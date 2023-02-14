@@ -118,6 +118,7 @@ class FunctionComponent(ResilientComponent):
 
             rtn = process_results(sep.get_paginated_results(sep.get_command_status, **params), self.options,
                                   sep_status_type, sep_scan_date)
+
             if sep_status_type.lower() == "remediation" and rtn["total_remediation_count"] > 0:
                 # Artifact may be remediated in multiple locations on multiple endpoints so send
                 # back remediation details as an incident attachment

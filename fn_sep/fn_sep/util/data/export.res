@@ -56,17 +56,12 @@
       "custom_condition": "1 AND 2 AND 3 AND 4 AND (5 OR 6)",
       "enabled": true,
       "export_key": "Example: SEP - Add Artifact from Scan Result",
-      "id": 811,
+      "id": 327,
       "logic_type": "advanced",
       "message_destinations": [],
       "name": "Example: SEP - Add Artifact from Scan Result",
       "object_type": "sep_eoc_scan_results",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "6ec7fae0-05c8-4c70-8e9d-805f1851d026",
@@ -95,17 +90,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Add Hash to Blacklist",
-      "id": 812,
+      "id": 328,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Add Hash to Blacklist",
       "object_type": "artifact",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "7aea2f44-b75f-4be7-be6e-1aa403c846db",
@@ -151,17 +141,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Assign Blacklist to lockdown group",
-      "id": 813,
+      "id": 329,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Assign Blacklist to lockdown group",
       "object_type": "sep_groups",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "0b833e1e-88f7-47a1-945e-fce3eea319dd",
@@ -181,6 +166,34 @@
     },
     {
       "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "Example: SEP - Cancel a Command",
+      "id": 439,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Example: SEP - Cancel a Command",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "f276a676-2340-47a1-8177-1f372fd8ae2b",
+      "view_items": [
+        {
+          "content": "4abc119a-52eb-487c-8147-6a52eaa24557",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "example_sep_cancel_a_command"
+      ]
+    },
+    {
+      "automations": [],
       "conditions": [
         {
           "evaluation_id": null,
@@ -192,17 +205,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Delete Blacklist",
-      "id": 814,
+      "id": 330,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Delete Blacklist",
       "object_type": "sep_fingerprint_lists",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "9176bfaa-12db-4e09-9f87-44f82154c8bd",
@@ -224,17 +232,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Delete Hash from Blacklist",
-      "id": 815,
+      "id": 331,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Delete Hash from Blacklist",
       "object_type": "artifact",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "a4094609-9582-445a-89ad-82b1daa9c109",
@@ -265,17 +268,12 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: SEP - Get Blacklist information",
-      "id": 816,
+      "id": 332,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Get Blacklist information",
       "object_type": "incident",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "62c42d6b-0465-4866-82cc-59c0df64a3de",
@@ -303,6 +301,25 @@
     },
     {
       "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "Example: SEP - Get Critical Events",
+      "id": 440,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Example: SEP - Get Critical Events",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "04ca9ec4-a676-48c7-923c-c8db03f604ea",
+      "view_items": [],
+      "workflows": [
+        "exmple_sep__get_critical_events"
+      ]
+    },
+    {
+      "automations": [],
       "conditions": [
         {
           "evaluation_id": null,
@@ -314,17 +331,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Get Endpoint Details",
-      "id": 817,
+      "id": 333,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Get Endpoint Details",
       "object_type": "sep_eoc_scan_results",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "173ad155-ef61-489a-bf33-f3c07bb5b8e8",
@@ -353,17 +365,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Get Endpoint Details for artifact",
-      "id": 818,
+      "id": 334,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: SEP - Get Endpoint Details for artifact",
       "object_type": "artifact",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "e7abd80d-6d78-4d12-84db-8afcceda9155",
@@ -377,17 +384,12 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: SEP - Get Endpoints status summary",
-      "id": 819,
+      "id": 335,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Get Endpoints status summary",
       "object_type": "incident",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "d87da2bd-bb7c-4ab1-a849-5637efd4a2a0",
@@ -401,23 +403,46 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: SEP - Get Endpoints status summary (refresh)",
-      "id": 820,
+      "id": 336,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Get Endpoints status summary (refresh)",
       "object_type": "sep_endpoint_status_summary",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "c7d94472-547d-436b-be34-dc6778e14368",
       "view_items": [],
       "workflows": [
         "wf_sep_get_endpoints_status_refresh"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "Example: SEP - Get Exceptions Policy",
+      "id": 441,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Example: SEP - Get Exceptions Policy",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "bb60f275-0187-4f5f-86cd-4a6096e3fec2",
+      "view_items": [
+        {
+          "content": "dd256887-d938-4cbe-a77b-e12e4b0a18ba",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "example_sep__get_exception_policy"
       ]
     },
     {
@@ -454,17 +479,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Get File Content as Base64 string",
-      "id": 821,
+      "id": 337,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Get File Content as Base64 string",
       "object_type": "sep_eoc_scan_results",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "10322675-fa1d-4995-bc78-367e801d8007",
@@ -477,18 +497,41 @@
       "automations": [],
       "conditions": [],
       "enabled": true,
+      "export_key": "Example: SEP - Get Firewall Policy",
+      "id": 443,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Example: SEP - Get Firewall Policy",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "d1d8bfff-6471-44f7-a4df-034cf507ce44",
+      "view_items": [
+        {
+          "content": "a2f54f2b-ddab-47d9-9f00-98a0b0308dd9",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "example_sep__get_firewall_policy"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
       "export_key": "Example: SEP - Get Groups information",
-      "id": 822,
+      "id": 338,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Get Groups information",
       "object_type": "incident",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "29acd35b-b36a-4527-8eeb-f6c40408bcbc",
@@ -519,23 +562,46 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Get Non-Compliant Endpoints status details",
-      "id": 823,
+      "id": 339,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Get Non-Compliant Endpoints status details",
       "object_type": "sep_endpoint_status_summary",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "28ca4f8c-2ec5-4675-a75f-a0d5c06c3e64",
       "view_items": [],
       "workflows": [
         "wf_sep_get_endpoints_status_details"
+      ]
+    },
+    {
+      "automations": [],
+      "conditions": [],
+      "enabled": true,
+      "export_key": "Example: SEP - Get Policy Summary",
+      "id": 442,
+      "logic_type": "all",
+      "message_destinations": [],
+      "name": "Example: SEP - Get Policy Summary",
+      "object_type": "incident",
+      "tags": [],
+      "timeout_seconds": 86400,
+      "type": 1,
+      "uuid": "8cb8b786-aa01-4951-a76c-ca40d7931ea6",
+      "view_items": [
+        {
+          "content": "aeb06dd2-6775-445a-bade-32a1961f0668",
+          "element": "field_uuid",
+          "field_type": "actioninvocation",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        "example_sep__get_policy_summary"
       ]
     },
     {
@@ -572,17 +638,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Get Quarantine status",
-      "id": 824,
+      "id": 340,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Get Quarantine status",
       "object_type": "sep_endpoint_details",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "28b24270-a3da-4049-8321-a960ac3d1deb",
@@ -611,17 +672,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Get Remediation status",
-      "id": 825,
+      "id": 341,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Get Remediation status",
       "object_type": "sep_eoc_scan_results",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "1c292319-915a-40ff-a701-803257fe5831",
@@ -665,17 +721,12 @@
       "custom_condition": "1 AND 2 AND 3 AND 4",
       "enabled": true,
       "export_key": "Example: SEP - Get Scan results",
-      "id": 826,
+      "id": 342,
       "logic_type": "advanced",
       "message_destinations": [],
       "name": "Example: SEP - Get Scan results",
       "object_type": "sep_eoc_scan_results",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "8f943bc5-819c-4e05-a224-a18e7bd64299",
@@ -704,17 +755,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Get Upload status",
-      "id": 827,
+      "id": 343,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Get Upload status",
       "object_type": "sep_eoc_scan_results",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "173c927d-c7b0-47b3-b3e1-1ba217459ef9",
@@ -764,17 +810,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Initiate EOC Scan for Artifact",
-      "id": 828,
+      "id": 344,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: SEP - Initiate EOC Scan for Artifact",
       "object_type": "artifact",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "260182a1-0339-4f47-819f-1a09c38f7109",
@@ -812,17 +853,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Move Endpoint",
-      "id": 829,
+      "id": 345,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Move Endpoint",
       "object_type": "sep_endpoint_details",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "a105414a-343a-434b-897e-f6522a4b649e",
@@ -888,17 +924,12 @@
       "custom_condition": "1 AND 2 AND (3 OR 4 OR 5)",
       "enabled": true,
       "export_key": "Example: SEP - Parse notification",
-      "id": 830,
+      "id": 346,
       "logic_type": "advanced",
       "message_destinations": [],
       "name": "Example: SEP - Parse notification",
       "object_type": "__emailmessage",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 0,
       "uuid": "e73eaa63-1a3f-407b-8457-5086bf06b6e5",
@@ -939,17 +970,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Quarantine Endpoint",
-      "id": 831,
+      "id": 347,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Quarantine Endpoint",
       "object_type": "sep_endpoint_details",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "5548dcc7-0c26-4315-801e-a2f2c7e5ec99",
@@ -1035,17 +1061,12 @@
       "custom_condition": "1 AND 2 AND (3 OR 4 OR 5) AND 6 AND 7 AND 8 AND 9 AND 10",
       "enabled": true,
       "export_key": "Example: SEP - Remediate Artifact on Endpoint",
-      "id": 832,
+      "id": 348,
       "logic_type": "advanced",
       "message_destinations": [],
       "name": "Example: SEP - Remediate Artifact on Endpoint",
       "object_type": "sep_eoc_scan_results",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "f6b8c118-5e90-46d7-9c2c-cf2a1edf04cb",
@@ -1104,17 +1125,12 @@
       ],
       "enabled": true,
       "export_key": "Example: SEP - Un-Quarantine Endpoint",
-      "id": 833,
+      "id": 349,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: SEP - Un-Quarantine Endpoint",
       "object_type": "sep_endpoint_details",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "569d2855-6956-4dd5-bd59-318fcf7f9a8e",
@@ -1179,17 +1195,12 @@
       "custom_condition": "1 AND 2 AND (3 OR 4 OR 5) AND 6 AND 7",
       "enabled": true,
       "export_key": "Example: SEP - Upload file to SEPM server",
-      "id": 834,
+      "id": 350,
       "logic_type": "advanced",
       "message_destinations": [],
       "name": "Example: SEP - Upload file to SEPM server",
       "object_type": "sep_eoc_scan_results",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "abc7bd33-4d8c-4a4a-a28a-786421c9e21d",
@@ -1210,7 +1221,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1668006441192,
+  "export_date": 1675198522832,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1222,9 +1233,38 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/sep_results_limit",
+      "hide_notification": false,
+      "id": 3101,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sep_results_limit",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "5",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "sep_results_limit",
+      "tooltip": "The maximum number of records to be returned. Page size must be between 1 and 10000",
+      "type_id": 11,
+      "uuid": "86bd768a-cab5-497c-88f6-70ff93622723",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/sep_computer_ids",
       "hide_notification": false,
-      "id": 3079,
+      "id": 2315,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1235,12 +1275,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_computer_ids",
       "tooltip": "The list of computer ids on which to run the SEP command.",
@@ -1258,7 +1293,7 @@
       "deprecated": false,
       "export_key": "__function/sep_os",
       "hide_notification": false,
-      "id": 3093,
+      "id": 2329,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1269,12 +1304,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_os",
       "tooltip": "The list of OS to filter. Possible values are CentOs, Debian, Fedora, MacOSX, Oracle, OSX, RedHat, SUSE, Ubuntu, Win10, Win2K, Win7, Win8, WinEmb7, WinEmb8, WinEmb81, WinFundamental, WinNT, Win2K3, Win2K8, Win2K8R2, WinVista, WinXP, WinXPEmb, WinXPProf64",
@@ -1292,7 +1322,7 @@
       "deprecated": false,
       "export_key": "__function/sep_md5",
       "hide_notification": false,
-      "id": 3102,
+      "id": 2338,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1303,12 +1333,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_md5",
       "tooltip": "The MD5 hash value of the suspicious file.",
@@ -1326,7 +1351,7 @@
       "deprecated": false,
       "export_key": "__function/sep_order",
       "hide_notification": false,
-      "id": 3071,
+      "id": 2307,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1337,12 +1362,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_order",
       "tooltip": "Specifies whether the results are in ascending order (ASC) or descending order (DESC).",
@@ -1360,7 +1380,7 @@
       "deprecated": false,
       "export_key": "__function/sep_sha1",
       "hide_notification": false,
-      "id": 3094,
+      "id": 2330,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1371,12 +1391,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_sha1",
       "tooltip": "The SHA1 hash value of the suspicious file.",
@@ -1394,7 +1409,7 @@
       "deprecated": false,
       "export_key": "__function/sep_source",
       "hide_notification": false,
-      "id": 3081,
+      "id": 2317,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1405,12 +1420,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_source",
       "tooltip": "The file source from where to search for the suspicious file. Possible values are: FILESYSTEM (default), QUARANTINE, or BOTH. ",
@@ -1428,7 +1438,7 @@
       "deprecated": false,
       "export_key": "__function/sep_status",
       "hide_notification": false,
-      "id": 3078,
+      "id": 2314,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1439,12 +1449,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_status",
       "tooltip": "Get overall status for endpoints.",
@@ -1462,7 +1467,7 @@
       "deprecated": false,
       "export_key": "__function/sep_group_ids",
       "hide_notification": false,
-      "id": 3076,
+      "id": 2312,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1473,12 +1478,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_group_ids",
       "tooltip": "The list of groups on which to run the SEP command.",
@@ -1494,9 +1494,39 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/sep_exceptions_id",
+      "hide_notification": false,
+      "id": 3102,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sep_exceptions_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "sep_exceptions_id",
+      "tooltip": "The ID of the exceptions policy to get",
+      "type_id": 11,
+      "uuid": "b6faf5cc-22a4-4120-9228-c924c5c8519b",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/sep_scan_type",
       "hide_notification": false,
-      "id": 3099,
+      "id": 2335,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -1507,12 +1537,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_scan_type",
       "tooltip": "The SEP eoc scan type. Possible values are:  FULL_SCAN and QUICK_SCAN.",
@@ -1526,7 +1551,7 @@
           "label": "FULL_SCAN",
           "properties": null,
           "uuid": "810db651-8a47-4931-a4b4-1e579d08088d",
-          "value": 3270
+          "value": 820
         },
         {
           "default": false,
@@ -1535,7 +1560,7 @@
           "label": "QUICK_SCAN",
           "properties": null,
           "uuid": "8f3dd10a-b0d1-485f-9f5d-fd9b1df72664",
-          "value": 3271
+          "value": 821
         }
       ]
     },
@@ -1549,7 +1574,7 @@
       "deprecated": false,
       "export_key": "__function/sep_status_details",
       "hide_notification": false,
-      "id": 3092,
+      "id": 2328,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1560,12 +1585,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_status_details",
       "tooltip": "Get endpoints status details.",
@@ -1583,7 +1603,7 @@
       "deprecated": false,
       "export_key": "__function/sep_pageindex",
       "hide_notification": false,
-      "id": 3069,
+      "id": 2305,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1594,12 +1614,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_pageindex",
       "tooltip": "The index page that is used for the returned results. The default page index is 1.",
@@ -1617,7 +1632,7 @@
       "deprecated": false,
       "export_key": "__function/sep_status_type",
       "hide_notification": false,
-      "id": 3073,
+      "id": 2309,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1628,12 +1643,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_status_type",
       "tooltip": "The type of command status requested.",
@@ -1651,7 +1661,7 @@
       "deprecated": false,
       "export_key": "__function/sep_description",
       "hide_notification": false,
-      "id": 3068,
+      "id": 2304,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1662,12 +1672,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_description",
       "tooltip": "The SEP object (e.g. scan) description.",
@@ -1685,7 +1690,7 @@
       "deprecated": false,
       "export_key": "__function/sep_undo",
       "hide_notification": false,
-      "id": 3089,
+      "id": 2325,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1696,12 +1701,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_undo",
       "tooltip": "Boolean value, if set to true, will undo operation.",
@@ -1717,9 +1717,39 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/sep_firewall_id",
+      "hide_notification": false,
+      "id": 3103,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sep_firewall_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "sep_firewall_id",
+      "tooltip": "The ID of the firewall policy to get.",
+      "type_id": 11,
+      "uuid": "eace2b34-2d56-465a-8f31-590914646cce",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/sep_sha256",
       "hide_notification": false,
-      "id": 3080,
+      "id": 2316,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1730,12 +1760,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_sha256",
       "tooltip": "The SHA256 hash value of the suspicious file.",
@@ -1753,7 +1778,7 @@
       "deprecated": false,
       "export_key": "__function/sep_file_id",
       "hide_notification": false,
-      "id": 3090,
+      "id": 2326,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1764,12 +1789,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_file_id",
       "tooltip": "The file ID from which to get detailed information.",
@@ -1787,7 +1807,7 @@
       "deprecated": false,
       "export_key": "__function/sep_groupid",
       "hide_notification": false,
-      "id": 3084,
+      "id": 2320,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1798,12 +1818,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_groupid",
       "tooltip": "Group id on which to run the SEP command.",
@@ -1821,7 +1836,7 @@
       "deprecated": false,
       "export_key": "__function/sep_hash_value",
       "hide_notification": false,
-      "id": 3091,
+      "id": 2327,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1832,12 +1847,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_hash_value",
       "tooltip": "The hash value. Can be MD5 or SHA256 hash value.",
@@ -1855,7 +1865,7 @@
       "deprecated": false,
       "export_key": "__function/sep_sort",
       "hide_notification": false,
-      "id": 3075,
+      "id": 2311,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1866,12 +1876,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_sort",
       "tooltip": "The column by which the results are sorted. Possible values are COMPUTER_NAME (Default value), COMPUTER_ID, COMPUTER_DOMAIN_NAME, or DOMAIN_ID.",
@@ -1887,9 +1892,39 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/sep_command_id",
+      "hide_notification": false,
+      "id": 3104,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sep_command_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "sep_command_id",
+      "tooltip": "The command ID for which details are needed.",
+      "type_id": 11,
+      "uuid": "12d6a498-0c36-40e6-810a-b3450d55a0ef",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/sep_commandid",
       "hide_notification": false,
-      "id": 3101,
+      "id": 2337,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1900,12 +1935,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_commandid",
       "tooltip": "Command id of SEP job.",
@@ -1923,7 +1953,7 @@
       "deprecated": false,
       "export_key": "__function/sep_fingerprintlist_name",
       "hide_notification": false,
-      "id": 3087,
+      "id": 2323,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1934,12 +1964,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_fingerprintlist_name",
       "tooltip": "Name of a SEP fingerprint list.",
@@ -1957,7 +1982,7 @@
       "deprecated": false,
       "export_key": "__function/sep_domainid",
       "hide_notification": false,
-      "id": 3082,
+      "id": 2318,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1968,12 +1993,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_domainid",
       "tooltip": "The SEPM domain id.",
@@ -1991,7 +2011,7 @@
       "deprecated": false,
       "export_key": "__function/sep_fullpathname",
       "hide_notification": false,
-      "id": 3086,
+      "id": 2322,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2002,12 +2022,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_fullpathname",
       "tooltip": "The full path name of the group.",
@@ -2025,7 +2040,7 @@
       "deprecated": false,
       "export_key": "__function/sep_incident_id",
       "hide_notification": false,
-      "id": 3074,
+      "id": 2310,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -2036,12 +2051,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_incident_id",
       "tooltip": "The resilient incident id.",
@@ -2059,7 +2069,7 @@
       "deprecated": false,
       "export_key": "__function/sep_domain",
       "hide_notification": false,
-      "id": 3097,
+      "id": 2333,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2070,12 +2080,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_domain",
       "tooltip": "The SEPM domain.",
@@ -2093,7 +2098,7 @@
       "deprecated": false,
       "export_key": "__function/sep_file_path",
       "hide_notification": false,
-      "id": 3100,
+      "id": 2336,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2104,12 +2109,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_file_path",
       "tooltip": "The file path of the suspect file.",
@@ -2127,7 +2127,7 @@
       "deprecated": false,
       "export_key": "__function/sep_fingerprintlist_id",
       "hide_notification": false,
-      "id": 3098,
+      "id": 2334,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2138,12 +2138,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_fingerprintlist_id",
       "tooltip": "Id of SEP fingerprint list",
@@ -2161,7 +2156,7 @@
       "deprecated": false,
       "export_key": "__function/sep_pagesize",
       "hide_notification": false,
-      "id": 3070,
+      "id": 2306,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -2172,12 +2167,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_pagesize",
       "tooltip": "The number of results to include on each page. The default is 20.",
@@ -2195,7 +2185,7 @@
       "deprecated": false,
       "export_key": "__function/sep_scan_action",
       "hide_notification": false,
-      "id": 3072,
+      "id": 2308,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2206,12 +2196,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_scan_action",
       "tooltip": "Action to be performed during a scan.",
@@ -2225,7 +2210,7 @@
           "label": "remediate",
           "properties": null,
           "uuid": "93b82e92-6f87-431a-9c2a-9f5d0f2c621b",
-          "value": 3269
+          "value": 819
         }
       ]
     },
@@ -2239,7 +2224,7 @@
       "deprecated": false,
       "export_key": "__function/sep_scan_date",
       "hide_notification": false,
-      "id": 3096,
+      "id": 2332,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2250,12 +2235,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_scan_date",
       "tooltip": "Time when scan was initiated",
@@ -2273,7 +2253,7 @@
       "deprecated": false,
       "export_key": "__function/sep_matching_endpoint_ids",
       "hide_notification": false,
-      "id": 3088,
+      "id": 2324,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -2284,12 +2264,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_matching_endpoint_ids",
       "tooltip": "Get list of matching endpoints.",
@@ -2307,7 +2282,7 @@
       "deprecated": false,
       "export_key": "__function/sep_lastupdate",
       "hide_notification": false,
-      "id": 3077,
+      "id": 2313,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2318,12 +2293,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_lastupdate",
       "tooltip": "Indicates when a computer last updated its status. The default value of 0 gets all the results.",
@@ -2341,7 +2311,7 @@
       "deprecated": false,
       "export_key": "__function/sep_mode",
       "hide_notification": false,
-      "id": 3083,
+      "id": 2319,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2352,12 +2322,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_mode",
       "tooltip": "The presentation mode for the results, as a list (default) or as a tree.",
@@ -2375,7 +2340,7 @@
       "deprecated": false,
       "export_key": "__function/sep_computername",
       "hide_notification": false,
-      "id": 3085,
+      "id": 2321,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2386,12 +2351,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_computername",
       "tooltip": "The host name of computer. Wild card is supported as \u0027*\u0027.",
@@ -2409,7 +2369,7 @@
       "deprecated": false,
       "export_key": "__function/sep_hardwarekey",
       "hide_notification": false,
-      "id": 3095,
+      "id": 2331,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -2420,12 +2380,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_hardwarekey",
       "tooltip": "Hardware key of SEP computer.",
@@ -2443,7 +2398,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/sep_source",
       "hide_notification": false,
-      "id": 3061,
+      "id": 2297,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2454,12 +2409,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "sep_source",
       "tooltip": "The file source from where to search for the suspicious file. Possible values are: FILESYSTEM (default), QUARANTINE, or BOTH.",
@@ -2473,7 +2423,7 @@
           "label": "FILESYSTEM",
           "properties": null,
           "uuid": "d8b5096b-46e5-426e-bda0-aa59c60e1f81",
-          "value": 3252
+          "value": 802
         },
         {
           "default": false,
@@ -2482,7 +2432,7 @@
           "label": "QUARANTINE",
           "properties": null,
           "uuid": "81873541-81a6-497d-af11-6ebc05358ae3",
-          "value": 3253
+          "value": 803
         },
         {
           "default": false,
@@ -2491,7 +2441,7 @@
           "label": "BOTH",
           "properties": null,
           "uuid": "c45efbf7-988a-4238-a13b-ea7865a1e454",
-          "value": 3254
+          "value": 804
         }
       ]
     },
@@ -2503,9 +2453,39 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "actioninvocation/sep_firewall_id",
+      "hide_notification": false,
+      "id": 3114,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sep_firewall_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Firewall Id",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "a2f54f2b-ddab-47d9-9f00-98a0b0308dd9",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "actioninvocation/sep_target_endpoints",
       "hide_notification": false,
-      "id": 3065,
+      "id": 2301,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2516,12 +2496,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Target endpoints",
       "tooltip": "Select current endpoint or all endpoints as  action target.",
@@ -2535,7 +2510,7 @@
           "label": "Selected endpoint",
           "properties": null,
           "uuid": "3d242426-b4af-4005-a6d1-f52dce3b80d4",
-          "value": 3263
+          "value": 813
         },
         {
           "default": false,
@@ -2544,7 +2519,7 @@
           "label": "All matching endpoints",
           "properties": null,
           "uuid": "9a2fcb4f-7e0c-4a8f-9203-2a68c12c0adb",
-          "value": 3264
+          "value": 814
         }
       ]
     },
@@ -2556,9 +2531,40 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "actioninvocation/sep_domain_id",
+      "hide_notification": false,
+      "id": 3113,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sep_domain_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Domain Id",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "aeb06dd2-6775-445a-bade-32a1961f0668",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "actioninvocation/sep_scan_type",
       "hide_notification": false,
-      "id": 3062,
+      "id": 2298,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2569,12 +2575,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Scan type",
       "tooltip": "The SEP eoc scan type. Possible values are:  QUICK_SCAN and FULL_SCAN. A  FULL_SCAN evaluates all areas of the computer hard drive. A QUICK_SCAN only scans the important locations of your computer that the viruses and other security threats most often target.",
@@ -2588,7 +2589,7 @@
           "label": "QUICK_SCAN",
           "properties": null,
           "uuid": "1a2a7484-26bb-4c11-ae80-1a77f9a2483c",
-          "value": 3255
+          "value": 805
         },
         {
           "default": false,
@@ -2597,7 +2598,7 @@
           "label": "FULL_SCAN",
           "properties": null,
           "uuid": "a1433c90-8d8b-4248-8258-4f697d7b7f74",
-          "value": 3256
+          "value": 806
         }
       ]
     },
@@ -2611,7 +2612,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/sep_domain_name",
       "hide_notification": false,
-      "id": 3067,
+      "id": 2303,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2622,12 +2623,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Domain name",
       "tooltip": "SEP domain name",
@@ -2641,7 +2637,7 @@
           "label": "Default",
           "properties": null,
           "uuid": "2b55ad7d-41aa-4a0e-ae55-c0c4e25e0a19",
-          "value": 3268
+          "value": 818
         }
       ]
     },
@@ -2653,9 +2649,40 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "actioninvocation/sep_exceptions_id",
+      "hide_notification": false,
+      "id": 3112,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sep_exceptions_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Exceptions ID",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "dd256887-d938-4cbe-a77b-e12e4b0a18ba",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "actioninvocation/sep_fingerprintlist_name",
       "hide_notification": false,
-      "id": 3063,
+      "id": 2299,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2666,12 +2693,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Fingerprint list name",
       "tooltip": "Name of a SEP fingerprint list.",
@@ -2685,7 +2707,7 @@
           "label": "Blacklist",
           "properties": null,
           "uuid": "d3c29d9a-7f3b-4d64-b9fe-a9e5d31d0764",
-          "value": 3257
+          "value": 807
         }
       ]
     },
@@ -2699,7 +2721,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/sep_fullpathname",
       "hide_notification": false,
-      "id": 3064,
+      "id": 2300,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2710,12 +2732,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Group Full path name",
       "tooltip": "The full path name of the group.",
@@ -2729,7 +2746,7 @@
           "label": "My Company\\JP_QUARANTINE_GROUP",
           "properties": null,
           "uuid": "9150d769-a74a-414a-b405-81ec6bd48c1d",
-          "value": 3258
+          "value": 808
         },
         {
           "default": false,
@@ -2738,7 +2755,7 @@
           "label": "My Company\\TEST_GROUP_1",
           "properties": null,
           "uuid": "16aaf071-0e8a-4462-98c8-3b730ceabe19",
-          "value": 3259
+          "value": 809
         },
         {
           "default": false,
@@ -2747,7 +2764,7 @@
           "label": "My Company\\QUARANTINE_GROUP",
           "properties": null,
           "uuid": "55071776-863f-4be6-8b17-7594f82b20e2",
-          "value": 3260
+          "value": 810
         },
         {
           "default": false,
@@ -2756,7 +2773,7 @@
           "label": "My Company",
           "properties": null,
           "uuid": "a7de732c-062c-4e3e-a785-070d561b90a3",
-          "value": 3261
+          "value": 811
         },
         {
           "default": false,
@@ -2765,7 +2782,7 @@
           "label": "My Company\\Default Group",
           "properties": null,
           "uuid": "bb283ce3-384d-470d-8361-dc7917b4c100",
-          "value": 3262
+          "value": 812
         }
       ]
     },
@@ -2777,9 +2794,40 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "actioninvocation/sep_command_id",
+      "hide_notification": false,
+      "id": 3105,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sep_command_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Command Id",
+      "tooltip": "",
+      "type_id": 6,
+      "uuid": "4abc119a-52eb-487c-8147-6a52eaa24557",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "actioninvocation/sep_artifact_type_scan_results",
       "hide_notification": false,
-      "id": 3066,
+      "id": 2302,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -2790,12 +2838,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Artifact type - scan results",
       "tooltip": "Resilient artifact types.",
@@ -2809,7 +2852,7 @@
           "label": "Malware SHA-256 Hash",
           "properties": null,
           "uuid": "70052397-ca00-495f-bb75-15455e83881c",
-          "value": 3265
+          "value": 815
         },
         {
           "default": false,
@@ -2818,7 +2861,7 @@
           "label": "System Name",
           "properties": null,
           "uuid": "814b9fae-fa78-40ab-993c-51f8179c470e",
-          "value": 3266
+          "value": 816
         },
         {
           "default": false,
@@ -2827,7 +2870,7 @@
           "label": "File Path",
           "properties": null,
           "uuid": "57403861-7a23-4003-8d28-b92795f30017",
-          "value": 3267
+          "value": 817
         }
       ]
     },
@@ -2845,7 +2888,7 @@
   ],
   "functions": [
     {
-      "created_date": 1668002329986,
+      "created_date": 1668001886478,
       "description": {
         "content": "Add an MD5 hash to a new fingerprint list. \nNote: Currently only supports MD5 hash type.",
         "format": "text"
@@ -2853,23 +2896,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Add Fingerprint List",
       "export_key": "fn_sep_add_fingerprint_list",
-      "id": 306,
+      "id": 242,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002330197,
+      "last_modified_time": 1674507183387,
       "name": "fn_sep_add_fingerprint_list",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"id\": \"id\"}, \"raw\": \"{\\\"id\\\": \\\"id\\\"}\", \"inputs\": {\"sep_domainid\": \"domainid\", \"sep_hash_value\": \"hash_value\", \"sep_fingerprintlist_name\": \"Test Blacklist 13\", \"sep_description\": \"This is test of adding files in blacklist.\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2322, \"timestamp\": \"2023-01-06 06:33:51\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_domainid\": {\"type\": \"string\"}, \"sep_hash_value\": {\"type\": \"string\"}, \"sep_fingerprintlist_name\": {\"type\": \"string\"}, \"sep_description\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "d4b5ee5d-10b2-4935-a650-f1516acfc691",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "185d9c87-28d8-46a4-9e50-dbc73be88b59",
@@ -2911,19 +2951,14 @@
           "name": "Example: SEP - Add Hash to Blacklist",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_add_fingerprint_list",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 419
+          "workflow_id": 324
         }
       ]
     },
     {
-      "created_date": 1668002330289,
+      "created_date": 1668001886643,
       "description": {
         "content": "Assign a fingerprint list to a group for lock-down.",
         "format": "text"
@@ -2931,23 +2966,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Assign Fingerprint List to Group",
       "export_key": "fn_sep_assign_fingerprint_list_to_group",
-      "id": 307,
+      "id": 243,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002330496,
+      "last_modified_time": 1674507183550,
       "name": "fn_sep_assign_fingerprint_list_to_group",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {}, \"raw\": \"{}\", \"inputs\": {\"sep_groupid\": \"groupid\", \"sep_fingerprintlist_id\": \"fingerprintlist_id\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2038, \"timestamp\": \"2023-01-06 11:32:28\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"message\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_groupid\": {\"type\": \"string\"}, \"sep_fingerprintlist_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "edb1beff-d01c-4334-aeb6-45d9a65831d4",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "0180b379-0327-4e2f-b8bc-4367275da5ea",
@@ -2973,19 +3005,14 @@
           "name": "Example: SEP - Assign Blacklist to lockdown group",
           "object_type": "sep_groups",
           "programmatic_name": "wf_sep_assign_fingerprint_list_to_lockdown_group",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 416
+          "workflow_id": 321
         }
       ]
     },
     {
-      "created_date": 1668002330582,
+      "created_date": 1668001886815,
       "description": {
         "content": "Delete  a  fingerprint list.",
         "format": "text"
@@ -2993,23 +3020,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Delete Fingerprint List",
       "export_key": "fn_sep_delete_fingerprint_list",
-      "id": 308,
+      "id": 244,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002330792,
+      "last_modified_time": 1674507183726,
       "name": "fn_sep_delete_fingerprint_list",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {}, \"raw\": \"{}\", \"inputs\": {\"sep_fingerprintlist_id\": \"fingerprintlist_id\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2041, \"timestamp\": \"2023-01-06 11:12:40\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"message\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_fingerprintlist_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "e710d302-1010-4994-a02c-87377bfde59e",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "4878447f-eb7a-45b8-814a-0c7b753a8821",
@@ -3027,14 +3051,9 @@
           "name": "Example: SEP - Delete Blacklist",
           "object_type": "sep_fingerprint_lists",
           "programmatic_name": "wf_sep_delete_fingerprint_list",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 428
+          "workflow_id": 333
         },
         {
           "actions": [],
@@ -3042,19 +3061,14 @@
           "name": "Example: SEP - Delete Hash from Blacklist",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_delete_hash_from_fingerprint_list",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 418
+          "workflow_id": 323
         }
       ]
     },
     {
-      "created_date": 1668002330880,
+      "created_date": 1668001886982,
       "description": {
         "content": "Gets the details of a command status from a command id.",
         "format": "text"
@@ -3062,23 +3076,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Get Command Status",
       "export_key": "fn_sep_get_command_status",
-      "id": 309,
+      "id": 245,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002331086,
+      "last_modified_time": 1674507183914,
       "name": "fn_sep_get_command_status",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"content\": [{\"beginTime\": \"2023-01-06T09:51:09Z\", \"lastUpdateTime\": \"2023-01-06T09:51:09Z\", \"computerName\": \"computerName\", \"computerIp\": \"000.00.00.00\", \"domainName\": \"Default\", \"currentLoginUserName\": \"Testuser\", \"stateId\": 3, \"subStateId\": 0, \"subStateDesc\": \"C:\\\\Users\\\\Public\\\\Documents\\\\sample.exe\", \"binaryFileId\": \"binaryFileId\", \"resultInXML\": \"\", \"computerId\": \"computerId\", \"hardwareKey\": \"hardwareKey\"}], \"totalPages\": 1, \"firstPage\": true, \"lastPage\": true, \"totalElements\": 1, \"size\": 20, \"number\": 0, \"sort\": [{\"direction\": \"ASC\", \"property\": \"Begintime\", \"ascending\": true}], \"numberOfElements\": 1, \"total_match_count\": 0, \"total_match_ep_count\": 0, \"total_remediation_count\": 0, \"total_fail_remediation_count\": 0, \"total_remediation_ep_count\": 0, \"total_not_completed\": 0, \"total_ep_count\": 1, \"scan_artifact_value\": \"\", \"remediate_artifact_value\": \"\", \"overall_command_state\": \"Completed\"}, \"raw\": \"{\\\"content\\\": [{\\\"beginTime\\\": \\\"2023-01-06T09:51:09Z\\\", \\\"lastUpdateTime\\\": \\\"2023-01-06T09:51:09Z\\\", \\\"computerName\\\": \\\"EC2AMAZ-O9BT872\\\", \\\"computerIp\\\": \\\"172.31.37.22\\\", \\\"domainName\\\": \\\"Default\\\", \\\"currentLoginUserName\\\": \\\"Administrator\\\", \\\"stateId\\\": 3, \\\"subStateId\\\": 0, \\\"subStateDesc\\\": \\\"C:\\\\\\\\Users\\\\\\\\Public\\\\\\\\Documents\\\\\\\\sample.exe\\\", \\\"binaryFileId\\\": \\\"F1568E3BAC1F211B397E2DAC71FD6BF7\\\", \\\"resultInXML\\\": \\\"\\\", \\\"computerId\\\": \\\"CD08C63EAC1F211B1B6FD4039B293000\\\", \\\"hardwareKey\\\": \\\"E4A30FDB287F7B23F9BF22166FD54BF1\\\"}], \\\"totalPages\\\": 1, \\\"firstPage\\\": true, \\\"lastPage\\\": true, \\\"totalElements\\\": 1, \\\"size\\\": 20, \\\"number\\\": 0, \\\"sort\\\": [{\\\"direction\\\": \\\"ASC\\\", \\\"property\\\": \\\"Begintime\\\", \\\"ascending\\\": true}], \\\"numberOfElements\\\": 1, \\\"total_match_count\\\": 0, \\\"total_match_ep_count\\\": 0, \\\"total_remediation_count\\\": 0, \\\"total_fail_remediation_count\\\": 0, \\\"total_remediation_ep_count\\\": 0, \\\"total_not_completed\\\": 0, \\\"total_ep_count\\\": 1, \\\"scan_artifact_value\\\": \\\"\\\", \\\"remediate_artifact_value\\\": \\\"\\\", \\\"overall_command_state\\\": \\\"Completed\\\"}\", \"inputs\": {\"sep_status_type\": \"quarantine\", \"sep_commandid\": \"commandid\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2060, \"timestamp\": \"2023-01-06 13:56:03\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"beginTime\": {\"type\": \"string\"}, \"lastUpdateTime\": {\"type\": \"string\"}, \"computerName\": {\"type\": \"string\"}, \"computerIp\": {\"type\": \"string\"}, \"domainName\": {\"type\": \"string\"}, \"currentLoginUserName\": {\"type\": \"string\"}, \"stateId\": {\"type\": \"integer\"}, \"subStateId\": {\"type\": \"integer\"}, \"subStateDesc\": {\"type\": \"string\"}, \"binaryFileId\": {\"type\": \"string\"}, \"resultInXML\": {\"type\": \"string\"}, \"computerId\": {\"type\": \"string\"}, \"hardwareKey\": {\"type\": \"string\"}}}}, \"totalPages\": {\"type\": \"integer\"}, \"firstPage\": {\"type\": \"boolean\"}, \"lastPage\": {\"type\": \"boolean\"}, \"totalElements\": {\"type\": \"integer\"}, \"size\": {\"type\": \"integer\"}, \"number\": {\"type\": \"integer\"}, \"sort\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"direction\": {\"type\": \"string\"}, \"property\": {\"type\": \"string\"}, \"ascending\": {\"type\": \"boolean\"}}}}, \"numberOfElements\": {\"type\": \"integer\"}, \"total_match_count\": {\"type\": \"integer\"}, \"total_match_ep_count\": {\"type\": \"integer\"}, \"total_remediation_count\": {\"type\": \"integer\"}, \"total_fail_remediation_count\": {\"type\": \"integer\"}, \"total_remediation_ep_count\": {\"type\": \"integer\"}, \"total_not_completed\": {\"type\": \"integer\"}, \"total_ep_count\": {\"type\": \"integer\"}, \"scan_artifact_value\": {\"type\": \"string\"}, \"remediate_artifact_value\": {\"type\": \"string\"}, \"overall_command_state\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_status_type\": {\"type\": \"string\"}, \"sep_commandid\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "b29ec053-be35-4311-9d8f-1b6275664c0d",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "6067c5a3-b7b6-4d18-ac4e-6405527a3cae",
@@ -3160,14 +3171,9 @@
           "name": "Example: SEP - Get Quarantine status",
           "object_type": "sep_endpoint_details",
           "programmatic_name": "wf_sep_get_quarantine_status",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 410
+          "workflow_id": 315
         },
         {
           "actions": [],
@@ -3175,14 +3181,9 @@
           "name": "Example: SEP - Get Remediation status",
           "object_type": "sep_eoc_scan_results",
           "programmatic_name": "wf_sep_get_remediation_status",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 422
+          "workflow_id": 327
         },
         {
           "actions": [],
@@ -3190,14 +3191,9 @@
           "name": "Example: SEP - Get Scan results",
           "object_type": "sep_eoc_scan_results",
           "programmatic_name": "wf_sep_get_scan_results",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 429
+          "workflow_id": 334
         },
         {
           "actions": [],
@@ -3205,14 +3201,9 @@
           "name": "Example: SEP - Get Upload status",
           "object_type": "sep_eoc_scan_results",
           "programmatic_name": "wf_sep_get_upload_status",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 424
+          "workflow_id": 329
         },
         {
           "actions": [],
@@ -3220,14 +3211,9 @@
           "name": "Example: SEP - Initiate EOC Scan for Artifact",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_initiate_eoc_scan_for_artifact",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 411
+          "workflow_id": 316
         },
         {
           "actions": [],
@@ -3235,14 +3221,9 @@
           "name": "Example: SEP - Quarantine Endpoint",
           "object_type": "sep_endpoint_details",
           "programmatic_name": "wf_sep_quarantine_endpoint",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 412
+          "workflow_id": 317
         },
         {
           "actions": [],
@@ -3250,14 +3231,9 @@
           "name": "Example: SEP - Remediate Artifact on Endpoint",
           "object_type": "sep_eoc_scan_results",
           "programmatic_name": "wf_sep_remediate_artifact_on_endpoint",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 427
+          "workflow_id": 332
         },
         {
           "actions": [],
@@ -3265,19 +3241,14 @@
           "name": "Example: SEP - Upload file to SEPM server",
           "object_type": "sep_eoc_scan_results",
           "programmatic_name": "wf_sep_upload_file_to_sepm",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 426
+          "workflow_id": 331
         }
       ]
     },
     {
-      "created_date": 1668002331168,
+      "created_date": 1668001887145,
       "description": {
         "content": "Gets the information about the computers in a specified domain.",
         "format": "text"
@@ -3285,23 +3256,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Get Computers",
       "export_key": "fn_sep_get_computers",
-      "id": 310,
+      "id": 246,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002331375,
+      "last_modified_time": 1674507184076,
       "name": "fn_sep_get_computers",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"content\": [{\"group\": {\"id\": \"id\", \"name\": \"My Company\", \"fullPathName\": null, \"domain\": {\"id\": \"id\", \"name\": \"Default\"}, \"externalReferenceId\": null, \"source\": null}, \"ipAddresses\": [\"000.00.00.00\", \"0000:0000:0000:0000:0000:0000:C3BE:E313\"], \"macAddresses\": [\"02-00-00-00-00-80\", \"02-00-00-00-00-80\"], \"gateways\": [\"000.00.00.1\", \"000.00.00.1\", \"0.0.0.0\", \"0.0.0.0\"], \"subnetMasks\": [\"000.000.000.0\", \"64\"], \"dnsServers\": [\"0.0.0.0\", \"0.0.0.0\"], \"winServers\": [\"0.0.0.0\", \"0.0.0.0\"], \"description\": \"\", \"computerName\": \"computerName\", \"logonUserName\": \"Administrator\", \"domainOrWorkgroup\": \"WORKGROUP\", \"computerDescription\": \"\", \"processorType\": \"Intel64 Family 6 Model 79 Stepping 1\", \"processorClock\": 2300, \"physicalCpus\": 2, \"logicalCpus\": 0, \"memory\": 4294557696, \"biosVersion\": \"Xen - 0 Revision: 1.221\", \"osFunction\": \"Server\", \"osFlavorNumber\": 8, \"osName\": \"Windows Server 2019\", \"operatingSystem\": \"Windows Server 2019 Datacenter Edition\", \"osVersion\": \"10.0\", \"osMajor\": 10, \"osMinor\": 0, \"osServicePack\": \"17763\", \"osBitness\": \"x64\", \"tmpDevice\": null, \"uniqueId\": \"uniqueId\", \"hardwareKey\": \"hardwareKey\", \"uuid\": \"uuid\", \"osLanguage\": \"en-US\", \"totalDiskSpace\": 51197, \"groupUpdateProvider\": false, \"deploymentStatus\": \"302456832\", \"deploymentMessage\": \"\", \"deploymentTargetVersion\": \"14.3.9205.6000\", \"deploymentRunningVersion\": \"14.3.9205.6000\", \"deploymentPreVersion\": \"\", \"lastDeploymentTime\": 1670855163000, \"virtualizationPlatform\": \"Citrix\", \"securityVirtualAppliance\": null, \"serialNumber\": \"serialNumber1\", \"installType\": \"0\", \"writeFiltersStatus\": null, \"agentVersion\": \"14.3.9205.6000\", \"atpDeviceId\": null, \"encryptedDevicePassword\": null, \"publicKey\": \"publicKey\", \"deleted\": 0, \"quarantineStatus\": 3, \"quarantineCode\": 105, \"quarantineDesc\": \"Host Integrity check is disabled.\\n Host Integrity policy has been disabled by the administrator.\", \"loginDomain\": \"LocalComputer\", \"agentId\": \"agentId\", \"agentType\": \"105\", \"profileVersion\": \"14.3.9205\", \"profileSerialNo\": \"AAAA-12/28/2022 14:30:24 853\", \"profileChecksum\": null, \"idsVersion\": \"\", \"idsSerialNo\": \"\", \"idsChecksum\": null, \"creationTime\": 1670855079127, \"onlineStatus\": 1, \"lastUpdateTime\": 1673003005980, \"lastServerId\": \"lastServerId\", \"lastServerName\": \"lastServerName\", \"lastSiteId\": \"lastSiteId\", \"lastSiteName\": \"My Site\", \"attributeExtension\": \"\", \"fullName\": \"\", \"email\": \"\", \"jobTitle\": \"\", \"department\": \"\", \"employeeNumber\": \"\", \"employeeStatus\": \"\", \"officePhone\": \"\", \"mobilePhone\": \"\", \"homePhone\": \"\", \"agentTimeStamp\": 1673003005980, \"agentUsn\": 252331, \"patternIdx\": \"patternIdx\", \"apOnOff\": 1, \"infected\": 0, \"worstInfectionIdx\": \"9999\", \"lastScanTime\": 1672980342000, \"lastVirusTime\": 0, \"contentUpdate\": 1, \"avEngineOnOff\": 1, \"avDefsetVersion\": \"230105023\", \"avDefsetSequence\": \"225331\", \"avDefsetRevision\": \"23\", \"tamperOnOff\": 1, \"majorVersion\": 14, \"minorVersion\": 3, \"rebootRequired\": 0, \"rebootReason\": \"\", \"licenseStatus\": -1, \"licenseExpiry\": 0, \"timeZone\": 0, \"firewallOnOff\": 1, \"freeMem\": 2616713216, \"freeDisk\": 33266442240, \"lastDownloadTime\": 1670855103022, \"currentClientId\": \"currentClientId\", \"licenseId\": null, \"isGrace\": 0, \"snacLicenseId\": null, \"ptpOnOff\": 1, \"lastHeuristicThreatTime\": 0, \"bashStatus\": 1, \"daOnOff\": 1, \"cidsDrvOnOff\": 1, \"cidsSilentMode\": 0, \"cidsDrvMulfCode\": 0, \"cidsBrowserIeOnOff\": 1, \"cidsBrowserFfOnOff\": 1, \"cidsEngineVersion\": \"17.2.10.7\", \"cidsDefsetVersion\": \"230105073\", \"elamOnOff\": 1, \"osElamStatus\": 0, \"tdadOnOff\": 3, \"tdadStatusId\": 127, \"tdadGlobalDataDownloadTime\": 0, \"tdadGlobalDataProcessingDoneTime\": 0, \"vsicStatus\": 3, \"isNpvdiClient\": 0, \"svaId\": null, \"lastConnectedIpAddr\": \"000.00.00.00\", \"pepOnOff\": 1, \"edrStatus\": 0, \"atpServer\": \"\", \"tpmDevice\": \"0\", \"dhcpServer\": \"000.00.00.1\", \"computerTimeStamp\": 1673001224119, \"computerUsn\": 252244, \"diskDrive\": \"C:\\\\\", \"hypervisorVendorId\": \"3\", \"kernel\": null, \"bwf\": 2, \"fbwf\": 2, \"uwf\": 2, \"telemetryMid\": \"telemetryMid\", \"telemetryHwid\": \"telemetryHwid\", \"wssStatus\": 3, \"pskVersion\": 0, \"readableLastScanTime\": \"2023-01-06 04:45:42\", \"timediffLastScanTime\": 22878.328934907913, \"readableLastUpdateTime\": \"2023-01-06 11:03:25\", \"timediffLastUpdateTime\": 214.34893488883972, \"readableLastVirusTime\": \"1970-01-01 00:00:00\", \"timediffLastVirusTime\": 1673003220.328935}], \"totalPages\": 1, \"firstPage\": true, \"lastPage\": true, \"totalElements\": 1, \"size\": 20, \"number\": 0, \"sort\": [{\"direction\": \"ASC\", \"property\": \"COMPUTER_NAME\", \"ascending\": true}], \"numberOfElements\": 1}, \"raw\": \"{\\\"content\\\": [{\\\"group\\\": {\\\"id\\\": \\\"id\\\", \\\"name\\\": \\\"My Company\\\", \\\"fullPathName\\\": null, \\\"domain\\\": {\\\"id\\\": \\\"id\\\", \\\"name\\\": \\\"Default\\\"}, \\\"externalReferenceId\\\": null, \\\"source\\\": null}, \\\"ipAddresses\\\": [\\\"000.00.00.00\\\", \\\"FFFF:0000:0000:0000:1111:AAAA:CCCC:EEEE\\\"], \\\"macAddresses\\\": [\\\"02-00-00-00-00-80\\\", \\\"02-00-00-00-00-80\\\"], \\\"gateways\\\": [\\\"000.00.00.0\\\", \\\"000.00.00.0\\\", \\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"subnetMasks\\\": [\\\"000.000.000.0\\\", \\\"64\\\"], \\\"dnsServers\\\": [\\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"winServers\\\": [\\\"0.0.0.0\\\", \\\"0.0.0.0\\\"], \\\"description\\\": \\\"\\\", \\\"computerName\\\": \\\"computerName\\\", \\\"logonUserName\\\": \\\"Administrator\\\", \\\"domainOrWorkgroup\\\": \\\"WORKGROUP\\\", \\\"computerDescription\\\": \\\"\\\", \\\"processorType\\\": \\\"Intel64 Family 6 Model 79 Stepping 1\\\", \\\"processorClock\\\": 2300, \\\"physicalCpus\\\": 2, \\\"logicalCpus\\\": 0, \\\"memory\\\": 4294557696, \\\"biosVersion\\\": \\\"Xen - 0 Revision: 1.221\\\", \\\"osFunction\\\": \\\"Server\\\", \\\"osFlavorNumber\\\": 8, \\\"osName\\\": \\\"Windows Server 2019\\\", \\\"operatingSystem\\\": \\\"Windows Server 2019 Datacenter Edition\\\", \\\"osVersion\\\": \\\"10.0\\\", \\\"osMajor\\\": 10, \\\"osMinor\\\": 0, \\\"osServicePack\\\": \\\"17763\\\", \\\"osBitness\\\": \\\"x64\\\", \\\"tmpDevice\\\": null, \\\"uniqueId\\\": \\\"uniqueId\\\", \\\"hardwareKey\\\": \\\"hardwareKey\\\", \\\"uuid\\\": \\\"uuid\\\", \\\"osLanguage\\\": \\\"en-US\\\", \\\"totalDiskSpace\\\": 51197, \\\"groupUpdateProvider\\\": false, \\\"deploymentStatus\\\": \\\"302456832\\\", \\\"deploymentMessage\\\": \\\"\\\", \\\"deploymentTargetVersion\\\": \\\"14.3.9205.6000\\\", \\\"deploymentRunningVersion\\\": \\\"14.3.9205.6000\\\", \\\"deploymentPreVersion\\\": \\\"\\\", \\\"lastDeploymentTime\\\": 1670855163000, \\\"virtualizationPlatform\\\": \\\"Citrix\\\", \\\"securityVirtualAppliance\\\": null, \\\"serialNumber\\\": \\\"serialNumber\\\", \\\"installType\\\": \\\"0\\\", \\\"writeFiltersStatus\\\": null, \\\"agentVersion\\\": \\\"14.3.9205.6000\\\", \\\"atpDeviceId\\\": null, \\\"encryptedDevicePassword\\\": null, \\\"publicKey\\\": \\\"publicKey\\\", \\\"deleted\\\": 0, \\\"quarantineStatus\\\": 3, \\\"quarantineCode\\\": 105, \\\"quarantineDesc\\\": \\\"Host Integrity check is disabled.\\\\n Host Integrity policy has been disabled by the administrator.\\\", \\\"loginDomain\\\": \\\"LocalComputer\\\", \\\"agentId\\\": \\\"agentId\\\", \\\"agentType\\\": \\\"105\\\", \\\"profileVersion\\\": \\\"14.3.9205\\\", \\\"profileSerialNo\\\": \\\"DDDD-12/28/2022 14:30:24 853\\\", \\\"profileChecksum\\\": null, \\\"idsVersion\\\": \\\"\\\", \\\"idsSerialNo\\\": \\\"\\\", \\\"idsChecksum\\\": null, \\\"creationTime\\\": 1670855079127, \\\"onlineStatus\\\": 1, \\\"lastUpdateTime\\\": 1673003005980, \\\"lastServerId\\\": \\\"lastServerId\\\", \\\"lastServerName\\\": \\\"lastServerName\\\", \\\"lastSiteId\\\": \\\"lastSiteId\\\", \\\"lastSiteName\\\": \\\"My Site\\\", \\\"attributeExtension\\\": \\\"\\\", \\\"fullName\\\": \\\"\\\", \\\"email\\\": \\\"\\\", \\\"jobTitle\\\": \\\"\\\", \\\"department\\\": \\\"\\\", \\\"employeeNumber\\\": \\\"\\\", \\\"employeeStatus\\\": \\\"\\\", \\\"officePhone\\\": \\\"\\\", \\\"mobilePhone\\\": \\\"\\\", \\\"homePhone\\\": \\\"\\\", \\\"agentTimeStamp\\\": 1673003005980, \\\"agentUsn\\\": 252331, \\\"patternIdx\\\": \\\"patternIdx\\\", \\\"apOnOff\\\": 1, \\\"infected\\\": 0, \\\"worstInfectionIdx\\\": \\\"9999\\\", \\\"lastScanTime\\\": 1672980342000, \\\"lastVirusTime\\\": 0, \\\"contentUpdate\\\": 1, \\\"avEngineOnOff\\\": 1, \\\"avDefsetVersion\\\": \\\"230105023\\\", \\\"avDefsetSequence\\\": \\\"225331\\\", \\\"avDefsetRevision\\\": \\\"23\\\", \\\"tamperOnOff\\\": 1, \\\"majorVersion\\\": 14, \\\"minorVersion\\\": 3, \\\"rebootRequired\\\": 0, \\\"rebootReason\\\": \\\"\\\", \\\"licenseStatus\\\": -1, \\\"licenseExpiry\\\": 0, \\\"timeZone\\\": 0, \\\"firewallOnOff\\\": 1, \\\"freeMem\\\": 2616713216, \\\"freeDisk\\\": 33266442240, \\\"lastDownloadTime\\\": 1670855103022, \\\"currentClientId\\\": \\\"currentClientId\\\", \\\"licenseId\\\": null, \\\"isGrace\\\": 0, \\\"snacLicenseId\\\": null, \\\"ptpOnOff\\\": 1, \\\"lastHeuristicThreatTime\\\": 0, \\\"bashStatus\\\": 1, \\\"daOnOff\\\": 1, \\\"cidsDrvOnOff\\\": 1, \\\"cidsSilentMode\\\": 0, \\\"cidsDrvMulfCode\\\": 0, \\\"cidsBrowserIeOnOff\\\": 1, \\\"cidsBrowserFfOnOff\\\": 1, \\\"cidsEngineVersion\\\": \\\"00.0.00.0\\\", \\\"cidsDefsetVersion\\\": \\\"230105073\\\", \\\"elamOnOff\\\": 1, \\\"osElamStatus\\\": 0, \\\"tdadOnOff\\\": 3, \\\"tdadStatusId\\\": 127, \\\"tdadGlobalDataDownloadTime\\\": 0, \\\"tdadGlobalDataProcessingDoneTime\\\": 0, \\\"vsicStatus\\\": 3, \\\"isNpvdiClient\\\": 0, \\\"svaId\\\": null, \\\"lastConnectedIpAddr\\\": \\\"000.00.00.00\\\", \\\"pepOnOff\\\": 1, \\\"edrStatus\\\": 0, \\\"atpServer\\\": \\\"\\\", \\\"tpmDevice\\\": \\\"0\\\", \\\"dhcpServer\\\": \\\"000.00.00.0\\\", \\\"computerTimeStamp\\\": 1673001224119, \\\"computerUsn\\\": 252244, \\\"diskDrive\\\": \\\"C:\\\\\\\\\\\", \\\"hypervisorVendorId\\\": \\\"3\\\", \\\"kernel\\\": null, \\\"bwf\\\": 2, \\\"fbwf\\\": 2, \\\"uwf\\\": 2, \\\"telemetryMid\\\": \\\"telemetryMid\\\", \\\"telemetryHwid\\\": \\\"telemetryHwid\\\", \\\"wssStatus\\\": 3, \\\"pskVersion\\\": 0, \\\"readableLastScanTime\\\": \\\"2023-01-06 04:45:42\\\", \\\"timediffLastScanTime\\\": 22878.328934907913, \\\"readableLastUpdateTime\\\": \\\"2023-01-06 11:03:25\\\", \\\"timediffLastUpdateTime\\\": 214.34893488883972, \\\"readableLastVirusTime\\\": \\\"1970-01-01 00:00:00\\\", \\\"timediffLastVirusTime\\\": 1673003220.328935}], \\\"totalPages\\\": 1, \\\"firstPage\\\": true, \\\"lastPage\\\": true, \\\"totalElements\\\": 1, \\\"size\\\": 20, \\\"number\\\": 0, \\\"sort\\\": [{\\\"direction\\\": \\\"ASC\\\", \\\"property\\\": \\\"COMPUTER_NAME\\\", \\\"ascending\\\": true}], \\\"numberOfElements\\\": 1}\", \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2156, \"timestamp\": \"2023-01-06 11:07:00\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"group\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"fullPathName\": {}, \"domain\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}}}, \"externalReferenceId\": {}, \"source\": {}}}, \"ipAddresses\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"macAddresses\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"gateways\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"subnetMasks\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"dnsServers\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"winServers\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"description\": {\"type\": \"string\"}, \"computerName\": {\"type\": \"string\"}, \"logonUserName\": {\"type\": \"string\"}, \"domainOrWorkgroup\": {\"type\": \"string\"}, \"computerDescription\": {\"type\": \"string\"}, \"processorType\": {\"type\": \"string\"}, \"processorClock\": {\"type\": \"integer\"}, \"physicalCpus\": {\"type\": \"integer\"}, \"logicalCpus\": {\"type\": \"integer\"}, \"memory\": {\"type\": \"integer\"}, \"biosVersion\": {\"type\": \"string\"}, \"osFunction\": {\"type\": \"string\"}, \"osFlavorNumber\": {\"type\": \"integer\"}, \"osName\": {\"type\": \"string\"}, \"operatingSystem\": {\"type\": \"string\"}, \"osVersion\": {\"type\": \"string\"}, \"osMajor\": {\"type\": \"integer\"}, \"osMinor\": {\"type\": \"integer\"}, \"osServicePack\": {\"type\": \"string\"}, \"osBitness\": {\"type\": \"string\"}, \"tmpDevice\": {}, \"uniqueId\": {\"type\": \"string\"}, \"hardwareKey\": {\"type\": \"string\"}, \"uuid\": {\"type\": \"string\"}, \"osLanguage\": {\"type\": \"string\"}, \"totalDiskSpace\": {\"type\": \"integer\"}, \"groupUpdateProvider\": {\"type\": \"boolean\"}, \"deploymentStatus\": {\"type\": \"string\"}, \"deploymentMessage\": {\"type\": \"string\"}, \"deploymentTargetVersion\": {\"type\": \"string\"}, \"deploymentRunningVersion\": {\"type\": \"string\"}, \"deploymentPreVersion\": {\"type\": \"string\"}, \"lastDeploymentTime\": {\"type\": \"integer\"}, \"virtualizationPlatform\": {\"type\": \"string\"}, \"securityVirtualAppliance\": {}, \"serialNumber\": {\"type\": \"string\"}, \"installType\": {\"type\": \"string\"}, \"writeFiltersStatus\": {}, \"agentVersion\": {\"type\": \"string\"}, \"atpDeviceId\": {}, \"encryptedDevicePassword\": {}, \"publicKey\": {\"type\": \"string\"}, \"deleted\": {\"type\": \"integer\"}, \"quarantineStatus\": {\"type\": \"integer\"}, \"quarantineCode\": {\"type\": \"integer\"}, \"quarantineDesc\": {\"type\": \"string\"}, \"loginDomain\": {\"type\": \"string\"}, \"agentId\": {\"type\": \"string\"}, \"agentType\": {\"type\": \"string\"}, \"profileVersion\": {\"type\": \"string\"}, \"profileSerialNo\": {\"type\": \"string\"}, \"profileChecksum\": {}, \"idsVersion\": {\"type\": \"string\"}, \"idsSerialNo\": {\"type\": \"string\"}, \"idsChecksum\": {}, \"creationTime\": {\"type\": \"integer\"}, \"onlineStatus\": {\"type\": \"integer\"}, \"lastUpdateTime\": {\"type\": \"integer\"}, \"lastServerId\": {\"type\": \"string\"}, \"lastServerName\": {\"type\": \"string\"}, \"lastSiteId\": {\"type\": \"string\"}, \"lastSiteName\": {\"type\": \"string\"}, \"attributeExtension\": {\"type\": \"string\"}, \"fullName\": {\"type\": \"string\"}, \"email\": {\"type\": \"string\"}, \"jobTitle\": {\"type\": \"string\"}, \"department\": {\"type\": \"string\"}, \"employeeNumber\": {\"type\": \"string\"}, \"employeeStatus\": {\"type\": \"string\"}, \"officePhone\": {\"type\": \"string\"}, \"mobilePhone\": {\"type\": \"string\"}, \"homePhone\": {\"type\": \"string\"}, \"agentTimeStamp\": {\"type\": \"integer\"}, \"agentUsn\": {\"type\": \"integer\"}, \"patternIdx\": {\"type\": \"string\"}, \"apOnOff\": {\"type\": \"integer\"}, \"infected\": {\"type\": \"integer\"}, \"worstInfectionIdx\": {\"type\": \"string\"}, \"lastScanTime\": {\"type\": \"integer\"}, \"lastVirusTime\": {\"type\": \"integer\"}, \"contentUpdate\": {\"type\": \"integer\"}, \"avEngineOnOff\": {\"type\": \"integer\"}, \"avDefsetVersion\": {\"type\": \"string\"}, \"avDefsetSequence\": {\"type\": \"string\"}, \"avDefsetRevision\": {\"type\": \"string\"}, \"tamperOnOff\": {\"type\": \"integer\"}, \"majorVersion\": {\"type\": \"integer\"}, \"minorVersion\": {\"type\": \"integer\"}, \"rebootRequired\": {\"type\": \"integer\"}, \"rebootReason\": {\"type\": \"string\"}, \"licenseStatus\": {\"type\": \"integer\"}, \"licenseExpiry\": {\"type\": \"integer\"}, \"timeZone\": {\"type\": \"integer\"}, \"firewallOnOff\": {\"type\": \"integer\"}, \"freeMem\": {\"type\": \"integer\"}, \"freeDisk\": {\"type\": \"integer\"}, \"lastDownloadTime\": {\"type\": \"integer\"}, \"currentClientId\": {\"type\": \"string\"}, \"licenseId\": {}, \"isGrace\": {\"type\": \"integer\"}, \"snacLicenseId\": {}, \"ptpOnOff\": {\"type\": \"integer\"}, \"lastHeuristicThreatTime\": {\"type\": \"integer\"}, \"bashStatus\": {\"type\": \"integer\"}, \"daOnOff\": {\"type\": \"integer\"}, \"cidsDrvOnOff\": {\"type\": \"integer\"}, \"cidsSilentMode\": {\"type\": \"integer\"}, \"cidsDrvMulfCode\": {\"type\": \"integer\"}, \"cidsBrowserIeOnOff\": {\"type\": \"integer\"}, \"cidsBrowserFfOnOff\": {\"type\": \"integer\"}, \"cidsEngineVersion\": {\"type\": \"string\"}, \"cidsDefsetVersion\": {\"type\": \"string\"}, \"elamOnOff\": {\"type\": \"integer\"}, \"osElamStatus\": {\"type\": \"integer\"}, \"tdadOnOff\": {\"type\": \"integer\"}, \"tdadStatusId\": {\"type\": \"integer\"}, \"tdadGlobalDataDownloadTime\": {\"type\": \"integer\"}, \"tdadGlobalDataProcessingDoneTime\": {\"type\": \"integer\"}, \"vsicStatus\": {\"type\": \"integer\"}, \"isNpvdiClient\": {\"type\": \"integer\"}, \"svaId\": {}, \"lastConnectedIpAddr\": {\"type\": \"string\"}, \"pepOnOff\": {\"type\": \"integer\"}, \"edrStatus\": {\"type\": \"integer\"}, \"atpServer\": {\"type\": \"string\"}, \"tpmDevice\": {\"type\": \"string\"}, \"dhcpServer\": {\"type\": \"string\"}, \"computerTimeStamp\": {\"type\": \"integer\"}, \"computerUsn\": {\"type\": \"integer\"}, \"diskDrive\": {\"type\": \"string\"}, \"hypervisorVendorId\": {\"type\": \"string\"}, \"kernel\": {}, \"bwf\": {\"type\": \"integer\"}, \"fbwf\": {\"type\": \"integer\"}, \"uwf\": {\"type\": \"integer\"}, \"telemetryMid\": {\"type\": \"string\"}, \"telemetryHwid\": {\"type\": \"string\"}, \"wssStatus\": {\"type\": \"integer\"}, \"pskVersion\": {\"type\": \"integer\"}, \"readableLastScanTime\": {\"type\": \"string\"}, \"timediffLastScanTime\": {\"type\": \"number\"}, \"readableLastUpdateTime\": {\"type\": \"string\"}, \"timediffLastUpdateTime\": {\"type\": \"number\"}, \"readableLastVirusTime\": {\"type\": \"string\"}, \"timediffLastVirusTime\": {\"type\": \"number\"}}}}, \"totalPages\": {\"type\": \"integer\"}, \"firstPage\": {\"type\": \"boolean\"}, \"lastPage\": {\"type\": \"boolean\"}, \"totalElements\": {\"type\": \"integer\"}, \"size\": {\"type\": \"integer\"}, \"number\": {\"type\": \"integer\"}, \"sort\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"direction\": {\"type\": \"string\"}, \"property\": {\"type\": \"string\"}, \"ascending\": {\"type\": \"boolean\"}}}}, \"numberOfElements\": {\"type\": \"integer\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "91343444-7a62-4f7f-9812-918531b6bf10",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "797b8c43-78ae-45ab-af45-83f158801dd0",
@@ -3399,14 +3367,9 @@
           "name": "Example: SEP - Get Endpoint Details",
           "object_type": "sep_eoc_scan_results",
           "programmatic_name": "wf_sep_get_endpoint_details",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 414
+          "workflow_id": 319
         },
         {
           "actions": [],
@@ -3414,14 +3377,9 @@
           "name": "Example: SEP - Get Endpoint Details for artifact",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_get_endpoint_details_for_artifact",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 425
+          "workflow_id": 330
         },
         {
           "actions": [],
@@ -3429,14 +3387,9 @@
           "name": "Example: SEP - Get Endpoints status summary",
           "object_type": "incident",
           "programmatic_name": "wf_sep_get_endpoints_status",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 420
+          "workflow_id": 325
         },
         {
           "actions": [],
@@ -3444,14 +3397,9 @@
           "name": "Example: SEP - Get Endpoints status summary (refresh)",
           "object_type": "sep_endpoint_status_summary",
           "programmatic_name": "wf_sep_get_endpoints_status_refresh",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 421
+          "workflow_id": 326
         },
         {
           "actions": [],
@@ -3459,14 +3407,9 @@
           "name": "Example: SEP - Get Non-Compliant Endpoints status details",
           "object_type": "sep_endpoint_status_summary",
           "programmatic_name": "wf_sep_get_endpoints_status_details",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 430
+          "workflow_id": 335
         },
         {
           "actions": [],
@@ -3474,14 +3417,9 @@
           "name": "Example: SEP - Get Quarantine status",
           "object_type": "sep_endpoint_details",
           "programmatic_name": "wf_sep_get_quarantine_status",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 410
+          "workflow_id": 315
         },
         {
           "actions": [],
@@ -3489,14 +3427,9 @@
           "name": "Example: SEP - Initiate EOC Scan for Artifact",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_initiate_eoc_scan_for_artifact",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 411
+          "workflow_id": 316
         },
         {
           "actions": [],
@@ -3504,19 +3437,14 @@
           "name": "Example: SEP - Quarantine Endpoint",
           "object_type": "sep_endpoint_details",
           "programmatic_name": "wf_sep_quarantine_endpoint",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 412
+          "workflow_id": 317
         }
       ]
     },
     {
-      "created_date": 1668002331464,
+      "created_date": 1668001887306,
       "description": {
         "content": "Gets a list of all accessible domains.",
         "format": "text"
@@ -3524,23 +3452,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Get Domains",
       "export_key": "fn_sep_get_domains",
-      "id": 311,
+      "id": 247,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002331669,
+      "last_modified_time": 1674507184229,
       "name": "fn_sep_get_domains",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": [{\"id\": \"id\", \"name\": \"Default\", \"description\": null, \"createdTime\": 1670774894004, \"enable\": true, \"companyName\": \"Tata Consultancy Services Ltd\", \"contactInfo\": null, \"administratorCount\": 1}], \"raw\": \"[{\\\"id\\\": \\\"id\\\", \\\"name\\\": \\\"Default\\\", \\\"description\\\": null, \\\"createdTime\\\": 1670774894004, \\\"enable\\\": true, \\\"companyName\\\": \\\"Tata Consultancy Services Ltd\\\", \\\"contactInfo\\\": null, \\\"administratorCount\\\": 1}]\", \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2032, \"timestamp\": \"2023-01-06 11:05:32\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"description\": {}, \"createdTime\": {\"type\": \"integer\"}, \"enable\": {\"type\": \"boolean\"}, \"companyName\": {\"type\": \"string\"}, \"contactInfo\": {}, \"administratorCount\": {\"type\": \"integer\"}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "a17245e2-ae90-46aa-ae44-cc0d37b8387c",
-      "version": 1,
+      "version": 2,
       "view_items": [],
       "workflows": [
         {
@@ -3549,14 +3474,9 @@
           "name": "Example: SEP - Add Hash to Blacklist",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_add_fingerprint_list",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 419
+          "workflow_id": 324
         },
         {
           "actions": [],
@@ -3564,14 +3484,9 @@
           "name": "Example: SEP - Delete Hash from Blacklist",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_delete_hash_from_fingerprint_list",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 418
+          "workflow_id": 323
         },
         {
           "actions": [],
@@ -3579,14 +3494,9 @@
           "name": "Example: SEP - Get Blacklist information",
           "object_type": "incident",
           "programmatic_name": "wf_sep_get_blacklist_information",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 423
+          "workflow_id": 328
         },
         {
           "actions": [],
@@ -3594,19 +3504,14 @@
           "name": "Example: SEP - Get Groups information",
           "object_type": "incident",
           "programmatic_name": "wf_sep_get_groups_information",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 413
+          "workflow_id": 318
         }
       ]
     },
     {
-      "created_date": 1668002331754,
+      "created_date": 1668001887469,
       "description": {
         "content": "Get contents of a file uploaded to SEPM server as a Base64 string for a given file ID.",
         "format": "text"
@@ -3614,23 +3519,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Get File Content as Base64",
       "export_key": "fn_sep_get_file_content_as_base64",
-      "id": 312,
+      "id": 248,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002331998,
+      "last_modified_time": 1674507184382,
       "name": "fn_sep_get_file_content_as_base64",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": \"TVpQAAIAAAAEAA8A//8AALgAAAAAAAAAQAAaAAAA+yFqcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAALoQAA4ftAnNIbgBTM0hkJBUaGlzIHByb2dyYW0gbXVzdCBiZSBydW4gdW5kZXIgV2luMzINCiQ3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQRQAATAEJAO3nqFYAAAAAAAAAAOAADgMLAQUAAAAhAABgAgAAAAAACCAAAAAQAAAAECEAAABAAAAQAAAAAgAABAAAAAAAAAAFAAAAAAAAAAAwJwAABgAAAAAAAAIAAAAAABAAACAAAAAAEAAAEAAAAAAAABAAAAAA4CMAsQEAAACQIwBWOwAAAPAjAACeAAAAAAAAAAAAAAAAAAAAAAAAAJAkAIidAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgCMAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQIwDlBgAAAAAAAAAAAAAAAAAAAAAAAC50ZXh0AAAAAAAhAAAQAAAA+CAAAAYAAAAAAAAAAAAAAAAAACAAAGAuZGF0YQAAAABgAgAAECEAAMwAAAD+IAAAAAAAAAAAAAAAAABAAADALnRscwAAAAAAEAAAAHAjAAACAAAAyiEAAAAAAAAAAAAAAAAAQAAAwC5yZGF0YQAAABAAAACAIwAAAgAAAMwhAAAAAAAAAAAAAAAAAEAAAFAuaWRhdGEAAABAAAAAkCMAADwAAADOIQAAAAAAAAAAAAAAAABAAABALmRpZGF0YQAAEAAAANAjAAAIAAAACiIAAAAAAAAAAAAAAAAAQAAAwC5lZGF0YQAAABAAAADgIwAAAgAAABIiAAAAAAAAAAAAAAAAAEAAAEAucnNyYwAAAACgAAAA8CMAAJ4AAAAUIgAAAAAAAAAAAAAAAABAAABALnJlbG9jAAAAoAIAAJAkAACeAgAAsiIAAAAAAAAAAAAAAAAAQAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAByo8WAAAACw6GAAAAOE8GAAACCs8GAAAB6chEgAAB44KEAAAB6EokcAAB5o1EcAAB5I7UcAAB4kn0cAAB78pUcAAB4Q+kYAAB64jkcAAB7EskEAAB4ssEEAAB7IjkcAAB7w2kUAAB6EGUYAAB7AnEYAAB5I70YAAB489UYAAB5MaEQAAB5oUEUAAB5s2UUAAB6MK0QAAB6gtkEAAB5sxUEAAB588kEAAB5gu0IAAB4oxkMAAB4Y+EMAAB68DEQAAB6sIEUAAB445kEAAB4Qs0EAAB7gNkQAAB6MukEAAB4I0FAAAB5EwkEAAB6MokAAAB6EqUAAAB4cjEAAAB6YSEUAAB48rEEAAB58ukEAAB7UnUEAAB4EnkEAAB70nUEAAB4YskEAAB4oskEAAB5YskEAAB5UnkEAAB60nUEAAB5kykcAAB5kaEQAAB5400AAAB4MjEAAAB5U6UAAAB70n0QAAB74pEQAAB7sgUAAAB5Mi0AAAB7saEQAAB7YSkQAAB48Z0QAAB6AgUAAAB5AY1YAAB7M81AAAB6Ui0AAAB6wtkEAAB4gDVQAAB40+1sAAB4EVVEAAB48PlIAAB4MTlIAAB5EZ1IAAB7Yg1IAAB5snFIAAB5Uq1IAAB50tFIAAB4ovlIAAB743lIAAB5M5VIAAB5IT1MAAB5oT1MAAB6IT1MAAB6oT1MAAB7IT1MAAB7oT1MAAB4IUFMAAB4oUFMAAB6oUVMAAB4YFlkAAB6MH1kAAB6sH1kAAB40KVkAAB5cKVkAAB6snkEAAB4IM0UAAB70MUUAAB6IMkUAAB4ws0EAAB7QgEAAAB7ggEAAAB7wgEAAAB5grEEAAB4knkEAAB60skEAAB4csEEAAB7ovEEAAB6kskEAAB5wv2AAAB709VAAAB6E/FsAAB7knUEAAB6sblMAAB4wXFQAAB7kYlEAAB7w8F0AAB5AAV4AAB48BF4AAB7kFV4AAB78W14AAB6Ukl4AAB60kl4AAB4Qnl4AAB4MyV4AAB6s114AAB7M114AAB5g4l4AAB6A4l4AAB7s5l4AAB7IE18AAB7IZ18AAB7Qd18AAB6E1l8AAB5IAmAAAB4MDGAAAB4AGGAAAB7cJmAAAB78JmAAAB6MK2AAAB4UrmAAAB6A71kAAB7kskEAAB6grUAAAB7UZE0AAB74yE0AAB5M5U0AAB5cC04AAB4o8kEAAB5UM1QAAB68n1QAAB6gF1UAAB6oRlUAAB6IO1UAAB7QRlUAAB4w1EsAAB78E0wAAB6UVU4AAB4U2U8AAB4EMFEAAB5AukEAAB64FlcAAB50F1cAAB5ghVcAAB7IYlgAAB6chEgAAB44KEAAAB78pUcAAB6EokcAAB5o1EcAAB5I7UcAAB4kn0cAAB4Q+kYAAB7EskEAAB4ssEEAAB7IjkcAAB7w2kUAAB6EGUYAAB7AnEYAAB5I70YAAB489UYAAB64jkcAAB5oUEUAAB5s2UUAAB6MK0QAAB6gtkEAAB5sxUEAAB588kEAAB5gu0IAAB4oxkMAAB4Y+EMAAB68DEQAAB5EwkEAAB5MaEQAAB6MokAAAB6EqUAAAB4cjEAAAB6YSEUAAB48rEEAAB58ukEAAB6sIEUAAB445kEAAB4Qs0EAAB7gNkQAAB4I0FAAAB5kykcAAB5kaEQAAB5400AAAB4MjEAAAB5U6UAAAB70n0QAAB74pEQAAB7sgUAAAB5Mi0AAAB7saEQAAB7YSkQAAB48Z0QAAB6AgUAAAB5AY1YAAB4EMFEAAB5UnkEAAB60nUEAAB7M81AAAB6Ui0AAAB4gDVQAAB4EVVEAAB6wtkEAAB40...\", \"inputs\": {\"sep_file_id\": \"sep_file_id\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 4753, \"timestamp\": \"2023-01-06 10:40:29\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"string\"}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_file_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "d3f9eb5b-969b-45aa-bb88-29c21c85fd04",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "f5c6389c-d677-4da9-83f2-e05175fe1f6a",
@@ -3648,19 +3550,14 @@
           "name": "Example: SEP - Get File Content as Base64 string",
           "object_type": "sep_eoc_scan_results",
           "programmatic_name": "wf_sep_get_file_content_as_base64_string",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 417
+          "workflow_id": 322
         }
       ]
     },
     {
-      "created_date": 1668002332084,
+      "created_date": 1668001887633,
       "description": {
         "content": "Get the fingerprint list information for a specified name or id.",
         "format": "text"
@@ -3668,23 +3565,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Get Fingerprint List",
       "export_key": "fn_sep_get_fingerprint_list",
-      "id": 313,
+      "id": 249,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002332319,
+      "last_modified_time": 1674507184541,
       "name": "fn_sep_get_fingerprint_list",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"id\": \"id\", \"name\": \"Test Blacklist 13 of testing purpose\", \"hashType\": \"MD5\", \"source\": \"WEBSERVICE\", \"description\": \"This is test of adding files in blacklist.\", \"data\": [\"data\"], \"groupIds\": []}, \"raw\": \"{\\\"id\\\": \\\"id\\\", \\\"name\\\": \\\"Test Blacklist 13 of testing purpose\\\", \\\"hashType\\\": \\\"MD5\\\", \\\"source\\\": \\\"WEBSERVICE\\\", \\\"description\\\": \\\"This is test of adding files in blacklist.\\\", \\\"data\\\": [\\\"data\\\"], \\\"groupIds\\\": []}\", \"inputs\": {\"sep_domainid\": \"sep_domainid\", \"sep_fingerprintlist_name\": \"Test blacklist updated\", \"sep_fingerprintlist_id\": \"sep_fingerprintlist_id\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2092, \"timestamp\": \"2023-01-06 06:41:50\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"hashType\": {\"type\": \"string\"}, \"source\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"data\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"groupIds\": {\"type\": \"array\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_domainid\": {\"type\": \"string\"}, \"sep_fingerprintlist_name\": {\"type\": \"string\"}, \"sep_fingerprintlist_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "e3e94d0c-e2c9-4f76-9e41-6878e718e8de",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "214b95e7-240a-4a9d-b8c5-686fc4953ef3",
@@ -3718,14 +3612,9 @@
           "name": "Example: SEP - Add Hash to Blacklist",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_add_fingerprint_list",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 419
+          "workflow_id": 324
         },
         {
           "actions": [],
@@ -3733,14 +3622,9 @@
           "name": "Example: SEP - Assign Blacklist to lockdown group",
           "object_type": "sep_groups",
           "programmatic_name": "wf_sep_assign_fingerprint_list_to_lockdown_group",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 416
+          "workflow_id": 321
         },
         {
           "actions": [],
@@ -3748,14 +3632,9 @@
           "name": "Example: SEP - Delete Hash from Blacklist",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_delete_hash_from_fingerprint_list",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 418
+          "workflow_id": 323
         },
         {
           "actions": [],
@@ -3763,19 +3642,14 @@
           "name": "Example: SEP - Get Blacklist information",
           "object_type": "incident",
           "programmatic_name": "wf_sep_get_blacklist_information",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 423
+          "workflow_id": 328
         }
       ]
     },
     {
-      "created_date": 1668002332414,
+      "created_date": 1668001887799,
       "description": {
         "content": "Get properties of all groups in a domain.",
         "format": "text"
@@ -3783,23 +3657,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Get Groups",
       "export_key": "fn_sep_get_groups",
-      "id": 314,
+      "id": 250,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002332624,
+      "last_modified_time": 1674507184701,
       "name": "fn_sep_get_groups",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"content\": [{\"id\": \"id\", \"name\": \"My Company\", \"description\": \"\", \"fullPathName\": \"My Company\", \"numberOfPhysicalComputers\": 1, \"numberOfRegisteredUsers\": 1, \"createdBy\": \"createdBy                                                                                                \", \"created\": 1670774894035, \"lastModified\": 1670774894035, \"policySerialNumber\": \"E3DD-12/28/2022 14:30:24 853\", \"policyDate\": 1672237824853, \"customIpsNumber\": \"\", \"domain\": {\"id\": \"id\", \"name\": \"name\"}, \"policyInheritanceEnabled\": false}, {\"id\": \"id\", \"name\": \"Default Group\", \"description\": \"\", \"fullPathName\": \"My Company\\\\Default Group\", \"numberOfPhysicalComputers\": 0, \"numberOfRegisteredUsers\": 0, \"createdBy\": \"createdBy                                                                                                \", \"created\": 1670774894035, \"lastModified\": 1670774894035, \"policySerialNumber\": \"459F-12/28/2022 14:30:24 853\", \"policyDate\": 1672237824853, \"customIpsNumber\": \"\", \"domain\": {\"id\": \"id\", \"name\": \"Default\"}, \"policyInheritanceEnabled\": true}, {\"id\": \"id\", \"name\": \"Test\", \"description\": \"\", \"fullPathName\": \"My Company\\\\Test\", \"numberOfPhysicalComputers\": 0, \"numberOfRegisteredUsers\": 0, \"createdBy\": \"createdBy                                                                                                \", \"created\": 1670853895754, \"lastModified\": 1670853895754, \"policySerialNumber\": \"01C5-12/28/2022 14:30:24 853\", \"policyDate\": 1672237824853, \"customIpsNumber\": \"\", \"domain\": {\"id\": \"id\", \"name\": \"Default\"}, \"policyInheritanceEnabled\": true}], \"totalPages\": 1, \"firstPage\": true, \"lastPage\": true, \"totalElements\": 3, \"size\": 25, \"number\": 0, \"sort\": [{\"direction\": \"ASC\", \"property\": \"NAME\", \"ascending\": true}], \"numberOfElements\": 3}, \"raw\": \"{\\\"content\\\": [{\\\"id\\\": \\\"id\\\", \\\"name\\\": \\\"My Company\\\", \\\"description\\\": \\\"\\\", \\\"fullPathName\\\": \\\"My Company\\\", \\\"numberOfPhysicalComputers\\\": 1, \\\"numberOfRegisteredUsers\\\": 1, \\\"createdBy\\\": \\\"createdBy                                                                                                \\\", \\\"created\\\": 1670774894035, \\\"lastModified\\\": 1670774894035, \\\"policySerialNumber\\\": \\\"E3DD-12/28/2022 14:30:24 853\\\", \\\"policyDate\\\": 1672237824853, \\\"customIpsNumber\\\": \\\"\\\", \\\"domain\\\": {\\\"id\\\": \\\"3CB04764AC1F211B2A79E12FEDEA41B1\\\", \\\"name\\\": \\\"Default\\\"}, \\\"policyInheritanceEnabled\\\": false}, {\\\"id\\\": \\\"459F58A0AC1F211B0743E90D2F0C32A1\\\", \\\"name\\\": \\\"Default Group\\\", \\\"description\\\": \\\"\\\", \\\"fullPathName\\\": \\\"My Company\\\\\\\\Default Group\\\", \\\"numberOfPhysicalComputers\\\": 0, \\\"numberOfRegisteredUsers\\\": 0, \\\"createdBy\\\": \\\"AF3C39A10A320801000000DBF200C60A                                                                                                \\\", \\\"created\\\": 1670774894035, \\\"lastModified\\\": 1670774894035, \\\"policySerialNumber\\\": \\\"459F-12/28/2022 14:30:24 853\\\", \\\"policyDate\\\": 1672237824853, \\\"customIpsNumber\\\": \\\"\\\", \\\"domain\\\": {\\\"id\\\": \\\"3CB04764AC1F211B2A79E12FEDEA41B1\\\", \\\"name\\\": \\\"Default\\\"}, \\\"policyInheritanceEnabled\\\": true}, {\\\"id\\\": \\\"01C53575AC1F211B53E6515D65FC81CD\\\", \\\"name\\\": \\\"Test\\\", \\\"description\\\": \\\"\\\", \\\"fullPathName\\\": \\\"My Company\\\\\\\\Test\\\", \\\"numberOfPhysicalComputers\\\": 0, \\\"numberOfRegisteredUsers\\\": 0, \\\"createdBy\\\": \\\"AF3C39A10A320801000000DBF200C60A                                                                                                \\\", \\\"created\\\": 1670853895754, \\\"lastModified\\\": 1670853895754, \\\"policySerialNumber\\\": \\\"01C5-12/28/2022 14:30:24 853\\\", \\\"policyDate\\\": 1672237824853, \\\"customIpsNumber\\\": \\\"\\\", \\\"domain\\\": {\\\"id\\\": \\\"3CB04764AC1F211B2A79E12FEDEA41B1\\\", \\\"name\\\": \\\"Default\\\"}, \\\"policyInheritanceEnabled\\\": true}], \\\"totalPages\\\": 1, \\\"firstPage\\\": true, \\\"lastPage\\\": true, \\\"totalElements\\\": 3, \\\"size\\\": 25, \\\"number\\\": 0, \\\"sort\\\": [{\\\"direction\\\": \\\"ASC\\\", \\\"property\\\": \\\"NAME\\\", \\\"ascending\\\": true}], \\\"numberOfElements\\\": 3}\", \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2148, \"timestamp\": \"2023-01-06 10:17:14\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"fullPathName\": {\"type\": \"string\"}, \"numberOfPhysicalComputers\": {\"type\": \"integer\"}, \"numberOfRegisteredUsers\": {\"type\": \"integer\"}, \"createdBy\": {\"type\": \"string\"}, \"created\": {\"type\": \"integer\"}, \"lastModified\": {\"type\": \"integer\"}, \"policySerialNumber\": {\"type\": \"string\"}, \"policyDate\": {\"type\": \"integer\"}, \"customIpsNumber\": {\"type\": \"string\"}, \"domain\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}}}, \"policyInheritanceEnabled\": {\"type\": \"boolean\"}}}}, \"totalPages\": {\"type\": \"integer\"}, \"firstPage\": {\"type\": \"boolean\"}, \"lastPage\": {\"type\": \"boolean\"}, \"totalElements\": {\"type\": \"integer\"}, \"size\": {\"type\": \"integer\"}, \"number\": {\"type\": \"integer\"}, \"sort\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"direction\": {\"type\": \"string\"}, \"property\": {\"type\": \"string\"}, \"ascending\": {\"type\": \"boolean\"}}}}, \"numberOfElements\": {\"type\": \"integer\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "da72c4a8-45c1-4633-9d18-9ef6bd03dae9",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "3ca07027-92ca-4d00-a40e-9ced6a71beb1",
@@ -3865,14 +3736,9 @@
           "name": "Example: SEP - Get Groups information",
           "object_type": "incident",
           "programmatic_name": "wf_sep_get_groups_information",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 413
+          "workflow_id": 318
         },
         {
           "actions": [],
@@ -3880,19 +3746,14 @@
           "name": "Example: SEP - Move Endpoint",
           "object_type": "sep_endpoint_details",
           "programmatic_name": "wf_sep_move_endpoint",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 415
+          "workflow_id": 320
         }
       ]
     },
     {
-      "created_date": 1668002332703,
+      "created_date": 1668001887962,
       "description": {
         "content": "Check for and move an endpoint to a different group.",
         "format": "text"
@@ -3900,23 +3761,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Move endpoint",
       "export_key": "fn_sep_move_endpoint",
-      "id": 315,
+      "id": 251,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002332897,
+      "last_modified_time": 1674507184841,
       "name": "fn_sep_move_endpoint",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": [{\"responseCode\": \"200\", \"responseMessage\": \"OK\"}], \"raw\": \"[{\\\"responseCode\\\": \\\"200\\\", \\\"responseMessage\\\": \\\"OK\\\"}]\", \"inputs\": {\"sep_groupid\": \"sep_groupid\", \"sep_hardwarekey\": \"sep_hardwarekey\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 1991, \"timestamp\": \"2023-01-06 10:40:03\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"responseCode\": {\"type\": \"string\"}, \"responseMessage\": {\"type\": \"string\"}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_groupid\": {\"type\": \"string\"}, \"sep_hardwarekey\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "eda382b3-ec2c-4c42-ba90-643cd22349dc",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "0180b379-0327-4e2f-b8bc-4367275da5ea",
@@ -3942,19 +3800,14 @@
           "name": "Example: SEP - Move Endpoint",
           "object_type": "sep_endpoint_details",
           "programmatic_name": "wf_sep_move_endpoint",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 415
+          "workflow_id": 320
         }
       ]
     },
     {
-      "created_date": 1668002332975,
+      "created_date": 1668001888129,
       "description": {
         "content": "Quarantine/un-quarantine Symantec Endpoint Protection endpoints. The function will add or remove endpoints to or from network quarantine.",
         "format": "text"
@@ -3962,23 +3815,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Quarantine Endpoints",
       "export_key": "fn_sep_quarantine_endpoints",
-      "id": 316,
+      "id": 252,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002333169,
+      "last_modified_time": 1674507184984,
       "name": "fn_sep_quarantine_endpoints",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"commandID_group\": \"commandID_group\", \"commandID_computer\": \"commandID_computer\"}, \"raw\": \"{\\\"commandID_group\\\": \\\"commandID_group\\\", \\\"commandID_computer\\\": \\\"commandID_computer\\\"}\", \"inputs\": {\"sep_group_ids\": \"sep_group_ids\", \"sep_undo\": true, \"sep_computer_ids\": \"sep_computer_ids\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2090, \"timestamp\": \"2023-01-06 10:10:20\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"commandID_group\": {\"type\": \"string\"}, \"commandID_computer\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_group_ids\": {\"type\": \"string\"}, \"sep_undo\": {\"type\": \"boolean\"}, \"sep_computer_ids\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "ce358d79-cdf9-49d8-a94c-89d838f51197",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "9074e6ef-2fe5-42b4-a9d2-b11ad9f0988d",
@@ -4012,19 +3862,14 @@
           "name": "Example: SEP - Quarantine Endpoint",
           "object_type": "sep_endpoint_details",
           "programmatic_name": "wf_sep_quarantine_endpoint",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 412
+          "workflow_id": 317
         }
       ]
     },
     {
-      "created_date": 1668002333246,
+      "created_date": 1668001888291,
       "description": {
         "content": "Initiates an Evidence of Compromise (EOC) scan  of an artifact value  against  a list of endpoints or groups. The function can also be used to complete a remediation (quarantine) scan action  for hash value (MD5, SHA1 or SHA256).",
         "format": "text"
@@ -4032,23 +3877,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Scan Endpoints",
       "export_key": "fn_sep_scan_endpoints",
-      "id": 317,
+      "id": 253,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002333438,
+      "last_modified_time": 1674507185119,
       "name": "fn_sep_scan_endpoints",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"commandID_group\": \"commandID_group\", \"commandID_computer\": \"commandID_computer\"}, \"raw\": \"{\\\"commandID_group\\\": \\\"commandID_group\\\", \\\"commandID_computer\\\": \\\"commandID_computer\\\"}\", \"inputs\": {\"sep_scan_action\": \"remediate\", \"sep_group_ids\": \"sep_group_ids\", \"sep_description\": \"demo xyz\", \"sep_scan_type\": \"FULL_SCAN\", \"sep_computer_ids\": \"sep_computer_ids\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2108, \"timestamp\": \"2023-01-06 10:04:26\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"commandID_group\": {\"type\": \"string\"}, \"commandID_computer\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_scan_action\": {\"type\": \"string\"}, \"sep_group_ids\": {\"type\": \"string\"}, \"sep_description\": {\"type\": \"string\"}, \"sep_scan_type\": {\"type\": \"string\"}, \"sep_computer_ids\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "cc7fd805-db7a-4c37-aa0e-29ffd1752eec",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "b304766d-cbda-4c8e-85de-27c4e16e082a",
@@ -4130,14 +3972,9 @@
           "name": "Example: SEP - Initiate EOC Scan for Artifact",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_initiate_eoc_scan_for_artifact",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 411
+          "workflow_id": 316
         },
         {
           "actions": [],
@@ -4145,19 +3982,14 @@
           "name": "Example: SEP - Remediate Artifact on Endpoint",
           "object_type": "sep_eoc_scan_results",
           "programmatic_name": "wf_sep_remediate_artifact_on_endpoint",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 427
+          "workflow_id": 332
         }
       ]
     },
     {
-      "created_date": 1668002333515,
+      "created_date": 1668001888456,
       "description": {
         "content": "Updates an existing fingerprint list with a set of hash values. \nNote: Currently only supports MD5 hash type.",
         "format": "text"
@@ -4165,23 +3997,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Update Fingerprint List",
       "export_key": "fn_sep_update_fingerprint_list",
-      "id": 318,
+      "id": 254,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002333709,
+      "last_modified_time": 1674507185261,
       "name": "fn_sep_update_fingerprint_list",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {}, \"raw\": \"{}\", \"inputs\": {\"sep_domainid\": \"sep_domainid\", \"sep_hash_value\": \"sep_hash_value\", \"sep_fingerprintlist_name\": \"Test Blacklist Updated\", \"sep_description\": \"This is test of adding files in blacklist.\", \"sep_fingerprintlist_id\": \"sep_fingerprintlist_id\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2087, \"timestamp\": \"2023-01-06 09:30:38\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"content\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_domainid\": {\"type\": \"string\"}, \"sep_hash_value\": {\"type\": \"string\"}, \"sep_fingerprintlist_name\": {\"type\": \"string\"}, \"sep_description\": {\"type\": \"string\"}, \"sep_fingerprintlist_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "86fbaf45-bb0f-4ba0-a988-cc603d315e49",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "185d9c87-28d8-46a4-9e50-dbc73be88b59",
@@ -4231,14 +4060,9 @@
           "name": "Example: SEP - Add Hash to Blacklist",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_add_fingerprint_list",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 419
+          "workflow_id": 324
         },
         {
           "actions": [],
@@ -4246,19 +4070,14 @@
           "name": "Example: SEP - Delete Hash from Blacklist",
           "object_type": "artifact",
           "programmatic_name": "wf_sep_delete_hash_from_fingerprint_list",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 418
+          "workflow_id": 323
         }
       ]
     },
     {
-      "created_date": 1668002333786,
+      "created_date": 1668001888640,
       "description": {
         "content": "Upload a file from an endpoint back to the SEPM server.  \nNote: Only supports executable file types such as binary executable (.exe), batch (.bat), Windows installer package (.msi) etc. File source can be FILESYTEM, QUARANTINE or BOTH",
         "format": "text"
@@ -4266,23 +4085,20 @@
       "destination_handle": "fn_sep",
       "display_name": "SEP - Upload File to SEPM",
       "export_key": "fn_sep_upload_file_to_sepm",
-      "id": 319,
+      "id": 255,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 8,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1668002333978,
+      "last_modified_time": 1674507185625,
       "name": "fn_sep_upload_file_to_sepm",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"commandID\": \"commandID\"}, \"raw\": \"{\\\"commandID\\\": \\\"commandID\\\"}\", \"inputs\": {\"sep_md5\": \"sep_md5\", \"sep_file_path\": \"C:/Users/Public/Documents/sample.exe\", \"sep_source\": \"FILESYSTEM\", \"sep_computer_ids\": \"sep_computer_ids\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2270, \"timestamp\": \"2023-01-06 09:50:57\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"commandID\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_md5\": {\"type\": \"string\"}, \"sep_file_path\": {\"type\": \"string\"}, \"sep_source\": {\"type\": \"string\"}, \"sep_computer_ids\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
       "uuid": "a5fce4c1-b595-47b0-bfa0-781b802cba59",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "478fdc18-25d8-4490-8513-f5d6fe9ab1ce",
@@ -4340,27 +4156,252 @@
           "name": "Example: SEP - Upload file to SEPM server",
           "object_type": "sep_eoc_scan_results",
           "programmatic_name": "wf_sep_upload_file_to_sepm",
-          "tags": [
-            {
-              "tag_handle": "fn_sep",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 426
+          "workflow_id": 331
+        }
+      ]
+    },
+    {
+      "created_date": 1674507185449,
+      "description": {
+        "content": "Cancels an existing command by creating a new cancel command for clients for which the command is still pending.",
+        "format": "text"
+      },
+      "destination_handle": "fn_sep",
+      "display_name": "SEP - Cancel a Command",
+      "export_key": "sep_cancel_a_command",
+      "id": 388,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1674507185630,
+      "name": "sep_cancel_a_command",
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": \"None\", \"content\": {\"commandID\": \"8D77EE017C204AFEA4A10B682F15DBAE\"}, \"raw\": \"None\", \"inputs\": {\"sep_command_id\": \"E1B09D9873174FD49CC622037C5F4AE4\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.2\", \"host\": \"host\", \"execution_time_ms\": 2106, \"timestamp\": \"2023-01-18 19:34:42\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {\"type\": \"string\"}, \"content\": {\"type\": \"object\"}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_command_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
+      "uuid": "43bc97a6-bb30-4e14-9515-8676325ab748",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "12d6a498-0c36-40e6-810a-b3450d55a0ef",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: SEP - Cancel a Command",
+          "object_type": "incident",
+          "programmatic_name": "example_sep_cancel_a_command",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 430
+        }
+      ]
+    },
+    {
+      "created_date": 1674507185650,
+      "description": {
+        "content": "Gets information related to critical events. \u0027results_limit\u0027 is not currently used for this function.",
+        "format": "text"
+      },
+      "destination_handle": "fn_sep",
+      "display_name": "SEP - Get Critical Events Info",
+      "export_key": "sep_get_critical_events_info",
+      "id": 389,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1674507185786,
+      "name": "sep_get_critical_events_info",
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"lastUpdated\": 1672986455971, \"totalUnacknowledgedMessages\": 47, \"criticalEventsInfoList\": [{\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Some Symantec Endpoint Protection groups have not been assigned a password.\", \"message\": \"To enhance security, Symantec recommends that you should require the users in this client group to use passwords in the following situations: opening, stopping, or uninstalling the client, or importing the Sylink file. You should assign a password to the following client groups.\u003cbr/\u003e\u003cbr/\u003eDefault: My Company\u003cbr/\u003e\u003cbr/\u003e\u003cbr/\u003eFor information on how to enable password protection on the client, see: \u003ca href=\\\"https://techdocs.broadcom.com/bin/gethidpage.html?ux-context-string=sesm_computersnusers_policies_password_setting\u0026appid=SEP\u0026language=en\u0026format=rendered\\\" class=\\\"bluelink\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\"\u003ePassword-protecting the Symantec Endpoint Protection client\u003c/a\u003e\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 11, 2022 4:11:03 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Information: Symantec Trial license Expires In 60 Days\", \"message\": \"Your Symantec Endpoint Protection Trial license expires in 60 days. To continue to receive virus definitions and product updates, contact your \u0026lt;a class=\u0026quot;bluelink\u0026quot; onclick=\u0026quot;createWindowFromURL(\u0026#039;../util/universal-redirect.php?WhereWeWant=https://ced.broadcom.com/sep/14/partnerlocator\u0026#039;, \u0026#039;_blank\u0026#039;, \u0026#039;scrollbars=yes,width=800, height=650, resizable=yes, screenX=100, screenY=100\u0026#039;);\u0026quot; href=\u0026quot;#\u0026quot; \u0026gt;preferred reseller\u0026lt;/a\u0026gt;.\u0026lt;br\u0026gt;\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"New software package available\", \"message\": \"Date: Dec 11, 2022 4:19:17 PM UTC\\tServer: EC2AAA-1A0AAAA\\nDownload: Successfully downloaded the Symantec Agent for Linux 14.3 RU5 package from LiveUpdate. This package is now available for deployment.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"New software package available\", \"message\": \"Date: Dec 11, 2022 4:20:22 PM UTC\\tServer: EC2AAA-1A0AAAA\\nDownload: Successfully downloaded the Symantec Endpoint Protection Mac 14.3 RU3 package from LiveUpdate. This package is now available for deployment.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"New software package available\", \"message\": \"Date: Dec 11, 2022 4:21:28 PM UTC\\tServer: EC2AAA-1A0AAAA\\nDownload: Successfully downloaded the Symantec Endpoint Protection Mac 14.3 RU5 package from LiveUpdate. This package is now available for deployment.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"New software package available\", \"message\": \"Date: Dec 11, 2022 4:21:31 PM UTC\\tServer: EC2AAA-1A0AAAA\\nDownload: Successfully downloaded the Symantec Agent for Linux 14.3 RU4 package from LiveUpdate. This package is now available for deployment.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 12, 2022 7:37:15 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Informational: Symantec Endpoint Protection Computer List Changed\", \"message\": \"Number of clients changed: 1.  Changes could be that a client was added, renamed, or deleted, Unmanaged Detector status changed, client mode changed, or the hardware changed.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 13, 2022 7:42:58 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 14, 2022 4:32:24 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"New software package available\", \"message\": \"Date: Dec 14, 2022 4:37:47 AM UTC\\tServer: EC2AAA-1A0AAAA\\nDownload: Successfully downloaded the Symantec Endpoint Protection Mac 14.3 RU6 package from LiveUpdate. This package is now available for deployment.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 15, 2022 4:32:27 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 16, 2022 4:32:29 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 19, 2022 4:32:29 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 13, 2022 5:42:55 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 14, 2022 2:32:21 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 15, 2022 2:32:20 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 16, 2022 2:32:30 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 19, 2022 2:32:31 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 20, 2022 4:32:25 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 20, 2022 2:32:25 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 21, 2022 4:32:21 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 21, 2022 2:32:21 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 22, 2022 4:32:23 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 23, 2022 4:32:20 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 26, 2022 4:32:25 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 27, 2022 4:32:27 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 28, 2022 4:32:27 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 29, 2022 4:32:25 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 22, 2022 2:32:23 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 23, 2022 2:32:20 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 26, 2022 2:32:24 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 27, 2022 2:33:26 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 28, 2022 2:32:27 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 29, 2022 2:32:26 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 30, 2022 4:32:24 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Dec 30, 2022 2:32:22 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Jan 2, 2023 4:32:25 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Jan 2, 2023 2:32:21 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Jan 3, 2023 4:32:24 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Jan 3, 2023 2:32:22 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Jan 4, 2023 4:32:26 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Jan 4, 2023 2:32:25 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Jan 5, 2023 4:32:27 AM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Jan 5, 2023 2:32:26 PM.\", \"acknowledged\": 0}, {\"eventId\": \"eventId\", \"eventDateTime\": \"eventDateTime\", \"subject\": \"Server Health Alert\", \"message\": \"Server EC2AAA-1A0AAAA health status: poor. \\nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \\nStatus reported on Jan 6, 2023 4:32:24 AM.\", \"acknowledged\": 0}]}, \"raw\": null, \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2281, \"timestamp\": \"2023-01-06 06:27:36\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"lastUpdated\": {\"type\": \"integer\"}, \"totalUnacknowledgedMessages\": {\"type\": \"integer\"}, \"criticalEventsInfoList\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"eventId\": {\"type\": \"string\"}, \"eventDateTime\": {\"type\": \"string\"}, \"subject\": {\"type\": \"string\"}, \"message\": {\"type\": \"string\"}, \"acknowledged\": {\"type\": \"integer\"}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
+      "uuid": "d90b14a5-6ccd-4979-a789-97e4f8f41b73",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "86bd768a-cab5-497c-88f6-70ff93622723",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Exmple: SEP - Get Critical Events",
+          "object_type": "incident",
+          "programmatic_name": "exmple_sep__get_critical_events",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 431
+        }
+      ]
+    },
+    {
+      "created_date": 1674507185799,
+      "description": {
+        "content": "Get the exceptions policy for specified policy id.",
+        "format": "text"
+      },
+      "destination_handle": "fn_sep",
+      "display_name": "SEP - Get Exceptions Policy",
+      "export_key": "sep_get_exceptions_policy",
+      "id": 390,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1674507185946,
+      "name": "sep_get_exceptions_policy",
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"sources\": [], \"configuration\": {\"files\": [], \"non_pe_rules\": [], \"directories\": [], \"webdomains\": [], \"certificates\": [], \"applications\": [], \"blacklistrules\": [], \"applications_to_monitor\": [], \"mac\": {\"files\": []}, \"linux\": {\"directories\": [], \"extension_list\": null}, \"extension_list\": null, \"knownrisks\": [{\"rulestate\": {\"enabled\": true}, \"threat\": {\"id\": \"id\", \"name\": \"name\"}, \"action\": \"IGNORE\"}, {\"rulestate\": {\"enabled\": true}, \"threat\": {\"id\": \"id\", \"name\": \"name\"}, \"action\": \"IGNORE\"}, {\"rulestate\": {\"enabled\": true}, \"threat\": {\"id\": \"id\", \"name\": \"name\"}, \"action\": \"IGNORE\"}], \"tamper_files\": [], \"dns_and_host_applications\": [], \"dns_and_host_blacklistrules\": []}, \"lockedoptions\": {\"knownrisk\": false, \"extension\": false, \"file\": false, \"domain\": false, \"securityrisk\": false, \"sonar\": false, \"application\": false, \"dnshostfile\": false, \"certificate\": false}, \"enabled\": true, \"desc\": \"test\", \"name\": \"name\", \"lastmodifiedtime\": 1671002049331}, \"raw\": null, \"inputs\": {\"sep_exceptions_id\": \"sep_exceptions_id\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2262, \"timestamp\": \"2023-01-05 10:28:10\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"sources\": {\"type\": \"array\"}, \"configuration\": {\"type\": \"object\", \"properties\": {\"files\": {\"type\": \"array\"}, \"non_pe_rules\": {\"type\": \"array\"}, \"directories\": {\"type\": \"array\"}, \"webdomains\": {\"type\": \"array\"}, \"certificates\": {\"type\": \"array\"}, \"applications\": {\"type\": \"array\"}, \"blacklistrules\": {\"type\": \"array\"}, \"applications_to_monitor\": {\"type\": \"array\"}, \"mac\": {\"type\": \"object\", \"properties\": {\"files\": {\"type\": \"array\"}}}, \"linux\": {\"type\": \"object\", \"properties\": {\"directories\": {\"type\": \"array\"}, \"extension_list\": {}}}, \"extension_list\": {}, \"knownrisks\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"rulestate\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}}}, \"threat\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}}}, \"action\": {\"type\": \"string\"}}}}, \"tamper_files\": {\"type\": \"array\"}, \"dns_and_host_applications\": {\"type\": \"array\"}, \"dns_and_host_blacklistrules\": {\"type\": \"array\"}}}, \"lockedoptions\": {\"type\": \"object\", \"properties\": {\"knownrisk\": {\"type\": \"boolean\"}, \"extension\": {\"type\": \"boolean\"}, \"file\": {\"type\": \"boolean\"}, \"domain\": {\"type\": \"boolean\"}, \"securityrisk\": {\"type\": \"boolean\"}, \"sonar\": {\"type\": \"boolean\"}, \"application\": {\"type\": \"boolean\"}, \"dnshostfile\": {\"type\": \"boolean\"}, \"certificate\": {\"type\": \"boolean\"}}}, \"enabled\": {\"type\": \"boolean\"}, \"desc\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"lastmodifiedtime\": {\"type\": \"integer\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_exceptions_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
+      "uuid": "c972130f-e94b-40f6-a81a-3fbcf2c8c5c9",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "b6faf5cc-22a4-4120-9228-c924c5c8519b",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: SEP - Get Exceptions Policy",
+          "object_type": "incident",
+          "programmatic_name": "example_sep__get_exception_policy",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 432
+        }
+      ]
+    },
+    {
+      "created_date": 1674507185957,
+      "description": {
+        "content": "Get the firewall policy for specified policy id.",
+        "format": "text"
+      },
+      "destination_handle": "fn_sep",
+      "display_name": "SEP - Get Firewall Policy",
+      "export_key": "sep_get_firewall_policy",
+      "id": 391,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1674507186096,
+      "name": "sep_get_firewall_policy",
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"sources\": null, \"configuration\": {\"enforced_rules\": [{\"uid\": \"uid\", \"name\": \"Block IPv6\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ether_type_id\": 34525}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": false}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block IPv6 over IPv4 (Teredo)\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 3544, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block IPv6 over IPv4 (ISATAP)\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"protocol_ids\": [41], \"ip_fragmented_only\": false}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow ICMPv6\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"protocol_ids\": [58], \"icmp_types\": [135, 136, 148, 149], \"icmp_type_ranges\": [{\"start\": 1, \"end\": 4}, {\"start\": 128, \"end\": 132}, {\"start\": 141, \"end\": 143}, {\"start\": 151, \"end\": 153}], \"icmp_codes\": [135, 136, 148, 149], \"icmp_code_ranges\": [{\"start\": 1, \"end\": 4}, {\"start\": 128, \"end\": 132}, {\"start\": 141, \"end\": 143}, {\"start\": 151, \"end\": 153}]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block SNMP\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"svc_name\": \"SNMP Management\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 161, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 162, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 10161, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 10162, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"svc_name\": \"SNMP Management\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 161, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 162, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 10161, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 10162, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"SNMP Client\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 161, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 162, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 10161, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 10162, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"svc_name\": \"SNMP Client\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 161, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 162, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 10161, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 10162, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": false}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow fragmented packets\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ip_fragmented_only\": true}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow wireless EAPOL\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ether_type_id\": 34958}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow USB over IEEE802\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ether_type_id\": 35118}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}], \"baseline_rules\": [{\"uid\": \"uid\", \"name\": \"Allow Local File Sharing to private IP addresses\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 139, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 445, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 137, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 138, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 139, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 445, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": [{\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block Local File Sharing\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 139, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 445, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 137, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 138, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 139, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 445, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow Bootp\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 68, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 67, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow UPnP Discovery from private IP addresses\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 1900, \"end\": null, \"location\": \"DST\"}], \"protocol_ids\": [17]}], \"hosts\": [{\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block UPnP Discovery\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 1900, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow Web Service requests from private IP addresses\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 5357, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 5358, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 5357, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 5358, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": [{\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block Web Service requests\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 5357, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 5358, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 5357, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 5358, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow LLMNR from private IP addresses\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 5355, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": [{\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block LLMNR\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 5355, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": [{\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow LLMNR from ipv6 traffic\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 5355, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow Web Services Discovery from private IP addresses\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 3702, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": [{\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block Web Services Discovery\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 3702, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow SSDP from private IP addresses\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 2869, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}], \"hosts\": [{\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block SSDP\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 2869, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow ping, pong and tracert\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 1, \"protocol_ids\": [1], \"icmp_types\": [0]}, {\"enabled\": true, \"direction_id\": 0, \"protocol_ids\": [1], \"icmp_types\": [8]}, {\"enabled\": true, \"direction_id\": 1, \"protocol_ids\": [1], \"icmp_types\": [11]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow all applications\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": null, \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": [{\"name\": \"*\"}], \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow VPN\", \"severity\": 4, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"svc_name\": \"VPN --- PPTP\", \"svc_uid\": \"svc_uid\", \"direction_id\": 2, \"ports\": [{\"start\": 1723, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"svc_name\": \"VPN --- PPTP\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 500, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 1701, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 4500, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"VPN --- PPTP\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"protocol_ids\": [47, 50], \"ip_fragmented_only\": false}, {\"enabled\": true, \"svc_name\": \"VPN --- Check Point\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 1032, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 1033, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"svc_name\": \"VPN --- Check Point\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 256, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 264, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 18231, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 18234, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"svc_name\": \"VPN --- Check Point\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 1266, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 1368, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"VPN --- Check Point\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 18231, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 18234, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 500, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"VPN --- Check Point\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"protocol_ids\": [50], \"ip_fragmented_only\": false}, {\"enabled\": true, \"svc_name\": \"VPN --- Check Point\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"protocol_ids\": [17], \"ip_fragmented_only\": true}, {\"enabled\": true, \"svc_name\": \"VPN --- NetScreen\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 62516, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 500, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"VPN --- NetScreen\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"protocol_ids\": [50], \"ip_fragmented_only\": false}, {\"enabled\": true, \"svc_name\": \"VPN --- Cisco 5000\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 1029, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 500, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"VPN --- Cisco 5000\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"protocol_ids\": [50], \"ip_fragmented_only\": false}, {\"enabled\": true, \"svc_name\": \"VPN --- Cisco 3000\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 500, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 10000, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 62514, \"end\": 62524, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"VPN --- Cisco 3000\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"protocol_ids\": [50], \"ip_fragmented_only\": false}, {\"enabled\": true, \"svc_name\": \"VPN --- Nortel\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 8282, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"svc_name\": \"VPN --- Nortel\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 17, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 586, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"svc_name\": \"VPN --- Nortel\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 500, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 8121, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"VPN --- Nortel\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"protocol_ids\": [50], \"ip_fragmented_only\": false}, {\"enabled\": true, \"svc_name\": \"VPN --- Aventail\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 443, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 1080, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"svc_name\": \"VPN --- Aventail\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"protocol_ids\": [50], \"ip_fragmented_only\": false}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow Veritas Protocol\", \"severity\": 4, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ether_type_id\": 51966}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow IGMP traffic\", \"severity\": 4, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"protocol_ids\": [2], \"ip_fragmented_only\": false}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow Bonjour traffic\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 5353, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 5353, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block broadcast and multicast traffic and don\u0027t log\", \"severity\": 1, \"action\": \"BLOCK\", \"connections\": null, \"hosts\": [{\"location\": \"LOCAL\", \"mac\": \"FF-FF-FF-FF-FF-FF\"}, {\"location\": \"LOCAL\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block all other IP traffic and log\", \"severity\": 1, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ip_fragmented_only\": false}], \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block all other traffic and don\u0027t log\", \"severity\": 1, \"action\": \"BLOCK\", \"connections\": null, \"hosts\": null, \"adapters\": [{\"enabled\": true, \"name\": \"All Adapters\", \"uid\": \"uid\", \"type\": \"ANY\"}], \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}], \"ignore_parent_rules\": null, \"smart_dhcp\": true, \"smart_dns\": true, \"smart_wins\": true, \"token_ring_traffic\": false, \"netbios_protection\": false, \"reverse_dns\": false, \"port_scan\": true, \"dos\": false, \"antimac_spoofing\": false, \"autoblock\": true, \"autoblock_duration\": 600, \"stealth_web\": false, \"antiIP_spoofing\": false, \"hide_os\": false, \"windows_firewall\": \"DISABLE_ONCE\", \"windows_firewall_notification\": false, \"endpoint_notification\": {\"enabled\": false, \"endpoint_notification_message\": null, \"ask_enabled\": false, \"endpoint_notification_ask_message\": null}, \"p2p_auth\": {\"enabled\": false, \"excludeHosts\": null, \"max_auth_attempts\": null, \"time_between_auth_attempts\": null, \"time_before_re_auth\": null, \"time_for_remote_blocked\": null, \"session_timeout\": null, \"hosts\": null}, \"mac\": {\"enforced_rules\": [{\"uid\": \"uid\", \"name\": \"Block IPv6 over IPv4 (Teredo)\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 3544, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow ICMPv6\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"protocol_ids\": [58], \"icmp_types\": [135, 136, 148, 149], \"icmp_type_ranges\": [{\"start\": 1, \"end\": 4}, {\"start\": 128, \"end\": 132}, {\"start\": 141, \"end\": 143}, {\"start\": 151, \"end\": 153}], \"icmp_codes\": [135, 136, 148, 149], \"icmp_code_ranges\": [{\"start\": 1, \"end\": 4}, {\"start\": 128, \"end\": 132}, {\"start\": 141, \"end\": 143}, {\"start\": 151, \"end\": 153}]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow Mac Discovery from local computers\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 5353, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": [{\"location\": \"DST\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"DST\", \"ipv6_subnet\": \"FF00::/12\"}], \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block Mac Discovery from external computers\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 5353, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow outgoing ichat requests\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 2, \"ports\": [{\"start\": 1900, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"direction_id\": 2, \"ports\": [{\"start\": 5223, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow outgoing NTP requests\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 2, \"ports\": [{\"start\": 123, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}], \"baseline_rules\": [{\"uid\": \"uid\", \"name\": \"Allow Local File Sharing to private IP addresses\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 137, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 138, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 20, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 21, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 22, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 139, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 445, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 137, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 138, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 445, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 548, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}], \"hosts\": [{\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block Local File Sharing to external computers\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 445, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 20, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 21, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 22, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 139, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 445, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 137, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 138, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 137, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow Bootp\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 68, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 67, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow UPnP Discovery from private IP addresses\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 1900, \"end\": null, \"location\": \"DST\"}], \"protocol_ids\": [17]}], \"hosts\": [{\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"SRC\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block UPnP Discovery\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 1900, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow SSDP from private IP addresses\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 2869, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}], \"hosts\": [{\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block SSDP\", \"severity\": 3, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 2869, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow ping, pong and tracert\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 1, \"protocol_ids\": [1], \"icmp_types\": [0]}, {\"enabled\": true, \"direction_id\": 0, \"protocol_ids\": [1], \"icmp_types\": [8]}, {\"enabled\": true, \"direction_id\": 1, \"protocol_ids\": [1], \"icmp_types\": [11]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow VPN\", \"severity\": 4, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"svc_name\": \"VPN --- NetScreen\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 62516, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 500, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"VPN --- NetScreen\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"protocol_ids\": [50], \"ip_fragmented_only\": false}, {\"enabled\": true, \"svc_name\": \"VPN --- Cisco 5000\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 1029, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 500, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"VPN --- Cisco 5000\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"protocol_ids\": [50], \"ip_fragmented_only\": false}, {\"enabled\": true, \"svc_name\": \"VPN --- Cisco 3000\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 500, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 10000, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 62514, \"end\": 62524, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"VPN --- Cisco 3000\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"protocol_ids\": [50], \"ip_fragmented_only\": false}, {\"enabled\": true, \"svc_name\": \"VPN --- OS X\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 1723, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"svc_name\": \"VPN --- OS X\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 1723, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"svc_name\": \"VPN --- OS X\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 500, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 1701, \"end\": null, \"location\": \"LOCAL\"}, {\"start\": 4500, \"end\": null, \"location\": \"LOCAL\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"svc_name\": \"VPN --- OS X\", \"svc_uid\": \"svc_uid\", \"direction_id\": 0, \"ports\": [{\"start\": 500, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 1701, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 4500, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow IGMP traffic\", \"severity\": 4, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"protocol_ids\": [2], \"ip_fragmented_only\": false}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow outgoing web traffic\", \"severity\": 4, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 2, \"ports\": [{\"start\": 80, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 443, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"direction_id\": 2, \"ports\": [{\"start\": 80, \"end\": null, \"location\": \"REMOTE\"}, {\"start\": 443, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block broadcast and multicast traffic and don\u0027t log\", \"severity\": 1, \"action\": \"BLOCK\", \"connections\": null, \"hosts\": [{\"location\": \"LOCAL\", \"ip\": \"255.255.255.255\"}, {\"location\": \"LOCAL\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow Airport\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 192, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": false}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow Kerberos\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 88, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [17]}, {\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 88, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": false}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow outgoing DLP\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 2, \"ports\": [{\"start\": 10443, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": false}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow outgoing RDP\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 2, \"ports\": [{\"start\": 3283, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": false}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow outgoing JAMF\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 2, \"ports\": [{\"start\": 8443, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}], \"hosts\": [{\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}, {\"location\": \"REMOTE\", \"ip_range\": {\"ip_start\": \"ip_start\", \"ip_end\": \"ip_end\"}}], \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": false}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Allow LDAP\", \"severity\": 3, \"action\": \"ALLOW\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ports\": [{\"start\": 389, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}, {\"enabled\": true, \"direction_id\": 2, \"ports\": [{\"start\": 3268, \"end\": null, \"location\": \"REMOTE\"}], \"protocol_ids\": [6]}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": false}, \"desc\": null, \"log_action\": 0, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}, {\"uid\": \"uid\", \"name\": \"Block all other IP traffic and log\", \"severity\": 1, \"action\": \"BLOCK\", \"connections\": [{\"enabled\": true, \"direction_id\": 0, \"ip_fragmented_only\": false}], \"hosts\": null, \"adapters\": null, \"applications\": null, \"rulestate\": {\"enabled\": true}, \"desc\": null, \"log_action\": 1, \"packet_capture\": false, \"email_alert\": false, \"screen_saver\": \"ANY\", \"time_slots\": null}], \"ignore_parent_rules\": null, \"smart_dhcp\": true, \"smart_dns\": true, \"port_scan\": true, \"dos\": false, \"antimac_spoofing\": false, \"autoblock\": true, \"autoblock_duration\": 600, \"endpoint_notification\": {\"enabled\": false, \"endpoint_notification_message\": null, \"ask_enabled\": null, \"endpoint_notification_ask_message\": null}}}, \"enabled\": true, \"desc\": \"Test Firewall\", \"name\": \"Test Firewall\", \"lastmodifiedtime\": 1671002675007}, \"raw\": null, \"inputs\": {\"sep_firewall_id\": \"sep_firewall_id\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 3004, \"timestamp\": \"2023-01-05 10:28:02\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"sources\": {}, \"configuration\": {\"type\": \"object\", \"properties\": {\"enforced_rules\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"uid\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"severity\": {\"type\": \"integer\"}, \"action\": {\"type\": \"string\"}, \"connections\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}, \"direction_id\": {\"type\": \"integer\"}, \"ether_type_id\": {\"type\": \"integer\"}, \"ports\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"start\": {\"type\": \"integer\"}, \"end\": {}, \"location\": {\"type\": \"string\"}}}}, \"protocol_ids\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}, \"ip_fragmented_only\": {\"type\": \"boolean\"}, \"icmp_types\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}, \"icmp_type_ranges\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"start\": {\"type\": \"integer\"}, \"end\": {\"type\": \"integer\"}}}}, \"icmp_codes\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}, \"icmp_code_ranges\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"start\": {\"type\": \"integer\"}, \"end\": {\"type\": \"integer\"}}}}, \"svc_name\": {\"type\": \"string\"}, \"svc_uid\": {\"type\": \"string\"}}}}, \"hosts\": {}, \"adapters\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}, \"name\": {\"type\": \"string\"}, \"uid\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}}}}, \"applications\": {}, \"rulestate\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}}}, \"desc\": {}, \"log_action\": {\"type\": \"integer\"}, \"packet_capture\": {\"type\": \"boolean\"}, \"email_alert\": {\"type\": \"boolean\"}, \"screen_saver\": {\"type\": \"string\"}, \"time_slots\": {}}}}, \"baseline_rules\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"uid\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"severity\": {\"type\": \"integer\"}, \"action\": {\"type\": \"string\"}, \"connections\": {}, \"hosts\": {}, \"adapters\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}, \"name\": {\"type\": \"string\"}, \"uid\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}}}}, \"applications\": {}, \"rulestate\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}}}, \"desc\": {}, \"log_action\": {\"type\": \"integer\"}, \"packet_capture\": {\"type\": \"boolean\"}, \"email_alert\": {\"type\": \"boolean\"}, \"screen_saver\": {\"type\": \"string\"}, \"time_slots\": {}}}}, \"ignore_parent_rules\": {}, \"smart_dhcp\": {\"type\": \"boolean\"}, \"smart_dns\": {\"type\": \"boolean\"}, \"smart_wins\": {\"type\": \"boolean\"}, \"token_ring_traffic\": {\"type\": \"boolean\"}, \"netbios_protection\": {\"type\": \"boolean\"}, \"reverse_dns\": {\"type\": \"boolean\"}, \"port_scan\": {\"type\": \"boolean\"}, \"dos\": {\"type\": \"boolean\"}, \"antimac_spoofing\": {\"type\": \"boolean\"}, \"autoblock\": {\"type\": \"boolean\"}, \"autoblock_duration\": {\"type\": \"integer\"}, \"stealth_web\": {\"type\": \"boolean\"}, \"antiIP_spoofing\": {\"type\": \"boolean\"}, \"hide_os\": {\"type\": \"boolean\"}, \"windows_firewall\": {\"type\": \"string\"}, \"windows_firewall_notification\": {\"type\": \"boolean\"}, \"endpoint_notification\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}, \"endpoint_notification_message\": {}, \"ask_enabled\": {\"type\": \"boolean\"}, \"endpoint_notification_ask_message\": {}}}, \"p2p_auth\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}, \"excludeHosts\": {}, \"max_auth_attempts\": {}, \"time_between_auth_attempts\": {}, \"time_before_re_auth\": {}, \"time_for_remote_blocked\": {}, \"session_timeout\": {}, \"hosts\": {}}}, \"mac\": {\"type\": \"object\", \"properties\": {\"enforced_rules\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"uid\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"severity\": {\"type\": \"integer\"}, \"action\": {\"type\": \"string\"}, \"connections\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}, \"direction_id\": {\"type\": \"integer\"}, \"ports\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"start\": {\"type\": \"integer\"}, \"end\": {}, \"location\": {\"type\": \"string\"}}}}, \"protocol_ids\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}, \"icmp_types\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}, \"icmp_type_ranges\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"start\": {\"type\": \"integer\"}, \"end\": {\"type\": \"integer\"}}}}, \"icmp_codes\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}, \"icmp_code_ranges\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"start\": {\"type\": \"integer\"}, \"end\": {\"type\": \"integer\"}}}}}}}, \"hosts\": {}, \"adapters\": {}, \"applications\": {}, \"rulestate\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}}}, \"desc\": {}, \"log_action\": {\"type\": \"integer\"}, \"packet_capture\": {\"type\": \"boolean\"}, \"email_alert\": {\"type\": \"boolean\"}, \"screen_saver\": {\"type\": \"string\"}, \"time_slots\": {}}}}, \"baseline_rules\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"uid\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"severity\": {\"type\": \"integer\"}, \"action\": {\"type\": \"string\"}, \"connections\": {}, \"hosts\": {}, \"adapters\": {}, \"applications\": {}, \"rulestate\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}}}, \"desc\": {}, \"log_action\": {\"type\": \"integer\"}, \"packet_capture\": {\"type\": \"boolean\"}, \"email_alert\": {\"type\": \"boolean\"}, \"screen_saver\": {\"type\": \"string\"}, \"time_slots\": {}}}}, \"ignore_parent_rules\": {}, \"smart_dhcp\": {\"type\": \"boolean\"}, \"smart_dns\": {\"type\": \"boolean\"}, \"port_scan\": {\"type\": \"boolean\"}, \"dos\": {\"type\": \"boolean\"}, \"antimac_spoofing\": {\"type\": \"boolean\"}, \"autoblock\": {\"type\": \"boolean\"}, \"autoblock_duration\": {\"type\": \"integer\"}, \"endpoint_notification\": {\"type\": \"object\", \"properties\": {\"enabled\": {\"type\": \"boolean\"}, \"endpoint_notification_message\": {}, \"ask_enabled\": {}, \"endpoint_notification_ask_message\": {}}}}}}}, \"enabled\": {\"type\": \"boolean\"}, \"desc\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"lastmodifiedtime\": {\"type\": \"integer\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"sep_firewall_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
+      "uuid": "a789fe90-a77a-4ee7-80f8-a6ee416644cf",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "eace2b34-2d56-465a-8f31-590914646cce",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: SEP - Get Firewall Policy",
+          "object_type": "incident",
+          "programmatic_name": "example_sep__get_firewall_policy",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 434
+        }
+      ]
+    },
+    {
+      "created_date": 1674507186108,
+      "description": {
+        "content": "Get the summary information for policies within a specific Domain. Also gets the list of groups to which the policies are assigned.",
+        "format": "text"
+      },
+      "destination_handle": "fn_sep",
+      "display_name": "SEP - Get Policy Summary",
+      "export_key": "sep_get_policy_summary",
+      "id": 392,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1675197917529,
+      "name": "sep_get_policy_summary",
+      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"content\": [{\"sources\": [], \"enabled\": false, \"desc\": \"Created automatically during product installation.\", \"name\": \"Intensive Protection policy\", \"lastmodifiedtime\": 1670774922808, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"hid\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": [{\"groupId\": \"groupId\", \"defaultLocationId\": \"defaultLocationId\", \"locationIds\": [\"locationIds\"]}]}, {\"sources\": [], \"enabled\": true, \"desc\": \"Created automatically during product installation.\", \"name\": \"Exceptions policy\", \"lastmodifiedtime\": 1670774922808, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"exceptions\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": [{\"groupId\": \"groupId\", \"defaultLocationId\": \"defaultLocationId\", \"locationIds\": [\"locationIds\"]}]}, {\"sources\": [], \"enabled\": true, \"desc\": \"test\", \"name\": \"Test\", \"lastmodifiedtime\": 1671002049331, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"exceptions\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": null}, {\"sources\": [], \"enabled\": true, \"desc\": \"Created automatically during product installation.\", \"name\": \"Memory Exploit Mitigation policy\", \"lastmodifiedtime\": 1670774922777, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"mem\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": [{\"groupId\": \"groupId\", \"defaultLocationId\": \"defaultLocationId\", \"locationIds\": [\"locationIds\"]}]}, {\"sources\": [], \"enabled\": true, \"desc\": \"\", \"name\": \"Test MEM\", \"lastmodifiedtime\": 1671003757070, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"mem\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": null}, {\"sources\": [], \"enabled\": true, \"desc\": \"Created automatically during product installation.\", \"name\": \"Web and Cloud Access Protection policy\", \"lastmodifiedtime\": 1670774922777, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"ntr\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": [{\"groupId\": \"groupId\", \"defaultLocationId\": \"defaultLocationId\", \"locationIds\": [\"locationIds\"]}]}, {\"sources\": [], \"enabled\": true, \"desc\": \"Recommended policy for most environments, providing a good balance between security and performance. Created automatically during product installation.\", \"name\": \"Virus and Spyware Protection policy - Balanced\", \"lastmodifiedtime\": 1670774922824, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"av\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": [{\"groupId\": \"groupId\", \"defaultLocationId\": \"defaultLocationId\", \"locationIds\": [\"locationIds\"]}]}, {\"sources\": [], \"enabled\": true, \"desc\": \"High security policy that may affect the performance of other applications. Created automatically during product installation.\", \"name\": \"Virus and Spyware Protection policy - High Security\", \"lastmodifiedtime\": 1670774922840, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"av\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": null}, {\"sources\": [], \"enabled\": true, \"desc\": \"Higher performance policy, but with reduced security. Relies on Auto-Protect scanning of files with selected extensions for most detections. One monthly scheduled scan and no email scanning. Created automatically during product installation.\", \"name\": \"Virus and Spyware Protection policy - High Performance\", \"lastmodifiedtime\": 1670774922840, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"av\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": null}, {\"sources\": [], \"enabled\": true, \"desc\": \"Created automatically during product installation.\", \"name\": \"Firewall policy\", \"lastmodifiedtime\": 1670774922808, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"fw\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": [{\"groupId\": \"groupId\", \"defaultLocationId\": \"defaultLocationId\", \"locationIds\": [\"locationIds\"]}]}, {\"sources\": [], \"enabled\": true, \"desc\": \"Created automatically during product installation.\", \"name\": \"Quarantine Firewall policy\", \"lastmodifiedtime\": 1670774922808, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"fw\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": null}, {\"sources\": [], \"enabled\": true, \"desc\": \"Test Firewall\", \"name\": \"Test Firewall\", \"lastmodifiedtime\": 1671002675007, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"fw\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": null}, {\"sources\": [], \"enabled\": true, \"desc\": \"Created automatically during product installation.\", \"name\": \"Intrusion Prevention policy\", \"lastmodifiedtime\": 1670774922777, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"ips\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": [{\"groupId\": \"groupId\", \"defaultLocationId\": \"defaultLocationId\", \"locationIds\": [\"locationIds\"]}]}, {\"sources\": null, \"enabled\": true, \"desc\": \"Created automatically during product installation.\", \"name\": \"LiveUpdate Content policy\", \"lastmodifiedtime\": 1670774922855, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"lucontent\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": null}, {\"sources\": [], \"enabled\": true, \"desc\": \"Created automatically during product installation.\", \"name\": \"LiveUpdate Settings policy\", \"lastmodifiedtime\": 1670774922855, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"lu\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": [{\"groupId\": \"groupId\", \"defaultLocationId\": \"defaultLocationId\", \"locationIds\": [\"locationIds\"]}]}, {\"sources\": [], \"enabled\": true, \"desc\": \"\", \"name\": \"Test LiveUpdate\", \"lastmodifiedtime\": 1671003711900, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"lu\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": null}, {\"sources\": [], \"enabled\": true, \"desc\": \"Created automatically during product installation.\", \"name\": \"Host Integrity policy\", \"lastmodifiedtime\": 1670774922808, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"hi\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": null}, {\"sources\": [], \"enabled\": true, \"desc\": \"HID/HI\", \"name\": \"Test Integrity\", \"lastmodifiedtime\": 1671003318142, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"hi\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": null}, {\"sources\": [], \"enabled\": true, \"desc\": \"Created automatically during product installation.\", \"name\": \"Application and Device Control policy\", \"lastmodifiedtime\": 1670774922824, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"adc\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": [{\"groupId\": \"groupId\", \"defaultLocationId\": \"defaultLocationId\", \"locationIds\": [\"locationIds\"]}]}, {\"sources\": [], \"enabled\": false, \"desc\": \"Created automatically during product installation.\", \"name\": \"Client Upgrade policy\", \"lastmodifiedtime\": 1670774922808, \"id\": \"id\", \"domainid\": \"domainid\", \"policytype\": \"upgrade\", \"subtype\": null, \"assignedtocloudgroups\": null, \"assignedtolocations\": [{\"groupId\": \"groupId\", \"defaultLocationId\": \"defaultLocationId\", \"locationIds\": [\"locationIds\"]}]}], \"number\": 0, \"size\": 20, \"sort\": null, \"numberOfElements\": 20, \"lastPage\": true, \"totalPages\": 1, \"firstPage\": true, \"totalElements\": 20}, \"raw\": null, \"inputs\": {}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-sep\", \"package_version\": \"1.0.1\", \"host\": \"host\", \"execution_time_ms\": 2390, \"timestamp\": \"2023-01-05 10:21:01\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"sources\": {\"type\": [\"array\", \"null\"]}, \"enabled\": {\"type\": \"boolean\"}, \"desc\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"lastmodifiedtime\": {\"type\": \"integer\"}, \"id\": {\"type\": \"string\"}, \"domainid\": {\"type\": \"string\"}, \"policytype\": {\"type\": \"string\"}, \"subtype\": {}, \"assignedtocloudgroups\": {}, \"assignedtolocations\": {}}}}, \"number\": {\"type\": \"integer\"}, \"size\": {\"type\": \"integer\"}, \"sort\": {}, \"numberOfElements\": {\"type\": \"integer\"}, \"lastPage\": {\"type\": \"boolean\"}, \"totalPages\": {\"type\": \"integer\"}, \"firstPage\": {\"type\": \"boolean\"}, \"totalElements\": {\"type\": \"integer\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\"}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "tags": [],
+      "uuid": "0f2a4ca4-9c93-44a7-9309-95544588cbfd",
+      "version": 2,
+      "view_items": [
+        {
+          "content": "214b95e7-240a-4a9d-b8c5-686fc4953ef3",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example: SEP - Get Policy Summary",
+          "object_type": "incident",
+          "programmatic_name": "example_sep__get_policy_summary",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 433
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 26,
+  "id": 49,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1668006439015,
+      "create_date": 1675198521013,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -4369,7 +4410,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1668006439015,
+      "update_date": 1675198521013,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -4379,87 +4420,291 @@
   "message_destinations": [
     {
       "api_keys": [
-        "3f6feee7-fc7f-40f3-8222-0323a3aae5ab"
+        "d6617953-7de6-4ed3-94a1-c917f684dcf1"
       ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_sep",
       "name": "fn_sep",
       "programmatic_name": "fn_sep",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
+      "tags": [],
+      "users": [
+        "a@example.com"
       ],
-      "users": [],
       "uuid": "88199d49-9dff-44d1-84ce-c1e502b91496"
     }
   ],
   "notifications": null,
-  "overrides": [],
+  "overrides": null,
   "phases": [],
-  "playbooks": null,
+  "playbooks": [],
   "regulators": null,
   "roles": [],
   "scripts": [
     {
       "actions": [],
-      "created_date": 1668002322882,
+      "created_date": 1668001882546,
       "description": "Script for Symantec SEP to add a Resilient artifact from a property of the \u0027Symantec SEP - EOC scan results\u0027 data-table.\nThe supported artifact types supported are: \"File Path\", \"Malware SHA-256 Hash\" and \"System Name\".",
       "enabled": false,
       "export_key": "scr_sep_add_artifact_from_scan_results",
-      "id": 311,
+      "id": 197,
       "language": "python",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002322992,
+      "last_modified_time": 1668001882611,
       "name": "scr_sep_add_artifact_from_scan_results",
       "object_type": "sep_eoc_scan_results",
       "playbook_handle": null,
       "programmatic_name": "scr_sep_add_artifact_from_scan_results",
       "script_text": "# Create a Resilient artifact based on a dropdown which selects the corresponding data-table field.\nARTIFACT_TYPE = rule.properties.sep_artifact_type_scan_results\nFUNCTION_NAME = \"fn_sep_scan_endpoints\"\n\nPARAMS = {\n    \"Malware SHA-256 Hash\": row.hash_value,\n    \"System Name\": row.computer_name,\n    \"File Path\": row.file_path\n}\n\n\ndef addArtifact(artifact_type, artifact_value, description):\n    \"\"\"This method adds new artifacts to the incident derived from matches of the the regular expression\n\n    :param artifact_type: The type of the artifact.\n    :param artifact_value: - The value of the artifact.\n    :param description: - the description of the artifact.\n    \"\"\"\n    incident.addArtifact(artifact_type, artifact_value, description)\n\n\ndef validate_fields(fields, params):\n    \"\"\"\n    Ensure required fields are present. Throw ValueError if not\n    :param fields: Required fields.\n    :param params: Data-table fields as parameters.\n    :return: no return\n    \"\"\"\n    for f in fields:\n        if f not in params or not params.get(f) or params.get(f) == \u0027\u0027:\n            raise ValueError(str(\u0027Required data-table field is missing or empty for artifact type: \u0027 + f))\n\n\ndef main():\n    desc = \u0027\u0027\n\n    validate_fields([\"System Name\", ARTIFACT_TYPE], PARAMS)\n\n    desc = u\"Detected by Symantec SEP Eoc Scan for artifact of type \u0027{0}\u0027 and value \u0027{1}\u0027 by function \" \\\n    \"\u0027{2}\u0027 for Symantec SEP.\".format(row.artifact_type, unicode(row.artifact_value), FUNCTION_NAME)\n    addArtifact(ARTIFACT_TYPE, PARAMS[ARTIFACT_TYPE], desc)\n\n\n# Script execution starts here\nif __name__ == \"__main__\":\n    main()",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "58c07c1d-64da-4b01-993f-20e827e9ba4f"
     },
     {
       "actions": [],
-      "created_date": 1668002323110,
+      "created_date": 1668001882686,
       "description": "Script for Symantec SEP to parse email notifications to generate incidents and artifacts.",
       "enabled": false,
       "export_key": "scr_sep_parse_email_notification",
-      "id": 312,
+      "id": 198,
       "language": "python",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002323233,
+      "last_modified_time": 1668001882748,
       "name": "scr_sep_parse_email_notification",
       "object_type": "__emailmessage",
       "playbook_handle": null,
       "programmatic_name": "scr_sep_parse_email_notification",
       "script_text": "# Symantec SEP email notification parsing script.\n# This is a a follow-on from the generic parsing script which is used specifically to parse for Symantec SEP notifications.\n\nimport re\n\n# Dict to capture suspicious file details to add to data-table.\nFILE_PATH_LIST = []\nCOMPUTER_NAME = \u0027\u0027\n\ndef add_artifact(artifact_type, artifact_value, description):\n    \"\"\" Add new artifacts to the incident.\n    :param artifact_type: The type of the artifact.\n    :param artifact_value: - The value of the artifact.\n    :param description: - the description of the artifact.\n    \"\"\"\n    incident.addArtifact(artifact_type, artifact_value, description)\n\ndef add_artifact_from_email(regex, artifact_type, description):\n    \"\"\"This method adds new artifacts to the incident derived from matches of the the regular expression\n    parameter within the email body contents.\n    :param regex: - A regular expression to match against the email body contents.\n    :param artifact_type: - The type of the artifact(s).\n    :param description: - The description of the artifact(s).\n    \"\"\"\n    global FILE_PATH_LIST, COMPUTER_NAME\n    data_list = []\n    if artifact_type == \"System Name\":\n        # Only extract 1st match found for \"Computer:\"\n        data = re.search(regex, emailmessage.body.content)\n        if data is not None:\n            add_artifact(artifact_type, data.group(1), description)\n            COMPUTER_NAME = data.group(1).strip()\n    else:\n        data_set = set(re.findall(regex, emailmessage.body.content))  # Using a set to enforce uniqueness\n        if data_set is not None and len(data_set) \u003e 0:\n            # Convert regex set to list\n            for d in data_set:\n                data_list.append(d.strip())\n            [add_artifact(artifact_type, artifact_value, description) for artifact_value in data_list]\n            if artifact_type == \"File Path\":\n                [FILE_PATH_LIST.append(fp) for fp in data_list]\n\n\n###\n# Mainline starts here\n###\ndef main():\n    # Add \"Phishing\" as an incident type for the associated incident\n    incident.incident_type_ids.append(\"Phishing\")\n\n    # Add the email sender information to the incident as the recipient of the Symantec SEP notification.\n    reportingUserInfo = emailmessage.from.address\n    if emailmessage.from.name is not None:\n        reportingUserInfo = u\"{0} \u003c{1}\u003e\".format(emailmessage.from.name,emailmessage.from.address)\n        incident.addArtifact(\"Email Recipient\", reportingUserInfo, \"Symantec SEP notification email reipient.\")\n        # Extract email sender information on the assumption that a fishing email is being forwarded\n    if emailmessage.body.content is not None:\n        add_artifact_from_email(r\"From: (.*)\\n\", \"Email Sender\", \"Symantec SEP notification  email sender.\")\n        add_artifact_from_email(r\"Reply-To: (.*)\\n\", \"Email Sender\", \"Symantec SEP notification email sender (Reply-To).\")\n        add_artifact_from_email(r\"File path: (.*)\\n\", \"File Path\", \"File path of suspicious file in SEP environment.\")\n        add_artifact_from_email(r\"Computer: (.*)\\n\", \"System Name\", \"Endpoint  with suspicious file in SEP environment.\")\n        add_artifact_from_email(r\"User: (.*)\\n\", \"User Account\", \"User account which had a suspicious file in SEP environment.\")\n        add_artifact_from_email(r\"IP Address: (.*)\\n\", \"IP Address\",\n                        \"IP address of Endpoint which had the suspicious file in SEP environment.\")\n        add_artifact_from_email(r\"Security alert: suspicious activity from (\\d{1,3}.\\d{1,3}.\\d{1,3}.\\d{1,3}) .*\", \"IP Address\",\n                                \"IP address with suspicious activity detected in SEP environment.\")\n    if FILE_PATH_LIST:\n        for fp in FILE_PATH_LIST:\n          file_name = fp.split(\"\\\\\")[-1] if \u0027\\\\\u0027 in fp else fp.split(\"/\")[-1]\n          add_artifact(\"File Name\", file_name, u\"File name of file path for suspicious file {} in SEP environment.\".format(unicode(fp)))\n# Script execution starts here\nmain()",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "05e72a31-43e3-4950-9552-11310a3a2816"
     }
   ],
   "server_version": {
-    "build_number": 49,
-    "major": 43,
-    "minor": 1,
-    "version": "43.1.49"
+    "build_number": 7899,
+    "major": 45,
+    "minor": 0,
+    "version": "45.0.7899"
   },
   "tags": [],
   "task_order": [],
   "timeframes": null,
   "types": [
+    {
+      "actions": [],
+      "display_name": "Symantec SEP - Critical Events",
+      "export_key": "sep_critical_events",
+      "fields": {
+        "acknowledged": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "sep_critical_events/acknowledged",
+          "hide_notification": false,
+          "id": 3106,
+          "input_type": "boolean",
+          "internal": false,
+          "is_tracked": false,
+          "name": "acknowledged",
+          "operation_perms": {},
+          "operations": [],
+          "order": 4,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "short_text": "",
+          "tags": [],
+          "templates": [],
+          "text": "Acknowledged",
+          "tooltip": "",
+          "type_id": 1249,
+          "uuid": "97b5f339-6978-436c-bfc6-38679cba9b1a",
+          "values": [],
+          "width": 123
+        },
+        "date_added": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "sep_critical_events/date_added",
+          "hide_notification": false,
+          "id": 3107,
+          "input_type": "datetimepicker",
+          "internal": false,
+          "is_tracked": false,
+          "name": "date_added",
+          "operation_perms": {},
+          "operations": [],
+          "order": 0,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "short_text": "",
+          "tags": [],
+          "templates": [],
+          "text": "Date Added",
+          "tooltip": "",
+          "type_id": 1249,
+          "uuid": "ee7fa2ea-1bda-4113-8462-4aee746ef9e0",
+          "values": [],
+          "width": 160
+        },
+        "event_date": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "sep_critical_events/event_date",
+          "hide_notification": false,
+          "id": 3108,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "event_date",
+          "operation_perms": {},
+          "operations": [],
+          "order": 1,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "short_text": "",
+          "tags": [],
+          "templates": [],
+          "text": "Event Date",
+          "tooltip": "",
+          "type_id": 1249,
+          "uuid": "0d559dc0-a3e8-44e4-99b2-1099dcf278dc",
+          "values": [],
+          "width": 91
+        },
+        "event_id": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "sep_critical_events/event_id",
+          "hide_notification": false,
+          "id": 3109,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "event_id",
+          "operation_perms": {},
+          "operations": [],
+          "order": 5,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "short_text": "",
+          "tags": [],
+          "templates": [],
+          "text": "Event Id",
+          "tooltip": "",
+          "type_id": 1249,
+          "uuid": "49b82ee0-0c24-4d05-810b-d41e71749e47",
+          "values": [],
+          "width": 84
+        },
+        "message": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "sep_critical_events/message",
+          "hide_notification": false,
+          "id": 3110,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "message",
+          "operation_perms": {},
+          "operations": [],
+          "order": 3,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "short_text": "",
+          "tags": [],
+          "templates": [],
+          "text": "Message",
+          "tooltip": "",
+          "type_id": 1249,
+          "uuid": "f859cb8d-b0de-4a7f-937f-281ec24195c8",
+          "values": [],
+          "width": 84
+        },
+        "subject": {
+          "allow_default_value": false,
+          "blank_option": false,
+          "calculated": false,
+          "changeable": true,
+          "chosen": false,
+          "default_chosen_by_server": false,
+          "deprecated": false,
+          "export_key": "sep_critical_events/subject",
+          "hide_notification": false,
+          "id": 3111,
+          "input_type": "text",
+          "internal": false,
+          "is_tracked": false,
+          "name": "subject",
+          "operation_perms": {},
+          "operations": [],
+          "order": 2,
+          "placeholder": "",
+          "prefix": null,
+          "read_only": false,
+          "rich_text": false,
+          "short_text": "",
+          "tags": [],
+          "templates": [],
+          "text": "Subject",
+          "tooltip": "",
+          "type_id": 1249,
+          "uuid": "a326363b-3dda-4ab2-bdac-09165da5c4ea",
+          "values": [],
+          "width": 84
+        }
+      },
+      "for_actions": false,
+      "for_custom_fields": false,
+      "for_notifications": false,
+      "for_workflows": false,
+      "id": null,
+      "parent_types": [
+        "incident"
+      ],
+      "properties": {
+        "can_create": false,
+        "can_destroy": false,
+        "for_who": []
+      },
+      "scripts": [],
+      "tags": [],
+      "type_id": 8,
+      "type_name": "sep_critical_events",
+      "uuid": "a9339c2b-b613-46af-9def-ac127d91811b"
+    },
     {
       "actions": [],
       "display_name": "Symantec SEP - Endpoint details",
@@ -4475,7 +4720,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/computerName",
           "hide_notification": false,
-          "id": 2988,
+          "id": 2224,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4491,7 +4736,7 @@
           "templates": [],
           "text": "Computer name",
           "tooltip": "",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "929a15ce-dd74-4eed-8c53-24596ec5a27b",
           "values": [],
           "width": 126
@@ -4506,7 +4751,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/domain_id",
           "hide_notification": false,
-          "id": 2989,
+          "id": 2225,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4522,7 +4767,7 @@
           "templates": [],
           "text": "SEP domain id",
           "tooltip": "",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "e4478fb5-2937-4894-af06-7c9c18d905bc",
           "values": [],
           "width": 39
@@ -4537,7 +4782,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/domain_name",
           "hide_notification": false,
-          "id": 2990,
+          "id": 2226,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4553,7 +4798,7 @@
           "templates": [],
           "text": "SEP domain name",
           "tooltip": "",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "389c8bfc-05a3-40ca-9a04-3d2fd9dc9e82",
           "values": [],
           "width": 40
@@ -4568,7 +4813,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/endpoint_quarantine_status",
           "hide_notification": false,
-          "id": 2991,
+          "id": 2227,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4584,7 +4829,7 @@
           "templates": [],
           "text": "Endpoint quarantine status",
           "tooltip": "Quarantine status of an endpoint. Possible statuses are \u0027Un-Quarantined\u0027 and \u0027Quarantined\u0027. Note: Only applicable for MS Windows endpoints.",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "ddd2e15a-1460-4f0e-a7cd-b884fb1d5175",
           "values": [],
           "width": 57
@@ -4599,7 +4844,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/group_id",
           "hide_notification": false,
-          "id": 2992,
+          "id": 2228,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4615,7 +4860,7 @@
           "templates": [],
           "text": "SEP group id",
           "tooltip": "",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "72a4e915-5a51-4245-8825-ff65b12f346b",
           "values": [],
           "width": 30
@@ -4630,7 +4875,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/group_name",
           "hide_notification": false,
-          "id": 2993,
+          "id": 2229,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4646,7 +4891,7 @@
           "templates": [],
           "text": "SEP group name",
           "tooltip": "",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "084b80de-6d3c-41ea-8c2d-b5064b5aeaa3",
           "values": [],
           "width": 32
@@ -4661,7 +4906,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/hardwareKey",
           "hide_notification": false,
-          "id": 2994,
+          "id": 2230,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4677,7 +4922,7 @@
           "templates": [],
           "text": "Hardware key",
           "tooltip": "Hardware Key is the way to identify a client in SEP.",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "bbab835d-28f6-4101-baca-610eab13df3d",
           "values": [],
           "width": 51
@@ -4692,7 +4937,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/infected",
           "hide_notification": false,
-          "id": 2995,
+          "id": 2231,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4708,7 +4953,7 @@
           "templates": [],
           "text": "Infected",
           "tooltip": "",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "7d67b2e2-05de-46a9-9380-a76621293d44",
           "values": [],
           "width": 44
@@ -4723,7 +4968,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/ipAddresses",
           "hide_notification": false,
-          "id": 2996,
+          "id": 2232,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4739,7 +4984,7 @@
           "templates": [],
           "text": "IP addresses",
           "tooltip": "",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "1720988d-c5c3-4937-b0f6-59f01d9cdc5f",
           "values": [],
           "width": 149
@@ -4754,7 +4999,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/operatingSystem",
           "hide_notification": false,
-          "id": 2997,
+          "id": 2233,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4770,7 +5015,7 @@
           "templates": [],
           "text": "Operating system",
           "tooltip": "",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "8121e17e-115d-4fc3-977d-f7a008d39db4",
           "values": [],
           "width": 102
@@ -4785,7 +5030,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/quarantine_command_state",
           "hide_notification": false,
-          "id": 2998,
+          "id": 2234,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4801,7 +5046,7 @@
           "templates": [],
           "text": "Quarantine command state",
           "tooltip": "State of the quarantine command for a SEP command id.",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "63bb2e21-50b1-4fec-9a3b-614c20c371dc",
           "values": [],
           "width": 58
@@ -4816,7 +5061,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/quarantine_commandid",
           "hide_notification": false,
-          "id": 2999,
+          "id": 2235,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4832,7 +5077,7 @@
           "templates": [],
           "text": "SEP quarantine  command id",
           "tooltip": "",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "8373deb9-1a64-41aa-8309-3588edba0c59",
           "values": [],
           "width": 58
@@ -4847,7 +5092,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/query_execution_date",
           "hide_notification": false,
-          "id": 3000,
+          "id": 2236,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4863,7 +5108,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "f715fc71-d2b9-47eb-90f0-3a3984afc847",
           "values": [],
           "width": 113
@@ -4878,7 +5123,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/sep_description",
           "hide_notification": false,
-          "id": 3001,
+          "id": 2237,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4894,7 +5139,7 @@
           "templates": [],
           "text": "Description",
           "tooltip": "Description of an endpoint in the SEP environment.",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "48b8ba21-3d7a-4bad-bac1-06cce62b755c",
           "values": [],
           "width": 143
@@ -4909,7 +5154,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_details/uniqueId",
           "hide_notification": false,
-          "id": 3002,
+          "id": 2238,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4925,7 +5170,7 @@
           "templates": [],
           "text": "SEP Computer id",
           "tooltip": "",
-          "type_id": 1134,
+          "type_id": 1200,
           "uuid": "220f865e-968f-49fd-b4f6-7833a4631124",
           "values": [],
           "width": 51
@@ -4945,12 +5190,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "sep_endpoint_details",
       "uuid": "d38c1432-a44b-4f00-938e-a5eddd15d180"
@@ -4970,7 +5210,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/apOnOff",
           "hide_notification": false,
-          "id": 3003,
+          "id": 2239,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4986,7 +5226,7 @@
           "templates": [],
           "text": "Auto-protect engine",
           "tooltip": "Auto-protect engine - status on an endpoint.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "c47fdaef-142b-4b48-a4fa-64f928ee857f",
           "values": [],
           "width": 43
@@ -5001,7 +5241,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/avEngineOnOff",
           "hide_notification": false,
-          "id": 3004,
+          "id": 2240,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5017,7 +5257,7 @@
           "templates": [],
           "text": "Anti-Virus engine",
           "tooltip": "Anti-Virus engine - status on an endpoint.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "f7d0ef31-d4d2-4d49-853a-cc22c86fcf59",
           "values": [],
           "width": 77
@@ -5032,7 +5272,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/cidsBrowserFfOnOff",
           "hide_notification": false,
-          "id": 3005,
+          "id": 2241,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5048,7 +5288,7 @@
           "templates": [],
           "text": "Browser Intrustion Prevention - FireFox engine",
           "tooltip": "Browser Intrustion Prevention - FireFox engine - status on an endpoint.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "6793d391-5227-4fc0-99e7-700a79ca0dfa",
           "values": [],
           "width": 105
@@ -5063,7 +5303,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/cidsBrowserIeOnOff",
           "hide_notification": false,
-          "id": 3006,
+          "id": 2242,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5079,7 +5319,7 @@
           "templates": [],
           "text": "Browser Intrustion Prevention - IE engine",
           "tooltip": "Browser Intrustion Prevention - IE engine - status on an endpoint.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "46151939-5c7e-4148-9b46-769f534bc7fc",
           "values": [],
           "width": 105
@@ -5094,7 +5334,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/cidsDrvOnOff",
           "hide_notification": false,
-          "id": 3007,
+          "id": 2243,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5110,7 +5350,7 @@
           "templates": [],
           "text": "Client Intrusion Detection System engine",
           "tooltip": "Client Intrusion Detection System engine - status on an endpoint.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "1dc855ac-d41a-4136-bba1-5df2bfd1a840",
           "values": [],
           "width": 69
@@ -5125,7 +5365,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/computer_name",
           "hide_notification": false,
-          "id": 3008,
+          "id": 2244,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5141,7 +5381,7 @@
           "templates": [],
           "text": "Computer name",
           "tooltip": "",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "672cb129-7be7-454e-99f2-11a53bb44ee4",
           "values": [],
           "width": 95
@@ -5156,7 +5396,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/daOnOff",
           "hide_notification": false,
-          "id": 3009,
+          "id": 2245,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5172,7 +5412,7 @@
           "templates": [],
           "text": "Download Insight engine",
           "tooltip": "Client Intrusion Detection System engine - status on an endpoint.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "1cce89a6-fc48-4225-8dd1-fed07364c7a2",
           "values": [],
           "width": 52
@@ -5187,7 +5427,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/elamOnOff",
           "hide_notification": false,
-          "id": 3010,
+          "id": 2246,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5203,7 +5443,7 @@
           "templates": [],
           "text": "Early Launch Antimalware engine",
           "tooltip": "Client Intrusion Detection System engine - status on an endpoint.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "336a8e6f-17b7-43a9-aed1-0072a137522f",
           "values": [],
           "width": 67
@@ -5218,7 +5458,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/firewallOnOff",
           "hide_notification": false,
-          "id": 3011,
+          "id": 2247,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5234,7 +5474,7 @@
           "templates": [],
           "text": "Firewall engine",
           "tooltip": "Client Intrusion Detection System engine - status on an endpoint.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "6b5ab73b-ed10-4baf-8e87-7bdbde1e1ab0",
           "values": [],
           "width": 70
@@ -5249,7 +5489,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/host_integrity_check",
           "hide_notification": false,
-          "id": 3012,
+          "id": 2248,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5265,7 +5505,7 @@
           "templates": [],
           "text": "Host integrity check status",
           "tooltip": "Status of Host Integrity check.  Possible values are \u0027Passed\u0027 and  \u0027Failed\u0027.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "79dafc67-c989-47a5-b7ef-5ec40e63c754",
           "values": [],
           "width": 110
@@ -5280,7 +5520,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/onlineStatus",
           "hide_notification": false,
-          "id": 3013,
+          "id": 2249,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5296,7 +5536,7 @@
           "templates": [],
           "text": "Online status",
           "tooltip": "",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "496d5b9e-21a8-4b70-a016-6aa97df8f0f6",
           "values": [],
           "width": 68
@@ -5311,7 +5551,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/pepOnOff",
           "hide_notification": false,
-          "id": 3014,
+          "id": 2250,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5327,7 +5567,7 @@
           "templates": [],
           "text": "Proactive Exploit Protection engine",
           "tooltip": "Client Intrusion Detection System engine - status on an endpoint.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "ad01f35b-ada1-4868-8ef6-a8b1791455f8",
           "values": [],
           "width": 54
@@ -5342,7 +5582,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/ptpOnOff",
           "hide_notification": false,
-          "id": 3015,
+          "id": 2251,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5358,7 +5598,7 @@
           "templates": [],
           "text": "Proactive Threat Protection engine",
           "tooltip": "Client Intrusion Detection System engine - status on an endpoint.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "bb77c2e0-4629-49c6-8dc0-a4e052b133d9",
           "values": [],
           "width": 54
@@ -5373,7 +5613,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/query_execution_date",
           "hide_notification": false,
-          "id": 3016,
+          "id": 2252,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5389,7 +5629,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "405b818c-c161-4103-affe-a4bba1ff653e",
           "values": [],
           "width": 126
@@ -5404,7 +5644,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/readableLastScanTime",
           "hide_notification": false,
-          "id": 3017,
+          "id": 2253,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5420,7 +5660,7 @@
           "templates": [],
           "text": "Last Scan Time",
           "tooltip": "Last time the ednpoint performed a scan.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "0cb3ab72-4a09-4ef2-8823-decf6f2f2faa",
           "values": [],
           "width": 82
@@ -5435,7 +5675,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/readableLastUpdateTime",
           "hide_notification": false,
-          "id": 3018,
+          "id": 2254,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5451,7 +5691,7 @@
           "templates": [],
           "text": "Last update time",
           "tooltip": "Last time Endpoint sent an update to the SEPM server.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "bafd7d35-96cb-491f-bf6c-f5b74db7d71e",
           "values": [],
           "width": 82
@@ -5466,7 +5706,7 @@
           "deprecated": false,
           "export_key": "sep_endpoints_non_compliant_details/tamperOnOff",
           "hide_notification": false,
-          "id": 3019,
+          "id": 2255,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5482,7 +5722,7 @@
           "templates": [],
           "text": "Tamper protection engine",
           "tooltip": "Client Intrusion Detection System engine - status on an endpoint.",
-          "type_id": 1135,
+          "type_id": 1201,
           "uuid": "6cef5021-b145-493b-ae73-bb9ee6c2df9b",
           "values": [],
           "width": 68
@@ -5502,12 +5742,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "sep_endpoints_non_compliant_details",
       "uuid": "5b9d28cf-e9a1-4e0f-8826-19255125f69d"
@@ -5527,7 +5762,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_status_summary/disabled",
           "hide_notification": false,
-          "id": 3020,
+          "id": 2256,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5543,7 +5778,7 @@
           "templates": [],
           "text": "Disabled",
           "tooltip": "Count of endpoints on which at least one of the main Symantec SEP engines are disabled.",
-          "type_id": 1136,
+          "type_id": 1202,
           "uuid": "1feabb04-7afc-4a19-a130-14aea7522a03",
           "values": [],
           "width": 81
@@ -5558,7 +5793,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_status_summary/hi_failed",
           "hide_notification": false,
-          "id": 3021,
+          "id": 2257,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5574,7 +5809,7 @@
           "templates": [],
           "text": "Host integrity failed",
           "tooltip": "Count of endpoints where Host Integrity check has failed.",
-          "type_id": 1136,
+          "type_id": 1202,
           "uuid": "360b8137-60ac-4bce-a610-192cb19ebd71",
           "values": [],
           "width": 132
@@ -5589,7 +5824,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_status_summary/non_compliant",
           "hide_notification": false,
-          "id": 3022,
+          "id": 2258,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5605,7 +5840,7 @@
           "templates": [],
           "text": "Non compliant",
           "tooltip": "Total count of non-compliant endpoints in the Symantec SEP environment. ",
-          "type_id": 1136,
+          "type_id": 1202,
           "uuid": "be1cd774-3c15-4c94-9bed-9de6dd76ea71",
           "values": [],
           "width": 52
@@ -5620,7 +5855,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_status_summary/offline",
           "hide_notification": false,
-          "id": 3023,
+          "id": 2259,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5636,7 +5871,7 @@
           "templates": [],
           "text": "Offline",
           "tooltip": "Count of offline endpoints.",
-          "type_id": 1136,
+          "type_id": 1202,
           "uuid": "bd09465e-3859-42d0-8095-fab7a0d8da69",
           "values": [],
           "width": 41
@@ -5651,7 +5886,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_status_summary/out_of_date",
           "hide_notification": false,
-          "id": 3024,
+          "id": 2260,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5667,7 +5902,7 @@
           "templates": [],
           "text": "Out of date",
           "tooltip": "Count of endpoints which have not sent an update within the heartbeart (15 minute) windows.",
-          "type_id": 1136,
+          "type_id": 1202,
           "uuid": "10364bf0-eecb-45dc-b4e7-72157094fb96",
           "values": [],
           "width": 86
@@ -5682,7 +5917,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_status_summary/query_execution_date",
           "hide_notification": false,
-          "id": 3025,
+          "id": 2261,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5698,7 +5933,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1136,
+          "type_id": 1202,
           "uuid": "a6fe927b-0e1c-4210-8951-8db8653dfd25",
           "values": [],
           "width": 127
@@ -5713,7 +5948,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_status_summary/total",
           "hide_notification": false,
-          "id": 3026,
+          "id": 2262,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5729,7 +5964,7 @@
           "templates": [],
           "text": "Total",
           "tooltip": "Total count of endpoints in the Symantec SEP environment. Note: Endpoints can be counted in more than status column.",
-          "type_id": 1136,
+          "type_id": 1202,
           "uuid": "de5adc90-9db5-47cb-9602-edfa1a1f12ea",
           "values": [],
           "width": 29
@@ -5744,7 +5979,7 @@
           "deprecated": false,
           "export_key": "sep_endpoint_status_summary/up_to_date",
           "hide_notification": false,
-          "id": 3027,
+          "id": 2263,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5760,7 +5995,7 @@
           "templates": [],
           "text": "Up to date",
           "tooltip": "Count of endpoints which have sent an update within the heartbeart (15 minute) windows.",
-          "type_id": 1136,
+          "type_id": 1202,
           "uuid": "ff90283f-5fba-4b97-a2f8-d6407f7c0318",
           "values": [],
           "width": 87
@@ -5780,12 +6015,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "sep_endpoint_status_summary",
       "uuid": "0e739973-f4b8-4efe-8e2d-b1ddeb413fd3"
@@ -5805,7 +6035,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/artifact_id",
           "hide_notification": false,
-          "id": 3028,
+          "id": 2264,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5821,7 +6051,7 @@
           "templates": [],
           "text": "Artifact id",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "5a05faf0-ca9a-4b56-b841-497c7f9b4c36",
           "values": [],
           "width": 40
@@ -5836,7 +6066,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/artifact_type",
           "hide_notification": false,
-          "id": 3029,
+          "id": 2265,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5852,7 +6082,7 @@
           "templates": [],
           "text": "Artifact type",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "1518fc32-f8bc-4d99-8bbd-9a8eb2347511",
           "values": [],
           "width": 67
@@ -5867,7 +6097,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/artifact_value",
           "hide_notification": false,
-          "id": 3030,
+          "id": 2266,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5883,7 +6113,7 @@
           "templates": [],
           "text": "Artifact value",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "82166ba2-7cbe-4736-9a73-25d96b9d2731",
           "values": [],
           "width": 72
@@ -5898,7 +6128,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/computer_id",
           "hide_notification": false,
-          "id": 3031,
+          "id": 2267,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5914,7 +6144,7 @@
           "templates": [],
           "text": "SEP computer id",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "b933cb6d-6bc4-4b5e-a7bc-ddba65b7fdea",
           "values": [],
           "width": 51
@@ -5929,7 +6159,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/computer_name",
           "hide_notification": false,
-          "id": 3032,
+          "id": 2268,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5945,7 +6175,7 @@
           "templates": [],
           "text": "Computer name",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "e7cbc268-525d-423c-b32c-670bae5ecb57",
           "values": [],
           "width": 58
@@ -5960,7 +6190,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/file_id",
           "hide_notification": false,
-          "id": 3033,
+          "id": 2269,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5976,7 +6206,7 @@
           "templates": [],
           "text": "SEP file id",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "32b624b3-a593-4f2e-b88d-0b967ddb497c",
           "values": [],
           "width": 40
@@ -5991,7 +6221,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/file_path",
           "hide_notification": false,
-          "id": 3034,
+          "id": 2270,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6007,7 +6237,7 @@
           "templates": [],
           "text": "File path",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "132f0487-2f8d-4fad-8ab7-620cf50fbc11",
           "values": [],
           "width": 32
@@ -6022,7 +6252,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/file_upload_status",
           "hide_notification": false,
-          "id": 3035,
+          "id": 2271,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6038,7 +6268,7 @@
           "templates": [],
           "text": "File upload  status",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "3fbfbb3d-6490-4c99-8153-6fed645bf102",
           "values": [],
           "width": 90
@@ -6053,7 +6283,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/hash_value",
           "hide_notification": false,
-          "id": 3036,
+          "id": 2272,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6069,7 +6299,7 @@
           "templates": [],
           "text": "Hash value",
           "tooltip": "Scan match can return sha-256, sha1 or md5 hash values.",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "009b08b6-8659-4c24-aa50-9a21bbbb930a",
           "values": [],
           "width": 42
@@ -6084,7 +6314,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/query_execution_date",
           "hide_notification": false,
-          "id": 3037,
+          "id": 2273,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6100,7 +6330,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "29216307-050b-47c0-ab6d-6e27a8b2dc20",
           "values": [],
           "width": 74
@@ -6115,7 +6345,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/remediation_commandid",
           "hide_notification": false,
-          "id": 3038,
+          "id": 2274,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6131,7 +6361,7 @@
           "templates": [],
           "text": "SEP remediation command id",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "2338c1ef-02cd-4558-857f-c9d1df0ebde7",
           "values": [],
           "width": 97
@@ -6146,7 +6376,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/remediation_status",
           "hide_notification": false,
-          "id": 3039,
+          "id": 2275,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6162,7 +6392,7 @@
           "templates": [],
           "text": "Remediation status",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "7c3d6788-2780-4975-b3c3-833f5fab221d",
           "values": [],
           "width": 86
@@ -6177,7 +6407,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/scan_command_state",
           "hide_notification": false,
-          "id": 3040,
+          "id": 2276,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6193,7 +6423,7 @@
           "templates": [],
           "text": "Scan command state",
           "tooltip": "This value contains the overall state of the scan command across all target endpoints. Possible values are \u0027In progress\u0027, \u0027Completed\u0027 and \u0027Timedout\u0027\u0027.",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "bfd30e06-a4cc-4c39-89a8-2756dc13782a",
           "values": [],
           "width": 51
@@ -6208,7 +6438,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/scan_commandid",
           "hide_notification": false,
-          "id": 3041,
+          "id": 2277,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6224,7 +6454,7 @@
           "templates": [],
           "text": "SEP scan command id",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "1e29dc36-695f-46f9-8e8c-c0ac35d223ec",
           "values": [],
           "width": 94
@@ -6239,7 +6469,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/scan_result",
           "hide_notification": false,
-          "id": 3042,
+          "id": 2278,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6255,7 +6485,7 @@
           "templates": [],
           "text": "Scan Query/Result",
           "tooltip": "This column is used to signify whether the row is being used to display a query or a query result.  Possible values: \u0027Query\u0027 for a query and \u0027Full match\u0027, \u0027Partial Match\u0027 or \u0027Hash match\u0027 for a match.",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "a344bd68-aab4-4206-ade7-7e5c516c7b01",
           "values": [],
           "width": 69
@@ -6270,7 +6500,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/scan_type",
           "hide_notification": false,
-          "id": 3043,
+          "id": 2279,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6286,7 +6516,7 @@
           "templates": [],
           "text": "SEP Scan type",
           "tooltip": "The SEP eoc scan type. ",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "95b6372c-7bcc-4089-ac6b-eac5b5c0c2e8",
           "values": [],
           "width": 31
@@ -6301,7 +6531,7 @@
           "deprecated": false,
           "export_key": "sep_eoc_scan_results/upload_commandid",
           "hide_notification": false,
-          "id": 3044,
+          "id": 2280,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6317,7 +6547,7 @@
           "templates": [],
           "text": "SEP upload command id",
           "tooltip": "",
-          "type_id": 1137,
+          "type_id": 1203,
           "uuid": "bfd5d390-4a52-404f-827c-fe88eae41df6",
           "values": [],
           "width": 86
@@ -6337,12 +6567,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "sep_eoc_scan_results",
       "uuid": "aab4b432-fbc6-4484-a6a9-fd00997a8b28"
@@ -6362,7 +6587,7 @@
           "deprecated": false,
           "export_key": "sep_fingerprint_lists/domain_name",
           "hide_notification": false,
-          "id": 3045,
+          "id": 2281,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6378,7 +6603,7 @@
           "templates": [],
           "text": "SEP domain name",
           "tooltip": "",
-          "type_id": 1138,
+          "type_id": 1204,
           "uuid": "2679b8af-266d-4145-887b-eeaf5fb610db",
           "values": [],
           "width": 69
@@ -6393,7 +6618,7 @@
           "deprecated": false,
           "export_key": "sep_fingerprint_lists/group_ids",
           "hide_notification": false,
-          "id": 3046,
+          "id": 2282,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6409,7 +6634,7 @@
           "templates": [],
           "text": "Assigned SEP group ids",
           "tooltip": "",
-          "type_id": 1138,
+          "type_id": 1204,
           "uuid": "4ba3f07b-2e6b-4e8f-8677-ad60f33e3149",
           "values": [],
           "width": 217
@@ -6424,7 +6649,7 @@
           "deprecated": false,
           "export_key": "sep_fingerprint_lists/hash_values",
           "hide_notification": false,
-          "id": 3047,
+          "id": 2283,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6440,7 +6665,7 @@
           "templates": [],
           "text": "MD5 Hash values",
           "tooltip": "Hash values in list (Currently MD5 only supported).",
-          "type_id": 1138,
+          "type_id": 1204,
           "uuid": "41abab3c-c370-4206-ab37-94e437d5183c",
           "values": [],
           "width": 195
@@ -6455,7 +6680,7 @@
           "deprecated": false,
           "export_key": "sep_fingerprint_lists/list_description",
           "hide_notification": false,
-          "id": 3048,
+          "id": 2284,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6471,7 +6696,7 @@
           "templates": [],
           "text": "Description",
           "tooltip": "SEP list description.",
-          "type_id": 1138,
+          "type_id": 1204,
           "uuid": "3aeb0107-ef1f-4795-925a-9ab4e9c5b879",
           "values": [],
           "width": 161
@@ -6486,7 +6711,7 @@
           "deprecated": false,
           "export_key": "sep_fingerprint_lists/list_id",
           "hide_notification": false,
-          "id": 3049,
+          "id": 2285,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6502,7 +6727,7 @@
           "templates": [],
           "text": "SEP list id",
           "tooltip": "",
-          "type_id": 1138,
+          "type_id": 1204,
           "uuid": "315b124e-79fa-4d18-8924-0ac8aed35417",
           "values": [],
           "width": 75
@@ -6517,7 +6742,7 @@
           "deprecated": false,
           "export_key": "sep_fingerprint_lists/list_name",
           "hide_notification": false,
-          "id": 3050,
+          "id": 2286,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6533,7 +6758,7 @@
           "templates": [],
           "text": "List name",
           "tooltip": "SEP list name.",
-          "type_id": 1138,
+          "type_id": 1204,
           "uuid": "70dccc43-cb7a-4815-9a64-770cba212de9",
           "values": [],
           "width": 75
@@ -6548,7 +6773,7 @@
           "deprecated": false,
           "export_key": "sep_fingerprint_lists/query_execution_date",
           "hide_notification": false,
-          "id": 3051,
+          "id": 2287,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6564,7 +6789,7 @@
           "templates": [],
           "text": "Query Execution date",
           "tooltip": "",
-          "type_id": 1138,
+          "type_id": 1204,
           "uuid": "661c8e15-746c-4963-8f98-da4ca7e2fb89",
           "values": [],
           "width": 129
@@ -6584,12 +6809,7 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "sep_fingerprint_lists",
       "uuid": "2aa13e41-f0c8-4b34-a1aa-2a480f686ed7"
@@ -6609,7 +6829,7 @@
           "deprecated": false,
           "export_key": "sep_groups/domain_id",
           "hide_notification": false,
-          "id": 3052,
+          "id": 2288,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6625,7 +6845,7 @@
           "templates": [],
           "text": "SEP domain id",
           "tooltip": "",
-          "type_id": 1139,
+          "type_id": 1205,
           "uuid": "28d8690e-952e-40f1-b405-d427c876ad32",
           "values": [],
           "width": 56
@@ -6640,7 +6860,7 @@
           "deprecated": false,
           "export_key": "sep_groups/domain_name",
           "hide_notification": false,
-          "id": 3053,
+          "id": 2289,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6656,7 +6876,7 @@
           "templates": [],
           "text": "SEP domain name",
           "tooltip": "",
-          "type_id": 1139,
+          "type_id": 1205,
           "uuid": "b8af6da4-da4d-45d2-adb3-f57bc5f65966",
           "values": [],
           "width": 75
@@ -6671,7 +6891,7 @@
           "deprecated": false,
           "export_key": "sep_groups/fullPathName",
           "hide_notification": false,
-          "id": 3054,
+          "id": 2290,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6687,7 +6907,7 @@
           "templates": [],
           "text": "Full path name",
           "tooltip": "Full path name of the SEP group.",
-          "type_id": 1139,
+          "type_id": 1205,
           "uuid": "9cd693f9-7a49-49ac-9cc1-727ddecafb3d",
           "values": [],
           "width": 117
@@ -6702,7 +6922,7 @@
           "deprecated": false,
           "export_key": "sep_groups/group_description",
           "hide_notification": false,
-          "id": 3055,
+          "id": 2291,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6718,7 +6938,7 @@
           "templates": [],
           "text": "Description",
           "tooltip": "Description of the SEP group. ",
-          "type_id": 1139,
+          "type_id": 1205,
           "uuid": "ff14c2ce-b978-4061-9e89-daeefee44ff1",
           "values": [],
           "width": 156
@@ -6733,7 +6953,7 @@
           "deprecated": false,
           "export_key": "sep_groups/group_id",
           "hide_notification": false,
-          "id": 3056,
+          "id": 2292,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6749,7 +6969,7 @@
           "templates": [],
           "text": "SEP Group id",
           "tooltip": "",
-          "type_id": 1139,
+          "type_id": 1205,
           "uuid": "c4e322ab-e1d7-4415-8c03-e3ece5f0b234",
           "values": [],
           "width": 146
@@ -6764,7 +6984,7 @@
           "deprecated": false,
           "export_key": "sep_groups/group_name",
           "hide_notification": false,
-          "id": 3057,
+          "id": 2293,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6780,7 +7000,7 @@
           "templates": [],
           "text": "SEP Group name",
           "tooltip": "",
-          "type_id": 1139,
+          "type_id": 1205,
           "uuid": "40445ab6-0336-498a-8cf0-bf24d6da4135",
           "values": [],
           "width": 104
@@ -6795,7 +7015,7 @@
           "deprecated": false,
           "export_key": "sep_groups/numberOfPhysicalComputers",
           "hide_notification": false,
-          "id": 3058,
+          "id": 2294,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6811,7 +7031,7 @@
           "templates": [],
           "text": "Number of physical computers",
           "tooltip": "Numer of physical endpoints assigned to the SEP group.",
-          "type_id": 1139,
+          "type_id": 1205,
           "uuid": "1a805352-4e5d-4d03-854a-0e1c7f709b49",
           "values": [],
           "width": 69
@@ -6826,7 +7046,7 @@
           "deprecated": false,
           "export_key": "sep_groups/policyInheritanceEnabled",
           "hide_notification": false,
-          "id": 3059,
+          "id": 2295,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -6842,7 +7062,7 @@
           "templates": [],
           "text": "Policy inheritance enabled",
           "tooltip": "",
-          "type_id": 1139,
+          "type_id": 1205,
           "uuid": "f49f38ac-07ae-45a3-9f5d-df718c0a5c3f",
           "values": [],
           "width": 134
@@ -6857,7 +7077,7 @@
           "deprecated": false,
           "export_key": "sep_groups/query_execution_date",
           "hide_notification": false,
-          "id": 3060,
+          "id": 2296,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6873,7 +7093,7 @@
           "templates": [],
           "text": "Query execution date",
           "tooltip": "",
-          "type_id": 1139,
+          "type_id": 1205,
           "uuid": "2c004034-8ffa-405c-9da9-1b6c05dcac53",
           "values": [],
           "width": 109
@@ -6893,186 +7113,13 @@
         "for_who": []
       },
       "scripts": [],
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "type_id": 8,
       "type_name": "sep_groups",
       "uuid": "5a463e0a-dc40-4e49-99d0-aeaa2de8c75a"
     }
   ],
   "workflows": [
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_sep_get_blacklist_information",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_blacklist_information\" isExecutable=\"true\" name=\"Example: SEP - Get Blacklist information\"\u003e\u003cdocumentation\u003eGet a blacklist fingerprint list information for a specified name.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ps8d9j\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_07rq9qa\" name=\"SEP - Get Domains\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17245e2-ae90-46aa-ae44-cc0d37b8387c\"\u003e{\"inputs\":{},\"post_processing_script\":\"fn_name = \\\"fn_sep_get_domains\\\"\\nwf_name = \\\"Example: SEP - Get Blacklist information\\\"\\ncontent = results.content\\ndomainid = None\\nfor i in range(len(content)):\\n  if content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    domainid = content[i][\\\"id\\\"]\\n    break\\nif domainid is not None:\\n    workflow.addProperty(\\\"domid_exists\\\", {})\\nelse:\\n    note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The domain name  \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; was not found \\\" \\\\\\n                u\\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(wf_name, unicode(rule.properties.sep_domain_name), fn_name)\\n    incident.addNote(helper.createRichText(note_text))\",\"result_name\":\"get_domains_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ps8d9j\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ea62qu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ps8d9j\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_07rq9qa\"/\u003e\u003cserviceTask id=\"ServiceTask_02udmal\" name=\"SEP - Get Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e3e94d0c-e2c9-4f76-9e41-6878e718e8de\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027, u\u0027sep_domainid\u0027: u\u0027908090000946C25D330E919313D23887\u0027}, \\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-28 16:23:05\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1153}, \\n        \u0027success\u0027: True, \\n        \u0027content\u0027: {u\u0027description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027hashType\u0027: u\u0027MD5\u0027, u\u0027source\u0027: u\u0027WEBSERVICE\u0027, \\n                    u\u0027groupIds\u0027: [u\u00277E4BB119A9FE9DC526EDABFB1EE261B8\u0027], u\u0027data\u0027: [u\u0027482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027], \\n                    u\u0027id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027, u\u0027name\u0027: u\u0027Blacklist_2\u0027}, \\n        \u0027raw\u0027: \u0027{\\\"description\\\": \\\"Hash of type Malware MD5 Hash\\\", \\\"hashType\\\": \\\"MD5\\\", \\\"source\\\": \\\"WEBSERVICE\\\", \u0027\\n               \u0027\\\"groupIds\\\": [\\\"7E4BB119A9FE9DC526EDABFB1EE261B8\\\"], \\\"data\\\": [\\\"482F9B6E0CC4C1DBBD772AAAF088CB3A\\\"], \u0027\\n               \u0027\\\"id\\\": \\\"E60B061FDD844EBF9778D4BD2AC3942A\\\", \\\"name\\\": \\\"Blacklist_2\\\"}\u0027, \\n        \u0027reason\u0027: None, \\n        \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_fingerprint_list script\\nDATA_TBL_FIELDS = [\\\"domain_name\\\", \\\"list_name\\\", \\\"list_id\\\", \\\"list_description\\\", \\\"hash_values\\\", \\\"group_ids\\\"]\\nFN_NAME = \\\"fn_sep_get_fingerprint_list\\\"\\nWF_NAME = \\\"Get Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nDOMAIN_NAME = rule.properties.sep_domain_name\\n# Processing\\n\\n\\ndef main():\\n    note_text = \u0027\u0027\\n\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and int(CONTENT[\\\"errorCode\\\"]) == 410:\\n            # The finger print list doesn\u0027t exist.\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; does not exist \\\" \\\\\\n                        \\\"for domain \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]), unicode(DOMAIN_NAME), FN_NAME)\\n        else:\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; results returned for \\\" \\\\\\n                        \\\"fingerprint list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and domain \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, len(CONTENT[\\\"data\\\"]), unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                        unicode(DOMAIN_NAME), FN_NAME)\\n\\n            newrow = incident.addRow(\\\"sep_fingerprint_lists\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            newrow.domain_name = rule.properties.sep_domain_name\\n            newrow.list_name =  CONTENT[\\\"name\\\"]\\n            newrow.list_id =  CONTENT[\\\"id\\\"]\\n            newrow.list_description =  CONTENT[\\\"description\\\"]\\n            newrow.hash_values = \u0027, \u0027.join(CONTENT[\\\"data\\\"])\\n            newrow.group_ids = \u0027, \u0027.join(CONTENT[\\\"groupIds\\\"])\\n    else:\\n        noteText += u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned  for \\\" \\\\\\n                    \\\"fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and domain \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient \\\" \\\\\\n                    \\\"function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                                                 unicode(DOMAIN_NAME), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\ndomain_content = domain_content_results.content\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = domain_content[i][\\\"id\\\"]\\n    break\\ninputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0rgoz9j\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0gitwsh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0vp7xul\"\u003e\u003cincoming\u003eSequenceFlow_0gitwsh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0gitwsh\" sourceRef=\"ServiceTask_02udmal\" targetRef=\"EndEvent_0vp7xul\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_041efzy\"\u003e\u003cincoming\u003eSequenceFlow_0ea62qu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0rgoz9j\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1xlixd1\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ea62qu\" sourceRef=\"ServiceTask_07rq9qa\" targetRef=\"ExclusiveGateway_041efzy\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0rgoz9j\" name=\"Domain id exists\" sourceRef=\"ExclusiveGateway_041efzy\" targetRef=\"ServiceTask_02udmal\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cendEvent id=\"EndEvent_1azx5ow\"\u003e\u003cincoming\u003eSequenceFlow_1xlixd1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1xlixd1\" name=\"Domain id does not exist\" sourceRef=\"ExclusiveGateway_041efzy\" targetRef=\"EndEvent_1azx5ow\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1mq2nlq\"\u003e\u003ctext\u003eGet domain id by name. Input: Domain name selected from activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0sygkpf\" sourceRef=\"ServiceTask_07rq9qa\" targetRef=\"TextAnnotation_1mq2nlq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1p42b6d\"\u003e\u003ctext\u003e\u003c![CDATA[Get fingerprint list information by name for domain by id. Fingerprint list\u00a0 name selected from\u00a0 activity field.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1t81cuv\" sourceRef=\"ServiceTask_02udmal\" targetRef=\"TextAnnotation_1p42b6d\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_07rq9qa\" id=\"ServiceTask_07rq9qa_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"243\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ps8d9j\" id=\"SequenceFlow_1ps8d9j_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"243\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_02udmal\" id=\"ServiceTask_02udmal_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"560\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0vp7xul\" id=\"EndEvent_0vp7xul_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"734\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"707\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0gitwsh\" id=\"SequenceFlow_0gitwsh_di\"\u003e\u003comgdi:waypoint x=\"660\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"734\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"652\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_041efzy\" id=\"ExclusiveGateway_041efzy_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"397\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"422\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ea62qu\" id=\"SequenceFlow_0ea62qu_di\"\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"370\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0rgoz9j\" id=\"SequenceFlow_0rgoz9j_di\"\u003e\u003comgdi:waypoint x=\"447\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"560\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"83\" x=\"462\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1azx5ow\" id=\"EndEvent_1azx5ow_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"404\" y=\"320\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"422\" y=\"359\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xlixd1\" id=\"SequenceFlow_1xlixd1_di\"\u003e\u003comgdi:waypoint x=\"422\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"422\" xsi:type=\"omgdc:Point\" y=\"320\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"79\" x=\"398\" y=\"269\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1mq2nlq\" id=\"TextAnnotation_1mq2nlq_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"150\" x=\"218\" y=\"52\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0sygkpf\" id=\"Association_0sygkpf_di\"\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"294\" xsi:type=\"omgdc:Point\" y=\"99\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1p42b6d\" id=\"TextAnnotation_1p42b6d_di\"\u003e\u003comgdc:Bounds height=\"67\" width=\"238\" x=\"491\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1t81cuv\" id=\"Association_1t81cuv_di\"\u003e\u003comgdi:waypoint x=\"610\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"610\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Get a blacklist fingerprint list information for a specified name.",
-      "export_key": "wf_sep_get_blacklist_information",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002345261,
-      "name": "Example: SEP - Get Blacklist information",
-      "object_type": "incident",
-      "programmatic_name": "wf_sep_get_blacklist_information",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "3401ead8-eeaa-4719-b511-54018521041f",
-      "workflow_id": 423
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "wf_sep_get_quarantine_status",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_quarantine_status\" isExecutable=\"true\" name=\"Example: SEP - Get Quarantine status\"\u003e\u003cdocumentation\u003eGet the status of an Quarantine Endpoint command.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_12r8v45\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_00td1h5\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027inputs\u0027: {u\u0027sep_status_type\u0027: u\u0027quarantine\u0027, u\u0027sep_commandid\u0027: u\u00277D3670DDF5A64A99B3721BF8A375B302\u0027},\\n          \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-04-26 15:25:55\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                      \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1256},\\n          \u0027success\u0027: True,\\n          \u0027content\u0027: {u\u0027sort\u0027: [{u\u0027direction\u0027: u\u0027ASC\u0027, u\u0027property\u0027: u\u0027Begintime\u0027, u\u0027ascending\u0027: True}], \u0027command_state\u0027: \u0027Completed\u0027, u\u0027number\u0027: 0, u\u0027firstPage\u0027: True, \u0027: 0, u\u0027content\u0027: [{u\u0027computerName\u0027: u\u0027WIN-N5KGH4CP3N3\u0027, u\u0027subStateId u\u0027binaryFileId\u0027: None, u\u0027lastUpdateTime\u0027:\\n                        u\u00272019-04-26T11:05:27Z\u0027, u\u0027domainName\u0027: u\u0027Default\u0027, u\u0027hardwareKey\u0027: u\u0027DC7D24D6465566D2941F35BC8D17801E\u0027,\\n                        u\u0027subStateDesc\u0027: u\u0027\u0027, u\u0027stateId\u0027: 3, u\u0027computerId\u0027: u\u002789AD1BBB0946C25D25E6C0984E971D8A\u0027, u\u0027computerIp\u0027: u\u00279.70.194.94\u0027, u\u0027beginTime\u0027: u\u00272019-04-26T11:05:27Z\u0027, u\u0027currentLoginUserName\u0027: u\u0027Administrator\u0027, u\u0027resultInXML\u0027: u\u0027\u0027, \u0027command_status_id\u0027: 3}], u\u0027lastPage\u0027: True, u\u0027totalPages\u0027: 1, u\u0027numberOfElements\u0027: 1, u\u0027totalElements\u0027: 1, u\u0027size\u0027: 20},\\n          \u0027raw\u0027: \u0027{\\\"sort\\\": [{\\\"direction\\\": \\\"ASC\\\", \\\"property\\\": \\\"Begintime\\\", \\\"ascending\\\": true}], \\\"command_state\\\": \\\"Completed\\\", \\\"number\\\": 0, \\\"firstPage\\\": true, \\\"content\\\": [{\\\"computerName\\\": \\\"WIN-N5KGH4CP3N3\\\", \\\"subStateId\\\": 0, \\\"binaryFileId\\\": null, \\\"lastUpdateTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"domainName\\\": \\\"Default\\\", \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\", \\\"subStateDesc\\\": \\\"\\\", \\\"stateId\\\": 3, \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\", \\\"computerIp\\\": \\\"9.70.194.94\\\", \\\"beginTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"currentLoginUserName\\\": \\\"Administrator\\\", \\\"resultInXML\\\": \\\"\\\", \\\"command_status_id\\\": 3}], \\\"lastPage\\\": true, \\\"totalPages\\\": 1, \\\"numberOfElements\\\": 1, \\\"totalElements\\\": 1, \\\"size\\\": 20}\u0027, \u0027reason\u0027: None, \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"quarantine_status\\\", \\\"quarantine_command_state\\\", \\\"endpoint_quarantine_status\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Quarantine Endpoint\\\"\\nSTATUS_TYPE = \\\"quarantine\\\"\\nFINAL_STATUSES = {\\n    0: \\\"Not received\\\",\\n    1: \\\"Received\\\",\\n    2: \\\"In progress\\\",\\n    3: \\\"Completed\\\",\\n    4: \\\"Rejected\\\",\\n    5: \\\"Canceled\\\",\\n    6: \\\"Failed\\\"\\n}\\n\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Processing\\n\\ndef main():\\n\\n    endpoint_quarantine_status = row.endpoint_quarantine_status[\\\"content\\\"]\\n    status_msg = \\\"Un-quarantine\\\" if endpoint_quarantine_status == \\\"Quarantined\\\" else \\\"Quarantine\\\"\\n    note_text = \u0027\u0027\\n    quarantine_command_state = C_OUTER[\\\"overall_command_state\\\"]\\n\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        row.quarantine_command_state = quarantine_command_state\\n        row.query_execution_date = QUERY_EXECUTION_DATE\\n        computer = C_OUTER[\\\"content\\\"][0]\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; command status for command id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    \\\"for computer \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; was \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, status_msg, row.quarantine_commandid, row.computerName, FINAL_STATUSES[computer[\\\"stateId\\\"]], FN_NAME)\\n        if quarantine_command_state == \\\"Completed\\\":\\n            row.quarantine_command_state = FINAL_STATUSES[computer[\\\"stateId\\\"]]\\n        else:\\n            row.quarantine_command_state = quarantine_command_state\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_commandid = row.quarantine_commandid\\ninputs.sep_status_type = \\\"quarantine\\\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_12r8v45\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_04ddrsa\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_12r8v45\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_00td1h5\"/\u003e\u003cserviceTask id=\"ServiceTask_0l56qqb\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n      \\\"input_params\\\": {\\\"sep_computername\\\": \\\"myhostname\\\", \\\"sep_domain\\\": null, \\\"sep_lastupdate\\\": null, \\\"sep_order: null,\\n      \\\"sep_os\\\": null, \\\"sep_pageindex\\\": null, \\\"sep_pageindex\\\": null, \\\"sep_sort\\\": null},\\n      \\\"query_execution_time\\\": \\\"2018-08-09 12:34:15\\\",\\n      \\\"content\\\"\\n                {\\n                  \\\"sort\\\": [\\n                    {\\n                      \\\"direction\\\": \\\"ASC\\\",\\n                      \\\"property\\\": \\\"COMPUTER_NAME\\\",\\n                      \\\"ascending\\\": true\\n                    }\\n                  ],\\n                  \\\"number\\\": 0,\\n                  \\\"firstPage\\\": true,\\n                  \\\"content\\\": [\\n                    {\\n                      \\\"profileVersion\\\": \\\"14.2.1031\\\",\\n                      \\\"elamOnOff\\\": 1,\\n                      \\\"avEngineOnOff\\\": 1,\\n                      \\\"profileChecksum\\\": null,\\n                      \\\"atpDeviceId\\\": null,\\n                      \\\"processorType\\\": \\\"Intel64 Family 6 Model 15 Stepping 1\\\",\\n                      \\\"oslanguage\\\": \\\"en-US\\\",\\n                      \\\"licenseId\\\": null,\\n                      \\\"licenseStatus\\\": -1,\\n                      \\\"group\\\": {\\n                        \\\"domain\\\": {\\n                          \\\"id\\\": \\\"908090000946C25D330E919313D23887\\\",\\n                          \\\"name\\\": \\\"Default\\\"\\n                        },\\n                        \\\"name\\\": \\\"My Company\\\",\\n                        \\\"fullPathName\\\": null,\\n                        \\\"externalReferenceId\\\": null,\\n                        \\\"source\\\": null,\\n                        \\\"id\\\": \\\"CAD80F000946C25D6C150831060AA326\\\"\\n                      },\\n                      \\\"uuid\\\": \\\"EA650B42-D10A-7F9F-A1D2-0A58C4F4CEB1\\\",\\n                      \\\"groupUpdateProvider\\\": false,\\n                      \\\"edrStatus\\\": 0,\\n                      \\\"freeDisk\\\": 56538476544,\\n                      \\\"diskDrive\\\": \\\"C:\\\\\\\\\\\",\\n                      \\\"osFunction\\\": \\\"Server\\\",\\n                      \\\"processorClock\\\": 2394,\\n                      \\\"mobilePhone\\\": \\\"\\\",\\n                      \\\"jobTitle\\\": \\\"\\\",\\n                      \\\"lastHeuristicThreatTime\\\": 0,\\n                      \\\"osname\\\": \\\"Windows Server 2012\\\",\\n                      \\\"winServers\\\": [\\n                        \\\"0.0.0.0\\\",\\n                        \\\"0.0.0.0\\\"\\n                      ],\\n                      \\\"deploymentMessage\\\": \\\"\\\",\\n                      \\\"idsSerialNo\\\": \\\"\\\",\\n                      \\\"employeeNumber\\\": \\\"\\\",\\n                      \\\"snacLicenseId\\\": null,\\n                      \\\"lastSiteId\\\": \\\"EE75B0850946C25D5287B58B5173A37C\\\",\\n                      \\\"uwf\\\": 2,\\n                      \\\"currentClientId\\\": \\\"256B2B130946C25D40C83823AA2E5D4C\\\",\\n                      \\\"osbitness\\\": \\\"x64\\\",\\n                      \\\"lastScanTime\\\": 1550825941000,\\n                      \\\"email\\\": \\\"\\\",\\n                      \\\"securityVirtualAppliance\\\": null,\\n                      \\\"worstInfectionIdx\\\": \\\"0\\\",\\n                      \\\"encryptedDevicePassword\\\": null,\\n                      \\\"lastServerId\\\": \\\"7D6AAA6F0946C25D170B3A2D442500B6\\\",\\n                      \\\"kernel\\\": null,\\n                      \\\"lastUpdateTime\\\": 1550835481557,\\n                      \\\"ptpOnOff\\\": 1,\\n                      \\\"majorVersion\\\": 14,\\n                      \\\"lastConnectedIpAddr\\\": \\\"9.70.194.93\\\",\\n                      \\\"agentVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"deploymentRunningVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"agentTimeStamp\\\": 1550835481557,\\n                      \\\"osminor\\\": 2,\\n                      \\\"osMajor\\\": 6,\\n                      \\\"deploymentTargetVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"osMinor\\\": 2,\\n                      \\\"osFlavorNumber\\\": 79,\\n                      \\\"logicalCpus\\\": 0,\\n                      \\\"deploymentPreVersion\\\": \\\"\\\",\\n                      \\\"hypervisorVendorId\\\": \\\"0\\\",\\n                      \\\"fbwf\\\": 2,\\n                      \\\"osversion\\\": \\\"6.2\\\",\\n                      \\\"dnsServers\\\": [\\n                        \\\"9.70.192.29\\\",\\n                        \\\"FEC0:0000:0000:FFFF:0000:0000:0000:0001\\\"\\n                      ],\\n                      \\\"vsicStatus\\\": 3,\\n                      \\\"deleted\\\": 0,\\n                      \\\"deploymentStatus\\\": \\\"302456832\\\",\\n                      \\\"computerTimeStamp\\\": 1550758769451,\\n                      \\\"bwf\\\": 2,\\n                      \\\"totalDiskSpace\\\": 81567,\\n                      \\\"homePhone\\\": \\\"\\\",\\n                      \\\"daOnOff\\\": 1,\\n                      \\\"computerDescription\\\": \\\"\\\",\\n                      \\\"pepOnOff\\\": 1,\\n                      \\\"bashStatus\\\": 1,\\n                      \\\"agentUsn\\\": 525374,\\n                      \\\"osName\\\": \\\"Windows Server 2012\\\",\\n                      \\\"patternIdx\\\": \\\"F592051A3024B9BD77C1FC9EE1D1ADC9\\\",\\n                      \\\"employeeStatus\\\": \\\"\\\",\\n                      \\\"tmpDevice\\\": null,\\n                      \\\"rebootRequired\\\": 0,\\n                      \\\"subnetMasks\\\": [\\n                        \\\"255.255.255.0\\\",\\n                        \\\"64\\\"\\n                      ],\\n                      \\\"minorVersion\\\": 2,\\n                      \\\"osservicePack\\\": \\\"\\\",\\n                      \\\"lastSiteName\\\": \\\"My Site\\\",\\n                      \\\"cidsEngineVersion\\\": \\\"0.0.0.0\\\",\\n                      \\\"lastDeploymentTime\\\": 1550585147000,\\n                      \\\"isGrace\\\": 0,\\n                      \\\"computerUsn\\\": 501645,\\n                      \\\"agentId\\\": \\\"6E5AA5CB0946C25D40C83823BB5107E6\\\",\\n                      \\\"cidsBrowserFfOnOff\\\": 1,\\n                      \\\"domainOrWorkgroup\\\": \\\"WORKGROUP\\\",\\n                      \\\"svaId\\\": null,\\n                      \\\"loginDomain\\\": \\\"LocalComputer\\\",\\n                      \\\"lastServerName\\\": \\\"WIN-4OA0GKJN830\\\",\\n                      \\\"contentUpdate\\\": 1,\\n                      \\\"writeFiltersStatus\\\": null,\\n                      \\\"infected\\\": 0,\\n                      \\\"memory\\\": 6441979904,\\n                      \\\"freeMem\\\": 2910998528,\\n                      \\\"officePhone\\\": \\\"\\\",\\n                      \\\"lastVirusTime\\\": 1550597487000,\\n                      \\\"telemetryMid\\\": \\\"890E283B-41D3-4340-A397-66F6AFCAF33E\\\",\\n                      \\\"idsVersion\\\": \\\"\\\",\\n                      \\\"cidsBrowserIeOnOff\\\": 1,\\n                      \\\"publicKey\\\": \\\"BgIAAACkAABSU0ExAAgAAAEAAQDfMtYpvbC2ZOrpGFbK76tuyp2MZ7/6EGsFrqAV3ZBMfvMllksVObpPYvDSc5vCjtzthb1301VADLAspayGytsdAj5z8+LLpOnJkHNg9tIunm1lLkBTitevI6G+nNjyKd7uPn3+bxjk1LL8g1exL2C2SMPEXubdUa1N5xwmhhPHp6PSIAjY74QUcNyplfvylMS9QRWoQ70mqNy9tLLef6+qCYWTqGa7QKXS0WUJs8sJMzWfCrpeMVAmU5/s3yEu+OI+9RKgOeSfy7wRzmAWHQTofjHkYGYqwXcwwLX7AbWjdcpYo0Kaecf8e5t2ZvWyR362EaNxn0HYSjpKraY1hLK1\\\",\\n                      \\\"quarantineDesc\\\": \\\"Host Integrity check is disabled.\\\\n Host Integrity policy has been disabled by the administrator.\\\",\\n                      \\\"cidsDrvMulfCode\\\": 0,\\n                      \\\"biosVersion\\\": \\\"INTEL  - 6040000 PhoenixBIOS 4.0 Release 6.0\\\",\\n                      \\\"rebootReason\\\": \\\"\\\",\\n                      \\\"telemetryHwid\\\": \\\"A942D8EB-32C3-E42F-FE83-723FDC431F32\\\",\\n                      \\\"cidsSilentMode\\\": 0,\\n                      \\\"creationTime\\\": 1550585043812,\\n                      \\\"macAddresses\\\": [\\n                        \\\"00-50-56-8B-A6-C3\\\",\\n                        \\\"00-50-56-8B-A6-C3\\\"\\n                      ],\\n                      \\\"idsChecksum\\\": null,\\n                      \\\"operatingSystem\\\": \\\"Windows Server 2012 \\\",\\n                      \\\"osmajor\\\": 6,\\n                      \\\"virtualizationPlatform\\\": \\\"Unknown\\\",\\n                      \\\"ipAddresses\\\": [\\n                        \\\"9.70.194.93\\\",\\n                        \\\"FE80:0000:0000:0000:FC67:074E:CD22:0188\\\"\\n                      ],\\n                      \\\"physicalCpus\\\": 1,\\n                      \\\"osBitness\\\": \\\"x64\\\",\\n                      \\\"cidsDefsetVersion\\\": \\\"190220061\\\",\\n                      \\\"cidsDrvOnOff\\\": 1,\\n                      \\\"computerName\\\": \\\"WIN-4OA0GKJN830\\\",\\n                      \\\"logonUserName\\\": \\\"Administrator\\\",\\n                      \\\"licenseExpiry\\\": 0,\\n                      \\\"osLanguage\\\": \\\"en-US\\\",\\n                      \\\"gateways\\\": [\\n                        \\\"9.70.194.1\\\",\\n                        \\\"9.70.194.1\\\",\\n                        \\\"0.0.0.0\\\",\\n                        \\\"0.0.0.0\\\"\\n                      ],\\n                      \\\"uniqueId\\\": \\\"D31AA16E0946C25D40C83823C500518B\\\",\\n                      \\\"department\\\": \\\"\\\",\\n                      \\\"isNpvdiClient\\\": 0,\\n                      \\\"dhcpServer\\\": \\\"0.0.0.0\\\",\\n                      \\\"osfunction\\\": \\\"Server\\\",\\n                      \\\"description\\\": \\\"\\\",\\n                      \\\"osflavorNumber\\\": 79,\\n                      \\\"tpmDevice\\\": \\\"0\\\",\\n                      \\\"onlineStatus\\\": 1,\\n                      \\\"lastDownloadTime\\\": 1550585418144,\\n                      \\\"apOnOff\\\": 1,\\n                      \\\"timeZone\\\": 480,\\n                      \\\"fullName\\\": \\\"\\\",\\n                      \\\"osVersion\\\": \\\"6.2\\\",\\n                      \\\"attributeExtension\\\": \\\"\\\",\\n                      \\\"atpServer\\\": \\\"\\\",\\n                      \\\"tamperOnOff\\\": 1,\\n                      \\\"osServicePack\\\": \\\"\\\",\\n                      \\\"agentType\\\": \\\"105\\\",\\n                      \\\"serialNumber\\\": \\\"VMware-42 0b 65 ea 0a d1 9f 7f-a1 d2 0a 58 c4 f4 ce b1\\\",\\n                      \\\"osElamStatus\\\": 0,\\n                      \\\"installType\\\": \\\"0\\\",\\n                      \\\"profileSerialNo\\\": \\\"CAD8-01/26/2019 08:00:11 062\\\",\\n                      \\\"hardwareKey\\\": \\\"1771D79454E53469DF4B290C06C104C9\\\",\\n                      \\\"firewallOnOff\\\": 1\\n                    }\\n                  ],\\n                  \\\"lastPage\\\": true,\\n                  \\\"totalPages\\\": 1,\\n                  \\\"size\\\": 20,\\n                  \\\"totalElements\\\": 2,\\n                  \\\"numberOfElements\\\": 2\\n                }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\nFN_NAME = \\\"SEP - Get Computers\\\"\\nWF_NAME = \\\"Get  Quarantine status\\\"\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"endpoint_quarantine_status\\\"]\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n\\n# Processing\\ndef main():\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        row.query_execution_date = QUERY_EXECUTION_DATE\\n        computer = C_OUTER[\\\"content\\\"][0]\\n        ep_name = computer[\\\"computerName\\\"]\\n        ep_osname = computer.get(\\\"osname\\\", \\\"\\\")\\n        if \\\"windows\\\" in ep_osname.lower():\\n            if (computer[\\\"quarantineDesc\\\"].find(\\\"Host Integrity check passed\\\") == -1):\\n                row.endpoint_quarantine_status = \\\"Quarantined\\\"\\n            else:\\n                row.endpoint_quarantine_status = \\\"Un-Quarantined\\\"\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Quarantine status of endpoint \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; is \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, ep_name, row.endpoint_quarantine_status, FN_NAME)\\n        else:\\n            newrow.endpoint_quarantine_status = \\\"N/A\\\"\\n    else:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n    if note_text:\\n        incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sep_computername = row.computerName\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_04ddrsa\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_15594a4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_04ddrsa\" sourceRef=\"ServiceTask_00td1h5\" targetRef=\"ServiceTask_0l56qqb\"/\u003e\u003cendEvent id=\"EndEvent_1adq8qh\"\u003e\u003cincoming\u003eSequenceFlow_15594a4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_15594a4\" sourceRef=\"ServiceTask_0l56qqb\" targetRef=\"EndEvent_1adq8qh\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0cv272w\"\u003e\u003ctext\u003e\u003c![CDATA[Get current command status for quarantine command by quarantine commandid. Input: Assigned from data table row.\nUpdate data table with latest status.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1j2wee7\" sourceRef=\"ServiceTask_00td1h5\" targetRef=\"TextAnnotation_0cv272w\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1gfad9d\"\u003e\u003ctext\u003e\u003c![CDATA[Refresh data table row for the \u0027Endpoint status\u0027 property.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1a7deoo\" sourceRef=\"ServiceTask_0l56qqb\" targetRef=\"TextAnnotation_1gfad9d\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_00td1h5\" id=\"ServiceTask_00td1h5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"243\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_12r8v45\" id=\"SequenceFlow_12r8v45_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"243\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0l56qqb\" id=\"ServiceTask_0l56qqb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"506\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04ddrsa\" id=\"SequenceFlow_04ddrsa_di\"\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"506\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"379.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1adq8qh\" id=\"EndEvent_1adq8qh_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"681\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"654\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15594a4\" id=\"SequenceFlow_15594a4_di\"\u003e\u003comgdi:waypoint x=\"606\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"681\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"598.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0cv272w\" id=\"TextAnnotation_0cv272w_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"231\" x=\"177\" y=\"46\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1j2wee7\" id=\"Association_1j2wee7_di\"\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1gfad9d\" id=\"TextAnnotation_1gfad9d_di\"\u003e\u003comgdc:Bounds height=\"32\" width=\"229\" x=\"441\" y=\"45\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1a7deoo\" id=\"Association_1a7deoo_di\"\u003e\u003comgdi:waypoint x=\"556\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"556\" xsi:type=\"omgdc:Point\" y=\"77\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "description": "Get the status of an Quarantine Endpoint command.",
-      "export_key": "wf_sep_get_quarantine_status",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668003939192,
-      "name": "Example: SEP - Get Quarantine status",
-      "object_type": "sep_endpoint_details",
-      "programmatic_name": "wf_sep_get_quarantine_status",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "9b599b31-9323-44c8-ad99-a34e71413e1e",
-      "workflow_id": 410
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_sep_upload_file_to_sepm",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_upload_file_to_sepm\" isExecutable=\"true\" name=\"Example: SEP - Upload file to SEPM server\"\u003e\u003cdocumentation\u003eRequest a file discovered by an EOC scan be uploaded to the SEPM server. Note: Only supports file executable types such as binary executable (.exe), batch (.bat), Windows installer package (.msi) etc.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0nxl5ad\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0pe71mo\" name=\"SEP - Upload File to SEPM\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a5fce4c1-b595-47b0-bfa0-781b802cba59\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_upload_file_to_sepm script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027inputs\u0027: {u\u0027sep_sha256\u0027: u\u0027590f9895c2cbe93d47c3f7a3104fb843edfb5d5741330593d7d302a1e11e0ba5\u0027, u\u0027sep_source\u0027: u\u0027FILESYSTEM\u0027,\\n                   u\u0027sep_computer_ids\u0027: u\u002789AD1BBB0946C25D25E6C0984E971D8A\u0027, u\u0027sep_file_path\u0027: u\u0027C:\\\\\\\\temp\\\\\\\\New Text Document.txt\u0027,\\n                   u\u0027sep_sha1\u0027: None, u\u0027sep_md5\u0027: None\\n                   },\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 14:46:08\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1226\\n                   }, \u0027success\u0027: True,\\n         \u0027content\u0027: {u\u0027commandID\u0027: u\u00271BFD8C9B3FD74FF4A2490FFE63314E7A\u0027},\\n         \u0027raw\u0027: \u0027{\\\"commandID\\\": \\\"1BFD8C9B3FD74FF4A2490FFE63314E7A\\\"}\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"commandID\\\"]\\nfn_name = \\\"fn_sep_upload_file_to_sepm\\\"\\nwf_name = \\\"Upload file to SEPM server\\\"\\ncontent = results.content\\ninputs = results.inputs\\n# Processing\\n\\nif content  is not None:\\n    noteText = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Command excuted with id  \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for artifact with \\\" \\\\\\n               \\\"type \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; from source \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(wf_name, content[\\\"commandID\\\"], row.artifact_type, unicode(row.artifact_value), inputs[\\\"sep_source\\\"], fn_name)\\n    row.upload_commandid = content[\\\"commandID\\\"]\\n\\nelse:\\n    noteText += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(wf_name, fn_name)\\n\\nincident.addNote(helper.createRichText(noteText))\",\"pre_processing_script\":\"inputs.sep_computer_ids = row.computer_id\\ninputs.sep_file_path = row.file_path\\ninputs.sep_source = rule.properties.sep_source\\nhash_lengths  = [64, 40, 32]\\nhvs = [None if h != len(row.hash_value) else row.hash_value for h in hash_lengths]\\ninputs.sep_sha256 = hvs[0]\\ninputs.sep_sha1 = hvs[1]\\ninputs.sep_md5 = hvs[2]\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0nxl5ad\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0gntbdm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0nxl5ad\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0pe71mo\"/\u003e\u003cserviceTask id=\"ServiceTask_1udvp4k\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027inputs\u0027: {u\u0027sep_status_type\u0027: u\u0027quarantine\u0027, u\u0027sep_commandid\u0027: u\u00277D3670DDF5A64A99B3721BF8A375B302\u0027},\\n          \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-04-26 15:25:55\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                      \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1256},\\n          \u0027success\u0027: True,\\n          \u0027content\u0027: {u\u0027sort\u0027: [{u\u0027direction\u0027: u\u0027ASC\u0027, u\u0027property\u0027: u\u0027Begintime\u0027, u\u0027ascending\u0027: True}], \u0027command_state\u0027: \u0027Completed\u0027, u\u0027number\u0027: 0, u\u0027firstPage\u0027: True, \u0027: 0, u\u0027content\u0027: [{u\u0027computerName\u0027: u\u0027WIN-N5KGH4CP3N3\u0027, u\u0027subStateId u\u0027binaryFileId\u0027: None, u\u0027lastUpdateTime\u0027:\\n                        u\u00272019-04-26T11:05:27Z\u0027, u\u0027domainName\u0027: u\u0027Default\u0027, u\u0027hardwareKey\u0027: u\u0027DC7D24D6465566D2941F35BC8D17801E\u0027,\\n                        u\u0027subStateDesc\u0027: u\u0027\u0027, u\u0027stateId\u0027: 3, u\u0027computerId\u0027: u\u002789AD1BBB0946C25D25E6C0984E971D8A\u0027, u\u0027computerIp\u0027: u\u00279.70.194.94\u0027, u\u0027beginTime\u0027: u\u00272019-04-26T11:05:27Z\u0027, u\u0027currentLoginUserName\u0027: u\u0027Administrator\u0027, u\u0027resultInXML\u0027: u\u0027\u0027, \u0027command_status_id\u0027: 3}], u\u0027lastPage\u0027: True, u\u0027totalPages\u0027: 1, u\u0027numberOfElements\u0027: 1, u\u0027totalElements\u0027: 1, u\u0027size\u0027: 20},\\n          \u0027raw\u0027: \u0027{\\\"sort\\\": [{\\\"direction\\\": \\\"ASC\\\", \\\"property\\\": \\\"Begintime\\\", \\\"ascending\\\": true}], \\\"command_state\\\": \\\"Completed\\\", \\\"number\\\": 0, \\\"firstPage\\\": true, \\\"content\\\": [{\\\"computerName\\\": \\\"WIN-N5KGH4CP3N3\\\", \\\"subStateId\\\": 0, \\\"binaryFileId\\\": null, \\\"lastUpdateTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"domainName\\\": \\\"Default\\\", \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\", \\\"subStateDesc\\\": \\\"\\\", \\\"stateId\\\": 3, \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\", \\\"computerIp\\\": \\\"9.70.194.94\\\", \\\"beginTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"currentLoginUserName\\\": \\\"Administrator\\\", \\\"resultInXML\\\": \\\"\\\", \\\"command_status_id\\\": 3}], \\\"lastPage\\\": true, \\\"totalPages\\\": 1, \\\"numberOfElements\\\": 1, \\\"totalElements\\\": 1, \\\"size\\\": 20}\u0027, \u0027reason\u0027: None, \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"file_upload_status\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Upload file to SEPM server\\\"\\nSTATUS_TYPE = \\\"upload\\\"\\nFINAL_STATUSES = {\\n    0: \\\"Initial / Not received\\\",\\n    1: \\\"Received\\\", \\n    2: \\\"In progress\\\",\\n    3: \\\"Completed\\\".format(STATUS_TYPE.capitalize()),\\n    4: \\\"Rejected\\\".format(STATUS_TYPE.capitalize()),\\n    5: \\\"Canceled\\\".format(STATUS_TYPE.capitalize()),\\n    6: \\\"Failed\\\".format(STATUS_TYPE.capitalize())\\n}\\nC_OUTER = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Processing\\n\\ndef main():\\n    upload_command_state = C_OUTER[\\\"overall_command_state\\\"]\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        row.query_execution_date = QUERY_EXECUTION_DATE\\n        computer = C_OUTER[\\\"content\\\"][0]\\n        if upload_command_state == \\\"Completed\\\":\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Upload command completed with status \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n                        \\\"for command id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for artifact with type \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FINAL_STATUSES[computer[\\\"stateId\\\"]], INPUTS[\\\"sep_commandid\\\"], row.artifact_type,\\n                    unicode(row.artifact_value), FN_NAME)\\n            row.file_upload_status = FINAL_STATUSES[computer[\\\"stateId\\\"]]\\n            if computer[\\\"stateId\\\"] == 3:\\n                row.file_id = computer[\\\"binaryFileId\\\"]\\n        else:\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Upload command in \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; state for command \\\" \\\\\\n                        \\\"id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for artifact with type \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n                   \\\"\u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FINAL_STATUSES[computer[\\\"stateId\\\"]], INPUTS[\\\"sep_commandid\\\"], row.artifact_type,\\n                    unicode(row.artifact_value), FN_NAME)\\n            row.file_upload_status = upload_command_state\\n    else:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                    \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_commandid = row.upload_commandid\\ninputs.sep_status_type = \\\"upload\\\"\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0gntbdm\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_01wjfew\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0gntbdm\" sourceRef=\"ServiceTask_0pe71mo\" targetRef=\"ServiceTask_1udvp4k\"/\u003e\u003cendEvent id=\"EndEvent_1g71ogb\"\u003e\u003cincoming\u003eSequenceFlow_01wjfew\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_01wjfew\" sourceRef=\"ServiceTask_1udvp4k\" targetRef=\"EndEvent_1g71ogb\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1wem961\"\u003e\u003ctext\u003e\u003c![CDATA[Initiate file upload to SEPM server.\nInputs: Assigned from a data table entry. Output: upload commandid\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1datj2m\" sourceRef=\"ServiceTask_0pe71mo\" targetRef=\"TextAnnotation_1wem961\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1usp072\"\u003e\u003ctext\u003e\u003c![CDATA[Get initial command status for upload command by upload commandid.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_02p06gl\" sourceRef=\"ServiceTask_1udvp4k\" targetRef=\"TextAnnotation_1usp072\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0pe71mo\" id=\"ServiceTask_0pe71mo_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"249\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0nxl5ad\" id=\"SequenceFlow_0nxl5ad_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"249\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"223.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1udvp4k\" id=\"ServiceTask_1udvp4k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"470\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0gntbdm\" id=\"SequenceFlow_0gntbdm_di\"\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"470\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"364.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1g71ogb\" id=\"EndEvent_1g71ogb_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"680\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"653\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_01wjfew\" id=\"SequenceFlow_01wjfew_di\"\u003e\u003comgdi:waypoint x=\"570\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"680\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"580\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1wem961\" id=\"TextAnnotation_1wem961_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"223\" x=\"187\" y=\"23\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1datj2m\" id=\"Association_1datj2m_di\"\u003e\u003comgdi:waypoint x=\"300\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"299\" xsi:type=\"omgdc:Point\" y=\"87\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1usp072\" id=\"TextAnnotation_1usp072_di\"\u003e\u003comgdc:Bounds height=\"49\" width=\"231\" x=\"404\" y=\"30\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_02p06gl\" id=\"Association_02p06gl_di\"\u003e\u003comgdi:waypoint x=\"521\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"521\" xsi:type=\"omgdc:Point\" y=\"103\"/\u003e\u003comgdi:waypoint x=\"520\" xsi:type=\"omgdc:Point\" y=\"84\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Request a file discovered by an EOC scan be uploaded to the SEPM server. Note: Only supports file executable types such as binary executable (.exe), batch (.bat), Windows installer package (.msi) etc.",
-      "export_key": "wf_sep_upload_file_to_sepm",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002347401,
-      "name": "Example: SEP - Upload file to SEPM server",
-      "object_type": "sep_eoc_scan_results",
-      "programmatic_name": "wf_sep_upload_file_to_sepm",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "f5ad77f8-b227-44c7-9ddb-eefaa05d175e",
-      "workflow_id": 426
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_sep_get_remediation_status",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_remediation_status\" isExecutable=\"true\" name=\"Example: SEP - Get Remediation status\"\u003e\u003cdocumentation\u003eGet the status of an remediation scan command.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1va6qu8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ovi8ki\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n    \u0027inputs\u0027: {u\u0027sep_commandid\u0027: u\u00272F260501C22842ABBA7EB0805D92EFE0\u0027},\\n    \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-03-01 12:46:27\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027,\\n    \u0027execution_time_ms\u0027: 1085},\\n    \u0027success\u0027: True,\\n    \u0027content\u0027:\\n                {\\n                  \\\"sort\\\": [\\n                    {\\n                      \\\"direction\\\": \\\"ASC\\\",\\n                      \\\"property\\\": \\\"Begintime\\\",\\n                      \\\"ascending\\\": true\\n                    }\\n                  ],\\n                  \\\"number\\\": 0,\\n                  \\\"firstPage\\\": true,\\n                  \\\"content\\\": [\\n                    {\\n                      \\\"computerName\\\": \\\"ep1\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"1771D79454E53469DF4B290C06C104C9\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"D31AA16E0946C25D40C83823C500518B\\\",\\n                      \\\"computerIp\\\": \\\"192.168.194.93\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    },\\n                    {\\n                      \\\"computerName\\\": \\\"ep2\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\",\\n                      \\\"computerIp\\\": \\\"192.168.194.94\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    }\\n                  ],\\n                  \\\"lastPage\\\": true,\\n                  \\\"totalPages\\\": 1,\\n                  \\\"size\\\": 20,\\n                  \\\"totalElements\\\": 2,\\n                  \\\"numberOfElements\\\": 2\\n                }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"remediation_status\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Get Remediation status\\\"\\nSTATUS_TYPE = \\\"remediate\\\"\\nREMEDITATE_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    remediation_command_state = C_OUTER[\\\"overall_command_state\\\"]\\n    total_remediation_count = C_OUTER[\\\"total_remediation_count\\\"]\\n    total_remediation_ep_count = C_OUTER[\\\"total_remediation_ep_count\\\"]\\n    total_fail_remediation_count = C_OUTER[\\\"total_fail_remediation_count\\\"]\\n    total_ep_count = C_OUTER[\\\"total_ep_count\\\"]\\n    att_name = C_OUTER[\\\"att_name\\\"]\\n\\n    note_text = \u0027\u0027\\n    att_note = \u0027\u0027\\n    if C_OUTER is not None:\\n        if total_remediation_count \u0026gt; 0:\\n            att_note = \\\"\u0026lt;br\u0026gt;Added full result as an attachment. Attachment name : \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(att_name)\\n            \\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Remediate artifact returned \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; remediated \\\" \\\\\\n                    \\\"artifacts on \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; out of a total of \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; endpoints for artifact with type \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    \\\"and value \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{7}\u0026lt;/b\u0026gt;.{6}\\\" \\\\\\n            .format(WF_NAME, total_remediation_count, total_remediation_ep_count, total_ep_count, row.artifact_type,\\n                    unicode(row.artifact_value), att_note, FN_NAME)\\n\\n        if remediation_command_state == \\\"Completed\\\":\\n            if total_fail_remediation_count == 0 and total_remediation_count \u0026gt; 0:\\n                row.remediation_status = u\\\"{0} at {1}. For remediation results see note/attachment.\\\".format(remediation_command_state, REMEDITATE_EXECUTION_DATE)\\n            elif total_fail_remediation_count == 0 and total_remediation_count == 0:\\n                row.remediation_status = \\\"No match found\\\"\\n            elif total_fail_remediation_count \u0026gt; 0:\\n                row.remediation_status = \\\"Failed\\\"\\n        else:\\n            row.remediation_status = remediation_command_state\\n    else:\\n        row.remediation_status = remediation_command_state\\n        note_text += u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Remediate artifact returned \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results for \\\" \\\\\\n                     \\\"for artifact with type \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, row.artifact_type, unicode(row.artifact_value), FN_NAME)\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"pre_processing_script\":\"inputs.sep_incident_id = incident.id\\ninputs.sep_commandid = row.remediation_commandid\\ninputs.sep_status_type = \\\"remediation\\\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1va6qu8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1mk16pm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1va6qu8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ovi8ki\"/\u003e\u003cendEvent id=\"EndEvent_13zxfd0\"\u003e\u003cincoming\u003eSequenceFlow_1mk16pm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1mk16pm\" sourceRef=\"ServiceTask_0ovi8ki\" targetRef=\"EndEvent_13zxfd0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19afvuj\"\u003e\u003ctext\u003e\u003c![CDATA[Get current command status for a remediation command by remediation commandid. Input: Assigned from data table row.\nUpdate data table with latest status.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_10o7p7s\" sourceRef=\"ServiceTask_0ovi8ki\" targetRef=\"TextAnnotation_19afvuj\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ovi8ki\" id=\"ServiceTask_0ovi8ki_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"277\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1va6qu8\" id=\"SequenceFlow_1va6qu8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"277\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"237.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_13zxfd0\" id=\"EndEvent_13zxfd0_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"432\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"450\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mk16pm\" id=\"SequenceFlow_1mk16pm_di\"\u003e\u003comgdi:waypoint x=\"377\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"432\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"404.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19afvuj\" id=\"TextAnnotation_19afvuj_di\"\u003e\u003comgdc:Bounds height=\"60\" width=\"259\" x=\"197\" y=\"41\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_10o7p7s\" id=\"Association_10o7p7s_di\"\u003e\u003comgdi:waypoint x=\"327\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"327\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Get the status of an remediation scan command.",
-      "export_key": "wf_sep_get_remediation_status",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002344483,
-      "name": "Example: SEP - Get Remediation status",
-      "object_type": "sep_eoc_scan_results",
-      "programmatic_name": "wf_sep_get_remediation_status",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "9bc104af-53ec-4b0c-8161-84b20cc171c7",
-      "workflow_id": 422
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_sep_get_groups_information",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_groups_information\" isExecutable=\"true\" name=\"Example: SEP - Get Groups information\"\u003e\u003cdocumentation\u003eGet groups information.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0laeki3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0wjv59v\" name=\"SEP - Get Domains\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17245e2-ae90-46aa-ae44-cc0d37b8387c\"\u003e{\"inputs\":{},\"post_processing_script\":\"fn_name = \\\"fn_sep_get_domains\\\"\\nwf_name = \\\"Example: SEP - Get Groups information\\\"\\ncontent = results.content\\ndomainid = None\\nfor i in range(len(content)):\\n  if content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    domainid = content[i][\\\"id\\\"]\\n    break\\nif domainid is not None:\\n    workflow.addProperty(\\\"domid_exists\\\", {})\\nelse:\\n    note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The domain name  \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; was not found \\\" \\\\\\n                u\\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(wf_name, unicode(rule.properties.sep_domain_name), fn_name)\\n    incident.addNote(helper.createRichText(note_text))\",\"result_name\":\"get_domains_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0laeki3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1auavki\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0laeki3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0wjv59v\"/\u003e\u003cserviceTask id=\"ServiceTask_1fdl7t3\" name=\"SEP - Get Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"da72c4a8-45c1-4633-9d18-9ef6bd03dae9\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_groups script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n         \u0027content\u0027: {\\n                      \\\"sort\\\": [\\n                        {\\n                          \\\"direction\\\": \\\"ASC\\\",\\n                          \\\"property\\\": \\\"NAME\\\",\\n                          \\\"ascending\\\": true\\n                        }\\n                      ],\\n                      \\\"number\\\": 0,\\n                      \\\"firstPage\\\": true,\\n                      \\\"content\\\": [\\n                        {\\n                          \\\"policyDate\\\": 1548489611062,\\n                          \\\"domain\\\": {\\n                            \\\"id\\\": \\\"908090000946C25D330E919313D23887\\\",\\n                            \\\"name\\\": \\\"Default\\\"\\n                          },\\n                          \\\"numberOfRegisteredUsers\\\": 1,\\n                          \\\"description\\\": \\\"\\\",\\n                          \\\"created\\\": 1548481072007,\\n                          \\\"policySerialNumber\\\": \\\"4CBD-01/26/2019 08:00:11 062\\\",\\n                          \\\"lastModified\\\": 1548481072007,\\n                          \\\"fullPathName\\\": \\\"My Company\\\\\\\\Default Group\\\",\\n                          \\\"createdBy\\\": \\\"AF3C39A10A320801000000DBF200C60A\\\",\\n                          \\\"numberOfPhysicalComputers\\\": 1,\\n                          \\\"customIpsNumber\\\": \\\"\\\",\\n                          \\\"id\\\": \\\"4CBD63EE0946C25D1011DB1872A1736A\\\",\\n                          \\\"policyInheritanceEnabled\\\": true,\\n                          \\\"name\\\": \\\"Default Group\\\"\\n                        },\\n                        {\\n                          \\\"policyDate\\\": 1548489611062,\\n                          \\\"domain\\\": {\\n                            \\\"id\\\": \\\"908090000946C25D330E919313D23887\\\",\\n                            \\\"name\\\": \\\"Default\\\"\\n                          },\\n                          \\\"numberOfRegisteredUsers\\\": 1,\\n                          \\\"description\\\": \\\"\\\",\\n                          \\\"created\\\": 1548481072007,\\n                          \\\"policySerialNumber\\\": \\\"CAD8-01/26/2019 08:00:11 062\\\",\\n                          \\\"lastModified\\\": 1548481072007,\\n                          \\\"fullPathName\\\": \\\"My Company\\\",\\n                          \\\"createdBy\\\": \\\"AF3C39A10A320801000000DBF200C60A\\\",\\n                          \\\"number OfPhysicalComputers\\\": 1,\\n                          \\\"customIpsNumber\\\": \\\"\\\",\\n                          \\\"id\\\": \\\"CAD80F000946C25D6C150831060AA326\\\",\\n                          \\\"policyInheritanceEnabled\\\": false,\\n                          \\\"name\\\": \\\"My Company\\\"\\n                        }\\n                      ],\\n                      \\\"lastPage\\\": true,\\n                      \\\"totalPages\\\": 1,\\n                      \\\"size\\\": 25,\\n                      \\\"totalElements\\\": 2,\\n                      \\\"numberOfElements\\\": 2\\n                     }\\n\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_groups script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"group_name\\\", \\\"group_id\\\", \\\"group_description\\\", \\\"fullPathName\\\",\\n                   \\\"numberOfPhysicalComputers\\\",\\\"policyInheritanceEnabled\\\"]\\nFN_NAME = \\\"fn_symc_sep_get_groups\\\"\\nWF_NAME = \\\"Get Groups information\\\"\\nDATA_TBL_FIELDS_DOM = [\\\"domain_name\\\", \\\"domain_id\\\"]\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nDOMAIN_NAME = rule.properties.sep_domain_name\\n\\n# Processing\\ndef main():\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; results returned for domain \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, results[\\\"content\\\"][\\\"numberOfElements\\\"], DOMAIN_NAME, FN_NAME)\\n        groups = C_OUTER[\\\"content\\\"]\\n        for i in range(len(groups)):\\n            newrow = incident.addRow(\\\"sep_groups\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            for f in DATA_TBL_FIELDS:\\n                try:\\n                    f_base = f.split(\u0027_\u0027)[1]\\n                except:\\n                    f_base = f\\n                if f == \\\"query_execution_time\\\":\\n                    continue\\n                if groups[i][f_base] is not None:\\n                      newrow[f] = groups[i][f_base]\\n\\n            domain = groups[i][\\\"domain\\\"]\\n            if domain is not None:\\n                for d in DATA_TBL_FIELDS_DOM:\\n                    d_base = d.split(\u0027_\u0027)[1]\\n                    newrow[d] = domain[d_base]\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for domain \\\" \\\\\\n                     \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, DOMAIN_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\ndomain_content = domain_content_results.content\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domain = domain_content[i][\\\"id\\\"]\\n    break\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1sjbew6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_07x2ixb\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1nbpqxw\"\u003e\u003cincoming\u003eSequenceFlow_07x2ixb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_07x2ixb\" sourceRef=\"ServiceTask_1fdl7t3\" targetRef=\"EndEvent_1nbpqxw\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_177475l\"\u003e\u003cincoming\u003eSequenceFlow_1auavki\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1sjbew6\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_09uvsaf\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_1auavki\" sourceRef=\"ServiceTask_0wjv59v\" targetRef=\"ExclusiveGateway_177475l\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1sjbew6\" name=\"Domain id exists\" sourceRef=\"ExclusiveGateway_177475l\" targetRef=\"ServiceTask_1fdl7t3\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"#Enter supplemental script\\n#Variables instantiated in this editor are available\\n#for use in the expression above\",\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cendEvent id=\"EndEvent_1elyur7\"\u003e\u003cincoming\u003eSequenceFlow_09uvsaf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_09uvsaf\" name=\"Domain id does not exist\" sourceRef=\"ExclusiveGateway_177475l\" targetRef=\"EndEvent_1elyur7\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1tuz1dp\"\u003e\u003ctext\u003eGet domain id by name. Input: Domain name selected from activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0mbznxe\" sourceRef=\"ServiceTask_0wjv59v\" targetRef=\"TextAnnotation_1tuz1dp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1b12v14\"\u003e\u003ctext\u003e\u003c![CDATA[Get group information by domain id.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0jcaxmf\" sourceRef=\"ServiceTask_1fdl7t3\" targetRef=\"TextAnnotation_1b12v14\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0wjv59v\" id=\"ServiceTask_0wjv59v_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"256\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0laeki3\" id=\"SequenceFlow_0laeki3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"256\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"227\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1fdl7t3\" id=\"ServiceTask_1fdl7t3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"610\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1nbpqxw\" id=\"EndEvent_1nbpqxw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"785\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"758\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_07x2ixb\" id=\"SequenceFlow_07x2ixb_di\"\u003e\u003comgdi:waypoint x=\"710\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"785\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"702.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_177475l\" id=\"ExclusiveGateway_177475l_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"450\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"475\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1auavki\" id=\"SequenceFlow_1auavki_di\"\u003e\u003comgdi:waypoint x=\"356\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"450\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"403\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1sjbew6\" id=\"SequenceFlow_1sjbew6_di\"\u003e\u003comgdi:waypoint x=\"500\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"610\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"83\" x=\"514\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1elyur7\" id=\"EndEvent_1elyur7_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"457\" y=\"329\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"475\" y=\"368\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_09uvsaf\" id=\"SequenceFlow_09uvsaf_di\"\u003e\u003comgdi:waypoint x=\"475\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"475\" xsi:type=\"omgdc:Point\" y=\"329\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"79\" x=\"451\" y=\"273\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1tuz1dp\" id=\"TextAnnotation_1tuz1dp_di\"\u003e\u003comgdc:Bounds height=\"62\" width=\"189\" x=\"211\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0mbznxe\" id=\"Association_0mbznxe_di\"\u003e\u003comgdi:waypoint x=\"306\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"306\" xsi:type=\"omgdc:Point\" y=\"123\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1b12v14\" id=\"TextAnnotation_1b12v14_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"203\" x=\"558\" y=\"62\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0jcaxmf\" id=\"Association_0jcaxmf_di\"\u003e\u003comgdi:waypoint x=\"660\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"660\" xsi:type=\"omgdc:Point\" y=\"92\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Get groups information.",
-      "export_key": "wf_sep_get_groups_information",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002337850,
-      "name": "Example: SEP - Get Groups information",
-      "object_type": "incident",
-      "programmatic_name": "wf_sep_get_groups_information",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "a9d9db3a-97cf-4f57-829a-47cc9e60fe69",
-      "workflow_id": 413
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_sep_assign_fingerprint_list_to_lockdown_group",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_assign_fingerprint_list_to_lockdown_group\" isExecutable=\"true\" name=\"Example: SEP - Assign Blacklist to lockdown group\"\u003e\u003cdocumentation\u003eAssign a blacklist fingerprint list to a group for system lockdown.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ntekla\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ntekla\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0k7dyaf\"/\u003e\u003cserviceTask id=\"ServiceTask_0k7dyaf\" name=\"SEP - Get Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e3e94d0c-e2c9-4f76-9e41-6878e718e8de\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027, u\u0027sep_domainid\u0027: u\u0027908090000946C25D330E919313D23887\u0027}, \\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-28 16:23:05\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1153}, \\n        \u0027success\u0027: True, \\n        \u0027content\u0027: {u\u0027description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027hashType\u0027: u\u0027MD5\u0027, u\u0027source\u0027: u\u0027WEBSERVICE\u0027, \\n                    u\u0027groupIds\u0027: [u\u00277E4BB119A9FE9DC526EDABFB1EE261B8\u0027], u\u0027data\u0027: [u\u0027482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027], \\n                    u\u0027id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027, u\u0027name\u0027: u\u0027Blacklist_2\u0027}, \\n        \u0027raw\u0027: \u0027{\\\"description\\\": \\\"Hash of type Malware MD5 Hash\\\", \\\"hashType\\\": \\\"MD5\\\", \\\"source\\\": \\\"WEBSERVICE\\\", \u0027\\n               \u0027\\\"groupIds\\\": [\\\"7E4BB119A9FE9DC526EDABFB1EE261B8\\\"], \\\"data\\\": [\\\"482F9B6E0CC4C1DBBD772AAAF088CB3A\\\"], \u0027\\n               \u0027\\\"id\\\": \\\"E60B061FDD844EBF9778D4BD2AC3942A\\\", \\\"name\\\": \\\"Blacklist_2\\\"}\u0027, \\n        \u0027reason\u0027: None, \\n        \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_fingerprint_list script\\nFN_NAME = \\\"fn_sep_get_fingerprint_list\\\"\\nWF_NAME = \\\"Assign Fingerprint List to lockdown group\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\n\\n\\ndef main():\\n    note_text = \u0027\u0027\\n\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and int(CONTENT[\\\"errorCode\\\"]) == 410:\\n            # The finger print list doesn\u0027t exist.\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; does not exist \\\" \\\\\\n                        \\\"for domain id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_name\\\"], INPUTS[\\\"sep_domainid\\\"],\\n                        FN_NAME)\\n    else:\\n        noteText += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned  for \\\" \\\\\\n                    \\\"fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and domain id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient \\\" \\\\\\n                    \\\"function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_name\\\"],\\n                                                 INPUTS[\\\"sep_domainid\\\"], FN_NAME)\\n    if note_text:\\n        incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_domainid = row.domain_id\\ninputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name\",\"result_name\":\"get_fingerprintlist_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ntekla\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0o19zlo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_1vdzpa9\" name=\"SEP - Assign Fingerprint List to ...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"edb1beff-d01c-4334-aeb6-45d9a65831d4\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_assign_fingerprint_list_to_group ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027, u\u0027sep_groupid\u0027: u\u00277E4BB119A9FE9DC526EDABFB1EE261B8\u0027},\\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-28 17:53:52\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027,\\n                   \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1225},\\n        \u0027success\u0027: True,\\n        \u0027content\u0027: \u0027\u0027,\\n        \u0027raw\u0027: \u0027\\\"\\\"\u0027,\\n        \u0027reason\u0027: None,\\n        \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\nFN_NAME = \\\"fn_sep_assign_fingerprint_list_to_group\\\"\\nWF_NAME = \\\"Assign Fingerprint List to lockdown group\\\"\\nDATA_TBL_FIELDS = [\\\"domain_name\\\", \\\"list_name\\\", \\\"list_id\\\", \\\"list_description\\\", \\\"hash_values\\\", \\\"hash_type\\\", \\\"group_ids\\\"]\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and int(CONTENT[\\\"errorCode\\\"]) == 400:\\n            # The finger print list doesn\u0027t exist.\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; does not exist or is invalid \\\" \\\\\\n                        \\\"for domain id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format( WF_NAME, INPUTS[\\\"sep_fingerprintlist_name\\\"], row.domain_id, FN_NAME)\\n        else:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully assigned fingerprint list  with id \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to group with id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_id\\\"], INPUTS[\\\"sep_groupid\\\"], FN_NAME)\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned \\\" \\\\\\n                     \\\"with fingerprint id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and group id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_id\\\"], INPUTS[\\\"sep_groupid\\\"], FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"content = workflow.properties.get_fingerprintlist_results.content\\ninputs.sep_fingerprintlist_id = content[\\\"id\\\"]\\ninputs.sep_groupid = row.group_id\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0o19zlo\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_151camr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0o19zlo\" sourceRef=\"ServiceTask_0k7dyaf\" targetRef=\"ServiceTask_1vdzpa9\"/\u003e\u003cendEvent id=\"EndEvent_1undvlq\"\u003e\u003cincoming\u003eSequenceFlow_151camr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_151camr\" sourceRef=\"ServiceTask_1vdzpa9\" targetRef=\"EndEvent_1undvlq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0exjdgx\"\u003e\u003ctext\u003e\u003c![CDATA[Get fingerprint list id by name for domain by id. Input: Parameter fingerprint list assigned from activity field, domain id from data table row.\u00a0\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_024d5zv\" sourceRef=\"ServiceTask_0k7dyaf\" targetRef=\"TextAnnotation_0exjdgx\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ld2gpb\"\u003e\u003ctext\u003e\u003c![CDATA[Assign (SEP) fingerprint list by id to group by id. Input: Group parameter assigned from data table row.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0i8njzx\" sourceRef=\"ServiceTask_1vdzpa9\" targetRef=\"TextAnnotation_0ld2gpb\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ntekla\" id=\"SequenceFlow_0ntekla_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"299\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"203.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0k7dyaf\" id=\"ServiceTask_0k7dyaf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"299\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1vdzpa9\" id=\"ServiceTask_1vdzpa9_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"571\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0o19zlo\" id=\"SequenceFlow_0o19zlo_di\"\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"571\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"440\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1undvlq\" id=\"EndEvent_1undvlq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"715\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"688\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_151camr\" id=\"SequenceFlow_151camr_di\"\u003e\u003comgdi:waypoint x=\"671\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"715\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"648\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0exjdgx\" id=\"TextAnnotation_0exjdgx_di\"\u003e\u003comgdc:Bounds height=\"76\" width=\"214\" x=\"242\" y=\"37\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_024d5zv\" id=\"Association_024d5zv_di\"\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"350\" xsi:type=\"omgdc:Point\" y=\"113\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ld2gpb\" id=\"TextAnnotation_0ld2gpb_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"297\" x=\"472\" y=\"39\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0i8njzx\" id=\"Association_0i8njzx_di\"\u003e\u003comgdi:waypoint x=\"621\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"621\" xsi:type=\"omgdc:Point\" y=\"93\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Assign a blacklist fingerprint list to a group for system lockdown.",
-      "export_key": "wf_sep_assign_fingerprint_list_to_lockdown_group",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002340103,
-      "name": "Example: SEP - Assign Blacklist to lockdown group",
-      "object_type": "sep_groups",
-      "programmatic_name": "wf_sep_assign_fingerprint_list_to_lockdown_group",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "483838fc-fbaa-4207-92df-b1e3f5dbd43a",
-      "workflow_id": 416
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_sep_delete_hash_from_fingerprint_list",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_delete_hash_from_fingerprint_list\" isExecutable=\"true\" name=\"Example: SEP - Delete Hash from Blacklist\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Update a blacklist fingerprint list to remove an MD5 hash.\nNote: The fingerprint list will be deleted if only a single MD5 hash is remaining in the list.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0uc7t2u\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0am1izt\" name=\"SEP - Get Domains\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17245e2-ae90-46aa-ae44-cc0d37b8387c\"\u003e{\"inputs\":{},\"post_processing_script\":\"fn_name = \\\"fn_sep_get_domains\\\"\\nwf_name = \\\"Delete Hash from Fingerprint List\\\"\\ncontent = results.content\\ndomainid = None\\nfor i in range(len(content)):\\n  if content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    domainid = content[i][\\\"id\\\"]\\n    break\\nif domainid is not None:\\n    workflow.addProperty(\\\"domid_exists\\\", {})\\nelse:\\n    note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The domain name  \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; was not found \\\" \\\\\\n                u\\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(wf_name, unicode(rule.properties.sep_domain_name), fn_name)\\n    incident.addNote(helper.createRichText(note_text))\",\"result_name\":\"get_domains_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0uc7t2u\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ve607k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0uc7t2u\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0am1izt\"/\u003e\u003cserviceTask id=\"ServiceTask_0giri6n\" name=\"SEP - Get Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e3e94d0c-e2c9-4f76-9e41-6878e718e8de\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027, u\u0027sep_domainid\u0027: u\u0027908090000946C25D330E919313D23887\u0027},\\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-28 16:23:05\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1153},\\n        \u0027success\u0027: True,\\n        \u0027content\u0027: {u\u0027description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027hashType\u0027: u\u0027MD5\u0027, u\u0027source\u0027: u\u0027WEBSERVICE\u0027,\\n                    u\u0027groupIds\u0027: [u\u00277E4BB119A9FE9DC526EDABFB1EE261B8\u0027], u\u0027data\u0027: [u\u0027482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027],\\n                    u\u0027id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027, u\u0027name\u0027: u\u0027Blacklist_2\u0027},\\n        \u0027raw\u0027: \u0027{\\\"description\\\": \\\"Hash of type Malware MD5 Hash\\\", \\\"hashType\\\": \\\"MD5\\\", \\\"source\\\": \\\"WEBSERVICE\\\", \u0027\\n               \u0027\\\"groupIds\\\": [\\\"7E4BB119A9FE9DC526EDABFB1EE261B8\\\"], \\\"data\\\": [\\\"482F9B6E0CC4C1DBBD772AAAF088CB3A\\\"], \u0027\\n               \u0027\\\"id\\\": \\\"E60B061FDD844EBF9778D4BD2AC3942A\\\", \\\"name\\\": \\\"Blacklist_2\\\"}\u0027,\\n        \u0027reason\u0027: None,\\n        \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_fingerprint_list script\\nFN_NAME = \\\"fn_get_fingerprint_list\\\"\\nWF_NAME = \\\"Delete Hash from Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\ndef main():\\n    fpl_exists = hash_in_list = last_hash_in_list = False\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and CONTENT[\\\"errorCode\\\"] == 410:\\n            # The finger print list doesn\u0027t already exist.\\n            pass\\n        elif \\\"data\\\" in CONTENT:\\n            # Finger print list exists set flag for gateway.\\n            fpl_exists = True\\n            workflow.addProperty(\\\"fpl_exists\\\", {})\\n            # Add property  whcih can be used by delete fingerprint list function if called.\\n            workflow.addProperty(\\\"sep_fingerprintlist_name\\\", {\\\"fingerprintlist_name\\\": INPUTS[\\\"sep_fingerprintlist_name\\\"]})\\n        if \\\"data\\\" in CONTENT and artifact.value.upper() in [d.upper() for d in CONTENT[\\\"data\\\"]]:\\n            # Finger print list exists and hash in list set flag for hash in list.\\n            hash_in_list = True\\n            workflow.addProperty(\\\"hash_in_list\\\", {})\\n            if len(CONTENT[\\\"data\\\"]) == 1:\\n                # This is the last hash value, delete list instead.\\n                last_hash_in_list = True\\n                workflow.addProperty(\\\"last_hash_in_list\\\", {})\\n\\n    if not hash_in_list:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; has not been detected in the \\\" \\\\\\n                    u\\\"fingerprint list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for domain id \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                    INPUTS[\\\"sep_domainid\\\"], FN_NAME)\\n        incident.addNote(helper.createRichText(note_text))\\n\\n    if last_hash_in_list:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; is the only hash in the fingerprint \\\" \\\\\\n                    u\\\"list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for domain id \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                    INPUTS[\\\"sep_domainid\\\"], FN_NAME)\\n        incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\ndomain_content = domain_content_results.content\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = domain_content[i][\\\"id\\\"]\\n    break\\n\\ninputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name\",\"result_name\":\"fpl_content_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0v2nltq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_11h8805\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_162hm01\" name=\"SEP - Update Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"86fbaf45-bb0f-4ba0-a988-cc603d315e49\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_update_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027,\\n                   u\u0027sep_hash_value\u0027: u\u00270B26E313ED4A7CA6904B0E9369E5B957,482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027,\\n                   u\u0027sep_domainid\u0027: u\u0027A9B4B7160946C25D24B6AA458EF5557F\u0027,\\n                   u\u0027sep_fingerprintlist_id\u0027: u\u0027D132F4BA85D64E9F941906C2ECBF3F5F\u0027\\n                   },\\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 10:48:45\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost.com\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1131\\n                    }, \u0027success\u0027: True,\\n                    \u0027content\u0027: \u0027\u0027,\\n                    \u0027raw\u0027: \u0027\\\"\\\"\u0027,\\n                    \u0027reason\u0027: None,\\n                    \u0027version\u0027: \u00271.0\u0027\\n\\n}\\n\\\"\\\"\\\"\\nFN_NAME = \\\"fn_sep_update_fingerprint_list\\\"\\nWF_NAME = \\\"Delete Hash from Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\ndef main():\\n    if CONTENT is not None:\\n        # If we got here we assume we are successsful, no status messgae is returned by api.\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully removed MD5 hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from fingerprint \\\" \\\\\\n                    u\\\"list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                    FN_NAME)\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                     \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\nfpl_content_results = workflow.properties.fpl_content_results\\ndomain_content = domain_content_results.content\\nfpl_content = fpl_content_results.content\\n\\ninputs.sep_hash_value = artifact.value\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = domain_content[i][\\\"id\\\"]\\n    break\\n\\nif artifact.description is not None:\\n    inputs.sep_description = artifact.description.content\\nelse:\\n    inputs.sep_description = u\\\"Hash of type {}\\\".format(unicode(artifact.type))\\n    \\nif fpl_content[\\\"name\\\"] ==  rule.properties.sep_fingerprintlist_name:\\n    inputs.sep_fingerprintlist_id = fpl_content[\\\"id\\\"]\\n\\n\\nif fpl_content[\\\"name\\\"] ==  rule.properties.sep_fingerprintlist_name:\\n    inputs.sep_fingerprintlist_id = fpl_content[\\\"id\\\"]\\n    inputs.sep_fingerprintlist_name = fpl_content[\\\"name\\\"]\\n    if fpl_content[\\\"data\\\"] is not None:\\n        inputs.sep_hash_value = \u0027,\u0027.join([hv for hv in fpl_content[\\\"data\\\"] if hv.lower() != artifact.value.lower()])\\n\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ipha1l\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1dh77nx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_18ctqi5\"\u003e\u003cincoming\u003eSequenceFlow_1dh77nx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1dh77nx\" sourceRef=\"ServiceTask_162hm01\" targetRef=\"EndEvent_18ctqi5\"/\u003e\u003cendEvent id=\"EndEvent_0v07fj3\"\u003e\u003cincoming\u003eSequenceFlow_01uickx\u003c/incoming\u003e\u003c/endEvent\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_1kxhqy5\"\u003e\u003cincoming\u003eSequenceFlow_11h8805\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ipha1l\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_01uickx\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1apinor\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_11h8805\" sourceRef=\"ServiceTask_0giri6n\" targetRef=\"ExclusiveGateway_1kxhqy5\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1ipha1l\" name=\"Fingerprint list exists, hash in list\" sourceRef=\"ExclusiveGateway_1kxhqy5\" targetRef=\"ServiceTask_162hm01\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"hash_in_list\\\", None) != None\",\"language\":\"python\"}},{\"evaluation_id\":2,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"fpl_exists\\\", None) != None\",\"language\":\"python\"}},{\"evaluation_id\":3,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"last_hash_in_list\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_01uickx\" name=\"Hash not in list\" sourceRef=\"ExclusiveGateway_1kxhqy5\" targetRef=\"EndEvent_0v07fj3\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"hash_in_list\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cserviceTask id=\"ServiceTask_1bgeys4\" name=\"SEP - Delete Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e710d302-1010-4994-a02c-87377bfde59e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_delete_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_fingerprintlist_id\u0027: u\u00272728515A08A4481B8207623558254F60\u0027},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 11:49:38\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost.com\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1137\\n                    },\\n         \u0027success\u0027: True,\\n         \u0027content\u0027: \u0027\u0027,\\n         \u0027raw\u0027: \u0027\\\"\\\"\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n\\n}\\n\\\"\\\"\\\"\\n\\nFN_NAME = \\\"fn_sep_update_fingerprint_list\\\"\\nWF_NAME = \\\"Delete Fingerprint List\\\"\\nCONTENT = results.content\\nFP_LIST_NAME = workflow.properties.get(\\\"sep_fingerprintlist_name\\\", None)[\\\"fingerprintlist_name\\\"]\\n\\ndef main():\\n    if CONTENT is not None:\\n        # If we got here we assume we are successsful, no status messgage is returned by api.\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully deleted fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    u\\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, unicode(FP_LIST_NAME), FN_NAME)\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                     \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"pre_processing_script\":\"fpl_content_results = workflow.properties.fpl_content_results\\nfpl_content = fpl_content_results.content\\n    \\nif fpl_content[\\\"name\\\"] ==  rule.properties.sep_fingerprintlist_name:\\n    inputs.sep_fingerprintlist_id = fpl_content[\\\"id\\\"]\\n\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1apinor\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1wzicdx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1apinor\" name=\"Last hash in list\" sourceRef=\"ExclusiveGateway_1kxhqy5\" targetRef=\"ServiceTask_1bgeys4\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"last_hash_in_list\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cendEvent id=\"EndEvent_19hhdbk\"\u003e\u003cincoming\u003eSequenceFlow_1wzicdx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1wzicdx\" sourceRef=\"ServiceTask_1bgeys4\" targetRef=\"EndEvent_19hhdbk\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_1kzdufb\"\u003e\u003cincoming\u003eSequenceFlow_0ve607k\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0v2nltq\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_0ky6jnv\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ve607k\" sourceRef=\"ServiceTask_0am1izt\" targetRef=\"ExclusiveGateway_1kzdufb\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0v2nltq\" name=\"Domain id exists\" sourceRef=\"ExclusiveGateway_1kzdufb\" targetRef=\"ServiceTask_0giri6n\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cendEvent id=\"EndEvent_0r7d527\"\u003e\u003cincoming\u003eSequenceFlow_0ky6jnv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ky6jnv\" name=\"Domain id does not exist\" sourceRef=\"ExclusiveGateway_1kzdufb\" targetRef=\"EndEvent_0r7d527\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0i1qa65\"\u003e\u003ctext\u003eGet domain id by name. Input: Domain name selected from activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0bvlsgi\" sourceRef=\"ServiceTask_0am1izt\" targetRef=\"TextAnnotation_0i1qa65\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_055rsea\"\u003e\u003ctext\u003eGet fingerprint list information by name for domain by id. input: Fingerprint list\u00a0 name selected from\u00a0 activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_14bd1vg\" sourceRef=\"ServiceTask_0giri6n\" targetRef=\"TextAnnotation_055rsea\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1uq5ayd\"\u003e\u003ctext\u003e\u003c![CDATA[Update (delete) hash value from\u00a0 fingerprint list by id for domain by id.\u00a0 Input: Hash value input assigned from artifact value.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_153fcta\" sourceRef=\"ServiceTask_162hm01\" targetRef=\"TextAnnotation_1uq5ayd\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1t5n6ic\"\u003e\u003ctext\u003e\u003c![CDATA[Delete fingerprint\u00a0 list by id .\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0n8h1w6\" sourceRef=\"ServiceTask_1bgeys4\" targetRef=\"TextAnnotation_1t5n6ic\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0am1izt\" id=\"ServiceTask_0am1izt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"248\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0uc7t2u\" id=\"SequenceFlow_0uc7t2u_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"248\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"223\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0giri6n\" id=\"ServiceTask_0giri6n_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"563\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_162hm01\" id=\"ServiceTask_162hm01_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"696\" y=\"46\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_18ctqi5\" id=\"EndEvent_18ctqi5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"868\" y=\"68\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"841\" y=\"107\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dh77nx\" id=\"SequenceFlow_1dh77nx_di\"\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"86\"/\u003e\u003comgdi:waypoint x=\"868\" xsi:type=\"omgdc:Point\" y=\"86\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"787\" y=\"64.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0v07fj3\" id=\"EndEvent_0v07fj3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"868\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"841\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_1kxhqy5\" id=\"ExclusiveGateway_1kxhqy5_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"721\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"701\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11h8805\" id=\"SequenceFlow_11h8805_di\"\u003e\u003comgdi:waypoint x=\"663\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"721\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"647\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ipha1l\" id=\"SequenceFlow_1ipha1l_di\"\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"149\"/\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"149\"/\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"126\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"89\" x=\"701.5\" y=\"139.58947368421053\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_01uickx\" id=\"SequenceFlow_01uickx_di\"\u003e\u003comgdi:waypoint x=\"771\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"868\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"75\" x=\"744.3231707317074\" y=\"191\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1bgeys4\" id=\"ServiceTask_1bgeys4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"696\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1apinor\" id=\"SequenceFlow_1apinor_di\"\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"278\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"78\" x=\"707\" y=\"247.7608695652174\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_19hhdbk\" id=\"EndEvent_19hhdbk_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"868\" y=\"300\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"841\" y=\"339\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1wzicdx\" id=\"SequenceFlow_1wzicdx_di\"\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"318\"/\u003e\u003comgdi:waypoint x=\"868\" xsi:type=\"omgdc:Point\" y=\"318\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"787\" y=\"296.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_1kzdufb\" id=\"ExclusiveGateway_1kzdufb_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"405\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"385\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ve607k\" id=\"SequenceFlow_0ve607k_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"405\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"331.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v2nltq\" id=\"SequenceFlow_0v2nltq_di\"\u003e\u003comgdi:waypoint x=\"455\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"563\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"83\" x=\"468.34375\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0r7d527\" id=\"EndEvent_0r7d527_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"412\" y=\"314\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"385\" y=\"353\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ky6jnv\" id=\"SequenceFlow_0ky6jnv_di\"\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"314\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"79\" x=\"406\" y=\"241.79012345679013\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0i1qa65\" id=\"TextAnnotation_0i1qa65_di\"\u003e\u003comgdc:Bounds height=\"38\" width=\"200\" x=\"198\" y=\"67\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0bvlsgi\" id=\"Association_0bvlsgi_di\"\u003e\u003comgdi:waypoint x=\"298\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"298\" xsi:type=\"omgdc:Point\" y=\"105\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_055rsea\" id=\"TextAnnotation_055rsea_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"251\" x=\"413\" y=\"63\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_14bd1vg\" id=\"Association_14bd1vg_di\"\u003e\u003comgdi:waypoint x=\"588\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"552\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1uq5ayd\" id=\"TextAnnotation_1uq5ayd_di\"\u003e\u003comgdc:Bounds height=\"45\" width=\"332\" x=\"1021\" y=\"133\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_153fcta\" id=\"Association_153fcta_di\"\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"95\"/\u003e\u003comgdi:waypoint x=\"1044\" xsi:type=\"omgdc:Point\" y=\"133\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1t5n6ic\" id=\"TextAnnotation_1t5n6ic_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"148\" x=\"1027\" y=\"235\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0n8h1w6\" id=\"Association_0n8h1w6_di\"\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"309\"/\u003e\u003comgdi:waypoint x=\"1027\" xsi:type=\"omgdc:Point\" y=\"264\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Update a blacklist fingerprint list to remove an MD5 hash.\nNote: The fingerprint list will be deleted if only a single MD5 hash is remaining in the list.",
-      "export_key": "wf_sep_delete_hash_from_fingerprint_list",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002341574,
-      "name": "Example: SEP - Delete Hash from Blacklist",
-      "object_type": "artifact",
-      "programmatic_name": "wf_sep_delete_hash_from_fingerprint_list",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "c430f574-c952-462c-a86a-075ce113e126",
-      "workflow_id": 418
-    },
     {
       "actions": [],
       "content": {
@@ -7084,90 +7131,13 @@
       "description": "Get overall Endpoint status (refresh data table row).",
       "export_key": "wf_sep_get_endpoints_status_refresh",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002343763,
+      "last_modified_time": 1668001893838,
       "name": "Example: SEP - Get Endpoints status summary (refresh)",
       "object_type": "sep_endpoint_status_summary",
       "programmatic_name": "wf_sep_get_endpoints_status_refresh",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "ff3c182c-5896-40f0-85bd-eedab07b5483",
-      "workflow_id": 421
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_sep_initiate_eoc_scan_for_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_initiate_eoc_scan_for_artifact\" isExecutable=\"true\" name=\"Example: SEP - Initiate EOC Scan for Artifact\"\u003e\u003cdocumentation\u003eInitiate an Evidence of Compromise (EOC) scan on artifacts of type file (name or path) or hash (MD5, SHA1 or SHA256) against all endpoints.  Use returned command id to get the initial command status and information on any matches for each endpoint.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0xb8u6k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0rzdc39\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sep_matching_endpoint_ids = True\",\"result_name\":\"get_computers_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0xb8u6k\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0h8wmqc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0xb8u6k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0rzdc39\"/\u003e\u003cserviceTask id=\"ServiceTask_0pk1dod\" name=\"SEP - Scan Endpoints\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"cc7fd805-db7a-4c37-aa0e-29ffd1752eec\"\u003e{\"inputs\":{\"cb92fbc0-79a0-48fe-b048-8c62ef5ea42f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"810db651-8a47-4931-a4b4-1e579d08088d\"}},\"5b452d96-e040-46b3-ac15-828c9ffddbfa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"93b82e92-6f87-431a-9c2a-9f5d0f2c621b\"}}},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_upload_file_to_sepm script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_description\u0027: u\u0027Scan to remediate file based on sha256\u0027, u\u0027sep_computer_ids\u0027: u\u0027D31AA16E0946C25D40C83823C500518B\u0027,\\n                    u\u0027sep_scan_action\u0027: None, u\u0027sep_file_path\u0027: u\u0027C:\\\\\\\\temp\\\\\\\\eicar.zip\u0027, u\u0027sep_group_ids\u0027: u\u0027CAD80F000946C25D6C150831060AA326\u0027,\\n                    u\u0027sep_sha256\u0027: None, u\u0027sep_scan_type\u0027: {u\u0027name\u0027: u\u0027FULL_SCAN\u0027, u\u0027id\u0027: 229}},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-04-12 10:49:22\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 12349},\\n         \u0027success\u0027: True, \u0027content\u0027: {u\u0027commandID_computer\u0027: u\u00270F0CBDD7EDFF4634B23FA11F5AB81FFC\u0027, u\u0027commandID_group\u0027: u\u0027BB37F78894DB451B8E8921EC127667A3\u0027},\\n         \u0027raw\u0027: \u0027{\\\"commandID_computer\\\": \\\"0F0CBDD7EDFF4634B23FA11F5AB81FFC\\\", \\\"commandID_group\\\": \\\"BB37F78894DB451B8E8921EC127667A3\\\"}\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"scan_commandID\\\"]\\nFN_NAME = \\\"fn_sep_scan_endpoints\\\"\\nWF_NAME = \\\"Initiate EOC Scan for Artifact\\\"\\n# Processing\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nnote_text = \u0027\u0027\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if CONTENT  is not None:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Returned command id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for a \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    \\\"scan on artifact \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, CONTENT[\\\"commandID_computer\\\"], INPUTS[\\\"sep_scan_type\\\"], unicode(artifact.value), FN_NAME)\\n    else:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; command id returned for a \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; scan on artifact \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, INPUTS[\\\"sep_scan_type\\\"], INPUTS[\\\"sep_file_path\\\"], unicode(artifact.value), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"GET_COMPUTERS_CONTENT = workflow.properties.get_computers_results.content\\nARTIFACT_TYPE = artifact.type\\nARTIFACT_VALUE = artifact.value\\nARTIFACT_DESCRIPTION = artifact.description\\nARTIFACT_TYPE_TO_ROW = {\\n    \\\"File Name\\\": \\\"file_name\\\",\\n    \\\"File Path\\\": \\\"file_path\\\",\\n    \\\"Malware MD5 Hash\\\": \\\"md5\\\",\\n    \\\"Malware SHA-1 Hash\\\": \\\"sha1\\\",\\n    \\\"Malware SHA-256 Hash\\\": \\\"sha256\\\"\\n}\\nARTIFACT_TYPES = [ v for v in sorted(ARTIFACT_TYPE_TO_ROW.values())]\\nCOMPUTER_IDS = []\\n## Processing\\n\\ndef get_computers():\\n    global COMPUTER_IDS\\n    # Get computers to run scan against from previous step.\\n    if GET_COMPUTERS_CONTENT is not None and GET_COMPUTERS_CONTENT[\\\"endpoints_matching_ids\\\"]:\\n        COMPUTER_IDS = GET_COMPUTERS_CONTENT[\\\"endpoints_matching_ids\\\"]\\n\\ndef set_inputs(fn, fp, md5, sha1, sha256):\\n    global COMPUTER_IDS\\n    inputs.sep_file_path = fn if fp is None else fp\\n    inputs.sep_md5 = md5\\n    inputs.sep_sha1 = sha1\\n    inputs.sep_sha256 = sha256\\n    inputs.sep_computer_ids = \u0027,\u0027.join(COMPUTER_IDS)\\n    inputs.sep_scan_type = rule.properties.sep_scan_type\\n    inputs.sep_scan_action = None\\n    if ARTIFACT_DESCRIPTION is not None:\\n        inputs.sep_description = u\\\"Scan eoc for {0}\\\".format(unicode(ARTIFACT_DESCRIPTION[\\\"content\\\"]))\\n    else:\\n        inputs.sep_description = u\\\"Scan eoc for for suspicious hash of type {0} and value {1} in the SEP environment.\\\".format(ARTIFACT_TYPE, ARTIFACT_VALUE)\\n\\ndef main():\\n    get_computers()\\n    # Assign values to correct row based on artifact type\\n    types = [None if t not in ARTIFACT_TYPE_TO_ROW[ARTIFACT_TYPE] else ARTIFACT_VALUE for t in ARTIFACT_TYPES]\\n    set_inputs(*types)\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"result_name\":\"scan_eoc_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0h8wmqc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17ndhto\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0h8wmqc\" sourceRef=\"ServiceTask_0rzdc39\" targetRef=\"ServiceTask_0pk1dod\"/\u003e\u003cserviceTask id=\"ServiceTask_0er956h\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n    \u0027inputs\u0027: {u\u0027sep_commandid\u0027: u\u00272F260501C22842ABBA7EB0805D92EFE0\u0027},\\n    \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-03-01 12:46:27\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027,\\n    \u0027execution_time_ms\u0027: 1085},\\n    \u0027success\u0027: True,\\n    \u0027content\u0027:\\n                {\\n                  \\\"sort\\\": [\\n                    {\\n                      \\\"direction\\\": \\\"ASC\\\",\\n                      \\\"property\\\": \\\"Begintime\\\",\\n                      \\\"ascending\\\": true\\n                    }\\n                  ],\\n                  \\\"number\\\": 0,\\n                  \\\"firstPage\\\": true,\\n                  \\\"content\\\": [\\n                    {\\n                      \\\"computerName\\\": \\\"ep1\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"1771D79454E53469DF4B290C06C104C9\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"D31AA16E0946C25D40C83823C500518B\\\",\\n                      \\\"computerIp\\\": \\\"9.70.194.93\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    },\\n                    {\\n                      \\\"computerName\\\": \\\"ep2\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\",\\n                      \\\"computerIp\\\": \\\"9.70.194.94\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    }\\n                  ],\\n                  \\\"lastPage\\\": true,\\n                  \\\"totalPages\\\": 1,\\n                  \\\"size\\\": 20,\\n                  \\\"totalElements\\\": 2,\\n                  \\\"numberOfElements\\\": 2\\n                }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"scan_result\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Initiate EOC Scan for Artifact\\\"\\nC_OUTER = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nCOMMAND_ID = INPUTS[\\\"sep_commandid\\\"]\\nSTATUS_TYPE = \\\"Scan\\\"\\nARTIFACT_TYPE = artifact.type\\nARTIFACT_VALUE = artifact.value\\nARTIFACT_TYPE_TO_ROW = {\\n    \\\"File Name\\\": \\\"file_name\\\",\\n    \\\"File Path\\\": \\\"file_path\\\",\\n    \\\"Malware MD5 Hash\\\": \\\"md5\\\",\\n    \\\"Malware SHA-1 Hash\\\": \\\"sha1\\\",\\n    \\\"Malware SHA-256 Hash\\\": \\\"sha256\\\"\\n}\\nROW_NAMES = [v for v in sorted(ARTIFACT_TYPE_TO_ROW.values())]\\nROW_VALUES = [None if t not in ARTIFACT_TYPE_TO_ROW[ARTIFACT_TYPE] else ARTIFACT_VALUE for t in ROW_NAMES]\\n\\n\\n# Processing\\n\\ndef set_row_artifact_info(thisrow):\\n    for i in range(len(ROW_NAMES)):\\n        if ROW_VALUES[i] is not None:\\n            thisrow[ROW_NAMES[i]] = artifact.value\\n\\n\\ndef add_row(match_type, file_path, hash_value, computer_name, computer_id):\\n    newrow = incident.addRow(\u0027sep_eoc_scan_results\u0027)\\n    newrow.scan_type = rule.properties.sep_scan_type.split(\\\"_\\\")[0]\\n    set_row_artifact_info(newrow)\\n    newrow.artifact_id = artifact.id\\n    newrow.scan_commandid = COMMAND_ID\\n    newrow.scan_command_state = \\\"Completed\\\"\\n    newrow.scan_result = \u0027 \u0027.join(match_type.lower().split(\u0027_\u0027)).capitalize()\\n    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n    newrow.file_path = file_path\\n    newrow.hash_value = hash_value\\n    newrow.computer_name = computer_name\\n    newrow.computer_id = computer_id\\n\\n\\ndef add_empty_row(scan_state):\\n    newrow = incident.addRow(\u0027sep_eoc_scan_results\u0027)\\n    newrow.scan_type = rule.properties.sep_scan_type.split(\\\"_\\\")[0]\\n    newrow.artifact_value = artifact.value\\n    newrow.artifact_type = artifact.type\\n    newrow.artifact_id = artifact.id\\n    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n    newrow.scan_commandid = COMMAND_ID\\n    newrow.scan_command_state = scan_state\\n    newrow.scan_result = \\\"Query\\\"\\n    return newrow\\n\\n\\ndef get_file_name(file_path):\\n    return file_path.split(\\\"\\\\\\\\\\\")[-1] if \u0027\\\\\\\\\u0027 in file_path else file_path.split(\\\"/\\\")[-1]\\n\\n\\n\\ndef main():\\n    match_types = [\\\"HASH_MATCH\\\", \\\"FULL_MATCH\\\", \\\"PARTIAL_MATCH\\\"]\\n    scan_state = C_OUTER[\\\"overall_command_state\\\"]\\n    total_ep_count =  C_OUTER[\\\"total_ep_count\\\"]\\n    total_match_count = C_OUTER[\\\"total_match_count\\\"]\\n    total_not_completed = C_OUTER[\\\"total_not_completed\\\"]\\n    total_completed = total_ep_count - total_not_completed\\n    hits_over_limit = C_OUTER[\\\"scan_eoc_hits_over_limit\\\"]\\n    truncated_count = C_OUTER[\\\"truncated_count\\\"]\\n    att_name = C_OUTER[\\\"att_name\\\"]\\n    ep_match_count = 0\\n    note_text = \u0027\u0027\\n    status_note = \u0027\u0027\\n    if C_OUTER is not None:\\n        status_note =  \\\"The command Completed on \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; targeted endpoints.\\\".format(total_completed, total_ep_count)\\n        if total_not_completed:\\n            status_note += \\\"\u0026lt;br\u0026gt;Note: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; endpoints on which the command has not completed. Please review console/logs  \\\" \\\\\\n                           \\\"on the Symantec SEPM server for further details if required.\\\".format(total_not_completed)\\n\\n        if hits_over_limit is not None:\\n            newrow = add_empty_row()\\n            newrow.scan_result = \\\"Query: Matches over limit see note/attachment.\\\"\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; : \u0027EOC Scan for artifact\u0027 for artifact \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n                        \\\"of type \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with command id \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; returned \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; matches in truncated \\\" \\\\\\n                        \\\"results out of a total of \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{6}\u0026lt;/b\u0026gt;.\u0026lt;br\u0026gt;Added full result as an attachment. \\\" \\\\\\n                        \\\"Attachment name : \u0026lt;b\u0026gt;{7}\u0026lt;/b\u0026gt;. {8}\\\" \\\\\\n                .format(WF_NAME, unicode(ARTIFACT_VALUE), ARTIFACT_TYPE, COMMAND_ID, truncated_count, total_match_count, FN_NAME,\\n                        att_name, status_note)\\n        else:\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; : \u0027EOC Scan for artifact\u0027 for artifact \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n                        \\\"of type \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with command id \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; returned \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; matches in results for \\\" \\\\\\n                        \\\"Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;. {6}\\\" \\\\\\n                .format(WF_NAME, unicode(ARTIFACT_VALUE), ARTIFACT_TYPE, COMMAND_ID, total_match_count, FN_NAME, status_note)\\n        c_inner = C_OUTER[\\\"content\\\"]\\n\\n        for i in range(len(c_inner)):\\n            ep = c_inner[i]\\n            # Process matches if command status is \u0027Completed\u0027\\n            if ep[\\\"command_status_id\\\"] == 3:\\n                computer_name = ep[\\\"computerName\\\"]\\n                computer_id = ep[\\\"computerId\\\"]\\n                if ep[\\\"scan_result\\\"][\\\"MATCH\\\"]:\\n                    ep_match_count += 1\\n                    for match_type in match_types:\\n                        if len(ep[\\\"scan_result\\\"][match_type+\\\"ES\\\"]) \u0026gt; 0:\\n                            if match_type in match_types[1:]: # Full or parttila match\\n                                fms = ep[\\\"scan_result\\\"][match_type+\\\"ES\\\"]\\n                                if fms:\\n                                    hts = [\\\"sha256\\\", \\\"sha1\\\", \\\"md5\\\"]\\n                                    for fm in fms:\\n                                        add_row(match_type, fm.value, fm.hashValue, computer_name, computer_id)\\n                            else: # Hash match\\n                                hms = ep[\\\"scan_result\\\"][\\\"HASH_MATCHES\\\"]\\n                                if hms:\\n                                    for hm in hms:\\n                                        add_row(match_type, hm.value, row.artifact_value, computer_name,\\n                                                computer_id)\\n\\n            if ep_match_count == 0:\\n                newrow = add_empty_row(scan_state)\\n                if scan_state == \\\"Completed\\\":\\n                    newrow.scan_result = \\\"No match found\\\"\\n        else:\\n            add_empty_row(scan_state)\\n\\n    else:\\n        add_empty_row(scan_state)\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; : Scan artifact returned \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"scan_eoc_content = workflow.properties.scan_eoc_results.content\\nscan_eoc_metrics = workflow.properties.scan_eoc_results.metrics\\ninputs.sep_incident_id = incident.id\\ninputs.sep_commandid = scan_eoc_content[\\\"commandID_computer\\\"]\\ninputs.sep_status_type = \\\"scan\\\"\\ninputs.sep_scan_date = scan_eoc_metrics[\\\"timestamp\\\"]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_17ndhto\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0gcrsmt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_17ndhto\" sourceRef=\"ServiceTask_0pk1dod\" targetRef=\"ServiceTask_0er956h\"/\u003e\u003cendEvent id=\"EndEvent_16izkd3\"\u003e\u003cincoming\u003eSequenceFlow_0gcrsmt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0gcrsmt\" sourceRef=\"ServiceTask_0er956h\" targetRef=\"EndEvent_16izkd3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1qu5tmc\"\u003e\u003ctext\u003e\u003c![CDATA[Get all endpoints by endpoint id only\n. Input: Parameter \u0027sep_matching_endpoint_ids\u0027 = True\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1hxj0lh\" sourceRef=\"ServiceTask_0rzdc39\" targetRef=\"TextAnnotation_1qu5tmc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1j1fvy0\"\u003e\u003ctext\u003eInitiate an EOC scan. Input: Assigned from an artifact value. Target endpoints will be all endpoints by endpoint id. Output: EOC scan commandid.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1anob6m\" sourceRef=\"ServiceTask_0pk1dod\" targetRef=\"TextAnnotation_1j1fvy0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0rn3jmu\"\u003e\u003ctext\u003e\u003c![CDATA[Get initial command status for Remediate command by eoc scan commandid.Input:\n\u00a0Scan Commandid from step 2\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_08nsrne\" sourceRef=\"ServiceTask_0er956h\" targetRef=\"TextAnnotation_0rn3jmu\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0rzdc39\" id=\"ServiceTask_0rzdc39_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"238\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xb8u6k\" id=\"SequenceFlow_0xb8u6k_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"238\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"218\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0pk1dod\" id=\"ServiceTask_0pk1dod_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"523\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0h8wmqc\" id=\"SequenceFlow_0h8wmqc_di\"\u003e\u003comgdi:waypoint x=\"338\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"523\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"385.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0er956h\" id=\"ServiceTask_0er956h_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"810\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17ndhto\" id=\"SequenceFlow_17ndhto_di\"\u003e\u003comgdi:waypoint x=\"623\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"810\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"671.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_16izkd3\" id=\"EndEvent_16izkd3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"992\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"965\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0gcrsmt\" id=\"SequenceFlow_0gcrsmt_di\"\u003e\u003comgdi:waypoint x=\"910\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"992\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"906\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1qu5tmc\" id=\"TextAnnotation_1qu5tmc_di\"\u003e\u003comgdc:Bounds height=\"72\" width=\"149\" x=\"216\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1hxj0lh\" id=\"Association_1hxj0lh_di\"\u003e\u003comgdi:waypoint x=\"289\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1j1fvy0\" id=\"TextAnnotation_1j1fvy0_di\"\u003e\u003comgdc:Bounds height=\"75\" width=\"335\" x=\"407\" y=\"32\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1anob6m\" id=\"Association_1anob6m_di\"\u003e\u003comgdi:waypoint x=\"574\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"574\" xsi:type=\"omgdc:Point\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0rn3jmu\" id=\"TextAnnotation_0rn3jmu_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"202\" x=\"759\" y=\"39\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_08nsrne\" id=\"Association_08nsrne_di\"\u003e\u003comgdi:waypoint x=\"860\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"859\" xsi:type=\"omgdc:Point\" y=\"100\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Initiate an Evidence of Compromise (EOC) scan on artifacts of type file (name or path) or hash (MD5, SHA1 or SHA256) against all endpoints.  Use returned command id to get the initial command status and information on any matches for each endpoint.",
-      "export_key": "wf_sep_initiate_eoc_scan_for_artifact",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002336333,
-      "name": "Example: SEP - Initiate EOC Scan for Artifact",
-      "object_type": "artifact",
-      "programmatic_name": "wf_sep_initiate_eoc_scan_for_artifact",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "86900745-92cf-47a1-9c67-19f946a76a78",
-      "workflow_id": 411
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_sep_delete_fingerprint_list",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_delete_fingerprint_list\" isExecutable=\"true\" name=\"Example: SEP - Delete Blacklist\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Delete an existing blacklist fingerprint list.\nNote: Also removes it from a any group to which it has been assigned.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0c36cb8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_03o9n4i\" name=\"SEP - Delete Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e710d302-1010-4994-a02c-87377bfde59e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_delete_fingerprint_list ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-29 10:36:53\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027,\\n                     \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1744},\\n         \u0027success\u0027: True,\\n         \u0027content\u0027: \u0027\u0027,\\n         \u0027raw\u0027: \u0027\\\"\\\"\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\nFN_NAME = \\\"fn_sep_delete_fingerprint_list\\\"\\nWF_NAME = \\\"Delete Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and int(CONTENT[\\\"errorCode\\\"]) == 410:\\n            # The finger print list doesn\u0027t exist.\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; does not exist or is invalid \\\" \\\\\\n                        \\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format( WF_NAME, INPUTS[\\\"sep_fingerprintlist_name\\\"], FN_NAME)\\n        else:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully deleted fingerprint list  with id \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_id\\\"], FN_NAME)\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned \\\" \\\\\\n                     \\\"with fingerprint id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_id\\\"],  FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_fingerprintlist_id = row.list_id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0c36cb8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dwxa2k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0c36cb8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03o9n4i\"/\u003e\u003cendEvent id=\"EndEvent_1olth1h\"\u003e\u003cincoming\u003eSequenceFlow_0dwxa2k\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0dwxa2k\" sourceRef=\"ServiceTask_03o9n4i\" targetRef=\"EndEvent_1olth1h\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0uh5fsj\"\u003e\u003ctext\u003e\u003c![CDATA[Delete fingerprint list by id.\u00a0 Input parameter is assigned from data table row.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0sm2mmz\" sourceRef=\"ServiceTask_03o9n4i\" targetRef=\"TextAnnotation_0uh5fsj\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03o9n4i\" id=\"ServiceTask_03o9n4i_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"261\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0c36cb8\" id=\"SequenceFlow_0c36cb8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"261\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"229.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1olth1h\" id=\"EndEvent_1olth1h_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dwxa2k\" id=\"SequenceFlow_0dwxa2k_di\"\u003e\u003comgdi:waypoint x=\"361\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0uh5fsj\" id=\"TextAnnotation_0uh5fsj_di\"\u003e\u003comgdc:Bounds height=\"56\" width=\"303\" x=\"159\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0sm2mmz\" id=\"Association_0sm2mmz_di\"\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"111\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Delete an existing blacklist fingerprint list.\nNote: Also removes it from a any group to which it has been assigned.",
-      "export_key": "wf_sep_delete_fingerprint_list",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002348862,
-      "name": "Example: SEP - Delete Blacklist",
-      "object_type": "sep_fingerprint_lists",
-      "programmatic_name": "wf_sep_delete_fingerprint_list",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "c6b60f0a-4de7-4024-a456-fbd9472c6a7c",
-      "workflow_id": 428
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "wf_sep_get_endpoint_details",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_endpoint_details\" isExecutable=\"true\" name=\"Example: SEP - Get Endpoint Details\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Get endpoint details for Evidence of Compromise (EOC) data table row \"computer_name\" value.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0x5nwsi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_192mbob\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_computername\u0027: u\u0027WIN-4OA0GKJN830\u0027}, \\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-23 18:40:17\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \\n         \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1966}, \\n         \u0027success\u0027: True, \\n         \u0027content\u0027: {u\u0027sort\u0027: [{u\u0027direction\u0027: u\u0027ASC\u0027, u\u0027property\u0027: u\u0027COMPUTER_NAME\u0027, u\u0027ascending\u0027: True}], u\u0027number\u0027: 0, \\n                     u\u0027firstPage\u0027: True, u\u0027content\u0027: [{u\u0027profileVersion\u0027: u\u002714.2.1031\u0027, u\u0027elamOnOff\u0027: 1, \\n                     u\u0027avEngineOnOff\u0027: 1, u\u0027profileChecksum\u0027: None, u\u0027atpDeviceId\u0027: None, \\n                     u\u0027processorType\u0027: u\u0027Intel64 Family 6 Model 15 Stepping 1\u0027, u\u0027oslanguage\u0027: u\u0027en-US\u0027, \\n                     u\u0027licenseId\u0027: None, u\u0027licenseStatus\u0027: -1, \\n                     u\u0027group\u0027: {u\u0027domain\u0027: {u\u0027id\u0027: u\u0027908090000946C25D330E919313D23887\u0027, u\u0027name\u0027: u\u0027Default\u0027}, u\u0027name\u0027: u\u0027My Company\\\\\\\\JP_TEST_GROUP_1\u0027, u\u0027fullPathName\u0027: None, u\u0027externalReferenceId\u0027: None, u\u0027source\u0027: None, u\u0027id\u0027: u\u00278E20F39B0946C25D118925C2E28C2D59\u0027}, \\n                     u\u0027uuid\u0027: u\u0027EA650B42-D10A-7F9F-A1D2-0A58C4F4CEB1\u0027, \\n                     u\u0027groupUpdateProvider\u0027: False, \\n                     u\u0027edrStatus\u0027: 2, u\u0027freeDisk\u0027: 40542507008, u\u0027diskDrive\u0027: u\u0027C:\\\\\\\\\u0027, u\u0027osFunction\u0027: u\u0027Server\u0027, u\u0027processorClock\u0027: 2394, \\n                     u\u0027mobilePhone\u0027: u\u0027\u0027, u\u0027jobTitle\u0027: u\u0027\u0027, u\u0027last\u00e1HeuristicThreatTime\u0027: 0, u\u0027osname\u0027: u\u0027Windows Server 2012\u0027, \\n                     u\u0027winServers\u0027: [u\u00270.0.0.0\u0027, u\u00270.0.0.0\u0027], u\u0027deploymentMessage\u0027: u\u0027\u0027, u\u0027idsSerialNo\u0027: u\u0027\u0027, \\n                     u\u0027employeeNumber\u0027: u\u0027\u0027, u\u0027snacLicenseId\u0027: None, u\u0027lastSiteId\u0027: u\u0027EE75B0850946C25D5287B58B5173A37C\u0027, \\n                     u\u0027uwf\u0027: 2, u\u0027currentClientId\u0027: u\u0027256B2B130946C25D40C83823AA2E5D4C\u0027, u\u0027osbitness\u0027: u\u0027x64\u0027, \\n                     u\u0027lastScanTime\u0027: 1558613245000, u\u0027email\u0027: u\u0027\u0027, u\u0027securityVirtualAppliance\u0027: None, \\n                     u\u0027worstInfectionIdx\u0027: u\u00270\u0027, u\u0027encryptedDevicePassword\u0027: None, u\u0027lastServerId\u0027: u\u00277D6AAA6F0946C25D170B3A2D442500B6\u0027, \\n                     u\u0027kernel\u0027: None, u\u0027lastUpdateTime\u0027: 1558632769514, u\u0027ptpOnOff\u0027: 1, u\u0027majorVersion\u0027: 14, \\n                     u\u0027lastConnectedIpAddr\u0027: u\u00279.70.194.93\u0027, u\u0027agentVersion\u0027: u\u002714.2.1031.0100\u0027, u\u0027deploymentRunningVersion\u0027: u\u002714.2.1031.0100\u0027, \\n                     u\u0027agentTimeStamp\u0027: 1558632769514, u\u0027osminor\u0027: 2, u\u0027osMajor\u0027: 6, u\u0027deploymentTargetVersion\u0027: u\u002714.2.1031.0100\u0027, \\n                     u\u0027osMinor\u0027: 2, u\u0027osFlavorNumber\u0027: 79, u\u0027logicalCpus\u0027: 0, u\u0027deploymentPreVersion\u0027: u\u0027\u0027, u\u0027hypervisorVendorId\u0027: u\u00270\u0027, \\n                     u\u0027fbwf\u0027: 2, u\u0027osversion\u0027: u\u00276.2\u0027, u\u0027dnsServers\u0027: [u\u00279.70.192.29\u0027, u\u0027FEC0:0000:0000:FFFF:0000:0000:0000:0001\u0027], \\n                     u\u0027vsicStatus\u0027: 3, u\u0027deleted\u0027: 0, u\u0027deploymentStatus\u0027: u\u0027302456832\u0027, u\u0027computerTimeStamp\u0027: 1558622386922, u\u0027bwf\u0027: 2, \\n                     u\u0027totalDiskSpace\u0027: 81567, u\u0027homePhone\u0027: u\u0027\u0027, u\u0027daOnOff\u0027: 1, u\u0027computerDescription\u0027: u\u0027\u0027, u\u0027pepOnOff\u0027: 1, \\n                     \u0027timediffLastUpdateTime\u0027: 448.98237204551697, u\u0027bashStatus\u0027: 1, u\u0027agentUsn\u0027: 2545799, u\u0027osName\u0027: u\u0027Windows Server 2012\u0027, \\n                     \u0027readableLastUpdateTime\u0027: \u00272019-05-23 18:32:49\u0027, u\u0027patternIdx\u0027: u\u00274A80266952462523E3E5AC3B816032AE\u0027, \\n                     u\u0027employeeStatus\u0027: u\u0027\u0027, u\u0027tmpDevice\u0027: None, u\u0027rebootRequired\u0027: 0, u\u0027subnetMasks\u0027: [u\u0027255.255.255.0\u0027, u\u002764\u0027], \\n                     u\u0027minorVersion\u0027: 2, u\u0027osservicePack\u0027: u\u0027\u0027, \u0027timediffLastVirusTime\u0027: 5638590.9823720455, u\u0027lastSiteName\u0027: u\u0027My Site\u0027, \\n                     u\u0027cidsEngineVersion\u0027: u\u00270.0.0.0\u0027, u\u0027lastDeploymentTime\u0027: 1550585147000, u\u0027isGrace\u0027: 0, u\u0027computerUsn\u0027: 2544267, \\n                     u\u0027agentId\u0027: u\u00276E5AA5CB0946C25D40C83823BB5107E6\u0027, u\u0027cidsBrowserFfOnOff\u0027: 1, u\u0027domainOrWorkgroup\u0027: u\u0027WORKGROUP\u0027, \\n                     u\u0027svaId\u0027: None, u\u0027loginDomain\u0027: u\u0027LocalComputer\u0027, u\u0027lastServerName\u0027: u\u0027WIN-4OA0GKJN830\u0027, u\u0027contentUpdate\u0027: 1, \\n                     u\u0027writeFiltersStatus\u0027: None, u\u0027infected\u0027: 0, \u0027timediffLastScanTime\u0027: 19972.982372045517, u\u0027memory\u0027: 6441979904, \\n                     u\u0027freeMem\u0027: 3117060096, u\u0027officePhone\u0027: u\u0027\u0027, u\u0027lastVirusTime\u0027: 1552994627000, u\u0027telemetryMid\u0027: u\u0027890E283B-41D3-4340-A397-66F6AFCAF33E\u0027,\\n                     u\u0027idsVersion\u0027: u\u0027\u0027, u\u0027cidsBrowserIeOnOff\u0027: 1, u\u0027publicKey\u0027: u\u0027BgIAAACkAABSU0ExAAgAAAEAAQDfMtYpvbC2ZOrpGFbK76tuyp2MZ7/6EGsFrqAV3ZBMfvMllksVObpPYvDSc5vCjtzthb1301VADLAspayGytsdAj5z8+LLpOnJkHNg9tIunm1lLkBTitevI6G+nNjyKd7uPn3+bxjk1LL8g1exL2C2SMPEXubdUa1N5xwmhhPHp6PSIAjY74QUcNyplfvylMS9QRWoQ70mqNy9tLLef6+qCYWTqGa7QKXS0WUJs8sJMzWfCrpeMVAmU5/s3yEu+OI+9RKgOeSfy7wRzmAWHQTofjHkYGYqwXcwwLX7AbWjdcpYo0Kaecf8e5t2ZvWyR362EaNxn0HYSjpKraY1hLK1\u0027, \\n                     u\u0027quarantineDesc\u0027: u\u0027Host Integrity check passed\\\\n\u0027, u\u0027cidsDrvMulfCode\u0027: 0, u\u0027biosVersion\u0027: u\u0027INTEL  - 6040000 PhoenixBIOS 4.0 Release 6.0\u0027, \\n                     u\u0027rebootReason\u0027: u\u0027\u0027, u\u0027telemetryHwid\u0027: u\u0027A942D8EB-32C3-E42F-FE83-723FDC431F32\u0027, \u0027readableLastVirusTime\u0027: \u00272019-03-19 11:23:47\u0027, \\n                     u\u0027cidsSilentMode\u0027: 0, u\u0027creationTime\u0027: 1550585043812, u\u0027macAddresses\u0027: [u\u002700-50-56-8B-A6-C3\u0027, u\u002700-50-56-8B-A6-C3\u0027], \\n                     u\u0027idsChecksum\u0027: None, u\u0027operatingSystem\u0027: u\u0027Windows Server 2012 \u0027, u\u0027osmajor\u0027: 6, u\u0027virtualizationPlatform\u0027: u\u0027Unknown\u0027, \\n                     u\u0027ipAddresses\u0027: [u\u00279.70.194.93\u0027, u\u0027FE80:0000:0000:0000:FC67:074E:CD22:0188\u0027], u\u0027physicalCpus\u0027: 1, u\u0027osBitness\u0027: u\u0027x64\u0027, \\n                     u\u0027cidsDefsetVersion\u0027: u\u0027190522063\u0027, u\u0027cidsDrvOnOff\u0027: 1, u\u0027computerName\u0027: u\u0027WIN-4OA0GKJN830\u0027, u\u0027logonUserName\u0027: u\u0027Administrator\u0027, \\n                     u\u0027licenseExpiry\u0027: 0, u\u0027osLanguage\u0027: u\u0027en-US\u0027, u\u0027gateways\u0027: [u\u00279.70.194.1\u0027, u\u00279.70.194.1\u0027, u\u00270.0.0.0\u0027, u\u00270.0.0.0\u0027], \\n                     u\u0027uniqueId\u0027: u\u0027D31AA16E0946C25D40C83823C500518B\u0027, u\u0027department\u0027: u\u0027\u0027, u\u0027isNpvdiClient\u0027: 0, u\u0027dhcpServer\u0027: u\u00270.0.0.0\u0027, \\n                     u\u0027readableLastScanTime\u0027: \u00272019-05-23 13:07:25\u0027, u\u0027osfunction\u0027: u\u0027Server\u0027, u\u0027description\u0027: u\u0027\u0027, u\u0027osflavorNumber\u0027: 79, \\n                     u\u0027tpmDevice\u0027: u\u00270\u0027, u\u0027onlineStatus\u0027: 1, u\u0027lastDownloadTime\u0027: 1558356063096, u\u0027apOnOff\u0027: 1, u\u0027timeZone\u0027: 480, u\u0027fullName\u0027: u\u0027\u0027, \\n                     u\u0027osVersion\u0027: u\u00276.2\u0027, u\u0027attributeExtension\u0027: u\u0027\u0027, u\u0027atpServer\u0027: u\u0027https://9.70.194.99:443\u0027, u\u0027tamperOnOff\u0027: 1, u\u0027osServicePack\u0027: u\u0027\u0027, \\n                     u\u0027agentType\u0027: u\u0027105\u0027, u\u0027serialNumber\u0027: u\u0027VMware-42 0b 65 ea 0a d1 9f 7f-a1 d2 0a 58 c4 f4 ce b1\u0027, u\u0027osElamStatus\u0027: 0, u\u0027installType\u0027: u\u00270\u0027, \\n                     u\u0027profileSerialNo\u0027: u\u00278E20-05/08/2019 07:00:23 015\u0027, u\u0027hardwareKey\u0027: u\u00271771D79454E53469DF4B290C06C104C9\u0027, u\u0027firewallOnOff\u0027: 1}], \\n                     u\u0027lastPage\u0027: True, u\u0027totalPages\u0027: 1, u\u0027numberOfElements\u0027: 1, u\u0027totalElements\u0027: 1, u\u0027size\u0027: 20}, \\n\\n         \u0027raw\u0027: \u0027\u0026lt;content_as_string\u0026gt;\u0027\\n         \u0027reason\u0027: None, \\n         \u0027version\u0027: \u00271.0\u0027}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"computerName\\\", \\\"uniqueId\\\", \\\"operatingSystem\\\", \\\"ipAddresses\\\",\\n                   \\\"sep_description\\\", \\\"domain_name\\\", \\\"domain_id\\\", \\\"hardwareKey\\\", \\\"group_name\\\", \\\"group_id\\\",\\n                   \\\"infected\\\"]\\nWF_NAME = \\\"Get Endpoint Details\\\"\\nFN_NAME = \\\"fn_sep_get_computers\\\"\\nC_OUTER = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; results returned for computer name \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\" \\\\\\n            .format(WF_NAME, results[\\\"content\\\"][\\\"numberOfElements\\\"], unicode(INPUTS[\\\"sep_computername\\\"]),\\n                    FN_NAME)\\n\\n        eps = C_OUTER[\\\"content\\\"]\\n        for i in range(len(eps)):\\n            ep_osname = eps[i].get(\\\"osname\\\", \\\"\\\")\\n            newrow = incident.addRow(\\\"sep_endpoint_details\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            for f in DATA_TBL_FIELDS:\\n                f_base = f.split(\u0027_\u0027)[0]\\n                if f_base == \\\"query_execution_time\\\":\\n                    continue\\n                if eps[i][f_base] is not None:\\n                    if isinstance(eps[i][f_base], unicode) or isinstance(eps[i][f_base], int) \\\\\\n                            or isinstance(eps[i][f_base], long) or len(eps[i][f_base]) == 0:\\n                        if f_base == \\\"onlineStatus\\\":\\n                            if eps[i][f_base]:\\n                                newrow[f] = \\\"Online\\\"\\n                            else:\\n                                newrow[f] = \\\"Offline\\\"\\n                        elif f_base == \\\"infected\\\":\\n                            if eps[i][f_base]:\\n                                newrow[f] = \\\"Yes\\\"\\n                            else:\\n                                newrow[f] = \\\"No\\\"\\n                        else:\\n                            newrow[f] = eps[i][f_base]\\n                    else:\\n                        newrow[f] = \u0027,\u0027.join(eps[i][f_base])\\n\\n            if \\\"windows\\\" in ep_osname.lower():\\n                if (eps[i][\\\"quarantineDesc\\\"].find(\\\"Host Integrity check passed\\\") == -1):\\n                    newrow.endpoint_quarantine_status = \\\"Quarantined\\\"\\n                else:\\n                    newrow.endpoint_quarantine_status = \\\"Un-Quarantined\\\"\\n            else:\\n                newrow.endpoint_quarantine_status = \\\"\\\"\\n\\n            group = eps[i].group\\n            if group is not None:\\n                newrow.group_name = group[\\\"name\\\"]\\n                newrow.group_id = group[\\\"id\\\"]\\n                domain = group[\\\"domain\\\"]\\n                if domain is not None:\\n                    newrow.domain_name = domain[\\\"name\\\"]\\n                    newrow.domain_id = domain[\\\"id\\\"]\\n\\n    else:\\n        note_text += u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for computer \\\" \\\\\\n                     \\\"name \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\" \\\\\\n            .format(WF_NAME, unicode(INPUTS[\\\"sep_computername\\\"]), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sep_computername = row.computer_name\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0x5nwsi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1xa1j2n\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0x5nwsi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_192mbob\"/\u003e\u003cendEvent id=\"EndEvent_1p6qx0z\"\u003e\u003cincoming\u003eSequenceFlow_1xa1j2n\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1xa1j2n\" sourceRef=\"ServiceTask_192mbob\" targetRef=\"EndEvent_1p6qx0z\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1r41qm6\"\u003e\u003ctext\u003e\u003c![CDATA[Get endpoint properties. Input assigned from data table row. Create new entry for data table \u0027Symantec SEP - Endpoint details\n\u0027 with results.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_07qwp5h\" sourceRef=\"ServiceTask_192mbob\" targetRef=\"TextAnnotation_1r41qm6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_192mbob\" id=\"ServiceTask_192mbob_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"244\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0x5nwsi\" id=\"SequenceFlow_0x5nwsi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"244\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"221\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1p6qx0z\" id=\"EndEvent_1p6qx0z_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"389\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"407\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xa1j2n\" id=\"SequenceFlow_1xa1j2n_di\"\u003e\u003comgdi:waypoint x=\"344\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"389\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"366.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1r41qm6\" id=\"TextAnnotation_1r41qm6_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"379\" x=\"104\" y=\"35\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_07qwp5h\" id=\"Association_07qwp5h_di\"\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"292\" xsi:type=\"omgdc:Point\" y=\"93\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "description": "Get endpoint details for Evidence of Compromise (EOC) data table row \"computer_name\" value.",
-      "export_key": "wf_sep_get_endpoint_details",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002633086,
-      "name": "Example: SEP - Get Endpoint Details",
-      "object_type": "sep_eoc_scan_results",
-      "programmatic_name": "wf_sep_get_endpoint_details",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "b11247c4-b7d6-4a96-856f-e6f2d16bde76",
-      "workflow_id": 414
+      "workflow_id": 326
     },
     {
       "actions": [],
@@ -7180,162 +7150,70 @@
       "description": "Get the status of an Upload command.",
       "export_key": "wf_sep_get_upload_status",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002345985,
+      "last_modified_time": 1668001895047,
       "name": "Example: SEP - Get Upload status",
       "object_type": "sep_eoc_scan_results",
       "programmatic_name": "wf_sep_get_upload_status",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "4932c0a2-f9d7-48a7-8634-46b15785a214",
-      "workflow_id": 424
+      "workflow_id": 329
     },
     {
       "actions": [],
       "content": {
         "version": 1,
-        "workflow_id": "wf_sep_get_endpoints_status_details",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_endpoints_status_details\" isExecutable=\"true\" name=\"Example: SEP - Get Non-Compliant Endpoints status details\"\u003e\u003cdocumentation\u003eGet further details for Endpoints with non-compliant status.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0mbv4rm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1riqjtk\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_status\u0027: True},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-24 11:06:24\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1157},\\n         \u0027success\u0027: True,\\n         \u0027content\u0027: {\u0027out_of_date\u0027: 0, \u0027hi_failed\u0027: 1, \u0027disabled\u0027: 0, \u0027up_to_date\u0027: 3, \u0027non_compliant\u0027: 1,\\n                     \u0027total\u0027: 3, \u0027offline\u0027: 0},\\n         \u0027raw\u0027: \u0027{\\\"out_of_date\\\": 0, \\\"hi_failed\\\": 1, \\\"disabled\\\": 0, \\\"up_to_date\\\": 3, \\\"non_compliant\\\": 1,\\n                  \\\"total\\\": 3, \\\"offline\\\": 0}\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable for \\\"Get Endpoints status\\\" workflow.\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"computer_name\\\",\\\"host_integrity_check\\\", \\\"onlineStatus\\\", \\\"readableLastScanTime\\\",\\n                   \\\"readableLastUpdateTime\\\", \\\"apOnOff\\\", \\\"avEngineOnOff\\\", \\\"cidsBrowserFfOnOff\\\", \\\"cidsBrowserIeOnOff\\\", \\n                   \\\"cidsDrvOnOff\\\", \\\"daOnOff\\\", \\\"elamOnOff\\\", \\\"firewallOnOff\\\", \\\"pepOnOff\\\", \\\"ptpOnOff\\\", \\\"tamperOnOff\\\"]\\nFN_NAME = \\\"fn_sep_get_computers\\\"\\nWF_NAME = \\\"Get Non-Compliant Endpoints status details\\\"\\nCONTENT = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\ndef add_rows_non_compliant_computers(eps):\\n    for i in range(len(eps)):\\n        newrow = incident.addRow(\\\"sep_endpoints_non_compliant_details\\\")\\n        newrow.query_execution_date = QUERY_EXECUTION_DATE\\n        for f in DATA_TBL_FIELDS:\\n            if f == \\\"query_execution_date\\\":\\n                continue\\n            newrow[f] = eps[i][f]\\n\\ndef main():\\n    note_text = \u0027\u0027\\n\\n    if CONTENT is not None and CONTENT[\\\"total\\\"] \u0026gt; 0:\\n\\n        if CONTENT[\\\"non_compliant\\\"] \u0026gt; 0:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; non-compliant endpoints \\\" \\\\\\n                        \\\"detected out of a total of \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, CONTENT[\\\"non_compliant\\\"], CONTENT[\\\"total\\\"], FN_NAME)\\n            add_rows_non_compliant_computers(CONTENT[\\\"eps\\\"])\\n        else:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; non-compliant endpoints \\\" \\\\\\n                         \\\"detected out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\" \\\\\\n                .format(WF_NAME, CONTENT[\\\"total\\\"], FN_NAME)\\n    else:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                    \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_status_details = True\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0mbv4rm\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1bchq6z\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0mbv4rm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1riqjtk\"/\u003e\u003cendEvent id=\"EndEvent_1jtsfdp\"\u003e\u003cincoming\u003eSequenceFlow_1bchq6z\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1bchq6z\" sourceRef=\"ServiceTask_1riqjtk\" targetRef=\"EndEvent_1jtsfdp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0rkf10b\"\u003e\u003ctext\u003e\u003c![CDATA[Get properties form non-compliant endpoints.\n\u00a0Input: Parameter \u0027sep_status_details\u0027 set to True. Create new entry for data table \u0027Symantec SEP - Non-compliant Endpoints status details\u0027 with results.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1jp6veq\" sourceRef=\"ServiceTask_1riqjtk\" targetRef=\"TextAnnotation_0rkf10b\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1riqjtk\" id=\"ServiceTask_1riqjtk_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"246\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mbv4rm\" id=\"SequenceFlow_0mbv4rm_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"246\" xsi:type=\"omgdc:Point\" y=\"207\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"177\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1jtsfdp\" id=\"EndEvent_1jtsfdp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"386\" y=\"193\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"359\" y=\"232\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bchq6z\" id=\"SequenceFlow_1bchq6z_di\"\u003e\u003comgdi:waypoint x=\"346\" xsi:type=\"omgdc:Point\" y=\"209\"/\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"210\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"321\" y=\"188\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0rkf10b\" id=\"TextAnnotation_0rkf10b_di\"\u003e\u003comgdc:Bounds height=\"81\" width=\"330\" x=\"131\" y=\"35\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1jp6veq\" id=\"Association_1jp6veq_di\"\u003e\u003comgdi:waypoint x=\"296\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"296\" xsi:type=\"omgdc:Point\" y=\"116\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "wf_sep_delete_hash_from_fingerprint_list",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_delete_hash_from_fingerprint_list\" isExecutable=\"true\" name=\"Example: SEP - Delete Hash from Blacklist\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Update a blacklist fingerprint list to remove an MD5 hash.\nNote: The fingerprint list will be deleted if only a single MD5 hash is remaining in the list.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0uc7t2u\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0am1izt\" name=\"SEP - Get Domains\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17245e2-ae90-46aa-ae44-cc0d37b8387c\"\u003e{\"inputs\":{},\"post_processing_script\":\"fn_name = \\\"fn_sep_get_domains\\\"\\nwf_name = \\\"Delete Hash from Fingerprint List\\\"\\ncontent = results.content\\ndomainid = None\\nfor i in range(len(content)):\\n  if content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    domainid = content[i][\\\"id\\\"]\\n    break\\nif domainid is not None:\\n    workflow.addProperty(\\\"domid_exists\\\", {})\\nelse:\\n    note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The domain name  \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; was not found \\\" \\\\\\n                u\\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(wf_name, unicode(rule.properties.sep_domain_name), fn_name)\\n    incident.addNote(helper.createRichText(note_text))\",\"result_name\":\"get_domains_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0uc7t2u\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ve607k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0uc7t2u\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0am1izt\"/\u003e\u003cserviceTask id=\"ServiceTask_0giri6n\" name=\"SEP - Get Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e3e94d0c-e2c9-4f76-9e41-6878e718e8de\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027, u\u0027sep_domainid\u0027: u\u0027908090000946C25D330E919313D23887\u0027},\\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-28 16:23:05\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1153},\\n        \u0027success\u0027: True,\\n        \u0027content\u0027: {u\u0027description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027hashType\u0027: u\u0027MD5\u0027, u\u0027source\u0027: u\u0027WEBSERVICE\u0027,\\n                    u\u0027groupIds\u0027: [u\u00277E4BB119A9FE9DC526EDABFB1EE261B8\u0027], u\u0027data\u0027: [u\u0027482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027],\\n                    u\u0027id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027, u\u0027name\u0027: u\u0027Blacklist_2\u0027},\\n        \u0027raw\u0027: \u0027{\\\"description\\\": \\\"Hash of type Malware MD5 Hash\\\", \\\"hashType\\\": \\\"MD5\\\", \\\"source\\\": \\\"WEBSERVICE\\\", \u0027\\n               \u0027\\\"groupIds\\\": [\\\"7E4BB119A9FE9DC526EDABFB1EE261B8\\\"], \\\"data\\\": [\\\"482F9B6E0CC4C1DBBD772AAAF088CB3A\\\"], \u0027\\n               \u0027\\\"id\\\": \\\"E60B061FDD844EBF9778D4BD2AC3942A\\\", \\\"name\\\": \\\"Blacklist_2\\\"}\u0027,\\n        \u0027reason\u0027: None,\\n        \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_fingerprint_list script\\nFN_NAME = \\\"fn_get_fingerprint_list\\\"\\nWF_NAME = \\\"Delete Hash from Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\ndef main():\\n    fpl_exists = hash_in_list = last_hash_in_list = False\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and CONTENT[\\\"errorCode\\\"] == 410:\\n            # The finger print list doesn\u0027t already exist.\\n            pass\\n        elif \\\"data\\\" in CONTENT:\\n            # Finger print list exists set flag for gateway.\\n            fpl_exists = True\\n            workflow.addProperty(\\\"fpl_exists\\\", {})\\n            # Add property  whcih can be used by delete fingerprint list function if called.\\n            workflow.addProperty(\\\"sep_fingerprintlist_name\\\", {\\\"fingerprintlist_name\\\": INPUTS[\\\"sep_fingerprintlist_name\\\"]})\\n        if \\\"data\\\" in CONTENT and artifact.value.upper() in [d.upper() for d in CONTENT[\\\"data\\\"]]:\\n            # Finger print list exists and hash in list set flag for hash in list.\\n            hash_in_list = True\\n            workflow.addProperty(\\\"hash_in_list\\\", {})\\n            if len(CONTENT[\\\"data\\\"]) == 1:\\n                # This is the last hash value, delete list instead.\\n                last_hash_in_list = True\\n                workflow.addProperty(\\\"last_hash_in_list\\\", {})\\n\\n    if not hash_in_list:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; has not been detected in the \\\" \\\\\\n                    u\\\"fingerprint list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for domain id \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                    INPUTS[\\\"sep_domainid\\\"], FN_NAME)\\n        incident.addNote(helper.createRichText(note_text))\\n\\n    if last_hash_in_list:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; is the only hash in the fingerprint \\\" \\\\\\n                    u\\\"list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for domain id \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                    INPUTS[\\\"sep_domainid\\\"], FN_NAME)\\n        incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\ndomain_content = domain_content_results.content\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = domain_content[i][\\\"id\\\"]\\n    break\\n\\ninputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name\",\"result_name\":\"fpl_content_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0v2nltq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_11h8805\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_162hm01\" name=\"SEP - Update Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"86fbaf45-bb0f-4ba0-a988-cc603d315e49\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_update_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027,\\n                   u\u0027sep_hash_value\u0027: u\u00270B26E313ED4A7CA6904B0E9369E5B957,482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027,\\n                   u\u0027sep_domainid\u0027: u\u0027A9B4B7160946C25D24B6AA458EF5557F\u0027,\\n                   u\u0027sep_fingerprintlist_id\u0027: u\u0027D132F4BA85D64E9F941906C2ECBF3F5F\u0027\\n                   },\\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 10:48:45\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost.com\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1131\\n                    }, \u0027success\u0027: True,\\n                    \u0027content\u0027: \u0027\u0027,\\n                    \u0027raw\u0027: \u0027\\\"\\\"\u0027,\\n                    \u0027reason\u0027: None,\\n                    \u0027version\u0027: \u00271.0\u0027\\n\\n}\\n\\\"\\\"\\\"\\nFN_NAME = \\\"fn_sep_update_fingerprint_list\\\"\\nWF_NAME = \\\"Delete Hash from Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\ndef main():\\n    if CONTENT is not None:\\n        # If we got here we assume we are successsful, no status messgae is returned by api.\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully removed MD5 hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; from fingerprint \\\" \\\\\\n                    u\\\"list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                    FN_NAME)\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                     \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\nfpl_content_results = workflow.properties.fpl_content_results\\ndomain_content = domain_content_results.content\\nfpl_content = fpl_content_results.content\\n\\ninputs.sep_hash_value = artifact.value\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = domain_content[i][\\\"id\\\"]\\n    break\\n\\nif artifact.description is not None:\\n    inputs.sep_description = artifact.description.content\\nelse:\\n    inputs.sep_description = u\\\"Hash of type {}\\\".format(unicode(artifact.type))\\n    \\nif fpl_content[\\\"name\\\"] ==  rule.properties.sep_fingerprintlist_name:\\n    inputs.sep_fingerprintlist_id = fpl_content[\\\"id\\\"]\\n\\n\\nif fpl_content[\\\"name\\\"] ==  rule.properties.sep_fingerprintlist_name:\\n    inputs.sep_fingerprintlist_id = fpl_content[\\\"id\\\"]\\n    inputs.sep_fingerprintlist_name = fpl_content[\\\"name\\\"]\\n    if fpl_content[\\\"data\\\"] is not None:\\n        inputs.sep_hash_value = \u0027,\u0027.join([hv for hv in fpl_content[\\\"data\\\"] if hv.lower() != artifact.value.lower()])\\n\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ipha1l\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1dh77nx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_18ctqi5\"\u003e\u003cincoming\u003eSequenceFlow_1dh77nx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1dh77nx\" sourceRef=\"ServiceTask_162hm01\" targetRef=\"EndEvent_18ctqi5\"/\u003e\u003cendEvent id=\"EndEvent_0v07fj3\"\u003e\u003cincoming\u003eSequenceFlow_01uickx\u003c/incoming\u003e\u003c/endEvent\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_1kxhqy5\"\u003e\u003cincoming\u003eSequenceFlow_11h8805\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ipha1l\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_01uickx\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1apinor\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_11h8805\" sourceRef=\"ServiceTask_0giri6n\" targetRef=\"ExclusiveGateway_1kxhqy5\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1ipha1l\" name=\"Fingerprint list exists, hash in list\" sourceRef=\"ExclusiveGateway_1kxhqy5\" targetRef=\"ServiceTask_162hm01\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"hash_in_list\\\", None) != None\",\"language\":\"python\"}},{\"evaluation_id\":2,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"fpl_exists\\\", None) != None\",\"language\":\"python\"}},{\"evaluation_id\":3,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"last_hash_in_list\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_01uickx\" name=\"Hash not in list\" sourceRef=\"ExclusiveGateway_1kxhqy5\" targetRef=\"EndEvent_0v07fj3\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"hash_in_list\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cserviceTask id=\"ServiceTask_1bgeys4\" name=\"SEP - Delete Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e710d302-1010-4994-a02c-87377bfde59e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_delete_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_fingerprintlist_id\u0027: u\u00272728515A08A4481B8207623558254F60\u0027},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 11:49:38\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost.com\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1137\\n                    },\\n         \u0027success\u0027: True,\\n         \u0027content\u0027: \u0027\u0027,\\n         \u0027raw\u0027: \u0027\\\"\\\"\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n\\n}\\n\\\"\\\"\\\"\\n\\nFN_NAME = \\\"fn_sep_update_fingerprint_list\\\"\\nWF_NAME = \\\"Delete Fingerprint List\\\"\\nCONTENT = results.content\\nFP_LIST_NAME = workflow.properties.get(\\\"sep_fingerprintlist_name\\\", None)[\\\"fingerprintlist_name\\\"]\\n\\ndef main():\\n    if CONTENT is not None:\\n        # If we got here we assume we are successsful, no status messgage is returned by api.\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully deleted fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    u\\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, unicode(FP_LIST_NAME), FN_NAME)\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                     \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"pre_processing_script\":\"fpl_content_results = workflow.properties.fpl_content_results\\nfpl_content = fpl_content_results.content\\n    \\nif fpl_content[\\\"name\\\"] ==  rule.properties.sep_fingerprintlist_name:\\n    inputs.sep_fingerprintlist_id = fpl_content[\\\"id\\\"]\\n\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1apinor\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1wzicdx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1apinor\" name=\"Last hash in list\" sourceRef=\"ExclusiveGateway_1kxhqy5\" targetRef=\"ServiceTask_1bgeys4\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"last_hash_in_list\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cendEvent id=\"EndEvent_19hhdbk\"\u003e\u003cincoming\u003eSequenceFlow_1wzicdx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1wzicdx\" sourceRef=\"ServiceTask_1bgeys4\" targetRef=\"EndEvent_19hhdbk\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_1kzdufb\"\u003e\u003cincoming\u003eSequenceFlow_0ve607k\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0v2nltq\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_0ky6jnv\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ve607k\" sourceRef=\"ServiceTask_0am1izt\" targetRef=\"ExclusiveGateway_1kzdufb\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0v2nltq\" name=\"Domain id exists\" sourceRef=\"ExclusiveGateway_1kzdufb\" targetRef=\"ServiceTask_0giri6n\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cendEvent id=\"EndEvent_0r7d527\"\u003e\u003cincoming\u003eSequenceFlow_0ky6jnv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ky6jnv\" name=\"Domain id does not exist\" sourceRef=\"ExclusiveGateway_1kzdufb\" targetRef=\"EndEvent_0r7d527\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0i1qa65\"\u003e\u003ctext\u003eGet domain id by name. Input: Domain name selected from activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0bvlsgi\" sourceRef=\"ServiceTask_0am1izt\" targetRef=\"TextAnnotation_0i1qa65\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_055rsea\"\u003e\u003ctext\u003eGet fingerprint list information by name for domain by id. input: Fingerprint list\u00a0 name selected from\u00a0 activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_14bd1vg\" sourceRef=\"ServiceTask_0giri6n\" targetRef=\"TextAnnotation_055rsea\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1uq5ayd\"\u003e\u003ctext\u003e\u003c![CDATA[Update (delete) hash value from\u00a0 fingerprint list by id for domain by id.\u00a0 Input: Hash value input assigned from artifact value.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_153fcta\" sourceRef=\"ServiceTask_162hm01\" targetRef=\"TextAnnotation_1uq5ayd\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1t5n6ic\"\u003e\u003ctext\u003e\u003c![CDATA[Delete fingerprint\u00a0 list by id .\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0n8h1w6\" sourceRef=\"ServiceTask_1bgeys4\" targetRef=\"TextAnnotation_1t5n6ic\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0am1izt\" id=\"ServiceTask_0am1izt_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"248\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0uc7t2u\" id=\"SequenceFlow_0uc7t2u_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"248\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"223\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0giri6n\" id=\"ServiceTask_0giri6n_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"563\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_162hm01\" id=\"ServiceTask_162hm01_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"696\" y=\"46\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_18ctqi5\" id=\"EndEvent_18ctqi5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"868\" y=\"68\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"841\" y=\"107\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dh77nx\" id=\"SequenceFlow_1dh77nx_di\"\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"86\"/\u003e\u003comgdi:waypoint x=\"868\" xsi:type=\"omgdc:Point\" y=\"86\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"787\" y=\"64.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0v07fj3\" id=\"EndEvent_0v07fj3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"868\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"841\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_1kxhqy5\" id=\"ExclusiveGateway_1kxhqy5_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"721\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"701\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11h8805\" id=\"SequenceFlow_11h8805_di\"\u003e\u003comgdi:waypoint x=\"663\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"721\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"647\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ipha1l\" id=\"SequenceFlow_1ipha1l_di\"\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"149\"/\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"149\"/\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"126\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"89\" x=\"701.5\" y=\"139.58947368421053\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_01uickx\" id=\"SequenceFlow_01uickx_di\"\u003e\u003comgdi:waypoint x=\"771\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"868\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"75\" x=\"744.3231707317074\" y=\"191\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1bgeys4\" id=\"ServiceTask_1bgeys4_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"696\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1apinor\" id=\"SequenceFlow_1apinor_di\"\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"746\" xsi:type=\"omgdc:Point\" y=\"278\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"78\" x=\"707\" y=\"247.7608695652174\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_19hhdbk\" id=\"EndEvent_19hhdbk_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"868\" y=\"300\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"841\" y=\"339\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1wzicdx\" id=\"SequenceFlow_1wzicdx_di\"\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"318\"/\u003e\u003comgdi:waypoint x=\"868\" xsi:type=\"omgdc:Point\" y=\"318\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"787\" y=\"296.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_1kzdufb\" id=\"ExclusiveGateway_1kzdufb_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"405\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"385\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ve607k\" id=\"SequenceFlow_0ve607k_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"405\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"331.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v2nltq\" id=\"SequenceFlow_0v2nltq_di\"\u003e\u003comgdi:waypoint x=\"455\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"563\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"83\" x=\"468.34375\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0r7d527\" id=\"EndEvent_0r7d527_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"412\" y=\"314\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"385\" y=\"353\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ky6jnv\" id=\"SequenceFlow_0ky6jnv_di\"\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"314\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"79\" x=\"406\" y=\"241.79012345679013\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0i1qa65\" id=\"TextAnnotation_0i1qa65_di\"\u003e\u003comgdc:Bounds height=\"38\" width=\"200\" x=\"198\" y=\"67\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0bvlsgi\" id=\"Association_0bvlsgi_di\"\u003e\u003comgdi:waypoint x=\"298\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"298\" xsi:type=\"omgdc:Point\" y=\"105\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_055rsea\" id=\"TextAnnotation_055rsea_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"251\" x=\"413\" y=\"63\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_14bd1vg\" id=\"Association_14bd1vg_di\"\u003e\u003comgdi:waypoint x=\"588\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"552\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1uq5ayd\" id=\"TextAnnotation_1uq5ayd_di\"\u003e\u003comgdc:Bounds height=\"45\" width=\"332\" x=\"1021\" y=\"133\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_153fcta\" id=\"Association_153fcta_di\"\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"95\"/\u003e\u003comgdi:waypoint x=\"1044\" xsi:type=\"omgdc:Point\" y=\"133\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1t5n6ic\" id=\"TextAnnotation_1t5n6ic_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"148\" x=\"1027\" y=\"235\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0n8h1w6\" id=\"Association_0n8h1w6_di\"\u003e\u003comgdi:waypoint x=\"796\" xsi:type=\"omgdc:Point\" y=\"309\"/\u003e\u003comgdi:waypoint x=\"1027\" xsi:type=\"omgdc:Point\" y=\"264\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 1,
-      "description": "Get further details for Endpoints with non-compliant status.",
-      "export_key": "wf_sep_get_endpoints_status_details",
+      "description": "Update a blacklist fingerprint list to remove an MD5 hash.\nNote: The fingerprint list will be deleted if only a single MD5 hash is remaining in the list.",
+      "export_key": "wf_sep_delete_hash_from_fingerprint_list",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002350129,
-      "name": "Example: SEP - Get Non-Compliant Endpoints status details",
-      "object_type": "sep_endpoint_status_summary",
-      "programmatic_name": "wf_sep_get_endpoints_status_details",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "6e13f304-051a-4056-98a5-468965bcd9ba",
-      "workflow_id": 430
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_sep_remediate_artifact_on_endpoint",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_remediate_artifact_on_endpoint\" isExecutable=\"true\" name=\"Example: SEP - Remediate Artifact on Endpoint\"\u003e\u003cdocumentation\u003eInitiate  a file quarantine scan on Symantec Endpoint Protection endpoints and get initial command status. A remediation action quarantines all copies of the selected file on the target endpoint(s) by hash value (SHA256, SHA1 or MD5).\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0mrwl5a\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0t9pxov\" name=\"SEP - Scan Endpoints\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"cc7fd805-db7a-4c37-aa0e-29ffd1752eec\"\u003e{\"inputs\":{\"cb92fbc0-79a0-48fe-b048-8c62ef5ea42f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"810db651-8a47-4931-a4b4-1e579d08088d\"}},\"5b452d96-e040-46b3-ac15-828c9ffddbfa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"93b82e92-6f87-431a-9c2a-9f5d0f2c621b\"}}},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_upload_file_to_sepm script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_description\u0027: u\u0027Scan to remediate file based on sha256\u0027, u\u0027sep_computer_ids\u0027: u\u0027D31AA16E0946C25D40C83823C500518B\u0027, \\n                    u\u0027sep_scan_action\u0027: None, u\u0027sep_file_path\u0027: u\u0027C:\\\\\\\\temp\\\\\\\\eicar.zip\u0027, u\u0027sep_group_ids\u0027: u\u0027CAD80F000946C25D6C150831060AA326\u0027, \\n                    u\u0027sep_sha256\u0027: 8f5cae16ef5cfd3fcd9a4d6d58de14137b92a845ce00f69b64c5b04b6b712a83, u\u0027sep_scan_type\u0027: {u\u0027name\u0027: u\u0027QUICK_SCAN\u0027, u\u0027id\u0027: 229}}, \\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-04-12 10:49:22\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027Johns-MacBook-Pro-2.local\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 12349}, \\n         \u0027success\u0027: True, \u0027content\u0027: {u\u0027commandID_computer\u0027: u\u00270F0CBDD7EDFF4634B23FA11F5AB81FFC\u0027, u\u0027commandID_group\u0027: u\u0027BB37F78894DB451B8E8921EC127667A3\u0027}, \\n         \u0027raw\u0027: \u0027{\\\"commandID_computer\\\": \\\"0F0CBDD7EDFF4634B23FA11F5AB81FFC\\\", \\\"commandID_group\\\": \\\"BB37F78894DB451B8E8921EC127667A3\\\"}\u0027, \\n         \u0027reason\u0027: None, \\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"remediate_commandid\\\"]\\nfn_name = \\\"fn_sep_scan_endpoints\\\"\\nwf_name = \\\"Remediate Artifact on Endpoint \\\"\\ncontent = results.content\\nquery_execution_date = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\nif content is not None:\\n    noteText = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Command executed with id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for artifact with \\\" \\\\\\n               \\\"type \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(wf_name, content[\\\"commandID_computer\\\"], row.artifact_type, unicode(row.artifact_value), fn_name)\\n    row.query_execution_date = query_execution_date\\n    row.remediation_commandid = content[\\\"commandID_computer\\\"]\\n\\nelse:\\n    noteText += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(wf_name, fn_name)\\n\\nincident.addNote(helper.createRichText(noteText))\",\"pre_processing_script\":\"##  Symantec Endpoint Protection- fn_sep_scan_endpoints script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {    \u0027inputs\u0027: {u\u0027sep_matching_endpoint_ids\u0027: True, u\u0027sep_commandid\u0027: u\u0027C6B90CB6F344465F9CAC429437618EB0\u0027,\\n                        u\u0027sep_status_type\u0027: u\u0027scan\u0027},\\n             \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-31 11:00:58\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027,\\n                         \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 4785},\\n             \u0027success\u0027: True,\\n             \u0027content\u0027: {\u0027endpoints_matching_ids\u0027: [u\u0027WIN-4OA0GKJN830\u0027, u\u0027WIN-N5KGH4CP3N3\u0027]},\\n             \u0027raw\u0027: \u0027{\\\"endpoints_matching_ids\\\": [\\\"WIN-4OA0GKJN830\\\", \\\"WIN-N5KGH4CP3N3\\\"]}\u0027,\\n             \u0027reason\u0027: None,\\n             \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\nstatus_results =  workflow.properties.get_command_status_results\\nCONTENT = status_results.content\\nINPUTS = status_results.inputs\\nHASH_LENS = [64, 40, 32]\\nHVS = [None if h != len(row.hash_value) else row.hash_value for h in HASH_LENS]\\n\\ndef main():\\n    inputs.sep_computer_ids = row.computer_id\\n    if rule.properties.sep_target_endpoints.lower() == \\\"all matching endpoints\\\":\\n        if CONTENT is not None and CONTENT[\\\"endpoints_matching_ids\\\"]:\\n            inputs.sep_computer_ids = \u0027,\u0027.join(CONTENT[\\\"endpoints_matching_ids\\\"])\\n    else:\\n        inputs.sep_computer_ids = row.computer_id\\n    inputs.sep_sha256 = HVS[0]\\n    inputs.sep_sha1 = HVS[1]\\n    inputs.sep_md5 = HVS[2]\\n    inputs.sep_file_path = row.file_path\\n    inputs.sep_scan_type = row.scan_type+\\\"_SCAN\\\"\\n    inputs.sep_scan_action = \\\"remediate\\\"\\n    inputs.sep_description = u\\\"Remediate endpoint for suspect file \u0027{0}\u0027.\\\".format(unicode(inputs.sep_file_path))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_13314yw\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1sez1d0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_1l3it0d\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n    \u0027inputs\u0027: {u\u0027sep_commandid\u0027: u\u00272F260501C22842ABBA7EB0805D92EFE0\u0027},\\n    \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-03-01 12:46:27\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027,\\n    \u0027execution_time_ms\u0027: 1085},\\n    \u0027success\u0027: True,\\n    \u0027content\u0027:\\n                {\\n                  \\\"sort\\\": [\\n                    {\\n                      \\\"direction\\\": \\\"ASC\\\",\\n                      \\\"property\\\": \\\"Begintime\\\",\\n                      \\\"ascending\\\": true\\n                    }\\n                  ],\\n                  \\\"number\\\": 0,\\n                  \\\"firstPage\\\": true,\\n                  \\\"content\\\": [\\n                    {\\n                      \\\"computerName\\\": \\\"ep1\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"1771D79454E53469DF4B290C06C104C9\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"D31AA16E0946C25D40C83823C500518B\\\",\\n                      \\\"computerIp\\\": \\\"192.168.194.93\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    },\\n                    {\\n                      \\\"computerName\\\": \\\"ep2\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\",\\n                      \\\"computerIp\\\": \\\"192.168.194.94\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    }\\n                  ],\\n                  \\\"lastPage\\\": true,\\n                  \\\"totalPages\\\": 1,\\n                  \\\"size\\\": 20,\\n                  \\\"totalElements\\\": 2,\\n                  \\\"numberOfElements\\\": 2\\n                }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"remediation_status\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Get Remediation status\\\"\\nSTATUS_TYPE = \\\"remediate\\\"\\nREMEDITATE_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    remediation_command_state = C_OUTER[\\\"overall_command_state\\\"]\\n    total_remediation_count = C_OUTER[\\\"total_remediation_count\\\"]\\n    total_remediation_ep_count = C_OUTER[\\\"total_remediation_ep_count\\\"]\\n    total_fail_remediation_count = C_OUTER[\\\"total_fail_remediation_count\\\"]\\n    total_ep_count = C_OUTER[\\\"total_ep_count\\\"]\\n    att_name = C_OUTER[\\\"att_name\\\"]\\n\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Remediate artifact returned \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; remediated \\\" \\\\\\n                    \\\"artifacts on \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; out of a total of \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; endpoints for artifact with type \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    \\\"and value \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{7}\u0026lt;/b\u0026gt;.\u0026lt;br\u0026gt;Added full result as an attachment. \\\" \\\\\\n                    \\\"Attachment name : \u0026lt;b\u0026gt;{6}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, total_remediation_count, total_remediation_ep_count, total_ep_count, row.artifact_type,\\n                    unicode(row.artifact_value), att_name, FN_NAME)\\n\\n        if remediation_command_state == \\\"Completed\\\":\\n            if total_fail_remediation_count == 0 and total_remediation_count \u0026gt; 0:\\n                row.remediation_status = u\\\"{0} at {1}.\\\".format(remediation_command_state, REMEDITATE_EXECUTION_DATE)\\n            if total_fail_remediation_count == 0 and total_remediation_count \u0026gt; 0:\\n                row.remediation_status = u\\\"{0} at {1}.\\\".format(remediation_command_state, REMEDITATE_EXECUTION_DATE)\\n            elif total_fail_remediation_count == 0 and total_remediation_count == 0:\\n                row.remediation_status = \\\"Artifact not found\\\"\\n            elif total_fail_remediation_count \u0026gt; 0:\\n                row.remediation_status = \\\"Failed\\\"\\n        else:\\n            row.remediation_status = remediation_command_state\\n    else:\\n        row.remediation_status = remediation_command_state\\n        note_text += u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Remediate artifact returned \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results for \\\" \\\\\\n                     \\\"for artifact with type \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, row.artifact_type, unicode(row.artifact_value), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"pre_processing_script\":\"inputs.sep_incident_id = incident.id\\ninputs.sep_commandid = row.remediation_commandid\\ninputs.sep_status_type = \\\"remediation\\\"\\n\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1sez1d0\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1wubs8p\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1sez1d0\" sourceRef=\"ServiceTask_0t9pxov\" targetRef=\"ServiceTask_1l3it0d\"/\u003e\u003cendEvent id=\"EndEvent_1d7rlau\"\u003e\u003cincoming\u003eSequenceFlow_1wubs8p\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1wubs8p\" sourceRef=\"ServiceTask_1l3it0d\" targetRef=\"EndEvent_1d7rlau\"/\u003e\u003cserviceTask id=\"ServiceTask_0b85o2k\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sep_commandid = row.scan_commandid\\ninputs.sep_status_type = \\\"scan\\\"\\ninputs.sep_matching_endpoint_ids = True\",\"result_name\":\"get_command_status_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0mrwl5a\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_13314yw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_13314yw\" sourceRef=\"ServiceTask_0b85o2k\" targetRef=\"ServiceTask_0t9pxov\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0mrwl5a\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0b85o2k\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_02xaj10\"\u003e\u003ctext\u003e\u003c![CDATA[Get command status of EOC scan to determine all target endpoints for remediate action. The EOC scan commandid is assigned from a data table entry. Inputs: \u0027sep_matching_endpoint_ids\u0027 is set to True.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0rezdgv\" sourceRef=\"ServiceTask_0b85o2k\" targetRef=\"TextAnnotation_02xaj10\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1466lik\"\u003e\u003ctext\u003e\u003c![CDATA[Initiate an scan with\na remediate action. Inputs: Assigned from data table row apart from target endpoint will either be \u0027all matching endpoints\u0027 from previous step or \u0027selected endpoint\u0027 from data table row. Output:Remediate commandid.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1a68pef\" sourceRef=\"ServiceTask_0t9pxov\" targetRef=\"TextAnnotation_1466lik\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1dl8gf0\"\u003e\u003ctext\u003eGet initial command status for Remediate command by remediate commandid.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0vm26pl\" sourceRef=\"ServiceTask_1l3it0d\" targetRef=\"TextAnnotation_1dl8gf0\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0t9pxov\" id=\"ServiceTask_0t9pxov_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"537\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1l3it0d\" id=\"ServiceTask_1l3it0d_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"738\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1sez1d0\" id=\"SequenceFlow_1sez1d0_di\"\u003e\u003comgdi:waypoint x=\"637\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"738\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"642.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1d7rlau\" id=\"EndEvent_1d7rlau_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"896\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"869\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1wubs8p\" id=\"SequenceFlow_1wubs8p_di\"\u003e\u003comgdi:waypoint x=\"838\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"896\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"822\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0b85o2k\" id=\"ServiceTask_0b85o2k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"285\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13314yw\" id=\"SequenceFlow_13314yw_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"537\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"416\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mrwl5a\" id=\"SequenceFlow_0mrwl5a_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"285\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"241.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_02xaj10\" id=\"TextAnnotation_02xaj10_di\"\u003e\u003comgdc:Bounds height=\"101\" width=\"223\" x=\"223\" y=\"16\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0rezdgv\" id=\"Association_0rezdgv_di\"\u003e\u003comgdi:waypoint x=\"335\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"335\" xsi:type=\"omgdc:Point\" y=\"117\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1466lik\" id=\"TextAnnotation_1466lik_di\"\u003e\u003comgdc:Bounds height=\"113\" width=\"207\" x=\"483\" y=\"10\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1a68pef\" id=\"Association_1a68pef_di\"\u003e\u003comgdi:waypoint x=\"587\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"587\" xsi:type=\"omgdc:Point\" y=\"123\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1dl8gf0\" id=\"TextAnnotation_1dl8gf0_di\"\u003e\u003comgdc:Bounds height=\"67\" width=\"170\" x=\"703\" y=\"10\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0vm26pl\" id=\"Association_0vm26pl_di\"\u003e\u003comgdi:waypoint x=\"788\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"788\" xsi:type=\"omgdc:Point\" y=\"77\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Initiate  a file quarantine scan on Symantec Endpoint Protection endpoints and get initial command status. A remediation action quarantines all copies of the selected file on the target endpoint(s) by hash value (SHA256, SHA1 or MD5).",
-      "export_key": "wf_sep_remediate_artifact_on_endpoint",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002348132,
-      "name": "Example: SEP - Remediate Artifact on Endpoint",
-      "object_type": "sep_eoc_scan_results",
-      "programmatic_name": "wf_sep_remediate_artifact_on_endpoint",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "3ce24dcb-e1d7-47b8-8636-134f5c449be1",
-      "workflow_id": 427
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_sep_get_endpoints_status",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_endpoints_status\" isExecutable=\"true\" name=\"Example: SEP - Get Endpoints status summary\"\u003e\u003cdocumentation\u003eGet overall Endpoint status summary.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_17diq7h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0629w22\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_status\u0027: True},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-24 11:06:24\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1157},\\n         \u0027success\u0027: True,\\n         \u0027content\u0027: {\u0027out_of_date\u0027: 0, \u0027hi_failed\u0027: 1, \u0027disabled\u0027: 0, \u0027up_to_date\u0027: 3, \u0027non_compliant\u0027: 1,\\n                     \u0027total\u0027: 3, \u0027offline\u0027: 0},\\n         \u0027raw\u0027: \u0027{\\\"out_of_date\\\": 0, \\\"hi_failed\\\": 1, \\\"disabled\\\": 0, \\\"up_to_date\\\": 3, \\\"non_compliant\\\": 1,\\n                  \\\"total\\\": 3, \\\"offline\\\": 0}\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable for \\\"Get Endpoints status\\\" workflow.\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"non_compliant\\\", \\\"up_to_date\\\", \\\"out_of_date\\\", \\\"total\\\", \\\"disabled\\\",\\n                   \\\"offline\\\",\\\"hi_failed\\\", ]\\nFN_NAME = \\\"fn_sep_get_computers\\\"\\nWF_NAME = \\\"Get Endpoints status\\\"\\nCONTENT = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    \\n    new_row = incident.addRow(\\\"sep_endpoint_status_summary\\\")\\n\\n    if CONTENT is not None and CONTENT[\\\"total\\\"] \u0026gt; 0:\\n        if CONTENT[\\\"total\\\"] \u0026gt; 0:\\n          \\n            #newrow = incident.addRow(\\\"sep_endpoint_status_summary\\\")\\n            new_row.query_execution_date = QUERY_EXECUTION_DATE\\n            for f in DATA_TBL_FIELDS:\\n                if f == \\\"query_execution_date\\\":\\n                    continue\\n                new_row[f] = CONTENT[f]\\n\\n        if CONTENT[\\\"non_compliant\\\"] \u0026gt; 0:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; non-compliant endpoints \\\" \\\\\\n                        \\\"detected out of a total of \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, CONTENT[\\\"non_compliant\\\"], CONTENT[\\\"total\\\"], FN_NAME)\\n        else:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; non-compliant endpoints \\\" \\\\\\n                         \\\"detected out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\" \\\\\\n                .format(WF_NAME, CONTENT[\\\"total\\\"], FN_NAME)\\n    else:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                    \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_status = True\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_17diq7h\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0d5iax7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0zs04b4\"\u003e\u003cincoming\u003eSequenceFlow_0d5iax7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0d5iax7\" sourceRef=\"ServiceTask_0629w22\" targetRef=\"EndEvent_0zs04b4\"/\u003e\u003csequenceFlow id=\"SequenceFlow_17diq7h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0629w22\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0x9ctm1\"\u003e\u003ctext\u003e\u003c![CDATA[Get/refresh overall\u00a0 endpoint status.\n\u00a0Input parameter\u00a0 \u0027sep_status\u0027 set to True. Create new entry for data table \u0027Symantec SEP - Endpoint status summary\u0027 with status.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1tak0zp\" sourceRef=\"ServiceTask_0629w22\" targetRef=\"TextAnnotation_0x9ctm1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0629w22\" id=\"ServiceTask_0629w22_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"288\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0zs04b4\" id=\"EndEvent_0zs04b4_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"467\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"440\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d5iax7\" id=\"SequenceFlow_0d5iax7_di\"\u003e\u003comgdi:waypoint x=\"388\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"467\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"382.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17diq7h\" id=\"SequenceFlow_17diq7h_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"288\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"243\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0x9ctm1\" id=\"TextAnnotation_0x9ctm1_di\"\u003e\u003comgdc:Bounds height=\"62\" width=\"381\" x=\"147\" y=\"50\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1tak0zp\" id=\"Association_1tak0zp_di\"\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"340\" xsi:type=\"omgdc:Point\" y=\"112\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Get overall Endpoint status summary.",
-      "export_key": "wf_sep_get_endpoints_status",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002343017,
-      "name": "Example: SEP - Get Endpoints status summary",
-      "object_type": "incident",
-      "programmatic_name": "wf_sep_get_endpoints_status",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "e5969fb2-8c2c-405a-8650-f2441cfd164a",
-      "workflow_id": 420
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "wf_sep_add_fingerprint_list",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_add_fingerprint_list\" isExecutable=\"true\" name=\"Example: SEP - Add Hash to Blacklist\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Create a new blacklist fingerprint list and add an MD5 hash if the fingerprint list doesn\u0027t already exist. Add an MD5 hash to an existing blacklist fingerprint list if it already exists.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0kq5pev\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1yag4fo\" name=\"SEP - Get Domains\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17245e2-ae90-46aa-ae44-cc0d37b8387c\"\u003e{\"inputs\":{},\"post_processing_script\":\"fn_name = \\\"fn_sep_get_domains\\\"\\nwf_name = \\\"Example: SEP - Add Hash to Blacklist\\\"\\ncontent = results.content\\ndomainid = None\\nfor i in range(len(content)):\\n  if content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    domainid = content[i][\\\"id\\\"]\\n    break\\nif domainid is not None:\\n    workflow.addProperty(\\\"domid_exists\\\", {})\\nelse:\\n    note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The domain name  \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; was not found \\\" \\\\\\n                u\\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(wf_name, unicode(rule.properties.sep_domain_name), fn_name)\\n    incident.addNote(helper.createRichText(note_text))\",\"result_name\":\"get_domains_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0kq5pev\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0biifwi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0kq5pev\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1yag4fo\"/\u003e\u003cserviceTask id=\"ServiceTask_1ky4b19\" name=\"SEP - Add Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d4b5ee5d-10b2-4935-a650-f1516acfc691\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_add_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, \\n                   u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist\u0027, \\n                   u\u0027sep_hash_value\u0027: u\u0027482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027, \\n                   u\u0027sep_domainid\u0027: u\u0027A9B4B7160946C25D24B6AA458EF5557F\u0027\\n                   }, \\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 12:02:37\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \\n                    \u0027host\u0027: \u0027myhost.ibm.com\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1417\\n                    }, \\n        \u0027success\u0027: True, \\n        \u0027content\u0027: {u\u0027id\u0027: u\u0027AB29BEA5333C488694B9533E65858BF2\u0027}, \\n        \u0027raw\u0027: \u0027{\\\"id\\\": \\\"AB29BEA5333C488694B9533E65858BF2\\\"}\u0027,\\n        \u0027reason\u0027: None, \\n        \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\nFN_NAME = \\\"Add Hash to Fingerprint List\\\"\\nWF_NAME = \\\"fn_sep_add_fingerprint_list\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\ndef main():\\n    if CONTENT is not None:\\n        # If we got here we assume we are successsful.\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added MD5 hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to new fingerprint list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n                   \\\"\u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]), FN_NAME)\\n    \\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                     \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n    \\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\ncontent = domain_content_results.content\\nfor i in range(len(content)):\\n  if content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = content[i][\\\"id\\\"]\\n    break\\ninputs.sep_hash_value = artifact.value\\ninputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name\\ninputs.sep_description = u\\\"Fingerprint list \u0027{}\u0027\\\".format(unicode(inputs.sep_fingerprintlist_name))\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0d2r1uc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1uotu52\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_00ai6k6\" name=\"SEP - Get Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e3e94d0c-e2c9-4f76-9e41-6878e718e8de\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027, u\u0027sep_domainid\u0027: u\u0027908090000946C25D330E919313D23887\u0027},\\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-28 16:23:05\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1153},\\n        \u0027success\u0027: True,\\n        \u0027content\u0027: {u\u0027description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027hashType\u0027: u\u0027MD5\u0027, u\u0027source\u0027: u\u0027WEBSERVICE\u0027,\\n                    u\u0027groupIds\u0027: [u\u00277E4BB119A9FE9DC526EDABFB1EE261B8\u0027], u\u0027data\u0027: [u\u0027482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027],\\n                    u\u0027id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027, u\u0027name\u0027: u\u0027Blacklist_2\u0027},\\n        \u0027raw\u0027: \u0027{\\\"description\\\": \\\"Hash of type Malware MD5 Hash\\\", \\\"hashType\\\": \\\"MD5\\\", \\\"source\\\": \\\"WEBSERVICE\\\", \u0027\\n               \u0027\\\"groupIds\\\": [\\\"7E4BB119A9FE9DC526EDABFB1EE261B8\\\"], \\\"data\\\": [\\\"482F9B6E0CC4C1DBBD772AAAF088CB3A\\\"], \u0027\\n               \u0027\\\"id\\\": \\\"E60B061FDD844EBF9778D4BD2AC3942A\\\", \\\"name\\\": \\\"Blacklist_2\\\"}\u0027,\\n        \u0027reason\u0027: None,\\n        \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_fingerprint_list script\\nDATA_TBL_FIELDS = [\\\"domain_name\\\", \\\"list_name\\\", \\\"list_id\\\", \\\"list_description\\\", \\\"hash_values\\\", \\\"hash_type\\\", \\\"group_ids\\\"]\\nWF_NAME = \\\"Add Hash to Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    fpl_exists = hash_in_list = False\\n    note_text = \u0027\u0027\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and int(CONTENT[\\\"errorCode\\\"]) == 410:\\n            # The finger print list doesn\u0027t already exist.\\n            pass\\n        elif \\\"data\\\" in CONTENT:\\n            # The finger print list exists set flag for gateway.\\n            fpl_exists = True\\n            workflow.addProperty(\\\"fpl_exists\\\", {})\\n        if \\\"data\\\" in CONTENT and artifact.value.upper() in [d.upper() for d in CONTENT[\\\"data\\\"]]:\\n            # Finger print list exists and hash in list set flag for hash in list.\\n            hash_in_list = True\\n            workflow.addProperty(\\\"hash_in_list\\\", {})\\n\\n    if fpl_exists and hash_in_list:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; has already been added to \\\" \\\\\\n                    u\\\"fingerprint list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for domain id \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                    INPUTS[\\\"sep_domainid\\\"])\\n        incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\ndomain_content = domain_content_results.content\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = domain_content[i][\\\"id\\\"]\\n    break\\n\\ninputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name\\n\",\"result_name\":\"get_fingerprintlist_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0c6p764\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_15jlepx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_1w8n3y1\" name=\"SEP - Update Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"86fbaf45-bb0f-4ba0-a988-cc603d315e49\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_update_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027,\\n                   u\u0027sep_hash_value\u0027: u\u00270B26E313ED4A7CA6904B0E9369E5B957,482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027,\\n                   u\u0027sep_domainid\u0027: u\u0027A9B4B7160946C25D24B6AA458EF5557F\u0027,\\n                   u\u0027sep_fingerprintlist_id\u0027: u\u0027D132F4BA85D64E9F941906C2ECBF3F5F\u0027\\n                   },\\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 10:48:45\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost.com\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1131\\n                    }, \u0027success\u0027: True,\\n                    \u0027content\u0027: \u0027\u0027,\\n                    \u0027raw\u0027: \u0027\\\"\\\"\u0027,\\n                    \u0027reason\u0027: None,\\n                    \u0027version\u0027: \u00271.0\u0027\\n\\n}\\n\\\"\\\"\\\"\\nFN_NAME = \\\"fn_sep_update_fingerprint_list\\\"\\nWF_NAME = \\\"Add Hash to Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\ndef main():\\n    if CONTENT is not None:\\n        # If we got here we assume we are successsful, no status messgae is returned by api.\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added MD5 hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to fingerprint \\\" \\\\\\n                    \\\"list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                    FN_NAME)\\n    \\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                     \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n    \\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\nfpl_content_results = workflow.properties.get_fingerprintlist_results\\ndomain_content = domain_content_results.content\\nfpl_content = fpl_content_results.content\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = domain_content[i][\\\"id\\\"]\\n    break\\n    \\nif fpl_content[\\\"name\\\"] ==  rule.properties.sep_fingerprintlist_name:\\n    inputs.sep_fingerprintlist_id = fpl_content[\\\"id\\\"]\\n    inputs.sep_fingerprintlist_name = fpl_content[\\\"name\\\"]\\n    if fpl_content[\\\"data\\\"] is not None:\\n        inputs.sep_hash_value = artifact.value + \u0027,\u0027 + \u0027,\u0027.join(fpl_content[\\\"data\\\"])\\n    else:\\n        inputs.sep_hash_value = artifact.value\\n\\ninputs.sep_description = u\\\"Fingerprint list \u0027{}\u0027\\\".format(unicode(inputs.sep_fingerprintlist_name))\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t3gxmu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0trk8w1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1ex9cby\"\u003e\u003cincoming\u003eSequenceFlow_0trk8w1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0trk8w1\" sourceRef=\"ServiceTask_1w8n3y1\" targetRef=\"EndEvent_1ex9cby\"/\u003e\u003cendEvent id=\"EndEvent_0q07f4q\"\u003e\u003cincoming\u003eSequenceFlow_1uotu52\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1uotu52\" sourceRef=\"ServiceTask_1ky4b19\" targetRef=\"EndEvent_0q07f4q\"/\u003e\u003cendEvent id=\"EndEvent_0e1z6sp\"\u003e\u003cincoming\u003eSequenceFlow_1gh12ii\u003c/incoming\u003e\u003c/endEvent\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_1atgwj2\"\u003e\u003cincoming\u003eSequenceFlow_15jlepx\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1t3gxmu\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_0d2r1uc\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1gh12ii\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_15jlepx\" sourceRef=\"ServiceTask_00ai6k6\" targetRef=\"ExclusiveGateway_1atgwj2\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1t3gxmu\" name=\"Fingerprint exists, hash not in list\" sourceRef=\"ExclusiveGateway_1atgwj2\" targetRef=\"ServiceTask_1w8n3y1\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"fpl_exists\\\", None)  != None\",\"language\":\"python\"}},{\"evaluation_id\":2,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"hash_in_list\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_0d2r1uc\" name=\"Fingerprint list doesn\u0027t exist\" sourceRef=\"ExclusiveGateway_1atgwj2\" targetRef=\"ServiceTask_1ky4b19\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"fpl_exists\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_1gh12ii\" name=\"Fingerprint exists, hash in list\" sourceRef=\"ExclusiveGateway_1atgwj2\" targetRef=\"EndEvent_0e1z6sp\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"fpl_exists\\\", None)  != None\",\"language\":\"python\"}},{\"evaluation_id\":2,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"hash_in_list\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_0odi5lh\"\u003e\u003cincoming\u003eSequenceFlow_0biifwi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0c6p764\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1rgvipb\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0biifwi\" sourceRef=\"ServiceTask_1yag4fo\" targetRef=\"ExclusiveGateway_0odi5lh\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0c6p764\" name=\"Domain id exists\" sourceRef=\"ExclusiveGateway_0odi5lh\" targetRef=\"ServiceTask_00ai6k6\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cendEvent id=\"EndEvent_05qh4sr\"\u003e\u003cincoming\u003eSequenceFlow_1rgvipb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1rgvipb\" name=\"Domain id does not exist\" sourceRef=\"ExclusiveGateway_0odi5lh\" targetRef=\"EndEvent_05qh4sr\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1cpx12i\"\u003e\u003ctext\u003eGet domain id by name. Input: Domain name selected from activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0s0s66c\" sourceRef=\"ServiceTask_1yag4fo\" targetRef=\"TextAnnotation_1cpx12i\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_135ie3b\"\u003e\u003ctext\u003eGet fingerprint id and name by domain id. Input: Fingerprint list\u00a0 name selected from\u00a0 activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0i5n4ot\" sourceRef=\"ServiceTask_00ai6k6\" targetRef=\"TextAnnotation_135ie3b\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_09wgioe\"\u003e\u003ctext\u003eUpdate (add) hash value to\u00a0 fingerprint list by id for domain by id. Input:\u00a0 Hash value input assigned from artifact value.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ne5lde\" sourceRef=\"ServiceTask_1w8n3y1\" targetRef=\"TextAnnotation_09wgioe\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0wr9qec\"\u003e\u003ctext\u003eCreate new\u00a0 fingerprint list by name for domain by id and add hash.\u00a0 Input: Hash value input assigned from artifact value.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_18bj1az\" sourceRef=\"ServiceTask_1ky4b19\" targetRef=\"TextAnnotation_0wr9qec\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1yag4fo\" id=\"ServiceTask_1yag4fo_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"271\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0kq5pev\" id=\"SequenceFlow_0kq5pev_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"271\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"189.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ky4b19\" id=\"ServiceTask_1ky4b19_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"766\" y=\"310\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_00ai6k6\" id=\"ServiceTask_00ai6k6_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"592\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1w8n3y1\" id=\"ServiceTask_1w8n3y1_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"766\" y=\"38\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ex9cby\" id=\"EndEvent_1ex9cby_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"936\" y=\"60\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"909\" y=\"99\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0trk8w1\" id=\"SequenceFlow_0trk8w1_di\"\u003e\u003comgdi:waypoint x=\"866\" xsi:type=\"omgdc:Point\" y=\"78\"/\u003e\u003comgdi:waypoint x=\"936\" xsi:type=\"omgdc:Point\" y=\"78\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"856\" y=\"56.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0q07f4q\" id=\"EndEvent_0q07f4q_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"936\" y=\"332\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"909\" y=\"371\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uotu52\" id=\"SequenceFlow_1uotu52_di\"\u003e\u003comgdi:waypoint x=\"866\" xsi:type=\"omgdc:Point\" y=\"350\"/\u003e\u003comgdi:waypoint x=\"901\" xsi:type=\"omgdc:Point\" y=\"350\"/\u003e\u003comgdi:waypoint x=\"901\" xsi:type=\"omgdc:Point\" y=\"350\"/\u003e\u003comgdi:waypoint x=\"936\" xsi:type=\"omgdc:Point\" y=\"350\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"871\" y=\"343.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0e1z6sp\" id=\"EndEvent_0e1z6sp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"936\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"909\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_1atgwj2\" id=\"ExclusiveGateway_1atgwj2_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"791\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"771\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15jlepx\" id=\"SequenceFlow_15jlepx_di\"\u003e\u003comgdi:waypoint x=\"692\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"791\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"696.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t3gxmu\" id=\"SequenceFlow_1t3gxmu_di\"\u003e\u003comgdi:waypoint x=\"816\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"816\" xsi:type=\"omgdc:Point\" y=\"118\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"89\" x=\"771\" y=\"141.6716417910448\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d2r1uc\" id=\"SequenceFlow_0d2r1uc_di\"\u003e\u003comgdi:waypoint x=\"816\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"816\" xsi:type=\"omgdc:Point\" y=\"310\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"72\" x=\"780\" y=\"232.55696202531647\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1gh12ii\" id=\"SequenceFlow_1gh12ii_di\"\u003e\u003comgdi:waypoint x=\"841\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"936\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"89\" x=\"853.1346153846154\" y=\"193\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_0odi5lh\" id=\"ExclusiveGateway_0odi5lh_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"441.4895489548955\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"466.4895489548955\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0biifwi\" id=\"SequenceFlow_0biifwi_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"441\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"406\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0c6p764\" id=\"SequenceFlow_0c6p764_di\"\u003e\u003comgdi:waypoint x=\"491\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"592\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"83\" x=\"500\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_05qh4sr\" id=\"EndEvent_05qh4sr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"448\" y=\"317.3993399339934\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"466\" y=\"356.3993399339934\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rgvipb\" id=\"SequenceFlow_1rgvipb_di\"\u003e\u003comgdi:waypoint x=\"466\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"466\" xsi:type=\"omgdc:Point\" y=\"317\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"79\" x=\"442\" y=\"268\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1cpx12i\" id=\"TextAnnotation_1cpx12i_di\"\u003e\u003comgdc:Bounds height=\"49\" width=\"311\" x=\"165\" y=\"53\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0s0s66c\" id=\"Association_0s0s66c_di\"\u003e\u003comgdi:waypoint x=\"321\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"321\" xsi:type=\"omgdc:Point\" y=\"102\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_135ie3b\" id=\"TextAnnotation_135ie3b_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"218\" x=\"502\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0i5n4ot\" id=\"Association_0i5n4ot_di\"\u003e\u003comgdi:waypoint x=\"633\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"617\" xsi:type=\"omgdc:Point\" y=\"96\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_09wgioe\" id=\"TextAnnotation_09wgioe_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"259\" x=\"1085\" y=\"140\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ne5lde\" id=\"Association_1ne5lde_di\"\u003e\u003comgdi:waypoint x=\"866\" xsi:type=\"omgdc:Point\" y=\"89\"/\u003e\u003comgdi:waypoint x=\"1107\" xsi:type=\"omgdc:Point\" y=\"140\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0wr9qec\" id=\"TextAnnotation_0wr9qec_di\"\u003e\u003comgdc:Bounds height=\"56\" width=\"387\" x=\"1085\" y=\"265\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_18bj1az\" id=\"Association_18bj1az_di\"\u003e\u003comgdi:waypoint x=\"866\" xsi:type=\"omgdc:Point\" y=\"344\"/\u003e\u003comgdi:waypoint x=\"1085\" xsi:type=\"omgdc:Point\" y=\"317\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Create a new blacklist fingerprint list and add an MD5 hash if the fingerprint list doesn\u0027t already exist. Add an MD5 hash to an existing blacklist fingerprint list if it already exists.",
-      "export_key": "wf_sep_add_fingerprint_list",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002342293,
-      "name": "Example: SEP - Add Hash to Blacklist",
+      "last_modified_time": 1668001892636,
+      "name": "Example: SEP - Delete Hash from Blacklist",
       "object_type": "artifact",
-      "programmatic_name": "wf_sep_add_fingerprint_list",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "bfaa58ba-c487-42eb-a055-2f7d339d1932",
-      "workflow_id": 419
+      "programmatic_name": "wf_sep_delete_hash_from_fingerprint_list",
+      "tags": [],
+      "uuid": "c430f574-c952-462c-a86a-075ce113e126",
+      "workflow_id": 323
     },
     {
       "actions": [],
       "content": {
         "version": 1,
-        "workflow_id": "wf_sep_get_file_content_as_base64_string",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_file_content_as_base64_string\" isExecutable=\"true\" name=\"Example: SEP - Get File Content as Base64 string\"\u003e\u003cdocumentation\u003eGet contents of a file uploaded to SEPM server as a Base64 string.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0u06rc6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0g265cu\" name=\"SEP - Get File Content as Base64\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3f9eb5b-969b-45aa-bb88-29c21c85fd04\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_file_content_as_base64 ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_file_id\u0027: u\u0027B9158547A9FE9DC52292A6098528F239\u0027},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-29 16:44:07\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027,\\n                     \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1893},\\n         \u0027success\u0027: True,\\n         \u0027content\u0027: \u0027\u0026lt;base64_string\u0026gt;\u0027,\\n         \u0027raw\u0027: \u0027\\\"\u0026lt;base64_string\u0026gt;\\\"\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\nDATA_TBL_FIELDS = []\\nFN_NAME = \\\"fn_sep_get_file_content_as_base64\\\"\\nWF_NAME = \\\"Get  File Content as Base64 string\\\"\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = []\\nCONTENT = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Processing\\n\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if CONTENT is not None:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Returned Base64 string of size \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; returned \\\" \\\\\\n                    \\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, len(CONTENT), FN_NAME)\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned for \\\" \\\\\\n                    \\\"Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_file_id = row.file_id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0u06rc6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vfi4tu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0u06rc6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0g265cu\"/\u003e\u003cendEvent id=\"EndEvent_0u9uek2\"\u003e\u003cincoming\u003eSequenceFlow_0vfi4tu\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vfi4tu\" sourceRef=\"ServiceTask_0g265cu\" targetRef=\"EndEvent_0u9uek2\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0nw6rl8\"\u003e\u003ctext\u003e\u003c![CDATA[Get uploaded file content as Base64 string by file id.\ninput: File id parameter assigned from data table entry.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_146oek5\" sourceRef=\"ServiceTask_0g265cu\" targetRef=\"TextAnnotation_0nw6rl8\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0g265cu\" id=\"ServiceTask_0g265cu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"248\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0u06rc6\" id=\"SequenceFlow_0u06rc6_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"248\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"223\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0u9uek2\" id=\"EndEvent_0u9uek2_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"396\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"414\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vfi4tu\" id=\"SequenceFlow_0vfi4tu_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"372\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0nw6rl8\" id=\"TextAnnotation_0nw6rl8_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"214\" x=\"196\" y=\"58\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_146oek5\" id=\"Association_146oek5_di\"\u003e\u003comgdi:waypoint x=\"300\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"302\" xsi:type=\"omgdc:Point\" y=\"121\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "wf_sep_get_blacklist_information",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_blacklist_information\" isExecutable=\"true\" name=\"Example: SEP - Get Blacklist information\"\u003e\u003cdocumentation\u003eGet a blacklist fingerprint list information for a specified name.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1ps8d9j\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_07rq9qa\" name=\"SEP - Get Domains\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17245e2-ae90-46aa-ae44-cc0d37b8387c\"\u003e{\"inputs\":{},\"post_processing_script\":\"fn_name = \\\"fn_sep_get_domains\\\"\\nwf_name = \\\"Example: SEP - Get Blacklist information\\\"\\ncontent = results.content\\ndomainid = None\\nfor i in range(len(content)):\\n  if content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    domainid = content[i][\\\"id\\\"]\\n    break\\nif domainid is not None:\\n    workflow.addProperty(\\\"domid_exists\\\", {})\\nelse:\\n    note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The domain name  \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; was not found \\\" \\\\\\n                u\\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(wf_name, unicode(rule.properties.sep_domain_name), fn_name)\\n    incident.addNote(helper.createRichText(note_text))\",\"result_name\":\"get_domains_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1ps8d9j\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0ea62qu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1ps8d9j\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_07rq9qa\"/\u003e\u003cserviceTask id=\"ServiceTask_02udmal\" name=\"SEP - Get Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e3e94d0c-e2c9-4f76-9e41-6878e718e8de\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027, u\u0027sep_domainid\u0027: u\u0027908090000946C25D330E919313D23887\u0027}, \\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-28 16:23:05\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1153}, \\n        \u0027success\u0027: True, \\n        \u0027content\u0027: {u\u0027description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027hashType\u0027: u\u0027MD5\u0027, u\u0027source\u0027: u\u0027WEBSERVICE\u0027, \\n                    u\u0027groupIds\u0027: [u\u00277E4BB119A9FE9DC526EDABFB1EE261B8\u0027], u\u0027data\u0027: [u\u0027482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027], \\n                    u\u0027id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027, u\u0027name\u0027: u\u0027Blacklist_2\u0027}, \\n        \u0027raw\u0027: \u0027{\\\"description\\\": \\\"Hash of type Malware MD5 Hash\\\", \\\"hashType\\\": \\\"MD5\\\", \\\"source\\\": \\\"WEBSERVICE\\\", \u0027\\n               \u0027\\\"groupIds\\\": [\\\"7E4BB119A9FE9DC526EDABFB1EE261B8\\\"], \\\"data\\\": [\\\"482F9B6E0CC4C1DBBD772AAAF088CB3A\\\"], \u0027\\n               \u0027\\\"id\\\": \\\"E60B061FDD844EBF9778D4BD2AC3942A\\\", \\\"name\\\": \\\"Blacklist_2\\\"}\u0027, \\n        \u0027reason\u0027: None, \\n        \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_fingerprint_list script\\nDATA_TBL_FIELDS = [\\\"domain_name\\\", \\\"list_name\\\", \\\"list_id\\\", \\\"list_description\\\", \\\"hash_values\\\", \\\"group_ids\\\"]\\nFN_NAME = \\\"fn_sep_get_fingerprint_list\\\"\\nWF_NAME = \\\"Get Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nDOMAIN_NAME = rule.properties.sep_domain_name\\n# Processing\\n\\n\\ndef main():\\n    note_text = \u0027\u0027\\n\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and int(CONTENT[\\\"errorCode\\\"]) == 410:\\n            # The finger print list doesn\u0027t exist.\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; does not exist \\\" \\\\\\n                        \\\"for domain \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]), unicode(DOMAIN_NAME), FN_NAME)\\n        else:\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; results returned for \\\" \\\\\\n                        \\\"fingerprint list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and domain \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, len(CONTENT[\\\"data\\\"]), unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                        unicode(DOMAIN_NAME), FN_NAME)\\n\\n            newrow = incident.addRow(\\\"sep_fingerprint_lists\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            newrow.domain_name = rule.properties.sep_domain_name\\n            newrow.list_name =  CONTENT[\\\"name\\\"]\\n            newrow.list_id =  CONTENT[\\\"id\\\"]\\n            newrow.list_description =  CONTENT[\\\"description\\\"]\\n            newrow.hash_values = \u0027, \u0027.join(CONTENT[\\\"data\\\"])\\n            newrow.group_ids = \u0027, \u0027.join(CONTENT[\\\"groupIds\\\"])\\n    else:\\n        noteText += u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned  for \\\" \\\\\\n                    \\\"fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and domain \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient \\\" \\\\\\n                    \\\"function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                                                 unicode(DOMAIN_NAME), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\ndomain_content = domain_content_results.content\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = domain_content[i][\\\"id\\\"]\\n    break\\ninputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0rgoz9j\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0gitwsh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0vp7xul\"\u003e\u003cincoming\u003eSequenceFlow_0gitwsh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0gitwsh\" sourceRef=\"ServiceTask_02udmal\" targetRef=\"EndEvent_0vp7xul\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_041efzy\"\u003e\u003cincoming\u003eSequenceFlow_0ea62qu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0rgoz9j\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1xlixd1\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0ea62qu\" sourceRef=\"ServiceTask_07rq9qa\" targetRef=\"ExclusiveGateway_041efzy\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0rgoz9j\" name=\"Domain id exists\" sourceRef=\"ExclusiveGateway_041efzy\" targetRef=\"ServiceTask_02udmal\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cendEvent id=\"EndEvent_1azx5ow\"\u003e\u003cincoming\u003eSequenceFlow_1xlixd1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1xlixd1\" name=\"Domain id does not exist\" sourceRef=\"ExclusiveGateway_041efzy\" targetRef=\"EndEvent_1azx5ow\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1mq2nlq\"\u003e\u003ctext\u003eGet domain id by name. Input: Domain name selected from activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0sygkpf\" sourceRef=\"ServiceTask_07rq9qa\" targetRef=\"TextAnnotation_1mq2nlq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1p42b6d\"\u003e\u003ctext\u003e\u003c![CDATA[Get fingerprint list information by name for domain by id. Fingerprint list\u00a0 name selected from\u00a0 activity field.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1t81cuv\" sourceRef=\"ServiceTask_02udmal\" targetRef=\"TextAnnotation_1p42b6d\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_07rq9qa\" id=\"ServiceTask_07rq9qa_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"243\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ps8d9j\" id=\"SequenceFlow_1ps8d9j_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"243\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_02udmal\" id=\"ServiceTask_02udmal_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"560\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0vp7xul\" id=\"EndEvent_0vp7xul_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"734\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"707\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0gitwsh\" id=\"SequenceFlow_0gitwsh_di\"\u003e\u003comgdi:waypoint x=\"660\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"734\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"652\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_041efzy\" id=\"ExclusiveGateway_041efzy_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"397\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"422\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ea62qu\" id=\"SequenceFlow_0ea62qu_di\"\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"397\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"370\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0rgoz9j\" id=\"SequenceFlow_0rgoz9j_di\"\u003e\u003comgdi:waypoint x=\"447\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"560\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"83\" x=\"462\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1azx5ow\" id=\"EndEvent_1azx5ow_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"404\" y=\"320\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"422\" y=\"359\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xlixd1\" id=\"SequenceFlow_1xlixd1_di\"\u003e\u003comgdi:waypoint x=\"422\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"422\" xsi:type=\"omgdc:Point\" y=\"320\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"79\" x=\"398\" y=\"269\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1mq2nlq\" id=\"TextAnnotation_1mq2nlq_di\"\u003e\u003comgdc:Bounds height=\"47\" width=\"150\" x=\"218\" y=\"52\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0sygkpf\" id=\"Association_0sygkpf_di\"\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"294\" xsi:type=\"omgdc:Point\" y=\"99\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1p42b6d\" id=\"TextAnnotation_1p42b6d_di\"\u003e\u003comgdc:Bounds height=\"67\" width=\"238\" x=\"491\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1t81cuv\" id=\"Association_1t81cuv_di\"\u003e\u003comgdi:waypoint x=\"610\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"610\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 1,
-      "description": "Get contents of a file uploaded to SEPM server as a Base64 string.",
-      "export_key": "wf_sep_get_file_content_as_base64_string",
+      "description": "Get a blacklist fingerprint list information for a specified name.",
+      "export_key": "wf_sep_get_blacklist_information",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002340817,
-      "name": "Example: SEP - Get File Content as Base64 string",
-      "object_type": "sep_eoc_scan_results",
-      "programmatic_name": "wf_sep_get_file_content_as_base64_string",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "20376905-53d7-45a5-846a-aa6da648186c",
-      "workflow_id": 417
+      "last_modified_time": 1668001894650,
+      "name": "Example: SEP - Get Blacklist information",
+      "object_type": "incident",
+      "programmatic_name": "wf_sep_get_blacklist_information",
+      "tags": [],
+      "uuid": "3401ead8-eeaa-4719-b511-54018521041f",
+      "workflow_id": 328
     },
     {
       "actions": [],
       "content": {
-        "version": 2,
-        "workflow_id": "wf_sep_quarantine_endpoint",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_quarantine_endpoint\" isExecutable=\"true\" name=\"Example: SEP - Quarantine Endpoint\"\u003e\u003cdocumentation\u003eQuarantine or un-quarantine an endpoint. Add or remove endpoints to or from network quarantine.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_06pked3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0x2fe5w\" name=\"SEP - Quarantine Endpoints\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ce358d79-cdf9-49d8-a94c-89d838f51197\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_quarantine_endpoints script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027inputs\u0027: {u\u0027sep_undo\u0027: False, u\u0027sep_computer_ids\u0027: u\u002789AD1BBB0946C25D25E6C0984E971D8A\u0027},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 14:42:09\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                     \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1102\\n                    }, \u0027success\u0027: True,\\n         \u0027content\u0027: {u\u0027commandID_computer\u0027: u\u002779AD5636B73A4C0D828938AE1E5B2C13\u0027},\\n         \u0027raw\u0027: \u0027{\\\"commandID_computer\\\": \\\"79AD5636B73A4C0D828938AE1E5B2C13\\\"}\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_quarantine_endpoints script\\nDATA_TBL_FIELDS = [\\\"quarantine_commandid\\\"]\\nfn_name = \\\"fn_sep_quarantine_endpoints\\\"\\nwf_name = \\\"Quarantine Endpoint\\\"\\n# Processing\\ncontent = results.content\\ninputs = results.inputs\\nquery_execution_date = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\nif content  is not None:\\n    note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Executed with command id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for endpoint \\\" \\\\\\n                \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(wf_name, content[\\\"commandID_computer\\\"], row.computerName, fn_name)\\n    row.query_execution_date = query_execution_date\\n    row.quarantine_commandid = content[\\\"commandID_computer\\\"]\\n\\nelse:\\n    note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n                 .format(wf_name, fn_name)\\n\\nincident.addNote(helper.createRichText(note_text))\\n\",\"pre_processing_script\":\"inputs.sep_computer_ids = row.uniqueId\\nendpoint_quarantine_status = row.endpoint_quarantine_status[\\\"content\\\"]\\n\\n# 2 different rules using - Quarantine or Un-quarantine  based on row value. (w rules using Workflow)\\ninputs.sep_undo = True if endpoint_quarantine_status == \\\"Quarantined\\\" else False\\n\",\"result_name\":\"quarantine_ep_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_06pked3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0htp49n\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_06pked3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0x2fe5w\"/\u003e\u003cserviceTask id=\"ServiceTask_0jp94xu\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027inputs\u0027: {u\u0027sep_status_type\u0027: u\u0027quarantine\u0027, u\u0027sep_commandid\u0027: u\u00277D3670DDF5A64A99B3721BF8A375B302\u0027},\\n          \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-04-26 15:25:55\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                      \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1256},\\n          \u0027success\u0027: True,\\n          \u0027content\u0027: {u\u0027sort\u0027: [{u\u0027direction\u0027: u\u0027ASC\u0027, u\u0027property\u0027: u\u0027Begintime\u0027, u\u0027ascending\u0027: True}], \u0027command_state\u0027: \u0027Completed\u0027, u\u0027number\u0027: 0, u\u0027firstPage\u0027: True, \u0027: 0, u\u0027content\u0027: [{u\u0027computerName\u0027: u\u0027WIN-N5KGH4CP3N3\u0027, u\u0027subStateId u\u0027binaryFileId\u0027: None, u\u0027lastUpdateTime\u0027:\\n                        u\u00272019-04-26T11:05:27Z\u0027, u\u0027domainName\u0027: u\u0027Default\u0027, u\u0027hardwareKey\u0027: u\u0027DC7D24D6465566D2941F35BC8D17801E\u0027,\\n                        u\u0027subStateDesc\u0027: u\u0027\u0027, u\u0027stateId\u0027: 3, u\u0027computerId\u0027: u\u002789AD1BBB0946C25D25E6C0984E971D8A\u0027, u\u0027computerIp\u0027: u\u00279.70.194.94\u0027, u\u0027beginTime\u0027: u\u00272019-04-26T11:05:27Z\u0027, u\u0027currentLoginUserName\u0027: u\u0027Administrator\u0027, u\u0027resultInXML\u0027: u\u0027\u0027, \u0027command_status_id\u0027: 3}], u\u0027lastPage\u0027: True, u\u0027totalPages\u0027: 1, u\u0027numberOfElements\u0027: 1, u\u0027totalElements\u0027: 1, u\u0027size\u0027: 20},\\n          \u0027raw\u0027: \u0027{\\\"sort\\\": [{\\\"direction\\\": \\\"ASC\\\", \\\"property\\\": \\\"Begintime\\\", \\\"ascending\\\": true}], \\\"command_state\\\": \\\"Completed\\\", \\\"number\\\": 0, \\\"firstPage\\\": true, \\\"content\\\": [{\\\"computerName\\\": \\\"WIN-N5KGH4CP3N3\\\", \\\"subStateId\\\": 0, \\\"binaryFileId\\\": null, \\\"lastUpdateTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"domainName\\\": \\\"Default\\\", \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\", \\\"subStateDesc\\\": \\\"\\\", \\\"stateId\\\": 3, \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\", \\\"computerIp\\\": \\\"9.70.194.94\\\", \\\"beginTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"currentLoginUserName\\\": \\\"Administrator\\\", \\\"resultInXML\\\": \\\"\\\", \\\"command_status_id\\\": 3}], \\\"lastPage\\\": true, \\\"totalPages\\\": 1, \\\"numberOfElements\\\": 1, \\\"totalElements\\\": 1, \\\"size\\\": 20}\u0027, \u0027reason\u0027: None, \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"quarantine_status\\\", \\\"quarantine_command_state\\\", \\\"endpoint_quarantine_status\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Quarantine Endpoint\\\"\\nSTATUS_TYPE = \\\"quarantine\\\"\\nFINAL_STATUSES = {\\n    0: \\\"Not received\\\",\\n    1: \\\"Received\\\",\\n    2: \\\"In progress\\\",\\n    3: \\\"Completed\\\",\\n    4: \\\"Rejected\\\",\\n    5: \\\"Canceled\\\",\\n    6: \\\"Failed\\\"\\n}\\n\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Processing\\n\\ndef main():\\n\\n    endpoint_quarantine_status = row.endpoint_quarantine_status[\\\"content\\\"]\\n    status_msg = \\\"Un-quarantine\\\" if endpoint_quarantine_status == \\\"Quarantined\\\" else \\\"Quarantine\\\"\\n    note_text = \u0027\u0027\\n    quarantine_command_state = C_OUTER[\\\"overall_command_state\\\"]\\n\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        row.quarantine_command_state = quarantine_command_state\\n        row.query_execution_date = QUERY_EXECUTION_DATE\\n        computer = C_OUTER[\\\"content\\\"][0]\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; command status for command id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    \\\"for computer \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; was \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, status_msg, row.quarantine_commandid, row.computerName, FINAL_STATUSES[computer[\\\"stateId\\\"]], FN_NAME)\\n        if quarantine_command_state == \\\"Completed\\\":\\n            row.quarantine_command_state = FINAL_STATUSES[computer[\\\"stateId\\\"]]\\n        else:\\n            row.quarantine_command_state = quarantine_command_state\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"quarantine_ep_content = workflow.properties.quarantine_ep_results.content\\ninputs.sep_incident_id = incident.id\\ninputs.sep_commandid = quarantine_ep_content[\\\"commandID_computer\\\"]\\ninputs.sep_status_type = \\\"quarantine\\\"\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0htp49n\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hbt9xj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0htp49n\" sourceRef=\"ServiceTask_0x2fe5w\" targetRef=\"ServiceTask_0jp94xu\"/\u003e\u003cserviceTask id=\"ServiceTask_0redefa\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n      \\\"input_params\\\": {\\\"sep_computername\\\": \\\"myhostname\\\", \\\"sep_domain\\\": null, \\\"sep_lastupdate\\\": null, \\\"sep_order: null,\\n      \\\"sep_os\\\": null, \\\"sep_pageindex\\\": null, \\\"sep_pageindex\\\": null, \\\"sep_sort\\\": null},\\n      \\\"query_execution_time\\\": \\\"2018-08-09 12:34:15\\\",\\n      \\\"content\\\"\\n                {\\n                  \\\"sort\\\": [\\n                    {\\n                      \\\"direction\\\": \\\"ASC\\\",\\n                      \\\"property\\\": \\\"COMPUTER_NAME\\\",\\n                      \\\"ascending\\\": true\\n                    }\\n                  ],\\n                  \\\"number\\\": 0,\\n                  \\\"firstPage\\\": true,\\n                  \\\"content\\\": [\\n                    {\\n                      \\\"profileVersion\\\": \\\"14.2.1031\\\",\\n                      \\\"elamOnOff\\\": 1,\\n                      \\\"avEngineOnOff\\\": 1,\\n                      \\\"profileChecksum\\\": null,\\n                      \\\"atpDeviceId\\\": null,\\n                      \\\"processorType\\\": \\\"Intel64 Family 6 Model 15 Stepping 1\\\",\\n                      \\\"oslanguage\\\": \\\"en-US\\\",\\n                      \\\"licenseId\\\": null,\\n                      \\\"licenseStatus\\\": -1,\\n                      \\\"group\\\": {\\n                        \\\"domain\\\": {\\n                          \\\"id\\\": \\\"908090000946C25D330E919313D23887\\\",\\n                          \\\"name\\\": \\\"Default\\\"\\n                        },\\n                        \\\"name\\\": \\\"My Company\\\",\\n                        \\\"fullPathName\\\": null,\\n                        \\\"externalReferenceId\\\": null,\\n                        \\\"source\\\": null,\\n                        \\\"id\\\": \\\"CAD80F000946C25D6C150831060AA326\\\"\\n                      },\\n                      \\\"uuid\\\": \\\"EA650B42-D10A-7F9F-A1D2-0A58C4F4CEB1\\\",\\n                      \\\"groupUpdateProvider\\\": false,\\n                      \\\"edrStatus\\\": 0,\\n                      \\\"freeDisk\\\": 56538476544,\\n                      \\\"diskDrive\\\": \\\"C:\\\\\\\\\\\",\\n                      \\\"osFunction\\\": \\\"Server\\\",\\n                      \\\"processorClock\\\": 2394,\\n                      \\\"mobilePhone\\\": \\\"\\\",\\n                      \\\"jobTitle\\\": \\\"\\\",\\n                      \\\"lastHeuristicThreatTime\\\": 0,\\n                      \\\"osname\\\": \\\"Windows Server 2012\\\",\\n                      \\\"winServers\\\": [\\n                        \\\"0.0.0.0\\\",\\n                        \\\"0.0.0.0\\\"\\n                      ],\\n                      \\\"deploymentMessage\\\": \\\"\\\",\\n                      \\\"idsSerialNo\\\": \\\"\\\",\\n                      \\\"employeeNumber\\\": \\\"\\\",\\n                      \\\"snacLicenseId\\\": null,\\n                      \\\"lastSiteId\\\": \\\"EE75B0850946C25D5287B58B5173A37C\\\",\\n                      \\\"uwf\\\": 2,\\n                      \\\"currentClientId\\\": \\\"256B2B130946C25D40C83823AA2E5D4C\\\",\\n                      \\\"osbitness\\\": \\\"x64\\\",\\n                      \\\"lastScanTime\\\": 1550825941000,\\n                      \\\"email\\\": \\\"\\\",\\n                      \\\"securityVirtualAppliance\\\": null,\\n                      \\\"worstInfectionIdx\\\": \\\"0\\\",\\n                      \\\"encryptedDevicePassword\\\": null,\\n                      \\\"lastServerId\\\": \\\"7D6AAA6F0946C25D170B3A2D442500B6\\\",\\n                      \\\"kernel\\\": null,\\n                      \\\"lastUpdateTime\\\": 1550835481557,\\n                      \\\"ptpOnOff\\\": 1,\\n                      \\\"majorVersion\\\": 14,\\n                      \\\"lastConnectedIpAddr\\\": \\\"9.70.194.93\\\",\\n                      \\\"agentVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"deploymentRunningVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"agentTimeStamp\\\": 1550835481557,\\n                      \\\"osminor\\\": 2,\\n                      \\\"osMajor\\\": 6,\\n                      \\\"deploymentTargetVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"osMinor\\\": 2,\\n                      \\\"osFlavorNumber\\\": 79,\\n                      \\\"logicalCpus\\\": 0,\\n                      \\\"deploymentPreVersion\\\": \\\"\\\",\\n                      \\\"hypervisorVendorId\\\": \\\"0\\\",\\n                      \\\"fbwf\\\": 2,\\n                      \\\"osversion\\\": \\\"6.2\\\",\\n                      \\\"dnsServers\\\": [\\n                        \\\"9.70.192.29\\\",\\n                        \\\"FEC0:0000:0000:FFFF:0000:0000:0000:0001\\\"\\n                      ],\\n                      \\\"vsicStatus\\\": 3,\\n                      \\\"deleted\\\": 0,\\n                      \\\"deploymentStatus\\\": \\\"302456832\\\",\\n                      \\\"computerTimeStamp\\\": 1550758769451,\\n                      \\\"bwf\\\": 2,\\n                      \\\"totalDiskSpace\\\": 81567,\\n                      \\\"homePhone\\\": \\\"\\\",\\n                      \\\"daOnOff\\\": 1,\\n                      \\\"computerDescription\\\": \\\"\\\",\\n                      \\\"pepOnOff\\\": 1,\\n                      \\\"bashStatus\\\": 1,\\n                      \\\"agentUsn\\\": 525374,\\n                      \\\"osName\\\": \\\"Windows Server 2012\\\",\\n                      \\\"patternIdx\\\": \\\"F592051A3024B9BD77C1FC9EE1D1ADC9\\\",\\n                      \\\"employeeStatus\\\": \\\"\\\",\\n                      \\\"tmpDevice\\\": null,\\n                      \\\"rebootRequired\\\": 0,\\n                      \\\"subnetMasks\\\": [\\n                        \\\"255.255.255.0\\\",\\n                        \\\"64\\\"\\n                      ],\\n                      \\\"minorVersion\\\": 2,\\n                      \\\"osservicePack\\\": \\\"\\\",\\n                      \\\"lastSiteName\\\": \\\"My Site\\\",\\n                      \\\"cidsEngineVersion\\\": \\\"0.0.0.0\\\",\\n                      \\\"lastDeploymentTime\\\": 1550585147000,\\n                      \\\"isGrace\\\": 0,\\n                      \\\"computerUsn\\\": 501645,\\n                      \\\"agentId\\\": \\\"6E5AA5CB0946C25D40C83823BB5107E6\\\",\\n                      \\\"cidsBrowserFfOnOff\\\": 1,\\n                      \\\"domainOrWorkgroup\\\": \\\"WORKGROUP\\\",\\n                      \\\"svaId\\\": null,\\n                      \\\"loginDomain\\\": \\\"LocalComputer\\\",\\n                      \\\"lastServerName\\\": \\\"WIN-4OA0GKJN830\\\",\\n                      \\\"contentUpdate\\\": 1,\\n                      \\\"writeFiltersStatus\\\": null,\\n                      \\\"infected\\\": 0,\\n                      \\\"memory\\\": 6441979904,\\n                      \\\"freeMem\\\": 2910998528,\\n                      \\\"officePhone\\\": \\\"\\\",\\n                      \\\"lastVirusTime\\\": 1550597487000,\\n                      \\\"telemetryMid\\\": \\\"890E283B-41D3-4340-A397-66F6AFCAF33E\\\",\\n                      \\\"idsVersion\\\": \\\"\\\",\\n                      \\\"cidsBrowserIeOnOff\\\": 1,\\n                      \\\"publicKey\\\": \\\"BgIAAACkAABSU0ExAAgAAAEAAQDfMtYpvbC2ZOrpGFbK76tuyp2MZ7/6EGsFrqAV3ZBMfvMllksVObpPYvDSc5vCjtzthb1301VADLAspayGytsdAj5z8+LLpOnJkHNg9tIunm1lLkBTitevI6G+nNjyKd7uPn3+bxjk1LL8g1exL2C2SMPEXubdUa1N5xwmhhPHp6PSIAjY74QUcNyplfvylMS9QRWoQ70mqNy9tLLef6+qCYWTqGa7QKXS0WUJs8sJMzWfCrpeMVAmU5/s3yEu+OI+9RKgOeSfy7wRzmAWHQTofjHkYGYqwXcwwLX7AbWjdcpYo0Kaecf8e5t2ZvWyR362EaNxn0HYSjpKraY1hLK1\\\",\\n                      \\\"quarantineDesc\\\": \\\"Host Integrity check is disabled.\\\\n Host Integrity policy has been disabled by the administrator.\\\",\\n                      \\\"cidsDrvMulfCode\\\": 0,\\n                      \\\"biosVersion\\\": \\\"INTEL  - 6040000 PhoenixBIOS 4.0 Release 6.0\\\",\\n                      \\\"rebootReason\\\": \\\"\\\",\\n                      \\\"telemetryHwid\\\": \\\"A942D8EB-32C3-E42F-FE83-723FDC431F32\\\",\\n                      \\\"cidsSilentMode\\\": 0,\\n                      \\\"creationTime\\\": 1550585043812,\\n                      \\\"macAddresses\\\": [\\n                        \\\"00-50-56-8B-A6-C3\\\",\\n                        \\\"00-50-56-8B-A6-C3\\\"\\n                      ],\\n                      \\\"idsChecksum\\\": null,\\n                      \\\"operatingSystem\\\": \\\"Windows Server 2012 \\\",\\n                      \\\"osmajor\\\": 6,\\n                      \\\"virtualizationPlatform\\\": \\\"Unknown\\\",\\n                      \\\"ipAddresses\\\": [\\n                        \\\"9.70.194.93\\\",\\n                        \\\"FE80:0000:0000:0000:FC67:074E:CD22:0188\\\"\\n                      ],\\n                      \\\"physicalCpus\\\": 1,\\n                      \\\"osBitness\\\": \\\"x64\\\",\\n                      \\\"cidsDefsetVersion\\\": \\\"190220061\\\",\\n                      \\\"cidsDrvOnOff\\\": 1,\\n                      \\\"computerName\\\": \\\"WIN-4OA0GKJN830\\\",\\n                      \\\"logonUserName\\\": \\\"Administrator\\\",\\n                      \\\"licenseExpiry\\\": 0,\\n                      \\\"osLanguage\\\": \\\"en-US\\\",\\n                      \\\"gateways\\\": [\\n                        \\\"9.70.194.1\\\",\\n                        \\\"9.70.194.1\\\",\\n                        \\\"0.0.0.0\\\",\\n                        \\\"0.0.0.0\\\"\\n                      ],\\n                      \\\"uniqueId\\\": \\\"D31AA16E0946C25D40C83823C500518B\\\",\\n                      \\\"department\\\": \\\"\\\",\\n                      \\\"isNpvdiClient\\\": 0,\\n                      \\\"dhcpServer\\\": \\\"0.0.0.0\\\",\\n                      \\\"osfunction\\\": \\\"Server\\\",\\n                      \\\"description\\\": \\\"\\\",\\n                      \\\"osflavorNumber\\\": 79,\\n                      \\\"tpmDevice\\\": \\\"0\\\",\\n                      \\\"onlineStatus\\\": 1,\\n                      \\\"lastDownloadTime\\\": 1550585418144,\\n                      \\\"apOnOff\\\": 1,\\n                      \\\"timeZone\\\": 480,\\n                      \\\"fullName\\\": \\\"\\\",\\n                      \\\"osVersion\\\": \\\"6.2\\\",\\n                      \\\"attributeExtension\\\": \\\"\\\",\\n                      \\\"atpServer\\\": \\\"\\\",\\n                      \\\"tamperOnOff\\\": 1,\\n                      \\\"osServicePack\\\": \\\"\\\",\\n                      \\\"agentType\\\": \\\"105\\\",\\n                      \\\"serialNumber\\\": \\\"VMware-42 0b 65 ea 0a d1 9f 7f-a1 d2 0a 58 c4 f4 ce b1\\\",\\n                      \\\"osElamStatus\\\": 0,\\n                      \\\"installType\\\": \\\"0\\\",\\n                      \\\"profileSerialNo\\\": \\\"CAD8-01/26/2019 08:00:11 062\\\",\\n                      \\\"hardwareKey\\\": \\\"1771D79454E53469DF4B290C06C104C9\\\",\\n                      \\\"firewallOnOff\\\": 1\\n                    }\\n                  ],\\n                  \\\"lastPage\\\": true,\\n                  \\\"totalPages\\\": 1,\\n                  \\\"size\\\": 20,\\n                  \\\"totalElements\\\": 2,\\n                  \\\"numberOfElements\\\": 2\\n                }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"endpoint_quarantine_status\\\"]\\nFN_NAME = \\\"fn_sep_get_computers\\\"\\nWF_NAME = \\\"Quarantine Endpoint\\\"\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n\\n# Processing\\ndef main():\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        row.query_execution_date = QUERY_EXECUTION_DATE\\n        computer = C_OUTER[\\\"content\\\"][0]\\n        ep_name = computer[\\\"computerName\\\"]\\n        ep_osname = computer.get(\\\"osname\\\", \\\"\\\")\\n        if \\\"windows\\\" in ep_osname.lower():\\n            if \\\"host integrity check passed\\\" not in computer[\\\"quarantineDesc\\\"].lower():\\n                row.endpoint_quarantine_status = \\\"Quarantined\\\"\\n            else:\\n                row.endpoint_quarantine_status = \\\"Un-Quarantined\\\"\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Quarantine status of endpoint \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; is \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, ep_name, row.endpoint_quarantine_status, FN_NAME)\\n        else:\\n            newrow.endpoint_quarantine_status = \\\"\\\"\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n    if len(note_text) \u0026gt; 0:\\n        incident.addNote(helper.createRichText(note_text))\\n    \\nif __name__ == \\\"__main__\\\":\\n    main()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sep_computername = row.computer_name\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1hbt9xj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1kk7m3v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1hbt9xj\" sourceRef=\"ServiceTask_0jp94xu\" targetRef=\"ServiceTask_0redefa\"/\u003e\u003cendEvent id=\"EndEvent_0n9ktln\"\u003e\u003cincoming\u003eSequenceFlow_1kk7m3v\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1kk7m3v\" sourceRef=\"ServiceTask_0redefa\" targetRef=\"EndEvent_0n9ktln\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ijawub\"\u003e\u003ctext\u003e\u003c![CDATA[Initiate a quarantine or undo quarantine action. Inputs:\u00a0 Data table row. The value of\u00a0 \u0027Endpoint status\u0027 which can be \u0027Available\u0027 or \u0027Quarantined\u0027, will determine whether a \u0027Quarantine\u0027 or \u0027Un-quarantine\u0027 action be initiated. Output: Quarantine commandid.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0c52qrd\" sourceRef=\"ServiceTask_0x2fe5w\" targetRef=\"TextAnnotation_0ijawub\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_12bt23g\"\u003e\u003ctext\u003e\u003c![CDATA[Get initial command status for quarantine command by quarantine commandid. Output: Quarantine commandid\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0z8shi7\" sourceRef=\"ServiceTask_0jp94xu\" targetRef=\"TextAnnotation_12bt23g\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1r2oxnf\"\u003e\u003ctext\u003e\u003c![CDATA[Refresh data table row for the \u0027Endpoint status\u0027 property current status.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1pnsrre\" sourceRef=\"ServiceTask_0redefa\" targetRef=\"TextAnnotation_1r2oxnf\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0x2fe5w\" id=\"ServiceTask_0x2fe5w_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"262\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_06pked3\" id=\"SequenceFlow_06pked3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"230\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0jp94xu\" id=\"ServiceTask_0jp94xu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"509\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0htp49n\" id=\"SequenceFlow_0htp49n_di\"\u003e\u003comgdi:waypoint x=\"362\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"509\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"390.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0redefa\" id=\"ServiceTask_0redefa_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"724\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hbt9xj\" id=\"SequenceFlow_1hbt9xj_di\"\u003e\u003comgdi:waypoint x=\"609\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"724\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"621.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0n9ktln\" id=\"EndEvent_0n9ktln_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"859\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"832\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1kk7m3v\" id=\"SequenceFlow_1kk7m3v_di\"\u003e\u003comgdi:waypoint x=\"824\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"859\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"796.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ijawub\" id=\"TextAnnotation_0ijawub_di\"\u003e\u003comgdc:Bounds height=\"103\" width=\"328\" x=\"142\" y=\"9\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0c52qrd\" id=\"Association_0c52qrd_di\"\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"112\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_12bt23g\" id=\"TextAnnotation_12bt23g_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"174\" x=\"472\" y=\"6\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0z8shi7\" id=\"Association_0z8shi7_di\"\u003e\u003comgdi:waypoint x=\"559\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"560\" xsi:type=\"omgdc:Point\" y=\"70\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1r2oxnf\" id=\"TextAnnotation_1r2oxnf_di\"\u003e\u003comgdc:Bounds height=\"39\" width=\"203\" x=\"672\" y=\"18\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1pnsrre\" id=\"Association_1pnsrre_di\"\u003e\u003comgdi:waypoint x=\"774\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"774\" xsi:type=\"omgdc:Point\" y=\"57\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 1,
+        "workflow_id": "wf_sep_assign_fingerprint_list_to_lockdown_group",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_assign_fingerprint_list_to_lockdown_group\" isExecutable=\"true\" name=\"Example: SEP - Assign Blacklist to lockdown group\"\u003e\u003cdocumentation\u003eAssign a blacklist fingerprint list to a group for system lockdown.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ntekla\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0ntekla\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0k7dyaf\"/\u003e\u003cserviceTask id=\"ServiceTask_0k7dyaf\" name=\"SEP - Get Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e3e94d0c-e2c9-4f76-9e41-6878e718e8de\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027, u\u0027sep_domainid\u0027: u\u0027908090000946C25D330E919313D23887\u0027}, \\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-28 16:23:05\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1153}, \\n        \u0027success\u0027: True, \\n        \u0027content\u0027: {u\u0027description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027hashType\u0027: u\u0027MD5\u0027, u\u0027source\u0027: u\u0027WEBSERVICE\u0027, \\n                    u\u0027groupIds\u0027: [u\u00277E4BB119A9FE9DC526EDABFB1EE261B8\u0027], u\u0027data\u0027: [u\u0027482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027], \\n                    u\u0027id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027, u\u0027name\u0027: u\u0027Blacklist_2\u0027}, \\n        \u0027raw\u0027: \u0027{\\\"description\\\": \\\"Hash of type Malware MD5 Hash\\\", \\\"hashType\\\": \\\"MD5\\\", \\\"source\\\": \\\"WEBSERVICE\\\", \u0027\\n               \u0027\\\"groupIds\\\": [\\\"7E4BB119A9FE9DC526EDABFB1EE261B8\\\"], \\\"data\\\": [\\\"482F9B6E0CC4C1DBBD772AAAF088CB3A\\\"], \u0027\\n               \u0027\\\"id\\\": \\\"E60B061FDD844EBF9778D4BD2AC3942A\\\", \\\"name\\\": \\\"Blacklist_2\\\"}\u0027, \\n        \u0027reason\u0027: None, \\n        \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_fingerprint_list script\\nFN_NAME = \\\"fn_sep_get_fingerprint_list\\\"\\nWF_NAME = \\\"Assign Fingerprint List to lockdown group\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\n# Processing\\n\\n\\ndef main():\\n    note_text = \u0027\u0027\\n\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and int(CONTENT[\\\"errorCode\\\"]) == 410:\\n            # The finger print list doesn\u0027t exist.\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; does not exist \\\" \\\\\\n                        \\\"for domain id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_name\\\"], INPUTS[\\\"sep_domainid\\\"],\\n                        FN_NAME)\\n    else:\\n        noteText += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned  for \\\" \\\\\\n                    \\\"fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and domain id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient \\\" \\\\\\n                    \\\"function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_name\\\"],\\n                                                 INPUTS[\\\"sep_domainid\\\"], FN_NAME)\\n    if note_text:\\n        incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_domainid = row.domain_id\\ninputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name\",\"result_name\":\"get_fingerprintlist_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ntekla\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0o19zlo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_1vdzpa9\" name=\"SEP - Assign Fingerprint List to ...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"edb1beff-d01c-4334-aeb6-45d9a65831d4\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_assign_fingerprint_list_to_group ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027, u\u0027sep_groupid\u0027: u\u00277E4BB119A9FE9DC526EDABFB1EE261B8\u0027},\\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-28 17:53:52\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027,\\n                   \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1225},\\n        \u0027success\u0027: True,\\n        \u0027content\u0027: \u0027\u0027,\\n        \u0027raw\u0027: \u0027\\\"\\\"\u0027,\\n        \u0027reason\u0027: None,\\n        \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\nFN_NAME = \\\"fn_sep_assign_fingerprint_list_to_group\\\"\\nWF_NAME = \\\"Assign Fingerprint List to lockdown group\\\"\\nDATA_TBL_FIELDS = [\\\"domain_name\\\", \\\"list_name\\\", \\\"list_id\\\", \\\"list_description\\\", \\\"hash_values\\\", \\\"hash_type\\\", \\\"group_ids\\\"]\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and int(CONTENT[\\\"errorCode\\\"]) == 400:\\n            # The finger print list doesn\u0027t exist.\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; does not exist or is invalid \\\" \\\\\\n                        \\\"for domain id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format( WF_NAME, INPUTS[\\\"sep_fingerprintlist_name\\\"], row.domain_id, FN_NAME)\\n        else:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully assigned fingerprint list  with id \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to group with id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_id\\\"], INPUTS[\\\"sep_groupid\\\"], FN_NAME)\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned \\\" \\\\\\n                     \\\"with fingerprint id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and group id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_id\\\"], INPUTS[\\\"sep_groupid\\\"], FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"content = workflow.properties.get_fingerprintlist_results.content\\ninputs.sep_fingerprintlist_id = content[\\\"id\\\"]\\ninputs.sep_groupid = row.group_id\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0o19zlo\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_151camr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0o19zlo\" sourceRef=\"ServiceTask_0k7dyaf\" targetRef=\"ServiceTask_1vdzpa9\"/\u003e\u003cendEvent id=\"EndEvent_1undvlq\"\u003e\u003cincoming\u003eSequenceFlow_151camr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_151camr\" sourceRef=\"ServiceTask_1vdzpa9\" targetRef=\"EndEvent_1undvlq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0exjdgx\"\u003e\u003ctext\u003e\u003c![CDATA[Get fingerprint list id by name for domain by id. Input: Parameter fingerprint list assigned from activity field, domain id from data table row.\u00a0\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_024d5zv\" sourceRef=\"ServiceTask_0k7dyaf\" targetRef=\"TextAnnotation_0exjdgx\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ld2gpb\"\u003e\u003ctext\u003e\u003c![CDATA[Assign (SEP) fingerprint list by id to group by id. Input: Group parameter assigned from data table row.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0i8njzx\" sourceRef=\"ServiceTask_1vdzpa9\" targetRef=\"TextAnnotation_0ld2gpb\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ntekla\" id=\"SequenceFlow_0ntekla_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"299\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"203.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0k7dyaf\" id=\"ServiceTask_0k7dyaf_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"299\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1vdzpa9\" id=\"ServiceTask_1vdzpa9_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"571\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0o19zlo\" id=\"SequenceFlow_0o19zlo_di\"\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"571\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"440\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1undvlq\" id=\"EndEvent_1undvlq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"715\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"688\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_151camr\" id=\"SequenceFlow_151camr_di\"\u003e\u003comgdi:waypoint x=\"671\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"715\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"648\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0exjdgx\" id=\"TextAnnotation_0exjdgx_di\"\u003e\u003comgdc:Bounds height=\"76\" width=\"214\" x=\"242\" y=\"37\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_024d5zv\" id=\"Association_024d5zv_di\"\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"350\" xsi:type=\"omgdc:Point\" y=\"113\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ld2gpb\" id=\"TextAnnotation_0ld2gpb_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"297\" x=\"472\" y=\"39\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0i8njzx\" id=\"Association_0i8njzx_di\"\u003e\u003comgdi:waypoint x=\"621\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"621\" xsi:type=\"omgdc:Point\" y=\"93\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 2,
-      "description": "Quarantine or un-quarantine an endpoint. Add or remove endpoints to or from network quarantine.",
-      "export_key": "wf_sep_quarantine_endpoint",
+      "content_version": 1,
+      "description": "Assign a blacklist fingerprint list to a group for system lockdown.",
+      "export_key": "wf_sep_assign_fingerprint_list_to_lockdown_group",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1668004041471,
-      "name": "Example: SEP - Quarantine Endpoint",
-      "object_type": "sep_endpoint_details",
-      "programmatic_name": "wf_sep_quarantine_endpoint",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "a457878a-30ac-408d-8ba7-2bdbc0a8b16a",
-      "workflow_id": 412
+      "last_modified_time": 1668001891840,
+      "name": "Example: SEP - Assign Blacklist to lockdown group",
+      "object_type": "sep_groups",
+      "programmatic_name": "wf_sep_assign_fingerprint_list_to_lockdown_group",
+      "tags": [],
+      "uuid": "483838fc-fbaa-4207-92df-b1e3f5dbd43a",
+      "workflow_id": 321
     },
     {
       "actions": [],
@@ -7348,42 +7226,279 @@
       "description": "Move an endpoint to a different group.",
       "export_key": "wf_sep_move_endpoint",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002339347,
+      "last_modified_time": 1668001891454,
       "name": "Example: SEP - Move Endpoint",
       "object_type": "sep_endpoint_details",
       "programmatic_name": "wf_sep_move_endpoint",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "32cefcd8-d19e-4b31-8e8d-eccc4e2b281f",
-      "workflow_id": 415
+      "workflow_id": 320
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_sep_get_remediation_status",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_remediation_status\" isExecutable=\"true\" name=\"Example: SEP - Get Remediation status\"\u003e\u003cdocumentation\u003eGet the status of an remediation scan command.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1va6qu8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0ovi8ki\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n    \u0027inputs\u0027: {u\u0027sep_commandid\u0027: u\u00272F260501C22842ABBA7EB0805D92EFE0\u0027},\\n    \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-03-01 12:46:27\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027,\\n    \u0027execution_time_ms\u0027: 1085},\\n    \u0027success\u0027: True,\\n    \u0027content\u0027:\\n                {\\n                  \\\"sort\\\": [\\n                    {\\n                      \\\"direction\\\": \\\"ASC\\\",\\n                      \\\"property\\\": \\\"Begintime\\\",\\n                      \\\"ascending\\\": true\\n                    }\\n                  ],\\n                  \\\"number\\\": 0,\\n                  \\\"firstPage\\\": true,\\n                  \\\"content\\\": [\\n                    {\\n                      \\\"computerName\\\": \\\"ep1\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"1771D79454E53469DF4B290C06C104C9\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"D31AA16E0946C25D40C83823C500518B\\\",\\n                      \\\"computerIp\\\": \\\"192.168.194.93\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    },\\n                    {\\n                      \\\"computerName\\\": \\\"ep2\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\",\\n                      \\\"computerIp\\\": \\\"192.168.194.94\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    }\\n                  ],\\n                  \\\"lastPage\\\": true,\\n                  \\\"totalPages\\\": 1,\\n                  \\\"size\\\": 20,\\n                  \\\"totalElements\\\": 2,\\n                  \\\"numberOfElements\\\": 2\\n                }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"remediation_status\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Get Remediation status\\\"\\nSTATUS_TYPE = \\\"remediate\\\"\\nREMEDITATE_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    remediation_command_state = C_OUTER[\\\"overall_command_state\\\"]\\n    total_remediation_count = C_OUTER[\\\"total_remediation_count\\\"]\\n    total_remediation_ep_count = C_OUTER[\\\"total_remediation_ep_count\\\"]\\n    total_fail_remediation_count = C_OUTER[\\\"total_fail_remediation_count\\\"]\\n    total_ep_count = C_OUTER[\\\"total_ep_count\\\"]\\n    att_name = C_OUTER[\\\"att_name\\\"]\\n\\n    note_text = \u0027\u0027\\n    att_note = \u0027\u0027\\n    if C_OUTER is not None:\\n        if total_remediation_count \u0026gt; 0:\\n            att_note = \\\"\u0026lt;br\u0026gt;Added full result as an attachment. Attachment name : \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;.\\\".format(att_name)\\n            \\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Remediate artifact returned \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; remediated \\\" \\\\\\n                    \\\"artifacts on \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; out of a total of \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; endpoints for artifact with type \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    \\\"and value \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{7}\u0026lt;/b\u0026gt;.{6}\\\" \\\\\\n            .format(WF_NAME, total_remediation_count, total_remediation_ep_count, total_ep_count, row.artifact_type,\\n                    unicode(row.artifact_value), att_note, FN_NAME)\\n\\n        if remediation_command_state == \\\"Completed\\\":\\n            if total_fail_remediation_count == 0 and total_remediation_count \u0026gt; 0:\\n                row.remediation_status = u\\\"{0} at {1}. For remediation results see note/attachment.\\\".format(remediation_command_state, REMEDITATE_EXECUTION_DATE)\\n            elif total_fail_remediation_count == 0 and total_remediation_count == 0:\\n                row.remediation_status = \\\"No match found\\\"\\n            elif total_fail_remediation_count \u0026gt; 0:\\n                row.remediation_status = \\\"Failed\\\"\\n        else:\\n            row.remediation_status = remediation_command_state\\n    else:\\n        row.remediation_status = remediation_command_state\\n        note_text += u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Remediate artifact returned \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results for \\\" \\\\\\n                     \\\"for artifact with type \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, row.artifact_type, unicode(row.artifact_value), FN_NAME)\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"pre_processing_script\":\"inputs.sep_incident_id = incident.id\\ninputs.sep_commandid = row.remediation_commandid\\ninputs.sep_status_type = \\\"remediation\\\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1va6qu8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1mk16pm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1va6qu8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0ovi8ki\"/\u003e\u003cendEvent id=\"EndEvent_13zxfd0\"\u003e\u003cincoming\u003eSequenceFlow_1mk16pm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1mk16pm\" sourceRef=\"ServiceTask_0ovi8ki\" targetRef=\"EndEvent_13zxfd0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19afvuj\"\u003e\u003ctext\u003e\u003c![CDATA[Get current command status for a remediation command by remediation commandid. Input: Assigned from data table row.\nUpdate data table with latest status.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_10o7p7s\" sourceRef=\"ServiceTask_0ovi8ki\" targetRef=\"TextAnnotation_19afvuj\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0ovi8ki\" id=\"ServiceTask_0ovi8ki_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"277\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1va6qu8\" id=\"SequenceFlow_1va6qu8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"277\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"237.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_13zxfd0\" id=\"EndEvent_13zxfd0_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"432\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"450\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1mk16pm\" id=\"SequenceFlow_1mk16pm_di\"\u003e\u003comgdi:waypoint x=\"377\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"432\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"404.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19afvuj\" id=\"TextAnnotation_19afvuj_di\"\u003e\u003comgdc:Bounds height=\"60\" width=\"259\" x=\"197\" y=\"41\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_10o7p7s\" id=\"Association_10o7p7s_di\"\u003e\u003comgdi:waypoint x=\"327\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"327\" xsi:type=\"omgdc:Point\" y=\"101\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Get the status of an remediation scan command.",
+      "export_key": "wf_sep_get_remediation_status",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1668001894253,
+      "name": "Example: SEP - Get Remediation status",
+      "object_type": "sep_eoc_scan_results",
+      "programmatic_name": "wf_sep_get_remediation_status",
+      "tags": [],
+      "uuid": "9bc104af-53ec-4b0c-8161-84b20cc171c7",
+      "workflow_id": 327
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_sep_add_fingerprint_list",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_add_fingerprint_list\" isExecutable=\"true\" name=\"Example: SEP - Add Hash to Blacklist\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Create a new blacklist fingerprint list and add an MD5 hash if the fingerprint list doesn\u0027t already exist. Add an MD5 hash to an existing blacklist fingerprint list if it already exists.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0kq5pev\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1yag4fo\" name=\"SEP - Get Domains\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17245e2-ae90-46aa-ae44-cc0d37b8387c\"\u003e{\"inputs\":{},\"post_processing_script\":\"fn_name = \\\"fn_sep_get_domains\\\"\\nwf_name = \\\"Example: SEP - Add Hash to Blacklist\\\"\\ncontent = results.content\\ndomainid = None\\nfor i in range(len(content)):\\n  if content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    domainid = content[i][\\\"id\\\"]\\n    break\\nif domainid is not None:\\n    workflow.addProperty(\\\"domid_exists\\\", {})\\nelse:\\n    note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The domain name  \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; was not found \\\" \\\\\\n                u\\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(wf_name, unicode(rule.properties.sep_domain_name), fn_name)\\n    incident.addNote(helper.createRichText(note_text))\",\"result_name\":\"get_domains_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0kq5pev\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0biifwi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0kq5pev\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1yag4fo\"/\u003e\u003cserviceTask id=\"ServiceTask_1ky4b19\" name=\"SEP - Add Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d4b5ee5d-10b2-4935-a650-f1516acfc691\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_add_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, \\n                   u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist\u0027, \\n                   u\u0027sep_hash_value\u0027: u\u0027482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027, \\n                   u\u0027sep_domainid\u0027: u\u0027A9B4B7160946C25D24B6AA458EF5557F\u0027\\n                   }, \\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 12:02:37\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \\n                    \u0027host\u0027: \u0027myhost.ibm.com\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1417\\n                    }, \\n        \u0027success\u0027: True, \\n        \u0027content\u0027: {u\u0027id\u0027: u\u0027AB29BEA5333C488694B9533E65858BF2\u0027}, \\n        \u0027raw\u0027: \u0027{\\\"id\\\": \\\"AB29BEA5333C488694B9533E65858BF2\\\"}\u0027,\\n        \u0027reason\u0027: None, \\n        \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\nFN_NAME = \\\"Add Hash to Fingerprint List\\\"\\nWF_NAME = \\\"fn_sep_add_fingerprint_list\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\ndef main():\\n    if CONTENT is not None:\\n        # If we got here we assume we are successsful.\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added MD5 hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to new fingerprint list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n                   \\\"\u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]), FN_NAME)\\n    \\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                     \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n    \\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\ncontent = domain_content_results.content\\nfor i in range(len(content)):\\n  if content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = content[i][\\\"id\\\"]\\n    break\\ninputs.sep_hash_value = artifact.value\\ninputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name\\ninputs.sep_description = u\\\"Fingerprint list \u0027{}\u0027\\\".format(unicode(inputs.sep_fingerprintlist_name))\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0d2r1uc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1uotu52\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_00ai6k6\" name=\"SEP - Get Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e3e94d0c-e2c9-4f76-9e41-6878e718e8de\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027, u\u0027sep_domainid\u0027: u\u0027908090000946C25D330E919313D23887\u0027},\\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-28 16:23:05\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1153},\\n        \u0027success\u0027: True,\\n        \u0027content\u0027: {u\u0027description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027hashType\u0027: u\u0027MD5\u0027, u\u0027source\u0027: u\u0027WEBSERVICE\u0027,\\n                    u\u0027groupIds\u0027: [u\u00277E4BB119A9FE9DC526EDABFB1EE261B8\u0027], u\u0027data\u0027: [u\u0027482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027],\\n                    u\u0027id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027, u\u0027name\u0027: u\u0027Blacklist_2\u0027},\\n        \u0027raw\u0027: \u0027{\\\"description\\\": \\\"Hash of type Malware MD5 Hash\\\", \\\"hashType\\\": \\\"MD5\\\", \\\"source\\\": \\\"WEBSERVICE\\\", \u0027\\n               \u0027\\\"groupIds\\\": [\\\"7E4BB119A9FE9DC526EDABFB1EE261B8\\\"], \\\"data\\\": [\\\"482F9B6E0CC4C1DBBD772AAAF088CB3A\\\"], \u0027\\n               \u0027\\\"id\\\": \\\"E60B061FDD844EBF9778D4BD2AC3942A\\\", \\\"name\\\": \\\"Blacklist_2\\\"}\u0027,\\n        \u0027reason\u0027: None,\\n        \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_fingerprint_list script\\nDATA_TBL_FIELDS = [\\\"domain_name\\\", \\\"list_name\\\", \\\"list_id\\\", \\\"list_description\\\", \\\"hash_values\\\", \\\"hash_type\\\", \\\"group_ids\\\"]\\nWF_NAME = \\\"Add Hash to Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    fpl_exists = hash_in_list = False\\n    note_text = \u0027\u0027\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and int(CONTENT[\\\"errorCode\\\"]) == 410:\\n            # The finger print list doesn\u0027t already exist.\\n            pass\\n        elif \\\"data\\\" in CONTENT:\\n            # The finger print list exists set flag for gateway.\\n            fpl_exists = True\\n            workflow.addProperty(\\\"fpl_exists\\\", {})\\n        if \\\"data\\\" in CONTENT and artifact.value.upper() in [d.upper() for d in CONTENT[\\\"data\\\"]]:\\n            # Finger print list exists and hash in list set flag for hash in list.\\n            hash_in_list = True\\n            workflow.addProperty(\\\"hash_in_list\\\", {})\\n\\n    if fpl_exists and hash_in_list:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; has already been added to \\\" \\\\\\n                    u\\\"fingerprint list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for domain id \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                    INPUTS[\\\"sep_domainid\\\"])\\n        incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\ndomain_content = domain_content_results.content\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = domain_content[i][\\\"id\\\"]\\n    break\\n\\ninputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name\\n\",\"result_name\":\"get_fingerprintlist_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0c6p764\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_15jlepx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_1w8n3y1\" name=\"SEP - Update Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"86fbaf45-bb0f-4ba0-a988-cc603d315e49\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_update_fingerprint_list script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_description\u0027: u\u0027Hash of type Malware MD5 Hash\u0027, u\u0027sep_fingerprintlist_name\u0027: u\u0027Blacklist_2\u0027,\\n                   u\u0027sep_hash_value\u0027: u\u00270B26E313ED4A7CA6904B0E9369E5B957,482F9B6E0CC4C1DBBD772AAAF088CB3A\u0027,\\n                   u\u0027sep_domainid\u0027: u\u0027A9B4B7160946C25D24B6AA458EF5557F\u0027,\\n                   u\u0027sep_fingerprintlist_id\u0027: u\u0027D132F4BA85D64E9F941906C2ECBF3F5F\u0027\\n                   },\\n        \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 10:48:45\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost.com\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1131\\n                    }, \u0027success\u0027: True,\\n                    \u0027content\u0027: \u0027\u0027,\\n                    \u0027raw\u0027: \u0027\\\"\\\"\u0027,\\n                    \u0027reason\u0027: None,\\n                    \u0027version\u0027: \u00271.0\u0027\\n\\n}\\n\\\"\\\"\\\"\\nFN_NAME = \\\"fn_sep_update_fingerprint_list\\\"\\nWF_NAME = \\\"Add Hash to Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\n\\ndef main():\\n    if CONTENT is not None:\\n        # If we got here we assume we are successsful, no status messgae is returned by api.\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully added MD5 hash \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; to fingerprint \\\" \\\\\\n                    \\\"list \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, artifact.value, unicode(INPUTS[\\\"sep_fingerprintlist_name\\\"]),\\n                    FN_NAME)\\n    \\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                     \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n    \\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\nfpl_content_results = workflow.properties.get_fingerprintlist_results\\ndomain_content = domain_content_results.content\\nfpl_content = fpl_content_results.content\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domainid = domain_content[i][\\\"id\\\"]\\n    break\\n    \\nif fpl_content[\\\"name\\\"] ==  rule.properties.sep_fingerprintlist_name:\\n    inputs.sep_fingerprintlist_id = fpl_content[\\\"id\\\"]\\n    inputs.sep_fingerprintlist_name = fpl_content[\\\"name\\\"]\\n    if fpl_content[\\\"data\\\"] is not None:\\n        inputs.sep_hash_value = artifact.value + \u0027,\u0027 + \u0027,\u0027.join(fpl_content[\\\"data\\\"])\\n    else:\\n        inputs.sep_hash_value = artifact.value\\n\\ninputs.sep_description = u\\\"Fingerprint list \u0027{}\u0027\\\".format(unicode(inputs.sep_fingerprintlist_name))\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1t3gxmu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0trk8w1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1ex9cby\"\u003e\u003cincoming\u003eSequenceFlow_0trk8w1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0trk8w1\" sourceRef=\"ServiceTask_1w8n3y1\" targetRef=\"EndEvent_1ex9cby\"/\u003e\u003cendEvent id=\"EndEvent_0q07f4q\"\u003e\u003cincoming\u003eSequenceFlow_1uotu52\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1uotu52\" sourceRef=\"ServiceTask_1ky4b19\" targetRef=\"EndEvent_0q07f4q\"/\u003e\u003cendEvent id=\"EndEvent_0e1z6sp\"\u003e\u003cincoming\u003eSequenceFlow_1gh12ii\u003c/incoming\u003e\u003c/endEvent\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_1atgwj2\"\u003e\u003cincoming\u003eSequenceFlow_15jlepx\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1t3gxmu\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_0d2r1uc\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1gh12ii\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_15jlepx\" sourceRef=\"ServiceTask_00ai6k6\" targetRef=\"ExclusiveGateway_1atgwj2\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1t3gxmu\" name=\"Fingerprint exists, hash not in list\" sourceRef=\"ExclusiveGateway_1atgwj2\" targetRef=\"ServiceTask_1w8n3y1\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"fpl_exists\\\", None)  != None\",\"language\":\"python\"}},{\"evaluation_id\":2,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"hash_in_list\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_0d2r1uc\" name=\"Fingerprint list doesn\u0027t exist\" sourceRef=\"ExclusiveGateway_1atgwj2\" targetRef=\"ServiceTask_1ky4b19\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"fpl_exists\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_1gh12ii\" name=\"Fingerprint exists, hash in list\" sourceRef=\"ExclusiveGateway_1atgwj2\" targetRef=\"EndEvent_0e1z6sp\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"fpl_exists\\\", None)  != None\",\"language\":\"python\"}},{\"evaluation_id\":2,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"hash_in_list\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_0odi5lh\"\u003e\u003cincoming\u003eSequenceFlow_0biifwi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0c6p764\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_1rgvipb\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_0biifwi\" sourceRef=\"ServiceTask_1yag4fo\" targetRef=\"ExclusiveGateway_0odi5lh\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0c6p764\" name=\"Domain id exists\" sourceRef=\"ExclusiveGateway_0odi5lh\" targetRef=\"ServiceTask_00ai6k6\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cendEvent id=\"EndEvent_05qh4sr\"\u003e\u003cincoming\u003eSequenceFlow_1rgvipb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1rgvipb\" name=\"Domain id does not exist\" sourceRef=\"ExclusiveGateway_0odi5lh\" targetRef=\"EndEvent_05qh4sr\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1cpx12i\"\u003e\u003ctext\u003eGet domain id by name. Input: Domain name selected from activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0s0s66c\" sourceRef=\"ServiceTask_1yag4fo\" targetRef=\"TextAnnotation_1cpx12i\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_135ie3b\"\u003e\u003ctext\u003eGet fingerprint id and name by domain id. Input: Fingerprint list\u00a0 name selected from\u00a0 activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0i5n4ot\" sourceRef=\"ServiceTask_00ai6k6\" targetRef=\"TextAnnotation_135ie3b\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_09wgioe\"\u003e\u003ctext\u003eUpdate (add) hash value to\u00a0 fingerprint list by id for domain by id. Input:\u00a0 Hash value input assigned from artifact value.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1ne5lde\" sourceRef=\"ServiceTask_1w8n3y1\" targetRef=\"TextAnnotation_09wgioe\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0wr9qec\"\u003e\u003ctext\u003eCreate new\u00a0 fingerprint list by name for domain by id and add hash.\u00a0 Input: Hash value input assigned from artifact value.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_18bj1az\" sourceRef=\"ServiceTask_1ky4b19\" targetRef=\"TextAnnotation_0wr9qec\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1yag4fo\" id=\"ServiceTask_1yag4fo_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"271\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0kq5pev\" id=\"SequenceFlow_0kq5pev_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"271\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"189.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ky4b19\" id=\"ServiceTask_1ky4b19_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"766\" y=\"310\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_00ai6k6\" id=\"ServiceTask_00ai6k6_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"592\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1w8n3y1\" id=\"ServiceTask_1w8n3y1_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"766\" y=\"38\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ex9cby\" id=\"EndEvent_1ex9cby_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"936\" y=\"60\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"909\" y=\"99\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0trk8w1\" id=\"SequenceFlow_0trk8w1_di\"\u003e\u003comgdi:waypoint x=\"866\" xsi:type=\"omgdc:Point\" y=\"78\"/\u003e\u003comgdi:waypoint x=\"936\" xsi:type=\"omgdc:Point\" y=\"78\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"856\" y=\"56.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0q07f4q\" id=\"EndEvent_0q07f4q_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"936\" y=\"332\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"909\" y=\"371\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1uotu52\" id=\"SequenceFlow_1uotu52_di\"\u003e\u003comgdi:waypoint x=\"866\" xsi:type=\"omgdc:Point\" y=\"350\"/\u003e\u003comgdi:waypoint x=\"901\" xsi:type=\"omgdc:Point\" y=\"350\"/\u003e\u003comgdi:waypoint x=\"901\" xsi:type=\"omgdc:Point\" y=\"350\"/\u003e\u003comgdi:waypoint x=\"936\" xsi:type=\"omgdc:Point\" y=\"350\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"871\" y=\"343.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0e1z6sp\" id=\"EndEvent_0e1z6sp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"936\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"909\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_1atgwj2\" id=\"ExclusiveGateway_1atgwj2_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"791\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"771\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15jlepx\" id=\"SequenceFlow_15jlepx_di\"\u003e\u003comgdi:waypoint x=\"692\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"791\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"696.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1t3gxmu\" id=\"SequenceFlow_1t3gxmu_di\"\u003e\u003comgdi:waypoint x=\"816\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"816\" xsi:type=\"omgdc:Point\" y=\"118\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"89\" x=\"771\" y=\"141.6716417910448\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d2r1uc\" id=\"SequenceFlow_0d2r1uc_di\"\u003e\u003comgdi:waypoint x=\"816\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"816\" xsi:type=\"omgdc:Point\" y=\"310\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"72\" x=\"780\" y=\"232.55696202531647\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1gh12ii\" id=\"SequenceFlow_1gh12ii_di\"\u003e\u003comgdi:waypoint x=\"841\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"936\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"89\" x=\"853.1346153846154\" y=\"193\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_0odi5lh\" id=\"ExclusiveGateway_0odi5lh_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"441.4895489548955\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"466.4895489548955\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0biifwi\" id=\"SequenceFlow_0biifwi_di\"\u003e\u003comgdi:waypoint x=\"371\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"441\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"406\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0c6p764\" id=\"SequenceFlow_0c6p764_di\"\u003e\u003comgdi:waypoint x=\"491\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"592\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"83\" x=\"500\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_05qh4sr\" id=\"EndEvent_05qh4sr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"448\" y=\"317.3993399339934\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"466\" y=\"356.3993399339934\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rgvipb\" id=\"SequenceFlow_1rgvipb_di\"\u003e\u003comgdi:waypoint x=\"466\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"466\" xsi:type=\"omgdc:Point\" y=\"317\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"79\" x=\"442\" y=\"268\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1cpx12i\" id=\"TextAnnotation_1cpx12i_di\"\u003e\u003comgdc:Bounds height=\"49\" width=\"311\" x=\"165\" y=\"53\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0s0s66c\" id=\"Association_0s0s66c_di\"\u003e\u003comgdi:waypoint x=\"321\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"321\" xsi:type=\"omgdc:Point\" y=\"102\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_135ie3b\" id=\"TextAnnotation_135ie3b_di\"\u003e\u003comgdc:Bounds height=\"54\" width=\"218\" x=\"502\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0i5n4ot\" id=\"Association_0i5n4ot_di\"\u003e\u003comgdi:waypoint x=\"633\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"617\" xsi:type=\"omgdc:Point\" y=\"96\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_09wgioe\" id=\"TextAnnotation_09wgioe_di\"\u003e\u003comgdc:Bounds height=\"46\" width=\"259\" x=\"1085\" y=\"140\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1ne5lde\" id=\"Association_1ne5lde_di\"\u003e\u003comgdi:waypoint x=\"866\" xsi:type=\"omgdc:Point\" y=\"89\"/\u003e\u003comgdi:waypoint x=\"1107\" xsi:type=\"omgdc:Point\" y=\"140\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0wr9qec\" id=\"TextAnnotation_0wr9qec_di\"\u003e\u003comgdc:Bounds height=\"56\" width=\"387\" x=\"1085\" y=\"265\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_18bj1az\" id=\"Association_18bj1az_di\"\u003e\u003comgdi:waypoint x=\"866\" xsi:type=\"omgdc:Point\" y=\"344\"/\u003e\u003comgdi:waypoint x=\"1085\" xsi:type=\"omgdc:Point\" y=\"317\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Create a new blacklist fingerprint list and add an MD5 hash if the fingerprint list doesn\u0027t already exist. Add an MD5 hash to an existing blacklist fingerprint list if it already exists.",
+      "export_key": "wf_sep_add_fingerprint_list",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1668001893047,
+      "name": "Example: SEP - Add Hash to Blacklist",
+      "object_type": "artifact",
+      "programmatic_name": "wf_sep_add_fingerprint_list",
+      "tags": [],
+      "uuid": "bfaa58ba-c487-42eb-a055-2f7d339d1932",
+      "workflow_id": 324
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "exmple_sep__get_critical_events",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"exmple_sep__get_critical_events\" isExecutable=\"true\" name=\"Exmple: SEP - Get Critical Events\"\u003e\u003cdocumentation\u003eGets information related to critical events.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1rws9n8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0bwwsqy\" name=\"SEP - Get Critical Events Info\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d90b14a5-6ccd-4979-a789-97e4f8f41b73\"\u003e{\"inputs\":{},\"post_processing_script\":\"import time\\n\\nnow = int(time.time()*1000)\\n\\nif not results.success:\\n  incident.addNote(f\\\"Symantec SEP - Get Critical Events failed: {results.reason}\\\")\\nelse:\\n  for event in results.content.get(\\\"criticalEventsInfoList\\\", []):\\n    row = incident.addRow(\\\"sep_critical_events\\\")\\n    row[\u0027date_added\u0027] = now\\n    row[\u0027event_id\u0027] = event.get(\u0027eventId\u0027)\\n    row[\u0027event_date\u0027] = event.get(\u0027eventDateTime\u0027)\\n    row[\u0027subject\u0027] = event.get(\u0027subject\u0027)\\n    row[\u0027message\u0027] = event.get(\u0027message\u0027)\\n    row[\u0027acknowledged\u0027] = bool(event.get(\u0027acknowledged\u0027))\\n    \\n    \",\"post_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1rws9n8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_13ovg1h\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1rws9n8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0bwwsqy\"/\u003e\u003cendEvent id=\"EndEvent_1beinqa\"\u003e\u003cincoming\u003eSequenceFlow_13ovg1h\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_13ovg1h\" sourceRef=\"ServiceTask_0bwwsqy\" targetRef=\"EndEvent_1beinqa\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1w60d7t\"\u003e\u003ctext\u003eResults returned in the Symantec Critical Events datatable\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_09em9gc\" sourceRef=\"ServiceTask_0bwwsqy\" targetRef=\"TextAnnotation_1w60d7t\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0bwwsqy\" id=\"ServiceTask_0bwwsqy_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"268\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rws9n8\" id=\"SequenceFlow_1rws9n8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"268\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"233\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1beinqa\" id=\"EndEvent_1beinqa_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"427\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"445\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13ovg1h\" id=\"SequenceFlow_13ovg1h_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"427\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"397.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1w60d7t\" id=\"TextAnnotation_1w60d7t_di\"\u003e\u003comgdc:Bounds height=\"42\" width=\"208\" x=\"343\" y=\"62\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_09em9gc\" id=\"Association_09em9gc_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"167\"/\u003e\u003comgdi:waypoint x=\"425\" xsi:type=\"omgdc:Point\" y=\"104\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "description": "Gets information related to critical events.",
+      "export_key": "exmple_sep__get_critical_events",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1675198015889,
+      "name": "Exmple: SEP - Get Critical Events",
+      "object_type": "incident",
+      "programmatic_name": "exmple_sep__get_critical_events",
+      "tags": [],
+      "uuid": "786d1b99-4767-45a2-8679-f2661fa9518b",
+      "workflow_id": 431
     },
     {
       "actions": [],
       "content": {
         "version": 2,
-        "workflow_id": "wf_sep_get_endpoint_details_for_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_endpoint_details_for_artifact\" isExecutable=\"true\" name=\"Example: SEP - Get Endpoint Details for artifact\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Get endpoint details for artifact value. Artifact value will be \"DNS name\" or \"System name\"]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0te25gx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ko5njg\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_computername\u0027: u\u0027WIN-4OA0GKJN830\u0027}, \\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-23 18:40:17\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \\n         \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1966}, \\n         \u0027success\u0027: True, \\n         \u0027content\u0027: {u\u0027sort\u0027: [{u\u0027direction\u0027: u\u0027ASC\u0027, u\u0027property\u0027: u\u0027COMPUTER_NAME\u0027, u\u0027ascending\u0027: True}], u\u0027number\u0027: 0, \\n                     u\u0027firstPage\u0027: True, u\u0027content\u0027: [{u\u0027profileVersion\u0027: u\u002714.2.1031\u0027, u\u0027elamOnOff\u0027: 1, \\n                     u\u0027avEngineOnOff\u0027: 1, u\u0027profileChecksum\u0027: None, u\u0027atpDeviceId\u0027: None, \\n                     u\u0027processorType\u0027: u\u0027Intel64 Family 6 Model 15 Stepping 1\u0027, u\u0027oslanguage\u0027: u\u0027en-US\u0027, \\n                     u\u0027licenseId\u0027: None, u\u0027licenseStatus\u0027: -1, \\n                     u\u0027group\u0027: {u\u0027domain\u0027: {u\u0027id\u0027: u\u0027908090000946C25D330E919313D23887\u0027, u\u0027name\u0027: u\u0027Default\u0027}, u\u0027name\u0027: u\u0027My Company\\\\\\\\JP_TEST_GROUP_1\u0027, u\u0027fullPathName\u0027: None, u\u0027externalReferenceId\u0027: None, u\u0027source\u0027: None, u\u0027id\u0027: u\u00278E20F39B0946C25D118925C2E28C2D59\u0027}, \\n                     u\u0027uuid\u0027: u\u0027EA650B42-D10A-7F9F-A1D2-0A58C4F4CEB1\u0027, \\n                     u\u0027groupUpdateProvider\u0027: False, \\n                     u\u0027edrStatus\u0027: 2, u\u0027freeDisk\u0027: 40542507008, u\u0027diskDrive\u0027: u\u0027C:\\\\\\\\\u0027, u\u0027osFunction\u0027: u\u0027Server\u0027, u\u0027processorClock\u0027: 2394, \\n                     u\u0027mobilePhone\u0027: u\u0027\u0027, u\u0027jobTitle\u0027: u\u0027\u0027, u\u0027lastHeuristicThreatTime\u0027: 0, u\u0027osname\u0027: u\u0027Windows Server 2012\u0027, \\n                     u\u0027winServers\u0027: [u\u00270.0.0.0\u0027, u\u00270.0.0.0\u0027], u\u0027deploymentMessage\u0027: u\u0027\u0027, u\u0027idsSerialNo\u0027: u\u0027\u0027, \\n                     u\u0027employeeNumber\u0027: u\u0027\u0027, u\u0027snacLicenseId\u0027: None, u\u0027lastSiteId\u0027: u\u0027EE75B0850946C25D5287B58B5173A37C\u0027, \\n                     u\u0027uwf\u0027: 2, u\u0027currentClientId\u0027: u\u0027256B2B130946C25D40C83823AA2E5D4C\u0027, u\u0027osbitness\u0027: u\u0027x64\u0027, \\n                     u\u0027lastScanTime\u0027: 1558613245000, u\u0027email\u0027: u\u0027\u0027, u\u0027securityVirtualAppliance\u0027: None, \\n                     u\u0027worstInfectionIdx\u0027: u\u00270\u0027, u\u0027encryptedDevicePassword\u0027: None, u\u0027lastServerId\u0027: u\u00277D6AAA6F0946C25D170B3A2D442500B6\u0027, \\n                     u\u0027kernel\u0027: None, u\u0027lastUpdateTime\u0027: 1558632769514, u\u0027ptpOnOff\u0027: 1, u\u0027majorVersion\u0027: 14, \\n                     u\u0027lastConnectedIpAddr\u0027: u\u00279.70.194.93\u0027, u\u0027agentVersion\u0027: u\u002714.2.1031.0100\u0027, u\u0027deploymentRunningVersion\u0027: u\u002714.2.1031.0100\u0027, \\n                     u\u0027agentTimeStamp\u0027: 1558632769514, u\u0027osminor\u0027: 2, u\u0027osMajor\u0027: 6, u\u0027deploymentTargetVersion\u0027: u\u002714.2.1031.0100\u0027, \\n                     u\u0027osMinor\u0027: 2, u\u0027osFlavorNumber\u0027: 79, u\u0027logicalCpus\u0027: 0, u\u0027deploymentPreVersion\u0027: u\u0027\u0027, u\u0027hypervisorVendorId\u0027: u\u00270\u0027, \\n                     u\u0027fbwf\u0027: 2, u\u0027osversion\u0027: u\u00276.2\u0027, u\u0027dnsServers\u0027: [u\u00279.70.192.29\u0027, u\u0027FEC0:0000:0000:FFFF:0000:0000:0000:0001\u0027], \\n                     u\u0027vsicStatus\u0027: 3, u\u0027deleted\u0027: 0, u\u0027deploymentStatus\u0027: u\u0027302456832\u0027, u\u0027computerTimeStamp\u0027: 1558622386922, u\u0027bwf\u0027: 2, \\n                     u\u0027totalDiskSpace\u0027: 81567, u\u0027homePhone\u0027: u\u0027\u0027, u\u0027daOnOff\u0027: 1, u\u0027computerDescription\u0027: u\u0027\u0027, u\u0027pepOnOff\u0027: 1, \\n                     \u0027timediffLastUpdateTime\u0027: 448.98237204551697, u\u0027bashStatus\u0027: 1, u\u0027agentUsn\u0027: 2545799, u\u0027osName\u0027: u\u0027Windows Server 2012\u0027, \\n                     \u0027readableLastUpdateTime\u0027: \u00272019-05-23 18:32:49\u0027, u\u0027patternIdx\u0027: u\u00274A80266952462523E3E5AC3B816032AE\u0027, \\n                     u\u0027employeeStatus\u0027: u\u0027\u0027, u\u0027tmpDevice\u0027: None, u\u0027rebootRequired\u0027: 0, u\u0027subnetMasks\u0027: [u\u0027255.255.255.0\u0027, u\u002764\u0027], \\n                     u\u0027minorVersion\u0027: 2, u\u0027osservicePack\u0027: u\u0027\u0027, \u0027timediffLastVirusTime\u0027: 5638590.9823720455, u\u0027lastSiteName\u0027: u\u0027My Site\u0027, \\n                     u\u0027cidsEngineVersion\u0027: u\u00270.0.0.0\u0027, u\u0027lastDeploymentTime\u0027: 1550585147000, u\u0027isGrace\u0027: 0, u\u0027computerUsn\u0027: 2544267, \\n                     u\u0027agentId\u0027: u\u00276E5AA5CB0946C25D40C83823BB5107E6\u0027, u\u0027cidsBrowserFfOnOff\u0027: 1, u\u0027domainOrWorkgroup\u0027: u\u0027WORKGROUP\u0027, \\n                     u\u0027svaId\u0027: None, u\u0027loginDomain\u0027: u\u0027LocalComputer\u0027, u\u0027lastServerName\u0027: u\u0027WIN-4OA0GKJN830\u0027, u\u0027contentUpdate\u0027: 1, \\n                     u\u0027writeFiltersStatus\u0027: None, u\u0027infected\u0027: 0, \u0027timediffLastScanTime\u0027: 19972.982372045517, u\u0027memory\u0027: 6441979904, \\n                     u\u0027freeMem\u0027: 3117060096, u\u0027officePhone\u0027: u\u0027\u0027, u\u0027lastVirusTime\u0027: 1552994627000, u\u0027telemetryMid\u0027: u\u0027890E283B-41D3-4340-A397-66F6AFCAF33E\u0027,\\n                     u\u0027idsVersion\u0027: u\u0027\u0027, u\u0027cidsBrowserIeOnOff\u0027: 1, u\u0027publicKey\u0027: u\u0027BgIAAACkAABSU0ExAAgAAAEAAQDfMtYpvbC2ZOrpGFbK76tuyp2MZ7/6EGsFrqAV3ZBMfvMllksVObpPYvDSc5vCjtzthb1301VADLAspayGytsdAj5z8+LLpOnJkHNg9tIunm1lLkBTitevI6G+nNjyKd7uPn3+bxjk1LL8g1exL2C2SMPEXubdUa1N5xwmhhPHp6PSIAjY74QUcNyplfvylMS9QRWoQ70mqNy9tLLef6+qCYWTqGa7QKXS0WUJs8sJMzWfCrpeMVAmU5/s3yEu+OI+9RKgOeSfy7wRzmAWHQTofjHkYGYqwXcwwLX7AbWjdcpYo0Kaecf8e5t2ZvWyR362EaNxn0HYSjpKraY1hLK1\u0027, \\n                     u\u0027quarantineDesc\u0027: u\u0027Host Integrity check passed\\\\n\u0027, u\u0027cidsDrvMulfCode\u0027: 0, u\u0027biosVersion\u0027: u\u0027INTEL  - 6040000 PhoenixBIOS 4.0 Release 6.0\u0027, \\n                     u\u0027rebootReason\u0027: u\u0027\u0027, u\u0027telemetryHwid\u0027: u\u0027A942D8EB-32C3-E42F-FE83-723FDC431F32\u0027, \u0027readableLastVirusTime\u0027: \u00272019-03-19 11:23:47\u0027, \\n                     u\u0027cidsSilentMode\u0027: 0, u\u0027creationTime\u0027: 1550585043812, u\u0027macAddresses\u0027: [u\u002700-50-56-8B-A6-C3\u0027, u\u002700-50-56-8B-A6-C3\u0027], \\n                     u\u0027idsChecksum\u0027: None, u\u0027operatingSystem\u0027: u\u0027Windows Server 2012 \u0027, u\u0027osmajor\u0027: 6, u\u0027virtualizationPlatform\u0027: u\u0027Unknown\u0027, \\n                     u\u0027ipAddresses\u0027: [u\u00279.70.194.93\u0027, u\u0027FE80:0000:0000:0000:FC67:074E:CD22:0188\u0027], u\u0027physicalCpus\u0027: 1, u\u0027osBitness\u0027: u\u0027x64\u0027, \\n                     u\u0027cidsDefsetVersion\u0027: u\u0027190522063\u0027, u\u0027cidsDrvOnOff\u0027: 1, u\u0027computerName\u0027: u\u0027WIN-4OA0GKJN830\u0027, u\u0027logonUserName\u0027: u\u0027Administrator\u0027, \\n                     u\u0027licenseExpiry\u0027: 0, u\u0027osLanguage\u0027: u\u0027en-US\u0027, u\u0027gateways\u0027: [u\u00279.70.194.1\u0027, u\u00279.70.194.1\u0027, u\u00270.0.0.0\u0027, u\u00270.0.0.0\u0027], \\n                     u\u0027uniqueId\u0027: u\u0027D31AA16E0946C25D40C83823C500518B\u0027, u\u0027department\u0027: u\u0027\u0027, u\u0027isNpvdiClient\u0027: 0, u\u0027dhcpServer\u0027: u\u00270.0.0.0\u0027, \\n                     u\u0027readableLastScanTime\u0027: \u00272019-05-23 13:07:25\u0027, u\u0027osfunction\u0027: u\u0027Server\u0027, u\u0027description\u0027: u\u0027\u0027, u\u0027osflavorNumber\u0027: 79, \\n                     u\u0027tpmDevice\u0027: u\u00270\u0027, u\u0027onlineStatus\u0027: 1, u\u0027lastDownloadTime\u0027: 1558356063096, u\u0027apOnOff\u0027: 1, u\u0027timeZone\u0027: 480, u\u0027fullName\u0027: u\u0027\u0027, \\n                     u\u0027osVersion\u0027: u\u00276.2\u0027, u\u0027attributeExtension\u0027: u\u0027\u0027, u\u0027atpServer\u0027: u\u0027https://9.70.194.99:443\u0027, u\u0027tamperOnOff\u0027: 1, u\u0027osServicePack\u0027: u\u0027\u0027, \\n                     u\u0027agentType\u0027: u\u0027105\u0027, u\u0027serialNumber\u0027: u\u0027VMware-42 0b 65 ea 0a d1 9f 7f-a1 d2 0a 58 c4 f4 ce b1\u0027, u\u0027osElamStatus\u0027: 0, u\u0027installType\u0027: u\u00270\u0027, \\n                     u\u0027profileSerialNo\u0027: u\u00278E20-05/08/2019 07:00:23 015\u0027, u\u0027hardwareKey\u0027: u\u00271771D79454E53469DF4B290C06C104C9\u0027, u\u0027firewallOnOff\u0027: 1}], \\n                     u\u0027lastPage\u0027: True, u\u0027totalPages\u0027: 1, u\u0027numberOfElements\u0027: 1, u\u0027totalElements\u0027: 1, u\u0027size\u0027: 20}, \\n                    \\n         \u0027raw\u0027: \u0027\u0026lt;content_as_string\u0026gt;\u0027\\n         \u0027reason\u0027: None, \\n         \u0027version\u0027: \u00271.0\u0027}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"computerName\\\", \\\"uniqueId\\\", \\\"operatingSystem\\\", \\\"ipAddresses\\\",\\n                   \\\"sep_description\\\", \\\"domain_name\\\", \\\"domain_id\\\", \\\"hardwareKey\\\", \\\"group_name\\\", \\\"group_id\\\",\\n                   \\\"infected\\\"]\\nWF_NAME = \\\"Get Endpoint Details\\\"\\nFN_NAME = \\\"fn_sep_get_computers\\\"\\nC_OUTER = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; results returned for computer name \\\" \\\\\\n                   \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, results[\\\"content\\\"][\\\"numberOfElements\\\"], unicode(INPUTS[\\\"sep_computername\\\"]),\\n                    FN_NAME)\\n\\n        eps = C_OUTER[\\\"content\\\"]\\n        for i in range(len(eps)):\\n            ep_osname = eps[i].get(\\\"osname\\\", \\\"\\\")\\n            newrow = incident.addRow(\\\"sep_endpoint_details\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            for f in DATA_TBL_FIELDS:\\n                f_base = f.split(\u0027_\u0027)[0]\\n                if f_base == \\\"query_execution_time\\\":\\n                    continue\\n                if eps[i][f_base] is not None:\\n                    if isinstance(eps[i][f_base], unicode) or isinstance(eps[i][f_base], int) \\\\\\n                            or isinstance(eps[i][f_base], long) or len(eps[i][f_base]) == 0:\\n                        if f_base == \\\"onlineStatus\\\":\\n                            if eps[i][f_base]:\\n                                newrow[f] = \\\"Online\\\"\\n                            else:\\n                                newrow[f] = \\\"Offline\\\"\\n                        elif f_base == \\\"infected\\\":\\n                            if eps[i][f_base]:\\n                                newrow[f] = \\\"Yes\\\"\\n                            else:\\n                                newrow[f] = \\\"No\\\"\\n                        else:\\n                            newrow[f] = eps[i][f_base]\\n                    else:\\n                        newrow[f] = \u0027,\u0027.join(eps[i][f_base])\\n\\n            if \\\"windows\\\" in ep_osname.lower():\\n                if (eps[i][\\\"quarantineDesc\\\"].find(\\\"Host Integrity check passed\\\") == -1):\\n                    newrow.endpoint_quarantine_status = \\\"Quarantined\\\"\\n                else:\\n                    newrow.endpoint_quarantine_status = \\\"Un-Quarantined\\\"\\n            else:\\n                newrow.endpoint_quarantine_status = \\\"\\\"\\n\\n\\n            group = eps[i].group\\n            if group is not None:\\n                newrow.group_name = group[\\\"name\\\"]\\n                newrow.group_id = group[\\\"id\\\"]\\n                domain = group[\\\"domain\\\"]\\n                if domain is not None:\\n                    newrow.domain_name = domain[\\\"name\\\"]\\n                    newrow.domain_id = domain[\\\"id\\\"]\\n\\n    else:\\n        note_text += u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for computer \\\" \\\\\\n                     \\\"name \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, unicode(INPUTS[\\\"sep_computername\\\"]), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sep_computername = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0te25gx\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1u4fpe2\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0te25gx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ko5njg\"/\u003e\u003cendEvent id=\"EndEvent_1ahwylo\"\u003e\u003cincoming\u003eSequenceFlow_1u4fpe2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1u4fpe2\" sourceRef=\"ServiceTask_1ko5njg\" targetRef=\"EndEvent_1ahwylo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0z43ebe\"\u003e\u003ctext\u003e\u003c![CDATA[Get endpoint properties. Input: Assigned from artifact value. Create new entry for data table \u0027Symantec SEP - Endpoint details\n\u0027 with results.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1is4p7g\" sourceRef=\"ServiceTask_1ko5njg\" targetRef=\"TextAnnotation_0z43ebe\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ko5njg\" id=\"ServiceTask_1ko5njg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"242\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0te25gx\" id=\"SequenceFlow_0te25gx_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ahwylo\" id=\"EndEvent_1ahwylo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"392\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"410\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1u4fpe2\" id=\"SequenceFlow_1u4fpe2_di\"\u003e\u003comgdi:waypoint x=\"342\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"392\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"367\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0z43ebe\" id=\"TextAnnotation_0z43ebe_di\"\u003e\u003comgdc:Bounds height=\"56\" width=\"307\" x=\"141\" y=\"58\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1is4p7g\" id=\"Association_1is4p7g_di\"\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"294\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "workflow_id": "wf_sep_get_endpoint_details",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_endpoint_details\" isExecutable=\"true\" name=\"Example: SEP - Get Endpoint Details\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Get endpoint details for Evidence of Compromise (EOC) data table row \"computer_name\" value.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0x5nwsi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_192mbob\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_computername\u0027: u\u0027WIN-4OA0GKJN830\u0027}, \\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-23 18:40:17\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \\n         \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1966}, \\n         \u0027success\u0027: True, \\n         \u0027content\u0027: {u\u0027sort\u0027: [{u\u0027direction\u0027: u\u0027ASC\u0027, u\u0027property\u0027: u\u0027COMPUTER_NAME\u0027, u\u0027ascending\u0027: True}], u\u0027number\u0027: 0, \\n                     u\u0027firstPage\u0027: True, u\u0027content\u0027: [{u\u0027profileVersion\u0027: u\u002714.2.1031\u0027, u\u0027elamOnOff\u0027: 1, \\n                     u\u0027avEngineOnOff\u0027: 1, u\u0027profileChecksum\u0027: None, u\u0027atpDeviceId\u0027: None, \\n                     u\u0027processorType\u0027: u\u0027Intel64 Family 6 Model 15 Stepping 1\u0027, u\u0027oslanguage\u0027: u\u0027en-US\u0027, \\n                     u\u0027licenseId\u0027: None, u\u0027licenseStatus\u0027: -1, \\n                     u\u0027group\u0027: {u\u0027domain\u0027: {u\u0027id\u0027: u\u0027908090000946C25D330E919313D23887\u0027, u\u0027name\u0027: u\u0027Default\u0027}, u\u0027name\u0027: u\u0027My Company\\\\\\\\JP_TEST_GROUP_1\u0027, u\u0027fullPathName\u0027: None, u\u0027externalReferenceId\u0027: None, u\u0027source\u0027: None, u\u0027id\u0027: u\u00278E20F39B0946C25D118925C2E28C2D59\u0027}, \\n                     u\u0027uuid\u0027: u\u0027EA650B42-D10A-7F9F-A1D2-0A58C4F4CEB1\u0027, \\n                     u\u0027groupUpdateProvider\u0027: False, \\n                     u\u0027edrStatus\u0027: 2, u\u0027freeDisk\u0027: 40542507008, u\u0027diskDrive\u0027: u\u0027C:\\\\\\\\\u0027, u\u0027osFunction\u0027: u\u0027Server\u0027, u\u0027processorClock\u0027: 2394, \\n                     u\u0027mobilePhone\u0027: u\u0027\u0027, u\u0027jobTitle\u0027: u\u0027\u0027, u\u0027last\u00e1HeuristicThreatTime\u0027: 0, u\u0027osname\u0027: u\u0027Windows Server 2012\u0027, \\n                     u\u0027winServers\u0027: [u\u00270.0.0.0\u0027, u\u00270.0.0.0\u0027], u\u0027deploymentMessage\u0027: u\u0027\u0027, u\u0027idsSerialNo\u0027: u\u0027\u0027, \\n                     u\u0027employeeNumber\u0027: u\u0027\u0027, u\u0027snacLicenseId\u0027: None, u\u0027lastSiteId\u0027: u\u0027EE75B0850946C25D5287B58B5173A37C\u0027, \\n                     u\u0027uwf\u0027: 2, u\u0027currentClientId\u0027: u\u0027256B2B130946C25D40C83823AA2E5D4C\u0027, u\u0027osbitness\u0027: u\u0027x64\u0027, \\n                     u\u0027lastScanTime\u0027: 1558613245000, u\u0027email\u0027: u\u0027\u0027, u\u0027securityVirtualAppliance\u0027: None, \\n                     u\u0027worstInfectionIdx\u0027: u\u00270\u0027, u\u0027encryptedDevicePassword\u0027: None, u\u0027lastServerId\u0027: u\u00277D6AAA6F0946C25D170B3A2D442500B6\u0027, \\n                     u\u0027kernel\u0027: None, u\u0027lastUpdateTime\u0027: 1558632769514, u\u0027ptpOnOff\u0027: 1, u\u0027majorVersion\u0027: 14, \\n                     u\u0027lastConnectedIpAddr\u0027: u\u00279.70.194.93\u0027, u\u0027agentVersion\u0027: u\u002714.2.1031.0100\u0027, u\u0027deploymentRunningVersion\u0027: u\u002714.2.1031.0100\u0027, \\n                     u\u0027agentTimeStamp\u0027: 1558632769514, u\u0027osminor\u0027: 2, u\u0027osMajor\u0027: 6, u\u0027deploymentTargetVersion\u0027: u\u002714.2.1031.0100\u0027, \\n                     u\u0027osMinor\u0027: 2, u\u0027osFlavorNumber\u0027: 79, u\u0027logicalCpus\u0027: 0, u\u0027deploymentPreVersion\u0027: u\u0027\u0027, u\u0027hypervisorVendorId\u0027: u\u00270\u0027, \\n                     u\u0027fbwf\u0027: 2, u\u0027osversion\u0027: u\u00276.2\u0027, u\u0027dnsServers\u0027: [u\u00279.70.192.29\u0027, u\u0027FEC0:0000:0000:FFFF:0000:0000:0000:0001\u0027], \\n                     u\u0027vsicStatus\u0027: 3, u\u0027deleted\u0027: 0, u\u0027deploymentStatus\u0027: u\u0027302456832\u0027, u\u0027computerTimeStamp\u0027: 1558622386922, u\u0027bwf\u0027: 2, \\n                     u\u0027totalDiskSpace\u0027: 81567, u\u0027homePhone\u0027: u\u0027\u0027, u\u0027daOnOff\u0027: 1, u\u0027computerDescription\u0027: u\u0027\u0027, u\u0027pepOnOff\u0027: 1, \\n                     \u0027timediffLastUpdateTime\u0027: 448.98237204551697, u\u0027bashStatus\u0027: 1, u\u0027agentUsn\u0027: 2545799, u\u0027osName\u0027: u\u0027Windows Server 2012\u0027, \\n                     \u0027readableLastUpdateTime\u0027: \u00272019-05-23 18:32:49\u0027, u\u0027patternIdx\u0027: u\u00274A80266952462523E3E5AC3B816032AE\u0027, \\n                     u\u0027employeeStatus\u0027: u\u0027\u0027, u\u0027tmpDevice\u0027: None, u\u0027rebootRequired\u0027: 0, u\u0027subnetMasks\u0027: [u\u0027255.255.255.0\u0027, u\u002764\u0027], \\n                     u\u0027minorVersion\u0027: 2, u\u0027osservicePack\u0027: u\u0027\u0027, \u0027timediffLastVirusTime\u0027: 5638590.9823720455, u\u0027lastSiteName\u0027: u\u0027My Site\u0027, \\n                     u\u0027cidsEngineVersion\u0027: u\u00270.0.0.0\u0027, u\u0027lastDeploymentTime\u0027: 1550585147000, u\u0027isGrace\u0027: 0, u\u0027computerUsn\u0027: 2544267, \\n                     u\u0027agentId\u0027: u\u00276E5AA5CB0946C25D40C83823BB5107E6\u0027, u\u0027cidsBrowserFfOnOff\u0027: 1, u\u0027domainOrWorkgroup\u0027: u\u0027WORKGROUP\u0027, \\n                     u\u0027svaId\u0027: None, u\u0027loginDomain\u0027: u\u0027LocalComputer\u0027, u\u0027lastServerName\u0027: u\u0027WIN-4OA0GKJN830\u0027, u\u0027contentUpdate\u0027: 1, \\n                     u\u0027writeFiltersStatus\u0027: None, u\u0027infected\u0027: 0, \u0027timediffLastScanTime\u0027: 19972.982372045517, u\u0027memory\u0027: 6441979904, \\n                     u\u0027freeMem\u0027: 3117060096, u\u0027officePhone\u0027: u\u0027\u0027, u\u0027lastVirusTime\u0027: 1552994627000, u\u0027telemetryMid\u0027: u\u0027890E283B-41D3-4340-A397-66F6AFCAF33E\u0027,\\n                     u\u0027idsVersion\u0027: u\u0027\u0027, u\u0027cidsBrowserIeOnOff\u0027: 1, u\u0027publicKey\u0027: u\u0027BgIAAACkAABSU0ExAAgAAAEAAQDfMtYpvbC2ZOrpGFbK76tuyp2MZ7/6EGsFrqAV3ZBMfvMllksVObpPYvDSc5vCjtzthb1301VADLAspayGytsdAj5z8+LLpOnJkHNg9tIunm1lLkBTitevI6G+nNjyKd7uPn3+bxjk1LL8g1exL2C2SMPEXubdUa1N5xwmhhPHp6PSIAjY74QUcNyplfvylMS9QRWoQ70mqNy9tLLef6+qCYWTqGa7QKXS0WUJs8sJMzWfCrpeMVAmU5/s3yEu+OI+9RKgOeSfy7wRzmAWHQTofjHkYGYqwXcwwLX7AbWjdcpYo0Kaecf8e5t2ZvWyR362EaNxn0HYSjpKraY1hLK1\u0027, \\n                     u\u0027quarantineDesc\u0027: u\u0027Host Integrity check passed\\\\n\u0027, u\u0027cidsDrvMulfCode\u0027: 0, u\u0027biosVersion\u0027: u\u0027INTEL  - 6040000 PhoenixBIOS 4.0 Release 6.0\u0027, \\n                     u\u0027rebootReason\u0027: u\u0027\u0027, u\u0027telemetryHwid\u0027: u\u0027A942D8EB-32C3-E42F-FE83-723FDC431F32\u0027, \u0027readableLastVirusTime\u0027: \u00272019-03-19 11:23:47\u0027, \\n                     u\u0027cidsSilentMode\u0027: 0, u\u0027creationTime\u0027: 1550585043812, u\u0027macAddresses\u0027: [u\u002700-50-56-8B-A6-C3\u0027, u\u002700-50-56-8B-A6-C3\u0027], \\n                     u\u0027idsChecksum\u0027: None, u\u0027operatingSystem\u0027: u\u0027Windows Server 2012 \u0027, u\u0027osmajor\u0027: 6, u\u0027virtualizationPlatform\u0027: u\u0027Unknown\u0027, \\n                     u\u0027ipAddresses\u0027: [u\u00279.70.194.93\u0027, u\u0027FE80:0000:0000:0000:FC67:074E:CD22:0188\u0027], u\u0027physicalCpus\u0027: 1, u\u0027osBitness\u0027: u\u0027x64\u0027, \\n                     u\u0027cidsDefsetVersion\u0027: u\u0027190522063\u0027, u\u0027cidsDrvOnOff\u0027: 1, u\u0027computerName\u0027: u\u0027WIN-4OA0GKJN830\u0027, u\u0027logonUserName\u0027: u\u0027Administrator\u0027, \\n                     u\u0027licenseExpiry\u0027: 0, u\u0027osLanguage\u0027: u\u0027en-US\u0027, u\u0027gateways\u0027: [u\u00279.70.194.1\u0027, u\u00279.70.194.1\u0027, u\u00270.0.0.0\u0027, u\u00270.0.0.0\u0027], \\n                     u\u0027uniqueId\u0027: u\u0027D31AA16E0946C25D40C83823C500518B\u0027, u\u0027department\u0027: u\u0027\u0027, u\u0027isNpvdiClient\u0027: 0, u\u0027dhcpServer\u0027: u\u00270.0.0.0\u0027, \\n                     u\u0027readableLastScanTime\u0027: \u00272019-05-23 13:07:25\u0027, u\u0027osfunction\u0027: u\u0027Server\u0027, u\u0027description\u0027: u\u0027\u0027, u\u0027osflavorNumber\u0027: 79, \\n                     u\u0027tpmDevice\u0027: u\u00270\u0027, u\u0027onlineStatus\u0027: 1, u\u0027lastDownloadTime\u0027: 1558356063096, u\u0027apOnOff\u0027: 1, u\u0027timeZone\u0027: 480, u\u0027fullName\u0027: u\u0027\u0027, \\n                     u\u0027osVersion\u0027: u\u00276.2\u0027, u\u0027attributeExtension\u0027: u\u0027\u0027, u\u0027atpServer\u0027: u\u0027https://9.70.194.99:443\u0027, u\u0027tamperOnOff\u0027: 1, u\u0027osServicePack\u0027: u\u0027\u0027, \\n                     u\u0027agentType\u0027: u\u0027105\u0027, u\u0027serialNumber\u0027: u\u0027VMware-42 0b 65 ea 0a d1 9f 7f-a1 d2 0a 58 c4 f4 ce b1\u0027, u\u0027osElamStatus\u0027: 0, u\u0027installType\u0027: u\u00270\u0027, \\n                     u\u0027profileSerialNo\u0027: u\u00278E20-05/08/2019 07:00:23 015\u0027, u\u0027hardwareKey\u0027: u\u00271771D79454E53469DF4B290C06C104C9\u0027, u\u0027firewallOnOff\u0027: 1}], \\n                     u\u0027lastPage\u0027: True, u\u0027totalPages\u0027: 1, u\u0027numberOfElements\u0027: 1, u\u0027totalElements\u0027: 1, u\u0027size\u0027: 20}, \\n\\n         \u0027raw\u0027: \u0027\u0026lt;content_as_string\u0026gt;\u0027\\n         \u0027reason\u0027: None, \\n         \u0027version\u0027: \u00271.0\u0027}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"computerName\\\", \\\"uniqueId\\\", \\\"operatingSystem\\\", \\\"ipAddresses\\\",\\n                   \\\"sep_description\\\", \\\"domain_name\\\", \\\"domain_id\\\", \\\"hardwareKey\\\", \\\"group_name\\\", \\\"group_id\\\",\\n                   \\\"infected\\\"]\\nWF_NAME = \\\"Get Endpoint Details\\\"\\nFN_NAME = \\\"fn_sep_get_computers\\\"\\nC_OUTER = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; results returned for computer name \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\" \\\\\\n            .format(WF_NAME, results[\\\"content\\\"][\\\"numberOfElements\\\"], unicode(INPUTS[\\\"sep_computername\\\"]),\\n                    FN_NAME)\\n\\n        eps = C_OUTER[\\\"content\\\"]\\n        for i in range(len(eps)):\\n            ep_osname = eps[i].get(\\\"osname\\\", \\\"\\\")\\n            newrow = incident.addRow(\\\"sep_endpoint_details\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            for f in DATA_TBL_FIELDS:\\n                f_base = f.split(\u0027_\u0027)[0]\\n                if f_base == \\\"query_execution_time\\\":\\n                    continue\\n                if eps[i][f_base] is not None:\\n                    if isinstance(eps[i][f_base], unicode) or isinstance(eps[i][f_base], int) \\\\\\n                            or isinstance(eps[i][f_base], long) or len(eps[i][f_base]) == 0:\\n                        if f_base == \\\"onlineStatus\\\":\\n                            if eps[i][f_base]:\\n                                newrow[f] = \\\"Online\\\"\\n                            else:\\n                                newrow[f] = \\\"Offline\\\"\\n                        elif f_base == \\\"infected\\\":\\n                            if eps[i][f_base]:\\n                                newrow[f] = \\\"Yes\\\"\\n                            else:\\n                                newrow[f] = \\\"No\\\"\\n                        else:\\n                            newrow[f] = eps[i][f_base]\\n                    else:\\n                        newrow[f] = \u0027,\u0027.join(eps[i][f_base])\\n\\n            if \\\"windows\\\" in ep_osname.lower():\\n                if (eps[i][\\\"quarantineDesc\\\"].find(\\\"Host Integrity check passed\\\") == -1):\\n                    newrow.endpoint_quarantine_status = \\\"Quarantined\\\"\\n                else:\\n                    newrow.endpoint_quarantine_status = \\\"Un-Quarantined\\\"\\n            else:\\n                newrow.endpoint_quarantine_status = \\\"\\\"\\n\\n            group = eps[i].group\\n            if group is not None:\\n                newrow.group_name = group[\\\"name\\\"]\\n                newrow.group_id = group[\\\"id\\\"]\\n                domain = group[\\\"domain\\\"]\\n                if domain is not None:\\n                    newrow.domain_name = domain[\\\"name\\\"]\\n                    newrow.domain_id = domain[\\\"id\\\"]\\n\\n    else:\\n        note_text += u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for computer \\\" \\\\\\n                     \\\"name \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\" \\\\\\n            .format(WF_NAME, unicode(INPUTS[\\\"sep_computername\\\"]), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sep_computername = row.computer_name\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0x5nwsi\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1xa1j2n\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0x5nwsi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_192mbob\"/\u003e\u003cendEvent id=\"EndEvent_1p6qx0z\"\u003e\u003cincoming\u003eSequenceFlow_1xa1j2n\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1xa1j2n\" sourceRef=\"ServiceTask_192mbob\" targetRef=\"EndEvent_1p6qx0z\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1r41qm6\"\u003e\u003ctext\u003e\u003c![CDATA[Get endpoint properties. Input assigned from data table row. Create new entry for data table \u0027Symantec SEP - Endpoint details\n\u0027 with results.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_07qwp5h\" sourceRef=\"ServiceTask_192mbob\" targetRef=\"TextAnnotation_1r41qm6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_192mbob\" id=\"ServiceTask_192mbob_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"244\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0x5nwsi\" id=\"SequenceFlow_0x5nwsi_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"244\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"221\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1p6qx0z\" id=\"EndEvent_1p6qx0z_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"389\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"407\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1xa1j2n\" id=\"SequenceFlow_1xa1j2n_di\"\u003e\u003comgdi:waypoint x=\"344\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"389\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"366.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1r41qm6\" id=\"TextAnnotation_1r41qm6_di\"\u003e\u003comgdc:Bounds height=\"58\" width=\"379\" x=\"104\" y=\"35\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_07qwp5h\" id=\"Association_07qwp5h_di\"\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"292\" xsi:type=\"omgdc:Point\" y=\"93\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "content_version": 2,
-      "description": "Get endpoint details for artifact value. Artifact value will be \"DNS name\" or \"System name\"",
-      "export_key": "wf_sep_get_endpoint_details_for_artifact",
+      "description": "Get endpoint details for Evidence of Compromise (EOC) data table row \"computer_name\" value.",
+      "export_key": "wf_sep_get_endpoint_details",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002696677,
-      "name": "Example: SEP - Get Endpoint Details for artifact",
+      "last_modified_time": 1671718898934,
+      "name": "Example: SEP - Get Endpoint Details",
+      "object_type": "sep_eoc_scan_results",
+      "programmatic_name": "wf_sep_get_endpoint_details",
+      "tags": [],
+      "uuid": "b11247c4-b7d6-4a96-856f-e6f2d16bde76",
+      "workflow_id": 319
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_sep_remediate_artifact_on_endpoint",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_remediate_artifact_on_endpoint\" isExecutable=\"true\" name=\"Example: SEP - Remediate Artifact on Endpoint\"\u003e\u003cdocumentation\u003eInitiate  a file quarantine scan on Symantec Endpoint Protection endpoints and get initial command status. A remediation action quarantines all copies of the selected file on the target endpoint(s) by hash value (SHA256, SHA1 or MD5).\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0mrwl5a\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0t9pxov\" name=\"SEP - Scan Endpoints\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"cc7fd805-db7a-4c37-aa0e-29ffd1752eec\"\u003e{\"inputs\":{\"cb92fbc0-79a0-48fe-b048-8c62ef5ea42f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"810db651-8a47-4931-a4b4-1e579d08088d\"}},\"5b452d96-e040-46b3-ac15-828c9ffddbfa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"93b82e92-6f87-431a-9c2a-9f5d0f2c621b\"}}},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_upload_file_to_sepm script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_description\u0027: u\u0027Scan to remediate file based on sha256\u0027, u\u0027sep_computer_ids\u0027: u\u0027D31AA16E0946C25D40C83823C500518B\u0027, \\n                    u\u0027sep_scan_action\u0027: None, u\u0027sep_file_path\u0027: u\u0027C:\\\\\\\\temp\\\\\\\\eicar.zip\u0027, u\u0027sep_group_ids\u0027: u\u0027CAD80F000946C25D6C150831060AA326\u0027, \\n                    u\u0027sep_sha256\u0027: 8f5cae16ef5cfd3fcd9a4d6d58de14137b92a845ce00f69b64c5b04b6b712a83, u\u0027sep_scan_type\u0027: {u\u0027name\u0027: u\u0027QUICK_SCAN\u0027, u\u0027id\u0027: 229}}, \\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-04-12 10:49:22\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027Johns-MacBook-Pro-2.local\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 12349}, \\n         \u0027success\u0027: True, \u0027content\u0027: {u\u0027commandID_computer\u0027: u\u00270F0CBDD7EDFF4634B23FA11F5AB81FFC\u0027, u\u0027commandID_group\u0027: u\u0027BB37F78894DB451B8E8921EC127667A3\u0027}, \\n         \u0027raw\u0027: \u0027{\\\"commandID_computer\\\": \\\"0F0CBDD7EDFF4634B23FA11F5AB81FFC\\\", \\\"commandID_group\\\": \\\"BB37F78894DB451B8E8921EC127667A3\\\"}\u0027, \\n         \u0027reason\u0027: None, \\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"remediate_commandid\\\"]\\nfn_name = \\\"fn_sep_scan_endpoints\\\"\\nwf_name = \\\"Remediate Artifact on Endpoint \\\"\\ncontent = results.content\\nquery_execution_date = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\nif content is not None:\\n    noteText = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Command executed with id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for artifact with \\\" \\\\\\n               \\\"type \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(wf_name, content[\\\"commandID_computer\\\"], row.artifact_type, unicode(row.artifact_value), fn_name)\\n    row.query_execution_date = query_execution_date\\n    row.remediation_commandid = content[\\\"commandID_computer\\\"]\\n\\nelse:\\n    noteText += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(wf_name, fn_name)\\n\\nincident.addNote(helper.createRichText(noteText))\",\"pre_processing_script\":\"##  Symantec Endpoint Protection- fn_sep_scan_endpoints script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {    \u0027inputs\u0027: {u\u0027sep_matching_endpoint_ids\u0027: True, u\u0027sep_commandid\u0027: u\u0027C6B90CB6F344465F9CAC429437618EB0\u0027,\\n                        u\u0027sep_status_type\u0027: u\u0027scan\u0027},\\n             \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-31 11:00:58\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027,\\n                         \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 4785},\\n             \u0027success\u0027: True,\\n             \u0027content\u0027: {\u0027endpoints_matching_ids\u0027: [u\u0027WIN-4OA0GKJN830\u0027, u\u0027WIN-N5KGH4CP3N3\u0027]},\\n             \u0027raw\u0027: \u0027{\\\"endpoints_matching_ids\\\": [\\\"WIN-4OA0GKJN830\\\", \\\"WIN-N5KGH4CP3N3\\\"]}\u0027,\\n             \u0027reason\u0027: None,\\n             \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\nstatus_results =  workflow.properties.get_command_status_results\\nCONTENT = status_results.content\\nINPUTS = status_results.inputs\\nHASH_LENS = [64, 40, 32]\\nHVS = [None if h != len(row.hash_value) else row.hash_value for h in HASH_LENS]\\n\\ndef main():\\n    inputs.sep_computer_ids = row.computer_id\\n    if rule.properties.sep_target_endpoints.lower() == \\\"all matching endpoints\\\":\\n        if CONTENT is not None and CONTENT[\\\"endpoints_matching_ids\\\"]:\\n            inputs.sep_computer_ids = \u0027,\u0027.join(CONTENT[\\\"endpoints_matching_ids\\\"])\\n    else:\\n        inputs.sep_computer_ids = row.computer_id\\n    inputs.sep_sha256 = HVS[0]\\n    inputs.sep_sha1 = HVS[1]\\n    inputs.sep_md5 = HVS[2]\\n    inputs.sep_file_path = row.file_path\\n    inputs.sep_scan_type = row.scan_type+\\\"_SCAN\\\"\\n    inputs.sep_scan_action = \\\"remediate\\\"\\n    inputs.sep_description = u\\\"Remediate endpoint for suspect file \u0027{0}\u0027.\\\".format(unicode(inputs.sep_file_path))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_13314yw\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1sez1d0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_1l3it0d\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n    \u0027inputs\u0027: {u\u0027sep_commandid\u0027: u\u00272F260501C22842ABBA7EB0805D92EFE0\u0027},\\n    \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-03-01 12:46:27\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027,\\n    \u0027execution_time_ms\u0027: 1085},\\n    \u0027success\u0027: True,\\n    \u0027content\u0027:\\n                {\\n                  \\\"sort\\\": [\\n                    {\\n                      \\\"direction\\\": \\\"ASC\\\",\\n                      \\\"property\\\": \\\"Begintime\\\",\\n                      \\\"ascending\\\": true\\n                    }\\n                  ],\\n                  \\\"number\\\": 0,\\n                  \\\"firstPage\\\": true,\\n                  \\\"content\\\": [\\n                    {\\n                      \\\"computerName\\\": \\\"ep1\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"1771D79454E53469DF4B290C06C104C9\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"D31AA16E0946C25D40C83823C500518B\\\",\\n                      \\\"computerIp\\\": \\\"192.168.194.93\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    },\\n                    {\\n                      \\\"computerName\\\": \\\"ep2\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\",\\n                      \\\"computerIp\\\": \\\"192.168.194.94\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    }\\n                  ],\\n                  \\\"lastPage\\\": true,\\n                  \\\"totalPages\\\": 1,\\n                  \\\"size\\\": 20,\\n                  \\\"totalElements\\\": 2,\\n                  \\\"numberOfElements\\\": 2\\n                }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"remediation_status\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Get Remediation status\\\"\\nSTATUS_TYPE = \\\"remediate\\\"\\nREMEDITATE_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    remediation_command_state = C_OUTER[\\\"overall_command_state\\\"]\\n    total_remediation_count = C_OUTER[\\\"total_remediation_count\\\"]\\n    total_remediation_ep_count = C_OUTER[\\\"total_remediation_ep_count\\\"]\\n    total_fail_remediation_count = C_OUTER[\\\"total_fail_remediation_count\\\"]\\n    total_ep_count = C_OUTER[\\\"total_ep_count\\\"]\\n    att_name = C_OUTER[\\\"att_name\\\"]\\n\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Remediate artifact returned \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; remediated \\\" \\\\\\n                    \\\"artifacts on \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; out of a total of \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; endpoints for artifact with type \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    \\\"and value \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{7}\u0026lt;/b\u0026gt;.\u0026lt;br\u0026gt;Added full result as an attachment. \\\" \\\\\\n                    \\\"Attachment name : \u0026lt;b\u0026gt;{6}\u0026lt;/b\u0026gt;.\\\" \\\\\\n            .format(WF_NAME, total_remediation_count, total_remediation_ep_count, total_ep_count, row.artifact_type,\\n                    unicode(row.artifact_value), att_name, FN_NAME)\\n\\n        if remediation_command_state == \\\"Completed\\\":\\n            if total_fail_remediation_count == 0 and total_remediation_count \u0026gt; 0:\\n                row.remediation_status = u\\\"{0} at {1}.\\\".format(remediation_command_state, REMEDITATE_EXECUTION_DATE)\\n            if total_fail_remediation_count == 0 and total_remediation_count \u0026gt; 0:\\n                row.remediation_status = u\\\"{0} at {1}.\\\".format(remediation_command_state, REMEDITATE_EXECUTION_DATE)\\n            elif total_fail_remediation_count == 0 and total_remediation_count == 0:\\n                row.remediation_status = \\\"Artifact not found\\\"\\n            elif total_fail_remediation_count \u0026gt; 0:\\n                row.remediation_status = \\\"Failed\\\"\\n        else:\\n            row.remediation_status = remediation_command_state\\n    else:\\n        row.remediation_status = remediation_command_state\\n        note_text += u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Remediate artifact returned \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results for \\\" \\\\\\n                     \\\"for artifact with type \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, row.artifact_type, unicode(row.artifact_value), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\\n\",\"pre_processing_script\":\"inputs.sep_incident_id = incident.id\\ninputs.sep_commandid = row.remediation_commandid\\ninputs.sep_status_type = \\\"remediation\\\"\\n\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1sez1d0\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1wubs8p\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1sez1d0\" sourceRef=\"ServiceTask_0t9pxov\" targetRef=\"ServiceTask_1l3it0d\"/\u003e\u003cendEvent id=\"EndEvent_1d7rlau\"\u003e\u003cincoming\u003eSequenceFlow_1wubs8p\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1wubs8p\" sourceRef=\"ServiceTask_1l3it0d\" targetRef=\"EndEvent_1d7rlau\"/\u003e\u003cserviceTask id=\"ServiceTask_0b85o2k\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sep_commandid = row.scan_commandid\\ninputs.sep_status_type = \\\"scan\\\"\\ninputs.sep_matching_endpoint_ids = True\",\"result_name\":\"get_command_status_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0mrwl5a\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_13314yw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_13314yw\" sourceRef=\"ServiceTask_0b85o2k\" targetRef=\"ServiceTask_0t9pxov\"/\u003e\u003csequenceFlow id=\"SequenceFlow_0mrwl5a\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0b85o2k\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_02xaj10\"\u003e\u003ctext\u003e\u003c![CDATA[Get command status of EOC scan to determine all target endpoints for remediate action. The EOC scan commandid is assigned from a data table entry. Inputs: \u0027sep_matching_endpoint_ids\u0027 is set to True.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0rezdgv\" sourceRef=\"ServiceTask_0b85o2k\" targetRef=\"TextAnnotation_02xaj10\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1466lik\"\u003e\u003ctext\u003e\u003c![CDATA[Initiate an scan with\na remediate action. Inputs: Assigned from data table row apart from target endpoint will either be \u0027all matching endpoints\u0027 from previous step or \u0027selected endpoint\u0027 from data table row. Output:Remediate commandid.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1a68pef\" sourceRef=\"ServiceTask_0t9pxov\" targetRef=\"TextAnnotation_1466lik\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1dl8gf0\"\u003e\u003ctext\u003eGet initial command status for Remediate command by remediate commandid.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0vm26pl\" sourceRef=\"ServiceTask_1l3it0d\" targetRef=\"TextAnnotation_1dl8gf0\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0t9pxov\" id=\"ServiceTask_0t9pxov_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"537\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1l3it0d\" id=\"ServiceTask_1l3it0d_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"738\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1sez1d0\" id=\"SequenceFlow_1sez1d0_di\"\u003e\u003comgdi:waypoint x=\"637\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"738\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"642.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1d7rlau\" id=\"EndEvent_1d7rlau_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"896\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"869\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1wubs8p\" id=\"SequenceFlow_1wubs8p_di\"\u003e\u003comgdi:waypoint x=\"838\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"896\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"822\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0b85o2k\" id=\"ServiceTask_0b85o2k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"285\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13314yw\" id=\"SequenceFlow_13314yw_di\"\u003e\u003comgdi:waypoint x=\"385\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"537\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"416\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mrwl5a\" id=\"SequenceFlow_0mrwl5a_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"285\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"241.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_02xaj10\" id=\"TextAnnotation_02xaj10_di\"\u003e\u003comgdc:Bounds height=\"101\" width=\"223\" x=\"223\" y=\"16\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0rezdgv\" id=\"Association_0rezdgv_di\"\u003e\u003comgdi:waypoint x=\"335\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"335\" xsi:type=\"omgdc:Point\" y=\"117\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1466lik\" id=\"TextAnnotation_1466lik_di\"\u003e\u003comgdc:Bounds height=\"113\" width=\"207\" x=\"483\" y=\"10\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1a68pef\" id=\"Association_1a68pef_di\"\u003e\u003comgdi:waypoint x=\"587\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"587\" xsi:type=\"omgdc:Point\" y=\"123\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1dl8gf0\" id=\"TextAnnotation_1dl8gf0_di\"\u003e\u003comgdc:Bounds height=\"67\" width=\"170\" x=\"703\" y=\"10\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0vm26pl\" id=\"Association_0vm26pl_di\"\u003e\u003comgdi:waypoint x=\"788\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"788\" xsi:type=\"omgdc:Point\" y=\"77\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Initiate  a file quarantine scan on Symantec Endpoint Protection endpoints and get initial command status. A remediation action quarantines all copies of the selected file on the target endpoint(s) by hash value (SHA256, SHA1 or MD5).",
+      "export_key": "wf_sep_remediate_artifact_on_endpoint",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1668001896237,
+      "name": "Example: SEP - Remediate Artifact on Endpoint",
+      "object_type": "sep_eoc_scan_results",
+      "programmatic_name": "wf_sep_remediate_artifact_on_endpoint",
+      "tags": [],
+      "uuid": "3ce24dcb-e1d7-47b8-8636-134f5c449be1",
+      "workflow_id": 332
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 3,
+        "workflow_id": "example_sep_cancel_a_command",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_sep_cancel_a_command\" isExecutable=\"true\" name=\"Example: SEP - Cancel a Command\"\u003e\u003cdocumentation\u003eCancel an existing pending command\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1dpd1zs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1susnrv\" name=\"SEP - Cancel a Command\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"43bc97a6-bb30-4e14-9515-8676325ab748\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  incident.addNote(f\\\"SEP Command {rule.properties.sep_command_id} was canceled\\\")\\nelse:\\n  incident.addNote(f\\\"SEP Command {rule.properties.sep_command_id} was not canceled. Reason: {results.reason}\\\")\\n  \",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sep_command_id = rule.properties.sep_command_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1dpd1zs\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0wjsxa0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1dpd1zs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1susnrv\"/\u003e\u003cendEvent id=\"EndEvent_12y8jw4\"\u003e\u003cincoming\u003eSequenceFlow_0wjsxa0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0wjsxa0\" sourceRef=\"ServiceTask_1susnrv\" targetRef=\"EndEvent_12y8jw4\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1susnrv\" id=\"ServiceTask_1susnrv_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"254.0422018348624\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dpd1zs\" id=\"SequenceFlow_1dpd1zs_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"254\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"226\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_12y8jw4\" id=\"EndEvent_12y8jw4_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"407.0422018348624\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"425.0422018348624\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0wjsxa0\" id=\"SequenceFlow_0wjsxa0_di\"\u003e\u003comgdi:waypoint x=\"354\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"407\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"380.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 3,
+      "description": "Cancel an existing pending command",
+      "export_key": "example_sep_cancel_a_command",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1675198072577,
+      "name": "Example: SEP - Cancel a Command",
+      "object_type": "incident",
+      "programmatic_name": "example_sep_cancel_a_command",
+      "tags": [],
+      "uuid": "ad7c79ea-0a9c-4ae6-bedd-90a2f7f52403",
+      "workflow_id": 430
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "example_sep__get_firewall_policy",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_sep__get_firewall_policy\" isExecutable=\"true\" name=\"Example: SEP - Get Firewall Policy\"\u003e\u003cdocumentation\u003eGet the firewall policy for the specified policy id.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1rci898\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0o0weow\" name=\"SEP - Get Firewall Policy\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a789fe90-a77a-4ee7-80f8-a6ee416644cf\"\u003e{\"inputs\":{},\"post_processing_script\":\"import json\\n\\nif not results.success:\\n  incident.addNote(f\\\"SEP Firewall Policy {rule.properties.sep_firewall_id} error. Reason: {results.reason}\\\")\\nelse:\\n  incident.addNote(f\\\"SEP Firewall Policy: {rule.properties.sep_firewall_id}\\\\n\\\\n{json.dumps(results.content, indent=4)}\\\")\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sep_firewall_id = rule.properties.sep_firewall_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1rci898\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1yreptj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1rci898\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0o0weow\"/\u003e\u003cendEvent id=\"EndEvent_0rcsgt1\"\u003e\u003cincoming\u003eSequenceFlow_1yreptj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1yreptj\" sourceRef=\"ServiceTask_0o0weow\" targetRef=\"EndEvent_0rcsgt1\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0o0weow\" id=\"ServiceTask_0o0weow_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"253\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1rci898\" id=\"SequenceFlow_1rci898_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"253\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"225.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rcsgt1\" id=\"EndEvent_0rcsgt1_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"410.6295896328294\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"428.6295896328294\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1yreptj\" id=\"SequenceFlow_1yreptj_di\"\u003e\u003comgdi:waypoint x=\"353\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"411\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"382\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "description": "Get the firewall policy for the specified policy id.",
+      "export_key": "example_sep__get_firewall_policy",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1675198233394,
+      "name": "Example: SEP - Get Firewall Policy",
+      "object_type": "incident",
+      "programmatic_name": "example_sep__get_firewall_policy",
+      "tags": [],
+      "uuid": "7b3caea5-a14a-4ae6-a140-65439cbf8355",
+      "workflow_id": 434
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_sep_get_endpoints_status_details",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_endpoints_status_details\" isExecutable=\"true\" name=\"Example: SEP - Get Non-Compliant Endpoints status details\"\u003e\u003cdocumentation\u003eGet further details for Endpoints with non-compliant status.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0mbv4rm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1riqjtk\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_status\u0027: True},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-24 11:06:24\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1157},\\n         \u0027success\u0027: True,\\n         \u0027content\u0027: {\u0027out_of_date\u0027: 0, \u0027hi_failed\u0027: 1, \u0027disabled\u0027: 0, \u0027up_to_date\u0027: 3, \u0027non_compliant\u0027: 1,\\n                     \u0027total\u0027: 3, \u0027offline\u0027: 0},\\n         \u0027raw\u0027: \u0027{\\\"out_of_date\\\": 0, \\\"hi_failed\\\": 1, \\\"disabled\\\": 0, \\\"up_to_date\\\": 3, \\\"non_compliant\\\": 1,\\n                  \\\"total\\\": 3, \\\"offline\\\": 0}\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable for \\\"Get Endpoints status\\\" workflow.\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"computer_name\\\",\\\"host_integrity_check\\\", \\\"onlineStatus\\\", \\\"readableLastScanTime\\\",\\n                   \\\"readableLastUpdateTime\\\", \\\"apOnOff\\\", \\\"avEngineOnOff\\\", \\\"cidsBrowserFfOnOff\\\", \\\"cidsBrowserIeOnOff\\\", \\n                   \\\"cidsDrvOnOff\\\", \\\"daOnOff\\\", \\\"elamOnOff\\\", \\\"firewallOnOff\\\", \\\"pepOnOff\\\", \\\"ptpOnOff\\\", \\\"tamperOnOff\\\"]\\nFN_NAME = \\\"fn_sep_get_computers\\\"\\nWF_NAME = \\\"Get Non-Compliant Endpoints status details\\\"\\nCONTENT = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\ndef add_rows_non_compliant_computers(eps):\\n    for i in range(len(eps)):\\n        newrow = incident.addRow(\\\"sep_endpoints_non_compliant_details\\\")\\n        newrow.query_execution_date = QUERY_EXECUTION_DATE\\n        for f in DATA_TBL_FIELDS:\\n            if f == \\\"query_execution_date\\\":\\n                continue\\n            newrow[f] = eps[i][f]\\n\\ndef main():\\n    note_text = \u0027\u0027\\n\\n    if CONTENT is not None and CONTENT[\\\"total\\\"] \u0026gt; 0:\\n\\n        if CONTENT[\\\"non_compliant\\\"] \u0026gt; 0:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; non-compliant endpoints \\\" \\\\\\n                        \\\"detected out of a total of \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, CONTENT[\\\"non_compliant\\\"], CONTENT[\\\"total\\\"], FN_NAME)\\n            add_rows_non_compliant_computers(CONTENT[\\\"eps\\\"])\\n        else:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; non-compliant endpoints \\\" \\\\\\n                         \\\"detected out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\" \\\\\\n                .format(WF_NAME, CONTENT[\\\"total\\\"], FN_NAME)\\n    else:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                    \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_status_details = True\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0mbv4rm\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1bchq6z\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0mbv4rm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1riqjtk\"/\u003e\u003cendEvent id=\"EndEvent_1jtsfdp\"\u003e\u003cincoming\u003eSequenceFlow_1bchq6z\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1bchq6z\" sourceRef=\"ServiceTask_1riqjtk\" targetRef=\"EndEvent_1jtsfdp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0rkf10b\"\u003e\u003ctext\u003e\u003c![CDATA[Get properties form non-compliant endpoints.\n\u00a0Input: Parameter \u0027sep_status_details\u0027 set to True. Create new entry for data table \u0027Symantec SEP - Non-compliant Endpoints status details\u0027 with results.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1jp6veq\" sourceRef=\"ServiceTask_1riqjtk\" targetRef=\"TextAnnotation_0rkf10b\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1riqjtk\" id=\"ServiceTask_1riqjtk_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"246\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0mbv4rm\" id=\"SequenceFlow_0mbv4rm_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"246\" xsi:type=\"omgdc:Point\" y=\"207\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"177\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1jtsfdp\" id=\"EndEvent_1jtsfdp_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"386\" y=\"193\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"359\" y=\"232\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bchq6z\" id=\"SequenceFlow_1bchq6z_di\"\u003e\u003comgdi:waypoint x=\"346\" xsi:type=\"omgdc:Point\" y=\"209\"/\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"210\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"321\" y=\"188\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0rkf10b\" id=\"TextAnnotation_0rkf10b_di\"\u003e\u003comgdc:Bounds height=\"81\" width=\"330\" x=\"131\" y=\"35\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1jp6veq\" id=\"Association_1jp6veq_di\"\u003e\u003comgdi:waypoint x=\"296\" xsi:type=\"omgdc:Point\" y=\"168\"/\u003e\u003comgdi:waypoint x=\"296\" xsi:type=\"omgdc:Point\" y=\"116\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Get further details for Endpoints with non-compliant status.",
+      "export_key": "wf_sep_get_endpoints_status_details",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1668001897321,
+      "name": "Example: SEP - Get Non-Compliant Endpoints status details",
+      "object_type": "sep_endpoint_status_summary",
+      "programmatic_name": "wf_sep_get_endpoints_status_details",
+      "tags": [],
+      "uuid": "6e13f304-051a-4056-98a5-468965bcd9ba",
+      "workflow_id": 335
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "wf_sep_get_quarantine_status",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_quarantine_status\" isExecutable=\"true\" name=\"Example: SEP - Get Quarantine status\"\u003e\u003cdocumentation\u003eGet the status of an Quarantine Endpoint command.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_12r8v45\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_00td1h5\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027inputs\u0027: {u\u0027sep_status_type\u0027: u\u0027quarantine\u0027, u\u0027sep_commandid\u0027: u\u00277D3670DDF5A64A99B3721BF8A375B302\u0027},\\n          \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-04-26 15:25:55\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                      \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1256},\\n          \u0027success\u0027: True,\\n          \u0027content\u0027: {u\u0027sort\u0027: [{u\u0027direction\u0027: u\u0027ASC\u0027, u\u0027property\u0027: u\u0027Begintime\u0027, u\u0027ascending\u0027: True}], \u0027command_state\u0027: \u0027Completed\u0027, u\u0027number\u0027: 0, u\u0027firstPage\u0027: True, \u0027: 0, u\u0027content\u0027: [{u\u0027computerName\u0027: u\u0027WIN-N5KGH4CP3N3\u0027, u\u0027subStateId u\u0027binaryFileId\u0027: None, u\u0027lastUpdateTime\u0027:\\n                        u\u00272019-04-26T11:05:27Z\u0027, u\u0027domainName\u0027: u\u0027Default\u0027, u\u0027hardwareKey\u0027: u\u0027DC7D24D6465566D2941F35BC8D17801E\u0027,\\n                        u\u0027subStateDesc\u0027: u\u0027\u0027, u\u0027stateId\u0027: 3, u\u0027computerId\u0027: u\u002789AD1BBB0946C25D25E6C0984E971D8A\u0027, u\u0027computerIp\u0027: u\u00279.70.194.94\u0027, u\u0027beginTime\u0027: u\u00272019-04-26T11:05:27Z\u0027, u\u0027currentLoginUserName\u0027: u\u0027Administrator\u0027, u\u0027resultInXML\u0027: u\u0027\u0027, \u0027command_status_id\u0027: 3}], u\u0027lastPage\u0027: True, u\u0027totalPages\u0027: 1, u\u0027numberOfElements\u0027: 1, u\u0027totalElements\u0027: 1, u\u0027size\u0027: 20},\\n          \u0027raw\u0027: \u0027{\\\"sort\\\": [{\\\"direction\\\": \\\"ASC\\\", \\\"property\\\": \\\"Begintime\\\", \\\"ascending\\\": true}], \\\"command_state\\\": \\\"Completed\\\", \\\"number\\\": 0, \\\"firstPage\\\": true, \\\"content\\\": [{\\\"computerName\\\": \\\"WIN-N5KGH4CP3N3\\\", \\\"subStateId\\\": 0, \\\"binaryFileId\\\": null, \\\"lastUpdateTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"domainName\\\": \\\"Default\\\", \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\", \\\"subStateDesc\\\": \\\"\\\", \\\"stateId\\\": 3, \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\", \\\"computerIp\\\": \\\"9.70.194.94\\\", \\\"beginTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"currentLoginUserName\\\": \\\"Administrator\\\", \\\"resultInXML\\\": \\\"\\\", \\\"command_status_id\\\": 3}], \\\"lastPage\\\": true, \\\"totalPages\\\": 1, \\\"numberOfElements\\\": 1, \\\"totalElements\\\": 1, \\\"size\\\": 20}\u0027, \u0027reason\u0027: None, \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"quarantine_status\\\", \\\"quarantine_command_state\\\", \\\"endpoint_quarantine_status\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Quarantine Endpoint\\\"\\nSTATUS_TYPE = \\\"quarantine\\\"\\nFINAL_STATUSES = {\\n    0: \\\"Not received\\\",\\n    1: \\\"Received\\\",\\n    2: \\\"In progress\\\",\\n    3: \\\"Completed\\\",\\n    4: \\\"Rejected\\\",\\n    5: \\\"Canceled\\\",\\n    6: \\\"Failed\\\"\\n}\\n\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Processing\\n\\ndef main():\\n\\n    endpoint_quarantine_status = row.endpoint_quarantine_status[\\\"content\\\"]\\n    status_msg = \\\"Un-quarantine\\\" if endpoint_quarantine_status == \\\"Quarantined\\\" else \\\"Quarantine\\\"\\n    note_text = \u0027\u0027\\n    quarantine_command_state = C_OUTER[\\\"overall_command_state\\\"]\\n\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        row.quarantine_command_state = quarantine_command_state\\n        row.query_execution_date = QUERY_EXECUTION_DATE\\n        computer = C_OUTER[\\\"content\\\"][0]\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; command status for command id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    \\\"for computer \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; was \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, status_msg, row.quarantine_commandid, row.computerName, FINAL_STATUSES[computer[\\\"stateId\\\"]], FN_NAME)\\n        if quarantine_command_state == \\\"Completed\\\":\\n            row.quarantine_command_state = FINAL_STATUSES[computer[\\\"stateId\\\"]]\\n        else:\\n            row.quarantine_command_state = quarantine_command_state\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_commandid = row.quarantine_commandid\\ninputs.sep_status_type = \\\"quarantine\\\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_12r8v45\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_04ddrsa\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_12r8v45\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_00td1h5\"/\u003e\u003cserviceTask id=\"ServiceTask_0l56qqb\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n      \\\"input_params\\\": {\\\"sep_computername\\\": \\\"myhostname\\\", \\\"sep_domain\\\": null, \\\"sep_lastupdate\\\": null, \\\"sep_order: null,\\n      \\\"sep_os\\\": null, \\\"sep_pageindex\\\": null, \\\"sep_pageindex\\\": null, \\\"sep_sort\\\": null},\\n      \\\"query_execution_time\\\": \\\"2018-08-09 12:34:15\\\",\\n      \\\"content\\\"\\n                {\\n                  \\\"sort\\\": [\\n                    {\\n                      \\\"direction\\\": \\\"ASC\\\",\\n                      \\\"property\\\": \\\"COMPUTER_NAME\\\",\\n                      \\\"ascending\\\": true\\n                    }\\n                  ],\\n                  \\\"number\\\": 0,\\n                  \\\"firstPage\\\": true,\\n                  \\\"content\\\": [\\n                    {\\n                      \\\"profileVersion\\\": \\\"14.2.1031\\\",\\n                      \\\"elamOnOff\\\": 1,\\n                      \\\"avEngineOnOff\\\": 1,\\n                      \\\"profileChecksum\\\": null,\\n                      \\\"atpDeviceId\\\": null,\\n                      \\\"processorType\\\": \\\"Intel64 Family 6 Model 15 Stepping 1\\\",\\n                      \\\"oslanguage\\\": \\\"en-US\\\",\\n                      \\\"licenseId\\\": null,\\n                      \\\"licenseStatus\\\": -1,\\n                      \\\"group\\\": {\\n                        \\\"domain\\\": {\\n                          \\\"id\\\": \\\"908090000946C25D330E919313D23887\\\",\\n                          \\\"name\\\": \\\"Default\\\"\\n                        },\\n                        \\\"name\\\": \\\"My Company\\\",\\n                        \\\"fullPathName\\\": null,\\n                        \\\"externalReferenceId\\\": null,\\n                        \\\"source\\\": null,\\n                        \\\"id\\\": \\\"CAD80F000946C25D6C150831060AA326\\\"\\n                      },\\n                      \\\"uuid\\\": \\\"EA650B42-D10A-7F9F-A1D2-0A58C4F4CEB1\\\",\\n                      \\\"groupUpdateProvider\\\": false,\\n                      \\\"edrStatus\\\": 0,\\n                      \\\"freeDisk\\\": 56538476544,\\n                      \\\"diskDrive\\\": \\\"C:\\\\\\\\\\\",\\n                      \\\"osFunction\\\": \\\"Server\\\",\\n                      \\\"processorClock\\\": 2394,\\n                      \\\"mobilePhone\\\": \\\"\\\",\\n                      \\\"jobTitle\\\": \\\"\\\",\\n                      \\\"lastHeuristicThreatTime\\\": 0,\\n                      \\\"osname\\\": \\\"Windows Server 2012\\\",\\n                      \\\"winServers\\\": [\\n                        \\\"0.0.0.0\\\",\\n                        \\\"0.0.0.0\\\"\\n                      ],\\n                      \\\"deploymentMessage\\\": \\\"\\\",\\n                      \\\"idsSerialNo\\\": \\\"\\\",\\n                      \\\"employeeNumber\\\": \\\"\\\",\\n                      \\\"snacLicenseId\\\": null,\\n                      \\\"lastSiteId\\\": \\\"EE75B0850946C25D5287B58B5173A37C\\\",\\n                      \\\"uwf\\\": 2,\\n                      \\\"currentClientId\\\": \\\"256B2B130946C25D40C83823AA2E5D4C\\\",\\n                      \\\"osbitness\\\": \\\"x64\\\",\\n                      \\\"lastScanTime\\\": 1550825941000,\\n                      \\\"email\\\": \\\"\\\",\\n                      \\\"securityVirtualAppliance\\\": null,\\n                      \\\"worstInfectionIdx\\\": \\\"0\\\",\\n                      \\\"encryptedDevicePassword\\\": null,\\n                      \\\"lastServerId\\\": \\\"7D6AAA6F0946C25D170B3A2D442500B6\\\",\\n                      \\\"kernel\\\": null,\\n                      \\\"lastUpdateTime\\\": 1550835481557,\\n                      \\\"ptpOnOff\\\": 1,\\n                      \\\"majorVersion\\\": 14,\\n                      \\\"lastConnectedIpAddr\\\": \\\"9.70.194.93\\\",\\n                      \\\"agentVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"deploymentRunningVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"agentTimeStamp\\\": 1550835481557,\\n                      \\\"osminor\\\": 2,\\n                      \\\"osMajor\\\": 6,\\n                      \\\"deploymentTargetVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"osMinor\\\": 2,\\n                      \\\"osFlavorNumber\\\": 79,\\n                      \\\"logicalCpus\\\": 0,\\n                      \\\"deploymentPreVersion\\\": \\\"\\\",\\n                      \\\"hypervisorVendorId\\\": \\\"0\\\",\\n                      \\\"fbwf\\\": 2,\\n                      \\\"osversion\\\": \\\"6.2\\\",\\n                      \\\"dnsServers\\\": [\\n                        \\\"9.70.192.29\\\",\\n                        \\\"FEC0:0000:0000:FFFF:0000:0000:0000:0001\\\"\\n                      ],\\n                      \\\"vsicStatus\\\": 3,\\n                      \\\"deleted\\\": 0,\\n                      \\\"deploymentStatus\\\": \\\"302456832\\\",\\n                      \\\"computerTimeStamp\\\": 1550758769451,\\n                      \\\"bwf\\\": 2,\\n                      \\\"totalDiskSpace\\\": 81567,\\n                      \\\"homePhone\\\": \\\"\\\",\\n                      \\\"daOnOff\\\": 1,\\n                      \\\"computerDescription\\\": \\\"\\\",\\n                      \\\"pepOnOff\\\": 1,\\n                      \\\"bashStatus\\\": 1,\\n                      \\\"agentUsn\\\": 525374,\\n                      \\\"osName\\\": \\\"Windows Server 2012\\\",\\n                      \\\"patternIdx\\\": \\\"F592051A3024B9BD77C1FC9EE1D1ADC9\\\",\\n                      \\\"employeeStatus\\\": \\\"\\\",\\n                      \\\"tmpDevice\\\": null,\\n                      \\\"rebootRequired\\\": 0,\\n                      \\\"subnetMasks\\\": [\\n                        \\\"255.255.255.0\\\",\\n                        \\\"64\\\"\\n                      ],\\n                      \\\"minorVersion\\\": 2,\\n                      \\\"osservicePack\\\": \\\"\\\",\\n                      \\\"lastSiteName\\\": \\\"My Site\\\",\\n                      \\\"cidsEngineVersion\\\": \\\"0.0.0.0\\\",\\n                      \\\"lastDeploymentTime\\\": 1550585147000,\\n                      \\\"isGrace\\\": 0,\\n                      \\\"computerUsn\\\": 501645,\\n                      \\\"agentId\\\": \\\"6E5AA5CB0946C25D40C83823BB5107E6\\\",\\n                      \\\"cidsBrowserFfOnOff\\\": 1,\\n                      \\\"domainOrWorkgroup\\\": \\\"WORKGROUP\\\",\\n                      \\\"svaId\\\": null,\\n                      \\\"loginDomain\\\": \\\"LocalComputer\\\",\\n                      \\\"lastServerName\\\": \\\"WIN-4OA0GKJN830\\\",\\n                      \\\"contentUpdate\\\": 1,\\n                      \\\"writeFiltersStatus\\\": null,\\n                      \\\"infected\\\": 0,\\n                      \\\"memory\\\": 6441979904,\\n                      \\\"freeMem\\\": 2910998528,\\n                      \\\"officePhone\\\": \\\"\\\",\\n                      \\\"lastVirusTime\\\": 1550597487000,\\n                      \\\"telemetryMid\\\": \\\"890E283B-41D3-4340-A397-66F6AFCAF33E\\\",\\n                      \\\"idsVersion\\\": \\\"\\\",\\n                      \\\"cidsBrowserIeOnOff\\\": 1,\\n                      \\\"publicKey\\\": \\\"BgIAAACkAABSU0ExAAgAAAEAAQDfMtYpvbC2ZOrpGFbK76tuyp2MZ7/6EGsFrqAV3ZBMfvMllksVObpPYvDSc5vCjtzthb1301VADLAspayGytsdAj5z8+LLpOnJkHNg9tIunm1lLkBTitevI6G+nNjyKd7uPn3+bxjk1LL8g1exL2C2SMPEXubdUa1N5xwmhhPHp6PSIAjY74QUcNyplfvylMS9QRWoQ70mqNy9tLLef6+qCYWTqGa7QKXS0WUJs8sJMzWfCrpeMVAmU5/s3yEu+OI+9RKgOeSfy7wRzmAWHQTofjHkYGYqwXcwwLX7AbWjdcpYo0Kaecf8e5t2ZvWyR362EaNxn0HYSjpKraY1hLK1\\\",\\n                      \\\"quarantineDesc\\\": \\\"Host Integrity check is disabled.\\\\n Host Integrity policy has been disabled by the administrator.\\\",\\n                      \\\"cidsDrvMulfCode\\\": 0,\\n                      \\\"biosVersion\\\": \\\"INTEL  - 6040000 PhoenixBIOS 4.0 Release 6.0\\\",\\n                      \\\"rebootReason\\\": \\\"\\\",\\n                      \\\"telemetryHwid\\\": \\\"A942D8EB-32C3-E42F-FE83-723FDC431F32\\\",\\n                      \\\"cidsSilentMode\\\": 0,\\n                      \\\"creationTime\\\": 1550585043812,\\n                      \\\"macAddresses\\\": [\\n                        \\\"00-50-56-8B-A6-C3\\\",\\n                        \\\"00-50-56-8B-A6-C3\\\"\\n                      ],\\n                      \\\"idsChecksum\\\": null,\\n                      \\\"operatingSystem\\\": \\\"Windows Server 2012 \\\",\\n                      \\\"osmajor\\\": 6,\\n                      \\\"virtualizationPlatform\\\": \\\"Unknown\\\",\\n                      \\\"ipAddresses\\\": [\\n                        \\\"9.70.194.93\\\",\\n                        \\\"FE80:0000:0000:0000:FC67:074E:CD22:0188\\\"\\n                      ],\\n                      \\\"physicalCpus\\\": 1,\\n                      \\\"osBitness\\\": \\\"x64\\\",\\n                      \\\"cidsDefsetVersion\\\": \\\"190220061\\\",\\n                      \\\"cidsDrvOnOff\\\": 1,\\n                      \\\"computerName\\\": \\\"WIN-4OA0GKJN830\\\",\\n                      \\\"logonUserName\\\": \\\"Administrator\\\",\\n                      \\\"licenseExpiry\\\": 0,\\n                      \\\"osLanguage\\\": \\\"en-US\\\",\\n                      \\\"gateways\\\": [\\n                        \\\"9.70.194.1\\\",\\n                        \\\"9.70.194.1\\\",\\n                        \\\"0.0.0.0\\\",\\n                        \\\"0.0.0.0\\\"\\n                      ],\\n                      \\\"uniqueId\\\": \\\"D31AA16E0946C25D40C83823C500518B\\\",\\n                      \\\"department\\\": \\\"\\\",\\n                      \\\"isNpvdiClient\\\": 0,\\n                      \\\"dhcpServer\\\": \\\"0.0.0.0\\\",\\n                      \\\"osfunction\\\": \\\"Server\\\",\\n                      \\\"description\\\": \\\"\\\",\\n                      \\\"osflavorNumber\\\": 79,\\n                      \\\"tpmDevice\\\": \\\"0\\\",\\n                      \\\"onlineStatus\\\": 1,\\n                      \\\"lastDownloadTime\\\": 1550585418144,\\n                      \\\"apOnOff\\\": 1,\\n                      \\\"timeZone\\\": 480,\\n                      \\\"fullName\\\": \\\"\\\",\\n                      \\\"osVersion\\\": \\\"6.2\\\",\\n                      \\\"attributeExtension\\\": \\\"\\\",\\n                      \\\"atpServer\\\": \\\"\\\",\\n                      \\\"tamperOnOff\\\": 1,\\n                      \\\"osServicePack\\\": \\\"\\\",\\n                      \\\"agentType\\\": \\\"105\\\",\\n                      \\\"serialNumber\\\": \\\"VMware-42 0b 65 ea 0a d1 9f 7f-a1 d2 0a 58 c4 f4 ce b1\\\",\\n                      \\\"osElamStatus\\\": 0,\\n                      \\\"installType\\\": \\\"0\\\",\\n                      \\\"profileSerialNo\\\": \\\"CAD8-01/26/2019 08:00:11 062\\\",\\n                      \\\"hardwareKey\\\": \\\"1771D79454E53469DF4B290C06C104C9\\\",\\n                      \\\"firewallOnOff\\\": 1\\n                    }\\n                  ],\\n                  \\\"lastPage\\\": true,\\n                  \\\"totalPages\\\": 1,\\n                  \\\"size\\\": 20,\\n                  \\\"totalElements\\\": 2,\\n                  \\\"numberOfElements\\\": 2\\n                }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\nFN_NAME = \\\"SEP - Get Computers\\\"\\nWF_NAME = \\\"Get  Quarantine status\\\"\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"endpoint_quarantine_status\\\"]\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n\\n# Processing\\ndef main():\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        row.query_execution_date = QUERY_EXECUTION_DATE\\n        computer = C_OUTER[\\\"content\\\"][0]\\n        ep_name = computer[\\\"computerName\\\"]\\n        ep_osname = computer.get(\\\"osname\\\", \\\"\\\")\\n        if \\\"windows\\\" in ep_osname.lower():\\n            if (computer[\\\"quarantineDesc\\\"].find(\\\"Host Integrity check passed\\\") == -1):\\n                row.endpoint_quarantine_status = \\\"Quarantined\\\"\\n            else:\\n                row.endpoint_quarantine_status = \\\"Un-Quarantined\\\"\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Quarantine status of endpoint \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; is \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, ep_name, row.endpoint_quarantine_status, FN_NAME)\\n        else:\\n            newrow.endpoint_quarantine_status = \\\"N/A\\\"\\n    else:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n    if note_text:\\n        incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sep_computername = row.computerName\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_04ddrsa\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_15594a4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_04ddrsa\" sourceRef=\"ServiceTask_00td1h5\" targetRef=\"ServiceTask_0l56qqb\"/\u003e\u003cendEvent id=\"EndEvent_1adq8qh\"\u003e\u003cincoming\u003eSequenceFlow_15594a4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_15594a4\" sourceRef=\"ServiceTask_0l56qqb\" targetRef=\"EndEvent_1adq8qh\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0cv272w\"\u003e\u003ctext\u003e\u003c![CDATA[Get current command status for quarantine command by quarantine commandid. Input: Assigned from data table row.\nUpdate data table with latest status.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1j2wee7\" sourceRef=\"ServiceTask_00td1h5\" targetRef=\"TextAnnotation_0cv272w\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1gfad9d\"\u003e\u003ctext\u003e\u003c![CDATA[Refresh data table row for the \u0027Endpoint status\u0027 property.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1a7deoo\" sourceRef=\"ServiceTask_0l56qqb\" targetRef=\"TextAnnotation_1gfad9d\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_00td1h5\" id=\"ServiceTask_00td1h5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"243\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_12r8v45\" id=\"SequenceFlow_12r8v45_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"243\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0l56qqb\" id=\"ServiceTask_0l56qqb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"506\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04ddrsa\" id=\"SequenceFlow_04ddrsa_di\"\u003e\u003comgdi:waypoint x=\"343\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"506\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"379.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1adq8qh\" id=\"EndEvent_1adq8qh_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"681\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"654\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15594a4\" id=\"SequenceFlow_15594a4_di\"\u003e\u003comgdi:waypoint x=\"606\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"681\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"598.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0cv272w\" id=\"TextAnnotation_0cv272w_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"231\" x=\"177\" y=\"46\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1j2wee7\" id=\"Association_1j2wee7_di\"\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"109\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1gfad9d\" id=\"TextAnnotation_1gfad9d_di\"\u003e\u003comgdc:Bounds height=\"32\" width=\"229\" x=\"441\" y=\"45\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1a7deoo\" id=\"Association_1a7deoo_di\"\u003e\u003comgdi:waypoint x=\"556\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"556\" xsi:type=\"omgdc:Point\" y=\"77\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "description": "Get the status of an Quarantine Endpoint command.",
+      "export_key": "wf_sep_get_quarantine_status",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1671718898185,
+      "name": "Example: SEP - Get Quarantine status",
+      "object_type": "sep_endpoint_details",
+      "programmatic_name": "wf_sep_get_quarantine_status",
+      "tags": [],
+      "uuid": "9b599b31-9323-44c8-ad99-a34e71413e1e",
+      "workflow_id": 315
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_sep_upload_file_to_sepm",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_upload_file_to_sepm\" isExecutable=\"true\" name=\"Example: SEP - Upload file to SEPM server\"\u003e\u003cdocumentation\u003eRequest a file discovered by an EOC scan be uploaded to the SEPM server. Note: Only supports file executable types such as binary executable (.exe), batch (.bat), Windows installer package (.msi) etc.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0nxl5ad\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0pe71mo\" name=\"SEP - Upload File to SEPM\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a5fce4c1-b595-47b0-bfa0-781b802cba59\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_upload_file_to_sepm script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027inputs\u0027: {u\u0027sep_sha256\u0027: u\u0027590f9895c2cbe93d47c3f7a3104fb843edfb5d5741330593d7d302a1e11e0ba5\u0027, u\u0027sep_source\u0027: u\u0027FILESYSTEM\u0027,\\n                   u\u0027sep_computer_ids\u0027: u\u002789AD1BBB0946C25D25E6C0984E971D8A\u0027, u\u0027sep_file_path\u0027: u\u0027C:\\\\\\\\temp\\\\\\\\New Text Document.txt\u0027,\\n                   u\u0027sep_sha1\u0027: None, u\u0027sep_md5\u0027: None\\n                   },\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 14:46:08\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1226\\n                   }, \u0027success\u0027: True,\\n         \u0027content\u0027: {u\u0027commandID\u0027: u\u00271BFD8C9B3FD74FF4A2490FFE63314E7A\u0027},\\n         \u0027raw\u0027: \u0027{\\\"commandID\\\": \\\"1BFD8C9B3FD74FF4A2490FFE63314E7A\\\"}\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"commandID\\\"]\\nfn_name = \\\"fn_sep_upload_file_to_sepm\\\"\\nwf_name = \\\"Upload file to SEPM server\\\"\\ncontent = results.content\\ninputs = results.inputs\\n# Processing\\n\\nif content  is not None:\\n    noteText = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Command excuted with id  \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for artifact with \\\" \\\\\\n               \\\"type \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; from source \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(wf_name, content[\\\"commandID\\\"], row.artifact_type, unicode(row.artifact_value), inputs[\\\"sep_source\\\"], fn_name)\\n    row.upload_commandid = content[\\\"commandID\\\"]\\n\\nelse:\\n    noteText += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(wf_name, fn_name)\\n\\nincident.addNote(helper.createRichText(noteText))\",\"pre_processing_script\":\"inputs.sep_computer_ids = row.computer_id\\ninputs.sep_file_path = row.file_path\\ninputs.sep_source = rule.properties.sep_source\\nhash_lengths  = [64, 40, 32]\\nhvs = [None if h != len(row.hash_value) else row.hash_value for h in hash_lengths]\\ninputs.sep_sha256 = hvs[0]\\ninputs.sep_sha1 = hvs[1]\\ninputs.sep_md5 = hvs[2]\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0nxl5ad\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0gntbdm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0nxl5ad\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0pe71mo\"/\u003e\u003cserviceTask id=\"ServiceTask_1udvp4k\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027inputs\u0027: {u\u0027sep_status_type\u0027: u\u0027quarantine\u0027, u\u0027sep_commandid\u0027: u\u00277D3670DDF5A64A99B3721BF8A375B302\u0027},\\n          \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-04-26 15:25:55\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                      \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1256},\\n          \u0027success\u0027: True,\\n          \u0027content\u0027: {u\u0027sort\u0027: [{u\u0027direction\u0027: u\u0027ASC\u0027, u\u0027property\u0027: u\u0027Begintime\u0027, u\u0027ascending\u0027: True}], \u0027command_state\u0027: \u0027Completed\u0027, u\u0027number\u0027: 0, u\u0027firstPage\u0027: True, \u0027: 0, u\u0027content\u0027: [{u\u0027computerName\u0027: u\u0027WIN-N5KGH4CP3N3\u0027, u\u0027subStateId u\u0027binaryFileId\u0027: None, u\u0027lastUpdateTime\u0027:\\n                        u\u00272019-04-26T11:05:27Z\u0027, u\u0027domainName\u0027: u\u0027Default\u0027, u\u0027hardwareKey\u0027: u\u0027DC7D24D6465566D2941F35BC8D17801E\u0027,\\n                        u\u0027subStateDesc\u0027: u\u0027\u0027, u\u0027stateId\u0027: 3, u\u0027computerId\u0027: u\u002789AD1BBB0946C25D25E6C0984E971D8A\u0027, u\u0027computerIp\u0027: u\u00279.70.194.94\u0027, u\u0027beginTime\u0027: u\u00272019-04-26T11:05:27Z\u0027, u\u0027currentLoginUserName\u0027: u\u0027Administrator\u0027, u\u0027resultInXML\u0027: u\u0027\u0027, \u0027command_status_id\u0027: 3}], u\u0027lastPage\u0027: True, u\u0027totalPages\u0027: 1, u\u0027numberOfElements\u0027: 1, u\u0027totalElements\u0027: 1, u\u0027size\u0027: 20},\\n          \u0027raw\u0027: \u0027{\\\"sort\\\": [{\\\"direction\\\": \\\"ASC\\\", \\\"property\\\": \\\"Begintime\\\", \\\"ascending\\\": true}], \\\"command_state\\\": \\\"Completed\\\", \\\"number\\\": 0, \\\"firstPage\\\": true, \\\"content\\\": [{\\\"computerName\\\": \\\"WIN-N5KGH4CP3N3\\\", \\\"subStateId\\\": 0, \\\"binaryFileId\\\": null, \\\"lastUpdateTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"domainName\\\": \\\"Default\\\", \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\", \\\"subStateDesc\\\": \\\"\\\", \\\"stateId\\\": 3, \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\", \\\"computerIp\\\": \\\"9.70.194.94\\\", \\\"beginTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"currentLoginUserName\\\": \\\"Administrator\\\", \\\"resultInXML\\\": \\\"\\\", \\\"command_status_id\\\": 3}], \\\"lastPage\\\": true, \\\"totalPages\\\": 1, \\\"numberOfElements\\\": 1, \\\"totalElements\\\": 1, \\\"size\\\": 20}\u0027, \u0027reason\u0027: None, \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"file_upload_status\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Upload file to SEPM server\\\"\\nSTATUS_TYPE = \\\"upload\\\"\\nFINAL_STATUSES = {\\n    0: \\\"Initial / Not received\\\",\\n    1: \\\"Received\\\", \\n    2: \\\"In progress\\\",\\n    3: \\\"Completed\\\".format(STATUS_TYPE.capitalize()),\\n    4: \\\"Rejected\\\".format(STATUS_TYPE.capitalize()),\\n    5: \\\"Canceled\\\".format(STATUS_TYPE.capitalize()),\\n    6: \\\"Failed\\\".format(STATUS_TYPE.capitalize())\\n}\\nC_OUTER = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Processing\\n\\ndef main():\\n    upload_command_state = C_OUTER[\\\"overall_command_state\\\"]\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        row.query_execution_date = QUERY_EXECUTION_DATE\\n        computer = C_OUTER[\\\"content\\\"][0]\\n        if upload_command_state == \\\"Completed\\\":\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Upload command completed with status \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n                        \\\"for command id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for artifact with type \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FINAL_STATUSES[computer[\\\"stateId\\\"]], INPUTS[\\\"sep_commandid\\\"], row.artifact_type,\\n                    unicode(row.artifact_value), FN_NAME)\\n            row.file_upload_status = FINAL_STATUSES[computer[\\\"stateId\\\"]]\\n            if computer[\\\"stateId\\\"] == 3:\\n                row.file_id = computer[\\\"binaryFileId\\\"]\\n        else:\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Upload command in \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; state for command \\\" \\\\\\n                        \\\"id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for artifact with type \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; and value \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \\\" \\\\\\n                   \\\"\u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FINAL_STATUSES[computer[\\\"stateId\\\"]], INPUTS[\\\"sep_commandid\\\"], row.artifact_type,\\n                    unicode(row.artifact_value), FN_NAME)\\n            row.file_upload_status = upload_command_state\\n    else:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                    \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_commandid = row.upload_commandid\\ninputs.sep_status_type = \\\"upload\\\"\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0gntbdm\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_01wjfew\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0gntbdm\" sourceRef=\"ServiceTask_0pe71mo\" targetRef=\"ServiceTask_1udvp4k\"/\u003e\u003cendEvent id=\"EndEvent_1g71ogb\"\u003e\u003cincoming\u003eSequenceFlow_01wjfew\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_01wjfew\" sourceRef=\"ServiceTask_1udvp4k\" targetRef=\"EndEvent_1g71ogb\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1wem961\"\u003e\u003ctext\u003e\u003c![CDATA[Initiate file upload to SEPM server.\nInputs: Assigned from a data table entry. Output: upload commandid\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1datj2m\" sourceRef=\"ServiceTask_0pe71mo\" targetRef=\"TextAnnotation_1wem961\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1usp072\"\u003e\u003ctext\u003e\u003c![CDATA[Get initial command status for upload command by upload commandid.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_02p06gl\" sourceRef=\"ServiceTask_1udvp4k\" targetRef=\"TextAnnotation_1usp072\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0pe71mo\" id=\"ServiceTask_0pe71mo_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"249\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0nxl5ad\" id=\"SequenceFlow_0nxl5ad_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"249\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"223.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1udvp4k\" id=\"ServiceTask_1udvp4k_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"470\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0gntbdm\" id=\"SequenceFlow_0gntbdm_di\"\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"470\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"364.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1g71ogb\" id=\"EndEvent_1g71ogb_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"680\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"653\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_01wjfew\" id=\"SequenceFlow_01wjfew_di\"\u003e\u003comgdi:waypoint x=\"570\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"680\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"580\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1wem961\" id=\"TextAnnotation_1wem961_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"223\" x=\"187\" y=\"23\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1datj2m\" id=\"Association_1datj2m_di\"\u003e\u003comgdi:waypoint x=\"300\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"299\" xsi:type=\"omgdc:Point\" y=\"87\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1usp072\" id=\"TextAnnotation_1usp072_di\"\u003e\u003comgdc:Bounds height=\"49\" width=\"231\" x=\"404\" y=\"30\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_02p06gl\" id=\"Association_02p06gl_di\"\u003e\u003comgdi:waypoint x=\"521\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"521\" xsi:type=\"omgdc:Point\" y=\"103\"/\u003e\u003comgdi:waypoint x=\"520\" xsi:type=\"omgdc:Point\" y=\"84\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Request a file discovered by an EOC scan be uploaded to the SEPM server. Note: Only supports file executable types such as binary executable (.exe), batch (.bat), Windows installer package (.msi) etc.",
+      "export_key": "wf_sep_upload_file_to_sepm",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1668001895832,
+      "name": "Example: SEP - Upload file to SEPM server",
+      "object_type": "sep_eoc_scan_results",
+      "programmatic_name": "wf_sep_upload_file_to_sepm",
+      "tags": [],
+      "uuid": "f5ad77f8-b227-44c7-9ddb-eefaa05d175e",
+      "workflow_id": 331
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "wf_sep_quarantine_endpoint",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_quarantine_endpoint\" isExecutable=\"true\" name=\"Example: SEP - Quarantine Endpoint\"\u003e\u003cdocumentation\u003eQuarantine or un-quarantine an endpoint. Add or remove endpoints to or from network quarantine.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_06pked3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0x2fe5w\" name=\"SEP - Quarantine Endpoints\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ce358d79-cdf9-49d8-a94c-89d838f51197\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_quarantine_endpoints script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027inputs\u0027: {u\u0027sep_undo\u0027: False, u\u0027sep_computer_ids\u0027: u\u002789AD1BBB0946C25D25E6C0984E971D8A\u0027},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-14 14:42:09\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                     \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1102\\n                    }, \u0027success\u0027: True,\\n         \u0027content\u0027: {u\u0027commandID_computer\u0027: u\u002779AD5636B73A4C0D828938AE1E5B2C13\u0027},\\n         \u0027raw\u0027: \u0027{\\\"commandID_computer\\\": \\\"79AD5636B73A4C0D828938AE1E5B2C13\\\"}\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_quarantine_endpoints script\\nDATA_TBL_FIELDS = [\\\"quarantine_commandid\\\"]\\nfn_name = \\\"fn_sep_quarantine_endpoints\\\"\\nwf_name = \\\"Quarantine Endpoint\\\"\\n# Processing\\ncontent = results.content\\ninputs = results.inputs\\nquery_execution_date = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\nif content  is not None:\\n    note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Executed with command id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for endpoint \\\" \\\\\\n                \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n        .format(wf_name, content[\\\"commandID_computer\\\"], row.computerName, fn_name)\\n    row.query_execution_date = query_execution_date\\n    row.quarantine_commandid = content[\\\"commandID_computer\\\"]\\n\\nelse:\\n    note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n                 .format(wf_name, fn_name)\\n\\nincident.addNote(helper.createRichText(note_text))\\n\",\"pre_processing_script\":\"inputs.sep_computer_ids = row.uniqueId\\nendpoint_quarantine_status = row.endpoint_quarantine_status[\\\"content\\\"]\\n\\n# 2 different rules using - Quarantine or Un-quarantine  based on row value. (w rules using Workflow)\\ninputs.sep_undo = True if endpoint_quarantine_status == \\\"Quarantined\\\" else False\\n\",\"result_name\":\"quarantine_ep_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_06pked3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0htp49n\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_06pked3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0x2fe5w\"/\u003e\u003cserviceTask id=\"ServiceTask_0jp94xu\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: { \u0027inputs\u0027: {u\u0027sep_status_type\u0027: u\u0027quarantine\u0027, u\u0027sep_commandid\u0027: u\u00277D3670DDF5A64A99B3721BF8A375B302\u0027},\\n          \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-04-26 15:25:55\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                      \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1256},\\n          \u0027success\u0027: True,\\n          \u0027content\u0027: {u\u0027sort\u0027: [{u\u0027direction\u0027: u\u0027ASC\u0027, u\u0027property\u0027: u\u0027Begintime\u0027, u\u0027ascending\u0027: True}], \u0027command_state\u0027: \u0027Completed\u0027, u\u0027number\u0027: 0, u\u0027firstPage\u0027: True, \u0027: 0, u\u0027content\u0027: [{u\u0027computerName\u0027: u\u0027WIN-N5KGH4CP3N3\u0027, u\u0027subStateId u\u0027binaryFileId\u0027: None, u\u0027lastUpdateTime\u0027:\\n                        u\u00272019-04-26T11:05:27Z\u0027, u\u0027domainName\u0027: u\u0027Default\u0027, u\u0027hardwareKey\u0027: u\u0027DC7D24D6465566D2941F35BC8D17801E\u0027,\\n                        u\u0027subStateDesc\u0027: u\u0027\u0027, u\u0027stateId\u0027: 3, u\u0027computerId\u0027: u\u002789AD1BBB0946C25D25E6C0984E971D8A\u0027, u\u0027computerIp\u0027: u\u00279.70.194.94\u0027, u\u0027beginTime\u0027: u\u00272019-04-26T11:05:27Z\u0027, u\u0027currentLoginUserName\u0027: u\u0027Administrator\u0027, u\u0027resultInXML\u0027: u\u0027\u0027, \u0027command_status_id\u0027: 3}], u\u0027lastPage\u0027: True, u\u0027totalPages\u0027: 1, u\u0027numberOfElements\u0027: 1, u\u0027totalElements\u0027: 1, u\u0027size\u0027: 20},\\n          \u0027raw\u0027: \u0027{\\\"sort\\\": [{\\\"direction\\\": \\\"ASC\\\", \\\"property\\\": \\\"Begintime\\\", \\\"ascending\\\": true}], \\\"command_state\\\": \\\"Completed\\\", \\\"number\\\": 0, \\\"firstPage\\\": true, \\\"content\\\": [{\\\"computerName\\\": \\\"WIN-N5KGH4CP3N3\\\", \\\"subStateId\\\": 0, \\\"binaryFileId\\\": null, \\\"lastUpdateTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"domainName\\\": \\\"Default\\\", \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\", \\\"subStateDesc\\\": \\\"\\\", \\\"stateId\\\": 3, \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\", \\\"computerIp\\\": \\\"9.70.194.94\\\", \\\"beginTime\\\": \\\"2019-04-26T11:05:27Z\\\", \\\"currentLoginUserName\\\": \\\"Administrator\\\", \\\"resultInXML\\\": \\\"\\\", \\\"command_status_id\\\": 3}], \\\"lastPage\\\": true, \\\"totalPages\\\": 1, \\\"numberOfElements\\\": 1, \\\"totalElements\\\": 1, \\\"size\\\": 20}\u0027, \u0027reason\u0027: None, \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"quarantine_status\\\", \\\"quarantine_command_state\\\", \\\"endpoint_quarantine_status\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Quarantine Endpoint\\\"\\nSTATUS_TYPE = \\\"quarantine\\\"\\nFINAL_STATUSES = {\\n    0: \\\"Not received\\\",\\n    1: \\\"Received\\\",\\n    2: \\\"In progress\\\",\\n    3: \\\"Completed\\\",\\n    4: \\\"Rejected\\\",\\n    5: \\\"Canceled\\\",\\n    6: \\\"Failed\\\"\\n}\\n\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Processing\\n\\ndef main():\\n\\n    endpoint_quarantine_status = row.endpoint_quarantine_status[\\\"content\\\"]\\n    status_msg = \\\"Un-quarantine\\\" if endpoint_quarantine_status == \\\"Quarantined\\\" else \\\"Quarantine\\\"\\n    note_text = \u0027\u0027\\n    quarantine_command_state = C_OUTER[\\\"overall_command_state\\\"]\\n\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        row.quarantine_command_state = quarantine_command_state\\n        row.query_execution_date = QUERY_EXECUTION_DATE\\n        computer = C_OUTER[\\\"content\\\"][0]\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; command status for command id \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    \\\"for computer \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; was \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, status_msg, row.quarantine_commandid, row.computerName, FINAL_STATUSES[computer[\\\"stateId\\\"]], FN_NAME)\\n        if quarantine_command_state == \\\"Completed\\\":\\n            row.quarantine_command_state = FINAL_STATUSES[computer[\\\"stateId\\\"]]\\n        else:\\n            row.quarantine_command_state = quarantine_command_state\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"quarantine_ep_content = workflow.properties.quarantine_ep_results.content\\ninputs.sep_incident_id = incident.id\\ninputs.sep_commandid = quarantine_ep_content[\\\"commandID_computer\\\"]\\ninputs.sep_status_type = \\\"quarantine\\\"\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0htp49n\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hbt9xj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0htp49n\" sourceRef=\"ServiceTask_0x2fe5w\" targetRef=\"ServiceTask_0jp94xu\"/\u003e\u003cserviceTask id=\"ServiceTask_0redefa\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n      \\\"input_params\\\": {\\\"sep_computername\\\": \\\"myhostname\\\", \\\"sep_domain\\\": null, \\\"sep_lastupdate\\\": null, \\\"sep_order: null,\\n      \\\"sep_os\\\": null, \\\"sep_pageindex\\\": null, \\\"sep_pageindex\\\": null, \\\"sep_sort\\\": null},\\n      \\\"query_execution_time\\\": \\\"2018-08-09 12:34:15\\\",\\n      \\\"content\\\"\\n                {\\n                  \\\"sort\\\": [\\n                    {\\n                      \\\"direction\\\": \\\"ASC\\\",\\n                      \\\"property\\\": \\\"COMPUTER_NAME\\\",\\n                      \\\"ascending\\\": true\\n                    }\\n                  ],\\n                  \\\"number\\\": 0,\\n                  \\\"firstPage\\\": true,\\n                  \\\"content\\\": [\\n                    {\\n                      \\\"profileVersion\\\": \\\"14.2.1031\\\",\\n                      \\\"elamOnOff\\\": 1,\\n                      \\\"avEngineOnOff\\\": 1,\\n                      \\\"profileChecksum\\\": null,\\n                      \\\"atpDeviceId\\\": null,\\n                      \\\"processorType\\\": \\\"Intel64 Family 6 Model 15 Stepping 1\\\",\\n                      \\\"oslanguage\\\": \\\"en-US\\\",\\n                      \\\"licenseId\\\": null,\\n                      \\\"licenseStatus\\\": -1,\\n                      \\\"group\\\": {\\n                        \\\"domain\\\": {\\n                          \\\"id\\\": \\\"908090000946C25D330E919313D23887\\\",\\n                          \\\"name\\\": \\\"Default\\\"\\n                        },\\n                        \\\"name\\\": \\\"My Company\\\",\\n                        \\\"fullPathName\\\": null,\\n                        \\\"externalReferenceId\\\": null,\\n                        \\\"source\\\": null,\\n                        \\\"id\\\": \\\"CAD80F000946C25D6C150831060AA326\\\"\\n                      },\\n                      \\\"uuid\\\": \\\"EA650B42-D10A-7F9F-A1D2-0A58C4F4CEB1\\\",\\n                      \\\"groupUpdateProvider\\\": false,\\n                      \\\"edrStatus\\\": 0,\\n                      \\\"freeDisk\\\": 56538476544,\\n                      \\\"diskDrive\\\": \\\"C:\\\\\\\\\\\",\\n                      \\\"osFunction\\\": \\\"Server\\\",\\n                      \\\"processorClock\\\": 2394,\\n                      \\\"mobilePhone\\\": \\\"\\\",\\n                      \\\"jobTitle\\\": \\\"\\\",\\n                      \\\"lastHeuristicThreatTime\\\": 0,\\n                      \\\"osname\\\": \\\"Windows Server 2012\\\",\\n                      \\\"winServers\\\": [\\n                        \\\"0.0.0.0\\\",\\n                        \\\"0.0.0.0\\\"\\n                      ],\\n                      \\\"deploymentMessage\\\": \\\"\\\",\\n                      \\\"idsSerialNo\\\": \\\"\\\",\\n                      \\\"employeeNumber\\\": \\\"\\\",\\n                      \\\"snacLicenseId\\\": null,\\n                      \\\"lastSiteId\\\": \\\"EE75B0850946C25D5287B58B5173A37C\\\",\\n                      \\\"uwf\\\": 2,\\n                      \\\"currentClientId\\\": \\\"256B2B130946C25D40C83823AA2E5D4C\\\",\\n                      \\\"osbitness\\\": \\\"x64\\\",\\n                      \\\"lastScanTime\\\": 1550825941000,\\n                      \\\"email\\\": \\\"\\\",\\n                      \\\"securityVirtualAppliance\\\": null,\\n                      \\\"worstInfectionIdx\\\": \\\"0\\\",\\n                      \\\"encryptedDevicePassword\\\": null,\\n                      \\\"lastServerId\\\": \\\"7D6AAA6F0946C25D170B3A2D442500B6\\\",\\n                      \\\"kernel\\\": null,\\n                      \\\"lastUpdateTime\\\": 1550835481557,\\n                      \\\"ptpOnOff\\\": 1,\\n                      \\\"majorVersion\\\": 14,\\n                      \\\"lastConnectedIpAddr\\\": \\\"9.70.194.93\\\",\\n                      \\\"agentVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"deploymentRunningVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"agentTimeStamp\\\": 1550835481557,\\n                      \\\"osminor\\\": 2,\\n                      \\\"osMajor\\\": 6,\\n                      \\\"deploymentTargetVersion\\\": \\\"14.2.1031.0100\\\",\\n                      \\\"osMinor\\\": 2,\\n                      \\\"osFlavorNumber\\\": 79,\\n                      \\\"logicalCpus\\\": 0,\\n                      \\\"deploymentPreVersion\\\": \\\"\\\",\\n                      \\\"hypervisorVendorId\\\": \\\"0\\\",\\n                      \\\"fbwf\\\": 2,\\n                      \\\"osversion\\\": \\\"6.2\\\",\\n                      \\\"dnsServers\\\": [\\n                        \\\"9.70.192.29\\\",\\n                        \\\"FEC0:0000:0000:FFFF:0000:0000:0000:0001\\\"\\n                      ],\\n                      \\\"vsicStatus\\\": 3,\\n                      \\\"deleted\\\": 0,\\n                      \\\"deploymentStatus\\\": \\\"302456832\\\",\\n                      \\\"computerTimeStamp\\\": 1550758769451,\\n                      \\\"bwf\\\": 2,\\n                      \\\"totalDiskSpace\\\": 81567,\\n                      \\\"homePhone\\\": \\\"\\\",\\n                      \\\"daOnOff\\\": 1,\\n                      \\\"computerDescription\\\": \\\"\\\",\\n                      \\\"pepOnOff\\\": 1,\\n                      \\\"bashStatus\\\": 1,\\n                      \\\"agentUsn\\\": 525374,\\n                      \\\"osName\\\": \\\"Windows Server 2012\\\",\\n                      \\\"patternIdx\\\": \\\"F592051A3024B9BD77C1FC9EE1D1ADC9\\\",\\n                      \\\"employeeStatus\\\": \\\"\\\",\\n                      \\\"tmpDevice\\\": null,\\n                      \\\"rebootRequired\\\": 0,\\n                      \\\"subnetMasks\\\": [\\n                        \\\"255.255.255.0\\\",\\n                        \\\"64\\\"\\n                      ],\\n                      \\\"minorVersion\\\": 2,\\n                      \\\"osservicePack\\\": \\\"\\\",\\n                      \\\"lastSiteName\\\": \\\"My Site\\\",\\n                      \\\"cidsEngineVersion\\\": \\\"0.0.0.0\\\",\\n                      \\\"lastDeploymentTime\\\": 1550585147000,\\n                      \\\"isGrace\\\": 0,\\n                      \\\"computerUsn\\\": 501645,\\n                      \\\"agentId\\\": \\\"6E5AA5CB0946C25D40C83823BB5107E6\\\",\\n                      \\\"cidsBrowserFfOnOff\\\": 1,\\n                      \\\"domainOrWorkgroup\\\": \\\"WORKGROUP\\\",\\n                      \\\"svaId\\\": null,\\n                      \\\"loginDomain\\\": \\\"LocalComputer\\\",\\n                      \\\"lastServerName\\\": \\\"WIN-4OA0GKJN830\\\",\\n                      \\\"contentUpdate\\\": 1,\\n                      \\\"writeFiltersStatus\\\": null,\\n                      \\\"infected\\\": 0,\\n                      \\\"memory\\\": 6441979904,\\n                      \\\"freeMem\\\": 2910998528,\\n                      \\\"officePhone\\\": \\\"\\\",\\n                      \\\"lastVirusTime\\\": 1550597487000,\\n                      \\\"telemetryMid\\\": \\\"890E283B-41D3-4340-A397-66F6AFCAF33E\\\",\\n                      \\\"idsVersion\\\": \\\"\\\",\\n                      \\\"cidsBrowserIeOnOff\\\": 1,\\n                      \\\"publicKey\\\": \\\"BgIAAACkAABSU0ExAAgAAAEAAQDfMtYpvbC2ZOrpGFbK76tuyp2MZ7/6EGsFrqAV3ZBMfvMllksVObpPYvDSc5vCjtzthb1301VADLAspayGytsdAj5z8+LLpOnJkHNg9tIunm1lLkBTitevI6G+nNjyKd7uPn3+bxjk1LL8g1exL2C2SMPEXubdUa1N5xwmhhPHp6PSIAjY74QUcNyplfvylMS9QRWoQ70mqNy9tLLef6+qCYWTqGa7QKXS0WUJs8sJMzWfCrpeMVAmU5/s3yEu+OI+9RKgOeSfy7wRzmAWHQTofjHkYGYqwXcwwLX7AbWjdcpYo0Kaecf8e5t2ZvWyR362EaNxn0HYSjpKraY1hLK1\\\",\\n                      \\\"quarantineDesc\\\": \\\"Host Integrity check is disabled.\\\\n Host Integrity policy has been disabled by the administrator.\\\",\\n                      \\\"cidsDrvMulfCode\\\": 0,\\n                      \\\"biosVersion\\\": \\\"INTEL  - 6040000 PhoenixBIOS 4.0 Release 6.0\\\",\\n                      \\\"rebootReason\\\": \\\"\\\",\\n                      \\\"telemetryHwid\\\": \\\"A942D8EB-32C3-E42F-FE83-723FDC431F32\\\",\\n                      \\\"cidsSilentMode\\\": 0,\\n                      \\\"creationTime\\\": 1550585043812,\\n                      \\\"macAddresses\\\": [\\n                        \\\"00-50-56-8B-A6-C3\\\",\\n                        \\\"00-50-56-8B-A6-C3\\\"\\n                      ],\\n                      \\\"idsChecksum\\\": null,\\n                      \\\"operatingSystem\\\": \\\"Windows Server 2012 \\\",\\n                      \\\"osmajor\\\": 6,\\n                      \\\"virtualizationPlatform\\\": \\\"Unknown\\\",\\n                      \\\"ipAddresses\\\": [\\n                        \\\"9.70.194.93\\\",\\n                        \\\"FE80:0000:0000:0000:FC67:074E:CD22:0188\\\"\\n                      ],\\n                      \\\"physicalCpus\\\": 1,\\n                      \\\"osBitness\\\": \\\"x64\\\",\\n                      \\\"cidsDefsetVersion\\\": \\\"190220061\\\",\\n                      \\\"cidsDrvOnOff\\\": 1,\\n                      \\\"computerName\\\": \\\"WIN-4OA0GKJN830\\\",\\n                      \\\"logonUserName\\\": \\\"Administrator\\\",\\n                      \\\"licenseExpiry\\\": 0,\\n                      \\\"osLanguage\\\": \\\"en-US\\\",\\n                      \\\"gateways\\\": [\\n                        \\\"9.70.194.1\\\",\\n                        \\\"9.70.194.1\\\",\\n                        \\\"0.0.0.0\\\",\\n                        \\\"0.0.0.0\\\"\\n                      ],\\n                      \\\"uniqueId\\\": \\\"D31AA16E0946C25D40C83823C500518B\\\",\\n                      \\\"department\\\": \\\"\\\",\\n                      \\\"isNpvdiClient\\\": 0,\\n                      \\\"dhcpServer\\\": \\\"0.0.0.0\\\",\\n                      \\\"osfunction\\\": \\\"Server\\\",\\n                      \\\"description\\\": \\\"\\\",\\n                      \\\"osflavorNumber\\\": 79,\\n                      \\\"tpmDevice\\\": \\\"0\\\",\\n                      \\\"onlineStatus\\\": 1,\\n                      \\\"lastDownloadTime\\\": 1550585418144,\\n                      \\\"apOnOff\\\": 1,\\n                      \\\"timeZone\\\": 480,\\n                      \\\"fullName\\\": \\\"\\\",\\n                      \\\"osVersion\\\": \\\"6.2\\\",\\n                      \\\"attributeExtension\\\": \\\"\\\",\\n                      \\\"atpServer\\\": \\\"\\\",\\n                      \\\"tamperOnOff\\\": 1,\\n                      \\\"osServicePack\\\": \\\"\\\",\\n                      \\\"agentType\\\": \\\"105\\\",\\n                      \\\"serialNumber\\\": \\\"VMware-42 0b 65 ea 0a d1 9f 7f-a1 d2 0a 58 c4 f4 ce b1\\\",\\n                      \\\"osElamStatus\\\": 0,\\n                      \\\"installType\\\": \\\"0\\\",\\n                      \\\"profileSerialNo\\\": \\\"CAD8-01/26/2019 08:00:11 062\\\",\\n                      \\\"hardwareKey\\\": \\\"1771D79454E53469DF4B290C06C104C9\\\",\\n                      \\\"firewallOnOff\\\": 1\\n                    }\\n                  ],\\n                  \\\"lastPage\\\": true,\\n                  \\\"totalPages\\\": 1,\\n                  \\\"size\\\": 20,\\n                  \\\"totalElements\\\": 2,\\n                  \\\"numberOfElements\\\": 2\\n                }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"endpoint_quarantine_status\\\"]\\nFN_NAME = \\\"fn_sep_get_computers\\\"\\nWF_NAME = \\\"Quarantine Endpoint\\\"\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n\\n# Processing\\ndef main():\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None and len(C_OUTER[\\\"content\\\"]) \u0026gt; 0:\\n        row.query_execution_date = QUERY_EXECUTION_DATE\\n        computer = C_OUTER[\\\"content\\\"][0]\\n        ep_name = computer[\\\"computerName\\\"]\\n        ep_osname = computer.get(\\\"osname\\\", \\\"\\\")\\n        if \\\"windows\\\" in ep_osname.lower():\\n            if \\\"host integrity check passed\\\" not in computer[\\\"quarantineDesc\\\"].lower():\\n                row.endpoint_quarantine_status = \\\"Quarantined\\\"\\n            else:\\n                row.endpoint_quarantine_status = \\\"Un-Quarantined\\\"\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Quarantine status of endpoint \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; is \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, ep_name, row.endpoint_quarantine_status, FN_NAME)\\n        else:\\n            newrow.endpoint_quarantine_status = \\\"\\\"\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, FN_NAME)\\n    if len(note_text) \u0026gt; 0:\\n        incident.addNote(helper.createRichText(note_text))\\n    \\nif __name__ == \\\"__main__\\\":\\n    main()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sep_computername = row.computer_name\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1hbt9xj\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1kk7m3v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1hbt9xj\" sourceRef=\"ServiceTask_0jp94xu\" targetRef=\"ServiceTask_0redefa\"/\u003e\u003cendEvent id=\"EndEvent_0n9ktln\"\u003e\u003cincoming\u003eSequenceFlow_1kk7m3v\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1kk7m3v\" sourceRef=\"ServiceTask_0redefa\" targetRef=\"EndEvent_0n9ktln\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0ijawub\"\u003e\u003ctext\u003e\u003c![CDATA[Initiate a quarantine or undo quarantine action. Inputs:\u00a0 Data table row. The value of\u00a0 \u0027Endpoint status\u0027 which can be \u0027Available\u0027 or \u0027Quarantined\u0027, will determine whether a \u0027Quarantine\u0027 or \u0027Un-quarantine\u0027 action be initiated. Output: Quarantine commandid.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0c52qrd\" sourceRef=\"ServiceTask_0x2fe5w\" targetRef=\"TextAnnotation_0ijawub\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_12bt23g\"\u003e\u003ctext\u003e\u003c![CDATA[Get initial command status for quarantine command by quarantine commandid. Output: Quarantine commandid\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0z8shi7\" sourceRef=\"ServiceTask_0jp94xu\" targetRef=\"TextAnnotation_12bt23g\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1r2oxnf\"\u003e\u003ctext\u003e\u003c![CDATA[Refresh data table row for the \u0027Endpoint status\u0027 property current status.]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1pnsrre\" sourceRef=\"ServiceTask_0redefa\" targetRef=\"TextAnnotation_1r2oxnf\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0x2fe5w\" id=\"ServiceTask_0x2fe5w_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"262\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_06pked3\" id=\"SequenceFlow_06pked3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"262\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"230\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0jp94xu\" id=\"ServiceTask_0jp94xu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"509\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0htp49n\" id=\"SequenceFlow_0htp49n_di\"\u003e\u003comgdi:waypoint x=\"362\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"509\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"390.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0redefa\" id=\"ServiceTask_0redefa_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"724\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hbt9xj\" id=\"SequenceFlow_1hbt9xj_di\"\u003e\u003comgdi:waypoint x=\"609\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"724\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"621.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0n9ktln\" id=\"EndEvent_0n9ktln_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"859\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"832\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1kk7m3v\" id=\"SequenceFlow_1kk7m3v_di\"\u003e\u003comgdi:waypoint x=\"824\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"859\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"796.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0ijawub\" id=\"TextAnnotation_0ijawub_di\"\u003e\u003comgdc:Bounds height=\"103\" width=\"328\" x=\"142\" y=\"9\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0c52qrd\" id=\"Association_0c52qrd_di\"\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"112\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_12bt23g\" id=\"TextAnnotation_12bt23g_di\"\u003e\u003comgdc:Bounds height=\"64\" width=\"174\" x=\"472\" y=\"6\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0z8shi7\" id=\"Association_0z8shi7_di\"\u003e\u003comgdi:waypoint x=\"559\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"560\" xsi:type=\"omgdc:Point\" y=\"70\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1r2oxnf\" id=\"TextAnnotation_1r2oxnf_di\"\u003e\u003comgdc:Bounds height=\"39\" width=\"203\" x=\"672\" y=\"18\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1pnsrre\" id=\"Association_1pnsrre_di\"\u003e\u003comgdi:waypoint x=\"774\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"774\" xsi:type=\"omgdc:Point\" y=\"57\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "description": "Quarantine or un-quarantine an endpoint. Add or remove endpoints to or from network quarantine.",
+      "export_key": "wf_sep_quarantine_endpoint",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1671718899331,
+      "name": "Example: SEP - Quarantine Endpoint",
+      "object_type": "sep_endpoint_details",
+      "programmatic_name": "wf_sep_quarantine_endpoint",
+      "tags": [],
+      "uuid": "a457878a-30ac-408d-8ba7-2bdbc0a8b16a",
+      "workflow_id": 317
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_sep_delete_fingerprint_list",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_delete_fingerprint_list\" isExecutable=\"true\" name=\"Example: SEP - Delete Blacklist\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Delete an existing blacklist fingerprint list.\nNote: Also removes it from a any group to which it has been assigned.]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0c36cb8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_03o9n4i\" name=\"SEP - Delete Fingerprint List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e710d302-1010-4994-a02c-87377bfde59e\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_delete_fingerprint_list ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult:{\u0027inputs\u0027: {u\u0027sep_fingerprintlist_id\u0027: u\u0027E60B061FDD844EBF9778D4BD2AC3942A\u0027},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-29 10:36:53\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027,\\n                     \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1744},\\n         \u0027success\u0027: True,\\n         \u0027content\u0027: \u0027\u0027,\\n         \u0027raw\u0027: \u0027\\\"\\\"\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n }\\n\\\"\\\"\\\"\\n#  Globals\\nFN_NAME = \\\"fn_sep_delete_fingerprint_list\\\"\\nWF_NAME = \\\"Delete Fingerprint List\\\"\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n\\n    if CONTENT is not None:\\n        if \\\"errorCode\\\" in CONTENT and int(CONTENT[\\\"errorCode\\\"]) == 410:\\n            # The finger print list doesn\u0027t exist.\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The fingerprint list \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; does not exist or is invalid \\\" \\\\\\n                        \\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format( WF_NAME, INPUTS[\\\"sep_fingerprintlist_name\\\"], FN_NAME)\\n        else:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Successfully deleted fingerprint list  with id \\\" \\\\\\n                        \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_id\\\"], FN_NAME)\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned \\\" \\\\\\n                     \\\"with fingerprint id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, INPUTS[\\\"sep_fingerprintlist_id\\\"],  FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_fingerprintlist_id = row.list_id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0c36cb8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dwxa2k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0c36cb8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03o9n4i\"/\u003e\u003cendEvent id=\"EndEvent_1olth1h\"\u003e\u003cincoming\u003eSequenceFlow_0dwxa2k\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0dwxa2k\" sourceRef=\"ServiceTask_03o9n4i\" targetRef=\"EndEvent_1olth1h\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0uh5fsj\"\u003e\u003ctext\u003e\u003c![CDATA[Delete fingerprint list by id.\u00a0 Input parameter is assigned from data table row.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0sm2mmz\" sourceRef=\"ServiceTask_03o9n4i\" targetRef=\"TextAnnotation_0uh5fsj\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03o9n4i\" id=\"ServiceTask_03o9n4i_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"261\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0c36cb8\" id=\"SequenceFlow_0c36cb8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"261\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"229.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1olth1h\" id=\"EndEvent_1olth1h_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dwxa2k\" id=\"SequenceFlow_0dwxa2k_di\"\u003e\u003comgdi:waypoint x=\"361\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0uh5fsj\" id=\"TextAnnotation_0uh5fsj_di\"\u003e\u003comgdc:Bounds height=\"56\" width=\"303\" x=\"159\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0sm2mmz\" id=\"Association_0sm2mmz_di\"\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"311\" xsi:type=\"omgdc:Point\" y=\"111\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Delete an existing blacklist fingerprint list.\nNote: Also removes it from a any group to which it has been assigned.",
+      "export_key": "wf_sep_delete_fingerprint_list",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1668001896628,
+      "name": "Example: SEP - Delete Blacklist",
+      "object_type": "sep_fingerprint_lists",
+      "programmatic_name": "wf_sep_delete_fingerprint_list",
+      "tags": [],
+      "uuid": "c6b60f0a-4de7-4024-a456-fbd9472c6a7c",
+      "workflow_id": 333
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_sep_get_file_content_as_base64_string",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_file_content_as_base64_string\" isExecutable=\"true\" name=\"Example: SEP - Get File Content as Base64 string\"\u003e\u003cdocumentation\u003eGet contents of a file uploaded to SEPM server as a Base64 string.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0u06rc6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0g265cu\" name=\"SEP - Get File Content as Base64\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3f9eb5b-969b-45aa-bb88-29c21c85fd04\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_file_content_as_base64 ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_file_id\u0027: u\u0027B9158547A9FE9DC52292A6098528F239\u0027},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-29 16:44:07\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027,\\n                     \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1893},\\n         \u0027success\u0027: True,\\n         \u0027content\u0027: \u0027\u0026lt;base64_string\u0026gt;\u0027,\\n         \u0027raw\u0027: \u0027\\\"\u0026lt;base64_string\u0026gt;\\\"\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\nDATA_TBL_FIELDS = []\\nFN_NAME = \\\"fn_sep_get_file_content_as_base64\\\"\\nWF_NAME = \\\"Get  File Content as Base64 string\\\"\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = []\\nCONTENT = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n# Processing\\n\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if CONTENT is not None:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Returned Base64 string of size \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; returned \\\" \\\\\\n                    \\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, len(CONTENT), FN_NAME)\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; result returned for \\\" \\\\\\n                    \\\"Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_file_id = row.file_id\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0u06rc6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0vfi4tu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0u06rc6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0g265cu\"/\u003e\u003cendEvent id=\"EndEvent_0u9uek2\"\u003e\u003cincoming\u003eSequenceFlow_0vfi4tu\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0vfi4tu\" sourceRef=\"ServiceTask_0g265cu\" targetRef=\"EndEvent_0u9uek2\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0nw6rl8\"\u003e\u003ctext\u003e\u003c![CDATA[Get uploaded file content as Base64 string by file id.\ninput: File id parameter assigned from data table entry.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_146oek5\" sourceRef=\"ServiceTask_0g265cu\" targetRef=\"TextAnnotation_0nw6rl8\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0g265cu\" id=\"ServiceTask_0g265cu_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"248\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0u06rc6\" id=\"SequenceFlow_0u06rc6_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"248\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"223\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0u9uek2\" id=\"EndEvent_0u9uek2_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"396\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"414\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0vfi4tu\" id=\"SequenceFlow_0vfi4tu_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"372\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0nw6rl8\" id=\"TextAnnotation_0nw6rl8_di\"\u003e\u003comgdc:Bounds height=\"63\" width=\"214\" x=\"196\" y=\"58\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_146oek5\" id=\"Association_146oek5_di\"\u003e\u003comgdi:waypoint x=\"300\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"302\" xsi:type=\"omgdc:Point\" y=\"121\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Get contents of a file uploaded to SEPM server as a Base64 string.",
+      "export_key": "wf_sep_get_file_content_as_base64_string",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1668001892235,
+      "name": "Example: SEP - Get File Content as Base64 string",
+      "object_type": "sep_eoc_scan_results",
+      "programmatic_name": "wf_sep_get_file_content_as_base64_string",
+      "tags": [],
+      "uuid": "20376905-53d7-45a5-846a-aa6da648186c",
+      "workflow_id": 322
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_sep_initiate_eoc_scan_for_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_initiate_eoc_scan_for_artifact\" isExecutable=\"true\" name=\"Example: SEP - Initiate EOC Scan for Artifact\"\u003e\u003cdocumentation\u003eInitiate an Evidence of Compromise (EOC) scan on artifacts of type file (name or path) or hash (MD5, SHA1 or SHA256) against all endpoints.  Use returned command id to get the initial command status and information on any matches for each endpoint.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0xb8u6k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0rzdc39\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sep_matching_endpoint_ids = True\",\"result_name\":\"get_computers_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0xb8u6k\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0h8wmqc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0xb8u6k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0rzdc39\"/\u003e\u003cserviceTask id=\"ServiceTask_0pk1dod\" name=\"SEP - Scan Endpoints\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"cc7fd805-db7a-4c37-aa0e-29ffd1752eec\"\u003e{\"inputs\":{\"cb92fbc0-79a0-48fe-b048-8c62ef5ea42f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"810db651-8a47-4931-a4b4-1e579d08088d\"}},\"5b452d96-e040-46b3-ac15-828c9ffddbfa\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"93b82e92-6f87-431a-9c2a-9f5d0f2c621b\"}}},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_upload_file_to_sepm script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_description\u0027: u\u0027Scan to remediate file based on sha256\u0027, u\u0027sep_computer_ids\u0027: u\u0027D31AA16E0946C25D40C83823C500518B\u0027,\\n                    u\u0027sep_scan_action\u0027: None, u\u0027sep_file_path\u0027: u\u0027C:\\\\\\\\temp\\\\\\\\eicar.zip\u0027, u\u0027sep_group_ids\u0027: u\u0027CAD80F000946C25D6C150831060AA326\u0027,\\n                    u\u0027sep_sha256\u0027: None, u\u0027sep_scan_type\u0027: {u\u0027name\u0027: u\u0027FULL_SCAN\u0027, u\u0027id\u0027: 229}},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-04-12 10:49:22\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 12349},\\n         \u0027success\u0027: True, \u0027content\u0027: {u\u0027commandID_computer\u0027: u\u00270F0CBDD7EDFF4634B23FA11F5AB81FFC\u0027, u\u0027commandID_group\u0027: u\u0027BB37F78894DB451B8E8921EC127667A3\u0027},\\n         \u0027raw\u0027: \u0027{\\\"commandID_computer\\\": \\\"0F0CBDD7EDFF4634B23FA11F5AB81FFC\\\", \\\"commandID_group\\\": \\\"BB37F78894DB451B8E8921EC127667A3\\\"}\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"scan_commandID\\\"]\\nFN_NAME = \\\"fn_sep_scan_endpoints\\\"\\nWF_NAME = \\\"Initiate EOC Scan for Artifact\\\"\\n# Processing\\nCONTENT = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nnote_text = \u0027\u0027\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if CONTENT  is not None:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: Returned command id \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for a \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; \\\" \\\\\\n                    \\\"scan on artifact \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, CONTENT[\\\"commandID_computer\\\"], INPUTS[\\\"sep_scan_type\\\"], unicode(artifact.value), FN_NAME)\\n    else:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There was \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; command id returned for a \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; scan on artifact \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, INPUTS[\\\"sep_scan_type\\\"], INPUTS[\\\"sep_file_path\\\"], unicode(artifact.value), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"GET_COMPUTERS_CONTENT = workflow.properties.get_computers_results.content\\nARTIFACT_TYPE = artifact.type\\nARTIFACT_VALUE = artifact.value\\nARTIFACT_DESCRIPTION = artifact.description\\nARTIFACT_TYPE_TO_ROW = {\\n    \\\"File Name\\\": \\\"file_name\\\",\\n    \\\"File Path\\\": \\\"file_path\\\",\\n    \\\"Malware MD5 Hash\\\": \\\"md5\\\",\\n    \\\"Malware SHA-1 Hash\\\": \\\"sha1\\\",\\n    \\\"Malware SHA-256 Hash\\\": \\\"sha256\\\"\\n}\\nARTIFACT_TYPES = [ v for v in sorted(ARTIFACT_TYPE_TO_ROW.values())]\\nCOMPUTER_IDS = []\\n## Processing\\n\\ndef get_computers():\\n    global COMPUTER_IDS\\n    # Get computers to run scan against from previous step.\\n    if GET_COMPUTERS_CONTENT is not None and GET_COMPUTERS_CONTENT[\\\"endpoints_matching_ids\\\"]:\\n        COMPUTER_IDS = GET_COMPUTERS_CONTENT[\\\"endpoints_matching_ids\\\"]\\n\\ndef set_inputs(fn, fp, md5, sha1, sha256):\\n    global COMPUTER_IDS\\n    inputs.sep_file_path = fn if fp is None else fp\\n    inputs.sep_md5 = md5\\n    inputs.sep_sha1 = sha1\\n    inputs.sep_sha256 = sha256\\n    inputs.sep_computer_ids = \u0027,\u0027.join(COMPUTER_IDS)\\n    inputs.sep_scan_type = rule.properties.sep_scan_type\\n    inputs.sep_scan_action = None\\n    if ARTIFACT_DESCRIPTION is not None:\\n        inputs.sep_description = u\\\"Scan eoc for {0}\\\".format(unicode(ARTIFACT_DESCRIPTION[\\\"content\\\"]))\\n    else:\\n        inputs.sep_description = u\\\"Scan eoc for for suspicious hash of type {0} and value {1} in the SEP environment.\\\".format(ARTIFACT_TYPE, ARTIFACT_VALUE)\\n\\ndef main():\\n    get_computers()\\n    # Assign values to correct row based on artifact type\\n    types = [None if t not in ARTIFACT_TYPE_TO_ROW[ARTIFACT_TYPE] else ARTIFACT_VALUE for t in ARTIFACT_TYPES]\\n    set_inputs(*types)\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"result_name\":\"scan_eoc_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0h8wmqc\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17ndhto\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0h8wmqc\" sourceRef=\"ServiceTask_0rzdc39\" targetRef=\"ServiceTask_0pk1dod\"/\u003e\u003cserviceTask id=\"ServiceTask_0er956h\" name=\"SEP - Get Command Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b29ec053-be35-4311-9d8f-1b6275664c0d\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_command_status script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n    \u0027inputs\u0027: {u\u0027sep_commandid\u0027: u\u00272F260501C22842ABBA7EB0805D92EFE0\u0027},\\n    \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-03-01 12:46:27\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027,\\n    \u0027execution_time_ms\u0027: 1085},\\n    \u0027success\u0027: True,\\n    \u0027content\u0027:\\n                {\\n                  \\\"sort\\\": [\\n                    {\\n                      \\\"direction\\\": \\\"ASC\\\",\\n                      \\\"property\\\": \\\"Begintime\\\",\\n                      \\\"ascending\\\": true\\n                    }\\n                  ],\\n                  \\\"number\\\": 0,\\n                  \\\"firstPage\\\": true,\\n                  \\\"content\\\": [\\n                    {\\n                      \\\"computerName\\\": \\\"ep1\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"1771D79454E53469DF4B290C06C104C9\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"D31AA16E0946C25D40C83823C500518B\\\",\\n                      \\\"computerIp\\\": \\\"9.70.194.93\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    },\\n                    {\\n                      \\\"computerName\\\": \\\"ep2\\\",\\n                      \\\"subStateId\\\": 0,\\n                      \\\"binaryFileId\\\": null,\\n                      \\\"lastUpdateTime\\\": null,\\n                      \\\"domainName\\\": \\\"Default\\\",\\n                      \\\"hardwareKey\\\": \\\"DC7D24D6465566D2941F35BC8D17801E\\\",\\n                      \\\"subStateDesc\\\": null,\\n                      \\\"stateId\\\": 0,\\n                      \\\"computerId\\\": \\\"89AD1BBB0946C25D25E6C0984E971D8A\\\",\\n                      \\\"computerIp\\\": \\\"9.70.194.94\\\",\\n                      \\\"beginTime\\\": null,\\n                      \\\"currentLoginUserName\\\": \\\"Administrator\\\",\\n                      \\\"resultInXML\\\": null\\n                    }\\n                  ],\\n                  \\\"lastPage\\\": true,\\n                  \\\"totalPages\\\": 1,\\n                  \\\"size\\\": 20,\\n                  \\\"totalElements\\\": 2,\\n                  \\\"numberOfElements\\\": 2\\n                }\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_sep_get_command_status script\\nDATA_TBL_FIELDS = [\\\"scan_result\\\"]\\nFN_NAME = \\\"fn_sep_get_command_status\\\"\\nWF_NAME = \\\"Initiate EOC Scan for Artifact\\\"\\nC_OUTER = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nCOMMAND_ID = INPUTS[\\\"sep_commandid\\\"]\\nSTATUS_TYPE = \\\"Scan\\\"\\nARTIFACT_TYPE = artifact.type\\nARTIFACT_VALUE = artifact.value\\nARTIFACT_TYPE_TO_ROW = {\\n    \\\"File Name\\\": \\\"file_name\\\",\\n    \\\"File Path\\\": \\\"file_path\\\",\\n    \\\"Malware MD5 Hash\\\": \\\"md5\\\",\\n    \\\"Malware SHA-1 Hash\\\": \\\"sha1\\\",\\n    \\\"Malware SHA-256 Hash\\\": \\\"sha256\\\"\\n}\\nROW_NAMES = [v for v in sorted(ARTIFACT_TYPE_TO_ROW.values())]\\nROW_VALUES = [None if t not in ARTIFACT_TYPE_TO_ROW[ARTIFACT_TYPE] else ARTIFACT_VALUE for t in ROW_NAMES]\\n\\n\\n# Processing\\n\\ndef set_row_artifact_info(thisrow):\\n    for i in range(len(ROW_NAMES)):\\n        if ROW_VALUES[i] is not None:\\n            thisrow[ROW_NAMES[i]] = artifact.value\\n\\n\\ndef add_row(match_type, file_path, hash_value, computer_name, computer_id):\\n    newrow = incident.addRow(\u0027sep_eoc_scan_results\u0027)\\n    newrow.scan_type = rule.properties.sep_scan_type.split(\\\"_\\\")[0]\\n    set_row_artifact_info(newrow)\\n    newrow.artifact_id = artifact.id\\n    newrow.scan_commandid = COMMAND_ID\\n    newrow.scan_command_state = \\\"Completed\\\"\\n    newrow.scan_result = \u0027 \u0027.join(match_type.lower().split(\u0027_\u0027)).capitalize()\\n    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n    newrow.file_path = file_path\\n    newrow.hash_value = hash_value\\n    newrow.computer_name = computer_name\\n    newrow.computer_id = computer_id\\n\\n\\ndef add_empty_row(scan_state):\\n    newrow = incident.addRow(\u0027sep_eoc_scan_results\u0027)\\n    newrow.scan_type = rule.properties.sep_scan_type.split(\\\"_\\\")[0]\\n    newrow.artifact_value = artifact.value\\n    newrow.artifact_type = artifact.type\\n    newrow.artifact_id = artifact.id\\n    newrow.query_execution_date = QUERY_EXECUTION_DATE\\n    newrow.scan_commandid = COMMAND_ID\\n    newrow.scan_command_state = scan_state\\n    newrow.scan_result = \\\"Query\\\"\\n    return newrow\\n\\n\\ndef get_file_name(file_path):\\n    return file_path.split(\\\"\\\\\\\\\\\")[-1] if \u0027\\\\\\\\\u0027 in file_path else file_path.split(\\\"/\\\")[-1]\\n\\n\\n\\ndef main():\\n    match_types = [\\\"HASH_MATCH\\\", \\\"FULL_MATCH\\\", \\\"PARTIAL_MATCH\\\"]\\n    scan_state = C_OUTER[\\\"overall_command_state\\\"]\\n    total_ep_count =  C_OUTER[\\\"total_ep_count\\\"]\\n    total_match_count = C_OUTER[\\\"total_match_count\\\"]\\n    total_not_completed = C_OUTER[\\\"total_not_completed\\\"]\\n    total_completed = total_ep_count - total_not_completed\\n    hits_over_limit = C_OUTER[\\\"scan_eoc_hits_over_limit\\\"]\\n    truncated_count = C_OUTER[\\\"truncated_count\\\"]\\n    att_name = C_OUTER[\\\"att_name\\\"]\\n    ep_match_count = 0\\n    note_text = \u0027\u0027\\n    status_note = \u0027\u0027\\n    if C_OUTER is not None:\\n        status_note =  \\\"The command Completed on \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; targeted endpoints.\\\".format(total_completed, total_ep_count)\\n        if total_not_completed:\\n            status_note += \\\"\u0026lt;br\u0026gt;Note: There were \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; endpoints on which the command has not completed. Please review console/logs  \\\" \\\\\\n                           \\\"on the Symantec SEPM server for further details if required.\\\".format(total_not_completed)\\n\\n        if hits_over_limit is not None:\\n            newrow = add_empty_row()\\n            newrow.scan_result = \\\"Query: Matches over limit see note/attachment.\\\"\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; : \u0027EOC Scan for artifact\u0027 for artifact \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n                        \\\"of type \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with command id \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; returned \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; matches in truncated \\\" \\\\\\n                        \\\"results out of a total of \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{6}\u0026lt;/b\u0026gt;.\u0026lt;br\u0026gt;Added full result as an attachment. \\\" \\\\\\n                        \\\"Attachment name : \u0026lt;b\u0026gt;{7}\u0026lt;/b\u0026gt;. {8}\\\" \\\\\\n                .format(WF_NAME, unicode(ARTIFACT_VALUE), ARTIFACT_TYPE, COMMAND_ID, truncated_count, total_match_count, FN_NAME,\\n                        att_name, status_note)\\n        else:\\n            note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; : \u0027EOC Scan for artifact\u0027 for artifact \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; \\\" \\\\\\n                        \\\"of type \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; with command id \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt; returned \u0026lt;b\u0026gt;{4}\u0026lt;/b\u0026gt; matches in results for \\\" \\\\\\n                        \\\"Resilient function \u0026lt;b\u0026gt;{5}\u0026lt;/b\u0026gt;. {6}\\\" \\\\\\n                .format(WF_NAME, unicode(ARTIFACT_VALUE), ARTIFACT_TYPE, COMMAND_ID, total_match_count, FN_NAME, status_note)\\n        c_inner = C_OUTER[\\\"content\\\"]\\n\\n        for i in range(len(c_inner)):\\n            ep = c_inner[i]\\n            # Process matches if command status is \u0027Completed\u0027\\n            if ep[\\\"command_status_id\\\"] == 3:\\n                computer_name = ep[\\\"computerName\\\"]\\n                computer_id = ep[\\\"computerId\\\"]\\n                if ep[\\\"scan_result\\\"][\\\"MATCH\\\"]:\\n                    ep_match_count += 1\\n                    for match_type in match_types:\\n                        if len(ep[\\\"scan_result\\\"][match_type+\\\"ES\\\"]) \u0026gt; 0:\\n                            if match_type in match_types[1:]: # Full or parttila match\\n                                fms = ep[\\\"scan_result\\\"][match_type+\\\"ES\\\"]\\n                                if fms:\\n                                    hts = [\\\"sha256\\\", \\\"sha1\\\", \\\"md5\\\"]\\n                                    for fm in fms:\\n                                        add_row(match_type, fm.value, fm.hashValue, computer_name, computer_id)\\n                            else: # Hash match\\n                                hms = ep[\\\"scan_result\\\"][\\\"HASH_MATCHES\\\"]\\n                                if hms:\\n                                    for hm in hms:\\n                                        add_row(match_type, hm.value, row.artifact_value, computer_name,\\n                                                computer_id)\\n\\n            if ep_match_count == 0:\\n                newrow = add_empty_row(scan_state)\\n                if scan_state == \\\"Completed\\\":\\n                    newrow.scan_result = \\\"No match found\\\"\\n        else:\\n            add_empty_row(scan_state)\\n\\n    else:\\n        add_empty_row(scan_state)\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt; : Scan artifact returned \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results for Resilient function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\" \\\\\\n            .format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"scan_eoc_content = workflow.properties.scan_eoc_results.content\\nscan_eoc_metrics = workflow.properties.scan_eoc_results.metrics\\ninputs.sep_incident_id = incident.id\\ninputs.sep_commandid = scan_eoc_content[\\\"commandID_computer\\\"]\\ninputs.sep_status_type = \\\"scan\\\"\\ninputs.sep_scan_date = scan_eoc_metrics[\\\"timestamp\\\"]\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_17ndhto\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0gcrsmt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_17ndhto\" sourceRef=\"ServiceTask_0pk1dod\" targetRef=\"ServiceTask_0er956h\"/\u003e\u003cendEvent id=\"EndEvent_16izkd3\"\u003e\u003cincoming\u003eSequenceFlow_0gcrsmt\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0gcrsmt\" sourceRef=\"ServiceTask_0er956h\" targetRef=\"EndEvent_16izkd3\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1qu5tmc\"\u003e\u003ctext\u003e\u003c![CDATA[Get all endpoints by endpoint id only\n. Input: Parameter \u0027sep_matching_endpoint_ids\u0027 = True\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1hxj0lh\" sourceRef=\"ServiceTask_0rzdc39\" targetRef=\"TextAnnotation_1qu5tmc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1j1fvy0\"\u003e\u003ctext\u003eInitiate an EOC scan. Input: Assigned from an artifact value. Target endpoints will be all endpoints by endpoint id. Output: EOC scan commandid.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1anob6m\" sourceRef=\"ServiceTask_0pk1dod\" targetRef=\"TextAnnotation_1j1fvy0\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0rn3jmu\"\u003e\u003ctext\u003e\u003c![CDATA[Get initial command status for Remediate command by eoc scan commandid.Input:\n\u00a0Scan Commandid from step 2\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_08nsrne\" sourceRef=\"ServiceTask_0er956h\" targetRef=\"TextAnnotation_0rn3jmu\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0rzdc39\" id=\"ServiceTask_0rzdc39_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"238\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xb8u6k\" id=\"SequenceFlow_0xb8u6k_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"238\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"218\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0pk1dod\" id=\"ServiceTask_0pk1dod_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"523\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0h8wmqc\" id=\"SequenceFlow_0h8wmqc_di\"\u003e\u003comgdi:waypoint x=\"338\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"523\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"385.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0er956h\" id=\"ServiceTask_0er956h_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"810\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17ndhto\" id=\"SequenceFlow_17ndhto_di\"\u003e\u003comgdi:waypoint x=\"623\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"810\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"671.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_16izkd3\" id=\"EndEvent_16izkd3_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"992\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"965\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0gcrsmt\" id=\"SequenceFlow_0gcrsmt_di\"\u003e\u003comgdi:waypoint x=\"910\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"992\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"906\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1qu5tmc\" id=\"TextAnnotation_1qu5tmc_di\"\u003e\u003comgdc:Bounds height=\"72\" width=\"149\" x=\"216\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1hxj0lh\" id=\"Association_1hxj0lh_di\"\u003e\u003comgdi:waypoint x=\"289\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"290\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1j1fvy0\" id=\"TextAnnotation_1j1fvy0_di\"\u003e\u003comgdc:Bounds height=\"75\" width=\"335\" x=\"407\" y=\"32\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1anob6m\" id=\"Association_1anob6m_di\"\u003e\u003comgdi:waypoint x=\"574\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"574\" xsi:type=\"omgdc:Point\" y=\"107\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0rn3jmu\" id=\"TextAnnotation_0rn3jmu_di\"\u003e\u003comgdc:Bounds height=\"61\" width=\"202\" x=\"759\" y=\"39\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_08nsrne\" id=\"Association_08nsrne_di\"\u003e\u003comgdi:waypoint x=\"860\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"859\" xsi:type=\"omgdc:Point\" y=\"100\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Initiate an Evidence of Compromise (EOC) scan on artifacts of type file (name or path) or hash (MD5, SHA1 or SHA256) against all endpoints.  Use returned command id to get the initial command status and information on any matches for each endpoint.",
+      "export_key": "wf_sep_initiate_eoc_scan_for_artifact",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1668001889862,
+      "name": "Example: SEP - Initiate EOC Scan for Artifact",
       "object_type": "artifact",
-      "programmatic_name": "wf_sep_get_endpoint_details_for_artifact",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
-      "uuid": "d0526b57-0bb9-42e5-b121-a0ad918e8778",
-      "workflow_id": 425
+      "programmatic_name": "wf_sep_initiate_eoc_scan_for_artifact",
+      "tags": [],
+      "uuid": "86900745-92cf-47a1-9c67-19f946a76a78",
+      "workflow_id": 316
     },
     {
       "actions": [],
@@ -7396,18 +7511,108 @@
       "description": "Get the results of a scan EOC command.",
       "export_key": "wf_sep_get_scan_results",
       "last_modified_by": "a@example.com",
-      "last_modified_time": 1668002349578,
+      "last_modified_time": 1668001897025,
       "name": "Example: SEP - Get Scan results",
       "object_type": "sep_eoc_scan_results",
       "programmatic_name": "wf_sep_get_scan_results",
-      "tags": [
-        {
-          "tag_handle": "fn_sep",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "7616f2b9-c48b-44b8-8e0b-b8086f3b04d3",
-      "workflow_id": 429
+      "workflow_id": 334
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 9,
+        "workflow_id": "example_sep__get_exception_policy",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_sep__get_exception_policy\" isExecutable=\"true\" name=\"Example: SEP - Get Exceptions Policy\"\u003e\u003cdocumentation\u003eGet the exceptions policy for the specified policy id.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0usmwc7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ilwh7h\" name=\"SEP - Get Exceptions Policy\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c972130f-e94b-40f6-a81a-3fbcf2c8c5c9\"\u003e{\"inputs\":{},\"post_processing_script\":\"import json\\n\\nif not results.success:\\n  incident.addNote(f\\\"SEP Exceptions Policy {rule.properties.sep_exceptions_id} error. Reason: {results.reason}\\\")\\nelse:\\n  incident.addNote(f\\\"SEP Exceptions Policy: {rule.properties.sep_exceptions_id}\\\\n\\\\n{json.dumps(results.content, indent=4)}\\\")\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sep_exceptions_id = rule.properties.sep_exceptions_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0usmwc7\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_04iiby1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0usmwc7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ilwh7h\"/\u003e\u003cendEvent id=\"EndEvent_1n8dcqf\"\u003e\u003cincoming\u003eSequenceFlow_04iiby1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_04iiby1\" sourceRef=\"ServiceTask_1ilwh7h\" targetRef=\"EndEvent_1n8dcqf\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ilwh7h\" id=\"ServiceTask_1ilwh7h_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"273\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0usmwc7\" id=\"SequenceFlow_0usmwc7_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"273\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1n8dcqf\" id=\"EndEvent_1n8dcqf_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"431\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"449\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04iiby1\" id=\"SequenceFlow_04iiby1_di\"\u003e\u003comgdi:waypoint x=\"373\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"431\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"402\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 9,
+      "description": "Get the exceptions policy for the specified policy id.",
+      "export_key": "example_sep__get_exception_policy",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1675198208339,
+      "name": "Example: SEP - Get Exceptions Policy",
+      "object_type": "incident",
+      "programmatic_name": "example_sep__get_exception_policy",
+      "tags": [],
+      "uuid": "808af4ab-6714-4b51-95de-701468187e4b",
+      "workflow_id": 432
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_sep_get_groups_information",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_groups_information\" isExecutable=\"true\" name=\"Example: SEP - Get Groups information\"\u003e\u003cdocumentation\u003eGet groups information.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0laeki3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0wjv59v\" name=\"SEP - Get Domains\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17245e2-ae90-46aa-ae44-cc0d37b8387c\"\u003e{\"inputs\":{},\"post_processing_script\":\"fn_name = \\\"fn_sep_get_domains\\\"\\nwf_name = \\\"Example: SEP - Get Groups information\\\"\\ncontent = results.content\\ndomainid = None\\nfor i in range(len(content)):\\n  if content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    domainid = content[i][\\\"id\\\"]\\n    break\\nif domainid is not None:\\n    workflow.addProperty(\\\"domid_exists\\\", {})\\nelse:\\n    note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: The domain name  \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; was not found \\\" \\\\\\n                u\\\"for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;.\\\".format(wf_name, unicode(rule.properties.sep_domain_name), fn_name)\\n    incident.addNote(helper.createRichText(note_text))\",\"result_name\":\"get_domains_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0laeki3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1auavki\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0laeki3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0wjv59v\"/\u003e\u003cserviceTask id=\"ServiceTask_1fdl7t3\" name=\"SEP - Get Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"da72c4a8-45c1-4633-9d18-9ef6bd03dae9\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_groups script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\\n         \u0027content\u0027: {\\n                      \\\"sort\\\": [\\n                        {\\n                          \\\"direction\\\": \\\"ASC\\\",\\n                          \\\"property\\\": \\\"NAME\\\",\\n                          \\\"ascending\\\": true\\n                        }\\n                      ],\\n                      \\\"number\\\": 0,\\n                      \\\"firstPage\\\": true,\\n                      \\\"content\\\": [\\n                        {\\n                          \\\"policyDate\\\": 1548489611062,\\n                          \\\"domain\\\": {\\n                            \\\"id\\\": \\\"908090000946C25D330E919313D23887\\\",\\n                            \\\"name\\\": \\\"Default\\\"\\n                          },\\n                          \\\"numberOfRegisteredUsers\\\": 1,\\n                          \\\"description\\\": \\\"\\\",\\n                          \\\"created\\\": 1548481072007,\\n                          \\\"policySerialNumber\\\": \\\"4CBD-01/26/2019 08:00:11 062\\\",\\n                          \\\"lastModified\\\": 1548481072007,\\n                          \\\"fullPathName\\\": \\\"My Company\\\\\\\\Default Group\\\",\\n                          \\\"createdBy\\\": \\\"AF3C39A10A320801000000DBF200C60A\\\",\\n                          \\\"numberOfPhysicalComputers\\\": 1,\\n                          \\\"customIpsNumber\\\": \\\"\\\",\\n                          \\\"id\\\": \\\"4CBD63EE0946C25D1011DB1872A1736A\\\",\\n                          \\\"policyInheritanceEnabled\\\": true,\\n                          \\\"name\\\": \\\"Default Group\\\"\\n                        },\\n                        {\\n                          \\\"policyDate\\\": 1548489611062,\\n                          \\\"domain\\\": {\\n                            \\\"id\\\": \\\"908090000946C25D330E919313D23887\\\",\\n                            \\\"name\\\": \\\"Default\\\"\\n                          },\\n                          \\\"numberOfRegisteredUsers\\\": 1,\\n                          \\\"description\\\": \\\"\\\",\\n                          \\\"created\\\": 1548481072007,\\n                          \\\"policySerialNumber\\\": \\\"CAD8-01/26/2019 08:00:11 062\\\",\\n                          \\\"lastModified\\\": 1548481072007,\\n                          \\\"fullPathName\\\": \\\"My Company\\\",\\n                          \\\"createdBy\\\": \\\"AF3C39A10A320801000000DBF200C60A\\\",\\n                          \\\"number OfPhysicalComputers\\\": 1,\\n                          \\\"customIpsNumber\\\": \\\"\\\",\\n                          \\\"id\\\": \\\"CAD80F000946C25D6C150831060AA326\\\",\\n                          \\\"policyInheritanceEnabled\\\": false,\\n                          \\\"name\\\": \\\"My Company\\\"\\n                        }\\n                      ],\\n                      \\\"lastPage\\\": true,\\n                      \\\"totalPages\\\": 1,\\n                      \\\"size\\\": 25,\\n                      \\\"totalElements\\\": 2,\\n                      \\\"numberOfElements\\\": 2\\n                     }\\n\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_groups script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"group_name\\\", \\\"group_id\\\", \\\"group_description\\\", \\\"fullPathName\\\",\\n                   \\\"numberOfPhysicalComputers\\\",\\\"policyInheritanceEnabled\\\"]\\nFN_NAME = \\\"fn_symc_sep_get_groups\\\"\\nWF_NAME = \\\"Get Groups information\\\"\\nDATA_TBL_FIELDS_DOM = [\\\"domain_name\\\", \\\"domain_id\\\"]\\nC_OUTER = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\nDOMAIN_NAME = rule.properties.sep_domain_name\\n\\n# Processing\\ndef main():\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; results returned for domain \\\" \\\\\\n                    \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, results[\\\"content\\\"][\\\"numberOfElements\\\"], DOMAIN_NAME, FN_NAME)\\n        groups = C_OUTER[\\\"content\\\"]\\n        for i in range(len(groups)):\\n            newrow = incident.addRow(\\\"sep_groups\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            for f in DATA_TBL_FIELDS:\\n                try:\\n                    f_base = f.split(\u0027_\u0027)[1]\\n                except:\\n                    f_base = f\\n                if f == \\\"query_execution_time\\\":\\n                    continue\\n                if groups[i][f_base] is not None:\\n                      newrow[f] = groups[i][f_base]\\n\\n            domain = groups[i][\\\"domain\\\"]\\n            if domain is not None:\\n                for d in DATA_TBL_FIELDS_DOM:\\n                    d_base = d.split(\u0027_\u0027)[1]\\n                    newrow[d] = domain[d_base]\\n\\n    else:\\n        note_text += \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for domain \\\" \\\\\\n                     \\\"\u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, DOMAIN_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"domain_content_results =  workflow.properties.get_domains_results\\ndomain_content = domain_content_results.content\\n\\nfor i in range(len(domain_content)):\\n  if domain_content[i][\\\"name\\\"] ==  rule.properties.sep_domain_name:\\n    inputs.sep_domain = domain_content[i][\\\"id\\\"]\\n    break\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1sjbew6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_07x2ixb\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_1nbpqxw\"\u003e\u003cincoming\u003eSequenceFlow_07x2ixb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_07x2ixb\" sourceRef=\"ServiceTask_1fdl7t3\" targetRef=\"EndEvent_1nbpqxw\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_177475l\"\u003e\u003cincoming\u003eSequenceFlow_1auavki\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1sjbew6\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_09uvsaf\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_1auavki\" sourceRef=\"ServiceTask_0wjv59v\" targetRef=\"ExclusiveGateway_177475l\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1sjbew6\" name=\"Domain id exists\" sourceRef=\"ExclusiveGateway_177475l\" targetRef=\"ServiceTask_1fdl7t3\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"#Enter supplemental script\\n#Variables instantiated in this editor are available\\n#for use in the expression above\",\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) != None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003cendEvent id=\"EndEvent_1elyur7\"\u003e\u003cincoming\u003eSequenceFlow_09uvsaf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_09uvsaf\" name=\"Domain id does not exist\" sourceRef=\"ExclusiveGateway_177475l\" targetRef=\"EndEvent_1elyur7\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"final_expression_text\":\"workflow.properties.get(\\\"domid_exists\\\", None) == None\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":null}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1tuz1dp\"\u003e\u003ctext\u003eGet domain id by name. Input: Domain name selected from activity field.\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0mbznxe\" sourceRef=\"ServiceTask_0wjv59v\" targetRef=\"TextAnnotation_1tuz1dp\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1b12v14\"\u003e\u003ctext\u003e\u003c![CDATA[Get group information by domain id.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0jcaxmf\" sourceRef=\"ServiceTask_1fdl7t3\" targetRef=\"TextAnnotation_1b12v14\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0wjv59v\" id=\"ServiceTask_0wjv59v_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"256\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0laeki3\" id=\"SequenceFlow_0laeki3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"256\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"227\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1fdl7t3\" id=\"ServiceTask_1fdl7t3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"610\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1nbpqxw\" id=\"EndEvent_1nbpqxw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"785\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"758\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_07x2ixb\" id=\"SequenceFlow_07x2ixb_di\"\u003e\u003comgdi:waypoint x=\"710\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"785\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"702.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_177475l\" id=\"ExclusiveGateway_177475l_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"450\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"475\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1auavki\" id=\"SequenceFlow_1auavki_di\"\u003e\u003comgdi:waypoint x=\"356\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"450\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"403\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1sjbew6\" id=\"SequenceFlow_1sjbew6_di\"\u003e\u003comgdi:waypoint x=\"500\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"610\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"83\" x=\"514\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1elyur7\" id=\"EndEvent_1elyur7_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"457\" y=\"329\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"475\" y=\"368\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_09uvsaf\" id=\"SequenceFlow_09uvsaf_di\"\u003e\u003comgdi:waypoint x=\"475\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"475\" xsi:type=\"omgdc:Point\" y=\"329\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"26\" width=\"79\" x=\"451\" y=\"273\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1tuz1dp\" id=\"TextAnnotation_1tuz1dp_di\"\u003e\u003comgdc:Bounds height=\"62\" width=\"189\" x=\"211\" y=\"61\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0mbznxe\" id=\"Association_0mbznxe_di\"\u003e\u003comgdi:waypoint x=\"306\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"306\" xsi:type=\"omgdc:Point\" y=\"123\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1b12v14\" id=\"TextAnnotation_1b12v14_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"203\" x=\"558\" y=\"62\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0jcaxmf\" id=\"Association_0jcaxmf_di\"\u003e\u003comgdi:waypoint x=\"660\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"660\" xsi:type=\"omgdc:Point\" y=\"92\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Get groups information.",
+      "export_key": "wf_sep_get_groups_information",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1668001890674,
+      "name": "Example: SEP - Get Groups information",
+      "object_type": "incident",
+      "programmatic_name": "wf_sep_get_groups_information",
+      "tags": [],
+      "uuid": "a9d9db3a-97cf-4f57-829a-47cc9e60fe69",
+      "workflow_id": 318
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "example_sep__get_policy_summary",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_sep__get_policy_summary\" isExecutable=\"true\" name=\"Example: SEP - Get Policy Summary\"\u003e\u003cdocumentation\u003eGet the summary information for policies within a specific Domain. Also gets the list of groups to which the policies are assigned.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1vly10s\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_15tnwro\" name=\"SEP - Get Policy Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0f2a4ca4-9c93-44a7-9309-95544588cbfd\"\u003e{\"inputs\":{},\"post_processing_script\":\"import json\\n\\nif not results.success:\\n  incident.addNote(f\\\"SEP Policy Summary for Domain: {rule.properties.sep_domain_id} error. Reason: {results.reason}\\\")\\nelse:\\n  incident.addNote(f\\\"Policy Summary for Domain: {rule.properties.sep_domain_id}\\\\n\\\\n{json.dumps(results.content, indent=4)}\\\")\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.sep_domainid = rule.properties.sep_domain_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1vly10s\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_16id3u6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1vly10s\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_15tnwro\"/\u003e\u003cendEvent id=\"EndEvent_02otlkc\"\u003e\u003cincoming\u003eSequenceFlow_16id3u6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_16id3u6\" sourceRef=\"ServiceTask_15tnwro\" targetRef=\"EndEvent_02otlkc\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_15tnwro\" id=\"ServiceTask_15tnwro_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"251\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1vly10s\" id=\"SequenceFlow_1vly10s_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"251\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"224.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02otlkc\" id=\"EndEvent_02otlkc_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"404\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"422\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_16id3u6\" id=\"SequenceFlow_16id3u6_di\"\u003e\u003comgdi:waypoint x=\"351\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"404\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"377.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "description": "Get the summary information for policies within a specific Domain. Also gets the list of groups to which the policies are assigned.",
+      "export_key": "example_sep__get_policy_summary",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1675197943410,
+      "name": "Example: SEP - Get Policy Summary",
+      "object_type": "incident",
+      "programmatic_name": "example_sep__get_policy_summary",
+      "tags": [],
+      "uuid": "8dc86e06-b8ab-4dcb-be93-f5bb88101b95",
+      "workflow_id": 433
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "wf_sep_get_endpoint_details_for_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_endpoint_details_for_artifact\" isExecutable=\"true\" name=\"Example: SEP - Get Endpoint Details for artifact\"\u003e\u003cdocumentation\u003e\u003c![CDATA[Get endpoint details for artifact value. Artifact value will be \"DNS name\" or \"System name\"]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0te25gx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1ko5njg\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_computername\u0027: u\u0027WIN-4OA0GKJN830\u0027}, \\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-23 18:40:17\u0027, \u0027package_version\u0027: \u00271.0.0\u0027, \\n         \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1966}, \\n         \u0027success\u0027: True, \\n         \u0027content\u0027: {u\u0027sort\u0027: [{u\u0027direction\u0027: u\u0027ASC\u0027, u\u0027property\u0027: u\u0027COMPUTER_NAME\u0027, u\u0027ascending\u0027: True}], u\u0027number\u0027: 0, \\n                     u\u0027firstPage\u0027: True, u\u0027content\u0027: [{u\u0027profileVersion\u0027: u\u002714.2.1031\u0027, u\u0027elamOnOff\u0027: 1, \\n                     u\u0027avEngineOnOff\u0027: 1, u\u0027profileChecksum\u0027: None, u\u0027atpDeviceId\u0027: None, \\n                     u\u0027processorType\u0027: u\u0027Intel64 Family 6 Model 15 Stepping 1\u0027, u\u0027oslanguage\u0027: u\u0027en-US\u0027, \\n                     u\u0027licenseId\u0027: None, u\u0027licenseStatus\u0027: -1, \\n                     u\u0027group\u0027: {u\u0027domain\u0027: {u\u0027id\u0027: u\u0027908090000946C25D330E919313D23887\u0027, u\u0027name\u0027: u\u0027Default\u0027}, u\u0027name\u0027: u\u0027My Company\\\\\\\\JP_TEST_GROUP_1\u0027, u\u0027fullPathName\u0027: None, u\u0027externalReferenceId\u0027: None, u\u0027source\u0027: None, u\u0027id\u0027: u\u00278E20F39B0946C25D118925C2E28C2D59\u0027}, \\n                     u\u0027uuid\u0027: u\u0027EA650B42-D10A-7F9F-A1D2-0A58C4F4CEB1\u0027, \\n                     u\u0027groupUpdateProvider\u0027: False, \\n                     u\u0027edrStatus\u0027: 2, u\u0027freeDisk\u0027: 40542507008, u\u0027diskDrive\u0027: u\u0027C:\\\\\\\\\u0027, u\u0027osFunction\u0027: u\u0027Server\u0027, u\u0027processorClock\u0027: 2394, \\n                     u\u0027mobilePhone\u0027: u\u0027\u0027, u\u0027jobTitle\u0027: u\u0027\u0027, u\u0027lastHeuristicThreatTime\u0027: 0, u\u0027osname\u0027: u\u0027Windows Server 2012\u0027, \\n                     u\u0027winServers\u0027: [u\u00270.0.0.0\u0027, u\u00270.0.0.0\u0027], u\u0027deploymentMessage\u0027: u\u0027\u0027, u\u0027idsSerialNo\u0027: u\u0027\u0027, \\n                     u\u0027employeeNumber\u0027: u\u0027\u0027, u\u0027snacLicenseId\u0027: None, u\u0027lastSiteId\u0027: u\u0027EE75B0850946C25D5287B58B5173A37C\u0027, \\n                     u\u0027uwf\u0027: 2, u\u0027currentClientId\u0027: u\u0027256B2B130946C25D40C83823AA2E5D4C\u0027, u\u0027osbitness\u0027: u\u0027x64\u0027, \\n                     u\u0027lastScanTime\u0027: 1558613245000, u\u0027email\u0027: u\u0027\u0027, u\u0027securityVirtualAppliance\u0027: None, \\n                     u\u0027worstInfectionIdx\u0027: u\u00270\u0027, u\u0027encryptedDevicePassword\u0027: None, u\u0027lastServerId\u0027: u\u00277D6AAA6F0946C25D170B3A2D442500B6\u0027, \\n                     u\u0027kernel\u0027: None, u\u0027lastUpdateTime\u0027: 1558632769514, u\u0027ptpOnOff\u0027: 1, u\u0027majorVersion\u0027: 14, \\n                     u\u0027lastConnectedIpAddr\u0027: u\u00279.70.194.93\u0027, u\u0027agentVersion\u0027: u\u002714.2.1031.0100\u0027, u\u0027deploymentRunningVersion\u0027: u\u002714.2.1031.0100\u0027, \\n                     u\u0027agentTimeStamp\u0027: 1558632769514, u\u0027osminor\u0027: 2, u\u0027osMajor\u0027: 6, u\u0027deploymentTargetVersion\u0027: u\u002714.2.1031.0100\u0027, \\n                     u\u0027osMinor\u0027: 2, u\u0027osFlavorNumber\u0027: 79, u\u0027logicalCpus\u0027: 0, u\u0027deploymentPreVersion\u0027: u\u0027\u0027, u\u0027hypervisorVendorId\u0027: u\u00270\u0027, \\n                     u\u0027fbwf\u0027: 2, u\u0027osversion\u0027: u\u00276.2\u0027, u\u0027dnsServers\u0027: [u\u00279.70.192.29\u0027, u\u0027FEC0:0000:0000:FFFF:0000:0000:0000:0001\u0027], \\n                     u\u0027vsicStatus\u0027: 3, u\u0027deleted\u0027: 0, u\u0027deploymentStatus\u0027: u\u0027302456832\u0027, u\u0027computerTimeStamp\u0027: 1558622386922, u\u0027bwf\u0027: 2, \\n                     u\u0027totalDiskSpace\u0027: 81567, u\u0027homePhone\u0027: u\u0027\u0027, u\u0027daOnOff\u0027: 1, u\u0027computerDescription\u0027: u\u0027\u0027, u\u0027pepOnOff\u0027: 1, \\n                     \u0027timediffLastUpdateTime\u0027: 448.98237204551697, u\u0027bashStatus\u0027: 1, u\u0027agentUsn\u0027: 2545799, u\u0027osName\u0027: u\u0027Windows Server 2012\u0027, \\n                     \u0027readableLastUpdateTime\u0027: \u00272019-05-23 18:32:49\u0027, u\u0027patternIdx\u0027: u\u00274A80266952462523E3E5AC3B816032AE\u0027, \\n                     u\u0027employeeStatus\u0027: u\u0027\u0027, u\u0027tmpDevice\u0027: None, u\u0027rebootRequired\u0027: 0, u\u0027subnetMasks\u0027: [u\u0027255.255.255.0\u0027, u\u002764\u0027], \\n                     u\u0027minorVersion\u0027: 2, u\u0027osservicePack\u0027: u\u0027\u0027, \u0027timediffLastVirusTime\u0027: 5638590.9823720455, u\u0027lastSiteName\u0027: u\u0027My Site\u0027, \\n                     u\u0027cidsEngineVersion\u0027: u\u00270.0.0.0\u0027, u\u0027lastDeploymentTime\u0027: 1550585147000, u\u0027isGrace\u0027: 0, u\u0027computerUsn\u0027: 2544267, \\n                     u\u0027agentId\u0027: u\u00276E5AA5CB0946C25D40C83823BB5107E6\u0027, u\u0027cidsBrowserFfOnOff\u0027: 1, u\u0027domainOrWorkgroup\u0027: u\u0027WORKGROUP\u0027, \\n                     u\u0027svaId\u0027: None, u\u0027loginDomain\u0027: u\u0027LocalComputer\u0027, u\u0027lastServerName\u0027: u\u0027WIN-4OA0GKJN830\u0027, u\u0027contentUpdate\u0027: 1, \\n                     u\u0027writeFiltersStatus\u0027: None, u\u0027infected\u0027: 0, \u0027timediffLastScanTime\u0027: 19972.982372045517, u\u0027memory\u0027: 6441979904, \\n                     u\u0027freeMem\u0027: 3117060096, u\u0027officePhone\u0027: u\u0027\u0027, u\u0027lastVirusTime\u0027: 1552994627000, u\u0027telemetryMid\u0027: u\u0027890E283B-41D3-4340-A397-66F6AFCAF33E\u0027,\\n                     u\u0027idsVersion\u0027: u\u0027\u0027, u\u0027cidsBrowserIeOnOff\u0027: 1, u\u0027publicKey\u0027: u\u0027BgIAAACkAABSU0ExAAgAAAEAAQDfMtYpvbC2ZOrpGFbK76tuyp2MZ7/6EGsFrqAV3ZBMfvMllksVObpPYvDSc5vCjtzthb1301VADLAspayGytsdAj5z8+LLpOnJkHNg9tIunm1lLkBTitevI6G+nNjyKd7uPn3+bxjk1LL8g1exL2C2SMPEXubdUa1N5xwmhhPHp6PSIAjY74QUcNyplfvylMS9QRWoQ70mqNy9tLLef6+qCYWTqGa7QKXS0WUJs8sJMzWfCrpeMVAmU5/s3yEu+OI+9RKgOeSfy7wRzmAWHQTofjHkYGYqwXcwwLX7AbWjdcpYo0Kaecf8e5t2ZvWyR362EaNxn0HYSjpKraY1hLK1\u0027, \\n                     u\u0027quarantineDesc\u0027: u\u0027Host Integrity check passed\\\\n\u0027, u\u0027cidsDrvMulfCode\u0027: 0, u\u0027biosVersion\u0027: u\u0027INTEL  - 6040000 PhoenixBIOS 4.0 Release 6.0\u0027, \\n                     u\u0027rebootReason\u0027: u\u0027\u0027, u\u0027telemetryHwid\u0027: u\u0027A942D8EB-32C3-E42F-FE83-723FDC431F32\u0027, \u0027readableLastVirusTime\u0027: \u00272019-03-19 11:23:47\u0027, \\n                     u\u0027cidsSilentMode\u0027: 0, u\u0027creationTime\u0027: 1550585043812, u\u0027macAddresses\u0027: [u\u002700-50-56-8B-A6-C3\u0027, u\u002700-50-56-8B-A6-C3\u0027], \\n                     u\u0027idsChecksum\u0027: None, u\u0027operatingSystem\u0027: u\u0027Windows Server 2012 \u0027, u\u0027osmajor\u0027: 6, u\u0027virtualizationPlatform\u0027: u\u0027Unknown\u0027, \\n                     u\u0027ipAddresses\u0027: [u\u00279.70.194.93\u0027, u\u0027FE80:0000:0000:0000:FC67:074E:CD22:0188\u0027], u\u0027physicalCpus\u0027: 1, u\u0027osBitness\u0027: u\u0027x64\u0027, \\n                     u\u0027cidsDefsetVersion\u0027: u\u0027190522063\u0027, u\u0027cidsDrvOnOff\u0027: 1, u\u0027computerName\u0027: u\u0027WIN-4OA0GKJN830\u0027, u\u0027logonUserName\u0027: u\u0027Administrator\u0027, \\n                     u\u0027licenseExpiry\u0027: 0, u\u0027osLanguage\u0027: u\u0027en-US\u0027, u\u0027gateways\u0027: [u\u00279.70.194.1\u0027, u\u00279.70.194.1\u0027, u\u00270.0.0.0\u0027, u\u00270.0.0.0\u0027], \\n                     u\u0027uniqueId\u0027: u\u0027D31AA16E0946C25D40C83823C500518B\u0027, u\u0027department\u0027: u\u0027\u0027, u\u0027isNpvdiClient\u0027: 0, u\u0027dhcpServer\u0027: u\u00270.0.0.0\u0027, \\n                     u\u0027readableLastScanTime\u0027: \u00272019-05-23 13:07:25\u0027, u\u0027osfunction\u0027: u\u0027Server\u0027, u\u0027description\u0027: u\u0027\u0027, u\u0027osflavorNumber\u0027: 79, \\n                     u\u0027tpmDevice\u0027: u\u00270\u0027, u\u0027onlineStatus\u0027: 1, u\u0027lastDownloadTime\u0027: 1558356063096, u\u0027apOnOff\u0027: 1, u\u0027timeZone\u0027: 480, u\u0027fullName\u0027: u\u0027\u0027, \\n                     u\u0027osVersion\u0027: u\u00276.2\u0027, u\u0027attributeExtension\u0027: u\u0027\u0027, u\u0027atpServer\u0027: u\u0027https://9.70.194.99:443\u0027, u\u0027tamperOnOff\u0027: 1, u\u0027osServicePack\u0027: u\u0027\u0027, \\n                     u\u0027agentType\u0027: u\u0027105\u0027, u\u0027serialNumber\u0027: u\u0027VMware-42 0b 65 ea 0a d1 9f 7f-a1 d2 0a 58 c4 f4 ce b1\u0027, u\u0027osElamStatus\u0027: 0, u\u0027installType\u0027: u\u00270\u0027, \\n                     u\u0027profileSerialNo\u0027: u\u00278E20-05/08/2019 07:00:23 015\u0027, u\u0027hardwareKey\u0027: u\u00271771D79454E53469DF4B290C06C104C9\u0027, u\u0027firewallOnOff\u0027: 1}], \\n                     u\u0027lastPage\u0027: True, u\u0027totalPages\u0027: 1, u\u0027numberOfElements\u0027: 1, u\u0027totalElements\u0027: 1, u\u0027size\u0027: 20}, \\n                    \\n         \u0027raw\u0027: \u0027\u0026lt;content_as_string\u0026gt;\u0027\\n         \u0027reason\u0027: None, \\n         \u0027version\u0027: \u00271.0\u0027}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable fn_amp_get_computers script\\nDATA_TBL_FIELDS = [\\\"query_execution_time\\\", \\\"computerName\\\", \\\"uniqueId\\\", \\\"operatingSystem\\\", \\\"ipAddresses\\\",\\n                   \\\"sep_description\\\", \\\"domain_name\\\", \\\"domain_id\\\", \\\"hardwareKey\\\", \\\"group_name\\\", \\\"group_id\\\",\\n                   \\\"infected\\\"]\\nWF_NAME = \\\"Get Endpoint Details\\\"\\nFN_NAME = \\\"fn_sep_get_computers\\\"\\nC_OUTER = results.content\\nINPUTS = results.inputs\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    if C_OUTER is not None:\\n        note_text = u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; results returned for computer name \\\" \\\\\\n                   \\\"\u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, results[\\\"content\\\"][\\\"numberOfElements\\\"], unicode(INPUTS[\\\"sep_computername\\\"]),\\n                    FN_NAME)\\n\\n        eps = C_OUTER[\\\"content\\\"]\\n        for i in range(len(eps)):\\n            ep_osname = eps[i].get(\\\"osname\\\", \\\"\\\")\\n            newrow = incident.addRow(\\\"sep_endpoint_details\\\")\\n            newrow.query_execution_date = QUERY_EXECUTION_DATE\\n            for f in DATA_TBL_FIELDS:\\n                f_base = f.split(\u0027_\u0027)[0]\\n                if f_base == \\\"query_execution_time\\\":\\n                    continue\\n                if eps[i][f_base] is not None:\\n                    if isinstance(eps[i][f_base], unicode) or isinstance(eps[i][f_base], int) \\\\\\n                            or isinstance(eps[i][f_base], long) or len(eps[i][f_base]) == 0:\\n                        if f_base == \\\"onlineStatus\\\":\\n                            if eps[i][f_base]:\\n                                newrow[f] = \\\"Online\\\"\\n                            else:\\n                                newrow[f] = \\\"Offline\\\"\\n                        elif f_base == \\\"infected\\\":\\n                            if eps[i][f_base]:\\n                                newrow[f] = \\\"Yes\\\"\\n                            else:\\n                                newrow[f] = \\\"No\\\"\\n                        else:\\n                            newrow[f] = eps[i][f_base]\\n                    else:\\n                        newrow[f] = \u0027,\u0027.join(eps[i][f_base])\\n\\n            if \\\"windows\\\" in ep_osname.lower():\\n                if (eps[i][\\\"quarantineDesc\\\"].find(\\\"Host Integrity check passed\\\") == -1):\\n                    newrow.endpoint_quarantine_status = \\\"Quarantined\\\"\\n                else:\\n                    newrow.endpoint_quarantine_status = \\\"Un-Quarantined\\\"\\n            else:\\n                newrow.endpoint_quarantine_status = \\\"\\\"\\n\\n\\n            group = eps[i].group\\n            if group is not None:\\n                newrow.group_name = group[\\\"name\\\"]\\n                newrow.group_id = group[\\\"id\\\"]\\n                domain = group[\\\"domain\\\"]\\n                if domain is not None:\\n                    newrow.domain_name = domain[\\\"name\\\"]\\n                    newrow.domain_id = domain[\\\"id\\\"]\\n\\n    else:\\n        note_text += u\\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for computer \\\" \\\\\\n                     \\\"name \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\"\\\\\\n            .format(WF_NAME, unicode(INPUTS[\\\"sep_computername\\\"]), FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.sep_computername = artifact.value\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0te25gx\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1u4fpe2\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0te25gx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1ko5njg\"/\u003e\u003cendEvent id=\"EndEvent_1ahwylo\"\u003e\u003cincoming\u003eSequenceFlow_1u4fpe2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1u4fpe2\" sourceRef=\"ServiceTask_1ko5njg\" targetRef=\"EndEvent_1ahwylo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0z43ebe\"\u003e\u003ctext\u003e\u003c![CDATA[Get endpoint properties. Input: Assigned from artifact value. Create new entry for data table \u0027Symantec SEP - Endpoint details\n\u0027 with results.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1is4p7g\" sourceRef=\"ServiceTask_1ko5njg\" targetRef=\"TextAnnotation_0z43ebe\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1ko5njg\" id=\"ServiceTask_1ko5njg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"242\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0te25gx\" id=\"SequenceFlow_0te25gx_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"242\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"220\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1ahwylo\" id=\"EndEvent_1ahwylo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"392\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"410\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1u4fpe2\" id=\"SequenceFlow_1u4fpe2_di\"\u003e\u003comgdi:waypoint x=\"342\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"392\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"367\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0z43ebe\" id=\"TextAnnotation_0z43ebe_di\"\u003e\u003comgdc:Bounds height=\"56\" width=\"307\" x=\"141\" y=\"58\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1is4p7g\" id=\"Association_1is4p7g_di\"\u003e\u003comgdi:waypoint x=\"293\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"294\" xsi:type=\"omgdc:Point\" y=\"114\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "description": "Get endpoint details for artifact value. Artifact value will be \"DNS name\" or \"System name\"",
+      "export_key": "wf_sep_get_endpoint_details_for_artifact",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1671718899653,
+      "name": "Example: SEP - Get Endpoint Details for artifact",
+      "object_type": "artifact",
+      "programmatic_name": "wf_sep_get_endpoint_details_for_artifact",
+      "tags": [],
+      "uuid": "d0526b57-0bb9-42e5-b121-a0ad918e8778",
+      "workflow_id": 330
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 1,
+        "workflow_id": "wf_sep_get_endpoints_status",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"wf_sep_get_endpoints_status\" isExecutable=\"true\" name=\"Example: SEP - Get Endpoints status summary\"\u003e\u003cdocumentation\u003eGet overall Endpoint status summary.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_17diq7h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0629w22\" name=\"SEP - Get Computers\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"91343444-7a62-4f7f-9812-918531b6bf10\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  Symantec Endpoint Protection  - fn_sep_get_computers script ##\\n# Example result:\\n\\\"\\\"\\\"\\nResult: {\u0027inputs\u0027: {u\u0027sep_status\u0027: True},\\n         \u0027metrics\u0027: {\u0027package\u0027: \u0027fn-sep\u0027, \u0027timestamp\u0027: \u00272019-05-24 11:06:24\u0027, \u0027package_version\u0027: \u00271.0.0\u0027,\\n                    \u0027host\u0027: \u0027myhost\u0027, \u0027version\u0027: \u00271.0\u0027, \u0027execution_time_ms\u0027: 1157},\\n         \u0027success\u0027: True,\\n         \u0027content\u0027: {\u0027out_of_date\u0027: 0, \u0027hi_failed\u0027: 1, \u0027disabled\u0027: 0, \u0027up_to_date\u0027: 3, \u0027non_compliant\u0027: 1,\\n                     \u0027total\u0027: 3, \u0027offline\u0027: 0},\\n         \u0027raw\u0027: \u0027{\\\"out_of_date\\\": 0, \\\"hi_failed\\\": 1, \\\"disabled\\\": 0, \\\"up_to_date\\\": 3, \\\"non_compliant\\\": 1,\\n                  \\\"total\\\": 3, \\\"offline\\\": 0}\u0027,\\n         \u0027reason\u0027: None,\\n         \u0027version\u0027: \u00271.0\u0027\\n}\\n\\\"\\\"\\\"\\n#  Globals\\n# List of fields in datatable for \\\"Get Endpoints status\\\" workflow.\\nDATA_TBL_FIELDS = [\\\"query_execution_date\\\", \\\"non_compliant\\\", \\\"up_to_date\\\", \\\"out_of_date\\\", \\\"total\\\", \\\"disabled\\\",\\n                   \\\"offline\\\",\\\"hi_failed\\\", ]\\nFN_NAME = \\\"fn_sep_get_computers\\\"\\nWF_NAME = \\\"Get Endpoints status\\\"\\nCONTENT = results.content\\nQUERY_EXECUTION_DATE = results[\\\"metrics\\\"][\\\"timestamp\\\"]\\n\\n# Processing\\n\\ndef main():\\n    note_text = \u0027\u0027\\n    \\n    new_row = incident.addRow(\\\"sep_endpoint_status_summary\\\")\\n\\n    if CONTENT is not None and CONTENT[\\\"total\\\"] \u0026gt; 0:\\n        if CONTENT[\\\"total\\\"] \u0026gt; 0:\\n          \\n            #newrow = incident.addRow(\\\"sep_endpoint_status_summary\\\")\\n            new_row.query_execution_date = QUERY_EXECUTION_DATE\\n            for f in DATA_TBL_FIELDS:\\n                if f == \\\"query_execution_date\\\":\\n                    continue\\n                new_row[f] = CONTENT[f]\\n\\n        if CONTENT[\\\"non_compliant\\\"] \u0026gt; 0:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; non-compliant endpoints \\\" \\\\\\n                        \\\"detected out of a total of \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{3}\u0026lt;/b\u0026gt;\\\"\\\\\\n                .format(WF_NAME, CONTENT[\\\"non_compliant\\\"], CONTENT[\\\"total\\\"], FN_NAME)\\n        else:\\n            note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; non-compliant endpoints \\\" \\\\\\n                         \\\"detected out of a total of \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt; for Resilient function \u0026lt;b\u0026gt;{2}\u0026lt;/b\u0026gt;\\\" \\\\\\n                .format(WF_NAME, CONTENT[\\\"total\\\"], FN_NAME)\\n    else:\\n        note_text = \\\"Symantec SEP Integration: Workflow \u0026lt;b\u0026gt;{0}\u0026lt;/b\u0026gt;: There were \u0026lt;b\u0026gt;no\u0026lt;/b\u0026gt; results returned for Resilient \\\" \\\\\\n                    \\\"function \u0026lt;b\u0026gt;{1}\u0026lt;/b\u0026gt;\\\".format(WF_NAME, FN_NAME)\\n\\n    incident.addNote(helper.createRichText(note_text))\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\",\"pre_processing_script\":\"inputs.sep_status = True\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_17diq7h\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0d5iax7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_0zs04b4\"\u003e\u003cincoming\u003eSequenceFlow_0d5iax7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0d5iax7\" sourceRef=\"ServiceTask_0629w22\" targetRef=\"EndEvent_0zs04b4\"/\u003e\u003csequenceFlow id=\"SequenceFlow_17diq7h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0629w22\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0x9ctm1\"\u003e\u003ctext\u003e\u003c![CDATA[Get/refresh overall\u00a0 endpoint status.\n\u00a0Input parameter\u00a0 \u0027sep_status\u0027 set to True. Create new entry for data table \u0027Symantec SEP - Endpoint status summary\u0027 with status.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1tak0zp\" sourceRef=\"ServiceTask_0629w22\" targetRef=\"TextAnnotation_0x9ctm1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0629w22\" id=\"ServiceTask_0629w22_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"288\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0zs04b4\" id=\"EndEvent_0zs04b4_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"467\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"440\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0d5iax7\" id=\"SequenceFlow_0d5iax7_di\"\u003e\u003comgdi:waypoint x=\"388\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"467\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"382.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17diq7h\" id=\"SequenceFlow_17diq7h_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"288\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"243\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0x9ctm1\" id=\"TextAnnotation_0x9ctm1_di\"\u003e\u003comgdc:Bounds height=\"62\" width=\"381\" x=\"147\" y=\"50\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1tak0zp\" id=\"Association_1tak0zp_di\"\u003e\u003comgdi:waypoint x=\"339\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"340\" xsi:type=\"omgdc:Point\" y=\"112\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 1,
+      "description": "Get overall Endpoint status summary.",
+      "export_key": "wf_sep_get_endpoints_status",
+      "last_modified_by": "a@example.com",
+      "last_modified_time": 1668001893441,
+      "name": "Example: SEP - Get Endpoints status summary",
+      "object_type": "incident",
+      "programmatic_name": "wf_sep_get_endpoints_status",
+      "tags": [],
+      "uuid": "e5969fb2-8c2c-405a-8650-f2441cfd164a",
+      "workflow_id": 325
     }
   ],
   "workspaces": []

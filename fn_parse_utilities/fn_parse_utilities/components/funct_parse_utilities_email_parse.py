@@ -82,8 +82,7 @@ class FunctionComponent(ResilientComponent):
                 if file_extension.lower() == ".msg":
                     yield StatusMessage("Processing MSG File")
                     # Write the attachment_contents to a temp file
-                    path_tmp_file, path_tmp_dir = write_to_tmp_file(attachment_contents,
-                                                                    tmp_file_name=attachment_metadata.get("name"))
+                    path_tmp_file, path_tmp_dir = write_to_tmp_file(attachment_contents)
 
                     try:
                         parsed_email = parse_from_file_msg(path_tmp_file)

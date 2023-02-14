@@ -47,6 +47,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 1/2023 | Bug Fix |
 | 1.0.0 | 11/2022 | Initial Release |
 
 ---
@@ -169,6 +170,22 @@ Any attachments found are added to the incident as artifacts if `parse_utilities
 
  ![screenshot: fn-parse-utilities-email-parse ](./doc/screenshots/fn-parse-utilities-email-parse.png)
 
+### Supporting Outlook .msg files
+* This function relies on `mail-parser>=3.9.3`.
+
+#### For Integrations Servers:
+* To support parsing of Outlook email files (`.msg`), you need to install the `msgconvert` tool.
+* `msgconvert` is a tool written in Perl and can be found in `Email::Outlook::Message` (Centos/RHEL).
+* See https://github.com/SpamScope/mail-parser for more information on the packaged used.
+
+#### Install `msgconvert` on CentOS/RHEL based systems:
+```
+$ sudo yum install cpan
+$ sudo cpan -fTi install Email::Outlook::Message
+```
+
+#### For App Host Environments:
+* The packages required to parse Outlook .msg  files is built into the container.
 <details><summary>Inputs:</summary>
 <p>
 

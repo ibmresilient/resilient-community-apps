@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_sep',
     display_name='Symantec Endpoint Protection',
-    version='1.0.2',
+    version='1.1.0',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -32,7 +32,8 @@ setup(
                      "such as deleting or blacklisting suspicious files from within the IBM SOAR platform.",
     install_requires=[
         'resilient_circuits>=46.0.0',
-        'resilient_lib>=46.0.0'
+        'resilient_lib>=46.0.0',
+        'defusedxml==0.7.1'
     ],
     packages=find_packages(),
     include_package_data=True,

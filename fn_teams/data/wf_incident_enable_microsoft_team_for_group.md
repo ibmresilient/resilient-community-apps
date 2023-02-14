@@ -33,7 +33,7 @@ else:
 content = results.get("content")
 
 if not results.success:
-  text = u"Could not enable Teams for this MS Group
+  text = u"Could not enable Teams for this MS Group"
   fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
