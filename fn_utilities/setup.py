@@ -4,7 +4,6 @@
 from setuptools import setup, find_packages
 import glob
 import ntpath
-import sys
 
 PACKAGE='fn_utilities'
 
@@ -23,7 +22,7 @@ def snake_to_camel(word):
 setup(
     name='fn_utilities',
     display_name='Utility Functions for SOAR',
-    version='2.1.1',
+    version='2.1.2',
     license='MIT',
     author='IBM SOAR',
     url="http://ibm.biz/soarcommunity",
@@ -34,10 +33,10 @@ setup(
     to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate
     the security incident response activities.""",
     install_requires=[
-        'resilient_circuits>=41.0.0',
+        'resilient_circuits>=47.1.0',
         'openpyxl~=3.0.10',
-        'pyOpenSSL~=22.0',
-        'cryptography~=36.0',
+        'pyOpenSSL~=23.0',
+        'cryptography~=39.0.1',
         'pywinrm~=0.4',
         'json2html~=1.3',
         'lxml~=4.8',
