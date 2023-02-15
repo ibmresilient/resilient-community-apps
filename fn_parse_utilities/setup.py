@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_parse_utilities",
     display_name="Parse Utilities Function for SOAR",
-    version="1.0.1",
+    version="1.0.2",
     license="MIT",
     author="IBM SOAR",
     url="http://ibm.biz/soarcommunity",
@@ -34,8 +34,8 @@ setup(
         'pdfid~=1.1',
         'defusedxml~=0.7.1',
         'lxml~=4.8',
-        'cryptography~=36.0',
-        'pyOpenSSL~=22.0',
+        'cryptography~=39.0.1',
+        'pyOpenSSL~=23.0',
         'mail-parser~=3.15'
     ],
     python_requires='>=3.6',

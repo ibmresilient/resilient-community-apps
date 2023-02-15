@@ -47,6 +47,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.2 | 2/2023 | Update cryptography to version 39.0.1 and pyOpenSSL to version 23.0 |
 | 1.0.1 | 1/2023 | Bug Fix |
 | 1.0.0 | 11/2022 | Initial Release |
 
@@ -121,12 +122,12 @@ The app does support a proxy server.
 ### Python Environment
 This has been tested in both Python 3.6 and Python 3.9, however it suggested to use Python 3.7 or greater.
 Additional package dependencies may exist for each of these packages:
-* cryptography~=36.0
+* cryptography~=39.0.1
 * defusedxml~=0.7.1
 * lxml~=4.8
 * mail-parser~=3.15
 * pdfid~=1.1
-* pyOpenSSL~=22.0
+* pyOpenSSL~=23.0
 * resilient-circuits
 
 ---

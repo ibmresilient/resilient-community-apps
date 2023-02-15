@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
 
-import os
-import json
-import logging
-import base64
-import tempfile
+from os import unlink
+from json import loads, dumps
+from logging import getLogger
+from base64 import b64decode
+from tempfile import NamedTemporaryFile
 from resilient_lib import SOARCommon
 from pdfid.pdfid import PDFiD, PDFiD2JSON
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
+log = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements SOAR function 'pdfid"""
@@ -35,21 +36,20 @@ class FunctionComponent(ResilientComponent):
                 soar_common = SOARCommon(client)
                 filename, base64content = soar_common.get_case_attachment(incident_id, artifact_id, task_id, attachment_id)
 
-            log = logging.getLogger(__name__)
             log.debug("base64content: %s", base64content)
 
             yield StatusMessage("Analysing with pdfid...")
             try:
-                pdfcontent = base64.b64decode(base64content)
+                pdfcontent = b64decode(base64content)
 
-                with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+                with NamedTemporaryFile(delete=False) as temp_file:
                     try:
                         temp_file.write(pdfcontent)
                         temp_file.close()
                         xmldoc = PDFiD(temp_file.name)
-                        data = json.loads(PDFiD2JSON(xmldoc, True))
+                        data = loads(PDFiD2JSON(xmldoc, True))
                     finally:
-                        os.unlink(temp_file.name)
+                        unlink(temp_file.name)
 
                 results = {
                     "filename": filename,
@@ -65,7 +65,7 @@ class FunctionComponent(ResilientComponent):
                     "error": str(exc)
                 }
 
-            log.info(json.dumps(results, indent=2))
+            log.info(dumps(results, indent=2))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
