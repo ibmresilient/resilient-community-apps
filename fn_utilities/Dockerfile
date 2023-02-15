@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/python-39:latest
 #FROM resilient/rc-data-feeder-base
 
 ARG APPLICATION=fn_utilities
-ARG RES_CIRCUITS_VERSION=40.0
+ARG RES_CIRCUITS_VERSION=47.1
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
@@ -20,10 +20,8 @@ RUN pip install --upgrade pip
 # install resilient-circuits
 RUN pip install resilient-circuits>=${RES_CIRCUITS_VERSION}
 
-# install and upgrade six to satisfy fn_utilities requirement
-RUN pip install six==1.14.0
 # install and upgrade cryptography to satisfy fn_utilities requirement
-RUN pip install --upgrade cryptography
+RUN pip install --upgrade cryptography==39.0.1
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
@@ -41,8 +39,6 @@ RUN cpan -fTi Email::Outlook::Message
 COPY ./dist /tmp/packages
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
-# install and upgrade cryptography to satisfy fn_utilities requirement
-RUN pip install --upgrade cryptography
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>
 
