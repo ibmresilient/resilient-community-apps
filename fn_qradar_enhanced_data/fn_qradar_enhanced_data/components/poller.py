@@ -83,11 +83,11 @@ class PollerComponent(ResilientComponent):
         # This is created, so that each QRadar server is only queried once
         case_server_dict = {}
         for case in case_list:
-            qradar_destination = case.get("properties").get("qradar_destination")
+            qradar_destination = case.get("properties", {}).get("qradar_destination")
             if qradar_destination not in case_server_dict:
                 case_server_dict[qradar_destination] = {}
             # Add the case to the dictionary of the server it is from
-            case_server_dict[qradar_destination][case.get("properties").get("qradar_id")] = case
+            case_server_dict[qradar_destination][case.get("properties", {}).get("qradar_id")] = case
         # :End: QRadar servers dictionary
 
         for server in case_server_dict:
@@ -118,14 +118,14 @@ class PollerComponent(ResilientComponent):
 
             # Add to payload to update SOAR cases field qr_last_updated_time
             if offenses_update_list:
-                updated_cases = [case_server_dict[server][str(offense.get('id'))].get("id") for offense in offenses_update_list]
+                updated_cases = [case_server_dict.get(server, {}).get(str(offense.get('id')), {}).get("id") for offense in offenses_update_list]
                 # Iterate through list of offenses recieved from QRadar query
                 for offense in offenses_update_list:
                     offense_lastPersistedTime = int(offense.get("last_persisted_time"))
                     offense_id = str(offense.get('id'))
                     case_dict = case_server_dict[server][offense_id]
                     case_id = case_dict.get('id')
-                    case_lastPersistedTime = case_dict.get("properties").get("qr_last_updated_time")
+                    case_lastPersistedTime = case_dict.get("properties", {}).get("qr_last_updated_time")
                     LOG.debug(f"QRadar last persisted time: {datetime.fromtimestamp(offense_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')}")
                     LOG.debug(f"SOAR Incident last updated time: {datetime.fromtimestamp(case_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')}")
                     if offense_lastPersistedTime > case_lastPersistedTime:
@@ -135,11 +135,11 @@ class PollerComponent(ResilientComponent):
                         payload['patches'][case_id] = {
                                                 "version": case_dict.get("vers")+1,
                                                 "changes": [{
-                                                "old_value": {"date": case_dict.get("properties").get("qr_last_updated_time")},
-                                                "new_value": {"date": int(offense.get("last_persisted_time"))},
-                                                "field": {"name": "qr_last_updated_time"}
-                                            }]
-                                        }
+                                                    "old_value": {"date": case_lastPersistedTime},
+                                                    "new_value": {"date": offense_lastPersistedTime},
+                                                    "field": {"name": "qr_last_updated_time"}
+                                                }]
+                                            }
 
             self.sync_notes(qradar_client, server, filter_notes, case_server_dict)
 
@@ -170,12 +170,13 @@ class PollerComponent(ResilientComponent):
 
             # Update offense notes
             if offenses_notes:
+                poller_time = int(self.last_poller_time.strftime("%s")) * 1e3
                 for notes in offenses_notes:
-                    incident_id = case_server_dict[server][notes.get('id')].get('id') # ID of the SOAR incident
+                    incident_id = case_server_dict.get(server, {}).get(notes.get('id'), {}).get('id') # ID of the SOAR incident
                     incident_notes = self.rest_client().get(f"/incidents/{incident_id}/comments")
                     for note in notes.get("notes"):
                         # Check if the QRadar note was created after the last_poller_time
-                        if int(note.get("createTime")) > int(self.last_poller_time.strftime("%s")) * 1e3:
+                        if int(note.get("createTime")) > poller_time:
                             # Create a list of notes that are on the SOAR incident
                             inc_notes = [remove_html_tags(n.get("text")).replace("Added from QRadar", "") for n in incident_notes]
                             if note.get("noteText") not in inc_notes:
