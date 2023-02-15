@@ -5,10 +5,11 @@
 
 from json import loads
 from fn_jira.util.helper import (DEFAULT_JIRA_DT_NAME, PACKAGE_NAME,
-                                 get_jira_client, get_server_settings,
+                                 get_server_settings,
                                  to_markdown)
 from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
 from resilient_lib import build_incident_url, validate_fields
+from fn_jira.lib.app_common import AppCommon
 
 FN_NAME = "jira_open_issue"
 
@@ -35,7 +36,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # Connect to Jira
         yield self.status_message("Connecting to JIRA")
-        jira_client = get_jira_client(self.opts, options)
+        jira_client = AppCommon(self.opts, options).get_jira_client()
 
         # Get + validate the function parameters:
         self.LOG.info("Validating function inputs")

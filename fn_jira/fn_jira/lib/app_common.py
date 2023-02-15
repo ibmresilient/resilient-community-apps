@@ -3,10 +3,10 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 from logging import getLogger
-from urllib.parse import urljoin
-
-from requests.exceptions import JSONDecodeError
-from resilient_lib import IntegrationError, readable_datetime, str_to_bool, validate_fields, RequestsCommon
+from jira import JIRA
+from fn_jira.util.helper import str_time_to_int_time, check_jira_issue_linked_to_task, get_id_from_jira_issue_description
+from resilient_lib import IntegrationError, str_to_bool, validate_fields, RequestsCommon
+from datetime import datetime
 
 LOG = getLogger(__name__)
 
@@ -14,18 +14,13 @@ PACKAGE_NAME = "fn_jira"
 GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
 SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "TOKEN", "OAUTH")
 
-# change the header as necessary
-HEADER = { 'Content-Type': 'application/json' }
-
 class AppCommon():
-    def __init__(self, rc, opts, app_configs):
+    def __init__(self, opts, app_configs):
         """
         Initialize the parameters needed to communicate to the endpoint solution
 
         :param opts: All of the settings from the app.config
         :type opts: dict
-        :param rc: object to resilient_lib.requests_common for making API calls
-        :type rc: ``resilient_lib.RequestsCommon``
         :param app_configs: app.config parameters in order to authenticate and access the endpoint
         :type app_configs: dict
         """
@@ -39,7 +34,7 @@ class AppCommon():
             {"name": "auth_method"},
             {"name": "jira_dt_name"}], app_configs)
 
-        self.rc = rc
+        self.rc = RequestsCommon(opts, app_configs)
 
         # Required configs
         self.endpoint_url = app_configs.get("url")
@@ -65,7 +60,7 @@ class AppCommon():
                 self.proxies = None
         else:
             # Call resilient_lib function to find proxies
-            self.proxies = RequestsCommon(opts, app_configs).get_proxies()
+            self.proxies = self.rc.get_proxies()
 
         # AUTH and BASIC AUTH
         if self.auth_method.upper() in SUPPORTED_AUTH_METHODS[0:2]:
@@ -108,126 +103,91 @@ class AppCommon():
         else:
             raise IntegrationError(f"{self.auth_method} auth_method is not supported. Supported methods: {SUPPORTED_AUTH_METHODS}")
 
-    def __init_session_obj(self):
+        self.jira_client = self.get_jira_client()
+
+    def get_jira_client(self):
+        """ Create Jira client connection"""
+        return JIRA(
+            auth = self.auth,
+            basic_auth = self.basic_auth,
+            token_auth = self.token_auth,
+            oauth = self.oauth,
+            options = {"server": self.endpoint_url,
+                    "verify": self.verify,
+                    "rest_api_version": "2"},
+            proxies = self.proxies,
+            timeout = self.timeout
+        )
+
+    def search_jira_issues(self, search_filters, last_poller_time=None, max_results=50, data_to_get_from_case=None):
         """
-        
+        Search for Jira issues with given filters
+        :param jira_client: Client connection to Jira
+        :param search_filters: Search filters for Jira
+        :param last_poller_time: Last time the poller ran
+        :param max_results: Max number of issues that can be returned from Jira issue search
         """
-        if not hasattr(AppCommon, "jira_session"):
-            AppCommon.jira_session = Session()
 
-    def _get_uri(self, cmd):
-        """
-        Build API url
-        <- ::CHANGE_ME:: change this to reflect the correct way to build an API call ->
+        if last_poller_time:
+            search_filters = f"{search_filters} and updated > '{last_poller_time.strftime('%Y/%m/%d %H:%M')}'"
 
-        :param cmd: portion of API: alerts, endpoints, policies
-        :type cmd: str
-        :return: complete URL
-        :rtype: str
-        """
-        return urljoin(self.endpoint_url, cmd)
+        issues_list = self.jira_client.search_issues(
+            search_filters,
+            maxResults=max_results,
+            fields=["issuetype", "project", "priority", "updated", "status", "description", "attachment", "summary", "comment", "created", "resolutiondate"],
+            json_result=True
+        ).get("issues")
 
-    def _make_headers(self, token):
-        """Build API header using authorization token
+        # Format each dictionary
+        for issue in issues_list:
+            issue.pop("expand")
 
-        :param token: authorization token
-        :type token: str
-        :return: complete header
-        :rtype: dict
-        """
-        header = HEADER.copy()
-        # modify to represent how to build the header
+            for key, value in issue.get("fields").items():
+                issue[key] = value
+            issue.pop("fields")
 
-        return header
+            # Change the value of the dict key to the one value that is used in that dict
+            for key, value in {"issuetype": "name", "project": "key", "priority": "name", "status": "name", "comment": "comments"}.items():
+                if issue.get(key):
+                    issue[key] = issue[key].get(value)
 
-    def _api_call(self, method, url, payload=None):
-        """
-        Make an API call to the endpoint solution and get back the response
+            if not data_to_get_from_case.get(issue.get("key")):
+                data_to_get_from_case[issue.get("key")] = {}
 
-        :param method: REST method to execute (GET, POST, PUT, ...)
-        :type method: str
-        :param url: URL to send request to
-        :type url: str
-        :param payload: JSON payload to send if a POST, defaults to None
-        :type payload: dict|None
-        :return: requests.Response object returned from the endpoint call
-        :rtype: ``requests.Response``
-        """    
-        # <- ::CHANGE_ME:: there may be changes needed in here to
-        # work with your endpoint solution ->
+            data_to_get_from_case[issue.get("key")]["comments"] = False
+            data_to_get_from_case[issue.get("key")]["attachments"] = False
 
-        return self.rc.execute(method,
-                               url,
-                               params=params,
-                               json=payload,
-                               headers=self._make_headers(),
-                               verify=self.verify,
-                               callback=callback)
+            # Create a list of just comment string
+            comments = issue.get("comment")
+            if comments:
+                data_to_get_from_case[issue.get("key")]["comments"] = True
+                for comment_num in range(len(comments)):
+                    comments[comment_num] = comments[comment_num].get("body")
 
-    def query_entities_since_ts(self, timestamp, *args, **kwargs):
-        """
-        Get changed entities since last poller run
+            # Convert the string times to integer epoch time
+            issue["created"] = str_time_to_int_time(issue.get("created"))
+            issue["updated"] = str_time_to_int_time(issue.get("updated"))
 
-        :param timestamp: datetime when the last poller ran
-        :type timestamp: datetime
-        :param *args: additional positional parameters needed for endpoint queries
-        :param **kwargs: additional key/value pairs needed for endpoint queries
-        :return: changed entity list
-        :rtype: list
-        """
-        # <- ::CHANGE_ME:: -> for the specific API calls
-        # and make sure to properly handle pagination!
-        query = {
-            "query_field_name": readable_datetime(timestamp) # utc datetime format
-        }
+            # Create a list of just attachment filenames
+            attachments = issue.get("attachment")
+            if attachments:
+                data_to_get_from_case[issue.get("key")]["attachments"] = True
+                for attach_num in range(len(attachments)):
+                    attachments[attach_num] = {
+                        "filename": attachments[attach_num].get("filename"),
+                        "content": self.jira_client._session.get(attachments[attach_num].get("content")).content
+                    }
 
-        LOG.debug("Querying endpoint with %s", query)
-        response, err_msg = self._api_call("GET", 'alerts', query, refresh_authentication=True)
-        if err_msg:
-            LOG.error("%s API call failed: %s", PACKAGE_NAME, err_msg)
-            return None
+            issue_description = issue.get("description")
+            if check_jira_issue_linked_to_task(issue_description):
+                task_id = get_id_from_jira_issue_description(issue_description)
+                data_to_get_from_case["tasks"].append({
+                    "incident_id": int(issue_description[issue_description.index("incidents/")+10:issue_description.index("?task_id")]),
+                    "task_id": task_id,
+                    "task_key": issue.get("key")
+                })
 
-        return response.json()
-
-    def make_linkback_url(self, entity_id, linkback_url):
-        """
-        Create a url to link back to the endpoint entity
-
-        :param entity_id: id representing the entity
-        :type entity_id: str
-        :param linkback_url: string to in which one can format the entity ID to join to the base url
-        :type linkback_url: str
-        :return: completed url for linkback
-        :rtype: str
-        """
-        return urljoin(self.endpoint_url, linkback_url.format(entity_id))
-
-
-def callback(response):
-    """
-    Callback needed for certain REST API calls to return a formatted error message
-
-    :param response: the requests response object
-    :type response: ``requests.Response``
-    :return: response, error_msg
-    :rtype: tuple(``requests.Reponse``, str)
-    """
-    error_msg = None
-    if response.status_code >= 300 and response.status_code <= 500:
-        try:
-            resp = response.json()
-            msg = resp.get('messages') or resp.get('message')
-            details = resp.get('details')
-        except JSONDecodeError as err:
-            msg = str(err)
-            details = response.text
-
-        error_msg  = u"Error: \n    status code: {0}\n    message: {1}\n    details: {2}".format(
-            response.status_code,
-            msg,
-            details)
-
-    return response, error_msg
+        return issues_list, data_to_get_from_case
 
 def _get_verify_ssl(app_configs):
     """
@@ -253,62 +213,3 @@ def _get_verify_ssl(app_configs):
         verify = str_to_bool(verify)
 
     return verify
-
-class JiraServers():
-    def __init__(self, opts):
-        self.servers, self.server_name_list = self._load_servers(opts)
-
-    def _load_servers(self, opts):
-        """
-        Create list of label names and a dictionary of the servers and their configs
-        :param opts: Dict of app_configs
-        :return servers: Dictonary of all the Jira servers from the app.config that contains each servers configurations
-        :return server_name_list: List filled with all of the labels for the servers from the app.config
-        """
-        servers = {}
-        server_name_list = self._get_server_name_list(opts)
-        for server in server_name_list:
-            server_data = opts.get(server)
-            if not server_data:
-                raise KeyError(f"Unable to find Jira server: {server}")
-
-            servers[server] = server_data
-
-        return servers, server_name_list
-
-    def jira_label_test(jira_label, servers_list):
-        """
-        Check if the given jira_label is in the app.config
-        :param jira_label: User selected server
-        :param servers_list: List of jira servers
-        :return: Dictionary of app_configs for choosen server
-        """
-        # If label not given and using previous versions app.config [fn_jira]
-        if not jira_label and servers_list.get(PACKAGE_NAME):
-            return servers_list[PACKAGE_NAME]
-        elif not jira_label:
-            raise IntegrationError("No label was given and is required if servers are labeled in the app.config")
-
-        label = f"{PACKAGE_NAME}:{jira_label}"
-        if jira_label and label in servers_list:
-            app_configs = servers_list[label]
-        elif len(servers_list) == 1:
-            app_configs = servers_list[list(servers_list.keys())[0]]
-        else:
-            raise IntegrationError("{} did not match labels given in the app.config".format(jira_label))
-
-        return app_configs
-
-    def _get_server_name_list(self, opts):
-        """
-        Return the list of jira server names defined in the app.config in fn_jira.
-        :param opts: List of app_configs
-        :return: List of servers
-        """
-        return [key for key in opts.keys() if key.startswith(f"{PACKAGE_NAME}:") and key != GLOBAL_SETTINGS]
-
-    def get_server_name_list(self):
-        """
-        Return list of all server names
-        """
-        return self.server_name_list

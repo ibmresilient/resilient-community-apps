@@ -9,6 +9,7 @@ from io import BytesIO
 from resilient.co3base import BasicHTTPException
 from resilient_circuits import AppFunctionComponent, FunctionError, FunctionResult, app_function
 from resilient_lib import IntegrationError, validate_fields
+from fn_jira.lib.app_common import AppCommon
 
 FN_NAME = "jira_create_comment"
 src_pattern = compile(r'<img[^>]+src="([^">]+)')
@@ -38,7 +39,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # Connect to Jira
         yield self.status_message("Connecting to JIRA")
-        jira_client = helper.get_jira_client(self.opts, options)
+        jira_client = AppCommon(self.opts, options).get_jira_client()
 
         # Validate required parameters
         self.LOG.info("Validating function inputs")
