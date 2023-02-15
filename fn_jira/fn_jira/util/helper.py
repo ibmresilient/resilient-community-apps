@@ -1,13 +1,12 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
-from jira import JIRA
-from resilient_lib import IntegrationError, MarkdownParser, validate_fields, RequestsCommon, SOARCommon
+from resilient_lib import IntegrationError, MarkdownParser, SOARCommon
 from re import compile, sub
+from datetime import datetime
 
 PACKAGE_NAME = "fn_jira"
 GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
-SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "TOKEN", "OAUTH")
 
 # Jira datatable constants
 DEFAULT_JIRA_DT_NAME = "jira_task_references" # Can be overridden with app.config jira_dt_name value
@@ -15,125 +14,6 @@ JIRA_DT_ISSUE_ID_COL_NAME = "jira_issue_id_col"
 JIRA_DT_ISSUE_LINK_COL_NAME = "jira_link"
 IBM_SOAR_LINK = "IBM SOAR Link:"
 html_tags = compile('<.*?>')
-
-def get_jira_client(opts, options):
-    """
-    Function that gets the client for JIRA
-    :param opts: All of the settings from the app.config
-    :param options: The options for fn_jira from the app.config
-    :raise: IntegrationError if auth_method set in app.config is unsupported
-    :return: Instance to jira client
-    :rtype: JIRA object. See: https://jira.readthedocs.io/en/latest/api.html
-    """
-
-    # Get global_settings if definied in the app.config
-    global_settings = opts.get(GLOBAL_SETTINGS, {})
-
-    # Validate the app.config settings for fn_jira
-    validate_fields([
-        {"name": "url", "placeholder": "https://<jira url>"},
-        {"name": "auth_method"},
-        {"name": "jira_dt_name"}], options)
-
-    # Set app.config settings to variables
-    auth_method = options.get("auth_method")
-    oauth = token_auth = basic_auth = auth = None
-    url = options.get("url")
-
-    # Get verify setting from app.config
-    verify = options.get("verify_cert", False)
-    if verify:
-        verify = False if verify.lower() == "false" else (True if verify.lower() == "true" else verify)
-
-    # Get timeout from app.config either from global_settings if present or from individual Jira server settings
-    timeout = int(global_settings.get("timeout")) if global_settings.get("timeout", None) else int(options.get("timeout", 10))
-
-    # Set proxies variable as a dict
-    proxies = {}
-    # Check if global_settings is definied in the app.config
-    if global_settings:
-        # Check if proxies are defined in the global_settings
-        if global_settings.get("http_proxy"):
-            proxies["http"] = global_settings.get("http_proxy")
-        if global_settings.get("https_proxy"):
-            proxies["https"] = global_settings.get("https_proxy")
-        if not proxies:
-            proxies = None
-    else:
-        # Call resilient_lib function to find proxies
-        proxies = RequestsCommon(opts, options).get_proxies()
-
-    # AUTH and BASIC AUTH
-    if auth_method.upper() in SUPPORTED_AUTH_METHODS[0:2]:
-        validate_fields([{"name": "user", "placeholder": "<jira username or email>"},
-                         {"name": "password", "placeholder": "<jira user password or API Key>"}],
-                         options)
-        if auth_method.upper() == SUPPORTED_AUTH_METHODS[0]: # AUTH
-            auth = (options.get("user"), options.get("password"))
-        else: # BASIC
-            basic_auth = (options.get("user"), options.get("password"))
-
-    # TOKEN
-    elif auth_method.upper() == SUPPORTED_AUTH_METHODS[2]:
-        validate_fields(["auth_token"], options)
-        token_auth = (options.get("auth_token"))
-
-    # OAUTH
-    elif auth_method.upper() == SUPPORTED_AUTH_METHODS[3]:
-        key_cert_data = None
-
-        # Validate required fields
-        validate_fields([
-            {"name": "access_token", "placeholder": "<oauth access token>"},
-            {"name": "access_token_secret", "placeholder": "<oauth access token secret>"},
-            {"name": "consumer_key_name", "placeholder": "<oauth consumer key - from Jira incoming link settings>"},
-            {"name": "private_rsa_key_file_path", "placeholder": "<private RSA key matched with public key on Jira>"}
-            ], options)
-
-        try:
-            with open(options.get("private_rsa_key_file_path"), "r") as private_rsa_key:
-                key_cert_data = private_rsa_key.read()
-        except FileNotFoundError as e:
-            raise IntegrationError(f"Private Key file not valid: {str(e)}")
-
-        oauth = {"access_token": options.get("access_token"),
-                 "access_token_secret": options.get("access_token_secret"),
-                 "consumer_key": options.get("consumer_key_name"),
-                 "key_cert": key_cert_data}
-
-    else:
-        raise IntegrationError(f"{auth_method} auth_method is not supported. Supported methods: {SUPPORTED_AUTH_METHODS}")
-
-    return JIRA(
-        auth = auth,
-        basic_auth = basic_auth,
-        token_auth = token_auth,
-        oauth = oauth,
-        options = {"server": url,
-                   "verify": verify,
-                   "rest_api_version": "2"},
-        proxies = proxies,
-        timeout = timeout,
-    )
-
-def to_markdown(html):
-    """Takes a string of html converts it to Markdown
-    and returns it"""
-    return MarkdownParser(strikeout="-", bold="*", underline="+", italic="_").convert(html)
-
-def get_jira_issue_id(res_client, dt_name, incident_id, task_id):
-    """Returns the jira_issue_id and jira_url that relates to the task_id"""
-
-    try:
-        rows = SOARCommon(res_client)._get_case_info(incident_id, f"table_data/{dt_name}?handle_format=names")["rows"]
-    except Exception as err:
-        raise IntegrationError(f"Failed to get '{dt_name}' Datatable. This is required to send task notes to Jira", err)
-
-    row = [r for r in rows if str(r["cells"].get("task_id").get("value")) == str(task_id)][0]
-
-    if row:
-        cells = row.get("cells")
-        return str(cells.get("jira_issue_id_col").get("value")), str(cells.get(JIRA_DT_ISSUE_LINK_COL_NAME).get("value"))
 
 class JiraServers():
     def __init__(self, opts):
@@ -193,6 +73,34 @@ class JiraServers():
         Return list of all server names
         """
         return self.server_name_list
+
+def str_time_to_int_time(str_time):
+    """
+    Convert time string to integer epoch time
+    :param str_time: Time in string
+    :return: Epoch time as integer
+    """
+    str_time = str_time[:str_time.rindex(".")]
+    return int(datetime.strptime(str_time, "%Y-%m-%dT%H:%M:%S").timestamp() * 1e3)
+
+def to_markdown(html):
+    """Takes a string of html converts it to Markdown
+    and returns it"""
+    return MarkdownParser(strikeout="-", bold="*", underline="+", italic="_").convert(html)
+
+def get_jira_issue_id(res_client, dt_name, incident_id, task_id):
+    """Returns the jira_issue_id and jira_url that relates to the task_id"""
+
+    try:
+        rows = SOARCommon(res_client)._get_case_info(incident_id, f"table_data/{dt_name}?handle_format=names")["rows"]
+    except Exception as err:
+        raise IntegrationError(f"Failed to get '{dt_name}' Datatable. This is required to send task notes to Jira", err)
+
+    row = [r for r in rows if str(r["cells"].get("task_id").get("value")) == str(task_id)][0]
+
+    if row:
+        cells = row.get("cells")
+        return str(cells.get("jira_issue_id_col").get("value")), str(cells.get(JIRA_DT_ISSUE_LINK_COL_NAME).get("value"))
 
 def get_id_from_jira_issue_description(description):
     """

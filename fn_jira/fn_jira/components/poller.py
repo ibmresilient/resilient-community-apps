@@ -8,9 +8,10 @@ from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
 from fn_jira.util import helper, poller_helper
-from fn_jira.lib.poller_common import JiraCommon, poller
+from fn_jira.lib.poller_common import poller
 from resilient_lib import validate_fields, SOARCommon
 from fn_jira.poller.configure_tab import init_incident_groups_tab
+from fn_jira.lib.app_common import AppCommon
 
 LOG = getLogger(__name__)
 
@@ -116,14 +117,13 @@ class PollerComponent(ResilientComponent):
                 poller_filters = options.get("poller_filters")
 
             # Get a list of Jira issues bases on the given search filters
-            jira_issue_list, data_to_get_from_case = JiraCommon.search_jira_issues(
-                                                                self.opts,
-                                                                helper.get_jira_client(self.opts, options),
-                                                                poller_filters,
-                                                                self.last_poller_time,
-                                                                max_results,
-                                                                data_to_get_from_case
-                                                            )
+            jira_issue_list, data_to_get_from_case = AppCommon(self.opts, options).search_jira_issues(
+                poller_filters,
+                self.last_poller_time,
+                max_results,
+                data_to_get_from_case
+            )
+
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
 
