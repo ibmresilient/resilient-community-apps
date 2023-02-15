@@ -1,0 +1,16 @@
+{
+  "email_ids": [
+    "<6475dbadd11745c5abf0fb7b1b60d54f@example.com>"
+  ],
+  "emails": {
+    "<6475dbadd11745c5abf0fb7b1b60d54f@example.com>": {
+      "subject": "Warning! Another potential phishing email!",
+      "body": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\nExample Body\r\n</body>\r\n</html>\r\n",
+      "mime_content": "Received: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\r\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 127.0.0.1 via Mailbox Transport; Thu, 23 Jun 2022 12:48:18 +0100\r\nReceived: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\r\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 127.0.0.1; Thu, 23 Jun 2022 12:48:18 +0100\r\nReceived: from WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6]) by\r\n WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6%2]) with mapi id\r\n 00.00.2242.012; Thu, 23 Jun 2022 12:48:18 +0100\r\nFrom: Thomas Shelby <t.shelby@example.com>\r\nTo: Thomas Shelby <t.shelby@example.com>\r\nSubject: Warning! Another potential phishing email!\r\nThread-Topic: Warning! Another potential phishing email!\r\nThread-Index: AQHYhvch4pObt1o+A0qCLDlDou3uNw==\r\nDate: Thu, 23 Jun 2022 12:48:18 +0100\r\nMessage-ID: <6475dbadd11745c5abf0fb7b1b60d54f@example.com>\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: WIN-L3KDT22U7UJ.example.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t7c1c4ee8-4c79-454a-ffbb-08da550e43f6\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_\r\nContent-Type: text/plain; charset=\"us-ascii\"\r\n\r\nExample Body\r\n\r\n--_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_\r\nContent-Type: text/html; charset=\"us-ascii\"\r\n\r\n<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\">\r\n</head>\r\n<body>\r\nExample Body\r\n</body>\r\n</html>\r\n\r\n--_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_--\r\n",
+      "sender_name": "Thomas Shelby",
+      "sender_email": "t.shelby@example.com",
+      "attachments": {},
+      "attachment_ids": []
+    }
+  }
+}
