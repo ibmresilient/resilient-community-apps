@@ -35,6 +35,11 @@ max_issues_returned = 50
 #  under the individual Jira servers will be ignored
 #http_proxy=
 #https_proxy=
+# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# See documentation section "Templates for SOAR Cases" for more details
+#soar_create_case_template=
+#soar_update_case_template=
+#soar_close_case_template=
 
 [fn_jira:jira_label1]
 # Url to Jira server

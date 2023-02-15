@@ -4,11 +4,12 @@
 """Transition a Jira issue from IBM SOAR"""
 
 from json import loads
-from fn_jira.util.helper import (PACKAGE_NAME, get_jira_client,
+from fn_jira.util.helper import (PACKAGE_NAME,
                                  get_server_settings, to_markdown)
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function)
 from resilient_lib import validate_fields
+from fn_jira.lib.app_common import AppCommon
 
 FN_NAME = "jira_transition_issue"
 
@@ -36,7 +37,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # Connect to Jira
         yield self.status_message("Connecting to JIRA")
-        jira_client = get_jira_client(self.opts, options)
+        jira_client = AppCommon(self.opts, options).get_jira_client()
 
         # Get + validate the function parameters:
         self.LOG.info("Validating function inputs")

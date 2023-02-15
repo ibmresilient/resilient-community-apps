@@ -8,9 +8,11 @@ from threading import Thread
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (SOARCommon, get_last_poller_date,
-                           make_payload_from_template, poller)
+                           make_payload_from_template, poller, validate_fields)
 
 from fn_jira.lib.app_common import AppCommon
+from fn_jira.poller.configure_tab import init_incident_groups_tab
+from fn_jira.util import helper
 
 
 PACKAGE_NAME = "fn_jira"
@@ -71,7 +73,6 @@ def query_entities(app_common, last_poller_time):
 
     return query_results
 
-
 def get_entity_id(entity):
     """
     Get the id for the entity returned in your query
@@ -107,55 +108,46 @@ class PollerComponent(AppFunctionComponent):
         :param opts: all settings including SOAR settings
         :type opts: dict
         """
-        # Validate required fields in app.config are set
-        # <::CHANGE_ME:: change this validation to include all the fields required in the app.config file >
-        required_fields = ["polling_interval",
-                        "polling_lookback",
-                        "endpoint_url",
-                        "cafile",
-                        "api_key",
-                        "api_secret"]
 
-        super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)
+        super(PollerComponent, self).__init__(opts, PACKAGE_NAME)
+        self.opts = opts
+        init_incident_groups_tab()
 
-        # collect settings necessary and initialize libraries used by the poller
-        if not self._init_env(opts, self.options):
-            LOG.info("Poller interval is not configured.  Automated escalation is disabled.")
+        # Collect settings necessary and initialize libraries used by the poller
+        if not self._init_env():
+            LOG.info("Poller interval is not configured. Automated escalation is disabled.")
             return
 
+        # Create poller thread
         poller_thread = Thread(target=self.run)
         poller_thread.daemon = True
         poller_thread.start()
 
-    def _init_env(self, opts, options):
+    def _init_env(self):
         """
         Initialize the environment based on app.config settings
 
-        :param opts: all settings including SOAR settings
-        :type opts: dict
-        :param options: settings specific to this app
-        :type options: dict
         :return: True if poller is configured
         :rtype: bool
         """
-        self.polling_interval = float(options.get("polling_interval", 0))
+        global_settings = self.opts.get(helper.GLOBAL_SETTINGS, {})
+        self.polling_interval = int(global_settings.get("polling_interval", 0))
         if not self.polling_interval or is_this_a_selftest(self):
             LOG.debug("Exiting poller because polling interval set to 0 or this run is a selftest.")
             return False
 
         LOG.info("Poller initiated, polling interval %s", self.polling_interval)
-        self.last_poller_time = get_last_poller_date(int(options.get("polling_lookback", 0)))
+        self.last_poller_time = get_last_poller_date(int(global_settings.get("polling_lookback", 0)))
         LOG.info("Poller lookback: %s", self.last_poller_time)
 
-        # collect the override templates to use when creating, updating and closing cases
-        self.soar_create_case_template = options.get("soar_create_case_template")
-        self.soar_update_case_template = options.get("soar_update_case_template")
-        self.soar_close_case_template = options.get("soar_close_case_template")
+        # Collect the override templates to use when creating, updating and closing cases
+        self.soar_create_case_template = global_settings.get("soar_create_case_template")
+        self.soar_update_case_template = global_settings.get("soar_update_case_template")
+        self.soar_close_case_template = global_settings.get("soar_close_case_template")
 
         # rest_client is used to make IBM SOAR API calls
         self.rest_client = self.rest_client()
         self.soar_common = SOARCommon(self.rest_client)
-        self.app_common = init_app(self.rc, options)
 
         return True
 
@@ -172,12 +164,80 @@ class PollerComponent(AppFunctionComponent):
         :type last_poller_time: int
         """
 
-        # get the list of entities (alerts, cases, etc.) to insert, update or close as cases in IBM SOAR
-        query_results = query_entities(self.app_common, kwargs["last_poller_time"])
+        # List of the Jira datatable names found in the app.config
+        jira_dt_names = []
 
-        if query_results:
-            # iterate over all the entities.
-            self.process_query_list(query_results.get("result", [])) # <::CHANGE_ME:: update to the correct value for your API>
+        # Dictionary of dicts that say what info to get from each SOAR case
+        data_to_get_from_case = {"tasks": []}
+
+        # Get list of Jira servers configured in the app.config
+        servers_list = helper.JiraServers(self.opts).get_server_name_list()
+        # If no servers labeled then add fn_jira to list
+        if not servers_list:
+            servers_list.append(helper.PACKAGE_NAME)
+
+        # Get global_setting if definied in the app.config
+        global_settings = self.opts.get(helper.GLOBAL_SETTINGS, {})
+
+        # Validation dictionary for the "poller_filters" app.config setting
+        poller_filters_validator = {"name": "poller_filters",
+                                   "placeholder": "priority in (high, medium, low) and "\
+                                   "status in ('to do', 'in progress', done) and project in "\
+                                   "(project_name1, project_name2)"}
+
+        # Dictionary for Jira Issues
+        jira_issues_dict = {}
+
+        # Loop through all the Jira servers in the app.config
+        for server in servers_list:
+
+            # If multiple servers are define get just the servers label
+            if server.startswith(f"{helper.PACKAGE_NAME}:"):
+                server = server[len(helper.PACKAGE_NAME)+1:]
+
+            # Get settings for server from the app.config
+            options = helper.get_server_settings(self.opts, server)
+
+            # Add the datatable name specified in the current app.config
+            dt_name = options.get("jira_dt_name")
+            if dt_name not in jira_dt_names:
+                jira_dt_names.append(dt_name)
+
+            # Get the max_results settings from the global_settings
+            max_results = global_settings.get("max_issues_returned")
+            if not max_results:
+                # Get the max_results settings from the servers settings
+                max_results = options.get("max_issues_returned")
+
+            # If poller_filters and or max_results are defnined in the global_settings
+            poller_filters = global_settings.get("poller_filters")
+            if poller_filters:
+                # Validate poller_filter
+                validate_fields([poller_filters_validator], global_settings)
+            else: # If poller_filters is defnined in individual Jira server settings
+                # Validate poller_filter
+                validate_fields([poller_filters_validator], options)
+                # Get the poller_filters settings from the servers settings
+                poller_filters = options.get("poller_filters")
+
+            # Get a list of Jira issues bases on the given search filters
+            jira_issue_list, data_to_get_from_case = AppCommon(self.opts, options).search_jira_issues(
+                poller_filters,
+                self.last_poller_time,
+                max_results,
+                data_to_get_from_case
+            )
+
+            # Add list of Jira issues to jira_issues_dict under the server the issues where found in
+            jira_issues_dict[server] = jira_issue_list
+
+        # Get a list of open SOAR cases that contain the field jira_issue_id.
+        soar_cases_list, err_msg = SOARCommon(self.rest_client()).get_soar_cases({"jira_issue_id": True})
+
+        soar_cases_list = self.process_soar_cases(soar_cases_list, data_to_get_from_case)
+
+        # Process Jira issues returned from search
+        self.process_jira_issue_dict(jira_issues_dict, soar_cases_list)
 
     def process_query_list(self, query_results):
         """
