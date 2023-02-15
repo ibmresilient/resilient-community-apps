@@ -36,7 +36,7 @@ class TestExchangeDeleteEmails:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @patch('fn_exchange.components.exchange_delete_emails.exchange_utils', side_effect=mocked_exchange_utils)
+    @patch('fn_exchange.components.exchange_delete_emails.exchange_interface', side_effect=mocked_exchange_utils)
     @pytest.mark.parametrize("exchange_emails, exchange_hard_delete, exchange_folder_path, exchange_sender, exchange_start_date, exchange_end_date, expected_results", [
         ("user@exch.com", False, "Top of Information Store/TESTFOLDER_1", "jdoe@exch.com", 1518480000000,
          1518480000000, {'email_ids': ['<ed6f175b4ef84ceaa921ba8bfdd37739@exch.exch.com>'], 'emails': {
@@ -61,7 +61,7 @@ class TestExchangeDeleteEmails:
             "exchange_folder_path": exchange_folder_path,
             "exchange_sender": exchange_sender,
             "exchange_start_date": exchange_start_date,
-            "exchange_end_date": exchange_end_date
-        }
+            "exchange_end_date": exchange_end_date}
+
         results = call_exchange_delete_emails_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert(expected_results == results.get("content"))

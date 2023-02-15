@@ -6,15 +6,17 @@
 """Generate Mock responses to simulate Microsoft Exchange for Unit and function tests """
 import sys
 
-from exchangelib.queryset import QuerySet
 from mock import MagicMock
+from exchangelib.queryset import QuerySet
 from exchangelib import Message, FileAttachment, Account, Folder, CalendarItem, EWSDateTime, EWSTimeZone, Q, Mailbox
-from fn_exchange.lib.exchange_utils import exchange_utils, FolderError
 
+from fn_exchange.lib import exchange_helper
+from fn_exchange.lib.exchange_helper import FolderError
+from fn_exchange.lib.exchange_utils import exchange_interface
 from exchangelib.folders import RootOfHierarchy
 
 DELEGATE = 'delegate'
-TEST_TZ = exchange_utils._get_tz()
+TEST_TZ = exchange_helper.get_timezone()
 # Function opts
 MOCK_OPTS = {
     'verify_cert': 'false',
@@ -105,6 +107,8 @@ class MockFolder(RootOfHierarchy):
             yield item
             for recur_item in item.subfolders.values():
                 yield recur_item
+
+
 def get_sender():
     sender = MagicMock(spec=Mailbox)
     sender.name = "John Doe"
@@ -113,8 +117,8 @@ def get_sender():
     sender.mailbox_type = "Mailbox"
     return sender
 
-def get_mime_content():
 
+def get_mime_content():
     mime_content = """Received: from exch.exch.com (2002:925:1d2d::925:1d2d) by\r\n exch.exch.com (2002:925:1d2d::925:1d2d) with Microsoft SMTP Server\r\n (TLS) id 15.0.1395.4 via Mailbox Transport; Tue,
        10 Nov 2020 11:52:21 +0000\r\nReceived: from exch.exch.com (2002:925:1d2d::925:1d2d) by\r\n exch.exch.com (2002:925:1d2d::925:1d2d) with Microsoft SMTP Server\r\n (TLS) id 15.0.1395.4; Tue,
        10 Nov 2020 11:46:35 +0000\r\nReceived: from exch.exch.com ([
@@ -124,11 +128,25 @@ def get_mime_content():
       ]) with mapi id\r\n 15.00.1395.000; Tue,
        10 Nov 2020 11:46:35 +0000\r\nFrom: \"John Doe\" <jdoe@exch.com>\r\nTo: \"User\" <user@exch.com>\r\nSubject: Example Subject\r\nThread-Topic: Example Subject\r\nThread-Index: AQHWt1Wr3ksBSsdJkUatZX7q6rcC3A==\r\nDate: Tue,
        10 Nov 2020 11:36:02 +0000\r\nMessage-ID: <ed6f175b4ef84ceaa921ba8bfdd37739@exch.exch.com>\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: exch.exch.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nContent-Type: multipart\/alternative;\r\n\tboundary=\"_000_ed6f175b4ef84ceaa921ba8bfdd37739exchexchcom_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_ed6f175b4ef84ceaa921ba8bfdd37739exchexchcom_\r\nContent-Type: text\/plain; charset=\"us-ascii\"\r\n\r\nTest\r\n\r\n--_000_ed6f175b4ef84ceaa921ba8bfdd37739exchexchcom_\r\nContent-Type: text\/html; charset=\"us-ascii\"\r\n\r\n<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text\/html; charset=us-ascii\">\r\n<\/head>\r\n<body>\r\nTest\r\n<\/body>\r\n<\/html>\r\n\r\n--_000_ed6f175b4ef84ceaa921ba8bfdd37739exchexchcom_--\r\n"""
-
     return mime_content
 
 
-def get_emails():
+def return_none(*args, **kwargs):
+    return None
+
+def send_emails(**kwargs):
+    email = MagicMock(spec=Message)
+    email.subject = kwargs.get("subject")
+    email.body = kwargs.get("body")
+    email.sender_name = kwargs.get("account")
+    email.folder = kwargs.get("folder")
+    email.sender_email = kwargs.get("account")
+    email.to_recipients = kwargs.get("to_recipients")
+    email.send_and_save = return_none
+    return email
+
+
+def get_emails(function_parameters):
     emails = MagicMock(spec=QuerySet)
     email = MagicMock(spec=Message)
     email.message_id = "<ed6f175b4ef84ceaa921ba8bfdd37739@exch.exch.com>"
@@ -149,15 +167,42 @@ def get_emails():
     emails.__iter__.return_value = [email]
     return emails
 
-def create_meeting():
-    meeting = MagicMock(spec=CalendarItem)
-    meeting.subject = "Test"
-    meeting.body = "Just a test"
-    meeting.attachments = []
-    meeting.start = EWSDateTime(2020, 11, 10, 14, 0, tzinfo=TEST_TZ)
-    meeting.end = EWSDateTime(2020, 11, 10, 15, 0, tzinfo=TEST_TZ)
-    meeting.required_attendees = ['user@exch.com']
-    return meeting
+
+def calendar_item(**kwargs):
+    invite = MagicMock(spec=CalendarItem)
+    assert kwargs.get("account")
+    assert kwargs.get("folder")
+    assert kwargs.get("start")
+    assert kwargs.get("end")
+    assert kwargs.get("subject")
+    ra = kwargs.get("required_attendees")
+    oa = kwargs.get("optional_attendees")
+    if ra:
+        assert isinstance(ra, list)
+    if oa:
+        assert isinstance(oa, list)
+    
+    invite.save = return_none
+    invite.account = kwargs.get("account")
+    return invite
+    
+def create_meeting(function_parameters):
+    assert "subject" in function_parameters
+    assert "start_time" in function_parameters
+    assert "end_time" in function_parameters
+    assert "subject" in function_parameters
+    assert "body" in function_parameters
+    assert "required_attendees" in function_parameters
+    assert "optional_attendees" in function_parameters
+
+    return {
+        'required_attendees' : function_parameters.get("required_attendees"),
+        'optional_attendees' : function_parameters.get("optional_attendees"),
+        'sender' : function_parameters.get("username"),
+        'subject' : function_parameters.get("subject"),
+        'body' : function_parameters.get("body"),
+        'start_time' : function_parameters.get("start_time"),
+        'end_time' : function_parameters.get("end_time"),}
 
 def resolve_names():
     user = MagicMock(spec=Mailbox)
@@ -168,7 +213,7 @@ def resolve_names():
     info = [user]
     return info
 
-def connect_to_account(username):
+def connect_to_account(username, impersonation=None):
 
     account = MagicMock(spec=Account)
     if username != "empty_user@exch.com":
@@ -177,6 +222,7 @@ def connect_to_account(username):
         account.Identity = ("user@exch.com", None, None, None)
         account.username = "user@exch.com"
         account.get_user = "user@exch.com"
+        account.root.refresh = return_none
         account.protocol = MagicMock()
         account.protocol.resolve_names = MagicMock()
         account.protocol.resolve_names.return_value = resolve_names()
@@ -195,12 +241,12 @@ def create_email_message():
     sent_email.send_and_save = MagicMock()
     return sent_email
 
-def  go_to_folder(folder_name):
+def  go_to_folder(username, account, folder_name):
      folder = MagicMock(spec=Message)
      folder.name = folder_name
      folder.child_folder_count = 0
      folder.all = MagicMock()
-     folder.all.return_value = get_emails()
+     folder.all.return_value = get_emails({})
      return folder
 
 def mocked_exchange_utils(*args):
@@ -208,17 +254,15 @@ def mocked_exchange_utils(*args):
     class MockResponse:
         """Class will be used by the mock to replace exchange_utils in circuits tests"""
         def __init__(self, *arg):
-            self.utils = exchange_utils(MOCK_OPTS, {})
+            self.utils = exchange_interface(MOCK_OPTS, {})
 
-        def create_meeting(self, exchange_email, exchange_meeting_start_time, exchange_meeting_end_time,
-                           exchange_meeting_subject, exchange_meeting_body,
-                           exchange_required_attendees, exchange_optional_attendees):
-            return create_meeting()
+        def create_meeting(self, function_parameters):
+            return create_meeting(function_parameters)
 
         def get_emails(self, username, folder_path=None, email_ids = None, sender=None, subject=None, body=None,
                    start_date=None, end_date=None, has_attachments=None, order_by_recency=None, num_emails=None,
                    search_subfolders=False):
-            return get_emails()
+            return get_emails({})
 
         def create_email_function_results(self, emails):
             return self.utils.create_email_function_results(emails)
