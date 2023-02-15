@@ -1,0 +1,17 @@
+{
+  "status_code": 200,
+  "content": {
+    "timeout_type": "FIRST_SEEN",
+    "number_of_elements": 1,
+    "creation_time": 1440703748272,
+    "name": "FTP Servers",
+    "namespace": "SHARED",
+    "element_type": "IP",
+    "collection_id": 13
+  },
+  "inputs": {
+    "qradar_label": "SOAR_Plugin_Destination_Name",
+    "qradar_reference_set_name": "FTP Servers",
+    "qradar_reference_set_item_value": "1.1.1.1"
+  }
+}

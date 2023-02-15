@@ -1,0 +1,32 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4e8349d3-a5e1-****-****-3d81f5252b7f')/channels/$entity",
+    "id": "19:8d4fbf7358174021ae16374572797fce@thread.tacv2",
+    "createdDateTime": "2022-11-22T12:21:20.4305814Z",
+    "displayName": "Engineering Team",
+    "description": "Engineering 2 subteam",
+    "isFavoriteByDefault": false,
+    "email": "",
+    "webUrl": "https://teams.microsoft.com/l/channel/19%3a8d4fbf7************72797fce%40thread.tacv2/Engineering Team?groupId=4e8349d3-a5e1-****-*****-3d81f5252b7f&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a",
+    "membershipType": "standard",
+    "status_code": 201,
+    "message": "Successfully created channel: Engineering Team"
+  },
+  "raw": null,
+  "inputs": {
+    "ms_channel_name": "Engineering Team",
+    "ms_group_description": "Engineering 2 subteam",
+    "ms_groupteam_name": "Engineering Team"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "2.0.0",
+    "host": "appHost",
+    "execution_time_ms": 9106,
+    "timestamp": "2022-11-22 12:21:20"
+  }
+}
