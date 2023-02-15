@@ -56,5 +56,5 @@ class FunctionComponent(AppFunctionComponent):
             yield StatusMessage("Meeting invite created and sent!")
             yield FunctionResult(results, success=True)
 
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

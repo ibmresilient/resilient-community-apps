@@ -163,7 +163,7 @@ class exchange_interface:
             end_date = EWSDateTime.fromtimestamp(end_date/1000, tz=tz)
             filtered_emails = filtered_emails.filter(datetime_received__lte=end_date)
 
-        if has_attachments:
+        if has_attachments is not None:
             filtered_emails = filtered_emails.filter(has_attachments=has_attachments)
 
         if not order_by_recency:
