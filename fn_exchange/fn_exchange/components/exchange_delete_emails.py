@@ -3,11 +3,10 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-from resilient_lib import ResultPayload
 from resilient_circuits import (AppFunctionComponent, app_function,
-                                StatusMessage, FunctionResult, )
+                                StatusMessage)
 
-from fn_exchange.lib.exchange_helper import PACKAGE_NAME
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, ResultsHandler
 from fn_exchange.lib.exchange_utils import exchange_interface
 
 FN_NAME = "exchange_delete_emails"
@@ -49,8 +48,8 @@ class FunctionComponent(AppFunctionComponent):
             Response <dict> : A response with the mails retrieved and their attributes
                               or the error message if the retrieval process failed
         """
+        rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
         function_parameters = {}
-
         function_parameters["hard_delete"] = getattr(fn_inputs, "exchange_hard_delete", False)
 
         function_parameters["username"] = getattr(fn_inputs, "exchange_email", None)
@@ -96,13 +95,9 @@ class FunctionComponent(AppFunctionComponent):
 
             self.LOG.info(msg)
             yield StatusMessage(msg)
-            yield StatusMessage(f"{num_deleted} emails deleted")
-            
-            rp = ResultPayload(pkgname=PACKAGE_NAME, inputs=fn_inputs)
-            rp_results = rp.done(success=True, content=results)
-            rp_results.update(results)
 
-            yield FunctionResult(rp_results, custom_results=True)
+            yield StatusMessage(f"{num_deleted} emails deleted")
+            yield rh.success(results)
 
         except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+            yield rh.fail(reason=str(err))

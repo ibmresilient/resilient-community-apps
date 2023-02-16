@@ -4,9 +4,9 @@
 """Function implementation"""
 
 from resilient_circuits import (AppFunctionComponent, app_function,
-                                StatusMessage, FunctionResult)
+                                StatusMessage)
 
-from fn_exchange.lib.exchange_helper import PACKAGE_NAME
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, ResultsHandler
 from fn_exchange.lib.exchange_utils import exchange_interface
 
 FN_NAME = "exchange_send_email"
@@ -34,6 +34,7 @@ class FunctionComponent(AppFunctionComponent):
             Response <dict> : A response with the email sent and or the error message
                               if the operation failed
         """
+        rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
         function_parameters = {}
 
         function_parameters["username"]    = getattr(fn_inputs, "exchange_email", None)
@@ -55,7 +56,7 @@ class FunctionComponent(AppFunctionComponent):
             results = utils.create_email_message(function_parameters)
 
             yield StatusMessage("Email sent!")
-            yield FunctionResult(results, success=True)
+            yield rh.success(results)
 
         except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+            yield rh.fail(reason=str(err))

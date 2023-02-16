@@ -5,9 +5,9 @@
 
 from resilient_lib import validate_fields
 from resilient_circuits import (AppFunctionComponent, app_function, 
-                                StatusMessage, FunctionResult)
+                                StatusMessage)
 
-from fn_exchange.lib.exchange_helper import PACKAGE_NAME
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, ResultsHandler
 from fn_exchange.lib.exchange_utils import exchange_interface
 
 
@@ -50,6 +50,7 @@ class FunctionComponent(AppFunctionComponent):
             Response <dict> : A response with the mails retrieved and their attributes
                               or the error message if the retrieval process failed
         """
+        rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
         function_parameters = {}
         
         validate_fields([
@@ -106,10 +107,10 @@ class FunctionComponent(AppFunctionComponent):
 
         results["src_folder"] = function_parameters["src_folder"]
         results["dst_folder"] = function_parameters["dst_folder"]
-        yield FunctionResult(results, success=True)
+        yield rh.success(results)
 
         try:
             pass
 
         except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+            yield rh.fail(reason=str(err))

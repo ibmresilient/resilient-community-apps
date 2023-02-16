@@ -4,9 +4,9 @@
 """Function implementation"""
 
 from resilient_circuits import (AppFunctionComponent, app_function,
-                                StatusMessage, FunctionResult)
+                                StatusMessage)
 
-from fn_exchange.lib.exchange_helper import PACKAGE_NAME
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, ResultsHandler
 from fn_exchange.lib.exchange_utils import exchange_interface
 
 
@@ -38,6 +38,7 @@ class FunctionComponent(AppFunctionComponent):
             Response <dict> : A response with the meeting details or the error message
                               if the meeting creation process failed
         """
+        rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
         function_parameters = {}
         function_parameters["username"] = getattr(fn_inputs, "exchange_email", None)
         function_parameters["start_time"] = getattr(fn_inputs, "exchange_meeting_start_time", None)
@@ -46,7 +47,7 @@ class FunctionComponent(AppFunctionComponent):
         function_parameters["body"] = getattr(fn_inputs, "exchange_meeting_body", None)
         function_parameters["required_attendees"] = getattr(fn_inputs, "exchange_required_attendees", None)
         function_parameters["optional_attendees"] = getattr(fn_inputs, "exchange_optional_attendees", None)
-        
+
         try:
             utils = exchange_interface(self.rc, self.options)
             yield StatusMessage(f"Successfully connected to {function_parameters.get('emails')}")
@@ -54,7 +55,7 @@ class FunctionComponent(AppFunctionComponent):
             yield StatusMessage("Sending out meeting invite")
             results = utils.create_meeting(function_parameters)
             yield StatusMessage("Meeting invite created and sent!")
-            yield FunctionResult(results, success=True)
+            yield rh.success(results)
 
         except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+            yield rh.fail(reason=str(err))
