@@ -74,7 +74,7 @@ email_ids = content.get("email_ids")
 # Loop through all queried emails
 for email_id in email_ids:
   email = emails[email_id]
-  # Extract information and create Artifcats
+  # Extract information and create Artifacts
   if email['sender_name']:
     incident.addArtifact('Email Sender Name', email['sender_name'], 'Sender name for email {}'.format(email_id))
   if email['sender_email']:

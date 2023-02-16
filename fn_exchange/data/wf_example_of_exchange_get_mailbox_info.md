@@ -23,16 +23,38 @@ inputs.exchange_get_email = inputs.exchange_get_email if rule.properties.exchang
 
 ### Post-Processing Script
 ```python
-# Example results
-# results = {
-#   'name': 'firstname lastname',
-#   'email_address': 'user@example.com',
-#   'routing_type': 'SMTP',
-#   'mailbox_type': 'Mailbox'
-# }
+'''
+Example
+-------
+response = {
+  'name': 'firstname lastname',
+  'email_address': 'user@example.com',
+  'routing_type': 'SMTP',
+  'mailbox_type': 'Mailbox'}
 
-incident.addArtifact('Email Sender', results.email_address, 'Email address from Exchange Get Mailbox Info')
-incident.addArtifact('Email Sender Name', results.name, 'Email sender name from Exchange Get Mailbox Info')
+'''
+
+content = results.get("content")
+
+if not results.success:
+  text = u"Unable to create meeting"
+  fail_reason = results.reason
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
+else:
+
+  incident.addArtifact('Email Sender', content.get('email_address'), 'Email address from Exchange Get Mailbox Info')
+  incident.addArtifact('Email Sender Name', content.get('name'), 'Email sender name from Exchange Get Mailbox Info')
+  
+  text  =  "<b>Microsoft Exchange Mailbox Information:</b><br />"
+  text += f"<br />Name: {content.get('name')}"
+  text += f"<br />Email Address: {content.get('email_address')}
+  text += f"<br />Routing Type: {content.get('routing_type')}"
+  text += f"<br />Mailbox Type: {content.get('mailbox_type')}"
+
+noteText = helper.createRichText(text)
+incident.addNote(noteText)
 ```
 
 ---

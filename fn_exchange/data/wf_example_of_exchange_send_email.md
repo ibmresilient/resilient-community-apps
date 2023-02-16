@@ -27,21 +27,37 @@ inputs.exchange_emails = inputs.exchange_emails if rule.properties.exchange_emai
 
 ### Post-Processing Script
 ```python
-# Example results
-# results = {
-#             'recipients': ['user1@example.com', 'user2@example.com'],
-#             'sender': 'sender@example.com',
-#             'subject': 'Subject',
-#             'body': 'HTML Body'
-#           }
+'''
+Example
+-------
+response = {
+  'recipients': ['user1@example.com', 'user2@example.com'],
+  'sender': 'sender@example.com',
+  'subject': 'Subject',
+  'body': 'HTML Body'}
 
-# Create note with results
-note = '''Sender: {}, Recipients: {}
-Subject: {}
-Body: {}
-'''.format(results.sender, results.recipients, results.subject, results.body)
+'''
 
-incident.addNote(note)
+content = results.get("content")
+
+if not results.success:
+  text = u"Unable to create meeting"
+  fail_reason = results.reason
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
+else:
+  start_time = Date(content.get("start_time")).toString()
+  end_time = Date(content.get("end_time")).toString()
+  
+  text  =  "<b>Exchange email:</b><br />"
+  text += f"<br />From: {content.get('sender')}"
+  text += f"<br />Recipients: {content.get('recipients')}"
+  text += f"<br />Subject: {content.get('subject')}"
+  text += f"<br />Body: {content.get('body')}"
+
+noteText = helper.createRichText(text)
+incident.addNote(noteText)
 ```
 
 ---

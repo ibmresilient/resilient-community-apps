@@ -37,7 +37,8 @@ from fn_exchange.lib.exchange_helper import (
 
 class exchange_interface:
 
-    def __init__(self, options:dict):
+    def __init__(self, rc, options:dict):
+        self.rc = rc
         self.options = options
         self.log = logging.getLogger(__file__)
 
