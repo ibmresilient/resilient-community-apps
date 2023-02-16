@@ -42,6 +42,7 @@ RISK_SCORE = "Risk Score"
 SESSION_ID = "Session ID"
 TRUSTEER_ENDPOINT_PROTECTION_DEVICE_ID = "Trusteer Endpoint Protection Device ID"
 USER_IP_ADDRESS = "User IP Address"
+USER_AGENT_STRING = "User Agent String:"
 
 COUNTRY_NAMES = {
     "N/A": "-",
@@ -336,8 +337,9 @@ class EmailProcessor(object):
         incident.discovered_date = self.soar_datetimeformat(self.email_contents_json.get(EVENT_RECEIVED_AT))
         incident.start_date = self.soar_datetimeformat(self.email_contents_json.get(EVENT_RECEIVED_AT))
         incident.plan_status = "A"
+        incident.severity_code = self.soar_severity(self.email_contents_json.get(RISK_SCORE))
         incident.properties.trusteer_ppd_puid = self.email_contents_json.get(PERMANENT_USER_ID)
-
+        incident.properties.trusteer_ppd_application_id = self.email_contents_json.get(APPLICATION_ID)
 
     def update_alert_data_table(self):
         # Add a new row to the Trusteer Alert data table
@@ -352,14 +354,29 @@ class EmailProcessor(object):
         alert_row.trusteer_ppd_dt_organization = self.email_contents_json.get(ORGANIZATION)
         alert_row.trusteer_ppd_dt_reason = self.email_contents_json.get(REASON)
         alert_row.trusteer_ppd_dt_recommendation = self.email_contents_json.get(RECOMMENDATION)
+        if self.email_contents_json.get(COUNTRY_NAME) != 'N/A':
+            alert_row.trusteer_ppd_dt_country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
+        alert_row.trusteer_ppd_dt_city = self.email_contents_json.get(CITY_NAME)
         if self.email_contents_json.get(RISK_SCORE) != 'N/A':
             alert_row.trusteer_ppd_dt_risk_score = int(self.email_contents_json.get(RISK_SCORE))
-        alert_row.trusteer_ppd_dt_country = COUNTRY_NAMES.get(self.email_contents_json.get(COUNTRY_NAME), "-")
-        alert_row.trusteer_ppd_dt_city = self.email_contents_json.get(CITY_NAME)
 
+    def add_artifacts(self):
+        # Add any Trusteer information (not in the data table) as artifacts here.
+        if self.email_contents_json.get(USER_AGENT_STRING) and (self.email_contents_json.get(USER_AGENT_STRING) != 'N/A'):
+            artifact_value = self.email_contents_json.get(USER_AGENT_STRING)
+            artifact_type = "User Agent"
+            artifact_description = "Trusteer PPD created artifact."
+            incident.addArtifact(artifact_type, artifact_value, artifact_description)
+        if self.email_contents_json.get(MALWARE) and (self.email_contents_json.get(MALWARE) != 'N/A'):
+            artifact_value = self.email_contents_json.get(MALWARE)
+            artifact_type = "Malware Family/Variant"
+            artifact_description = "Trusteer PPD created artifact."
+            incident.addArtifact(artifact_type, artifact_value, artifact_description)
+            
+    def add_incident_note(self):
         # Add a note containing the email contents
         incident.addNote("Email from Trusteer Pinpoint Detect:<br> {0}".format(self.email_contents))
-        
+
     def get_trusteer_ppd_puid(self):
         trusteer_ppd_puid = self.email_contents_json.get("Permanent User ID", None)
         if trusteer_ppd_puid is None:
@@ -393,6 +410,19 @@ class EmailProcessor(object):
                 incident.addEmailAttachment(attachment.id)
                 incident.addArtifact(
                     "Email Attachment Name", attachment.suggested_filename, "")
+
+    @staticmethod
+    def soar_severity(risk_score):
+        if risk_score and risk_score != 'N/A':
+            risk_score = int(risk_score)
+            if risk_score <= 200:
+                return 'Low'
+            elif risk_score >= 201 and risk_score <= 499:
+                return 'Medium'
+            else:
+                return 'High'
+        else: 
+            return None
 
     @staticmethod
     def soar_datetimeformat(value, date_format="%Y-%m-%d %H:%M:%S UTC", split_at=None):
@@ -494,8 +524,15 @@ else:
 # Update the alert data table
 processor.update_alert_data_table()
 
+# Add any artifacts from the email
+processor.add_artifacts()
+
+# Add incident note with contents of the email
+processor.add_incident_note()
+
 # Add email message attachments to incident
 processor.processAttachments()
+
 
 if SAVE_CONVERSATION:
     processor.add_email_conversation(emailmessage.headers, 

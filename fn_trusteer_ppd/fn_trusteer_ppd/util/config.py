@@ -15,6 +15,7 @@ api_token=xxx
 endpoint_url=https://trusteer.com
 # Trusteer REST API version
 api_version=v1
+verify=true
 # 
 # # Specify paths to files if client certs are needed to authenticate
 # client_auth_cert = <path_to_cert.pem>

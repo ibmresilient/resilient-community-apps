@@ -15,6 +15,7 @@ PACKAGE_NAME = "fn_trusteer_ppd"
 
 # Trusteer REST API header
 HEADER = { 'Content-Type': 'application/json' }
+PINPOINT_FEEDBACK_URL = "/api/{api_version}/update_pinpoint_session_resolution"
 
 # URL prefix to refer back to your console for a specific alert, event, etc.
 LINKBACK_URL = "{base_url}/search-results?{id_type}={id}&type=session"
@@ -39,9 +40,11 @@ class AppCommon():
         self.api_token = app_configs.get("api_token")
         self.endpoint_url = app_configs.get("endpoint_url")
         self.api_version = app_configs.get("api_version")
+        self.base_url = urljoin(self.endpoint_url, "-api/api/{version}".format(version=self.api_version))
         self.verify = _get_verify_ssl(app_configs)
 
         self.header = self._make_header(self.api_token)
+        self.rc = RequestsCommon()
 
     def _get_uri(self, cmd: str) -> str:
         """
@@ -52,7 +55,7 @@ class AppCommon():
         :return: complete URL
         :rtype: str
         """
-        return urljoin(self.endpoint_url, cmd.format(api_version=self.api_version))
+        return urljoin(self.base_url, cmd.format(api_version=self.api_version))
 
     def _make_header(self, token: str) -> dict:
         """Build API header using authorization token
@@ -83,6 +86,53 @@ class AppCommon():
         :rtype: str
         """
         return linkback_url.format(base_url=self.endpoint_url, id_type=id_type, id=id)
+
+    def update_classification(self, session_id: str, application_id: str, feedback: str, fraud_mo: str) -> dict:
+        """_summary_
+
+        Args:
+            classification (str): The new resolution value for the record. 
+            The possible values are:
+                confirmed_fraud - You confirm that the session was fraudulent whether Pinpoint generated an alert or not.
+                confirmed_legitimate - Pinpoint generated an alert and you confirm that the session is not fraudulent.
+                undetermined - Pinpoint generated an alert and you are not able to determine whether the session was fraudulent.
+                pending_confirmation - Default, waiting for your classification.
+
+            fraud_mo (str): fraud_mo
+                (Optional) If you set feedback to confirmed_fraud and confirm that the session was fraudulent, 
+                            you can also set the specific type of fraud that occurred. If you are not sure of the type of 
+                            fraud, do not set the fraud_mo field.
+
+                account_takeover - An attempt was made to access the account using stolen credentials from the fraudster device.
+                remote_access_tool - An attempt was made to access the account using a device that is suspected to be remotely controlled by another device.
+                first_party - The account owner is attempting to commit fraud.
+                social_engineering - The account owner is the victim of a social-engineering attack.
+                stolen_device - An attempt was made to access the account from a stolen device.
+                mule_account - The account is a mule account that is used by fraudsters
+
+        Returns:
+            dict: _description_
+        """
+        # URL: https://orgname-api.trusteer.com/api/v1/update_pinpoint_session_resolution
+        url = self._get_uri(PINPOINT_FEEDBACK_URL)
+        data = {
+            "app_id": application_id,
+            "customer_session_id": session_id,
+            "feedback": feedback,
+            "api_key": self.api_token
+        }
+        # If confirmed fraud, set fraud_mo if it is specified
+        if fraud_mo and feedback == "confirmed_fraud":
+            data["fraud_mo"] = fraud_mo
+
+        response = self.rc.execute("POST",
+                                   url=url,
+                                   json=data,
+                                   headers=self.header,
+                                   verify=self.verify)
+        response_json = response.json()
+
+        return response_json
 
 def _get_verify_ssl(app_configs: dict):
     """
