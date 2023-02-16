@@ -35,7 +35,7 @@ Exchange email and meeting capabilities. The package provided has the following 
 - Send email to a list of recipients""",
     install_requires=[
         "resilient_circuits>=45.0.0",
-        "exchangelib ~= 4.9.0"
+        "exchangelib ~= 4.6.2"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
