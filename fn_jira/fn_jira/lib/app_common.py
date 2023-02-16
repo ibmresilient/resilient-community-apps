@@ -134,21 +134,11 @@ class AppCommon():
         issues_list = self.jira_client.search_issues(
             search_filters,
             maxResults=max_results,
-            fields=["issuetype", "project", "priority", "updated", "status", "description", "attachment", "summary", "comment", "created", "resolutiondate"],
             json_result=True
         ).get("issues")
 
         # Format each dictionary
         for issue in issues_list:
-
-            for key, value in issue.get("fields").items():
-                issue[key] = value
-            issue.pop("fields")
-
-            # Change the value of the dict key to the one value that is used in that dict
-            for key, value in {"issuetype": "name", "project": "key", "priority": "name", "status": "name", "comment": "comments"}.items():
-                if issue.get(key):
-                    issue[key] = issue[key].get(value)
 
             if not data_to_get_from_case.get(issue.get("key")):
                 data_to_get_from_case[issue.get("key")] = {}
@@ -157,18 +147,19 @@ class AppCommon():
             data_to_get_from_case[issue.get("key")]["attachments"] = False
 
             # Create a list of just comment string
-            comments = issue.get("comment")
+            comments = issue.get("fields").get("comment").get("comments")
             if comments:
                 data_to_get_from_case[issue.get("key")]["comments"] = True
                 for comment_num in range(len(comments)):
                     comments[comment_num] = comments[comment_num].get("body")
+            issue["fields"]["comment"] = comments if comments else []
 
             # Convert the string times to integer epoch time
-            issue["created"] = str_time_to_int_time(issue.get("created"))
-            issue["updated"] = str_time_to_int_time(issue.get("updated"))
+            issue["fields"]["created"] = str_time_to_int_time(issue.get("fields").get("created"))
+            issue["fields"]["updated"] = str_time_to_int_time(issue.get("fields").get("updated"))
 
             # Create a list of just attachment filenames
-            attachments = issue.get("attachment")
+            attachments = issue.get("fields").get("attachment")
             if attachments:
                 data_to_get_from_case[issue.get("key")]["attachments"] = True
                 for attach_num in range(len(attachments)):
@@ -176,8 +167,9 @@ class AppCommon():
                         "filename": attachments[attach_num].get("filename"),
                         "content": self.jira_client._session.get(attachments[attach_num].get("content")).content
                     }
+            issue["fields"]["attachment"] = attachments if attachments else []
 
-            issue_description = issue.get("description")
+            issue_description = issue.get("fields").get("description")
             if check_jira_issue_linked_to_task(issue_description):
                 task_id = get_id_from_jira_issue_description(issue_description)
                 data_to_get_from_case["tasks"].append({

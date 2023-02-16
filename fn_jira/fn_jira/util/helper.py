@@ -395,19 +395,6 @@ def update_soar_incident(res_client, soar_cases_to_update):
                 "changes": []
                 }
 
-        # Close SOAR incident if linked Jira issue is closed
-        # If the Jira issue has a resolutiondate then it has been closed
-        if jira.get("resolutiondate"):
-            soar_update_payload['patches'][soar.get("id")]["changes"].append(
-                add_changes_to_soar_payload("text", "A", "C", "plan_status")
-            )
-            soar_update_payload['patches'][soar.get("id")]["changes"].append(
-                add_changes_to_soar_payload("text", None, "Closed on Jira", "resolution_summary")
-            )
-            soar_update_payload['patches'][soar.get("id")]["changes"].append(
-                add_changes_to_soar_payload("text", None, "Resolved", "resolution_id")
-            )
-
         # If Jira issue is linked to SOAR incident and not a SOAR task
         # Check if new comments added or old comments changed/deleted
         soar_update_comments_attachments(jira, soar, res_client, "comment")
