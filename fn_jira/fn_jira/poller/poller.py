@@ -18,11 +18,6 @@ from fn_jira.util import helper, poller_helper
 
 PACKAGE_NAME = "fn_jira"
 GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
-ENTITY_ID = "<- ::CHANGE_ME:: ->"  # name of field in the endpoint entity (alert, case, etc) with the ID value
-ENTITY_CLOSE_FIELD = "<- ::CHANGE_ME:: ->" # name of field in endpoint entity to reference the close state
-SOAR_ENTITY_ID_FIELD = "<- ::CHANGE_ME:: ->" # name of custom IBM SOAR case field to retain the endpoint entity_id
-ENTITY_LABEL = "<- ::CHANGE_ME:: ->" # label the name the case, alert, event, etc. native to your endpoint solution
-ENTITY_COMMENT_HEADER = "Created by <- ::CHANGE_ME:: ->" # header used to identify comments create by the endpoint entity
 
 LOG = getLogger(__name__)
 
@@ -34,6 +29,7 @@ TEMPLATE_DIR = path.join(path.dirname(__file__), "data")
 CREATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_create_case.jinja")
 UPDATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_update_case.jinja")
 CLOSE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_close_case.jinja")
+UPDATE_TASK_TEMPLATE = path.join(TEMPLATE_DIR, "soar_update_task.jinja")
 
 class PollerComponent(AppFunctionComponent):
     """
@@ -83,6 +79,7 @@ class PollerComponent(AppFunctionComponent):
         self.soar_create_case_template = self.global_settings.get("soar_create_case_template")
         self.soar_update_case_template = self.global_settings.get("soar_update_case_template")
         self.soar_close_case_template = self.global_settings.get("soar_close_case_template")
+        self.soar_update_task_template = self.global_settings.get("soar_update_task_template")
 
         # rest_client is used to make IBM SOAR API calls
         self.res_client = self.rest_client()
@@ -223,11 +220,8 @@ class PollerComponent(AppFunctionComponent):
 
         # List of Jira issues to add as incidents on SOAR
         jira_issues_to_add_to_soar = []
-
-        # A list of lists that contain the SOAR case to update and its corresponding Jira issue
-        soar_cases_to_update = []
-
-        soar_cases_to_close = []
+        # A list of lists that contain the SOAR case and its corresponding Jira issue
+        soar_cases_to_update = soar_cases_to_close = soar_tasks_to_update = []
 
         # Loop through the Jira servers dict
         for jira_server in jira_issues_dict:
@@ -250,13 +244,13 @@ class PollerComponent(AppFunctionComponent):
                 jira_issue_key = jira_issue.get("key")
                 jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
 
-                if helper.check_jira_issue_linked_to_task(jira_issue.get("description")):
+                if helper.check_jira_issue_linked_to_task(jira_issue.get("fields").get("description")):
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
                     jira_issues_with_soar_case.append(jira_issue)
                 elif jira_issue_key in soar_cases_jira_key:
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
                     jira_issues_with_soar_case.append(jira_issue)
-                elif not jira_issue.get("resolutiondate"):
+                elif not jira_issue.get("fields").get("resolutiondate"):
                     # If the Jira issue is not found on SOAR than add to jira_issues_to_add_to_soar list
                     jira_issues_to_add_to_soar.append(jira_issue)
 
@@ -265,22 +259,23 @@ class PollerComponent(AppFunctionComponent):
                 for soar_case in soar_cases_list:
                     soar_tasks = soar_case.get("tasks") # Get the list of tasks from the SOAR case if they exist
                     for jira_issue in jira_issues_with_soar_case:
-                        jira_issue_description = jira_issue.get("description") # Get the description of the Jira issue
+                        jira_issue_updated = jira_issue.get("fields").get("updated")
+                        jira_issue_description = jira_issue.get("fields").get("description") # Get the description of the Jira issue
                         # Check if the Jira issue is linked to a SOAR task that needs to be updated
                         if soar_tasks and helper.check_jira_issue_linked_to_task(jira_issue_description):
                             task_id = helper.get_id_from_jira_issue_description(jira_issue_description)
                             # Loop through all tasks on the SOAR case
                             for task in soar_tasks:
                                 if task.get("id") == task_id:
-                                    if jira_issue.get("updated") > task.get("datatable").get("cells").get("last_updated").get("value"):
-                                        # Add matching SOAR case and Jira issue to soar_cases_to_update list
-                                        soar_cases_to_update.append([jira_issue, soar_case])
+                                    if jira_issue_updated > task.get("datatable").get("cells").get("last_updated").get("value"):
+                                        # Add matching SOAR case and Jira issue to soar_tasks_to_update list
+                                        soar_tasks_to_update.append([jira_issue, soar_case])
                                         break
                         # Check if SOAR incident needs to be updated
                         if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id") and\
-                        jira_issue.get("updated") > soar_case.get("inc_last_modified_date"):
+                        jira_issue_updated > soar_case.get("inc_last_modified_date"):
                             # Check if the Jira issue has been closed
-                            if jira_issue.get("resolutiondate"):
+                            if jira_issue.get("fields").get("resolutiondate"):
                                 # Add matching SOAR case and Jira issue to soar_cases_to_close list
                                 soar_cases_to_close.append([jira_issue, soar_case])
                                 break
@@ -289,18 +284,23 @@ class PollerComponent(AppFunctionComponent):
                             break
 
         # Create new SOAR cases from Jira issues
-        for jira_issue in jira_issues_to_add_to_soar:
-            self.soar_create_case(jira_issue)
-            LOG.info(f"SOAR incident created: {jira_issue.get('summary')}")
+        if jira_issues_to_add_to_soar:
+            for jira_issue in jira_issues_to_add_to_soar:
+                self.soar_create_case(jira_issue)
+                LOG.info(f"SOAR incident created: {jira_issue.get('summary')}")
 
         # Close SOAR cases that's linked Jira issue is closed
         if soar_cases_to_close:
             self.soar_close_cases(soar_cases_to_close)
 
+        # Update SOAR tasks with data from linked Jira issues
+        # if soar_tasks_to_update:
+        #     self.soar_update_tasks(soar_tasks_to_update)
+
         # Update SOAR cases with data from linked Jira issues
-        # if soar_cases_to_update:
-        #     # helper.update_soar_incident(self.rest_client(), soar_cases_to_update)
-        #     self.soar_update_cases(soar_cases_to_update)
+        if soar_cases_to_update:
+            # helper.update_soar_incident(self.rest_client(), soar_cases_to_update)
+            self.soar_update_cases(soar_cases_to_update)
 
     def soar_create_case(self, jira_issue):
         """
@@ -320,9 +320,10 @@ class PollerComponent(AppFunctionComponent):
         create_soar_case = self.soar_common.create_soar_case(
             soar_create_payload)
 
-        if jira_issue.get("attachment"):
+        attachments = jira_issue.get("fields").get("attachment")
+        if attachments:
             # Get attachments from the Jira ticket
-            for attach in jira_issue.get("attachment"):
+            for attach in attachments:
                 try:
                     # Add the attachment to the SOAR incident
                     self.res_client.post_attachment(f"/incidents/{create_soar_case.get('id')}/attachments",
@@ -337,25 +338,25 @@ class PollerComponent(AppFunctionComponent):
         """
         Close SOAR cases who's linked Jira issue has been closed.
         :param soar_cases_to_close: A list of lists that contain the SOAR cases to close and their corresponding Jira issues.
+        :return: None
         """
-
-        soar_update_payload = {"patches": {}}
+        soar_close_payload = {"patches": {}}
 
         for close in soar_cases_to_close:
             soar = close[1]
 
-            soar_close_payload = make_payload_from_template(
+            payload = make_payload_from_template(
                 self.soar_close_case_template,
                 CLOSE_CASE_TEMPLATE,
                 {"jira": close[0], "soar": soar})
 
-            soar_update_payload["patches"][soar.get("id")] = soar_close_payload
+            soar_close_payload["patches"][soar.get("id")] = payload
 
          # If SOAR payload is not empty then update fields on cases
-        if soar_update_payload["patches"]:
+        if soar_close_payload["patches"]:
             # Send put request to SOAR
             # This will update all cases that need to be updated
-            self.res_client.put("/incidents/patch", soar_update_payload)
+            self.res_client.put("/incidents/patch", soar_close_payload)
 
     def soar_update_cases(self, soar_cases_to_update):
         """
@@ -363,177 +364,34 @@ class PollerComponent(AppFunctionComponent):
         :param soar_cases_to_update: A list of lists that contain the SOAR case to update and its corresponding Jira issue
         :return: None
         """
-        soar_to_jira_fields = {
-            "name": "summary",
-            "description": "description",
-            "severity_code": "priority",
-            "jira_internal_url": "self",
-            "jira_issue_id": "key",
-            "jira_server": "jira_server",
-            "jira_url": "self",
-            "jira_project_key": "project",
-            "inc_last_modified_date": "updated",
-            "jira_issue_status": "status"
-        }
-
-        soar_field_type = {
-            "name": "text",
-            "description": "textarea",
-            "severity_code": "text",
-            "jira_internal_url": "textarea",
-            "jira_issue_id": "text",
-            "jira_server": "text",
-            "jira_url": "textarea",
-            "jira_project_key": "text",
-            "inc_last_modified_date": "date",
-            "jira_issue_status": "text"
-        }
-
-        # Payload for updating the field "SOAR Case Last Updated" on SOAR cases to update
         soar_update_payload = {"patches": {}}
 
-        # Payload for updating SOAR tasks
-        task_update_payload = []
-
         for update in soar_cases_to_update:
-            jira = update[0] # Get the Jira issue
-            soar = update[1] # Get the SOAR case
-            # Get the description of the Jira issue
-            jira_issue_description = jira.get("description")
+            jira = update[0]
+            soar = update[1]
 
-            # Check if the Jira issue is linked to a SOAR task
-            if helper.check_jira_issue_linked_to_task(jira_issue_description):
-                task_id = helper.get_id_from_jira_issue_description(jira_issue_description)
-                for task in soar.get("tasks"):
-                    if task.get("id") == task_id:
-                        # Update SOAR task with Jira data
-                        task_update_payload.append(helper.soar_update_task(jira, self.res_client, task))
-                        break
-                continue
+            payload = make_payload_from_template(
+                self.soar_update_case_template,
+                UPDATE_CASE_TEMPLATE,
+                {"jira": jira, "soar": soar})
 
-            soar_update_payload['patches'][soar.get("id")] = {
-                    "version": soar.get("vers")+1,
-                    "changes": []
-                    }
+            soar_update_payload["patches"][soar.get("id")] = payload
 
-            # Close SOAR incident if linked Jira issue is closed
-            # If the Jira issue has a resolutiondate then it has been closed
-            if jira.get("resolutiondate"):
-                soar_update_payload['patches'][soar.get("id")]["changes"].append(
-                    helper.add_changes_to_soar_payload("text", "A", "C", "plan_status")
-                )
-                soar_update_payload['patches'][soar.get("id")]["changes"].append(
-                    helper.add_changes_to_soar_payload("text", None, "Closed on Jira", "resolution_summary")
-                )
-                soar_update_payload['patches'][soar.get("id")]["changes"].append(
-                    helper.add_changes_to_soar_payload("text", None, "Resolved", "resolution_id")
-                )
+    def soar_update_tasks(self, soar_tasks_to_update):
+        """
+        Update the SOAR tasks with new data from the corresponding Jira issue
+        :param soar_tasks_to_update: A list of lists that contain the SOAR tasks to update and its corresponding Jira issue
+        :return: None
+        """
+        soar_task_update_payload = {"patches": {}}
 
-            # If Jira issue is linked to SOAR incident and not a SOAR task
-            # Check if new comments added or old comments changed/deleted
-            helper.soar_update_comments_attachments(jira, soar, self.res_client, "comment")
+        for update in soar_tasks_to_update:
+            jira = update[0]
+            soar = update[1]
 
-            # Check if new attachments added or old attachments deleted
-            helper.soar_update_comments_attachments(jira, soar, self.res_client, "attachment")
+            payload = make_payload_from_template(
+                self.soar_update_task_template,
+                UPDATE_TASK_TEMPLATE,
+                {"jira": jira, "soar": soar})
 
-            for key, value in soar_to_jira_fields.items():
-                soar_value = soar.get(key)
-                jira_value = jira.get(value)
-
-                if key == "jira_url": # If the key is equal to jira_url
-                    # Create jira_url
-                    jira_key = jira.get("key")
-                    jira_value = f'<a href="{jira_value[:jira_value.index("/", 8)]}/browse/{jira_key}">{jira_key}</a>'
-                    del jira_key
-
-                if soar_value != jira_value: # Check if the current SOAR value is different fromt the current Jira value
-                    soar_update_payload['patches'][soar.get("id")]["changes"].append(
-                        helper.add_changes_to_soar_payload(soar_field_type[key], soar_value, jira_value, key)
-                    )
-
-        try:
-            # If SOAR payload is not empty then update fields on cases
-            if soar_update_payload["patches"]:
-                # Send put request to SOAR
-                # This will update all cases that need to be updated
-                self.res_client.put("/incidents/patch", soar_update_payload)
-
-            # If task update payload is not empty then update fields on tasks
-            if task_update_payload:
-                # Send put request to SOAR
-                # This will update all tasks that need to be updated
-                self.res_client.put("/tasks", task_update_payload)
-
-        except Exception as e:
-            raise IntegrationError(str(e))
-
-    # def process_query_list(self, query_results):
-    #     """
-    #     Perform all the processing on the entity list, creating, updating and closing SOAR
-    #     cases based on the states of the endpoint entities.
-
-    #     The logic is to determine if a SOAR case needs to be created, updated or closed, and
-    #     apply the correct template file to apply the field changes.
-
-    #     :param query_results: list of endpoint entities to check against SOAR cases
-    #     :type query_results: list
-    #     """
-
-    #     try:
-    #         cases_insert = cases_closed = cases_updated = 0
-    #         for entity in query_results:
-    #             entity_id = get_entity_id(entity)
-
-    #             # create linkback url
-    #             entity["entity_url"] = self.app_common.make_linkback_url(entity_id)
-
-    #             # determine if this is an existing SOAR case
-    #             soar_case, _error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: entity_id }, open_cases=False)
-
-    #             # if case does not exist, create a new one
-    #             if not soar_case:
-    #                 # create the SOAR case
-    #                 soar_create_payload = make_payload_from_template(
-    #                     self.soar_create_case_template,
-    #                     CREATE_CASE_TEMPLATE,
-    #                     entity)
-    #                 create_soar_case = self.soar_common.create_soar_case(
-    #                     soar_create_payload)
-
-    #                 soar_case_id = create_soar_case.get("id") # get newly created case_id
-
-    #                 cases_insert += 1
-    #                 LOG.info("Created SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
-    #             else:
-    #                 soar_case_id = soar_case.get("id")
-
-    #                 if is_entity_closed(entity):
-    #                     if soar_case.get("plan_status", "C") == "A":
-    #                         # close the SOAR case
-    #                         soar_close_payload = make_payload_from_template(
-    #                             self.soar_close_case_template,
-    #                             CLOSE_CASE_TEMPLATE,
-    #                             entity)
-    #                         _close_soar_case = self.soar_common.update_soar_case(
-    #                             soar_case_id,
-    #                             soar_close_payload)
-
-    #                         cases_closed += 1
-    #                         LOG.info("Closed SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
-    #                 else:
-    #                     # perform an update operation on the existing SOAR case
-    #                     soar_update_payload = make_payload_from_template(
-    #                         self.soar_update_case_template,
-    #                         UPDATE_CASE_TEMPLATE,
-    #                         entity)
-    #                     _update_soar_case = self.soar_common.update_soar_case(
-    #                         soar_case_id,
-    #                         soar_update_payload)
-
-    #                     cases_updated += 1
-    #                     LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
-
-    #         LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
-    #                  cases_insert, cases_closed, cases_updated)
-    #     except Exception as err:
-    #         LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
+            soar_task_update_payload["patches"][soar.get("id")] = payload
