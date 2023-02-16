@@ -5,10 +5,10 @@
 
 # Exchange Move Folder Contents and Delete Folder
 
-## Function - Exchange Move Folder Contents and Delete Folder
+## Function - Exchange Move Emails
 
 ### API Name
-`exchange_move_folder_contents_and_delete_folder`
+`exchange_move_emails`
 
 ### Output Name
 `None`
@@ -19,10 +19,12 @@
 ### Pre-Processing Script
 ```python
 # Set inputs
-inputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email
-inputs.exchange_delete_if_no_subfolders = inputs.exchange_delete_if_no_subfolders if rule.properties.exchange_delete_if_no_subfolders is None else rule.properties.exchange_delete_if_no_subfolders
-inputs.exchange_folder_path = inputs.exchange_folder_path if rule.properties.exchange_folder_path is None else rule.properties.exchange_folder_path
-inputs.exchange_destination_folder_path = inputs.exchange_destination_folder_path if rule.properties.exchange_destination_folder_path is None else rule.properties.exchange_destination_folder_path
+inputs.exchange_email = inputs.exchange_email if not rule.properties.exchange_email else rule.properties.exchange_email
+inputs.exchange_force_delete_subfolders = inputs.exchange_force_delete_subfolders if not rule.properties.exchange_force_delete_subfolders else rule.properties.exchange_force_delete_subfolders
+inputs.exchange_folder_path = inputs.exchange_folder_path if not rule.properties.exchange_folder_path else rule.properties.exchange_folder_path
+inputs.exchange_destination_folder_path = inputs.exchange_destination_folder_path if not rule.properties.exchange_destination_folder_path else rule.properties.exchange_destination_folder_path
+inputs.exchange_force_delete_subfolders = inputs.exchange_force_delete_subfolders if rule.properties.exchange_force_delete_subfolders is None else rule.properties.exchange_force_delete_subfolders
+
 ```
 
 ### Post-Processing Script

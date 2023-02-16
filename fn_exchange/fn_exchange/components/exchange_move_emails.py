@@ -7,7 +7,7 @@ from resilient_lib import validate_fields
 from resilient_circuits import (AppFunctionComponent, app_function, 
                                 StatusMessage, FunctionResult)
 
-from fn_exchange.lib import constants
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME
 from fn_exchange.lib.exchange_utils import exchange_interface
 
 
@@ -17,7 +17,7 @@ class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'exchange_find_emails' """
 
     def __init__(self, opts):
-        super(FunctionComponent, self).__init__(opts, constants.PACKAGE_NAME)
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -54,9 +54,10 @@ class FunctionComponent(AppFunctionComponent):
         
         validate_fields([
             "exchange_destination_folder_path",
-            "exchange_delete_source_folder"], fn_inputs)
+            "exchange_delete_source_folder",
+            "exchange_force_delete_subfolders"], fn_inputs)
 
-        function_parameters["delete_src_folder"] = fn_inputs.exchange_delete_source_folder
+        delete_src_folder = fn_inputs.exchange_delete_source_folder
         function_parameters["dst_folder"] = fn_inputs.exchange_destination_folder_path
         function_parameters["force_delete"] = fn_inputs.exchange_force_delete_subfolders
 
@@ -83,7 +84,7 @@ class FunctionComponent(AppFunctionComponent):
         yield StatusMessage("Finding emails")
         interface = exchange_interface(self.rc, self.options)
         results, retrieved_emails = interface.move_emails(
-            function_parameters, function_parameters["delete_src_folder"])
+            function_parameters, delete_src_folder)
         
         src_folder = results.get("src_folder")
         dst_folder = results.get("dst_folder")
@@ -99,7 +100,7 @@ class FunctionComponent(AppFunctionComponent):
         yield StatusMessage(msg)
         yield StatusMessage(f"{len(results.get('email_ids'))} emails were moved")
         
-        if function_parameters["delete_src_folder"]:
+        if delete_src_folder:
             yield StatusMessage(f"Deleting folder {function_parameters['src_folder']}")
             src_folder.delete()
 

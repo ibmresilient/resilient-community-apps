@@ -1,44 +1,35 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_exchange.lib import constants
+from resilient_circuits import (
+    AppFunctionComponent, app_function, StatusMessage, FunctionResult)
+
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME
 from fn_exchange.lib.exchange_utils import exchange_interface
 
+FN_NAME = "exchange_get_mailbox_info"
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'exchange_get_mailbox_info"""
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements function 'exchange_find_emails' """
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_exchange", {})
-        self.opts = opts
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_exchange", {})
-        self.opts = opts
-
-    @function("exchange_get_mailbox_info")
-    def _exchange_get_mailbox_info_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: Get mailbox info from exchange"""
         try:
             # Get the function parameters:
-            log = logging.getLogger(__name__)
-            get_user = kwargs.get('exchange_get_email')
-            log.info("exchange_get_email: %s" % get_user)
+            get_user = getattr(fn_inputs, 'exchange_get_email', None)
+            self.LOG.info(f"exchange_get_email: {get_user}")
 
-            # Initialize utils
-            utils = exchange_interface(self.options, self.opts)
+            utils = exchange_interface(self.rc, self.options)
 
             # Connect to server
             username = self.options.get("email")
-            yield StatusMessage("Getting mailbox info for %s" % get_user)
+            yield StatusMessage(f"Getting mailbox info for {get_user}")
             account = utils.connect_to_account(username)
 
             # Get mailbox info
@@ -47,19 +38,16 @@ class FunctionComponent(ResilientComponent):
                 info = info[0]
                 results = {
                     "name": getattr(info, "name", ""),
-                    "email_address": getattr(info, "email_address", ""),
-                    "routing_type": getattr(info, "routing_type", ""),
-                    "mailbox_type": getattr(info, "mailbox_type", ""),
-                    "success": True
-                }
-
+                    "email_address" : getattr(info, "email_address", ""),
+                    "routing_type"  : getattr(info, "routing_type", ""),
+                    "mailbox_type"  : getattr(info, "mailbox_type", "")}
             else:
-                results = {"success": False}
-                yield StatusMessage("No mailbox found for %s" % get_user)
+                yield FunctionResult(results, success=False, reason="Unable retrieve mailbox information")
 
-            yield StatusMessage("Done getting mailbox info")
+                yield StatusMessage(f"No mailbox found for {get_user}")
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+            yield StatusMessage("Completed retrieving mailbox information")
+            yield FunctionResult(results, success=True)
+
+        except Exception as err:
+            yield FunctionResult(results, success=False, reason=str(err))

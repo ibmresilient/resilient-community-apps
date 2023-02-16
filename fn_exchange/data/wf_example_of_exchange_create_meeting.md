@@ -29,26 +29,41 @@ inputs.exchange_optional_attendees = rule.properties.exchange_optional_attendees
 
 ### Post-Processing Script
 ```python
-# results = {
-#                 'required_attendees':required1@example.com,required2@example.com
-#                 'optional_attendees': optional1@example.com,...
-#                 'sender': sender@example.com
-#                 'subject': meeting subject
-#                 'body': meeting body
-#                 'start_time': epoch start time
-#                 'end_time': epoch end time
-#             }
+'''
+Results:
+--------
+   'required_attendees':required1@example.com,required2@example.com
+   'optional_attendees': optional1@example.com,...
+   'sender': sender@example.com
+   'subject': meeting subject
+   'body': meeting body
+   'start_time': epoch start time
+   'end_time': epoch end time
+'''
+
 from java.util import Date
 
-start_time = Date(results.start_time).toString()
-end_time = Date(results.end_time).toString()
-noteText = '''Meeting created from Exchange Create Meeting
-Subject: {}
-From {} to {}
-Required Attendees: {}
-Optional Attendees: {}
-Body: {}'''.format(results.subject, start_time, end_time, results.required_attendees, results.optional_attendees, results.body)
+content = results.get("content")
 
+if not results.success:
+  text = u"Unable to create meeting"
+  fail_reason = results.reason
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
+else:
+  start_time = Date(content.get("start_time")).toString()
+  end_time = Date(content.get("end_time")).toString()
+  
+  text  =  "<b>Meeting created from Exchange Create Meeting:</b><br />"
+  text += f"<br />Subject: {content.get('subject')}"
+  text += f"<br />Start time: {content.get('start_time')}"
+  text += f"<br />End time: {content.get('end_time')}"
+  text += f"<br />Required Attendees: {content.get('required_attendees')}" 
+  text += f"<br />Optional Attendees: {content.get('optional_attendees')}" 
+  text += f"<br />Body: {content.get('body')}"
+
+noteText = helper.createRichText(text)
 incident.addNote(noteText)
 ```
 

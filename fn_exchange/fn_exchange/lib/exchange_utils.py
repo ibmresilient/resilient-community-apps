@@ -37,14 +37,13 @@ from fn_exchange.lib.exchange_helper import (
 
 class exchange_interface:
 
-    def __init__(self, rc, options):
+    def __init__(self, options:dict):
         self.options = options
-        self.rc = rc
         self.log = logging.getLogger(__file__)
 
 
-    def connect_to_account(self, primary_smtp_address, impersonation=False) -> exchangelib.Account:
-        """Connect to specified account and return it"""
+    def connect_to_account(self, primary_smtp_address:str, impersonation=False) -> exchangelib.Account:
+        """Connect to an Account using the specified credentials"""
 
         verify_cert = self.options.get('verify_cert')
         server   = self.options.get('server')
@@ -102,8 +101,8 @@ class exchange_interface:
         return account
 
 
-    def get_emails(self, function_parameters) -> exchangelib.restriction.Q:
-        """Get queried emails"""
+    def get_emails(self, function_parameters:dict) -> exchangelib.restriction.Q:
+        """Query emails from the server using the specified attributes"""
 
         username   = function_parameters.get("username")
         num_emails = function_parameters.get("num_emails")
@@ -111,9 +110,11 @@ class exchange_interface:
         src_folder = function_parameters.get("src_folder")
         start_date = function_parameters.get("start_date")
         end_date   = function_parameters.get("end_date")
+
         sender  = function_parameters.get("sender")
         subject = function_parameters.get("subject")
         body    = function_parameters.get("body")
+
         has_attachments     = function_parameters.get("has_attachments")
         order_by_recency    = function_parameters.get("order_by_recency")
         search_subfolders   = function_parameters.get("search_subfolders")
@@ -121,8 +122,11 @@ class exchange_interface:
 
         account = self.connect_to_account(username)
 
+        # Defaults to folder specified in app.conf (Top of Information Store/Inbox) if not 
+        # specified in input.
         src_folder = default_folder_path if src_folder is None else src_folder
 
+        # Get the folder object for each path specified
         split_folder_paths = re.findall('(?:[^,"]|"(?:\\.|[^"])*")+', src_folder)
         folders = [exchange_helper.go_to_folder(username, account, folder.strip()) for folder in split_folder_paths]
 
@@ -136,6 +140,8 @@ class exchange_interface:
 
         folder_collection = FolderCollection(account=account, folders=folders)
         filtered_emails = folder_collection.all()
+
+        ''' Query based on Input attributes'''
 
         if email_ids:
             id_query = Q()
@@ -178,8 +184,8 @@ class exchange_interface:
         return filtered_emails
 
 
-    def create_email_message(self, function_parameters) -> dict:
-        """Create an email message object"""
+    def create_email_message(self, function_parameters:dict) -> dict:
+        """Create an email message object and send it to the recipients"""
         username    = function_parameters.get("username")
         msg_subject = function_parameters.get("msg_subject")
         msg_body    = function_parameters.get("msg_body")
@@ -206,8 +212,8 @@ class exchange_interface:
             'msg_body'   : function_parameters["msg_body"]}
 
 
-    def create_meeting(self, function_parameters) -> dict:
-        """Create an email message object"""    
+    def create_meeting(self, function_parameters:dict) -> dict:
+        """Create an email message object and send it to the recipients"""    
         username = function_parameters.get("username")
         start_time = function_parameters.get("start_time")
         end_time = function_parameters.get("end_time")
@@ -236,7 +242,7 @@ class exchange_interface:
             required_attendees=required_attendees,
             optional_attendees=optional_attendees)
 
-        self.log.info("Sending out meeting invite and saving a copy")
+        self.log.info("Sending out meeting invite and save a copy")
         meeting.save(send_meeting_invitations=SEND_TO_ALL_AND_SAVE_COPY)
 
         return {
@@ -250,7 +256,13 @@ class exchange_interface:
 
 
     def move_emails(self, function_parameters, delete_src_folder=False) -> tuple:
-        """Moving mails to a specified folder"""
+        """
+        Moves mails to a specified folder. Deletes the source folder if delete_src_folder
+        set to True. If the force_delete attribute has not been specified in 
+        function_parameters or is set to False, the operation halts on detecting subfolders
+        present in the source folder while deleting.
+        """
+    
         username   = function_parameters.get("username")
         src_folder = function_parameters.get("src_folder")
         dst_folder = function_parameters.get("dst_folder")
@@ -285,6 +297,7 @@ class exchange_interface:
         results = self.create_email_function_results(retrieved_emails)
 
         self.log.info(f"Moving emails to {dst_folder}")
+        # Retrieving folder object for source and destination folders 
         results["src_folder"] = exchange_helper.go_to_folder(username, account, src_folder)
         results["dst_folder"] = exchange_helper.go_to_folder(username, account, dst_folder)
 
@@ -293,7 +306,10 @@ class exchange_interface:
 
     def create_email_function_results(self, emails) -> dict:
         """
-        Create function results from email query results
+        Retrieved emails are of object type Messages. This function extracts import information
+        from those objects and models a response in the form of a dictionary to be sent back
+        to QRadar SOAR. If an attachment is detected, it creates a base64 encoded version of 
+        the attachment and sends it back to QRadar SOAR.
 
         Example :
         -------
@@ -351,5 +367,6 @@ class exchange_interface:
                         curr_attachment['attachment_name'] = attachment.name
                         curr_attachment['attachment_content_type'] = attachment.content_type
                         curr_attachment['attachment_size'] = attachment.size
+                        # Creates a base64 version of the attachment
                         curr_attachment['attachment_base64'] = base64.b64encode(attachment.content).decode('utf-8')
         return results
