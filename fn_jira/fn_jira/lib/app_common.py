@@ -140,7 +140,6 @@ class AppCommon():
 
         # Format each dictionary
         for issue in issues_list:
-            issue.pop("expand")
 
             for key, value in issue.get("fields").items():
                 issue[key] = value

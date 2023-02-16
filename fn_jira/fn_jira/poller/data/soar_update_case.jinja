@@ -1,9 +1,18 @@
 {
   {# JINJA template for updating a new SOAR incident from an endpoint #}
-  {# modify to specify your specific **data** fields #}
-  "severity_code": "{{ **severity** | soar_substitute('{"Safe": "Low"}') }}",
+  "name": "{{ summary }}",
+  "description": {% if description is none %} "" {% else %} "{{ description }}" {% endif %},
+  "severity_code": "{{ priority }}",
+  "create_date": {{ created }},
+  "discovered_date": {{ created }},
+  "plan_status": "A",
   {# specify your custom fields for your endpoint solution #}
   "properties": {
-    "**endpoint_tags**": "{{ **tags** | join(', ') }}",
+    "jira_internal_url": "{{ internal_url }}",
+    "jira_issue_id": "{{ key }}",
+    "jira_server": "{{ jira_server }}",
+    "jira_url": "{{ url }}",
+    "jira_project_key": "{{ project }}",
+    "jira_issue_status": "{{ status }}"
   }
 }
