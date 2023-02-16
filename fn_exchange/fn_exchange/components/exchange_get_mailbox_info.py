@@ -41,13 +41,11 @@ class FunctionComponent(AppFunctionComponent):
                     "email_address" : getattr(info, "email_address", ""),
                     "routing_type"  : getattr(info, "routing_type", ""),
                     "mailbox_type"  : getattr(info, "mailbox_type", "")}
+                yield StatusMessage("Completed retrieving mailbox information")
+                yield FunctionResult(results, success=True)
             else:
                 yield FunctionResult({}, success=False, reason="Unable retrieve mailbox information")
-
                 yield StatusMessage(f"No mailbox found for {get_user}")
 
-            yield StatusMessage("Completed retrieving mailbox information")
-            yield FunctionResult(results, success=True)
-
         except Exception as err:
-            yield FunctionResult(results, success=False, reason=str(err))
+            yield FunctionResult({}, success=False, reason=str(err))
