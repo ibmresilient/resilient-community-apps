@@ -37,7 +37,7 @@ class TestExchangeMoveEmails:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    # @patch('fn_exchange.components.exchange_move_emails.exchange_interface', side_effect=mocked_exchange_utils)
+    @pytest.mark.livetest
     @patch('fn_exchange.lib.exchange_utils.exchange_interface.get_emails', side_effect=get_emails)
     @patch('fn_exchange.lib.exchange_utils.exchange_helper.go_to_folder', side_effect=go_to_folder)
     @pytest.mark.parametrize(

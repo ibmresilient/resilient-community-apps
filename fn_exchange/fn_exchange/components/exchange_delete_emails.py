@@ -3,8 +3,9 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
+from resilient_lib import ResultPayload
 from resilient_circuits import (AppFunctionComponent, app_function,
-                                StatusMessage, FunctionResult)
+                                StatusMessage, FunctionResult, )
 
 from fn_exchange.lib.exchange_helper import PACKAGE_NAME
 from fn_exchange.lib.exchange_utils import exchange_interface
@@ -95,9 +96,13 @@ class FunctionComponent(AppFunctionComponent):
 
             self.LOG.info(msg)
             yield StatusMessage(msg)
-
             yield StatusMessage(f"{num_deleted} emails deleted")
-            yield FunctionResult(results, success=True)
+            
+            rp = ResultPayload(pkgname=PACKAGE_NAME, inputs=fn_inputs)
+            rp_results = rp.done(success=True, content=results)
+            rp_results.update(results)
+
+            yield FunctionResult(rp_results, custom_results=True)
 
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))
