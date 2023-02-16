@@ -6,7 +6,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Exchange Create Meeting",
-      "id": 14,
+      "id": 106,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Exchange Create Meeting",
@@ -82,7 +82,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Exchange Delete Emails",
-      "id": 15,
+      "id": 107,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Exchange Delete Emails",
@@ -206,7 +206,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Exchange Find Emails",
-      "id": 16,
+      "id": 108,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Exchange Find Emails",
@@ -314,7 +314,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Exchange Get Mailbox Info",
-      "id": 17,
+      "id": 109,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Exchange Get Mailbox Info",
@@ -342,7 +342,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Exchange Move Emails",
-      "id": 18,
+      "id": 110,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Exchange Move Emails",
@@ -466,7 +466,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Exchange Move Folder Contents and Delete Folder",
-      "id": 19,
+      "id": 111,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Exchange Move Folder Contents and Delete Folder",
@@ -518,7 +518,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Exchange Send Email",
-      "id": 20,
+      "id": 112,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Exchange Send Email",
@@ -568,7 +568,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1655997303039,
+  "export_date": 1676543652989,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -582,7 +582,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_meeting_end_time",
       "hide_notification": false,
-      "id": 313,
+      "id": 545,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -604,6 +604,36 @@
     },
     {
       "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/exchange_delete_source_folder",
+      "hide_notification": false,
+      "id": 594,
+      "input_type": "boolean",
+      "internal": false,
+      "is_tracked": false,
+      "name": "exchange_delete_source_folder",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "exchange_delete_source_folder",
+      "tooltip": "Move the emails to another folder and delete the current folder",
+      "type_id": 11,
+      "uuid": "9b5b8a91-0a07-493b-9eaf-7d55e0bdcc1a",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
       "blank_option": false,
       "calculated": false,
       "changeable": true,
@@ -612,7 +642,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_get_email",
       "hide_notification": false,
-      "id": 314,
+      "id": 546,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -642,7 +672,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_search_subfolders",
       "hide_notification": false,
-      "id": 310,
+      "id": 547,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -671,7 +701,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_meeting_body",
       "hide_notification": false,
-      "id": 303,
+      "id": 548,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -700,7 +730,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_email",
       "hide_notification": false,
-      "id": 316,
+      "id": 549,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -730,7 +760,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_num_emails",
       "hide_notification": false,
-      "id": 300,
+      "id": 550,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -759,7 +789,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_has_attachments",
       "hide_notification": false,
-      "id": 305,
+      "id": 551,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -788,7 +818,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_start_date",
       "hide_notification": false,
-      "id": 299,
+      "id": 552,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -817,7 +847,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_end_date",
       "hide_notification": false,
-      "id": 308,
+      "id": 553,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -846,7 +876,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_folder_path",
       "hide_notification": false,
-      "id": 302,
+      "id": 554,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -875,7 +905,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_order_by_recency",
       "hide_notification": false,
-      "id": 309,
+      "id": 555,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -904,7 +934,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_meeting_subject",
       "hide_notification": false,
-      "id": 298,
+      "id": 556,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -933,7 +963,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_sender",
       "hide_notification": false,
-      "id": 304,
+      "id": 557,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -962,7 +992,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_hard_delete",
       "hide_notification": false,
-      "id": 297,
+      "id": 558,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -992,7 +1022,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_emails",
       "hide_notification": false,
-      "id": 296,
+      "id": 559,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1022,7 +1052,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_email_ids",
       "hide_notification": false,
-      "id": 312,
+      "id": 560,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1051,7 +1081,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_optional_attendees",
       "hide_notification": false,
-      "id": 311,
+      "id": 561,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1080,7 +1110,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_message_subject",
       "hide_notification": false,
-      "id": 307,
+      "id": 562,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1109,7 +1139,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_meeting_start_time",
       "hide_notification": false,
-      "id": 301,
+      "id": 563,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1139,7 +1169,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_message_body",
       "hide_notification": false,
-      "id": 306,
+      "id": 564,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1168,7 +1198,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_required_attendees",
       "hide_notification": false,
-      "id": 295,
+      "id": 565,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1197,7 +1227,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_destination_folder_path",
       "hide_notification": false,
-      "id": 315,
+      "id": 566,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1225,13 +1255,13 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/exchange_delete_if_no_subfolders",
+      "export_key": "__function/exchange_force_delete_subfolders",
       "hide_notification": false,
-      "id": 294,
+      "id": 567,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
-      "name": "exchange_delete_if_no_subfolders",
+      "name": "exchange_force_delete_subfolders",
       "operation_perms": {},
       "operations": [],
       "placeholder": "",
@@ -1241,8 +1271,8 @@
       "rich_text": false,
       "tags": [],
       "templates": [],
-      "text": "exchange_delete_if_no_subfolders",
-      "tooltip": "Yes to delete the folder if it has no subfolders. No to delete even if the folder has subfolders.",
+      "text": "exchange_force_delete_subfolders",
+      "tooltip": "Yes to delete even if the folder has subfolders else stops operation",
       "type_id": 11,
       "uuid": "6a692281-1bf5-425e-b80b-2552a1d974bf",
       "values": []
@@ -1257,7 +1287,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_sender",
       "hide_notification": false,
-      "id": 287,
+      "id": 522,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1286,7 +1316,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_num_emails",
       "hide_notification": false,
-      "id": 271,
+      "id": 523,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1315,7 +1345,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_folder_path",
       "hide_notification": false,
-      "id": 289,
+      "id": 524,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1344,7 +1374,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_search_subfolders",
       "hide_notification": false,
-      "id": 288,
+      "id": 525,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1373,7 +1403,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_destination_folder_path",
       "hide_notification": false,
-      "id": 286,
+      "id": 526,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1402,7 +1432,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_required_attendees",
       "hide_notification": false,
-      "id": 280,
+      "id": 527,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1431,7 +1461,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_hard_delete",
       "hide_notification": false,
-      "id": 282,
+      "id": 528,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1459,23 +1489,24 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "actioninvocation/exchange_delete_if_no_subfolders",
+      "export_key": "actioninvocation/exchange_force_delete_subfolders",
       "hide_notification": false,
-      "id": 273,
+      "id": 529,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
-      "name": "exchange_delete_if_no_subfolders",
+      "name": "exchange_force_delete_subfolders",
       "operation_perms": {},
       "operations": [],
       "placeholder": "",
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
+      "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "exchange_delete_if_no_subfolders",
-      "tooltip": "Yes to delete the folder if it has no subfolders. No to delete even if the folder has subfolders.",
+      "text": "Force delete sub-folders",
+      "tooltip": "Yes to delete even if the folder has subfolders else stops the deletion process",
       "type_id": 6,
       "uuid": "f5d90001-ee27-4731-82d2-59c177b49dd6",
       "values": []
@@ -1490,7 +1521,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_end_date",
       "hide_notification": false,
-      "id": 284,
+      "id": 530,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1519,7 +1550,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_meeting_end_time",
       "hide_notification": false,
-      "id": 293,
+      "id": 531,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1548,7 +1579,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_meeting_start_time",
       "hide_notification": false,
-      "id": 281,
+      "id": 532,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1577,7 +1608,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_has_attachments",
       "hide_notification": false,
-      "id": 290,
+      "id": 533,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1606,7 +1637,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_emails",
       "hide_notification": false,
-      "id": 278,
+      "id": 534,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1635,7 +1666,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_message_body",
       "hide_notification": false,
-      "id": 277,
+      "id": 535,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1664,7 +1695,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_get_email",
       "hide_notification": false,
-      "id": 285,
+      "id": 536,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1693,7 +1724,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_email_ids",
       "hide_notification": false,
-      "id": 291,
+      "id": 537,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1722,7 +1753,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_start_date",
       "hide_notification": false,
-      "id": 283,
+      "id": 538,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -1751,7 +1782,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_optional_attendees",
       "hide_notification": false,
-      "id": 276,
+      "id": 539,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1780,7 +1811,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_order_by_recency",
       "hide_notification": false,
-      "id": 279,
+      "id": 540,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1809,7 +1840,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_meeting_body",
       "hide_notification": false,
-      "id": 275,
+      "id": 541,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1838,7 +1869,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_message_subject",
       "hide_notification": false,
-      "id": 292,
+      "id": 542,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1867,7 +1898,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_email",
       "hide_notification": false,
-      "id": 272,
+      "id": 543,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1896,7 +1927,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/exchange_meeting_subject",
       "hide_notification": false,
-      "id": 274,
+      "id": 544,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1929,7 +1960,7 @@
   ],
   "functions": [
     {
-      "created_date": 1655995101980,
+      "created_date": 1673954178250,
       "description": {
         "content": "Creates a meeting and sends out invitation to required attendees and optional attendees.",
         "format": "text"
@@ -1937,18 +1968,20 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Create Meeting",
       "export_key": "exchange_create_meeting",
-      "id": 1,
+      "id": 73,
       "last_modified_by": {
-        "display_name": "exchange",
-        "id": 6,
-        "name": "aaa9eee1-5258-447f-8219-32d33236fee0",
-        "type": "apikey"
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1655997239496,
+      "last_modified_time": 1673954178296,
       "name": "exchange_create_meeting",
+      "output_json_example": "{\"required_attendees\": \"example@example.com\", \"optional_attendees\": null, \"sender\": \"t.shelby@example.com\", \"subject\": \"This is a potential malicious link\", \"body\": null, \"start_time\": 1655938800000, \"end_time\": 1656025200000}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"required_attendees\": {\"type\": \"string\"}, \"optional_attendees\": {}, \"sender\": {\"type\": \"string\"}, \"subject\": {\"type\": \"string\"}, \"body\": {}, \"start_time\": {\"type\": \"integer\"}, \"end_time\": {\"type\": \"integer\"}}}",
       "tags": [],
       "uuid": "145aab42-f201-4d01-95ad-6181b64720b7",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "b34e0c16-3511-4708-9c83-338aff49a43e",
@@ -2016,12 +2049,12 @@
           "programmatic_name": "example_of_exchange_create_meeting",
           "tags": [],
           "uuid": null,
-          "workflow_id": 1
+          "workflow_id": 80
         }
       ]
     },
     {
-      "created_date": 1655995102071,
+      "created_date": 1673954178305,
       "description": {
         "content": "Delete emails with the specified query parameters.",
         "format": "text"
@@ -2029,18 +2062,20 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Delete Emails",
       "export_key": "exchange_delete_emails",
-      "id": 2,
+      "id": 74,
       "last_modified_by": {
-        "display_name": "exchange",
-        "id": 6,
-        "name": "aaa9eee1-5258-447f-8219-32d33236fee0",
-        "type": "apikey"
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1655997239551,
+      "last_modified_time": 1673954178346,
       "name": "exchange_delete_emails",
+      "output_json_example": "{\"email_ids\": [\"\u003c6475dbadd11745c5abf0fb7b1b60d54f@example.com\u003e\"], \"emails\": {\"\u003c6475dbadd11745c5abf0fb7b1b60d54f@example.com\u003e\": {\"subject\": \"Warning! Another potential phishing email!\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nExample Body\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\\r\\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 127.0.0.1 via Mailbox Transport; Thu, 23 Jun 2022 12:48:18 +0100\\r\\nReceived: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\\r\\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 127.0.0.1; Thu, 23 Jun 2022 12:48:18 +0100\\r\\nReceived: from WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6]) by\\r\\n WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6%2]) with mapi id\\r\\n 00.00.2242.012; Thu, 23 Jun 2022 12:48:18 +0100\\r\\nFrom: Thomas Shelby \u003ct.shelby@example.com\u003e\\r\\nTo: Thomas Shelby \u003ct.shelby@example.com\u003e\\r\\nSubject: Warning! Another potential phishing email!\\r\\nThread-Topic: Warning! Another potential phishing email!\\r\\nThread-Index: AQHYhvch4pObt1o+A0qCLDlDou3uNw==\\r\\nDate: Thu, 23 Jun 2022 12:48:18 +0100\\r\\nMessage-ID: \u003c6475dbadd11745c5abf0fb7b1b60d54f@example.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: WIN-L3KDT22U7UJ.example.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t7c1c4ee8-4c79-454a-ffbb-08da550e43f6\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\nExample Body\\r\\n\\r\\n--_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nExample Body\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_--\\r\\n\", \"sender_name\": \"Thomas Shelby\", \"sender_email\": \"t.shelby@example.com\", \"attachments\": {}, \"attachment_ids\": []}}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"email_ids\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"emails\": {\"type\": \"object\", \"properties\": {\"\u003c6475dbadd11745c5abf0fb7b1b60d54f@example.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}}}}}",
       "tags": [],
       "uuid": "25dd829d-5480-465d-b865-9ed9bea2ff53",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "b34e0c16-3511-4708-9c83-338aff49a43e",
@@ -2156,12 +2191,12 @@
           "programmatic_name": "example_of_exchange_delete_emails",
           "tags": [],
           "uuid": null,
-          "workflow_id": 5
+          "workflow_id": 78
         }
       ]
     },
     {
-      "created_date": 1655995102159,
+      "created_date": 1673954178354,
       "description": {
         "content": "Find emails with the specified parameters.",
         "format": "text"
@@ -2169,18 +2204,20 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Find Emails",
       "export_key": "exchange_find_emails",
-      "id": 3,
+      "id": 75,
       "last_modified_by": {
-        "display_name": "exchange",
-        "id": 6,
-        "name": "aaa9eee1-5258-447f-8219-32d33236fee0",
-        "type": "apikey"
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1655997239605,
+      "last_modified_time": 1673954178400,
       "name": "exchange_find_emails",
+      "output_json_example": "{\"email_ids\": [\"\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e\"], \"emails\": {\"\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e\": {\"subject\": \"Warning: You may have clicked on a malicious link!\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003cstyle type=\\\"text/css\\\" style=\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=\\\"divtagdefaultwrapper\\\" style=\\\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\\\" dir=\\\"ltr\\\"\u003e\\r\\n\u003cp\u003eWarning!\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\\r\\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 127.0.0.1 via Mailbox Transport; Thu, 23 Jun 2022 12:42:35 +0100\\r\\nReceived: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\\r\\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 127.0.0.1; Thu, 23 Jun 2022 12:42:30 +0100\\r\\nReceived: from WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6]) by\\r\\n WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6%2]) with mapi id\\r\\n 00.00.2242.012; Thu, 23 Jun 2022 12:42:30 +0100\\r\\nFrom: Thomas Shelby \u003ct.shelby@example.com\u003e\\r\\nTo: Thomas Shelby \u003ct.shelby@example.com\u003e\\r\\nSubject: Warning: You may have clicked on a malicious link!\\r\\nThread-Topic: Warning: You may have clicked on a malicious link!\\r\\nThread-Index: AQHYhvZRBvk78Xewzkm1r+nXQYlDFQ==\\r\\nDate: Thu, 23 Jun 2022 12:42:30 +0100\\r\\nMessage-ID: \u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: WIN-L3KDT22U7UJ.example.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\td0ea5374-fac7-437a-aac4-08da550d74ca\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\\r\\nContent-Type: text/plain; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\nWarning!\\r\\n\\r\\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\\r\\nContent-Type: text/html; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=3D\\\"Content-Type\\\" content=3D\\\"text/html; charset=3Diso-8859-=\\r\\n1\\\"\u003e\\r\\n\u003cstyle type=3D\\\"text/css\\\" style=3D\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margi=\\r\\nn-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=3D\\\"divtagdefaultwrapper\\\" style=3D\\\"font-size:12pt;color:#000000;font=\\r\\n-family:Calibri,Helvetica,sans-serif;\\\" dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cp\u003eWarning!\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_--\\r\\n\", \"sender_name\": \"Thomas Shelby\", \"sender_email\": \"t.shelby@example.com\", \"attachments\": {}, \"attachment_ids\": []}}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"email_ids\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"emails\": {\"type\": \"object\", \"properties\": {\"\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}}}}}",
       "tags": [],
       "uuid": "e8d8dcd1-3c3e-4974-be3e-7aba129a01eb",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "b34e0c16-3511-4708-9c83-338aff49a43e",
@@ -2288,12 +2325,12 @@
           "programmatic_name": "example_of_exchange_find_emails",
           "tags": [],
           "uuid": null,
-          "workflow_id": 4
+          "workflow_id": 79
         }
       ]
     },
     {
-      "created_date": 1655995102244,
+      "created_date": 1673954178408,
       "description": {
         "content": "Get mailbox info for specified email.",
         "format": "text"
@@ -2301,18 +2338,20 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Get Mailbox Info",
       "export_key": "exchange_get_mailbox_info",
-      "id": 4,
+      "id": 76,
       "last_modified_by": {
-        "display_name": "exchange",
-        "id": 6,
-        "name": "aaa9eee1-5258-447f-8219-32d33236fee0",
-        "type": "apikey"
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1655997239653,
+      "last_modified_time": 1673954178447,
       "name": "exchange_get_mailbox_info",
+      "output_json_example": "{\"name\": \"Thomas Shelby\", \"email_address\": \"t.shelby@example.com\", \"routing_type\": \"SMTP\", \"mailbox_type\": \"Mailbox\", \"success\": true}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"email_address\": {\"type\": \"string\"}, \"routing_type\": {\"type\": \"string\"}, \"mailbox_type\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}}}",
       "tags": [],
       "uuid": "b6813ac5-8dbd-40f2-8a32-dc0b92ea878f",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "9b76ef0e-a7c6-40d8-85d1-ef14ea0b2f9e",
@@ -2332,12 +2371,12 @@
           "programmatic_name": "example_of_exchange_get_mailbox_info",
           "tags": [],
           "uuid": null,
-          "workflow_id": 7
+          "workflow_id": 82
         }
       ]
     },
     {
-      "created_date": 1655995102320,
+      "created_date": 1673954178454,
       "description": {
         "content": "Move queried emails from a specified folder to another specified folder.",
         "format": "text"
@@ -2345,18 +2384,20 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Move Emails",
       "export_key": "exchange_move_emails",
-      "id": 5,
+      "id": 77,
       "last_modified_by": {
-        "display_name": "exchange",
-        "id": 6,
-        "name": "aaa9eee1-5258-447f-8219-32d33236fee0",
-        "type": "apikey"
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1655997239703,
+      "last_modified_time": 1676382858229,
       "name": "exchange_move_emails",
+      "output_json_example": "{\"email_ids\": [\"\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e\"], \"emails\": {\"\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e\": {\"subject\": \"Warning: You may have clicked on a malicious link!\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003cstyle type=\\\"text/css\\\" style=\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=\\\"divtagdefaultwrapper\\\" style=\\\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\\\" dir=\\\"ltr\\\"\u003e\\r\\n\u003cp\u003eWarning!\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\\r\\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 127.0.0.1 via Mailbox Transport; Thu, 23 Jun 2022 12:42:35 +0100\\r\\nReceived: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\\r\\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 127.0.0.1; Thu, 23 Jun 2022 12:42:30 +0100\\r\\nReceived: from WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6]) by\\r\\n WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6%2]) with mapi id\\r\\n 00.00.2242.012; Thu, 23 Jun 2022 12:42:30 +0100\\r\\nFrom: Thomas Shelby \u003ct.shelby@example.com\u003e\\r\\nTo: Thomas Shelby \u003ct.shelby@example.com\u003e\\r\\nSubject: Warning: You may have clicked on a malicious link!\\r\\nThread-Topic: Warning: You may have clicked on a malicious link!\\r\\nThread-Index: AQHYhvZRBvk78Xewzkm1r+nXQYlDFQ==\\r\\nDate: Thu, 23 Jun 2022 12:42:30 +0100\\r\\nMessage-ID: \u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: WIN-L3KDT22U7UJ.example.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\td0ea5374-fac7-437a-aac4-08da550d74ca\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\\r\\nContent-Type: text/plain; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\nWarning!\\r\\n\\r\\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\\r\\nContent-Type: text/html; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=3D\\\"Content-Type\\\" content=3D\\\"text/html; charset=3Diso-8859-=\\r\\n1\\\"\u003e\\r\\n\u003cstyle type=3D\\\"text/css\\\" style=3D\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margi=\\r\\nn-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=3D\\\"divtagdefaultwrapper\\\" style=3D\\\"font-size:12pt;color:#000000;font=\\r\\n-family:Calibri,Helvetica,sans-serif;\\\" dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cp\u003eWarning!\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_--\\r\\n\", \"sender_name\": \"Thomas Shelby\", \"sender_email\": \"t.shelby@example.com\", \"attachments\": {}, \"attachment_ids\": []}}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"email_ids\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"emails\": {\"type\": \"object\", \"properties\": {\"\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}}}}}",
       "tags": [],
       "uuid": "4caa6dc8-1ac6-4b54-bb97-6f8e041bf067",
-      "version": 2,
+      "version": 3,
       "view_items": [
         {
           "content": "b34e0c16-3511-4708-9c83-338aff49a43e",
@@ -2461,45 +2502,9 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
-        }
-      ],
-      "workflows": [
+        },
         {
-          "actions": [],
-          "description": null,
-          "name": "Example of Exchange Move Emails",
-          "object_type": "artifact",
-          "programmatic_name": "example_of_exchange_move_emails",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 6
-        }
-      ]
-    },
-    {
-      "created_date": 1655995102398,
-      "description": {
-        "content": "Move all items from this folder that satisfy the query parameters to the destination folder and then delete the original folder.",
-        "format": "text"
-      },
-      "destination_handle": "fn_exchange",
-      "display_name": "Exchange Move Folder Contents and Delete Folder",
-      "export_key": "exchange_move_folder_contents_and_delete_folder",
-      "id": 6,
-      "last_modified_by": {
-        "display_name": "exchange",
-        "id": 6,
-        "name": "aaa9eee1-5258-447f-8219-32d33236fee0",
-        "type": "apikey"
-      },
-      "last_modified_time": 1655997239751,
-      "name": "exchange_move_folder_contents_and_delete_folder",
-      "tags": [],
-      "uuid": "c29302aa-36cd-4858-8465-caecc2578d78",
-      "version": 2,
-      "view_items": [
-        {
-          "content": "b34e0c16-3511-4708-9c83-338aff49a43e",
+          "content": "9b5b8a91-0a07-493b-9eaf-7d55e0bdcc1a",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -2513,25 +2518,19 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
-        },
-        {
-          "content": "fb62c41a-089a-4e9d-8120-a1881d488802",
-          "element": "field_uuid",
-          "field_type": "__function",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "68b57992-1013-4b8e-a346-ad2bf7bab85c",
-          "element": "field_uuid",
-          "field_type": "__function",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
         }
       ],
       "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "Example of Exchange Move Emails",
+          "object_type": "artifact",
+          "programmatic_name": "example_of_exchange_move_emails",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 81
+        },
         {
           "actions": [],
           "description": null,
@@ -2540,12 +2539,12 @@
           "programmatic_name": "exchange_move_and_delete_folder",
           "tags": [],
           "uuid": null,
-          "workflow_id": 3
+          "workflow_id": 83
         }
       ]
     },
     {
-      "created_date": 1655995102479,
+      "created_date": 1673954178550,
       "description": {
         "content": "Send an email to a list of recipients.",
         "format": "text"
@@ -2553,18 +2552,20 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Send Email",
       "export_key": "exchange_send_email",
-      "id": 7,
+      "id": 79,
       "last_modified_by": {
-        "display_name": "exchange",
-        "id": 6,
-        "name": "aaa9eee1-5258-447f-8219-32d33236fee0",
-        "type": "apikey"
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1655997239801,
+      "last_modified_time": 1673954178589,
       "name": "exchange_send_email",
+      "output_json_example": "{\"recipients\": \"t.shelby@example.com\", \"sender\": \"t.shelby@example.com\", \"subject\": \"Warning! Another potential phishing email!\", \"body\": \"Example Body\"}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"recipients\": {\"type\": \"string\"}, \"sender\": {\"type\": \"string\"}, \"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}}}",
       "tags": [],
       "uuid": "a17b4b6d-5d21-413e-8d90-b7d95ebb79c0",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "b34e0c16-3511-4708-9c83-338aff49a43e",
@@ -2608,20 +2609,20 @@
           "programmatic_name": "example_of_exchange_send_email",
           "tags": [],
           "uuid": null,
-          "workflow_id": 2
+          "workflow_id": 84
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 1,
+  "id": 27,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1655997300257,
+      "create_date": 1676543650912,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2630,7 +2631,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1655997300257,
+      "update_date": 1676543650912,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2640,7 +2641,8 @@
   "message_destinations": [
     {
       "api_keys": [
-        "aaa9eee1-5258-447f-8219-32d33236fee0"
+        "a68a8299-c8fc-4c0d-93f6-0c671e9d39b3",
+        "ad261c1f-f1cc-4115-bbce-a151f88bac5e"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -2653,17 +2655,17 @@
     }
   ],
   "notifications": null,
-  "overrides": [],
+  "overrides": null,
   "phases": [],
-  "playbooks": null,
+  "playbooks": [],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 49,
-    "major": 43,
-    "minor": 1,
-    "version": "43.1.49"
+    "build_number": 7899,
+    "major": 45,
+    "minor": 0,
+    "version": "45.0.7899"
   },
   "tags": [],
   "task_order": [],
@@ -2673,78 +2675,97 @@
     {
       "actions": [],
       "content": {
-        "version": 1,
-        "workflow_id": "example_of_exchange_delete_emails",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_exchange_delete_emails\" isExecutable=\"true\" name=\"Example of Exchange Delete Emails\"\u003e\u003cdocumentation\u003eDeletes queried emails and then creates artifacts from the results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0sdwknx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0s388lg\" name=\"Exchange Delete Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"25dd829d-5480-465d-b865-9ed9bea2ff53\"\u003e{\"inputs\":{},\"post_processing_script\":\" # Example function results\\n        # results = {\\n        #     \u0027email_ids\u0027: [\u0027id1\u0027, \u0027idN\u0027],\\n        #     \u0027emails\u0027: {\\n        #         \u0027id1\u0027: {\\n        #             \u0027subject\u0027: \u0027Email Subject\u0027,\\n        #             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n        #             \u0027mime_content\u0027: mime content of message\\n        #             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n        #             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n        #             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n        #             \u0027attachments\u0027: {\\n        #                 \u0027attachment_id1\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n        #                     \u0027attachment_size\u0027: \u00278842\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 },\\n        #                 \u0027attachment_id2\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_size\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 }\\n        #             }\\n        #         },\\n        #         \u0027idN\u0027: {\\n        #             \u0027subject\u0027: \u0027Email Subject\u0027,\\n        #             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n        #             \u0027mime_content\u0027: mime content of message\\n        #             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n        #             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n        #             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n        #             \u0027attachments\u0027: {\\n        #                 \u0027attachment_id1\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n        #                     \u0027attachment_size\u0027: \u00278842\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 },\\n        #                 \u0027attachment_id2\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_size\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 }\\n        #             }\\n        #         }\\n        #     }\\n        # }\\n        \\n# Get email ids\\nemail_ids = results.email_ids\\n# Get emails\\nemails = results.emails\\n\\n# Loop through all queried emails\\nfor email_id in email_ids:\\n  # Get email that corresponds to email_id\\n  email = emails[email_id]\\n  # Create artifacts from sender information that isn\u0027t None\\n  if email[\u0027sender_name\u0027]:\\n    incident.addArtifact(\u0027Email Sender Name\u0027, email[\u0027sender_name\u0027], \u0027Sender name for email {}\u0027.format(email_id))\\n  if email[\u0027sender_email\u0027]:\\n    incident.addArtifact(\u0027Email Sender\u0027, email[\u0027sender_email\u0027], \u0027Sender email address for email {}\u0027.format(email_id))\\n  if email[\u0027subject\u0027]:\\n    incident.addArtifact(\u0027Email Subject\u0027, email[\u0027subject\u0027], \u0027Email subject for email {}\u0027.format(email_id))\\n  if email[\u0027body\u0027]:\\n    incident.addArtifact(\u0027Email Body\u0027, email[\u0027body\u0027], \u0027Email body in HTML for email {}\u0027.format(email_id))\\n    \\n  # Loop through attachments and create artifacts and notes for them\\n  attachment_ids = email[\u0027attachment_ids\u0027]\\n  attachments = email[\u0027attachments\u0027]\\n  for attachment_id in attachment_ids:\\n    attachment = attachments[attachment_id]\\n    incident.addArtifact(\u0027Email Attachment Name\u0027, attachment[\u0027attachment_name\u0027], \u0027Attachment name for attachment {} from email {}\u0027.format(attachment_id, email_id))\\n    \\n    # Add note\\n    noteText = \u0027base64 attachment of {} from email {}: \\\\n{}\u0027.format(attachment[\u0027attachment_name\u0027], email_id, attachment[\u0027attachment_base64\u0027])\\n    incident.addNote(noteText)\",\"pre_processing_script\":\"# Set inputs\\n# For for information on input values, read tooltips\\ninputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email\\ninputs.exchange_folder_path = inputs.exchange_folder_path if rule.properties.exchange_folder_path is None else rule.properties.exchange_folder_path\\ninputs.exchange_hard_delete = inputs.exchange_hard_delete if rule.properties.exchange_hard_delete is None else rule.properties.exchange_hard_delete\\ninputs.exchange_email_ids = inputs.exchange_email_ids if rule.properties.exchange_email_ids is None else rule.properties.exchange_email_ids\\ninputs.exchange_sender = inputs.exchange_sender if rule.properties.exchange_sender is None else rule.properties.exchange_sender\\ninputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject\\ninputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body\\ninputs.exchange_start_date = inputs.exchange_start_date if rule.properties.exchange_start_date is None else rule.properties.exchange_start_date\\ninputs.exchange_end_date = inputs.exchange_end_date if rule.properties.exchange_end_date is None else rule.properties.exchange_end_date\\ninputs.exchange_has_attachments = inputs.exchange_has_attachments if rule.properties.exchange_has_attachments is None else rule.properties.exchange_has_attachments\\ninputs.exchange_order_by_recency = inputs.exchange_order_by_recency if rule.properties.exchange_order_by_recency is None else rule.properties.exchange_order_by_recency\\ninputs.exchange_num_emails = inputs.exchange_num_emails if rule.properties.exchange_num_emails is None else rule.properties.exchange_num_emails\\ninputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.properties.exchange_search_subfolders is None else rule.properties.exchange_search_subfolders\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0sdwknx\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_11z2k7n\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0sdwknx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0s388lg\"/\u003e\u003cendEvent id=\"EndEvent_0av7ljj\"\u003e\u003cincoming\u003eSequenceFlow_11z2k7n\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_11z2k7n\" sourceRef=\"ServiceTask_0s388lg\" targetRef=\"EndEvent_0av7ljj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0s388lg\" id=\"ServiceTask_0s388lg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"268\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0sdwknx\" id=\"SequenceFlow_0sdwknx_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"268\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"233\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0av7ljj\" id=\"EndEvent_0av7ljj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11z2k7n\" id=\"SequenceFlow_11z2k7n_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"395.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Deletes queried emails and then creates artifacts from the results.",
-      "export_key": "example_of_exchange_delete_emails",
-      "last_modified_by": "aaa9eee1-5258-447f-8219-32d33236fee0",
-      "last_modified_time": 1655995104590,
-      "name": "Example of Exchange Delete Emails",
-      "object_type": "artifact",
-      "programmatic_name": "example_of_exchange_delete_emails",
-      "tags": [],
-      "uuid": "d4bd65a6-cdd4-481f-a691-986602a19a13",
-      "workflow_id": 5
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "example_of_exchange_find_emails",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_exchange_find_emails\" isExecutable=\"true\" name=\"Example of Exchange Find Emails\"\u003e\u003cdocumentation\u003eQuery emails and then create artifacts from results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0jwoyul\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0vmq0m0\" name=\"Exchange Find Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e8d8dcd1-3c3e-4974-be3e-7aba129a01eb\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Example function results\\n        # results = {\\n        #     \u0027email_ids\u0027: [\u0027id1\u0027, \u0027idN\u0027],\\n        #     \u0027emails\u0027: {\\n        #         \u0027id1\u0027: {\\n        #             \u0027subject\u0027: \u0027Email Subject\u0027,\\n        #             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n        #             \u0027mime_content\u0027: mime content of message\\n        #             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n        #             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n        #             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n        #             \u0027attachments\u0027: {\\n        #                 \u0027attachment_id1\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n        #                     \u0027attachment_size\u0027: \u00278842\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 },\\n        #                 \u0027attachment_id2\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_size\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 }\\n        #             }\\n        #         },\\n        #         \u0027idN\u0027: {\\n        #             \u0027subject\u0027: \u0027Email Subject\u0027,\\n        #             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n        #             \u0027mime_content\u0027: mime content of message\\n        #             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n        #             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n        #             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n        #             \u0027attachments\u0027: {\\n        #                 \u0027attachment_id1\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n        #                     \u0027attachment_size\u0027: \u00278842\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 },\\n        #                 \u0027attachment_id2\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_size\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 }\\n        #             }\\n        #         }\\n        #     }\\n        # }\\n        \\n# Get email ids\\nemail_ids = results.email_ids\\n# Get emails\\nemails = results.emails\\n\\n# Loop through all queried emails\\nfor email_id in email_ids:\\n  # Get email that corresponds to email_id\\n  email = emails[email_id]\\n  # Create artifacts from sender information that isn\u0027t None\\n  if email[\u0027sender_name\u0027]:\\n    incident.addArtifact(\u0027Email Sender Name\u0027, email[\u0027sender_name\u0027], \u0027Sender name for email {}\u0027.format(email_id))\\n  if email[\u0027sender_email\u0027]:\\n    incident.addArtifact(\u0027Email Sender\u0027, email[\u0027sender_email\u0027], \u0027Sender email address for email {}\u0027.format(email_id))\\n  if email[\u0027subject\u0027]:\\n    incident.addArtifact(\u0027Email Subject\u0027, email[\u0027subject\u0027], \u0027Email subject for email {}\u0027.format(email_id))\\n  if email[\u0027body\u0027]:\\n    incident.addArtifact(\u0027Email Body\u0027, email[\u0027body\u0027], \u0027Email body in HTML for email {}\u0027.format(email_id))\\n    \\n  # Loop through attachments and create artifacts and notes for them\\n  attachment_ids = email[\u0027attachment_ids\u0027]\\n  attachments = email[\u0027attachments\u0027]\\n  for attachment_id in attachment_ids:\\n    attachment = attachments[attachment_id]\\n    incident.addArtifact(\u0027Email Attachment Name\u0027, attachment[\u0027attachment_name\u0027], \u0027Attachment name for attachment {} from email {}\u0027.format(attachment_id, email_id))\\n    \\n    # Add note\\n    noteText = \u0027base64 attachment of {} from email {}: \\\\n{}\u0027.format(attachment[\u0027attachment_name\u0027], email_id, attachment[\u0027attachment_base64\u0027])\\n    incident.addNote(noteText)\",\"pre_processing_script\":\"# Set inputs\\n# For for information on input values, read tooltips\\ninputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email\\ninputs.exchange_folder_path = inputs.exchange_folder_path if rule.properties.exchange_folder_path is None else rule.properties.exchange_folder_path\\ninputs.exchange_email_ids = inputs.exchange_email_ids if rule.properties.exchange_email_ids is None else rule.properties.exchange_email_ids\\ninputs.exchange_sender = inputs.exchange_sender if rule.properties.exchange_sender is None else rule.properties.exchange_sender\\ninputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject\\ninputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body\\ninputs.exchange_start_date = inputs.exchange_start_date if rule.properties.exchange_start_date is None else rule.properties.exchange_start_date\\ninputs.exchange_end_date = inputs.exchange_end_date if rule.properties.exchange_end_date is None else rule.properties.exchange_end_date\\ninputs.exchange_has_attachments = inputs.exchange_has_attachments if rule.properties.exchange_has_attachments is None else rule.properties.exchange_has_attachments\\ninputs.exchange_order_by_recency = inputs.exchange_order_by_recency if rule.properties.exchange_order_by_recency is None else rule.properties.exchange_order_by_recency\\ninputs.exchange_num_emails = inputs.exchange_num_emails if rule.properties.exchange_num_emails is None else rule.properties.exchange_num_emails\\ninputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.properties.exchange_search_subfolders is None else rule.properties.exchange_search_subfolders\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0jwoyul\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ujx8nx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0jwoyul\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0vmq0m0\"/\u003e\u003cendEvent id=\"EndEvent_1y922gq\"\u003e\u003cincoming\u003eSequenceFlow_1ujx8nx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ujx8nx\" sourceRef=\"ServiceTask_0vmq0m0\" targetRef=\"EndEvent_1y922gq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0vmq0m0\" id=\"ServiceTask_0vmq0m0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"264\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jwoyul\" id=\"SequenceFlow_0jwoyul_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"264\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"231\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1y922gq\" id=\"EndEvent_1y922gq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"453\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"471\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ujx8nx\" id=\"SequenceFlow_1ujx8nx_di\"\u003e\u003comgdi:waypoint x=\"364\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"453\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"408.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Query emails and then create artifacts from results.",
-      "export_key": "example_of_exchange_find_emails",
-      "last_modified_by": "aaa9eee1-5258-447f-8219-32d33236fee0",
-      "last_modified_time": 1655995104238,
-      "name": "Example of Exchange Find Emails",
-      "object_type": "artifact",
-      "programmatic_name": "example_of_exchange_find_emails",
-      "tags": [],
-      "uuid": "de0fb43a-7e70-4208-849c-3ae70d9487cf",
-      "workflow_id": 4
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "example_of_exchange_create_meeting",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_exchange_create_meeting\" isExecutable=\"true\" name=\"Example of Exchange Create Meeting\"\u003e\u003cdocumentation\u003eCreates a meeting with the given parameters and creates a note from the result.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ul9qip\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_14opixw\" name=\"Exchange Create Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"145aab42-f201-4d01-95ad-6181b64720b7\"\u003e{\"inputs\":{},\"post_processing_script\":\"# results = {\\n#                 \u0027required_attendees\u0027:required1@example.com,required2@example.com\\n#                 \u0027optional_attendees\u0027: optional1@example.com,...\\n#                 \u0027sender\u0027: sender@example.com\\n#                 \u0027subject\u0027: meeting subject\\n#                 \u0027body\u0027: meeting body\\n#                 \u0027start_time\u0027: epoch start time\\n#                 \u0027end_time\u0027: epoch end time\\n#             }\\nfrom java.util import Date\\n\\nstart_time = Date(results.start_time).toString()\\nend_time = Date(results.end_time).toString()\\nnoteText = \u0027\u0027\u0027Meeting created from Exchange Create Meeting\\nSubject: {}\\nFrom {} to {}\\nRequired Attendees: {}\\nOptional Attendees: {}\\nBody: {}\u0027\u0027\u0027.format(results.subject, start_time, end_time, results.required_attendees, results.optional_attendees, results.body)\\n\\nincident.addNote(noteText)\",\"pre_processing_script\":\"inputs.exchange_email = rule.properties.exchange_email if rule.properties.exchange_email is not None else inputs.exchange_email\\ninputs.exchange_meeting_start_time = rule.properties.exchange_meeting_start_time if rule.properties.exchange_meeting_start_time is not None else inputs.exchange_meeting_start_time\\ninputs.exchange_meeting_end_time = rule.properties.exchange_meeting_end_time if rule.properties.exchange_meeting_end_time is not None else inputs.exchange_meeting_end_time\\ninputs.exchange_meeting_subject = rule.properties.exchange_meeting_subject if rule.properties.exchange_meeting_subject is not None else inputs.exchange_meeting_subject\\ninputs.exchange_meeting_body = rule.properties.exchange_meeting_body if rule.properties.exchange_meeting_body is not None else inputs.exchange_meeting_body\\ninputs.exchange_required_attendees = rule.properties.exchange_required_attendees if rule.properties.exchange_required_attendees is not None else inputs.exchange_required_attendees\\ninputs.exchange_optional_attendees = rule.properties.exchange_optional_attendees if rule.properties.exchange_optional_attendees is not None else inputs.exchange_optional_attendees\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ul9qip\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0c3ucsv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ul9qip\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_14opixw\"/\u003e\u003cendEvent id=\"EndEvent_1cu0hvo\"\u003e\u003cincoming\u003eSequenceFlow_0c3ucsv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0c3ucsv\" sourceRef=\"ServiceTask_14opixw\" targetRef=\"EndEvent_1cu0hvo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_14opixw\" id=\"ServiceTask_14opixw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"281\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ul9qip\" id=\"SequenceFlow_0ul9qip_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"281\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"239.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1cu0hvo\" id=\"EndEvent_1cu0hvo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"454\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"472\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0c3ucsv\" id=\"SequenceFlow_0c3ucsv_di\"\u003e\u003comgdi:waypoint x=\"381\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"454\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"417.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Creates a meeting with the given parameters and creates a note from the result.",
-      "export_key": "example_of_exchange_create_meeting",
-      "last_modified_by": "aaa9eee1-5258-447f-8219-32d33236fee0",
-      "last_modified_time": 1655995103231,
-      "name": "Example of Exchange Create Meeting",
-      "object_type": "artifact",
-      "programmatic_name": "example_of_exchange_create_meeting",
-      "tags": [],
-      "uuid": "143f380f-ab08-4841-aaf6-072a381583a7",
-      "workflow_id": 1
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
+        "version": 7,
         "workflow_id": "example_of_exchange_move_emails",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_exchange_move_emails\" isExecutable=\"true\" name=\"Example of Exchange Move Emails\"\u003e\u003cdocumentation\u003eMoves queried emails from a specified folder to another specified folder then makes an artifact from the results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1s2jbgu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0sp764s\" name=\"Exchange Move Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4caa6dc8-1ac6-4b54-bb97-6f8e041bf067\"\u003e{\"inputs\":{},\"post_processing_script\":\" # Example function results\\n        # results = {\\n        #     \u0027email_ids\u0027: [\u0027id1\u0027, \u0027idN\u0027],\\n        #     \u0027emails\u0027: {\\n        #         \u0027id1\u0027: {\\n        #             \u0027subject\u0027: \u0027Email Subject\u0027,\\n        #             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n        #             \u0027mime_content\u0027: mime content of message\\n        #             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n        #             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n        #             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n        #             \u0027attachments\u0027: {\\n        #                 \u0027attachment_id1\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n        #                     \u0027attachment_size\u0027: \u00278842\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 },\\n        #                 \u0027attachment_id2\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_size\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 }\\n        #             }\\n        #         },\\n        #         \u0027idN\u0027: {\\n        #             \u0027subject\u0027: \u0027Email Subject\u0027,\\n        #             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n        #             \u0027mime_content\u0027: mime content of message\\n        #             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n        #             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n        #             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n        #             \u0027attachments\u0027: {\\n        #                 \u0027attachment_id1\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n        #                     \u0027attachment_size\u0027: \u00278842\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 },\\n        #                 \u0027attachment_id2\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_size\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 }\\n        #             }\\n        #         }\\n        #     }\\n        # }\\n        \\n# Get email ids\\nemail_ids = results.email_ids\\n# Get emails\\nemails = results.emails\\n\\n# Loop through all queried emails\\nfor email_id in email_ids:\\n  # Get email that corresponds to email_id\\n  email = emails[email_id]\\n  # Create artifacts from sender information that isn\u0027t None\\n  if email[\u0027sender_name\u0027]:\\n    incident.addArtifact(\u0027Email Sender Name\u0027, email[\u0027sender_name\u0027], \u0027Sender name for email {}\u0027.format(email_id))\\n  if email[\u0027sender_email\u0027]:\\n    incident.addArtifact(\u0027Email Sender\u0027, email[\u0027sender_email\u0027], \u0027Sender email address for email {}\u0027.format(email_id))\\n  if email[\u0027subject\u0027]:\\n    incident.addArtifact(\u0027Email Subject\u0027, email[\u0027subject\u0027], \u0027Email subject for email {}\u0027.format(email_id))\\n  if email[\u0027body\u0027]:\\n    incident.addArtifact(\u0027Email Body\u0027, email[\u0027body\u0027], \u0027Email body in HTML for email {}\u0027.format(email_id))\\n    \\n  # Loop through attachments and create artifacts and notes for them\\n  attachment_ids = email[\u0027attachment_ids\u0027]\\n  attachments = email[\u0027attachments\u0027]\\n  for attachment_id in attachment_ids:\\n    attachment = attachments[attachment_id]\\n    incident.addArtifact(\u0027Email Attachment Name\u0027, attachment[\u0027attachment_name\u0027], \u0027Attachment name for attachment {} from email {}\u0027.format(attachment_id, email_id))\\n    \\n    # Add note\\n    noteText = \u0027base64 attachment of {} from email {}: \\\\n{}\u0027.format(attachment[\u0027attachment_name\u0027], email_id, attachment[\u0027attachment_base64\u0027])\\n    incident.addNote(noteText)\",\"pre_processing_script\":\"# Set inputs\\n# For for information on input values, read tooltips\\ninputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email\\ninputs.exchange_folder_path = inputs.exchange_folder_path if rule.properties.exchange_folder_path is None else rule.properties.exchange_folder_path\\ninputs.exchange_destination_folder_path = inputs.exchange_destination_folder_path if rule.properties.exchange_destination_folder_path is None else rule.properties.exchange_destination_folder_path\\ninputs.exchange_email_ids = inputs.exchange_email_ids if rule.properties.exchange_email_ids is None else rule.properties.exchange_email_ids\\ninputs.exchange_sender = inputs.exchange_sender if rule.properties.exchange_sender is None else rule.properties.exchange_sender\\ninputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject\\ninputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body\\ninputs.exchange_start_date = inputs.exchange_start_date if rule.properties.exchange_start_date is None else rule.properties.exchange_start_date\\ninputs.exchange_end_date = inputs.exchange_end_date if rule.properties.exchange_end_date is None else rule.properties.exchange_end_date\\ninputs.exchange_has_attachments = inputs.exchange_has_attachments if rule.properties.exchange_has_attachments is None else rule.properties.exchange_has_attachments\\ninputs.exchange_order_by_recency = inputs.exchange_order_by_recency if rule.properties.exchange_order_by_recency is None else rule.properties.exchange_order_by_recency\\ninputs.exchange_num_emails = inputs.exchange_num_emails if rule.properties.exchange_num_emails is None else rule.properties.exchange_num_emails\\ninputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.properties.exchange_search_subfolders is None else rule.properties.exchange_search_subfolders\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1s2jbgu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ydv2zm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1s2jbgu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0sp764s\"/\u003e\u003cendEvent id=\"EndEvent_1w03xbg\"\u003e\u003cincoming\u003eSequenceFlow_1ydv2zm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ydv2zm\" sourceRef=\"ServiceTask_0sp764s\" targetRef=\"EndEvent_1w03xbg\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0sp764s\" id=\"ServiceTask_0sp764s_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"257\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1s2jbgu\" id=\"SequenceFlow_1s2jbgu_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"257\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"227.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1w03xbg\" id=\"EndEvent_1w03xbg_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"410\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"428\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ydv2zm\" id=\"SequenceFlow_1ydv2zm_di\"\u003e\u003comgdi:waypoint x=\"357\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"410\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"383.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_exchange_move_emails\" isExecutable=\"true\" name=\"Example of Exchange Move Emails\"\u003e\u003cdocumentation\u003eMoves queried emails from a specified folder to another specified folder then makes an artifact from the results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1s2jbgu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0sp764s\" name=\"Exchange Move Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4caa6dc8-1ac6-4b54-bb97-6f8e041bf067\"\u003e{\"inputs\":{\"9b5b8a91-0a07-493b-9eaf-7d55e0bdcc1a\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false,\"multiselect_value\":[]}},\"6a692281-1bf5-425e-b80b-2552a1d974bf\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false,\"multiselect_value\":[]}}},\"post_processing_script\":\"\u0027\u0027\u0027 \\nExample results:\\n---------------\\n results = {\\n     \u0027email_ids\u0027: [\u0027id1\u0027, \u0027idN\u0027],\\n     \u0027emails\u0027: {\\n         \u0027id1\u0027: {\\n             \u0027subject\u0027: \u0027Email Subject\u0027,\\n             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n             \u0027mime_content\u0027: mime content of message\\n             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n             \u0027attachments\u0027: {\\n\\n                 \u0027attachment_id1\u0027: {\\n                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n                     \u0027attachment_size\u0027: \u00278842\u0027,\\n                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027},\\n\\n                 \u0027attachment_id2\u0027: {\\n                     \u0027attachment_name\u0027: \u0027...\u0027,\\n                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n                     \u0027attachment_size\u0027: \u0027...\u0027,\\n                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027}}},\\n\u0027\u0027\u0027\\n\\n\\n# To skip adding attachment as a base64 encoded value, Change this to False\\nenable_add_attachment_value = True \\ncontent   = results.get(\\\"content\\\")\\nemails    = content.get(\\\"emails\\\")\\nemail_ids = content.get(\\\"email_ids\\\")\\n\\n# Loop through all queried emails\\nfor email_id in email_ids:\\n  email = emails[email_id]\\n  # Extract information and create Artifcats\\n  if email[\u0027sender_name\u0027]:\\n    incident.addArtifact(\u0027Email Sender Name\u0027, email[\u0027sender_name\u0027], \u0027Sender name for email {}\u0027.format(email_id))\\n  if email[\u0027sender_email\u0027]:\\n    incident.addArtifact(\u0027Email Sender\u0027, email[\u0027sender_email\u0027], \u0027Sender email address for email {}\u0027.format(email_id))\\n  if email[\u0027subject\u0027]:\\n    incident.addArtifact(\u0027Email Subject\u0027, email[\u0027subject\u0027], \u0027Email subject for email {}\u0027.format(email_id))\\n  if email[\u0027body\u0027]:\\n    incident.addArtifact(\u0027Email Body\u0027, email[\u0027body\u0027], \u0027Email body in HTML for email {}\u0027.format(email_id))\\n    \\n  # Loop through attachments and create artifacts\\n  attachment_ids = email[\u0027attachment_ids\u0027]\\n  attachments = email[\u0027attachments\u0027]\\n  for attachment_id in attachment_ids:\\n    attachment = attachments[attachment_id]\\n    incident.addArtifact(\u0027Email Attachment Name\u0027, attachment[\u0027attachment_name\u0027], \u0027Attachment name for attachment {} from email {}\u0027.format(attachment_id, email_id))\\n    \\n    if enable_add_attachment_value:\\n      incident.addArtifact(\u0027Email Attachment\u0027, attachment[\u0027attachment_base64\u0027], \u0027Attachment file {} base64 encoded : {}\u0027.format(attachment[\u0027attachment_name\u0027], attachment[\u0027attachment_base64\u0027]))\\n\\ntext  = \\\"\u0026lt;b\u0026gt;Microsoft Exchange:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\ntext += \\\"\u0026lt;br /\u0026gt;Successfully moved \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt; emails\\\".format(len(email_ids))\\n\\nnoteText = helper.createRichText(text)\\nincident.addNote(noteText)\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Set inputs\\n# For for information on input values, read tooltips\\ninputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email\\ninputs.exchange_folder_path = inputs.exchange_folder_path if rule.properties.exchange_folder_path is None else rule.properties.exchange_folder_path\\ninputs.exchange_destination_folder_path = inputs.exchange_destination_folder_path if rule.properties.exchange_destination_folder_path is None else rule.properties.exchange_destination_folder_path\\ninputs.exchange_email_ids = inputs.exchange_email_ids if rule.properties.exchange_email_ids is None else rule.properties.exchange_email_ids\\ninputs.exchange_sender = inputs.exchange_sender if rule.properties.exchange_sender is None else rule.properties.exchange_sender\\ninputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject\\ninputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body\\ninputs.exchange_start_date = inputs.exchange_start_date if rule.properties.exchange_start_date is None else rule.properties.exchange_start_date\\ninputs.exchange_end_date = inputs.exchange_end_date if rule.properties.exchange_end_date is None else rule.properties.exchange_end_date\\ninputs.exchange_has_attachments = inputs.exchange_has_attachments if rule.properties.exchange_has_attachments is None else rule.properties.exchange_has_attachments\\ninputs.exchange_order_by_recency = inputs.exchange_order_by_recency if rule.properties.exchange_order_by_recency is None else rule.properties.exchange_order_by_recency\\ninputs.exchange_num_emails = inputs.exchange_num_emails if rule.properties.exchange_num_emails is None else rule.properties.exchange_num_emails\\ninputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.properties.exchange_search_subfolders is None else rule.properties.exchange_search_subfolders\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1s2jbgu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ydv2zm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1s2jbgu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0sp764s\"/\u003e\u003cendEvent id=\"EndEvent_1w03xbg\"\u003e\u003cincoming\u003eSequenceFlow_1ydv2zm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ydv2zm\" sourceRef=\"ServiceTask_0sp764s\" targetRef=\"EndEvent_1w03xbg\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0sp764s\" id=\"ServiceTask_0sp764s_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"257\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1s2jbgu\" id=\"SequenceFlow_1s2jbgu_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"257\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"227.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1w03xbg\" id=\"EndEvent_1w03xbg_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"410\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"428\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ydv2zm\" id=\"SequenceFlow_1ydv2zm_di\"\u003e\u003comgdi:waypoint x=\"357\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"410\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"383.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
+      "content_version": 7,
       "description": "Moves queried emails from a specified folder to another specified folder then makes an artifact from the results.",
       "export_key": "example_of_exchange_move_emails",
-      "last_modified_by": "aaa9eee1-5258-447f-8219-32d33236fee0",
-      "last_modified_time": 1655995105154,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1676382889963,
       "name": "Example of Exchange Move Emails",
       "object_type": "artifact",
       "programmatic_name": "example_of_exchange_move_emails",
       "tags": [],
       "uuid": "71053136-1c97-466e-9105-1ed12e6cad61",
-      "workflow_id": 6
+      "workflow_id": 81
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 2,
+        "workflow_id": "example_of_exchange_send_email",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_exchange_send_email\" isExecutable=\"true\" name=\"Example of Exchange Send Email\"\u003e\u003cdocumentation\u003eSends an email to all specified recipients then makes a note with the results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0cu0gse\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0kc53qw\" name=\"Exchange Send Email\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17b4b6d-5d21-413e-8d90-b7d95ebb79c0\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Example results\\n# results = {\\n#             \u0027recipients\u0027: [\u0027user1@example.com\u0027, \u0027user2@example.com\u0027],\\n#             \u0027sender\u0027: \u0027sender@example.com\u0027,\\n#             \u0027subject\u0027: \u0027Subject\u0027,\\n#             \u0027body\u0027: \u0027HTML Body\u0027\\n#           }\\n\\n# Create note with results\\nnote = \u0027\u0027\u0027Sender: {}, Recipients: {}\\nSubject: {}\\nBody: {}\\n\u0027\u0027\u0027.format(results.sender, results.recipients, results.subject, results.body)\\n\\nincident.addNote(note)\",\"pre_processing_script\":\"# Set inputs\\ninputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email\\ninputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject\\ninputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body\\ninputs.exchange_emails = inputs.exchange_emails if rule.properties.exchange_emails is None else rule.properties.exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0cu0gse\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1o7o03m\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0cu0gse\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0kc53qw\"/\u003e\u003cendEvent id=\"EndEvent_06nfble\"\u003e\u003cincoming\u003eSequenceFlow_1o7o03m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1o7o03m\" sourceRef=\"ServiceTask_0kc53qw\" targetRef=\"EndEvent_06nfble\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0kc53qw\" id=\"ServiceTask_0kc53qw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0cu0gse\" id=\"SequenceFlow_0cu0gse_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_06nfble\" id=\"EndEvent_06nfble_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"449\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"467\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1o7o03m\" id=\"SequenceFlow_1o7o03m_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"410.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 2,
+      "description": "Sends an email to all specified recipients then makes a note with the results.",
+      "export_key": "example_of_exchange_send_email",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1676298159436,
+      "name": "Example of Exchange Send Email",
+      "object_type": "artifact",
+      "programmatic_name": "example_of_exchange_send_email",
+      "tags": [],
+      "uuid": "222280e7-07f0-4c5e-9a0e-e1d0d88353f2",
+      "workflow_id": 84
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 10,
+        "workflow_id": "exchange_move_and_delete_folder",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"exchange_move_and_delete_folder\" isExecutable=\"true\" name=\"Exchange Move Folder Contents and Delete Folder\"\u003e\u003cdocumentation\u003eGets all emails from a folder, move those emails to another folder, delete the original folder, then make an artifact from the results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0iq3xjq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1l3w1vw\" name=\"Exchange Move Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4caa6dc8-1ac6-4b54-bb97-6f8e041bf067\"\u003e{\"inputs\":{\"9b5b8a91-0a07-493b-9eaf-7d55e0bdcc1a\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}},\"6a692281-1bf5-425e-b80b-2552a1d974bf\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false,\"multiselect_value\":[]}}},\"post_processing_script\":\" # Example function results\\n        # results = {\\n        #     \u0027email_ids\u0027: [\u0027id1\u0027, \u0027idN\u0027],\\n        #     \u0027emails\u0027: {\\n        #         \u0027id1\u0027: {\\n        #             \u0027subject\u0027: \u0027Email Subject\u0027,\\n        #             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n        #             \u0027mime_content\u0027: mime content of message\\n        #             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n        #             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n        #             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n        #             \u0027attachments\u0027: {\\n        #                 \u0027attachment_id1\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n        #                     \u0027attachment_size\u0027: \u00278842\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 },\\n        #                 \u0027attachment_id2\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_size\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 }\\n        #             }\\n        #         },\\n        #         \u0027idN\u0027: {\\n        #             \u0027subject\u0027: \u0027Email Subject\u0027,\\n        #             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n        #             \u0027mime_content\u0027: mime content of message\\n        #             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n        #             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n        #             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n        #             \u0027attachments\u0027: {\\n        #                 \u0027attachment_id1\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n        #                     \u0027attachment_size\u0027: \u00278842\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 },\\n        #                 \u0027attachment_id2\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_size\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 }\\n        #             }\\n        #         }\\n        #     }\\n        # }\\n        \\n# Get email ids\\nemail_ids = results.email_ids\\n# Get emails\\nemails = results.emails\\n\\n# Loop through all queried emails\\nfor email_id in email_ids:\\n  # Get email that corresponds to email_id\\n  email = emails[email_id]\\n  # Create artifacts from sender information that isn\u0027t None\\n  if email[\u0027sender_name\u0027]:\\n    incident.addArtifact(\u0027Email Sender Name\u0027, email[\u0027sender_name\u0027], \u0027Sender name for email {}\u0027.format(email_id))\\n  if email[\u0027sender_email\u0027]:\\n    incident.addArtifact(\u0027Email Sender\u0027, email[\u0027sender_email\u0027], \u0027Sender email address for email {}\u0027.format(email_id))\\n  if email[\u0027subject\u0027]:\\n    incident.addArtifact(\u0027Email Subject\u0027, email[\u0027subject\u0027], \u0027Email subject for email {}\u0027.format(email_id))\\n  if email[\u0027body\u0027]:\\n    incident.addArtifact(\u0027Email Body\u0027, email[\u0027body\u0027], \u0027Email body in HTML for email {}\u0027.format(email_id))\\n    \\n  # Loop through attachments and create artifacts and notes for them\\n  attachment_ids = email[\u0027attachment_ids\u0027]\\n  attachments = email[\u0027attachments\u0027]\\n  for attachment_id in attachment_ids:\\n    attachment = attachments[attachment_id]\\n    incident.addArtifact(\u0027Email Attachment Name\u0027, attachment[\u0027attachment_name\u0027], \u0027Attachment name for attachment {} from email {}\u0027.format(attachment_id, email_id))\\n    \\n    # Add note\\n    noteText = \u0027base64 attachment of {} from email {}: \\\\n{}\u0027.format(attachment[\u0027attachment_name\u0027], email_id, attachment[\u0027attachment_base64\u0027])\\n    incident.addNote(noteText)\",\"pre_processing_script\":\"# Set inputs\\ninputs.exchange_email = inputs.exchange_email if not rule.properties.exchange_email else rule.properties.exchange_email\\ninputs.exchange_force_delete_subfolders = inputs.exchange_force_delete_subfolders if not rule.properties.exchange_force_delete_subfolders else rule.properties.exchange_force_delete_subfolders\\ninputs.exchange_folder_path = inputs.exchange_folder_path if not rule.properties.exchange_folder_path else rule.properties.exchange_folder_path\\ninputs.exchange_destination_folder_path = inputs.exchange_destination_folder_path if not rule.properties.exchange_destination_folder_path else rule.properties.exchange_destination_folder_path\\ninputs.exchange_force_delete_subfolders = inputs.exchange_force_delete_subfolders if rule.properties.exchange_force_delete_subfolders is None else rule.properties.exchange_force_delete_subfolders\\n\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0iq3xjq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dsimwi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0iq3xjq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1l3w1vw\"/\u003e\u003cendEvent id=\"EndEvent_1yb64d9\"\u003e\u003cincoming\u003eSequenceFlow_0dsimwi\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0dsimwi\" sourceRef=\"ServiceTask_1l3w1vw\" targetRef=\"EndEvent_1yb64d9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1l3w1vw\" id=\"ServiceTask_1l3w1vw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0iq3xjq\" id=\"SequenceFlow_0iq3xjq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1yb64d9\" id=\"EndEvent_1yb64d9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dsimwi\" id=\"SequenceFlow_0dsimwi_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"399\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 10,
+      "description": "Gets all emails from a folder, move those emails to another folder, delete the original folder, then make an artifact from the results.",
+      "export_key": "exchange_move_and_delete_folder",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1676383577565,
+      "name": "Exchange Move Folder Contents and Delete Folder",
+      "object_type": "artifact",
+      "programmatic_name": "exchange_move_and_delete_folder",
+      "tags": [],
+      "uuid": "bcf11247-2817-4b83-8e3c-c15055b8d055",
+      "workflow_id": 83
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "example_of_exchange_create_meeting",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_exchange_create_meeting\" isExecutable=\"true\" name=\"Example of Exchange Create Meeting\"\u003e\u003cdocumentation\u003eCreates a meeting with the given parameters and creates a note from the result.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0ul9qip\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_14opixw\" name=\"Exchange Create Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"145aab42-f201-4d01-95ad-6181b64720b7\"\u003e{\"inputs\":{},\"post_processing_script\":\"\u0027\u0027\u0027\\nResults:\\n--------\\n   \u0027required_attendees\u0027:required1@example.com,required2@example.com\\n   \u0027optional_attendees\u0027: optional1@example.com,...\\n   \u0027sender\u0027: sender@example.com\\n   \u0027subject\u0027: meeting subject\\n   \u0027body\u0027: meeting body\\n   \u0027start_time\u0027: epoch start time\\n   \u0027end_time\u0027: epoch end time\\n\u0027\u0027\u0027\\n\\nfrom java.util import Date\\n\\ncontent = results.get(\\\"content\\\")\\n\\nif not results.success:\\n  text = u\\\"Unable to create meeting\\\"\\n  fail_reason = results.reason\\n  if fail_reason:\\n    text = u\\\"{0}:\\\\n\\\\tFailure reason: {1}\\\".format(text, fail_reason)\\n    \\nelse:\\n  start_time = Date(content.get(\\\"start_time\\\")).toString()\\n  end_time = Date(content.get(\\\"end_time\\\")).toString()\\n  \\n  text  =  \\\"\u0026lt;b\u0026gt;Meeting created from Exchange Create Meeting:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\n  text += f\\\"\u0026lt;br /\u0026gt;Subject: {content.get(\u0027subject\u0027)}\\\"\\n  text += f\\\"\u0026lt;br /\u0026gt;Start time: {content.get(\u0027start_time\u0027)}\\\"\\n  text += f\\\"\u0026lt;br /\u0026gt;End time: {content.get(\u0027end_time\u0027)}\\\"\\n  text += f\\\"\u0026lt;br /\u0026gt;Required Attendees: {content.get(\u0027required_attendees\u0027)}\\\" \\n  text += f\\\"\u0026lt;br /\u0026gt;Optional Attendees: {content.get(\u0027optional_attendees\u0027)}\\\" \\n  text += f\\\"\u0026lt;br /\u0026gt;Body: {content.get(\u0027body\u0027)}\\\"\\n\\nnoteText = helper.createRichText(text)\\nincident.addNote(noteText)\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.exchange_email = rule.properties.exchange_email if rule.properties.exchange_email is not None else inputs.exchange_email\\ninputs.exchange_meeting_start_time = rule.properties.exchange_meeting_start_time if rule.properties.exchange_meeting_start_time is not None else inputs.exchange_meeting_start_time\\ninputs.exchange_meeting_end_time = rule.properties.exchange_meeting_end_time if rule.properties.exchange_meeting_end_time is not None else inputs.exchange_meeting_end_time\\ninputs.exchange_meeting_subject = rule.properties.exchange_meeting_subject if rule.properties.exchange_meeting_subject is not None else inputs.exchange_meeting_subject\\ninputs.exchange_meeting_body = rule.properties.exchange_meeting_body if rule.properties.exchange_meeting_body is not None else inputs.exchange_meeting_body\\ninputs.exchange_required_attendees = rule.properties.exchange_required_attendees if rule.properties.exchange_required_attendees is not None else inputs.exchange_required_attendees\\ninputs.exchange_optional_attendees = rule.properties.exchange_optional_attendees if rule.properties.exchange_optional_attendees is not None else inputs.exchange_optional_attendees\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0ul9qip\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0c3ucsv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0ul9qip\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_14opixw\"/\u003e\u003cendEvent id=\"EndEvent_1cu0hvo\"\u003e\u003cincoming\u003eSequenceFlow_0c3ucsv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0c3ucsv\" sourceRef=\"ServiceTask_14opixw\" targetRef=\"EndEvent_1cu0hvo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_14opixw\" id=\"ServiceTask_14opixw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"281\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0ul9qip\" id=\"SequenceFlow_0ul9qip_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"281\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"239.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1cu0hvo\" id=\"EndEvent_1cu0hvo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"454\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"472\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0c3ucsv\" id=\"SequenceFlow_0c3ucsv_di\"\u003e\u003comgdi:waypoint x=\"381\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"454\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"417.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "description": "Creates a meeting with the given parameters and creates a note from the result.",
+      "export_key": "example_of_exchange_create_meeting",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1676298124019,
+      "name": "Example of Exchange Create Meeting",
+      "object_type": "artifact",
+      "programmatic_name": "example_of_exchange_create_meeting",
+      "tags": [],
+      "uuid": "143f380f-ab08-4841-aaf6-072a381583a7",
+      "workflow_id": 80
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "example_of_exchange_delete_emails",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_exchange_delete_emails\" isExecutable=\"true\" name=\"Example of Exchange Delete Emails\"\u003e\u003cdocumentation\u003eDeletes queried emails and then creates artifacts from the results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0sdwknx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0s388lg\" name=\"Exchange Delete Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"25dd829d-5480-465d-b865-9ed9bea2ff53\"\u003e{\"inputs\":{},\"post_processing_script\":\"\u0027\u0027\u0027 \\nExample results:\\n---------------\\n results = {\\n     \u0027email_ids\u0027: [\u0027id1\u0027, \u0027idN\u0027],\\n     \u0027emails\u0027: {\\n         \u0027id1\u0027: {\\n             \u0027subject\u0027: \u0027Email Subject\u0027,\\n             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n             \u0027mime_content\u0027: mime content of message\\n             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n             \u0027attachments\u0027: {\\n\\n                 \u0027attachment_id1\u0027: {\\n                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n                     \u0027attachment_size\u0027: \u00278842\u0027,\\n                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027},\\n\\n                 \u0027attachment_id2\u0027: {\\n                     \u0027attachment_name\u0027: \u0027...\u0027,\\n                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n                     \u0027attachment_size\u0027: \u0027...\u0027,\\n                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027}}},\\n\u0027\u0027\u0027\\n\\n\\n# To skip adding attachment as a base64 encoded value, Change this to False\\nenable_add_attachment_value = True \\ncontent   = results.get(\\\"content\\\")\\nemails    = content.get(\\\"emails\\\")\\nemail_ids = content.get(\\\"email_ids\\\")\\n\\n# Loop through all queried emails\\nfor email_id in email_ids:\\n  email = emails[email_id]\\n  # Extract information and create Artifcats\\n  if email[\u0027sender_name\u0027]:\\n    incident.addArtifact(\u0027Email Sender Name\u0027, email[\u0027sender_name\u0027], \u0027Sender name for email {}\u0027.format(email_id))\\n  if email[\u0027sender_email\u0027]:\\n    incident.addArtifact(\u0027Email Sender\u0027, email[\u0027sender_email\u0027], \u0027Sender email address for email {}\u0027.format(email_id))\\n  if email[\u0027subject\u0027]:\\n    incident.addArtifact(\u0027Email Subject\u0027, email[\u0027subject\u0027], \u0027Email subject for email {}\u0027.format(email_id))\\n  if email[\u0027body\u0027]:\\n    incident.addArtifact(\u0027Email Body\u0027, email[\u0027body\u0027], \u0027Email body in HTML for email {}\u0027.format(email_id))\\n    \\n  # Loop through attachments and create artifacts\\n  attachment_ids = email[\u0027attachment_ids\u0027]\\n  attachments = email[\u0027attachments\u0027]\\n  for attachment_id in attachment_ids:\\n    attachment = attachments[attachment_id]\\n    incident.addArtifact(\u0027Email Attachment Name\u0027, attachment[\u0027attachment_name\u0027], \u0027Attachment name for attachment {} from email {}\u0027.format(attachment_id, email_id))\\n    \\n    if enable_add_attachment_value:\\n      incident.addArtifact(\u0027Email Attachment\u0027, attachment[\u0027attachment_base64\u0027], \u0027Attachment file {} base64 encoded : {}\u0027.format(attachment[\u0027attachment_name\u0027], attachment[\u0027attachment_base64\u0027]))\\n\\ntext  = \\\"\u0026lt;b\u0026gt;Microsoft Exchange:\u0026lt;/b\u0026gt;\u0026lt;br /\u0026gt;\\\"\\ntext += \\\"\u0026lt;br /\u0026gt;Successfully deleted \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt; emails\\\".format(len(email_ids))\\n\\nnoteText = helper.createRichText(text)\\nincident.addNote(noteText)\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Set inputs\\n# For for information on input values, read tooltips\\ninputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email\\ninputs.exchange_folder_path = inputs.exchange_folder_path if rule.properties.exchange_folder_path is None else rule.properties.exchange_folder_path\\ninputs.exchange_hard_delete = inputs.exchange_hard_delete if rule.properties.exchange_hard_delete is None else rule.properties.exchange_hard_delete\\ninputs.exchange_email_ids = inputs.exchange_email_ids if rule.properties.exchange_email_ids is None else rule.properties.exchange_email_ids\\ninputs.exchange_sender = inputs.exchange_sender if rule.properties.exchange_sender is None else rule.properties.exchange_sender\\ninputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject\\ninputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body\\ninputs.exchange_start_date = inputs.exchange_start_date if rule.properties.exchange_start_date is None else rule.properties.exchange_start_date\\ninputs.exchange_end_date = inputs.exchange_end_date if rule.properties.exchange_end_date is None else rule.properties.exchange_end_date\\ninputs.exchange_has_attachments = inputs.exchange_has_attachments if rule.properties.exchange_has_attachments is None else rule.properties.exchange_has_attachments\\ninputs.exchange_order_by_recency = inputs.exchange_order_by_recency if rule.properties.exchange_order_by_recency is None else rule.properties.exchange_order_by_recency\\ninputs.exchange_num_emails = inputs.exchange_num_emails if rule.properties.exchange_num_emails is None else rule.properties.exchange_num_emails\\ninputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.properties.exchange_search_subfolders is None else rule.properties.exchange_search_subfolders\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0sdwknx\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_11z2k7n\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0sdwknx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0s388lg\"/\u003e\u003cendEvent id=\"EndEvent_0av7ljj\"\u003e\u003cincoming\u003eSequenceFlow_11z2k7n\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_11z2k7n\" sourceRef=\"ServiceTask_0s388lg\" targetRef=\"EndEvent_0av7ljj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0s388lg\" id=\"ServiceTask_0s388lg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"268\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0sdwknx\" id=\"SequenceFlow_0sdwknx_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"268\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"233\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0av7ljj\" id=\"EndEvent_0av7ljj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11z2k7n\" id=\"SequenceFlow_11z2k7n_di\"\u003e\u003comgdi:waypoint x=\"368\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"395.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "description": "Deletes queried emails and then creates artifacts from the results.",
+      "export_key": "example_of_exchange_delete_emails",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1676376427362,
+      "name": "Example of Exchange Delete Emails",
+      "object_type": "artifact",
+      "programmatic_name": "example_of_exchange_delete_emails",
+      "tags": [],
+      "uuid": "d4bd65a6-cdd4-481f-a691-986602a19a13",
+      "workflow_id": 78
     },
     {
       "actions": [],
@@ -2756,52 +2777,33 @@
       "content_version": 1,
       "description": "Get\u0027s mailbox info for an email and then creates an artifact with the results.",
       "export_key": "example_of_exchange_get_mailbox_info",
-      "last_modified_by": "aaa9eee1-5258-447f-8219-32d33236fee0",
-      "last_modified_time": 1655995105466,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1673954180141,
       "name": "Example of Exchange Get Mailbox Info",
       "object_type": "artifact",
       "programmatic_name": "example_of_exchange_get_mailbox_info",
       "tags": [],
       "uuid": "7b2d9e8c-4785-47a2-9007-14ae6ea572d2",
-      "workflow_id": 7
+      "workflow_id": 82
     },
     {
       "actions": [],
       "content": {
-        "version": 1,
-        "workflow_id": "exchange_move_and_delete_folder",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"exchange_move_and_delete_folder\" isExecutable=\"true\" name=\"Exchange Move Folder Contents and Delete Folder\"\u003e\u003cdocumentation\u003eGets all emails from a folder, move those emails to another folder, delete the original folder, then make an artifact from the results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0iq3xjq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1l3w1vw\" name=\"Exchange Move Folder Contents and...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c29302aa-36cd-4858-8465-caecc2578d78\"\u003e{\"inputs\":{\"6a692281-1bf5-425e-b80b-2552a1d974bf\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":true,\"multiselect_value\":[]}}},\"post_processing_script\":\" # Example function results\\n        # results = {\\n        #     \u0027email_ids\u0027: [\u0027id1\u0027, \u0027idN\u0027],\\n        #     \u0027emails\u0027: {\\n        #         \u0027id1\u0027: {\\n        #             \u0027subject\u0027: \u0027Email Subject\u0027,\\n        #             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n        #             \u0027mime_content\u0027: mime content of message\\n        #             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n        #             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n        #             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n        #             \u0027attachments\u0027: {\\n        #                 \u0027attachment_id1\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n        #                     \u0027attachment_size\u0027: \u00278842\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 },\\n        #                 \u0027attachment_id2\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_size\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 }\\n        #             }\\n        #         },\\n        #         \u0027idN\u0027: {\\n        #             \u0027subject\u0027: \u0027Email Subject\u0027,\\n        #             \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n        #             \u0027mime_content\u0027: mime content of message\\n        #             \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n        #             \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n        #             \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n        #             \u0027attachments\u0027: {\\n        #                 \u0027attachment_id1\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n        #                     \u0027attachment_size\u0027: \u00278842\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 },\\n        #                 \u0027attachment_id2\u0027: {\\n        #                     \u0027attachment_name\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_content_type\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_size\u0027: \u0027...\u0027,\\n        #                     \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n        #                 }\\n        #             }\\n        #         }\\n        #     }\\n        # }\\n        \\n# Get email ids\\nemail_ids = results.email_ids\\n# Get emails\\nemails = results.emails\\n\\n# Loop through all queried emails\\nfor email_id in email_ids:\\n  # Get email that corresponds to email_id\\n  email = emails[email_id]\\n  # Create artifacts from sender information that isn\u0027t None\\n  if email[\u0027sender_name\u0027]:\\n    incident.addArtifact(\u0027Email Sender Name\u0027, email[\u0027sender_name\u0027], \u0027Sender name for email {}\u0027.format(email_id))\\n  if email[\u0027sender_email\u0027]:\\n    incident.addArtifact(\u0027Email Sender\u0027, email[\u0027sender_email\u0027], \u0027Sender email address for email {}\u0027.format(email_id))\\n  if email[\u0027subject\u0027]:\\n    incident.addArtifact(\u0027Email Subject\u0027, email[\u0027subject\u0027], \u0027Email subject for email {}\u0027.format(email_id))\\n  if email[\u0027body\u0027]:\\n    incident.addArtifact(\u0027Email Body\u0027, email[\u0027body\u0027], \u0027Email body in HTML for email {}\u0027.format(email_id))\\n    \\n  # Loop through attachments and create artifacts and notes for them\\n  attachment_ids = email[\u0027attachment_ids\u0027]\\n  attachments = email[\u0027attachments\u0027]\\n  for attachment_id in attachment_ids:\\n    attachment = attachments[attachment_id]\\n    incident.addArtifact(\u0027Email Attachment Name\u0027, attachment[\u0027attachment_name\u0027], \u0027Attachment name for attachment {} from email {}\u0027.format(attachment_id, email_id))\\n    \\n    # Add note\\n    noteText = \u0027base64 attachment of {} from email {}: \\\\n{}\u0027.format(attachment[\u0027attachment_name\u0027], email_id, attachment[\u0027attachment_base64\u0027])\\n    incident.addNote(noteText)\",\"pre_processing_script\":\"# Set inputs\\ninputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email\\ninputs.exchange_delete_if_no_subfolders = inputs.exchange_delete_if_no_subfolders if rule.properties.exchange_delete_if_no_subfolders is None else rule.properties.exchange_delete_if_no_subfolders\\ninputs.exchange_folder_path = inputs.exchange_folder_path if rule.properties.exchange_folder_path is None else rule.properties.exchange_folder_path\\ninputs.exchange_destination_folder_path = inputs.exchange_destination_folder_path if rule.properties.exchange_destination_folder_path is None else rule.properties.exchange_destination_folder_path\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0iq3xjq\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0dsimwi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0iq3xjq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1l3w1vw\"/\u003e\u003cendEvent id=\"EndEvent_1yb64d9\"\u003e\u003cincoming\u003eSequenceFlow_0dsimwi\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0dsimwi\" sourceRef=\"ServiceTask_1l3w1vw\" targetRef=\"EndEvent_1yb64d9\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1l3w1vw\" id=\"ServiceTask_1l3w1vw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0iq3xjq\" id=\"SequenceFlow_0iq3xjq_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1yb64d9\" id=\"EndEvent_1yb64d9_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0dsimwi\" id=\"SequenceFlow_0dsimwi_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"399\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 18,
+        "workflow_id": "example_of_exchange_find_emails",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_exchange_find_emails\" isExecutable=\"true\" name=\"Example of Exchange Find Emails\"\u003e\u003cdocumentation\u003eQuery emails and then create artifacts from results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0jwoyul\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0vmq0m0\" name=\"Exchange Find Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e8d8dcd1-3c3e-4974-be3e-7aba129a01eb\"\u003e{\"inputs\":{},\"post_processing_script\":\"\u0027\u0027\u0027\\n\\nExample function results:\\n------------------------\\n    {\\n      \u0027email_ids\u0027: [\u0027id1\u0027, \u0027idN\u0027],\\n      \u0027emails\u0027: {\\n          \u0027id1\u0027: {\\n              \u0027subject\u0027: \u0027Email Subject\u0027,\\n              \u0027body\u0027: \u0027Subject body in HTML\u0027,\\n              \u0027mime_content\u0027: mime content of message\\n              \u0027sender_name\u0027: \u0027FirstName LastName\u0027,\\n              \u0027sender_email\u0027: \u0027example@example.com\u0027,\\n              \u0027attachment_ids\u0027: [\u0027attachment_id1\u0027, \u0027attachment_id2\u0027],\\n              \u0027attachments\u0027: {\\n                  \u0027attachment_id1\u0027: {\\n                      \u0027attachment_name\u0027: \u0027attachment.xslx\u0027,\\n                      \u0027attachment_content_type\u0027: \u0027spreadsheet\u0027,\\n                      \u0027attachment_size\u0027: \u00278842\u0027,\\n                      \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027\\n                  },\\n                  \u0027attachment_id2\u0027: {\\n                      \u0027attachment_name\u0027: \u0027...\u0027,\\n                      \u0027attachment_content_type\u0027: \u0027...\u0027,\\n                      \u0027attachment_size\u0027: \u0027...\u0027,\\n                      \u0027attachment_base64\u0027: \u0027attachment encoded in base 64\u0027}}},\\n\\n\u0027\u0027\u0027\\n\\n# To skip adding attachment as a base64 encoded value, Change this to False\\nenable_add_attachment_value = True \\ncontent   = results.get(\\\"content\\\")\\nemails    = content.get(\\\"emails\\\")\\nemail_ids = content.get(\\\"email_ids\\\")\\n\\n# Loop through all queried emails\\nfor email_id in email_ids:\\n  email = emails[email_id]\\n  # Extract information and create Artifcats\\n  if email[\u0027sender_name\u0027]:\\n    incident.addArtifact(\u0027Email Sender Name\u0027, email[\u0027sender_name\u0027], \u0027Sender name for email {}\u0027.format(email_id))\\n  if email[\u0027sender_email\u0027]:\\n    incident.addArtifact(\u0027Email Sender\u0027, email[\u0027sender_email\u0027], \u0027Sender email address for email {}\u0027.format(email_id))\\n  if email[\u0027subject\u0027]:\\n    incident.addArtifact(\u0027Email Subject\u0027, email[\u0027subject\u0027], \u0027Email subject for email {}\u0027.format(email_id))\\n  if email[\u0027body\u0027]:\\n    incident.addArtifact(\u0027Email Body\u0027, email[\u0027body\u0027], \u0027Email body in HTML for email {}\u0027.format(email_id))\\n    \\n  # Loop through attachments and create artifacts\\n  attachment_ids = email[\u0027attachment_ids\u0027]\\n  attachments = email[\u0027attachments\u0027]\\n  for attachment_id in attachment_ids:\\n    attachment = attachments[attachment_id]\\n    incident.addArtifact(\u0027Email Attachment Name\u0027, attachment[\u0027attachment_name\u0027], \u0027Attachment name for attachment {} from email {}\u0027.format(attachment_id, email_id))\\n    \\n    if enable_add_attachment_value:\\n      incident.addArtifact(\u0027Email Attachment\u0027, attachment[\u0027attachment_base64\u0027], \u0027Attachment file {} base64 encoded : {}\u0027.format(attachment[\u0027attachment_name\u0027], attachment[\u0027attachment_base64\u0027]))\\n\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Set inputs\\n# For for information on input values, read tooltips\\ninputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email\\ninputs.exchange_folder_path = inputs.exchange_folder_path if rule.properties.exchange_folder_path is None else rule.properties.exchange_folder_path\\ninputs.exchange_email_ids = inputs.exchange_email_ids if rule.properties.exchange_email_ids is None else rule.properties.exchange_email_ids\\ninputs.exchange_sender = inputs.exchange_sender if rule.properties.exchange_sender is None else rule.properties.exchange_sender\\ninputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject\\ninputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body\\ninputs.exchange_start_date = inputs.exchange_start_date if rule.properties.exchange_start_date is None else rule.properties.exchange_start_date\\ninputs.exchange_end_date = inputs.exchange_end_date if rule.properties.exchange_end_date is None else rule.properties.exchange_end_date\\ninputs.exchange_has_attachments = inputs.exchange_has_attachments if rule.properties.exchange_has_attachments is None else rule.properties.exchange_has_attachments\\ninputs.exchange_order_by_recency = inputs.exchange_order_by_recency if rule.properties.exchange_order_by_recency is None else rule.properties.exchange_order_by_recency\\ninputs.exchange_num_emails = inputs.exchange_num_emails if rule.properties.exchange_num_emails is None else rule.properties.exchange_num_emails\\ninputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.properties.exchange_search_subfolders is None else rule.properties.exchange_search_subfolders\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0jwoyul\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1ujx8nx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0jwoyul\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0vmq0m0\"/\u003e\u003cendEvent id=\"EndEvent_1y922gq\"\u003e\u003cincoming\u003eSequenceFlow_1ujx8nx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1ujx8nx\" sourceRef=\"ServiceTask_0vmq0m0\" targetRef=\"EndEvent_1y922gq\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0vmq0m0\" id=\"ServiceTask_0vmq0m0_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"266\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jwoyul\" id=\"SequenceFlow_0jwoyul_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"229\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"229\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"266\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"199\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1y922gq\" id=\"EndEvent_1y922gq_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"453\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"471\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1ujx8nx\" id=\"SequenceFlow_1ujx8nx_di\"\u003e\u003comgdi:waypoint x=\"366\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"406\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"406\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"453\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"376\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
-      "description": "Gets all emails from a folder, move those emails to another folder, delete the original folder, then make an artifact from the results.",
-      "export_key": "exchange_move_and_delete_folder",
-      "last_modified_by": "aaa9eee1-5258-447f-8219-32d33236fee0",
-      "last_modified_time": 1655995103920,
-      "name": "Exchange Move Folder Contents and Delete Folder",
+      "content_version": 18,
+      "description": "Query emails and then create artifacts from results.",
+      "export_key": "example_of_exchange_find_emails",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1676376772402,
+      "name": "Example of Exchange Find Emails",
       "object_type": "artifact",
-      "programmatic_name": "exchange_move_and_delete_folder",
+      "programmatic_name": "example_of_exchange_find_emails",
       "tags": [],
-      "uuid": "bcf11247-2817-4b83-8e3c-c15055b8d055",
-      "workflow_id": 3
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "example_of_exchange_send_email",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_of_exchange_send_email\" isExecutable=\"true\" name=\"Example of Exchange Send Email\"\u003e\u003cdocumentation\u003eSends an email to all specified recipients then makes a note with the results.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0cu0gse\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0kc53qw\" name=\"Exchange Send Email\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17b4b6d-5d21-413e-8d90-b7d95ebb79c0\"\u003e{\"inputs\":{\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Example Subject\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"Example Body\"}},\"3c92533f-7241-4d0e-b031-2bb4aa510ca9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"user@example.com\"}}},\"post_processing_script\":\"# Example results\\n# results = {\\n#             \u0027recipients\u0027: [\u0027user1@example.com\u0027, \u0027user2@example.com\u0027],\\n#             \u0027sender\u0027: \u0027sender@example.com\u0027,\\n#             \u0027subject\u0027: \u0027Subject\u0027,\\n#             \u0027body\u0027: \u0027HTML Body\u0027\\n#           }\\n\\n# Create note with results\\nnote = \u0027\u0027\u0027Sender: {}, Recipients: {}\\nSubject: {}\\nBody: {}\\n\u0027\u0027\u0027.format(results.sender, results.recipients, results.subject, results.body)\\n\\nincident.addNote(note)\",\"pre_processing_script\":\"# Set inputs\\ninputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email\\ninputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject\\ninputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body\\ninputs.exchange_emails = inputs.exchange_emails if rule.properties.exchange_emails is None else rule.properties.exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0cu0gse\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1o7o03m\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0cu0gse\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0kc53qw\"/\u003e\u003cendEvent id=\"EndEvent_06nfble\"\u003e\u003cincoming\u003eSequenceFlow_1o7o03m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1o7o03m\" sourceRef=\"ServiceTask_0kc53qw\" targetRef=\"EndEvent_06nfble\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0kc53qw\" id=\"ServiceTask_0kc53qw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"272\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0cu0gse\" id=\"SequenceFlow_0cu0gse_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"272\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"235\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_06nfble\" id=\"EndEvent_06nfble_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"449\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"467\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1o7o03m\" id=\"SequenceFlow_1o7o03m_di\"\u003e\u003comgdi:waypoint x=\"372\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"449\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"410.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Sends an email to all specified recipients then makes a note with the results.",
-      "export_key": "example_of_exchange_send_email",
-      "last_modified_by": "aaa9eee1-5258-447f-8219-32d33236fee0",
-      "last_modified_time": 1655995103580,
-      "name": "Example of Exchange Send Email",
-      "object_type": "artifact",
-      "programmatic_name": "example_of_exchange_send_email",
-      "tags": [],
-      "uuid": "222280e7-07f0-4c5e-9a0e-e1d0d88353f2",
-      "workflow_id": 2
+      "uuid": "de0fb43a-7e70-4208-849c-3ae70d9487cf",
+      "workflow_id": 79
     }
   ],
   "workspaces": []

@@ -21,9 +21,33 @@ def codegen_reload_data():
     return {
         "package": u"fn_exchange",
         "message_destinations": [u"fn_exchange"],
-        "functions": [u"exchange_create_meeting", u"exchange_delete_emails", u"exchange_find_emails", u"exchange_get_mailbox_info", u"exchange_move_emails", u"exchange_move_folder_contents_and_delete_folder", u"exchange_send_email"],
-        "workflows": [u"example_of_exchange_create_meeting", u"example_of_exchange_delete_emails", u"example_of_exchange_find_emails", u"example_of_exchange_get_mailbox_info", u"example_of_exchange_move_emails", u"example_of_exchange_send_email", u"exchange_move_and_delete_folder"],
-        "actions": [u"Exchange Create Meeting", u"Exchange Delete Emails", u"Exchange Find Emails", u"Exchange Get Mailbox Info", u"Exchange Move Emails", u"Exchange Move Folder Contents and Delete Folder", u"Exchange Send Email"],
+
+        "functions": [
+            u"exchange_create_meeting",
+            u"exchange_delete_emails",
+            u"exchange_find_emails",
+            u"exchange_get_mailbox_info",
+            u"exchange_move_emails",
+            u"exchange_send_email"],
+
+        "workflows": [
+            u"example_of_exchange_create_meeting",
+            u"example_of_exchange_delete_emails",
+            u"example_of_exchange_find_emails",
+            u"example_of_exchange_get_mailbox_info",
+            u"example_of_exchange_move_emails",
+            u"example_of_exchange_send_email",
+            u"exchange_move_and_delete_folder"],
+
+        "actions": [
+            u"Exchange Create Meeting",
+            u"Exchange Delete Emails",
+            u"Exchange Find Emails",
+            u"Exchange Get Mailbox Info",
+            u"Exchange Move Emails",
+            u"Exchange Move Folder Contents and Delete Folder",
+            u"Exchange Send Email"],
+
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],

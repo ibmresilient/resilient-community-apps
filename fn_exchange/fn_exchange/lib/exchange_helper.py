@@ -4,9 +4,10 @@ import time
 import logging
 import exchangelib
 
-from exchangelib import EWSTimeZone, folders
+from exchangelib import EWSTimeZone
 from exchangelib.errors import ErrorFolderNotFound
 
+PACKAGE_NAME =  "fn_exchange"
 log = logging.getLogger(__file__)
 
 class NoMailboxError(Exception):

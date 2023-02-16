@@ -6,7 +6,7 @@
 from resilient_circuits import (AppFunctionComponent, app_function,
                                 StatusMessage, FunctionResult)
 
-from fn_exchange.lib import constants
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME
 from fn_exchange.lib.exchange_utils import exchange_interface
 
 FN_NAME = "exchange_find_emails"
@@ -15,7 +15,7 @@ class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'exchange_find_emails' """
 
     def __init__(self, opts):
-        super(FunctionComponent, self).__init__(opts, constants.PACKAGE_NAME)
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):

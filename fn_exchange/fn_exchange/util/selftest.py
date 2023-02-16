@@ -15,7 +15,7 @@ log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
-    Simple test to confirm access to Miscrosoft Exchange API connectivity.
+    Simple test to confirm access to Microsoft Exchange API connectivity.
     """
     options = opts.get("fn_exchange", {})
     username = options.get("email")

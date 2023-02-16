@@ -37,67 +37,45 @@ inputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.pr
 
 ### Post-Processing Script
 ```python
- # Example function results
-        # results = {
-        #     'email_ids': ['id1', 'idN'],
-        #     'emails': {
-        #         'id1': {
-        #             'subject': 'Email Subject',
-        #             'body': 'Subject body in HTML',
-        #             'mime_content': mime content of message
-        #             'sender_name': 'FirstName LastName',
-        #             'sender_email': 'example@example.com',
-        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
-        #             'attachments': {
-        #                 'attachment_id1': {
-        #                     'attachment_name': 'attachment.xslx',
-        #                     'attachment_content_type': 'spreadsheet',
-        #                     'attachment_size': '8842',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 },
-        #                 'attachment_id2': {
-        #                     'attachment_name': '...',
-        #                     'attachment_content_type': '...',
-        #                     'attachment_size': '...',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 }
-        #             }
-        #         },
-        #         'idN': {
-        #             'subject': 'Email Subject',
-        #             'body': 'Subject body in HTML',
-        #             'mime_content': mime content of message
-        #             'sender_name': 'FirstName LastName',
-        #             'sender_email': 'example@example.com',
-        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
-        #             'attachments': {
-        #                 'attachment_id1': {
-        #                     'attachment_name': 'attachment.xslx',
-        #                     'attachment_content_type': 'spreadsheet',
-        #                     'attachment_size': '8842',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 },
-        #                 'attachment_id2': {
-        #                     'attachment_name': '...',
-        #                     'attachment_content_type': '...',
-        #                     'attachment_size': '...',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 }
-        #             }
-        #         }
-        #     }
-        # }
-        
-# Get email ids
-email_ids = results.email_ids
-# Get emails
-emails = results.emails
+''' 
+Example results:
+---------------
+ results = {
+     'email_ids': ['id1', 'idN'],
+     'emails': {
+         'id1': {
+             'subject': 'Email Subject',
+             'body': 'Subject body in HTML',
+             'mime_content': mime content of message
+             'sender_name': 'FirstName LastName',
+             'sender_email': 'example@example.com',
+             'attachment_ids': ['attachment_id1', 'attachment_id2'],
+             'attachments': {
+
+                 'attachment_id1': {
+                     'attachment_name': 'attachment.xslx',
+                     'attachment_content_type': 'spreadsheet',
+                     'attachment_size': '8842',
+                     'attachment_base64': 'attachment encoded in base 64'},
+
+                 'attachment_id2': {
+                     'attachment_name': '...',
+                     'attachment_content_type': '...',
+                     'attachment_size': '...',
+                     'attachment_base64': 'attachment encoded in base 64'}}},
+'''
+
+
+# To skip adding attachment as a base64 encoded value, Change this to False
+enable_add_attachment_value = True 
+content   = results.get("content")
+emails    = content.get("emails")
+email_ids = content.get("email_ids")
 
 # Loop through all queried emails
 for email_id in email_ids:
-  # Get email that corresponds to email_id
   email = emails[email_id]
-  # Create artifacts from sender information that isn't None
+  # Extract information and create Artifcats
   if email['sender_name']:
     incident.addArtifact('Email Sender Name', email['sender_name'], 'Sender name for email {}'.format(email_id))
   if email['sender_email']:
@@ -107,16 +85,21 @@ for email_id in email_ids:
   if email['body']:
     incident.addArtifact('Email Body', email['body'], 'Email body in HTML for email {}'.format(email_id))
     
-  # Loop through attachments and create artifacts and notes for them
+  # Loop through attachments and create artifacts
   attachment_ids = email['attachment_ids']
   attachments = email['attachments']
   for attachment_id in attachment_ids:
     attachment = attachments[attachment_id]
     incident.addArtifact('Email Attachment Name', attachment['attachment_name'], 'Attachment name for attachment {} from email {}'.format(attachment_id, email_id))
     
-    # Add note
-    noteText = 'base64 attachment of {} from email {}: \n{}'.format(attachment['attachment_name'], email_id, attachment['attachment_base64'])
-    incident.addNote(noteText)
+    if enable_add_attachment_value:
+      incident.addArtifact('Email Attachment', attachment['attachment_base64'], 'Attachment file {} base64 encoded : {}'.format(attachment['attachment_name'], attachment['attachment_base64']))
+
+text  = "<b>Microsoft Exchange:</b><br />"
+text += "<br />Successfully deleted <b>{}</b> emails".format(len(email_ids))
+
+noteText = helper.createRichText(text)
+incident.addNote(noteText)
 ```
 
 ---
