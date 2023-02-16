@@ -37,6 +37,7 @@ class TestExchangeCreateMeeting:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @patch('fn_exchange.components.exchange_create_meeting.exchange_interface', side_effect=mocked_exchange_utils)
     @pytest.mark.parametrize(
         "exchange_email, exchange_meeting_start_time, exchange_meeting_end_time, exchange_meeting_subject, \

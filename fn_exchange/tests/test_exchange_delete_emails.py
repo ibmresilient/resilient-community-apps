@@ -36,6 +36,7 @@ class TestExchangeDeleteEmails:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @patch('fn_exchange.components.exchange_delete_emails.exchange_interface', side_effect=mocked_exchange_utils)
     @pytest.mark.parametrize("exchange_emails, exchange_hard_delete, exchange_folder_path, exchange_sender, exchange_start_date, exchange_end_date, expected_results", [
         ("user@exch.com", False, "Top of Information Store/TESTFOLDER_1", "jdoe@exch.com", 1518480000000,

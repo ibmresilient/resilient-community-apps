@@ -36,6 +36,7 @@ class TestExchangeGetMailboxInfo:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @patch('fn_exchange.components.exchange_get_mailbox_info.exchange_interface', side_effect=mocked_exchange_utils)
     @pytest.mark.parametrize("exchange_email, expected_results", [
         ("user@exch.com", {'email_address': 'user@exch.com', 'mailbox_type': 'Mailbox', 'name': 'User', 'routing_type': 'SMTP'}),
@@ -60,6 +61,7 @@ class TestExchangeGetMailboxInfoEmpMailbox:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @patch('fn_exchange.components.exchange_get_mailbox_info.exchange_interface', side_effect=mocked_exchange_utils)
     @pytest.mark.parametrize("exchange_email, expected_results", [
         ("empty_user@exch.com", {'success': True}),

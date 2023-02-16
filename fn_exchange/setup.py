@@ -19,7 +19,7 @@ def snake_to_camel(word):
 setup(
     name='fn_exchange',
     display_name='Microsoft Exchange',
-    version='1.0.5',
+    version='1.1.0',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
@@ -35,7 +35,8 @@ Exchange email and meeting capabilities. The package provided has the following 
 - Send email to a list of recipients""",
     install_requires=[
         "resilient_circuits>=45.0.0",
-        "exchangelib ~= 4.6.2"
+        "exchangelib ~= 4.6.2;python_version=='3.6'",
+        "exchangelib ~= 4.9.0;python_version>='3.9'"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

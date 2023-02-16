@@ -36,7 +36,7 @@ class TestExchangeSendEmail:
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
-
+    @pytest.mark.livetest
     @patch('fn_exchange.lib.exchange_utils.Message', side_effect=send_emails)
     @patch('fn_exchange.lib.exchange_utils.exchange_interface.connect_to_account', side_effect=connect_to_account)
     @pytest.mark.parametrize("exchange_email, exchange_message_subject, exchange_message_body, exchange_emails, expected_results", [
@@ -49,6 +49,5 @@ class TestExchangeSendEmail:
             "exchange_message_subject": exchange_message_subject,
             "exchange_message_body": exchange_message_body,
             "exchange_emails": exchange_emails}
-
         results = call_exchange_send_email_function(circuits_app, function_params)
         assert(expected_results == results.get("content"))
