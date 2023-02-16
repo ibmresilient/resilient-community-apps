@@ -1,13 +1,26 @@
 {
   {# JINJA template for closing a SOAR incident using endpoint data #}
-  {# modify to specify your specific **data** fields #}
-  "plan_status": "C",
-  "resolution_id": "{{ **alertStatus** | soar_substitute('{"benign": "Not an Issue", "malicious": "Resolved"}') }}",
-  "resolution_summary": "Closed by **EndPoint**, Alert Status: {{ **alertStatus** }}"
-  {# add additional fields based on your 'on close' field requirements #}
-  {#
-  ,"properties": {
-      "your_custom_field": "value"
-  }
-  #}
+  "version": {{ soar["vers"] + 1 }},
+  "changes": [
+    {
+      "old_value": {"text": "A"},
+      "new_value": {"text": "C"},
+      "field": {"name": "plan_status"}
+    },
+    {
+      "old_value": {"text": null},
+      "new_value": {"text": "Resolved"},
+      "field": {"name": "resolution_id"}
+    },
+    {
+      "old_value": {"text": null},
+      "new_value": {"text": "Closed by Jira"},
+      "field": {"name": "resolution_summary"}
+    },
+    {
+      "old_value": {"text": "{{ soar["properties"]["jira_issue_status"] }}"},
+      "new_value": {"text": "{{ jira["status"] }}"},
+      "field": {"name": "jira_issue_status"}
+    }
+  ]
 }
