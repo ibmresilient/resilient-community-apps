@@ -44,7 +44,7 @@ setup(
         "resilient.circuits.components": [
             "{}FunctionComponent = fn_jira.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_jira/components/jira_[a-zA-Z]*.py")
         ] +
-        [ "PollerComponent = fn_jira.components.poller:PollerComponent" ],
+        [ "PollerComponent = fn_jira.poller.poller:PollerComponent" ],
         "resilient.circuits.configsection": ["gen_config = fn_jira.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_jira.util.customize:customization_data"],
         "resilient.circuits.selftest": ["selftest = fn_jira.util.selftest:selftest_function"]

@@ -1,9 +1,10 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
-from resilient_lib import IntegrationError, MarkdownParser, SOARCommon
+from resilient_lib import IntegrationError, MarkdownParser, SOARCommon, make_payload_from_template
 from re import compile, sub
 from datetime import datetime
+from os import path
 
 PACKAGE_NAME = "fn_jira"
 GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
@@ -14,6 +15,15 @@ JIRA_DT_ISSUE_ID_COL_NAME = "jira_issue_id_col"
 JIRA_DT_ISSUE_LINK_COL_NAME = "jira_link"
 IBM_SOAR_LINK = "IBM SOAR Link:"
 html_tags = compile('<.*?>')
+
+# Directory of default templates
+TEMPLATE_DIR = path.join(path.dirname(__file__), "data")
+
+# Default Templates used to create/update/close SOAR cases.
+#   Mostly they will be modified to include custom SOAR fields
+CREATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_create_case.jinja")
+UPDATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_update_case.jinja")
+CLOSE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_close_case.jinja")
 
 class JiraServers():
     def __init__(self, opts):
@@ -133,67 +143,6 @@ def get_server_settings(opts, jira_label):
 
     # Get configuration for jira server specified
     return JiraServers.jira_label_test(jira_label, servers_list)
-
-def create_soar_incident(res_client, issue):
-    """
-    Function: Creates a SOAR incident from a Jira ticket
-    :param res_client: Client connection to SOAR
-    :param issue: Information on the Jira ticket
-    :param return: None
-    """
-
-    internal_url = issue.get("self")
-    jira_key = issue.get("key")
-
-    # Get comments from the Jira ticket
-    comments = []
-    if issue.get("comment"):
-        for comment in issue.get("comment"):
-            comments.append({
-                "text": {
-                    "format": "text",
-                    "content": comment
-                },
-                "type": "incident"
-            })
-
-    # Create payload to create incident on SOAR
-    payload = {
-        "name": issue.get("summary"),
-        "description": issue.get("description"),
-        "severity_code": issue.get("priority"),
-        "create_date": issue.get("created"),
-        "discovered_date": issue.get("created"),
-        "properties": {
-            "jira_internal_url": internal_url,
-            "jira_issue_id": jira_key,
-            "jira_server": issue.get("jira_server"),
-            "jira_url": f"<a href='{internal_url[:internal_url.index('/', 8)]}/browse/{jira_key}' target='blank'>{jira_key}</a>",
-            "jira_project_key": issue.get("project"),
-            "inc_last_modified_date": issue.get("updated"),
-            "jira_issue_status": issue.get("status")
-        },
-        "comments": comments
-    }
-
-    try:
-        # Create incident on SOAR
-        response = SOARCommon(res_client).create_soar_case(payload)
-    except Exception as err:
-        raise IntegrationError(err)
-
-    if issue.get("attachment"):
-        # Get attachments from the Jira ticket
-        for attach in issue.get("attachment"):
-            try:
-                # Add the attachment to the SOAR incident
-                res_client.post_attachment(f"/incidents/{response.get('id')}/attachments",
-                                           filepath=None,
-                                           filename=attach.get("filename"),
-                                           bytes_handle=attach.get("content")
-                                          )
-            except Exception as err:
-                raise IntegrationError(err)
 
 def remove_html_tags(comment):
     """
@@ -404,7 +353,6 @@ def update_soar_incident(res_client, soar_cases_to_update):
         "jira_server": "jira_server",
         "jira_url": "self",
         "jira_project_key": "project",
-        "inc_last_modified_date": "updated",
         "jira_issue_status": "status"
     }
 
@@ -417,7 +365,6 @@ def update_soar_incident(res_client, soar_cases_to_update):
         "jira_server": "text",
         "jira_url": "textarea",
         "jira_project_key": "text",
-        "inc_last_modified_date": "date",
         "jira_issue_status": "text"
     }
 
@@ -443,13 +390,6 @@ def update_soar_incident(res_client, soar_cases_to_update):
                     break
             continue
 
-        # If Jira issue is linked to SOAR incident and not a SOAR task
-        # Check if new comments added or old comments changed/deleted
-        soar_update_comments_attachments(jira, soar, res_client, "comment")
-
-        # Check if new attachments added or old attachments deleted
-        soar_update_comments_attachments(jira, soar, res_client, "attachment")
-
         soar_update_payload['patches'][soar.get("id")] = {
                 "version": soar.get("vers")+1,
                 "changes": []
@@ -467,6 +407,13 @@ def update_soar_incident(res_client, soar_cases_to_update):
             soar_update_payload['patches'][soar.get("id")]["changes"].append(
                 add_changes_to_soar_payload("text", None, "Resolved", "resolution_id")
             )
+
+        # If Jira issue is linked to SOAR incident and not a SOAR task
+        # Check if new comments added or old comments changed/deleted
+        soar_update_comments_attachments(jira, soar, res_client, "comment")
+
+        # Check if new attachments added or old attachments deleted
+        soar_update_comments_attachments(jira, soar, res_client, "attachment")
 
         for key, value in soar_to_jira_fields.items():
             soar_value = soar.get(key)
