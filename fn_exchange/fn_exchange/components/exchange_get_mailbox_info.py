@@ -4,9 +4,9 @@
 """Function implementation"""
 
 from resilient_circuits import (
-    AppFunctionComponent, app_function, StatusMessage, FunctionResult)
+    AppFunctionComponent, app_function, StatusMessage)
 
-from fn_exchange.lib.exchange_helper import PACKAGE_NAME
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, ResultsHandler
 from fn_exchange.lib.exchange_utils import exchange_interface
 
 FN_NAME = "exchange_get_mailbox_info"
@@ -20,13 +20,13 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """Function: Get mailbox info from exchange"""
+        rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
+        get_user = getattr(fn_inputs, 'exchange_get_email', None)
+        self.LOG.info(f"exchange_get_email: {get_user}")
+
         try:
             # Get the function parameters:
-            get_user = getattr(fn_inputs, 'exchange_get_email', None)
-            self.LOG.info(f"exchange_get_email: {get_user}")
-
             utils = exchange_interface(self.rc, self.options)
-
             # Connect to server
             username = self.options.get("email")
             yield StatusMessage(f"Getting mailbox info for {get_user}")
@@ -42,10 +42,10 @@ class FunctionComponent(AppFunctionComponent):
                     "routing_type"  : getattr(info, "routing_type", ""),
                     "mailbox_type"  : getattr(info, "mailbox_type", "")}
                 yield StatusMessage("Completed retrieving mailbox information")
-                yield FunctionResult(results, success=True)
+                yield rh.success(results)
             else:
-                yield FunctionResult({}, success=False, reason="Unable retrieve mailbox information")
                 yield StatusMessage(f"No mailbox found for {get_user}")
+                yield rh.fail(reason="Unable retrieve mailbox information")
 
         except Exception as err:
-            yield FunctionResult({}, success=False, reason=str(err))
+            yield rh.fail(reason=str(err))

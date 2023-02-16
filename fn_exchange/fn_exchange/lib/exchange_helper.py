@@ -6,9 +6,32 @@ import exchangelib
 
 from exchangelib import EWSTimeZone
 from exchangelib.errors import ErrorFolderNotFound
+from resilient_lib import ResultPayload
+
+from resilient_circuits import FunctionResult
 
 PACKAGE_NAME =  "fn_exchange"
 log = logging.getLogger(__file__)
+
+
+# rp = ResultPayload(pkgname=PACKAGE_NAME, inputs=fn_inputs)
+# rp_results = rp.done(success=True, content=results)
+# rp_results.update(results)
+
+
+class ResultsHandler(ResultPayload):
+    def __init__(self, package_name, fn_inputs):
+        super(ResultsHandler, self).__init__(pkgname=package_name, inputs=fn_inputs)
+
+    def success(self, content):
+        results = self.done(success=True, content=content)
+        results.update(content)
+        return FunctionResult(results, custom_results=True)
+
+    def fail(self, reason):
+        results = self.done(success=False, reason=reason)
+        return FunctionResult(results, custom_results=True)
+
 
 class NoMailboxError(Exception):
     def __init__(self, email):
