@@ -564,11 +564,15 @@ class EmailProcessor(object):
       
     @staticmethod
     def get_message_id(headers):
-        msg_id_list = [v for k,v in headers.items() if k.lower() in MESSAGE_ID_LIST]
+        msg_id_list = []
+        for k,v in headers.items():
+            if k.lower() in MESSAGE_ID_LIST:
+                msg_id_list.extend(v)
+
         # find the message id among several choices
         msg_id = msg_id_list[0] if msg_id_list else None
         if msg_id:
-            match = MESSAGE_PATTERN.findall(msg_id[0].strip()) # remove brackets <>
+            match = MESSAGE_PATTERN.findall(msg_id.strip()) # remove brackets <>
             if match:
                 return match[0]
     
