@@ -41,18 +41,18 @@ class TestExchangeCreateMeeting:
     @patch('fn_exchange.components.exchange_create_meeting.exchange_interface', side_effect=mocked_exchange_utils)
     @pytest.mark.parametrize(
         "exchange_email, exchange_meeting_start_time, exchange_meeting_end_time, exchange_meeting_subject, \
-            exchange_message_body, exchange_required_attendees, exchange_optional_attendees, expected_results", [
+            exchange_meeting_body, exchange_required_attendees, exchange_optional_attendees, expected_results", [
         ("user@exch.com", 1518367008000, 1518367008000, "text", "text", "text", "text", 
-         {'body': None, 'end_time': 1518367008000, 'optional_attendees': 'text', 'required_attendees': 'text', 'sender': 'user@exch.com', 'start_time': 1518367008000, 'subject': 'text'}),
+         {'body': "text", 'end_time': 1518367008000, 'optional_attendees': 'text', 'required_attendees': 'text', 'sender': 'user@exch.com', 'start_time': 1518367008000, 'subject': 'text'}),
     ])
-    def test_success(self, mock_utils, circuits_app, exchange_email, exchange_meeting_start_time, exchange_meeting_end_time, exchange_meeting_subject, exchange_message_body, exchange_required_attendees, exchange_optional_attendees, expected_results):
+    def test_success(self, mock_utils, circuits_app, exchange_email, exchange_meeting_start_time, exchange_meeting_end_time, exchange_meeting_subject, exchange_meeting_body, exchange_required_attendees, exchange_optional_attendees, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "exchange_email": exchange_email,
             "exchange_meeting_start_time": exchange_meeting_start_time,
             "exchange_meeting_end_time": exchange_meeting_end_time,
             "exchange_meeting_subject": exchange_meeting_subject,
-            "exchange_message_body": exchange_message_body,
+            "exchange_meeting_body": exchange_meeting_body,
             "exchange_required_attendees": exchange_required_attendees,
             "exchange_optional_attendees": exchange_optional_attendees}
 

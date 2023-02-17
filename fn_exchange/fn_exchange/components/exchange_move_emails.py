@@ -7,7 +7,7 @@ from resilient_lib import validate_fields
 from resilient_circuits import (AppFunctionComponent, app_function, 
                                 StatusMessage)
 
-from fn_exchange.lib.exchange_helper import PACKAGE_NAME, ResultsHandler
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, INPUTS_MAP, ResultsHandler
 from fn_exchange.lib.exchange_utils import exchange_interface
 
 
@@ -27,23 +27,23 @@ class FunctionComponent(AppFunctionComponent):
 
         FN Inputs:
         -------
-            delete_src_folder      <bool> : True delete the source folder
-            dst_folder              <str> : Destination path to move the email
-            force_delete           <bool> : True deletes source folder with subfolders
-                                            False stops the deletion process on detecting subfolders
+            exchange_delete_source_folder    <bool> : True delete the source folder
+            exchange_destination_folder_path  <str> : Destination path to move the email
+            exchange_force_delete_subfolders <bool> : True deletes source folder with subfolders
+                                                      False stops the deletion process on detecting subfolders
 
-            username                <str> : Primary email account to be used
-            num_emails              <int> : Limit the number of emails retrieved
-            email_ids               <str> : Retrieve emails from all these senders
-            src_folder              <str> : Source folder to move the mails from
-            sender                  <str> : Only find emails from this specified sender
-            subject                 <str> : Retrieve emails with matching message subject
-            body                    <str> : Retrieve emails with matching message body
-            has_attachments        <bool> : Retrieve emails with attachments 
-            order_by_recency       <bool> : Order retrieved emails by recency
-            search_subfolders      <bool> : Specifies whether to query a mailbox's subfolder
-            start_date         <datetime> : Get emails on or after this date
-            end_date           <datetime> : Get emails until after this date
+            exchange_email                    <str> : Primary email account to be used
+            exchange_num_emails               <int> : Limit the number of emails retrieved
+            exchange_email_ids                <str> : Retrieve emails from all these senders
+            exchange_folder_path              <str> : Custom folder path to find emails
+            exchange_sender                   <str> : Only find emails from this specified sender
+            exchange_message_subject          <str> : Retrieve emails with matching message subject
+            exchange_message_body             <str> : Retrieve emails with matching message body
+            exchange_has_attachments         <bool> : Retrieve emails with attachments 
+            exchange_order_by_recency        <bool> : Order retrieved emails by recency
+            exchange_search_subfolders       <bool> : Specifies whether to query a mailbox's subfolder
+            exchange_start_date          <datetime> : Get emails on or after this date
+            exchange_end_date            <datetime> : Get emails until after this date
 
         Returns:
         --------
@@ -59,21 +59,9 @@ class FunctionComponent(AppFunctionComponent):
             "exchange_force_delete_subfolders"], fn_inputs)
 
         delete_src_folder = fn_inputs.exchange_delete_source_folder
-        function_parameters["dst_folder"] = fn_inputs.exchange_destination_folder_path
-        function_parameters["force_delete"] = fn_inputs.exchange_force_delete_subfolders
-
-        function_parameters["username"] = getattr(fn_inputs, "exchange_email", None)
-        function_parameters["num_emails"] = getattr(fn_inputs, "exchange_num_emails", None)
-        function_parameters["email_ids"]  = getattr(fn_inputs, "exchange_email_ids", None)
-        function_parameters["src_folder"] = getattr(fn_inputs, "exchange_folder_path", None)
-        function_parameters["sender"]  = getattr(fn_inputs, "exchange_sender", None)
-        function_parameters["subject"] = getattr(fn_inputs, "exchange_message_subject", None)
-        function_parameters["body"]    = getattr(fn_inputs, "exchange_message_body", None)
-        function_parameters["has_attachments"] = getattr(fn_inputs, "exchange_has_attachments", None)
-        function_parameters["order_by_recency"] = getattr(fn_inputs, "exchange_order_by_recency", None)
-        function_parameters["search_subfolders"] = getattr(fn_inputs, "exchange_search_subfolders", None)
-        function_parameters["start_date"] = getattr(fn_inputs, "exchange_start_date", None)
-        function_parameters["end_date"] = getattr(fn_inputs, "exchange_end_date", None)
+        function_parameters = {}
+        for key, value in fn_inputs._asdict().items():
+            function_parameters[INPUTS_MAP[key]] = value
 
         if not function_parameters.get("src_folder"):
             function_parameters["src_folder"] = self.options.get('default_folder_path')

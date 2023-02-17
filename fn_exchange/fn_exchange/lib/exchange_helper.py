@@ -14,9 +14,37 @@ PACKAGE_NAME =  "fn_exchange"
 log = logging.getLogger(__file__)
 
 
-# rp = ResultPayload(pkgname=PACKAGE_NAME, inputs=fn_inputs)
-# rp_results = rp.done(success=True, content=results)
-# rp_results.update(results)
+#function_parameters["recipients"]  = getattr(fn_inputs, "exchange_emails", None)
+        
+INPUTS_MAP = {
+    "exchange_email"                   : "username",
+    "exchange_num_emails"              : "num_emails",
+    "exchange_email_ids"               : "email_ids",
+    
+    "exchange_meeting_start_time"      : "start_time",
+    "exchange_meeting_end_time"        : "end_time",
+    "exchange_meeting_subject"         : "meeting_subject",
+    "exchange_meeting_body"            : "meeting_body",
+    "exchange_required_attendees"      : "required_attendees",
+    "exchange_optional_attendees"      : "optional_attendees",
+    
+    "exchange_sender"                  : "sender",
+    "exchange_email_recipients"        : "recipients",
+    "exchange_message_subject"         : "msg_subject",
+    "exchange_message_body"            : "msg_body",
+    "exchange_start_date"              : "start_date",
+    "exchange_end_date"                : "end_date",
+    
+    "exchange_hard_delete"             : "hard_delete",
+    "exchange_has_attachments"         : "has_attachments",
+    "exchange_order_by_recency"        : "order_by_recency",
+    "exchange_search_subfolders"       : "search_subfolders",
+    "exchange_folder_path"             : "src_folder",
+    "exchange_destination_folder_path" : "dst_folder",
+    "exchange_get_email"               : "mailbox_id",
+    "exchange_delete_source_folder"    : "delete_src_folder",
+    "exchange_force_delete_subfolders" : "force_delete"}
+
 
 
 class ResultsHandler(ResultPayload):

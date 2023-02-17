@@ -39,15 +39,15 @@ class TestExchangeSendEmail:
     @pytest.mark.livetest
     @patch('fn_exchange.lib.exchange_utils.Message', side_effect=send_emails)
     @patch('fn_exchange.lib.exchange_utils.exchange_interface.connect_to_account', side_effect=connect_to_account)
-    @pytest.mark.parametrize("exchange_email, exchange_message_subject, exchange_message_body, exchange_emails, expected_results", [
+    @pytest.mark.parametrize("exchange_email, exchange_message_subject, exchange_message_body, exchange_email_recipients, expected_results", [
         ("user@exch.com", "Example Subject", "Testing", "jdoe@exch.com", {'msg_body': 'Testing', 'recipients': 'jdoe@exch.com', 'sender': 'user@exch.com', 'msg_subject': 'Example Subject'})
     ])
-    def test_success(self, mock_send_email, mock_connect_account, circuits_app, exchange_email, exchange_message_subject, exchange_message_body, exchange_emails, expected_results):
+    def test_success(self, mock_send_email, mock_connect_account, circuits_app, exchange_email, exchange_message_subject, exchange_message_body, exchange_email_recipients, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "exchange_email": exchange_email,
             "exchange_message_subject": exchange_message_subject,
             "exchange_message_body": exchange_message_body,
-            "exchange_emails": exchange_emails}
+            "exchange_email_recipients": exchange_email_recipients}
         results = call_exchange_send_email_function(circuits_app, function_params)
         assert(expected_results == results.get("content"))

@@ -175,6 +175,7 @@ def calendar_item(**kwargs):
     assert kwargs.get("start")
     assert kwargs.get("end")
     assert kwargs.get("subject")
+    assert kwargs.get("body")
     ra = kwargs.get("required_attendees")
     oa = kwargs.get("optional_attendees")
     if ra:
@@ -187,11 +188,10 @@ def calendar_item(**kwargs):
     return invite
     
 def create_meeting(function_parameters):
-    assert "subject" in function_parameters
+    assert "meeting_subject" in function_parameters
+    assert "meeting_body" in function_parameters
     assert "start_time" in function_parameters
     assert "end_time" in function_parameters
-    assert "subject" in function_parameters
-    assert "body" in function_parameters
     assert "required_attendees" in function_parameters
     assert "optional_attendees" in function_parameters
 
@@ -199,8 +199,8 @@ def create_meeting(function_parameters):
         'required_attendees' : function_parameters.get("required_attendees"),
         'optional_attendees' : function_parameters.get("optional_attendees"),
         'sender' : function_parameters.get("username"),
-        'subject' : function_parameters.get("subject"),
-        'body' : function_parameters.get("body"),
+        'subject' : function_parameters.get("meeting_subject"),
+        'body' : function_parameters.get("meeting_body"),
         'start_time' : function_parameters.get("start_time"),
         'end_time' : function_parameters.get("end_time"),}
 

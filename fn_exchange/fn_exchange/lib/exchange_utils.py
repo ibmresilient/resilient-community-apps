@@ -113,8 +113,8 @@ class exchange_interface:
         end_date   = function_parameters.get("end_date")
 
         sender  = function_parameters.get("sender")
-        subject = function_parameters.get("subject")
-        body    = function_parameters.get("body")
+        subject = function_parameters.get("msg_subject")
+        body    = function_parameters.get("msg_body")
 
         has_attachments     = function_parameters.get("has_attachments")
         order_by_recency    = function_parameters.get("order_by_recency")
@@ -218,8 +218,8 @@ class exchange_interface:
         username = function_parameters.get("username")
         start_time = function_parameters.get("start_time")
         end_time = function_parameters.get("end_time")
-        meeting_subject = function_parameters.get("subject")
-        meeting_body = function_parameters.get("body")
+        meeting_subject = function_parameters.get("meeting_subject")
+        meeting_body = function_parameters.get("meeting_body")
         required_attendees = function_parameters.get("required_attendees")
         optional_attendees = function_parameters.get("optional_attendees")
 
