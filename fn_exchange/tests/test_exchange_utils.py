@@ -212,8 +212,8 @@ class TestExchangeUtils:
         function_parameters["username"] = "empty_user@exch.com"
         function_parameters["start_time"] = 1000000
         function_parameters["end_time"] = 1100000
-        function_parameters["subject"] = "subject1"
-        function_parameters["body"] = "body1"
+        function_parameters["meeting_subject"] = "subject1"
+        function_parameters["meeting_body"] = "body1"
         function_parameters["required_attendees"] = 'r1@example.com,r2@example.com'
         function_parameters["optional_attendees"] = None
 
@@ -254,7 +254,6 @@ class TestExchangeUtils:
         # Initialize testing variables with Mock objects
         # Mocked account and mocked root with subfolders
         opts = MOCK_OPTS
-        opts_int = MOCK_INT_OPTS
         opts['default_folder_path'] = '1'
         test_utils = exchange_interface(None, opts)
         mock_account = MockAccount(None)
@@ -283,12 +282,12 @@ class TestExchangeUtils:
         assert emails2.q == Q(sender='another sender')
 
         # Subject filter check
-        emails3 = test_utils.get_emails({"username":'mockemail', "subject" :'testsender'})
+        emails3 = test_utils.get_emails({"username":'mockemail', "msg_subject" :'testsender'})
         assert emails3.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
         assert emails3.q == Q(subject__contains='testsender')
 
         # Body filter check
-        emails4 = test_utils.get_emails({"username":'mockemail', "body" :'testbody'})
+        emails4 = test_utils.get_emails({"username":'mockemail', "msg_body" :'testbody'})
         assert emails4.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
         assert emails4.q == Q(body__contains='testbody')
 
@@ -313,7 +312,7 @@ class TestExchangeUtils:
         assert emails7.q == Q()
 
         emails8 = test_utils.get_emails({"username":'mockemail', "src_folder":'1', "sender":'sender',
-                                         "subject":'subject', "body":'body', "has_attachments":False})
+                                         "msg_subject":'subject', "msg_body":'body', "has_attachments":False})
         assert emails8.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
         assert emails8.q == Q(sender='sender') & Q(subject__contains='subject') \
                & Q(body__contains='body') & Q(has_attachments=False)

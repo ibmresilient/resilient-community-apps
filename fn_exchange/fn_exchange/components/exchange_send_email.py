@@ -6,7 +6,7 @@
 from resilient_circuits import (AppFunctionComponent, app_function,
                                 StatusMessage)
 
-from fn_exchange.lib.exchange_helper import PACKAGE_NAME, ResultsHandler
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, INPUTS_MAP, ResultsHandler
 from fn_exchange.lib.exchange_utils import exchange_interface
 
 FN_NAME = "exchange_send_email"
@@ -24,7 +24,7 @@ class FunctionComponent(AppFunctionComponent):
 
         Inputs:
         -------
-            username    <str> : Primary email account to be used
+            exchange_email    <str> : Primary email account to be used
             recipients  <str> : Mail ids of the recipients (comma separated)
             msg_body    <str> : Body of the mail
             msg_subject <str> : Mail subject
@@ -36,11 +36,10 @@ class FunctionComponent(AppFunctionComponent):
         """
         rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
         function_parameters = {}
-
-        function_parameters["username"]    = getattr(fn_inputs, "exchange_email", None)
-        function_parameters["recipients"]  = getattr(fn_inputs, "exchange_emails", None)
-        function_parameters["msg_body"]    = getattr(fn_inputs, "exchange_message_body", None)
-        function_parameters["msg_subject"] = getattr(fn_inputs, "exchange_message_subject", None)
+        
+        function_parameters = {}
+        for key, value in fn_inputs._asdict().items():
+            function_parameters[INPUTS_MAP[key]] = value
 
         if not function_parameters.get("username"):
             function_parameters["username"] = self.options.get('username')

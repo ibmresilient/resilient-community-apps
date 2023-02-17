@@ -6,7 +6,7 @@
 from resilient_circuits import (AppFunctionComponent, app_function,
                                 StatusMessage)
 
-from fn_exchange.lib.exchange_helper import PACKAGE_NAME, ResultsHandler
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, INPUTS_MAP, ResultsHandler
 from fn_exchange.lib.exchange_utils import exchange_interface
 
 
@@ -25,13 +25,13 @@ class FunctionComponent(AppFunctionComponent):
 
         Inputs:
         -------
-        username                <str> : Primary email account to be used
-        subject                 <str> : Subject for the meeting invite
-        body                    <str> : Body for the meeting invite
-        required_attendees      <str> : List of required attendees (comma separated)
-        optional_attendees      <str> : List of optional attendees (comma separated)
-        start_time         <datetime> : Meeting start time and date
-        end_time           <datetime> : Meeting end time and date
+        exchange_email                   <str> : Primary email account to be used
+        meeting_subject                  <str> : Subject for the meeting invite
+        meeting_body                     <str> : Body for the meeting invite
+        exchange_required_attendees      <str> : List of required attendees (comma separated)
+        exchange_optional_attendees      <str> : List of optional attendees (comma separated)
+        exchange_meeting_start_time <datetime> : Meeting start time and date
+        exchange_meeting_end_time   <datetime> : Meeting end time and date
 
         Returns:
         --------
@@ -40,13 +40,8 @@ class FunctionComponent(AppFunctionComponent):
         """
         rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
         function_parameters = {}
-        function_parameters["username"] = getattr(fn_inputs, "exchange_email", None)
-        function_parameters["start_time"] = getattr(fn_inputs, "exchange_meeting_start_time", None)
-        function_parameters["end_time"] = getattr(fn_inputs, "exchange_meeting_end_time", None)
-        function_parameters["subject"] = getattr(fn_inputs, "exchange_meeting_subject", None)
-        function_parameters["body"] = getattr(fn_inputs, "exchange_meeting_body", None)
-        function_parameters["required_attendees"] = getattr(fn_inputs, "exchange_required_attendees", None)
-        function_parameters["optional_attendees"] = getattr(fn_inputs, "exchange_optional_attendees", None)
+        for key, value in fn_inputs._asdict().items():
+            function_parameters[INPUTS_MAP[key]] = value
 
         try:
             utils = exchange_interface(self.rc, self.options)
