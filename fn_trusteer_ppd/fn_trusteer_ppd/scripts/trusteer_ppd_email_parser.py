@@ -6,7 +6,7 @@ from datetime import datetime
 
 # The new incident owner - the email address of a user or the name of a group and cannot be blank.
 # Change this value to reflect who will be the owner of the incident before running the script.
-new_case_owner = "Trusteer Pinpoint Detect owner"
+new_case_owner = "Trusteer Pinpoint Detect case owner"
 
 # Change to True if you have Outbound Email 2.0+ installed and wish to capture the inbound email as a conversation 
 SAVE_CONVERSATION = False
@@ -437,13 +437,14 @@ class EmailProcessor(object):
 
     @staticmethod
     def get_message_id(headers):
-        #msg_id_list = [v for k,v in headers.items() if k.lower() in MESSAGE_ID_LIST]
+        msg_id_list = []
         for k,v in headers.items():
             if k.lower() in MESSAGE_ID_LIST:
+                msg_id_list.extend(v)
                 
         # find the message id among several choices
         msg_id = msg_id_list[0] if msg_id_list else None
-        if msg_id and len(msg_id)>0:
+        if msg_id:
             match = MESSAGE_PATTERN.findall(msg_id.strip()) # remove brackets <>
             if match:
                 return match[0]
