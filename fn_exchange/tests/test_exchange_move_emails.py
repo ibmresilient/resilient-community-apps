@@ -62,8 +62,8 @@ class TestExchangeMoveEmails:
             "exchange_destination_folder_path": exchange_destination_folder_path,
             "exchange_sender": exchange_sender,
             "exchange_start_date": exchange_start_date,
-            "exchange_end_date": exchange_end_date
-        }
+            "exchange_end_date": exchange_end_date}
+
         results = call_exchange_move_emails_function(circuits_app, function_params)
         assert results.get("success")
         results = results.get("content")
