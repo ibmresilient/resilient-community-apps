@@ -13,6 +13,7 @@ import shutil
 
 LOG = logging.getLogger(__name__)
 
+
 class ResilientCommon():
 
     def __init__(self, rest_client):
@@ -182,7 +183,8 @@ class ResilientCommon():
 
     def add_agent_information(self, incident_id, row_payload):
         try:
-            uri = u'/incidents/{0}/table_data/{1}/row_data'.format(incident_id, HARFANGLAB_AGENT_DATATABLE_NAME)
+            uri = u'/incidents/{0}/table_data/{1}/row_data'.format(
+                incident_id, HARFANGLAB_AGENT_DATATABLE_NAME)
 
             return self.rest_client.post(uri=uri, payload=row_payload)
 
@@ -194,7 +196,8 @@ class ResilientCommon():
         if incident_id and to_csv and filename and len(to_csv) > 0:
 
             try:
-                path_tmp_file, path_tmp_dir = write_to_tmp_file(''.encode(), filename)
+                path_tmp_file, path_tmp_dir = write_to_tmp_file(
+                    ''.encode(), filename)
 
                 keys = to_csv[0].keys()
 
@@ -204,7 +207,8 @@ class ResilientCommon():
                     dict_writer.writerows(to_csv)
 
                 with open(path_tmp_file, "rb") as data_stream:
-                    res = write_file_attachment(self.rest_client, filename, data_stream, incident_id)
+                    res = write_file_attachment(
+                        self.rest_client, filename, data_stream, incident_id)
 
             except Exception as e:
                 raise Exception(f'Failed to write CSV: {str(e)}')
@@ -224,9 +228,11 @@ class ResilientCommon():
         if hasattr(resp, "status_code"):
             if isinstance(rc, list):
                 if resp.status_code < rc[0] or resp.status_code > rc[1]:
-                    raise IntegrationError(u"status code failure: {0}".format(resp.status_code))
+                    raise IntegrationError(
+                        u"status code failure: {0}".format(resp.status_code))
             elif resp.status_code != rc:
-                raise IntegrationError(u"status code failure: {0}".format(resp.status_code))
+                raise IntegrationError(
+                    u"status code failure: {0}".format(resp.status_code))
 
             return resp.json()
 

@@ -34,7 +34,8 @@ class FunctionComponent(AppFunctionComponent):
         verify = True
         if self.options.get('verify').lower() == 'false':
             verify = False
-        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get('api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
+        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get(
+            'api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
 
         ioc_type = fn_inputs.harfanglab_ioc_type
         ioc_value = fn_inputs.harfanglab_ioc_value
@@ -47,10 +48,10 @@ class FunctionComponent(AppFunctionComponent):
         except Exception as e:
             ioc_comment = ''
 
-
         try:
 
-            results = conn.add_ioc_to_source(ioc_value, ioc_type, ioc_comment, ioc_status, source_name)
+            results = conn.add_ioc_to_source(
+                ioc_value, ioc_type, ioc_comment, ioc_status, source_name)
 
             yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
             yield FunctionResult(results)

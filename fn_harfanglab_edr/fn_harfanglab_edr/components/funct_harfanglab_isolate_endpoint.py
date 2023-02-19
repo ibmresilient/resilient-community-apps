@@ -29,8 +29,8 @@ class FunctionComponent(AppFunctionComponent):
         verify = True
         if self.options.get('verify').lower() == 'false':
             verify = False
-        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get('api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
-
+        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get(
+            'api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
 
         # Example validating app_configs
         # validate_fields([
@@ -85,4 +85,3 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionResult({}, success=False, reason=str(e))
-

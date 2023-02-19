@@ -24,7 +24,8 @@ def call_harfanglab_add_ioc_to_source_function(circuits, function_params, timeou
 
     # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
     # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
+    exception_event = circuits.watcher.wait(
+        "exception", parent=None, timeout=timeout)
 
     if exception_event is not False:
         exception = exception_event.args[1]
@@ -32,7 +33,8 @@ def call_harfanglab_add_ioc_to_source_function(circuits, function_params, timeou
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("harfanglab_add_ioc_to_source_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait(
+            "harfanglab_add_ioc_to_source_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
@@ -74,5 +76,6 @@ class TestHarfanglabAddIocToSource:
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
-        results = call_harfanglab_add_ioc_to_source_function(circuits_app, mock_inputs)
+        results = call_harfanglab_add_ioc_to_source_function(
+            circuits_app, mock_inputs)
         assert(expected_results == results)

@@ -22,7 +22,6 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-
         """
         Function: Run a job on an endpoint
         Inputs:
@@ -32,20 +31,25 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields(["harfanglab_agent_id", "harfanglab_job_name"], fn_inputs)
+        validate_fields(
+            ["harfanglab_agent_id", "harfanglab_job_name"], fn_inputs)
 
         verify = True
         if self.options.get('verify').lower() == 'false':
             verify = False
-        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get('api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
+        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get(
+            'api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
 
         agent_id = fn_inputs.harfanglab_agent_id
         job_name = fn_inputs.harfanglab_job_name
-        job_timeout =  getattr(fn_inputs, "harfanglab_job_timeout", self.options.get('job_timeout', 600))
-        incident_id = getattr(fn_inputs, "harfanglab_ibm_soar_incident_id", None)
+        job_timeout = getattr(
+            fn_inputs, "harfanglab_job_timeout", self.options.get('job_timeout', 600))
+        incident_id = getattr(
+            fn_inputs, "harfanglab_ibm_soar_incident_id", None)
 
         try:
-            results = conn.run_job(job_name, agent_id, int(job_timeout), 'html')
+            results = conn.run_job(
+                job_name, agent_id, int(job_timeout), 'html')
 
             if incident_id:
                 link = None
@@ -59,14 +63,18 @@ class FunctionComponent(AppFunctionComponent):
 
                     try:
                         filename = f'{FN_NAME}-{job_name}-{results["output"][0].get("hostname",agent_id)}'
-                        path_tmp_file, path_tmp_dir = write_to_tmp_file(res.content, filename)
+                        path_tmp_file, path_tmp_dir = write_to_tmp_file(
+                            res.content, filename)
 
-                        password = self.options.get('archive_password', 'infected')
+                        password = self.options.get(
+                            'archive_password', 'infected')
 
-                        pyminizip.compress(path_tmp_file, None, f'{path_tmp_file}.zip', password, 5)
+                        pyminizip.compress(
+                            path_tmp_file, None, f'{path_tmp_file}.zip', password, 5)
 
                         with open(f'{path_tmp_file}.zip', "rb") as data_stream:
-                            res = write_file_attachment(self.rest_client(), f'{filename}.zip', data_stream, incident_id)
+                            res = write_file_attachment(
+                                self.rest_client(), f'{filename}.zip', data_stream, incident_id)
 
                     except Exception:
                         yield FunctionError()
@@ -77,7 +85,8 @@ class FunctionComponent(AppFunctionComponent):
 
                 yield self.status_message(f"Pushing file to SOAR: '{FN_NAME}'")
                 self.resilient_common = ResilientCommon(self.rest_client())
-                self.resilient_common.add_csv_file_to_incident_attachments(incident_id, f'{FN_NAME}-{job_name}-{agent_id}.csv', results.get('output'))
+                self.resilient_common.add_csv_file_to_incident_attachments(
+                    incident_id, f'{FN_NAME}-{job_name}-{agent_id}.csv', results.get('output'))
 
             yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
             yield FunctionResult(results)

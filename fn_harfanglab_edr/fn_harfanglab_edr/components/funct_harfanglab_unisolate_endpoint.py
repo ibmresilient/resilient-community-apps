@@ -19,7 +19,6 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-
         """
         Function: Unisolate an endpoint
         Inputs:
@@ -31,7 +30,8 @@ class FunctionComponent(AppFunctionComponent):
         verify = True
         if self.options.get('verify').lower() == 'false':
             verify = False
-        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get('api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
+        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get(
+            'api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
 
         agent_id = fn_inputs.harfanglab_agent_id
         try:
@@ -40,4 +40,3 @@ class FunctionComponent(AppFunctionComponent):
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionResult({}, success=False, reason=str(e))
-

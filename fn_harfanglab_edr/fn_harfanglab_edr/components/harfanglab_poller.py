@@ -49,15 +49,19 @@ class HarfangLabPollerComponent(ResilientComponent):
 
         self._load_options(opts)
         if self.polling_interval == 0:
-            LOG.info(u"HarfangLab poller interval is not configured.  Automated escalation is disabled.")
+            LOG.info(
+                u"HarfangLab poller interval is not configured.  Automated escalation is disabled.")
             return
 
         # Set last_poller_time to the specified polling_lookback in minutes to pick up extra threats
         # the first time polling.
-        self.polling_lookback = int(self.options.get("polling_lookback", DEFAULT_POLLER_LOOKBACK_MINUTES))
-        self.last_poller_time = datetime.datetime.utcnow() - datetime.timedelta(minutes=self.polling_lookback)
+        self.polling_lookback = int(self.options.get(
+            "polling_lookback", DEFAULT_POLLER_LOOKBACK_MINUTES))
+        self.last_poller_time = datetime.datetime.utcnow(
+        ) - datetime.timedelta(minutes=self.polling_lookback)
 
-        LOG.info(u"HarfangLab poller initiated, polling interval %s", self.polling_interval)
+        LOG.info(u"HarfangLab poller initiated, polling interval %s",
+                 self.polling_interval)
         Timer(self.polling_interval, Poll(), persist=False).register(self)
 
     @handler("reload")
@@ -94,7 +98,8 @@ class HarfangLabPollerComponent(ResilientComponent):
         verify = True
         if self.options.get('verify').lower() == 'false':
             verify = False
-        self.harfanglab_connector = HarfangLabConnector(self.options.get('api_url'), self.options.get('api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
+        self.harfanglab_connector = HarfangLabConnector(self.options.get('api_url'), self.options.get(
+            'api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
 
         self.resilient_common = ResilientCommon(self.rest_client())
 
@@ -150,29 +155,33 @@ class HarfangLabPollerComponent(ResilientComponent):
                     DEFAULT_INCIDENT_CREATION_TEMPLATE,
                     alert)
 
-                incident_payload["properties"]["harfanglab_security_event_url"] = f'<a target=\'blank\' href=\'{alert.get("incident_link")}\'>HarfangLab Security Event</a>'
-                resilient_incident = self.resilient_common.create_incident(incident_payload)
+                incident_payload["properties"][
+                    "harfanglab_security_event_url"] = f'<a target=\'blank\' href=\'{alert.get("incident_link")}\'>HarfangLab Security Event</a>'
+                resilient_incident = self.resilient_common.create_incident(
+                    incident_payload)
 
-
-                #Adding agent information
+                # Adding agent information
                 agent = alert.get('agent')
                 if agent:
                     agent_payload = self.jinja_env.make_payload_from_template(
                         self.options.get("agent_template"),
                         DEFAULT_AGENT_TEMPLATE,
                         agent)
-                    self.resilient_common.add_agent_information(resilient_incident.get('id'),agent_payload)
+                    self.resilient_common.add_agent_information(
+                        resilient_incident.get('id'), agent_payload)
 
-                LOG.info(f'Created incident {resilient_incident.get("id")} from HarfanLab Security Event {alert_id}')
+                LOG.info(
+                    f'Created incident {resilient_incident.get("id")} from HarfanLab Security Event {alert_id}')
 
             else:
                 resilient_incident_id = resilient_incident.get('id')
 
-
                 if resilient_incident.get("plan_status") == "C" and alert.get("status") not in ['closed', 'false_positive']:
                     """Incident is closed in Resilient but not in HarfangLab"""
-                    self.harfanglab_connector.change_security_event_status(alert_id,'closed')
-                    LOG.info(f'Changing status to "closed" for HarfangLab Security Event {alert_id} as it has been closed in Resilient')
+                    self.harfanglab_connector.change_security_event_status(
+                        alert_id, 'closed')
+                    LOG.info(
+                        f'Changing status to "closed" for HarfangLab Security Event {alert_id} as it has been closed in Resilient')
 
                 elif alert.get("status") == "closed" and resilient_incident.get("plan_status") != "C":
                     """Incident is closed in HarfangLab EDR but not in Resilient"""
@@ -183,9 +192,11 @@ class HarfangLabPollerComponent(ResilientComponent):
                     updated_resilient_incident = self.resilient_common.close_incident(
                         resilient_incident_id,
                         incident_payload)
-                    _ = self.resilient_common.create_incident_comment(resilient_incident_id, "Close synchronized from HarfangLab")
-                    LOG.info(f'Closed incident {resilient_incident_id} from HarfangLab Security Event {alert_id}')
-                #else:
+                    _ = self.resilient_common.create_incident_comment(
+                        resilient_incident_id, "Close synchronized from HarfangLab")
+                    LOG.info(
+                        f'Closed incident {resilient_incident_id} from HarfangLab Security Event {alert_id}')
+                # else:
                 #    # update an incident
                 #    incident_payload = self.jinja_env.make_payload_from_template(
                 #        self.options.get("update_incident_template"),
@@ -199,4 +210,3 @@ class HarfangLabPollerComponent(ResilientComponent):
 
         except Exception as err:
             LOG.error(str(err))
-

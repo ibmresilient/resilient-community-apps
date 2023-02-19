@@ -17,14 +17,16 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_harfanglab_telemetry_search_source_ip_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("harfanglab_telemetry_search_source_ip", function_params)
+    evt = SubmitTestFunction(
+        "harfanglab_telemetry_search_source_ip", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
 
     # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
     # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
+    exception_event = circuits.watcher.wait(
+        "exception", parent=None, timeout=timeout)
 
     if exception_event is not False:
         exception = exception_event.args[1]
@@ -32,7 +34,8 @@ def call_harfanglab_telemetry_search_source_ip_function(circuits, function_param
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("harfanglab_telemetry_search_source_ip_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait(
+            "harfanglab_telemetry_search_source_ip_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
@@ -68,5 +71,6 @@ class TestHarfanglabTelemetrySearchSourceIp:
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
-        results = call_harfanglab_telemetry_search_source_ip_function(circuits_app, mock_inputs)
+        results = call_harfanglab_telemetry_search_source_ip_function(
+            circuits_app, mock_inputs)
         assert(expected_results == results)

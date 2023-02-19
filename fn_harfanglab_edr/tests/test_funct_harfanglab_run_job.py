@@ -24,7 +24,8 @@ def call_harfanglab_run_job_function(circuits, function_params, timeout=5):
 
     # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
     # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
+    exception_event = circuits.watcher.wait(
+        "exception", parent=None, timeout=timeout)
 
     if exception_event is not False:
         exception = exception_event.args[1]
@@ -32,7 +33,8 @@ def call_harfanglab_run_job_function(circuits, function_params, timeout=5):
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("harfanglab_run_job_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait(
+            "harfanglab_run_job_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)

@@ -10,6 +10,7 @@ from resilient_circuits.template_functions import render_json, environment
 
 LOG = logging.getLogger(__name__)
 
+
 class JinjaEnvironment():
     def __init__(self):
         # Add the timestamp-parse function to the global JINJA environment
@@ -18,12 +19,12 @@ class JinjaEnvironment():
             "resilient_datetimeformat": jinja_resilient_datetimeformat,
             "resilient_substitute": jinja_resilient_substitute,
             "resilient_splitpart": jinja_resilient_splitpart
-            })
+        })
         env.filters.update({
             "resilient_datetimeformat": jinja_resilient_datetimeformat,
             "resilient_substitute": jinja_resilient_substitute,
             "resilient_splitpart": jinja_resilient_splitpart
-            })
+        })
 
     def make_payload_from_template(self, template_override, default_template, payload):
         """convert a payload into a newformat based on a specified template
@@ -59,19 +60,20 @@ class JinjaEnvironment():
         if template_file_path:
             if not (os.path.exists(template_file_path) and os.path.isfile(template_file_path)):
                 LOG.error(u"Template file: %s doesn't exist, using default template",
-                        template_file_path)
+                          template_file_path)
                 template_file_path = None
 
         if not template_file_path:
             # using default template
             template_file_path = os.path.join(
-                                    os.path.dirname(os.path.realpath(__file__)),
-                                    default_template
-                                )
+                os.path.dirname(os.path.realpath(__file__)),
+                default_template
+            )
 
         LOG.debug(u"Incident template file: %s", template_file_path)
         with open(template_file_path, "r") as definition:
             return definition.read()
+
 
 def jinja_resilient_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S"):
     """custom jinja filter to convert UTC dates to epoch format
@@ -88,6 +90,7 @@ def jinja_resilient_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S"):
 
     utc_time = time.strptime(value[:value.rfind('.')], date_format)
     return calendar.timegm(utc_time)*1000
+
 
 def jinja_resilient_substitute(value, json_str):
     """jinja custom filter to replace values based on a lookup dictionary
@@ -109,7 +112,8 @@ def jinja_resilient_substitute(value, json_str):
 
     return value
 
-def jinja_resilient_splitpart (value, index, split_chars=' - '):
+
+def jinja_resilient_splitpart(value, index, split_chars=' - '):
     """[split a string and return the index]
 
     Args:

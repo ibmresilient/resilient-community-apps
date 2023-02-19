@@ -58,7 +58,7 @@ It provides the following functions:
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
             "{}FunctionComponent = fn_harfanglab_edr.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_harfanglab_edr/components/f[a-zA-Z]*.py")
-        ]+
+        ] +
         ["PollerComponent = fn_harfanglab_edr.components.harfanglab_poller:HarfangLabPollerComponent"],
         "resilient.circuits.configsection": ["gen_config = fn_harfanglab_edr.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_harfanglab_edr.util.customize:customization_data"],

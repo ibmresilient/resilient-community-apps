@@ -33,9 +33,11 @@ class FunctionComponent(AppFunctionComponent):
         verify = True
         if self.options.get('verify').lower() == 'false':
             verify = False
-        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get('api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
+        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get(
+            'api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
 
-        validate_fields(["harfanglab_hash", "harfanglab_ibm_soar_incident_id"], fn_inputs)
+        validate_fields(
+            ["harfanglab_hash", "harfanglab_ibm_soar_incident_id"], fn_inputs)
 
         hash = fn_inputs.harfanglab_hash
         incident_id = fn_inputs.harfanglab_ibm_soar_incident_id
@@ -57,14 +59,17 @@ class FunctionComponent(AppFunctionComponent):
                 res = requests.get(link, verify=verify, stream=True)
 
                 try:
-                    path_tmp_file, path_tmp_dir = write_to_tmp_file(res.content, hash)
+                    path_tmp_file, path_tmp_dir = write_to_tmp_file(
+                        res.content, hash)
 
                     password = self.options.get('archive_password', 'infected')
 
-                    pyminizip.compress(path_tmp_file, None, f'{path_tmp_file}.zip', password, 5)
+                    pyminizip.compress(path_tmp_file, None,
+                                       f'{path_tmp_file}.zip', password, 5)
 
                     with open(f'{path_tmp_file}.zip', "rb") as data_stream:
-                        res = write_file_attachment(self.rest_client(), f'{hash}.zip', data_stream, incident_id)
+                        res = write_file_attachment(
+                            self.rest_client(), f'{hash}.zip', data_stream, incident_id)
 
                 except Exception:
                     yield FunctionError()
@@ -73,10 +78,7 @@ class FunctionComponent(AppFunctionComponent):
                     if path_tmp_dir and os.path.isdir(path_tmp_dir):
                         shutil.rmtree(path_tmp_dir)
 
-
             yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionResult({}, success=False, reason=str(e))
-
-

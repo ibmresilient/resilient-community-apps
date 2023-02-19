@@ -10,6 +10,7 @@ import markdown
 STRING_TYPES = (str, bytes)
 MARKDOWN_CHARS = r"\`*_{}[]()#+-!|"
 
+
 def get_params(params):
     res = []
     if params:
@@ -38,6 +39,7 @@ def string_escape(st):
         st = st.replace(c, '\\' + c)
 
     return st
+
 
 def get_markdown_from_table(name, t, headers=None, headerTransform=None, url_keys=None):
     """
@@ -134,6 +136,7 @@ def get_markdown_from_table(name, t, headers=None, headerTransform=None, url_key
 
     return result
 
+
 def url_to_clickable_markdown(data, url_keys):
     """
     Transform the urls fields into clickable url in markdown.
@@ -156,6 +159,7 @@ def url_to_clickable_markdown(data, url_keys):
                 for key, value in data.items()}
 
     return data
+
 
 def get_clickable_url(url, text=None):
     """
@@ -183,6 +187,7 @@ def get_clickable_url(url, text=None):
         return '[{}]({})'.format(text, url)
     else:
         return '[{}]({})'.format(url, url)
+
 
 class HarfangLabConnector:
 
@@ -411,7 +416,6 @@ class HarfangLabConnector:
         for filter, v in filters.items():
             f.append(f'{filter}={v}')
         return f'{self.base_url}/telemetry/processes?limit=25&offset=0&{"&".join(f)}&ordering=-event_create_date'
-
 
     """
     The JOBS dict contains all the job services and their description. Its keys correspond to the service names in the service description file in JSON format.
@@ -1053,7 +1057,7 @@ class HarfangLabConnector:
        :rtype: ``(int,List[Any])``
     """
 
-    def fetch_security_events(self, first_fetch = None, alert_status = None, alert_type = None, min_severity = None, max_fetch = None, last_fetch = None, delay = 0, exclude_rules = None):
+    def fetch_security_events(self, first_fetch=None, alert_status=None, alert_type=None, min_severity=None, max_fetch=None, last_fetch=None, delay=0, exclude_rules=None):
 
         url = f'{self.base_url}/api/data/alert/alert/Alert/'
         last_fetch = None
@@ -1082,7 +1086,8 @@ class HarfangLabConnector:
             except Exception as e:
                 max_results = None
 
-        severity = ','.join(HarfangLabConnector.SEVERITIES[HarfangLabConnector.SEVERITIES.index(min_severity):]).lower()
+        severity = ','.join(
+            HarfangLabConnector.SEVERITIES[HarfangLabConnector.SEVERITIES.index(min_severity):]).lower()
 
         if last_fetch is None:
             # if missing, use what provided via first_fetch_time
@@ -1111,12 +1116,14 @@ class HarfangLabConnector:
             delay = int(delay)
         except Exception as e:
             delay = 0
-        date_max = datetime.fromtimestamp(datetime.timestamp(datetime.now() - timedelta(seconds=int(delay))))
+        date_max = datetime.fromtimestamp(datetime.timestamp(
+            datetime.now() - timedelta(seconds=int(delay))))
 
         cursor_min = date_min
         cursor_max = date_max
 
-        self.logger.debug(f'Getting events between {date_min.strftime("%Y-%m-%dT%H:%M:%SZ")} and {date_max.strftime("%Y-%m-%dT%H:%M:%SZ")}')
+        self.logger.debug(
+            f'Getting events between {date_min.strftime("%Y-%m-%dT%H:%M:%SZ")} and {date_max.strftime("%Y-%m-%dT%H:%M:%SZ")}')
         while cursor_min != cursor_max:
             offset = 0
             while True:
@@ -1136,14 +1143,15 @@ class HarfangLabConnector:
                     args['alert_type'] = alert_type
 
                 try:
-                    u=f'{url}'+get_params(args)
+                    u = f'{url}'+get_params(args)
                     response = self.hlSession.get(u)
                     response.raise_for_status()
                     results = response.json()
                 except Exception as e:
-                    raise Exception(f'Failed to fetch security events: {str(e)}')
+                    raise Exception(
+                        f'Failed to fetch security events: {str(e)}')
 
-                #print(
+                # print(
                 #    f'Getting events between {date_min.strftime("%Y-%m-%dT%H:%M:%SZ")} and {date_max.strftime("%Y-%m-%dT%H:%M:%SZ")}: {results["count"]}')
 
                 if results['count'] >= HarfangLabConnector.MAX_NUMBER_OF_ITEMS:
@@ -1151,7 +1159,8 @@ class HarfangLabConnector:
                     break
 
                 if 'count' in results and 'results' in results:
-                    self.logger.debug(f'Fetched {total_number_of_alerts} / {results["count"]} events')
+                    self.logger.debug(
+                        f'Fetched {total_number_of_alerts} / {results["count"]} events')
 
                     for alert in results['results']:
 
@@ -1191,6 +1200,7 @@ class HarfangLabConnector:
        :type event_id: ``str``
        :param event_id: The agent security event ID
     """
+
     def get_event_by_id(self, event_id):
         try:
             return self.hlSession.get(
@@ -1198,8 +1208,8 @@ class HarfangLabConnector:
             ).json()
 
         except Exception as e:
-            raise Exception(f'Failed to get security event information: {str(e)}')
-
+            raise Exception(
+                f'Failed to get security event information: {str(e)}')
 
     """
        Get endpoint details from HarfangLab EDR manager
@@ -1216,6 +1226,7 @@ class HarfangLabConnector:
        :return: A dict with endpoint details
        :rtype: ``Dict[str,Any]``
     """
+
     def get_endpoint_details(self, agentid, fields=None, format='markdown'):
 
         try:
@@ -1232,14 +1243,14 @@ class HarfangLabConnector:
                     None, results, headers=fields)
 
                 if format == 'html':
-                    result['html'] = markdown.markdown(result['markdown'], extensions=['tables'])
+                    result['html'] = markdown.markdown(
+                        result['markdown'], extensions=['tables'])
                     del (result['markdown'])
 
             return result
 
         except Exception as e:
             raise Exception(f'Failed to search endpoint: {str(e)}')
-
 
     """
        Search an endpoint in HarfangLab EDR manager
@@ -1268,6 +1279,7 @@ class HarfangLabConnector:
        :return: The list of searched endpoints
        :rtype: ``Dict[str,Any]``
     """
+
     def search_endpoint(self, hostname=None, ostype=None, status=None, offset=0, limit=10, fields=None, format='markdown'):
 
         data = {
@@ -1293,7 +1305,8 @@ class HarfangLabConnector:
                 None, results, headers=fields)
 
             if format == 'html':
-                result['html'] = markdown.markdown(result['markdown'], extensions=['tables'])
+                result['html'] = markdown.markdown(
+                    result['markdown'], extensions=['tables'])
                 del (result['markdown'])
 
             return result
@@ -1334,7 +1347,7 @@ class HarfangLabConnector:
             func = field.get('transform', None)
             data = args.get(field['name'], None)
             mandatory = field.get('mandatory', False)
-            #if not data and mandatory:
+            # if not data and mandatory:
             #    raise Exception(
             #        f'Mismatch between the observable type and what the responder expects ({field["name"]})')
             if func:
@@ -1381,7 +1394,7 @@ class HarfangLabConnector:
                 if func:
                     link = func(self, params)
             if not link:
-                link = serv.get('link',{}).get('link_href')
+                link = serv.get('link', {}).get('link_href')
 
         result['search_type'] = service_name
         result['args'] = args
@@ -1390,7 +1403,6 @@ class HarfangLabConnector:
         result['output'] = output
         result['count'] = count
         result['link'] = link
-
 
         headers = []
         for h in serv['fields']:
@@ -1411,12 +1423,13 @@ class HarfangLabConnector:
             None, output, headers=headers, url_keys=url_keys)
 
         if format == 'html':
-            result['html'] = markdown.markdown(result['markdown'], extensions=['tables'])
+            result['html'] = markdown.markdown(
+                result['markdown'], extensions=['tables'])
             del(result['markdown'])
 
         return result
 
-    def search_multiple_iocs_in_telemetry(self, iocs, limit, format='markdown', search_types = None):
+    def search_multiple_iocs_in_telemetry(self, iocs, limit, format='markdown', search_types=None):
         """
            Search multiple IOCs in HarfangLab telemetry and returns a markdown table with the search results
 
@@ -1448,9 +1461,11 @@ class HarfangLabConnector:
                     res = None
 
                     if ioc.get('type')[0:2] == 'ip' and search_type in ['searchSourceIP', 'searchDestinationIP']:
-                        res = self.search_telemetry(search_type, {'ip': ioc.get('value'), 'limit': limit})
+                        res = self.search_telemetry(
+                            search_type, {'ip': ioc.get('value'), 'limit': limit})
                     elif ioc.get('type') in ['hash', 'md5', 'sha1', 'sha256'] and search_type in ['searchHash', 'searchDriverByHash']:
-                        res = self.search_telemetry(search_type, {'hash': ioc.get('value'), 'limit': limit})
+                        res = self.search_telemetry(
+                            search_type, {'hash': ioc.get('value'), 'limit': limit})
 
                     if res:
                         search_result = ioc.copy()
@@ -1492,13 +1507,13 @@ class HarfangLabConnector:
         results['title'] = 'IOC search'
 
         if format == 'html':
-            results['html'] = markdown.markdown(results['markdown'], extensions=['tables'])
+            results['html'] = markdown.markdown(
+                results['markdown'], extensions=['tables'])
             del(results['markdown'])
 
         return results
 
-
-    def run_job(self, job_name, agent_id, job_title = None, job_description = None, job_timeout = 600, format = 'markdown', request_api_endpoint = None):
+    def run_job(self, job_name, agent_id, job_title=None, job_description=None, job_timeout=600, format='markdown', request_api_endpoint=None):
         """
            Run a HarfangLab job and returns a markdown table with the results
 
@@ -1676,12 +1691,13 @@ class HarfangLabConnector:
             job['title'], output, headers=headers, url_keys=url_keys)
 
         if format == 'html':
-            result['html'] = markdown.markdown(result['markdown'], extensions=['tables'])
+            result['html'] = markdown.markdown(
+                result['markdown'], extensions=['tables'])
             del(result['markdown'])
 
         return result
 
-    def dump_process(self, agent_id, process_uuid, format='markdown', job_timeout = 600):
+    def dump_process(self, agent_id, process_uuid, format='markdown', job_timeout=600):
         """
            Dump a process
 
@@ -1699,7 +1715,7 @@ class HarfangLabConnector:
         """
         return self.run_job('dumpProcess', agent_id, job_timeout, format, f'/api/data/telemetry/Processes/{process_uuid}/requestDumpProcess/')
 
-    def kill_process(self, agent_id, process_uuid, format = 'markdown', job_timeout = 600):
+    def kill_process(self, agent_id, process_uuid, format='markdown', job_timeout=600):
         """
            Kill a process
 
@@ -1748,7 +1764,7 @@ class HarfangLabConnector:
             response = self.hlSession.get(url, params=data)
             response.raise_for_status()
         except Exception as e:
-            raise Exception(f'Failed to list sources: %s'  % (str(e)))
+            raise Exception(f'Failed to list sources: %s' % (str(e)))
 
         return response.json()['results']
 
@@ -1795,9 +1811,11 @@ class HarfangLabConnector:
         '''
 
         try:
-            results = self.list_sources(source_type='ioc', source_name=source_name)
+            results = self.list_sources(
+                source_type='ioc', source_name=source_name)
         except Exception as e:
-            raise Exception(f'Failed to list sources and identify {source_name}: %s' % (str(e)))
+            raise Exception(
+                f'Failed to list sources and identify {source_name}: %s' % (str(e)))
 
         source_id = None
 
@@ -1842,7 +1860,8 @@ class HarfangLabConnector:
                 response.raise_for_status()
                 self.logger.debug(f'IOC added')
             except Exception as e:
-                raise Exception(f'Failed to add IOC {ioc_value} to source {source_id}: %s' % (str(e)))
+                raise Exception(
+                    f'Failed to add IOC {ioc_value} to source {source_id}: %s' % (str(e)))
 
     def change_security_event_status(self, security_event_id, status):
         '''
@@ -1872,13 +1891,15 @@ class HarfangLabConnector:
             elif status.lower() == 'closed':
                 data['new_status'] = 'closed'
             else:
-                raise Exception('Status must be either new, investigating, false_positive or closed')
+                raise Exception(
+                    'Status must be either new, investigating, false_positive or closed')
 
             response = self.hlSession.post(url=url, json=data)
             response.raise_for_status()
 
         except Exception as e:
-            raise Exception(f'Failed to change security event status: %s' % (str(e)))
+            raise Exception(
+                f'Failed to change security event status: %s' % (str(e)))
 
     def isolate_endpoint(self, agent_id):
         '''

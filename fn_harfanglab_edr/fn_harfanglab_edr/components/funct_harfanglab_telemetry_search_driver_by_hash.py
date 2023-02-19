@@ -20,7 +20,6 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-
         """
         Function: Search a driver load in HarfangLab EDR's telemetry per hash
         Inputs:
@@ -34,13 +33,15 @@ class FunctionComponent(AppFunctionComponent):
         verify = True
         if self.options.get('verify').lower() == 'false':
             verify = False
-        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get('api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
+        conn = HarfangLabConnector(self.options.get('api_url'), self.options.get(
+            'api_key'), verify, self.options.get('http_proxy'), self.options.get('https_proxy'))
 
         validate_fields(["harfanglab_hash"], fn_inputs)
 
         hash = fn_inputs.harfanglab_hash
-        limit =  getattr(fn_inputs, "harfanglab_limit", 10)
-        incident_id = getattr(fn_inputs, "harfanglab_ibm_soar_incident_id", None)
+        limit = getattr(fn_inputs, "harfanglab_limit", 10)
+        incident_id = getattr(
+            fn_inputs, "harfanglab_ibm_soar_incident_id", None)
 
         try:
             if not limit or limit == '':
@@ -57,7 +58,8 @@ class FunctionComponent(AppFunctionComponent):
 
             if incident_id:
                 self.resilient_common = ResilientCommon(self.rest_client())
-                self.resilient_common.add_csv_file_to_incident_attachments(incident_id, f'{FN_NAME}-{hash}.csv', results.get('output'))
+                self.resilient_common.add_csv_file_to_incident_attachments(
+                    incident_id, f'{FN_NAME}-{hash}.csv', results.get('output'))
 
             yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
             yield FunctionResult(results)
