@@ -1,0 +1,6 @@
+FROM_HARFANGLAB_EDR_COMMENT_HDR = "From HarfangLab EDR"
+FROM_SOAR_COMMENT_HDR = "From IBM SOAR"
+
+HARFANGLAB_ALERT_ID = "harfanglab_alert_id"
+
+HARFANGLAB_AGENT_DATATABLE_NAME = "harfanglab_agents_dt"

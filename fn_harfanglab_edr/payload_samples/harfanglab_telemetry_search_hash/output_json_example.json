@@ -1,0 +1,109 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "message": "OK",
+    "markdown": "### Hash search\n\n#### Search details\n\n|Hash|Process_Name|Image_Name|Limit|Search Type|Total Number Of Hits|Investigation Link|\n|---|---|---|---|---|---|---|\n| 73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28 |  |  | 10 | searchHash | 4 | https://<your stack>:8443/telemetry/processes?limit=25&offset=0&hashes.sha256__exact=73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28&limit=10&ordering=-event_create_date |\n#### Results (fetched 4/4 entries)\n\n|Name|Creation Date|Hostname|Process Name|Image Name|Command Line|Integrity Level|Parent Image|Parent Command Line|Username|Signed|Signer|Md5|Sha1|Sha256|Process Uuid|Agent Id|\n|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|\n|  | 2023-01-12T08:13:02.908000Z | WEBSERVER | svchost.exe | \\\\vboxsvr\\vagrant\\svchost.exe | c:\\vagrant\\svchost.exe | High | C:\\Windows\\PSEXESVC.exe | C:\\Windows\\PSEXESVC.exe | WEBSERVER\\vagrant | False |  | 37e39e11487f1401c3b4cc8c6ace0db8 | 8fa487cae82aaa284781673a401cc8d0e2bb3d66 | 73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28 | f6a077c7-243a-4d57-0e44-0042d6a662f3 | bab01596-243a-4d57-836a-53c48df074d1 |\n|  | 2023-01-12T08:07:39.560000Z | WORKSTATION-3752 | svchost.exe | C:\\Users\\Public\\svchost.exe | C:\\Users\\public\\svchost.exe -k ClipboardSvcGroup -p | High | C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe | C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe -Version 5.1 -s -NoLogo -NoProfile | WORKSTATION-375\\vagrant | False |  | 37e39e11487f1401c3b4cc8c6ace0db8 | 8fa487cae82aaa284781673a401cc8d0e2bb3d66 | 73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28 | e9e757f1-7746-429a-1780-0016b9e6cb03 | a5df9bab-7746-429a-b2c1-5c48fe4be869 |\n|  | 2023-01-11T19:44:51.211000Z | WEBSERVER | svchost.exe | \\\\vboxsvr\\vagrant\\svchost.exe | c:\\vagrant\\svchost.exe | High | C:\\Windows\\PSEXESVC.exe | C:\\Windows\\PSEXESVC.exe | WEBSERVER\\vagrant | False |  | 37e39e11487f1401c3b4cc8c6ace0db8 | 8fa487cae82aaa284781673a401cc8d0e2bb3d66 | 73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28 | 23483bd0-ba2a-40df-024c-007248785a4f | 6f8a6369-ba2a-40df-99fc-efed06947f6f |\n|  | 2023-01-11T19:42:57.460000Z | WORKSTATION-3752 | svchost.exe | C:\\Users\\Public\\svchost.exe | C:\\Users\\public\\svchost.exe -k ClipboardSvcGroup -p | High |  |  | WORKSTATION-375\\vagrant | False |  | 37e39e11487f1401c3b4cc8c6ace0db8 | 8fa487cae82aaa284781673a401cc8d0e2bb3d66 | 73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28 | 2a0e535d-ec03-494a-12ec-007738a0b665 | 484e6b4f-ec03-494a-a0d4-9c54313889c5 |\n",
+    "search_type": "searchHash",
+    "args": {
+      "hash": "73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28",
+      "process_name": null,
+      "image_name": null,
+      "limit": 10
+    },
+    "title": "Hash search",
+    "output": [
+      {
+        "name": null,
+        "creation date": "2023-01-12T08:13:02.908000Z",
+        "hostname": "WEBSERVER",
+        "process name": "svchost.exe",
+        "image name": "\\\\vboxsvr\\vagrant\\svchost.exe",
+        "command line": "c:\\vagrant\\svchost.exe",
+        "integrity level": "High",
+        "parent image": "C:\\Windows\\PSEXESVC.exe",
+        "parent command line": "C:\\Windows\\PSEXESVC.exe",
+        "username": "WEBSERVER\\vagrant",
+        "signed": false,
+        "signer": "",
+        "md5": "37e39e11487f1401c3b4cc8c6ace0db8",
+        "sha1": "8fa487cae82aaa284781673a401cc8d0e2bb3d66",
+        "sha256": "73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28",
+        "process UUID": "f6a077c7-243a-4d57-0e44-0042d6a662f3",
+        "agent id": "bab01596-243a-4d57-836a-53c48df074d1"
+      },
+      {
+        "name": null,
+        "creation date": "2023-01-12T08:07:39.560000Z",
+        "hostname": "WORKSTATION-3752",
+        "process name": "svchost.exe",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "command line": "C:\\Users\\public\\svchost.exe -k ClipboardSvcGroup -p",
+        "integrity level": "High",
+        "parent image": "C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "parent command line": "C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe -Version 5.1 -s -NoLogo -NoProfile",
+        "username": "WORKSTATION-375\\vagrant",
+        "signed": false,
+        "signer": "",
+        "md5": "37e39e11487f1401c3b4cc8c6ace0db8",
+        "sha1": "8fa487cae82aaa284781673a401cc8d0e2bb3d66",
+        "sha256": "73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28",
+        "process UUID": "e9e757f1-7746-429a-1780-0016b9e6cb03",
+        "agent id": "a5df9bab-7746-429a-b2c1-5c48fe4be869"
+      },
+      {
+        "name": null,
+        "creation date": "2023-01-11T19:44:51.211000Z",
+        "hostname": "WEBSERVER",
+        "process name": "svchost.exe",
+        "image name": "\\\\vboxsvr\\vagrant\\svchost.exe",
+        "command line": "c:\\vagrant\\svchost.exe",
+        "integrity level": "High",
+        "parent image": "C:\\Windows\\PSEXESVC.exe",
+        "parent command line": "C:\\Windows\\PSEXESVC.exe",
+        "username": "WEBSERVER\\vagrant",
+        "signed": false,
+        "signer": "",
+        "md5": "37e39e11487f1401c3b4cc8c6ace0db8",
+        "sha1": "8fa487cae82aaa284781673a401cc8d0e2bb3d66",
+        "sha256": "73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28",
+        "process UUID": "23483bd0-ba2a-40df-024c-007248785a4f",
+        "agent id": "6f8a6369-ba2a-40df-99fc-efed06947f6f"
+      },
+      {
+        "name": null,
+        "creation date": "2023-01-11T19:42:57.460000Z",
+        "hostname": "WORKSTATION-3752",
+        "process name": "svchost.exe",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "command line": "C:\\Users\\public\\svchost.exe -k ClipboardSvcGroup -p",
+        "integrity level": "High",
+        "parent image": null,
+        "parent command line": null,
+        "username": "WORKSTATION-375\\vagrant",
+        "signed": false,
+        "signer": "",
+        "md5": "37e39e11487f1401c3b4cc8c6ace0db8",
+        "sha1": "8fa487cae82aaa284781673a401cc8d0e2bb3d66",
+        "sha256": "73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28",
+        "process UUID": "2a0e535d-ec03-494a-12ec-007738a0b665",
+        "agent id": "484e6b4f-ec03-494a-a0d4-9c54313889c5"
+      }
+    ],
+    "count": 4,
+    "link": "https://<your stack>:8443/telemetry/processes?limit=25&offset=0&hashes.sha256__exact=73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28&limit=10&ordering=-event_create_date"
+  },
+  "raw": null,
+  "inputs": {
+    "harfanglab_hash": "73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-harfanglab-edr",
+    "package_version": "1.0.0",
+    "host": "tui",
+    "execution_time_ms": 314,
+    "timestamp": "2023-02-14 15:11:20"
+  }
+}

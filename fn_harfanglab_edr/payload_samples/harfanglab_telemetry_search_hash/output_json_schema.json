@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "markdown": {
+          "type": "string"
+        },
+        "search_type": {
+          "type": "string"
+        },
+        "args": {
+          "type": "object",
+          "properties": {
+            "hash": {
+              "type": "string"
+            },
+            "process_name": {},
+            "image_name": {},
+            "limit": {
+              "type": "integer"
+            }
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "output": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {},
+              "creation date": {
+                "type": "string"
+              },
+              "hostname": {
+                "type": "string"
+              },
+              "process name": {
+                "type": "string"
+              },
+              "image name": {
+                "type": "string"
+              },
+              "command line": {
+                "type": "string"
+              },
+              "integrity level": {
+                "type": "string"
+              },
+              "parent image": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "parent command line": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "username": {
+                "type": "string"
+              },
+              "signed": {
+                "type": "boolean"
+              },
+              "signer": {
+                "type": "string"
+              },
+              "md5": {
+                "type": "string"
+              },
+              "sha1": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string"
+              },
+              "process UUID": {
+                "type": "string"
+              },
+              "agent id": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "count": {
+          "type": "integer"
+        },
+        "link": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "harfanglab_hash": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

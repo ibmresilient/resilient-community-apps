@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {},
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "harfanglab_source_name": {
+          "type": "string"
+        },
+        "harfanglab_ioc_value": {
+          "type": "string"
+        },
+        "harfanglab_ioc_status": {
+          "type": "string"
+        },
+        "harfanglab_ioc_comment": {
+          "type": "string"
+        },
+        "harfanglab_ioc_type": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

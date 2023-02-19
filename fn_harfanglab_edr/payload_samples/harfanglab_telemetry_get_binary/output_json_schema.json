@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "markdown": {
+          "type": "string"
+        },
+        "search_type": {
+          "type": "string"
+        },
+        "args": {
+          "type": "object",
+          "properties": {
+            "hash": {
+              "type": "string"
+            }
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "output": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "size": {
+                "type": "integer"
+              },
+              "signed": {
+                "type": "boolean"
+              },
+              "signer": {
+                "type": "string"
+              },
+              "md5": {
+                "type": "string"
+              },
+              "sha1": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string"
+              },
+              "download_link": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "count": {
+          "type": "integer"
+        },
+        "link": {}
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "harfanglab_hash": {
+          "type": "string"
+        },
+        "harfanglab_ibm_soar_incident_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "message": "OK",
+    "markdown": "### Driver load search\n\n#### Search details\n\n|Filename|Limit|Search Type|Total Number Of Hits|Investigation Link|\n|---|---|---|---|---|\n| MpKslDrv.sys | 10 | searchDriverByFileName | 97 |  |\n#### Results (fetched 10/97 entries)\n\n|Loading Time|Hostname|Image Name|Image Path|Size|Signed|Signer|Md5|Sha1|Sha256|\n|---|---|---|---|---|---|---|---|---|---|\n| 2023-02-14T04:52:55.662000Z | DC-01 | MpKslDrv.sys | C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{41D85ED2-9570-46AF-A14C-48A0F2B9BBF6}\\MpKslDrv.sys | 214280 | True | Microsoft Windows | cc513c00999921f83964cfb52a3966be | 2f53ed4e72742acc6572b1e09fcd4117b15a47fe | c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb |\n| 2023-02-14T04:11:56.937000Z | WORKSTATION-3752 | MpKslDrv.sys | C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{FCE46EAF-F0A5-4A0F-A0D4-3413FA538B12}\\MpKslDrv.sys | 214280 | True | Microsoft Windows | cc513c00999921f83964cfb52a3966be | 2f53ed4e72742acc6572b1e09fcd4117b15a47fe | c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb |\n| 2023-02-14T02:29:13.791000Z | WEBSERVER | MpKslDrv.sys | C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{813CEE46-6181-4F10-AEC4-12D23D58A921}\\MpKslDrv.sys | 214280 | True | Microsoft Windows | cc513c00999921f83964cfb52a3966be | 2f53ed4e72742acc6572b1e09fcd4117b15a47fe | c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb |\n| 2023-02-13T04:52:54.788000Z | DC-01 | MpKslDrv.sys | C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{2D01A991-DB41-4410-A5F9-E5C313A7D7F6}\\MpKslDrv.sys | 214280 | True | Microsoft Windows | cc513c00999921f83964cfb52a3966be | 2f53ed4e72742acc6572b1e09fcd4117b15a47fe | c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb |\n| 2023-02-13T04:11:57.401000Z | WORKSTATION-3752 | MpKslDrv.sys | C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{9C7571E2-1592-461F-9DAB-D3931890B829}\\MpKslDrv.sys | 214280 | True | Microsoft Windows | cc513c00999921f83964cfb52a3966be | 2f53ed4e72742acc6572b1e09fcd4117b15a47fe | c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb |\n| 2023-02-13T02:29:11.465000Z | WEBSERVER | MpKslDrv.sys | C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{0E017262-D767-48AE-8F3D-C7AAEE3380C1}\\MpKslDrv.sys | 214280 | True | Microsoft Windows | cc513c00999921f83964cfb52a3966be | 2f53ed4e72742acc6572b1e09fcd4117b15a47fe | c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb |\n| 2023-02-12T04:52:56.802000Z | DC-01 | MpKslDrv.sys | C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{C37BB81A-84F3-419D-9E74-0E759DC4F3F9}\\MpKslDrv.sys | 214280 | True | Microsoft Windows | cc513c00999921f83964cfb52a3966be | 2f53ed4e72742acc6572b1e09fcd4117b15a47fe | c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb |\n| 2023-02-12T04:11:53.045000Z | WORKSTATION-3752 | MpKslDrv.sys | C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{30A1B473-3EDE-4430-A9F4-435C4DC31296}\\MpKslDrv.sys | 214280 | True | Microsoft Windows | cc513c00999921f83964cfb52a3966be | 2f53ed4e72742acc6572b1e09fcd4117b15a47fe | c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb |\n| 2023-02-12T02:29:10.684000Z | WEBSERVER | MpKslDrv.sys | C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{E1F3780C-C67A-4BF4-9EA6-E8A6C0D246F5}\\MpKslDrv.sys | 214280 | True | Microsoft Windows | cc513c00999921f83964cfb52a3966be | 2f53ed4e72742acc6572b1e09fcd4117b15a47fe | c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb |\n| 2023-02-11T04:52:53.363000Z | DC-01 | MpKslDrv.sys | C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{78BF4AFC-04CA-4857-9FBC-914A6CE07FCE}\\MpKslDrv.sys | 214280 | True | Microsoft Windows | cc513c00999921f83964cfb52a3966be | 2f53ed4e72742acc6572b1e09fcd4117b15a47fe | c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb |\n",
+    "search_type": "searchDriverByFileName",
+    "args": {
+      "filename": "MpKslDrv.sys",
+      "limit": 10
+    },
+    "title": "Driver load search",
+    "output": [
+      {
+        "loading time": "2023-02-14T04:52:55.662000Z",
+        "hostname": "DC-01",
+        "image name": "MpKslDrv.sys",
+        "image path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{41D85ED2-9570-46AF-A14C-48A0F2B9BBF6}\\MpKslDrv.sys",
+        "size": 214280,
+        "signed": true,
+        "signer": "Microsoft Windows",
+        "md5": "cc513c00999921f83964cfb52a3966be",
+        "sha1": "2f53ed4e72742acc6572b1e09fcd4117b15a47fe",
+        "sha256": "c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb"
+      },
+      {
+        "loading time": "2023-02-14T04:11:56.937000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "MpKslDrv.sys",
+        "image path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{FCE46EAF-F0A5-4A0F-A0D4-3413FA538B12}\\MpKslDrv.sys",
+        "size": 214280,
+        "signed": true,
+        "signer": "Microsoft Windows",
+        "md5": "cc513c00999921f83964cfb52a3966be",
+        "sha1": "2f53ed4e72742acc6572b1e09fcd4117b15a47fe",
+        "sha256": "c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb"
+      },
+      {
+        "loading time": "2023-02-14T02:29:13.791000Z",
+        "hostname": "WEBSERVER",
+        "image name": "MpKslDrv.sys",
+        "image path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{813CEE46-6181-4F10-AEC4-12D23D58A921}\\MpKslDrv.sys",
+        "size": 214280,
+        "signed": true,
+        "signer": "Microsoft Windows",
+        "md5": "cc513c00999921f83964cfb52a3966be",
+        "sha1": "2f53ed4e72742acc6572b1e09fcd4117b15a47fe",
+        "sha256": "c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb"
+      },
+      {
+        "loading time": "2023-02-13T04:52:54.788000Z",
+        "hostname": "DC-01",
+        "image name": "MpKslDrv.sys",
+        "image path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{2D01A991-DB41-4410-A5F9-E5C313A7D7F6}\\MpKslDrv.sys",
+        "size": 214280,
+        "signed": true,
+        "signer": "Microsoft Windows",
+        "md5": "cc513c00999921f83964cfb52a3966be",
+        "sha1": "2f53ed4e72742acc6572b1e09fcd4117b15a47fe",
+        "sha256": "c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb"
+      },
+      {
+        "loading time": "2023-02-13T04:11:57.401000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "MpKslDrv.sys",
+        "image path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{9C7571E2-1592-461F-9DAB-D3931890B829}\\MpKslDrv.sys",
+        "size": 214280,
+        "signed": true,
+        "signer": "Microsoft Windows",
+        "md5": "cc513c00999921f83964cfb52a3966be",
+        "sha1": "2f53ed4e72742acc6572b1e09fcd4117b15a47fe",
+        "sha256": "c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb"
+      },
+      {
+        "loading time": "2023-02-13T02:29:11.465000Z",
+        "hostname": "WEBSERVER",
+        "image name": "MpKslDrv.sys",
+        "image path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{0E017262-D767-48AE-8F3D-C7AAEE3380C1}\\MpKslDrv.sys",
+        "size": 214280,
+        "signed": true,
+        "signer": "Microsoft Windows",
+        "md5": "cc513c00999921f83964cfb52a3966be",
+        "sha1": "2f53ed4e72742acc6572b1e09fcd4117b15a47fe",
+        "sha256": "c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb"
+      },
+      {
+        "loading time": "2023-02-12T04:52:56.802000Z",
+        "hostname": "DC-01",
+        "image name": "MpKslDrv.sys",
+        "image path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{C37BB81A-84F3-419D-9E74-0E759DC4F3F9}\\MpKslDrv.sys",
+        "size": 214280,
+        "signed": true,
+        "signer": "Microsoft Windows",
+        "md5": "cc513c00999921f83964cfb52a3966be",
+        "sha1": "2f53ed4e72742acc6572b1e09fcd4117b15a47fe",
+        "sha256": "c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb"
+      },
+      {
+        "loading time": "2023-02-12T04:11:53.045000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "MpKslDrv.sys",
+        "image path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{30A1B473-3EDE-4430-A9F4-435C4DC31296}\\MpKslDrv.sys",
+        "size": 214280,
+        "signed": true,
+        "signer": "Microsoft Windows",
+        "md5": "cc513c00999921f83964cfb52a3966be",
+        "sha1": "2f53ed4e72742acc6572b1e09fcd4117b15a47fe",
+        "sha256": "c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb"
+      },
+      {
+        "loading time": "2023-02-12T02:29:10.684000Z",
+        "hostname": "WEBSERVER",
+        "image name": "MpKslDrv.sys",
+        "image path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{E1F3780C-C67A-4BF4-9EA6-E8A6C0D246F5}\\MpKslDrv.sys",
+        "size": 214280,
+        "signed": true,
+        "signer": "Microsoft Windows",
+        "md5": "cc513c00999921f83964cfb52a3966be",
+        "sha1": "2f53ed4e72742acc6572b1e09fcd4117b15a47fe",
+        "sha256": "c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb"
+      },
+      {
+        "loading time": "2023-02-11T04:52:53.363000Z",
+        "hostname": "DC-01",
+        "image name": "MpKslDrv.sys",
+        "image path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\{78BF4AFC-04CA-4857-9FBC-914A6CE07FCE}\\MpKslDrv.sys",
+        "size": 214280,
+        "signed": true,
+        "signer": "Microsoft Windows",
+        "md5": "cc513c00999921f83964cfb52a3966be",
+        "sha1": "2f53ed4e72742acc6572b1e09fcd4117b15a47fe",
+        "sha256": "c9e46e1201a7fc7d7098faa844fbc452df3a0683517393046dde447bebc005bb"
+      }
+    ],
+    "count": 97,
+    "link": null
+  },
+  "raw": null,
+  "inputs": {
+    "harfanglab_limit": 10,
+    "harfanglab_filename": "MpKslDrv.sys"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-harfanglab-edr",
+    "package_version": "1.0.0",
+    "host": "tui",
+    "execution_time_ms": 132,
+    "timestamp": "2023-02-14 15:16:06"
+  }
+}

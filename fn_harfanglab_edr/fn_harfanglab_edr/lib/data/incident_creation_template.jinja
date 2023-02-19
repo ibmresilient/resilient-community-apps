@@ -1,0 +1,201 @@
+{
+  {%- set comma = joiner(",") -%}
+  {# JINJA template for creating a new SOAR incident from a HarfangLab EDR security event. #}
+  "name": "HarfangLab - {{ agent.hostname }} - {{ rule_name }}",
+  "start_date": {{ event_create_date|resilient_datetimeformat }},
+  "discovered_date": {{ alert_time|resilient_datetimeformat }},
+  "description": {
+    "format": "text",
+    "content": "{{ msg }}"
+  },
+  {# if HarfangLab users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
+  "plan_status": "{{ status|resilient_substitute('{"closed": "C", "new": "A", "investigating": "A", "false_postive": "C"}') }}",
+  {% if status == "closed" %}
+    "resolution_id": "Resolved",
+    "resolution_summary": "Closed by HarfangLab EDR",
+  {% endif %}
+  "severity_code": "{{ level|resilient_substitute('{"critical": "High", "high": "High", "medium": "Medium", "low": "Low", "informational": "Low"}') }}",
+  "properties": {
+    "harfanglab_alert_id": "{{ id }}",
+    "harfanglab_rule_name": "{{ rule_name }}",
+    "harfanglab_agent_id": "{{ agent.agentid }}",
+    "harfanglab_agent_name": "{{ agent.hostname }}",
+    "harfanglab_alert_type": "{{ alert_type }}",
+    "harfanglab_status": "{{ status }}"
+  },
+  "artifacts": [
+    {% if agent.hostname %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "System Name"
+        },
+        "value": "{{ agent.hostname|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if process %}
+    {% if process.username %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "User Account"
+        },
+        "value": "{{ process.username|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if process.hashes.md5 %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "Malware MD5 Hash"
+        },
+        "value": "{{ process.hashes.md5 }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if process.hashes.sha1 %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "Malware SHA-1 Hash"
+        },
+        "value": "{{ process.hashes.sha1 }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if process.hashes.sha256 %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "Malware SHA-256 Hash"
+        },
+        "value": "{{ process.hashes.sha256 }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if process.image_name %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "File Path"
+        },
+        "value": "{{ process.image_name|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if process.process_name %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "File Name"
+        },
+        "value": "{{ process.process_name|replace('\\', '\\\\')|replace('"', '\\"') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% endif %}
+    {% if details_dns_resolution %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "DNS Name"
+        },
+        "value": "{{ details_dns_resolution.requested_name }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if details_url_request %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "DNS Name"
+        },
+        "value": "{{ details_url_request.host }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if details_url_request %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "URL"
+        },
+        "value": "{{ details_url_request.url }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if details_connection %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "IP Address"
+        },
+        "value": "{{ details_connection.DestinationIp }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if details_registry and details_registry.target_object %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "Registry Key"
+        },
+        "value": "{{ details_registry.target_object }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+    {% if eventlog and eventlog.event_data and eventlog.event_data.get('Threat Name') %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "Malware Family/Variant"
+        },
+        "value": "{{ eventlog.event_data.get('Threat Name') }}",
+        "description": {
+          "format": "text",
+          "content": "creation date: {{ event_create_date|resilient_datetimeformat  }}"
+        }
+      }
+      {% endif %}
+
+  ]
+}
+

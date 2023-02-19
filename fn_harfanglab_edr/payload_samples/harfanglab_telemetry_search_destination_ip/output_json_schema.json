@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "markdown": {
+          "type": "string"
+        },
+        "search_type": {
+          "type": "string"
+        },
+        "args": {
+          "type": "object",
+          "properties": {
+            "ip": {
+              "type": "string"
+            },
+            "limit": {
+              "type": "integer"
+            }
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "output": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "creation date": {
+                "type": "string"
+              },
+              "hostname": {
+                "type": "string"
+              },
+              "image name": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "source address": {
+                "type": "string"
+              },
+              "source port": {
+                "type": "integer"
+              },
+              "destination address": {
+                "type": "string"
+              },
+              "destination port": {
+                "type": "integer"
+              },
+              "direction": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "count": {
+          "type": "integer"
+        },
+        "link": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "harfanglab_ip": {
+          "type": "string"
+        },
+        "harfanglab_limit": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

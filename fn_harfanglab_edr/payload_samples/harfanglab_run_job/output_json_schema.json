@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "markdown": {
+          "type": "string"
+        },
+        "output": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "session": {
+                "type": "integer"
+              },
+              "username": {
+                "type": "string"
+              },
+              "integrity": {
+                "type": "string"
+              },
+              "pid": {
+                "type": "integer"
+              },
+              "ppid": {
+                "type": "integer"
+              },
+              "cmdline": {
+                "type": "string"
+              },
+              "fullpath": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "signed": {
+                "type": "boolean"
+              },
+              "md5": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "sha1": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "sha256": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          }
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "harfanglab_job_name": {
+          "type": "string"
+        },
+        "harfanglab_agent_id": {
+          "type": "string"
+        },
+        "harfanglab_job_timeout": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

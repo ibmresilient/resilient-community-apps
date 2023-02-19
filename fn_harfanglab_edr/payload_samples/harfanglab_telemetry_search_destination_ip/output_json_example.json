@@ -1,0 +1,142 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "message": "OK",
+    "markdown": "### IP search\n\n#### Search details\n\n|Ip|Limit|Search Type|Total Number Of Hits|Investigation Link|\n|---|---|---|---|---|\n| 10.1.1.222 | 10 | searchDestinationIP | 28126 | https://<your stack>:8443/telemetry/network-connections?offset=0&daddr=10.1.1.222&limit=10&ordering=-event_create_date |\n#### Results (fetched 10/28126 entries)\n\n|Creation Date|Hostname|Image Name|Username|Source Address|Source Port|Destination Address|Destination Port|Direction|\n|---|---|---|---|---|---|---|---|---|\n| 2023-02-14T14:12:30.804000Z | WORKSTATION-3752 | C:\\Users\\Public\\svchost.exe | WORKSTATION-375\\vagrant | 192.168.56.200 | 50060 | 10.1.1.222 | 80 | out |\n| 2023-02-14T14:10:48.161000Z | WORKSTATION-3752 | C:\\Users\\Public\\svchost.exe | WORKSTATION-375\\vagrant | 192.168.56.200 | 50059 | 10.1.1.222 | 80 | out |\n| 2023-02-14T14:09:05.493000Z | WORKSTATION-3752 | C:\\Users\\Public\\svchost.exe | WORKSTATION-375\\vagrant | 192.168.56.200 | 50058 | 10.1.1.222 | 80 | out |\n| 2023-02-14T14:07:22.723000Z | WORKSTATION-3752 | C:\\Users\\Public\\svchost.exe | WORKSTATION-375\\vagrant | 192.168.56.200 | 50057 | 10.1.1.222 | 80 | out |\n| 2023-02-14T14:05:39.988000Z | WORKSTATION-3752 | C:\\Users\\Public\\svchost.exe | WORKSTATION-375\\vagrant | 192.168.56.200 | 50056 | 10.1.1.222 | 80 | out |\n| 2023-02-14T14:03:57.275000Z | WORKSTATION-3752 | C:\\Users\\Public\\svchost.exe | WORKSTATION-375\\vagrant | 192.168.56.200 | 50055 | 10.1.1.222 | 80 | out |\n| 2023-02-14T14:02:14.595000Z | WORKSTATION-3752 | C:\\Users\\Public\\svchost.exe | WORKSTATION-375\\vagrant | 192.168.56.200 | 50050 | 10.1.1.222 | 80 | out |\n| 2023-02-14T14:00:31.925000Z | WORKSTATION-3752 | C:\\Users\\Public\\svchost.exe | WORKSTATION-375\\vagrant | 192.168.56.200 | 50049 | 10.1.1.222 | 80 | out |\n| 2023-02-14T13:58:49.300000Z | WORKSTATION-3752 | C:\\Users\\Public\\svchost.exe | WORKSTATION-375\\vagrant | 192.168.56.200 | 50048 | 10.1.1.222 | 80 | out |\n| 2023-02-14T13:57:06.650000Z | WORKSTATION-3752 | C:\\Users\\Public\\svchost.exe | WORKSTATION-375\\vagrant | 192.168.56.200 | 50046 | 10.1.1.222 | 80 | out |\n",
+    "search_type": "searchDestinationIP",
+    "args": {
+      "ip": "10.1.1.222",
+      "limit": 10
+    },
+    "title": "IP search",
+    "output": [
+      {
+        "creation date": "2023-02-14T14:12:30.804000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "username": "WORKSTATION-375\\vagrant",
+        "source address": "192.168.56.200",
+        "source port": 50060,
+        "destination address": "10.1.1.222",
+        "destination port": 80,
+        "direction": "out"
+      },
+      {
+        "creation date": "2023-02-14T14:10:48.161000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "username": "WORKSTATION-375\\vagrant",
+        "source address": "192.168.56.200",
+        "source port": 50059,
+        "destination address": "10.1.1.222",
+        "destination port": 80,
+        "direction": "out"
+      },
+      {
+        "creation date": "2023-02-14T14:09:05.493000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "username": "WORKSTATION-375\\vagrant",
+        "source address": "192.168.56.200",
+        "source port": 50058,
+        "destination address": "10.1.1.222",
+        "destination port": 80,
+        "direction": "out"
+      },
+      {
+        "creation date": "2023-02-14T14:07:22.723000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "username": "WORKSTATION-375\\vagrant",
+        "source address": "192.168.56.200",
+        "source port": 50057,
+        "destination address": "10.1.1.222",
+        "destination port": 80,
+        "direction": "out"
+      },
+      {
+        "creation date": "2023-02-14T14:05:39.988000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "username": "WORKSTATION-375\\vagrant",
+        "source address": "192.168.56.200",
+        "source port": 50056,
+        "destination address": "10.1.1.222",
+        "destination port": 80,
+        "direction": "out"
+      },
+      {
+        "creation date": "2023-02-14T14:03:57.275000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "username": "WORKSTATION-375\\vagrant",
+        "source address": "192.168.56.200",
+        "source port": 50055,
+        "destination address": "10.1.1.222",
+        "destination port": 80,
+        "direction": "out"
+      },
+      {
+        "creation date": "2023-02-14T14:02:14.595000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "username": "WORKSTATION-375\\vagrant",
+        "source address": "192.168.56.200",
+        "source port": 50050,
+        "destination address": "10.1.1.222",
+        "destination port": 80,
+        "direction": "out"
+      },
+      {
+        "creation date": "2023-02-14T14:00:31.925000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "username": "WORKSTATION-375\\vagrant",
+        "source address": "192.168.56.200",
+        "source port": 50049,
+        "destination address": "10.1.1.222",
+        "destination port": 80,
+        "direction": "out"
+      },
+      {
+        "creation date": "2023-02-14T13:58:49.300000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "username": "WORKSTATION-375\\vagrant",
+        "source address": "192.168.56.200",
+        "source port": 50048,
+        "destination address": "10.1.1.222",
+        "destination port": 80,
+        "direction": "out"
+      },
+      {
+        "creation date": "2023-02-14T13:57:06.650000Z",
+        "hostname": "WORKSTATION-3752",
+        "image name": "C:\\Users\\Public\\svchost.exe",
+        "username": "WORKSTATION-375\\vagrant",
+        "source address": "192.168.56.200",
+        "source port": 50046,
+        "destination address": "10.1.1.222",
+        "destination port": 80,
+        "direction": "out"
+      }
+    ],
+    "count": 28126,
+    "link": "https://<your stack>:8443/telemetry/network-connections?offset=0&daddr=10.1.1.222&limit=10&ordering=-event_create_date"
+  },
+  "raw": null,
+  "inputs": {
+    "harfanglab_ip": "10.1.1.222",
+    "harfanglab_limit": 10
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-harfanglab-edr",
+    "package_version": "1.0.0",
+    "host": "tui",
+    "execution_time_ms": 124,
+    "timestamp": "2023-02-14 15:13:26"
+  }
+}

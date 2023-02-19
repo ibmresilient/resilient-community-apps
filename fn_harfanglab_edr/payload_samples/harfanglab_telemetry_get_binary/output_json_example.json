@@ -1,0 +1,41 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "message": "OK",
+    "markdown": "### Binary download\n\n#### Search details\n\n|Hash|Search Type|Total Number Of Hits|Investigation Link|\n|---|---|---|---|\n| 73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28 | getBinary | 1 |  |\n#### Results (fetched 1/1 entries)\n\n|Path|Size|Signed|Signer|Md5|Sha1|Sha256|Download_Link|\n|---|---|---|---|---|---|---|---|\n| \\\\vboxsvr\\vagrant\\svchost.exe, C:\\Users\\Public\\svchost.exe | 284672 | False |  | 37e39e11487f1401c3b4cc8c6ace0db8 | 8fa487cae82aaa284781673a401cc8d0e2bb3d66 | 73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28 | [Download](https://<your stack>:8443/api/data/telemetry/Binary/download/73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28?hl_expiring_key=d3b158e6119180d7ea8c31924ebcbcce6fb8c240) |\n",
+    "search_type": "getBinary",
+    "args": {
+      "hash": "73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28"
+    },
+    "title": "Binary download",
+    "output": [
+      {
+        "path": "\\\\vboxsvr\\vagrant\\svchost.exe, C:\\Users\\Public\\svchost.exe",
+        "size": 284672,
+        "signed": false,
+        "signer": "",
+        "md5": "37e39e11487f1401c3b4cc8c6ace0db8",
+        "sha1": "8fa487cae82aaa284781673a401cc8d0e2bb3d66",
+        "sha256": "73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28",
+        "download_link": "https://<your stack>:8443/api/data/telemetry/Binary/download/73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28?hl_expiring_key=d3b158e6119180d7ea8c31924ebcbcce6fb8c240"
+      }
+    ],
+    "count": 1,
+    "link": null
+  },
+  "raw": null,
+  "inputs": {
+    "harfanglab_hash": "73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28",
+    "harfanglab_ibm_soar_incident_id": 2362
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-harfanglab-edr",
+    "package_version": "1.0.0",
+    "host": "tui",
+    "execution_time_ms": 2027,
+    "timestamp": "2023-02-14 20:04:00"
+  }
+}

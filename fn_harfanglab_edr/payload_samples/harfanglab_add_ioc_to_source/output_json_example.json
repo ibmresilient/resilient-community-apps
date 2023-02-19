@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": null,
+  "raw": null,
+  "inputs": {
+    "harfanglab_source_name": "Test",
+    "harfanglab_ioc_value": "73c1c74eca4dbf5a234f558aa9c35bd9d7a24bf692ebf830822c97a33341ad28",
+    "harfanglab_ioc_status": "testing",
+    "harfanglab_ioc_comment": "",
+    "harfanglab_ioc_type": "hash"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-harfanglab-edr",
+    "package_version": "1.0.0",
+    "host": "tui",
+    "execution_time_ms": 186,
+    "timestamp": "2023-02-14 15:11:05"
+  }
+}

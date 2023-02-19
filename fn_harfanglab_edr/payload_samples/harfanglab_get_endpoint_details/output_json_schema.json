@@ -1,0 +1,373 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "group_count": {
+          "type": "integer"
+        },
+        "groups": {
+          "type": "array"
+        },
+        "policy": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "tenant": {},
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "revision": {
+              "type": "integer"
+            },
+            "sleeptime": {
+              "type": "integer"
+            },
+            "sleepjitter": {
+              "type": "integer"
+            },
+            "telemetry_process": {
+              "type": "boolean"
+            },
+            "telemetry_process_limit": {
+              "type": "boolean"
+            },
+            "telemetry_process_limit_value": {
+              "type": "integer"
+            },
+            "telemetry_network": {
+              "type": "boolean"
+            },
+            "telemetry_network_limit": {
+              "type": "boolean"
+            },
+            "telemetry_network_limit_value": {
+              "type": "integer"
+            },
+            "telemetry_log": {
+              "type": "boolean"
+            },
+            "telemetry_log_limit": {
+              "type": "boolean"
+            },
+            "telemetry_log_limit_value": {
+              "type": "integer"
+            },
+            "telemetry_remotethread": {
+              "type": "boolean"
+            },
+            "telemetry_remotethread_limit": {
+              "type": "boolean"
+            },
+            "telemetry_remotethread_limit_value": {
+              "type": "integer"
+            },
+            "telemetry_driverload": {
+              "type": "boolean"
+            },
+            "telemetry_driverload_limit": {
+              "type": "boolean"
+            },
+            "telemetry_driverload_limit_value": {
+              "type": "integer"
+            },
+            "telemetry_alerts_limit": {
+              "type": "boolean"
+            },
+            "telemetry_alerts_limit_value": {
+              "type": "integer"
+            },
+            "binary_download_enabled": {
+              "type": "boolean"
+            },
+            "telemetry_on_alert_enabled": {
+              "type": "boolean"
+            },
+            "telemetry_on_alert_pre_alert_event_count": {
+              "type": "integer"
+            },
+            "telemetry_on_alert_post_alert_max_event_count": {
+              "type": "integer"
+            },
+            "telemetry_on_alert_post_alert_max_duration_secs": {
+              "type": "integer"
+            },
+            "loglevel": {
+              "type": "string"
+            },
+            "use_sigma": {
+              "type": "boolean"
+            },
+            "ioc_mode": {
+              "type": "integer"
+            },
+            "hlai_mode": {
+              "type": "integer"
+            },
+            "hlai_skip_signed_ms": {
+              "type": "boolean"
+            },
+            "hlai_skip_signed_others": {
+              "type": "boolean"
+            },
+            "hlai_minimum_level": {
+              "type": "string"
+            },
+            "hibou_mode": {
+              "type": "integer"
+            },
+            "hibou_skip_signed_ms": {
+              "type": "boolean"
+            },
+            "hibou_skip_signed_others": {
+              "type": "boolean"
+            },
+            "hibou_minimum_level": {
+              "type": "string"
+            },
+            "yara_mode": {
+              "type": "integer"
+            },
+            "yara_skip_signed_ms": {
+              "type": "boolean"
+            },
+            "yara_skip_signed_others": {
+              "type": "boolean"
+            },
+            "use_driver": {
+              "type": "boolean"
+            },
+            "use_isolation": {
+              "type": "boolean"
+            },
+            "use_ransomguard": {
+              "type": "boolean"
+            },
+            "ransomguard_alert_only": {
+              "type": "boolean"
+            },
+            "driverblock_mode": {
+              "type": "integer"
+            },
+            "self_protection": {
+              "type": "boolean"
+            },
+            "audit_killswitch": {
+              "type": "boolean"
+            },
+            "self_protection_feature_hosts": {
+              "type": "boolean"
+            },
+            "feature_callback_tampering": {
+              "type": "boolean"
+            },
+            "use_process_block": {
+              "type": "boolean"
+            },
+            "use_sigma_process_block": {
+              "type": "boolean"
+            },
+            "sigma_ruleset": {},
+            "yara_ruleset": {},
+            "ioc_ruleset": {}
+          }
+        },
+        "tenant": {},
+        "starttime": {
+          "type": "string"
+        },
+        "additional_info": {
+          "type": "object",
+          "properties": {
+            "additional_info1": {},
+            "additional_info2": {},
+            "additional_info3": {},
+            "additional_info4": {}
+          }
+        },
+        "local_user_count": {
+          "type": "integer"
+        },
+        "local_admin_count": {
+          "type": "integer"
+        },
+        "local_group_count": {
+          "type": "integer"
+        },
+        "effective_policy_id": {
+          "type": "string"
+        },
+        "effective_policy_revision": {
+          "type": "integer"
+        },
+        "domainname": {
+          "type": "string"
+        },
+        "dnsdomainname": {},
+        "hostname": {
+          "type": "string"
+        },
+        "osmajor": {
+          "type": "integer"
+        },
+        "osminor": {
+          "type": "integer"
+        },
+        "osproducttype": {
+          "type": "string"
+        },
+        "has_valid_password": {
+          "type": "boolean"
+        },
+        "firstseen": {
+          "type": "string"
+        },
+        "lastseen": {
+          "type": "string"
+        },
+        "lastseen_warning": {
+          "type": "string"
+        },
+        "lastseen_error": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "bitness": {
+          "type": "string"
+        },
+        "distroid": {},
+        "domain": {},
+        "installdate": {
+          "type": "string"
+        },
+        "ipaddress": {
+          "type": "string"
+        },
+        "ipmask": {
+          "type": "string"
+        },
+        "external_ipaddress": {
+          "type": "string"
+        },
+        "osbuild": {
+          "type": "integer"
+        },
+        "osid": {
+          "type": "string"
+        },
+        "ostype": {
+          "type": "string"
+        },
+        "osversion": {
+          "type": "string"
+        },
+        "producttype": {
+          "type": "string"
+        },
+        "servicepack": {},
+        "total_memory": {
+          "type": "number"
+        },
+        "cpu_count": {
+          "type": "integer"
+        },
+        "cpu_frequency": {
+          "type": "integer"
+        },
+        "avg_cpu": {
+          "type": "number"
+        },
+        "avg_memory": {
+          "type": "number"
+        },
+        "avg_system_cpu": {
+          "type": "number"
+        },
+        "machine_boottime": {
+          "type": "string"
+        },
+        "isolation_state": {
+          "type": "boolean"
+        },
+        "isolation_policy": {
+          "type": "boolean"
+        },
+        "driver_enabled": {
+          "type": "boolean"
+        },
+        "driver_policy": {
+          "type": "boolean"
+        },
+        "telemetry": {},
+        "uninstall_status": {
+          "type": "integer"
+        },
+        "update_status": {
+          "type": "integer"
+        },
+        "update_type": {},
+        "refresh_properties_status": {},
+        "windows_groups_last_update": {
+          "type": "string"
+        },
+        "windows_users_last_update": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "harfanglab_agent_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

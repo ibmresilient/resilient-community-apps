@@ -1,0 +1,18 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": "Host bab01596-243a-4d57-836a-53c48df074d1 successfully isolated",
+  "raw": null,
+  "inputs": {
+    "harfanglab_agent_id": "bab01596-243a-4d57-836a-53c48df074d1"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-harfanglab-edr",
+    "package_version": "1.0.0",
+    "host": "tui",
+    "execution_time_ms": 11028,
+    "timestamp": "2023-02-14 15:29:40"
+  }
+}

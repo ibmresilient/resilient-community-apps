@@ -1,0 +1,14 @@
+{
+  {# JINJA template for closing a new SOAR incident from a HarfangLab EDR Security Event. #}
+  "plan_status": "C",
+  "resolution_id": {
+    "name": "Resolved"
+  },
+  "resolution_summary": {
+    "format": "text",
+    "content": "Closed by HarfangLab EDR"
+  },
+  "properties": {
+    "harfanglab_status": "{{ status }}"
+  }
+}
