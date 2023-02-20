@@ -36,9 +36,9 @@ response = {
 
 content = results.get("content")
 
-if not results.success:
+if not results.get("success")
   text = u"Unable to create meeting"
-  fail_reason = results.reason
+  fail_reason = results.get("reason")
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
     

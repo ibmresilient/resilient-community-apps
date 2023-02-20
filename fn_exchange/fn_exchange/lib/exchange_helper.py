@@ -57,7 +57,7 @@ class ResultsHandler(ResultPayload):
         return FunctionResult(results, custom_results=True)
 
     def fail(self, reason):
-        results = self.done(success=False, reason=reason)
+        results = self.done(success=False, reason=reason, content={})
         return FunctionResult(results, custom_results=True)
 
 
