@@ -121,6 +121,7 @@ class exchange_interface:
         search_subfolders   = function_parameters.get("search_subfolders")
         default_folder_path = self.options.get("default_folder_path")
 
+        timezone = self.options.get("timezone")
         account = self.connect_to_account(username)
 
         # Defaults to folder specified in app.conf (Top of Information Store/Inbox) if not 
@@ -161,13 +162,13 @@ class exchange_interface:
 
         if start_date:
             # get YYYY/MM/DD from epoch time in milliseconds
-            tz = self._get_tz()
-            start_date = EWSDateTime.fromtimestamp(start_date/1000, tz=tz)
+            timezone = exchange_helper.get_timezone(timezone)
+            start_date = EWSDateTime.fromtimestamp(start_date/1000, tz=timezone)
             filtered_emails = filtered_emails.filter(datetime_received__gte=start_date)
 
         if end_date:
-            tz = self._get_tz()
-            end_date = EWSDateTime.fromtimestamp(end_date/1000, tz=tz)
+            timezone = exchange_helper.get_timezone(timezone)
+            end_date = EWSDateTime.fromtimestamp(end_date/1000, tz=timezone)
             filtered_emails = filtered_emails.filter(datetime_received__lte=end_date)
 
         if has_attachments is not None:
@@ -222,6 +223,7 @@ class exchange_interface:
         meeting_body = function_parameters.get("meeting_body")
         required_attendees = function_parameters.get("required_attendees")
         optional_attendees = function_parameters.get("optional_attendees")
+        timezone = self.options.get("timezone")
 
         account = self.connect_to_account(username, impersonation=(username.lower() != self.options.get("email").lower()))
 
@@ -230,14 +232,16 @@ class exchange_interface:
         if optional_attendees:
             optional_attendees = [oa.strip() for oa in optional_attendees.split(',')]
 
-        tz = exchange_helper.get_timezone()
+        timezone = exchange_helper.get_timezone(timezone)
+        start_time = EWSDateTime.fromtimestamp(start_time/1000, tz=timezone)
+        end_time = EWSDateTime.fromtimestamp(end_time/1000, tz=timezone)
 
         self.log.info("Creating meeting using the provided parameters")
         meeting = CalendarItem(
             account=account,
             folder=account.calendar,
-            start=EWSDateTime.fromtimestamp(start_time/1000, tz=tz),
-            end=EWSDateTime.fromtimestamp(end_time/1000, tz=tz),
+            start=start_time,
+            end=end_time,
             subject=meeting_subject,
             body=meeting_body,
             required_attendees=required_attendees,
@@ -252,8 +256,9 @@ class exchange_interface:
             'sender': username,
             'subject': meeting_subject,
             'body': meeting_body,
-            'start_time': start_time,
-            'end_time': end_time}
+            'start_time': str(start_time.strftime('%Y-%m-%d %H:%M:%S')),
+            'end_time': str(end_time.strftime('%Y-%m-%d %H:%M:%S')),
+            'timezone' : str(timezone)}
 
 
     def move_emails(self, function_parameters, delete_src_folder=False) -> tuple:
