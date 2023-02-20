@@ -30,7 +30,6 @@ inputs.exchange_force_delete_subfolders = inputs.exchange_force_delete_subfolder
 ### Post-Processing Script
 ```python
 '''
-
 Example function results:
 ------------------------
     {
@@ -57,36 +56,42 @@ Example function results:
                       'attachment_base64': 'attachment encoded in base 64'}}},
 
 '''
-
 # To skip adding attachment as a base64 encoded value, Change this to False
 enable_add_attachment_value = True 
+fail_reason = results.get("reason")
 content   = results.get("content")
 emails    = content.get("emails")
 email_ids = content.get("email_ids")
 
-# Loop through all queried emails
-for email_id in email_ids:
-  email = emails[email_id]
-  # Extract information and create Artifacts
-  if email['sender_name']:
-    incident.addArtifact('Email Sender Name', email['sender_name'], 'Sender name for email {}'.format(email_id))
-  if email['sender_email']:
-    incident.addArtifact('Email Sender', email['sender_email'], 'Sender email address for email {}'.format(email_id))
-  if email['subject']:
-    incident.addArtifact('Email Subject', email['subject'], 'Email subject for email {}'.format(email_id))
-  if email['body']:
-    incident.addArtifact('Email Body', email['body'], 'Email body in HTML for email {}'.format(email_id))
-    
-  # Loop through attachments and create artifacts
-  attachment_ids = email['attachment_ids']
-  attachments = email['attachments']
-  for attachment_id in attachment_ids:
-    attachment = attachments[attachment_id]
-    incident.addArtifact('Email Attachment Name', attachment['attachment_name'], 'Attachment name for attachment {} from email {}'.format(attachment_id, email_id))
-    
-    if enable_add_attachment_value:
-      incident.addArtifact('Email Attachment', attachment['attachment_base64'], 'Attachment file {} base64 encoded : {}'.format(attachment['attachment_name'], attachment['attachment_base64']))
 
+if not results.get("success"):
+  text = u"Unable to delete emails"
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+else:
+  
+  # Loop through all queried emails
+  for email_id in email_ids:
+    email = emails[email_id]
+    # Extract information and create Artifacts
+    if email['sender_name']:
+      incident.addArtifact('Email Sender Name', email['sender_name'], 'Sender name for email {}'.format(email_id))
+    if email['sender_email']:
+      incident.addArtifact('Email Sender', email['sender_email'], 'Sender email address for email {}'.format(email_id))
+    if email['subject']:
+      incident.addArtifact('Email Subject', email['subject'], 'Email subject for email {}'.format(email_id))
+    if email['body']:
+      incident.addArtifact('Email Body', email['body'], 'Email body in HTML for email {}'.format(email_id))
+      
+    # Loop through attachments and create artifacts
+    attachment_ids = email['attachment_ids']
+    attachments = email['attachments']
+    for attachment_id in attachment_ids:
+      attachment = attachments[attachment_id]
+      incident.addArtifact('Email Attachment Name', attachment['attachment_name'], 'Attachment name for attachment {} from email {}'.format(attachment_id, email_id))
+      
+      if enable_add_attachment_value:
+        incident.addArtifact('Email Attachment', attachment['attachment_base64'], 'Attachment file {} base64 encoded : {}'.format(attachment['attachment_name'], attachment['attachment_base64']))
 
 ```
 

@@ -70,35 +70,33 @@ class FunctionComponent(AppFunctionComponent):
         for parameter in function_parameters:
             self.LOG.info(" ".join([parameter, ":", str(function_parameters.get(parameter))]))
 
-        yield StatusMessage("Finding emails")
-        interface = exchange_interface(self.rc, self.options)
-        results, retrieved_emails = interface.move_emails(
-            function_parameters, delete_src_folder)
-        
-        src_folder = results.get("src_folder")
-        dst_folder = results.get("dst_folder")
-
-        if results.get("email_ids") == 0:
-            msg = "Failed to perform operation as 0 emails were retrieved"
-        else:
-            for email in retrieved_emails:
-                email.move(dst_folder)
-            msg = f"Moved emails to {function_parameters['dst_folder']}"
-
-        self.LOG.info(msg)
-        yield StatusMessage(msg)
-        yield StatusMessage(f"{len(results.get('email_ids'))} emails were moved")
-        
-        if delete_src_folder:
-            yield StatusMessage(f"Deleting folder {function_parameters['src_folder']}")
-            src_folder.delete()
-
-        results["src_folder"] = function_parameters["src_folder"]
-        results["dst_folder"] = function_parameters["dst_folder"]
-        yield rh.success(results)
-
         try:
-            pass
+            yield StatusMessage("Finding emails")
+            interface = exchange_interface(self.rc, self.options)
+            results, retrieved_emails = interface.move_emails(
+                function_parameters, delete_src_folder)
+            
+            src_folder = results.get("src_folder")
+            dst_folder = results.get("dst_folder")
+
+            if results.get("email_ids") == 0:
+                msg = "Failed to perform operation as 0 emails were retrieved"
+            else:
+                for email in retrieved_emails:
+                    email.move(dst_folder)
+                msg = f"Moved emails to {function_parameters['dst_folder']}"
+
+            self.LOG.info(msg)
+            yield StatusMessage(msg)
+            yield StatusMessage(f"{len(results.get('email_ids'))} emails were moved")
+            
+            if delete_src_folder:
+                yield StatusMessage(f"Deleting folder {function_parameters['src_folder']}")
+                src_folder.delete()
+
+            results["src_folder"] = function_parameters["src_folder"]
+            results["dst_folder"] = function_parameters["dst_folder"]
+            yield rh.success(results)
 
         except Exception as err:
             yield rh.fail(reason=str(err))

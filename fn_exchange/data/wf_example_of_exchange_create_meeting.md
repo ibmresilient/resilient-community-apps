@@ -37,28 +37,31 @@ Results:
    'sender': sender@example.com
    'subject': meeting subject
    'body': meeting body
-   'start_time': epoch start time
-   'end_time': epoch end time
+   'start_time': 1655938800000
+   'end_time': 1656025200000
 '''
-
-from java.util import Date
+from datetime import datetime
 
 content = results.get("content")
+success = results.get("success")
+fail_reason = results.get("reason")
 
-if not results.success:
+if not success:
   text = u"Unable to create meeting"
-  fail_reason = results.reason
   if fail_reason:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
     
 else:
-  start_time = Date(content.get("start_time")).toString()
-  end_time = Date(content.get("end_time")).toString()
+  start_time = int(content.get("start_time"))/1000
+  start_time = datetime.utcfromtimestamp(start_time).strftime('%Y-%m-%d %H:%M:%S')
+
+  end_time   = int(content.get("end_time"))/1000
+  end_time   = datetime.utcfromtimestamp(end_time).strftime('%Y-%m-%d %H:%M:%S')
   
   text  =  "<b>Meeting created from Exchange Create Meeting:</b><br />"
   text += f"<br />Subject: {content.get('subject')}"
-  text += f"<br />Start time: {content.get('start_time')}"
-  text += f"<br />End time: {content.get('end_time')}"
+  text += f"<br />Start time: {start_time}"
+  text += f"<br />End time: {end_time}"
   text += f"<br />Required Attendees: {content.get('required_attendees')}" 
   text += f"<br />Optional Attendees: {content.get('optional_attendees')}" 
   text += f"<br />Body: {content.get('body')}"
