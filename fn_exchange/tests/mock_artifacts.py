@@ -16,7 +16,7 @@ from fn_exchange.lib.exchange_utils import exchange_interface
 from exchangelib.folders import RootOfHierarchy
 
 DELEGATE = 'delegate'
-TEST_TZ = exchange_helper.get_timezone()
+TEST_TZ = exchange_helper.get_timezone(None)
 # Function opts
 MOCK_OPTS = {
     'verify_cert': 'false',

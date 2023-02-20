@@ -318,5 +318,14 @@ class TestExchangeUtils:
                & Q(body__contains='body') & Q(has_attachments=False)
 
     def test_get_tz(self):
-        tz = get_timezone()
+        tz = get_timezone(None)
         assert isinstance(tz, EWSTimeZone)
+        assert str(tz) == "Etc/GMT"
+        
+        tz = get_timezone("America/Chicago")
+        assert isinstance(tz, EWSTimeZone)
+        assert str(tz) == "America/Chicago"
+        
+        tz = get_timezone("   America/Chicago   ")
+        assert isinstance(tz, EWSTimeZone)
+        assert str(tz) == "America/Chicago"

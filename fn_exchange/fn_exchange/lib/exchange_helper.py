@@ -97,8 +97,11 @@ class ImpersonationError(Exception):
         super(ImpersonationError, self).__init__(fail_msg)
 
 
-def get_timezone(format="Etc/GMT") -> EWSTimeZone:
-    assert isinstance(format, str)
+def get_timezone(format) -> EWSTimeZone:
+    if not format:
+        format = "Etc/GMT"
+    else:
+        format = format.strip()
     log.info(f"Setting Timezone to {format}")
     return EWSTimeZone(format)
 
