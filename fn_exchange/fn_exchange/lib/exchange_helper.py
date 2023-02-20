@@ -98,13 +98,9 @@ class ImpersonationError(Exception):
 
 
 def get_timezone(format="Etc/GMT") -> EWSTimeZone:
+    assert isinstance(format, str)
     log.info(f"Setting Timezone to {format}")
-    if sys.version_info.major <= 2:
-        # Support for PY 2
-        return EWSTimeZone.timezone(format)
-    else:
-        # Support for PY 3
-        return EWSTimeZone(format)
+    return EWSTimeZone(format)
 
 
 def parse_time(epoch_time) -> list:
