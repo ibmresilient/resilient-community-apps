@@ -52,16 +52,12 @@ if not success:
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
     
 else:
-  start_time = int(content.get("start_time"))/1000
-  start_time = datetime.utcfromtimestamp(start_time).strftime('%Y-%m-%d %H:%M:%S')
-
-  end_time   = int(content.get("end_time"))/1000
-  end_time   = datetime.utcfromtimestamp(end_time).strftime('%Y-%m-%d %H:%M:%S')
   
   text  =  "<b>Meeting created from Exchange Create Meeting:</b><br />"
   text += f"<br />Subject: {content.get('subject')}"
-  text += f"<br />Start time: {start_time}"
-  text += f"<br />End time: {end_time}"
+  text += f"<br />Start time: {content.get('start_time')}"
+  text += f"<br />End time: {content.get('end_time')}"
+  text += f"<br />Timezone: {content.get('timezone')}"
   text += f"<br />Required Attendees: {content.get('required_attendees')}" 
   text += f"<br />Optional Attendees: {content.get('optional_attendees')}" 
   text += f"<br />Body: {content.get('body')}"

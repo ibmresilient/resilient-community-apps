@@ -47,9 +47,6 @@ if not results.get("success"):
     text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
     
 else:
-  start_time = Date(content.get("start_time")).toString()
-  end_time = Date(content.get("end_time")).toString()
-  
   text  =  "<b>Exchange email:</b><br />"
   text += f"<br />From: {content.get('sender')}"
   text += f"<br />Recipients: {content.get('recipients')}"
