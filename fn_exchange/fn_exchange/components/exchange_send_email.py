@@ -46,7 +46,7 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.info('No connection email was specified, using value from config file')
 
         for parameter in function_parameters:
-            self.LOG.info(" ".join([parameter, ":", str(function_parameters.get(parameter))]))
+            self.LOG.info(f"{parameter} : {str(function_parameters.get(parameter))}")
 
         try:
             utils = exchange_interface(self.rc, self.options)
