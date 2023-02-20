@@ -21,8 +21,11 @@ username=domain\\username
 email=admin@example.com 
 password=password
 
-# Some folder path after root i.e. Top of Information Store/Inbox. Multiple folderpaths must be separated by commas.
+# folder path after root i.e. Top of Information Store/Inbox. Multiple folder paths must be separated by commas.
 default_folder_path=Top of Information Store/Inbox
+
+# Set a different Timezone if required. Default Timezone is set to Etc/GMT
+#timezone=Etc/GMT
 
 #https_proxy=https://your.proxy.com
 #http_proxy=http://your.proxy.com
