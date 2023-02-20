@@ -575,7 +575,7 @@ class EmailProcessor(object):
             match = MESSAGE_PATTERN.findall(msg_id.strip()) # remove brackets <>
             if match:
                 return match[0]
-    
+
     @staticmethod
     def save_message_id(headers):
         # extract the message ID and retain
