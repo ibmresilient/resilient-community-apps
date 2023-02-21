@@ -140,6 +140,11 @@ class AppCommon():
         # Format each dictionary
         for issue in issues_list:
 
+            jira_key = issue.get("key")
+            internal_url = issue.get("self")
+            issue["internal_url"] = internal_url
+            issue["url"] = f"<a href='{internal_url[:internal_url.index('/', 8)]}/browse/{jira_key}' target='blank'>{jira_key}</a>"
+
             if not data_to_get_from_case.get(issue.get("key")):
                 data_to_get_from_case[issue.get("key")] = {}
 

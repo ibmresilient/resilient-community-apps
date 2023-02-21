@@ -5,6 +5,7 @@
 from logging import getLogger
 from os import path
 from threading import Thread
+from json import dumps
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (SOARCommon, get_last_poller_date,
@@ -290,8 +291,8 @@ class PollerComponent(AppFunctionComponent):
                 LOG.info(f"SOAR incident created: {jira_issue.get('summary')}")
 
         # Close SOAR cases that's linked Jira issue is closed
-        if soar_cases_to_close:
-            self.soar_close_cases(soar_cases_to_close)
+        # if soar_cases_to_close:
+        #     self.soar_close_cases(soar_cases_to_close)
 
         # Update SOAR tasks with data from linked Jira issues
         # if soar_tasks_to_update:
@@ -308,11 +309,6 @@ class PollerComponent(AppFunctionComponent):
         :param jira_issue: Dict of Jira issue data
         :return: None
         """
-        jira_key = jira_issue.get("key")
-        internal_url = jira_issue.get("self")
-        jira_issue["internal_url"] = internal_url
-        jira_issue["url"] = f"<a href='{internal_url[:internal_url.index('/', 8)]}/browse/{jira_key}' target='blank'>{jira_key}</a>"
-
         soar_create_payload = make_payload_from_template(
             self.soar_create_case_template,
             CREATE_CASE_TEMPLATE,
@@ -352,10 +348,10 @@ class PollerComponent(AppFunctionComponent):
 
             soar_close_payload["patches"][soar.get("id")] = payload
 
-         # If SOAR payload is not empty then update fields on cases
+        # If SOAR soar_close_payload is not empty then close cases
         if soar_close_payload["patches"]:
             # Send put request to SOAR
-            # This will update all cases that need to be updated
+            # This will close all cases that need to be closed
             self.res_client.put("/incidents/patch", soar_close_payload)
 
     def soar_update_cases(self, soar_cases_to_update):
@@ -376,6 +372,12 @@ class PollerComponent(AppFunctionComponent):
                 {"jira": jira, "soar": soar})
 
             soar_update_payload["patches"][soar.get("id")] = payload
+
+        # If SOAR soar_update_payload is not empty then update fields on cases
+        if soar_update_payload["patches"]:
+            # Send put request to SOAR
+            # This will update all cases that need to be updated
+            self.res_client.put("/incidents/patch", soar_update_payload)
 
     def soar_update_tasks(self, soar_tasks_to_update):
         """
