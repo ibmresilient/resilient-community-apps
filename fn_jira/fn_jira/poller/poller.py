@@ -303,8 +303,8 @@ class PollerComponent(AppFunctionComponent):
                 LOG.info(f"SOAR incident created: {jira_issue.get('summary')}")
 
         # Close SOAR cases that's linked Jira issue is closed
-        # if soar_cases_to_close:
-        #     self.soar_close_cases(soar_cases_to_close)
+        if soar_cases_to_close:
+            self.soar_close_cases(soar_cases_to_close)
 
         # Update SOAR tasks with data from linked Jira issues
         if soar_tasks_to_update:
