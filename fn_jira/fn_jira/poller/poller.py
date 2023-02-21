@@ -5,6 +5,7 @@
 from logging import getLogger
 from os import path
 from threading import Thread
+from json import dumps
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
@@ -302,8 +303,8 @@ class PollerComponent(AppFunctionComponent):
                 LOG.info(f"SOAR incident created: {jira_issue.get('summary')}")
 
         # Close SOAR cases that's linked Jira issue is closed
-        if soar_cases_to_close:
-            self.soar_close_cases(soar_cases_to_close)
+        # if soar_cases_to_close:
+        #     self.soar_close_cases(soar_cases_to_close)
 
         # Update SOAR tasks with data from linked Jira issues
         if soar_tasks_to_update:
@@ -407,6 +408,12 @@ class PollerComponent(AppFunctionComponent):
 
             # Check if new attachments added or old attachments deleted
             self.soar_update_comments_attachments(jira, soar, "attachment")
+
+        # If SOAR soar_update_payload is not empty then update fields on cases
+        if soar_update_payload["patches"]:
+            # Send put request to SOAR
+            # This will update all cases that need to be updated
+            self.res_client.put("/incidents/patch", soar_update_payload)
 
         # If SOAR soar_update_payload is not empty then update fields on cases
         if soar_update_payload["patches"]:
