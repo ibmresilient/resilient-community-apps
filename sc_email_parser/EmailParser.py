@@ -571,10 +571,9 @@ class EmailProcessor(object):
 
         # find the message id among several choices
         msg_id = msg_id_list[0] if msg_id_list else None
-        if msg_id:
-            match = MESSAGE_PATTERN.findall(msg_id.strip()) # remove brackets <>
-            if match:
-                return match[0]
+        match = MESSAGE_PATTERN.findall(msg_id.strip()) if msg_id else None # remove brackets <>
+        if match:
+            return match[0]
 
     @staticmethod
     def save_message_id(headers):
