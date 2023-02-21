@@ -152,59 +152,6 @@ def remove_html_tags(comment):
     """
     return sub(html_tags, '', comment)
 
-def soar_update_comments_attachments(jira, soar, res_client, update_type):
-    """
-    Add comment\attchment to the SOAR case that are in the Jira issue and
-    delete comments\attachments that are in the SOAR case and not in the Jira issue
-    :param jira: Dict of Jira issue data
-    :param soar: Dict of SOAR case data
-    :param res_client: Client connection to SOAR
-    :param update_type: Either attachment or comment
-    :return: None
-    """
-    # Get comments\attachments from the Jira issue
-    jira_updates = jira.pop(update_type) if jira.get(update_type) else []
-    if update_type == "attachment":
-        jira_attachments = jira_updates
-        jira_updates = [attach.get("filename") for attach in jira_attachments]
-    # Get comments\attachments from the SOAR case
-    soar_updates = soar.pop(f"{update_type}s") if soar.get(f"{update_type}s") else []
-    # Remove the text "\nAdded from Jira" from comments if present
-    if update_type == "comment":
-        for num in range(len(soar_updates)):
-            update_content = soar_updates[num].get("content")
-            soar_updates[num]["content"] = remove_html_tags(update_content.replace("\nAdded from Jira", ""))
-
-    if soar_updates:
-        for num, soar_update in enumerate(soar_updates):
-            soar_update_content = soar_update.get("content")
-            if update_type == "attachment":
-                soar_update_content = soar_update.get("name")
-            # Delete comment\attachment on SOAR if comment\attachment is not found on Jira issue
-            if soar_update_content not in jira_updates:
-                # Send delete request to SOAR
-                try:
-                    res_client.delete(f"/incidents/{soar.get('id')}/{update_type}s/{soar_update.get('id')}")
-                except Exception as e:
-                    raise IntegrationError(str(e))
-            elif soar_update_content in jira_updates: # If comment\attachment on SOAR and Jira then remove it from jira_updates
-                jira_updates.pop(jira_updates.index(soar_update_content))
-
-        # Delete variables that are no longer needed
-        del num, soar_update
-
-    if jira_updates:
-        for jira_update in jira_updates:
-            # Send post request to SOAR
-            try:
-                if update_type == "attachment":
-                    content = jira_attachments[next((index for (index, attach) in enumerate(jira_attachments) if attach["filename"] == jira_update), None)].get("content")
-                    res_client.post_attachment(f"/incidents/{soar.get('id')}/attachments", filepath=None, filename=jira_update, bytes_handle=content)
-                else:
-                    SOARCommon(res_client).create_case_comment(soar.get('id'), f"{jira_update}\nAdded from Jira")
-            except Exception as e:
-                raise IntegrationError(str(e))
-
 def soar_update_task(jira, res_client, task):
     """
     Update soar tasks
@@ -344,30 +291,6 @@ def update_soar_incident(res_client, soar_cases_to_update):
     :return: None
     """
 
-    soar_to_jira_fields = {
-        "name": "summary",
-        "description": "description",
-        "severity_code": "priority",
-        "jira_internal_url": "self",
-        "jira_issue_id": "key",
-        "jira_server": "jira_server",
-        "jira_url": "self",
-        "jira_project_key": "project",
-        "jira_issue_status": "status"
-    }
-
-    soar_field_type = {
-        "name": "text",
-        "description": "textarea",
-        "severity_code": "text",
-        "jira_internal_url": "textarea",
-        "jira_issue_id": "text",
-        "jira_server": "text",
-        "jira_url": "textarea",
-        "jira_project_key": "text",
-        "jira_issue_status": "text"
-    }
-
     # Payload for updating the field "SOAR Case Last Updated" on SOAR cases to update
     soar_update_payload = {"patches": {}}
 
@@ -389,33 +312,6 @@ def update_soar_incident(res_client, soar_cases_to_update):
                     task_update_payload.append(soar_update_task(jira, res_client, task))
                     break
             continue
-
-        soar_update_payload['patches'][soar.get("id")] = {
-                "version": soar.get("vers")+1,
-                "changes": []
-                }
-
-        # If Jira issue is linked to SOAR incident and not a SOAR task
-        # Check if new comments added or old comments changed/deleted
-        soar_update_comments_attachments(jira, soar, res_client, "comment")
-
-        # Check if new attachments added or old attachments deleted
-        soar_update_comments_attachments(jira, soar, res_client, "attachment")
-
-        for key, value in soar_to_jira_fields.items():
-            soar_value = soar.get(key)
-            jira_value = jira.get(value)
-
-            if key == "jira_url": # If the key is equal to jira_url
-                # Create jira_url
-                jira_key = jira.get("key")
-                jira_value = f'<a href="{jira_value[:jira_value.index("/", 8)]}/browse/{jira_key}">{jira_key}</a>'
-                del jira_key
-
-            if soar_value != jira_value: # Check if the current SOAR value is different fromt the current Jira value
-                soar_update_payload['patches'][soar.get("id")]["changes"].append(
-                    add_changes_to_soar_payload(soar_field_type[key], soar_value, jira_value, key)
-                )
 
     try:
         # If SOAR payload is not empty then update fields on cases

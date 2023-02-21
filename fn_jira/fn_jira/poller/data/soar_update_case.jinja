@@ -2,55 +2,54 @@
   {# JINJA template for updating a new SOAR incident from an endpoint #}
   "version": {{ soar["vers"] + 1 }},
   "changes": [
-    {
-      "old_value": {"text": "{{ soar["name"] }}"},
-      "new_value": {"text": "{{ jira["fields"]["summary"] }}"},
-      "field": {"name": "name"}
-    },
-    {
-      "old_value": {"textarea": {% if soar["description"] is none %} null {% else %} {{ soar["description"] }} {% endif %}},
-      "new_value": {"textarea": {% if jira["fields"]["description"] is none %} null {% else %} "{{ jira["fields"]["description"] }}" {% endif %}},
-      "field": {"name": "description"}
-    },
-    {
-      "old_value": {"text": "{{ soar["properties"]["jira_issue_status"] }}"},
-      "new_value": {"text": "{{ jira["fields"]["status"]["name"] }}"},
-      "field": {"name": "jira_issue_status"}
-    },
-    {
-      "old_value": {"text": "{{ soar["severity_code"] }}"},
-      "new_value": {"text": "{{ jira["fields"]["priority"]["name"] }}"},
-      "field": {"name": "severity_code"}
-    },
-    {
-      "old_value": {"text": "{{ soar["create_date"] }}"},
-      "new_value": {"text": "{{ jira["fields"]["created"] }}"},
-      "field": {"name": "create_date"}
-    },
-    {
-      "old_value": {"text": "{{ soar["discovered_date"] }}"},
-      "new_value": {"text": "{{ jira["fields"]["created"] }}"},
-      "field": {"name": "discovered_date"}
-    },
-    {
-      "old_value": {"text": "{{ soar["properties"]["jira_issue_id"] }}"},
-      "new_value": {"text": "{{ jira["key"] }}"},
-      "field": {"name": "jira_issue_id"}
-    },
-    {
-      "old_value": {"text": "{{ soar["properties"]["jira_server"] }}"},
-      "new_value": {"text": "{{ jira["jira_server"] }}"},
-      "field": {"name": "jira_server"}
-    },
-    {
-      "old_value": {"text": "{{ soar["properties"]["jira_project_key"] }}"},
-      "new_value": {"text": "{{ jira["fields"]["project"]["key"] }}"},
-      "field": {"name": "jira_project_key"}
-    },
-    {
-      "old_value": {"text": "{{ soar["properties"]["jira_issue_status"] }}"},
-      "new_value": {"text": "{{ jira["fields"]["status"]["name"] }}"},
-      "field": {"name": "jira_issue_status"}
-    }
+    {% if soar["name"] != jira["fields"]["summary"] %}
+      {
+        "old_value": {"text": "{{ soar["name"] }}"},
+        "new_value": {"text": "{{ jira["fields"]["summary"] }}"},
+        "field": {"name": "name"}
+      },
+    {% endif %}
+    {% if soar["description"] != jira["fields"]["description"] %}
+      {
+        "old_value": {"textarea": {% if soar["description"] is none %} null {% else %} {{ soar["description"] }} {% endif %}},
+        "new_value": {"textarea": {% if jira["fields"]["description"] is none %} null {% else %} "{{ jira["fields"]["description"] }}" {% endif %}},
+        "field": {"name": "description"}
+      },
+    {% endif %}
+    {% if soar["severity_code"] != jira["fields"]["priority"]["name"] %}
+      {
+        "old_value": {"text": "{{ soar["severity_code"] }}"},
+        "new_value": {"text": "{{ jira["fields"]["priority"]["name"] }}"},
+        "field": {"name": "severity_code"}
+      },
+    {% endif %}
+    {% if soar["properties"]["jira_issue_id"] != jira["key"] %}
+      {
+        "old_value": {"text": "{{ soar["properties"]["jira_issue_id"] }}"},
+        "new_value": {"text": "{{ jira["key"] }}"},
+        "field": {"name": "jira_issue_id"}
+      },
+    {% endif %}
+    {% if soar["properties"]["jira_server"] != jira["jira_server"] %}
+      {
+        "old_value": {"text": "{{ soar["properties"]["jira_server"] }}"},
+        "new_value": {"text": "{{ jira["jira_server"] }}"},
+        "field": {"name": "jira_server"}
+      },
+    {% endif %}
+    {% if soar["properties"]["jira_project_key"] != jira["fields"]["project"]["key"] %}
+      {
+        "old_value": {"text": "{{ soar["properties"]["jira_project_key"] }}"},
+        "new_value": {"text": "{{ jira["fields"]["project"]["key"] }}"},
+        "field": {"name": "jira_project_key"}
+      },
+    {% endif %}
+    {% if soar["properties"]["jira_issue_status"] != jira["fields"]["status"]["name"] %}
+      {
+        "old_value": {"text": "{{ soar["properties"]["jira_issue_status"] }}"},
+        "new_value": {"text": "{{ jira["fields"]["status"]["name"] }}"},
+        "field": {"name": "jira_issue_status"}
+      }
+    {% endif %}
   ]
 }
