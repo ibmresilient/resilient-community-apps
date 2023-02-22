@@ -299,8 +299,8 @@ class PollerComponent(AppFunctionComponent):
             self.soar_close_cases(soar_cases_to_close)
 
         # Update SOAR tasks with data from linked Jira issues
-        # if soar_tasks_to_update:
-        #     self.soar_update_tasks(soar_tasks_to_update)
+        if soar_tasks_to_update:
+            self.soar_update_tasks(soar_tasks_to_update)
 
         # Update SOAR cases with data from linked Jira issues
         if soar_cases_to_update:
