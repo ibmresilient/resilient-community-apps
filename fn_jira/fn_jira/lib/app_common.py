@@ -144,6 +144,7 @@ class AppCommon():
             internal_url = issue.get("self")
             issue["internal_url"] = internal_url
             issue["url"] = f"<a href='{internal_url[:internal_url.index('/', 8)]}/browse/{jira_key}' target='blank'>{jira_key}</a>"
+            issue["fields"]["summary"] = issue.get("fields").get("summary").replace("IBM SOAR: ", "")
 
             if not data_to_get_from_case.get(issue.get("key")):
                 data_to_get_from_case[issue.get("key")] = {}

@@ -291,9 +291,6 @@ def update_soar_incident(res_client, soar_cases_to_update):
     :return: None
     """
 
-    # Payload for updating the field "SOAR Case Last Updated" on SOAR cases to update
-    soar_update_payload = {"patches": {}}
-
     # Payload for updating SOAR tasks
     task_update_payload = []
 
@@ -311,15 +308,7 @@ def update_soar_incident(res_client, soar_cases_to_update):
                     # Update SOAR task with Jira data
                     task_update_payload.append(soar_update_task(jira, res_client, task))
                     break
-            continue
-
     try:
-        # If SOAR payload is not empty then update fields on cases
-        if soar_update_payload["patches"]:
-            # Send put request to SOAR
-            # This will update all cases that need to be updated
-            res_client.put("/incidents/patch", soar_update_payload)
-
         # If task update payload is not empty then update fields on tasks
         if task_update_payload:
             # Send put request to SOAR
