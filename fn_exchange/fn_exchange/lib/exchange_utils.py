@@ -152,7 +152,10 @@ class exchange_interface:
             filtered_emails = filtered_emails.filter(id_query)
 
         if sender:
-            filtered_emails = filtered_emails.filter(sender=sender)
+            id_query = Q()
+            for email_id in email_ids.split(','):
+                id_query = id_query | Q(sender=sender.strip()) 
+            filtered_emails = filtered_emails.filter(id_query)
 
         if subject:
             filtered_emails = filtered_emails.filter(subject__contains=subject)
