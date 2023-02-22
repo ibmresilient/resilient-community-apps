@@ -6,7 +6,8 @@ Usage: resilient-circuits selftest -l fn_exchange
 """
 
 import logging
-from fn_exchange.lib.exchange_utils import exchange_utils
+from resilient_lib import RequestsCommon
+from fn_exchange.lib.exchange_utils import exchange_interface
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -19,21 +20,24 @@ def selftest_function(opts):
     """
     options = opts.get("fn_exchange", {})
     username = options.get("email")
+    rc = RequestsCommon(opts, options)
+
+    # Initialize utils
+    utils = exchange_interface(rc, options)
+
+    # Connect to server
+    account = utils.connect_to_account(username)
+
+    # Get mailbox info
+    info = account.protocol.resolve_names([username], return_full_contact_data=True)
+
+    if isinstance(info, list) and info[0][0].email_address == username:
+        return {"state": "success"}
+    else:
+        return {"state": "failure"}
+    
     try:
-
-        # Initialize utils
-        utils = exchange_utils(options, opts)
-
-        # Connect to server
-        account = utils.connect_to_account(username)
-
-        # Get mailbox info
-        info = account.protocol.resolve_names([username], return_full_contact_data=True)
-
-        if isinstance(info, list) and info[0][0].email_address == username:
-            return {"state": "success"}
-        else:
-            return {"state": "failure"}
+        pass
 
     except Exception as e:
         return {"state": "failure", "status_code": e}
