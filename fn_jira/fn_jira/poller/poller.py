@@ -5,7 +5,6 @@
 from logging import getLogger
 from os import path
 from threading import Thread
-from json import dumps
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,

@@ -1,10 +1,9 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
-from resilient_lib import IntegrationError, MarkdownParser, SOARCommon, make_payload_from_template
+from resilient_lib import IntegrationError, MarkdownParser, SOARCommon
 from re import compile, sub
 from datetime import datetime
-from os import path
 
 PACKAGE_NAME = "fn_jira"
 GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
@@ -14,15 +13,6 @@ DEFAULT_JIRA_DT_NAME = "jira_task_references" # Can be overridden with app.confi
 JIRA_DT_ISSUE_LINK_COL_NAME = "jira_link"
 IBM_SOAR_LINK = "IBM SOAR Link:"
 html_tags = compile('<.*?>')
-
-# Directory of default templates
-TEMPLATE_DIR = path.join(path.dirname(__file__), "data")
-
-# Default Templates used to create/update/close SOAR cases.
-#   Mostly they will be modified to include custom SOAR fields
-CREATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_create_case.jinja")
-UPDATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_update_case.jinja")
-CLOSE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_close_case.jinja")
 
 class JiraServers():
     def __init__(self, opts):

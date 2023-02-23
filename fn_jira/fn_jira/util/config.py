@@ -48,7 +48,7 @@ polling_lookback=60
 #  that are configured under the individual Jira servers will be ignored
 poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search.
-# If max_issues_returned [fn_jira:global_settings] is configured, then max_issues_returned
+# If max_issues_returned under [fn_jira:global_settings] is configured, then max_issues_returned
 #  that are configured under the individual Jira servers will be ignored.
 max_issues_returned = 50
 # Proxys to use
@@ -57,9 +57,12 @@ max_issues_returned = 50
 #http_proxy=
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# If templates under [fn_jira:global_settings] are configured, then templates
+#  that are configured under the individual Jira servers will be ignored.
 # See documentation section "Templates for SOAR Cases" for more details
 #soar_create_case_template=
 #soar_update_case_template=
+#soar_update_task_template=
 #soar_close_case_template=
 
 [fn_jira:jira_label1]

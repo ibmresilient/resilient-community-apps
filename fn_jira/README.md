@@ -64,7 +64,6 @@ This app allows for the tracking of SOAR Incidents and Tasks as Jira Issues. Bid
 * Issue transition
 * Comment creation
 
-
 ---
 
 ## Requirements
@@ -1169,7 +1168,15 @@ max_issues_returned = 50
 # If proxys are defined under [fn_jira:global_settings], then proxys defined
 #  under the individual Jira servers will be ignored
 #http_proxy=
-#https_proxy
+#https_proxy=
+# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# If templates under [fn_jira:global_settings] are configured, then templates
+#  that are configured under the individual Jira servers will be ignored.
+# See documentation section "Templates for SOAR Cases" for more details
+#soar_create_case_template=
+#soar_update_case_template=
+#soar_update_task_template=
+#soar_close_case_template=
 ```
 
 The following settings can be either configure under `[fn_jira:global_settings]` or under each individual Jira server:
