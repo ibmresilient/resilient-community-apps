@@ -14,6 +14,8 @@
   - [App Configuration](#app-configuration)
   - [Multi-tenancy](#multi-tenancy)
   - [Configuring OAuth](#configuring-oauth)
+  - [Poller Considerations](#poller-considerations)
+    - [Poller Templates for SOAR Cases](#poller-templates-for-soar-cases)
   - [Custom Layouts](#custom-layouts)
 - [Function - Jira Create Comment](#function---jira-create-comment)
 - [Function - Jira Open Issue](#function---jira-open-issue)
@@ -23,7 +25,6 @@
 - [Playbooks](#playbooks)
 - [How to configure to use a single Jira Server](#how-to-configure-to-use-a-single-jira-server)
 - [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled)
-- [Bidirectional sync with the poller](#bidirectional-sync-with-the-poller)
 - [Configuring bidirectional sync](#configuring-bidirectional-sync)
 - [Troubleshooting & Support](#troubleshooting--support)
 
@@ -62,7 +63,6 @@ This app allows for the tracking of SOAR Incidents and Tasks as Jira Issues. Bid
 * Issue creation
 * Issue transition
 * Comment creation
-
 
 ---
 
@@ -147,6 +147,11 @@ The following table provides the settings you need to configure the app. These s
 | **verify_cert** | No | `True` | A boolean value. Set to `True` if you want ti verify SSL certificates on each request. |
 | **http_proxy** | No | `http://localhost:3128` |  Your HTTP Proxy. |
 | **https_proxy** | No | `https://localhost:3128` |  Your HTTPS Proxy. |
+| **soar_create_case_template** | No | `/var/rescircuits/create_case.jinja` | *Path to override template for automatic case creation. See [Poller Considerations](#poller-considerations).* |
+| **soar_update_case_template** | No | `/var/rescircuits/update_case.jinja` | *Path to override template for automatic case updating. See [Poller Considerations](#poller-considerations).* |
+| **soar_close_case_template** | No | `/var/rescircuits/close_case.jinja` | *Path to override template for automatic case closing. See [Poller Considerations](#poller-considerations).* |
+| **soar_update_task_template** | No | `/var/rescircuits/update_task.jinja` | *Path to override template for automatic case updating. See [Poller Considerations](#poller-considerations).* |
+
 
 #### Multi-tenancy
 Starting in version 2.2.0, more than one Jira instance can be configured for SOAR. For enterprises with only one Jira instance, your app.config file will continue to define the Jira instance under the `[fn_jira]` section header.
@@ -189,6 +194,161 @@ Once you've completed the linked step above, you can continue with the rest of J
 1. Use the token and secret printed to your terminal to provide access to Jira for this app. If running in App Host, it is recommended to enter the values of the tokens as secrets in the app's **Configuration** tab by clicking **Add Secret**.
 
 1. In App Host, upload the private key as a file by clicking **New File**. Paste the contents of the private key into the file and ensure that the path to the file is the same as what you wrote in your app.config.
+
+### Poller Considerations
+If the poller is configured in the app.config, then SOAR cases that are linked to Jira issues will be updated when the linked Jira issue is changed.
+The Jira issues are found when running the Jira search using the filters given in the app.config. Only Jira issues that meet the search requirements and have been updated within the polling_lookback
+time frame will be returned from the search.
+
+Disable the poller by changing the app.config setting to `poller_interval=0`.
+
+#### Poller Templates for SOAR Cases
+It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.
+
+This is especially relevant if you have required custom _close_ fields that need to be filled when closing a case in SOAR. If that is the case, be sure to implement a custom `close_case_template` and reference those required close fields in the template.
+
+When overriding the template in App Host, specify the file path for each file as `/var/rescircuits`.
+
+Below are the default templates used which can be copied, modified, and used with app_config's
+`soar_create_case_template`, `soar_update_case_template`, `soar_update_task_template`, and `soar_close_case_template` settings to override the default templates.
+
+<details><summary>soar_create_case_template.jinja</summary>
+
+```jinja
+{
+  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  "name": "{{ fields["summary"] }}",
+  "description": {% if fields["description"] is none %} null {% else %} "{{ fields["description"] }}" {% endif %},
+  "severity_code": "{{ fields["priority"]["name"] }}",
+  "create_date": {{ fields["created"] }},
+  "discovered_date": {{ fields["created"] }},
+  "plan_status": "A",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "jira_internal_url": "{{ internal_url }}",
+    "jira_issue_id": "{{ key }}",
+    "jira_server": "{{ jira_server }}",
+    "jira_url": "{{ url }}",
+    "jira_project_key": "{{ fields["project"]["key"] }}",
+    "jira_issue_status": "{{ fields["status"]["name"] }}"
+  },
+  {# add comments as necessary #}
+  "comments": [
+    {% for note in fields["comment"] %}
+      { "text": { "format": "text", "content": "{{ note }}" }, "type": "incident" }
+      {% if not loop.last %}
+        ,
+      {% endif %}
+    {% endfor %}
+  ]
+}
+
+```
+</details>
+
+<details><summary>soar_update_case_template.jinja</summary>
+
+```jinja
+{
+  {# JINJA template for updating a new SOAR incident from an endpoint #}
+  "version": {{ soar["vers"] + 1 }},
+  "changes": [
+      {
+        "old_value": {"text": "{{ soar["name"] }}"},
+        "new_value": {"text": "{{ jira["fields"]["summary"] }}"},
+        "field": {"name": "name"}
+      },
+      {
+        "old_value": {"textarea": {% if soar["description"] is none %} null {% else %} "{{ soar["description"] }}" {% endif %}},
+        "new_value": {"textarea": {% if jira["fields"]["description"] is none %} null {% else %} "{{ jira["fields"]["description"] }}" {% endif %}},
+        "field": {"name": "description"}
+      },
+      {
+        "old_value": {"text": "{{ soar["severity_code"] }}"},
+        "new_value": {"text": "{{ jira["fields"]["priority"]["name"] }}"},
+        "field": {"name": "severity_code"}
+      },
+      {
+        "old_value": {"text": "{{ soar["properties"]["jira_issue_id"] }}"},
+        "new_value": {"text": "{{ jira["key"] }}"},
+        "field": {"name": "jira_issue_id"}
+      },
+      {
+        "old_value": {"text": "{{ soar["properties"]["jira_server"] }}"},
+        "new_value": {"text": "{{ jira["jira_server"] }}"},
+        "field": {"name": "jira_server"}
+      },
+      {
+        "old_value": {"text": "{{ soar["properties"]["jira_project_key"] }}"},
+        "new_value": {"text": "{{ jira["fields"]["project"]["key"] }}"},
+        "field": {"name": "jira_project_key"}
+      },
+      {
+        "old_value": {"text": "{{ soar["properties"]["jira_issue_status"] }}"},
+        "new_value": {"text": "{{ jira["fields"]["status"]["name"] }}"},
+        "field": {"name": "jira_issue_status"}
+      }
+  ]
+}
+
+```
+</details>
+
+<details><summary>soar_update_task_template.jinja</summary>
+
+```jinja
+{
+  {# JINJA template for updating a new SOAR incident from an endpoint #}
+  "name": "{{ jira["fields"]["summary"] }}",
+  "inc_id": {{ task["inc_id"] }},
+  "required": {% if task["required"] == True %} true {% else %} false {% endif %},
+  "status": {% if jira["fields"]["resolutiondate"] == none %} "{{ task["status"] }}" {% else %} "C" {% endif %},
+  "frozen": {% if task["frozen"] == True %} true {% else %} false {% endif %},
+  "init_date": {{ task["init_date"] }},
+  "active": {% if task["active"] == True %} true {% else %} false {% endif %},
+  "inc_name": "{{ task["inc_name"] }}",
+  "custom": {% if task["custom"] == True %} true {% else %} false {% endif %},
+  "id": {{ task["id"] }},
+  "inc_training": {% if task["inc_training"] == True %} true {% else %} false {% endif %},
+  "description": "<div class='rte'><div>{{ jira["fields"]["description"] }}</div></div>",
+  "cat_name": "{{ task["cat_name"] }}"
+}
+
+```
+</details>
+
+<details><summary>soar_close_case_template.jinja</summary>
+
+```jinja
+{
+  {# JINJA template for closing a SOAR incident using endpoint data #}
+  "version": {{ soar["vers"] + 1 }},
+  "changes": [
+    {
+      "old_value": {"text": "A"},
+      "new_value": {"text": "C"},
+      "field": {"name": "plan_status"}
+    },
+    {
+      "old_value": {"text": null},
+      "new_value": {"text": "Resolved"},
+      "field": {"name": "resolution_id"}
+    },
+    {
+      "old_value": {"text": null},
+      "new_value": {"text": "Closed by Jira"},
+      "field": {"name": "resolution_summary"}
+    },
+    {
+      "old_value": {"text": "{{ soar["properties"]["jira_issue_status"] }}"},
+      "new_value": {"text": "{{ jira["fields"]["status"]["name"] }}"},
+      "field": {"name": "jira_issue_status"}
+    }
+  ]
+}
+
+```
+</details>
 
 ### Custom Layouts
 * Import the Data Tables and Custom Fields like the screenshot below:
@@ -943,34 +1103,6 @@ inputs.jira_label = rule.properties.jira_label
 Example app.config server label: [fn_jira:jira_label1]
   `jira_label1` will be set to `inputs.jira_label` in the above example.
 
-## Bidirectional sync with the poller
-If the poller is configured in the app.config, then SOAR cases that are linked to Jira issues will be updated when the linked Jira issue is changed.
-The Jira issues are found when running the Jira search using the filters given in the app.config. Only Jira issues that meet the search requirements and have been updated within the polling_lookback
-time frame will be recieved from the search.
-The poller will update the following fields on SOAR cases:
-- Name
-- Description
-- Severity Code
-- Jira Internal url
-- Jira Issue ID
-- Jira Server
-- Jira url
-- Jira Project Key
-- Jira Issue Status
-- Plan Status
-- Resolution Summary
-- Resolution ID
-- Comments
-- Attachments
-
-The poller will update the following fields on SOAR tasks:
-- Notes
-- Attachments
-- Instructions
-- instr_text
-- Status
-It will also update the datatable row that represents the task
-
 ## Configuring bidirectional sync
 In version 3.0.0 bidirectional sync between SOAR and Jira was introduced. When updating from a previous version to 3.0.0 the app.config must be manually edited to add the new settings that allow the poller to sync SOAR and Jira tickets.
 The following must be added to the app.config for the poller to run:
@@ -994,7 +1126,15 @@ max_issues_returned = 50
 # If proxys are defined under [fn_jira:global_settings], then proxys defined
 #  under the individual Jira servers will be ignored
 #http_proxy=
-#https_proxy
+#https_proxy=
+# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# If templates under [fn_jira:global_settings] are configured, then templates
+#  that are configured under the individual Jira servers will be ignored.
+# See documentation section "Templates for SOAR Cases" for more details
+#soar_create_case_template=
+#soar_update_case_template=
+#soar_update_task_template=
+#soar_close_case_template=
 ```
 
 The following settings can be either configure under `[fn_jira:global_settings]` or under each individual Jira server:

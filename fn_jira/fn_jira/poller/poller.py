@@ -5,20 +5,18 @@
 from logging import getLogger
 from os import path
 from threading import Thread
-from json import dumps
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
-from resilient_lib import (SOARCommon, get_last_poller_date,
-                           make_payload_from_template, poller, validate_fields,
-                           IntegrationError)
+from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
+                           make_payload_from_template, poller, validate_fields)
 
 from fn_jira.lib.app_common import AppCommon
 from fn_jira.poller.configure_tab import init_incident_groups_tab
-from fn_jira.util import helper, poller_helper
-
-
-PACKAGE_NAME = "fn_jira"
-GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
+from fn_jira.util import poller_helper
+from fn_jira.util.helper import (GLOBAL_SETTINGS, PACKAGE_NAME, JiraServers,
+                                 check_jira_issue_linked_to_task,
+                                 get_id_from_jira_issue_description,
+                                 get_server_settings, remove_html_tags)
 
 LOG = getLogger(__name__)
 
@@ -27,10 +25,10 @@ TEMPLATE_DIR = path.join(path.dirname(__file__), "data")
 
 # Default Templates used to create/update/close SOAR cases.
 #   Mostly they will be modified to include custom SOAR fields
-CREATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_create_case.jinja")
-UPDATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_update_case.jinja")
-CLOSE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_close_case.jinja")
-UPDATE_TASK_TEMPLATE = path.join(TEMPLATE_DIR, "soar_update_task.jinja")
+CREATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_create_case_template.jinja")
+UPDATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_update_case_template.jinja")
+CLOSE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_close_case_template.jinja")
+UPDATE_TASK_TEMPLATE = path.join(TEMPLATE_DIR, "soar_update_task_template.jinja")
 
 class PollerComponent(AppFunctionComponent):
     """
@@ -108,7 +106,7 @@ class PollerComponent(AppFunctionComponent):
         data_to_get_from_case = {"tasks": []}
 
         # Get list of Jira servers configured in the app.config
-        servers_list = helper.JiraServers(self.opts).get_server_name_list()
+        servers_list = JiraServers(self.opts).get_server_name_list()
         # If no servers labeled then add fn_jira to list
         if not servers_list:
             servers_list.append(PACKAGE_NAME)
@@ -130,7 +128,7 @@ class PollerComponent(AppFunctionComponent):
                 server = server[len(PACKAGE_NAME)+1:]
 
             # Get settings for server from the app.config
-            options = helper.get_server_settings(self.opts, server)
+            options = get_server_settings(self.opts, server)
 
             # Add the datatable name specified in the current app.config
             dt_name = options.get("jira_dt_name")
@@ -249,7 +247,7 @@ class PollerComponent(AppFunctionComponent):
                 jira_issue_key = jira_issue.get("key")
                 jira_issue["jira_server"] = jira_server # Add jira_server key to jira_issue
 
-                if helper.check_jira_issue_linked_to_task(jira_issue.get("fields").get("description")):
+                if check_jira_issue_linked_to_task(jira_issue.get("fields").get("description")):
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
                     jira_issues_with_soar_case.append(jira_issue)
                 elif jira_issue_key in soar_cases_jira_key:
@@ -267,14 +265,14 @@ class PollerComponent(AppFunctionComponent):
                         jira_issue_updated = jira_issue.get("fields").get("updated")
                         jira_issue_description = jira_issue.get("fields").get("description") # Get the description of the Jira issue
                         # Check if the Jira issue is linked to a SOAR task that needs to be updated
-                        if soar_tasks and helper.check_jira_issue_linked_to_task(jira_issue_description):
-                            task_id = helper.get_id_from_jira_issue_description(jira_issue_description)
+                        if soar_tasks and check_jira_issue_linked_to_task(jira_issue_description):
+                            task_id = get_id_from_jira_issue_description(jira_issue_description)
                             # Loop through all tasks on the SOAR case
                             for task in soar_tasks:
                                 if task.get("id") == task_id:
                                     if jira_issue_updated > task.get("datatable").get("cells").get("last_updated").get("value"):
                                         # Add matching SOAR case and Jira issue to soar_tasks_to_update list
-                                        soar_tasks_to_update.append([jira_issue, soar_case])
+                                        soar_tasks_to_update.append([jira_issue, task])
                                         break
                         # Check if SOAR incident needs to be updated
                         if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id") and\
@@ -396,18 +394,42 @@ class PollerComponent(AppFunctionComponent):
         :param soar_tasks_to_update: A list of lists that contain the SOAR tasks to update and its corresponding Jira issue
         :return: None
         """
-        soar_task_update_payload = {"patches": {}}
+        soar_task_update_payload = []
 
         for update in soar_tasks_to_update:
             jira = update[0]
-            soar = update[1]
+            task = update[1]
 
-            payload = make_payload_from_template(
+            jira_issue_description = jira.get("fields").get("description")
+            link_end_index = jira_issue_description.index("\n\n")+2
+            # Check if link to SOAR task is in the Jira issue description
+            if check_jira_issue_linked_to_task(jira_issue_description) and link_end_index < len(jira_issue_description):
+                # Remove link to SOAR task from the description
+                jira["fields"]["description"] = jira_issue_description[link_end_index:].replace("Created in IBM SOAR", "")
+            else:
+                jira["fields"]["description"] = jira_issue_description
+
+            # Create update payload for current SAOR task
+            soar_task_update_payload.append(make_payload_from_template(
                 self.soar_update_task_template,
                 UPDATE_TASK_TEMPLATE,
-                {"jira": jira, "soar": soar})
+                {"jira": jira, "task": task})
+            )
 
-            soar_task_update_payload["patches"][soar.get("id")] = payload
+            # Update comments
+            poller_helper.update_task_comments(self.res_client, task, jira)
+
+            # Update attachments
+            poller_helper.update_task_attachments(jira, task, self.res_client)
+
+            # Update datatable
+            poller_helper.update_task_datatable(task, jira, self.res_client)
+
+        # If task update payload is not empty then update fields on tasks
+        if soar_task_update_payload:
+            # Send put request to SOAR
+            # This will update all tasks that need to be updated
+            self.res_client.put("/tasks", soar_task_update_payload)
 
     def soar_update_comments_attachments(self, jira, soar, update_type):
         """
@@ -429,7 +451,7 @@ class PollerComponent(AppFunctionComponent):
         if update_type == "comment":
             for num in range(len(soar_updates)):
                 update_content = soar_updates[num].get("content")
-                soar_updates[num]["content"] = helper.remove_html_tags(update_content.replace("\nAdded from Jira", ""))
+                soar_updates[num]["content"] = remove_html_tags(update_content.replace("\nAdded from Jira", ""))
 
         if soar_updates:
             for num, soar_update in enumerate(soar_updates):
