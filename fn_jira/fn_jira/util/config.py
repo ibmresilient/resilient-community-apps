@@ -7,14 +7,6 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     return u"""
-# V2.2.0+ have the option to have multiple servers configured.
-# By default two examples of servers are given, example one is labeled `jira_label1` and example two is labeled `jira_label2`.
-# The label for a server is placed after `[fn_jira:` and then followed by `]`.
-# To add additional servers copy the below example server configuration from `[fn_jira:jira_label1]` to `#https_proxy=`.
-# Then paste it at the bottom of the app.config.
-# Change the server label, `jira_label1`, to a label helpful to define that server.
-# Then change the setting to those of the server you wish to add.
-
 [fn_jira:global_settings]
 # Maximum time in seconds to wait before timeout.
 timeout=10
@@ -27,7 +19,7 @@ polling_lookback=60
 #  that are configured under the individual Jira servers will be ignored
 poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search.
-# If max_issues_returned [fn_jira:global_settings] is configured, then max_issues_returned
+# If max_issues_returned under [fn_jira:global_settings] is configured, then max_issues_returned
 #  that are configured under the individual Jira servers will be ignored.
 max_issues_returned = 50
 # Proxys to use
@@ -36,9 +28,12 @@ max_issues_returned = 50
 #http_proxy=
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# If templates under [fn_jira:global_settings] are configured, then templates
+#  that are configured under the individual Jira servers will be ignored.
 # See documentation section "Templates for SOAR Cases" for more details
 #soar_create_case_template=
 #soar_update_case_template=
+#soar_update_task_template=
 #soar_close_case_template=
 
 [fn_jira:jira_label1]
@@ -68,6 +63,12 @@ max_issues_returned = 50
 # Proxys to use
 #http_proxy=
 #https_proxy=
+# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# See documentation section "Templates for SOAR Cases" for more details
+#soar_create_case_template=
+#soar_update_case_template=
+#soar_update_task_template=
+#soar_close_case_template=
 
 [fn_jira:jira_label2]
 # Url to Jira server
@@ -96,4 +97,10 @@ max_issues_returned = 50
 # Proxys to use
 #http_proxy=
 #https_proxy=
+# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# See documentation section "Templates for SOAR Cases" for more details
+#soar_create_case_template=
+#soar_update_case_template=
+#soar_update_task_template=
+#soar_close_case_template=
 """
