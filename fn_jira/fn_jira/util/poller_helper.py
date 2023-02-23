@@ -4,6 +4,7 @@
 """Poller Helper"""
 
 from resilient_lib import SOARCommon
+from fn_jira.util.helper import remove_html_tags
 
 # Helper functions for processing SOAR cases
 class SOAR():
@@ -101,3 +102,66 @@ class SOAR():
                 if field_name == "attachments":
                     field_dict["name"] = case_field[field_num].get("name")
                 cases_list[num][field_name].append(field_dict)
+
+def update_task_comments(res_client, task, jira):
+    """
+    Update the task comments
+    :param task: Dictionary of data from the SOAR task
+    :param jira: Dictionary of data from the Jira issue
+    :param res_client: Connection to SOAR
+    :return: None
+    """
+    # Remove all html tags from the task notes
+    for num in range(len(task.get("notes"))):
+        task["notes"][num] = remove_html_tags(task["notes"][num].replace("<br/>Added from Jira", ""))
+
+    # Update comments/notes
+    comments = jira.get("fields").get("comment")
+    if comments:
+        for comment in comments:
+            if comment not in task.get("notes"):
+                comment_payload = {
+                    "text": {
+                        "format": "text",
+                        "content": f"{comment}\nAdded from Jira"
+                    },
+                    "is_deleted": False
+                }
+                res_client.post(f"/tasks/{task.get('id')}/comments", comment_payload)
+
+def update_task_attachments(jira, task, res_client):
+    """
+    Update task attachments
+    :param task: Dictionary of data from the SOAR task
+    :param jira: Dictionary of data from the Jira issue
+    :param res_client: Connection to SOAR
+    :return: None
+    """
+    attachments = jira.get("fields").get("attachment")
+    if attachments:
+        task_attachments = [att.get("name") for att in task.get("attachments")]
+        for attach in attachments:
+            filename = attach.get("filename")
+            if filename not in task_attachments:
+                res_client.post_attachment(f"/tasks/{task.get('id')}/attachments", filepath=None, filename=filename, bytes_handle=attach.get("content"))
+
+def update_task_datatable(task, jira, res_client):
+    """
+    Update data table on SOAR with new information from the updated task
+    :param task: Dictionary of data from the SOAR task
+    :param jira: Dictionary of data from the Jira issue
+    :param res_client: Connection to SOAR
+    :return: None
+    """
+    datatable = task.get('datatable')
+    datatable_cells = datatable.get("cells")
+
+    d_payload = {
+        "id": datatable.get("id"),
+        "version": datatable.get("version")
+    }
+    d_payload["cells"] = {cell: { "value": datatable_cells[cell].get("value")} for cell in datatable_cells}
+    d_payload["cells"]["last_updated"]["value"] = jira.get("fields").get("updated")
+    d_payload["cells"]["status"]["value"] = jira.get("fields").get("status").get("name")
+
+    res_client.put(f"/incidents/{task.get('inc_id')}/table_data/{datatable.get('table_id')}/row_data/{datatable.get('id')}", d_payload)

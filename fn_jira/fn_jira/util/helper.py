@@ -1,29 +1,18 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
-from resilient_lib import IntegrationError, MarkdownParser, SOARCommon, make_payload_from_template
+from resilient_lib import IntegrationError, MarkdownParser, SOARCommon
 from re import compile, sub
 from datetime import datetime
-from os import path
 
 PACKAGE_NAME = "fn_jira"
 GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
 
 # Jira datatable constants
 DEFAULT_JIRA_DT_NAME = "jira_task_references" # Can be overridden with app.config jira_dt_name value
-JIRA_DT_ISSUE_ID_COL_NAME = "jira_issue_id_col"
 JIRA_DT_ISSUE_LINK_COL_NAME = "jira_link"
 IBM_SOAR_LINK = "IBM SOAR Link:"
 html_tags = compile('<.*?>')
-
-# Directory of default templates
-TEMPLATE_DIR = path.join(path.dirname(__file__), "data")
-
-# Default Templates used to create/update/close SOAR cases.
-#   Mostly they will be modified to include custom SOAR fields
-CREATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_create_case.jinja")
-UPDATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_update_case.jinja")
-CLOSE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_close_case.jinja")
 
 class JiraServers():
     def __init__(self, opts):
@@ -152,116 +141,6 @@ def remove_html_tags(comment):
     """
     return sub(html_tags, '', comment)
 
-def soar_update_task(jira, res_client, task):
-    """
-    Update soar tasks
-    :param jira: Dict of Jira issue data
-    :param res_client: Client connection to SOAR
-    :param task: SOAR task dictionary
-    :return: Payload to update task
-    """
-    jira_issue_description = jira.get("description")
-
-    # Add data to task update payload
-    t_payload = task.copy()
-    t_payload["notes"] = []
-    del t_payload["attachments"], t_payload["datatable"]
-
-    link_end_index = jira_issue_description.index("\n\n")+2
-    # Check if link to SOAR task is in the Jira issue description
-    if check_jira_issue_linked_to_task(jira_issue_description) and link_end_index < len(jira_issue_description):
-        # Remove link to SOAR task from the description
-        instructions = jira_issue_description[link_end_index:].replace("Created in IBM SOAR", "")
-    else:
-        instructions = jira_issue_description
-
-    if instructions:
-        # Update the SOAR task instructions and instr_text to be the rest of the Jira issue description
-        t_payload["instructions"] = f'<div class="rte"><div>{instructions}</div></div>'
-        t_payload["instr_text"] = f'<div class="rte"><div>{instructions}</div></div>'
-
-    # Removed no longer needed variables
-    del link_end_index, instructions
-
-    # Check if Jira issue has been closed
-    # If the Jira issue has a resolutiondate then it has been closed
-    if jira.get("resolutiondate"):
-        t_payload["status"] = "C"
-
-    # Update comments
-    update_task_comments(res_client, task, jira)
-
-    # Update attachments
-    update_task_attachments(jira, task, res_client)
-
-    # Update datatable
-    update_task_datatable(task, jira, res_client)
-
-    return t_payload
-
-def update_task_comments(res_client, task, jira):
-    """
-    Update the task comments
-    :param task: Dictionary of data from the SOAR task
-    :param jira: Dictionary of data from the Jira issue
-    :param res_client: Connection to SOAR
-    :return: None
-    """
-    # Remove all html tags from the task notes
-    for num in range(len(task.get("notes"))):
-        task["notes"][num] = remove_html_tags(task["notes"][num].replace("<br/>Added from Jira", ""))
-
-    # Update comments/notes
-    comments = jira.get("comment")
-    if comments:
-        for comment in comments:
-            if comment not in task.get("notes"):
-                comment_payload = {
-                    "text": {
-                        "format": "text",
-                        "content": f"{comment}\nAdded from Jira"
-                    },
-                    "is_deleted": False
-                }
-                res_client.post(f"/tasks/{task.get('id')}/comments", comment_payload)
-
-def update_task_attachments(jira, task, res_client):
-    """
-    Update task attachments
-    :param task: Dictionary of data from the SOAR task
-    :param jira: Dictionary of data from the Jira issue
-    :param res_client: Connection to SOAR
-    :return: None
-    """
-    attachments = jira.get("attachment")
-    if attachments:
-        task_attachments = [att.get("name") for att in task.get("attachments")]
-        for attach in attachments:
-            filename = attach.get("filename")
-            if filename not in task_attachments:
-                res_client.post_attachment(f"/tasks/{task.get('id')}/attachments", filepath=None, filename=filename, bytes_handle=attach.get("content"))
-
-def update_task_datatable(task, jira, res_client):
-    """
-    Update data table on SOAR with new information from the updated task
-    :param task: Dictionary of data from the SOAR task
-    :param jira: Dictionary of data from the Jira issue
-    :param res_client: Connection to SOAR
-    :return: None
-    """
-    datatable = task.get('datatable')
-    datatable_cells = datatable.get("cells")
-
-    d_payload = {
-        "id": datatable.get("id"),
-        "version": datatable.get("version")
-    }
-    d_payload["cells"] = {cell: { "value": datatable_cells[cell].get("value")} for cell in datatable_cells}
-    d_payload["cells"]["last_updated"]["value"] = jira.get("updated")
-    d_payload["cells"]["status"]["value"] = jira.get("status")
-
-    res_client.put(f"/incidents/{task.get('inc_id')}/table_data/{datatable.get('table_id')}/row_data/{datatable.get('id')}", d_payload)
-
 def check_jira_issue_linked_to_task(jira_issue_description):
     """
     Check if the given Jira issue is linked to a SOAR task
@@ -272,48 +151,3 @@ def check_jira_issue_linked_to_task(jira_issue_description):
     # Check if the Jira issue is linked to a SOAR task
     if jira_issue_description and IBM_SOAR_LINK in jira_issue_description and "?task_id=" in jira_issue_description:
             return True
-
-def add_changes_to_soar_payload(field_type, old_value, new_value, field_name):
-    """
-    Add chamges to SOAR update payload
-    """
-    return {
-        "old_value": {field_type: old_value},
-        "new_value": {field_type: new_value},
-        "field": {"name": field_name}
-    }
-
-def update_soar_incident(res_client, soar_cases_to_update):
-    """
-    Update the SOAR cases with new data from the corresponding Jira issue
-    :param res_client: Client connection to SOAR
-    :param soar_cases_to_update: A list of lists that contain the SOAR case to update and its corresponding Jira issue
-    :return: None
-    """
-
-    # Payload for updating SOAR tasks
-    task_update_payload = []
-
-    for update in soar_cases_to_update:
-        jira = update[0] # Get the Jira issue
-        soar = update[1] # Get the SOAR case
-        # Get the description of the Jira issue
-        jira_issue_description = jira.get("description")
-
-        # Check if the Jira issue is linked to a SOAR task
-        if check_jira_issue_linked_to_task(jira_issue_description):
-            task_id = get_id_from_jira_issue_description(jira_issue_description)
-            for task in soar.get("tasks"):
-                if task.get("id") == task_id:
-                    # Update SOAR task with Jira data
-                    task_update_payload.append(soar_update_task(jira, res_client, task))
-                    break
-    try:
-        # If task update payload is not empty then update fields on tasks
-        if task_update_payload:
-            # Send put request to SOAR
-            # This will update all tasks that need to be updated
-            res_client.put("/tasks", task_update_payload)
-
-    except Exception as e:
-        raise IntegrationError(str(e))

@@ -4,14 +4,11 @@
 
 from logging import getLogger
 from jira import JIRA
-from fn_jira.util.helper import str_time_to_int_time, check_jira_issue_linked_to_task, get_id_from_jira_issue_description
+from fn_jira.util.helper import str_time_to_int_time, check_jira_issue_linked_to_task, get_id_from_jira_issue_description, GLOBAL_SETTINGS
 from resilient_lib import IntegrationError, str_to_bool, validate_fields, RequestsCommon
-from datetime import datetime
 
 LOG = getLogger(__name__)
 
-PACKAGE_NAME = "fn_jira"
-GLOBAL_SETTINGS = f"{PACKAGE_NAME}:global_settings"
 SUPPORTED_AUTH_METHODS = ("AUTH", "BASIC", "TOKEN", "OAUTH")
 
 class AppCommon():
