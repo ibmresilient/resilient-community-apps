@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Tests APIs using both mocked endpoints and livetests"""
 
 import json
@@ -7,13 +8,19 @@ from unittest import mock
 
 import pytest
 import requests_mock
-from fn_trusteer_ppd.lib.app_common import (AppCommon, PACKAGE_NAME, LINKBACK_URL)
+from resilient_lib import (RequestsCommon)
+from fn_trusteer_ppd.lib.trusteer_ppd_client import (TrusteerPPDClient, PACKAGE_NAME, 
+                                                     ENDPOINT_URL, REST_API_BASE_URL, LINKBACK_URL)
 
 APP_CONFIG = {
     "api_token": "abcd-efgh",
     "api_version": "v1",
-    "endpoint_url": "https://fake.trusteer.com",
-    "verify": "true"
+    "customer_name": "trusteer_customer_name",
+    "verify": "true",
+    "client_auth_cert" : "/path/to/cert.pem",
+    "client_auth_key" : "/path/to/key.pem",
+    "endpoint_url": ENDPOINT_URL.format(customer_name="trusteer_customer_name"),
+    "rest_api_base_url": REST_API_BASE_URL.format(customer_name="trusteer_customer_name")
 }
 
 BASE_MOCK_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mock_data")
@@ -34,19 +41,15 @@ def mock_api():
 
 
 @pytest.fixture(scope="module")
-def app_common():
-    yield AppCommon(PACKAGE_NAME, APP_CONFIG)
+def trusteer_ppd_client():
+    rc = RequestsCommon()
+    yield TrusteerPPDClient(rc, PACKAGE_NAME, APP_CONFIG)
 
-def test_make_headers(app_common: AppCommon):
-    headers = app_common._make_header("api_token")
-
-    assert headers == { 'Content-Type': 'application/json',  'Authorization': "Bearer api_token" }
-
-def test_make_linkback_url(app_common: AppCommon):
+def test_make_linkback_url(trusteer_ppd_client: TrusteerPPDClient):
     pu_id = "aaaa-bbbb-cccc-dddd"
     device_id = "aaaa-bbbb-1111-2222"
-    puid_url = app_common.make_linkback_url(id=pu_id, id_type='puid')
-    device_id_url = app_common.make_linkback_url(id=device_id, id_type='device_id')
+    puid_url = trusteer_ppd_client.make_linkback_url(id=pu_id, id_type='puid')
+    device_id_url = trusteer_ppd_client.make_linkback_url(id=device_id, id_type='device_id')
 
     assert puid_url == LINKBACK_URL.format(base_url=APP_CONFIG.get('endpoint_url'), id=pu_id, id_type='puid')
     assert device_id_url == LINKBACK_URL.format(base_url=APP_CONFIG.get('endpoint_url'), id=device_id, id_type='device_id')

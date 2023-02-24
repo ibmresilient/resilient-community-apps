@@ -6,7 +6,7 @@ from base64 import b64encode
 import logging
 from urllib.parse import urljoin
 
-from resilient_lib import str_to_bool, eval_mapping, RequestsCommon
+from resilient_lib import RequestsCommon, validate_fields, str_to_bool
 
 
 LOG = logging.getLogger(__name__)
@@ -15,15 +15,17 @@ PACKAGE_NAME = "fn_trusteer_ppd"
 
 # Trusteer REST API header
 HEADER = { 'Content-Type': 'application/json' }
-PINPOINT_FEEDBACK_URL = "/api/{api_version}/update_pinpoint_session_resolution"
 
 # URL prefix to refer back to your console for a specific alert, event, etc.
-LINKBACK_URL = "{base_url}/search-results?{id_type}={id}&type=session"
+ENDPOINT_URL = "https://{customer_name}.trusteer.com"
+REST_API_BASE_URL = "https://{customer_name}-api.trusteer.com"
+PINPOINT_FEEDBACK_URL = "/api/{api_version}/update_pinpoint_session_resolution"
+LINKBACK_URL = "{base_url}/search-results?{id_type}={id}"
 
 # E N D P O I N T S
 
-class AppCommon():
-    def __init__(self, package_name: str, app_configs: dict) -> None:
+class TrusteerPPDClient():
+    def __init__(self, rc: RequestsCommon, package_name: str, app_configs: dict) -> None:
         """
         Initialize the parameters needed to communicate to the endpoint solution
 
@@ -34,17 +36,23 @@ class AppCommon():
         :param app_configs: app.config parameters in order to authenticate and access the endpoint
         :type app_configs: dict
         """
+        validate_fields(["api_token", "api_version", "customer_name", "client_auth_cert", "client_auth_key"],
+                         app_configs)
+        self.rc = rc
         self.package_name = package_name
 
         # required configs
         self.api_token = app_configs.get("api_token")
-        self.endpoint_url = app_configs.get("endpoint_url")
         self.api_version = app_configs.get("api_version")
-        self.base_url = urljoin(self.endpoint_url, "-api/api/{version}".format(version=self.api_version))
+        self.customer_name = app_configs.get("customer_name")
+        self.client_auth_key = app_configs.get("client_auth_key")
+        self.client_auth_cert = app_configs.get("client_auth_cert")
+        
         self.verify = _get_verify_ssl(app_configs)
 
-        self.header = self._make_header(self.api_token)
-        self.rc = RequestsCommon()
+        self.endpoint_url = ENDPOINT_URL.format(customer_name=self.customer_name)
+        self.rest_api_base_url = REST_API_BASE_URL.format(customer_name=self.customer_name)
+        self.headers = HEADER
 
     def _get_uri(self, cmd: str) -> str:
         """
@@ -55,22 +63,8 @@ class AppCommon():
         :return: complete URL
         :rtype: str
         """
-        return urljoin(self.base_url, cmd.format(api_version=self.api_version))
+        return urljoin(self.rest_api_base_url, cmd.format(api_version=self.api_version))
 
-    def _make_header(self, token: str) -> dict:
-        """Build API header using authorization token
-
-        :param token: authorization token
-        :type token: str
-        :return: complete header
-        :rtype: dict
-        """
-
-        header = HEADER.copy()
-        # modify to represent how to build the header
-        header['Authorization'] = f"Bearer {token}"
-
-        return header
 
     def make_linkback_url(self, id: str, id_type: str, linkback_url : str = LINKBACK_URL) -> str:
         """
@@ -113,7 +107,7 @@ class AppCommon():
         Returns:
             dict: _description_
         """
-        # URL: https://orgname-api.trusteer.com/api/v1/update_pinpoint_session_resolution
+        # Get Trusteer Pinpoint REST API URL for feedback
         url = self._get_uri(PINPOINT_FEEDBACK_URL)
         data = {
             "app_id": application_id,
@@ -128,7 +122,7 @@ class AppCommon():
         response = self.rc.execute("POST",
                                    url=url,
                                    json=data,
-                                   headers=self.header,
+                                   headers=self.headers,
                                    verify=self.verify)
         response_json = response.json()
 

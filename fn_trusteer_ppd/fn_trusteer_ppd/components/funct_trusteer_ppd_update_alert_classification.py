@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # Generated with resilient-sdk v48.0.3934
-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields
-from fn_trusteer_ppd.lib.app_common import AppCommon, PACKAGE_NAME
+from fn_trusteer_ppd.lib.trusteer_ppd_client import TrusteerPPDClient, PACKAGE_NAME
 
 FN_NAME = "trusteer_ppd_update_alert_classification"
 
@@ -31,12 +31,12 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["trusteer_ppd_session_id", "trusteer_ppd_application_id", "trusteer_ppd_feedback"], fn_inputs)
 
-        app_common = AppCommon(self.PACKAGE_NAME, self.options)
+        trusteer_ppd_client = TrusteerPPDClient(self.rc, self.PACKAGE_NAME, self.options)
 
-        results = app_common.update_classification(fn_inputs.trusteer_ppd_session_id,
-                                                   fn_inputs.trusteer_ppd_application_id,
-                                                   fn_inputs.trusteer_ppd_feedback, 
-                                                   fn_inputs.trusteer_ppd_fraud_mo)        
+        results = trusteer_ppd_client.update_classification(fn_inputs.trusteer_ppd_session_id,
+                                                            fn_inputs.trusteer_ppd_application_id,
+                                                            fn_inputs.trusteer_ppd_feedback, 
+                                                            fn_inputs.trusteer_ppd_fraud_mo)        
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

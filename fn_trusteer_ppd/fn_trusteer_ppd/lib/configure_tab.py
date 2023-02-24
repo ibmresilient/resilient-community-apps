@@ -4,7 +4,7 @@
 
 import logging
 
-from fn_trusteer_ppd.lib.app_common import (PACKAGE_NAME)
+from fn_trusteer_ppd.lib.trusteer_ppd_client import (PACKAGE_NAME)
 from resilient_circuits.app import AppArgumentParser
 from resilient_lib.ui import Datatable, Field, Tab, create_tab
 

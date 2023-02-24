@@ -20,6 +20,8 @@ Return examples:
 """
 
 import logging
+from resilient_lib import RequestsCommon, IntegrationError
+from fn_trusteer_ppd.lib.trusteer_ppd_client import TrusteerPPDClient, PACKAGE_NAME
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -33,7 +35,17 @@ def selftest_function(opts):
     """
     app_configs = opts.get("fn_trusteer_ppd", {})
 
-    return {
-        "state": "unimplemented",
-        "reason": None
-    }
+    rc = RequestsCommon(opts, app_configs)
+
+    try:
+        
+        trusteer_ppd_client = TrusteerPPDClient(rc, PACKAGE_NAME, app_configs=app_configs)
+        return {
+            "state": "success",
+            "reason": "Successful connection to Trusteer."
+        }
+    except IntegrationError as error:
+        return {
+            "state": "failure",
+            "reason": f"Failed to connect to Trusteer: {str(error)}"
+        }

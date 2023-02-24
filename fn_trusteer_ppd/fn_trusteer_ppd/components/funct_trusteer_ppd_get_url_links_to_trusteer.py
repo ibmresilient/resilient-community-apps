@@ -4,8 +4,7 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
-from fn_trusteer_ppd.lib.app_common import AppCommon, PACKAGE_NAME
+from fn_trusteer_ppd.lib.trusteer_ppd_client import TrusteerPPDClient, PACKAGE_NAME
 from fn_trusteer_ppd.lib.configure_tab import init_trusteer_ppd_tab
 
 PACKAGE_NAME = "fn_trusteer_ppd"
@@ -29,8 +28,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.trusteer_ppd_puid
             -   fn_inputs.trusteer_ppd_device_id
         """
-
-        app_common = AppCommon(self.PACKAGE_NAME, self.options)
+        trusteer_client = TrusteerPPDClient(self.rc, self.PACKAGE_NAME, self.options)
 
         link_url_puid = None
         link_url_device_id = None
@@ -40,11 +38,12 @@ class FunctionComponent(AppFunctionComponent):
         
         # Get the URL link back to Trusteer PUID.
         if trusteer_ppd_puid:
-            link_url_puid = app_common.make_linkback_url(id=trusteer_ppd_puid, id_type='puid')
+            link_url_puid = trusteer_client.make_linkback_url(id=trusteer_ppd_puid, id_type='puid')
 
         # Get the link back to the Device in the Trusteer session.
         if trusteer_ppd_device_id:
-            link_url_device_id = app_common.make_linkback_url(id=trusteer_ppd_device_id, id_type='device_id')
+            link_url_device_id = trusteer_client.make_linkback_url(id=trusteer_ppd_device_id, 
+                                                                   id_type='device_id')
 
         results = {"link_url_puid": link_url_puid,
                    "link_url_device_id": link_url_device_id}
