@@ -47,7 +47,7 @@ class TrusteerPPDClient():
         self.customer_name = app_configs.get("customer_name")
         self.client_auth_key = app_configs.get("client_auth_key")
         self.client_auth_cert = app_configs.get("client_auth_cert")
-        
+
         self.verify = _get_verify_ssl(app_configs)
 
         self.endpoint_url = ENDPOINT_URL.format(customer_name=self.customer_name)
@@ -81,7 +81,7 @@ class TrusteerPPDClient():
         """
         return linkback_url.format(base_url=self.endpoint_url, id_type=id_type, id=id)
 
-    def update_classification(self, session_id: str, application_id: str, feedback: str, fraud_mo: str) -> dict:
+    def update_classification(self, session_id: str, application_id: str, classification: str) -> dict:
         """_summary_
 
         Args:
@@ -107,15 +107,30 @@ class TrusteerPPDClient():
         Returns:
             dict: _description_
         """
+        classification_map = { 
+            "Pending": {"feedback": "pending_confirmation", "fraud_mo": None},
+            "Confirmed legitimate": {"feedback": "confirmed_legitimate", "fraud_mo": None},
+            "Undetermined": {"feedback": "undetermined", "fraud_mo": None},
+            "Confirmed fraud": {"feedback": "confirmed_fraud", "fraud_mo": None},
+            "Confirmed fraud (Account takeover)": {"confirmed_fraud": "pending_confirmation", "fraud_mo": "account_takeover"},
+            "Confirmed fraud (First-party)": {"confirmed_fraud": "confirmed_fraud", "fraud_mo": "first_party"},
+            "Confirmed fraud (Mule account)": {"feedback": "confirmed_fraud", "fraud_mo": "mule_account"},
+            "Confirmed fraud (Remote access tool)":{"feedback": "confirmed_fraud", "fraud_mo": "remote_access_tool"},
+            "Confirmed fraud (Social engineering)":{"feedback": "confirmed_fraud", "fraud_mo": "social_engineering"},
+            "Confirmed fraud (Stolen device)": {"feedback": "confirmed_fraud", "fraud_mo": "stolen_device"},
+            }
+        mapped_classification = classification_map.get(classification)
+        feedback = mapped_classification.get("feedback")
+        fraud_mo = mapped_classification.get("fraud_mo")
+
         # Get Trusteer Pinpoint REST API URL for feedback
         url = self._get_uri(PINPOINT_FEEDBACK_URL)
         data = {
+            "api_key": self.api_token,
             "app_id": application_id,
             "customer_session_id": session_id,
-            "feedback": feedback,
-            "api_key": self.api_token
+            "feedback": feedback
         }
-        # If confirmed fraud, set fraud_mo if it is specified
         if fraud_mo and feedback == "confirmed_fraud":
             data["fraud_mo"] = fraud_mo
 

@@ -25,7 +25,7 @@ def codegen_reload_data():
         "functions": [u"trusteer_ppd_get_url_links_to_trusteer", u"trusteer_ppd_update_alert_classification"],
         "workflows": [],
         "actions": [u"Trusteer PPD: Parse Trusteer Email"],
-        "incident_fields": [u"trusteer_ppd_application_id", u"trusteer_ppd_link_to_puid", u"trusteer_ppd_puid"],
+        "incident_fields": [u"trusteer_ppd_application_id", u"trusteer_ppd_classification", u"trusteer_ppd_link_to_puid", u"trusteer_ppd_puid"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"trusteer_ppd_dt_trusteer_alerts"],
@@ -56,6 +56,7 @@ def customization_data(client=None):
         - Trusteer PPD: Parse Trusteer Email
     - Incident Fields:
         - trusteer_ppd_application_id
+        - trusteer_ppd_classification
         - trusteer_ppd_link_to_puid
         - trusteer_ppd_puid
     - Data Tables:

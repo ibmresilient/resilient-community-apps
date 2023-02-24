@@ -24,19 +24,17 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.trusteer_ppd_session_id
             -   fn_inputs.trusteer_ppd_application_id
             -   fn_inputs.trusteer_ppd_classification
-            -   fn_inputs.trusteer_ppd_fraud_mo
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields(["trusteer_ppd_session_id", "trusteer_ppd_application_id", "trusteer_ppd_feedback"], fn_inputs)
+        validate_fields(["trusteer_ppd_session_id", "trusteer_ppd_application_id", "trusteer_ppd_classification"], fn_inputs)
 
         trusteer_ppd_client = TrusteerPPDClient(self.rc, self.PACKAGE_NAME, self.options)
 
         results = trusteer_ppd_client.update_classification(fn_inputs.trusteer_ppd_session_id,
                                                             fn_inputs.trusteer_ppd_application_id,
-                                                            fn_inputs.trusteer_ppd_feedback, 
-                                                            fn_inputs.trusteer_ppd_fraud_mo)        
+                                                            fn_inputs.trusteer_ppd_classification) 
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
