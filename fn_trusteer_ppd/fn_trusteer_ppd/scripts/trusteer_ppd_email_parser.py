@@ -378,7 +378,7 @@ class EmailProcessor(object):
         incident.addNote("Email from Trusteer Pinpoint Detect:<br> {0}".format(self.email_contents))
 
     def get_trusteer_ppd_puid(self):
-        trusteer_ppd_puid = self.email_contents_json.get("Permanent User ID", None)
+        trusteer_ppd_puid = self.email_contents_json.get(PERMANENT_USER_ID, None)
         if trusteer_ppd_puid is None:
             log.error("Email message has no  Pinpoint Detect Permanent User ID!")
         return trusteer_ppd_puid
@@ -441,13 +441,13 @@ class EmailProcessor(object):
         for k,v in headers.items():
             if k.lower() in MESSAGE_ID_LIST:
                 msg_id_list.extend(v)
-                
+
         # find the message id among several choices
         msg_id = msg_id_list[0] if msg_id_list else None
         match = MESSAGE_PATTERN.findall(msg_id.strip()) if msg_id else None # remove brackets <>
         if match:
             return match[0]
-    
+
     @staticmethod
     def save_message_id(headers):
         # extract the message ID and retain
@@ -489,13 +489,6 @@ class EmailProcessor(object):
 # Create the email processor object, loading it with the email message body content.
 processor = EmailProcessor()
 
-# We need to check that the email has a subject otherwise the script will fail
-subject = emailmessage.subject if hasattr(emailmessage, 'subject') else None
-
-# Create a suitable title for an incident based on the email
-new_case_title = "Trusteer Case from email \"{0}\" via mailbox {1}".format(
-    subject, emailmessage.inbound_mailbox)
-
 # Check to see if a similar incident already exists
 # We will search for an incident which has the same name as we would give a new incident
 trusteer_ppd_puid = processor.get_trusteer_ppd_puid()
@@ -505,6 +498,9 @@ query = query_builder.build()
 cases = helper.findIncidents(query)
 
 if len(cases) == 0:
+  # Create a suitable title for an incident based on the email
+    new_case_title = "Trusteer PUID {0} via mailbox {1}".format(trusteer_ppd_puid, emailmessage.inbound_mailbox)
+    
     # A similar case does not already exist. Create a new case and associate the email with it.
     log.info(u"Creating new case {0}".format(new_case_title))
 
@@ -533,6 +529,7 @@ processor.add_incident_note()
 # Add email message attachments to incident
 processor.processAttachments()
 
+incident.addNote("emailmessage.headers = <br>{}".format(emailmessage.headers))
 
 if SAVE_CONVERSATION:
     processor.add_email_conversation(emailmessage.headers, 
