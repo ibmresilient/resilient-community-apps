@@ -30,7 +30,7 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [u"trusteer_ppd_dt_trusteer_alerts"],
         "automatic_tasks": [],
-        "scripts": [u"Trusteer PPD: Create Case from Email"],
+        "scripts": [u"Trusteer PPD: Create Artifacts", u"Trusteer PPD: Create Case from Email"],
         "playbooks": [u"trusteer_ppd_update_classification_in_trusteer", u"trusteer_ppd_update_device_url_link", u"trusteer_ppd_update_puid_url_link"]
     }
 
@@ -62,6 +62,7 @@ def customization_data(client=None):
     - Data Tables:
         - trusteer_ppd_dt_trusteer_alerts
     - Scripts:
+        - Trusteer PPD: Create Artifacts
         - Trusteer PPD: Create Case from Email
     """
 

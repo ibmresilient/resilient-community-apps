@@ -349,7 +349,7 @@ class EmailProcessor(object):
         alert_row.trusteer_ppd_dt_activity = self.email_contents_json.get(ACTIVITY)
         alert_row.trusteer_ppd_dt_event_received_at = self.soar_datetimeformat(self.email_contents_json.get(EVENT_RECEIVED_AT))
         alert_row.trusteer_ppd_dt_user_ip_address = self.email_contents_json.get(USER_IP_ADDRESS)
-        alert_row.trusteer_ppd_dt_device_id = self.email_contents_json.get(GLOBAL_DEVICE_ID)
+        alert_row.trusteer_ppd_dt_device_id_and_link = {'format':'html', 'content': self.email_contents_json.get(GLOBAL_DEVICE_ID)}
         alert_row.trusteer_ppd_dt_new_device_indication = bool(self.email_contents_json.get(NEW_DEVICE_INDICATION))
         alert_row.trusteer_ppd_dt_organization = self.email_contents_json.get(ORGANIZATION)
         alert_row.trusteer_ppd_dt_reason = self.email_contents_json.get(REASON)
@@ -507,6 +507,9 @@ if len(cases) == 0:
     # Create an incident with a title based on the email subject, owned identified by variable newIncidentOwner
     emailmessage.createAssociatedIncident(new_case_title, new_case_owner)
 
+    # Add PUID as aa User Account artifact
+    incident.addArtifact("User Account", trusteer_ppd_puid, "Permanent User ID from Trusteer")
+
     # Update custom fields of the new case
     processor.add_info_to_case()
 
@@ -528,8 +531,6 @@ processor.add_incident_note()
 
 # Add email message attachments to incident
 processor.processAttachments()
-
-incident.addNote("emailmessage.headers = <br>{}".format(emailmessage.headers))
 
 if SAVE_CONVERSATION:
     processor.add_email_conversation(emailmessage.headers, 
