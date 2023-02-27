@@ -192,8 +192,8 @@ class exchange_interface:
     def create_email_message(self, function_parameters:dict) -> dict:
         """Create an email message object and send it to the recipients"""
         username    = function_parameters.get("username")
-        msg_subject = function_parameters.get("msg_subject")
-        msg_body    = function_parameters.get("msg_body")
+        msg_subject = function_parameters.get("msg_subject", "")
+        msg_body    = function_parameters.get("msg_body" , "")
         recipients  = function_parameters.get("recipients")
 
         account = self.connect_to_account(username, impersonation=(username.lower() != self.options.get("email").lower()))
@@ -226,6 +226,8 @@ class exchange_interface:
         meeting_body = function_parameters.get("meeting_body")
         required_attendees = function_parameters.get("required_attendees")
         optional_attendees = function_parameters.get("optional_attendees")
+        meeting_location = function_parameters.get("meeting_location")
+        is_meeting_online = function_parameters.get("is_online_meeting")
         timezone = self.options.get("timezone")
 
         account = self.connect_to_account(username, impersonation=(username.lower() != self.options.get("email").lower()))
@@ -248,7 +250,9 @@ class exchange_interface:
             subject=meeting_subject,
             body=meeting_body,
             required_attendees=required_attendees,
-            optional_attendees=optional_attendees)
+            optional_attendees=optional_attendees,
+            location=meeting_location,
+            is_online_meeting=is_meeting_online)
 
         self.log.info("Sending out meeting invite and save a copy")
         meeting.save(send_meeting_invitations=SEND_TO_ALL_AND_SAVE_COPY)
@@ -261,7 +265,9 @@ class exchange_interface:
             'body': meeting_body,
             'start_time': str(start_time.strftime('%Y-%m-%d %H:%M:%S')),
             'end_time': str(end_time.strftime('%Y-%m-%d %H:%M:%S')),
-            'timezone' : str(timezone)}
+            'timezone' : str(timezone),
+            'location' : meeting_location,
+            'online_meeting' : is_meeting_online}
 
 
     def move_emails(self, function_parameters, delete_src_folder=False) -> tuple:

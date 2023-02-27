@@ -50,7 +50,7 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             utils = exchange_interface(self.rc, self.options)
-            yield StatusMessage(f"Successfully connected to {function_parameters.get('emails')}")
+            yield StatusMessage(f"Successfully connected to {function_parameters.get('email')}")
 
             results = utils.create_email_message(function_parameters)
 
