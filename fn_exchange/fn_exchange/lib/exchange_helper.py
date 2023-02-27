@@ -27,6 +27,8 @@ INPUTS_MAP = {
     "exchange_meeting_body"            : "meeting_body",
     "exchange_required_attendees"      : "required_attendees",
     "exchange_optional_attendees"      : "optional_attendees",
+    "exchange_is_online_meeting"       : "is_online_meeting",
+    "exchange_meeting_location"        : "meeting_location",
     
     "exchange_sender"                  : "sender",
     "exchange_email_recipients"        : "recipients",
@@ -49,7 +51,7 @@ INPUTS_MAP = {
 
 class ResultsHandler(ResultPayload):
     def __init__(self, package_name, fn_inputs):
-        super(ResultsHandler, self).__init__(pkgname=package_name, inputs=fn_inputs)
+        super(ResultsHandler, self).__init__(pkgname=package_name, inputs=fn_inputs._asdict())
 
     def success(self, content):
         results = self.done(success=True, content=content)

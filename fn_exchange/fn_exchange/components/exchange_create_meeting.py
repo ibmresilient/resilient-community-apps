@@ -45,7 +45,7 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             utils = exchange_interface(self.rc, self.options)
-            yield StatusMessage(f"Successfully connected to {function_parameters.get('emails')}")
+            yield StatusMessage(f"Successfully connected to {function_parameters.get('email')}")
 
             yield StatusMessage("Sending out meeting invite")
             results = utils.create_meeting(function_parameters)
