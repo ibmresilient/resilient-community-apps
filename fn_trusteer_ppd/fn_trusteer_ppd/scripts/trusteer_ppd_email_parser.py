@@ -42,7 +42,7 @@ RISK_SCORE = "Risk Score"
 SESSION_ID = "Session ID"
 TRUSTEER_ENDPOINT_PROTECTION_DEVICE_ID = "Trusteer Endpoint Protection Device ID"
 USER_IP_ADDRESS = "User IP Address"
-USER_AGENT_STRING = "User Agent String:"
+USER_AGENT_STRING = "User Agent String"
 
 COUNTRY_NAMES = {
     "N/A": "-",
