@@ -10,11 +10,9 @@ from resilient_lib.ui import Datatable, Field, Tab, create_tab
 
 LOG = logging.getLogger(__name__)
 
-TAB_NAME = "Trusteer"
-
 class TrusteerPPDTab(Tab):
     SECTION = PACKAGE_NAME
-    NAME = TAB_NAME
+    NAME = "Trusteer"
     UUID = "66239367-306f-4a36-a530-1a34dfcebf3e"
 
     CONTAINS = [
@@ -33,6 +31,6 @@ class TrusteerPPDTab(Tab):
 def init_trusteer_ppd_tab():
     try:
         create_tab(TrusteerPPDTab, AppArgumentParser().parse_args(), update_existing=True)
-        LOG.info("Tab created: %s", TAB_NAME)
+        LOG.info("Tab created: %s", TrusteerPPDTab.NAME)
     except SystemExit as e:
-        LOG.warning("Failed to create tab: %s.\nERROR: %s", TAB_NAME, e)
+        LOG.warning("Failed to create tab: %s.\nERROR: %s", TrusteerPPDTab.NAME, e)
