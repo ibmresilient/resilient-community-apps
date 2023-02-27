@@ -42,7 +42,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1677508332738,
+  "export_date": 1677517909598,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -549,13 +549,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 200,
+  "id": 203,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1677508331013,
+      "create_date": 1677517907981,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -564,7 +564,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1677508331013,
+      "update_date": 1677517907981,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -593,7 +593,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 25,
+        "content_version": 30,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_cf8abd3f_ae68_4a56_81e4_80f6b20de483\" isExecutable=\"true\" name=\"playbook_cf8abd3f_ae68_4a56_81e4_80f6b20de483\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1glhule\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_01tmsx4\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Trusteer PPD: Update Alert Classification\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6a64bb10-a82a-46d2-9719-25fb8b7b398f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03h6dz5\u003c/incoming\u003e\u003coutgoing\u003eFlow_01tmsx4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_01tmsx4\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_1\"/\u003e\u003csequenceFlow id=\"Flow_1glhule\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_3\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Trusteer PPD: Update Alert Classification\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"33cacd1a-2705-4218-8ea0-7217c0444506\"\u003e{\"inputs\":{},\"pre_processing_script\":\"classification_map = { \\n  \\\"Pending\\\": {\\\"feedback\\\": \\\"pending_confirmation\\\", \\\"fraud_mo\\\": None},\\n  \\\"Confirmed legitimate\\\": {\\\"feedback\\\": \\\"confirmed_legitimate\\\", \\\"fraud_mo\\\": None},\\n  \\\"Undetermined\\\": {\\\"feedback\\\": \\\"undetermined\\\", \\\"fraud_mo\\\": None},\\n  \\\"Confirmed fraud\\\": {\\\"feedback\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": None},\\n  \\\"Confirmed fraud (Account takeover)\\\": {\\\"feedback\\\": \\\"pending_confirmation\\\", \\\"fraud_mo\\\": \\\"account_takeover\\\"},\\n  \\\"Confirmed fraud (First-party)\\\": {\\\"feedback\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": \\\"first_party\\\"},\\n  \\\"Confirmed fraud (Mule account)\\\": {\\\"feedback\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": \\\"mule_account\\\"},\\n  \\\"Confirmed fraud (Remote access tool)\\\":{\\\"feedback\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": \\\"remote_access_tool\\\"},\\n  \\\"Confirmed fraud (Social engineering)\\\":{\\\"feedback\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": \\\"social_engineering\\\"},\\n  \\\"Confirmed fraud (Stolen device)\\\": {\\\"feedback\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": \\\"stolen_device\\\"}\\n}\\nmapped_classification = classification_map.get(playbook.inputs.trusteer_ppd_classification)\\ninputs.trusteer_ppd_feedback = mapped_classification.get(\\\"feedback\\\")\\ninputs.trusteer_ppd_fraud_mo = mapped_classification.get(\\\"fraud_mo\\\")\\n        \\ninputs.trusteer_ppd_application_id = incident.properties.trusteer_ppd_application_id\\ninputs.trusteer_ppd_session_id = row.trusteer_ppd_dt_session_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"alert_classification\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1glhule\u003c/incoming\u003e\u003coutgoing\u003eFlow_03h6dz5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_03h6dz5\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cf8abd3f_ae68_4a56_81e4_80f6b20de483\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03h6dz5\" id=\"Flow_03h6dz5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1glhule\" id=\"Flow_1glhule_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"76\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01tmsx4\" id=\"Flow_01tmsx4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"627\" y=\"24\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"157.85000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1676316038154,
@@ -767,7 +767,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1677507891497,
+      "last_modified_time": 1677517165611,
       "local_scripts": [
         {
           "actions": [],
@@ -778,12 +778,12 @@
           "id": 34,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1677266587819,
+          "last_modified_time": 1677517162428,
           "name": "Trusteer PPD: Update Alert Classification",
           "object_type": "trusteer_ppd_dt_trusteer_alerts",
           "playbook_handle": "trusteer_ppd_update_classification_in_trusteer",
           "programmatic_name": "trusteer_ppd_update_classification_in_trusteer_trusteer_ppd_update_alert_classification",
-          "script_text": "results = playbook.functions.results.alert_classification\n\nif results.success:\n  incident.properties.trusteer_ppd_classification = playbook.inputs.trusteer_ppd_classification\n  incident.addNote(\"Trusteer PPD: Updated Alert Classification to \u003cb\u003e{0}\u003c/b\u003e\".format(results.inputs.trusteer_ppd_classification))\nelse:\n  incident.addNote(\"Trusteer PPD: ERROR: Unable to Update Alert Classification to \u003cb\u003e{0}\u003c/b\u003e in Trusteer\".format(results.inputs.trusteer_ppd_classification))",
+          "script_text": "results = playbook.functions.results.alert_classification\n\nif results.success:\n  incident.properties.trusteer_ppd_classification = playbook.inputs.trusteer_ppd_classification\n  incident.addNote(\"Trusteer PPD: Updated Alert Classification to \u003cb\u003e{0}\u003c/b\u003e\".format(playbook.inputs.trusteer_ppd_classification))\nelse:\n  incident.addNote(\"Trusteer PPD: ERROR: Unable to Update Alert Classification to \u003cb\u003e{0}\u003c/b\u003e in Trusteer\".format(playbook.inputs.trusteer_ppd_classification))",
           "tags": [],
           "uuid": "6a64bb10-a82a-46d2-9719-25fb8b7b398f"
         }
@@ -817,7 +817,7 @@
       "tags": [],
       "type": "default",
       "uuid": "cf8abd3f-ae68-4a56-81e4-80f6b20de483",
-      "version": 34
+      "version": 39
     },
     {
       "activation_details": {
