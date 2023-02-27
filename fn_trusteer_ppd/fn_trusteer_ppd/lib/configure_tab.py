@@ -21,10 +21,11 @@ class TrusteerPPDTab(Tab):
         Field("trusteer_ppd_puid"),
         Field("trusteer_ppd_link_to_puid"),
         Field("trusteer_ppd_application_id"),
+        Field("trusteer_ppd_classification"),
         Datatable("trusteer_ppd_dt_trusteer_alerts")
     ]
     SHOW_IF = [
-        Field("trusteer_session_id").conditions.has_value()
+        Field("trusteer_ppd_puid").conditions.has_value()
     ]
 
 
