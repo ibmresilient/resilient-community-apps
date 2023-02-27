@@ -3,20 +3,19 @@
   "success": true,
   "reason": null,
   "content": {
-    "link_url_puid": "https://fake.trusteer.com/search-results?puid=aaa-bbb-ccc-ddd&type=session",
-    "link_url_device_id": "https://fake.trusteer.com/search-results?device_id=111-222-333-444&type=session"
+    "link_url_puid": "https://oneibmboard.trusteer.com/search-results?puid=PUID-808949021a04d66f9e54192028693507",
+    "link_url_device_id": null
   },
   "raw": null,
   "inputs": {
-    "trusteer_ppd_puid": "aaa-bbb-ccc-ddd",
-    "trusteer_ppd_device_id": "111-222-333-444"
+    "trusteer_ppd_puid": "PUID-808949021a04d66f9e54192028693507"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-trusteer-ppd",
     "package_version": "1.0.0",
-    "host": "laptop",
-    "execution_time_ms": 7306,
-    "timestamp": "2023-02-06 17:07:38"
+    "host": "laptop.local",
+    "execution_time_ms": 1,
+    "timestamp": "2023-02-27 14:24:00"
   }
 }

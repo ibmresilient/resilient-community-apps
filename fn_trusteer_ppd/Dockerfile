@@ -1,3 +1,4 @@
+# Generated with resilient-sdk v48.0.3934
 # docker build -t ibmresilient/fn_trusteer_ppd:1.0.0 -t ibmresilient/fn_trusteer_ppd:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python

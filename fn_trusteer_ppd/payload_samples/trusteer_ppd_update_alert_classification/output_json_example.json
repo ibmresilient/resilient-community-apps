@@ -1,3 +1,27 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "status": "success",
+    "message": "OK",
+    "data": {
+      "api_request_id": "D624E86F-ACDA-48FC-B6F3-9F178FD286D4"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "trusteer_ppd_session_id": "xxxxxxdfb606bf2637c21f",
+    "trusteer_ppd_feedback": "confirmed_fraud",
+    "trusteer_ppd_application_id": "trusteer_demo",
+    "trusteer_ppd_fraud_mo": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-trusteer-ppd",
+    "package_version": "1.0.0",
+    "host": "laptop.local",
+    "execution_time_ms": 320,
+    "timestamp": "2023-02-27 14:21:57"
+  }
 }

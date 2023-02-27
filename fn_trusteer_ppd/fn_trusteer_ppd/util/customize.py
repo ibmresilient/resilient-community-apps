@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [u"trusteer_ppd_dt_trusteer_alerts"],
         "automatic_tasks": [],
         "scripts": [u"Trusteer PPD: Create Artifacts", u"Trusteer PPD: Create Case from Email"],
-        "playbooks": [u"trusteer_ppd_update_classification_in_trusteer", u"trusteer_ppd_update_device_url_link", u"trusteer_ppd_update_puid_url_link"]
+        "playbooks": [u"trusteer_ppd_create_artifacts", u"trusteer_ppd_update_classification_in_trusteer", u"trusteer_ppd_update_device_url_link", u"trusteer_ppd_update_puid_url_link"]
     }
 
 
@@ -49,6 +49,7 @@ def customization_data(client=None):
         - trusteer_ppd_get_url_links_to_trusteer
         - trusteer_ppd_update_alert_classification
     - Playbooks:
+        - trusteer_ppd_create_artifacts
         - trusteer_ppd_update_classification_in_trusteer
         - trusteer_ppd_update_device_url_link
         - trusteer_ppd_update_puid_url_link
