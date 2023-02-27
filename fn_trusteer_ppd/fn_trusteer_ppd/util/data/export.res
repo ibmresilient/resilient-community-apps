@@ -42,7 +42,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1677447695565,
+  "export_date": 1677505571035,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -77,19 +77,103 @@
     },
     {
       "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/trusteer_ppd_fraud_mo",
+      "hide_notification": false,
+      "id": 386,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "trusteer_ppd_fraud_mo",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "trusteer_ppd_fraud_mo",
+      "tooltip": "If you set feedback to confirmed_fraud and confirm that the session was fraudulent, you can also set the specific type of fraud that occurred. If you are not sure of the type of fraud, do not set the fraud_mo field.",
+      "type_id": 11,
+      "uuid": "c28e15bf-cf29-43ca-ab31-2f970856a58c",
+      "values": [
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "account_takeover",
+          "properties": null,
+          "uuid": "3b0c855d-b6c8-4bc9-94c1-eb5ae9f715c8",
+          "value": 196
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "remote_access_tool",
+          "properties": null,
+          "uuid": "9df281ae-23dc-4392-81de-e1bb4c969c20",
+          "value": 197
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "first_party",
+          "properties": null,
+          "uuid": "da1b11f2-3e9f-46da-882c-72fc0beb226e",
+          "value": 198
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "social_engineering",
+          "properties": null,
+          "uuid": "2893a025-544d-43b9-8691-4c3a5905e9d5",
+          "value": 199
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "stolen_device",
+          "properties": null,
+          "uuid": "b91cfe37-4a74-4e4f-9aa0-c7ce7639d729",
+          "value": 200
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "mule_account",
+          "properties": null,
+          "uuid": "557ae445-af24-418a-9553-44cb33ae599e",
+          "value": 201
+        }
+      ]
+    },
+    {
+      "allow_default_value": false,
       "blank_option": false,
       "calculated": false,
       "changeable": true,
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/trusteer_ppd_classification",
+      "export_key": "__function/trusteer_ppd_feedback",
       "hide_notification": false,
-      "id": 385,
-      "input_type": "text",
+      "id": 387,
+      "input_type": "select",
       "internal": false,
       "is_tracked": false,
-      "name": "trusteer_ppd_classification",
+      "name": "trusteer_ppd_feedback",
       "operation_perms": {},
       "operations": [],
       "placeholder": "",
@@ -99,11 +183,48 @@
       "rich_text": false,
       "tags": [],
       "templates": [],
-      "text": "trusteer_ppd_classification",
+      "text": "trusteer_ppd_feedback",
       "tooltip": "",
       "type_id": 11,
-      "uuid": "f3ab3008-8cd9-4193-84cc-aed6c2235390",
-      "values": []
+      "uuid": "e838b1bc-74c3-4e17-9238-f585ae20cdb1",
+      "values": [
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "confirmed_fraud",
+          "properties": null,
+          "uuid": "6bf41799-a023-4e45-8b39-e6a58f5d6f5e",
+          "value": 202
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "confirmed_legitimate",
+          "properties": null,
+          "uuid": "74858565-dcf5-4940-b710-600b2f869887",
+          "value": 203
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "undetermined",
+          "properties": null,
+          "uuid": "b767b74c-c81e-437d-a75b-8bde0f38b13e",
+          "value": 204
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "pending_confirmation",
+          "properties": null,
+          "uuid": "6bf08009-bc9e-4114-a7ae-e44785fe1a01",
+          "value": 205
+        }
+      ]
     },
     {
       "allow_default_value": false,
@@ -384,11 +505,11 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1677266672459,
+      "last_modified_time": 1677505545278,
       "name": "trusteer_ppd_update_alert_classification",
       "tags": [],
       "uuid": "33cacd1a-2705-4218-8ea0-7217c0444506",
-      "version": 6,
+      "version": 8,
       "view_items": [
         {
           "content": "0a74af58-481e-4376-8a6f-78b5e14196ab",
@@ -407,7 +528,15 @@
           "step_label": null
         },
         {
-          "content": "f3ab3008-8cd9-4193-84cc-aed6c2235390",
+          "content": "e838b1bc-74c3-4e17-9238-f585ae20cdb1",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "c28e15bf-cf29-43ca-ab31-2f970856a58c",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -420,13 +549,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 191,
+  "id": 195,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1677447693849,
+      "create_date": 1677505569282,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -435,7 +564,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1677447693849,
+      "update_date": 1677505569282,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -464,8 +593,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 18,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_cf8abd3f_ae68_4a56_81e4_80f6b20de483\" isExecutable=\"true\" name=\"playbook_cf8abd3f_ae68_4a56_81e4_80f6b20de483\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1glhule\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_01tmsx4\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Trusteer PPD: Update Alert Classification\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6a64bb10-a82a-46d2-9719-25fb8b7b398f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03h6dz5\u003c/incoming\u003e\u003coutgoing\u003eFlow_01tmsx4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_01tmsx4\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_1\"/\u003e\u003csequenceFlow id=\"Flow_1glhule\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_3\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Trusteer PPD: Update Alert Classification\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"33cacd1a-2705-4218-8ea0-7217c0444506\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.trusteer_ppd_application_id = incident.properties.trusteer_ppd_application_id\\ninputs.trusteer_ppd_session_id = row.trusteer_ppd_dt_session_id\\ninputs.trusteer_ppd_classification = playbook.inputs.trusteer_ppd_classification\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"alert_classification\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1glhule\u003c/incoming\u003e\u003coutgoing\u003eFlow_03h6dz5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_03h6dz5\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cf8abd3f_ae68_4a56_81e4_80f6b20de483\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1glhule\" id=\"Flow_1glhule_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"76\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01tmsx4\" id=\"Flow_01tmsx4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03h6dz5\" id=\"Flow_03h6dz5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"627\" y=\"24\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"157.85000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 23,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_cf8abd3f_ae68_4a56_81e4_80f6b20de483\" isExecutable=\"true\" name=\"playbook_cf8abd3f_ae68_4a56_81e4_80f6b20de483\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1glhule\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_01tmsx4\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Trusteer PPD: Update Alert Classification\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6a64bb10-a82a-46d2-9719-25fb8b7b398f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03h6dz5\u003c/incoming\u003e\u003coutgoing\u003eFlow_01tmsx4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_01tmsx4\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_1\"/\u003e\u003csequenceFlow id=\"Flow_1glhule\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_3\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Trusteer PPD: Update Alert Classification\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"33cacd1a-2705-4218-8ea0-7217c0444506\"\u003e{\"inputs\":{},\"pre_processing_script\":\"classification_map = { \\n  \\\"Pending\\\": {\\\"feedback\\\": \\\"pending_confirmation\\\", \\\"fraud_mo\\\": None},\\n  \\\"Confirmed legitimate\\\": {\\\"feedback\\\": \\\"confirmed_legitimate\\\", \\\"fraud_mo\\\": None},\\n  \\\"Undetermined\\\": {\\\"feedback\\\": \\\"undetermined\\\", \\\"fraud_mo\\\": None},\\n  \\\"Confirmed fraud\\\": {\\\"feedback\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": None},\\n  \\\"Confirmed fraud (Account takeover)\\\": {\\\"confirmed_fraud\\\": \\\"pending_confirmation\\\", \\\"fraud_mo\\\": \\\"account_takeover\\\"},\\n  \\\"Confirmed fraud (First-party)\\\": {\\\"confirmed_fraud\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": \\\"first_party\\\"},\\n  \\\"Confirmed fraud (Mule account)\\\": {\\\"feedback\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": \\\"mule_account\\\"},\\n  \\\"Confirmed fraud (Remote access tool)\\\":{\\\"feedback\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": \\\"remote_access_tool\\\"},\\n  \\\"Confirmed fraud (Social engineering)\\\":{\\\"feedback\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": \\\"social_engineering\\\"},\\n  \\\"Confirmed fraud (Stolen device)\\\": {\\\"feedback\\\": \\\"confirmed_fraud\\\", \\\"fraud_mo\\\": \\\"stolen_device\\\"}\\n}\\nmapped_classification = classification_map.get(playbook.inputs.trusteer_ppd_classification)\\ninputs.trusteer_ppd_feedback = mapped_classification.get(\\\"feedback\\\")\\ninputs.trusteer_ppd_fraud_mo = mapped_classification.get(\\\"fraud_mo\\\")\\n        \\ninputs.trusteer_ppd_application_id = incident.properties.trusteer_ppd_application_id\\ninputs.trusteer_ppd_session_id = row.trusteer_ppd_dt_session_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"alert_classification\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1glhule\u003c/incoming\u003e\u003coutgoing\u003eFlow_03h6dz5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_03h6dz5\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cf8abd3f_ae68_4a56_81e4_80f6b20de483\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03h6dz5\" id=\"Flow_03h6dz5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1glhule\" id=\"Flow_1glhule_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"76\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01tmsx4\" id=\"Flow_01tmsx4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"627\" y=\"24\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"157.85000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1676316038154,
       "creator_principal": {
@@ -638,7 +767,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1677269107054,
+      "last_modified_time": 1677504738526,
       "local_scripts": [
         {
           "actions": [],
@@ -688,7 +817,7 @@
       "tags": [],
       "type": "default",
       "uuid": "cf8abd3f-ae68-4a56-81e4-80f6b20de483",
-      "version": 27
+      "version": 32
     },
     {
       "activation_details": {
