@@ -115,6 +115,7 @@ class TrusteerPPDClient():
             "customer_session_id": session_id,
             "feedback": feedback
         }
+        # If session is confirmed fraud then also set the fraud mo if specified
         if fraud_mo and feedback == "confirmed_fraud":
             data["fraud_mo"] = fraud_mo
 
