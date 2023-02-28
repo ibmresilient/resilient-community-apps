@@ -4,7 +4,7 @@
 """AppFunction implementation"""
 import json
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_trusteer_ppd.lib.datatable_helper import RESDatatable
+from fn_trusteer_ppd.lib.datatable_helper import TrusteerDatatable
 from resilient_lib import IntegrationError, validate_fields
 
 PACKAGE_NAME = "fn_trusteer_ppd"
@@ -35,7 +35,7 @@ class FunctionComponent(AppFunctionComponent):
         res_client = self.rest_client()
 
         # Instantiate a new RESDatatable
-        datatable = RESDatatable(res_client, fn_inputs.incident_id, "trusteer_ppd_dt_trusteer_alerts")
+        datatable = TrusteerDatatable(res_client, fn_inputs.incident_id, "trusteer_ppd_dt_trusteer_alerts")
 
         # Get the data table data
         datatable.get_data()
@@ -47,13 +47,11 @@ class FunctionComponent(AppFunctionComponent):
 
         # For each row with the specified session ID, update the classification cell.
         for row in rows:
-            cell_json = {"trusteer_ppd_dt_classification": fn_inputs.trusteer_ppd_classification}
-            cell_str = json.dumps(cell_json)
-            updated_row = datatable.update_row(int(row.get('id')), cell_json)
+            cell_to_update = {"trusteer_ppd_dt_classification": fn_inputs.trusteer_ppd_classification}
+            updated_row = datatable.update_row(row.get('id'), cell_to_update)
 
             if "error" in updated_row:
-                yield self.status_message("Row in Trusteer Alerts data table NOT updated.")
-                raise ValueError(updated_row["error"])
+                raise IntegrationError("Row in Trusteer Alerts data table NOT updated.")
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
