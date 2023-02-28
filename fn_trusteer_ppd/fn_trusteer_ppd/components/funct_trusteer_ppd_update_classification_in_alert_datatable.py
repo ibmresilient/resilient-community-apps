@@ -34,7 +34,7 @@ class FunctionComponent(AppFunctionComponent):
         # Instantiate new Resilient API object
         res_client = self.rest_client()
 
-        # Instantiate a new RESDatatable
+        # Instantiate a new TrusteerDatatable
         datatable = TrusteerDatatable(res_client, fn_inputs.incident_id, "trusteer_ppd_dt_trusteer_alerts")
 
         # Get the data table data
@@ -55,7 +55,6 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        # Note this is only used for demo purposes! Put your own key/value pairs here that you want to access on the Platform
         results = {"rows": rows}
 
         yield FunctionResult(results)
