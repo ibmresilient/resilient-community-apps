@@ -62,8 +62,10 @@ class FunctionComponent(AppFunctionComponent):
             yield StatusMessage("Finding emails")
             retrieved_emails = utils.get_emails(function_parameters)
 
-            yield StatusMessage(f"Search email operation complete, {retrieved_emails.count()} emails found")
-            results = utils.create_email_function_results(retrieved_emails)
+            yield StatusMessage(f"{retrieved_emails.count()} emails found")
+            out = (retrieved_emails, function_parameters.get("num_emails"))
+            results = utils.create_email_function_results(retrieved_emails, function_parameters.get("num_emails"))
+            yield StatusMessage(f"Search email operation complete, {len(results.get('emails'))} emails found")
             yield rh.success(results)
 
         except Exception as err:
