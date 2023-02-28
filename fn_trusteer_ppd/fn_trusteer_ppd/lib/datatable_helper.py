@@ -1,6 +1,6 @@
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-""" This is a helper module for GET, UPDATE and DELETE
-    Functions for a SOAR Data Table """
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 from json import loads
 from logging import getLogger
