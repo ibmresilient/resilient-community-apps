@@ -26,7 +26,7 @@ def codegen_reload_data():
         "workflows": [],
         "actions": [u"Trusteer PPD: Parse Trusteer Email"],
         "incident_fields": [u"trusteer_ppd_application_id", u"trusteer_ppd_classification", u"trusteer_ppd_link_to_puid", u"trusteer_ppd_puid"],
-        "incident_artifact_types": [],
+        "incident_artifact_types": [u"trusteer_ppd_device_id"],
         "incident_types": [],
         "datatables": [u"trusteer_ppd_dt_trusteer_alerts"],
         "automatic_tasks": [],
@@ -60,6 +60,8 @@ def customization_data(client=None):
         - trusteer_ppd_classification
         - trusteer_ppd_link_to_puid
         - trusteer_ppd_puid
+    - Custom Artifact Types:
+        - trusteer_ppd_device_id
     - Data Tables:
         - trusteer_ppd_dt_trusteer_alerts
     - Scripts:

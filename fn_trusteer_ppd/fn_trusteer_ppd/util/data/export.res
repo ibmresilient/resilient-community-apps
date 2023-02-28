@@ -42,7 +42,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1677540726920,
+  "export_date": 1677598190663,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -549,13 +549,32 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 212,
+  "id": 213,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
-  "incident_artifact_types": [],
+  "incident_artifact_types": [
+    {
+      "default_scan_option": "unsupported",
+      "desc": "Device ID from Trusteer Pinpoint Detect Alert",
+      "enabled": true,
+      "export_key": "trusteer_ppd_device_id",
+      "file": false,
+      "id": 0,
+      "multi_aware": false,
+      "name": "Trusteer Device ID",
+      "parse_as_csv": false,
+      "programmatic_name": "trusteer_ppd_device_id",
+      "reg_exp": null,
+      "system": false,
+      "tags": [],
+      "use_for_relationships": true,
+      "uuid": "2afc6fb0-86ed-4d9e-8eae-9c450bb275b6",
+      "version": 2
+    }
+  ],
   "incident_types": [
     {
-      "create_date": 1677540724878,
+      "create_date": 1677598188641,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -564,7 +583,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1677540724878,
+      "update_date": 1677598188641,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1160,7 +1179,7 @@
       "id": 29,
       "language": "python3",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1677540684209,
+      "last_modified_time": 1677591482134,
       "name": "Trusteer PPD: Create Case from Email",
       "object_type": "__emailmessage",
       "playbook_handle": null,
