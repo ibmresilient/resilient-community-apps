@@ -164,7 +164,7 @@ def get_emails(function_parameters):
     email.move_to_trash = MagicMock()
     emails.count = MagicMock()
     emails.count.return_value = 1
-    emails.__iter__.return_value = [email]
+    emails.__iter__.return_value = [email, ]
     return emails
 
 
@@ -264,8 +264,8 @@ def mocked_exchange_utils(*args):
                    search_subfolders=False):
             return get_emails({})
 
-        def create_email_function_results(self, emails):
-            return self.utils.create_email_function_results(emails)
+        def create_email_function_results(self, emails, num_emails):
+            return self.utils.create_email_function_results(emails, num_emails)
 
         def connect_to_account(self, username):
             return connect_to_account(username)

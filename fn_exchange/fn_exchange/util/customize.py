@@ -31,27 +31,31 @@ def codegen_reload_data():
             u"exchange_send_email"],
 
         "workflows": [
-            u"example_of_exchange_create_meeting",
-            u"example_of_exchange_delete_emails",
-            u"example_of_exchange_find_emails",
-            u"example_of_exchange_get_mailbox_info",
-            u"example_of_exchange_move_emails",
-            u"example_of_exchange_send_email",
-            u"exchange_move_and_delete_folder"],
+            u"example_of_exchange_create_meeting_incident",
+            u"example_of_exchange_delete_emails_incident",
+            u"example_of_exchange_find_emails_incident",
+            u"example_of_exchange_get_mailbox_info_incident",
+            u"example_of_exchange_move_emails_incident",
+            u"example_of_exchange_send_email_incident",
+            u"exchange_move_and_delete_folder_incident"],
 
         "actions": [
-            u"Exchange Create Meeting",
-            u"Exchange Delete Emails",
-            u"Exchange Find Emails",
-            u"Exchange Get Mailbox Info",
-            u"Exchange Move Emails",
-            u"Exchange Move Folder Contents and Delete Folder",
-            u"Exchange Send Email"],
+            u"Exchange: Create Meeting",
+            u"Exchange: Delete Emails",
+            u"Exchange: Find Emails",
+            u"Exchange: Retrieve Mailbox Information",
+            u"Exchange: Move Emails",
+            u"Exchange: Move Contents and Delete Folder",
+            u"Exchange: Send Email"],
 
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [],
+
+        "datatables": [
+            u"exchange_email_information_dt",
+            u"exchange_dt_meeting_information"],
+
         "automatic_tasks": [],
         "scripts": [],
         "playbooks": []

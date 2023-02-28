@@ -47,7 +47,7 @@ class TestExchangeUtils:
         test_utils = exchange_interface(MOCK_OPTS, MOCK_INT_OPTS)
 
         # Test when no results are returned
-        emails1 = test_utils.create_email_function_results([])
+        emails1 = test_utils.create_email_function_results([], None)
         emails1_results = {
             'email_ids': [],
             'emails': {}
@@ -56,7 +56,7 @@ class TestExchangeUtils:
 
         # Test one email with no attachments
         emails2 = [MockEmail('1', 'Subject 1', 'Body', MockSender('Sen Der1', 'sender1@example.com'), [], b'abc')]
-        emails2_output = test_utils.create_email_function_results(emails2)
+        emails2_output = test_utils.create_email_function_results(emails2, None)
         emails2_results = {
             'email_ids': ['1'],
             'emails': {
@@ -77,7 +77,7 @@ class TestExchangeUtils:
         emails3 = emails2 + [MockEmail('weio', 'nzxcv', 'vds', MockSender('FIRST LAST', 'firstlast@example.com'),
                                        [MockAttachment(MockAttachmentId('22'), 'ATTCH', 'spreadsheet', 12,
                                                        str.encode('encode me'))], b'def')]
-        emails3_output = test_utils.create_email_function_results(emails3)
+        emails3_output = test_utils.create_email_function_results(emails3, None)
         emails3_results = {
             'email_ids': ['1', 'weio'],
             'emails': {
@@ -112,7 +112,7 @@ class TestExchangeUtils:
 
         # Test that function results only include email items
         emails4 = emails3 + [2, 'not an email', True]
-        emails4_output = test_utils.create_email_function_results(emails4)
+        emails4_output = test_utils.create_email_function_results(emails4, None)
         assert emails4_output == emails3_results
 
     @patch("fn_exchange.lib.exchange_utils.exchange_interface.connect_to_account")

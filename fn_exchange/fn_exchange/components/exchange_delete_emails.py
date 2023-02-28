@@ -67,7 +67,7 @@ class FunctionComponent(AppFunctionComponent):
             num_deleted = retrieved_emails.count()
 
             yield StatusMessage(f"Search email operation complete, {num_deleted} emails found")
-            results = interface.create_email_function_results(retrieved_emails)
+            results = interface.create_email_function_results(retrieved_emails, function_parameters.get("num_emails"))
 
             if num_deleted == 0:
                 msg = "Failed to perform operation as 0 emails were retrieved"

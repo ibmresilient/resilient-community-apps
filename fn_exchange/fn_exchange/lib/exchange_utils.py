@@ -106,7 +106,6 @@ class exchange_interface:
         """Query emails from the server using the specified attributes"""
 
         username   = function_parameters.get("username")
-        num_emails = function_parameters.get("num_emails")
         email_ids  = function_parameters.get("email_ids")
         src_folder = function_parameters.get("src_folder")
         start_date = function_parameters.get("start_date")
@@ -153,7 +152,7 @@ class exchange_interface:
 
         if sender:
             id_query = Q()
-            for email_id in email_ids.split(','):
+            for email_id in sender.split(','):
                 id_query = id_query | Q(sender=sender.strip()) 
             filtered_emails = filtered_emails.filter(id_query)
 
@@ -177,16 +176,12 @@ class exchange_interface:
         if has_attachments is not None:
             filtered_emails = filtered_emails.filter(has_attachments=has_attachments)
 
-        if not order_by_recency:
-            if order_by_recency:
-                filtered_emails = filtered_emails.order_by('-datetime_received')
-            else:
-                filtered_emails = filtered_emails.order_by('datetime_received')
+        if order_by_recency:
+            filtered_emails = filtered_emails.order_by('-datetime_received')
+        else:
+            filtered_emails = filtered_emails.order_by('datetime_received')
 
-        if num_emails:
-            filtered_emails = filtered_emails[:num_emails]
-
-        return filtered_emails
+        return filtered_emails.all()
 
 
     def create_email_message(self, function_parameters:dict) -> dict:
@@ -309,7 +304,7 @@ class exchange_interface:
 
         num_moved = retrieved_emails.count()
         self.log.info(f"Search email operation complete, {num_moved} emails found")
-        results = self.create_email_function_results(retrieved_emails)
+        results = self.create_email_function_results(retrieved_emails, None)
 
         self.log.info(f"Moving emails to {dst_folder}")
         # Retrieving folder object for source and destination folders 
@@ -319,7 +314,7 @@ class exchange_interface:
         return results, retrieved_emails
 
 
-    def create_email_function_results(self, emails) -> dict:
+    def create_email_function_results(self, emails, max_mails: int) -> dict:
         """
         Retrieved emails are of object type Messages. This function extracts import information
         from those objects and models a response in the form of a dictionary to be sent back
@@ -345,13 +340,18 @@ class exchange_interface:
                             'attachment_size': '8842',
                             'attachment_base64': 'attachment encoded in base 64'}}}
         """
+        mail_count = 0
         results = {
             'email_ids': [],
             'emails': {}}
+        max_mails = max_mails if max_mails else -1
 
         for email in emails:
             # Check to see if item is an email
             if isinstance(email, Message):
+                if mail_count == max_mails:
+                    break
+                mail_count += 1
                 results['email_ids'].append(email.message_id)
                 results['emails'][email.message_id] = {}
                 curr_email = results['emails'][email.message_id]
