@@ -503,7 +503,7 @@ cases = helper.findIncidents(query)
 
 if len(cases) == 0:
   # Create a suitable title for an incident based on the email
-    new_case_title = "Trusteer PUID {0} via mailbox {1}".format(trusteer_ppd_puid, emailmessage.inbound_mailbox)
+    new_case_title = "Trusteer PUID {0}<br> via mailbox {1}".format(trusteer_ppd_puid, emailmessage.inbound_mailbox)
     
     # A similar case does not already exist. Create a new case and associate the email with it.
     log.info(u"Creating new case {0}".format(new_case_title))
