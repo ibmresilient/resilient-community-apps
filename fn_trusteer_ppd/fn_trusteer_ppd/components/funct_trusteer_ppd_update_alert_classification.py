@@ -36,7 +36,7 @@ class FunctionComponent(AppFunctionComponent):
                                                             fn_inputs.trusteer_ppd_application_id,
                                                             fn_inputs.trusteer_ppd_feedback,
                                                             fn_inputs.trusteer_ppd_fraud_mo)
-
+                                                            
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)
