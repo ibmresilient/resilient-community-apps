@@ -39,54 +39,52 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        try:
-            # Get the function parameters:
-            shell_command = fn_inputs.network_utilities_shell_command  # text
-            shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
 
-            LOG.info("network_utilities_shell_command: %s", shell_command)
-            LOG.info("network_utilities_shell_params: %s", shell_params)
+        # Get the function parameters:
+        shell_command = fn_inputs.network_utilities_shell_command  # text
+        shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
 
-            validate_fields(["network_utilities_shell_command"], fn_inputs)
+        LOG.info(f"network_utilities_shell_command: {shell_command}")
+        LOG.info(f"network_utilities_shell_params: {shell_params}")
 
-            params_list = shell_params.split(",")
-            rendered_shell_params = {}
-            for i, param in enumerate(params_list):
-                param_name = f"shell_param{i+1}"
-                escaping = self.options.get("shell_escaping", "sh")
-                if escaping == "sh":
-                    rendered_shell_params[param_name] = sh_filter(param)
-                else:
-                    rendered_shell_params[param_name] = ps_filter(param)
+        validate_fields(["network_utilities_shell_command"], fn_inputs)
 
-            # Options keys are lowercase, so the shell command name needs to be lowercase
-            if shell_command:
-                shell_command = shell_command.lower()
+        params_list = shell_params.split(",")
+        rendered_shell_params = {}
+        for i, param in enumerate(params_list):
+            param_name = f"shell_param{i+1}"
+            escaping = self.options.get("shell_escaping", "sh")
+            if escaping == "sh":
+                rendered_shell_params[param_name] = sh_filter(param)
+            else:
+                rendered_shell_params[param_name] = ps_filter(param)
 
-            # Check if command is configured
-            if shell_command not in self.options:
-                if ':' in shell_command:
-                    raise ValueError("Syntax for a remote command '%s' was used but remote_shell was set to False"
-                                     % shell_command)
-                raise ValueError('%s command not configured' % shell_command)
+        # Options keys are lowercase, so the shell command name needs to be lowercase
+        if shell_command:
+            shell_command = shell_command.lower()
 
-            shell_command_base = self.options[shell_command].strip()
+        # Check if command is configured
+        if shell_command not in self.options:
+            if ':' in shell_command:
+                raise ValueError(f"Syntax for a remote command {shell_command} was used but remote_shell was set to False")
+            raise ValueError(f'{shell_command} command not configured')
 
-            # Previous version required parentheses around command for linux, this is for backwards compatability
-            shell_command_base = remove_punctuation(shell_command_base, "parentheses")
+        shell_command_base = self.options[shell_command].strip()
 
-            # Previous version required brackets around command for powershell, this is for backwards compatability
-            shell_command_base = remove_punctuation(shell_command_base, "brackets")
+        # Previous version required parentheses around command for linux, this is for backwards compatability
+        shell_command_base = remove_punctuation(shell_command_base, "parentheses")
+
+        # Previous version required brackets around command for powershell, this is for backwards compatability
+        shell_command_base = remove_punctuation(shell_command_base, "brackets")
 
 
-            run_cmd = RunCmd(None, shell_command_base, rendered_shell_params)
-            run_cmd.run_local_cmd()
+        run_cmd = RunCmd(None, shell_command_base, rendered_shell_params)
+        run_cmd.run_local_cmd()
 
-            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-            yield FunctionResult(run_cmd.make_result())
-        except Exception as e:
-            yield IntegrationError(e)
+        yield FunctionResult(run_cmd.make_result())
+
 
 class RunCmd():
     def __init__(self, remote, shell_command, rendered_shell_params):
@@ -106,14 +104,14 @@ class RunCmd():
         server_splits = remote.rsplit('@', 1) # get last separator to avoid '@' in passwords
         if len(server_splits) != 2:
             raise ValueError("Incorrect format for remote. Ex. username:password@server, "
-                             "'%s' was specified", remote)
+                             f"{remote} was specified")
 
         self.remote_server = server_splits[1]
 
         user_pswd_splits = server_splits[0].split(':')
         if len(user_pswd_splits) != 2:
             raise ValueError("Incorrect format for remote. Ex. username:password@server, "
-                             "'%s' was specified", remote)
+                             f"{remote} was specified")
 
         self.remote_user = user_pswd_splits[0]
         self.remote_password = user_pswd_splits[1]
@@ -123,7 +121,7 @@ class RunCmd():
         shell_command_base = render(self.shell_command, self.rendered_shell_params)
 
         self.commandline = os.path.expandvars(shell_command_base)
-        LOG.debug("local cmd: %s", self.commandline)
+        LOG.debug(f"local cmd: {self.commandline}")
         # Set up the environment
         env = os.environ.copy()
 

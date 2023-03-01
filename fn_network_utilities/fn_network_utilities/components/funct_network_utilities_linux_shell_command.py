@@ -37,68 +37,65 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        try:
-            # Get the function parameters:
-            shell_command = fn_inputs.network_utilities_shell_command  # text
-            shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
-            remote_computer = getattr(fn_inputs, "network_utilities_remote_computer", None) #text
+        # Get the function parameters:
+        shell_command = fn_inputs.network_utilities_shell_command  # text
+        shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
+        remote_computer = getattr(fn_inputs, "network_utilities_remote_computer", None) #text
 
-            LOG.info("network_utilities_shell_command: %s", shell_command)
-            LOG.info("network_utilities_shell_params: %s", shell_params)
-            LOG.info("network_utilities_remote_computer: %s", remote_computer)
+        LOG.info(f"network_utilities_shell_command: {shell_command}")
+        LOG.info(f"network_utilities_shell_params: {shell_params}")
+        LOG.info(f"network_utilities_remote_computer: {remote_computer}")
 
-            validate_fields(["network_utilities_shell_command"], fn_inputs)
+        validate_fields(["network_utilities_shell_command"], fn_inputs)
 
 
-            params_list = shell_params.split(",")
-            rendered_shell_params = {}
-            for i, param in enumerate(params_list):
-                param_name = f"shell_param{i+1}"
-                rendered_shell_params[param_name] = sh_filter(param)
+        params_list = shell_params.split(",")
+        rendered_shell_params = {}
+        for i, param in enumerate(params_list):
+            param_name = f"shell_param{i+1}"
+            rendered_shell_params[param_name] = sh_filter(param)
 
-            # Options keys are lowercase, so the shell command name needs to be lowercase
-            if shell_command:
-                shell_command = shell_command.lower()
+        # Options keys are lowercase, so the shell command name needs to be lowercase
+        if shell_command:
+            shell_command = shell_command.lower()
 
-            # Get the remote computer and the remote command
-            colon_split = shell_command.split(':')
-            if len(colon_split) != 2 and remote_computer is None:
-                raise ValueError("Remote commands must be of the format remote_command_name:remote_computer_name"
-                                    "or have remote_computer defined, '%s' was specified" % shell_command)
-            elif len(colon_split) == 2:
-                if remote_computer:
-                    raise ValueError('A remote computer is configured in both network_utilities_remote_computer and network_utilities_shell_command. Choose one to use.')
-                elif self.options.get(colon_split[1]) is None:
-                    raise ValueError('The remote computer %s is not configured' % colon_split[1])
-                else:
-                    remote = self.options.get(colon_split[1]).strip()
+        # Get the remote computer and the remote command
+        colon_split = shell_command.split(':')
+        if len(colon_split) != 2 and remote_computer is None:
+            raise ValueError(f"Remote commands must be of the format remote_command_name:remote_computer_name"
+                                "or have remote_computer defined, {shell_command} was specified")
+        elif len(colon_split) == 2:
+            if remote_computer:
+                raise ValueError('A remote computer is configured in both network_utilities_remote_computer and network_utilities_shell_command. Choose one to use.')
+            elif self.options.get(colon_split[1]) is None:
+                raise ValueError(f'The remote computer {colon_split[1]} is not configured')
             else:
-                remote = remote_computer
+                remote = self.options.get(colon_split[1]).strip()
+        else:
+            remote = remote_computer
 
-            shell_command = colon_split[0].strip()
+        shell_command = colon_split[0].strip()
 
-            # Previous version required parentheses around remote computer, this is for backwards compatability
-            remote = remove_punctuation(remote, "parentheses")
+        # Previous version required parentheses around remote computer, this is for backwards compatability
+        remote = remove_punctuation(remote, "parentheses")
 
-            # Check if command is configured
-            if shell_command not in self.options:
-                if ':' in shell_command:
-                    raise ValueError(f"Syntax for a remote command {shell_command} was used but remote_shell was set to False")
-                raise ValueError(f"{shell_command} command not configured")
+        # Check if command is configured
+        if shell_command not in self.options:
+            if ':' in shell_command:
+                raise ValueError(f"Syntax for a remote command {shell_command} was used but remote_shell was set to False")
+            raise ValueError(f"{shell_command} command not configured")
 
-            shell_command_base = self.options[shell_command].strip()
+        shell_command_base = self.options[shell_command].strip()
 
-            # Previous version required parentheses around command, this is for backwards compatability
-            shell_command_base = remove_punctuation(shell_command_base, "parentheses")
+        # Previous version required parentheses around command, this is for backwards compatability
+        shell_command_base = remove_punctuation(shell_command_base, "parentheses")
 
-            run_cmd = RunCmd(remote, shell_command_base.strip(), rendered_shell_params)
-            run_cmd.run_remote_linux()
+        run_cmd = RunCmd(remote, shell_command_base.strip(), rendered_shell_params)
+        run_cmd.run_remote_linux()
 
-            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-            yield FunctionResult(run_cmd.make_result())
-        except Exception as e:
-            yield IntegrationError(e)
+        yield FunctionResult(run_cmd.make_result())
 
 class RunCmd():
     def __init__(self, remote, shell_command, rendered_shell_params):
@@ -118,14 +115,14 @@ class RunCmd():
         server_splits = remote.rsplit('@', 1) # get last separator to avoid '@' in passwords
         if len(server_splits) != 2:
             raise ValueError("Incorrect format for remote. Ex. username:password@server, "
-                             "'%s' was specified", remote)
+                             f"{remote} was specified")
 
         self.remote_server = server_splits[1]
 
         user_pswd_splits = server_splits[0].split(':')
         if len(user_pswd_splits) != 2:
             raise ValueError("Incorrect format for remote. Ex. username:password@server, "
-                             "'%s' was specified", remote)
+                             f"{remote} was specified")
 
         self.remote_user = user_pswd_splits[0]
         self.remote_password = user_pswd_splits[1]
@@ -150,8 +147,7 @@ class RunCmd():
         except Exception as err:
             self.stderrdata = str(err)
             LOG.error(str(err))
-            LOG.error("Unable to run cmd: %s on remote server: %s", self.commandline,
-                                                                    self.remote_server)
+            LOG.error(f"Unable to run cmd: {self.commandline} on remote server: {self.remote_server}")
 
 
     def make_result(self):
