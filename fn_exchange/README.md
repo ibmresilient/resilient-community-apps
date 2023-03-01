@@ -21,24 +21,27 @@
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
+  - [Key Features](#key-features)
 - [Requirements](#requirements)
   - [SOAR platform](#soar-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
-  - [Endpoint Developed With](#endpoint-developed-with)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+  - [Custom Layouts](#custom-layouts)
 - [Function - Exchange Create Meeting](#function---exchange-create-meeting)
 - [Function - Exchange Delete Emails](#function---exchange-delete-emails)
 - [Function - Exchange Find Emails](#function---exchange-find-emails)
 - [Function - Exchange Get Mailbox Info](#function---exchange-get-mailbox-info)
 - [Function - Exchange Move Emails](#function---exchange-move-emails)
-- [Function - Exchange Move Folder Contents and Delete Folder](#function---exchange-move-folder-contents-and-delete-folder)
 - [Function - Exchange Send Email](#function---exchange-send-email)
+- [Data Table - Email Information](#data-table---email-information)
+- [Data Table - Meeting Information](#data-table---meeting-information)
 - [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
+
 ---
 
 ## Release Notes
@@ -48,11 +51,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| v1.0.4 | September 2022 | Bugfix on Selftest |
-| v1.0.3 | June 2022 | Add support for Python 3.9. |
-| v1.0.2 | June 2021 | Fix for ``selftest``. |
-| v1.0.1 | December 2020 | Added App Host support, Added proxy support. |
-| v1.0.0 | August 2018 | Initial Release. |
+| 1.0.0 | MM/YYYY | Initial Release | <!-- ::CHANGE_ME:: -->
 
 ---
 
@@ -63,7 +62,7 @@
 -->
 **Integrate with Microsoft Exchange email and meeting functionality**
 
- ![screenshot: main](./doc/screenshots/main.png)
+ ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
 
 This package provides functions that can be used to access Microsoft 
 Exchange email and meeting capabilities. The package provided has the following capabilities:<br>
@@ -82,23 +81,32 @@ Exchange email and meeting capabilities. The package provided has the following 
 
 - Send email to a list of recipients
 
+### Key Features
+<!--
+  List the Key Features of the Integration
+-->
+* Key Feature 1 <!-- ::CHANGE_ME:: -->
+* Key Feature 2 <!-- ::CHANGE_ME:: -->
+* Key Feature 3 <!-- ::CHANGE_ME:: -->
+
 ---
 
 ## Requirements
 <!--
   List any Requirements 
 --> 
+<!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, App Host and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
-If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `43.1.49`.
+If deploying to a SOAR platform with an Edge Gateway, the requirements are:
+* SOAR platform >= `45.0.7899`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `43.1.49`.
+* SOAR platform >= `45.0.7899`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -106,67 +114,67 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-
+  <!-- ::CHANGE_ME:: -->
 
 The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
-* Cloud Pak is configured with an App Host.
+* IBM Cloud Pak for Security >= `1.8`.
+* Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 The following Cloud Pak guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does** support a proxy server.
+The app **does/does not** <!-- ::CHANGE_ME:: --> support a proxy server.
 
 ### Python Environment
-Python 2.7, Python 3.6 and Python 3.9 are supported.
+Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* exchangelib
-* exchangelib==2.2.0; python_version<"3"
+* exchangelib ~= 4.6.2;python_version=='3.6'
+* exchangelib ~= 4.9.0;python_version>='3.9'
 * resilient_circuits>=45.0.0
 
-### Endpoint Developed With
+### <!-- ::CHANGE_ME:: --> Development Version
 
-This app has been implemented using **Microsoft Exchange Server**
+This app has been implemented using:
+| Product Name | Product Version | API URL | API Version |
+| ------------ | --------------- | ------- | ----------- |
+| <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> |
+
+#### Prerequisites
+<!--
+List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
+-->
+* Prereq A <!-- ::CHANGE_ME:: -->
+* Prereq B <!-- ::CHANGE_ME:: -->
+* Prereq C <!-- ::CHANGE_ME:: -->
 
 #### Configuration
-* The `exchange_folder_path` or `exchange_destination_folder_path` fields may be difficult to configure and are dependent on the Exchange environment. Upon entering an invalid folder path, a tree structure of the folder hierarchy will be printed. Here is an example:
+<!--
+List any steps that are needed to configure the endpoint to use this app.
+-->
+* Config A <!-- ::CHANGE_ME:: -->
+* Config B <!-- ::CHANGE_ME:: -->
+* Config C <!-- ::CHANGE_ME:: -->
 
- ![screenshot: fn-exchange-folder-path ](./doc/screenshots/fn-exchange-folder-path.png)
-
-* Example folder paths given this folder structure
-could be any path following the root path:
-  - Top of Information Store/Inbox
-  - Top of Information Store/Deleted Items
-  - Finder/Unread Mail
-  - Finder
-
-* Additionally, if the `exchange_search_subfolders` path is set to true, every folder in its branch will be included in the query. For example if the specified folder is **Recoverable Items**, then the searched folders would be:
-  - Recoverable Items
-  - Recoverable Items/Deletions
-  - Recoverable Items/Purges
-  - Recoverable Items/Versions
-
-* To search folder paths, the specified account in config file must have access to the searched folders. Folders that contain `/` or `,` must be wrapped in quotes.
-  - Example/"One/With/Quotes"/Folder
-  - Example/"One, with, commas"/Folder
-  - Example/"One/with, both"/Folder
-
-* Multiple folder paths can be specified by separating them with commas and following the above rules.
-
-* For more information on specific function inputs, check the tooltips.
+#### Permissions
+<!--
+List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
+-->
+* Permission A <!-- ::CHANGE_ME:: -->
+* Permission B <!-- ::CHANGE_ME:: -->
+* Permission C <!-- ::CHANGE_ME:: -->
 
 
 ---
@@ -182,17 +190,30 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **default_folder_path** | Yes | `Top of Information Store/Inbox` |  *Some folder path after root Multiple folder paths must be separated by commas.* |
-| **email** | Yes | `admin@example.com` | *default account to send emails and create meetings if one was not specified. Specifying an account that is not this one will require impersonation access.* |
-| **password** | Yes | `password` |  *Password of Admin account.*  |
-| **server** | Yes | `example.com` |  *Exchange server DNS name or ip address.* |
-| **username** | Yes | `domain\username` | *Admin account with mailbox access to other accounts.* |
-| **verify_cert** | Yes | `True` | *Use a CA cert for access to an Exchange server.* |
+| **default_folder_path** | Yes | `Top of Information Store/Inbox` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **email** | Yes | `admin@example.com` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **password** | Yes | `password` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **server** | Yes | `example.com` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **username** | Yes | `domain\username` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **verify_cert** | Yes | `True` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+
+### Custom Layouts
+<!--
+  Use this section to provide guidance on where the user should add any custom fields and data tables.
+  You may wish to recommend a new incident tab.
+  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
+-->
+* Import the Data Tables and Custom Fields like the screenshot below:
+
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) <!-- ::CHANGE_ME:: -->
+
 
 ---
 
 ## Function - Exchange Create Meeting
 Creates a meeting and sends out invitation to required attendees and optional attendees.
+
+ ![screenshot: fn-exchange-create-meeting ](./doc/screenshots/fn-exchange-create-meeting.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -200,8 +221,10 @@ Creates a meeting and sends out invitation to required attendees and optional at
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exchange_email` | `text` | Yes | `user@example.com` | Email account that is used |
+| `exchange_is_online_meeting` | `boolean` | No | `-` | Specifies if the location provided in the above filed is a link or not |
 | `exchange_meeting_body` | `text` | No | `Meeting Body` | Body of exchange meeting |
 | `exchange_meeting_end_time` | `datetimepicker` | Yes | `-` | When the meeting should end |
+| `exchange_meeting_location` | `text` | No | `https://meeting.room.com/meet/johnDoe` | If the meeting is conducted online, then the URL to the Room. Or the Name of the Physical location of the Meeting Room |
 | `exchange_meeting_start_time` | `datetimepicker` | Yes | `-` | When the meeting should start |
 | `exchange_meeting_subject` | `text` | No | `Meeting Subject` | Subject of exchange meeting |
 | `exchange_optional_attendees` | `text` | No | `user1@example.com,user2@example.com` | Comma separated list of optional attendees |
@@ -238,9 +261,14 @@ inputs.exchange_email = rule.properties.exchange_email if rule.properties.exchan
 inputs.exchange_meeting_start_time = rule.properties.exchange_meeting_start_time if rule.properties.exchange_meeting_start_time is not None else inputs.exchange_meeting_start_time
 inputs.exchange_meeting_end_time = rule.properties.exchange_meeting_end_time if rule.properties.exchange_meeting_end_time is not None else inputs.exchange_meeting_end_time
 inputs.exchange_meeting_subject = rule.properties.exchange_meeting_subject if rule.properties.exchange_meeting_subject is not None else inputs.exchange_meeting_subject
-inputs.exchange_meeting_body = rule.properties.exchange_meeting_body if rule.properties.exchange_meeting_body is not None else inputs.exchange_meeting_body
 inputs.exchange_required_attendees = rule.properties.exchange_required_attendees if rule.properties.exchange_required_attendees is not None else inputs.exchange_required_attendees
 inputs.exchange_optional_attendees = rule.properties.exchange_optional_attendees if rule.properties.exchange_optional_attendees is not None else inputs.exchange_optional_attendees
+inputs.exchange_meeting_location = rule.properties.exchange_meeting_location if rule.properties.exchange_meeting_location is not None else inputs.exchange_meeting_location
+inputs.exchange_is_online_meeting = rule.properties.exchange_is_online_meeting if rule.properties.exchange_is_online_meeting is not None else inputs.exchange_is_online_meeting
+
+if rule.properties.exchange_meeting_body and rule.properties.exchange_meeting_body.content:
+  inputs.exchange_meeting_body = inputs.exchange_meeting_body if rule.properties.exchange_meeting_body.content is None else rule.properties.exchange_meeting_body.content
+  
 ```
 
 </p>
@@ -250,27 +278,65 @@ inputs.exchange_optional_attendees = rule.properties.exchange_optional_attendees
 <p>
 
 ```python
-# results = {
-#                 'required_attendees':required1@example.com,required2@example.com
-#                 'optional_attendees': optional1@example.com,...
-#                 'sender': sender@example.com
-#                 'subject': meeting subject
-#                 'body': meeting body
-#                 'start_time': epoch start time
-#                 'end_time': epoch end time
-#             }
-from java.util import Date
+'''
+Results:
+--------
+   'required_attendees':required1@example.com,required2@example.com
+   'optional_attendees': optional1@example.com,...
+   'sender': sender@example.com
+   'subject': meeting subject
+   'body': meeting body
+   'start_time': 1655938800000
+   'end_time': 1656025200000
+   'location': https://meeting.room.com/meet/johndoe
+'''
+enable_write_to_datatables = True
 
-start_time = Date(results.start_time).toString()
-end_time = Date(results.end_time).toString()
-noteText = '''Meeting created from Exchange Create Meeting
-Subject: {}
-From {} to {}
-Required Attendees: {}
-Optional Attendees: {}
-Body: {}'''.format(results.subject, start_time, end_time, results.required_attendees, results.optional_attendees, results.body)
+from datetime import datetime
 
-incident.addNote(noteText)
+content = results.get("content")
+success = results.get("success")
+fail_reason = results.get("reason")
+
+if not success:
+  text = u"Unable to create meeting"
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+  noteText = helper.createRichText(text)
+  incident.addNote(noteText)
+    
+else:
+  required_attendees = ",".join(content.get('required_attendees')) if content.get('required_attendees') else ""
+  optional_attendees = ",".join(content.get('optional_attendees')) if content.get('optional_attendees') else ""
+  if content.get("online_meeting") is True:
+    location = u"""<a href='{0}'>link</a>""".format(content.get('location')) if content.get("location") else ""
+  else:
+    location = content.get('location') if content.get("location") else ""
+
+  if enable_write_to_datatables:
+    message_row = incident.addRow("exchange_dt_meeting_information")
+    message_row.exchange_dt_created_time = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+    message_row.exchange_dt_meeting_subject = content.get('subject')
+    message_row.exchange_dt_start_time = content.get('start_time')
+    message_row.exchange_dt_end_time = content.get('end_time')
+    message_row.exchange_dt_mandatory_attendees = required_attendees
+    message_row.exchange_dt_optional_attendees = optional_attendees
+    message_row.exchange_dt_meeting_location = helper.createRichText(location)
+
+  else:
+    text  =  "<b>Meeting created from Exchange Create Meeting:</b><br />"
+    text += f"<br />Subject: {content.get('subject')}"
+    text += f"<br />Start time: {content.get('start_time')}"
+    text += f"<br />End time: {content.get('end_time')}"
+    text += f"<br />Timezone: {content.get('timezone')}"
+    text += f"<br />Required Attendees: {required_attendees}" 
+    text += f"<br />Optional Attendees: {optional_attendees}" 
+    text += f"<br />Body: {content.get('body')}"
+    text += f"<br />Location: {location}"
+    text += f"<br />Online Meeting: {content.get('online_meeting')}"
+    noteText = helper.createRichText(text)
+    incident.addNote(noteText)
+
 ```
 
 </p>
@@ -279,6 +345,8 @@ incident.addNote(noteText)
 ---
 ## Function - Exchange Delete Emails
 Delete emails with the specified query parameters.
+
+ ![screenshot: fn-exchange-delete-emails ](./doc/screenshots/fn-exchange-delete-emails.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -341,13 +409,15 @@ inputs.exchange_hard_delete = inputs.exchange_hard_delete if rule.properties.exc
 inputs.exchange_email_ids = inputs.exchange_email_ids if rule.properties.exchange_email_ids is None else rule.properties.exchange_email_ids
 inputs.exchange_sender = inputs.exchange_sender if rule.properties.exchange_sender is None else rule.properties.exchange_sender
 inputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject
-inputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body
 inputs.exchange_start_date = inputs.exchange_start_date if rule.properties.exchange_start_date is None else rule.properties.exchange_start_date
 inputs.exchange_end_date = inputs.exchange_end_date if rule.properties.exchange_end_date is None else rule.properties.exchange_end_date
 inputs.exchange_has_attachments = inputs.exchange_has_attachments if rule.properties.exchange_has_attachments is None else rule.properties.exchange_has_attachments
 inputs.exchange_order_by_recency = inputs.exchange_order_by_recency if rule.properties.exchange_order_by_recency is None else rule.properties.exchange_order_by_recency
 inputs.exchange_num_emails = inputs.exchange_num_emails if rule.properties.exchange_num_emails is None else rule.properties.exchange_num_emails
 inputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.properties.exchange_search_subfolders is None else rule.properties.exchange_search_subfolders
+
+if rule.properties.exchange_message_body and rule.properties.exchange_message_body.content:
+  inputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body.content is None else rule.properties.exchange_message_body.content
 ```
 
 </p>
@@ -357,86 +427,86 @@ inputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.pr
 <p>
 
 ```python
- # Example function results
-        # results = {
-        #     'email_ids': ['id1', 'idN'],
-        #     'emails': {
-        #         'id1': {
-        #             'subject': 'Email Subject',
-        #             'body': 'Subject body in HTML',
-        #             'mime_content': mime content of message
-        #             'sender_name': 'FirstName LastName',
-        #             'sender_email': 'example@example.com',
-        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
-        #             'attachments': {
-        #                 'attachment_id1': {
-        #                     'attachment_name': 'attachment.xslx',
-        #                     'attachment_content_type': 'spreadsheet',
-        #                     'attachment_size': '8842',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 },
-        #                 'attachment_id2': {
-        #                     'attachment_name': '...',
-        #                     'attachment_content_type': '...',
-        #                     'attachment_size': '...',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 }
-        #             }
-        #         },
-        #         'idN': {
-        #             'subject': 'Email Subject',
-        #             'body': 'Subject body in HTML',
-        #             'mime_content': mime content of message
-        #             'sender_name': 'FirstName LastName',
-        #             'sender_email': 'example@example.com',
-        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
-        #             'attachments': {
-        #                 'attachment_id1': {
-        #                     'attachment_name': 'attachment.xslx',
-        #                     'attachment_content_type': 'spreadsheet',
-        #                     'attachment_size': '8842',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 },
-        #                 'attachment_id2': {
-        #                     'attachment_name': '...',
-        #                     'attachment_content_type': '...',
-        #                     'attachment_size': '...',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 }
-        #             }
-        #         }
-        #     }
-        # }
-        
-# Get email ids
-email_ids = results.email_ids
-# Get emails
-emails = results.emails
+''' 
+Example results:
+---------------
+ results = {
+     'email_ids': ['id1', 'idN'],
+     'emails': {
+         'id1': {
+             'subject': 'Email Subject',
+             'body': 'Subject body in HTML',
+             'mime_content': mime content of message
+             'sender_name': 'FirstName LastName',
+             'sender_email': 'example@example.com',
+             'attachment_ids': ['attachment_id1', 'attachment_id2'],
+             'attachments': {
 
-# Loop through all queried emails
-for email_id in email_ids:
-  # Get email that corresponds to email_id
-  email = emails[email_id]
-  # Create artifacts from sender information that isn't None
-  if email['sender_name']:
-    incident.addArtifact('Email Sender Name', email['sender_name'], 'Sender name for email {}'.format(email_id))
-  if email['sender_email']:
-    incident.addArtifact('Email Sender', email['sender_email'], 'Sender email address for email {}'.format(email_id))
-  if email['subject']:
-    incident.addArtifact('Email Subject', email['subject'], 'Email subject for email {}'.format(email_id))
-  if email['body']:
-    incident.addArtifact('Email Body', email['body'], 'Email body in HTML for email {}'.format(email_id))
+                 'attachment_id1': {
+                     'attachment_name': 'attachment.xslx',
+                     'attachment_content_type': 'spreadsheet',
+                     'attachment_size': '8842',
+                     'attachment_base64': 'attachment encoded in base 64'},
+
+                 'attachment_id2': {
+                     'attachment_name': '...',
+                     'attachment_content_type': '...',
+                     'attachment_size': '...',
+                     'attachment_base64': 'attachment encoded in base 64'}}},
+'''
+
+# Enable to add all information to a datatable found in the Exchange tab.
+enable_write_to_datatables  = True
+# Enable to add attachments found as a base64 encoded value. This option only works when enable_write_to_datatables is set to False
+enable_add_attachment_value = False
+
+
+from datetime import datetime
+
+fail_reason = results.get("reason")
+content   = results.get("content")
+emails    = content.get("emails")
+email_ids = content.get("email_ids")
+
+if not results.get("success"):
+  text = u"Unable to delete emails"
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+  noteText = helper.createRichText(text)
+  incident.addNote(noteText)
+
+else:
+  for email_id in email_ids:
+    email = emails.get(email_id)
+    attachment_ids = email.get('attachment_ids')
     
-  # Loop through attachments and create artifacts and notes for them
-  attachment_ids = email['attachment_ids']
-  attachments = email['attachments']
-  for attachment_id in attachment_ids:
-    attachment = attachments[attachment_id]
-    incident.addArtifact('Email Attachment Name', attachment['attachment_name'], 'Attachment name for attachment {} from email {}'.format(attachment_id, email_id))
-    
-    # Add note
-    noteText = 'base64 attachment of {} from email {}: \n{}'.format(attachment['attachment_name'], email_id, attachment['attachment_base64'])
-    incident.addNote(noteText)
+    if enable_write_to_datatables:
+      message_row = incident.addRow("exchange_email_information_dt")
+      message_row.exchange_date_of_retrieval = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+      message_row.exchange_dt_message_id = email_id 
+      message_row.exchange_dt_sender_name = email.get("sender_name", "-")
+      message_row.exchange_dt_sender_email = email.get("sender_email", "-")
+      message_row.exchange_dt_email_status = "Deleted"
+      message_row.exchange_dt_message_subject = email.get("subject", "-")
+      message_row.exchange_dt_count_attachments = len(attachment_ids)
+
+    else:
+      attachments = email.get('attachments')
+      if email.get("sender_name"):
+        incident.addArtifact('Email Sender Name', email['sender_name'], 'Sender name for email {}'.format(email_id))
+      if email.get("sender_email"):
+        incident.addArtifact('Email Sender', email['sender_email'], 'Sender email address for email {}'.format(email_id))
+      if email.get("subject"):
+        incident.addArtifact('Email Subject', email['subject'], 'Email subject for email {}'.format(email_id))
+      if email.get("body"):
+        incident.addArtifact('Email Body', email['body'], 'Email body in HTML for email {}'.format(email_id))
+
+      for attachment_id in attachment_ids:
+        attachment = attachments.get(attachment_id)
+        incident.addArtifact('Email Attachment Name', attachment['attachment_name'], 'Attachment name for attachment {} from email {}'.format(attachment_id, email_id))
+        if enable_add_attachment_value:
+          incident.addArtifact('Email Attachment', attachment['attachment_base64'], 'Attachment file {} base64 encoded : {}'.format(attachment['attachment_name'], attachment['attachment_base64']))
+
 ```
 
 </p>
@@ -445,6 +515,8 @@ for email_id in email_ids:
 ---
 ## Function - Exchange Find Emails
 Find emails with the specified parameters.
+
+ ![screenshot: fn-exchange-find-emails ](./doc/screenshots/fn-exchange-find-emails.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -505,13 +577,15 @@ inputs.exchange_folder_path = inputs.exchange_folder_path if rule.properties.exc
 inputs.exchange_email_ids = inputs.exchange_email_ids if rule.properties.exchange_email_ids is None else rule.properties.exchange_email_ids
 inputs.exchange_sender = inputs.exchange_sender if rule.properties.exchange_sender is None else rule.properties.exchange_sender
 inputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject
-inputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body
 inputs.exchange_start_date = inputs.exchange_start_date if rule.properties.exchange_start_date is None else rule.properties.exchange_start_date
 inputs.exchange_end_date = inputs.exchange_end_date if rule.properties.exchange_end_date is None else rule.properties.exchange_end_date
 inputs.exchange_has_attachments = inputs.exchange_has_attachments if rule.properties.exchange_has_attachments is None else rule.properties.exchange_has_attachments
 inputs.exchange_order_by_recency = inputs.exchange_order_by_recency if rule.properties.exchange_order_by_recency is None else rule.properties.exchange_order_by_recency
 inputs.exchange_num_emails = inputs.exchange_num_emails if rule.properties.exchange_num_emails is None else rule.properties.exchange_num_emails
 inputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.properties.exchange_search_subfolders is None else rule.properties.exchange_search_subfolders
+
+if rule.properties.exchange_message_body and rule.properties.exchange_message_body.content:
+  inputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body.content is None else rule.properties.exchange_message_body
 ```
 
 </p>
@@ -521,86 +595,87 @@ inputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.pr
 <p>
 
 ```python
-# Example function results
-        # results = {
-        #     'email_ids': ['id1', 'idN'],
-        #     'emails': {
-        #         'id1': {
-        #             'subject': 'Email Subject',
-        #             'body': 'Subject body in HTML',
-        #             'mime_content': mime content of message
-        #             'sender_name': 'FirstName LastName',
-        #             'sender_email': 'example@example.com',
-        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
-        #             'attachments': {
-        #                 'attachment_id1': {
-        #                     'attachment_name': 'attachment.xslx',
-        #                     'attachment_content_type': 'spreadsheet',
-        #                     'attachment_size': '8842',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 },
-        #                 'attachment_id2': {
-        #                     'attachment_name': '...',
-        #                     'attachment_content_type': '...',
-        #                     'attachment_size': '...',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 }
-        #             }
-        #         },
-        #         'idN': {
-        #             'subject': 'Email Subject',
-        #             'body': 'Subject body in HTML',
-        #             'mime_content': mime content of message
-        #             'sender_name': 'FirstName LastName',
-        #             'sender_email': 'example@example.com',
-        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
-        #             'attachments': {
-        #                 'attachment_id1': {
-        #                     'attachment_name': 'attachment.xslx',
-        #                     'attachment_content_type': 'spreadsheet',
-        #                     'attachment_size': '8842',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 },
-        #                 'attachment_id2': {
-        #                     'attachment_name': '...',
-        #                     'attachment_content_type': '...',
-        #                     'attachment_size': '...',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 }
-        #             }
-        #         }
-        #     }
-        # }
-        
-# Get email ids
-email_ids = results.email_ids
-# Get emails
-emails = results.emails
+'''
 
-# Loop through all queried emails
-for email_id in email_ids:
-  # Get email that corresponds to email_id
-  email = emails[email_id]
-  # Create artifacts from sender information that isn't None
-  if email['sender_name']:
-    incident.addArtifact('Email Sender Name', email['sender_name'], 'Sender name for email {}'.format(email_id))
-  if email['sender_email']:
-    incident.addArtifact('Email Sender', email['sender_email'], 'Sender email address for email {}'.format(email_id))
-  if email['subject']:
-    incident.addArtifact('Email Subject', email['subject'], 'Email subject for email {}'.format(email_id))
-  if email['body']:
-    incident.addArtifact('Email Body', email['body'], 'Email body in HTML for email {}'.format(email_id))
+Example function results:
+------------------------
+    {
+      'email_ids': ['id1', 'idN'],
+      'emails': {
+          'id1': {
+              'subject': 'Email Subject',
+              'body': 'Subject body in HTML',
+              'mime_content': mime content of message
+              'sender_name': 'FirstName LastName',
+              'sender_email': 'example@example.com',
+              'attachment_ids': ['attachment_id1', 'attachment_id2'],
+              'attachments': {
+                  'attachment_id1': {
+                      'attachment_name': 'attachment.xslx',
+                      'attachment_content_type': 'spreadsheet',
+                      'attachment_size': '8842',
+                      'attachment_base64': 'attachment encoded in base 64'},
+                  'attachment_id2': {
+                      'attachment_name': '...',
+                      'attachment_content_type': '...',
+                      'attachment_size': '...',
+                      'attachment_base64': 'attachment encoded in base 64'}}},
+
+'''
+
+# Enable to add all information to a datatable found in the Exchange tab.
+enable_write_to_datatables  = True
+# Enable to add attachments found as a base64 encoded value. This option only works when enable_write_to_datatables is set to False
+enable_add_attachment_value = False
+
+
+from datetime import datetime
+
+fail_reason = results.get("reason")
+inputs    = results.get("inputs")
+content   = results.get("content")
+emails    = content.get("emails")
+email_ids = content.get("email_ids")
+
+if not results.get("success"):
+  text = u"Unable to find emails"
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+  noteText = helper.createRichText(text)
+  incident.addNote(noteText)
+
+else:
+  for email_id in email_ids:
+    email = emails.get(email_id)
+    attachment_ids = email.get('attachment_ids')
     
-  # Loop through attachments and create artifacts and notes for them
-  attachment_ids = email['attachment_ids']
-  attachments = email['attachments']
-  for attachment_id in attachment_ids:
-    attachment = attachments[attachment_id]
-    incident.addArtifact('Email Attachment Name', attachment['attachment_name'], 'Attachment name for attachment {} from email {}'.format(attachment_id, email_id))
-    
-    # Add note
-    noteText = 'base64 attachment of {} from email {}: \n{}'.format(attachment['attachment_name'], email_id, attachment['attachment_base64'])
-    incident.addNote(noteText)
+    if enable_write_to_datatables:
+      message_row = incident.addRow("exchange_email_information_dt")
+      message_row.exchange_date_of_retrieval = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+      message_row.exchange_dt_message_id = email_id 
+      message_row.exchange_dt_recipient_email = email.get("sender_email", "-")
+      message_row.exchange_dt_sender_email = inputs.get("inputs").get("exchange_email")
+      message_row.exchange_dt_email_status = "Queried"
+      message_row.exchange_dt_message_subject = email.get("subject", "-")
+      message_row.exchange_dt_count_attachments = len(attachment_ids)
+
+    else:
+      attachments = email.get('attachments')
+      if email.get("sender_name"):
+        incident.addArtifact('Email Sender Name', email['sender_name'], 'Sender name for email {}'.format(email_id))
+      if email.get("sender_email"):
+        incident.addArtifact('Email Sender', email['sender_email'], 'Sender email address for email {}'.format(email_id))
+      if email.get("subject"):
+        incident.addArtifact('Email Subject', email['subject'], 'Email subject for email {}'.format(email_id))
+      if email.get("body"):
+        incident.addArtifact('Email Body', email['body'], 'Email body in HTML for email {}'.format(email_id))
+
+      for attachment_id in attachment_ids:
+        attachment = attachments.get(attachment_id)
+        incident.addArtifact('Email Attachment Name', attachment['attachment_name'], 'Attachment name for attachment {} from email {}'.format(attachment_id, email_id))
+        if enable_add_attachment_value:
+          incident.addArtifact('Email Attachment', attachment['attachment_base64'], 'Attachment file {} base64 encoded : {}'.format(attachment['attachment_name'], attachment['attachment_base64']))
+
 ```
 
 </p>
@@ -609,6 +684,8 @@ for email_id in email_ids:
 ---
 ## Function - Exchange Get Mailbox Info
 Get mailbox info for specified email.
+
+ ![screenshot: fn-exchange-get-mailbox-info ](./doc/screenshots/fn-exchange-get-mailbox-info.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -652,16 +729,38 @@ inputs.exchange_get_email = inputs.exchange_get_email if rule.properties.exchang
 <p>
 
 ```python
-# Example results
-# results = {
-#   'name': 'firstname lastname',
-#   'email_address': 'user@example.com',
-#   'routing_type': 'SMTP',
-#   'mailbox_type': 'Mailbox'
-# }
+'''
+Example
+-------
+response = {
+  'name': 'firstname lastname',
+  'email_address': 'user@example.com',
+  'routing_type': 'SMTP',
+  'mailbox_type': 'Mailbox'}
 
-incident.addArtifact('Email Sender', results.email_address, 'Email address from Exchange Get Mailbox Info')
-incident.addArtifact('Email Sender Name', results.name, 'Email sender name from Exchange Get Mailbox Info')
+'''
+
+content = results.get("content")
+
+if not results.get("success")
+  text = u"Unable to create meeting"
+  fail_reason = results.get("reason")
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
+else:
+
+  incident.addArtifact('Email Sender', content.get('email_address'), 'Email address from Exchange Get Mailbox Info')
+  incident.addArtifact('Email Sender Name', content.get('name'), 'Email sender name from Exchange Get Mailbox Info')
+  
+  text  =  "<b>Microsoft Exchange Mailbox Information:</b><br />"
+  text += f"<br />Name: {content.get('name')}"
+  text += f"<br />Email Address: {content.get('email_address')}
+  text += f"<br />Routing Type: {content.get('routing_type')}"
+  text += f"<br />Mailbox Type: {content.get('mailbox_type')}"
+
+noteText = helper.createRichText(text)
+incident.addNote(noteText)
 ```
 
 </p>
@@ -671,16 +770,20 @@ incident.addArtifact('Email Sender Name', results.name, 'Email sender name from 
 ## Function - Exchange Move Emails
 Move queried emails from a specified folder to another specified folder.
 
+ ![screenshot: fn-exchange-move-emails ](./doc/screenshots/fn-exchange-move-emails.png) <!-- ::CHANGE_ME:: -->
+
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `exchange_delete_source_folder` | `boolean` | Yes | `-` | Move the emails to another folder and delete the current folder |
 | `exchange_destination_folder_path` | `text` | Yes | `Top of Information Store, Top of Information Store/Inbox` | Folder path of destination folder from root folder, leave empty for root folder |
 | `exchange_email` | `text` | Yes | `user@example.com` | Email account that is used |
 | `exchange_email_ids` | `text` | No | `-` | Comma separated list of email ids |
 | `exchange_end_date` | `datetimepicker` | No | `-` | Get emails until after this date, leave empty to not set an end date |
 | `exchange_folder_path` | `text` | No | `Top of Information Store,Top of Information Store/Inbox,Top of Information Store/Drafts,...` | Comma separated list of folder paths to query from |
+| `exchange_force_delete_subfolders` | `boolean` | Yes | `-` | Yes to delete even if the folder has subfolders else stops operation |
 | `exchange_has_attachments` | `boolean` | No | `-` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
@@ -732,13 +835,15 @@ inputs.exchange_destination_folder_path = inputs.exchange_destination_folder_pat
 inputs.exchange_email_ids = inputs.exchange_email_ids if rule.properties.exchange_email_ids is None else rule.properties.exchange_email_ids
 inputs.exchange_sender = inputs.exchange_sender if rule.properties.exchange_sender is None else rule.properties.exchange_sender
 inputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject
-inputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body
 inputs.exchange_start_date = inputs.exchange_start_date if rule.properties.exchange_start_date is None else rule.properties.exchange_start_date
 inputs.exchange_end_date = inputs.exchange_end_date if rule.properties.exchange_end_date is None else rule.properties.exchange_end_date
 inputs.exchange_has_attachments = inputs.exchange_has_attachments if rule.properties.exchange_has_attachments is None else rule.properties.exchange_has_attachments
 inputs.exchange_order_by_recency = inputs.exchange_order_by_recency if rule.properties.exchange_order_by_recency is None else rule.properties.exchange_order_by_recency
 inputs.exchange_num_emails = inputs.exchange_num_emails if rule.properties.exchange_num_emails is None else rule.properties.exchange_num_emails
 inputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.properties.exchange_search_subfolders is None else rule.properties.exchange_search_subfolders
+
+if rule.properties.exchange_message_body and rule.properties.exchange_message_body.content:
+  inputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body.content is None else rule.properties.exchange_message_body
 ```
 
 </p>
@@ -748,233 +853,88 @@ inputs.exchange_search_subfolders = inputs.exchange_search_subfolders if rule.pr
 <p>
 
 ```python
- # Example function results
-        # results = {
-        #     'email_ids': ['id1', 'idN'],
-        #     'emails': {
-        #         'id1': {
-        #             'subject': 'Email Subject',
-        #             'body': 'Subject body in HTML',
-        #             'mime_content': mime content of message
-        #             'sender_name': 'FirstName LastName',
-        #             'sender_email': 'example@example.com',
-        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
-        #             'attachments': {
-        #                 'attachment_id1': {
-        #                     'attachment_name': 'attachment.xslx',
-        #                     'attachment_content_type': 'spreadsheet',
-        #                     'attachment_size': '8842',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 },
-        #                 'attachment_id2': {
-        #                     'attachment_name': '...',
-        #                     'attachment_content_type': '...',
-        #                     'attachment_size': '...',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 }
-        #             }
-        #         },
-        #         'idN': {
-        #             'subject': 'Email Subject',
-        #             'body': 'Subject body in HTML',
-        #             'mime_content': mime content of message
-        #             'sender_name': 'FirstName LastName',
-        #             'sender_email': 'example@example.com',
-        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
-        #             'attachments': {
-        #                 'attachment_id1': {
-        #                     'attachment_name': 'attachment.xslx',
-        #                     'attachment_content_type': 'spreadsheet',
-        #                     'attachment_size': '8842',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 },
-        #                 'attachment_id2': {
-        #                     'attachment_name': '...',
-        #                     'attachment_content_type': '...',
-        #                     'attachment_size': '...',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 }
-        #             }
-        #         }
-        #     }
-        # }
-        
-# Get email ids
-email_ids = results.email_ids
-# Get emails
-emails = results.emails
+''' 
+Example results:
+---------------
+ results = {
+     'email_ids': ['id1', 'idN'],
+     'emails': {
+         'id1': {
+             'subject': 'Email Subject',
+             'body': 'Subject body in HTML',
+             'mime_content': mime content of message
+             'sender_name': 'FirstName LastName',
+             'sender_email': 'example@example.com',
+             'attachment_ids': ['attachment_id1', 'attachment_id2'],
+             'attachments': {
 
-# Loop through all queried emails
-for email_id in email_ids:
-  # Get email that corresponds to email_id
-  email = emails[email_id]
-  # Create artifacts from sender information that isn't None
-  if email['sender_name']:
-    incident.addArtifact('Email Sender Name', email['sender_name'], 'Sender name for email {}'.format(email_id))
-  if email['sender_email']:
-    incident.addArtifact('Email Sender', email['sender_email'], 'Sender email address for email {}'.format(email_id))
-  if email['subject']:
-    incident.addArtifact('Email Subject', email['subject'], 'Email subject for email {}'.format(email_id))
-  if email['body']:
-    incident.addArtifact('Email Body', email['body'], 'Email body in HTML for email {}'.format(email_id))
+                 'attachment_id1': {
+                     'attachment_name': 'attachment.xslx',
+                     'attachment_content_type': 'spreadsheet',
+                     'attachment_size': '8842',
+                     'attachment_base64': 'attachment encoded in base 64'},
+
+                 'attachment_id2': {
+                     'attachment_name': '...',
+                     'attachment_content_type': '...',
+                     'attachment_size': '...',
+                     'attachment_base64': 'attachment encoded in base 64'}}},
+'''
+
+# Enable to add all information to a datatable found in the Exchange tab.
+enable_write_to_datatables  = True
+# Enable to add attachments found as a base64 encoded value. This option only works when enable_write_to_datatables is set to False
+enable_add_attachment_value = False
+
+
+from datetime import datetime
+
+fail_reason = results.get("reason")
+inputs    = results.get("inputs")
+content   = results.get("content")
+emails    = content.get("emails")
+email_ids = content.get("email_ids")
+
+if not results.get("success"):
+  text = u"Unable to move emails"
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+
+  noteText = helper.createRichText(text)
+  incident.addNote(noteText)
+
+else:
+  for email_id in email_ids:
+    email = emails.get(email_id)
+    attachment_ids = email.get('attachment_ids')
     
-  # Loop through attachments and create artifacts and notes for them
-  attachment_ids = email['attachment_ids']
-  attachments = email['attachments']
-  for attachment_id in attachment_ids:
-    attachment = attachments[attachment_id]
-    incident.addArtifact('Email Attachment Name', attachment['attachment_name'], 'Attachment name for attachment {} from email {}'.format(attachment_id, email_id))
-    
-    # Add note
-    noteText = 'base64 attachment of {} from email {}: \n{}'.format(attachment['attachment_name'], email_id, attachment['attachment_base64'])
-    incident.addNote(noteText)
-```
+    if enable_write_to_datatables:
+      message_row = incident.addRow("exchange_email_information_dt")
+      message_row.exchange_date_of_retrieval = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+      message_row.exchange_dt_message_id = email_id 
+      message_row.exchange_dt_recipient_email = email.get("sender_email", "-")
+      message_row.exchange_dt_sender_email = inputs.get("inputs").get("exchange_email")
+      message_row.exchange_dt_email_status = "Moved"
+      message_row.exchange_dt_message_subject = email.get("subject", "-")
+      message_row.exchange_dt_count_attachments = len(attachment_ids)
 
-</p>
-</details>
+    else:
+      attachments = email.get('attachments')
+      if email.get("sender_name"):
+        incident.addArtifact('Email Sender Name', email['sender_name'], 'Sender name for email {}'.format(email_id))
+      if email.get("sender_email"):
+        incident.addArtifact('Email Sender', email['sender_email'], 'Sender email address for email {}'.format(email_id))
+      if email.get("subject"):
+        incident.addArtifact('Email Subject', email['subject'], 'Email subject for email {}'.format(email_id))
+      if email.get("body"):
+        incident.addArtifact('Email Body', email['body'], 'Email body in HTML for email {}'.format(email_id))
 
----
-## Function - Exchange Move Folder Contents and Delete Folder
-Move all items from this folder that satisfy the query parameters to the destination folder and then delete the original folder.
+      for attachment_id in attachment_ids:
+        attachment = attachments.get(attachment_id)
+        incident.addArtifact('Email Attachment Name', attachment['attachment_name'], 'Attachment name for attachment {} from email {}'.format(attachment_id, email_id))
+        if enable_add_attachment_value:
+          incident.addArtifact('Email Attachment', attachment['attachment_base64'], 'Attachment file {} base64 encoded : {}'.format(attachment['attachment_name'], attachment['attachment_base64']))
 
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `exchange_delete_if_no_subfolders` | `boolean` | Yes | `-` | Yes to delete the folder if it has no subfolders. No to delete even if the folder has subfolders. |
-| `exchange_destination_folder_path` | `text` | Yes | `Top of Information Store, Top of Information Store/Inbox` | Folder path of destination folder from root folder, leave empty for root folder |
-| `exchange_email` | `text` | Yes | `user@example.com` | Email account that is used |
-| `exchange_folder_path` | `text` | No | `Top of Information Store,Top of Information Store/Inbox,Top of Information Store/Drafts,...` | Comma separated list of folder paths to query from |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "email_ids": [
-    "\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e"
-  ],
-  "emails": {
-    "\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e": {
-      "attachment_ids": [],
-      "attachments": {},
-      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003cstyle type=\"text/css\" style=\"display:none;\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=\"ltr\"\u003e\r\n\u003cdiv id=\"divtagdefaultwrapper\" style=\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\" dir=\"ltr\"\u003e\r\n\u003cp\u003eWarning!\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
-      "mime_content": "Received: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\r\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 127.0.0.1 via Mailbox Transport; Thu, 23 Jun 2022 12:42:35 +0100\r\nReceived: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\r\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 127.0.0.1; Thu, 23 Jun 2022 12:42:30 +0100\r\nReceived: from WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6]) by\r\n WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6%2]) with mapi id\r\n 00.00.2242.012; Thu, 23 Jun 2022 12:42:30 +0100\r\nFrom: Thomas Shelby \u003ct.shelby@example.com\u003e\r\nTo: Thomas Shelby \u003ct.shelby@example.com\u003e\r\nSubject: Warning: You may have clicked on a malicious link!\r\nThread-Topic: Warning: You may have clicked on a malicious link!\r\nThread-Index: AQHYhvZRBvk78Xewzkm1r+nXQYlDFQ==\r\nDate: Thu, 23 Jun 2022 12:42:30 +0100\r\nMessage-ID: \u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: WIN-L3KDT22U7UJ.example.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\td0ea5374-fac7-437a-aac4-08da550d74ca\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\r\nContent-Type: text/plain; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\nWarning!\r\n\r\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\r\nContent-Type: text/html; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=3D\"Content-Type\" content=3D\"text/html; charset=3Diso-8859-=\r\n1\"\u003e\r\n\u003cstyle type=3D\"text/css\" style=3D\"display:none;\"\u003e\u003c!-- P {margin-top:0;margi=\r\nn-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=3D\"ltr\"\u003e\r\n\u003cdiv id=3D\"divtagdefaultwrapper\" style=3D\"font-size:12pt;color:#000000;font=\r\n-family:Calibri,Helvetica,sans-serif;\" dir=3D\"ltr\"\u003e\r\n\u003cp\u003eWarning!\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_--\r\n",
-      "sender_email": "t.shelby@example.com",
-      "sender_name": "Thomas Shelby",
-      "subject": "Warning: You may have clicked on a malicious link!"
-    }
-  }
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-# Set inputs
-inputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email
-inputs.exchange_delete_if_no_subfolders = inputs.exchange_delete_if_no_subfolders if rule.properties.exchange_delete_if_no_subfolders is None else rule.properties.exchange_delete_if_no_subfolders
-inputs.exchange_folder_path = inputs.exchange_folder_path if rule.properties.exchange_folder_path is None else rule.properties.exchange_folder_path
-inputs.exchange_destination_folder_path = inputs.exchange_destination_folder_path if rule.properties.exchange_destination_folder_path is None else rule.properties.exchange_destination_folder_path
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
- # Example function results
-        # results = {
-        #     'email_ids': ['id1', 'idN'],
-        #     'emails': {
-        #         'id1': {
-        #             'subject': 'Email Subject',
-        #             'body': 'Subject body in HTML',
-        #             'mime_content': mime content of message
-        #             'sender_name': 'FirstName LastName',
-        #             'sender_email': 'example@example.com',
-        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
-        #             'attachments': {
-        #                 'attachment_id1': {
-        #                     'attachment_name': 'attachment.xslx',
-        #                     'attachment_content_type': 'spreadsheet',
-        #                     'attachment_size': '8842',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 },
-        #                 'attachment_id2': {
-        #                     'attachment_name': '...',
-        #                     'attachment_content_type': '...',
-        #                     'attachment_size': '...',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 }
-        #             }
-        #         },
-        #         'idN': {
-        #             'subject': 'Email Subject',
-        #             'body': 'Subject body in HTML',
-        #             'mime_content': mime content of message
-        #             'sender_name': 'FirstName LastName',
-        #             'sender_email': 'example@example.com',
-        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
-        #             'attachments': {
-        #                 'attachment_id1': {
-        #                     'attachment_name': 'attachment.xslx',
-        #                     'attachment_content_type': 'spreadsheet',
-        #                     'attachment_size': '8842',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 },
-        #                 'attachment_id2': {
-        #                     'attachment_name': '...',
-        #                     'attachment_content_type': '...',
-        #                     'attachment_size': '...',
-        #                     'attachment_base64': 'attachment encoded in base 64'
-        #                 }
-        #             }
-        #         }
-        #     }
-        # }
-        
-# Get email ids
-email_ids = results.email_ids
-# Get emails
-emails = results.emails
-
-# Loop through all queried emails
-for email_id in email_ids:
-  # Get email that corresponds to email_id
-  email = emails[email_id]
-  # Create artifacts from sender information that isn't None
-  if email['sender_name']:
-    incident.addArtifact('Email Sender Name', email['sender_name'], 'Sender name for email {}'.format(email_id))
-  if email['sender_email']:
-    incident.addArtifact('Email Sender', email['sender_email'], 'Sender email address for email {}'.format(email_id))
-  if email['subject']:
-    incident.addArtifact('Email Subject', email['subject'], 'Email subject for email {}'.format(email_id))
-  if email['body']:
-    incident.addArtifact('Email Body', email['body'], 'Email body in HTML for email {}'.format(email_id))
-    
-  # Loop through attachments and create artifacts and notes for them
-  attachment_ids = email['attachment_ids']
-  attachments = email['attachments']
-  for attachment_id in attachment_ids:
-    attachment = attachments[attachment_id]
-    incident.addArtifact('Email Attachment Name', attachment['attachment_name'], 'Attachment name for attachment {} from email {}'.format(attachment_id, email_id))
-    
-    # Add note
-    noteText = 'base64 attachment of {} from email {}: \n{}'.format(attachment['attachment_name'], email_id, attachment['attachment_base64'])
-    incident.addNote(noteText)
 ```
 
 </p>
@@ -984,13 +944,15 @@ for email_id in email_ids:
 ## Function - Exchange Send Email
 Send an email to a list of recipients.
 
+ ![screenshot: fn-exchange-send-email ](./doc/screenshots/fn-exchange-send-email.png) <!-- ::CHANGE_ME:: -->
+
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exchange_email` | `text` | Yes | `user@example.com` | Email account that is used |
-| `exchange_emails` | `text` | Yes | `user1@example.com,user2@example.com,...` | Comma separated list of emails |
+| `exchange_email_recipients` | `text` | Yes | `user1@example.com,user2@example.com,...` | Comma separated list of emails |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
 
@@ -1021,8 +983,10 @@ results = {
 # Set inputs
 inputs.exchange_email = inputs.exchange_email if rule.properties.exchange_email is None else rule.properties.exchange_email
 inputs.exchange_message_subject = inputs.exchange_message_subject if rule.properties.exchange_message_subject is None else rule.properties.exchange_message_subject
-inputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body is None else rule.properties.exchange_message_body
-inputs.exchange_emails = inputs.exchange_emails if rule.properties.exchange_emails is None else rule.properties.exchange_emails
+inputs.exchange_email_recipients = inputs.exchange_email_recipients if rule.properties.exchange_email_recipients is None else rule.properties.exchange_email_recipients
+
+if rule.properties.exchange_message_body and rule.properties.exchange_message_body.content:
+  inputs.exchange_message_body = inputs.exchange_message_body if rule.properties.exchange_message_body.content is None else rule.properties.exchange_message_body.content
 ```
 
 </p>
@@ -1032,21 +996,50 @@ inputs.exchange_emails = inputs.exchange_emails if rule.properties.exchange_emai
 <p>
 
 ```python
-# Example results
-# results = {
-#             'recipients': ['user1@example.com', 'user2@example.com'],
-#             'sender': 'sender@example.com',
-#             'subject': 'Subject',
-#             'body': 'HTML Body'
-#           }
+'''
+Example
+-------
+response = {
+  'recipients': ['user1@example.com', 'user2@example.com'],
+  'sender': 'sender@example.com',
+  'subject': 'Subject',
+  'body': 'HTML Body'}
+'''
 
-# Create note with results
-note = '''Sender: {}, Recipients: {}
-Subject: {}
-Body: {}
-'''.format(results.sender, results.recipients, results.subject, results.body)
+# Enable to write the information from the email to the data-table
+enable_write_to_datatables = True
 
-incident.addNote(note)
+
+from datetime import datetime
+
+content = results.get("content")
+if not results.get("success"):
+  text = u"Unable to send email"
+  fail_reason = results.get("reason")
+  if fail_reason:
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+  noteText = helper.createRichText(text)
+  incident.addNote(noteText)
+
+else:
+  if enable_write_to_datatables:
+    message_row = incident.addRow("exchange_email_information_dt")
+    message_row.exchange_date_of_retrieval    = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+    message_row.exchange_dt_recipient_email   = str(content.get('recipients'))
+    message_row.exchange_dt_sender_email      = content.get('sender')
+    message_row.exchange_dt_email_status      = "sent"
+    message_row.exchange_dt_message_subject   = content.get("msg_subject", "-")
+    message_row.exchange_dt_count_attachments = 0
+
+  else:
+    text  =  "<b>Exchange email:</b><br />"
+    text += f"<br />From: {content.get('sender')}"
+    text += f"<br />Recipients: {content.get('recipients')}"
+    text += f"<br />Subject: {content.get('msg_subject')}"
+    text += f"<br />Body: {content.get('msg_body')}"
+    noteText = helper.createRichText(text)
+    incident.addNote(noteText)
+
 ```
 
 </p>
@@ -1055,19 +1048,57 @@ incident.addNote(note)
 ---
 
 
+## Data Table - Email Information
+
+ ![screenshot: dt-email-information](./doc/screenshots/dt-email-information.png) <!-- ::CHANGE_ME:: -->
+
+#### API Name:
+exchange_email_information_dt
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Attachments | `exchange_dt_count_attachments` | `number` | - |
+| Date of Retrieval | `exchange_date_of_retrieval` | `text` | - |
+| Message ID | `exchange_dt_message_id` | `text` | Unique ID of the message |
+| Message Subject | `exchange_dt_message_subject` | `text` | Subject of the email |
+| Recipient Email Address | `exchange_dt_recipient_email` | `text` | - |
+| Sender Email Address | `exchange_dt_sender_email` | `text` | Email address of the sender |
+| Status | `exchange_dt_email_status` | `text` | - |
+
+---
+## Data Table - Meeting Information
+
+ ![screenshot: dt-meeting-information](./doc/screenshots/dt-meeting-information.png) <!-- ::CHANGE_ME:: -->
+
+#### API Name:
+exchange_dt_meeting_information
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Created Time | `exchange_dt_created_time` | `text` | - |
+| End Time | `exchange_dt_end_time` | `text` | - |
+| Location | `exchange_dt_meeting_location` | `text` | - |
+| Mandatory Attendees | `exchange_dt_mandatory_attendees` | `text` | - |
+| Meeting Subject | `exchange_dt_meeting_subject` | `text` | - |
+| Optional Attendees | `exchange_dt_optional_attendees` | `text` | - |
+| Start Time | `exchange_dt_start_time` | `text` | - |
+
+---
 
 
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Exchange Create Meeting | artifact | `example_of_exchange_create_meeting` |
-| Exchange Delete Emails | artifact | `example_of_exchange_delete_emails` |
-| Exchange Find Emails | artifact | `example_of_exchange_find_emails` |
-| Exchange Get Mailbox Info | artifact | `example_of_exchange_get_mailbox_info` |
-| Exchange Move Emails | artifact | `example_of_exchange_move_emails` |
-| Exchange Move Folder Contents and Delete Folder | artifact | `exchange_move_and_delete_folder` |
-| Exchange Send Email | artifact | `example_of_exchange_send_email` |
+| Exchange: Create Meeting | incident | `example_of_exchange_create_meeting_incident` |
+| Exchange: Delete Emails | incident | `example_of_exchange_delete_emails_incident` |
+| Exchange: Find Emails | incident | `example_of_exchange_find_emails_incident` |
+| Exchange: Move Contents and Delete Folder | incident | `exchange_move_and_delete_folder_incident` |
+| Exchange: Move Emails | incident | `example_of_exchange_move_emails_incident` |
+| Exchange: Retrieve Mailbox Information | incident | `example_of_exchange_get_mailbox_info_incident` |
+| Exchange: Send Email | incident | `example_of_exchange_send_email_incident` |
 
 ---
 

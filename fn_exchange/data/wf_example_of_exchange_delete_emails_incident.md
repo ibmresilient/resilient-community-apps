@@ -96,8 +96,8 @@ else:
       message_row = incident.addRow("exchange_email_information_dt")
       message_row.exchange_date_of_retrieval = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
       message_row.exchange_dt_message_id = email_id 
-      message_row.exchange_dt_sender_name = email.get("sender_name", "-")
-      message_row.exchange_dt_sender_email = email.get("sender_email", "-")
+      message_row.exchange_dt_recipient_email = email.get("sender_email", "-")
+      message_row.exchange_dt_sender_email = inputs.get("inputs").get("exchange_email")
       message_row.exchange_dt_email_status = "Deleted"
       message_row.exchange_dt_message_subject = email.get("subject", "-")
       message_row.exchange_dt_count_attachments = len(attachment_ids)
