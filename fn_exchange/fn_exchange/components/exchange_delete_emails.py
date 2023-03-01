@@ -52,6 +52,7 @@ class FunctionComponent(AppFunctionComponent):
         function_parameters = {}
         for key, value in fn_inputs._asdict().items():
             function_parameters[INPUTS_MAP[key]] = value
+        mail_limit = function_parameters.get("num_emails") if function_parameters.get("num_emails") else 0
 
         if not function_parameters.get("src_folder"):
             function_parameters["src_folder"] = self.options.get('default_folder_path')
@@ -74,12 +75,17 @@ class FunctionComponent(AppFunctionComponent):
 
             elif function_parameters["hard_delete"]:
                 msg = "Permanently deleted emails"
-                retrieved_emails.delete()
+                for no, mail in enumerate(retrieved_emails, 1):
+                    if no == mail_limit:
+                        break
+                    mail.delete()
 
             else:
                 msg = "Moved emails to trash"
-                for item in retrieved_emails:
-                    item.move_to_trash()
+                for no, mail in enumerate(retrieved_emails, 1):
+                    if no == mail_limit:
+                        break
+                    mail.move_to_trash()
 
             self.LOG.info(msg)
             yield StatusMessage(msg)

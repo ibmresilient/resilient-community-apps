@@ -62,6 +62,7 @@ class FunctionComponent(AppFunctionComponent):
         function_parameters = {}
         for key, value in fn_inputs._asdict().items():
             function_parameters[INPUTS_MAP[key]] = value
+        mail_limit = function_parameters.get("num_emails") if function_parameters.get("num_emails") else 0
 
         if not function_parameters.get("src_folder"):
             function_parameters["src_folder"] = self.options.get('default_folder_path')
@@ -82,9 +83,11 @@ class FunctionComponent(AppFunctionComponent):
             if results.get("email_ids") == 0:
                 msg = "Failed to perform operation as 0 emails were retrieved"
             else:
-                for email in retrieved_emails:
-                    email.move(dst_folder)
                 msg = f"Moved emails to {function_parameters['dst_folder']}"
+                for no, email in enumerate(retrieved_emails, 1):
+                    if no == mail_limit:
+                        break
+                    email.move(dst_folder)
 
             self.LOG.info(msg)
             yield StatusMessage(msg)
