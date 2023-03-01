@@ -15,7 +15,6 @@ api_token=xxx
 api_version=v1
 # Trusteer customer name used to form the URLs for REST API calls and links back to Trusteer
 customer_name = 
-verify=true
 # 
 # Mandatory: specify paths to cert and key files used to for REST API authentication.
 client_auth_cert = <path_to_cert.pem>

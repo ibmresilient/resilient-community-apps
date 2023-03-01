@@ -48,8 +48,6 @@ class TrusteerPPDClient():
         self.client_auth_key = app_configs.get("client_auth_key")
         self.client_auth_cert = app_configs.get("client_auth_cert")
 
-        self.verify = _get_verify_ssl(app_configs)
-
         self.endpoint_url = ENDPOINT_URL.format(customer_name=self.customer_name)
         self.rest_api_base_url = REST_API_BASE_URL.format(customer_name=self.customer_name)
         self.headers = HEADER
@@ -122,33 +120,7 @@ class TrusteerPPDClient():
         response = self.rc.execute("POST",
                                    url=url,
                                    json=data,
-                                   headers=self.headers,
-                                   verify=self.verify)
+                                   headers=self.headers)
         response_json = response.json()
 
         return response_json
-
-def _get_verify_ssl(app_configs: dict):
-    """
-    Get ``verify`` parameter from app config.
-    Value can be set in the [fn_my_app] section
-
-    :param opts: All of the app.config file as a dict
-    :type opts: dict
-    :param app_options: App specific configs
-    :type app_options: dict
-    :return: Value to set ``requests.request.verify`` to. Either a path or a boolean. Defaults to ``True``
-    :rtype: bool|str(path)
-    """
-    # start checking the app specific settings
-    verify = app_configs.get("verify")
-
-    # because verify can be either a boolean or a path,
-    # we need to check if it is a string with a boolean 
-    # value first then, and only then, we convert it to a bool
-    # NOTE: that this will then only support "true" or "false"
-    # (case-insensitive) rather than the normal "true", "yes", etc...
-    if isinstance(verify, str) and verify.lower() in ["false", "true"]:
-        verify = str_to_bool(verify)
-
-    return verify
