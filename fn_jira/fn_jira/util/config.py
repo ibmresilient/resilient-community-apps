@@ -28,8 +28,8 @@ max_issues_returned = 50
 #http_proxy=
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
-# If templates under [fn_jira:global_settings] are configured, then templates
-#  that are configured under the individual Jira servers will be ignored.
+# If templates under the individual Jira servers are configured, then templates
+#  that are configured under [fn_jira:global_settings] will be ignored.
 # See documentation section "Templates for SOAR Cases" for more details
 #soar_create_case_template=
 #soar_update_case_template=

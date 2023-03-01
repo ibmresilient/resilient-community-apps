@@ -1,6 +1,6 @@
 {
   {# JINJA template for creating a new SOAR incident from an endpoint #}
-  "name": "{{ fields["summary"] }}",
+  "name": "{{ fields["summary"] }}\nCreated from Jira",
   "description": {% if fields["description"] is none %} null {% else %} "{{ fields["description"] }}" {% endif %},
   "severity_code": "{{ fields["priority"]["name"] }}",
   "create_date": {{ fields["created"] }},

@@ -2,15 +2,15 @@
   {# JINJA template for updating a new SOAR incident from an endpoint #}
   "name": "{{ jira["fields"]["summary"] }}",
   "inc_id": {{ task["inc_id"] }},
-  "required": {% if task["required"] == True %} true {% else %} false {% endif %},
+  "required": {{ task["required"] | lower }},
   "status": {% if jira["fields"]["resolutiondate"] == none %} "{{ task["status"] }}" {% else %} "C" {% endif %},
-  "frozen": {% if task["frozen"] == True %} true {% else %} false {% endif %},
+  "frozen": {{ task["frozen"] | lower }},
   "init_date": {{ task["init_date"] }},
-  "active": {% if task["active"] == True %} true {% else %} false {% endif %},
+  "active": {{ task["active"] | lower }},
   "inc_name": "{{ task["inc_name"] }}",
-  "custom": {% if task["custom"] == True %} true {% else %} false {% endif %},
+  "custom": {{ task["custom"] | lower }},
   "id": {{ task["id"] }},
-  "inc_training": {% if task["inc_training"] == True %} true {% else %} false {% endif %},
+  "inc_training": {{ task["inc_training"] | lower }},
   "description": "<div class='rte'><div>{{ jira["fields"]["description"] }}</div></div>",
   "cat_name": "{{ task["cat_name"] }}"
 }
