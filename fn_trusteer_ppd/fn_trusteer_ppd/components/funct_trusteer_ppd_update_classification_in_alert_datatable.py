@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # Generated with resilient-sdk v48.0.3934
-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """AppFunction implementation"""
-import json
+
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_trusteer_ppd.lib.datatable_helper import TrusteerDatatable
 from resilient_lib import IntegrationError, validate_fields

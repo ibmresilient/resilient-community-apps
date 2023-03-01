@@ -2,14 +2,8 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
-from json import loads
 from logging import getLogger
-from threading import Thread
-from time import sleep
-from cachetools import cached, LRUCache
-from resilient_lib import get_workflow_status
 
-DATATABLE_TYPE = 8
 LOG = getLogger(__name__)
 
 class TrusteerDatatable(object):
