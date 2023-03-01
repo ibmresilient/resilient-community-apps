@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 from logging import getLogger
+from urllib.parse import urlparse
 from jira import JIRA
 from fn_jira.util.helper import str_time_to_int_time, check_jira_issue_linked_to_task, get_id_from_jira_issue_description, GLOBAL_SETTINGS
 from resilient_lib import IntegrationError, str_to_bool, validate_fields, RequestsCommon, SOARCommon
@@ -140,7 +141,8 @@ class AppCommon():
             jira_key = issue.get("key")
             internal_url = issue.get("self")
             issue["internal_url"] = internal_url
-            issue["url"] = f"<a href='{internal_url[:internal_url.index('/', 8)]}/browse/{jira_key}' target='blank'>{jira_key}</a>"
+            parsed_url = urlparse(internal_url)
+            issue["url"] = f"<a href='{parsed_url.scheme}://{parsed_url.netloc}/browse/{jira_key}' target='blank'>{jira_key}</a>"
             issue["fields"]["summary"] = issue.get("fields").get("summary").replace("IBM SOAR: ", "")
 
             if not data_to_get_from_case.get(issue.get("key")):
@@ -210,10 +212,11 @@ def _get_verify_ssl(app_configs):
 
 class SOAR():
 
-    def add_task_to_case(rest_client, cases_list, num, id, comments=False, attachments=False):
+    def add_task_to_case(soar_common, options, cases_list, num, id, comments=False, attachments=False):
         """
         Adds task data to the SOAR case
-        :param rest_client: Client connection to SOAR
+        :param soar_common: Initiate SOARCommon
+        :param options: Options for the Jira server being used
         :param cases_list: List of SOAR cases
         :param num: The index of the case in case_list
         :param id: Task ID
@@ -224,7 +227,7 @@ class SOAR():
         case_id = cases_list[num].get('id')
 
         # Add Tasks to cases
-        case_tasks = SOARCommon(rest_client)._get_case_info(case_id, "tasks?want_notes=true")
+        case_tasks = soar_common._get_case_info(case_id, "tasks?want_notes=true")
         if case_tasks:
             # Add tasks field to the case if the field does not exist
             task = cases_list[num].get("tasks")
@@ -256,7 +259,7 @@ class SOAR():
 
                     # Get attachments
                     if attachments:
-                        task_attachments = rest_client.get(f"/tasks/{task_id}/attachments")
+                        task_attachments = soar_common.rest_client.get(f"/tasks/{task_id}/attachments")
                         cases_list[num]["tasks"][case_task_num]["attachments"] = []
                         for attach_num in range(len(task_attachments)):
                             cases_list[num]["tasks"][case_task_num]["attachments"].append({
@@ -267,33 +270,28 @@ class SOAR():
                         cases_list[num]["tasks"][case_task_num]["attachments"] = []
 
                     # Add the data table that contains the task info to the task
-                    case_datatables = SOARCommon(rest_client)._get_case_info(case_id, "table_data?handle_format=names")
-                    if case_datatables:
-                        found = False
-                        for datatable in case_datatables:
-                            if found:
+                    datatable = soar_common._get_case_info(case_id, f"table_data/{options.get('jira_dt_name')}?handle_format=names")
+                    if datatable:
+                        for row in datatable.get("rows"):
+                            if str(id) == row["cells"].get("task_id").get("value"):
+                                for field in ["actions", "playbooks", "inc_owner", "inc_name"]:
+                                    row.pop(field)
+                                cases_list[num]["tasks"][case_task_num]["datatable"] = row
+                                cases_list[num]["tasks"][case_task_num]["datatable"]["table_id"] = datatable.get("id")
                                 break
-                            for row in case_datatables[datatable].get("rows"):
-                                if str(id) == row["cells"].get("task_id").get("value"):
-                                    found = True
-                                    for field in ["actions", "playbooks", "inc_owner", "inc_name"]:
-                                        row.pop(field)
-                                    cases_list[num]["tasks"][case_task_num]["datatable"] = row
-                                    cases_list[num]["tasks"][case_task_num]["datatable"]["table_id"] = case_datatables[datatable].get("id")
-                                    break
                     break
 
-    def add_to_case(rest_client, cases_list, num, field_name):
+    def add_to_case(soar_common, cases_list, num, field_name):
         """
         Function adds comments and attachments on the SOAR incident to the case in the list
-        :param rest_client: Client connection to SOAR
+        :param soar_common: Initiate SOARCommon
         :param cases_list: List of SOAR cases
         :param num: The index of the case in case_list
         :param field_name: Name of the field to add. Either 'attachments' or 'comments'
         :return: None
         """
         url_end = '?want_notes=true' if field_name == 'tasks' else ''
-        case_field = SOARCommon(rest_client)._get_case_info(cases_list[num].get('id'), f"{field_name}{url_end}")
+        case_field = soar_common._get_case_info(cases_list[num].get('id'), f"{field_name}{url_end}")
         if case_field:
             cases_list[num][field_name] = []
             for field_num in range(len(case_field)):

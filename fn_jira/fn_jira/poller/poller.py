@@ -19,15 +19,21 @@ from fn_jira.util.helper import (GLOBAL_SETTINGS, PACKAGE_NAME, JiraServers,
 
 LOG = getLogger(__name__)
 
+# SOAR template names
+create_case = "soar_create_case_template"
+update_case = "soar_update_case_template"
+close_case = "soar_close_case_template"
+update_task = "soar_update_task_template"
+
 # Directory of default templates
 TEMPLATE_DIR = path.join(path.dirname(__file__), "data")
 
 # Default Templates used to create/update/close SOAR cases.
 #  Mostly they will be modified to include custom SOAR fields
-CREATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_create_case_template.jinja")
-UPDATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_update_case_template.jinja")
-CLOSE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, "soar_close_case_template.jinja")
-UPDATE_TASK_TEMPLATE = path.join(TEMPLATE_DIR, "soar_update_task_template.jinja")
+CREATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, f"{create_case}.jinja")
+UPDATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, f"{update_case}.jinja")
+CLOSE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, f"{close_case}.jinja")
+UPDATE_TASK_TEMPLATE = path.join(TEMPLATE_DIR, f"{update_task}.jinja")
 
 class PollerComponent(AppFunctionComponent):
     """
@@ -74,10 +80,10 @@ class PollerComponent(AppFunctionComponent):
         LOG.info("Poller lookback: %s", self.last_poller_time)
 
         # Collect the override templates to use when creating, updating and closing cases
-        self.soar_create_case_template = self.global_settings.get("soar_create_case_template")
-        self.soar_update_case_template = self.global_settings.get("soar_update_case_template")
-        self.soar_close_case_template = self.global_settings.get("soar_close_case_template")
-        self.soar_update_task_template = self.global_settings.get("soar_update_task_template")
+        self.soar_create_case_template = self.global_settings.get(f"{create_case}")
+        self.soar_update_case_template = self.global_settings.get(f"{update_case}")
+        self.soar_close_case_template = self.global_settings.get(f"{close_case}")
+        self.soar_update_task_template = self.global_settings.get(f"{update_task}")
 
         # rest_client is used to make IBM SOAR API calls
         self.res_client = self.rest_client()
@@ -188,11 +194,14 @@ class PollerComponent(AppFunctionComponent):
 
                 if data_to_get.get("comments"): # If comments were on the linked Jira ticket
                     # Add comment/notes to case
-                    SOAR.add_to_case(self.res_client, cases_list, num, "comments")
+                    SOAR.add_to_case(self.soar_common, cases_list, num, "comments")
 
                 if data_to_get.get("attachments"): # If attachments were on the linked Jira ticket
                     # Add attachments to cases
-                    SOAR.add_to_case(self.res_client, cases_list, num, "attachments")
+                    SOAR.add_to_case(self.soar_common, cases_list, num, "attachments")
+
+            options = get_server_settings(self.opts, cases_list[num].get("properties").get("jira_server"))
+            cases_list[num]["name"] = cases_list[num].get("name").replace("\nCreated from Jira", "")
 
             tasks = data_to_get_from_case.get("tasks")
             if tasks:
@@ -200,13 +209,14 @@ class PollerComponent(AppFunctionComponent):
                     if task.get("incident_id") == cases_list[num].get("id"):
                         task_data_to_get = data_to_get_from_case.get(task.get("task_key"))
                         if task_data_to_get:
-                            SOAR.add_task_to_case(self.res_client,
-                                                        cases_list,
-                                                        num,
-                                                        task.get("task_id"),
-                                                        comments=task_data_to_get.get("comments"),
-                                                        attachments=task_data_to_get.get("attachments")
-                                                       )
+                            SOAR.add_task_to_case(self.soar_common,
+                                                  options,
+                                                  cases_list,
+                                                  num,
+                                                  task.get("task_id"),
+                                                  comments=task_data_to_get.get("comments"),
+                                                  attachments=task_data_to_get.get("attachments")
+                                                 )
 
         return cases_list
 
@@ -304,24 +314,25 @@ class PollerComponent(AppFunctionComponent):
             # helper.update_soar_incident(self.rest_client(), soar_cases_to_update)
             self.soar_update_cases(soar_cases_to_update)
 
-    def set_poller_templates(self, server_label):
+    def set_poller_templates(self, server_label, template_name):
         """
         Set the paths to the poller templates
         :param server_label: The label for the Jira server in the app.config
-        :return: None
+        :return: Poller template
         """
         options = get_server_settings(self.opts, server_label)
+
         # Collect the override templates to use when creating, updating and closing cases
-        # If a path to a poller template is set in the Glbal_settings, then it will ignore
-        #  setting in the indiviual Jira server configs
-        if not self.soar_create_case_template:
-            self.soar_create_case_template = options.get("soar_create_case_template")
-        if not self.soar_update_case_template:
-            self.soar_update_case_template = options.get("soar_update_case_template")
-        if not self.soar_close_case_template:
-            self.soar_close_case_template = options.get("soar_close_case_template")
-        if not self.soar_update_task_template:
-            self.soar_update_task_template = options.get("soar_update_task_template")
+        # If a path to a poller template is set in the indiviual Jira server configs, then it will ignore
+        #  setting in the Global_settings
+        if template_name == "create_case":
+            return options.get(create_case) if options.get(create_case) else self.soar_create_case_template
+        elif template_name == "update_case":
+            return options.get(update_case) if options.get(update_case) else self.soar_update_case_template
+        elif template_name == "close_case":
+            return options.get(close_case) if options.get(close_case) else self.soar_close_case_template
+        elif template_name == "update_task":
+            return options.get(update_task) if options.get(update_task) else self.soar_update_task_template
 
     def soar_create_case(self, jira_issue):
         """
@@ -329,10 +340,8 @@ class PollerComponent(AppFunctionComponent):
         :param jira_issue: Dict of Jira issue data
         :return: None
         """
-        self.set_poller_templates(jira_issue.get("jira_server"))
-
         soar_create_payload = make_payload_from_template(
-            self.soar_create_case_template,
+            self.set_poller_templates(jira_issue.get("jira_server"), "create_case"),
             CREATE_CASE_TEMPLATE,
             jira_issue)
         create_soar_case = self.soar_common.create_soar_case(
@@ -360,10 +369,8 @@ class PollerComponent(AppFunctionComponent):
             soar = close[1]
             jira = close[0]
 
-            self.set_poller_templates(jira.get("jira_server"))
-
             payload = make_payload_from_template(
-                self.soar_close_case_template,
+                self.set_poller_templates(jira.get("jira_server"), "close_case"),
                 CLOSE_CASE_TEMPLATE,
                 {"jira": jira, "soar": soar})
 
@@ -387,10 +394,8 @@ class PollerComponent(AppFunctionComponent):
             jira = update[0]
             soar = update[1]
 
-            self.set_poller_templates(jira.get("jira_server"))
-
             payload = make_payload_from_template(
-                self.soar_update_case_template,
+                self.set_poller_templates(jira.get("jira_server"), "update_case"),
                 UPDATE_CASE_TEMPLATE,
                 {"jira": jira, "soar": soar})
 
@@ -421,8 +426,6 @@ class PollerComponent(AppFunctionComponent):
             jira = update[0]
             task = update[1]
 
-            self.set_poller_templates(jira.get("jira_server"))
-
             jira_issue_description = jira.get("fields").get("description")
             link_end_index = jira_issue_description.index("\n\n")+2
             # Check if link to SOAR task is in the Jira issue description
@@ -434,7 +437,7 @@ class PollerComponent(AppFunctionComponent):
 
             # Create update payload for current SAOR task
             soar_task_update_payload.append(make_payload_from_template(
-                self.soar_update_task_template,
+                self.set_poller_templates(jira.get("jira_server"), "update_task"),
                 UPDATE_TASK_TEMPLATE,
                 {"jira": jira, "task": task})
             )
