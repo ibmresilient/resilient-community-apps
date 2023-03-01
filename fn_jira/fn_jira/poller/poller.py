@@ -340,8 +340,6 @@ class PollerComponent(AppFunctionComponent):
         :param jira_issue: Dict of Jira issue data
         :return: None
         """
-        self.set_poller_templates(jira_issue.get("jira_server"))
-
         soar_create_payload = make_payload_from_template(
             self.set_poller_templates(jira_issue.get("jira_server"), "create_case"),
             CREATE_CASE_TEMPLATE,
@@ -396,8 +394,6 @@ class PollerComponent(AppFunctionComponent):
             jira = update[0]
             soar = update[1]
 
-            self.set_poller_templates(jira.get("jira_server"))
-
             payload = make_payload_from_template(
                 self.set_poller_templates(jira.get("jira_server"), "update_case"),
                 UPDATE_CASE_TEMPLATE,
@@ -435,8 +431,6 @@ class PollerComponent(AppFunctionComponent):
         for update in soar_tasks_to_update:
             jira = update[0]
             task = update[1]
-
-            self.set_poller_templates(jira.get("jira_server"))
 
             jira_issue_description = jira.get("fields").get("description")
             link_end_index = jira_issue_description.index("\n\n")+2
