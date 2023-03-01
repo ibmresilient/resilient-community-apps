@@ -1,9 +1,3 @@
 {
-  "required_attendees": "example@example.com",
-  "optional_attendees": null,
-  "sender": "t.shelby@example.com",
-  "subject": "This is a potential malicious link",
-  "body": null,
-  "start_time": 1655938800000,
-  "end_time": 1656025200000
+    
 }
