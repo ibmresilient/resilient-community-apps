@@ -88,7 +88,7 @@ class FunctionComponent(ResilientComponent):
     def expand_url(self, url):
         """ Starting point. Make sure the URL has a prefix. """
         if not url.lower().startswith('http'):
-            url = 'http://' + url
+            url = 'https://' + url
         urls = []
         return self.follow_url(url, urls, 1)
 

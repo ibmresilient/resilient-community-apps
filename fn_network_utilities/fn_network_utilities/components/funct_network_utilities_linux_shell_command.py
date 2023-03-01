@@ -7,9 +7,9 @@ import time
 import shlex
 import json
 import paramiko
-from fn_network_utilities.util.utils_common import b_to_s
+from fn_network_utilities.util.utils_common import remove_punctuation
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, render
+from resilient_lib import IntegrationError, validate_fields, render, b_to_s
 from resilient_lib.components.templates_common import sh_filter
 
 PACKAGE_NAME = "fn_network_utilities"
@@ -77,22 +77,19 @@ class FunctionComponent(AppFunctionComponent):
 
             shell_command = colon_split[0].strip()
 
-            # Previous version required parantheses around remote computer, this is for backwards compatability
-            if remote.startswith('(') and remote.endswith(')'):
-                remote = remote[1:-1]
+            # Previous version required parentheses around remote computer, this is for backwards compatability
+            remote = remove_punctuation(remote, "parentheses")
 
             # Check if command is configured
             if shell_command not in self.options:
                 if ':' in shell_command:
-                    raise ValueError("Syntax for a remote command '%s' was used but remote_shell was set to False"
-                                     % shell_command)
-                raise ValueError('%s command not configured' % shell_command)
+                    raise ValueError(f"Syntax for a remote command {shell_command} was used but remote_shell was set to False")
+                raise ValueError(f"{shell_command} command not configured")
 
             shell_command_base = self.options[shell_command].strip()
 
-            # Previous version required parantheses around command, this is for backwards compatability
-            if shell_command_base.startswith('(') and shell_command_base.endswith(')'):
-                shell_command_base = shell_command_base[1:-1]
+            # Previous version required parentheses around command, this is for backwards compatability
+            shell_command_base = remove_punctuation(shell_command_base, "parentheses")
 
             run_cmd = RunCmd(remote, shell_command_base.strip(), rendered_shell_params)
             run_cmd.run_remote_linux()
@@ -158,7 +155,6 @@ class RunCmd():
 
 
     def make_result(self):
-        #encoding = chardet.detect(s_to_b(self.stdoutdata))["encoding"] or "utf-8"
         self.tend = time.time()
 
         result = b_to_s(self.stdoutdata)

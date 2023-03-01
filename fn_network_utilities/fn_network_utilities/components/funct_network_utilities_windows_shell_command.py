@@ -6,9 +6,9 @@ import logging
 import time
 import json
 import winrm
-from fn_network_utilities.util.utils_common import b_to_s
+from fn_network_utilities.util.utils_common import remove_punctuation
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, render
+from resilient_lib import IntegrationError, validate_fields, render, b_to_s
 from resilient_lib.components.templates_common import ps_filter
 
 PACKAGE_NAME = "fn_network_utilities"
@@ -78,9 +78,8 @@ class FunctionComponent(AppFunctionComponent):
 
             shell_command = colon_split[0].strip()
 
-            # Previous version required parantheses around remote computer, this is for backwards compatability
-            if remote.startswith('(') and remote.endswith(')'):
-                remote = remote[1:-1]
+            # Previous version required parentheses around remote computer, this is for backwards compatability
+            remote = remove_punctuation(remote, "parenthesis")
 
             # Check if command is configured
             if shell_command not in self.options:
@@ -92,8 +91,7 @@ class FunctionComponent(AppFunctionComponent):
             shell_command_base = self.options[shell_command].strip()
 
             # Previous version required brackets around command, this is for backwards compatability
-            if shell_command_base.startswith('[') and shell_command_base.endswith(']'):
-                shell_command_base = shell_command_base[1:-1]
+            shell_command_base = remove_punctuation(shell_command_base, "brackets")
 
             run_cmd = RunCmd(remote, shell_command_base.strip(), rendered_shell_params)
 

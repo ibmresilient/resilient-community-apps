@@ -2,14 +2,12 @@
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-def b_to_s(value):
-    try:
-        return value.decode()
-    except:
-        return value
+def remove_punctuation(line, punctuation):
+    if punctuation == "parentheses":
+        if line.startswith('(') and line.endswith(')'):
+                return line[1:-1]
+    elif punctuation == "brackets":
+        if line.startswith('[') and line.endswith(']'):
+                return line[1:-1]
 
-def s_to_b(value):
-    try:
-        return bytes(value, 'utf-8')
-    except:
-        return value
+    return line
