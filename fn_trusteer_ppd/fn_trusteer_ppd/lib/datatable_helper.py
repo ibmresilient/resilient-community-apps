@@ -24,7 +24,7 @@ class TrusteerDatatable(object):
         except Exception:
             raise ValueError(u"Failed to get {} Datatable".format(self.api_name))
 
-    def get_rows(self, max_rows=0, sort_by=None, sort_direction="ASC", search_column=None, search_value=None):
+    def get_rows(self, max_rows: int=0, sort_by: str=None, sort_direction: str="ASC", search_column: str=None, search_value:str=None):
         """ Searches and returns rows based on a search/sort criteria, else None """
 
         if self.rows:
@@ -55,7 +55,7 @@ class TrusteerDatatable(object):
 
             return rows_to_return
 
-    def get_row(self, row_id=None, search_column=None, search_value=None):
+    def get_row(self, row_id: int=None, search_column: str=None, search_value: str=None) -> dict:
         """ Searches and returns row if row found, else None """
 
         # Search by row_id if defined
@@ -76,7 +76,7 @@ class TrusteerDatatable(object):
                 if value and value == search_value:
                     return row
 
-    def update_row(self, row_id, cells_to_update):
+    def update_row(self, row_id: int, cells_to_update: dict) -> dict:
         """ Updates the row with given updates in cells_to_update.
             Returns the updated row or dict with the entry 'error'. """
 
@@ -85,7 +85,7 @@ class TrusteerDatatable(object):
 
         uri = "/incidents/{}/table_data/{}/row_data/{}?handle_format=names".format(self.incident_id, self.api_name, row_id)
 
-        def get_cell_value(cell_name, cells_to_update):
+        def get_cell_value(cell_name: str, cells_to_update:dict) -> dict:
             """Function to get the new/old cell value"""
             if cell_name in cells_to_update:
                 return cells_to_update[cell_name]

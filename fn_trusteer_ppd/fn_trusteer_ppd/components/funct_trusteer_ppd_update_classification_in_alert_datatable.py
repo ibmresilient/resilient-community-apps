@@ -55,7 +55,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        results = {"rows": rows}
+        results = {"num_rows_updated": len(rows)}
 
         yield FunctionResult(results)
 
