@@ -122,7 +122,7 @@ class TrusteerDatatable(object):
                 return_value = {"error": err_msg}
 
             else:
-                raise ValueError(u"Could not update row in {}. Unknown Error".format(self.api_name))
+                raise ValueError(u"Could not update row in {0}. Unknown Error {1}".format(self.api_name, str(err)))
 
         return return_value
 

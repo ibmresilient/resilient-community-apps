@@ -35,7 +35,7 @@ setup(
         <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
         <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        "resilient-circuits>=47.1.0"
+        "resilient-circuits>=48.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

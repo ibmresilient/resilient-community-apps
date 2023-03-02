@@ -51,7 +51,7 @@ class FunctionComponent(AppFunctionComponent):
             updated_row = datatable.update_row(row.get('id'), cell_to_update)
 
             if "error" in updated_row:
-                raise IntegrationError("Row in Trusteer Alerts data table NOT updated.")
+                raise IntegrationError("Row in Trusteer Alerts data table NOT updated: {}".format(updated_row))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

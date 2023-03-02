@@ -80,7 +80,7 @@ Bi-directional App for Trusteer Pinpoint Detect. Parse emails from Trusteer Pinp
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1 <!-- ::CHANGE_ME:: -->
+* Create cases in SOAR from Trusteer Pinpoint Detect Criminal 
 * Key Feature 2 <!-- ::CHANGE_ME:: -->
 * Key Feature 3 <!-- ::CHANGE_ME:: -->
 
@@ -133,12 +133,12 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does/does not** <!-- ::CHANGE_ME:: --> support a proxy server.
+The app **does** support a proxy server.
 
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient-circuits>=47.1.0
+* resilient-circuits>=48.0.0
 
 ### IBM Trusteer Development Version
 
@@ -151,17 +151,25 @@ This app has been implemented using:
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
-* Prereq A <!-- ::CHANGE_ME:: -->
-* Prereq B <!-- ::CHANGE_ME:: -->
+* An email address configured in Trusteer Management Application (TMA/Trustboard) to which Trusteer sends **Pinpoint Detection suspicious access detected** alerts.
+* The same email address configured in Trusteer is also configured in SOAR inbound email connection.
 * Prereq C <!-- ::CHANGE_ME:: -->
 
-#### Configuration
+#### Configure Trusteer and SOAR
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-* Config A <!-- ::CHANGE_ME:: -->
-* Config B <!-- ::CHANGE_ME:: -->
-* Config C <!-- ::CHANGE_ME:: -->
+In the Trusteer Management Application (TMA/Trustboard), select **Setup and Administration** on the left menu and click on **Feeds Configuration**.  Click on the **+ Add** button at the top of the page:
+
+ ![screenshot: fn-trusteer-ppd-tma-feed-config ](./doc/screenshots/fn-trusteer-ppd-tma-feed-config.png)
+ 
+Fill out the pop-up form. The **Product** selection must be **Pinpoint Detection** and the  **Feed Name** selection must be **Pinpoint Criminal Detection suspicious access detected** as this is the only feed supported by the SOAR app. Hit Save.
+
+ ![screenshot: fn-trusteer-ppd-tma-form ](./doc/screenshots/fn-trusteer-ppd-tma-form.png)
+
+The email addresse to send Trusteer alerts appears in the list.
+ ![screenshot: fn-trusteer-ppd-tma-config ](./doc/screenshots/fn-trusteer-ppd-tma-config.png)
+
 
 #### Permissions
 <!--
