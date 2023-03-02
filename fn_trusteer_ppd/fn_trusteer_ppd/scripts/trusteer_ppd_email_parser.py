@@ -344,7 +344,6 @@ class EmailProcessor(object):
     def update_alert_data_table(self):
         # Add a new row to the Trusteer Alert data table
         alert_row = incident.addRow('trusteer_ppd_dt_trusteer_alerts')
-        alert_row.trusteer_ppd_dt_date_added = int(datetime.now().timestamp()*1000) 
         alert_row.trusteer_ppd_dt_session_id = self.email_contents_json.get(SESSION_ID)
         alert_row.trusteer_ppd_dt_activity = self.email_contents_json.get(ACTIVITY)
         alert_row.trusteer_ppd_dt_event_received_at = self.soar_datetimeformat(self.email_contents_json.get(EVENT_RECEIVED_AT))
@@ -362,17 +361,17 @@ class EmailProcessor(object):
 
     def add_artifacts(self):
         # Add any Trusteer information (not in the data table) as artifacts here.
+        artifact_description = "Trusteer PPD created artifact."
         if self.email_contents_json.get(USER_AGENT_STRING) and (self.email_contents_json.get(USER_AGENT_STRING) != 'N/A'):
             artifact_value = self.email_contents_json.get(USER_AGENT_STRING)
-            artifact_type = "User Agent"
-            artifact_description = "Trusteer PPD created artifact."
-            incident.addArtifact(artifact_type, artifact_value, artifact_description)
+            incident.addArtifact("User Agent", artifact_value, artifact_description)
         if self.email_contents_json.get(MALWARE) and (self.email_contents_json.get(MALWARE) != 'N/A'):
             artifact_value = self.email_contents_json.get(MALWARE)
-            artifact_type = "Malware Family/Variant"
-            artifact_description = "Trusteer PPD created artifact."
-            incident.addArtifact(artifact_type, artifact_value, artifact_description)
-            
+            incident.addArtifact("Malware Family/Variant", artifact_value, artifact_description)
+        if self.email_contents_json.get(DETECTED_AT) and (self.email_contents_json.get(DETECTED_AT) != 'N/A'):
+            artifact_value = self.email_contents_json.get(DETECTED_AT)
+            incident.addArtifact("URL", artifact_value, artifact_description)
+
     def add_incident_note(self):
         # Add a note containing the email contents
         incident.addNote("Email from Trusteer Pinpoint Detect:<br> {0}".format(self.email_contents))
