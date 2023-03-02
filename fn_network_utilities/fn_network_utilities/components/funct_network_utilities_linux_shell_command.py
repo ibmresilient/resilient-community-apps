@@ -76,8 +76,8 @@ class FunctionComponent(AppFunctionComponent):
 
         shell_command = colon_split[0].strip()
 
-        # Previous version required parentheses around remote computer, this is for backwards compatability
-        remote = remove_punctuation(remote, "parentheses")
+        # Previous version required parenthesis around remote computer, this is for backwards compatability
+        remote = remove_punctuation(remote, True)
 
         # Check if command is configured
         if shell_command not in self.options:
@@ -87,8 +87,8 @@ class FunctionComponent(AppFunctionComponent):
 
         shell_command_base = self.options[shell_command].strip()
 
-        # Previous version required parentheses around command, this is for backwards compatability
-        shell_command_base = remove_punctuation(shell_command_base, "parentheses")
+        # Previous version required parenthesis around command, this is for backwards compatability
+        shell_command_base = remove_punctuation(shell_command_base, True)
 
         run_cmd = RunCmd(remote, shell_command_base.strip(), rendered_shell_params)
         run_cmd.run_remote_linux()

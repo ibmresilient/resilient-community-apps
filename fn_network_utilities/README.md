@@ -494,6 +494,8 @@ incident.addNote(helper.createPlainText(note_text))
 ## Function - Network Utilities: Local Shell Command
 This function allows your workflows/playbooks to execute shell-scripts locally and return the result into the workflow/playbook. The results include the `stdout` and `stderr` streams, the return code, and information about the execution time. If the output of the shell script is JSON, it is returned as structured data. Results can then be added to the incident as file attachments, artifacts, data tables, or any other uses.
 
+This is not reccomended for use in App Host because the base image of the container (registry.access.redhat.com/ubi8/python-39) has limited OS commands available.
+
 Different modes supported:
 * Local command execution of Linux commands such as nslookup, dig, traceroute and whois
 * Local execution of Windows Powershell commands if resilient-circuits is installed on a Windows platform.

@@ -71,11 +71,11 @@ class FunctionComponent(AppFunctionComponent):
 
         shell_command_base = self.options[shell_command].strip()
 
-        # Previous version required parentheses around command for linux, this is for backwards compatability
-        shell_command_base = remove_punctuation(shell_command_base, "parentheses")
+        # Previous version required parenthesis around command for linux, this is for backwards compatability
+        shell_command_base = remove_punctuation(shell_command_base, True)
 
         # Previous version required brackets around command for powershell, this is for backwards compatability
-        shell_command_base = remove_punctuation(shell_command_base, "brackets")
+        shell_command_base = remove_punctuation(shell_command_base, False)
 
 
         run_cmd = RunCmd(None, shell_command_base, rendered_shell_params)
