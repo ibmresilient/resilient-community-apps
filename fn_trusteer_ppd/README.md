@@ -109,7 +109,9 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  <!-- ::CHANGE_ME:: -->
+  | Incidents | Read |
+  | Edit Incidents | Fields |
+  | Layouts | Read, Edit |
 
 The following SOAR platform guides provide additional information: 
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -820,16 +822,16 @@ class EmailProcessor(object):
 
     def add_artifacts(self):
         # Add any Trusteer information (not in the data table) as artifacts here.
+        artifact_description = "Trusteer PPD created artifact."
         if self.email_contents_json.get(USER_AGENT_STRING) and (self.email_contents_json.get(USER_AGENT_STRING) != 'N/A'):
             artifact_value = self.email_contents_json.get(USER_AGENT_STRING)
-            artifact_type = "User Agent"
-            artifact_description = "Trusteer PPD created artifact."
-            incident.addArtifact(artifact_type, artifact_value, artifact_description)
+            incident.addArtifact("User Agent", artifact_value, artifact_description)
         if self.email_contents_json.get(MALWARE) and (self.email_contents_json.get(MALWARE) != 'N/A'):
             artifact_value = self.email_contents_json.get(MALWARE)
-            artifact_type = "Malware Family/Variant"
-            artifact_description = "Trusteer PPD created artifact."
-            incident.addArtifact(artifact_type, artifact_value, artifact_description)
+            incident.addArtifact("Malware Family/Variant", artifact_value, artifact_description)
+        if self.email_contents_json.get(DETECTED_AT) and (self.email_contents_json.get(DETECTED_AT) != 'N/A'):
+            artifact_value = self.email_contents_json.get(DETECTED_AT)
+            incident.addArtifact("URL", artifact_value, artifact_description)
             
     def add_incident_note(self):
         # Add a note containing the email contents
@@ -1019,7 +1021,7 @@ trusteer_ppd_dt_trusteer_alerts
 | City | `trusteer_ppd_dt_city` | `text` | - |
 | Classification | `trusteer_ppd_dt_classification` | `text` | - |
 | Country | `trusteer_ppd_dt_country` | `text` | - |
-| Date Added | `trusteer_ppd_dt_date_added` | `datetimepicker` | - |
+| SOAR Added | `trusteer_ppd_dt_date_added` | `datetimepicker` | - |
 | Device ID | `trusteer_ppd_dt_device_id_and_link` | `textarea` | - |
 | Event Received At | `trusteer_ppd_dt_event_received_at` | `datetimepicker` | - |
 | IP Address | `trusteer_ppd_dt_user_ip_address` | `text` | - |
