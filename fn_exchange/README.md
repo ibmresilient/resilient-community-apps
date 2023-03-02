@@ -280,16 +280,64 @@ Creates a meeting and sends out invitation to required attendees and optional at
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_exchange --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_exchange
-} 
+  "body": "Please be present",
+  "content": {
+    "body": "Please be present",
+    "end_time": "2023-03-24 13:00:37",
+    "location": "https://example.com",
+    "online_meeting": true,
+    "optional_attendees": [
+      "johndoe.s.1@exchange2016.com"
+    ],
+    "required_attendees": [
+      "scurtin@exchange2016.com"
+    ],
+    "sender": "johndoe.n@exchange2016.com",
+    "start_time": "2023-03-24 12:00:37",
+    "subject": "Security Weekly Meeting",
+    "timezone": "Etc/GMT"
+  },
+  "end_time": "2023-03-24 13:00:37",
+  "inputs": {
+    "inputs": {
+      "exchange_email": "johndoe.n@exchange2016.com",
+      "exchange_is_online_meeting": true,
+      "exchange_meeting_body": "Please be present",
+      "exchange_meeting_end_time": 1679662837000,
+      "exchange_meeting_location": "https://example.com",
+      "exchange_meeting_start_time": 1679659237000,
+      "exchange_meeting_subject": "Security Weekly Meeting",
+      "exchange_optional_attendees": "johndoe.s.1@exchange2016.com",
+      "exchange_required_attendees": "scurtin@exchange2016.com"
+    }
+  },
+  "location": "https://example.com",
+  "metrics": {
+    "execution_time_ms": 3233,
+    "host": "exchange2016",
+    "package": "fn-exchange",
+    "package_version": "1.1.0",
+    "timestamp": "2023-03-01 14:28:03",
+    "version": "1.0"
+  },
+  "online_meeting": true,
+  "optional_attendees": [
+    "johndoe.s.1@exchange2016.com"
+  ],
+  "raw": "{\"required_attendees\": [\"scurtin@exchange2016.com\"], \"optional_attendees\": [\"johndoe.s.1@exchange2016.com\"], \"sender\": \"johndoe.n@exchange2016.com\", \"subject\": \"Security Weekly Meeting\", \"body\": \"Please be present\", \"start_time\": \"2023-03-24 12:00:37\", \"end_time\": \"2023-03-24 13:00:37\", \"timezone\": \"Etc/GMT\", \"location\": \"https://example.com\", \"online_meeting\": true}",
+  "reason": null,
+  "required_attendees": [
+    "scurtin@exchange2016.com"
+  ],
+  "sender": "johndoe.n@exchange2016.com",
+  "start_time": "2023-03-24 12:00:37",
+  "subject": "Security Weekly Meeting",
+  "success": true,
+  "timezone": "Etc/GMT",
+  "version": "1.0"
+}
 ```
 
 </p>
@@ -843,16 +891,36 @@ Get mailbox info for specified email.
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_exchange --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_exchange
-} 
+  "content": {
+    "email_address": "johndoe.n@exchange2016.com",
+    "mailbox_type": "Mailbox",
+    "name": "John Doe",
+    "routing_type": "SMTP"
+  },
+  "email_address": "johndoe.n@exchange2016.com",
+  "inputs": {
+    "inputs": {
+      "exchange_get_email": "johndoe.n@exchange2016.com"
+    }
+  },
+  "mailbox_type": "Mailbox",
+  "metrics": {
+    "execution_time_ms": 254,
+    "host": "exchange2016",
+    "package": "fn-exchange",
+    "package_version": "1.1.0",
+    "timestamp": "2023-03-02 12:21:02",
+    "version": "1.0"
+  },
+  "name": "John Doe",
+  "raw": "{\"name\": \"John Doe\", \"email_address\": \"johndoe.n@exchange2016.com\", \"routing_type\": \"SMTP\", \"mailbox_type\": \"Mailbox\"}",
+  "reason": null,
+  "routing_type": "SMTP",
+  "success": true,
+  "version": "1.0"
+}
 ```
 
 </p>
@@ -882,23 +950,24 @@ response = {
   'mailbox_type': 'Mailbox'}
 
 '''
+write_to_artifact = False
 
 content = results.get("content")
 
-if not results.get("success")
+if not results.get("success"):
   text = u"Unable to create meeting"
   fail_reason = results.get("reason")
   if fail_reason:
-    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    text += u"Failure reason: {}".format(fail_reason)
     
 else:
-
-  incident.addArtifact('Email Sender', content.get('email_address'), 'Email address from Exchange Get Mailbox Info')
-  incident.addArtifact('Email Sender Name', content.get('name'), 'Email sender name from Exchange Get Mailbox Info')
+  if write_to_artifact:
+    incident.addArtifact('Email Sender', content.get('email_address'), 'Email address from Exchange Get Mailbox Info')
+    incident.addArtifact('Email Sender Name', content.get('name'), 'Email sender name from Exchange Get Mailbox Info')
   
   text  =  "<b>Microsoft Exchange Mailbox Information:</b><br />"
   text += f"<br />Name: {content.get('name')}"
-  text += f"<br />Email Address: {content.get('email_address')}
+  text += f"<br />Email Address: {content.get('email_address')}"
   text += f"<br />Routing Type: {content.get('routing_type')}"
   text += f"<br />Mailbox Type: {content.get('mailbox_type')}"
 
@@ -1343,14 +1412,7 @@ else:
 
 ## Data Table - Email Information
 
- <p align="center">
-<img src="./doc/screenshots/popup_create_meeting.png" />
-</p>
-
-<p align="center">
-<img src="./doc/screenshots/workflow_create_meeting.png" />
-</p>
-
+ ![screenshot: dt-email-information](./doc/screenshots/dt-email-information.png) <!-- ::CHANGE_ME:: -->
 
 #### API Name:
 exchange_email_information_dt
