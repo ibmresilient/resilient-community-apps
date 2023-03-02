@@ -1,3 +1,153 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "required_attendees": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "optional_attendees": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sender": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "string"
+        },
+        "end_time": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "online_meeting": {
+          "type": "boolean"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "inputs": {
+          "type": "object",
+          "properties": {
+            "exchange_optional_attendees": {
+              "type": "string"
+            },
+            "exchange_is_online_meeting": {
+              "type": "boolean"
+            },
+            "exchange_meeting_start_time": {
+              "type": "integer"
+            },
+            "exchange_required_attendees": {
+              "type": "string"
+            },
+            "exchange_meeting_subject": {
+              "type": "string"
+            },
+            "exchange_meeting_end_time": {
+              "type": "integer"
+            },
+            "exchange_meeting_location": {
+              "type": "string"
+            },
+            "exchange_meeting_body": {
+              "type": "string"
+            },
+            "exchange_email": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
+    "required_attendees": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "optional_attendees": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sender": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "start_time": {
+      "type": "string"
+    },
+    "end_time": {
+      "type": "string"
+    },
+    "timezone": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "online_meeting": {
+      "type": "boolean"
+    }
+  }
 }

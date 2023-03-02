@@ -33,23 +33,24 @@ response = {
   'mailbox_type': 'Mailbox'}
 
 '''
+write_to_artifact = False
 
 content = results.get("content")
 
-if not results.get("success")
+if not results.get("success"):
   text = u"Unable to create meeting"
   fail_reason = results.get("reason")
   if fail_reason:
-    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    text += u"Failure reason: {}".format(fail_reason)
     
 else:
-
-  incident.addArtifact('Email Sender', content.get('email_address'), 'Email address from Exchange Get Mailbox Info')
-  incident.addArtifact('Email Sender Name', content.get('name'), 'Email sender name from Exchange Get Mailbox Info')
+  if write_to_artifact:
+    incident.addArtifact('Email Sender', content.get('email_address'), 'Email address from Exchange Get Mailbox Info')
+    incident.addArtifact('Email Sender Name', content.get('name'), 'Email sender name from Exchange Get Mailbox Info')
   
   text  =  "<b>Microsoft Exchange Mailbox Information:</b><br />"
   text += f"<br />Name: {content.get('name')}"
-  text += f"<br />Email Address: {content.get('email_address')}
+  text += f"<br />Email Address: {content.get('email_address')}"
   text += f"<br />Routing Type: {content.get('routing_type')}"
   text += f"<br />Mailbox Type: {content.get('mailbox_type')}"
 
