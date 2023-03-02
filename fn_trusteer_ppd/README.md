@@ -170,6 +170,27 @@ Fill out the pop-up form. The **Product** selection must be **Pinpoint Detection
 The email addresse to send Trusteer alerts appears in the list.
  ![screenshot: fn-trusteer-ppd-tma-config ](./doc/screenshots/fn-trusteer-ppd-tma-config.png)
 
+Configure the same email address in SOAR by creating an inbound email connection:
+
+ ![screenshot: fn-trusteer-ppd-tma-config ](./doc/screenshots/fn-trusteer-ppd-inbound-email.png)
+
+Email from Trusteer arrives in the inbound mailbox and a the provided rule 
+
+
+### The case/incident owner
+New cases/incidents need an owner, either an individual identified by their email address or a group name. Prior to running the app, the provided script **Trusteer PPD: Create Case from Email**, should be changed to reflect the new incident owner in your IBM SOAR platform. For example, to change the owner to l1@businessname.com, locate line 9 of the script:
+
+```python
+# The new incident owner - the email address of a user or the name of a group and cannot be blank.
+# Change this value to reflect who will be the owner of the incident before running the script.
+new_case_owner = "Trusteer Pinpoint Detect case owner"
+```
+Edit the line:
+```python
+# The new incident owner - the email address of a user or the name of a group and cannot be blank.
+# Change this value to reflect who will be the owner of the incident before running the script.
+newIncidentOwner = "l1@businessname.com"
+```
 
 #### Permissions
 <!--
@@ -213,9 +234,7 @@ The following Trusteer Tab custom layout is included in the app:
 ---
 
 ## Function - Trusteer PPD: Get URL Links to Trusteer
-Return the URL links to the Trusteer session PUIDs and the devices.
-
- ![screenshot: fn-trusteer-ppd-get-url-links-to-trusteer ](./doc/screenshots/fn-trusteer-ppd-get-url-links-to-trusteer.png) <!-- ::CHANGE_ME:: -->
+Return the URL links to the Trusteer PUID and/or the device, depending on the input parameters.
 
 <details><summary>Inputs:</summary>
 <p>
@@ -264,17 +283,28 @@ results = {
 <p>
 
 ```python
-None
+inputs.trusteer_ppd_device_id = row.trusteer_ppd_dt_device_id_and_link.content
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Post-Process Scrip to Create Link to Device:</summary>
 <p>
 
 ```python
-None
+result = playbook.functions.results.trusteer_ppd_result
+if not result.success:
+  incident.addNote("Trusteer PPD: Function to get URL links was not successful.")
+else:
+  content = result.get("content", {})
+
+  link_url_device_id = content.get("link_url_device_id", {})
+  if link_url_device_id:
+    ref_html = u"""<a href='{0}'>{1}</a>""".format(link_url_device_id, result.inputs.trusteer_ppd_device_id)
+    row.trusteer_ppd_dt_device_id_and_link = helper.createRichText(ref_html)
+  else:
+    incident.addNote("Trusteer PPD: Function to get URL links has no content.")
 ```
 
 </p>
@@ -353,7 +383,24 @@ results = {
 <p>
 
 ```python
-None
+classification_map = { 
+  "Pending": {"feedback": "pending_confirmation", "fraud_mo": None},
+  "Confirmed legitimate": {"feedback": "confirmed_legitimate", "fraud_mo": None},
+  "Undetermined": {"feedback": "undetermined", "fraud_mo": None},
+  "Confirmed fraud": {"feedback": "confirmed_fraud", "fraud_mo": None},
+  "Confirmed fraud (Account takeover)": {"feedback": "pending_confirmation", "fraud_mo": "account_takeover"},
+  "Confirmed fraud (First-party)": {"feedback": "confirmed_fraud", "fraud_mo": "first_party"},
+  "Confirmed fraud (Mule account)": {"feedback": "confirmed_fraud", "fraud_mo": "mule_account"},
+  "Confirmed fraud (Remote access tool)":{"feedback": "confirmed_fraud", "fraud_mo": "remote_access_tool"},
+  "Confirmed fraud (Social engineering)":{"feedback": "confirmed_fraud", "fraud_mo": "social_engineering"},
+  "Confirmed fraud (Stolen device)": {"feedback": "confirmed_fraud", "fraud_mo": "stolen_device"}
+}
+mapped_classification = classification_map.get(playbook.inputs.trusteer_ppd_classification)
+inputs.trusteer_ppd_feedback = mapped_classification.get("feedback")
+inputs.trusteer_ppd_fraud_mo = mapped_classification.get("fraud_mo")
+        
+inputs.trusteer_ppd_application_id = incident.properties.trusteer_ppd_application_id
+inputs.trusteer_ppd_session_id = row.trusteer_ppd_dt_session_id
 ```
 
 </p>
@@ -363,7 +410,12 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.alert_classification
+
+if results.success:
+  incident.addNote("Trusteer PPD: Updated Alert Classification to <b>{0}</b>".format(playbook.inputs.trusteer_ppd_classification))
+else:
+  incident.addNote("Trusteer PPD: ERROR: Unable to Update Alert Classification to <b>{0}</b> in Trusteer".format(playbook.inputs.trusteer_ppd_classification))
 ```
 
 </p>
@@ -373,7 +425,7 @@ None
 ## Function - Trusteer PPD: Update Classification in Alert Datatable
 Update the Trusteer Alert data table Classification column for all rows with the same session ID.
 
- ![screenshot: fn-trusteer-ppd-update-classification-in-alert-datatable ](./doc/screenshots/fn-trusteer-ppd-update-classification-in-alert-datatable.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-trusteer-ppd-update-classification-in-alert-datatable ](./doc/screenshots/fn-trusteer-ppd-update-classification-in-alert-datatable.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -424,7 +476,9 @@ results = {
 <p>
 
 ```python
-None
+inputs.incident_id = incident.id
+inputs.trusteer_ppd_session_id = row.trusteer_ppd_dt_session_id
+inputs.trusteer_ppd_classification = playbook.inputs.trusteer_ppd_classification
 ```
 
 </p>
@@ -434,7 +488,12 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.alert_datatable_update
+
+if not results.success:
+  incident.addNote("Trusteer PPD: ERROR: Unable to update Trusteer Alerts data table to classification <b>{}</b>".format(playbook.inputs.trusteer_ppd_classification))
+else:
+  incident.addNote("Trusteer PPD: Updated Trusteer PPD Alerts data table sessions: <b>{0}</b> to classification:<b>{1}</b> ".format(row.trusteer_ppd_dt_session_id, playbook.inputs.trusteer_ppd_classification))
 ```
 
 </p>
