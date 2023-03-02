@@ -19,39 +19,52 @@
 # Microsoft Exchange
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-  - [Custom Layouts](#custom-layouts)
-- [Function - Exchange Create Meeting](#function---exchange-create-meeting)
-- [Function - Exchange Delete Emails](#function---exchange-delete-emails)
-- [Function - Exchange Find Emails](#function---exchange-find-emails)
-- [Function - Exchange Get Mailbox Info](#function---exchange-get-mailbox-info)
-- [Function - Exchange Move Emails](#function---exchange-move-emails)
-- [Function - Exchange Send Email](#function---exchange-send-email)
-- [Data Table - Email Information](#data-table---email-information)
-- [Data Table - Meeting Information](#data-table---meeting-information)
-- [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Microsoft Exchange](#microsoft-exchange)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+    - [Development Version](#development-version)
+    - [Endpoint Developed With](#endpoint-developed-with)
+    - [Configuration](#configuration)
+      - [Timezones](#timezones)
+      - [Folder Paths](#folder-paths)
+      - [Information as Data-tables or Artifacts](#information-as-data-tables-or-artifacts)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+    - [Custom Layouts](#custom-layouts)
+  - [Function - Exchange Create Meeting](#function---exchange-create-meeting)
+  - [Function - Exchange Delete Emails](#function---exchange-delete-emails)
+  - [Function - Exchange Find Emails](#function---exchange-find-emails)
+  - [Function - Exchange Get Mailbox Info](#function---exchange-get-mailbox-info)
+  - [Function - Exchange Move Emails](#function---exchange-move-emails)
+  - [Function - Exchange Send Email](#function---exchange-send-email)
+  - [Data Table - Email Information](#data-table---email-information)
+      - [API Name:](#api-name)
+      - [Columns:](#columns)
+  - [Data Table - Meeting Information](#data-table---meeting-information)
+      - [API Name:](#api-name-1)
+      - [Columns:](#columns-1)
+  - [Rules](#rules)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
--->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | MM/YYYY | Initial Release | <!-- ::CHANGE_ME:: -->
+| v1.0.4 | September 2022 | Bugfix on Selftest |
+| v1.0.3 | June 2022 | Add support for Python 3.9. |
+| v1.0.2 | June 2021 | Fix for ``selftest``. |
+| v1.0.1 | December 2020 | Added App Host support, Added proxy support. |
+| v1.0.0 | August 2018 | Initial Release. |
 
 ---
 
@@ -64,49 +77,46 @@
 
  ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
 
-This package provides functions that can be used to access Microsoft 
-Exchange email and meeting capabilities. The package provided has the following capabilities:<br>
+This application extends the capabilities of the SOAR platform with Microsoft Exchange On-prem services and functionality. Emails from an exchange mailbox can now be read, written, sent, queried, deleted, and moved from within the platform. Both Online and in-person meetings can be scheduled and invites can be sent using this application. All extracted information is now tabulated and neatly displayed in a separate incident tab. <br>
 
-- Create a meeting in Microsoft Exchange and send out invites<br>
+### Key Features
 
-- Delete queried emails from a user's mailbox<br>
+- Compose and send emails to multiple recipients.<br>
 
-- Query emails from a user's mailbox<br>
+- Schedule an Online meeting in Microsoft Exchange and send out invites with links to the meeting.<br>
 
-- Get mailbox info for a sender<br>
+- Schedule an Offline meeting and send out invites with information regarding meeting venue.<br>
 
-- Move the contents of one folder to another folder and deletes the original<br>
+- Saved all scheduled meetings as incident notes or in a separate incident tab called Exchange.<br>
+
+- Get mailbox information for a particular sender.<br>
+
+- Get emails from a user's mailbox and filter them based on fundamental attributes including the sender's email address, the location of the email's folder, the subject, the body, and if it contains attachments.<br>
+
+- Conduct a thorough search of the user's mailbox by tunneling subfolders, conducting the search based on the beginning and ending dates of emails received, sorting emails by recency, and limiting the number of emails obtained.
+
+- Save all retrieved information as either artifacts or tabulate in a separate incident tab called Exchange.<br>
+
+- Delete email permanently from a user's mailbox or move them to the Trash folder.<br>
+
+- Migrate all the contents of a folder to another.<br>
 
 - Move queried emails from one folder to another folder<br>
 
-- Send email to a list of recipients
-
-### Key Features
-<!--
-  List the Key Features of the Integration
--->
-* Key Feature 1 <!-- ::CHANGE_ME:: -->
-* Key Feature 2 <!-- ::CHANGE_ME:: -->
-* Key Feature 3 <!-- ::CHANGE_ME:: -->
-
----
 
 ## Requirements
-<!--
-  List any Requirements 
---> 
-<!-- ::CHANGE_ME:: -->
+
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `45.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `45.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -114,7 +124,6 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  <!-- ::CHANGE_ME:: -->
 
 The following SOAR platform guides provide additional information: 
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -136,7 +145,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does/does not** <!-- ::CHANGE_ME:: --> support a proxy server.
+The app **does** support a proxy server.
 
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
@@ -145,37 +154,63 @@ Additional package dependencies may exist for each of these packages:
 * exchangelib ~= 4.9.0;python_version>='3.9'
 * resilient_circuits>=45.0.0
 
-### <!-- ::CHANGE_ME:: --> Development Version
+### Development Version
 
 This app has been implemented using:
-| Product Name | Product Version | API URL | API Version |
-| ------------ | --------------- | ------- | ----------- |
-| <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> |
+| Product Name | Product Version | API URL |
+| ------------ | --------------- | ------- |
+| exchangelib | 4.9.0 | https://ecederstrand.github.io/exchangelib/ |
 
-#### Prerequisites
-<!--
-List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
--->
-* Prereq A <!-- ::CHANGE_ME:: -->
-* Prereq B <!-- ::CHANGE_ME:: -->
-* Prereq C <!-- ::CHANGE_ME:: -->
+### Endpoint Developed With
 
-#### Configuration
-<!--
-List any steps that are needed to configure the endpoint to use this app.
--->
-* Config A <!-- ::CHANGE_ME:: -->
-* Config B <!-- ::CHANGE_ME:: -->
-* Config C <!-- ::CHANGE_ME:: -->
+This app has been implemented using **Microsoft Exchange Server**
 
-#### Permissions
-<!--
-List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
--->
-* Permission A <!-- ::CHANGE_ME:: -->
-* Permission B <!-- ::CHANGE_ME:: -->
-* Permission C <!-- ::CHANGE_ME:: -->
+### Configuration
 
+Please pay attention to the below mentioned pointers as the application can be slightly complex and confusing to configure.
+
+#### Timezones
+
+* The application now has the ability to set a default timezone from the app.conf. Timezones are to be specified using their `Tz Database name`. Here are a few examples:
+
+- timezone = Europe/Dublin
+- timezone = Etc/GMT+2
+- timezone = Asia/Kolkata
+- timezone = Etc/GMT
+
+#### Folder Paths
+
+* When the `Source location` or the `exchange_folder_path` fields are left empty, they are substituted with the value specified for `default_folder_path` in app.conf 
+
+* The path related fields might be slightly complicated to configure as they tend to vary with the Exchange environment. Upon entering an invalid folder path, a tree structure of the folder hierarchy will be printed. Here is an example:
+
+ ![screenshot: fn-exchange-folder-path ](./doc/screenshots/fn-exchange-folder-path.png)
+
+* Example folder paths given this folder structure
+could be any path following the root path:
+  - Top of Information Store/Inbox
+  - Top of Information Store/Deleted Items
+  - Finder/Unread Mail
+  - Finder
+
+* Additionally, if the `exchange_search_subfolders` path is set to true, every folder in its branch will be included in the query. For example if the specified folder is **Recoverable Items**, then the searched folders would be:
+  - Recoverable Items
+  - Recoverable Items/Deletions
+  - Recoverable Items/Purges
+  - Recoverable Items/Versions
+
+* To search folder paths, the specified account in config file must have access to the searched folders. Folders that contain `/` or `,` must be wrapped in quotes.
+  - Example/"One/With/Quotes"/Folder
+  - Example/"One, with, commas"/Folder
+  - Example/"One/with, both"/Folder
+
+* Multiple folder paths can be specified by separating them with commas and following the above rules.
+
+#### Information as Data-tables or Artifacts
+
+* Information extracted from emails and meetings can now be either added as artifacts (legacy) or to data-tables present in the Exchange tab of an Incident. This behavior can be changed by toggling the `enable_write_to_datatables` option found in the Post processing scripts of the workflows.
+
+* For more information on specific function inputs, check the tooltips.
 
 ---
 
@@ -190,12 +225,13 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **default_folder_path** | Yes | `Top of Information Store/Inbox` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **email** | Yes | `admin@example.com` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **password** | Yes | `password` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **server** | Yes | `example.com` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **username** | Yes | `domain\username` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **verify_cert** | Yes | `True` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **default_folder_path** | Yes | `Top of Information Store/Inbox` |  *Some folder path after root Multiple folder paths must be separated by commas.* |
+| **server** | Yes | `example.com` |*Exchange server DNS name or ip address.* |
+| **email** | Yes | `admin@example.com` | *default account to send emails and create meetings if one was not specified. Specifying an account that is not this one will require impersonation access.* |
+| **username** | Yes | `domain\username` | *Admin account with mailbox access to other accounts.* |
+| **password** | Yes | `password` | *Password of Admin account.* |
+| **verify_cert** | Yes | `True` | *Use a CA cert for access to an Exchange server.* |
+| **timezone** | No | `Etc/GMT` | *Default Timezone for the application. Used for Meetings and querying emails.* |
 
 ### Custom Layouts
 <!--
@@ -207,13 +243,19 @@ The following table provides the settings you need to configure the app. These s
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) <!-- ::CHANGE_ME:: -->
 
-
 ---
 
 ## Function - Exchange Create Meeting
 Creates a meeting and sends out invitation to required attendees and optional attendees.
 
- ![screenshot: fn-exchange-create-meeting ](./doc/screenshots/fn-exchange-create-meeting.png) <!-- ::CHANGE_ME:: -->
+<p align="center">
+<img src="./doc/screenshots/popup_create_meeting.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/workflow_create_meeting.png" />
+</p>
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -221,14 +263,14 @@ Creates a meeting and sends out invitation to required attendees and optional at
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exchange_email` | `text` | Yes | `user@example.com` | Email account that is used |
-| `exchange_is_online_meeting` | `boolean` | No | `-` | Specifies if the location provided in the above filed is a link or not |
+| `exchange_meeting_subject` | `text` | No | `Meeting Subject` | Subject of exchange meeting |
 | `exchange_meeting_body` | `text` | No | `Meeting Body` | Body of exchange meeting |
 | `exchange_meeting_end_time` | `datetimepicker` | Yes | `-` | When the meeting should end |
-| `exchange_meeting_location` | `text` | No | `https://meeting.room.com/meet/johnDoe` | If the meeting is conducted online, then the URL to the Room. Or the Name of the Physical location of the Meeting Room |
 | `exchange_meeting_start_time` | `datetimepicker` | Yes | `-` | When the meeting should start |
-| `exchange_meeting_subject` | `text` | No | `Meeting Subject` | Subject of exchange meeting |
-| `exchange_optional_attendees` | `text` | No | `user1@example.com,user2@example.com` | Comma separated list of optional attendees |
-| `exchange_required_attendees` | `text` | No | `user1@example.com,user2@example.com` | Comma separated list of required attendees |
+| `exchange_optional_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of optional attendees |
+| `exchange_required_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of required attendees |
+| `exchange_meeting_location` | `text` | No | `https://meeting.room.com/meet/user` | If the meeting is conducted online, then the URL to the Room. Or the Name of the Physical location of the Meeting Room |
+| `exchange_is_online_meeting` | `boolean` | No | `-` | Specifies if the location provided in the above filed is a link or not |
 
 </p>
 </details>
@@ -238,16 +280,16 @@ Creates a meeting and sends out invitation to required attendees and optional at
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
+<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-  "body": null,
-  "end_time": 1656025200000,
-  "optional_attendees": null,
-  "required_attendees": "example@example.com",
-  "sender": "t.shelby@example.com",
-  "start_time": 1655938800000,
-  "subject": "This is a potential malicious link"
-}
+    # TODO: Generate an example of the Function Output within this code block.
+    # To get the output of a Function:
+    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
+    #   2. Invoke the Function in SOAR
+    #   3. Gather the results using: $ resilient-sdk codegen -p fn_exchange --gather-results
+    #   4. Run docgen again: $ resilient-sdk docgen -p fn_exchange
+} 
 ```
 
 </p>
@@ -346,7 +388,14 @@ else:
 ## Function - Exchange Delete Emails
 Delete emails with the specified query parameters.
 
- ![screenshot: fn-exchange-delete-emails ](./doc/screenshots/fn-exchange-delete-emails.png) <!-- ::CHANGE_ME:: -->
+<p align="center">
+<img src="./doc/screenshots/popup_delete_email.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/workflow_delete_email.png" />
+</p>
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -361,7 +410,7 @@ Delete emails with the specified query parameters.
 | `exchange_has_attachments` | `boolean` | No | `-` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
-| `exchange_num_emails` | `text` | No | `10` | Maximum number of emails to query |
+| `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
 | `exchange_order_by_recency` | `boolean` | No | `-` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
 | `exchange_search_subfolders` | `boolean` | No | `-` | Yes to search subfolders, No or Unknown to not search subfolders |
 | `exchange_sender` | `text` | No | `user@example.com` | Only get emails from this sender, leave blank to ignore sender attribute |
@@ -377,20 +426,35 @@ Delete emails with the specified query parameters.
 
 ```python
 results = {
-  "email_ids": [
-    "\u003c6475dbadd11745c5abf0fb7b1b60d54f@example.com\u003e"
-  ],
-  "emails": {
-    "\u003c6475dbadd11745c5abf0fb7b1b60d54f@example.com\u003e": {
-      "attachment_ids": [],
-      "attachments": {},
-      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nExample Body\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
-      "mime_content": "Received: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\r\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 127.0.0.1 via Mailbox Transport; Thu, 23 Jun 2022 12:48:18 +0100\r\nReceived: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\r\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 127.0.0.1; Thu, 23 Jun 2022 12:48:18 +0100\r\nReceived: from WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6]) by\r\n WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6%2]) with mapi id\r\n 00.00.2242.012; Thu, 23 Jun 2022 12:48:18 +0100\r\nFrom: Thomas Shelby \u003ct.shelby@example.com\u003e\r\nTo: Thomas Shelby \u003ct.shelby@example.com\u003e\r\nSubject: Warning! Another potential phishing email!\r\nThread-Topic: Warning! Another potential phishing email!\r\nThread-Index: AQHYhvch4pObt1o+A0qCLDlDou3uNw==\r\nDate: Thu, 23 Jun 2022 12:48:18 +0100\r\nMessage-ID: \u003c6475dbadd11745c5abf0fb7b1b60d54f@example.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: WIN-L3KDT22U7UJ.example.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t7c1c4ee8-4c79-454a-ffbb-08da550e43f6\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_\r\nContent-Type: text/plain; charset=\"us-ascii\"\r\n\r\nExample Body\r\n\r\n--_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_\r\nContent-Type: text/html; charset=\"us-ascii\"\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nExample Body\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_6475dbadd11745c5abf0fb7b1b60d54fexamplecom_--\r\n",
-      "sender_email": "t.shelby@example.com",
-      "sender_name": "Thomas Shelby",
-      "subject": "Warning! Another potential phishing email!"
+  "content": {},
+  "inputs": {
+    "inputs": {
+      "exchange_email": "exampleuser1@outlook2016.com",
+      "exchange_email_ids": null,
+      "exchange_end_date": null,
+      "exchange_folder_path": null,
+      "exchange_hard_delete": false,
+      "exchange_has_attachments": null,
+      "exchange_message_subject": "Security Weekly Meeting",
+      "exchange_num_emails": 2,
+      "exchange_order_by_recency": null,
+      "exchange_search_subfolders": null,
+      "exchange_sender": null,
+      "exchange_start_date": null
     }
-  }
+  },
+  "metrics": {
+    "execution_time_ms": 1293,
+    "host": "exchange2016",
+    "package": "fn-exchange",
+    "package_version": "1.0.5",
+    "timestamp": "2023-02-28 20:21:08",
+    "version": "1.0"
+  },
+  "raw": "{}",
+  "reason": "The SMTP address has no mailbox associated with it.",
+  "success": false,
+  "version": "1.0"
 }
 ```
 
@@ -484,8 +548,8 @@ else:
       message_row = incident.addRow("exchange_email_information_dt")
       message_row.exchange_date_of_retrieval = datetime.now().strftime('%Y/%m/%d %H:%M:%S')
       message_row.exchange_dt_message_id = email_id 
-      message_row.exchange_dt_sender_name = email.get("sender_name", "-")
-      message_row.exchange_dt_sender_email = email.get("sender_email", "-")
+      message_row.exchange_dt_recipient_email = email.get("sender_email", "-")
+      message_row.exchange_dt_sender_email = inputs.get("inputs").get("exchange_email")
       message_row.exchange_dt_email_status = "Deleted"
       message_row.exchange_dt_message_subject = email.get("subject", "-")
       message_row.exchange_dt_count_attachments = len(attachment_ids)
@@ -516,7 +580,14 @@ else:
 ## Function - Exchange Find Emails
 Find emails with the specified parameters.
 
- ![screenshot: fn-exchange-find-emails ](./doc/screenshots/fn-exchange-find-emails.png) <!-- ::CHANGE_ME:: -->
+<p align="center">
+<img src="./doc/screenshots/popup_find_email.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/workflow_find_email.png" />
+</p>
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -530,7 +601,7 @@ Find emails with the specified parameters.
 | `exchange_has_attachments` | `boolean` | No | `-` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
-| `exchange_num_emails` | `text` | No | `10` | Maximum number of emails to query |
+| `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
 | `exchange_order_by_recency` | `boolean` | No | `-` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
 | `exchange_search_subfolders` | `boolean` | No | `-` | Yes to search subfolders, No or Unknown to not search subfolders |
 | `exchange_sender` | `text` | No | `user@example.com` | Only get emails from this sender, leave blank to ignore sender attribute |
@@ -546,20 +617,83 @@ Find emails with the specified parameters.
 
 ```python
 results = {
+  "content": {
+    "email_ids": [
+      "\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e",
+      "\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e"
+    ],
+    "emails": {
+      "\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e": {
+        "attachment_ids": [],
+        "attachments": {},
+        "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003cstyle type=\"text/css\" style=\"display:none;\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=\"ltr\"\u003e\r\n\u003cdiv id=\"divtagdefaultwrapper\" style=\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\" dir=\"ltr\"\u003e\r\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+        "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Wed, 8 Feb 2023 13:33:52 +0000\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Wed, 8 Feb 2023 13:33:17 +0000\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Wed, 8 Feb 2023 13:33:07 +0000\r\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\r\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\r\nSubject: test shared mailbox\r\nThread-Topic: test shared mailbox\r\nThread-Index: AQHZO8HaJ8uG95+s6EuNRn6s2lhHRQ==\r\nDate: Wed, 8 Feb 2023 13:32:59 +0000\r\nMessage-ID: \u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t602573ae-2be8-4b87-7aee-08db09d903b1\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\r\nContent-Type: text/plain; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\nsent from johndoe.s.1@exchange2016.com\r\n\r\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\r\nContent-Type: text/html; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=3D\"Content-Type\" content=3D\"text/html; charset=3Diso-8859-=\r\n1\"\u003e\r\n\u003cstyle type=3D\"text/css\" style=3D\"display:none;\"\u003e\u003c!-- P {margin-top:0;margi=\r\nn-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=3D\"ltr\"\u003e\r\n\u003cdiv id=3D\"divtagdefaultwrapper\" style=3D\"font-size:12pt;color:#000000;font=\r\n-family:Calibri,Helvetica,sans-serif;\" dir=3D\"ltr\"\u003e\r\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_--\r\n",
+        "sender_email": "johndoe@exchange2016.com",
+        "sender_name": "John Doe",
+        "subject": "test shared mailbox"
+      },
+      "\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e": {
+        "attachment_ids": [],
+        "attachments": {},
+        "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003cstyle type=\"text/css\" style=\"display:none;\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=\"ltr\"\u003e\r\n\u003cdiv id=\"divtagdefaultwrapper\" style=\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\" dir=\"ltr\"\u003e\r\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+        "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Wed, 5 Oct 2022 19:02:10 +0100\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Wed, 5 Oct 2022 19:02:10 +0100\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Wed, 5 Oct 2022 19:02:09 +0100\r\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\r\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\r\nCC: John Doe \u003cjohndoe@exchange2016.com\u003e\r\nSubject: send to shared mailbox\r\nThread-Topic: send to shared mailbox\r\nThread-Index: AQHY2OSWU84bk8I1/EaCiH2jYzkr5w==\r\nDate: Wed, 5 Oct 2022 19:02:09 +0100\r\nMessage-ID: \u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t940a5821-4068-494b-ea8c-08daa6fbb91e\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\r\nContent-Type: text/plain; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\nsend to shared mailbox\r\n\r\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\r\nContent-Type: text/html; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=3D\"Content-Type\" content=3D\"text/html; charset=3Diso-8859-=\r\n1\"\u003e\r\n\u003cstyle type=3D\"text/css\" style=3D\"display:none;\"\u003e\u003c!-- P {margin-top:0;margi=\r\nn-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=3D\"ltr\"\u003e\r\n\u003cdiv id=3D\"divtagdefaultwrapper\" style=3D\"font-size:12pt;color:#000000;font=\r\n-family:Calibri,Helvetica,sans-serif;\" dir=3D\"ltr\"\u003e\r\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_--\r\n",
+        "sender_email": "johndoe@exchange2016.com",
+        "sender_name": "John Doe",
+        "subject": "send to shared mailbox"
+      }
+    }
+  },
   "email_ids": [
-    "\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e"
+    "\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e",
+    "\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e"
   ],
   "emails": {
-    "\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e": {
+    "\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e": {
       "attachment_ids": [],
       "attachments": {},
-      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003cstyle type=\"text/css\" style=\"display:none;\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=\"ltr\"\u003e\r\n\u003cdiv id=\"divtagdefaultwrapper\" style=\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\" dir=\"ltr\"\u003e\r\n\u003cp\u003eWarning!\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
-      "mime_content": "Received: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\r\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 127.0.0.1 via Mailbox Transport; Thu, 23 Jun 2022 12:42:35 +0100\r\nReceived: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\r\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 127.0.0.1; Thu, 23 Jun 2022 12:42:30 +0100\r\nReceived: from WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6]) by\r\n WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6%2]) with mapi id\r\n 00.00.2242.012; Thu, 23 Jun 2022 12:42:30 +0100\r\nFrom: Thomas Shelby \u003ct.shelby@example.com\u003e\r\nTo: Thomas Shelby \u003ct.shelby@example.com\u003e\r\nSubject: Warning: You may have clicked on a malicious link!\r\nThread-Topic: Warning: You may have clicked on a malicious link!\r\nThread-Index: AQHYhvZRBvk78Xewzkm1r+nXQYlDFQ==\r\nDate: Thu, 23 Jun 2022 12:42:30 +0100\r\nMessage-ID: \u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: WIN-L3KDT22U7UJ.example.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\td0ea5374-fac7-437a-aac4-08da550d74ca\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\r\nContent-Type: text/plain; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\nWarning!\r\n\r\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\r\nContent-Type: text/html; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=3D\"Content-Type\" content=3D\"text/html; charset=3Diso-8859-=\r\n1\"\u003e\r\n\u003cstyle type=3D\"text/css\" style=3D\"display:none;\"\u003e\u003c!-- P {margin-top:0;margi=\r\nn-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=3D\"ltr\"\u003e\r\n\u003cdiv id=3D\"divtagdefaultwrapper\" style=3D\"font-size:12pt;color:#000000;font=\r\n-family:Calibri,Helvetica,sans-serif;\" dir=3D\"ltr\"\u003e\r\n\u003cp\u003eWarning!\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_--\r\n",
-      "sender_email": "t.shelby@example.com",
-      "sender_name": "Thomas Shelby",
-      "subject": "Warning: You may have clicked on a malicious link!"
+      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003cstyle type=\"text/css\" style=\"display:none;\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=\"ltr\"\u003e\r\n\u003cdiv id=\"divtagdefaultwrapper\" style=\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\" dir=\"ltr\"\u003e\r\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+      "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Wed, 8 Feb 2023 13:33:52 +0000\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Wed, 8 Feb 2023 13:33:17 +0000\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Wed, 8 Feb 2023 13:33:07 +0000\r\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\r\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\r\nSubject: test shared mailbox\r\nThread-Topic: test shared mailbox\r\nThread-Index: AQHZO8HaJ8uG95+s6EuNRn6s2lhHRQ==\r\nDate: Wed, 8 Feb 2023 13:32:59 +0000\r\nMessage-ID: \u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t602573ae-2be8-4b87-7aee-08db09d903b1\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\r\nContent-Type: text/plain; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\nsent from johndoe.s.1@exchange2016.com\r\n\r\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\r\nContent-Type: text/html; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=3D\"Content-Type\" content=3D\"text/html; charset=3Diso-8859-=\r\n1\"\u003e\r\n\u003cstyle type=3D\"text/css\" style=3D\"display:none;\"\u003e\u003c!-- P {margin-top:0;margi=\r\nn-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=3D\"ltr\"\u003e\r\n\u003cdiv id=3D\"divtagdefaultwrapper\" style=3D\"font-size:12pt;color:#000000;font=\r\n-family:Calibri,Helvetica,sans-serif;\" dir=3D\"ltr\"\u003e\r\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_--\r\n",
+      "sender_email": "johndoe@exchange2016.com",
+      "sender_name": "John Doe",
+      "subject": "test shared mailbox"
+    },
+    "\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e": {
+      "attachment_ids": [],
+      "attachments": {},
+      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003cstyle type=\"text/css\" style=\"display:none;\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=\"ltr\"\u003e\r\n\u003cdiv id=\"divtagdefaultwrapper\" style=\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\" dir=\"ltr\"\u003e\r\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+      "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Wed, 5 Oct 2022 19:02:10 +0100\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Wed, 5 Oct 2022 19:02:10 +0100\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Wed, 5 Oct 2022 19:02:09 +0100\r\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\r\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\r\nCC: John Doe \u003cjohndoe@exchange2016.com\u003e\r\nSubject: send to shared mailbox\r\nThread-Topic: send to shared mailbox\r\nThread-Index: AQHY2OSWU84bk8I1/EaCiH2jYzkr5w==\r\nDate: Wed, 5 Oct 2022 19:02:09 +0100\r\nMessage-ID: \u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t940a5821-4068-494b-ea8c-08daa6fbb91e\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\r\nContent-Type: text/plain; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\nsend to shared mailbox\r\n\r\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\r\nContent-Type: text/html; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=3D\"Content-Type\" content=3D\"text/html; charset=3Diso-8859-=\r\n1\"\u003e\r\n\u003cstyle type=3D\"text/css\" style=3D\"display:none;\"\u003e\u003c!-- P {margin-top:0;margi=\r\nn-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=3D\"ltr\"\u003e\r\n\u003cdiv id=3D\"divtagdefaultwrapper\" style=3D\"font-size:12pt;color:#000000;font=\r\n-family:Calibri,Helvetica,sans-serif;\" dir=3D\"ltr\"\u003e\r\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_--\r\n",
+      "sender_email": "johndoe@exchange2016.com",
+      "sender_name": "John Doe",
+      "subject": "send to shared mailbox"
     }
-  }
+  },
+  "inputs": {
+    "inputs": {
+      "exchange_email": "johndoe.s.1@exchange2016.com",
+      "exchange_email_ids": null,
+      "exchange_end_date": null,
+      "exchange_folder_path": null,
+      "exchange_has_attachments": null,
+      "exchange_message_subject": null,
+      "exchange_num_emails": 2,
+      "exchange_order_by_recency": null,
+      "exchange_search_subfolders": null,
+      "exchange_sender": null,
+      "exchange_start_date": null
+    }
+  },
+  "metrics": {
+    "execution_time_ms": 190199,
+    "host": "exchange2016",
+    "package": "fn-exchange",
+    "package_version": "1.0.5",
+    "timestamp": "2023-02-28 15:51:03",
+    "version": "1.0"
+  },
+  "raw": "{\"email_ids\": [\"\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\", \"\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\"], \"emails\": {\"\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\": {\"subject\": \"send to shared mailbox\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003cstyle type=\\\"text/css\\\" style=\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=\\\"divtagdefaultwrapper\\\" style=\\\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\\\" dir=\\\"ltr\\\"\u003e\\r\\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Wed, 5 Oct 2022 19:02:10 +0100\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Wed, 5 Oct 2022 19:02:10 +0100\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Wed, 5 Oct 2022 19:02:09 +0100\\r\\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\\r\\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\\r\\nCC: John Doe \u003cjohndoe@exchange2016.com\u003e\\r\\nSubject: send to shared mailbox\\r\\nThread-Topic: send to shared mailbox\\r\\nThread-Index: AQHY2OSWU84bk8I1/EaCiH2jYzkr5w==\\r\\nDate: Wed, 5 Oct 2022 19:02:09 +0100\\r\\nMessage-ID: \u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t940a5821-4068-494b-ea8c-08daa6fbb91e\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\nsend to shared mailbox\\r\\n\\r\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=3D\\\"Content-Type\\\" content=3D\\\"text/html; charset=3Diso-8859-=\\r\\n1\\\"\u003e\\r\\n\u003cstyle type=3D\\\"text/css\\\" style=3D\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margi=\\r\\nn-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=3D\\\"divtagdefaultwrapper\\\" style=3D\\\"font-size:12pt;color:#000000;font=\\r\\n-family:Calibri,Helvetica,sans-serif;\\\" dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe\", \"sender_email\": \"johndoe@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\": {\"subject\": \"test shared mailbox\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003cstyle type=\\\"text/css\\\" style=\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=\\\"divtagdefaultwrapper\\\" style=\\\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\\\" dir=\\\"ltr\\\"\u003e\\r\\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Wed, 8 Feb 2023 13:33:52 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Wed, 8 Feb 2023 13:33:17 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Wed, 8 Feb 2023 13:33:07 +0000\\r\\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\\r\\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\\r\\nSubject: test shared mailbox\\r\\nThread-Topic: test shared mailbox\\r\\nThread-Index: AQHZO8HaJ8uG95+s6EuNRn6s2lhHRQ==\\r\\nDate: Wed, 8 Feb 2023 13:32:59 +0000\\r\\nMessage-ID: \u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t602573ae-2be8-4b87-7aee-08db09d903b1\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\nsent from johndoe.s.1@exchange2016.com\\r\\n\\r\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=3D\\\"Content-Type\\\" content=3D\\\"text/html; charset=3Diso-8859-=\\r\\n1\\\"\u003e\\r\\n\u003cstyle type=3D\\\"text/css\\\" style=3D\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margi=\\r\\nn-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=3D\\\"divtagdefaultwrapper\\\" style=3D\\\"font-size:12pt;color:#000000;font=\\r\\n-family:Calibri,Helvetica,sans-serif;\\\" dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe\", \"sender_email\": \"johndoe@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}}}",
+  "reason": null,
+  "success": true,
+  "version": "1.0"
 }
 ```
 
@@ -685,7 +819,14 @@ else:
 ## Function - Exchange Get Mailbox Info
 Get mailbox info for specified email.
 
- ![screenshot: fn-exchange-get-mailbox-info ](./doc/screenshots/fn-exchange-get-mailbox-info.png) <!-- ::CHANGE_ME:: -->
+ <p align="center">
+<img src="./doc/screenshots/popup_retrieve_info.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/workflow_get-mailbox_info.png" />
+</p>
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -702,14 +843,16 @@ Get mailbox info for specified email.
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
+<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-  "email_address": "t.shelby@example.com",
-  "mailbox_type": "Mailbox",
-  "name": "Thomas Shelby",
-  "routing_type": "SMTP",
-  "success": true
-}
+    # TODO: Generate an example of the Function Output within this code block.
+    # To get the output of a Function:
+    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
+    #   2. Invoke the Function in SOAR
+    #   3. Gather the results using: $ resilient-sdk codegen -p fn_exchange --gather-results
+    #   4. Run docgen again: $ resilient-sdk docgen -p fn_exchange
+} 
 ```
 
 </p>
@@ -770,7 +913,14 @@ incident.addNote(noteText)
 ## Function - Exchange Move Emails
 Move queried emails from a specified folder to another specified folder.
 
- ![screenshot: fn-exchange-move-emails ](./doc/screenshots/fn-exchange-move-emails.png) <!-- ::CHANGE_ME:: -->
+ !<p align="center">
+<img src="./doc/screenshots/popup_move_email.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/workflow_move_email.png" />
+</p>
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -787,7 +937,7 @@ Move queried emails from a specified folder to another specified folder.
 | `exchange_has_attachments` | `boolean` | No | `-` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
-| `exchange_num_emails` | `text` | No | `10` | Maximum number of emails to query |
+| `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
 | `exchange_order_by_recency` | `boolean` | No | `-` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
 | `exchange_search_subfolders` | `boolean` | No | `-` | Yes to search subfolders, No or Unknown to not search subfolders |
 | `exchange_sender` | `text` | No | `user@example.com` | Only get emails from this sender, leave blank to ignore sender attribute |
@@ -803,20 +953,130 @@ Move queried emails from a specified folder to another specified folder.
 
 ```python
 results = {
+  "content": {
+    "dst_folder": "Top of Information Store/Notes",
+    "email_ids": [
+      "\u003cdacfdd29axxxxxxxxxxxxxxxx4d9@exchange2016.com\u003e",
+      "\u003c3e563564exxxxxxxxxxxxxxxx570@exchange2016.com\u003e",
+      "\u003cf2ff33ff9xxxxxxxxxxxxxxxxce8@exchange2016.com\u003e",
+      "\u003c6c7f6d14axxxxxxxxxxxxxxxx9da@exchange2016.com\u003e"
+    ],
+    "emails": {
+      "\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e": {
+        "attachment_ids": [],
+        "attachments": {},
+        "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nbody\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+        "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:29:17 +0000\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Thu, 23 Feb 2023 14:29:16 +0000\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Thu, 23 Feb 2023 14:29:16 +0000\r\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\r\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\r\nSubject: empty body\r\nThread-Topic: empty body\r\nThread-Index: AQHZR5M1Ggkaj9t1Ak+on2020HrGvQ==\r\nDate: Thu, 23 Feb 2023 14:29:16 +0000\r\nMessage-ID: \u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\tca8c256f-6f10-4873-9530-08db15aa57ed\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\r\nContent-Type: text/plain; charset=\"us-ascii\"\r\n\r\nbody\r\n\r\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\r\nContent-Type: text/html; charset=\"us-ascii\"\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nbody\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_--\r\n",
+        "sender_email": "johndoe.s.n@exchange2016.com",
+        "sender_name": "John Doe Norcross",
+        "subject": "empty body"
+      },
+      "\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e": {
+        "attachment_ids": [],
+        "attachments": {},
+        "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nhello\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+        "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:53 +0000\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:52 +0000\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:51 +0000\r\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\r\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\r\nSubject: empty body\r\nThread-Topic: empty body\r\nThread-Index: AQHZR50Re6VSynXBbUukAjEsBzROJg==\r\nDate: Thu, 23 Feb 2023 15:39:51 +0000\r\nMessage-ID: \u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t8a887daa-1c90-4bf7-d067-08db15b43417\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\r\nContent-Type: text/plain; charset=\"us-ascii\"\r\n\r\nhello\r\n\r\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\r\nContent-Type: text/html; charset=\"us-ascii\"\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nhello\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_--\r\n",
+        "sender_email": "johndoe.s.n@exchange2016.com",
+        "sender_name": "John Doe Norcross",
+        "subject": "empty body"
+      },
+      "\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e": {
+        "attachment_ids": [],
+        "attachments": {},
+        "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nNone\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+        "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:04:42 +0000\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Thu, 23 Feb 2023 14:04:41 +0000\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Thu, 23 Feb 2023 14:04:41 +0000\r\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\r\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\r\nSubject: empty body\r\nThread-Topic: empty body\r\nThread-Index: AQHZR4/FK1OEqdG/gU6cEqwOk7zcsw==\r\nDate: Thu, 23 Feb 2023 14:04:41 +0000\r\nMessage-ID: \u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t7d4ceba2-2741-4bc3-3fdf-08db15a6e886\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\r\nContent-Type: text/plain; charset=\"us-ascii\"\r\n\r\nNone\r\n\r\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\r\nContent-Type: text/html; charset=\"us-ascii\"\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nNone\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_--\r\n",
+        "sender_email": "johndoe.s.n@exchange2016.com",
+        "sender_name": "John Doe Norcross",
+        "subject": "empty body"
+      },
+      "\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e": {
+        "attachment_ids": [],
+        "attachments": {},
+        "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+        "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:07 +0000\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:07 +0000\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:06 +0000\r\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\r\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\r\nSubject: empty body\r\nThread-Topic: empty body\r\nThread-Index: AQHZR5z2bkf3+maGpUGV+Apoem2N1g==\r\nDate: Thu, 23 Feb 2023 15:39:06 +0000\r\nMessage-ID: \u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t0dc84cc5-f59d-4c53-f4af-08db15b41987\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\r\nContent-Type: text/plain; charset=\"us-ascii\"\r\n\r\n\r\n\r\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\r\nContent-Type: text/html; charset=\"us-ascii\"\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_--\r\n",
+        "sender_email": "johndoe.s.n@exchange2016.com",
+        "sender_name": "John Doe Norcross",
+        "subject": "empty body"
+      }
+    },
+    "src_folder": "Top of Information Store/Inbox"
+  },
+  "dst_folder": "Top of Information Store/Notes",
   "email_ids": [
-    "\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e"
+    "\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e",
+    "\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e",
+    "\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e",
+    "\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e"
   ],
   "emails": {
-    "\u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e": {
+    "\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e": {
       "attachment_ids": [],
       "attachments": {},
-      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003cstyle type=\"text/css\" style=\"display:none;\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=\"ltr\"\u003e\r\n\u003cdiv id=\"divtagdefaultwrapper\" style=\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\" dir=\"ltr\"\u003e\r\n\u003cp\u003eWarning!\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
-      "mime_content": "Received: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\r\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 127.0.0.1 via Mailbox Transport; Thu, 23 Jun 2022 12:42:35 +0100\r\nReceived: from WIN-L3KDT22U7UJ.example.com (127.0.0.1) by\r\n WIN-L3KDT22U7UJ.example.com (127.0.0.1) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 127.0.0.1; Thu, 23 Jun 2022 12:42:30 +0100\r\nReceived: from WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6]) by\r\n WIN-L3KDT22U7UJ.example.com ([fe80::533:0000:eca:98d6%2]) with mapi id\r\n 00.00.2242.012; Thu, 23 Jun 2022 12:42:30 +0100\r\nFrom: Thomas Shelby \u003ct.shelby@example.com\u003e\r\nTo: Thomas Shelby \u003ct.shelby@example.com\u003e\r\nSubject: Warning: You may have clicked on a malicious link!\r\nThread-Topic: Warning: You may have clicked on a malicious link!\r\nThread-Index: AQHYhvZRBvk78Xewzkm1r+nXQYlDFQ==\r\nDate: Thu, 23 Jun 2022 12:42:30 +0100\r\nMessage-ID: \u003ce71b38b97b994651a034bfe095f5bb1a@example.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: WIN-L3KDT22U7UJ.example.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\td0ea5374-fac7-437a-aac4-08da550d74ca\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\r\nContent-Type: text/plain; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\nWarning!\r\n\r\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_\r\nContent-Type: text/html; charset=\"iso-8859-1\"\r\nContent-Transfer-Encoding: quoted-printable\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=3D\"Content-Type\" content=3D\"text/html; charset=3Diso-8859-=\r\n1\"\u003e\r\n\u003cstyle type=3D\"text/css\" style=3D\"display:none;\"\u003e\u003c!-- P {margin-top:0;margi=\r\nn-bottom:0;} --\u003e\u003c/style\u003e\r\n\u003c/head\u003e\r\n\u003cbody dir=3D\"ltr\"\u003e\r\n\u003cdiv id=3D\"divtagdefaultwrapper\" style=3D\"font-size:12pt;color:#000000;font=\r\n-family:Calibri,Helvetica,sans-serif;\" dir=3D\"ltr\"\u003e\r\n\u003cp\u003eWarning!\u003cbr\u003e\r\n\u003c/p\u003e\r\n\u003c/div\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_e71b38b97b994651a034bfe095f5bb1aexamplecom_--\r\n",
-      "sender_email": "t.shelby@example.com",
-      "sender_name": "Thomas Shelby",
-      "subject": "Warning: You may have clicked on a malicious link!"
+      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nbody\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+      "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:29:17 +0000\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Thu, 23 Feb 2023 14:29:16 +0000\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Thu, 23 Feb 2023 14:29:16 +0000\r\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\r\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\r\nSubject: empty body\r\nThread-Topic: empty body\r\nThread-Index: AQHZR5M1Ggkaj9t1Ak+on2020HrGvQ==\r\nDate: Thu, 23 Feb 2023 14:29:16 +0000\r\nMessage-ID: \u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\tca8c256f-6f10-4873-9530-08db15aa57ed\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\r\nContent-Type: text/plain; charset=\"us-ascii\"\r\n\r\nbody\r\n\r\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\r\nContent-Type: text/html; charset=\"us-ascii\"\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nbody\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_--\r\n",
+      "sender_email": "johndoe.s.n@exchange2016.com",
+      "sender_name": "John Doe Norcross",
+      "subject": "empty body"
+    },
+    "\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e": {
+      "attachment_ids": [],
+      "attachments": {},
+      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nhello\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+      "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:53 +0000\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:52 +0000\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:51 +0000\r\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\r\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\r\nSubject: empty body\r\nThread-Topic: empty body\r\nThread-Index: AQHZR50Re6VSynXBbUukAjEsBzROJg==\r\nDate: Thu, 23 Feb 2023 15:39:51 +0000\r\nMessage-ID: \u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t8a887daa-1c90-4bf7-d067-08db15b43417\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\r\nContent-Type: text/plain; charset=\"us-ascii\"\r\n\r\nhello\r\n\r\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\r\nContent-Type: text/html; charset=\"us-ascii\"\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nhello\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_--\r\n",
+      "sender_email": "johndoe.s.n@exchange2016.com",
+      "sender_name": "John Doe Norcross",
+      "subject": "empty body"
+    },
+    "\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e": {
+      "attachment_ids": [],
+      "attachments": {},
+      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nNone\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+      "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:04:42 +0000\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Thu, 23 Feb 2023 14:04:41 +0000\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Thu, 23 Feb 2023 14:04:41 +0000\r\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\r\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\r\nSubject: empty body\r\nThread-Topic: empty body\r\nThread-Index: AQHZR4/FK1OEqdG/gU6cEqwOk7zcsw==\r\nDate: Thu, 23 Feb 2023 14:04:41 +0000\r\nMessage-ID: \u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t7d4ceba2-2741-4bc3-3fdf-08db15a6e886\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\r\nContent-Type: text/plain; charset=\"us-ascii\"\r\n\r\nNone\r\n\r\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\r\nContent-Type: text/html; charset=\"us-ascii\"\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nNone\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_--\r\n",
+      "sender_email": "johndoe.s.n@exchange2016.com",
+      "sender_name": "John Doe Norcross",
+      "subject": "empty body"
+    },
+    "\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e": {
+      "attachment_ids": [],
+      "attachments": {},
+      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
+      "mime_content": "Received: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:07 +0000\r\nReceived: from host.exchange2016.com (9.37.29.13) by\r\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\r\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\r\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:07 +0000\r\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\r\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\r\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:06 +0000\r\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\r\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\r\nSubject: empty body\r\nThread-Topic: empty body\r\nThread-Index: AQHZR5z2bkf3+maGpUGV+Apoem2N1g==\r\nDate: Thu, 23 Feb 2023 15:39:06 +0000\r\nMessage-ID: \u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\r\nAccept-Language: en-US\r\nContent-Language: en-US\r\nX-MS-Exchange-Organization-AuthAs: Internal\r\nX-MS-Exchange-Organization-AuthMechanism: 04\r\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\r\nX-MS-Has-Attach:\r\nX-MS-Exchange-Organization-Network-Message-Id:\r\n\t0dc84cc5-f59d-4c53-f4af-08db15b41987\r\nX-MS-Exchange-Organization-SCL: -1\r\nX-MS-TNEF-Correlator:\r\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\r\nContent-Type: multipart/alternative;\r\n\tboundary=\"_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\"\r\nMIME-Version: 1.0\r\n\r\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\r\nContent-Type: text/plain; charset=\"us-ascii\"\r\n\r\n\r\n\r\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\r\nContent-Type: text/html; charset=\"us-ascii\"\r\n\r\n\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=us-ascii\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n\r\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_--\r\n",
+      "sender_email": "johndoe.s.n@exchange2016.com",
+      "sender_name": "John Doe Norcross",
+      "subject": "empty body"
     }
-  }
+  },
+  "inputs": {
+    "inputs": {
+      "exchange_delete_source_folder": false,
+      "exchange_destination_folder_path": "Top of Information Store/Notes",
+      "exchange_email": "johndoe.s@exchange2016.com",
+      "exchange_email_ids": null,
+      "exchange_end_date": null,
+      "exchange_folder_path": null,
+      "exchange_force_delete_subfolders": false,
+      "exchange_has_attachments": null,
+      "exchange_message_subject": "empty body",
+      "exchange_num_emails": null,
+      "exchange_order_by_recency": null,
+      "exchange_search_subfolders": null,
+      "exchange_sender": null,
+      "exchange_start_date": null
+    }
+  },
+  "metrics": {
+    "execution_time_ms": 10386,
+    "host": "exchange2016",
+    "package": "fn-exchange",
+    "package_version": "1.0.5",
+    "timestamp": "2023-02-28 19:55:32",
+    "version": "1.0"
+  },
+  "raw": "{\"email_ids\": [\"\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\", \"\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\", \"\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\", \"\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\"], \"emails\": {\"\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nNone\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:04:42 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 14:04:41 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 14:04:41 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR4/FK1OEqdG/gU6cEqwOk7zcsw==\\r\\nDate: Thu, 23 Feb 2023 14:04:41 +0000\\r\\nMessage-ID: \u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t7d4ceba2-2741-4bc3-3fdf-08db15a6e886\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\nNone\\r\\n\\r\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nNone\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nbody\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:29:17 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 14:29:16 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 14:29:16 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR5M1Ggkaj9t1Ak+on2020HrGvQ==\\r\\nDate: Thu, 23 Feb 2023 14:29:16 +0000\\r\\nMessage-ID: \u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\tca8c256f-6f10-4873-9530-08db15aa57ed\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\nbody\\r\\n\\r\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nbody\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:07 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:07 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:06 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR5z2bkf3+maGpUGV+Apoem2N1g==\\r\\nDate: Thu, 23 Feb 2023 15:39:06 +0000\\r\\nMessage-ID: \u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t0dc84cc5-f59d-4c53-f4af-08db15b41987\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\\r\\n\\r\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nhello\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:53 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:52 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:51 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR50Re6VSynXBbUukAjEsBzROJg==\\r\\nDate: Thu, 23 Feb 2023 15:39:51 +0000\\r\\nMessage-ID: \u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t8a887daa-1c90-4bf7-d067-08db15b43417\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\nhello\\r\\n\\r\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nhello\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}}, \"src_folder\": \"Top of Information Store/Inbox\", \"dst_folder\": \"Top of Information Store/Notes\"}",
+  "reason": null,
+  "src_folder": "Top of Information Store/Inbox",
+  "success": true,
+  "version": "1.0"
 }
 ```
 
@@ -944,7 +1204,14 @@ else:
 ## Function - Exchange Send Email
 Send an email to a list of recipients.
 
- ![screenshot: fn-exchange-send-email ](./doc/screenshots/fn-exchange-send-email.png) <!-- ::CHANGE_ME:: -->
+ <p align="center">
+<img src="./doc/screenshots/popup_send_email.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/workflow_send_email.png" />
+</p>
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -966,10 +1233,36 @@ Send an email to a list of recipients.
 
 ```python
 results = {
-  "body": "Example Body",
-  "recipients": "t.shelby@example.com",
-  "sender": "t.shelby@example.com",
-  "subject": "Warning! Another potential phishing email!"
+  "content": {
+    "msg_body": "Happy to announce that we have successfully cancelled your insurance",
+    "msg_subject": "Cancellation request",
+    "recipients": "johndoe.s@exchange2016.com",
+    "sender": "johndoe.s.n@exchange2016.com"
+  },
+  "inputs": {
+    "inputs": {
+      "exchange_email": "johndoe.s.n@exchange2016.com",
+      "exchange_email_recipients": "johndoe.s@exchange2016.com",
+      "exchange_message_body": "Happy to announce that we have successfully cancelled your insurance",
+      "exchange_message_subject": "Cancellation request"
+    }
+  },
+  "metrics": {
+    "execution_time_ms": 3496,
+    "host": "exchange2016",
+    "package": "fn-exchange",
+    "package_version": "1.0.5",
+    "timestamp": "2023-02-28 20:10:41",
+    "version": "1.0"
+  },
+  "msg_body": "Happy to announce that we have successfully cancelled your insurance",
+  "msg_subject": "Cancellation request",
+  "raw": "{\"recipients\": \"johndoe.s@exchange2016.com\", \"sender\": \"johndoe.s.n@exchange2016.com\", \"msg_subject\": \"Cancellation request\", \"msg_body\": \"Happy to announce that we have successfully cancelled your insurance\"}",
+  "reason": null,
+  "recipients": "johndoe.s@exchange2016.com",
+  "sender": "johndoe.s.n@exchange2016.com",
+  "success": true,
+  "version": "1.0"
 }
 ```
 
@@ -1050,7 +1343,14 @@ else:
 
 ## Data Table - Email Information
 
- ![screenshot: dt-email-information](./doc/screenshots/dt-email-information.png) <!-- ::CHANGE_ME:: -->
+ <p align="center">
+<img src="./doc/screenshots/popup_create_meeting.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/workflow_create_meeting.png" />
+</p>
+
 
 #### API Name:
 exchange_email_information_dt
