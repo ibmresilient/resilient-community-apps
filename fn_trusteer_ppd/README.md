@@ -197,9 +197,9 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the Data Tables and Custom Fields like the screenshot below:
+The following Trusteer Tab custom layout is included in the app:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) <!-- ::CHANGE_ME:: -->
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
 
 ---
@@ -274,9 +274,21 @@ None
 
 ---
 ## Function - Trusteer PPD: Update Alert Classification
-Update the alert classification in Trusteer to : confirmed_fraud, confirmed_legitimate, undetermined, or pending_confirmation.  If the feedback is confirmed_fraud, then the optional fraud_mo parameter can provide more information.
+Update the alert classification in Trusteer to one of: 
+* confirmed_fraud
+* confirmed_legitimate
+* undetermined
+* pending_confirmation  
 
- ![screenshot: fn-trusteer-ppd-update-alert-classification ](./doc/screenshots/fn-trusteer-ppd-update-alert-classification.png) <!-- ::CHANGE_ME:: -->
+If the feedback is confirmed_fraud, then the optional fraud_mo parameter can provide more information: 
+* account_takeover
+* remote_access_tool
+* first_party
+* social_engineering
+* stolen_device
+* mule_account
+
+ ![screenshot: fn-trusteer-ppd-update-alert-classification ](./doc/screenshots/fn-trusteer-ppd-update-alert-classification.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -450,7 +462,7 @@ if device_link:
 
 ---
 ## Script - Trusteer PPD: Create Case from Email
-Parse an email from Trusteer Pinpoint Detect and create a case if there is not an Active case with the PUID already in SOAR.
+Parse an email from Trusteer Pinpoint Detect and create a case if there is not an Active case with the PUID already in SOAR.  Otherwise, add a new row to Trusteer Alerts data table and populate with information from the current email.
 
 **Object:** __emailmessage
 
@@ -1009,7 +1021,7 @@ if SAVE_CONVERSATION:
 
 ## Data Table - Trusteer Alerts
 
- ![screenshot: dt-trusteer-alerts](./doc/screenshots/dt-trusteer-alerts.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-trusteer-alerts](./doc/screenshots/dt-trusteer-alerts.png)
 
 #### API Name:
 trusteer_ppd_dt_trusteer_alerts
@@ -1051,19 +1063,19 @@ trusteer_ppd_dt_trusteer_alerts
 ---
 
 ## Rules
-| Rule Name | Object | Workflow Triggered |
+| Rule Name | Object | Script Triggered |
 | --------- | ------ | ------------------ |
-| Trusteer PPD: Parse Trusteer Email | __emailmessage | `-` |
+| Trusteer PPD: Parse Trusteer Email | __emailmessage | `Trusteer PPD: Create Case from Email` |
 
 ---
 
 ## Playbooks
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| Trusteer PPD: Create Artifacts | Create artifacts from the columns of the Trusteer Alerts data table. | trusteer_ppd_dt_trusteer_alerts | `enabled` |
-| Trusteer PPD: Update Classification in Trusteer | None | trusteer_ppd_dt_trusteer_alerts | `enabled` |
-| Trusteer PPD: Update Device URL Link | None | trusteer_ppd_dt_trusteer_alerts | `enabled` |
-| Trusteer PPD: Update PUID URL Link | None | incident | `enabled` |
+| Trusteer PPD: Create Artifacts | Manual playbook that runs off a row of the Trusteer Alerts data table. Create artifacts from the columns of the Trusteer Alerts data table. | trusteer_ppd_dt_trusteer_alerts | `enabled` |
+| Trusteer PPD: Update Classification in Trusteer | Send classification feedback to Trusteer on the  session alert.  Update the Classification column in the Trusteer Alerts data table for each alert with the same session ID as the playbook row from which the playbook is executed. | trusteer_ppd_dt_trusteer_alerts | `enabled` |
+| Trusteer PPD: Update Device URL Link | Automatic playbook that is executed when an alert is added to the Trusteer Alerts data table and update the Device ID cell with a link back to the device in Trusteer. | trusteer_ppd_dt_trusteer_alerts | `enabled` |
+| Trusteer PPD: Update PUID URL Link | Automatic playbook that is executed when a Trusteer case is created. Update the PUID link custom field with a URL link to the customer account in Trusteer. | incident | `enabled` |
 
 ---
 
