@@ -25,11 +25,16 @@ class FunctionComponent(AppFunctionComponent):
 
         Inputs:
         -------
+        The values returned from fn_inputs are mapped to easier readable variable names using the 
+        INPUT_MAP that is found in fn_exchange.lib.exchange_helper
+        
         exchange_email                   <str> : Primary email account to be used
         meeting_subject                  <str> : Subject for the meeting invite
         meeting_body                     <str> : Body for the meeting invite
         exchange_required_attendees      <str> : List of required attendees (comma separated)
         exchange_optional_attendees      <str> : List of optional attendees (comma separated)
+        exchange_location                <str> : Venue details or online meeting link
+        exchange_online_meeting          <str> : Specifies if its a online meeting
         exchange_meeting_start_time <datetime> : Meeting start time and date
         exchange_meeting_end_time   <datetime> : Meeting end time and date
 

@@ -26,7 +26,11 @@ class FunctionComponent(AppFunctionComponent):
         emails between specific dates.
 
         FN Inputs:
-        -------
+        ---------
+
+        The values returned from fn_inputs are mapped to easier readable variable names using the 
+        INPUT_MAP that is found in fn_exchange.lib.exchange_helper
+        
             exchange_email              <str> : Primary email account to be used
             exchange_num_emails         <int> : Limit the number of emails retrieved
             exchange_email_ids          <str> : Retrieve emails from all these senders
@@ -63,7 +67,6 @@ class FunctionComponent(AppFunctionComponent):
             retrieved_emails = utils.get_emails(function_parameters)
 
             yield StatusMessage(f"{retrieved_emails.count()} emails found")
-            out = (retrieved_emails, function_parameters.get("num_emails"))
             results = utils.create_email_function_results(retrieved_emails, function_parameters.get("num_emails"))
             yield StatusMessage(f"Search email operation complete, {len(results.get('emails'))} emails found")
             yield rh.success(results)
