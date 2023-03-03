@@ -14,7 +14,6 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-
 def call_rest_api_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
     evt = SubmitTestFunction("rest_api", function_params)
@@ -39,7 +38,7 @@ def call_rest_api_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestRestApi:
+class TestInternetUtilitiesCallRestApi:
     """ Tests for the rest_api function"""
 
     def test_function_definition(self):
@@ -47,38 +46,20 @@ class TestRestApi:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    mock_inputs_1 = {
-        "rest_api_url": "sample text",
-        "rest_api_headers": {"type": "text", "content": "sample line one\nsample line two"},
-        "rest_api_timeout": 123,
-        "rest_api_cookies": {"type": "text", "content": "sample line one\nsample line two"},
-        "rest_api_verify": True,
-        "rest_api_method": "GET",
-        "rest_api_allowed_status_codes": "sample text",
-        "rest_api_body": {"type": "text", "content": "sample line one\nsample line two"}
-    }
-
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-        "rest_api_url": "sample text",
-        "rest_api_headers": {"type": "text", "content": "sample line one\nsample line two"},
-        "rest_api_timeout": 123,
-        "rest_api_cookies": {"type": "text", "content": "sample line one\nsample line two"},
-        "rest_api_verify": True,
-        "rest_api_method": "GET",
-        "rest_api_allowed_status_codes": "sample text",
-        "rest_api_body": {"type": "text", "content": "sample line one\nsample line two"}
-    }
-
-    expected_results_2 = {"value": "xyz"}
-
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
+    @pytest.mark.livetest
+    @pytest.mark.parametrize("rest_method, rest_url, rest_headers, rest_body", [
+        ('POST', "https://httpbin.org/post", {"Content-type": "application/json; charset=UTF-8"},
+         {'title': 'foo', 'body': 'ƱƲ','userId': 1})
     ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
+    def test_success(self, circuits_app, rest_method, rest_url, rest_headers, rest_body):
         """ Test calling with sample values for the parameters """
-
-        results = call_rest_api_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        function_params = {
+            "rest_api_method": rest_method,
+            "rest_api_url": rest_url,
+            "rest_api_headers": {'content': rest_headers},
+            "rest_api_body": {'content': rest_body }
+        }
+        results = call_rest_api_function(circuits_app, function_params)
+        assert(rest_body['title'] == results['json']['json']['title'])
+        assert(rest_body['body'] == results['json']['json']['body'])
+        assert(rest_body['userId'] == results['json']['json']['userId'])
