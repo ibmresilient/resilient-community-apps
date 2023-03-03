@@ -27,7 +27,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_email_header_validation'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'dkimpy'
+        'dkimpy~=1.0.5'
     ],
     packages=find_packages(),
     include_package_data=True,
