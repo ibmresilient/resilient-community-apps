@@ -57,7 +57,7 @@ class TestJiraCreateComment:
 
     expected_results_1 = {"value": "xyz"}
 
-    client = mock_data.mock_init().mock_connection()
+    client = mock_data.mock_init()
     print("f")
 
     @patch("fn_jira.components.jira_create_comment.AppCommon", side_effect=mock_data.mock_init())
