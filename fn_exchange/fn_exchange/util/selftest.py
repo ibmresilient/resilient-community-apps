@@ -21,23 +21,21 @@ def selftest_function(opts):
     options = opts.get("fn_exchange", {})
     username = options.get("email")
     rc = RequestsCommon(opts, options)
-
-    # Initialize utils
-    utils = exchange_interface(rc, options)
-
-    # Connect to server
-    account = utils.connect_to_account(username)
-
-    # Get mailbox info
-    info = account.protocol.resolve_names([username], return_full_contact_data=True)
-
-    if isinstance(info, list) and info[0][0].email_address == username:
-        return {"state": "success"}
-    else:
-        return {"state": "failure"}
     
     try:
-        pass
+        # Initialize utils
+        utils = exchange_interface(rc, options)
+
+        # Connect to server
+        account = utils.connect_to_account(username)
+
+        # Get mailbox info
+        info = account.protocol.resolve_names([username], return_full_contact_data=True)
+
+        if isinstance(info, list) and info[0][0].email_address == username:
+            return {"state": "success"}
+        else:
+            return {"state": "failure"}
 
     except Exception as e:
         return {"state": "failure", "status_code": e}

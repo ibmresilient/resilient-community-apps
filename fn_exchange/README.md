@@ -60,7 +60,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| V2.0.0 | February | UI update, Custom Layout, Data-tables, Timezone support and bug fixes |
+| v2.0.0 | February | UI update, Custom Layout, Data-tables, Timezone support and bug fixes |
 | v1.0.4 | September 2022 | Bugfix on Selftest |
 | v1.0.3 | June 2022 | Add support for Python 3.9. |
 | v1.0.2 | June 2021 | Fix for ``selftest``. |
@@ -154,9 +154,9 @@ Additional package dependencies may exist for each of these packages:
 ### Development Version
 
 This app has been implemented using:
-| Product Name | Product Version | API URL |
-| ------------ | --------------- | ------- |
-| exchangelib | 4.9.0 | https://ecederstrand.github.io/exchangelib/ |
+| Product Name | Product Version |
+| ------------ | --------------- |
+| Microsoft Exchange | 2016 |
 
 ### Endpoint Developed With
 
@@ -433,7 +433,7 @@ else:
 
 ---
 ## Function - Exchange Delete Emails
-Emails can be queried from a user's mailbox and deleted. These emails can be filtered based on fundamental attributes including the sender's email address, the location of the email's folder, the subject, the body, and if it contains attachments. A through search can be performed on the user's mailbox by tunneling subfolders, beginning and ending dates of emails received, sorting emails by recency, and limiting the number of emails obtained. Once these emails are selected, the user has an option to either permanently delete the emails or move them to the Trash folder. The email information retrieved form the mailbox is now stored in a data-table available under the Exchange incident tab. The ability to store information as artifacts is also retained. This can be turned on from within the postprocessing script of this workflow.
+Emails can be queried from a user's mailbox and deleted. These emails can be filtered based on fundamental attributes including the sender's email address, the location of the email's folder, the subject, the body, and if it contains attachments. A thorough search can be performed on the user's mailbox by tunneling subfolders, beginning and ending dates of emails received, sorting emails by recency, and limiting the number of emails obtained. Once these emails are selected, the user has an option to either permanently delete the emails or move them to the Trash folder. The email information retrieved form the mailbox is now stored in a data-table available under the Exchange incident tab. The ability to store information as artifacts is also retained. This can be turned on from within the postprocessing script of this workflow.
 
 <p align="center">
 <img src="./doc/screenshots/popup_delete_email.png" />
@@ -625,7 +625,7 @@ else:
 
 ---
 ## Function - Exchange Find Emails
-Emails can be queried from a user's mailbox and deleted. These emails can be filtered based on fundamental attributes including the sender's email address, the location of the email's folder, the subject, the body, and if it contains attachments. A through search can be performed on the user's mailbox by tunneling subfolders, beginning and ending dates of emails received, sorting emails by recency, and limiting the number of emails obtained. The email retrieved form the mailbox can now be stored in a data-table available under the Exchange incident tab. The ability to store information as artifacts is also retained. This can be turned on from within the postprocessing script of this workflow.
+Emails can be queried from a user's mailbox and deleted. These emails can be filtered based on fundamental attributes including the sender's email address, the location of the email's folder, the subject, the body, and if it contains attachments. A thorough search can be performed on the user's mailbox by tunneling subfolders, beginning and ending dates of emails received, sorting emails by recency, and limiting the number of emails obtained. The email retrieved form the mailbox can now be stored in a data-table available under the Exchange incident tab. The ability to store information as artifacts is also retained. This can be turned on from within the postprocessing script of this workflow.
 
 <p align="center">
 <img src="./doc/screenshots/popup_find_email.png" />
@@ -979,9 +979,9 @@ incident.addNote(noteText)
 
 ---
 ## Function - Exchange Move Emails
-Move queried emails from a specified folder to another specified folder. The `exchange_destination_folder_path` must be specified to perform this action. If the user decides to migrate all contents form one folder to another and delete the source, `exchange_delete_source_folder ` must be enabled. Emails can be queried from a user's mailbox and deleted. These emails can be filtered based on fundamental attributes including the sender's email address, the location of the email's folder, the subject, the body, and if it contains attachments. A through search can be performed on the user's mailbox by tunneling subfolders, beginning and ending dates of emails received, sorting emails by recency, and limiting the number of emails obtained. The email retrieved form the mailbox can now be stored in a data-table available under the Exchange incident tab. The ability to store information as artifacts is also retained. This can be turned on from within the postprocessing script of this workflow.
+Move queried emails from a specified folder to another specified folder. The `exchange_destination_folder_path` must be specified to perform this action. If the user decides to migrate all contents form one folder to another and delete the source, `exchange_delete_source_folder ` must be enabled. Emails can be queried from a user's mailbox and deleted. These emails can be filtered based on fundamental attributes including the sender's email address, the location of the email's folder, the subject, the body, and if it contains attachments. A thorough search can be performed on the user's mailbox by tunneling subfolders, beginning and ending dates of emails received, sorting emails by recency, and limiting the number of emails obtained. The email retrieved form the mailbox can now be stored in a data-table available under the Exchange incident tab. The ability to store information as artifacts is also retained. This can be turned on from within the postprocessing script of this workflow.
 
- !<p align="center">
+ <p align="center">
 <img src="./doc/screenshots/popup_move_email.png" />
 </p>
 
