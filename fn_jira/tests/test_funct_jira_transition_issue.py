@@ -2,23 +2,22 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
-from resilient_circuits.util import get_function_definition
+from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from data import mock_data
-from mock import patch
 
 PACKAGE_NAME = "fn_jira"
-FUNCTION_NAME = "jira_create_comment"
+FUNCTION_NAME = "jira_transition_issue"
 
 # Read the default configuration-data section from the package
-config_data = mock_data.get_mock_config()
+config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-def call_jira_create_comment_function(circuits, function_params, timeout=5):
+
+def call_jira_transition_issue_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("jira_create_comment", function_params)
+    evt = SubmitTestFunction("jira_transition_issue", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -27,20 +26,21 @@ def call_jira_create_comment_function(circuits, function_params, timeout=5):
     # return this exception if it is raised
     exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
 
-    if exception_event:
+    if exception_event is not False:
         exception = exception_event.args[1]
         raise exception
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("jira_create_comment_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("jira_transition_issue_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
-class TestJiraCreateComment:
-    """ Tests for the jira_create_comment function"""
+
+class TestJiraTransitionIssue:
+    """ Tests for the jira_transition_issue function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -48,24 +48,31 @@ class TestJiraCreateComment:
         assert func is not None
 
     mock_inputs_1 = {
-        "incident_id": 2230,
-        "jira_label": "my-server",
-        "jira_issue_id": "",
-        "jira_comment": "404 error is thrown",
-        "task_id": 214
+        "jira_comment": "sample text",
+        "jira_fields": "sample text",
+        "jira_transition_id": "sample text",
+        "jira_label": "sample text",
+        "jira_issue_id": "sample text"
     }
 
     expected_results_1 = {"value": "xyz"}
 
-    client = mock_data.mock_init().mock_connection()
-    print("f")
+    mock_inputs_2 = {
+        "jira_comment": "sample text",
+        "jira_fields": "sample text",
+        "jira_transition_id": "sample text",
+        "jira_label": "sample text",
+        "jira_issue_id": "sample text"
+    }
 
-    @patch("fn_jira.components.jira_create_comment.AppCommon", side_effect=mock_data.mock_init())
+    expected_results_2 = {"value": "xyz"}
+
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1)
+        (mock_inputs_1, expected_results_1),
+        (mock_inputs_2, expected_results_2)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
-        results = call_jira_create_comment_function(circuits_app, mock_inputs)
+        results = call_jira_transition_issue_function(circuits_app, mock_inputs)
         assert(expected_results == results)

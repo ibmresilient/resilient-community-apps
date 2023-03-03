@@ -31,7 +31,7 @@ setup(
     install_requires=[
         'resilient_circuits>=45.0.0',
         'jira~=3.2',
-        'pyjwt~=2.4',
+        'pyjwt~=2.4'
     ],
     packages=find_packages(),
     python_requires='>=3.6',
