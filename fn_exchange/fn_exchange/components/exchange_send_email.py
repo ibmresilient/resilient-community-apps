@@ -24,10 +24,13 @@ class FunctionComponent(AppFunctionComponent):
 
         Inputs:
         -------
-            exchange_email    <str> : Primary email account to be used
-            recipients  <str> : Mail ids of the recipients (comma separated)
-            msg_body    <str> : Body of the mail
-            msg_subject <str> : Mail subject
+        The values returned from fn_inputs are mapped to easier readable variable names using the 
+        INPUT_MAP that is found in fn_exchange.lib.exchange_helper
+        
+            exchange_email <str> : Primary email account to be used
+            recipients     <str> : Mail ids of the recipients (comma separated)
+            msg_body       <str> : Body of the mail
+            msg_subject    <str> : Mail subject
 
         Returns:
         --------

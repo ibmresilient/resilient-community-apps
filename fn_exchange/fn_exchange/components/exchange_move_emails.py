@@ -26,7 +26,10 @@ class FunctionComponent(AppFunctionComponent):
         destination folder.
 
         FN Inputs:
-        -------
+        ---------
+        The values returned from fn_inputs are mapped to easier readable variable names using the 
+        INPUT_MAP that is found in fn_exchange.lib.exchange_helper
+
             exchange_delete_source_folder    <bool> : True delete the source folder
             exchange_destination_folder_path  <str> : Destination path to move the email
             exchange_force_delete_subfolders <bool> : True deletes source folder with subfolders
@@ -62,7 +65,7 @@ class FunctionComponent(AppFunctionComponent):
         function_parameters = {}
         for key, value in fn_inputs._asdict().items():
             function_parameters[INPUTS_MAP[key]] = value
-        mail_limit = function_parameters.get("num_emails") if function_parameters.get("num_emails") else 0
+        mail_limit = int(function_parameters.get("num_emails")) if function_parameters.get("num_emails") else 0
 
         if not function_parameters.get("src_folder"):
             function_parameters["src_folder"] = self.options.get('default_folder_path')

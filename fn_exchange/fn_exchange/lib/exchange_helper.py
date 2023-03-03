@@ -50,6 +50,11 @@ INPUTS_MAP = {
 
 
 class ResultsHandler(ResultPayload):
+    """
+    A wrapper class that modifies the results that are returned to allow for 
+    backwards comparability. This function returns results as a named tuple and 
+    also encloses a copy of the results as an element.
+    """
     def __init__(self, package_name, fn_inputs):
         super(ResultsHandler, self).__init__(pkgname=package_name, inputs=fn_inputs._asdict())
 

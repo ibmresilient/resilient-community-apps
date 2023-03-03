@@ -19,7 +19,19 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-        """Function: Get mailbox info from exchange"""
+        """
+        Retrieves mailbox information using email address
+
+        FN Inputs:
+        ---------
+
+            exchange_get_email  <str> : Mailbox information to be retrieved
+
+        Returns:
+        --------
+            Response <dict> : A response with the mails retrieved and their attributes
+                              or the error message if the retrieval process failed
+        """
         rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
         get_user = getattr(fn_inputs, 'exchange_get_email', None)
         self.LOG.info(f"exchange_get_email: {get_user}")
