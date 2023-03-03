@@ -170,7 +170,7 @@ Fill out the pop-up form. The **Product** selection must be **Pinpoint Detection
 The email addresse to send Trusteer alerts appears in the list.
  ![screenshot: fn-trusteer-ppd-tma-config ](./doc/screenshots/fn-trusteer-ppd-tma-config.png)
 
-Configure the same email address in SOAR by creating an inbound email connection:
+Create and configure a SOAR inbound email connection with the same email address configured in Trusteer:
 
  ![screenshot: fn-trusteer-ppd-tma-config ](./doc/screenshots/fn-trusteer-ppd-inbound-email.png)
 
@@ -178,7 +178,7 @@ Email from Trusteer arrives in the inbound mailbox and a the provided rule
 
 
 ### The case/incident owner
-New cases/incidents need an owner, either an individual identified by their email address or a group name. Prior to running the app, the provided script **Trusteer PPD: Create Case from Email**, should be changed to reflect the new incident owner in your IBM SOAR platform. For example, to change the owner to l1@businessname.com, locate line 9 of the script:
+New cases/incidents need an owner, either an individual identified by their email address or a group name. Prior to running the app, the provided script **Trusteer PPD: Create Case from Email v1.0.0**, should be changed to reflect the new incident owner in your IBM SOAR platform. For example, to change the owner to l1@businessname.com, locate line 9 of the script:
 
 ```python
 # The new incident owner - the email address of a user or the name of a group and cannot be blank.
@@ -528,7 +528,7 @@ if device_link:
 </details>
 
 ---
-## Script - Trusteer PPD: Create Case from Email
+## Script - Trusteer PPD: Create Case from Email v1.0.0
 Parse an email from Trusteer Pinpoint Detect and create a case if there is not an Active case with the PUID already in SOAR.  Otherwise, add a new row to Trusteer Alerts data table and populate with information from the current email.
 
 **Object:** __emailmessage
@@ -1132,7 +1132,7 @@ trusteer_ppd_dt_trusteer_alerts
 ## Rules
 | Rule Name | Object | Script Triggered |
 | --------- | ------ | ------------------ |
-| Trusteer PPD: Parse Trusteer Email | __emailmessage | `Trusteer PPD: Create Case from Email` |
+| Trusteer PPD: Parse Trusteer Email v1.0.0 | __emailmessage | `Trusteer PPD: Create Case from Email` |
 
 ---
 
