@@ -1093,7 +1093,6 @@ Search QRadar Top events for the given Offense ID
 | `qradar_search_param4` | `text` | No | `-` | - |
 | `qradar_search_param5` | `text` | No | `-` | - |
 | `qradar_search_param6` | `text` | No | `-` | - |
-| `qradar_search_param7` | `text` | No | `5 days` | Used for time to look back for graphql search |
 | `soar_incident_id` | `number` | No | `-` | ID of the SOAR incident the function is running in |
 | `soar_table_name` | `text` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
 
@@ -1164,7 +1163,7 @@ results = {
   },
   "inputs": {
     "qradar_label": "qradar_label1",
-    "qradar_query": "SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60",
+    "qradar_query": "SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60",
     "qradar_query_type": "sourceip",
     "qradar_search_param1": "sourceip as sourceip,SUM(eventcount) as eventcount,UNIQUECOUNT(category) as categorycount,UNIQUECOUNT(username) as usernamecount,max(starttime)",
     "qradar_search_param2": "WHERE INOFFENSE(%param3%)",
@@ -1172,7 +1171,7 @@ results = {
     "qradar_search_param4": "GROUP BY sourceip",
     "qradar_search_param5": "ORDER BY max(starttime) DESC",
     "qradar_search_param6": "LIMIT 10",
-    "qradar_search_param7": "5 days",
+
     "soar_incident_id": 2111,
     "soar_table_name": "qr_top_source_ips"
   },
@@ -1203,17 +1202,6 @@ inputs.qradar_query_type = "categories"
 inputs.qradar_label = incident.properties.qradar_destination
 inputs.soar_table_name = "qr_categories"
 inputs.soar_incident_id = incident.id
-
-# QRadar graphql search look back time default is 5 days
-inputs.qradar_search_param7 = "5 days"
-# If the poller is running and the qr_last_updated_time is changed the
-# the QRadar graphql look back time will change to 2 days
-if incident.properties.qr_last_updated_time != incident.create_date:
-  inputs.qradar_search_param7 = "2 days"
-# If manual QRadar Update rule is run set the number if days to search to the
-# user entered number
-if rule.properties.number_of_days_to_search:
-  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search) + " days"
 ```
 
 </p>

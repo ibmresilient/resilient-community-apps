@@ -7,8 +7,8 @@ from datetime import datetime, timedelta
 from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from resilient_lib import IntegrationError
-from fn_qradar_enhanced_data.lib.poller_common import SOARCommon, poller
+from resilient_lib import IntegrationError, SOARCommon
+from fn_qradar_enhanced_data.lib.poller_common import poller
 from fn_qradar_enhanced_data.util.function_utils import (get_qradar_client, get_server_settings, get_sync_notes, remove_html_tags)
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
@@ -66,7 +66,7 @@ class PollerComponent(ResilientComponent):
         :param last_poller_time: (int) Time in milliseconds when the last poller ran
         :return: None
         """
-        case_list, error_msg = SOARCommon.get_open_soar_cases({"qradar_id": True, "qradar_destination": True}, self.rest_client())
+        case_list, error_msg = SOARCommon(self.rest_client()).get_soar_cases({"qradar_id": True, "qradar_destination": True})
 
         if error_msg:
             raise IntegrationError(error_msg)

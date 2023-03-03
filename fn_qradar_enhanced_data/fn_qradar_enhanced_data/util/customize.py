@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_qradar_enhanced_data"""
+"""Generate the SOAR customizations required for fn_qradar_enhanced_data"""
 
 import base64
 import os
