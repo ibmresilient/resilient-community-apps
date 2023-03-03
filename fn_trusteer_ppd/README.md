@@ -65,24 +65,25 @@
 -->
 **IBM SOAR app for Trusteer Pinpoint Detect**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
 
-Bi-directional App for Trusteer Pinpoint Detect. Parse emails from Trusteer Pinpoint Detect 
-        and create cases in SOAR and send classification information back to Trusteer.<br>
+IBM Security® Trusteer® Pinpoint Detect helps organizations quickly and transparently establish digital identity trust throughout a seamless customer experience without compromising on security.
 
+IBM Security® Trusteer® Pinpoint Detect is real-time, cloud-based risk assessment software that analyzes online identities to differentiate between malicious users and true customers. Trusteer® Pinpoint Detect uses artificial intelligence and machine learning to protect digital channels against account takeover and fraudulent transactions and detect end user devices infected with high-risk malware.
 
+ ![screenshot: main](./doc/screenshots/main.png)
 
-        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
-
-        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
+Bi-directional App for Trusteer Pinpoint Detect. Parse emails from Trusteer Pinpoint Detect and create cases in SOAR and sends classification information back to Trusteer.
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* Create cases in SOAR from Trusteer Pinpoint Detect Criminal 
-* Key Feature 2 <!-- ::CHANGE_ME:: -->
-* Key Feature 3 <!-- ::CHANGE_ME:: -->
+* Create cases in SOAR from Trusteer Pinpoint Detect Criminal email alert feeds via email parsing script in SOAR.
+* A Trusteer account (PUID - Permanent User ID) maps to a case in SOAR and alerts to the account are added to the Trusteer Alerts data table.
+* Send feedback to Trusteer on a session from a row in Trusteer Alerts data table.
+* 
+* Add artifacts to the case vis email parsing script.
+* Add artifacts to the case via data table row script.
 
 ---
 
@@ -153,31 +154,35 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 -->
 * An email address configured in Trusteer Management Application (TMA/Trustboard) to which Trusteer sends **Pinpoint Detection suspicious access detected** alerts.
 * The same email address configured in Trusteer is also configured in SOAR inbound email connection.
-* Prereq C <!-- ::CHANGE_ME:: -->
+* An API 
 
-#### Configure Trusteer and SOAR
+#### Configure Trusteer Email Feeds
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-In the Trusteer Management Application (TMA/Trustboard), select **Setup and Administration** on the left menu and click on **Feeds Configuration**.  Click on the **+ Add** button at the top of the page:
+Use the Trusteer Management Application (TMA/Trustboard) to configure the email address to receive Trusteer alert emails.
+* Select **Setup and Administration** on the left menu and click on **Feeds Configuration**.  
+* Click on the **+ Add** button at the top of the page:
 
  ![screenshot: fn-trusteer-ppd-tma-feed-config ](./doc/screenshots/fn-trusteer-ppd-tma-feed-config.png)
  
-Fill out the pop-up form. The **Product** selection must be **Pinpoint Detection** and the  **Feed Name** selection must be **Pinpoint Criminal Detection suspicious access detected** as this is the only feed supported by the SOAR app. Hit Save.
+* Fill out the pop-up form. 
+* The **Product** selection must be **Pinpoint Detection** and the  **Feed Name** selection must be **Pinpoint Criminal Detection suspicious access detected** as this is the only feed supported by the SOAR app. Hit Save.
 
  ![screenshot: fn-trusteer-ppd-tma-form ](./doc/screenshots/fn-trusteer-ppd-tma-form.png)
 
-The email addresse to send Trusteer alerts appears in the list.
+The email address to send Trusteer alerts appears in the list.
  ![screenshot: fn-trusteer-ppd-tma-config ](./doc/screenshots/fn-trusteer-ppd-tma-config.png)
 
+
+#### Configure SOAR Inbound Email Connection
 Create and configure a SOAR inbound email connection with the same email address configured in Trusteer:
 
  ![screenshot: fn-trusteer-ppd-tma-config ](./doc/screenshots/fn-trusteer-ppd-inbound-email.png)
 
 Email from Trusteer arrives in the inbound mailbox and a the provided rule 
 
-
-### The case/incident owner
+#### The Case/incident Owner
 New cases/incidents need an owner, either an individual identified by their email address or a group name. Prior to running the app, the provided script **Trusteer PPD: Create Case from Email v1.0.0**, should be changed to reflect the new incident owner in your IBM SOAR platform. For example, to change the owner to l1@businessname.com, locate line 9 of the script:
 
 ```python
@@ -191,6 +196,11 @@ Edit the line:
 # Change this value to reflect who will be the owner of the incident before running the script.
 newIncidentOwner = "l1@businessname.com"
 ```
+#### Enable the Rule: Trusteer PPD: Parse Trusteer Email v1.0.0
+
+Once the new case owner is defined in the **Trusteer PPD: Create Case from Email v1.0.0** script, enable the included rule: **Trusteer PPD: Parse Trusteer Email v1.0.0**
+
+![screenshot: fn-trusteer-ppd-rule ](./doc/screenshots/fn-trusteer-ppd-rule.png)
 
 #### Permissions
 <!--
