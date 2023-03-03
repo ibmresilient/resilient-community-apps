@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "rows_ids": [
+      643
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 2269,
+    "dt_utils_datatable_api_name": "dt_utils_test_data_table",
+    "dt_utils_rows_ids": "[643]"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-datatable-utils",
+    "package_version": "2.0.0",
+    "host": "local",
+    "execution_time_ms": 759,
+    "timestamp": "2022-05-31 13:45:13"
+  }
+}
