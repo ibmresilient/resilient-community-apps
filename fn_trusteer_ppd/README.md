@@ -79,11 +79,10 @@ Bi-directional App for Trusteer Pinpoint Detect. Parse emails from Trusteer Pinp
   List the Key Features of the Integration
 -->
 * Create cases in SOAR from Trusteer Pinpoint Detect Criminal email alert feeds via email parsing script in SOAR.
-* A Trusteer account (PUID - Permanent User ID) maps to a case in SOAR and alerts to the account are added to the Trusteer Alerts data table.
+* A Trusteer account (PUID - Permanent User ID) maps to a case in SOAR and subsequent new alerts on the account are added to the Trusteer Alerts data table.
 * Send feedback to Trusteer on a session from a row in Trusteer Alerts data table.
-* 
-* Add artifacts to the case vis email parsing script.
-* Add artifacts to the case via data table row script.
+* Add artifacts to the Trusteer case vis email parsing script.
+* Add artifacts to the Truster case via data table row script.
 
 ---
 
@@ -91,7 +90,6 @@ Bi-directional App for Trusteer Pinpoint Detect. Parse emails from Trusteer Pinp
 <!--
   List any Requirements 
 --> 
-<!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -146,7 +144,7 @@ Additional package dependencies may exist for each of these packages:
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
-| IBM Trusteer | 11.7 | https://orgname-api.trusteer.com/api/v1/ (Feedback Loop API)| v1 |
+| IBM Trusteer | 11.7 | https://customer_name-api.trusteer.com/api/v1/ (Feedback Loop API)| v1 |
 
 #### Prerequisites
 <!--
@@ -206,10 +204,8 @@ Once the new case owner is defined in the **Trusteer PPD: Create Case from Email
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
-* Permission A <!-- ::CHANGE_ME:: -->
-* Permission B <!-- ::CHANGE_ME:: -->
-* Permission C <!-- ::CHANGE_ME:: -->
-
+* Trusteer account 
+* Trusteer API Token
 
 ---
 

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-
+import os
 from base64 import b64encode
 import logging
 from urllib.parse import urljoin
 
-from resilient_lib import RequestsCommon, validate_fields, str_to_bool
+from resilient_lib import RequestsCommon, validate_fields, IntegrationError
 
 
 LOG = logging.getLogger(__name__)
@@ -45,8 +45,14 @@ class TrusteerPPDClient():
         self.api_token = app_configs.get("api_token")
         self.api_version = app_configs.get("api_version")
         self.customer_name = app_configs.get("customer_name")
+
+        # Make sure the client auth cert and key files are there.
         self.client_auth_key = app_configs.get("client_auth_key")
         self.client_auth_cert = app_configs.get("client_auth_cert")
+        if not os.path.isfile(self.client_auth_cert):
+            raise IntegrationError("No Trusteer client_auth_cert file found.")
+        if not os.path.isfile(self.client_auth_key):
+            raise IntegrationError("No Trusteer client_auth_key file found.")
 
         self.endpoint_url = ENDPOINT_URL.format(customer_name=self.customer_name)
         self.rest_api_base_url = REST_API_BASE_URL.format(customer_name=self.customer_name)
