@@ -3,21 +3,21 @@
   "success": true,
   "reason": null,
   "content": {
-    "issue_url": "https://team-111.atlassian.net/browse/JRA-47",
-    "issue_url_internal": "https://team-111.atlassian.net/rest/api/2/issue/10058",
+    "issue_url": "https://example.com/browse/JRA-47",
+    "issue_url_internal": "https://example.com/rest/api/2/issue/10058",
     "issue_key": "JRA-47",
     "issue": {
       "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
       "id": "10058",
-      "self": "https://team-111.atlassian.net/rest/api/2/issue/10058",
+      "self": "https://example.com/rest/api/2/issue/10058",
       "key": "JRA-47",
       "fields": {
         "statuscategorychangedate": "2023-01-31T12:57:59.508-0500",
         "issuetype": {
-          "self": "https://team-111.atlassian.net/rest/api/2/issuetype/10007",
+          "self": "https://example.com/rest/api/2/issuetype/10007",
           "id": "10007",
           "description": "Stories track functionality or features expressed as user goals.",
-          "iconUrl": "https://team-111.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
+          "iconUrl": "https://example.com/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
           "name": "Story",
           "subtask": false,
           "avatarId": 10315,
@@ -27,17 +27,17 @@
         "timespent": null,
         "customfield_10030": null,
         "project": {
-          "self": "https://team-111.atlassian.net/rest/api/2/project/10001",
+          "self": "https://example.com/rest/api/2/project/10001",
           "id": "10001",
           "key": "JRA",
           "name": "Test Project",
           "projectTypeKey": "software",
           "simplified": true,
           "avatarUrls": {
-            "48x48": "https://team-111.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10419",
-            "24x24": "https://team-111.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=small",
-            "16x16": "https://team-111.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=xsmall",
-            "32x32": "https://team-111.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=medium"
+            "48x48": "https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419",
+            "24x24": "https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=small",
+            "16x16": "https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=xsmall",
+            "32x32": "https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=medium"
           }
         },
         "customfield_10031": null,
@@ -55,7 +55,7 @@
           "shouldDisplay": true
         },
         "watches": {
-          "self": "https://team-111.atlassian.net/rest/api/2/issue/JRA-47/watchers",
+          "self": "https://example.com/rest/api/2/issue/JRA-47/watchers",
           "watchCount": 1,
           "isWatching": true
         },
@@ -66,8 +66,8 @@
         "customfield_10022": null,
         "customfield_10023": null,
         "priority": {
-          "self": "https://team-111.atlassian.net/rest/api/2/priority/4",
-          "iconUrl": "https://team-111.atlassian.net/images/icons/priorities/low.svg",
+          "self": "https://example.com/rest/api/2/priority/4",
+          "iconUrl": "https://example.com/images/icons/priorities/low.svg",
           "name": "Low",
           "id": "4"
         },
@@ -91,7 +91,7 @@
         "versions": [],
         "issuelinks": [],
         "assignee": {
-          "self": "https://team-111.atlassian.net/rest/api/2/user?accountId=123456",
+          "self": "https://example.com/rest/api/2/user?accountId=123456",
           "accountId": "123456",
           "emailAddress": "test@example.com",
           "avatarUrls": {
@@ -107,13 +107,13 @@
         },
         "updated": "2023-01-31T12:57:59.000-0500",
         "status": {
-          "self": "https://team-111.atlassian.net/rest/api/2/status/10003",
+          "self": "https://example.com/rest/api/2/status/10003",
           "description": "",
-          "iconUrl": "https://team-111.atlassian.net/",
+          "iconUrl": "https://example.com/",
           "name": "To Do",
           "id": "10003",
           "statusCategory": {
-            "self": "https://team-111.atlassian.net/rest/api/2/statuscategory/2",
+            "self": "https://example.com/rest/api/2/statuscategory/2",
             "id": 2,
             "key": "new",
             "colorName": "blue-gray",
@@ -137,7 +137,7 @@
         "attachment": [],
         "summary": "IBM SOAR: h",
         "creator": {
-          "self": "https://team-111.atlassian.net/rest/api/2/user?accountId=123456",
+          "self": "https://example.com/rest/api/2/user?accountId=123456",
           "accountId": "123456",
           "emailAddress": "test@example.com",
           "avatarUrls": {
@@ -153,7 +153,7 @@
         },
         "subtasks": [],
         "reporter": {
-          "self": "https://team-111.atlassian.net/rest/api/2/user?accountId=123456",
+          "self": "https://example.com/rest/api/2/user?accountId=123456",
           "accountId": "123456",
           "emailAddress": "test@example.com",
           "avatarUrls": {
@@ -183,13 +183,13 @@
         },
         "comment": {
           "comments": [],
-          "self": "https://team-111.atlassian.net/rest/api/2/issue/10058/comment",
+          "self": "https://example.com/rest/api/2/issue/10058/comment",
           "maxResults": 0,
           "total": 0,
           "startAt": 0
         },
         "votes": {
-          "self": "https://team-111.atlassian.net/rest/api/2/issue/JRA-47/votes",
+          "self": "https://example.com/rest/api/2/issue/JRA-47/votes",
           "votes": 0,
           "hasVoted": false
         },

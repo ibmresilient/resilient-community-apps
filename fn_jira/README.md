@@ -398,15 +398,15 @@ results = {
       },
       "displayName": "test",
       "emailAddress": "test@example.com",
-      "self": "https://team-111.atlassian.net/rest/api/2/user?accountId=123456",
+      "self": "https://example.com/rest/api/2/user?accountId=123456",
       "timeZone": "America/New_York"
     },
     "body": "404 error is thrown",
     "created": "2023-01-31T09:52:58.464-0500",
     "id": "10350",
-    "jira_url": "\u003ca href=\"https://team-111.atlassian.net/browse/JRA-45\"\u003eJRA-45\u003c/a\u003e",
+    "jira_url": "\u003ca href=\"https://example.com/browse/JRA-45\"\u003eJRA-45\u003c/a\u003e",
     "jsdPublic": true,
-    "self": "https://team-111.atlassian.net/rest/api/2/issue/10055/comment/10350",
+    "self": "https://example.com/rest/api/2/issue/10055/comment/10350",
     "updateAuthor": {
       "accountId": "123456",
       "accountType": "atlassian",
@@ -419,7 +419,7 @@ results = {
       },
       "displayName": "test",
       "emailAddress": "test@example.com",
-      "self": "https://team-111.atlassian.net/rest/api/2/user?accountId=123456",
+      "self": "https://example.com/rest/api/2/user?accountId=123456",
       "timeZone": "America/New_York"
     },
     "updated": "2023-01-31T09:52:58.464-0500"
@@ -539,14 +539,14 @@ results = {
           },
           "displayName": "test",
           "emailAddress": "test@example.com",
-          "self": "https://team-111.atlassian.net/rest/api/2/user?accountId=123456",
+          "self": "https://example.com/rest/api/2/user?accountId=123456",
           "timeZone": "America/New_York"
         },
         "attachment": [],
         "comment": {
           "comments": [],
           "maxResults": 0,
-          "self": "https://team-111.atlassian.net/rest/api/2/issue/10058/comment",
+          "self": "https://example.com/rest/api/2/issue/10058/comment",
           "startAt": 0,
           "total": 0
         },
@@ -564,7 +564,7 @@ results = {
           },
           "displayName": "test",
           "emailAddress": "test@example.com",
-          "self": "https://team-111.atlassian.net/rest/api/2/user?accountId=123456",
+          "self": "https://example.com/rest/api/2/user?accountId=123456",
           "timeZone": "America/New_York"
         },
         "customfield_10001": null,
@@ -617,19 +617,19 @@ results = {
           "description": "Stories track functionality or features expressed as user goals.",
           "entityId": "28f65659-c37e-43ad-a17f-1d00d8d6d9ac",
           "hierarchyLevel": 0,
-          "iconUrl": "https://team-111.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
+          "iconUrl": "https://example.com/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
           "id": "10007",
           "name": "Story",
-          "self": "https://team-111.atlassian.net/rest/api/2/issuetype/10007",
+          "self": "https://example.com/rest/api/2/issuetype/10007",
           "subtask": false
         },
         "labels": [],
         "lastViewed": null,
         "priority": {
-          "iconUrl": "https://team-111.atlassian.net/images/icons/priorities/low.svg",
+          "iconUrl": "https://example.com/images/icons/priorities/low.svg",
           "id": "4",
           "name": "Low",
-          "self": "https://team-111.atlassian.net/rest/api/2/priority/4"
+          "self": "https://example.com/rest/api/2/priority/4"
         },
         "progress": {
           "progress": 0,
@@ -637,16 +637,16 @@ results = {
         },
         "project": {
           "avatarUrls": {
-            "16x16": "https://team-111.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=xsmall",
-            "24x24": "https://team-111.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=small",
-            "32x32": "https://team-111.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=medium",
-            "48x48": "https://team-111.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10419"
+            "16x16": "https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=xsmall",
+            "24x24": "https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=small",
+            "32x32": "https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=medium",
+            "48x48": "https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419"
           },
           "id": "10001",
           "key": "JRA",
           "name": "Test Project",
           "projectTypeKey": "software",
-          "self": "https://team-111.atlassian.net/rest/api/2/project/10001",
+          "self": "https://example.com/rest/api/2/project/10001",
           "simplified": true
         },
         "reporter": {
@@ -661,7 +661,7 @@ results = {
           },
           "displayName": "test",
           "emailAddress": "test@example.com",
-          "self": "https://team-111.atlassian.net/rest/api/2/user?accountId=123456",
+          "self": "https://example.com/rest/api/2/user?accountId=123456",
           "timeZone": "America/New_York"
         },
         "resolution": null,
@@ -669,16 +669,16 @@ results = {
         "security": null,
         "status": {
           "description": "",
-          "iconUrl": "https://team-111.atlassian.net/",
+          "iconUrl": "https://example.com/",
           "id": "10003",
           "name": "To Do",
-          "self": "https://team-111.atlassian.net/rest/api/2/status/10003",
+          "self": "https://example.com/rest/api/2/status/10003",
           "statusCategory": {
             "colorName": "blue-gray",
             "id": 2,
             "key": "new",
             "name": "To Do",
-            "self": "https://team-111.atlassian.net/rest/api/2/statuscategory/2"
+            "self": "https://example.com/rest/api/2/statuscategory/2"
           }
         },
         "statuscategorychangedate": "2023-01-31T12:57:59.508-0500",
@@ -692,12 +692,12 @@ results = {
         "versions": [],
         "votes": {
           "hasVoted": false,
-          "self": "https://team-111.atlassian.net/rest/api/2/issue/JRA-47/votes",
+          "self": "https://example.com/rest/api/2/issue/JRA-47/votes",
           "votes": 0
         },
         "watches": {
           "isWatching": true,
-          "self": "https://team-111.atlassian.net/rest/api/2/issue/JRA-47/watchers",
+          "self": "https://example.com/rest/api/2/issue/JRA-47/watchers",
           "watchCount": 1
         },
         "worklog": {
@@ -710,11 +710,11 @@ results = {
       },
       "id": "10058",
       "key": "JRA-47",
-      "self": "https://team-111.atlassian.net/rest/api/2/issue/10058"
+      "self": "https://example.com/rest/api/2/issue/10058"
     },
     "issue_key": "JRA-47",
-    "issue_url": "https://team-111.atlassian.net/browse/JRA-47",
-    "issue_url_internal": "https://team-111.atlassian.net/rest/api/2/issue/10058",
+    "issue_url": "https://example.com/browse/JRA-47",
+    "issue_url_internal": "https://example.com/rest/api/2/issue/10058",
     "jira_dt_name": "jira_task_references"
   },
   "inputs": {
