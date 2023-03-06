@@ -12,18 +12,21 @@ from resilient_lib import (RequestsCommon)
 from fn_trusteer_ppd.lib.trusteer_ppd_client import (TrusteerPPDClient, PACKAGE_NAME, 
                                                      ENDPOINT_URL, REST_API_BASE_URL, LINKBACK_URL)
 
+BASE_MOCK_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+PATH_CERT_PEM = os.path.join(BASE_MOCK_PATH, "cert.pem")
+PATH_KEY_PEM = os.path.join(BASE_MOCK_PATH, "key.pem")
+
 APP_CONFIG = {
     "api_token": "abcd-efgh",
     "api_version": "v1",
     "customer_name": "trusteer_customer_name",
     "verify": "true",
-    "client_auth_cert" : "/path/to/cert.pem",
-    "client_auth_key" : "/path/to/key.pem",
+    "client_auth_cert" : PATH_CERT_PEM,
+    "client_auth_key" : PATH_KEY_PEM,
     "endpoint_url": ENDPOINT_URL.format(customer_name="trusteer_customer_name"),
     "rest_api_base_url": REST_API_BASE_URL.format(customer_name="trusteer_customer_name")
 }
 
-BASE_MOCK_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mock_data")
 
 def load_json(path_file):
     with open(path_file, "r") as json_file:
