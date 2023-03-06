@@ -2,14 +2,16 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from data import mock_data
+from unittest.mock import patch
 
 PACKAGE_NAME = "fn_jira"
 FUNCTION_NAME = "jira_open_issue"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = mock_data.get_mock_config()
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -54,23 +56,14 @@ class TestJiraOpenIssue:
         "jira_fields": "sample text"
     }
 
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-        "jira_label": "sample text",
-        "incident_id": 123,
-        "task_id": 123,
-        "jira_fields": "sample text"
-    }
-
-    expected_results_2 = {"value": "xyz"}
+    expected_results_1 = mock_data.create_issue_results()
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
+        (mock_inputs_1, expected_results_1)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-
-        results = call_jira_open_issue_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        with patch("fn_jira.components.jira_open_issue.AppCommon.get_jira_client") as patch_open:
+            patch_open.return_value = mock_data.mock_init()
+            results = call_jira_open_issue_function(circuits_app, mock_inputs)
+            assert(expected_results == results.get("content"))

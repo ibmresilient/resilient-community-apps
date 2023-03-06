@@ -94,23 +94,24 @@ class FunctionComponent(AppFunctionComponent):
         if not jira_comment or not jira_comment.strip():
             raise FunctionError("Note is empty after rich text is removed")
 
-        # Loop through any linked images in the note and add them as attachments on Jira
-        for src, alt in imgs:
-            try:
-                # Read a url image to a filestream
-                if src.lower().startswith("http"):
-                    # External resource
-                    img_data = self.rc.execute("GET", src, headers={"User-agent": "SOAR Apphost"}).content
-                else:
-                    # Resource from the platform
-                    img_data = self.rest_client().get(src[src.index("/rest")+len("/rest"):], is_uri_absolute=True, get_response_object=True).content
+        if imgs:
+            # Loop through any linked images in the note and add them as attachments on Jira
+            for src, alt in imgs:
+                try:
+                    # Read a url image to a filestream
+                    if src.lower().startswith("http"):
+                        # External resource
+                        img_data = self.rc.execute("GET", src, headers={"User-agent": "SOAR Apphost"}).content
+                    else:
+                        # Resource from the platform
+                        img_data = self.rest_client().get(src[src.index("/rest")+len("/rest"):], is_uri_absolute=True, get_response_object=True).content
 
-                yield self.status_message(f"Adding attachment '{alt}' to {jira_issue_id} in JIRA")
-                jira_client.add_attachment(jira_issue_id, attachment=BytesIO(img_data), filename=alt)
-            except BasicHTTPException as e:
-                yield self.status_message(f"Attachment '{alt}' could not be loaded. Details: {e}")
-            except Exception as e:
-                raise IntegrationError(f"Something went wrong when posting attachment to Jira. Details: {e}")
+                    yield self.status_message(f"Adding attachment '{alt}' to {jira_issue_id} in JIRA")
+                    jira_client.add_attachment(jira_issue_id, attachment=BytesIO(img_data), filename=alt)
+                except BasicHTTPException as e:
+                    yield self.status_message(f"Attachment '{alt}' could not be loaded. Details: {e}")
+                except Exception as e:
+                    raise IntegrationError(f"Something went wrong when posting attachment to Jira. Details: {e}")
 
         yield self.status_message(f"Adding comment to {jira_issue_id} in JIRA")
 
