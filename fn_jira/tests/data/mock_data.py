@@ -443,8 +443,34 @@ def mock_init():
                     """ Mock """
                     pass
 
-                def permalink():
+                def permalink(self):
                     return "https://example.com/browse/JRA-47"
             return MockCreateIssue()
+
+        def transition_issue(self, issue, transition):
+            """ Mock transition_issue return """
+            class MockTransitionIssue(object):
+                def __init__(self):
+                    """ Mock init """
+                    pass
+
+            return MockTransitionIssue()
+
+        def issue(self, issue_id):
+            """ Mock issue return """
+            class MockIssue(object):
+                def __init__(self):
+                    """ Mock init """
+                    pass
+
+                def update(self, comment, fields):
+                    """ Mock update return """
+                    class MockUpdate(object):
+                        def __init__(self):
+                            """ Mock init """
+                            pass
+                    return MockUpdate()
+
+            return MockIssue()
 
     return MockClient()
