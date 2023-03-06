@@ -3,10 +3,10 @@
   "success": true,
   "reason": null,
   "content": {
-    "self": "https://team-111.atlassian.net/rest/api/2/issue/10055/comment/10350",
+    "self": "https://example.com/rest/api/2/issue/10055/comment/10350",
     "id": "10350",
     "author": {
-      "self": "https://team-111.atlassian.net/rest/api/2/user?accountId=123456",
+      "self": "https://example.com/rest/api/2/user?accountId=123456",
       "accountId": "123456",
       "emailAddress": "test@example.com",
       "avatarUrls": {
@@ -22,7 +22,7 @@
     },
     "body": "404 error is thrown",
     "updateAuthor": {
-      "self": "https://team-111.atlassian.net/rest/api/2/user?accountId=123456",
+      "self": "https://example.com/rest/api/2/user?accountId=123456",
       "accountId": "123456",
       "emailAddress": "test@example.com",
       "avatarUrls": {
@@ -39,7 +39,7 @@
     "created": "2023-01-31T09:52:58.464-0500",
     "updated": "2023-01-31T09:52:58.464-0500",
     "jsdPublic": true,
-    "jira_url": "<a href=\"https://team-111.atlassian.net/browse/JRA-45\">JRA-45</a>"
+    "jira_url": "<a href=\"https://example.com/browse/JRA-45\">JRA-45</a>"
   },
   "raw": null,
   "inputs": {
