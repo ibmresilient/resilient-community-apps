@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 import pytest
@@ -50,17 +51,14 @@ class TestJiraOpenIssue:
         assert func is not None
 
     mock_inputs_1 = {
-        "jira_label": "sample text",
-        "incident_id": 123,
-        "task_id": 123,
-        "jira_fields": "sample text"
+        "jira_label": "my-server",
+        "incident_id": 10058,
+        "jira_fields": "{ \"summary\":\"IBM SOAR: h\",\"issuetype\":\"Story\",\"project\":\"JRA\",\"description\":\"Created in IBM SOAR\",\"priority\":{ \"name\":\"Low\" } }"
     }
 
     expected_results_1 = mock_data.create_issue_results()
 
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1)
-    ])
+    @pytest.mark.parametrize("mock_inputs, expected_results", [(mock_inputs_1, expected_results_1)])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
         with patch("fn_jira.components.jira_open_issue.AppCommon.get_jira_client") as patch_open:
