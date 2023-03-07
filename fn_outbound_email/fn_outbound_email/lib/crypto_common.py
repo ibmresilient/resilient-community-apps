@@ -21,12 +21,13 @@ def convert_base64(contents: bytes) -> bytes:
     :return: decoded data
     :rtype: bytes
     """
-    try:
-        decoded_contents = base64.b64decode(contents)
-        # using 'in' as last char may be \n
-        return decoded_contents if base64.b64encode(decoded_contents) in contents else contents
-    except Exception:
-        return contents
+    if contents:
+        try:
+            decoded_contents = base64.b64decode(contents)
+            # using 'in' as last char may be \n
+            return decoded_contents if base64.b64encode(decoded_contents) in contents else contents
+        except Exception:
+            return contents
 
 def get_p12_info(file_path: str, private_key: str):
     """read the signer p12 certificate and return the parts
@@ -44,12 +45,16 @@ def get_p12_info(file_path: str, private_key: str):
     # get cert data - it may be in base64 format
     p12_cert = convert_base64(_get_file(file_path, mode='rb', return_bytes=False))
 
-    private_key, certificate, additional_certificates = serialization.pkcs12.load_key_and_certificates(
-        p12_cert,
-        s_to_b(private_key)
-    )
+    if p12_cert:
+        private_key, certificate, additional_certificates = serialization.pkcs12.load_key_and_certificates(
+            p12_cert,
+            s_to_b(private_key)
+        )
 
-    return private_key, certificate, additional_certificates
+        return private_key, certificate, additional_certificates
+    else:
+        LOG.error(f"No certificate information decoded for filepath: {file_path}")
+        return None, None, None
 
 def _get_file(file_path: str, mode='r', return_bytes=True) -> bytes:
     """read contents of a file into byte format

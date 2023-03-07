@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v48.0.4034
 
 """Generate the Resilient customizations required for fn_outbound_email"""
 
