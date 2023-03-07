@@ -80,9 +80,19 @@ Bi-directional App for Trusteer Pinpoint Detect. Parse emails from Trusteer Pinp
 -->
 * Create cases in SOAR from Trusteer Pinpoint Detect Criminal email alert feeds via email parsing script in SOAR.
 * A Trusteer account (PUID - Permanent User ID) maps to a case in SOAR and subsequent new alerts on the account are added to the Trusteer Alerts data table.
-* Send feedback to Trusteer on a session from a row in Trusteer Alerts data table.
-* Add artifacts to the Trusteer case vis email parsing script.
-* Add artifacts to the Truster case via data table row script.
+* Send alert Classification feedback to Trusteer on a session from the Trusteer Alerts data table. Classification options are:
+  * Pending
+  * Confirmed legitimate
+  * Undetermined
+  * Confirmed fraud
+  * Confirmed fraud (Account takeover)
+  * Confirmed fraud (First-party)
+  * Confirmed fraud (Mule account)
+  * Confirmed fraud (Remote access tool)
+  * Confirmed fraud (Social engineering)
+* Add artifacts to the Trusteer case via email parsing script 
+* Add artifacts to the Trusteer case via Trusteer Alerts data table script.
+* Navigate links back to the Trusteer account and devices from the case.
 
 ---
 
@@ -535,7 +545,7 @@ if device_link:
 
 ---
 ## Script - Trusteer PPD: Create Case from Email v1.0.0
-Parse an email from Trusteer Pinpoint Detect and create a case if there is not an Active case with the PUID already in SOAR.  Otherwise, add a new row to Trusteer Alerts data table and populate with information from the current email.
+Parse an email from Trusteer Pinpoint Detect and create a case if there is not an Active case with the PUID already in SOAR.  Otherwise, add a new row to Trusteer Alerts data table in the case with the associated PUID and populate with information from the current email.
 
 **Object:** __emailmessage
 
@@ -1017,7 +1027,7 @@ class EmailProcessor(object):
         
         try:
             row = incident.addRow('email_conversations')
-            row['date_sent'] = int(time.time()*1000) # TODO ts from headers.get("Date")
+            row['date_sent'] = int(time.time()*1000)
             row['source'] = "inbound"
             row['inbound_id'] = emailmessage.id
             row['recipients'] = helper.createRichText("To: {}<br>Cc: {}<br>Bcc: {}".format(handle_list(headers.get("To")), handle_list(headers.get("CC", '')), handle_list(headers.get("BCC", ''))))
