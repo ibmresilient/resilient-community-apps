@@ -71,7 +71,7 @@ DEFANG_PATTERN = re.compile(r"(https|http|ftps|ftp|mailto|news|file|mailto):", r
 # replies to message
 REPLY_PATTERN = re.compile(r"^re: ", re.IGNORECASE)
 # possible message-id names
-MESSAGE_ID_LIST =  ["x-original-message-id", "x-microsoft-original-message-id", "x-google-original-message-id", "message-id"]
+MESSAGE_ID_LIST =  ["message-id", "x-original-message-id", "x-microsoft-original-message-id", "x-google-original-message-id"]
 
 class Utils:
     """ A class to collect some utilities used by the rest of the script. """
@@ -564,14 +564,21 @@ class EmailProcessor(object):
       
     @staticmethod
     def get_message_id(headers):
-        msg_id_list = [v for k,v in headers.items() if k.lower() in MESSAGE_ID_LIST]
-        # find the message id among several choices
-        msg_id = msg_id_list[0] if msg_id_list else None
-        if msg_id:
-            match = MESSAGE_PATTERN.findall(msg_id[0].strip()) # remove brackets <>
-            if match:
-                return match[0]
-    
+        msg_id = None
+        #represent the header keys as lower case for matching
+        header_keys = {k.lower(): k for k in headers.keys()}
+
+        # looks for the headers in order of importance
+        for msg_hdr in MESSAGE_ID_LIST:
+            if msg_hdr in header_keys:
+                msg_id = headers[header_keys[msg_hdr]][0]
+                break
+
+        # remove brackets <>
+        match = MESSAGE_PATTERN.findall(msg_id.strip()) if msg_id else None 
+        if match:
+            return match[0]
+
     @staticmethod
     def save_message_id(headers):
         # extract the message ID and retain

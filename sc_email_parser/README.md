@@ -4,6 +4,7 @@ This package consists of the **RuleAndScript.res** and **ScriptAlone.res** IBM S
 ## History
 | Version | Date | Comments |
 | ------: | ---: | -------: |
+| 2.3.2 | 2/2023 | Fix index error |
 | 2.3.1 | 10/2022 | Fix for defanging logic |
 | 2.3.0 | 9/2022 | Support for Outbound Email 2.0 conversations |
 | 2.2.0 | 7/2021 | Support for Python 3 |
