@@ -7,7 +7,7 @@
 from logging import getLogger
 import requests
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields, render, RequestsCommon
+from resilient_lib import render, RequestsCommon
 
 PACKAGE_NAME = "fn_rest_api"
 FN_NAME = "rest_api"

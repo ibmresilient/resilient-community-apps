@@ -23,7 +23,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1677800558382,
+  "export_date": 1678243423503,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -350,7 +350,7 @@
     {
       "created_date": 1675211719736,
       "description": {
-        "content": "This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS.\n\nThe function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.",
+        "content": "This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS.\n\nThe function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.",
         "format": "text"
       },
       "destination_handle": "fn_rest_api",
@@ -363,11 +363,11 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1677531658487,
+      "last_modified_time": 1678242982506,
       "name": "rest_api",
       "tags": [],
       "uuid": "5f728e3d-a4a0-4c6f-9f09-04468edc4d10",
-      "version": 3,
+      "version": 4,
       "view_items": [
         {
           "content": "984922d9-24f1-444f-8967-8199742c8bf9",
@@ -460,13 +460,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 18,
+  "id": 22,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1677800556505,
+      "create_date": 1678243421657,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -475,7 +475,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1677800556505,
+      "update_date": 1678243421657,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],

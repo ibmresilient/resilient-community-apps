@@ -1,3 +1,62 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "ok": true,
+    "url": "https://postman-echo.com/get",
+    "status_code": 200,
+    "reason": "OK",
+    "cookies": {
+      "sails.sid": "s%3AC3qSgEkPLbzV-xtRnnqe-p7zt80yQSTm.SJf3XOyooMFo0wQ8wiWfCzlgieNUBQGRNtSo%2BRSXw54"
+    },
+    "headers": {
+      "Date": "Thu, 02 Mar 2023 23:47:12 GMT",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "486",
+      "Connection": "close",
+      "ETag": "W/\"1e6-/Slr9JmNLSHXgTt5sCvAphvtWyI\"",
+      "set-cookie": "sails.sid=s%3AC3qSgEkPLbzV-xtRnnqe-p7zt80yQSTm.SJf3XOyooMFo0wQ8wiWfCzlgieNUBQGRNtSo%2BRSXw54; Path=/; HttpOnly"
+    },
+    "elapsed": 711,
+    "apparent_encoding": "ascii",
+    "text": "{\n  \"args\": {\n    \"key\": \"8.8.8.8\"\n  },\n  \"headers\": {\n    \"x-forwarded-proto\": \"https\",\n    \"x-forwarded-port\": \"443\",\n    \"host\": \"postman-echo.com\",\n    \"x-amzn-trace-id\": \"Root=1-64013580-54708cb41d08344e2a8af58b\",\n    \"content-length\": \"18\",\n    \"user-agent\": \"python-requests/2.28.1\",\n    \"accept-encoding\": \"gzip, deflate\",\n    \"accept\": \"*/*\",\n    \"content-type\": \"application/json\",\n    \"x-frooble\": \"Baz\",\n    \"authorization\": \"\"\n  },\n  \"url\": \"https://postman-echo.com/get\"\n}",
+    "json": {
+      "args": {
+        "key": "8.8.8.8"
+      },
+      "headers": {
+        "x-forwarded-proto": "https",
+        "x-forwarded-port": "443",
+        "host": "postman-echo.com",
+        "x-amzn-trace-id": "Root=1-64013580-54708cb41d08344e2a8af58b",
+        "content-length": "18",
+        "user-agent": "python-requests/2.28.1",
+        "accept-encoding": "gzip, deflate",
+        "accept": "*/*",
+        "content-type": "application/json",
+        "x-frooble": "Baz",
+        "authorization": ""
+      },
+      "url": "https://postman-echo.com/get"
+    },
+    "links": {}
+  },
+  "raw": null,
+  "inputs": {
+    "rest_api_headers": "Content-Type: application/json\nX-Frooble: Baz\nAuthorization: {{auth_header}}",
+    "rest_api_method": "GET",
+    "rest_api_verify": true,
+    "rest_api_allowed_status_codes": " 305,404,500",
+    "rest_api_url": "https://postman-echo.com/get",
+    "rest_api_body": "{\"key\": \"8.8.8.8\"}"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-rest-api",
+    "package_version": "1.0.0",
+    "host": "My Host",
+    "execution_time_ms": 731,
+    "timestamp": "2023-03-02 18:47:11"
+  }
 }

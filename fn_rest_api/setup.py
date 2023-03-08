@@ -22,17 +22,16 @@ def snake_to_camel(word):
 
 setup(
     name="fn_rest_api",
-    display_name="<<display name of your app here>>",
+    display_name="REST API Functions for SOAR",
     version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
-    author_email="you@example.com",
-    url="<<your company url>>",
-    description="<<::CHANGE_ME::>>Enter a short description of the App",
-    long_description="""<<::CHANGE_ME::>>Enter a long description, including the key features of the App. \
-Multiple continuation lines are supported with a backslash. Line breaks are supported too:
-<br>- This will be rendered like a list
-<br>- once the App is installed in SOAR""",
+    license="MIT",
+    author="IBM SOAR",
+    author_email="",
+    url="https://ibm.com/mysupport",
+    description="Function to call REST web services in the SOAR Platform",
+    long_description="""This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, OPTIONS and PATCH.
+ The function parameters determine the type of call, the URL, and optionally the headers, cookies and body.
+ The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.""",
     install_requires=[
         "resilient-circuits>=47.1.0"
     ],
