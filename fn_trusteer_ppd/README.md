@@ -162,7 +162,8 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 -->
 * An email address configured in Trusteer Management Application (TMA/Trustboard) to which Trusteer sends **Pinpoint Detection suspicious access detected** alerts.
 * The same email address configured in Trusteer is also configured in SOAR inbound email connection.
-* An API 
+* A Trusteer API token.
+* Trusteer client authorization certificate and key files to perform REST API calls.
 
 #### Configure Trusteer Email Feeds
 <!--
@@ -187,8 +188,6 @@ The email address to send Trusteer alerts appears in the list.
 Create and configure a SOAR inbound email connection with the same email address configured in Trusteer:
 
  ![screenshot: fn-trusteer-ppd-tma-config ](./doc/screenshots/fn-trusteer-ppd-inbound-email.png)
-
-Email from Trusteer arrives in the inbound mailbox and a the provided rule 
 
 #### The Case/incident Owner
 New cases/incidents need an owner, either an individual identified by their email address or a group name. Prior to running the app, the provided script **Trusteer PPD: Create Case from Email v1.0.0**, should be changed to reflect the new incident owner in your IBM SOAR platform. For example, to change the owner to l1@businessname.com, locate line 9 of the script:
