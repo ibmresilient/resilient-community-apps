@@ -47,19 +47,31 @@ class TestInternetUtilitiesCallRestApi:
         assert func is not None
 
     @pytest.mark.livetest
-    @pytest.mark.parametrize("rest_method, rest_url, rest_headers, rest_body", [
-        ('POST', "https://httpbin.org/post", {"Content-type": "application/json; charset=UTF-8"},
-         {'title': 'foo', 'body': 'ƱƲ','userId': 1})
+    @pytest.mark.parametrize("rest_method, rest_url, rest_headers, rest_body, rest_verify", [
+        ('POST', "https://httpbin.org/post", 'Content-type: application/json; charset=UTF-8',
+         "title: foo, body: ƱƲ, userId: 1", True)
     ])
-    def test_success(self, circuits_app, rest_method, rest_url, rest_headers, rest_body):
+    def test_success(self, circuits_app, rest_method, rest_url, rest_headers, rest_body, rest_verify):
         """ Test calling with sample values for the parameters """
         function_params = {
             "rest_api_method": rest_method,
             "rest_api_url": rest_url,
             "rest_api_headers": {'content': rest_headers},
-            "rest_api_body": {'content': rest_body }
+            "rest_api_body": {'content': rest_body },
+            "rest_api_verify": rest_verify
         }
         results = call_rest_api_function(circuits_app, function_params)
-        assert(rest_body['title'] == results['json']['json']['title'])
-        assert(rest_body['body'] == results['json']['json']['body'])
-        assert(rest_body['userId'] == results['json']['json']['userId'])
+        def build_dict(rest_temp):
+            temp_dict = {}
+            if rest_temp is not None:
+                lines = rest_temp.split(",")
+                for line in lines:
+                    keyval = line.strip().split(":", 1)
+                    if len(keyval) == 2:
+                        temp_dict[keyval[0].strip()] = keyval[1].strip()
+            return temp_dict
+        rest_body = build_dict(rest_body)
+        results = build_dict(results['content']['json']['json'])
+        assert(rest_body['title'] == results['title'])
+        assert(rest_body['body'] == results['body'])
+        assert(rest_body['userId'] == results['userId'])

@@ -15,6 +15,9 @@ def config_section_data():
 # uncomment to add proxies
 # https_proxy=https://<your_proxy>:<port>
 # http_proxy=http://<your_proxy>:<port>
+
+# In conjunction with Secrets set in SOAR, you can use sensitive values
+# auth_example=$SECRET_EXAMPLE
 """
 
     return config_data

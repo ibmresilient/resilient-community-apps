@@ -102,7 +102,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.8`.
+* IBM Cloud Pak for Security >= `1.9`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -128,12 +128,6 @@ Additional package dependencies may exist for each of these packages:
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
-### App Configuration
-The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
-
-| Config | Required | Example | Description |
-| ------ | :------: | ------- | ----------- |
-
 
 ---
 
@@ -143,6 +137,14 @@ This function calls a REST web service. It supports the standard REST methods: G
 The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
 
  ![screenshot: fn-rest-api ](./doc/screenshots/fn-rest-api.png)
+
+ ---
+
+For sensitive information that may be included in the rest_api_header, using jinja-like syntax, you can substitute values that are specified in the inputs for values that are in the app.config. This, in conjunction with app secrets, allows the user to set sensitive values without having them exposed in plaintext.
+
+ ![screenshot: fn-rest-api-workflow ](./doc/screenshots/fn-rest-api-workflow.png)
+ ![screenshot: fn-rest-api-create-secret ](./doc/screenshots/fn-rest-api-create-secret.png)
+ ![screenshot: fn-rest-api-app-config ](./doc/screenshots/fn-rest-api-app-config.png)
 
 <details><summary>Inputs:</summary>
 <p>
