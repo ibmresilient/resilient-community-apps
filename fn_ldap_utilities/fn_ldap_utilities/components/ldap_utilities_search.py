@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """ SOAR functions component to execute queries against an LDAP server """
@@ -72,8 +72,7 @@ class FunctionComponent(ResilientComponent):
                     raise ValueError(f"The LDAP Search Filter '{ldap_search_filter}' contains the key '%ldap_param%' but no value has been given for ldap_search_param.")
                 else:
                     # Insert escaped param value in filter, need to escape any backslashes X 2 for regex.
-                    ldap_search_filter = sub(
-                        re_pattern, ldap_param_value.replace('\\', '\\\\'), ldap_search_filter)
+                    ldap_search_filter = sub(re_pattern, ldap_param_value.replace('\\', '\\\\'), ldap_search_filter)
 
             return ldap_search_filter
 
