@@ -42,9 +42,7 @@ class FunctionComponent(AppFunctionComponent):
         ldap_domain_name = getattr(fn_inputs, "ldap_domain_name", "") # text
         ldap_dn = getattr(fn_inputs, "ldap_dn") # text (required)
         ldap_new_password = getattr(fn_inputs, "ldap_new_password") # text
-        ldap_new_auto_password_len = getattr(fn_inputs, "ldap_new_auto_password_len") # int Default length is 12
-        if not ldap_new_auto_password_len:
-            ldap_new_auto_password_len = DEFAULT_MAX_PASSWORD_LEN
+        ldap_new_auto_password_len = getattr(fn_inputs, "ldap_new_auto_password_len", DEFAULT_MAX_PASSWORD_LEN) # int Default length is 12
         ldap_return_new_password = getattr(fn_inputs, "ldap_return_new_password") # boolean
 
         self.LOG.info(f"LDAP Domain Name: {ldap_domain_name}")
