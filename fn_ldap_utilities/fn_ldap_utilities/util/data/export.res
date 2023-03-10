@@ -6,7 +6,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: LDAP Utilities: Add",
-      "id": 29,
+      "id": 291,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: LDAP Utilities: Add",
@@ -66,7 +66,7 @@
       ],
       "enabled": true,
       "export_key": "Example: LDAP Utilities: Add User(s) to Group(s)",
-      "id": 30,
+      "id": 292,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: LDAP Utilities: Add User(s) to Group(s)",
@@ -118,7 +118,7 @@
       ],
       "enabled": true,
       "export_key": "Example: LDAP Utilities: Remove User(s) from Group(s)",
-      "id": 31,
+      "id": 293,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: LDAP Utilities: Remove User(s) from Group(s)",
@@ -184,7 +184,7 @@
       ],
       "enabled": true,
       "export_key": "Example: LDAP Utilities: Search",
-      "id": 32,
+      "id": 294,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: LDAP Utilities: Search",
@@ -258,7 +258,7 @@
       ],
       "enabled": true,
       "export_key": "Example: LDAP Utilities: Set Password",
-      "id": 33,
+      "id": 295,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: LDAP Utilities: Set Password",
@@ -340,7 +340,7 @@
       ],
       "enabled": true,
       "export_key": "Example: LDAP Utilities: Toggle Access",
-      "id": 34,
+      "id": 296,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: LDAP Utilities: Toggle Access",
@@ -406,7 +406,7 @@
       ],
       "enabled": true,
       "export_key": "Example: LDAP Utilities: Update",
-      "id": 35,
+      "id": 297,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: LDAP Utilities: Update",
@@ -456,8 +456,9 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1652983187444,
+  "export_date": 1678468630767,
   "export_format_version": 2,
+  "export_type": null,
   "fields": [
     {
       "allow_default_value": false,
@@ -469,7 +470,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_new_auto_password_len",
       "hide_notification": false,
-      "id": 379,
+      "id": 4470,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -498,7 +499,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_search_filter",
       "hide_notification": false,
-      "id": 367,
+      "id": 4471,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -528,7 +529,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_toggle_access",
       "hide_notification": false,
-      "id": 368,
+      "id": 4472,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -554,7 +555,7 @@
           "label": "Enable",
           "properties": null,
           "uuid": "a9a1571e-b734-4cbe-84d7-277ce397c0de",
-          "value": 102
+          "value": 953
         },
         {
           "default": true,
@@ -563,7 +564,7 @@
           "label": "Disable",
           "properties": null,
           "uuid": "938bd462-d9e0-4887-8ef1-670120e419ad",
-          "value": 103
+          "value": 954
         }
       ]
     },
@@ -577,7 +578,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_attribute_name",
       "hide_notification": false,
-      "id": 369,
+      "id": 4473,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -607,7 +608,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_search_param",
       "hide_notification": false,
-      "id": 370,
+      "id": 4474,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -636,7 +637,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_attribute_values",
       "hide_notification": false,
-      "id": 371,
+      "id": 4475,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -666,7 +667,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_domain_name",
       "hide_notification": false,
-      "id": 380,
+      "id": 4476,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -695,7 +696,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_dn",
       "hide_notification": false,
-      "id": 372,
+      "id": 4477,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -725,7 +726,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_return_new_password",
       "hide_notification": false,
-      "id": 381,
+      "id": 4478,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -754,7 +755,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_search_attributes",
       "hide_notification": false,
-      "id": 373,
+      "id": 4479,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -783,7 +784,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_multiple_group_dn",
       "hide_notification": false,
-      "id": 374,
+      "id": 4480,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -813,7 +814,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_search_base",
       "hide_notification": false,
-      "id": 375,
+      "id": 4481,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -843,7 +844,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_new_password",
       "hide_notification": false,
-      "id": 376,
+      "id": 4482,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -872,7 +873,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_attribute_name_values",
       "hide_notification": false,
-      "id": 377,
+      "id": 4483,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -901,7 +902,7 @@
       "deprecated": false,
       "export_key": "__function/ldap_multiple_user_dn",
       "hide_notification": false,
-      "id": 378,
+      "id": 4484,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -931,7 +932,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_toggle_access",
       "hide_notification": false,
-      "id": 391,
+      "id": 4455,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -957,7 +958,7 @@
           "label": "Disable",
           "properties": null,
           "uuid": "cebb0014-5092-4c3a-acc9-a6b8c38716d4",
-          "value": 104
+          "value": 951
         },
         {
           "default": false,
@@ -966,7 +967,7 @@
           "label": "Enable",
           "properties": null,
           "uuid": "583d990c-ff1d-4a72-a651-5501781fc925",
-          "value": 105
+          "value": 952
         }
       ]
     },
@@ -980,7 +981,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_domain_name",
       "hide_notification": false,
-      "id": 382,
+      "id": 4456,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1009,7 +1010,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_attribute_name_values",
       "hide_notification": false,
-      "id": 364,
+      "id": 4457,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1038,7 +1039,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_new_auto_password_length",
       "hide_notification": false,
-      "id": 389,
+      "id": 4458,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -1067,7 +1068,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_attribute_update_value",
       "hide_notification": false,
-      "id": 393,
+      "id": 4459,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1097,7 +1098,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_return_new_password",
       "hide_notification": false,
-      "id": 390,
+      "id": 4460,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -1126,7 +1127,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_update_attribute_name",
       "hide_notification": false,
-      "id": 392,
+      "id": 4461,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1156,7 +1157,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_search_filter",
       "hide_notification": false,
-      "id": 386,
+      "id": 4462,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1185,7 +1186,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_groups",
       "hide_notification": false,
-      "id": 365,
+      "id": 4463,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1214,7 +1215,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_user_info",
       "hide_notification": false,
-      "id": 366,
+      "id": 4464,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1244,7 +1245,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_search_base",
       "hide_notification": false,
-      "id": 385,
+      "id": 4465,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1273,7 +1274,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_user_new_password",
       "hide_notification": false,
-      "id": 388,
+      "id": 4466,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1302,7 +1303,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_search_attributes",
       "hide_notification": false,
-      "id": 387,
+      "id": 4467,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1331,7 +1332,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_multiple_user_dn",
       "hide_notification": false,
-      "id": 383,
+      "id": 4468,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1361,7 +1362,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/ldap_multiple_group_dn",
       "hide_notification": false,
-      "id": 396,
+      "id": 4469,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1391,7 +1392,7 @@
       "deprecated": false,
       "export_key": "incident/ldap_base_dn",
       "hide_notification": false,
-      "id": 394,
+      "id": 4360,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1420,7 +1421,7 @@
       "deprecated": false,
       "export_key": "incident/ldap_domain_name",
       "hide_notification": false,
-      "id": 395,
+      "id": 4361,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1453,13 +1454,7 @@
   ],
   "functions": [
     {
-      "created_date": 1651757332906,
-      "creator": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
+      "created_date": 1678390955388,
       "description": {
         "content": "Add users, groups, organizational units to LDAP",
         "format": "text"
@@ -1467,18 +1462,18 @@
       "destination_handle": "fn_ldap_utilities",
       "display_name": "LDAP Utilities: Add",
       "export_key": "ldap_utilities_add",
-      "id": 6,
+      "id": 92,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 26,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1651758827340,
+      "last_modified_time": 1678390955431,
       "name": "ldap_utilities_add",
       "tags": [],
       "uuid": "673a09d5-acf2-4c3d-8e48-4647cf91be6f",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "bf1fbfd3-3b2d-4919-a4e2-0a22449d0921",
@@ -1522,18 +1517,12 @@
           "programmatic_name": "example_ldap_utilities_add",
           "tags": [],
           "uuid": null,
-          "workflow_id": 21
+          "workflow_id": 112
         }
       ]
     },
     {
-      "created_date": 1651757332977,
-      "creator": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
+      "created_date": 1678390955458,
       "description": {
         "content": "A function that allows adding multiple users to multiple groups",
         "format": "text"
@@ -1541,18 +1530,18 @@
       "destination_handle": "fn_ldap_utilities",
       "display_name": "LDAP Utilities: Add to Group(s)",
       "export_key": "ldap_utilities_add_to_groups",
-      "id": 7,
+      "id": 93,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 26,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1651757407827,
+      "last_modified_time": 1678390955499,
       "name": "ldap_utilities_add_to_groups",
       "tags": [],
       "uuid": "b602d316-c3b6-4b36-8813-eb81fd381bba",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "bf1fbfd3-3b2d-4919-a4e2-0a22449d0921",
@@ -1588,18 +1577,12 @@
           "programmatic_name": "example_ldap_utilities_add_users_to_groups",
           "tags": [],
           "uuid": null,
-          "workflow_id": 26
+          "workflow_id": 109
         }
       ]
     },
     {
-      "created_date": 1651757333050,
-      "creator": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
+      "created_date": 1678390955522,
       "description": {
         "content": "A function that allows you to remove multiple from multiple groups",
         "format": "text"
@@ -1607,18 +1590,18 @@
       "destination_handle": "fn_ldap_utilities",
       "display_name": "LDAP Utilities: Remove from Group(s)",
       "export_key": "ldap_utilities_remove_from_groups",
-      "id": 8,
+      "id": 94,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 26,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1651757407881,
+      "last_modified_time": 1678390955558,
       "name": "ldap_utilities_remove_from_groups",
       "tags": [],
       "uuid": "9ba21139-a5f0-4710-983d-83190f4bdc6c",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "bf1fbfd3-3b2d-4919-a4e2-0a22449d0921",
@@ -1654,18 +1637,12 @@
           "programmatic_name": "example_ldap_utilities_remove_user_from_groups",
           "tags": [],
           "uuid": null,
-          "workflow_id": 20
+          "workflow_id": 111
         }
       ]
     },
     {
-      "created_date": 1651757333123,
-      "creator": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
+      "created_date": 1678390955581,
       "description": {
         "content": "SOAR Function to do a search or query against an LDAP server.",
         "format": "text"
@@ -1673,18 +1650,18 @@
       "destination_handle": "fn_ldap_utilities",
       "display_name": "LDAP Utilities: Search",
       "export_key": "ldap_utilities_search",
-      "id": 9,
+      "id": 95,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 26,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1652973271589,
+      "last_modified_time": 1678390955619,
       "name": "ldap_utilities_search",
       "tags": [],
       "uuid": "892075c1-64ba-46c9-aba1-f1f1aa040bb7",
-      "version": 4,
+      "version": 1,
       "view_items": [
         {
           "content": "bf1fbfd3-3b2d-4919-a4e2-0a22449d0921",
@@ -1736,7 +1713,7 @@
           "programmatic_name": "example_ldap_utilities_search",
           "tags": [],
           "uuid": null,
-          "workflow_id": 25
+          "workflow_id": 114
         },
         {
           "actions": [],
@@ -1746,7 +1723,7 @@
           "programmatic_name": "example_ldap_utilities_set_password",
           "tags": [],
           "uuid": null,
-          "workflow_id": 23
+          "workflow_id": 110
         },
         {
           "actions": [],
@@ -1756,7 +1733,7 @@
           "programmatic_name": "example_ldap_utilities_toggle_access",
           "tags": [],
           "uuid": null,
-          "workflow_id": 24
+          "workflow_id": 108
         },
         {
           "actions": [],
@@ -1766,18 +1743,12 @@
           "programmatic_name": "example_ldap_utilities_update",
           "tags": [],
           "uuid": null,
-          "workflow_id": 22
+          "workflow_id": 113
         }
       ]
     },
     {
-      "created_date": 1651757333200,
-      "creator": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
+      "created_date": 1678390955641,
       "description": {
         "content": "A function that allows you to set a new password for an LDAP entry given the entry\u0027s DN",
         "format": "text"
@@ -1785,18 +1756,18 @@
       "destination_handle": "fn_ldap_utilities",
       "display_name": "LDAP Utilities: Set Password",
       "export_key": "ldap_utilities_set_password",
-      "id": 10,
+      "id": 96,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 26,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1651757407973,
+      "last_modified_time": 1678390955681,
       "name": "ldap_utilities_set_password",
       "tags": [],
       "uuid": "b75c2ee2-759b-4d01-9649-6ec46f6a646e",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "bf1fbfd3-3b2d-4919-a4e2-0a22449d0921",
@@ -1848,18 +1819,12 @@
           "programmatic_name": "example_ldap_utilities_set_password",
           "tags": [],
           "uuid": null,
-          "workflow_id": 23
+          "workflow_id": 110
         }
       ]
     },
     {
-      "created_date": 1651757333270,
-      "creator": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
+      "created_date": 1678390955707,
       "description": {
         "content": "A function that allows an LDAP user, with the correct privileges to enable or disable another account given their DN",
         "format": "text"
@@ -1867,18 +1832,18 @@
       "destination_handle": "fn_ldap_utilities",
       "display_name": "LDAP Utilities: Toggle Access",
       "export_key": "ldap_utilities_toggle_access",
-      "id": 11,
+      "id": 97,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 26,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1651757408018,
+      "last_modified_time": 1678390955747,
       "name": "ldap_utilities_toggle_access",
       "tags": [],
       "uuid": "b912c17d-5be2-4dfa-9c8d-2d2b5d9abb08",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "bf1fbfd3-3b2d-4919-a4e2-0a22449d0921",
@@ -1914,18 +1879,12 @@
           "programmatic_name": "example_ldap_utilities_toggle_access",
           "tags": [],
           "uuid": null,
-          "workflow_id": 24
+          "workflow_id": 108
         }
       ]
     },
     {
-      "created_date": 1651757333338,
-      "creator": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
+      "created_date": 1678390955771,
       "description": {
         "content": "A function that updates the attribute of a DN with a new value",
         "format": "text"
@@ -1933,18 +1892,18 @@
       "destination_handle": "fn_ldap_utilities",
       "display_name": "LDAP Utilities: Update",
       "export_key": "ldap_utilities_update",
-      "id": 12,
+      "id": 98,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 26,
+        "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1651757408066,
+      "last_modified_time": 1678390955809,
       "name": "ldap_utilities_update",
       "tags": [],
       "uuid": "dfe0fab8-c425-48fc-95ab-a23f722f77bc",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "bf1fbfd3-3b2d-4919-a4e2-0a22449d0921",
@@ -1988,20 +1947,20 @@
           "programmatic_name": "example_ldap_utilities_update",
           "tags": [],
           "uuid": null,
-          "workflow_id": 22
+          "workflow_id": 113
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 13,
+  "id": 17,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1652983186200,
+      "create_date": 1678468629559,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2010,7 +1969,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1652983186200,
+      "update_date": 1678468629559,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2027,22 +1986,23 @@
       "programmatic_name": "fn_ldap_utilities",
       "tags": [],
       "users": [
-        "admin@example.com"
+        "f@example.com"
       ],
       "uuid": "253d5df1-2f84-4be2-97cb-1c43cada5a32"
     }
   ],
   "notifications": null,
-  "overrides": [],
+  "overrides": null,
   "phases": [],
+  "playbooks": [],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 7058,
-    "major": 42,
+    "build_number": 7899,
+    "major": 45,
     "minor": 0,
-    "version": "42.0.7058"
+    "version": "45.0.7899"
   },
   "tags": [],
   "task_order": [],
@@ -2063,7 +2023,7 @@
           "deprecated": false,
           "export_key": "ldap_query_results/email_address",
           "hide_notification": false,
-          "id": 359,
+          "id": 4363,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2079,7 +2039,7 @@
           "templates": [],
           "text": "Email address",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1019,
           "uuid": "398592cb-4d52-473e-926f-32c7d12ca11c",
           "values": [],
           "width": 132
@@ -2094,7 +2054,7 @@
           "deprecated": false,
           "export_key": "ldap_query_results/fullname",
           "hide_notification": false,
-          "id": 360,
+          "id": 4364,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2110,7 +2070,7 @@
           "templates": [],
           "text": "Fullname",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1019,
           "uuid": "b469d0fe-ab32-4100-bba5-9d40212fd127",
           "values": [],
           "width": 113
@@ -2125,7 +2085,7 @@
           "deprecated": false,
           "export_key": "ldap_query_results/surname",
           "hide_notification": false,
-          "id": 361,
+          "id": 4365,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2141,7 +2101,7 @@
           "templates": [],
           "text": "Surname",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1019,
           "uuid": "595f9641-46c6-485d-8005-8af98eb2a96c",
           "values": [],
           "width": 113
@@ -2156,7 +2116,7 @@
           "deprecated": false,
           "export_key": "ldap_query_results/telephone_number",
           "hide_notification": false,
-          "id": 362,
+          "id": 4366,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2172,7 +2132,7 @@
           "templates": [],
           "text": "Telephone Number",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1019,
           "uuid": "26e46025-166c-4505-a051-dee46e16df98",
           "values": [],
           "width": 172
@@ -2187,7 +2147,7 @@
           "deprecated": false,
           "export_key": "ldap_query_results/uid",
           "hide_notification": false,
-          "id": 363,
+          "id": 4367,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2203,7 +2163,7 @@
           "templates": [],
           "text": "UID",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1019,
           "uuid": "94595e20-41c8-4e37-adff-70e949aa8ddc",
           "values": [],
           "width": 113
@@ -2233,142 +2193,135 @@
     {
       "actions": [],
       "content": {
-        "version": 13,
-        "workflow_id": "example_ldap_utilities_toggle_access",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_toggle_access\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Toggle Access\"\u003e\u003cdocumentation\u003eAn example workflow showing how to enable/disable an Active Directory user account\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0zt8blr\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_19rq2c5\"\u003e\u003cincoming\u003eSequenceFlow_1dijgsh\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_04m0elt\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1qhd998\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"post_processing_script\":\"# No post-processing script here as output being passed into next function\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Set the ldap_search_base and ldap_search_filter\\n# using the ldap_param wildcard then get the email\\n# address the user you want to toggle access for from the artifact\u0027s value\\ninputs.ldap_search_filter = \\\"(\u0026amp;(mail=%ldap_param%))\\\"\\ninputs.ldap_search_param =  artifact.value\\n\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif rule.properties.ldap_search_base:\\n  inputs.ldap_search_base = rule.properties.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python\",\"result_name\":\"search_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zt8blr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_00cs355\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zt8blr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1qhd998\"/\u003e\u003cserviceTask id=\"ServiceTask_0be768x\" name=\"LDAP Utilities: Toggle Access\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b912c17d-5be2-4dfa-9c8d-2d2b5d9abb08\"\u003e{\"inputs\":{\"aa0f6b18-30f9-4e15-ac83-9fce34525947\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"938bd462-d9e0-4887-8ef1-670120e419ad\"}}},\"post_processing_script\":\"# If the function is successful in updating users access rights,\\n# a note is added to the incident\\n\\nif (results.success):\\n  color = \\\"#45bc27\\\" #green\\n  if (results.inputs.ldap_toggle_access.get(\\\"name\\\") == \\\"Disabled\\\"):\\n    color = \\\"#ff402b\\\" #red\\n  noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP Utilities: Toggle Access workflow \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                    \u0026lt;b\u0026gt;Email:\u0026lt;/b\u0026gt; \u0026lt;u style=\\\"color: #7fb0ff\\\"\u0026gt;{}\u0026lt;/u\u0026gt;\\n                    \u0026lt;b\u0026gt;Status:\u0026lt;/b\u0026gt; \u0026lt;b style=\\\"color: {}\\\"\u0026gt;{}\u0026lt;/b\u0026gt;\\n                    \u0026lt;b\u0026gt;DN:\u0026lt;/b\u0026gt; \u0027{}\u0027\\\"\\\"\\\".format(artifact.value, color, results.inputs.ldap_toggle_access.name, results.inputs.ldap_dn)\\n\\n  incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Once the LDAP Utilities: Search completes, get the DN of the first entry\\n# which will be the DN of the account you want to set a Toggle Access for\\ninputs.ldap_domain_name = workflow.properties.search_output.inputs.ldap_domain_name\\ninputs.ldap_dn = workflow.properties.search_output.content[0][\\\"dn\\\"]\\ninputs.ldap_toggle_access = rule.properties.ldap_toggle_access\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1r2dkc6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1dijgsh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1dijgsh\" sourceRef=\"ServiceTask_0be768x\" targetRef=\"EndEvent_19rq2c5\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_0uz0mob\"\u003e\u003cincoming\u003eSequenceFlow_00cs355\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1r2dkc6\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_04m0elt\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_00cs355\" sourceRef=\"ServiceTask_1qhd998\" targetRef=\"ExclusiveGateway_0uz0mob\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1r2dkc6\" name=\"\" sourceRef=\"ExclusiveGateway_0uz0mob\" targetRef=\"ServiceTask_0be768x\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"# if at least one entry is found, success will be True\\ndecision = True\\ndecision == workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_04m0elt\" name=\"\" sourceRef=\"ExclusiveGateway_0uz0mob\" targetRef=\"EndEvent_19rq2c5\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"decision = True\\ndecision != workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_15a70qt\"\u003e\u003ctext\u003eIf the search returns nothing, skip toggling access and end\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0r15w1a\" sourceRef=\"ExclusiveGateway_0uz0mob\" targetRef=\"TextAnnotation_15a70qt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0fgo0d9\"\u003e\u003ctext\u003eEnd\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1nvst3c\" sourceRef=\"EndEvent_19rq2c5\" targetRef=\"TextAnnotation_0fgo0d9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"50\" x=\"102\" y=\"147\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"165\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003comgdi:waypoint x=\"143\" xsi:type=\"omgdc:Point\" y=\"177\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_19rq2c5\" id=\"EndEvent_19rq2c5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"704\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"722\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1qhd998\" id=\"ServiceTask_1qhd998_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zt8blr\" id=\"SequenceFlow_0zt8blr_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"279\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"238.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0be768x\" id=\"ServiceTask_0be768x_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"543\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dijgsh\" id=\"SequenceFlow_1dijgsh_di\"\u003e\u003comgdi:waypoint x=\"643\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"704\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"673.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_0uz0mob\" id=\"ExclusiveGateway_0uz0mob_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"436\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"461\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_00cs355\" id=\"SequenceFlow_00cs355_di\"\u003e\u003comgdi:waypoint x=\"379\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"436\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"407.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1r2dkc6\" id=\"SequenceFlow_1r2dkc6_di\"\u003e\u003comgdi:waypoint x=\"486\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"543\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"470\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04m0elt\" id=\"SequenceFlow_04m0elt_di\"\u003e\u003comgdi:waypoint x=\"461\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"461\" xsi:type=\"omgdc:Point\" y=\"129\"/\u003e\u003comgdi:waypoint x=\"722\" xsi:type=\"omgdc:Point\" y=\"129\"/\u003e\u003comgdi:waypoint x=\"722\" xsi:type=\"omgdc:Point\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"547\" y=\"108\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_15a70qt\" id=\"TextAnnotation_15a70qt_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"172\" x=\"434\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0r15w1a\" id=\"Association_0r15w1a_di\"\u003e\u003comgdi:waypoint x=\"468\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"510\" xsi:type=\"omgdc:Point\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0fgo0d9\" id=\"TextAnnotation_0fgo0d9_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"50\" x=\"767\" y=\"167\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1nvst3c\" id=\"Association_1nvst3c_di\"\u003e\u003comgdi:waypoint x=\"739\" xsi:type=\"omgdc:Point\" y=\"200\"/\u003e\u003comgdi:waypoint x=\"767\" xsi:type=\"omgdc:Point\" y=\"191\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 13,
-      "creator_id": "admin@example.com",
-      "description": "An example workflow showing how to enable/disable an Active Directory user account",
-      "export_key": "example_ldap_utilities_toggle_access",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1652117953056,
-      "name": "Example: LDAP Utilities: Toggle Access",
-      "object_type": "artifact",
-      "programmatic_name": "example_ldap_utilities_toggle_access",
-      "tags": [],
-      "uuid": "cbb7719b-4d47-4d86-84c9-5001ac42637d",
-      "workflow_id": 24
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 21,
-        "workflow_id": "example_ldap_utilities_add_users_to_groups",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_add_users_to_groups\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Add User(s) to Group(s)\"\u003e\u003cdocumentation\u003eAn example workflow showing how to add multiple users to multiple groups\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0snjctn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1977eiw\" name=\"LDAP Utilities: Add to Group(s)\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b602d316-c3b6-4b36-8813-eb81fd381bba\"\u003e{\"inputs\":{},\"post_processing_script\":\"# If the function is successful in adding the users to said groups,\\n# a note is added to the incident\\n\\nif (results.success):\\n  noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP Utilities: Add User(s) to Group(s) \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                    \u0026lt;b\u0026gt;User(s):\u0026lt;/b\u0026gt; {}\\n                    \u0026lt;b\u0026gt;Group(s):\u0026lt;/b\u0026gt; {}\\\"\\\"\\\".format(results.inputs.ldap_multiple_user_dn, results.inputs.ldap_multiple_group_dn)\\n\\n  incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Both inputs must be a string representation of a List\\n\\n## Example of multiple entries\\n# inputs.ldap_multiple_user_dn = \\\"[\u0027dn=user1,dc=example,dc=com\u0027, \u0027dn=user2,dc=example,dc=com\u0027]\\\"\\n# inputs.ldap_multiple_group_dn = \\\"[\u0027dn=Accounts Group,dc=example,dc=com\u0027, \u0027dn=IT Group,dc=example,dc=com\u0027]\\\"\\n\\n# Both inputs must be a string representation of a List\\ninputs.ldap_multiple_user_dn = rule.properties.ldap_multiple_user_dn\\ninputs.ldap_multiple_group_dn = rule.properties.ldap_multiple_group_dn\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0snjctn\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_11eb0c4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0snjctn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1977eiw\"/\u003e\u003cendEvent id=\"EndEvent_0rlnblo\"\u003e\u003cincoming\u003eSequenceFlow_11eb0c4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_11eb0c4\" sourceRef=\"ServiceTask_1977eiw\" targetRef=\"EndEvent_0rlnblo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1977eiw\" id=\"ServiceTask_1977eiw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"399\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0snjctn\" id=\"SequenceFlow_0snjctn_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"298.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rlnblo\" id=\"EndEvent_0rlnblo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"679\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"697\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11eb0c4\" id=\"SequenceFlow_11eb0c4_di\"\u003e\u003comgdi:waypoint x=\"499\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"679\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"589\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 21,
-      "creator_id": "admin@example.com",
-      "description": "An example workflow showing how to add multiple users to multiple groups",
-      "export_key": "example_ldap_utilities_add_users_to_groups",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1652972339666,
-      "name": "Example: LDAP Utilities: Add User(s) to Group(s)",
-      "object_type": "artifact",
-      "programmatic_name": "example_ldap_utilities_add_users_to_groups",
-      "tags": [],
-      "uuid": "8bb8e545-0841-49ec-a2f0-9080337a5564",
-      "workflow_id": 26
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 19,
-        "workflow_id": "example_ldap_utilities_set_password",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_set_password\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Set Password\"\u003e\u003cdocumentation\u003eAn example workflow that searches for a user using their email address, gets their DN and sets a new password for that user\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1bbjw69\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0azie2d\"\u003e\u003cincoming\u003eSequenceFlow_1adifvp\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_193svjt\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_03tj4yh\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"post_processing_script\":\"# No post-processing script here as output being passed into next function\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Set the ldap_search_base and ldap_search_filter\\n# using the ldap_param wildcard then get the email\\n# address the user you want to set a new password for from the artifact\u0027s value\\ninputs.ldap_search_filter = \\\"(\u0026amp;(objectClass=person)(mail=%ldap_param%))\\\"\\ninputs.ldap_search_param =  artifact.value\\n\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif rule.properties.ldap_search_base:\\n  inputs.ldap_search_base = rule.properties.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python\",\"result_name\":\"search_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1bbjw69\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_04b8zyw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1bbjw69\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03tj4yh\"/\u003e\u003cserviceTask id=\"ServiceTask_042e0nm\" name=\"LDAP Utilities: Set Password\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b75c2ee2-759b-4d01-9649-6ec46f6a646e\"\u003e{\"inputs\":{\"91b1cdc7-457b-4c8b-8f35-b9faffcb8c6d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":12}}},\"post_processing_script\":\"# If the function is successful in changing the users password,\\n# a note is added to the incident\\n\\nif (results.success):\\n  noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP MultiDomain Utilities: Set Password workflow \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                    A New Password has been set for:\\n                    \u0026lt;b\u0026gt;Email:\u0026lt;/b\u0026gt; \u0026lt;u style=\\\"color: #7fb0ff\\\"\u0026gt;{}\u0026lt;/u\u0026gt;\\n                    \u0026lt;b\u0026gt;DN:\u0026lt;/b\u0026gt; \u0027{}\u0027\\n                    \u0026lt;b\u0026gt;New password:\u0026lt;/b\u0026gt; \u0027{}\u0027\\\"\\\"\\\".format(artifact.value, results.inputs.ldap_dn, results.inputs.ldap_new_password)\\n\\n  incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Once the LDAP Utilities: Search completes, get the DN of the first entry\\n# which will be the DN of the account you want to set a Set a New Password for\\ninputs.ldap_domain_name = workflow.properties.search_output.inputs.ldap_domain_name\\ninputs.ldap_dn = workflow.properties.search_output.content[0][\\\"dn\\\"]\\ninputs.ldap_new_password = rule.properties.ldap_user_new_password\\ninputs.ldap_new_auto_password_len = rule.properties.ldap_new_auto_password_length\\ninputs.ldap_return_new_password = rule.properties.ldap_return_new_password\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1d9kfki\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1adifvp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1adifvp\" sourceRef=\"ServiceTask_042e0nm\" targetRef=\"EndEvent_0azie2d\"/\u003e\u003csequenceFlow id=\"SequenceFlow_04b8zyw\" sourceRef=\"ServiceTask_03tj4yh\" targetRef=\"ExclusiveGateway_1wqzksd\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_1wqzksd\"\u003e\u003cincoming\u003eSequenceFlow_04b8zyw\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1d9kfki\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_193svjt\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_1d9kfki\" name=\"\" sourceRef=\"ExclusiveGateway_1wqzksd\" targetRef=\"ServiceTask_042e0nm\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"# if at least one entry is found, success will be True\\ndecision = True\\ndecision == workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_193svjt\" name=\"\" sourceRef=\"ExclusiveGateway_1wqzksd\" targetRef=\"EndEvent_0azie2d\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"decision = True\\ndecision != workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_12ui9le\"\u003e\u003ctext\u003eIf the search returns nothing, skip Set Password and End\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0hnn7g6\" sourceRef=\"ExclusiveGateway_1wqzksd\" targetRef=\"TextAnnotation_12ui9le\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0q69jso\"\u003e\u003ctext\u003eEnd\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0pek3d6\" sourceRef=\"EndEvent_0azie2d\" targetRef=\"TextAnnotation_0q69jso\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"50\" x=\"106\" y=\"153\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"165\" xsi:type=\"omgdc:Point\" y=\"197\"/\u003e\u003comgdi:waypoint x=\"148\" xsi:type=\"omgdc:Point\" y=\"183\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0azie2d\" id=\"EndEvent_0azie2d_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"843\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"816\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03tj4yh\" id=\"ServiceTask_03tj4yh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"282.1146881287726\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bbjw69\" id=\"SequenceFlow_1bbjw69_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"282\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"240\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_042e0nm\" id=\"ServiceTask_042e0nm_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"583\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1adifvp\" id=\"SequenceFlow_1adifvp_di\"\u003e\u003comgdi:waypoint x=\"683\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"843\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"718\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04b8zyw\" id=\"SequenceFlow_04b8zyw_di\"\u003e\u003comgdi:waypoint x=\"382\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"434\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"408\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_1wqzksd\" id=\"ExclusiveGateway_1wqzksd_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"434\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"459\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1d9kfki\" id=\"SequenceFlow_1d9kfki_di\"\u003e\u003comgdi:waypoint x=\"484\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"583\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"489\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_193svjt\" id=\"SequenceFlow_193svjt_di\"\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"116\"/\u003e\u003comgdi:waypoint x=\"843\" xsi:type=\"omgdc:Point\" y=\"116\"/\u003e\u003comgdi:waypoint x=\"843\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"606\" y=\"95\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_12ui9le\" id=\"TextAnnotation_12ui9le_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"181\" x=\"370\" y=\"301\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0hnn7g6\" id=\"Association_0hnn7g6_di\"\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"301\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0q69jso\" id=\"TextAnnotation_0q69jso_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"915\" y=\"191\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0pek3d6\" id=\"Association_0pek3d6_di\"\u003e\u003comgdi:waypoint x=\"879\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"915\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 19,
-      "creator_id": "admin@example.com",
-      "description": "An example workflow that searches for a user using their email address, gets their DN and sets a new password for that user",
-      "export_key": "example_ldap_utilities_set_password",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1652117941813,
-      "name": "Example: LDAP Utilities: Set Password",
-      "object_type": "artifact",
-      "programmatic_name": "example_ldap_utilities_set_password",
-      "tags": [],
-      "uuid": "ad15e9ce-3d17-4bbb-b99a-e6aa4eb5db62",
-      "workflow_id": 23
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 9,
+        "version": 5,
         "workflow_id": "example_ldap_utilities_remove_user_from_groups",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_remove_user_from_groups\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Remove User(s) from Group(s)\"\u003e\u003cdocumentation\u003eAn example workflow showing how to remove multiple users from a group\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_00qp10i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1hkgt06\" name=\"LDAP Utilities: Remove from Group...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9ba21139-a5f0-4710-983d-83190f4bdc6c\"\u003e{\"inputs\":{},\"post_processing_script\":\"# If the function is successful in removing the users from said groups,\\n# a note is added to the incident\\n\\nif (results.success):\\n  if not results.users_dn:\\n    noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP Utilities: Remove User from Group(s) \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                  \u0026lt;b\u0026gt;No users found. Check inputted user DN\u0027s\u0026lt;/b\u0026gt;\\\"\\\"\\\"\\n  else:\\n    noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP Utilities: Remove User from Group(s) \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                    \u0026lt;b\u0026gt;User(s):\u0026lt;/b\u0026gt; {}\\n                    \u0026lt;b\u0026gt;Group(s):\u0026lt;/b\u0026gt; {}\\\"\\\"\\\".format(results.inputs.ldap_multiple_user_dn, results.inputs.ldap_multiple_group_dn)\\n\\n  incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Both inputs must be a string representation of a List\\n\\n## Example of multiple entries\\n# inputs.ldap_multiple_user_dn = \\\"[\u0027dn=user1,dc=example,dc=com\u0027, \u0027dn=user2,dc=example,dc=com\u0027]\\\"\\n# inputs.ldap_multiple_group_dn = \\\"[\u0027dn=Accounts Group,dc=example,dc=com\u0027, \u0027dn=IT Group,dc=example,dc=com\u0027]\\\"\\n\\n# Both inputs must be a string representation of a List\\ninputs.ldap_multiple_user_dn = rule.properties.ldap_multiple_user_dn\\ninputs.ldap_multiple_group_dn = rule.properties.ldap_multiple_group_dn\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_00qp10i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xidaq7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_00qp10i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1hkgt06\"/\u003e\u003cendEvent id=\"EndEvent_0lyq5pj\"\u003e\u003cincoming\u003eSequenceFlow_0xidaq7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0xidaq7\" sourceRef=\"ServiceTask_1hkgt06\" targetRef=\"EndEvent_0lyq5pj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1hkgt06\" id=\"ServiceTask_1hkgt06_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"384\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_00qp10i\" id=\"SequenceFlow_00qp10i_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"384\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"291\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0lyq5pj\" id=\"EndEvent_0lyq5pj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"655\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"673\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xidaq7\" id=\"SequenceFlow_0xidaq7_di\"\u003e\u003comgdi:waypoint x=\"484\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"655\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"569.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_remove_user_from_groups\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Remove User(s) from Group(s)\"\u003e\u003cdocumentation\u003eAn example workflow showing how to remove multiple users from a group\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_00qp10i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1hkgt06\" name=\"LDAP Utilities: Remove from Group...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9ba21139-a5f0-4710-983d-83190f4bdc6c\"\u003e{\"inputs\":{},\"post_processing_script\":\"# If the function is successful in removing the users from said groups, a note is added to the incident\\nif (results.success):\\n  if not results.users_dn:\\n    noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP Utilities: Remove User from Group(s) \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                  \u0026lt;b\u0026gt;No users found. Check inputted user DN\u0027s\u0026lt;/b\u0026gt;\\\"\\\"\\\"\\n  else:\\n    noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP Utilities: Remove User from Group(s) \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                    \u0026lt;b\u0026gt;User(s):\u0026lt;/b\u0026gt; {}\\n                    \u0026lt;b\u0026gt;Group(s):\u0026lt;/b\u0026gt; {}\\\"\\\"\\\".format(results.inputs.ldap_multiple_user_dn, results.inputs.ldap_multiple_group_dn)\\n\\n  incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Both inputs must be a string representation of a List\\n\\n## Example of multiple entries\\n# inputs.ldap_multiple_user_dn = \\\"[\u0027dn=user1,dc=example,dc=com\u0027, \u0027dn=user2,dc=example,dc=com\u0027]\\\"\\n# inputs.ldap_multiple_group_dn = \\\"[\u0027dn=Accounts Group,dc=example,dc=com\u0027, \u0027dn=IT Group,dc=example,dc=com\u0027]\\\"\\n\\n# Both inputs must be a string representation of a List\\ninputs.ldap_multiple_user_dn = rule.properties.ldap_multiple_user_dn\\ninputs.ldap_multiple_group_dn = rule.properties.ldap_multiple_group_dn\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_00qp10i\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xidaq7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_00qp10i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1hkgt06\"/\u003e\u003cendEvent id=\"EndEvent_0lyq5pj\"\u003e\u003cincoming\u003eSequenceFlow_0xidaq7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0xidaq7\" sourceRef=\"ServiceTask_1hkgt06\" targetRef=\"EndEvent_0lyq5pj\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1hkgt06\" id=\"ServiceTask_1hkgt06_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"384\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_00qp10i\" id=\"SequenceFlow_00qp10i_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"384\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"291\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0lyq5pj\" id=\"EndEvent_0lyq5pj_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"655\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"673\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xidaq7\" id=\"SequenceFlow_0xidaq7_di\"\u003e\u003comgdi:waypoint x=\"484\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"655\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"569.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 9,
-      "creator_id": "admin@example.com",
+      "content_version": 5,
       "description": "An example workflow showing how to remove multiple users from a group",
       "export_key": "example_ldap_utilities_remove_user_from_groups",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1652108868522,
+      "last_modified_by": "f@example.com",
+      "last_modified_time": 1678468140610,
       "name": "Example: LDAP Utilities: Remove User(s) from Group(s)",
       "object_type": "artifact",
       "programmatic_name": "example_ldap_utilities_remove_user_from_groups",
       "tags": [],
       "uuid": "f25af4ec-ae21-4ce6-a450-879a9295ae01",
-      "workflow_id": 20
+      "workflow_id": 111
     },
     {
       "actions": [],
       "content": {
-        "version": 16,
-        "workflow_id": "example_ldap_utilities_add",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_add\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Add\"\u003e\u003cdocumentation\u003eAdd users, groups, organizational units to LDAP\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_066ua9g\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1uu1w6e\" name=\"LDAP Utilities: Add\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"673a09d5-acf2-4c3d-8e48-4647cf91be6f\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  incident.addNote(\\\"LDAP Add operation successful for: {}\\\".format(results.inputs.get(\u0027ldap_dn\u0027)))\\nelse:\\n  incident.addNote(\\\"LDAP Add operation unsuccessful for: {}. Reason: {}\\\".format(results.inputs.get(\u0027ldap_dn\u0027), results.reason))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\\n\\ninputs.ldap_dn = rule.properties.ldap_user_info\\ninputs.ldap_multiple_group_dn = rule.properties.ldap_groups if rule.properties.ldap_groups else \u0027[]\u0027\\ninputs.ldap_attribute_name_values = rule.properties.ldap_attribute_name_values\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_066ua9g\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17gy3iw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_066ua9g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1uu1w6e\"/\u003e\u003cendEvent id=\"EndEvent_1wihe6x\"\u003e\u003cincoming\u003eSequenceFlow_17gy3iw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17gy3iw\" sourceRef=\"ServiceTask_1uu1w6e\" targetRef=\"EndEvent_1wihe6x\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_11tbom4\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in an incident note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_02dw48z\" sourceRef=\"ServiceTask_1uu1w6e\" targetRef=\"TextAnnotation_11tbom4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1uu1w6e\" id=\"ServiceTask_1uu1w6e_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_066ua9g\" id=\"SequenceFlow_066ua9g_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1wihe6x\" id=\"EndEvent_1wihe6x_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"430\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"448\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17gy3iw\" id=\"SequenceFlow_17gy3iw_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"394.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_11tbom4\" id=\"TextAnnotation_11tbom4_di\"\u003e\u003comgdc:Bounds height=\"43\" width=\"162\" x=\"334\" y=\"77\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_02dw48z\" id=\"Association_02dw48z_di\"\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"394\" xsi:type=\"omgdc:Point\" y=\"120\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 16,
-      "creator_id": "admin@example.com",
-      "description": "Add users, groups, organizational units to LDAP",
-      "export_key": "example_ldap_utilities_add",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1652972215540,
-      "name": "Example: LDAP Utilities: Add",
-      "object_type": "incident",
-      "programmatic_name": "example_ldap_utilities_add",
-      "tags": [],
-      "uuid": "5615976c-9912-487c-960a-c9ea2cb5b7f8",
-      "workflow_id": 21
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 12,
+        "version": 7,
         "workflow_id": "example_ldap_utilities_update",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_update\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Update\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow that updates the value of a DN\u0027s attribute with the given value(s)]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0s8l4i1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_14rl1ih\"\u003e\u003cincoming\u003eSequenceFlow_15r9dza\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_0hz51xf\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1923jeb\" name=\"LDAP Utilities: Update\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"dfe0fab8-c425-48fc-95ab-a23f722f77bc\"\u003e{\"inputs\":{},\"post_processing_script\":\"# If the function is successful in updating the value of the attribute,\\n# a note is added to the incident\\n\\nif (results.success):\\n  noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP Utilities: Update workflow \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                    An LDAP Attribute has been updated\\n                    \u0026lt;b\u0026gt;Attribute:\u0026lt;/b\u0026gt; {}\\n                    \u0026lt;b\u0026gt;New Value(s):\u0026lt;/b\u0026gt; {}\\n                    \u0026lt;b\u0026gt;DN:\u0026lt;/b\u0026gt; \u0027{}\u0027\\\"\\\"\\\".format(results.inputs.ldap_attribute_name, results.inputs.ldap_attribute_values, results.user_dn)\\n\\n  incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Once the LDAP Utilities: Search completes, get the DN of the first entry\\n# which will be the DN of the account you want to update. Then set\\n# the name of the attribute to update and list the values\\ninputs.ldap_domain_name = workflow.properties.search_output.inputs.ldap_domain_name\\ninputs.ldap_dn = workflow.properties.search_output.content[0][\\\"dn\\\"]\\ninputs.ldap_attribute_name = rule.properties.ldap_update_attribute_name\\ninputs.ldap_attribute_values = rule.properties.ldap_attribute_update_value\\n# inputs.ldap_attribute_values = \\\"[\u0027081111111\u0027, \u0027082222222\u0027]\\\"\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_18fei9y\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_15r9dza\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0s8l4i1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1k2mvun\"/\u003e\u003csequenceFlow id=\"SequenceFlow_15r9dza\" sourceRef=\"ServiceTask_1923jeb\" targetRef=\"EndEvent_14rl1ih\"/\u003e\u003cserviceTask id=\"ServiceTask_1k2mvun\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"post_processing_script\":\"# No post-processing script here as output being passed into next function\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"# Set the ldap_search_base and ldap_search_filter\\n# using the ldap_param wildcard then get the email\\n# address the user you want to update from the artifact\u0027s value\\ninputs.ldap_search_filter = \\\"(\u0026amp;(mail=%ldap_param%))\\\"\\ninputs.ldap_search_param =  artifact.value\\n\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif rule.properties.ldap_search_base:\\n  inputs.ldap_search_base = rule.properties.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python\",\"result_name\":\"search_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0s8l4i1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xussi6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0xussi6\" sourceRef=\"ServiceTask_1k2mvun\" targetRef=\"ExclusiveGateway_0xk5bqy\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_0xk5bqy\"\u003e\u003cincoming\u003eSequenceFlow_0xussi6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_18fei9y\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_0hz51xf\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_18fei9y\" name=\"\" sourceRef=\"ExclusiveGateway_0xk5bqy\" targetRef=\"ServiceTask_1923jeb\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"# if at least one entry is found, success will be True\\ndecision = True\\ndecision == workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_0hz51xf\" name=\"\" sourceRef=\"ExclusiveGateway_0xk5bqy\" targetRef=\"EndEvent_14rl1ih\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"decision = True\\ndecision != workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19p2bfe\"\u003e\u003ctext\u003eEnd\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_18f2kbb\" sourceRef=\"EndEvent_14rl1ih\" targetRef=\"TextAnnotation_19p2bfe\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"50\" x=\"97\" y=\"164\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"164\" xsi:type=\"omgdc:Point\" y=\"200\"/\u003e\u003comgdi:waypoint x=\"147\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_14rl1ih\" id=\"EndEvent_14rl1ih_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"685\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"703\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19p2bfe\" id=\"TextAnnotation_19p2bfe_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"757\" y=\"191\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_18f2kbb\" id=\"Association_18f2kbb_di\"\u003e\u003comgdi:waypoint x=\"721\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"757\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1923jeb\" id=\"ServiceTask_1923jeb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"526\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0s8l4i1\" id=\"SequenceFlow_0s8l4i1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"260\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"184\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15r9dza\" id=\"SequenceFlow_15r9dza_di\"\u003e\u003comgdi:waypoint x=\"626\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"685\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"610.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1k2mvun\" id=\"ServiceTask_1k2mvun_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"260\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xussi6\" id=\"SequenceFlow_0xussi6_di\"\u003e\u003comgdi:waypoint x=\"360\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"417\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"388.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_0xk5bqy\" id=\"ExclusiveGateway_0xk5bqy_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"417\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"442\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_18fei9y\" id=\"SequenceFlow_18fei9y_di\"\u003e\u003comgdi:waypoint x=\"467\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"526\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"452\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0hz51xf\" id=\"SequenceFlow_0hz51xf_di\"\u003e\u003comgdi:waypoint x=\"442\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"442\" xsi:type=\"omgdc:Point\" y=\"126\"/\u003e\u003comgdi:waypoint x=\"703\" xsi:type=\"omgdc:Point\" y=\"126\"/\u003e\u003comgdi:waypoint x=\"703\" xsi:type=\"omgdc:Point\" y=\"187\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"528\" y=\"105\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_update\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Update\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow that updates the value of a DN\u0027s attribute with the given value(s)]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0s8l4i1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_14rl1ih\"\u003e\u003cincoming\u003eSequenceFlow_15r9dza\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_0hz51xf\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1923jeb\" name=\"LDAP Utilities: Update\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"dfe0fab8-c425-48fc-95ab-a23f722f77bc\"\u003e{\"inputs\":{},\"post_processing_script\":\"# If the function is successful in updating the value of the attribute, a note is added to the incident\\nif (results.success):\\n  noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP Utilities: Update workflow \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                    An LDAP Attribute has been updated\\n                    \u0026lt;b\u0026gt;Attribute:\u0026lt;/b\u0026gt; {}\\n                    \u0026lt;b\u0026gt;New Value(s):\u0026lt;/b\u0026gt; {}\\n                    \u0026lt;b\u0026gt;DN:\u0026lt;/b\u0026gt; \u0027{}\u0027\\\"\\\"\\\".format(results.inputs.ldap_attribute_name, results.inputs.ldap_attribute_values, results.user_dn)\\n\\n  incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Once the LDAP Utilities: Search completes, get the DN of the first entry\\n# which will be the DN of the account you want to update. Then set\\n# the name of the attribute to update and list the values\\ninputs.ldap_domain_name = workflow.properties.search_output.inputs.ldap_domain_name\\ninputs.ldap_dn = workflow.properties.search_output.content[0][\\\"dn\\\"]\\ninputs.ldap_attribute_name = rule.properties.ldap_update_attribute_name\\ninputs.ldap_attribute_values = rule.properties.ldap_attribute_update_value\\n# inputs.ldap_attribute_values = \\\"[\u0027081111111\u0027, \u0027082222222\u0027]\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_18fei9y\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_15r9dza\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0s8l4i1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1k2mvun\"/\u003e\u003csequenceFlow id=\"SequenceFlow_15r9dza\" sourceRef=\"ServiceTask_1923jeb\" targetRef=\"EndEvent_14rl1ih\"/\u003e\u003cserviceTask id=\"ServiceTask_1k2mvun\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Set the ldap_search_base and ldap_search_filter\\n# using the ldap_param wildcard then get the email\\n# address the user you want to update from the artifact\u0027s value\\ninputs.ldap_search_filter = \\\"(\u0026amp;(mail=%ldap_param%))\\\"\\ninputs.ldap_search_param =  artifact.value\\n\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif rule.properties.ldap_search_base:\\n  inputs.ldap_search_base = rule.properties.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0s8l4i1\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0xussi6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0xussi6\" sourceRef=\"ServiceTask_1k2mvun\" targetRef=\"ExclusiveGateway_0xk5bqy\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_0xk5bqy\"\u003e\u003cincoming\u003eSequenceFlow_0xussi6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_18fei9y\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_0hz51xf\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_18fei9y\" name=\"\" sourceRef=\"ExclusiveGateway_0xk5bqy\" targetRef=\"ServiceTask_1923jeb\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"# if at least one entry is found, success will be True\\ndecision = True\\ndecision == workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_0hz51xf\" name=\"\" sourceRef=\"ExclusiveGateway_0xk5bqy\" targetRef=\"EndEvent_14rl1ih\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"decision = True\\ndecision != workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_19p2bfe\"\u003e\u003ctext\u003eEnd\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_18f2kbb\" sourceRef=\"EndEvent_14rl1ih\" targetRef=\"TextAnnotation_19p2bfe\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"50\" x=\"97\" y=\"164\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"164\" xsi:type=\"omgdc:Point\" y=\"200\"/\u003e\u003comgdi:waypoint x=\"147\" xsi:type=\"omgdc:Point\" y=\"192\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_14rl1ih\" id=\"EndEvent_14rl1ih_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"685\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"703\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_19p2bfe\" id=\"TextAnnotation_19p2bfe_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"757\" y=\"191\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_18f2kbb\" id=\"Association_18f2kbb_di\"\u003e\u003comgdi:waypoint x=\"721\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"757\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1923jeb\" id=\"ServiceTask_1923jeb_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"526\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0s8l4i1\" id=\"SequenceFlow_0s8l4i1_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"260\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"184\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15r9dza\" id=\"SequenceFlow_15r9dza_di\"\u003e\u003comgdi:waypoint x=\"626\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"685\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"610.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1k2mvun\" id=\"ServiceTask_1k2mvun_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"260\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0xussi6\" id=\"SequenceFlow_0xussi6_di\"\u003e\u003comgdi:waypoint x=\"360\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"417\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"388.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_0xk5bqy\" id=\"ExclusiveGateway_0xk5bqy_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"417\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"442\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_18fei9y\" id=\"SequenceFlow_18fei9y_di\"\u003e\u003comgdi:waypoint x=\"467\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"526\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"452\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0hz51xf\" id=\"SequenceFlow_0hz51xf_di\"\u003e\u003comgdi:waypoint x=\"442\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"442\" xsi:type=\"omgdc:Point\" y=\"126\"/\u003e\u003comgdi:waypoint x=\"703\" xsi:type=\"omgdc:Point\" y=\"126\"/\u003e\u003comgdi:waypoint x=\"703\" xsi:type=\"omgdc:Point\" y=\"187\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"528\" y=\"105\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 12,
-      "creator_id": "admin@example.com",
+      "content_version": 7,
       "description": "An example workflow that updates the value of a DN\u0027s attribute with the given value(s)",
       "export_key": "example_ldap_utilities_update",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1652117962067,
+      "last_modified_by": "f@example.com",
+      "last_modified_time": 1678468551840,
       "name": "Example: LDAP Utilities: Update",
       "object_type": "artifact",
       "programmatic_name": "example_ldap_utilities_update",
       "tags": [],
       "uuid": "4e0cb06d-9c47-4996-8dfe-aed68869262f",
-      "workflow_id": 22
+      "workflow_id": 113
     },
     {
       "actions": [],
       "content": {
-        "version": 27,
-        "workflow_id": "example_ldap_utilities_search",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_search\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Search\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow which runs a person query against an LDAP server using the person\u0027s email address]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1p0pun3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1xv950w\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"post_processing_script\":\"##  LDAP Utilities: Search - post-processing script ##\\n# Example of expected results - OpenLdap\\n\\\"\\\"\\\"\\n\u0027entries\u0027: [{\\\"dn\\\": \\\"uid=newton,dc=example,dc=com\\\", \\\"telephoneNumber\\\": [], \\\"uid\\\": [\\\"newton\\\"],\\n    \\\"mail\\\": [\\\"newton@ldap.forumsys.com\\\"], \\\"sn\\\": [\\\"Newton\\\"], \\\"cn\\\": [\\\"Isaac Newton\\\"]},\\n    {\\\"dn\\\": \\\"uid=einstein,dc=example,dc=com\\\", \\\"telephoneNumber\\\": [\\\"314-159-2653\\\"], \\\"uid\\\": [\\\"einstein\\\"],\\n    \\\"mail\\\": [\\\"einstein@ldap.forumsys.com\\\"], \\\"sn\\\": [\\\"Einstein\\\"], \\\"cn\\\": [\\\"Albert Einstein\\\"]}]\\n\\\"\\\"\\\"\\n\\n# Example of expected results - ActiveDirectory\\n\\\"\\\"\\\"\\n\u0027entries\u0027: [{u\u0027dn\u0027: u\u0027CN=Isaac Newton,OU=IBMResilient,DC=ibm,DC=resilient,DC=com\u0027,\\n              u\u0027telephoneNumber\u0027: u\u0027314-159-2653\u0027, u\u0027cn\u0027: u\u0027Isaac Newton\u0027,\\n              u\u0027mail\u0027: u\u0027einstein@resilient.ibm.com\u0027, u\u0027sn\u0027: u\u0027Newton\u0027}]\\n\\\"\\\"\\\"\\n\\n#  Globals\\nENTRY_TO_DATATABLE_MAP = {\\n   \\\"uid\\\": \\\"uid\\\",\\n   \\\"cn\\\": \\\"fullname\\\",\\n   \\\"sn\\\": \\\"surname\\\",\\n   \\\"mail\\\": \\\"email_address\\\",\\n   \\\"telephoneNumber\\\": \\\"telephone_number\\\"\\n}\\n\\n# Processing if the function is a success\\nif(results.success):\\n  for entry in results.entries:\\n    if not entry:\\n      break\\n    # Add Row\\n    row = incident.addRow(\\\"ldap_query_results\\\")\\n    for k in ENTRY_TO_DATATABLE_MAP:\\n      if not entry[k]:\\n        row[ENTRY_TO_DATATABLE_MAP[k]] = \\\"N/A\\\"\\n      else:\\n        try:\\n          # If \u0027entry[k]\u0027 is empty\\n          if not len(entry[k]):\\n            row[ENTRY_TO_DATATABLE_MAP[k]] = \\\"N/A\\\"\\n          # Handle for Active Directory\\n          elif isinstance(entry[k], unicode):\\n            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k]\\n          # Handle for OpenLdap\\n          else:\\n            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k][0]\\n        except IndexError:\\n          row[ENTRY_TO_DATATABLE_MAP[k]] = \\\"N/A\\\"\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"##  LDAP Utilities: Search - pre-processing script ##\\n\\n# If search filters are given\\nif rule.properties.ldap_search_filter:\\n  inputs.ldap_search_filter = rule.properties.ldap_search_filter\\n# If filters not given then set them to example filters\\nelse:\\n  inputs.ldap_search_filter = \\\"(\u0026amp;(objectClass=person)(mail=*%ldap_param%))\\\"\\n\\n# If search attributes are given\\nif rule.properties.ldap_search_attributes:\\n  inputs.ldap_search_attributes = rule.properties.ldap_search_attributes\\n# If search attributes not given then set them to example attributes\\nelse:\\n  inputs.ldap_search_attributes = \\\"*\\\"\\n\\ninputs.ldap_search_param = artifact.value\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif rule.properties.ldap_search_base:\\n  inputs.ldap_search_base = rule.properties.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1p0pun3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hxgtgx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_02v8j60\"\u003e\u003cincoming\u003eSequenceFlow_1hxgtgx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1hxgtgx\" sourceRef=\"ServiceTask_1xv950w\" targetRef=\"EndEvent_02v8j60\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1p0pun3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1xv950w\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1xv950w\" id=\"ServiceTask_1xv950w_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"356\" y=\"167\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02v8j60\" id=\"EndEvent_02v8j60_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"639\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"657\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hxgtgx\" id=\"SequenceFlow_1hxgtgx_di\"\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"639\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"502.5\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1p0pun3\" id=\"SequenceFlow_1p0pun3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"356\" xsi:type=\"omgdc:Point\" y=\"207\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"232\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "version": 7,
+        "workflow_id": "example_ldap_utilities_toggle_access",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_toggle_access\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Toggle Access\"\u003e\u003cdocumentation\u003eAn example workflow showing how to enable/disable an Active Directory user account\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0zt8blr\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_19rq2c5\"\u003e\u003cincoming\u003eSequenceFlow_1dijgsh\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_04m0elt\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_1qhd998\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Set the ldap_search_base and ldap_search_filter\\n# using the ldap_param wildcard then get the email\\n# address the user you want to toggle access for from the artifact\u0027s value\\ninputs.ldap_search_filter = \\\"(\u0026amp;(mail=%ldap_param%))\\\"\\ninputs.ldap_search_param =  artifact.value\\n\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif rule.properties.ldap_search_base:\\n  inputs.ldap_search_base = rule.properties.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zt8blr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_00cs355\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zt8blr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1qhd998\"/\u003e\u003cserviceTask id=\"ServiceTask_0be768x\" name=\"LDAP Utilities: Toggle Access\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b912c17d-5be2-4dfa-9c8d-2d2b5d9abb08\"\u003e{\"inputs\":{\"aa0f6b18-30f9-4e15-ac83-9fce34525947\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"938bd462-d9e0-4887-8ef1-670120e419ad\"}}},\"post_processing_script\":\"# If the function is successful in updating users access rights, a note is added to the incident\\nif (results.success):\\n  color = \\\"#45bc27\\\" #green\\n  if (results.inputs.ldap_toggle_access.get(\\\"name\\\") == \\\"Disabled\\\"):\\n    color = \\\"#ff402b\\\" #red\\n  noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP Utilities: Toggle Access workflow \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                    \u0026lt;b\u0026gt;Email:\u0026lt;/b\u0026gt; \u0026lt;u style=\\\"color: #7fb0ff\\\"\u0026gt;{}\u0026lt;/u\u0026gt;\\n                    \u0026lt;b\u0026gt;Status:\u0026lt;/b\u0026gt; \u0026lt;b style=\\\"color: {}\\\"\u0026gt;{}\u0026lt;/b\u0026gt;\\n                    \u0026lt;b\u0026gt;DN:\u0026lt;/b\u0026gt; \u0027{}\u0027\\\"\\\"\\\".format(artifact.value, color, results.inputs.ldap_toggle_access.name, results.inputs.ldap_dn)\\n\\n  incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Once the LDAP Utilities: Search completes, get the DN of the first entry\\n# which will be the DN of the account you want to set a Toggle Access for\\ninputs.ldap_domain_name = workflow.properties.search_output.inputs.ldap_domain_name\\ninputs.ldap_dn = workflow.properties.search_output.content[0][\\\"dn\\\"]\\ninputs.ldap_toggle_access = rule.properties.ldap_toggle_access\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1r2dkc6\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1dijgsh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1dijgsh\" sourceRef=\"ServiceTask_0be768x\" targetRef=\"EndEvent_19rq2c5\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_0uz0mob\"\u003e\u003cincoming\u003eSequenceFlow_00cs355\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1r2dkc6\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_04m0elt\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_00cs355\" sourceRef=\"ServiceTask_1qhd998\" targetRef=\"ExclusiveGateway_0uz0mob\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1r2dkc6\" name=\"\" sourceRef=\"ExclusiveGateway_0uz0mob\" targetRef=\"ServiceTask_0be768x\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"# if at least one entry is found, success will be True\\ndecision = True\\ndecision == workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_04m0elt\" name=\"\" sourceRef=\"ExclusiveGateway_0uz0mob\" targetRef=\"EndEvent_19rq2c5\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"decision = True\\ndecision != workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_15a70qt\"\u003e\u003ctext\u003eIf the search returns nothing, skip toggling access and end\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0r15w1a\" sourceRef=\"ExclusiveGateway_0uz0mob\" targetRef=\"TextAnnotation_15a70qt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0fgo0d9\"\u003e\u003ctext\u003eEnd\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1nvst3c\" sourceRef=\"EndEvent_19rq2c5\" targetRef=\"TextAnnotation_0fgo0d9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"50\" x=\"102\" y=\"147\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"165\" xsi:type=\"omgdc:Point\" y=\"196\"/\u003e\u003comgdi:waypoint x=\"143\" xsi:type=\"omgdc:Point\" y=\"177\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_19rq2c5\" id=\"EndEvent_19rq2c5_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"704\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"722\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1qhd998\" id=\"ServiceTask_1qhd998_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zt8blr\" id=\"SequenceFlow_0zt8blr_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"279\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"238.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0be768x\" id=\"ServiceTask_0be768x_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"543\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1dijgsh\" id=\"SequenceFlow_1dijgsh_di\"\u003e\u003comgdi:waypoint x=\"643\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"704\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"673.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_0uz0mob\" id=\"ExclusiveGateway_0uz0mob_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"436\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"461\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_00cs355\" id=\"SequenceFlow_00cs355_di\"\u003e\u003comgdi:waypoint x=\"379\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"436\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"407.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1r2dkc6\" id=\"SequenceFlow_1r2dkc6_di\"\u003e\u003comgdi:waypoint x=\"486\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"543\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"470\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04m0elt\" id=\"SequenceFlow_04m0elt_di\"\u003e\u003comgdi:waypoint x=\"461\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"461\" xsi:type=\"omgdc:Point\" y=\"129\"/\u003e\u003comgdi:waypoint x=\"722\" xsi:type=\"omgdc:Point\" y=\"129\"/\u003e\u003comgdi:waypoint x=\"722\" xsi:type=\"omgdc:Point\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"547\" y=\"108\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_15a70qt\" id=\"TextAnnotation_15a70qt_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"172\" x=\"434\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0r15w1a\" id=\"Association_0r15w1a_di\"\u003e\u003comgdi:waypoint x=\"468\" xsi:type=\"omgdc:Point\" y=\"224\"/\u003e\u003comgdi:waypoint x=\"510\" xsi:type=\"omgdc:Point\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0fgo0d9\" id=\"TextAnnotation_0fgo0d9_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"50\" x=\"767\" y=\"167\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1nvst3c\" id=\"Association_1nvst3c_di\"\u003e\u003comgdi:waypoint x=\"739\" xsi:type=\"omgdc:Point\" y=\"200\"/\u003e\u003comgdi:waypoint x=\"767\" xsi:type=\"omgdc:Point\" y=\"191\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 27,
-      "creator_id": "admin@example.com",
+      "content_version": 7,
+      "description": "An example workflow showing how to enable/disable an Active Directory user account",
+      "export_key": "example_ldap_utilities_toggle_access",
+      "last_modified_by": "f@example.com",
+      "last_modified_time": 1678468511307,
+      "name": "Example: LDAP Utilities: Toggle Access",
+      "object_type": "artifact",
+      "programmatic_name": "example_ldap_utilities_toggle_access",
+      "tags": [],
+      "uuid": "cbb7719b-4d47-4d86-84c9-5001ac42637d",
+      "workflow_id": 108
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 6,
+        "workflow_id": "example_ldap_utilities_add_users_to_groups",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_add_users_to_groups\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Add User(s) to Group(s)\"\u003e\u003cdocumentation\u003eAn example workflow showing how to add multiple users to multiple groups\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0snjctn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1977eiw\" name=\"LDAP Utilities: Add to Group(s)\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b602d316-c3b6-4b36-8813-eb81fd381bba\"\u003e{\"inputs\":{},\"post_processing_script\":\"# If the function is successful in adding the users to said groups, a note is added to the incident\\nif (results.success):\\n  noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP Utilities: Add User(s) to Group(s) \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                    \u0026lt;b\u0026gt;User(s):\u0026lt;/b\u0026gt; {}\\n                    \u0026lt;b\u0026gt;Group(s):\u0026lt;/b\u0026gt; {}\\\"\\\"\\\".format(results.inputs.ldap_multiple_user_dn, results.inputs.ldap_multiple_group_dn)\\n\\n  incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Both inputs must be a string representation of a List\\n\\n## Example of multiple entries\\n# inputs.ldap_multiple_user_dn = \\\"[\u0027dn=user1,dc=example,dc=com\u0027, \u0027dn=user2,dc=example,dc=com\u0027]\\\"\\n# inputs.ldap_multiple_group_dn = \\\"[\u0027dn=Accounts Group,dc=example,dc=com\u0027, \u0027dn=IT Group,dc=example,dc=com\u0027]\\\"\\n\\n# Both inputs must be a string representation of a List\\ninputs.ldap_multiple_user_dn = rule.properties.ldap_multiple_user_dn\\ninputs.ldap_multiple_group_dn = rule.properties.ldap_multiple_group_dn\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0snjctn\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_11eb0c4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0snjctn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1977eiw\"/\u003e\u003cendEvent id=\"EndEvent_0rlnblo\"\u003e\u003cincoming\u003eSequenceFlow_11eb0c4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_11eb0c4\" sourceRef=\"ServiceTask_1977eiw\" targetRef=\"EndEvent_0rlnblo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1977eiw\" id=\"ServiceTask_1977eiw_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"399\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0snjctn\" id=\"SequenceFlow_0snjctn_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"298.5\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rlnblo\" id=\"EndEvent_0rlnblo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"679\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"697\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_11eb0c4\" id=\"SequenceFlow_11eb0c4_di\"\u003e\u003comgdi:waypoint x=\"499\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"679\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"589\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 6,
+      "description": "An example workflow showing how to add multiple users to multiple groups",
+      "export_key": "example_ldap_utilities_add_users_to_groups",
+      "last_modified_by": "f@example.com",
+      "last_modified_time": 1678468098281,
+      "name": "Example: LDAP Utilities: Add User(s) to Group(s)",
+      "object_type": "artifact",
+      "programmatic_name": "example_ldap_utilities_add_users_to_groups",
+      "tags": [],
+      "uuid": "8bb8e545-0841-49ec-a2f0-9080337a5564",
+      "workflow_id": 109
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "example_ldap_utilities_add",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_add\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Add\"\u003e\u003cdocumentation\u003eAdd users, groups, organizational units to LDAP\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_066ua9g\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1uu1w6e\" name=\"LDAP Utilities: Add\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"673a09d5-acf2-4c3d-8e48-4647cf91be6f\"\u003e{\"inputs\":{},\"post_processing_script\":\"if results.success:\\n  incident.addNote(\\\"LDAP Add operation successful for: {}\\\".format(results.inputs.get(\u0027ldap_dn\u0027)))\\nelse:\\n  incident.addNote(\\\"LDAP Add operation unsuccessful for: {}. Reason: {}\\\".format(results.inputs.get(\u0027ldap_dn\u0027), results.reason))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\\n\\ninputs.ldap_dn = rule.properties.ldap_user_info\\ninputs.ldap_multiple_group_dn = rule.properties.ldap_groups if rule.properties.ldap_groups else \u0027[]\u0027\\ninputs.ldap_attribute_name_values = rule.properties.ldap_attribute_name_values\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_066ua9g\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_17gy3iw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_066ua9g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1uu1w6e\"/\u003e\u003cendEvent id=\"EndEvent_1wihe6x\"\u003e\u003cincoming\u003eSequenceFlow_17gy3iw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_17gy3iw\" sourceRef=\"ServiceTask_1uu1w6e\" targetRef=\"EndEvent_1wihe6x\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_11tbom4\"\u003e\u003ctext\u003e\u003c![CDATA[Results returned in an incident note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_02dw48z\" sourceRef=\"ServiceTask_1uu1w6e\" targetRef=\"TextAnnotation_11tbom4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1uu1w6e\" id=\"ServiceTask_1uu1w6e_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"259\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_066ua9g\" id=\"SequenceFlow_066ua9g_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"259\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"228.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1wihe6x\" id=\"EndEvent_1wihe6x_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"430\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"448\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_17gy3iw\" id=\"SequenceFlow_17gy3iw_di\"\u003e\u003comgdi:waypoint x=\"359\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"430\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"394.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_11tbom4\" id=\"TextAnnotation_11tbom4_di\"\u003e\u003comgdc:Bounds height=\"43\" width=\"162\" x=\"334\" y=\"77\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_02dw48z\" id=\"Association_02dw48z_di\"\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"394\" xsi:type=\"omgdc:Point\" y=\"120\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "description": "Add users, groups, organizational units to LDAP",
+      "export_key": "example_ldap_utilities_add",
+      "last_modified_by": "f@example.com",
+      "last_modified_time": 1678468047217,
+      "name": "Example: LDAP Utilities: Add",
+      "object_type": "incident",
+      "programmatic_name": "example_ldap_utilities_add",
+      "tags": [],
+      "uuid": "5615976c-9912-487c-960a-c9ea2cb5b7f8",
+      "workflow_id": 112
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 7,
+        "workflow_id": "example_ldap_utilities_search",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_search\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Search\"\u003e\u003cdocumentation\u003e\u003c![CDATA[An example workflow which runs a person query against an LDAP server using the person\u0027s email address]]\u003e\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1p0pun3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1xv950w\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Globals\\nENTRY_TO_DATATABLE_MAP = {\\n  \\\"uid\\\": \\\"uid\\\",\\n  \\\"cn\\\": \\\"fullname\\\",\\n  \\\"sn\\\": \\\"surname\\\",\\n  \\\"mail\\\": \\\"email_address\\\",\\n  \\\"telephoneNumber\\\": \\\"telephone_number\\\"\\n}\\n\\n# Processing if the function is a success\\nif(results.success):\\n  for entry in results.entries:\\n    if not entry:\\n      break\\n    # Add Row\\n    row = incident.addRow(\\\"ldap_query_results\\\")\\n    for k in ENTRY_TO_DATATABLE_MAP:\\n      if not entry[k]:\\n        row[ENTRY_TO_DATATABLE_MAP[k]] = \\\"N/A\\\"\\n      else:\\n        try:\\n          # If \u0027entry[k]\u0027 is empty\\n          if not len(entry[k]):\\n            row[ENTRY_TO_DATATABLE_MAP[k]] = \\\"N/A\\\"\\n          # Handle for Active Directory\\n          elif isinstance(entry[k], unicode):\\n            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k]\\n          # Handle for OpenLdap\\n          else:\\n            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k][0]\\n        except IndexError:\\n          row[ENTRY_TO_DATATABLE_MAP[k]] = \\\"N/A\\\"\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# If search filters are given\\nif rule.properties.ldap_search_filter:\\n  inputs.ldap_search_filter = rule.properties.ldap_search_filter\\n# If filters not given then set them to example filters\\nelse:\\n  inputs.ldap_search_filter = \\\"(\u0026amp;(objectClass=person)(mail=*%ldap_param%))\\\"\\n\\n# If search attributes are given\\nif rule.properties.ldap_search_attributes:\\n  inputs.ldap_search_attributes = rule.properties.ldap_search_attributes\\n# If search attributes not given then set them to example attributes\\nelse:\\n  inputs.ldap_search_attributes = \\\"*\\\"\\n\\ninputs.ldap_search_param = artifact.value\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif rule.properties.ldap_search_base:\\n  inputs.ldap_search_base = rule.properties.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1p0pun3\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1hxgtgx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_02v8j60\"\u003e\u003cincoming\u003eSequenceFlow_1hxgtgx\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1hxgtgx\" sourceRef=\"ServiceTask_1xv950w\" targetRef=\"EndEvent_02v8j60\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1p0pun3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1xv950w\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1xv950w\" id=\"ServiceTask_1xv950w_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"356\" y=\"167\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_02v8j60\" id=\"EndEvent_02v8j60_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"639\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"657\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1hxgtgx\" id=\"SequenceFlow_1hxgtgx_di\"\u003e\u003comgdi:waypoint x=\"456\" xsi:type=\"omgdc:Point\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"639\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"502.5\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1p0pun3\" id=\"SequenceFlow_1p0pun3_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"356\" xsi:type=\"omgdc:Point\" y=\"207\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"232\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 7,
       "description": "An example workflow which runs a person query against an LDAP server using the person\u0027s email address",
       "export_key": "example_ldap_utilities_search",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1652975159720,
+      "last_modified_by": "f@example.com",
+      "last_modified_time": 1678468250350,
       "name": "Example: LDAP Utilities: Search",
       "object_type": "artifact",
       "programmatic_name": "example_ldap_utilities_search",
       "tags": [],
       "uuid": "dd244e52-1072-418a-ac40-19c2ed8dc53d",
-      "workflow_id": 25
+      "workflow_id": 114
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 15,
+        "workflow_id": "example_ldap_utilities_set_password",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_ldap_utilities_set_password\" isExecutable=\"true\" name=\"Example: LDAP Utilities: Set Password\"\u003e\u003cdocumentation\u003eAn example workflow that searches for a user using their email address, gets their DN and sets a new password for that user\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1bbjw69\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0azie2d\"\u003e\u003cincoming\u003eSequenceFlow_1adifvp\u003c/incoming\u003e\u003cincoming\u003eSequenceFlow_193svjt\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_03tj4yh\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Set the ldap_search_base and ldap_search_filter\\n# using the ldap_param wildcard then get the email\\n# address the user you want to set a new password for from the artifact\u0027s value\\ninputs.ldap_search_filter = \\\"(\u0026amp;(objectClass=person)(mail=%ldap_param%))\\\"\\ninputs.ldap_search_param =  artifact.value\\n\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif rule.properties.ldap_search_base:\\n  inputs.ldap_search_base = rule.properties.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif rule.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = rule.properties.ldap_domain_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1bbjw69\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_04b8zyw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1bbjw69\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03tj4yh\"/\u003e\u003cserviceTask id=\"ServiceTask_042e0nm\" name=\"LDAP Utilities: Set Password\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b75c2ee2-759b-4d01-9649-6ec46f6a646e\"\u003e{\"inputs\":{\"91b1cdc7-457b-4c8b-8f35-b9faffcb8c6d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"number_value\":12}},\"c886d097-52d8-4281-a68a-988496f28d11\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false,\"multiselect_value\":[]}}},\"post_processing_script\":\"# If the function is successful in changing the users password, a note is added to the incident\\nif (results.success):\\n  noteText = \\\"\\\"\\\"\u0026lt;br\u0026gt;\u0026lt;i style=\\\"color: #979ca3\\\"\u0026gt; LDAP MultiDomain Utilities: Set Password workflow \u0026lt;u\u0026gt;complete\u0026lt;/u\u0026gt;:\u0026lt;/i\u0026gt;\\n                    A New Password has been set for:\\n                    \u0026lt;b\u0026gt;Email:\u0026lt;/b\u0026gt; \u0026lt;u style=\\\"color: #7fb0ff\\\"\u0026gt;{}\u0026lt;/u\u0026gt;\\n                    \u0026lt;b\u0026gt;DN:\u0026lt;/b\u0026gt; \u0027{}\u0027\\n                    \u0026lt;b\u0026gt;New password:\u0026lt;/b\u0026gt; \u0027{}\u0027\\\"\\\"\\\".format(artifact.value, results.inputs.ldap_dn, results.inputs.ldap_new_password)\\n\\n  incident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Once the LDAP Utilities: Search completes, get the DN of the first entry\\n# which will be the DN of the account you want to set a Set a New Password for\\ninputs.ldap_domain_name = workflow.properties.search_output.inputs.ldap_domain_name\\ninputs.ldap_dn = workflow.properties.search_output.content[0][\\\"dn\\\"]\\ninputs.ldap_new_password = rule.properties.ldap_user_new_password\\npass_len = rule.properties.ldap_new_auto_password_length\\nif pass_len:\\n  inputs.ldap_new_auto_password_len = pass_len\\ninputs.ldap_return_new_password = rule.properties.ldap_return_new_password\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1d9kfki\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1adifvp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1adifvp\" sourceRef=\"ServiceTask_042e0nm\" targetRef=\"EndEvent_0azie2d\"/\u003e\u003csequenceFlow id=\"SequenceFlow_04b8zyw\" sourceRef=\"ServiceTask_03tj4yh\" targetRef=\"ExclusiveGateway_1wqzksd\"/\u003e\u003cexclusiveGateway id=\"ExclusiveGateway_1wqzksd\"\u003e\u003cincoming\u003eSequenceFlow_04b8zyw\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1d9kfki\u003c/outgoing\u003e\u003coutgoing\u003eSequenceFlow_193svjt\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"SequenceFlow_1d9kfki\" name=\"\" sourceRef=\"ExclusiveGateway_1wqzksd\" targetRef=\"ServiceTask_042e0nm\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"# if at least one entry is found, success will be True\\ndecision = True\\ndecision == workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"SequenceFlow_193svjt\" name=\"\" sourceRef=\"ExclusiveGateway_1wqzksd\" targetRef=\"EndEvent_0azie2d\"\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e\u003c![CDATA[{\"conditions\":[{\"evaluation_id\":1,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"decision = True\\ndecision != workflow.properties.search_output[\\\"success\\\"]\",\"final_expression_text\":\"decision\",\"language\":\"python\"}}],\"custom_condition\":\"\",\"logic_type\":\"all\",\"script_language\":\"python\"}]]\u003e\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_12ui9le\"\u003e\u003ctext\u003eIf the search returns nothing, skip Set Password and End\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0hnn7g6\" sourceRef=\"ExclusiveGateway_1wqzksd\" targetRef=\"TextAnnotation_12ui9le\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0q69jso\"\u003e\u003ctext\u003eEnd\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0pek3d6\" sourceRef=\"EndEvent_0azie2d\" targetRef=\"TextAnnotation_0q69jso\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"50\" x=\"106\" y=\"153\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"165\" xsi:type=\"omgdc:Point\" y=\"197\"/\u003e\u003comgdi:waypoint x=\"148\" xsi:type=\"omgdc:Point\" y=\"183\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0azie2d\" id=\"EndEvent_0azie2d_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"843\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"816\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03tj4yh\" id=\"ServiceTask_03tj4yh_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"282.1146881287726\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bbjw69\" id=\"SequenceFlow_1bbjw69_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"282\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"240\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_042e0nm\" id=\"ServiceTask_042e0nm_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"583\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1adifvp\" id=\"SequenceFlow_1adifvp_di\"\u003e\u003comgdi:waypoint x=\"683\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"843\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"718\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04b8zyw\" id=\"SequenceFlow_04b8zyw_di\"\u003e\u003comgdi:waypoint x=\"382\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"434\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"408\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ExclusiveGateway_1wqzksd\" id=\"ExclusiveGateway_1wqzksd_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"50\" width=\"50\" x=\"434\" y=\"181\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"459\" y=\"234\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1d9kfki\" id=\"SequenceFlow_1d9kfki_di\"\u003e\u003comgdi:waypoint x=\"484\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"583\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"489\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_193svjt\" id=\"SequenceFlow_193svjt_di\"\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"181\"/\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"116\"/\u003e\u003comgdi:waypoint x=\"843\" xsi:type=\"omgdc:Point\" y=\"116\"/\u003e\u003comgdi:waypoint x=\"843\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"606\" y=\"95\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_12ui9le\" id=\"TextAnnotation_12ui9le_di\"\u003e\u003comgdc:Bounds height=\"48\" width=\"181\" x=\"370\" y=\"301\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0hnn7g6\" id=\"Association_0hnn7g6_di\"\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"231\"/\u003e\u003comgdi:waypoint x=\"459\" xsi:type=\"omgdc:Point\" y=\"301\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0q69jso\" id=\"TextAnnotation_0q69jso_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"915\" y=\"191\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0pek3d6\" id=\"Association_0pek3d6_di\"\u003e\u003comgdi:waypoint x=\"879\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"915\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 15,
+      "description": "An example workflow that searches for a user using their email address, gets their DN and sets a new password for that user",
+      "export_key": "example_ldap_utilities_set_password",
+      "last_modified_by": "f@example.com",
+      "last_modified_time": 1678468422538,
+      "name": "Example: LDAP Utilities: Set Password",
+      "object_type": "artifact",
+      "programmatic_name": "example_ldap_utilities_set_password",
+      "tags": [],
+      "uuid": "ad15e9ce-3d17-4bbb-b99a-e6aa4eb5db62",
+      "workflow_id": 110
     }
   ],
   "workspaces": []

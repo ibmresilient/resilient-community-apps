@@ -29,6 +29,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.0 | 03/2023 | <ul><li>Update search function to have a configurable return limit.</li><li>Fix bug in set password function.</li></ul>
 | 2.0.1 | 07/2022 | Fix helper.py so that ldap_connect_timeout is not required in app.config |
 | 2.0.0 | 04/2022 | <ul><li>Add ability to have multiple LDAP Domains</li><li>New rule to add users, groups, organizational units, etc.</li></ul>|
 | 1.1.1 | 07/2021 | Support added for App Host |
@@ -65,13 +66,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `42.0.7058`.
+* SOAR platform >= `46.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `42.0.7058`.
+* SOAR platform >= `46.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=42.0.0`.
+* Integration server is running `resilient_circuits>=46.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -101,10 +102,10 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does not support a proxy server.
 
 ### Python Environment
-Python 3.6 and Python 3.9 are supported.
+Python 3.6 and greater are supported.
 Additional package dependencies may exist for each of these packages:
 * ldap3>=2.0.0
-* resilient_circuits>=42.0.0
+* resilient_circuits>=46.0.0
 
 ---
 
@@ -143,7 +144,7 @@ Two incident fields have been added, `ldap_domain_name` and `ldap_base_dn`. If t
 
 ---
 
-## Function - LDAP Utilities: Add (new to v2.0.0)
+## Function - LDAP Utilities: Add
 Add users, groups, organizational units to LDAP
 
  ![screenshot: fn-ldap-utilities-add ](./doc/screenshots/add.png)

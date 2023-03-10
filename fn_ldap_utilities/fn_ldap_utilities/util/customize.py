@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v48.0.4034
 
 """Generate the Resilient customizations required for fn_ldap_utilities"""
 
@@ -39,7 +40,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 42.0.7058
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
