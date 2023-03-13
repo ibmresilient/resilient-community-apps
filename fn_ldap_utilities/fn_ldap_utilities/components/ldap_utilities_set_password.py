@@ -3,14 +3,19 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-from resilient_lib import validate_fields
-from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list, PACKAGE_NAME
-from fn_ldap_utilities.util.ldap_utils import LDAPDomains
-from ldap3 import MODIFY_REPLACE
-from string import ascii_letters, digits
 from random import sample
-from resilient_circuits import (AppFunctionComponent, FunctionResult, app_function)
+from string import ascii_letters, digits
 
+from ldap3 import MODIFY_REPLACE
+from resilient_circuits import (AppFunctionComponent, FunctionResult,
+                                app_function)
+from resilient_lib import validate_fields
+
+from fn_ldap_utilities.util.helper import (PACKAGE_NAME, LDAPUtilitiesHelper,
+                                           get_domains_list)
+from fn_ldap_utilities.util.ldap_utils import LDAPDomains
+
+FN_NAME = "ldap_utilities_set_password"
 DEFAULT_MAX_PASSWORD_LEN = 12
 FN_NAME = "ldap_utilities_set_password"
 
@@ -32,7 +37,6 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.ldap_new_auto_password_len
             -   fn_inputs.ldap_return_new_password
         """
-
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate that required fields are given
@@ -74,15 +78,15 @@ class FunctionComponent(AppFunctionComponent):
         if not ldap_new_password:
             ldap_new_password = "".join(sample(str(ascii_letters+digits+'*#$%&/-_!?'), int(ldap_new_auto_password_len)))
 
-        # If the password was changed or not
-        changed = False
+        # If the call to LDAP is successful
+        success = False
 
         try:
-            self.status_message("Attempting to change password")
+            yield self.status_message("Attempting to change password")
             if helper.LDAP_IS_ACTIVE_DIRECTORY:
-                changed = c.extend.microsoft.modify_password(str(ldap_dn), ldap_new_password)
+                success = c.extend.microsoft.modify_password(str(ldap_dn), ldap_new_password)
             else:
-                changed = c.modify(ldap_dn, {'userPassword': [(MODIFY_REPLACE, [ldap_new_password])]})
+                success = c.modify(ldap_dn, {'userPassword': [(MODIFY_REPLACE, [ldap_new_password])]})
 
         except Exception as err:
             self.LOG.debug(f"Error: {err}")
@@ -100,4 +104,4 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
-        yield FunctionResult(results, success=changed)
+        yield FunctionResult(results, success=success)

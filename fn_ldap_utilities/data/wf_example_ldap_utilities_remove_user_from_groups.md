@@ -39,9 +39,7 @@ if rule.properties.ldap_domain_name:
 
 ### Post-Processing Script
 ```python
-# If the function is successful in removing the users from said groups,
-# a note is added to the incident
-
+# If the function is successful in removing the users from said groups, a note is added to the incident
 if (results.success):
   if not results.users_dn:
     noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>

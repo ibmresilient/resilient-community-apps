@@ -42,7 +42,7 @@ if rule.properties.ldap_domain_name:
 
 ### Post-Processing Script
 ```python
-# No post-processing script here as output being passed into next function
+None
 ```
 
 ---
@@ -69,9 +69,7 @@ inputs.ldap_toggle_access = rule.properties.ldap_toggle_access
 
 ### Post-Processing Script
 ```python
-# If the function is successful in updating users access rights,
-# a note is added to the incident
-
+# If the function is successful in updating users access rights, a note is added to the incident
 if (results.success):
   color = "#45bc27" #green
   if (results.inputs.ldap_toggle_access.get("name") == "Disabled"):

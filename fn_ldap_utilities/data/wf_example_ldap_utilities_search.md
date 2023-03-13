@@ -19,8 +19,6 @@
 
 ### Pre-Processing Script
 ```python
-##  LDAP Utilities: Search - pre-processing script ##
-
 # If search filters are given
 if rule.properties.ldap_search_filter:
   inputs.ldap_search_filter = rule.properties.ldap_search_filter
@@ -53,29 +51,13 @@ if rule.properties.ldap_domain_name:
 
 ### Post-Processing Script
 ```python
-##  LDAP Utilities: Search - post-processing script ##
-# Example of expected results - OpenLdap
-"""
-'entries': [{"dn": "uid=newton,dc=example,dc=com", "telephoneNumber": [], "uid": ["newton"],
-    "mail": ["newton@ldap.forumsys.com"], "sn": ["Newton"], "cn": ["Isaac Newton"]},
-    {"dn": "uid=einstein,dc=example,dc=com", "telephoneNumber": ["314-159-2653"], "uid": ["einstein"],
-    "mail": ["einstein@ldap.forumsys.com"], "sn": ["Einstein"], "cn": ["Albert Einstein"]}]
-"""
-
-# Example of expected results - ActiveDirectory
-"""
-'entries': [{u'dn': u'CN=Isaac Newton,OU=IBMResilient,DC=ibm,DC=resilient,DC=com',
-              u'telephoneNumber': u'314-159-2653', u'cn': u'Isaac Newton',
-              u'mail': u'einstein@resilient.ibm.com', u'sn': u'Newton'}]
-"""
-
-#  Globals
+# Globals
 ENTRY_TO_DATATABLE_MAP = {
-   "uid": "uid",
-   "cn": "fullname",
-   "sn": "surname",
-   "mail": "email_address",
-   "telephoneNumber": "telephone_number"
+  "uid": "uid",
+  "cn": "fullname",
+  "sn": "surname",
+  "mail": "email_address",
+  "telephoneNumber": "telephone_number"
 }
 
 # Processing if the function is a success

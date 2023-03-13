@@ -42,7 +42,7 @@ if rule.properties.ldap_domain_name:
 
 ### Post-Processing Script
 ```python
-# No post-processing script here as output being passed into next function
+None
 ```
 
 ---
@@ -65,17 +65,15 @@ if rule.properties.ldap_domain_name:
 inputs.ldap_domain_name = workflow.properties.search_output.inputs.ldap_domain_name
 inputs.ldap_dn = workflow.properties.search_output.content[0]["dn"]
 inputs.ldap_new_password = rule.properties.ldap_user_new_password
+pass_len = rule.properties.ldap_new_auto_password_length
+if pass_len:
+  inputs.ldap_new_auto_password_len = pass_len
 inputs.ldap_return_new_password = rule.properties.ldap_return_new_password
-auto_password = rule.properties.ldap_new_auto_password_length
-if auto_password:
-  inputs.ldap_new_auto_password_len = auto_password
 ```
 
 ### Post-Processing Script
 ```python
-# If the function is successful in changing the users password,
-# a note is added to the incident
-
+# If the function is successful in changing the users password, a note is added to the incident
 if (results.success):
   noteText = """<br><i style="color: #979ca3"> LDAP MultiDomain Utilities: Set Password workflow <u>complete</u>:</i>
                     A New Password has been set for:

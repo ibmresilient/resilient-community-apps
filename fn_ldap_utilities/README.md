@@ -29,7 +29,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.0.2 | 03/2023 | Fix bug in set password function |
+| 2.1.0 | 03/2023 | <ul><li>Update search function to have a configurable return limit.</li><li>Fix bug in set password function.</li></ul>
 | 2.0.1 | 07/2022 | Fix helper.py so that ldap_connect_timeout is not required in app.config |
 | 2.0.0 | 04/2022 | <ul><li>Add ability to have multiple LDAP Domains</li><li>New rule to add users, groups, organizational units, etc.</li></ul>|
 | 1.1.1 | 07/2021 | Support added for App Host |
@@ -102,7 +102,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does not support a proxy server.
 
 ### Python Environment
-Python 3.6 and Python 3.9 are supported.
+Python 3.6 and greater are supported.
 Additional package dependencies may exist for each of these packages:
 * ldap3>=2.0.0
 * resilient_circuits>=46.0.0
@@ -144,7 +144,7 @@ Two incident fields have been added, `ldap_domain_name` and `ldap_base_dn`. If t
 
 ---
 
-## Function - LDAP Utilities: Add (new to v2.0.0)
+## Function - LDAP Utilities: Add
 Add users, groups, organizational units to LDAP
 
  ![screenshot: fn-ldap-utilities-add ](./doc/screenshots/add.png)
