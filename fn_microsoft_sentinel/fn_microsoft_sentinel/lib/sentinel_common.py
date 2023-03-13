@@ -19,13 +19,9 @@ SUBSCRIPTION_URL = "/subscriptions/{subscription_id}/resourceGroups/{resource_gr
 INCIDENTS_URL = "incidents"
 COMMENTS_URL = "comments"
 RELATIONS_URL = "relations"
-ENTITY_BODY = {
-    "expansionId": "98b974fd-cc64-48b8-9bd0-3a209f5b944b",
-}
-
+ENTITY_BODY = {"expansionId": "98b974fd-cc64-48b8-9bd0-3a209f5b944b",}
 AUTH_URL = "https://login.microsoftonline.com/{}/oauth2/token"
 RESOURCE_URI = "https://management.core.windows.net"
-
 AUTH_SCOPE = [ None ]
 
 # convert entity types to SOAR artifact types
@@ -69,9 +65,8 @@ class SentinelAPI():
     def __init__(self, opts, options):
         """
         Build the connection class for Sentinel
-        Args:
-            opts (Dict): All of the configurations in the app.config
-            options (Dict): function_section parameters
+        :param opts (Dict): All of the configurations in the app.config
+        :param options (Dict): function_section parameters
         """
         self.polling_lookback = int(options.get("polling_lookback", DEFAULT_POLLER_LOOBACK_MINUTES))
         self.base_url = options.get("azure_url")
@@ -80,35 +75,25 @@ class SentinelAPI():
         self.client_id = options.get("client_id")
         self.app_secret = options.get("app_secret")
         self.kwargs = self.get_requests_kwargs(REQUEST_PARAMS, options)
-        LOG.debug("kwargs: %s", self.kwargs)
+        LOG.debug(f"kwargs: {self.kwargs}")
 
         self.access_token = None
 
     def get_requests_kwargs(self, params_list, options):
         """
         Create dictionary of addl parameters to send to the requests call
-
-        Args:
-            params_list ([dict]): parameters to include if specificied in [function_section]
-            options ([dict]): function_section parameters
-
-        Returns:
-            [dict]: returned values, with any conversion is necessary
+        :param params_list [dict]: parameters to include if specificied in [function_section]
+        :param options [dict]: function_section parameters
+        :return [dict]: returned values, with any conversion is necessary
         """
         return { k:opr(options[k]) for k, opr in params_list.items() if k in options }
 
     def _authenticate(self, app_scope=AUTH_SCOPE):
         """
         Authenticate to azure and get the access token
-
-        Args:
-            app_scope ([str], optional): scope of authentication. Defaults to AUTH_SCOPE.
-
-        Raises:
-            IntegrationError: if authentication errors occur
-
-        Returns:
-            [str]: access token
+        :param app_scope ([str], optional): scope of authentication. Defaults to AUTH_SCOPE.
+        :raises IntegrationError: if authentication errors occur
+        :return [str]: access token
         """
         authenticate_url = AUTH_URL.format(self.tenant_id)
         post_data = {
@@ -126,18 +111,14 @@ class SentinelAPI():
             return True
 
         msg = u"Unable to authenticate to MS Azure: Error: {}\nDescription: {}\nCorrelation_id: {}"\
-                .format(result_json.get("error"), result_json.get("error_description"), result_json.get("correlation_id"))
+            .format(result_json.get("error"), result_json.get("error_description"), result_json.get("correlation_id"))
         raise IntegrationError(msg)
 
     def _make_header(self, content_type="application/json"):
         """
         Build headers needed for API calls. It will include the Defender access token.
-
-        Args:
-            content_type (str, optional): Defaults to "application/json".
-
-        Returns:
-            [dict]: api headers to use
+        :param content_type (str, optional): Defaults to "application/json".
+        :return [dict]: api headers to use
         """
         headers = {'Authorization': f'Bearer {self.access_token}'}
         if content_type:
@@ -148,15 +129,11 @@ class SentinelAPI():
     def _call(self, url_endpoint, payload=None, oper="GET", content_type="application/json"):
         """
         Make the API call to Defender
-
-        Args:
-            url_endpoint ([str]): Endpoint url
-            payload ([dict], optional): Payload to send. Defaults to None.
-            oper (str, optional): "GET", "POST", "DELETE". Defaults to "GET".
-            content_type (str, optional): Value for content_type. Defaults to "application/json".
-
-        Returns:
-            [json]: Returned API payload
+        :param url_endpoint [str]: Endpoint url
+        :param payload ([dict], optional): Payload to send. Defaults to None.
+        :param oper (str, optional): "GET", "POST", "DELETE". Defaults to "GET".
+        :param content_type (str, optional): Value for content_type. Defaults to "application/json".
+        :return [json]: Returned API payload
         """
         self._authenticate()
         headers = self._make_header(content_type)
@@ -164,12 +141,14 @@ class SentinelAPI():
         try:
             if oper in ["PUT", "POST", "PATCH"]:
                 result, status = self.rc.execute(oper, url_endpoint, json=payload, headers=headers,
-                                                 callback=callback_response,
-                                                 **self.kwargs)
+                    callback=callback_response,
+                    **self.kwargs
+                )
             else:
                 result, status = self.rc.execute(oper, url_endpoint, params=payload, headers=headers,
-                                                 callback=callback_response,
-                                                 **self.kwargs)
+                    callback=callback_response,
+                    **self.kwargs
+                )
         except Exception as err:
             LOG.error(str(err))
             status = False
@@ -190,19 +169,16 @@ class SentinelAPI():
         """
         Query Sentinel for all incidents created within the last polling window. If first time,
         then use a lookback value.
-
-        Args:
-            profile_data ([dict]): Profile to query incidents
-
-        Returns:
-            result [dict]: API results
-            status [bool]: True if API call was successful
-            reason [str]: Reason of error when status=False
+        :param profile_data [dict]: Profile to query incidents
+        :return result [dict]: API results
+        :return status [bool]: True if API call was successful
+        :return reason [str]: Reason of error when status=False
         """
         url = self._get_base_payload(profile_data['subscription_id'],
-                                     profile_data['resource_groupname'],
-                                     profile_data['workspace_name'],
-                                     extra_url=INCIDENTS_URL)
+            profile_data['resource_groupname'],
+            profile_data['workspace_name'],
+            extra_url=INCIDENTS_URL
+        )
 
         # Build filter information
         last_poller_datetime = self._get_last_poller_date(profile_data)
@@ -220,15 +196,11 @@ class SentinelAPI():
     def query_next_incidents(self, profile_data, nextlink):
         """
         Get the next set of incident data
-
-        Args:
-            profile_data ([dickt]): app settings for this profile
-            nextlink ([str]): url
-
-        Returns:
-            result [dict]: API results
-            status [bool]: True if API call was successful
-            reason [str]: Reason of error when status=False
+        :param profile_data ([dickt]): app settings for this profile
+        :param nextlink [str]: url
+        :return result [dict]: API results
+        :return status [bool]: True if API call was successful
+        :return reason [str]: Reason of error when status=False
         """
         last_poller_datetime = self._get_last_poller_date(profile_data)
 
@@ -245,14 +217,10 @@ class SentinelAPI():
         This logic is unnecessary of the $filter capability is workin in the query API call.
         Loop through all incidents results and reapply the logic to filter the list based on
         the last poller window time.
-
-        Args:
-            result ([dict]): api result from query API
-            poller_last_modified_date ([datetime]): datetime of last poller run
-            field (str, optional): Field to check for last poller time. Defaults to "lastModifiedTimeUtc".
-
-        Returns:
-            [dict]: Filtered out incident list
+        :param result [dict]: api result from query API
+        :param poller_last_modified_date [datetime]: datetime of last poller run
+        :param field (str, optional): Field to check for last poller time. Defaults to "lastModifiedTimeUtc".
+        :return [dict]: Filtered out incident list
         """
         # Loop through all incidents and filter out older incidents outside poller window
         filtered = []
@@ -262,11 +230,9 @@ class SentinelAPI():
                 incident_last_modified_date = datetime.strptime(str_date[:str_date.rfind('.')], date_format)
                 if incident_last_modified_date >= poller_last_modified_date:
                     filtered.append(inc)
-                    LOG.debug("Allowing incident:%s %s", inc['name'],
-                              incident_last_modified_date.isoformat())
+                    LOG.debug(f"Allowing incident:{inc['name']} {incident_last_modified_date.isoformat()}")
                 else:
-                    LOG.debug("Filtering incident:%s %s", inc['name'],
-                              incident_last_modified_date.isoformat())
+                    LOG.debug(f"Filtering incident:{inc['name']} {incident_last_modified_date.isoformat()}")
 
             except ValueError as err:
                 LOG.error(str(err))
@@ -276,22 +242,18 @@ class SentinelAPI():
     def get_incident_entities(self, profile_data, sentinel_incident_id):
         """
         Query for entities associated with a sentinel incident
-
-        Args:
-            profile_name ([str]): Profile name with incident access parameters
-            sentinel_incident_id ([str]): Sentinel incident id
-
-        Returns:
-            [dict]: Entity list from API call
+        :param profile_name [str]: Profile name with incident access parameters
+        :param sentinel_incident_id [str]: Sentinel incident id
+        :return [dict]: Entity list from API call
         """
-        relations_url = "/".join([INCIDENTS_URL, str(sentinel_incident_id),
-                                  RELATIONS_URL])
+        relations_url = "/".join([INCIDENTS_URL, str(sentinel_incident_id), RELATIONS_URL])
 
         url = self._get_base_payload(profile_data['subscription_id'],
-                                     profile_data['resource_groupname'],
-                                     profile_data['workspace_name'],
-                                     extra_url=relations_url,
-                                     api_version=PREVIEW_API_VERSION)
+            profile_data['resource_groupname'],
+            profile_data['workspace_name'],
+            extra_url=relations_url,
+            api_version=PREVIEW_API_VERSION
+        )
 
         result, status, reason = self._call(url)
 
@@ -301,22 +263,19 @@ class SentinelAPI():
     def get_incident_alerts(self, profile_data, sentinel_incident_id):
         """
         Query for alerts associated with a sentinel incident
-
-        Args:
-            profile_name ([str]): Profile name with incident access parameters
-            sentinel_incident_id ([str]): Sentinel incident id
-            max_alerts (int): number of alerts to return (in descending order) or all if set to None
-
-        Returns:
-            [dict]: Alert list from API call
+        :param profile_name [str]: Profile name with incident access parameters
+        :param sentinel_incident_id [str]: Sentinel incident id
+        :param max_alerts (int): number of alerts to return (in descending order) or all if set to None
+        :return [dict]: Alert list from API call
         """
         alerts_url = ALERTS_URL.format(str(sentinel_incident_id))
 
         url = self._get_base_payload(profile_data['subscription_id'],
-                                     profile_data['resource_groupname'],
-                                     profile_data['workspace_name'],
-                                     extra_url=alerts_url,
-                                     api_version=PREVIEW_API_VERSION)
+            profile_data['resource_groupname'],
+            profile_data['workspace_name'],
+            extra_url=alerts_url,
+            api_version=PREVIEW_API_VERSION
+        )
 
         result, status, reason = self._call(url, oper="POST")
 
@@ -364,7 +323,8 @@ class SentinelAPI():
             for entity in result['value']['entities']:
                 if entity['properties'].get('friendlyName'):
                     artifact_type, artifact_value = convert_entity_type(entity['kind'],
-                                                                        entity['properties']['friendlyName'])
+                        entity['properties']['friendlyName']
+                    )
                     entity['soar_artifact_type'] = artifact_type
                     entity['resilient_artifact_value'] = artifact_value
 
@@ -373,12 +333,8 @@ class SentinelAPI():
     def _make_createdate_filter(self, last_poller_datetime):
         """
         Build the $filter parameter to find incidents by last poller run datetime
-
-        Args:
-            last_poller_datetime ([datetime]): Last poller time
-
-        Returns:
-            [str]: $filter string to use
+        :param last_poller_datetime ([datetime]): Last poller time
+        :return [str]: $filter string to use
         """
         last_poller_datetime_iso = last_poller_datetime.isoformat()
 
@@ -390,12 +346,8 @@ class SentinelAPI():
         """
         Get the last poller datetime based on a profile. If first time, use the lookback
         parameter to calculate it from the current datetime.
-
-        Args:
-            profile_data ([str]): Profile to get last poller runtime
-
-        Returns:
-            [datetime]: Datetime to use for last poller run time
+        :param profile_data [str]: Profile to get last poller runtime
+        :return [datetime]: Datetime to use for last poller run time
         """
         if profile_data.get('last_poller_time'):
             last_poller_datetime = profile_data['last_poller_time']
@@ -409,16 +361,12 @@ class SentinelAPI():
     def create_update_incident(self, profile_data, sentinel_incident_id, incident_payload):
         """
         Create or update a Sentinel incident based on a SOAR incident.
-
-        Args:
-            profile_name ([str]): Profile to use for creating the incident
-            sentinel_incident_id ([str]): Sentinel incident id or None for creating a new one
-            incident_payload ([dict]): Dictionary of sentinel incident data
-
-        Returns:
-            result [dict]: API results
-            status [bool]: True if API call was successful
-            reason [str]: Reason of error when status=False
+        :param profile_name [str]: Profile to use for creating the incident
+        :param sentinel_incident_id [str]: Sentinel incident id or None for creating a new one
+        :param incident_payload [dict]: Dictionary of sentinel incident data
+        :return result [dict]: API results
+        :return status [bool]: True if API call was successful
+        :return reason [str]: Reason of error when status=False
         """
         if not sentinel_incident_id:
             sentinel_incident_id = make_uuid()
@@ -426,9 +374,10 @@ class SentinelAPI():
         incident_url = "/".join([INCIDENTS_URL, sentinel_incident_id])
 
         url = self._get_base_payload(profile_data['subscription_id'],
-                                     profile_data['resource_groupname'],
-                                     profile_data['workspace_name'],
-                                     extra_url=incident_url)
+            profile_data['resource_groupname'],
+            profile_data['workspace_name'],
+            extra_url=incident_url
+        )
 
         result, status, reason = self._call(url, payload=incident_payload, oper="PUT")
 
@@ -438,22 +387,19 @@ class SentinelAPI():
     def get_incident_comments(self, profile_data, sentinel_incident_id):
         """
         Get all comments for a Sentinel incident
-
-        Args:
-            profile_name ([str]): Profile for incident
-            sentinel_incident_id ([str]): Sentinel incident id
-
-        Returns:
-            result [dict]: API results
-            status [bool]: True if API call was successful
-            reason [str]: Reason of error when status=False
+        :param profile_name [str]: Profile for incident
+        :param sentinel_incident_id [str]: Sentinel incident id
+        :return result [dict]: API results
+        :return status [bool]: True if API call was successful
+        :return reason [str]: Reason of error when status=False
         """
         comments_url = "/".join([INCIDENTS_URL, str(sentinel_incident_id), COMMENTS_URL])
 
         url = self._get_base_payload(profile_data['subscription_id'],
-                                     profile_data['resource_groupname'],
-                                     profile_data['workspace_name'],
-                                     extra_url=comments_url)
+            profile_data['resource_groupname'],
+            profile_data['workspace_name'],
+            extra_url=comments_url
+        )
 
         result, status, reason = self._call(url)
 
@@ -463,16 +409,12 @@ class SentinelAPI():
     def create_comment(self, profile_data, sentinel_incident_id, note):
         """
         Create a sentinel incident comment
-
-        Args:
-            sentinel_incident_id ([str]): Sentinel incident id
-            profile_name ([str]): Profile to use for the incident
-            note ([str]): Note to sync
-
-        Returns:
-            result [dict]: API results
-            status [bool]: True if API call was successful
-            reason [str]: Reason of error when status=False
+        :param sentinel_incident_id [str]: Sentinel incident id
+        :param profile_name [str]: Profile to use for the incident
+        :param note [str]: Note to sync
+        :return result [dict]: API results
+        :return status [bool]: True if API call was successful
+        :return reason [str]: Reason of error when status=False
         """
         comment_url = "/".join([INCIDENTS_URL, sentinel_incident_id, COMMENTS_URL, make_uuid()])
 
@@ -495,22 +437,19 @@ class SentinelAPI():
     def get_comments(self, profile_data, sentinel_incident_id):
         """
         Get all comments for sentinel incident
-
-        Args:
-            profile_name ([str]): Profile to use for the incident
-            sentinel_incident_id ([str]): Sentinel incident id
-
-        Returns:
-            result [dict]: API results
-            status [bool]: True if API call was successful
-            reason [str]: Reason of error when status=False
+        :param profile_name [str]: Profile to use for the incident
+        :param sentinel_incident_id [str]: Sentinel incident id
+        :returnresult [dict]: API results
+        :return status [bool]: True if API call was successful
+        :return reason [str]: Reason of error when status=False
         """
         comment_url = "/".join([INCIDENTS_URL, sentinel_incident_id, COMMENTS_URL])
 
         url = self._get_base_payload(profile_data['subscription_id'],
-                                     profile_data['resource_groupname'],
-                                     profile_data['workspace_name'],
-                                     extra_url=comment_url)
+            profile_data['resource_groupname'],
+            profile_data['workspace_name'],
+            extra_url=comment_url
+        )
 
         result, status, reason = self._call(url)
 
@@ -521,24 +460,20 @@ class SentinelAPI():
                           extra_url=None, api_version=API_VERSION):
         """
         Build the URL needed for sentinel incident access
-
-        Args:
-            subscription_id ([str]): Sentinel subscription ID
-            resource_groupname ([str]): Sentinel resource group name
-            workspace_name ([str]): Sentinel workspce name
-            extra_url ([str], optional): Additional url information to append. Defaults to None.
-            api_version ([str], optional): API version to use. Defaults to API_VERSION.
-
-        Returns:
-            [str]: Url
+        :param subscription_id [str]: Sentinel subscription ID
+        :param resource_groupname [str]: Sentinel resource group name
+        :param workspace_name [str]: Sentinel workspce name
+        :param extra_url ([str], optional): Additional url information to append. Defaults to None.
+        :param api_version ([str], optional): API version to use. Defaults to API_VERSION.
+        :return [str]: Url
         """
         # Build url
         url = "{}{}".format(self.base_url,
-                            SUBSCRIPTION_URL.format(subscription_id=subscription_id,
-                                                    resource_groupname=resource_groupname,
-                                                    workspace_name=workspace_name
-                                                   )
-                           )
+            SUBSCRIPTION_URL.format(subscription_id=subscription_id,
+                resource_groupname=resource_groupname,
+                workspace_name=workspace_name
+            )
+        )
 
         if extra_url:
             url = '/'.join([url, extra_url])
@@ -549,8 +484,7 @@ class SentinelAPI():
 
 def get_sentinel_incident_ids(sentinel_incident):
     """
-    Returns:
-        [str]: sentinel_indident_id or None if not found
+    :return [str]: sentinel_indident_id or None if not found
     """
     if not sentinel_incident:
         return None
@@ -559,21 +493,16 @@ def get_sentinel_incident_ids(sentinel_incident):
 
 def make_uuid():
     """
-    Returns:
-        [str]: Created uuid
+    :return [str]: Created uuid
     """
     return str(uuid1())
 
 def callback_response(response):
     """
     Call back routine to review HTTP status code
-
-    Args:
-        response ([requests Response]): Object returned from Requests API call
-
-    Returns:
-        [json]: Payload from API call
-        [bool]: True is call was successful
+    :param response ([requests Response]): Object returned from Requests API call
+    :return [json]: Payload from API call
+    :return [bool]: True is call was successful
     """
     status = bool(response.status_code <= 300)
 
@@ -595,12 +524,8 @@ def callback_response(response):
 def convert_date(value, date_format="%Y-%m-%dT%H:%M:%S"):
     """
     Convert UTC formatted timestamp to epoch value
-
-    Args:
-        value ([str]): UTC formatted timestamp
-
-    Returns:
-        [number]: Epoch value
+    :param value [str]: UTC formatted timestamp
+    :return [number]: Epoch value
     """
     if not value:
         return value
@@ -613,17 +538,12 @@ def convert_date(value, date_format="%Y-%m-%dT%H:%M:%S"):
 def convert_entity_type(entity_type, entity_value):
     """
     Convert entity information to artifacts. A lookup table on entity types is used
-
-    Args:
-        entity_type ([str]): Type of the entity
-        entity_value ([str]): Entity value used in part or whole as an artifact value
-
+    :param entity_type [str]: Type of the entity
+    :param entity_value [str]: Entity value used in part or whole as an artifact value
         sha-1 - 40(MD5)
         md5 - 32(SHA1)
         sha-256 - 64(SHA256)
-
-    Returns:
-        artifact_type, artifact_value
+    :return: artifact_type, artifact_value
     """
     soar_artifact_type = ENTITY_TYPE_LOOKUP.get(entity_type.lower(), "String")
     if isinstance(soar_artifact_type, dict):

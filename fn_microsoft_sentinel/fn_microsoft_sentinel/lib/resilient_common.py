@@ -17,7 +17,7 @@ class ResilientCommon():
     def find_incident(self, sentinel_incident_id):
         """
         Find a SOAR incident which contains a custom field associated with a Sentinel incident
-        :param sentinel_incident_id ([str]): Sentinel incident id
+        :param sentinel_incident_id [str]: Sentinel incident id
         :return [dict]: API results of the first incident found
         """
         r_incidents = []
@@ -63,9 +63,9 @@ class ResilientCommon():
         """
         Close an incident, applying a template for the required and optional fields needed
         during the close process.
-        :param incident ([dict]): SOAR incident data
-        :param sentinel_incident ([dict]): Sentinel incident data
-        :param incident_close_template ([str]): path to template to apply for close operation
+        :param incident [dict]: SOAR incident data
+        :param sentinel_incident [dict]: Sentinel incident data
+        :param incident_close_template [str]: path to template to apply for close operation
         :raises IntegrationError: catch any errors
         :return [dict]: returned SOAR data
         """
@@ -155,7 +155,7 @@ class ResilientCommon():
         """
         Need to avoid creating same comments over and over this logic will read all comments
         from an incident and remove those comments which have already sync.
-        :param incident_id ([str]): SOAR incident id
+        :param incident_id [str]: SOAR incident id
         :param sentinel_comments ([list]): Comments from the sentinel incident
         :return: new_comments ([list])
         """

@@ -3,6 +3,7 @@ include Dockerfile
 include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_microsoft_sentinel/util *
+recursive-include fn_microsoft_sentinel/poller *
 include fn_microsoft_sentinel/LICENSE
 include doc/*.md
 include doc/screenshots/*

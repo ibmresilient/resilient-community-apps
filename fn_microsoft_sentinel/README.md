@@ -43,10 +43,6 @@ When upgrading from a previous version to v1.0.3, manually update your app.confi
 ---
 
 ## Overview
-<!--
-  Provide a high-level description of the function itself and its remote software or application.
-  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
--->
 **SOAR integration for 'fn_microsoft_sentinel'**
 
  ![screenshot: main](./doc/screenshots/main.png)
@@ -55,9 +51,6 @@ This app allows bi-directional synchronization between IBM SOAR and Microsoft Se
 Sentinel entities are exposed as artifacts for further investigation.
 
 ### Key Features
-<!--
-  List the Key Features of the Integration
--->
 * Escalate Microsoft Sentinel Incidents to IBM SOAR Cases
 * Automatically keep Incidents and Cases synchronized
 * Retrieve Sentinel Incident alert entities as artifacts
@@ -67,9 +60,6 @@ Sentinel entities are exposed as artifacts for further investigation.
 ---
 
 ## Requirements
-<!--
-  List any Requirements
--->
 This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -599,8 +589,8 @@ In addition, the `incident_creation_template` and `incident_update_template` inc
 mapping:
 
 ```
-  {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
-  {# {{ properties.owner.assignedTo|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com"}') }} #}
+  {# if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# {{ properties.owner.assignedTo|soar_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com"}') }} #}
   "owner_id": "{{ properties.owner.assignedTo }}",
 ```
 
@@ -611,16 +601,16 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 {
   {# JINJA template for creating a new SOAR incident from a Sentinel incident. #}
   "name": "Sentinel Incident {{ properties.incidentNumber|e }} - {{ properties.title|replace('"', '\\"') }}",
-  "discovered_date": {{ properties.createdTimeUtc|resilient_datetimeformat }},
-  "start_date": {% if properties.firstActivityTimeUtc %} {{ properties.firstActivityTimeUtc|resilient_datetimeformat }} {% else %} {{ properties.createdTimeUtc|resilient_datetimeformat }} {%endif %},
+  "discovered_date": {{ properties.createdTimeUtc|soar_datetimeformat }},
+  "start_date": {% if properties.firstActivityTimeUtc %} {{ properties.firstActivityTimeUtc|soar_datetimeformat }} {% else %} {{ properties.createdTimeUtc|soar_datetimeformat }} {%endif %},
   "description": {
     "format": "text",
     "content": "{{ properties.description|replace('"', '\\"') }}"
   },
-  {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
-  {# "owner_id": "{{ properties.owner.userPrincipalName|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
-  "plan_status": "{{ properties.status|resilient_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
-  "severity_code": "{{ properties.severity|resilient_substitute('{"Informational": "Low"}') }}",
+  {# if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ properties.owner.userPrincipalName|soar_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ properties.status|soar_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
+  "severity_code": "{{ properties.severity|soar_substitute('{"Informational": "Low"}') }}",
   "properties": {
     "sentinel_incident_number": "{{ name|e }}",
     "sentinel_incident_id": "{{ properties.incidentNumber }}",
@@ -632,7 +622,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
     "sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}",
     "sentinel_incident_labels": "{{ properties.labels|join(' ') }}",
     "sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}",
-    "sentinel_profile": "{{ resilient_profile }}"
+    "sentinel_profile": "{{ soar_profile }}"
   }
   {% if properties.status == "Closed" %}
   ,
@@ -650,10 +640,10 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
     "format": "text",
     "content": "{{ properties.description|replace('"', '\\"') }}"
   },
-  {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
-  {# "owner_id": "{{ properties.owner.userPrincipalName|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
-  "plan_status": "{{ properties.status|resilient_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
-  "severity_code": "{{ properties.severity|resilient_substitute('{"Informational": "Low"}') }}",
+  {# if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ properties.owner.userPrincipalName|soar_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ properties.status|soar_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
+  "severity_code": "{{ properties.severity|soar_substitute('{"Informational": "Low"}') }}",
   "properties": {
     "sentinel_incident_status": "{{ properties.status }}",
     "sentinel_incident_classification": "{{ properties.classification }}",
@@ -690,13 +680,13 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 {
     {# JINJA template for closing a new Sentinel incident from a SOAR incident. #}
     "properties": {
-        "title": "{{ name|resilient_splitpart(1)}}",
-        "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
+        "title": "{{ name|soar_splitpart(1)}}",
+        "severity": "{{ severity_code|string|soar_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
         "status": "Closed",
-        "classification": "{{ resolution_id|string|resilient_substitute('{"7": "Undetermined", "8": "Undetermined", "9": "FalsePositive", "10": "TruePositive", "DEFAULT": "Undetermined"}') }}",
+        "classification": "{{ resolution_id|string|soar_substitute('{"7": "Undetermined", "8": "Undetermined", "9": "FalsePositive", "10": "TruePositive", "DEFAULT": "Undetermined"}') }}",
         "classificationComment": "{{ resolution_summary|striptags|safe }}",
         {# modify as necessary #}
-        "classificationReason": "{{ resolution_id|string|resilient_substitute('{"7": "", "8": "", "9": "InaccurateData", "10": "SuspiciousActivity", "DEFAULT": ""}') }}"
+        "classificationReason": "{{ resolution_id|string|soar_substitute('{"7": "", "8": "", "9": "InaccurateData", "10": "SuspiciousActivity", "DEFAULT": ""}') }}"
     }
 }
 ```
@@ -706,8 +696,8 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 {
     {# JINJA template for updating a new Sentinel incident from a SOAR incident. #}
     "properties": {
-        "title": "{{ name|resilient_splitpart(1)}}",
-        "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
+        "title": "{{ name|soar_splitpart(1)}}",
+        "severity": "{{ severity_code|string|soar_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
         "status": "{{ properties.sentinel_incident_status }}",
         "classification": "{{ properties.sentinel_incident_classification }}",
         "classificationComment": "{{ properties.sentinel_incident_classification_comment|safe }}",

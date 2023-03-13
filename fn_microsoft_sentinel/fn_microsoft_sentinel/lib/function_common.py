@@ -22,11 +22,11 @@ class SentinelProfiles():
         self.profiles = self._load_profiles(opts, options)
 
     def _load_profiles(self, opts, options):
-        """load the app.config profiles for sentinel. Each profile represents a different workspace
-                to pull incidents from.
-
-        Raises:
-            KeyError: error when a named profile is not found in app.config
+        """
+        Load the app.config profiles for sentinel. Each profile represents a different workspace
+        to pull incidents from.
+        :raises KeyError: error when a named profile is not found in app.config
+        :return: Dictionary of profiles
         """
         sentinel_profiles = options["sentinel_profiles"]
 
@@ -47,16 +47,11 @@ class SentinelProfiles():
         return profiles
 
     def get_profile(self, profile_name):
-        """collect the settings for a Sentinel profile: subscription, resource group, workspace
-
-        Args:
-            profile_name ([str]): name of profile in app.config
-
-        Raises:
-            KeyError: profile not found
-
-        Returns:
-            [dict]: settings for a sentinel incident environment
+        """
+        Collect the settings for a Sentinel profile: subscription, resource group, workspace
+        :param profile_name [str]: name of profile in app.config
+        :raises KeyError: profile not found
+        :return [dict]: settings for a sentinel incident environment
         """
         if profile_name not in self.profiles:
             raise KeyError(f"Unable to find profile: {profile_name}")
