@@ -1,3 +1,59 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "6c98642b-7248-4b4d-994e-32443f100e78_8a2fe554-9e4e-8298-cd70-4159a5494b7e": [
+      {
+        "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/fca87582-43c0-5af8-fdec-dfda212ee53c",
+        "name": "fca87582-43c0-5af8-fdec-dfda212ee53c",
+        "type": "Microsoft.SecurityInsights/entities",
+        "kind": "Ip",
+        "properties": {
+          "address": "1.1.1.1",
+          "friendlyName": "1.1.1.1"
+        },
+        "soar_artifact_type": "IP Address",
+        "resilient_artifact_value": "1.1.1.1"
+      },
+      {
+        "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/fd328c82-310e-6bb5-1d3b-f1c635dd5f20",
+        "name": "fd328c82-310e-6bb5-1d3b-f1c635dd5f20",
+        "type": "Microsoft.SecurityInsights/entities",
+        "kind": "AzureResource",
+        "properties": {
+          "resourceId": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder",
+          "subscriptionId": "a4b7e24a-xxxx-4d84-xxxx-89e99b336784",
+          "friendlyName": "logforwarder"
+        },
+        "soar_artifact_type": "String",
+        "resilient_artifact_value": "logforwarder"
+      },
+      {
+        "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/a41bc108-5e1e-7f62-4294-7412e5319c81",
+        "name": "a41bc108-5e1e-7f62-4294-7412e5319c81",
+        "type": "Microsoft.SecurityInsights/entities",
+        "kind": "Host",
+        "properties": {
+          "azureID": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder",
+          "friendlyName": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder"
+        },
+        "soar_artifact_type": "System Name",
+        "resilient_artifact_value": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder"
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
+    "sentinel_profile": "profile_a"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 2254,
+    "timestamp": "2023-03-13 13:26:31"
+  }
 }

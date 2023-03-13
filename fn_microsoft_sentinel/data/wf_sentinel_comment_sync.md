@@ -12,7 +12,7 @@
 `sentinel_add_incident_comment`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_microsoft_sentinel`

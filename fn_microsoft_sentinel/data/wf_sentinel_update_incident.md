@@ -12,7 +12,7 @@
 `sentinel_update_incident`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_microsoft_sentinel`

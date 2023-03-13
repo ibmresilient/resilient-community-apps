@@ -13,8 +13,8 @@ from resilient_lib import validate_fields, make_payload_from_template
 FN_NAME = "sentinel_update_incident"
 
 class FunctionComponent(AppFunctionComponent):
-    """This component handles initial population of a feed and ongoing
-    modifications from the associated queue."""
+    """ This component handles initial population of a feed and ongoing
+    modifications from the associated queue. """
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)

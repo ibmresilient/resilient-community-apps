@@ -29,10 +29,7 @@ def selftest_function(opts):
         app_configs
     )
 
-    sentinel_api = SentinelAPI(app_configs['tenant_id'],
-                               app_configs['client_id'],
-                               app_configs['app_secret'],
-                               opts, app_configs)
+    sentinel_api = SentinelAPI(opts, app_configs)
 
     reason = None
     try:

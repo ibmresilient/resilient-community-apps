@@ -26,27 +26,24 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 ### Post-Processing Script
 ```python
 from java.util import Date
-
 current_dt = Date().getTime()
 
 if results.success:
   for alert in results.content.keys():
-      for entity in results.content[alert]:
-        row = incident.addRow("sentinel_incident_entities")
-        row['report_date'] = current_dt
-        row['alert_id'] = alert
-        row['entity_id'] = entity['name']
-        row['entity_type'] = entity['kind']
-        row['entity_value'] = entity['properties']['friendlyName']
-        row['entity_properties'] = "<br>".join(["<b>{}</b>: {}".format(k, v) for k, v in entity['properties'].items()])
-        
-        # create an artifact
-        desc = ["created from Sentinel entity: {}".format(entity['name'])]
-        if entity['properties'].get('azureID'):
-          desc.append(entity['properties']['azureID'])
-        if entity['resilient_artifact_type']:
-            incident.addArtifact(entity['resilient_artifact_type'], entity['resilient_artifact_value'], "\n".join(desc))
-
+    for entity in results.content[alert]:
+      row = incident.addRow("sentinel_incident_entities")
+      row['report_date'] = current_dt
+      row['alert_id'] = alert
+      row['entity_id'] = entity['name']
+      row['entity_type'] = entity['kind']
+      row['entity_value'] = entity['properties']['friendlyName']
+      row['entity_properties'] = "<br>".join(["<b>{}</b>: {}".format(k, v) for k, v in entity['properties'].items()])
+      # Create an artifact
+      desc = ["created from Sentinel entity: {}".format(entity['name'])]
+      if entity['properties'].get('azureID'):
+        desc.append(entity['properties']['azureID'])
+      if entity['resilient_artifact_type']:
+          incident.addArtifact(entity['resilient_artifact_type'], entity['resilient_artifact_value'], "\n".join(desc))
 ```
 
 ---

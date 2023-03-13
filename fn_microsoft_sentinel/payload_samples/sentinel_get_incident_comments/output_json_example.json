@@ -1,3 +1,38 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "value": [
+      {
+        "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/6c98642b-7248-4b4d-994e-32443f100e78/Comments/cdd41cd8-7d4e-4b7a-976f-f409938fe791",
+        "name": "cdd41cd8-7d4e-4b7a-976f-f409938fe791",
+        "type": "Microsoft.SecurityInsights/Incidents/Comments",
+        "properties": {
+          "message": "bye",
+          "createdTimeUtc": "2023-03-13T17:19:47.2791036Z",
+          "author": {
+            "objectId": "43dd7b73-6a70-475e-88c3-609a9f30b514",
+            "email": "admin@example.com",
+            "name": "Admin",
+            "userPrincipalName": "admin@example.com"
+          }
+        }
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
+    "incident_id": 2178,
+    "sentinel_profile": "profile_a"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 1426,
+    "timestamp": "2023-03-13 13:19:53"
+  }
 }

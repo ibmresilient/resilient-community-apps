@@ -1,3 +1,72 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "value": [
+      {
+        "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Entities/8a2fe554-9e4e-8298-cd70-4159a5494b7e",
+        "name": "8a2fe554-9e4e-8298-cd70-4159a5494b7e",
+        "type": "Microsoft.SecurityInsights/Entities",
+        "kind": "SecurityAlert",
+        "properties": {
+          "systemAlertId": "8a2fe554-9e4e-8298-cd70-4159a5494b7e",
+          "tactics": [
+            "PreAttack"
+          ],
+          "alertDisplayName": "Traffic detected from IP addresses recommended for blocking",
+          "description": "Defender for Cloud detected inbound traffic from IP addresses that are recommended to be blocked. This typically occurs when this IP address doesn't communicate regularly with this resource.\r\nAlternatively, the IP address has been flagged as malicious by Microsoft's threat intelligence sources.",
+          "remediationSteps": [
+            "{\"kind\":\"openBlade\",\"displayValue\":\"Enforce rule\",\"extension\":\"Microsoft_Azure_Security_R3\",\"detailBlade\":\"AdaptiveNetworkControlsResourceBlade\",\"detailBladeInputs\":\"protectedResourceId=/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder\"}"
+          ],
+          "confidenceLevel": "Unknown",
+          "severity": "Low",
+          "vendorName": "Microsoft",
+          "productName": "Azure Security Center",
+          "alertType": "Network_TrafficFromUnrecommendedIP",
+          "processingEndTime": "2023-03-12T20:52:01.0089039Z",
+          "status": "New",
+          "endTimeUtc": "2023-03-10T00:00:00Z",
+          "startTimeUtc": "2023-03-10T00:00:00Z",
+          "timeGenerated": "2023-03-12T20:52:26.5903077Z",
+          "compromisedEntity": "logforwarder",
+          "providerAlertId": "2517238943999999999_a8f8cc78-9d76-495e-b7b9-dd8fc53e4034",
+          "alertLink": "https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2517238943999999999_a8f8cc78-9d76-495e-b7b9-dd8fc53e4034/subscriptionId/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroup/demoassets/referencedFrom/alertDeepLink/location/centralus",
+          "resourceIdentifiers": [
+            {
+              "type": "AzureResource",
+              "resourceId": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder",
+              "subscriptionId": "a4b7e24a-xxxx-4d84-xxxx-89e99b336784"
+            },
+            {
+              "type": "LogAnalytics",
+              "workspaceId": "c6c712b0-dc3d-4408-945a-4bde1db6579b"
+            }
+          ],
+          "additionalData": {
+            "StoreAlertPublisher": "{\"Succeeded\":true,\"Reason\":null,\"PublishTime\":\"2023-03-12T20:52:03.3552179Z\"}",
+            "AlertMessageEnqueueTime": "2023-03-12T20:52:26.593Z",
+            "OriginalProductName": "Azure Security Center",
+            "OriginalProductComponentName": null,
+            "effectiveSubscriptionId": "a4b7e24a-xxxx-4d84-xxxx-89e99b336784"
+          },
+          "friendlyName": "Traffic detected from IP addresses recommended for blocking",
+          "timeGenerated_ms": 1678654346000
+        }
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
+    "sentinel_profile": "profile_a"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 1944,
+    "timestamp": "2023-03-13 13:05:04"
+  }
 }

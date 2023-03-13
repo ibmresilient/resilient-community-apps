@@ -12,7 +12,7 @@
 `sentinel_get_incident_comments`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_microsoft_sentinel`
@@ -29,11 +29,6 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 if results.success:
   for comment in results.content['value']:
     incident.addNote(helper.createRichText(comment['properties']['message']))
-      
-    # remember the comment in our datatable
-    row = incident.addRow('sentinel_comment_ids')
-    row['comment_id'] = comment['name']
-
 ```
 
 ---

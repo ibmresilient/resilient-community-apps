@@ -33,7 +33,7 @@ if results['success']:
   for alert in results['content']['value']:
     properties = alert.get('properties', {})
     row = incident.addRow("sentinel_incident_alerts")
-    row['report_date'] = current_dt 
+    row['report_date'] = current_dt
     row['alert_date'] = properties['timeGenerated_ms']
     row['alert_name'] = properties.get('alertDisplayName')
     row['alert_description'] = properties.get('description')
@@ -49,7 +49,6 @@ if results['success']:
         row['alert_url'] = helper.createRichText("<a target='blank' href='{}'>Alert Link</a>".format(properties['alertLink']))
     else:
         row['alert_url'] = helper.createRichText("<a target='blank' href='https://security.microsoft.com/alerts/{}'>Alert Link</a>".format(properties.get('systemAlertId')))
-
 ```
 
 ---
