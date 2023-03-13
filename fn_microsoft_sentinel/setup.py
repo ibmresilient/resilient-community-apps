@@ -5,13 +5,11 @@ from setuptools import setup, find_packages
 import glob
 import ntpath
 
-
 def get_module_name(module_path):
     """
     Return the module name of the module path
     """
     return ntpath.split(module_path)[1].split(".")[0]
-
 
 def snake_to_camel(word):
     """
@@ -19,28 +17,23 @@ def snake_to_camel(word):
     """
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
-def get_function_list():
-    return ["{}FunctionComponent = fn_microsoft_sentinel.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_microsoft_sentinel/components/funct_[a-zA-Z]*.py")]
-
 setup(
     name="fn_microsoft_sentinel",
     display_name="Microsoft Sentinel",
-    version="1.0.4",
+    version="1.1.0",
     license="MIT",
-    author="IBM Resilient",
-    author_email="",
+    author="IBM QRadar SOAR",
     url="https://github.com/ibmresilient/fn_microsoft_sentinel",
-    description="Resilient Circuits Components for 'fn_microsoft_sentinel'",
+    description="SOAR integration for 'fn_microsoft_sentinel'",
     long_description="""This app allows bi-directional synchronization between IBM SOAR and Microsoft Sentinel.
     <br>Key features:
-    <br>* Escalate Microsoft Sentinel Incidents to IBM Resilient SOAR Cases
+    <br>* Escalate Microsoft Sentinel Incidents to IBM SOAR Cases
     <br>* Automatically keep Incidents and Cases synchronized
     <br>* Retrieve Sentinel Incident alert entities as artifacts
     <br>* Sync comments to and from Sentinel Incidents
     <br>* Support editable templates for field mapping between the two systems""",
     install_requires=[
-        "resilient_circuits>=43.0.0",
-        "resilient-lib>=43.0.0",
+        "resilient_circuits>=46.0.0",
         "jinja2",
         "simplejson"
     ],
@@ -53,7 +46,7 @@ setup(
     entry_points={
         "resilient.circuits.components": [
                 # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-                "{}FunctionComponent = fn_microsoft_sentinel.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_microsoft_sentinel/components/f[a-zA-Z]*.py")
+                "{}FunctionComponent = fn_microsoft_sentinel.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_microsoft_sentinel/components/funct_[a-zA-Z]*.py")
             ]+
             [ "PollerComponent = fn_microsoft_sentinel.components.sentinel_poller:SentinelPollerComponent" ],
         "resilient.circuits.configsection": ["gen_config = fn_microsoft_sentinel.util.config:config_section_data"],

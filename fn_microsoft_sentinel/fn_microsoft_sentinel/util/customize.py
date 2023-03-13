@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v48.0.4034
 
 """Generate the Resilient customizations required for fn_microsoft_sentinel"""
 
@@ -29,7 +30,8 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [u"sentinel_incident_alerts", u"sentinel_incident_entities"],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": []
     }
 
 
@@ -38,7 +40,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 39.0.6328
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
