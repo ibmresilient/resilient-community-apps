@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -13,7 +13,7 @@ from fn_microsoft_sentinel.lib.constants import FROM_SENTINEL_COMMENT_HDR, SENT_
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'sentinel_add_incident_comment''"""
+    """Component that implements SOAR function 'sentinel_add_incident_comment''"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -49,10 +49,7 @@ class FunctionComponent(ResilientComponent):
             log.info("sentinel_incident_id: %s", sentinel_incident_id)
             log.info("sentinel_incident_comment: %s", sentinel_incident_comment)
 
-            sentinel_api = SentinelAPI(self.options['tenant_id'],
-                                       self.options['client_id'],
-                                       self.options['app_secret'],
-                                       self.opts, self.options)
+            sentinel_api = SentinelAPI(self.opts, self.options)
 
             # do not resync comments originating from Sentinel
             if FROM_SENTINEL_COMMENT_HDR in sentinel_incident_comment or SENT_TO_SENTINEL_HDR in sentinel_incident_comment:

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Generated with resilient-sdk v48.0.4034
 
-"""Generate the Resilient customizations required for fn_microsoft_sentinel"""
+"""Generate the SOAR customizations required for fn_microsoft_sentinel"""
 
 import base64
 import os

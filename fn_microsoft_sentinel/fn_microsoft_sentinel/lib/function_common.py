@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 from resilient_lib import validate_fields
+from os import path
 
-DEFAULT_SENTINEL_UPDATE_INCIDENT_TEMPLATE = "data/sentinel_update_incident_template.jinja"
-DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE = "data/sentinel_close_incident_template.jinja"
+# Directory of default templates
+TEMPLATE_DIR = path.join(path.dirname(__file__), "data")
 
-DEFAULT_INCIDENT_CREATION_TEMPLATE = "data/incident_creation_template.jinja"
-DEFAULT_INCIDENT_UPDATE_TEMPLATE = "data/incident_update_template.jinja"
-DEFAULT_INCIDENT_CLOSE_TEMPLATE = "data/incident_close_template.jinja"
+DEFAULT_SENTINEL_UPDATE_INCIDENT_TEMPLATE = path.join(TEMPLATE_DIR, "sentinel_update_incident_template.jinja")
+DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE = path.join(TEMPLATE_DIR, "sentinel_close_incident_template.jinja")
+DEFAULT_INCIDENT_CREATION_TEMPLATE = path.join(TEMPLATE_DIR, "incident_creation_template.jinja")
+DEFAULT_INCIDENT_UPDATE_TEMPLATE = path.join(TEMPLATE_DIR, "incident_update_template.jinja")
+DEFAULT_INCIDENT_CLOSE_TEMPLATE = path.join(TEMPLATE_DIR, "incident_close_template.jinja")
 
 REQUIRED_PROFILE_FIELDS = ["subscription_id", "workspace_name", "resource_groupname"]
 
@@ -23,7 +26,7 @@ class SentinelProfiles():
                 to pull incidents from.
 
         Raises:
-            KeyError: [error when a named profile is not found in app.config]
+            KeyError: error when a named profile is not found in app.config
         """
         sentinel_profiles = options["sentinel_profiles"]
 
@@ -31,10 +34,10 @@ class SentinelProfiles():
         profiles = {}
         profile_list = [item.strip() for item in sentinel_profiles.split(",")]
         for profile in profile_list:
-            profile_name = u"{}:{}".format(PACKAGE_NAME, profile)
+            profile_name = f"{PACKAGE_NAME}:{profile}"
             profile_data = opts.get(profile_name)
             if not profile_data:
-                raise KeyError(u"Unable to find Sentinel profile: {}".format(profile_name))
+                raise KeyError(f"Unable to find Sentinel profile: {profile_name}")
 
             # check each profile for the correct settings
             validate_fields(REQUIRED_PROFILE_FIELDS, profile_data)
@@ -47,16 +50,16 @@ class SentinelProfiles():
         """collect the settings for a Sentinel profile: subscription, resource group, workspace
 
         Args:
-            profile_name ([str]): [name of profile in app.config]
+            profile_name ([str]): name of profile in app.config
 
         Raises:
-            KeyError: [profile not found]
+            KeyError: profile not found
 
         Returns:
-            [dict]: [settings for a sentinel incident environment]
+            [dict]: settings for a sentinel incident environment
         """
-        if not profile_name in self.profiles:
-            raise KeyError(u"Unable to find profile: {}".format(profile_name))
+        if profile_name not in self.profiles:
+            raise KeyError(f"Unable to find profile: {profile_name}")
 
         return self.profiles[profile_name]
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -11,7 +11,7 @@ from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'sentinel_get_incident_alerts''"""
+    """Component that implements SOAR function 'sentinel_get_incident_alerts''"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -46,10 +46,7 @@ class FunctionComponent(ResilientComponent):
             log.info("sentinel_incident_id: %s", sentinel_incident_id)
             log.info("sentinel_profile: %s", sentinel_profile)
 
-            sentinel_api = SentinelAPI(self.options['tenant_id'],
-                                       self.options['client_id'],
-                                       self.options['app_secret'],
-                                       self.opts, self.options)
+            sentinel_api = SentinelAPI(self.opts, self.options)
 
             profile_data = self.sentinel_profiles.get_profile(sentinel_profile)
             # read all alerts associated with a Sentinel incident

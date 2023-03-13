@@ -1,5 +1,5 @@
 {
-    {# JINJA template for closing a new Sentinel incident from a Resilient incident. #}
+    {# JINJA template for closing a new Sentinel incident from a SOAR incident. #}
     "properties": {
         "title": "{{ name|resilient_splitpart(1)}}",
         "severity": "{{ severity_code|string|resilient_substitute('{"4":"Low", "5":"Medium", "6":"High", "55":"Low", "56":"Medium", "57":"High"}') }}",

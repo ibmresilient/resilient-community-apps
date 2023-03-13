@@ -5,7 +5,7 @@
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [Resilient platform](#resilient-platform)
+  - [SOAR platform](#SOAR-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
@@ -47,7 +47,7 @@ When upgrading from a previous version to v1.0.3, manually update your app.confi
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_microsoft_sentinel'**
+**SOAR integration for 'fn_microsoft_sentinel'**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
@@ -58,7 +58,7 @@ Sentinel entities are exposed as artifacts for further investigation.
 <!--
   List the Key Features of the Integration
 -->
-* Escalate Microsoft Sentinel Incidents to IBM Resilient SOAR Cases
+* Escalate Microsoft Sentinel Incidents to IBM SOAR Cases
 * Automatically keep Incidents and Cases synchronized
 * Retrieve Sentinel Incident alert entities as artifacts
 * Sync comments to and from Sentinel Incidents
@@ -70,19 +70,19 @@ Sentinel entities are exposed as artifacts for further investigation.
 <!--
   List any Requirements
 -->
-This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 
-### Resilient platform
-The Resilient platform supports two app deployment mechanisms, App Host and integration server.
+### SOAR platform
+The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
-If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `39.0`.
+If deploying to a SOAR platform with an App Host, the requirements are:
+* SOAR platform >= `46.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `39.0`.
+If deploying to a SOAR platform with an integration server, the requirements are:
+* SOAR platform >= `46.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=37.0.0`.
+* Integration server is running `resilient_circuits>=46.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -91,16 +91,16 @@ If deploying to a Resilient platform with an integration server, the requirement
   | Incident | Read, Edit, Create, Owner, Status |
   | Incident Notes | Edit |
 
-The following Resilient platform guides provide additional information:
+The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.5.
+* IBM Cloud Pak for Security >= 1.6.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -114,11 +114,10 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.6 is supported.
+Python 3.6 and greater are supported.
 Additional package dependencies may exist for each of these packages:
 * jinja2
-* resilient-lib>=37.0.0
-* resilient_circuits>=37.0.0
+* resilient_circuits>=46.0.0
 * simplejson
 
 ---
@@ -148,7 +147,7 @@ Several steps are necessary to enable API access to Sentinel. Below is a brief l
 ## Installation
 
 ### Install
-* To install or uninstall an App or Integration on the _Resilient platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
@@ -173,13 +172,13 @@ For each profile:
 | **subscription_id** | Yes | `aaa-bbb-fff` | *subscription_id for incident access * |
 | **workspace_name** | Yes | `` | *workspace name for incident access.* |
 | **resource_groupname** | Yes | `` | *resource group for incident access.* |
-| **new_incident_filters** | Yes | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *Set of filters to apply when escalating incidents to Resilient SOAR. Incidents not matching the criteria are not synchronized. In this example, both a match of status and severity would be required. * |
+| **new_incident_filters** | Yes | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *Set of filters to apply when escalating incidents to SOAR SOAR. Incidents not matching the criteria are not synchronized. In this example, both a match of status and severity would be required. * |
 | **max_alerts** | 10 | *limit the number of alerts per sentinel incident to the first n alerts or leave blank for all alerts* |
-| **create_incident_template** | /var/rescircuits/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
-| **update_incident_template** | /var/rescircuits/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. |
-| **close_incident_template** | /var/rescircuits/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an Resilient incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
-| **sentinel_update_incident_template** | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for updating a sentinel incident when the Resilient SOAR incident is updated |
-| **sentinel_close_incident_template** | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for closing a sentinel incident when the Resilient SOAR incident is closed |
+| **create_incident_template** | /var/rescircuits/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. |
+| **update_incident_template** | /var/rescircuits/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. |
+| **close_incident_template** | /var/rescircuits/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
+| **sentinel_update_incident_template** | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for updating a sentinel incident when the SOAR incident is updated |
+| **sentinel_close_incident_template** | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for closing a sentinel incident when the SOAR incident is closed |
 
 See the section below for examples of the templates.
 
@@ -301,7 +300,7 @@ if results.success:
 ---
 ## Function - Sentinel Add Incident Comment
 Create a comment for a given Sentinel incident. This is used with an rule to automatically sync
-Resilient Comments with Sentinel.
+SOAR Comments with Sentinel.
 
 <details><summary>Inputs:</summary>
 <p>
@@ -494,7 +493,7 @@ if results.success:
 
 ---
 ## Function - Sentinel Update Incident
-Update / Close a Sentinel incident based on Sentinel field changes in the Resilient Incident
+Update / Close a Sentinel incident based on Sentinel field changes in the SOAR Incident
 
 <details><summary>Inputs:</summary>
 <p>
@@ -513,9 +512,6 @@ Update / Close a Sentinel incident based on Sentinel field changes in the Resili
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```
 
@@ -593,7 +589,7 @@ sentinel_incident_entities
 ---
 
 ## Custom Templates
-Below are examples of templates for creating, updating, and closing Resilient incidents. Customize these templates and refer to them in our app.config file.
+Below are examples of templates for creating, updating, and closing SOAR incidents. Customize these templates and refer to them in our app.config file.
 
 Each template should be reviewed for correctness in your enterprise.
 For instance, closing a SOAR incident may include additional custom fields which the default template
@@ -613,7 +609,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 ### incident_create_template.jinja
 ```
 {
-  {# JINJA template for creating a new Resilient incident from a Sentinel incident. #}
+  {# JINJA template for creating a new SOAR incident from a Sentinel incident. #}
   "name": "Sentinel Incident {{ properties.incidentNumber|e }} - {{ properties.title|replace('"', '\\"') }}",
   "discovered_date": {{ properties.createdTimeUtc|resilient_datetimeformat }},
   "start_date": {% if properties.firstActivityTimeUtc %} {{ properties.firstActivityTimeUtc|resilient_datetimeformat }} {% else %} {{ properties.createdTimeUtc|resilient_datetimeformat }} {%endif %},
@@ -649,7 +645,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 ### incident_update_template.jinja
 ```
 {
-  {# JINJA template for updating a new Resilient incident from a Sentinel incident. #}
+  {# JINJA template for updating a new SOAR incident from a Sentinel incident. #}
   "description": {
     "format": "text",
     "content": "{{ properties.description|replace('"', '\\"') }}"
@@ -673,7 +669,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 ### incident_close_template.jinja
 ```
 {
-  {# JINJA template for closing a new Resilient incident from a Sentinel incident. #}
+  {# JINJA template for closing a new SOAR incident from a Sentinel incident. #}
   "plan_status": "C",
   "resolution_id": "Resolved",
   "resolution_summary": "Closed by Sentinel",
@@ -692,7 +688,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 ### sentinel_close_incident_template.jinja
 ```
 {
-    {# JINJA template for closing a new Sentinel incident from a Resilient incident. #}
+    {# JINJA template for closing a new Sentinel incident from a SOAR incident. #}
     "properties": {
         "title": "{{ name|resilient_splitpart(1)}}",
         "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
@@ -708,7 +704,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 ### sentinel_update_incident_template.jinja
 ```
 {
-    {# JINJA template for updating a new Sentinel incident from a Resilient incident. #}
+    {# JINJA template for updating a new Sentinel incident from a SOAR incident. #}
     "properties": {
         "title": "{{ name|resilient_splitpart(1)}}",
         "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",

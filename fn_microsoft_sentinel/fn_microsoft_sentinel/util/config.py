@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-
 """Generate a default configuration-file section for fn_microsoft_sentinel"""
-
 
 def config_section_data():
     """
@@ -9,7 +7,7 @@ def config_section_data():
     for fn_microsoft_sentinel when called by `resilient-circuits config [-c|-u]`
     """
 
-    config_data = u"""[fn_microsoft_sentinel]
+    return u"""[fn_microsoft_sentinel]
 azure_url=https://management.azure.com
 # enter your own tenant_id, client_id (app_id) and app_secret
 tenant_id=aaa-bbb-ccc
@@ -42,11 +40,10 @@ max_alerts=
 #  if more than one field is specified, all fields need to pass
 #   format: "field1": "value", "field2": ["list_value1", "list_value2"]
 new_incident_filters="status": ["New", "Active"],"severity": ["High", "Medium","Low"]
-# custom templates to replace the default map of sentinel fields to resilient incident fields
+# custom templates to replace the default map of sentinel fields to SOAR incident fields
 #create_incident_template=
 #update_incident_template=
 #close_incident_template=
 #update_sentinel_incident_template=
 #close_sentinel_incident_template=
 """
-    return config_data
