@@ -215,6 +215,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
 -->
 * Trusteer account 
 * Trusteer API Token
+* Trusteer client authorization certificate and key files
 
 ---
 
