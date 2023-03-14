@@ -5,7 +5,7 @@
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [SOAR platform](#SOAR-platform)
+  - [SOAR platform](#soar-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
@@ -14,21 +14,21 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
-- [Function - Sentinel Get Incident Entities](#function---sentinel-get-incident-entities)
 - [Function - Sentinel Add Incident Comment](#function---sentinel-add-incident-comment)
+- [Function - Sentinel Get Incident Alerts](#function---sentinel-get-incident-alerts)
 - [Function - Sentinel Get Incident Comments](#function---sentinel-get-incident-comments)
+- [Function - Sentinel Get Incident Entities](#function---sentinel-get-incident-entities)
 - [Function - Sentinel Update Incident](#function---sentinel-update-incident)
-- [Data Table - Sentinel Comment IDs](#data-table---sentinel-comment-ids)
+- [Data Table - Sentinel Incident Alerts](#data-table---sentinel-incident-alerts)
 - [Data Table - Sentinel Incident Entities](#data-table---sentinel-incident-entities)
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
 - [Custom Templates](#custom-templates)
 - [Troubleshooting & Support](#troubleshooting--support)
+
 ---
 
 ## Release Notes
-| Version | Date | Notes |
-| ------- | ---- | ----- |
 | 1.1.0 | 3/2023 | Update function 'Sentinel Update Incident' |
 | 1.0.4 | 6/2022 | Several template fixes for tags (labels) and severity |
 | 1.0.3 | 4/2022 | Support for app.config verify and cert parameters |
@@ -60,20 +60,20 @@ Sentinel entities are exposed as artifacts for further investigation.
 ---
 
 ## Requirements
-This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
+This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, App Host and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
-If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `46.0`.
+If deploying to a SOAR platform with an Edge Gateway, the requirements are:
+* SOAR platform >= `45.0.7899`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0`.
+* SOAR platform >= `45.0.7899`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=46.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions:
+* If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -81,30 +81,30 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Incident | Read, Edit, Create, Owner, Status |
   | Incident Notes | Edit |
 
-The following SOAR platform guides provide additional information:
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
+The following SOAR platform guides provide additional information: 
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.9.
-* Cloud Pak is configured with an App Host.
+* IBM Cloud Pak for Security >= `1.8`.
+* Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information:
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
-* _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security Knowledge Center table of contents, select Case Management and Orchestration & Automation > **System administrator**.
+The following Cloud Pak guides provide additional information: 
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
+* _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
-These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific Knowledge Center page, select Case Management and Orchestration & Automation.
+These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.6 and greater are supported.
+Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * jinja2
 * resilient_circuits>=46.0.0
@@ -137,7 +137,7 @@ Several steps are necessary to enable API access to Sentinel. Below is a brief l
 ## Installation
 
 ### Install
-* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
@@ -172,25 +172,8 @@ For each profile:
 
 See the section below for examples of the templates.
 
-### Automatic Rules
-Several rules are configurated to automatically synchronize a SOAR incident with the Sentinel incident. Those automatic rules are:
-
-| Rule Name | Object | Behavior |
-| --------- | ------ | ------------------ |
-| Sentinel Comment Sync | note | Synchronize SOAR notes with Sentinel incidents |
-| Sentinel Incident Sync | incident | Get Sentinel incident alerts and entities when the SOAR incident is created |
-| Sentinel Update Incident | incident | Synchronize SOAR incident changes (changes in status, severity, etc) with Sentinel |
-
-These rules are disabled when the app is first installed. If you wish to use this app to automatically synchronize with Sentinel, enable each rule using the Enable slider found on the Rules tab in Customization Settings.
-
-![screenshot: subscription role](./doc/screenshots/automatic_rules.png)
 ### Custom Layouts
-<!--
-  Use this section to provide guidance on where the user should add any custom fields and data tables.
-  You may wish to recommend a new incident tab.
-  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
--->
-* Import the Custom Fields and Data Tables like the screenshot below:
+* Import the Data Tables and Custom Fields like the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
@@ -200,94 +183,6 @@ These rules are disabled when the app is first installed. If you wish to use thi
 
  ![screenshot: function-list ](./doc/screenshots/function_list.png)
 
-## Function - Sentinel Get Incident Entities
-Get the Entities associated with a Sentinel Incident
-
- ![screenshot: fn-sentinel-get-incident-entities ](./doc/screenshots/fn-sentinel-get-incident-entities.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `sentinel_incident_id` | `text` | Yes | `-` | This is information is captured in a custom incident field. |
-| `sentinel_profile` | `text` | Yes | `-` | This is information is captured in a custom incident field. |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-  "value": [
-      {
-          "id": "/subscriptions/##SUBSCRIPTIONID##/resourceGroups/jn-sentineltest/providers/Microsoft.OperationalInsights/workspaces/cybtgmu6sxcvk/providers/Microsoft.SecurityInsights/Incidents/ad7cb03c-37c8-4f98-a34a-c76951b8683e/relations/ad7cb03c-37c8-4f98-a34a-c76951b8683e_fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-          "name": "ad7cb03c-37c8-4f98-a34a-c76951b8683e_fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-          "type": "Microsoft.SecurityInsights/Incidents/relations",
-          "properties": {
-              "relatedResourceId": "/subscriptions/a7be6876-1523-4cd2-b50c-75c5d041da61/resourceGroups/jn-sentineltest/providers/Microsoft.OperationalInsights/workspaces/cybtgmu6sxcvk/providers/Microsoft.SecurityInsights/entities/fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-              "relatedResourceName": "fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-              "relatedResourceType": "Microsoft.SecurityInsights/entities",
-              "relatedResourceKind": "SecurityAlert"
-          }
-      },
-      {
-          "id": "/subscriptions/##SUBSCRIPTIONID##/resourceGroups/jn-sentineltest/providers/Microsoft.OperationalInsights/workspaces/cybtgmu6sxcvk/providers/Microsoft.SecurityInsights/Incidents/ad7cb03c-37c8-4f98-a34a-c76951b8683e/relations/ad7cb03c-37c8-4f98-a34a-c76951b8683e_fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-          "name": "ad7cb03c-37c8-4f98-a34a-c76951b8683e_fe3ca9f0-0765-b792-cd03-d3aa100571d9",
-          "type": "Microsoft.SecurityInsights/Incidents/relations",
-          "properties": {
-              "relatedResourceId": "/subscriptions/a7be6876-1523-4cd2-b50c-75c5d041da61/resourceGroups/jn-sentineltest/providers/Microsoft.OperationalInsights/workspaces/cybtgmu6sxcvk/providers/Microsoft.SecurityInsights/entities/fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-              "relatedResourceName": "fe3ca9f0-0765-b792-cd03-d3aa100571d8",
-              "relatedResourceType": "Microsoft.SecurityInsights/entities",
-              "relatedResourceKind": "SecurityAlert"
-          }
-      }
-  ]
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.sentinel_incident_id = incident.properties.sentinel_incident_id
-inputs.sentinel_profile = incident.properties.sentinel_profile
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-if results.success:
-  for alert in results.content.keys():
-      for entity in results.content[alert]:
-        row = incident.addRow("sentinel_incident_entities")
-        row['alert_id'] = alert
-        row['entity_id'] = entity['name']
-        row['entity_type'] = entity['kind']
-        row['entity_value'] = entity['properties']['friendlyName']
-        row['entity_properties'] = "<br>".join(["<b>{}</b>: {}".format(k, v) for k, v in entity['properties'].items()])
-
-        # create an artifact
-        desc = ["created from Sentinel entity: {}".format(entity['name'])]
-        if entity['properties'].get('azureID'):
-          desc.append(entity['properties']['azureID'])
-        incident.addArtifact(entity['resilient_artifact_type'][0], entity['resilient_artifact_type'][1], "\n".join(desc))
-
-```
-
-</p>
-</details>
-
----
 ## Function - Sentinel Add Incident Comment
 Create a comment for a given Sentinel incident. This is used with an rule to automatically sync
 SOAR Comments with Sentinel.
@@ -307,41 +202,42 @@ SOAR Comments with Sentinel.
 <details><summary>Outputs:</summary>
 <p>
 
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
 ```python
 results = {
-  'version': '1.0',
-  'success': True,
-  'reason': None,
-  'content': {
-    'id': '/subscriptions/567dddd6-80a5-42a7-b39a-b2ceba0533f4/resourceGroups/Resilient/providers/Microsoft.OperationalInsights/workspaces/Resiliient/providers/Microsoft.SecurityInsights/Incidents/4bb815ba-5b84-11eb-b782-8c8590577e7a/Comments/55b61c46-5c2c-11eb-8466-acde48001122',
-    'name': '55b61c46-5c2c-11eb-8466-acde48001122',
-    'etag': '"2400312b-0000-0100-0000-6009ec820000"',
-    'type': 'Microsoft.SecurityInsights/Incidents/Comments',
-    'properties': {
-      'message': 'test note',
-      'createdTimeUtc': '2021-01-21T21:05:06.0488305Z',
-      'author': {
-        'objectId': '20f58040-2a0f-4cfc-b18f-39f45f71434f',
-        'email': None,
-        'name': 'Comment created from external application - sentinelIncident',
-        'userPrincipalName': None
-      }
-    }
+  "content": {
+    "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/6c98642b-7248-4b4d-994e-32443f100e78/Comments/45cee46a-c1c3-11ed-89ef-fa89897771d7",
+    "name": "45cee46a-c1c3-11ed-89ef-fa89897771d7",
+    "properties": {
+      "author": {
+        "email": null,
+        "name": "Comment created from external application - MS Sentinel",
+        "objectId": "fb5360be-0c6a-4260-ae69-9b07dd735441",
+        "userPrincipalName": null
+      },
+      "createdTimeUtc": "2023-03-13T17:19:57.3027524Z",
+      "message": "From IBM SOAR:\nbye"
+    },
+    "type": "Microsoft.SecurityInsights/Incidents/Comments"
   },
-  'raw': '',
-  'inputs': {
-    'sentinel_incident_id': '4bb815ba-5b84-11eb-b782-8c8590577e7a',
-    'sentinel_profile': 'profile_a',
-    'sentinel_incident_comment': '<div class="rte"><div>test note</div></div>'
+  "inputs": {
+    "sentinel_incident_comment": "bye",
+    "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
+    "sentinel_profile": "profile_a"
   },
-  'metrics': {
-    'version': '1.0',
-    'package': 'fn-microsoft-sentinel',
-    'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
-    'execution_time_ms': 1000,
-    'timestamp': '2021-01-21 16:05:06'
-  }
+  "metrics": {
+    "execution_time_ms": 2222,
+    "host": "local",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "1.1.0",
+    "timestamp": "2023-03-13 13:19:57",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -353,7 +249,7 @@ results = {
 
 ```python
 inputs.sentinel_incident_comment = note.text.content
-inputs.sentinel_incident_id = incident.properties.sentinel_incident_id
+inputs.sentinel_incident_id = incident.properties.sentinel_incident_number
 inputs.sentinel_profile = incident.properties.sentinel_profile
 ```
 
@@ -364,26 +260,29 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 <p>
 
 ```python
+# Import Date
+from java.util import Date
+
 if results.success:
-  row = incident.addRow("sentinel_comment_ids")
-  row['comment_id'] = results.content['name']
+  # Get the current time
+  dt_now = Date()
+  note.text = u"<b>Sent to Sentinel at {0}</b><br>{1}".format(dt_now, unicode(note.text.content))
 ```
 
 </p>
 </details>
 
 ---
-## Function - Sentinel Get Incident Comments
-Get Comments from a Sentinel Incident. Comments are tracked to only sync new comments.
+## Function - Sentinel Get Incident Alerts
+Sentinel Get Incident Alerts
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `incident_id` | `number` | Yes | `-` |  This is information is captured from the Incident. |
-| `sentinel_incident_id` | `text` | Yes | `-` |  This is information is captured in a custom incident field. |
-| `sentinel_profile` | `text` | Yes | `-` |  This is information is captured in a custom incident field. |
+| `sentinel_incident_id` | `text` | No | `-` | - |
+| `sentinel_profile` | `text` | Yes | `-` | - |
 
 </p>
 </details>
@@ -391,61 +290,80 @@ Get Comments from a Sentinel Incident. Comments are tracked to only sync new com
 <details><summary>Outputs:</summary>
 <p>
 
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
 ```python
 results = {
-  'version': '1.0',
-  'success': True,
-  'reason': None,
-  'content': {
-    'value': [
+  "content": {
+    "value": [
       {
-        'id': '/subscriptions/567dddd6-80a5-42a7-b39a-b2ceba0533f4/resourceGroups/Resilient/providers/Microsoft.OperationalInsights/workspaces/Resiliient/providers/Microsoft.SecurityInsights/Incidents/a8e79e8a-5b80-11eb-b397-8c8590577e7a/Comments/b0720338-5c26-11eb-8e31-acde48001122',
-        'name': 'b0720338-5c26-11eb-8e31-acde48001122',
-        'etag': '"24001709-0000-0100-0000-6009e3090000"',
-        'type': 'Microsoft.SecurityInsights/Incidents/Comments',
-        'properties': {
-          'message': 'new comment  with  rich text. ',
-          'createdTimeUtc': '2021-01-21T20:24:41.2237053Z',
-          'author': {
-            'objectId': '20f58040-2a0f-4cfc-b18f-39f45f71434f',
-            'email': None,
-            'name': 'Comment created from external application - sentinelIncident',
-            'userPrincipalName': None
-          }
-        }
-      },
-      {
-        'id': '/subscriptions/567dddd6-80a5-42a7-b39a-b2ceba0533f4/resourceGroups/Resilient/providers/Microsoft.OperationalInsights/workspaces/Resiliient/providers/Microsoft.SecurityInsights/Incidents/a8e79e8a-5b80-11eb-b397-8c8590577e7a/Comments/b070610c-5c26-11eb-862b-acde48001122',
-        'name': 'b070610c-5c26-11eb-862b-acde48001122',
-        'etag': '"24001509-0000-0100-0000-6009e3090000"',
-        'type': 'Microsoft.SecurityInsights/Incidents/Comments',
-        'properties': {
-          'message': 'dddd',
-          'createdTimeUtc': '2021-01-21T20:24:41.1717981Z',
-          'author': {
-            'objectId': '20f58040-2a0f-4cfc-b18f-39f45f71434f',
-            'email': None,
-            'name': 'Comment created from external application - sentinelIncident',
-            'userPrincipalName': None
-          }
-        }
+        "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Entities/8a2fe554-9e4e-8298-cd70-4159a5494b7e",
+        "kind": "SecurityAlert",
+        "name": "8a2fe554-9e4e-8298-cd70-4159a5494b7e",
+        "properties": {
+          "additionalData": {
+            "AlertMessageEnqueueTime": "2023-03-12T20:52:26.593Z",
+            "OriginalProductComponentName": null,
+            "OriginalProductName": "Azure Security Center",
+            "StoreAlertPublisher": "{\"Succeeded\":true,\"Reason\":null,\"PublishTime\":\"2023-03-12T20:52:03.3552179Z\"}",
+            "effectiveSubscriptionId": "a4b7e24a-xxxx-4d84-xxxx-89e99b336784"
+          },
+          "alertDisplayName": "Traffic detected from IP addresses recommended for blocking",
+          "alertLink": "https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2517238943999999999_a8f8cc78-9d76-495e-b7b9-dd8fc53e4034/subscriptionId/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroup/demoassets/referencedFrom/alertDeepLink/location/centralus",
+          "alertType": "Network_TrafficFromUnrecommendedIP",
+          "compromisedEntity": "logforwarder",
+          "confidenceLevel": "Unknown",
+          "description": "Defender for Cloud detected inbound traffic from IP addresses that are recommended to be blocked. This typically occurs when this IP address doesn\u0027t communicate regularly with this resource.\r\nAlternatively, the IP address has been flagged as malicious by Microsoft\u0027s threat intelligence sources.",
+          "endTimeUtc": "2023-03-10T00:00:00Z",
+          "friendlyName": "Traffic detected from IP addresses recommended for blocking",
+          "processingEndTime": "2023-03-12T20:52:01.0089039Z",
+          "productName": "Azure Security Center",
+          "providerAlertId": "2517238943999999999_a8f8cc78-9d76-495e-b7b9-dd8fc53e4034",
+          "remediationSteps": [
+            "{\"kind\":\"openBlade\",\"displayValue\":\"Enforce rule\",\"extension\":\"Microsoft_Azure_Security_R3\",\"detailBlade\":\"AdaptiveNetworkControlsResourceBlade\",\"detailBladeInputs\":\"protectedResourceId=/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder\"}"
+          ],
+          "resourceIdentifiers": [
+            {
+              "resourceId": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder",
+              "subscriptionId": "a4b7e24a-xxxx-4d84-xxxx-89e99b336784",
+              "type": "AzureResource"
+            },
+            {
+              "type": "LogAnalytics",
+              "workspaceId": "c6c712b0-dc3d-4408-945a-4bde1db6579b"
+            }
+          ],
+          "severity": "Low",
+          "startTimeUtc": "2023-03-10T00:00:00Z",
+          "status": "New",
+          "systemAlertId": "8a2fe554-9e4e-8298-cd70-4159a5494b7e",
+          "tactics": [
+            "PreAttack"
+          ],
+          "timeGenerated": "2023-03-12T20:52:26.5903077Z",
+          "timeGenerated_ms": 1678654346000,
+          "vendorName": "Microsoft"
+        },
+        "type": "Microsoft.SecurityInsights/Entities"
       }
     ]
   },
-  'raw': '',
-  'inputs': {
-    'sentinel_incident_id': 'a8e79e8a-5b80-11eb-b397-8c8590577e7a',
-    'incident_id': 4514,
-    'sentinel_profile': 'profile_a'
+  "inputs": {
+    "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
+    "sentinel_profile": "profile_a"
   },
-  'metrics': {
-    'version': '1.0',
-    'package': 'fn-microsoft-sentinel',
-    'package_version': '1.0.0',
-    'host': 'Marks-MacBook-Pro.local',
-    'execution_time_ms': 766,
-    'timestamp': '2021-01-21 15:25:22'
-  }
+  "metrics": {
+    "execution_time_ms": 1944,
+    "host": "local",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "1.1.0",
+    "timestamp": "2023-03-13 13:05:04",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -456,7 +374,116 @@ results = {
 <p>
 
 ```python
-inputs.sentinel_incident_id = incident.properties.sentinel_incident_id
+inputs.sentinel_incident_id = incident.properties.sentinel_incident_number
+inputs.sentinel_profile = incident.properties.sentinel_profile
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+current_dt = Date().getTime()
+
+if results['success']:
+  for alert in results['content']['value']:
+    properties = alert.get('properties', {})
+    row = incident.addRow("sentinel_incident_alerts")
+    row['report_date'] = current_dt
+    row['alert_date'] = properties['timeGenerated_ms']
+    row['alert_name'] = properties.get('alertDisplayName')
+    row['alert_description'] = properties.get('description')
+    row['alert_type'] = properties.get('alertType')
+    row['alert_status'] = properties.get('status')
+    row['alert_severity'] = properties.get('severity')
+    row['alert_confidence_level'] = properties.get('confidenceLevel')
+    row['alert_tactics'] = ",".join(properties.get('tactics', []))
+    row['alert_compromised_entity'] = properties.get('compromisedEntity')
+    row['alert_remediation_steps'] = helper.createPlainText('\n'.join(properties.get('remediationSteps', [])))
+    row['alert_id'] = properties.get('systemAlertId')
+    if properties.get('alertLink'):
+        row['alert_url'] = helper.createRichText("<a target='blank' href='{}'>Alert Link</a>".format(properties['alertLink']))
+    else:
+        row['alert_url'] = helper.createRichText("<a target='blank' href='https://security.microsoft.com/alerts/{}'>Alert Link</a>".format(properties.get('systemAlertId')))
+```
+
+</p>
+</details>
+
+---
+## Function - Sentinel Get Incident Comments
+Get Comments from a Sentinel Incident
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | No | `SOAR Incident ID` | IncidentID |
+| `sentinel_incident_id` | `text` | No | `-` | - |
+| `sentinel_profile` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "value": [
+      {
+        "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/6c98642b-7248-4b4d-994e-32443f100e78/Comments/cdd41cd8-7d4e-4b7a-976f-f409938fe791",
+        "name": "cdd41cd8-7d4e-4b7a-976f-f409938fe791",
+        "properties": {
+          "author": {
+            "email": "admin@example.com",
+            "name": "Admin",
+            "objectId": "43dd7b73-6a70-475e-88c3-609a9f30b514",
+            "userPrincipalName": "admin@example.com"
+          },
+          "createdTimeUtc": "2023-03-13T17:19:47.2791036Z",
+          "message": "bye"
+        },
+        "type": "Microsoft.SecurityInsights/Incidents/Comments"
+      }
+    ]
+  },
+  "inputs": {
+    "incident_id": 2178,
+    "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
+    "sentinel_profile": "profile_a"
+  },
+  "metrics": {
+    "execution_time_ms": 1426,
+    "host": "local",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "1.1.0",
+    "timestamp": "2023-03-13 13:19:53",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.sentinel_incident_id = incident.properties.sentinel_incident_number
 inputs.incident_id = incident.id
 inputs.sentinel_profile = incident.properties.sentinel_profile
 ```
@@ -471,26 +498,20 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 if results.success:
   for comment in results.content['value']:
     incident.addNote(helper.createRichText(comment['properties']['message']))
-
-    # remember the comment in our datatable
-    row = incident.addRow('sentinel_comment_ids')
-    row['comment_id'] = comment['name']
-
 ```
 
 </p>
 </details>
 
 ---
-## Function - Sentinel Update Incident
-Update / Close a Sentinel incident based on Sentinel field changes in the SOAR Incident
+## Function - Sentinel Get Incident Entities
+Get the Entities associated with a Sentinel Incident
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `incident_id` | `number` | Yes | `-` | - |
 | `sentinel_incident_id` | `text` | No | `-` | - |
 | `sentinel_profile` | `text` | Yes | `-` | - |
 
@@ -500,8 +521,67 @@ Update / Close a Sentinel incident based on Sentinel field changes in the SOAR I
 <details><summary>Outputs:</summary>
 <p>
 
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
 ```python
 results = {
+  "content": {
+    "6c98642b-7248-4b4d-994e-32443f100e78_8a2fe554-9e4e-8298-cd70-4159a5494b7e": [
+      {
+        "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/fca87582-43c0-5af8-fdec-dfda212ee53c",
+        "kind": "Ip",
+        "name": "fca87582-43c0-5af8-fdec-dfda212ee53c",
+        "properties": {
+          "address": "1.1.1.1",
+          "friendlyName": "1.1.1.1"
+        },
+        "resilient_artifact_value": "1.1.1.1",
+        "soar_artifact_type": "IP Address",
+        "type": "Microsoft.SecurityInsights/entities"
+      },
+      {
+        "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/fd328c82-310e-6bb5-1d3b-f1c635dd5f20",
+        "kind": "AzureResource",
+        "name": "fd328c82-310e-6bb5-1d3b-f1c635dd5f20",
+        "properties": {
+          "friendlyName": "logforwarder",
+          "resourceId": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder",
+          "subscriptionId": "a4b7e24a-xxxx-4d84-xxxx-89e99b336784"
+        },
+        "resilient_artifact_value": "logforwarder",
+        "soar_artifact_type": "String",
+        "type": "Microsoft.SecurityInsights/entities"
+      },
+      {
+        "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/a41bc108-5e1e-7f62-4294-7412e5319c81",
+        "kind": "Host",
+        "name": "a41bc108-5e1e-7f62-4294-7412e5319c81",
+        "properties": {
+          "azureID": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder",
+          "friendlyName": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder"
+        },
+        "resilient_artifact_value": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder",
+        "soar_artifact_type": "System Name",
+        "type": "Microsoft.SecurityInsights/entities"
+      }
+    ]
+  },
+  "inputs": {
+    "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
+    "sentinel_profile": "profile_a"
+  },
+  "metrics": {
+    "execution_time_ms": 2254,
+    "host": "local",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "1.1.0",
+    "timestamp": "2023-03-13 13:26:31",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -512,7 +592,124 @@ results = {
 <p>
 
 ```python
-inputs.sentinel_incident_id = incident.properties.sentinel_incident_id
+inputs.sentinel_incident_id = incident.properties.sentinel_incident_number
+inputs.sentinel_profile = incident.properties.sentinel_profile
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+current_dt = Date().getTime()
+
+if results.success:
+  for alert in results.content.keys():
+    for entity in results.content[alert]:
+      row = incident.addRow("sentinel_incident_entities")
+      row['report_date'] = current_dt
+      row['alert_id'] = alert
+      row['entity_id'] = entity['name']
+      row['entity_type'] = entity['kind']
+      row['entity_value'] = entity['properties']['friendlyName']
+      row['entity_properties'] = "<br>".join(["<b>{}</b>: {}".format(k, v) for k, v in entity['properties'].items()])
+      # Create an artifact
+      desc = ["created from Sentinel entity: {}".format(entity['name'])]
+      if entity['properties'].get('azureID'):
+        desc.append(entity['properties']['azureID'])
+      if entity['resilient_artifact_type']:
+          incident.addArtifact(entity['resilient_artifact_type'], entity['resilient_artifact_value'], "\n".join(desc))
+```
+
+</p>
+</details>
+
+---
+## Function - Sentinel Update Incident
+Update / Close a Sentinel incident based on Sentinel field changes in the Resilient Incident
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | No | `SOAR Incident ID` | IncidentID |
+| `sentinel_incident_id` | `text` | No | `-` | - |
+| `sentinel_profile` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "etag": "\"0c01af2a-0000-0100-0000-640f343f0000\"",
+    "id": "/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/29293940-bec6-4549-8d8a-0f6341dc37cc",
+    "name": "29293940-bec6-4549-8d8a-0f6341dc37cc",
+    "properties": {
+      "additionalData": {
+        "alertProductNames": [],
+        "alertsCount": 0,
+        "bookmarksCount": 0,
+        "commentsCount": 0,
+        "tactics": []
+      },
+      "createdTimeUtc": "2023-03-10T18:26:47.7370027Z",
+      "description": "None",
+      "incidentNumber": 1905,
+      "incidentUrl": "https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/a4b7e24a-xxxx-4d84-xxxx-89e99b336784/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/29293940-bec6-4549-8d8a-0f6341dc37cc",
+      "labels": [],
+      "lastModifiedTimeUtc": "2023-03-13T14:33:35.862704Z",
+      "owner": {
+        "assignedTo": null,
+        "email": null,
+        "objectId": null,
+        "userPrincipalName": null
+      },
+      "relatedAnalyticRuleIds": [],
+      "severity": "Medium",
+      "status": "New",
+      "title": "test incident"
+    },
+    "type": "Microsoft.SecurityInsights/Incidents"
+  },
+  "inputs": {
+    "incident_id": 2176,
+    "sentinel_incident_id": "29293940-bec6-4549-8d8a-0f6341dc37cc",
+    "sentinel_profile": "profile_a"
+  },
+  "metrics": {
+    "execution_time_ms": 1455,
+    "host": "local",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "1.1.0",
+    "timestamp": "2023-03-13 10:33:35",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.incident_id = incident.id
+inputs.sentinel_incident_id = incident.properties.sentinel_incident_number
 inputs.sentinel_profile = incident.properties.sentinel_profile
 ```
 
@@ -530,11 +727,36 @@ None
 </details>
 
 ---
+
+
+## Data Table - Sentinel Incident Alerts
+
+ ![screenshot: dt-sentinel-incident-alerts](./doc/screenshots/dt-sentinel-incident-alerts.png)
+
+#### API Name:
+sentinel_incident_alerts
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Alert Date | `alert_date` | `datetimepicker` | - |
+| Alert Id | `alert_id` | `text` | - |
+| Alert Name | `alert_name` | `text` | - |
+| Alert Type | `alert_type` | `text` | - |
+| Compromised Entity | `alert_compromised_entity` | `text` | - |
+| Confidence Level | `alert_confidence_level` | `text` | - |
+| Description | `alert_description` | `textarea` | - |
+| Link | `alert_url` | `textarea` | - |
+| Remediation Steps | `alert_remediation_steps` | `textarea` | - |
+| Report Date | `report_date` | `datetimepicker` | - |
+| Severity | `alert_severity` | `text` | - |
+| Status | `alert_status` | `text` | - |
+| Tactics | `alert_tactics` | `text` | - |
+
+---
 ## Data Table - Sentinel Incident Entities
 
  ![screenshot: dt-sentinel-incident-entities](./doc/screenshots/dt-sentinel-incident-entities.png)
-
-This table is used to capture information about an entity in addition to entity information created as artifacts.
 
 #### API Name:
 sentinel_incident_entities
@@ -547,34 +769,37 @@ sentinel_incident_entities
 | Entity Properties | `entity_properties` | `textarea` | - |
 | Entity Type | `entity_type` | `text` | - |
 | Entity Value | `entity_value` | `text` | - |
+| Report Date | `report_date` | `datetimepicker` | - |
 
 ---
 
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| Sentinel Incident Classification Comment | `sentinel_incident_classification_comment` | `text` | `properties` | - | Close code information |
-| Sentinel Incident Labels | `sentinel_incident_labels` | `text` | `properties` | - | Incident labels applied |
-| Sentinel Incident Assigned To | `sentinel_incident_assigned_to` | `text` | `properties` | - | Sentinel Incident assignment |
-| Sentinel Incident Classification Reason | `sentinel_incident_classification_reason` | `text` | `properties` | - | Close code information |
-| Sentinel Incident Tactics | `sentinel_incident_tactics` | `text` | `properties` | - | Mitre Att@ck tactics |
-| Sentinel Incident ID | `sentinel_incident_id` | `text` | `properties` | - | Reference Sentinel Incident ID |
-| Sentinel Incident Number | `sentinel_incident_number` | `number` | `properties` | - | Reference Sentinel Incident Number |
-| Sentinel Profile | `sentinel_profile` | `text` | `properties` | - | Sentinel profile used for synchronization actions |
+| Sentinel Incident Assigned To | `sentinel_incident_assigned_to` | `text` | `properties` | - | - |
+| Sentinel Incident Classification | `sentinel_incident_classification` | `text` | `properties` | - | - |
+| Sentinel Incident Classification Comment | `sentinel_incident_classification_comment` | `text` | `properties` | - | - |
+| Sentinel Incident Classification Reason | `sentinel_incident_classification_reason` | `text` | `properties` | - | - |
+| Sentinel Incident ID | `sentinel_incident_id` | `text` | `properties` | - | - |
+| Sentinel Incident Labels | `sentinel_incident_labels` | `text` | `properties` | - | - |
+| Sentinel Incident Number | `sentinel_incident_number` | `text` | `properties` | - | - |
 | Sentinel Incident Status | `sentinel_incident_status` | `text` | `properties` | - | - |
-| Sentinel Incident Classification | `sentinel_incident_classification` | `text` | `properties` | - | Close code information. |
-| Sentinel Incident URL | `sentinel_incident_url` | `textarea` | `properties` | - | Clickable link back to Sentinel and the specific incident. |
+| Sentinel Incident Tactics | `sentinel_incident_tactics` | `text` | `properties` | - | - |
+| Sentinel Incident URL | `sentinel_incident_url` | `textarea` | `properties` | - | - |
+| Sentinel Profile | `sentinel_profile` | `text` | `properties` | - | - |
 
 ---
+
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Sentinel Update Incident | incident | `-` |
 | Sentinel Comment Sync | note | `sentinel_comment_sync` |
+| Sentinel Get Incident Alerts | incident | `sentinel_get_incident_alerts` |
 | Sentinel Get Incident Comments | incident | `sentinel_get_incident_comments` |
-| Sentinel Incident Entity Sync | incident | `sentinel_get_incident_entities` |
 | Sentinel Get Incident Entities | incident | `sentinel_get_incident_entities` |
+| Sentinel Incident Sync | incident | `sentinel_get_incident_alerts` |
+| Sentinel Update Incident | incident | `sentinel_update_incident` |
 
 ---
 
@@ -713,4 +938,4 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM supported App. For assistance, see: https://ibm.com/mysupport.
+This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
