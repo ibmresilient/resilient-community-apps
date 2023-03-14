@@ -31,5 +31,4 @@ jsb_analysis_report_request_timeout=1800
 jsb_verify=False
 # Send an e-mail upon completion of the analysis
 jsb_email_notification=True
-#http_proxy=http://user:pass@10.10.1.10:3128
 #https_proxy=http://user:pass@10.10.1.10:1080"""
