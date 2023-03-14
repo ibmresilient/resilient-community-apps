@@ -3,11 +3,14 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Function implementation"""
 
-from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProfiles
-from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
-from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
-from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
+from resilient_circuits import (AppFunctionComponent, FunctionResult,
+                                app_function)
 from resilient_lib import validate_fields
+
+from fn_microsoft_sentinel.lib.function_common import (PACKAGE_NAME,
+                                                       SentinelProfiles)
+from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
+from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
 
 FN_NAME = "sentinel_get_incident_comments"
 

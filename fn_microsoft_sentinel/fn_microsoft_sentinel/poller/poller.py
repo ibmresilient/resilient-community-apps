@@ -2,20 +2,22 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Poller implementation"""
 
+from json import decoder, loads
 from logging import getLogger
 from threading import Thread
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
-from resilient_lib import (SOARCommon, get_last_poller_date, poller, validate_fields)
-from fn_microsoft_sentinel.poller.configure_tab import init_incident_groups_tab
-from json import loads, decoder
+from resilient_lib import (SOARCommon, get_last_poller_date, poller,
+                           validate_fields)
+
+from fn_microsoft_sentinel.lib.function_common import (
+    DEFAULT_INCIDENT_CLOSE_TEMPLATE, DEFAULT_INCIDENT_CREATION_TEMPLATE,
+    DEFAULT_INCIDENT_UPDATE_TEMPLATE, PACKAGE_NAME, SentinelProfiles)
 from fn_microsoft_sentinel.lib.jinja_common import JinjaEnvironment
-from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, SentinelProfiles,\
-        DEFAULT_INCIDENT_CREATION_TEMPLATE,\
-        DEFAULT_INCIDENT_UPDATE_TEMPLATE,\
-        DEFAULT_INCIDENT_CLOSE_TEMPLATE
 from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
-from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI, get_sentinel_incident_ids
+from fn_microsoft_sentinel.lib.sentinel_common import (
+    SentinelAPI, get_sentinel_incident_ids)
+from fn_microsoft_sentinel.poller.configure_tab import init_incident_groups_tab
 
 LOG = getLogger(__name__)
 
@@ -86,12 +88,12 @@ class PollerComponent(AppFunctionComponent):
         :type last_poller_time: int
         """
         for profile_name, profile_data in self.sentinel_profiles.get_profiles().items():
-            result, status, reason  = self.sentinel_client.query_incidents(profile_data)
+            result, status, reason = self.sentinel_client.query_incidents(profile_data)
             if status:
                 self._parse_results(result, profile_name, profile_data)
                 if result.get("nextLink"):
                     LOG.debug("running nextLink")
-                    result, status, reason  = self.sentinel_client.query_next_incidents(
+                    result, status, reason = self.sentinel_client.query_next_incidents(
                         profile_data,
                         result.get("nextLink")
                     )
@@ -106,7 +108,7 @@ class PollerComponent(AppFunctionComponent):
         for sentinel_incident in result.get("value", []):
             # Determine if an incident already exists, used to know if create or update
             sentinel_incident_id, sentinel_incident_number = get_sentinel_incident_ids(sentinel_incident)
-            soar_incident, err = self.soar_common.get_soar_case({"sentinel_incident_number": sentinel_incident_id})
+            soar_incident, _ = self.soar_common.get_soar_case({"sentinel_incident_number": sentinel_incident_id})
 
             new_incident_filters = get_profile_filters(profile_data['new_incident_filters'])
             result_soar_incident = self._create_update_incident(
@@ -123,6 +125,7 @@ class PollerComponent(AppFunctionComponent):
                     profile_data,
                     sentinel_incident_id
                 )
+
                 new_comments = []
                 if status:
                     new_comments = self.resilient_common.filter_resilient_comments(
@@ -137,10 +140,9 @@ class PollerComponent(AppFunctionComponent):
                             entity_comment_id=comment['name']
                         )
                 else:
-                    LOG.error("Error getting comments: %s", reason)
+                    LOG.error(f"Error getting comments: {reason}")
 
-    def _create_update_incident(self, profile_name, profile_data,\
-                                sentinel_incident, soar_incident, new_incident_filters):
+    def _create_update_incident(self, profile_name, profile_data, sentinel_incident, soar_incident, new_incident_filters):
         """
         Perform the operations on the sentinel incident: create, update or close
         :param profile_name [str]: [incident profile]
@@ -155,8 +157,7 @@ class PollerComponent(AppFunctionComponent):
         if soar_incident:
             soar_incident_id = soar_incident['id']
             if soar_incident["plan_status"] == "C":
-                LOG.info("Bypassing update to closed incident %s from Sentinel incident %s",
-                            soar_incident_id, sentinel_incident_number)
+                LOG.info(f"Bypassing update to closed incident {soar_incident_id} from Sentinel incident {sentinel_incident_number}")
             elif sentinel_incident['properties']['status'] == "Closed":
                 # Close the incident
                 incident_payload = self.jinja_env.make_payload_from_template(
@@ -166,8 +167,7 @@ class PollerComponent(AppFunctionComponent):
                 )
                 updated_soar_incident = self.soar_common.update_soar_case(soar_incident_id, incident_payload)
                 _ = self.soar_common.create_case_comment(soar_incident_id, "Close synchronized from Sentinel")
-                LOG.info("Closed incident %s from Sentinel incident %s",
-                         soar_incident_id, sentinel_incident_number)
+                LOG.info(f"Closed incident {soar_incident_id} from Sentinel incident {sentinel_incident_number}")
             else:
                 # Update an incident incident
                 incident_payload = self.jinja_env.make_payload_from_template(
@@ -176,9 +176,7 @@ class PollerComponent(AppFunctionComponent):
                     sentinel_incident
                 )
                 updated_soar_incident = self.soar_common.update_soar_case(soar_incident_id, incident_payload)
-                _ = self.soar_common.create_case_comment(soar_incident_id, "Updates synchronized from Sentinel")
-                LOG.info("Updated incident %s from Sentinel incident %s",
-                    soar_incident_id, sentinel_incident_number)
+                LOG.info(f"Updated incident {soar_incident_id} from Sentinel incident {sentinel_incident_number}")
         else:
             # Apply filters to only escalate certain incidents
             if check_incident_filters(sentinel_incident, new_incident_filters):
@@ -192,11 +190,9 @@ class PollerComponent(AppFunctionComponent):
                     sentinel_incident
                 )
                 updated_soar_incident = self.soar_common.create_soar_case(incident_payload)
-                LOG.info("Created incident %s from Sentinel incident %s",
-                         updated_soar_incident['id'], sentinel_incident_number)
+                LOG.info(f"Created incident {updated_soar_incident['id']} from Sentinel incident {sentinel_incident_number}")
             else:
-                LOG.info("Sentinel incident %s bypassed due to new_incident_filters",
-                         sentinel_incident_number)
+                LOG.info(f"Sentinel incident {sentinel_incident_number} bypassed due to new_incident_filters")
                 updated_soar_incident = None
 
         return updated_soar_incident
@@ -211,10 +207,9 @@ def get_profile_filters(str_filters):
         return None
 
     try:
-        return loads(u"{{ {0} }}".format(str_filters))
+        return loads(f"{{ {str_filters} }}")
     except decoder.JSONDecodeError as err:
-        LOG.error('Incorrect format for new_incident_filters, syntax: "field1": "value", "field2": ["value1", "value2"] :%s',
-            err)
+        LOG.error(f'Incorrect format for new_incident_filters, syntax: "field1": "value", "field2": ["value1", "value2"] :{err}')
 
 def check_incident_filters(sentinel_incident, new_incident_filters):
     """

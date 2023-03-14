@@ -2,11 +2,12 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 from calendar import timegm
-from logging import getLogger
 from json import loads
-from os.path import exists, isfile, join, dirname, realpath
+from logging import getLogger
+from os.path import dirname, exists, isfile, join, realpath
 from time import strptime
-from resilient_circuits.template_functions import render_json, environment
+
+from resilient_circuits.template_functions import environment, render_json
 
 LOG = getLogger(__name__)
 
@@ -45,9 +46,9 @@ class JinjaEnvironment():
         """
         Return the contents of a jinja template, either from the default or a customer specified
         custom path.
-        :param specified_template [str]: [customer specified template path]
-        :param default_template [str]: [default template location]
-        :return [str]: [contents of template]
+        :param specified_template [str]: customer specified template path
+        :param default_template [str]: default template location
+        :return [str]: contents of template
         """
         template_file_path = specified_template
         if template_file_path:
@@ -84,13 +85,13 @@ def jinja_resilient_substitute(value, json_str):
     jinja custom filter to replace values based on a lookup dictionary
     :param value [str]: original value
     :param json_str [str]: string encoded json lookup values
-    :param [str]: [replacement value or original value if no replacement found]
+    :return [str]: replacement value or original value if no replacement found
     """
     replace_dict = loads(json_str)
     if value in replace_dict:
         return replace_dict[value]
 
-    # use a default value if specific match is missing
+    # Use a default value if specific match is missing
     if 'DEFAULT' in replace_dict:
         return replace_dict['DEFAULT']
 

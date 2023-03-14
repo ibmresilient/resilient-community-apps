@@ -7,8 +7,10 @@ from datetime import datetime, timedelta
 from logging import getLogger
 from time import strptime
 from uuid import uuid1
-from resilient_lib import RequestsCommon, IntegrationError
+
+from resilient_lib import IntegrationError, RequestsCommon
 from simplejson.errors import JSONDecodeError
+
 from fn_microsoft_sentinel.lib.constants import FROM_SOAR_COMMENT_HDR
 
 ALERTS_URL = "incidents/{}/alerts"
@@ -24,7 +26,7 @@ AUTH_URL = "https://login.microsoftonline.com/{}/oauth2/token"
 RESOURCE_URI = "https://management.core.windows.net"
 AUTH_SCOPE = [ None ]
 
-# convert entity types to SOAR artifact types
+# Convert entity types to SOAR artifact types
 ENTITY_TYPE_LOOKUP = {
     "account": "User Account",
     "host": "System Name",
@@ -52,7 +54,7 @@ ENTITY_TYPE_LOOKUP = {
     "submission mail": "Email Body"
 }
 
-# extra parameters possible in sentinel section for requests calls
+# Extra parameters possible in sentinel section for requests calls
 REQUEST_PARAMS = {
     'verify': lambda val: False if val and val.lower() in ['false', 'no', 'off', '0'] else val,
     'cert': str
@@ -190,7 +192,7 @@ class SentinelAPI():
         if status:
             result = self._filter_by_last_modified_date(result, last_poller_datetime)
 
-        LOG.debug("%s:%s:%s", status, reason, result)
+        LOG.debug(f"{status}:{reason}:{result}")
         return result, status, reason
 
     def query_next_incidents(self, profile_data, nextlink):
@@ -208,11 +210,11 @@ class SentinelAPI():
         if status:
             result = self._filter_by_last_modified_date(result, last_poller_datetime)
 
-        LOG.debug("%s:%s:%s", status, reason, result)
+        LOG.debug(f"{status}:{reason}:{result}")
         return result, status, reason
 
-    def _filter_by_last_modified_date(self, result, poller_last_modified_date, field="lastModifiedTimeUtc", \
-                                    date_format="%Y-%m-%dT%H:%M:%S"):
+    def _filter_by_last_modified_date(self, result, poller_last_modified_date, field="lastModifiedTimeUtc",
+            date_format="%Y-%m-%dT%H:%M:%S"):
         """
         This logic is unnecessary of the $filter capability is workin in the query API call.
         Loop through all incidents results and reapply the logic to filter the list based on
@@ -257,7 +259,7 @@ class SentinelAPI():
 
         result, status, reason = self._call(url)
 
-        LOG.debug("%s:%s:%s", status, reason, result)
+        LOG.debug(f"{status}:{reason}:{result}")
         return result, status, reason
 
     def get_incident_alerts(self, profile_data, sentinel_incident_id):
@@ -279,15 +281,15 @@ class SentinelAPI():
 
         result, status, reason = self._call(url, oper="POST")
 
-        # limit the number of alerts returned
+        # Limit the number of alerts returned
         if profile_data.get('max_alerts'):
             result['value'] = result['value'][:int(profile_data.get('max_alerts'))]
 
-        # build epoch values for time stamps
+        # Build epoch values for time stamps
         for alert in result['value']:
             alert['properties']['timeGenerated_ms'] = convert_date(alert['properties']['timeGenerated'])
 
-        LOG.debug("%s:%s:%s", status, reason, result)
+        LOG.debug(f"{status}:{reason}:{result}")
         return result, status, reason
 
     def get_incident_alert_entities(self, alert_url):
@@ -316,7 +318,7 @@ class SentinelAPI():
         url = f"{self.base_url}{alert_url}/expand?{PREVIEW_API_VERSION}"
 
         result, status, reason = self._call(url, payload=ENTITY_BODY, oper="POST")
-        LOG.debug("%s:%s:%s", status, reason, result)
+        LOG.debug(f"{status}:{reason}:{result}")
 
         # Convert entity types to artifact types, adding 'soar_artifact_type' property
         if status:
@@ -351,7 +353,7 @@ class SentinelAPI():
         """
         if profile_data.get('last_poller_time'):
             last_poller_datetime = profile_data['last_poller_time']
-            LOG.debug("last_poller_time: %s", last_poller_datetime.isoformat())
+            LOG.debug(f"last_poller_time: {last_poller_datetime.isoformat()}")
         else:
             # Use lookback value
             last_poller_datetime = datetime.utcnow() - timedelta(minutes=self.polling_lookback)
@@ -381,7 +383,7 @@ class SentinelAPI():
 
         result, status, reason = self._call(url, payload=incident_payload, oper="PUT")
 
-        LOG.debug("%s:%s:%s", status, reason, result)
+        LOG.debug(f"{status}:{reason}:{result}")
         return result, status, reason
 
     def get_incident_comments(self, profile_data, sentinel_incident_id):
@@ -403,7 +405,7 @@ class SentinelAPI():
 
         result, status, reason = self._call(url)
 
-        LOG.debug("%s:%s:%s", status, reason, result)
+        LOG.debug(f"{status}:{reason}:{result}")
         return result, status, reason
 
     def create_comment(self, profile_data, sentinel_incident_id, note):
@@ -419,9 +421,10 @@ class SentinelAPI():
         comment_url = "/".join([INCIDENTS_URL, sentinel_incident_id, COMMENTS_URL, make_uuid()])
 
         url = self._get_base_payload(profile_data['subscription_id'],
-                                     profile_data['resource_groupname'],
-                                     profile_data['workspace_name'],
-                                     extra_url=comment_url)
+            profile_data['resource_groupname'],
+            profile_data['workspace_name'],
+            extra_url=comment_url
+        )
 
         payload = {
             "properties": {
@@ -431,7 +434,7 @@ class SentinelAPI():
 
         result, status, reason = self._call(url, payload=payload, oper="PUT")
 
-        LOG.debug("%s:%s:%s", status, reason, result)
+        LOG.debug(f"{status}:{reason}:{result}")
         return result, status, reason
 
     def get_comments(self, profile_data, sentinel_incident_id):
@@ -453,7 +456,7 @@ class SentinelAPI():
 
         result, status, reason = self._call(url)
 
-        LOG.debug("%s:%s:%s", status, reason, result)
+        LOG.debug(f"{status}:{reason}:{result}")
         return result, status, reason
 
     def _get_base_payload(self, subscription_id, resource_groupname, workspace_name,
@@ -484,10 +487,11 @@ class SentinelAPI():
 
 def get_sentinel_incident_ids(sentinel_incident):
     """
+    :param sentinel_incident: Dictionary of the Sentinel incident fields
     :return [str]: sentinel_indident_id or None if not found
     """
     if not sentinel_incident:
-        return None
+        return None, None
 
     return sentinel_incident['name'], sentinel_incident['properties']['incidentNumber']
 

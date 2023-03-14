@@ -3,13 +3,16 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Function implementation"""
 
-from fn_microsoft_sentinel.lib.function_common import PACKAGE_NAME, DEFAULT_SENTINEL_UPDATE_INCIDENT_TEMPLATE, \
-    DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE, SentinelProfiles
-from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
-from fn_microsoft_sentinel.lib.constants import SENTINEL_INCIDENT_NUMBER
-from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
+from resilient_circuits import (AppFunctionComponent, FunctionResult,
+                                app_function)
 from resilient_lib import validate_fields
+
+from fn_microsoft_sentinel.lib.constants import SENTINEL_INCIDENT_NUMBER
+from fn_microsoft_sentinel.lib.function_common import (
+    DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE,
+    DEFAULT_SENTINEL_UPDATE_INCIDENT_TEMPLATE, PACKAGE_NAME, SentinelProfiles)
 from fn_microsoft_sentinel.lib.jinja_common import JinjaEnvironment
+from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
 
 FN_NAME = "sentinel_update_incident"
 

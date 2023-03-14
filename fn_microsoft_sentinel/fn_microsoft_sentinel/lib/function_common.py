@@ -30,7 +30,7 @@ class SentinelProfiles():
         """
         sentinel_profiles = options["sentinel_profiles"]
 
-        # confirm all profiles are valid
+        # Confirm all profiles are valid
         profiles = {}
         profile_list = [item.strip() for item in sentinel_profiles.split(",")]
         for profile in profile_list:
@@ -39,7 +39,7 @@ class SentinelProfiles():
             if not profile_data:
                 raise KeyError(f"Unable to find Sentinel profile: {profile_name}")
 
-            # check each profile for the correct settings
+            # Check each profile for the correct settings
             validate_fields(REQUIRED_PROFILE_FIELDS, profile_data)
 
             profiles[profile] = profile_data
@@ -63,5 +63,3 @@ class SentinelProfiles():
         Return all profiles
         """
         return self.profiles
-
-

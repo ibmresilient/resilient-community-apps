@@ -3,9 +3,8 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 from logging import getLogger
-from resilient import SimpleHTTPException, Patch
-from resilient_lib import IntegrationError, SOARCommon
-from fn_microsoft_sentinel.lib.constants import FROM_SOAR_COMMENT_HDR, SENTINEL_INCIDENT_NUMBER
+from resilient_lib import SOARCommon
+from fn_microsoft_sentinel.lib.constants import FROM_SOAR_COMMENT_HDR
 
 LOG = getLogger(__name__)
 
@@ -20,8 +19,8 @@ class ResilientCommon():
         Need to avoid creating same comments over and over this logic will read all comments
         from an incident and remove those comments which have already sync.
         :param incident_id [str]: SOAR incident id
-        :param sentinel_comments ([list]): Comments from the sentinel incident
-        :return: new_comments ([list])
+        :param sentinel_comments [list]: Comments from the sentinel incident
+        :return: new_comments [list]
         """
         soar_comments = self.soar_common.get_case_comments(incident_id)
         soar_comment_list = [comment['text'] for comment in soar_comments]
