@@ -106,7 +106,7 @@ class PollerComponent(AppFunctionComponent):
         for sentinel_incident in result.get("value", []):
             # Determine if an incident already exists, used to know if create or update
             sentinel_incident_id, sentinel_incident_number = get_sentinel_incident_ids(sentinel_incident)
-            soar_incident = self.resilient_common.find_incident(sentinel_incident_id)
+            soar_incident, err = self.soar_common.get_soar_case({"sentinel_incident_number": sentinel_incident_id})
 
             new_incident_filters = get_profile_filters(profile_data['new_incident_filters'])
             result_soar_incident = self._create_update_incident(
@@ -130,10 +130,11 @@ class PollerComponent(AppFunctionComponent):
                         result['value']
                     )
                     for comment in new_comments:
-                        self.resilient_common.create_incident_comment(
+                        self.soar_common.create_case_comment(
                             incident_id,
-                            comment['name'],
-                            comment['properties']['message']
+                            comment['properties']['message'],
+                            entity_comment_header="From Sentinel",
+                            entity_comment_id=comment['name']
                         )
                 else:
                     LOG.error("Error getting comments: %s", reason)
@@ -163,11 +164,8 @@ class PollerComponent(AppFunctionComponent):
                     DEFAULT_INCIDENT_CLOSE_TEMPLATE,
                     sentinel_incident
                 )
-                updated_soar_incident = self.resilient_common.close_incident(
-                    soar_incident_id,
-                    incident_payload
-                )
-                _ = self.resilient_common.create_incident_comment(soar_incident_id, None, "Close synchronized from Sentinel")
+                updated_soar_incident = self.soar_common.update_soar_case(soar_incident_id, incident_payload)
+                _ = self.soar_common.create_case_comment(soar_incident_id, "Close synchronized from Sentinel")
                 LOG.info("Closed incident %s from Sentinel incident %s",
                          soar_incident_id, sentinel_incident_number)
             else:
@@ -177,11 +175,8 @@ class PollerComponent(AppFunctionComponent):
                     DEFAULT_INCIDENT_UPDATE_TEMPLATE,
                     sentinel_incident
                 )
-                updated_soar_incident = self.resilient_common.update_incident(
-                    soar_incident_id,
-                    incident_payload
-                )
-                _ = self.resilient_common.create_incident_comment(soar_incident_id, None, "Updates synchronized from Sentinel")
+                updated_soar_incident = self.soar_common.update_soar_case(soar_incident_id, incident_payload)
+                _ = self.soar_common.create_case_comment(soar_incident_id, "Updates synchronized from Sentinel")
                 LOG.info("Updated incident %s from Sentinel incident %s",
                     soar_incident_id, sentinel_incident_number)
         else:
@@ -196,7 +191,7 @@ class PollerComponent(AppFunctionComponent):
                     DEFAULT_INCIDENT_CREATION_TEMPLATE,
                     sentinel_incident
                 )
-                updated_soar_incident = self.resilient_common.create_incident(incident_payload)
+                updated_soar_incident = self.soar_common.create_soar_case(incident_payload)
                 LOG.info("Created incident %s from Sentinel incident %s",
                          updated_soar_incident['id'], sentinel_incident_number)
             else:
