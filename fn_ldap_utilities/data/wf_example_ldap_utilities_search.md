@@ -47,6 +47,9 @@ if incident.properties.ldap_domain_name:
 # If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
 if rule.properties.ldap_domain_name:
   inputs.ldap_domain_name = rule.properties.ldap_domain_name
+
+if rule.properties.ldap_search_max_return:
+  inputs.ldap_search_max_return = rule.properties.ldap_search_max_return
 ```
 
 ### Post-Processing Script
@@ -62,7 +65,7 @@ ENTRY_TO_DATATABLE_MAP = {
 
 # Processing if the function is a success
 if(results.success):
-  for entry in results.entries:
+  for entry in results.get("content").get("entries"):
     if not entry:
       break
     # Add Row

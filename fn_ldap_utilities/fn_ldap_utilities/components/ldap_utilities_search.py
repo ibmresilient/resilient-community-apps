@@ -18,6 +18,7 @@ from fn_ldap_utilities.util.helper import (PACKAGE_NAME, LDAPUtilitiesHelper,
 from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 
 FN_NAME = "ldap_utilities_search"
+MAX_returned_results = 1000
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'ldap_utilities_search'
@@ -66,6 +67,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.ldap_search_filter
             -   fn_inputs.ldap_search_attributes
             -   fn_inputs.ldap_search_param
+            -   fn_inputs.ldap_search_max_return
         """
 
         def replace_ldap_param(ldap_param_value=None, ldap_search_filter=""):
@@ -93,6 +95,7 @@ class FunctionComponent(AppFunctionComponent):
         input_ldap_search_filter = self.get_textarea_param(getattr(fn_inputs, "ldap_search_filter")) # textarea (required)
         input_ldap_search_attributes = getattr(fn_inputs, "ldap_search_attributes", ALL_ATTRIBUTES) # text (optional)
         input_ldap_search_param = getattr(fn_inputs, "ldap_search_param") # text (optional)
+        max_return = getattr(fn_inputs, "ldap_search_max_return", MAX_returned_results)
 
         if input_ldap_search_attributes and input_ldap_search_attributes is not ALL_ATTRIBUTES:
             input_ldap_search_attributes = [str(attr) for attr in input_ldap_search_attributes.split(',')]
@@ -101,11 +104,12 @@ class FunctionComponent(AppFunctionComponent):
             # Escape special chars from the search_param
             input_ldap_search_param = escape_filter_chars(input_ldap_search_param)
 
-        self.LOG.info("LDAP Domain Name: %s", ldap_domain_name)
-        self.LOG.info("LDAP Search Base: %s", input_ldap_search_base)
-        self.LOG.info("LDAP Search Filter: %s", input_ldap_search_filter)
-        self.LOG.info("LDAP Search Attributes: %s", input_ldap_search_attributes)
-        self.LOG.info("LDAP Search Param: %s", input_ldap_search_param)
+        self.LOG.info(f"LDAP Domain Name: {ldap_domain_name}")
+        self.LOG.info(f"LDAP Search Base: {input_ldap_search_base}")
+        self.LOG.info(f"LDAP Search Filter: {input_ldap_search_filter}")
+        self.LOG.info(f"LDAP Search Attributes: {input_ldap_search_attributes}")
+        self.LOG.info(f"LDAP Search Param: {input_ldap_search_param}")
+        self.LOG.info(f"LDAP Search Max Return: {max_return}")
 
         # Initiate variable, so that it does not error when called
         conn = ""
@@ -137,7 +141,8 @@ class FunctionComponent(AppFunctionComponent):
             res = conn.search(
                 search_base=input_ldap_search_base,
                 search_filter=input_ldap_search_filter,
-                attributes=input_ldap_search_attributes)
+                attributes=input_ldap_search_attributes
+            )
 
             if res and len(conn.entries) > 0:
                 entries = loads(conn.response_to_json())["entries"]
