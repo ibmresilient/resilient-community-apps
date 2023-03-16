@@ -25,7 +25,6 @@ max_issues_returned = 50
 # Proxys to use
 # If proxys are defined under [fn_jira:global_settings], then proxys defined
 #  under the individual Jira servers will be ignored
-#http_proxy=
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # If templates under the individual Jira servers are configured, then templates
@@ -61,7 +60,6 @@ poller_filters= priority in (high, medium, low) and status in ('to do', 'in prog
 # Max number of issues that can be returned from Jira issue search
 max_issues_returned = 50
 # Proxys to use
-#http_proxy=
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # See documentation section "Templates for SOAR Cases" for more details
@@ -95,7 +93,6 @@ poller_filters= priority in (high, medium, low) and status in ('to do', 'in prog
 # Max number of issues that can be returned from Jira issue search
 max_issues_returned = 50
 # Proxys to use
-#http_proxy=
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # See documentation section "Templates for SOAR Cases" for more details
