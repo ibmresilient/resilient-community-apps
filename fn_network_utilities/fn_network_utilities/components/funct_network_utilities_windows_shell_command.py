@@ -13,6 +13,7 @@ from resilient_lib.components.templates_common import ps_filter
 
 PACKAGE_NAME = "fn_network_utilities"
 FN_NAME = "network_utilities_windows_shell_command"
+DEFAULT_TIMEOUT_SEC = 20
 
 LOG = logging.getLogger(__name__)
 
@@ -40,11 +41,16 @@ class FunctionComponent(AppFunctionComponent):
         shell_command = fn_inputs.network_utilities_shell_command  # text
         shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
         remote_computer = getattr(fn_inputs, "network_utilities_remote_computer", None) #text
-
+        if self.options.get("timeout_windows") is not None:
+            timeout_sec = self.options.get("timeout_windows")
+        else: 
+            timeout_sec = DEFAULT_TIMEOUT_SEC
 
         LOG.info(f"network_utilities_shell_command: {shell_command}")
         LOG.info(f"network_utilities_shell_params: {shell_params}")
         LOG.info(f"network_utilities_remote_computer: {remote_computer}")
+        LOG.info(f"network_utilities_timeout_sec: {timeout_sec}")
+
 
         validate_fields(["network_utilities_shell_command"], fn_inputs)
 
@@ -93,7 +99,7 @@ class FunctionComponent(AppFunctionComponent):
         run_cmd = RunCmd(remote, shell_command_base.strip(), rendered_shell_params)
 
         run_cmd.run_windows_cmd(self.options.get('remote_auth_transport'),
-                                self.options.get('remote_powershell_extensions', '').strip(","))
+                                self.options.get('remote_powershell_extensions', '').strip(","), timeout_sec)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
@@ -131,7 +137,7 @@ class RunCmd():
         self.remote_password = user_pswd_splits[1]
 
 
-    def run_windows_cmd(self, remote_auth_transport, ps_extensions):
+    def run_windows_cmd(self, remote_auth_transport, ps_extensions, timeout_sec):
 
         # Format shell parameters
         shell_command_base = self.shell_command
@@ -139,7 +145,7 @@ class RunCmd():
 
         session = winrm.Session(self.remote_server,
                                 auth=(self.remote_user, self.remote_password),
-                                transport=remote_auth_transport, server_cert_validation="ignore")
+                                transport=remote_auth_transport, server_cert_validation="ignore", operation_timeout_sec=timeout_sec)
 
         if extension in ps_extensions:
             
