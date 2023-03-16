@@ -5,6 +5,7 @@
 
 from resilient_lib import RequestsCommon
 import json
+import base64
 import jwt
 import time
 import datetime
@@ -28,28 +29,44 @@ class ZoomCommon:
         self.key = options.get("zoom_api_key")
         self.secret = options.get("zoom_api_secret")
         self.api_url = options.get("zoom_api_url")
+        self.account_id = options.get("zoom_account_id")
+        self.client_id = options.get("zoom_client_id")
+        self.client_secret = options.get("zoom_client_secret")
 
-    @staticmethod
-    def generate_auth_token(key, secret):
+
+    def generate_auth_token(self, key, secret):
         """Generates authentication token used to authenticate with Zoom API"""
-        return jwt.encode({'iss': key, 'exp': time.time() + 60},  # exp is expiry time in epoch, we have it for 60 secs
-                          secret,  # secret key
-                          algorithm='HS256')
+        req_common = RequestsCommon(self.opts, self.options)
+        # url = 'https://api.zoom.us/v2/users/me'
+        # account_id = self.account_id
+        url = f"https://zoom.us/oauth/token?grant_type=account_credentials&account_id={self.account_id}"
+        auth_str = f"{self.client_id}:{self.client_secret}"
+        auth_bytes = base64.b64encode(auth_str.encode("utf-8"))
+        encoded_auth = str(auth_bytes, "utf-8")
+        headers = {
+            "Authorization" : f"Basic {encoded_auth}" 
+        }
+        response = req_common.execute("post", url, headers=headers).json()
+        return response["access_token"]
+
+        # return jwt.encode({'iss': key, 'exp': time.time() + 60},  # exp is expiry time in epoch, we have it for 60 secs
+        #                   secret,  # secret key
+        #                   algorithm='HS256')
 
     def zoom_request(self, path=None, method="GET", query=None, headers=None):
         """Generates and makes specified request to Zoom API"""
         url = self.api_url + path
         
         access_token = self.generate_auth_token(self.key, self.secret)
-        headers = {'authorization': 'Bearer %s' % access_token,
-               'content-type': 'application/json'}
+        headers = {'Authorization': f'Bearer {access_token}',
+               'Content-type': 'application/json'}
         
         
         req_common = RequestsCommon(self.opts, self.options)
 
         response = None
         if method == "GET":
-            response = req_common.execute('get', url, headers=headers, params= {'access_token': access_token}, verify=False)
+            response = req_common.execute('get', url, headers=headers, verify=False)
         elif method == "POST":
             response = req_common.execute('post', url, json=query, verify=True, headers=headers)
 
