@@ -14,6 +14,7 @@ from resilient_lib.components.templates_common import sh_filter
 
 PACKAGE_NAME = "fn_network_utilities"
 FN_NAME = "network_utilities_linux_shell_command"
+DEFAULT_TIMEOUT_SEC = 20
 
 LOG = logging.getLogger(__name__)
 
@@ -41,10 +42,15 @@ class FunctionComponent(AppFunctionComponent):
         shell_command = fn_inputs.network_utilities_shell_command  # text
         shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
         remote_computer = getattr(fn_inputs, "network_utilities_remote_computer", None) #text
+        if self.options.get("timeout_linux") is not None:
+            timeout_sec = self.options.get("timeout_linux")
+        else: 
+            timeout_sec = DEFAULT_TIMEOUT_SEC
 
         LOG.info(f"network_utilities_shell_command: {shell_command}")
         LOG.info(f"network_utilities_shell_params: {shell_params}")
         LOG.info(f"network_utilities_remote_computer: {remote_computer}")
+        LOG.info(f"network_utilities_timeout_sec: {timeout_sec}")
 
         validate_fields(["network_utilities_shell_command"], fn_inputs)
 
@@ -91,7 +97,7 @@ class FunctionComponent(AppFunctionComponent):
         shell_command_base = remove_punctuation(shell_command_base, True)
 
         run_cmd = RunCmd(remote, shell_command_base.strip(), rendered_shell_params)
-        run_cmd.run_remote_linux()
+        run_cmd.run_remote_linux(timeout_sec)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
@@ -128,7 +134,7 @@ class RunCmd():
         self.remote_password = user_pswd_splits[1]
 
 
-    def run_remote_linux(self):
+    def run_remote_linux(self, timeout_sec):
         self.commandline = render(self.shell_command, self.rendered_shell_params)
         LOG.debug("Remote cmd: %s", self.commandline)
 
@@ -140,7 +146,7 @@ class RunCmd():
             client.connect(hostname=self.remote_server, username=self.remote_user, 
                         password=self.remote_password)
 
-            stdin, stdout, stderr = client.exec_command(self.commandline) # nosec
+            stdin, stdout, stderr = client.exec_command(self.commandline, timeout=timeout_sec) # nosec
             self.stdoutdata = stdout.read().decode()
             self.stderrdata = stderr.read().decode()
             self.retcode = stdout.channel.recv_exit_status()
