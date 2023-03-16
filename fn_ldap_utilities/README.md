@@ -29,7 +29,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.1.0 | 03/2023 | <ul><li>Update search function to have a configurable return limit.</li><li>Fix bug in set password function.</li></ul>
+| 2.1.0 | 03/2023 | <ul><li>Update search function to perform a paged search.</li><li>Fix bug in set password function.</li></ul>
 | 2.0.1 | 07/2022 | Fix helper.py so that ldap_connect_timeout is not required in app.config |
 | 2.0.0 | 04/2022 | <ul><li>Add ability to have multiple LDAP Domains</li><li>New rule to add users, groups, organizational units, etc.</li></ul>|
 | 1.1.1 | 07/2021 | Support added for App Host |
