@@ -36,7 +36,7 @@ class JiraServers():
 
         return servers, server_name_list
 
-    def jira_label_test(jira_label, servers_list):
+    def jira_label_test(self, jira_label, servers_list):
         """
         Check if the given jira_label is in the app.config
         :param jira_label: User selected server
@@ -124,14 +124,15 @@ def get_server_settings(opts, jira_label):
     :param jira_label: Label of the server in the app.config to use
     :return: Jira server settings for specified server
     """
-    server_list = {PACKAGE_NAME} if opts.get(PACKAGE_NAME, {}) else JiraServers(opts).get_server_name_list()
+    jiraServers = JiraServers(opts)
+    server_list = {PACKAGE_NAME} if opts.get(PACKAGE_NAME, {}) else jiraServers.get_server_name_list()
 
     # Creates a dictionary that is filled with the jira servers
     # and there configurations
     servers_list = {server_name:opts.get(server_name, {}) for server_name in server_list}
 
     # Get configuration for jira server specified
-    return JiraServers.jira_label_test(jira_label, servers_list)
+    return jiraServers.jira_label_test(jira_label, servers_list)
 
 def remove_html_tags(comment):
     """
@@ -147,7 +148,6 @@ def check_jira_issue_linked_to_task(jira_issue_description):
     :param jira_issue_description: String description of Jira issue
     :return: Boolean
     """
-
     # Check if the Jira issue is linked to a SOAR task
     if jira_issue_description and IBM_SOAR_LINK in jira_issue_description and "?task_id=" in jira_issue_description:
             return True
