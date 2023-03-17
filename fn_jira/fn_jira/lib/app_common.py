@@ -6,7 +6,7 @@ from logging import getLogger
 from urllib.parse import urlparse
 from jira import JIRA
 from fn_jira.util.helper import str_time_to_int_time, check_jira_issue_linked_to_task, get_id_from_jira_issue_description, GLOBAL_SETTINGS
-from resilient_lib import IntegrationError, str_to_bool, validate_fields, RequestsCommon, SOARCommon
+from resilient_lib import IntegrationError, str_to_bool, validate_fields, RequestsCommon
 
 LOG = getLogger(__name__)
 
@@ -47,18 +47,12 @@ class AppCommon():
 
         # Set proxies variable as a dict
         self.proxies = {}
-        # Check if global_settings is definied in the app.config
-        if global_settings:
-            # Check if proxies are defined in the global_settings
-            if global_settings.get("http_proxy"):
-                self.proxies["http"] = global_settings.get("http_proxy")
-            if global_settings.get("https_proxy"):
-                self.proxies["https"] = global_settings.get("https_proxy")
-            if not self.proxies:
-                self.proxies = None
-        else:
-            # Call resilient_lib function to find proxies
-            self.proxies = self.rc.get_proxies()
+        if global_settings.get("https_proxy"):
+            self.proxies["https"] = global_settings.get("https_proxy")
+        elif app_configs.get("https_proxy"):
+            self.proxies["https"] = app_configs.get("https_proxy")
+        if not self.proxies:
+            self.proxies = None
 
         # AUTH and BASIC AUTH
         if self.auth_method.upper() in SUPPORTED_AUTH_METHODS[0:2]:
@@ -210,94 +204,90 @@ def _get_verify_ssl(app_configs):
 
     return verify
 
-class SOAR():
+def add_task_to_case(soar_common, options, cases_list, num, id, comments=False, attachments=False):
+    """
+    Adds task data to the SOAR case
+    :param options: Options for the Jira server being used
+    :param cases_list: List of SOAR cases
+    :param num: The index of the case in case_list
+    :param id: Task ID
+    :param comments: Boolean if to add comments
+    :param attachments: Boolean if to add attachments
+    :return: None
+    """
+    case_id = cases_list[num].get('id')
 
-    def add_task_to_case(soar_common, options, cases_list, num, id, comments=False, attachments=False):
-        """
-        Adds task data to the SOAR case
-        :param soar_common: Initiate SOARCommon
-        :param options: Options for the Jira server being used
-        :param cases_list: List of SOAR cases
-        :param num: The index of the case in case_list
-        :param id: Task ID
-        :param comments: Boolean if to add comments
-        :param attachments: Boolean if to add attachments
-        :return: None
-        """
-        case_id = cases_list[num].get('id')
+    # Add Tasks to cases
+    case_tasks = soar_common._get_case_info(case_id, "tasks?want_notes=true")
+    if case_tasks:
+        # Add tasks field to the case if the field does not exist
+        task = cases_list[num].get("tasks")
+        cases_list[num]["tasks"] = task if task else []
+        del task # Delete variable that is no longer needed
 
-        # Add Tasks to cases
-        case_tasks = soar_common._get_case_info(case_id, "tasks?want_notes=true")
-        if case_tasks:
-            # Add tasks field to the case if the field does not exist
-            task = cases_list[num].get("tasks")
-            cases_list[num]["tasks"] = task if task else []
-            del task # Delete variable that is no longer needed
+        for task_num in range(len(case_tasks)):
+            task_id = case_tasks[task_num].get("id")
+            if id == task_id:
+                cases_list[num]["tasks"].append(
+                    {k: v for k, v in case_tasks[task_num].items()\
+                        if v is not None and \
+                            k not in ["perms", "actions", "playbooks", "creator_principal", "regs", "notes_count", "attachments_count", "inc_owner_id", "user_notes", "auto_deactivate", "phase_id"]}
+                )
+                case_task_num = len(cases_list[num]["tasks"])-1
 
-            for task_num in range(len(case_tasks)):
-                task_id = case_tasks[task_num].get("id")
-                if id == task_id:
-                    cases_list[num]["tasks"].append(
-                        {k: v for k, v in case_tasks[task_num].items()\
-                            if v is not None and \
-                                k not in ["perms", "actions", "playbooks", "creator_principal", "regs", "notes_count", "attachments_count", "inc_owner_id", "user_notes", "auto_deactivate", "phase_id"]}
-                    )
-                    case_task_num = len(cases_list[num]["tasks"])-1
+                # Get notes
+                if comments:
+                    task_notes = case_tasks[task_num].get("notes")
+                    cases_list[num]["tasks"][case_task_num]["notes"] = []
+                    for note_num in range(len(task_notes)):
+                        cases_list[num]["tasks"][case_task_num]["notes"].append(
+                            task_notes[note_num].get("text")
+                        )
+                else:
+                    cases_list[num]["tasks"][case_task_num]["notes"] = []
 
-                    # Get notes
-                    if comments:
-                        task_notes = case_tasks[task_num].get("notes")
-                        cases_list[num]["tasks"][case_task_num]["notes"] = []
-                        for note_num in range(len(task_notes)):
-                            cases_list[num]["tasks"][case_task_num]["notes"].append(
-                                task_notes[note_num].get("text")
-                            )
-                    else:
-                        cases_list[num]["tasks"][case_task_num]["notes"] = []
+                del comments
 
-                    del comments
+                # Get attachments
+                if attachments:
+                    task_attachments = soar_common.rest_client.get(f"/tasks/{task_id}/attachments")
+                    cases_list[num]["tasks"][case_task_num]["attachments"] = []
+                    for attach_num in range(len(task_attachments)):
+                        cases_list[num]["tasks"][case_task_num]["attachments"].append({
+                            "id": task_attachments[attach_num].get("id"),
+                            "name": task_attachments[attach_num].get("name")
+                        })
+                else:
+                    cases_list[num]["tasks"][case_task_num]["attachments"] = []
 
-                    # Get attachments
-                    if attachments:
-                        task_attachments = soar_common.rest_client.get(f"/tasks/{task_id}/attachments")
-                        cases_list[num]["tasks"][case_task_num]["attachments"] = []
-                        for attach_num in range(len(task_attachments)):
-                            cases_list[num]["tasks"][case_task_num]["attachments"].append({
-                                "id": task_attachments[attach_num].get("id"),
-                                "name": task_attachments[attach_num].get("name")
-                            })
-                    else:
-                        cases_list[num]["tasks"][case_task_num]["attachments"] = []
+                # Add the data table that contains the task info to the task
+                datatable = soar_common._get_case_info(case_id, f"table_data/{options.get('jira_dt_name')}?handle_format=names")
+                if datatable:
+                    for row in datatable.get("rows"):
+                        if str(id) == row["cells"].get("task_id").get("value"):
+                            for field in ["actions", "playbooks", "inc_owner", "inc_name"]:
+                                row.pop(field)
+                            cases_list[num]["tasks"][case_task_num]["datatable"] = row
+                            cases_list[num]["tasks"][case_task_num]["datatable"]["table_id"] = datatable.get("id")
+                            break
+                break
 
-                    # Add the data table that contains the task info to the task
-                    datatable = soar_common._get_case_info(case_id, f"table_data/{options.get('jira_dt_name')}?handle_format=names")
-                    if datatable:
-                        for row in datatable.get("rows"):
-                            if str(id) == row["cells"].get("task_id").get("value"):
-                                for field in ["actions", "playbooks", "inc_owner", "inc_name"]:
-                                    row.pop(field)
-                                cases_list[num]["tasks"][case_task_num]["datatable"] = row
-                                cases_list[num]["tasks"][case_task_num]["datatable"]["table_id"] = datatable.get("id")
-                                break
-                    break
-
-    def add_to_case(soar_common, cases_list, num, field_name):
-        """
-        Function adds comments and attachments on the SOAR incident to the case in the list
-        :param soar_common: Initiate SOARCommon
-        :param cases_list: List of SOAR cases
-        :param num: The index of the case in case_list
-        :param field_name: Name of the field to add. Either 'attachments' or 'comments'
-        :return: None
-        """
-        url_end = '?want_notes=true' if field_name == 'tasks' else ''
-        case_field = soar_common._get_case_info(cases_list[num].get('id'), f"{field_name}{url_end}")
-        if case_field:
-            cases_list[num][field_name] = []
-            for field_num in range(len(case_field)):
-                field_dict = {"id": case_field[field_num].get("id")}
-                if field_name == "comments":
-                    field_dict["content"] = case_field[field_num].get("text").replace("<div>","").replace("</div>","")
-                if field_name == "attachments":
-                    field_dict["name"] = case_field[field_num].get("name")
-                cases_list[num][field_name].append(field_dict)
+def add_to_case(soar_common, cases_list, num, field_name):
+    """
+    Function adds comments and attachments on the SOAR incident to the case in the list
+    :param cases_list: List of SOAR cases
+    :param num: The index of the case in case_list
+    :param field_name: Name of the field to add. Either 'attachments' or 'comments'
+    :return: None
+    """
+    url_end = '?want_notes=true' if field_name == 'tasks' else ''
+    case_field = soar_common._get_case_info(cases_list[num].get('id'), f"{field_name}{url_end}")
+    if case_field:
+        cases_list[num][field_name] = []
+        for field_num in range(len(case_field)):
+            field_dict = {"id": case_field[field_num].get("id")}
+            if field_name == "comments":
+                field_dict["content"] = case_field[field_num].get("text").replace("<div>","").replace("</div>","")
+            if field_name == "attachments":
+                field_dict["name"] = case_field[field_num].get("name")
+            cases_list[num][field_name].append(field_dict)

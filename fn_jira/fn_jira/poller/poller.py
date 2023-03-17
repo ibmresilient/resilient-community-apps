@@ -10,7 +10,7 @@ from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
                            make_payload_from_template, poller, validate_fields)
 
-from fn_jira.lib.app_common import AppCommon, SOAR
+from fn_jira.lib.app_common import AppCommon, add_task_to_case, add_to_case
 from fn_jira.poller.configure_tab import init_incident_groups_tab
 from fn_jira.util.helper import (GLOBAL_SETTINGS, PACKAGE_NAME, JiraServers,
                                  check_jira_issue_linked_to_task,
@@ -194,14 +194,13 @@ class PollerComponent(AppFunctionComponent):
 
                 if data_to_get.get("comments"): # If comments were on the linked Jira ticket
                     # Add comment/notes to case
-                    SOAR.add_to_case(self.soar_common, cases_list, num, "comments")
+                    add_to_case(self.soar_common, cases_list, num, "comments")
 
                 if data_to_get.get("attachments"): # If attachments were on the linked Jira ticket
                     # Add attachments to cases
-                    SOAR.add_to_case(self.soar_common, cases_list, num, "attachments")
+                    add_to_case(self.soar_common, cases_list, num, "attachments")
 
             options = get_server_settings(self.opts, cases_list[num].get("properties").get("jira_server"))
-            cases_list[num]["name"] = cases_list[num].get("name").replace("\nCreated from Jira", "")
 
             tasks = data_to_get_from_case.get("tasks")
             if tasks:
@@ -209,14 +208,14 @@ class PollerComponent(AppFunctionComponent):
                     if task.get("incident_id") == cases_list[num].get("id"):
                         task_data_to_get = data_to_get_from_case.get(task.get("task_key"))
                         if task_data_to_get:
-                            SOAR.add_task_to_case(self.soar_common,
-                                                  options,
-                                                  cases_list,
-                                                  num,
-                                                  task.get("task_id"),
-                                                  comments=task_data_to_get.get("comments"),
-                                                  attachments=task_data_to_get.get("attachments")
-                                                 )
+                            add_task_to_case(self.soar_common,
+                                options,
+                                cases_list,
+                                num,
+                                task.get("task_id"),
+                                comments=task_data_to_get.get("comments"),
+                                attachments=task_data_to_get.get("attachments")
+                            )
 
         return cases_list
 
