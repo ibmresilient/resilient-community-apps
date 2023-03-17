@@ -48,7 +48,7 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 02/2023 | Initial Release |
-| 1.0.1 | 3/2023 | Add a timeout option for remote shell commands |
+| 1.0.1 | 3/2023 | Add a timeout option for linux remote shell command |
 
 ---
 
@@ -156,7 +156,6 @@ The following table provides the settings you need to configure the app. These s
 | **traceroute** | Yes | `traceroute -m 15 "{{shell_param1}}"` | -- |
 | **whois** | Yes | `whois "{{shell_param1}}"` | -- |
 | **timeout_linux** | no | `20` | time in seconds to timeout, default is 20 seconds |
-| **timeout_windows** | no | `20` | time in seconds to timeout, default is 20 seconds |
 
 Important to Note: Linux Shell Command, Windows Shell Command, and Local Shell Command come from Utility Functions for SOAR's Shell Command function. In that version, `remote_computer` was required to be wrapped in parantheses (). This is no longer the case, but is still accepted for backwards compatibility. Additionally, `remote_command_linux` and `remote_command_powershell` were required to be wrapped in parantheses () and brackets [], respectively. Again, this is no longer the case, but is still accepted for backwards compatibility.
 

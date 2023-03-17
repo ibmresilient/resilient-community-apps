@@ -44,6 +44,5 @@ whois=whois "{{shell_param1}}"
 
 # Timeout in seconds, default is 20
 #timeout_linux=20
-#timeout_windows=20
 """
     return config_data
