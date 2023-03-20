@@ -964,7 +964,7 @@ class EmailProcessor(object):
             if not attachment.inline:
                 incident.addEmailAttachment(attachment.id)
                 incident.addArtifact(
-                    "Email Attachment Name", attachment.suggested_filename, "")
+                    "Email Attachment Name", attachment.suggested_filename, "Trusteer PPD created artifact.")
 
     @staticmethod
     def soar_severity(risk_score):
