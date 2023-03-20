@@ -19,6 +19,7 @@ from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 
 FN_NAME = "ldap_utilities_search"
 PAGED_SIZE = 1000
+cookie_path = "1.2.840.113556.1.4.319"
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'ldap_utilities_search'
@@ -143,7 +144,7 @@ class FunctionComponent(AppFunctionComponent):
                 paged_size=PAGED_SIZE
             )
             all_entries.extend(loads(conn.response_to_json())["entries"])
-            cookie = conn.result['controls']['1.2.840.113556.1.4.319']['value']['cookie']
+            cookie = conn.result['controls'][cookie_path]['value']['cookie']
             while cookie:
                 conn.search(
                     search_base=input_ldap_search_base,
@@ -153,7 +154,7 @@ class FunctionComponent(AppFunctionComponent):
                     paged_cookie=cookie
                 )
                 all_entries.extend(loads(conn.response_to_json())["entries"])
-                cookie = conn.result['controls']['1.2.840.113556.1.4.319']['value']['cookie']
+                cookie = conn.result['controls'][cookie_path]['value']['cookie']
 
             if res and len(all_entries) > 0:
                 self.LOG.info("Result contains %s entries", len(all_entries))
