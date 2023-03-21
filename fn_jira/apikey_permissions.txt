@@ -12,7 +12,7 @@ read_function
 create_incident
 read_all_incidents
 #delete_all_incidents
-#edit_all_incidents_members
+edit_all_incidents_members
 edit_all_incidents_owner
 edit_all_incidents_status
 #
@@ -56,7 +56,7 @@ read_incident_public_task
 #edit_layouts
 #delete_layouts
 #create_function
-#read_function
+read_function
 #edit_function
 #delete_function
 #create_script
