@@ -45,23 +45,20 @@ class TestLdapUtilitiesUpdate:
     }
 
     outputs = {
-        'attribute_name': 'givenName',
-        'attribute_values': ['Lord Farquaad'],
         'success': True,
-        'user_dn': 'CN=Test User8,CN=Users,dc=example,DC=com'
+        "content": {
+            'attribute_name': 'givenName',
+            'attribute_values': ['Lord Farquaad'],
+            'user_dn': 'CN=Test User8,CN=Users,dc=example,DC=com'
+        }
     }
 
     @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())
     @patch('fn_ldap_utilities.util.helper.Server', helper.mocked_server())
-    @pytest.mark.parametrize("ldap_dn, ldap_attribute_name, ldap_attribute_values, expected_results",
-                             [(inputs["ldap_dn"], inputs["ldap_attribute_name"], inputs["ldap_attribute_values"], outputs)])
-    def test_success(self, circuits_app, ldap_dn, ldap_attribute_name, ldap_attribute_values, expected_results):
+    @pytest.mark.parametrize("mock_inputs, expected_results", [(inputs, outputs)])
+    def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = {
-            "ldap_dn": ldap_dn,
-            "ldap_attribute_name": ldap_attribute_name,
-            "ldap_attribute_values": ldap_attribute_values
-        }
-        results = call_ldap_utilities_update_function(circuits_app, function_params)
+
+        results = call_ldap_utilities_update_function(circuits_app, mock_inputs)
         for expected_result in expected_results:
             assert expected_result in results
