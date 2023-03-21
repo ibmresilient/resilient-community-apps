@@ -17,7 +17,6 @@ from fn_ldap_utilities.util.ldap_utils import LDAPDomains
 
 FN_NAME = "ldap_utilities_set_password"
 DEFAULT_MAX_PASSWORD_LEN = 12
-FN_NAME = "ldap_utilities_set_password"
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'ldap_utilities_set_password'"""
