@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v48.0.4034
 
 """Generate the Resilient customizations required for fn_trusteer_ppd"""
 
@@ -21,16 +22,16 @@ def codegen_reload_data():
     return {
         "package": u"fn_trusteer_ppd",
         "message_destinations": [u"fn_trusteer_ppd"],
-        "functions": [],
+        "functions": [u"trusteer_ppd_get_url_links_to_trusteer", u"trusteer_ppd_update_alert_classification", u"trusteer_ppd_update_classification_in_alert_datatable"],
         "workflows": [],
-        "actions": [],
-        "incident_fields": [],
-        "incident_artifact_types": [],
+        "actions": [u"Trusteer PPD: Parse Trusteer Email v1.0.0"],
+        "incident_fields": [u"trusteer_ppd_application_id", u"trusteer_ppd_link_to_puid", u"trusteer_ppd_puid"],
+        "incident_artifact_types": [u"trusteer_ppd_device_id"],
         "incident_types": [],
-        "datatables": [],
+        "datatables": [u"trusteer_ppd_dt_trusteer_alerts"],
         "automatic_tasks": [],
-        "scripts": [],
-        "playbooks": []
+        "scripts": [u"Trusteer PPD: Create Artifacts", u"Trusteer PPD: Create Case from Email v1.0.0"],
+        "playbooks": [u"trusteer_ppd_create_artifacts", u"trusteer_ppd_update_classification_in_trusteer", u"trusteer_ppd_update_device_url_link", u"trusteer_ppd_update_puid_url_link"]
     }
 
 
@@ -44,6 +45,28 @@ def customization_data(client=None):
     Contents:
     - Message Destinations:
         - fn_trusteer_ppd
+    - Functions:
+        - trusteer_ppd_get_url_links_to_trusteer
+        - trusteer_ppd_update_alert_classification
+        - trusteer_ppd_update_classification_in_alert_datatable
+    - Playbooks:
+        - trusteer_ppd_create_artifacts
+        - trusteer_ppd_update_classification_in_trusteer
+        - trusteer_ppd_update_device_url_link
+        - trusteer_ppd_update_puid_url_link
+    - Rules:
+        - Trusteer PPD: Parse Trusteer Email v1.0.0
+    - Incident Fields:
+        - trusteer_ppd_application_id
+        - trusteer_ppd_link_to_puid
+        - trusteer_ppd_puid
+    - Custom Artifact Types:
+        - trusteer_ppd_device_id
+    - Data Tables:
+        - trusteer_ppd_dt_trusteer_alerts
+    - Scripts:
+        - Trusteer PPD: Create Artifacts
+        - Trusteer PPD: Create Case from Email v1.0.0
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

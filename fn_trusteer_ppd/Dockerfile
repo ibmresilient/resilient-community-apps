@@ -1,10 +1,11 @@
+# Generated with resilient-sdk v48.1.0
 # docker build -t ibmresilient/fn_trusteer_ppd:1.0.0 -t ibmresilient/fn_trusteer_ppd:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_trusteer_ppd
-ARG RESILIENT_CIRCUITS_VERSION=47.1.0
+ARG RESILIENT_CIRCUITS_VERSION=48.0.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container

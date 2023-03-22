@@ -22,20 +22,20 @@ def snake_to_camel(word):
 
 setup(
     name="fn_trusteer_ppd",
-    display_name="Trusteer Pointpoint Detect",
+    display_name="Trusteer Pinpoint Detect",
     version="1.0.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
     url="https://ibm.com/mysupport",
-    description="IBM SOAR app bidirectional synchronization and functions for Trusteer Poinpoint Detect",
+    description="IBM SOAR app for Trusteer Pinpoint Detect",
     long_description="""Bi-directional App for Trusteer Pinpoint Detect. Parse emails from Trusteer Pinpoint Detect \
-        and create and update cases in SOAR.<br>
+        and create cases in SOAR and send classification information back to Trusteer.<br>
 
         <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
         <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        "resilient-circuits>=47.1.0"
+        "resilient-circuits>=48.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
