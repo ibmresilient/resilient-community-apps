@@ -171,7 +171,7 @@ If you have existing custom workflows, see [Creating workflows when server/serve
 
 ### MSSP Configuration
 
-Make sure to follow the instructions in the Integration Server Guide to install the app on the Config org. Afterwards, have your system administrator push the app to the appropriate child orgs.
+Make sure to follow the instructions in the Integration Server Guide to install the app on the Config org. The custom layout will have to be added manuanlly, see [Custom Layouts](#custom-layouts). Afterwards, have your system administrator push the app to the appropriate child orgs.
 
 ### Custom Layouts
 * Import the Data Tables and Custom Fields like the screenshot below:
