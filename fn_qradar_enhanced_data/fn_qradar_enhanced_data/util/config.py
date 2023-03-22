@@ -15,6 +15,7 @@ def config_section_data():
 # Interval to poll QRadar for changes (in seconds)
 # When polling_interval equals 0 the poller is off
 polling_interval=0
+# Amount of time in minutes to look back for changes
 polling_lookback=60
 # If true then data tables given in the workflows will be cleared when incident is updated by poller
 clear_datatables=True
