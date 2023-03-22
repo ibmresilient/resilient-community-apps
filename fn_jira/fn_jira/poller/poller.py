@@ -373,7 +373,11 @@ class PollerComponent(AppFunctionComponent):
                 CLOSE_CASE_TEMPLATE,
                 {"jira": jira, "soar": soar})
 
-            soar_close_payload["patches"][soar.get("id")] = payload
+            # Create new payload that will only have changes that have different old and new values
+            new_payload = filter_out_identical_changes(payload)
+
+            if new_payload.get("changes"):
+                soar_close_payload["patches"][soar.get("id")] = new_payload
 
         # If SOAR soar_close_payload is not empty then close cases
         if soar_close_payload["patches"]:
@@ -398,8 +402,11 @@ class PollerComponent(AppFunctionComponent):
                 UPDATE_CASE_TEMPLATE,
                 {"jira": jira, "soar": soar})
 
-            if payload.get("changes"):
-                soar_update_payload["patches"][soar.get("id")] = payload
+            # Create new payload that will only have changes that have different old and new values
+            new_payload = filter_out_identical_changes(payload)
+
+            if new_payload.get("changes"):
+                soar_update_payload["patches"][soar.get("id")] = new_payload
 
             # Check if new comments added or old comments changed/deleted
             self.soar_update_comments_attachments(jira, soar, "comment")
@@ -562,3 +569,18 @@ class PollerComponent(AppFunctionComponent):
         d_payload["cells"]["status"]["value"] = jira.get("fields").get("status").get("name")
 
         self.res_client.put(f"/incidents/{task.get('inc_id')}/table_data/{datatable.get('table_id')}/row_data/{datatable.get('id')}", d_payload)
+
+def filter_out_identical_changes(payload):
+    """
+    Filter out changes in the payload that are identical
+    :param payload: SOAR update payload
+    :return: Payload with only new fields
+    """
+    new_payload = payload.copy()
+    new_payload["changes"] = []
+
+    for soar_change in payload.get("changes"):
+        if soar_change.get("old_value") != soar_change.get("new_value"):
+            new_payload["changes"].append(soar_change)
+
+    return new_payload
