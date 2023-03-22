@@ -37,9 +37,6 @@ class FunctionComponent(AppFunctionComponent):
         # Instantiate a new TrusteerDatatable
         datatable = TrusteerDatatable(res_client, fn_inputs.incident_id, "trusteer_ppd_dt_trusteer_alerts")
 
-        # Get the data table data
-        datatable.get_data()
-
         # Get rows with the specified Trusteer session ID.
         rows = datatable.get_rows(max_rows=0, sort_by=None, sort_direction="ASC", 
                                   search_column="trusteer_ppd_dt_session_id", 

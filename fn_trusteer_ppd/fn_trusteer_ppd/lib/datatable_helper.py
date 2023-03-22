@@ -27,6 +27,9 @@ class TrusteerDatatable(object):
     def get_rows(self, max_rows: int=0, sort_by: str=None, sort_direction: str="ASC", search_column: str=None, search_value:str=None):
         """ Searches and returns rows based on a search/sort criteria, else None """
 
+        if not self.rows:
+            self.get_data()
+  
         if self.rows:
             is_reverse = True if sort_direction == "DESC" else False
 
