@@ -79,8 +79,7 @@ class FunctionComponent(AppFunctionComponent):
                     raise ValueError(f"The LDAP Search Filter '{ldap_search_filter}' contains the key '%ldap_param%' but no value has been given for ldap_search_param.")
                 else:
                     # Insert escaped param value in filter, need to escape any backslashes X 2 for regex.
-                    ldap_search_filter = sub(
-                        re_pattern, ldap_param_value.replace('\\', '\\\\'), ldap_search_filter)
+                    ldap_search_filter = sub(re_pattern, ldap_param_value.replace('\\', '\\\\'), ldap_search_filter)
 
             return ldap_search_filter
 

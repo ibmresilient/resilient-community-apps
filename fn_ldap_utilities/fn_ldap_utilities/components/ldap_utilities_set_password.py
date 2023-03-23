@@ -30,7 +30,11 @@ class FunctionComponent(AppFunctionComponent):
         """
         Function: A function that allows you to set a new password for an LDAP entry given the entry's DN
         Inputs:
-            -   fn_inputs.
+            -   fn_inputs.ldap_domain_name
+            -   fn_inputs.ldap_dn
+            -   fn_inputs.ldap_new_password
+            -   fn_inputs.ldap_new_auto_password_len
+            -   fn_inputs.ldap_return_new_password
         """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
@@ -41,8 +45,8 @@ class FunctionComponent(AppFunctionComponent):
         ldap_domain_name = getattr(fn_inputs, "ldap_domain_name", "") # text
         ldap_dn = getattr(fn_inputs, "ldap_dn") # text (required)
         ldap_new_password = getattr(fn_inputs, "ldap_new_password") # text
-        ldap_new_auto_password_len = getattr(fn_inputs, "ldap_new_auto_password_len", DEFAULT_MAX_PASSWORD_LEN)  # int Default length is 12
-        ldap_return_new_password = getattr(fn_inputs, "ldap_return_new_password")  # boolean
+        ldap_new_auto_password_len = getattr(fn_inputs, "ldap_new_auto_password_len", DEFAULT_MAX_PASSWORD_LEN) # int Default length is 12
+        ldap_return_new_password = getattr(fn_inputs, "ldap_return_new_password") # boolean
 
         self.LOG.info(f"LDAP Domain Name: {ldap_domain_name}")
         self.LOG.info(f"LDAP DN: {ldap_dn}")

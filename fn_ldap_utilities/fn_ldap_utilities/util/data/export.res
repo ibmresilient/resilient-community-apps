@@ -1146,6 +1146,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
+      "short_text": "",
       "tags": [],
       "templates": [],
       "text": "LDAP Return New Password",
