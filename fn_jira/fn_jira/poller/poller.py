@@ -166,6 +166,7 @@ class PollerComponent(AppFunctionComponent):
             )
             for issue in jira_issue_list:
                 self.LOG.debug(f"Jira Issue ID: {issue.get('id')}. Jira Issue Key: {issue.get('key')}")
+            
 
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
