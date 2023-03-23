@@ -7,9 +7,9 @@ from datetime import datetime, timedelta
 from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from resilient_lib import IntegrationError, SOARCommon
+from resilient_lib import IntegrationError, SOARCommon, clean_html
 from fn_qradar_enhanced_data.lib.poller_common import poller
-from fn_qradar_enhanced_data.util.function_utils import (get_qradar_client, get_server_settings, get_sync_notes, remove_html_tags)
+from fn_qradar_enhanced_data.util.function_utils import (get_qradar_client, get_server_settings, get_sync_notes)
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
 from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_POLLERQUERY
@@ -178,7 +178,7 @@ class PollerComponent(ResilientComponent):
                         # Check if the QRadar note was created after the last_poller_time
                         if int(note.get("createTime")) > poller_time:
                             # Create a list of notes that are on the SOAR incident
-                            inc_notes = [remove_html_tags(n.get("text")).replace("Added from QRadar", "") for n in incident_notes]
+                            inc_notes = [clean_html(n.get("text")) for n in incident_notes if "Added from QRadar" not in n.get("text")]
                             if note.get("noteText") not in inc_notes:
                                 # Create the comment payload
                                 comment_payload = {

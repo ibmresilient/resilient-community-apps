@@ -4,10 +4,10 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, clean_html
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
-from fn_qradar_enhanced_data.util.function_utils import get_qradar_client, get_server_settings, get_sync_notes, remove_html_tags
+from fn_qradar_enhanced_data.util.function_utils import get_qradar_client, get_server_settings, get_sync_notes
 
 FN_NAME = "qradar_create_note"
 
@@ -50,7 +50,7 @@ class FunctionComponent(AppFunctionComponent):
         if get_sync_notes(self.opts.get(GLOBAL_SETTINGS, {}), options):
             # Make POST call to the specified QRadar server to add a note to the specified QRadar offense
             results = auth_info.make_call("POST",
-                f"{api_url}siem/offenses/{fn_inputs.qradar_offense_id}/notes?note_text={remove_html_tags(fn_inputs.qradar_note)}"
+                f"{api_url}siem/offenses/{fn_inputs.qradar_offense_id}/notes?note_text={clean_html(fn_inputs.qradar_note)}"
             ).json()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
