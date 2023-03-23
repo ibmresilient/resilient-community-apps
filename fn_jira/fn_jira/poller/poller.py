@@ -164,6 +164,7 @@ class PollerComponent(AppFunctionComponent):
                 max_results,
                 data_to_get_from_case
             )
+            self.LOG.debug(jira_issue_list)
 
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
