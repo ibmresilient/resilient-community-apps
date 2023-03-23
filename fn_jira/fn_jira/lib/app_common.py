@@ -120,6 +120,8 @@ class AppCommon():
         :param max_results: Max number of issues that can be returned from Jira issue search
         """
 
+        LOG.debug(last_poller_time.strftime('%Y/%m/%d %H:%M'))
+
         if last_poller_time:
             search_filters = f"{search_filters} and updated > '{last_poller_time.strftime('%Y/%m/%d %H:%M')}'"
 
