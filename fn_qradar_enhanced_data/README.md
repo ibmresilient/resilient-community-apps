@@ -156,7 +156,7 @@ The following table provides the settings you need to configure the app. These s
 | **verify_cert** | Yes | `/path/to/cert` | *Path to certificate or specify `false` if using self signed certificate* |
 | **search_timeout** | No | `300` | *Timeout for the AQL search to be specified in seconds* |
 | **polling_interval** | No | `600` | *Time in seconds to wait between each poller run* |
-| **polling_lookback** | No | `60` | ** |
+| **polling_lookback** | No | `60` | *Time in minutes to look back* |
 | **clear_datatables** | No | `True` | *Boolean to clear or not clear content of data tables in incident when poller is run* |
 | **sync_notes** | Yes | `True` | *Boolean if true then notes that are added to QRadar offenses will be added to their linked SOAR incidents*|
 
