@@ -28,23 +28,25 @@ inputs.soar_table_name = "qr_flows"
 ### Post-Processing Script
 ```python
 content = results.get("content")
-link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/flows?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-for flow in content.get("events"):
-  offenseid = content.get("offenseid")
-  qradar_event = incident.addRow("qr_flows")
-  qradar_event.application = link.format(offenseid, "application_name", flow.Application, flow.Application)
-  qradar_event.source_ip = link.format(offenseid, "sourceip", flow.sourceip, flow.sourceip)
-  qradar_event.source_port = link.format(offenseid, "sourceport", flow.sourceport, flow.sourceport)
-  qradar_event.destination_ip = link.format(offenseid, "destinationip", flow.destinationip, flow.destinationip)
-  qradar_event.destination_port = link.format(offenseid, "destinationport", flow.destinationport, flow.destinationport)
-  qradar_event.protocol = flow.Protocol
-  qradar_event.first_packet_time = int(flow.FirstPacketTime)
-  qradar_event.source_bytes = int(flow.sourcebytes)
-  qradar_event.source_packets = int(flow.sourcepackets)
-  qradar_event.destination_bytes = int(flow.destinationbytes)
-  qradar_event.destination_packets = int(flow.destinationpackets)
-  qradar_event.reported_time = content.get("current_time")
+if content:
+  link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/flows?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
+  
+  for flow in content.get("events"):
+    offenseid = content.get("offenseid")
+    qradar_event = incident.addRow("qr_flows")
+    qradar_event.application = link.format(offenseid, "application_name", flow.Application, flow.Application)
+    qradar_event.source_ip = link.format(offenseid, "sourceip", flow.sourceip, flow.sourceip)
+    qradar_event.source_port = link.format(offenseid, "sourceport", flow.sourceport, flow.sourceport)
+    qradar_event.destination_ip = link.format(offenseid, "destinationip", flow.destinationip, flow.destinationip)
+    qradar_event.destination_port = link.format(offenseid, "destinationport", flow.destinationport, flow.destinationport)
+    qradar_event.protocol = flow.Protocol
+    qradar_event.first_packet_time = int(flow.FirstPacketTime)
+    qradar_event.source_bytes = int(flow.sourcebytes)
+    qradar_event.source_packets = int(flow.sourcepackets)
+    qradar_event.destination_bytes = int(flow.destinationbytes)
+    qradar_event.destination_packets = int(flow.destinationpackets)
+    qradar_event.reported_time = content.get("current_time")
 ```
 
 ---

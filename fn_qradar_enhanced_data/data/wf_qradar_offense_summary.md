@@ -26,9 +26,9 @@ inputs.qradar_label = incident.properties.qradar_destination
 ### Post-Processing Script
 ```python
 content = results.get("content")
-link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}{1}\" target=\"_blank\">{2}</a>"
 
 if content:
+  link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}{1}\" target=\"_blank\">{2}</a>"
   offenseid = content.get("offenseid")
   offense = content.get("offense")
   assignedTo = offense.get("assignedTo")

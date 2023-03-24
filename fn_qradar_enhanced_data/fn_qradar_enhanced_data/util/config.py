@@ -12,6 +12,11 @@ def config_section_data():
 #Settings that apply to all QRadar servers
 [fn_qradar_integration:edm_global_settings]
 #search_timeout=
+# Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
+#  same timezone as the QRadar servers timezone. Value must start with + or -, then hours followed by : and then minutes.
+# If timezone_offset under [fn_qradar_enhanced_data:global_settings] is configured, then timezone_offset
+#  that are configured under the individual QRadar servers will be ignored
+#timezone_offset = -4:00
 # Interval to poll QRadar for changes (in seconds)
 # When polling_interval equals 0 the poller is off
 polling_interval=0
@@ -40,6 +45,9 @@ verify_cert=false|/path/to/cert
 #search_timeout=
 # If true then notes that are added to QRadar offenses will be added to their linked SOAR incidents
 #sync_notes=True
+# Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
+#  same timezone as the QRadar servers timezone. Value must start with + or -, then hours followed by : and then minutes.
+#timezone_offset = -4:00
 
 # Note: the QRadar instance name that you want to communicate with, must equal the
 # QRadar Destination Name that is set when configuring the SOAR Plugin
@@ -54,4 +62,7 @@ verify_cert=false|/path/to/cert
 #search_timeout=
 # If true then notes that are added to QRadar offenses will be added to their linked SOAR incidents
 #sync_notes=True
+# Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
+#  same timezone as the QRadar servers timezone. Value must start with + or -, then hours followed by : and then minutes.
+#timezone_offset = -4:00
 '''

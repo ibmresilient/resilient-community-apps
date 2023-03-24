@@ -356,14 +356,10 @@ class QRadarClient(object):
 
         ret = {"status_code": response.status_code}
 
-        try:
-            if add_content_source:
-                ret["content"] = response.json()["data"].get(query_call.strip()).get(add_content_source)
-            else:
-                ret["content"] = response.json()["data"].get(query_call.strip())
-        except Exception as err:
-            LOG.error(err)
-            LOG.error(response)
+        if add_content_source:
+            ret["content"] = response.json()["data"].get(query_call.strip()).get(add_content_source)
+        else:
+            ret["content"] = response.json()["data"].get(query_call.strip())
 
         return ret
 

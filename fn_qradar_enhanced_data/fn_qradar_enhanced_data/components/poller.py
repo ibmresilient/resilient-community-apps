@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from logging import getLogger
 from threading import Thread
 from resilient_circuits import ResilientComponent
-from resilient_lib import IntegrationError, SOARCommon, clean_html
+from resilient_lib import IntegrationError, SOARCommon
 from fn_qradar_enhanced_data.lib.poller_common import poller
 from fn_qradar_enhanced_data.util.function_utils import (get_qradar_client, get_server_settings, get_sync_notes)
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
@@ -53,6 +53,44 @@ class PollerComponent(ResilientComponent):
         self.soar_common = SOARCommon(self.rest_client())
 
         return True
+
+    def set_time_offset(self, offset):
+        """
+        Offset time from UTC time by user given value
+        :param offset: [str] User given time offset
+        :return: Datetime object
+        """
+        last_poller_time = self.last_poller_time
+        offset_minutes = 0
+        offset_hours = 0
+
+        def make_int(time_offset):
+            """
+            Make string time offset into int
+            :param time_offset: string time offset
+            :return: int time offset
+            """
+            if time_offset.startswith("0"):
+                time_offset = time_offset[1:]
+            return int(time_offset) if time_offset else 0
+
+        # Get minutes to offset if present
+        if ":" in offset:
+            offset_minutes = offset[offset.index(":")+1:].strip()
+            offset_minutes = make_int(offset_minutes)
+            # Remove the minutes offset from offset variable
+            offset = offset[0:offset.index(":")]
+
+        if offset.startswith("-"):
+            offset_hours = offset[offset.index("-")+1:].strip()
+            offset_hours = make_int(offset_hours)
+            last_poller_time = last_poller_time - timedelta(hours=offset_hours, minutes=offset_minutes)
+        elif offset.startswith("+"):
+            offset_hours = offset[offset.index("+")+1:].strip()
+            offset_hours = make_int(offset_hours)
+            last_poller_time = last_poller_time + timedelta(hours=offset_hours, minutes=offset_minutes)
+
+        return last_poller_time
 
     @poller('polling_interval', 'last_poller_time', PACKAGE_NAME)
     def run(self, last_poller_time=None):
@@ -128,8 +166,6 @@ class PollerComponent(ResilientComponent):
                     case_dict = case_server_dict[server][offense_id]
                     case_id = case_dict.get('id')
                     case_lastPersistedTime = case_dict.get("properties", {}).get("qr_last_updated_time")
-                    LOG.debug(f"QRadar last persisted time: {datetime.fromtimestamp(offense_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')}")
-                    LOG.debug(f"SOAR Incident last updated time: {datetime.fromtimestamp(case_lastPersistedTime / 1e3).strftime('%m-%d-%Y %H:%M:%S')}")
                     if offense_lastPersistedTime > case_lastPersistedTime:
                         # If time is different then update the case
                         updated_cases.append(case_id)
@@ -165,15 +201,25 @@ class PollerComponent(ResilientComponent):
         :param case_server_dict: Dictionary of SOAR incidents
         :return: None
         """
+        options = self.opts.get(f"{PACKAGE_NAME}:{server}", {})
+        last_poller_time = self.last_poller_time
 
-        if get_sync_notes(self.global_settings, self.opts.get(f"{PACKAGE_NAME}:{server}", {})):
+        # Set last_poller_time to correct timezone based off user given offset
+        if self.global_settings.get("timezone_offset"):
+            # If timezone_offset configured in global_settings
+            last_poller_time = self.set_time_offset(self.global_settings.get("timezone_offset"))
+        elif options.get("timezone_offset"):
+            # If timezone_offset configured in individual server settings
+            last_poller_time = self.set_time_offset(options.get("timezone_offset"))
+
+        if get_sync_notes(self.global_settings, options):
             # Get notes from all QRadar offenses in filter
             offenses_notes = qradar_client.graphql_query({"filter": filter_notes}, GRAPHQL_POLLERQUERY).get("content")
             notes_to_add = []
 
             # Update offense notes
             if offenses_notes:
-                poller_time = int(self.last_poller_time.strftime("%s")) * 1e3
+                poller_time = int(last_poller_time.strftime("%s")) * 1e3
                 for notes in offenses_notes:
                     incident_id = case_server_dict.get(server, {}).get(notes.get('id'), {}).get('id') # ID of the SOAR incident
                     new_notes = [ note.get("noteText") for note in notes.get("notes") if int(note.get("createTime")) > poller_time ]

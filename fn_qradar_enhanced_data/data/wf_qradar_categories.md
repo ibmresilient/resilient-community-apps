@@ -28,19 +28,21 @@ inputs.soar_incident_id = incident.id
 ### Post-Processing Script
 ```python
 content = results.get("content")
-link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-for event in content.get("events"):
-  offenseid = content.get("offenseid")
-  categoryname = event.get("categoryname")
-  qradar_event = incident.addRow("qr_categories")
-  qradar_event.category_name = link.format(offenseid, "category_name", categoryname, categoryname)
-  qradar_event.magnitude = link.format(offenseid, "category_name", categoryname, event.get("magnitude"))
-  qradar_event.event_count = link.format(offenseid, "category_name", categoryname, event.get("eventcount"))
-  qradar_event.event_time = int(event.eventtime)
-  qradar_event.sourceip_count = link.format(offenseid, "category_name", categoryname, event.get("sourceipcount"))
-  qradar_event.destinationip_count = link.format(offenseid, "category_name", categoryname, event.get("destinationipcount"))
-  qradar_event.reported_time = content.get("current_time")
+if content:
+  link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
+
+  for event in content.get("events"):
+    offenseid = content.get("offenseid")
+    categoryname = event.get("categoryname")
+    qradar_event = incident.addRow("qr_categories")
+    qradar_event.category_name = link.format(offenseid, "category_name", categoryname, categoryname)
+    qradar_event.magnitude = link.format(offenseid, "category_name", categoryname, event.get("magnitude"))
+    qradar_event.event_count = link.format(offenseid, "category_name", categoryname, event.get("eventcount"))
+    qradar_event.event_time = int(event.eventtime)
+    qradar_event.sourceip_count = link.format(offenseid, "category_name", categoryname, event.get("sourceipcount"))
+    qradar_event.destinationip_count = link.format(offenseid, "category_name", categoryname, event.get("destinationipcount"))
+    qradar_event.reported_time = content.get("current_time")
 ```
 
 ---
@@ -68,16 +70,18 @@ inputs.soar_incident_id = incident.id
 ### Post-Processing Script
 ```python
 content = results.get("content")
-link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-for event in content.get("events"):
-  qradar_event = incident.addRow("qr_categories")
-  qradar_event.category_name = event.get("categoryname")
-  qradar_event.flow_count = event.get("flowcount")
-  qradar_event.last_packet_time = int(event.get("lastpackettime"))
-  qradar_event.sourceip_count = event.get("sourceipcount")
-  qradar_event.destinationip_count = event.get("destinationipcount")
-  qradar_event.reported_time = content.get("current_time")
+if content:
+  link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
+
+  for event in content.get("events"):
+    qradar_event = incident.addRow("qr_categories")
+    qradar_event.category_name = event.get("categoryname")
+    qradar_event.flow_count = event.get("flowcount")
+    qradar_event.last_packet_time = int(event.get("lastpackettime"))
+    qradar_event.sourceip_count = event.get("sourceipcount")
+    qradar_event.destinationip_count = event.get("destinationipcount")
+    qradar_event.reported_time = content.get("current_time")
 ```
 
 ---
