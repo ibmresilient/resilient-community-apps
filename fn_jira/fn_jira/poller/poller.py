@@ -5,7 +5,7 @@
 from logging import getLogger
 from os import path
 from threading import Thread
-from datetime import timezone
+from datetime import timezone, timedelta
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
@@ -77,8 +77,9 @@ class PollerComponent(AppFunctionComponent):
             return False
 
         LOG.info("Poller initiated, polling interval %s", self.polling_interval)
-        self.last_poller_time = get_last_poller_date(int(self.global_settings.get("polling_lookback", 0))).astimezone(timezone.utc)
-        LOG.info("Poller lookback: %s", self.last_poller_time)
+        poller_lookback = int(self.global_settings.get("polling_lookback", 0))
+        self.last_poller_time = get_last_poller_date(poller_lookback).astimezone(timezone.utc)
+        LOG.info("Minutes for poller to lookback: %s", poller_lookback)
 
         # Collect the override templates to use when creating, updating and closing cases
         self.soar_create_case_template = self.global_settings.get(f"{create_case}")
@@ -91,6 +92,44 @@ class PollerComponent(AppFunctionComponent):
         self.soar_common = SOARCommon(self.res_client)
 
         return True
+
+    def set_time_offset(self, offset):
+        """
+        Offset time from UTC time by user given value
+        :param offset: [str] User given time offset
+        :return: Datetime object
+        """
+        last_poller_time = self.last_poller_time
+        offset_minutes = 0
+        offset_hours = 0
+
+        def make_int(time_offset):
+            """
+            Make string time offset into int
+            :param time_offset: string time offset
+            :return: int time offset
+            """
+            if time_offset.startswith("0"):
+                time_offset = time_offset[1:]
+            return int(time_offset) if time_offset else 0
+
+        # Get minutes to offset if present
+        if ":" in offset:
+            offset_minutes = offset[offset.index(":")+1:].strip()
+            offset_minutes = make_int(offset_minutes)
+            # Remove the minutes offset from offset variable
+            offset = offset[0:offset.index(":")]
+
+        if offset.startswith("-"):
+            offset_hours = offset[offset.index("-")+1:].strip()
+            offset_hours = make_int(offset_hours)
+            last_poller_time = last_poller_time - timedelta(hours=offset_hours, minutes=offset_minutes)
+        elif offset.startswith("+"):
+            offset_hours = offset[offset.index("+")+1:].strip()
+            offset_hours = make_int(offset_hours)
+            last_poller_time = last_poller_time + timedelta(hours=offset_hours, minutes=offset_minutes)
+
+        return last_poller_time
 
     @poller("polling_interval", "last_poller_time")
     def run(self, *args, **kwargs):
@@ -158,16 +197,23 @@ class PollerComponent(AppFunctionComponent):
                 # Get the poller_filters settings from the servers settings
                 poller_filters = options.get("poller_filters")
 
+            # Set last_poller_time to correct timezone based off user given offset
+            if self.global_settings.get("timezone_offset"):
+                # If timezone_offset configured in global_settings
+                last_poller_time = self.set_time_offset(self.global_settings.get("timezone_offset"))
+            elif options.get("timezone_offset"):
+                # If timezone_offset configured in individual server settings
+                last_poller_time = self.set_time_offset(options.get("timezone_offset"))
+            else:
+                last_poller_time = self.last_poller_time
+
             # Get a list of Jira issues bases on the given search filters
             jira_issue_list, data_to_get_from_case = AppCommon(self.opts, options).search_jira_issues(
                 poller_filters,
-                self.last_poller_time,
+                last_poller_time,
                 max_results,
                 data_to_get_from_case
             )
-            for issue in jira_issue_list:
-                self.LOG.debug(f"Jira Issue ID: {issue.get('id')}. Jira Issue Key: {issue.get('key')}")
-            
 
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list

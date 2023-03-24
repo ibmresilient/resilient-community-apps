@@ -6,7 +6,7 @@ from logging import getLogger
 from urllib.parse import urlparse
 from jira import JIRA
 from fn_jira.util.helper import str_time_to_int_time, check_jira_issue_linked_to_task, get_id_from_jira_issue_description, GLOBAL_SETTINGS
-from resilient_lib import IntegrationError, str_to_bool, validate_fields, RequestsCommon
+from resilient_lib import IntegrationError, str_to_bool, validate_fields, RequestsCommon, clean_html
 
 LOG = getLogger(__name__)
 
@@ -289,7 +289,7 @@ def add_to_case(soar_common, cases_list, num, field_name):
         for field_num in range(len(case_field)):
             field_dict = {"id": case_field[field_num].get("id")}
             if field_name == "comments":
-                field_dict["content"] = case_field[field_num].get("text").replace("<div>","").replace("</div>","")
+                field_dict["content"] = clean_html(case_field[field_num].get("text"))
             if field_name == "attachments":
                 field_dict["name"] = case_field[field_num].get("name")
             cases_list[num][field_name].append(field_dict)

@@ -141,6 +141,7 @@ The following table provides the settings you need to configure the app. These s
 | **poller_filters** | Yes | `priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)` | Search filters for Jira issue to sync with SOAR cases. |
 | **polling_interval** | Yes | `0` | Interval to poll Jira for changes (in seconds). |
 | **polling_lookback** | Yes | `60` | Amount of time for poller to look back when syncing Jira issues and SOAR cases. |
+| **timezone_offset** | No | `-4:00` | Timezone off set from UTC time. |
 | **timeout** | No | `10` | The number of seconds to timeout after when making a request to the Jira platform. |
 | **url** | Yes | `https://<jira url>` | The URL of your Jira platform. |
 | **user** | Required for `AUTH` or `BASIC` | `<jira user>` | The username of the Jira account to use with this integration. They must be a user on the Jira platform with the correct permissions. |
