@@ -5,7 +5,7 @@
 from logging import getLogger
 from os import path
 from threading import Thread
-from datetime import timezone, timedelta
+from datetime import timezone, timedelta, datetime
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
@@ -93,13 +93,13 @@ class PollerComponent(AppFunctionComponent):
 
         return True
 
-    def set_time_offset(self, offset):
+    def set_time_offset(self, last_poller_time, offset):
         """
         Offset time from UTC time by user given value
+        :param last_poller_time: datetime object of last time the poller ran
         :param offset: [str] User given time offset
         :return: Datetime object
         """
-        last_poller_time = self.last_poller_time
         offset_minutes = 0
         offset_hours = 0
 
@@ -197,20 +197,20 @@ class PollerComponent(AppFunctionComponent):
                 # Get the poller_filters settings from the servers settings
                 poller_filters = options.get("poller_filters")
 
+            last_poller_time = datetime.fromtimestamp(kwargs.get("last_poller_time") / 1e3)
+            last_poller = last_poller_time
             # Set last_poller_time to correct timezone based off user given offset
             if self.global_settings.get("timezone_offset"):
                 # If timezone_offset configured in global_settings
-                last_poller_time = self.set_time_offset(self.global_settings.get("timezone_offset"))
+                last_poller = self.set_time_offset(last_poller_time, self.global_settings.get("timezone_offset"))
             elif options.get("timezone_offset"):
                 # If timezone_offset configured in individual server settings
-                last_poller_time = self.set_time_offset(options.get("timezone_offset"))
-            else:
-                last_poller_time = self.last_poller_time
+                last_poller = self.set_time_offset(last_poller_time, options.get("timezone_offset"))
 
             # Get a list of Jira issues bases on the given search filters
             jira_issue_list, data_to_get_from_case = AppCommon(self.opts, options).search_jira_issues(
                 poller_filters,
-                last_poller_time,
+                last_poller,
                 max_results,
                 data_to_get_from_case
             )
