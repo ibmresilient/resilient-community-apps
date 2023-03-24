@@ -106,6 +106,7 @@ class PollerComponent(ResilientComponent):
         :param last_poller_time: (int) Time in milliseconds when the last poller ran
         :return: None
         """
+        self.last_poller_time = datetime.fromtimestamp(last_poller_time / 1e3)
         case_list, error_msg = self.soar_common.get_soar_cases({"qradar_id": True, "qradar_destination": True})
 
         if error_msg:
@@ -203,7 +204,6 @@ class PollerComponent(ResilientComponent):
         """
         options = self.opts.get(f"{PACKAGE_NAME}:{server}", {})
         last_poller_time = self.last_poller_time
-
         # Set last_poller_time to correct timezone based off user given offset
         if self.global_settings.get("timezone_offset"):
             # If timezone_offset configured in global_settings
