@@ -77,9 +77,9 @@ class PollerComponent(AppFunctionComponent):
             return False
 
         LOG.info("Poller initiated, polling interval %s", self.polling_interval)
-        poller_lookback = int(self.global_settings.get("polling_lookback", 0))
-        self.last_poller_time = get_last_poller_date(poller_lookback).astimezone(timezone.utc)
-        LOG.info("Minutes for poller to lookback: %s", poller_lookback)
+        self.poller_lookback = int(self.global_settings.get("polling_lookback", 0))
+        self.last_poller_time = get_last_poller_date(self.poller_lookback).astimezone(timezone.utc)
+        LOG.info("Minutes for poller to lookback: %s", self.poller_lookback)
 
         # Collect the override templates to use when creating, updating and closing cases
         self.soar_create_case_template = self.global_settings.get(f"{create_case}")
@@ -100,6 +100,8 @@ class PollerComponent(AppFunctionComponent):
         :param offset: [str] User given time offset
         :return: Datetime object
         """
+        last_poller_time = last_poller_time - timedelta(minutes=self.poller_lookback)
+
         offset_minutes = 0
         offset_hours = 0
 
