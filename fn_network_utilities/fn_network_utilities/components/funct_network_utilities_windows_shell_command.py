@@ -45,7 +45,6 @@ class FunctionComponent(AppFunctionComponent):
         LOG.info(f"network_utilities_shell_params: {shell_params}")
         LOG.info(f"network_utilities_remote_computer: {remote_computer}")
 
-
         validate_fields(["network_utilities_shell_command"], fn_inputs)
 
 

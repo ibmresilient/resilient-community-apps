@@ -43,7 +43,7 @@ class FunctionComponent(AppFunctionComponent):
         shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
         remote_computer = getattr(fn_inputs, "network_utilities_remote_computer", None) #text
         if self.options.get("timeout_linux") is not None:
-            timeout_sec = self.options.get("timeout_linux")
+            timeout_sec = int(self.options.get("timeout_linux"))
         else: 
             timeout_sec = DEFAULT_TIMEOUT_SEC
 

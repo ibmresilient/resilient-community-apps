@@ -48,7 +48,7 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 02/2023 | Initial Release |
-| 1.0.1 | 3/2023 | Add a timeout option for linux remote shell command |
+| 1.0.1 | 3/2023 | Add a timeout option for Linux shell command |
 
 ---
 
@@ -366,7 +366,7 @@ This function allows your workflows/playbooks to execute shell-scripts remotely 
  ![screenshot: fn-network-utilities-linux-shell-command ](./doc/screenshots/fn-network-utilities-linux-shell-command.png)
 
 For security, the list of available shell commands must be configured explicitly by the administrator. To do this, edit the [fn_utilities] section of the app.config file.
-NOTE: The parameter values {{shell_param1}}, {{shell_param2}}, {{shell_param3}} may contain spaces, dashes and other characters. In your command configuration, they must be surrounded with double-quotes. Failure to properly quote your command parameters creates a security risk, since the parameter values usually come from artifacts and other untrusted data.
+NOTE: The parameter values {{shell_param1}}, {{shell_param2}}, {{shell_param3}} may contain spaces, dashes and other characters. In your command configuration, they must be surrounded with double-quotes. Failure to properly quote your command parameters creates a security risk, since the parameter values usually come from artifacts and other untrusted data. Additionally, timeouts do not yield any exceptions to notify when it has occurred.
 
 ### app.config examples:
 * Linux Operating Systems basic examples:
