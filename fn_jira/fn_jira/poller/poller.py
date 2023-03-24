@@ -5,6 +5,7 @@
 from logging import getLogger
 from os import path
 from threading import Thread
+from datetime import timezone
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
@@ -76,7 +77,7 @@ class PollerComponent(AppFunctionComponent):
             return False
 
         LOG.info("Poller initiated, polling interval %s", self.polling_interval)
-        self.last_poller_time = get_last_poller_date(int(self.global_settings.get("polling_lookback", 0)))
+        self.last_poller_time = get_last_poller_date(int(self.global_settings.get("polling_lookback", 0))).astimezone(timezone.utc)
         LOG.info("Poller lookback: %s", self.last_poller_time)
 
         # Collect the override templates to use when creating, updating and closing cases
