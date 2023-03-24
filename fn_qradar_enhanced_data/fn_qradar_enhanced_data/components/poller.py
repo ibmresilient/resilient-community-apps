@@ -46,8 +46,9 @@ class PollerComponent(ResilientComponent):
             return False
 
         LOG.info(f"Poller initiated, polling interval {self.polling_interval}")
-        self.last_poller_time = datetime.now() - timedelta(minutes=int(self.global_settings.get('polling_lookback', 0)))
-        LOG.info(f"Poller lookback: {self.last_poller_time}")
+        self.poller_lookback = int(self.global_settings.get('polling_lookback', 0))
+        self.last_poller_time = datetime.now() - timedelta(minutes=self.poller_lookback)
+        LOG.info(f"Minutes for poller to lookback: {self.poller_lookback}")
 
         self.rest_client()
         self.soar_common = SOARCommon(self.rest_client())
@@ -106,7 +107,7 @@ class PollerComponent(ResilientComponent):
         :param last_poller_time: (int) Time in milliseconds when the last poller ran
         :return: None
         """
-        self.last_poller_time = datetime.fromtimestamp(last_poller_time / 1e3)
+        self.last_poller_time = datetime.fromtimestamp(last_poller_time / 1e3) - timedelta(minutes=self.poller_lookback)
         case_list, error_msg = self.soar_common.get_soar_cases({"qradar_id": True, "qradar_destination": True})
 
         if error_msg:
