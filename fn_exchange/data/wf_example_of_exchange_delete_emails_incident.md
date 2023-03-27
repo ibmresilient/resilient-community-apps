@@ -77,6 +77,7 @@ enable_add_attachment_value = False
 from datetime import datetime
 
 fail_reason = results.get("reason")
+inputs    = results.get("inputs")
 content   = results.get("content")
 emails    = content.get("emails")
 email_ids = content.get("email_ids")
