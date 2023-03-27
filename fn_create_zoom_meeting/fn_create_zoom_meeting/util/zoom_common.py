@@ -26,19 +26,15 @@ class ZoomCommon:
     def __init__(self, opts, options):
         self.opts = opts
         self.options = options
-        self.key = options.get("zoom_api_key")
-        self.secret = options.get("zoom_api_secret")
         self.api_url = options.get("zoom_api_url")
         self.account_id = options.get("zoom_account_id")
         self.client_id = options.get("zoom_client_id")
         self.client_secret = options.get("zoom_client_secret")
 
 
-    def generate_auth_token(self, key, secret):
+    def generate_auth_token(self):
         """Generates authentication token used to authenticate with Zoom API"""
         req_common = RequestsCommon(self.opts, self.options)
-        # url = 'https://api.zoom.us/v2/users/me'
-        # account_id = self.account_id
         url = f"https://zoom.us/oauth/token?grant_type=account_credentials&account_id={self.account_id}"
         auth_str = f"{self.client_id}:{self.client_secret}"
         auth_bytes = base64.b64encode(auth_str.encode("utf-8"))
@@ -49,15 +45,11 @@ class ZoomCommon:
         response = req_common.execute("post", url, headers=headers).json()
         return response["access_token"]
 
-        # return jwt.encode({'iss': key, 'exp': time.time() + 60},  # exp is expiry time in epoch, we have it for 60 secs
-        #                   secret,  # secret key
-        #                   algorithm='HS256')
-
     def zoom_request(self, path=None, method="GET", query=None, headers=None):
         """Generates and makes specified request to Zoom API"""
         url = self.api_url + path
         
-        access_token = self.generate_auth_token(self.key, self.secret)
+        access_token = self.generate_auth_token()
         headers = {'Authorization': f'Bearer {access_token}',
                'Content-type': 'application/json'}
         
@@ -77,7 +69,7 @@ class ZoomCommon:
             raise FunctionError("API call failed! HTTP Status: {}, URL: {}".format(response.status_code, url))
         elif response.status_code == 401:
             # access token probably expired
-            access_token = self.generate_auth_token(self.key, self.secret)
+            access_token = self.generate_auth_token()
             return self.zoom_request(path, method, query, headers)
 
         return response
@@ -142,7 +134,7 @@ class ZoomCommon:
 
     def create_meeting(self, host_email, agenda_string, record_boolean, meeting_topic, meeting_password, timezone):
         """Creates a Zoom Meeting"""
-        access_token = self.generate_auth_token(self.key, self.secret)
+        access_token = self.generate_auth_token()
 
         meeting_time = datetime.datetime.now()  # type: datetime
         post_time_format = meeting_time.strftime('yyyy-MM-dd\'T\'HH:mm:ss%Z')
@@ -169,11 +161,13 @@ class ZoomCommon:
 
             zoom_host_url = json_data["start_url"]
             zoom_join_url = self.strip_password_from_join_url(json_data["join_url"])
+            zoom_url_with_pass = json_data["join_url"]
 
         results = {
             "host_url": zoom_host_url,
             "attendee_url": zoom_join_url,
-            "date_created": meeting_time
+            "date_created": meeting_time,
+            "attendee_url_with_pass": zoom_url_with_pass
         }
 
         return results

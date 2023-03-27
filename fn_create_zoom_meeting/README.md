@@ -42,6 +42,7 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 09/2018 | Initial Release |
 | 1.1.0 | 10/2021| Add App Host Support, Section header in app.config has been changed to `fn_create_zoom_meeting`, please make sure to update your app.config |
+| 2.0.0 | 3/2023 | Change App type to Server-to-Server Oauth |
 
 ---
 
@@ -69,7 +70,7 @@ Resilient Circuits Components for 'fn_create_zoom_meeting'
 <!--
   List any Requirements 
 -->
-Go to [https://marketplace.zoom.us/](https://marketplace.zoom.us/), click the develop drop down menu and select build app. From here, choose the JWT app type and use the api key and api secret to fill out the variables in the app.config. The email variable in the app.config wil be the email used for the app marketplace account.
+Go to [https://marketplace.zoom.us/](https://marketplace.zoom.us/), click the develop drop down menu and select build app. From here, choose the Server-toServer app type and use the Account ID, Client ID, and Client Secret to fill out the variables in the app.config. The email variable in the app.config wil be the email used for the app marketplace account.
 
 This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -116,7 +117,6 @@ The app does support a proxy server.
 Both Python 2.7 and Python 3.6 are supported.
 Additional package dependencies may exist for each of these packages:
 * bs4
-* pyjwt
 * pytz
 * resilient_circuits>=30.0.0
 
@@ -134,9 +134,10 @@ The following table provides the settings you need to configure the app. These s
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **zoom_api_url** | Yes | `https://api.zoom.us/v2` | - |
-| **zoom_api_key** | Yes | `<zoom api key>` | API key from the app marketplace|
+| **zoom_client_id** | Yes | `<zoom client id>` | Client ID from the app marketplace|
+| **zoom_account_id** | Yes | `<zoom client id>` | Account ID from the app marketplace|
 | **zoom_marketplace_account_email** | Yes | `<zoom marketplace account email>` | Host email |
-| **zoom_api_secret** | Yes | `<zoom api secret>` | API secret from the app marketplace |
+| **zoom_client_secret** | Yes | `<zoom client secret>` | Cloemt secret from the app marketplace |
 | **zoom_api_timezone** | Yes | `<timezone, i.e America/New_York>` | pytz.timezone |
 
 
@@ -144,6 +145,8 @@ The following table provides the settings you need to configure the app. These s
 
 ## Function - Create Zoom Meeting
 This will return a meeting URL to connect to a zoom meeting
+
+NOTE: JWT App types are deprecated, must change to Server-to-Server OAuth app.
 
  ![screenshot: fn-create-zoom-meeting ](./doc/screenshots/fn_create_zoom_meeting_function.png)
 
@@ -205,7 +208,8 @@ inputs.zoom_record_meeting = inputs.zoom_record_meeting if rule.properties.zoom_
 # {
 #   "host_url": "https://zoom.us/s/x?zak=x", 
 #   "attendee_url": "https://zoom.us/j/x", 
-#   "date_created": "01/01/1971 12:00:00"
+#   "date_created": "01/01/1971 12:00:00",
+#   "attendee_url_with_pass": 'https://us05web.zoom.us/j/89922216709?pwd=UTlEYWRrbUV4SHBacStvQUkvcHVPQT09'
 # }
 if results.host_url is not None and results.attendee_url is not None:
   host_url = results.host_url

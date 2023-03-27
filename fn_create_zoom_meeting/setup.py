@@ -32,7 +32,6 @@ setup(
     long_description="This SOAR Function package can be used to create a Zoom meeting from a workflow using the Functions feature of the SOAR Circuits integration framework.",
     install_requires=[
         'resilient_circuits>=42.0.0',
-        'pyjwt',
         'pytz',
         'bs4'
     ],
