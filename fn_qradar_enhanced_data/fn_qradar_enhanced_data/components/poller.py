@@ -139,10 +139,14 @@ class PollerComponent(ResilientComponent):
             id_list = list(case_server_dict[server].keys())
             for id in id_list:
                 filter_note.append(f"id={str(id)}")
-                filter.append(f"id={str(id)} and last_persisted_time > {int(case_server_dict[server][id].get('properties').get('qr_last_updated_time'))}")
+                LOG.debug(str(case_server_dict[server][id].get('properties')))
+                qr_lat_updated = int(case_server_dict[server][id].get('properties').get('qr_last_updated_time'))
+                filter.append(f"id={str(id)} and last_persisted_time > {qr_lat_updated}")
 
             filters = " or ".join(filter)
+            LOG.debug(str(filters))
             filter_notes = " or ".join(filter_note)
+            LOG.debug(str(filter_notes))
 
             # Create connection to QRadar server
             qradar_client = get_qradar_client(self.opts, get_server_settings(self.opts, server))
