@@ -16,6 +16,9 @@ try:
 except:
     import html.parser as htmlparser
 
+LOG = logging.getLogger(__name__)
+
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_create_zoom_meeting"""
 
@@ -72,7 +75,7 @@ class FunctionComponent(ResilientComponent):
 
             yield FunctionResult(r)
         except Exception as e:
-            log.error(e)
+            LOG.error(e)
             yield FunctionError(e)
 
     def _clean_html(self, html_fragment):

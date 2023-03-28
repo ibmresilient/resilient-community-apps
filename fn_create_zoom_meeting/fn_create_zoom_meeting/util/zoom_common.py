@@ -6,7 +6,6 @@
 from resilient_lib import RequestsCommon
 import json
 import base64
-import jwt
 import time
 import datetime
 import logging
@@ -19,6 +18,7 @@ except:
 
 LOG = logging.getLogger(__name__)
 PWD_IN_URL = "pwd"
+AUTH_URL = f"https://zoom.us/oauth/token?grant_type=account_credentials&account_id="
 
 
 class ZoomCommon:
@@ -35,7 +35,7 @@ class ZoomCommon:
     def generate_auth_token(self):
         """Generates authentication token used to authenticate with Zoom API"""
         req_common = RequestsCommon(self.opts, self.options)
-        url = f"https://zoom.us/oauth/token?grant_type=account_credentials&account_id={self.account_id}"
+        url = f"{AUTH_URL}{self.account_id}"
         auth_str = f"{self.client_id}:{self.client_secret}"
         auth_bytes = base64.b64encode(auth_str.encode("utf-8"))
         encoded_auth = str(auth_bytes, "utf-8")

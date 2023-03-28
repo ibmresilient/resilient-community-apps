@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_create_zoom_meeting',
     display_name='Zoom Functions for SOAR',
-    version='1.1.0',
+    version='2.0.0',
     url='http://ibm.biz/soarcommunity',
     license='MIT',
     author='IBM SOAR',

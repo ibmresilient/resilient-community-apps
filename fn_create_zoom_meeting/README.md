@@ -42,7 +42,7 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 09/2018 | Initial Release |
 | 1.1.0 | 10/2021| Add App Host Support, Section header in app.config has been changed to `fn_create_zoom_meeting`, please make sure to update your app.config |
-| 2.0.0 | 3/2023 | Change App type to Server-to-Server Oauth |
+| 2.0.0 | 3/2023 | Change App type to Server-to-Server OAuth |
 
 ---
 
@@ -70,7 +70,7 @@ Resilient Circuits Components for 'fn_create_zoom_meeting'
 <!--
   List any Requirements 
 -->
-Go to [https://marketplace.zoom.us/](https://marketplace.zoom.us/), click the develop drop down menu and select build app. From here, choose the Server-toServer app type and use the Account ID, Client ID, and Client Secret to fill out the variables in the app.config. The email variable in the app.config wil be the email used for the app marketplace account.
+Go to [https://marketplace.zoom.us/](https://marketplace.zoom.us/), click the develop drop down menu and select build app. From here, choose the Server-to-Server app type and use the Account ID, Client ID, and Client Secret to fill out the variables in the app.config. The email variable in the app.config wil be the email used for the app marketplace account.
 
 This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
 
@@ -114,7 +114,7 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app does support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Both Python 3.6 and 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * bs4
 * pytz
@@ -137,7 +137,7 @@ The following table provides the settings you need to configure the app. These s
 | **zoom_client_id** | Yes | `<zoom client id>` | Client ID from the app marketplace|
 | **zoom_account_id** | Yes | `<zoom client id>` | Account ID from the app marketplace|
 | **zoom_marketplace_account_email** | Yes | `<zoom marketplace account email>` | Host email |
-| **zoom_client_secret** | Yes | `<zoom client secret>` | Cloemt secret from the app marketplace |
+| **zoom_client_secret** | Yes | `<zoom client secret>` | Client secret from the app marketplace |
 | **zoom_api_timezone** | Yes | `<timezone, i.e America/New_York>` | pytz.timezone |
 
 
