@@ -32,7 +32,7 @@ setup(
         'ansible~=7.3.0; python_version>="3.9"',
         'ansible-runner~=2.3.2; python_version>="3.9"',
         'python-daemon~=3.0.1; python_version>="3.9"',
-        'ansible==2.8.3; python_version=="3.6"',
+        'ansible==7.0.0; python_version=="3.6"',
         'ansible-runner==1.3.4; python_version=="3.6"',
         'python-daemon==2.3.2; python_version=="3.6"', # a sub dependency of ansible-runner whose version needs to be pinned for PY36
         'resilient_circuits>=30.0.0',
