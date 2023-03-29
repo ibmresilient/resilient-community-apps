@@ -1,0 +1,17 @@
+{
+    "vars": {
+        "http-method": "POST",
+        "http-body": {
+            "incident": {
+                "name": "{{incident.name}}",
+                "id": "{{incident.id}}"
+            }
+        }
+    },
+    "query": {
+        "expression": "http:\/\/httpbin.org\/post"
+    },
+    "incident_fields": {
+        "name": "{{result.json.incident.id}}"
+    }
+}

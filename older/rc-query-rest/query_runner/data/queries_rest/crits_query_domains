@@ -1,0 +1,21 @@
+{
+
+<!--
+also:
+    * set ticket id on an artifact
+
+-->
+
+    "comment": "https://github.com/crits/crits/wiki/Authenticated-API",
+
+    "vars": {
+        "CRITS_SERVER_URL": "http://crits:8080/",
+        "CRITS_USER": "admin",
+        "CRITS_APIKEY": "78b1931665cadc97a609da99c96d0aa63cbbb23c"
+    }
+
+    "query": {
+        "expression": "{{CRITS_SERVER_URL|js}}/api/v1/samples/?&username={{CRITS_USER|js}}&api_key={{CRITS_APIKEY|js}}&c-campaign.name={{foo|js}}"
+    },
+
+}

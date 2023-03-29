@@ -1,0 +1,12 @@
+{
+    "query": {
+        "expression": "select LONG(NOW()) as now, LOGSOURCENAME(logsourceid) as logsource from events where INOFFENSE({{incident.properties.qradar_id}}) LIMIT 1 START '{{ properties.start_time|datetime }}' STOP '{{ properties.end_time|datetime }}'",
+        "range": "0-0",
+        "extract_results_from": "events"
+    },
+    "incident_fields": {
+        "logsource": "{{ result.logsource|js }}",
+        "query_last_run": "{{ result.now }}"
+    },
+    "artifacts": []
+}

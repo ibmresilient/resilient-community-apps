@@ -1,0 +1,11 @@
+{
+    "query": {
+        "expression": "http://httpbin.org/get?q={{artifact.value|js}}"
+    },
+
+    "notes": [
+        {
+            "text": "<b>Query</b>: <a href=\"{{result.url|js}}\">{{result.args.q|js}}</a><br>User Agent: {{result.headers['User-Agent']}}<br>Origin: {{result.origin|js}}"
+        }
+    ]
+}

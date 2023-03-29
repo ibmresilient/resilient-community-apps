@@ -1,0 +1,3 @@
+include README.md
+include query_runner/data/*
+include query_runner/LICENSE

@@ -1,0 +1,12 @@
+# -----------------------------------------------------------------------------
+# The 'QueryREST' action component
+# -----------------------------------------------------------------------------
+[rest]
+queue=rest
+
+# Directory containing query definition files
+# Filenames must match the Resilient action names
+# (recommend copying the supplied examples into your own custom directory)
+query_definitions_dir=${directory}
+
+query_timeout=60

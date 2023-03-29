@@ -1,0 +1,26 @@
+{
+    "vars": {
+        "http-headers": {"X-Fooble": "Bar"}
+    },
+
+    "query": {
+        "expression": "http://httpbin.org/get?q={{artifact.value|js}}"
+    },
+
+    "incident_fields": {
+        "description": "{{result.headers}}"
+    },
+
+    "artifacts": [
+        {
+            "value": "{{result.origin|js}}",
+            "type": "IP Address",
+            "description": "Origin for this request"
+        },
+        {
+            "value": "{{result.headers['User-Agent']|js}}",
+            "type": "User Agent",
+            "description": "User-agent for this request"
+        }
+    ]
+}

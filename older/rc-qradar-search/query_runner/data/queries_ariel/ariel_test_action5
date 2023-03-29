@@ -1,0 +1,19 @@
+{
+    "vars": {
+        "columns": "CategoryName(category), ProtocolName(protocolId), LogSourceName(logsourceid), LogSourceTypeName(deviceType), NetworkName(sourceip), NetworkName(destinationip), QidName(qid), RuleName(creEventList), *",
+        "start": "START '{{ (incident.discovered_date - (1000 * 60 * 60 * properties.time_window_hours|value('time_window_hours')|int()))|datetime }}'",
+        "stop": "STOP '{{ (incident.discovered_date + (1000 * 60 * 60 * properties.time_window_hours|value('time_window_hours')|int()))|datetime }}'"
+        "ip_field": "{{type_info.assets.fields.ip.id}}"
+    },
+    "query": {
+        "expression": "select {{columns}} from events where LOGSOURCEGROUPNAME(logsourceid) = 'Staff Proxies' and sourceip = '{{row.cells[ip_field].value|js}}' {{start}} {{stop}}",
+        "extract_results_from": "events",
+        "default": { "Result": "No data was returned from this query.", "Query": "{{query|js}}" },
+        "onerror": { "Error": "No data was returned from this query.", "Query": "{{query|js}}", "Message": "{{error|js}}" }
+    },
+    "attachment": {
+        "name": "Proxy_Logs_{{artifact.value|js}}_{{properties.time_window_hours|value('time_window_hours')}}h",
+        "ext": "csv"
+    }
+}
+

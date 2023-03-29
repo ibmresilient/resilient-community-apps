@@ -1,0 +1,15 @@
+{
+    "vars": {
+        "http-method": "POST",
+        "http-body": {"artifact": "{{artifact.value|js}}"}
+    },
+
+    "query": {
+        "expression": "http://httpbin.org/post"
+    },
+
+    "incident_fields": {
+        "description": "{{result}}"
+    }
+
+}

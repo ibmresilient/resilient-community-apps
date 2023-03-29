@@ -1,0 +1,10 @@
+# Components
+
+Python files in this directory will be automatically loaded.
+The loader looks for classes that implement <BaseComponent>
+or some derived Circuits <Component> class, and attaches 
+them to the application.
+
+Supporting Python classes that are not Circuits components
+should generally be placed in the `lib` directory.
+

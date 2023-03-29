@@ -1,0 +1,36 @@
+{
+    "vars": {
+        "test": "{% if type_info|artifact_type == 'String' %}{{ type_info|artifact_type }}{% else %}*{% endif %}"
+    },
+    "query": {
+        "expression": "search index=_internal source = \/Applications\/Splunk\/var\/log\/splunk\/splunkd.log \"{{ artifact.value }}\" earliest=-{{ properties.days_to_search }}d",
+        "limit": 10,
+        "extract_results_from": "results",
+        "additional_queries": ["counts_example"]
+    },
+    "datatables": [
+        {
+            "name": "test_table",
+            "keys": ["col1", "col3"],
+            "cells": {
+                "col1": {
+                    "value": "{{artifact.value}}"
+                },
+                "col2": {
+                    "value": "{{test}}"
+                },
+                "col3": {
+                    "value": "{{result._time}}"
+                }
+            }
+        }
+    ],
+    "attachment": {
+        "name": "Splunk_File",
+        "keys": [
+            "_si",
+            "index",
+            "sourcetype"
+        ]
+    }
+}

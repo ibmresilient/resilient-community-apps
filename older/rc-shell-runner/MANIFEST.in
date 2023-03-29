@@ -1,0 +1,4 @@
+include README.md
+include shell_runner/data/*
+include shell_runner/scripts/*
+include shell_runner/LICENSE

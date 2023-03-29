@@ -1,0 +1,14 @@
+{
+    "query": {
+        "expression": ".*,my test value,.*",
+        "extract_results_from": "results",
+        "parameters": {
+            "file_format": "csv",
+            "filename": "tests/sample_data/test_file_fieldlist.csv"
+        }
+    },
+    "incident_fields": {
+        "field1": "{{ result.column1 }}",
+        "field2": "{{ result.column3 }}"
+    }
+}

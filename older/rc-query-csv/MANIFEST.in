@@ -1,0 +1,3 @@
+include README.md
+include rc_query_csv/data/*
+include rc_query_csv/LICENSE

@@ -1,0 +1,47 @@
+{
+    "query": {
+        "expression": "search index=_internal source = \/Applications\/Splunk\/var\/log\/splunk\/splunkd.log {{ artifact.value }} earliest=-5d@w1 latest=now |fields *",
+        "limit": 2,
+        "extract_results_from": "results"
+    },
+    "incident_fields": {
+        "custom1": "{{ result._raw }}"
+    },
+    "datatables": [
+        {
+            "name": "test_table",
+            "keys": ["col1"],
+            "cells": {
+                "col1": {
+                    "value": "{{artifact.value}}"
+                },
+                "col2": {
+                    "value": "{{result.host|js}}"
+                },
+                "col3": {
+                    "value": "{{result.sourcetype|js}}"
+                },
+                "int_col": {
+                    "value": "{{ result.date_second }}"
+                },
+                "sel_col": {
+                    "value": "{{result.sourcetype }}"
+                },
+                "multi_col": {
+                    "value": "{{result.sourcetype }}"
+                },
+                "datetime_col": {
+                    "value": "{{ result.user|ms }}"
+                }
+            }
+        }
+    ],
+    "attachment": {
+        "name": "One_Splunk_Result",
+        "keys": [
+            "_si",
+            "index",
+            "sourcetype"
+        ]
+    }
+}
