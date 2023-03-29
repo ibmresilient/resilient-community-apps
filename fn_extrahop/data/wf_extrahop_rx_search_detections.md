@@ -87,7 +87,8 @@ if rule.properties.extrahop_offset:
     inputs.extrahop_offset = rule.properties.extrahop_offset
 if rule.properties.extrahop_update_time:
     inputs.extrahop_update_time = rule.properties.extrahop_update_time
-
+if rule.properties.extrahop_mod_time:
+    inputs.extrahop_mod_time = rule.properties.extrahop_mod_time
 ```
 
 ### Post-Processing Script

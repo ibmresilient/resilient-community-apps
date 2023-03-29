@@ -29,6 +29,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.extrahop_active_until
             -   fn_inputs.extrahop_active_from
             -   fn_inputs.extrahop_update_time
+            -   fn_inputs.extrahop_mod_time
             -   fn_inputs.extrahop_sort
             -   fn_inputs.extrahop_offset
         """

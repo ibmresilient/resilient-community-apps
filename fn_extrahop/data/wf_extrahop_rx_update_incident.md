@@ -34,7 +34,7 @@ QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_detections"
 DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
                    "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
-                   "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
+                   "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time", "mod_time"]
 # Read CATEGORY_MAP and TYPE_MAP dicts from workflow property.
 CATEGORY_MAP = workflow.properties.category_map
 TYPE_MAP = workflow.properties.type_map
