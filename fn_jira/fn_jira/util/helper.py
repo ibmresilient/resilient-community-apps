@@ -134,14 +134,6 @@ def get_server_settings(opts, jira_label):
     # Get configuration for jira server specified
     return jiraServers.jira_label_test(jira_label, servers_list)
 
-def remove_html_tags(comment):
-    """
-    Remove html tags from a comment
-    :param comment: Comment from Jira issue
-    :return: Comment without html tags
-    """
-    return sub(html_tags, '', comment)
-
 def check_jira_issue_linked_to_task(jira_issue_description):
     """
     Check if the given Jira issue is linked to a SOAR task
