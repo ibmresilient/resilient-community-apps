@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Reveal(x) client class for SOAR app supporting Extrahop integration"""
 import json
@@ -184,7 +184,7 @@ class RxClient():
         return r
 
     def search_detections(self, search_filter=None, active_from=None, active_until=None, limit=None, offset=None,
-                          update_time=None, sort=None):
+                          mod_time=None, sort=None):
         """Get information about devices or a specific computer by device id
 
         For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
@@ -196,7 +196,7 @@ class RxClient():
         Default 0 (int)
         :param limit: (Optional) Limit the number of detections returned to the specified maximum number (int).
         :param offset: (Optional) Skip the specified number of detections (int).
-        :param update_time: (Optional) Get detections that were updated on or after the specified date (int).
+        :param mod_time: (Optional) Get detections that were updated on or after the specified date (int).
         :param sort: (Optional) Sorts returned detections by the specified fields. (int).
         :return Result in json format.`
         """
@@ -233,8 +233,8 @@ class RxClient():
             data["limit"] = int(limit)
         if offset:
             data["offset"] = int(offset)
-        if update_time:
-            data["update_time"] = int(update_time)
+        if mod_time:
+            data["mod_time"] = int(mod_time)
 
         r = self.api_call("post", uri, headers=self._headers, data=json.dumps(data))
 

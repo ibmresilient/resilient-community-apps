@@ -67,6 +67,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.0 | 04/2023 | Use mod_time instead of update_time |
 | 1.0.0 | 06/2022 | Initial Release |
 
 ---

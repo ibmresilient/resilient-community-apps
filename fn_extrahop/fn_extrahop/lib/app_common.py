@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Poller support functionality for interaction with the 3rd party endpoints"""
 import logging
 from datetime import datetime
@@ -62,7 +62,7 @@ class AppCommon():
             if "category" in search_filter:
                 categories = search_filter_api.pop("category")
 
-        response = self.rx_cli.search_detections(search_filter=search_filter_api, limit=limit, offset=offset)
+        response = self.rx_cli.search_detections(search_filter=search_filter_api, limit=limit, offset=offset, mod_time=timestamp)
 
         result = response.json()
 
