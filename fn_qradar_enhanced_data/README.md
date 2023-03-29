@@ -992,7 +992,7 @@ Fetch QRadar Offense Details
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` |  Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_offense_id` | `text` | No | `-` | The ID of the given offense |
-| `qradar_query_type` | `text` | No | `-` | - |
+| `qradar_query_type` | `text` | No | `-` | Can equal `flows`, `topevents`, `categories`, `destinationip`, or `sourceip` |
 | `soar_incident_id` | `number` | No | `-` | ID of the SOAR incident the function is running in |
 | `soar_table_name` | `text` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
 
@@ -1056,18 +1056,20 @@ inputs.soar_incident_id = incident.id
 
 ```python
 content = results.get("content")
-link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses?filter={0}%3B%3D%3B%3B{1}&page=1&pagesize=10\" target=\"_blank\">{2}</a>"
 
-for event in content.get("rules_data"):
-  qradar_event = incident.addRow("qr_triggered_rules")
-  qradar_event.rule_name = link.format("rules", event.id, event.name)
-  qradar_event.rule_group = ", ".join(list(map(lambda x: x.name, list(filter(lambda x: x.name is not None, event.groups))))) if len(event.groups) > 0 else ""
-  qradar_event.rule_type = event.type
-  qradar_event.enabled = "True" if event.enabled else "False"
-  qradar_event.response = "Yes" if event.responses.newEvents or event.responses.email or event.responses.log or event.responses.addToReferenceData or event.responses.addToReferenceSet or event.responses.removeFromReferenceData or event.responses.removeFromReferenceSet or event.responses.notify or event.responses.notifySeverityOverride or event.responses.selectiveForwardingResponse or event.responses.customAction else "No"
-  qradar_event.date_created = int(event.creationDate)
-  qradar_event.last_modified = int(event.modificationDate)
-  qradar_event.reported_time = content.get("current_time")
+if content:
+  link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses?filter={0}%3B%3D%3B%3B{1}&page=1&pagesize=10\" target=\"_blank\">{2}</a>"
+
+  for event in content.get("rules_data"):
+    qradar_event = incident.addRow("qr_triggered_rules")
+    qradar_event.rule_name = link.format("rules", event.get("id"), event.get("name"))
+    qradar_event.rule_group = ", ".join(list(map(lambda x: x.get("name"), list(filter(lambda x: x.get("name") is not None, event.get("groups")))))) if len(event.get("groups")) > 0 else ""
+    qradar_event.rule_type = event.get("type")
+    qradar_event.enabled = "True" if event.get("enabled") else "False"
+    qradar_event.response = "Yes" if event.get("responses").get("newEvents") or event.get("responses").get("email") or event.get("responses").get("log") or event.get("responses").get("addToReferenceData") or event.get("responses").get("addToReferenceSet") or event.get("responses").get("removeFromReferenceData") or event.get("responses").get("removeFromReferenceSet") or event.get("responses").get("notify") or event.get("responses").get("notifySeverityOverride") or event.get("responses").get("selectiveForwardingResponse") or event.get("responses").get("customAction") else "No"
+    qradar_event.date_created = int(event.get("creationDate"))
+    qradar_event.last_modified = int(event.get("modificationDate"))
+    qradar_event.reported_time = content.get("current_time")
 ```
 
 </p>
@@ -1086,7 +1088,7 @@ Search QRadar Top events for the given Offense ID
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` |  Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_query` | `textarea` | No | `-` | A QRadar query string with parameters |
-| `qradar_query_type` | `text` | No | `-` | - |
+| `qradar_query_type` | `text` | No | `-` | Can equal `flows`, `topevents`, `categories`, `destinationip`, or `sourceip` |
 | `qradar_search_param1` | `text` | No | `-` | - |
 | `qradar_search_param2` | `text` | No | `-` | - |
 | `qradar_search_param3` | `text` | No | `-` | - |
@@ -1212,19 +1214,20 @@ inputs.soar_incident_id = incident.id
 
 ```python
 content = results.get("content")
-link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-for event in content.get("events"):
+if content:
+  link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
   offenseid = content.get("offenseid")
-  categoryname = event.get("categoryname")
-  qradar_event = incident.addRow("qr_categories")
-  qradar_event.category_name = link.format(offenseid, "category_name", categoryname, categoryname)
-  qradar_event.magnitude = link.format(offenseid, "category_name", categoryname, event.get("magnitude"))
-  qradar_event.event_count = link.format(offenseid, "category_name", categoryname, event.get("eventcount"))
-  qradar_event.event_time = int(event.eventtime)
-  qradar_event.sourceip_count = link.format(offenseid, "category_name", categoryname, event.get("sourceipcount"))
-  qradar_event.destinationip_count = link.format(offenseid, "category_name", categoryname, event.get("destinationipcount"))
-  qradar_event.reported_time = content.get("current_time")
+  for event in content.get("events"):
+    categoryname = event.get("categoryname")
+    qradar_event = incident.addRow("qr_categories")
+    qradar_event.category_name = link.format(offenseid, "category_name", categoryname, categoryname)
+    qradar_event.magnitude = link.format(offenseid, "category_name", categoryname, event.get("magnitude"))
+    qradar_event.event_count = link.format(offenseid, "category_name", categoryname, event.get("eventcount"))
+    qradar_event.event_time = int(event.get("eventtime"))
+    qradar_event.sourceip_count = link.format(offenseid, "category_name", categoryname, event.get("sourceipcount"))
+    qradar_event.destinationip_count = link.format(offenseid, "category_name", categoryname, event.get("destinationipcount"))
+    qradar_event.reported_time = content.get("current_time")
 ```
 
 </p>
@@ -1247,11 +1250,12 @@ Create artifact from Assets info for the selected row
 
 type_mapping = { "IP Address": "IP Address", "Name": "String" }
 
-for type in rule.properties.select_to_create_artifact_from_asset_info:
-  if type in type_mapping:
-      incident.addArtifact(type_mapping.get(type),
-                           row.ip_address.get("content") if type == "IP Address" else row.asset_name.get("content"),
-                           "QRadar Offense {}".format(type))
+for artifact_type in rule.properties.select_to_create_artifact_from_asset_info:
+  if artifact_type in type_mapping:
+    incident.addArtifact(type_mapping.get(artifact_type),
+      row.ip_address.get("content") if artifact_type == "IP Address" else row.asset_name.get("content"),
+      "QRadar Offense {}".format(artifact_type)
+    )
 ```
 
 </p>
@@ -1274,9 +1278,12 @@ import re
 
 type_mapping = { "Destination IP": "IP Address", }
 
-for type in rule.properties.select_to_create_artifact_from_destip:
-  if type in type_mapping:
-    incident.addArtifact(type_mapping.get(type), re.sub("<[^<>]+>", "", row.destination_ip.get("content")), "QRadar Offense {}".format(type))
+for artifact_type in rule.properties.select_to_create_artifact_from_destip:
+  if artifact_type in type_mapping:
+    incident.addArtifact(type_mapping.get(artifact_type),
+      re.sub("<[^<>]+>", "", row.destination_ip.get("content")),
+      "QRadar Offense {}".format(artifact_type)
+    )
 ```
 
 </p>
@@ -1299,14 +1306,14 @@ import re
 
 type_mapping = { "Source IP": "IP Address", "Destination IP": "IP Address", "Username": "User Account" }
 
-for type in rule.properties.select_to_create_artifact:
-  if type in type_mapping:
-    if type in ["Source IP", "Destination IP"]:
-      value = re.sub("<[^<>]+>", "", row.source_ip.get("content") if type == "Source IP" else row.destination_ip.get("content"))
+for artifact_type in rule.properties.select_to_create_artifact:
+  if artifact_type in type_mapping:
+    if artifact_type in ["Source IP", "Destination IP"]:
+      value = re.sub("<[^<>]+>", "", row.source_ip.get("content") if artifact_type == "Source IP" else row.destination_ip.get("content"))
     else:
       value = row.username
-    
-    incident.addArtifact(type_mapping.get(type), value, "QRadar Offense {}".format(type))
+
+    incident.addArtifact(type_mapping.get(artifact_type), value, "QRadar Offense {}".format(artifact_type))
 ```
 
 </p>
@@ -1325,18 +1332,21 @@ Create artifact from the Flows info of the selected row
 # We create artifacts for those observables according to how they can be mapped to
 # SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
+import re
+
 type_mapping = {
-    "Source IP": "IP Address",
-    "Destination IP": "IP Address",
-    "Source Port": "Port",
-    "Destination Port": "Port"
+  "Source IP": "IP Address",
+  "Destination IP": "IP Address",
+  "Source Port": "Port",
+  "Destination Port": "Port"
 }
 
-for type in rule.properties.select_to_create_artifact_from_flows_info:
-  if type in type_mapping:
-    incident.addArtifact(type_mapping.get(type),
-                         row.source_ip.get("content") if type in ["Source IP", "Source Port"] else row.destination_ip.get("content"),
-                         "QRadar Offense {}".format(type))
+for artifact_type in rule.properties.select_to_create_artifact_from_flows_info:
+  if artifact_type in type_mapping:
+    incident.addArtifact(type_mapping.get(artifact_type),
+      re.sub("<[^<>]+>", "", row.source_ip.get("content") if artifact_type in ["Source IP", "Source Port"] else row.destination_ip.get("content")),
+      "QRadar Offense {}".format(artifact_type)
+    )
 ```
 
 </p>
@@ -1359,11 +1369,12 @@ import re
 
 type_mapping = { "Source IP": "IP Address", "MAC": "MAC Address", }
 
-for type in rule.properties.select_to_create_artifact_from_sourceip:
-  if type in type_mapping:
-    incident.addArtifact(type_mapping.get(type),
-                         row.mac if type == "MAC" else re.sub("<[^<>]+>", "", row.source_ip.get("content"),
-                         "QRadar Offense {}".format(type))
+for artifact_type in rule.properties.select_to_create_artifact_from_sourceip:
+  if artifact_type in type_mapping:
+    incident.addArtifact(type_mapping.get(artifact_type),
+      row.mac if artifact_type == "MAC" else re.sub("<[^<>]+>", "", row.source_ip.get("content")),
+      "QRadar Offense {}".format(artifact_type)
+    )
 ```
 
 </p>
@@ -1379,14 +1390,14 @@ qr_last_updated_time will be set to equal create_date for the incident on incide
 <p>
 
 ```python
-import java.util.Date as Date
+import datetime
 
 # If qr_last_updated_time is empty (This will be true on incident creation)
 if not incident.properties.qr_last_updated_time:
   incident.properties.qr_last_updated_time = incident.create_date
 # If qr_last_updated_time is not empty (This will be true when Manual refresh rule is run)
 else:
-  incident.properties.qr_last_updated_time = Date()
+  incident.properties.qr_last_updated_time = datetime.datetime.now()
 ```
 
 </p>
@@ -1438,7 +1449,7 @@ qr_categories
 ---
 ## Data Table - QR Destination IPs (First 10)
 
- ![screenshot: dt-qr-destination-ips-first-10](./doc/screenshots/dt-qr-destination-ips-first-10.png)
+ ![screenshot: dt-qr-destination-ips-first-10](./doc/screenshots/dt-qr-destination-ips-first-10-events.png)
 
 #### API Name:
 qr_top_destination_ips
@@ -1501,7 +1512,7 @@ qr_flows
 ---
 ## Data Table - QR Source IPs (First 10)
 
- ![screenshot: dt-qr-source-ips-first-10](./doc/screenshots/dt-qr-source-ips-first-10.png)
+ ![screenshot: dt-qr-source-ips-first-10](./doc/screenshots/dt-qr-source-ips-first-10-events.png)
 
 #### API Name:
 qr_top_source_ips
@@ -1542,8 +1553,6 @@ qr_triggered_rules
 
 ---
 ## Data Table - QRadar Rules and MITRE Tactics and Techniques
-
- ![screenshot: dt-qradar-rules-and-mitre-tactics-and-techniques](./doc/screenshots/dt-qradar-rules-and-mitre-tactics-and-techniques.png)
 
 #### API Name:
 qradar_rules_and_mitre_tactics_and_techniques
