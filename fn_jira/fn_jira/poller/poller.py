@@ -7,12 +7,10 @@ from logging import getLogger
 from os import path
 from threading import Thread
 from datetime import timezone, timedelta, datetime
-from json import dumps
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
-from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
-                           make_payload_from_template, poller, validate_fields,
-                           clean_html)
+from resilient_lib import (SOARCommon, get_last_poller_date, clean_html,
+                           make_payload_from_template, poller, validate_fields)
 
 from fn_jira.lib.app_common import AppCommon, add_task_to_case, add_to_case
 from fn_jira.poller.configure_tab import init_incident_groups_tab
@@ -222,7 +220,6 @@ class PollerComponent(AppFunctionComponent):
 
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
-            LOG.debug(dumps(jira_issue_list))
 
         # Get a list of open SOAR cases that contain the field jira_issue_id.
         soar_cases_list = self.res_client.post(
@@ -467,11 +464,11 @@ class PollerComponent(AppFunctionComponent):
             if new_payload.get("changes"):
                 soar_update_payload["patches"][soar.get("id")] = new_payload
 
-            # Check if new comments added or old comments changed/deleted
-            self.soar_update_comments_attachments(jira, soar, "comment")
+            # Check if new comments added or old comments changed
+            self.soar_update_comments(jira, soar)
 
-            # Check if new attachments added or old attachments deleted
-            self.soar_update_comments_attachments(jira, soar, "attachment")
+            # Check if new attachments added
+            self.soar_update_attachments(jira, soar)
 
         # If SOAR soar_update_payload is not empty then update fields on cases
         if soar_update_payload["patches"]:
@@ -528,50 +525,35 @@ class PollerComponent(AppFunctionComponent):
             # This will update all tasks that need to be updated
             self.res_client.put("/tasks", soar_task_update_payload)
 
-    def soar_update_comments_attachments(self, jira, soar, update_type):
+    def soar_update_comments(self, jira, soar):
         """
-        Add comment\attchment to the SOAR case that are in the Jira issue and
-        delete comments\attachments that are in the SOAR case and not in the Jira issue
+        Update SOAR incident with new comments on the linked Jira issue
         :param jira: Dict of Jira issue data
         :param soar: Dict of SOAR case data
-        :param update_type: Either attachment or comment
         :return: None
         """
-        # Get comments\attachments from the Jira issue
-        jira_updates = jira.get("fields").pop(update_type) if jira.get("fields").get(update_type) else []
-        if update_type == "attachment":
-            jira_attachments = jira_updates
-            jira_updates = [attach.get("filename") for attach in jira_attachments]
-        # Get comments\attachments from the SOAR case
-        soar_updates = soar.pop(f"{update_type}s") if soar.get(f"{update_type}s") else []
-        # Remove the text "\nAdded from Jira" from comments if present
-        if update_type == "comment":
-            for num in range(len(soar_updates)):
-                update_content = soar_updates[num].get("content")
-                soar_updates[num]["content"] = clean_html(update_content.replace("\nAdded from Jira", ""))
+        jira_comments = jira.get("fields").pop("comment") if jira.get("fields").get("comment") else []
+        if jira_comments:
+            new_comments = self.soar_common.filter_soar_comments(soar.get("id"), jira_comments, soar_header="\nAdded from Jira")
+            for comment in new_comments:
+                self.soar_common.create_case_comment(soar.get("id"), f"{comment}\nAdded from Jira")
 
-        if soar_updates:
-            for num, soar_update in enumerate(soar_updates):
-                soar_update_content = soar_update.get("content")
-                if update_type == "attachment":
-                    soar_update_content = soar_update.get("name")
-                if soar_update_content in jira_updates: # If comment\attachment on SOAR and Jira then remove it from jira_updates
-                    jira_updates.pop(jira_updates.index(soar_update_content))
+    def soar_update_attachments(self, jira, soar):
+        """
+        Update SOAR incident with new attachments on the linked Jira issue
+        :param jira: Dict of Jira issue data
+        :param soar: Dict of SOAR case data
+        :return: None
+        """
+        jira_attachments = jira.get("fields").pop("attachment") if jira.get("fields").get("attachment") else []
+        soar_attachments = soar.pop("attachments") if soar.get("attachments") else []
 
-            # Delete variables that are no longer needed
-            del num, soar_update
+        new_attachments_names = [at.get("filename") for at in jira_attachments\
+            if at.get("filename") not in [s_attach.get("name") for s_attach in soar_attachments]]
 
-        if jira_updates:
-            for jira_update in jira_updates:
-                # Send post request to SOAR
-                try:
-                    if update_type == "attachment":
-                        content = jira_attachments[next((index for (index, attach) in enumerate(jira_attachments) if attach["filename"] == jira_update), None)].get("content")
-                        self.res_client.post_attachment(f"/incidents/{soar.get('id')}/attachments", filepath=None, filename=jira_update, bytes_handle=content)
-                    else:
-                        SOARCommon(self.res_client).create_case_comment(soar.get('id'), f"{jira_update}\nAdded from Jira")
-                except Exception as e:
-                    raise IntegrationError(str(e))
+        for attch_name in new_attachments_names:
+            content = jira_attachments[next((index for (index, attach) in enumerate(jira_attachments) if attach["filename"] == attch_name), None)].get("content")
+            self.res_client.post_attachment(f"/incidents/{soar.get('id')}/attachments", filepath=None, filename=attch_name, bytes_handle=content)
 
     def update_task_comments(self, task, jira):
         """

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from resilient_lib import IntegrationError, MarkdownParser, SOARCommon
-from re import compile, sub
+from re import compile
 from datetime import datetime
 
 PACKAGE_NAME = "fn_jira"
