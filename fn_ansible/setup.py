@@ -29,8 +29,12 @@ setup(
     long_description="This app runs the Ansible environment to allow the running of playbooks and modules against your enterprise. "
                      "Specify the playbooks, hosts and environment variables necessary for execution.",
     install_requires=[
-        'ansible>=2.8.1',
-        'ansible-runner>=1.3.4',
+        'ansible~=7.3.0; python_version>="3.9"',
+        'ansible-runner~=2.3.2; python_version>="3.9"',
+        'python-daemon~=3.0.1; python_version>="3.9"',
+        'ansible==2.8.3; python_version=="3.6"',
+        'ansible-runner==1.3.4; python_version=="3.6"',
+        'python-daemon==2.3.2; python_version=="3.6"', # a sub dependency of ansible-runner whose version needs to be pinned for PY36
         'resilient_circuits>=30.0.0',
         'resilient_lib>=32.0.140'
     ],
