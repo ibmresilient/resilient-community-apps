@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Poller implementation"""
 
 from logging import getLogger
@@ -9,14 +10,15 @@ from datetime import timezone, timedelta, datetime
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
-                           make_payload_from_template, poller, validate_fields)
+                           make_payload_from_template, poller, validate_fields,
+                           clean_html)
 
 from fn_jira.lib.app_common import AppCommon, add_task_to_case, add_to_case
 from fn_jira.poller.configure_tab import init_incident_groups_tab
 from fn_jira.util.helper import (GLOBAL_SETTINGS, PACKAGE_NAME, JiraServers,
                                  check_jira_issue_linked_to_task,
                                  get_id_from_jira_issue_description,
-                                 get_server_settings, remove_html_tags)
+                                 get_server_settings)
 
 LOG = getLogger(__name__)
 
@@ -219,6 +221,7 @@ class PollerComponent(AppFunctionComponent):
 
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
+            LOG.debug(str(jira_issue_list))
 
         # Get a list of open SOAR cases that contain the field jira_issue_id.
         soar_cases_list = self.res_client.post(
@@ -419,6 +422,7 @@ class PollerComponent(AppFunctionComponent):
         for close in soar_cases_to_close:
             soar = close[1]
             jira = close[0]
+            LOG.debug(f"Closing SOAR incident: {soar.get('id')} and Jira issue: {jira.get('key')}")
 
             payload = make_payload_from_template(
                 self.set_poller_templates(jira.get("jira_server"), "close_case"),
@@ -448,6 +452,7 @@ class PollerComponent(AppFunctionComponent):
         for update in soar_cases_to_update:
             jira = update[0]
             soar = update[1]
+            LOG.debug(f"Updating SOAR incident: {soar.get('id')} with Jira issue: {jira.get('key')}")
 
             payload = make_payload_from_template(
                 self.set_poller_templates(jira.get("jira_server"), "update_case"),
@@ -541,7 +546,7 @@ class PollerComponent(AppFunctionComponent):
         if update_type == "comment":
             for num in range(len(soar_updates)):
                 update_content = soar_updates[num].get("content")
-                soar_updates[num]["content"] = remove_html_tags(update_content.replace("\nAdded from Jira", ""))
+                soar_updates[num]["content"] = clean_html(update_content.replace("\nAdded from Jira", ""))
 
         if soar_updates:
             for num, soar_update in enumerate(soar_updates):
@@ -575,7 +580,7 @@ class PollerComponent(AppFunctionComponent):
         """
         # Remove all html tags from the task notes
         for num in range(len(task.get("notes"))):
-            task["notes"][num] = remove_html_tags(task["notes"][num].replace("<br/>Added from Jira", ""))
+            task["notes"][num] = clean_html(task["notes"][num].replace("<br/>Added from Jira", ""))
 
         # Update comments/notes
         comments = jira.get("fields").get("comment")
