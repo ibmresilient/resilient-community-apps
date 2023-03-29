@@ -41,5 +41,8 @@ whois=whois "{{shell_param1}}"
 # psscan=python /path/to/vol.py -f "{{shell_param1}}" "--profile={{shell_param2}}" psscan --output=json
 # dlllist=python /path/to/vol.py -f "{{shell_param1}}" "--profile={{shell_param2}}" dlllist --output=json
 # (etc)
+
+# Timeout in seconds, default is 20
+#timeout_linux=20
 """
     return config_data
