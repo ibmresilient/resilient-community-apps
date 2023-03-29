@@ -7,6 +7,7 @@ from logging import getLogger
 from os import path
 from threading import Thread
 from datetime import timezone, timedelta, datetime
+from json import dumps
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (IntegrationError, SOARCommon, get_last_poller_date,
@@ -221,7 +222,7 @@ class PollerComponent(AppFunctionComponent):
 
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
-            LOG.debug(str(jira_issue_list))
+            LOG.debug(dumps(jira_issue_list))
 
         # Get a list of open SOAR cases that contain the field jira_issue_id.
         soar_cases_list = self.res_client.post(
@@ -333,13 +334,14 @@ class PollerComponent(AppFunctionComponent):
                             # Loop through all tasks on the SOAR case
                             for task in soar_tasks:
                                 if task.get("id") == task_id:
-                                    if jira_issue_updated > task.get("datatable").get("cells").get("last_updated").get("value"):
+                                    # if jira_issue_updated > task.get("datatable").get("cells").get("last_updated").get("value"):
                                         # Add matching SOAR case and Jira issue to soar_tasks_to_update list
-                                        soar_tasks_to_update.append([jira_issue, task])
-                                        break
+                                    soar_tasks_to_update.append([jira_issue, task])
+                                    break
                         # Check if SOAR incident needs to be updated
-                        if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id") and\
-                        jira_issue_updated > soar_case.get("inc_last_modified_date"):
+                        # if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id") and\
+                        # jira_issue_updated > soar_case.get("inc_last_modified_date"):
+                        if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id"):
                             # Check if the Jira issue has been closed
                             if jira_issue.get("fields").get("resolutiondate"):
                                 # Add matching SOAR case and Jira issue to soar_cases_to_close list
