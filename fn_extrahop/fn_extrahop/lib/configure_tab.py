@@ -38,6 +38,7 @@ class ExtraHopTab(Tab):
         Field("extrahop_site_name"),
         Field("extrahop_site_uuid"),
         Field("extrahop_risk_score"),
+        Field("extrahop_mod_time"),
         Field("extrahop_update_time"),
         Field("extrahop_end_time"),
         Field("extrahop_status"),

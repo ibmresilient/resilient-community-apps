@@ -17,7 +17,7 @@ PACKAGE_NAME = "fn_extrahop"
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 # List of fields to check to determine if an update is required.
 UPDATEABLE_FIELDS = [
-    "update_time", "end_time", "risk_score",
+    "mod_time", "update_time", "end_time", "risk_score",
     "status", "ticket_id", "assignee"
 ]
 # Default prefix for function parameters
