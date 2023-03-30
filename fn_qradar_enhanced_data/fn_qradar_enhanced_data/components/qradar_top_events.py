@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
@@ -50,7 +50,6 @@ class FunctionComponent(AppFunctionComponent):
         qradar_search_param4 = getattr(fn_inputs, "qradar_search_param4", None) # text
         qradar_search_param5 = getattr(fn_inputs, "qradar_search_param5", None) # text
         qradar_search_param6 = getattr(fn_inputs, "qradar_search_param6", None) # text
-        qradar_search_time = getattr(fn_inputs, "qradar_search_param7", None) # text, time to search example: 36 Days
         qradar_label = getattr(fn_inputs, "qradar_label", None) # QRadar server to connect to
         soar_table_name = getattr(fn_inputs, "soar_table_name", None) # Name of data table
         soar_incident_id = getattr(fn_inputs, "soar_incident_id", None) # ID of incident
@@ -82,8 +81,7 @@ class FunctionComponent(AppFunctionComponent):
                                                 qradar_search_param3,
                                                 " ",
                                                 " ",
-                                                " ",
-                                                qradar_search_time])
+                                                " "])
 
         search_query_string = make_query_string(qradar_search_query,
                                                 [qradar_search_param1,
@@ -91,8 +89,7 @@ class FunctionComponent(AppFunctionComponent):
                                                 " ",
                                                 qradar_search_param4 or " ",
                                                 qradar_search_param5,
-                                                qradar_search_param6,
-                                                qradar_search_time])
+                                                qradar_search_param6])
 
         self.LOG.info(f"Running query: {temp_query_string}")
 

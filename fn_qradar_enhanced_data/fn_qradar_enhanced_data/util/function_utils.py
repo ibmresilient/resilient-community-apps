@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Util functions
 
 from logging import getLogger
@@ -8,6 +8,19 @@ from fn_qradar_enhanced_data.util import qradar_utils
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 
 LOG = getLogger(__name__)
+
+def get_sync_notes(global_settings, options):
+    """
+    Get the sync_notes setting either from edm_global_settings or individual server config
+    :param global_settings: Global settings for the integration
+    :param options: Settings for specified QRadar server
+    :return: Boolean
+    """
+    sync_notes = global_settings.get("sync_notes")
+    if sync_notes is None:
+        sync_notes = options.get("sync_notes", True)
+
+    return str_to_bool(sync_notes)
 
 def get_search_timeout(global_settings, options):
     """
