@@ -38,7 +38,6 @@ class FunctionComponent(ResilientComponent):
 
             LOG.info("rest_method: %s", rest_method)
             LOG.info("rest_url: %s", rest_url)
-            LOG.info("rest_headers: %s", rest_headers)
             LOG.info("rest_cookies: %s", rest_cookies)
             LOG.info("rest_body: %s", rest_body)
             LOG.info("rest_verify: %s", rest_verify)
