@@ -19,6 +19,7 @@
 ### v2.1.0
 * Added optional `render_rich_text` configuration. If set to True, rich text notes will be sent to SNOW.
 * Verified on ServiceNow Tokyo release
+* Verified on ServiceNow Utah release
 
 ### v2.0.9
 * Support added for ServiceNow Security Incident Response (SIR)
@@ -70,9 +71,9 @@ Bi-directional app with ServiceNow and IBM Security QRadar SOAR allows SEC Ops P
   * If integrating with ServiceNow Security Incident Table (SIR), `IBM SOAR App >= 2.0.9` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
 * If IBM SOAR is not publicly accessible (behind a firewall), a ServiceNow MID Server is required. See the [Install Guide](./docs/install_guide) for more information
 * IBM Cloud Pak for Security `>= 1.6.0` *or* IBM SOAR `>= v41.2.0`
-* App Host `>= v1.5.0` (recommended) *or* an Integrations Server running `resilient-circuits >= v42.0.0`.
+* App Host `>= v1.10.0` (recommended) *or* an Integrations Server running `resilient-circuits >= v46.0.0`.
   - `fn_service_now >= v1.0.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
-  - If integrating with SIR, `fn_service_now >= v2.0.9` is required
+  - If integrating with SIR, `fn_service_now >= v2.1.0` is recommended
 
 ---
 
