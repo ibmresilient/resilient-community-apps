@@ -1,4 +1,4 @@
-# QRadar Enhanced Offense Data Migration
+# QRadar Enhanced Data Migration
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -15,6 +15,7 @@
   - [App Configuration](#app-configuration)
   - [MSSP Configuration](#mssp-configuration)
   - [Custom Layouts](#custom-layouts)
+- [Function - QRadar Create Note](#function---qradar-create-note)
 - [Function - QRadar Get Offense MITRE Reference](#function---qradar-get-offense-mitre-reference)
 - [Function - QRadar Offense Summary](#function---qradar-offense-summary)
 - [Function - QRadar Top Events](#function---qradar-top-events)
@@ -34,6 +35,7 @@
 - [Data Table - QRadar Rules and MITRE Tactics and Techniques](#data-table---qradar-rules-and-mitre-tactics-and-techniques)
 - [Custom Fields](#custom-fields)
 - [Rules](#rules)
+- [Playbooks](#playbooks)
 - [Version 2.0.0 Changes](#version-200-changes)
     - [QRadar API Searches](#qradar-api-searches)
     - [QRadar Enhanced Data Refresh Manual Rule](#qradar-enhanced-data-refresh-manual-rule)
@@ -41,11 +43,13 @@
   - [For Customers who do not use the QRadar-Plugin](#for-customers-who-do-not-use-the-qradar-plugin)
   - [For Customers that are having performance issues related to the poller](#for-customers-that-are-having-performance-issues-related-to-the-poller)
 - [Troubleshooting & Support](#troubleshooting--support)
+
 ---
 
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.2.0 | 02/2023 | Add notes & assigned sync |
 | 2.1.0 | 10/2022 | Add Mitre Info from Offense to case |
 | 2.0.1 | 08/2022 | Update documentation |
 | 2.0.0 | 02/2022 | Real time update to the Offense Summary |
@@ -83,16 +87,16 @@ This app fetches the data associated with the QRadar Offense and provides live l
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, App Host and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
-If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `44.0.7585`.
+If deploying to a SOAR platform with an Edge Gateway, the requirements are:
+* SOAR platform >= `45.0.7899`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `44.0.7585`.
+* SOAR platform >= `45.0.7899`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=43.0.0`.
+* Integration server is running `resilient_circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -101,22 +105,21 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Layouts | Read, Edit |
   | Incident | Edit |
 
-
 The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
-The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.10.
-* Cloud Pak is configured with an App Host.
+* IBM Cloud Pak for Security >= `1.8`.
+* Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 The following Cloud Pak guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
@@ -125,9 +128,9 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Both Python 3.6 and Python 3.9 are supported.
+Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient_circuits>=43.0.0
+* resilient_circuits>=45.0.0
 
 ### QRadar Requirements
 The app works with QRadar 7.4.0 or higher and requires the QRadar Analayst Workflow app 1.2 or higher to be installed on QRadar. The QRadar Analyst workflow app can be downloaded from the IBM App Exchange - https://exchange.xforce.ibmcloud.com/hub/extension/123f9ec5a53214cc6e35b1e4700b0806.
@@ -153,8 +156,9 @@ The following table provides the settings you need to configure the app. These s
 | **verify_cert** | Yes | `/path/to/cert` | *Path to certificate or specify `false` if using self signed certificate* |
 | **search_timeout** | No | `300` | *Timeout for the AQL search to be specified in seconds* |
 | **polling_interval** | No | `600` | *Time in seconds to wait between each poller run* |
-| **polling_lookback** | No | `60` | ** |
+| **polling_lookback** | No | `60` | *Time in minutes to look back* |
 | **clear_datatables** | No | `True` | *Boolean to clear or not clear content of data tables in incident when poller is run* |
+| **sync_notes** | Yes | `True` | *Boolean if true then notes that are added to QRadar offenses will be added to their linked SOAR incidents*|
 
 #### 1.2.0 Changes
 Starting in version 1.2.0, more than one QRadar instance can be configured for SOAR case data synchronization. For enterprises with only one QRadar instance, your app.config file will continue to define the QRadar instance under the `[fn_qradar_integration]` section header.
@@ -167,7 +171,7 @@ If you have existing custom workflows, see [Creating workflows when server/serve
 
 ### MSSP Configuration
 
-Make sure to follow the instructions in the Integration Server Guide to install the app on the Config org. Afterwards, have your system administrator push the app to the appropriate child orgs.
+Make sure to follow the instructions in the Integration Server Guide to install the app on the Config org. The custom layout will have to be added manuanlly, see [Custom Layouts](#custom-layouts). Afterwards, have your system administrator push the app to the appropriate child orgs.
 
 ### Custom Layouts
 * Import the Data Tables and Custom Fields like the screenshot below:
@@ -176,6 +180,82 @@ Make sure to follow the instructions in the Integration Server Guide to install 
 
 ---
 
+## Function - QRadar Create Note
+Create a note on the linked QRadar offense.
+
+ ![screenshot: fn-qradar-create-note ](./doc/screenshots/fn-qradar-create-note.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `qradar_label` | `text` | No | `-` |  Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
+| `qradar_note` | `textarea` | Yes | `Note text` | - |
+| `qradar_offense_id` | `text` | No | `-` | The ID of the given offense |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "create_time": 1675879964337,
+    "id": 69,
+    "note_text": "hi something",
+    "username": "API_token: SOAR"
+  },
+  "inputs": {
+    "qradar_label": "qradar_label1",
+    "qradar_note": "hi something",
+    "qradar_offense_id": "21"
+  },
+  "metrics": {
+    "execution_time_ms": 491,
+    "host": "local",
+    "package": "unknown",
+    "package_version": "unknown",
+    "timestamp": "2023-02-08 13:20:52",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.qradar_label = incident.properties.qradar_destination
+inputs.qradar_offense_id = incident.properties.qradar_id
+inputs.qradar_note = note.text
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
 ## Function - QRadar Get Offense MITRE Reference
 Get the MITRE Tactics and Techniques in relation to the rules that were fired to cause the offense in QRadar.
 
@@ -186,7 +266,7 @@ Get the MITRE Tactics and Techniques in relation to the rules that were fired to
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
+| `qradar_label` | `text` | No | `-` |  Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_offense_id` | `text` | No | `-` | The ID of the given offense |
 | `soar_incident_id` | `number` | No | `-` | ID of the SOAR incident the function is running in |
 | `soar_table_name` | `text` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
@@ -862,7 +942,9 @@ inputs.soar_table_name = "qradar_rules_and_mitre_tactics_and_techniques"
 <p>
 
 ```python
-for item in results.content.get('rules'):
+mitre_results = playbook.functions.results.mitre_results
+
+for item in mitre_results.content.get('rules'):
   mapping = item.get('mapping')
   if mapping:
     for tactic in list(mapping):
@@ -908,10 +990,10 @@ Fetch QRadar Offense Details
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config or leave blank when QRadar servers are not labeled in the app.config.|
-| `qradar_offense_id` | `text` | No | `-` | ID of the QRadar offense |
-| `qradar_query_type` | `text` | No | `-` | Can equal `offensesummary`, `offenserules`, or `sourceip` |
-| `soar_incident_id` | `integer` | No | ID of the SOAR incident the function is running in |
+| `qradar_label` | `text` | No | `-` |  Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
+| `qradar_offense_id` | `text` | No | `-` | The ID of the given offense |
+| `qradar_query_type` | `text` | No | `-` | Can equal `flows`, `topevents`, `categories`, `destinationip`, or `sourceip` |
+| `soar_incident_id` | `number` | No | `-` | ID of the SOAR incident the function is running in |
 | `soar_table_name` | `text` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
 
 </p>
@@ -974,33 +1056,20 @@ inputs.soar_incident_id = incident.id
 
 ```python
 content = results.get("content")
-link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}{1}\" target=\"_blank\">{2}</a>"
 
 if content:
-  offenseid = content.get("offenseid")
-  offense = content.get("offense")
-  assignedTo = offense.get("assignedTo")
-  offenseSource = offense.get("offenseSource")
+  link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses?filter={0}%3B%3D%3B%3B{1}&page=1&pagesize=10\" target=\"_blank\">{2}</a>"
 
-  incident.qr_offense_index_type = offense.get("offenseType").get("name")
-  incident.qr_offense_index_value = offenseSource
-  incident.qr_offense_source = offenseSource
-  incident.qr_source_ip_count = link.format(offenseid, "", offense.get("sourceCount"))
-  incident.qr_destination_ip_count = link.format(offenseid, "", int(offense.get("remoteDestinationCount")) + int(offense.get("localDestinationCount")))
-  incident.qr_event_count = link.format(offenseid, "/events?page=1&pagesize=10", offense.get("eventCount"))
-  incident.qr_flow_count =  link.format(offenseid, "/flows?page=1&pagesize=10", offense.get("flowCount"))
-  incident.qr_assigned = link.format("", "?filter=status%3B%3D%3BOpen%3BOPEN&filter=assignedTo%3B%3D%3B%3B{}&page=1&pagesize=10".format(assignedTo if assignedTo else ""), assignedTo) if assignedTo else "Unassigned"
-  incident.qr_magnitude = link.format(offenseid, "", offense.get("magnitude"))
-  incident.qr_credibility = link.format(offenseid, "", offense.get("credibility"))
-  incident.qr_severity = link.format(offenseid, "", offense.get("severity"))
-  incident.qr_relevance = link.format(offenseid, "", offense.get("relevance"))
-  incident.qr_offense_status = offense.get("status")
-  incident.qr_offense_domain = "Default Domain"
-  if offense.get("domain"):
-    incident.qr_offense_domain = offense.get("domain").get("name")
-
-  incident.qr_offense_start_time = int(offense.get("startTime"))
-  incident.qr_offense_last_updated_time = int(offense.get("lastUpdatedTime"))
+  for event in content.get("rules_data"):
+    qradar_event = incident.addRow("qr_triggered_rules")
+    qradar_event.rule_name = link.format("rules", event.get("id"), event.get("name"))
+    qradar_event.rule_group = ", ".join(list(map(lambda x: x.get("name"), list(filter(lambda x: x.get("name") is not None, event.get("groups")))))) if len(event.get("groups")) > 0 else ""
+    qradar_event.rule_type = event.get("type")
+    qradar_event.enabled = "True" if event.get("enabled") else "False"
+    qradar_event.response = "Yes" if event.get("responses").get("newEvents") or event.get("responses").get("email") or event.get("responses").get("log") or event.get("responses").get("addToReferenceData") or event.get("responses").get("addToReferenceSet") or event.get("responses").get("removeFromReferenceData") or event.get("responses").get("removeFromReferenceSet") or event.get("responses").get("notify") or event.get("responses").get("notifySeverityOverride") or event.get("responses").get("selectiveForwardingResponse") or event.get("responses").get("customAction") else "No"
+    qradar_event.date_created = int(event.get("creationDate"))
+    qradar_event.last_modified = int(event.get("modificationDate"))
+    qradar_event.reported_time = content.get("current_time")
 ```
 
 </p>
@@ -1010,24 +1079,23 @@ if content:
 ## Function - QRadar Top Events
 Search QRadar Top events for the given Offense ID
 
- ![screenshot: fn-qradar-top-events ](./doc/screenshots/fn-qradar-top-events.png) 
+ ![screenshot: fn-qradar-top-events ](./doc/screenshots/fn-qradar-top-events.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `qradar_label` | `text` | No | `-` | Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
+| `qradar_label` | `text` | No | `-` |  Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
 | `qradar_query` | `textarea` | No | `-` | A QRadar query string with parameters |
-| `qradar_query_type` | `text` | No | `-` | Can equal `flows`, `topevents`, `categories`, `destinationip`, or `sourceip`  |
+| `qradar_query_type` | `text` | No | `-` | Can equal `flows`, `topevents`, `categories`, `destinationip`, or `sourceip` |
 | `qradar_search_param1` | `text` | No | `-` | - |
 | `qradar_search_param2` | `text` | No | `-` | - |
 | `qradar_search_param3` | `text` | No | `-` | - |
 | `qradar_search_param4` | `text` | No | `-` | - |
 | `qradar_search_param5` | `text` | No | `-` | - |
 | `qradar_search_param6` | `text` | No | `-` | - |
-| `qradar_search_param7` | `text` | No | `5 days` | Used for time to look back for graphql search |
-| `soar_incident_id` | `integer` | No | ID of the SOAR incident the function is running in |
+| `soar_incident_id` | `number` | No | `-` | ID of the SOAR incident the function is running in |
 | `soar_table_name` | `text` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
 
 </p>
@@ -1097,7 +1165,7 @@ results = {
   },
   "inputs": {
     "qradar_label": "qradar_label1",
-    "qradar_query": "SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60",
+    "qradar_query": "SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60",
     "qradar_query_type": "sourceip",
     "qradar_search_param1": "sourceip as sourceip,SUM(eventcount) as eventcount,UNIQUECOUNT(category) as categorycount,UNIQUECOUNT(username) as usernamecount,max(starttime)",
     "qradar_search_param2": "WHERE INOFFENSE(%param3%)",
@@ -1105,7 +1173,7 @@ results = {
     "qradar_search_param4": "GROUP BY sourceip",
     "qradar_search_param5": "ORDER BY max(starttime) DESC",
     "qradar_search_param6": "LIMIT 10",
-    "qradar_search_param7": "5 days",
+
     "soar_incident_id": 2111,
     "soar_table_name": "qr_top_source_ips"
   },
@@ -1136,17 +1204,6 @@ inputs.qradar_query_type = "categories"
 inputs.qradar_label = incident.properties.qradar_destination
 inputs.soar_table_name = "qr_categories"
 inputs.soar_incident_id = incident.id
-
-# QRadar graphql search look back time default is 5 days
-inputs.qradar_search_param7 = "5 days"
-# If the poller is running and the qr_last_updated_time is changed the
-# the QRadar graphql look back time will change to 2 days
-if incident.properties.qr_last_updated_time != incident.create_date:
-  inputs.qradar_search_param7 = "2 days"
-# If manual QRadar Update rule is run set the number if days to search to the
-# user entered number
-if rule.properties.number_of_days_to_search:
-  inputs.qradar_search_param7 = str(rule.properties.number_of_days_to_search) + " days"
 ```
 
 </p>
@@ -1157,21 +1214,20 @@ if rule.properties.number_of_days_to_search:
 
 ```python
 content = results.get("content")
-link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
 
-for event in content.get("events"):
+if content:
+  link = "<a href=\"https://" + content.get("qrhost") + "/console/ui/offenses/{0}/events?filter={1}%3B%3D%3B%3B{2}&page=1&pagesize=10\" target=\"_blank\">{3}</a>"
   offenseid = content.get("offenseid")
-  qradar_event = incident.addRow("qr_offense_top_events")
-  qradar_event.event_name = link.format(offenseid, "event_name", event.event_name, event.event_name)
-  qradar_event.category = link.format(offenseid, "category_name", event.category_name, event.category_name)
-  qradar_event.source_ip = link.format(offenseid, "sourceip", event.sourceip, event.sourceip)
-  qradar_event.destination_ip = link.format(offenseid, "destinationip", event.destinationip, event.destinationip)
-  qradar_event.log_source = link.format(offenseid, "log_source_name", event.logsourcename, event.logsourcename)
-  qradar_event.event_count = link.format(offenseid, "event_name", event.event_name, event.eventcount)
-  qradar_event.event_time = int(event.event_time)
-  qradar_event.magnitude = event.magnitude
-  qradar_event.username = event.username
-  qradar_event.reported_time = content.get("current_time")
+  for event in content.get("events"):
+    categoryname = event.get("categoryname")
+    qradar_event = incident.addRow("qr_categories")
+    qradar_event.category_name = link.format(offenseid, "category_name", categoryname, categoryname)
+    qradar_event.magnitude = link.format(offenseid, "category_name", categoryname, event.get("magnitude"))
+    qradar_event.event_count = link.format(offenseid, "category_name", categoryname, event.get("eventcount"))
+    qradar_event.event_time = int(event.get("eventtime"))
+    qradar_event.sourceip_count = link.format(offenseid, "category_name", categoryname, event.get("sourceipcount"))
+    qradar_event.destinationip_count = link.format(offenseid, "category_name", categoryname, event.get("destinationipcount"))
+    qradar_event.reported_time = content.get("current_time")
 ```
 
 </p>
@@ -1191,17 +1247,15 @@ Create artifact from Assets info for the selected row
 # We create artifacts according to how they can be mapped to
 # SOAR default artifacts. If user has custom artifacts, and wants
 # to map them as well, please modify the following mapping dict.
-import re
 
-type_mapping = { "IP Address": "IP Address", "Name": "String", }
+type_mapping = { "IP Address": "IP Address", "Name": "String" }
 
-for type in rule.properties.select_to_create_artifact_from_asset_info:
-  if type in type_mapping:
-    artifact_description = "QRadar Offense {}".format(type)
-    if type == "IP Address":
-      incident.addArtifact(type_mapping.get(type), row.ip_address.get("content"), artifact_description)
-    elif type == "Name":
-      incident.addArtifact(type_mapping.get(type), row.asset_name.get("content"), artifact_description)
+for artifact_type in rule.properties.select_to_create_artifact_from_asset_info:
+  if artifact_type in type_mapping:
+    incident.addArtifact(type_mapping.get(artifact_type),
+      row.ip_address.get("content") if artifact_type == "IP Address" else row.asset_name.get("content"),
+      "QRadar Offense {}".format(artifact_type)
+    )
 ```
 
 </p>
@@ -1224,11 +1278,12 @@ import re
 
 type_mapping = { "Destination IP": "IP Address", }
 
-for type in rule.properties.select_to_create_artifact_from_destip:
-  if type in type_mapping:
-    artifact_description = "QRadar Offense {}".format(type)
-    if type == "Destination IP":
-      incident.addArtifact(type_mapping.get(type), re.sub("<[^<>]+>", "", row.destination_ip.get("content")), artifact_description)
+for artifact_type in rule.properties.select_to_create_artifact_from_destip:
+  if artifact_type in type_mapping:
+    incident.addArtifact(type_mapping.get(artifact_type),
+      re.sub("<[^<>]+>", "", row.destination_ip.get("content")),
+      "QRadar Offense {}".format(artifact_type)
+    )
 ```
 
 </p>
@@ -1251,15 +1306,14 @@ import re
 
 type_mapping = { "Source IP": "IP Address", "Destination IP": "IP Address", "Username": "User Account" }
 
-for type in rule.properties.select_to_create_artifact:
-  if type in type_mapping:
-    artifact_description = "QRadar Offense {}".format(type)
-    if type == "Source IP":
-      incident.addArtifact(type_mapping.get(type), re.sub("<[^<>]+>", "", row.source_ip.get("content")), artifact_description)
-    elif type == "Destination IP":
-      incident.addArtifact(type_mapping.get(type), re.sub("<[^<>]+>", "", row.destination_ip.get("content")), artifact_description)
-    elif type == "Username":
-      incident.addArtifact(type_mapping.get(type), row.username, artifact_description)
+for artifact_type in rule.properties.select_to_create_artifact:
+  if artifact_type in type_mapping:
+    if artifact_type in ["Source IP", "Destination IP"]:
+      value = re.sub("<[^<>]+>", "", row.source_ip.get("content") if artifact_type == "Source IP" else row.destination_ip.get("content"))
+    else:
+      value = row.username
+
+    incident.addArtifact(type_mapping.get(artifact_type), value, "QRadar Offense {}".format(artifact_type))
 ```
 
 </p>
@@ -1281,23 +1335,18 @@ Create artifact from the Flows info of the selected row
 import re
 
 type_mapping = {
-    "Source IP": "IP Address",
-    "Destination IP": "IP Address",
-    "Source Port": "Port",
-    "Destination Port": "Port"
+  "Source IP": "IP Address",
+  "Destination IP": "IP Address",
+  "Source Port": "Port",
+  "Destination Port": "Port"
 }
 
-for type in rule.properties.select_to_create_artifact_from_flows_info:
-  if type in type_mapping:
-    artifact_description = "QRadar Offense {}".format(type)
-    if type == "Source IP":
-      incident.addArtifact(type_mapping.get(type), row.source_ip.get("content"), artifact_description)
-    elif type == "Destination IP":
-      incident.addArtifact(type_mapping.get(type), row.destination_ip.get("content"), artifact_description)
-    elif type == "Source Port":
-      incident.addArtifact(type_mapping.get(type), row.source_ip.get("content"), artifact_description)
-    elif type == "Destination Port":
-      incident.addArtifact(type_mapping.get(type), row.destination_ip.get("content"), artifact_description)
+for artifact_type in rule.properties.select_to_create_artifact_from_flows_info:
+  if artifact_type in type_mapping:
+    incident.addArtifact(type_mapping.get(artifact_type),
+      re.sub("<[^<>]+>", "", row.source_ip.get("content") if artifact_type in ["Source IP", "Source Port"] else row.destination_ip.get("content")),
+      "QRadar Offense {}".format(artifact_type)
+    )
 ```
 
 </p>
@@ -1320,13 +1369,12 @@ import re
 
 type_mapping = { "Source IP": "IP Address", "MAC": "MAC Address", }
 
-for type in rule.properties.select_to_create_artifact_from_sourceip:
-  if type in type_mapping:
-    artifact_description = "QRadar Offense {}".format(type)
-    if type == "Source IP":
-      incident.addArtifact(type_mapping.get(type), re.sub("<[^<>]+>", "", row.source_ip.get("content"), artifact_description)
-    elif type == "MAC":
-      incident.addArtifact(type_mapping.get(type), row.mac, artifact_description)
+for artifact_type in rule.properties.select_to_create_artifact_from_sourceip:
+  if artifact_type in type_mapping:
+    incident.addArtifact(type_mapping.get(artifact_type),
+      row.mac if artifact_type == "MAC" else re.sub("<[^<>]+>", "", row.source_ip.get("content")),
+      "QRadar Offense {}".format(artifact_type)
+    )
 ```
 
 </p>
@@ -1342,14 +1390,14 @@ qr_last_updated_time will be set to equal create_date for the incident on incide
 <p>
 
 ```python
-import java.util.Date as Date
+import datetime
 
 # If qr_last_updated_time is empty (This will be true on incident creation)
 if not incident.properties.qr_last_updated_time:
   incident.properties.qr_last_updated_time = incident.create_date
 # If qr_last_updated_time is not empty (This will be true when Manual refresh rule is run)
 else:
-  incident.properties.qr_last_updated_time = Date()
+  incident.properties.qr_last_updated_time = datetime.datetime.now()
 ```
 
 </p>
@@ -1359,7 +1407,7 @@ else:
 
 ## Data Table - QR Assets
 
- ![screenshot: dt-qr-assets](./doc/screenshots/dt-qr-assets.png) 
+ ![screenshot: dt-qr-assets](./doc/screenshots/dt-qr-assets.png)
 
 #### API Name:
 qr_assets
@@ -1380,7 +1428,7 @@ qr_assets
 ---
 ## Data Table - QR Categories
 
- ![screenshot: dt-qr-categories](./doc/screenshots/dt-qr-categories.png) 
+ ![screenshot: dt-qr-categories](./doc/screenshots/dt-qr-categories.png)
 
 #### API Name:
 qr_categories
@@ -1401,7 +1449,7 @@ qr_categories
 ---
 ## Data Table - QR Destination IPs (First 10)
 
- ![screenshot: dt-qr-destination-ips-first-10](./doc/screenshots/dt-qr-destination-ips-first-10.png) 
+ ![screenshot: dt-qr-destination-ips-first-10](./doc/screenshots/dt-qr-destination-ips-first-10-events.png)
 
 #### API Name:
 qr_top_destination_ips
@@ -1418,7 +1466,7 @@ qr_top_destination_ips
 ---
 ## Data Table - QR Events (First 10 Events)
 
- ![screenshot: dt-qr-events-first-10-events](./doc/screenshots/dt-qr-events-first-10-events.png) 
+ ![screenshot: dt-qr-events-first-10-events](./doc/screenshots/dt-qr-events-first-10-events.png)
 
 #### API Name:
 qr_offense_top_events
@@ -1440,7 +1488,7 @@ qr_offense_top_events
 ---
 ## Data Table - QR Flows
 
- ![screenshot: dt-qr-flows](./doc/screenshots/dt-qr-flows.png) 
+ ![screenshot: dt-qr-flows](./doc/screenshots/dt-qr-flows.png)
 
 #### API Name:
 qr_flows
@@ -1464,7 +1512,7 @@ qr_flows
 ---
 ## Data Table - QR Source IPs (First 10)
 
- ![screenshot: dt-qr-source-ips-first-10](./doc/screenshots/dt-qr-source-ips-first-10.png) 
+ ![screenshot: dt-qr-source-ips-first-10](./doc/screenshots/dt-qr-source-ips-first-10-events.png)
 
 #### API Name:
 qr_top_source_ips
@@ -1486,7 +1534,7 @@ qr_top_source_ips
 ---
 ## Data Table - QR Triggered Rules
 
- ![screenshot: dt-qr-triggered-rules](./doc/screenshots/dt-qr-triggered-rules.png) 
+ ![screenshot: dt-qr-triggered-rules](./doc/screenshots/dt-qr-triggered-rules.png)
 
 #### API Name:
 qr_triggered_rules
@@ -1505,8 +1553,6 @@ qr_triggered_rules
 
 ---
 ## Data Table - QRadar Rules and MITRE Tactics and Techniques
-
- ![screenshot: dt-qradar-rules-and-mitre-tactics-and-techniques](./doc/screenshots/dt-qradar-rules-and-mitre-tactics-and-techniques.png) 
 
 #### API Name:
 qradar_rules_and_mitre_tactics_and_techniques
@@ -1560,7 +1606,6 @@ qradar_rules_and_mitre_tactics_and_techniques
 | Create Artifact from Events info | qr_offense_top_events | `-` |
 | Create artifact from Source IP info | qr_top_source_ips | `-` |
 | Create Artifacts from Flows Info  | qr_flows | `-` |
-| Example: QRadar Get QRadar Rule MITRE Reference | incident | `example_qradar_get_mitre_reference_from_rules` |
 | QRadar Enhanced Data | incident | `qradar_triggered_rules` |
 | QRadar Enhanced Data Poller | incident | `qradar_triggered_rules` |
 | QRadar Enhanced Data Refresh | incident | `qradar_triggered_rules` |
@@ -1568,6 +1613,15 @@ qradar_rules_and_mitre_tactics_and_techniques
 The rule, QRadar Enhanced Data, is an automatic rule that triggers when a new incident with a qradar_id value and a qradar_destination value is created, or an existing incident whose qradar_id value is updated. This rule triggers workflows as listed above and populates the offense information in the custom fields and data tables. The rules for creating artifacts are menu item rules associated with the data tables. These rules can be executed at row level to generate artifacts from the column values. The workflows' input and post processing scripts can be customized for data retrieval and data presentation.
 
 ---
+
+## Playbooks
+| Playbook Name | Description | Object | Status |
+| ------------- | ----------- | ------ | ------ |
+| QRadar Create Note | Add a note from SOAR to its linked QRadar offense | note | `enabled` |
+| QRadar Get MITRE Reference From Rules | Using the QRadar ID for the offense in question, this playbook will retrieve the related MITRE Tactics and Techniques from QRadar based on the defined rules. | incident | `enabled` |
+
+---
+
 ## Version 2.0.0 Changes
 ### QRadar API Searches
 When a case is first created the search will be set by default to look back 5 days.
@@ -1624,4 +1678,4 @@ The max value of num_workers is 500.
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
- This is a IBM supported App. For assistance, see: https://ibm.com/mysupport.
+This is a IBM supported App. For assistance, see [https://ibm.com/mysupport](https://ibm.com/mysupport).
