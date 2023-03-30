@@ -18,8 +18,8 @@ except:
 
 LOG = logging.getLogger(__name__)
 PWD_IN_URL = "pwd"
-AUTH_URL = f"https://zoom.us/oauth/token?grant_type=account_credentials&account_id="
-
+AUTH_URL = "https://zoom.us/oauth/token?grant_type=account_credentials&account_id="
+USERS_PATH = "/users?status=active&page_size=30&page_number="
 
 class ZoomCommon:
 
@@ -76,7 +76,7 @@ class ZoomCommon:
 
     def get_zoom_host_id(self, host_email):
         """Gets the Zoom User ID of the host"""
-        path = "/users?status=active&page_size=30&page_number="
+        path = USERS_PATH
         users_request = self.zoom_request(path + "1")
         user_data = json.loads(users_request.text)
 

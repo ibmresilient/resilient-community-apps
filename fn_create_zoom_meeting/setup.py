@@ -29,12 +29,13 @@ setup(
     author='IBM SOAR',
     author_email='',
     description="Functions to create Zoom meetings as part of a security incident response workflow.",
-    long_description="This SOAR Function package can be used to create a Zoom meeting from a workflow using the Functions feature of the SOAR Circuits integration framework.",
+    long_description="This SOAR Function package can be used to create a Zoom meeting from a workflow using the Functions feature of the Resilient Circuits integration framework.",
     install_requires=[
         'resilient_circuits>=42.0.0',
         'pytz',
         'bs4'
     ],
+    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
