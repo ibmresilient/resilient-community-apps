@@ -1,0 +1,7 @@
+{
+  "name": "Thomas Shelby",
+  "email_address": "t.shelby@example.com",
+  "routing_type": "SMTP",
+  "mailbox_type": "Mailbox",
+  "success": true
+}

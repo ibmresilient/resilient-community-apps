@@ -1,0 +1,79 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "sha": "4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d",
+    "node_id": "MDY6Q29tbWl0MTM2NzQwODo0YmU2ZjU2ZmRkMzdjOWQzYWEwNTRhMTVjZGZjYjA5MWJiMTZmYTRk",
+    "commit": {
+      "author": {
+        "name": "A Example",
+        "email": "a@example.com",
+        "date": "2022-12-03T16:31:16Z"
+      },
+      "committer": {
+        "name": "A Example",
+        "email": "a@example.com",
+        "date": "2022-12-03T16:31:16Z"
+      },
+      "message": "sample",
+      "tree": {
+        "sha": "cf973382698e6d6fb61d6fe6c9e241cb66afff98",
+        "url": "https://github.com/api/v3/repos/repo-owner/personal/git/trees/cf973382698e6d6fb61d6fe6c9e241cb66afff98"
+      },
+      "url": "https://github.com/api/v3/repos/repo-owner/personal/git/commits/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://github.com/api/v3/repos/repo-owner/personal/commits/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d",
+    "html_url": "https://github.com/repo-owner/personal/commit/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d",
+    "comments_url": "https://github.com/api/v3/repos/repo-owner/personal/commits/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d/comments",
+    "author": null,
+    "committer": null,
+    "parents": [
+      {
+        "sha": "9b4630d4b69a2b1381c9e39c66cbfafc4d3a9288",
+        "url": "https://github.com/api/v3/repos/repo-owner/personal/commits/9b4630d4b69a2b1381c9e39c66cbfafc4d3a9288",
+        "html_url": "https://github.com/repo-owner/personal/commit/9b4630d4b69a2b1381c9e39c66cbfafc4d3a9288"
+      }
+    ],
+    "stats": {
+      "total": 3,
+      "additions": 3,
+      "deletions": 0
+    },
+    "files": [
+      {
+        "sha": "1c943a98887754f364fafaa1da3ac56e0e0875a9",
+        "filename": "sample_file",
+        "status": "added",
+        "additions": 3,
+        "deletions": 0,
+        "changes": 3,
+        "blob_url": "https://github.com/repo-owner/personal/blob/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d/sample_file",
+        "raw_url": "https://github.com/repo-owner/personal/raw/4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d/sample_file",
+        "contents_url": "https://github.com/api/v3/repos/repo-owner/personal/contents/sample_file?ref=4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d",
+        "patch": "@@ -0,0 +1,3 @@\n+a\n+b\n+c\n\\ No newline at end of file"
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "github_owner": "repo-owner",
+    "github_sha": "4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d",
+    "github_repo": "personal"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-github",
+    "package_version": "1.0.0",
+    "host": "host",
+    "execution_time_ms": 380,
+    "timestamp": "2022-12-03 11:36:03"
+  }
+}
