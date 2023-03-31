@@ -5,7 +5,7 @@
 
 from resilient_lib import RequestsCommon
 import json
-import jwt
+import base64
 import time
 import datetime
 import logging
@@ -18,38 +18,47 @@ except:
 
 LOG = logging.getLogger(__name__)
 PWD_IN_URL = "pwd"
-
+AUTH_URL = "https://zoom.us/oauth/token?grant_type=account_credentials&account_id="
+USERS_PATH = "/users?status=active&page_size=30&page_number="
 
 class ZoomCommon:
 
     def __init__(self, opts, options):
         self.opts = opts
         self.options = options
-        self.key = options.get("zoom_api_key")
-        self.secret = options.get("zoom_api_secret")
         self.api_url = options.get("zoom_api_url")
+        self.account_id = options.get("zoom_account_id")
+        self.client_id = options.get("zoom_client_id")
+        self.client_secret = options.get("zoom_client_secret")
 
-    @staticmethod
-    def generate_auth_token(key, secret):
+
+    def generate_auth_token(self):
         """Generates authentication token used to authenticate with Zoom API"""
-        return jwt.encode({'iss': key, 'exp': time.time() + 60},  # exp is expiry time in epoch, we have it for 60 secs
-                          secret,  # secret key
-                          algorithm='HS256')
+        req_common = RequestsCommon(self.opts, self.options)
+        url = f"{AUTH_URL}{self.account_id}"
+        auth_str = f"{self.client_id}:{self.client_secret}"
+        auth_bytes = base64.b64encode(auth_str.encode("utf-8"))
+        encoded_auth = str(auth_bytes, "utf-8")
+        headers = {
+            "Authorization" : f"Basic {encoded_auth}" 
+        }
+        response = req_common.execute("post", url, headers=headers).json()
+        return response["access_token"]
 
     def zoom_request(self, path=None, method="GET", query=None, headers=None):
         """Generates and makes specified request to Zoom API"""
         url = self.api_url + path
         
-        access_token = self.generate_auth_token(self.key, self.secret)
-        headers = {'authorization': 'Bearer %s' % access_token,
-               'content-type': 'application/json'}
+        access_token = self.generate_auth_token()
+        headers = {'Authorization': f'Bearer {access_token}',
+               'Content-type': 'application/json'}
         
         
         req_common = RequestsCommon(self.opts, self.options)
 
         response = None
         if method == "GET":
-            response = req_common.execute('get', url, headers=headers, params= {'access_token': access_token}, verify=False)
+            response = req_common.execute('get', url, headers=headers, verify=False)
         elif method == "POST":
             response = req_common.execute('post', url, json=query, verify=True, headers=headers)
 
@@ -60,14 +69,14 @@ class ZoomCommon:
             raise FunctionError("API call failed! HTTP Status: {}, URL: {}".format(response.status_code, url))
         elif response.status_code == 401:
             # access token probably expired
-            access_token = self.generate_auth_token(self.key, self.secret)
+            access_token = self.generate_auth_token()
             return self.zoom_request(path, method, query, headers)
 
         return response
 
     def get_zoom_host_id(self, host_email):
         """Gets the Zoom User ID of the host"""
-        path = "/users?status=active&page_size=30&page_number="
+        path = USERS_PATH
         users_request = self.zoom_request(path + "1")
         user_data = json.loads(users_request.text)
 
@@ -125,7 +134,7 @@ class ZoomCommon:
 
     def create_meeting(self, host_email, agenda_string, record_boolean, meeting_topic, meeting_password, timezone):
         """Creates a Zoom Meeting"""
-        access_token = self.generate_auth_token(self.key, self.secret)
+        access_token = self.generate_auth_token()
 
         meeting_time = datetime.datetime.now()  # type: datetime
         post_time_format = meeting_time.strftime('yyyy-MM-dd\'T\'HH:mm:ss%Z')
@@ -152,11 +161,13 @@ class ZoomCommon:
 
             zoom_host_url = json_data["start_url"]
             zoom_join_url = self.strip_password_from_join_url(json_data["join_url"])
+            zoom_url_with_pass = json_data["join_url"]
 
         results = {
             "host_url": zoom_host_url,
             "attendee_url": zoom_join_url,
-            "date_created": meeting_time
+            "date_created": meeting_time,
+            "attendee_url_with_pass": zoom_url_with_pass
         }
 
         return results

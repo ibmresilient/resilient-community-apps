@@ -19,7 +19,7 @@ Return examples:
 """
 
 import logging
-from fn_create_zoom_meeting.util.zoom_common import ZoomCommon
+from fn_create_zoom_meeting.util.zoom_common import ZoomCommon, USERS_PATH
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -34,7 +34,7 @@ def selftest_function(opts):
     app_configs = opts.get("fn_create_zoom_meeting", {})
 
     zoom = ZoomCommon(opts, app_configs)
-    request = zoom.zoom_request("/users?status=active&page_size=30&page_number=", "GET")
+    request = zoom.zoom_request(USERS_PATH, "GET")
     if request.status_code == 200:
         return {"state": "success"}
     else:

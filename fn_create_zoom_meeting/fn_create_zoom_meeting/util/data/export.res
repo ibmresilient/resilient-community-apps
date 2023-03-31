@@ -6,17 +6,12 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Create Zoom Meeting: Incident",
-      "id": 62,
+      "id": 46,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Create Zoom Meeting: Incident",
       "object_type": "incident",
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "b268f718-ce4d-4e7d-91eb-56eb245cde23",
@@ -69,8 +64,9 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1635280604709,
+  "export_date": 1680201587183,
   "export_format_version": 2,
+  "export_type": null,
   "fields": [
     {
       "allow_default_value": false,
@@ -82,7 +78,7 @@
       "deprecated": false,
       "export_key": "__function/zoom_record_meeting",
       "hide_notification": false,
-      "id": 341,
+      "id": 329,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -93,12 +89,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "zoom_record_meeting",
       "tooltip": "Check this to record the meeting",
@@ -116,7 +107,7 @@
       "deprecated": false,
       "export_key": "__function/zoom_agenda",
       "hide_notification": false,
-      "id": 337,
+      "id": 330,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -127,12 +118,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "zoom_agenda",
       "tooltip": "Agenda for this meeting",
@@ -150,7 +136,7 @@
       "deprecated": false,
       "export_key": "__function/zoom_topic",
       "hide_notification": false,
-      "id": 338,
+      "id": 331,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -162,12 +148,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "zoom_topic",
       "tooltip": "Meeting topic",
@@ -185,7 +166,7 @@
       "deprecated": false,
       "export_key": "__function/zoom_password",
       "hide_notification": false,
-      "id": 339,
+      "id": 332,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -196,12 +177,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "zoom_password",
       "tooltip": "Meeting password",
@@ -219,7 +195,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/zoom_password",
       "hide_notification": false,
-      "id": 345,
+      "id": 325,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -230,12 +206,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Zoom Password",
       "tooltip": "",
@@ -253,7 +224,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/zoom_topic",
       "hide_notification": false,
-      "id": 343,
+      "id": 326,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -265,12 +236,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Zoom Topic",
       "tooltip": "",
@@ -288,7 +254,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/zoom_agenda",
       "hide_notification": false,
-      "id": 344,
+      "id": 327,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -299,12 +265,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Zoom Agenda",
       "tooltip": "",
@@ -322,7 +283,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/zoom_record_meeting",
       "hide_notification": false,
-      "id": 346,
+      "id": 328,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -333,12 +294,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Record Meeting",
       "tooltip": "",
@@ -360,14 +316,7 @@
   ],
   "functions": [
     {
-      "apps": [],
-      "created_date": 1634237033057,
-      "creator": {
-        "display_name": "Chris\u0027 Integration Server v40",
-        "id": 6,
-        "name": "05c96997-7401-4089-a039-df21d0e54b07",
-        "type": "apikey"
-      },
+      "created_date": 1678891217244,
       "description": {
         "content": "This will return a meeting URL to connect to a zoom meeting",
         "format": "text"
@@ -375,23 +324,18 @@
       "destination_handle": "zoom",
       "display_name": "Create Zoom Meeting",
       "export_key": "fn_create_zoom_meeting",
-      "id": 41,
+      "id": 27,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "Chris\u0027 Integration Server v45",
+        "id": 6,
+        "name": "922e405b-8bec-4a67-91f1-b726c9dcc6a5",
+        "type": "apikey"
       },
-      "last_modified_time": 1635280518255,
+      "last_modified_time": 1678891217293,
       "name": "fn_create_zoom_meeting",
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "7badee36-5f2d-431a-b17c-d60fb677bbdb",
-      "version": 4,
+      "version": 1,
       "view_items": [
         {
           "content": "dc0da531-5a0e-4259-95d1-f15b1cecb470",
@@ -433,26 +377,22 @@
           "name": "Example: Create Zoom Meeting: Incident",
           "object_type": "incident",
           "programmatic_name": "example_create_zoom_meeting_incident",
-          "tags": [
-            {
-              "tag_handle": "fn_create_zoom_meeting",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 49
+          "workflow_id": 41
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 12,
+  "id": 28,
+  "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1635280603433,
+      "create_date": 1680201585278,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -461,7 +401,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1635280603433,
+      "update_date": 1680201585278,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -471,35 +411,30 @@
   "message_destinations": [
     {
       "api_keys": [
-        "05c96997-7401-4089-a039-df21d0e54b07",
-        "ac7e72bc-80f3-460c-826b-0c074ba234d3"
+        "922e405b-8bec-4a67-91f1-b726c9dcc6a5"
       ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "zoom",
       "name": "zoom",
       "programmatic_name": "zoom",
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "users": [],
       "uuid": "1cd136c8-7933-44f3-9973-a50055347ee2"
     }
   ],
   "notifications": null,
-  "overrides": [],
+  "overrides": null,
   "phases": [],
+  "playbooks": [],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 6554,
-    "major": 40,
+    "build_number": 7899,
+    "major": 45,
     "minor": 0,
-    "version": "40.0.6554"
+    "version": "45.0.7899"
   },
   "tags": [],
   "task_order": [],
@@ -509,27 +444,21 @@
     {
       "actions": [],
       "content": {
-        "version": 7,
+        "version": 9,
         "workflow_id": "example_create_zoom_meeting_incident",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_create_zoom_meeting_incident\" isExecutable=\"true\" name=\"Example: Create Zoom Meeting: Incident\"\u003e\u003cdocumentation\u003eAn example that creates a Zoom meeting based on incident properties.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lcxyhs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1kph3ld\" name=\"Create Zoom Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7badee36-5f2d-431a-b17c-d60fb677bbdb\"\u003e{\"inputs\":{\"a5a5d049-ab75-4986-a963-9bd2190f8e7e\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false,\"multiselect_value\":[]}}},\"post_processing_script\":\"# results:\\n# {\\n#   \\\"host_url\\\": \\\"https://zoom.us/s/x?zak=x\\\", \\n#   \\\"attendee_url\\\": \\\"https://zoom.us/j/x\\\", \\n#   \\\"date_created\\\": \\\"01/01/1971 12:00:00\\\"\\n# }\\nif results.host_url is not None and results.attendee_url is not None:\\n  host_url = results.host_url\\n  attendee_url = results.attendee_url\\n  \\n  if host_url is None:\\n    host_url = \\\"\\\"\\n  \\n  if attendee_url is None:\\n    attendee_url = \\\"\\\"\\n  \\ntext = \\\"\\\"\\\"\u0026lt;b\u0026gt;Zoom Meeting:\u0026lt;/b\u0026gt;\\n          \u0026lt;b\u0026gt;Host URL:\u0026lt;/b\u0026gt; \u0026lt;a href=\u0027{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\n          \u0026lt;b\u0026gt;Attendee URL:\u0026lt;/b\u0026gt; \u0026lt;a href=\u0027{1}\u0027\u0026gt;{1}\u0026lt;/a\u0026gt;\\\"\\\"\\\".format(results.host_url, results.attendee_url)\\n\\nincident.addNote(helper.createRichText(text))\",\"pre_processing_script\":\"inputs.zoom_topic = rule.properties.zoom_topic\\n\\ninputs.zoom_password = inputs.zoom_password if rule.properties.zoom_password is None else rule.properties.zoom_password\\n\\nif rule.properties.zoom_agenda is not None:\\n  inputs.zoom_agenda = rule.properties.zoom_agenda\\nelse:\\n  if inputs.zoom_agenda is None and incident.description is not None and incident.description.content is not None:\\n    inputs.zoom_agenda = incident.description.content\\n\\ninputs.zoom_record_meeting = inputs.zoom_record_meeting if rule.properties.zoom_record_meeting is None else rule.properties.zoom_record_meeting\\n\\n\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lcxyhs\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1lcohow\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_149o5on\"\u003e\u003cincoming\u003eSequenceFlow_1lcohow\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1lcxyhs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1kph3ld\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1lcohow\" sourceRef=\"ServiceTask_1kph3ld\" targetRef=\"EndEvent_149o5on\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_18o8pzs\"\u003e\u003ctext\u003einputs: zoom_creator_id, zoom_topic, zoom_agenda, zoom_password, and zoom_record_meeting\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_071vqwd\" sourceRef=\"ServiceTask_1kph3ld\" targetRef=\"TextAnnotation_18o8pzs\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1x80p9p\"\u003e\u003ctext\u003eoutputs: host_url and attendee_url\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_02j1jqy\" sourceRef=\"ServiceTask_1kph3ld\" targetRef=\"TextAnnotation_1x80p9p\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"313\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"308\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"178\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"315\" xsi:type=\"omgdc:Point\" y=\"213\"/\u003e\u003comgdi:waypoint x=\"248\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1kph3ld\" id=\"ServiceTask_1kph3ld_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"503\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_149o5on\" id=\"EndEvent_149o5on_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"726\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"699\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lcxyhs\" id=\"SequenceFlow_1lcxyhs_di\"\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"503\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"381\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lcohow\" id=\"SequenceFlow_1lcohow_di\"\u003e\u003comgdi:waypoint x=\"603\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"665\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"665\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"726\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"635\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_18o8pzs\" id=\"TextAnnotation_18o8pzs_di\"\u003e\u003comgdc:Bounds height=\"32\" width=\"336\" x=\"182\" y=\"120\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_071vqwd\" id=\"Association_071vqwd_di\"\u003e\u003comgdi:waypoint x=\"503\" xsi:type=\"omgdc:Point\" y=\"189\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"152\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1x80p9p\" id=\"TextAnnotation_1x80p9p_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"250\" x=\"669\" y=\"121\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_02j1jqy\" id=\"Association_02j1jqy_di\"\u003e\u003comgdi:waypoint x=\"603\" xsi:type=\"omgdc:Point\" y=\"191\"/\u003e\u003comgdi:waypoint x=\"744\" xsi:type=\"omgdc:Point\" y=\"151\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_create_zoom_meeting_incident\" isExecutable=\"true\" name=\"Example: Create Zoom Meeting: Incident\"\u003e\u003cdocumentation\u003eAn example that creates a Zoom meeting based on incident properties.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1lcxyhs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1kph3ld\" name=\"Create Zoom Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7badee36-5f2d-431a-b17c-d60fb677bbdb\"\u003e{\"inputs\":{\"a5a5d049-ab75-4986-a963-9bd2190f8e7e\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false,\"multiselect_value\":[]}}},\"post_processing_script\":\"# results:\\n# {\\n#   \\\"host_url\\\": \\\"https://zoom.us/s/x?zak=x\\\", \\n#   \\\"attendee_url\\\": \\\"https://zoom.us/j/x\\\", \\n#   \\\"date_created\\\": \\\"01/01/1971 12:00:00\\\"\\n#   \\\"attendee_url_with_pass\\\": \\\"https://us05web.zoom.us/j/89922216709?pwd=UTlEYWRrbUV4SHBacStvQUkvcHVPQT09\\\"\\n# }\\nif results.host_url is not None and results.attendee_url is not None:\\n  host_url = results.host_url\\n  attendee_url = results.attendee_url\\n  \\n  if host_url is None:\\n    host_url = \\\"\\\"\\n  \\n  if attendee_url is None:\\n    attendee_url = \\\"\\\"\\n  \\ntext = \\\"\\\"\\\"\u0026lt;b\u0026gt;Zoom Meeting:\u0026lt;/b\u0026gt;\\n          \u0026lt;b\u0026gt;Host URL:\u0026lt;/b\u0026gt; \u0026lt;a href=\u0027{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\n          \u0026lt;b\u0026gt;Attendee URL:\u0026lt;/b\u0026gt; \u0026lt;a href=\u0027{1}\u0027\u0026gt;{1}\u0026lt;/a\u0026gt;\\\"\\\"\\\".format(results.host_url, results.attendee_url)\\n\\nincident.addNote(helper.createRichText(text))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.zoom_topic = rule.properties.zoom_topic\\n\\ninputs.zoom_password = getattr(inputs, \u0027zoom_password\u0027) if rule.properties.zoom_password is None else rule.properties.zoom_password\\n\\nif rule.properties.zoom_agenda is not None:\\n  inputs.zoom_agenda = rule.properties.zoom_agenda\\nelse:\\n  if getattr(inputs, \u0027zoom_agenda\u0027) is None and incident.description is not None and incident.description.content is not None:\\n    inputs.zoom_agenda = incident.description.content\\n\\ninputs.zoom_record_meeting = getattr(inputs, \u0027zoom_record_meeting\u0027) if rule.properties.zoom_record_meeting is None else rule.properties.zoom_record_meeting\\n\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1lcxyhs\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1lcohow\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndEvent_149o5on\"\u003e\u003cincoming\u003eSequenceFlow_1lcohow\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1lcxyhs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1kph3ld\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1lcohow\" sourceRef=\"ServiceTask_1kph3ld\" targetRef=\"EndEvent_149o5on\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_18o8pzs\"\u003e\u003ctext\u003einputs: zoom_creator_id, zoom_topic, zoom_agenda, zoom_password, and zoom_record_meeting\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_071vqwd\" sourceRef=\"ServiceTask_1kph3ld\" targetRef=\"TextAnnotation_18o8pzs\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1x80p9p\"\u003e\u003ctext\u003eoutputs: host_url and attendee_url\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_02j1jqy\" sourceRef=\"ServiceTask_1kph3ld\" targetRef=\"TextAnnotation_1x80p9p\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"313\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"308\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"178\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"315\" xsi:type=\"omgdc:Point\" y=\"213\"/\u003e\u003comgdi:waypoint x=\"248\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1kph3ld\" id=\"ServiceTask_1kph3ld_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"503\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_149o5on\" id=\"EndEvent_149o5on_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"726\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"699\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lcxyhs\" id=\"SequenceFlow_1lcxyhs_di\"\u003e\u003comgdi:waypoint x=\"349\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"503\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"381\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1lcohow\" id=\"SequenceFlow_1lcohow_di\"\u003e\u003comgdi:waypoint x=\"603\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"665\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"665\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"726\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"635\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_18o8pzs\" id=\"TextAnnotation_18o8pzs_di\"\u003e\u003comgdc:Bounds height=\"32\" width=\"336\" x=\"182\" y=\"120\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_071vqwd\" id=\"Association_071vqwd_di\"\u003e\u003comgdi:waypoint x=\"503\" xsi:type=\"omgdc:Point\" y=\"189\"/\u003e\u003comgdi:waypoint x=\"396\" xsi:type=\"omgdc:Point\" y=\"152\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1x80p9p\" id=\"TextAnnotation_1x80p9p_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"250\" x=\"669\" y=\"121\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_02j1jqy\" id=\"Association_02j1jqy_di\"\u003e\u003comgdi:waypoint x=\"603\" xsi:type=\"omgdc:Point\" y=\"191\"/\u003e\u003comgdi:waypoint x=\"744\" xsi:type=\"omgdc:Point\" y=\"151\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 7,
-      "creator_id": "05c96997-7401-4089-a039-df21d0e54b07",
+      "content_version": 9,
       "description": "An example that creates a Zoom meeting based on incident properties.",
       "export_key": "example_create_zoom_meeting_incident",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1635280536705,
+      "last_modified_time": 1680118439307,
       "name": "Example: Create Zoom Meeting: Incident",
       "object_type": "incident",
       "programmatic_name": "example_create_zoom_meeting_incident",
-      "tags": [
-        {
-          "tag_handle": "fn_create_zoom_meeting",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "873bb550-0f2d-4d18-9e3e-9dc4f3a69bf0",
-      "workflow_id": 49
+      "workflow_id": 41
     }
   ],
   "workspaces": []
