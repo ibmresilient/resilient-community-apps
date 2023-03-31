@@ -40,7 +40,7 @@ class FunctionComponent(AppFunctionComponent):
         # Get function inputs
         ldap_domain_name = getattr(fn_inputs, "ldap_domain_name", "") # text
         ldap_dn = getattr(fn_inputs, "ldap_dn") # text (required)
-        ldap_toggle_access = getattr(fn_inputs, "ldap_toggle_access")["name"] # select, values: "Enable", "Disable" (required)
+        ldap_toggle_access = getattr(fn_inputs, "ldap_toggle_access") # select, values: "Enable", "Disable" (required)
 
         self.LOG.info(f"LDAP Domain Name: {ldap_domain_name}")
         self.LOG.info(f"LDAP DN: {ldap_dn}")
@@ -90,7 +90,7 @@ class FunctionComponent(AppFunctionComponent):
             success = c.modify(ldap_dn, {ldap_user_account_control_attribute: [(MODIFY_REPLACE, [ldap_user_accout_control_value])]})
 
         except Exception as err:
-            self.LOG.debug(f"Error: {err}")
+            self.LOG.error(f"Error: {err}")
             raise ValueError("Could not toggle access for this user. Ensue ldap_dn is valid")
 
         finally:

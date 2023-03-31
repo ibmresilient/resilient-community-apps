@@ -1,25 +1,3 @@
 {
-  "version": "1.0",
-  "success": true,
-  "reason": null,
-  "content": null,
-  "raw": "null",
-  "inputs": {
-    "ldap_domain_name": "Domain2",
-    "ldap_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
-    "ldap_toggle_access": {
-      "id": 102,
-      "name": "Enable"
-    }
-  },
-  "metrics": {
-    "version": "1.0",
-    "package": "fn-ldap-utilities",
-    "package_version": "2.0.0",
-    "host": "local",
-    "execution_time_ms": 0,
-    "timestamp": "2022-05-19 14:53:26"
-  },
-  "user_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
-  "user_status": "Enable"
+    
 }

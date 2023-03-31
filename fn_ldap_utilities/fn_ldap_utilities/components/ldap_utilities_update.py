@@ -60,7 +60,7 @@ class FunctionComponent(AppFunctionComponent):
             # Try converting input to an array
             ldap_attribute_values = literal_eval(ldap_attribute_values_asString)
         except Exception as err:
-            self.LOG.debug(f"Error: {err}")
+            self.LOG.error(f"Error: {err}")
             raise ValueError(
                 """ldap_attribute_values must be a string repersenation of an array e.g. "['stringValue1, 1234, 'stringValue2']" """)
 
@@ -84,7 +84,7 @@ class FunctionComponent(AppFunctionComponent):
             success = c.modify(ldap_dn, {ldap_attribute_name: [(MODIFY_REPLACE, ldap_attribute_values)]})
 
         except Exception as err:
-            self.LOG.debug(f"Error: {err}")
+            self.LOG.error(f"Error: {err}")
             raise ValueError("Failed to update. Ensure 'ldap_dn' is valid and the update meets your LDAP CONSTRAINTS")
 
         finally:

@@ -169,10 +169,10 @@ class FunctionComponent(AppFunctionComponent):
                 yield self.status_message("No entries found")
 
         except LDAPSocketOpenError as err:
-            self.LOG.debug(f"Error: {err}")
+            self.LOG.error(f"Error: {err}")
             raise ValueError("Invalid Search Base", input_ldap_search_base)
         except LDAPInvalidFilterError as err:
-            self.LOG.debug(f"Error: {err}")
+            self.LOG.error(f"Error: {err}")
             raise ValueError("Invalid search filter", input_ldap_search_filter)
         except Exception as err:
             raise ValueError("Could not Search the LDAP Server. Ensure 'ldap_search_base' is valid", err)

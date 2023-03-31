@@ -89,7 +89,7 @@ class FunctionComponent(AppFunctionComponent):
             success = ad_add_members_to_groups(c, input_ldap_multiple_user_dn, input_ldap_multiple_group_dn, True)
 
         except Exception as err:
-            self.LOG.debug(f"Error: {err}")
+            self.LOG.error(f"Error: {err}")
             raise ValueError("Ensure all user and group DNs exist")
 
         finally:

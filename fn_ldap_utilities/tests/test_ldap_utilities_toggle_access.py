@@ -51,7 +51,7 @@ class TestLdapUtilitiesToggleAccess:
         assert func is not None
 
     mock_inputs_1 = {
-        "ldap_toggle_access": {"name": {"name": "Disable"}},
+        "ldap_toggle_access": "Disable",
         "ldap_dn": "CN=Test User8,CN=Users,dc=example,DC=com"
     }
 
@@ -59,7 +59,7 @@ class TestLdapUtilitiesToggleAccess:
         "success": True,
         "content": {
             "user_dn": "CN=Test User8,CN=Users,dc=example,DC=com",
-            "user_status": "Disabled"
+            "user_status": "Disable"
         }
     }
 

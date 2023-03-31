@@ -97,7 +97,7 @@ class FunctionComponent(AppFunctionComponent):
         except LDAPEntryAlreadyExistsResult:
             raise ValueError("User already exists")
         except Exception as err:
-            self.LOG.debug(f'Error: {err}')
+            self.LOG.error(f'Error: {err}')
             raise ValueError("Ensure dn is correct")
         finally:
             # Unbind connection

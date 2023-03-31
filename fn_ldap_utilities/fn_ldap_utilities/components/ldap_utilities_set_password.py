@@ -82,13 +82,10 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             yield self.status_message("Attempting to change password")
-            if helper.LDAP_IS_ACTIVE_DIRECTORY:
-                success = c.extend.microsoft.modify_password(str(ldap_dn), ldap_new_password)
-            else:
-                success = c.modify(ldap_dn, {'userPassword': [(MODIFY_REPLACE, [ldap_new_password])]})
+            success = c.modify(ldap_dn, {'userPassword': [(MODIFY_REPLACE, [ldap_new_password])]})
 
         except Exception as err:
-            self.LOG.debug(f"Error: {err}")
+            self.LOG.error(f"Error: {err}")
             raise ValueError("Could not change password. Check ldap_dn are valid")
 
         finally:
