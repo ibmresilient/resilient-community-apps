@@ -1,84 +1,100 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v48.0.4034
+# pragma pylint: disable=unused-argument, no-self-use
 
-"""AppFunction implementation"""
+# (c) Copyright IBM Corp. 2010, 2018, 2021. All Rights Reserved.
 
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+"""Function implementation"""
 
-PACKAGE_NAME = "fn_create_zoom_meeting"
-FN_NAME = "fn_create_zoom_meeting"
+import logging
+from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
+from fn_create_zoom_meeting.util.zoom_common import ZoomCommon
+import pytz
+from bs4 import BeautifulSoup
+from six import string_types
+try:
+    import HTMLParser as htmlparser
+except:
+    import html.parser as htmlparser
+
+LOG = logging.getLogger(__name__)
 
 
-class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'fn_create_zoom_meeting'"""
+class FunctionComponent(ResilientComponent):
+    """Component that implements Resilient function 'fn_create_zoom_meeting"""
 
     def __init__(self, opts):
-        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        """constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+        self.options = opts.get("fn_create_zoom_meeting", {})
 
-    @app_function(FN_NAME)
-    def _app_function(self, fn_inputs):
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.options = opts.get("fn_create_zoom_meeting", {})
+
+    @function("fn_create_zoom_meeting")
+    def _fn_create_zoom_meeting_function(self, event, *args, **kwargs):
+        """Function: This will return a meeting URL to connect to a zoom meeting"""
+        try:
+            log = logging.getLogger(__name__)
+
+            # Get the function parameters:
+            zoom_topic = kwargs.get("zoom_topic")  # text
+            zoom_password = kwargs.get("zoom_password")  # text
+            zoom_record_meeting = kwargs.get("zoom_record_meeting")  # boolean
+
+            # Remove the HTML tags
+            zoom_agenda = self._clean_html(kwargs.get("zoom_agenda"))  # text
+
+            if type(zoom_record_meeting) is not bool:
+                zoom_record_meeting = False
+
+            zoom_host_email = self.options.get("zoom_marketplace_account_email")
+            zoom_api_url = self.options.get("zoom_api_url")
+            zoom_api_timezone = self.options.get("zoom_api_timezone")
+
+            if zoom_api_timezone is None:
+                yield FunctionError("zoom_api_timezone is not defined in app.config")
+            try:
+                pytz.timezone(str(zoom_api_timezone))
+            except pytz.exceptions.UnknownTimeZoneError:
+                yield FunctionError("Invalid timezone provided in app.config")
+            if zoom_api_url is None:
+                yield FunctionError("zoom_api_url is not defined in app.config")
+
+
+            if zoom_topic is None:
+                zoom_topic = ""
+
+            if zoom_password is None:
+                zoom_password = ""
+
+            self.common = ZoomCommon(self.opts, self.options)
+
+            r = self.common.create_meeting(zoom_host_email, zoom_agenda, zoom_record_meeting, zoom_topic, zoom_password, zoom_api_timezone)
+
+            yield FunctionResult(r)
+        except Exception as e:
+            LOG.error(e)
+            yield FunctionError(e)
+
+    def _clean_html(self, html_fragment):
         """
-        Function: This will return a meeting URL to connect to a zoom meeting
-        Inputs:
-            -   fn_inputs.zoom_password
-            -   fn_inputs.zoom_record_meeting
-            -   fn_inputs.zoom_agenda
-            -   fn_inputs.zoom_topic
+        Resilient textarea fields return html fragments. This routine will remove the html and insert any
+        code within <div></div> with a linefeed
+        :param html_fragment:
+        :return: cleaned up code
         """
 
-        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
+        if not html_fragment or not isinstance(html_fragment, string_types):
+            return html_fragment
 
-        # Example validating app_configs
-        # validate_fields([
-        #     {"name": "api_key", "placeholder": "<your-api-key>"},
-        #     {"name": "base_url", "placeholder": "<api-base-url>"}],
-        #     self.app_configs)
+        return BeautifulSoup(self._unescape(html_fragment), "html.parser").text
 
-        # Example validating required fn_inputs
-        # validate_fields(["required_input_one", "required_input_two"], fn_inputs)
-
-        # Example accessing optional attribute in fn_inputs and initializing it to None if it does not exist (this is similar for app_configs)
-        # optional_input =  getattr(fn_inputs, "optional_input", None)
-
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
-
-        # Example interacting with REST API
-        # res_client = self.rest_client()
-        # function_details = res_client.get(f"/functions/{FN_NAME}?handle_format=names")
-
-        # Example raising an exception
-        # raise IntegrationError("Example raising custom error")
-
-        ##############################################
-        # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
-        ##############################################
-
-        # Call API implementation example:
-        # params = {
-        #     "api_key": self.app_configs.api_key,
-        #     "ip_address": fn_inputs.artifact_value
-        # }
-        #
-        # response = self.rc.execute(
-        #     method="get",
-        #     url=self.app_configs.api_base_url,
-        #     params=params
-        # )
-        #
-        # results = response.json()
-        #
-        # yield self.status_message(f"Endpoint reached successfully and returning results for App Function: '{FN_NAME}'")
-        #
-        # yield FunctionResult(results)
-        ##############################################
-
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
-
-        # Note this is only used for demo purposes! Put your own key/value pairs here that you want to access on the Platform
-        results = {"mock_key": "Mock Value!"}
-
-        yield FunctionResult(results)
-        # yield FunctionResult({}, success=False, reason="Bad call")
+    @staticmethod
+    def _unescape(data):
+        """ Return unescaped data such as &gt; -> >, &quot -> ', etc. """
+        try:
+            return htmlparser.unescape(data)
+        except:
+            return data
