@@ -323,7 +323,6 @@ class PollerComponent(AppFunctionComponent):
                 for soar_case in soar_cases_list:
                     soar_tasks = soar_case.get("tasks") # Get the list of tasks from the SOAR case if they exist
                     for jira_issue in jira_issues_with_soar_case:
-                        jira_issue_updated = jira_issue.get("fields").get("updated")
                         jira_issue_description = jira_issue.get("fields").get("description") # Get the description of the Jira issue
                         # Check if the Jira issue is linked to a SOAR task that needs to be updated
                         if soar_tasks and check_jira_issue_linked_to_task(jira_issue_description):
@@ -331,13 +330,10 @@ class PollerComponent(AppFunctionComponent):
                             # Loop through all tasks on the SOAR case
                             for task in soar_tasks:
                                 if task.get("id") == task_id:
-                                    # if jira_issue_updated > task.get("datatable").get("cells").get("last_updated").get("value"):
-                                        # Add matching SOAR case and Jira issue to soar_tasks_to_update list
+                                    # Add matching SOAR case and Jira issue to soar_tasks_to_update list
                                     soar_tasks_to_update.append([jira_issue, task])
                                     break
                         # Check if SOAR incident needs to be updated
-                        # if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id") and\
-                        # jira_issue_updated > soar_case.get("inc_last_modified_date"):
                         if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id"):
                             # Check if the Jira issue has been closed
                             if jira_issue.get("fields").get("resolutiondate"):
@@ -350,9 +346,7 @@ class PollerComponent(AppFunctionComponent):
 
         # Create new SOAR cases from Jira issues
         if jira_issues_to_add_to_soar:
-            for jira_issue in jira_issues_to_add_to_soar:
-                self.soar_create_case(jira_issue)
-                LOG.info(f"SOAR incident created: {jira_issue.get('summary')}")
+            self.soar_create_case(jira_issues_to_add_to_soar)
 
         # Close SOAR cases that's linked Jira issue is closed
         if soar_cases_to_close:
@@ -387,28 +381,30 @@ class PollerComponent(AppFunctionComponent):
         elif template_name == "update_task":
             return options.get(update_task) if options.get(update_task) else self.soar_update_task_template
 
-    def soar_create_case(self, jira_issue):
+    def soar_create_case(self, jira_issues_to_add_to_soar):
         """
         Create a new SOAR incident from a Jira issue
-        :param jira_issue: Dict of Jira issue data
+        :param jira_issues_to_add_to_soar: Dict of Jira issues
         :return: None
         """
-        soar_create_payload = make_payload_from_template(
-            self.set_poller_templates(jira_issue.get("jira_server"), "create_case"),
-            CREATE_CASE_TEMPLATE,
-            jira_issue)
-        create_soar_case = self.soar_common.create_soar_case(
-            soar_create_payload)
+        for jira_issue in jira_issues_to_add_to_soar:
+            soar_create_payload = make_payload_from_template(
+                self.set_poller_templates(jira_issue.get("jira_server"), "create_case"),
+                CREATE_CASE_TEMPLATE,
+                jira_issue)
+            create_soar_case = self.soar_common.create_soar_case(
+                soar_create_payload)
+            LOG.info(f"SOAR incident created: {jira_issue.get('summary')}")
 
-        attachments = jira_issue.get("fields").get("attachment")
-        if attachments:
-            # Get attachments from the Jira ticket
-            for attach in attachments:
-                # Add the attachment to the SOAR incident
-                self.res_client.post_attachment(f"/incidents/{create_soar_case.get('id')}/attachments",
-                    filepath=None,
-                    filename=attach.get("filename"),
-                    bytes_handle=attach.get("content"))
+            attachments = jira_issue.get("fields").get("attachment")
+            if attachments:
+                # Get attachments from the Jira ticket
+                for attach in attachments:
+                    # Add the attachment to the SOAR incident
+                    self.res_client.post_attachment(f"/incidents/{create_soar_case.get('id')}/attachments",
+                        filepath=None,
+                        filename=attach.get("filename"),
+                        bytes_handle=attach.get("content"))
 
     def soar_close_cases(self, soar_cases_to_close):
         """
