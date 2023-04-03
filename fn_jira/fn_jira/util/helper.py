@@ -1,7 +1,7 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
-from resilient_lib import IntegrationError, MarkdownParser, SOARCommon
+from resilient_lib import IntegrationError, MarkdownParser, SOARCommon, clean_html
 from re import compile
 from datetime import datetime
 

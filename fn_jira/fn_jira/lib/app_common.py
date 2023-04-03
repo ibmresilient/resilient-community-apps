@@ -6,7 +6,7 @@ from logging import getLogger
 from urllib.parse import urlparse
 from jira import JIRA
 from fn_jira.util.helper import str_time_to_int_time, check_jira_issue_linked_to_task, get_id_from_jira_issue_description, GLOBAL_SETTINGS
-from resilient_lib import IntegrationError, str_to_bool, validate_fields, RequestsCommon, clean_html
+from resilient_lib import IntegrationError, str_to_bool, validate_fields, RequestsCommon
 
 LOG = getLogger(__name__)
 
@@ -128,7 +128,8 @@ class AppCommon():
         issues_list = self.jira_client.search_issues(
             search_filters,
             maxResults=max_results,
-            json_result=True
+            json_result=True,
+            expand="renderedFields"
         ).get("issues")
 
         # Format each dictionary
@@ -147,13 +148,9 @@ class AppCommon():
             data_to_get_from_case[issue.get("key")]["comments"] = False
             data_to_get_from_case[issue.get("key")]["attachments"] = False
 
-            # Create a list of just comment string
-            comments = issue.get("fields").get("comment").get("comments")
-            if comments:
+            # Check if there are comments on the Jira issue
+            if issue.get("fields").get("comment").get("comments"):
                 data_to_get_from_case[issue.get("key")]["comments"] = True
-                for comment_num in range(len(comments)):
-                    comments[comment_num] = comments[comment_num].get("body")
-            issue["fields"]["comment"] = comments if comments else []
 
             # Convert the string times to integer epoch time
             issue["fields"]["created"] = str_time_to_int_time(issue.get("fields").get("created"))
@@ -289,7 +286,7 @@ def add_to_case(soar_common, cases_list, num, field_name):
         for field_num in range(len(case_field)):
             field_dict = {"id": case_field[field_num].get("id")}
             if field_name == "comments":
-                field_dict["content"] = clean_html(case_field[field_num].get("text"))
+                field_dict["content"] = case_field[field_num].get("text")
             if field_name == "attachments":
                 field_dict["name"] = case_field[field_num].get("name")
             cases_list[num][field_name].append(field_dict)

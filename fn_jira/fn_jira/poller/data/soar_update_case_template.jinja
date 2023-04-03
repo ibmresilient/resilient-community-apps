@@ -3,16 +3,6 @@
   "version": {{ soar["vers"] + 1 }},
   "changes": [
       {
-        "old_value": {"text": "{{ soar["name"] }}"},
-        "new_value": {"text": "{{ jira["fields"]["summary"] }}"},
-        "field": {"name": "name"}
-      },
-      {
-        "old_value": {"textarea": {% if soar["description"] is none %} null {% else %} "{{ soar["description"] }}" {% endif %}},
-        "new_value": {"textarea": {% if jira["fields"]["description"] is none %} null {% else %} "{{ jira["fields"]["description"] }}" {% endif %}},
-        "field": {"name": "description"}
-      },
-      {
         "old_value": {"text": "{{ soar["severity_code"] }}"},
         "new_value": {"text": "{{ jira["fields"]["priority"]["name"] }}"},
         "field": {"name": "severity_code"}

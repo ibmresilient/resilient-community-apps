@@ -388,6 +388,7 @@ class PollerComponent(AppFunctionComponent):
         :return: None
         """
         for jira_issue in jira_issues_to_add_to_soar:
+            jira_issue["renderedFields"]["description"] = jira_issue.get("renderedFields").get("description").replace('"', "'")
             soar_create_payload = make_payload_from_template(
                 self.set_poller_templates(jira_issue.get("jira_server"), "create_case"),
                 CREATE_CASE_TEMPLATE,
@@ -522,11 +523,12 @@ class PollerComponent(AppFunctionComponent):
         :param soar: Dict of SOAR case data
         :return: None
         """
-        jira_comments = jira.get("fields").pop("comment") if jira.get("fields").get("comment") else []
+        jira_comments = [comment.get("body") for comment in jira.get("renderedFields").get("comment").get("comments")]
         if jira_comments:
             new_comments = self.soar_common.filter_soar_comments(soar.get("id"), jira_comments, soar_header="\nAdded from Jira")
-            for comment in new_comments:
-                self.soar_common.create_case_comment(soar.get("id"), f"{comment}\nAdded from Jira")
+            if new_comments:
+                for comment in new_comments:
+                    self.soar_common.create_case_comment(soar.get("id"), f"{comment}\nAdded from Jira")
 
     def soar_update_attachments(self, jira, soar):
         """
@@ -554,13 +556,13 @@ class PollerComponent(AppFunctionComponent):
         """
         # Remove all html tags from the task notes
         for num in range(len(task.get("notes"))):
-            task["notes"][num] = clean_html(task["notes"][num].replace("<br/>Added from Jira", ""))
+            task["notes"][num] = task["notes"][num].replace("<br/>Added from Jira", "")
 
         # Update comments/notes
         comments = jira.get("fields").get("comment")
         if comments:
             for comment in comments:
-                if comment not in task.get("notes"):
+                if clean_html(comment) not in [clean_html(note) for note in task.get("notes")]:
                     comment_payload = {
                         "text": {
                             "format": "text",
@@ -617,7 +619,12 @@ def filter_out_identical_changes(payload):
     new_payload["changes"] = []
 
     for soar_change in payload.get("changes"):
-        if soar_change.get("old_value") != soar_change.get("new_value"):
+        if soar_change.get("old_value").get("textarea") and soar_change.get("old_value").get("textarea").get("format") == "html":
+            old_value = clean_html(soar_change.get("old_value").get("textarea").get("content"))
+            new_value = clean_html(soar_change.get("new_value").get("textarea").get("content"))
+            if old_value != new_value:
+                new_payload["changes"].append(soar_change)
+        elif soar_change.get("old_value") != soar_change.get("new_value"):
             new_payload["changes"].append(soar_change)
 
     return new_payload
