@@ -12,7 +12,7 @@ LOG = getLogger(__name__)
 class IncidentGroupsTab(Tab):
     SECTION = PACKAGE_NAME
     NAME = "Jira Incident"
-    UUID = "6f8c7b82-348d-4e3d-8416-a234301347d6"
+    UUID = "6f8c7b82-1234-4e3d-8416-a234301347d6"
 
     CONTAINS = [
         Field("jira_internal_url"),
