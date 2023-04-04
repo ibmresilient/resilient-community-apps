@@ -25,7 +25,7 @@ class IncidentGroupsTab(Tab):
     ]
 
     SHOW_IF = [
-        Field("jira_server").conditions.has_value()
+        Field("jira_linked_to_incident").conditions.equals(True)
     ]
 
 # Continue if exception is thrown

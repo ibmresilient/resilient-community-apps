@@ -221,11 +221,19 @@ class PollerComponent(AppFunctionComponent):
             # Add list of Jira issues to jira_issues_dict under the server the issues where found in
             jira_issues_dict[server] = jira_issue_list
 
+        # Query used for getting SOAR incidents that are linked to Jira issues
+        query = {
+            "filters": [{
+                "conditions": [
+                    {"field_name": "plan_status", "method": "equals", "value": "A"},
+                    {"field_name": "properties.jira_linked_to_incident", "method": "equals", "value": True}
+                ]}
+            ],
+            "sorts": [{"field_name": "create_date", "type": "desc"}]
+        }
+
         # Get a list of open SOAR cases that contain the field jira_issue_id.
-        soar_cases_list = self.res_client.post(
-            "/incidents/query?return_level=normal&handle_format=names",
-            self.soar_common._build_search_query({"jira_issue_id": True}, open_cases=True)
-        )
+        soar_cases_list = self.res_client.post("/incidents/query?return_level=normal&handle_format=names", query)
 
         soar_cases_list = self.process_soar_cases(soar_cases_list, data_to_get_from_case)
 
@@ -319,7 +327,6 @@ class PollerComponent(AppFunctionComponent):
                     jira_issues_to_add_to_soar.append(jira_issue)
 
             if soar_cases_list:
-                # Check if "SOAR Case Last Updated" time is before Jira issue 'Updated' time
                 for soar_case in soar_cases_list:
                     soar_tasks = soar_case.get("tasks") # Get the list of tasks from the SOAR case if they exist
                     for jira_issue in jira_issues_with_soar_case:
@@ -486,12 +493,21 @@ class PollerComponent(AppFunctionComponent):
         :param soar: Dict of SOAR case data
         :return: None
         """
-        jira_comments = [comment.get("body") for comment in jira.get("renderedFields").get("comment").get("comments")]
+        # List of comments from the SOAR incident
+        soar_comments = [clean_html(comment.get("content").replace("Added from Jira", "")) for comment in soar.get("comments", [])]
+        # List of comments from the Jira issue
+        jira_comments = [comment.get("body").replace("\n", "") for comment in jira.get("renderedFields").get("comment").get("comments", [])]
+
         if jira_comments:
-            new_comments = self.soar_common.filter_soar_comments(soar.get("id"), jira_comments, soar_header="\nAdded from Jira")
-            if new_comments:
-                for comment in new_comments:
-                    self.soar_common.create_case_comment(soar.get("id"), f"{comment}\nAdded from Jira")
+            for comment in jira_comments:
+                if clean_html(comment) not in soar_comments:
+                    comment_payload = {
+                        "text": {
+                            "format": "html",
+                            "content": f"{comment}<br/>Added from Jira"
+                        }
+                    }
+                    self.res_client.post(f"/incidents/{soar.get('id')}/comments", comment_payload)
 
     def soar_update_attachments(self, jira, soar):
         """
@@ -510,6 +526,7 @@ class PollerComponent(AppFunctionComponent):
             content = jira_attachments[next((index for (index, attach) in enumerate(jira_attachments) if attach["filename"] == attch_name), None)].get("content")
             self.res_client.post_attachment(f"/incidents/{soar.get('id')}/attachments", filepath=None, filename=attch_name, bytes_handle=content)
 
+    # SOAR task functions
     def soar_update_tasks(self, soar_tasks_to_update):
         """
         Update the SOAR tasks with new data from the corresponding Jira issue
@@ -560,19 +577,19 @@ class PollerComponent(AppFunctionComponent):
         :param jira: Dictionary of data from the Jira issue
         :return: None
         """
-        # Remove all html tags from the task notes
-        for num in range(len(task.get("notes"))):
-            task["notes"][num] = task["notes"][num].replace("<br/>Added from Jira", "")
+        # SOAR Task comments
+        task_comments = [clean_html(note.replace("Added from Jira", "")) for note in task.get("notes", []) if "Added Jira Issue:" not in note]
+        # Jira issue comments
+        jira_comments = [comment.get("body").replace("\n", "") for comment in jira.get("renderedFields").get("comment").get("comments", [])]
 
         # Update comments/notes
-        comments = jira.get("fields").get("comment")
-        if comments:
-            for comment in comments:
-                if clean_html(comment) not in [clean_html(note) for note in task.get("notes")]:
+        if jira_comments:
+            for comment in jira_comments:
+                if clean_html(comment) not in task_comments:
                     comment_payload = {
                         "text": {
-                            "format": "text",
-                            "content": f"{comment}\nAdded from Jira"
+                            "format": "html",
+                            "content": f"{comment}<br/>Added from Jira"
                         },
                         "is_deleted": False
                     }
@@ -604,16 +621,23 @@ class PollerComponent(AppFunctionComponent):
         """
         datatable = task.get('datatable')
         datatable_cells = datatable.get("cells")
+        # Boolean to define if there is new data to add to the datatable
+        datatable_new_data = False
 
         d_payload = {
             "id": datatable.get("id"),
             "version": datatable.get("version")
         }
         d_payload["cells"] = {cell: { "value": datatable_cells[cell].get("value")} for cell in datatable_cells}
-        d_payload["cells"]["last_updated"]["value"] = jira.get("fields").get("updated")
-        d_payload["cells"]["status"]["value"] = jira.get("fields").get("status").get("name")
+        if d_payload.get("cells").get("last_updated").get("value") < jira.get("fields").get("updated"):
+            datatable_new_data = True
+            d_payload["cells"]["last_updated"]["value"] = jira.get("fields").get("updated")
+        if d_payload.get("cells").get("status").get("value") != jira.get("fields").get("status").get("name"):
+            datatable_new_data = True
+            d_payload["cells"]["status"]["value"] = jira.get("fields").get("status").get("name")
 
-        self.res_client.put(f"/incidents/{task.get('inc_id')}/table_data/{datatable.get('table_id')}/row_data/{datatable.get('id')}", d_payload)
+        if datatable_new_data:
+            self.res_client.put(f"/incidents/{task.get('inc_id')}/table_data/{datatable.get('table_id')}/row_data/{datatable.get('id')}", d_payload)
 
 def filter_out_identical_changes(payload):
     """

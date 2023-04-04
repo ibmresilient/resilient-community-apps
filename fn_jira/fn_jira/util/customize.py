@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v48.0.4034
 
-"""Generate the SOAR customizations required for fn_jira"""
+"""Generate the Resilient customizations required for fn_jira"""
 
 import base64
 import os
@@ -24,7 +25,7 @@ def codegen_reload_data():
         "functions": [u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue"],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_issue_status", u"jira_project_key", u"jira_server", u"jira_url"],
+        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_issue_status", u"jira_linked_to_incident", u"jira_project_key", u"jira_server", u"jira_url"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"jira_task_references"],
@@ -58,6 +59,7 @@ def customization_data(client=None):
         - jira_internal_url
         - jira_issue_id
         - jira_issue_status
+        - jira_linked_to_incident
         - jira_project_key
         - jira_server
         - jira_url

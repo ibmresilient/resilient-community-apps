@@ -165,7 +165,10 @@ class AppCommon():
                         "filename": attachments[attach_num].get("filename"),
                         "content": self.jira_client._session.get(attachments[attach_num].get("content")).content
                     }
+                del attach_num
             issue["fields"]["attachment"] = attachments if attachments else []
+
+            del attachments
 
             issue_description = issue.get("fields").get("description")
             if check_jira_issue_linked_to_task(issue_description):
