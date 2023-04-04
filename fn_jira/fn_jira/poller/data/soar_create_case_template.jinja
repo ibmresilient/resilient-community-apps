@@ -17,8 +17,8 @@
   },
   {# add comments as necessary #}
   "comments": [
-    {% for note in fields["comment"] %}
-      { "text": { "format": "text", "content": "{{ note }}" }, "type": "incident" }
+    {% for note in renderedFields["comment"] %}
+      { "text": { "format": "html", "content": "{{ note }}" }, "type": "incident" }
       {% if not loop.last %}
         ,
       {% endif %}

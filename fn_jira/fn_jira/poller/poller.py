@@ -389,10 +389,16 @@ class PollerComponent(AppFunctionComponent):
         """
         for jira_issue in jira_issues_to_add_to_soar:
             jira_issue["renderedFields"]["description"] = jira_issue.get("renderedFields").get("description").replace('"', "'")
+            # Set comments to list of comments
+            jira_issue["renderedFields"]["comment"] = [comment.get("body") for comment in jira_issue.get("renderedFields").get("comment").get("comments")]
+
+            # Create payload for creating SOAR incident from template
             soar_create_payload = make_payload_from_template(
                 self.set_poller_templates(jira_issue.get("jira_server"), "create_case"),
                 CREATE_CASE_TEMPLATE,
                 jira_issue)
+
+            # Make call to SOAR to create incident
             create_soar_case = self.soar_common.create_soar_case(
                 soar_create_payload)
             LOG.info(f"SOAR incident created: {jira_issue.get('summary')}")
@@ -552,6 +558,49 @@ class PollerComponent(AppFunctionComponent):
         for attch_name in new_attachments_names:
             content = jira_attachments[next((index for (index, attach) in enumerate(jira_attachments) if attach["filename"] == attch_name), None)].get("content")
             self.res_client.post_attachment(f"/incidents/{soar.get('id')}/attachments", filepath=None, filename=attch_name, bytes_handle=content)
+
+    def soar_update_tasks(self, soar_tasks_to_update):
+        """
+        Update the SOAR tasks with new data from the corresponding Jira issue
+        :param soar_tasks_to_update: A list of lists that contain the SOAR tasks to update and its corresponding Jira issue
+        :return: None
+        """
+        soar_task_update_payload = []
+
+        for update in soar_tasks_to_update:
+            jira = update[0]
+            task = update[1]
+
+            jira_issue_description = jira.get("fields").get("description")
+            link_end_index = jira_issue_description.index("\n\n")+2
+            # Check if link to SOAR task is in the Jira issue description
+            if check_jira_issue_linked_to_task(jira_issue_description) and link_end_index < len(jira_issue_description):
+                # Remove link to SOAR task from the description
+                jira["fields"]["description"] = jira_issue_description[link_end_index:].replace("Created in IBM SOAR", "")
+            else:
+                jira["fields"]["description"] = jira_issue_description
+
+            # Create update payload for current SOAR task
+            soar_task_update_payload.append(make_payload_from_template(
+                self.set_poller_templates(jira.get("jira_server"), "update_task"),
+                UPDATE_TASK_TEMPLATE,
+                {"jira": jira, "task": task})
+            )
+
+            # Update comments
+            self.update_task_comments(task, jira)
+
+            # Update attachments
+            self.update_task_attachments(task, jira)
+
+            # Update datatable
+            self.update_task_datatable(task, jira)
+
+        # If task update payload is not empty then update fields on tasks
+        if soar_task_update_payload:
+            # Send put request to SOAR
+            # This will update all tasks that need to be updated
+            self.res_client.put("/tasks", soar_task_update_payload)
 
     def update_task_comments(self, task, jira):
         """

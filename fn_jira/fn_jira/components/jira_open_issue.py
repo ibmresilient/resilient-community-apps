@@ -5,11 +5,11 @@
 
 from json import loads
 from fn_jira.util.helper import (DEFAULT_JIRA_DT_NAME, PACKAGE_NAME,
-                                 get_server_settings,
-                                 to_markdown)
+                                 get_server_settings, to_markdown)
 from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
 from resilient_lib import build_incident_url, validate_fields
 from fn_jira.lib.app_common import AppCommon
+from fn_jira.poller.configure_tab import init_incident_groups_tab
 
 FN_NAME = "jira_open_issue"
 
@@ -18,6 +18,7 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        init_incident_groups_tab()
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
