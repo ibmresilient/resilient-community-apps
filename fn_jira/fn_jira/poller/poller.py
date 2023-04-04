@@ -7,6 +7,7 @@ from logging import getLogger
 from os import path
 from threading import Thread
 from datetime import timezone, timedelta, datetime
+from time import sleep
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (SOARCommon, get_last_poller_date, clean_html,
@@ -397,7 +398,7 @@ class PollerComponent(AppFunctionComponent):
         for jira_issue in jira_issues_to_add_to_soar:
             jira_issue["renderedFields"]["description"] = jira_issue.get("renderedFields").get("description").replace('"', "'")
             # Set comments to list of comments
-            jira_issue["renderedFields"]["comment"] = [comment.get("body") for comment in jira_issue.get("renderedFields").get("comment").get("comments")]
+            jira_issue["renderedFields"]["comment"] = [comment.get("body").replace('"', "'") for comment in jira_issue.get("renderedFields").get("comment").get("comments")]
 
             # Create payload for creating SOAR incident from template
             soar_create_payload = make_payload_from_template(
@@ -482,9 +483,13 @@ class PollerComponent(AppFunctionComponent):
 
         # If SOAR soar_update_payload is not empty then update fields on cases
         if soar_update_payload["patches"]:
-            # Send put request to SOAR
-            # This will update all cases that need to be updated
-            self.res_client.put("/incidents/patch", soar_update_payload)
+            try:
+                # Send put request to SOAR
+                # This will update all cases that need to be updated
+                response = self.res_client.put("/incidents/patch", soar_update_payload)
+                LOG.debug(str(response))
+            except Exception as err:
+                LOG.error(str(err))
 
     def soar_update_comments(self, jira, soar):
         """
