@@ -491,55 +491,6 @@ class PollerComponent(AppFunctionComponent):
             except Exception as err:
                 LOG.error(str(err))
 
-        # If SOAR soar_update_payload is not empty then update fields on cases
-        if soar_update_payload["patches"]:
-            # Send put request to SOAR
-            # This will update all cases that need to be updated
-            self.res_client.put("/incidents/patch", soar_update_payload)
-
-    def soar_update_tasks(self, soar_tasks_to_update):
-        """
-        Update the SOAR tasks with new data from the corresponding Jira issue
-        :param soar_tasks_to_update: A list of lists that contain the SOAR tasks to update and its corresponding Jira issue
-        :return: None
-        """
-        soar_task_update_payload = []
-
-        for update in soar_tasks_to_update:
-            jira = update[0]
-            task = update[1]
-
-            jira_issue_description = jira.get("fields").get("description")
-            link_end_index = jira_issue_description.index("\n\n")+2
-            # Check if link to SOAR task is in the Jira issue description
-            if check_jira_issue_linked_to_task(jira_issue_description) and link_end_index < len(jira_issue_description):
-                # Remove link to SOAR task from the description
-                jira["fields"]["description"] = jira_issue_description[link_end_index:].replace("Created in IBM SOAR", "")
-            else:
-                jira["fields"]["description"] = jira_issue_description
-
-            # Create update payload for current SAOR task
-            soar_task_update_payload.append(make_payload_from_template(
-                self.set_poller_templates(jira.get("jira_server"), "update_task"),
-                UPDATE_TASK_TEMPLATE,
-                {"jira": jira, "task": task})
-            )
-
-            # Update comments
-            self.update_task_comments(task, jira)
-
-            # Update attachments
-            self.update_task_attachments(task, jira)
-
-            # Update datatable
-            self.update_task_datatable(task, jira)
-
-        # If task update payload is not empty then update fields on tasks
-        if soar_task_update_payload:
-            # Send put request to SOAR
-            # This will update all tasks that need to be updated
-            self.res_client.put("/tasks", soar_task_update_payload)
-
     def soar_update_comments(self, jira, soar):
         """
         Update SOAR incident with new comments on the linked Jira issue

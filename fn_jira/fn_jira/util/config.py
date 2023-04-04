@@ -40,35 +40,6 @@ max_issues_returned = 50
 #soar_update_task_template=
 #soar_close_case_template=
 
-[fn_jira:global_settings]
-# Maximum time in seconds to wait before timeout.
-timeout=10
-# Interval to poll Jira for changes (in seconds)
-# When polling_interval equals 0 the poller is off
-polling_interval=0
-polling_lookback=60
-# Search filters for Jira issue to sync with SOAR cases.
-# If poller_filters under [fn_jira:global_settings] is configured, then poller_filters
-#  that are configured under the individual Jira servers will be ignored
-poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
-# Max number of issues that can be returned from Jira issue search.
-# If max_issues_returned under [fn_jira:global_settings] is configured, then max_issues_returned
-#  that are configured under the individual Jira servers will be ignored.
-max_issues_returned = 50
-# Proxys to use
-# If proxys are defined under [fn_jira:global_settings], then proxys defined
-#  under the individual Jira servers will be ignored
-#http_proxy=
-#https_proxy=
-# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
-# If templates under [fn_jira:global_settings] are configured, then templates
-#  that are configured under the individual Jira servers will be ignored.
-# See documentation section "Templates for SOAR Cases" for more details
-#soar_create_case_template=
-#soar_update_case_template=
-#soar_update_task_template=
-#soar_close_case_template=
-
 [fn_jira:jira_label1]
 # Url to Jira server
 url=https://<jira url>
