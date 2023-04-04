@@ -152,10 +152,14 @@ class RxClient():
             if filter_data.get("filter"):
                 data["filter"] = filter_data.get("filter")
 
-        data["active_from"] = active_from
-        data["active_until"] = active_until
-        data["limit"] = int(limit) if limit else None
-        data["offset"] = int(offset) if offset else None
+        if active_from:
+            data["active_from"] = active_from
+        if active_until:
+            data["active_until"] = active_until
+        if limit:
+            data["limit"] = int(limit)
+        if offset:
+            data["offset"] = int(offset)
 
         r = self.api_call("post", uri, headers=self._headers, data=json.dumps(data))
 

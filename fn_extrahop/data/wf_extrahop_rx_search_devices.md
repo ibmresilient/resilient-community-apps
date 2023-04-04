@@ -83,8 +83,8 @@ main()
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_devices"
 WF_NAME = "Example: Extrahop Reveal(x) search devices"
-CONTENT = results.content
-INPUTS = results.inputs
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Display subset of fields
 DATA_TABLE = "extrahop_devices"
@@ -111,23 +111,26 @@ def process_devs(dev):
     # Process a device result.
     newrow = incident.addRow(DATA_TABLE)
     newrow.query_execution_date = QUERY_EXECUTION_DATE
-    for f1 in DATA_TBL_FIELDS:
-        f2 = f1
-        if f1.startswith("devs_"):
-            f2 = f1.split('_', 1)[1]
-        if dev[f1] is None:
-            newrow[f1] = dev[f2]
-        elif isinstance(dev[f2], list):
-            newrow[f1] = "{}".format(", ".join(dev[f2]))
-        elif isinstance(dev[f2], bool):
-            newrow[f1] = str(dev[f2])
-        elif f1 in ["mod_time", "user_mod_time", "discover_time", "last_seen_time"]:
-            newrow[f1] = long(dev[f2])
-        else:
-            newrow[f1] = "{}".format(dev[f2])
+    newrow.display_name = dev.get("display_name", None)
+    newrow.devs_description = dev.get("description", None)
+    newrow.default_name = dev.get("default_name", None)
+    newrow.dns_name = dev.get("dns_name", None)
+    newrow.ipaddr4 = dev.get("ipaddr4", None)
+    newrow.ipaddr6 = dev.get("ipaddr6", None)
+    newrow.macaddr  = dev.get("macaddr", None)
+    newrow.role = dev.get("role", None)
+    newrow.vendor = dev.get("vendor", None)
+    newrow.devs_id = dev.get("id", None)
+    newrow.extrahop_id = dev.get("extrahop_id", None)
+    newrow.activity = dev.get("activity", None)
+    newrow.on_watchlist = str(dev.get("on_watchlist", None))
+    newrow.mod_time = dev.get("mod_time", None)
+    newrow.user_mod_time = dev.get("user_mod_time", None)              
+    newrow.discover_time = dev.get("discover_time", None)
+    newrow.last_seen_time = dev.get("last_seen_time", None)
     device_url = make_linkback_url(dev["extrahop_id"])
     device_url_html = u'<div><b><a target="blank" href="{1}">{2}</a></b></div>' \
-              .format("url", device_url, dev["extrahop_id"])
+        .format("url", device_url, dev["extrahop_id"])
     newrow.device_url = device_url_html
 
 def main():
@@ -137,7 +140,7 @@ def main():
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Search devices failed with error <b>'{1}'</b> for " \
                         u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, CONTENT["error"], FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
         else:
-            devs = CONTENT.result
+            devs = CONTENT.get("result", None)
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
                         u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
             if devs:
@@ -172,12 +175,12 @@ main()
 ### Pre-Processing Script
 ```python
 search_filters =  [ 
-    rule.properties.extrahop_device_field,
-    rule.properties.extrahop_device_operand,
-    rule.properties.extrahop_device_operator
+    "extrahop_device_field",
+    "extrahop_device_operand",
+    "extrahop_device_operator"
 ]
 for p in search_filters:
-    if p:
+    if hasattr(rule.properties, p) and rule.properties.get(p):
         raise ValueError("A search filter and Device ID are not allowed at the same time.")
         
 if rule.properties.extrahop_device_id:
@@ -200,14 +203,11 @@ if rule.properties.extrahop_offset:
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_devices"
 WF_NAME = "Example: Extrahop Reveal(x) search devices"
-CONTENT = results.content
-INPUTS = results.inputs
+CONTENT = results.get("content")
+INPUTS = results.get("inputs")
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Display subset of fields
 DATA_TABLE = "extrahop_devices"
-DATA_TBL_FIELDS = ["display_name", "devs_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
-                   "role", "vendor", "devs_id", "extrahop_id", "activity", "mod_time", "user_mod_time", "discover_time",
-                   "last_seen_time"]
 LINKBACK_URL = "/extrahop/#/metrics/devices/{}.{}"
 
 
@@ -228,20 +228,23 @@ def process_devs(dev):
     # Process a device result.
     newrow = incident.addRow(DATA_TABLE)
     newrow.query_execution_date = QUERY_EXECUTION_DATE
-    for f1 in DATA_TBL_FIELDS:
-        f2 = f1
-        if f1.startswith("devs_"):
-            f2 = f1.split('_', 1)[1]
-        if dev[f1] is None:
-            newrow[f1] = dev[f2]
-        elif isinstance(dev[f2], list):
-            newrow[f1] = "{}".format(", ".join(dev[f2]))
-        elif isinstance(dev[f2], bool):
-            newrow[f1] = str(dev[f2])
-        elif f1 in ["mod_time", "user_mod_time", "discover_time", "last_seen_time"]:
-            newrow[f1] = long(dev[f2])
-        else:
-            newrow[f1] = "{}".format(dev[f2])
+    newrow.display_name = dev.get("display_name", None)
+    newrow.devs_description = dev.get("description", None)
+    newrow.default_name = dev.get("default_name", None)
+    newrow.dns_name = dev.get("dns_name", None)
+    newrow.ipaddr4 = dev.get("ipaddr4", None)
+    newrow.ipaddr6 = dev.get("ipaddr6", None)
+    newrow.macaddr  = dev.get("macaddr", None)
+    newrow.role = dev.get("role", None)
+    newrow.vendor = dev.get("vendor", None)
+    newrow.devs_id = dev.get("id", None)
+    newrow.extrahop_id = dev.get("extrahop_id", None)
+    newrow.activity = dev.get("activity", None)
+    newrow.on_watchlist = str(dev.get("on_watchlist", None))
+    newrow.mod_time = dev.get("mod_time", None)
+    newrow.user_mod_time = dev.get("user_mod_time", None)              
+    newrow.discover_time = dev.get("discover_time", None)
+    newrow.last_seen_time = dev.get("last_seen_time", None)
     device_url = make_linkback_url(dev["extrahop_id"])
     device_url_html = u'<div><b><a target="blank" href="{1}">{2}</a></b></div>' \
         .format("url", device_url, dev["extrahop_id"])
@@ -249,10 +252,10 @@ def process_devs(dev):
 
 # Processing
 def main():
-    device_id = INPUTS["extrahop_device_id"]
+    device_id = INPUTS.get("extrahop_device_id")
     note_text = u''
     if CONTENT:
-        dev = CONTENT.result
+        dev = CONTENT.get("result")
         if dev:
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A Device was successfully returned for " \
                         u"device ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
