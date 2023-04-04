@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [u"extrahop_activitymaps", u"extrahop_detections", u"extrahop_devices", u"extrahop_tags", u"extrahop_watchlist"],
         "automatic_tasks": [],
         "scripts": [u"ExtraHop script: add artifact from device", u"ExtraHop script: detection property helper", u"ExtraHop script: device property helper"],
-        "playbooks": []
+        "playbooks": [u"extrahop_rx_add_artifact_from_device", u"extrahop_rx_search_detections"]
     }
 
 
@@ -74,6 +74,9 @@ def customization_data(client=None):
         - wf_extrahop_rx_update_detection
         - wf_extrahop_rx_update_incident
         - wf_extrahop_rx_update_watchlist
+    - Playbooks:
+        - extrahop_rx_add_artifact_from_device
+        - extrahop_rx_search_detections
     - Rules:
         - Example: Extrahop Reveal(x) add artifact
         - Example: Extrahop Reveal(x) assign tag

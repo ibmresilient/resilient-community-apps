@@ -184,7 +184,7 @@ class RxClient():
         return r
 
     def search_detections(self, search_filter=None, active_from=None, active_until=None, limit=None, offset=None,
-                          mod_time=None, sort=None):
+                          mod_time=None, update_time=None, sort=None):
         """Get information about devices or a specific computer by device id
 
         For more details on api, see https://docs.extrahop.com/8.6/rx360-rest-api/
@@ -197,6 +197,7 @@ class RxClient():
         :param limit: (Optional) Limit the number of detections returned to the specified maximum number (int).
         :param offset: (Optional) Skip the specified number of detections (int).
         :param mod_time: (Optional) Get detections that were updated on or after the specified date (int).
+        :param update_time: (Optional) Get detections that were updated on or after the specified date (int).
         :param sort: (Optional) Sorts returned detections by the specified fields. (int).
         :return Result in json format.`
         """
@@ -235,6 +236,8 @@ class RxClient():
             data["offset"] = int(offset)
         if mod_time:
             data["mod_time"] = int(mod_time)
+        if update_time:
+            data["update_time"] = int(update_time)
 
         r = self.api_call("post", uri, headers=self._headers, data=json.dumps(data))
 

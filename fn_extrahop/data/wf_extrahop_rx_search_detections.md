@@ -12,7 +12,7 @@
 `funct_extrahop_rx_search_detections`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_extrahop`
@@ -97,13 +97,10 @@ if rule.properties.extrahop_mod_time:
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_detections"
 WF_NAME = "Example: Extrahop revealx search detections"
-CONTENT = results.content
-INPUTS = results.inputs
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_detections"
-DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
-                   "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
-                   "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
 
 # Read CATEGORY_MAP and TYPE_MAP from workflow property.
 CATEGORY_MAP = workflow.properties.category_map
@@ -115,59 +112,79 @@ LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 def process_dets(det):
     detection_url = make_linkback_url(det["id"])
     detection_url_html = u'<div><b><a target="blank" href="{0}">{1}</a></b></div>' \
-        .format(detection_url, det["id"])
+        .format(detection_url, det.get("id", None))
     newrow = incident.addRow(DATA_TABLE)
     newrow.query_execution_date = QUERY_EXECUTION_DATE
     newrow.detection_url = detection_url_html
-    for f1 in DATA_TBL_FIELDS:
-        f2 = f1
-        if f1.startswith("det_"):
-            f2 = f1.split('_', 1)[1]
-        if det[f2] is None or isinstance(det[f2], long):
-            newrow[f1] = det[f2]
-        elif isinstance(det[f1], list):
-            if f1 == "categories":
-                newrow[f1] = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det[f2]))
-            elif f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
-                obj_cnt = 0
-                tbl = u''
-                for i in det[f2]:
-                    for k, v in i.items():
-                        if k == "legacy_ids":
-                            tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
-                        elif k == "url":
-                            tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>' \
-                                .format(k, v, i["id"])
-                        else:
-                            tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
-                    tbl += u"<br>"
-                    obj_cnt += 1
-                newrow[f1] = tbl
-            else:
-                newrow[f1] = "{}".format(", ".join(det[f2]))
-        elif isinstance(det[f2], (bool, dict)):
-            if f1 in ["properties"]:
-                suspect_ip = False
-                tbl = u''
-                for i, j in det[f2].items():
-                    if i == "suspicious_ipaddr":
-                        artifact_type = "IP Address"
-                        type = "Suspicious IP Addresses"
-                        value = j["value"]
-                        tbl += u'<div><b>{0}:'.format(type)
-                        tbl += u'<div><b>{0}'.format(", ".join("{}".format(i) for i in value))
-                    else:
-                        tbl += u'<div><b>{0}:</b>{1}</div>'.format(i, j)
-                newrow[f1] = tbl
-            else:
-                newrow[f1] = str(det[f2])
+    newrow.appliance_id = det.get("appliance_id", None)
+    newrow.assignee = det.get("assignee", None)
+    newrow.categories = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det.get("categories", [])))
+    newrow.det_description = det.get("description", None)
+    newrow.det_id = det.get("id", None)
+    newrow.is_user_created = str(det.get("is_user_created", None))
+    newrow.end_time = det.get("end_time", None)
+    newrow.mod_time = det.get("mod_time", None)
+    newrow.update_time = det.get("update_time", None)
+    newrow.start_time = det.get("start_time", None)
+    newrow.status = det.get("status", None)
+    newrow.title = det.get("title", None)
+    detection_type = det.get("type", None)
+    newrow.type = TYPE_MAP.get(detection_type) if detection_type and TYPE_MAP.get(detection_type) else detection_type
+    newrow.risk_score = det.get("risk_score", None)
+    newrow.resolution = det.get("resolution", None)
+    #newrow.ticket_url =  '<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det.get(f2, None), det.get(f2, None).split('/')[-1])
+    newrow.ticket_id = det.get("ticket_id", None)
+    newrow.properties = make_properties_string(det)
+    newrow.participants = make_list_string(det.get("participants", []))
+    newrow.mitre_tactics = make_list_string(det.get("mitre_tactics", []))
+    newrow.mitre_techniques = make_list_string(det.get("mitre_techniques", []))
+
+def make_properties_string(det):
+    """_summary_
+
+    Args:
+        det (json object): ExtraHop detection object 
+
+    Returns:
+        str : properties json object converted to a formatted string
+    """
+    tbl = ''
+    properties = det.get("properties", {})
+    for i, j in properties.items():
+        if i == "suspicious_ipaddr":
+            det_type = "Suspicious IP Addresses"
+            value = j["value"]
+            tbl = '{0}<div><b>{1}:'.format(tbl, det_type)
+            tbl = '{0}:<div><b>{1}'.format(tbl, ", ".join("{}".format(i) for i in value))
         else:
-            if f1 == "type":
-                newrow[f1] = TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
-            elif f1 == "ticket_url":
-                newrow[f1] =  u'<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det[f2], det[f2].split('/')[-1])
+            tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, i, j)
+        
+    return tbl
+
+def make_list_string(detection_list):
+    """_summary_
+
+    Args:
+        det (json object): ExtraHop detection object 
+
+    Returns:
+        str : properties json object converted to a formatted string
+
+"""
+
+    tbl = u''
+    for i in detection_list:
+        for k, v in i.items():
+            if k == "legacy_ids":
+                tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, k, ','.join(v))
+            elif k == "url":
+                tbl = '{0}<div><b>{1}:<a target="blank" href="{2}">{3}</a></div>' \
+                                .format(tbl, k, v, i["id"])
             else:
-                newrow[f1] = "{}".format(det[f2])
+                tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, k, v)
+        tbl += u"<br>"
+
+    return tbl
 
 # Processing
 def make_linkback_url(det_id):
@@ -182,28 +199,27 @@ def make_linkback_url(det_id):
     return incident.properties.extrahop_console_url + LINKBACK_URL.format(det_id)
 
 # Processing
-def main():
-    note_text = u''
+#def main():
+note_text = u''
 
-    if CONTENT:
-        dets = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
+if CONTENT:
+    dets = CONTENT.get("result", {})
+    note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
                     u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-        if dets:
-            for det in dets:
-                process_dets(det)
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+    if dets:
+        for det in dets:
+            process_dets(det)
+        note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
 
-    else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+else:
+    note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to search detections for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
             .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
-    incident.addNote(helper.createRichText(note_text))
+incident.addNote(helper.createRichText(note_text))
     
 # Start execution
-main()
-
+#main()
 ```
 
 ---
@@ -244,20 +260,101 @@ inputs.extrahop_detection_id = rule.properties.extrahop_detection_id
 # funct_extrahop_rx_get_detections
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_detections"
-WF_NAME = "Example: Extrahop Reveal(x) search detections"
-CONTENT = results.content
-INPUTS = results.inputs
+WF_NAME = "Example: Extrahop Reveal(x) get detections"
+CONTENT = results.get("content")
+INPUTS = results.get("inputs")
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_detections"
-DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
-                   "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
-                   "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
+
 # Read CATEGORY_MAP and TYPE_MAP from workflow property.
 CATEGORY_MAP = workflow.properties.category_map
 TYPE_MAP = workflow.properties.type_map
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 
 # Processing
+# Processing
+def process_dets(det):
+    detection_url = make_linkback_url(det["id"])
+    detection_url_html = u'<div><b><a target="blank" href="{0}">{1}</a></b></div>' \
+        .format(detection_url, det.get("id", None))
+    newrow = incident.addRow(DATA_TABLE)
+    newrow.query_execution_date = QUERY_EXECUTION_DATE
+    newrow.detection_url = detection_url_html
+    newrow.appliance_id = det.get("appliance_id", None)
+    newrow.assignee = det.get("assignee", None)
+    newrow.categories = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det.get("categories", [])))
+    newrow.det_description = det.get("description", None)
+    newrow.det_id = det.get("id", None)
+    newrow.is_user_created = str(det.get("is_user_created", None))
+    newrow.end_time = det.get("end_time", None)
+    newrow.mod_time = det.get("mod_time", None)
+    newrow.update_time = det.get("update_time", None)
+    newrow.start_time = det.get("start_time", None)
+    newrow.status = det.get("status", None)
+    newrow.title = det.get("title", None)
+    detection_type = det.get("type", None)
+    newrow.type = TYPE_MAP.get(detection_type) if detection_type and TYPE_MAP.get(detection_type) else detection_type
+    newrow.risk_score = det.get("risk_score", None)
+    newrow.resolution = det.get("resolution", None)
+    #newrow.ticket_url =  '<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det.get(f2, None), det.get(f2, None).split('/')[-1])
+    newrow.ticket_id = det.get("ticket_id", None)
+    newrow.properties = make_json_string(det.get("properties", {}))
+    newrow.participants = make_list_string(det.get("participants", []))
+    newrow.mitre_techniques = make_list_string(det.get("mitre_techniques", []))
+    newrow.mitre_tactics = make_list_string(det.get("mitre_tactics", []))
+
+    # Add participant artifacts
+    add_properties_artifacts(det.get("properties", {}))
+
+    # Add participant artifacts
+    add_participants_artifacts(det.get("det_id", None), det.get("participants", []))
+
+def make_json_string(detection_json):
+    """_summary_
+
+    Args:
+        det (json object): ExtraHop detection object 
+
+    Returns:
+        str : properties json object converted to a formatted string
+    """
+    tbl = ''
+    for i, j in detection_json.items():
+        if i == "suspicious_ipaddr":
+            det_type = "Suspicious IP Addresses"
+            value = j["value"]
+            tbl = '{0}<div><b>{1}:'.format(tbl, det_type)
+            tbl = '{0}:<div><b>{1}'.format(tbl, ", ".join("{}".format(i) for i in value))
+        else:
+            tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, i, j)
+        
+    return tbl
+
+def make_list_string(detection_list):
+    """_summary_
+
+    Args:
+        det (json object): ExtraHop detection object 
+
+    Returns:
+        str : properties json object converted to a formatted string
+
+"""
+
+    tbl = u''
+    for i in detection_list:
+        for k, v in i.items():
+            if k == "legacy_ids":
+                tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, k, ','.join(v))
+            elif k == "url":
+                tbl = '{0}<div><b>{1}:<a target="blank" href="{2}">{3}</a></div>' \
+                                .format(tbl, k, v, i["id"])
+            else:
+                tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, k, v)
+        tbl += u"<br>"
+
+    return tbl
+
 def make_linkback_url(det_id):
     """Create a url to link back to the detection.
 
@@ -278,84 +375,49 @@ def addArtifact(artifact_type, artifact_value, description):
     """
     incident.addArtifact(artifact_type, artifact_value, description)
 
+def add_properties_artifacts(properties):
+    """Add IP Address artifacts of the detections properties.
+
+    Args:
+        properties (_type_): properties of the detections (json object)
+    """
+    for i, j in properties.items():
+        if i == "suspicious_ipaddr":
+            artifact_type = "IP Address"
+            artifact_type = "Suspicious IP Addresses"
+            value = j["value"]
+            for ip in value:
+                addArtifact(artifact_type, ip, "Suspicious IP address found by ExtraHop.")
+
+def add_participants_artifacts(det_id, participants):
+    """ Add artifacts of the participants 
+
+    Args:
+        participants (_type_): List of json objects 
+    """
+    for p in participants:
+        if p.get("object_type") == "ipaddr":
+            artifact_type = "IP Address"
+            addArtifact(artifact_type, p.get("object_value"),
+                        "Participant IP address in ExtraHop detection '{0}', role: '{1}'."
+                         .format(det_id, p.get("role")))
+        if p.get("hostname"):
+            artifact_type = "DNS Name"
+            addArtifact(artifact_type, p["hostname"],
+                        "Participant DNS name in ExtraHop detection '{0}', role: '{1}'."
+                        .format(det_id, p.get("role")))
+
 # Processing
 def main():
-    detection_id = INPUTS["extrahop_detection_id"]
+    detection_id = INPUTS.get("extrahop_detection_id")
     note_text = u''
     if CONTENT:
-        det = CONTENT.result
+        det = CONTENT.get("result", {})
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A Detection was successfully returned for " \
                     u"detection ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
-            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                    .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if det:
-            detection_url = make_linkback_url(det["id"])
-            detection_url_html = u'<div><b><a target="blank" href="{0}">{1}</a></b></div>' \
-                         .format(detection_url, det["id"])
-            newrow = incident.addRow(DATA_TABLE)
-            newrow.query_execution_date = QUERY_EXECUTION_DATE
-            newrow.detection_url = detection_url_html
-            for f1 in DATA_TBL_FIELDS:
-                f2 = f1
-                if f1.startswith("det_"):
-                    f2 = f1.split('_', 1)[1]
-                if det[f2] is None or isinstance(det[f2], long):
-                    newrow[f1] = det[f2]
-                elif isinstance(det[f1], list):
-                    if f1 == "categories":
-                        newrow[f1] = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det[f2]))
-                    elif f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
-                        if f1 == "participants":
-                            for p in det[f2]:
-                                if p["object_type"] == "ipaddr":
-                                    artifact_type = "IP Address"
-                                    addArtifact(artifact_type, p["object_value"],
-                                                "Participant IP address in ExtraHop detection '{0}', role: '{1}'."
-                                                .format(det["id"], p["role"]))
-                                    if p["hostname"]:
-                                        artifact_type = "DNS Name"
-                                        addArtifact(artifact_type, p["hostname"],
-                                                    "Participant DNS name in ExtraHop detection '{0}', role: '{1}'."
-                                                    .format(det["id"], p["role"]))
-                        obj_cnt = 0
-                        tbl = u''
-                        for i in det[f2]:
-                            for k, v in i.items():
-                                if k == "legacy_ids":
-                                    tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
-                                elif k == "url":
-                                    tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>' \
-                                        .format(k, v, i["id"])
-                                else:
-                                    tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
-                            tbl += u"<br>"
-                            obj_cnt += 1
-                        newrow[f1] = tbl
-                    else:
-                        newrow[f1] = "{}".format(", ".join(det[f2]))
-                elif isinstance(det[f2], (bool, dict)):
-                    if f1 in ["properties"]:
-                        tbl = u''
-                        for i, j in det[f2].items():
-                            if i == "suspicious_ipaddr":
-                                artifact_type = "IP Address"
-                                type = "Suspicious IP Addresses"
-                                value = j["value"]
-                                for ip in value:
-                                    addArtifact(artifact_type, ip, "Suspicious IP address found by ExtraHop.")
-                                tbl += u'<div><b>{0}:'.format(type)
-                                tbl += u'<div><b>{0}'.format(", ".join("{}".format(i) for i in value))
-                            else:
-                                tbl += u'<div><b>{0}:</b>{1}</div>'.format(i, j)
-                        newrow[f1] = tbl
-                    else:
-                        newrow[f1] = str(det[f2])
-                else:
-                    if f1 == "type":
-                        newrow[f1] = TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
-                    elif f1 == "ticket_url":
-                        newrow[f1] =  u'<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det[f2], det[f2].split('/')[-1])
-                    else:
-                        newrow[f1] = "{}".format(det[f2])
+            process_dets(det)
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
@@ -365,7 +427,6 @@ def main():
 
     incident.addNote(helper.createRichText(note_text))
 main()
-
 ```
 
 ---
