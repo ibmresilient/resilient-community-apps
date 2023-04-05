@@ -634,14 +634,20 @@ class PollerComponent(AppFunctionComponent):
             "version": datatable.get("version")
         }
         d_payload["cells"] = {cell: { "value": datatable_cells[cell].get("value")} for cell in datatable_cells}
-        if d_payload.get("cells").get("last_updated").get("value") < jira.get("fields").get("updated"):
-            datatable_new_data = True
-            d_payload["cells"]["last_updated"]["value"] = jira.get("fields").get("updated")
-        if d_payload.get("cells").get("status").get("value") != jira.get("fields").get("status").get("name"):
-            datatable_new_data = True
-            d_payload["cells"]["status"]["value"] = jira.get("fields").get("status").get("name")
 
-        if datatable_new_data:
+        jira_updated = jira.get("fields").get("updated")
+        # If Jira issue updated time is different from the last_updated time in the SOAR datatable
+        if d_payload.get("cells").get("last_updated").get("value") < jira_updated:
+            datatable_new_data = True
+            d_payload["cells"]["last_updated"]["value"] = jira_updated
+
+        jira_status = jira.get("fields").get("status").get("name")
+        # If Jira issue status is different from the status in the SOAR datatable
+        if d_payload.get("cells").get("status").get("value") != jira_status:
+            datatable_new_data = True
+            d_payload["cells"]["status"]["value"] = jira_status
+
+        if datatable_new_data: # If equals True
             self.res_client.put(f"/incidents/{task.get('inc_id')}/table_data/{datatable.get('table_id')}/row_data/{datatable.get('id')}", d_payload)
 
 def filter_out_identical_changes(payload):

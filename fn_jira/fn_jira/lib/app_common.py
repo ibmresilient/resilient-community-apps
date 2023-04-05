@@ -220,7 +220,7 @@ def add_task_to_case(soar_common, options, cases_list, num, id, comments=False, 
     case_id = cases_list[num].get('id')
 
     # Add Tasks to cases
-    case_tasks = soar_common._get_case_info(case_id, "tasks?want_notes=true")
+    case_tasks = soar_common._get_case_info(case_id, "tasks?want_notes=true&handle_format=names")
     if case_tasks:
         # Add tasks field to the case if the field does not exist
         task = cases_list[num].get("tasks")

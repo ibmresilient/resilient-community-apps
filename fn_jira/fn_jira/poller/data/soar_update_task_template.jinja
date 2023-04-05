@@ -3,7 +3,7 @@
   "name": "{{ jira["fields"]["summary"] }}",
   "inc_id": {{ task["inc_id"] }},
   "required": {{ task["required"] | lower }},
-  "status": {% if jira["fields"]["resolutiondate"] == none %} "{{ task["status"] }}" {% else %} "C" {% endif %},
+  "status": {% if jira["fields"]["resolutiondate"] is none %} "{{ task["status"] }}" {% else %} "C" {% endif %},
   "frozen": {{ task["frozen"] | lower }},
   "init_date": {{ task["init_date"] }},
   "active": {{ task["active"] | lower }},
