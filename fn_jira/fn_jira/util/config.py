@@ -7,16 +7,43 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     return u"""
-# V2.2.0+ have the option to have multiple servers configured.
-# By default two examples of servers are given, example one is labeled `jira_label1` and example two is labeled `jira_label2`.
-# The label for a server is placed after `[fn_jira:` and then followed by `]`.
-# To add additional servers copy the below example server configuration from `[fn_jira:jira_label1]` to `#https_proxy=`.
-# Then paste it at the bottom of the app.config.
-# Change the server label, `jira_label1`, to a label helpful to define that server.
-# Then change the setting to those of the server you wish to add.
+[fn_jira:global_settings]
+# Maximum time in seconds to wait before timeout.
+timeout=10
+# Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
+#  same timezone as the Jira servers timezone. Value must start with + or -, then hours followed by : and then minutes.
+# If timezone_offset under [fn_jira:global_settings] is configured, then timezone_offset
+#  that are configured under the individual Jira servers will be ignored
+#timezone_offset = -4:00
+# Interval to poll Jira for changes (in seconds)
+# When polling_interval equals 0 the poller is off
+polling_interval=0
+polling_lookback=60
+# Search filters for Jira issue to sync with SOAR cases.
+# If poller_filters under [fn_jira:global_settings] is configured, then poller_filters
+#  that are configured under the individual Jira servers will be ignored
+poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
+# Max number of issues that can be returned from Jira issue search.
+# If max_issues_returned under [fn_jira:global_settings] is configured, then max_issues_returned
+#  that are configured under the individual Jira servers will be ignored.
+max_issues_returned = 50
+# Proxys to use
+# If proxys are defined under [fn_jira:global_settings], then proxys defined
+#  under the individual Jira servers will be ignored
+#https_proxy=
+# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# If templates under the individual Jira servers are configured, then templates
+#  that are configured under [fn_jira:global_settings] will be ignored.
+# See documentation section "Templates for SOAR Cases" for more details
+#soar_create_case_template=
+#soar_update_case_template=
+#soar_update_task_template=
+#soar_close_case_template=
 
 [fn_jira:jira_label1]
+# Url to Jira server
 url=https://<jira url>
+# Authentication method (AUTH, BASIC, TOKEN, OAUTH)
 auth_method=BASIC
 user=<jira username or email>
 password=<jira user password or API Key>
@@ -27,16 +54,32 @@ password=<jira user password or API Key>
 #access_token_secret = <oauth access token secret>
 #consumer_key_name = <oauth consumer key - from Jira incoming link settings>
 #private_rsa_key_file_path = <private RSA key matched with public key on Jira>
-timeout=10
-# data Table name to hold data for tasks synced to Jira
-jira_dt_name=jira_task_references 
-# use verify_cert to disable untrusted certificate verification
+# Maximum time in seconds to wait before timeout
+#timeout=10
+# Data table name to hold data for tasks synced to Jira
+jira_dt_name=jira_task_references
+# Path to certificate. False to disable certificate verification.
 verify_cert=True
-#http_proxy=
+# Search filters for Jira issue to sync with SOAR cases.
+poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
+# Max number of issues that can be returned from Jira issue search
+max_issues_returned = 50
+# Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
+#  same timezone as the Jira servers timezone. Value must start with + or -, then hours followed by : and then minutes.
+#timezone_offset = -4:00
+# Proxys to use
 #https_proxy=
+# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# See documentation section "Templates for SOAR Cases" for more details
+#soar_create_case_template=
+#soar_update_case_template=
+#soar_update_task_template=
+#soar_close_case_template=
 
 [fn_jira:jira_label2]
+# Url to Jira server
 url=https://<jira url>
+# Authentication method (AUTH, BASIC, TOKEN, OAUTH)
 auth_method=BASIC
 user=<jira username or email>
 password=<jira user password or API Key>
@@ -47,11 +90,25 @@ password=<jira user password or API Key>
 #access_token_secret = <oauth access token secret>
 #consumer_key_name = <oauth consumer key - from Jira incoming link settings>
 #private_rsa_key_file_path = <private RSA key matched with public key on Jira>
-timeout=10
-# data Table name to hold data for tasks synced to Jira
-jira_dt_name=jira_task_references 
-# use verify_cert to disable untrusted certificate verification
+# Maximum time in seconds to wait before timeout
+#timeout=10
+# Data table name to hold data for tasks synced to Jira
+jira_dt_name=jira_task_references
+# Path to certificate. False to disable certificate verification.
 verify_cert=True
-#http_proxy=
+# Search filters for Jira issue to sync with SOAR cases.
+poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
+# Max number of issues that can be returned from Jira issue search
+max_issues_returned = 50
+# Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
+#  same timezone as the Jira servers timezone. Value must start with + or -, then hours followed by : and then minutes.
+#timezone_offset = -4:00
+# Proxys to use
 #https_proxy=
+# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# See documentation section "Templates for SOAR Cases" for more details
+#soar_create_case_template=
+#soar_update_case_template=
+#soar_update_task_template=
+#soar_close_case_template=
 """
