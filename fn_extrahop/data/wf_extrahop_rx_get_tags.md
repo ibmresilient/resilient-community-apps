@@ -28,8 +28,8 @@ None
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_tags"
 WF_NAME = "Example: Extrahop Reveal(x) get tags"
-CONTENT = results.content
-INPUTS = results.inputs
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TBL_FIELDS = ["am_description", "am_id", "mod_time", "mode", "name", "owner", "rights", "short_code", "show_alert_status", "walks", "weighting"]
 
@@ -38,7 +38,7 @@ DATA_TBL_FIELDS = ["am_description", "am_id", "mod_time", "mode", "name", "owner
 def main():
     note_text = u''
     if CONTENT:
-        tags = CONTENT.result
+        tags = CONTENT.get("result", {})
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Tags returned for SOAR function <b>{2}</b> "\
                      u"with parameters <b>{3}</b>."\
         .format(WF_NAME, len(tags), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
@@ -46,9 +46,9 @@ def main():
             for tag in tags:
                 newrow = incident.addRow("extrahop_tags")
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
-                newrow.tag = tag.name
-                newrow.mod_time = tag.mod_time
-                newrow.tag_id = tag.id
+                newrow.tag = tag.get("name")
+                newrow.mod_time = tag.get("mod_time")
+                newrow.tag_id = tag.get("id")
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Tags")
 
     else:

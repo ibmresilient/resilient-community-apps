@@ -28,8 +28,8 @@ None
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_activitymaps"
 WF_NAME = "Example: Extrahop Reveal(x) get activitymaps"
-CONTENT = results.content
-INPUTS = results.inputs
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_activitymaps"
 DATA_TBL_FIELDS = ["ams_description", "ams_id", "mod_time", "mode", "ams_name", "owner", "rights", "short_code",
@@ -38,7 +38,7 @@ DATA_TBL_FIELDS = ["ams_description", "ams_id", "mod_time", "mode", "ams_name", 
 def main():
     note_text = u''
     if CONTENT:
-        ams = CONTENT.result
+        ams = CONTENT.get("result")
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Activitymaps returned for SOAR " \
                     u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(ams), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if ams:

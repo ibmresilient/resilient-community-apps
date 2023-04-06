@@ -28,8 +28,8 @@ None
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_watchlist"
 WF_NAME = "Example: Extrahop Reveal(x) get watchlist"
-CONTENT = results.content
-INPUTS = results.inputs
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Display subset of fields
 DATA_TABLE = "extrahop_watchlist"
@@ -39,7 +39,7 @@ DATA_TBL_FIELDS = ["display_name", "ipaddr4", "ipaddr6", "macaddr", "extrahop_id
 def main():
     note_text = u''
     if CONTENT:
-        devs = CONTENT.result
+        devs = CONTENT.get("result", [])
         note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> devices returned in the Watchlist" \
                     u" for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if devs:

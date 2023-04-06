@@ -30,8 +30,8 @@ if rule.properties.extrahop_tag_name is None:
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_tags"
 WF_NAME = "Example: Extrahop Reveal(x) assign tag"
-CONTENT = results.content
-INPUTS = results.inputs
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
@@ -40,7 +40,7 @@ def main():
     tag_id = None
     
     if CONTENT:
-        tags = CONTENT.result
+        tags = CONTENT.get("result", {})
         if tags:
             for tag in tags:
                 if tag_name == tag["name"]:
@@ -99,8 +99,8 @@ if not inputs.extrahop_tag_id:
 #  Globals
 FN_NAME = "funct_extrahop_rx_assign_tag"
 WF_NAME = "Example: Extrahop Reveal(x) assign tag"
-CONTENT = results.content
-INPUTS = results.inputs
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
@@ -108,7 +108,7 @@ def main():
     tag_name = rule.properties.extrahop_tag_name
     tag = INPUTS.get("extrahop_tag_name")
     if CONTENT:
-        result = CONTENT.result
+        result = CONTENT.get("result", None)
         if result == "success":
             device_id = INPUTS.get("extrahop_device_ids")
             tag_id = INPUTS.get("extrahop_tag_id")

@@ -31,8 +31,8 @@ if inputs.extrahop_tag_name is None:
 #  Globals
 FN_NAME = "funct_extrahop_rx_create_tag"
 WF_NAME = "Example: Extrahop Reveal(x) create tag"
-CONTENT = results.content
-INPUTS = results.inputs
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 
 # Processing
@@ -40,25 +40,25 @@ def main():
     note_text = u''
     tag = INPUTS.get("extrahop_tag_name")
     if CONTENT:
-        result = CONTENT.result
+        result = CONTENT.get("result", None)
         if result == "success":
             workflow.addProperty("tag_exists", {})
             tag = INPUTS.get("extrahop_tag_name")
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully created tag <b>'{1}'</b> for SOAR " \
-                        u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
+                        u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         elif result == "failed":
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to create tag <b>'{1}'</b> for " \
-                        u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
+                        u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         elif result == "exists":
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A 422 (tag name exists) error was thrown while to create tag <b>'{1}'</b> for " \
-                        u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
+                        u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
             note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Create tag <b>'{1}'</b> failed with unexpected " \
-                        u"response for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
+                        u"response for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
         note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to create a tag <b>'{1}'</b>for SOAR function <b>{2}</b> with parameters <b>{3}</b> ."\
-            .format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
+            .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
