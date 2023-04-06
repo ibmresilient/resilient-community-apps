@@ -1,15 +1,17 @@
 {
   {# JINJA template for updating a new SOAR incident from an endpoint #}
-  "name": "{{ jira["fields"]["summary"] }}",
-  "inc_id": {{ task["inc_id"] }},
-  "required": {{ task["required"] | lower }},
-  "status": {% if jira["fields"]["resolutiondate"] is none %} "{{ task["status"] }}" {% else %} "C" {% endif %},
-  "frozen": {{ task["frozen"] | lower }},
-  "init_date": {{ task["init_date"] }},
-  "active": {{ task["active"] | lower }},
   "inc_name": "{{ task["inc_name"] }}",
+  "name": "{{ jira["fields"]["summary"] }}",
   "custom": {{ task["custom"] | lower }},
+  "inc_id": {{ task["inc_id"] }},
+  "due_date": {% if task["due_date"] is none %} null {% else %} {{ task["due_date"] }} {% endif %},
+  "required": {{ task["required"] | lower }},
+  "owner_id": {% if task["owner_id"] is none %} null {% else %} "{{ task["owner_id"] }}" {% endif %},
   "id": {{ task["id"] }},
+  "status": {% if jira["fields"]["resolutiondate"] is none %} "{{ task["status"] }}" {% else %} "C" {% endif %},
   "inc_training": {{ task["inc_training"] | lower }},
-  "cat_name": "{{ task["cat_name"] }}"
+  "frozen": {{ task["frozen"] | lower }},
+  "cat_name": "{{ task["cat_name"] }}",
+  "init_date": {{ task["init_date"] }},
+  "active": {{ task["active"] | lower }}
 }

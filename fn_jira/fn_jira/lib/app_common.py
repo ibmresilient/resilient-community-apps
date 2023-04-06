@@ -230,25 +230,8 @@ def add_task_to_case(soar_common, options, cases_list, num, id, comments=False, 
         for task_num in range(len(case_tasks)):
             task_id = case_tasks[task_num].get("id")
             if id == task_id:
-                cases_list[num]["tasks"].append(
-                    {k: v for k, v in case_tasks[task_num].items()\
-                        if v is not None and \
-                            k not in ["perms", "actions", "playbooks", "creator_principal", "regs", "notes_count", "attachments_count", "inc_owner_id", "user_notes", "auto_deactivate", "phase_id"]}
-                )
+                cases_list[num]["tasks"].append({k: v for k, v in case_tasks[task_num].items()})
                 case_task_num = len(cases_list[num]["tasks"])-1
-
-                # Get notes
-                if comments:
-                    task_notes = case_tasks[task_num].get("notes")
-                    cases_list[num]["tasks"][case_task_num]["notes"] = []
-                    for note_num in range(len(task_notes)):
-                        cases_list[num]["tasks"][case_task_num]["notes"].append(
-                            task_notes[note_num].get("text")
-                        )
-                else:
-                    cases_list[num]["tasks"][case_task_num]["notes"] = []
-
-                del comments
 
                 # Get attachments
                 if attachments:

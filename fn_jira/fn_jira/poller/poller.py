@@ -544,21 +544,17 @@ class PollerComponent(AppFunctionComponent):
             jira = update[0]
             task = update[1]
 
-            jira_issue_description = jira.get("fields").get("description")
-            link_end_index = jira_issue_description.index("\n\n")+2
-            # Check if link to SOAR task is in the Jira issue description
-            if check_jira_issue_linked_to_task(jira_issue_description) and link_end_index < len(jira_issue_description):
-                # Remove link to SOAR task from the description
-                jira["fields"]["description"] = jira_issue_description[link_end_index:].replace("Created in IBM SOAR", "")
-            else:
-                jira["fields"]["description"] = jira_issue_description
+            if task.get("instructions"):
+                task["instructions"] = task.get("instructions").replace('"', "'")
 
             # Create update payload for current SOAR task
-            soar_task_update_payload.append(make_payload_from_template(
+            task_payload = make_payload_from_template(
                 self.set_poller_templates(jira.get("jira_server"), "update_task"),
                 UPDATE_TASK_TEMPLATE,
                 {"jira": jira, "task": task})
-            )
+
+            if jira.get("fields").get("resolutiondate"):
+                soar_task_update_payload.append(task_payload)
 
             # Update comments
             self.update_task_comments(task, jira)
@@ -583,7 +579,7 @@ class PollerComponent(AppFunctionComponent):
         :return: None
         """
         # SOAR Task comments
-        task_comments = [clean_html(note.replace("Added from Jira", "")) for note in task.get("notes", []) if "Added Jira Issue:" not in note]
+        task_comments = [clean_html(note.get("text").replace("Added from Jira", "")) for note in task.get("notes", []) if "Added Jira Issue:" not in note.get("text")]
         # Jira issue comments
         jira_comments = [comment.get("body").replace("\n", "") for comment in jira.get("renderedFields").get("comment").get("comments", [])]
 
