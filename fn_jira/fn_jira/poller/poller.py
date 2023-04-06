@@ -569,7 +569,10 @@ class PollerComponent(AppFunctionComponent):
         if soar_task_update_payload:
             # Send put request to SOAR
             # This will update all tasks that need to be updated
-            self.res_client.put("/tasks", soar_task_update_payload)
+            try:
+                self.res_client.put("/tasks", soar_task_update_payload)
+            except Exception as err:
+                LOG.error(str(err))
 
     def update_task_comments(self, task, jira):
         """
@@ -582,6 +585,8 @@ class PollerComponent(AppFunctionComponent):
         task_comments = [clean_html(note.get("text").replace("Added from Jira", "")) for note in task.get("notes", []) if "Added Jira Issue:" not in note.get("text")]
         # Jira issue comments
         jira_comments = [comment.get("body").replace("\n", "") for comment in jira.get("renderedFields").get("comment").get("comments", [])]
+        if jira.get("fields").get("resolutiondate") and "Closed in IBM SOAR" not in jira_comments:
+            jira_comments.append("Closed in IBM SOAR\nResolution: Done")
 
         # Update comments/notes
         if jira_comments:
