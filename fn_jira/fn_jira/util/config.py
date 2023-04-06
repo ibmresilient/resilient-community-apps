@@ -22,7 +22,7 @@ polling_lookback=60
 # Search filters for Jira issue to sync with SOAR cases.
 # If poller_filters under [fn_jira:global_settings] is configured, then poller_filters
 #  that are configured under the individual Jira servers will be ignored
-poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
+#poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search.
 # If max_issues_returned under [fn_jira:global_settings] is configured, then max_issues_returned
 #  that are configured under the individual Jira servers will be ignored.
