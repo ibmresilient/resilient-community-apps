@@ -37,7 +37,6 @@ max_issues_returned = 50
 # See documentation section "Templates for SOAR Cases" for more details
 #soar_create_case_template=
 #soar_update_case_template=
-#soar_close_task_template=
 #soar_close_case_template=
 
 [fn_jira:jira_label1]
@@ -73,7 +72,6 @@ max_issues_returned = 50
 # See documentation section "Templates for SOAR Cases" for more details
 #soar_create_case_template=
 #soar_update_case_template=
-#soar_close_task_template=
 #soar_close_case_template=
 
 [fn_jira:jira_label2]
@@ -109,6 +107,5 @@ max_issues_returned = 50
 # See documentation section "Templates for SOAR Cases" for more details
 #soar_create_case_template=
 #soar_update_case_template=
-#soar_close_task_template=
 #soar_close_case_template=
 """

@@ -25,7 +25,6 @@ LOG = getLogger(__name__)
 create_case = "soar_create_case_template"
 update_case = "soar_update_case_template"
 close_case = "soar_close_case_template"
-close_task = "soar_close_task_template"
 
 # Directory of default templates
 TEMPLATE_DIR = path.join(path.dirname(__file__), "data")
@@ -35,7 +34,6 @@ TEMPLATE_DIR = path.join(path.dirname(__file__), "data")
 CREATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, f"{create_case}.jinja")
 UPDATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, f"{update_case}.jinja")
 CLOSE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, f"{close_case}.jinja")
-CLOSE_TASK_TEMPLATE = path.join(TEMPLATE_DIR, f"{close_task}.jinja")
 
 class PollerComponent(AppFunctionComponent):
     """
@@ -86,7 +84,6 @@ class PollerComponent(AppFunctionComponent):
         self.soar_create_case_template = self.global_settings.get(f"{create_case}")
         self.soar_update_case_template = self.global_settings.get(f"{update_case}")
         self.soar_close_case_template = self.global_settings.get(f"{close_case}")
-        self.soar_close_task_template = self.global_settings.get(f"{close_task}")
 
         # rest_client is used to make IBM SOAR API calls
         self.res_client = self.rest_client()
@@ -385,8 +382,6 @@ class PollerComponent(AppFunctionComponent):
             return options.get(update_case) if options.get(update_case) else self.soar_update_case_template
         elif template_name == "close_case":
             return options.get(close_case) if options.get(close_case) else self.soar_close_case_template
-        elif template_name == "update_task":
-            return options.get(close_task) if options.get(close_task) else self.soar_close_task_template
 
     def soar_create_case(self, jira_issues_to_add_to_soar):
         """
@@ -537,8 +532,10 @@ class PollerComponent(AppFunctionComponent):
         :param soar_tasks_to_update: A list of lists that contain the SOAR tasks to update and its corresponding Jira issue
         :return: None
         """
-        soar_task_close_payload = []
-        soar_task_clear_instr_payload = []
+
+        def close_task_status(task):
+            task["status"] = "C"
+            return task
 
         for update in soar_tasks_to_update:
             jira = update[0]
@@ -555,36 +552,10 @@ class PollerComponent(AppFunctionComponent):
 
             # If the Jira issue has a resolutiondate then the issue is closed
             if jira.get("fields", {}).get("resolutiondate") and not task.get("closed_date"):
-
-                # If the task has instructions replace any ' with " so that it will convert to json without error
-                if task.get("instructions"):
-                    task["instructions"] = task.get("instructions").replace('"', "'")
-
-                # Create close payload for current SOAR task
-                task_payload = make_payload_from_template(
-                    self.set_poller_templates(jira.get("jira_server"), "update_task"),
-                    CLOSE_TASK_TEMPLATE,
-                    {"jira": jira, "task": task})
-                # Create a payload to clear the field `instr_text`
-                clear_instr_payload = task_payload.copy()
-                clear_instr_payload.pop("instructions")
-                clear_instr_payload.pop("status")
-
-                soar_task_clear_instr_payload.append(clear_instr_payload)
-                soar_task_close_payload.append(task_payload)
-
-        # If task close payload is not empty then update fields on tasks
-        if soar_task_close_payload:
-            # Send put request to SOAR
-            # This will close all tasks that need to be updated
-            try:
-                # LOG.info(f"Closing SOAR tasks: {[for task in ]}")
-                # First make api call to clear task field 'instr_text', so close payload does not error
-                self.res_client.put("/tasks", soar_task_clear_instr_payload)
-                # Make api to close tasks
-                self.res_client.put("/tasks", soar_task_close_payload)
-            except Exception as err:
-                LOG.error(str(err))
+                try:
+                    self.res_client.get_put(f"/tasks/{task.get('id')}", lambda soar_task: close_task_status(soar_task))
+                except Exception as err:
+                    LOG.error(str(err))
 
     def update_task_comments(self, task, jira):
         """
