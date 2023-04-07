@@ -566,8 +566,9 @@ class PollerComponent(AppFunctionComponent):
                     CLOSE_TASK_TEMPLATE,
                     {"jira": jira, "task": task})
                 # Create a payload to clear the field `instr_text`
-                clear_instr_payload = task_payload
+                clear_instr_payload = task_payload.copy()
                 clear_instr_payload.pop("instructions")
+                clear_instr_payload.pop("status")
 
                 soar_task_clear_instr_payload.append(clear_instr_payload)
                 soar_task_close_payload.append(task_payload)
