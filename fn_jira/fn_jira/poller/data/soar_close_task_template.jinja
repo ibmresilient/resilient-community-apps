@@ -14,6 +14,9 @@
   "cat_name": "{{ task["cat_name"] }}",
   "init_date": {{ task["init_date"] }},
   "description": {% if task["instructions"] is none %} null {% else %} "{{ task["instructions"] }}" {% endif %},
-  "instr_text": {% if task["instructions"] is none %} null {% else %} "{{ task["instructions"] }}" {% endif %},
+  "instructions": {
+    "format": "html",
+    "content": {% if task["instructions"] is none %} null {% else %} "{{ task["instructions"] }}" {% endif %}
+  },
   "active": {{ task["active"] | lower }}
 }

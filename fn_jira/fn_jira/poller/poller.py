@@ -7,7 +7,6 @@ from logging import getLogger
 from os import path
 from threading import Thread
 from datetime import timezone, timedelta, datetime
-from time import sleep
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (SOARCommon, get_last_poller_date, clean_html,
@@ -26,7 +25,7 @@ LOG = getLogger(__name__)
 create_case = "soar_create_case_template"
 update_case = "soar_update_case_template"
 close_case = "soar_close_case_template"
-update_task = "soar_update_task_template"
+close_task = "soar_close_task_template"
 
 # Directory of default templates
 TEMPLATE_DIR = path.join(path.dirname(__file__), "data")
@@ -36,7 +35,7 @@ TEMPLATE_DIR = path.join(path.dirname(__file__), "data")
 CREATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, f"{create_case}.jinja")
 UPDATE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, f"{update_case}.jinja")
 CLOSE_CASE_TEMPLATE = path.join(TEMPLATE_DIR, f"{close_case}.jinja")
-UPDATE_TASK_TEMPLATE = path.join(TEMPLATE_DIR, f"{update_task}.jinja")
+CLOSE_TASK_TEMPLATE = path.join(TEMPLATE_DIR, f"{close_task}.jinja")
 
 class PollerComponent(AppFunctionComponent):
     """
@@ -87,7 +86,7 @@ class PollerComponent(AppFunctionComponent):
         self.soar_create_case_template = self.global_settings.get(f"{create_case}")
         self.soar_update_case_template = self.global_settings.get(f"{update_case}")
         self.soar_close_case_template = self.global_settings.get(f"{close_case}")
-        self.soar_update_task_template = self.global_settings.get(f"{update_task}")
+        self.soar_close_task_template = self.global_settings.get(f"{close_task}")
 
         # rest_client is used to make IBM SOAR API calls
         self.res_client = self.rest_client()
@@ -387,7 +386,7 @@ class PollerComponent(AppFunctionComponent):
         elif template_name == "close_case":
             return options.get(close_case) if options.get(close_case) else self.soar_close_case_template
         elif template_name == "update_task":
-            return options.get(update_task) if options.get(update_task) else self.soar_update_task_template
+            return options.get(close_task) if options.get(close_task) else self.soar_close_task_template
 
     def soar_create_case(self, jira_issues_to_add_to_soar):
         """
@@ -396,9 +395,9 @@ class PollerComponent(AppFunctionComponent):
         :return: None
         """
         for jira_issue in jira_issues_to_add_to_soar:
-            jira_issue["renderedFields"]["description"] = jira_issue.get("renderedFields").get("description").replace('"', "'")
+            jira_issue["renderedFields"]["description"] = jira_issue.get("renderedFields", {}).get("description").replace('"', "'")
             # Set comments to list of comments
-            jira_issue["renderedFields"]["comment"] = [comment.get("body").replace('"', "'") for comment in jira_issue.get("renderedFields").get("comment").get("comments")]
+            jira_issue["renderedFields"]["comment"] = [comment.get("body", "").replace('"', "'") for comment in jira_issue.get("renderedFields", {}).get("comment").get("comments")]
 
             # Create payload for creating SOAR incident from template
             soar_create_payload = make_payload_from_template(
@@ -499,9 +498,9 @@ class PollerComponent(AppFunctionComponent):
         :return: None
         """
         # List of comments from the SOAR incident
-        soar_comments = [clean_html(comment.get("content").replace("Added from Jira", "")) for comment in soar.get("comments", [])]
+        soar_comments = [clean_html(comment.get("content", "").replace("Added from Jira", "")) for comment in soar.get("comments", [])]
         # List of comments from the Jira issue
-        jira_comments = [comment.get("body").replace("\n", "") for comment in jira.get("renderedFields").get("comment").get("comments", [])]
+        jira_comments = [comment.get("body", "").replace("\n", "") for comment in jira.get("renderedFields", {}).get("comment").get("comments", [])]
 
         if jira_comments:
             for comment in jira_comments:
@@ -538,23 +537,12 @@ class PollerComponent(AppFunctionComponent):
         :param soar_tasks_to_update: A list of lists that contain the SOAR tasks to update and its corresponding Jira issue
         :return: None
         """
-        soar_task_update_payload = []
+        soar_task_close_payload = []
+        soar_task_clear_instr_payload = []
 
         for update in soar_tasks_to_update:
             jira = update[0]
             task = update[1]
-
-            if task.get("instructions"):
-                task["instructions"] = task.get("instructions").replace('"', "'")
-
-            # Create update payload for current SOAR task
-            task_payload = make_payload_from_template(
-                self.set_poller_templates(jira.get("jira_server"), "update_task"),
-                UPDATE_TASK_TEMPLATE,
-                {"jira": jira, "task": task})
-
-            if jira.get("fields").get("resolutiondate"):
-                soar_task_update_payload.append(task_payload)
 
             # Update comments
             self.update_task_comments(task, jira)
@@ -565,12 +553,35 @@ class PollerComponent(AppFunctionComponent):
             # Update datatable
             self.update_task_datatable(task, jira)
 
-        # If task update payload is not empty then update fields on tasks
-        if soar_task_update_payload:
+            # If the Jira issue has a resolutiondate then the issue is closed
+            if jira.get("fields", {}).get("resolutiondate") and not task.get("closed_date"):
+
+                # If the task has instructions replace any ' with " so that it will convert to json without error
+                if task.get("instructions"):
+                    task["instructions"] = task.get("instructions").replace('"', "'")
+
+                # Create close payload for current SOAR task
+                task_payload = make_payload_from_template(
+                    self.set_poller_templates(jira.get("jira_server"), "update_task"),
+                    CLOSE_TASK_TEMPLATE,
+                    {"jira": jira, "task": task})
+                # Create a payload to clear the field `instr_text`
+                clear_instr_payload = task_payload
+                clear_instr_payload.pop("instructions")
+
+                soar_task_clear_instr_payload.append(clear_instr_payload)
+                soar_task_close_payload.append(task_payload)
+
+        # If task close payload is not empty then update fields on tasks
+        if soar_task_close_payload:
             # Send put request to SOAR
-            # This will update all tasks that need to be updated
+            # This will close all tasks that need to be updated
             try:
-                self.res_client.put("/tasks", soar_task_update_payload)
+                # LOG.info(f"Closing SOAR tasks: {[for task in ]}")
+                # First make api call to clear task field 'instr_text', so close payload does not error
+                self.res_client.put("/tasks", soar_task_clear_instr_payload)
+                # Make api to close tasks
+                self.res_client.put("/tasks", soar_task_close_payload)
             except Exception as err:
                 LOG.error(str(err))
 
@@ -585,8 +596,6 @@ class PollerComponent(AppFunctionComponent):
         task_comments = [clean_html(note.get("text").replace("Added from Jira", "")) for note in task.get("notes", []) if "Added Jira Issue:" not in note.get("text")]
         # Jira issue comments
         jira_comments = [comment.get("body").replace("\n", "") for comment in jira.get("renderedFields").get("comment").get("comments", [])]
-        if jira.get("fields").get("resolutiondate") and "Closed in IBM SOAR" not in jira_comments:
-            jira_comments.append("Closed in IBM SOAR\nResolution: Done")
 
         # Update comments/notes
         if jira_comments:

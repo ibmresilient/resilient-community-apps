@@ -149,7 +149,7 @@ class AppCommon():
             data_to_get_from_case[issue.get("key")]["attachments"] = False
 
             # Check if there are comments on the Jira issue
-            if issue.get("fields").get("comment").get("comments"):
+            if issue.get("fields", {}).get("comment").get("comments"):
                 data_to_get_from_case[issue.get("key")]["comments"] = True
 
             # Convert the string times to integer epoch time
