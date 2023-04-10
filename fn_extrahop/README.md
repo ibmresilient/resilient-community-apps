@@ -417,7 +417,7 @@ main()
 ##  ExtraHop - wf_extrahop_rx_update_detection post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_add_detection_note"
-WF_NAME = "Example: Extrahop Reveal(x) update detection"
+WF_NAME = "ExtraHop Reveal(x): update detection"
 CONTENT = results.content
 INPUTS = results.inputs
 
@@ -555,7 +555,7 @@ if not inputs.extrahop_tag_id:
 ##  ExtraHop - wf_extrahop_rx_assign_tag post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_assign_tag"
-WF_NAME = "Example: Extrahop Reveal(x) assign tag"
+WF_NAME = "ExtraHop Reveal(x): assign tag"
 CONTENT = results.content
 INPUTS = results.inputs
 
@@ -678,7 +678,7 @@ if inputs.extrahop_tag_name is None:
 ##  ExtraHop - wf_extrahop_rx_create_tag post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_create_tag"
-WF_NAME = "Example: Extrahop Reveal(x) create tag"
+WF_NAME = "ExtraHop Reveal(x): create tag"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -839,7 +839,7 @@ None
 ##  ExtraHop - wf_extrahop_rx_get_activitymaps post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_activitymaps"
-WF_NAME = "Example: Extrahop Reveal(x) get activitymaps"
+WF_NAME = "ExtraHop Reveal(x): get activitymaps"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -925,11 +925,11 @@ The function provides the following functionality.
   
 **_NOTE:_** Get detection note will fail if `Detection Tracking` is enabled on ExtraHop.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) update detection`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): Update Detection`.
 
 * The current note is retrieved from the ExtraHop detection when a matching SOAR incident is closed. 
   
-The workflow is initiated by the automatic data table rule `Example: Extrahop Reveal(x) update detection` whern a SOAR incident is closed
+The playbook is initiated by the automatic data table `Extrahop Reveal(x): Update Detection` when a SOAR case/incident is closed.
 
 <details><summary>Inputs:</summary>
 <p>
@@ -993,7 +993,7 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 ##  ExtraHop - wf_extrahop_rx_update_detection post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_detection_note"
-WF_NAME = "Example: Extrahop Reveal(x) update detection"
+WF_NAME = "ExtraHop Reveal(x): update detection"
 CONTENT = results.content
 INPUTS = results.inputs
 
@@ -1034,12 +1034,12 @@ The function provides the following functionality.
 
 * Retrieves information on detections in the ExtraHop environment.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) update incident`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): Update Case`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `ExtraHop Detections` is updated.
  
-The workflow is initiated by the automatic incident rule `Example: Extrahop Reveal(x) update incident`.
+The playbook is initiated by the automatic `Extrahop Reveal(x): Update Case`.
 The following screenshots show an example of the data table updated by the function:
 
    ![screenshot: fn-extrahop-revealx-get-detections-datatable](./doc/screenshots/fn-extrahop-revealx-get-detections-datatable.png)
@@ -1147,7 +1147,7 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 ##  ExtraHop - wf_extrahop_rx_update_incident post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_detections"
-WF_NAME = "Example: Extrahop Reveal(x) refresh incident"
+WF_NAME = "ExtraHop Reveal(x): refresh incident"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -1285,12 +1285,12 @@ The function provides the following functionality.
 
 * Retrieves information for devices in the ExtraHop environment.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) search devices`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): search devices`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `ExtraHop Devices` is updated.
  
-The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(x) search devices`.
+The workflow is initiated by the manual incident menu item `ExtraHop Reveal(x): search devices`.
    
    ![screenshot: fn-extrahop-revealx-get-devices-action](./doc/screenshots/fn-extrahop-revealx-get-devices-action.png)
 
@@ -1433,7 +1433,7 @@ if rule.properties.extrahop_offset:
 ##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_devices"
-WF_NAME = "Example: Extrahop Reveal(x) refresh incident"
+WF_NAME = "ExtraHop Reveal(x): refresh incident"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -1534,12 +1534,12 @@ The function provides the following functionality.
 
 * Retrieves a list of tags discovered in the ExtraHop environment.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) get tags`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Get Tags`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Tags` is updated.
  
-The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(x) get tags`.
+The workflow is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Tags`.
 
    ![screenshot: fn-extrahop-revealx-get-tags-action](./doc/screenshots/fn-extrahop-revealx-get-tags-action.png)
 
@@ -1620,7 +1620,7 @@ if rule.properties.extrahop_tag_name is None:
 ##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_tags"
-WF_NAME = "Example: Extrahop Reveal(x) assign tag"
+WF_NAME = "ExtraHop Reveal(x): assign tag"
 CONTENT = results.content
 INPUTS = results.inputs
 
@@ -1667,12 +1667,12 @@ The function provides the following functionality.
 
 * Retrieves a list of devices on the watchlist in the ExtraHop environment.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) get watchlist`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Get Watchlist`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Watchlist` is updated.
  
-The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(x) get watchlist`.
+The workflow is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Watchlist`.
 
    ![screenshot: fn-extrahop-revealx-get-watchlist-action](./doc/screenshots/fn-extrahop-revealx-get-watchlist-action.png)
 
@@ -1784,7 +1784,7 @@ None
 ##  ExtraHop - wf_extrahop_rx_get_watchlist post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_watchlist"
-WF_NAME = "Example: Extrahop Reveal(x) get watchlist"
+WF_NAME = "ExtraHop Reveal(x): Get Watchlist"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -1840,12 +1840,12 @@ The function provides the following functionality.
 * Retrieves a list of detections in the ExtraHop environment based on the provided parameters.
 * A filter in JSON is used to target the information retrieved.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) search detections`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Detections`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Detections` is updated.
  
-The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(x) search detections`.
+The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Search Detections`.
 
 The following screenshot shows an example of the action inputs for the workflow:
 
@@ -2229,14 +2229,14 @@ The function provides the following functionality.
 * Retrieves a list of devices on the in the ExtraHop environment based on the parameters provided.
 * A filter in JSON is used to target the information retrieved.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) search devices`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Devices`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Devices` is updated.
  
-The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(x) search devices`.
+The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Search Devices`.
 
-The following screenshot shows an example of the action inputs for the workflow:
+The following screenshot shows an example of the action inputs for the playbook:
 
    ![screenshot: fn-extrahop-revealx-search-devices-action](./doc/screenshots/fn-extrahop-revealx-search-devices-action.png)
 
@@ -2414,7 +2414,7 @@ main()
 ##  ExtraHop - wf_extrahop_rx_search_devices post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_devices"
-WF_NAME = "Example: Extrahop Reveal(x) search devices"
+WF_NAME = "ExtraHop Reveal(x): search devices"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -2504,12 +2504,12 @@ The function provides the following functionality.
 
 **_NOTE:_** Extra configuration is required to use the keylog_txt output. [Session key download](https://docs.extrahop.com/current/session-key-download/) 
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) search packets`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Packets`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * An attachment in the select output format is added to the SOAR incident.
 
-The workflow is initiated by the manual incident artifact rule `Example: Extrahop Reveal(x) search packets`.
+The workflow is initiated by the manual incident artifact rule `ExtraHop Reveal(x): Search Packets`.
 
 The following screenshot shows an example of the action inputs for the workflow:
 
@@ -2619,7 +2619,7 @@ inputs.extrahop_port2 = rule.properties.extrahop_port2
 ##  ExtraHop - wf_extrahop_rx_search_packets post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_packets"
-WF_NAME = "Example: Extrahop Reveal(x) search packets"
+WF_NAME = "ExtraHop Reveal(x): search packets"
 CONTENT = results.content
 INPUTS = results.inputs
 
@@ -2666,7 +2666,7 @@ The function provides the following functionality.
 
 * Updates the status, resolution, ticket ID, assignee and optionally participants of an ExtraHop detection.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) update detection`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Update Detection`.
 
 * Closes an ExtraHop detection if the equivalent SOAR incident is closed.
 * A note is added to the SOAR incident with the status of the action.
@@ -2674,7 +2674,7 @@ An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x)
 
 **_NOTE:_** Get or add ExtraHop detection note will fail if `Detection Tracking` is enabled on ExtraHop but the workflow should still complete.
 
-The workflow is initiated by an automatic incident rule `Example: Extrahop Reveal(x) update detection`
+The workflow is initiated by an automatic incident rule `ExtraHop Reveal(x): Update Detection`
 
 The following screenshot shows an example of a note added to a SOAR incident:
 
@@ -2752,7 +2752,7 @@ inputs.soar_inc_resolution_id = incident.resolution_id
 ##  ExtraHop - wf_extrahop_rx_update_setection post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_update_detection"
-WF_NAME = "Example: Extrahop Reveal(x) update detection"
+WF_NAME = "ExtraHop Reveal(x): update detection"
 CONTENT = results.content
 INPUTS = results.inputs
 
@@ -2795,15 +2795,15 @@ The function provides the following functionality.
 
 * Adds or removes devices to or from the ExtraHop watchlist of the target ExtraHop environment.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) update watchlist`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Update Watchlist`.
 
 * Adds a device or list ExtraHop devices to the watchlist of the target ExtraHop environment.
 * Refreshes the associated row of the data table  `ExtraHop Devices`.
 * A note is added to the SOAR incident with the status of the action.
  
-The workflow is initiated by the manual data table rule `Example: Extrahop Reveal(x) assign tag`.
+The workflow is initiated by the manual data table menu item `ExtraHop Reveal(x): Assign Tag`.
 
-The following screenshot shows an example of the action inputs for the workflow:
+The following screenshot shows an example of the action inputs for the playbook:
 
    ![screenshot: fn-extrahop-revealx-update-watchlist-action](./doc/screenshots/fn-extrahop-revealx-update-watchlist-action.png)
 
@@ -2882,7 +2882,7 @@ elif action == "remove":
 ##  ExtraHop - wf_extrahop_rx_update_watchlist post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_update_watchlist"
-WF_NAME = "Example: Extrahop Reveal(x) update watchlist"
+WF_NAME = "ExtraHop Reveal(x): update watchlist"
 CONTENT = results.content
 INPUTS = results.inputs
 
@@ -3635,22 +3635,22 @@ extrahop_watchlist
 ---
 
 
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Example: Extrahop Reveal(x) add artifact | extrahop_devices | `wf_extrahop_rx_add_artifact` |
-| Example: Extrahop Reveal(x) assign tag | extrahop_devices | `wf_extrahop_rx_assign_tag` |
-| Example: Extrahop Reveal(x) create tag | incident | `wf_extrahop_rx_create_tag` |
-| Example: Extrahop Reveal(x) get activitymaps | incident | `wf_extrahop_rx_get_activitymaps` |
-| Example: Extrahop Reveal(x) get tags | incident | `wf_extrahop_rx_get_tags` |
-| Example: Extrahop Reveal(x) get watchlist | incident | `wf_extrahop_rx_get_watchlist` |
-| Example: Extrahop Reveal(x) refresh incident | incident | `wf_extrahop_rx_refresh_incident` |
-| Example: Extrahop Reveal(x) search detections | incident | `wf_extrahop_rx_search_detections` |
-| Example: Extrahop Reveal(x) search devices | incident | `wf_extrahop_rx_search_devices` |
-| Example: Extrahop Reveal(x) search packets | artifact | `wf_extrahop_rx_search_packets` |
-| Example: Extrahop Reveal(x) update detection | incident | `wf_extrahop_rx_update_detection` |
-| Example: Extrahop Reveal(x) update incident | incident | `wf_extrahop_rx_update_incident` |
-| Example: Extrahop Reveal(x) update watchlist | extrahop_devices | `wf_extrahop_rx_update_watchlist` |
+## Playbooks
+| Playbook Name | Description | Object | Status |
+| ------------- | ----------- | ------ | ------ |
+| ExtraHop Reveal(x): Add Artifact | Add Devices data table field as a SOAR artifact. | extrahop_devices | `enabled` |
+| ExtraHop Reveal(x): Assign Tag |Assign a tag to a list of devices ids for Extrahop Reveal(x). | extrahop_devices | `enabled` |
+| ExtraHop Reveal(x): Create tag | Create a new tag for  ExtraHop Reveal(x). |incident | `enabled` |
+| ExtraHop Reveal(x): Get Activity Maps | Get activity maps information from Extrahop Reveal(x) and write to the ExtraHop Activitymaps data table. | incident | `enabled` |
+| ExtraHop Reveal(x): Get Tags | Get tags information from Extrahop Reveal(x) and write to the ExtraHop Tags data table. | incident | `enabled` |
+| ExtraHop Reveal(x): Get Watchlist | Retrieve all devices that are in the watchlist from Extrahop Reveal(x) . | incident | `enabled` |
+| ExtraHop Reveal(x): Refresh Case | Refresh SOAR case with detection and device information from Extrahop Reveal(x) .|incident | `enabled` |
+| ExtraHop Reveal(x): Search Detections | Search for detections information from Extrahop Reveal(x). | incident | `enabled` |
+| ExtraHop Reveal(x): Search Devices | Search for devices information from Extrahop Reveal(x) using a filter. |incident | `enabled` |
+| ExtraHop Reveal(x): Search Packets | Search for and download packets stored on the ExtraHop Reveal(x) system and add as an attachment. Valid output types are: pcap, keylog_txt or zip.|artifact | `enabled` |
+| ExtraHop Reveal(x): Update Detection | Automatic playbook to update ExtraHop detection if the status is changed on the associated  SOAR incident. Add a resolution note to the  detection. | incident | `enabled` |
+| ExtraHop Reveal(x): Update Case | Automatic playbook to update ExtraHop SOAR case with detection information from Extrahop.| incident | `enabled` |
+| ExtraHop Reveal(x): Update Watchlist | Add or remove an ExtraHop device to or from the watchlist. | extrahop_devices | `enabledt` |
 
 ---
 
