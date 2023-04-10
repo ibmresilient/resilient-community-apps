@@ -32,7 +32,7 @@
           "value": null
         }
       ],
-      "enabled": true,
+      "enabled": false,
       "export_key": "Trusteer PPD: Parse Trusteer Email v1.0.0",
       "id": 42,
       "logic_type": "all",
@@ -49,7 +49,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1681135098455,
+  "export_date": 1681136571538,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -635,7 +635,7 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 293,
+  "id": 295,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [
@@ -660,7 +660,7 @@
   ],
   "incident_types": [
     {
-      "create_date": 1681135096494,
+      "create_date": 1681136569748,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -669,7 +669,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1681135096494,
+      "update_date": 1681136569748,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
