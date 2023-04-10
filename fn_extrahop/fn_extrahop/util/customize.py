@@ -30,7 +30,7 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [u"extrahop_activitymaps", u"extrahop_detections", u"extrahop_devices", u"extrahop_tags", u"extrahop_watchlist"],
         "automatic_tasks": [],
-        "scripts": [u"ExtraHop script: add artifact from device", u"ExtraHop script: detection property helper", u"ExtraHop script: device property helper"],
+        "scripts": [u"ExtraHop script: add artifact from device", u"ExtraHop script: detection property helper"],
         "playbooks": [u"extrahop_rx_add_artifact", u"extrahop_rx_assign_tag", u"extrahop_rx_create_tag", u"extrahop_rx_get_activity_maps", u"extrahop_rx_get_tags", u"extrahop_rx_get_watchlist", u"extrahop_rx_refresh_case", u"extrahop_rx_search_detections", u"extrahop_rx_search_devices", u"extrahop_rx_search_packets", u"extrahop_rx_update_case", u"extrahop_rx_update_detection", u"extrahop_rx_update_watchlist"]
     }
 
@@ -98,7 +98,6 @@ def customization_data(client=None):
     - Scripts:
         - ExtraHop script: add artifact from device
         - ExtraHop script: detection property helper
-        - ExtraHop script: device property helper
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
