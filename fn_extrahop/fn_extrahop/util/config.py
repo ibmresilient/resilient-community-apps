@@ -34,6 +34,9 @@ extrahop_cafile=<path to cert file>|false
 # To turn the poller off use value 0.
 # Set value to 0 when running selftest/Test Configuration.
 polling_interval = <POLLING_INTERVAL>
+# Optional - Number of minutes to look back for new ExtraHop detections the first time the app starts or restarts.
+# Defaults to zero if not set.
+polling_lookback =
 # Optional - Filter detection results returned to SOAR using key/value pairs. Filter keys/values are all optional.
 # Example: polling_filters="risk_score_min": 80, "category": ["sec.exploit"], "types": ["interactive_traffic_ssh", 
 # "interactive_traffic_shell"], "status": [".none", "new", "in_progress", "acknowledged", "closed"], 

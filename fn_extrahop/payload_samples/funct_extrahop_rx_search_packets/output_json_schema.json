@@ -44,7 +44,9 @@
           "type": "string"
         },
         "extrahop_limit_bytes": {},
-        "extrahop_active_until": {}
+        "extrahop_active_until": {
+          "type": "integer"
+        }
       }
     },
     "metrics": {

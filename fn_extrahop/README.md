@@ -222,6 +222,7 @@ The following table provides the settings you need to configure the app. These s
 | **extrahop_rx_key_secret** | *Yes | `ab2ef34gh56ijklm012n3abc41ab2ef34gh56ijklm012n3abc4` | *Key secret setting if ExtraHop cloud instance used by the integration.* |
 | **extrahop_rx_api_key** | *Yes | `ab2ef34GH56ijkLM012n3abc41ab2ef34GH56ijklm4` | *API key setting if standalone sensor used by the integration.* |
 | **polling_interval** | Yes | `60` | *Interval to wait between polls of ExtraHop for detections.* |
+| **polling_lookback** | No |`120` | *Number of **minutes** to look back for new ExtraHop detections the first time the app starts or restarts.* |
 | **polling_filters** | No | `polling_filters="risk_score_min": 80, "category": ["sec.exploit"], "types": ["interactive_traffic_ssh", "interactive_traffic_shell"],  "status": [".none", "new", "in_progress", "acknowledged"], "resolution": [".none" ]` | *Filter detection results returned to SOAR using key/value pairs.*  |
 | **extrahop_cafile** | No | `<path to cert file>` or `false` | *TLS certificate setting. Can be a path to a CA bundle or 'false'*  |
 | **https_proxy** | No | `https://proxy:443` or `proxy:443` | *Optional setting for an https proxy if required.* |
