@@ -140,7 +140,7 @@ The function parameters determine the type of call, the URL, and optionally the 
 
  ---
 
-For sensitive information that may be included in the rest_api_header, using jinja-like syntax, you can substitute values that are specified in the inputs for values that are in the app.config. This, in conjunction with app secrets, allows the user to set sensitive values without having them exposed in plaintext.
+For sensitive information that may be included in the rest_header, rest_url, rest_body, or rest_cookies, using jinja-like syntax, you can substitute values that are specified in the inputs for values that are in the app.config. This, in conjunction with app secrets, allows the user to set sensitive values without having them exposed in plaintext.
 
  ![screenshot: fn-rest-api-workflow ](./doc/screenshots/fn-rest-api-workflow.png)
  ![screenshot: fn-rest-api-create-secret ](./doc/screenshots/fn-rest-api-create-secret.png)

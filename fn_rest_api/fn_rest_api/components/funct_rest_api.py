@@ -65,13 +65,23 @@ class FunctionComponent(AppFunctionComponent):
             rest_headers = render(rest_headers, self.options)
             headers_dict = build_dict(rest_headers)
 
+
         # Read newline-separated 'rest_cookies' into a dictionary
         cookies_dict = rest_cookies
         if not isinstance(rest_cookies, dict):
+            rest_cookies = render(rest_cookies, self.options)
             cookies_dict = build_dict(rest_cookies)
 
+        # Read newline-separated 'rest_body' into a dictionary
+        body_dict = rest_body
+        if not isinstance(rest_body, dict):
+            rest_body = render(rest_body, self.options)
+            body_dict = build_dict(rest_body)
+
+        rest_url = render(rest_url, self.options)
+
         resp = make_rest_call(self.opts, self.options, rest_method, rest_url,
-                                headers_dict, cookies_dict, rest_body, rest_verify, rest_timeout, allowed_status_codes)
+                                headers_dict, cookies_dict, body_dict, rest_verify, rest_timeout, allowed_status_codes)
 
         try:
             response_json = resp.json()
@@ -111,7 +121,7 @@ def build_dict(rest_temp):
 
     return temp_dict
 
-def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, rest_body, rest_verify, rest_timeout, allowed_status_codes=[200]):
+def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, body_dict, rest_verify, rest_timeout, allowed_status_codes=[200]):
     
     def callback(response: requests.Response):
         if response.status_code < 300:
@@ -127,7 +137,7 @@ def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_d
         return rc.execute(rest_method, rest_url,
                                   headers=headers_dict,
                                   cookies=cookies_dict,
-                                  json=rest_body,
+                                  json=body_dict,
                                   verify=rest_verify,
                                   timeout=rest_timeout,
                                   callback=callback)
@@ -135,7 +145,7 @@ def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_d
     return rc.execute(rest_method, rest_url,
                               headers=headers_dict,
                               cookies=cookies_dict,
-                              data=rest_body,
+                              data=body_dict,
                               verify=rest_verify,
                               timeout=rest_timeout,
                               callback=callback)
