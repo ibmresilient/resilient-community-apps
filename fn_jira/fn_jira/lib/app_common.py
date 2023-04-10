@@ -172,8 +172,16 @@ class AppCommon():
             if check_jira_issue_linked_to_task(issue_description):
                 task_id = get_id_from_jira_issue_description(issue_description)
                 LOG.debug(issue_description)
+
+                # Get SOAR incident id from description.
+                if "incidents/" in issue_description:
+                    incident_id = int(issue_description[issue_description.index("incidents/")+10:issue_description.index("?task_id")])
+                else: # If using CP4S index cases
+                    incident_id = int(issue_description[issue_description.index("#cases/")+7:issue_description.index("?task_id")])
+
+                # Add task info
                 data_to_get_from_case["tasks"].append({
-                    "incident_id": int(issue_description[issue_description.index("incidents/")+10:issue_description.index("?task_id")]),
+                    "incident_id": incident_id,
                     "task_id": task_id,
                     "task_key": issue.get("key")
                 })
