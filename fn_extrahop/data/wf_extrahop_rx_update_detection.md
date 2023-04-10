@@ -29,32 +29,33 @@ inputs.soar_inc_resolution_id = incident.resolution_id
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_update_setection post processing script ##
+##  ExtraHop - pb_extrahop_rx_update_setection post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_update_detection"
-WF_NAME = "Example: Extrahop Reveal(x) update detection"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Update Detection"
+results = playbook.functions.results.update_detection_result
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
-        result = CONTENT["result"]
+        result = CONTENT.get("result", None)
         if result == "success":
-            workflow.addProperty("update_detection_ok", {})
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully updated the detection status for SOAR " \
-                        u"function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            playbook.addProperty("update_detection_ok", {})
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Successfully updated the detection status for SOAR " \
+                        "function <b>{1}</b> with parameters <b>{2}</b>.".format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         elif result == "failed":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to update the detection status for " \
-                        u"SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Failed to update the detection status for " \
+                        "SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Update detection status failed with unexpected " \
-                        u"response for SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Update detection status failed with unexpected " \
+                        "response for SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to update the detection status <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to update the detection status <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
@@ -82,34 +83,41 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_update_detection post processing script ##
+##  ExtraHop - pb_extrahop_rx_update_detection post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_detection_note"
-WF_NAME = "Example: Extrahop Reveal(x) update detection"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Update Detection"
+results = playbook.functions.results.get_detection_note_result
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
-        if CONTENT.get("result"):
-            result = CONTENT.result
-            if result.get("note"):
-                workflow.addProperty("get_note_ok", {})
-        elif CONTENT.get("error"):
-            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Get detection note failed for " \
-                        u"SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-            note_text += u"<br>Error code: <b>{0}</b>, Error <b>{1}<b>.".format(CONTENT.get("error"), CONTENT.get("text"))
+        result = CONTENT.get("result", None)
+        if result:
+            note = result.get("note", None)
+            if note:
+                playbook.addProperty("get_note_ok", {})
+            else:
+                note_text += "ExtraHop Integration: Playbook <b>{0}</b>: Get detection note failed for " \
+                             "SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+                    .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        elif CONTENT.get("error", None):
+            note_text += u"ExtraHop Integration: Playbook <b>{0}</b>: Get detection note failed for " \
+                        "SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+                .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text += "<br>Error code: <b>{0}</b>, Error <b>{1}<b>.".format(CONTENT.get("error"), CONTENT.get("text"))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get a detection note for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get a detection note for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     if note_text:
         incident.addNote(helper.createRichText(note_text))
 
 main()
+
 
 ```
 
@@ -128,22 +136,22 @@ main()
 
 ### Pre-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_update_detection pre processing script ##
+##  ExtraHop - pb_extrahop_rx_update_detection pre processing script ##
 import re
 inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 
-UPD_DET_DATETIME = workflow.properties.update_detection_note_result.metrics["timestamp"]
+UPD_DET_DATETIME = playbook.functions.results.get_detection_note_result.metrics.get("timestamp", None)
 SUMMARY = re.sub('<[^<]+?>', '', incident.resolution_summary.content)
 
 
 def get_current_note():
     # Get old note
-    note = u''
-    get_detection_note_content = workflow.properties.get_detection_note_result.content
-    note_obj = get_detection_note_content["result"]
+    note = ''
+    get_detection_note_content = playbook.functions.results.get_detection_note_result.content
+    note_obj = get_detection_note_content.get("result", {})
     if not note_obj:
         raise ValueError("Existing ExtraHop detection note not found.")
-    note = note_obj["note"]
+    note = note_obj.get("note", None)
     return note
 
 
@@ -165,45 +173,47 @@ main()
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_update_detection post processing script ##
+##  ExtraHop - pb_extrahop_rx_update_detection post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_add_detection_note"
-WF_NAME = "Example: Extrahop Reveal(x) update detection"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Update Detection"
+results = playbook.functions.results.add_detection_note_result
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
-    note_text = u''
-    detection_id = INPUTS["extrahop_detection_id"]
+    note_text = ''
+    detection_id = INPUTS.get("extrahop_detection_id", None)
     if CONTENT:
-        result = CONTENT.result
+        result = CONTENT.get("result", None)
         if result == "success":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully added closure resolution note to " \
-                        u"ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Successfully added closure resolution note to " \
+                        "ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         elif result.get("error"):
-            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
-                        u"detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-            note_text += u"<br>Error code: <b>{0}</b>, Error <b>{1}<b>.".format(result.get("error"), result.get("text"))
+            note_text += "ExtraHop Integration: Playbook <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
+                         "detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text += "<br>Error code: <b>{0}</b>, Error <b>{1}<b>.".format(result.get("error"), result.get("text"))
         elif result == "failed":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
-                        u"detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
+                        "detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
-                        u"detection <b>{1}</b> with unexpected response for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
+                        "detection <b>{1}</b> with unexpected response for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to add closure resolution note to ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters" \
-                     u" <b>{3}</b> ."\
-            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to add closure resolution note to ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters" \
+                     " <b>{3}</b> ."\
+            .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
+
 
 ```
 
@@ -227,12 +237,14 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_update_incident post processing script ##
+##  ExtraHop - pb_extrahop_rx_update_incident post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_detections"
-WF_NAME = "Example: Extrahop Reveal(x) update detection"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Update Detection"
+results = playbook.functions.results.get_detections_result
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
+
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_detections"
 DATA_TBL_FIELDS = ["assignee",  "status", "ticket_id"]
@@ -240,23 +252,23 @@ DATA_TBL_FIELDS = ["assignee",  "status", "ticket_id"]
 
 # Processing
 def main():
-    detection_id = INPUTS["extrahop_detection_id"]
-    note_text = u''
+    detection_id = INPUTS.get("extrahop_detection_id", None)
+    note_text = ''
     if CONTENT:
-        det = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A Detection was successfully returned for " \
-                    u"detection ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
-            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-        note_text += u"<br>Updated ExtraHop properties for SOAR incident."
-        incident.properties.extrahop_status = det["status"]
-        incident.properties.extrahop_ticket_id = det["ticket_id"]
-        incident.properties.extrahop_assignee = det["assignee"]
-        incident.properties.extrahop_update_notification = "<span style='color:red;'>The ExtraHop Detection has been closed.</span><br><div>To refresh the incident run the action: Example: Extrahop Reveal(x) refresh incident.<div/>"
+        det = CONTENT.get("result", {})
+        note_text = "ExtraHop Integration: Playbook <b>{0}</b>: A Detection was successfully returned for " \
+                    "detection ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
+            .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "<br>Updated ExtraHop properties for SOAR incident."
+        incident.properties.extrahop_status = det.get("status", None)
+        incident.properties.extrahop_ticket_id = det.get("ticket_id", None)
+        incident.properties.extrahop_assignee = det.get("assignee", None)
+        incident.properties.extrahop_update_notification = "<span style='color:red;'>The ExtraHop Detection has been closed.</span><br><div>To refresh the case run the playbook: Extrahop Reveal(x) Refresh Case.<div/>"
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
-                     u" with parameters <b>{3}</b>." \
-            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
+                     " with parameters <b>{3}</b>." \
+            .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 

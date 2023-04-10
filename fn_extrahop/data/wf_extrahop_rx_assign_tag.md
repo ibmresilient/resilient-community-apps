@@ -19,43 +19,43 @@
 
 ### Pre-Processing Script
 ```python
-if rule.properties.extrahop_tag_name is None:
+if playbook.inputs.extrahop_tag_name is None:
     raise ValueError("The tag name is not set")
 
 ```
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##
+##  ExtraHop - pb_extrahop_rx_get_tags post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_tags"
-WF_NAME = "Example: Extrahop Reveal(x) assign tag"
+PB_NAME = "Extrahop Reveal(x): Assign Tag"
+results = playbook.functions.results.get_tags_results
 CONTENT = results.get("content", {})
 INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
-    note_text = u''
-    tag_name = rule.properties.extrahop_tag_name
+    note_text = ''
+    tag_name = playbook.inputs.extrahop_tag_name
     tag_id = None
     
     if CONTENT:
         tags = CONTENT.get("result", {})
-        if tags:
-            for tag in tags:
-                if tag_name == tag["name"]:
-                    tag_id = tag["id"]
-                    workflow.addProperty("tag_exists", {})
-                    break
-            if not tag_id:
-                note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Tag <b>'{1}'</b> not returned for SOAR function <b>{2}</b> "\
-                            u"with parameters <b>{3}</b>."\
-                    .format(WF_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        for tag in tags:
+            if tag_name == tag["name"]:
+                tag_id = tag["id"]
+                playbook.addProperty("tag_exists", {})
+                break
+        if not tag_id:
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Tag <b>'{1}'</b> not returned for SOAR function <b>{2}</b> "\
+                        "with parameters <b>{3}</b>."\
+                    .format(PB_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get tags for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get tags for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     if note_text:
         incident.addNote(helper.createRichText(note_text))
 
@@ -78,57 +78,60 @@ main()
 
 ### Pre-Processing Script
 ```python
-tag_name = rule.properties.extrahop_tag_name
-get_tags_content = workflow.properties.get_tags_result.content
+tag_name = playbook.inputs.extrahop_tag_name
+get_tags_content = playbook.functions.results.get_tags_results.get("content", {})
 inputs.extrahop_device_ids = str(row.devs_id)
 if tag_name is None:
     raise ValueError("The tag name is not set")
 inputs.extrahop_tag_id = None
-for tag in get_tags_content["result"]:
-    if tag_name == tag["name"]:
-        inputs.extrahop_tag_id = tag["id"]
+for tag in get_tags_content.get("result", []):
+    if tag_name == tag.get("name", None):
+        inputs.extrahop_tag_id = tag.get("id", None)
         break
 if not inputs.extrahop_tag_id:
     raise ValueError("Tag {} not found.".format(tag_name))
+
 
 ```
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_assign_tag post processing script ##
+##  ExtraHop - pb_extrahop_rx_assign_tag post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_assign_tag"
-WF_NAME = "Example: Extrahop Reveal(x) assign tag"
+PB_NAME = "Extrahop Reveal(x): Assign Tag"
+results = playbook.functions.results.assign_tag_results
 CONTENT = results.get("content", {})
 INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
     note_text = u''
-    tag_name = rule.properties.extrahop_tag_name
+    tag_name = playbook.inputs.extrahop_tag_name
     tag = INPUTS.get("extrahop_tag_name")
     if CONTENT:
         result = CONTENT.get("result", None)
         if result == "success":
             device_id = INPUTS.get("extrahop_device_ids")
             tag_id = INPUTS.get("extrahop_tag_id")
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully assigned tag <b>'{1}'</b> with id <b>{2}</b> to device id <b>{3}</b> for SOAR " \
-                        u"function <b>{4}</b> with parameters <b>{5}</b>.".format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Successfully assigned tag <b>'{1}'</b> with id <b>{2}</b> to device id <b>{3}</b> for SOAR " \
+                        "function <b>{4}</b> with parameters <b>{5}</b>.".format(PB_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
         elif result == "failed":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to assign tag <b>{1}</b> with id <b>{2}</b> to device id <b>{3}</b> for " \
-                        u"SOAR function <b>{4}</b> with parameters <b>{5}</b>.".format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Failed to assign tag <b>{1}</b> with id <b>{2}</b> to device id <b>{3}</b> for " \
+                        "SOAR function <b>{4}</b> with parameters <b>{5}</b>.".format(PB_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Assign tag <b>{1}</b> with id <b>{2}</b> to device id <b>{3}</b> failed with unexpected " \
-                        u"response for SOAR function <b>{4}</b> with parameters <b>{5}</b>.".format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Assign tag <b>{1}</b> with id <b>{2}</b> to device id <b>{3}</b> failed with unexpected " \
+                        "response for SOAR function <b>{4}</b> with parameters <b>{5}</b>.".format(PB_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to assign tag <b>{1}</b> with id  <b>{2}</b> to device id <b>{3}</b> for SOAR function <b>{4}</b> with parameters <b>{5}</b>."\
-            .format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to assign tag <b>{1}</b> with id  <b>{2}</b> to device id <b>{3}</b> for SOAR function <b>{4}</b> with parameters <b>{5}</b>."\
+            .format(PB_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
+
 
 ```
 

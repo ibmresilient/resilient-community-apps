@@ -19,7 +19,7 @@
 
 ### Pre-Processing Script
 ```python
-inputs.extrahop_tag_name = rule.properties.extrahop_tag_name
+inputs.extrahop_tag_name = playbook.inputs.extrahop_tag_name
 if inputs.extrahop_tag_name is None:
     raise ValueError("The tag name is not set")
 
@@ -30,39 +30,38 @@ if inputs.extrahop_tag_name is None:
 ##  ExtraHop - wf_extrahop_rx_create_tag post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_create_tag"
-WF_NAME = "Example: Extrahop Reveal(x) create tag"
+PB_NAME = "Extrahop Reveal(x): Create Tag"
+results = playbook.functions.results.create_tag_result
 CONTENT = results.get("content", {})
 INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 
 # Processing
-def main():
-    note_text = u''
-    tag = INPUTS.get("extrahop_tag_name")
-    if CONTENT:
-        result = CONTENT.get("result", None)
-        if result == "success":
-            workflow.addProperty("tag_exists", {})
-            tag = INPUTS.get("extrahop_tag_name")
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully created tag <b>'{1}'</b> for SOAR " \
-                        u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-        elif result == "failed":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to create tag <b>'{1}'</b> for " \
-                        u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-        elif result == "exists":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A 422 (tag name exists) error was thrown while to create tag <b>'{1}'</b> for " \
-                        u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-        else:
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Create tag <b>'{1}'</b> failed with unexpected " \
-                        u"response for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+note_text = u''
+tag = INPUTS.get("extrahop_tag_name")
+if CONTENT:
+    result = CONTENT.get("result", None)
+    if result == "success":
+        playbook.addProperty("tag_created", {})
+        tag = INPUTS.get("extrahop_tag_name")
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Successfully created tag <b>'{1}'</b> for SOAR " \
+                    "function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+    elif result == "failed":
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Failed to create tag <b>'{1}'</b> for " \
+                    "SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+    elif result == "exists":
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: A 422 (tag name exists) error was thrown while to create tag <b>'{1}'</b> for " \
+                    "SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to create a tag <b>'{1}'</b>for SOAR function <b>{2}</b> with parameters <b>{3}</b> ."\
-            .format(WF_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Create tag <b>'{1}'</b> failed with unexpected " \
+                    "response for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+else:
+    note_text += "ExtraHop Reveal(x): Playbook<b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                 "to create a tag <b>'{1}'</b>for SOAR function <b>{2}</b> with parameters <b>{3}</b> ."\
+            .format(PB_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
-    incident.addNote(helper.createRichText(note_text))
-
-main()
+incident.addNote(helper.createRichText(note_text))
 
 ```
 
@@ -86,51 +85,42 @@ None
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##
+##  ExtraHop - pb_extrahop_rx_get_tags post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_tags"
-WF_NAME = "Example: Extrahop Reveal(x) create tag"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Create Tag"
+results = playbook.functions.results.get_tags_result
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TBL_FIELDS = ["am_description", "am_id", "mod_time", "mode", "name", "owner", "rights", "short_code", "show_alert_status", "walks", "weighting"]
 
 
 # Processing
-def main():
-    note_text = u''
-    tag_exists = False
-    tag_name = rule.properties.extrahop_tag_name
-    if CONTENT:
-        tags = CONTENT.result
-        if tags:
-            for tag in tags:
-                if tag_name == tag["name"]:
-                    note_text = u"ExtraHop Integration: Workflow <b>{0}</b>:  Tag <b>'{1}'</b> returned for returned " \
-                                u"for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-                        .format(WF_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
-                    tag_exists = True
-                    newrow = incident.addRow("extrahop_tags")
-                    newrow.query_execution_date = QUERY_EXECUTION_DATE
-                    newrow.tag = tag.name
-                    newrow.mod_time = tag.mod_time
-                    newrow.tag_id = tag.id
-                    note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Tags")
-                    break
-            if not tag_exists:
-                note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Tag <b>'{1}'</b>not returned for SOAR function " \
+note_text = u''
+tag_exists = False
+tag_name = playbook.inputs.extrahop_tag_name
+if CONTENT:
+    tags = CONTENT.get("result", {})
+    for tag in tags:
+        if tag_name == tag.get("name"):
+            note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>:  Tag <b>'{1}'</b> returned " \
+                                "for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                        .format(PB_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+            tag_exists = True
+            newrow = incident.addRow("extrahop_tags")
+            newrow.query_execution_date = QUERY_EXECUTION_DATE
+            newrow.tag = tag.get("name", None)
+            newrow.mod_time = tag.get("mod_time", None)
+            newrow.tag_id = tag.get("id", None)
+            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Tags")
+            break
+    if not tag_exists:
+        note_text = u"ExtraHop Reveal(x): Playbook <b>{0}</b>: Tag <b>'{1}'</b>not returned for SOAR function " \
                             u"<b>{2}</b> with parameters <b>{3}</b>."\
-                    .format(WF_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-
-    else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get  Tag <b>'{1}'</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-            .format(WF_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-
-    incident.addNote(helper.createRichText(note_text))
-
-main()
+                    .format(PB_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
 ```
 

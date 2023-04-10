@@ -24,23 +24,105 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_update_incident post processing script ##
+##  ExtraHop - pb_extrahop_rx_search_detections post processing script ##
+# funct_extrahop_rx_get_detections
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_detections"
-WF_NAME = "Example: Extrahop Reveal(x) update incident"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Refresh Case"
+results = playbook.functions.results.get_detections_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_detections"
-DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
-                   "mitre_tactics", "mitre_techniques", "mod_time", "participants", "properties", "resolution", "risk_score",
-                   "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
-# Read CATEGORY_MAP and TYPE_MAP dicts from workflow property.
-CATEGORY_MAP = workflow.properties.category_map
-TYPE_MAP = workflow.properties.type_map
+
+# Read CATEGORY_MAP and TYPE_MAP from playbook property.
+CATEGORY_MAP = playbook.properties.category_map
+TYPE_MAP = playbook.properties.type_map
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 
 # Processing
+def process_dets(det):
+    detection_url = make_linkback_url(det.get("id", None))
+    detection_url_html = u'<div><b><a target="blank" href="{0}">{1}</a></b></div>' \
+        .format(detection_url, det.get("id", None))
+    newrow = incident.addRow(DATA_TABLE)
+    newrow.query_execution_date = QUERY_EXECUTION_DATE
+    newrow.detection_url = detection_url_html
+    newrow.appliance_id = det.get("appliance_id", None)
+    newrow.assignee = det.get("assignee", None)
+    newrow.categories = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det.get("categories", [])))
+    newrow.det_description = det.get("description", None)
+    newrow.det_id = det.get("id", None)
+    newrow.is_user_created = str(det.get("is_user_created", None))
+    newrow.end_time = det.get("end_time", None)
+    newrow.mod_time = det.get("mod_time", None)
+    newrow.update_time = det.get("update_time", None)
+    newrow.start_time = det.get("start_time", None)
+    newrow.status = det.get("status", None)
+    newrow.title = det.get("title", None)
+    detection_type = det.get("type", None)
+    newrow.type = TYPE_MAP.get(detection_type) if detection_type and TYPE_MAP.get(detection_type) else detection_type
+    newrow.risk_score = det.get("risk_score", None)
+    newrow.resolution = det.get("resolution", None)
+    #newrow.ticket_url =  '<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det.get(f2, None), det.get(f2, None).split('/')[-1])
+    newrow.ticket_id = det.get("ticket_id", None)
+    newrow.properties = make_json_string(det.get("properties", {}))
+    newrow.participants = make_list_string(det.get("participants", []))
+    newrow.mitre_techniques = make_list_string(det.get("mitre_techniques", []))
+    newrow.mitre_tactics = make_list_string(det.get("mitre_tactics", []))
+
+    # Add participant artifacts
+    add_properties_artifacts(det.get("properties", {}))
+
+    # Add participant artifacts
+    add_participants_artifacts(det.get("det_id", None), det.get("participants", []))
+
+def make_json_string(detection_json):
+    """_summary_
+
+    Args:
+        det (json object): ExtraHop detection object 
+
+    Returns:
+        str : properties json object converted to a formatted string
+    """
+    tbl = ''
+    for i, j in detection_json.items():
+        if i == "suspicious_ipaddr":
+            det_type = "Suspicious IP Addresses"
+            value = j["value"]
+            tbl = '{0}<div><b>{1}:'.format(tbl, det_type)
+            tbl = '{0}:<div><b>{1}'.format(tbl, ", ".join("{}".format(i) for i in value))
+        else:
+            tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, i, j)
+        
+    return tbl
+
+def make_list_string(detection_list):
+    """_summary_
+
+    Args:
+        det (json object): ExtraHop detection object 
+
+    Returns:
+        str : properties json object converted to a formatted string
+
+"""
+
+    tbl = u''
+    for i in detection_list:
+        for k, v in i.items():
+            if k == "legacy_ids":
+                tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, k, ','.join(v))
+            elif k == "url":
+                tbl = '{0}<div><b>{1}:<a target="blank" href="{2}">{3}</a></div>' \
+                                .format(tbl, k, v, i["id"])
+            else:
+                tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, k, v)
+        tbl += u"<br>"
+
+    return tbl
+
 def make_linkback_url(det_id):
     """Create a url to link back to the detection.
 
@@ -61,93 +143,57 @@ def addArtifact(artifact_type, artifact_value, description):
     """
     incident.addArtifact(artifact_type, artifact_value, description)
 
+def add_properties_artifacts(properties):
+    """Add IP Address artifacts of the detections properties.
+
+    Args:
+        properties (_type_): properties of the detections (json object)
+    """
+    for i, j in properties.items():
+        if i == "suspicious_ipaddr":
+            artifact_type = "IP Address"
+            artifact_type = "Suspicious IP Addresses"
+            value = j["value"]
+            for ip in value:
+                addArtifact(artifact_type, ip, "Suspicious IP address found by ExtraHop.")
+
+def add_participants_artifacts(det_id, participants):
+    """ Add artifacts of the participants 
+
+    Args:
+        participants (_type_): List of json objects 
+    """
+    for p in participants:
+        if p.get("object_type") == "ipaddr":
+            artifact_type = "IP Address"
+            addArtifact(artifact_type, p.get("object_value"),
+                        "Participant IP address in ExtraHop detection '{0}', role: '{1}'."
+                         .format(det_id, p.get("role")))
+        if p.get("hostname"):
+            artifact_type = "DNS Name"
+            addArtifact(artifact_type, p["hostname"],
+                        "Participant DNS name in ExtraHop detection '{0}', role: '{1}'."
+                        .format(det_id, p.get("role")))
+
 # Processing
 def main():
-    detection_id = INPUTS["extrahop_detection_id"]
+    detection_id = INPUTS.get("extrahop_detection_id")
     note_text = u''
     if CONTENT:
-        det = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A Detection was successfully returned for " \
+        det = CONTENT.get("result", {})
+        note_text = u"ExtraHop Reveal(x): Playbook <b>{0}</b>: A Detection was successfully returned for " \
                     u"detection ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
-            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                    .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if det:
-            detection_url = make_linkback_url(det["id"])
-            detection_url_html = u'<div><b><a target="blank" href="{0}">{1}</a></b></div>' \
-                         .format(detection_url, det["id"])
-            newrow = incident.addRow(DATA_TABLE)
-            newrow.query_execution_date = QUERY_EXECUTION_DATE
-            newrow.detection_url = detection_url_html
-            for f1 in DATA_TBL_FIELDS:
-                f2 = f1
-                if f1.startswith("det_"):
-                    f2 = f1.split('_', 1)[1]
-                if det[f2] is None or isinstance(det[f2], long):
-                    newrow[f1] = det[f2]
-                elif isinstance(det[f1], list):
-                    if f1 == "categories":
-                        newrow[f1] = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det[f2]))
-                    elif f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
-                        if f1 == "participants":
-                            for p in det[f2]:
-                                if p["object_type"] == "ipaddr":
-                                    artifact_type = "IP Address"
-                                    addArtifact(artifact_type, p["object_value"],
-                                                "Participant IP address in ExtraHop detection '{0}', role: '{1}'."
-                                                .format(det["id"], p["role"]))
-                                    if p["hostname"]:
-                                        artifact_type = "DNS Name"
-                                        addArtifact(artifact_type, p["hostname"],
-                                                    "Participant DNS name in ExtraHop detection '{0}', role: '{1}'."
-                                                    .format(det["id"], p["role"]))
-                        obj_cnt = 0
-                        tbl = u''
-                        for i in det[f2]:
-                            for k, v in i.items():
-                                if k == "legacy_ids":
-                                    tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
-                                elif k == "url":
-                                    tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>' \
-                                        .format(k, v, i["id"])
-                                else:
-                                    tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
-                            tbl += u"<br>"
-                            obj_cnt += 1
-                        newrow[f1] = tbl
-                    else:
-                        newrow[f1] = "{}".format(", ".join(det[f2]))
-                elif isinstance(det[f2], (bool, dict)):
-                    if f1 in ["properties"]:
-                        tbl = u''
-                        for i, j in det[f2].items():
-                            if i == "suspicious_ipaddr":
-                                artifact_type = "IP Address"
-                                type = "Suspicious IP Addresses"
-                                value = j["value"]
-                                for ip in value:
-                                    addArtifact(artifact_type, ip, "Suspicious IP address found by ExtraHop.")
-                                tbl += u'<div><b>{0}:'.format(type)
-                                tbl += u'<div><b>{0}'.format(", ".join("{}".format(i) for i in value))
-                            else:
-                                tbl += u'<div><b>{0}:</b>{1}</div>'.format(i, j)
-                        newrow[f1] = tbl
-                    else:
-                        newrow[f1] = str(det[f2])
-                else:
-                    if f1 == "type":
-                        newrow[f1] = TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
-                    elif f1 == "ticket_url":
-                        newrow[f1] =  u'<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det[f2], det[f2].split('/')[-1])
-                    else:
-                        newrow[f1] = "{}".format(det[f2])
+            process_dets(det)
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+        note_text += u"ExtraHop Reveal(x): Playbook<b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
                      u" with parameters <b>{3}</b>." \
-            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
-
 
 main()
 
@@ -173,12 +219,13 @@ None
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##
+##  ExtraHop - pb_extrahop_rx_get_devices post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_devices"
-WF_NAME = "Example: Extrahop Reveal(x) update incident"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Update Case"
+results = playbook.functions.results.get_devices_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Display subset of fields
 DATA_TABLE = "extrahop_devices"
@@ -203,63 +250,66 @@ def process_devs(dev):
     # Process a device result.
     newrow = incident.addRow(DATA_TABLE)
     newrow.query_execution_date = QUERY_EXECUTION_DATE
-    for f1 in DATA_TBL_FIELDS:
-        f2 = f1
-        if f1.startswith("devs_"):
-            f2 = f1.split('_', 1)[1]
-        if dev[f1] is None:
-            newrow[f1] = dev[f2]
-        elif isinstance(dev[f2], list):
-            newrow[f1] = "{}".format(", ".join(dev[f2]))
-        elif isinstance(dev[f2], bool):
-            newrow[f1] = str(dev[f2])
-        elif f1 in ["mod_time", "user_mod_time", "discover_time", "last_seen_time"]:
-            newrow[f1] = long(dev[f2])
-        else:
-            newrow[f1] = "{}".format(dev[f2])
+    newrow.display_name = dev.get("display_name", None)
+    newrow.devs_description = dev.get("description", None)
+    newrow.default_name = dev.get("default_name", None)
+    newrow.dns_name = dev.get("dns_name", None)
+    newrow.ipaddr4 = dev.get("ipaddr4", None)
+    newrow.ipaddr6 = dev.get("ipaddr6", None)
+    newrow.macaddr  = dev.get("macaddr", None)
+    newrow.role = dev.get("role", None)
+    newrow.vendor = dev.get("vendor", None)
+    newrow.devs_id = dev.get("id", None)
+    newrow.extrahop_id = dev.get("extrahop_id", None)
+    newrow.activity = dev.get("activity", None)
+    newrow.on_watchlist = str(dev.get("on_watchlist", None))
+    newrow.mod_time = dev.get("mod_time", None)
+    newrow.user_mod_time = dev.get("user_mod_time", None)              
+    newrow.discover_time = dev.get("discover_time", None)
+    newrow.last_seen_time = dev.get("last_seen_time", None)
     device_url = make_linkback_url(dev["extrahop_id"])
     device_url_html = u'<div><b><a target="blank" href="{1}">{2}</a></b></div>' \
-              .format("url", device_url, dev["extrahop_id"])
+        .format("url", device_url, dev["extrahop_id"])
     newrow.device_url = device_url_html
 
 def get_dev_ids():
     # Get participant dev ids    
     dev_ids = []
-    get_devices_content = workflow.properties.get_detections_result.content
-    devs = get_devices_content["result"]
-    participants = devs["participants"]
+    get_devices_content = playbook.functions.results.get_detections_results.content
+    devs = get_devices_content.get("result", {})
+    participants = devs.get("participants", {})
     for p in participants:
-        if p["object_type"] == "device":
-            dev_ids.append(p["object_id"])
+        if p.get("object_type", None) == "device":
+            dev_ids.append(p.get("object_id", None))
     return dev_ids
 
 
 # Processing
-def main():
-    participant_dev_ids = get_dev_ids()
-    note_text = u''
-    if CONTENT:
-        devs = [d for d in CONTENT.result if d["id"] in participant_dev_ids]
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
-                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join(
+participant_dev_ids = get_dev_ids()
+note_text = ''
+if CONTENT:
+    devs = [d for d in CONTENT.get("result") if d.get("id", None) in participant_dev_ids]
+    note_text = "ExtraHop Integration: Playbook <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
+                    "function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, len(devs), FN_NAME, ", ".join(
             "{}:{}".format(k, v) for k, v in INPUTS.items()))
-        if devs:
-            if isinstance(devs, list):
-                for dev in devs:
-                    process_devs(dev)
-            else:
-                process_devs(devs)
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
+    if devs:
+        if isinstance(devs, list):
+            for dev in devs:
+                process_devs(dev)
+        else:
+            process_devs(devs)
+        note_text += "<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
 
-    else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get devices for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+else:
+    note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get devices for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
-    incident.addNote(helper.createRichText(note_text))
+incident.addNote(helper.createRichText(note_text))
 
+#Unset the Detection update notification. 
+incident.properties.extrahop_update_notification = None
 
-main()
 ```
 
 ---

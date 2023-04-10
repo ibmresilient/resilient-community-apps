@@ -19,11 +19,11 @@
 
 ### Pre-Processing Script
 ```python
-'##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
+##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
 # Read CATEGORY_MAP and TYPE_MAP from workflow propertyself. 
 # Reverse the dict keys and values
-CATEGORY_MAP = {v: k for k, v in workflow.properties.category_map.items()}
-TYPE_MAP = {v: k for k, v in workflow.properties.type_map.items()}
+CATEGORY_MAP = {v: k for k, v in playbook.properties.category_map.items()}
+TYPE_MAP = {v: k for k, v in playbook.properties.type_map.items()}
 DOT_PARAMS = [
     "me",
     "none"
@@ -51,25 +51,25 @@ filter = {}
 search_filter = {}
 category = None
 detection_types = None
-if rule.properties.extrahop_detection_category:
-    category = CATEGORY_MAP[rule.properties.extrahop_detection_category]
-if rule.properties.extrahop_detection_types:
-    detection_types = [TYPE_MAP[d] for d in rule.properties.extrahop_detection_types]
+if playbook.inputs.extrahop_detection_category:
+    category = CATEGORY_MAP[playbook.inputs.extrahop_detection_category]
+if hasattr(playbook.inputs, "extrahop_detection_types"):
+    detection_types = [TYPE_MAP[d] for d in playbook.inputs.extrahop_detection_types]
 
 filter_props = {
-    "risk_score_min": get_prop(rule.properties.extrahop_detection_risk_score_min),
+    "risk_score_min": get_prop(playbook.inputs.extrahop_detection_risk_score_min),
     "types": get_prop(detection_types),
     "category": get_prop(category),
-    "assignee": get_prop(rule.properties.extrahop_detection_assignee, "list"),
-    "ticket_id": get_prop(rule.properties.extrahop_detection_ticket_id, "list"),
-    "status": get_prop(rule.properties.extrahop_detection_status),
-    "resolution": get_prop(rule.properties.extrahop_detection_resolution)
+    "assignee": get_prop(playbook.inputs.extrahop_detection_assignee, "list"),
+    "ticket_id": get_prop(playbook.inputs.extrahop_detection_ticket_id, "list"),
+    "status": get_prop(playbook.inputs.get("extrahop_detection_status") if hasattr(playbook.inputs, "extrahop_detection_status") else None),
+    "resolution": get_prop(playbook.inputs.get("extrahop_detection_resolution") if hasattr(playbook.inputs, "extrahop_detection_resolution") else None)
 }
 
 filter = {k: v for k, v in filter_props.items() if v}
 
 if filter:
-    if rule.properties.extrahop_detection_id:
+    if playbook.properties.extrahop_detection_id:
         raise ValueError("The search filter and Detecion ID are not allowed at the same time.")
 
     search_filter = {
@@ -77,34 +77,35 @@ if filter:
     }
     inputs.extrahop_search_filter = str(search_filter).replace("'", '"')
 
-if rule.properties.extrahop_active_from:
-    inputs.extrahop_active_from = rule.properties.extrahop_active_from
-if rule.properties.extrahop_active_until:
-    inputs.extrahop_active_until = rule.properties.extrahop_active_until
-if rule.properties.extrahop_limit:
-    inputs.extrahop_limit = rule.properties.extrahop_limit
-if rule.properties.extrahop_offset:
-    inputs.extrahop_offset = rule.properties.extrahop_offset
-if rule.properties.extrahop_update_time:
-    inputs.extrahop_update_time = rule.properties.extrahop_update_time
-if rule.properties.extrahop_mod_time:
-    inputs.extrahop_mod_time = rule.properties.extrahop_mod_time
+if playbook.inputs.extrahop_active_from:
+    inputs.extrahop_active_from = playbook.inputs.extrahop_active_from
+if playbook.inputs.extrahop_active_until:
+    inputs.extrahop_active_until = playbook.inputs.extrahop_active_until
+if playbook.inputs.extrahop_limit:
+    inputs.extrahop_limit = playbook.inputs.extrahop_limit
+if playbook.inputs.extrahop_offset:
+    inputs.extrahop_offset = playbook.inputs.extrahop_offset
+if playbook.inputs.extrahop_update_time:
+    inputs.extrahop_update_time = playbook.inputs.extrahop_update_time
+if playbook.inputs.extrahop_mod_time:
+    inputs.extrahop_mod_time = playbook.inputs.extrahop_mod_time
 ```
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_search_detections post processing script ##
+##  ExtraHop - pb_extrahop_rx_search_detections post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_detections"
-WF_NAME = "Example: Extrahop revealx search detections"
+PB_NAME = "Extrahop Revealx search detections"
+results = playbook.functions.results.search_detections_results
 CONTENT = results.get("content", {})
 INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_detections"
 
 # Read CATEGORY_MAP and TYPE_MAP from workflow property.
-CATEGORY_MAP = workflow.properties.category_map
-TYPE_MAP = workflow.properties.type_map
+CATEGORY_MAP = playbook.properties.category_map
+TYPE_MAP = playbook.properties.type_map
 
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 
@@ -199,24 +200,27 @@ def make_linkback_url(det_id):
     return incident.properties.extrahop_console_url + LINKBACK_URL.format(det_id)
 
 # Processing
-#def main():
-note_text = u''
+def main():
+    note_text = ''
 
-if CONTENT:
-    dets = CONTENT.get("result", {})
-    note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
-                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-    if dets:
-        for det in dets:
-            process_dets(det)
-        note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+    if CONTENT:
+        dets = CONTENT.get("result", {})
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
+                    "function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        if dets:
+            for det in dets:
+                process_dets(det)
+            note_text += "<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
 
-else:
-    note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to search detections for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+    else:
+        note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to search detections for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+                    .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
-incident.addNote(helper.createRichText(note_text))
+    incident.addNote(helper.createRichText(note_text))
+    
+# Start execution
+main()
     
 # Start execution
 #main()
@@ -237,44 +241,50 @@ incident.addNote(helper.createRichText(note_text))
 
 ### Pre-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
+##  ExtraHop - pb_extrahop_rx_search_detections pre processing script ##
 # funct_extrahop_rx_get_detections
-
+# Some of the search parameters cannot be used if a single detection ID is specifiedself.
+# Those parameters are listed in search_filters
 search_filters =  [ 
-    rule.properties.extrahop_detection_risk_score_min, rule.properties.extrahop_detection_category, 
-    rule.properties.extrahop_detection_types, rule.properties.extrahop_detection_assignee, 
-    rule.properties.extrahop_detection_ticket_id, rule.properties.extrahop_detection_status, 
-    rule.properties.extrahop_detection_resolution
+    "extrahop_detection_risk_score_min", "extrahop_detection_category", 
+    "extrahop_detection_types", "extrahop_detection_assignee", 
+    "extrahop_detection_ticket_id", "extrahop_detection_status", 
+    "extrahop_detection_resolution"
 ]
-for p in search_filters:
-    if p:
-        raise ValueError("A search filter and Detection ID are not allowed at the same time.")
 
-inputs.extrahop_detection_id = rule.properties.extrahop_detection_id
+
+for p in search_filters:
+    if hasattr(playbook.inputs, p) and playbook.inputs.get(p):
+        raise ValueError("A search filter {0} and Detection ID are not allowed at the same time.".format(p))
+
+inputs.extrahop_detection_id = playbook.inputs.extrahop_detection_id
+
+if playbook.inputs.extrahop_limit:
+    inputs.extrahop_limit = playbook.inputs.extrahop_limit
 
 ```
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_search_detections post processing script ##
+##  ExtraHop - pb_extrahop_rx_search_detections post processing script ##
 # funct_extrahop_rx_get_detections
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_detections"
-WF_NAME = "Example: Extrahop Reveal(x) get detections"
-CONTENT = results.get("content")
-INPUTS = results.get("inputs")
+PB_NAME = "Extrahop Reveal(x): Search Detections"
+results = playbook.functions.results.get_detections_result
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_detections"
 
-# Read CATEGORY_MAP and TYPE_MAP from workflow property.
-CATEGORY_MAP = workflow.properties.category_map
-TYPE_MAP = workflow.properties.type_map
+# Read CATEGORY_MAP and TYPE_MAP from playbook property.
+CATEGORY_MAP = playbook.properties.category_map
+TYPE_MAP = playbook.properties.type_map
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 
 # Processing
-# Processing
 def process_dets(det):
-    detection_url = make_linkback_url(det["id"])
+    detection_url = make_linkback_url(det.get("id", None))
     detection_url_html = u'<div><b><a target="blank" href="{0}">{1}</a></b></div>' \
         .format(detection_url, det.get("id", None))
     newrow = incident.addRow(DATA_TABLE)
@@ -351,7 +361,7 @@ def make_list_string(detection_list):
                                 .format(tbl, k, v, i["id"])
             else:
                 tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, k, v)
-        tbl += u"<br>"
+        tbl += "<br>"
 
     return tbl
 
@@ -410,20 +420,20 @@ def add_participants_artifacts(det_id, participants):
 # Processing
 def main():
     detection_id = INPUTS.get("extrahop_detection_id")
-    note_text = u''
+    note_text = ''
     if CONTENT:
         det = CONTENT.get("result", {})
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A Detection was successfully returned for " \
-                    u"detection ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
-                    .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: A Detection was successfully returned for " \
+                    "detection ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
+                    .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if det:
             process_dets(det)
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
-                     u" with parameters <b>{3}</b>." \
-            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
+                     " with parameters <b>{3}</b>." \
+            .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 main()

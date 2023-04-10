@@ -24,55 +24,55 @@ if artifact.type == "IP Address" or artifact.type == "DNS Name":
     inputs.extrahop_bpf = "host {}".format(artifact.value)
 elif artifact.type == "MAC Address":
     inputs.extrahop_bpf = "ether host {}".format(artifact.value)
-inputs.extrahop_active_from = rule.properties.extrahop_active_from
-inputs.extrahop_active_until = rule.properties.extrahop_active_until
-inputs.extrahop_output = rule.properties.extrahop_output
-inputs.extrahop_limit_search_duration = rule.properties.extrahop_limit_search_duration
-inputs.extrahop_limit_bytes = rule.properties.extrahop_limit_bytes
-inputs.extrahop_ip1 = rule.properties.extrahop_ip1
-inputs.extrahop_port1 = rule.properties.extrahop_port1
-inputs.extrahop_ip2 = rule.properties.extrahop_ip2
-inputs.extrahop_port2 = rule.properties.extrahop_port2
+inputs.extrahop_active_from = playbook.inputs.extrahop_active_from
+inputs.extrahop_active_until = playbook.inputs.extrahop_active_until
+inputs.extrahop_output = playbook.inputs.extrahop_output
+inputs.extrahop_limit_search_duration = playbook.inputs.extrahop_limit_search_duration
+inputs.extrahop_limit_bytes = playbook.inputs.extrahop_limit_bytes
+inputs.extrahop_ip1 = playbook.inputs.extrahop_ip1
+inputs.extrahop_port1 = playbook.inputs.extrahop_port1
+inputs.extrahop_ip2 = playbook.inputs.extrahop_ip2
+inputs.extrahop_port2 = playbook.inputs.extrahop_port2
 ```
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_search_packets post processing script ##
+##  ExtraHop - pb_extrahop_rx_search_packets post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_packets"
-WF_NAME = "Example: Extrahop Reveal(x) search packets"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Search Packets"
+results = playbook.functions.results.search_packets_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
-        result = CONTENT.result
+        result = CONTENT.get("result")
         if result.get("attachment"):
-            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully searched for packets for SOAR " \
-                        u"function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-            note_text += u"<br>Attachment <b>{}<b> added.".format(result.get("attachment"))
+            note_text += "ExtraHop Integration: Playbook <b>{0}</b>: Successfully searched for packets for SOAR " \
+                         "function <b>{1}</b> with parameters <b>{2}</b>."\
+                .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text += "<br>Attachment <b>{}<b> added.".format(result.get("attachment"))
         elif result.get("status"):
-            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Search for packets returned no results for SOAR " \
+            note_text += u"ExtraHop Integration: Playbook <b>{0}</b>: Search for packets returned no results for SOAR " \
                         u"SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
             note_text += u"<br>Status <b>{}<b>.".format(result.get("status"))
         elif result.get("error"):
-            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Search for packets failed for " \
+            note_text += u"ExtraHop Integration: Playbook <b>{0}</b>: Search for packets failed for " \
                         u"SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
             note_text += u"<br>Error <b>{}<b>.".format(result.get("error"))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+        note_text += u"ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to search packets for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
-
 ```
 
 ---

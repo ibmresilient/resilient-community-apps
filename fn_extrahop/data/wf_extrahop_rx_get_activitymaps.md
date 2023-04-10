@@ -24,27 +24,29 @@ None
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_get_activitymaps post processing script ##
+##  ExtraHop - pb_extrahop_rx_get_activitymaps post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_activitymaps"
-WF_NAME = "Example: Extrahop Reveal(x) get activitymaps"
+PB_NAME = "Extrahop Reveal(x): Get Activitymaps"
+results = playbook.functions.results.get_activitymap_results
 CONTENT = results.get("content", {})
 INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_activitymaps"
-DATA_TBL_FIELDS = ["ams_description", "ams_id", "mod_time", "mode", "ams_name", "owner", "rights", "short_code",
+DATA_TBL_FIELDS = ["ams_description", "ams_id", "mode", "ams_name", "owner", "rights", "short_code",
                    "show_alert_status", "walks", "weighting"]
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
         ams = CONTENT.get("result")
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Activitymaps returned for SOAR " \
-                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(ams), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: There were <b>{1}</b> Activitymaps returned for SOAR " \
+                    "function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, len(ams), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if ams:
             for am in ams:
                 newrow = incident.addRow(DATA_TABLE)
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
+                newrow.mod_time = am.get("mod_time", None)
                 for f1 in DATA_TBL_FIELDS:
                     f2 = f1
                     if f1.startswith("ams_"):
@@ -58,26 +60,26 @@ def main():
                             for w in am[f2]:
                                 for kw, vw in w.items():
                                     if kw == "origins":
-                                        tbl += u"<div><b>origins:</b></div>"
+                                        tbl += "<div><b>origins:</b></div>"
                                         for o in vw:
                                             for k, v in o.items():
                                                 tbl += u"<div><b>&emsp;{0}:</b>{1}</div>".format(k, v)
-                                        tbl += u"<br>"
+                                        tbl += "<br>"
                                     elif kw == "steps":
-                                        tbl += u"<div><b>steps:</b></div>"
+                                        tbl += "<div><b>steps:</b></div>"
                                         for s in vw:
                                             relationships = s.get("relationships")
                                             if relationships:
-                                                tbl += u"<div><b>&emsp;relationships:</b></div>"
+                                                tbl += "<div><b>&emsp;relationships:</b></div>"
                                                 for r in relationships:
                                                     for k, v in r.items():
-                                                        tbl += u"<div><b>&emsp;&emsp;{0}:</b>{1}</div>".format(k, v)
-                                                tbl += u"<br>"
-                                        tbl += u"<br>"
+                                                        tbl += "<div><b>&emsp;&emsp;{0}:</b>{1}</div>".format(k, v)
+                                                tbl += "<br>"
+                                        tbl += "<br>"
                                     else:
-                                        tbl += u"<div><b>{}:</b></div>".format(kw)
-                                        tbl += u"<div><b>&emsp{}</b></div>".format(vw)
-                            tbl += u"<br>"
+                                        tbl += "<div><b>{}:</b></div>".format(kw)
+                                        tbl += "<div><b>&emsp{}</b></div>".format(vw)
+                            tbl += "<br>"
                             obj_cnt += 1
                             newrow[f1] = tbl
                         else:
@@ -86,15 +88,16 @@ def main():
                         newrow[f1] = str(am[f2])
                     else:
                         newrow[f1] = "{}".format(am[f2])
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Activitymaps")
+            note_text += "<br>The data table <b>{0}</b> has been updated".format("Extrahop Activitymaps")
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get activitymaps for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get activitymaps for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
+
 
 ```
 

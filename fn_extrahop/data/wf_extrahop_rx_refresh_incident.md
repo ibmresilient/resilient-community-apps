@@ -28,7 +28,8 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 # funct_extrahop_rx_get_detections
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_detections"
-WF_NAME = "Extrahop Reveal(x) refresh incident"
+PB_NAME = "Extrahop Reveal(x): Refresh Case"
+results = playbook.functions.results.get_detections_results
 CONTENT = results.get("content", {})
 INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -180,17 +181,17 @@ def main():
     note_text = u''
     if CONTENT:
         det = CONTENT.get("result", {})
-        note_text = u"ExtraHop Reveal(x): Workflow <b>{0}</b>: A Detection was successfully returned for " \
+        note_text = u"ExtraHop Reveal(x): Playbook <b>{0}</b>: A Detection was successfully returned for " \
                     u"detection ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
-                    .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                    .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if det:
             process_dets(det)
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
     else:
-        note_text += u"ExtraHop Reveal(x): Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+        note_text += u"ExtraHop Reveal(x): Playbook<b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
                      u" with parameters <b>{3}</b>." \
-            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 main()
@@ -216,10 +217,11 @@ None
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##
+##  ExtraHop - pb_extrahop_rx_get_devices post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_devices"
-WF_NAME = "Example: Extrahop Reveal(x) refresh incident"
+PB_NAME = "Extrahop Reveal(x): Refresh Case"
+results = playbook.functions.results.get_devices_results
 CONTENT = results.get("content", {})
 INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -271,7 +273,7 @@ def process_devs(dev):
 def get_dev_ids():
     # Get participant dev ids    
     dev_ids = []
-    get_devices_content = workflow.properties.get_detections_result.content
+    get_devices_content = playbook.functions.results.get_detections_results.content
     devs = get_devices_content.get("result", {})
     participants = devs.get("participants", {})
     for p in participants:
@@ -281,33 +283,31 @@ def get_dev_ids():
 
 
 # Processing
-def main():
-    participant_dev_ids = get_dev_ids()
-    note_text = u''
-    if CONTENT:
-        devs = [d for d in CONTENT.get("result") if d.get("id", None) in participant_dev_ids]
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
-                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join(
+participant_dev_ids = get_dev_ids()
+note_text = ''
+if CONTENT:
+    devs = [d for d in CONTENT.get("result") if d.get("id", None) in participant_dev_ids]
+    note_text = "ExtraHop Integration: Playbook <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
+                    "function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, len(devs), FN_NAME, ", ".join(
             "{}:{}".format(k, v) for k, v in INPUTS.items()))
-        if devs:
-            if isinstance(devs, list):
-                for dev in devs:
-                    process_devs(dev)
-            else:
-                process_devs(devs)
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
+    if devs:
+        if isinstance(devs, list):
+            for dev in devs:
+                process_devs(dev)
+        else:
+            process_devs(devs)
+        note_text += "<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
 
-    else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get devices for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+else:
+    note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get devices for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
-    incident.addNote(helper.createRichText(note_text))
+incident.addNote(helper.createRichText(note_text))
 
-    #Unset the Detection update notification. 
-    incident.properties.extrahop_update_notification = None
-    
-main()
+#Unset the Detection update notification. 
+incident.properties.extrahop_update_notification = None
+
 ```
 
 ---

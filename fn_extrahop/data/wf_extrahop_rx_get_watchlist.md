@@ -24,10 +24,11 @@ None
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_get_watchlist post processing script ##
+##  ExtraHop - pb_extrahop_rx_get_watchlist post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_watchlist"
-WF_NAME = "Example: Extrahop Reveal(x) get watchlist"
+PB_NAME = "Extrahop Reveal(x): Get Watchlist"
+results = playbook.functions.results.get_watchlist_results
 CONTENT = results.get("content", {})
 INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -37,11 +38,11 @@ DATA_TBL_FIELDS = ["display_name", "ipaddr4", "ipaddr6", "macaddr", "extrahop_id
 
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
         devs = CONTENT.get("result", [])
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> devices returned in the Watchlist" \
-                    u" for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: There were <b>{1}</b> devices returned in the Watchlist" \
+                    " for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if devs:
             for dev in devs:
                 newrow = incident.addRow("extrahop_watchlist")
@@ -56,16 +57,17 @@ def main():
                       newrow[f1] = str(dev[f2])
                   else:
                       newrow[f1] = "{}".format(dev[f2])
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+            note_text += "<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
 
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get the watchlist for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get the watchlist for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
+
 
 ```
 

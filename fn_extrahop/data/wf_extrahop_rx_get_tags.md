@@ -24,10 +24,11 @@ None
 
 ### Post-Processing Script
 ```python
-##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##
+##  ExtraHop - pb_extrahop_rx_get_tags post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_tags"
-WF_NAME = "Example: Extrahop Reveal(x) get tags"
+PB_NAME = "Extrahop Reveal(x): Get Tags"
+results = playbook.functions.results.get_tags_results
 CONTENT = results.get("content", {})
 INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
@@ -36,12 +37,12 @@ DATA_TBL_FIELDS = ["am_description", "am_id", "mod_time", "mode", "name", "owner
 
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
         tags = CONTENT.get("result", {})
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Tags returned for SOAR function <b>{2}</b> "\
-                     u"with parameters <b>{3}</b>."\
-        .format(WF_NAME, len(tags), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text = "ExtraHop Integration: Playbook<b>{0}</b>: There were <b>{1}</b> Tags returned for SOAR function <b>{2}</b> "\
+                     "with parameters <b>{3}</b>."\
+        .format(PB_NAME, len(tags), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if tags:
             for tag in tags:
                 newrow = incident.addRow("extrahop_tags")
@@ -49,12 +50,12 @@ def main():
                 newrow.tag = tag.get("name")
                 newrow.mod_time = tag.get("mod_time")
                 newrow.tag_id = tag.get("id")
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Tags")
+            note_text += "<br>The data table <b>{0}</b> has been updated".format("Extrahop Tags")
 
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get tags for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get tags for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
