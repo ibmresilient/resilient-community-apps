@@ -67,7 +67,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 04/2023 | Use mod_time instead of update_time |
+| 1.1.0 | 04/2023 | Use mod_time instead of update_time in poller. Convert rules/workflows to playbooks |
 | 1.0.0 | 06/2022 | Initial Release |
 
 ---
@@ -90,7 +90,7 @@ The ExtraHop App for IBM SOAR escalates ExtraHop detections into IBM Security SO
   List the Key Features of the Integration
 -->
 The ExtraHop App provides the following functionality:
-* A poller which gathers current detections from ExtraHop and escalates to the SOAR platform as incidents.
+* A poller which gathers current detections from ExtraHop and escalates to the SOAR platform as cases/incidents.
 * Functions to get, search and update detections.
 * Functions to get and add detection notes.
 * Functions to get and search devices.
@@ -110,11 +110,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `41.2.41`.
+* SOAR platform >= `45.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `41.2.41`.
+* SOAR platform >= `45.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=42.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -152,9 +152,7 @@ The app **does** support a proxy server via the https_proxy and http_proxy app.c
 ### Python Environment
 Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* jinja2
-* resilient-circuits>=42.0.0
-* resilient-lib
+* resilient-circuits>=48.0.0
 * retry2 ~= 0.9
 
 ### Endpoint Developed With
@@ -162,7 +160,7 @@ Additional package dependencies may exist for each of these packages:
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
-| ExtraHop RevealX 360 | 8.8.31785 | https://<extrahop_cloud_api_url> or https://<sensor_hostname_or_ip> | v1 |
+| ExtraHop RevealX 360 | 9.2.01526 | https://<extrahop_cloud_api_url> or https://<sensor_hostname_or_ip> | v1 |
 
 #### Prerequisites
 <!--
@@ -265,7 +263,7 @@ The poller provides the following functionality.
 
 * For any new detections discovered, creates a  matching incident in the SOAR platform.
 * The ExtraHop detections Ticket ID is assigned the SOAR case value.
-* The workflow `Example: Extrahop Reveal(x) update incident` is triggered by an automatic rule.
+* The playbook `Extrahop Reveal(x): Update Case` is triggered by automatically to update an incident/case.
 * The automatic rule Enhances the incidents by adding artifacts and data tables with detection and device information from the matching ExtraHop detection.
 * Can be configured to filter the detections which are escalated to the SOAR incidents.  
 * Closes SOAR incidents if the corresponding ExtraHop detections are closed.
@@ -315,11 +313,11 @@ The function provides the following functionality.
 
 **_NOTE:_** Add detection note will fail if `Detection Tracking` is enabled on ExtraHop.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) update detection`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x) Update Detection`.
 
 * A note is added to the ExtraHop detection when a matching SOAR incident is closed. 
   
-The workflow is initiated by the automatic data table rule `Example: Extrahop Reveal(x) update detection` when a SOAR incident is closed.
+The playbookis initiated by the automatic data table rule `Extrahop Reveal(x): Update Detection` when a SOAR incident is closed.
 
 The following screenshot shows an example of a note added to an ExtraHop detection:
 
@@ -471,11 +469,11 @@ The function provides the following functionality.
 
 * Assigns a tag to a list of device ids discovered in the ExtraHop environment.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) assign tag`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): Assign Tag`.
 
 * A note is added to the SOAR incident with the status of the action. 
   
-The workflow is initiated by the manual data table rule `Example: Extrahop Reveal(x) assign tag` for data table `Example: Extrahop Reveal(x) assign tag`.
+The olaybook is initiated by the manual data table rule `Extrahop Reveal(x): Assign Tag` for data table `ExtraGop Devices`.
 
    ![screenshot: fn-extrahop-revealx-assign-tag-action](./doc/screenshots/fn-extrahop-revealx-assign-tag-action.png)
 
@@ -604,12 +602,12 @@ The function provides the following functionality.
 
 * Creates a new tag in the ExtraHop environment.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) create tag`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): Create Tag`.
 
 * A note is added to the SOAR incident with the status of the action.
 * The data table `Extrahop Tags` is updated.
 
-The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(x) create tag`.
+The playbook is initiated by the menu item `Extrahop Reveal(x): Create Tag`.
 
    ![screenshot: fn-extrahop-revealx-create-tag-action](./doc/screenshots/fn-extrahop-revealx-create-tag-action.png)
   
@@ -729,12 +727,12 @@ The function provides the following functionality.
 
 * Retrieves information on activitymaps in the ExtraHop environment.
 
-An example workflow that uses this SOAR function is `Example: Extrahop Reveal(x) get activitymaps`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): Get Activitymaps`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `ExtraHop Activitymaps` is updated.
  
-The workflow is initiated by the manual incident rule `Example: Extrahop Reveal(x) get activitymaps`.
+The playbook is initiated by the incident menu item `Extrahop Reveal(x): Get Activitymaps`.
 
    ![screenshot: fn-extrahop-revealx-get-activitymaps-action](./doc/screenshots/fn-extrahop-revealx-get-activitymaps-action.png)
 
