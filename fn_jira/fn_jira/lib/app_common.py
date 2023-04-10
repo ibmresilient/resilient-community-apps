@@ -168,11 +168,10 @@ class AppCommon():
                 del attach_num
             issue["fields"]["attachment"] = attachments if attachments else []
 
-            del attachments
-
-            issue_description = issue.get("fields").get("description")
+            issue_description = issue.get("renderedFields").get("description")
             if check_jira_issue_linked_to_task(issue_description):
                 task_id = get_id_from_jira_issue_description(issue_description)
+                LOG.debug(issue_description)
                 data_to_get_from_case["tasks"].append({
                     "incident_id": int(issue_description[issue_description.index("incidents/")+10:issue_description.index("?task_id")]),
                     "task_id": task_id,

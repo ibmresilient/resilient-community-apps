@@ -107,15 +107,7 @@ def get_id_from_jira_issue_description(description):
     given Jira issue
     :param jira_issue_description: Description of the Jira issue
     """
-    task_id = None
-    search_end = "]\n\n"
-
-    if f"{IBM_SOAR_LINK} [" in description and search_end in description:
-        task_id = int(description[description.rindex("task_id=")+8:description.index(search_end)])
-    else:
-        task_id = int(description[description.index("task_id=")+8:description.index("\n\n")])
-
-    return task_id
+    return int(description[description.rindex("task_id=")+8:description.index('</a>')])
 
 def get_server_settings(opts, jira_label):
     """

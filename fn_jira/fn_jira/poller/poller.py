@@ -327,7 +327,7 @@ class PollerComponent(AppFunctionComponent):
                 for soar_case in soar_cases_list:
                     soar_tasks = soar_case.get("tasks") # Get the list of tasks from the SOAR case if they exist
                     for jira_issue in jira_issues_with_soar_case:
-                        jira_issue_description = jira_issue.get("fields").get("description") # Get the description of the Jira issue
+                        jira_issue_description = jira_issue.get("renderedFields").get("description") # Get the description of the Jira issue
                         # Check if the Jira issue is linked to a SOAR task that needs to be updated
                         if soar_tasks and check_jira_issue_linked_to_task(jira_issue_description):
                             task_id = get_id_from_jira_issue_description(jira_issue_description)
