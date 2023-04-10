@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1680271680563,
+  "export_date": 1681127816722,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1078,13 +1078,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 35,
+  "id": 40,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1680271679091,
+      "create_date": 1681127815372,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1093,7 +1093,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1680271679091,
+      "update_date": 1681127815372,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2915,7 +2915,26 @@
   ],
   "regulators": null,
   "roles": [],
-  "scripts": [],
+  "scripts": [
+    {
+      "actions": [],
+      "created_date": 1680268045113,
+      "description": "",
+      "enabled": false,
+      "export_key": "No search results",
+      "id": 80,
+      "language": "python3",
+      "last_modified_by": "f@example.com",
+      "last_modified_time": 1680268263354,
+      "name": "No search results",
+      "object_type": "artifact",
+      "playbook_handle": null,
+      "programmatic_name": "example_ldap_utilities_toggle_access_no_search_results",
+      "script_text": "incident.addNote(f\"No entries found for {artifact.value}\")",
+      "tags": [],
+      "uuid": "4546bfdd-a324-47b2-9f14-0b6a466374e8"
+    }
+  ],
   "server_version": {
     "build_number": 7899,
     "major": 45,

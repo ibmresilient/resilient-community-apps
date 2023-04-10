@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Generated with resilient-sdk v48.0.4034
 
-"""Generate the Resilient customizations required for fn_ldap_utilities"""
+"""Generate the SOAR customizations required for fn_ldap_utilities"""
 
 import base64
 import os
@@ -30,7 +30,7 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [u"ldap_query_results"],
         "automatic_tasks": [],
-        "scripts": [],
+        "scripts": [u"No search results"],
         "playbooks": [u"example_ldap_utilities_add", u"example_ldap_utilities_add_users_to_groups", u"example_ldap_utilities_remove_users_from_groups", u"example_ldap_utilities_search", u"example_ldap_utilities_set_password", u"example_ldap_utilities_toggle_access", u"example_ldap_utilities_update"]
     }
 
@@ -66,6 +66,8 @@ def customization_data(client=None):
         - ldap_domain_name
     - Data Tables:
         - ldap_query_results
+    - Scripts:
+        - No search results
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

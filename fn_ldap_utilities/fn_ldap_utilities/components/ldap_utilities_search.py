@@ -136,15 +136,19 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Attempting to Search")
 
         try:
+            # Perform a paged search on the LDAP server
             res = conn.search(
                 search_base=input_ldap_search_base,
                 search_filter=input_ldap_search_filter,
                 attributes=input_ldap_search_attributes,
                 paged_size=PAGED_SIZE
             )
+            # Add the search results to the `all_entries` list
             all_entries.extend(loads(conn.response_to_json())["entries"])
+            # Get the cookies from the search
             cookie = conn.result['controls'][cookie_path]['value']['cookie']
             while cookie:
+                #Perform a paged search with the cookies from the last search
                 conn.search(
                     search_base=input_ldap_search_base,
                     search_filter=input_ldap_search_filter,
@@ -152,7 +156,9 @@ class FunctionComponent(AppFunctionComponent):
                     paged_size=PAGED_SIZE,
                     paged_cookie=cookie
                 )
+                # Add the search results to the `all_entries` list
                 all_entries.extend(loads(conn.response_to_json())["entries"])
+                # Get the cookies from the search
                 cookie = conn.result['controls'][cookie_path]['value']['cookie']
 
             if res and len(all_entries) > 0:
