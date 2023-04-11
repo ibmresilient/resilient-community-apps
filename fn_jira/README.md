@@ -213,7 +213,7 @@ This is especially relevant if you have required custom _close_ fields that need
 When overriding the template in App Host, specify the file path for each file as `/var/rescircuits`.
 
 Below are the default templates used which can be copied, modified, and used with app_config's
-`soar_create_case_template`, `soar_update_case_template`, `soar_update_task_template`, and `soar_close_case_template` settings to override the default templates.
+`soar_create_case_template`, `soar_update_case_template`, and `soar_close_case_template` settings to override the default templates.
 
 <details><summary>soar_create_case_template.jinja</summary>
 
@@ -221,7 +221,7 @@ Below are the default templates used which can be copied, modified, and used wit
 {
   {# JINJA template for creating a new SOAR incident from an endpoint #}
   "name": "{{ fields["summary"] }}",
-  "description": {% if fields["description"] is none %} null {% else %} "{{ fields["description"] }}" {% endif %},
+  "description": {% if renderedFields["description"] is none %} null {% else %} "{{ renderedFields["description"] }}" {% endif %},
   "severity_code": "{{ fields["priority"]["name"] }}",
   "create_date": {{ fields["created"] }},
   "discovered_date": {{ fields["created"] }},
@@ -233,12 +233,13 @@ Below are the default templates used which can be copied, modified, and used wit
     "jira_server": "{{ jira_server }}",
     "jira_url": "{{ url }}",
     "jira_project_key": "{{ fields["project"]["key"] }}",
-    "jira_issue_status": "{{ fields["status"]["name"] }}"
+    "jira_issue_status": "{{ fields["status"]["name"] }}",
+    "jira_linked_to_incident": true
   },
   {# add comments as necessary #}
   "comments": [
-    {% for note in fields["comment"] %}
-      { "text": { "format": "text", "content": "{{ note }}" }, "type": "incident" }
+    {% for note in renderedFields["comment"] %}
+      { "text": { "format": "html", "content": "{{ note }}" }, "type": "incident" }
       {% if not loop.last %}
         ,
       {% endif %}
@@ -256,16 +257,6 @@ Below are the default templates used which can be copied, modified, and used wit
   {# JINJA template for updating a new SOAR incident from an endpoint #}
   "version": {{ soar["vers"] + 1 }},
   "changes": [
-      {
-        "old_value": {"text": "{{ soar["name"] }}"},
-        "new_value": {"text": "{{ jira["fields"]["summary"] }}"},
-        "field": {"name": "name"}
-      },
-      {
-        "old_value": {"textarea": {% if soar["description"] is none %} null {% else %} "{{ soar["description"] }}" {% endif %}},
-        "new_value": {"textarea": {% if jira["fields"]["description"] is none %} null {% else %} "{{ jira["fields"]["description"] }}" {% endif %}},
-        "field": {"name": "description"}
-      },
       {
         "old_value": {"text": "{{ soar["severity_code"] }}"},
         "new_value": {"text": "{{ jira["fields"]["priority"]["name"] }}"},
@@ -305,11 +296,6 @@ Below are the default templates used which can be copied, modified, and used wit
   "version": {{ soar["vers"] + 1 }},
   "changes": [
     {
-      "old_value": {"text": "A"},
-      "new_value": {"text": "C"},
-      "field": {"name": "plan_status"}
-    },
-    {
       "old_value": {"text": null},
       "new_value": {"text": "Resolved"},
       "field": {"name": "resolution_id"}
@@ -323,6 +309,11 @@ Below are the default templates used which can be copied, modified, and used wit
       "old_value": {"text": "{{ soar["properties"]["jira_issue_status"] }}"},
       "new_value": {"text": "{{ jira["fields"]["status"]["name"] }}"},
       "field": {"name": "jira_issue_status"}
+    },
+    {
+      "old_value": {"text": "A"},
+      "new_value": {"text": "C"},
+      "field": {"name": "plan_status"}
     }
   ]
 }
@@ -1030,18 +1021,25 @@ password=<jira user password or API Key>
 #consumer_key_name = <oauth consumer key - from Jira incoming link settings>
 #private_rsa_key_file_path = <private RSA key matched with public key on Jira>
 # Maximum time in seconds to wait before timeout
-timeout=10
+timeout=30
 # Data table name to hold data for tasks synced to Jira
 jira_dt_name=jira_task_references
 # Path to certificate. False to disable certificate verification.
-verify_cert=False
+verify_cert=True
 # Search filters for Jira issue to sync with SOAR cases.
 poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search
 max_issues_returned = 50
 # Proxys to use
-#http_proxy=
 #https_proxy=
+# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# If templates under [fn_jira:global_settings] are configured, then templates
+#  that are configured under the individual Jira servers will be ignored.
+# See documentation section "Templates for SOAR Cases" for more details
+#soar_create_case_template=
+#soar_update_case_template=
+#soar_update_task_template=
+#soar_close_case_template=
 ```
 2. Either keep the label, jira_label1, or change it
 ```
@@ -1060,7 +1058,7 @@ password=<jira user password or API Key>
 #consumer_key_name = <oauth consumer key - from Jira incoming link settings>
 #private_rsa_key_file_path = <private RSA key matched with public key on Jira>
 # Maximum time in seconds to wait before timeout
-timeout=10
+timeout=30
 # Data table name to hold data for tasks synced to Jira
 jira_dt_name=jira_task_references
 # Path to certificate. False to disable certificate verification.
@@ -1070,8 +1068,15 @@ poller_filters= priority in (high, medium, low) and status in ('to do', 'in prog
 # Max number of issues that can be returned from Jira issue search
 max_issues_returned = 50
 # Proxys to use
-#http_proxy=
 #https_proxy=
+# OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
+# If templates under [fn_jira:global_settings] are configured, then templates
+#  that are configured under the individual Jira servers will be ignored.
+# See documentation section "Templates for SOAR Cases" for more details
+#soar_create_case_template=
+#soar_update_case_template=
+#soar_update_task_template=
+#soar_close_case_template=
 ```
 
 ## Creating workflows when server/servers in app.config are labeled
@@ -1089,7 +1094,7 @@ The following must be added to the app.config for the poller to run:
 ```
 [fn_jira:global_settings]
 # Maximum time in seconds to wait before timeout.
-timeout=10
+timeout=30
 # Interval to poll Jira for changes (in seconds)
 # When polling_interval equals 0 the poller is off
 polling_interval=0
@@ -1097,7 +1102,7 @@ polling_lookback=60
 # Search filters for Jira issue to sync with SOAR cases.
 # If poller_filters under [fn_jira:global_settings] is configured, then poller_filters
 #  that are configured under the individual Jira servers will be ignored
-poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
+#poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search.
 # If max_issues_returned [fn_jira:global_settings] is configured, then max_issues_returned
 #  that are configured under the individual Jira servers will be ignored.
@@ -1105,7 +1110,6 @@ max_issues_returned = 50
 # Proxys to use
 # If proxys are defined under [fn_jira:global_settings], then proxys defined
 #  under the individual Jira servers will be ignored
-#http_proxy=
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # If templates under [fn_jira:global_settings] are configured, then templates

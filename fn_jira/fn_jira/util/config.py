@@ -9,7 +9,7 @@ def config_section_data():
     return u"""
 [fn_jira:global_settings]
 # Maximum time in seconds to wait before timeout.
-timeout=10
+timeout=30
 # Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
 #  same timezone as the Jira servers timezone. Value must start with + or -, then hours followed by : and then minutes.
 # If timezone_offset under [fn_jira:global_settings] is configured, then timezone_offset
@@ -54,7 +54,7 @@ password=<jira user password or API Key>
 #consumer_key_name = <oauth consumer key - from Jira incoming link settings>
 #private_rsa_key_file_path = <private RSA key matched with public key on Jira>
 # Maximum time in seconds to wait before timeout
-#timeout=10
+#timeout=30
 # Data table name to hold data for tasks synced to Jira
 jira_dt_name=jira_task_references
 # Path to certificate. False to disable certificate verification.
@@ -89,7 +89,7 @@ password=<jira user password or API Key>
 #consumer_key_name = <oauth consumer key - from Jira incoming link settings>
 #private_rsa_key_file_path = <private RSA key matched with public key on Jira>
 # Maximum time in seconds to wait before timeout
-#timeout=10
+#timeout=30
 # Data table name to hold data for tasks synced to Jira
 jira_dt_name=jira_task_references
 # Path to certificate. False to disable certificate verification.
