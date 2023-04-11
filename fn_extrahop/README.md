@@ -263,13 +263,18 @@ The poller provides the following functionality.
 
 * For any new detections discovered, creates a  matching incident in the SOAR platform.
 * The ExtraHop detections Ticket ID is assigned the SOAR case value.
-* The playbook `Extrahop Reveal(x): Update Case` is triggered by automatically to update an incident/case.
-* The automatic rule Enhances the incidents by adding artifacts and data tables with detection and device information from the matching ExtraHop detection.
-* Can be configured to filter the detections which are escalated to the SOAR incidents.  
-* Closes SOAR incidents if the corresponding ExtraHop detections are closed.
-* Closes ExtraHop detections if the corresponding SOAR incidents are closed.
-* Updates  a notification property in the ExtraHop custom tab if information for a SOAR incident if the corresponding ExtraHop detection is updated.
-* Adds a note to an ExtraHop detection when a matching SOAR incident is created.
+* The playbook `Extrahop Reveal(x): Update Case` is triggered automatically to update an incident/case.
+* The automatic playbook enhances the case/incident by adding artifacts and data tables with detection and device information from the matching ExtraHop detection.
+* Can be configured to filter the detections which are escalated to the SOAR cases.  
+* Closes SOAR case if the corresponding ExtraHop detections are closed.
+* Closes ExtraHop detections if the corresponding SOAR cases are closed.
+* Updates a notification property in the ExtraHop custom tab if information for a SOAR case if the corresponding ExtraHop detection is updated.
+* Adds a note to an ExtraHop detection when a matching SOAR case is created.
+
+**NOTE** Starting with version 1.1.0 of the ExtraHop app for SOAR:
+* The poller uses ExtraHop detection `mod_time` field to determine which detections to pull in to SOAR.
+* The poller includes an optional `polling_lookback` parameter in the app.config that can be used to look back the specified number of minutes when the poller starts or restarts to pull in "older" detections.  If not specified in the app.config, the poller uses a look back of zero minutes.
+* The function `ExtraHop Reveal(x) search detections` takes an optional `mod_time` parameter used for searching detections in ExtraHop.
 
 The following screenshot shows examples of SOAR incidents created by the poller from ExtraHop detections:
 
@@ -315,9 +320,9 @@ The function provides the following functionality.
 
 An example playbook that uses this SOAR function is `Extrahop Reveal(x) Update Detection`.
 
-* A note is added to the ExtraHop detection when a matching SOAR incident is closed. 
+* A note is added to the ExtraHop detection when a matching SOAR case is closed. 
   
-The playbookis initiated by the automatic data table rule `Extrahop Reveal(x): Update Detection` when a SOAR incident is closed.
+The automatic data table playbook `Extrahop Reveal(x): Update Detection` is triggered when a SOAR case is closed.
 
 The following screenshot shows an example of a note added to an ExtraHop detection:
 
@@ -342,26 +347,26 @@ The following screenshot shows an example of a note added to an ExtraHop detecti
 
 ```python
 results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
   "content": {
     "result": "success"
   },
+  "raw": null,
   "inputs": {
-    "extrahop_detection_id": 3,
-    "extrahop_note": "\nIBM SOAR 16/05/2022 15:13:37\n[SOAR Case - 4305](https://127.0.0.1:1443/#incidents/4305)\n[SOAR case - \u00274305\u0027](Closed with resolution summary: \u0027test closed.\u0027)",
-    "extrahop_update_time": 0
+    "extrahop_update_time": 0,
+    "extrahop_note": "\nIBM SOAR 10/04/2023 15:36:28\n[SOAR Case - 3080](https://host0.ibm.com:443/#incidents/3080)\nIBM SOAR 10/04/2023 14:00:50\n[SOAR Case - 3390](https://host1.ibm.com:443/#incidents/3390)\nIBM SOAR 2023-04-10 14:18:35\n[SOAR case - '3390'](Closed with resolution summary: 'Not an issue')",
+    "extrahop_detection_id": 4294967305
   },
   "metrics": {
-    "execution_time_ms": 892,
-    "host": "myhost.ibm.com",
+    "version": "1.0",
     "package": "fn-extrahop",
     "package_version": "1.0.0",
-    "timestamp": "2022-05-16 15:29:16",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
+    "host": "MBP",
+    "execution_time_ms": 4470,
+    "timestamp": "2023-04-10 14:18:48"
+  }
 }
 ```
 
@@ -372,22 +377,22 @@ results = {
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_update_detection pre processing script ##
+##  ExtraHop - pb_extrahop_rx_update_detection pre processing script ##
 import re
 inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 
-UPD_DET_DATETIME = workflow.properties.update_detection_note_result.metrics["timestamp"]
+UPD_DET_DATETIME = playbook.functions.results.get_detection_note_result.metrics.get("timestamp", None)
 SUMMARY = re.sub('<[^<]+?>', '', incident.resolution_summary.content)
 
 
 def get_current_note():
     # Get old note
-    note = u''
-    get_detection_note_content = workflow.properties.get_detection_note_result.content
-    note_obj = get_detection_note_content["result"]
+    note = ''
+    get_detection_note_content = playbook.functions.results.get_detection_note_result.content
+    note_obj = get_detection_note_content.get("result", {})
     if not note_obj:
         raise ValueError("Existing ExtraHop detection note not found.")
-    note = note_obj["note"]
+    note = note_obj.get("note", None)
     return note
 
 
@@ -404,58 +409,57 @@ def main():
     inputs.extrahop_note = '\n'.join([detection_note if detection_note else "", make_summary_note()])
     inputs.extrahop_update_time = 0
 main()
-
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Pre-Process Script:</summary>
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_update_detection post processing script ##
+##  ExtraHop - pb_extrahop_rx_update_detection post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_add_detection_note"
-WF_NAME = "ExtraHop Reveal(x): update detection"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Update Detection"
+results = playbook.functions.results.add_detection_note_result
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
-    note_text = u''
-    detection_id = INPUTS["extrahop_detection_id"]
+    note_text = ''
+    detection_id = INPUTS.get("extrahop_detection_id", None)
     if CONTENT:
-        result = CONTENT.result
+        result = CONTENT.get("result", None)
         if result == "success":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully added closure resolution note to " \
-                        u"ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Successfully added closure resolution note to " \
+                        "ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         elif result.get("error"):
-            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
-                        u"detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-            note_text += u"<br>Error code: <b>{0}</b>, Error <b>{1}<b>.".format(result.get("error"), result.get("text"))
+            note_text += "ExtraHop Integration: Playbook <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
+                         "detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text += "<br>Error code: <b>{0}</b>, Error <b>{1}<b>.".format(result.get("error"), result.get("text"))
         elif result == "failed":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
-                        u"detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
+                        "detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
-                        u"detection <b>{1}</b> with unexpected response for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-                .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Failed to add closure resolution note to ExtraHop " \
+                        "detection <b>{1}</b> with unexpected response for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+                .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to add closure resolution note to ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters" \
-                     u" <b>{3}</b> ."\
-            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to add closure resolution note to ExtraHop detection <b>{1}</b> for SOAR function <b>{2}</b> with parameters" \
+                     " <b>{3}</b> ."\
+            .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
 
 ```
-
 </p>
 </details>
 
@@ -473,7 +477,7 @@ An example playbook that uses this SOAR function is `Extrahop Reveal(x): Assign 
 
 * A note is added to the SOAR incident with the status of the action. 
   
-The olaybook is initiated by the manual data table rule `Extrahop Reveal(x): Assign Tag` for data table `ExtraGop Devices`.
+The playbook is initiated by the manual data table menu item `Extrahop Reveal(x): Assign Tag` for data table `ExtraGop Devices`.
 
    ![screenshot: fn-extrahop-revealx-assign-tag-action](./doc/screenshots/fn-extrahop-revealx-assign-tag-action.png)
 
@@ -530,15 +534,15 @@ results = {
 <p>
 
 ```python
-tag_name = rule.properties.extrahop_tag_name
-get_tags_content = workflow.properties.get_tags_result.content
+tag_name = playbook.inputs.extrahop_tag_name
+get_tags_content = playbook.functions.results.get_tags_results.get("content", {})
 inputs.extrahop_device_ids = str(row.devs_id)
 if tag_name is None:
     raise ValueError("The tag name is not set")
 inputs.extrahop_tag_id = None
-for tag in get_tags_content["result"]:
-    if tag_name == tag["name"]:
-        inputs.extrahop_tag_id = tag["id"]
+for tag in get_tags_content.get("result", []):
+    if tag_name == tag.get("name", None):
+        inputs.extrahop_tag_id = tag.get("id", None)
         break
 if not inputs.extrahop_tag_id:
     raise ValueError("Tag {} not found.".format(tag_name))
@@ -552,36 +556,37 @@ if not inputs.extrahop_tag_id:
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_assign_tag post processing script ##
+##  ExtraHop - pb_extrahop_rx_assign_tag post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_assign_tag"
-WF_NAME = "ExtraHop Reveal(x): assign tag"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Assign Tag"
+results = playbook.functions.results.assign_tag_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
     note_text = u''
-    tag_name = rule.properties.extrahop_tag_name
+    tag_name = playbook.inputs.extrahop_tag_name
     tag = INPUTS.get("extrahop_tag_name")
     if CONTENT:
-        result = CONTENT.result
+        result = CONTENT.get("result", None)
         if result == "success":
             device_id = INPUTS.get("extrahop_device_ids")
             tag_id = INPUTS.get("extrahop_tag_id")
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully assigned tag <b>'{1}'</b> with id <b>{2}</b> to device id <b>{3}</b> for SOAR " \
-                        u"function <b>{4}</b> with parameters <b>{5}</b>.".format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Successfully assigned tag <b>'{1}'</b> with id <b>{2}</b> to device id <b>{3}</b> for SOAR " \
+                        "function <b>{4}</b> with parameters <b>{5}</b>.".format(PB_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
         elif result == "failed":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to assign tag <b>{1}</b> with id <b>{2}</b> to device id <b>{3}</b> for " \
-                        u"SOAR function <b>{4}</b> with parameters <b>{5}</b>.".format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Failed to assign tag <b>{1}</b> with id <b>{2}</b> to device id <b>{3}</b> for " \
+                        "SOAR function <b>{4}</b> with parameters <b>{5}</b>.".format(PB_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Assign tag <b>{1}</b> with id <b>{2}</b> to device id <b>{3}</b> failed with unexpected " \
-                        u"response for SOAR function <b>{4}</b> with parameters <b>{5}</b>.".format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Assign tag <b>{1}</b> with id <b>{2}</b> to device id <b>{3}</b> failed with unexpected " \
+                        "response for SOAR function <b>{4}</b> with parameters <b>{5}</b>.".format(PB_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to assign tag <b>{1}</b> with id  <b>{2}</b> to device id <b>{3}</b> for SOAR function <b>{4}</b> with parameters <b>{5}</b>."\
-            .format(WF_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to assign tag <b>{1}</b> with id  <b>{2}</b> to device id <b>{3}</b> for SOAR function <b>{4}</b> with parameters <b>{5}</b>."\
+            .format(PB_NAME, tag_name, tag_id, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
@@ -594,7 +599,7 @@ main()
 
 ---
 ## Function - Extrahop Reveal(x) create tag
-Create a new tag for  Extrahop Reveal(x).  Parameter tag_name.
+Create a new tag for Extrahop Reveal(x).  Parameter tag_name.
 
    ![screenshot: fn-extrahop-revealx-create-tag ](./doc/screenshots/fn-extrahop-revealx-create-tag.png)
 
@@ -662,12 +667,10 @@ results = {
 <p>
 
 ```python
-inputs.extrahop_tag_name = rule.properties.extrahop_tag_name
+inputs.extrahop_tag_name = playbook.inputs.extrahop_tag_name
 if inputs.extrahop_tag_name is None:
     raise ValueError("The tag name is not set")
-
 ```
-
 </p>
 </details>
 
@@ -678,42 +681,39 @@ if inputs.extrahop_tag_name is None:
 ##  ExtraHop - wf_extrahop_rx_create_tag post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_create_tag"
-WF_NAME = "ExtraHop Reveal(x): create tag"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Create Tag"
+results = playbook.functions.results.create_tag_result
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 
 # Processing
-def main():
-    note_text = u''
-    tag = INPUTS.get("extrahop_tag_name")
-    if CONTENT:
-        result = CONTENT.result
-        if result == "success":
-            workflow.addProperty("tag_exists", {})
-            tag = INPUTS.get("extrahop_tag_name")
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully created tag <b>'{1}'</b> for SOAR " \
-                        u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
-        elif result == "failed":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to create tag <b>'{1}'</b> for " \
-                        u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
-        elif result == "exists":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A 422 (tag name exists) error was thrown while to create tag <b>'{1}'</b> for " \
-                        u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
-        else:
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Create tag <b>'{1}'</b> failed with unexpected " \
-                        u"response for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
+
+note_text = u''
+tag = INPUTS.get("extrahop_tag_name")
+if CONTENT:
+    result = CONTENT.get("result", None)
+    if result == "success":
+        playbook.addProperty("tag_created", {})
+        tag = INPUTS.get("extrahop_tag_name")
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Successfully created tag <b>'{1}'</b> for SOAR " \
+                    "function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+    elif result == "failed":
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Failed to create tag <b>'{1}'</b> for " \
+                    "SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+    elif result == "exists":
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: A 422 (tag name exists) error was thrown while to create tag <b>'{1}'</b> for " \
+                    "SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to create a tag <b>'{1}'</b>for SOAR function <b>{2}</b> with parameters <b>{3}</b> ."\
-            .format(WF_NAME, unicode(tag), FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: Create tag <b>'{1}'</b> failed with unexpected " \
+                    "response for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+else:
+    note_text += "ExtraHop Reveal(x): Playbook<b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                 "to create a tag <b>'{1}'</b>for SOAR function <b>{2}</b> with parameters <b>{3}</b> ."\
+            .format(PB_NAME, tag, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
-    incident.addNote(helper.createRichText(note_text))
-
-main()
-
+incident.addNote(helper.createRichText(note_text))
 ```
-
 </p>
 </details>
 
@@ -836,27 +836,29 @@ None
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_get_activitymaps post processing script ##
+##  ExtraHop - pb_extrahop_rx_get_activitymaps post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_activitymaps"
-WF_NAME = "ExtraHop Reveal(x): get activitymaps"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Get Activitymaps"
+results = playbook.functions.results.get_activitymap_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_activitymaps"
-DATA_TBL_FIELDS = ["ams_description", "ams_id", "mod_time", "mode", "ams_name", "owner", "rights", "short_code",
+DATA_TBL_FIELDS = ["ams_description", "ams_id", "mode", "ams_name", "owner", "rights", "short_code",
                    "show_alert_status", "walks", "weighting"]
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
-        ams = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Activitymaps returned for SOAR " \
-                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(ams), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        ams = CONTENT.get("result")
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: There were <b>{1}</b> Activitymaps returned for SOAR " \
+                    "function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, len(ams), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if ams:
             for am in ams:
                 newrow = incident.addRow(DATA_TABLE)
                 newrow.query_execution_date = QUERY_EXECUTION_DATE
+                newrow.mod_time = am.get("mod_time", None)
                 for f1 in DATA_TBL_FIELDS:
                     f2 = f1
                     if f1.startswith("ams_"):
@@ -870,26 +872,26 @@ def main():
                             for w in am[f2]:
                                 for kw, vw in w.items():
                                     if kw == "origins":
-                                        tbl += u"<div><b>origins:</b></div>"
+                                        tbl += "<div><b>origins:</b></div>"
                                         for o in vw:
                                             for k, v in o.items():
                                                 tbl += u"<div><b>&emsp;{0}:</b>{1}</div>".format(k, v)
-                                        tbl += u"<br>"
+                                        tbl += "<br>"
                                     elif kw == "steps":
-                                        tbl += u"<div><b>steps:</b></div>"
+                                        tbl += "<div><b>steps:</b></div>"
                                         for s in vw:
                                             relationships = s.get("relationships")
                                             if relationships:
-                                                tbl += u"<div><b>&emsp;relationships:</b></div>"
+                                                tbl += "<div><b>&emsp;relationships:</b></div>"
                                                 for r in relationships:
                                                     for k, v in r.items():
-                                                        tbl += u"<div><b>&emsp;&emsp;{0}:</b>{1}</div>".format(k, v)
-                                                tbl += u"<br>"
-                                        tbl += u"<br>"
+                                                        tbl += "<div><b>&emsp;&emsp;{0}:</b>{1}</div>".format(k, v)
+                                                tbl += "<br>"
+                                        tbl += "<br>"
                                     else:
-                                        tbl += u"<div><b>{}:</b></div>".format(kw)
-                                        tbl += u"<div><b>&emsp{}</b></div>".format(vw)
-                            tbl += u"<br>"
+                                        tbl += "<div><b>{}:</b></div>".format(kw)
+                                        tbl += "<div><b>&emsp{}</b></div>".format(vw)
+                            tbl += "<br>"
                             obj_cnt += 1
                             newrow[f1] = tbl
                         else:
@@ -898,15 +900,16 @@ def main():
                         newrow[f1] = str(am[f2])
                     else:
                         newrow[f1] = "{}".format(am[f2])
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Activitymaps")
+            note_text += "<br>The data table <b>{0}</b> has been updated".format("Extrahop Activitymaps")
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get activitymaps for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get activitymaps for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
+
 
 ```
 
@@ -929,7 +932,7 @@ An example playbook that uses this SOAR function is `Extrahop Reveal(x): Update 
 
 * The current note is retrieved from the ExtraHop detection when a matching SOAR incident is closed. 
   
-The playbook is initiated by the automatic data table `Extrahop Reveal(x): Update Detection` when a SOAR case/incident is closed.
+The automatic data table playbook `Extrahop Reveal(x): Update Detection` is initiated when a SOAR case/incident is closed.
 
 <details><summary>Inputs:</summary>
 <p>
@@ -981,6 +984,10 @@ results = {
 
 ```python
 inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
+inputs.incident_id = incident.id
+inputs.soar_inc_owner_id = incident.owner_id
+inputs.soar_inc_plan_status = incident.plan_status
+inputs.soar_inc_resolution_id = incident.resolution_id
 ```
 
 </p>
@@ -990,35 +997,37 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_update_detection post processing script ##
+##  ExtraHop - pb_extrahop_rx_update_setection post processing script ##
 #  Globals
-FN_NAME = "funct_extrahop_rx_get_detection_note"
-WF_NAME = "ExtraHop Reveal(x): update detection"
-CONTENT = results.content
-INPUTS = results.inputs
+FN_NAME = "funct_extrahop_rx_update_detection"
+PB_NAME = "Extrahop Reveal(x): Update Detection"
+results = playbook.functions.results.update_detection_result
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
-        if CONTENT.get("result"):
-            result = CONTENT.result
-            if result.get("note"):
-                workflow.addProperty("get_note_ok", {})
-        elif CONTENT.get("error"):
-            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Get detection note failed for " \
-                        u"SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-            note_text += u"<br>Error code: <b>{0}</b>, Error <b>{1}<b>.".format(CONTENT.get("error"), CONTENT.get("text"))
+        result = CONTENT.get("result", None)
+        if result == "success":
+            playbook.addProperty("update_detection_ok", {})
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Successfully updated the detection status for SOAR " \
+                        "function <b>{1}</b> with parameters <b>{2}</b>.".format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        elif result == "failed":
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Failed to update the detection status for " \
+                        "SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        else:
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Update detection status failed with unexpected " \
+                        "response for SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get a detection note for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-    if note_text:
-        incident.addNote(helper.createRichText(note_text))
+        note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to update the detection status <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+    incident.addNote(helper.createRichText(note_text))
 
 main()
-
 ```
 
 </p>
@@ -1144,28 +1153,110 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_update_incident post processing script ##
+##  ExtraHop - pb_extrahop_rx_search_detections post processing script ##
+# funct_extrahop_rx_get_detections
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_detections"
-WF_NAME = "ExtraHop Reveal(x): refresh incident"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Refresh Case"
+results = playbook.functions.results.get_detections_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_detections"
-DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
-                   "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
-                   "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
-# Read CATEGORY_MAP and TYPE_MAP from workflow property.
-CATEGORY_MAP = workflow.properties.category_map
-TYPE_MAP = workflow.properties.type_map
+
+# Read CATEGORY_MAP and TYPE_MAP from playbook property.
+CATEGORY_MAP = playbook.properties.category_map
+TYPE_MAP = playbook.properties.type_map
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 
 # Processing
+def process_dets(det):
+    detection_url = make_linkback_url(det.get("id", None))
+    detection_url_html = u'<div><b><a target="blank" href="{0}">{1}</a></b></div>' \
+        .format(detection_url, det.get("id", None))
+    newrow = incident.addRow(DATA_TABLE)
+    newrow.query_execution_date = QUERY_EXECUTION_DATE
+    newrow.detection_url = detection_url_html
+    newrow.appliance_id = det.get("appliance_id", None)
+    newrow.assignee = det.get("assignee", None)
+    newrow.categories = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det.get("categories", [])))
+    newrow.det_description = det.get("description", None)
+    newrow.det_id = det.get("id", None)
+    newrow.is_user_created = str(det.get("is_user_created", None))
+    newrow.end_time = det.get("end_time", None)
+    newrow.mod_time = det.get("mod_time", None)
+    newrow.update_time = det.get("update_time", None)
+    newrow.start_time = det.get("start_time", None)
+    newrow.status = det.get("status", None)
+    newrow.title = det.get("title", None)
+    detection_type = det.get("type", None)
+    newrow.type = TYPE_MAP.get(detection_type) if detection_type and TYPE_MAP.get(detection_type) else detection_type
+    newrow.risk_score = det.get("risk_score", None)
+    newrow.resolution = det.get("resolution", None)
+    #newrow.ticket_url =  '<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det.get(f2, None), det.get(f2, None).split('/')[-1])
+    newrow.ticket_id = det.get("ticket_id", None)
+    newrow.properties = make_json_string(det.get("properties", {}))
+    newrow.participants = make_list_string(det.get("participants", []))
+    newrow.mitre_techniques = make_list_string(det.get("mitre_techniques", []))
+    newrow.mitre_tactics = make_list_string(det.get("mitre_tactics", []))
+
+    # Add participant artifacts
+    add_properties_artifacts(det.get("properties", {}))
+
+    # Add participant artifacts
+    add_participants_artifacts(det.get("det_id", None), det.get("participants", []))
+
+def make_json_string(detection_json):
+    """_summary_
+
+    Args:
+        det (json object): ExtraHop detection object 
+
+    Returns:
+        str : properties json object converted to a formatted string
+    """
+    tbl = ''
+    for i, j in detection_json.items():
+        if i == "suspicious_ipaddr":
+            det_type = "Suspicious IP Addresses"
+            value = j["value"]
+            tbl = '{0}<div><b>{1}:'.format(tbl, det_type)
+            tbl = '{0}:<div><b>{1}'.format(tbl, ", ".join("{}".format(i) for i in value))
+        else:
+            tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, i, j)
+        
+    return tbl
+
+def make_list_string(detection_list):
+    """_summary_
+
+    Args:
+        det (json object): ExtraHop detection object 
+
+    Returns:
+        str : properties json object converted to a formatted string
+
+"""
+
+    tbl = u''
+    for i in detection_list:
+        for k, v in i.items():
+            if k == "legacy_ids":
+                tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, k, ','.join(v))
+            elif k == "url":
+                tbl = '{0}<div><b>{1}:<a target="blank" href="{2}">{3}</a></div>' \
+                                .format(tbl, k, v, i["id"])
+            else:
+                tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, k, v)
+        tbl += u"<br>"
+
+    return tbl
+
 def make_linkback_url(det_id):
     """Create a url to link back to the detection.
 
     Args:
-        det_id (str/int): representing the detection.
+        det_id (str/int): id representing the detection.
 
     Returns:
         str: completed url for linkback
@@ -1181,94 +1272,57 @@ def addArtifact(artifact_type, artifact_value, description):
     """
     incident.addArtifact(artifact_type, artifact_value, description)
 
+def add_properties_artifacts(properties):
+    """Add IP Address artifacts of the detections properties.
+
+    Args:
+        properties (_type_): properties of the detections (json object)
+    """
+    for i, j in properties.items():
+        if i == "suspicious_ipaddr":
+            artifact_type = "IP Address"
+            artifact_type = "Suspicious IP Addresses"
+            value = j["value"]
+            for ip in value:
+                addArtifact(artifact_type, ip, "Suspicious IP address found by ExtraHop.")
+
+def add_participants_artifacts(det_id, participants):
+    """ Add artifacts of the participants 
+
+    Args:
+        participants (_type_): List of json objects 
+    """
+    for p in participants:
+        if p.get("object_type") == "ipaddr":
+            artifact_type = "IP Address"
+            addArtifact(artifact_type, p.get("object_value"),
+                        "Participant IP address in ExtraHop detection '{0}', role: '{1}'."
+                         .format(det_id, p.get("role")))
+        if p.get("hostname"):
+            artifact_type = "DNS Name"
+            addArtifact(artifact_type, p["hostname"],
+                        "Participant DNS name in ExtraHop detection '{0}', role: '{1}'."
+                        .format(det_id, p.get("role")))
+
 # Processing
 def main():
-    detection_id = INPUTS["extrahop_detection_id"]
+    detection_id = INPUTS.get("extrahop_detection_id")
     note_text = u''
     if CONTENT:
-        det = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A Detection was successfully returned for " \
+        det = CONTENT.get("result", {})
+        note_text = u"ExtraHop Reveal(x): Playbook <b>{0}</b>: A Detection was successfully returned for " \
                     u"detection ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
-            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                    .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if det:
-            detection_url = make_linkback_url(det["id"])
-            detection_url_html = u'<div><b><a target="blank" href="{0}">{1}</a></b></div>' \
-                         .format(detection_url, det["id"])
-            newrow = incident.addRow(DATA_TABLE)
-            newrow.query_execution_date = QUERY_EXECUTION_DATE
-            newrow.detection_url = detection_url_html
-            for f1 in DATA_TBL_FIELDS:
-                f2 = f1
-                if f1.startswith("det_"):
-                    f2 = f1.split('_', 1)[1]
-                if det[f2] is None or isinstance(det[f2], long):
-                    newrow[f1] = det[f2]
-                elif isinstance(det[f1], list):
-                    if f1 == "categories":
-                        newrow[f1] = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det[f2]))
-                    elif f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
-                        if f1 == "participants":
-                            for p in det[f2]:
-                                if p["object_type"] == "ipaddr":
-                                    artifact_type = "IP Address"
-                                    addArtifact(artifact_type, p["object_value"],
-                                                "Participant IP address in ExtraHop detection '{0}', role: '{1}'."
-                                                .format(det["id"], p["role"]))
-                                    if p["hostname"]:
-                                        artifact_type = "DNS Name"
-                                        addArtifact(artifact_type, p["hostname"],
-                                                    "Participant DNS name in ExtraHop detection '{0}', role: '{1}'."
-                                                    .format(det["id"], p["role"]))
-                        obj_cnt = 0
-                        tbl = u''
-                        for i in det[f2]:
-                            for k, v in i.items():
-                                if k == "legacy_ids":
-                                    tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
-                                elif k == "url":
-                                    tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>' \
-                                        .format(k, v, i["id"])
-                                else:
-                                    tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
-                            tbl += u"<br>"
-                            obj_cnt += 1
-                        newrow[f1] = tbl
-                    else:
-                        newrow[f1] = "{}".format(", ".join(det[f2]))
-                elif isinstance(det[f2], (bool, dict)):
-                    if f1 in ["properties"]:
-                        tbl = u''
-                        for i, j in det[f2].items():
-                            if i == "suspicious_ipaddr":
-                                artifact_type = "IP Address"
-                                type = "Suspicious IP Addresses"
-                                value = j["value"]
-                                for ip in value:
-                                    addArtifact(artifact_type, ip, "Suspicious IP address found by ExtraHop.")
-                                tbl += u'<div><b>{0}:'.format(type)
-                                tbl += u'<div><b>{0}'.format(", ".join("{}".format(i) for i in value))
-                            else:
-                                tbl += u'<div><b>{0}:</b>{1}</div>'.format(i, j)
-                        newrow[f1] = tbl
-                    else:
-                        newrow[f1] = str(det[f2])
-                else:
-                    if f1 == "type":
-                        newrow[f1] = TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
-                    elif f1 == "ticket_url":
-                        newrow[f1] =  u'<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det[f2], det[f2].split('/')[-1])
-                    else:
-                        newrow[f1] = "{}".format(det[f2])
+            process_dets(det)
             note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+        note_text += u"ExtraHop Reveal(x): Playbook<b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
                      u" with parameters <b>{3}</b>." \
-            .format(WF_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
-
-
 main()
 ```
 
@@ -1290,7 +1344,7 @@ An example playbook that uses this SOAR function is `Extrahop Reveal(x): search 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `ExtraHop Devices` is updated.
  
-The workflow is initiated by the manual incident menu item `ExtraHop Reveal(x): search devices`.
+The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): search devices`.
    
    ![screenshot: fn-extrahop-revealx-get-devices-action](./doc/screenshots/fn-extrahop-revealx-get-devices-action.png)
 
@@ -1401,25 +1455,25 @@ results = {
 
 ```python
 search_filters =  [ 
-    rule.properties.extrahop_device_field,
-    rule.properties.extrahop_device_operand,
-    rule.properties.extrahop_device_operator
+    "extrahop_device_field",
+    "extrahop_device_operand",
+    "extrahop_device_operator"
 ]
 for p in search_filters:
-    if p:
+    if hasattr(playbook.inputs, p) and playbook.inputs.get(p):
         raise ValueError("A search filter and Device ID are not allowed at the same time.")
         
-if rule.properties.extrahop_device_id:
-    inputs.extrahop_device_id = rule.properties.extrahop_device_id
+if playbook.inputs.extrahop_device_id:
+    inputs.extrahop_device_id = playbook.inputs.extrahop_device_id
     
-if rule.properties.extrahop_active_from:
-    inputs.extrahop_active_from = rule.properties.extrahop_active_from
-if rule.properties.extrahop_active_until:
-    inputs.extrahop_active_until = rule.properties.extrahop_active_until
-if rule.properties.extrahop_limit:
-    inputs.extrahop_limit = rule.properties.extrahop_limit
-if rule.properties.extrahop_offset:
-    inputs.extrahop_offset = rule.properties.extrahop_offset
+if playbook.inputs.extrahop_active_from:
+    inputs.extrahop_active_from = playbook.inputs.extrahop_active_from
+if playbook.inputs.extrahop_active_until:
+    inputs.extrahop_active_until = playbook.inputs.extrahop_active_until
+if playbook.inputs.extrahop_limit:
+    inputs.extrahop_limit = playbook.inputs.extrahop_limit
+if playbook.inputs.extrahop_offset:
+    inputs.extrahop_offset = playbook.inputs.extrahop_offset
 
 ```
 
@@ -1430,18 +1484,16 @@ if rule.properties.extrahop_offset:
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_get_devices post processing script ##
+##  ExtraHop - pb_extrahop_rx_get_devices post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_devices"
-WF_NAME = "ExtraHop Reveal(x): refresh incident"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Example: Extrahop Reveal(x) search devices"
+results = playbook.functions.results.get_devices_result
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Display subset of fields
 DATA_TABLE = "extrahop_devices"
-DATA_TBL_FIELDS = ["display_name", "devs_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
-                   "role", "vendor", "devs_id", "extrahop_id", "activity", "mod_time", "user_mod_time", "discover_time", 
-                   "last_seen_time"]
 LINKBACK_URL = "/extrahop/#/metrics/devices/{}.{}"
 
 
@@ -1449,76 +1501,65 @@ def make_linkback_url(dev_id):
     """Create a url to link back to the endpoint alert, case, etc.
 
     Args:
-        dev_id (str/int): representing the device etc.
+        dev_id (str/int): id representing the device etc.
 
     Returns:
         str: completed url for linkback
     """
-    return incident.properties.extrahop_console_url + LINKBACK_URL.format(incident.properties.extrahop_site_uuid, dev_id)
+    return incident.properties.extrahop_console_url + LINKBACK_URL.format(incident.properties.extrahop_site_uuid,
+                                                                          dev_id)
+
 
 def process_devs(dev):
     # Process a device result.
     newrow = incident.addRow(DATA_TABLE)
     newrow.query_execution_date = QUERY_EXECUTION_DATE
-    for f1 in DATA_TBL_FIELDS:
-        f2 = f1
-        if f1.startswith("devs_"):
-            f2 = f1.split('_', 1)[1]
-        if dev[f1] is None:
-            newrow[f1] = dev[f2]
-        elif isinstance(dev[f2], list):
-            newrow[f1] = "{}".format(", ".join(dev[f2]))
-        elif isinstance(dev[f2], bool):
-            newrow[f1] = str(dev[f2])
-        elif f1 in ["mod_time", "user_mod_time", "discover_time", "last_seen_time"]:
-            newrow[f1] = long(dev[f2])
-        else:
-            newrow[f1] = "{}".format(dev[f2])
+    newrow.display_name = dev.get("display_name", None)
+    newrow.devs_description = dev.get("description", None)
+    newrow.default_name = dev.get("default_name", None)
+    newrow.dns_name = dev.get("dns_name", None)
+    newrow.ipaddr4 = dev.get("ipaddr4", None)
+    newrow.ipaddr6 = dev.get("ipaddr6", None)
+    newrow.macaddr  = dev.get("macaddr", None)
+    newrow.role = dev.get("role", None)
+    newrow.vendor = dev.get("vendor", None)
+    newrow.devs_id = dev.get("id", None)
+    newrow.extrahop_id = dev.get("extrahop_id", None)
+    newrow.activity = dev.get("activity", None)
+    newrow.on_watchlist = str(dev.get("on_watchlist", None))
+    newrow.mod_time = dev.get("mod_time", None)
+    newrow.user_mod_time = dev.get("user_mod_time", None)              
+    newrow.discover_time = dev.get("discover_time", None)
+    newrow.last_seen_time = dev.get("last_seen_time", None)
     device_url = make_linkback_url(dev["extrahop_id"])
     device_url_html = u'<div><b><a target="blank" href="{1}">{2}</a></b></div>' \
-              .format("url", device_url, dev["extrahop_id"])
+        .format("url", device_url, dev["extrahop_id"])
     newrow.device_url = device_url_html
-
-def get_dev_ids():
-    # Get participant devs    
-    dev_ids = []
-    get_devices_content = workflow.properties.get_detections_result.content
-    devs = get_devices_content["result"]
-    participants = devs["participants"]
-    for p in participants:
-        if p["object_type"] == "device":
-            dev_ids.append(p["object_id"])
-    return dev_ids
-
 
 # Processing
 def main():
-    participant_dev_ids = get_dev_ids()
-    note_text = u''
+    device_id = INPUTS.get("extrahop_device_id")
+    note_text = ''
     if CONTENT:
-        devs = [d for d in CONTENT.result if d["id"] in participant_dev_ids]
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
-                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join(
-            "{}:{}".format(k, v) for k, v in INPUTS.items()))
-        if devs:
-            if isinstance(devs, list):
-                for dev in devs:
-                    process_devs(dev)
-            else:
-                process_devs(devs)
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
+        dev = CONTENT.get("result")
+        if dev:
+            note_text = "ExtraHop Integration: Workflow <b>{0}</b>: A Device was successfully returned for " \
+                        "device ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
+                .format(PB_NAME, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            process_devs(dev)
+            note_text += "<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
 
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get devices for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get device for device ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
+                     " with parameters <b>{3}</b>." \
+            .format(PB_NAME, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
-    #Unset the Detection update notification. 
-    incident.properties.extrahop_update_notification = None
-    
+
 main()
+
 ```
 
 </p>
@@ -1539,7 +1580,7 @@ An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Get Tag
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Tags` is updated.
  
-The workflow is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Tags`.
+The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Tags`.
 
    ![screenshot: fn-extrahop-revealx-get-tags-action](./doc/screenshots/fn-extrahop-revealx-get-tags-action.png)
 
@@ -1547,7 +1588,7 @@ The following screenshot shows an example of the data table updated by the funct
 
    ![screenshot: fn-extrahop-revealx-get-tags-datatable](./doc/screenshots/fn-extrahop-revealx-get-tags-datatable.png)
 
-The following screenshot shows an example of a note added to a SOAR incident:
+The following screenshot shows an example of a note added to a SOAR case:
 
    ![screenshot: fn-extrahop-revealx-get-tags-note](./doc/screenshots/fn-extrahop-revealx-get-tags-note.png)
 
@@ -1617,38 +1658,40 @@ if rule.properties.extrahop_tag_name is None:
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_get_tags post processing script ##
+##  ExtraHop - pb_extrahop_rx_get_tags post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_tags"
-WF_NAME = "ExtraHop Reveal(x): assign tag"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Get Tags"
+results = playbook.functions.results.get_tags_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DATA_TBL_FIELDS = ["am_description", "am_id", "mod_time", "mode", "name", "owner", "rights", "short_code", "show_alert_status", "walks", "weighting"]
+
 
 # Processing
 def main():
-    note_text = u''
-    tag_name = rule.properties.extrahop_tag_name
-    tag_id = None
-    
+    note_text = ''
     if CONTENT:
-        tags = CONTENT.result
+        tags = CONTENT.get("result", {})
+        note_text = "ExtraHop Integration: Playbook<b>{0}</b>: There were <b>{1}</b> Tags returned for SOAR function <b>{2}</b> "\
+                     "with parameters <b>{3}</b>."\
+        .format(PB_NAME, len(tags), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if tags:
             for tag in tags:
-                if tag_name == tag["name"]:
-                    tag_id = tag["id"]
-                    workflow.addProperty("tag_exists", {})
-                    break
-            if not tag_id:
-                note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Tag <b>'{1}'</b> not returned for SOAR function <b>{2}</b> "\
-                            u"with parameters <b>{3}</b>."\
-                    .format(WF_NAME, tag_name, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                newrow = incident.addRow("extrahop_tags")
+                newrow.query_execution_date = QUERY_EXECUTION_DATE
+                newrow.tag = tag.get("name")
+                newrow.mod_time = tag.get("mod_time")
+                newrow.tag_id = tag.get("id")
+            note_text += "<br>The data table <b>{0}</b> has been updated".format("Extrahop Tags")
 
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get tags for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-    if note_text:
-        incident.addNote(helper.createRichText(note_text))
+        note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get tags for SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+
+    incident.addNote(helper.createRichText(note_text))
 
 main()
 
@@ -1672,7 +1715,7 @@ An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Get Wat
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Watchlist` is updated.
  
-The workflow is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Watchlist`.
+The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Watchlist`.
 
    ![screenshot: fn-extrahop-revealx-get-watchlist-action](./doc/screenshots/fn-extrahop-revealx-get-watchlist-action.png)
 
@@ -1781,12 +1824,13 @@ None
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_get_watchlist post processing script ##
+##  ExtraHop - pb_extrahop_rx_get_watchlist post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_watchlist"
-WF_NAME = "ExtraHop Reveal(x): Get Watchlist"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Get Watchlist"
+results = playbook.functions.results.get_watchlist_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Display subset of fields
 DATA_TABLE = "extrahop_watchlist"
@@ -1794,11 +1838,11 @@ DATA_TBL_FIELDS = ["display_name", "ipaddr4", "ipaddr6", "macaddr", "extrahop_id
 
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
-        devs = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> devices returned in the Watchlist" \
-                    u" for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        devs = CONTENT.get("result", [])
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: There were <b>{1}</b> devices returned in the Watchlist" \
+                    " for SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if devs:
             for dev in devs:
                 newrow = incident.addRow("extrahop_watchlist")
@@ -1813,12 +1857,12 @@ def main():
                       newrow[f1] = str(dev[f2])
                   else:
                       newrow[f1] = "{}".format(dev[f2])
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+            note_text += "<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
 
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get the watchlist for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get the watchlist for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
@@ -1847,7 +1891,7 @@ An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search 
  
 The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Search Detections`.
 
-The following screenshot shows an example of the action inputs for the workflow:
+The following screenshot shows an example of the action inputs for the playbook:
 
    ![screenshot: fn-extrahop-revealx-search-detections-action](./doc/screenshots/fn-extrahop-revealx-search-detections-action.png)
 
@@ -1871,6 +1915,7 @@ The following screenshot shows an example of a note added to a SOAR incident:
 | `extrahop_active_from` | `number` | No | `-` | (Optional) The beginning timestamp for the request. Return only devices active after this time. Time is expressed in milliseconds since the epoch. 0 indicates the time of the request. |
 | `extrahop_active_until` | `number` | No | `-` | (Optional) The ending timestamp for the request. Return only devices active before this time. |
 | `extrahop_limit` | `number` | No | `-` | (Optional) Limit the number of devices returned to the specified maximum number. |
+| `extrahop_mod_time` | `number` | No | `-` | (Optional) Return detections that were modified on or after the specified date, expressed in milliseconds since the epoch. |
 | `extrahop_offset` | `number` | No | `-` | (Optional) Skip the specified number of devices. This parameter is often combined with the limit parameter to paginate result sets. |
 | `extrahop_search_filter` | `text` | No | `-` | The  filter criteria for Extrahop search results. |
 | `extrahop_sort` | `text` | No | `-` | Sorts returned detections by the specified fields. By default, detections are sorted by most recent update time and then ID in ascending order. |
@@ -2024,11 +2069,11 @@ results = {
 <p>
 
 ```python
-'##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
+##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##
 # Read CATEGORY_MAP and TYPE_MAP from workflow propertyself. 
 # Reverse the dict keys and values
-CATEGORY_MAP = {v: k for k, v in workflow.properties.category_map.items()}
-TYPE_MAP = {v: k for k, v in workflow.properties.type_map.items()}
+CATEGORY_MAP = {v: k for k, v in playbook.properties.category_map.items()}
+TYPE_MAP = {v: k for k, v in playbook.properties.type_map.items()}
 DOT_PARAMS = [
     "me",
     "none"
@@ -2056,25 +2101,25 @@ filter = {}
 search_filter = {}
 category = None
 detection_types = None
-if rule.properties.extrahop_detection_category:
-    category = CATEGORY_MAP[rule.properties.extrahop_detection_category]
-if rule.properties.extrahop_detection_types:
-    detection_types = [TYPE_MAP[d] for d in rule.properties.extrahop_detection_types]
+if playbook.inputs.extrahop_detection_category:
+    category = CATEGORY_MAP[playbook.inputs.extrahop_detection_category]
+if hasattr(playbook.inputs, "extrahop_detection_types"):
+    detection_types = [TYPE_MAP[d] for d in playbook.inputs.extrahop_detection_types]
 
 filter_props = {
-    "risk_score_min": get_prop(rule.properties.extrahop_detection_risk_score_min),
+    "risk_score_min": get_prop(playbook.inputs.extrahop_detection_risk_score_min),
     "types": get_prop(detection_types),
     "category": get_prop(category),
-    "assignee": get_prop(rule.properties.extrahop_detection_assignee, "list"),
-    "ticket_id": get_prop(rule.properties.extrahop_detection_ticket_id, "list"),
-    "status": get_prop(rule.properties.extrahop_detection_status),
-    "resolution": get_prop(rule.properties.extrahop_detection_resolution)
+    "assignee": get_prop(playbook.inputs.extrahop_detection_assignee, "list"),
+    "ticket_id": get_prop(playbook.inputs.extrahop_detection_ticket_id, "list"),
+    "status": get_prop(playbook.inputs.get("extrahop_detection_status") if hasattr(playbook.inputs, "extrahop_detection_status") else None),
+    "resolution": get_prop(playbook.inputs.get("extrahop_detection_resolution") if hasattr(playbook.inputs, "extrahop_detection_resolution") else None)
 }
 
 filter = {k: v for k, v in filter_props.items() if v}
 
 if filter:
-    if rule.properties.extrahop_detection_id:
+    if playbook.properties.extrahop_detection_id:
         raise ValueError("The search filter and Detecion ID are not allowed at the same time.")
 
     search_filter = {
@@ -2082,16 +2127,18 @@ if filter:
     }
     inputs.extrahop_search_filter = str(search_filter).replace("'", '"')
 
-if rule.properties.extrahop_active_from:
-    inputs.extrahop_active_from = rule.properties.extrahop_active_from
-if rule.properties.extrahop_active_until:
-    inputs.extrahop_active_until = rule.properties.extrahop_active_until
-if rule.properties.extrahop_limit:
-    inputs.extrahop_limit = rule.properties.extrahop_limit
-if rule.properties.extrahop_offset:
-    inputs.extrahop_offset = rule.properties.extrahop_offset
-if rule.properties.extrahop_update_time:
-    inputs.extrahop_update_time = rule.properties.extrahop_update_time
+if playbook.inputs.extrahop_active_from:
+    inputs.extrahop_active_from = playbook.inputs.extrahop_active_from
+if playbook.inputs.extrahop_active_until:
+    inputs.extrahop_active_until = playbook.inputs.extrahop_active_until
+if playbook.inputs.extrahop_limit:
+    inputs.extrahop_limit = playbook.inputs.extrahop_limit
+if playbook.inputs.extrahop_offset:
+    inputs.extrahop_offset = playbook.inputs.extrahop_offset
+if playbook.inputs.extrahop_update_time:
+    inputs.extrahop_update_time = playbook.inputs.extrahop_update_time
+if playbook.inputs.extrahop_mod_time:
+    inputs.extrahop_mod_time = playbook.inputs.extrahop_mod_time
 
 ```
 
@@ -2102,21 +2149,19 @@ if rule.properties.extrahop_update_time:
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_search_detections post processing script ##
+##  ExtraHop - pb_extrahop_rx_search_detections post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_detections"
-WF_NAME = "Example: Extrahop revealx search detections"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Revealx search detections"
+results = playbook.functions.results.search_detections_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_detections"
-DATA_TBL_FIELDS = ["appliance_id", "assignee", "categories", "det_description", "end_time", "det_id", "is_user_created",
-                   "mitre_tactics", "mitre_techniques", "participants", "properties", "resolution", "risk_score",
-                   "start_time", "status", "ticket_id", "ticket_url", "title", "type", "update_time"]
 
 # Read CATEGORY_MAP and TYPE_MAP from workflow property.
-CATEGORY_MAP = workflow.properties.category_map
-TYPE_MAP = workflow.properties.type_map
+CATEGORY_MAP = playbook.properties.category_map
+TYPE_MAP = playbook.properties.type_map
 
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 
@@ -2124,66 +2169,86 @@ LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 def process_dets(det):
     detection_url = make_linkback_url(det["id"])
     detection_url_html = u'<div><b><a target="blank" href="{0}">{1}</a></b></div>' \
-        .format(detection_url, det["id"])
+        .format(detection_url, det.get("id", None))
     newrow = incident.addRow(DATA_TABLE)
     newrow.query_execution_date = QUERY_EXECUTION_DATE
     newrow.detection_url = detection_url_html
-    for f1 in DATA_TBL_FIELDS:
-        f2 = f1
-        if f1.startswith("det_"):
-            f2 = f1.split('_', 1)[1]
-        if det[f2] is None or isinstance(det[f2], long):
-            newrow[f1] = det[f2]
-        elif isinstance(det[f1], list):
-            if f1 == "categories":
-                newrow[f1] = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det[f2]))
-            elif f1 in ["participants", "mitre_tactics", "mitre_techniques"]:
-                obj_cnt = 0
-                tbl = u''
-                for i in det[f2]:
-                    for k, v in i.items():
-                        if k == "legacy_ids":
-                            tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, ','.join(v))
-                        elif k == "url":
-                            tbl += u'<div><b>{0}:<a target="blank" href="{1}">{2}</a></div>' \
-                                .format(k, v, i["id"])
-                        else:
-                            tbl += u'<div><b>{0}:</b>{1}</div>'.format(k, v)
-                    tbl += u"<br>"
-                    obj_cnt += 1
-                newrow[f1] = tbl
-            else:
-                newrow[f1] = "{}".format(", ".join(det[f2]))
-        elif isinstance(det[f2], (bool, dict)):
-            if f1 in ["properties"]:
-                suspect_ip = False
-                tbl = u''
-                for i, j in det[f2].items():
-                    if i == "suspicious_ipaddr":
-                        artifact_type = "IP Address"
-                        type = "Suspicious IP Addresses"
-                        value = j["value"]
-                        tbl += u'<div><b>{0}:'.format(type)
-                        tbl += u'<div><b>{0}'.format(", ".join("{}".format(i) for i in value))
-                    else:
-                        tbl += u'<div><b>{0}:</b>{1}</div>'.format(i, j)
-                newrow[f1] = tbl
-            else:
-                newrow[f1] = str(det[f2])
+    newrow.appliance_id = det.get("appliance_id", None)
+    newrow.assignee = det.get("assignee", None)
+    newrow.categories = "{}".format(", ".join(CATEGORY_MAP[c] if CATEGORY_MAP.get(c) else c for c in det.get("categories", [])))
+    newrow.det_description = det.get("description", None)
+    newrow.det_id = det.get("id", None)
+    newrow.is_user_created = str(det.get("is_user_created", None))
+    newrow.end_time = det.get("end_time", None)
+    newrow.mod_time = det.get("mod_time", None)
+    newrow.update_time = det.get("update_time", None)
+    newrow.start_time = det.get("start_time", None)
+    newrow.status = det.get("status", None)
+    newrow.title = det.get("title", None)
+    detection_type = det.get("type", None)
+    newrow.type = TYPE_MAP.get(detection_type) if detection_type and TYPE_MAP.get(detection_type) else detection_type
+    newrow.risk_score = det.get("risk_score", None)
+    newrow.resolution = det.get("resolution", None)
+    #newrow.ticket_url =  '<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det.get(f2, None), det.get(f2, None).split('/')[-1])
+    newrow.ticket_id = det.get("ticket_id", None)
+    newrow.properties = make_properties_string(det)
+    newrow.participants = make_list_string(det.get("participants", []))
+    newrow.mitre_tactics = make_list_string(det.get("mitre_tactics", []))
+    newrow.mitre_techniques = make_list_string(det.get("mitre_techniques", []))
+
+def make_properties_string(det):
+    """_summary_
+
+    Args:
+        det (json object): ExtraHop detection object 
+
+    Returns:
+        str : properties json object converted to a formatted string
+    """
+    tbl = ''
+    properties = det.get("properties", {})
+    for i, j in properties.items():
+        if i == "suspicious_ipaddr":
+            det_type = "Suspicious IP Addresses"
+            value = j["value"]
+            tbl = '{0}<div><b>{1}:'.format(tbl, det_type)
+            tbl = '{0}:<div><b>{1}'.format(tbl, ", ".join("{}".format(i) for i in value))
         else:
-            if f1 == "type":
-                newrow[f1] = TYPE_MAP[det[f2]] if TYPE_MAP.get(det[f2]) else det[f2]
-            elif f1 == "ticket_url":
-                newrow[f1] =  u'<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det[f2], det[f2].split('/')[-1])
+            tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, i, j)
+        
+    return tbl
+
+def make_list_string(detection_list):
+    """_summary_
+
+    Args:
+        det (json object): ExtraHop detection object 
+
+    Returns:
+        str : properties json object converted to a formatted string
+
+"""
+
+    tbl = u''
+    for i in detection_list:
+        for k, v in i.items():
+            if k == "legacy_ids":
+                tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, k, ','.join(v))
+            elif k == "url":
+                tbl = '{0}<div><b>{1}:<a target="blank" href="{2}">{3}</a></div>' \
+                                .format(tbl, k, v, i["id"])
             else:
-                newrow[f1] = "{}".format(det[f2])
+                tbl = '{0}<div><b>{1}:</b>{2}</div>'.format(tbl, k, v)
+        tbl += u"<br>"
+
+    return tbl
 
 # Processing
 def make_linkback_url(det_id):
     """Create a url to link back to the detection.
 
     Args:
-        det_id (str/int): representing the detection.
+        det_id (str/int): id representing the detection.
 
     Returns:
         str: completed url for linkback
@@ -2192,21 +2257,21 @@ def make_linkback_url(det_id):
 
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
 
     if CONTENT:
-        dets = CONTENT.result
-        note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
-                    u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        dets = CONTENT.get("result", {})
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
+                    "function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         if dets:
             for det in dets:
                 process_dets(det)
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+            note_text += "<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
 
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to search detections for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to search detections for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+                    .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
     
@@ -2346,62 +2411,26 @@ results = {
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_search_devices pre processing script ##
-
-def get_prop(prop, type=None):
-    if prop:
-        return '{}'.format(prop)
-    else:
-        return None
-
-
-def main():
-    filter = {}
-    search_filter = {}
-    filter_props = {
-        "field": get_prop(rule.properties.extrahop_device_field),
-        "operand": get_prop(rule.properties.extrahop_device_operand),
-        "operator": get_prop(rule.properties.extrahop_device_operator)
-    }
-    filter = {k: v for k, v in filter_props.items() if v}
-
-    if filter and rule.properties.extrahop_device_id:
-        raise ValueError("The device ID and search filter shouldn't be set at the same time.")
-
-    if filter:
-        missing_props = []
-        for f in ["field", "operand", "operator"]:
-            if not filter.get(f, None):
-                missing_props.append(f)
-        if missing_props:
-            raise ValueError("The filter is missing properties: '{}'.".format(", ".join(missing_props)))
-
-        search_filter = {
-            "filter": filter
-        }
-
-    if rule.properties.extrahop_device_id:
-        search_filter = {
-            "filter": {
-                "field": "discovery_id",
-                "operator": "=",
-                "operand": str(rule.properties.extrahop_device_id)
-            }
-        }
-    if search_filter:
-        inputs.extrahop_search_filter = str(search_filter).replace("'", '"')
-    if rule.properties.extrahop_active_from:
-        inputs.extrahop_active_from = rule.properties.extrahop_active_from
-    if rule.properties.extrahop_active_until:
-        inputs.extrahop_active_until = rule.properties.extrahop_active_until
-    if rule.properties.extrahop_limit:
-        inputs.extrahop_limit = rule.properties.extrahop_limit
-    if rule.properties.extrahop_offset:
-        inputs.extrahop_offset = rule.properties.extrahop_offset
-
-
-main()
-
+search_filters =  [ 
+    "extrahop_device_field",
+    "extrahop_device_operand",
+    "extrahop_device_operator"
+]
+for p in search_filters:
+    if hasattr(playbook.inputs, p) and playbook.inputs.get(p):
+        raise ValueError("A search filter and Device ID are not allowed at the same time.")
+        
+if playbook.inputs.extrahop_device_id:
+    inputs.extrahop_device_id = playbook.inputs.extrahop_device_id
+    
+if playbook.inputs.extrahop_active_from:
+    inputs.extrahop_active_from = playbook.inputs.extrahop_active_from
+if playbook.inputs.extrahop_active_until:
+    inputs.extrahop_active_until = playbook.inputs.extrahop_active_until
+if playbook.inputs.extrahop_limit:
+    inputs.extrahop_limit = playbook.inputs.extrahop_limit
+if playbook.inputs.extrahop_offset:
+    inputs.extrahop_offset = playbook.inputs.extrahop_offset
 ```
 
 </p>
@@ -2411,19 +2440,16 @@ main()
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_search_devices post processing script ##
+##  ExtraHop - pb_extrahop_rx_search_devices post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_devices"
-WF_NAME = "ExtraHop Reveal(x): search devices"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Search Devices"
+results = playbook.functions.results.device_search_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 # Display subset of fields
 DATA_TABLE = "extrahop_devices"
-DATA_TBL_FIELDS = ["display_name", "devs_description", "default_name", "dns_name", "ipaddr4", "ipaddr6", "macaddr",
-                   "role", "vendor", "devs_id", "extrahop_id", "activity", "on_watchlist", "mod_time", "user_mod_time", "discover_time", 
-                   "last_seen_time"]
-
 LINKBACK_URL = "/extrahop/#/metrics/devices/{}.{}"
 
 
@@ -2432,7 +2458,7 @@ def make_linkback_url(dev_id):
     """Create a url to link back to the endpoint alert, case, etc.
 
     Args:
-        dev_id (str/int): representing the device etc.
+        dev_id (str/int): id representing the device etc.
 
     Returns:
         str: completed url for linkback
@@ -2443,49 +2469,51 @@ def process_devs(dev):
     # Process a device result.
     newrow = incident.addRow(DATA_TABLE)
     newrow.query_execution_date = QUERY_EXECUTION_DATE
-    for f1 in DATA_TBL_FIELDS:
-        f2 = f1
-        if f1.startswith("devs_"):
-            f2 = f1.split('_', 1)[1]
-        if dev[f1] is None:
-            newrow[f1] = dev[f2]
-        elif isinstance(dev[f2], list):
-            newrow[f1] = "{}".format(", ".join(dev[f2]))
-        elif isinstance(dev[f2], bool):
-            newrow[f1] = str(dev[f2])
-        elif f1 in ["mod_time", "user_mod_time", "discover_time", "last_seen_time"]:
-            newrow[f1] = long(dev[f2])
-        else:
-            newrow[f1] = "{}".format(dev[f2])
+    newrow.display_name = dev.get("display_name", None)
+    newrow.devs_description = dev.get("description", None)
+    newrow.default_name = dev.get("default_name", None)
+    newrow.dns_name = dev.get("dns_name", None)
+    newrow.ipaddr4 = dev.get("ipaddr4", None)
+    newrow.ipaddr6 = dev.get("ipaddr6", None)
+    newrow.macaddr  = dev.get("macaddr", None)
+    newrow.role = dev.get("role", None)
+    newrow.vendor = dev.get("vendor", None)
+    newrow.devs_id = dev.get("id", None)
+    newrow.extrahop_id = dev.get("extrahop_id", None)
+    newrow.activity = dev.get("activity", None)
+    newrow.on_watchlist = str(dev.get("on_watchlist", None))
+    newrow.mod_time = dev.get("mod_time", None)
+    newrow.user_mod_time = dev.get("user_mod_time", None)              
+    newrow.discover_time = dev.get("discover_time", None)
+    newrow.last_seen_time = dev.get("last_seen_time", None)
     device_url = make_linkback_url(dev["extrahop_id"])
     device_url_html = u'<div><b><a target="blank" href="{1}">{2}</a></b></div>' \
-              .format("url", device_url, dev["extrahop_id"])
+        .format("url", device_url, dev["extrahop_id"])
     newrow.device_url = device_url_html
 
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
         if CONTENT.get("error", None):
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Search devices failed with error <b>'{1}'</b> for " \
-                        u"SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, CONTENT["error"], FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop: Playbook <b>{0}</b>: Search devices failed with error <b>'{1}'</b> for " \
+                        "SOAR function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, CONTENT["error"], FN_NAME, ", ".join(unicode("{}:{}").format(k, v) for k, v in INPUTS.items()))
         else:
-            devs = CONTENT.result
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
-                        u"function <b>{2}</b> with parameters <b>{3}</b>.".format(WF_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            devs = CONTENT.get("result", None)
+            note_text = "ExtraHop Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Devices returned for SOAR " \
+                        "function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, len(devs), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
             if devs:
                 for dev in devs:
                     process_devs(dev)
-                note_text += u"<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
+                note_text += "<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
 
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to search devices for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to search devices for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
-
 ```
 
 </p>
@@ -2504,14 +2532,14 @@ The function provides the following functionality.
 
 **_NOTE:_** Extra configuration is required to use the keylog_txt output. [Session key download](https://docs.extrahop.com/current/session-key-download/) 
 
-An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Packets`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): search packets`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * An attachment in the select output format is added to the SOAR incident.
 
-The workflow is initiated by the manual incident artifact rule `ExtraHop Reveal(x): Search Packets`.
+The playbook is initiated by the manual incident artifact menu item `ExtraHop Reveal(x): Search Packets`.
 
-The following screenshot shows an example of the action inputs for the workflow:
+The following screenshot shows an example of the action inputs for the playbook:
 
    ![screenshot: fn-extrahop-revealx-search-packets-action](./doc/screenshots/fn-extrahop-revealx-search-packets-action.png)
 
@@ -2598,15 +2626,15 @@ if artifact.type == "IP Address" or artifact.type == "DNS Name":
     inputs.extrahop_bpf = "host {}".format(artifact.value)
 elif artifact.type == "MAC Address":
     inputs.extrahop_bpf = "ether host {}".format(artifact.value)
-inputs.extrahop_active_from = rule.properties.extrahop_active_from
-inputs.extrahop_active_until = rule.properties.extrahop_active_until
-inputs.extrahop_output = rule.properties.extrahop_output
-inputs.extrahop_limit_search_duration = rule.properties.extrahop_limit_search_duration
-inputs.extrahop_limit_bytes = rule.properties.extrahop_limit_bytes
-inputs.extrahop_ip1 = rule.properties.extrahop_ip1
-inputs.extrahop_port1 = rule.properties.extrahop_port1
-inputs.extrahop_ip2 = rule.properties.extrahop_ip2
-inputs.extrahop_port2 = rule.properties.extrahop_port2
+inputs.extrahop_active_from = playbook.inputs.extrahop_active_from
+inputs.extrahop_active_until = playbook.inputs.extrahop_active_until
+inputs.extrahop_output = playbook.inputs.extrahop_output
+inputs.extrahop_limit_search_duration = playbook.inputs.extrahop_limit_search_duration
+inputs.extrahop_limit_bytes = playbook.inputs.extrahop_limit_bytes
+inputs.extrahop_ip1 = playbook.inputs.extrahop_ip1
+inputs.extrahop_port1 = playbook.inputs.extrahop_port1
+inputs.extrahop_ip2 = playbook.inputs.extrahop_ip2
+inputs.extrahop_port2 = playbook.inputs.extrahop_port2
 ```
 
 </p>
@@ -2616,37 +2644,38 @@ inputs.extrahop_port2 = rule.properties.extrahop_port2
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_search_packets post processing script ##
+##  ExtraHop - pb_extrahop_rx_search_packets post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_packets"
-WF_NAME = "ExtraHop Reveal(x): search packets"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Search Packets"
+results = playbook.functions.results.search_packets_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
-        result = CONTENT.result
+        result = CONTENT.get("result")
         if result.get("attachment"):
-            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully searched for packets for SOAR " \
-                        u"function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-            note_text += u"<br>Attachment <b>{}<b> added.".format(result.get("attachment"))
+            note_text += "ExtraHop Integration: Playbook <b>{0}</b>: Successfully searched for packets for SOAR " \
+                         "function <b>{1}</b> with parameters <b>{2}</b>."\
+                .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text += "<br>Attachment <b>{}<b> added.".format(result.get("attachment"))
         elif result.get("status"):
-            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Search for packets returned no results for SOAR " \
+            note_text += u"ExtraHop Integration: Playbook <b>{0}</b>: Search for packets returned no results for SOAR " \
                         u"SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
             note_text += u"<br>Status <b>{}<b>.".format(result.get("status"))
         elif result.get("error"):
-            note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: Search for packets failed for " \
+            note_text += u"ExtraHop Integration: Playbook <b>{0}</b>: Search for packets failed for " \
                         u"SOAR function <b>{1}</b> with parameters <b>{2}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
             note_text += u"<br>Error <b>{}<b>.".format(result.get("error"))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+        note_text += u"ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      u"to search packets for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
@@ -2672,9 +2701,9 @@ An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Update 
 * A note is added to the SOAR incident with the status of the action.
 * A note is added to the ExtraHop detection.
 
-**_NOTE:_** Get or add ExtraHop detection note will fail if `Detection Tracking` is enabled on ExtraHop but the workflow should still complete.
+**_NOTE:_** Get or add ExtraHop detection note will fail if `Detection Tracking` is enabled on ExtraHop but the playbook should still complete.
 
-The workflow is initiated by an automatic incident rule `ExtraHop Reveal(x): Update Detection`
+The playbook is initiated by an automatic incident menu item `ExtraHop Reveal(x): Update Detection`
 
 The following screenshot shows an example of a note added to a SOAR incident:
 
@@ -2749,37 +2778,37 @@ inputs.soar_inc_resolution_id = incident.resolution_id
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_update_setection post processing script ##
+##  ExtraHop - pb_extrahop_rx_update_detection post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_update_detection"
-WF_NAME = "ExtraHop Reveal(x): update detection"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Update Detection"
+results = playbook.functions.results.update_detection_result
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
-        result = CONTENT["result"]
+        result = CONTENT.get("result", None)
         if result == "success":
-            workflow.addProperty("update_detection_ok", {})
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully updated the detection status for SOAR " \
-                        u"function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            playbook.addProperty("update_detection_ok", {})
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Successfully updated the detection status for SOAR " \
+                        "function <b>{1}</b> with parameters <b>{2}</b>.".format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         elif result == "failed":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to update the detection status for " \
-                        u"SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Failed to update the detection status for " \
+                        "SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         else:
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Update detection status failed with unexpected " \
-                        u"response for SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Update detection status failed with unexpected " \
+                        "response for SOAR function <b>{1}</b> with parameters <b>{2}</b>.".format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to update the detection status <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to update the detection status <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>."\
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
 
     incident.addNote(helper.createRichText(note_text))
 
 main()
-
 ```
 
 </p>
@@ -2801,7 +2830,7 @@ An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Update 
 * Refreshes the associated row of the data table  `ExtraHop Devices`.
 * A note is added to the SOAR incident with the status of the action.
  
-The workflow is initiated by the manual data table menu item `ExtraHop Reveal(x): Assign Tag`.
+The playbook is initiated by the manual data table menu item `ExtraHop Reveal(x): Assign Tag`.
 
 The following screenshot shows an example of the action inputs for the playbook:
 
@@ -2865,7 +2894,7 @@ results = {
 
 ```python
 dev_id = row.devs_id
-action = rule.properties.extrahop_watchlist_action
+action = playbook.inputs.extrahop_watchlist_action
 if action == "add":
     inputs.extrahop_assign = str(dev_id)
 elif action == "remove":
@@ -2879,40 +2908,41 @@ elif action == "remove":
 <p>
 
 ```python
-##  ExtraHop - wf_extrahop_rx_update_watchlist post processing script ##
+##  ExtraHop - pb_extrahop_rx_update_watchlist post processing script ##
 #  Globals
 FN_NAME = "funct_extrahop_rx_update_watchlist"
-WF_NAME = "ExtraHop Reveal(x): update watchlist"
-CONTENT = results.content
-INPUTS = results.inputs
+PB_NAME = "Extrahop Reveal(x): Update Watchlist"
+results = playbook.functions.results.update_watchlist_results
+CONTENT = results.get("content", {})
+INPUTS = results.get("inputs", {})
 
 # Processing
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
         result = CONTENT["result"]
         if result == "success":
             workflow.addProperty("watchlist_updated", {})
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Successfully updated the watchlist for SOAR " \
-                        u"function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Successfully updated the watchlist for SOAR " \
+                        "function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
+                .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
         elif result == "failed":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Failed to update the watchlist for " \
-                        u"SOAR function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Failed to update the watchlist for " \
+                        "SOAR function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
+                .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
         elif result == "conflict":
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: A 409 (conflict) error was thrown while attempting  " \
-                        u"to update the watchlist for SOAR function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: A 409 (conflict) error was thrown while attempting  " \
+                        "to update the watchlist for SOAR function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
+                .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
             note_text += u"<br>Check if the sensor is being managed from the cloud-based service."
         else:
-            note_text = u"ExtraHop Integration: Workflow <b>{0}</b>: Update watchlist failed with unexpected " \
-                        u"response for SOAR function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
-                .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
+            note_text = "ExtraHop Integration: Playbook <b>{0}</b>: Update watchlist failed with unexpected " \
+                        "response for SOAR function <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
+                .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
     else:
-        note_text += u"ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to update the watchlist <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
-            .format(WF_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
+        note_text += "ExtraHop Integration: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to update the watchlist <b>{1}</b> with parameters <b>{2}</b> for device <b>{3}</b>."\
+            .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()), row.devs_id)
 
     incident.addNote(helper.createRichText(note_text))
 
@@ -2967,18 +2997,12 @@ def validate_fields(fields, params):
             raise ValueError(str('Required data-table field is missing or empty for artifact type: ' + f))
 
 
-def main():
-    desc = ''
+# Processing starts here
+desc = ''
+validate_fields([ARTIFACT_TYPE], PARAMS)
+desc = "Artifact from Device detected in the ExtraHop environment. Device name '{}', Device ID '{}'.".format(row.default_name, row.devs_id)
+addArtifact(ARTIFACT_TYPE, PARAMS[ARTIFACT_TYPE], desc)
 
-    validate_fields([ARTIFACT_TYPE], PARAMS)
-
-    desc = "Artifact from Device detected in the ExtraHop environment. Device name '{}', Device ID '{}'.".format(row.default_name, row.devs_id)
-    addArtifact(ARTIFACT_TYPE, PARAMS[ARTIFACT_TYPE], desc)
-
-
-# Script execution starts here
-if __name__ == "__main__":
-    main()
 ```
 
 </p>
@@ -3454,32 +3478,15 @@ TYPE_MAP = {
     "xss_attack": "Cross-Site Scripting (XSS) Attack"
 }
 
-workflow.addProperty("category_map", CATEGORY_MAP)
-workflow.addProperty("type_map", TYPE_MAP)
+try:
+    playbook.addProperty("category_map", CATEGORY_MAP)
+    playbook.addProperty("type_map", TYPE_MAP)
+    script_inputs = playbook.inputs
+except:
+    workflow.addProperty("category_map", CATEGORY_MAP)
+    workflow.addProperty("type_map", TYPE_MAP)
+    script_inputs = rule.properties
 
-
-if rule.properties.extrahop_detection_id:
-    workflow.addProperty("det_id_set", {})
-
-```
-
-</p>
-</details>
-
----
-## Script - ExtraHop script: device property helper
-Set ExtraHop device properties as workflow property dicts.
-
-**Object:** incident
-
-<details><summary>Script Text:</summary>
-<p>
-
-```python
-##  ExtraHop - scr_extrahop_device_property_helper script ##
-# Used to share data with other workflows.
-if rule.properties.extrahop_device_id:
-    workflow.addProperty("dev_id_set", {})
 ```
 
 </p>
@@ -3653,7 +3660,119 @@ extrahop_watchlist
 | ExtraHop Reveal(x): Update Watchlist | Add or remove an ExtraHop device to or from the watchlist. | extrahop_devices | `enabledt` |
 
 ---
+## Templates for SOAR Cases
+It may necessary to modify the templates used to create or close SOAR cases based on a customer's required custom fields. Below are the default templates used which can be copied, modified and used with app_config's
+`soar_create_case_template` and `soar_close_case_template` settings to override the default templates.
 
+### soar_close_incident.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+```
+{
+  {# JINJA template for closing a SOAR incident from an ExtraHop detection. #}
+  "plan_status": "C",
+  "resolution_id": "{{ resolution | soar_substitute('{"None": "Unresolved", "no_action_taken": "Not an Issue", "action_taken": "Resolved"}') }}",
+  "resolution_summary": "Closed by ExtraHop, Detection resolution = {{ resolution }}",
+  "properties": {
+    "extrahop_status": "{{ status | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",
+    "extrahop_assignee": "{{ assignee | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_update_notification": "<span style='color:red;'>The ExtraHop Detection has been closed.</span><br><div>To refresh the incident run the action: Example: Extrahop Reveal(x) refresh incident.<div/>"
+  }
+}
+```
+### soar_create_incident.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+```
+{
+  {# JINJA template for creating a new SOAR incident from an ExtraHop detection. #}
+  "name": "ExtraHop detection - {{ title }}",
+  {# Remove escapes and backticks unnecessary for payload, introduced by api for some detections. #}
+  "description": "{{ description | replace('"', '\\"') | replace('\\-', '-') | replace('\\.', '.') | replace('`', '') }}",
+  {# start_date cannot be after discovered_date #}
+  "discovered_date": {{ start_time }},
+  "start_date": {{ start_time }},
+  {# if detection users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ assignedTo|soar_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ status|string|soar_substitute('{"None": "A", "acknowledged": "A", "in_progress": "A", "closed": "C"}') }}",
+{% if 1.0 <= risk_score <= 30 %}
+  "severity_code": "Low",
+{% elif 31 <= risk_score <= 79 %}
+  "severity_code": "Medium",
+{% else %}
+  "severity_code": "High",
+{% endif %}
+  "properties": {
+    "extrahop_detection_id": {{ id }},
+    "extrahop_mod_time": {{ mod_time }},
+    "extrahop_update_time": {{ update_time }},
+     {% if end_time %}
+        "extrahop_end_time": {{ end_time }},
+     {% endif %}
+    "extrahop_risk_score": {{ risk_score }},
+    "extrahop_status": "{{ status | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",
+    "extrahop_assignee": "{{ assignee | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_detection_link": "<a target='blank' href='{{ detection_url }}'>ExtraHop detection</a>",
+    "extrahop_console_url": "{{ console_url }}",
+    "extrahop_site_name": "{{ network.name }}",
+    "extrahop_site_uuid": "{{ network.appliance_uuid }}"
+  },
+  "comments": [
+    {
+      "text": {
+          "format": "text",
+          "content": "Created by ExtraHop from a detection."
+      }
+    }
+  ]
+}
+```
+### soar_ticketid_incident.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+```
+{
+  {# JINJA template for updating a SOAR incident ticket id when SOAR case linked to an ExtraHop detection. #}
+  "properties": {
+    "extrahop_ticket_id": "{{ ticket_id }}"
+  }
+}
+```
+### soar_update_incident.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+```
+{
+  {# JINJA template for updating a SOAR incident from an ExtraHop detection. #}
+  "name": "ExtraHop detection - {{ title }}",
+  {# Remove escapes and backticks unnecessary for payload, introduced by api for some detections. #}
+  "description": "{{ description | replace('"', '\\"') | replace('\\-', '-') | replace('\\.', '.') | replace('`', '') }}",
+{% if end_time %}
+  "end_date": {{ end_time }},
+{% endif %}
+  {# if detection users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ assignedTo|soar_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ status|string|soar_substitute('{"None": "A", "acknowledged": "A", "in_progress": "A", "closed": "C"}') }}",
+{% if 1.0 <= risk_score <= 30 %}
+  "severity_code": "Low",
+{% elif 31 <= risk_score <= 79 %}
+  "severity_code": "Medium",
+{% else %}
+  "severity_code": "High",
+{% endif %}
+  "properties": {
+    "extrahop_update_time": {{ update_time }},
+    "extrahop_mod_time": {{ mod_time }},
+     {% if end_time %}
+        "extrahop_end_time": {{ end_time }},
+     {% endif %}
+    "extrahop_risk_score": {{ risk_score }},
+    "extrahop_status": "{{ status | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",
+    "extrahop_assignee": "{{ assignee | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_detection_updated": {{ epoch_now }},
+    "extrahop_update_notification": "<span style='color:red;'>The ExtraHop Detection has been updated.</span><br><div>To refresh the case run the playbook: Extrahop Reveal(x) Refresh Case.<div/>"
+  }
+}
+```
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
