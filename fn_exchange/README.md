@@ -60,7 +60,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| v2.0.0 | February | UI update, Custom Layout, Data-tables, Timezone support and bug fixes |
+| v2.0.0 | February | UI update, Playbook Migration, Custom Layout, Data-tables, Timezone support and bug fixes |
 | v1.0.4 | September 2022 | Bugfix on Selftest |
 | v1.0.3 | June 2022 | Add support for Python 3.9. |
 | v1.0.2 | June 2021 | Fix for ``selftest``. |
@@ -100,6 +100,8 @@ This application extends the capabilities of the SOAR platform with Microsoft Ex
 
 - Move queried emails from one folder to another folder<br>
 
+- All the above mentioned functionality has now been Incorporated with Playbooks<br>
+
 
 ## Requirements
 
@@ -109,13 +111,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0`.
+* SOAR platform >= `47.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0`.
+* SOAR platform >= `47.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=45.0.0`.
+* Integration server is running `resilient_circuits>=48.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -148,8 +150,8 @@ The app **does** support a proxy server.
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * exchangelib ~= 4.6.2;python_version=='3.6'
-* exchangelib ~= 4.9.0;python_version>='3.9'
-* resilient_circuits>=45.0.0
+* exchangelib ~= 5.0.1;python_version>='3.9'
+* resilient_circuits>=48.0.0
 
 ### Development Version
 

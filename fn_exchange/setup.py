@@ -19,7 +19,7 @@ def snake_to_camel(word):
 setup(
     name='fn_exchange',
     display_name='Microsoft Exchange',
-    version='1.1.0',
+    version='2.0.0',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
