@@ -648,7 +648,6 @@ if playbook.inputs.ldap_domain_name:
 
 ```python
 results = playbook.functions.results.search_results
-# Globals
 ENTRY_TO_DATATABLE_MAP = {
   "uid": "uid",
   "cn": "fullname",
@@ -659,27 +658,11 @@ ENTRY_TO_DATATABLE_MAP = {
 
 # Processing if the function is a success
 if results.get("success"):
-  for entry in results.get("content").get("entries"):
-    if not entry:
-      break
-    # Add Row
-    row = incident.addRow("ldap_query_results")
+  for entry in results.get("content", {}).get("entries"):
+    row = incident.addRow("ldap_query_results") # Add Row
     for k in ENTRY_TO_DATATABLE_MAP:
-      if not entry[k]:
-        row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
-      else:
-        try:
-          # If 'entry[k]' is empty
-          if not len(entry[k]):
-            row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
-          # Handle for Active Directory
-          elif isinstance(entry[k], str):
-            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k]
-          # Handle for OpenLdap
-          else:
-            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k][0]
-        except IndexError:
-          row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
+      # If Handle for Active Directory else Handle for OpenLdap
+      row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A" if not entry.get(k) else ",".join(entry.get(k)) if isinstance(entry[k], list) else entry.get(k)
 ```
 
 </p>
@@ -1052,6 +1035,9 @@ if rule.properties.ldap_domain_name:
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
+#### Known Errors
+1. `Expected to execute a maximum of 50,000 lines` error received when running the search function this occurs because the playbook scripts have a max line execution limit of 50,000 lines of code. If you hit this limit, then try to add more filters to your search to get less results.
+2. `The maximum number of new objects created by rules and playbooks has been exceeded` error received when running the search function this occurs because the playbook script tried to add more than 500 rows to a data table. The 500 object creation limit is only on playbooks and not on workflows, so if you create a rule and workflow this error will not occur.
 
 ### For Support
 This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.

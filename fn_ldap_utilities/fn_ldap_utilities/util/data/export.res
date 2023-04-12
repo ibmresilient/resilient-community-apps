@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1681312901603,
+  "export_date": 1681316305502,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -982,13 +982,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 42,
+  "id": 45,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1681312899622,
+      "create_date": 1681316303408,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -997,7 +997,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1681312899622,
+      "update_date": 1681316303408,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1026,7 +1026,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
+        "content_version": 7,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d9790869_2c5a_41b6_afdb_c2252ddb9867\" isExecutable=\"true\" name=\"playbook_d9790869_2c5a_41b6_afdb_c2252ddb9867\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1013ih3\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"LDAP Utilities: Add\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"673a09d5-acf2-4c3d-8e48-4647cf91be6f\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given by the user field then set ldap_domain_name to that value\\nif playbook.inputs.ldap_domain_name:\\n  inputs.ldap_domain_name = playbook.inputs.ldap_domain_name\\n\\ninputs.ldap_dn = playbook.inputs.ldap_user_info\\ninputs.ldap_multiple_group_dn = playbook.inputs.ldap_groups if playbook.inputs.ldap_groups else \u0027[]\u0027\\ninputs.ldap_attribute_name_values = playbook.inputs.ldap_attribute_name_values\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1013ih3\u003c/incoming\u003e\u003coutgoing\u003eFlow_1mj3jex\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1013ih3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5b3c78b0-189a-4dff-ac7c-c4f7d64dedda\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mj3jex\u003c/incoming\u003e\u003coutgoing\u003eFlow_1khnrsg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1mj3jex\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1khnrsg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1khnrsg\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d9790869_2c5a_41b6_afdb_c2252ddb9867\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1khnrsg\" id=\"Flow_1khnrsg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mj3jex\" id=\"Flow_1mj3jex_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1013ih3\" id=\"Flow_1013ih3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1680180539067,
@@ -1196,7 +1196,7 @@
         "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1680270049706,
+      "last_modified_time": 1681315236715,
       "local_scripts": [
         {
           "actions": [],
@@ -1270,7 +1270,7 @@
       "tags": [],
       "type": "default",
       "uuid": "d9790869-2c5a-41b6-afdb-c2252ddb9867",
-      "version": 10
+      "version": 11
     },
     {
       "activation_type": "manual",
@@ -1717,7 +1717,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 27,
+        "content_version": 36,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0b961651_a9db_4bf6_b5cf_957fd057abd3\" isExecutable=\"true\" name=\"playbook_0b961651_a9db_4bf6_b5cf_957fd057abd3\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1brwefy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# If search filters are given\\nif playbook.inputs.ldap_search_filter:\\n  inputs.ldap_search_filter = playbook.inputs.ldap_search_filter\\n# If filters not given then set them to example filters\\nelse:\\n  inputs.ldap_search_filter = \\\"(\u0026amp;(objectClass=person)(mail=*%ldap_param%))\\\"\\n\\n# If search attributes are given\\nif playbook.inputs.ldap_search_attributes:\\n  inputs.ldap_search_attributes = playbook.inputs.ldap_search_attributes\\n# If search attributes not given then set them to example attributes\\nelse:\\n  inputs.ldap_search_attributes = \\\"*\\\"\\n\\ninputs.ldap_search_param = artifact.value\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif playbook.inputs.ldap_search_base:\\n  inputs.ldap_search_base = playbook.inputs.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif playbook.inputs.ldap_domain_name:\\n  inputs.ldap_domain_name = playbook.inputs.ldap_domain_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1brwefy\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vxukq1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1brwefy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"bef60ef8-b743-4622-9cb2-6538b78358c8\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1vxukq1\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rb5vyh\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1vxukq1\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0rb5vyh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0rb5vyh\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0b961651_a9db_4bf6_b5cf_957fd057abd3\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rb5vyh\" id=\"Flow_0rb5vyh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"342\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"364\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vxukq1\" id=\"Flow_1vxukq1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"232\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"258\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1brwefy\" id=\"Flow_1brwefy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"148\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"258\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"364\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1680182401331,
@@ -1886,7 +1886,7 @@
         "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1681312658644,
+      "last_modified_time": 1681315209905,
       "local_scripts": [
         {
           "actions": [],
@@ -1897,12 +1897,12 @@
           "id": 76,
           "language": "python3",
           "last_modified_by": "f@example.com",
-          "last_modified_time": 1681312652536,
+          "last_modified_time": 1681315031964,
           "name": "post-process",
           "object_type": "artifact",
           "playbook_handle": "example_ldap_utilities_search",
           "programmatic_name": "example_ldap_utilities_search_post_process",
-          "script_text": "results = playbook.functions.results.search_results\nENTRY_TO_DATATABLE_MAP = {\n  \"uid\": \"uid\",\n  \"cn\": \"fullname\",\n  \"sn\": \"surname\",\n  \"mail\": \"email_address\",\n  \"telephoneNumber\": \"telephone_number\"\n}\n\n# Processing if the function is a success\nif results.get(\"success\"):\n  for entry in results.get(\"content\").get(\"entries\"):\n    if not entry:\n      break\n    row = incident.addRow(\"ldap_query_results\") # Add Row\n    for k in ENTRY_TO_DATATABLE_MAP:\n      try: # If Handle for Active Directory else Handle for OpenLdap\n        row[ENTRY_TO_DATATABLE_MAP[k]] = \"N/A\" if not entry.get(k) else entry[k] if isinstance(entry[k], str) else entry[k][0]\n      except IndexError:\n        row[ENTRY_TO_DATATABLE_MAP[k]] = \"N/A\"",
+          "script_text": "results = playbook.functions.results.search_results\nENTRY_TO_DATATABLE_MAP = {\n  \"uid\": \"uid\",\n  \"cn\": \"fullname\",\n  \"sn\": \"surname\",\n  \"mail\": \"email_address\",\n  \"telephoneNumber\": \"telephone_number\"\n}\n\n# Processing if the function is a success\nif results.get(\"success\"):\n  for entry in results.get(\"content\", {}).get(\"entries\"):\n    row = incident.addRow(\"ldap_query_results\") # Add Row\n    for k in ENTRY_TO_DATATABLE_MAP:\n      # If Handle for Active Directory else Handle for OpenLdap\n      row[ENTRY_TO_DATATABLE_MAP[k]] = \"N/A\" if not entry.get(k) else \",\".join(entry.get(k)) if isinstance(entry[k], list) else entry.get(k)",
           "tags": [],
           "uuid": "bef60ef8-b743-4622-9cb2-6538b78358c8"
         }
@@ -1982,7 +1982,7 @@
       "tags": [],
       "type": "default",
       "uuid": "0b961651-a9db-4bf6-b5cf-957fd057abd3",
-      "version": 32
+      "version": 41
     },
     {
       "activation_type": "manual",
