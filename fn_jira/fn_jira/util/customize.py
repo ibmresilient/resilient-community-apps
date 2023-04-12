@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v48.0.4034
 
-"""Generate the SOAR customizations required for fn_jira"""
+"""Generate the Resilient customizations required for fn_jira"""
 
 import base64
 import os
@@ -13,6 +14,7 @@ except ImportError:
 
 RES_FILE = "data/export.res"
 
+
 def codegen_reload_data():
     """
     Parameters required reload codegen for the fn_jira package
@@ -21,23 +23,24 @@ def codegen_reload_data():
         "package": u"fn_jira",
         "message_destinations": [u"fn_jira"],
         "functions": [u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue"],
-        "workflows": [u"example_jira_open_issue_task", u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue", u"jira_transition_issue_task"],
-        "actions": [u"Example: Create Jira Issue", u"Example: Create Jira Issue (Task)", u"Example: Jira Close Issue", u"Example: Jira Close Issue (Task)", u"Example: Jira Create Comment", u"Example: Jira Create Comment (Task)"],
-        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_server", u"jira_url"],
+        "workflows": [],
+        "actions": [],
+        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_issue_status", u"jira_linked_to_incident", u"jira_project_key", u"jira_server", u"jira_url"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"jira_task_references"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [u"example_create_jira_issue", u"example_create_jira_issue_task", u"example_jira_close_issue", u"example_jira_close_issue_task", u"example_jira_create_comment"]
     }
+
 
 def customization_data(client=None):
     """
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 44.0.7585
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
@@ -46,22 +49,18 @@ def customization_data(client=None):
         - jira_create_comment
         - jira_open_issue
         - jira_transition_issue
-    - Workflows:
-        - example_jira_open_issue_task
-        - jira_create_comment
-        - jira_open_issue
-        - jira_transition_issue
-        - jira_transition_issue_task
-    - Rules:
-        - Example: Create Jira Issue
-        - Example: Create Jira Issue (Task)
-        - Example: Jira Close Issue
-        - Example: Jira Close Issue (Task)
-        - Example: Jira Create Comment
-        - Example: Jira Create Comment (Task)
+    - Playbooks:
+        - example_create_jira_issue
+        - example_create_jira_issue_task
+        - example_jira_close_issue
+        - example_jira_close_issue_task
+        - example_jira_create_comment
     - Incident Fields:
         - jira_internal_url
         - jira_issue_id
+        - jira_issue_status
+        - jira_linked_to_incident
+        - jira_project_key
         - jira_server
         - jira_url
     - Data Tables:
