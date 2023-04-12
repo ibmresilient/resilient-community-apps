@@ -56,7 +56,12 @@ class PollerComponent(AppFunctionComponent):
         :rtype: bool
         """
         # Validate required fields in app.config are set
-        validate_fields(["azure_url", "client_id", "tenant_id", "app_secret", "sentinel_profiles"], self.options)
+        validate_fields([{"name": "azure_url"},
+                         {"name": "client_id", "placeholder": "aaa-bbb-ccc"},
+                         {"name": "tenant_id", "placeholder": "aaa-bbb-ccc"},
+                         {"name": "app_secret", "placeholder": "aaa-bbb-eee"},
+                         {"name": "sentinel_profiles"}],
+                         self.options)
 
         self.polling_interval = int(self.options.get("polling_interval", 0))
         if not self.polling_interval or is_this_a_selftest(self):

@@ -13,7 +13,9 @@ DEFAULT_INCIDENT_CREATION_TEMPLATE = path.join(TEMPLATE_DIR, "incident_creation_
 DEFAULT_INCIDENT_UPDATE_TEMPLATE = path.join(TEMPLATE_DIR, "incident_update_template.jinja")
 DEFAULT_INCIDENT_CLOSE_TEMPLATE = path.join(TEMPLATE_DIR, "incident_close_template.jinja")
 
-REQUIRED_PROFILE_FIELDS = ["subscription_id", "workspace_name", "resource_groupname"]
+REQUIRED_PROFILE_FIELDS = [{"name": "subscription_id", "placeholder": "aaa-bbb-fff"},
+                           {"name": "workspace_name", "placeholder": "AzureExampleWorkspace"},
+                           {"name": "resource_groupname", "placeholder": "ExampleGroupName"}]
 
 PACKAGE_NAME = "fn_microsoft_sentinel"
 
