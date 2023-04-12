@@ -21,22 +21,18 @@
     - [Install](#install)
     - [App Configuration](#app-configuration)
     - [Custom Layouts](#custom-layouts)
-  - [](#)
   - [Function - Exchange Create Meeting](#function---exchange-create-meeting)
   - [Function - Exchange Delete Emails](#function---exchange-delete-emails)
   - [Function - Exchange Find Emails](#function---exchange-find-emails)
   - [Function - Exchange Get Mailbox Info](#function---exchange-get-mailbox-info)
   - [Function - Exchange Move Emails](#function---exchange-move-emails)
   - [Function - Exchange Send Email](#function---exchange-send-email)
+  - [Data Table - Email Information](#data-table---email-information)
       - [API Name:](#api-name)
       - [Columns:](#columns)
-      - [API Name:](#api-name-1)
-  - [Data Table - Email Information](#data-table---email-information)
-      - [API Name:](#api-name-2)
-      - [Columns:](#columns-1)
   - [Data Table - Meeting Information](#data-table---meeting-information)
-      - [API Name:](#api-name-3)
-      - [Columns:](#columns-2)
+      - [API Name:](#api-name-1)
+      - [Columns:](#columns-1)
   - [Playbook](#playbook)
   - [Troubleshooting \& Support](#troubleshooting--support)
     - [For Support](#for-support)
@@ -225,6 +221,7 @@ The following table provides the settings you need to configure the app. These s
 <p align="center">
 <img src="./doc/screenshots/layout_datatables.png" />
 </p>
+
 ---
 
 ## Function - Exchange Create Meeting
@@ -999,17 +996,6 @@ Get mailbox info for specified email. The information retrieved from the server 
 <img src="./doc/screenshots/workflow_get-mailbox_info.png" />
 </p>
 
-Get mailbox info for specified email. The information retrieved from the server is saved as a incident note.
-
- <p align="center">
-<img src="./doc/screenshots/popup_retrieve_info.png" />
-</p>
-
-<p align="center">
-<img src="./doc/screenshots/workflow_get-mailbox_info.png" />
-</p>
-
-
 <details><summary>Inputs:</summary>
 <p>
 
@@ -1450,7 +1436,8 @@ Send an email to a list of recipients. Multiple recipients can be specified in a
 <img src="./doc/screenshots/workflow_send_email.png" />
 </p>
 
-
+<details><summary>Inputs:</summary>
+<p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
@@ -1459,23 +1446,13 @@ Send an email to a list of recipients. Multiple recipients can be specified in a
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
 
-<p align="center">
-<img src="./doc/screenshots/datatable_email_information.png" />
 </p>
+</details>
 
-#### API Name:
-exchange_email_information_dt
+<details><summary>Outputs:</summary>
+<p>
 
-#### Columns:
-| Column Name | API Access Name | Type | Tooltip |
-| ----------- | --------------- | ---- | ------- |
-| Attachments | `exchange_dt_count_attachments` | `number` | Number of attachments in the email |
-| Date of Retrieval | `exchange_date_of_retrieval` | `text` | Date the email was retrieved from the mailbox. Not to be confused with email recieved date. |
-| Message ID | `exchange_dt_message_id` | `text` | Unique ID of the message |
-| Message Subject | `exchange_dt_message_subject` | `text` | Subject of the email |
-| Recipient Email Address | `exchange_dt_recipient_email` | `text` | Email address of the Recipient |
-| Sender Email Address | `exchange_dt_sender_email` | `text` | Email address of the sender |
-| Status | `exchange_dt_email_status` | `text` | Queried / Sent / Moved / Deleted (depends on the action being performed) |
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
 ```python
 results = {
@@ -1511,13 +1488,12 @@ results = {
   "version": "1.0"
 }
 ```
-
-<p align="center">
-<img src="./doc/screenshots/datatable_meeting_information.png" />
 </p>
+</details>
 
-#### API Name:
-exchange_dt_meeting_information
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
 
 ```python
 # Set inputs
