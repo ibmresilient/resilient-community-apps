@@ -1,4 +1,5 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -8,9 +9,17 @@ from resilient_circuits import (AppFunctionComponent, app_function,
 
 from fn_exchange.lib.exchange_helper import PACKAGE_NAME, INPUTS_MAP, ResultsHandler
 from fn_exchange.lib.exchange_utils import exchange_interface
+from resilient_circuits import (AppFunctionComponent, app_function,
+                                StatusMessage)
+
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, INPUTS_MAP, ResultsHandler
+from fn_exchange.lib.exchange_utils import exchange_interface
 
 FN_NAME = "exchange_send_email"
+FN_NAME = "exchange_send_email"
 
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements function 'exchange_find_emails' """
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'exchange_find_emails' """
 
@@ -55,9 +64,14 @@ class FunctionComponent(AppFunctionComponent):
             yield StatusMessage(f"Successfully connected to {function_parameters.get('username')}")
 
             results = utils.create_email_message(function_parameters)
+            results = utils.create_email_message(function_parameters)
 
             yield StatusMessage("Email sent!")
             yield rh.success(results)
+            yield StatusMessage("Email sent!")
+            yield rh.success(results)
 
+        except Exception as err:
+            yield rh.fail(reason=str(err))
         except Exception as err:
             yield rh.fail(reason=str(err))

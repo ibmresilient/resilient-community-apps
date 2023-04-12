@@ -1,4 +1,5 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -13,6 +14,8 @@ from fn_exchange.lib.exchange_configure_tab import init_exchange_tab
 
 FN_NAME = "exchange_create_meeting"
 
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements function 'exchange_find_emails' """
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'exchange_find_emails' """
 
@@ -53,11 +56,19 @@ class FunctionComponent(AppFunctionComponent):
         try:
             utils = exchange_interface(self.rc, self.options)
             yield StatusMessage(f"Successfully connected to {function_parameters.get('email')}")
+            utils = exchange_interface(self.rc, self.options)
+            yield StatusMessage(f"Successfully connected to {function_parameters.get('email')}")
 
             yield StatusMessage("Sending out meeting invite")
             results = utils.create_meeting(function_parameters)
             yield StatusMessage("Meeting invite created and sent!")
             yield rh.success(results)
+            yield StatusMessage("Sending out meeting invite")
+            results = utils.create_meeting(function_parameters)
+            yield StatusMessage("Meeting invite created and sent!")
+            yield rh.success(results)
 
+        except Exception as err:
+            yield rh.fail(reason=str(err))
         except Exception as err:
             yield rh.fail(reason=str(err))

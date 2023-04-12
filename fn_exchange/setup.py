@@ -15,6 +15,20 @@ def snake_to_camel(word):
     Convert a word from snake_case to CamelCase
     """
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
+import glob
+import ntpath
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
     name='fn_exchange',
@@ -37,7 +51,11 @@ Exchange email and meeting capabilities. The package provided has the following 
         "resilient_circuits>=45.0.0",
         "exchangelib ~= 4.6.2;python_version=='3.6'",
         "exchangelib ~= 4.9.0;python_version>='3.9'"
+        "resilient_circuits>=45.0.0",
+        "exchangelib ~= 4.6.2;python_version=='3.6'",
+        "exchangelib ~= 4.9.0;python_version>='3.9'"
     ],
+    python_requires='>=3.6',
     python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
@@ -47,6 +65,8 @@ Exchange email and meeting capabilities. The package provided has the following 
     ],
     entry_points={
         "resilient.circuits.components": [
+            # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
+            "{}FunctionComponent = fn_exchange.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_exchange/components/[a-zA-Z]*.py")
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
             "{}FunctionComponent = fn_exchange.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_exchange/components/[a-zA-Z]*.py")
         ],

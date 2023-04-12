@@ -6,6 +6,7 @@
   - [Release Notes](#release-notes)
   - [Overview](#overview)
     - [Key Features](#key-features)
+    - [Key Features](#key-features-1)
   - [Requirements](#requirements)
     - [SOAR platform](#soar-platform)
     - [Cloud Pak for Security](#cloud-pak-for-security)
@@ -16,23 +17,31 @@
     - [Configuration](#configuration)
       - [Timezones](#timezones)
       - [Folder Paths](#folder-paths)
+    - [Configuration](#configuration-1)
+      - [Timezones](#timezones-1)
+      - [Folder Paths](#folder-paths-1)
       - [Information as Data-tables or Artifacts](#information-as-data-tables-or-artifacts)
+      - [Information as Data-tables or Artifacts](#information-as-data-tables-or-artifacts-1)
   - [Installation](#installation)
     - [Install](#install)
     - [App Configuration](#app-configuration)
     - [Custom Layouts](#custom-layouts)
+    - [Custom Layouts](#custom-layouts-1)
   - [Function - Exchange Create Meeting](#function---exchange-create-meeting)
   - [Function - Exchange Delete Emails](#function---exchange-delete-emails)
   - [Function - Exchange Find Emails](#function---exchange-find-emails)
   - [Function - Exchange Get Mailbox Info](#function---exchange-get-mailbox-info)
   - [Function - Exchange Move Emails](#function---exchange-move-emails)
   - [Function - Exchange Send Email](#function---exchange-send-email)
-  - [Data Table - Email Information](#data-table---email-information)
       - [API Name:](#api-name)
       - [Columns:](#columns)
-  - [Data Table - Meeting Information](#data-table---meeting-information)
       - [API Name:](#api-name-1)
+  - [Data Table - Email Information](#data-table---email-information)
+      - [API Name:](#api-name-2)
       - [Columns:](#columns-1)
+  - [Data Table - Meeting Information](#data-table---meeting-information)
+      - [API Name:](#api-name-3)
+      - [Columns:](#columns-2)
   - [Playbook](#playbook)
   - [Troubleshooting \& Support](#troubleshooting--support)
     - [For Support](#for-support)
@@ -55,15 +64,21 @@
 **Integrate with Microsoft Exchange email and meeting functionality**
 
  ![screenshot: main](./doc/screenshots/main.png) 
+ ![screenshot: main](./doc/screenshots/main.png) 
 
+This application extends the capabilities of the SOAR platform with Microsoft Exchange On-prem services and functionality. Emails from an exchange mailbox can now be read, written, sent, queried, deleted, and moved from within the platform. Both Online and in-person meetings can be scheduled and invites can be sent using this application. All extracted information is now tabulated and neatly displayed in a separate incident tab. <br>
 This application extends the capabilities of the SOAR platform with Microsoft Exchange On-prem services and functionality. Emails from an exchange mailbox can now be read, written, sent, queried, deleted, and moved from within the platform. Both Online and in-person meetings can be scheduled and invites can be sent using this application. All extracted information is now tabulated and neatly displayed in a separate incident tab. <br>
 
 ### Key Features
+### Key Features
 
+- Compose and send emails to multiple recipients.<br>
 - Compose and send emails to multiple recipients.<br>
 
 - Schedule an Online meeting in Microsoft Exchange and send out invites with links to the meeting.<br>
+- Schedule an Online meeting in Microsoft Exchange and send out invites with links to the meeting.<br>
 
+- Schedule an Offline meeting and send out invites with information regarding meeting venue.<br>
 - Schedule an Offline meeting and send out invites with information regarding meeting venue.<br>
 
 - Saved all scheduled meetings as incident notes or in a separate incident tab called Exchange.<br>
@@ -80,16 +95,18 @@ This application extends the capabilities of the SOAR platform with Microsoft Ex
 
 - Migrate all the contents of a folder to another.<br>
 
-- Move queried emails from one folder to another folder<br>
+- Get mailbox information for a particular sender.<br>
 
 - All the above mentioned functionality has now been Incorporated with Playbooks<br>
 
 
 ## Requirements
 
+
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
@@ -108,18 +125,23 @@ If deploying to a SOAR platform with an integration server, the requirements are
 
 The following SOAR platform guides provide additional information: 
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
 
+The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * IBM Cloud Pak for Security >= `1.10`.
 * Cloud Pak is configured with an Edge Gateway.
+* IBM Cloud Pak for Security >= `1.10`.
+* Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 The following Cloud Pak guides provide additional information: 
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -129,6 +151,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
+Python 3.6 and Python 3.9 are supported.
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * exchangelib ~= 4.6.2;python_version=='3.6'
@@ -146,6 +169,24 @@ This app has been implemented using:
 
 This app has been implemented using **Microsoft Exchange Server**
 
+### Configuration
+
+Please pay attention to the below mentioned pointers as the application can be slightly complex and confusing to configure.
+
+#### Timezones
+
+* The application now has the ability to set a default timezone from the app.conf. Timezones are to be specified using their `Tz Database name`. Here are a few examples:
+
+- timezone = Europe/Dublin
+- timezone = Etc/GMT+2
+- timezone = Asia/Kolkata
+- timezone = Etc/GMT
+
+#### Folder Paths
+
+* When the `Source location` or the `exchange_folder_path` fields are left empty, they are substituted with the value specified for `default_folder_path` in app.conf 
+
+* The path related fields might be slightly complicated to configure as they tend to vary with the Exchange environment. Upon entering an invalid folder path, a tree structure of the folder hierarchy will be printed. Here is an example:
 ### Configuration
 
 Please pay attention to the below mentioned pointers as the application can be slightly complex and confusing to configure.
@@ -188,7 +229,11 @@ could be any path following the root path:
 * Multiple folder paths can be specified by separating them with commas and following the above rules.
 
 #### Information as Data-tables or Artifacts
+#### Information as Data-tables or Artifacts
 
+* Information extracted from emails and meetings can now be either added as artifacts (legacy) or to data-tables present in the Exchange tab of an Incident. This behavior can be changed by toggling the `enable_write_to_datatables` option found in the Post processing scripts of the workflows.
+
+* For more information on specific function inputs, check the tooltips.
 * Information extracted from emails and meetings can now be either added as artifacts (legacy) or to data-tables present in the Exchange tab of an Incident. This behavior can be changed by toggling the `enable_write_to_datatables` option found in the Post processing scripts of the workflows.
 
 * For more information on specific function inputs, check the tooltips.
@@ -208,10 +253,25 @@ The following table provides the settings you need to configure the app. These s
 | ------ | :------: | ------- | ----------- |
 | **default_folder_path** | Yes | `Top of Information Store/Inbox` |  *Some folder path after root Multiple folder paths must be separated by commas.* |
 | **server** | Yes | `example.com` |*Exchange server DNS name or ip address.* |
+| **server** | Yes | `example.com` |*Exchange server DNS name or ip address.* |
 | **email** | Yes | `admin@example.com` | *default account to send emails and create meetings if one was not specified. Specifying an account that is not this one will require impersonation access.* |
 | **username** | Yes | `domain\username` | *Admin account with mailbox access to other accounts.* |
 | **password** | Yes | `password` | *Password of Admin account.* |
+| **password** | Yes | `password` | *Password of Admin account.* |
 | **verify_cert** | Yes | `True` | *Use a CA cert for access to an Exchange server.* |
+| **timezone** | No | `Etc/GMT` | *Default Timezone for the application. Used for Meetings and querying emails.* |
+
+### Custom Layouts
+
+* Import the Data Tables and Custom Fields like the screenshot below:
+
+<p align="center">
+<img src="./doc/screenshots/layout_tab.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/layout_datatables.png" />
+</p>
 | **timezone** | No | `Etc/GMT` | *Default Timezone for the application. Used for Meetings and querying emails.* |
 
 ### Custom Layouts
@@ -239,6 +299,16 @@ Creates a meeting and sends out invitation to attendees. The user is provided wi
 <img src="./doc/screenshots/workflow_create_meeting.png" />
 </p>
 
+Creates a meeting and sends out invitation to attendees. The user is provided with the option to choose required and optional attendees. If its a virtual meeting, the user now has the ability to specify the URL to the meeting room and mark the invite as an online meeting.
+
+<p align="center">
+<img src="./doc/screenshots/popup_create_meeting.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/workflow_create_meeting.png" />
+</p>
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -247,9 +317,14 @@ Creates a meeting and sends out invitation to attendees. The user is provided wi
 | ---- | :--: | :------: | ------- | ------- |
 | `exchange_email` | `text` | Yes | `user@example.com` | Email account that is used |
 | `exchange_meeting_subject` | `text` | No | `Meeting Subject` | Subject of exchange meeting |
+| `exchange_meeting_subject` | `text` | No | `Meeting Subject` | Subject of exchange meeting |
 | `exchange_meeting_body` | `text` | No | `Meeting Body` | Body of exchange meeting |
 | `exchange_meeting_end_time` | `datetimepicker` | Yes | `-` | When the meeting should end |
 | `exchange_meeting_start_time` | `datetimepicker` | Yes | `-` | When the meeting should start |
+| `exchange_optional_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of optional attendees |
+| `exchange_required_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of required attendees |
+| `exchange_meeting_location` | `text` | No | `https://meeting.room.com/meet/user` | If the meeting is conducted online, then the URL to the Room. Or the Name of the Physical location of the Meeting Room |
+| `exchange_is_online_meeting` | `boolean` | No | `True` | Specifies if the location provided in the above filed is a link or not |
 | `exchange_optional_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of optional attendees |
 | `exchange_required_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of required attendees |
 | `exchange_meeting_location` | `text` | No | `https://meeting.room.com/meet/user` | If the meeting is conducted online, then the URL to the Room. Or the Name of the Physical location of the Meeting Room |
@@ -265,6 +340,61 @@ Creates a meeting and sends out invitation to attendees. The user is provided wi
 
 ```python
 results = {
+  "body": "Please be present",
+  "content": {
+    "body": "Please be present",
+    "end_time": "2023-03-24 13:00:37",
+    "location": "https://example.com",
+    "online_meeting": true,
+    "optional_attendees": [
+      "johndoe.s.1@exchange2016.com"
+    ],
+    "required_attendees": [
+      "sampleuser@exchange2016.com"
+    ],
+    "sender": "johndoe.n@exchange2016.com",
+    "start_time": "2023-03-24 12:00:37",
+    "subject": "Security Weekly Meeting",
+    "timezone": "Etc/GMT"
+  },
+  "end_time": "2023-03-24 13:00:37",
+  "inputs": {
+    "inputs": {
+      "exchange_email": "johndoe.n@exchange2016.com",
+      "exchange_is_online_meeting": true,
+      "exchange_meeting_body": "Please be present",
+      "exchange_meeting_end_time": 1679662837000,
+      "exchange_meeting_location": "https://example.com",
+      "exchange_meeting_start_time": 1679659237000,
+      "exchange_meeting_subject": "Security Weekly Meeting",
+      "exchange_optional_attendees": "johndoe.s.1@exchange2016.com",
+      "exchange_required_attendees": "sampleuser@exchange2016.com"
+    }
+  },
+  "location": "https://example.com",
+  "metrics": {
+    "execution_time_ms": 3233,
+    "host": "exchange2016",
+    "package": "fn-exchange",
+    "package_version": "1.1.0",
+    "timestamp": "2023-03-01 14:28:03",
+    "version": "1.0"
+  },
+  "online_meeting": true,
+  "optional_attendees": [
+    "johndoe.s.1@exchange2016.com"
+  ],
+  "raw": "{\"required_attendees\": [\"sampleuser@exchange2016.com\"], \"optional_attendees\": [\"johndoe.s.1@exchange2016.com\"], \"sender\": \"johndoe.n@exchange2016.com\", \"subject\": \"Security Weekly Meeting\", \"body\": \"Please be present\", \"start_time\": \"2023-03-24 12:00:37\", \"end_time\": \"2023-03-24 13:00:37\", \"timezone\": \"Etc/GMT\", \"location\": \"https://example.com\", \"online_meeting\": true}",
+  "reason": null,
+  "required_attendees": [
+    "sampleuser@exchange2016.com"
+  ],
+  "sender": "johndoe.n@exchange2016.com",
+  "start_time": "2023-03-24 12:00:37",
+  "subject": "Security Weekly Meeting",
+  "success": true,
+  "timezone": "Etc/GMT",
+  "version": "1.0"
   "body": "Please be present",
   "content": {
     "body": "Please be present",
@@ -363,7 +493,21 @@ Results:
    'location': https://meeting.room.com/meet/johndoe
 '''
 enable_write_to_datatables = True
+'''
+Results:
+--------
+   'required_attendees':required1@example.com,required2@example.com
+   'optional_attendees': optional1@example.com,...
+   'sender': sender@example.com
+   'subject': meeting subject
+   'body': meeting body
+   'start_time': 1655938800000
+   'end_time': 1656025200000
+   'location': https://meeting.room.com/meet/johndoe
+'''
+enable_write_to_datatables = True
 
+from datetime import datetime
 from datetime import datetime
 
 content = playbook.functions.results.output_exchange_create_meeting.get("content")
@@ -435,11 +579,19 @@ Emails can be queried from a user's mailbox and deleted. These emails can be fil
 | `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
 | `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
 | `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
+| `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
+| `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
+| `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
 | `exchange_folder_path` | `text` | No | `Top of Information Store,Top of Information Store/Inbox,Top of Information Store/Drafts,...` | Comma separated list of folder paths to query from |
+| `exchange_hard_delete` | `boolean` | Yes | `True` | Yes for hard deletion. No for soft deletion (move to deleted folder) |
+| `exchange_has_attachments` | `boolean` | No | `False` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_hard_delete` | `boolean` | Yes | `True` | Yes for hard deletion. No for soft deletion (move to deleted folder) |
 | `exchange_has_attachments` | `boolean` | No | `False` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
+| `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
+| `exchange_order_by_recency` | `boolean` | No | `False` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
+| `exchange_search_subfolders` | `boolean` | No | `True` | Yes to search subfolders, No or Unknown to not search subfolders |
 | `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
 | `exchange_order_by_recency` | `boolean` | No | `False` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
 | `exchange_search_subfolders` | `boolean` | No | `True` | Yes to search subfolders, No or Unknown to not search subfolders |
@@ -470,7 +622,36 @@ results = {
       "exchange_search_subfolders": null,
       "exchange_sender": null,
       "exchange_start_date": null
+  "content": {},
+  "inputs": {
+    "inputs": {
+      "exchange_email": "exampleuser1@outlook2016.com",
+      "exchange_message_ids": null,
+      "exchange_end_date": null,
+      "exchange_folder_path": null,
+      "exchange_hard_delete": false,
+      "exchange_has_attachments": null,
+      "exchange_message_subject": "Security Weekly Meeting",
+      "exchange_num_emails": 2,
+      "exchange_order_by_recency": null,
+      "exchange_search_subfolders": null,
+      "exchange_sender": null,
+      "exchange_start_date": null
     }
+  },
+  "metrics": {
+    "execution_time_ms": 1293,
+    "host": "exchange2016",
+    "package": "fn-exchange",
+    "package_version": "1.0.5",
+    "timestamp": "2023-02-28 20:21:08",
+    "version": "1.0"
+  },
+  "raw": "{}",
+  "reason": "The SMTP address has no mailbox associated with it.",
+  "success": false,
+  "version": "1.0"
+}
   },
   "metrics": {
     "execution_time_ms": 1293,
@@ -646,10 +827,17 @@ Emails can be queried from a user's mailbox and deleted. These emails can be fil
 | `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
 | `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
 | `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
+| `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
+| `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
+| `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
 | `exchange_folder_path` | `text` | No | `Top of Information Store,Top of Information Store/Inbox,Top of Information Store/Drafts,...` | Comma separated list of folder paths to query from |
+| `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
+| `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
+| `exchange_order_by_recency` | `boolean` | No | `False` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
+| `exchange_search_subfolders` | `boolean` | No | `True` | Yes to search subfolders, No or Unknown to not search subfolders |
 | `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
 | `exchange_order_by_recency` | `boolean` | No | `False` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
 | `exchange_search_subfolders` | `boolean` | No | `True` | Yes to search subfolders, No or Unknown to not search subfolders |
@@ -799,6 +987,31 @@ Example function results:
                       'attachment_content_type': '...',
                       'attachment_size': '...',
                       'attachment_base64': 'attachment encoded in base 64'}}},
+'''
+
+Example function results:
+------------------------
+    {
+      'email_ids': ['id1', 'idN'],
+      'emails': {
+          'id1': {
+              'subject': 'Email Subject',
+              'body': 'Subject body in HTML',
+              'mime_content': mime content of message
+              'sender_name': 'FirstName LastName',
+              'sender_email': 'example@example.com',
+              'attachment_ids': ['attachment_id1', 'attachment_id2'],
+              'attachments': {
+                  'attachment_id1': {
+                      'attachment_name': 'attachment.xslx',
+                      'attachment_content_type': 'spreadsheet',
+                      'attachment_size': '8842',
+                      'attachment_base64': 'attachment encoded in base 64'},
+                  'attachment_id2': {
+                      'attachment_name': '...',
+                      'attachment_content_type': '...',
+                      'attachment_size': '...',
+                      'attachment_base64': 'attachment encoded in base 64'}}},
 
 '''
 
@@ -881,6 +1094,16 @@ Get mailbox info for specified email. The information retrieved from the server 
 <img src="./doc/screenshots/workflow_get-mailbox_info.png" />
 </p>
 
+Get mailbox info for specified email. The information retrieved from the server is saved as a incident note.
+
+ <p align="center">
+<img src="./doc/screenshots/popup_retrieve_info.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/workflow_get-mailbox_info.png" />
+</p>
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -923,7 +1146,33 @@ results = {
   "name": "John Doe",
   "raw": "{\"name\": \"John Doe\", \"email_address\": \"johndoe.n@exchange2016.com\", \"routing_type\": \"SMTP\", \"mailbox_type\": \"Mailbox\"}",
   "reason": null,
+  "content": {
+    "email_address": "johndoe.n@exchange2016.com",
+    "mailbox_type": "Mailbox",
+    "name": "John Doe",
+    "routing_type": "SMTP"
+  },
+  "email_address": "johndoe.n@exchange2016.com",
+  "inputs": {
+    "inputs": {
+      "exchange_get_email": "johndoe.n@exchange2016.com"
+    }
+  },
+  "mailbox_type": "Mailbox",
+  "metrics": {
+    "execution_time_ms": 254,
+    "host": "exchange2016",
+    "package": "fn-exchange",
+    "package_version": "1.1.0",
+    "timestamp": "2023-03-02 12:21:02",
+    "version": "1.0"
+  },
+  "name": "John Doe",
+  "raw": "{\"name\": \"John Doe\", \"email_address\": \"johndoe.n@exchange2016.com\", \"routing_type\": \"SMTP\", \"mailbox_type\": \"Mailbox\"}",
+  "reason": null,
   "routing_type": "SMTP",
+  "success": true,
+  "version": "1.0"
   "success": true,
   "version": "1.0"
 }
@@ -946,6 +1195,14 @@ inputs.exchange_get_email = getattr(playbook.inputs, "exchange_get_email", None)
 <p>
 
 ```python
+'''
+Example
+-------
+response = {
+  'name': 'firstname lastname',
+  'email_address': 'user@example.com',
+  'routing_type': 'SMTP',
+  'mailbox_type': 'Mailbox'}
 '''
 Example
 -------
@@ -1004,16 +1261,25 @@ Move queried emails from a specified folder to another specified folder. The `ex
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exchange_delete_source_folder` | `boolean` | Yes | `False` | Move the emails to another folder and delete the current folder |
+| `exchange_delete_source_folder` | `boolean` | Yes | `False` | Move the emails to another folder and delete the current folder |
 | `exchange_destination_folder_path` | `text` | Yes | `Top of Information Store, Top of Information Store/Inbox` | Folder path of destination folder from root folder, leave empty for root folder |
 | `exchange_email` | `text` | Yes | `user@example.com` | Email account that is used |
+| `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
+| `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
+| `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
 | `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
 | `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
 | `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
 | `exchange_folder_path` | `text` | No | `Top of Information Store,Top of Information Store/Inbox,Top of Information Store/Drafts,...` | Comma separated list of folder paths to query from |
 | `exchange_force_delete_subfolders` | `boolean` | Yes | `False` | Yes to delete even if the folder has subfolders else stops operation |
 | `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, Unknown to get all |
+| `exchange_force_delete_subfolders` | `boolean` | Yes | `False` | Yes to delete even if the folder has subfolders else stops operation |
+| `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
+| `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
+| `exchange_order_by_recency` | `boolean` | No | `True` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
+| `exchange_search_subfolders` | `boolean` | No | `False` | Yes to search subfolders, No or Unknown to not search subfolders |
 | `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
 | `exchange_order_by_recency` | `boolean` | No | `True` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
 | `exchange_search_subfolders` | `boolean` | No | `False` | Yes to search subfolders, No or Unknown to not search subfolders |
@@ -1293,8 +1559,6 @@ Send an email to a list of recipients. Multiple recipients can be specified in a
 </p>
 
 
-<details><summary>Inputs:</summary>
-<p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
@@ -1303,13 +1567,23 @@ Send an email to a list of recipients. Multiple recipients can be specified in a
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
 
+<p align="center">
+<img src="./doc/screenshots/datatable_email_information.png" />
 </p>
-</details>
 
-<details><summary>Outputs:</summary>
-<p>
+#### API Name:
+exchange_email_information_dt
 
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Attachments | `exchange_dt_count_attachments` | `number` | Number of attachments in the email |
+| Date of Retrieval | `exchange_date_of_retrieval` | `text` | Date the email was retrieved from the mailbox. Not to be confused with email recieved date. |
+| Message ID | `exchange_dt_message_id` | `text` | Unique ID of the message |
+| Message Subject | `exchange_dt_message_subject` | `text` | Subject of the email |
+| Recipient Email Address | `exchange_dt_recipient_email` | `text` | Email address of the Recipient |
+| Sender Email Address | `exchange_dt_sender_email` | `text` | Email address of the sender |
+| Status | `exchange_dt_email_status` | `text` | Queried / Sent / Moved / Deleted (depends on the action being performed) |
 
 ```python
 results = {
@@ -1346,11 +1620,12 @@ results = {
 }
 ```
 
+<p align="center">
+<img src="./doc/screenshots/datatable_meeting_information.png" />
 </p>
-</details>
 
-<details><summary>Example Pre-Process Script:</summary>
-<p>
+#### API Name:
+exchange_dt_meeting_information
 
 ```python
 # Set inputs
