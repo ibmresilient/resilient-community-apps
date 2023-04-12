@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Generated with resilient-sdk v48.0.4034
 
-"""Generate the SOAR customizations required for fn_ldap_utilities"""
+"""Generate the Resilient customizations required for fn_ldap_utilities"""
 
 import base64
 import os

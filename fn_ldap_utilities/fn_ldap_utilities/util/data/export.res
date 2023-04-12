@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1681127816722,
+  "export_date": 1681312901603,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -143,6 +143,35 @@
       "tooltip": "The name of the LDAP attribute",
       "type_id": 11,
       "uuid": "ad229bf3-14fe-4f0d-aae1-ee339da733dc",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/ldap_search_cookies",
+      "hide_notification": false,
+      "id": 6522,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "ldap_search_cookies",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "ldap_search_cookies",
+      "tooltip": "Search cookies from last paged search",
+      "type_id": 11,
+      "uuid": "b2a37dbd-dabe-49fa-8909-1e117078cac4",
       "values": []
     },
     {
@@ -418,35 +447,6 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/ldap_search_max_return",
-      "hide_notification": false,
-      "id": 4522,
-      "input_type": "number",
-      "internal": false,
-      "is_tracked": false,
-      "name": "ldap_search_max_return",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "The max number of results that can be returned.",
-      "prefix": null,
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "ldap_search_max_return",
-      "tooltip": "",
-      "type_id": 11,
-      "uuid": "25f0f729-1bac-4c7a-a794-b3b171589472",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
       "export_key": "__function/ldap_attribute_name_values",
       "hide_notification": false,
       "id": 4483,
@@ -624,18 +624,7 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: LDAP Utilities: Add",
-          "object_type": "incident",
-          "programmatic_name": "example_ldap_utilities_add",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 112
-        }
-      ]
+      "workflows": []
     },
     {
       "created_date": 1678390955458,
@@ -684,18 +673,7 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: LDAP Utilities: Add User(s) to Group(s)",
-          "object_type": "artifact",
-          "programmatic_name": "example_ldap_utilities_add_users_to_groups",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 109
-        }
-      ]
+      "workflows": []
     },
     {
       "created_date": 1678390955522,
@@ -744,18 +722,7 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: LDAP Utilities: Remove User(s) from Group(s)",
-          "object_type": "artifact",
-          "programmatic_name": "example_ldap_utilities_remove_user_from_groups",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 111
-        }
-      ]
+      "workflows": []
     },
     {
       "created_date": 1678390955581,
@@ -773,11 +740,11 @@
         "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1679065185827,
+      "last_modified_time": 1681305638128,
       "name": "ldap_utilities_search",
       "tags": [],
       "uuid": "892075c1-64ba-46c9-aba1-f1f1aa040bb7",
-      "version": 4,
+      "version": 6,
       "view_items": [
         {
           "content": "bf1fbfd3-3b2d-4919-a4e2-0a22449d0921",
@@ -820,7 +787,7 @@
           "step_label": null
         },
         {
-          "content": "25f0f729-1bac-4c7a-a794-b3b171589472",
+          "content": "b2a37dbd-dabe-49fa-8909-1e117078cac4",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -838,36 +805,6 @@
           "tags": [],
           "uuid": null,
           "workflow_id": 114
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: LDAP Utilities: Set Password",
-          "object_type": "artifact",
-          "programmatic_name": "example_ldap_utilities_set_password",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 110
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: LDAP Utilities: Toggle Access",
-          "object_type": "artifact",
-          "programmatic_name": "example_ldap_utilities_toggle_access",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 108
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: LDAP Utilities: Update",
-          "object_type": "artifact",
-          "programmatic_name": "example_ldap_utilities_update",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 113
         }
       ]
     },
@@ -934,18 +871,7 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: LDAP Utilities: Set Password",
-          "object_type": "artifact",
-          "programmatic_name": "example_ldap_utilities_set_password",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 110
-        }
-      ]
+      "workflows": []
     },
     {
       "created_date": 1678390955707,
@@ -994,18 +920,7 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: LDAP Utilities: Toggle Access",
-          "object_type": "artifact",
-          "programmatic_name": "example_ldap_utilities_toggle_access",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 108
-        }
-      ]
+      "workflows": []
     },
     {
       "created_date": 1678390955771,
@@ -1062,29 +977,18 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: LDAP Utilities: Update",
-          "object_type": "artifact",
-          "programmatic_name": "example_ldap_utilities_update",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 113
-        }
-      ]
+      "workflows": []
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 40,
+  "id": 42,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1681127815372,
+      "create_date": 1681312899622,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1093,7 +997,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1681127815372,
+      "update_date": 1681312899622,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1813,7 +1717,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 9,
+        "content_version": 27,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0b961651_a9db_4bf6_b5cf_957fd057abd3\" isExecutable=\"true\" name=\"playbook_0b961651_a9db_4bf6_b5cf_957fd057abd3\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1brwefy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# If search filters are given\\nif playbook.inputs.ldap_search_filter:\\n  inputs.ldap_search_filter = playbook.inputs.ldap_search_filter\\n# If filters not given then set them to example filters\\nelse:\\n  inputs.ldap_search_filter = \\\"(\u0026amp;(objectClass=person)(mail=*%ldap_param%))\\\"\\n\\n# If search attributes are given\\nif playbook.inputs.ldap_search_attributes:\\n  inputs.ldap_search_attributes = playbook.inputs.ldap_search_attributes\\n# If search attributes not given then set them to example attributes\\nelse:\\n  inputs.ldap_search_attributes = \\\"*\\\"\\n\\ninputs.ldap_search_param = artifact.value\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif playbook.inputs.ldap_search_base:\\n  inputs.ldap_search_base = playbook.inputs.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif playbook.inputs.ldap_domain_name:\\n  inputs.ldap_domain_name = playbook.inputs.ldap_domain_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1brwefy\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vxukq1\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1brwefy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"bef60ef8-b743-4622-9cb2-6538b78358c8\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1vxukq1\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rb5vyh\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1vxukq1\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0rb5vyh\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0rb5vyh\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0b961651_a9db_4bf6_b5cf_957fd057abd3\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rb5vyh\" id=\"Flow_0rb5vyh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"342\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"364\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vxukq1\" id=\"Flow_1vxukq1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"232\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"258\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1brwefy\" id=\"Flow_1brwefy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"148\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"258\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"364\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1680182401331,
@@ -1982,7 +1886,7 @@
         "name": "f@example.com",
         "type": "user"
       },
-      "last_modified_time": 1680270557967,
+      "last_modified_time": 1681312658644,
       "local_scripts": [
         {
           "actions": [],
@@ -1993,12 +1897,12 @@
           "id": 76,
           "language": "python3",
           "last_modified_by": "f@example.com",
-          "last_modified_time": 1680188690213,
+          "last_modified_time": 1681312652536,
           "name": "post-process",
           "object_type": "artifact",
           "playbook_handle": "example_ldap_utilities_search",
           "programmatic_name": "example_ldap_utilities_search_post_process",
-          "script_text": "results = playbook.functions.results.search_results\n# Globals\nENTRY_TO_DATATABLE_MAP = {\n  \"uid\": \"uid\",\n  \"cn\": \"fullname\",\n  \"sn\": \"surname\",\n  \"mail\": \"email_address\",\n  \"telephoneNumber\": \"telephone_number\"\n}\n\n# Processing if the function is a success\nif results.get(\"success\"):\n  for entry in results.get(\"content\").get(\"entries\"):\n    if not entry:\n      break\n    # Add Row\n    row = incident.addRow(\"ldap_query_results\")\n    for k in ENTRY_TO_DATATABLE_MAP:\n      if not entry[k]:\n        row[ENTRY_TO_DATATABLE_MAP[k]] = \"N/A\"\n      else:\n        try:\n          # If \u0027entry[k]\u0027 is empty\n          if not len(entry[k]):\n            row[ENTRY_TO_DATATABLE_MAP[k]] = \"N/A\"\n          # Handle for Active Directory\n          elif isinstance(entry[k], str):\n            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k]\n          # Handle for OpenLdap\n          else:\n            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k][0]\n        except IndexError:\n          row[ENTRY_TO_DATATABLE_MAP[k]] = \"N/A\"",
+          "script_text": "results = playbook.functions.results.search_results\nENTRY_TO_DATATABLE_MAP = {\n  \"uid\": \"uid\",\n  \"cn\": \"fullname\",\n  \"sn\": \"surname\",\n  \"mail\": \"email_address\",\n  \"telephoneNumber\": \"telephone_number\"\n}\n\n# Processing if the function is a success\nif results.get(\"success\"):\n  for entry in results.get(\"content\").get(\"entries\"):\n    if not entry:\n      break\n    row = incident.addRow(\"ldap_query_results\") # Add Row\n    for k in ENTRY_TO_DATATABLE_MAP:\n      try: # If Handle for Active Directory else Handle for OpenLdap\n        row[ENTRY_TO_DATATABLE_MAP[k]] = \"N/A\" if not entry.get(k) else entry[k] if isinstance(entry[k], str) else entry[k][0]\n      except IndexError:\n        row[ENTRY_TO_DATATABLE_MAP[k]] = \"N/A\"",
           "tags": [],
           "uuid": "bef60ef8-b743-4622-9cb2-6538b78358c8"
         }
@@ -2078,7 +1982,7 @@
       "tags": [],
       "type": "default",
       "uuid": "0b961651-a9db-4bf6-b5cf-957fd057abd3",
-      "version": 14
+      "version": 32
     },
     {
       "activation_type": "manual",
