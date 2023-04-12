@@ -23,19 +23,19 @@ def snake_to_camel(word):
 setup(
     name='fn_create_zoom_meeting',
     display_name='Zoom Functions for SOAR',
-    version='1.1.0',
+    version='2.0.0',
     url='http://ibm.biz/soarcommunity',
     license='MIT',
     author='IBM SOAR',
     author_email='',
     description="Functions to create Zoom meetings as part of a security incident response workflow.",
-    long_description="This SOAR Function package can be used to create a Zoom meeting from a workflow using the Functions feature of the SOAR Circuits integration framework.",
+    long_description="This SOAR Function package can be used to create a Zoom meeting from a workflow using the Functions feature of the Resilient Circuits integration framework.",
     install_requires=[
         'resilient_circuits>=42.0.0',
-        'pyjwt',
         'pytz',
         'bs4'
     ],
+    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

@@ -55,8 +55,9 @@ def mocked_requests_post(*args, **kwargs):
 
 def run_zoom_common_create_meeting():
     zoom_api_url = "https://api.zoom.us/v2"
-    zoom_api_key = ""  # Fill with zoom api key
-    zoom_api_secret = ""  # Fill with zoom api secret
+    zoom_account_id = ""  # Fill with zoom account id
+    zoom_client_id = ""  # Fill with zoom client id
+    zoom_client_secret = "" # Fill with zoom client secret
 
     zoom_host_email = "" # Add associated email
     zoom_agenda = "test"
@@ -67,8 +68,9 @@ def run_zoom_common_create_meeting():
 
     opts = {}
     options = {
-        "zoom_api_key": zoom_api_key, 
-        "zoom_api_secret": zoom_api_secret, 
+        "zoom_client_id": zoom_client_id, 
+        "zoom_client_secret": zoom_client_secret, 
+        "zoom_account_id": zoom_account_id,
         "zoom_api_url": zoom_api_url
         }
 

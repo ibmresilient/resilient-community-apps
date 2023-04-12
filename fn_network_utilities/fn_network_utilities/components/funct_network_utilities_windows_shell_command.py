@@ -41,7 +41,6 @@ class FunctionComponent(AppFunctionComponent):
         shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
         remote_computer = getattr(fn_inputs, "network_utilities_remote_computer", None) #text
 
-
         LOG.info(f"network_utilities_shell_command: {shell_command}")
         LOG.info(f"network_utilities_shell_params: {shell_params}")
         LOG.info(f"network_utilities_remote_computer: {remote_computer}")

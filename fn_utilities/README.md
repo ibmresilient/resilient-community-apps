@@ -25,6 +25,7 @@
 
 | Version | Date   | Notes |
 | ------- | ------ |:----- |
+| 2.1.3 | 03/2023 | Remove log for rest_headers in fn_call_rest_api |
 | 2.1.2 | 01/2023 | Bug fix for version of cryptography |
 | 2.1.1 | 04/2022 | Bug fix for selftest |
 | 2.1.0 | 03/2022 | <ul><li>Support for PATCH method</li><li>Add rule to get owner contact info for Tasks</li><li>Bug fix for utilities_pdfid</li><li>Add new utilities_artifact_hash function</li><li>Add a timeout parameter to call_rest_api function</li></ul> |
@@ -34,6 +35,7 @@
 | 2.0.0 | 07/2020 | Numerous fixes, improved Rules and workflows and only Python 3 supported |
 | 1.0.15 | 05/2020 | Bug fixes, App Host Support |
 | 1.0.14 | 05/2020 | Shell Command support for Remote Linux Execution |
+
 
 ---
 

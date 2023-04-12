@@ -16,6 +16,9 @@ try:
 except:
     import html.parser as htmlparser
 
+LOG = logging.getLogger(__name__)
+
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_create_zoom_meeting"""
 
@@ -48,8 +51,6 @@ class FunctionComponent(ResilientComponent):
 
             zoom_host_email = self.options.get("zoom_marketplace_account_email")
             zoom_api_url = self.options.get("zoom_api_url")
-            zoom_api_key = self.options.get("zoom_api_key")
-            zoom_api_secret = self.options.get("zoom_api_secret")
             zoom_api_timezone = self.options.get("zoom_api_timezone")
 
             if zoom_api_timezone is None:
@@ -61,11 +62,6 @@ class FunctionComponent(ResilientComponent):
             if zoom_api_url is None:
                 yield FunctionError("zoom_api_url is not defined in app.config")
 
-            if zoom_api_key is None:
-                yield FunctionError("zoom_api_key is not defined in app.config")
-
-            if zoom_api_secret is None:
-                yield FunctionError("zoom_api_secret is not defined in app.config")
 
             if zoom_topic is None:
                 zoom_topic = ""
@@ -79,7 +75,7 @@ class FunctionComponent(ResilientComponent):
 
             yield FunctionResult(r)
         except Exception as e:
-            log.error(e)
+            LOG.error(e)
             yield FunctionError(e)
 
     def _clean_html(self, html_fragment):
