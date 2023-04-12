@@ -4,6 +4,7 @@ include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_microsoft_sentinel/util *
 recursive-include fn_microsoft_sentinel/poller *
+recursive-include fn_microsoft_sentinel/lib *
 include fn_microsoft_sentinel/LICENSE
 include doc/*.md
 include doc/screenshots/*
