@@ -86,7 +86,7 @@ class TrusteerPPDClient():
         return linkback_url.format(base_url=self.endpoint_url, id_type=id_type, id=id)
 
     def update_classification(self, session_id: str, application_id: str, feedback: str, fraud_mo: str) -> dict:
-        """_summary_
+        """Send Classification on the session alert back to Trusteer.
 
         Args:
             classification (str): The new resolution value for the record. 
@@ -109,7 +109,7 @@ class TrusteerPPDClient():
                 mule_account - The account is a mule account that is used by fraudsters
 
         Returns:
-            dict: _description_
+            dict: json object indicating whether classification feedback was sent successfully
         """
         # Get Trusteer Pinpoint REST API URL for feedback
         url = self._get_uri(PINPOINT_FEEDBACK_URL)
@@ -130,3 +130,4 @@ class TrusteerPPDClient():
         response_json = response.json()
 
         return response_json
+

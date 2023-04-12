@@ -7,7 +7,6 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from fn_trusteer_ppd.lib.trusteer_ppd_client import TrusteerPPDClient, PACKAGE_NAME
 from fn_trusteer_ppd.lib.configure_tab import init_trusteer_ppd_tab
 
-PACKAGE_NAME = "fn_trusteer_ppd"
 FN_NAME = "trusteer_ppd_get_url_links_to_trusteer"
 
 
