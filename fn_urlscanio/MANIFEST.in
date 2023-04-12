@@ -1,0 +1,3 @@
+include README.md
+include fn_urlscanio/util/*
+include fn_urlscanio/LICENSE

@@ -1,0 +1,15 @@
+{
+    "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiGxxxxx-----END PUBLIC KEY-----\n",
+    "version": 2,
+    "signature_algorithm": "sha256WithRSAEncryption",
+    "extensions": {
+      "issuerAltNames": "[]",
+      "subjectAltNames": "['*.ibm.com', 'ibm.com']",
+      "basicConstraints": "false"
+    },
+    "notBefore": "2018-03-16 00:00:00",
+    "issuer": "'xxxx'",
+    "expiration_status": "Valid",
+    "notAfter": "2020-03-15 12:00:00",
+    "subject": "'[(\"C\", \"US\"), (\"ST\", \"New York\"), (\"L\", \"Armonk\"), (\"O\", \"International Business Machines Corporation\"), (\"CN\", \"*.ibm.com\")]'"
+}

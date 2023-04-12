@@ -1,0 +1,3 @@
+include README.md
+include fn_grr_search/util/*
+include fn_grr_search/LICENSE
