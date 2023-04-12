@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1681216423434,
+  "export_date": 1681301290075,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1510,13 +1510,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 2,
+  "id": 3,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1681216420806,
+      "create_date": 1681301287524,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1525,7 +1525,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1681216420806,
+      "update_date": 1681301287524,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1554,253 +1554,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\" isExecutable=\"true\" name=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kyausf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Move Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4caa6dc8-1ac6-4b54-bb97-6f8e041bf067\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"68b57992-1013-4b8e-a346-ad2bf7bab85c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9b5b8a91-0a07-493b-9eaf-7d55e0bdcc1a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"6a692281-1bf5-425e-b80b-2552a1d974bf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fb62c41a-089a-4e9d-8120-a1881d488802\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"448eb40d-862e-4060-b9fb-533cad926d60\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"083a1b4e-a13d-4d4c-9b96-91a3be1358d4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"f01a2772-3982-4775-add9-ddf5d186a676\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"f2f42571-196f-4de3-b974-44afe622b14e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"00cff531-cd95-4db4-b043-f8afbf05182c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d74ad5b7-34c0-40ab-9e67-78ddda58964f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fd95941a-4ce2-4c29-9ff5-7cbb478992b4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a442703a-a3c4-405f-84c7-8d88c6798ce9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"598dd034-5efb-49af-a8bd-10b40218515a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# For information on input values, read tooltips\\ninputs.exchange_email_operation = \\\"MOVED\\\"\\n\\ninputs.exchange_email                   = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_folder_path             = getattr(playbook.inputs, \\\"exchange_folder_path\\\", None)\\ninputs.exchange_destination_folder_path = getattr(playbook.inputs, \\\"exchange_destination_folder_path\\\", None)\\ninputs.exchange_force_delete_subfolders = getattr(playbook.inputs, \\\"exchange_force_delete_subfolders\\\", False)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kyausf\u003c/incoming\u003e\u003coutgoing\u003eFlow_17jksda\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kyausf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Push Emails to Datatables\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1f93d76-809d-425f-a9ec-02dcb2637a98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17jksda\u003c/incoming\u003e\u003coutgoing\u003eFlow_04ykqx0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17jksda\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_04ykqx0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_04ykqx0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kyausf\" id=\"Flow_1kyausf_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-864\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-742\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17jksda\" id=\"Flow_17jksda_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-658\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-552\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04ykqx0\" id=\"Flow_04ykqx0_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-468\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-326\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"641.5419999999999\" y=\"-742.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"-552.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"646\" y=\"-916\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"674\" y=\"-326.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "create_date": 1680869460762,
-      "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
-      "deployment_id": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
-      "description": {
-        "content": "Gets all emails from a folder, move those emails to another folder, delete the original folder, then make an artifact from the results.",
-        "format": "text"
-      },
-      "display_name": "Playbook: Exchange Move and Delete Folder Contents",
-      "export_key": "playbook_exchange_move_and_delete_folder_contents",
-      "field_type_handle": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
-      "fields_type": {
-        "actions": [],
-        "display_name": "Playbook: Exchange Move and Delete Folder Contents",
-        "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
-        "fields": {
-          "exchange_destination_folder_path": {
-            "allow_default_value": false,
-            "blank_option": false,
-            "calculated": false,
-            "changeable": true,
-            "chosen": false,
-            "default_chosen_by_server": false,
-            "deprecated": false,
-            "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_destination_folder_path",
-            "hide_notification": false,
-            "id": 675,
-            "input_type": "text",
-            "internal": false,
-            "is_tracked": false,
-            "name": "exchange_destination_folder_path",
-            "operation_perms": {},
-            "operations": [],
-            "placeholder": "Top of Information Store, Top of Information Store/Inbox",
-            "prefix": null,
-            "read_only": false,
-            "rich_text": false,
-            "tags": [],
-            "templates": [],
-            "text": "Destination Folder",
-            "tooltip": "Folder path of destination folder from root folder, leave empty for root folder",
-            "type_id": 1018,
-            "uuid": "909b338d-a768-4e21-af2a-4ae2b135318e",
-            "values": []
-          },
-          "exchange_email": {
-            "allow_default_value": false,
-            "blank_option": false,
-            "calculated": false,
-            "changeable": true,
-            "chosen": false,
-            "default_chosen_by_server": false,
-            "deprecated": false,
-            "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_email",
-            "hide_notification": false,
-            "id": 661,
-            "input_type": "text",
-            "internal": false,
-            "is_tracked": false,
-            "name": "exchange_email",
-            "operation_perms": {},
-            "operations": [],
-            "placeholder": "user.1@example.com",
-            "prefix": null,
-            "read_only": false,
-            "rich_text": false,
-            "tags": [],
-            "templates": [],
-            "text": "Email address",
-            "tooltip": "Email account that is used to perform this operation",
-            "type_id": 1018,
-            "uuid": "4ac2cce1-2e11-4d42-87dd-415dc246c3d5",
-            "values": []
-          },
-          "exchange_folder_path": {
-            "allow_default_value": false,
-            "blank_option": false,
-            "calculated": false,
-            "changeable": true,
-            "chosen": false,
-            "default_chosen_by_server": false,
-            "deprecated": false,
-            "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_folder_path",
-            "hide_notification": false,
-            "id": 664,
-            "input_type": "text",
-            "internal": false,
-            "is_tracked": false,
-            "name": "exchange_folder_path",
-            "operation_perms": {},
-            "operations": [],
-            "placeholder": "Top of Information Store, Top of Information Store/Inbox, Top of Information Store/Drafts",
-            "prefix": null,
-            "read_only": false,
-            "rich_text": false,
-            "tags": [],
-            "templates": [],
-            "text": "Source Locatoin",
-            "tooltip": "Comma separated list of folder paths to query from or the location from which mails are to be moved",
-            "type_id": 1018,
-            "uuid": "ea6083ee-ec49-42aa-908f-b9f4d66a0ae4",
-            "values": []
-          },
-          "exchange_force_delete_subfolders": {
-            "allow_default_value": false,
-            "blank_option": false,
-            "calculated": false,
-            "changeable": true,
-            "chosen": false,
-            "default_chosen_by_server": false,
-            "deprecated": false,
-            "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_force_delete_subfolders",
-            "hide_notification": false,
-            "id": 676,
-            "input_type": "boolean",
-            "internal": false,
-            "is_tracked": false,
-            "name": "exchange_force_delete_subfolders",
-            "operation_perms": {},
-            "operations": [],
-            "placeholder": "",
-            "prefix": null,
-            "read_only": false,
-            "rich_text": false,
-            "tags": [],
-            "templates": [],
-            "text": "Force delete subfolders",
-            "tooltip": "Yes to delete even if the folder has subfolders else stops the deletion process",
-            "type_id": 1018,
-            "uuid": "71ec2d5e-1d72-4801-a9b4-3c7ddb656303",
-            "values": []
-          }
-        },
-        "for_actions": false,
-        "for_custom_fields": false,
-        "for_notifications": false,
-        "for_workflows": false,
-        "id": null,
-        "parent_types": [
-          "__playbook"
-        ],
-        "properties": {
-          "can_create": false,
-          "can_destroy": false,
-          "for_who": []
-        },
-        "scripts": [],
-        "tags": [],
-        "type_id": 28,
-        "type_name": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
-        "uuid": "468546bc-846e-4106-a53a-21195f4957a1"
-      },
-      "has_logical_errors": false,
-      "id": 17,
-      "is_deleted": false,
-      "is_locked": false,
-      "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
-      "last_modified_time": 1681208490792,
-      "local_scripts": [],
-      "manual_settings": {
-        "activation_conditions": {
-          "conditions": [],
-          "logic_type": "all"
-        },
-        "view_items": [
-          {
-            "content": "\u003cp style=\"font-size: 15.0px;\"\u003e This function allows for moving all contents of a folder to another and deleting the source folder.  \u003c/p\u003e\u003cbr /\u003e",
-            "element": "html",
-            "field_type": null,
-            "show_if": null,
-            "show_link_header": false,
-            "step_label": null
-          },
-          {
-            "content": "4ac2cce1-2e11-4d42-87dd-415dc246c3d5",
-            "element": "field_uuid",
-            "field_type": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
-            "show_if": null,
-            "show_link_header": false,
-            "step_label": null
-          },
-          {
-            "content": "ea6083ee-ec49-42aa-908f-b9f4d66a0ae4",
-            "element": "field_uuid",
-            "field_type": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
-            "show_if": null,
-            "show_link_header": false,
-            "step_label": null
-          },
-          {
-            "content": "909b338d-a768-4e21-af2a-4ae2b135318e",
-            "element": "field_uuid",
-            "field_type": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
-            "show_if": null,
-            "show_link_header": false,
-            "step_label": null
-          },
-          {
-            "content": "71ec2d5e-1d72-4801-a9b4-3c7ddb656303",
-            "element": "field_uuid",
-            "field_type": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
-            "show_if": null,
-            "show_link_header": false,
-            "step_label": null
-          },
-          {
-            "content": "\u003cbr /\u003e\n\u003cp style=\"font-size: 12.0px;\"\u003e\u003cb\u003e\u003cspan style=\"color: red;\"\u003e*\u003c/span\u003e\u003cu\u003eNote\u003c/u\u003e: \u003c/b\u003e The function \u003cb\u003edoes not\u003c/b\u003e move sub-folders or their contents. If the \u003cb\u003eForce delete sub-folders\u003c/b\u003e option is selected, the function will delete all the sub-folders and their contents permanently \u003c/p\u003e",
-            "element": "html",
-            "field_type": null,
-            "show_if": null,
-            "show_link_header": false,
-            "step_label": null
-          }
-        ]
-      },
-      "name": "playbook_exchange_move_and_delete_folder_contents",
-      "object_type": "incident",
-      "status": "enabled",
-      "tag": {
-        "display_name": "Playbook_29a00aff-ee2d-4048-9bbc-90b4bd2b8963",
-        "id": 18,
-        "name": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
-        "type": "playbook",
-        "uuid": "fad8648d-2f56-4fcd-8dd7-ff1d82a20617"
-      },
-      "tags": [],
-      "type": "default",
-      "uuid": "29a00aff-ee2d-4048-9bbc-90b4bd2b8963",
-      "version": 13
-    },
-    {
-      "activation_type": "manual",
-      "content": {
-        "content_version": 14,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\" isExecutable=\"true\" name=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1oxszau\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Create Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"145aab42-f201-4d01-95ad-6181b64720b7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exchange_email = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_meeting_start_time = getattr(playbook.inputs, \\\"exchange_meeting_start_time\\\", None)\\ninputs.exchange_meeting_end_time = getattr(playbook.inputs, \\\"exchange_meeting_end_time\\\", None)\\ninputs.exchange_meeting_subject = getattr(playbook.inputs, \\\"exchange_meeting_subject\\\", None)\\ninputs.exchange_required_attendees = getattr(playbook.inputs, \\\"exchange_required_attendees\\\", None)\\ninputs.exchange_optional_attendees = getattr(playbook.inputs, \\\"exchange_optional_attendees\\\", None)\\ninputs.exchange_meeting_location = getattr(playbook.inputs, \\\"exchange_meeting_location\\\", None)\\ninputs.exchange_is_online_meeting = getattr(playbook.inputs, \\\"exchange_is_online_meeting\\\", False)\\n\\nif playbook.inputs.exchange_meeting_body and playbook.inputs.exchange_meeting_body.content:\\n  inputs.exchange_meeting_body = playbook.inputs.exchange_meeting_body.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_create_meeting\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1oxszau\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xv63p6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1oxszau\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_176827y\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"Postprocess Meeting Invite\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"498fc2b9-1d89-4497-8e58-5755f5e58f45\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xv63p6\u003c/incoming\u003e\u003coutgoing\u003eFlow_176827y\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_176827y\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_4\"/\u003e\u003csequenceFlow id=\"Flow_0xv63p6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xv63p6\" id=\"Flow_0xv63p6_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"202\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_176827y\" id=\"Flow_176827y_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1oxszau\" id=\"Flow_1oxszau_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"16\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"118\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"684\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"656\" y=\"-36\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 15,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\" isExecutable=\"true\" name=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1oxszau\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Create Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"145aab42-f201-4d01-95ad-6181b64720b7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exchange_email = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_meeting_start_time = getattr(playbook.inputs, \\\"exchange_meeting_start_time\\\", None)\\ninputs.exchange_meeting_end_time = getattr(playbook.inputs, \\\"exchange_meeting_end_time\\\", None)\\ninputs.exchange_meeting_subject = getattr(playbook.inputs, \\\"exchange_meeting_subject\\\", None)\\ninputs.exchange_required_attendees = getattr(playbook.inputs, \\\"exchange_required_attendees\\\", None)\\ninputs.exchange_optional_attendees = getattr(playbook.inputs, \\\"exchange_optional_attendees\\\", None)\\ninputs.exchange_meeting_location = getattr(playbook.inputs, \\\"exchange_meeting_location\\\", None)\\ninputs.exchange_is_online_meeting = getattr(playbook.inputs, \\\"exchange_is_online_meeting\\\", False)\\n\\nif playbook.inputs.exchange_meeting_body and playbook.inputs.exchange_meeting_body.content:\\n  inputs.exchange_meeting_body = playbook.inputs.exchange_meeting_body.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_create_meeting\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1oxszau\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xv63p6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1oxszau\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_176827y\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"Push Meeting Invite to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"498fc2b9-1d89-4497-8e58-5755f5e58f45\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xv63p6\u003c/incoming\u003e\u003coutgoing\u003eFlow_176827y\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_176827y\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_4\"/\u003e\u003csequenceFlow id=\"Flow_0xv63p6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xv63p6\" id=\"Flow_0xv63p6_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"202\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_176827y\" id=\"Flow_176827y_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1oxszau\" id=\"Flow_1oxszau_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"16\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"656\" y=\"-36\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"118\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"684\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1680694876786,
       "creator_principal": {
@@ -2113,19 +1868,19 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1681214881207,
+      "last_modified_time": 1681290905938,
       "local_scripts": [
         {
           "actions": [],
           "created_date": 1680694876944,
           "description": "A post-processing script that processes the meeting invite and creates a note or adds it as an entry to the Datatable",
           "enabled": false,
-          "export_key": "Postprocess Meeting Invite",
+          "export_key": "Push Meeting Invite to DataTable",
           "id": 2,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1681209839415,
-          "name": "Postprocess Meeting Invite",
+          "last_modified_time": 1681290901063,
+          "name": "Push Meeting Invite to DataTable",
           "object_type": "incident",
           "playbook_handle": "example_playbook_for_exchange_create_meetings",
           "programmatic_name": "example_playbook_for_exchange_create_meetings_postprocess_meeting_invite",
@@ -2251,7 +2006,7 @@
       "tags": [],
       "type": "default",
       "uuid": "f3349a04-5261-44c8-8417-a67c590da40d",
-      "version": 16
+      "version": 17
     },
     {
       "activation_type": "manual",
@@ -3827,6 +3582,251 @@
     {
       "activation_type": "manual",
       "content": {
+        "content_version": 9,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\" isExecutable=\"true\" name=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kyausf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Move Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4caa6dc8-1ac6-4b54-bb97-6f8e041bf067\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"68b57992-1013-4b8e-a346-ad2bf7bab85c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9b5b8a91-0a07-493b-9eaf-7d55e0bdcc1a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"6a692281-1bf5-425e-b80b-2552a1d974bf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fb62c41a-089a-4e9d-8120-a1881d488802\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"448eb40d-862e-4060-b9fb-533cad926d60\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"083a1b4e-a13d-4d4c-9b96-91a3be1358d4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"f01a2772-3982-4775-add9-ddf5d186a676\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"f2f42571-196f-4de3-b974-44afe622b14e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"00cff531-cd95-4db4-b043-f8afbf05182c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d74ad5b7-34c0-40ab-9e67-78ddda58964f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fd95941a-4ce2-4c29-9ff5-7cbb478992b4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a442703a-a3c4-405f-84c7-8d88c6798ce9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"598dd034-5efb-49af-a8bd-10b40218515a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# For information on input values, read tooltips\\ninputs.exchange_email_operation = \\\"MOVED\\\"\\n\\ninputs.exchange_email                   = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_folder_path             = getattr(playbook.inputs, \\\"exchange_folder_path\\\", None)\\ninputs.exchange_destination_folder_path = getattr(playbook.inputs, \\\"exchange_destination_folder_path\\\", None)\\ninputs.exchange_force_delete_subfolders = getattr(playbook.inputs, \\\"exchange_force_delete_subfolders\\\", False)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kyausf\u003c/incoming\u003e\u003coutgoing\u003eFlow_17jksda\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kyausf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Push Emails to DataTables\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1f93d76-809d-425f-a9ec-02dcb2637a98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17jksda\u003c/incoming\u003e\u003coutgoing\u003eFlow_04ykqx0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17jksda\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_04ykqx0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_04ykqx0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04ykqx0\" id=\"Flow_04ykqx0_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-468\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-326\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17jksda\" id=\"Flow_17jksda_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-658\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-552\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kyausf\" id=\"Flow_1kyausf_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-864\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-742\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"646\" y=\"-916\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"641.5419999999999\" y=\"-742.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"-552.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"674\" y=\"-326.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1680869460762,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
+      "description": {
+        "content": "Gets all emails from a folder, move those emails to another folder, delete the original folder, then make an artifact from the results.",
+        "format": "text"
+      },
+      "display_name": "Playbooks: Exchange Move and Delete Folder Contents",
+      "export_key": "playbook_exchange_move_and_delete_folder_contents",
+      "field_type_handle": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Playbook: Exchange Move and Delete Folder Contents",
+        "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
+        "fields": {
+          "exchange_destination_folder_path": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_destination_folder_path",
+            "hide_notification": false,
+            "id": 675,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "exchange_destination_folder_path",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "Top of Information Store, Top of Information Store/Inbox",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Destination Folder",
+            "tooltip": "Folder path of destination folder from root folder, leave empty for root folder",
+            "type_id": 1018,
+            "uuid": "909b338d-a768-4e21-af2a-4ae2b135318e",
+            "values": []
+          },
+          "exchange_email": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_email",
+            "hide_notification": false,
+            "id": 661,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "exchange_email",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "user.1@example.com",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Email address",
+            "tooltip": "Email account that is used to perform this operation",
+            "type_id": 1018,
+            "uuid": "4ac2cce1-2e11-4d42-87dd-415dc246c3d5",
+            "values": []
+          },
+          "exchange_folder_path": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_folder_path",
+            "hide_notification": false,
+            "id": 664,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "exchange_folder_path",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "Top of Information Store, Top of Information Store/Inbox, Top of Information Store/Drafts",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Source Locatoin",
+            "tooltip": "Comma separated list of folder paths to query from or the location from which mails are to be moved",
+            "type_id": 1018,
+            "uuid": "ea6083ee-ec49-42aa-908f-b9f4d66a0ae4",
+            "values": []
+          },
+          "exchange_force_delete_subfolders": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_force_delete_subfolders",
+            "hide_notification": false,
+            "id": 676,
+            "input_type": "boolean",
+            "internal": false,
+            "is_tracked": false,
+            "name": "exchange_force_delete_subfolders",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Force delete subfolders",
+            "tooltip": "Yes to delete even if the folder has subfolders else stops the deletion process",
+            "type_id": 1018,
+            "uuid": "71ec2d5e-1d72-4801-a9b4-3c7ddb656303",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
+        "uuid": "468546bc-846e-4106-a53a-21195f4957a1"
+      },
+      "has_logical_errors": false,
+      "id": 17,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1681290726019,
+      "local_scripts": [],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "\u003cp style=\"font-size: 15.0px;\"\u003e This function allows for moving all contents of a folder to another and deleting the source folder.  \u003c/p\u003e\u003cbr /\u003e",
+            "element": "html",
+            "field_type": null,
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "4ac2cce1-2e11-4d42-87dd-415dc246c3d5",
+            "element": "field_uuid",
+            "field_type": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "ea6083ee-ec49-42aa-908f-b9f4d66a0ae4",
+            "element": "field_uuid",
+            "field_type": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "909b338d-a768-4e21-af2a-4ae2b135318e",
+            "element": "field_uuid",
+            "field_type": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "71ec2d5e-1d72-4801-a9b4-3c7ddb656303",
+            "element": "field_uuid",
+            "field_type": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "\u003cbr /\u003e\n\u003cp style=\"font-size: 12.0px;\"\u003e\u003cb\u003e\u003cspan style=\"color: red;\"\u003e*\u003c/span\u003e\u003cu\u003eNote\u003c/u\u003e: \u003c/b\u003e The function \u003cb\u003edoes not\u003c/b\u003e move sub-folders or their contents. If the \u003cb\u003eForce delete sub-folders\u003c/b\u003e option is selected, the function will delete all the sub-folders and their contents permanently \u003c/p\u003e",
+            "element": "html",
+            "field_type": null,
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "playbook_exchange_move_and_delete_folder_contents",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_29a00aff-ee2d-4048-9bbc-90b4bd2b8963",
+        "id": 18,
+        "name": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
+        "type": "playbook",
+        "uuid": "fad8648d-2f56-4fcd-8dd7-ff1d82a20617"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "29a00aff-ee2d-4048-9bbc-90b4bd2b8963",
+      "version": 15
+    },
+    {
+      "activation_type": "manual",
+      "content": {
         "content_version": 14,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_f80a68a8_2f09_4e56_beac_0860d89092ca\" isExecutable=\"true\" name=\"playbook_f80a68a8_2f09_4e56_beac_0860d89092ca\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kb1qbu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Move Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4caa6dc8-1ac6-4b54-bb97-6f8e041bf067\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"68b57992-1013-4b8e-a346-ad2bf7bab85c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9b5b8a91-0a07-493b-9eaf-7d55e0bdcc1a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"6a692281-1bf5-425e-b80b-2552a1d974bf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fb62c41a-089a-4e9d-8120-a1881d488802\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"448eb40d-862e-4060-b9fb-533cad926d60\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"083a1b4e-a13d-4d4c-9b96-91a3be1358d4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"f01a2772-3982-4775-add9-ddf5d186a676\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"f2f42571-196f-4de3-b974-44afe622b14e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"00cff531-cd95-4db4-b043-f8afbf05182c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d74ad5b7-34c0-40ab-9e67-78ddda58964f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fd95941a-4ce2-4c29-9ff5-7cbb478992b4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a442703a-a3c4-405f-84c7-8d88c6798ce9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"# For information on input values, read tooltips\\ninputs.exchange_email_operation = \\\"MOVED\\\"\\ninputs.exchange_delete_source_folder = False\\n\\ninputs.exchange_folder_path = getattr(playbook.inputs, \\\"exchange_folder_path\\\", None)\\ninputs.exchange_destination_folder_path = getattr(playbook.inputs, \\\"exchange_destination_folder_path\\\", None)\\ninputs.exchange_force_delete_subfolders = getattr(playbook.inputs, \\\"exchange_force_delete_subfolders\\\", False)\\n\\ninputs.exchange_email           = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_email_ids       = getattr(playbook.inputs, \\\"exchange_email_ids\\\", None)\\ninputs.exchange_sender          = getattr(playbook.inputs, \\\"exchange_sender\\\", None)\\ninputs.exchange_message_subject = getattr(playbook.inputs, \\\"exchange_message_subject\\\", None)\\ninputs.exchange_start_date      = getattr(playbook.inputs, \\\"exchange_start_date\\\", None)\\ninputs.exchange_end_date        = getattr(playbook.inputs, \\\"exchange_end_date\\\", None)\\ninputs.exchange_num_emails      = getattr(playbook.inputs, \\\"exchange_num_emails\\\", None)\\n\\ninputs.exchange_order_by_recency  = getattr(playbook.inputs, \\\"exchange_order_by_recency\\\", None)\\ninputs.exchange_search_subfolders = getattr(playbook.inputs, \\\"exchange_search_subfolders\\\", None)\\ninputs.exchange_has_attachments   = getattr(playbook.inputs, \\\"exchange_has_attachments\\\", None)\\n\\nif playbook.inputs.exchange_message_body and playbook.inputs.exchange_message_body.content:\\n  inputs.exchange_message_body = playbook.inputs.exchange_message_body.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kb1qbu\u003c/incoming\u003e\u003coutgoing\u003eFlow_1pz417l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kb1qbu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Push Emails to DataTables\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1f93d76-809d-425f-a9ec-02dcb2637a98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1pz417l\u003c/incoming\u003e\u003coutgoing\u003eFlow_03fgfvg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1pz417l\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_03fgfvg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_03fgfvg\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f80a68a8_2f09_4e56_beac_0860d89092ca\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03fgfvg\" id=\"Flow_03fgfvg_di\"\u003e\u003comgdi:waypoint x=\"640\" y=\"-208\"/\u003e\u003comgdi:waypoint x=\"640\" y=\"-126\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1pz417l\" id=\"Flow_1pz417l_di\"\u003e\u003comgdi:waypoint x=\"640\" y=\"-378\"/\u003e\u003comgdi:waypoint x=\"640\" y=\"-292\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kb1qbu\" id=\"Flow_1kb1qbu_di\"\u003e\u003comgdi:waypoint x=\"640\" y=\"-574\"/\u003e\u003comgdi:waypoint x=\"640\" y=\"-462\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"546\" y=\"-626\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"542\" y=\"-462\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"542\" y=\"-292\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"574\" y=\"-126\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
@@ -4429,7 +4429,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 44,
+        "content_version": 45,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_3dd89838_239b_4a92_8715_89a1ce35ab20\" isExecutable=\"true\" name=\"playbook_3dd89838_239b_4a92_8715_89a1ce35ab20\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1oxszau\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_1oxszau\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_5\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fqifyn\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Exchange Send Email\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17b4b6d-5d21-413e-8d90-b7d95ebb79c0\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"3c92533f-7241-4d0e-b031-2bb4aa510ca9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# Set inputs\\ninputs.exchange_email            = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_message_subject  = getattr(playbook.inputs, \\\"exchange_message_subject\\\", None)\\ninputs.exchange_email_recipients = getattr(playbook.inputs, \\\"exchange_email_recipients\\\", None)\\n\\nif playbook.inputs.exchange_message_body and playbook.inputs.exchange_message_body.content:\\n  inputs.exchange_message_body = playbook.inputs.exchange_message_body.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_send_email\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1oxszau\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xoo0eh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0xoo0eh\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_6\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"Post Processing Email\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"973377cc-9298-4e45-8a55-ba1d9877ba81\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xoo0eh\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fqifyn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0fqifyn\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3dd89838_239b_4a92_8715_89a1ce35ab20\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fqifyn\" id=\"Flow_0fqifyn_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xoo0eh\" id=\"Flow_0xoo0eh_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1oxszau\" id=\"Flow_1oxszau_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"126\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"636\" y=\"74\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"631.5\" y=\"377.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1680698092309,
@@ -4598,7 +4598,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1681212200337,
+      "last_modified_time": 1681296773408,
       "local_scripts": [
         {
           "actions": [],
@@ -4706,7 +4706,7 @@
       "tags": [],
       "type": "default",
       "uuid": "3dd89838-239b-4a92-8715-89a1ce35ab20",
-      "version": 48
+      "version": 49
     }
   ],
   "regulators": null,
