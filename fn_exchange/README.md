@@ -1007,7 +1007,7 @@ Move queried emails from a specified folder to another specified folder. The `ex
 | `exchange_order_by_recency` | `boolean` | No | `True` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
 | `exchange_search_subfolders` | `boolean` | No | `False` | Yes to search subfolders, No or Unknown to not search subfolders |
 | `exchange_sender` | `text` | No | `user@example.com` | Only get emails from this sender, leave blank to ignore sender attribute |
-
+ 
 </p>
 </details>
 
