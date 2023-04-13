@@ -69,8 +69,6 @@ This application extends the capabilities of the SOAR platform with Microsoft Ex
 
 - Saved all scheduled meetings as incident notes or in a separate incident tab called Exchange.<br>
 
-- Get mailbox information for a particular sender.<br>
-
 - Get emails from a user's mailbox and filter them based on fundamental attributes including the sender's email address, the location of the email's folder, the subject, the body, and if it contains attachments.<br>
 
 - Conduct a thorough search of the user's mailbox by tunneling subfolders, conducting the search based on the beginning and ending dates of emails received, sorting emails by recency, and limiting the number of emails obtained.
@@ -242,7 +240,6 @@ Creates a meeting and sends out invitation to attendees. The user is provided wi
 | ---- | :--: | :------: | ------- | ------- |
 | `exchange_email` | `text` | Yes | `user@example.com` | Email account that is used |
 | `exchange_meeting_subject` | `text` | No | `Meeting Subject` | Subject of exchange meeting |
-| `exchange_meeting_subject` | `text` | No | `Meeting Subject` | Subject of exchange meeting |
 | `exchange_meeting_body` | `text` | No | `Meeting Body` | Body of exchange meeting |
 | `exchange_meeting_end_time` | `datetimepicker` | Yes | `-` | When the meeting should end |
 | `exchange_meeting_start_time` | `datetimepicker` | Yes | `-` | When the meeting should start |
@@ -261,61 +258,6 @@ Creates a meeting and sends out invitation to attendees. The user is provided wi
 
 ```python
 results = {
-  "body": "Please be present",
-  "content": {
-    "body": "Please be present",
-    "end_time": "2023-03-24 13:00:37",
-    "location": "https://example.com",
-    "online_meeting": true,
-    "optional_attendees": [
-      "johndoe.s.1@exchange2016.com"
-    ],
-    "required_attendees": [
-      "sampleuser@exchange2016.com"
-    ],
-    "sender": "johndoe.n@exchange2016.com",
-    "start_time": "2023-03-24 12:00:37",
-    "subject": "Security Weekly Meeting",
-    "timezone": "Etc/GMT"
-  },
-  "end_time": "2023-03-24 13:00:37",
-  "inputs": {
-    "inputs": {
-      "exchange_email": "johndoe.n@exchange2016.com",
-      "exchange_is_online_meeting": true,
-      "exchange_meeting_body": "Please be present",
-      "exchange_meeting_end_time": 1679662837000,
-      "exchange_meeting_location": "https://example.com",
-      "exchange_meeting_start_time": 1679659237000,
-      "exchange_meeting_subject": "Security Weekly Meeting",
-      "exchange_optional_attendees": "johndoe.s.1@exchange2016.com",
-      "exchange_required_attendees": "sampleuser@exchange2016.com"
-    }
-  },
-  "location": "https://example.com",
-  "metrics": {
-    "execution_time_ms": 3233,
-    "host": "exchange2016",
-    "package": "fn-exchange",
-    "package_version": "1.1.0",
-    "timestamp": "2023-03-01 14:28:03",
-    "version": "1.0"
-  },
-  "online_meeting": true,
-  "optional_attendees": [
-    "johndoe.s.1@exchange2016.com"
-  ],
-  "raw": "{\"required_attendees\": [\"sampleuser@exchange2016.com\"], \"optional_attendees\": [\"johndoe.s.1@exchange2016.com\"], \"sender\": \"johndoe.n@exchange2016.com\", \"subject\": \"Security Weekly Meeting\", \"body\": \"Please be present\", \"start_time\": \"2023-03-24 12:00:37\", \"end_time\": \"2023-03-24 13:00:37\", \"timezone\": \"Etc/GMT\", \"location\": \"https://example.com\", \"online_meeting\": true}",
-  "reason": null,
-  "required_attendees": [
-    "sampleuser@exchange2016.com"
-  ],
-  "sender": "johndoe.n@exchange2016.com",
-  "start_time": "2023-03-24 12:00:37",
-  "subject": "Security Weekly Meeting",
-  "success": true,
-  "timezone": "Etc/GMT",
-  "version": "1.0"
   "body": "Please be present",
   "content": {
     "body": "Please be present",
@@ -416,7 +358,6 @@ Results:
 enable_write_to_datatables = True
 
 from datetime import datetime
-from datetime import datetime
 
 content = playbook.functions.results.output_exchange_create_meeting.get("content")
 success = playbook.functions.results.output_exchange_create_meeting.get("success")
@@ -487,12 +428,7 @@ Emails can be queried from a user's mailbox and deleted. These emails can be fil
 | `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
 | `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
 | `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
-| `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
-| `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
-| `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
 | `exchange_folder_path` | `text` | No | `Top of Information Store,Top of Information Store/Inbox,Top of Information Store/Drafts,...` | Comma separated list of folder paths to query from |
-| `exchange_hard_delete` | `boolean` | Yes | `True` | Yes for hard deletion. No for soft deletion (move to deleted folder) |
-| `exchange_has_attachments` | `boolean` | No | `False` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_hard_delete` | `boolean` | Yes | `True` | Yes for hard deletion. No for soft deletion (move to deleted folder) |
 | `exchange_has_attachments` | `boolean` | No | `False` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
@@ -527,36 +463,7 @@ results = {
       "exchange_search_subfolders": null,
       "exchange_sender": null,
       "exchange_start_date": null
-  "content": {},
-  "inputs": {
-    "inputs": {
-      "exchange_email": "exampleuser1@outlook2016.com",
-      "exchange_message_ids": null,
-      "exchange_end_date": null,
-      "exchange_folder_path": null,
-      "exchange_hard_delete": false,
-      "exchange_has_attachments": null,
-      "exchange_message_subject": "Security Weekly Meeting",
-      "exchange_num_emails": 2,
-      "exchange_order_by_recency": null,
-      "exchange_search_subfolders": null,
-      "exchange_sender": null,
-      "exchange_start_date": null
     }
-  },
-  "metrics": {
-    "execution_time_ms": 1293,
-    "host": "exchange2016",
-    "package": "fn-exchange",
-    "package_version": "1.0.5",
-    "timestamp": "2023-02-28 20:21:08",
-    "version": "1.0"
-  },
-  "raw": "{}",
-  "reason": "The SMTP address has no mailbox associated with it.",
-  "success": false,
-  "version": "1.0"
-}
   },
   "metrics": {
     "execution_time_ms": 1293,
@@ -732,11 +639,7 @@ Emails can be queried from a user's mailbox and deleted. These emails can be fil
 | `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
 | `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
 | `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
-| `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
-| `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
-| `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
 | `exchange_folder_path` | `text` | No | `Top of Information Store,Top of Information Store/Inbox,Top of Information Store/Drafts,...` | Comma separated list of folder paths to query from |
-| `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
@@ -891,32 +794,6 @@ Example function results:
                       'attachment_base64': 'attachment encoded in base 64'}}},
 '''
 
-Example function results:
-------------------------
-    {
-      'email_ids': ['id1', 'idN'],
-      'emails': {
-          'id1': {
-              'subject': 'Email Subject',
-              'body': 'Subject body in HTML',
-              'mime_content': mime content of message
-              'sender_name': 'FirstName LastName',
-              'sender_email': 'example@example.com',
-              'attachment_ids': ['attachment_id1', 'attachment_id2'],
-              'attachments': {
-                  'attachment_id1': {
-                      'attachment_name': 'attachment.xslx',
-                      'attachment_content_type': 'spreadsheet',
-                      'attachment_size': '8842',
-                      'attachment_base64': 'attachment encoded in base 64'},
-                  'attachment_id2': {
-                      'attachment_name': '...',
-                      'attachment_content_type': '...',
-                      'attachment_size': '...',
-                      'attachment_base64': 'attachment encoded in base 64'}}},
-
-'''
-
 # Enable to add all information to a datatable found in the Exchange tab.
 enable_write_to_datatables  = True
 # Enable to add attachments found as a base64 encoded value. This option only works when enable_write_to_datatables is set to False
@@ -1037,33 +914,6 @@ results = {
   "name": "John Doe",
   "raw": "{\"name\": \"John Doe\", \"email_address\": \"johndoe.n@exchange2016.com\", \"routing_type\": \"SMTP\", \"mailbox_type\": \"Mailbox\"}",
   "reason": null,
-  "content": {
-    "email_address": "johndoe.n@exchange2016.com",
-    "mailbox_type": "Mailbox",
-    "name": "John Doe",
-    "routing_type": "SMTP"
-  },
-  "email_address": "johndoe.n@exchange2016.com",
-  "inputs": {
-    "inputs": {
-      "exchange_get_email": "johndoe.n@exchange2016.com"
-    }
-  },
-  "mailbox_type": "Mailbox",
-  "metrics": {
-    "execution_time_ms": 254,
-    "host": "exchange2016",
-    "package": "fn-exchange",
-    "package_version": "1.1.0",
-    "timestamp": "2023-03-02 12:21:02",
-    "version": "1.0"
-  },
-  "name": "John Doe",
-  "raw": "{\"name\": \"John Doe\", \"email_address\": \"johndoe.n@exchange2016.com\", \"routing_type\": \"SMTP\", \"mailbox_type\": \"Mailbox\"}",
-  "reason": null,
-  "routing_type": "SMTP",
-  "success": true,
-  "version": "1.0"
   "success": true,
   "version": "1.0"
 }
@@ -1148,12 +998,7 @@ Move queried emails from a specified folder to another specified folder. The `ex
 | `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
 | `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
 | `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
-| `exchange_message_ids` | `text` | No | `-` | Comma separated list of email ids |
-| `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
-| `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
 | `exchange_folder_path` | `text` | No | `Top of Information Store,Top of Information Store/Inbox,Top of Information Store/Drafts,...` | Comma separated list of folder paths to query from |
-| `exchange_force_delete_subfolders` | `boolean` | Yes | `False` | Yes to delete even if the folder has subfolders else stops operation |
-| `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_force_delete_subfolders` | `boolean` | Yes | `False` | Yes to delete even if the folder has subfolders else stops operation |
 | `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
@@ -1218,46 +1063,6 @@ results = {
     "src_folder": "Top of Information Store/Inbox"
   },
   "dst_folder": "Top of Information Store/Notes",
-  "email_ids": [
-    "\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e",
-    "\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e",
-    "\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e",
-    "\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e"
-  ],
-  "emails": {
-    "\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e": {
-      "attachment_ids": [],
-      "attachments": {},
-      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nbody\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
-      "sender_email": "johndoe.s.n@exchange2016.com",
-      "sender_name": "John Doe Norcross",
-      "subject": "Security Meeting"
-    },
-    "\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e": {
-      "attachment_ids": [],
-      "attachments": {},
-      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nhello\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
-      "sender_email": "johndoe.s.n@exchange2016.com",
-      "sender_name": "John Doe Norcross",
-      "subject": "Security Meeting"
-    },
-    "\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e": {
-      "attachment_ids": [],
-      "attachments": {},
-      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\nNone\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
-      "sender_email": "johndoe.s.n@exchange2016.com",
-      "sender_name": "John Doe Norcross",
-      "subject": "Security Meeting"
-    },
-    "\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e": {
-      "attachment_ids": [],
-      "attachments": {},
-      "body": "\u003chtml\u003e\r\n\u003chead\u003e\r\n\u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"\u003e\r\n\u003c/head\u003e\r\n\u003cbody\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e\r\n",
-      "sender_email": "johndoe.s.n@exchange2016.com",
-      "sender_name": "John Doe Norcross",
-      "subject": "Security Meeting"
-    }
-  },
   "inputs": {
     "inputs": {
       "exchange_delete_source_folder": false,
