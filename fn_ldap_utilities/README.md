@@ -1036,8 +1036,10 @@ if rule.properties.ldap_domain_name:
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 #### Known Errors
-1. `Expected to execute a maximum of 50,000 lines` error received when running the search function this occurs because the playbook scripts have a max line execution limit of 50,000 lines of code. If you hit this limit, then try to add more filters to your search to get less results.
-2. `The maximum number of new objects created by rules and playbooks has been exceeded` error received when running the search function this occurs because the playbook script tried to add more than 500 rows to a data table. The 500 object creation limit is only on playbooks and not on workflows, so if you create a rule and workflow this error will not occur.
+1. `Expected to execute a maximum of 50,000 lines`
+This error occurs when running the search function when processing a large search result. The playbook scripts have a max execution limit of 50,000 lines of code. If you hit this limit, try to add more filters to your search to return fewer results.
+2. `The maximum number of new objects created by rules and playbooks has been exceeded`
+This error occurs when running the search function when processing a large search result.  and the playbook script tried to add more than 500 rows to a data table. The 500 object creation limit is only a limitation with playbooks and not workflows. For the time being, use a rule and workflow to avoid this error if you feel adding so many datatable rows is necessary. Alternatively, add more filters to your search to return fewer results.
 
 ### For Support
 This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
