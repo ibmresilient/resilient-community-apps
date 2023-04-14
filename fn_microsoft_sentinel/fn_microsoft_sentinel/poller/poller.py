@@ -57,7 +57,7 @@ class PollerComponent(AppFunctionComponent):
         """
         # Validate required fields in app.config are set
         validate_fields([{"name": "azure_url"},
-                         {"name": "client_id", "placeholder": "aaa-bbb-ccc"},
+                         {"name": "client_id", "placeholder": "aaa-bbb-ddd"},
                          {"name": "tenant_id", "placeholder": "aaa-bbb-ccc"},
                          {"name": "app_secret", "placeholder": "aaa-bbb-eee"},
                          {"name": "sentinel_profiles"}],

@@ -20,8 +20,10 @@ log.addHandler(logging.StreamHandler())
 def selftest_function(opts):
     app_configs = opts.get(PACKAGE_NAME, {})
 
-    validate_fields(
-        ["tenant_id", "client_id", "app_secret"],
+    validate_fields([
+        {"name": "tenant_id", "placeholder": "aaa-bbb-ccc"},
+        {"name": "client_id", "placeholder": "aaa-bbb-ddd"},
+        {"name": "app_secret", "placeholder": "aaa-bbb-eee"}],
         app_configs
     )
 
