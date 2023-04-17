@@ -3,19 +3,64 @@
   "success": true,
   "reason": null,
   "content": {
-    "result": []
+    "result": [
+      {
+        "analysis_level": 1,
+        "custom_model": null,
+        "dns_name": "pc3.i.rx.tours",
+        "ipaddr6": null,
+        "custom_criticality": null,
+        "custom_name": null,
+        "cdp_name": "",
+        "vendor": null,
+        "ipaddr4": "10.1.0.161",
+        "vlanid": 0,
+        "macaddr": "0E:3D:A8:02:A0:B3",
+        "auto_role": "pc",
+        "dhcp_name": "pc3",
+        "default_name": "Device 0e3da802a0b30000",
+        "vpc_id": null,
+        "custom_type": "",
+        "subnet_id": null,
+        "cloud_account": null,
+        "custom_make": null,
+        "user_mod_time": 0,
+        "discover_time": 1681158480000,
+        "mod_time": 1681751806994,
+        "role": "pc",
+        "display_name": "pc3",
+        "last_seen_time": null,
+        "on_watchlist": false,
+        "critical": false,
+        "discovery_id": "0e3da802a0b30000",
+        "node_id": 1,
+        "extrahop_id": "0e3da802a0b30000",
+        "cloud_instance_name": null,
+        "cloud_instance_description": null,
+        "cloud_instance_type": null,
+        "cloud_instance_id": null,
+        "model_override": null,
+        "model": null,
+        "netbios_name": "PC3",
+        "device_class": "node",
+        "is_l3": false,
+        "parent_id": null,
+        "description": null,
+        "id": 4294967311,
+        "analysis": "advanced"
+      }
+    ]
   },
   "raw": null,
   "inputs": {
-    "extrahop_active_from": 1679544000000,
-    "extrahop_active_until": 1679716800000
+    "extrahop_search_filter": "{\"filter\": {\"field\": \"ipaddr\", \"operand\": \"10.1.0.161\", \"operator\": \"=\"}}"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-extrahop",
     "package_version": "1.0.0",
-    "host": "MBP",
-    "execution_time_ms": 4849,
-    "timestamp": "2023-04-10 13:28:15"
+    "host": "laptop.local",
+    "execution_time_ms": 812,
+    "timestamp": "2023-04-17 13:17:05"
   }
 }

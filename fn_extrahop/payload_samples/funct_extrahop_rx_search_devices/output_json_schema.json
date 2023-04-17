@@ -13,7 +13,105 @@
       "type": "object",
       "properties": {
         "result": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "analysis_level": {
+                "type": "integer"
+              },
+              "custom_model": {},
+              "dns_name": {
+                "type": "string"
+              },
+              "ipaddr6": {},
+              "custom_criticality": {},
+              "custom_name": {},
+              "cdp_name": {
+                "type": "string"
+              },
+              "vendor": {},
+              "ipaddr4": {
+                "type": "string"
+              },
+              "vlanid": {
+                "type": "integer"
+              },
+              "macaddr": {
+                "type": "string"
+              },
+              "auto_role": {
+                "type": "string"
+              },
+              "dhcp_name": {
+                "type": "string"
+              },
+              "default_name": {
+                "type": "string"
+              },
+              "vpc_id": {},
+              "custom_type": {
+                "type": "string"
+              },
+              "subnet_id": {},
+              "cloud_account": {},
+              "custom_make": {},
+              "user_mod_time": {
+                "type": "integer"
+              },
+              "discover_time": {
+                "type": "integer"
+              },
+              "mod_time": {
+                "type": "integer"
+              },
+              "role": {
+                "type": "string"
+              },
+              "display_name": {
+                "type": "string"
+              },
+              "last_seen_time": {},
+              "on_watchlist": {
+                "type": "boolean"
+              },
+              "critical": {
+                "type": "boolean"
+              },
+              "discovery_id": {
+                "type": "string"
+              },
+              "node_id": {
+                "type": "integer"
+              },
+              "extrahop_id": {
+                "type": "string"
+              },
+              "cloud_instance_name": {},
+              "cloud_instance_description": {},
+              "cloud_instance_type": {},
+              "cloud_instance_id": {},
+              "model_override": {},
+              "model": {},
+              "netbios_name": {
+                "type": "string"
+              },
+              "device_class": {
+                "type": "string"
+              },
+              "is_l3": {
+                "type": "boolean"
+              },
+              "parent_id": {},
+              "description": {},
+              "id": {
+                "type": "integer"
+              },
+              "analysis": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },
@@ -21,11 +119,8 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "extrahop_active_from": {
-          "type": "integer"
-        },
-        "extrahop_active_until": {
-          "type": "integer"
+        "extrahop_search_filter": {
+          "type": "string"
         }
       }
     },

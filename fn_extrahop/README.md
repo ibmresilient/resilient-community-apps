@@ -1646,7 +1646,7 @@ results = {
 <p>
 
 ```python
-if rule.properties.extrahop_tag_name is None:
+if playbook.inputs.extrahop_tag_name is None:
     raise ValueError("The tag name is not set")
 
 ```
@@ -2965,7 +2965,7 @@ Add Devices data table field as a SOAR artifact.
 
 ```python
 # Create a SOAR artifact based on a dropdown which selects the corresponding data-table field.
-ARTIFACT_TYPE = rule.properties.extrahop_artifact_type.replace(" (v4)" ,"").replace(" (v6)" ,"")
+ARTIFACT_TYPE = playbook.inputs.extrahop_artifact_type.replace(" (v4)" ,"").replace(" (v6)" ,"")
 
 PARAMS = {
     "IP Address": row.ipaddr4,
@@ -2973,7 +2973,7 @@ PARAMS = {
     "MAC Address": row.macaddr
 }
 # Both IP address V4 or V6 will be added as type "IP Address".
-if "v6" in rule.properties.extrahop_artifact_type:
+if "v6" in playbook.inputs.extrahop_artifact_type:
     PARAMS.update({"IP Address": row.ipaddr6})
 
 def addArtifact(artifact_type, artifact_value, description):

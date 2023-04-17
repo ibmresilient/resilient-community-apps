@@ -13,7 +13,94 @@
       "type": "object",
       "properties": {
         "result": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "start_time": {
+                "type": "integer"
+              },
+              "update_time": {
+                "type": "integer"
+              },
+              "mod_time": {
+                "type": "integer"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "categories": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "risk_score": {
+                "type": "integer"
+              },
+              "type": {
+                "type": "string"
+              },
+              "properties": {
+                "type": "object"
+              },
+              "participants": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "role": {
+                      "type": "string"
+                    },
+                    "object_id": {
+                      "type": "integer"
+                    },
+                    "object_type": {
+                      "type": "string"
+                    },
+                    "object_value": {
+                      "type": "string"
+                    },
+                    "hostname": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "external": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "ticket_id": {
+                "type": "string"
+              },
+              "assignee": {},
+              "status": {
+                "type": "string"
+              },
+              "resolution": {},
+              "mitre_tactics": {
+                "type": "array"
+              },
+              "mitre_techniques": {
+                "type": "array"
+              },
+              "appliance_id": {
+                "type": "integer"
+              },
+              "is_user_created": {
+                "type": "boolean"
+              }
+            }
+          }
         }
       }
     },
@@ -21,11 +108,8 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "extrahop_active_from": {
-          "type": "integer"
-        },
-        "extrahop_active_until": {
-          "type": "integer"
+        "extrahop_search_filter": {
+          "type": "string"
         }
       }
     },

@@ -70,7 +70,7 @@ filter = {k: v for k, v in filter_props.items() if v}
 
 if filter:
     if playbook.properties.extrahop_detection_id:
-        raise ValueError("The search filter and Detecion ID are not allowed at the same time.")
+        raise ValueError("The search filter and Detection ID are not allowed at the same time.")
 
     search_filter = {
         "filter": filter

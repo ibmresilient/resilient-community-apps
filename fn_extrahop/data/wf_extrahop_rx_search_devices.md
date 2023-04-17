@@ -38,7 +38,7 @@ def main():
     }
     filter = {k: v for k, v in filter_props.items() if v}
 
-    if filter and rule.properties.extrahop_device_id:
+    if filter and playbook.inputs.extrahop_device_id:
         raise ValueError("The device ID and search filter shouldn't be set at the same time.")
 
     if filter:
@@ -58,7 +58,7 @@ def main():
             "filter": {
                 "field": "discovery_id",
                 "operator": "=",
-                "operand": str(rule.properties.extrahop_device_id)
+                "operand": str(playbook.inputs.extrahop_device_id)
             }
         }
     if search_filter:
