@@ -64,7 +64,7 @@ def codegen_reload_data():
             u"pb_scheduler_remove_job",
             u"pb_scheduler_resume_job",
             u"pb_scheduler_run_job_now",
-            u"pb_scheduler_schedule_job"
+            u"pb_scheduler_schedule_job",
             u"pb_scheduler_schedule_job_artifact",
             u"pb_scheduler_schedule_job_task"
         ],
