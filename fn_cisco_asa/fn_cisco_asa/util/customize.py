@@ -23,15 +23,15 @@ def codegen_reload_data():
         "package": u"fn_cisco_asa",
         "message_destinations": [u"fn_cisco_asa"],
         "functions": [u"cisco_asa_add_artifact_to_network_object_group", u"cisco_asa_get_network_object_details", u"cisco_asa_get_network_objects", u"cisco_asa_remove_network_object_from_network_object_group"],
-        "workflows": [u"cisco_asa_add_artifact_to_network_object_group", u"cisco_asa_get_network_object_details", u"cisco_asa_get_network_object_group", u"cisco_asa_remove_network_object_from_network_object_group"],
-        "actions": [u"Cisco ASA: Add FQDN to Network Object Group", u"Cisco ASA: Add IP Address to Network Object Group", u"Cisco ASA: Add IP Range to Network Object Group", u"Cisco ASA: Add IPv4Network to Network Object Group", u"Cisco ASA: Add IPv6Network to Network Object Group", u"Cisco ASA: Get Network Object Details", u"Cisco ASA: Get Network Object Group", u"Cisco ASA: Remove Network Object from Network Object Group"],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"cisco_asa_network_object_dt"],
         "automatic_tasks": [],
         "scripts": [u"Convert JSON to rich text v1.3"],
-        "playbooks": []
+        "playbooks": [u"cisco_asa_add_fqdn_to_network_object_group", u"cisco_asa_add_ip_address_to_network_object_group", u"cisco_asa_add_ip_range_to_network_object_group", u"cisco_asa_add_ipv4network_to_network_object_group", u"cisco_asa_add_ipv6network_to_network_object_group", u"cisco_asa_get_network_object_details", u"cisco_asa_get_network_object_group", u"cisco_asa_remove_network_object_from_network_object_group"]
     }
 
 
@@ -50,20 +50,15 @@ def customization_data(client=None):
         - cisco_asa_get_network_object_details
         - cisco_asa_get_network_objects
         - cisco_asa_remove_network_object_from_network_object_group
-    - Workflows:
-        - cisco_asa_add_artifact_to_network_object_group
+    - Playbooks:
+        - cisco_asa_add_fqdn_to_network_object_group
+        - cisco_asa_add_ip_address_to_network_object_group
+        - cisco_asa_add_ip_range_to_network_object_group
+        - cisco_asa_add_ipv4network_to_network_object_group
+        - cisco_asa_add_ipv6network_to_network_object_group
         - cisco_asa_get_network_object_details
         - cisco_asa_get_network_object_group
         - cisco_asa_remove_network_object_from_network_object_group
-    - Rules:
-        - Cisco ASA: Add FQDN to Network Object Group
-        - Cisco ASA: Add IP Address to Network Object Group
-        - Cisco ASA: Add IP Range to Network Object Group
-        - Cisco ASA: Add IPv4Network to Network Object Group
-        - Cisco ASA: Add IPv6Network to Network Object Group
-        - Cisco ASA: Get Network Object Details
-        - Cisco ASA: Get Network Object Group
-        - Cisco ASA: Remove Network Object from Network Object Group
     - Data Tables:
         - cisco_asa_network_object_dt
     - Scripts:

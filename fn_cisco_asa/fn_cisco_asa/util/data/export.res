@@ -1,412 +1,9 @@
 {
   "action_order": [],
-  "actions": [
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "DNS Name"
-        }
-      ],
-      "enabled": true,
-      "export_key": "Cisco ASA: Add FQDN to Network Object Group",
-      "id": 57,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Cisco ASA: Add FQDN to Network Object Group",
-      "object_type": "artifact",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "68b86c28-5719-4a2c-b762-b1c904cbbfc6",
-      "view_items": [
-        {
-          "content": "5aa4faf0-e68c-4b79-b59f-ecfba0b26d3e",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "62efce93-c19d-40d8-a0db-7881e62fc470",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "31522f3c-c1cf-4e59-b354-509386097d43",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "374aa87c-ab69-42fe-89c9-f596b0dc8b62",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
-      "workflows": [
-        "cisco_asa_add_artifact_to_network_object_group"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "IP Address"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "String"
-        }
-      ],
-      "enabled": true,
-      "export_key": "Cisco ASA: Add IP Address to Network Object Group",
-      "id": 58,
-      "logic_type": "any",
-      "message_destinations": [],
-      "name": "Cisco ASA: Add IP Address to Network Object Group",
-      "object_type": "artifact",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "56ec3aa6-c24d-431b-b142-3a0422484ab4",
-      "view_items": [
-        {
-          "content": "5aa4faf0-e68c-4b79-b59f-ecfba0b26d3e",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "21ab6818-1011-41ad-8eb2-a8eb5a3373dd",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "31522f3c-c1cf-4e59-b354-509386097d43",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
-      "workflows": [
-        "cisco_asa_add_artifact_to_network_object_group"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "IP Address"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "String"
-        }
-      ],
-      "enabled": true,
-      "export_key": "Cisco ASA: Add IP Range to Network Object Group",
-      "id": 59,
-      "logic_type": "any",
-      "message_destinations": [],
-      "name": "Cisco ASA: Add IP Range to Network Object Group",
-      "object_type": "artifact",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "486b026b-09ee-4f29-980e-e5f70aa2e253",
-      "view_items": [
-        {
-          "content": "5aa4faf0-e68c-4b79-b59f-ecfba0b26d3e",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "62efce93-c19d-40d8-a0db-7881e62fc470",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "31522f3c-c1cf-4e59-b354-509386097d43",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "4f73d084-c4bb-4d6f-8db4-3211c6758a60",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
-      "workflows": [
-        "cisco_asa_add_artifact_to_network_object_group"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "IP Address"
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "String"
-        }
-      ],
-      "enabled": true,
-      "export_key": "Cisco ASA: Add IPv4Network to Network Object Group",
-      "id": 60,
-      "logic_type": "any",
-      "message_destinations": [],
-      "name": "Cisco ASA: Add IPv4Network to Network Object Group",
-      "object_type": "artifact",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "3566782e-9582-4f6d-99b4-57ed1eb1ae85",
-      "view_items": [
-        {
-          "content": "5aa4faf0-e68c-4b79-b59f-ecfba0b26d3e",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "21ab6818-1011-41ad-8eb2-a8eb5a3373dd",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "31522f3c-c1cf-4e59-b354-509386097d43",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "1ed93f79-a707-415c-a47c-194edde66a2d",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
-      "workflows": [
-        "cisco_asa_add_artifact_to_network_object_group"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "artifact.type",
-          "method": "equals",
-          "type": null,
-          "value": "String"
-        }
-      ],
-      "enabled": true,
-      "export_key": "Cisco ASA: Add IPv6Network to Network Object Group",
-      "id": 61,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Cisco ASA: Add IPv6Network to Network Object Group",
-      "object_type": "artifact",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "59aac940-4cd6-44d7-9b8d-5f91c4c7e3ce",
-      "view_items": [
-        {
-          "content": "5aa4faf0-e68c-4b79-b59f-ecfba0b26d3e",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "62efce93-c19d-40d8-a0db-7881e62fc470",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "31522f3c-c1cf-4e59-b354-509386097d43",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "f32fca83-dfbd-41af-b466-2e93d6034442",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
-      "workflows": [
-        "cisco_asa_add_artifact_to_network_object_group"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "cisco_asa_network_object_dt.cisco_asa_network_object_id",
-          "method": "has_a_value",
-          "type": null,
-          "value": null
-        },
-        {
-          "evaluation_id": null,
-          "field_name": "cisco_asa_network_object_dt.cisco_asa_status",
-          "method": "equals",
-          "type": null,
-          "value": "Active"
-        }
-      ],
-      "enabled": true,
-      "export_key": "Cisco ASA: Get Network Object Details",
-      "id": 62,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Cisco ASA: Get Network Object Details",
-      "object_type": "cisco_asa_network_object_dt",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "bbc6ac55-e6d5-4421-99eb-ec4759776cf9",
-      "view_items": [],
-      "workflows": [
-        "cisco_asa_get_network_object_details"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [],
-      "enabled": true,
-      "export_key": "Cisco ASA: Get Network Object Group",
-      "id": 63,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Cisco ASA: Get Network Object Group",
-      "object_type": "incident",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "244e64bd-d370-4151-ae81-244b5055cb98",
-      "view_items": [
-        {
-          "content": "5aa4faf0-e68c-4b79-b59f-ecfba0b26d3e",
-          "element": "field_uuid",
-          "field_type": "actioninvocation",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        }
-      ],
-      "workflows": [
-        "cisco_asa_get_network_object_group"
-      ]
-    },
-    {
-      "automations": [],
-      "conditions": [
-        {
-          "evaluation_id": null,
-          "field_name": "cisco_asa_network_object_dt.cisco_asa_status",
-          "method": "equals",
-          "type": null,
-          "value": "Active"
-        }
-      ],
-      "enabled": true,
-      "export_key": "Cisco ASA: Remove Network Object from Network Object Group",
-      "id": 64,
-      "logic_type": "all",
-      "message_destinations": [],
-      "name": "Cisco ASA: Remove Network Object from Network Object Group",
-      "object_type": "cisco_asa_network_object_dt",
-      "tags": [],
-      "timeout_seconds": 86400,
-      "type": 1,
-      "uuid": "d1cbf8bd-d6d6-4d16-840c-462a272252ec",
-      "view_items": [],
-      "workflows": [
-        "cisco_asa_remove_network_object_from_network_object_group"
-      ]
-    }
-  ],
+  "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1681831481401,
+  "export_date": 1681859283919,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -754,391 +351,6 @@
       "values": []
     },
     {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "actioninvocation/cisco_asa_ipv6_prefix_length",
-      "hide_notification": false,
-      "id": 437,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "cisco_asa_ipv6_prefix_length",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "required": "always",
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "IPv6 Prefix Length",
-      "tooltip": "Prefix length in bits (greater than 8 and less than or equal to 128).",
-      "type_id": 6,
-      "uuid": "f32fca83-dfbd-41af-b466-2e93d6034442",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": true,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "actioninvocation/cisco_asa_ipv4_netmask",
-      "hide_notification": false,
-      "id": 438,
-      "input_type": "select",
-      "internal": false,
-      "is_tracked": false,
-      "name": "cisco_asa_ipv4_netmask",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "required": "always",
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "IPv4 Netmask",
-      "tooltip": "",
-      "type_id": 6,
-      "uuid": "1ed93f79-a707-415c-a47c-194edde66a2d",
-      "values": [
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "255.255.255.255 /32",
-          "properties": null,
-          "uuid": "18259d10-9239-406d-8c22-a327e53068b3",
-          "value": 252
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "255.255.255.251 /31",
-          "properties": null,
-          "uuid": "281a1bca-8943-4f0b-b199-874c4fab0498",
-          "value": 253
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "255.255.255.252 /30",
-          "properties": null,
-          "uuid": "86e3c344-1874-440f-a36c-8665cfd43f07",
-          "value": 254
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "255.255.255.248 /29",
-          "properties": null,
-          "uuid": "8c302d10-dc08-4021-a117-d8905461402a",
-          "value": 255
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "255.255.255.240 /28",
-          "properties": null,
-          "uuid": "3c029d5d-486b-400d-b516-0c3fb6bca0b8",
-          "value": 256
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "255.255.255.224 /27",
-          "properties": null,
-          "uuid": "236c55f2-faed-4dc4-98b1-358233fe99d7",
-          "value": 257
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "255.255.255.192 /26",
-          "properties": null,
-          "uuid": "ba799ff8-3409-47df-8ffa-27553cb9de81",
-          "value": 258
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "255.255.255.128 /25",
-          "properties": null,
-          "uuid": "1a1b414e-c467-40bf-8f6b-8eb3c275da4b",
-          "value": 259
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "255.255.255.0 /24",
-          "properties": null,
-          "uuid": "520c86d4-1bce-4461-91a2-b34b637f6bc8",
-          "value": 260
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "255.255.0.0 /16",
-          "properties": null,
-          "uuid": "38986c6e-b71d-456e-8031-56b05ee1742b",
-          "value": 261
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "255.0.0.0 /8",
-          "properties": null,
-          "uuid": "4117f60f-2406-484d-810b-d22735aedc2c",
-          "value": 262
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "0.0.0.0 /0",
-          "properties": null,
-          "uuid": "5ff97008-2f81-49d6-bea4-6b07aef707a8",
-          "value": 263
-        }
-      ]
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "actioninvocation/cisco_asa_network_object_name",
-      "hide_notification": false,
-      "id": 439,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "cisco_asa_network_object_name",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "Network Object Name",
-      "tooltip": "Objects must have unique names that are limited to 64 characters, including letters and numbers. Space and these special characters: .!@#$%^\u0026()-_{} are NOT permitted.  Object names are case-sensitive.",
-      "type_id": 6,
-      "uuid": "21ab6818-1011-41ad-8eb2-a8eb5a3373dd",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "actioninvocation/cisco_asa_network_object_description",
-      "hide_notification": false,
-      "id": 440,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "cisco_asa_network_object_description",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "Network Object Description",
-      "tooltip": "",
-      "type_id": 6,
-      "uuid": "31522f3c-c1cf-4e59-b354-509386097d43",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "actioninvocation/cisco_asa_fqdn_ip_version",
-      "hide_notification": false,
-      "id": 441,
-      "input_type": "select",
-      "internal": false,
-      "is_tracked": false,
-      "name": "cisco_asa_fqdn_ip_version",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "required": "always",
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "IP Version",
-      "tooltip": "Indicate IPv4FQDN or IPv6FQDN",
-      "type_id": 6,
-      "uuid": "374aa87c-ab69-42fe-89c9-f596b0dc8b62",
-      "values": [
-        {
-          "default": true,
-          "enabled": true,
-          "hidden": false,
-          "label": "IPv4FQDN",
-          "properties": null,
-          "uuid": "55c8f84f-e783-41e1-bf75-bb1f268a779d",
-          "value": 264
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "IPv6FQDN",
-          "properties": null,
-          "uuid": "af349085-837d-4333-a6da-ed2d515741ac",
-          "value": 265
-        }
-      ]
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "actioninvocation/cisco_asa_end_range",
-      "hide_notification": false,
-      "id": 442,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "cisco_asa_end_range",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "required": "always",
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "End IP Address",
-      "tooltip": "End IP address of a range of addresses.  Do not include masks or prefixes.",
-      "type_id": 6,
-      "uuid": "4f73d084-c4bb-4d6f-8db4-3211c6758a60",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "actioninvocation/cisco_asa_firewall_network_object_group",
-      "hide_notification": false,
-      "id": 443,
-      "input_type": "select",
-      "internal": false,
-      "is_tracked": false,
-      "name": "cisco_asa_firewall_network_object_group",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "required": "always",
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "Firewall Network Object Group",
-      "tooltip": "",
-      "type_id": 6,
-      "uuid": "5aa4faf0-e68c-4b79-b59f-ecfba0b26d3e",
-      "values": [
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "firewall_1:BLOCKLIST_IN",
-          "properties": null,
-          "uuid": "b88e75c5-0942-4bb1-899b-ce9b5934a093",
-          "value": 266
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "firewall_1:BLOCKLIST_OUT",
-          "properties": null,
-          "uuid": "20263819-c98b-428d-a156-62d98c000b1d",
-          "value": 267
-        }
-      ]
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "actioninvocation/cisco_asa_network_object_name_required",
-      "hide_notification": false,
-      "id": 444,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "cisco_asa_network_object_name_required",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": "properties",
-      "read_only": false,
-      "required": "always",
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "Network Object Name",
-      "tooltip": "Objects must have unique names that are limited to 64 characters, including letters and numbers. Space and these special characters: .!@#$%^\u0026()-_{} are NOT permitted.  Object names are case-sensitive.",
-      "type_id": 6,
-      "uuid": "62efce93-c19d-40d8-a0db-7881e62fc470",
-      "values": []
-    },
-    {
       "export_key": "incident/internal_customizations_field",
       "id": 0,
       "input_type": "text",
@@ -1442,13 +654,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 310,
+  "id": 319,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1681831479553,
+      "create_date": 1681859282241,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1457,7 +669,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1681831479553,
+      "update_date": 1681859282241,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1482,7 +694,1746 @@
   "notifications": null,
   "overrides": null,
   "phases": [],
-  "playbooks": [],
+  "playbooks": [
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 7,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b22b8944_4384_409a_8692_d92a9afbba72\" isExecutable=\"true\" name=\"playbook_b22b8944_4384_409a_8692_d92a9afbba72\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1hvjfbc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_052t9qz\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Cisco ASA Add Artifact to Network Object Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{\"6e5a3cb6-18fe-4dae-9b87-a8c5d889b070\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"737cf112-4adc-4e54-b7a1-a5d696340dcc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ed9ad5be-b3c3-4105-926d-57c63228a592\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2f25706e-1951-4911-b198-11fb4c73c973\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"81b3ce67-7d3a-4c7d-9024-3959fefdf49f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0231aa2a-1167-4eb8-95a6-8c77ec5da5a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9f3b3e08-6648-4f28-ab82-a4fadf68c91d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c78dedd5-1780-40fd-8561-5246ed6dbf32\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"95639c4a-a104-4598-abba-6b1438432ba6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2c351503-8d83-440c-8d7d-6c1de9550c93\"}}},\"pre_processing_script\":\"# Parse the firewall name and network object group from the colon separated string\\nfirewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\\n# Get input from the artifact type and value\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\\n\\n# Optional network object description and object name\\nif playbook.inputs.cisco_asa_network_object_description:\\n  inputs.cisco_asa_network_object_description = playbook.inputs.cisco_asa_network_object_description\\n  \\nif playbook.inputs.cisco_asa_network_object_name:\\n  inputs.cisco_asa_network_object_name = playbook.inputs.cisco_asa_network_object_name\\n\\nif playbook.inputs.cisco_asa_ipv4_netmask:\\n  inputs.cisco_asa_netmask = playbook.inputs.cisco_asa_ipv4_netmask\\n\\n  \",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1hvjfbc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1baxhfp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1hvjfbc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Cisco ASA: Write Artifact to Network Object data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9ee6bbf2-bf9e-4e80-a86b-1a651c6dd36c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1baxhfp\u003c/incoming\u003e\u003coutgoing\u003eFlow_052t9qz\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1baxhfp\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_052t9qz\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b22b8944_4384_409a_8692_d92a9afbba72\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_052t9qz\" id=\"Flow_052t9qz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1baxhfp\" id=\"Flow_1baxhfp_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hvjfbc\" id=\"Flow_1hvjfbc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434.3000030517578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178.3000030517578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308.3000030517578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1681846915004,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_b22b8944_4384_409a_8692_d92a9afbba72",
+      "description": {
+        "content": "Add an IPv4 network to a Cisco ASA network object group.  If there is an error write the error to an incident note.",
+        "format": "text"
+      },
+      "display_name": " Cisco ASA: Add IPv4Network to Network Object Group ",
+      "export_key": "cisco_asa_add_ipv4network_to_network_object_group",
+      "field_type_handle": "playbook_b22b8944_4384_409a_8692_d92a9afbba72",
+      "fields_type": {
+        "actions": [],
+        "display_name": " Cisco ASA: Add IPv4Network to Network Object Group ",
+        "export_key": "playbook_b22b8944_4384_409a_8692_d92a9afbba72",
+        "fields": {
+          "cisco_asa_firewall_network_object_group": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_b22b8944_4384_409a_8692_d92a9afbba72/cisco_asa_firewall_network_object_group",
+            "hide_notification": false,
+            "id": 657,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_firewall_network_object_group",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Firewall Network Object Group",
+            "tooltip": "",
+            "type_id": 1069,
+            "uuid": "583cee79-e384-4426-8cbf-f838194293d4",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:BLOCKLIST_IN",
+                "properties": null,
+                "uuid": "71f7f00e-f509-4564-83e8-3fd91b8be6c7",
+                "value": 1323
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:BLOCKLIST_OUT",
+                "properties": null,
+                "uuid": "0a911ef5-6545-4d4c-9137-5d33adc02582",
+                "value": 1324
+              }
+            ]
+          },
+          "cisco_asa_ipv4_netmask": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_b22b8944_4384_409a_8692_d92a9afbba72/cisco_asa_ipv4_netmask",
+            "hide_notification": false,
+            "id": 658,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_ipv4_netmask",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "IPv4 Netmask",
+            "tooltip": "",
+            "type_id": 1069,
+            "uuid": "94dfab97-0795-4fc2-b91d-9279dfe5c66b",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "255.255.255.255 /32",
+                "properties": null,
+                "uuid": "4dc8efde-ef6c-4e14-97ac-170634535456",
+                "value": 1325
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "255.255.255.251 /31",
+                "properties": null,
+                "uuid": "77143a52-cbb3-49a0-9fc4-834acc201309",
+                "value": 1326
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "255.255.255.252 /30",
+                "properties": null,
+                "uuid": "6b741894-940f-4edf-983f-9556cb533dcd",
+                "value": 1327
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "255.255.255.248 /29",
+                "properties": null,
+                "uuid": "4615f391-f338-4f01-a650-7f3c1ede4a5c",
+                "value": 1328
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "255.255.255.240 /28",
+                "properties": null,
+                "uuid": "106357ce-3058-444e-92f4-68f9bed44b9e",
+                "value": 1329
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "255.255.255.224 /27",
+                "properties": null,
+                "uuid": "ca634754-d270-424d-a2ac-4bf1b1067a8c",
+                "value": 1330
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "255.255.255.192 /26",
+                "properties": null,
+                "uuid": "0720bffd-e379-477d-b02d-c693c4372f14",
+                "value": 1331
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "255.255.255.128 /25",
+                "properties": null,
+                "uuid": "01808fd1-6102-4b2d-9e50-1242ce857fa1",
+                "value": 1332
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "255.255.255.0 /24",
+                "properties": null,
+                "uuid": "286b36c8-1c7e-4c23-a4ce-b17a67bf34d7",
+                "value": 1333
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "255.255.0.0 /16",
+                "properties": null,
+                "uuid": "cb2a9b48-6439-4b37-b19b-6c804a90411b",
+                "value": 1334
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "255.0.0.0 /8",
+                "properties": null,
+                "uuid": "ad195d39-31db-4b58-8af5-8d2aab1b9d68",
+                "value": 1335
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "0.0.0.0 /0",
+                "properties": null,
+                "uuid": "5845a3b5-1b40-4c51-a41a-f3065a8d7161",
+                "value": 1336
+              }
+            ]
+          },
+          "cisco_asa_network_object_description": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_b22b8944_4384_409a_8692_d92a9afbba72/cisco_asa_network_object_description",
+            "hide_notification": false,
+            "id": 659,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_network_object_description",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Network Object Description",
+            "tooltip": "",
+            "type_id": 1069,
+            "uuid": "017efb0d-aaf7-4909-8a68-e9c78fe7cfbc",
+            "values": []
+          },
+          "cisco_asa_network_object_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_b22b8944_4384_409a_8692_d92a9afbba72/cisco_asa_network_object_name",
+            "hide_notification": false,
+            "id": 660,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_network_object_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Network Object Name",
+            "tooltip": "Objects must have unique names that are limited to 64 characters, including letters and numbers. Space and these special characters: .!@#$%^\u0026()-_{} are NOT permitted.  Object names are case-sensitive.",
+            "type_id": 1069,
+            "uuid": "f85090a0-9f16-473c-8fa9-3dde14061247",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_b22b8944_4384_409a_8692_d92a9afbba72",
+        "uuid": "9d60bdea-ae6f-48b1-a92f-6e151251f177"
+      },
+      "has_logical_errors": false,
+      "id": 59,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1681848292269,
+      "local_scripts": [],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "IP Address"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "String"
+            }
+          ],
+          "logic_type": "any"
+        },
+        "view_items": [
+          {
+            "content": "583cee79-e384-4426-8cbf-f838194293d4",
+            "element": "field_uuid",
+            "field_type": "playbook_b22b8944_4384_409a_8692_d92a9afbba72",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "f85090a0-9f16-473c-8fa9-3dde14061247",
+            "element": "field_uuid",
+            "field_type": "playbook_b22b8944_4384_409a_8692_d92a9afbba72",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "017efb0d-aaf7-4909-8a68-e9c78fe7cfbc",
+            "element": "field_uuid",
+            "field_type": "playbook_b22b8944_4384_409a_8692_d92a9afbba72",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "94dfab97-0795-4fc2-b91d-9279dfe5c66b",
+            "element": "field_uuid",
+            "field_type": "playbook_b22b8944_4384_409a_8692_d92a9afbba72",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "cisco_asa_add_ipv4network_to_network_object_group",
+      "object_type": "artifact",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_b22b8944-4384-409a-8692-d92a9afbba72",
+        "id": 59,
+        "name": "playbook_b22b8944_4384_409a_8692_d92a9afbba72",
+        "type": "playbook",
+        "uuid": "e98e7e27-7862-4f95-9216-a72c4956738e"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "b22b8944-4384-409a-8692-d92a9afbba72",
+      "version": 12
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_9383b995_1aef_4e83_ac9f_0da387f3496b\" isExecutable=\"true\" name=\"playbook_9383b995_1aef_4e83_ac9f_0da387f3496b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1yj74qi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Cisco ASA Get Network Objects\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"af7d53df-369d-4e78-b33b-865d5a85895a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Get the firewall network object group pair\\nfirewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_network_objects_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1yj74qi\u003c/incoming\u003e\u003coutgoing\u003eFlow_0mw9zsl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1yj74qi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1o1all6\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Cisco ASA: write network object to data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0baa0d5a-bbad-4948-886a-af12e8f884a4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mw9zsl\u003c/incoming\u003e\u003coutgoing\u003eFlow_1o1all6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0mw9zsl\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1o1all6\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_9383b995_1aef_4e83_ac9f_0da387f3496b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1yj74qi\" id=\"Flow_1yj74qi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mw9zsl\" id=\"Flow_0mw9zsl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1o1all6\" id=\"Flow_1o1all6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"598\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1681851807852,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_9383b995_1aef_4e83_ac9f_0da387f3496b",
+      "description": {
+        "content": "Get the network objects of the specified network object group and write them to the Cisco ASA Network Objects data table.",
+        "format": "text"
+      },
+      "display_name": "Cisco ASA Get Network Object Group",
+      "export_key": "cisco_asa_get_network_object_group",
+      "field_type_handle": "playbook_9383b995_1aef_4e83_ac9f_0da387f3496b",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Cisco ASA Get Network Object Group",
+        "export_key": "playbook_9383b995_1aef_4e83_ac9f_0da387f3496b",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_9383b995_1aef_4e83_ac9f_0da387f3496b",
+        "uuid": "9aee1c44-a918-4b27-99b3-6c40435bdf4e"
+      },
+      "has_logical_errors": false,
+      "id": 63,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1681852219858,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1681852186514,
+          "description": "Write the network objects into the Network Objects data table.",
+          "enabled": false,
+          "export_key": "Cisco ASA: write network object to data table",
+          "id": 85,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1681852186528,
+          "name": "Cisco ASA: write network object to data table",
+          "object_type": "incident",
+          "playbook_handle": "cisco_asa_get_network_object_group",
+          "programmatic_name": "cisco_asa_get_network_object_group_cisco_asa_write_network_object_to_data_table",
+          "script_text": "from datetime import datetime\n\nresults = playbook.functions.results.get_network_objects_results\ncontent = results.get(\"content\", {})\nmember_list = content.get(\"member_list\", [])\nfirewall = results.inputs.get(\"cisco_asa_firewall\")\nnetwork_object_group = results.inputs.get(\"cisco_asa_network_object_group\")\n\n# Add each email as a row in the query results data table\nfor network_object in member_list:\n  network_object_row = incident.addRow(\"cisco_asa_network_object_dt\")\n  network_object_row.cisco_asa_query_date = datetime.now()\n  network_object_row.cisco_asa_firewall = firewall\n  network_object_row.cisco_asa_network_object_group = network_object_group\n\n  if network_object.get(\"kind\")  == \u0027object#NetworkObj\u0027:\n    network_object_row.cisco_asa_network_object_id = network_object.get(\"objectId\")\n    network_object_row.cisco_asa_network_object_description = network_object.get(\"description\")\n    host = network_object.get(\"host\")\n    network_object_row.cisco_asa_network_object_kind = host.get(\"kind\")\n    network_object_row.cisco_asa_network_object_value = host.get(\"value\")\n  else:\n    network_object_row.cisco_asa_network_object_kind = network_object.get(\"kind\")\n    network_object_row.cisco_asa_network_object_value = network_object.get(\"value\")\n\n  status_text = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=\"green\", status=\"Active\")\n  network_object_row.cisco_asa_status = helper.createRichText(status_text)\n",
+          "tags": [],
+          "uuid": "0baa0d5a-bbad-4948-886a-af12e8f884a4"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "cisco_asa_get_network_object_group",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_9383b995-1aef-4e83-ac9f-0da387f3496b",
+        "id": 63,
+        "name": "playbook_9383b995_1aef_4e83_ac9f_0da387f3496b",
+        "type": "playbook",
+        "uuid": "26910c65-e298-4bef-a7cc-ea9121ed530f"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "9383b995-1aef-4e83-ac9f-0da387f3496b",
+      "version": 7
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 15,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6\" isExecutable=\"true\" name=\"playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1wezt00\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ltyq12\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Cisco ASA Add Artifact to Network Object Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{\"6e5a3cb6-18fe-4dae-9b87-a8c5d889b070\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"737cf112-4adc-4e54-b7a1-a5d696340dcc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ed9ad5be-b3c3-4105-926d-57c63228a592\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2f25706e-1951-4911-b198-11fb4c73c973\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"81b3ce67-7d3a-4c7d-9024-3959fefdf49f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0231aa2a-1167-4eb8-95a6-8c77ec5da5a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9f3b3e08-6648-4f28-ab82-a4fadf68c91d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c78dedd5-1780-40fd-8561-5246ed6dbf32\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"95639c4a-a104-4598-abba-6b1438432ba6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2c351503-8d83-440c-8d7d-6c1de9550c93\"}}},\"pre_processing_script\":\"# Parse the firewall name and network object group from the colon separated string\\nfirewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\\n# Get input from the artifact type and value\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\\ninputs.cisco_asa_network_object_name = playbook.inputs.cisco_asa_network_object_name\\n\\n# Optional network object description\\nif playbook.inputs.cisco_asa_network_object_description:\\n  inputs.cisco_asa_network_object_description = playbook.inputs.cisco_asa_network_object_description\\n\\n# FQDN version\\ninputs.cisco_asa_fqdn_ip_version = playbook.inputs.cisco_asa_fqdn_ip_version\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wezt00\u003c/incoming\u003e\u003coutgoing\u003eFlow_0mfth9l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1wezt00\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0mfth9l\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Cisco ASA: Write Artifact to Network Object data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9ee6bbf2-bf9e-4e80-a86b-1a651c6dd36c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mfth9l\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ltyq12\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0ltyq12\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mfth9l\" id=\"Flow_0mfth9l_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wezt00\" id=\"Flow_1wezt00_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ltyq12\" id=\"Flow_0ltyq12_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"308.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1681833345061,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6",
+      "description": {
+        "content": "Add an DNS artifact to a Cisco ASA network object group.  If the artifact is not added to the group an error message is written to an incident note.",
+        "format": "text"
+      },
+      "display_name": "Cisco ASA: Add FQDN to Network Object Group",
+      "export_key": "cisco_asa_add_fqdn_to_network_object_group",
+      "field_type_handle": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Cisco ASA: Add FQDN to Network Object Group",
+        "export_key": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6",
+        "fields": {
+          "cisco_asa_firewall_network_object_group": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6/cisco_asa_firewall_network_object_group",
+            "hide_notification": false,
+            "id": 646,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_firewall_network_object_group",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Firewall Network Object Group",
+            "tooltip": "",
+            "type_id": 1066,
+            "uuid": "92ba9510-0448-4029-be05-5fecd989f29e",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:BLOCKLIST_IN",
+                "properties": null,
+                "uuid": "3379eae7-d4f1-41fa-b8f6-a108fdc69571",
+                "value": 1315
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:BLOCKLIST_OUT",
+                "properties": null,
+                "uuid": "355d6b41-f692-4b9b-bcc9-51c2b3bdcde7",
+                "value": 1316
+              }
+            ]
+          },
+          "cisco_asa_fqdn_ip_version": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6/cisco_asa_fqdn_ip_version",
+            "hide_notification": false,
+            "id": 647,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_fqdn_ip_version",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "IP Version",
+            "tooltip": "IPv4FQDN or IPv6FQDN",
+            "type_id": 1066,
+            "uuid": "6a20c8e7-a793-4131-9a68-ed9612b1e3d6",
+            "values": [
+              {
+                "default": true,
+                "enabled": true,
+                "hidden": false,
+                "label": "IPv4FQDN",
+                "properties": null,
+                "uuid": "d2cea1f9-bcef-412a-a654-750f353cc53a",
+                "value": 1317
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "IPv6FQDN",
+                "properties": null,
+                "uuid": "6e582687-f944-4518-bb0f-13a6427772e8",
+                "value": 1318
+              }
+            ]
+          },
+          "cisco_asa_network_object_description": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6/cisco_asa_network_object_description",
+            "hide_notification": false,
+            "id": 648,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_network_object_description",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Network Object Description",
+            "tooltip": "",
+            "type_id": 1066,
+            "uuid": "eb323705-3f2c-459f-88d0-6af71c096a35",
+            "values": []
+          },
+          "cisco_asa_network_object_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6/cisco_asa_network_object_name",
+            "hide_notification": false,
+            "id": 649,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_network_object_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Network Object Name",
+            "tooltip": "Objects must have unique names that are limited to 64 characters, including letters and numbers. Space and these special characters: .!@#$%^\u0026()-_{} are NOT permitted.  Object names are case-sensitive.",
+            "type_id": 1066,
+            "uuid": "7a07456c-e3b5-4b6a-bfeb-eadead5429cb",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6",
+        "uuid": "c9b99662-480b-41e5-b165-9c6c47ddd82d"
+      },
+      "has_logical_errors": false,
+      "id": 56,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1681845476320,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1681833345534,
+          "description": "Add an artifact to the Cisco ASA network object group and add it to the Network Object data table.  If the artifact is not added to the group an error message is written to an incident note.",
+          "enabled": false,
+          "export_key": "Cisco ASA: Add network object to data table",
+          "id": 81,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1681833345582,
+          "name": "Cisco ASA: Add network object to data table",
+          "object_type": "artifact",
+          "playbook_handle": "cisco_asa_add_fqdn_to_network_object_group",
+          "programmatic_name": "cisco_asa_add_fqdn_to_network_object_group_cisco_asa_add_fqdn_to_network_objectgroup_cisco_asa_add_network_object_to_data_table",
+          "script_text": "from datetime import datetime\n\nresults = playbook.functions.results.add_artifact_results\nsuccess = results.get(\"success\")\ncontent = results.get(\"content\")\nfirewall = content.get(\"firewall\")\nnetwork_object_group = content.get(\"network_object_group\")\nnetwork_object_value = content.get(\"network_object_value\")\nnetwork_object_name = content.get(\"network_object_name\")\nnetwork_object_kind = content.get(\"network_object_kind\")\nif success:\n  network_object_description = content.get(\"network_object_description\")\n  # Add network object as a row in the network Cisco ASA network objects data table\n  network_object_row = incident.addRow(\"cisco_asa_network_object_dt\")\n  network_object_row.cisco_asa_query_date = datetime.now()\n  network_object_row.cisco_asa_firewall = firewall\n  network_object_row.cisco_asa_network_object_group = network_object_group\n  network_object_row.cisco_asa_network_object_kind = network_object_kind\n  network_object_row.cisco_asa_network_object_value = network_object_value\n  network_object_row.cisco_asa_network_object_id = network_object_name\n  network_object_row.cisco_asa_network_object_description = network_object_description  \n  # Update status field\n  status_text = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=\"green\", status=\"Active\")\n  network_object_row.cisco_asa_status = helper.createRichText(status_text)\nelse:\n  # Artifact not added to the group so add a note with the reason.\n  reason = content.get(\"reason\")\n  note = u\"Cisco ASA Add Artifact to Network Object Group Results:\\n    Artifact value: {0}\\n    Object Name: {1} \\n    Object Kind: {2} was not added to Firewall: {3}, Network Object Group: {4}\\n\\n{5}\"\n  note = note.format(network_object_value, network_object_name, network_object_kind, firewall, network_object_group, reason)\n  incident.addNote(helper.createPlainText(note))",
+          "tags": [],
+          "uuid": "b3d774a7-7a20-4719-b6a1-ecc5d9268630"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "DNS Name"
+            }
+          ],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "92ba9510-0448-4029-be05-5fecd989f29e",
+            "element": "field_uuid",
+            "field_type": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "7a07456c-e3b5-4b6a-bfeb-eadead5429cb",
+            "element": "field_uuid",
+            "field_type": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "eb323705-3f2c-459f-88d0-6af71c096a35",
+            "element": "field_uuid",
+            "field_type": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "6a20c8e7-a793-4131-9a68-ed9612b1e3d6",
+            "element": "field_uuid",
+            "field_type": "playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "cisco_asa_add_fqdn_to_network_object_group",
+      "object_type": "artifact",
+      "status": "enabled",
+      "tag": {
+        "display_name": "playbook_ba5b49b4-e9fb-4203-b0dc-e039a2150eb6",
+        "id": 56,
+        "name": "playbook_ba5b49b4-e9fb-4203-b0dc-e039a2150eb6",
+        "type": "playbook",
+        "uuid": "f907cac3-b762-4764-a0b8-5daf4b746961"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "ba5b49b4-e9fb-4203-b0dc-e039a2150eb6",
+      "version": 19
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 7,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ea888208_7601_4257_a499_489f49aa0a4b\" isExecutable=\"true\" name=\"playbook_ea888208_7601_4257_a499_489f49aa0a4b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1vrthep\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Cisco ASA Add Artifact to Network Object Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{\"6e5a3cb6-18fe-4dae-9b87-a8c5d889b070\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"737cf112-4adc-4e54-b7a1-a5d696340dcc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ed9ad5be-b3c3-4105-926d-57c63228a592\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2f25706e-1951-4911-b198-11fb4c73c973\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"81b3ce67-7d3a-4c7d-9024-3959fefdf49f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0231aa2a-1167-4eb8-95a6-8c77ec5da5a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9f3b3e08-6648-4f28-ab82-a4fadf68c91d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c78dedd5-1780-40fd-8561-5246ed6dbf32\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"95639c4a-a104-4598-abba-6b1438432ba6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2c351503-8d83-440c-8d7d-6c1de9550c93\"}}},\"pre_processing_script\":\"# Parse the firewall name and network object group from the colon separated string\\nfirewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\\n# Get input from the artifact type and value\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\\n\\n# Optional network object description\\nif playbook.inputs.cisco_asa_network_object_description:\\n  inputs.cisco_asa_network_object_description = playbook.inputs.cisco_asa_network_object_description\\n  \\nif playbook.inputs.cisco_asa_network_object_name:\\n  inputs.cisco_asa_network_object_name = playbook.inputs.cisco_asa_network_object_name\\n  \",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1vrthep\u003c/incoming\u003e\u003coutgoing\u003eFlow_1oa2pl5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1vrthep\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0bh3tr3\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Cisco ASA: Write Artifact to Network Object data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9ee6bbf2-bf9e-4e80-a86b-1a651c6dd36c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1oa2pl5\u003c/incoming\u003e\u003coutgoing\u003eFlow_0bh3tr3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1oa2pl5\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0bh3tr3\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ea888208_7601_4257_a499_489f49aa0a4b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bh3tr3\" id=\"Flow_0bh3tr3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1oa2pl5\" id=\"Flow_1oa2pl5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vrthep\" id=\"Flow_1vrthep_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1681839858418,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_ea888208_7601_4257_a499_489f49aa0a4b",
+      "description": {
+        "content": "Add IP address artifact to Cisco ASA network object group.  If the artifact is not added to the group an error message is written to an incident note.",
+        "format": "text"
+      },
+      "display_name": "Cisco ASA: Add IP Address to Network Object Group",
+      "export_key": "cisco_asa_add_ip_address_to_network_object_group",
+      "field_type_handle": "playbook_ea888208_7601_4257_a499_489f49aa0a4b",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Cisco ASA: Add IP Address to Network Object Group",
+        "export_key": "playbook_ea888208_7601_4257_a499_489f49aa0a4b",
+        "fields": {
+          "cisco_asa_firewall_network_object_group": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_ea888208_7601_4257_a499_489f49aa0a4b/cisco_asa_firewall_network_object_group",
+            "hide_notification": false,
+            "id": 650,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_firewall_network_object_group",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Firewall Network Object Group",
+            "tooltip": "",
+            "type_id": 1067,
+            "uuid": "f65c62c3-f8b0-4844-bca8-c8267e741357",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:BLOCKLIST_IN",
+                "properties": null,
+                "uuid": "b510e2b5-7621-40f9-bfe1-0f886eea7a16",
+                "value": 1319
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:BLOCKLIST_OUT",
+                "properties": null,
+                "uuid": "0dc286bb-77b8-4cb1-a68b-a4aaa5dcac05",
+                "value": 1320
+              }
+            ]
+          },
+          "cisco_asa_network_object_description": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_ea888208_7601_4257_a499_489f49aa0a4b/cisco_asa_network_object_description",
+            "hide_notification": false,
+            "id": 651,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_network_object_description",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Network Object Description",
+            "tooltip": "",
+            "type_id": 1067,
+            "uuid": "f16de41b-d13c-4040-9741-e8231bcc5448",
+            "values": []
+          },
+          "cisco_asa_network_object_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_ea888208_7601_4257_a499_489f49aa0a4b/cisco_asa_network_object_name",
+            "hide_notification": false,
+            "id": 652,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_network_object_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Network Object Name",
+            "tooltip": "Objects must have unique names that are limited to 64 characters, including letters and numbers. Space and these special characters: .!@#$%^\u0026()-_{} are NOT permitted.  Object names are case-sensitive.",
+            "type_id": 1067,
+            "uuid": "492c64fc-4d5d-4efa-b529-4781f4d3d4f1",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_ea888208_7601_4257_a499_489f49aa0a4b",
+        "uuid": "b8756e5b-de62-46da-bbd3-b2b4dfd596b2"
+      },
+      "has_logical_errors": false,
+      "id": 57,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1681845350540,
+      "local_scripts": [],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "IP Address"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "String"
+            }
+          ],
+          "logic_type": "any"
+        },
+        "view_items": [
+          {
+            "content": "f65c62c3-f8b0-4844-bca8-c8267e741357",
+            "element": "field_uuid",
+            "field_type": "playbook_ea888208_7601_4257_a499_489f49aa0a4b",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "492c64fc-4d5d-4efa-b529-4781f4d3d4f1",
+            "element": "field_uuid",
+            "field_type": "playbook_ea888208_7601_4257_a499_489f49aa0a4b",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "f16de41b-d13c-4040-9741-e8231bcc5448",
+            "element": "field_uuid",
+            "field_type": "playbook_ea888208_7601_4257_a499_489f49aa0a4b",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "cisco_asa_add_ip_address_to_network_object_group",
+      "object_type": "artifact",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_ea888208-7601-4257-a499-489f49aa0a4b",
+        "id": 57,
+        "name": "playbook_ea888208_7601_4257_a499_489f49aa0a4b",
+        "type": "playbook",
+        "uuid": "4898cebc-8123-489e-a3c6-2f808b1e8ba5"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "ea888208-7601-4257-a499-489f49aa0a4b",
+      "version": 12
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 8,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2\" isExecutable=\"true\" name=\"playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_177645j\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0xgi9jg\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Cisco ASA Add Artifact to Network Object Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{\"6e5a3cb6-18fe-4dae-9b87-a8c5d889b070\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"737cf112-4adc-4e54-b7a1-a5d696340dcc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ed9ad5be-b3c3-4105-926d-57c63228a592\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2f25706e-1951-4911-b198-11fb4c73c973\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"81b3ce67-7d3a-4c7d-9024-3959fefdf49f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0231aa2a-1167-4eb8-95a6-8c77ec5da5a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9f3b3e08-6648-4f28-ab82-a4fadf68c91d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c78dedd5-1780-40fd-8561-5246ed6dbf32\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"95639c4a-a104-4598-abba-6b1438432ba6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2c351503-8d83-440c-8d7d-6c1de9550c93\"}}},\"pre_processing_script\":\"# Parse the firewall name and network object group from the colon separated string\\nfirewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\\n# Get input from the artifact type and value\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\\n\\n# Optional network object description\\nif playbook.inputs.cisco_asa_network_object_description:\\n  inputs.cisco_asa_network_object_description = playbook.inputs.cisco_asa_network_object_description\\n  \\nif playbook.inputs.cisco_asa_network_object_name:\\n  inputs.cisco_asa_network_object_name = playbook.inputs.cisco_asa_network_object_name\\n\\n# Option params for IP netmask or end IP for IP range\\nif playbook.inputs.cisco_asa_end_range:\\n  inputs.cisco_asa_end_range = playbook.inputs.cisco_asa_end_range\\n  \",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_177645j\u003c/incoming\u003e\u003coutgoing\u003eFlow_1l1uhqy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_177645j\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Cisco ASA: Write Artifact to Network Object data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9ee6bbf2-bf9e-4e80-a86b-1a651c6dd36c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1l1uhqy\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xgi9jg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1l1uhqy\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0xgi9jg\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xgi9jg\" id=\"Flow_0xgi9jg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1l1uhqy\" id=\"Flow_1l1uhqy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_177645j\" id=\"Flow_177645j_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1681845724139,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2",
+      "description": {
+        "content": "Add IP range to a Cisco ASA network object group.  If there is an error write it to an incident note.",
+        "format": "text"
+      },
+      "display_name": "Cisco ASA: Add IP Range to Network Object Group",
+      "export_key": "cisco_asa_add_ip_range_to_network_object_group",
+      "field_type_handle": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Cisco ASA: Add IP Range to Network Object Group",
+        "export_key": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2",
+        "fields": {
+          "cisco_asa_end_range": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2/cisco_asa_end_range",
+            "hide_notification": false,
+            "id": 653,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_end_range",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "End IP Address",
+            "tooltip": "End IP address of a range of addresses.  Do not include masks or prefixes.",
+            "type_id": 1068,
+            "uuid": "3a9aa3fd-44d3-47c8-b0e3-13d6c9b65778",
+            "values": []
+          },
+          "cisco_asa_firewall_network_object_group": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2/cisco_asa_firewall_network_object_group",
+            "hide_notification": false,
+            "id": 654,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_firewall_network_object_group",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Firewall Network Object Group",
+            "tooltip": "",
+            "type_id": 1068,
+            "uuid": "16cb5635-c6ad-47b3-ab16-64cff3a15d54",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:BLOCKLIST_IN",
+                "properties": null,
+                "uuid": "8a65cfec-7dd0-4fae-97d0-350a07db2f47",
+                "value": 1321
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:BLOCKLIST_OUT",
+                "properties": null,
+                "uuid": "3635eaa9-8cc8-42d1-848b-ec71c9df46aa",
+                "value": 1322
+              }
+            ]
+          },
+          "cisco_asa_network_object_description": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2/cisco_asa_network_object_description",
+            "hide_notification": false,
+            "id": 655,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_network_object_description",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Network Object Description",
+            "tooltip": "",
+            "type_id": 1068,
+            "uuid": "2901ecb5-d6a7-40b7-9f92-a5fd8befa045",
+            "values": []
+          },
+          "cisco_asa_network_object_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2/cisco_asa_network_object_name",
+            "hide_notification": false,
+            "id": 656,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_network_object_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Network Object Name",
+            "tooltip": "Objects must have unique names that are limited to 64 characters, including letters and numbers. Space and these special characters: .!@#$%^\u0026()-_{} are NOT permitted.  Object names are case-sensitive.",
+            "type_id": 1068,
+            "uuid": "138a01ca-0246-4d6c-b984-3a3b3ec0ff8b",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2",
+        "uuid": "5483f1e9-45ad-471d-86c9-eb1296ae4f23"
+      },
+      "has_logical_errors": false,
+      "id": 58,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1681846834122,
+      "local_scripts": [],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "IP Address"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "String"
+            }
+          ],
+          "logic_type": "any"
+        },
+        "view_items": [
+          {
+            "content": "16cb5635-c6ad-47b3-ab16-64cff3a15d54",
+            "element": "field_uuid",
+            "field_type": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "138a01ca-0246-4d6c-b984-3a3b3ec0ff8b",
+            "element": "field_uuid",
+            "field_type": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "2901ecb5-d6a7-40b7-9f92-a5fd8befa045",
+            "element": "field_uuid",
+            "field_type": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "3a9aa3fd-44d3-47c8-b0e3-13d6c9b65778",
+            "element": "field_uuid",
+            "field_type": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "cisco_asa_add_ip_range_to_network_object_group",
+      "object_type": "artifact",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_3a521756-192b-425d-b0f9-c1e3f3c8ecd2",
+        "id": 58,
+        "name": "playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2",
+        "type": "playbook",
+        "uuid": "e1d8c1fb-3d4c-49d2-b7f6-1d02d17574f9"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "3a521756-192b-425d-b0f9-c1e3f3c8ecd2",
+      "version": 15
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25\" isExecutable=\"true\" name=\"playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1rkfpxx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Cisco ASA Add Artifact to Network Object Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{\"6e5a3cb6-18fe-4dae-9b87-a8c5d889b070\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"737cf112-4adc-4e54-b7a1-a5d696340dcc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ed9ad5be-b3c3-4105-926d-57c63228a592\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2f25706e-1951-4911-b198-11fb4c73c973\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"81b3ce67-7d3a-4c7d-9024-3959fefdf49f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0231aa2a-1167-4eb8-95a6-8c77ec5da5a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9f3b3e08-6648-4f28-ab82-a4fadf68c91d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c78dedd5-1780-40fd-8561-5246ed6dbf32\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"95639c4a-a104-4598-abba-6b1438432ba6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2c351503-8d83-440c-8d7d-6c1de9550c93\"}}},\"pre_processing_script\":\"# Parse the firewall name and network object group from the colon separated string\\nfirewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\\n# Get input from the artifact type and value\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\\n\\n# Optional network object description and object name\\nif playbook.inputs.cisco_asa_network_object_description:\\n  inputs.cisco_asa_network_object_description = playbook.inputs.cisco_asa_network_object_description\\n  \\nif playbook.inputs.cisco_asa_network_object_name:\\n  inputs.cisco_asa_network_object_name = playbook.inputs.cisco_asa_network_object_name\\n\\nif playbook.inputs.cisco_asa_ipv6_prefix_length:\\n  inputs.cisco_asa_netmask = playbook.inputs.cisco_asa_ipv6_prefix_length\\n\\n  \",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1rkfpxx\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ba70o0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1rkfpxx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Cisco ASA: Write Artifact to Network Object data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9ee6bbf2-bf9e-4e80-a86b-1a651c6dd36c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ba70o0\u003c/incoming\u003e\u003coutgoing\u003eFlow_0v5ownu\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ba70o0\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0v5ownu\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0v5ownu\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rkfpxx\" id=\"Flow_1rkfpxx_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ba70o0\" id=\"Flow_1ba70o0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0v5ownu\" id=\"Flow_0v5ownu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"338.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1681848915905,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25",
+      "description": {
+        "content": "Add in IPv6 IP network to a Cisco ASA network object group.  If an error occurs write it to an incident note.",
+        "format": "text"
+      },
+      "display_name": "Cisco ASA: Add IPv6Network to Network Object Group",
+      "export_key": "cisco_asa_add_ipv6network_to_network_object_group",
+      "field_type_handle": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Cisco ASA: Add IPv6Network to Network Object Group",
+        "export_key": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25",
+        "fields": {
+          "cisco_asa_firewall_network_object_group": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25/cisco_asa_firewall_network_object_group",
+            "hide_notification": false,
+            "id": 661,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_firewall_network_object_group",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Firewall Network Object Group",
+            "tooltip": "",
+            "type_id": 1070,
+            "uuid": "24590ab4-1189-4bcb-ba3a-75a887a9a71e",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:BLOCKLIST_IN",
+                "properties": null,
+                "uuid": "28d833ca-6a6e-44e4-bf8e-47752855f7ef",
+                "value": 1337
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:BLOCKLIST_OUT",
+                "properties": null,
+                "uuid": "f51c45e2-ae51-4f76-bf34-fa3452b4f101",
+                "value": 1338
+              }
+            ]
+          },
+          "cisco_asa_ipv6_prefix_length": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25/cisco_asa_ipv6_prefix_length",
+            "hide_notification": false,
+            "id": 662,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_ipv6_prefix_length",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "IPv6 Prefix Length",
+            "tooltip": "Prefix length in bits (greater than 8 and less than or equal to 128).",
+            "type_id": 1070,
+            "uuid": "def9f767-05a6-457d-ba57-7e62b174d4b3",
+            "values": []
+          },
+          "cisco_asa_network_object_description": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25/cisco_asa_network_object_description",
+            "hide_notification": false,
+            "id": 663,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_network_object_description",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Network Object Description",
+            "tooltip": "",
+            "type_id": 1070,
+            "uuid": "00cd93c3-78d7-41b9-a6c8-ce5a31290b03",
+            "values": []
+          },
+          "cisco_asa_network_object_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25/cisco_asa_network_object_name",
+            "hide_notification": false,
+            "id": 664,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "cisco_asa_network_object_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Network Object Name",
+            "tooltip": "Objects must have unique names that are limited to 64 characters, including letters and numbers. Space and these special characters: .!@#$%^\u0026()-_{} are NOT permitted.  Object names are case-sensitive.",
+            "type_id": 1070,
+            "uuid": "8baf5b8c-d96f-466c-9d70-b324b7046027",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25",
+        "uuid": "b1d77e74-efdb-4705-915d-915fd6bb922e"
+      },
+      "has_logical_errors": false,
+      "id": 60,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1681849309215,
+      "local_scripts": [],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "String"
+            }
+          ],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "24590ab4-1189-4bcb-ba3a-75a887a9a71e",
+            "element": "field_uuid",
+            "field_type": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "8baf5b8c-d96f-466c-9d70-b324b7046027",
+            "element": "field_uuid",
+            "field_type": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "00cd93c3-78d7-41b9-a6c8-ce5a31290b03",
+            "element": "field_uuid",
+            "field_type": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "def9f767-05a6-457d-ba57-7e62b174d4b3",
+            "element": "field_uuid",
+            "field_type": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "cisco_asa_add_ipv6network_to_network_object_group",
+      "object_type": "artifact",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_f2bfe21e-5b8b-4663-b59a-dcde43a92c25",
+        "id": 60,
+        "name": "playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25",
+        "type": "playbook",
+        "uuid": "4f93581c-b978-4b25-82bf-998f14a10b43"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "f2bfe21e-5b8b-4663-b59a-dcde43a92c25",
+      "version": 7
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_623f06bc_b670_4649_ba68_22296aa9d14a\" isExecutable=\"true\" name=\"playbook_623f06bc_b670_4649_ba68_22296aa9d14a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1rd2gjx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Cisco ASA Get Network Object Details\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0cfd3303-0293-46cb-b257-911c49167204\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.cisco_asa_firewall = row.cisco_asa_firewall\\ninputs.cisco_asa_network_object_id = row.cisco_asa_network_object_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_details_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1rd2gjx\u003c/incoming\u003e\u003coutgoing\u003eFlow_1uepge0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1rd2gjx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Convert JSON to rich text v1.3\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"64d3e6da-8b56-4d19-9ce8-a75586f71dad\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0zz538p\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rh7tl8\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0rh7tl8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0rh7tl8\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Cisco ASA: write fomatted results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0a9cd07d-4a0d-4bbf-ac61-96b084eb49c4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1uepge0\u003c/incoming\u003e\u003coutgoing\u003eFlow_0zz538p\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1uepge0\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003csequenceFlow id=\"Flow_0zz538p\" sourceRef=\"ScriptTask_4\" targetRef=\"ScriptTask_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_623f06bc_b670_4649_ba68_22296aa9d14a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rd2gjx\" id=\"Flow_1rd2gjx_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rh7tl8\" id=\"Flow_0rh7tl8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1uepge0\" id=\"Flow_1uepge0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0zz538p\" id=\"Flow_0zz538p_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"398.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"534.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1681851089893,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_623f06bc_b670_4649_ba68_22296aa9d14a",
+      "description": {
+        "content": null,
+        "format": "text"
+      },
+      "display_name": "Cisco ASA: Get Network Object Details",
+      "export_key": "cisco_asa_get_network_object_details",
+      "field_type_handle": "playbook_623f06bc_b670_4649_ba68_22296aa9d14a",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Cisco ASA: Get Network Object Details",
+        "export_key": "playbook_623f06bc_b670_4649_ba68_22296aa9d14a",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_623f06bc_b670_4649_ba68_22296aa9d14a",
+        "uuid": "09d55953-ebba-45a9-8f63-e06efd57c1c3"
+      },
+      "has_logical_errors": false,
+      "id": 62,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1681851514593,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1681851469853,
+          "description": "Create json object note to pass to JSON Conversion. ",
+          "enabled": false,
+          "export_key": "Cisco ASA: write fomatted results",
+          "id": 84,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1681851469867,
+          "name": "Cisco ASA: write fomatted results",
+          "object_type": "cisco_asa_network_object_dt",
+          "playbook_handle": "cisco_asa_get_network_object_details",
+          "programmatic_name": "cisco_asa_get_network_object_details_cisco_asa_write_fomatted_results",
+          "script_text": "# Put the results json into a workflow property so we can call the \n# convert_json_to_rich_text script to print readable formatted json in an incident note.\nresults = playbook.functions.results.get_details_results\ninputs = results.get(\"inputs\")\nfirewall_id = inputs.get(\"cisco_asa_firewall\")\nobject_id = inputs.get(\"cisco_asa_network_object_id\")\nheader = u\"Cisco ASA Firewall: {0} Network Object ID {1}\".format(firewall_id, object_id)\n\njson_note = {\n              \"version\": \"1.3\",\n              \"header\": header, \n              \"json\": results.content,\n              \"sort\": False\n            }\nplaybook.addProperty(\u0027convert_json_to_rich_text\u0027, json_note)",
+          "tags": [],
+          "uuid": "0a9cd07d-4a0d-4bbf-ac61-96b084eb49c4"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "cisco_asa_network_object_dt.cisco_asa_network_object_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "cisco_asa_network_object_dt.cisco_asa_status",
+              "method": "equals",
+              "type": null,
+              "value": "Active"
+            }
+          ],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "cisco_asa_get_network_object_details",
+      "object_type": "cisco_asa_network_object_dt",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_623f06bc-b670-4649-ba68-22296aa9d14a",
+        "id": 62,
+        "name": "playbook_623f06bc_b670_4649_ba68_22296aa9d14a",
+        "type": "playbook",
+        "uuid": "0d2e3d19-b2b6-458b-a2e5-d2a13ef07ae6"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "623f06bc-b670-4649-ba68-22296aa9d14a",
+      "version": 7
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 4,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e1efe2b6_d78c_4eab_94bd_d309b5f5a3e6\" isExecutable=\"true\" name=\"playbook_e1efe2b6_d78c_4eab_94bd_d309b5f5a3e6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1yd2jp6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Cisco ASA Remove Network Object from Network Object Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"50488692-9f80-4d9b-ad88-44e5a80e4fc7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.cisco_asa_firewall = row.cisco_asa_firewall\\ninputs.cisco_asa_network_object_group = row.cisco_asa_network_object_group\\ninputs.cisco_asa_network_object_kind = row.cisco_asa_network_object_kind\\ninputs.cisco_asa_network_object_value = row.cisco_asa_network_object_value\\ninputs.cisco_asa_network_object_id = row.cisco_asa_network_object_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"remove_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1yd2jp6\u003c/incoming\u003e\u003coutgoing\u003eFlow_1436ej5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1yd2jp6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1c6jn6v\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Cisco ASA: Remove Network Object data table update\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"18e9d3f2-46b3-4309-9373-45b051077092\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1436ej5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1c6jn6v\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1436ej5\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1c6jn6v\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e1efe2b6_d78c_4eab_94bd_d309b5f5a3e6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1yd2jp6\" id=\"Flow_1yd2jp6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1436ej5\" id=\"Flow_1436ej5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1c6jn6v\" id=\"Flow_1c6jn6v_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1681850379438,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_e1efe2b6_d78c_4eab_94bd_d309b5f5a3e6",
+      "description": {
+        "content": "Remove the network object from the specified Cisco ASA network object group. The status column of the row is marked as Removed in the data table.",
+        "format": "text"
+      },
+      "display_name": "Cisco ASA: Remove Network Object from Network Object Group",
+      "export_key": "cisco_asa_remove_network_object_from_network_object_group",
+      "field_type_handle": "playbook_e1efe2b6_d78c_4eab_94bd_d309b5f5a3e6",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Cisco ASA: Remove Network Object from Network Object Group",
+        "export_key": "playbook_e1efe2b6_d78c_4eab_94bd_d309b5f5a3e6",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_e1efe2b6_d78c_4eab_94bd_d309b5f5a3e6",
+        "uuid": "df1844ff-f2f7-4156-b6ab-7491c71ba478"
+      },
+      "has_logical_errors": false,
+      "id": 61,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1681850837384,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1681850709844,
+          "description": "Update the Network Objects data table to indicate network object has been Removed.",
+          "enabled": false,
+          "export_key": "Cisco ASA: Remove Network Object data table update",
+          "id": 83,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1681850784108,
+          "name": "Cisco ASA: Remove Network Object data table update",
+          "object_type": "cisco_asa_network_object_dt",
+          "playbook_handle": "cisco_asa_remove_network_object_from_network_object_group",
+          "programmatic_name": "cisco_asa_remove_network_object_from_network_object_group_cisco_asa_remove_network_object_data_table_update",
+          "script_text": "from datetime import datetime\n\nresults = playbook.functions.results.remove_results\n\nif results.success:\n  text = \"Removed\"\nelse:\n  text = \"NotFound\"\n  note = \"Remove Network Object From Network Object Group Results:\\n\\n    {0}\".format(results.content)\n  incident.addNote(helper.createPlainText(note))\n  \nstatus_text = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=\"red\", status=text)\nrow[\u0027cisco_asa_status\u0027] = helper.createRichText(status_text)\nrow[\"cisco_asa_query_date\"] = datetime.now()",
+          "tags": [],
+          "uuid": "18e9d3f2-46b3-4309-9373-45b051077092"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "cisco_asa_network_object_dt.cisco_asa_status",
+              "method": "equals",
+              "type": null,
+              "value": "Active"
+            }
+          ],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "cisco_asa_remove_network_object_from_network_object_group",
+      "object_type": "cisco_asa_network_object_dt",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_e1efe2b6-d78c-4eab-94bd-d309b5f5a3e6",
+        "id": 61,
+        "name": "playbook_e1efe2b6_d78c_4eab_94bd_d309b5f5a3e6",
+        "type": "playbook",
+        "uuid": "1af48dec-b244-4002-8e4c-7538f8d34fec"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "e1efe2b6-d78c-4eab-94bd-d309b5f5a3e6",
+      "version": 8
+    }
+  ],
   "regulators": null,
   "roles": [],
   "scripts": [
@@ -1795,83 +2746,6 @@
       "uuid": "b60c1bf0-cfb6-44d8-804c-229b1be36466"
     }
   ],
-  "workflows": [
-    {
-      "actions": [],
-      "content": {
-        "version": 3,
-        "workflow_id": "cisco_asa_remove_network_object_from_network_object_group",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"cisco_asa_remove_network_object_from_network_object_group\" isExecutable=\"true\" name=\"Cisco ASA Remove Network Object from Network Object Group\"\u003e\u003cdocumentation\u003eRemove the network object from the specified Cisco ASA network object group. The status column of the row is marked as Removed in the data table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0zs3em8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0qz9u75\" name=\"Cisco ASA Remove Network Object f...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"50488692-9f80-4d9b-ad88-44e5a80e4fc7\"\u003e{\"inputs\":{},\"post_processing_script\":\"#from java.util import Date\\nfrom datetime import datetime\\n\\nif results.success:\\n  text = \\\"Removed\\\"\\nelse:\\n  text = \\\"NotFound\\\"\\n  note = \\\"Remove Network Object From Network Object Group Results:\\\\n\\\\n    {0}\\\".format(results.content)\\n  incident.addNote(helper.createPlainText(note))\\n  \\nstatus_text = u\\\"\\\"\\\"\u0026lt;p style= \\\"color:{color}\\\"\u0026gt;{status}\u0026lt;/p\u0026gt;\\\"\\\"\\\".format(color=\\\"red\\\", status=text)\\nrow[\u0027cisco_asa_status\u0027] = helper.createRichText(status_text)\\nrow[\\\"cisco_asa_query_date\\\"] = datetime.now()\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.cisco_asa_firewall = row.cisco_asa_firewall\\ninputs.cisco_asa_network_object_group = row.cisco_asa_network_object_group\\ninputs.cisco_asa_network_object_kind = row.cisco_asa_network_object_kind\\ninputs.cisco_asa_network_object_value = row.cisco_asa_network_object_value\\ninputs.cisco_asa_network_object_id = row.cisco_asa_network_object_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0zs3em8\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1un9ebq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0zs3em8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0qz9u75\"/\u003e\u003cendEvent id=\"EndEvent_1busvxw\"\u003e\u003cincoming\u003eSequenceFlow_1un9ebq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1un9ebq\" sourceRef=\"ServiceTask_0qz9u75\" targetRef=\"EndEvent_1busvxw\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1lw2x61\"\u003e\u003ctext\u003e\u003c![CDATA[Input: Data table row\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1418gmu\" sourceRef=\"ServiceTask_0qz9u75\" targetRef=\"TextAnnotation_1lw2x61\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_16fukp9\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Network object in the data table row is removed from the Cisco ASA network object group.\u00a0 Data table Status column is updated.\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0fgqbcz\" sourceRef=\"ServiceTask_0qz9u75\" targetRef=\"TextAnnotation_16fukp9\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0qz9u75\" id=\"ServiceTask_0qz9u75_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"482\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0zs3em8\" id=\"SequenceFlow_0zs3em8_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"482\" xsi:type=\"omgdc:Point\" y=\"208\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"295\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1busvxw\" id=\"EndEvent_1busvxw_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"840\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"858\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1un9ebq\" id=\"SequenceFlow_1un9ebq_di\"\u003e\u003comgdi:waypoint x=\"582\" xsi:type=\"omgdc:Point\" y=\"208\"/\u003e\u003comgdi:waypoint x=\"840\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"666\" y=\"185\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1lw2x61\" id=\"TextAnnotation_1lw2x61_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"318\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1418gmu\" id=\"Association_1418gmu_di\"\u003e\u003comgdi:waypoint x=\"489\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"386\" xsi:type=\"omgdc:Point\" y=\"85\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_16fukp9\" id=\"TextAnnotation_16fukp9_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"655\" y=\"55\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0fgqbcz\" id=\"Association_0fgqbcz_di\"\u003e\u003comgdi:waypoint x=\"577\" xsi:type=\"omgdc:Point\" y=\"173\"/\u003e\u003comgdi:waypoint x=\"686\" xsi:type=\"omgdc:Point\" y=\"85\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 3,
-      "description": "Remove the network object from the specified Cisco ASA network object group. The status column of the row is marked as Removed in the data table.",
-      "export_key": "cisco_asa_remove_network_object_from_network_object_group",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1681764673485,
-      "name": "Cisco ASA Remove Network Object from Network Object Group",
-      "object_type": "cisco_asa_network_object_dt",
-      "programmatic_name": "cisco_asa_remove_network_object_from_network_object_group",
-      "tags": [],
-      "uuid": "a3e14aae-44a2-421e-a4e3-d15b7438faa8",
-      "workflow_id": 70
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 4,
-        "workflow_id": "cisco_asa_get_network_object_details",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"cisco_asa_get_network_object_details\" isExecutable=\"true\" name=\"Cisco ASA Get Network Object Details\"\u003e\u003cdocumentation\u003eGet the details of the network object and write the information to an incident note\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0j2rqtk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0z15zd1\" name=\"Cisco ASA Get Network Object Deta...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0cfd3303-0293-46cb-b257-911c49167204\"\u003e{\"inputs\":{},\"post_processing_script\":\"# Put the results json into a workflow property so we can call the \\n# convert_json_to_rich_text script to print readable formatted json in an incident note.\\ninputs = results.get(\\\"inputs\\\")\\nfirewall_id = inputs.get(\\\"cisco_asa_firewall\\\")\\nobject_id = inputs.get(\\\"cisco_asa_network_object_id\\\")\\nheader = u\\\"Cisco ASA Firewall: {0} Network Object ID {1}\\\".format(firewall_id, object_id)\\n\\njson_note = {\\n              \\\"version\\\": \\\"1.3\\\",\\n              \\\"header\\\": header, \\n              \\\"json\\\": results.content,\\n              \\\"sort\\\": False\\n            }\\n\\nworkflow.addProperty(\u0027convert_json_to_rich_text\u0027, json_note)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.cisco_asa_firewall = row.cisco_asa_firewall\\ninputs.cisco_asa_network_object_id = row.cisco_asa_network_object_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0j2rqtk\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1bv8ypy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0j2rqtk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0z15zd1\"/\u003e\u003csequenceFlow id=\"SequenceFlow_1bv8ypy\" sourceRef=\"ServiceTask_0z15zd1\" targetRef=\"ScriptTask_0jx3vdc\"/\u003e\u003cendEvent id=\"EndEvent_1wrfjch\"\u003e\u003cincoming\u003eSequenceFlow_1qjf72s\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_0jx3vdc\" name=\"Convert JSON to rich text v1.3\"\u003e\u003cextensionElements\u003e\u003cresilient:script programmaticName=\"convert_json_to_rich_text_13\" uuid=\"64d3e6da-8b56-4d19-9ce8-a75586f71dad\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1bv8ypy\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1qjf72s\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"SequenceFlow_1qjf72s\" sourceRef=\"ScriptTask_0jx3vdc\" targetRef=\"EndEvent_1wrfjch\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1frrg7u\"\u003e\u003ctext\u003e\u003c![CDATA[Input: network objectId and the name of firewall containing the network objectId\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0m911yn\" sourceRef=\"ServiceTask_0z15zd1\" targetRef=\"TextAnnotation_1frrg7u\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1ubawvz\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Network Object details written to an incident note\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1gwjtt2\" sourceRef=\"ServiceTask_0z15zd1\" targetRef=\"TextAnnotation_1ubawvz\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0z15zd1\" id=\"ServiceTask_0z15zd1_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"542\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0j2rqtk\" id=\"SequenceFlow_0j2rqtk_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"542\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"370\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1frrg7u\" id=\"TextAnnotation_1frrg7u_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"351\" y=\"53\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0m911yn\" id=\"Association_0m911yn_di\"\u003e\u003comgdi:waypoint x=\"546\" xsi:type=\"omgdc:Point\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"422\" xsi:type=\"omgdc:Point\" y=\"83\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1ubawvz\" id=\"TextAnnotation_1ubawvz_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"718\" y=\"53\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1gwjtt2\" id=\"Association_1gwjtt2_di\"\u003e\u003comgdi:waypoint x=\"637\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"749\" xsi:type=\"omgdc:Point\" y=\"83\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1bv8ypy\" id=\"SequenceFlow_1bv8ypy_di\"\u003e\u003comgdi:waypoint x=\"642\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"801\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"676.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1wrfjch\" id=\"EndEvent_1wrfjch_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"1066\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"1084\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_0jx3vdc\" id=\"ScriptTask_0jx3vdc_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"801\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1qjf72s\" id=\"SequenceFlow_1qjf72s_di\"\u003e\u003comgdi:waypoint x=\"901\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1066\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"983.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 4,
-      "description": "Get the details of the network object and write the information to an incident note",
-      "export_key": "cisco_asa_get_network_object_details",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1681766768655,
-      "name": "Cisco ASA Get Network Object Details",
-      "object_type": "cisco_asa_network_object_dt",
-      "programmatic_name": "cisco_asa_get_network_object_details",
-      "tags": [],
-      "uuid": "e0e33857-81c1-430d-9ccf-6a8d689a2d56",
-      "workflow_id": 71
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 1,
-        "workflow_id": "cisco_asa_get_network_object_group",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"cisco_asa_get_network_object_group\" isExecutable=\"true\" name=\"Cisco ASA Get Network Object Group\"\u003e\u003cdocumentation\u003eGet the network objects of the specified network object group and write them to the Cisco ASA Network Objects data table.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0lrikjy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_181hekj\" name=\"Cisco ASA Get Network Objects\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"af7d53df-369d-4e78-b33b-865d5a85895a\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ncontent = results.get(\\\"content\\\")\\nmember_list = content.get(\\\"member_list\\\")\\nfirewall = results.inputs.get(\\\"cisco_asa_firewall\\\")\\nnetwork_object_group = results.inputs.get(\\\"cisco_asa_network_object_group\\\")\\n\\n# Add each email as a row in the query results data table\\nfor network_object in member_list:\\n  network_object_row = incident.addRow(\\\"cisco_asa_network_object_dt\\\")\\n  network_object_row.cisco_asa_query_date = Date()\\n  network_object_row.cisco_asa_firewall = firewall\\n  network_object_row.cisco_asa_network_object_group = network_object_group\\n\\n  if network_object.get(\\\"kind\\\")  == \u0027object#NetworkObj\u0027:\\n    network_object_row.cisco_asa_network_object_id = network_object.get(\\\"objectId\\\")\\n    network_object_row.cisco_asa_network_object_description = network_object.get(\\\"description\\\")\\n    host = network_object.get(\\\"host\\\")\\n    network_object_row.cisco_asa_network_object_kind = host.get(\\\"kind\\\")\\n    network_object_row.cisco_asa_network_object_value = host.get(\\\"value\\\")\\n  else:\\n    network_object_row.cisco_asa_network_object_kind = network_object.get(\\\"kind\\\")\\n    network_object_row.cisco_asa_network_object_value = network_object.get(\\\"value\\\")\\n\\n  status_text = u\\\"\\\"\\\"\u0026lt;p style= \\\"color:{color}\\\"\u0026gt;{status}\u0026lt;/p\u0026gt;\\\"\\\"\\\".format(color=\\\"green\\\", status=\\\"Active\\\")\\n  network_object_row.cisco_asa_status = helper.createRichText(status_text)\\n\",\"pre_processing_script\":\"# Get the firewall network object group pair\\nfirewall_group_pair = rule.properties.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0lrikjy\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0v4egf9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0lrikjy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_181hekj\"/\u003e\u003cendEvent id=\"EndEvent_14dhg81\"\u003e\u003cincoming\u003eSequenceFlow_0v4egf9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0v4egf9\" sourceRef=\"ServiceTask_181hekj\" targetRef=\"EndEvent_14dhg81\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_06n52yh\"\u003e\u003ctext\u003e\u003c![CDATA[Input: Cisco ASA Host, Cisco ASA Network Object Group\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0e7erpf\" sourceRef=\"ServiceTask_181hekj\" targetRef=\"TextAnnotation_06n52yh\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_017886w\"\u003e\u003ctext\u003e\u003c![CDATA[Output: Network objects contained in the Network Object Group are written to the Network Objects data table\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_00cljd0\" sourceRef=\"ServiceTask_181hekj\" targetRef=\"TextAnnotation_017886w\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_181hekj\" id=\"ServiceTask_181hekj_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"571\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lrikjy\" id=\"SequenceFlow_0lrikjy_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"571\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"384.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_14dhg81\" id=\"EndEvent_14dhg81_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"976\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"994\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0v4egf9\" id=\"SequenceFlow_0v4egf9_di\"\u003e\u003comgdi:waypoint x=\"671\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"976\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"823.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_06n52yh\" id=\"TextAnnotation_06n52yh_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"400\" y=\"52\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0e7erpf\" id=\"Association_0e7erpf_di\"\u003e\u003comgdi:waypoint x=\"577\" xsi:type=\"omgdc:Point\" y=\"170\"/\u003e\u003comgdi:waypoint x=\"468\" xsi:type=\"omgdc:Point\" y=\"82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_017886w\" id=\"TextAnnotation_017886w_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"749\" y=\"52\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_00cljd0\" id=\"Association_00cljd0_di\"\u003e\u003comgdi:waypoint x=\"666\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"780\" xsi:type=\"omgdc:Point\" y=\"82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 1,
-      "description": "Get the network objects of the specified network object group and write them to the Cisco ASA Network Objects data table.",
-      "export_key": "cisco_asa_get_network_object_group",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1678998061054,
-      "name": "Cisco ASA Get Network Object Group",
-      "object_type": "incident",
-      "programmatic_name": "cisco_asa_get_network_object_group",
-      "tags": [],
-      "uuid": "1a4bddfb-ef25-4fd6-ac2e-8fdc78c680dd",
-      "workflow_id": 69
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 9,
-        "workflow_id": "cisco_asa_add_artifact_to_network_object_group",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"cisco_asa_add_artifact_to_network_object_group\" isExecutable=\"true\" name=\"Cisco ASA Add Artifact to Network Object Group\"\u003e\u003cdocumentation\u003eAdd an artifact to the Cisco ASA network object group.  If the artifact is not added to the group an error message is written to an incident note.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_10x6vmu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"SequenceFlow_10x6vmu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0qpnwgg\"/\u003e\u003cendEvent id=\"EndEvent_0z4dkmr\"\u003e\u003cincoming\u003eSequenceFlow_1835eiz\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_0qpnwgg\" name=\"Cisco ASA Add Artifact to Network...\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{\"95639c4a-a104-4598-abba-6b1438432ba6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2c351503-8d83-440c-8d7d-6c1de9550c93\"}}},\"post_processing_script\":\"from datetime import datetime\\n\\nsuccess = results.get(\\\"success\\\")\\ncontent = results.get(\\\"content\\\")\\nfirewall = content.get(\\\"firewall\\\")\\nnetwork_object_group = content.get(\\\"network_object_group\\\")\\nnetwork_object_value = content.get(\\\"network_object_value\\\")\\nnetwork_object_name = content.get(\\\"network_object_name\\\")\\nnetwork_object_kind = content.get(\\\"network_object_kind\\\")\\nif success:\\n  network_object_description = content.get(\\\"network_object_description\\\")\\n  # Add network object as a row in the network Cisco ASA network objects data table\\n  network_object_row = incident.addRow(\\\"cisco_asa_network_object_dt\\\")\\n  network_object_row.cisco_asa_query_date = datetime.now()\\n  network_object_row.cisco_asa_firewall = firewall\\n  network_object_row.cisco_asa_network_object_group = network_object_group\\n  network_object_row.cisco_asa_network_object_kind = network_object_kind\\n  network_object_row.cisco_asa_network_object_value = network_object_value\\n  network_object_row.cisco_asa_network_object_id = network_object_name\\n  network_object_row.cisco_asa_network_object_description = network_object_description  \\n  # Update status field\\n  status_text = u\\\"\\\"\\\"\u0026lt;p style= \\\"color:{color}\\\"\u0026gt;{status}\u0026lt;/p\u0026gt;\\\"\\\"\\\".format(color=\\\"green\\\", status=\\\"Active\\\")\\n  network_object_row.cisco_asa_status = helper.createRichText(status_text)\\nelse:\\n  # Artifact not added to the group so add a note with the reason.\\n  reason = content.get(\\\"reason\\\")\\n  note = u\\\"Cisco ASA Add Artifact to Network Object Group Results:\\\\n    Artifact value: {0}\\\\n    Object Name: {1} \\\\n    Object Kind: {2} was not added to Firewall: {3}, Network Object Group: {4}\\\\n\\\\n{5}\\\"\\n  note = note.format(network_object_value, network_object_name, network_object_kind, firewall, network_object_group, reason)\\n  incident.addNote(helper.createPlainText(note))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Parse the firewall name and network object group from the colon separated string\\nfirewall_group_pair = rule.properties.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\\n# Get input from the artifact type and value\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\\n\\n# Optional network object description\\nif rule.properties.cisco_asa_network_object_description:\\n  inputs.cisco_asa_network_object_description = rule.properties.cisco_asa_network_object_description\\n  \\n# Option params for IP netmask or end IP for IP range\\nif rule.properties.cisco_asa_end_range:\\n  inputs.cisco_asa_end_range = rule.properties.cisco_asa_end_range\\nif rule.properties.cisco_asa_ipv4_netmask:\\n  inputs.cisco_asa_netmask = rule.properties.cisco_asa_ipv4_netmask\\nelif rule.properties.cisco_asa_ipv6_prefix_length:\\n  inputs.cisco_asa_netmask = rule.properties.cisco_asa_ipv6_prefix_length\\n\\n# FQDN version\\nif rule.properties.cisco_asa_fqdn_ip_version:\\n  inputs.cisco_asa_fqdn_ip_version = rule.properties.cisco_asa_fqdn_ip_version\\n  \\n# IPv4FQDN and IPv4Range require a name as input.\\nif rule.properties.cisco_asa_network_object_name_required:\\n  inputs.cisco_asa_network_object_name = rule.properties.cisco_asa_network_object_name_required\\nelse:\\n  inputs.cisco_asa_network_object_name = rule.properties.cisco_asa_network_object_name\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_10x6vmu\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1835eiz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1835eiz\" sourceRef=\"ServiceTask_0qpnwgg\" targetRef=\"EndEvent_0z4dkmr\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0n37lmi\"\u003e\u003ctext\u003e\u003c![CDATA[Input: IP address artifact or String artifact\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1vdjclh\" sourceRef=\"ServiceTask_0qpnwgg\" targetRef=\"TextAnnotation_0n37lmi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0dvro8n\"\u003e\u003ctext\u003e\u003c![CDATA[Output: artifact\u00a0 value of IP Address\u00a0 artifact is added to the Cisco ASA netowrk object group and a row entry is added to the Cisco ASA data table\n]]\u003e\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0amcyrn\" sourceRef=\"ServiceTask_0qpnwgg\" targetRef=\"TextAnnotation_0dvro8n\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_10x6vmu\" id=\"SequenceFlow_10x6vmu_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"511\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"90\" x=\"309.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0z4dkmr\" id=\"EndEvent_0z4dkmr_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"937\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"955\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0qpnwgg\" id=\"ServiceTask_0qpnwgg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"511\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1835eiz\" id=\"SequenceFlow_1835eiz_di\"\u003e\u003comgdi:waypoint x=\"611\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"937\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"0\" x=\"774\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0n37lmi\" id=\"TextAnnotation_0n37lmi_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"323\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1vdjclh\" id=\"Association_1vdjclh_di\"\u003e\u003comgdi:waypoint x=\"516\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"392\" xsi:type=\"omgdc:Point\" y=\"72\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0dvro8n\" id=\"TextAnnotation_0dvro8n_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"661\" y=\"42\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0amcyrn\" id=\"Association_0amcyrn_di\"\u003e\u003comgdi:waypoint x=\"601\" xsi:type=\"omgdc:Point\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"696\" xsi:type=\"omgdc:Point\" y=\"72\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 9,
-      "description": "Add an artifact to the Cisco ASA network object group.  If the artifact is not added to the group an error message is written to an incident note.",
-      "export_key": "cisco_asa_add_artifact_to_network_object_group",
-      "last_modified_by": "admin@example.com",
-      "last_modified_time": 1681831399765,
-      "name": "Cisco ASA Add Artifact to Network Object Group",
-      "object_type": "artifact",
-      "programmatic_name": "cisco_asa_add_artifact_to_network_object_group",
-      "tags": [],
-      "uuid": "42487444-4504-49b9-9374-e4fb55fc8fca",
-      "workflow_id": 72
-    }
-  ],
+  "workflows": [],
   "workspaces": []
 }

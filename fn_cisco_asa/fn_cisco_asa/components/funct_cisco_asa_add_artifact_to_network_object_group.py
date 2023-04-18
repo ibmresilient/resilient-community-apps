@@ -55,7 +55,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"cisco_asa_network_object_group: %s", network_object_group)
             LOG.info(u"cisco_asa_network_object_name: %s", network_object_name)
             LOG.info(u"cisco_asa_network_object_value: %s", artifact_value)
-            LOG.info(u"cisco_asa_network_object_description: %s", artifact_value)
+            LOG.info(u"cisco_asa_network_object_description: %s", network_object_description)
             LOG.info(u"cisco_asa_artifact_type: %s", artifact_type)
             LOG.info(u"cisco_asa_ipv4_netmask: %s", ip_netmask)
             LOG.info(u"cisco_asa_ipv4_end_range: %s", ip_end_range)
