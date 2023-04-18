@@ -22,14 +22,14 @@
 - [Data Table - Sentinel Incident Alerts](#data-table---sentinel-incident-alerts)
 - [Data Table - Sentinel Incident Entities](#data-table---sentinel-incident-entities)
 - [Custom Fields](#custom-fields)
-- [Rules](#rules)
+- [Playbooks](#playbooks)
 - [Custom Templates](#custom-templates)
 - [Troubleshooting & Support](#troubleshooting--support)
 
 ---
 
 ## Release Notes
-| 1.1.0 | 3/2023 | Update function 'Sentinel Update Incident' |
+| 1.1.0 | 4/2023 | Update function 'Sentinel Update Incident' |
 | 1.0.4 | 6/2022 | Several template fixes for tags (labels) and severity |
 | 1.0.3 | 4/2022 | Support for app.config verify and cert parameters |
 | 1.0.2 | 2/2022 | Bug fix in some situations updating Sentinel from SOAR |
@@ -53,7 +53,7 @@ Sentinel entities are exposed as artifacts for further investigation.
 ### Key Features
 * Escalate Microsoft Sentinel Incidents to IBM SOAR Cases
 * Automatically keep Incidents and Cases synchronized
-* Retrieve Sentinel Incident alert entities as artifacts
+* Retrieve Sentinel Incident alert entities as artifacts and data table rows
 * Sync comments to and from Sentinel Incidents
 * Support editable templates for field mapping between the two systems
 
@@ -158,17 +158,17 @@ The following table provides the settings you need to configure the app. These s
 
 For each profile:
 | Config | Required | Example | Description |
-| ------ | :------: | ------- | ----------- |
+| ------ | :------: | ------- | ----------- |`
 | **subscription_id** | Yes | `aaa-bbb-fff` | *subscription_id for incident access * |
 | **workspace_name** | Yes | `` | *workspace name for incident access.* |
 | **resource_groupname** | Yes | `` | *resource group for incident access.* |
 | **new_incident_filters** | Yes | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *Set of filters to apply when escalating incidents to SOAR SOAR. Incidents not matching the criteria are not synchronized. In this example, both a match of status and severity would be required. * |
-| **max_alerts** | 10 | *limit the number of alerts per sentinel incident to the first n alerts or leave blank for all alerts* |
-| **create_incident_template** | /var/rescircuits/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. |
-| **update_incident_template** | /var/rescircuits/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. |
-| **close_incident_template** | /var/rescircuits/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
-| **sentinel_update_incident_template** | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for updating a sentinel incident when the SOAR incident is updated |
-| **sentinel_close_incident_template** | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for closing a sentinel incident when the SOAR incident is closed |
+| **max_alerts** | Yes | 10 | *limit the number of alerts per sentinel incident to the first n alerts or leave blank for all alerts* |
+| **create_incident_template** | No | /var/rescircuits/create_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. |
+| **update_incident_template** | No | /var/rescircuits/update_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. |
+| **close_incident_template** | No | /var/rescircuits/close_incident_template.jinja | Customer supplied template for mapping Sentinel Incident fields to an SOAR incident. If not specified, a default template is used. This is useful when a customer customizes the fields used when closing an incident. |
+| **sentinel_update_incident_template** | No | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for updating a sentinel incident when the SOAR incident is updated |
+| **sentinel_close_incident_template** | No | /var/rescircuits/update_sentinel_incident_template.jinja | Customer supplied template for closing a sentinel incident when the SOAR incident is closed |
 
 See the section below for examples of the templates.
 
@@ -261,12 +261,14 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 
 ```python
 # Import Date
-from java.util import Date
+import datetime
 
-if results.success:
+results = playbook.functions.results.comment_results
+
+if results.get("success"):
   # Get the current time
-  dt_now = Date()
-  note.text = u"<b>Sent to Sentinel at {0}</b><br>{1}".format(dt_now, unicode(note.text.content))
+  dt_now = datetime.datetime.now()
+  # note.text = f"<b>Sent to Sentinel at {dt_now}</b><br>{str(note.text.content)}"
 ```
 
 </p>
@@ -385,16 +387,17 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 <p>
 
 ```python
-from java.util import Date
+import datetime
 
-current_dt = Date().getTime()
+current_dt = datetime.datetime.now()
+results = playbook.functions.results.alerts_results
 
-if results['success']:
-  for alert in results['content']['value']:
+if results.get('success'):
+  for alert in results.get('content').get('value'):
     properties = alert.get('properties', {})
     row = incident.addRow("sentinel_incident_alerts")
     row['report_date'] = current_dt
-    row['alert_date'] = properties['timeGenerated_ms']
+    row['alert_date'] = properties.get('timeGenerated_ms')
     row['alert_name'] = properties.get('alertDisplayName')
     row['alert_description'] = properties.get('description')
     row['alert_type'] = properties.get('alertType')
@@ -406,9 +409,9 @@ if results['success']:
     row['alert_remediation_steps'] = helper.createPlainText('\n'.join(properties.get('remediationSteps', [])))
     row['alert_id'] = properties.get('systemAlertId')
     if properties.get('alertLink'):
-        row['alert_url'] = helper.createRichText("<a target='blank' href='{}'>Alert Link</a>".format(properties['alertLink']))
+      row['alert_url'] = helper.createRichText(f"<a target='blank' href='{properties.get('alertLink')}'>Alert Link</a>")
     else:
-        row['alert_url'] = helper.createRichText("<a target='blank' href='https://security.microsoft.com/alerts/{}'>Alert Link</a>".format(properties.get('systemAlertId')))
+      row['alert_url'] = helper.createRichText(f"<a target='blank' href='https://security.microsoft.com/alerts/{properties.get('systemAlertId')}'>Alert Link</a>")
 ```
 
 </p>
@@ -495,9 +498,10 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 <p>
 
 ```python
-if results.success:
-  for comment in results.content['value']:
-    incident.addNote(helper.createRichText(comment['properties']['message']))
+results = playbook.functions.results.comment_results
+if results.get("success"):
+  for comment in results.get("content").get('value'):
+    incident.addNote(helper.createRichText(comment.get('properties').get('message')))
 ```
 
 </p>
@@ -603,25 +607,26 @@ inputs.sentinel_profile = incident.properties.sentinel_profile
 <p>
 
 ```python
-from java.util import Date
-current_dt = Date().getTime()
+import datetime
+current_dt = datetime.datetime.now()
+results = playbook.functions.results.entities_results
 
-if results.success:
-  for alert in results.content.keys():
-    for entity in results.content[alert]:
+if results.get("success"):
+  for alert in results.get("content").keys():
+    for entity in results.get("content")[alert]:
       row = incident.addRow("sentinel_incident_entities")
       row['report_date'] = current_dt
       row['alert_id'] = alert
-      row['entity_id'] = entity['name']
-      row['entity_type'] = entity['kind']
-      row['entity_value'] = entity['properties']['friendlyName']
-      row['entity_properties'] = "<br>".join(["<b>{}</b>: {}".format(k, v) for k, v in entity['properties'].items()])
+      row['entity_id'] = entity.get('name')
+      row['entity_type'] = entity.get('kind')
+      row['entity_value'] = entity.get('properties').get('friendlyName')
+      row['entity_properties'] = "<br>".join(["<b>{}</b>: {}".format(k, v) for k, v in entity.get('properties').items()])
       # Create an artifact
-      desc = ["created from Sentinel entity: {}".format(entity['name'])]
-      if entity['properties'].get('azureID'):
-        desc.append(entity['properties']['azureID'])
-      if entity['resilient_artifact_type']:
-          incident.addArtifact(entity['resilient_artifact_type'], entity['resilient_artifact_value'], "\n".join(desc))
+      desc = [f"created from Sentinel entity: {entity.get('name')}"]
+      if entity.get('properties').get('azureID'):
+        desc.append(entity.get('properties').get('azureID'))
+      if entity.get('resilient_artifact_type'):
+        incident.addArtifact(entity.get('resilient_artifact_type'), entity.get('resilient_artifact_value'), "\n".join(desc))
 ```
 
 </p>
@@ -791,15 +796,15 @@ sentinel_incident_entities
 ---
 
 
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Sentinel Comment Sync | note | `sentinel_comment_sync` |
-| Sentinel Get Incident Alerts | incident | `sentinel_get_incident_alerts` |
-| Sentinel Get Incident Comments | incident | `sentinel_get_incident_comments` |
-| Sentinel Get Incident Entities | incident | `sentinel_get_incident_entities` |
-| Sentinel Incident Sync | incident | `sentinel_get_incident_alerts` |
-| Sentinel Update Incident | incident | `sentinel_update_incident` |
+## Playbooks
+| Playbook Name | Description | Object | Status |
+| ------------- | ----------- | ------ | ------ |
+| Sentinel Comment Sync | Sync an Incident note to a Sentinel Incident comment | note | `enabled` |
+| Sentinel Get Incident Alerts | Get alerts for a Sentinel Incident | incident | `enabled` |
+| Sentinel Get Incident Comments | Get sentinel incident comments | incident | `enabled` |
+| Sentinel Get Incident Entities | Get Entities for a Sentinel Incident | incident | `enabled` |
+| Sentinel Incident Sync | Sync SOAR incident with linked Sentinel incident | incident | `enabled` |
+| Sentinel Update Incident | Update SOAR incident with new information from the Sentinel incident | incident | `enabled` |
 
 ---
 

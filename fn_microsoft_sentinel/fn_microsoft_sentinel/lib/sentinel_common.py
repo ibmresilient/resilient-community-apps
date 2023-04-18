@@ -327,7 +327,7 @@ class SentinelAPI():
                     artifact_type, artifact_value = convert_entity_type(entity['kind'],
                         entity['properties']['friendlyName']
                     )
-                    entity['soar_artifact_type'] = artifact_type
+                    entity['resilient_artifact_type'] = artifact_type
                     entity['resilient_artifact_value'] = artifact_value
 
         return result, status, reason
