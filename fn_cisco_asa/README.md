@@ -102,7 +102,6 @@ Key capabilities include the following:
 <!--
   List any Requirements 
 --> 
-<!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -152,7 +151,7 @@ Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=48.0.0
 
-### <!-- ::CHANGE_ME:: --> Development Version
+### Development Version
 
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
@@ -229,7 +228,7 @@ The app makes REST API calls to add and remove network objects from the BLOCKLIS
 ## Function - Cisco ASA Add Artifact to Network Object Group
 Add an artifact to a Cisco ASA network object group.
 
- ![screenshot: fn-cisco-asa-add-artifact-to-network-object-group ](./doc/screenshots/fn-cisco-asa-add-artifact-to-network-object-group.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-cisco-asa-add-artifact-to-network-object-group ](./doc/screenshots/fn-cisco-asa-add-artifact-to-network-object-group.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -459,7 +458,7 @@ playbook.addProperty('convert_json_to_rich_text', json_note)
 ## Function - Cisco ASA Get Network Objects
 Query the Cisco ASA firewall and return the network objects contained in the specified network object group.
 
- ![screenshot: fn-cisco-asa-get-network-objects ](./doc/screenshots/fn-cisco-asa-get-network-objects.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-cisco-asa-get-network-objects ](./doc/screenshots/fn-cisco-asa-get-network-objects.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -575,7 +574,7 @@ for network_object in member_list:
 ## Function - Cisco ASA Remove Network Object from Network Object Group
 Remove a network object from a Cisco ASA network object group.
 
- ![screenshot: fn-cisco-asa-remove-network-object-from-network-object-group ](./doc/screenshots/fn-cisco-asa-remove-network-object-from-network-object-group.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-cisco-asa-remove-network-object-from-network-object-group ](./doc/screenshots/fn-cisco-asa-remove-network-object-from-network-object-group.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -955,7 +954,7 @@ else:
 
 ## Data Table - Cisco ASA Network Objects
 
- ![screenshot: dt-cisco-asa-network-objects](./doc/screenshots/dt-cisco-asa-network-objects.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-cisco-asa-network-objects](./doc/screenshots/dt-cisco-asa-network-objects.png)
 
 #### API Name:
 cisco_asa_network_object_dt
