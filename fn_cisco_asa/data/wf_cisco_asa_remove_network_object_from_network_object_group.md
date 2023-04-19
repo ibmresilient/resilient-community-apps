@@ -28,8 +28,9 @@ inputs.cisco_asa_network_object_id = row.cisco_asa_network_object_id
 
 ### Post-Processing Script
 ```python
-#from java.util import Date
 from datetime import datetime
+
+results = playbook.functions.results.remove_results
 
 if results.success:
   text = "Removed"
@@ -41,7 +42,6 @@ else:
 status_text = u"""<p style= "color:{color}">{status}</p>""".format(color="red", status=text)
 row['cisco_asa_status'] = helper.createRichText(status_text)
 row["cisco_asa_query_date"] = datetime.now()
-
 ```
 
 ---

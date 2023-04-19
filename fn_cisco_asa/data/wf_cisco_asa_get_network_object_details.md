@@ -27,6 +27,7 @@ inputs.cisco_asa_network_object_id = row.cisco_asa_network_object_id
 ```python
 # Put the results json into a workflow property so we can call the 
 # convert_json_to_rich_text script to print readable formatted json in an incident note.
+results = playbook.functions.results.get_details_results
 inputs = results.get("inputs")
 firewall_id = inputs.get("cisco_asa_firewall")
 object_id = inputs.get("cisco_asa_network_object_id")
@@ -38,8 +39,7 @@ json_note = {
               "json": results.content,
               "sort": False
             }
-
-workflow.addProperty('convert_json_to_rich_text', json_note)
+playbook.addProperty('convert_json_to_rich_text', json_note)
 ```
 
 ---

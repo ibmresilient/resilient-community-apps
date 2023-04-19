@@ -20,7 +20,7 @@
 ### Pre-Processing Script
 ```python
 # Parse the firewall name and network object group from the colon separated string
-firewall_group_pair = rule.properties.cisco_asa_firewall_network_object_group
+firewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group
 
 # Parse the firewall group pair, which is a string in "firewall:network_object_group" format
 firewall_group_pair_list = firewall_group_pair.split(":")
@@ -30,28 +30,14 @@ inputs.cisco_asa_network_object_group = firewall_group_pair_list[1]
 # Get input from the artifact type and value
 inputs.cisco_asa_network_object_value = artifact.value
 inputs.cisco_asa_artifact_type = artifact.type
+inputs.cisco_asa_network_object_name = playbook.inputs.cisco_asa_network_object_name
 
 # Optional network object description
-if rule.properties.cisco_asa_network_object_description:
-  inputs.cisco_asa_network_object_description = rule.properties.cisco_asa_network_object_description
-  
-# Option params for IP netmask or end IP for IP range
-if rule.properties.cisco_asa_end_range:
-  inputs.cisco_asa_end_range = rule.properties.cisco_asa_end_range
-if rule.properties.cisco_asa_ipv4_netmask:
-  inputs.cisco_asa_netmask = rule.properties.cisco_asa_ipv4_netmask
-elif rule.properties.cisco_asa_ipv6_prefix_length:
-  inputs.cisco_asa_netmask = rule.properties.cisco_asa_ipv6_prefix_length
+if playbook.inputs.cisco_asa_network_object_description:
+  inputs.cisco_asa_network_object_description = playbook.inputs.cisco_asa_network_object_description
 
 # FQDN version
-if rule.properties.cisco_asa_fqdn_ip_version:
-  inputs.cisco_asa_fqdn_ip_version = rule.properties.cisco_asa_fqdn_ip_version
-  
-# IPv4FQDN and IPv4Range require a name as input.
-if rule.properties.cisco_asa_network_object_name_required:
-  inputs.cisco_asa_network_object_name = rule.properties.cisco_asa_network_object_name_required
-else:
-  inputs.cisco_asa_network_object_name = rule.properties.cisco_asa_network_object_name
+inputs.cisco_asa_fqdn_ip_version = playbook.inputs.cisco_asa_fqdn_ip_version
 
 ```
 
@@ -59,6 +45,7 @@ else:
 ```python
 from datetime import datetime
 
+results = playbook.functions.results.add_artifact_results
 success = results.get("success")
 content = results.get("content")
 firewall = content.get("firewall")

@@ -31,17 +31,18 @@ inputs.cisco_asa_network_object_group = firewall_group_pair_list[1]
 
 ### Post-Processing Script
 ```python
-from java.util import Date
+from datetime import datetime
 
-content = results.get("content")
-member_list = content.get("member_list")
+results = playbook.functions.results.get_network_objects_results
+content = results.get("content", {})
+member_list = content.get("member_list", [])
 firewall = results.inputs.get("cisco_asa_firewall")
 network_object_group = results.inputs.get("cisco_asa_network_object_group")
 
 # Add each email as a row in the query results data table
 for network_object in member_list:
   network_object_row = incident.addRow("cisco_asa_network_object_dt")
-  network_object_row.cisco_asa_query_date = Date()
+  network_object_row.cisco_asa_query_date = datetime.now()
   network_object_row.cisco_asa_firewall = firewall
   network_object_row.cisco_asa_network_object_group = network_object_group
 
