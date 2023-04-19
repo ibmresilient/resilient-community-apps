@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1681908585352,
+  "export_date": 1681912470514,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -654,13 +654,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 322,
+  "id": 323,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1681908583632,
+      "create_date": 1681912468629,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -669,7 +669,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1681908583632,
+      "update_date": 1681912468629,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2437,6 +2437,24 @@
   "regulators": null,
   "roles": [],
   "scripts": [
+    {
+      "actions": [],
+      "created_date": 1681840480675,
+      "description": "Write the network object to the Network Object data table or write an incident note if there was an error.",
+      "enabled": false,
+      "export_key": "Cisco ASA: Write Artifact to Network Object data table",
+      "id": 82,
+      "language": "python3",
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1681845298832,
+      "name": "Cisco ASA: Write Artifact to Network Object data table",
+      "object_type": "artifact",
+      "playbook_handle": null,
+      "programmatic_name": "cisco_asa_add_ip_address_to_network_object_group_cisco_asa_write_ip_artifact_to_network_object_data_table",
+      "script_text": "from datetime import datetime\n\nresults = playbook.functions.results.add_artifact_results\nsuccess = results.get(\"success\")\ncontent = results.get(\"content\")\nfirewall = content.get(\"firewall\")\nnetwork_object_group = content.get(\"network_object_group\")\nnetwork_object_value = content.get(\"network_object_value\")\nnetwork_object_name = content.get(\"network_object_name\")\nnetwork_object_kind = content.get(\"network_object_kind\")\nif success:\n  network_object_description = content.get(\"network_object_description\")\n  # Add network object as a row in the network Cisco ASA network objects data table\n  network_object_row = incident.addRow(\"cisco_asa_network_object_dt\")\n  network_object_row.cisco_asa_query_date = datetime.now()\n  network_object_row.cisco_asa_firewall = firewall\n  network_object_row.cisco_asa_network_object_group = network_object_group\n  network_object_row.cisco_asa_network_object_kind = network_object_kind\n  network_object_row.cisco_asa_network_object_value = network_object_value\n  network_object_row.cisco_asa_network_object_id = network_object_name\n  network_object_row.cisco_asa_network_object_description = network_object_description  \n  # Update status field\n  status_text = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=\"green\", status=\"Active\")\n  network_object_row.cisco_asa_status = helper.createRichText(status_text)\nelse:\n  # Artifact not added to the group so add a note with the reason.\n  reason = content.get(\"reason\")\n  note = u\"Cisco ASA Add Artifact to Network Object Group Results:\\n    Artifact value: {0}\\n    Object Name: {1} \\n    Object Kind: {2} was not added to Firewall: {3}, Network Object Group: {4}\\n\\n{5}\"\n  note = note.format(network_object_value, network_object_name, network_object_kind, firewall, network_object_group, reason)\n  incident.addNote(helper.createPlainText(note))",
+      "tags": [],
+      "uuid": "9ee6bbf2-bf9e-4e80-a86b-1a651c6dd36c"
+    },
     {
       "actions": [],
       "created_date": 1681766531705,

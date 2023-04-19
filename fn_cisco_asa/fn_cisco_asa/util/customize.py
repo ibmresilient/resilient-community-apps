@@ -30,7 +30,7 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [u"cisco_asa_network_object_dt"],
         "automatic_tasks": [],
-        "scripts": [u"Convert JSON to rich text v1.3"],
+        "scripts": [u"Cisco ASA: Write Artifact to Network Object data table", u"Convert JSON to rich text v1.3"],
         "playbooks": [u"cisco_asa_add_fqdn_to_network_object_group", u"cisco_asa_add_ip_address_to_network_object_group", u"cisco_asa_add_ip_range_to_network_object_group", u"cisco_asa_add_ipv4network_to_network_object_group", u"cisco_asa_add_ipv6network_to_network_object_group", u"cisco_asa_get_network_object_details", u"cisco_asa_get_network_object_group", u"cisco_asa_remove_network_object_from_network_object_group"]
     }
 
@@ -62,6 +62,7 @@ def customization_data(client=None):
     - Data Tables:
         - cisco_asa_network_object_dt
     - Scripts:
+        - Cisco ASA: Write Artifact to Network Object data table
         - Convert JSON to rich text v1.3
     """
 
