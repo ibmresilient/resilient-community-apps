@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """Poller implementation"""
 import datetime
 import logging
@@ -14,6 +14,7 @@ from fn_extrahop.lib.app_common import AppCommon
 from fn_extrahop.lib.rx_client import validate_settings
 from fn_extrahop.lib.templates_common import make_payload_from_template
 from fn_extrahop.lib.configure_tab import init_extrahop_tab
+from fn_extrahop.util.selftest import selftest_function
 
 PACKAGE_NAME = "fn_extrahop"
 ENTITY_ID = "id"
@@ -132,7 +133,11 @@ class PollerComponent(ResilientComponent):
             return False
 
         LOG.info("Poller initiated, polling interval %s", self.polling_interval)
-        self.last_poller_time = get_last_poller_date(int(options.get('polling_lookback', 0)))
+        # If polling_lookback is not set to a value, make it default to zero lookback time
+        lookback_str = options.get('polling_lookback', "0")
+        lookback_int = 0 if lookback_str == "" else int(lookback_str)
+
+        self.last_poller_time = get_last_poller_date(lookback_int)
         LOG.info("Poller lookback: %s", self.last_poller_time)
 
         # collect the override templates to use when creating, updating and closing cases
