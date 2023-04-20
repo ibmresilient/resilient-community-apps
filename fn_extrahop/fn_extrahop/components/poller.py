@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Poller implementation"""
 import datetime
 import logging
@@ -14,7 +14,6 @@ from fn_extrahop.lib.app_common import AppCommon
 from fn_extrahop.lib.rx_client import validate_settings
 from fn_extrahop.lib.templates_common import make_payload_from_template
 from fn_extrahop.lib.configure_tab import init_extrahop_tab
-from fn_extrahop.util.selftest import selftest_function
 
 PACKAGE_NAME = "fn_extrahop"
 ENTITY_ID = "id"
