@@ -2,33 +2,55 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
+
 
 setup(
     name='fn_virustotal',
-    version='1.0.7',
+    display_name="VirusTotal",
+    version='1.1.0',
     license='MIT',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    url='https://ibm.biz/resilientcommunity',
-    description="Resilient Circuits Components for 'fn_virustotal'",
-    long_description="""Resilient Circuits Components for 'fn_virustotal'. Queries are possible for IP Addresses, URLs, hashes, domain and files.
-Files and URLs may require additional time to complete their scans, so a link is returned to review the results at a later time.
+    author='IBM SOAR',
+    author_email='',
+    url='https://ibm.biz/soarcommunity',
+    description='IBM SOAR app for VirusTotal',
+    long_description="""App performs VirusTotal on IP Addresses, URLs, hashes, domain and file artifacts.
+Files and URLs may require additional time to complete their scans, so a link is returned to review the results at a later time..<br>
+
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
                      """,
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient_lib',
-        'virustotal_api',
-        'bs4'
+        "resilient-circuits>=48.0.0",
+        'virustotal_api==1.1.11',
+        'bs4==0.0.1'
     ],
+    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
-    platforms='any',
+    platforms="any",
     classifiers=[
-        'Programming Language :: Python',
+        "Programming Language :: Python",
     ],
     entry_points={
         "resilient.circuits.components": [
-            "VirustotalFunctionComponent = fn_virustotal.components.virustotal:FunctionComponent"
+            # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
+            "{}FunctionComponent = fn_virustotal.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_virustotal/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_virustotal.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_virustotal.util.customize:customization_data"],
