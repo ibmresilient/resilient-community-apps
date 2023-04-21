@@ -8,6 +8,7 @@ from resilient_circuits import (AppFunctionComponent, app_function,
 
 from fn_exchange.lib.exchange_helper import PACKAGE_NAME, INPUTS_MAP, ResultsHandler
 from fn_exchange.lib.exchange_utils import exchange_interface
+from fn_exchange.lib.exchange_configure_tab import init_exchange_tab
 
 
 FN_NAME = "exchange_create_meeting"
@@ -16,6 +17,7 @@ class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'exchange_find_emails' """
 
     def __init__(self, opts):
+        init_exchange_tab()
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
     @app_function(FN_NAME)

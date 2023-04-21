@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v48.0.4034
 
 """Generate the Resilient customizations required for fn_exchange"""
 
@@ -20,7 +21,9 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_exchange",
-        "message_destinations": [u"fn_exchange"],
+
+        "message_destinations": [
+            u"fn_exchange"],
 
         "functions": [
             u"exchange_create_meeting",
@@ -30,36 +33,28 @@ def codegen_reload_data():
             u"exchange_move_emails",
             u"exchange_send_email"],
 
-        "workflows": [
-            u"example_of_exchange_create_meeting_incident",
-            u"example_of_exchange_delete_emails_incident",
-            u"example_of_exchange_find_emails_incident",
-            u"example_of_exchange_get_mailbox_info_incident",
-            u"example_of_exchange_move_emails_incident",
-            u"example_of_exchange_send_email_incident",
-            u"exchange_move_and_delete_folder_incident"],
-
-        "actions": [
-            u"Exchange: Create Meeting",
-            u"Exchange: Delete Emails",
-            u"Exchange: Find Emails",
-            u"Exchange: Retrieve Mailbox Information",
-            u"Exchange: Move Emails",
-            u"Exchange: Move Contents and Delete Folder",
-            u"Exchange: Send Email"],
-
-        "incident_fields": [],
-        "incident_artifact_types": [],
-        "incident_types": [],
+        "playbooks": [
+            u"playbook_exchange_move_and_delete_folder_contents",
+            u"example_playbook_for_exchange_create_meetings",
+            u"playbooks_exchange_delete_email",
+            u"playbooks_exchange_find_email",
+            U"playbook_exchange_get_mailbox_info",
+            u"playbooks_exchange_move_email",
+            u"playbooks_exchange_send_email"],
 
         "datatables": [
             u"exchange_email_information_dt",
             u"exchange_dt_meeting_information"],
 
-        "automatic_tasks": [],
-        "scripts": [],
-        "playbooks": []
-    }
+        "scripts": [
+            u"Push Emails to DataTables"],
+
+        "workflows": [],
+        "actions": [],
+        "incident_fields": [],
+        "incident_artifact_types": [],
+        "incident_types": [],
+        "automatic_tasks": []}
 
 
 def customization_data(client=None):
@@ -67,7 +62,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 43.1.49
+    IBM SOAR Platform Version: 47.0.8304
 
     Contents:
     - Message Destinations:
@@ -78,24 +73,20 @@ def customization_data(client=None):
         - exchange_find_emails
         - exchange_get_mailbox_info
         - exchange_move_emails
-        - exchange_move_folder_contents_and_delete_folder
         - exchange_send_email
-    - Workflows:
-        - example_of_exchange_create_meeting
-        - example_of_exchange_delete_emails
-        - example_of_exchange_find_emails
-        - example_of_exchange_get_mailbox_info
-        - example_of_exchange_move_emails
-        - example_of_exchange_send_email
-        - exchange_move_and_delete_folder
-    - Rules:
-        - Exchange Create Meeting
-        - Exchange Delete Emails
-        - Exchange Find Emails
-        - Exchange Get Mailbox Info
-        - Exchange Move Emails
-        - Exchange Move Folder Contents and Delete Folder
-        - Exchange Send Email
+    - Playbooks:
+        - example_playbook_for_exchange_create_meetings
+        - playbook_exchange_get_mailbox_info
+        - playbook_exchange_move_and_delete_folder_contents
+        - playbooks_exchange_delete_email
+        - playbooks_exchange_find_email
+        - playbooks_exchange_move_email
+        - playbooks_exchange_send_email
+    - Data Tables:
+        - exchange_dt_meeting_information
+        - exchange_email_information_dt
+    - Scripts:
+        - Push Emails to DataTables
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

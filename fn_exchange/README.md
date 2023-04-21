@@ -81,7 +81,9 @@ This application extends the capabilities of the SOAR platform with Microsoft Ex
 
 - Get mailbox information for a particular sender.<br>
 
+
 - All the above mentioned functionality has now been incorporated with Playbooks<br>
+
 
 
 ## Requirements
@@ -92,6 +94,7 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an integration server, the requirements are:
+
 * SOAR platform >= `46.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=48.0.0`.
@@ -812,6 +815,7 @@ status_colour_map = {
   "MOVED"   : "#B8860B", # DarkGoldenrod
   "TRASHED" : "#CD5C5C", # IndianRed
   "DELETED" : "#B22222"} # Firebrick
+
 
 if not results.get("success"):
   text = u"Unable to find emails"

@@ -39,6 +39,9 @@
             "fields": {
               "type": "object",
               "properties": {
+                "statuscategorychangedate": {
+                  "type": "string"
+                },
                 "issuetype": {
                   "type": "object",
                   "properties": {
@@ -59,10 +62,20 @@
                     },
                     "subtask": {
                       "type": "boolean"
+                    },
+                    "avatarId": {
+                      "type": "integer"
+                    },
+                    "entityId": {
+                      "type": "string"
+                    },
+                    "hierarchyLevel": {
+                      "type": "integer"
                     }
                   }
                 },
                 "timespent": {},
+                "customfield_10030": {},
                 "project": {
                   "type": "object",
                   "properties": {
@@ -80,6 +93,9 @@
                     },
                     "projectTypeKey": {
                       "type": "string"
+                    },
+                    "simplified": {
+                      "type": "boolean"
                     },
                     "avatarUrls": {
                       "type": "object",
@@ -100,23 +116,31 @@
                     }
                   }
                 },
+                "customfield_10031": {},
                 "fixVersions": {
                   "type": "array"
                 },
-                "customfield_10110": {
-                  "type": "string"
-                },
-                "customfield_10111": {},
                 "aggregatetimespent": {},
                 "resolution": {},
-                "customfield_10107": {},
-                "customfield_10108": {},
-                "customfield_10109": {},
+                "customfield_10035": {},
+                "customfield_10027": {},
+                "customfield_10028": {},
+                "customfield_10029": {},
                 "resolutiondate": {},
                 "workratio": {
                   "type": "integer"
                 },
-                "lastViewed": {},
+                "issuerestriction": {
+                  "type": "object",
+                  "properties": {
+                    "issuerestrictions": {
+                      "type": "object"
+                    },
+                    "shouldDisplay": {
+                      "type": "boolean"
+                    }
+                  }
+                },
                 "watches": {
                   "type": "object",
                   "properties": {
@@ -131,9 +155,14 @@
                     }
                   }
                 },
+                "lastViewed": {},
                 "created": {
                   "type": "string"
                 },
+                "customfield_10020": {},
+                "customfield_10021": {},
+                "customfield_10022": {},
+                "customfield_10023": {},
                 "priority": {
                   "type": "object",
                   "properties": {
@@ -151,13 +180,39 @@
                     }
                   }
                 },
-                "customfield_10100": {},
-                "customfield_10101": {},
-                "customfield_10102": {},
+                "customfield_10024": {},
+                "customfield_10025": {},
                 "labels": {
                   "type": "array"
                 },
-                "customfield_10103": {},
+                "customfield_10026": {},
+                "customfield_10016": {},
+                "customfield_10017": {},
+                "customfield_10018": {
+                  "type": "object",
+                  "properties": {
+                    "hasEpicLinkFieldDependency": {
+                      "type": "boolean"
+                    },
+                    "showField": {
+                      "type": "boolean"
+                    },
+                    "nonEditableReason": {
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "customfield_10019": {
+                  "type": "string"
+                },
                 "timeestimate": {},
                 "aggregatetimeoriginalestimate": {},
                 "versions": {
@@ -166,7 +221,49 @@
                 "issuelinks": {
                   "type": "array"
                 },
-                "assignee": {},
+                "assignee": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "accountId": {
+                      "type": "string"
+                    },
+                    "emailAddress": {
+                      "type": "string"
+                    },
+                    "avatarUrls": {
+                      "type": "object",
+                      "properties": {
+                        "48x48": {
+                          "type": "string"
+                        },
+                        "24x24": {
+                          "type": "string"
+                        },
+                        "16x16": {
+                          "type": "string"
+                        },
+                        "32x32": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "displayName": {
+                      "type": "string"
+                    },
+                    "active": {
+                      "type": "boolean"
+                    },
+                    "timeZone": {
+                      "type": "string"
+                    },
+                    "accountType": {
+                      "type": "string"
+                    }
+                  }
+                },
                 "updated": {
                   "type": "string"
                 },
@@ -217,14 +314,22 @@
                 "description": {
                   "type": "string"
                 },
+                "customfield_10010": {},
+                "customfield_10014": {},
                 "timetracking": {
                   "type": "object"
                 },
-                "archiveddate": {},
+                "customfield_10015": {},
+                "customfield_10005": {},
+                "customfield_10006": {},
+                "customfield_10007": {},
+                "security": {},
+                "customfield_10008": {},
+                "customfield_10009": {},
+                "aggregatetimeestimate": {},
                 "attachment": {
                   "type": "array"
                 },
-                "aggregatetimeestimate": {},
                 "summary": {
                   "type": "string"
                 },
@@ -234,10 +339,7 @@
                     "self": {
                       "type": "string"
                     },
-                    "name": {
-                      "type": "string"
-                    },
-                    "key": {
+                    "accountId": {
                       "type": "string"
                     },
                     "emailAddress": {
@@ -267,6 +369,9 @@
                       "type": "boolean"
                     },
                     "timeZone": {
+                      "type": "string"
+                    },
+                    "accountType": {
                       "type": "string"
                     }
                   }
@@ -280,10 +385,7 @@
                     "self": {
                       "type": "string"
                     },
-                    "name": {
-                      "type": "string"
-                    },
-                    "key": {
+                    "accountId": {
                       "type": "string"
                     },
                     "emailAddress": {
@@ -314,11 +416,11 @@
                     },
                     "timeZone": {
                       "type": "string"
+                    },
+                    "accountType": {
+                      "type": "string"
                     }
                   }
-                },
-                "customfield_10000": {
-                  "type": "string"
                 },
                 "aggregateprogress": {
                   "type": "object",
@@ -331,6 +433,10 @@
                     }
                   }
                 },
+                "customfield_10001": {},
+                "customfield_10002": {},
+                "customfield_10003": {},
+                "customfield_10004": {},
                 "environment": {},
                 "duedate": {},
                 "progress": {
@@ -349,6 +455,9 @@
                   "properties": {
                     "comments": {
                       "type": "array"
+                    },
+                    "self": {
+                      "type": "string"
                     },
                     "maxResults": {
                       "type": "integer"
@@ -391,8 +500,7 @@
                       "type": "array"
                     }
                   }
-                },
-                "archivedby": {}
+                }
               }
             }
           }
@@ -411,9 +519,6 @@
         },
         "jira_fields": {
           "type": "string"
-        },
-        "task_id": {
-          "type": "integer"
         },
         "jira_label": {
           "type": "string"

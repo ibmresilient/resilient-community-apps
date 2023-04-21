@@ -45,7 +45,8 @@ INPUTS_MAP = {
     "exchange_destination_folder_path" : "dst_folder",
     "exchange_get_email"               : "mailbox_id",
     "exchange_delete_source_folder"    : "delete_src_folder",
-    "exchange_force_delete_subfolders" : "force_delete"}
+    "exchange_force_delete_subfolders" : "force_delete",
+    "exchange_email_operation"         : "email_operation"}
 
 
 
