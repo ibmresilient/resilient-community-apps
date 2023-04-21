@@ -2993,7 +2993,7 @@
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1677759760512,
+      "create_date": 1682092770008,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -3002,7 +3002,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1677759760512,
+      "update_date": 1682092770008,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -3033,10 +3033,10 @@
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 7899,
-    "major": 45,
+    "build_number": 0,
+    "major": 46,
     "minor": 0,
-    "version": "45.0.7899"
+    "version": "46.0.0"
   },
   "tags": [],
   "task_order": [],
