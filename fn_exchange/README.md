@@ -81,7 +81,9 @@ This application extends the capabilities of the SOAR platform with Microsoft Ex
 
 - Get mailbox information for a particular sender.<br>
 
-- All the above mentioned functionality has now been Incorporated with Playbooks<br>
+
+- All the above mentioned functionality has now been incorporated with Playbooks<br>
+
 
 
 ## Requirements
@@ -92,7 +94,8 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `47.0`.
+
+* SOAR platform >= `46.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=48.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -245,8 +248,8 @@ Creates a meeting and sends out invitation to attendees. The user is provided wi
 | `exchange_meeting_start_time` | `datetimepicker` | Yes | `-` | When the meeting should start |
 | `exchange_optional_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of optional attendees |
 | `exchange_required_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of required attendees |
-| `exchange_meeting_location` | `text` | No | `https://meeting.room.com/meet/user` | If the meeting is conducted online, then the URL to the Room. Or the Name of the Physical location of the Meeting Room |
-| `exchange_is_online_meeting` | `boolean` | No | `True` | Specifies if the location provided in the above filed is a link or not |
+| `exchange_meeting_location` | `text` | No | `https://meeting.room.com/meet/user` | If the meeting is conducted online, then the URL to the Room. Or the name of the physical location of the Meeting Room |
+| `exchange_is_online_meeting` | `boolean` | No | `True` | Specifies if the location provided in the above filled is a link or not |
 
 </p>
 </details>
@@ -430,12 +433,12 @@ Emails can be queried from a user's mailbox and deleted. These emails can be fil
 | `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
 | `exchange_folder_path` | `text` | No | `Top of Information Store,Top of Information Store/Inbox,Top of Information Store/Drafts,...` | Comma separated list of folder paths to query from |
 | `exchange_hard_delete` | `boolean` | Yes | `True` | Yes for hard deletion. No for soft deletion (move to deleted folder) |
-| `exchange_has_attachments` | `boolean` | No | `False` | True to include attachments, False to exclude attachments, Unknown to get all |
+| `exchange_has_attachments` | `boolean` | No | `False` | True to include attachments, False to exclude attachments, leave empty to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
 | `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
-| `exchange_order_by_recency` | `boolean` | No | `False` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
-| `exchange_search_subfolders` | `boolean` | No | `True` | Yes to search subfolders, No or Unknown to not search subfolders |
+| `exchange_order_by_recency` | `boolean` | No | `False` | Yes to get newest emails first, No to get oldest emails first, leave empty to ignore time sent |
+| `exchange_search_subfolders` | `boolean` | No | `True` | Yes to search subfolders, No or leave empty to not search subfolders |
 | `exchange_sender` | `text` | No | `user@example.com` | Only get emails from this sender, leave blank to ignore sender attribute |
 
 </p>
@@ -564,10 +567,10 @@ content   = results.get("content")
 emails    = content.get("emails")
 email_ids = content.get("email_ids")
 status_colour_map = {
-  "QUERIED" : "#B0C4DE",
-  "MOVED"   : "#B8860B",
-  "TRASHED" : "#CD5C5C",
-  "DELETED" : "#B22222"}
+  "QUERIED" : "#B0C4DE", # LightSteelBlue
+  "MOVED"   : "#B8860B", # DarkGoldenrod
+  "TRASHED" : "#CD5C5C", # IndianRed
+  "DELETED" : "#B22222"} # Firebrick
 
 if not results.get("success"):
   text = u"Unable to find emails"
@@ -640,12 +643,12 @@ Emails can be queried from a user's mailbox and deleted. These emails can be fil
 | `exchange_start_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails on or after this date, leave empty to not set a start date |
 | `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
 | `exchange_folder_path` | `text` | No | `Top of Information Store,Top of Information Store/Inbox,Top of Information Store/Drafts,...` | Comma separated list of folder paths to query from |
-| `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, Unknown to get all |
+| `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, leave empty to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
 | `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
-| `exchange_order_by_recency` | `boolean` | No | `False` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
-| `exchange_search_subfolders` | `boolean` | No | `True` | Yes to search subfolders, No or Unknown to not search subfolders |
+| `exchange_order_by_recency` | `boolean` | No | `False` | Yes to get newest emails first, No to get oldest emails first, leave empty to ignore time sent |
+| `exchange_search_subfolders` | `boolean` | No | `True` | Yes to search subfolders, No or leave empty to not search subfolders |
 | `exchange_sender` | `text` | No | `user@example.com` | Only get emails from this sender, leave blank to ignore sender attribute |
 
 </p>
@@ -808,10 +811,11 @@ content   = results.get("content")
 emails    = content.get("emails")
 email_ids = content.get("email_ids")
 status_colour_map = {
-  "QUERIED" : "#B0C4DE",
-  "MOVED"   : "#B8860B",
-  "TRASHED" : "#CD5C5C",
-  "DELETED" : "#B22222"}
+  "QUERIED" : "#B0C4DE", # LightSteelBlue
+  "MOVED"   : "#B8860B", # DarkGoldenrod
+  "TRASHED" : "#CD5C5C", # IndianRed
+  "DELETED" : "#B22222"} # Firebrick
+
 
 if not results.get("success"):
   text = u"Unable to find emails"
@@ -1000,12 +1004,12 @@ Move queried emails from a specified folder to another specified folder. The `ex
 | `exchange_end_date` | `datetimepicker` | No | `03/24/2023 13:00:37 +00:00` | Get emails until after this date, leave empty to not set an end date |
 | `exchange_folder_path` | `text` | No | `Top of Information Store,Top of Information Store/Inbox,Top of Information Store/Drafts,...` | Comma separated list of folder paths to query from |
 | `exchange_force_delete_subfolders` | `boolean` | Yes | `False` | Yes to delete even if the folder has subfolders else stops operation |
-| `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, Unknown to get all |
+| `exchange_has_attachments` | `boolean` | No | `True` | True to include attachments, False to exclude attachments, leave empty to get all |
 | `exchange_message_body` | `text` | No | `Hello, how are you?` | Text for the message body of an email to query or to send, depending on the function. |
 | `exchange_message_subject` | `text` | No | `Invitation: Security Meeting` | Text for the subject of an email to query or send depending on the function. |
 | `exchange_num_emails` | `number` | No | `10` | Number of emails to be selected |
-| `exchange_order_by_recency` | `boolean` | No | `True` | Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent |
-| `exchange_search_subfolders` | `boolean` | No | `False` | Yes to search subfolders, No or Unknown to not search subfolders |
+| `exchange_order_by_recency` | `boolean` | No | `True` | Yes to get newest emails first, No to get oldest emails first, leave empty to ignore time sent |
+| `exchange_search_subfolders` | `boolean` | No | `False` | Yes to search subfolders, No or leave empty to not search subfolders |
 | `exchange_sender` | `text` | No | `user@example.com` | Only get emails from this sender, leave blank to ignore sender attribute |
  
 </p>
@@ -1176,10 +1180,10 @@ content   = results.get("content")
 emails    = content.get("emails")
 email_ids = content.get("email_ids")
 status_colour_map = {
-  "QUERIED" : "#B0C4DE",
-  "MOVED"   : "#B8860B",
-  "TRASHED" : "#CD5C5C",
-  "DELETED" : "#B22222"}
+  "QUERIED" : "#B0C4DE", # LightSteelBlue
+  "MOVED"   : "#B8860B", # DarkGoldenrod
+  "TRASHED" : "#CD5C5C", # IndianRed
+  "DELETED" : "#B22222"} # Firebrick
 
 if not results.get("success"):
   text = u"Unable to find emails"
