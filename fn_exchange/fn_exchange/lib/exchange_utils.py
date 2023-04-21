@@ -22,6 +22,7 @@ from exchangelib.folders import FolderCollection
 from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
 from exchangelib.restriction import Q
 from exchangelib.items import SEND_TO_ALL_AND_SAVE_COPY
+from exchangelib.items.calendar_item import MeetingRequest
 
 from requests.adapters import HTTPAdapter
 from requests.exceptions import ConnectionError
@@ -348,7 +349,7 @@ class exchange_interface:
 
         for email in emails:
             # Check to see if item is an email
-            if isinstance(email, Message):
+            if isinstance(email, Message) or isinstance(email, MeetingRequest):
                 if mail_count == max_mails:
                     break
                 mail_count += 1

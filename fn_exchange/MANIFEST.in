@@ -9,6 +9,7 @@ include doc/*.md
 include doc/screenshots/*
 include icons/*.png
 recursive-include payload_samples/*/ *.json
-
+include tox.ini
+recursive-include tests/*
 
 global-exclude *.bak

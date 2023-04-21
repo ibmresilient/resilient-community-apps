@@ -38,7 +38,6 @@ class FunctionComponent(AppFunctionComponent):
                               if the operation failed
         """
         rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
-        function_parameters = {}
         
         function_parameters = {}
         for key, value in fn_inputs._asdict().items():
@@ -53,7 +52,7 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             utils = exchange_interface(self.rc, self.options)
-            yield StatusMessage(f"Successfully connected to {function_parameters.get('email')}")
+            yield StatusMessage(f"Successfully connected to {function_parameters.get('username')}")
 
             results = utils.create_email_message(function_parameters)
 
