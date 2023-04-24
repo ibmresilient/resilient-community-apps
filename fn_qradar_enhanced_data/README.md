@@ -1087,17 +1087,22 @@ Search QRadar Top events for the given Offense ID
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` |  Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
-| `qradar_query` | `textarea` | No | `-` | A QRadar query string with parameters |
-| `qradar_query_type` | `text` | No | `-` | Can equal `flows`, `topevents`, `categories`, `destinationip`, or `sourceip` |
-| `qradar_search_param1` | `text` | No | `-` | - |
-| `qradar_search_param2` | `text` | No | `-` | - |
-| `qradar_search_param3` | `text` | No | `-` | - |
-| `qradar_search_param4` | `text` | No | `-` | - |
-| `qradar_search_param5` | `text` | No | `-` | - |
-| `qradar_search_param6` | `text` | No | `-` | - |
+| `qradar_query` | `textarea` | Yes | `-` | A QRadar query string with place holders for qradar_search_paramX such as %param1% |
+| `qradar_query_type` | `text` | Yes | `-` | Can equal `flows`, `topevents`, `categories`, `destinationip`, or `sourceip` |
+| `qradar_search_param1` | `text` | No | `APPLICATIONNAME(applicationid) as 'Application', sourceip, sourceport, destinationip, destinationport, PROTOCOLNAME(protocolid) as 'Protocol', firstpackettime AS 'FirstPacketTime', sourcebytes, sourcepackets, destinationbytes, destinationpackets` | These are the fields to return from the query |
+| `qradar_search_param2` | `text` | No | `WHERE INOFFENSE(%param3%)` | Typically the `Where` clause for the query |
+| `qradar_search_param3` | `text` | No | `6833` | Optional. Typically the qradar ID used in qradar_search_param2 |
+| `qradar_search_param4` | `text` | No | `GROUP BY category,magnitude` | Optional clause such as `Group by` |
+| `qradar_search_param5` | `text` | No | `ORDER BY starttime` | Optional clause such as `Order by` |
+| `qradar_search_param6` | `text` | No | `LIMIT 10` | Optional clause such as `limit` |
 | `soar_incident_id` | `number` | No | `-` | ID of the SOAR incident the function is running in |
 | `soar_table_name` | `text` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
 
+Note: This function uses the qradar_search_paramX input fields twice. 
+First, params 2 & 3 are used with `qradar_query` to build a temporary table of results. 
+Then fields 1, 4-6 are combined to return the limited results requested.  
+When reusing these input fields be aware of these purposes.
+ 
 </p>
 </details>
 
