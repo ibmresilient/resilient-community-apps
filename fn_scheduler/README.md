@@ -23,7 +23,7 @@
   - [Table of Contents](#table-of-contents)
   - [Release Notes](#release-notes)
     - [Migrating to v1.0.2](#migrating-to-v102)
-    - [Notes regarding v2.1.0 Migrated all workflows and rules to playbooks](#notes-regarding-v210-migrated-all-workflows-and-rules-to-playbooks)
+    - [Notes regarding v2.1.0](#notes-regarding-v210)
   - [Overview](#overview)
   - [Requirements](#requirements)
     - [SOAR platform](#soar-platform)
@@ -45,12 +45,12 @@
   - [Data Table - Scheduler Rules](#data-table---scheduler-rules)
       - [API Name:](#api-name)
       - [Columns:](#columns)
-  - [Playbooks](#playbooks)
+  - [Playbooks API](#playbooks-api)
   - [Considerations](#considerations)
     - [Playbooks and Rules](#playbooks-and-rules)
     - [Artifacts](#artifacts)
     - [Datatables](#datatables)
-    - [Persistence of Scheduled Rules](#persistence-of-scheduled-rules)
+    - [Persistence of Scheduled Playbooks/Rules](#persistence-of-scheduled-playbooksrules)
     - [Integrations](#integrations)
   - [Troubleshooting \& Support](#troubleshooting--support)
     - [For Support](#for-support)
@@ -84,7 +84,8 @@ When migrating to v1.0.2 from a previous release, add the following setting to y
 Use this setting rather than the SQLite `datastore_dir` setting to persist the scheduler DB in PostgreSQL.
 This is necessary in an App Host environment to retain your schedules outside the app container.
 
-### Notes regarding v2.1.0 Migrated all workflows and rules to playbooks
+### Notes regarding v2.1.0
+
 This application has been recreated using playbooks. While the application itself still supports scheduling Rules, and Workflows, its own Rules have been replaced with playbooks.
 
 | SOAR Version | Capability |
@@ -98,7 +99,7 @@ This application has been recreated using playbooks. While the application itsel
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Functions to allow Rules to be scheduled**
+**Functions to allow Playbooks/Rules to be scheduled**
 
 This package of functions allows an enterprise to schedule a rule to run in the future associated with a incident, task, artifact, and datatable. Times to run can be specified in the following ways:
 
@@ -115,6 +116,9 @@ Functions available include:
 2) Listing scheduled Playbooks/Rules
 3) Pause and resume scheduled Playbooks/Rules
 5) Removing a scheduled Playbook/Rule
+
+
+ ![screenshot: playbooks_support ](./doc/screenshots/main.png)
 
 ---
 
@@ -186,8 +190,8 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **timezone** | Yes | `utc` | *Specify the timezone (ex. America/New_York) which scheduled rules should follow.* |
-| **thread_max** | Yes | `20` | *Number of threads which can run at the same. Typically, triggered rules run for a very short time to kick off a IBM SOAR rule.* |
+| **timezone** | Yes | `utc` | *Specify the timezone (ex. America/New_York) which scheduled Playbooks/rules should follow.* |
+| **thread_max** | Yes | `20` | *Number of threads which can run at the same. Typically, triggered Playbooks/rules run for a very short time to kick off a IBM SOAR rule.* |
 | **datastore_dir** | No | `/path/to/sqlite_folder` | *Specify a data path for the sqlite persistent datafile (ex. /path/to/scheduler.sqlite)* |
 | **db_url** | No | postgresql+pypostgresql://res_test:res_test@192.168.1.215:5432/res_test | *Specify a PostgreSQL db to retain the schedules. Uncomment and remove the setting datastore_dir.* |
 | disable_notes | No | True|False | Set to True to disable creating a note when a rule is triggered. Default is False |
@@ -199,12 +203,12 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-A datatable is used to display scheduled rules/playbook and to take actions such as pause, resume and remove a scheduled job. This datatable can be added to your incident layout by adding a new tab and by dragging the `Scheduler Rules` datatable to the new tab. Remember to save the layout change.
+A datatable is used to display scheduled Playbooks/Rules and to take actions such as pause, resume and remove a scheduled job. This datatable can be added to your incident layout by adding a new tab and by dragging the `Scheduler Rules` datatable to the new tab. Remember to save the layout change.
 
 ---
 
 ### Supported Scheduled Rules/Playbooks
-Scheduled rules/playbooks are possible for:
+Scheduled Playbooks/Rules are possible for:
 * incidents
 * artifacts
 * tasks
@@ -855,7 +859,7 @@ scheduler_rules
 
 
 
-## Playbooks
+## Playbooks API
 | Playbook Name | Object | Playbook API | Function output API | Post Processing script Name |
 | ------------- | ------ | ------------ | ------------------ | ---------------------- |
 | Scheduler: List Jobs | `Incident` | pb_scheduler_list_jobs | output_scheduled_rule_list | Write all jobs to DataTable |
@@ -893,7 +897,7 @@ scheduler_rules
 * Datatable scheduled playbooks are not part of this package, but can be easily created for a specific Datatable.
 * Datatable scheduled playbooks cannot currently reference the invoking datatable row in the pre-processing script. However, a playbooks's activity field in the Activation form can be defined to prompt for it.
 
-### Persistence of Scheduled Rules
+### Persistence of Scheduled Playbooks/Rules
 * Labels for scheduled Playbooks/Rules need to be unique. Attempting to create a duplicate will fail.
 * Sqlite is used to persist scheduled Playbooks/Rules. Restarting resilient-circuits will continue with the scheduled Playbooks/Rules already defined.
 
