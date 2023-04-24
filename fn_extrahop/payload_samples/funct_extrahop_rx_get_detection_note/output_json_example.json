@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": {
+      "author": "setup",
+      "update_time": 1652711350410,
+      "note": "\nIBM SOAR 16/05/2022 15:13:37\n[SOAR Case - 4305](https://127.0.0.1:1443/#incidents/4305)"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "extrahop_detection_id": 3
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-extrahop",
+    "package_version": "1.0.0",
+    "host": "myhost.ibm.com",
+    "execution_time_ms": 780,
+    "timestamp": "2022-05-16 15:29:13"
+  }
+}

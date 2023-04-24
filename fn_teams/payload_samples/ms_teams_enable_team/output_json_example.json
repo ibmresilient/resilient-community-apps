@@ -1,0 +1,57 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "764a62f2-b759-4dd9-86e7-1a4949e4b77d",
+    "deletedDateTime": null,
+    "classification": null,
+    "createdDateTime": "2022-11-17T15:35:29Z",
+    "creationOptions": [],
+    "description": "This is a sample group",
+    "displayName": "Engineering Team",
+    "expirationDateTime": null,
+    "groupTypes": [
+      "Unified"
+    ],
+    "isAssignableToRole": null,
+    "mail": "example@******.onmicrosoft.com",
+    "mailEnabled": true,
+    "mailNickname": "example",
+    "membershipRule": null,
+    "membershipRuleProcessingState": null,
+    "onPremisesDomainName": null,
+    "onPremisesLastSyncDateTime": null,
+    "onPremisesNetBiosName": null,
+    "onPremisesSamAccountName": null,
+    "onPremisesSecurityIdentifier": null,
+    "onPremisesSyncEnabled": null,
+    "preferredDataLocation": null,
+    "preferredLanguage": null,
+    "proxyAddresses": [
+      "SMTP:example@******.onmicrosoft.com"
+    ],
+    "renewedDateTime": "2022-11-17T15:35:29Z",
+    "resourceBehaviorOptions": [],
+    "resourceProvisioningOptions": [],
+    "securityEnabled": false,
+    "securityIdentifier": "S-1-12-1-1984586482-1306113881-1226499974-2109203529",
+    "theme": null,
+    "visibility": "Public",
+    "onPremisesProvisioningErrors": [],
+    "message": "Successfully enabled Teams for Group: Engineering Team",
+    "teamsEnabled": true
+  },
+  "raw": null,
+  "inputs": {
+    "ms_group_mail_nickname": "EngineeringTeam@******.onmicrosoft.com"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "2.0.0",
+    "host": "AppHost",
+    "execution_time_ms": 5220,
+    "timestamp": "2022-11-17 15:37:00"
+  }
+}
