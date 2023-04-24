@@ -54,7 +54,8 @@ def codegen_reload_data():
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "automatic_tasks": []}
+        "automatic_tasks": []
+    }
 
 
 def customization_data(client=None):
