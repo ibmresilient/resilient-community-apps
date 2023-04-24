@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1682331955143,
+  "export_date": 1682348722646,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -880,13 +880,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 20,
+  "id": 26,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1682331952923,
+      "create_date": 1682348720338,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -895,7 +895,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1682331952923,
+      "update_date": 1682348720338,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1662,7 +1662,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 6,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_19f67260_22c1_4871_9a9f_31b6889ab9ea\" isExecutable=\"true\" name=\"playbook_19f67260_22c1_4871_9a9f_31b6889ab9ea\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0bi2u41\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Run Schedule Job Now\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d35f9fe8-d19b-41fc-adb2-d80bc7b4e68b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.scheduler_label = row[\u0027schedule_label\u0027]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_run\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0bi2u41\u003c/incoming\u003e\u003coutgoing\u003eFlow_0b29eph\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0bi2u41\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Write executed job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"407b2ddd-e3b5-49bd-af97-4c1a0be854b4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0b29eph\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ox2zla\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0b29eph\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ox2zla\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ox2zla\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_19f67260_22c1_4871_9a9f_31b6889ab9ea\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ox2zla\" id=\"Flow_1ox2zla_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"574\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b29eph\" id=\"Flow_0b29eph_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bi2u41\" id=\"Flow_0bi2u41_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"574\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1681814503362,
@@ -1714,7 +1714,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1681912476361,
+      "last_modified_time": 1682335032882,
       "local_scripts": [
         {
           "actions": [],
@@ -1725,12 +1725,12 @@
           "id": 27,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1681814635317,
+          "last_modified_time": 1682335028977,
           "name": "Write executed job to DataTable",
           "object_type": "scheduler_rules",
           "playbook_handle": "pb_scheduler_run_job_now",
           "programmatic_name": "pb_scheduler_run_job_now_write_executed_job_to_datatable",
-          "script_text": "results = playbook.functions.results.output_scheduled_rule_run\n\nif not results.success:\n  incident.addNote(\"Run Scheduled Job Now failed for job {}: {}\".format(row[\u0027schedule_label\u0027], results.reason))\nelse:\n  msg = \"Run Scheduled Job Now suceeeded for job: {}, Rule/Playbook: {}\".format(row[\u0027schedule_label\u0027], row[\u0027rule\u0027].content)\n  incident.addNote(helper.createRichText(msg))",
+          "script_text": "results = playbook.functions.results.output_scheduled_rule_run\n\nif not results.success:\n  incident.addNote(\"Run Scheduled Job Now failed for job {}: {}\".format(row[\u0027schedule_label\u0027], results.reason))\nelse:\n  msg = \"Run Scheduled Job Now succeeded for job: {}, Rule/Playbook: {}\".format(row[\u0027schedule_label\u0027], row[\u0027rule\u0027].content)\n  incident.addNote(helper.createRichText(msg))",
           "tags": [],
           "uuid": "407b2ddd-e3b5-49bd-af97-4c1a0be854b4"
         }
@@ -1770,7 +1770,7 @@
       "tags": [],
       "type": "default",
       "uuid": "19f67260-22c1-4871-9a9f-31b6889ab9ea",
-      "version": 10
+      "version": 11
     },
     {
       "activation_type": "manual",

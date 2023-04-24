@@ -32,28 +32,8 @@ def codegen_reload_data():
             u"scheduled_rule_pause",
             u"scheduled_rule_resume"
         ],
-        "workflows": [
-            u"list_schedules",
-            u"modify_a_scheduled_rule",
-            u"pause_a_scheduled_job",
-            u"remove_a_schedule",
-            u"resume_a_scheduled_job",
-            u"run_a_scheduled_job_now",
-            u"schedule_a_rule_to_run__task",
-            u"schedule_a_rule_to_run_artifact",
-            u"schedule_rule_to_run"
-        ],
-        "actions": [
-            u"List Scheduled Jobs",
-            u"Modify a Scheduled Job",
-            u"Pause a Scheduled Job",
-            u"Remove a Scheduled Job",
-            u"Resume a Scheduled Job",
-            u"Run Scheduled Job Now",
-            u"Schedule a Rule/Playbook to Run",
-            u"Schedule a Rule/Playbook to Run - Artifact",
-            u"Schedule a Rule/Playbook to Run - Task"
-        ],
+        "workflows": [],
+        "actions": [],
         "datatables": [
             u"scheduler_rules"
         ],
