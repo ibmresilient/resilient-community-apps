@@ -1420,7 +1420,6 @@ exchange_dt_meeting_information
 ---
 
 
-
 ## Playbook
 | Playbook Name | Object | API Name |
 | --------- | ------ | ------------------ |
