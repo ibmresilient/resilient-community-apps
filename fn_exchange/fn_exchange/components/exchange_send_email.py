@@ -1,69 +1,63 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_exchange.util.exchange_utils import exchange_utils
-from exchangelib import Message
+from resilient_circuits import (AppFunctionComponent, app_function,
+                                StatusMessage)
 
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, INPUTS_MAP, ResultsHandler
+from fn_exchange.lib.exchange_utils import exchange_interface
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'exchange_send_email"""
+FN_NAME = "exchange_send_email"
+
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements function 'exchange_find_emails' """
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_exchange", {})
-        self.opts = opts
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_exchange", {})
-        self.opts = opts
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """
+        Send email to a list of recipients and save it to the SENT folder of the mailbox
 
-    @function("exchange_send_email")
-    def _exchange_send_email_function(self, event, *args, **kwargs):
-        """Function: """
+        Inputs:
+        -------
+        The values returned from fn_inputs are mapped to easier readable variable names using the 
+        INPUT_MAP that is found in fn_exchange.lib.exchange_helper
+        
+            exchange_email <str> : Primary email account to be used
+            recipients     <str> : Mail ids of the recipients (comma separated)
+            msg_body       <str> : Body of the mail
+            msg_subject    <str> : Mail subject
+
+        Returns:
+        --------
+            Response <dict> : A response with the email sent and or the error message
+                              if the operation failed
+        """
+        rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
+        
+        function_parameters = {}
+        for key, value in fn_inputs._asdict().items():
+            function_parameters[INPUTS_MAP[key]] = value
+
+        if not function_parameters.get("username"):
+            function_parameters["username"] = self.options.get('username')
+            self.LOG.info('No connection email was specified, using value from config file')
+
+        for parameter in function_parameters:
+            self.LOG.info(f"{parameter} : {str(function_parameters.get(parameter))}")
+
         try:
-            # Get the function parameters:
-            exchange_email = kwargs.get("exchange_email")  # text
-            exchange_message_subject = kwargs.get("exchange_message_subject")  # text
-            exchange_message_body = kwargs.get("exchange_message_body")  # text
-            exchange_emails = kwargs.get("exchange_emails")  # text
+            utils = exchange_interface(self.rc, self.options)
+            yield StatusMessage(f"Successfully connected to {function_parameters.get('username')}")
 
-            log = logging.getLogger(__name__)
-            if exchange_email is None:
-                exchange_email = self.options.get('email')
-                log.info('No connection email was specified, using value from config file')
-            log.info("exchange_email: %s" % exchange_email)
-            log.info("exchange_message_subject: %s" % exchange_message_subject)
-            log.info("exchange_message_body: %s" % exchange_message_body)
-            log.info("exchange_emails: %s" % exchange_emails)
+            results = utils.create_email_message(function_parameters)
 
-            # Initialize utils
-            utils = exchange_utils(self.options, self.opts)
+            yield StatusMessage("Email sent!")
+            yield rh.success(results)
 
-            # Get sender account
-            email = utils.create_email_message(exchange_email, exchange_message_subject, exchange_message_body,
-                                               exchange_emails)
-            yield StatusMessage("Successfully connected to %s" % exchange_email)
-
-            # Send email
-            yield StatusMessage("Sending email")
-            email.send_and_save()
-            yield StatusMessage("Email sent")
-
-            results = {
-                'recipients': exchange_emails,
-                'sender': exchange_email,
-                'subject': exchange_message_subject,
-                'body': exchange_message_body
-            }
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield rh.fail(reason=str(err))

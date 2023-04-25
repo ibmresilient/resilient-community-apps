@@ -2,40 +2,71 @@
   "$schema": "http://json-schema.org/draft-06/schema",
   "type": "object",
   "properties": {
-    "email_ids": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+    "version": {
+      "type": "string"
     },
-    "emails": {
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "content": {
+      "type": "object"
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
       "type": "object",
       "properties": {
-        "<6475dbadd11745c5abf0fb7b1b60d54f@example.com>": {
+        "inputs": {
           "type": "object",
           "properties": {
-            "subject": {
+            "exchange_sender": {},
+            "exchange_email_ids": {},
+            "exchange_message_subject": {
               "type": "string"
             },
-            "body": {
+            "exchange_search_subfolders": {},
+            "exchange_end_date": {},
+            "exchange_folder_path": {},
+            "exchange_start_date": {},
+            "exchange_num_emails": {
+              "type": "integer"
+            },
+            "exchange_order_by_recency": {},
+            "exchange_hard_delete": {
+              "type": "boolean"
+            },
+            "exchange_email": {
               "type": "string"
             },
-            "mime_content": {
-              "type": "string"
-            },
-            "sender_name": {
-              "type": "string"
-            },
-            "sender_email": {
-              "type": "string"
-            },
-            "attachments": {
-              "type": "object"
-            },
-            "attachment_ids": {
-              "type": "array"
-            }
+            "exchange_has_attachments": {}
           }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
         }
       }
     }

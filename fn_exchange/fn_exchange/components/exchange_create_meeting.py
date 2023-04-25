@@ -1,74 +1,63 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_exchange.util.exchange_utils import exchange_utils
-from exchangelib.items import SEND_TO_ALL_AND_SAVE_COPY
+from resilient_circuits import (AppFunctionComponent, app_function,
+                                StatusMessage)
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'exchange_create_meeting"""
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, INPUTS_MAP, ResultsHandler
+from fn_exchange.lib.exchange_utils import exchange_interface
+from fn_exchange.lib.exchange_configure_tab import init_exchange_tab
+
+
+FN_NAME = "exchange_create_meeting"
+
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements function 'exchange_find_emails' """
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_exchange", {})
-        self.opts = opts
+        init_exchange_tab()
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_exchange", {})
-        self.opts = opts
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """
+        Creates a meeting and sends out invitation to required attendees and optional attendees.
 
-    @function("exchange_create_meeting")
-    def _exchange_create_meeting_function(self, event, *args, **kwargs):
-        """Function: Creates a meeting and sends out invitation to required attendees and optional attendees."""
+        Inputs:
+        -------
+        The values returned from fn_inputs are mapped to easier readable variable names using the 
+        INPUT_MAP that is found in fn_exchange.lib.exchange_helper
+        
+        exchange_email                   <str> : Primary email account to be used
+        meeting_subject                  <str> : Subject for the meeting invite
+        meeting_body                     <str> : Body for the meeting invite
+        exchange_required_attendees      <str> : List of required attendees (comma separated)
+        exchange_optional_attendees      <str> : List of optional attendees (comma separated)
+        exchange_location                <str> : Venue details or online meeting link
+        exchange_online_meeting          <str> : Specifies if its a online meeting
+        exchange_meeting_start_time <datetime> : Meeting start time and date
+        exchange_meeting_end_time   <datetime> : Meeting end time and date
+
+        Returns:
+        --------
+            Response <dict> : A response with the meeting details or the error message
+                              if the meeting creation process failed
+        """
+        rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
+        function_parameters = {}
+        for key, value in fn_inputs._asdict().items():
+            function_parameters[INPUTS_MAP[key]] = value
+
         try:
-            # Get the function parameters:
-            exchange_email = kwargs.get("exchange_email")  # text
-            exchange_meeting_start_time = kwargs.get("exchange_meeting_start_time")  # datetimepicker
-            exchange_meeting_end_time = kwargs.get("exchange_meeting_end_time")  # datetimepicker
-            exchange_meeting_subject = kwargs.get("exchange_meeting_subject")  # text
-            exchange_meeting_body = kwargs.get("exchange_meeting_body")  # text
-            exchange_required_attendees = kwargs.get("exchange_required_attendees")  # text
-            exchange_optional_attendees = kwargs.get("exchange_optional_attendees")  # text
+            utils = exchange_interface(self.rc, self.options)
+            yield StatusMessage(f"Successfully connected to {function_parameters.get('email')}")
 
-            log = logging.getLogger(__name__)
-            log.info("exchange_email: %s", exchange_email)
-            log.info("exchange_meeting_start_time: %s", exchange_meeting_start_time)
-            log.info("exchange_meeting_end_time: %s", exchange_meeting_end_time)
-            log.info("exchange_meeting_subject: %s", exchange_meeting_subject)
-            log.info("exchange_meeting_body: %s", exchange_meeting_body)
-            log.info("exchange_required_attendees: %s", exchange_required_attendees)
-            log.info("exchange_optional_attendees: %s", exchange_optional_attendees)
+            yield StatusMessage("Sending out meeting invite")
+            results = utils.create_meeting(function_parameters)
+            yield StatusMessage("Meeting invite created and sent!")
+            yield rh.success(results)
 
-            # Initialize utils
-            utils = exchange_utils(self.options, self.opts)
-
-            # Create meeting
-            meeting = utils.create_meeting(exchange_email, exchange_meeting_start_time, exchange_meeting_end_time,
-                                           exchange_meeting_subject, exchange_meeting_body,
-                                           exchange_required_attendees, exchange_optional_attendees)
-            yield StatusMessage("Successfully connected to %s" % exchange_email)
-
-            # Send out meeting
-            yield StatusMessage("Sending out meeting")
-            meeting.save(send_meeting_invitations=SEND_TO_ALL_AND_SAVE_COPY)
-
-            results = {
-                'required_attendees': exchange_required_attendees,
-                'optional_attendees': exchange_optional_attendees,
-                'sender': exchange_email,
-                'subject': exchange_meeting_subject,
-                'body': exchange_meeting_body,
-                'start_time': exchange_meeting_start_time,
-                'end_time': exchange_meeting_end_time
-            }
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield rh.fail(reason=str(err))

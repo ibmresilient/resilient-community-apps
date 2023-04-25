@@ -2,6 +2,132 @@
   "$schema": "http://json-schema.org/draft-06/schema",
   "type": "object",
   "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "email_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emails": {
+          "type": "object",
+          "properties": {
+            "<8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com>": {
+              "type": "object",
+              "properties": {
+                "subject": {
+                  "type": "string"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "mime_content": {
+                  "type": "string"
+                },
+                "sender_name": {
+                  "type": "string"
+                },
+                "sender_email": {
+                  "type": "string"
+                },
+                "attachments": {
+                  "type": "object"
+                },
+                "attachment_ids": {
+                  "type": "array"
+                }
+              }
+            },
+            "<53fe9fb07c4b48218c611b835c1e9603@exchange2016.com>": {
+              "type": "object",
+              "properties": {
+                "subject": {
+                  "type": "string"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "mime_content": {
+                  "type": "string"
+                },
+                "sender_name": {
+                  "type": "string"
+                },
+                "sender_email": {
+                  "type": "string"
+                },
+                "attachments": {
+                  "type": "object"
+                },
+                "attachment_ids": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "inputs": {
+          "type": "object",
+          "properties": {
+            "exchange_sender": {},
+            "exchange_email_ids": {},
+            "exchange_message_subject": {},
+            "exchange_search_subfolders": {},
+            "exchange_end_date": {},
+            "exchange_folder_path": {},
+            "exchange_start_date": {},
+            "exchange_num_emails": {
+              "type": "integer"
+            },
+            "exchange_order_by_recency": {},
+            "exchange_email": {
+              "type": "string"
+            },
+            "exchange_has_attachments": {}
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
     "email_ids": {
       "type": "array",
       "items": {
@@ -11,7 +137,33 @@
     "emails": {
       "type": "object",
       "properties": {
-        "<e71b38b97b994651a034bfe095f5bb1a@example.com>": {
+        "<8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com>": {
+          "type": "object",
+          "properties": {
+            "subject": {
+              "type": "string"
+            },
+            "body": {
+              "type": "string"
+            },
+            "mime_content": {
+              "type": "string"
+            },
+            "sender_name": {
+              "type": "string"
+            },
+            "sender_email": {
+              "type": "string"
+            },
+            "attachments": {
+              "type": "object"
+            },
+            "attachment_ids": {
+              "type": "array"
+            }
+          }
+        },
+        "<53fe9fb07c4b48218c611b835c1e9603@exchange2016.com>": {
           "type": "object",
           "properties": {
             "subject": {
