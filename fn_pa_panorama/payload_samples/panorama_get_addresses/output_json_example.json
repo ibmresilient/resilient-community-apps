@@ -1,0 +1,81 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "@status": "success",
+    "@code": "19",
+    "result": {
+      "@total-count": "7",
+      "@count": "7",
+      "entry": [
+        {
+          "@name": "Test",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "ip-netmask": "1.1.1.1"
+        },
+        {
+          "@name": "9.9.9.9",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "ip-netmask": "9.9.9.9",
+          "description": "9.9.9.9"
+        },
+        {
+          "@name": "google.com",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "google.com",
+          "fqdn": "google.com"
+        },
+        {
+          "@name": "8.8.8.8",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "ip-netmask": "8.8.8.8",
+          "description": "8.8.8.8"
+        },
+        {
+          "@name": "208.113.204.14",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "ip-netmask": "208.113.204.14",
+          "description": "Create from Resilient",
+          "tag": {
+            "member": [
+              "Prod"
+            ]
+          }
+        },
+        {
+          "@name": "1.2.3.4",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "1.2.3.4",
+          "fqdn": "1.2.3.4"
+        },
+        {
+          "@name": "11.22.33.44",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "ip-netmask": "11.22.33.44"
+        }
+      ]
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "panorama_location": "vsys",
+    "panorama_vsys": "vsys1",
+    "panorama_label": "panorama_label1"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-pa-panorama",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 593,
+    "timestamp": "2022-10-06 12:34:05"
+  }
+}
