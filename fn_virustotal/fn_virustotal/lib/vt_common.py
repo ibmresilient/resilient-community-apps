@@ -7,13 +7,10 @@
 import base64
 import logging 
 from resilient_lib import RequestsCommon, IntegrationError, validate_fields, str_to_bool
-from resilient_lib.components.requests_common import DEFAULT_TIMEOUT
 
 LOG = logging.getLogger(__name__)
 
 BASE_URL = "https://virustotal.com/api/v3"
-SCAN_URL_URI = "/urls"
-GET_URLS_URI = "/urls/{id}"
 
 class VirusTotalClient(object):
     def __init__(self, opts, options):

@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1682451337962,
+  "export_date": 1682459266097,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -229,18 +229,29 @@
           "step_label": null
         }
       ],
-      "workflows": []
+      "workflows": [
+        {
+          "actions": [],
+          "description": null,
+          "name": "VirusTotal Scan Hits",
+          "object_type": "artifact",
+          "programmatic_name": "virustotal_scan_hits",
+          "tags": [],
+          "uuid": null,
+          "workflow_id": 4
+        }
+      ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 3,
+  "id": 7,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1682451335969,
+      "create_date": 1682459264419,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -249,7 +260,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1682451335969,
+      "update_date": 1682459264419,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -470,6 +481,139 @@
       "type": "default",
       "uuid": "4aea219b-1665-43ff-ab82-c868d727f22d",
       "version": 6
+    },
+    {
+      "activation_details": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "DNS Name"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "IP Address"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "Malware MD5 Hash"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "Malware SHA-256 Hash"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "URL"
+            }
+          ],
+          "logic_type": "any"
+        }
+      },
+      "activation_type": "automatic",
+      "content": {
+        "content_version": 7,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e\" isExecutable=\"true\" name=\"playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_10ys58q\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"VirusTotal\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d108590a-21f9-4e42-92c4-d2a6fe39c9b4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"typeLookup = { \u0027Email Attachment\u0027: \u0027file\u0027, \u0027Malware Sample\u0027: \u0027file\u0027, \u0027Malware MD5 Hash\u0027: \u0027hash\u0027, \u0027Malware SHA-1 Hash\u0027: \u0027hash\u0027, \u0027Malware SHA-256 Hash\u0027: \u0027hash\u0027, \u0027Other File\u0027: \u0027file\u0027, \u0027RCF 822 Email Message Fife\u0027: \u0027file\u0027, \u0027File Name\u0027: \u0027filename\u0027,\\n \u0027URL\u0027: \u0027url\u0027, \u0027IP Address\u0027: \u0027ip\u0027, \u0027DNS Name\u0027:\u0027domain\u0027}\\nif artifact.type in typeLookup:\\n  inputs.vt_type = typeLookup.get(artifact.type, artifact.type)\\nelse:\\n  inputs.vt_type = artifact.type\\n\\ninputs.incident_id = incident.id\\ninputs.artifact_id = artifact.id\\ninputs.vt_data = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"vt_scan_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10ys58q\u003c/incoming\u003e\u003coutgoing\u003eFlow_0nybqro\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_10ys58q\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"VirusTotal: Create artifact hits\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f739be17-e9d4-4ccc-b889-d0fe0215f4d0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0nybqro\u003c/incoming\u003e\u003coutgoing\u003eFlow_0iw8kar\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0nybqro\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0iw8kar\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0iw8kar\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0iw8kar\" id=\"Flow_0iw8kar_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0nybqro\" id=\"Flow_0nybqro_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10ys58q\" id=\"Flow_10ys58q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1682453595198,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e",
+      "description": {
+        "content": "Perform automatic lookups for artifacts including IP addresses, hashes, domains, and URLS and creates a hit for the artifact if it is deemed potentially malicious by VirusTotal.",
+        "format": "text"
+      },
+      "display_name": "VirusTotal: Scan Hits",
+      "export_key": "virustotal_scan_hits",
+      "field_type_handle": "playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e",
+      "fields_type": {
+        "actions": [],
+        "display_name": "VirusTotal: Scan Hits",
+        "export_key": "playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e",
+        "uuid": "12c0652f-0c9e-4c53-9b62-5a8f2636ea6e"
+      },
+      "has_logical_errors": false,
+      "id": 3,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1682458249339,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1682454020006,
+          "description": "Create artifact hits on artifacts the VirusTotal has deemed malicious.",
+          "enabled": false,
+          "export_key": "VirusTotal: Create artifact hits",
+          "id": 4,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1682458247080,
+          "name": "VirusTotal: Create artifact hits",
+          "object_type": "artifact",
+          "playbook_handle": "virustotal_scan_hits",
+          "programmatic_name": "virustotal_scan_hits_virustotal_create_artifact_hits",
+          "script_text": "results = playbook.functions.results.vt_scan_results\n\nif results:\n  scan = results.get(\"scan\", None)\n  if scan is not None and scan.get(\"data\", None) is not None:\n    data = scan.get(\"data\", None)\n    attributes = data.get(\"attributes\", None)\n    if attributes is not None:\n      last_analysis_stats = attributes.get(\"last_analysis_stats\", None)\n      if last_analysis_stats is not None:\n        malicious = last_analysis_stats.get(\"malicious\", None)\n        if malicious is not None and malicious \u003e 0:\n          hit = [\n            {\n              \"name\": \"Artifact Value\",\n              \"type\": \"string\",\n              \"value\": \"{}\".format(artifact.value)\n            }\n          ]\n          artifact.addHit(\"VirusTotal hits added.\", hit)\n          if attributes.get(\"last_http_response_content_sha256\", None) is not None:\n            incident.addArtifact(\u0027Malware SHA-256 Hash\u0027, attributes.get(\"last_http_response_content_sha256\", None), \"Created by VirusTotal.\")\n            \n          if results.scan.get(\u0027md5\u0027, None) is not None:\n            incident.addArtifact(\u0027Malware MD5 Hash\u0027, scan.get(\u0027md5\u0027), None)\n  \n          if results.scan.get(\u0027sha1\u0027, None) is not None:\n            incident.addArtifact(\u0027Malware SHA-1 Hash\u0027, scan.get(\u0027sha1\u0027), None)\n    \n          if results.scan.get(\u0027sha256\u0027, None) is not None:\n            incident.addArtifact(\u0027Malware SHA-256 Hash\u0027, scan.get(\u0027sha256\u0027), None)\n        else:\n          incident.addNote(\u0027VirusTotal has not found a hit.\u0027)\n      else:\n        incident.addNote(\u0027VirusTotal has failed. - no last_analysis_stats\u0027)\n    else:\n      incident.addNote(\u0027VirusTotal has failed - no attributes.\u0027)\n  else:\n    incident.addNote(\u0027VirusTotal has failed - no data.\u0027)\nelse:\n  incident.addNote(\u0027VirusTotal has failed - no results.\u0027)\n      ",
+          "tags": [],
+          "uuid": "f739be17-e9d4-4ccc-b889-d0fe0215f4d0"
+        }
+      ],
+      "name": "virustotal_scan_hits",
+      "object_type": "artifact",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_eff2d4c0-cdb2-4b4c-825b-347c357cf05e",
+        "id": 3,
+        "name": "playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e",
+        "type": "playbook",
+        "uuid": "6fd8cf7a-e50c-489b-8fa2-149653a8bbe6"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "eff2d4c0-cdb2-4b4c-825b-347c357cf05e",
+      "version": 12
     }
   ],
   "regulators": null,

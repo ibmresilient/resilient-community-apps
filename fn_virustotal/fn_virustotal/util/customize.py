@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"virustotal_scan_artifact", u"virustotal_scan_attachment"]
+        "playbooks": [u"virustotal_scan_artifact", u"virustotal_scan_attachment", u"virustotal_scan_hits"]
     }
 
 
@@ -50,6 +50,7 @@ def customization_data(client=None):
     - Playbooks:
         - virustotal_scan_artifact
         - virustotal_scan_attachment
+        - virustotal_scan_hits
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

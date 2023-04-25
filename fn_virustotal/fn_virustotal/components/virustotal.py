@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -7,20 +7,11 @@ import logging
 import os
 import tempfile
 import time
-from fn_virustotal.lib.resilient_common import validateFields, get_input_entity, get_resilient_client
-from fn_virustotal.lib.errors import IntegrationError
-from fn_virustotal.lib.vt_common import VirusTotalClient
-from virus_total_apis import PublicApi as VirusTotal
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon
+from resilient_lib import IntegrationError, validate_fields
+from fn_virustotal.lib.resilient_common import get_input_entity, get_resilient_client
+from fn_virustotal.lib.vt_common import VirusTotalClient
 
-
-RC_NOT_FOUND = 0
-RC_READY     = 1
-RC_IN_QUEUE  = -2
-
-HTTP_OK = 200
-HTTP_RATE_LIMIT = 204
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'virustotal"""
@@ -35,7 +26,7 @@ class FunctionComponent(ResilientComponent):
 
     def _init_virustotal(self):
         """ validate required fields for app.config """
-        validateFields(('api_token', 'polling_interval_sec', 'max_polling_wait_sec'), self.options)
+        validate_fields(('api_token', 'polling_interval_sec', 'max_polling_wait_sec'), self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
