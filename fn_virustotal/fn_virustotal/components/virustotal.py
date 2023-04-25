@@ -9,6 +9,7 @@ import tempfile
 import time
 from fn_virustotal.lib.resilient_common import validateFields, get_input_entity, get_resilient_client
 from fn_virustotal.lib.errors import IntegrationError
+from fn_virustotal.lib.vt_common import VirusTotalClient
 from virus_total_apis import PublicApi as VirusTotal
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import RequestsCommon
@@ -58,10 +59,10 @@ class FunctionComponent(ResilientComponent):
             validateFields(('incident_id', 'vt_type'), kwargs)  # required
 
             # Init RequestsCommon with app.config options
-            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+            #rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
             # Create a VirusTotal instance with the API Token and any proxies gathered by RequestsCommon
-            vt = VirusTotal(self.options['api_token'], rc.get_proxies())
+            vt = VirusTotalClient(self.opts, self.options)
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
@@ -97,39 +98,42 @@ class FunctionComponent(ResilientComponent):
                     finally:
                         os.unlink(temp_file_binary.name)
 
-                file_result = self.return_response(response, vt.get_file_report, time.time())
+                file_result, code = self.return_response(response, vt.get_file_report, time.time())
 
                 ## was a sha-256 returned? try an existing report first
-                if file_result.get("sha256"):
-                    response = vt.get_file_report(file_result.get("sha256"))
-                    report_result = self.return_response(response, None, time.time())
+                meta = file_result.get("meta", None)
+                if meta and meta.get("file_info", None):
+                    file_info = meta.get("file_info", None)
+                    if file_info and file_info.get("sha256", None):
+                        response = vt.get_file_report(file_info.get("sha256"))
+                        report_result, code = self.return_response(response, None, time.time())
 
-                    if report_result.get("response_code") and report_result.get("response_code") == 1:
-                        result = report_result
-                    else:
-                        result = file_result
+                        if report_result.get("data", None) and code == "success":
+                            result = report_result
+                        else:
+                            result = file_result
 
             elif vt_type.lower() == 'url':
                 # attempt to see if a report already exists
                 response = vt.get_url_report(vt_data)
-                result = self.return_response(response, None, time.time())
+                result, code = self.return_response(response, None, time.time())
 
                 # check if result is not found, meaning no report exists
-                if result['response_code'] == RC_NOT_FOUND:
+                if code == "NotFoundError":
                     response = vt.scan_url(vt_data)
-                    result = self.return_response(response, vt.get_url_report, time.time())
+                    result, code = self.return_response(response, vt.get_url_report, time.time())
 
             elif vt_type.lower() == 'ip':
                 response = vt.get_ip_report(vt_data)
-                result = self.return_response(response, None, time.time())
+                result, code = self.return_response(response, None, time.time())
 
             elif vt_type.lower() == 'domain':
                 response = vt.get_domain_report(vt_data)
-                result = self.return_response(response, None, time.time())
+                result, code = self.return_response(response, None, time.time())
 
             elif vt_type.lower() == 'hash':
                 response = vt.get_file_report(vt_data)
-                result = self.return_response(response, None, time.time())
+                result, code  = self.return_response(response, None, time.time())
 
             else:
                 raise ValueError("Unknown type field: {}. Check workflow pre-processor script.".format(vt_type))
@@ -153,19 +157,25 @@ class FunctionComponent(ResilientComponent):
         :return:
         """
         if response and type(response) is not dict:
-            raise IntegrationError('Invalid response: {}'.format(response))
+            raise IntegrationError("Invalid response: {}".format(response))
+ 
+        data = response.get("data", None)
+        if data:
+            return response, "success"
 
-        status = response.get('response_code', -1)
+        error_status = response.get("error", None)
+        if error_status:
+            raise IntegrationError('Unrecognized response from VirusTotal.')
 
-        if status == HTTP_RATE_LIMIT:
-            raise IntegrationError('API rate limit exceeded')
+        code = error_status.get("code", None)
+        message = error_status.get("message", None)
 
         self.log.info(response)
 
-        if status != HTTP_OK:
-            raise IntegrationError('Invalid response status: {}'.format(status))
+        if code != "NotAvailableYet":
+            raise IntegrationError('Invalid response code: {} message: {}'.format(code, message))
 
-        return self.check_results(response['results'], callback, start_time)
+        return self.check_results(response, callback, start_time)
 
     def check_results(self, results, callback, start_time):
         '''
@@ -173,12 +183,15 @@ class FunctionComponent(ResilientComponent):
         :param results: possibly interim results
         :return: final results of scan
         '''
-        code = results.get('response_code', None)
-        scan_id = results.get('scan_id', None)
-        if code == RC_READY or code == RC_NOT_FOUND:
-            return results
+        data = results.get('data', None)
+        if data:
+            self.log.debug(results)
+            return results, "success"
 
-        elif code == RC_IN_QUEUE:
+        error_status = response.get('error', None)
+        code = error_status.get('code', None)
+        message = error_status.get('message', None)
+        if code == 'NotAvailableYet':
             curr_time = time.time()
             if int(curr_time - start_time)/1000 >= int(self.options.get('max_polling_wait_sec')):
                 raise IntegrationError("exceeded max wait time: {}".format(self.options.get('max_polling_wait_sec')))
@@ -187,11 +200,11 @@ class FunctionComponent(ResilientComponent):
                 time.sleep(int(self.options['polling_interval_sec']))
                 # start again to review results
                 response = callback(id)
-                results = self.return_response(response, callback, start_time)
+                results, code = self.return_response(response, callback, start_time)
             else:
-                raise IntegrationError("no callback function specified with response code: {} scan id {}".format(code, scan_id))
+                raise IntegrationError("no callback function specified with response code: {0} message: {}".format(code, message))
         else:
-            raise IntegrationError("unexpected response code: {} for scan_id {}".format(code, scan_id))
+            raise IntegrationError("unexpected response error: {0} message: {1}".format(code, message))
 
         self.log.debug(results)
-        return results
+        return results, code

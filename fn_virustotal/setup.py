@@ -37,7 +37,6 @@ Files and URLs may require additional time to complete their scans, so a link is
                      """,
     install_requires=[
         "resilient-circuits>=48.0.0",
-        'virustotal_api==1.1.11',
         'bs4==0.0.1'
     ],
     python_requires='>=3.6',
