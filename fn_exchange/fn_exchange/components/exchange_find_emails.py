@@ -1,78 +1,75 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_exchange.util.exchange_utils import exchange_utils
+from resilient_circuits import (AppFunctionComponent, app_function,
+                                StatusMessage)
 
+from fn_exchange.lib.exchange_helper import PACKAGE_NAME, INPUTS_MAP, ResultsHandler
+from fn_exchange.lib.exchange_utils import exchange_interface
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'exchange_find_emails"""
+FN_NAME = "exchange_find_emails"
+
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements function 'exchange_find_emails' """
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_exchange", {})
-        self.opts = opts
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_exchange", {})
-        self.opts = opts
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """
+        Query the server to find emails with the provided parameters. This function also
+        allows for limiting the number of emails retrieved, searching different folder
+        paths, ordering retrieved information by recency, searching subfolders and finding
+        emails between specific dates.
 
-    @function("exchange_find_emails")
-    def _exchange_find_emails_function(self, event, *args, **kwargs):
-        """Function: """
+        FN Inputs:
+        ---------
+
+        The values returned from fn_inputs are mapped to easier readable variable names using the 
+        INPUT_MAP that is found in fn_exchange.lib.exchange_helper
+        
+            exchange_email              <str> : Primary email account to be used
+            exchange_num_emails         <int> : Limit the number of emails retrieved
+            exchange_email_ids          <str> : Retrieve emails from all these senders
+            exchange_folder_path        <str> : Custom folder path to find emails
+            exchange_sender             <str> : Only find emails from this specified sender
+            exchange_message_subject    <str> : Retrieve emails with matching message subject
+            exchange_message_body       <str> : Retrieve emails with matching message body
+            exchange_has_attachments   <bool> : Retrieve emails with attachments 
+            exchange_order_by_recency  <bool> : Order retrieved emails by recency
+            exchange_search_subfolders <bool> : Specifies whether to query a mailbox's subfolder
+            exchange_start_date    <datetime> : Get emails on or after this date
+            exchange_end_date      <datetime> : Get emails until after this date
+
+        Returns:
+        --------
+            Response <dict> : A response with the mails retrieved and their attributes
+                              or the error message if the retrieval process failed
+        """
+        rh = ResultsHandler(package_name=PACKAGE_NAME, fn_inputs=fn_inputs)
+        function_parameters = {}
+        for key, value in fn_inputs._asdict().items():
+            function_parameters[INPUTS_MAP[key]] = value
+
+        if not function_parameters.get("src_folder"):
+            function_parameters["src_folder"] = self.options.get('default_folder_path')
+            self.LOG.info('No folder path was specified, using value from config file')
+
+        for parameter in function_parameters:
+            self.LOG.info(f"{parameter} : {str(function_parameters.get(parameter))}")
+
         try:
-            # Get the function parameters:
-            exchange_email = kwargs.get("exchange_email")  # text
-            exchange_folder_path = kwargs.get("exchange_folder_path")  # text
-            exchange_email_ids = kwargs.get("exchange_email_ids") # text
-            exchange_sender = kwargs.get("exchange_sender")  # text
-            exchange_message_subject = kwargs.get("exchange_message_subject") # text
-            exchange_message_body = kwargs.get("exchange_message_body") # text
-            exchange_start_date = kwargs.get("exchange_start_date")  # datepicker
-            exchange_end_date = kwargs.get("exchange_end_date")  # datepicker
-            exchange_has_attachments = kwargs.get("exchange_has_attachments") # boolean
-            exchange_order_by_recency = kwargs.get("exchange_order_by_recency") # boolean
-            exchange_num_emails = kwargs.get("exchange_num_emails") # int
-            exchange_search_subfolders = kwargs.get("exchange_search_subfolders") # boolean
-
-            log = logging.getLogger(__name__)
-            if exchange_folder_path is None:
-                exchange_folder_path = self.options.get('default_folder_path')
-                log.info('No folder path was specified, using value from config file')
-            log.info("exchange_email: %s" % exchange_email)
-            log.info("exchange_folder_path: %s" % exchange_folder_path)
-            log.info("exchange_email_ids: %s" % exchange_email_ids)
-            log.info("exchange_sender: %s" % exchange_sender)
-            log.info("exchange_message_subject: %s" % exchange_message_subject)
-            log.info("exchange_message_body: %s" % exchange_message_body)
-            log.info("exchange_start_date: %s" % exchange_start_date)
-            log.info("exchange_end_date: %s" % exchange_end_date)
-            log.info("exchange_has_attachments: %s" % exchange_has_attachments)
-            log.info("exchange_order_by_recency: %s" % exchange_order_by_recency)
-            log.info("exchange_num_emails: %s" % exchange_num_emails)
-            log.info("exchange_search_subfolders: %s" % exchange_search_subfolders)
-
-            # Initialize utils
-            utils = exchange_utils(self.options, self.opts)
-
-            # Find emails
+            utils = exchange_interface(self.rc, self.options)
             yield StatusMessage("Finding emails")
-            emails = utils.get_emails(exchange_email, exchange_folder_path, exchange_email_ids, exchange_sender,
-                                      exchange_message_subject, exchange_message_body, exchange_start_date,
-                                      exchange_end_date, exchange_has_attachments, exchange_order_by_recency,
-                                      exchange_num_emails, exchange_search_subfolders)
-            yield StatusMessage("Done finding emails, %d emails found" % emails.count())
+            retrieved_emails = utils.get_emails(function_parameters)
 
-            # Populate results with query data
-            results = utils.create_email_function_results(emails)
+            yield StatusMessage(f"{retrieved_emails.count()} emails found")
+            results = utils.create_email_function_results(retrieved_emails, function_parameters.get("num_emails"))
+            yield StatusMessage(f"Search email operation complete, {len(results.get('emails'))} emails found")
+            yield rh.success(results)
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield rh.fail(reason=str(err))

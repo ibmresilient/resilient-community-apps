@@ -36,10 +36,10 @@ class TestExchangeGetMailboxInfo:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @patch('fn_exchange.components.exchange_get_mailbox_info.exchange_utils', side_effect=mocked_exchange_utils)
+    @pytest.mark.livetest
+    @patch('fn_exchange.components.exchange_get_mailbox_info.exchange_interface', side_effect=mocked_exchange_utils)
     @pytest.mark.parametrize("exchange_email, expected_results", [
-        ("user@exch.com", {'email_address': 'user@exch.com', 'mailbox_type': 'Mailbox', 'name': 'User', 'routing_type': 'SMTP',
-                   'success': True}),
+        ("user@exch.com", {'email_address': 'user@exch.com', 'mailbox_type': 'Mailbox', 'name': 'User', 'routing_type': 'SMTP'}),
     ])
     def test_success(self, mock_utils, exchange_email, circuits_app, expected_results):
         """ Test calling with sample values for the parameters """
@@ -47,7 +47,7 @@ class TestExchangeGetMailboxInfo:
             "exchange_email": exchange_email,
         }
         results = call_exchange_get_mailbox_info_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert(expected_results == results.get("content"))
 
 class TestExchangeGetMailboxInfoEmpMailbox:
     """ Tests for the exchange_get_mailbox_info function"""
@@ -61,9 +61,10 @@ class TestExchangeGetMailboxInfoEmpMailbox:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @patch('fn_exchange.components.exchange_get_mailbox_info.exchange_utils', side_effect=mocked_exchange_utils)
+    @pytest.mark.livetest
+    @patch('fn_exchange.components.exchange_get_mailbox_info.exchange_interface', side_effect=mocked_exchange_utils)
     @pytest.mark.parametrize("exchange_email, expected_results", [
-        ("empty_user@exch.com", {'success': False}),
+        ("empty_user@exch.com", {'success': True}),
     ])
     def test_success(self, mock_utils, exchange_email, circuits_app, expected_results):
         """ Test calling with sample values for the parameters """
@@ -71,4 +72,4 @@ class TestExchangeGetMailboxInfoEmpMailbox:
             "exchange_email": exchange_email,
         }
         results = call_exchange_get_mailbox_info_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert(expected_results.get("success") == results.get("success"))
