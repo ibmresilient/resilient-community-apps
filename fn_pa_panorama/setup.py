@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_pa_panorama',
-    version='1.2.0',
+    version='1.3.0',
     license='MIT',
     author='IBM SOAR',
     description="SOAR Components to Integrate with the Panorama Platform",
@@ -27,8 +27,8 @@ setup(
                      "addresses, and user groups within Palo Alto Panorama. This integration can be"
                      " configured to work with one or multiple Jira instances.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient-lib>=32.0.0.186',
+        'resilient_circuits>=46.0.0',
+        'resilient-lib>=46.0.0',
         'xmltodict>=0.12.0'
     ],
     packages=find_packages(),

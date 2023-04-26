@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v48.1.4243
 
 """Generate the Resilient customizations required for fn_pa_panorama"""
 
@@ -22,15 +23,15 @@ def codegen_reload_data():
         "package": u"fn_pa_panorama",
         "message_destinations": [u"palo_alto_panorama"],
         "functions": [u"panorama_create_address", u"panorama_edit_address_group", u"panorama_edit_users_in_a_group", u"panorama_get_address_groups", u"panorama_get_addresses", u"panorama_get_users_in_a_group"],
-        "workflows": [u"example_panorama_block_dns_name", u"example_panorama_block_ip_address", u"example_panorama_block_user", u"example_panorama_unblock_dns_name", u"example_panorama_unblock_ip_address", u"example_panorama_unblock_user"],
-        "actions": [u"Example: Panorama Block DNS Name", u"Example: Panorama Block IP Address", u"Example: Panorama Block User", u"Example: Panorama Unblock DNS Name", u"Example: Panorama Unblock IP Address", u"Example: Panorama Unblock User"],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [u"example_panorama_block_dns_name", u"example_panorama_block_ip_address", u"example_panorama_block_user", u"example_panorama_unblock_dns_name", u"example_panorama_unblock_ip_address", u"example_panorama_unblock_user"]
     }
 
 
@@ -39,7 +40,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 44.0.7585
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
@@ -51,20 +52,13 @@ def customization_data(client=None):
         - panorama_get_address_groups
         - panorama_get_addresses
         - panorama_get_users_in_a_group
-    - Workflows:
+    - Playbooks:
         - example_panorama_block_dns_name
         - example_panorama_block_ip_address
         - example_panorama_block_user
         - example_panorama_unblock_dns_name
         - example_panorama_unblock_ip_address
         - example_panorama_unblock_user
-    - Rules:
-        - Example: Panorama Block DNS Name
-        - Example: Panorama Block IP Address
-        - Example: Panorama Block User
-        - Example: Panorama Unblock DNS Name
-        - Example: Panorama Unblock IP Address
-        - Example: Panorama Unblock User
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

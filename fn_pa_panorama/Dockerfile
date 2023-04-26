@@ -1,4 +1,4 @@
-# docker build -t ibmresilient/fn_pa_panorama:1.2.0 -t ibmresilient/fn_pa_panorama:latest .
+# docker build -t ibmresilient/fn_pa_panorama:1.3.0 -t ibmresilient/fn_pa_panorama:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest
