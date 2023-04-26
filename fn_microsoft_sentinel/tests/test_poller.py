@@ -1,5 +1,5 @@
 import pytest
-from fn_microsoft_sentinel.components.sentinel_poller import check_incident_filters
+from fn_microsoft_sentinel.poller.poller import check_incident_filters
 
 TEST_INCIDENT = {
     "status": "A",

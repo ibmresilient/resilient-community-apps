@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 """
 Function implementation test.
@@ -18,21 +18,16 @@ log.addHandler(logging.StreamHandler())
 
 
 def selftest_function(opts):
-    """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
-    """
     app_configs = opts.get(PACKAGE_NAME, {})
 
-    validate_fields(
-        ["tenant_id", "client_id", "app_secret"],
+    validate_fields([
+        {"name": "tenant_id", "placeholder": "aaa-bbb-ccc"},
+        {"name": "client_id", "placeholder": "aaa-bbb-ddd"},
+        {"name": "app_secret", "placeholder": "aaa-bbb-eee"}],
         app_configs
     )
 
-    sentinel_api = SentinelAPI(app_configs['tenant_id'],
-                               app_configs['client_id'],
-                               app_configs['app_secret'],
-                               opts, app_configs)
+    sentinel_api = SentinelAPI(opts, app_configs)
 
     reason = None
     try:
