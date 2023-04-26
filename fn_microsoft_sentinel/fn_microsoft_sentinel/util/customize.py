@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v48.0.4034
 
 """Generate the Resilient customizations required for fn_microsoft_sentinel"""
 
@@ -22,14 +23,15 @@ def codegen_reload_data():
         "package": u"fn_microsoft_sentinel",
         "message_destinations": [u"fn_microsoft_sentinel"],
         "functions": [u"sentinel_add_incident_comment", u"sentinel_get_incident_alerts", u"sentinel_get_incident_comments", u"sentinel_get_incident_entities", u"sentinel_update_incident"],
-        "workflows": [u"sentinel_comment_sync", u"sentinel_get_incident_alerts", u"sentinel_get_incident_comments", u"sentinel_get_incident_entities", u"sentinel_update_incident"],
-        "actions": [u"Sentinel Comment Sync", u"Sentinel Get Incident Alerts", u"Sentinel Get Incident Comments", u"Sentinel Get Incident Entities", u"Sentinel Incident Sync", u"Sentinel Update Incident"],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [u"sentinel_incident_assigned_to", u"sentinel_incident_classification", u"sentinel_incident_classification_comment", u"sentinel_incident_classification_reason", u"sentinel_incident_id", u"sentinel_incident_labels", u"sentinel_incident_number", u"sentinel_incident_status", u"sentinel_incident_tactics", u"sentinel_incident_url", u"sentinel_profile"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"sentinel_incident_alerts", u"sentinel_incident_entities"],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [u"sentinel_comment_sync", u"sentinel_get_incident_alerts", u"sentinel_get_incident_comments", u"sentinel_get_incident_entities", u"sentinel_incident_sync", u"sentinel_update_incident"]
     }
 
 
@@ -38,7 +40,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 39.0.6328
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
@@ -49,19 +51,13 @@ def customization_data(client=None):
         - sentinel_get_incident_comments
         - sentinel_get_incident_entities
         - sentinel_update_incident
-    - Workflows:
+    - Playbooks:
         - sentinel_comment_sync
         - sentinel_get_incident_alerts
         - sentinel_get_incident_comments
         - sentinel_get_incident_entities
+        - sentinel_incident_sync
         - sentinel_update_incident
-    - Rules:
-        - Sentinel Comment Sync
-        - Sentinel Get Incident Alerts
-        - Sentinel Get Incident Comments
-        - Sentinel Get Incident Entities
-        - Sentinel Incident Sync
-        - Sentinel Update Incident
     - Incident Fields:
         - sentinel_incident_assigned_to
         - sentinel_incident_classification

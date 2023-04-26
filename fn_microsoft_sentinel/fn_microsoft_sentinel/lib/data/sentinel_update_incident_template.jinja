@@ -1,8 +1,8 @@
 {
-    {# JINJA template for updating a new Sentinel incident from a Resilient incident. #}
+    {# JINJA template for updating a new Sentinel incident from a SOAR incident. #}
     "properties": {
-        "title": "{{ name|resilient_splitpart(1)}}",
-        "severity": "{{ severity_code|string|resilient_substitute('{"4":"Low", "5":"Medium", "6":"High", "55":"Low", "56":"Medium", "57":"High"}') }}",
+        "title": "{{ name|soar_splitpart(1)}}",
+        "severity": "{{ severity_code|string|soar_substitute('{"4":"Low", "5":"Medium", "6":"High", "55":"Low", "56":"Medium", "57":"High"}') }}",
         "status": "{{ properties.sentinel_incident_status }}",
         "classification": "{{ properties.sentinel_incident_classification }}",
         "classificationComment": "{{ properties.sentinel_incident_classification_comment|safe }}",
