@@ -47,7 +47,7 @@ class FunctionComponent(ResilientComponent):
             file - this will start a new scan for the file and queue for a report later.
         """
         try:
-            validateFields(('incident_id', 'vt_type'), kwargs)  # required
+            validate_fields(('incident_id', 'vt_type'), kwargs)  # required
 
             # Init RequestsCommon with app.config options
             #rc = RequestsCommon(opts=self.opts, function_opts=self.options)
@@ -82,7 +82,7 @@ class FunctionComponent(ResilientComponent):
                     # calling Floss.
                     temp_file_binary.write(entity["data"])
                     temp_file_binary.close()
-                    try:
+                    try: 
                         response = vt.scan_file(temp_file_binary.name, filename=entity["name"])
                     except Exception as err:
                         raise err
@@ -106,10 +106,11 @@ class FunctionComponent(ResilientComponent):
 
             elif vt_type.lower() == 'url':
                 # attempt to see if a report already exists
-                response = vt.get_url_report(vt_data)
-                result, code = self.return_response(response, None, time.time())
+                #response = vt.get_url_report(vt_data)
+                #result, code = self.return_response(response, None, time.time())
 
                 # check if result is not found, meaning no report exists
+                code = "NotFoundError"
                 if code == "NotFoundError":
                     response = vt.scan_url(vt_data)
                     result, code = self.return_response(response, vt.get_url_report, time.time())
