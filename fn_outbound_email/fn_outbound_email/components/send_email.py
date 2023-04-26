@@ -135,7 +135,13 @@ class FunctionComponent(ResilientComponent):
             note_data = send_smtp_email.get_note_data(mail_incident_id)
 
             error_msg = None
-            if mail_body_html:
+
+            if mail_body_text:
+                LOG.info("Rendering text")
+                text = mail_body_text
+                error_msg = email_message = send_smtp_email.send(body_text=mail_body_text)
+
+            elif mail_body_html:
                 LOG.info("Rendering template")
                 rendered_mail_html = send_smtp_email.render_template(mail_body_html, incident_data, mail_data, artifact_data, note_data)
                 LOG.debug(rendered_mail_html)
@@ -150,10 +156,6 @@ class FunctionComponent(ResilientComponent):
                     rendered_mail_html = rendered_mail_html.replace('---===newline===---', '<div>')
                     error_msg = send_smtp_email.send(body_html=rendered_mail_html)
                     text = rendered_mail_html.replace('---===newline===---', '<br>')
-            elif mail_body_text:
-                LOG.info("Rendering text")
-                text = mail_body_text
-                error_msg = email_message = send_smtp_email.send(body_text=mail_body_text)
 
             if error_msg:
                 yield StatusMessage("An error occurred while sending the email: {}".format(error_msg))

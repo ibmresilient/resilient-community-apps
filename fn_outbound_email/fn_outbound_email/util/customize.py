@@ -23,15 +23,15 @@ def codegen_reload_data():
         "package": u"fn_outbound_email",
         "message_destinations": [u"email_outbound"],
         "functions": [u"send_email", u"send_email2"],
-        "workflows": [u"example_send_incident_email_html", u"example_send_incident_email_html2", u"example_send_incident_email_text", u"example_send_task_email_html", u"example_send_task_email_html2", u"outbound_email_reply_to_message"],
-        "actions": [u"Example: Send Incident Email HTML", u"Example: Send Incident Email HTML2", u"Example: Send Incident Email Text", u"Example: Send Task Email HTML", u"Example: Send Task Email HTML2", u"Outbound Email: Reply to Message"],
+        "workflows": [u"example_send_incident_email_html", u"example_send_incident_email_html2", u"example_send_task_email_html", u"example_send_task_email_html2", u"outbound_email_reply_to_message"],
+        "actions": [u"Example: Send Incident Email HTML", u"Example: Send Incident Email HTML2", u"Example: Send Task Email HTML", u"Example: Send Task Email HTML2", u"Outbound Email: Reply to Message"],
         "incident_fields": [u"email_message_id"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"email_conversations"],
         "automatic_tasks": [],
         "scripts": [u"Save Outbound Email Results"],
-        "playbooks": []
+        "playbooks": [u"example_send_incident_email_text"]
     }
 
 
@@ -51,14 +51,14 @@ def customization_data(client=None):
     - Workflows:
         - example_send_incident_email_html
         - example_send_incident_email_html2
-        - example_send_incident_email_text
         - example_send_task_email_html
         - example_send_task_email_html2
         - outbound_email_reply_to_message
+    - Playbooks:
+        - example_send_incident_email_text
     - Rules:
         - Example: Send Incident Email HTML
         - Example: Send Incident Email HTML2
-        - Example: Send Incident Email Text
         - Example: Send Task Email HTML
         - Example: Send Task Email HTML2
         - Outbound Email: Reply to Message
