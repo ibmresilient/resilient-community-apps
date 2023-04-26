@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "time_to_live": "0 years 1 mons 0 days 0 hours 0 mins 0.0 secs",
+    "timeout_type": "LAST_SEEN",
+    "number_of_elements": 6,
+    "data": {
+      "9": {
+        "case_id": {
+          "last_seen": 1643141897308,
+          "first_seen": 1643140658221,
+          "source": "reference data api",
+          "value": "3107",
+          "domain_id": null
+        },
+        "case_time": {
+          "last_seen": 1643141897308,
+          "first_seen": 1643140658221,
+          "source": "reference data api",
+          "value": "1643141900578",
+          "domain_id": null
+        },
+        "domain_id": {
+          "last_seen": 1643141897308,
+          "first_seen": 1643140658221,
+          "source": "reference data api",
+          "value": "0",
+          "domain_id": null
+        },
+        "org_id": {
+          "last_seen": 1643141897308,
+          "first_seen": 1643140658221,
+          "source": "reference data api",
+          "value": "202",
+          "domain_id": null
+        }
+      },
+      "123": {
+        "234": {
+          "last_seen": 1643387701324,
+          "first_seen": 1643387632118,
+          "source": "reference data api",
+          "value": "test2",
+          "domain_id": null
+        }
+      },
+      "463": {
+        "457": {
+          "last_seen": 1643393906668,
+          "first_seen": 1643393906668,
+          "source": "reference data api",
+          "value": "test4",
+          "domain_id": null
+        }
+      }
+    },
+    "creation_time": 1637336107774,
+    "name": "Generated_Cases",
+    "namespace": "SHARED",
+    "element_type": "ALN",
+    "collection_id": 51,
+    "key_label": "offense_id"
+  },
+  "raw": "{\"time_to_live\": \"0 years 1 mons 0 days 0 hours 0 mins 0.0 secs\", \"timeout_type\": \"LAST_SEEN\", \"number_of_elements\": 6, \"data\": {\"9\": {\"case_id\": {\"last_seen\": 1643141897308, \"first_seen\": 1643140658221, \"source\": \"reference data api\", \"value\": \"3107\", \"domain_id\": null}, \"case_time\": {\"last_seen\": 1643141897308, \"first_seen\": 1643140658221, \"source\": \"reference data api\", \"value\": \"1643141900578\", \"domain_id\": null}, \"domain_id\": {\"last_seen\": 1643141897308, \"first_seen\": 1643140658221, \"source\": \"reference data api\", \"value\": \"0\", \"domain_id\": null}, \"org_id\": {\"last_seen\": 1643141897308, \"first_seen\": 1643140658221, \"source\": \"reference data api\", \"value\": \"202\", \"domain_id\": null}}, \"123\": {\"234\": {\"last_seen\": 1643387701324, \"first_seen\": 1643387632118, \"source\": \"reference data api\", \"value\": \"test2\", \"domain_id\": null}}, \"463\": {\"457\": {\"last_seen\": 1643393906668, \"first_seen\": 1643393906668, \"source\": \"reference data api\", \"value\": \"test4\", \"domain_id\": null}}}, \"creation_time\": 1637336107774, \"name\": \"Generated_Cases\", \"namespace\": \"SHARED\", \"element_type\": \"ALN\", \"collection_id\": 51, \"key_label\": \"offense_id\"}",
+  "inputs": {
+    "qradar_reference_table_name": "Generated_Cases",
+    "qradar_label": "SOAR_Plugin_Destination_Name"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-qradar-integration",
+    "package_version": "2.2.0",
+    "execution_time_ms": 364,
+    "timestamp": "2022-01-28 13:18:58"
+  }
+}
