@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v48.0.4034
+# Generated with resilient-sdk v48.1.4243
 
 """Generate the Resilient customizations required for fn_outbound_email"""
 
@@ -23,15 +23,15 @@ def codegen_reload_data():
         "package": u"fn_outbound_email",
         "message_destinations": [u"email_outbound"],
         "functions": [u"send_email", u"send_email2"],
-        "workflows": [u"example_send_incident_email_html", u"example_send_incident_email_html2", u"example_send_task_email_html", u"example_send_task_email_html2", u"outbound_email_reply_to_message"],
-        "actions": [u"Example: Send Incident Email HTML", u"Example: Send Incident Email HTML2", u"Example: Send Task Email HTML", u"Example: Send Task Email HTML2", u"Outbound Email: Reply to Message"],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [u"email_message_id"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"email_conversations"],
         "automatic_tasks": [],
         "scripts": [u"Save Outbound Email Results"],
-        "playbooks": [u"example_send_incident_email_text"]
+        "playbooks": [u"example_send_incident_email_text", u"example_send_task_email_html", u"example_send_task_email_html2", u"outbound_email_reply_to_message", u"pb_example_send_incident_email_html"]
     }
 
 
@@ -48,20 +48,12 @@ def customization_data(client=None):
     - Functions:
         - send_email
         - send_email2
-    - Workflows:
-        - example_send_incident_email_html
-        - example_send_incident_email_html2
+    - Playbooks:
+        - example_send_incident_email_text
         - example_send_task_email_html
         - example_send_task_email_html2
         - outbound_email_reply_to_message
-    - Playbooks:
-        - example_send_incident_email_text
-    - Rules:
-        - Example: Send Incident Email HTML
-        - Example: Send Incident Email HTML2
-        - Example: Send Task Email HTML
-        - Example: Send Task Email HTML2
-        - Outbound Email: Reply to Message
+        - pb_example_send_incident_email_html
     - Incident Fields:
         - email_message_id
     - Data Tables:
