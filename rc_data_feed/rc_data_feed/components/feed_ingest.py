@@ -457,7 +457,18 @@ class Reload(object):
             send_data(type_info, inc_id, rest_client_helper, item,
                       self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
+            # get the task notes to sync
+            self._query_task_note(rest_client_helper, inc_id, item.get("id"), type_info)
+
         return len(item_list)
+
+    def _query_task_note(self, rest_client_helper, inc_id, task_id, type_info):
+        query = "/incidents/{}/tasks/{}/comments".format(inc_id, task_id)
+        item_list = rest_client_helper.get(query)
+        for item in item_list:
+            send_data(type_info, inc_id, rest_client_helper, item,
+                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+
 
     def _query_attachment(self, rest_client_helper, inc_id, type_info):
         query = "/incidents/{}/attachments/query?include_tasks=true".format(inc_id)
