@@ -52,7 +52,7 @@ def codegen_reload_data():
         "incident_artifact_types": [],
         "incident_types": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": ["Write scheduled job to DataTable"]
     }
 
 
