@@ -138,6 +138,7 @@ class FeedComponent(ResilientComponent):
 
     DATATABLE_TYPE_ID = 8
     INCIDENT_TYPE_ID = 0
+    NOTE_TYPE_ID = 1
     INC_PAGE_SIZE = 500
     SEARCH_PAGE_SIZE = 50
 
@@ -453,12 +454,15 @@ class Reload(object):
     def _query_task(self, rest_client_helper, inc_id, type_info):
         query = "/incidents/{}/tasks".format(inc_id)
         item_list = rest_client_helper.get(query)
+
+        # get the type for a note to use within loop
+        task_note_type_info = self.type_info_index.get(FeedComponent.NOTE_TYPE_ID, None)
         for item in item_list:
             send_data(type_info, inc_id, rest_client_helper, item,
                       self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
 
             # get the task notes to sync
-            self._query_task_note(rest_client_helper, inc_id, item.get("id"), type_info)
+            self._query_task_note(rest_client_helper, inc_id, item.get("id"), task_note_type_info)
 
         return len(item_list)
 
