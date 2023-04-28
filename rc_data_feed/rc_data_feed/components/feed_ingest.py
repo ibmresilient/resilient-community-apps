@@ -463,7 +463,7 @@ class Reload(object):
         return len(item_list)
 
     def _query_task_note(self, rest_client_helper, inc_id, task_id, type_info):
-        query = "/incidents/{}/tasks/{}/comments".format(inc_id, task_id)
+        query = "/tasks/{}/comments".format(task_id)
         item_list = rest_client_helper.get(query)
         for item in item_list:
             send_data(type_info, inc_id, rest_client_helper, item,
