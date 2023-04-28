@@ -50,11 +50,12 @@ class VirusTotalClient(object):
         """
         endpoint_url = "{0}/urls".format(self.base_url)
         payload = urlencode({"url":url})
-        response = self.rc.execute("POST",
+        response, code = self.rc.execute("POST",
                                    endpoint_url,
                                    data=payload,
-                                   headers=self.headers)
-        return response.json()
+                                   headers=self.headers,
+                                   callback=callback)
+        return response.json(), code
 
     def get_url_report(self, url: str) -> dict:
         """ Get the URL report from VirusTotal on the URL (if there is one).
@@ -68,10 +69,11 @@ class VirusTotalClient(object):
         url_id = base64.urlsafe_b64encode(url.encode()).decode().strip("=")
 
         endpoint_url = "{0}/urls/{id}".format(self.base_url, id=url_id)
-        response = self.rc.execute("GET",
+        response, code = self.rc.execute("GET",
                                    endpoint_url,
-                                   headers=self.headers)
-        return response.json()
+                                   headers=self.headers,
+                                   callback=callback)
+        return response.json(), code
 
     def scan_file(self, file_to_scan: str, filename: str) -> dict:
         """ Scan a file using VirusTotal.
@@ -184,3 +186,18 @@ class VirusTotalClient(object):
                                    headers=self.headers)
         return response.json()
 
+
+def callback(response):
+    """
+    callback needed for certain REST API calls to return a formatted error message
+    :param response:
+    :return: response, error_msg
+    """
+    if response.status_code < 400:
+        code = "success"
+    elif response.status_code == 404:
+        code = 'NotFoundError'
+    else:
+        response.raise_for_status()
+
+    return response, code

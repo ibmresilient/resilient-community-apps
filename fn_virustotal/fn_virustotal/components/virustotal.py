@@ -93,9 +93,9 @@ class FunctionComponent(ResilientComponent):
 
                 ## was a sha-256 returned? try an existing report first
                 meta = file_result.get("meta", None)
-                if meta and meta.get("file_info", None):
+                if meta is not None and meta.get("file_info", None):
                     file_info = meta.get("file_info", None)
-                    if file_info and file_info.get("sha256", None):
+                    if file_info is not None and file_info.get("sha256", None):
                         response = vt.get_file_report(file_info.get("sha256"))
                         report_result, code = self.return_response(response, None, time.time())
 
@@ -103,17 +103,23 @@ class FunctionComponent(ResilientComponent):
                             result = report_result
                         else:
                             result = file_result
+                    else:
+                        result = file_result
+                else:
+                    result = file_result
 
             elif vt_type.lower() == 'url':
                 # attempt to see if a report already exists
-                #response = vt.get_url_report(vt_data)
-                #result, code = self.return_response(response, None, time.time())
+                response, code = vt.get_url_report(vt_data)
 
                 # check if result is not found, meaning no report exists
-                code = "NotFoundError"
-                if code == "NotFoundError":
-                    response = vt.scan_url(vt_data)
+                if code == "success":
+                    result, code = self.return_response(response, None, time.time())
+                elif code == "NotFoundError":
+                    response, code = vt.scan_url(vt_data)
                     result, code = self.return_response(response, vt.get_url_report, time.time())
+                else:
+                    raise IntegrationError("Error getting VirusTotal URL scan report: {0}".format(code))
 
             elif vt_type.lower() == 'ip':
                 response = vt.get_ip_report(vt_data)
@@ -151,16 +157,18 @@ class FunctionComponent(ResilientComponent):
         if response and type(response) is not dict:
             raise IntegrationError("Invalid response: {}".format(response))
  
+        error_status = response.get("error", None)
+        if error_status:
+            code = error_status.get("code", None)
+            message = error_status.get("message", None)
+        else:
+            code = "success"
+        if error_status is not None and code != "NotFoundError":
+            raise IntegrationError('Unrecognized response from VirusTotal.')
+
         data = response.get("data", None)
         if data:
             return response, "success"
-
-        error_status = response.get("error", None)
-        if error_status:
-            raise IntegrationError('Unrecognized response from VirusTotal.')
-
-        code = error_status.get("code", None)
-        message = error_status.get("message", None)
 
         self.log.info(response)
 
@@ -175,15 +183,24 @@ class FunctionComponent(ResilientComponent):
         :param results: possibly interim results
         :return: final results of scan
         '''
-        data = results.get('data', None)
-        if data:
-            self.log.debug(results)
-            return results, "success"
+        data = results.get("data", None)
+        error_status = results.get("error", None)
+        status = None
+        code = None
 
-        error_status = response.get('error', None)
-        code = error_status.get('code', None)
-        message = error_status.get('message', None)
-        if code == 'NotAvailableYet':
+        if data:
+            attributes = data.get("attributes", None)
+            status = attributes.get("status", None)
+            if status == "completed":
+                self.log.debug(results)
+                return results, "success"
+
+        if error_status is not None:
+            error_status = response.get('error', None)
+            code = error_status.get('code', None)
+            message = error_status.get('message', None)
+
+        if status in ["queued", "in-progress"]:
             curr_time = time.time()
             if int(curr_time - start_time)/1000 >= int(self.options.get('max_polling_wait_sec')):
                 raise IntegrationError("exceeded max wait time: {}".format(self.options.get('max_polling_wait_sec')))
