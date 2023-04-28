@@ -138,7 +138,7 @@ class FeedComponent(ResilientComponent):
 
     DATATABLE_TYPE_ID = 8
     INCIDENT_TYPE_ID = 0
-    NOTE_TYPE_ID = 1
+    NOTE_TYPE_ID = 2
     INC_PAGE_SIZE = 500
     SEARCH_PAGE_SIZE = 50
 
