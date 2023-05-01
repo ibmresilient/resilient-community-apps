@@ -1,8 +1,14 @@
 include README.md
-include screenshots/*
-include fn_joe_sandbox_analysis/util/*
 include Dockerfile
-include entrypoint.sh
 include apikey_permissions.txt
+include entrypoint.sh
+recursive-include fn_joe_sandbox_analysis/util *
+include fn_joe_sandbox_analysis/LICENSE
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
 
-exclude *.bak
+global-exclude *.bak
