@@ -83,7 +83,7 @@ class FunctionComponent(ResilientComponent):
                     temp_file_binary.write(entity["data"])
                     temp_file_binary.close()
                     try: 
-                        response = vt.scan_file(temp_file_binary.name, filename=entity["name"])
+                        response, code = vt.scan_file(temp_file_binary.name, filename=entity["name"])
                     except Exception as err:
                         raise err
                     finally:
@@ -92,17 +92,12 @@ class FunctionComponent(ResilientComponent):
                 file_result, code = self.return_response(response, vt.get_file_report, time.time())
 
                 ## was a sha-256 returned? try an existing report first
-                meta = file_result.get("meta", None)
-                if meta is not None and meta.get("file_info", None):
-                    file_info = meta.get("file_info", None)
-                    if file_info is not None and file_info.get("sha256", None):
-                        response = vt.get_file_report(file_info.get("sha256"))
-                        report_result, code = self.return_response(response, None, time.time())
+                sha256 = vt.get_sha256_from_file_result(file_result)
+                if sha256:
+                    report_result, code = vt.get_file_report(sha256)
 
-                        if report_result.get("data", None) and code == "success":
-                            result = report_result
-                        else:
-                            result = file_result
+                    if report_result.get("data", None) and code == "success":
+                        result = report_result
                     else:
                         result = file_result
                 else:
@@ -113,31 +108,26 @@ class FunctionComponent(ResilientComponent):
                 response, code = vt.get_url_report(vt_data)
 
                 # check if result is not found, meaning no report exists
-                if code == "success":
-                    result, code = self.return_response(response, None, time.time())
-                elif code == "NotFoundError":
+                if code == "NotFoundError":
                     response, code = vt.scan_url(vt_data)
-                    result, code = self.return_response(response, vt.get_url_report, time.time())
-                else:
+
+                if code != "success":
                     raise IntegrationError("Error getting VirusTotal URL scan report: {0}".format(code))
 
             elif vt_type.lower() == 'ip':
-                response = vt.get_ip_report(vt_data)
-                result, code = self.return_response(response, None, time.time())
+                response, code = vt.get_ip_report(vt_data)
 
             elif vt_type.lower() == 'domain':
-                response = vt.get_domain_report(vt_data)
-                result, code = self.return_response(response, None, time.time())
+                response, code  = vt.get_domain_report(vt_data)
 
             elif vt_type.lower() == 'hash':
-                response = vt.get_file_report(vt_data)
-                result, code  = self.return_response(response, None, time.time())
+                response, code = vt.get_file_report(vt_data)
 
             else:
-                raise ValueError("Unknown type field: {}. Check workflow pre-processor script.".format(vt_type))
+                raise ValueError("Unknown type field: {}. Check pre-processor script.".format(vt_type))
 
             results = {
-                "scan": result
+                "scan": response
             }
 
             self.log.debug("scan: {}".format(results))
@@ -146,74 +136,3 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
-
-
-    def return_response(self, response, callback, start_time):
-        """
-        parse the response and return the json results if successful
-        :param resp:
-        :return:
-        """
-        if response and type(response) is not dict:
-            raise IntegrationError("Invalid response: {}".format(response))
- 
-        error_status = response.get("error", None)
-        if error_status:
-            code = error_status.get("code", None)
-            message = error_status.get("message", None)
-        else:
-            code = "success"
-        if error_status is not None and code != "NotFoundError":
-            raise IntegrationError('Unrecognized response from VirusTotal.')
-
-        data = response.get("data", None)
-        if data:
-            return response, "success"
-
-        self.log.info(response)
-
-        if code != "NotAvailableYet":
-            raise IntegrationError('Invalid response code: {} message: {}'.format(code, message))
-
-        return self.check_results(response, callback, start_time)
-
-    def check_results(self, results, callback, start_time):
-        '''
-        continue checking for the scans to complete
-        :param results: possibly interim results
-        :return: final results of scan
-        '''
-        data = results.get("data", None)
-        error_status = results.get("error", None)
-        status = None
-        code = None
-
-        if data:
-            attributes = data.get("attributes", None)
-            status = attributes.get("status", None)
-            if status == "completed":
-                self.log.debug(results)
-                return results, "success"
-
-        if error_status is not None:
-            error_status = response.get('error', None)
-            code = error_status.get('code', None)
-            message = error_status.get('message', None)
-
-        if status in ["queued", "in-progress"]:
-            curr_time = time.time()
-            if int(curr_time - start_time)/1000 >= int(self.options.get('max_polling_wait_sec')):
-                raise IntegrationError("exceeded max wait time: {}".format(self.options.get('max_polling_wait_sec')))
-
-            if callback:
-                time.sleep(int(self.options['polling_interval_sec']))
-                # start again to review results
-                response = callback(id)
-                results, code = self.return_response(response, callback, start_time)
-            else:
-                raise IntegrationError("no callback function specified with response code: {0} message: {}".format(code, message))
-        else:
-            raise IntegrationError("unexpected response error: {0} message: {1}".format(code, message))
-
-        self.log.debug(results)
-        return results, code

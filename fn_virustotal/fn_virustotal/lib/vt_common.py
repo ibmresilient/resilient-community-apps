@@ -5,6 +5,7 @@
 """VirusTotal REST API client"""
 import os
 import base64
+import time
 from urllib.parse import urlencode
 import logging 
 from resilient_lib import RequestsCommon, IntegrationError, validate_fields, str_to_bool
@@ -89,8 +90,9 @@ class VirusTotalClient(object):
         Returns:
             dict: Return VT status on file analyses in JSON format.
         """
+        start_time = time.time()
         # files = {"file": ("copy.txt", open("copy.txt", "rb"), "text/plain")}
-        files = {"file": (filename, open(file_to_scan, "rb"), "text/plain")}
+        files = {"file": (filename, open(file_to_scan, "rb"), "application/octet-stream")}
         headers_for_file = {
             "accept": "application/json",
             "x-apikey": self.headers["x-apikey"]
@@ -102,7 +104,7 @@ class VirusTotalClient(object):
         if files_size_MB > VT_MAX_FILE_UPLOAD_SIZE_MB:
             raise IntegrationError("Cannot upload a file larger than {0} to VirusTotal: file size is {1} MB!".format(VT_MAX_FILE_UPLOAD_SIZE_MB, files_size_MB))
 
-        if files_size_MB:
+        if files_size_MB >= VT_MAX_FILE_SIZE_MB:
             response = self.get_upload_url()
             vt_upload_url = response.get("data", None)
         else:
@@ -115,16 +117,44 @@ class VirusTotalClient(object):
                                    files=files,
                                    headers=headers_for_file)
         response_json = response.json()
+
         data = response_json.get("data", None)
-        if data is not None:
+        if data and data.get("links", None):
             links = data.get("links", None)
-            if links is not None:
+            status = "incomplete"
+            if links:
                 endpoint_url = links.get("self", None)
-                analysis_response = self.rc.execute("GET",
+                curr_time = time.time()
+                diff = int(curr_time - start_time)/1000
+                while int(curr_time - start_time)/1000 <= int(self.max_polling_wait_sec):
+                    analysis_response = self.rc.execute("GET",
                                                 endpoint_url,
                                                 headers=self.headers)
-                analysis_response_json = analysis_response.json()
-                return analysis_response_json
+                    analysis_response_json = analysis_response.json()
+                    LOG.info("analysis_response_json = {}".format(analysis_response_json))
+                    analysis_data = analysis_response_json.get("data", {})
+                    if analysis_data:
+                        attributes = analysis_data.get("attributes", {})
+                        if attributes:
+                            status = attributes.get("status", None)
+                            if status == "completed":
+                                return analysis_response_json, status
+                            elif status in ["in-progress", "queued"]:
+                                # resubmit
+                                curr_time = time.time()
+                                if int(curr_time - start_time)/1000 >= int(self.max_polling_wait_sec):
+                                    raise IntegrationError("exceeded max wait time: {}".format(self.max_polling_wait_sec))
+
+                                time.sleep(int(self.polling_interval_sec))
+                                    # start again to review results
+                            else:
+                                raise IntegrationError("Invalid analyses status {}".format(status))
+                        
+                return analysis_response_json, status
+            else:
+                raise IntegrationError("No links returned from VirusTotal file scan.")
+        else:
+            raise IntegrationError("No data returned from VirusTotal file scan.")            
         return response_json
 
     def get_file_report(self, id: str) -> dict:
@@ -137,10 +167,11 @@ class VirusTotalClient(object):
             dict: Return information on the file from VT in JSON format
         """
         endpoint_url = "{0}/files/{id}".format(self.base_url, id=id)
-        response = self.rc.execute("GET",
+        response, code = self.rc.execute("GET",
                                    endpoint_url,
+                                   callback=callback,
                                    headers=self.headers)
-        return response.json()
+        return response.json(), code
 
     def get_ip_report(self, ip: str) -> dict:
         """ Get a VirusTotal IP address report
@@ -152,8 +183,9 @@ class VirusTotalClient(object):
             dict: Returns a report in JSON format from VT
         """
         endpoint_url = "{0}/ip_addresses/{ip}".format(self.base_url, ip=ip)
-        response = self.rc.execute("GET",
+        response, code = self.rc.execute("GET",
                                    endpoint_url,
+                                   callback=callback,
                                    headers=self.headers)
         return response.json()
 
@@ -167,10 +199,11 @@ class VirusTotalClient(object):
             dict: _description_
         """
         endpoint_url = "{0}/domains/{domain}".format(self.base_url, domain=domain)
-        response = self.rc.execute("GET",
+        response, code = self.rc.execute("GET",
                                    endpoint_url,
+                                   callback=callback,
                                    headers=self.headers)
-        return response.json()
+        return response.json(), code
 
     def get_upload_url(self) -> dict:
         """ Get a VT URL where a large file (greater than 32 MB and less than 650 MB)
@@ -186,6 +219,31 @@ class VirusTotalClient(object):
                                    headers=self.headers)
         return response.json()
 
+    def get_sha256_from_file_result(self, file_result):
+        sha256 = None
+        meta = file_result.get("meta", None)
+        if meta and meta.get("file_info", None):
+            file_info = meta.get("file_info", None)
+            if file_info and file_info.get("sha256", None):
+                return file_info.get("sha256", None)
+        return sha256
+
+    def return_response(self, response):
+        """
+        parse the response and return the json results if successful
+        :param resp:
+        :return:
+        """
+        if response and type(response) is not dict:
+            raise IntegrationError("Invalid response: {}".format(response))
+ 
+        error_status = response.get("error", None)
+        if error_status:
+            code = error_status.get("code", None)
+        else:
+            code = "success"
+        return response, code
+
 
 def callback(response):
     """
@@ -193,7 +251,7 @@ def callback(response):
     :param response:
     :return: response, error_msg
     """
-    if response.status_code < 400:
+    if response.status_code < 300:
         code = "success"
     elif response.status_code == 404:
         code = 'NotFoundError'
