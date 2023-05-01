@@ -1,10 +1,10 @@
 #!/usr/bin/env python
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
 import glob
 import ntpath
-
 
 def get_module_name(module_path):
     """
@@ -21,17 +21,17 @@ def snake_to_camel(word):
 
 setup(
     name='fn_joe_sandbox_analysis',
-    display_name="Joe Sandbox Function for IBM SOAR",
-    version='1.0.5',
+    display_name="Joe Sandbox Analysis Function for IBM SOAR",
+    version='1.1.0',
     license='MIT',
     author='IBM QRadar SOAR',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
-    description="Joe Sandbox Function for IBM SOAR",
-    long_description="Joe Sandbox Function for IBM SOAR",
+    description="Joe Sandbox Analysis Function for IBM SOAR",
+    long_description="Joe Sandbox Analysis Function for IBM SOAR",
     install_requires=[
-        'resilient_circuits>=32.0.0',
-        'jbxapi==2.10.1'
+        'resilient_circuits>=47.1.0',
+        'jbxapi>=3.19.0'
     ],
     packages=find_packages(),
     include_package_data=True,
