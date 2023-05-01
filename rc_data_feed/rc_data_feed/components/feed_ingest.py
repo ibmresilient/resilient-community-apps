@@ -123,7 +123,7 @@ async def send_data(type_info, inc_id, rest_client_helper, payload,\
         try:
             if not workspaces or (workspace in workspaces and feed_name in workspaces[workspace]):
                 LOG.debug("Calling feed %s for workspace: %s", feed_output.__class__.__name__, workspace)
-                await feed_output.send_data(context, payload)
+                feed_output.send_data(context, payload)
                 item_sent = True
         except Exception as err:
             LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
@@ -220,8 +220,8 @@ class FeedComponent(ResilientComponent):
             else:
                 payload = event.message[type_name]
 
-            send_data(type_info, inc_id, rest_client_helper, payload,
-                      self.feed_outputs, self.workspaces, is_deleted, self.incl_attachment_data)
+            asyncio.run(send_data(type_info, inc_id, rest_client_helper, payload,
+                      self.feed_outputs, self.workspaces, is_deleted, self.incl_attachment_data))
 
         except Exception as err:
             error_trace = traceback.format_exc()
@@ -346,8 +346,8 @@ class Reload(object):
                 type_info = type_info_index[FeedComponent.INCIDENT_TYPE_ID]
 
                 if sync_incident:
-                    send_data(type_info, inc_id, self.rest_client_helper, incident,
-                              self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+                    asyncio.run(send_data(type_info, inc_id, self.rest_client_helper, incident,
+                              self.feed_outputs, self.workspaces, False, self.incl_attachment_data))
 
                 # query api call should be done now
                 if query_api_method:
@@ -399,8 +399,8 @@ class Reload(object):
 
             inc_id = result['inc_id']
 
-            send_data(type_info, inc_id, self.rest_client_helper, result_data,
-                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+            asyncio.run(send_data(type_info, inc_id, self.rest_client_helper, result_data,
+                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data))
 
     def _populate_others_query(self,
                                inc_id,
@@ -429,8 +429,8 @@ class Reload(object):
         query = "/incidents/{}/artifacts".format(inc_id)
         item_list = rest_client_helper.get(query)
         for item in item_list:
-            send_data(type_info, inc_id, rest_client_helper,
-                      item, self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+            asyncio.run(send_data(type_info, inc_id, rest_client_helper,
+                      item, self.feed_outputs, self.workspaces, False, self.incl_attachment_data))
 
         return len(item_list)
 
@@ -438,8 +438,8 @@ class Reload(object):
         query = "/incidents/{}/milestones".format(inc_id)
         item_list = rest_client_helper.get(query)
         for item in item_list:
-            send_data(type_info, inc_id, rest_client_helper, item,
-                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+            asyncio.run(send_data(type_info, inc_id, rest_client_helper, item,
+                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data))
 
         return len(item_list)
 
@@ -447,8 +447,8 @@ class Reload(object):
         query = "/incidents/{}/comments".format(inc_id)
         item_list = rest_client_helper.get(query)
         for item in item_list:
-            send_data(type_info, inc_id, rest_client_helper, item,
-            self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+            asyncio.run(send_data(type_info, inc_id, rest_client_helper, item,
+            self.feed_outputs, self.workspaces, False, self.incl_attachment_data))
 
         return len(item_list)
 
@@ -459,8 +459,8 @@ class Reload(object):
         # get the type for a note to use within loop
         task_note_type_info = self.type_info_index.get(FeedComponent.NOTE_TYPE_ID, None)
         for item in item_list:
-            send_data(type_info, inc_id, rest_client_helper, item,
-                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+            asyncio.run(send_data(type_info, inc_id, rest_client_helper, item,
+                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data))
 
             # get the task notes to sync
             self._query_task_note(rest_client_helper, inc_id, item.get("id"), task_note_type_info)
@@ -471,16 +471,16 @@ class Reload(object):
         query = "/tasks/{}/comments".format(task_id)
         item_list = rest_client_helper.get(query)
         for item in item_list:
-            send_data(type_info, inc_id, rest_client_helper, item,
-                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+            asyncio.run(send_data(type_info, inc_id, rest_client_helper, item,
+                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data))
 
 
     def _query_attachment(self, rest_client_helper, inc_id, type_info):
         query = "/incidents/{}/attachments/query?include_tasks=true".format(inc_id)
         item_list = rest_client_helper.post(query, None)
         for item in item_list['attachments']:
-            send_data(type_info, inc_id, rest_client_helper, item,
-                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+            asyncio.run(send_data(type_info, inc_id, rest_client_helper, item,
+                      self.feed_outputs, self.workspaces, False, self.incl_attachment_data))
 
         return len(item_list)
 
@@ -495,8 +495,8 @@ class Reload(object):
                 type_info = self.type_info_index[datatable_id]
 
                 for row in table['rows']:
-                    send_data(type_info, inc_id, rest_client_helper, row,
-                            self.feed_outputs, self.workspaces, False, self.incl_attachment_data)
+                    asyncio.run(send_data(type_info, inc_id, rest_client_helper, row,
+                            self.feed_outputs, self.workspaces, False, self.incl_attachment_data))
 
         return len(item_list)
 
