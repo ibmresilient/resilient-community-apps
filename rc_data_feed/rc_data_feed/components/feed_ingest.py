@@ -4,6 +4,7 @@
 
 """Feed component implementation."""
 
+import asyncio
 import ast
 import logging
 import sys
@@ -74,7 +75,7 @@ def range_chunks(chunk_range, chunk_size):
 
         start += chunk_size
 
-def send_data(type_info, inc_id, rest_client_helper, payload,\
+async def send_data(type_info, inc_id, rest_client_helper, payload,\
               feed_outputs, workspaces, is_deleted, incl_attachment_data):
     """
     perform the sync to the different datastores
@@ -122,7 +123,7 @@ def send_data(type_info, inc_id, rest_client_helper, payload,\
         try:
             if not workspaces or (workspace in workspaces and feed_name in workspaces[workspace]):
                 LOG.debug("Calling feed %s for workspace: %s", feed_output.__class__.__name__, workspace)
-                feed_output.send_data(context, payload)
+                await feed_output.send_data(context, payload)
                 item_sent = True
         except Exception as err:
             LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
