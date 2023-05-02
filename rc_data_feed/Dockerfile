@@ -15,10 +15,10 @@ ENV APP_HOST_CONTAINER=${APP_HOST_CONTAINER}
 USER 0
 
 # Update to latest pip
-RUN pip install --upgrade pip
+RUN pip install --upgrade --trusted-host pypi.org --trusted-host files.pythonhosted.org pip
 
 # install resilient-circuits
-RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
+RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
@@ -27,7 +27,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 # install the base package
 COPY ./dist /tmp/packages
-RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
+RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>
