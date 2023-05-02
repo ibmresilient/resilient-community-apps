@@ -108,11 +108,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `46.0.8131`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `xv`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=48.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -180,8 +180,6 @@ The following table provides the settings you need to configure the app. These s
 | **https_proxy** | No | `https://your.proxy.com` | - |
 | **http_proxy** | No | `http://your.proxy.com` | - |
 
-| Config | Required | Example | Description |
-| ------ | :------: | ------- | ----------- |
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **host** | Yes | `<asa_ip>` | *IP Address of the Cisco ASA firewall.* |
@@ -979,14 +977,14 @@ cisco_asa_network_object_dt
 ## Playbooks
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| Cisco ASA: Add FQDN to Network Object Group | Add an DNS artifact to a Cisco ASA network object group.  If the artifact is not added to the group an error message is written to an incident note. | artifact | `enabled` |
-| Cisco ASA: Add IP Address to Network Object Group | Add IP address artifact to Cisco ASA network object group.  If the artifact is not added to the group an error message is written to an incident note. | artifact | `enabled` |
-| Cisco ASA: Add IP Range to Network Object Group | Add IP range to a Cisco ASA network object group.  If there is an error write it to an incident note. | artifact | `enabled` |
-|  Cisco ASA: Add IPv4Network to Network Object Group  | Add an IPv4 network to a Cisco ASA network object group.  If there is an error write the error to an incident note. | artifact | `enabled` |
-| Cisco ASA: Add IPv6Network to Network Object Group | Add in IPv6 IP network to a Cisco ASA network object group.  If an error occurs write it to an incident note. | artifact | `enabled` |
-| Cisco ASA: Get Network Object Details | None | cisco_asa_network_object_dt | `enabled` |
+| Cisco ASA: Add FQDN to Network Object Group (PB) | Add an DNS artifact to a Cisco ASA network object group.  If the artifact is not added to the group an error message is written to an incident note. | artifact | `enabled` |
+| Cisco ASA: Add IP Address to Network Object Group (PB) | Add IP address artifact to Cisco ASA network object group.  If the artifact is not added to the group an error message is written to an incident note. | artifact | `enabled` |
+| Cisco ASA: Add IP Range to Network Object Group (PB) | Add IP range to a Cisco ASA network object group.  If there is an error write it to an incident note. | artifact | `enabled` |
+|  Cisco ASA: Add IPv4Network to Network Object Group (PB) | Add an IPv4 network to a Cisco ASA network object group.  If there is an error write the error to an incident note. | artifact | `enabled` |
+| Cisco ASA: Add IPv6Network to Network Object Group (PB) | Add in IPv6 IP network to a Cisco ASA network object group.  If an error occurs write it to an incident note. | artifact | `enabled` |
+| Cisco ASA: Get Network Object Details (PB) | None | cisco_asa_network_object_dt | `enabled` |
 | Cisco ASA Get Network Object Group | Get the network objects of the specified network object group and write them to the Cisco ASA Network Objects data table. | incident | `enabled` |
-| Cisco ASA: Remove Network Object from Network Object Group | Remove the network object from the specified Cisco ASA network object group. The status column of the row is marked as Removed in the data table. | cisco_asa_network_object_dt | `enabled` |
+| Cisco ASA: Remove Network Object from Network Object Group (PB) | Remove the network object from the specified Cisco ASA network object group. The status column of the row is marked as Removed in the data table. | cisco_asa_network_object_dt | `enabled` |
 
 ---
 
