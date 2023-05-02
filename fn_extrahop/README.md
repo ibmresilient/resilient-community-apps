@@ -298,7 +298,7 @@ The following screenshot shows examples of artifacts added to a SOAR incident cr
    ![screenshot: fn-extrahop-revealx-incident-artifacts](./doc/screenshots/fn-extrahop-revealx-incident-artifacts.png)
 
 
-**_NOTE:_** See the data tables section for examples of data tables added by the poller.
+**_NOTE:_** See the data tables section for examples of data tables updated by the poller.
 
 ---
 
