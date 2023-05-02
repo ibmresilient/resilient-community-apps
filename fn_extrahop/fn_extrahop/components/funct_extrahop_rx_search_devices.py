@@ -46,7 +46,7 @@ class FunctionComponent(AppFunctionComponent):
         response = rx_cli.search_devices(**params)
         # Response is a list, returned result needs to be a dict
         if response.status_code == 400:
-            results = {"error": response.json()["error_message"]}
+            results = {"error": response.json()}
         else:
             results = {"result": response.json()}
 
