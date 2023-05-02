@@ -310,13 +310,6 @@ class PollerComponent(ResilientComponent):
                                                             soar_case_id,
                                                             soar_update_payload
                                                         )
-                            # Add an update note
-                            note = "Updated by ExtraHop from a detection."
-                            comment_header = "ExtraHop"
-                            _update_case_note = self.soar_common.create_case_comment(soar_case_id, entity_id,
-                                                                                     comment_header, note)
-                            cases_updated += 1
-
                             LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
 
             LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",

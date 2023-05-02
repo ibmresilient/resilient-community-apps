@@ -263,7 +263,7 @@ The poller provides the following functionality.
 
 * For any new detections discovered, creates a  matching incident in the SOAR platform.
 * The ExtraHop detections Ticket ID is assigned the SOAR case value.
-* The playbook `Extrahop Reveal(x): Update Case` is triggered automatically to update an incident/case.
+* The playbook `Extrahop Reveal(x): Update Case (PB)` is triggered automatically to update an incident/case.
 * The automatic playbook enhances the case/incident by adding artifacts and data tables with detection and device information from the matching ExtraHop detection.
 * Can be configured to filter the detections which are escalated to the SOAR cases.  
 * Closes SOAR case if the corresponding ExtraHop detections are closed.
@@ -275,6 +275,7 @@ The poller provides the following functionality.
 * The poller uses ExtraHop detection `mod_time` field to determine which detections to pull in to SOAR.
 * The poller includes an optional `polling_lookback` parameter in the app.config that can be used to look back the specified number of minutes when the poller starts or restarts to pull in "older" detections.  If not specified in the app.config, the poller uses a look back of zero minutes.
 * The function `ExtraHop Reveal(x) search detections` takes an optional `mod_time` parameter used for searching detections in ExtraHop.
+* ExtraHop playbook names are appended with **(PB)** to allow for easier distinction between rules which may will be in the SOAR instance after upgrading to the 1.1.0 version of the ExtraHop app.
 
 The following screenshot shows examples of SOAR incidents created by the poller from ExtraHop detections:
 
@@ -296,10 +297,6 @@ The following screenshot shows examples of artifacts added to a SOAR incident cr
 
    ![screenshot: fn-extrahop-revealx-incident-artifacts](./doc/screenshots/fn-extrahop-revealx-incident-artifacts.png)
 
-The following screenshot shows an example of a note added to a SOAR incident created by the poller:
-
-   ![screenshot: fn-extrahop-revealx-incident-note](./doc/screenshots/fn-extrahop-revealx-incident-note.png)
-
 
 **_NOTE:_** See the data tables section for examples of data tables added by the poller.
 
@@ -318,11 +315,11 @@ The function provides the following functionality.
 
 **_NOTE:_** Add detection note will fail if `Detection Tracking` is enabled on ExtraHop.
 
-An example playbook that uses this SOAR function is `Extrahop Reveal(x) Update Detection`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x) Update Detection (PB)`.
 
 * A note is added to the ExtraHop detection when a matching SOAR case is closed. 
   
-The automatic data table playbook `Extrahop Reveal(x): Update Detection` is triggered when a SOAR case is closed.
+The automatic data table playbook `Extrahop Reveal(x): Update Detection (PB)` is triggered when a SOAR case is closed.
 
 The following screenshot shows an example of a note added to an ExtraHop detection:
 
@@ -473,11 +470,11 @@ The function provides the following functionality.
 
 * Assigns a tag to a list of device ids discovered in the ExtraHop environment.
 
-An example playbook that uses this SOAR function is `Extrahop Reveal(x): Assign Tag`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): Assign Tag (PB)`.
 
 * A note is added to the SOAR incident with the status of the action. 
   
-The playbook is initiated by the manual data table menu item `Extrahop Reveal(x): Assign Tag` for data table `ExtraGop Devices`.
+The playbook is initiated by the manual data table menu item `Extrahop Reveal(x): Assign Tag (PB)` for data table `ExtraGop Devices`.
 
    ![screenshot: fn-extrahop-revealx-assign-tag-action](./doc/screenshots/fn-extrahop-revealx-assign-tag-action.png)
 
@@ -607,12 +604,12 @@ The function provides the following functionality.
 
 * Creates a new tag in the ExtraHop environment.
 
-An example playbook that uses this SOAR function is `Extrahop Reveal(x): Create Tag`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): Create Tag (PB)`.
 
 * A note is added to the SOAR incident with the status of the action.
 * The data table `Extrahop Tags` is updated.
 
-The playbook is initiated by the menu item `Extrahop Reveal(x): Create Tag`.
+The playbook is initiated by the menu item `Extrahop Reveal(x): Create Tag (PB)`.
 
    ![screenshot: fn-extrahop-revealx-create-tag-action](./doc/screenshots/fn-extrahop-revealx-create-tag-action.png)
   
@@ -727,12 +724,12 @@ The function provides the following functionality.
 
 * Retrieves information on activitymaps in the ExtraHop environment.
 
-An example playbook that uses this SOAR function is `Extrahop Reveal(x): Get Activitymaps`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): Get Activitymaps (PB)`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `ExtraHop Activitymaps` is updated.
  
-The playbook is initiated by the incident menu item `Extrahop Reveal(x): Get Activitymaps`.
+The playbook is initiated by the incident menu item `Extrahop Reveal(x): Get Activitymaps (PB)`.
 
    ![screenshot: fn-extrahop-revealx-get-activitymaps-action](./doc/screenshots/fn-extrahop-revealx-get-activitymaps-action.png)
 
@@ -928,11 +925,11 @@ The function provides the following functionality.
   
 **_NOTE:_** Get detection note will fail if `Detection Tracking` is enabled on ExtraHop.
 
-An example playbook that uses this SOAR function is `Extrahop Reveal(x): Update Detection`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): Update Detection (PB)`.
 
 * The current note is retrieved from the ExtraHop detection when a matching SOAR incident is closed. 
   
-The automatic data table playbook `Extrahop Reveal(x): Update Detection` is initiated when a SOAR case/incident is closed.
+The automatic data table playbook `Extrahop Reveal(x): Update Detection (PB)` is initiated when a SOAR case/incident is closed.
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1043,12 +1040,12 @@ The function provides the following functionality.
 
 * Retrieves information on detections in the ExtraHop environment.
 
-An example playbook that uses this SOAR function is `Extrahop Reveal(x): Update Case`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): Update Case (PB)`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `ExtraHop Detections` is updated.
  
-The playbook is initiated by the automatic `Extrahop Reveal(x): Update Case`.
+The playbook is initiated by the automatic `Extrahop Reveal(x): Update Case (PB)`.
 The following screenshots show an example of the data table updated by the function:
 
    ![screenshot: fn-extrahop-revealx-get-detections-datatable](./doc/screenshots/fn-extrahop-revealx-get-detections-datatable.png)
@@ -1339,12 +1336,12 @@ The function provides the following functionality.
 
 * Retrieves information for devices in the ExtraHop environment.
 
-An example playbook that uses this SOAR function is `Extrahop Reveal(x): search devices`.
+An example playbook that uses this SOAR function is `Extrahop Reveal(x): Search Devices (PB)`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `ExtraHop Devices` is updated.
  
-The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): search devices`.
+The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Search Devices (PB)`.
    
    ![screenshot: fn-extrahop-revealx-get-devices-action](./doc/screenshots/fn-extrahop-revealx-get-devices-action.png)
 
@@ -1575,12 +1572,12 @@ The function provides the following functionality.
 
 * Retrieves a list of tags discovered in the ExtraHop environment.
 
-An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Get Tags`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Get Tags (PB)`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Tags` is updated.
  
-The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Tags`.
+The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Tags (PB)`.
 
    ![screenshot: fn-extrahop-revealx-get-tags-action](./doc/screenshots/fn-extrahop-revealx-get-tags-action.png)
 
@@ -1710,12 +1707,12 @@ The function provides the following functionality.
 
 * Retrieves a list of devices on the watchlist in the ExtraHop environment.
 
-An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Get Watchlist`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Get Watchlist (PB)`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Watchlist` is updated.
  
-The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Watchlist`.
+The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Get Watchlist (PB)`.
 
    ![screenshot: fn-extrahop-revealx-get-watchlist-action](./doc/screenshots/fn-extrahop-revealx-get-watchlist-action.png)
 
@@ -1884,12 +1881,12 @@ The function provides the following functionality.
 * Retrieves a list of detections in the ExtraHop environment based on the provided parameters.
 * A filter in JSON is used to target the information retrieved.
 
-An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Detections`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Detections (PB)`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Detections` is updated.
  
-The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Search Detections`.
+The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Search Detections (PB)`.
 
 The following screenshot shows an example of the action inputs for the playbook:
 
@@ -2294,12 +2291,12 @@ The function provides the following functionality.
 * Retrieves a list of devices on the in the ExtraHop environment based on the parameters provided.
 * A filter in JSON is used to target the information retrieved.
 
-An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Devices`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Devices (PB)`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * The data table `Extrahop Devices` is updated.
  
-The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Search Devices`.
+The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): Search Devices (PB)`.
 
 The following screenshot shows an example of the action inputs for the playbook:
 
@@ -2532,7 +2529,7 @@ The function provides the following functionality.
 
 **_NOTE:_** Extra configuration is required to use the keylog_txt output. [Session key download](https://docs.extrahop.com/current/session-key-download/) 
 
-An example playbook that uses this SOAR function is `ExtraHop Reveal(x): search packets`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Search Packets (PB)`.
 
 * A note is added to the SOAR incident with the status of the action. 
 * An attachment in the select output format is added to the SOAR incident.
@@ -2695,7 +2692,7 @@ The function provides the following functionality.
 
 * Updates the status, resolution, ticket ID, assignee and optionally participants of an ExtraHop detection.
 
-An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Update Detection`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Update Detection (PB)`.
 
 * Closes an ExtraHop detection if the equivalent SOAR incident is closed.
 * A note is added to the SOAR incident with the status of the action.
@@ -2703,7 +2700,7 @@ An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Update 
 
 **_NOTE:_** Get or add ExtraHop detection note will fail if `Detection Tracking` is enabled on ExtraHop but the playbook should still complete.
 
-The playbook is initiated by an automatic incident menu item `ExtraHop Reveal(x): Update Detection`
+The playbook is initiated by an automatic incident menu item `ExtraHop Reveal(x): Update Detection (PB)`
 
 The following screenshot shows an example of a note added to a SOAR incident:
 
@@ -2824,13 +2821,13 @@ The function provides the following functionality.
 
 * Adds or removes devices to or from the ExtraHop watchlist of the target ExtraHop environment.
 
-An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Update Watchlist`.
+An example playbook that uses this SOAR function is `ExtraHop Reveal(x): Update Watchlist (PB)`.
 
 * Adds a device or list ExtraHop devices to the watchlist of the target ExtraHop environment.
 * Refreshes the associated row of the data table  `ExtraHop Devices`.
 * A note is added to the SOAR incident with the status of the action.
  
-The playbook is initiated by the manual data table menu item `ExtraHop Reveal(x): Assign Tag`.
+The playbook is initiated by the manual data table menu item `ExtraHop Reveal(x): Assign Tag (PB)`.
 
 The following screenshot shows an example of the action inputs for the playbook:
 
@@ -3536,8 +3533,9 @@ extrahop_detections
 | Description | `det_description` | `text` | - |
 | Detection URL | `detection_url` | `textarea` | - |
 | End time | `end_time` | `datetimepicker` | - |
-| ID | `det_id` | `text` | - |
+| Detection ID | `det_id` | `text` | - |
 | Is user created | `is_user_created` | `text` | - |
+| Mod time | `mod_time` | `datetimepicker` | - |
 | Mitre tactics | `mitre_tactics` | `textarea` | - |
 | Mitre techniques | `mitre_techniques` | `textarea` | - |
 | Participants | `participants` | `textarea` | - |
@@ -3573,7 +3571,7 @@ extrahop_devices
 | Display name | `display_name` | `text` | - |
 | DNS name | `dns_name` | `text` | - |
 | ExtraHop  ID | `extrahop_id` | `text` | ExtraHop Discovery ID |
-| ID | `devs_id` | `number` | REST API ID |
+| Device ID | `devs_id` | `number` | REST API ID |
 | IPaddr4 | `ipaddr4` | `text` | - |
 | IPaddr6 | `ipaddr6` | `text` | - |
 | Last seen time | `last_seen_time` | `datetimepicker` | - |
@@ -3645,19 +3643,19 @@ extrahop_watchlist
 ## Playbooks
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| ExtraHop Reveal(x): Add Artifact | Add Devices data table field as a SOAR artifact. | extrahop_devices | `enabled` |
-| ExtraHop Reveal(x): Assign Tag |Assign a tag to a list of devices ids for Extrahop Reveal(x). | extrahop_devices | `enabled` |
-| ExtraHop Reveal(x): Create tag | Create a new tag for  ExtraHop Reveal(x). |incident | `enabled` |
-| ExtraHop Reveal(x): Get Activity Maps | Get activity maps information from Extrahop Reveal(x) and write to the ExtraHop Activitymaps data table. | incident | `enabled` |
-| ExtraHop Reveal(x): Get Tags | Get tags information from Extrahop Reveal(x) and write to the ExtraHop Tags data table. | incident | `enabled` |
-| ExtraHop Reveal(x): Get Watchlist | Retrieve all devices that are in the watchlist from Extrahop Reveal(x) . | incident | `enabled` |
-| ExtraHop Reveal(x): Refresh Case | Refresh SOAR case with detection and device information from Extrahop Reveal(x) .|incident | `enabled` |
-| ExtraHop Reveal(x): Search Detections | Search for detections information from Extrahop Reveal(x). | incident | `enabled` |
-| ExtraHop Reveal(x): Search Devices | Search for devices information from Extrahop Reveal(x) using a filter. |incident | `enabled` |
-| ExtraHop Reveal(x): Search Packets | Search for and download packets stored on the ExtraHop Reveal(x) system and add as an attachment. Valid output types are: pcap, keylog_txt or zip.|artifact | `enabled` |
-| ExtraHop Reveal(x): Update Detection | Automatic playbook to update ExtraHop detection if the status is changed on the associated  SOAR incident. Add a resolution note to the  detection. | incident | `enabled` |
-| ExtraHop Reveal(x): Update Case | Automatic playbook to update ExtraHop SOAR case with detection information from Extrahop.| incident | `enabled` |
-| ExtraHop Reveal(x): Update Watchlist | Add or remove an ExtraHop device to or from the watchlist. | extrahop_devices | `enabledt` |
+| ExtraHop Reveal(x): Add Artifact (PB) | Add Devices data table field as a SOAR artifact. | extrahop_devices | `enabled` |
+| ExtraHop Reveal(x): Assign Tag (PB) |Assign a tag to a list of devices ids for Extrahop Reveal(x). | extrahop_devices | `enabled` |
+| ExtraHop Reveal(x): Create tag (PB) | Create a new tag for  ExtraHop Reveal(x). |incident | `enabled` |
+| ExtraHop Reveal(x): Get Activity Maps (PB) | Get activity maps information from Extrahop Reveal(x) and write to the ExtraHop Activitymaps data table. | incident | `enabled` |
+| ExtraHop Reveal(x): Get Tags (PB) | Get tags information from Extrahop Reveal(x) and write to the ExtraHop Tags data table. | incident | `enabled` |
+| ExtraHop Reveal(x): Get Watchlist (PB) | Retrieve all devices that are in the watchlist from Extrahop Reveal(x) . | incident | `enabled` |
+| ExtraHop Reveal(x): Refresh Case (PB) | Refresh SOAR case with detection and device information from Extrahop Reveal(x) .|incident | `enabled` |
+| ExtraHop Reveal(x): Search Detections (PB) | Search for detections information from Extrahop Reveal(x). | incident | `enabled` |
+| ExtraHop Reveal(x): Search Devices (PB) | Search for devices information from Extrahop Reveal(x) using a filter. |incident | `enabled` |
+| ExtraHop Reveal(x): Search Packets (PB) | Search for and download packets stored on the ExtraHop Reveal(x) system and add as an attachment. Valid output types are: pcap, keylog_txt or zip.|artifact | `enabled` |
+| ExtraHop Reveal(x): Update Detection (PB) | Automatic playbook to update ExtraHop detection if the status is changed on the associated  SOAR incident. Add a resolution note to the  detection. | incident | `enabled` |
+| ExtraHop Reveal(x): Update Case (PB) | Automatic playbook to update ExtraHop SOAR case with detection information from Extrahop.| incident | `enabled` |
+| ExtraHop Reveal(x): Update Watchlist (PB) | Add or remove an ExtraHop device to or from the watchlist. | extrahop_devices | `enabledt` |
 
 ---
 ## Templates for SOAR Cases
@@ -3769,7 +3767,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",
     "extrahop_assignee": "{{ assignee | string |soar_substitute('{"None": "None"}') }}",
     "extrahop_detection_updated": {{ epoch_now }},
-    "extrahop_update_notification": "<span style='color:red;'>The ExtraHop Detection has been updated.</span><br><div>To refresh the case run the playbook: Extrahop Reveal(x) Refresh Case.<div/>"
+    "extrahop_update_notification": "<span style='color:red;'>The ExtraHop Detection has been updated.</span><br><div>To refresh the case run the playbook: Extrahop Reveal(x): Refresh Case (PB).<div/>"
   }
 }
 ```
