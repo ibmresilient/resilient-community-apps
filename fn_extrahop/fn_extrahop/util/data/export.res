@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1683056944982,
+  "export_date": 1683129584436,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -2173,13 +2173,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 23,
+  "id": 28,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1683056942689,
+      "create_date": 1683129582597,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2188,7 +2188,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1683056942689,
+      "update_date": 1683129582597,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2770,7 +2770,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_da14a796_624e_4f7e_ac7b_568577625279\" isExecutable=\"true\" name=\"playbook_da14a796_624e_4f7e_ac7b_568577625279\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1fjylzl\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Extrahop Reveal(x) get activitymaps\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"18aa0964-745b-4329-a04b-a92f5f3fab40\"\u003e{\"inputs\":{},\"result_name\":\"get_activitymap_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fjylzl\u003c/incoming\u003e\u003coutgoing\u003eFlow_05obrjo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1fjylzl\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_03zfxza\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ExtraHop: Write activity map data to data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"8e4eedec-d8b6-4e09-9449-d147dfa808c3\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05obrjo\u003c/incoming\u003e\u003coutgoing\u003eFlow_03zfxza\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05obrjo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_03zfxza\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_da14a796_624e_4f7e_ac7b_568577625279\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03zfxza\" id=\"Flow_03zfxza_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05obrjo\" id=\"Flow_05obrjo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fjylzl\" id=\"Flow_1fjylzl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1682614137208,
@@ -2822,7 +2822,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683043398099,
+      "last_modified_time": 1683125153596,
       "local_scripts": [
         {
           "actions": [],
@@ -2833,12 +2833,12 @@
           "id": 18,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682614137295,
+          "last_modified_time": 1683125149721,
           "name": "ExtraHop: Write activity map data to data table",
           "object_type": "incident",
           "playbook_handle": "extrahop_rx_get_activity_maps",
           "programmatic_name": "extrahop_rx_get_activity_maps_extrahop_write_activity_map_data_to_data_table",
-          "script_text": "##  ExtraHop - pb_extrahop_rx_get_activitymaps post processing script ##\n#  Globals\nFN_NAME = \"funct_extrahop_rx_get_activitymaps\"\nPB_NAME = \"Extrahop Reveal(x): Get Activitymaps\"\nresults = playbook.functions.results.get_activitymap_results\nCONTENT = results.get(\"content\", {})\nINPUTS = results.get(\"inputs\", {})\nQUERY_EXECUTION_DATE = results[\"metrics\"][\"timestamp\"]\nDATA_TABLE = \"extrahop_activitymaps\"\nDATA_TBL_FIELDS = [\"ams_description\", \"ams_id\", \"mode\", \"ams_name\", \"owner\", \"rights\", \"short_code\",\n                   \"show_alert_status\", \"walks\", \"weighting\"]\n# Processing\ndef main():\n    note_text = \u0027\u0027\n    if CONTENT:\n        ams = CONTENT.get(\"result\")\n        note_text = \"ExtraHop Reveal(x): Playbook \u003cb\u003e{0}\u003c/b\u003e: There were \u003cb\u003e{1}\u003c/b\u003e Activitymaps returned for SOAR \" \\\n                    \"function \u003cb\u003e{2}\u003c/b\u003e with parameters \u003cb\u003e{3}\u003c/b\u003e.\".format(PB_NAME, len(ams), FN_NAME, \", \".join(\"{}:{}\".format(k, v) for k, v in INPUTS.items()))\n        if ams:\n            for am in ams:\n                newrow = incident.addRow(DATA_TABLE)\n                newrow.query_execution_date = QUERY_EXECUTION_DATE\n                newrow.mod_time = am.get(\"mod_time\", None)\n                for f1 in DATA_TBL_FIELDS:\n                    f2 = f1\n                    if f1.startswith(\"ams_\"):\n                        f2 = f1.split(\u0027_\u0027, 1)[1]\n                    if am[f2] is None:\n                        newrow[f1] = am[f2]\n                    if isinstance(am[f2], list):\n                        if f1 in [\"walks\"]:\n                            obj_cnt = 0\n                            tbl = u\u0027\u0027\n                            for w in am[f2]:\n                                for kw, vw in w.items():\n                                    if kw == \"origins\":\n                                        tbl += \"\u003cdiv\u003e\u003cb\u003eorigins:\u003c/b\u003e\u003c/div\u003e\"\n                                        for o in vw:\n                                            for k, v in o.items():\n                                                tbl += u\"\u003cdiv\u003e\u003cb\u003e\u0026emsp;{0}:\u003c/b\u003e{1}\u003c/div\u003e\".format(k, v)\n                                        tbl += \"\u003cbr\u003e\"\n                                    elif kw == \"steps\":\n                                        tbl += \"\u003cdiv\u003e\u003cb\u003esteps:\u003c/b\u003e\u003c/div\u003e\"\n                                        for s in vw:\n                                            relationships = s.get(\"relationships\")\n                                            if relationships:\n                                                tbl += \"\u003cdiv\u003e\u003cb\u003e\u0026emsp;relationships:\u003c/b\u003e\u003c/div\u003e\"\n                                                for r in relationships:\n                                                    for k, v in r.items():\n                                                        tbl += \"\u003cdiv\u003e\u003cb\u003e\u0026emsp;\u0026emsp;{0}:\u003c/b\u003e{1}\u003c/div\u003e\".format(k, v)\n                                                tbl += \"\u003cbr\u003e\"\n                                        tbl += \"\u003cbr\u003e\"\n                                    else:\n                                        tbl += \"\u003cdiv\u003e\u003cb\u003e{}:\u003c/b\u003e\u003c/div\u003e\".format(kw)\n                                        tbl += \"\u003cdiv\u003e\u003cb\u003e\u0026emsp{}\u003c/b\u003e\u003c/div\u003e\".format(vw)\n                            tbl += \"\u003cbr\u003e\"\n                            obj_cnt += 1\n                            newrow[f1] = tbl\n                        else:\n                            newrow[f1] = \"{}\".format(\", \".join(am[f2]))\n                    elif isinstance(am[f2], (bool, dict)):\n                        newrow[f1] = str(am[f2])\n                    else:\n                        newrow[f1] = \"{}\".format(am[f2])\n            note_text += \"\u003cbr\u003eThe data table \u003cb\u003e{0}\u003c/b\u003e has been updated\".format(\"Extrahop Activitymaps\")\n    else:\n        note_text += \"ExtraHop Reveal(x): Playbook \u003cb\u003e{0}\u003c/b\u003e: There was \u003cb\u003eno\u003c/b\u003e result returned while attempting \" \\\n                     \"to get activitymaps for SOAR function \u003cb\u003e{1}\u003c/b\u003e with parameters \u003cb\u003e{2}\u003c/b\u003e.\" \\\n            .format(PB_NAME, FN_NAME, \", \".join(\"{}:{}\".format(k, v) for k, v in INPUTS.items()))\n\n    incident.addNote(helper.createRichText(note_text))\n\nmain()\n",
+          "script_text": "##  ExtraHop - pb_extrahop_rx_get_activitymaps post processing script ##\n#  Globals\nFN_NAME = \"funct_extrahop_rx_get_activitymaps\"\nPB_NAME = \"Extrahop Reveal(x): Get Activity Maps\"\nresults = playbook.functions.results.get_activitymap_results\nCONTENT = results.get(\"content\", {})\nINPUTS = results.get(\"inputs\", {})\nQUERY_EXECUTION_DATE = results[\"metrics\"][\"timestamp\"]\nDATA_TABLE = \"extrahop_activitymaps\"\nDATA_TBL_FIELDS = [\"ams_description\", \"ams_id\", \"mode\", \"ams_name\", \"owner\", \"rights\", \"short_code\",\n                   \"show_alert_status\", \"walks\", \"weighting\"]\n# Processing\ndef main():\n    note_text = \u0027\u0027\n    if CONTENT:\n        ams = CONTENT.get(\"result\")\n        note_text = \"ExtraHop Reveal(x): Playbook \u003cb\u003e{0}\u003c/b\u003e: There were \u003cb\u003e{1}\u003c/b\u003e Activity Maps returned for SOAR \" \\\n                    \"function \u003cb\u003e{2}\u003c/b\u003e with parameters \u003cb\u003e{3}\u003c/b\u003e.\".format(PB_NAME, len(ams), FN_NAME, \", \".join(\"{}:{}\".format(k, v) for k, v in INPUTS.items()))\n        if ams:\n            for am in ams:\n                newrow = incident.addRow(DATA_TABLE)\n                newrow.query_execution_date = QUERY_EXECUTION_DATE\n                newrow.mod_time = am.get(\"mod_time\", None)\n                for f1 in DATA_TBL_FIELDS:\n                    f2 = f1\n                    if f1.startswith(\"ams_\"):\n                        f2 = f1.split(\u0027_\u0027, 1)[1]\n                    if am[f2] is None:\n                        newrow[f1] = am[f2]\n                    if isinstance(am[f2], list):\n                        if f1 in [\"walks\"]:\n                            obj_cnt = 0\n                            tbl = u\u0027\u0027\n                            for w in am[f2]:\n                                for kw, vw in w.items():\n                                    if kw == \"origins\":\n                                        tbl += \"\u003cdiv\u003e\u003cb\u003eorigins:\u003c/b\u003e\u003c/div\u003e\"\n                                        for o in vw:\n                                            for k, v in o.items():\n                                                tbl += u\"\u003cdiv\u003e\u003cb\u003e\u0026emsp;{0}:\u003c/b\u003e{1}\u003c/div\u003e\".format(k, v)\n                                        tbl += \"\u003cbr\u003e\"\n                                    elif kw == \"steps\":\n                                        tbl += \"\u003cdiv\u003e\u003cb\u003esteps:\u003c/b\u003e\u003c/div\u003e\"\n                                        for s in vw:\n                                            relationships = s.get(\"relationships\")\n                                            if relationships:\n                                                tbl += \"\u003cdiv\u003e\u003cb\u003e\u0026emsp;relationships:\u003c/b\u003e\u003c/div\u003e\"\n                                                for r in relationships:\n                                                    for k, v in r.items():\n                                                        tbl += \"\u003cdiv\u003e\u003cb\u003e\u0026emsp;\u0026emsp;{0}:\u003c/b\u003e{1}\u003c/div\u003e\".format(k, v)\n                                                tbl += \"\u003cbr\u003e\"\n                                        tbl += \"\u003cbr\u003e\"\n                                    else:\n                                        tbl += \"\u003cdiv\u003e\u003cb\u003e{}:\u003c/b\u003e\u003c/div\u003e\".format(kw)\n                                        tbl += \"\u003cdiv\u003e\u003cb\u003e\u0026emsp{}\u003c/b\u003e\u003c/div\u003e\".format(vw)\n                            tbl += \"\u003cbr\u003e\"\n                            obj_cnt += 1\n                            newrow[f1] = tbl\n                        else:\n                            newrow[f1] = \"{}\".format(\", \".join(am[f2]))\n                    elif isinstance(am[f2], (bool, dict)):\n                        newrow[f1] = str(am[f2])\n                    else:\n                        newrow[f1] = \"{}\".format(am[f2])\n            note_text += \"\u003cbr\u003eThe data table \u003cb\u003e{0}\u003c/b\u003e has been updated\".format(\"Extrahop Activitymaps\")\n    else:\n        note_text += \"ExtraHop Reveal(x): Playbook \u003cb\u003e{0}\u003c/b\u003e: There was \u003cb\u003eno\u003c/b\u003e result returned while attempting \" \\\n                     \"to get activitymaps for SOAR function \u003cb\u003e{1}\u003c/b\u003e with parameters \u003cb\u003e{2}\u003c/b\u003e.\" \\\n            .format(PB_NAME, FN_NAME, \", \".join(\"{}:{}\".format(k, v) for k, v in INPUTS.items()))\n\n    incident.addNote(helper.createRichText(note_text))\n\nmain()\n",
           "tags": [],
           "uuid": "8e4eedec-d8b6-4e09-9449-d147dfa808c3"
         }
@@ -2871,7 +2871,7 @@
       "tags": [],
       "type": "default",
       "uuid": "da14a796-624e-4f7e-ac7b-568577625279",
-      "version": 6
+      "version": 7
     },
     {
       "activation_type": "manual",
@@ -3212,7 +3212,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
+        "content_version": 6,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff\" isExecutable=\"true\" name=\"playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_12g9q7h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_12g9q7h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_9\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"##  ExtraHop - pb_extrahop_rx_search_detections pre processing script ##\\n# funct_extrahop_rx_get_detections\\n# Some of the search parameters cannot be used if a single detection ID is specifiedself.\\n# Those parameters are listed in search_filters\\nsearch_filters =  [ \\n    \\\"extrahop_detection_risk_score_min\\\", \\\"extrahop_detection_category\\\", \\n    \\\"extrahop_detection_types\\\", \\\"extrahop_detection_assignee\\\", \\n    \\\"extrahop_detection_ticket_id\\\", \\\"extrahop_detection_status\\\", \\n    \\\"extrahop_detection_resolution\\\"\\n]\\n\\n\\nfor p in search_filters:\\n    if hasattr(playbook.inputs, p) and playbook.inputs.get(p):\\n        raise ValueError(\\\"A search filter {0} and Detection ID are not allowed at the same time.\\\".format(p))\\n\\ninputs.extrahop_detection_id = playbook.inputs.extrahop_detection_id\\n\\nif playbook.inputs.extrahop_limit:\\n    inputs.extrahop_limit = playbook.inputs.extrahop_limit\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detections_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1nj8k3k\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xdfy3x\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cexclusiveGateway default=\"Flow_1ih6tfv\" id=\"ConditionPoint_4\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_18e2kku\u003c/incoming\u003e\u003coutgoing\u003eFlow_1nj8k3k\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1ih6tfv\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Extrahop Reveal(x) search detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b70037a5-fcaf-4e78-a1e2-6acdc4dff239\"\u003e{\"inputs\":{},\"pre_processing_script\":\"##  ExtraHop - wf_extrahop_rx_search_detections pre processing script ##\\n# Read CATEGORY_MAP and TYPE_MAP from workflow propertyself. \\n# Reverse the dict keys and values\\nCATEGORY_MAP = {v: k for k, v in playbook.properties.category_map.items()}\\nTYPE_MAP = {v: k for k, v in playbook.properties.type_map.items()}\\nDOT_PARAMS = [\\n    \\\"me\\\",\\n    \\\"none\\\"\\n]\\n\\n\\ndef get_prop(prop, type=None):\\n    if prop:\\n        if isinstance(prop, int):\\n            return prop\\n        elif isinstance(prop, list):\\n            return [\u0027{}\u0027.format(\u0027.\u0027 + i if i in DOT_PARAMS else i) for i in prop]\\n        else:\\n            result = \u0027{}\u0027.format(\u0027.\u0027 + prop if prop in DOT_PARAMS else prop)\\n        if type == \\\"list\\\":\\n            return [result]\\n\\n        return result\\n\\n    else:\\n        return None\\n\\n\\nfilter = {}\\nsearch_filter = {}\\ncategory = None\\ndetection_types = None\\nif playbook.inputs.extrahop_detection_category:\\n    category = CATEGORY_MAP[playbook.inputs.extrahop_detection_category]\\nif hasattr(playbook.inputs, \\\"extrahop_detection_types\\\"):\\n    detection_types = [TYPE_MAP[d] for d in playbook.inputs.extrahop_detection_types]\\n\\nfilter_props = {\\n    \\\"risk_score_min\\\": get_prop(playbook.inputs.extrahop_detection_risk_score_min),\\n    \\\"types\\\": get_prop(detection_types),\\n    \\\"category\\\": get_prop(category),\\n    \\\"assignee\\\": get_prop(playbook.inputs.extrahop_detection_assignee, \\\"list\\\"),\\n    \\\"ticket_id\\\": get_prop(playbook.inputs.extrahop_detection_ticket_id, \\\"list\\\"),\\n    \\\"status\\\": get_prop(playbook.inputs.get(\\\"extrahop_detection_status\\\") if hasattr(playbook.inputs, \\\"extrahop_detection_status\\\") else None),\\n    \\\"resolution\\\": get_prop(playbook.inputs.get(\\\"extrahop_detection_resolution\\\") if hasattr(playbook.inputs, \\\"extrahop_detection_resolution\\\") else None)\\n}\\n\\nfilter = {k: v for k, v in filter_props.items() if v}\\n\\nif filter:\\n    if playbook.properties.extrahop_detection_id:\\n        raise ValueError(\\\"The search filter and Detection ID are not allowed at the same time.\\\")\\n\\n    search_filter = {\\n        \\\"filter\\\": filter\\n    }\\n    inputs.extrahop_search_filter = str(search_filter).replace(\\\"\u0027\\\", \u0027\\\"\u0027)\\n\\nif playbook.inputs.extrahop_active_from:\\n    inputs.extrahop_active_from = playbook.inputs.extrahop_active_from\\nif playbook.inputs.extrahop_active_until:\\n    inputs.extrahop_active_until = playbook.inputs.extrahop_active_until\\nif playbook.inputs.extrahop_limit:\\n    inputs.extrahop_limit = playbook.inputs.extrahop_limit\\nif playbook.inputs.extrahop_offset:\\n    inputs.extrahop_offset = playbook.inputs.extrahop_offset\\nif playbook.inputs.extrahop_update_time:\\n    inputs.extrahop_update_time = playbook.inputs.extrahop_update_time\\nif playbook.inputs.extrahop_mod_time:\\n    inputs.extrahop_mod_time = playbook.inputs.extrahop_mod_time\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_detections_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ih6tfv\u003c/incoming\u003e\u003coutgoing\u003eFlow_079lkci\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write Detection to Detections Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c4c8659c-d796-4f23-8b2b-39140cbdcb57\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xdfy3x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1samx6c\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1xdfy3x\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_6\"/\u003e\u003cendEvent id=\"EndPoint_7\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1samx6c\u003c/incoming\u003e\u003cincoming\u003eFlow_0aebqau\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1samx6c\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_7\"/\u003e\u003cscriptTask id=\"ScriptTask_8\" name=\"ExtraHop: Write Search Detections results to Detections data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"dbfd3d53-b97b-493d-aa0f-96a7cbd3014d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_079lkci\u003c/incoming\u003e\u003coutgoing\u003eFlow_0aebqau\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_079lkci\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_8\"/\u003e\u003csequenceFlow id=\"Flow_0aebqau\" sourceRef=\"ScriptTask_8\" targetRef=\"EndPoint_7\"/\u003e\u003cscriptTask id=\"ScriptTask_9\" name=\"ExtraHop script: detection property helper\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e934b42f-f5c5-4117-97ba-e07cfbba59c5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12g9q7h\u003c/incoming\u003e\u003coutgoing\u003eFlow_18e2kku\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_18e2kku\" sourceRef=\"ScriptTask_9\" targetRef=\"ConditionPoint_4\"/\u003e\u003csequenceFlow id=\"Flow_1nj8k3k\" name=\"ExtraHop: Test Detection ID is set\" sourceRef=\"ConditionPoint_4\" targetRef=\"ServiceTask_3\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test Detection ID is set\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"if playbook.inputs.extrahop_detection_id:\\n  result = True\\nelse:\\n  result = False\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_1ih6tfv\" name=\"Else\" sourceRef=\"ConditionPoint_4\" targetRef=\"ServiceTask_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ih6tfv\" id=\"Flow_1ih6tfv_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"346\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"377\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"377\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"408\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"803\" y=\"359\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nj8k3k\" id=\"Flow_1nj8k3k_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"346\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"408\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"75\" x=\"588\" y=\"360\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18e2kku\" id=\"Flow_18e2kku_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"294\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0aebqau\" id=\"Flow_0aebqau_di\"\u003e\u003comgdi:waypoint x=\"900\" y=\"612\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"638\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"638\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"664\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_079lkci\" id=\"Flow_079lkci_di\"\u003e\u003comgdi:waypoint x=\"900\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"528\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1samx6c\" id=\"Flow_1samx6c_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"612\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"640\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"640\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"664\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xdfy3x\" id=\"Flow_1xdfy3x_di\"\u003e\u003comgdi:waypoint x=\"510\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"528\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12g9q7h\" id=\"Flow_12g9q7h_di\"\u003e\u003comgdi:waypoint x=\"729\" y=\"106\"/\u003e\u003comgdi:waypoint x=\"729\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"635\" y=\"54\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"411.5\" y=\"408.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_4\" id=\"ConditionPoint_4_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"607.5\" y=\"294.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"801.5\" y=\"408.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"411.5\" y=\"528.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_7\" id=\"EndPoint_7_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"653.5\" y=\"664.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_8\" id=\"ScriptTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"801.5\" y=\"528.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_9\" id=\"ScriptTask_9_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"631\" y=\"157.64999389648438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1682614138723,
@@ -3232,7 +3232,7 @@
       "field_type_handle": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff",
       "fields_type": {
         "actions": [],
-        "display_name": "ExtraHop Reveal(x): Search Detections",
+        "display_name": "ExtraHop Reveal(x): Search Detections (PB)",
         "export_key": "playbook_cfc50f7d_71b7_449f_a9cd_69f5d04a75ff",
         "fields": {
           "extrahop_active_from": {
@@ -3493,7 +3493,7 @@
             "tags": [],
             "templates": [],
             "text": "Detection ID",
-            "tooltip": "Optional: ExtraHop Detection ID. Note: If empty and no filter set, all detections will be returned.",
+            "tooltip": "ExtraHop Detection ID. Note: Search detection by either Detection ID (above) or the filter fields (below.) If Detection ID field is empty and no filter set, all ExtraHop detections will be returned.",
             "type_id": 1024,
             "uuid": "68dfde82-2777-44ff-9b1c-66206e6cf4fb",
             "values": []
@@ -7735,7 +7735,7 @@
             "tags": [],
             "templates": [],
             "text": "Update time",
-            "tooltip": "(Optional) Return detections that were updated on or after the specified date, expressed in milliseconds since the epoch.",
+            "tooltip": "(Optional) Returns detections related to events that occurred after the specified date, expressed in milliseconds since the epoch. Note that ExtraHop Machine Learning Services analyze historical data to generate detections, and so there is a time delay between when the events that cause those detections occur and when the detections are generated. If you search for detections in the same update_time window multiple times, the later search might return detections that were not returned by the earlier search.",
             "type_id": 1024,
             "uuid": "94a7df6f-7c75-42f5-8d37-a2173e9d1b9c",
             "values": []
@@ -7770,7 +7770,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683043481293,
+      "last_modified_time": 1683117542722,
       "local_scripts": [
         {
           "actions": [],
@@ -7986,7 +7986,7 @@
       "tags": [],
       "type": "default",
       "uuid": "cfc50f7d-71b7-449f-a9cd-69f5d04a75ff",
-      "version": 8
+      "version": 10
     },
     {
       "activation_type": "manual",
@@ -9768,7 +9768,7 @@
   "types": [
     {
       "actions": [],
-      "display_name": "ExtraHop Activitymaps",
+      "display_name": "ExtraHop Activity Maps",
       "export_key": "extrahop_activitymaps",
       "fields": {
         "ams_description": {
@@ -10206,7 +10206,7 @@
           "tags": [],
           "templates": [],
           "text": "Appliance ID",
-          "tooltip": "",
+          "tooltip": "The identifier for a sensor.",
           "type_id": 1013,
           "uuid": "e07d8028-42a2-4e38-8b55-06485e4aba47",
           "values": [],
@@ -10502,10 +10502,10 @@
         },
         "mod_time": {
           "allow_default_value": false,
-          "blank_option": false,
+          "blank_option": true,
           "calculated": false,
           "changeable": true,
-          "chosen": false,
+          "chosen": true,
           "default_chosen_by_server": false,
           "deprecated": false,
           "export_key": "extrahop_detections/mod_time",
@@ -10526,7 +10526,7 @@
           "tags": [],
           "templates": [],
           "text": "Mod time",
-          "tooltip": "",
+          "tooltip": "Returns detections that were updated after the specified date, expressed in milliseconds since the epoch.",
           "type_id": 1013,
           "uuid": "3bb1af84-faf2-4e89-a0ca-a677c39aa9b0",
           "values": [],
@@ -10886,10 +10886,10 @@
         },
         "update_time": {
           "allow_default_value": false,
-          "blank_option": false,
+          "blank_option": true,
           "calculated": false,
           "changeable": true,
-          "chosen": false,
+          "chosen": true,
           "default_chosen_by_server": false,
           "deprecated": false,
           "export_key": "extrahop_detections/update_time",
@@ -10910,7 +10910,7 @@
           "tags": [],
           "templates": [],
           "text": "Update time",
-          "tooltip": "",
+          "tooltip": "Returns detections related to events that occurred after the specified date, expressed in milliseconds since the epoch. Note that ExtraHop Machine Learning Services analyze historical data to generate detections, and so there is a time delay between when the events that cause those detections occur and when the detections are generated. If you search for detections in the same update_time window multiple times, the later search might return detections that were not returned by the earlier search.",
           "type_id": 1013,
           "uuid": "39aae273-6425-4e18-8dbe-9c3ed08517c5",
           "values": [],
