@@ -3,16 +3,24 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
     },
     "reason": {},
-    "content": {},
-    "raw": {
-      "type": "string"
+    "content": {
+      "type": "object",
+      "properties": {
+        "user_dn": {
+          "type": "string"
+        },
+        "ldap_new_password": {
+          "type": "string"
+        }
+      }
     },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -22,9 +30,7 @@
         "ldap_dn": {
           "type": "string"
         },
-        "ldap_new_password": {
-          "type": "string"
-        },
+        "ldap_new_password": {},
         "ldap_return_new_password": {
           "type": "boolean"
         },
@@ -55,9 +61,6 @@
           "type": "string"
         }
       }
-    },
-    "user_dn": {
-      "type": "string"
     }
   }
 }
