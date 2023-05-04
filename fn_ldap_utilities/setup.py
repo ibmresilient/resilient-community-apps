@@ -29,7 +29,8 @@ setup(
     long_description="SOAR components to allow reading and manipulation of your LDAP Server'",
     install_requires=[
         'resilient_circuits>=46.0.0',
-        'ldap3>=2.0.0'
+        'ldap3>=2.0.0',
+        'requests<2.30.0'
     ],
     packages=find_packages(),
     include_package_data=True,
