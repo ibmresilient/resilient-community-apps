@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v48.1.4243
+# Generated with resilient-sdk v48.2.4321
 
 """Generate the Resilient customizations required for fn_extrahop"""
 
