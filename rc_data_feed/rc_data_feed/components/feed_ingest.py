@@ -35,7 +35,7 @@ class PluginPool():
         self.workspaces = workspaces
 
         # double the number of threads for handling event messages
-        thread_pool_size = self.num_workers*2
+        thread_pool_size = int(self.num_workers*1.5) # increase threads by 50%
         LOG.info(f"ThreadPool size: {thread_pool_size}")
         self.pool = multiprocessing.pool.ThreadPool(thread_pool_size)
 
