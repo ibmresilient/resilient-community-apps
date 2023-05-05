@@ -437,7 +437,7 @@ class Reload(object):
                     try:
                         type_info = type_info_index.get(object_type, None)  # datatables will not have a type_info object at this time
 
-                        sync_count = self.lookup[object_type](self.plugin_pool.rest_client_helper, inc_id, type_info)
+                        sync_count = self.lookup[object_type](inc_id, type_info)
                         LOG.debug("inc_id: %s %s: %s", inc_id, object_type, sync_count)
                     except AttributeError:
                         LOG.error("Query error for synchronization method: %s", object_type)
