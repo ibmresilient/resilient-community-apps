@@ -4,7 +4,7 @@ FROM registry.access.redhat.com/ubi8/python-39:latest
 # rc-data-feeder will build plugins from a base image
 #FROM resilient/rc-data-feeder-base
 ARG APPLICATION=rc_data_feed
-ARG RESILIENT_CIRCUITS_VERSION=39
+ARG RESILIENT_CIRCUITS_VERSION=48
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
