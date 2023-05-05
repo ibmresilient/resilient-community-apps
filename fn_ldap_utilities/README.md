@@ -22,13 +22,14 @@
 - [Function - LDAP Utilities: Toggle Access](#function---ldap-utilities-toggle-access)
 - [Function - LDAP Utilities: Update](#function---ldap-utilities-update)
 - [Data Table - LDAP Query results](#data-table---ldap-query-results)
-- [Rules](#rules)
+- [Playbooks](#playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.0 | 04/2023 | <ul><li>Update search function to perform a paged search.</li><li>Fix bug in set password function.</li><li>Convert all Rules and Workflows to Playbooks.</li></ul>
 | 2.0.1 | 07/2022 | Fix helper.py so that ldap_connect_timeout is not required in app.config |
 | 2.0.0 | 04/2022 | <ul><li>Add ability to have multiple LDAP Domains</li><li>New rule to add users, groups, organizational units, etc.</li></ul>|
 | 1.1.1 | 07/2021 | Support added for App Host |
@@ -65,13 +66,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `42.0.7058`.
+* SOAR platform >= `46.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `42.0.7058`.
+* SOAR platform >= `46.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=42.0.0`.
+* Integration server is running `resilient_circuits>=46.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -101,10 +102,10 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does not support a proxy server.
 
 ### Python Environment
-Python 3.6 and Python 3.9 are supported.
+Python 3.6 and greater are supported.
 Additional package dependencies may exist for each of these packages:
 * ldap3>=2.0.0
-* resilient_circuits>=42.0.0
+* resilient_circuits>=46.0.0
 
 ---
 
@@ -143,7 +144,7 @@ Two incident fields have been added, `ldap_domain_name` and `ldap_base_dn`. If t
 
 ---
 
-## Function - LDAP Utilities: Add (new to v2.0.0)
+## Function - LDAP Utilities: Add
 Add users, groups, organizational units to LDAP
 
  ![screenshot: fn-ldap-utilities-add ](./doc/screenshots/add.png)
@@ -207,13 +208,13 @@ results = {
 # If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value
 if incident.properties.ldap_domain_name:
   inputs.ldap_domain_name = incident.properties.ldap_domain_name
-# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
-if rule.properties.ldap_domain_name:
-  inputs.ldap_domain_name = rule.properties.ldap_domain_name
+# If a value is given by the user field then set ldap_domain_name to that value
+if playbook.inputs.ldap_domain_name:
+  inputs.ldap_domain_name = playbook.inputs.ldap_domain_name
 
-inputs.ldap_dn = rule.properties.ldap_user_info
-inputs.ldap_multiple_group_dn = rule.properties.ldap_groups if rule.properties.ldap_groups else '[]'
-inputs.ldap_attribute_name_values = rule.properties.ldap_attribute_name_values
+inputs.ldap_dn = playbook.inputs.ldap_user_info
+inputs.ldap_multiple_group_dn = playbook.inputs.ldap_groups if playbook.inputs.ldap_groups else '[]'
+inputs.ldap_attribute_name_values = playbook.inputs.ldap_attribute_name_values
 ```
 
 </p>
@@ -223,10 +224,12 @@ inputs.ldap_attribute_name_values = rule.properties.ldap_attribute_name_values
 <p>
 
 ```python
-if results.success:
-  incident.addNote("LDAP Add operation successful for: {}".format(results.inputs.get('ldap_dn')))
+results = playbook.functions.results.add_results
+ldap_dn = results.get('inputs', {}).get('ldap_dn')
+if results.get("success"):
+  incident.addNote(f"LDAP Add operation successful for: {ldap_dn}")
 else:
-  incident.addNote("LDAP Add operation unsuccessful for: {}. Reason: {}".format(results.inputs.get('ldap_dn'), results.reason))
+  incident.addNote(f"LDAP Add operation unsuccessful for: {ldap_dn}. Reason: {results.get('reason')}")
 ```
 
 </p>
@@ -300,15 +303,15 @@ results = {
 # inputs.ldap_multiple_group_dn = "['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']"
 
 # Both inputs must be a string representation of a List
-inputs.ldap_multiple_user_dn = rule.properties.ldap_multiple_user_dn
-inputs.ldap_multiple_group_dn = rule.properties.ldap_multiple_group_dn
+inputs.ldap_multiple_user_dn = playbook.inputs.ldap_multiple_user_dn
+inputs.ldap_multiple_group_dn = playbook.inputs.ldap_multiple_group_dn
 
 # If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value
 if incident.properties.ldap_domain_name:
   inputs.ldap_domain_name = incident.properties.ldap_domain_name
 # If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
-if rule.properties.ldap_domain_name:
-  inputs.ldap_domain_name = rule.properties.ldap_domain_name
+if playbook.inputs.ldap_domain_name:
+  inputs.ldap_domain_name = playbook.inputs.ldap_domain_name
 ```
 
 </p>
@@ -318,13 +321,13 @@ if rule.properties.ldap_domain_name:
 <p>
 
 ```python
-# If the function is successful in adding the users to said groups,
-# a note is added to the incident
-
-if (results.success):
-  noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Add User(s) to Group(s) <u>complete</u>:</i>
-                    <b>User(s):</b> {}
-                    <b>Group(s):</b> {}""".format(results.inputs.ldap_multiple_user_dn, results.inputs.ldap_multiple_group_dn)
+results = playbook.functions.results.add_groups_results
+inputs = results.get('inputs', {})
+# If the function is successful in adding the users to said groups, a note is added to the incident
+if results.get("success"):
+  noteText = f"""<br><i style="color: #979ca3"> LDAP Utilities: Add User(s) to Group(s) <u>complete</u>:</i>
+                <b>User(s):</b> {inputs.get('ldap_multiple_user_dn')}
+                <b>Group(s):</b> {inputs.get('ldap_multiple_group_dn')}"""
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -400,15 +403,15 @@ results = {
 # inputs.ldap_multiple_group_dn = "['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']"
 
 # Both inputs must be a string representation of a List
-inputs.ldap_multiple_user_dn = rule.properties.ldap_multiple_user_dn
-inputs.ldap_multiple_group_dn = rule.properties.ldap_multiple_group_dn
+inputs.ldap_multiple_user_dn = playbook.inputs.ldap_multiple_user_dn
+inputs.ldap_multiple_group_dn = playbook.inputs.ldap_multiple_group_dn
 
 # If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value
 if incident.properties.ldap_domain_name:
   inputs.ldap_domain_name = incident.properties.ldap_domain_name
 # If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
-if rule.properties.ldap_domain_name:
-  inputs.ldap_domain_name = rule.properties.ldap_domain_name
+if playbook.inputs.ldap_domain_name:
+  inputs.ldap_domain_name = playbook.inputs.ldap_domain_name
 ```
 
 </p>
@@ -418,17 +421,17 @@ if rule.properties.ldap_domain_name:
 <p>
 
 ```python
-# If the function is successful in removing the users from said groups,
-# a note is added to the incident
-
-if (results.success):
-  if not results.users_dn:
+results = playbook.functions.results.remove_groups_results
+inputs = results.get("inputs", {})
+# If the function is successful in removing the users from said groups, a note is added to the incident
+if results.get("success"):
+  if not results.get("content", {}).get("users_dn"):
     noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
                   <b>No users found. Check inputted user DN's</b>"""
   else:
-    noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
-                    <b>User(s):</b> {}
-                    <b>Group(s):</b> {}""".format(results.inputs.ldap_multiple_user_dn, results.inputs.ldap_multiple_group_dn)
+    noteText = f"""<br><i style="color: #979ca3"> LDAP Utilities: Remove User from Group(s) <u>complete</u>:</i>
+                  <b>User(s):</b> {inputs.get('ldap_multiple_user_dn')}
+                  <b>Group(s):</b> {inputs.get('ldap_multiple_group_dn')}"""
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -607,18 +610,16 @@ results = {
 <p>
 
 ```python
-##  LDAP Utilities: Search - pre-processing script ##
-
 # If search filters are given
-if rule.properties.ldap_search_filter:
-  inputs.ldap_search_filter = rule.properties.ldap_search_filter
+if playbook.inputs.ldap_search_filter:
+  inputs.ldap_search_filter = playbook.inputs.ldap_search_filter
 # If filters not given then set them to example filters
 else:
   inputs.ldap_search_filter = "(&(objectClass=person)(mail=*%ldap_param%))"
 
 # If search attributes are given
-if rule.properties.ldap_search_attributes:
-  inputs.ldap_search_attributes = rule.properties.ldap_search_attributes
+if playbook.inputs.ldap_search_attributes:
+  inputs.ldap_search_attributes = playbook.inputs.ldap_search_attributes
 # If search attributes not given then set them to example attributes
 else:
   inputs.ldap_search_attributes = "*"
@@ -628,15 +629,15 @@ inputs.ldap_search_param = artifact.value
 if incident.properties.ldap_base_dn:
   inputs.ldap_search_base = incident.properties.ldap_base_dn
 # If a value is given in the rule ldap_search_base field then set ldap_search_base to that value
-if rule.properties.ldap_search_base:
-  inputs.ldap_search_base = rule.properties.ldap_search_base
+if playbook.inputs.ldap_search_base:
+  inputs.ldap_search_base = playbook.inputs.ldap_search_base
 
 # If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value
 if incident.properties.ldap_domain_name:
   inputs.ldap_domain_name = incident.properties.ldap_domain_name
 # If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
-if rule.properties.ldap_domain_name:
-  inputs.ldap_domain_name = rule.properties.ldap_domain_name
+if playbook.inputs.ldap_domain_name:
+  inputs.ldap_domain_name = playbook.inputs.ldap_domain_name
 ```
 
 </p>
@@ -646,54 +647,22 @@ if rule.properties.ldap_domain_name:
 <p>
 
 ```python
-##  LDAP Utilities: Search - post-processing script ##
-# Example of expected results - OpenLdap
-"""
-'entries': [{"dn": "uid=newton,dc=example,dc=com", "telephoneNumber": [], "uid": ["newton"],
-    "mail": ["newton@ldap.forumsys.com"], "sn": ["Newton"], "cn": ["Isaac Newton"]},
-    {"dn": "uid=einstein,dc=example,dc=com", "telephoneNumber": ["314-159-2653"], "uid": ["einstein"],
-    "mail": ["einstein@ldap.forumsys.com"], "sn": ["Einstein"], "cn": ["Albert Einstein"]}]
-"""
-
-# Example of expected results - ActiveDirectory
-"""
-'entries': [{u'dn': u'CN=Isaac Newton,OU=IBMResilient,DC=ibm,DC=resilient,DC=com',
-              u'telephoneNumber': u'314-159-2653', u'cn': u'Isaac Newton',
-              u'mail': u'einstein@resilient.ibm.com', u'sn': u'Newton'}]
-"""
-
-#  Globals
+results = playbook.functions.results.search_results
 ENTRY_TO_DATATABLE_MAP = {
-   "uid": "uid",
-   "cn": "fullname",
-   "sn": "surname",
-   "mail": "email_address",
-   "telephoneNumber": "telephone_number"
+  "uid": "uid",
+  "cn": "fullname",
+  "sn": "surname",
+  "mail": "email_address",
+  "telephoneNumber": "telephone_number"
 }
 
 # Processing if the function is a success
-if(results.success):
-  for entry in results.entries:
-    if not entry:
-      break
-    # Add Row
-    row = incident.addRow("ldap_query_results")
+if results.get("success"):
+  for entry in results.get("content", {}).get("entries"):
+    row = incident.addRow("ldap_query_results") # Add Row
     for k in ENTRY_TO_DATATABLE_MAP:
-      if not entry[k]:
-        row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
-      else:
-        try:
-          # If 'entry[k]' is empty
-          if not len(entry[k]):
-            row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
-          # Handle for Active Directory
-          elif isinstance(entry[k], unicode):
-            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k]
-          # Handle for OpenLdap
-          else:
-            row[ENTRY_TO_DATATABLE_MAP[k]] = entry[k][0]
-        except IndexError:
-          row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A"
+      # If Handle for Active Directory else Handle for OpenLdap
+      row[ENTRY_TO_DATATABLE_MAP[k]] = "N/A" if not entry.get(k) else ",".join(entry.get(k)) if isinstance(entry[k], list) else entry.get(k)
 ```
 
 </p>
@@ -757,13 +726,16 @@ results = {
 <p>
 
 ```python
+results = playbook.functions.results.search_results
 # Once the LDAP Utilities: Search completes, get the DN of the first entry
 # which will be the DN of the account you want to set a Set a New Password for
-inputs.ldap_domain_name = workflow.properties.search_output.inputs.ldap_domain_name
-inputs.ldap_dn = workflow.properties.search_output.content[0]["dn"]
-inputs.ldap_new_password = rule.properties.ldap_user_new_password
-inputs.ldap_new_auto_password_len = rule.properties.ldap_new_auto_password_length
-inputs.ldap_return_new_password = rule.properties.ldap_return_new_password
+inputs.ldap_domain_name = results.get("inputs", {}).get("ldap_domain_name")
+inputs.ldap_dn = results.get("content", {}).get("entries", [])[0]["dn"]
+inputs.ldap_new_password = playbook.inputs.ldap_user_new_password
+pass_len = playbook.inputs.ldap_new_auto_password_length
+if pass_len:
+  inputs.ldap_new_auto_password_len = pass_len
+inputs.ldap_return_new_password = playbook.inputs.ldap_return_new_password
 ```
 
 </p>
@@ -773,15 +745,15 @@ inputs.ldap_return_new_password = rule.properties.ldap_return_new_password
 <p>
 
 ```python
-# If the function is successful in changing the users password,
-# a note is added to the incident
-
-if (results.success):
-  noteText = """<br><i style="color: #979ca3"> LDAP MultiDomain Utilities: Set Password workflow <u>complete</u>:</i>
-                    A New Password has been set for:
-                    <b>Email:</b> <u style="color: #7fb0ff">{}</u>
-                    <b>DN:</b> '{}'
-                    <b>New password:</b> '{}'""".format(artifact.value, results.inputs.ldap_dn, results.inputs.ldap_new_password)
+results = playbook.functions.results.pass_results
+content = results.get("content", {})
+# If the function is successful in changing the users password, a note is added to the incident
+if results.get("success"):
+  noteText = f"""<br><i style="color: #979ca3"> LDAP MultiDomain Utilities: Set Password workflow <u>complete</u>:</i>
+                A New Password has been set for:
+                <b>Email:</b> <u style="color: #7fb0ff">{artifact.value}</u>
+                <b>DN:</b> '{content.get('user_dn')}'
+                <b>New password:</b> '{content.get('ldap_new_password')}'"""
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -847,11 +819,12 @@ results = {
 <p>
 
 ```python
+results = playbook.functions.results.search_results
 # Once the LDAP Utilities: Search completes, get the DN of the first entry
 # which will be the DN of the account you want to set a Toggle Access for
-inputs.ldap_domain_name = workflow.properties.search_output.inputs.ldap_domain_name
-inputs.ldap_dn = workflow.properties.search_output.content[0]["dn"]
-inputs.ldap_toggle_access = rule.properties.ldap_toggle_access
+inputs.ldap_domain_name = results.get("inputs", {}).get("ldap_domain_name")
+inputs.ldap_dn = results.get("content", {}).get("entries", [])[0]["dn"]
+inputs.ldap_toggle_access = playbook.inputs.ldap_toggle_access
 ```
 
 </p>
@@ -861,17 +834,18 @@ inputs.ldap_toggle_access = rule.properties.ldap_toggle_access
 <p>
 
 ```python
-# If the function is successful in updating users access rights,
-# a note is added to the incident
-
-if (results.success):
+results = playbook.functions.results.toggle_results
+content = results.get("content", {})
+# If the function is successful in updating users access rights, a note is added to the incident
+if results.get("success"):
   color = "#45bc27" #green
-  if (results.inputs.ldap_toggle_access.get("name") == "Disabled"):
+  if (content.get("user_status") == "Disable"):
     color = "#ff402b" #red
-  noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
-                    <b>Email:</b> <u style="color: #7fb0ff">{}</u>
-                    <b>Status:</b> <b style="color: {}">{}</b>
-                    <b>DN:</b> '{}'""".format(artifact.value, color, results.inputs.ldap_toggle_access.name, results.inputs.ldap_dn)
+
+  noteText = f"""<br><i style="color: #979ca3"> LDAP Utilities: Toggle Access workflow <u>complete</u>:</i>
+                <b>Email:</b> <u style="color: #7fb0ff">{artifact.value}</u>
+                <b>Status:</b> <b style="color: {color}">{content.get('user_status')}</b>
+                <b>DN:</b> '{content.get('user_dn')}'"""
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -939,13 +913,14 @@ results = {
 <p>
 
 ```python
+results = playbook.functions.results.search_results
 # Once the LDAP Utilities: Search completes, get the DN of the first entry
 # which will be the DN of the account you want to update. Then set
 # the name of the attribute to update and list the values
-inputs.ldap_domain_name = workflow.properties.search_output.inputs.ldap_domain_name
-inputs.ldap_dn = workflow.properties.search_output.content[0]["dn"]
-inputs.ldap_attribute_name = rule.properties.ldap_update_attribute_name
-inputs.ldap_attribute_values = rule.properties.ldap_attribute_update_value
+inputs.ldap_domain_name = results.get("inputs", {}).get("ldap_domain_name")
+inputs.ldap_dn = results.get("content", {}).get("entries", [])[0]["dn"]
+inputs.ldap_attribute_name = playbook.inputs.ldap_update_attribute_name
+inputs.ldap_attribute_values = playbook.inputs.ldap_attribute_update_value
 # inputs.ldap_attribute_values = "['081111111', '082222222']"
 ```
 
@@ -956,15 +931,15 @@ inputs.ldap_attribute_values = rule.properties.ldap_attribute_update_value
 <p>
 
 ```python
-# If the function is successful in updating the value of the attribute,
-# a note is added to the incident
-
-if (results.success):
-  noteText = """<br><i style="color: #979ca3"> LDAP Utilities: Update workflow <u>complete</u>:</i>
-                    An LDAP Attribute has been updated
-                    <b>Attribute:</b> {}
-                    <b>New Value(s):</b> {}
-                    <b>DN:</b> '{}'""".format(results.inputs.ldap_attribute_name, results.inputs.ldap_attribute_values, results.user_dn)
+results = playbook.functions.results.update_results
+content = results.get("content", {})
+# If the function is successful in updating the value of the attribute, a note is added to the incident
+if results.get("success"):
+  noteText = f"""<br><i style="color: #979ca3"> LDAP Utilities: Update workflow <u>complete</u>:</i>
+                An LDAP Attribute has been updated
+                <b>Attribute:</b> {content.get('attribute_name')}
+                <b>New Value(s):</b> {content.get('attribute_values')}
+                <b>DN:</b> '{content.get('user_dn')}'"""
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -993,17 +968,16 @@ ldap_query_results
 
 ---
 
-
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Example: LDAP Utilities: Add | incident | `example_ldap_utilities_add` |
-| Example: LDAP Utilities: Add User(s) to Group(s) | artifact | `example_ldap_utilities_add_users_to_groups` |
-| Example: LDAP Utilities: Remove User(s) from Group(s) | artifact | `example_ldap_utilities_remove_user_from_groups` |
-| Example: LDAP Utilities: Search | artifact | `example_ldap_utilities_search` |
-| Example: LDAP Utilities: Set Password | artifact | `example_ldap_utilities_set_password` |
-| Example: LDAP Utilities: Toggle Access | artifact | `example_ldap_utilities_toggle_access` |
-| Example: LDAP Utilities: Update | artifact | `example_ldap_utilities_update` |
+## Playbooks
+| Playbook Name | Description | Object | Status |
+| ------------- | ----------- | ------ | ------ |
+| Example: LDAP Utilities: Add | Add users, groups, organizational units to LDAP | incident | `enabled` |
+| Example: LDAP Utilities: Add User(s) to Group(s) | add multiple users to multiple groups | artifact | `enabled` |
+| Example: LDAP Utilities: Remove User(s) from Group(s) | remove multiple users from a group | artifact | `enabled` |
+| Example: LDAP Utilities: Search | runs a person query against an LDAP server using the person's email address | artifact | `enabled` |
+| Example: LDAP Utilities: Set Password | searches for a user using their email address, gets their DN and sets a new password for that user | artifact | `enabled` |
+| Example: LDAP Utilities: Toggle Access | enable/disable an Active Directory user account | artifact | `enabled` |
+| Example: LDAP Utilities: Update | updates the value of a DN's attribute with the given value(s) | artifact | `enabled` |
 
 ---
 
@@ -1048,19 +1022,24 @@ ldap_is_active_directory=False
 ldap_connect_timeout=10
 ```
 
-## Creating workflows when server/servers in app.config are labeled
-The function input field `ldap_domain_name` is required when LDAP server/servers in the app.config are labeled. In the example workflows pre-process scripts the input field `ldap_domain_name` is defined the following way,
+## Creating playbooks when server/servers in app.config are labeled
+The function input field `ldap_domain_name` is required when LDAP server/servers in the app.config are labeled. In the example playbook input scripts the input field `ldap_domain_name` is defined the following way,
 ```python
 # If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value
 if incident.properties.ldap_domain_name:
   inputs.ldap_domain_name = incident.properties.ldap_domain_name
-# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value
-if rule.properties.ldap_domain_name:
-  inputs.ldap_domain_name = rule.properties.ldap_domain_name
+# If a value is given in the playbook ldap_domain_name activation field then set ldap_domain_name to that value
+if playbook.input.ldap_domain_name:
+  inputs.ldap_domain_name = playbook.input.ldap_domain_name
 ```
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
+#### Known Errors
+1. `Expected to execute a maximum of 50,000 lines`
+This error occurs when running the search function when processing a large search result. The playbook scripts have a max execution limit of 50,000 lines of code. If you hit this limit, try to add more filters to your search to return fewer results.
+2. `The maximum number of new objects created by rules and playbooks has been exceeded`
+This error occurs when running the search function when processing a large search result.  and the playbook script tried to add more than 500 rows to a data table. The 500 object creation limit is only a limitation with playbooks and not workflows. For the time being, use a rule and workflow to avoid this error if you feel adding so many datatable rows is necessary. Alternatively, add more filters to your search to return fewer results.
 
 ### For Support
 This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.

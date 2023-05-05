@@ -1,28 +1,27 @@
 {
-  "version": "1.0",
+  "version": 2.0,
   "success": true,
   "reason": null,
-  "content": null,
-  "raw": "null",
+  "content": {
+    "users_dn": [
+      "CN=gerry,CN=Users,DC=dev,DC=co3sys,DC=com"
+    ],
+    "groups_dn": [
+      "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com"
+    ]
+  },
+  "raw": null,
   "inputs": {
     "ldap_domain_name": "Domain2",
     "ldap_multiple_group_dn": "['CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com']",
-    "ldap_multiple_user_dn": "['CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com']"
+    "ldap_multiple_user_dn": "['CN=gerry,CN=Users,DC=dev,DC=co3sys,DC=com']"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-ldap-utilities",
-    "package_version": "2.0.0",
+    "package_version": "2.1.0",
     "host": "local",
-    "execution_time_ms": 0,
-    "timestamp": "2022-05-19 15:22:53"
-  },
-  "users_dn": [
-    [
-      "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com"
-    ]
-  ],
-  "groups_dn": [
-    "CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com"
-  ]
+    "execution_time_ms": 1081,
+    "timestamp": "2023-03-30 10:57:37"
+  }
 }

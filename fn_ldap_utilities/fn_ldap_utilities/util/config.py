@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Generate a default configuration-file section for fn_ldap_utilities"""
 
 from __future__ import print_function
-
 
 def config_section_data():
     """Produce the default configuration section for app.config,

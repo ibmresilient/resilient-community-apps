@@ -3,16 +3,30 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
     },
     "reason": {},
-    "content": {},
-    "raw": {
-      "type": "string"
+    "content": {
+      "type": "object",
+      "properties": {
+        "attribute_name": {
+          "type": "string"
+        },
+        "attribute_values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "user_dn": {
+          "type": "string"
+        }
+      }
     },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
@@ -52,18 +66,6 @@
           "type": "string"
         }
       }
-    },
-    "attribute_name": {
-      "type": "string"
-    },
-    "attribute_values": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "user_dn": {
-      "type": "string"
     }
   }
 }

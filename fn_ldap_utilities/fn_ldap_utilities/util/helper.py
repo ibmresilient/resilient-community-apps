@@ -1,34 +1,17 @@
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 
 from logging import getLogger
 from ldap3 import Server, Connection, ALL, NTLM
 from enum import Enum
-import fn_ldap_utilities.util.ldap_utils as ldap_utils 
+import fn_ldap_utilities.util.ldap_utils as ldap_utils
+from resilient_lib import str_to_bool, validate_fields
 
 PACKAGE_NAME = "fn_ldap_utilities"
 LOG = getLogger(__name__)
 
-class LDAPUtilitiesHelper:
-
-    def str_to_bool(self, str):
-        """Convert unicode string to equivalent boolean value. Converts a "true" or "false" string to a boolean value , string is case insensitive."""
-        if str.lower() == 'true':
-            return True
-        elif str.lower() == 'false':
-            return False
-        else:
-            raise ValueError(f"{str} is not a boolean")
-
-    @staticmethod
-    def __get_config_option(app_configs, option_name, optional=False, placeholder=None):
-        """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
-        option = app_configs.get(option_name)
-        err = f"'{option_name}' is mandatory and is not set in app.config file. You must set this value to run this function"
-
-        if (not option or (placeholder and option == placeholder)) and not optional:
-            raise ValueError(err)
-        else:
-            return option
+class LDAPUtilitiesHelper():
 
     def get_ldap_connection(self):
         NTLM_string = "NTLM"
@@ -54,24 +37,23 @@ class LDAPUtilitiesHelper:
             SIMPLE = "SIMPLE"
             NTLM = "NTLM"
 
-        self.LDAP_SERVER = self.__get_config_option(
-            app_configs=app_configs, option_name="ldap_server", placeholder="xxx.xxx.xxx.xxx")
-        self.LDAP_PORT = int(self.__get_config_option(
-            app_configs=app_configs, option_name="ldap_port"))
-        self.LDAP_USE_SSL = self.str_to_bool(self.__get_config_option(
-            app_configs=app_configs, option_name="ldap_use_ssl"))
-        self.LDAP_AUTH_TYPE = self.__get_config_option(
-            app_configs=app_configs, option_name="ldap_auth").upper()
-        self.LDAP_USER_DN = self.__get_config_option(
-            app_configs=app_configs, option_name="ldap_user_dn", optional=True)
-        self.LDAP_USER_NTLM = self.__get_config_option(
-            app_configs=app_configs, option_name="ldap_user_ntlm", optional=True)
-        self.LDAP_PASSWORD = self.__get_config_option(
-            app_configs=app_configs, option_name="ldap_password", optional=True)
-        self.LDAP_IS_ACTIVE_DIRECTORY = self.str_to_bool(self.__get_config_option(
-            app_configs=app_configs, option_name="ldap_is_active_directory"))
-        self.LDAP_CONNECT_TIMEOUT = int(self.__get_config_option(
-            app_configs=app_configs, option_name="ldap_connect_timeout", placeholder=30))
+        validate_fields([
+            {"name": "ldap_server", "placeholder": "xxx.xxx.xxx.xxx"},
+            {"name": "ldap_port"},
+            {"name": "ldap_use_ssl"},
+            {"name": "ldap_auth"},
+            {"name": "ldap_is_active_directory"},
+        ], app_configs)
+
+        self.LDAP_SERVER = app_configs.get("ldap_server")
+        self.LDAP_PORT = int(app_configs.get("ldap_port"))
+        self.LDAP_USE_SSL = str_to_bool(app_configs.get("ldap_use_ssl"))
+        self.LDAP_AUTH_TYPE = app_configs.get("ldap_auth").upper()
+        self.LDAP_USER_DN = app_configs.get("ldap_user_dn")
+        self.LDAP_USER_NTLM = app_configs.get("ldap_user_ntlm")
+        self.LDAP_PASSWORD = app_configs.get("ldap_password")
+        self.LDAP_IS_ACTIVE_DIRECTORY = str_to_bool(app_configs.get("ldap_is_active_directory"))
+        self.LDAP_CONNECT_TIMEOUT = int(app_configs.get("ldap_connect_timeout", 30))
 
         if self.LDAP_AUTH_TYPE not in [v.value for v in SUPPORTED_LDAP_AUTH_TYPE_TYPES]:
             raise ValueError(f"Invalid value for 'ldap_auth'. '{self.LDAP_AUTH_TYPE}' is not a supported authentication method. Support methods are: {[v.value for v in SUPPORTED_LDAP_AUTH_TYPE_TYPES]}")
