@@ -1,0 +1,28 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": 0,
+    "description": "success",
+    "dn": "",
+    "message": "",
+    "referrals": null,
+    "type": "addResponse"
+  },
+  "raw": null,
+  "inputs": {
+    "ldap_domain_name": "Domain1",
+    "ldap_dn": "cn=Franky,cn=Users,dc=dev,dc=co3sys,dc=com",
+    "ldap_multiple_group_dn": "['CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com', 'CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com']",
+    "ldap_attribute_name_values": "\"objectClass\": \"user\", \"uid\": \"Franky\", \"telephoneNumber\": \"9340249504\", \"name\": \"Franky\", \"mail\": \"Franky@mail.com\", \"sn\": \"Stevens\""
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 1615,
+    "timestamp": "2023-03-30 10:41:39"
+  }
+}
