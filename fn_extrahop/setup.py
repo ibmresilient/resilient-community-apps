@@ -50,8 +50,7 @@ setup(
     """,
     install_requires=[
         "resilient-circuits>=48.0.0",
-        "retry2 ~= 0.9",
-        "urllib3~=1.26"
+        "retry2 ~= 0.9"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
