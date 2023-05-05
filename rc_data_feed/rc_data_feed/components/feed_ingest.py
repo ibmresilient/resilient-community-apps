@@ -479,7 +479,7 @@ class Reload(object):
             self.plugin_pool.send_data(type_info, inc_id, item, False, self.incl_attachment_data)
 
             # get the task notes to sync
-            self._query_task_note(self.plugin_pool.rest_client_helper, inc_id, item.get("id"), task_note_type_info)
+            self._query_task_note(inc_id, item.get("id"), task_note_type_info)
 
         return len(item_list)
 
