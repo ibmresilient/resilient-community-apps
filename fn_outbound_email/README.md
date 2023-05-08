@@ -47,10 +47,10 @@ In v2.1, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
 Each playbook has the same functionality as the previous, corresponding rule/workflow. 
 
-If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
 
 You can continue to use the rules/workflows. 
-But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
+But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 ### v2.0 Changes
 Version 2.0 represents a comprehensive set of changes to make the use of outbound email more out-the-box
