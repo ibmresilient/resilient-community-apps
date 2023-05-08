@@ -3643,9 +3643,10 @@ extrahop_watchlist
 | Extrahop Detection Link | `extrahop_detection_link` | `textarea` | `properties` | - | Link back to ExtraHop detection |
 | Extrahop Detection Updated | `extrahop_detection_updated` | `datetimepicker` | `properties` | - | Field to indicate detection has been updated |
 | Extrahop End Time | `extrahop_end_time` | `datetimepicker` | `properties` | - | - |
+| ExtraHop Participants | `extrahop_participants` | `text` | `properties` | - | - |
 | Extrahop Risk Score | `extrahop_risk_score` | `number` | `properties` | - | - |
 | Extrahop site name | `extrahop_site_name` | `text` | `properties` | - | The name of the ExtraHop appliance. |
-| Extrahop site UUID | `extrahop_site_uuid` | `text` | `properties` | - | The uuidof the ExtraHop appliance. |
+| Extrahop site UUID | `extrahop_site_uuid` | `text` | `properties` | - | The uuid of the ExtraHop appliance. |
 | Extrahop Status | `extrahop_status` | `text` | `properties` | - | - |
 | Extrahop Ticket ID | `extrahop_ticket_id` | `text` | `properties` | - | - |
 | ExtraHop Update Notification | `extrahop_update_notification` | `textarea` | `properties` | - | - |
@@ -3714,6 +3715,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
   "severity_code": "High",
 {% endif %}
   "properties": {
+    "extrahop_participants": "{{ participants }}",
     "extrahop_detection_id": {{ id }},
     "extrahop_mod_time": {{ mod_time }},
     "extrahop_update_time": {{ update_time }},
@@ -3771,6 +3773,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
   "severity_code": "High",
 {% endif %}
   "properties": {
+    "extrahop_participants": "{{ participants }}",
     "extrahop_update_time": {{ update_time }},
     "extrahop_mod_time": {{ mod_time }},
      {% if end_time %}

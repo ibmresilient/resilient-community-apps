@@ -45,6 +45,7 @@ class ExtraHopTab(Tab):
         Field("extrahop_ticket_id"),
         Field("extrahop_assignee"),
         Field("extrahop_detection_updated"),
+        Field("extrahop_participants"),
         Header("ExtraHop Details"),
         Datatable("extrahop_detections"),
         Datatable("extrahop_devices"),
