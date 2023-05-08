@@ -9,8 +9,8 @@ import requests
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import render, RequestsCommon
 
-PACKAGE_NAME = "fn_rest_api"
 FN_NAME = "rest_api"
+PACKAGE_NAME = "fn_rest_api"
 CONTENT_TYPE = "Content-type"
 CONTENT_TYPE_JSON = "application/json"
 LOG = getLogger(__name__)
@@ -41,12 +41,12 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Get the function parameters:
-        rest_method = self.get_select_param(getattr(fn_inputs, "rest_api_method", None))  # select, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
-        rest_url = getattr(fn_inputs, "rest_api_url", None)  # text
-        rest_headers = self.get_textarea_param(getattr(fn_inputs,"rest_api_headers", None))  # textarea
-        rest_cookies = self.get_textarea_param(getattr(fn_inputs,"rest_api_cookies", None))  # textarea
-        rest_body = self.get_textarea_param(getattr(fn_inputs,"rest_api_body", None))  # textarea
-        rest_verify = getattr(fn_inputs, "rest_api_verify")  # boolean
+        rest_method  = self.get_select_param(getattr(fn_inputs, "rest_api_method", None)) # select, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
+        rest_url     = getattr(fn_inputs, "rest_api_url", None) # text
+        rest_headers = self.get_textarea_param(getattr(fn_inputs, "rest_api_headers", None)) # textarea
+        rest_cookies = self.get_textarea_param(getattr(fn_inputs, "rest_api_cookies", None)) # textarea
+        rest_body    = self.get_textarea_param(getattr(fn_inputs, "rest_api_body", None))  # textarea
+        rest_verify  = getattr(fn_inputs, "rest_api_verify") # boolean
         rest_timeout = getattr(fn_inputs, "rest_api_timeout", 600) # Default timeout to 600 seconds
         allowed_status_codes = getattr(fn_inputs, "rest_api_allowed_status_codes", None) # text
 
@@ -59,47 +59,48 @@ class FunctionComponent(AppFunctionComponent):
         LOG.info("rest_timeout: %s", rest_timeout)
         LOG.info("allowed_status_codes: %s", allowed_status_codes)
 
-        # Read newline-separated 'rest_headers' into a dictionary
-        headers_dict = rest_headers
-        if not isinstance(rest_headers, dict):
+        # Read newline-separated 'rest_headers' into a dictionary, if dictionary or None, skipped
+        if rest_headers and not isinstance(rest_headers, dict):
             rest_headers = render(rest_headers, self.options)
-            headers_dict = build_dict(rest_headers)
+            rest_headers = build_dict(rest_headers)
 
-
-        # Read newline-separated 'rest_cookies' into a dictionary
-        cookies_dict = rest_cookies
-        if not isinstance(rest_cookies, dict):
+        # Read newline-separated 'rest_cookies' into a dictionary, if dictionary or None, skipped
+        if rest_cookies and not isinstance(rest_cookies, dict):
             rest_cookies = render(rest_cookies, self.options)
-            cookies_dict = build_dict(rest_cookies)
+            rest_cookies = build_dict(rest_cookies)
 
-        # Read newline-separated 'rest_body' into a dictionary
-        body_dict = rest_body
-        if not isinstance(rest_body, dict):
+        # Read newline-separated 'rest_body' into a dictionary, if dictionary or None, skipped
+        if rest_body and not isinstance(rest_body, dict):
             rest_body = render(rest_body, self.options)
-            body_dict = build_dict(rest_body)
+            rest_body = build_dict(rest_body)
 
         rest_url = render(rest_url, self.options)
 
-        resp = make_rest_call(self.opts, self.options, rest_method, rest_url,
-                                headers_dict, cookies_dict, body_dict, rest_verify, rest_timeout, allowed_status_codes)
+        # Converting allowed_status_codes to a list of integers
+        allowed_status_codes = [int(x) for x in allowed_status_codes.split(",")] if allowed_status_codes else []
+
+        response = make_rest_call(
+            self.opts, self.options, rest_method, rest_url,
+            rest_headers, rest_cookies, rest_body, rest_verify,
+            rest_timeout, allowed_status_codes)
 
         try:
-            response_json = resp.json()
+            response_json = response.json()
         except:
             response_json = None
 
         results = {
-            "ok": resp.ok,
-            "url": resp.url,
-            "status_code": resp.status_code,
-            "reason": resp.reason,
-            "cookies": dedup_dict(resp.cookies),
-            "headers": dedup_dict(resp.headers),
-            "elapsed": int(resp.elapsed.total_seconds() * 1000.0),
-            "apparent_encoding": resp.apparent_encoding,
-            "text": resp.text,
+            "ok": response.ok,
+            "url": response.url,
+            "status_code": response.status_code,
+            "reason": response.reason,
+            "cookies": dedup_dict(response.cookies),
+            "headers": dedup_dict(response.headers),
+            "elapsed": int(response.elapsed.total_seconds() * 1000.0),
+            "apparent_encoding": response.apparent_encoding,
+            "text": response.text,
             "json": response_json,
-            "links": resp.links,
+            "links": response.links,
         }
 
         # Produce a FunctionResult with the results
@@ -121,16 +122,27 @@ def build_dict(rest_temp):
 
     return temp_dict
 
-def make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, body_dict, rest_verify, rest_timeout, allowed_status_codes=[200]):
-    
+def make_rest_call(
+        opts,
+        options,
+        rest_method : str,
+        rest_url : str,
+        headers_dict : dict,
+        cookies_dict : dict,
+        body_dict : dict,
+        rest_verify : bool,
+        rest_timeout : int,
+        allowed_status_codes : list=[200]) -> requests.Response:
+
+
     def callback(response: requests.Response):
+        ''' Callback function to check the response status code'''
         if response.status_code < 300:
             return response
-        elif str(response.status_code) in allowed_status_codes:
+        elif int(response.status_code) in allowed_status_codes:
             return response
         else:
             response.raise_for_status()
-    
     rc = RequestsCommon(opts, options)
 
     if CONTENT_TYPE in headers_dict and CONTENT_TYPE_JSON in headers_dict[CONTENT_TYPE]:

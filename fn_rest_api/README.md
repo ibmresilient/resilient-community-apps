@@ -21,20 +21,22 @@
 # REST API Functions for SOAR
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-- [Function - REST API](#function---rest-api)
-- [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [REST API Functions for SOAR](#rest-api-functions-for-soar)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+  - [Installation](#installation)
+    - [Install](#install)
+  - [Function - REST API](#function---rest-api)
+  - [Rules](#rules)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 
 ---
 
@@ -45,7 +47,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 03/2023 | Initial Release |
+| 1.0.0 | 05/2023 | Initial Release |
 
 ---
 
@@ -80,13 +82,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `46.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `46.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=47.1.0`.
+* Integration server is running `resilient-circuits>=48.1`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -102,7 +104,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.9`.
+* IBM Cloud Pak for Security >= `1.10`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -118,7 +120,7 @@ The app does support a proxy server.
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient-circuits>=47.1.0
+* resilient-circuits>=48.1.0
 
 ---
 
@@ -152,12 +154,12 @@ For sensitive information that may be included in the rest_header, rest_url, res
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `rest_api_allowed_status_codes` | `text` | No | `-` | Comma separated list |
-| `rest_api_body` | `textarea` | No | `-` | - |
-| `rest_api_cookies` | `textarea` | No | `-` | - |
-| `rest_api_headers` | `textarea` | No | `-` | - |
-| `rest_api_method` | `select` | No | `-` | - |
-| `rest_api_timeout` | `number` | No | `-` | - |
-| `rest_api_url` | `text` | No | `-` | - |
+| `rest_api_body` | `textarea` | No | `-` | Request body |
+| `rest_api_cookies` | `textarea` | No | `-` | Cookies required for the API call |
+| `rest_api_headers` | `textarea` | No | `-` | Request headers |
+| `rest_api_method` | `select` | No | `-` | REST methods: GET, HEAD, POST, PUT, DELETE, OPTIONS and PATCH |
+| `rest_api_timeout` | `number` | No | `-` | Request timeout |
+| `rest_api_url` | `text` | No | `-` | Endpoint URL |
 | `rest_api_verify` | `boolean` | Yes | `-` | Verify SSL certificate |
 
 </p>
