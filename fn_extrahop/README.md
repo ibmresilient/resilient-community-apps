@@ -70,6 +70,21 @@
 | 1.1.0 | 04/2023 | Use mod_time instead of update_time in poller. Convert rules/workflows to playbooks |
 | 1.0.0 | 06/2022 | Initial Release |
 
+### 1.1 Changes
+In v1.1, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow. 
+
+If upgrading from a previous release, notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows. 
+But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes. 
+
+**NOTE** Starting with version 1.1.0 of the ExtraHop app for SOAR:
+* The poller uses ExtraHop detection `mod_time` field to determine which detections to pull in to SOAR.
+* The poller includes an optional `polling_lookback` parameter in the app.config that can be used to look back the specified number of minutes when the poller starts or restarts to pull in "older" detections.  If not specified in the app.config, the poller uses a look back of zero minutes.
+* The function `ExtraHop Reveal(x) search detections` takes an optional `mod_time` parameter used for searching detections in ExtraHop.
+
 ---
 
 ## Overview
@@ -274,8 +289,7 @@ The poller provides the following functionality.
 **NOTE** Starting with version 1.1.0 of the ExtraHop app for SOAR:
 * The poller uses ExtraHop detection `mod_time` field to determine which detections to pull in to SOAR.
 * The poller includes an optional `polling_lookback` parameter in the app.config that can be used to look back the specified number of minutes when the poller starts or restarts to pull in "older" detections.  If not specified in the app.config, the poller uses a look back of zero minutes.
-* The function `ExtraHop Reveal(x) search detections` takes an optional `mod_time` parameter used for searching detections in ExtraHop.
-* ExtraHop playbook names are appended with **(PB)** to allow for easier distinction between rules which may will be in the SOAR instance after upgrading to the 1.1.0 version of the ExtraHop app.
+
 
 The following screenshot shows examples of SOAR incidents created by the poller from ExtraHop detections:
 

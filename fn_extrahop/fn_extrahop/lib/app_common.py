@@ -5,6 +5,7 @@
 import logging
 from datetime import datetime
 from urllib.parse import urljoin
+from ast import literal_eval
 from resilient_lib import clean_html
 from fn_extrahop.lib.rx_client import RxClient
 from fn_extrahop.lib.poller_common import IBM_SOAR
@@ -129,10 +130,17 @@ class AppCommon():
 
         modified_fields = {k: det_copy[k] for k in UPDATEABLE_FIELDS if k in det_copy and det_copy[k] != case["properties"]["extrahop_"+k]}
 
-        if modified_fields:
-            LOG.info("Detection ID %s, modified properties: %s.", detection["id"], modified_fields)
+        # Comparison of participants list of json objects is different
+        # Get the participants list for the case
+        case_participants = literal_eval(case["properties"]["extrahop_participants"])
 
-        return bool(modified_fields)
+        # Compare the case participants to the detections participants list
+        participants_modified = compare_json_lists(case_participants, detection.get("participants", []))
+
+        if participants_modified and modified_fields:
+              LOG.info("Detection ID %s, modified properties: %s.", detection["id"], modified_fields)
+
+        return bool(participants_modified and modified_fields)
 
     def get_console_url(self):
         """Get the console base url """
@@ -248,3 +256,19 @@ def make_comment(existing_note, note, header=IBM_SOAR):
     return '\n'.join([existing_note if existing_note else "",
                         "{} {}".format(header, ts),
                         clean_html(note)])
+
+def compare_json_lists(list1, list2): 
+    """Compare 2 lists of json objects.  Return True if there are any differences
+
+    Args:
+        list1 (list): list of json objects
+        list2 (list): list of json objects
+
+    Returns:
+        _type_: _description_
+    """
+    # pair dicts
+    pairs = zip(list1, list2)
+
+    # Compare dicts - return True if different
+    return any(x != y for x, y in pairs)

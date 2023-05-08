@@ -149,6 +149,7 @@ class PollerComponent(ResilientComponent):
         self.polling_filters = {}
         if options.get("polling_filters"):
             self.polling_filters = eval_mapping(options.get("polling_filters"), wrapper="{{ {} }}")
+        LOG.info("Polling filters: %s", self.polling_filters)
 
         # rest_client is used to make IBM SOAR API calls
         self.rest_client = get_client(opts)

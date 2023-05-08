@@ -186,7 +186,7 @@ class RxClient():
         r = self.api_call("get", uri, headers=self._headers, params=params)
 
         return r
-
+ 
     def search_detections(self, search_filter=None, active_from=None, active_until=None, limit=None, offset=None,
                           mod_time=None, update_time=None, sort=None):
         """Get information about devices or a specific computer by device id
