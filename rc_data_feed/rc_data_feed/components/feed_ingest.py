@@ -34,7 +34,7 @@ class PluginPool():
         self.feed_outputs = feed_outputs
         self.workspaces = workspaces
 
-        # double the number of threads for handling event messages
+        # increase the number of threads for handling event messages
         thread_pool_size = int(self.num_workers*1.5) # increase threads by 50%
         LOG.info(f"ThreadPool size: {thread_pool_size}")
         self.pool = multiprocessing.pool.ThreadPool(thread_pool_size)
@@ -43,6 +43,17 @@ class PluginPool():
         _async_result = self.pool.apply_async(task, args=args)
 
     def async_send_data(self, type_name, workspace, context, payload):
+        """handler for asynchronously sending data to a plugin 
+
+        :param type_name: type of incident to sync: incident, task, note, artifact, etc.
+        :type type_name: str
+        :param workspace: workspace for this content
+        :type workspace: str
+        :param context: collection of information for synchronization include the rest_client to use
+        :type context: FeedContext
+        :param payload: payload to feed
+        :type payload: dict
+        """
         item_sent = False
         for feed_name, feed_output in self.feed_outputs.items():
             # don't let a failure in one feed break all the rest
