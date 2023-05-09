@@ -60,13 +60,6 @@ class FunctionComponent(AppFunctionComponent):
             # Set keys and values from response
             if case_files.get("contents"):
                 result = FunctionResult(case_files)
-                # Backwards compatibility with original results keys
-                setattr(result, "plaintext", dumps(case_files.get("contents", {}).get("plainText"),
-                                                   default=lambda o: o.__dict__, sort_keys=True, indent=4))
-                setattr(result, "wiki", case_files.get("contents", {}).get("wiki"))
-                setattr(result, "created", case_files.get("created"))
-                setattr(result, "title", case_files.get("title"))
-                setattr(result, "tags", case_files.get("tags"))
 
             # If no 'contents' set success to true and notify that no results match the queried ID
             else:

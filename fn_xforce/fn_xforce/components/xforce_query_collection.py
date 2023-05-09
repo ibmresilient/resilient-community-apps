@@ -68,13 +68,8 @@ class FunctionComponent(AppFunctionComponent):
             if casefiles_len > 0:
                 case_files["num_of_casefiles"] = casefiles_len
                 result = FunctionResult(case_files)
-                # Backwards compatibility
-                setattr(result, "case_files", case_files.get("casefiles"))
-                setattr(result, "num_of_casefiles", casefiles_len)
             else:
                 result = FunctionResult(f"Search query returned no results matching '{xforce_query}'")
-                # Backwards compatibility
-                setattr(result, "num_of_casefiles", 0)
 
             # Produce a FunctionResult with the results
             yield result

@@ -23,15 +23,15 @@ def codegen_reload_data():
         "package": u"fn_xforce",
         "message_destinations": [u"fn_xforce"],
         "functions": [u"xforce_get_collection_by_id", u"xforce_query_collection"],
-        "workflows": [u"example_return_top_3_entries_from_collections", u"example_xforce_collection_by_id", u"example_xforce_query_collections"],
-        "actions": [u"Example: X-Force Query Collection by ID", u"Example: X-Force Query from Artifact", u"Example: X-Force Return Top 3 from Collection(s)"],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [u"example_xforce_query_collection_by_id", u"example_xforce_query_from_artifact_pb", u"example_xforce_return_top_3_from_collections_pb"]
     }
 
 
@@ -48,14 +48,10 @@ def customization_data(client=None):
     - Functions:
         - xforce_get_collection_by_id
         - xforce_query_collection
-    - Workflows:
-        - example_return_top_3_entries_from_collections
-        - example_xforce_collection_by_id
-        - example_xforce_query_collections
-    - Rules:
-        - Example: X-Force Query Collection by ID
-        - Example: X-Force Query from Artifact
-        - Example: X-Force Return Top 3 from Collection(s)
+    - Playbooks:
+        - example_xforce_query_collection_by_id
+        - example_xforce_query_from_artifact_pb
+        - example_xforce_return_top_3_from_collections_pb
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
