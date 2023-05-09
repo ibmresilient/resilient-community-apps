@@ -132,14 +132,16 @@ class AppCommon():
 
         # Comparison of participants list of json objects is different
         # Get the participants list for the case
-        case_participants = literal_eval(case["properties"]["extrahop_participants"])
+        extrahop_participants = case["properties"]["extrahop_participants"]
+        case_participants = literal_eval(extrahop_participants) if extrahop_participants else [{}]
 
         # Compare the case participants to the detections participants list
-        participants_modified = compare_json_lists(case_participants, detection.get("participants", []))
+        participants_modified = compare_json_lists(case_participants, detection.get("participants", [{}]))
 
         if participants_modified and modified_fields:
               LOG.info("Detection ID %s, modified properties: %s.", detection["id"], modified_fields)
-
+              LOG.info("Participants: %s.", detection.get("participants", [{}]))
+              
         return bool(participants_modified and modified_fields)
 
     def get_console_url(self):
