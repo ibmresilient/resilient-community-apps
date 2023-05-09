@@ -470,7 +470,8 @@ class Reload(object):
         return len(item_list)
 
     def _query_task(self, inc_id, type_info):
-        query = "/incidents/{}/tasks".format(inc_id)
+        # collect tasks and task notes
+        query = "/incidents/{}/tasks?want_notes=true".format(inc_id)
         item_list = self.plugin_pool.rest_client_helper.get(query)
 
         # get the type for a note to use within loop
@@ -478,10 +479,17 @@ class Reload(object):
         for item in item_list:
             self.plugin_pool.send_data(type_info, inc_id, item, False, self.incl_attachment_data)
 
-            # get the task notes to sync
-            self._query_task_note(inc_id, item.get("id"), task_note_type_info)
+            # go through all the task notes
+            self._process_task_notes(item.get('notes', []), task_note_type_info, inc_id)
 
         return len(item_list)
+    
+    def _process_task_notes(self, notes_list, task_note_type_info, inc_id):
+            # go through all the task notes
+            for note in notes_list:
+                self.plugin_pool.send_data(task_note_type_info, inc_id, note, False, self.incl_attachment_data)
+                # children notes?
+                self._process_task_notes(note.get('children', []), task_note_type_info, inc_id)
 
     def _query_task_note(self, inc_id, task_id, type_info):
         query = "/tasks/{}/comments".format(task_id)
