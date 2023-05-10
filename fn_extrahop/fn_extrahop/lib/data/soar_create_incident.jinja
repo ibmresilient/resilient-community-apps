@@ -2,7 +2,10 @@
   {# JINJA template for creating a new SOAR incident from an ExtraHop detection. #}
   "name": "ExtraHop detection - {{ title }}",
   {# Remove escapes and backticks unnecessary for payload, introduced by api for some detections. #}
-  "description": "{{ description | replace('"', '\\"') | replace('\\-', '-') | replace('\\.', '.') | replace('`', '') }}",
+  "description": {
+    "format": "html",
+    "content": {{description | e | replace('\n','<br>') | tojson}}
+  },
   {# start_date cannot be after discovered_date #}
   "discovered_date": {{ start_time }},
   "start_date": {{ start_time }},
