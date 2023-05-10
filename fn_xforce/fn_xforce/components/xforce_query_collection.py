@@ -9,6 +9,7 @@ from fn_xforce.util.helper import XForceHelper, PACKAGE_NAME
 from resilient_lib import validate_fields
 from urllib.parse import quote as url_encode
 
+
 FN_NAME = "xforce_query_collection"
 
 class FunctionComponent(AppFunctionComponent):
@@ -27,11 +28,10 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.xforce_collection_type
         """
         try:
-
             yield self.status_message("Starting")
             helper = XForceHelper(self.options)
-            # Get Xforce params
-            XFORCE_APIKEY, XFORCE_BASEURL, XFORCE_PASSWORD = helper.setup_config()
+            # Get Xforce baseurl
+            XFORCE_BASEURL = helper.get_baseurl()
             # Get the function parameters:
             validate_fields(["xforce_query"], fn_inputs)
             xforce_collection_type = getattr(fn_inputs, "xforce_collection_type")
@@ -40,21 +40,18 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.info(f"xforce_collection_type: {xforce_collection_type}")
             self.LOG.info(f"xforce_query: {xforce_query}")
 
-            # Returns {} if len(proxies) == 0
-            proxies = helper.setup_proxies()
+            case_files = {}
+
+            # Prepare request string
+            collection_type = url_encode(str(xforce_collection_type))
+            query = url_encode(xforce_query)
+
+            request_string = f'{XFORCE_BASEURL}/casefiles/{collection_type}/fulltext?q={query}'
+            self.LOG.info(f"Making GET request to the url: {request_string}")
 
             try:
-                case_files = {}
-
-                # Prepare request string
-                collection_type = url_encode(str(xforce_collection_type))
-                query = url_encode(xforce_query)
-
-                request_string = f'{XFORCE_BASEURL}/casefiles/{collection_type}/fulltext?q={query}'
-                self.LOG.info(f"Making GET request to the url: {request_string}")
-
                 # Make the HTTP request through resilient_lib.
-                res = self.rc.execute("get", request_string, proxies=proxies, auth=(XFORCE_APIKEY, XFORCE_PASSWORD), callback=helper.handle_case_response)
+                res = helper.make_xforce_api_request(request_string)
                 # Is the status code in the 2XX family?
                 if int(res.status_code / 100) == 2:
                     case_files = res.json() # Save returned case files
