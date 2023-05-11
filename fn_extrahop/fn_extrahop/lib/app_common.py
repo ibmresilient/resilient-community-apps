@@ -18,7 +18,7 @@ PACKAGE_NAME = "fn_extrahop"
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 # List of fields to check to determine if an update is required.
 UPDATEABLE_FIELDS = [
-    "mod_time", "update_time", "end_time", "risk_score",
+    "mod_time", "end_time", "risk_score",
     "status", "ticket_id", "assignee"
 ]
 # Default prefix for function parameters
@@ -130,19 +130,10 @@ class AppCommon():
 
         modified_fields = {k: det_copy[k] for k in UPDATEABLE_FIELDS if k in det_copy and det_copy[k] != case["properties"]["extrahop_"+k]}
 
-        # Comparison of participants list of json objects is different
-        # Get the participants list for the case
-        extrahop_participants = case["properties"]["extrahop_participants"]
-        case_participants = literal_eval(extrahop_participants) if extrahop_participants else [{}]
-
-        # Compare the case participants to the detections participants list
-        participants_modified = compare_json_lists(case_participants, detection.get("participants", [{}]))
-
-        if participants_modified and modified_fields:
+        if modified_fields:
               LOG.info("Detection ID %s, modified properties: %s.", detection["id"], modified_fields)
-              LOG.info("Participants: %s.", detection.get("participants", [{}]))
-              
-        return bool(participants_modified and modified_fields)
+
+        return bool(modified_fields)
 
     def get_console_url(self):
         """Get the console base url """
@@ -258,19 +249,3 @@ def make_comment(existing_note, note, header=IBM_SOAR):
     return '\n'.join([existing_note if existing_note else "",
                         "{} {}".format(header, ts),
                         clean_html(note)])
-
-def compare_json_lists(list1, list2): 
-    """Compare 2 lists of json objects.  Return True if there are any differences
-
-    Args:
-        list1 (list): list of json objects
-        list2 (list): list of json objects
-
-    Returns:
-        _type_: _description_
-    """
-    # pair dicts
-    pairs = zip(list1, list2)
-
-    # Compare dicts - return True if different
-    return any(x != y for x, y in pairs)

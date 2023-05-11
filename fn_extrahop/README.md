@@ -1165,24 +1165,25 @@ inputs.extrahop_detection_id = incident.properties.extrahop_detection_id
 
 ```python
 ##  ExtraHop - pb_extrahop_rx_search_detections post processing script ##
-# funct_extrahop_rx_get_detections
+import datetime
 #  Globals
-FN_NAME = "funct_extrahop_rx_get_detections"
-PB_NAME = "Extrahop Reveal(x): Refresh Case"
-results = playbook.functions.results.get_detections_results
+FN_NAME = "funct_extrahop_rx_search_detections"
+PB_NAME = "Extrahop Revealx search detections"
+results = playbook.functions.results.search_detections_results
 CONTENT = results.get("content", {})
 INPUTS = results.get("inputs", {})
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 DATA_TABLE = "extrahop_detections"
 
-# Read CATEGORY_MAP and TYPE_MAP from playbook property.
+# Read CATEGORY_MAP and TYPE_MAP from workflow property.
 CATEGORY_MAP = playbook.properties.category_map
 TYPE_MAP = playbook.properties.type_map
+
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 
 # Processing
 def process_dets(det):
-    detection_url = make_linkback_url(det.get("id", None))
+    detection_url = make_linkback_url(det["id"])
     detection_url_html = u'<div><b><a target="blank" href="{0}">{1}</a></b></div>' \
         .format(detection_url, det.get("id", None))
     newrow = incident.addRow(DATA_TABLE)
@@ -1206,18 +1207,12 @@ def process_dets(det):
     newrow.resolution = det.get("resolution", None)
     #newrow.ticket_url =  '<div><b><a target="blank" href="{0}">{1}</a></div>'.format(det.get(f2, None), det.get(f2, None).split('/')[-1])
     newrow.ticket_id = det.get("ticket_id", None)
-    newrow.properties = make_json_string(det.get("properties", {}))
+    newrow.properties = make_properties_string(det)
     newrow.participants = make_list_string(det.get("participants", []))
-    newrow.mitre_techniques = make_list_string(det.get("mitre_techniques", []))
     newrow.mitre_tactics = make_list_string(det.get("mitre_tactics", []))
+    newrow.mitre_techniques = make_list_string(det.get("mitre_techniques", []))
 
-    # Add participant artifacts
-    add_properties_artifacts(det.get("properties", {}))
-
-    # Add participant artifacts
-    add_participants_artifacts(det.get("det_id", None), det.get("participants", []))
-
-def make_json_string(detection_json):
+def make_properties_string(det):
     """_summary_
 
     Args:
@@ -1227,7 +1222,8 @@ def make_json_string(detection_json):
         str : properties json object converted to a formatted string
     """
     tbl = ''
-    for i, j in detection_json.items():
+    properties = det.get("properties", {})
+    for i, j in properties.items():
         if i == "suspicious_ipaddr":
             det_type = "Suspicious IP Addresses"
             value = j["value"]
@@ -1263,6 +1259,7 @@ def make_list_string(detection_list):
 
     return tbl
 
+# Processing
 def make_linkback_url(det_id):
     """Create a url to link back to the detection.
 
@@ -1274,67 +1271,37 @@ def make_linkback_url(det_id):
     """
     return incident.properties.extrahop_console_url + LINKBACK_URL.format(det_id)
 
-def addArtifact(artifact_type, artifact_value, description):
-    """Add new artifacts to the incident.
-
-    :param artifact_type: The type of the artifact.
-    :param artifact_value: - The value of the artifact.
-    :param description: - the description of the artifact.
-    """
-    incident.addArtifact(artifact_type, artifact_value, description)
-
-def add_properties_artifacts(properties):
-    """Add IP Address artifacts of the detections properties.
-
-    Args:
-        properties (_type_): properties of the detections (json object)
-    """
-    for i, j in properties.items():
-        if i == "suspicious_ipaddr":
-            artifact_type = "IP Address"
-            artifact_type = "Suspicious IP Addresses"
-            value = j["value"]
-            for ip in value:
-                addArtifact(artifact_type, ip, "Suspicious IP address found by ExtraHop.")
-
-def add_participants_artifacts(det_id, participants):
-    """ Add artifacts of the participants 
-
-    Args:
-        participants (_type_): List of json objects 
-    """
-    for p in participants:
-        if p.get("object_type") == "ipaddr":
-            artifact_type = "IP Address"
-            addArtifact(artifact_type, p.get("object_value"),
-                        "Participant IP address in ExtraHop detection '{0}', role: '{1}'."
-                         .format(det_id, p.get("role")))
-        if p.get("hostname"):
-            artifact_type = "DNS Name"
-            addArtifact(artifact_type, p["hostname"],
-                        "Participant DNS name in ExtraHop detection '{0}', role: '{1}'."
-                        .format(det_id, p.get("role")))
-
+def format_input_params(input_params):
+    input_params_formatted =''
+    for k, v in input_params.items():
+        if k == "extrahop_active_until" or k == "extrahop_active_from":
+            v = datetime.datetime.fromtimestamp(v/1000).strftime('%Y-%m-%d %H:%M:%S')
+        input_params_formatted += "{}: {}<br>".format(k, v)
+    return input_params_formatted
+    
 # Processing
 def main():
-    detection_id = INPUTS.get("extrahop_detection_id")
-    note_text = u''
+    note_text = ''
+    input_params_formatted = format_input_params(INPUTS)
     if CONTENT:
-        det = CONTENT.get("result", {})
-        note_text = u"ExtraHop Reveal(x): Playbook <b>{0}</b>: A Detection was successfully returned for " \
-                    u"detection ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
-                    .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-        if det:
-            process_dets(det)
-            note_text += u"<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+        dets = CONTENT.get("result", {})
+        note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
+                    "function <b>{2}</b> with parameters: <br> <b>{3}</b>".format(PB_NAME, len(dets), FN_NAME, input_params_formatted)
+        if dets:
+            for det in dets:
+                process_dets(det)
+            note_text += "<br>The data table <b>{0}</b> has been updated".format("Extrahop Detections")
+
     else:
-        note_text += u"ExtraHop Reveal(x): Playbook<b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     u"to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
-                     u" with parameters <b>{3}</b>." \
-            .format(PB_NAME, detection_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+        note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to search detections for SOAR function <b>{1}</b> with parameters: <br> <b>{2}</b>" \
+                    .format(PB_NAME, FN_NAME, input_params_formatted)
 
     incident.addNote(helper.createRichText(note_text))
+    
+# Start execution
 main()
+
 ```
 
 </p>
@@ -1496,9 +1463,10 @@ if playbook.inputs.extrahop_offset:
 
 ```python
 ##  ExtraHop - pb_extrahop_rx_get_devices post processing script ##
+import datetime
 #  Globals
 FN_NAME = "funct_extrahop_rx_get_devices"
-PB_NAME = "Example: Extrahop Reveal(x) search devices"
+PB_NAME = "Extrahop Reveal(x) search devices"
 results = playbook.functions.results.get_devices_result
 CONTENT = results.get("content", {})
 INPUTS = results.get("inputs", {})
@@ -1519,8 +1487,14 @@ def make_linkback_url(dev_id):
     """
     return incident.properties.extrahop_console_url + LINKBACK_URL.format(incident.properties.extrahop_site_uuid,
                                                                           dev_id)
-
-
+def format_input_params(input_params):
+    input_params_formatted =''
+    for k, v in input_params.items():
+        if k == "extrahop_active_until" or k == "extrahop_active_from":
+            v = datetime.datetime.fromtimestamp(v/1000).strftime('%Y-%m-%d %H:%M:%S')
+        input_params_formatted += "{}: {}<br>".format(k, v)
+    return input_params_formatted
+    
 def process_devs(dev):
     # Process a device result.
     newrow = incident.addRow(DATA_TABLE)
@@ -1551,20 +1525,32 @@ def process_devs(dev):
 def main():
     device_id = INPUTS.get("extrahop_device_id")
     note_text = ''
+    input_params_formatted = format_input_params(INPUTS)
     if CONTENT:
-        dev = CONTENT.get("result")
-        if dev:
-            note_text = "ExtraHop Integration: Workflow <b>{0}</b>: A Device was successfully returned for " \
-                        "device ID <b>{1}</b> for SOAR function <b>{2}</b> with parameters <b>{3}</b>." \
-                .format(PB_NAME, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
-            process_devs(dev)
-            note_text += "<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
+        devs = CONTENT.get("result")
 
-    else:
-        note_text += "ExtraHop Integration: Workflow <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+        if devs:
+            note_text = "ExtraHop app: Playbook <b>{0}</b>: <b>{1}</b> Device(s) successfully returned for " \
+                        "Device ID <b>{2}</b> for SOAR function <b>{3}</b> with parameters: <br> <b>{4}</b>" \
+                .format(PB_NAME, len(devs), device_id, FN_NAME, input_params_formatted)
+            # Extrahop will return a list or a single json object
+            if isinstance(devs, list):
+              for dev in devs:
+                process_devs(dev)
+            else:
+              process_devs(devs)
+
+            note_text += "<br>The data table <b>{0}</b> has been updated".format(DATA_TABLE)
+        else:
+            note_text += "ExtraHop app: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      "to get device for device ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
-                     " with parameters <b>{3}</b>." \
-            .format(PB_NAME, device_id, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                     " with parameters: <br> <b>{3}</b>" \
+                .format(PB_NAME, device_id, FN_NAME, input_params_formatted)
+    else:
+        note_text += "ExtraHop app: Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
+                     "to get device for device ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
+                     " with parameters: <br> <b>{3}</b>" \
+            .format(PB_NAME, device_id, FN_NAME, input_params_formatted)
 
     incident.addNote(helper.createRichText(note_text))
 
@@ -2161,6 +2147,7 @@ if playbook.inputs.extrahop_mod_time:
 
 ```python
 ##  ExtraHop - pb_extrahop_rx_search_detections post processing script ##
+import datetime
 #  Globals
 FN_NAME = "funct_extrahop_rx_search_detections"
 PB_NAME = "Extrahop Revealx search detections"
@@ -2266,14 +2253,22 @@ def make_linkback_url(det_id):
     """
     return incident.properties.extrahop_console_url + LINKBACK_URL.format(det_id)
 
+def format_input_params(input_params):
+    input_params_formatted =''
+    for k, v in input_params.items():
+        if k == "extrahop_active_until" or k == "extrahop_active_from":
+            v = datetime.datetime.fromtimestamp(v/1000).strftime('%Y-%m-%d %H:%M:%S')
+        input_params_formatted += "{}: {}<br>".format(k, v)
+    return input_params_formatted
+    
 # Processing
 def main():
     note_text = ''
-
+    input_params_formatted = format_input_params(INPUTS)
     if CONTENT:
         dets = CONTENT.get("result", {})
         note_text = "ExtraHop Reveal(x): Playbook <b>{0}</b>: There were <b>{1}</b> Detections returned for SOAR " \
-                    "function <b>{2}</b> with parameters <b>{3}</b>.".format(PB_NAME, len(dets), FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                    "function <b>{2}</b> with parameters: <br> <b>{3}</b>".format(PB_NAME, len(dets), FN_NAME, input_params_formatted)
         if dets:
             for det in dets:
                 process_dets(det)
@@ -2281,14 +2276,13 @@ def main():
 
     else:
         note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
-                     "to search detections for SOAR function <b>{1}</b> with parameters <b>{2}</b>." \
-                    .format(PB_NAME, FN_NAME, ", ".join("{}:{}".format(k, v) for k, v in INPUTS.items()))
+                     "to search detections for SOAR function <b>{1}</b> with parameters: <br> <b>{2}</b>" \
+                    .format(PB_NAME, FN_NAME, input_params_formatted)
 
     incident.addNote(helper.createRichText(note_text))
     
 # Start execution
 main()
-
 ```
 
 </p>
@@ -3700,7 +3694,10 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
   {# JINJA template for creating a new SOAR incident from an ExtraHop detection. #}
   "name": "ExtraHop detection - {{ title }}",
   {# Remove escapes and backticks unnecessary for payload, introduced by api for some detections. #}
-  "description": "{{ description | replace('"', '\\"') | replace('\\-', '-') | replace('\\.', '.') | replace('`', '') }}",
+  "description": {
+    "format": "html",
+    "content": {{description | e | replace('\n','<br>')  | replace('\_', '_') | replace ('\.', '.') | tojson}}
+  },
   {# start_date cannot be after discovered_date #}
   "discovered_date": {{ start_time }},
   "start_date": {{ start_time }},
@@ -3715,7 +3712,6 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
   "severity_code": "High",
 {% endif %}
   "properties": {
-    "extrahop_participants": "{{ participants }}",
     "extrahop_detection_id": {{ id }},
     "extrahop_mod_time": {{ mod_time }},
     "extrahop_update_time": {{ update_time }},
@@ -3758,7 +3754,10 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
   {# JINJA template for updating a SOAR incident from an ExtraHop detection. #}
   "name": "ExtraHop detection - {{ title }}",
   {# Remove escapes and backticks unnecessary for payload, introduced by api for some detections. #}
-  "description": "{{ description | replace('"', '\\"') | replace('\\-', '-') | replace('\\.', '.') | replace('`', '') }}",
+  "description": {
+    "format": "html",
+    "content": {{description | e | replace('\n','<br>')  | replace('\_', '_') | replace ('\.', '.') | tojson}}
+  },
 {% if end_time %}
   "end_date": {{ end_time }},
 {% endif %}
@@ -3773,7 +3772,6 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
   "severity_code": "High",
 {% endif %}
   "properties": {
-    "extrahop_participants": "{{ participants }}",
     "extrahop_update_time": {{ update_time }},
     "extrahop_mod_time": {{ mod_time }},
      {% if end_time %}
