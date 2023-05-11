@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 # Util classes for qradar
 
 from base64 import b64encode
@@ -230,7 +231,7 @@ class ArielSearch(SearchWaitCommand):
             elif res["status"] in [qradar_constants.SEARCH_STATUS_WAIT, "SORTING", "EXECUTE"]:
                 status = SearchWaitCommand.SEARCH_STATUS_WAITING
 
-        return status
+        return status, res
 
 class QRadarClient(object):
 
@@ -281,10 +282,12 @@ class QRadarClient(object):
 
         ariel_search.set_query_all(query_all)
 
-        response = ariel_search.perform_search(temp_query, False) # Execute the query on a temp table
-        response = ariel_search.perform_search(search_query, True) # Get the actual query results from temp table
-
-        return response
+        _, result_set = ariel_search.perform_search(temp_query, False) # Execute the query on a temp table
+        if result_set.get("record_count"):
+            response, _ = ariel_search.perform_search(search_query, True) # Get the actual query results from temp table
+            return response
+        else:
+            return None
 
     def verify_connect(self):
         """
@@ -304,7 +307,7 @@ class QRadarClient(object):
         """
         resp = self.get_versions()
 
-        return True if resp.status_code == 200 and len(resp.json()) > 0 and "version" in resp.json()[0] else False
+        return True if int(resp.status_code/100) == 2 and len(resp.json()) > 0 and "version" in resp.json()[0] else False
 
     @staticmethod
     def verify_graphql_connect():
@@ -325,7 +328,7 @@ class QRadarClient(object):
         except Exception as e:
             pass
 
-        return response.status_code == 200
+        return int(response.status_code/100) == 2
 
     @staticmethod
     def graphql_query(variables, query_name, add_content_source=None):
@@ -427,7 +430,7 @@ class QRadarServers():
         Check if the given qradar_label is in the app.config
         :param qradar_label: User selected server
         :param servers_list: List of QRadar servers
-        :return: Dictionary of options for choosen server
+        :return: Dictionary of options for chosen server
         """
         # If label not given and using previous versions app.config [fn_qradar_integration]
         if not qradar_label and servers_list.get(qradar_constants.PACKAGE_NAME):
