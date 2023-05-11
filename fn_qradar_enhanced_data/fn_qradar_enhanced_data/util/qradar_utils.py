@@ -358,11 +358,13 @@ class QRadarClient(object):
             raise IntegrationError(f"Request to url [{url}] throws exception. Error [{query_call.strip()} call failed with exception {str(e)}]")
 
         ret = {"status_code": response.status_code}
+        ret = {"success": bool(int(response.status_code/100) == 2)} # True = 2xx status code
 
-        if add_content_source:
-            ret["content"] = response.json()["data"].get(query_call.strip()).get(add_content_source)
-        else:
-            ret["content"] = response.json()["data"].get(query_call.strip())
+        if not ret["success"]:
+            return ret
+
+        res_json = response.json().get("data", {}).get(query_call.strip())
+        ret["content"] = res_json.get(add_content_source) if add_content_source else res_json
 
         return ret
 

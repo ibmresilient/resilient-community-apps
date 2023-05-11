@@ -159,8 +159,9 @@ The following table provides the settings you need to configure the app. These s
 | **polling_lookback** | No | `60` | *Time in minutes to look back* |
 | **clear_datatables** | No | `True` | *Boolean to clear or not clear content of data tables in incident when poller is run* |
 | **sync_notes** | Yes | `True` | *Boolean if true then notes that are added to QRadar offenses will be added to their linked SOAR incidents*|
-| **empty_query_max** | No | 5 | New to 2.3. Attempt the AQL queries up to the number of times specified. Default is no retries (1) |
-| **empty_query_wait_secs** | No | 60 | New to 2.3. Number of seconds to pause before attempting the next AQL query. Default is 0 |
+| **empty_query_max** | No | `5` | New to 2.3. Attempt the AQL queries up to the number of times specified. Default is no retries (1) |
+| **empty_query_wait_secs** | No | `60` | New to 2.3. Number of seconds to pause before attempting the next AQL query. Default is 0 |
+|**empty_query_skip_types** | No | `flows` | New to 2.3. Comma separated list of query types to skip retry: topevents, flows, sourceip, destinationip, categories |
 
 #### 2.3.0 Changes
 See new settings `empty_query_max` and `empty_query_wait_secs`. 

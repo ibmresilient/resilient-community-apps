@@ -71,6 +71,15 @@ class FunctionComponent(AppFunctionComponent):
             # collect the retry settings, if any
             empty_query_max = int(global_settings.get("empty_query_max", 1))
             empty_query_wait_secs = int(global_settings.get("empty_query_wait_secs", 0))
+            empty_query_skip = [item.strip() for item in global_settings.get("empty_query_skip_types").split(',')] \
+                if global_settings.get("empty_query_skip_types") else []
+            # result structure template
+            results = {
+                    "qrhost": options.get("host"),
+                    "offenseid": qradar_search_param3,
+                    "events": [], # empty response
+                    "current_time": 0
+            }
 
             # loop through the queries
             query_count = 0
@@ -92,21 +101,20 @@ class FunctionComponent(AppFunctionComponent):
                 if response:
                     break
 
+                # skip retry?
+                if qradar_fn_type in empty_query_skip:
+                    break
+
                 # continue through the loop if no response received
                 query_count += 1
+                self.LOG.info(f"Waiting {empty_query_wait_secs}s for retry: {query_count}")
                 sleep(empty_query_wait_secs)
 
-            # result structure template
-            results = {
-                    "qrhost": options.get("host"),
-                    "offenseid": qradar_search_param3,
-                    "events": [], # empty response
-                    "current_time": 0
-            }
             if not response:
-                msg = f"Max queries: {query_count} returned no results"
-                self.LOG.warning(msg)
-                self.status_message(msg)
+                if query_count >= empty_query_max:
+                    msg = f"Max queries: {query_count} returned no results"
+                    self.LOG.warning(msg)
+                    self.status_message(msg)
             else:
                 # Enrich sourceip data by getting additional props using a graphql call to QRadar
                 if qradar_fn_type == "sourceip" and response["events"]:

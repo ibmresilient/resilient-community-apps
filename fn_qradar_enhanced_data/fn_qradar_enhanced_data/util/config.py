@@ -30,9 +30,11 @@ clear_datatables=True
 sync_notes=True
 # specify empty_query settings to indicate what to do when an AQL query returns empty results, 
 #  empty_query_max will attempt the AQL queries up to the number of times specified. Default is no retries (1)
-#  empty_query_wait_secs will pause the number of seconds before attempting the next query. Default is 0
 #empty_query_max=
+#  empty_query_wait_secs will pause the number of seconds before attempting the next query. Default is 0
 #empty_query_wait_secs=
+#  comma separated list of query types to skip retry: topevents, flows, sourceip, destinationip, categories
+#empty_query_skip_types=
 
 # Note: If [fn_qradar_integration] is present without a label then all labeled servers will
 # be disregarded and only the server under [fn_qradar_integration] will be used
