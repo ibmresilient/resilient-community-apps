@@ -102,12 +102,12 @@ class FunctionComponent(AppFunctionComponent):
                     break
 
                 # skip retry?
-                if qradar_fn_type in empty_query_skip:
+                if qradar_fn_type in empty_query_skip or check_db_for_skip(qradar_query, empty_query_skip):
                     break
 
                 # continue through the loop if no response received
                 query_count += 1
-                self.LOG.info(f"Waiting {empty_query_wait_secs}s for retry: {query_count}")
+                self.LOG.info(f"Waiting {empty_query_wait_secs}s retry: {query_count} for: {qradar_fn_type}")
                 sleep(empty_query_wait_secs)
 
             if not response:
@@ -157,6 +157,27 @@ class FunctionComponent(AppFunctionComponent):
                 event[key] = int(float(event[key]))
 
         return event
+
+def check_db_for_skip(qradar_query, empty_query_skip):
+    """The qradar_query contains the db to select from such as "SELECT %param1% FROM flows ..."
+        This logic will match "FROM flows" with the empty_query_skill_types list in order to 
+        bypass retry logic (if specified)
+
+    :param qradar_query: query string
+    :type qradar_query: str
+    :param empty_query_skip: list of types to bypass: ['flows']
+    :type empty_query_skip: list
+    :return: True if query db is found in the empty_query_skip_types
+    :rtype: boolean
+    """
+    b_skip = False
+    query = qradar_query.lower().replace(' ', '') # remove spaces to facilitate matching
+    for skip_type in empty_query_skip:
+        if f"from{skip_type}" in query:
+            b_skip = True
+            break
+
+    return b_skip
 
 def make_queries(qradar_fn_type,
                  qradar_search_param1,
