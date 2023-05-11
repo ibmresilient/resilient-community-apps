@@ -2,6 +2,7 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
+from fn_rest_api.components.funct_rest_api import build_dict, dedup_dict, make_rest_call
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
@@ -47,10 +48,13 @@ class TestInternetUtilitiesCallRestApi:
         assert func is not None
 
     @pytest.mark.livetest
-    @pytest.mark.parametrize("rest_method, rest_url, rest_headers, rest_body, rest_verify", [
-        ('POST', "https://httpbin.org/post", 'Content-type: application/json; charset=UTF-8',
-         "title: foo, body: ƱƲ, userId: 1", True)
-    ])
+    @pytest.mark.parametrize(
+        "rest_method, rest_url, rest_headers, rest_body, rest_verify",
+        [
+            ('POST', "https://httpbin.org/post", 'Content-type: application/json; charset=UTF-8', "title: foo\n body : ƱƲ\n  userId:1\n", True),
+            ('POST', "https://httpbin.org/post", 'Content-type: application/json; charset=UTF-8', '{"title": "foo", "body" : "ƱƲ",  "userId":"1"}', True)
+        ]
+    )
     def test_success(self, circuits_app, rest_method, rest_url, rest_headers, rest_body, rest_verify):
         """ Test calling with sample values for the parameters """
         function_params = {
@@ -61,17 +65,20 @@ class TestInternetUtilitiesCallRestApi:
             "rest_api_verify": rest_verify
         }
         results = call_rest_api_function(circuits_app, function_params)
-        def build_dict(rest_temp):
-            temp_dict = {}
-            if rest_temp is not None:
-                lines = rest_temp.split(",")
-                for line in lines:
-                    keyval = line.strip().split(":", 1)
-                    if len(keyval) == 2:
-                        temp_dict[keyval[0].strip()] = keyval[1].strip()
-            return temp_dict
+        results = results.get('content').get("json").get("json")
         rest_body = build_dict(rest_body)
-        results = build_dict(results['content']['json']['json'])
-        assert(rest_body['title'] == results['title'])
-        assert(rest_body['body'] == results['body'])
-        assert(rest_body['userId'] == results['userId'])
+
+        assert(rest_body['title'], results['title'])
+        assert(rest_body['body'], results['body'])
+        assert(rest_body['userId'], results['userId'])
+        
+
+    @pytest.mark.parametrize("test_case, expected_response", [
+        ("title: foo\n body : bar\n  userId:1\n", {'title': 'foo', 'body': 'bar', 'userId': '1'}),
+        ('{"title": "foo", "body" : "bar",  "userId":"1"}', {'title': 'foo', 'body': 'bar', 'userId': '1'}),
+        ('{"title": "foo", "body": ["bar1", "bar2"], "userId": "1"}', {'title': 'foo', 'body': ['bar1', 'bar2'], 'userId': '1'}),
+        ('{"title": "foo", "body" : ["bar1", "bar2"],  "userId":"1", "sub_dict" : {"title": "foo", "body" : ["bar1", "bar2"],  "userId":"1"}}', {'title': 'foo', 'body': ['bar1', 'bar2'], 'userId': '1', 'sub_dict' : {'title': 'foo', 'body': ['bar1', 'bar2'], 'userId': '1'}})
+    ])
+    def test_build_dict(self, test_case, expected_response):
+        generated_response = build_dict(test_case)
+        assert expected_response == generated_response

@@ -3,11 +3,12 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 """AppFunction implementation"""
+import json
+import requests
 
 from logging import getLogger
-import requests
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import render, RequestsCommon
+from resilient_lib import render, RequestsCommon, validate_fields
 
 FN_NAME = "rest_api"
 PACKAGE_NAME = "fn_rest_api"
@@ -39,50 +40,50 @@ class FunctionComponent(AppFunctionComponent):
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
+        validate_fields([
+            "rest_api_method",
+            "rest_api_url",
+            "rest_api_verify"
+            ], fn_inputs)
 
         # Get the function parameters:
-        rest_method  = self.get_select_param(getattr(fn_inputs, "rest_api_method", None)) # select, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
-        rest_url     = getattr(fn_inputs, "rest_api_url", None) # text
-        rest_headers = self.get_textarea_param(getattr(fn_inputs, "rest_api_headers", None)) # textarea
-        rest_cookies = self.get_textarea_param(getattr(fn_inputs, "rest_api_cookies", None)) # textarea
-        rest_body    = self.get_textarea_param(getattr(fn_inputs, "rest_api_body", None))  # textarea
+        rest_properties = {}
+        rest_method  = self.get_select_param(getattr(fn_inputs, "rest_api_method")) # select, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
+        rest_url     = getattr(fn_inputs, "rest_api_url") # text
         rest_verify  = getattr(fn_inputs, "rest_api_verify") # boolean
         rest_timeout = getattr(fn_inputs, "rest_api_timeout", 600) # Default timeout to 600 seconds
+        rest_properties["headers"] = self.get_textarea_param(getattr(fn_inputs, "rest_api_headers", None)) # textarea
+        rest_properties["cookies"] = self.get_textarea_param(getattr(fn_inputs, "rest_api_cookies", None)) # textarea
+        rest_properties["body"]    = self.get_textarea_param(getattr(fn_inputs, "rest_api_body", None))  # textarea
         allowed_status_codes = getattr(fn_inputs, "rest_api_allowed_status_codes", None) # text
 
         LOG.info("rest_method: %s", rest_method)
         LOG.info("rest_url: %s", rest_url)
-        LOG.info("rest_headers: %s", rest_headers)
-        LOG.info("rest_cookies: %s", rest_cookies)
-        LOG.info("rest_body: %s", rest_body)
         LOG.info("rest_verify: %s", rest_verify)
         LOG.info("rest_timeout: %s", rest_timeout)
+        LOG.info("rest_headers: %s", rest_properties.get("headers"))
+        LOG.info("rest_cookies: %s", rest_properties.get("cookies"))
+        LOG.info("rest_body: %s", rest_properties.get("body"))
         LOG.info("allowed_status_codes: %s", allowed_status_codes)
 
-        # Read newline-separated 'rest_headers' into a dictionary, if dictionary or None, skipped
-        if rest_headers and not isinstance(rest_headers, dict):
-            rest_headers = render(rest_headers, self.options)
-            rest_headers = build_dict(rest_headers)
-
-        # Read newline-separated 'rest_cookies' into a dictionary, if dictionary or None, skipped
-        if rest_cookies and not isinstance(rest_cookies, dict):
-            rest_cookies = render(rest_cookies, self.options)
-            rest_cookies = build_dict(rest_cookies)
-
-        # Read newline-separated 'rest_body' into a dictionary, if dictionary or None, skipped
-        if rest_body and not isinstance(rest_body, dict):
-            rest_body = render(rest_body, self.options)
-            rest_body = build_dict(rest_body)
-
+        # Rendering rest url
         rest_url = render(rest_url, self.options)
+
+        # Read newline-separated or json formatted 'headers', 'body' and 'cookies' into a dictionary, if None, skipped
+        for key in rest_properties:
+            kv_option = rest_properties[key]
+            if kv_option and not isinstance(kv_option, dict):
+                kv_option = render(kv_option, self.options)
+                kv_option = build_dict(kv_option)
+                rest_properties[key] = kv_option
 
         # Converting allowed_status_codes to a list of integers
         allowed_status_codes = [int(x) for x in allowed_status_codes.split(",")] if allowed_status_codes else []
 
         response = make_rest_call(
             self.opts, self.options, rest_method, rest_url,
-            rest_headers, rest_cookies, rest_body, rest_verify,
-            rest_timeout, allowed_status_codes)
+            rest_properties.get("headers"), rest_properties.get("cookies"),
+            rest_properties.get("body"), rest_verify,rest_timeout, allowed_status_codes)
 
         try:
             response_json = response.json()
@@ -106,34 +107,39 @@ class FunctionComponent(AppFunctionComponent):
         # Produce a FunctionResult with the results
         yield FunctionResult(results)
 
-def build_dict(rest_temp):
+
+def build_dict(kv_string:str) -> dict:
     """
-    Builds a dictionary from either the rest_headers or rest_cookies
-    :param rest_temp: rest_headers or rest_cookies
+    Builds a dictionary from the key-value string provided. If the key-value string is
+    in json format, then it is converted to dictionary. If the key-value string is not,
+    then the sting is assumed to be new-line separated, converted to a simple dictionary.
+    
+    Note: New-line separated key-value string does not support nested dictionary or lists.
+    
+    :param rest_temp: any key-value string
     :return: Dictionary
     """
-    temp_dict = {}
-    if rest_temp is not None:
-        lines = rest_temp.split("\n")
-        for line in lines:
-            keyval = line.strip().split(":", 1)
-            if len(keyval) == 2:
-                temp_dict[keyval[0].strip()] = keyval[1].strip()
+    _dict = {}
+    if kv_string is not None:
+        try:
+            # if key-value is in json format, then convert it to dictionary
+            LOG.info("Trying to decode key-value to json format")
+            _dict = json.loads(kv_string)
 
-    return temp_dict
+        except json.decoder.JSONDecodeError as e:
+            # If the key-value is not in json format, then try to build a simple dictionary
+            LOG.warn("Unable to decode in json format. Building a simple dictionary")
+            for each_line in kv_string.split("\n"):
+                item = each_line.strip().split(":", 1)
+                if len(item) == 2:
+                    _dict[item[0].strip()] = item[1].strip()
+    return _dict
 
-def make_rest_call(
-        opts,
-        options,
-        rest_method : str,
-        rest_url : str,
-        headers_dict : dict,
-        cookies_dict : dict,
-        body_dict : dict,
-        rest_verify : bool,
-        rest_timeout : int,
-        allowed_status_codes : list=[200]) -> requests.Response:
 
+def make_rest_call(opts, options, rest_method : str,
+    rest_url  : str, headers_dict : dict, cookies_dict : dict,
+    body_dict : dict, rest_verify : bool, rest_timeout : int,
+    allowed_status_codes : list=[200]) -> requests.Response:
 
     def callback(response: requests.Response):
         ''' Callback function to check the response status code'''
@@ -143,24 +149,27 @@ def make_rest_call(
             return response
         else:
             response.raise_for_status()
+
     rc = RequestsCommon(opts, options)
 
     if CONTENT_TYPE in headers_dict and CONTENT_TYPE_JSON in headers_dict[CONTENT_TYPE]:
-        return rc.execute(rest_method, rest_url,
-                                  headers=headers_dict,
-                                  cookies=cookies_dict,
-                                  json=body_dict,
-                                  verify=rest_verify,
-                                  timeout=rest_timeout,
-                                  callback=callback)
+        return rc.execute(
+            rest_method, rest_url,
+            headers=headers_dict,
+            cookies=cookies_dict,
+            json=body_dict,
+            verify=rest_verify,
+            timeout=rest_timeout,
+            callback=callback)
 
-    return rc.execute(rest_method, rest_url,
-                              headers=headers_dict,
-                              cookies=cookies_dict,
-                              data=body_dict,
-                              verify=rest_verify,
-                              timeout=rest_timeout,
-                              callback=callback)
+    return rc.execute(
+        rest_method, rest_url,
+        headers=headers_dict,
+        cookies=cookies_dict,
+        data=body_dict,
+        verify=rest_verify,
+        timeout=rest_timeout,
+        callback=callback)
 
 
 def dedup_dict(item_list):
