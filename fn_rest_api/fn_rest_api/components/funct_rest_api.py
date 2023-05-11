@@ -140,9 +140,27 @@ def make_rest_call(opts, options, rest_method : str,
     rest_url  : str, headers_dict : dict, cookies_dict : dict,
     body_dict : dict, rest_verify : bool, rest_timeout : int,
     allowed_status_codes : list=[200]) -> requests.Response:
+    '''
+    A wrapper function that makes the rest call and returns the response object. The callback function
+    allows the response to be returned if the status code is > 300 and in the allowed_status_codes list.
+    
+    :param opts: self.opts,
+    :param options: self.options,
+    :param rest_method: rest method, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
+    :param rest_url: rest url
+    :param headers_dict: dictionary of headers. Supports json and new-line separated key-value string
+    :param cookies_dict: dictionary of cookies. Supports json and new-line separated key-value string
+    :param body_dict: dictionary of body. Supports json and new-line separated key-value string
+    :param rest_verify: indicates whether to verify SSL certificates. Default is True
+    :param rest_timeout: timeout in seconds. Default is 600 seconds
+    :param allowed_status_codes: list of allowed status codes. Default is [200]
+    '''
 
     def callback(response: requests.Response):
-        ''' Callback function to check the response status code'''
+        ''' 
+        Callback function to check the response status code and return the response if the status code even
+        if response status code is > 300.
+        '''
         if response.status_code < 300:
             return response
         elif int(response.status_code) in allowed_status_codes:
@@ -152,6 +170,7 @@ def make_rest_call(opts, options, rest_method : str,
 
     rc = RequestsCommon(opts, options)
 
+    # If the content-type is json, then use the json parameter, else use the data parameter
     if CONTENT_TYPE in headers_dict and CONTENT_TYPE_JSON in headers_dict[CONTENT_TYPE]:
         return rc.execute(
             rest_method, rest_url,

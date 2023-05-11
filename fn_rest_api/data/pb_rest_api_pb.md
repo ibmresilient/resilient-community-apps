@@ -17,27 +17,108 @@
 ### Message Destination
 `fn_rest_api`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
+# rest_api_url, rest_api_method and rest_api_verify are mandatory fields.
+# rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.
 #
-# Inputs such as rest_api_headers, rest_api_cookies, rest_api_body can either take a dict as an input
-# or new-line seperated key-value pairs as shown below.
+# 1. New-line separated (Legacy)
+#    ---------------------------
 #
-# rest_api_headers = """
-# Content-Type: application/json
-# X-Frooble: Baz
-# Authorization: {{auth_header}}
+#    This format allows for specifying inputs as key-value pairs, separated
+#    by a new line. It let's us create quick and easy inputs that is properly
+#    formatted for the request. The primary purpose of this format is to retain
+#    backwards compatibility.
+#
+#    Note:  This format doesnot support complex data structures such as lists
+#    -----  or nested Key-value pairs.
+#
+#    Example:
+#    -------- 
+#      body = """
+#      name : user1
+#      password : p@ssword1
+#      role : admin
+#      """             
+# 
+#      headers = """
+#      Content-Type: application/json
+#      X-Frooble: Baz
+#      Authorization: {{auth_header}}
+#
+#
+#
+# 2. JSON format:
+#    ------------
+#
+#    Standard json file format. Supports complex data structures such as lists
+#    or nested Key-value pairs.
+#
+#    Example:
+#    --------
+#      body = """
+#      "name" : "user1",
+#      "password" : "p@ssword1",
+#      "role" : "admin",
+#      "content" : { "site_url" : "www.example.com", "users" : ["user1", "user2"] }
+#      """      
+#
+#
+#    Hint:
+#    -----
+#
+#    An easier way to feed inputs to the above mentioned fields would be using
+#    python dictionaries. While the inputs dont directly support dict, the in-built 
+#    json package can be used to convert a python dict to json string.
+#
+#    Example:
+#    --------
+#      import json
+#     
+#      body = {
+#       "name"     : "user1",
+#       "password" : "p@ssword1",
+#       "role"     : "admin",
+#       "content"  : { 
+#          "site_url" : "www.example.com",
+#          "users"    : ["user1", "user2"]
+#          }
+#      }
+#     
+#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
+#
 # """
 
-inputs.rest_api_headers = None  # Request headers used for Authorization
-inputs.rest_api_cookies = None  # Cookies for request
-inputs.rest_api_body    = None  # Request body
-inputs.rest_api_verify  = False # (Boolean) indicates whether to verify SSL certificates.
+method = "POST"
 
-inputs.rest_api_method  = "GET" #REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS
-inputs.rest_api_url     = "https://dummy.restapiexample.com/api/v1/employees" #Endpoint url
-inputs.rest_api_timeout = 600
-inputs.rest_api_allowed_status_codes = "305, 404, 500" #Status codes in a comma separated fashion
+url = "https://www.example.com"
+
+header = """
+Authorization : xxxxx
+Content-type  : application/json
+"""
+
+body = """
+"displayName"  : "Library Assist",
+"mailEnabled"  : true,
+"mailNickname" : "library",
+"securityEnabled" : true,
+"groupTypes": ["Unified"]
+"""
+
+cookie  = None
+verify  = True
+timeout = 60
+allowed_status_code = "305, 400, 404, 500"
+
+inputs.rest_api_url     = url                          # Endpoint url
+inputs.rest_api_headers = header if header else None   # Request headers used for Authorization
+inputs.rest_api_cookies = cookie if cookie else None   # Cookies for request
+inputs.rest_api_body    = body if body else None       # Request body
+inputs.rest_api_verify  = verify if verify else True   # (Boolean) indicates whether to verify SSL certificates.
+inputs.rest_api_timeout = timeout if timeout else 600  # Request timeout
+inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else "200" # Status codes in a comma separated fashion
+inputs.rest_api_method  = method if method and method in ["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"] else "GET" #REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS
 
 ```
 
@@ -56,12 +137,34 @@ inputs.rest_api_allowed_status_codes = "305, 404, 500" #Status codes in a comma 
 
 ### Script text
 ```python
-response = playbook.functions.results.rest_response
+'''
+results = {
+  "ok"      : response.ok,
+  "url"     : response.url,
+  "reason"  : response.reason,
+  "cookies" : dedup_dict(response.cookies),
+  "headers" : dedup_dict(response.headers),
+  "elapsed" : int(response.elapsed.total_seconds() * 1000.0),
+  "text"    : response.text,
+  "json"    : response_json,
+  "links"   : response.links,
+  "status_code": response.status_code,
+  "apparent_encoding": response.apparent_encoding,
+}
+'''
 
-if artifact.description:
-  artifact.description = u"{}\n\n{}".format(artifact.description.content, response.text)
+result = playbook.functions.results.rest_response
+
+if not result.success:
+  incident.addNote(helper.createRichText(result.reason))
+
 else:
-  artifact.description = response.text
+  response_text = result.content.get("text")
+  if artifact.description:
+    artifact.description = u"{}\n\n{}".format(artifact.description.content, response_text)
+  else:
+    artifact.description = response_text 
+
 ```
 
 ---
