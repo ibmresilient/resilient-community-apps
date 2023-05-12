@@ -32,7 +32,7 @@
     - [Proxy Server](#proxy-server)
     - [Python Environment](#python-environment)
   - [Installation](#installation)
-    - [Install](#install)
+  - [Function - REST API](#function---rest-api)
   - [Input Considerations](#input-considerations)
     - [1. New-line separated (Legacy)](#1-new-line-separated-legacy)
     - [Note:](#note)
@@ -41,7 +41,6 @@
     - [Example:](#example-1)
     - [Hint:](#hint)
     - [Example:](#example-2)
-  - [Function - REST API](#function---rest-api)
   - [Rules](#rules)
   - [Troubleshooting \& Support](#troubleshooting--support)
     - [For Support](#for-support)
@@ -134,12 +133,19 @@ Additional package dependencies may exist for each of these packages:
 
 ## Installation
 
-### Install
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 
 ---
+
+## Function - REST API
+
+This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS. The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
+
+<p align="center">
+<img src="./doc/screenshots/fn-rest-api-playbook.png" />
+</p>
 
 ## Input Considerations
 
@@ -206,20 +212,15 @@ Additional package dependencies may exist for each of these packages:
     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
   ```
 
-## Function - REST API
-This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS.
-
-The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
-
- ![screenshot: fn-rest-api ](./doc/screenshots/fn-rest-api.png)
-
- ---
-
 For sensitive information that may be included in the rest_header, rest_url, rest_body, or rest_cookies, using jinja-like syntax, you can substitute values that are specified in the inputs for values that are in the app.config. This, in conjunction with app secrets, allows the user to set sensitive values without having them exposed in plaintext.
 
- ![screenshot: fn-rest-api-workflow ](./doc/screenshots/fn-rest-api-workflow.png)
- ![screenshot: fn-rest-api-create-secret ](./doc/screenshots/fn-rest-api-create-secret.png)
- ![screenshot: fn-rest-api-app-config ](./doc/screenshots/fn-rest-api-app-config.png)
+<p align="center">
+<img src="./doc/screenshots/fn-rest-api-app-config.png" />
+</p>
+
+<p align="center">
+<img src="./doc/screenshots/fn-rest-api-create-secret.png" />
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
