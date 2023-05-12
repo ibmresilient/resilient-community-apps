@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1683907650967,
+  "export_date": 1683910979401,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -2184,13 +2184,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 55,
+  "id": 57,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1683907649108,
+      "create_date": 1683910977456,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2199,7 +2199,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1683907649108,
+      "update_date": 1683910977456,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -8010,7 +8010,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 64,
+        "content_version": 65,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a\" isExecutable=\"true\" name=\"playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1lahcrd\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cexclusiveGateway default=\"Flow_14x0mxz\" id=\"ConditionPoint_1\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_1lahcrd\u003c/incoming\u003e\u003coutgoing\u003eFlow_14x0mxz\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0ao8l0s\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_1lahcrd\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ConditionPoint_1\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"search_filters =  [ \\n    \\\"extrahop_device_field\\\",\\n    \\\"extrahop_device_operand\\\",\\n    \\\"extrahop_device_operator\\\"\\n]\\nfor p in search_filters:\\n    if hasattr(playbook.inputs, p) and playbook.inputs.get(p):\\n        raise ValueError(\\\"A search filter and Device ID are not allowed at the same time.\\\")\\n        \\nif playbook.inputs.extrahop_device_id:\\n    inputs.extrahop_device_id = playbook.inputs.extrahop_device_id\\n    \\nif playbook.inputs.extrahop_active_from:\\n    inputs.extrahop_active_from = playbook.inputs.extrahop_active_from\\nif playbook.inputs.extrahop_active_until:\\n    inputs.extrahop_active_until = playbook.inputs.extrahop_active_until\\nif playbook.inputs.extrahop_limit:\\n    inputs.extrahop_limit = playbook.inputs.extrahop_limit\\nif playbook.inputs.extrahop_offset:\\n    inputs.extrahop_offset = playbook.inputs.extrahop_offset\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_devices_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ao8l0s\u003c/incoming\u003e\u003coutgoing\u003eFlow_05j2dab\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) search devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e7384abd-0046-4b46-97af-d34d8cc9c711\"\u003e{\"inputs\":{},\"pre_processing_script\":\"##  ExtraHop - pb_extrahop_rx_search_devices pre processing script ##\\n\\ndef get_prop(prop, type=None):\\n    if prop:\\n        return \u0027{}\u0027.format(prop)\\n    else:\\n        return None\\n\\n\\ndef main():\\n    filter = {}\\n\\n    search_filter = {}\\n    filter_props = {\\n        \\\"field\\\": get_prop(playbook.inputs.extrahop_device_field),\\n        \\\"operand\\\": get_prop(playbook.inputs.extrahop_device_operand),\\n        \\\"operator\\\": get_prop(playbook.inputs.extrahop_device_operator)\\n    }\\n    filter = {k: v for k, v in filter_props.items() if v}\\n\\n    if filter and playbook.inputs.extrahop_device_id:\\n        raise ValueError(\\\"The device ID and search filter shouldn\u0027t be set at the same time.\\\")\\n\\n    if filter:\\n        missing_props = []\\n        for f in [\\\"field\\\", \\\"operand\\\", \\\"operator\\\"]:\\n            if not filter.get(f, None):\\n                missing_props.append(f)\\n        if missing_props:\\n            raise ValueError(\\\"The filter is missing properties: \u0027{}\u0027.\\\".format(\\\", \\\".join(missing_props)))\\n\\n        search_filter = {\\n            \\\"filter\\\": filter\\n        }\\n\\n    if playbook.inputs.extrahop_device_id:\\n        search_filter = {\\n            \\\"filter\\\": {\\n                \\\"field\\\": \\\"discovery_id\\\",\\n                \\\"operator\\\": \\\"=\\\",\\n                \\\"operand\\\": str(playbook.inputs.extrahop_device_id)\\n            }\\n        }\\n    if search_filter:\\n        inputs.extrahop_search_filter = str(search_filter).replace(\\\"\u0027\\\", \u0027\\\"\u0027)\\n    if playbook.inputs.extrahop_active_from:\\n        inputs.extrahop_active_from = playbook.inputs.extrahop_active_from\\n    if playbook.inputs.extrahop_active_until:\\n        inputs.extrahop_active_until = playbook.inputs.extrahop_active_until\\n    if playbook.inputs.extrahop_limit:\\n        inputs.extrahop_limit = playbook.inputs.extrahop_limit\\n    if playbook.inputs.extrahop_offset:\\n        inputs.extrahop_offset = playbook.inputs.extrahop_offset\\n\\n    if inputs == {}:\\n      raise ValueError(\\\"At least one search criteria is required to search devices. inputs = {0}\\\".format(inputs))\\n\\nmain()\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"device_search_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14x0mxz\u003c/incoming\u003e\u003coutgoing\u003eFlow_09y8l76\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"ExtraHop: Write Get Devices to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"afb734d7-29b8-411a-a975-71d81ac76bb8\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05j2dab\u003c/incoming\u003e\u003coutgoing\u003eFlow_0il7twe\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05j2dab\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0il7twe\u003c/incoming\u003e\u003cincoming\u003eFlow_0bc3x0c\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0il7twe\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_5\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write search devices results to data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d3fc8864-27c3-4c76-ac33-a469b0874f63\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09y8l76\u003c/incoming\u003e\u003coutgoing\u003eFlow_0bc3x0c\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_09y8l76\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_0bc3x0c\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_5\"/\u003e\u003csequenceFlow id=\"Flow_0ao8l0s\" name=\"ExtraHop: Test if search filters are NOT set\" sourceRef=\"ConditionPoint_1\" targetRef=\"ServiceTask_2\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"ExtraHop: Test if search filters are NOT set\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"if playbook.inputs.extrahop_device_field or playbook.inputs.extrahop_device_operator or playbook.inputs.extrahop_device_operand:\\n  result = False\\nelse:\\n  result = True\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_14x0mxz\" name=\"Else\" sourceRef=\"ConditionPoint_1\" targetRef=\"ServiceTask_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8ea4f516_9223_41fd_9dfe_189b20c8db8a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14x0mxz\" id=\"Flow_14x0mxz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"268\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"779\" y=\"204\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ao8l0s\" id=\"Flow_0ao8l0s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"222\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"268\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"85\" x=\"607\" y=\"202\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bc3x0c\" id=\"Flow_0bc3x0c_di\"\u003e\u003comgdi:waypoint x=\"860\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09y8l76\" id=\"Flow_09y8l76_di\"\u003e\u003comgdi:waypoint x=\"860\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"860\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0il7twe\" id=\"Flow_0il7twe_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"518\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05j2dab\" id=\"Flow_05j2dab_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lahcrd\" id=\"Flow_1lahcrd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"14\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_1\" id=\"ConditionPoint_1_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"599\" y=\"124\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"762\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"762\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1682614139667,
@@ -8370,7 +8370,7 @@
             "tags": [],
             "templates": [],
             "text": "Device ID",
-            "tooltip": "Optional: ExtraHop Device REST api ID. Note: If empty and no filter set, all devices will be returned.",
+            "tooltip": "Optional: ExtraHop Device REST api ID.",
             "type_id": 1025,
             "uuid": "b1b50c80-5dab-453c-9e47-255624913358",
             "values": []
@@ -8648,7 +8648,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683892901330,
+      "last_modified_time": 1683910944358,
       "local_scripts": [
         {
           "actions": [],
@@ -8796,7 +8796,7 @@
       "tags": [],
       "type": "default",
       "uuid": "8ea4f516-9223-41fd-9dfe-189b20c8db8a",
-      "version": 68
+      "version": 69
     },
     {
       "activation_type": "manual",
