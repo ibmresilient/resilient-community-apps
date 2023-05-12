@@ -112,7 +112,7 @@ class FunctionComponent(AppFunctionComponent):
 
             if not response:
                 if query_count >= empty_query_max:
-                    msg = f"Max queries: {query_count} returned no results"
+                    msg = f"Max queries: {query_count} returned no results for: {qradar_fn_type}"
                     self.LOG.warning(msg)
                     self.status_message(msg)
             else:
