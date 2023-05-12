@@ -33,6 +33,14 @@
     - [Python Environment](#python-environment)
   - [Installation](#installation)
     - [Install](#install)
+  - [Input Considerations](#input-considerations)
+    - [1. New-line separated (Legacy)](#1-new-line-separated-legacy)
+    - [Note:](#note)
+    - [Example:](#example)
+    - [2. JSON format:](#2-json-format)
+    - [Example:](#example-1)
+    - [Hint:](#hint)
+    - [Example:](#example-2)
   - [Function - REST API](#function---rest-api)
   - [Rules](#rules)
   - [Troubleshooting \& Support](#troubleshooting--support)
@@ -60,17 +68,17 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, OPTIONS and PATCH.
+The purpose of this function is to enable the ability to connect with external web services by sending REST API requests. The function supports commonly used REST methods such as GET, HEAD, POST, PUT, DELETE, OPTIONS, and PATCH. The specific details of the request, such as the type of request, URL, and other options like headers, cookies, and the request body, can be specified through the function parameters. Once a response is received from the service, it is presented in both text and JSON format. Additionally, other details about the response, such as the response status code, reason, cookies, headers, time elapsed, and links, are also provided.
 
- The function parameters determine the type of call, the URL, and optionally the headers, cookies and body.
-
- The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* Calls a REST web service
+* Make REST API requests to external web services.
+* Request body, headers and cookies now support complex structures just as nested key-value pairs and lists by JSON format.
+* Response is returned in both JSON and text format.
+* Ability to substitute sensitive information that are specified in the inputs for values that are in the app.config.
 
 ---
 
@@ -132,6 +140,71 @@ Additional package dependencies may exist for each of these packages:
 
 
 ---
+
+## Input Considerations
+
+* rest_api_url, rest_api_method and rest_api_verify are mandatory fields.
+* rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.
+### 1. New-line separated (Legacy)
+   This format allows for specifying inputs as key-value pairs, separated
+   by a new line. It let's us create quick and easy inputs that is properly
+   formatted for the request. The primary purpose of this format is to retain
+   backwards compatibility.
+
+  ### Note:  
+   This format does not support complex data structures such as lists or nested Key-value pairs.
+
+  ### Example:
+  ```python
+     body = """
+     name : user1
+     password : p@ssword1
+     role : admin
+     """
+
+     headers = """
+     Content-Type: application/json
+     X-Frooble: Baz
+     Authorization: {{auth_header}}
+     """
+  ```
+
+### 2. JSON format:
+   Standard json file format. Supports complex data structures such as lists
+   or nested Key-value pairs.
+
+  ### Example:
+  ```json
+    body = """
+     "name" : "user1",
+     "password" : "p@ssword1",
+     "role" : "admin",
+     "content" : {
+      "site_url" : "www.example.com",
+      "users" : ["user1", "user2"] }
+    """
+  ```
+  ### Hint:
+   An easier way to feed inputs to the above mentioned fields would be using
+   python dictionaries. While the inputs dont directly support dict, the in-built 
+   json package can be used to convert a python dict to a json string.
+
+  ### Example:
+  ```python
+     import json
+    
+     body = {
+      "name"     : "user1",
+      "password" : "p@ssword1",
+      "role"     : "admin",
+      "content"  : { 
+         "site_url" : "www.example.com",
+         "users"    : ["user1", "user2"]
+         }
+     }
+    
+    inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
+  ```
 
 ## Function - REST API
 This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS.

@@ -46,8 +46,16 @@ def selftest_function(opts):
     reason = None
     try:
         # make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, rest_body, rest_verify)
-        resp = make_rest_call(opts, opts.get("fn_rest_api", {}),
-                              "POST", "/".join((TEST_IP, "post")), headers, None, payload, False, 600)
+        resp = make_rest_call(
+            opts, opts.get("fn_rest_api", {}),
+            "POST",
+            "/".join((TEST_IP, "post")),
+            headers,
+            None,
+            payload,
+            False,
+            600
+        )
 
         state = "success"
     except Exception as e:
@@ -55,7 +63,7 @@ def selftest_function(opts):
         reason = e.args[0]
 
     result = {
-        "state": state,
+        "state" : state,
         "reason": reason
     }
 
