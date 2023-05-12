@@ -6,7 +6,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "REST API",
-      "id": 37,
+      "id": 45,
       "logic_type": "all",
       "message_destinations": [],
       "name": "REST API",
@@ -23,7 +23,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1683819833878,
+  "export_date": 1683893198002,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -445,20 +445,20 @@
           "programmatic_name": "rest_api",
           "tags": [],
           "uuid": null,
-          "workflow_id": 26
+          "workflow_id": 31
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 10,
+  "id": 11,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1683819831283,
+      "create_date": 1683893195357,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -467,7 +467,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1683819831283,
+      "update_date": 1683893195357,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -477,8 +477,8 @@
   "message_destinations": [
     {
       "api_keys": [
-        "c77b2ac5-96a4-4408-a32f-ed1fcaa5aea7",
-        "deae65d4-b922-4a16-adec-82efec686ab5"
+        "4ca9be46-9da9-4f24-8d14-d950cb932770",
+        "c77b2ac5-96a4-4408-a32f-ed1fcaa5aea7"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -497,7 +497,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 47,
+        "content_version": 48,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\" isExecutable=\"true\" name=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0c2h19h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"REST API\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5f728e3d-a4a0-4c6f-9f09-04468edc4d10\"\u003e{\"inputs\":{\"d978e98d-f0a9-407d-b797-e18f83d43e24\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"984922d9-24f1-444f-8967-8199742c8bf9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"dbd52017-9fb5-430f-9791-90a86e0f8a7b\"}},\"7d537dd9-c07d-4bb8-8135-e09eb4fe7896\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"db425783-b537-4b32-bd14-0aa247524857\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"c999b7b4-0638-4979-9676-043ea8550f52\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"30a4cbd0-09bd-488e-bde6-f1765a14aa8d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"a1f12637-495d-4de6-a332-130a497bda5c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d380e625-4828-4726-9f85-9d588aeeb159\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# rest_api_url, rest_api_method and rest_api_verify are mandatory fields.\\n# rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.\\n#\\n# 1. New-line separated (Legacy)\\n#    ---------------------------\\n#\\n#    This format allows for specifying inputs as key-value pairs, separated\\n#    by a new line. It let\u0027s us create quick and easy inputs that is properly\\n#    formatted for the request. The primary purpose of this format is to retain\\n#    backwards compatibility.\\n#\\n#    Note:  This format doesnot support complex data structures such as lists\\n#    -----  or nested Key-value pairs.\\n#\\n#    Example:\\n#    -------- \\n#      body = \\\"\\\"\\\"\\n#      name : user1\\n#      password : p@ssword1\\n#      role : admin\\n#      \\\"\\\"\\\"             \\n# \\n#      headers = \\\"\\\"\\\"\\n#      Content-Type: application/json\\n#      X-Frooble: Baz\\n#      Authorization: {{auth_header}}\\n#\\n#\\n#\\n# 2. JSON format:\\n#    ------------\\n#\\n#    Standard json file format. Supports complex data structures such as lists\\n#    or nested Key-value pairs.\\n#\\n#    Example:\\n#    --------\\n#      body = \\\"\\\"\\\"\\n#      \\\"name\\\" : \\\"user1\\\",\\n#      \\\"password\\\" : \\\"p@ssword1\\\",\\n#      \\\"role\\\" : \\\"admin\\\",\\n#      \\\"content\\\" : { \\\"site_url\\\" : \\\"www.example.com\\\", \\\"users\\\" : [\\\"user1\\\", \\\"user2\\\"] }\\n#      \\\"\\\"\\\"      \\n#\\n#\\n#    Hint:\\n#    -----\\n#\\n#    An easier way to feed inputs to the above mentioned fields would be using\\n#    python dictionaries. While the inputs dont directly support dict, the in-built \\n#    json package can be used to convert a python dict to json string.\\n#\\n#    Example:\\n#    --------\\n#      import json\\n#     \\n#      body = {\\n#       \\\"name\\\"     : \\\"user1\\\",\\n#       \\\"password\\\" : \\\"p@ssword1\\\",\\n#       \\\"role\\\"     : \\\"admin\\\",\\n#       \\\"content\\\"  : { \\n#          \\\"site_url\\\" : \\\"www.example.com\\\",\\n#          \\\"users\\\"    : [\\\"user1\\\", \\\"user2\\\"]\\n#          }\\n#      }\\n#     \\n#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string\\n#\\n# \\\"\\\"\\\"\\n\\nmethod = \\\"POST\\\"\\n\\nurl = \\\"https://www.example.com\\\"\\n\\nheader = \\\"\\\"\\\"\\nAuthorization : xxxxx\\nContent-type  : application/json\\n\\\"\\\"\\\"\\n\\nbody = \\\"\\\"\\\"\\n\\\"displayName\\\"  : \\\"Library Assist\\\",\\n\\\"mailEnabled\\\"  : true,\\n\\\"mailNickname\\\" : \\\"library\\\",\\n\\\"securityEnabled\\\" : true,\\n\\\"groupTypes\\\": [\\\"Unified\\\"]\\n\\\"\\\"\\\"\\n\\ncookie  = None\\nverify  = True\\ntimeout = 60\\nallowed_status_code = \\\"305, 400, 404, 500\\\"\\n\\ninputs.rest_api_url     = url                          # Endpoint url\\ninputs.rest_api_headers = header if header else None   # Request headers used for Authorization\\ninputs.rest_api_cookies = cookie if cookie else None   # Cookies for request\\ninputs.rest_api_body    = body if body else None       # Request body\\ninputs.rest_api_verify  = verify if verify else True   # (Boolean) indicates whether to verify SSL certificates.\\ninputs.rest_api_timeout = timeout if timeout else 600  # Request timeout\\ninputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else \\\"200\\\" # Status codes in a comma separated fashion\\ninputs.rest_api_method  = method if method and method in [\\\"GET\\\", \\\"HEAD\\\", \\\"POST\\\", \\\"PUT\\\", \\\"DELETE\\\", \\\"OPTIONS\\\"] else \\\"GET\\\" #REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"rest_response\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0c2h19h\u003c/incoming\u003e\u003coutgoing\u003eFlow_08s6wnz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0c2h19h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"process_rest_response\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"aa0a4d4f-19f0-472b-8c0e-a4b271013452\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08s6wnz\u003c/incoming\u003e\u003coutgoing\u003eFlow_150opgb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_08s6wnz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_150opgb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_150opgb\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_150opgb\" id=\"Flow_150opgb_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08s6wnz\" id=\"Flow_08s6wnz_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c2h19h\" id=\"Flow_0c2h19h_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"429\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"454\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1683545830838,
@@ -549,19 +549,19 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683819708638,
+      "last_modified_time": 1683892124651,
       "local_scripts": [
         {
           "actions": [],
           "created_date": 1683547528577,
           "description": "Script to process Endpoint response.",
           "enabled": false,
-          "export_key": "process_rest_response",
+          "export_key": "Process REST Response",
           "id": 22,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1683819706768,
-          "name": "process_rest_response",
+          "last_modified_time": 1683892472263,
+          "name": "Process REST Response",
           "object_type": "artifact",
           "playbook_handle": "rest_api_pb",
           "programmatic_name": "rest_api_pb_process_rest_response",
@@ -590,7 +590,7 @@
       "tags": [],
       "type": "default",
       "uuid": "1570b076-796d-44b2-b916-10a69b2ffee8",
-      "version": 52
+      "version": 53
     }
   ],
   "regulators": null,
@@ -610,21 +610,21 @@
     {
       "actions": [],
       "content": {
-        "version": 10,
+        "version": 1,
         "workflow_id": "rest_api",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"rest_api\" isExecutable=\"true\" name=\"REST API\"\u003e\u003cdocumentation\u003eThis is a general-purpose function to call any REST API or other HTTP service.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1urcf3t\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndEvent_0cdo3j1\"\u003e\u003cincoming\u003eSequenceFlow_1c7guvs\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_1urcf3t\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1c3e64q\"/\u003e\u003cserviceTask id=\"ServiceTask_1c3e64q\" name=\"REST API\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5f728e3d-a4a0-4c6f-9f09-04468edc4d10\"\u003e{\"inputs\":{\"984922d9-24f1-444f-8967-8199742c8bf9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"dbd52017-9fb5-430f-9791-90a86e0f8a7b\"}},\"db425783-b537-4b32-bd14-0aa247524857\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"text\",\"content\":\"Content-Type: application/json\\nX-Frooble: Baz\\nAuthorization: {{auth_header}}\"}}},\"d380e625-4828-4726-9f85-9d588aeeb159\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\" 305,404,500\"}}},\"post_processing_script\":\"\u0027\u0027\u0027\\nSet the artifact description to the Response (in plain text) of the REST call\\n\\nresults = {\\n  \\\"ok\\\": response.ok,\\n  \\\"url\\\": response.url,\\n  \\\"status_code\\\": response.status_code,\\n  \\\"reason\\\": response.reason,\\n  \\\"cookies\\\": dedup_dict(response.cookies),\\n  \\\"headers\\\": dedup_dict(response.headers),\\n  \\\"elapsed\\\": int(response.elapsed.total_seconds() * 1000.0),\\n  \\\"apparent_encoding\\\": response.apparent_encoding,\\n  \\\"text\\\": response.text,\\n  \\\"json\\\": response_json,\\n  \\\"links\\\": response.links,\\n}\\n\u0027\u0027\u0027\\n\\nif not results.success:\\n  incident.addNote(helper.createRichText(results.reason))\\n\\nelse:\\n  response_text = results.content.get(\\\"text\\\")\\n  if artifact.description:\\n    artifact.description = u\\\"{}\\\\n\\\\n{}\\\".format(artifact.description.content, response_text)\\n  else:\\n    artifact.description = response_text\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# rest_api_url, rest_api_method and rest_api_verify are mandatory fields.\\n# rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.\\n#\\n# 1. New-line separated (Legacy)\\n#    ---------------------------\\n#\\n#    This format allows for specifying inputs as key-value pairs, separated\\n#    by a new line. It let\u0027s us create quick and easy inputs that is properly\\n#    formatted for the request. The primary purpose of this format is to retain\\n#    backwards compatibility.\\n#\\n#    Note:  This format doesnot support complex data structures such as lists\\n#    -----  or nested Key-value pairs.\\n#\\n#    Example:\\n#    -------- \\n#      body = \\\"\\\"\\\"\\n#      name : user1\\n#      password : p@ssword1\\n#      role : admin\\n#      \\\"\\\"\\\"             \\n# \\n#      headers = \\\"\\\"\\\"\\n#      Content-Type: application/json\\n#      X-Frooble: Baz\\n#      Authorization: {{auth_header}}\\n#\\n#\\n#\\n# 2. JSON format:\\n#    ------------\\n#\\n#    Standard json file format. Supports complex data structures such as lists\\n#    or nested Key-value pairs.\\n#\\n#    Example:\\n#    --------\\n#      body = \\\"\\\"\\\"\\n#      \\\"name\\\" : \\\"user1\\\",\\n#      \\\"password\\\" : \\\"p@ssword1\\\",\\n#      \\\"role\\\" : \\\"admin\\\",\\n#      \\\"content\\\" : { \\\"site_url\\\" : \\\"www.example.com\\\", \\\"users\\\" : [\\\"user1\\\", \\\"user2\\\"] }\\n#      \\\"\\\"\\\"      \\n#\\n#\\n#    Hint:\\n#    -----\\n#\\n#    An easier way to feed inputs to the above mentioned fields would be using\\n#    python dictionaries. While the inputs dont directly support dict, the in-built \\n#    json package can be used to convert a python dict to json string.\\n#\\n#    Example:\\n#    --------\\n#      import json\\n#     \\n#      body = {\\n#       \\\"name\\\"     : \\\"user1\\\",\\n#       \\\"password\\\" : \\\"p@ssword1\\\",\\n#       \\\"role\\\"     : \\\"admin\\\",\\n#       \\\"content\\\"  : { \\n#          \\\"site_url\\\" : \\\"www.example.com\\\",\\n#          \\\"users\\\"    : [\\\"user1\\\", \\\"user2\\\"]\\n#          }\\n#      }\\n#     \\n#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string\\n#\\n# \\\"\\\"\\\"\\n\\nmethod = \\\"POST\\\"\\n\\nurl = \\\"https://www.example.com\\\"\\n\\nheader = \\\"\\\"\\\"\\nAuthorization : xxxxx\\nContent-type  : application/json\\n\\\"\\\"\\\"\\n\\nbody = \\\"\\\"\\\"\\n\\\"displayName\\\"  : \\\"Assist\\\",\\n\\\"mailEnabled\\\"  : true,\\n\\\"mailNickname\\\" : \\\"library\\\",\\n\\\"securityEnabled\\\" : true,\\n\\\"groupTypes\\\": [\\\"Unified\\\"]\\n\\\"\\\"\\\"\\n\\ncookie  = None\\nverify  = True\\ntimeout = 60\\nallowed_status_code = \\\"305, 400, 404, 500\\\"\\n\\ninputs.rest_api_url     = url                          # Endpoint url\\ninputs.rest_api_headers = header if header else None   # Request headers used for Authorization\\ninputs.rest_api_cookies = cookie if cookie else None   # Cookies for request\\ninputs.rest_api_body    = body if body else None       # Request body\\ninputs.rest_api_verify  = verify if verify else True   # (Boolean) indicates whether to verify SSL certificates.\\ninputs.rest_api_timeout = timeout if timeout else 600  # Request timeout\\ninputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else \\\"200\\\" # Status codes in a comma separated fashion\\ninputs.rest_api_method  = method if method and method in [\\\"GET\\\", \\\"HEAD\\\", \\\"POST\\\", \\\"PUT\\\", \\\"DELETE\\\", \\\"OPTIONS\\\"] else \\\"GET\\\" #REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS\\n\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1urcf3t\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_1c7guvs\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1c7guvs\" sourceRef=\"ServiceTask_1c3e64q\" targetRef=\"EndEvent_0cdo3j1\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_13lun7v\"\u003e\u003ctext\u003eResults are appended to the artifact description\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_10ck7zh\" sourceRef=\"ServiceTask_1c3e64q\" targetRef=\"TextAnnotation_13lun7v\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0cdo3j1\" id=\"EndEvent_0cdo3j1_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"511\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"529\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1urcf3t\" id=\"SequenceFlow_1urcf3t_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"302\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"250\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1c3e64q\" id=\"ServiceTask_1c3e64q_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"302\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1c7guvs\" id=\"SequenceFlow_1c7guvs_di\"\u003e\u003comgdi:waypoint x=\"402\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"511\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"456.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_13lun7v\" id=\"TextAnnotation_13lun7v_di\"\u003e\u003comgdc:Bounds height=\"59\" width=\"103\" x=\"436\" y=\"73\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_10ck7zh\" id=\"Association_10ck7zh_di\"\u003e\u003comgdi:waypoint x=\"398\" y=\"172\"/\u003e\u003comgdi:waypoint x=\"450\" y=\"132\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 10,
+      "content_version": 1,
       "description": "This is a general-purpose function to call any REST API or other HTTP service.",
       "export_key": "rest_api",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1683819817159,
+      "last_modified_time": 1683892124087,
       "name": "REST API",
       "object_type": "artifact",
       "programmatic_name": "rest_api",
       "tags": [],
       "uuid": "27e9c285-c17b-49d0-98bb-421e58443f50",
-      "workflow_id": 26
+      "workflow_id": 31
     }
   ],
   "workspaces": []

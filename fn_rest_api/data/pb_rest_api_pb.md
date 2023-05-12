@@ -124,7 +124,7 @@ inputs.rest_api_method  = method if method and method in ["GET", "HEAD", "POST",
 
 ---
 
-## Local script - process_rest_response
+## Local script - Process REST Response
 
 ### Description
 `Script to process Endpoint response.`
