@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1683910979401,
+  "export_date": 1684160311115,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -2184,13 +2184,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 57,
+  "id": 59,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1683910977456,
+      "create_date": 1684160308780,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2199,7 +2199,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1683910977456,
+      "update_date": 1684160308780,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -3099,7 +3099,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
+        "content_version": 5,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e2e29388_e089_4000_9d3b_56f822e5120f\" isExecutable=\"true\" name=\"playbook_e2e29388_e089_4000_9d3b_56f822e5120f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1idwdho\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_1idwdho\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_8\"/\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Extrahop Reveal(x) get detections\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fc71fc68-991e-4825-bc07-2191e58745f3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.extrahop_detection_id = incident.properties.extrahop_detection_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_detections_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0cmkvlw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xxpt0q\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Extrahop Reveal(x) get devices\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75447029-32ca-4363-b753-bc970cee66d5\"\u003e{\"inputs\":{},\"result_name\":\"get_devices_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1q0cr0x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xe1ibz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14gql9f\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"ExtraHop: Write Detection to data table and update custom fields\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f362b21d-354c-4b6f-b8b9-8a9c7ccfdcf0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xxpt0q\u003c/incoming\u003e\u003coutgoing\u003eFlow_1q0cr0x\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1xxpt0q\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_5\"/\u003e\u003csequenceFlow id=\"Flow_1q0cr0x\" sourceRef=\"ScriptTask_5\" targetRef=\"ServiceTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1xe1ibz\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_6\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"ExtraHop: Write Devices information to Devices data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3b4e5ca1-6717-4ae8-b3c1-7d26f525976f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xe1ibz\u003c/incoming\u003e\u003coutgoing\u003eFlow_14gql9f\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14gql9f\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_4\"/\u003e\u003cscriptTask id=\"ScriptTask_8\" name=\"ExtraHop script: detection property helper\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e934b42f-f5c5-4117-97ba-e07cfbba59c5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1idwdho\u003c/incoming\u003e\u003coutgoing\u003eFlow_0cmkvlw\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0cmkvlw\" sourceRef=\"ScriptTask_8\" targetRef=\"ServiceTask_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e2e29388_e089_4000_9d3b_56f822e5120f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0cmkvlw\" id=\"Flow_0cmkvlw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-128\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14gql9f\" id=\"Flow_14gql9f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"394\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xe1ibz\" id=\"Flow_1xe1ibz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"240\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"268\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q0cr0x\" id=\"Flow_1q0cr0x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"112\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"156\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xxpt0q\" id=\"Flow_1xxpt0q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"2\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"28\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1idwdho\" id=\"Flow_1idwdho_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-254\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-212\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"-306\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"-82\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"394\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"28.350006103515625\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"268.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_8\" id=\"ScriptTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"-212.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1682614138285,
@@ -3119,7 +3119,7 @@
       "field_type_handle": "playbook_e2e29388_e089_4000_9d3b_56f822e5120f",
       "fields_type": {
         "actions": [],
-        "display_name": "ExtraHop Reveal(x): Refresh Case",
+        "display_name": "ExtraHop Reveal(x): Refresh Case (PB)",
         "export_key": "playbook_e2e29388_e089_4000_9d3b_56f822e5120f",
         "fields": {},
         "for_actions": false,
@@ -3151,7 +3151,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683906719437,
+      "last_modified_time": 1684159861633,
       "local_scripts": [
         {
           "actions": [],
@@ -3203,7 +3203,16 @@
           ],
           "logic_type": "all"
         },
-        "view_items": []
+        "view_items": [
+          {
+            "content": "Use this action to manually retrieve the current status of the ExtraHop Detection and automatically update the corresponding SOAR Case or Incident.",
+            "element": "html",
+            "field_type": null,
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
       },
       "name": "extrahop_rx_refresh_case",
       "object_type": "incident",
@@ -3218,7 +3227,7 @@
       "tags": [],
       "type": "default",
       "uuid": "e2e29388-e089-4000-9d3b-56f822e5120f",
-      "version": 7
+      "version": 9
     },
     {
       "activation_type": "manual",
