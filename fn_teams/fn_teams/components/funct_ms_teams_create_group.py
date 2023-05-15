@@ -1,6 +1,6 @@
 
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 """AppFunction implementation"""
 from resilient_lib import validate_fields, IntegrationError

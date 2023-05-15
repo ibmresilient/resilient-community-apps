@@ -102,12 +102,7 @@
         "teamsEnabled": {
           "type": "boolean"
         },
-        "unfoundUsers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
+        "unfoundUsers": {}
       }
     },
     "raw": {},
@@ -120,13 +115,19 @@
         "incident_id": {
           "type": "integer"
         },
+        "additional_members": {
+          "type": "string"
+        },
         "ms_owners_list": {
           "type": "string"
         },
         "add_members_from": {
           "type": "string"
         },
-        "ms_team_description": {
+        "task_id": {
+          "type": "integer"
+        },
+        "ms_description": {
           "type": "string"
         }
       }

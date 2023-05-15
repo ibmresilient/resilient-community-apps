@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_teams',
     display_name="Microsoft Teams",
-    version='2.0.1',
+    version='2.1.0',
     license='MIT License',
     author='IBM SOAR',
     author_email='',
@@ -30,7 +30,7 @@ setup(
     Included are example workflows and rules for pushing incident and task information to a Teams channel and to create a group and channel from
     within an incident or task''',
     install_requires=[
-        "resilient_circuits>=45.0.0",
+        "resilient_circuits>=46.0.0",
         "pymsteams ~= 0.2.1",
         "msal ~= 1.19"
     ],
