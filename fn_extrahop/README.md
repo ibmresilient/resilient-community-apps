@@ -1326,7 +1326,7 @@ The playbook is initiated by the manual incident menu item `ExtraHop Reveal(x): 
    
    ![screenshot: fn-extrahop-revealx-get-devices-action](./doc/screenshots/fn-extrahop-revealx-get-devices-action.png)
 
-   ![screenshot: fn-extrahop-revealx-get-devices-action_2](./doc/screenshots/fn-extrahop-revealx-get-devices-action_2.png)
+   ![screenshot: fn-extrahop-revealx-search-devices-action_2](./doc/screenshots/fn-extrahop-revealx-search-devices-action_2.png)
 
 The following screenshots show an example of the data table updated by the function:
 
@@ -3632,19 +3632,18 @@ extrahop_watchlist
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
 | Extrahop Assignee | `extrahop_assignee` | `text` | `properties` | - | - |
-| Extrahop console URL | `extrahop_console_url` | `text` | `properties` | - | ExtraHop base console url. |
+| Extrahop Console URL | `extrahop_console_url` | `text` | `properties` | - | ExtraHop base console url. |
 | Extrahop Detection ID | `extrahop_detection_id` | `number` | `properties` | - | Extrahop detecion ID. |
 | Extrahop Detection Link | `extrahop_detection_link` | `textarea` | `properties` | - | Link back to ExtraHop detection |
 | Extrahop Detection Updated | `extrahop_detection_updated` | `datetimepicker` | `properties` | - | Field to indicate detection has been updated |
 | Extrahop End Time | `extrahop_end_time` | `datetimepicker` | `properties` | - | - |
-| ExtraHop Participants | `extrahop_participants` | `text` | `properties` | - | - |
+| ExtraHop Mod Time | `extrahop_mod_time` | `datetimepicker` | `properties` | - | - |
 | Extrahop Risk Score | `extrahop_risk_score` | `number` | `properties` | - | - |
-| Extrahop site name | `extrahop_site_name` | `text` | `properties` | - | The name of the ExtraHop appliance. |
-| Extrahop site UUID | `extrahop_site_uuid` | `text` | `properties` | - | The uuid of the ExtraHop appliance. |
+| Extrahop Site name | `extrahop_site_name` | `text` | `properties` | - | The name of the ExtraHop appliance. |
+| Extrahop Site UUID | `extrahop_site_uuid` | `text` | `properties` | - | The uuid of the ExtraHop appliance. |
 | Extrahop Status | `extrahop_status` | `text` | `properties` | - | - |
 | Extrahop Ticket ID | `extrahop_ticket_id` | `text` | `properties` | - | - |
 | ExtraHop Update Notification | `extrahop_update_notification` | `textarea` | `properties` | - | - |
-| ExtraHop Update Time | `extrahop_update_time` | `datetimepicker` | `properties` | - | - |
 
 ---
 
@@ -3657,11 +3656,11 @@ extrahop_watchlist
 | ExtraHop Reveal(x): Create tag (PB) | Create a new tag for  ExtraHop Reveal(x). |incident | `enabled` |
 | ExtraHop Reveal(x): Get Activity Maps (PB) | Get activity maps information from Extrahop Reveal(x) and write to the ExtraHop Activitymaps data table. | incident | `enabled` |
 | ExtraHop Reveal(x): Get Tags (PB) | Get tags information from Extrahop Reveal(x) and write to the ExtraHop Tags data table. | incident | `enabled` |
-| ExtraHop Reveal(x): Get Watchlist (PB) | Retrieve all devices that are in the watchlist from Extrahop Reveal(x) . | incident | `enabled` |
-| ExtraHop Reveal(x): Refresh Case (PB) | Refresh SOAR case with detection and device information from Extrahop Reveal(x) .|incident | `enabled` |
+| ExtraHop Reveal(x): Get Watchlist (PB) | Retrieve all devices that are in the watchlist from Extrahop Reveal(x). | incident | `enabled` |
+| ExtraHop Reveal(x): Refresh Case (PB) | Manually refresh SOAR case with detection and device information from Extrahop Reveal(x). | incident | `enabled` |
 | ExtraHop Reveal(x): Search Detections (PB) | Search for detections information from Extrahop Reveal(x). | incident | `enabled` |
-| ExtraHop Reveal(x): Search Devices (PB) | Search for devices information from Extrahop Reveal(x) using a filter. |incident | `enabled` |
-| ExtraHop Reveal(x): Search Packets (PB) | Search for and download packets stored on the ExtraHop Reveal(x) system and add as an attachment. Valid output types are: pcap, keylog_txt or zip.|artifact | `enabled` |
+| ExtraHop Reveal(x): Search Devices (PB) | Search for devices information from Extrahop Reveal(x) using a filter. | incident | `enabled` |
+| ExtraHop Reveal(x): Search Packets (PB) | Search for and download packets stored on the ExtraHop Reveal(x) system and add as an attachment. Valid output types are: pcap, keylog_txt or zip.| artifact | `enabled` |
 | ExtraHop Reveal(x): Update Detection (PB) | Automatic playbook to update ExtraHop detection if the status is changed on the associated  SOAR incident. Add a resolution note to the  detection. | incident | `enabled` |
 | ExtraHop Reveal(x): Update Case (PB) | Automatic playbook to update ExtraHop SOAR case with detection information from Extrahop.| incident | `enabled` |
 | ExtraHop Reveal(x): Update Watchlist (PB) | Add or remove an ExtraHop device to or from the watchlist. | extrahop_devices | `enabledt` |
