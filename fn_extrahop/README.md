@@ -3683,7 +3683,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "extrahop_status": "{{ status | string |soar_substitute('{"None": "None"}') }}",
     "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",
     "extrahop_assignee": "{{ assignee | string |soar_substitute('{"None": "None"}') }}",
-    "extrahop_update_notification": "<span style='color:red;'>The ExtraHop Detection has been closed.</span><br><div>To refresh the incident run the action: Example: Extrahop Reveal(x) refresh incident.<div/>"
+    "extrahop_update_notification": "<span style='color:red;'>The ExtraHop Detection has been closed.</span><br><div>To refresh the incident run the playbook: Extrahop Reveal(x) Refresh Case.<div/>"
   }
 }
 ```
