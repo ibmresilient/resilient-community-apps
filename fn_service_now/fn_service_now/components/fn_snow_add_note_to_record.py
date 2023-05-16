@@ -1,11 +1,10 @@
-# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import json
-import logging
-
+from json import dumps
+from logging import getLogger
 from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
                                                   ResilientHelper)
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
@@ -17,6 +16,7 @@ from resilient_lib import RequestsCommon, ResultPayload, MarkdownParser, str_to_
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
+
     def __init__(self, inputs):
         self.success = True
         self.inputs = inputs
@@ -45,7 +45,7 @@ class FunctionComponent(ResilientComponent):
     def _fn_snow_add_note_to_record_function(self, event, *args, **kwargs):
         """Function: Function that adds a Note to a ServiceNow Record. Option to add the note as a 'Work Note' or 'Additional Comment'."""
 
-        log = logging.getLogger(__name__)
+        log = getLogger(__name__)
 
         try:
             # Instansiate helper (which gets appconfigs from file)
@@ -55,10 +55,14 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function inputs:
             inputs = {
-                "incident_id": res_helper.get_function_input(kwargs, "incident_id"),  # number (required)
-                "task_id": res_helper.get_function_input(kwargs, "task_id", True),  # number
-                "sn_note_text": res_helper.get_function_input(kwargs, "sn_note_text"),  # text (required)
-                "sn_note_type": res_helper.get_function_input(kwargs, "sn_note_type")["name"]  # select, text (required)
+                # number (required)
+                "incident_id": res_helper.get_function_input(kwargs, "incident_id"),
+                # number
+                "task_id": res_helper.get_function_input(kwargs, "task_id", True),
+                # text (required)
+                "sn_note_text": res_helper.get_function_input(kwargs, "sn_note_text"),
+                # select, text (required)
+                "sn_note_type": res_helper.get_function_input(kwargs, "sn_note_type")["name"]
             }
 
             # Since v2.1.0, we've changed this to support HTML; the old version cleared the HTML.
@@ -66,9 +70,11 @@ class FunctionComponent(ResilientComponent):
             # this is only going to be supported on systems where `glide.ui.security.allow_codetag` is enabled
             # so it is optional
             if str_to_bool(self.options.get("render_rich_text", "false")):
-                inputs["sn_note_text"] = "[code]" + inputs["sn_note_text"] + "[/code]"
+                inputs["sn_note_text"] = "[code]" + \
+                    inputs["sn_note_text"] + "[/code]"
             else:
-                parser = MarkdownParser(bold="", italic="", underline="", strikeout="")
+                parser = MarkdownParser(
+                    bold="", italic="", underline="", strikeout="")
                 inputs["sn_note_text"] = parser.convert(inputs["sn_note_text"])
 
             # Create payload dict with inputs
@@ -80,10 +86,12 @@ class FunctionComponent(ResilientComponent):
             res_client = self.rest_client()
 
             # Get the datatable
-            datatable = ServiceNowRecordsDataTable(res_client, payload.inputs["incident_id"])
+            datatable = ServiceNowRecordsDataTable(
+                res_client, payload.inputs["incident_id"])
 
             # Generate res_id using incident and task id
-            res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"])
+            res_id = res_helper.generate_res_id(
+                payload.inputs["incident_id"], payload.inputs["task_id"])
 
             # Get the sn_ref_id
             sn_ref_id = datatable.get_sn_ref_id(res_id)
@@ -96,7 +104,8 @@ class FunctionComponent(ResilientComponent):
                     err_msg = err_msg.format("Task", payload.inputs["task_id"])
 
                 else:
-                    err_msg = err_msg.format("Incident", payload.inputs["incident_id"])
+                    err_msg = err_msg.format(
+                        "Incident", payload.inputs["incident_id"])
 
                 raise ValueError(err_msg)
 
@@ -110,16 +119,18 @@ class FunctionComponent(ResilientComponent):
                     "sn_note_type": payload.inputs["sn_note_type"]
                 }
 
-                yield StatusMessage("Adding Note to ServiceNow Record {0}".format(sn_ref_id))
+                yield StatusMessage(f"Adding Note to ServiceNow Record {sn_ref_id}")
 
                 # Call POST and get response
-                add_in_sn_response = res_helper.sn_api_request(rc, "POST", "/add", data=json.dumps(request_data))
+                add_in_sn_response = res_helper.sn_api_request(
+                    rc, "POST", "/add", data=dumps(request_data))
                 payload.res_id = res_id
                 payload.sn_ref_id = add_in_sn_response["sn_ref_id"]
 
             results = payload.as_dict()
             rp_results = rp.done(results.get("success"), results)
-            rp_results.update(results) # add in all results for backward-compatibility
+            # add in all results for backward-compatibility
+            rp_results.update(results)
 
             log.debug("RESULTS: %s", rp_results)
             log.info("Complete")

@@ -16,6 +16,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v2.2.0
+* Added playbooks
+
 ### v2.1.0
 * Added optional `render_rich_text` configuration. If set to True, rich text notes will be sent to SNOW.
 * Verified on ServiceNow Tokyo release
