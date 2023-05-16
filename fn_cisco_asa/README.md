@@ -51,11 +51,20 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.2.0 | 04/2023 | Convert to playbooks | 
+| 1.2.0 | 05/2023 | Convert to playbooks | 
 | 1.1.0 | 06/2022 | Update payload samples |
 | 1.0.0 | 04/2021 | Initial Release |
 
 ---
+### 1.2.0 Changes
+In v1.2, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow. 
+
+If upgrading from a previous release, notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows. 
+But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes. 
 
 ## Overview
 <!--
