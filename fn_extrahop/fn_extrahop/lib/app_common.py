@@ -131,7 +131,7 @@ class AppCommon():
         modified_fields = {k: det_copy[k] for k in UPDATEABLE_FIELDS if k in det_copy and det_copy[k] != case["properties"]["extrahop_"+k]}
 
         if modified_fields:
-              LOG.info("Detection ID %s, modified properties: %s.", detection["id"], modified_fields)
+            LOG.info("Detection ID %s, modified properties: %s.", detection["id"], modified_fields)
 
         return bool(modified_fields)
 

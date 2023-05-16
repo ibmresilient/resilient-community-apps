@@ -4,7 +4,7 @@
   {# Remove escapes and backticks unnecessary for payload, introduced by api for some detections. #}
   "description": {
     "format": "html",
-    "content": {{description | e | replace('\n','<br>') | tojson}}
+    "content": {{description | e | replace('\n','<br>')  | replace('\_', '_') | replace ('\.', '.') | tojson}}
   },
 {% if end_time %}
   "end_date": {{ end_time }},
