@@ -125,18 +125,18 @@ def test_ariel_graphql_search():
         # 3. Test check_status
         # 3.1 Complete status
         mocked_get_call.return_value = _generateResponse({"status": SEARCH_STATUS_COMPLETED}, 200)
-        status = search_cmd.check_status(search_id)
+        status, resp = search_cmd.check_status(search_id)
         assert status == SearchWaitCommand.SEARCH_STATUS_COMPLETED
 
         # 3.2 WAIT status
         mocked_get_call.return_value = _generateResponse({"status": SEARCH_STATUS_WAIT}, 200)
-        status = search_cmd.check_status(search_id)
+        status, resp = search_cmd.check_status(search_id)
         assert status == SearchWaitCommand.SEARCH_STATUS_WAITING
 
         # 3.3 Exception
         mocked_get_call.side_effect = Exception("Failed")
         try:
-            status = search_cmd.check_status(search_id)
+            status, resp = search_cmd.check_status(search_id)
             assert False
         except SearchFailure:
             assert True

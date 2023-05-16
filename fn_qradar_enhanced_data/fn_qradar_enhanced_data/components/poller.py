@@ -159,7 +159,7 @@ class PollerComponent(ResilientComponent):
                                                        f"{auth_info.api_url}siem/offenses?fields=id, last_persisted_time, assigned_to&filter={filters}"
                                                       ).json()
 
-            LOG.debug(f"QRadar returned macthing offenses: {str(offenses_update_list)}")
+            LOG.debug(f"QRadar returned matching offenses: {str(offenses_update_list)}")
 
             payload = { "patches": {} }
             updated_cases = []
