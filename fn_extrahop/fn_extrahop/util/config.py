@@ -23,7 +23,7 @@ extrahop_rx_cloud_console = <EXTRAHOP_RX_CLOUD_CONSOLE>
 extrahop_rx_key_id = <EXTRAHOP_RX_API_KEY_ID>
 extrahop_rx_key_secret = <EXTRAHOP_RX_API_KEY_SECRET>
 # Standalone sensor authentication setting - for a standalone ExtraHop sensor
-extrahop_rx_api_key = <EXTRAHOP_RX_API_KEY>
+# extrahop_rx_api_key = <EXTRAHOP_RX_API_KEY>
 # If your ExtraHop server uses a self-signed TLS certificate, or some
 # other certificate that is not automatically trusted by your machine,
 # you can set the CA bundle using the extrahop_cafile setting.
