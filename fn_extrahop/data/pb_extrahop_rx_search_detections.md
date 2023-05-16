@@ -310,7 +310,7 @@ def add_participants_artifacts(det_id, participants):
             addArtifact(artifact_type, p["hostname"],
                         "Participant DNS name in ExtraHop detection '{0}', role: '{1}'."
                         .format(det_id, p.get("role")))
-                                                                          dev_id)
+
 def format_input_params(input_params):
     input_params_formatted =''
     for k, v in input_params.items():
@@ -337,7 +337,7 @@ def main():
         note_text += "ExtraHop Reveal(x): Playbook <b>{0}</b>: There was <b>no</b> result returned while attempting " \
                      "to get detections for detection ID <b>{1}</b> for SOAR function <b>{2}</b> ." \
                      " with parameters:<br><b>{3}</b>" \
-            .format(PB_NAME, detection_id, FN_NAME, input_params_formatted)
+                     .format(PB_NAME, detection_id, FN_NAME, input_params_formatted)
 
     incident.addNote(helper.createRichText(note_text))
 main()
