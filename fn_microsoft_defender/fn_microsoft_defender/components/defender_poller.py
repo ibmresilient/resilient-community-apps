@@ -53,10 +53,10 @@ class DefenderPollerComponent(ResilientComponent):
 
         self._load_options(opts)
         if self.polling_interval == 0:
-            LOG.info(u"Defender poller interval is not configured.  Automated escalation is disabled.")
+            LOG.info("Defender poller interval is not configured.  Automated escalation is disabled.")
             return
 
-        LOG.info(u"Defender poller initiated, polling interval %s", self.polling_interval)
+        LOG.info(f"Defender poller initiated, polling interval {self.polling_interval}")
         Timer(self.polling_interval, Poll(), persist=False).register(self)
 
     @handler("reload")
@@ -165,8 +165,7 @@ class DefenderPollerComponent(ResilientComponent):
         if resilient_incident:
             resilient_incident_id = resilient_incident['id']
             if resilient_incident["plan_status"] == "C":
-                LOG.info("Bypassing update to closed incident %s from Defender incident %s",
-                            resilient_incident_id, defender_incident_id)
+                LOG.info(f"Bypassing update to closed incident {resilient_incident_id} from Defender incident {defender_incident_id}")
             elif defender_incident['status'] == "Resolved":
                 # close the incident
                 incident_payload = self.jinja_env.make_payload_from_template(
@@ -177,8 +176,7 @@ class DefenderPollerComponent(ResilientComponent):
                                                     resilient_incident_id,
                                                     incident_payload
                                                 )
-                LOG.info("Closed incident %s from Defender incident %s",
-                         resilient_incident_id, defender_incident_id)
+                LOG.info(f"Closed incident {resilient_incident_id} from Defender incident {defender_incident_id}")
             else:
                 # update an defender incident
                 incident_payload = self.jinja_env.make_payload_from_template(
@@ -189,8 +187,7 @@ class DefenderPollerComponent(ResilientComponent):
                                                     resilient_incident_id,
                                                     incident_payload
                                                 )
-                LOG.info("Updated incident %s from Defender incident %s",
-                         resilient_incident_id, defender_incident_id)
+                LOG.info(f"Updated incident {resilient_incident_id} from Defender incident {defender_incident_id}")
 
                 # add any recently added comments
                 self.add_comments(resilient_incident_id, defender_incident,
@@ -205,11 +202,9 @@ class DefenderPollerComponent(ResilientComponent):
                                                     DEFAULT_INCIDENT_CREATION_TEMPLATE,
                                                     defender_incident)
                 updated_resilient_incident = self.resilient_common.create_incident(incident_payload)
-                LOG.info("Created incident %s from Defender incident %s",
-                         updated_resilient_incident['id'], defender_incident_id)
+                LOG.info(f"Created incident {updated_resilient_incident['id']} from Defender incident {defender_incident_id}")
             else:
-                LOG.info("Defender incident %s bypassed due to new_incident_filters and alert_filters",
-                         defender_incident_id)
+                LOG.info(f"Defender incident {defender_incident_id} bypassed due to new_incident_filters and alert_filters")
                 updated_resilient_incident = None
 
         return updated_resilient_incident
@@ -219,7 +214,7 @@ class DefenderPollerComponent(ResilientComponent):
             comment_create_time = jinja_resilient_datetimeformat(comment['createdTime'])
 
             if comment_create_time >= last_poller_time_ms and IBM_SOAR_LABEL not in comment['comment']:
-                note = "Defender Incident comment: {}\n{}".format(comment['createdTime'], comment['comment'])
+                note = f"Defender Incident comment: {comment['createdTime']}\n{comment['comment']}"
                 self.resilient_common.create_incident_comment(incident_id, note)
 
 def get_profile_filters(str_filters):
@@ -232,13 +227,12 @@ def get_profile_filters(str_filters):
         [dict]: [dictionary representation of filters]
     """
     if not str_filters:
-        return None
+        return
 
     try:
-        return json.loads(u"{{ {0} }}".format(str_filters))
+        return json.loads(f"{{ {str_filters} }}")
     except json.decoder.JSONDecodeError as err:
-        LOG.error('Incorrect format for new_incident_filters, syntax: "field1": "value, "field2": ["value1", "value2"] :%s',
-                  err)
+        LOG.error(f'Incorrect format for new_incident_filters, syntax: "field1": "value, "field2": ["value1", "value2"] :{err}')
 
 def check_incident_filters(defender_incident, new_incident_filters):
     """apply the app.config profile filters to determine which incidents to escalate
@@ -274,7 +268,7 @@ def check_incident_filters(defender_incident, new_incident_filters):
             else:
                 result = bool(filter_value == defender_incident[filter_name])
 
-        if result is not None:
+        if result:
             result_list.append(result)
 
     return all(result_list)
@@ -322,7 +316,7 @@ def check_alert_filters(alert_list, alert_filters):
                     filter_result = bool(filter_value == alert[filter_name])
 
                 # when a test is done, save the value to compare with all other tests
-                if filter_result is not None:
+                if filter_result:
                     alert_result.append(filter_result)
 
         # if one alert passes all criteria, return with success. Otherwise continue to next alert
@@ -337,6 +331,6 @@ def get_defender_incident_id(defender_incident):
         [str]: [defender_incident_id or None if not found]
     """
     if not defender_incident:
-        return None
+        return
 
     return defender_incident['incidentId']

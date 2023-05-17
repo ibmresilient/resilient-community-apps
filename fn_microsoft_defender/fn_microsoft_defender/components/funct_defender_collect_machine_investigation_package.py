@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2020 - Confidential Information
+# Copyright IBM Corp. 2010, 2023 - Confidential Information
 
 """AppFunction implementation"""
 
@@ -27,7 +27,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.defender_machine_id
         """
 
-        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         validate_fields([{"name": "tenant_id"}, {"name": "client_id"}, {"name": "app_secret"}], self._app_configs_as_dict)
 
@@ -41,9 +41,7 @@ class FunctionComponent(AppFunctionComponent):
                                    self.opts,
                                    self._app_configs_as_dict)
 
-        payload = {
-            "Comment": action_description
-        }
+        payload = {"Comment": action_description}
         self.LOG.debug(payload)
 
         # build the url
@@ -58,8 +56,8 @@ class FunctionComponent(AppFunctionComponent):
             package_result, status, reason = defender_api.wait_for_action(url)
 
         else:
-            yield self.status_message(u"{} failure. Status: {} Reason: {}".format(FN_NAME, status, reason))
+            yield self.status_message(f"{FN_NAME} failure. Status: {status} Reason: {reason}")
 
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(package_result, success=status, reason=reason)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2020 - Confidential Information
+# Copyright IBM Corp. 2010, 2023 - Confidential Information
 
 """AppFunction implementation"""
 
@@ -26,7 +26,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.defender_incident_id
         """
 
-        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         incident_id = fn_inputs.defender_incident_id
 
@@ -49,7 +49,7 @@ class FunctionComponent(AppFunctionComponent):
 
         results = incident_payload
 
-        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)
         # yield FunctionResult({}, success=False, reason="Bad call")

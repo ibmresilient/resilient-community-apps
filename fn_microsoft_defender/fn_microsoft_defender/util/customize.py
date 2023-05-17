@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v49.0.4368
 
 """Generate the Resilient customizations required for fn_microsoft_defender"""
 
@@ -30,6 +31,7 @@ def codegen_reload_data():
         "datatables": [u"defender_alerts", u"defender_indicators", u"defender_machines"],
         "automatic_tasks": [],
         "scripts": [u"Create Artifact from Indicator"],
+        "playbooks": []
     }
 
 
@@ -38,7 +40,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 39.0.6328
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
