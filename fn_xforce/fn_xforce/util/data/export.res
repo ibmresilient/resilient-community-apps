@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1683652508861,
+  "export_date": 1684320457068,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -205,13 +205,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 21,
+  "id": 29,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1683652507574,
+      "create_date": 1684320455926,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -220,7 +220,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1683652507574,
+      "update_date": 1684320455926,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -608,7 +608,26 @@
   ],
   "regulators": null,
   "roles": [],
-  "scripts": [],
+  "scripts": [
+    {
+      "actions": [],
+      "created_date": 1683632895245,
+      "description": "",
+      "enabled": false,
+      "export_key": "query collections output",
+      "id": 47,
+      "language": "python3",
+      "last_modified_by": "g@example.com",
+      "last_modified_time": 1683637530368,
+      "name": "query collections output",
+      "object_type": "artifact",
+      "playbook_handle": null,
+      "programmatic_name": "example_xforce_query_from_artifact_pb_query_collections_output",
+      "script_text": "results = playbook.functions.results.query_collections_results\nif results.get(\"success\"):\n  content = results.get(\"content\", {})\n  if content.get(\"num_of_casefiles\") \u003e 0:\n    noteText = \"\"\"\u003cb\u003eX-Force Query status\u003c/b\u003e\u003cbr\u003eTotal matched case files: \u003cb\u003e{}\u003c/b\u003e\"\"\".format(content.get(\"num_of_casefiles\", 0))\n    incident.addNote(helper.createRichText(noteText))\n  else:\n    noteText = \"\"\"\u003cb\u003eX-Force Query status\u003c/b\u003e\u003cbr\u003e{}\"\"\".format(content)\n    incident.addNote(helper.createRichText(noteText))",
+      "tags": [],
+      "uuid": "6a9eb993-d3ad-4963-9c97-0a384a862864"
+    }
+  ],
   "server_version": {
     "build_number": 8131,
     "major": 46,

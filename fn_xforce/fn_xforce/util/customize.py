@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v48.2.4321
+# Generated with resilient-sdk v49.0.4368
 
 """Generate the Resilient customizations required for fn_xforce"""
 
@@ -30,7 +30,7 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": [],
+        "scripts": [u"query collections output"],
         "playbooks": [u"example_xforce_query_collection_by_id", u"example_xforce_query_from_artifact_pb", u"example_xforce_return_top_3_from_collections_pb"]
     }
 
@@ -52,6 +52,8 @@ def customization_data(client=None):
         - example_xforce_query_collection_by_id
         - example_xforce_query_from_artifact_pb
         - example_xforce_return_top_3_from_collections_pb
+    - Scripts:
+        - query collections output
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
