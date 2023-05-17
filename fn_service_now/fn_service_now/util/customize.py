@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v48.2.4321
+# Generated with resilient-sdk v49.0.4368
 
 """Generate the Resilient customizations required for fn_service_now"""
 

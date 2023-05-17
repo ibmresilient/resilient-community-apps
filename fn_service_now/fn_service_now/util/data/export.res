@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1684264733161,
+  "export_date": 1684320144693,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1219,13 +1219,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 25,
+  "id": 26,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1684264731735,
+      "create_date": 1684320143537,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1234,7 +1234,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1684264731735,
+      "update_date": 1684320143537,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2854,8 +2854,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_536adc5b_6286_4ff2_ae36_72ef17ffc20f\" isExecutable=\"true\" name=\"playbook_536adc5b_6286_4ff2_ae36_72ef17ffc20f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_030xauf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SNOW: Close Record\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"edadf951-4652-48a9-8068-9b719bf4bfe4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# A Dictionary that maps Record States to their corresponding codes\\n# These codes are defined in ServiceNow and may be different for each ServiceNow configuration\\n# Codes prepended with [SIR] are specific to Security Incident Response incidents\\nmap_sn_record_states = {\\n  \\\"New\\\": 1,\\n  \\\"In Progress\\\": 2,\\n  \\\"On Hold\\\": 3,\\n  \\\"[INC] Resolved\\\": 6,\\n  \\\"[INC] Closed\\\": 7,\\n  \\\"[INC] Canceled\\\": 8,\\n\\t\\\"[SIR] Analysis\\\": 16,\\n\\t\\\"[SIR] Contain\\\": 18,\\n\\t\\\"[SIR] Eradicate\\\": 19,\\n\\t\\\"[SIR] Recover\\\": 20,\\n\\t\\\"[SIR] Review\\\": 100,\\n\\t\\\"[SIR] Closed\\\": 3,\\n\\t\\\"[SIR] Canceled\\\": 7\\n}\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The state to change the record to\\n# inputs.sn_record_state = map_sn_record_states[\\\"Closed\\\"]\\ninputs.sn_record_state = map_sn_record_states[playbook.inputs.sn_record_state]\\n\\n# The resolution notes that are normally required when you close a ServiceNow record\\n# inputs.sn_close_notes = \\\"This incident has been resolved in IBM SOAR. No further action required\\\"\\ninputs.sn_close_notes = playbook.inputs.sn_close_notes\\n\\n# The ServiceNow \u0027close_code\u0027 that you normally select when closing a ServiceNow record\\n# inputs.sn_close_code = \\\"Solved (Permanently)\\\"\\ninputs.sn_close_code = playbook.inputs.sn_close_code\\n\\n# Add a Work Note to the Record in ServiceNow\\ninputs.sn_close_work_note = f\\\"This record\u0027s state has been changed to {playbook.incident.sn_record_state} by IBM SOAR\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"close_record\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_030xauf\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wztaau\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_030xauf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"82a425ab-8d3e-48a0-8672-e12b9b498585\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wztaau\u003c/incoming\u003e\u003coutgoing\u003eFlow_085mkuv\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wztaau\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_085mkuv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_085mkuv\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_536adc5b_6286_4ff2_ae36_72ef17ffc20f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_030xauf\" id=\"Flow_030xauf_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wztaau\" id=\"Flow_0wztaau_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_085mkuv\" id=\"Flow_085mkuv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_536adc5b_6286_4ff2_ae36_72ef17ffc20f\" isExecutable=\"true\" name=\"playbook_536adc5b_6286_4ff2_ae36_72ef17ffc20f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_030xauf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SNOW: Close Record\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"edadf951-4652-48a9-8068-9b719bf4bfe4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# A Dictionary that maps Record States to their corresponding codes\\n# These codes are defined in ServiceNow and may be different for each ServiceNow configuration\\n# Codes prepended with [SIR] are specific to Security Incident Response incidents\\nmap_sn_record_states = {\\n  \\\"New\\\": 1,\\n  \\\"In Progress\\\": 2,\\n  \\\"On Hold\\\": 3,\\n  \\\"[INC] Resolved\\\": 6,\\n  \\\"[INC] Closed\\\": 7,\\n  \\\"[INC] Canceled\\\": 8,\\n\\t\\\"[SIR] Analysis\\\": 16,\\n\\t\\\"[SIR] Contain\\\": 18,\\n\\t\\\"[SIR] Eradicate\\\": 19,\\n\\t\\\"[SIR] Recover\\\": 20,\\n\\t\\\"[SIR] Review\\\": 100,\\n\\t\\\"[SIR] Closed\\\": 3,\\n\\t\\\"[SIR] Canceled\\\": 7\\n}\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The state to change the record to\\n# inputs.sn_record_state = map_sn_record_states[\\\"Closed\\\"]\\ninputs.sn_record_state = map_sn_record_states[playbook.inputs.sn_record_state]\\n\\n# The resolution notes that are normally required when you close a ServiceNow record\\n# inputs.sn_close_notes = \\\"This incident has been resolved in IBM SOAR. No further action required\\\"\\ninputs.sn_close_notes = playbook.inputs.sn_close_notes\\n\\n# The ServiceNow \u0027close_code\u0027 that you normally select when closing a ServiceNow record\\n# inputs.sn_close_code = \\\"Solved (Permanently)\\\"\\ninputs.sn_close_code = playbook.inputs.sn_close_code\\n\\n# Add a Work Note to the Record in ServiceNow\\ninputs.sn_close_work_note = f\\\"This record\u0027s state has been changed to {playbook.inputs.sn_record_state} by IBM SOAR\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"close_record\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_030xauf\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wztaau\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_030xauf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"82a425ab-8d3e-48a0-8672-e12b9b498585\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wztaau\u003c/incoming\u003e\u003coutgoing\u003eFlow_085mkuv\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wztaau\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_085mkuv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_085mkuv\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_536adc5b_6286_4ff2_ae36_72ef17ffc20f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_085mkuv\" id=\"Flow_085mkuv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wztaau\" id=\"Flow_0wztaau_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_030xauf\" id=\"Flow_030xauf_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1684263681289,
       "creator_principal": {
@@ -3186,7 +3186,7 @@
         "name": "j@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684264081623,
+      "last_modified_time": 1684264922608,
       "local_scripts": [
         {
           "actions": [],
@@ -3260,7 +3260,7 @@
       "tags": [],
       "type": "default",
       "uuid": "536adc5b-6286-4ff2-ae36-72ef17ffc20f",
-      "version": 5
+      "version": 6
     },
     {
       "activation_type": "manual",
