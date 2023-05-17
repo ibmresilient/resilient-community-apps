@@ -57,7 +57,8 @@ Writes out all scheduled jobs to datatabe
 from datetime import datetime
 
 results = playbook.functions.results.output_scheduled_rule_list
-now = datetime.now().strftime("%Y-%m-%d %H:%M:%S") # '2023-03-24 11:28:34'
+now  = datetime.now().strftime("%Y-%m-%d %H:%M:%S") # '2023-03-24 11:28:34'
+date = datetime.now().strftime("%Y-%m-%d")
 TYPE_LOOKUP = {
   0: 'Incident',
   1: "Task",
