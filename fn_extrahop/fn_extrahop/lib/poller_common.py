@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Support functions for the poller"""
 
 import base64
@@ -39,7 +39,7 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
     Args:
         named_poller_interval ([str]): [name of instance variable containing the poller interval in seconds]
         named_last_poller_time ([datetime]): [name of instance variable containing the lookback value in mseconds]
-        package_name ([str]: [name of package for loggging]
+        package_name ([str]: [name of package for logging]
     """
     def poller_wrapper(func):
         # Decorator for running a function forever, passing the ms timestamp of
