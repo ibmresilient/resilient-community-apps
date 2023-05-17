@@ -10,7 +10,7 @@
 `snow_update_data_table_on_status_change_task_pb`
 
 ### Status
-`enabled`
+`disabled`
 
 ### Activation Type
 `automatic`

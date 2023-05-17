@@ -94,7 +94,7 @@ init_snow_note_text = f"""Record created from IBM SOAR Task ID: {task.id}. Assoc
 
 # If the user adds a comment when they invoke the playbook, that comment gets concatenated here
 if playbook.inputs.sn_initial_note.content:
-  init_snow_note_text = f"{init_snow_note_text}\n\n{playbook.inputs.sn_initial_note.content}")
+  init_snow_note_text = f"{init_snow_note_text}\n\n{playbook.inputs.sn_initial_note.content}"
 
 # ID of this incident
 inputs.incident_id = incident.id

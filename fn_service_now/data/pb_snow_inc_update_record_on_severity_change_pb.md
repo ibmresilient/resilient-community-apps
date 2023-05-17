@@ -10,7 +10,7 @@
 `snow_inc_update_record_on_severity_change_pb`
 
 ### Status
-`enabled`
+`disabled`
 
 ### Activation Type
 `automatic`

@@ -137,7 +137,7 @@ if row.sn_records_dt_type == "Incident":
                 <br><b>ServiceNow ID:</b> {results.get('sn_ref_id')}
                 <br><b>ServiceNow Record State:</b> {results.get('sn_record_state')}
                 <br><b>ServiceNow Closing Notes:</b> {results.get('inputs', {}).get('sn_close_notes')}
-                <br><b>ServiceNow Closing Code:</b> {results.get('inputs', {}).get('sn_close_code'))}"""
+                <br><b>ServiceNow Closing Code:</b> {results.get('inputs', {}).get('sn_close_code')}"""
 
   # Else, it failed, so set this note_text
   else:

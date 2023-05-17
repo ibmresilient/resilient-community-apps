@@ -103,7 +103,7 @@ init_snow_note_text = f"""Record created from a IBM SOAR Incident ID: {incident.
 
 # If the user adds a comment when they invoke the rule, that comment gets concatenated here
 if playbook.inputs.sn_initial_note.content
-  init_snow_note_text = "{init_snow_note_text}\n\n{playbook.inputs.sn_initial_note.content}")
+  init_snow_note_text = "{init_snow_note_text}\n\n{playbook.inputs.sn_initial_note.content}"
 
 # ID of this incident
 inputs.incident_id = incident.id
@@ -116,7 +116,7 @@ inputs.sn_init_work_note = init_snow_note_text
 # For SIR tables it is recommended to map "business_criticality" to sn_severity_map as that is visible in the SNOW query_builder
 # (see the example commented out below)
 inputs.sn_optional_fields = dumps({
-  "short_description": f"RES-{incident.id,}: {incident.name}"),
+  "short_description": f"RES-{incident.id,}: {incident.name}",
   "severity": sn_severity_map[incident.severity_code],
   #"business_criticality": sn_severity_map[incident.severity_code],
   "assignment_group": playbook.functions.results.assignment_group.get("sys_id"),
