@@ -26,6 +26,17 @@
 | 1.0.1 | 09/2020 | App Host support added and proxy support added |
 | 1.0.0 | 12/2018 | Initial Release |
 
+### 1.1.0 Changes
+In v1.1, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
+For automatic actions, the playbooks will be disabled by default.
+
+You can continue to use the rules/workflows. 
+But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
+
 ---
 
 ## Overview
