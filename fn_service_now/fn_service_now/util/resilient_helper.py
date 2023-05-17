@@ -2,8 +2,6 @@
 """ResilientHelper Module"""
 import base64
 from logging import getLogger
-
-import six
 from bs4 import BeautifulSoup
 from resilient import SimpleHTTPException
 
@@ -82,40 +80,29 @@ class ResilientHelper(object):
     @classmethod
     def _byteify(cls, data):
         """Function to handle json.loads object_hook for supporting Python 3"""
-        if six.PY3:
-            data_as_utf8_str = data
+        data_as_utf8_str = data
 
-            if isinstance(data, unicode):
-                data_as_utf8_str = data.encode("utf-8")
+        if isinstance(data, unicode):
+            data_as_utf8_str = data.encode("utf-8")
 
-                # if Python 3.x data_as_utf8_str will be bytes, so we convert back to str
-                if isinstance(data_as_utf8_str, bytes):
-                    data_as_utf8_str = data_as_utf8_str.decode(("utf-8"))
+            # if Python 3.x data_as_utf8_str will be bytes, so we convert back to str
+            if isinstance(data_as_utf8_str, bytes):
+                data_as_utf8_str = data_as_utf8_str.decode(("utf-8"))
 
-            elif isinstance(data, dict):
-                data_as_utf8_str = {cls._byteify(key): cls._byteify(value) for key, value in data.items()}
+        elif isinstance(data, dict):
+            data_as_utf8_str = {cls._byteify(key): cls._byteify(value) for key, value in data.items()}
 
-            return data_as_utf8_str
-        else:
-            raise ValueError("We do not support this version of Python")
+        return data_as_utf8_str
 
     @staticmethod
     def _encodeBase64(str_to_encode):
         """A helper function to encode a base64 string for Python 3 support"""
-        if six.PY3:
-            str_to_encode = base64.b64encode(str_to_encode)
-            return str_to_encode.decode("utf-8")
-
-        else:
-            raise ValueError("We do not support this version of Python")
+        str_to_encode = base64.b64encode(str_to_encode)
+        return str_to_encode.decode("utf-8")
 
     @staticmethod
     def str_to_unicode(str_to_convert):
-        if six.PY3:
-            return str(str_to_convert)
-
-        else:
-            raise ValueError("We do not support this version of Python")
+        return str(str_to_convert)
 
     def get_config_option(self, option_name, optional=False, placeholder=None):
         """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
