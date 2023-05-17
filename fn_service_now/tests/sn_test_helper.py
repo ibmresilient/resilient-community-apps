@@ -5,6 +5,8 @@ from mock_data import task
 import json
 import six
 
+basestring = str
+unicode = str
 PACKAGE_NAME = "fn_service_now"
 
 def get_mock_config_data():
@@ -37,7 +39,7 @@ def mock_pre_scrip_dict_to_json_str(d):
     if isinstance(value, list):
       raise ValueError('dict_to_json_str does not support Python Lists')
 
-    if isinstance(value, str):
+    if isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
       entries.append(json_entry_str.format(key, value))
     
@@ -59,9 +61,9 @@ def mock_byteify(data):
 
     data_as_utf8_str_dict = None
 
-    if isinstance(data, str):
+    if isinstance(data, unicode):
         data_as_utf8_str_dict = data.encode("utf-8")
-
+        
         # if Python 3.x data_as_utf8_str_dict will be bytes, so we convert back to str
         if isinstance(data_as_utf8_str_dict, bytes):
             data_as_utf8_str_dict = data_as_utf8_str_dict.decode(("utf-8"))

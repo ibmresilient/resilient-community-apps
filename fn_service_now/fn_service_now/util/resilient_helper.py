@@ -2,9 +2,12 @@
 """ResilientHelper Module"""
 import base64
 from logging import getLogger
+
+import six
 from bs4 import BeautifulSoup
 from resilient import SimpleHTTPException
-from resilient_lib import validate_fields
+
+unicode = str
 
 CONFIG_DATA_SECTION = "fn_service_now"
 SECOPS_TABLE_NAME = "sn_si_incident"
@@ -15,11 +18,8 @@ CP4S_CASES_REST_PREFIX = "cases-rest"
 LOG = getLogger(__name__)
 
 # Define an Incident that gets sent to ServiceNow
-
-
 class Incident(object):
-    """Class that represents a SOAR Incident. See API notes for more"""
-
+    """Class that represents a Resilient Incident. See API notes for more"""
     def __init__(self, incident_id, incident_name, incident_description):
         self.type = "res_incident"
         self.incident_id = incident_id
@@ -33,8 +33,7 @@ class Incident(object):
 
 # Define a Task that gets sent to ServiceNow
 class Task(object):
-    """Class that represents a SOAR Task. See API notes for more"""
-
+    """Class that represents a Resilient Task. See API notes for more"""
     def __init__(self, incident_id, task_id, task_name, task_instructions):
         self.type = "res_task"
         self.incident_id = incident_id
@@ -49,28 +48,22 @@ class Task(object):
 
 class ResilientHelper(object):
     """A helper class for sn_utilities"""
-
     def __init__(self, app_configs):
 
         LOG.debug("Initializing ResilientHelper")
 
         self.app_configs = app_configs
-        validate_fields([{"name": "sn_host", "placeholder": "https://instance.service-now.com"},
-                         "sn_api_url", "sn_table_name",
-                         {"name": "sn_username",
-                             "placeholder": "<ServiceNow Username>"},
-                         {"name": "sn_password", "placeholder": "<ServiceNow Password>"}], app_configs)
 
-        self.SN_HOST = app_configs.get("sn_host")
-        self.SN_API_URI = app_configs.get("sn_api_uri")
+        self.SN_HOST = self.get_config_option("sn_host", placeholder="https://instance.service-now.com")
+        self.SN_API_URI = self.get_config_option("sn_api_uri")
 
         # https://service-now-host.com/api/<app-name>/<custom-api-name/
         self.SN_API_URL = f"{self.SN_HOST}{self.SN_API_URI}"
-        self.SN_TABLE_NAME = str(app_configs.get("sn_table_name"))
-        self.SN_USERNAME = str(app_configs.get("sn_username"))
+        self.SN_TABLE_NAME = str(self.get_config_option("sn_table_name"))
+        self.SN_USERNAME = str(self.get_config_option("sn_username", placeholder="<ServiceNow Username>"))
 
         # Handle password surrounded by ' or "
-        pwd = str(app_configs.get("sn_password",))
+        pwd = str(self.get_config_option("sn_password", placeholder="<ServiceNow Password>"))
         if (pwd.startswith("'") and pwd.endswith("'")) or (pwd.startswith('"') and pwd.endswith('"')):
             self.SN_PASSWORD = pwd[1:-1]
         else:
@@ -78,40 +71,77 @@ class ResilientHelper(object):
 
         self.SN_AUTH = (self.SN_USERNAME, self.SN_PASSWORD)
 
-        self.CP4S_PREFIX = app_configs.get(
-            "cp4s_cases_prefix", CP4S_CASES_REST_PREFIX)
+        self.CP4S_PREFIX = self.get_config_option("cp4s_cases_prefix", placeholder=CP4S_CASES_REST_PREFIX, optional=True)
 
         # Default headers
-        self.headers = {"Content-Type": "application/json",
-                        "Accept": "application/json"}
+        self.headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
         LOG.debug("ResilientHelper initialized")
-        LOG.debug(
-            f"App Configs: sn_host: {self.SN_HOST} sn_api_uri: {self.SN_API_URI} sn_api_url: {self.SN_API_URL} sn_table_name: {self.SN_TABLE_NAME} sn_username: {self.SN_USERNAME} cp4s_cases_prefix: self.CP4S_PREFIX")
+        LOG.debug(f"App Configs: sn_host: {self.SN_HOST} sn_api_uri: {self.SN_API_URI} sn_api_url: {self.SN_API_URL} sn_table_name: {self.SN_TABLE_NAME} sn_username: {self.SN_USERNAME} cp4s_cases_prefix: self.CP4S_PREFIX")
 
     @classmethod
     def _byteify(cls, data):
         """Function to handle json.loads object_hook for supporting Python 3"""
-        data_as_utf8_str = data
+        if six.PY3:
+            data_as_utf8_str = data
 
-        if isinstance(data, str):
-            data_as_utf8_str = data.encode("utf-8")
+            if isinstance(data, unicode):
+                data_as_utf8_str = data.encode("utf-8")
 
-            # if Python 3.x data_as_utf8_str will be bytes, so we convert back to str
-            if isinstance(data_as_utf8_str, bytes):
-                data_as_utf8_str = data_as_utf8_str.decode(("utf-8"))
+                # if Python 3.x data_as_utf8_str will be bytes, so we convert back to str
+                if isinstance(data_as_utf8_str, bytes):
+                    data_as_utf8_str = data_as_utf8_str.decode(("utf-8"))
 
-        elif isinstance(data, dict):
-            data_as_utf8_str = {cls._byteify(key): cls._byteify(
-                value) for key, value in data.items()}
+            elif isinstance(data, dict):
+                data_as_utf8_str = {cls._byteify(key): cls._byteify(value) for key, value in data.items()}
 
-        return data_as_utf8_str
+            return data_as_utf8_str
+        else:
+            raise ValueError("We do not support this version of Python")
 
     @staticmethod
     def _encodeBase64(str_to_encode):
         """A helper function to encode a base64 string for Python 3 support"""
-        str_to_encode = base64.b64encode(str_to_encode)
-        return str_to_encode.decode("utf-8")
+        if six.PY3:
+            str_to_encode = base64.b64encode(str_to_encode)
+            return str_to_encode.decode("utf-8")
+
+        else:
+            raise ValueError("We do not support this version of Python")
+
+    @staticmethod
+    def str_to_unicode(str_to_convert):
+        if six.PY3:
+            return str(str_to_convert)
+
+        else:
+            raise ValueError("We do not support this version of Python")
+
+    def get_config_option(self, option_name, optional=False, placeholder=None):
+        """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
+        option = self.app_configs.get(option_name, placeholder)
+        err = f"'{option_name}' is mandatory and is not set in app.config file. You must set this value to run this function"
+
+        if not option and optional is False:
+            raise ValueError(err)
+        elif optional is False and placeholder and option == placeholder:
+            raise ValueError(err)
+        else:
+            return option
+
+    @staticmethod
+    def get_function_input(inputs, input_name, optional=False):
+        """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
+        LOG.debug(f"Trying to get function input: {input_name} from {inputs}. optional = {optional}")
+
+        the_input = inputs.get(input_name)
+
+        if the_input is None and optional is False:
+            err = f"'{input_name}' is a mandatory function input"
+            raise ValueError(err)
+        else:
+            LOG.debug(f"Got function input: {input_name}")
+            return the_input
 
     @staticmethod
     def generate_res_id(incident_id, task_id=None, sn_res_id=None):
@@ -187,19 +217,17 @@ class ResilientHelper(object):
         elif state == "C":
             return "Closed"
         else:
-            raise ValueError(
-                f"{state} is not a valid SOAR State. O=Open Task, A=Active Incident, C=Closed Incident/Task")
+            raise ValueError(f"{state} is not a valid Resilient State. O=Open Task, A=Active Incident, C=Closed Incident/Task")
 
     @staticmethod
     def get_incident(client, incident_id):
-        """Function that gets the incident from SOAR"""
+        """Function that gets the incident from Resilient"""
         err_msg = None
         get_url = f"/incidents/{incident_id}?text_content_output_format=always_text&handle_format=names"
 
-        # Get the incident from SOAR api
+        # Get the incident from resilient api
         try:
-            LOG.debug(
-                f"GET Incident from SOAR: ID {incident_id} URL: {get_url}")
+            LOG.debug(f"GET Incident from Resilient: ID {incident_id} URL: {get_url}")
             incident = client.get(get_url)
             LOG.debug(f"Incident got successfully: {incident}")
         except Exception as err:
@@ -230,23 +258,21 @@ class ResilientHelper(object):
 
         # Use the get_put option to GET the data, apply the change, and PUT it back to the server
         try:
-            LOG.debug(
-                f"PUT Incident from SOAR: ID: {incident_id} URL: {url} New Name: {new_incident_name}")
+            LOG.debug(f"PUT Incident from Resilient: ID: {incident_id} URL: {url} New Name: {new_incident_name}")
             client.get_put(url, change_func)
-            LOG.info(
-                f"Incident was successfully renamed to '{new_incident_name}'")
+            LOG.info(f"Incident was successfully renamed to '{new_incident_name}'")
         except Exception as err:
             raise ValueError(str(err))
 
     @staticmethod
     def get_task(client, task_id, incident_id):
-        """Function that gets the task from SOAR. Gets the task's instructions too"""
+        """Function that gets the task from Resilient. Gets the task's instructions too"""
         err_msg = None
 
-        # Get the task from SOAR api
+        # Get the task from resilient api
         try:
             get_url = f"/tasks/{task_id}?text_content_output_format=always_text&handle_format=names"
-            LOG.debug(f"GET Task from SOAR: ID {task_id} URL: {get_url}")
+            LOG.debug(f"GET Task from Resilient: ID {task_id} URL: {get_url}")
             task = client.get(get_url)
             LOG.debug(f"Task got successfully: {task}")
         except Exception as err:
@@ -261,18 +287,17 @@ class ResilientHelper(object):
 
             raise ValueError(err_msg)
 
+
         # Get the task_instructions in plaintext
         try:
             get_url = f"/tasks/{task_id}/instructions_ex"
-            LOG.debug(
-                f"GET task_instructions for: ID {task_id} URL: {get_url}")
+            LOG.debug(f"GET task_instructions for: ID {task_id} URL: {get_url}")
             task_instructions = client.get_content(get_url)
-            soup = BeautifulSoup(
-                str(task_instructions, "utf-8"), 'html.parser')
+            soup = BeautifulSoup(unicode(task_instructions, "utf-8"), 'html.parser')
             soup = soup.get_text()
             # BeautifulSoup decoding of the HTML includes quotation marks and non-breaking spaces
             # so we need to remove those for the instructions text that will go to SNOW
-            task_instructions = soup.replace(u'\xa0', u' ').replace(u'"', u'')
+            task_instructions = soup.replace(u'\xa0', u' ').replace(u'"',u'')
             LOG.debug("task_instructions got successfully")
         except Exception as err:
             err_msg = f"Error trying to get task_instructions for Task {task_id}."
@@ -283,6 +308,7 @@ class ResilientHelper(object):
                 err_msg = f"{err_msg} {err}"
 
             raise ValueError(err_msg)
+
 
         return Task(incident_id, task_id, task["name"], task_instructions)
 
@@ -301,18 +327,17 @@ class ResilientHelper(object):
 
         # Use the get_put option to GET the data, apply the change, and PUT it back to the server
         try:
-            LOG.debug(
-                f"PUT Task from SOAR: ID: {task_id} URL: {url} New Name: {new_task_name}")
+            LOG.debug(f"PUT Task from Resilient: ID: {task_id} URL: {url} New Name: {new_task_name}")
             client.get_put(url, change_func)
             LOG.info(f"Task was successfully renamed to '{new_task_name}'", )
         except Exception as err:
             raise ValueError(str(err))
 
+
     @classmethod
     def get_attachment(cls, res_client, attachment_id, incident_id=None, task_id=None):
         """Function that gets incident/task attachment"""
-        attachment = {"id": None, "name": None,
-                      "content_type": None, "contents": None}
+        attachment = {"id": None, "name": None, "content_type": None, "contents": None}
         err_msg, get_url = None, None
 
         # Get attachment metadata url
@@ -321,13 +346,11 @@ class ResilientHelper(object):
         elif incident_id:
             get_url = f"/incidents/{incident_id}/attachments/{attachment_id}"
         else:
-            raise ValueError(
-                "Failed to get_attachment. task_id or incident_id must be specified with attachment_id")
+            raise ValueError("Failed to get_attachment. task_id or incident_id must be specified with attachment_id")
 
         # Get attachment metadata
         try:
-            LOG.debug(
-                f"GET Attachment metadata: ID {attachment_id} URL: {get_url}")
+            LOG.debug(f"GET Attachment metadata: ID {attachment_id} URL: {get_url}")
             meta_data = res_client.get(get_url)
             LOG.debug("Attachment metadata got successfully")
         except Exception as err:
@@ -351,10 +374,8 @@ class ResilientHelper(object):
 
         # Get attachment contents
         try:
-            LOG.debug(
-                f"GET Attachment contents: ID {attachment_id} URL: {get_url}")
-            attachment["contents"] = cls._encodeBase64(
-                res_client.get_content(get_contents_url))
+            LOG.debug(f"GET Attachment contents: ID {attachment_id} URL: {get_url}")
+            attachment["contents"] = cls._encodeBase64(res_client.get_content(get_contents_url))
             LOG.debug("Attachment contents got successfully")
         except Exception as err:
             err_msg = f"Error trying to get Attachment contents for ID: {attachment_id}."
@@ -373,8 +394,7 @@ class ResilientHelper(object):
         """Function that generates the data that is sent in the request to the /create endpoint in ServiceNow"""
         err_msg, request_data = None, None
 
-        LOG.debug(
-            f"Generating request for ServiceNow. incident_id: {incident_id} task_id: {task_id} sn_table_name: {sn_table_name} res_link: {res_link} init_note: {init_note} sn_optional_fields: {sn_optional_fields} res_datatable: {res_datatable}")
+        LOG.debug(f"Generating request for ServiceNow. incident_id: {incident_id} task_id: {task_id} sn_table_name: {sn_table_name} res_link: {res_link} init_note: {init_note} sn_optional_fields: {sn_optional_fields} res_datatable: {res_datatable}")
 
         # Generate the res_id
         res_id = cls.generate_res_id(incident_id, task_id)
@@ -421,8 +441,7 @@ class ResilientHelper(object):
         if sn_optional_fields and len(sn_optional_fields) > 0:
             fields = []
             for field in sn_optional_fields:
-                fields.append(
-                    {"name": field, "value": sn_optional_fields[field]})
+                fields.append({"name": field, "value": sn_optional_fields[field]})
             request_data["sn_optional_fields"] = fields
         else:
             request_data["sn_optional_fields"] = None
@@ -438,7 +457,7 @@ class ResilientHelper(object):
 
         if self.SN_TABLE_NAME == SECOPS_TABLE_NAME and sn_ref_id.startswith(SECOPS_PLAYBOOK_TASK_PREFIX):
             return SECOPS_PLAYBOOK_TASK_TABLE_NAME
-
+        
         return self.SN_TABLE_NAME
 
     def sn_api_request(self, rc, method, endpoint, params=None, data=None, headers=None):
@@ -448,8 +467,7 @@ class ResilientHelper(object):
         SUPPORTED_METHODS = ["GET", "POST", "PATCH"]
 
         if method not in SUPPORTED_METHODS:
-            raise ValueError(
-                f"{method} is not a supported ServiceNow API Request. Supported methods are: {SUPPORTED_METHODS}")
+            raise ValueError(f"{method} is not a supported ServiceNow API Request. Supported methods are: {SUPPORTED_METHODS}")
 
         headers = self.headers if headers is None else headers
         url = f"{self.SN_API_URL}{endpoint}"
@@ -463,8 +481,7 @@ class ResilientHelper(object):
             data=data
         )
 
-        LOG.info(
-            f"SN REQUEST:\nmethod: {res.request.method}\nurl: {res.request.url}\nbody: {res.request.body}")
+        LOG.info(f"SN REQUEST:\nmethod: {res.request.method}\nurl: {res.request.url}\nbody: {res.request.body}")
 
         if method == "GET":
             LOG.info(f"SN RESPONSE: {res}")

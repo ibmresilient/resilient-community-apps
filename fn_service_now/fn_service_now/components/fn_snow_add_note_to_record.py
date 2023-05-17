@@ -11,7 +11,7 @@ from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import RequestsCommon, ResultPayload, MarkdownParser, str_to_bool, validate_fields
+from resilient_lib import RequestsCommon, ResultPayload, MarkdownParser, str_to_bool
 
 
 class FunctionPayload(object):
@@ -52,18 +52,17 @@ class FunctionComponent(ResilientComponent):
             res_helper = ResilientHelper(self.options)
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
-            validate_fields(["incident_id", "sn_note_text", "sn_note_type"], kwargs)
 
             # Get the function inputs:
             inputs = {
                 # number (required)
-                "incident_id": kwargs.get("incident_id"),
+                "incident_id": res_helper.get_function_input(kwargs, "incident_id"),
                 # number
-                "task_id": kwargs.get("task_id"),
+                "task_id": res_helper.get_function_input(kwargs, "task_id", True),
                 # text (required)
-                "sn_note_text": kwargs.get("sn_note_text"),
+                "sn_note_text": res_helper.get_function_input(kwargs, "sn_note_text"),
                 # select, text (required)
-                "sn_note_type": kwargs.get("sn_note_type", {}).get("name")
+                "sn_note_type": res_helper.get_function_input(kwargs, "sn_note_type")["name"]
             }
 
             # Since v2.1.0, we've changed this to support HTML; the old version cleared the HTML.

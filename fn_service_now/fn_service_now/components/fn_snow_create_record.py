@@ -12,7 +12,7 @@ from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import RequestsCommon, ResultPayload, validate_fields
+from resilient_lib import RequestsCommon, ResultPayload
 
 
 class FunctionPayload(object):
@@ -66,18 +66,16 @@ class FunctionComponent(ResilientComponent):
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
 
-            validate_fields(["incident_id"], kwargs)
-
             # Get the function inputs:
             inputs = {
                 # number (required)
-                "incident_id": kwargs.get("incident_id"),
+                "incident_id": res_helper.get_function_input(kwargs, "incident_id"),
                 # number (optional)
-                "task_id": kwargs.get("task_id"),
+                "task_id": res_helper.get_function_input(kwargs, "task_id", True),
                 # text (optional)
-                "sn_init_work_note": kwargs.get("sn_init_work_note"),
+                "sn_init_work_note": res_helper.get_function_input(kwargs, "sn_init_work_note", True),
                 # text, JSON String (optional)
-                "sn_optional_fields": kwargs.get("sn_optional_fields")
+                "sn_optional_fields": res_helper.get_function_input(kwargs, "sn_optional_fields", True)
             }
 
             # Convert 'sn_optional_fields' JSON string to Dictionary
@@ -126,7 +124,7 @@ class FunctionComponent(ResilientComponent):
                 request_data = req.get("data")
 
                 yield StatusMessage(u"Creating a new ServiceNow Record for the {0}: {1}".format(
-                    "Incident" if request_data.get("type") == "res_incident" else "Task", request_data.get("incident_name")) if request_data.get("incident_name") else request_data.get("task_name"))
+                    "Incident" if request_data.get("type") == "res_incident" else "Task", res_helper.str_to_unicode(request_data.get("incident_name")) if request_data.get("incident_name") else res_helper.str_to_unicode(request_data.get("task_name"))))
 
                 # Call POST and get response
                 create_in_sn_response = res_helper.sn_api_request(

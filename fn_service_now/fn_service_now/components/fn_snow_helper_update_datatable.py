@@ -11,7 +11,7 @@ from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import ResultPayload, validate_fields
+from resilient_lib import ResultPayload
 
 
 class FunctionPayload(object):
@@ -54,16 +54,15 @@ class FunctionComponent(ResilientComponent):
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
-            validate_fields(["incident_id", "sn_resilient_status"], kwargs)
 
             # Get the function inputs:
             inputs = {
                 # number (required)
-                "incident_id": kwargs.get("incident_id"),
+                "incident_id": res_helper.get_function_input(kwargs, "incident_id"),
                 # number (optional)
-                "task_id": kwargs.get("task_id"),
+                "task_id": res_helper.get_function_input(kwargs, "task_id", True),
                 # text (required)
-                "sn_resilient_status": kwargs.get("sn_resilient_status"),
+                "sn_resilient_status": res_helper.get_function_input(kwargs, "sn_resilient_status"),
             }
 
             # Create payload dict with inputs

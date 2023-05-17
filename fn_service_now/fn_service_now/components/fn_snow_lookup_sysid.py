@@ -10,7 +10,7 @@ from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import RequestsCommon, ResultPayload, validate_fields
+from resilient_lib import RequestsCommon, ResultPayload
 
 
 class FunctionPayload(object):
@@ -50,16 +50,15 @@ class FunctionComponent(ResilientComponent):
             res_helper = ResilientHelper(self.options)
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
-            validate_fields(["sn_query_field", "sn_table_name", "sn_query_value"], kwargs)
 
             # Get the function inputs:
             inputs = {
                 # text (required)
-                "sn_query_field": kwargs.get("sn_query_field"),
+                "sn_query_field": res_helper.get_function_input(kwargs, "sn_query_field"),
                 # text (required)
-                "sn_table_name": kwargs.get("sn_table_name"),
+                "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name"),
                 # text (required)
-                "sn_query_value": kwargs.get("sn_query_value")
+                "sn_query_value": res_helper.get_function_input(kwargs, "sn_query_value")
             }
 
             # Create payload dict with inputs
