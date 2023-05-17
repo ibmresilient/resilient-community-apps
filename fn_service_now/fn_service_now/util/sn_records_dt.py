@@ -31,17 +31,13 @@ class ServiceNowRecordsDataTable(object):
             cells = row["cells"]
             if cells[cell_name] and cells[cell_name].get("value") and cells[cell_name].get("value") == cell_value:
                 return row
-        return None
 
     def get_sn_ref_id(self, res_id):
         """Returns the sn_ref_id that relates to the res_id"""
         row = self.get_row("sn_records_dt_res_id", res_id)
-
         if row:
             cells = row["cells"]
             return str(cells["sn_records_dt_sn_ref_id"]["value"])
-
-        return None
 
     def add_row(self, time, name, res_type, res_id, sn_ref_id, res_status, snow_status, link):
         """Adds a new row to the data table and returns that row"""
