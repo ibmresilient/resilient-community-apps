@@ -67,7 +67,15 @@ This is necessary in an App Host environment to retain your schedules outside th
 
 ### Notes regarding v2.1.0
 
-This application has been recreated using playbooks. While the application itself still supports scheduling Rules, and Workflows, its own Rules have been replaced with playbooks.
+In v2.1, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow. 
+
+If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows. 
+But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes. 
+
 
 | SOAR Version | Capability |
 | ------------ | ---------- |
