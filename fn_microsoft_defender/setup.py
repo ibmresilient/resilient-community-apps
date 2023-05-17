@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_microsoft_defender",
     display_name="Microsoft Defender",
-    version="1.1.0",
+    version="1.2.0",
     license="MIT",
     author="IBM SOAR",
     author_email="mscherfling@ibm.com",
@@ -31,8 +31,8 @@ setup(
     description="IBM SOAR App for Microsoft Defender ATP",
     long_description="""Perform operations against Defender such as synchronize incidents and alerts, set indicators, isolate and quarantine machines, and block file execution""",
     install_requires=[
-        "resilient_circuits>=37.0.0",
-        "resilient_lib>=37.0.0",
+        "resilient_circuits>=46.0.0",
+        "resilient_lib>=46.0.0",
         "msal",
         "simplejson",
         "python-rapidjson"
