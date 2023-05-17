@@ -9,7 +9,7 @@ from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 
 
 class FunctionPayload(object):
@@ -48,13 +48,14 @@ class FunctionComponent(ResilientComponent):
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
+            validate_fields(["sn_res_id", "sn_note_text"], kwargs)
 
             # Get the function inputs:
             inputs = {
                 # text (required)
-                "sn_res_id": res_helper.get_function_input(kwargs, "sn_res_id"),
+                "sn_res_id": kwargs.get("sn_res_id"),
                 # number (required)
-                "sn_note_text": res_helper.get_function_input(kwargs, "sn_note_text")
+                "sn_note_text": kwargs.get("sn_note_text")
             }
 
             # Create payload dict with inputs

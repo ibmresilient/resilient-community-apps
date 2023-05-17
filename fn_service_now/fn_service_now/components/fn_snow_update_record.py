@@ -12,7 +12,7 @@ from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import RequestsCommon, ResultPayload
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 
 
 class FunctionPayload(object):
@@ -55,17 +55,18 @@ class FunctionComponent(ResilientComponent):
             res_helper = ResilientHelper(self.options)
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
+            validate_fields(["incident_id", "sn_update_fields"], kwargs)
 
             # Get the function inputs:
             inputs = {
                 # number (required)
-                "incident_id": res_helper.get_function_input(kwargs, "incident_id"),
+                "incident_id": kwargs.get("incident_id"),
                 # number (optional)
-                "task_id": res_helper.get_function_input(kwargs, "task_id", True),
+                "task_id": kwargs.get("task_id"),
                 # text (optional)
-                "sn_res_id": res_helper.get_function_input(kwargs, "sn_res_id", True),
+                "sn_res_id": kwargs.get("sn_res_id"),
                 # text, JSON String (required)
-                "sn_update_fields": res_helper.get_function_input(kwargs, "sn_update_fields")
+                "sn_update_fields": kwargs.get("sn_update_fields")
             }
 
             # Convert 'sn_update_fields' JSON string to Dictionary
