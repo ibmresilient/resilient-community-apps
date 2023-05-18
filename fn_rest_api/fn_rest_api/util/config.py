@@ -9,12 +9,18 @@ def config_section_data():
     for fn_rest_api when called by `resilient-circuits config [-c|-u]`
     """
     return u"""[fn_rest_api]
+#
 # Uncomment to add proxies
 # https_proxy = https://<your_proxy>:<port>
 # http_proxy = http://<your_proxy>:<port>
 #
-# In conjunction with Secrets set in SOAR, you can use sensitive values
-# auth_example = $SECRET_EXAMPLE
+# Values can be assigned here in app.conf and reference them in application
+# auth_header = sampleAPIToken123
 #
-
+# Alternatively, sensitive values can be stored as a SECRET in the Resilient platform
+# and assigned to a key as shown below.
+# auth_header = $SECRET_EXAMPLE
+#
+# This auth_header can later be accessed in the a playbook or a workflow as {{auth_header}}
+#
 """
