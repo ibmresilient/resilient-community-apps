@@ -268,7 +268,7 @@ def check_incident_filters(defender_incident, new_incident_filters):
             else:
                 result = bool(filter_value == defender_incident[filter_name])
 
-        if result:
+        if result is not None:
             result_list.append(result)
 
     return all(result_list)
@@ -316,7 +316,7 @@ def check_alert_filters(alert_list, alert_filters):
                     filter_result = bool(filter_value == alert[filter_name])
 
                 # when a test is done, save the value to compare with all other tests
-                if filter_result:
+                if filter_result is not None:
                     alert_result.append(filter_result)
 
         # if one alert passes all criteria, return with success. Otherwise continue to next alert
