@@ -14,6 +14,8 @@
   - [Installation](#installation)
   - [Function - REST API](#function---rest-api)
   - [Input Considerations](#input-considerations)
+    - [Sensitive information using APP Secrets](#sensitive-information-using-app-secrets)
+    - [Format](#format)
     - [1. New-line separated (Legacy)](#1-new-line-separated-legacy)
       - [Note:](#note)
       - [Example:](#example)
@@ -120,8 +122,24 @@ This function calls a REST web service. It supports the standard REST methods: G
 
 ## Input Considerations
 
-* rest_api_url, rest_api_method and rest_api_verify are mandatory fields.
-* rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.
+### Sensitive information using APP Secrets
+
+For sensitive information that may be included in the `rest_header`, `rest_url`, `rest_body`, or `rest_cookies`, you can substitute values from the  This, in conjunction with app secrets, allows the user to set sensitive values without having them exposed in plaintext.
+
+
+
+<p align="center">
+<img src="./doc/screenshots/fn-rest-api-create-secret.png" />
+</p>                                                 
+
+<p align="center">
+<img src="./doc/screenshots/fn-rest-api-app-config.png" />
+</p>
+
+
+### Format
+
+* Inputs for the fields: `rest_api_headers`, `rest_api_cookies`, `rest_api_body` can be provided in 2 different format.
 ### 1. New-line separated (Legacy)
    This format allows for specifying inputs as key-value pairs, separated
    by a new line. It let's us create quick and easy inputs that is properly
@@ -142,7 +160,7 @@ This function calls a REST web service. It supports the standard REST methods: G
      headers = """
      Content-Type: application/json
      X-Frooble: Baz
-     Authorization: {{auth_header}}
+     Authorization: {{bearer_id}}
      """
   ```
 
@@ -151,7 +169,7 @@ This function calls a REST web service. It supports the standard REST methods: G
    or nested Key-value pairs.
 
   #### Example:
-  ```json
+  ```python
     body = """
      "name" : "user1",
      "password" : "p@ssword1",
@@ -183,29 +201,19 @@ This function calls a REST web service. It supports the standard REST methods: G
     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
   ```
 
-For sensitive information that may be included in the rest_header, rest_url, rest_body, or rest_cookies, using jinja-like syntax, you can substitute values that are specified in the inputs for values that are in the app.config. This, in conjunction with app secrets, allows the user to set sensitive values without having them exposed in plaintext.
-
-<p align="center">
-<img src="./doc/screenshots/fn-rest-api-app-config.png" />
-</p>
-
-<p align="center">
-<img src="./doc/screenshots/fn-rest-api-create-secret.png" />
-</p>
-
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `rest_api_allowed_status_codes` | `text` | No | `-` | Comma separated list |
-| `rest_api_body` | `textarea` | No | `-` | Request body |
-| `rest_api_cookies` | `textarea` | No | `-` | Cookies required for the API call |
-| `rest_api_headers` | `textarea` | No | `-` | Request headers |
-| `rest_api_method` | `select` | No | `-` | REST methods: GET, HEAD, POST, PUT, DELETE, OPTIONS and PATCH |
-| `rest_api_timeout` | `number` | No | `-` | Request timeout |
-| `rest_api_url` | `text` | No | `-` | Endpoint URL |
-| `rest_api_verify` | `boolean` | Yes | `-` | Verify SSL certificate |
+| `rest_api_allowed_status_codes` | `text` | No | `"305, 404, 500"` | Comma separated list. All codes < 300 is allowed |
+| `rest_api_body` | `textarea` | No | `-` | Request body. Check [Input Considerations](#input-considerations) for format |
+| `rest_api_cookies` | `textarea` | No | `-` | Cookies required for the API call. Check [Input Considerations](#input-considerations) for format |
+| `rest_api_headers` | `textarea` | No | `-` | Request headers. Check [Input Considerations](#input-considerations) for format |
+| `rest_api_method` | `select` | Yes | `GET` | REST methods: GET, HEAD, POST, PUT, DELETE, OPTIONS and PATCH |
+| `rest_api_timeout` | `number` | No | `60` | Request timeout in seconds |
+| `rest_api_url` | `text` | Yes | `www.example.com` | Endpoint URL |
+| `rest_api_verify` | `boolean` | No | `True` | Verify SSL certificate |
 
 </p>
 </details>

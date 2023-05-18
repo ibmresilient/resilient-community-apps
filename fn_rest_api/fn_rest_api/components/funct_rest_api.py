@@ -69,6 +69,7 @@ class FunctionComponent(AppFunctionComponent):
         # Rendering rest url
         rest_url = render(rest_url, self.options)
 
+        LOG.info("Rendering rest properties")
         # Read newline-separated or json formatted 'headers', 'body' and 'cookies' into a dictionary, if None, skipped
         for key in rest_properties:
             kv_option = rest_properties[key]
@@ -76,6 +77,7 @@ class FunctionComponent(AppFunctionComponent):
                 kv_option = render(kv_option, self.options)
                 kv_option = build_dict(kv_option)
                 rest_properties[key] = kv_option
+            LOG.info(f"{key} : {kv_option}")
 
         # Converting allowed_status_codes to a list of integers
         allowed_status_codes = [int(x) for x in allowed_status_codes.split(",")] if allowed_status_codes else []
@@ -83,7 +85,7 @@ class FunctionComponent(AppFunctionComponent):
         response = make_rest_call(
             self.opts, self.options, rest_method, rest_url,
             rest_properties.get("headers"), rest_properties.get("cookies"),
-            rest_properties.get("body"), rest_verify,rest_timeout, allowed_status_codes)
+            rest_properties.get("body"), rest_verify, rest_timeout, allowed_status_codes)
 
         try:
             response_json = response.json()
