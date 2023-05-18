@@ -4,28 +4,58 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Defender Get Incident
+# Playbook - Defender Get Incident (PB)
 
+### API Name
+`defender_get_incident_pb`
+
+### Status
+`disabled`
+
+### Activation Type
+`automatic`
+
+### Object Type
+`incident`
+
+### Description
+Get a Defender 365 Incident by incident id
+
+
+---
 ## Function - Defender Get Incident
 
 ### API Name
 `defender_get_incident`
 
 ### Output Name
-``
+`get_incident`
 
 ### Message Destination
 `fn_microsoft_defender`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.defender_incident_id = incident.properties.defender_incident_id
-
 ```
 
-### Post-Processing Script
+---
+
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Objet Type
+`incident`
+
+### Script Content
 ```python
-import java.util.Date as Date
+from datetime import datetime
+results = playbook.functions.results.get_incident
 
 def mk_mitre_link(technique_list):
     links = []
@@ -36,21 +66,19 @@ def mk_mitre_link(technique_list):
                          
     return links
             
-now = Date().getTime()
+now = int(datetime.now().timestamp()*1000)
 
-resultz = results
-
-if resultz.success:
+if results.get("success"):
     # get max alert setting
-    max_alerts = int(resultz.inputs.get('defender_alert_result_max', 0))
+    max_alerts = int(results.get("inputs", {}).get('defender_alert_result_max', 0))
     row_count = 0
     machine_list = []
-    for alert in resultz.content.get('alerts', {}):
+    for alert in results.get("content", {}).get('alerts', {}):
         for device in alert.get('devices', {}):
             if device['mdatpDeviceId'] not in machine_list:
                 machine_list.append(device['mdatpDeviceId'])
                 row = incident.addRow('defender_machines')
-                row['report_date'] = int(Date().getTime())
+                row['report_date'] = now
                 row['machine_link'] = "<a target='blank' href='https://security.microsoft.com/machines/{}/overview'>Machine</a>".format(device['mdatpDeviceId'])
                 row['machine_id'] = device['mdatpDeviceId']
                 row['machine_name'] = device['deviceDnsName']
@@ -85,10 +113,9 @@ if resultz.success:
             row_count += 1
 
 else:
-    msg = u"Defender Get Incident unsuccessful.\nReason: {}".format(resultz.reason)
+    msg = u"Defender Get Incident unsuccessful.\nReason: {}".format(results.get("reason"))
     incident.addNote(msg)
 
 ```
 
 ---
-

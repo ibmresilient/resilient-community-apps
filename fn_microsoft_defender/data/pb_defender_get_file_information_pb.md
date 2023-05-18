@@ -4,38 +4,68 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Defender Get File Information
+# Playbook - Defender Get File Information (PB)
 
+### API Name
+`defender_get_file_information_pb`
+
+### Status
+`enabled`
+
+### Activation Type
+`manual`
+
+### Object Type
+`artifact`
+
+### Description
+Get more information about a file based on it's SHA1 or SHA256 hash
+
+
+---
 ## Function - Defender Get File Information
 
 ### API Name
 `defender_get_file_information`
 
 ### Output Name
-`None`
+`get_file_info`
 
 ### Message Destination
 `fn_microsoft_defender`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.defender_file_hash = artifact.value
 ```
 
-### Post-Processing Script
+---
+
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Objet Type
+`artifact`
+
+### Script Content
 ```python
-if not results.success:
-    msg = u"Defender Get File Information failed: {}".format(results.reason)
+results - playbook.functions.results.get_file_info
+if not results.get("success"):
+    msg = f"Defender Get File Information failed: {results.get('reason')}".
 else:
-    info = [u"{}: {}".format(k, v) for k, v in results.content.items()]
-    msg = u"Defender Get File Information:\n\n{}".format("\n".join(info))
+    info = [f"{k}: {v}" for k, v in results.get("content", {}).items()]
+    msg = f"Defender Get File Information:\n\n{'\n'.join(info)}"
 
 if artifact.description:
-    artifact.description = u"{}\n\n{}".format(artifact.description.content, msg)
+    artifact.description = f"{artifact.description.content}\n\n{msg}"
 else:
     artifact.description = msg
-    
-    
+
 """
 {
     "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Files/$entity",
@@ -60,4 +90,3 @@ else:
 ```
 
 ---
-

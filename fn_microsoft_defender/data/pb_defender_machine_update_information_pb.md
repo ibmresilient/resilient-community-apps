@@ -4,30 +4,59 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Defender Get Updated Machine Information
+# Playbook - Defender Machine Update Information (PB)
 
+### API Name
+`defender_machine_update_information_pb`
+
+### Status
+`disabled`
+
+### Activation Type
+`automatic`
+
+### Object Type
+`defender_machines`
+
+### Description
+Refresh Defender machine information
+
+
+---
 ## Function - Defender Find machines by filter
 
 ### API Name
 `defender_find_machines_by_filter`
 
 ### Output Name
-`None`
+`find_machine`
 
 ### Message Destination
 `fn_microsoft_defender`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.defender_filter_name = "filter_by_id"
 inputs.defender_filter_value = row['machine_id']
 ```
 
-### Post-Processing Script
-```python
-import java.util.Date as Date
-now = Date().getTime()
+---
 
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Objet Type
+`defender_machines`
+
+### Script Content
+```python
+from datetime import datetime
+now = int(datetime.now().timestamp()*1000)
 """
 "value": [
     {
@@ -38,8 +67,9 @@ now = Date().getTime()
     }
 ]
 """
-if results.success:
-    for machine in results.content.get('value', []):
+results = playbook.functions.results.find_machine
+if results.get("success"):
+    for machine in results.get("content", {}).get('value', []):
         row['report_date'] = now
         row['machine_internal_ip'] = machine['lastIpAddress']
         row['machine_ip'] = machine['lastExternalIpAddress']
@@ -49,9 +79,8 @@ if results.success:
         row['machine_exposure_level'] = machine.get('exposureLevel')
         row['machine_tags'] = ', '.join(machine.get('machineTags', []))
 else:
-  msg = u"Defender find machines by filter unsuccessful\nReason: {}".format(results.reason)
+  msg = u"Defender find machines by filter unsuccessful\nReason: {}".format(results.get("reason"))
   incident.addNote(helper.createPlainText(msg))
 ```
 
 ---
-

@@ -4,37 +4,67 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Defender Collect Machine Investigation Package
+# Playbook - Defender Machine Collect Investigation Package (PB)
 
+### API Name
+`defender_machine_collect_investigation_package_pb`
+
+### Status
+`enabled`
+
+### Activation Type
+`manual`
+
+### Object Type
+`defender_machines`
+
+### Description
+Start a process to collect an investigation report
+
+
+---
 ## Function - Defender Collect Machine Investigation Package
 
 ### API Name
 `defender_collect_machine_investigation_package`
 
 ### Output Name
-`None`
+`collect_machine_package`
 
 ### Message Destination
 `fn_microsoft_defender`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.defender_machine_id = row['machine_id']
-inputs.defender_description = rule.properties.defender_action_comment
+inputs.defender_description = playbook.inputs.defender_action_comment
 ```
 
-### Post-Processing Script
-```python
-import java.util.Date as Date
-now = Date().getTime()
+---
 
-if results.success:
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Objet Type
+`defender_machines`
+
+### Script Content
+```python
+from datetime import datetime
+now = int(datetime.now().timestamp()*1000)
+results = playbook.functions.results.collect_machine_package
+if results.get("success"):
   msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
-    results.content['type'],
-    results.content['requestorComment'],
-    results.content['status'],
-    results.content['creationDateTimeUtc']
-    )
+    results.get("content", {}).get('type'),
+    results.get("content", {}).get('requestorComment'),
+    results.get("content", {}).get('status'),
+    results.get("content", {}).get('creationDateTimeUtc')
+  )
   row['machine_last_action'] = helper.createPlainText(msg)
   row['report_date'] = now
   
@@ -49,8 +79,6 @@ if results.success:
     'creationDateTimeUtc': '2021-08-12T18:53:06.5259227Z',
     'lastUpdateDateTimeUtc': '2021-08-12T18:54:20.4259984Z',
 """
-  
 ```
 
 ---
-

@@ -4,27 +4,43 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Defender Close Incident
+# Playbook - Defender Close Incident (PB)
 
+### API Name
+`defender_close_incident_pb`
+
+### Status
+`disabled`
+
+### Activation Type
+`automatic`
+
+### Object Type
+`incident`
+
+### Description
+Close the corresponding Defender incident when the SOAR incident closes
+
+
+---
 ## Function - Defender Update Incident
 
 ### API Name
 `defender_update_incident`
 
 ### Output Name
-`None`
+`update_incident`
 
 ### Message Destination
 `fn_microsoft_defender`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
-# change as necessary. Value Defender values are:  Active, Resolved, and Redirected.
 LOOKUP_STATUS = {
-    "7": "Resolved", # Unresolved
-    "8": "Resolved", # Duplicate
-    "9": "Resolved", # Not an Issue
-    "10": "Resolved" # Resolved
+  "7": "Resolved", # Unresolved
+  "8": "Resolved", # Duplicate
+  "9": "Resolved", # Not an Issue
+  "10": "Resolved" # Resolved
 }
 
 inputs.defender_incident_id = incident.properties.defender_incident_id
@@ -32,11 +48,6 @@ inputs.defender_incident_status = LOOKUP_STATUS.get(incident.resolution_id, "Res
 inputs.defender_comment = incident.resolution_summary.content
 inputs.defender_classification = incident.properties.defender_classification
 inputs.defender_determination = incident.properties.defender_determination
-```
-
-### Post-Processing Script
-```python
-None
 ```
 
 ---

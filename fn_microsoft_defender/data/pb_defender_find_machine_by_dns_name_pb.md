@@ -4,30 +4,59 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Defender Find Machines by Filter
+# Playbook - Defender Find Machine by DNS name (PB)
 
+### API Name
+`defender_find_machine_by_dns_name_pb`
+
+### Status
+`enabled`
+
+### Activation Type
+`manual`
+
+### Object Type
+`artifact`
+
+### Description
+Use Microsoft OData filters to find machines controlled by Defender. See app documentation for the filters supported.
+
+
+---
 ## Function - Defender Find machines by filter
 
 ### API Name
 `defender_find_machines_by_filter`
 
 ### Output Name
-`None`
+`find_machine`
 
 ### Message Destination
 `fn_microsoft_defender`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.defender_filter_name = "filter_by_name"
 inputs.defender_filter_value = artifact.value
 ```
 
-### Post-Processing Script
-```python
-import java.util.Date as Date
-now = Date().getTime()
+---
 
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Objet Type
+`artifact`
+
+### Script Content
+```python
+from datetime import datetime
+now = int(datetime.now().timestamp()*1000)
 """
 "value": [
     {
@@ -38,11 +67,12 @@ now = Date().getTime()
     }
 ]
 """
-if results.success:
-    for machine in results.content.get('value', []):
+results = playbook.functions.results.find_machine
+if results.get("success"):
+    for machine in results.get("content", {}).get('value', []):
       row = incident.addRow("defender_machines")
       row['report_date'] = now
-      row['machine_link'] = "<a target='blank' href='https://security.microsoft.com/machines/{}/overview'>Machine</a>".format(machine['mdatpDeviceId'])
+      row['machine_link'] = f"<a target='blank' href='https://security.microsoft.com/machines/{machine['mdatpDeviceId']}/overview'>Machine</a>"
       row['machine_id'] = machine['id']
       row['machine_ip'] = machine['lastExternalIpAddress']
       row['machine_internal_ip'] = machine['lastIpAddress']
@@ -55,9 +85,8 @@ if results.success:
       row['machine_exposure_level'] = machine.get('exposureLevel')
       row['machine_tags'] = ', '.join(machine.get('machineTags', []))
 else:
-  msg = u"Defender Action unsuccessful.\nAction: Find Machines by filter\nReason: {}".format(results.reason)
+  msg = f"Defender Action unsuccessful.\nAction: Find Machines by filter\nReason: {results.get('reason')}"
   incident.addNote(helper.createPlainText(msg))
 ```
 
 ---
-

@@ -4,30 +4,43 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Defender Sync Incident
+# Playbook - Defender Sync Incident (PB)
 
+### API Name
+`defender_sync_incident_pb`
+
+### Status
+`disabled`
+
+### Activation Type
+`automatic`
+
+### Object Type
+`incident`
+
+### Description
+Sync SOAR Incident changes to the corresponding Defender Incident
+
+
+---
 ## Function - Defender Update Incident
 
 ### API Name
 `defender_update_incident`
 
 ### Output Name
-`None`
+`update_incident`
 
 ### Message Destination
 `fn_microsoft_defender`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.defender_incident_id = incident.properties.defender_incident_id
 inputs.defender_classification = incident.properties.defender_classification
 inputs.defender_determination = incident.properties.defender_determination
 inputs.defender_tags = incident.properties.defender_tags
-```
-
-### Post-Processing Script
-```python
-None
+inputs.defender_incident_status = "Active"
 ```
 
 ---
