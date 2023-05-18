@@ -160,13 +160,18 @@ def make_rest_call(opts, options, rest_method : str,
 
     def callback(response: requests.Response):
         ''' 
-        Callback function to check the response status code and return the response if the status code even
-        if response status code is > 300.
+        Callback function to check the response status code and return the response. if the status is < 300,
+        or in the allowed_status_codes list, then return the response, else raise an exception.
         '''
+        # return response if status code is < 300
         if response.status_code < 300:
             return response
+
+        # return response if status codein allowed_status_codes list
         elif int(response.status_code) in allowed_status_codes:
             return response
+
+        # raise exception for everything else
         else:
             response.raise_for_status()
 
