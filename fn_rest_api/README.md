@@ -15,7 +15,7 @@
   - [Function - REST API](#function---rest-api)
   - [Input Considerations](#input-considerations)
     - [Sensitive information using APP Secrets](#sensitive-information-using-app-secrets)
-    - [Format](#format)
+    - [Input Format](#input-format)
     - [1. New-line separated (Legacy)](#1-new-line-separated-legacy)
       - [Note:](#note)
       - [Example:](#example)
@@ -124,20 +124,26 @@ This function calls a REST web service. It supports the standard REST methods: G
 
 ### Sensitive information using APP Secrets
 
-For sensitive information that may be included in the `rest_header`, `rest_url`, `rest_body`, or `rest_cookies`, you can substitute values from the  This, in conjunction with app secrets, allows the user to set sensitive values without having them exposed in plaintext.
-
-
+For sensitive information that may be included in the `rest_header`, `rest_url`, `rest_body`, or `rest_cookies`, you can substitute values from the app.conf. To do so simply create a Key and a value pair, `auth_header` shown in the screenshot below. This can then be referenced in the application using the double-curly brace, `{{ auth_header }}`.
 
 <p align="center">
-<img src="./doc/screenshots/fn-rest-api-create-secret.png" />
-</p>                                                 
+<img src="./doc/screenshots/fn-rest-api-app-conf.png" />
+</p>
+
+This can also be used in conjunction with app secrets, allows the user to set sensitive values without having them exposed in plaintext.
 
 <p align="center">
-<img src="./doc/screenshots/fn-rest-api-app-config.png" />
+<img src="./doc/screenshots/fn-rest-api-secrets.png" />
+</p>
+
+This key can be directly referenced from within a playbook. For instance, a header using the above mentioned value can be constructed in the preprocessing script as follows:
+
+<p align="center">
+<img src="./doc/screenshots/fn-rest-api-secret-example.png" />
 </p>
 
 
-### Format
+### Input Format
 
 * Inputs for the fields: `rest_api_headers`, `rest_api_cookies`, `rest_api_body` can be provided in 2 different format.
 ### 1. New-line separated (Legacy)
@@ -160,7 +166,7 @@ For sensitive information that may be included in the `rest_header`, `rest_url`,
      headers = """
      Content-Type: application/json
      X-Frooble: Baz
-     Authorization: {{bearer_id}}
+     Authorization: {{auth_header}}
      """
   ```
 
