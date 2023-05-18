@@ -19,6 +19,17 @@
 
 ### Pre-Processing Script
 ```python
+# ALLOWED_STATUS_CODE
+# -------------------
+# Any status code below 300 is allowed by default. If you specify codes above 300, they are
+# expemted from raising an exception and thereby returns the endpoint response. Multiple
+# status codes can be specified as a string in a commad seperated fashion.
+#    
+#    Example:
+#    --------
+#     inputs.rest_api_allowed_status_codes = "305, 400, 404, 500"
+#
+#
 # SECRETS
 # -------
 # For sensitive information that may be included in the rest_header, rest_url, rest_body, or 
@@ -28,12 +39,12 @@
 #
 #    Example:
 #    --------
-#
 #      headers = """
 #      Content-Type: application/json
 #      X-Frooble: Baz
 #      Authorization: {{auth_header}}
 #      """
+#
 #
 # INPUT FORMAT
 # ------------
@@ -135,7 +146,7 @@ inputs.rest_api_cookies = cookie if cookie else None   # Cookies for request
 inputs.rest_api_body    = body if body else None       # Request body
 inputs.rest_api_verify  = verify if verify else True   # (Boolean) indicates whether to verify SSL certificates.
 inputs.rest_api_timeout = timeout if timeout else 600  # Request timeout
-inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else "200" # Status codes in a comma separated fashion
+inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else "200" # Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default
 inputs.rest_api_method  = method if method and method in ["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"] else "GET" #REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS
 
 ```
