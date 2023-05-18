@@ -124,7 +124,7 @@ This function calls a REST web service. It supports the standard REST methods: G
 
 ### Sensitive information using APP Secrets
 
-For sensitive information that may be included in the `rest_header`, `rest_url`, `rest_body`, or `rest_cookies`, you can substitute values from the app.conf. To do so simply create a Key and a value pair, `auth_header` shown in the screenshot below. This can then be referenced in the application using the double-curly brace, `{{ auth_header }}`.
+For sensitive information that may be included in the `rest_header`, `rest_url`, `rest_body`, or `rest_cookies`, you can substitute values from the app.conf. To do so simply create a Key and a value pair, `auth_header` shown in the screenshot below. This can then be referenced in the application using the double-curly brace, `{{auth_header}}`.
 
 <p align="center">
 <img src="./doc/screenshots/fn-rest-api-app-conf.png" />
