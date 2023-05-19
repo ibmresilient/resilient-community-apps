@@ -212,7 +212,7 @@ This key can be directly referenced from within a playbook. For instance, a head
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `rest_api_allowed_status_codes` | `text` | No | `"305, 404, 500"` | Comma separated list. All codes < 300 is allowed |
+| `rest_api_allowed_status_codes` | `text` | No | `"305, 404, 500"` | Comma separated list. All codes < 300 is allowed by default |
 | `rest_api_body` | `textarea` | No | `-` | Request body. Check [Input Considerations](#input-considerations) for format |
 | `rest_api_cookies` | `textarea` | No | `-` | Cookies required for the API call. Check [Input Considerations](#input-considerations) for format |
 | `rest_api_headers` | `textarea` | No | `-` | Request headers. Check [Input Considerations](#input-considerations) for format |
@@ -301,6 +301,38 @@ results = {
 <p>
 
 ```python
+#
+# ALLOWED_STATUS_CODE
+# -------------------
+# Any status code below 300 is allowed by default. If you specify codes above 300, they are
+# exempted from raising an exception and thereby returns the endpoint response. Multiple
+# status codes can be specified as a string in a command separated fashion.
+#    
+#    Example:
+#    --------
+#     inputs.rest_api_allowed_status_codes = "305, 400, 404, 500"
+#
+#
+# SECRETS
+# -------
+# For sensitive information that may be included in the rest_header, rest_url, rest_body, or 
+# rest_cookies, you can substitute values from the app.conf. To do so simply create a Key
+# and a value pair in app.conf and then directly reference the key here using
+# double-curly brace.
+#
+#    Example:
+#    --------
+#      headers = """
+#      Content-Type: application/json
+#      X-Frooble: Baz
+#      Authorization: {{auth_header}}
+#      """
+#
+#
+# INPUT FORMAT
+# ------------
+# rest_api_url, rest_api_method and rest_api_verify are mandatory fields.
+# rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.
 # rest_api_url, rest_api_method and rest_api_verify are mandatory fields.
 # rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.
 #
@@ -312,7 +344,7 @@ results = {
 #    formatted for the request. The primary purpose of this format is to retain
 #    backwards compatibility.
 #
-#    Note:  This format doesnot support complex data structures such as lists
+#    Note:  This format does not support complex data structures such as lists
 #    -----  or nested Key-value pairs.
 #
 #    Example:
@@ -350,7 +382,7 @@ results = {
 #    -----
 #
 #    An easier way to feed inputs to the above mentioned fields would be using
-#    python dictionaries. While the inputs dont directly support dict, the in-built 
+#    python dictionaries. While the inputs don't directly support dict, the in-built 
 #    json package can be used to convert a python dict to json string.
 #
 #    Example:

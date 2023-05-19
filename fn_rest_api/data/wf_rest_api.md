@@ -22,8 +22,8 @@
 # ALLOWED_STATUS_CODE
 # -------------------
 # Any status code below 300 is allowed by default. If you specify codes above 300, they are
-# expemted from raising an exception and thereby returns the endpoint response. Multiple
-# status codes can be specified as a string in a commad seperated fashion.
+# exempted from raising an exception and thereby returns the endpoint response. Multiple
+# status codes can be specified as a string in a command separated fashion.
 #    
 #    Example:
 #    --------
