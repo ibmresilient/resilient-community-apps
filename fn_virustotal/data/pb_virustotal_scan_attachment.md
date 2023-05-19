@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Playbook - VirusTotal: Scan Attachment (PB)
+# Playbook - Example VirusTotal: Scan Attachment (PB)
 
 ### API Name
 `virustotal_scan_attachment`

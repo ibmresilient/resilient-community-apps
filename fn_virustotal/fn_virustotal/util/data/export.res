@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1684182804191,
+  "export_date": 1684524141887,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -245,13 +245,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 70,
+  "id": 75,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1684182802636,
+      "create_date": 1684524140164,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -260,7 +260,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1684182802636,
+      "update_date": 1684524140164,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -289,7 +289,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 22,
+        "content_version": 30,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8d6fda2b_f434_4735_956c_0bc347ed1757\" isExecutable=\"true\" name=\"playbook_8d6fda2b_f434_4735_956c_0bc347ed1757\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0qvbax8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"VirusTotal\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d108590a-21f9-4e42-92c4-d2a6fe39c9b4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"typeLookup = { \u0027Email Attachment\u0027: \u0027file\u0027, \u0027Malware Sample\u0027: \u0027file\u0027, \u0027Malware MD5 Hash\u0027: \u0027hash\u0027, \u0027Malware SHA-1 Hash\u0027: \u0027hash\u0027, \u0027Malware SHA-256 Hash\u0027: \u0027hash\u0027, \u0027Other File\u0027: \u0027file\u0027, \u0027RCF 822 Email Message Fife\u0027: \u0027file\u0027, \u0027File Name\u0027: \u0027filename\u0027,\\n \u0027URL\u0027: \u0027url\u0027, \u0027IP Address\u0027: \u0027ip\u0027, \u0027DNS Name\u0027:\u0027domain\u0027}\\nif artifact.type in typeLookup:\\n  inputs.vt_type = typeLookup.get(artifact.type, artifact.type)\\nelse:\\n  inputs.vt_type = artifact.type\\n\\ninputs.incident_id = incident.id\\ninputs.artifact_id = artifact.id\\ninputs.vt_data = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"vt_scan_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qvbax8\u003c/incoming\u003e\u003coutgoing\u003eFlow_12ot3ft\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0qvbax8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"VirusTotal: Write artifact scan to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a4feb482-12fb-4a48-b09b-a68f1a227daf\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12ot3ft\u003c/incoming\u003e\u003coutgoing\u003eFlow_1yh0cma\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_12ot3ft\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1yh0cma\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1yh0cma\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8d6fda2b_f434_4735_956c_0bc347ed1757\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1yh0cma\" id=\"Flow_1yh0cma_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12ot3ft\" id=\"Flow_12ot3ft_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qvbax8\" id=\"Flow_0qvbax8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1682427075680,
@@ -304,12 +304,12 @@
         "content": "Perform a VirusTotal scan an artifact and write the results to a note for review.  \n\nIn some cases, the scan results may not be available immediately. \nIn those cases, a link to the VirusTotal report is provided for review when complete. ",
         "format": "text"
       },
-      "display_name": "VirusTotal: Scan Artifact (PB)",
+      "display_name": "Example VirusTotal: Scan Artifact (PB)",
       "export_key": "virustotal_scan_artifact",
       "field_type_handle": "playbook_8d6fda2b_f434_4735_956c_0bc347ed1757",
       "fields_type": {
         "actions": [],
-        "display_name": "VirusTotal: Scan Artifact",
+        "display_name": "Example VirusTotal: Scan Artifact (PB)",
         "export_key": "playbook_8d6fda2b_f434_4735_956c_0bc347ed1757",
         "fields": {},
         "for_actions": false,
@@ -341,7 +341,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684182624699,
+      "last_modified_time": 1684512531672,
       "local_scripts": [
         {
           "actions": [],
@@ -352,12 +352,12 @@
           "id": 2,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684182122773,
+          "last_modified_time": 1684512529454,
           "name": "VirusTotal: Write artifact scan to a note",
           "object_type": "artifact",
           "playbook_handle": "virustotal_scan_artifact",
           "programmatic_name": "virustotal_scan_artifact_virustotal_write_artifact_scan_to_a_note",
-          "script_text": "import datetime\n\nresults = playbook.functions.results.vt_scan_results\n  \nmsg = u\"\u003cp\u003eVirusTotal scan of {0} Artifact: {1}\u003c/p\u003e\".format(artifact.type, artifact.value)\nstats = results.scan.data.attributes.get(\"last_analysis_stats\", None)\nif stats is not None:\n\n    msg = msg + u\"\"\"\u003cp\u003eMalicious: \u003cspan style=\u0027color:red\u0027\u003e{}\u003c/span\u003e\nSuspicious: {}\nHarmless:   {}\nUndetected: {}\nTimeout:    {}\u003c/p\u003e\"\"\".format(stats.get(\u0027malicious\u0027), stats.get(\u0027suspicious\u0027),stats.get(\u0027harmless\u0027), stats.get(\u0027undetected\u0027), stats.get(\u0027timeout\u0027))\n    last_analysis_date = results.scan.data.attributes.get(\"last_analysis_date\", None)\n    if last_analysis_date is not None:\n        last_analysis_date_str = datetime.datetime.fromtimestamp(last_analysis_date).strftime(\u0027%Y-%b-%d %H:%M:%S\u0027)\n        msg = msg + u\"\"\"\u003cp\u003eLast analysis date: {}\u003c/p\u003e\"\"\".format(last_analysis_date_str)\n\nincident.addNote(helper.createRichText(u\"\u003cdiv\u003e{}\u003c/div\u003e\".format(msg)))\n\nlast_http_response_content_sha256 = results.scan.data.attributes.get(\"last_http_response_content_sha256\", None)\nif last_http_response_content_sha256 is not None:\n    incident.addArtifact(\u0027Malware SHA-256 Hash\u0027, last_http_response_content_sha256, \"Created by VirusTotal scan of artifact type: {0} value: {1}\".format(artifact.type, artifact.value))\n\nsha256 = results.scan.data.attributes.get(\"sha256\", None) \nif sha256 is not None:\n  incident.addArtifact(\u0027Malware SHA-256 Hash\u0027, sha256, \"Created by VirusTotal scan of artifact type: {0} value: {1}\".format(artifact.type, artifact.value))\n\nmd5 = results.scan.data.attributes.get(\"md5\", None)\nif md5is not None:\n  incident.addArtifact(\u0027Malware MD5 Hash\u0027, md5, \"Created by VirusTotal scan of artifact type: {0} value: {1}\".format(artifact.type, artifact.value))\n\nsha1 = results.scan.data.attributes.get(\"sha1\", None)\nif sha1 is not None:\n  incident.addArtifact(\u0027Malware SHA-1 Hash\u0027, sha1, None, \"Created by VirusTotal scan of artifact type: {0} value: {1}\".format(artifact.type, artifact.value))\n  ",
+          "script_text": "import datetime\nimport json\n\nresults = playbook.functions.results.vt_scan_results\n  \nmsg = u\"\u003cp\u003eVirusTotal scan of {0} Artifact: {1}\u003c/p\u003e\".format(artifact.type, artifact.value)\nstats = results.scan.data.attributes.get(\"last_analysis_stats\", None)\nif stats is not None:\n\n    msg = msg + u\"\"\"\u003cp\u003eMalicious: \u003cspan style=\u0027color:red\u0027\u003e{}\u003c/span\u003e\nSuspicious: {}\nHarmless:   {}\nUndetected: {}\nTimeout:    {}\u003c/p\u003e\"\"\".format(stats.get(\u0027malicious\u0027), stats.get(\u0027suspicious\u0027),stats.get(\u0027harmless\u0027), stats.get(\u0027undetected\u0027), stats.get(\u0027timeout\u0027))\n    last_analysis_date = results.scan.data.attributes.get(\"last_analysis_date\", None)\n    if last_analysis_date is not None:\n        last_analysis_date_str = datetime.datetime.fromtimestamp(last_analysis_date).strftime(\u0027%Y-%b-%d %H:%M:%S\u0027)\n        msg = msg + u\"\"\"\u003cp\u003eLast analysis date: {}\u003c/p\u003e\"\"\".format(last_analysis_date_str)\n\nincident.addNote(helper.createRichText(u\"\u003cdiv\u003e{}\u003c/div\u003e\".format(msg)))\n\nlast_http_response_content_sha256 = results.scan.data.attributes.get(\"last_http_response_content_sha256\", None)\nif last_http_response_content_sha256:\n    incident.addArtifact(\u0027Malware SHA-256 Hash\u0027, last_http_response_content_sha256, \"Created by VirusTotal scan of artifact type: {0} value: {1}\".format(artifact.type, artifact.value))\n\nsha256 = results.scan.data.attributes.get(\"sha256\", None) \nif sha256:\n    incident.addArtifact(\u0027Malware SHA-256 Hash\u0027, sha256, \"Created by VirusTotal scan of artifact type: {0} value: {1}\".format(artifact.type, artifact.value))\n\nmd5 = results.scan.data.attributes.get(\"md5\", None)\nif md5 :\n    incident.addArtifact(\u0027Malware MD5 Hash\u0027, md5, \"Created by VirusTotal scan of artifact type: {0} value: {1}\".format(artifact.type, artifact.value))\n\nsha1 = results.scan.data.attributes.get(\"sha1\", None)\nif sha1:\n    incident.addArtifact(\u0027Malware SHA-1 Hash\u0027, sha1, \"Created by VirusTotal scan of artifact type: {0} value: {1}\".format(artifact.type, artifact.value))\n\n# Uncomment the following line to have the results json printed formatted to a note.\npretty_results = json.dumps(results, indent=4, sort_keys=True)\nincident.addNote(helper.createRichText(u\"\u003cp\u003eVirusTotal scan of {0} Artifact: {1}\u003c/p\u003e\u003cdiv\u003e{2}\u003c/div\u003e\".format(artifact.type, artifact.value, pretty_results)))\n  ",
           "tags": [],
           "uuid": "a4feb482-12fb-4a48-b09b-a68f1a227daf"
         }
@@ -382,12 +382,12 @@
       "tags": [],
       "type": "default",
       "uuid": "8d6fda2b-f434-4735-956c-0bc347ed1757",
-      "version": 27
+      "version": 36
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 11,
+        "content_version": 14,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_4aea219b_1665_43ff_ab82_c868d727f22d\" isExecutable=\"true\" name=\"playbook_4aea219b_1665_43ff_ab82_c868d727f22d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1doyyap\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"VirusTotal\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d108590a-21f9-4e42-92c4-d2a6fe39c9b4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.vt_type = \u0027file\u0027\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\ninputs.artifact_id = None\\ninputs.vt_data = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"vt_scan_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1doyyap\u003c/incoming\u003e\u003coutgoing\u003eFlow_043blo8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1doyyap\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"VirusTotal: Write results to an incident note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b06ebeef-e1e1-42b0-bdfc-39fd6a3aeeb8\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_043blo8\u003c/incoming\u003e\u003coutgoing\u003eFlow_1em35q0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1em35q0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1em35q0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_043blo8\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_4aea219b_1665_43ff_ab82_c868d727f22d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_043blo8\" id=\"Flow_043blo8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1em35q0\" id=\"Flow_1em35q0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1doyyap\" id=\"Flow_1doyyap_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"209.017\" x=\"616\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1682440851511,
@@ -402,12 +402,12 @@
         "content": "Perform a VirusTotal scan against an attachment.  Write the results to a note.",
         "format": "text"
       },
-      "display_name": "VirusTotal: Scan Attachment (PB)",
+      "display_name": "Example VirusTotal: Scan Attachment (PB)",
       "export_key": "virustotal_scan_attachment",
       "field_type_handle": "playbook_4aea219b_1665_43ff_ab82_c868d727f22d",
       "fields_type": {
         "actions": [],
-        "display_name": "VirusTotal: Scan Attachment",
+        "display_name": "Example VirusTotal: Scan Attachment (PB)",
         "export_key": "playbook_4aea219b_1665_43ff_ab82_c868d727f22d",
         "fields": {},
         "for_actions": false,
@@ -439,7 +439,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684182663286,
+      "last_modified_time": 1684508435997,
       "local_scripts": [
         {
           "actions": [],
@@ -480,7 +480,7 @@
       "tags": [],
       "type": "default",
       "uuid": "4aea219b-1665-43ff-ab82-c868d727f22d",
-      "version": 16
+      "version": 20
     },
     {
       "activation_details": {
@@ -527,7 +527,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 12,
+        "content_version": 14,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e\" isExecutable=\"true\" name=\"playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_10ys58q\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"VirusTotal\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d108590a-21f9-4e42-92c4-d2a6fe39c9b4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"typeLookup = { \u0027Email Attachment\u0027: \u0027file\u0027, \u0027Malware Sample\u0027: \u0027file\u0027, \u0027Malware MD5 Hash\u0027: \u0027hash\u0027, \u0027Malware SHA-1 Hash\u0027: \u0027hash\u0027, \u0027Malware SHA-256 Hash\u0027: \u0027hash\u0027, \u0027Other File\u0027: \u0027file\u0027, \u0027RCF 822 Email Message Fife\u0027: \u0027file\u0027, \u0027File Name\u0027: \u0027filename\u0027,\\n \u0027URL\u0027: \u0027url\u0027, \u0027IP Address\u0027: \u0027ip\u0027, \u0027DNS Name\u0027:\u0027domain\u0027}\\nif artifact.type in typeLookup:\\n  inputs.vt_type = typeLookup.get(artifact.type, artifact.type)\\nelse:\\n  inputs.vt_type = artifact.type\\n\\ninputs.incident_id = incident.id\\ninputs.artifact_id = artifact.id\\ninputs.vt_data = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"vt_scan_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10ys58q\u003c/incoming\u003e\u003coutgoing\u003eFlow_0nybqro\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_10ys58q\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"VirusTotal: Create artifact hits\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f739be17-e9d4-4ccc-b889-d0fe0215f4d0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0nybqro\u003c/incoming\u003e\u003coutgoing\u003eFlow_0iw8kar\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0nybqro\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0iw8kar\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0iw8kar\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0iw8kar\" id=\"Flow_0iw8kar_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0nybqro\" id=\"Flow_0nybqro_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10ys58q\" id=\"Flow_10ys58q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1682453595198,
@@ -542,12 +542,12 @@
         "content": "Perform automatic lookups for artifacts including IP addresses, hashes, domains, and URLS and creates a hit for the artifact if it is deemed potentially malicious by VirusTotal.",
         "format": "text"
       },
-      "display_name": "VirusTotal: Scan Hits (PB)",
+      "display_name": "Example VirusTotal: Scan Hits (PB)",
       "export_key": "virustotal_scan_hits",
       "field_type_handle": "playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e",
       "fields_type": {
         "actions": [],
-        "display_name": "VirusTotal: Scan Hits (PB)",
+        "display_name": "Example VirusTotal: Scan Hits (PB)",
         "export_key": "playbook_eff2d4c0_cdb2_4b4c_825b_347c357cf05e",
         "fields": {},
         "for_actions": false,
@@ -579,7 +579,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684182679555,
+      "last_modified_time": 1684269408713,
       "local_scripts": [
         {
           "actions": [],
@@ -602,7 +602,7 @@
       ],
       "name": "virustotal_scan_hits",
       "object_type": "artifact",
-      "status": "enabled",
+      "status": "disabled",
       "tag": {
         "display_name": "Playbook_eff2d4c0-cdb2-4b4c-825b-347c357cf05e",
         "id": 3,
@@ -613,7 +613,7 @@
       "tags": [],
       "type": "default",
       "uuid": "eff2d4c0-cdb2-4b4c-825b-347c357cf05e",
-      "version": 19
+      "version": 22
     }
   ],
   "regulators": null,

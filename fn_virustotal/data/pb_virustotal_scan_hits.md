@@ -4,13 +4,13 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Playbook - VirusTotal: Scan Hits (PB)
+# Playbook - Example VirusTotal: Scan Hits (PB)
 
 ### API Name
 `virustotal_scan_hits`
 
 ### Status
-`enabled`
+`disabled`
 
 ### Activation Type
 `automatic`

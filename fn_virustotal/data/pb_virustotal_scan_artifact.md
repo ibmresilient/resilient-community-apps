@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Playbook - VirusTotal: Scan Artifact (PB)
+# Playbook - Example VirusTotal: Scan Artifact (PB)
 
 ### API Name
 `virustotal_scan_artifact`
@@ -67,6 +67,7 @@ Write VirusTotal scan results to an incident note.
 ### Script Content
 ```python
 import datetime
+import json
 
 results = playbook.functions.results.vt_scan_results
   
@@ -87,20 +88,24 @@ Timeout:    {}</p>""".format(stats.get('malicious'), stats.get('suspicious'),sta
 incident.addNote(helper.createRichText(u"<div>{}</div>".format(msg)))
 
 last_http_response_content_sha256 = results.scan.data.attributes.get("last_http_response_content_sha256", None)
-if last_http_response_content_sha256 is not None:
+if last_http_response_content_sha256:
     incident.addArtifact('Malware SHA-256 Hash', last_http_response_content_sha256, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
 
 sha256 = results.scan.data.attributes.get("sha256", None) 
-if sha256 is not None:
-  incident.addArtifact('Malware SHA-256 Hash', sha256, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
+if sha256:
+    incident.addArtifact('Malware SHA-256 Hash', sha256, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
 
 md5 = results.scan.data.attributes.get("md5", None)
-if md5is not None:
-  incident.addArtifact('Malware MD5 Hash', md5, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
+if md5 :
+    incident.addArtifact('Malware MD5 Hash', md5, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
 
 sha1 = results.scan.data.attributes.get("sha1", None)
-if sha1 is not None:
-  incident.addArtifact('Malware SHA-1 Hash', sha1, None, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
+if sha1:
+    incident.addArtifact('Malware SHA-1 Hash', sha1, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
+
+# Uncomment the following line to have the results json printed formatted to a note.
+pretty_results = json.dumps(results, indent=4, sort_keys=True)
+incident.addNote(helper.createRichText(u"<p>VirusTotal scan of {0} Artifact: {1}</p><div>{2}</div>".format(artifact.type, artifact.value, pretty_results)))
   
 ```
 
