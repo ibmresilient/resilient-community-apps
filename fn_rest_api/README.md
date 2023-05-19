@@ -14,8 +14,8 @@
   - [Installation](#installation)
   - [Function - REST API](#function---rest-api)
   - [Input Considerations](#input-considerations)
-    - [Sensitive information using APP Secrets](#sensitive-information-using-app-secrets)
-    - [Input Format](#input-format)
+    - [Sensitive information using App Secrets](#sensitive-information-using-app-secrets)
+    - [Input format](#input-format)
     - [1. New-line separated (Legacy)](#1-new-line-separated-legacy)
       - [Note:](#note)
       - [Example:](#example)
@@ -122,9 +122,9 @@ This function calls a REST web service. It supports the standard REST methods: G
 
 ## Input Considerations
 
-### Sensitive information using APP Secrets
+### Sensitive information using App Secrets
 
-For sensitive information that may be included in the `rest_header`, `rest_url`, `rest_body`, or `rest_cookies`, you can substitute values from the app.conf. To do so simply create a Key and a value pair, `auth_header` shown in the screenshot below. This can then be referenced in the application using the double-curly brace, `{{auth_header}}`.
+For sensitive information that may be included in the `rest_header`, `rest_url`, `rest_body`, or `rest_cookies`. To do so simply create a Key and a value pair, `auth_header` shown in the screenshot below. This can then be referenced in the application using the double-curly brace, `{{auth_header}}`.
 
 <p align="center">
 <img src="./doc/screenshots/fn-rest-api-app-conf.png" />
@@ -143,7 +143,7 @@ This key can be directly referenced from within a playbook. For instance, a head
 </p>
 
 
-### Input Format
+### Input format
 
 * Inputs for the fields: `rest_api_headers`, `rest_api_cookies`, `rest_api_body` can be provided in 2 different format.
 ### 1. New-line separated (Legacy)
@@ -212,10 +212,10 @@ This key can be directly referenced from within a playbook. For instance, a head
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `rest_api_allowed_status_codes` | `text` | No | `"305, 404, 500"` | Comma separated list. All codes < 300 is allowed by default |
-| `rest_api_body` | `textarea` | No | `-` | Request body. Check [Input Considerations](#input-considerations) for format |
-| `rest_api_cookies` | `textarea` | No | `-` | Cookies required for the API call. Check [Input Considerations](#input-considerations) for format |
-| `rest_api_headers` | `textarea` | No | `-` | Request headers. Check [Input Considerations](#input-considerations) for format |
+| `rest_api_allowed_status_codes` | `text` | No | `"305, 404, 500"` | Comma separated list. All codes < 300 are allowed by default |
+| `rest_api_body` | `textarea` | No | `-` | Request body. See [Input Considerations](#input-considerations) for format |
+| `rest_api_cookies` | `textarea` | No | `-` | Cookies required for the API call. See [Input Considerations](#input-considerations) for format |
+| `rest_api_headers` | `textarea` | No | `-` | Request headers. See [Input Considerations](#input-considerations) for format |
 | `rest_api_method` | `select` | Yes | `GET` | REST methods: GET, HEAD, POST, PUT, DELETE, OPTIONS and PATCH |
 | `rest_api_timeout` | `number` | No | `60` | Request timeout in seconds |
 | `rest_api_url` | `text` | Yes | `www.example.com` | Endpoint URL |
@@ -331,8 +331,6 @@ results = {
 #
 # INPUT FORMAT
 # ------------
-# rest_api_url, rest_api_method and rest_api_verify are mandatory fields.
-# rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.
 # rest_api_url, rest_api_method and rest_api_verify are mandatory fields.
 # rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.
 #

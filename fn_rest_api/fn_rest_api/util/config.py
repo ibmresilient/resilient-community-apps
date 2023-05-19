@@ -14,7 +14,7 @@ def config_section_data():
 # https_proxy = https://<your_proxy>:<port>
 # http_proxy = http://<your_proxy>:<port>
 #
-# Values can be assigned here in app.conf and reference them in application
+# Values can be assigned here in app.config and reference them in application
 # auth_header = sampleAPIToken123
 #
 # Alternatively, sensitive values can be stored as a SECRET in the Resilient platform
