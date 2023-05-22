@@ -55,13 +55,13 @@
 ### 1.2.0 Changes
 In v1.2, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
-Each playbook has the same functionality as the previous, corresponding rule/workflow.
+Each playbook has the same functionality as the previous, corresponding rule/workflow. 
 
-If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
+If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
 For automatic actions, the playbooks will be disabled by default.
 
-You can continue to use the rules/workflows. 
-But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
+You can continue to use the rules/workflows.
+But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 ### V1.1 Considerations
 See section [App Configuration](#app-configuration) for the new app.config setting: `alert_filters`. This setting must be manually added to your app.config file in order to use it with the poller to filter incident creation.
