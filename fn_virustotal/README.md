@@ -187,7 +187,10 @@ Perform VirusTotal scans and return reports on ip addresses, urls, domains, hash
 
  ![screenshot: fn-virustotal ](./doc/screenshots/fn-virustotal.png) 
 
+<p>
+Sample playbook using the VirusTotal function:
 
+ ![screenshot: fn-virustotal-pb ](./doc/screenshots/vt-scan-artifact-pb.png) 
 <details><summary>Inputs:</summary>
 <p>
 
@@ -1012,6 +1015,8 @@ if sha1:
 
 
 ## Playbooks
+ ![screenshot: fn-virustotal-pb ](./doc/screenshots/vt-playbooks.png) 
+
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
 | Example VirusTotal: Scan Artifact (PB) | Perform a VirusTotal scan on an artifact and write the results to a note for review.  | artifact | `enabled` |
@@ -1019,7 +1024,7 @@ if sha1:
 | Example VirusTotal: Scan Hits (PB) | Perform automatic lookups for artifacts including IP addresses, hashes, domains, and URLS and creates a hit for the artifact if it is deemed potentially malicious by VirusTotal. | artifact | `disabled` |
 
 
- ![screenshot: fn-virustotal-pb ](./doc/screenshots/vt-scan-artifact-pb.png) 
+
 ---
 
 ## Troubleshooting & Support
