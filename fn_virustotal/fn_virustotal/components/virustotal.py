@@ -12,7 +12,6 @@ from resilient_lib import IntegrationError, validate_fields
 from fn_virustotal.lib.resilient_common import get_input_entity, get_resilient_client
 from fn_virustotal.lib.vt_common import VirusTotalClient
 
-
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'virustotal"""
 
@@ -78,8 +77,7 @@ class FunctionComponent(ResilientComponent):
                 with tempfile.NamedTemporaryFile('w+b', delete=False) as temp_file_binary:
                     # Write binary data to a temporary file. Make sure to close the file here...this
                     # code must work on Windows and on Windows the file cannot be opened a second time
-                    # While open.  Floss will open the file again to read the data, so close before
-                    # calling Floss.
+                    # While open. 
                     temp_file_binary.write(entity["data"])
                     temp_file_binary.close()
                     try: 
@@ -115,10 +113,10 @@ class FunctionComponent(ResilientComponent):
 
                 # check if result is not found, meaning no report exists
                 if code == "NotFoundError":
-                    response, code = vt.scan_url(vt_data)
+                    scan_response, code = vt.scan_url(vt_data)
 
-                    if response.get("data", None):
-                        response, status = vt.wait_for_scan_to_complete(response)
+                    if scan_response.get("data", None):
+                        response, status = vt.wait_for_scan_to_complete(scan_response)
                         if status != "completed":
                             raise IntegrationError("VirusTotal URL scan not complete: {0}".format(status))
 

@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Function implementation"""
 
 import logging
-from virus_total_apis import PublicApi as VirusTotal
 from resilient_lib import RequestsCommon
 from resilient_lib import validate_fields
+from fn_virustotal.lib.vt_common import VirusTotalClient
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
-HTTP_OK = 200
 
 def selftest_function(opts):
     """
@@ -24,20 +23,19 @@ def selftest_function(opts):
     rc = RequestsCommon(options)
     reason = ""
     try:
-        vt = VirusTotal(options['api_token'], rc.get_proxies())
-        response = vt.get_ip_report(TEST_IP)
+        vt = VirusTotalClient(opts, options)
+        response, code = vt.get_ip_report(TEST_IP)
 
         if response and type(response) is not dict:
             state = "failure"
             reason = "no response"
         else:
-            status = response.get('response_code', -1)
-
-            if status != HTTP_OK:
-                state = "failure"
-                reason = state
-            else:
+            if code == "success":
                 state = "success"
+            else:
+                state = "failure"
+                reason = code
+
     except Exception as err:
         state = "failure"
         reason = str(err)

@@ -32,7 +32,7 @@ class VirusTotalClient(object):
         self.headers = self.get_headers(self.api_token)
 
     def get_headers(self, auth_token: str) -> dict:
-        """ Return the authorization header.
+        """ Return the authorization header with the auth token filled in.
         """
         headers = {
             "accept": "application/json",
@@ -49,6 +49,7 @@ class VirusTotalClient(object):
 
         Returns:
             dict: Return the VT scan results in json format.
+            str: code returned from the VT REST API 
         """
         endpoint_url = "{0}/urls".format(self.base_url)
         payload = urlencode({"url":url})
@@ -60,61 +61,69 @@ class VirusTotalClient(object):
         response_json = response.json()
         return response_json, code
 
-    def wait_for_scan_to_complete(self, response_json):
-        """Give a JSON scan object returned from VirusTotal, use the time parameters in the app.config
-           to poll for the analysis to complete.
+    def wait_for_scan_to_complete(self, response_json: dict) -> tuple[dict, str]:
+        """Given a VirusTotal JSON scan analysis object returned from VirusTotal scan submission, 
+        use the time parameters in the app.config to poll for the analysis to complete.
 
         Args:
-            response_json (_type_): _description_
+            response_json (dict): JSON object that is returned from a call to the VirusTotal endpoint
+                                  to scan a file or URL.  The JSON contains information on how to poll
+                                  to get the analysis information when and determine when it is complete.
 
         Raises:
-            IntegrationError: _description_
-            IntegrationError: _description_
-            IntegrationError: _description_
-            IntegrationError: _description_
+            IntegrationError: No "data" in VirusTotal scan JSON object.
+            IntegrationError: No links in VirusTotal scan JSON object.
+            IntegrationError: No self link in VirusTotal scan JSON object.
+            IntegrationError: Invalid analysis status.
+            IntegrationError: VirusTotal scan analysis is not complete - MAX poll time exceeded!
 
         Returns:
-            _type_: _description_
+            dict: JSON object of the analysis scan
+            str: status of the analysis (completed, in_progress, queued)
         """
-        start_time = time.time()
         data = response_json.get("data", None)
-        if data and data.get("type", None) == "analysis":
-            links = data.get("links", None)
-            if links:
-                endpoint_url = links.get("self", None)
-                curr_time = time.time()
-                diff = int(curr_time - start_time)/1000
-                while int(curr_time - start_time)/1000 <= int(self.max_polling_wait_sec):
-                    analysis_response = self.rc.execute("GET",
+        if not data or data.get("type", None) != "analysis":
+            raise IntegrationError("No data in VirusTotal scan JSON object.")
+
+        links = data.get("links", None)
+        if not links:
+            raise IntegrationError("No links in VirusTotal scan JSON object.")
+ 
+        endpoint_url = links.get("self", None)
+        if not endpoint_url:
+            raise IntegrationError("No self link in VirusTotal scan JSON object.") 
+
+        start_time = curr_time = time.time()
+        # Loop until analysis status is complete of the max poll time is exceeded.
+        while int(curr_time - start_time)/1000 <= int(self.max_polling_wait_sec):
+            # Check the end point to see if the analysis is complete.
+            analysis_response = self.rc.execute("GET",
                                                 endpoint_url,
                                                 headers=self.headers)
-                    analysis_response_json = analysis_response.json()
-                    LOG.info("analysis_response_json = {}".format(analysis_response_json))
-                    analysis_data = analysis_response_json.get("data", {})
-                    if analysis_data:
-                        attributes = analysis_data.get("attributes", {})
-                        if attributes:
-                            status = attributes.get("status", None)
-                            if status == "completed":
-                                return analysis_response_json, status
-                            elif status in ["in-progress", "queued"]:
-                                # resubmit
-                                curr_time = time.time()
-                                if int(curr_time - start_time)/1000 >= int(self.max_polling_wait_sec):
-                                    raise IntegrationError("exceeded max wait time: {}".format(self.max_polling_wait_sec))
+            analysis_response_json = analysis_response.json()
+            LOG.info("analysis_response_json = {}".format(analysis_response_json))
+            analysis_data = analysis_response_json.get("data", {})
+            if analysis_data:
+                attributes = analysis_data.get("attributes", {})
+                if attributes:
+                    status = attributes.get("status", None)
+                    if status == "completed":
+                        # Exit the loop when the analysis is complete.
+                        return analysis_response_json, status
+                    elif status in ["in-progress", "queued"]:
+                        # resubmit
+                        curr_time = time.time()
+                        if int(curr_time - start_time)/1000 >= int(self.max_polling_wait_sec):
+                            raise IntegrationError("exceeded max wait time: {}".format(self.max_polling_wait_sec))
 
-                                time.sleep(int(self.polling_interval_sec))
-                                    # start again to review results
-                            else:
-                                raise IntegrationError("Invalid analyses status {}".format(status))                        
-                return analysis_response_json, status
-            else:
-                raise IntegrationError("No links returned from VirusTotal URL scan.")
-        else:
-            raise IntegrationError("No data returned from VirusTotal URL scan.")     
-        return response_json, code
+                        time.sleep(int(self.polling_interval_sec))
+                        # start again to review results
+                    else:
+                        raise IntegrationError("Invalid analysis status: {}.".format(status))
 
-    def get_url_report(self, url: str) -> dict:
+        raise IntegrationError("VirusTotal scan analysis is not complete - MAX poll time exceeded!")
+
+    def get_url_report(self, url: str) -> tuple[dict, str]:
         """ Get the URL report from VirusTotal on the URL (if there is one).
 
         Args:
@@ -122,7 +131,9 @@ class VirusTotalClient(object):
 
         Returns:
             dict: Return VT scan report in JSON format.
+            str: code returned from the VT REST API.
         """
+        # urlencode the URL with command from VirusTotal REST API doc.
         url_id = base64.urlsafe_b64encode(url.encode()).decode().strip("=")
 
         endpoint_url = "{0}/urls/{id}".format(self.base_url, id=url_id)
@@ -132,7 +143,7 @@ class VirusTotalClient(object):
                                    callback=callback)
         return response.json(), code
 
-    def scan_file(self, file_to_scan: str, filename: str) -> dict:
+    def scan_file(self, file_to_scan: str, filename: str) -> tuple[dict, str]:
         """ Scan a file using VirusTotal.
 
         Args:
@@ -145,6 +156,7 @@ class VirusTotalClient(object):
 
         Returns:
             dict: Return VT status on file analyses in JSON format.
+            str: code returned from the VT REST API 
         """
         start_time = time.time()
         # files = {"file": ("copy.txt", open("copy.txt", "rb"), "text/plain")}
@@ -176,7 +188,7 @@ class VirusTotalClient(object):
         return response.json(), code
 
 
-    def get_file_report(self, id: str) -> dict:
+    def get_file_report(self, id: str)  -> tuple[dict, str]:
         """ Get a file report from VirusTotal if one is available.
 
         Args:
@@ -184,6 +196,7 @@ class VirusTotalClient(object):
 
         Returns:
             dict: Return information on the file from VT in JSON format
+            str: code returned from the VT REST API 
         """
         endpoint_url = "{0}/files/{id}".format(self.base_url, id=id)
         response, code = self.rc.execute("GET",
@@ -192,7 +205,7 @@ class VirusTotalClient(object):
                                    headers=self.headers)
         return response.json(), code
 
-    def get_ip_report(self, ip: str) -> dict:
+    def get_ip_report(self, ip: str)  -> tuple[dict, str]:
         """ Get a VirusTotal IP address report
 
         Args:
@@ -200,6 +213,7 @@ class VirusTotalClient(object):
 
         Returns:
             dict: Returns a report in JSON format from VT
+            str: code returned from the VT REST API 
         """
         endpoint_url = "{0}/ip_addresses/{ip}".format(self.base_url, ip=ip)
         response, code = self.rc.execute("GET",
@@ -208,14 +222,14 @@ class VirusTotalClient(object):
                                    headers=self.headers)
         return response.json(), code
 
-    def get_domain_report(self, domain: str) -> dict:
-        """_summary_
-
+    def get_domain_report(self, domain: str) -> tuple[dict, str]:
+        """ Get a VirusTotal Domain report
         Args:
-            domain (str): _description_
+            domain (str): Domain to get report on
 
         Returns:
-            dict: _description_
+            dict: Returns a report in JSON format from VT
+            str: code returned from the VT REST API 
         """
         endpoint_url = "{0}/domains/{domain}".format(self.base_url, domain=domain)
         response, code = self.rc.execute("GET",
@@ -238,7 +252,15 @@ class VirusTotalClient(object):
                                    headers=self.headers)
         return response.json()
 
-    def get_sha256_from_file_result(self, file_result):
+    def get_sha256_from_file_result(self, file_result: dict) -> str:
+        """ Return the sha 256 hash from the results of a VT file scan.
+
+        Args:
+            file_result (dict): JSON object from VT scan
+
+        Returns:
+            str : SHA-256 hash 
+        """
         sha256 = None
         meta = file_result.get("meta", None)
         if meta and meta.get("file_info", None):
@@ -247,35 +269,18 @@ class VirusTotalClient(object):
                 return file_info.get("sha256", None)
         return sha256
 
-    def return_response(self, response):
-        """
-        parse the response and return the json results if successful
-        :param resp:
-        :return:
-        """
-        if response and type(response) is not dict:
-            raise IntegrationError("Invalid response: {}".format(response))
- 
-        error_status = response.get("error", None)
-        if error_status:
-            code = error_status.get("code", None)
-        else:
-            code = "success"
-        return response, code
-
-
-def callback(response):
+def callback(response: dict) -> tuple[dict, str]:
     """
-    callback needed for certain REST API calls to return a formatted error message
+    callback needed for certain REST API calls to return a formatted code (string).
     :param response:
-    :return: response, error_msg
+    :return: response, code
     """
     if response.status_code < 300:
         code = "success"
     elif response.status_code in [400,404]:
         content = json.loads(response.text)
         error = content.get("error", None)
-        code = error.get("code", None)
+        code = error.get("code", None) if error else None
     else:
         response.raise_for_status()
 
