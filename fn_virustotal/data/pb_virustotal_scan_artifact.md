@@ -70,43 +70,65 @@ import datetime
 import json
 
 results = playbook.functions.results.vt_scan_results
-  
-msg = u"<p>VirusTotal scan of {0} Artifact: {1}</p>".format(artifact.type, artifact.value)
-stats = results.scan.data.attributes.get("last_analysis_stats", None)
-if stats is not None:
 
-    msg = msg + u"""<p>Malicious: <span style='color:red'>{}</span>
-Suspicious: {}
-Harmless:   {}
-Undetected: {}
-Timeout:    {}</p>""".format(stats.get('malicious'), stats.get('suspicious'),stats.get('harmless'), stats.get('undetected'), stats.get('timeout'))
-    last_analysis_date = results.scan.data.attributes.get("last_analysis_date", None)
-    if last_analysis_date is not None:
-        last_analysis_date_str = datetime.datetime.fromtimestamp(last_analysis_date).strftime('%Y-%b-%d %H:%M:%S')
-        msg = msg + u"""<p>Last analysis date: {}</p>""".format(last_analysis_date_str)
+# Uncomment the following line to have the results json printed formatted to a note.
+#pretty_results = json.dumps(results, indent=4, sort_keys=True)
+#incident.addNote(helper.createRichText(u"<p>VirusTotal scan of {0}: {1}</p><div>{2}</div>".format(artifact.type, artifact.value, pretty_results)))
 
-incident.addNote(helper.createRichText(u"<div>{}</div>".format(msg)))
+msg = u"<p>VirusTotal scan of {0}: <b>{1}</b></p>".format(artifact.type, artifact.value)
+scan = results.get("scan",  {})
+if not scan:
+  raise Exception("No scan data returned VirusTotal scan {0}: {1}".format(artifact.type, artifact.value))   
 
-last_http_response_content_sha256 = results.scan.data.attributes.get("last_http_response_content_sha256", None)
+data = scan.get("data", {})
+scan_error = scan.get("error", {})
+if scan_error:
+  msg = "{0}Error returned: {1}".format(msg, scan_error)
+  #helper.fail("Error returned from VirusTotal scan {0}: {1}: {2}".format(artifact.type, artifact.value, scan_error))
+
+stats = {}
+attributes = {}
+if data:
+  attributes = data.get("attributes", {})
+  if attributes:
+    # If this a report the stats are in last_analysis_stats otherwise they are in stats
+    stats = attributes.get("last_analysis_stats", {})
+    if stats == {}:
+	    stats = attributes.get("stats", {})
+
+for k,v in stats.items():
+  if k.lower() == "malicious":
+    msg = "{0}{1}: <span style='color:red'>{2}</span><br>".format(msg, k, v)
+  else:
+    msg = "{0}{1}: {2}<br>".format(msg, k, v)
+    
+last_analysis_date = attributes.get("last_analysis_date", None)
+if last_analysis_date:
+  last_analysis_date_str = datetime.datetime.fromtimestamp(last_analysis_date).strftime('%Y-%b-%d %H:%M:%S')
+  msg = "{0}<p>Last analysis date: {1}</p>""".format(msg, last_analysis_date_str)
+    
+if stats == {}:
+  msg = "{0}No stats returned from scan {1}: {2}".format(msg, artifact.type, artifact.value)  
+
+incident.addNote(helper.createRichText("<div>{0}</div>".format(msg)))
+
+# Create artifacts from results
+last_http_response_content_sha256 = attributes.get("last_http_response_content_sha256", None)
 if last_http_response_content_sha256:
     incident.addArtifact('Malware SHA-256 Hash', last_http_response_content_sha256, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
 
-sha256 = results.scan.data.attributes.get("sha256", None) 
+sha256 = attributes.get("sha256", None) 
 if sha256:
     incident.addArtifact('Malware SHA-256 Hash', sha256, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
 
-md5 = results.scan.data.attributes.get("md5", None)
-if md5 :
+md5 = attributes.get("md5", None)
+if md5:
     incident.addArtifact('Malware MD5 Hash', md5, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
 
-sha1 = results.scan.data.attributes.get("sha1", None)
+sha1 = attributes.get("sha1", None)
 if sha1:
     incident.addArtifact('Malware SHA-1 Hash', sha1, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
-
-# Uncomment the following line to have the results json printed formatted to a note.
-pretty_results = json.dumps(results, indent=4, sort_keys=True)
-incident.addNote(helper.createRichText(u"<p>VirusTotal scan of {0} Artifact: {1}</p><div>{2}</div>".format(artifact.type, artifact.value, pretty_results)))
-  
+    
 ```
 
 ---

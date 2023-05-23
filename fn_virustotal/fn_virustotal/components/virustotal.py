@@ -83,25 +83,31 @@ class FunctionComponent(ResilientComponent):
                     temp_file_binary.write(entity["data"])
                     temp_file_binary.close()
                     try: 
-                        response, code = vt.scan_file(temp_file_binary.name, filename=entity["name"])
+                        scan_response, code = vt.scan_file(temp_file_binary.name, filename=entity["name"])
                     except Exception as err:
                         raise err
                     finally:
                         os.unlink(temp_file_binary.name)
 
-                file_result, code = self.return_response(response, vt.get_file_report, time.time())
+                if code != "success":
+                    raise IntegrationError("VirusTotal file scan error: {0}".format(code))
+                
+                file_result, status = vt.wait_for_scan_to_complete(scan_response)
 
+                if status != "completed":
+                    raise IntegrationError("VirusTotal file scan note complete: {0}".format(status))
+                
                 ## was a sha-256 returned? try an existing report first
                 sha256 = vt.get_sha256_from_file_result(file_result)
                 if sha256:
                     report_result, code = vt.get_file_report(sha256)
 
                     if report_result.get("data", None) and code == "success":
-                        result = report_result
+                        response = report_result
                     else:
-                        result = file_result
+                        response = file_result
                 else:
-                    result = file_result
+                    response = file_result
 
             elif vt_type.lower() == 'url':
                 # attempt to see if a report already exists
@@ -111,7 +117,12 @@ class FunctionComponent(ResilientComponent):
                 if code == "NotFoundError":
                     response, code = vt.scan_url(vt_data)
 
-                if code != "success":
+                    if response.get("data", None):
+                        response, status = vt.wait_for_scan_to_complete(response)
+                        if status != "completed":
+                            raise IntegrationError("VirusTotal URL scan not complete: {0}".format(status))
+
+                elif code != "success":
                     raise IntegrationError("Error getting VirusTotal URL scan report: {0}".format(code))
 
             elif vt_type.lower() == 'ip':
@@ -127,7 +138,8 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Unknown type field: {}. Check pre-processor script.".format(vt_type))
 
             results = {
-                "scan": response
+                "scan": response,
+                "code": code
             }
 
             self.log.debug("scan: {}".format(results))
