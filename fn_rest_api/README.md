@@ -115,7 +115,7 @@ Additional package dependencies may exist for each of these packages:
 
 ## Function - REST API
 
-This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS. The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time. The function can be simply duplicated and used to make multiple requests to an endpoint or even access multiple endpoints.
+This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS. The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time. The function can be reused to make multiple requests to an endpoint or even access multiple endpoints.
 
 <p align="center">
 <img src="./doc/screenshots/fn-rest-api-playbook.png" />
