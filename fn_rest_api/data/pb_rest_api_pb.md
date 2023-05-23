@@ -10,7 +10,7 @@
 `rest_api_pb`
 
 ### Status
-`disabled`
+`enabled`
 
 ### Activation Type
 `manual`
@@ -132,6 +132,14 @@ This is a general-purpose function to call any REST API or other HTTP service.
 #      }
 #     
 #     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
+#
+#
+#
+# REUSABILITY
+# -----------
+# Multiple endpoints can be called from within a playbook. Simply duplicate this function
+# and modify the pre-processing script as per the endpoint, and the request to be made.
+#
 #
 # """
 
