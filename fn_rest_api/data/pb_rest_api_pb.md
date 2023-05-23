@@ -137,8 +137,9 @@ This is a general-purpose function to call any REST API or other HTTP service.
 #
 # REUSABILITY
 # -----------
-# Multiple endpoints can be called from within a playbook. Simply duplicate this function
-# and modify the pre-processing script as per the endpoint, and the request to be made.
+# The function can be reused to make multiple requests to an endpoint or even access 
+# multiple endpoints. This can be achieved by simply modifying the pre-processing script
+# as per the request and the endpoint.
 #
 #
 # """
