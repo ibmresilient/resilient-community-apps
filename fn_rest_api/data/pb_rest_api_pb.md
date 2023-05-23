@@ -10,7 +10,7 @@
 `rest_api_pb`
 
 ### Status
-`disabled`
+`enabled`
 
 ### Activation Type
 `manual`
@@ -132,6 +132,15 @@ This is a general-purpose function to call any REST API or other HTTP service.
 #      }
 #     
 #     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
+#
+#
+#
+# REUSABILITY
+# -----------
+# The function can be reused to make multiple requests to an endpoint or even access 
+# multiple endpoints. This can be achieved by simply modifying the pre-processing script
+# as per the request and the endpoint.
+#
 #
 # """
 

@@ -23,8 +23,8 @@ def codegen_reload_data():
         "package": u"fn_rest_api",
         "message_destinations": [u"fn_rest_api"],
         "functions": [u"rest_api"],
-        "workflows": [u"rest_api"],
-        "actions": [u"REST API"],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
@@ -47,12 +47,8 @@ def customization_data(client=None):
         - fn_rest_api
     - Functions:
         - rest_api
-    - Workflows:
-        - rest_api
     - Playbooks:
         - rest_api_pb
-    - Rules:
-        - REST API
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
