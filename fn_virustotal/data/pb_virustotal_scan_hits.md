@@ -10,7 +10,7 @@
 `virustotal_scan_hits`
 
 ### Status
-`disabled`
+`enabled`
 
 ### Activation Type
 `automatic`

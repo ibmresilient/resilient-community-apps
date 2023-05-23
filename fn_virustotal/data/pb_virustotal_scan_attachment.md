@@ -19,7 +19,7 @@
 `attachment`
 
 ### Description
-Perform a VirusTotal scan against an attachment.  Write the results to a note.
+Perform a VirusTotal scan on an attachment.  Write the results to a note.
 
 
 ---
@@ -97,7 +97,7 @@ for k,v in stats.items():
 last_analysis_date = attributes.get("last_analysis_date", None)
 if last_analysis_date:
   last_analysis_date_str = datetime.datetime.fromtimestamp(last_analysis_date).strftime('%Y-%b-%d %H:%M:%S')
-  msg = "{0}<p>Last analysis date: {1}</p>""".format(msg, last_analysis_date_str)
+  msg = "{0}<br><p>Last analysis date: {1}</p>""".format(msg, last_analysis_date_str)
     
 if stats == {}:
   msg = "{0}No stats returned from scan attachment: {1}".format(msg, attachment.name)  

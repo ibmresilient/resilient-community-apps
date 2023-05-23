@@ -19,10 +19,7 @@
 `artifact`
 
 ### Description
-Perform a VirusTotal scan an artifact and write the results to a note for review.  
-
-In some cases, the scan results may not be available immediately. 
-In those cases, a link to the VirusTotal report is provided for review when complete. 
+Perform a VirusTotal scan on an artifact and write the results to a note for review.  
 
 
 ---
@@ -105,7 +102,7 @@ for k,v in stats.items():
 last_analysis_date = attributes.get("last_analysis_date", None)
 if last_analysis_date:
   last_analysis_date_str = datetime.datetime.fromtimestamp(last_analysis_date).strftime('%Y-%b-%d %H:%M:%S')
-  msg = "{0}<p>Last analysis date: {1}</p>""".format(msg, last_analysis_date_str)
+  msg = "{0}<br><p>Last analysis date: {1}</p>""".format(msg, last_analysis_date_str)
     
 if stats == {}:
   msg = "{0}No stats returned from scan {1}: {2}".format(msg, artifact.type, artifact.value)  
