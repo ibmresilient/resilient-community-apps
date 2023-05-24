@@ -29,10 +29,18 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v2.1.0  | 5/2023 | Add playbooks
 | v2.0.0  | 5/2022 | <ul><li>Added function dt_utils_add_row that adds a row to a datatable</li><li>Function dt_utils_get_row can now get a row from menu of a datatable row</li><li>Added function dt_utils_get_all_data_table_rows that gets all rows from a data table in SOAR</li><li>Update example workflows</li><li>Added function dt_utils_clear_datatable that deletes all the contents of a datatable</li></ul> |
 | v1.2.0  | 2/2021 | Functions dt_utils_get_rows and dt_utils_delete_rows can now return or delete all datatable rows |
 | v1.1.0  | 11/2020 | Added support for App Host. New functions: `dt_utils_get_row`, `dt_utils_get_rows`, `dt_utils_delete_row`, `dt_utils_delete_rows`, `dt_utils_create_csv_table`|
 | v1.0.0  | 2/2019 | Initial Release |
+
+### 2.1.0 Changes
+In v2.1, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end. For automatic actions, the playbooks will be disabled by default.
+
+You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
 
 ---
 
@@ -1477,25 +1485,23 @@ dt_utils_test_data_table
 | text | `text` | `text` | - |
 
 ---
-
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Add Row | dt_utils_test_data_table | `example_data_table_utils_add_row` |
-| Add Row to Datatable | artifact | `example_data_table_utils_add_row_to_datatable` |
-| Clear Datatable | incident | `example_data_table_utils_clear_datatable` |
-| Delete Current Row | dt_utils_test_data_table | `example_data_table_utils_delete_row_from_datatable` |
-| Delete Data Table Row | artifact | `example_data_table_utils_delete_row` |
-| Delete Data Table Rows | artifact | `example_data_table_utils_delete_rows` |
-| Delete Rows by Name | dt_utils_test_data_table | `example_data_table_utils_delete_rows_from_datatable` |
-| Example: Create CSV Datatable | attachment | `example_create_csv_datatable` |
-| Get All Rows | dt_utils_test_data_table | `example_data_table_utils_get_all_data_table_rows` |
-| Get Current Row | dt_utils_test_data_table | `example_data_table_utils_get_current_row` |
-| Get Data Table Row | artifact | `example_data_table_utils_get_row` |
-| Get Data Table Rows | artifact | `example_data_table_utils_get_rows` |
-| Update Current Row | dt_utils_test_data_table | `update_row` |
-| Update Data Table Row | artifact | `example_data_table_utils_update_row` |
-
+## Playbooks
+| Playbook Name | Description | Object | Status |
+| ------------- | ----------- | ------ | ------ |
+| Example: Create CSV Datatable (PB) | None | Attachment | `enabled` |
+| Example: Data Table Utils: Add Row (PB) | None | Data Table | `enabled` |
+| Example: Data Table Utils: Add Row to Datatable (PB) | None | Artifact | `enabled` |
+| Example: Data Table Utils: Clear Datatable (PB) | None | Incident | `enabled` |
+| Example: Data Table Utils: Delete Row from Datatable (PB) | None | Data Table | `enabled` |
+| Example: Data Table Utils: Delete Row (PB) | None | Artifact | `enabled` |
+| Example: Data Table Utils: Delete Rows from Datatable (PB) | None | Data Table | `enabled` |
+| Example: Data Table Utils: Delete Rows (PB) | None | Artifact | `enabled` |
+| Example: Data Table Utils: Get All Data Table Rows (PB) | None | Data Table | `enabled` |
+| Example: Data Table Utils: Get Current Row (PB) | None | Data Table | `enabled` |
+| Example: Data Table Utils: Get Row (PB) | None | Artifact | `enabled` |
+| Example: Data Table Utils: Get Rows (PB) | None | Artifact | `enabled` |
+| Example: Data Table Utils: Update Row (PB) | None | Artifact | `enabled` |
+| Example Data Utils: Update Row (PB) | None | Data Table | `enabled` |
 ---
 
 ## Troubleshooting & Support
