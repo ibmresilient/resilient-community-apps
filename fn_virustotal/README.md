@@ -72,8 +72,20 @@ App performs VirusTotal on IP Addresses, URLs, hashes, domain and file artifacts
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1 <!-- ::CHANGE_ME:: -->
-* Key Feature 2 <!-- ::CHANGE_ME:: -->
+* Perform VirusTotal scan on the following SOAR artifact types:
+  * DNS Name
+  * Email Attachment
+  * IP Address
+  * File
+  * File Name
+  * Malware Sample
+  * Malware MD5 Hash
+  * Malware SHA-1
+  * Malware SHA-256 Hash
+  * Other File
+  * RFC 822 Email Message File
+  * URL
+* Automatic playbook to create hits on 
 * Key Feature 3 <!-- ::CHANGE_ME:: -->
 
 ---

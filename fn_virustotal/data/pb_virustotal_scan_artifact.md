@@ -36,7 +36,7 @@ Perform a VirusTotal scan on an artifact and write the results to a note for rev
 
 ### Function-Input Script
 ```python
-typeLookup = { 'Email Attachment': 'file', 'Malware Sample': 'file', 'Malware MD5 Hash': 'hash', 'Malware SHA-1 Hash': 'hash', 'Malware SHA-256 Hash': 'hash', 'Other File': 'file', 'RCF 822 Email Message Fife': 'file', 'File Name': 'filename',
+typeLookup = { 'Email Attachment': 'file', 'Malware Sample': 'file', 'Malware MD5 Hash': 'hash', 'Malware SHA-1 Hash': 'hash', 'Malware SHA-256 Hash': 'hash', 'Other File': 'file', 'RCF 822 Email Message File': 'file', 'File Name': 'filename',
  'URL': 'url', 'IP Address': 'ip', 'DNS Name':'domain'}
 if artifact.type in typeLookup:
   inputs.vt_type = typeLookup.get(artifact.type, artifact.type)
