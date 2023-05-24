@@ -63,16 +63,15 @@
 -->
 **IBM SOAR app for VirusTotal**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
-App performs VirusTotal on IP Addresses, URLs, hashes, domain and file artifacts.
-                     
+AThe VirusTotal app for SOAR performs VirusTotal analysis on IP Addresses, URLs, hashes, domain and file artifacts.
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* Perform VirusTotal scan on the following SOAR artifact types:
+* Perform VirusTotal analysis scan on the following SOAR artifact types:
   * DNS Name
   * Email Attachment
   * IP Address
@@ -85,8 +84,7 @@ App performs VirusTotal on IP Addresses, URLs, hashes, domain and file artifacts
   * Other File
   * RFC 822 Email Message File
   * URL
-* Automatic playbook to create hits on 
-* Key Feature 3 <!-- ::CHANGE_ME:: -->
+* Enable automatic playbook to perform VirusTotal analysis and create hits for the artifacts if it is deemed potentially malicious by VirusTotal. 
 
 ---
 
@@ -113,6 +111,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Org Data | Read |
   | Function | Read |
   | Incidents | Read |
+  | Incident fields | Edit
 
 The following SOAR platform guides provide additional information: 
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -142,7 +141,7 @@ Additional package dependencies may exist for each of these packages:
 * bs4==0.0.1
 * resilient-circuits>=48.0.0
 
-### <!-- ::CHANGE_ME:: --> Development Version
+### VirusTotal Development Version
 
 This app has been implemented using:
 | Product Name | Product Version| API URL | API Version |
@@ -153,26 +152,13 @@ This app has been implemented using:
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
-* Prereq A <!-- ::CHANGE_ME:: -->
-* Prereq B <!-- ::CHANGE_ME:: -->
-* Prereq C <!-- ::CHANGE_ME:: -->
+* VirusTotal API token
 
 #### Configuration
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-* Config A <!-- ::CHANGE_ME:: -->
-* Config B <!-- ::CHANGE_ME:: -->
-* Config C <!-- ::CHANGE_ME:: -->
-
-#### Permissions
-<!--
-List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
--->
-* Permission A <!-- ::CHANGE_ME:: -->
-* Permission B <!-- ::CHANGE_ME:: -->
-* Permission C <!-- ::CHANGE_ME:: -->
-
+* Generate a VirusTotal API token for use with IBM SOAR. Use this value in the app.config `api_token` setting.
 
 ---
 
@@ -187,15 +173,15 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_token** | Yes | `` | *VirusTotal API token.* <!-- ::CHANGE_ME:: --> |
-| **max_polling_wait_sec** | Yes | `600` | *Max polling time in seconds to wait for a scan analysis to complete.* <!-- ::CHANGE_ME:: --> |
-| **polling_interval_sec** | Yes | `60` | *Interval time in seconds to check if a scan analysis is complete.* <!-- ::CHANGE_ME:: --> |
+| **api_token** | Yes | `` | *VirusTotal API token.* |
+| **max_polling_wait_sec** | Yes | `600` | *Max polling time in seconds to wait for a scan analysis to complete.* |
+| **polling_interval_sec** | Yes | `60` | *Interval time in seconds to check if a scan analysis is complete.*  |
 
 
 ---
 
 ## Function - VirusTotal
-Perform VirusTotal scans and return reports on ip addresses, urls, domains, hashes and files.
+Perform VirusTotal scans and return reports on ip addresses, URLs, domains, hashes and files.
 
  ![screenshot: fn-virustotal ](./doc/screenshots/fn-virustotal.png) 
 
@@ -1035,7 +1021,9 @@ if sha1:
 | Example VirusTotal: Scan Attachment (PB) | Perform a VirusTotal scan on an attachment.  Write the results to a note. | attachment | `enabled` |
 | Example VirusTotal: Scan Hits (PB) | Perform automatic lookups for artifacts including IP addresses, hashes, domains, and URLS and creates a hit for the artifact if it is deemed potentially malicious by VirusTotal. | artifact | `disabled` |
 
+Enable the `Example VirusTotal: Scan Hits (PB)` playbook to automatically mark artifact hits from VirusTotal analysis results:
 
+ ![screenshot: main](./doc/screenshots/vt-artifact-hit.png)
 
 ---
 

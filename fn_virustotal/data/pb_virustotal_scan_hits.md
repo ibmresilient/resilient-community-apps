@@ -67,14 +67,14 @@ results = playbook.functions.results.vt_scan_results
 
 if results:
   scan = results.get("scan", None)
-  if scan is not None and scan.get("data", None) is not None:
+  if scan and scan.get("data", None):
     data = scan.get("data", None)
     attributes = data.get("attributes", None)
-    if attributes is not None:
+    if attributes:
       last_analysis_stats = attributes.get("last_analysis_stats", None)
-      if last_analysis_stats is not None:
+      if last_analysis_stats:
         malicious = last_analysis_stats.get("malicious", None)
-        if malicious is not None and malicious > 0:
+        if malicious and malicious > 0:
           hit = [
             {
               "name": "Artifact Value",
@@ -82,17 +82,26 @@ if results:
               "value": "{}".format(artifact.value)
             }
           ]
+          if artifact.type in ["DNS Name", "IP Address"]:
+            url_fragment = "domain" if (artifact.type == "DNS Name") else "ip-address"
+            entry = {"name": "VirusTotal Report", 
+                     "type": "uri",
+                     "value": "https://www.virustotal.com/gui/{0}/{1}".format(url_fragment, artifact.value)
+                     }
+            hit.append(entry)
+
           artifact.addHit("VirusTotal hits added.", hit)
-          if attributes.get("last_http_response_content_sha256", None) is not None:
+
+          if attributes.get("last_http_response_content_sha256", None):
             incident.addArtifact('Malware SHA-256 Hash', attributes.get("last_http_response_content_sha256", None), "Created by VirusTotal.")
             
-          if attributes.get('md5', None) is not None:
+          if attributes.get('md5', None):
             incident.addArtifact('Malware MD5 Hash', attributes.get('md5'), "Created by VirusTotal.")
   
-          if attributes.get('sha1', None) is not None:
+          if attributes.get('sha1', None):
             incident.addArtifact('Malware SHA-1 Hash', attributes.get('sha1'), "Created by VirusTotal.")
     
-          if attributes.get('sha256', None) is not None:
+          if attributes.get('sha256', None):
             incident.addArtifact('Malware SHA-256 Hash', attributes.get('sha256'), "Created by VirusTotal.")
         else:
           incident.addNote('VirusTotal has not found a hit.')
