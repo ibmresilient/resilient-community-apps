@@ -495,7 +495,7 @@ class PollerComponent(AppFunctionComponent):
         # List of comments from the SOAR incident
         soar_comments = [clean_html(comment.get("content", "").replace("Added from Jira", "")) for comment in soar.get("comments", [])]
         # List of comments from the Jira issue
-        jira_comments = [comment.get("body", "").replace("\n", "") for comment in jira.get("renderedFields", {}).get("comment").get("comments", [])]
+        jira_comments = [comment.get("body", "").replace("\n", "").replace("Added from Jira", "") for comment in jira.get("renderedFields", {}).get("comment").get("comments", [])]
 
         if jira_comments:
             for comment in jira_comments:
@@ -567,7 +567,7 @@ class PollerComponent(AppFunctionComponent):
         # SOAR Task comments
         task_comments = [clean_html(note.get("text").replace("Added from Jira", "")) for note in task.get("notes", []) if "Added Jira Issue:" not in note.get("text")]
         # Jira issue comments
-        jira_comments = [comment.get("body").replace("\n", "") for comment in jira.get("renderedFields").get("comment").get("comments", [])]
+        jira_comments = [comment.get("body").replace("\n", "").replace("Added from Jira", "") for comment in jira.get("renderedFields").get("comment").get("comments", [])]
 
         # Update comments/notes
         if jira_comments:
