@@ -63,6 +63,8 @@ Create artifact hits on artifacts the VirusTotal has deemed malicious. Created m
 
 ### Script Content
 ```python
+VIRUSTOTAL_GUI_URL = "https://www.virustotal.com/gui"
+
 results = playbook.functions.results.vt_scan_results
 
 if results:
@@ -82,11 +84,26 @@ if results:
               "value": "{}".format(artifact.value)
             }
           ]
-          if artifact.type in ["DNS Name", "IP Address"]:
-            url_fragment = "domain" if (artifact.type == "DNS Name") else "ip-address"
+          
+          # Add VirusTotal Report link to the note
+          uriLookup = { 'Email Attachment': 'file', 
+                'Malware Sample': 'file', 
+                'Malware MD5 Hash': 'file', 
+                'Malware SHA-1 Hash': 'file', 
+                'Malware SHA-256 Hash': 'file', 
+                'Other File': 'file',
+                'RCF 822 Email Message File': 'file', 
+                'File Name': 'file',
+                'URL': 'url', 
+                'IP Address': 'ip-address', 
+                'DNS Name':'domain'}
+          uri_fragment = uriLookup.get(artifact.type, None)
+          vt_id = data.get("id", None)
+
+          if vt_id and uri_fragment:
             entry = {"name": "VirusTotal Report", 
                      "type": "uri",
-                     "value": "https://www.virustotal.com/gui/{0}/{1}".format(url_fragment, artifact.value)
+                     "value": "{0}/{1}/{2}".format(VIRUSTOTAL_GUI_URL, uri_fragment, artifact.value)
                      }
             hit.append(entry)
 
@@ -104,15 +121,15 @@ if results:
           if attributes.get('sha256', None):
             incident.addArtifact('Malware SHA-256 Hash', attributes.get('sha256'), "Created by VirusTotal.")
         else:
-          incident.addNote('VirusTotal has not found a hit.')
+          incident.addNote("VirusTotal has not found a hit: {0} {1}.".format(artifact.type, artifact.value))
       else:
-        incident.addNote('VirusTotal has failed. - no last_analysis_stats')
+        incident.addNote("VirusTotal has failed. - no last_analysis_stats: {0} {1}.".format(artifact.type, artifact.value))
     else:
-      incident.addNote('VirusTotal has failed - no attributes.')
+      incident.addNote("VirusTotal has failed - no attributes: {0} {1}.".format(artifact.type, artifact.value))
   else:
-    incident.addNote('VirusTotal has failed - no data.')
+    incident.addNote("VirusTotal has failed - no data: {0} {1}.".format(artifact.type, artifact.value))
 else:
-  incident.addNote('VirusTotal has failed - no results.')
+  incident.addNote("VirusTotal has failed - no results: {0} {1}.".format(artifact.type, artifact.value))
       
 ```
 

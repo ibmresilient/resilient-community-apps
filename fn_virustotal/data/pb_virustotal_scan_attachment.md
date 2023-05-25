@@ -61,6 +61,8 @@ Write the results of an VirusTotal scan of an attachment to a note.
 import datetime
 import json
 
+VIRUSTOTAL_GUI_URL = "https://www.virustotal.com/gui"
+
 results = playbook.functions.results.vt_scan_results
 
 # Uncomment the following line to have the results json printed formatted to a note.
@@ -97,9 +99,16 @@ for k,v in stats.items():
 last_analysis_date = attributes.get("last_analysis_date", None)
 if last_analysis_date:
   last_analysis_date_str = datetime.datetime.fromtimestamp(last_analysis_date).strftime('%Y-%b-%d %H:%M:%S')
-  msg = "{0}<br><p>Last analysis date: {1}</p>""".format(msg, last_analysis_date_str)
+  msg = "{0}<br>Last analysis date: {1}".format(msg, last_analysis_date_str)
+
+# Add VirusTotal Report link to the note
+if data:
+  vt_id = data.get("id", None)
+  if vt_id:
+    link_back = "<a href='{0}/file/{1}'>VirusTotal Report</a>".format(VIRUSTOTAL_GUI_URL, vt_id)
+    msg = "{0}<br>{1}".format(msg, link_back)
     
-if stats == {}:
+if not stats:
   msg = "{0}No stats returned from scan attachment: {1}".format(msg, attachment.name)  
 
 incident.addNote(helper.createRichText("<div>{0}</div>".format(msg)))

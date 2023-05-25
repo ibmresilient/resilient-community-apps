@@ -98,11 +98,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `45.2.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `45.2.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=48.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -919,7 +919,7 @@ results = {
 <p>
 
 ```python
-typeLookup = { 'Email Attachment': 'file', 'Malware Sample': 'file', 'Malware MD5 Hash': 'hash', 'Malware SHA-1 Hash': 'hash', 'Malware SHA-256 Hash': 'hash', 'Other File': 'file', 'RCF 822 Email Message Fife': 'file', 'File Name': 'filename',
+typeLookup = { 'Email Attachment': 'file', 'Malware Sample': 'file', 'Malware MD5 Hash': 'hash', 'Malware SHA-1 Hash': 'hash', 'Malware SHA-256 Hash': 'hash', 'Other File': 'file', 'RCF 822 Email Message File': 'file', 'File Name': 'filename',
  'URL': 'url', 'IP Address': 'ip', 'DNS Name':'domain'}
 if artifact.type in typeLookup:
   inputs.vt_type = typeLookup.get(artifact.type, artifact.type)
@@ -940,6 +940,8 @@ inputs.vt_data = artifact.value
 ```python
 import datetime
 import json
+
+VIRUSTOTAL_GUI_URL = "https://www.virustotal.com/gui"
 
 results = playbook.functions.results.vt_scan_results
 
@@ -968,18 +970,39 @@ if data:
     if stats == {}:
 	    stats = attributes.get("stats", {})
 
+# Write statistics to the note
 for k,v in stats.items():
   if k.lower() == "malicious":
     msg = "{0}{1}: <span style='color:red'>{2}</span><br>".format(msg, k, v)
   else:
     msg = "{0}{1}: {2}<br>".format(msg, k, v)
-    
+
+# Write the last analysis time to the note
 last_analysis_date = attributes.get("last_analysis_date", None)
 if last_analysis_date:
   last_analysis_date_str = datetime.datetime.fromtimestamp(last_analysis_date).strftime('%Y-%b-%d %H:%M:%S')
-  msg = "{0}<p>Last analysis date: {1}</p>""".format(msg, last_analysis_date_str)
-    
-if stats == {}:
+  msg = "{0}<br>Last analysis date: {1}".format(msg, last_analysis_date_str)
+
+# Add VirusTotal Report link to the note
+if data:
+  uriLookup = { 'Email Attachment': 'file', 
+                'Malware Sample': 'file', 
+                'Malware MD5 Hash': 'file', 
+                'Malware SHA-1 Hash': 'file', 
+                'Malware SHA-256 Hash': 'file', 
+                'Other File': 'file',
+                'RCF 822 Email Message File': 'file', 
+                'File Name': 'file',
+                'URL': 'url', 
+                'IP Address': 'ip-address', 
+                'DNS Name':'domain'}
+  uri_fragment = uriLookup.get(artifact.type, None)
+  vt_id = data.get("id", None)
+  if vt_id and uri_fragment:
+    link_back = "<a href='{0}/{1}/{2}'>VirusTotal Report</a>".format(VIRUSTOTAL_GUI_URL, uri_fragment, vt_id)
+    msg = "{0}<br>{1}".format(msg, link_back)
+  
+if not stats:
   msg = "{0}No stats returned from scan {1}: {2}".format(msg, artifact.type, artifact.value)  
 
 incident.addNote(helper.createRichText("<div>{0}</div>".format(msg)))

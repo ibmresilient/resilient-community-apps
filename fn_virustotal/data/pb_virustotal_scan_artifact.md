@@ -66,6 +66,8 @@ Write VirusTotal scan results to an incident note.
 import datetime
 import json
 
+VIRUSTOTAL_GUI_URL = "https://www.virustotal.com/gui"
+
 results = playbook.functions.results.vt_scan_results
 
 # Uncomment the following line to have the results json printed formatted to a note.
@@ -93,18 +95,39 @@ if data:
     if stats == {}:
 	    stats = attributes.get("stats", {})
 
+# Write statistics to the note
 for k,v in stats.items():
   if k.lower() == "malicious":
     msg = "{0}{1}: <span style='color:red'>{2}</span><br>".format(msg, k, v)
   else:
     msg = "{0}{1}: {2}<br>".format(msg, k, v)
-    
+
+# Write the last analysis time to the note
 last_analysis_date = attributes.get("last_analysis_date", None)
 if last_analysis_date:
   last_analysis_date_str = datetime.datetime.fromtimestamp(last_analysis_date).strftime('%Y-%b-%d %H:%M:%S')
-  msg = "{0}<br><p>Last analysis date: {1}</p>""".format(msg, last_analysis_date_str)
-    
-if stats == {}:
+  msg = "{0}<br>Last analysis date: {1}".format(msg, last_analysis_date_str)
+
+# Add VirusTotal Report link to the note
+if data:
+  uriLookup = { 'Email Attachment': 'file', 
+                'Malware Sample': 'file', 
+                'Malware MD5 Hash': 'file', 
+                'Malware SHA-1 Hash': 'file', 
+                'Malware SHA-256 Hash': 'file', 
+                'Other File': 'file',
+                'RCF 822 Email Message File': 'file', 
+                'File Name': 'file',
+                'URL': 'url', 
+                'IP Address': 'ip-address', 
+                'DNS Name':'domain'}
+  uri_fragment = uriLookup.get(artifact.type, None)
+  vt_id = data.get("id", None)
+  if vt_id and uri_fragment:
+    link_back = "<a href='{0}/{1}/{2}'>VirusTotal Report</a>".format(VIRUSTOTAL_GUI_URL, uri_fragment, vt_id)
+    msg = "{0}<br>{1}".format(msg, link_back)
+  
+if not stats:
   msg = "{0}No stats returned from scan {1}: {2}".format(msg, artifact.type, artifact.value)  
 
 incident.addNote(helper.createRichText("<div>{0}</div>".format(msg)))
