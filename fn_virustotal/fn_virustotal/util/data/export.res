@@ -629,9 +629,9 @@
   "scripts": [],
   "server_version": {
     "build_number": 8131,
-    "major": 46,
-    "minor": 0,
-    "version": "46.0.8131"
+    "major": 45,
+    "minor": 2,
+    "version": "45.2.0"
   },
   "tags": [],
   "task_order": [],
