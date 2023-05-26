@@ -61,7 +61,7 @@ class VirusTotalClient(object):
         response_json = response.json()
         return response_json, code
 
-    def wait_for_scan_to_complete(self, response_json: dict) -> tuple[dict, str]:
+    def wait_for_scan_to_complete(self, response_json: dict, start_time: float) -> tuple[dict, str]:
         """Given a VirusTotal JSON scan analysis object returned from VirusTotal scan submission, 
         use the time parameters in the app.config to poll for the analysis to complete.
 
@@ -93,7 +93,9 @@ class VirusTotalClient(object):
         if not endpoint_url:
             raise IntegrationError("No self link in VirusTotal scan JSON object.") 
 
-        start_time = curr_time = time.time()
+        curr_time = time.time()
+        analysis_response_json = {}
+        status = None
         # Loop until analysis status is complete of the max poll time is exceeded.
         while int(curr_time - start_time)/1000 <= int(self.max_polling_wait_sec):
             # Check the end point to see if the analysis is complete.
@@ -113,7 +115,7 @@ class VirusTotalClient(object):
                     elif status in ["in-progress", "queued"]:
                         # resubmit
                         curr_time = time.time()
-                        if int(curr_time - start_time)/1000 >= int(self.max_polling_wait_sec):
+                        if int(curr_time - start_time)/1000 > int(self.max_polling_wait_sec):
                             raise IntegrationError("exceeded max wait time: {}".format(self.max_polling_wait_sec))
 
                         time.sleep(int(self.polling_interval_sec))
@@ -121,7 +123,10 @@ class VirusTotalClient(object):
                     else:
                         raise IntegrationError("Invalid analysis status: {}.".format(status))
 
-        raise IntegrationError("VirusTotal scan analysis is not complete - MAX poll time exceeded!")
+        if (int(curr_time - start_time)/1000 > int(self.max_polling_wait_sec)) and status != "completed":
+            raise IntegrationError("VirusTotal scan analysis is not complete - MAX poll time exceeded!")
+
+        return analysis_response_json, status
 
     def get_url_report(self, url: str) -> tuple[dict, str]:
         """ Get the URL report from VirusTotal on the URL (if there is one).

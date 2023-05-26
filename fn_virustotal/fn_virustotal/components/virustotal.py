@@ -90,7 +90,7 @@ class FunctionComponent(ResilientComponent):
                 if code != "success":
                     raise IntegrationError("VirusTotal file scan error: {0}".format(code))
                 
-                file_result, status = vt.wait_for_scan_to_complete(scan_response)
+                file_result, status = vt.wait_for_scan_to_complete(scan_response, time.time())
 
                 if status != "completed":
                     raise IntegrationError("VirusTotal file scan note complete: {0}".format(status))
@@ -116,7 +116,7 @@ class FunctionComponent(ResilientComponent):
                     scan_response, code = vt.scan_url(vt_data)
 
                     if scan_response.get("data", None):
-                        response, status = vt.wait_for_scan_to_complete(scan_response)
+                        response, status = vt.wait_for_scan_to_complete(scan_response, time.time())
                         if status != "completed":
                             raise IntegrationError("VirusTotal URL scan not complete: {0}".format(status))
 
