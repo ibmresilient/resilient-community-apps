@@ -2,6 +2,7 @@
 
 ## Table of Contents
 - [Scheduler](#scheduler)
+  - [Table of Contents](#table-of-contents)
   - [Release Notes](#release-notes)
     - [Migrating to v1.0.2](#migrating-to-v102)
     - [Notes regarding v2.1.0](#notes-regarding-v210)
@@ -143,7 +144,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.10.
+* IBM Cloud Pak for Security >= `1.10`.
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -162,8 +163,8 @@ Additional package dependencies may exist for each of these packages:
 * APScheduler >= 3.9;python_version >= '3.6'
 * python-dateutil>=2.8.1
 * pytz
-* resilient_circuits>=42.0
-* resilient_lib>=42.0
+* resilient_circuits>=46.0
+* resilient_lib>=46.0
 * SQLAlchemy>=1.3.8
 
 ---
@@ -280,7 +281,8 @@ results = {
     'kwargs': {
 
     }
-  },
+  }
+}
 ```
 
 </p>
@@ -394,7 +396,8 @@ results = {
     'kwargs': {
 
     }
-  },
+  }
+}
 ```
 
 </p>
@@ -503,6 +506,7 @@ from datetime import datetime
 
 results = playbook.functions.results.output_scheduled_rule_list
 now = datetime.now().strftime("%Y-%m-%d %H:%M:%S") # '2023-03-24 11:28:34'
+date = datetime.now().strftime("%Y-%m-%d")
 TYPE_LOOKUP = {
   0: 'Incident',
   1: "Task",
