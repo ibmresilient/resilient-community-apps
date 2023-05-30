@@ -4,37 +4,72 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# List Schedules
+# Playbook - Scheduler: List Jobs (PB)
 
+### API Name
+`pb_scheduler_list_jobs`
+
+### Status
+`enabled`
+
+### Activation Type
+`manual`
+
+### Object Type
+`incident`
+
+### Description
+List all scheduled jobs
+
+
+---
 ## Function - Scheduled Rule List
 
 ### API Name
 `list_scheduled_rules`
 
 ### Output Name
-`None`
+`output_scheduled_rule_list`
 
 ### Message Destination
 `fn_scheduler`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
-if rule.properties.incidents_returned == "All":
-  inputs.incident_id = 0
-else:
-  inputs.incident_id = incident.id
+inputs.incident_id = 0 if getattr(playbook.inputs, "incidents_returned", None) == "All" else incident.id
 ```
 
-### Post-Processing Script
-```python
-import java.util.Date as Date
+---
 
-TYPE_LOOKUP = {0: 'Incident', 1: "Task", 4: "Artifact", 5: "Attachment"}
+## Local script - Write all jobs to DataTable
+
+### Description
+Writes out all scheduled jobs to datatabe
+
+### Script Type
+`Local script`
+
+### Objet Type
+`incident`
+
+### Script Content
+```python
+from datetime import datetime
+
+results = playbook.functions.results.output_scheduled_rule_list
+now  = datetime.now().strftime("%Y-%m-%d %H:%M:%S") # '2023-03-24 11:28:34'
+date = datetime.now().strftime("%Y-%m-%d")
+TYPE_LOOKUP = {
+  0: 'Incident',
+  1: "Task",
+  4: "Artifact",
+  5: "Attachment"}
 
 if not results['content']:
   row = incident.addRow("scheduler_rules")
-  row['reported_on'] = str(Date())
+  row['reported_on'] = date
   row['schedule_label'] = "-- no scheduled rules --"
+
 else:
   for job in results['content']:
     row = incident.addRow("scheduler_rules")
@@ -42,10 +77,11 @@ else:
     row['schedule_type'] = job['type']
     row['incident_id'] = job['args'][0]
     row['schedule'] = job['value']
-    row['reported_on'] = str(Date())
+    row['reported_on'] = now
     row['status'] = 'Active' if job['next_run_time'] else 'Paused'
     row['next_run_time'] = job['next_run_time']
     row['rule_type'] = TYPE_LOOKUP.get(job['args'][6], "Datatable")
+
     if job['args'][8]:
       row['rule'] = "<a href='#playbooks/designer/{}'>{}</a>".format(job['args'][5], job['args'][4])
     else:
@@ -54,4 +90,3 @@ else:
 ```
 
 ---
-
