@@ -85,10 +85,11 @@ But migrating to playbooks provides greater functionality along with future app 
 ---
 
 ## Overview
-<!--
-  Provide a high-level description of the function itself and its remote software or application.
-  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
--->
+
+<p align="center">
+<img src="./doc/screenshots/app_info.png" />
+</p>
+
 **Functions to allow Playbooks/Rules to be scheduled**
 
 This package of functions allows an enterprise to schedule a rule to run in the future associated with a incident, task, artifact, and datatable. Times to run can be specified in the following ways:
@@ -107,8 +108,9 @@ Functions available include:
 3) Pause and resume scheduled Playbooks/Rules
 5) Removing a scheduled Playbook/Rule
 
-
- ![screenshot: playbooks_support ](./doc/screenshots/main.png)
+<p align="center">
+<img src="./doc/screenshots/main.png" />
+</p>
 
 ---
 
@@ -232,7 +234,10 @@ inputs.scheduler_is_playbook = getattr(playbook.inputs, "schedule_is_playbook", 
 ## Function - Scheduled Rule Create
 Schedule a rule or playbook to run on a schedule. This rule/playbook will be executed for a given incident, artifact, task, etc.
 
- ![screenshot: fn-scheduled-rule-create ](./doc/screenshots/create_scheduled_job.png)
+<p align="center">
+<img src="./doc/screenshots/create_scheduled_job.png" />
+</p>
+
 
 <details><summary>Inputs:</summary>
 <p>
