@@ -452,7 +452,9 @@ else:
 ## Function - Scheduled Rule List
 List the schedules presently defined
 
- ![screenshot: fn-scheduled-rule-list ](./doc/screenshots/list_scheduled_jobs.png)
+<p align="center">
+<img src="./doc/screenshots/list_scheduled_jobs.png" />
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
@@ -551,7 +553,9 @@ else:
 ## Function - Scheduled Rule Pause
 Pause a scheduled rule
 
- ![screenshot: fn-scheduled-rule-pause ](./doc/screenshots/scheduled_job_actions.png)
+<p align="center">
+<img src="./doc/screenshots/scheduled_job_actions.png" />
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
