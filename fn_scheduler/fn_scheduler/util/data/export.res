@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1685520979879,
+  "export_date": 1685524669067,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -17,7 +17,7 @@
       "deprecated": false,
       "export_key": "__function/object_id",
       "hide_notification": false,
-      "id": 467,
+      "id": 512,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -46,7 +46,7 @@
       "deprecated": false,
       "export_key": "__function/scheduler_label_prefix",
       "hide_notification": false,
-      "id": 468,
+      "id": 513,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -76,7 +76,7 @@
       "deprecated": false,
       "export_key": "__function/scheduler_label",
       "hide_notification": false,
-      "id": 469,
+      "id": 514,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -105,7 +105,7 @@
       "deprecated": false,
       "export_key": "__function/modify_scheduler_type_value",
       "hide_notification": false,
-      "id": 495,
+      "id": 515,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -134,7 +134,7 @@
       "deprecated": false,
       "export_key": "__function/scheduler_rule_name",
       "hide_notification": false,
-      "id": 471,
+      "id": 516,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -164,7 +164,7 @@
       "deprecated": false,
       "export_key": "__function/modify_scheduler_type",
       "hide_notification": false,
-      "id": 496,
+      "id": 517,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -189,7 +189,7 @@
           "label": "cron",
           "properties": null,
           "uuid": "bee7db2c-6675-4d5d-8ff8-ce2ddfae603b",
-          "value": 137
+          "value": 608
         },
         {
           "default": false,
@@ -198,7 +198,7 @@
           "label": "date",
           "properties": null,
           "uuid": "6d59cc69-8499-423e-90bf-5e482e7464a1",
-          "value": 138
+          "value": 609
         },
         {
           "default": false,
@@ -207,7 +207,7 @@
           "label": "delta",
           "properties": null,
           "uuid": "3540303a-bf3f-4d73-842b-eb9f6ed183e2",
-          "value": 139
+          "value": 610
         },
         {
           "default": false,
@@ -216,7 +216,7 @@
           "label": "interval",
           "properties": null,
           "uuid": "a9a054e3-9e75-4761-ad57-3258ae46102a",
-          "value": 140
+          "value": 611
         }
       ]
     },
@@ -230,7 +230,7 @@
       "deprecated": false,
       "export_key": "__function/scheduler_type",
       "hide_notification": false,
-      "id": 473,
+      "id": 518,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -255,7 +255,7 @@
           "label": "cron",
           "properties": null,
           "uuid": "eb8f0588-a416-4bf9-9154-665ed20bcdf9",
-          "value": 119
+          "value": 612
         },
         {
           "default": false,
@@ -264,7 +264,7 @@
           "label": "interval",
           "properties": null,
           "uuid": "422ba5d3-1f82-4199-bb51-773cfd56dedb",
-          "value": 120
+          "value": 613
         },
         {
           "default": false,
@@ -273,7 +273,7 @@
           "label": "date",
           "properties": null,
           "uuid": "ff3beed4-6f48-43fd-b5d4-c389e76c4d2f",
-          "value": 121
+          "value": 614
         },
         {
           "default": false,
@@ -282,7 +282,7 @@
           "label": "delta",
           "properties": null,
           "uuid": "f1289cbb-b0ff-4027-a6f8-af40bb474910",
-          "value": 122
+          "value": 615
         }
       ]
     },
@@ -296,7 +296,7 @@
       "deprecated": false,
       "export_key": "__function/scheduler_rule_parameters",
       "hide_notification": false,
-      "id": 474,
+      "id": 519,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -323,9 +323,39 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/incident_id",
+      "hide_notification": false,
+      "id": 317,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "incident_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "incident_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "509d6b58-e4b5-4150-b1d0-6843c6dcfb8d",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/row_id",
       "hide_notification": false,
-      "id": 475,
+      "id": 520,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -352,38 +382,9 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/incident_id",
-      "hide_notification": false,
-      "id": 476,
-      "input_type": "number",
-      "internal": false,
-      "is_tracked": false,
-      "name": "incident_id",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "Resilient Incident ID",
-      "prefix": null,
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "incident_id",
-      "tooltip": "IncidentID",
-      "type_id": 11,
-      "uuid": "5eaaeb87-cb70-4877-aa5e-0a5b10f73f3a",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
       "export_key": "__function/scheduler_type_value",
       "hide_notification": false,
-      "id": 477,
+      "id": 521,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -413,7 +414,7 @@
       "deprecated": false,
       "export_key": "__function/scheduler_is_playbook",
       "hide_notification": false,
-      "id": 478,
+      "id": 522,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -447,7 +448,7 @@
   ],
   "functions": [
     {
-      "created_date": 1684168490246,
+      "created_date": 1685523292018,
       "description": {
         "content": "Schedule a rule to run on a schedule. This rule will be executed for a given incident, artifact, task, etc.",
         "format": "text"
@@ -455,20 +456,20 @@
       "destination_handle": "fn_scheduler",
       "display_name": "Scheduled Rule Create",
       "export_key": "create_a_scheduled_rule",
-      "id": 26,
+      "id": 37,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684168490276,
+      "last_modified_time": 1685524632627,
       "name": "create_a_scheduled_rule",
       "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"version\": 1, \"id\": \"domain2-5640\", \"func\": \"fn_scheduler.components.create_a_scheduled_rule:triggered_job\", \"trigger\": null, \"executor\": \"default\", \"args\": [5640, null, null, \"domain2-5640\", \"test scheduled rule\", 212, 0, {\"artifact_value\": \"abc.com\", \"artifact_type\": \"domain\"}, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"kwargs\": {\"artifact_value\": \"abc.com\", \"artifact_type\": \"domain\"}, \"name\": \"triggered_job\", \"misfire_grace_time\": 1, \"coalesce\": false, \"max_instances\": 1, \"next_run_time\": \"Apr 27 2022 05:00AM\"}, \"raw\": \"{\\\"version\\\": 1, \\\"id\\\": \\\"domain2-5640\\\", \\\"func\\\": \\\"fn_scheduler.components.create_a_scheduled_rule:triggered_job\\\", \\\"trigger\\\": null, \\\"executor\\\": \\\"default\\\", \\\"args\\\": [5640, null, null, \\\"domain2-5640\\\", \\\"test scheduled rule\\\", 212, 0, {\\\"artifact_value\\\": \\\"abc.com\\\", \\\"artifact_type\\\": \\\"domain\\\"}, null, {\\\"timezone\\\": \\\"America/New_York\\\", \\\"thread_max\\\": \\\"20\\\", \\\"datastore_dir\\\": \\\"/tmp/scheduler.sqlite\\\"}], \\\"kwargs\\\": {\\\"artifact_value\\\": \\\"abc.com\\\", \\\"artifact_type\\\": \\\"domain\\\"}, \\\"name\\\": \\\"triggered_job\\\", \\\"misfire_grace_time\\\": 1, \\\"coalesce\\\": false, \\\"max_instances\\\": 1, \\\"next_run_time\\\": \\\"Apr 27 2022 05:00AM\\\"}\", \"inputs\": {\"scheduler_type_value\": \"* 5 * * *\", \"incident_id\": 5640, \"scheduler_type\": {\"id\": 2109, \"name\": \"cron\"}, \"scheduler_label_prefix\": \"domain2\", \"scheduler_rule_name\": \"test scheduled rule\", \"scheduler_rule_parameters\": \"artifact_value=abc.com;artifact_type=domain\", \"scheduler_is_playbook\": false}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-scheduler\", \"package_version\": \"1.2.0\", \"host\": \"local\", \"execution_time_ms\": 21, \"timestamp\": \"2022-04-26 08:38:13\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"integer\"}, \"id\": {\"type\": \"string\"}, \"func\": {\"type\": \"string\"}, \"trigger\": {}, \"executor\": {\"type\": \"string\"}, \"args\": {\"type\": \"array\", \"items\": {\"anyOf\": [{\"type\": [\"integer\", \"null\", \"string\"]}, {\"type\": \"object\", \"properties\": {\"artifact_value\": {\"type\": \"string\"}, \"artifact_type\": {\"type\": \"string\"}, \"timezone\": {\"type\": \"string\"}, \"thread_max\": {\"type\": \"string\"}, \"datastore_dir\": {\"type\": \"string\"}}}]}}, \"kwargs\": {\"type\": \"object\", \"properties\": {\"artifact_value\": {\"type\": \"string\"}, \"artifact_type\": {\"type\": \"string\"}}}, \"name\": {\"type\": \"string\"}, \"misfire_grace_time\": {\"type\": \"integer\"}, \"coalesce\": {\"type\": \"boolean\"}, \"max_instances\": {\"type\": \"integer\"}, \"next_run_time\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"scheduler_type_value\": {\"type\": \"string\"}, \"incident_id\": {\"type\": \"integer\"}, \"scheduler_type\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}}}, \"scheduler_label_prefix\": {\"type\": \"string\"}, \"scheduler_rule_name\": {\"type\": \"string\"}, \"scheduler_rule_parameters\": {\"type\": \"string\"}, \"scheduler_is_playbook\": {\"type\": \"boolean\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "bde7b5b2-f454-4435-9103-de31d991b924",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "0e1330b2-0b91-462b-acf2-2772a02299f8",
@@ -519,7 +520,7 @@
           "step_label": null
         },
         {
-          "content": "5eaaeb87-cb70-4877-aa5e-0a5b10f73f3a",
+          "content": "509d6b58-e4b5-4150-b1d0-6843c6dcfb8d",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -552,7 +553,7 @@
           "programmatic_name": "schedule_rule_to_run",
           "tags": [],
           "uuid": null,
-          "workflow_id": 90
+          "workflow_id": 67
         },
         {
           "actions": [],
@@ -562,7 +563,7 @@
           "programmatic_name": "schedule_a_rule_to_run_artifact",
           "tags": [],
           "uuid": null,
-          "workflow_id": 91
+          "workflow_id": 71
         },
         {
           "actions": [],
@@ -572,12 +573,12 @@
           "programmatic_name": "schedule_a_rule_to_run__task",
           "tags": [],
           "uuid": null,
-          "workflow_id": 86
+          "workflow_id": 65
         }
       ]
     },
     {
-      "created_date": 1684230520503,
+      "created_date": 1685523292077,
       "description": {
         "content": "List the schedules presently defined",
         "format": "text"
@@ -585,23 +586,23 @@
       "destination_handle": "fn_scheduler",
       "display_name": "Scheduled Rule List",
       "export_key": "list_scheduled_rules",
-      "id": 33,
+      "id": 38,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684230520534,
+      "last_modified_time": 1685524632627,
       "name": "list_scheduled_rules",
       "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": [{\"id\": \"domain2-5640\", \"args\": [5640, null, null, \"domain2-5640\", \"test scheduled rule\", 212, 0, {\"artifact_value\": \"abc.com\", \"artifact_type\": \"domain\"}, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": \"Apr 27 2022 05:00AM\", \"type\": \"date\", \"value\": \"Apr 27 2022 01:02AM\"}], \"raw\": \"[{\\\"id\\\": \\\"domain2-5640\\\", \\\"args\\\": [5640, null, null, \\\"domain2-5640\\\", \\\"test scheduled rule\\\", 212, 0, {\\\"artifact_value\\\": \\\"abc.com\\\", \\\"artifact_type\\\": \\\"domain\\\"}, null, {\\\"timezone\\\": \\\"America/New_York\\\", \\\"thread_max\\\": \\\"20\\\", \\\"datastore_dir\\\": \\\"/tmp/scheduler.sqlite\\\"}], \\\"next_run_time\\\": \\\"Apr 27 2022 05:00AM\\\", \\\"type\\\": \\\"date\\\", \\\"value\\\": \\\"Apr 27 2022 01:02AM\\\"}]\", \"inputs\": {\"incident_id\": 0}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-scheduler\", \"package_version\": \"1.2.0\", \"host\": \"local\", \"execution_time_ms\": 5, \"timestamp\": \"2022-04-26 08:48:41\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"args\": {\"type\": \"array\", \"items\": {\"anyOf\": [{\"type\": [\"integer\", \"null\", \"string\"]}, {\"type\": \"object\", \"properties\": {\"artifact_value\": {\"type\": \"string\"}, \"artifact_type\": {\"type\": \"string\"}, \"timezone\": {\"type\": \"string\"}, \"thread_max\": {\"type\": \"string\"}, \"datastore_dir\": {\"type\": \"string\"}}}]}}, \"next_run_time\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"value\": {\"type\": \"string\"}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "8972a0b8-7a13-4dee-b6c1-e9ebc389b3d3",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
-          "content": "5eaaeb87-cb70-4877-aa5e-0a5b10f73f3a",
+          "content": "509d6b58-e4b5-4150-b1d0-6843c6dcfb8d",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -618,12 +619,12 @@
           "programmatic_name": "list_schedules",
           "tags": [],
           "uuid": null,
-          "workflow_id": 92
+          "workflow_id": 68
         }
       ]
     },
     {
-      "created_date": 1684230520539,
+      "created_date": 1685523292119,
       "description": {
         "content": "Stop a schedule",
         "format": "text"
@@ -631,14 +632,14 @@
       "destination_handle": "fn_scheduler",
       "display_name": "Scheduled Rule Remove",
       "export_key": "remove_a_scheduled_rule",
-      "id": 34,
+      "id": 39,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684230520570,
+      "last_modified_time": 1685523292156,
       "name": "remove_a_scheduled_rule",
       "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": null, \"raw\": \"null\", \"inputs\": {\"scheduler_label\": \"domain2-5640\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-scheduler\", \"package_version\": \"1.2.0\", \"host\": \"local\", \"execution_time_ms\": 8, \"timestamp\": \"2022-04-26 09:08:20\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"scheduler_label\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -664,12 +665,12 @@
           "programmatic_name": "remove_a_schedule",
           "tags": [],
           "uuid": null,
-          "workflow_id": 87
+          "workflow_id": 69
         }
       ]
     },
     {
-      "created_date": 1684168490347,
+      "created_date": 1685523292160,
       "description": {
         "content": "Run a scheduled job now",
         "format": "text"
@@ -677,14 +678,14 @@
       "destination_handle": "fn_scheduler",
       "display_name": "Run Schedule Job Now",
       "export_key": "run_schedule_job_now",
-      "id": 29,
+      "id": 40,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684168490377,
+      "last_modified_time": 1685523292200,
       "name": "run_schedule_job_now",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {}, \"raw\": null, \"inputs\": {\"scheduler_label\": \"rulex1-5713\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-scheduler\", \"package_version\": \"2.0.0\", \"host\": \"local\", \"execution_time_ms\": 1609, \"timestamp\": \"2022-04-28 17:39:27\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"scheduler_label\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -710,12 +711,12 @@
           "programmatic_name": "run_a_scheduled_job_now",
           "tags": [],
           "uuid": null,
-          "workflow_id": 85
+          "workflow_id": 63
         }
       ]
     },
     {
-      "created_date": 1684230520584,
+      "created_date": 1685523292205,
       "description": {
         "content": "Modify an existing schedule",
         "format": "text"
@@ -723,14 +724,14 @@
       "destination_handle": "fn_scheduler",
       "display_name": "Scheduled Rule Modify",
       "export_key": "scheduled_rule_modify",
-      "id": 35,
+      "id": 41,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684230520614,
+      "last_modified_time": 1685523292241,
       "name": "scheduled_rule_modify",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"id\": \"domain2-5640\", \"args\": [5640, null, null, \"domain2-5640\", \"test scheduled rule\", 212, 0, {\"artifact_value\": \"abc.com\", \"artifact_type\": \"domain\"}, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": \"Apr 27 2022 05:00AM\", \"type\": \"date\", \"value\": \"Apr 28 2022 04:05AM\"}, \"raw\": null, \"inputs\": {\"scheduler_type_value\": \"2022-04-28 04:05:06\", \"scheduler_label\": \"domain2-5640\", \"scheduler_type\": \"date\", \"scheduler_rule_parameters\": null}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-scheduler\", \"package_version\": \"1.2.0\", \"host\": \"local\", \"execution_time_ms\": 23, \"timestamp\": \"2022-04-26 08:49:26\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"args\": {\"type\": \"array\", \"items\": {\"anyOf\": [{\"type\": [\"integer\", \"null\", \"string\"]}, {\"type\": \"object\", \"properties\": {\"artifact_value\": {\"type\": \"string\"}, \"artifact_type\": {\"type\": \"string\"}, \"timezone\": {\"type\": \"string\"}, \"thread_max\": {\"type\": \"string\"}, \"datastore_dir\": {\"type\": \"string\"}}}]}}, \"next_run_time\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"value\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"scheduler_type_value\": {\"type\": \"string\"}, \"scheduler_label\": {\"type\": \"string\"}, \"scheduler_type\": {\"type\": \"string\"}, \"scheduler_rule_parameters\": {}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -780,12 +781,12 @@
           "programmatic_name": "modify_a_scheduled_rule",
           "tags": [],
           "uuid": null,
-          "workflow_id": 88
+          "workflow_id": 70
         }
       ]
     },
     {
-      "created_date": 1684230520619,
+      "created_date": 1685523292246,
       "description": {
         "content": "Pause a scheduled rule",
         "format": "text"
@@ -793,14 +794,14 @@
       "destination_handle": "fn_scheduler",
       "display_name": "Scheduled Rule Pause",
       "export_key": "scheduled_rule_pause",
-      "id": 36,
+      "id": 42,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684230520648,
+      "last_modified_time": 1685523292283,
       "name": "scheduled_rule_pause",
       "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"id\": \"domain2-5640\", \"args\": [5640, null, null, \"domain2-5640\", \"test scheduled rule\", 212, 0, {\"artifact_value\": \"abc.com\", \"artifact_type\": \"domain\"}, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": \"Apr 27 2022 05:00AM\", \"type\": \"date\", \"value\": \"Apr 28 2022 04:05AM\"}, \"raw\": \"{\\\"id\\\": \\\"domain2-5640\\\", \\\"args\\\": [5640, null, null, \\\"domain2-5640\\\", \\\"test scheduled rule\\\", 212, 0, {\\\"artifact_value\\\": \\\"abc.com\\\", \\\"artifact_type\\\": \\\"domain\\\"}, null, {\\\"timezone\\\": \\\"America/New_York\\\", \\\"thread_max\\\": \\\"20\\\", \\\"datastore_dir\\\": \\\"/tmp/scheduler.sqlite\\\"}], \\\"next_run_time\\\": \\\"Apr 27 2022 05:00AM\\\", \\\"type\\\": \\\"date\\\", \\\"value\\\": \\\"Apr 28 2022 04:05AM\\\"}\", \"inputs\": {\"scheduler_label\": \"domain2-5640\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-scheduler\", \"package_version\": \"1.2.0\", \"host\": \"local\", \"execution_time_ms\": 14, \"timestamp\": \"2022-04-26 09:07:44\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"args\": {\"type\": \"array\", \"items\": {\"anyOf\": [{\"type\": [\"integer\", \"null\", \"string\"]}, {\"type\": \"object\", \"properties\": {\"artifact_value\": {\"type\": \"string\"}, \"artifact_type\": {\"type\": \"string\"}, \"timezone\": {\"type\": \"string\"}, \"thread_max\": {\"type\": \"string\"}, \"datastore_dir\": {\"type\": \"string\"}}}]}}, \"next_run_time\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"value\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"scheduler_label\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -826,12 +827,12 @@
           "programmatic_name": "pause_a_scheduled_job",
           "tags": [],
           "uuid": null,
-          "workflow_id": 93
+          "workflow_id": 66
         }
       ]
     },
     {
-      "created_date": 1684230520652,
+      "created_date": 1685523292287,
       "description": {
         "content": "Resume a scheduled job",
         "format": "text"
@@ -839,14 +840,14 @@
       "destination_handle": "fn_scheduler",
       "display_name": "Scheduled Rule Resume",
       "export_key": "scheduled_rule_resume",
-      "id": 37,
+      "id": 43,
       "last_modified_by": {
         "display_name": "Admin User",
         "id": 1,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684230520682,
+      "last_modified_time": 1685523292323,
       "name": "scheduled_rule_resume",
       "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"id\": \"domain2-5640\", \"args\": [5640, null, null, \"domain2-5640\", \"test scheduled rule\", 212, 0, {\"artifact_value\": \"abc.com\", \"artifact_type\": \"domain\"}, null, {\"timezone\": \"America/New_York\", \"thread_max\": \"20\", \"datastore_dir\": \"/tmp/scheduler.sqlite\"}], \"next_run_time\": null, \"type\": \"date\", \"value\": \"Apr 28 2022 04:05AM\"}, \"raw\": \"{\\\"id\\\": \\\"domain2-5640\\\", \\\"args\\\": [5640, null, null, \\\"domain2-5640\\\", \\\"test scheduled rule\\\", 212, 0, {\\\"artifact_value\\\": \\\"abc.com\\\", \\\"artifact_type\\\": \\\"domain\\\"}, null, {\\\"timezone\\\": \\\"America/New_York\\\", \\\"thread_max\\\": \\\"20\\\", \\\"datastore_dir\\\": \\\"/tmp/scheduler.sqlite\\\"}], \\\"next_run_time\\\": null, \\\"type\\\": \\\"date\\\", \\\"value\\\": \\\"Apr 28 2022 04:05AM\\\"}\", \"inputs\": {\"scheduler_label\": \"domain2-5640\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-scheduler\", \"package_version\": \"1.2.0\", \"host\": \"local\", \"execution_time_ms\": 10, \"timestamp\": \"2022-04-26 09:08:01\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"args\": {\"type\": \"array\", \"items\": {\"anyOf\": [{\"type\": [\"integer\", \"null\", \"string\"]}, {\"type\": \"object\", \"properties\": {\"artifact_value\": {\"type\": \"string\"}, \"artifact_type\": {\"type\": \"string\"}, \"timezone\": {\"type\": \"string\"}, \"thread_max\": {\"type\": \"string\"}, \"datastore_dir\": {\"type\": \"string\"}}}]}}, \"next_run_time\": {}, \"type\": {\"type\": \"string\"}, \"value\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"scheduler_label\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -872,20 +873,20 @@
           "programmatic_name": "resume_a_scheduled_job",
           "tags": [],
           "uuid": null,
-          "workflow_id": 89
+          "workflow_id": 64
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 32,
+  "id": 3,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1685520977412,
+      "create_date": 1685524666763,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -894,7 +895,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1685520977412,
+      "update_date": 1685524666763,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -904,7 +905,8 @@
   "message_destinations": [
     {
       "api_keys": [
-        "9e4a0ae1-29fb-4019-8d8e-8a794f2449d9"
+        "0d0e6173-d4c0-4db4-a1b1-c9fbe7012a95",
+        "2d884b7b-0c78-45f6-8491-f4e7fc9e46f2"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -923,10 +925,10 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 11,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f48af589_3237_4bf3_8b34_8a35d56dfcf0\" isExecutable=\"true\" name=\"playbook_f48af589_3237_4bf3_8b34_8a35d56dfcf0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0vjpdlj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scheduled Rule List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8972a0b8-7a13-4dee-b6c1-e9ebc389b3d3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = 0 if getattr(playbook.inputs, \\\"incidents_returned\\\", None) == \\\"All\\\" else incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_list\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0vjpdlj\u003c/incoming\u003e\u003coutgoing\u003eFlow_10dlkmg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0vjpdlj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Write all jobs to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ab17abfe-7197-4a20-8a4a-a7bd2003f9b1\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10dlkmg\u003c/incoming\u003e\u003coutgoing\u003eFlow_06tw55x\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_10dlkmg\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_06tw55x\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_06tw55x\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f48af589_3237_4bf3_8b34_8a35d56dfcf0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06tw55x\" id=\"Flow_06tw55x_di\"\u003e\u003comgdi:waypoint x=\"610\" y=\"562\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"664\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10dlkmg\" id=\"Flow_10dlkmg_di\"\u003e\u003comgdi:waypoint x=\"610\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"478\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0vjpdlj\" id=\"Flow_0vjpdlj_di\"\u003e\u003comgdi:waypoint x=\"610\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"516\" y=\"124\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"512\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"512\" y=\"478\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"544\" y=\"664\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1684230520868,
+      "create_date": 1685523292584,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -956,7 +958,7 @@
             "deprecated": false,
             "export_key": "playbook_f48af589_3237_4bf3_8b34_8a35d56dfcf0/incidents_returned",
             "hide_notification": false,
-            "id": 497,
+            "id": 523,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -972,7 +974,7 @@
             "templates": [],
             "text": "Incidents Returned",
             "tooltip": "",
-            "type_id": 1040,
+            "type_id": 1033,
             "uuid": "2fcd18fd-4e6a-4090-81f6-227100006a98",
             "values": [
               {
@@ -982,7 +984,7 @@
                 "label": "All",
                 "properties": null,
                 "uuid": "33f4d186-c7c9-4f0c-9802-5b6a7ac00c1b",
-                "value": 141
+                "value": 616
               },
               {
                 "default": false,
@@ -991,7 +993,7 @@
                 "label": "This Incident only",
                 "properties": null,
                 "uuid": "aa0784b5-f2fe-4d11-8c35-f1a4eec822e2",
-                "value": 142
+                "value": 617
               }
             ]
           }
@@ -1016,7 +1018,7 @@
         "uuid": "abf42e45-454d-4357-b446-08ceed0c1caa"
       },
       "has_logical_errors": false,
-      "id": 36,
+      "id": 28,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -1025,18 +1027,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684749456533,
+      "last_modified_time": 1685524635180,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684230520933,
+          "created_date": 1685523292673,
           "description": "Writes out all scheduled jobs to datatabe",
           "enabled": false,
           "export_key": "Write all jobs to DataTable",
-          "id": 34,
+          "id": 41,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684328896433,
+          "last_modified_time": 1685523292686,
           "name": "Write all jobs to DataTable",
           "object_type": "incident",
           "playbook_handle": "pb_scheduler_list_jobs",
@@ -1067,7 +1069,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_f48af589-3237-4bf3-8b34-8a35d56dfcf0",
-        "id": 40,
+        "id": 32,
         "name": "playbook_f48af589_3237_4bf3_8b34_8a35d56dfcf0",
         "type": "playbook",
         "uuid": "d7b79186-1876-4e51-b73c-4f4e619e870f"
@@ -1075,15 +1077,15 @@
       "tags": [],
       "type": "default",
       "uuid": "f48af589-3237-4bf3-8b34-8a35d56dfcf0",
-      "version": 13
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 9,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3da68bad_7a31_4e0d_bb23_36ddf5303fb6\" isExecutable=\"true\" name=\"playbook_3da68bad_7a31_4e0d_bb23_36ddf5303fb6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_148uxgp\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scheduled Rule Modify\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a2014c98-26b7-4016-917a-147509a88775\"\u003e{\"inputs\":{\"a8315456-7803-4a4d-a482-aeec5ca91c4e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0aeb9039-7eae-49d6-81d8-369ebb401019\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"bee7db2c-6675-4d5d-8ff8-ce2ddfae603b\"}},\"b5ca3be1-0c84-4898-b1f6-2015eb753e1c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4d308c31-9056-4d34-b977-99d58f89076c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"inputs.scheduler_label = row[\u0027schedule_label\u0027]\\ninputs.modify_scheduler_type = getattr(playbook.inputs, \\\"modify_schedule_type\\\", None)\\ninputs.modify_scheduler_type_value = getattr(playbook.inputs, \\\"modify_schedule_type_value\\\", \\\"cron\\\")\\ninputs.scheduler_rule_parameters = getattr(playbook.inputs, \\\"schedule_rule_parameters\\\", None)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_modify\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_148uxgp\u003c/incoming\u003e\u003coutgoing\u003eFlow_14zt43o\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_148uxgp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Write modified job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3729f3b4-aef9-454f-93e7-cef91cc7938a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14zt43o\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xvmy8a\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14zt43o\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0xvmy8a\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0xvmy8a\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3da68bad_7a31_4e0d_bb23_36ddf5303fb6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xvmy8a\" id=\"Flow_0xvmy8a_di\"\u003e\u003comgdi:waypoint x=\"680\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"680\" y=\"564\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14zt43o\" id=\"Flow_14zt43o_di\"\u003e\u003comgdi:waypoint x=\"680\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"680\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_148uxgp\" id=\"Flow_148uxgp_di\"\u003e\u003comgdi:waypoint x=\"680\" y=\"126\"/\u003e\u003comgdi:waypoint x=\"680\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"580\" y=\"74\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"582\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"582\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"614\" y=\"564\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1684230521157,
+      "create_date": 1685523292945,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -1113,7 +1115,7 @@
             "deprecated": false,
             "export_key": "playbook_3da68bad_7a31_4e0d_bb23_36ddf5303fb6/modify_schedule_type",
             "hide_notification": false,
-            "id": 498,
+            "id": 524,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1128,7 +1130,7 @@
             "templates": [],
             "text": "Schedule Type",
             "tooltip": "",
-            "type_id": 1041,
+            "type_id": 1034,
             "uuid": "cdde568e-845d-41f0-9c68-7e6663db2f3c",
             "values": [
               {
@@ -1138,7 +1140,7 @@
                 "label": "cron",
                 "properties": null,
                 "uuid": "9e8f00a8-1675-4e84-8ae9-668a7e536927",
-                "value": 143
+                "value": 618
               },
               {
                 "default": false,
@@ -1147,7 +1149,7 @@
                 "label": "date",
                 "properties": null,
                 "uuid": "f6395fc3-0f06-4893-8748-1abdf39373db",
-                "value": 144
+                "value": 619
               },
               {
                 "default": false,
@@ -1156,7 +1158,7 @@
                 "label": "delta",
                 "properties": null,
                 "uuid": "51118032-046a-4703-b398-0c1810fcf98a",
-                "value": 145
+                "value": 620
               },
               {
                 "default": false,
@@ -1165,7 +1167,7 @@
                 "label": "interval",
                 "properties": null,
                 "uuid": "fed50e47-cedc-4cd8-b81e-871ad31d7eaa",
-                "value": 146
+                "value": 621
               }
             ]
           },
@@ -1179,7 +1181,7 @@
             "deprecated": false,
             "export_key": "playbook_3da68bad_7a31_4e0d_bb23_36ddf5303fb6/modify_schedule_type_value",
             "hide_notification": false,
-            "id": 499,
+            "id": 525,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1194,7 +1196,7 @@
             "templates": [],
             "text": "Schedule Type Value",
             "tooltip": "cron (* 5 * * *); date (yyyy-mm-dd hh:mm:ss) ; interval (10m)",
-            "type_id": 1041,
+            "type_id": 1034,
             "uuid": "426cd594-2681-4232-a079-19cf3aa5cd62",
             "values": []
           },
@@ -1208,7 +1210,7 @@
             "deprecated": false,
             "export_key": "playbook_3da68bad_7a31_4e0d_bb23_36ddf5303fb6/schedule_rule_parameters",
             "hide_notification": false,
-            "id": 500,
+            "id": 526,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1223,7 +1225,7 @@
             "templates": [],
             "text": "Schedule Rule Parameters",
             "tooltip": "field1=value;field2=value format of optional rule parameters",
-            "type_id": 1041,
+            "type_id": 1034,
             "uuid": "2f028b9a-5ce7-425d-8484-de7c29127ba2",
             "values": []
           }
@@ -1248,7 +1250,7 @@
         "uuid": "c1f2c44a-cbd3-4614-a677-2c6362ff43ea"
       },
       "has_logical_errors": false,
-      "id": 37,
+      "id": 29,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -1257,18 +1259,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684749456821,
+      "last_modified_time": 1685524635506,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684230521245,
+          "created_date": 1685523293062,
           "description": "Updates the dataTable with the modified job",
           "enabled": false,
           "export_key": "Write modified job to DataTable",
-          "id": 35,
+          "id": 42,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684230521254,
+          "last_modified_time": 1685523293075,
           "name": "Write modified job to DataTable",
           "object_type": "scheduler_rules",
           "playbook_handle": "pb_scheduler_modify_job",
@@ -1330,7 +1332,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_3da68bad-7a31-4e0d-bb23-36ddf5303fb6",
-        "id": 41,
+        "id": 33,
         "name": "playbook_3da68bad_7a31_4e0d_bb23_36ddf5303fb6",
         "type": "playbook",
         "uuid": "8d955bdf-35bf-4df1-99fa-b2efeb8a7b8f"
@@ -1338,15 +1340,15 @@
       "tags": [],
       "type": "default",
       "uuid": "3da68bad-7a31-4e0d-bb23-36ddf5303fb6",
-      "version": 11
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e6557d98_6d8b_4fa3_bad3_cf0e61d1ad04\" isExecutable=\"true\" name=\"playbook_e6557d98_6d8b_4fa3_bad3_cf0e61d1ad04\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0vn1qwu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scheduled Rule Pause\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"aa278752-98c2-4866-b477-0eb19fd81b34\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.scheduler_label = row.schedule_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_pause\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0vn1qwu\u003c/incoming\u003e\u003coutgoing\u003eFlow_0asbdjd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0vn1qwu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Write paused job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"57b2ba73-f114-4562-99d6-bdc4f423bf74\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0asbdjd\u003c/incoming\u003e\u003coutgoing\u003eFlow_03vswz4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0asbdjd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_03vswz4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_03vswz4\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e6557d98_6d8b_4fa3_bad3_cf0e61d1ad04\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03vswz4\" id=\"Flow_03vswz4_di\"\u003e\u003comgdi:waypoint x=\"660\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"660\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0asbdjd\" id=\"Flow_0asbdjd_di\"\u003e\u003comgdi:waypoint x=\"660\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"660\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0vn1qwu\" id=\"Flow_0vn1qwu_di\"\u003e\u003comgdi:waypoint x=\"660\" y=\"106\"/\u003e\u003comgdi:waypoint x=\"660\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"560\" y=\"54\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"562\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"562\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"594\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1684230521454,
+      "create_date": 1685523293338,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -1386,7 +1388,7 @@
         "uuid": "c9d942ca-7634-4807-9ef8-ec7f97cae726"
       },
       "has_logical_errors": false,
-      "id": 38,
+      "id": 30,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -1395,18 +1397,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684749457123,
+      "last_modified_time": 1685524635834,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684230521505,
+          "created_date": 1685523293411,
           "description": "",
           "enabled": false,
           "export_key": "Write paused job to DataTable",
-          "id": 36,
+          "id": 43,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684230521515,
+          "last_modified_time": 1685523293425,
           "name": "Write paused job to DataTable",
           "object_type": "scheduler_rules",
           "playbook_handle": "pb_scheduler_pause_job",
@@ -1436,7 +1438,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_e6557d98-6d8b-4fa3-bad3-cf0e61d1ad04",
-        "id": 42,
+        "id": 34,
         "name": "playbook_e6557d98_6d8b_4fa3_bad3_cf0e61d1ad04",
         "type": "playbook",
         "uuid": "a6d1bd79-c52f-4382-9904-dee74edc9689"
@@ -1444,15 +1446,15 @@
       "tags": [],
       "type": "default",
       "uuid": "e6557d98-6d8b-4fa3-bad3-cf0e61d1ad04",
-      "version": 10
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_cb82c8f1_c294_4a01_8a3a_12e581bca983\" isExecutable=\"true\" name=\"playbook_cb82c8f1_c294_4a01_8a3a_12e581bca983\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_07citrq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scheduled Rule Remove\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7df74f5f-1b72-4357-85e3-20372e879b78\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.scheduler_label = row.schedule_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_remove\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07citrq\u003c/incoming\u003e\u003coutgoing\u003eFlow_1mnbasl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_07citrq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0s00p5r\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Write removed job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0100138c-f497-4284-a202-0bc3b482d47d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mnbasl\u003c/incoming\u003e\u003coutgoing\u003eFlow_0s00p5r\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1mnbasl\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0s00p5r\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cb82c8f1_c294_4a01_8a3a_12e581bca983\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0s00p5r\" id=\"Flow_0s00p5r_di\"\u003e\u003comgdi:waypoint x=\"600\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"600\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mnbasl\" id=\"Flow_1mnbasl_di\"\u003e\u003comgdi:waypoint x=\"600\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"600\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07citrq\" id=\"Flow_07citrq_di\"\u003e\u003comgdi:waypoint x=\"600\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"600\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"500\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"502\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"534\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"502\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1684230521718,
+      "create_date": 1685523293701,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -1492,7 +1494,7 @@
         "uuid": "33d518f2-13c7-4303-a8d9-45bf17aa5e1d"
       },
       "has_logical_errors": false,
-      "id": 39,
+      "id": 31,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -1501,18 +1503,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684749457438,
+      "last_modified_time": 1685524636171,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684230521769,
+          "created_date": 1685523293769,
           "description": "",
           "enabled": false,
           "export_key": "Write removed job to DataTable",
-          "id": 37,
+          "id": 44,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684230521779,
+          "last_modified_time": 1685523293783,
           "name": "Write removed job to DataTable",
           "object_type": "scheduler_rules",
           "playbook_handle": "pb_scheduler_remove_job",
@@ -1542,7 +1544,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_cb82c8f1-c294-4a01-8a3a-12e581bca983",
-        "id": 43,
+        "id": 35,
         "name": "playbook_cb82c8f1_c294_4a01_8a3a_12e581bca983",
         "type": "playbook",
         "uuid": "da5a6680-c4f8-4c34-b340-8b8236da7076"
@@ -1550,15 +1552,15 @@
       "tags": [],
       "type": "default",
       "uuid": "cb82c8f1-c294-4a01-8a3a-12e581bca983",
-      "version": 10
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_16c168c0_628f_4f50_9523_ae5c0287b76d\" isExecutable=\"true\" name=\"playbook_16c168c0_628f_4f50_9523_ae5c0287b76d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0abzlni\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scheduled Rule Resume\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"37083e99-ca31-41fb-85b5-d0ac4ed1f60b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.scheduler_label = row.schedule_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_resume\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0abzlni\u003c/incoming\u003e\u003coutgoing\u003eFlow_0kd0eqv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0abzlni\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0kd0eqv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_11l5t7j\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Write resumed job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3eaa3c1c-74bc-4673-b9aa-39c7ab1dbb65\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kd0eqv\u003c/incoming\u003e\u003coutgoing\u003eFlow_11l5t7j\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_11l5t7j\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_16c168c0_628f_4f50_9523_ae5c0287b76d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11l5t7j\" id=\"Flow_11l5t7j_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kd0eqv\" id=\"Flow_0kd0eqv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0abzlni\" id=\"Flow_0abzlni_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"337.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1684230521989,
+      "create_date": 1685523294047,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -1598,7 +1600,7 @@
         "uuid": "c5f9138c-2931-434b-a536-94472173ef84"
       },
       "has_logical_errors": false,
-      "id": 40,
+      "id": 32,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -1607,18 +1609,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684749457744,
+      "last_modified_time": 1685524636486,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684230522041,
+          "created_date": 1685523294113,
           "description": "",
           "enabled": false,
           "export_key": "Write resumed job to DataTable",
-          "id": 38,
+          "id": 45,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684230522051,
+          "last_modified_time": 1685523294127,
           "name": "Write resumed job to DataTable",
           "object_type": "scheduler_rules",
           "playbook_handle": "pb_scheduler_resume_job",
@@ -1648,7 +1650,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_16c168c0-628f-4f50-9523-ae5c0287b76d",
-        "id": 44,
+        "id": 36,
         "name": "playbook_16c168c0_628f_4f50_9523_ae5c0287b76d",
         "type": "playbook",
         "uuid": "1494a655-db1e-4cbb-99b5-b7dc492fc359"
@@ -1656,15 +1658,15 @@
       "tags": [],
       "type": "default",
       "uuid": "16c168c0-628f-4f50-9523-ae5c0287b76d",
-      "version": 10
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_19f67260_22c1_4871_9a9f_31b6889ab9ea\" isExecutable=\"true\" name=\"playbook_19f67260_22c1_4871_9a9f_31b6889ab9ea\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0bi2u41\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Run Schedule Job Now\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d35f9fe8-d19b-41fc-adb2-d80bc7b4e68b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.scheduler_label = row[\u0027schedule_label\u0027]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_run\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0bi2u41\u003c/incoming\u003e\u003coutgoing\u003eFlow_0b29eph\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0bi2u41\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Write executed job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"407b2ddd-e3b5-49bd-af97-4c1a0be854b4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0b29eph\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ox2zla\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0b29eph\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ox2zla\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ox2zla\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_19f67260_22c1_4871_9a9f_31b6889ab9ea\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ox2zla\" id=\"Flow_1ox2zla_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"574\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b29eph\" id=\"Flow_0b29eph_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bi2u41\" id=\"Flow_0bi2u41_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"574\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1684230522260,
+      "create_date": 1685523294399,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -1704,7 +1706,7 @@
         "uuid": "c0b780eb-962a-402c-b93e-4c4f67953aed"
       },
       "has_logical_errors": false,
-      "id": 41,
+      "id": 33,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -1713,18 +1715,18 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684749458067,
+      "last_modified_time": 1685524636857,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684230522312,
+          "created_date": 1685523294472,
           "description": "",
           "enabled": false,
           "export_key": "Write executed job to DataTable",
-          "id": 39,
+          "id": 46,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1684230522323,
+          "last_modified_time": 1685523294486,
           "name": "Write executed job to DataTable",
           "object_type": "scheduler_rules",
           "playbook_handle": "pb_scheduler_run_job_now",
@@ -1761,7 +1763,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_19f67260-22c1-4871-9a9f-31b6889ab9ea",
-        "id": 45,
+        "id": 37,
         "name": "playbook_19f67260_22c1_4871_9a9f_31b6889ab9ea",
         "type": "playbook",
         "uuid": "caf10aaa-7678-463f-959f-d7f49101bb13"
@@ -1769,15 +1771,15 @@
       "tags": [],
       "type": "default",
       "uuid": "19f67260-22c1-4871-9a9f-31b6889ab9ea",
-      "version": 10
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864\" isExecutable=\"true\" name=\"playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_162tnn7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scheduled Rule Create\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bde7b5b2-f454-4435-9103-de31d991b924\"\u003e{\"inputs\":{\"6742aa35-eb76-4fa4-85f8-a86015cf888a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"bfacefb1-5b39-4e7f-919c-84ccc54442f0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"a5074a34-6d40-4d03-8bf0-a8ad65b31f59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6b4b65f3-a243-48b5-8fea-e412bf2cf9f7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"0e1330b2-0b91-462b-acf2-2772a02299f8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"eb8f0588-a416-4bf9-9154-665ed20bcdf9\"}},\"4d308c31-9056-4d34-b977-99d58f89076c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"5eaaeb87-cb70-4877-aa5e-0a5b10f73f3a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"8690362f-626a-4c93-a68e-c2fb3b746003\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"5ad21089-a73c-4408-ae52-d636e154351c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.object_id    = artifact.id\\ninputs.incident_id  = incident.id\\n\\ninputs.scheduler_type         = getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\")\\ninputs.scheduler_rule_name    = getattr(playbook.inputs, \\\"schedule_rule_name\\\", None)\\ninputs.scheduler_label_prefix = getattr(playbook.inputs, \\\"schedule_label_prefix\\\", None)\\ninputs.scheduler_is_playbook  = getattr(playbook.inputs, \\\"schedule_is_playbook\\\", False)\\n\\nif getattr(playbook.inputs, \\\"schedule_rule_parameters\\\", None):\\n  inputs.scheduler_rule_parameters =  getattr(playbook.inputs, \\\"schedule_rule_parameters\\\", \\\"\\\") + u\\\";artifact_type={};artifact_value={}\\\".format(artifact.type, artifact.value)\\nelse:\\n  inputs.scheduler_rule_parameters = u\\\"artifact_type={};artifact_value={}\\\".format(artifact.type, artifact.value)\\n\\nif getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\") == \\\"date\\\":\\n  # date format converted to use dashes\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\").replace(\\\"/\\\", \\\"-\\\")\\nelse:\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\")\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_create\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_162tnn7\u003c/incoming\u003e\u003coutgoing\u003eFlow_00vaatr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_162tnn7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_00vaatr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0bt7vb4\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Write scheduled job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"38d9b9df-35c7-48ec-adec-8a082f5be517\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_00vaatr\u003c/incoming\u003e\u003coutgoing\u003eFlow_0bt7vb4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0bt7vb4\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bt7vb4\" id=\"Flow_0bt7vb4_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_00vaatr\" id=\"Flow_00vaatr_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_162tnn7\" id=\"Flow_162tnn7_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"600\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"601.5\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864\" isExecutable=\"true\" name=\"playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_162tnn7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scheduled Rule Create\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bde7b5b2-f454-4435-9103-de31d991b924\"\u003e{\"inputs\":{\"6742aa35-eb76-4fa4-85f8-a86015cf888a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"bfacefb1-5b39-4e7f-919c-84ccc54442f0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"a5074a34-6d40-4d03-8bf0-a8ad65b31f59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6b4b65f3-a243-48b5-8fea-e412bf2cf9f7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"0e1330b2-0b91-462b-acf2-2772a02299f8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"eb8f0588-a416-4bf9-9154-665ed20bcdf9\"}},\"4d308c31-9056-4d34-b977-99d58f89076c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8690362f-626a-4c93-a68e-c2fb3b746003\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"5ad21089-a73c-4408-ae52-d636e154351c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.object_id    = artifact.id\\ninputs.incident_id  = incident.id\\n\\ninputs.scheduler_type         = getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\")\\ninputs.scheduler_rule_name    = getattr(playbook.inputs, \\\"schedule_rule_name\\\", None)\\ninputs.scheduler_label_prefix = getattr(playbook.inputs, \\\"schedule_label_prefix\\\", None)\\ninputs.scheduler_is_playbook  = getattr(playbook.inputs, \\\"schedule_is_playbook\\\", False)\\n\\nif getattr(playbook.inputs, \\\"schedule_rule_parameters\\\", None):\\n  inputs.scheduler_rule_parameters =  getattr(playbook.inputs, \\\"schedule_rule_parameters\\\", \\\"\\\") + u\\\";artifact_type={};artifact_value={}\\\".format(artifact.type, artifact.value)\\nelse:\\n  inputs.scheduler_rule_parameters = u\\\"artifact_type={};artifact_value={}\\\".format(artifact.type, artifact.value)\\n\\nif getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\") == \\\"date\\\":\\n  # date format converted to use dashes\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\").replace(\\\"/\\\", \\\"-\\\")\\nelse:\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\")\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_create\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_162tnn7\u003c/incoming\u003e\u003coutgoing\u003eFlow_00vaatr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_162tnn7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_00vaatr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0bt7vb4\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Write scheduled job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"38d9b9df-35c7-48ec-adec-8a082f5be517\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_00vaatr\u003c/incoming\u003e\u003coutgoing\u003eFlow_0bt7vb4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0bt7vb4\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bt7vb4\" id=\"Flow_0bt7vb4_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_00vaatr\" id=\"Flow_00vaatr_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_162tnn7\" id=\"Flow_162tnn7_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"600\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"601.5\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1684230522536,
+      "create_date": 1685523294760,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -1807,7 +1809,7 @@
             "deprecated": false,
             "export_key": "playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864/schedule_is_playbook",
             "hide_notification": false,
-            "id": 501,
+            "id": 527,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -1823,7 +1825,7 @@
             "templates": [],
             "text": "is Playbook",
             "tooltip": "Yes - Playbook, No - Rule",
-            "type_id": 1046,
+            "type_id": 1039,
             "uuid": "9410edbc-5627-472e-a203-d1e6996c993c",
             "values": []
           },
@@ -1837,7 +1839,7 @@
             "deprecated": false,
             "export_key": "playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864/schedule_label_prefix",
             "hide_notification": false,
-            "id": 502,
+            "id": 528,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1853,7 +1855,7 @@
             "templates": [],
             "text": "Schedule Label Prefix",
             "tooltip": "name of schedule for future reference",
-            "type_id": 1046,
+            "type_id": 1039,
             "uuid": "6fe19823-ee6c-4fb0-ad25-2a58bc4fbec6",
             "values": []
           },
@@ -1867,7 +1869,7 @@
             "deprecated": false,
             "export_key": "playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864/schedule_rule_name",
             "hide_notification": false,
-            "id": 503,
+            "id": 529,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1883,7 +1885,7 @@
             "templates": [],
             "text": "Schedule Rule Name",
             "tooltip": "Name of Rule to schedule",
-            "type_id": 1046,
+            "type_id": 1039,
             "uuid": "54127dcd-8ea3-419c-a710-8374674db06c",
             "values": []
           },
@@ -1897,7 +1899,7 @@
             "deprecated": false,
             "export_key": "playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864/schedule_rule_parameters",
             "hide_notification": false,
-            "id": 504,
+            "id": 530,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1912,7 +1914,7 @@
             "templates": [],
             "text": "Schedule Rule Parameters",
             "tooltip": "field1=value;field2=value format of optional rule parameters",
-            "type_id": 1046,
+            "type_id": 1039,
             "uuid": "0a71c09d-5cfc-4c56-b95a-746ae2e25741",
             "values": []
           },
@@ -1926,7 +1928,7 @@
             "deprecated": false,
             "export_key": "playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864/schedule_type",
             "hide_notification": false,
-            "id": 505,
+            "id": 531,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1941,7 +1943,7 @@
             "templates": [],
             "text": "Schedule Type",
             "tooltip": "",
-            "type_id": 1046,
+            "type_id": 1039,
             "uuid": "3fa5ae6b-b036-42e0-b0f7-cdb65b92586a",
             "values": [
               {
@@ -1951,7 +1953,7 @@
                 "label": "cron",
                 "properties": null,
                 "uuid": "ef73c387-e072-40fe-9316-2d9052776dc3",
-                "value": 147
+                "value": 622
               },
               {
                 "default": false,
@@ -1960,7 +1962,7 @@
                 "label": "date",
                 "properties": null,
                 "uuid": "63dc6a33-b9b3-4657-8b84-debceaa66c1b",
-                "value": 148
+                "value": 623
               },
               {
                 "default": false,
@@ -1969,7 +1971,7 @@
                 "label": "delta",
                 "properties": null,
                 "uuid": "6b2f3693-0787-418f-aae4-6d6ae8c698f3",
-                "value": 149
+                "value": 624
               },
               {
                 "default": false,
@@ -1978,7 +1980,7 @@
                 "label": "interval",
                 "properties": null,
                 "uuid": "9b54a32d-64df-4caa-bede-c88faaeedf6e",
-                "value": 150
+                "value": 625
               }
             ]
           },
@@ -1992,7 +1994,7 @@
             "deprecated": false,
             "export_key": "playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864/schedule_type_value",
             "hide_notification": false,
-            "id": 506,
+            "id": 532,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2008,7 +2010,7 @@
             "templates": [],
             "text": "Schedule Type Value",
             "tooltip": "cron (* 5 * * *); date (yyyy/mm/dd hh:mm:ss) ; interval (10m)",
-            "type_id": 1046,
+            "type_id": 1039,
             "uuid": "464e3cd4-2850-4c66-8a1c-e0bb6ccfc7b4",
             "values": []
           }
@@ -2033,7 +2035,7 @@
         "uuid": "4ec29c0d-82a9-45e1-a40c-1ecef5cb01bb"
       },
       "has_logical_errors": false,
-      "id": 42,
+      "id": 34,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -2042,7 +2044,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684749458363,
+      "last_modified_time": 1685523295221,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -2105,7 +2107,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_1881ad3e-e539-47e1-b6e5-6f1c84df0864",
-        "id": 46,
+        "id": 38,
         "name": "playbook_1881ad3e_e539_47e1_b6e5_6f1c84df0864",
         "type": "playbook",
         "uuid": "b5f1c2d2-60a2-422f-82b4-3d1af448438f"
@@ -2113,15 +2115,15 @@
       "tags": [],
       "type": "default",
       "uuid": "1881ad3e-e539-47e1-b6e5-6f1c84df0864",
-      "version": 10
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a\" isExecutable=\"true\" name=\"playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_162tnn7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scheduled Rule Create\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bde7b5b2-f454-4435-9103-de31d991b924\"\u003e{\"inputs\":{\"6742aa35-eb76-4fa4-85f8-a86015cf888a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"bfacefb1-5b39-4e7f-919c-84ccc54442f0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"a5074a34-6d40-4d03-8bf0-a8ad65b31f59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6b4b65f3-a243-48b5-8fea-e412bf2cf9f7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"0e1330b2-0b91-462b-acf2-2772a02299f8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"eb8f0588-a416-4bf9-9154-665ed20bcdf9\"}},\"4d308c31-9056-4d34-b977-99d58f89076c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"5eaaeb87-cb70-4877-aa5e-0a5b10f73f3a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"8690362f-626a-4c93-a68e-c2fb3b746003\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"5ad21089-a73c-4408-ae52-d636e154351c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.scheduler_type = getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\")\\n\\nif getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\") == \\\"date\\\":\\n  # date format converted to use dashes\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\").replace(\\\"/\\\", \\\"-\\\")\\nelse:\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\")\\n\\ninputs.scheduler_rule_name = getattr(playbook.inputs, \\\"schedule_rule_name\\\", None)\\ninputs.scheduler_rule_parameters = getattr(playbook.inputs, \\\"schedule_rule_parameters\\\", None)\\ninputs.scheduler_label_prefix = getattr(playbook.inputs, \\\"schedule_label_prefix\\\", None)\\ninputs.incident_id = incident.id\\ninputs.scheduler_is_playbook = getattr(playbook.inputs, \\\"schedule_is_playbook\\\", False)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_create\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_162tnn7\u003c/incoming\u003e\u003coutgoing\u003eFlow_00vaatr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_162tnn7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_00vaatr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1m4jj08\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Write scheduled job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"38d9b9df-35c7-48ec-adec-8a082f5be517\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_00vaatr\u003c/incoming\u003e\u003coutgoing\u003eFlow_1m4jj08\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1m4jj08\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1m4jj08\" id=\"Flow_1m4jj08_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_00vaatr\" id=\"Flow_00vaatr_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_162tnn7\" id=\"Flow_162tnn7_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"600\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a\" isExecutable=\"true\" name=\"playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_162tnn7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scheduled Rule Create\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bde7b5b2-f454-4435-9103-de31d991b924\"\u003e{\"inputs\":{\"6742aa35-eb76-4fa4-85f8-a86015cf888a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"bfacefb1-5b39-4e7f-919c-84ccc54442f0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"a5074a34-6d40-4d03-8bf0-a8ad65b31f59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6b4b65f3-a243-48b5-8fea-e412bf2cf9f7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"0e1330b2-0b91-462b-acf2-2772a02299f8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"eb8f0588-a416-4bf9-9154-665ed20bcdf9\"}},\"4d308c31-9056-4d34-b977-99d58f89076c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8690362f-626a-4c93-a68e-c2fb3b746003\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"5ad21089-a73c-4408-ae52-d636e154351c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.scheduler_type = getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\")\\n\\nif getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\") == \\\"date\\\":\\n  # date format converted to use dashes\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\").replace(\\\"/\\\", \\\"-\\\")\\nelse:\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\")\\n\\ninputs.scheduler_rule_name = getattr(playbook.inputs, \\\"schedule_rule_name\\\", None)\\ninputs.scheduler_rule_parameters = getattr(playbook.inputs, \\\"schedule_rule_parameters\\\", None)\\ninputs.scheduler_label_prefix = getattr(playbook.inputs, \\\"schedule_label_prefix\\\", None)\\ninputs.incident_id = incident.id\\ninputs.scheduler_is_playbook = getattr(playbook.inputs, \\\"schedule_is_playbook\\\", False)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_create\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_162tnn7\u003c/incoming\u003e\u003coutgoing\u003eFlow_00vaatr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_162tnn7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_00vaatr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1m4jj08\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Write scheduled job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"38d9b9df-35c7-48ec-adec-8a082f5be517\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_00vaatr\u003c/incoming\u003e\u003coutgoing\u003eFlow_1m4jj08\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1m4jj08\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1m4jj08\" id=\"Flow_1m4jj08_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_00vaatr\" id=\"Flow_00vaatr_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_162tnn7\" id=\"Flow_162tnn7_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"600\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1684230522888,
+      "create_date": 1685523295204,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -2151,7 +2153,7 @@
             "deprecated": false,
             "export_key": "playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a/schedule_is_playbook",
             "hide_notification": false,
-            "id": 507,
+            "id": 533,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2167,7 +2169,7 @@
             "templates": [],
             "text": "Is Playbook",
             "tooltip": "Yes - Playbook, No - Rule",
-            "type_id": 1047,
+            "type_id": 1040,
             "uuid": "83c7ce62-e776-408b-b6b2-1d6cede89c20",
             "values": []
           },
@@ -2181,7 +2183,7 @@
             "deprecated": false,
             "export_key": "playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a/schedule_label_prefix",
             "hide_notification": false,
-            "id": 508,
+            "id": 534,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2197,7 +2199,7 @@
             "templates": [],
             "text": "Schedule Label Prefix",
             "tooltip": "name of schedule for future reference",
-            "type_id": 1047,
+            "type_id": 1040,
             "uuid": "8001889c-bcd7-4502-9bb5-0bcb74ca3f6d",
             "values": []
           },
@@ -2211,7 +2213,7 @@
             "deprecated": false,
             "export_key": "playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a/schedule_rule_name",
             "hide_notification": false,
-            "id": 509,
+            "id": 535,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2227,7 +2229,7 @@
             "templates": [],
             "text": "Schedule Rule Name",
             "tooltip": "Name of Rule to schedule",
-            "type_id": 1047,
+            "type_id": 1040,
             "uuid": "af1761b2-70ba-4516-bfa9-eb742c679fe5",
             "values": []
           },
@@ -2241,7 +2243,7 @@
             "deprecated": false,
             "export_key": "playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a/schedule_rule_parameters",
             "hide_notification": false,
-            "id": 510,
+            "id": 536,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2256,7 +2258,7 @@
             "templates": [],
             "text": "Schedule Rule Parameters",
             "tooltip": "field1=value;field2=value format of optional rule parameters",
-            "type_id": 1047,
+            "type_id": 1040,
             "uuid": "eec1d04d-fad2-4f77-99a5-4ca18440652f",
             "values": []
           },
@@ -2270,7 +2272,7 @@
             "deprecated": false,
             "export_key": "playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a/schedule_type",
             "hide_notification": false,
-            "id": 511,
+            "id": 537,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2285,7 +2287,7 @@
             "templates": [],
             "text": "Schedule Type",
             "tooltip": "",
-            "type_id": 1047,
+            "type_id": 1040,
             "uuid": "bb2a2f6b-6e84-4ff2-9bc1-7d802160ba6e",
             "values": [
               {
@@ -2295,7 +2297,7 @@
                 "label": "cron",
                 "properties": null,
                 "uuid": "7700f03e-af26-4379-b3f5-a8f4739f7605",
-                "value": 151
+                "value": 626
               },
               {
                 "default": false,
@@ -2304,7 +2306,7 @@
                 "label": "date",
                 "properties": null,
                 "uuid": "dc31d35b-9751-4f5e-a395-ce79d791582d",
-                "value": 152
+                "value": 627
               },
               {
                 "default": false,
@@ -2313,7 +2315,7 @@
                 "label": "delta",
                 "properties": null,
                 "uuid": "64097d31-caa8-48a5-b7af-db5a5740e44a",
-                "value": 153
+                "value": 628
               },
               {
                 "default": false,
@@ -2322,7 +2324,7 @@
                 "label": "interval",
                 "properties": null,
                 "uuid": "98bbe7c0-37d0-4350-bdcf-24867ab158ca",
-                "value": 154
+                "value": 629
               }
             ]
           },
@@ -2336,7 +2338,7 @@
             "deprecated": false,
             "export_key": "playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a/schedule_type_value",
             "hide_notification": false,
-            "id": 512,
+            "id": 538,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2352,7 +2354,7 @@
             "templates": [],
             "text": "Schedule Type Value",
             "tooltip": "cron (* 5 * * *); date (yyyy/mm/dd hh:mm:ss) ; interval (10m)",
-            "type_id": 1047,
+            "type_id": 1040,
             "uuid": "74fa8f48-9bb1-42b6-92eb-8f50c020773f",
             "values": []
           }
@@ -2377,7 +2379,7 @@
         "uuid": "c273dcad-1c4e-426c-8c17-d02a1bad18d6"
       },
       "has_logical_errors": false,
-      "id": 43,
+      "id": 35,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -2386,7 +2388,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684749458634,
+      "last_modified_time": 1685524637125,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -2449,7 +2451,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2405a12b-1f53-4ebf-b87e-d2f91866635a",
-        "id": 47,
+        "id": 39,
         "name": "playbook_2405a12b_1f53_4ebf_b87e_d2f91866635a",
         "type": "playbook",
         "uuid": "52119f75-23dd-44e9-b76f-bba681260441"
@@ -2457,15 +2459,15 @@
       "tags": [],
       "type": "default",
       "uuid": "2405a12b-1f53-4ebf-b87e-d2f91866635a",
-      "version": 10
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05\" isExecutable=\"true\" name=\"playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1t1whzl\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scheduled Rule Create\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bde7b5b2-f454-4435-9103-de31d991b924\"\u003e{\"inputs\":{\"6742aa35-eb76-4fa4-85f8-a86015cf888a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"bfacefb1-5b39-4e7f-919c-84ccc54442f0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"a5074a34-6d40-4d03-8bf0-a8ad65b31f59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6b4b65f3-a243-48b5-8fea-e412bf2cf9f7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"0e1330b2-0b91-462b-acf2-2772a02299f8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"eb8f0588-a416-4bf9-9154-665ed20bcdf9\"}},\"4d308c31-9056-4d34-b977-99d58f89076c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"5eaaeb87-cb70-4877-aa5e-0a5b10f73f3a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"8690362f-626a-4c93-a68e-c2fb3b746003\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"5ad21089-a73c-4408-ae52-d636e154351c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.scheduler_type = getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\")\\n\\nif getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\") == \\\"date\\\":\\n  # date format converted to use dashes\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\").replace(\\\"/\\\", \\\"-\\\")\\nelse:\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\")\\n\\ninputs.scheduler_rule_name = getattr(playbook.inputs, \\\"schedule_rule_name\\\", None)\\ninputs.scheduler_rule_parameters = getattr(playbook.inputs, \\\"schedule_rule_parameters\\\", None)\\ninputs.scheduler_label_prefix = getattr(playbook.inputs, \\\"schedule_label_prefix\\\", None)\\ninputs.incident_id = incident.id\\ninputs.object_id = task.id\\ninputs.scheduler_is_playbook = getattr(playbook.inputs, \\\"schedule_is_playbook\\\", False)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_create\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1t1whzl\u003c/incoming\u003e\u003coutgoing\u003eFlow_00vaatr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_00vaatr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1m4jj08\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Write scheduled job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"38d9b9df-35c7-48ec-adec-8a082f5be517\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_00vaatr\u003c/incoming\u003e\u003coutgoing\u003eFlow_1m4jj08\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1m4jj08\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_1t1whzl\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1t1whzl\" id=\"Flow_1t1whzl_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"76\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1m4jj08\" id=\"Flow_1m4jj08_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_00vaatr\" id=\"Flow_00vaatr_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"619\" y=\"24\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"601.5\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05\" isExecutable=\"true\" name=\"playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1t1whzl\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scheduled Rule Create\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bde7b5b2-f454-4435-9103-de31d991b924\"\u003e{\"inputs\":{\"6742aa35-eb76-4fa4-85f8-a86015cf888a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"bfacefb1-5b39-4e7f-919c-84ccc54442f0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"a5074a34-6d40-4d03-8bf0-a8ad65b31f59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6b4b65f3-a243-48b5-8fea-e412bf2cf9f7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"0e1330b2-0b91-462b-acf2-2772a02299f8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"eb8f0588-a416-4bf9-9154-665ed20bcdf9\"}},\"4d308c31-9056-4d34-b977-99d58f89076c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8690362f-626a-4c93-a68e-c2fb3b746003\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"5ad21089-a73c-4408-ae52-d636e154351c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.scheduler_type = getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\")\\n\\nif getattr(playbook.inputs, \\\"schedule_type\\\", \\\"cron\\\") == \\\"date\\\":\\n  # date format converted to use dashes\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\").replace(\\\"/\\\", \\\"-\\\")\\nelse:\\n  inputs.scheduler_type_value = getattr(playbook.inputs, \\\"schedule_type_value\\\", \\\"\\\")\\n\\ninputs.scheduler_rule_name = getattr(playbook.inputs, \\\"schedule_rule_name\\\", None)\\ninputs.scheduler_rule_parameters = getattr(playbook.inputs, \\\"schedule_rule_parameters\\\", None)\\ninputs.scheduler_label_prefix = getattr(playbook.inputs, \\\"schedule_label_prefix\\\", None)\\ninputs.incident_id = incident.id\\ninputs.object_id = task.id\\ninputs.scheduler_is_playbook = getattr(playbook.inputs, \\\"schedule_is_playbook\\\", False)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_scheduled_rule_create\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1t1whzl\u003c/incoming\u003e\u003coutgoing\u003eFlow_00vaatr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_00vaatr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1m4jj08\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Write scheduled job to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"38d9b9df-35c7-48ec-adec-8a082f5be517\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_00vaatr\u003c/incoming\u003e\u003coutgoing\u003eFlow_1m4jj08\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1m4jj08\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_1t1whzl\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1t1whzl\" id=\"Flow_1t1whzl_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"76\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1m4jj08\" id=\"Flow_1m4jj08_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_00vaatr\" id=\"Flow_00vaatr_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"619\" y=\"24\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"601.5\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1684230523233,
+      "create_date": 1685523295622,
       "creator_principal": {
         "display_name": "Admin User",
         "id": 1,
@@ -2484,7 +2486,223 @@
         "actions": [],
         "display_name": "Scheduler: Schedule a Job (Task) (PB)",
         "export_key": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05",
-        "fields": {},
+        "fields": {
+          "schedule_is_playbook": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05/schedule_is_playbook",
+            "hide_notification": false,
+            "id": 548,
+            "input_type": "boolean",
+            "internal": false,
+            "is_tracked": false,
+            "name": "schedule_is_playbook",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "is Playbook",
+            "tooltip": "Yes - Playbook, No - Rule",
+            "type_id": 1041,
+            "uuid": "814cad2f-791d-4401-8d34-1d0c8dcd13f6",
+            "values": []
+          },
+          "schedule_label_prefix": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05/schedule_label_prefix",
+            "hide_notification": false,
+            "id": 549,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "schedule_label_prefix",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Schedule Label Prefix",
+            "tooltip": "name of schedule for future reference",
+            "type_id": 1041,
+            "uuid": "4678ab76-cfdf-437f-9b8a-e082745a23f0",
+            "values": []
+          },
+          "schedule_rule_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05/schedule_rule_name",
+            "hide_notification": false,
+            "id": 550,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "schedule_rule_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Schedule Rule Name",
+            "tooltip": "Name of Rule to schedule",
+            "type_id": 1041,
+            "uuid": "fa5515c9-a0f9-4c7f-8615-929af2943367",
+            "values": []
+          },
+          "schedule_rule_parameters": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05/schedule_rule_parameters",
+            "hide_notification": false,
+            "id": 551,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "schedule_rule_parameters",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "schedule_type=cron; schedule_value= * 5 * * *",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Schedule Rule Parameters",
+            "tooltip": "field1=value;field2=value format of optional rule parameters",
+            "type_id": 1041,
+            "uuid": "27928f0d-75a0-41b6-a72b-211116e86e63",
+            "values": []
+          },
+          "schedule_type": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05/schedule_type",
+            "hide_notification": false,
+            "id": 552,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "schedule_type",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Schedule Type",
+            "tooltip": "",
+            "type_id": 1041,
+            "uuid": "f2d6661c-52a4-4444-bdd5-6504e71c9a44",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "cron",
+                "properties": null,
+                "uuid": "29dc56f9-4840-41df-901b-9ad751dcda67",
+                "value": 640
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "date",
+                "properties": null,
+                "uuid": "1f4cd787-e10e-4a40-adfa-df52df939f89",
+                "value": 641
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "delta",
+                "properties": null,
+                "uuid": "fdfe5448-022c-4f72-a7d0-359c54656b46",
+                "value": 642
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "interval",
+                "properties": null,
+                "uuid": "d19977b6-40ff-43a5-96ec-74a205688e52",
+                "value": 643
+              }
+            ]
+          },
+          "schedule_type_value": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05/schedule_type_value",
+            "hide_notification": false,
+            "id": 553,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "schedule_type_value",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "cron (* 5 * * *); date (yyyy/mm/dd hh:mm:ss) ; interval (10m)",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Schedule Type Value",
+            "tooltip": "cron (* 5 * * *); date (yyyy/mm/dd hh:mm:ss) ; interval (10m)",
+            "type_id": 1041,
+            "uuid": "511c6a02-7a2c-428d-818a-b9bfcaa5fbc7",
+            "values": []
+          }
+        },
         "for_actions": false,
         "for_custom_fields": false,
         "for_notifications": false,
@@ -2505,7 +2723,7 @@
         "uuid": "540c9221-1b49-4f2a-94d0-30cbe1c64f86"
       },
       "has_logical_errors": false,
-      "id": 44,
+      "id": 36,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -2514,21 +2732,70 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684749458850,
+      "last_modified_time": 1685524637484,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
           "conditions": [],
           "logic_type": "all"
         },
-        "view_items": []
+        "view_items": [
+          {
+            "content": "f2d6661c-52a4-4444-bdd5-6504e71c9a44",
+            "element": "field_uuid",
+            "field_type": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "511c6a02-7a2c-428d-818a-b9bfcaa5fbc7",
+            "element": "field_uuid",
+            "field_type": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "fa5515c9-a0f9-4c7f-8615-929af2943367",
+            "element": "field_uuid",
+            "field_type": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "814cad2f-791d-4401-8d34-1d0c8dcd13f6",
+            "element": "field_uuid",
+            "field_type": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "27928f0d-75a0-41b6-a72b-211116e86e63",
+            "element": "field_uuid",
+            "field_type": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "4678ab76-cfdf-437f-9b8a-e082745a23f0",
+            "element": "field_uuid",
+            "field_type": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
       },
       "name": "pb_scheduler_schedule_job_task",
       "object_type": "task",
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_a486c165-85d1-4d15-ac7a-e6b8352efc05",
-        "id": 48,
+        "id": 40,
         "name": "playbook_a486c165_85d1_4d15_ac7a_e6b8352efc05",
         "type": "playbook",
         "uuid": "236ae9a3-87bf-4d24-a16f-28e0c0c9e6bb"
@@ -2536,7 +2803,7 @@
       "tags": [],
       "type": "default",
       "uuid": "a486c165-85d1-4d15-ac7a-e6b8352efc05",
-      "version": 10
+      "version": 5
     }
   ],
   "regulators": null,
@@ -2544,14 +2811,14 @@
   "scripts": [
     {
       "actions": [],
-      "created_date": 1684168489760,
+      "created_date": 1685523291408,
       "description": "Write out scheduled job information to a datatable",
       "enabled": false,
       "export_key": "Write scheduled job to DataTable",
-      "id": 27,
+      "id": 40,
       "language": "python3",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1684168489774,
+      "last_modified_time": 1685523291428,
       "name": "Write scheduled job to DataTable",
       "object_type": "incident",
       "playbook_handle": null,
@@ -2586,7 +2853,7 @@
           "deprecated": false,
           "export_key": "scheduler_rules/incident_id",
           "hide_notification": false,
-          "id": 409,
+          "id": 290,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2603,7 +2870,7 @@
           "templates": [],
           "text": "Incident Id",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1002,
           "uuid": "9970f30f-bd88-41e2-aab5-87c480a2238e",
           "values": [],
           "width": 92
@@ -2618,7 +2885,7 @@
           "deprecated": false,
           "export_key": "scheduler_rules/next_run_time",
           "hide_notification": false,
-          "id": 410,
+          "id": 291,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2635,7 +2902,7 @@
           "templates": [],
           "text": "Next Run Time",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1002,
           "uuid": "56c5e84c-68d1-48f1-b937-43bc9a1ec069",
           "values": [],
           "width": 142
@@ -2650,7 +2917,7 @@
           "deprecated": false,
           "export_key": "scheduler_rules/reported_on",
           "hide_notification": false,
-          "id": 411,
+          "id": 292,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2667,7 +2934,7 @@
           "templates": [],
           "text": "Reported Date",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1002,
           "uuid": "4c46d03a-1025-496a-8560-e9b637e58fd2",
           "values": [],
           "width": 127
@@ -2682,7 +2949,7 @@
           "deprecated": false,
           "export_key": "scheduler_rules/rule",
           "hide_notification": false,
-          "id": 412,
+          "id": 293,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2699,7 +2966,7 @@
           "templates": [],
           "text": "Rule/Playbook",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1002,
           "uuid": "e9b42f63-41a3-4782-9d2f-585fd9f2e537",
           "values": [],
           "width": 166
@@ -2714,7 +2981,7 @@
           "deprecated": false,
           "export_key": "scheduler_rules/rule_type",
           "hide_notification": false,
-          "id": 413,
+          "id": 294,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2731,7 +2998,7 @@
           "templates": [],
           "text": "Rule Type",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1002,
           "uuid": "964a0f94-da6b-4005-8fa1-8540590e21b0",
           "values": [],
           "width": 88
@@ -2746,7 +3013,7 @@
           "deprecated": false,
           "export_key": "scheduler_rules/schedule",
           "hide_notification": false,
-          "id": 414,
+          "id": 295,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2763,7 +3030,7 @@
           "templates": [],
           "text": "Schedule",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1002,
           "uuid": "45a3e54f-97e7-425f-a15f-d856c7b7b17c",
           "values": [],
           "width": 124
@@ -2778,7 +3045,7 @@
           "deprecated": false,
           "export_key": "scheduler_rules/schedule_label",
           "hide_notification": false,
-          "id": 415,
+          "id": 296,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2795,7 +3062,7 @@
           "templates": [],
           "text": "Schedule Label",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1002,
           "uuid": "2d010306-40d2-4571-a3c1-a9e9c50a0b71",
           "values": [],
           "width": 93
@@ -2810,7 +3077,7 @@
           "deprecated": false,
           "export_key": "scheduler_rules/schedule_type",
           "hide_notification": false,
-          "id": 416,
+          "id": 297,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2827,7 +3094,7 @@
           "templates": [],
           "text": "Schedule Type",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1002,
           "uuid": "9eaa03ac-6b52-4eec-b9cd-69b6dbf4b893",
           "values": [],
           "width": 152
@@ -2842,7 +3109,7 @@
           "deprecated": false,
           "export_key": "scheduler_rules/status",
           "hide_notification": false,
-          "id": 417,
+          "id": 298,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2859,7 +3126,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "",
-          "type_id": 1018,
+          "type_id": 1002,
           "uuid": "a6f4384a-78d6-4b48-bcb6-40e5cc1c4d9b",
           "values": [],
           "width": 99
