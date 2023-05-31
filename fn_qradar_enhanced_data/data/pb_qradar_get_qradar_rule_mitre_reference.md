@@ -59,7 +59,7 @@ inputs.soar_table_name = "qradar_rules_and_mitre_tactics_and_techniques"
 ```python
 mitre_results = playbook.functions.results.mitre_results
 
-if mitre_results.get("sucess"):
+if mitre_results.get("success"):
   for item in mitre_results.get("content", {}).get('rules'):
     mapping = item.get('mapping')
     if mapping:
