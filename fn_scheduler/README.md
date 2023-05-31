@@ -356,7 +356,9 @@ else:
 ## Function - Scheduled Rule Modify
 Modify a Scheduled job associated with a rule or playbook. Settings which can be modified include the trigger criteria (cron, delta, date or interval) and the parameters passed to the rule or playbook.
 
- ![screenshot: modify_scheduled_job ](./doc/screenshots/modify_scheduled_job.png)
+<p align="center">
+<img src="./doc/screenshots/modify_scheduled_job.png" />
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
