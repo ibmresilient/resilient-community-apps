@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [u"reaqta_process_list", u"reaqta_trigger_events"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"reaqta_create_artifact_from_process_path"]
+        "playbooks": [u"reaqta_create_artifact_from_process_path", u"reaqta_create_artifact_from_trigger_event"]
     }
 
 
@@ -72,6 +72,7 @@ def customization_data(client=None):
         - reaqta_kill_process
     - Playbooks:
         - reaqta_create_artifact_from_process_path
+        - reaqta_create_artifact_from_trigger_event
     - Rules:
         - ReaQta Get Endpoint Status
         - ReaQta: Close Alert
