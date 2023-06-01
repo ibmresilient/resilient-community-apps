@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Playbook - Example VirusTotal: Scan Artifact (PB)
+# Playbook - Example: VirusTotal (PB)
 
 ### API Name
 `virustotal_scan_artifact`
