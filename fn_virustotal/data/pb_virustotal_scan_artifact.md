@@ -70,14 +70,14 @@ VIRUSTOTAL_GUI_URL = "https://www.virustotal.com/gui"
 
 results = playbook.functions.results.vt_scan_results
 
-# Uncomment the following line to have the results json printed formatted to a note.
+# Uncomment the following 2 lines to have the results json printed formatted to a note.
 #pretty_results = json.dumps(results, indent=4, sort_keys=True)
-#incident.addNote(helper.createRichText(u"<p>VirusTotal scan of {0}: {1}</p><div>{2}</div>".format(artifact.type, artifact.value, pretty_results)))
+#incident.addNote(helper.createRichText(u"<p>VirusTotal scan of {0}: {1} with artifact_id: {2}</p><div>{3}</div>".format(artifact.type, artifact.value, artifact.id, pretty_results)))
 
-msg = u"<p>VirusTotal scan of {0}: <b>{1}</b></p>".format(artifact.type, artifact.value)
+msg = u"<p>VirusTotal scan of {0}: <b>{1}</b> with artifact_id: {2}</p>".format(artifact.type, artifact.value, artifact.id)
 scan = results.get("scan",  {})
 if not scan:
-  raise Exception("No scan data returned VirusTotal scan {0}: {1}".format(artifact.type, artifact.value))   
+  raise Exception("No scan data returned VirusTotal scan {0}: {1} with artifact_id: {2}".format(artifact.type, artifact.value, artifact.id))   
 
 data = scan.get("data", {})
 scan_error = scan.get("error", {})
@@ -128,26 +128,26 @@ if data:
     msg = "{0}<br>{1}".format(msg, link_back)
   
 if not stats:
-  msg = "{0}No stats returned from scan {1}: {2}".format(msg, artifact.type, artifact.value)  
+  msg = "{0}No stats returned from scan {1}: {2} with artifact_id: {3}".format(msg, artifact.type, artifact.value, artifact.id)  
 
 incident.addNote(helper.createRichText("<div>{0}</div>".format(msg)))
 
 # Create artifacts from results
 last_http_response_content_sha256 = attributes.get("last_http_response_content_sha256", None)
 if last_http_response_content_sha256:
-    incident.addArtifact('Malware SHA-256 Hash', last_http_response_content_sha256, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
+    incident.addArtifact('Malware SHA-256 Hash', last_http_response_content_sha256, "Created by VirusTotal scan of artifact type: {0} value: {1} artifact_id: {2}".format(artifact.type, artifact.value, artifact.id))
 
 sha256 = attributes.get("sha256", None) 
 if sha256:
-    incident.addArtifact('Malware SHA-256 Hash', sha256, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
+    incident.addArtifact('Malware SHA-256 Hash', sha256, "Created by VirusTotal scan of artifact type: {0} value: {1} artifact_id: {2}".format(artifact.type, artifact.value, artifact.id))
 
 md5 = attributes.get("md5", None)
 if md5:
-    incident.addArtifact('Malware MD5 Hash', md5, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
+    incident.addArtifact('Malware MD5 Hash', md5, "Created by VirusTotal scan of artifact type: {0} value: {1} artifact_id: {2}".format(artifact.type, artifact.value, artifact.id))
 
 sha1 = attributes.get("sha1", None)
 if sha1:
-    incident.addArtifact('Malware SHA-1 Hash', sha1, "Created by VirusTotal scan of artifact type: {0} value: {1}".format(artifact.type, artifact.value))
+    incident.addArtifact('Malware SHA-1 Hash', sha1, "Created by VirusTotal scan of artifact type: {0} value: {1} artifact_id: {2}".format(artifact.type, artifact.value, artifact.id))
     
 ```
 

@@ -65,14 +65,14 @@ VIRUSTOTAL_GUI_URL = "https://www.virustotal.com/gui"
 
 results = playbook.functions.results.vt_scan_results
 
-# Uncomment the following line to have the results json printed formatted to a note.
+# Uncomment the following 2 lines to have the results json printed formatted to a note.
 #pretty_results = json.dumps(results, indent=4, sort_keys=True)
-#incident.addNote(helper.createRichText(u"<p>VirusTotal scan of attachment: {0}</p><div>{1}</div>".format(attachment.name, pretty_results)))
+#incident.addNote(helper.createRichText(u"<p>VirusTotal scan of attachment: {0} with attachment_id: {1}</p><div>{2}</div>".format(attachment.name, attachment.id, pretty_results)))
 
-msg = u"<p>VirusTotal scan of Attachment: <b>{0}</b></p>".format(attachment.name)
+msg = u"<p>VirusTotal scan of Attachment: <b>{0}</b> with attachment_id: {1}</p>".format(attachment.name, attachment.id)
 scan = results.get("scan",  {})
 if not scan:
-  raise Exception("No scan data returned VirusTotal scan on attachment: {0}".format(attachment.name))   
+  raise Exception("No scan data returned VirusTotal scan on attachment: {0} with attachment_id: {1}".format(attachment.name, attachment.id))   
 
 data = scan.get("data", {})
 scan_error = scan.get("error", {})
@@ -109,26 +109,26 @@ if data:
     msg = "{0}<br>{1}".format(msg, link_back)
     
 if not stats:
-  msg = "{0}No stats returned from scan attachment: {1}".format(msg, attachment.name)  
+  msg = "{0}No stats returned from scan attachment: {1} with attachment_id: {2}".format(msg, attachment.name, attachment.id)  
 
 incident.addNote(helper.createRichText("<div>{0}</div>".format(msg)))
 
 # Create artifacts from results
 last_http_response_content_sha256 = attributes.get("last_http_response_content_sha256", None)
 if last_http_response_content_sha256:
-    incident.addArtifact('Malware SHA-256 Hash', last_http_response_content_sha256, "Created by VirusTotal scan of attachment {0}".format(attachment.name))
+    incident.addArtifact('Malware SHA-256 Hash', last_http_response_content_sha256, "Created by VirusTotal scan of attachment {0} with attachment_id: {1}".format(attachment.name, attachment.id))
 
 sha256 = attributes.get("sha256", None) 
 if sha256:
-    incident.addArtifact('Malware SHA-256 Hash', sha256, "Created by VirusTotal scan of of attachment {0}".format(attachment.name))
+    incident.addArtifact('Malware SHA-256 Hash', sha256, "Created by VirusTotal scan of of attachment {0} with attachment_id: {1}".format(attachment.name, attachment.id))
 
 md5 = attributes.get("md5", None)
 if md5:
-    incident.addArtifact('Malware MD5 Hash', md5, "Created by VirusTotal scan of of attachment {0}".format(attachment.name))
+    incident.addArtifact('Malware MD5 Hash', md5, "Created by VirusTotal scan of of attachment {0} with attachment_id: {1}".format(attachment.name, attachment.id))
 
 sha1 = attributes.get("sha1", None)
 if sha1:
-    incident.addArtifact('Malware SHA-1 Hash', sha1, "Created by VirusTotal scan of of attachment {0}".format(attachment.name))
+    incident.addArtifact('Malware SHA-1 Hash', sha1, "Created by VirusTotal scan of of attachment {0} with attachment_id: {1}".format(attachment.name, attachment.id))
     
 
 ```

@@ -45,7 +45,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | Playbook support, Playbook artifact hits included |
+| 1.1.0 | Playbook support |
 | 1.0.7 | Add Support for Custom Headers |
 | 1.0.6 | Enhanced Rules and Workflows |
 | 1.0.5 | Bugfixes and Documentation updates |
@@ -84,8 +84,7 @@ AThe VirusTotal app for SOAR performs VirusTotal analysis on IP Addresses, URLs,
   * Other File
   * RFC 822 Email Message File
   * URL
-* Provide a link back to the VirusTotal report in a SOAR case note or in an artifact hit. 
-* Automatic playbook to perform VirusTotal analysis and create **hits** for newly added artifacts in SOAR if they are deemed potentially malicious by VirusTotal. 
+* Provide a link back to the VirusTotal report in a SOAR case note. 
 
 ---
 
@@ -1043,8 +1042,6 @@ if sha1:
 | ------------- | ----------- | ------ | ------ |
 | Example VirusTotal: Scan Artifact (PB) | Perform a VirusTotal scan on an artifact and write the results to a note for review.  | artifact | `enabled` |
 | Example VirusTotal: Scan Attachment (PB) | Perform a VirusTotal scan on an attachment.  Write the results to a note. | attachment | `enabled` |
-| Example VirusTotal: Scan Hits (PB) | Perform automatic lookups for artifacts including IP addresses, hashes, domains, and URLS and creates a hit for the artifact if it is deemed potentially malicious by VirusTotal. | artifact | `disabled` |
-
 
 **NOTE:**The playbooks `Example VirusTotal: Scan Artifact (PB)` and `Example VirusTotal: Scan Attachment (PB)` contain the following lines of code in the post script which can be uncomment to write the complete JSON object returned from a VirusTotal scan to a formatted note.
 <p>
@@ -1054,10 +1051,6 @@ if sha1:
 #pretty_results = json.dumps(results, indent=4, sort_keys=True)
 #incident.addNote(helper.createRichText(u"<p>VirusTotal scan of {0}: {1}</p><div>{2}</div>".format(artifact.type, artifact.value, pretty_results)))
 ```
-
-**NOTE:** The playbook `Example VirusTotal: Scan Hits (PB)` is disabled by default when the app is installed.  Enable the playbook to automatically mark artifact hits from VirusTotal analysis results when artifacts are created in SOAR:
-
- ![screenshot: main](./doc/screenshots/vt-artifact-hit.png)
 
 ---
 
