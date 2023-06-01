@@ -55,6 +55,14 @@
 | 1.0.1 | Proxy support added |
 
 ---
+### 1.1 Changes
+In v1.1, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow. 
+
+If upgrading from a previous release, notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows, but migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes. 
 
 ## Overview
 <!--
@@ -65,7 +73,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-AThe VirusTotal app for SOAR performs VirusTotal analysis on IP Addresses, URLs, hashes, domain and file artifacts.
+The VirusTotal app for SOAR performs VirusTotal analysis on IP Addresses, URLs, hashes, domain and file artifacts and on file attachments.
 
 ### Key Features
 <!--
@@ -189,6 +197,11 @@ Perform VirusTotal scans and return reports on ip addresses, URLs, domains, hash
 Sample playbook using the VirusTotal function:
 
  ![screenshot: fn-virustotal-pb ](./doc/screenshots/vt-scan-artifact-pb.png) 
+
+Sample note created by scanning a hash artifact:
+
+  ![screenshot: fn-virustotal-notes ](./doc/screenshots/vt-notes.png) 
+
 <details><summary>Inputs:</summary>
 <p>
 
@@ -1040,16 +1053,16 @@ if sha1:
 
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| Example VirusTotal: Scan Artifact (PB) | Perform a VirusTotal scan on an artifact and write the results to a note for review.  | artifact | `enabled` |
-| Example VirusTotal: Scan Attachment (PB) | Perform a VirusTotal scan on an attachment.  Write the results to a note. | attachment | `enabled` |
+| Example: VirusTotal (PB) | Perform a VirusTotal scan on an artifact and write the results to a note for review.  | artifact | `enabled` |
+| Example: VirusTotal for Attachments (PB) | Perform a VirusTotal scan on an attachment.  Write the results to a note. | attachment | `enabled` |
 
-**NOTE:**The playbooks `Example VirusTotal: Scan Artifact (PB)` and `Example VirusTotal: Scan Attachment (PB)` contain the following lines of code in the post script which can be uncomment to write the complete JSON object returned from a VirusTotal scan to a formatted note.
+**NOTE:**The playbooks `Example: VirusTotal (PB)` and `Example: VirusTotal for Attachments (PB)` contain the following lines of code in the post script which can be uncomment to write the complete JSON object returned from a VirusTotal scan to a formatted note.
 <p>
 
 ```python
-# Uncomment the following line to have the results json printed formatted to a note.
+# Uncomment the following 2 lines to have the results json printed formatted to a note.
 #pretty_results = json.dumps(results, indent=4, sort_keys=True)
-#incident.addNote(helper.createRichText(u"<p>VirusTotal scan of {0}: {1}</p><div>{2}</div>".format(artifact.type, artifact.value, pretty_results)))
+#incident.addNote(helper.createRichText(u"<p>VirusTotal scan of {0}: {1} artifact_id: {2}</p><div>{3}</div>".format(artifact.type, artifact.value, artifact.id, pretty_results)))
 ```
 
 ---
