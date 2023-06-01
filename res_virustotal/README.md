@@ -2,21 +2,23 @@
 
 ## Description
 
-This content package contains a single resource file with the following rule and workflow:
+This content package contains a single resource file with the following playbooks:
 
-1. VirusTotal Scan (Rule)
-- Automatic rule invoked by an artifact that is a Domain, IP address, Hash, or URL.
-- Associated with the VirusTotal Scan Hits Workflow
-2. VirusTotal Scan Hits (Workflow)
-- Perform lookups for artifacts including ip addresses, hashes, domains, and URLS and creates a hit for the artifact if it is deemed potentially malicious by VirusTotal.
+1. VirusTotal Scan (PB)
+- Automatic playbook invoked on creation of artifact that is a Domain, IP address, Hash, or URL.
+
+2. VirusTotal Scan (PB)
+- Manual playbook that can be invoked on an artifact that is a Domain, IP address, Hash, or URL.
+
+- Manual playbook that Perform lookups for artifacts including ip addresses, hashes, domains, and URLS and creates a hit for the artifact if it is deemed potentially malicious by VirusTotal.
 - Uses the Function VirusTotal 
 
 ![Hits](./screenshots/hits.png)
 
 ## Package Dependences
 The workflows in this package depend on the following
-- SOAR Version 43
-- fn_virustotal Version 1.0.7
+- SOAR Version 45.2.0
+- fn_virustotal Version 1.1.0
 
 
 ## Prerequisite
@@ -37,7 +39,7 @@ and select the `virustotal.res` file downloaded above.
 Once the resource file is successfully imported, the workflow included in the file is ready for use.
 
 
-### Example of VirusTotal Workflow with Hits
+### Example of VirusTotal Playbook with Hits
 This workflow invokes a functions from the fn_virustotal integration package.
 ![Workflow](./screenshots/main.png)
 
@@ -335,7 +337,6 @@ else:
 
 ## Uninstall
 Manually delete the followings:
-1. Rules
+1. Playbooks
 - "VirusTotal Scan"
-2. Workflows
-- VirusTotal Scan Hits
+- "VirusTotal Scan Hits (PB)"
