@@ -58,6 +58,7 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("incident_id")  # number
             artifact_id = kwargs.get("artifact_id")  # number
             attachment_id = kwargs.get("attachment_id")  # number
+            task_id = kwargs.get("task_id")  # number
             vt_type = kwargs.get("vt_type")  # text
             vt_data = kwargs.get("vt_data")  # text
 
@@ -65,6 +66,7 @@ class FunctionComponent(ResilientComponent):
             self.log.info("incident_id: %s", incident_id)
             self.log.info("artifact_id: %s", artifact_id)
             self.log.info("attachment_id: %s", attachment_id)
+            self.log.info("task_id: %s", task_id)
             self.log.info("vt_type: %s", vt_type)
             self.log.info("vt_data: %s", vt_data)
 
@@ -72,7 +74,7 @@ class FunctionComponent(ResilientComponent):
 
             # determine next steps based on the API call to make
             if vt_type.lower() == 'file':
-                entity = get_input_entity(get_resilient_client(self.resilient), incident_id, attachment_id, artifact_id)
+                entity = get_input_entity(get_resilient_client(self.resilient), incident_id, attachment_id, artifact_id, task_id)
                 # Create a temporary file to write the binary data to.
                 with tempfile.NamedTemporaryFile('w+b', delete=False) as temp_file_binary:
                     # Write binary data to a temporary file. Make sure to close the file here...this

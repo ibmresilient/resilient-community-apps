@@ -121,7 +121,7 @@ if results:
           if attributes.get('sha256', None):
             incident.addArtifact('Malware SHA-256 Hash', attributes.get('sha256'), "Created by VirusTotal.")
         else:
-          incident.addNote("VirusTotal has not found a hit: {0} {1} {2}.".format(artifact.type, artifact.value, artifact.id))
+          incident.addNote("VirusTotal has not found a hit: {0}: <b>{1}</b>  artifact id:{2}.".format(artifact.type, artifact.value, artifact.id))
       else:
         incident.addNote("VirusTotal has failed. - no last_analysis_stats: {0} {1} {2}.".format(artifact.type, artifact.value, artifact.id))
     else:

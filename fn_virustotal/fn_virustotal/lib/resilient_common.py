@@ -8,7 +8,7 @@ from resilient_lib import IntegrationError
 
 INCIDENT_FRAGMENT = '#incidents'
 
-def get_input_entity(client, incident_id, attachment_id, artifact_id):
+def get_input_entity(client, incident_id, attachment_id, artifact_id, task_id):
 
     re_uri_match_pattern = r"""(?:(?:https?|ftp):\/\/|\b(?:[a-z\d]+\.))(?:(?:[^\s()<>]+|\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))?\))+(?:\((?:[^\s()<>]+|(?:\(?:[^\s()<>]+\)))?\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))?"""
     entity = {"incident_id": incident_id, "id": None, "type": "", "meta_data": None, "data": None}
@@ -16,10 +16,17 @@ def get_input_entity(client, incident_id, attachment_id, artifact_id):
     if (attachment_id):
         entity["id"] = attachment_id
         entity["type"] = "attachment"
-        entity["meta_data"] = client.get("/incidents/{0}/attachments/{1}".format(entity["incident_id"], entity["id"]))
-        if entity["meta_data"].get("name"):
-            entity["name"] = entity["meta_data"]["name"]
-        entity["data"] = client.get_content("/incidents/{0}/attachments/{1}/contents".format(entity["incident_id"], entity["id"]))
+        if task_id:
+            entity["task_id"] = task_id
+            entity["meta_data"] = client.get("/tasks/{0}/attachments/{1}".format(entity["task_id"], entity["id"]))
+            if entity["meta_data"].get("name"):
+                entity["name"] = entity["meta_data"]["name"]
+            entity["data"] = client.get_content("/tasks/{0}/attachments/{1}/contents".format(entity["task_id"], entity["id"]))
+        else:
+            entity["meta_data"] = client.get("/incidents/{0}/attachments/{1}".format(entity["incident_id"], entity["id"]))
+            if entity["meta_data"].get("name"):
+                entity["name"] = entity["meta_data"]["name"]
+            entity["data"] = client.get_content("/incidents/{0}/attachments/{1}/contents".format(entity["incident_id"], entity["id"]))
 
     elif (artifact_id):
         entity["id"] = artifact_id
