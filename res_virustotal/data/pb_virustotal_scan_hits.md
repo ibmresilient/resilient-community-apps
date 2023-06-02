@@ -110,16 +110,16 @@ if results:
           artifact.addHit("VirusTotal hits added.", hit)
 
           if attributes.get("last_http_response_content_sha256", None):
-            incident.addArtifact('Malware SHA-256 Hash', attributes.get("last_http_response_content_sha256", None), "Created by VirusTotal.")
+            incident.addArtifact('Malware SHA-256 Hash', attributes.get("last_http_response_content_sha256", None), "Created by VirusTotalapp for {0}: <b>{1}</b>  artifact id:{2}.".format(artifact.type, artifact.value, artifact.id))
             
           if attributes.get('md5', None):
-            incident.addArtifact('Malware MD5 Hash', attributes.get('md5'), "Created by VirusTotal.")
+            incident.addArtifact('Malware MD5 Hash', attributes.get('md5'), "Created by VirusTotal app for {0}: <b>{1}</b>  artifact id:{2}.".format(artifact.type, artifact.value, artifact.id))
   
           if attributes.get('sha1', None):
-            incident.addArtifact('Malware SHA-1 Hash', attributes.get('sha1'), "Created by VirusTotal.")
+            incident.addArtifact('Malware SHA-1 Hash', attributes.get('sha1'), "Created by VirusTotalapp for {0}: <b>{1}</b>  artifact id:{2}.".format(artifact.type, artifact.value, artifact.id))
     
           if attributes.get('sha256', None):
-            incident.addArtifact('Malware SHA-256 Hash', attributes.get('sha256'), "Created by VirusTotal.")
+            incident.addArtifact('Malware SHA-256 Hash', attributes.get('sha256'), "Created by VirusTotal app for {0}: <b>{1}</b>  artifact id:{2}.".format(artifact.type, artifact.value, artifact.id))
         else:
           incident.addNote("VirusTotal has not found a hit: {0}: <b>{1}</b>  artifact id:{2}.".format(artifact.type, artifact.value, artifact.id))
       else:
