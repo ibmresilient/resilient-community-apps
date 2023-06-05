@@ -45,13 +45,29 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-| Version | Date | Notes |
-| ------- | ---- | ----- |
+| Version | Notes |
+| ------- | ----- |
+| 2.1.0 |  Add Playbooks
 | 2.0.0 | Migrated slackclient to v2, Added lookup via channel ID to improve speed |
 | 1.0.2 | Support for App Host, proxy support added |
 
+---
+### fn_slack 2.1.0 Changes
+In v2.1, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
+For automatic actions, the playbooks will be disabled by default.
+
+You can continue to use the rules/workflows. 
+But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
+
+---
 ### fn_slack 2.0.0 Considerations
+
 Slack integration is now able to use the channel ID instead of the channel name to post and archive. When using the channel name, this function must first retrieve a list of all channels in a workspace and then iterate through the list to find the desired channel. Using the channel ID, the function is able to immediately retrieve the desired channel and therefore is reccommended to use over channel name when calling functions via SOAR.
+
 ---
 
 ## Overview

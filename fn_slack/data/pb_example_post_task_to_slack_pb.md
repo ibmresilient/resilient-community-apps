@@ -4,20 +4,37 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Example: Post Task to Slack
+# Playbook - Example: Post Task to Slack (PB)
 
+### API Name
+`example_post_task_to_slack_pb`
+
+### Status
+`enabled`
+
+### Activation Type
+`manual`
+
+### Object Type
+`task`
+
+### Description
+Post message from a Task to your Slack channel. Send specifics about the Task with an optional custom text message.
+
+
+---
 ## Function - Post message to Slack
 
 ### API Name
 `slack_post_message`
 
 ### Output Name
-`None`
+`slack_info`
 
 ### Message Destination
 `slack`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 #####################
 # Task data         #
@@ -36,7 +53,7 @@ task_status = "Open" if task.status == "O" else "Closed"
 
 # Slack additional text message
 # Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.
-rule_additional_text = rule.properties.rule_slack_text if rule.properties.rule_slack_text is not None else ''
+rule_additional_text = playbook.inputs.rule_slack_text if playbook.inputs.rule_slack_text is not None else ''
 
 # Slack text message in JSON format
 # ---------------------------------
@@ -87,34 +104,45 @@ inputs.task_id = task.id
 # Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. 
 # If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. 
 # If there isn’t one defined, the workflow will terminate.
-inputs.slack_channel = rule.properties.rule_slack_channel if rule.properties.rule_slack_channel is not None else inputs.slack_channel
+inputs.slack_channel = playbook.inputs.rule_slack_channel if playbook.inputs.rule_slack_channel is not None else playbook.inputs.slack_channel
 
 # Is channel private
 # Indicate if the channel you are posting to should be private.
-inputs.slack_is_channel_private = rule.properties.rule_slack_is_channel_private if rule.properties.rule_slack_is_channel_private is not None else inputs.slack_is_channel_private
+inputs.slack_is_channel_private = playbook.inputs.rule_slack_is_channel_private if playbook.inputs.rule_slack_is_channel_private is not None else playbook.inputs.rule_slack_is_channel_private 
 
 # Slack user emails
 # Comma separated list of emails belonging to Slack users in your workspace that will be added to your channel.
-inputs.slack_participant_emails = rule.properties.rule_slack_participant_emails if rule.properties.rule_slack_participant_emails is not None else inputs.slack_participant_emails
+inputs.slack_participant_emails = playbook.inputs.rule_slack_participant_emails if playbook.inputs.rule_slack_participant_emails is not None else playbook.inputs.rule_slack_participant_emails
 
 # Slack text message
 # Container field to retain JSON fields to send to Slack
 inputs.slack_text = slack_text
 
 # Slack Channel ID, faster than finding via channel name
-inputs.slack_channel_id = rule.properties.slack_channel_id if rule.properties.slack_channel_id else inputs.slack_channel_id
+inputs.slack_channel_id = playbook.inputs.slack_channel_id if playbook.inputs.slack_channel_id else playbook.inputs.slack_channel_id
 
-```
-
-### Post-Processing Script
-```python
-users = ""
-for user in results.user_info:
-  users += "{} \n".format(user)
-# Create a note
-noteText = u"""Task was posted to <a href='{}'>Slack channel #{}</a>. Members of this channel are: \n{}""".format(results.url, results.channel, users)
-task.addNote(helper.createRichText(noteText))
 ```
 
 ---
 
+## Local script - Post Task to Slack Post-Process Script
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Objet Type
+`task`
+
+### Script Content
+```python
+userinfo = str(playbook.functions.results.slack_info.user_info)
+userinfo = userinfo.replace("'", "").replace("[","").replace("]","")
+# Create a note
+noteText = u"""Task was posted to <a href='{}'>Slack channel #{}</a>. Members of this channel are: \n{}""".format(playbook.functions.results.slack_info.url, playbook.functions.results.slack_info.channel, userinfo)
+task.addNote(helper.createRichText(noteText))
+```
+
+---

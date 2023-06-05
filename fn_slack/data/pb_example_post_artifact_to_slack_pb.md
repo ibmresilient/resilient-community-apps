@@ -4,35 +4,48 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Example: Post Note to Slack
+# Playbook - Example: Post Artifact to Slack (PB)
 
+### API Name
+`example_post_artifact_to_slack_pb`
+
+### Status
+`enabled`
+
+### Activation Type
+`manual`
+
+### Object Type
+`artifact`
+
+### Description
+Post a message from the Artifact to your Slack channel. Send specifics about the Artifact with an optional custom text message.
+
+
+---
 ## Function - Post message to Slack
 
 ### API Name
 `slack_post_message`
 
 ### Output Name
-``
+`user_info`
 
 ### Message Destination
 `slack`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 #####################
-# Note data         #
+# Artifact data     #
 #####################
 
 # Slack additional text message
 # Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.
-rule_additional_text = rule.properties.rule_slack_text if rule.properties.rule_slack_text is not None else ''
+rule_additional_text = playbook.inputs.rule_slack_text if playbook.inputs.rule_slack_text is not None else ''
 
 # Incident id for the URL
-incident_id = str(incident.id)
-type_data = "Incident Note"
-if task:
-  incident_id += "?task_id="+str(task.id)
-  type_data = "Task Note"
+incident_id_str = str(incident.id)
 
 # Slack text message in JSON format
 # ---------------------------------
@@ -43,74 +56,76 @@ if task:
 # "label": {{ "type": "[string|richtext|boolean|datetime", "data": "resilient field data" }}
 #
 # Make sure to send "datetime" types as integers and not strings:
-# without double quotes: { "type": "datetime", "data": resilient datetime data} 
+# without double quotes: { "type": "datetime", "data": resilient datetime data}  
 #
-# Text fields like 'note.text.content', 'task.name' or 'Slack additional text message' can include double quotes.
+# Text fields like 'artifact.value', or 'Slack additional text message' can include double quotes.
 # Watch out for embedded double quotes in these text fields and escape with field.replace(u'"', u'\\"') otherwise json.loads will fail.
 slack_text = u"""{{
   "Additional Text": {{"type": "string", "data": "{0}" }},
   "Resilient URL": {{"type": "incident", "data": "{1}" }},
   "Type of data": {{"type": "string", "data": "{2}" }},
   "Incident ID": {{"type": "string", "data": "{3}" }},
-  "Task": {{"type": "string", "data": "{4}" }},
-  "Note": {{"type": "richtext", "data": "{5}" }}
+  "Artifact Type": {{"type": "string", "data": "{4}" }},
+  "Artifact Value": {{"type": "string", "data": "{5}" }},
+  "Artifact Created By": {{"type": "string", "data": "{6}" }},
+  "Artifact Created on": {{"type": "datetime", "data": {7} }}
 }}""".format(
   rule_additional_text.replace(u'"', u'\\"'),
-  incident_id,
-  type_data,
-  str(incident.id),
-  task.name.replace(u'"', u'\\"') if task else "", 
-  note.text.content.replace(u'"', u'\\"') if note.text is not None else '')
-
-# Slack username - optional setting
-# Set to true and the authenticated user of the Slack App will appear as the author of the message, ignoring any values provided for slack_username. 
-# Set your bot's name to Note's creator to appear as the author of the message. Must be used in conjunction with slack_as_user set to false, otherwise ignored.
-#inputs.slack_as_user = False
-#inputs.slack_username = note.user_id
+  incident_id_str,
+  "Artifact",
+  incident_id_str,
+  artifact.type,
+  artifact.value.replace(u'"', u'\\"'),
+  artifact.creator.display_name,
+  artifact.created)
 
 # ID of this incident
 inputs.incident_id = incident.id
-
-# ID of this Task
-if task:
-  inputs.task_id = task.id
 
 # Slack channel name
 # Name of the existing Slack Workspace channel or a new Slack channel you are posting to. 
 # Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. 
 # If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. 
 # If there isn’t one defined, the workflow will terminate.
-inputs.slack_channel = rule.properties.rule_slack_channel if rule.properties.rule_slack_channel is not None else inputs.slack_channel
+inputs.slack_channel = playbook.inputs.rule_slack_channel if playbook.inputs.rule_slack_channel is not None else playbook.inputs.rule_slack_channel
 
 # Is channel private
 # Indicate if the channel you are posting to should be private.
-inputs.slack_is_channel_private = rule.properties.rule_slack_is_channel_private if rule.properties.rule_slack_is_channel_private is not None else inputs.slack_is_channel_private
+inputs.slack_is_channel_private = playbook.inputs.rule_slack_is_channel_private if playbook.inputs.rule_slack_is_channel_private is not None else playbook.inputs.rule_slack_is_channel_private
 
 # Slack user emails
 # Comma separated list of emails belonging to Slack users in your workspace that will be added to your channel.
-inputs.slack_participant_emails = rule.properties.rule_slack_participant_emails if rule.properties.rule_slack_participant_emails is not None else inputs.slack_participant_emails
+inputs.slack_participant_emails = playbook.inputs.rule_slack_participant_emails if playbook.inputs.rule_slack_participant_emails is not None else playbook.inputs.rule_slack_participant_emails
 
 # Slack text message
 # Container field to retain JSON fields to send to Slack.
 inputs.slack_text = slack_text
 
 # Slack Channel ID, faster than finding via channel name
-inputs.slack_channel_id = rule.properties.slack_channel_id if rule.properties.slack_channel_id else inputs.slack_channel_id
+inputs.slack_channel_id = playbook.inputs.slack_channel_id if playbook.inputs.slack_channel_id else playbook.inputs.slack_channel_id
 
-```
-
-### Post-Processing Script
-```python
-users = ""
-for user in results.user_info:
-  users += "{} \n".format(user)
-# Create a note
-noteText = u"""Note was posted to <a href='{}'>Slack channel #{}</a>. Members of this channel are: \n{}""".format(results.url, results.channel, users)
-if not task:
-  incident.addNote(helper.createRichText(noteText))
-else:
-  task.addNote(helper.createRichText(noteText))
 ```
 
 ---
 
+## Local script - Post message to Slack
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Objet Type
+`artifact`
+
+### Script Content
+```python
+userinfo = str(playbook.functions.results.slack_info.user_info)
+userinfo = userinfo.replace("'", "").replace("[","").replace("]","")
+# Create a note
+noteText = u"""Artifact was posted to <a href='{}'>Slack channel #{}</a>. Members of this channel are: \n{}""".format(playbook.functions.results.url, playbook.functions.results.channel, userinfo)
+incident.addNote(helper.createRichText(noteText))
+```
+
+---
