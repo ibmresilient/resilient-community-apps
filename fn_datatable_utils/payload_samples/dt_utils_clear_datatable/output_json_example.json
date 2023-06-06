@@ -10,15 +10,15 @@
   },
   "raw": null,
   "inputs": {
-    "incident_id": 2269,
+    "incident_id": 2101,
     "dt_utils_datatable_api_name": "dt_utils_test_data_table"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "host": "local",
-    "execution_time_ms": 626,
-    "timestamp": "2022-05-31 13:46:14"
+    "host": "AppTestAllen02241.fyre.ibm.com",
+    "execution_time_ms": 398,
+    "timestamp": "2023-06-06 00:56:27"
   }
 }

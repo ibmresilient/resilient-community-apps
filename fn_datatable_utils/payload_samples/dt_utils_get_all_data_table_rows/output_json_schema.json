@@ -31,9 +31,6 @@
                       },
                       "row_id": {
                         "type": "integer"
-                      },
-                      "value": {
-                        "type": "boolean"
                       }
                     }
                   },
@@ -44,9 +41,6 @@
                         "type": "string"
                       },
                       "row_id": {
-                        "type": "integer"
-                      },
-                      "value": {
                         "type": "integer"
                       }
                     }
@@ -75,10 +69,7 @@
                         "type": "integer"
                       },
                       "value": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
+                        "type": "array"
                       }
                     }
                   },
@@ -104,9 +95,6 @@
                       },
                       "row_id": {
                         "type": "integer"
-                      },
-                      "value": {
-                        "type": "string"
                       }
                     }
                   },
@@ -139,6 +127,20 @@
                     },
                     "enabled": {
                       "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "playbooks": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "playbook_handle": {
+                      "type": "string"
+                    },
+                    "display_name": {
+                      "type": "string"
                     }
                   }
                 }
