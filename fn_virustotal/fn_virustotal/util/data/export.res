@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1685734167332,
+  "export_date": 1686064078948,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -179,7 +179,7 @@
       "text": "incident_id",
       "tooltip": "",
       "type_id": 11,
-      "uuid": "509d6b58-e4b5-4150-b1d0-6843c6dcfb8d",
+      "uuid": "68e6aeb2-30a3-4103-b8ef-aef67489a5b0",
       "values": []
     },
     {
@@ -211,14 +211,14 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1685721104010,
+      "last_modified_time": 1685982749144,
       "name": "virustotal",
       "tags": [],
       "uuid": "d108590a-21f9-4e42-92c4-d2a6fe39c9b4",
-      "version": 5,
+      "version": 6,
       "view_items": [
         {
-          "content": "509d6b58-e4b5-4150-b1d0-6843c6dcfb8d",
+          "content": "68e6aeb2-30a3-4103-b8ef-aef67489a5b0",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -282,13 +282,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 139,
+  "id": 145,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1685734165343,
+      "create_date": 1686064076836,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -297,7 +297,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1685734165343,
+      "update_date": 1686064076836,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],

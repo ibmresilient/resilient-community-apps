@@ -4,8 +4,8 @@
 
 This content package contains a single resource file with the following playbooks:
 
-1. Automatic playbook: `VirusTotal: Scan (PB)`
-2. Manual playbook: `VirusTotal: Scan Manual (PB)`
+1. Automatic playbook: `VirusTotal: Scan for Hits Automatic (PB)`
+2. Manual playbook: `VirusTotal: Scan for Hits (PB)`
 
 Both playbooks:
 - Perform VirusTotal analysis on the following artifact types:
@@ -13,13 +13,15 @@ Both playbooks:
 - Create a hit for an artifact if it is deemed potentially malicious by VirusTotal.
 - Use the `VirusTotal` function from the VirusTotal app for SOAR.
 
+NOTE: Automatic playbook `VirusTotal: Scan for Hits Automatic (PB)` replaces the rule `VirusTotal: Scan` and the workflow 
+`VirusTotal: Scan Hits` in the VirusTotal content package v1.0.0.  Once the 1.1 VirusTotal content package is installed, the old rule and workflow can be deleted or disabled.  The manual playbook `VirusTotal: Scan (PB)` is new with the v1.1 release of the content package.
 
-Here is are example hits created by the `VirusTotal: Scan (PB)` playbook:
+Here is are example hits created by the `VirusTotal: Scan for Hits Automatic (PB)` playbook:
 ![Hits](./screenshots/vt-artifact-hit.png)
 
 ![Hits](./screenshots/vt-artifact-hit-2.png)
 
-## Package Dependences
+## Package Dependencies
 The playbooks in this package depend on the following:
 - SOAR v45.2.0
 - fn_virustotal v1.1.0
@@ -43,9 +45,9 @@ and select the `virustotal.res` file downloaded above.
 Once the resource file is successfully imported, the playbooks included in the file is ready for use.
 
 
-### VirusTotal: Scan (PB) Playbook
-This playbook invokes a function from the fn_virustotal integration package and uses the results to create hits on artifacts based on the results from VirusTotal
-.
+### VirusTotal: Scan for Hits Automatic (PB) Playbook
+This playbook automatically invokes a function from the fn_virustotal integration package and uses the results to create hits on artifacts based on the results from VirusTotal.
+
 ![Playbook](./screenshots/main.png)
 
 
@@ -62,8 +64,10 @@ Perform VirusTotal scans and return reports on ip addresses, urls, domains, hash
 | `incident_id` | `number` | Yes | `--` | - |
 | `artifact_id` | `number` | No | `--` | - |
 | `attachment_id` | `number` | No | `--` | - |
+| `task_id` | `number` | No | `--` | - |
 | `vt_type` | `text` | No | `hash` | descriptor for the type of virusTotal lookup to perform |
 | `vt_data` | `text` | No | `0.0.0.0` | data field for virusTotal lookup |
+
 
 
 </p>
@@ -820,5 +824,5 @@ else:
 ## Uninstall
 Manually delete the following:
 1. Playbooks
-- "VirusTotal: Scan (PB)"
-- "VirusTotal: Scan Manual (PB)"
+- "VirusTotal: Scan for Hits Automatic (PB)"
+- "VirusTotal: Scan for Hits (PB)"
