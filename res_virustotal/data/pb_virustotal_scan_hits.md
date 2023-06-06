@@ -4,13 +4,13 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Playbook - Example VirusTotal: Scan Hits (PB)
+# Playbook - VirusTotal: Scan for Hits Automatic (PB)
 
 ### API Name
 `virustotal_scan_hits`
 
 ### Status
-`disabled`
+`enabled`
 
 ### Activation Type
 `automatic`
@@ -53,7 +53,7 @@ inputs.vt_data = artifact.value
 ## Local script - VirusTotal: Create artifact hits
 
 ### Description
-Create artifact hits on artifacts the VirusTotal has deemed malicious. Created malware hash artifacts if found in the VT scan data results.
+Create artifact hits on artifacts the VirusTotal has deemed malicious. Create malware hash artifacts if found in the VT scan data results.
 
 ### Script Type
 `Local script`
@@ -103,33 +103,33 @@ if results:
           if vt_id and uri_fragment:
             entry = {"name": "VirusTotal Report", 
                      "type": "uri",
-                     "value": "{0}/{1}/{2}".format(VIRUSTOTAL_GUI_URL, uri_fragment, artifact.value)
+                     "value": "{0}/{1}/{2}".format(VIRUSTOTAL_GUI_URL, uri_fragment, vt_id)
                      }
             hit.append(entry)
 
           artifact.addHit("VirusTotal hits added.", hit)
 
           if attributes.get("last_http_response_content_sha256", None):
-            incident.addArtifact('Malware SHA-256 Hash', attributes.get("last_http_response_content_sha256", None), "Created by VirusTotal.")
+            incident.addArtifact('Malware SHA-256 Hash', attributes.get("last_http_response_content_sha256", None), "Created by VirusTotalapp for {0}: <b>{1}</b>  artifact id:{2}.".format(artifact.type, artifact.value, artifact.id))
             
           if attributes.get('md5', None):
-            incident.addArtifact('Malware MD5 Hash', attributes.get('md5'), "Created by VirusTotal.")
+            incident.addArtifact('Malware MD5 Hash', attributes.get('md5'), "Created by VirusTotal app for {0}: <b>{1}</b>  artifact id:{2}.".format(artifact.type, artifact.value, artifact.id))
   
           if attributes.get('sha1', None):
-            incident.addArtifact('Malware SHA-1 Hash', attributes.get('sha1'), "Created by VirusTotal.")
+            incident.addArtifact('Malware SHA-1 Hash', attributes.get('sha1'), "Created by VirusTotalapp for {0}: <b>{1}</b>  artifact id:{2}.".format(artifact.type, artifact.value, artifact.id))
     
           if attributes.get('sha256', None):
-            incident.addArtifact('Malware SHA-256 Hash', attributes.get('sha256'), "Created by VirusTotal.")
+            incident.addArtifact('Malware SHA-256 Hash', attributes.get('sha256'), "Created by VirusTotal app for {0}: <b>{1}</b>  artifact id:{2}.".format(artifact.type, artifact.value, artifact.id))
         else:
-          incident.addNote("VirusTotal has not found a hit: {0} {1}.".format(artifact.type, artifact.value))
+          incident.addNote("VirusTotal has not found a hit: {0}: <b>{1}</b>  artifact id:{2}.".format(artifact.type, artifact.value, artifact.id))
       else:
-        incident.addNote("VirusTotal has failed. - no last_analysis_stats: {0} {1}.".format(artifact.type, artifact.value))
+        incident.addNote("VirusTotal has failed. - no last_analysis_stats: {0} {1} {2}.".format(artifact.type, artifact.value, artifact.id))
     else:
-      incident.addNote("VirusTotal has failed - no attributes: {0} {1}.".format(artifact.type, artifact.value))
+      incident.addNote("VirusTotal has failed - no attributes: {0} {1} {2}.".format(artifact.type, artifact.value, artifact.id))
   else:
-    incident.addNote("VirusTotal has failed - no data: {0} {1}.".format(artifact.type, artifact.value))
+    incident.addNote("VirusTotal has failed - no data: {0} {1} {2].".format(artifact.type, artifact.value, artifact.id))
 else:
-  incident.addNote("VirusTotal has failed - no results: {0} {1}.".format(artifact.type, artifact.value))
+  incident.addNote("VirusTotal has failed - no results: {0} {1} {2}.".format(artifact.type, artifact.value, artifact.id))
       
 ```
 
