@@ -14,9 +14,9 @@ Both playbooks:
 - Use the `VirusTotal` function from the VirusTotal app for SOAR.
 
 NOTE: Automatic playbook `VirusTotal: Scan for Hits Automatic (PB)` replaces the rule `VirusTotal: Scan` and the workflow 
-`VirusTotal: Scan Hits` in the VirusTotal content package v1.0.0.  Once the 1.1 VirusTotal content package is installed, the old rule and workflow can be deleted or disabled.  The manual playbook `VirusTotal: Scan (PB)` is new with the v1.1 release of the content package.
+`VirusTotal: Scan Hits` in the VirusTotal content package v1.0.0.  Once the 1.1 VirusTotal content package is installed, the old rule and workflow can be deleted or disabled.  The manual playbook `VirusTotal: Scan for Hits (PB)` is new with the v1.1 release of the content package.
 
-Here is are example hits created by the `VirusTotal: Scan for Hits Automatic (PB)` playbook:
+Here is an example of a hit created by the `VirusTotal: Scan for Hits Automatic (PB)` playbook:
 ![Hits](./screenshots/vt-artifact-hit.png)
 
 ![Hits](./screenshots/vt-artifact-hit-2.png)
