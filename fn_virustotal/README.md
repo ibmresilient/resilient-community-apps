@@ -45,7 +45,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | Playbook support. Task attachment analysis support. |
+| 1.1.0 | Update VirusTotal REST API v2 to v3. Playbook support. Task attachment analysis support. |
 | 1.0.7 | Add Support for Custom Headers |
 | 1.0.6 | Enhanced Rules and Workflows |
 | 1.0.5 | Bugfixes and Documentation updates |
