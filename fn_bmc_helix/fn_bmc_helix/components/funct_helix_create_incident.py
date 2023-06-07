@@ -8,16 +8,12 @@ from datetime import datetime
 from logging import getLogger
 from fn_bmc_helix.lib.datatable.data_table import Datatable
 from fn_bmc_helix.lib.helix.HelixAPIClient import HelixClient
+from fn_bmc_helix.lib.helix.HelixConstants import PACKAGE_NAME, TABLE_NAME, RETURN_FIELDS
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError, clean_html
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-PACKAGE_NAME = "fn_bmc_helix"
 FN_NAME = "helix_create_incident"
-TABLE_NAME = "helix_linked_incidents_reference_table"
-
-# fields we want BMC Helix to return when creating an incident
-RETURN_FIELDS = ["Incident Number", "Request ID"]
-# form name corresponding to a BMC Helix Incident
+# Form name corresponding to a BMC Helix Incident
 FORM_NAME = "HPD:IncidentInterface_Create"
 ENTRY_NAME = "HPD:IncidentInterface"
 
@@ -29,12 +25,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.fn_options = opts.get(PACKAGE_NAME, {})
+        self.options = opts.get(PACKAGE_NAME, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.fn_options = opts.get(PACKAGE_NAME, {})
+        self.options = opts.get(PACKAGE_NAME, {})
 
     def add_dt_row(self, incident_id, task, values):
         """Adds a row to the datatable correlating the SOAR task
@@ -51,15 +47,14 @@ class FunctionComponent(ResilientComponent):
         row = {
             # Convert to mills and discard fractions of a second
             "timestamp": {"value": int(datetime.now().timestamp() * 1000)},
-            "taskincident_id": {u"value": "{0}: {1}".format(task["id"], task["name"])},
+            "taskincident_id": {"value": f'{task["id"]}: {task["name"]}'},
             "helix_id": {"value": values["Request ID"]},
             "status": {"value": values["Status"]},
             "extra": {"value": values["Incident Number"]}
         }
-        LOG.info(
-            u"Adding row to the helix_linked_incidents_reference_table DataTable: %s", row)
+        LOG.info(f"Adding row to the helix_linked_incidents_reference_table DataTable: {row}")
         dt_response = dt.dt_add_rows(row)
-        LOG.debug(u"Response from the SOAR Datatable API:\n%s", dt_response)
+        LOG.debug(f"Response from the SOAR Datatable API:\n{dt_response}")
         return dt_response
 
     def post_incident_to_helix(self, helix_client, rp, values, incident_id, task):
@@ -87,8 +82,7 @@ class FunctionComponent(ResilientComponent):
         # 201 is returned for resource created
         if status_code != 201:
             # Unexpected response from BMC Helix
-            reason = "Expected 201 - resource created response from BMC Helix. Received {0}".format(
-                status_code)
+            reason = f"Expected 201 - resource created response from BMC Helix. Received {status_code}"
             LOG.error(reason)
             return rp.done(False, helix_incident, reason=reason)
 
@@ -100,8 +94,7 @@ class FunctionComponent(ResilientComponent):
         incident_number = helix_incident["values"]["Incident Number"]
 
         # Get the newly created form entry object
-        entries, status_code = helix_client.query_form_entry(
-            ENTRY_NAME, incident_number)
+        entries, status_code = helix_client.query_form_entry(ENTRY_NAME, incident_number)
         entry = entries["entries"][0]
         # Save the incident number so we can log it. This is the ID that shows in the BMC Helix UI
         incident_number = entry["values"]["Incident Number"]
@@ -109,11 +102,10 @@ class FunctionComponent(ResilientComponent):
         request_id = entry["values"]["Request ID"]
         # We expect only one result to be returned
         if len(entries["entries"]) > 1:
-            LOG.debug("Multiple form entries in BMC Helix found matching Incident Number: %s."
-                      "The Request ID of the first entry will be written to the datatable.", incident_number)
+            LOG.debug(f"Multiple form entries in BMC Helix found matching Incident Number: {incident_number}."
+                      "The Request ID of the first entry will be written to the datatable.")
 
-        LOG.info("Correlated Request ID %s to Incident Number %s",
-                 request_id, incident_number)
+        LOG.info(f"Correlated Request ID {request_id} to Incident Number {incident_number}")
 
         self.add_dt_row(incident_id, task, entry["values"])
 
@@ -126,28 +118,28 @@ class FunctionComponent(ResilientComponent):
     def _helix_create_incident_function(self, event, *args, **kwargs):
         """Function: Create a new incident in BMC Helix"""
         try:
-            rc = RequestsCommon(self.opts, self.fn_options)
+            rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
-            yield StatusMessage("Starting '{0}' running in workflow '{1}'".format(FN_NAME, wf_instance_id))
+            yield StatusMessage(f"Starting '{FN_NAME}' running in workflow '{wf_instance_id}'")
 
             # Get and validate app configs
             app_configs = validate_fields([
                 {"name": "helix_host", "placeholder": "<example.domain>"},
                 {"name": "helix_user", "placeholder": "<example_user>"},
                 {"name": "helix_password", "placeholder": "xxx"}],
-                self.fn_options)
+                self.options)
 
             yield StatusMessage("Validations complete. Starting business logic")
 
             # Get optional settings
-            port = self.fn_options.get("helix_port", None)
+            port = self.options.get("helix_port", None)
 
             # If verify setting in the app.config is not set then defaults to true
-            verify = self.fn_options.get("verify", "true")
+            verify = self.options.get("verify", "true")
             # Check if verify in the app.config is a path to a certificate
             if not isfile(verify):
                 # If verify setting in the app.config is not equal to False then it is set to True
@@ -172,7 +164,7 @@ class FunctionComponent(ResilientComponent):
             # Instantiate a SOAR API client
             resilientClient = self.rest_client()
             # Get the task data
-            task = resilientClient.get("/tasks/{0}".format(task_id))
+            task = resilientClient.get(f"/tasks/{task_id}")
 
             # Add task instructions to the helix_payload dict if present in the task
             if task.get("instructions"):
@@ -185,8 +177,7 @@ class FunctionComponent(ResilientComponent):
 
             # Add the task name to the description if one wasn't provided in the inputs
             if not helix_payload.get("Description"):
-                helix_payload["Description"] = u"IBM SOAR Case {0}: {1}".format(
-                    incident_id, task["name"])
+                helix_payload["Description"] = f"IBM SOAR Case {incident_id}: {task['name']}"
             # Description has a max length of 100
             if len(helix_payload.get("Description", "")) > 100:
                 helix_payload["Description"] = helix_payload["Description"][:100]
@@ -195,14 +186,14 @@ class FunctionComponent(ResilientComponent):
             client = HelixClient(app_configs["helix_host"], app_configs["helix_user"],
                                  app_configs["helix_password"], rc, port=port, verify=verify)
 
-            LOG.info(u"Incident values to POST:\n%s", helix_payload)
+            LOG.info(f"Incident values to POST:\n{helix_payload}")
 
             results = self.post_incident_to_helix(
                 client, rp, helix_payload, incident_id, task)
 
-            yield StatusMessage("Finished '{}' that was running in workflow '{}'".format(FN_NAME, wf_instance_id))
+            yield StatusMessage(f"Finished '{FN_NAME}' that was running in workflow '{wf_instance_id}'")
 
-            LOG.info("'%s' complete", FN_NAME)
+            LOG.info(f"'{FN_NAME}' complete")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

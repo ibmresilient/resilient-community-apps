@@ -15,21 +15,7 @@ DATATABLE_TYPE = 8
 LOG = getLogger(__name__)
 
 class Datatable(object):
-    """ A helper class which provides a facade to interface with a SOAR / CP4S Data Table
-    Example:
-    .. code-block:: python
-
-        dt = Datatable(mocked_res_client, <incident_id>, <datatable_api_name>)
-        dt.get_data()
-        print(dt.rows)
-        ...
-
-    .. code-block:: python
-
-        dt = Datatable(mocked_res_client, <incident_id>, <datatable_api_name>)
-        dt.get_data()
-        dt.get_row(<row_id>, <column_to_search>, <value_to_search_in_column>)
-        ..."""
+    """ A helper class which provides a facade to interface with a SOAR / CP4S Data Table. """
 
     def __init__(self, res_client, incident_id, dt_api_name):
         self.res_client = res_client
@@ -45,15 +31,13 @@ class Datatable(object):
         :raises ValueError: If the datatable api call fails or the result contains no rows, raise an Exception
         """
 
-        uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(
-            self.incident_id, self.api_name)
+        uri = f"/incidents/{self.incident_id}/table_data/{self.api_name}?handle_format=names"
 
         try:
             self.data = self.res_client.get(uri)
             self.rows = self.data["rows"]
         except Exception:
-            raise ValueError(
-                "Failed to get {0} Datatable".format(self.api_name))
+            raise ValueError(f"Failed to get {self.api_name} Datatable")
 
     def get_rows(self, max_rows=0, sort_by=None, sort_direction="ASC", search_column=None, search_value=None):
         """get_rows Searches and returns rows based on a search/sort criteria, else None
@@ -66,7 +50,7 @@ class Datatable(object):
         :type sort_direction: str, optional
         :param search_column: The name of a specific datatable column to search, defaults to None
         :type search_column: str, optional
-        :param search_value: The value to be searched , defaults to None
+        :param search_value: The value to be searched, defaults to None
         :type search_value: str, optional
         :raises ValueError: If a search column is provided but that column is not found in the datatable, a ValueError is raised
         :raises ValueError: If the sort_by column is provided but that column is not found in the datatable, a ValueError is raised
@@ -79,8 +63,7 @@ class Datatable(object):
 
             for row in self.rows:
                 if search_column not in row["cells"]:
-                    raise ValueError("{0} is not a valid column api name for the data table: {1}".format(
-                        search_column, self.api_name))
+                    raise ValueError(f"{search_column} is not a valid column api name for the data table: {self.api_name}")
                 column = row["cells"].get(search_column)
                 value = column.get("value", None)
                 if value is not None and value is search_value:
@@ -88,8 +71,7 @@ class Datatable(object):
 
                 if sort_by:
                     if sort_by not in row["cells"]:
-                        raise ValueError(
-                            "{0} is not a valid column api name for the data table: {1}".format(sort_by, self.api_name))
+                        raise ValueError(f"{sort_by} is not a valid column api name for the data table: {self.api_name}")
                     rows_to_return = sorted(rows_to_return, key=lambda item: item['cells'][sort_by].get('value'),
                                             reverse=is_reverse)
             if max_rows != 0:
@@ -104,7 +86,7 @@ class Datatable(object):
         :type row_id: int, optional
         :param search_column: The name of a specific datatable column to search, defaults to None
         :type search_column: str, optional
-        :param search_value: The value to be searched , defaults to None
+        :param search_value: The value to be searched, defaults to None
         :type search_value: str, optional
         :raises ValueError: If a search_column is provided but not found in the cells of the gathered row, a ValueError is raised
         :return: The row
@@ -123,8 +105,7 @@ class Datatable(object):
                 cells = row["cells"]
 
                 if search_column not in cells:
-                    raise ValueError("{0} is not a valid column api name in for the data table {1}".format(
-                        search_column, self.api_name))
+                    raise ValueError(f"{search_column} is not a valid column api name in for the data table {self.api_name}")
                 column = cells.get(search_column)
                 value = column.get("value", None)
                 if value is not None and value is search_value:
@@ -146,8 +127,7 @@ class Datatable(object):
         err_msg, return_value = None, None
         current_cells, formatted_cells = [], {}
 
-        uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(
-            self.incident_id, self.api_name, row_id)
+        uri = f"/incidents/{self.incident_id}/table_data/{self.api_name}/row_data/{row_id}?handle_format=names"
 
         def get_cell_value(cell_name, cells_to_update):
             """Function to get the new/old cell value"""
@@ -161,8 +141,7 @@ class Datatable(object):
         row = self.get_row(row_id)
 
         if row is None:
-            raise ValueError(
-                "Could not find row to update for row_id: '{0}'".format(row_id))
+            raise ValueError(f"Could not find row to update for row_id: '{row_id}'")
 
         for entry in row["cells"]:
             cell_name = entry
@@ -173,9 +152,7 @@ class Datatable(object):
         for cell in current_cells:
             formatted_cells[cell[0]] = {"value": cell[1]}
 
-        formatted_cells = {
-            "cells": formatted_cells
-        }
+        formatted_cells = {"cells": formatted_cells}
 
         try:
             return_value = self.res_client.put(uri, formatted_cells)
@@ -184,15 +161,13 @@ class Datatable(object):
             if err.message:
                 err_msg = err.message
 
-                if u"not found" in err_msg.lower():
-                    err_msg = "Data Table {0} could not be found".format(
-                        self.api_name)
+                if "not found" in err_msg.lower():
+                    err_msg = f"Data Table {self.api_name} could not be found"
 
                 return_value = {"error": err_msg}
 
             else:
-                raise ValueError(
-                    "Could not update row in {0}. Unknown Error".format(self.api_name))
+                raise ValueError(f"Could not update row in {self.api_name}. Unknown Error")
 
         return return_value
 
@@ -209,8 +184,7 @@ class Datatable(object):
 
         return_value = None
 
-        uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(
-            self.incident_id, self.api_name, row_id)
+        uri = f"/incidents/{self.incident_id}/table_data/{self.api_name}/row_data/{row_id}?handle_format=names"
 
         try:
             return_value = self.res_client.delete(uri)
@@ -220,8 +194,7 @@ class Datatable(object):
                 return_value = {"error": err}
 
             else:
-                raise ValueError(
-                    "Could not delete row in {0}. Unknown Error: {1}".format(self.api_name, err))
+                raise ValueError(f"Could not delete row in {self.api_name}. Unknown Error: {err}")
 
         return return_value
 
@@ -235,7 +208,7 @@ class Datatable(object):
         :type rows_ids: list, optional
         :param search_column: The name of a specific datatable column to search, defaults to None
         :type search_column: str, optional
-        :param search_value: The value to be searched , defaults to None
+        :param search_value: The value to be searched, defaults to None
         :type search_value: str, optional
         :param row_id: The ID of a given row to delete, defaults to None
         :type row_id: int, optional
@@ -256,8 +229,7 @@ class Datatable(object):
             for row in self.rows:
                 if row["id"] in rows_ids_input:
                     if row["id"] == row_id:
-                        LOG.warning(
-                            "Queuing delete of current row: %s", row_id)
+                        LOG.warning(f"Queuing delete of current row: {row_id}")
                         self.queue_delete(workflow_id, row_id)
                         queued_row_id = row_id
                     else:
@@ -268,11 +240,10 @@ class Datatable(object):
             for row in self.rows:
                 cells = row["cells"]
                 if search_column not in cells:
-                    raise ValueError("{0} is not a valid column api name in for the data table {1}".format(
-                        search_column, self.api_name))
+                    raise ValueError(f"{search_column} is not a valid column api name in for the data table {self.api_name}")
                 if "value" in cells[search_column] and cells[search_column]["value"] == search_value:
                     if row["id"] == row_id:
-                        LOG.info("Queuing delete of current row: %s", row_id)
+                        LOG.info(f"Queuing delete of current row: {row_id}")
                         self.queue_delete(workflow_id, row_id)
                         queued_row_id = row_id
                     else:
@@ -283,8 +254,7 @@ class Datatable(object):
             for row_id in rows_ids_list:
                 deleted_row = self.delete_row(row_id)
                 if "error" in deleted_row:
-                    LOG.error("Unable to remove row_id: %s. Error: %s",
-                              row_id, deleted_row['error'])
+                    LOG.error(f"Unable to remove row_id: {row_id}. Error: {deleted_row['error']}")
                     return_value.remove(row_id)
 
         if queued_row_id:
@@ -300,7 +270,7 @@ class Datatable(object):
         :return: row_id or None if error or datatype is not a datatable
         :rtype: int
         """
-        uri = "/workflow_instances/{}".format(workflow_instance_id)
+        uri = f"/workflow_instances/{workflow_instance_id}"
         try:
             response = self.res_client.get(uri)
 
@@ -312,7 +282,7 @@ class Datatable(object):
                     return response['object']['object_id']
 
         except Exception as err:
-            LOG.error("Error with url: %s %s", uri, str(err))
+            LOG.error(f"Error with url: {uri} {str(err)}")
 
     def get_dt_headers(self):
         """get_dt_headers Function that gets all the data and rows of a Data Table
@@ -322,25 +292,21 @@ class Datatable(object):
         :return: The fields for a datatable
         :rtype: list
         """
-        uri = "/types/{0}?handle_format=names".format(self.api_name)
+        uri = f"/types/{self.api_name}?handle_format=names"
 
         try:
             self.data = self.res_client.get(uri)
             return self.data["fields"]
         except Exception:
-            raise ValueError(
-                "Failed to get {0} Datatable".format(self.api_name))
+            raise ValueError(f"Failed to get {self.api_name} Datatable")
 
     def dt_add_rows(self, rows):
         """ Adds rows to datatable
             from uploaded CSV data """
 
-        uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(
-            self.incident_id, self.api_name)
+        uri = f"/incidents/{self.incident_id}/table_data/{self.api_name}/row_data?handle_format=names"
 
-        formatted_cells = {
-            "cells": rows
-        }
+        formatted_cells = {"cells": rows}
         try:
             return_value = self.res_client.post(uri, formatted_cells)
         except Exception as err:
@@ -357,10 +323,7 @@ class Datatable(object):
         :return: The objects types information
         :rtype: json
         """
-
-        uri = "/types/{}".format(obj_id)
-
-        return self.res_client.get(uri)
+        return self.res_client.get(f"/types/{obj_id}")
 
     def queue_delete(self, workflow_id, row_id):
         """queue_delete Queue the delete action for when the workflow completes
@@ -402,7 +365,7 @@ def get_function_input(inputs, input_name, optional=False):
     the_input = inputs.get(input_name)
 
     if the_input is None and optional is False:
-        err = "'{0}' is a mandatory function input".format(input_name)
+        err = f"'{input_name}' is a mandatory function input"
         raise ValueError(err)
 
     return the_input
@@ -479,10 +442,8 @@ def threaded_delete(datatable, workflow_id, row_id):
         # Perform the delete rows()
         result = datatable.delete_row(row_id)
         if 'error' in result:
-            LOG.error("Queued delete failed for row_id: %s. Error: %s",
-                      row_id, result['error'])
+            LOG.error(f"Queued delete failed for row_id: {row_id}. Error: {result['error']}")
         else:
-            LOG.debug("Queued delete succeeded for row_id: %s", row_id)
+            LOG.debug(f"Queued delete succeeded for row_id: {row_id}")
     else:
-        LOG.error("Unable to delete row_id: %s with workflow %s state: %s",
-                  row_id, workflow_id, wf.status)
+        LOG.error(f"Unable to delete row_id: {row_id} with workflow {workflow_id} state: {wf.status}")

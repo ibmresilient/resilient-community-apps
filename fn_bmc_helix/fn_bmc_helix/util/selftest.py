@@ -45,7 +45,7 @@ def selftest_function(opts):
             }
         return {
             "state": "failure",
-            "reason": "Unexpected response from BMC Helix: {}".format(status_code)
+            "reason": f"Unexpected response from BMC Helix: {status_code}"
         }
     except Exception as e:
         return {
