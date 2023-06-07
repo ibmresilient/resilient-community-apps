@@ -22,7 +22,7 @@
 - [Function - Data Table Utils: Get Rows](#function---data-table-utils-get-rows)
 - [Function - Data Table Utils: Update Row](#function---data-table-utils-update-row)
 - [Data Table - Example CSV Datatable](#data-table---example-csv-datatable)
-- [Rules](#rules)
+- [Playbooks](#Playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
