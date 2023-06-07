@@ -36,7 +36,7 @@
 - [Function - Post attachment to Slack](#function---post-attachment-to-slack)
 - [Function - Post message to Slack](#function---post-message-to-slack)
 - [Data Table - Slack Conversations](#data-table---slack-conversations)
-- [Rules](#rules)
+- [Playbooks](#Playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -486,51 +486,19 @@ slack_conversations_db
 
 
 
-## Rules
-| Rule Name | Object | Workflow Triggered |
+## Playbooks
+| Rule Name | Object | Status |
 | --------- | ------ | ------------------ |
-| Example: Archive Incident Slack Channel | incident | `archive_slack_channel` |
-| Example: Archive Task Slack Channel | task | `slack_example_archive_slack_channel__task` |
-| Example: Post Artifact Attachment to Slack | artifact | `example_post_attachment_to_slack__artifact` |
-| Example: Post Artifact to Slack | artifact | `slack_example_post_message_to_slack__artifact` |
-| Example: Post Incident / Task Attachment to Slack | attachment | `slack_example_post_attachment_to_slack` |
-| Example: Post Incident to Slack | incident | `create_slack_message` |
-| Example: Post Note to Slack | note | `create_slack_reply` |
-| Example: Post Task to Slack | task | `slack_example_post_message_to_slack__task` |
+| Example: Archive Incident Slack Channel | incident | `enabled` |
+| Example: Archive Task Slack Channel | task | `enabled` |
+| Example: Post Artifact Attachment to Slack | artifact | `enabled` |
+| Example: Post Artifact to Slack | artifact | `enabled` |
+| Example: Post Incident / Task Attachment to Slack | attachment | `enabled` |
+| Example: Post Incident to Slack | incident | `enabled` |
+| Example: Post Note to Slack | note | `enabled` |
+| Example: Post Task to Slack | task | `enabled` |
 
 ---
-
-## Template file
-{%- if is_msg_parent -%}
-    {{- number }} - {{ username }} POSTED ON {{ msg_time }}:{{ '\n' -}}
-    {%- if msg_pretext -%}
-        {{- msg_pretext }}{{ '\n' -}}
-    {%- endif -%}
-    {%- if msg_text -%}
-        {{- msg_text }}{{ '\n' -}}
-    {%- endif -%}
-    {%- if file_name -%}
-        {{- file_name }}{{ '\n' -}}
-    {%- endif -%}
-    {%- if file_permalink -%}
-        {{- file_permalink }}{{ '\n' -}}
-    {%- endif %}{{ '\n' -}}
-    {%- if reply_count and reply_count > 0 -%}
-        {{- reply_count }} REPLIES:{{ '\n' -}}
-    {% endif -%}
-{%- else -%}
-    {{- '\t' }}{{ number }} - {{ username }} POSTED A REPLY ON {{ msg_time }}:{{ '\n' -}}
-    {%- if msg_text -%}
-        {{- '\t' }}{{ msg_text }}{{ '\n' -}}
-    {%- endif -%}
-    {%- if file_name -%}
-        {{- '\t' }}{{ file_name }}{{ '\n' -}}
-    {%- endif -%}
-    {%- if file_permalink -%}
-        {{- '\t' }}{{ file_permalink }}{{ '\n' -}}
-    {% endif %}{{ '\n' -}}
-{%- endif -%}
-
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
