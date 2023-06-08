@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 """ This is a helper module for GET, UPDATE and DELETE
     Functions for a SOAR Data Table """
 
