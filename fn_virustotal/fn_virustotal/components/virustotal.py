@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -7,19 +7,10 @@ import logging
 import os
 import tempfile
 import time
-from fn_virustotal.lib.resilient_common import validateFields, get_input_entity, get_resilient_client
-from fn_virustotal.lib.errors import IntegrationError
-from virus_total_apis import PublicApi as VirusTotal
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon
-
-
-RC_NOT_FOUND = 0
-RC_READY     = 1
-RC_IN_QUEUE  = -2
-
-HTTP_OK = 200
-HTTP_RATE_LIMIT = 204
+from resilient_lib import IntegrationError, validate_fields
+from fn_virustotal.lib.resilient_common import get_input_entity, get_resilient_client
+from fn_virustotal.lib.vt_common import VirusTotalClient
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'virustotal"""
@@ -34,7 +25,7 @@ class FunctionComponent(ResilientComponent):
 
     def _init_virustotal(self):
         """ validate required fields for app.config """
-        validateFields(('api_token', 'polling_interval_sec', 'max_polling_wait_sec'), self.options)
+        validate_fields(('api_token', 'polling_interval_sec', 'max_polling_wait_sec'), self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -55,18 +46,19 @@ class FunctionComponent(ResilientComponent):
             file - this will start a new scan for the file and queue for a report later.
         """
         try:
-            validateFields(('incident_id', 'vt_type'), kwargs)  # required
+            validate_fields(('incident_id', 'vt_type'), kwargs)  # required
 
             # Init RequestsCommon with app.config options
-            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+            #rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
             # Create a VirusTotal instance with the API Token and any proxies gathered by RequestsCommon
-            vt = VirusTotal(self.options['api_token'], rc.get_proxies())
+            vt = VirusTotalClient(self.opts, self.options)
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
             artifact_id = kwargs.get("artifact_id")  # number
             attachment_id = kwargs.get("attachment_id")  # number
+            task_id = kwargs.get("task_id")  # number
             vt_type = kwargs.get("vt_type")  # text
             vt_data = kwargs.get("vt_data")  # text
 
@@ -74,6 +66,7 @@ class FunctionComponent(ResilientComponent):
             self.log.info("incident_id: %s", incident_id)
             self.log.info("artifact_id: %s", artifact_id)
             self.log.info("attachment_id: %s", attachment_id)
+            self.log.info("task_id: %s", task_id)
             self.log.info("vt_type: %s", vt_type)
             self.log.info("vt_data: %s", vt_data)
 
@@ -81,61 +74,72 @@ class FunctionComponent(ResilientComponent):
 
             # determine next steps based on the API call to make
             if vt_type.lower() == 'file':
-                entity = get_input_entity(get_resilient_client(self.resilient), incident_id, attachment_id, artifact_id)
+                entity = get_input_entity(get_resilient_client(self.resilient), incident_id, attachment_id, artifact_id, task_id)
                 # Create a temporary file to write the binary data to.
                 with tempfile.NamedTemporaryFile('w+b', delete=False) as temp_file_binary:
                     # Write binary data to a temporary file. Make sure to close the file here...this
                     # code must work on Windows and on Windows the file cannot be opened a second time
-                    # While open.  Floss will open the file again to read the data, so close before
-                    # calling Floss.
+                    # While open. 
                     temp_file_binary.write(entity["data"])
                     temp_file_binary.close()
-                    try:
-                        response = vt.scan_file(temp_file_binary.name, filename=entity["name"])
+                    try: 
+                        scan_response, code = vt.scan_file(temp_file_binary.name, filename=entity["name"])
                     except Exception as err:
                         raise err
                     finally:
                         os.unlink(temp_file_binary.name)
 
-                file_result = self.return_response(response, vt.get_file_report, time.time())
+                if code != "success":
+                    raise IntegrationError("VirusTotal file scan error: {0}".format(code))
+                
+                file_result, status = vt.wait_for_scan_to_complete(scan_response, time.time())
 
+                if status != "completed":
+                    raise IntegrationError("VirusTotal file scan note complete: {0}".format(status))
+                
                 ## was a sha-256 returned? try an existing report first
-                if file_result.get("sha256"):
-                    response = vt.get_file_report(file_result.get("sha256"))
-                    report_result = self.return_response(response, None, time.time())
+                sha256 = vt.get_sha256_from_file_result(file_result)
+                if sha256:
+                    report_result, code = vt.get_file_report(sha256)
 
-                    if report_result.get("response_code") and report_result.get("response_code") == 1:
-                        result = report_result
+                    if report_result.get("data", None) and code == "success":
+                        response = report_result
                     else:
-                        result = file_result
+                        response = file_result
+                else:
+                    response = file_result
 
             elif vt_type.lower() == 'url':
                 # attempt to see if a report already exists
-                response = vt.get_url_report(vt_data)
-                result = self.return_response(response, None, time.time())
+                response, code = vt.get_url_report(vt_data)
 
                 # check if result is not found, meaning no report exists
-                if result['response_code'] == RC_NOT_FOUND:
-                    response = vt.scan_url(vt_data)
-                    result = self.return_response(response, vt.get_url_report, time.time())
+                if code == "NotFoundError":
+                    scan_response, code = vt.scan_url(vt_data)
+
+                    if scan_response.get("data", None):
+                        response, status = vt.wait_for_scan_to_complete(scan_response, time.time())
+                        if status != "completed":
+                            raise IntegrationError("VirusTotal URL scan not complete: {0}".format(status))
+
+                elif code != "success":
+                    raise IntegrationError("Error getting VirusTotal URL scan report: {0}".format(code))
 
             elif vt_type.lower() == 'ip':
-                response = vt.get_ip_report(vt_data)
-                result = self.return_response(response, None, time.time())
+                response, code = vt.get_ip_report(vt_data)
 
             elif vt_type.lower() == 'domain':
-                response = vt.get_domain_report(vt_data)
-                result = self.return_response(response, None, time.time())
+                response, code  = vt.get_domain_report(vt_data)
 
             elif vt_type.lower() == 'hash':
-                response = vt.get_file_report(vt_data)
-                result = self.return_response(response, None, time.time())
+                response, code = vt.get_file_report(vt_data)
 
             else:
-                raise ValueError("Unknown type field: {}. Check workflow pre-processor script.".format(vt_type))
+                raise ValueError("Unknown type field: {}. Check pre-processor script.".format(vt_type))
 
             results = {
-                "scan": result
+                "scan": response,
+                "code": code
             }
 
             self.log.debug("scan: {}".format(results))
@@ -144,54 +148,3 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
-
-
-    def return_response(self, response, callback, start_time):
-        """
-        parse the response and return the json results if successful
-        :param resp:
-        :return:
-        """
-        if response and type(response) is not dict:
-            raise IntegrationError('Invalid response: {}'.format(response))
-
-        status = response.get('response_code', -1)
-
-        if status == HTTP_RATE_LIMIT:
-            raise IntegrationError('API rate limit exceeded')
-
-        self.log.info(response)
-
-        if status != HTTP_OK:
-            raise IntegrationError('Invalid response status: {}'.format(status))
-
-        return self.check_results(response['results'], callback, start_time)
-
-    def check_results(self, results, callback, start_time):
-        '''
-        continue checking for the scans to complete
-        :param results: possibly interim results
-        :return: final results of scan
-        '''
-        code = results.get('response_code', None)
-        scan_id = results.get('scan_id', None)
-        if code == RC_READY or code == RC_NOT_FOUND:
-            return results
-
-        elif code == RC_IN_QUEUE:
-            curr_time = time.time()
-            if int(curr_time - start_time)/1000 >= int(self.options.get('max_polling_wait_sec')):
-                raise IntegrationError("exceeded max wait time: {}".format(self.options.get('max_polling_wait_sec')))
-
-            if callback:
-                time.sleep(int(self.options['polling_interval_sec']))
-                # start again to review results
-                response = callback(id)
-                results = self.return_response(response, callback, start_time)
-            else:
-                raise IntegrationError("no callback function specified with response code: {} scan id {}".format(code, scan_id))
-        else:
-            raise IntegrationError("unexpected response code: {} for scan_id {}".format(code, scan_id))
-
-        self.log.debug(results)
-        return results
