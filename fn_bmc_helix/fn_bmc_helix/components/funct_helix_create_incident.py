@@ -77,7 +77,7 @@ class FunctionComponent(ResilientComponent):
         except IntegrationError as e:
             LOG.error(
                 "POST request to BMC Helix resulted in an error. Ensure all required BMC Helix fields were provided.")
-            return rp.done(False, {"error": e.value}, reason="Request resulted in an error from the BMX Helix API.")
+            return rp.done(False, {"error": e.value}, reason="Request resulted in an error from the BMC Helix API.")
 
         # 201 is returned for resource created
         if status_code != 201:
