@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [u"dt_utils_test_data_table"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [u"example_create_csv_datatable_pb", u"example_data_table_utils_add_row_pb", u"example_data_table_utils_add_row_to_datatable_pb", u"example_data_table_utils_clear_datatable_pb", u"example_data_table_utils_delete_row_from_datatable_pb", u"example_data_table_utils_delete_row_pb", u"example_data_table_utils_delete_rows_from_datatable_pb", u"example_data_table_utils_delete_rows_pb", u"example_data_table_utils_get_all_data_table_rows_pb", u"example_data_table_utils_get_current_row_pb", u"example_data_table_utils_get_row_pb", u"example_data_table_utils_get_rows_pb", u"example_data_table_utils_update_row_pb", u"example_data_utils_update_row_pb"]
     }
 
 
@@ -55,6 +55,21 @@ def customization_data(client=None):
         - dt_utils_get_row
         - dt_utils_get_rows
         - dt_utils_update_row
+    - Playbooks:
+        - example_create_csv_datatable_pb
+        - example_data_table_utils_add_row_pb
+        - example_data_table_utils_add_row_to_datatable_pb
+        - example_data_table_utils_clear_datatable_pb
+        - example_data_table_utils_delete_row_from_datatable_pb
+        - example_data_table_utils_delete_row_pb
+        - example_data_table_utils_delete_rows_from_datatable_pb
+        - example_data_table_utils_delete_rows_pb
+        - example_data_table_utils_get_all_data_table_rows_pb
+        - example_data_table_utils_get_current_row_pb
+        - example_data_table_utils_get_row_pb
+        - example_data_table_utils_get_rows_pb
+        - example_data_table_utils_update_row_pb
+        - example_data_utils_update_row_pb
     - Data Tables:
         - dt_utils_test_data_table
     """
