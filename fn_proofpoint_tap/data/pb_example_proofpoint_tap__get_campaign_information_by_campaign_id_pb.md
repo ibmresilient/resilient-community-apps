@@ -4,31 +4,61 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Example: Proofpoint TAP - Get Campaign
+# Playbook - Example: Proofpoint TAP - Get Campaign Information by Campaign ID (PB)
 
+### API Name
+`example_proofpoint_tap__get_campaign_information_by_campaign_id_pb`
+
+### Status
+`enabled`
+
+### Activation Type
+`manual`
+
+### Object Type
+`artifact`
+
+### Description
+Imports detailed information for given campaign identifier, including description, the actor, malware family, techniques and the threat variants associated with the campaign. Results are saved in a note and data table.
+
+
+---
 ## Function - Proofpoint TAP Get Campaign
 
 ### API Name
 `fn_pp_campaign`
 
 ### Output Name
-``
+`campaign_results`
 
 ### Message Destination
 `fn_proofpoint_tap`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.proofpoint_campaign_id = artifact.value
 ```
 
-### Post-Processing Script
+---
+
+## Local script - Proofpoint TAP: Write Campaign results to data table and note
+
+### Description
+Write the results of Get Campaign to the Campaign Object Details data table and a note.
+
+### Script Type
+`Local script`
+
+### Objet Type
+`artifact`
+
+### Script Content
 ```python
-from java.util import Date
+from datetime import datetime
 
 def add_row_to_campaign_object_dt(object_type, object_id, object_name=None, threat=None, type_of_threat=None, subtype_of_threat=None, threat_time=None):
   object_dt = incident.addRow("proofpoint_tap_campaign_object_dt")
-  object_dt.proofpoint_tap_object_timestamp = Date()
+  object_dt.proofpoint_tap_object_timestamp = datetime.now()
   object_dt.proofpoint_tap_campaign_id = artifact.value
   object_dt.proofpoint_tap_object_type = object_type
   object_dt.proofpoint_tap_object_id = object_id
@@ -41,6 +71,8 @@ def add_row_to_campaign_object_dt(object_type, object_id, object_name=None, thre
 ########################
 # Mainline starts here #
 ########################
+
+results = playbook.functions.results.campaign_results
 
 # results and results.data are both a Dictionary
 if results is not None:
@@ -86,4 +118,3 @@ if results is not None:
 ```
 
 ---
-

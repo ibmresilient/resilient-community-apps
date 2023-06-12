@@ -4,20 +4,37 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Example: Proofpoint TAP - Aggregate Forensics for Campaign
+# Playbook - Example: Proofpoint TAP - Aggregate Malicious Forensics for Entire Campaign Associated with Threat ID (PB)
 
+### API Name
+`example_proofpoint_tap__aggregate_malicious_forensics_for_entire_campaign_associated_with_threat_id_pb`
+
+### Status
+`enabled`
+
+### Activation Type
+`manual`
+
+### Object Type
+`artifact`
+
+### Description
+Imports additional forensic information based on the given threat identifier. If the threat has been associated with a campaign, it returns aggregate forensics for the entire campaign. Otherwise, it returns aggregate forensics for the individual threat. The returned forensics are filtered to include malicious results only. Results are saved in a note and attachment.
+
+
+---
 ## Function - Proofpoint TAP Get Forensics
 
 ### API Name
 `fn_pp_forensics`
 
 ### Output Name
-``
+`forensics_results`
 
 ### Message Destination
 `fn_proofpoint_tap`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.incident_id = incident.id
 inputs.proofpoint_threat_id = artifact.value
@@ -25,9 +42,22 @@ inputs.proofpoint_aggregate_flag = True
 inputs.proofpoint_malicious_flag = True
 ```
 
-### Post-Processing Script
+---
+
+## Local script - ProofPoint TAP: Write Aggregate Malicious Forensics for Entire Campaign Associated with Threat ID Re
+
+### Description
+Write the results from Aggregate Malicious Forensics for Entire Campaign Associated with Threat ID Results to a note
+
+### Script Type
+`Local script`
+
+### Objet Type
+`artifact`
+
+### Script Content
 ```python
-from java.util import Date
+results = playbook.functions.results.forensics_results
 
 # results is a Dictionary and reports is a List
 if results is not None:
@@ -56,4 +86,3 @@ if results is not None:
 ```
 
 ---
-

@@ -4,28 +4,58 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Example: Proofpoint TAP - Aggregate Forensics by Campaign ID
+# Playbook - Example: Proofpoint TAP - Aggregate Forensics by Campaign ID (PB)
 
+### API Name
+`example_proofpoint_tap__aggregate_forensics_by_campaign_id_pb`
+
+### Status
+`enabled`
+
+### Activation Type
+`manual`
+
+### Object Type
+`artifact`
+
+### Description
+Returns aggregate forensics for an entire campaign based on the given campaign identifier. Results are saved in a note and attachment.
+
+
+---
 ## Function - Proofpoint TAP Get Forensics
 
 ### API Name
 `fn_pp_forensics`
 
 ### Output Name
-`None`
+`forensics_results`
 
 ### Message Destination
 `fn_proofpoint_tap`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.incident_id = incident.id
 inputs.proofpoint_campaign_id = artifact.value
 ```
 
-### Post-Processing Script
+---
+
+## Local script - ProofPoint TAP: Write Aggregate Forensics by Campaign ID Results 
+
+### Description
+Write the results of Aggregate Forensics by Campaign ID Results to a note.
+
+### Script Type
+`Local script`
+
+### Objet Type
+`artifact`
+
+### Script Content
 ```python
-from java.util import Date
+results = playbook.functions.results.forensics_results
 
 # results is a Dictionary and reports is a List
 if results is not None:
@@ -54,4 +84,3 @@ if results is not None:
 ```
 
 ---
-
