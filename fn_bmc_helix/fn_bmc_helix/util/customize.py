@@ -28,10 +28,10 @@ def codegen_reload_data():
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"helix_linked_incidents_reference_table"],
+        "datatables": [u"bmc_helix_incidents", u"helix_linked_incidents_reference_table"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [u"bmc_helix_create_incident_from_task"]
     }
 
 
@@ -51,10 +51,13 @@ def customization_data(client=None):
     - Workflows:
         - close_a_helix_incident_from_task
         - create_a_helix_incident_from_task
+    - Playbooks:
+        - bmc_helix_create_incident_from_task
     - Rules:
         - Helix Close Incident from Task
         - Helix Create Incident from Task
     - Data Tables:
+        - bmc_helix_incidents
         - helix_linked_incidents_reference_table
     """
 

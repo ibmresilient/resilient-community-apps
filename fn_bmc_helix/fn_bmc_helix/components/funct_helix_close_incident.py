@@ -8,7 +8,7 @@ from datetime import datetime
 from logging import getLogger
 from fn_bmc_helix.lib.datatable.data_table import Datatable
 from fn_bmc_helix.lib.helix.HelixAPIClient import HelixClient
-from fn_bmc_helix.lib.helix.HelixConstants import PACKAGE_NAME, TABLE_NAME, RETURN_FIELDS
+from fn_bmc_helix.lib.helix.HelixConstants import PACKAGE_NAME, TABLE_NAME
 from resilient_lib import ResultPayload, RequestsCommon, validate_fields, IntegrationError
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
@@ -30,8 +30,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get(PACKAGE_NAME, {})
         # Override MAX_ROWS if provided in app.config
-        self.max_rows = int(self.options.get(
-            "max_datatable_rows", MAX_ROWS))
+        self.max_rows = int(self.options.get("max_datatable_rows", MAX_ROWS))
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -57,7 +56,6 @@ class FunctionComponent(ResilientComponent):
         :return: The results of the method
         :rtype: ResultPayload
         """
-
         skipped, closed = [], []
 
         rows = self.get_dt_rows(incident_id, task)

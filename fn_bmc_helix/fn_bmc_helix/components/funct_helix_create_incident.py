@@ -72,8 +72,8 @@ class FunctionComponent(ResilientComponent):
         """
         # POST an incident to BMC Helix
         try:
-            helix_incident, status_code = helix_client.create_form_entry(
-                FORM_NAME, values, return_values=RETURN_FIELDS)
+            # helix_incident, status_code = helix_client.create_form_entry(FORM_NAME, values, return_values=RETURN_FIELDS)
+            helix_incident, status_code = helix_client.create_form_entry(FORM_NAME, values)
         except IntegrationError as e:
             LOG.error(
                 "POST request to BMC Helix resulted in an error. Ensure all required BMC Helix fields were provided.")

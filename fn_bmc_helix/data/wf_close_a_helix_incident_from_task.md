@@ -19,18 +19,6 @@
 
 ### Pre-Processing Script
 ```python
-# Python 2 compatibility for CP4S 1.6
-def mk_str(value, quotes=u'"'):
-    if value is None:
-        return "null"
-    else:
-        esc_value = value.replace(u'"', u'\\"')
-        if quotes:
-            return u'{0}{1}{0}'.format(quotes, esc_value)
-        else:
-            return esc_value
-
-
 inputs.task_id = task.id
 inputs.incident_id = incident.id
 
@@ -40,7 +28,6 @@ inputs.incident_id = incident.id
 payload = """{"Status_Reason": "foo"}"""
 
 inputs.helix_payload = payload if payload else ''
-
 ```
 
 ### Post-Processing Script
@@ -48,15 +35,15 @@ inputs.helix_payload = payload if payload else ''
 noteText = "<h5>Helix Close Incident:</h5>"
 
 if results["success"]:
-    if results["content"]["closed"]:
-      noteText += "<p>The following incidents were matched in Helix and successfully closed:</p>"
-      for item in results["content"]["closed"]:
-        noteText += "<p>    Incident Number {0}, Request ID: {1}</p>".format(item["values"]["Incident Number"], item["values"]["Request ID"])
-    if results["content"]["skipped"]:
-      noteText += "<p>The following incidents were not able to be closed. Common reasons include that the incident has been previously closed, " \
-      "the incident has been deleted, or the payload sent to Helix was incomplete according to the requirements of your specific system:</p>"
-      for item in results["content"]["skipped"]:
-        noteText += "<p>    Incident Number {0}, Request ID: {1}</p>".format(item["values"]["Incident Number"], item["values"]["Request ID"])
+  if results["content"]["closed"]:
+    noteText += "<p>The following incidents were matched in Helix and successfully closed:</p>"
+    for item in results["content"]["closed"]:
+      noteText += "<p>    Incident Number {0}, Request ID: {1}</p>".format(item["values"]["Incident Number"], item["values"]["Request ID"])
+  if results["content"]["skipped"]:
+    noteText += "<p>The following incidents were not able to be closed. Common reasons include that the incident has been previously closed, " \
+    "the incident has been deleted, or the payload sent to Helix was incomplete according to the requirements of your specific system:</p>"
+    for item in results["content"]["skipped"]:
+      noteText += "<p>    Incident Number {0}, Request ID: {1}</p>".format(item["values"]["Incident Number"], item["values"]["Request ID"])
 elif not results["content"]["closed"] and not results["content"]["skipped"]:
   # no sync to helix, just exit
   noteText = None
@@ -66,7 +53,6 @@ else:
 if noteText:
   richText = helper.createRichText(noteText)
   incident.addNote(richText)
-
 ```
 
 ---

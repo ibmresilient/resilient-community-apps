@@ -66,7 +66,7 @@ class Datatable(object):
                     raise ValueError(f"{search_column} is not a valid column api name for the data table: {self.api_name}")
                 column = row["cells"].get(search_column)
                 value = column.get("value", None)
-                if value is not None and value is search_value:
+                if value and value == search_value:
                     rows_to_return.append(row)
 
                 if sort_by:
@@ -108,7 +108,7 @@ class Datatable(object):
                     raise ValueError(f"{search_column} is not a valid column api name in for the data table {self.api_name}")
                 column = cells.get(search_column)
                 value = column.get("value", None)
-                if value is not None and value is search_value:
+                if value and value == search_value:
                     return row
 
     def update_row(self, row_id, cells_to_update):
@@ -140,7 +140,7 @@ class Datatable(object):
         # Get the row we want to update
         row = self.get_row(row_id)
 
-        if row is None:
+        if row == None:
             raise ValueError(f"Could not find row to update for row_id: '{row_id}'")
 
         for entry in row["cells"]:
@@ -364,7 +364,7 @@ def get_function_input(inputs, input_name, optional=False):
     """
     the_input = inputs.get(input_name)
 
-    if the_input is None and optional is False:
+    if the_input == None and optional == False:
         err = f"'{input_name}' is a mandatory function input"
         raise ValueError(err)
 
