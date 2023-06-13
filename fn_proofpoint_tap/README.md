@@ -51,11 +51,11 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 6/2023 | Playbook support |
-| 1.0.3 | | Fix for event filtering |
-| 1.0.2 | | Fix for Poller |
-| 1.0.1 | | Bugfix |
-| 1.0.0 | 2019 | Initial release |
+| 1.1.0 | 6/2023 | Playbook support; custom filtering on polling /siem endpoint |
+| 1.0.3 | 8/2020 | Fix for event filtering |
+| 1.0.2 | 5/2020 | Fix for Poller |
+| 1.0.1 | 4/2020 | Bugfix |
+| 1.0.0 | 12/2019 | Initial release |
 ---
 
 ## Overview
@@ -65,7 +65,7 @@
 -->
 Proofpoint Targeted Attack Protection (TAP) helps you stay ahead of attackers with an innovative approach that detects, analyzes and blocks advanced threats before they reach your inbox. This includes ransomware and other advanced email threats delivered through malicious attachments and URLs.
 
-**Resilient Circuits Components for 'fn_proofpoint_tap'**
+
 
  ![screenshot: main](./doc/screenshots/main.png)
 
@@ -76,7 +76,7 @@ Proofpoint Targeted Attack Protection (TAP) helps you stay ahead of attackers wi
 
 The Proofpoint TAP function package provides the following features:
 
-* Poll detailed information from several types of TAP events in a SIEM-compatible, vendor-neutral format. This includes Blocked or permitted clicks to threats recognized by URL Defense and Blocked, and delivered messages containing threats recognized by URL Defense or Attachment Defense.
+* Poll detailed information from several types of TAP events in a SIEM-compatible, vendor-neutral format. This includes Blocked or permitted clicks to threats recognized by URL Defense and Blocked, and delivered messages containing threats recognized by URL Defense or Attachment Defense. Create SOAR cases from polled threat data.
 * Get detailed forensic evidences about individual threats or campaigns observed in their environment. These evidences could be used as indicators of compromise to confirm infection on a host, as supplementary data to enrich and correlate against other security intelligence sources, or to orchestrate updates to security endpoints to prevent exposure and infection.
 * Pull specific details about campaigns, including their description, the actor, malware family, and techniques associated with the campaign and the threat variants which have been associated with the campaign.
 

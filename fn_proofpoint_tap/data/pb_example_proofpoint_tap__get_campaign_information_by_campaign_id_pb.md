@@ -71,8 +71,8 @@ def add_row_to_campaign_object_dt(object_type, object_id, object_name=None, thre
 ########################
 # Mainline starts here #
 ########################
-
 results = playbook.functions.results.campaign_results
+MAX_DATA_TABLE_ROWS = 25
 
 # results and results.data are both a Dictionary
 if results is not None:
@@ -92,20 +92,27 @@ if results is not None:
     <br>Campaign objects are saved in the Proofpoint TAP Campaign Object Details Data Table.""".format(noteText, artifact.value, campaign_name, campaign_description, campaign_start_date)
     
     campaign_members_list = data.get("campaignMembers", None)
-    map(lambda member: add_row_to_campaign_object_dt("CampaignMembers", member.get("id"), threat=member.get("threat"), \
-      type_of_threat=member.get("type"), subtype_of_threat=member.get("subType"), threat_time=member.get("threatTime")), campaign_members_list)
+    if len(campaign_members_list) > MAX_DATA_TABLE_ROWS:
+      noteText = noteText + "<br>Too many campaignMembers found to add to the Campaign Object data table {0}<br>".format(len(campaign_members_list))
+    else:
+      for member in campaign_members_list:
+        add_row_to_campaign_object_dt("CampaignMembers", member.get("id", None), threat=member.get("threat", None), type_of_threat=member.get("type", None), subtype_of_threat=member.get("subType", None), threat_time=member.get("threatTime", None))
     
     families_list = data.get("families", [])
-    map(lambda family: add_row_to_campaign_object_dt("CampaignFamily", family.get("id"), family.get("name")), families_list)
+    for family in families_list:
+      add_row_to_campaign_object_dt("CampaignFamily", family.get("id"), family.get("name"))
     
     actors_list = data.get("actors", [])
-    map(lambda actor: add_row_to_campaign_object_dt("Actor", actor.get("id"), object_name=actor.get("name")), actors_list)
+    for actor in actors_list:
+      add_row_to_campaign_object_dt("Actor", actor.get("id"), object_name=actor.get("name"))
     
     malware_list = data.get("malware", [])
-    map(lambda malware: add_row_to_campaign_object_dt("Malware", malware.get("id"), object_name=malware.get("name")), malware_list)
+    for malware in malware_list:
+      add_row_to_campaign_object_dt("Malware", malware.get("id"), object_name=malware.get("name"))
     
     techniques_list = data.get("techniques", [])
-    map(lambda technique: add_row_to_campaign_object_dt("Technique", technique.get("id"), object_name=technique.get("name")), techniques_list)
+    for technique in techniques_list:
+      add_row_to_campaign_object_dt("Technique", technique.get("id"), object_name=technique.get("name"))
 
   elif results.get("success") is False and results.get("note_err_text", None) is not None:
     noteText = u"""{} 
