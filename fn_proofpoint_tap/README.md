@@ -51,12 +51,34 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 6/2023 | Playbook support; custom filtering on polling /siem endpoint |
+| 1.1.0 | 6/2023 | Playbook support; Add siem_event_types app.config parameter to query threats using different TAP /siem endpoints |
 | 1.0.3 | 8/2020 | Fix for event filtering |
 | 1.0.2 | 5/2020 | Fix for Poller |
 | 1.0.1 | 4/2020 | Bugfix |
 | 1.0.0 | 12/2019 | Initial release |
----
+
+### 1.1 Changes
+## Playbooks
+In v1.1, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow. 
+
+If upgrading from a previous release, notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows. 
+But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes. 
+
+## User specified SIEM endpoints
+A new app.config setting `siem_event_types` is provided to allow the user to specify which Proofpoint /siem endpoints to query when converting TAP threats into SOAR incident/cases.  The parameter `siem_event_types` is a comma-separated list with the following possible values:
+* clicks_blocked
+* messages_blocked
+* messages_delivered
+* siem_issues
+* siem_all
+
+If the `siem_event_types` parameter is not specified, the default behavior is to use the /siem/all endpoint (siem_all), which is the endpoint used in versions of the app prior to 1.1.0.
+
+See the Proofpoint documentation for more information on the SIEM API: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/SIEM_API
 
 ## Overview
 <!--
@@ -132,7 +154,7 @@ The app **doest** support a proxy server.
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient-lib
+
 * resilient_circuits>=49.0.4423
 
 ### Development Version
@@ -142,30 +164,13 @@ This app has been implemented using:
 | ------------ | --------------- | ------- | ----------- |
 | Proofpoint TAP | N/A | https://tap-api-v2.proofpoint.com/v2 | v2 |
 
-#### Prerequisites
-<!--
-List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
--->
-* Prereq A <!-- ::CHANGE_ME:: -->
-* Prereq B <!-- ::CHANGE_ME:: -->
-* Prereq C <!-- ::CHANGE_ME:: -->
+
 
 #### Configuration
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-* Config A <!-- ::CHANGE_ME:: -->
-* Config B <!-- ::CHANGE_ME:: -->
-* Config C <!-- ::CHANGE_ME:: -->
-
-#### Permissions
-<!--
-List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
--->
-* Permission A <!-- ::CHANGE_ME:: -->
-* Permission B <!-- ::CHANGE_ME:: -->
-* Permission C <!-- ::CHANGE_ME:: -->
-
+* Proofpoint account with a username and password or an API Key and secret which is used to authenticate with the Proofpoint TAP REST API
 
 ---
 
@@ -181,14 +186,15 @@ The following table provides the settings you need to configure the app. These s
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **base_url** | Yes | `https://tap-api-v2.proofpoint.com/v2` | *Base URL for Proofpoint TAP REST API calls*  |
-| **cafile** | Yes | `` | *Certificate file if required by Proofpoint* |
-| **forensics_template** | Yes | `` | *inja template to override default forensic format* |
+| **cafile** | No | `` | *Certificate file if required by Proofpoint* |
+| **forensics_template** | No | `` | *Jinja template to override default forensic format* |
 | **password** | Yes | `xxxx` | *Credentials used to authenticate to Proofpoint TAP: password or API secret* |
 | **polling_interval** | Yes | `10` | *Time interval, in minutes, to check for new events. Enter 0 to disable*  |
-| **score_threshold** | Yes | `50` | *Classification for the type of event to import based on the respective threat score* |
-| **startup_interval** | Yes | `10` | *Time interval, in minutes, to check for previous events at startup. Maximum is 60* |
-| **threat_template** | Yes | `` | *Jinja template to override default threat description format* |
-| **type_filter** | Yes | `malware, phish, spam, impostor, all` | *Filter used to determine which comma-separated list of types of events to import into the Resilient platform.* |
+| **score_threshold** | No | `50` | *Classification for the type of event to import based on the respective threat score* |
+| **siem_event_types** | No | `clicks_blocked, messages_blocked, messages_delivered, siem_issues, siem_all` | *Comma-separated list of Proofpoint TAP SIEM endpoints called to import threats into the SOAR platform* |
+| **startup_interval** | No | `10` | *Time interval, in minutes, to check for previous events at startup. Maximum is 60* |
+| **threat_template** | No | `` | *Jinja template to override default threat description format* |
+| **type_filter** | No | `malware, phish, spam, impostor, all` | *Filter used to determine which comma-separated list of types of events to import into the SOAR platform* |
 | **username** | Yes | `12345678-abcd-abe1-0123-e1234567890` | *Credentials used to authenticate to Proofpoint TAP: username or API key* |
 
 ### Custom Layouts
@@ -309,7 +315,7 @@ results = {
 <p>
 
 ```python
-None
+inputs.proofpoint_campaign_id = artifact.value
 ```
 
 </p>
@@ -319,7 +325,74 @@ None
 <p>
 
 ```python
-None
+from datetime import datetime
+
+def add_row_to_campaign_object_dt(object_type, object_id, object_name=None, threat=None, type_of_threat=None, subtype_of_threat=None, threat_time=None):
+  object_dt = incident.addRow("proofpoint_tap_campaign_object_dt")
+  object_dt.proofpoint_tap_object_timestamp = datetime.now()
+  object_dt.proofpoint_tap_campaign_id = artifact.value
+  object_dt.proofpoint_tap_object_type = object_type
+  object_dt.proofpoint_tap_object_id = object_id
+  object_dt.proofpoint_tap_object_name = object_name
+  object_dt.proofpoint_tap_object_threat = threat
+  object_dt.proofpoint_tap_object_type_of_threat = type_of_threat
+  object_dt.proofpoint_tap_object_subtype_of_threat = subtype_of_threat
+  object_dt.proofpoint_tap_object_threat_time = threat_time
+  
+########################
+# Mainline starts here #
+########################
+results = playbook.functions.results.campaign_results
+MAX_DATA_TABLE_ROWS = 25
+
+# results and results.data are both a Dictionary
+if results is not None:
+  noteText = "<b>Proofpoint TAP - Get Campaign Information by Campaign ID:</b>"
+  
+  if results.get("success") is True and results.get("data", None) is not None:
+    data = results.get("data")
+    campaign_name = data.get("name", None)
+    campaign_description = data.get("description", None)
+    campaign_start_date = data.get("startDate", None)
+    
+    noteText = u"""{}<br>Campaign was found:
+    <br>- Campaign ID '{}'
+    <br>- Name '{}'
+    <br>- Description '{}'
+    <br>- Campaign's first threat variants were first observed on '{}'
+    <br>Campaign objects are saved in the Proofpoint TAP Campaign Object Details Data Table.""".format(noteText, artifact.value, campaign_name, campaign_description, campaign_start_date)
+    
+    campaign_members_list = data.get("campaignMembers", None)
+    if len(campaign_members_list) > MAX_DATA_TABLE_ROWS:
+      noteText = noteText + "<br>Too many campaignMembers found to add to the Campaign Object data table {0}<br>".format(len(campaign_members_list))
+    else:
+      for member in campaign_members_list:
+        add_row_to_campaign_object_dt("CampaignMembers", member.get("id", None), threat=member.get("threat", None), type_of_threat=member.get("type", None), subtype_of_threat=member.get("subType", None), threat_time=member.get("threatTime", None))
+    
+    families_list = data.get("families", [])
+    for family in families_list:
+      add_row_to_campaign_object_dt("CampaignFamily", family.get("id"), family.get("name"))
+    
+    actors_list = data.get("actors", [])
+    for actor in actors_list:
+      add_row_to_campaign_object_dt("Actor", actor.get("id"), object_name=actor.get("name"))
+    
+    malware_list = data.get("malware", [])
+    for malware in malware_list:
+      add_row_to_campaign_object_dt("Malware", malware.get("id"), object_name=malware.get("name"))
+    
+    techniques_list = data.get("techniques", [])
+    for technique in techniques_list:
+      add_row_to_campaign_object_dt("Technique", technique.get("id"), object_name=technique.get("name"))
+
+  elif results.get("success") is False and results.get("note_err_text", None) is not None:
+    noteText = u"""{} 
+    <br>No Campaign information found for campaign ID '{}'. 
+    <br>Error: {}.""".format(noteText, artifact.value, results.get("note_err_text"))
+  else:
+    noteText = u"""{} <br>No Campaign information found for campaign ID '{}'.""".format(noteText, artifact.value)
+  
+  incident.addNote(helper.createRichText(noteText))
 ```
 
 </p>

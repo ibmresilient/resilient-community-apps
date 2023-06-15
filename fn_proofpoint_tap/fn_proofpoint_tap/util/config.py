@@ -10,7 +10,7 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_proofpoint_tap]
-# Required - Base URL used to make Proofpoint TAP REST API calls
+# Required - URL used to make Proofpoint TAP REST API calls
 base_url=https://tap-api-v2.proofpoint.com/v2
 
 # Required - Credentials used to authenticate to Proofpoint TAP.
@@ -26,6 +26,18 @@ polling_interval=
 # Optional - How long, in minutes (max 60) to check for previous events at startup
 # No entry will use time span equivalent to polling interval
 startup_interval=
+
+# Optional - SIEM event type filtering
+# Specify the following SIEM event types in a comma separated list:
+#    clicks_blocked
+#    messages_blocked
+#    messages_delivered
+#    siem_issues
+#    siem_all
+# For each event type listed, the poller will call the corresponding
+# /siem endpoint to query for those events to convert to an incident/case in SOAR.
+# If no event types are specified, the poller defaults to siem_all
+siem_event_types=
 
 # Optional filtering - comma separated list of types of events to import into Resilient 
 # Options:  malware, phish, spam, impostor, all

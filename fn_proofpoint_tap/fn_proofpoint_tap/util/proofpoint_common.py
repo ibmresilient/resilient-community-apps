@@ -22,22 +22,45 @@ except ImportError:
 
 log = logging.getLogger(__name__)
 PROOFPOINT_TAP_404_ERROR = "404 Client Error"
+CLICKS_BLOCKED_URI = "{0}/siem/clicks/blocked?format=JSON"
+MESSAGES_BLOCKED_URI = "{0}/siem/clicks/blocked?format=JSON"
+MESSAGES_DELIVERED_URI = "{0}/siem/messages/delivered?format=JSON"
+SIEM_ISSUES = "{0}/siem/issues?format=JSON"
+SIEM_ALL = "{0}/siem/all?format=JSON"
 
+def get_threat_event_url(base_url, event_type):
+    """ Return the SIEM endpoint to call given an event type
+    """
+    url_options = {
+        "clicks_blocked": CLICKS_BLOCKED_URI.format(base_url),
+        "messages_blocked": MESSAGES_BLOCKED_URI.format(base_url),
+        "messages_delivered": MESSAGES_DELIVERED_URI.format(base_url),
+        "siem_issues": SIEM_ISSUES.format(base_url),
+        "siem_all": SIEM_ALL.format(base_url)
+    }
+    url = url_options.get(event_type, None)
 
-def get_threat_list(rc, options, lastupdate, bundle):
+    if not url:
+        raise IntegrationError("Unknown event type: '{}'".format(event_type))
+    return url
+
+def get_threat_list(rc, options, lastupdate, bundle, event_type):
     """
     Get threat list.
     :param rc:
     :param options:
     :param lastupdate:
     :param bundle:
+    :param event_type:
     :return:
     """
     base_url = options['base_url']
     username = options['username']
     password = options['password']
     basic_auth = HTTPBasicAuth(username, password)
-    url = '{0}/siem/all?format=JSON'.format(base_url)  # /v2/siem/all Fetch events for all clicks and messages relating to known threats within the specified time period
+
+    # Call a different /siem endpoint depending on the event type specified
+    url = get_threat_event_url(base_url, event_type)
 
     if isinstance(lastupdate, string_types) or isinstance(lastupdate, text_type):
         url += '&sinceTime={}'.format(lastupdate)
@@ -50,7 +73,7 @@ def get_threat_list(rc, options, lastupdate, bundle):
     res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
 
     # Debug logging
-    log.debug("Response content: {}".format(res.content))
+    log.debug("SIEM event type: {0} Response content: {1}".format(event_type, res.content))
     return res.json()
 
 
