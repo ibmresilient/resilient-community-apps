@@ -10,8 +10,12 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_proofpoint_tap]
-# Required - URL and credentials to authenticate to Proofpoint TAP
+# Required - Base URL used to make Proofpoint TAP REST API calls
 base_url=https://tap-api-v2.proofpoint.com/v2
+
+# Required - Credentials used to authenticate to Proofpoint TAP.
+# If API Key and secrets are used, enter the API Key in the
+# username parameter and the secret in the password parameter
 username=
 password=
 
