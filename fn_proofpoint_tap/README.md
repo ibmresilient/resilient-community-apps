@@ -224,16 +224,82 @@ Function pulls specific details about campaigns including description, the actor
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
+
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_proofpoint_tap --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_proofpoint_tap
-} 
+  "inputs": {
+    "pp_campaign_id": "68a66f7f-cdd7-4c53-ba0f-2e1760254114"
+  },
+  "success": true,
+  "data": {
+    "id": "68a66f7f-cdd7-4c53-ba0f-2e1760254114",
+    "name": "WebMail Phish | URLs | 01-05 June 2023",
+    "description": "Custom WebMail phishing page, attempting to steal users credentials. \n\nExample senders:\n* 'Mail Admin &lt;admin@yallahomsae.com&gt;'\n* 'Email Support yourcompany.com &lt;server@netbasx.com&gt;'\n\nExample subjects:\n* 'Password Expiration notice'\n* 'Mailbox Config Error - Fix Error'\n\n\n",
+    "startDate": "2023-06-01T00:00:00.000Z",
+    "notable": false,
+    "actors": [],
+    "families": [
+      {
+        "id": "34b3f509-c74c-4d33-a29d-b9b364b9905c",
+        "name": "Corporate Credential Phishing"
+      }
+    ],
+    "malware": [],
+    "techniques": [],
+    "brands": [],
+    "campaignMembers": [
+      {
+        "id": "b17ce924d5c75dd1e222f438fda67c526a77783403737613f261980b7bcc7510",
+        "threat": "https://ipfs.io/ipfs/bafybeicfmpubkjm27jyai3bgvcerhr4ewupxngxvt7kj4yhihb3rfuxq5q/25-06-bg-4ur-we9b-f9wohrng-tg-gwbrww.htmlD#mkavanagh@sensata.com",
+        "threatStatus": "active",
+        "type": "url",
+        "threatTime": "2023-06-01T16:06:36.000Z"
+      },
+      {
+        "id": "fc3cdac565b676f3b5f5610fcf58160617fe83dfd691ee20d72a98990a058808",
+        "threat": "https://ipfs.io/ipfs/Qmc92zdKqnFZKgnAYyCqSamRCBGaTpsSydmifKDTPMuxmJ#sales@arc-tech.com",
+        "threatStatus": "active",
+        "type": "url",
+        "threatTime": "2023-06-01T06:10:55.000Z"
+      },
+      {
+        "id": "c831966a9c313235f314ffa88c3126f556e9191c70bddea0cc3883ba1d64edd8",
+        "threat": "https://googleweblight.com/i?u=https://ipfs.io/ipfs/QmRa9DJTfqGctNFazQSQb5fU6kaUBEyvH56czJ3ioEaz9w/?submit=ima@bmigroup.com",
+        "threatStatus": "active",
+        "type": "url",
+        "threatTime": "2023-06-02T13:57:51.000Z"
+      },
+      {
+        "id": "531cb865bb4a8c87090440414dfce5c16dec06e314797576ba4bac500f602bb5",
+        "threat": "https://ipfs.io/ipfs/bafybeifluccxb2hveire3sevma2galuosmtm2egvpbegknas2bmlcjfykq/#nigel.desouza@tnt.com",
+        "threatStatus": "active",
+        "type": "url",
+        "threatTime": "2023-06-02T14:00:49.000Z"
+      },
+      {
+        "id": "97b31dfdc7621e7daef56e339df8fafc43c8ae71be2c79ef311832281dc1810c",
+        "threat": "https://ipfs.io/ipfs/bafybeifwtldig24fsmrgbwlm2vr2gll4axhcdrpvdqxlg6akalewirimmi/absupdated.html#agoddard@airmauritius.com",
+        "threatStatus": "active",
+        "type": "url",
+        "threatTime": "2023-06-01T10:30:57.000Z"
+      },
+      {
+        "id": "ad8176b49d94a51aec11e0b5f0dc3257e60f288540315d72e21477a0c73a192d",
+        "threat": "https://ipfs.io/ipfs/Qmc92zdKqnFZKgnAYyCqSamRCBGaTpsSydmifKDTPMuxmJ#mmole@mightymole.com",
+        "threatStatus": "active",
+        "type": "url",
+        "threatTime": "2023-06-01T01:20:04.000Z"
+      },
+      {
+        "id": "4a5db6fc6c11fd49b2836a4e77ed2284dc656222f73dbb8e59c8990a99edf8a9",
+        "threat": "https://ipfs.io/ipfs/QmRMD1JBn8FTfUsY1LZCc3G3QjYcCNRyo9cgXQLnG5gUaX#odonnel@fastenal.com",
+        "threatStatus": "active",
+        "type": "url",
+        "threatTime": "2023-06-02T05:18:21.000Z"
+      }
+    ]
+  }
+}
 ```
 
 </p>
