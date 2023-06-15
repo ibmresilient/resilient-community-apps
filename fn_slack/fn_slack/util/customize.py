@@ -49,6 +49,15 @@ def customization_data(client=None):
         - slack_archive_channel
         - slack_post_attachment
         - slack_post_message
+    - Workflows:
+        - archive_slack_channel
+        - create_slack_message
+        - create_slack_reply
+        - example_post_attachment_to_slack__artifact
+        - slack_example_archive_slack_channel__task
+        - slack_example_post_attachment_to_slack
+        - slack_example_post_message_to_slack__artifact
+        - slack_example_post_message_to_slack__task
     - Playbooks:
         - example_archive_incident_slack_channel_pb
         - example_archive_task_slack_channel_pb
@@ -58,6 +67,15 @@ def customization_data(client=None):
         - example_post_incident_to_slack_pb
         - example_post_note_to_slack_pb
         - example_post_task_to_slack_pb
+    - Rules:
+        - Example: Archive Incident Slack Channel
+        - Example: Archive Task Slack Channel
+        - Example: Post Artifact Attachment to Slack
+        - Example: Post Artifact to Slack
+        - Example: Post Incident / Task Attachment to Slack
+        - Example: Post Incident to Slack
+        - Example: Post Note to Slack
+        - Example: Post Task to Slack
     - Data Tables:
         - slack_conversations_db
     """
