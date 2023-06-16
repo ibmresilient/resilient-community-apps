@@ -165,43 +165,51 @@ class PP_ThreatPolling(ResilientComponent):
         cafile = self.options.get('cafile')
         bundle = os.path.expanduser(cafile) if cafile else False
         rc = RequestsCommon(opts=self.opts, function_opts=self.options)
+        siem_event_types_string =  self.options.get('siem_event_types') if self.options.get('siem_event_types') != "" else "siem_all"
+        siem_event_types = [event_type.strip() for event_type in siem_event_types_string.split(",")]
 
         while True:
             try:
-                threat_list = get_threat_list(rc, self.options, self.lastupdate, bundle)
-                for kind, datas in threat_list.items():
-                    if kind == 'queryEndTime':
-                        self.lastupdate = datas
-                    else:
-                        for data in datas:
-                            incident_id = None
-                            threat_id, idtype = self.find_id(data)
-                            if not threat_id:
-                                log.error("Threat ID not found for ProofPoint TAP event '%s' of kind '%s'.", data, kind)
-                                continue
-                            existing_incidents = self._find_resilient_incident_for_req(threat_id, idtype)
-                            if len(existing_incidents) == 0:
-                                # incident doesn't already exist, create Incident data
-                                incident_payload = self.build_incident_dto(data, kind, threat_id)
-                                if incident_payload is not None:
-                                    incident_id = self.create_incident(incident_payload)
-                                    log.debug('created Incident ID {}'.format(incident_id))
-                                else:
-                                    log.debug('Incident filtered')
-                            else:
-                                # incident already exists, extract its ID
-                                log.debug(u'incident {} {} already exists'.format(idtype, threat_id))
-                                incident_id = existing_incidents[0]['id']
-
-                            if incident_id is not None:
-                                # created or found an Incident, attach any (possibly new) artifacts
-                                artifact_payloads = self.build_artifacts(data)
-                                self.update_incident(incident_id, artifact_payloads)
+                # Loop through user selected SIEM endpoints to poll and process threats
+                for siem_event_type in siem_event_types:
+                    threat_list = get_threat_list(rc, self.options, self.lastupdate, bundle, siem_event_type)
+                    self.process_threat_list(threat_list)
             except Exception as err:
                 log.error(err)
 
             # Amount of time (seconds) to wait to check cases again, defaults to 10 mins if not set
             time.sleep(int(self.options.get("polling_interval", 10)) * 60)
+
+    def process_threat_list(self, threat_list):
+         """ Process a list to Proofpoint TAP threats and create incidents if not in SOAR otherwise update the incident. """
+         for kind, datas in threat_list.items():
+            if kind == 'queryEndTime':
+                self.lastupdate = datas
+                continue
+            for data in datas:
+                incident_id = None
+                threat_id, idtype = self.find_id(data)
+                if not threat_id:
+                    log.error("Threat ID not found for ProofPoint TAP event '%s' of kind '%s'.", data, kind)
+                    continue
+                existing_incidents = self._find_resilient_incident_for_req(threat_id, idtype)
+                if len(existing_incidents) == 0:
+                    # incident doesn't already exist, create Incident data
+                    incident_payload = self.build_incident_dto(data, kind, threat_id)
+                    if incident_payload is not None:
+                        incident_id = self.create_incident(incident_payload)
+                        log.debug('created Incident ID {}'.format(incident_id))
+                    else:
+                        log.debug('Incident filtered')
+                else:
+                    # incident already exists, extract its ID
+                    log.debug(u'incident {} {} already exists'.format(idtype, threat_id))
+                    incident_id = existing_incidents[0]['id']
+
+                if incident_id is not None:
+                    # created or found an Incident, attach any (possibly new) artifacts
+                    artifact_payloads = self.build_artifacts(data)
+                    self.update_incident(incident_id, artifact_payloads)
 
     def build_incident_dto(self, data, kind, threat_id):
         """build Incident data structure in Resilient DTO format"""
