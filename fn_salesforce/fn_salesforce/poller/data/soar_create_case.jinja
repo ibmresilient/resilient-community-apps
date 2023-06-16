@@ -1,0 +1,81 @@
+{
+  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
+     for details on available jinja methods. Examples for `soar_substitute` and more are included below.
+  #}
+  {# modify to specify your specific **data** fields #}
+  "name": "**EndPoint** Alert - {{ **title** }}",
+  "description": "{{ **description** | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  {% set start_date = **happenedAt** if **happenedAt** <= **receivedAt** else **receivedAt** %}
+  "discovered_date": {{ **receivedAt**| soar_datetimeformat(split_at='.') }},
+  "start_date": {{ **start_date** | soar_datetimeformat(split_at='.') }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ **assignedTo** |soar_substitute('{"Automation": "soar_user1@example.com", "default_user@example.com": "soar_user2@example.com", "DEFAULT": "default_user@example.com" }') }}", #}
+  "plan_status": "A",
+  "severity_code": "{{ **severity** | soar_substitute('{"Safe": "Low"}') }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "**endpoint_id**": "{{ **id** }}",
+    "**endpoint_link**": "<a target='_blank' href='{{ **endpoint_url** }}'>Link</a>",
+    "**endpoint_tags**": "{{ **tags** | join(', ') }}",
+  },
+  {# add comments as necessary #}
+  "comments": [
+    {% if notes %}
+    {
+      "text": {
+        "format": "text",
+        "content": "Created by **EndPoint**:\n{{ **notes** | replace('"', '\\"') }}"
+      }
+    }
+    {% else %}
+    {
+      "text": {
+        "format": "text",
+        "content": "Created by **EndPoint**"
+      }
+    }
+    {% endif %}
+  ],
+  {# add artifacts as necessary #}
+  "artifacts": [
+    {% for item in **entities** %}
+      {% if **item.entityType** == 'Ip' %}
+        {
+          "type": {
+            "name": "IP Address"
+          },
+          "value": "{{ **item.ipAddress** }}",
+          "description": {
+            "format": "text",
+            "content": "creation date: {{ **item.evidenceCreationTime** }}"
+          }
+        }
+      {% elif **item.entityType** == 'Url' %}
+        {
+          "type": {
+            "name": "URL"
+          },
+          "value": "{{ **item.url** }}",
+          "description": {
+            "format": "text",
+            "content": "creation date: {{ **item.evidenceCreationTime** }}\n"
+          }
+        }
+      {% elif **item.entityType** == 'File' %}
+        {
+          "type": {
+            "name": "File Name"
+          },
+          "value": "{{ **item.fileName** }}",
+          "description": {
+            "format": "text",
+            "content": "creation date: {{ **item.evidenceCreationTime** }}"
+          }
+        }
+      {% endif %}
+      {% if artifactFlg and not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
