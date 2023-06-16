@@ -32,17 +32,17 @@ def get_threat_event_url(base_url, event_type):
     """ Return the SIEM endpoint to call given an event type
     """
     url_options = {
-        "clicks_blocked": CLICKS_BLOCKED_URI.format(base_url),
-        "messages_blocked": MESSAGES_BLOCKED_URI.format(base_url),
-        "messages_delivered": MESSAGES_DELIVERED_URI.format(base_url),
-        "siem_issues": SIEM_ISSUES.format(base_url),
-        "siem_all": SIEM_ALL.format(base_url)
+        "clicks_blocked": CLICKS_BLOCKED_URI,
+        "messages_blocked": MESSAGES_BLOCKED_URI,
+        "messages_delivered": MESSAGES_DELIVERED_URI,
+        "siem_issues": SIEM_ISSUES,
+        "siem_all": SIEM_ALL
     }
     url = url_options.get(event_type, None)
 
     if not url:
         raise IntegrationError("Unknown event type: '{}'".format(event_type))
-    return url
+    return url.format(base_url)
 
 def get_threat_list(rc, options, lastupdate, bundle, event_type):
     """
