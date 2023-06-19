@@ -36,7 +36,17 @@ Create a new Incident in BMC Helix from a SOAR Incident Task
 
 ### Function-Input Script
 ```python
-payload = u"""{{ "ApplyTemplate": {},
+def mk_str(value, quotes='"'):
+  if value is None:
+    return "null"
+  else:
+    esc_value = value.replace('"', '\\"')
+    if quotes:
+      return '{0}{1}{0}'.format(quotes, esc_value)
+    else:
+      return esc_value
+
+payload = """{{ "ApplyTemplate": {},
   "First_Name": {},
   "Last_Name": {},
   "Impact": {},
@@ -47,21 +57,21 @@ payload = u"""{{ "ApplyTemplate": {},
   "Description": {},
   "Assigned Support Organization": {},
   "additional_data": {}
-}}""".format(playbook.properties.bmc_helix_template,
-  playbook.properties.bmc_helix_customer_first_name,
-  playbook.properties.bmc_helix_customer_last_name,
-  playbook.properties.bmc_helix_impact,
-  playbook.properties.bmc_helix_urgency,
-  playbook.properties.bmc_helix_service_type,
-  playbook.properties.bmc_helix_status,
-  playbook.properties.bmc_helix_reported_source,
-  playbook.properties.bmc_helix_note,
-  playbook.properties.bmc_helix_support_group,
-  playbook.properties.bmc_helix_additional_data.content if playbook.properties.bmc_helix_additional_data.content else "null"
+}}""".format(mk_str(playbook.inputs.bmc_helix_template),
+  mk_str(playbook.inputs.bmc_helix_customer_first_name),
+  mk_str(playbook.inputs.bmc_helix_customer_last_name),
+  mk_str(playbook.inputs.bmc_helix_impact),
+  mk_str(playbook.inputs.bmc_helix_urgency),
+  mk_str(playbook.inputs.bmc_helix_service_type),
+  mk_str(playbook.inputs.bmc_helix_status),
+  mk_str(playbook.inputs.bmc_helix_reported_source),
+  mk_str(playbook.inputs.bmc_helix_note),
+  mk_str(playbook.inputs.bmc_helix_support_group),
+  playbook.inputs.bmc_helix_additional_data.content if playbook.inputs.bmc_helix_additional_data.content else "null"
 )
 
 # set inputs
-inputs.task_id = task.id 
+inputs.task_id = task.id
 inputs.incident_id = incident.id
 inputs.helix_incident_name = task.name
 inputs.helix_payload = payload
@@ -82,21 +92,26 @@ inputs.helix_payload = payload
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.create_incident
-noteText = "<h5> Helix Create Incident</h5>"
-
-task_id = task.id
-task_name = task.name
+res_task = results.get("content", {}).get("task", {})
 values = results.get("content", {}).get("values", {})
 
-if results["success"]:
-  noteText += f"<p>Successfully sent task {task_id} \"{task_name}\" to Helix as Incident Number {values.get('Incident Number')} (UI name) and Request ID {values.get('Request ID')} (API name).</p>"
-else:
-  noteText += f"<p>Unable to send task {task_id} \"{task_name}\" to Helix</p>"
-  noteText += "<p>Ensure the activity fields and payload you provide meet the minimum requirements in your system for incident creation and routing."
-
-richText = helper.createRichText(noteText)
-incident.addNote(richText)
+if results.get("success"):
+  dt_row = incident.addRow("bmc_helix_incidents")
+  dt_row["soar_task_id"] = f'{res_task.get("id")}: {res_task.get("name")}'
+  dt_row["bmc_helix_request_id"] = values.get("Request ID")
+  dt_row["bmc_helix_status"] = values.get("Status")
+  dt_row["bmc_helix_created_date"] = int(datetime.now().timestamp()*1000)
+  dt_row["bmc_helix_assigned_to"] = values.get("Assignee")
+  dt_row["bmc_helix_incident_number"] = values.get("Incident Number")
+  dt_row["bmc_helix_description"] = values.get("Description")
+  dt_row["bmc_helix_company"] = values.get("Company")
+  dt_row["bmc_helix_organization"] = values.get("Organization")
+  dt_row["bmc_helix_assigned_support_organization"] = values.get("Assigned Support Organization")
+  dt_row["bmc_helix_urgency"] = values.get("Urgency")
+  dt_row["bmc_helix_impact"] = values.get("Impact")
+  dt_row["bmc_helix_priority"] = values.get("Priority")
 ```
 
 ---

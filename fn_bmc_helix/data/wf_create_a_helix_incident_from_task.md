@@ -21,15 +21,14 @@
 ```python
 # Python 2 compatibility for CP4S 1.6
 def mk_str(value, quotes=u'"'):
-    if value is None:
-        return "null"
+  if value is None:
+    return "null"
+  else:
+    esc_value = value.replace(u'"', u'\\"')
+    if quotes:
+      return u'{0}{1}{0}'.format(quotes, esc_value)
     else:
-        esc_value = value.replace(u'"', u'\\"')
-        if quotes:
-            return u'{0}{1}{0}'.format(quotes, esc_value)
-        else:
-            return esc_value
-
+      return esc_value
 
 payload = u"""{{ "ApplyTemplate": {},
   "First_Name": {},
@@ -43,7 +42,7 @@ payload = u"""{{ "ApplyTemplate": {},
   "Assigned Support Organization": {},
   "additional_data": {}
 }}""".format(mk_str(rule.properties.helix_template),
-  mk_str(rule.properties.helix_first_name),
+  rule.properties.helix_first_name,
   mk_str(rule.properties.helix_last_name),
   mk_str(rule.properties.helix_impact),
   mk_str(rule.properties.helix_urgency),
