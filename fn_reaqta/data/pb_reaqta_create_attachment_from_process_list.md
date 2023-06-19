@@ -4,29 +4,61 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# ReaQta: Attach File from Triggered Event
+# Playbook - ReaQta: Create Attachment from Process List (PB)
 
+### API Name
+`reaqta_create_attachment_from_process_list`
+
+### Status
+`enabled`
+
+### Activation Type
+`manual`
+
+### Object Type
+`reaqta_process_list`
+
+### Description
+Attach a file from an endpoint's process list
+
+
+---
 ## Function - ReaQta: Attach File
 
 ### API Name
 `reaqta_attach_file`
 
 ### Output Name
-`None`
+`create_attach_file_results`
 
 ### Message Destination
 `fn_reaqta`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
-inputs.reaqta_program_path = row['program_path']
+inputs.reaqta_program_path = row['process_path'].replace("\\\\", "\\")
 inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
 inputs.reaqta_incident_id = incident.id
 inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
-### Post-Processing Script
+---
+
+## Local script - ReaQta: Write attach files to note
+
+### Description
+Write the results of create attachment file to note.
+
+### Script Type
+`Local script`
+
+### Objet Type
+`reaqta_process_list`
+
+### Script Content
 ```python
+results = playbook.functions.results.create_attach_file_results
+
 if results.success:
   incident.addNote(u"ReaQta Attach File created: {} from program path: {}".format(results.content['name'], results.inputs['reaqta_program_path']))
 else:
@@ -34,4 +66,3 @@ else:
 ```
 
 ---
-

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v49.0.4368
 
 """Generate the Resilient customizations required for fn_reaqta"""
 
@@ -29,7 +30,8 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [u"reaqta_process_list", u"reaqta_trigger_events"],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [u"reaqta_create_artifact_from_process_path", u"reaqta_create_attachment_from_process_list", u"reaqta_create_attachment_from_triggered_event"]
     }
 
 
@@ -38,7 +40,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 41.2.41
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
@@ -68,6 +70,10 @@ def customization_data(client=None):
         - reaqta_get_processes
         - reaqta_isolate_endpoint
         - reaqta_kill_process
+    - Playbooks:
+        - reaqta_create_artifact_from_process_path
+        - reaqta_create_attachment_from_process_list
+        - reaqta_create_attachment_from_triggered_event
     - Rules:
         - ReaQta Get Endpoint Status
         - ReaQta: Close Alert

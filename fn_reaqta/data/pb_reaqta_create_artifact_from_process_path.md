@@ -4,20 +4,37 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# ReaQta: Create Artifact from Process Path
+# Playbook - ReaQta: Create Artifact from Process Path (PB)
 
+### API Name
+`reaqta_create_artifact_from_process_path`
+
+### Status
+`enabled`
+
+### Activation Type
+`manual`
+
+### Object Type
+`reaqta_process_list`
+
+### Description
+Create an artifact from a ReaQta Endpoint process file.
+
+
+---
 ## Function - ReaQta: Create Artifact
 
 ### API Name
 `reaqta_create_artifact`
 
 ### Output Name
-`None`
+`create_artifact_results`
 
 ### Message Destination
 `fn_reaqta`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.reaqta_incident_id = incident.id
 inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
@@ -26,11 +43,24 @@ inputs.reaqta_artifact_type = "Malware Sample"
 inputs.reaqta_hive = incident.properties.reaqta_hive
 ```
 
-### Post-Processing Script
+---
+
+## Local script - ReaQta: write create artifact results to note
+
+### Description
+Write a note to SOAR if there is an error creating artifacts.
+
+### Script Type
+`Local script`
+
+### Objet Type
+`reaqta_process_list`
+
+### Script Content
 ```python
+results = playbook.functions.results.create_artifact_results
 if not results.success:
   incident.addNote("ReaQta Create Artifact failed: {}".format(results.reason))
 ```
 
 ---
-
