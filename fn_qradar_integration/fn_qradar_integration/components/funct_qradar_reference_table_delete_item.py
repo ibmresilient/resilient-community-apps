@@ -1,24 +1,23 @@
-# -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 """Function implementation"""
 
-import logging
+from logging import getLogger
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
 from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
 from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
 import fn_qradar_integration.util.function_utils as function_utils
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_reference_table_delete_item''"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.opts = opts
         self.servers_list = function_utils.get_servers_list(opts)
 
@@ -34,7 +33,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
-            yield StatusMessage("Starting 'qradar_reference_table_delete_item' running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage(f"Starting 'qradar_reference_table_delete_item' running in workflow '{wf_instance_id}'")
 
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
@@ -45,16 +44,16 @@ class FunctionComponent(ResilientComponent):
             qradar_reference_table_item_outer_key = kwargs.get("qradar_reference_table_item_outer_key")  # text
             qradar_label = kwargs.get("qradar_label")  # text
 
-            LOG.info("qradar_reference_table_name: %s", qradar_reference_table_name)
-            LOG.info("qradar_reference_table_item_value: %s", qradar_reference_table_item_value)
-            LOG.info("qradar_reference_table_item_inner_key: %s", qradar_reference_table_item_inner_key)
-            LOG.info("qradar_reference_table_item_outer_key: %s", qradar_reference_table_item_outer_key)
-            LOG.info("qradar_label: %s", qradar_label)
+            LOG.info(f"qradar_reference_table_name: {qradar_reference_table_name}")
+            LOG.info(f"qradar_reference_table_item_value: {qradar_reference_table_item_value}")
+            LOG.info(f"qradar_reference_table_item_inner_key: {qradar_reference_table_item_inner_key}")
+            LOG.info(f"qradar_reference_table_item_outer_key: {qradar_reference_table_item_outer_key}")
+            LOG.info(f"qradar_label: {qradar_label}")
 
             options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
             qradar_verify_cert = False if options.get("verify_cert", "false").lower() == "false" else options.get("verify_cert")
 
-            LOG.debug("Connecting to QRadar instance @ {}".format(options.get("host")))
+            LOG.debug(f"Connecting to QRadar instance @ {options.get('host')}")
 
             qradar_client = QRadarClient(host=options.get("host"),
                                          username=options.get("username", None),
@@ -72,8 +71,8 @@ class FunctionComponent(ResilientComponent):
                               content=result,
                               reason=reason)
             
-            yield StatusMessage("Call made to QRadar and response code returned: {}".format(result.get('status_code', 'no response code found')))
-            yield StatusMessage("Finished 'qradar_reference_table_delete_item' that was running in workflow '{0}'".format(wf_instance_id))
+            yield StatusMessage(f"Call made to QRadar and response code returned: {result.get('status_code', 'no response code found')}")
+            yield StatusMessage(f"Finished 'qradar_reference_table_delete_item' that was running in workflow '{wf_instance_id}'")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
