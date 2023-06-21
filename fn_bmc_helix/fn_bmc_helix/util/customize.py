@@ -23,15 +23,15 @@ def codegen_reload_data():
         "package": u"fn_bmc_helix",
         "message_destinations": [u"fn_bmc_helix"],
         "functions": [u"helix_close_incident", u"helix_create_incident"],
-        "workflows": [u"close_a_helix_incident_from_task", u"create_a_helix_incident_from_task"],
-        "actions": [u"Helix Close Incident from Task", u"Helix Create Incident from Task"],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"bmc_helix_incidents", u"helix_linked_incidents_reference_table"],
+        "datatables": [u"bmc_helix_incidents"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"bmc_helix_create_incident_from_task"]
+        "playbooks": [u"bmc_helix_close_incident_from_task", u"bmc_helix_create_incident_from_task"]
     }
 
 
@@ -48,17 +48,11 @@ def customization_data(client=None):
     - Functions:
         - helix_close_incident
         - helix_create_incident
-    - Workflows:
-        - close_a_helix_incident_from_task
-        - create_a_helix_incident_from_task
     - Playbooks:
+        - bmc_helix_close_incident_from_task
         - bmc_helix_create_incident_from_task
-    - Rules:
-        - Helix Close Incident from Task
-        - Helix Create Incident from Task
     - Data Tables:
         - bmc_helix_incidents
-        - helix_linked_incidents_reference_table
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

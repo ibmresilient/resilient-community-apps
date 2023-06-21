@@ -4,20 +4,37 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Close a Helix Incident from Task
+# Playbook - BMC Helix Close Incident from Task
 
+### API Name
+`bmc_helix_close_incident_from_task`
+
+### Status
+`enabled`
+
+### Activation Type
+`automatic`
+
+### Object Type
+`task`
+
+### Description
+Close a BMC Helix incident that is linked to a SOAR task
+
+
+---
 ## Function - Helix: Close Incident
 
 ### API Name
 `helix_close_incident`
 
 ### Output Name
-``
+`closed_incident`
 
 ### Message Destination
 `fn_bmc_helix`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.task_id = task.id
 inputs.incident_id = incident.id
@@ -30,25 +47,42 @@ payload = """{"Status_Reason": "foo"}"""
 inputs.helix_payload = payload if payload else ''
 ```
 
-### Post-Processing Script
+---
+
+## Local script - post-process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Objet Type
+`task`
+
+### Script Content
 ```python
+results = playbook.functions.results.closed_incident
+content = results.get("content", {})
+closed = content.get("closed")
+skipped = content.get("skipped")
 noteText = "<h5>Helix Close Incident:</h5>"
 
-if results["success"]:
-  if results["content"]["closed"]:
+if results.get("success"):
+  if closed:
     noteText += "<p>The following incidents were matched in Helix and successfully closed:</p>"
-    for item in results["content"]["closed"]:
-      noteText += "<p>    Incident Number {0}, Request ID: {1}</p>".format(item["values"]["Incident Number"], item["values"]["Request ID"])
-  if results["content"]["skipped"]:
+    for item in closed:
+      noteText += "<p>    Incident Number {}, Request ID: {}</p>".format(item.get("values", {}).get("Incident Number"), item.get("values", {}).get("Request ID"))
+  if skipped:
     noteText += "<p>The following incidents were not able to be closed. Common reasons include that the incident has been previously closed, " \
     "the incident has been deleted, or the payload sent to Helix was incomplete according to the requirements of your specific system:</p>"
-    for item in results["content"]["skipped"]:
-      noteText += "<p>    Incident Number {0}, Request ID: {1}</p>".format(item["values"]["Incident Number"], item["values"]["Request ID"])
-elif not results["content"]["closed"] and not results["content"]["skipped"]:
+    for item in skipped:
+      noteText += "<p>    Incident Number {}, Request ID: {}</p>".format(item.get("values", {}).get("Incident Number"), item.get("values", {}).get("Request ID"))
+elif not closed and not skipped:
   # no sync to helix, just exit
   noteText = None
 else:
-  noteText += "<p>Function failed to complete. Reason: {}</p>".format(results.reason)
+  noteText += "<p>Function failed to complete. Reason: {}</p>".format(results.get("reason"))
 
 if noteText:
   richText = helper.createRichText(noteText)
@@ -56,4 +90,3 @@ if noteText:
 ```
 
 ---
-

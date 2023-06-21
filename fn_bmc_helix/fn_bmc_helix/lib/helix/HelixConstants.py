@@ -9,7 +9,7 @@ DEFAULT_HTTPS_PORT = 8443
 HTTPS_BASE_URL = lambda host, port: "https://{0}:{1}/api".format(host, str(port))
 
 PACKAGE_NAME = "fn_bmc_helix"
-TABLE_NAME = "helix_linked_incidents_reference_table"
+TABLE_NAME = "bmc_helix_incidents"
 
 # Fields we want BMC Helix to return when creating an incident
 RETURN_FIELDS = ["Incident Number", "Request ID"]
