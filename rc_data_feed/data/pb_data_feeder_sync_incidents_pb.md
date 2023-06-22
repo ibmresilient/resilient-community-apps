@@ -61,7 +61,9 @@ inputs.df_query_api_method = playbook.inputs.query_api_method
 results = playbook.functions.results.sync_incident_results
 if results.success:
   incident.addNote(f"Data Feeder Sync\nMin: {results['inputs']['df_min_incident_id']} Max: {results['inputs']['df_max_incident_id']}\nIncidents Sync'd: {results['content']['num_of_sync_incidents']}")
+else: 
   incident.addNote(f"Data Feeder Sync failed: {results.reason}")
+
 ```
 
 ---
