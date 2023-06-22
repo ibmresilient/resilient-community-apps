@@ -4,10 +4,10 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - BMC Helix Create Incident from Task
+# Playbook - BMC Helix Create Incident
 
 ### API Name
-`bmc_helix_create_incident_from_task`
+`bmc_helix_create_incident`
 
 ### Status
 `enabled`
@@ -16,10 +16,10 @@
 `manual`
 
 ### Object Type
-`task`
+`incident`
 
 ### Description
-Create a new Incident in BMC Helix from a SOAR Incident Task
+Create a BMC Helix incident from a SOAR incident.
 
 
 ---
@@ -29,7 +29,7 @@ Create a new Incident in BMC Helix from a SOAR Incident Task
 `helix_create_incident`
 
 ### Output Name
-`create_incident`
+`created_incident`
 
 ### Message Destination
 `fn_bmc_helix`
@@ -71,15 +71,14 @@ payload = """{{ "ApplyTemplate": {},
 )
 
 # set inputs
-inputs.task_id = task.id
 inputs.incident_id = incident.id
-inputs.helix_incident_name = task.name
+inputs.helix_incident_name = incident.name
 inputs.helix_payload = payload
 ```
 
 ---
 
-## Local script - post process
+## Local script - post-process
 
 ### Description
 
@@ -88,30 +87,28 @@ inputs.helix_payload = payload
 `Local script`
 
 ### Objet Type
-`task`
+`incident`
 
 ### Script Content
 ```python
 from datetime import datetime
-results = playbook.functions.results.create_incident
+results = playbook.functions.results.created_incident
 
 if results.get("success"):
   values = results.get("content", {}).get("values", {})
 
-  dt_row = incident.addRow("bmc_helix_incidents")
-  dt_row["soar_task_id"] = f'{results.get("inputs", {}).get("task_id")}: {results.get("inputs", {}).get("helix_incident_name")}'
-  dt_row["bmc_helix_request_id"] = values.get("Request ID")
-  dt_row["bmc_helix_status"] = values.get("Status")
-  dt_row["bmc_helix_created_date"] = int(datetime.now().timestamp()*1000)
-  dt_row["bmc_helix_assigned_to"] = values.get("Assignee")
-  dt_row["bmc_helix_incident_number"] = values.get("Incident Number")
-  dt_row["bmc_helix_description"] = values.get("Description")
-  dt_row["bmc_helix_company"] = values.get("Company")
-  dt_row["bmc_helix_organization"] = values.get("Organization")
-  dt_row["bmc_helix_assigned_support_organization"] = values.get("Assigned Support Organization")
-  dt_row["bmc_helix_urgency"] = values.get("Urgency")
-  dt_row["bmc_helix_impact"] = values.get("Impact")
-  dt_row["bmc_helix_priority"] = values.get("Priority")
+  incident.properties.bmc_helix_request_id = values.get("Request ID")
+  incident.properties.bmc_helix_status = values.get("Status")
+  incident.properties.bmc_helix_created_date = int(datetime.now().timestamp()*1000)
+  incident.properties.bmc_helix_assigned_to = values.get("Assignee")
+  incident.properties.bmc_helix_incident_number = values.get("Incident Number")
+  incident.properties.bmc_helix_description = values.get("Description")
+  incident.properties.bmc_helix_company = values.get("Company")
+  incident.properties.bmc_helix_organization = values.get("Organization")
+  incident.properties.bmc_helix_assigned_support_organization = values.get("Assigned Support Organization")
+  incident.properties.bmc_helix_urgency = values.get("Urgency")
+  incident.properties.bmc_helix_impact = values.get("Impact")
+  incident.properties.bmc_helix_priority = values.get("Priority")
 ```
 
 ---

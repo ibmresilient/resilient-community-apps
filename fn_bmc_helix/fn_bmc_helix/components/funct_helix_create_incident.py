@@ -88,6 +88,11 @@ class FunctionComponent(AppFunctionComponent):
             # Get function inputs
             helix_payload = getattr(fn_inputs, "helix_payload")
             helix_payload = loads(helix_payload)
+            helix_incident_name = getattr(fn_inputs, "helix_incident_name", "")
+            # SOAR incident_id
+            incident_id = getattr(fn_inputs, "incident_id")
+            # SOAR task id
+            task_id = getattr(fn_inputs, "task_id", None)
 
             # Add in the additional data
             addl_data = helix_payload.pop("additional_data")
@@ -96,26 +101,28 @@ class FunctionComponent(AppFunctionComponent):
             # Required metadata field to create a resource
             helix_payload["z1D_Action"] = "CREATE"
 
-            # SOAR incident_id
-            incident_id = getattr(fn_inputs, "incident_id")
-            # SOAR task id
-            task_id = getattr(fn_inputs, "task_id")
+            # Create variable task
+            task = None
 
-            # Get the task data
-            task = self.rest_client().get(f"/tasks/{task_id}")
+            if task_id:
+                # Get the task data
+                task = self.rest_client().get(f"/tasks/{task_id}")
 
-            # Add task instructions to the helix_payload dict if present in the task
-            if task.get("instructions"):
-                # Set the description to the task instructions
-                # Detailed description is the biggest text field we have available to us
-                desc = clean_html(task["instructions"])
-                # Add it to the helix_payload dict
-                # BMC Helix has a typo in their API, the below is correct
-                helix_payload["Detailed_Decription"] = desc
+                # Add task instructions to the helix_payload dict if present in the task
+                if task.get("instructions"):
+                    # Set the description to the task instructions
+                    # Detailed description is the biggest text field we have available to us
+                    # Add it to the helix_payload dict
+                    helix_payload["Detailed_Decription"] = clean_html(task.get("instructions"))
 
-            # Add the task name to the description if one wasn't provided in the inputs
-            if not helix_payload.get("Description"):
-                helix_payload["Description"] = f"IBM SOAR Case {incident_id}: {task['name']}"
+                # Add the task name to the description if one wasn't provided in the inputs
+                if not helix_payload.get("Description"):
+                    helix_payload["Description"] = f"IBM SOAR Case {incident_id}: {helix_incident_name}"
+            else:
+                # If not creating incident from a task
+                if not helix_payload.get("Description"):
+                    helix_payload["Description"] = f"IBM SOAR Case {incident_id}: {helix_incident_name}"
+
             # Description has a max length of 100
             if len(helix_payload.get("Description", "")) > 100:
                 helix_payload["Description"] = helix_payload["Description"][:100]
@@ -132,7 +139,7 @@ class FunctionComponent(AppFunctionComponent):
 
             # Produce a FunctionResult with the results
             if success:
-                yield FunctionResult({"values": result, "task": task})
+                yield FunctionResult({"values": result})
             else:
                 yield FunctionResult(result, success=success, reason=reason)
 

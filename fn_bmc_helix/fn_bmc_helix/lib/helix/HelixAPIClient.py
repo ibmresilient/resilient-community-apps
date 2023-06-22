@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use, undefined-variable
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+
 from .interface.helix_api import HelixAPI
 # Load constant values for API Calls
 from .HelixConstants import *
@@ -17,44 +18,25 @@ class HelixClient(HelixAPI):
         self.verify = verify
         self.port = port or DEFAULT_HTTPS_PORT
         self.base_url = HTTPS_BASE_URL(self.host, self.port)
-        self.authHeaders = {"content-type": "application/x-www-form-urlencoded"}
-        self.reqHeaders = self.build_request_headers()
+        self.reqHeaders = {
+            "content-type": "application/json",
+            "Authorization": f"AR-JWT {self.get_token()}"
+        }
 
     def get_token(self):
         """
         Accesses the BMC Helix simple authentication endpoint
-        to retrieve a JWT authorization token. The token is
-        decoded based on the apparent_encoding.
-
+        to retrieve a JWT authorization token.
         :return: The token
         :rtype: str
         """
-
         response = self.rc.execute("POST",
-                                   f"{self.base_url}/jwt/login",
-                                   data={"username": self.username, "password": self.password},
-                                   headers=self.authHeaders, verify=self.verify)
-        token = response.content
-        encoding = response.apparent_encoding
-        token = token.decode(encoding)
+            f"{self.base_url}/jwt/login",
+            data={"username": self.username, "password": self.password},
+            headers={"content-type": "application/x-www-form-urlencoded"},
+            verify=self.verify)
 
-        return token
-
-    def build_request_headers(self):
-        """
-        Builds the request headers that BMC Helix expects
-        for calls to the REST API
-
-        :return: dict of request headers
-        :rtype: dict
-        """
-        token = self.get_token()
-        reqHeaders = {
-            "content-type": "application/json",
-            "Authorization": f"AR-JWT {token}"
-        }
-
-        return reqHeaders
+        return response.text
 
     def release_token(self):
         """
@@ -66,7 +48,10 @@ class HelixClient(HelixAPI):
         :rtype: tuple(json, int)
         """
         response = self.rc.execute(
-            "POST", f"{self.base_url}/jwt/logout", headers=self.reqHeaders, verify=self.verify)
+            "POST",
+            f"{self.base_url}/jwt/logout",
+            headers=self.reqHeaders,
+            verify=self.verify)
 
         # Logging off returns an empty 204
         # Return empty json in the absence of response/incident content
@@ -92,11 +77,13 @@ class HelixClient(HelixAPI):
         :rtype: tuple(json, int)
         """
         field_list = ', '.join(return_values)
-        url = f"{self.base_url}{REQUEST_PREFIX}/{form_name}?fields=values({field_list})"
-        entry = {"values": values}
 
         response = self.rc.execute(
-            "POST", url, json=entry, headers=self.reqHeaders, verify=self.verify)
+            "POST",
+            f"{self.base_url}{REQUEST_PREFIX}/{form_name}?fields=values({field_list})",
+            json={"values": values},
+            headers=self.reqHeaders,
+            verify=self.verify)
 
         return response.json(), response.status_code
 
@@ -115,9 +102,11 @@ class HelixClient(HelixAPI):
         :return: The response content and http status code as a tuple
         :rtype: tuple(json, int)
         """
-        url = f"{self.base_url}{REQUEST_PREFIX}/{form_name}/{req_id}"
         response = self.rc.execute(
-            "GET", url, headers=self.reqHeaders, verify=self.verify)
+            "GET",
+            f"{self.base_url}{REQUEST_PREFIX}/{form_name}/{req_id}",
+            headers=self.reqHeaders,
+            verify=self.verify)
 
         return response.json(), response.status_code
 
@@ -138,18 +127,18 @@ class HelixClient(HelixAPI):
         :return: The response content and http status code as a tuple
         :rtype: tuple(json, int)
         """
-        entry = {"values": values}
-        url = f"{self.base_url}{REQUEST_PREFIX}/{form_name}/{req_id}"
-
         response = self.rc.execute(
-            "PUT", url, json=entry, headers=self.reqHeaders, verify=self.verify)
+            "PUT",
+            f"{self.base_url}{REQUEST_PREFIX}/{form_name}/{req_id}",
+            json={"values": values},
+            headers=self.reqHeaders,
+            verify=self.verify)
 
         # BMC Helix returns an empty 204 for form updates.
         # Get the updated incident and return it with the update status code
-        status_code = response.status_code
         updated_incident, _ = self.get_form_entry(form_name, req_id, values)
 
-        return updated_incident, status_code
+        return updated_incident, response.status_code
 
     def delete_form_entry(self, form_name, req_id, payload={}):
         """
@@ -166,9 +155,11 @@ class HelixClient(HelixAPI):
         :return: The response content and http status code as a tuple
         :rtype: tuple(json, int)
         """
-        url = f"{self.base_url}{REQUEST_PREFIX}/{form_name}/{req_id}"
         response = self.rc.execute(
-            "DELETE", url, headers=self.reqHeaders, verify=self.verify)
+            "DELETE",
+            f"{self.base_url}{REQUEST_PREFIX}/{form_name}/{req_id}",
+            headers=self.reqHeaders,
+            verify=self.verify)
 
         response_json = response.json() if response.content else {}
 
@@ -194,9 +185,12 @@ class HelixClient(HelixAPI):
         """
         # This url formatting is less than ideal, but the BMC Helix API is very picky with how we specify endpoints
         # and therefore we cannot fully url encode.
-        url = f"{self.base_url}{REQUEST_PREFIX}/{form_name}?q=%27Incident+Number%27+%3D+%22{id}%22"
         response = self.rc.execute(
-            "GET", url, headers=self.reqHeaders, verify=self.verify)
+            "GET",
+            f"{self.base_url}{REQUEST_PREFIX}/{form_name}?q=%27Incident+Number%27+%3D+%22{id}%22",
+            headers=self.reqHeaders,
+            verify=self.verify)
+
         return response.json(), response.status_code
 
     # Used in selftest
@@ -208,8 +202,10 @@ class HelixClient(HelixAPI):
         :return: The response content and http status code as a tuple
         :rtype: tuple(json, int)
         """
-        url = f"{self.base_url}{REQUEST_PREFIX}/{form_name}"
         response = self.rc.execute(
-            "GET", url, headers=self.reqHeaders, verify=self.verify)
+            "GET",
+            f"{self.base_url}{REQUEST_PREFIX}/{form_name}",
+            headers=self.reqHeaders,
+            verify=self.verify)
 
         return response.json(), response.status_code

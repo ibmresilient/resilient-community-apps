@@ -14,10 +14,6 @@ class HelixAPI(ABC):
         raise NotImplementedError(error_text)
 
     @abc.abstractmethod
-    def build_request_headers(self, *args, **kwargs):
-        raise NotImplementedError(error_text)
-
-    @abc.abstractmethod
     def release_token(self, *args, **kwargs):
         raise NotImplementedError(error_text)
 

@@ -3,7 +3,6 @@
 """Function implementation"""
 
 from json import loads
-from datetime import datetime
 from logging import getLogger
 from fn_bmc_helix.lib.datatable.data_table import Datatable
 from fn_bmc_helix.lib.helix.HelixAPIClient import HelixClient
@@ -48,37 +47,36 @@ class FunctionComponent(AppFunctionComponent):
         :rtype: dict, boolean, string
         """
         skipped, closed = [], []
+        if task:
+            rows = self.get_dt_rows(incident_id, task)
+            if not rows:
+                LOG.info(f'Task {task["id"]}: {task["name"]} not found in the BMC Helix datatable. Incidents in BMC Helix will be left unchanged.')
+                return {"skipped": skipped, "closed": closed}, False, "No record of escalating to BMC Helix"
 
-        rows = self.get_dt_rows(incident_id, task)
-        if not rows:
-            LOG.info(f'Task {task["id"]}: {task["name"]} not found in the BMC Helix datatable. Incidents in BMC Helix will be left unchanged.')
-            return {"skipped": skipped, "closed": closed}, False, "No record of escalating to BMC Helix"
-
-        if len(rows) > 1:
-            LOG.info(f"Multiple datatable rows found matching task {task['id']}: {task['name']}.\n"
-                     "Any incidents matching these rows in BMC Helix will be closed.")
-        # Handle multiple rows
-        for row in rows:
-            # Get BMC Helix UUID from the table
-            request_id = row.get("cells", {}).get("bmc_helix_request_id")["value"]
-            # Get the BMC Helix incident
-            try:
-                incident, _ = helix_client.get_form_entry(FORM_NAME, request_id)
-            except IntegrationError as e:
-                if e.value.find("404 Client Error: Not Found") > -1:
-                    # 404 - The incident was probably deleted
-                    LOG.info(f"Unable to find Request ID {request_id} in BMC Helix. It may have been deleted. Continuing to the next ID.")
-                else:
-                    # Unknown error case - the helix_payload supplied might have a bad key
-                    LOG.error(f"Received error response from BMC Helix when attempting to close Request ID {request_id}.\n"
-                              "Check your helix_payload input to ensure it matches the HPD:IncidentInterface_Create schema.\n"
-                              "Continuing to the next ID.")
-                skipped.append(incident)
-                continue  # Move on to the next row
-            # Close the incident if not already closed
-            closed, skipped = self.update_incident_values(helix_client, closed, skipped, incident, helix_payload)
-            updated_row = {"bmc_helix_status": "Closed"}
-            self.update_datatable_row(row["id"], updated_row, incident_id)
+            if len(rows) > 1:
+                LOG.info(f"Multiple datatable rows found matching task {task['id']}: {task['name']}.\n"
+                        "Any incidents matching these rows in BMC Helix will be closed.")
+            # Handle multiple rows
+            for row in rows:
+                # Get BMC Helix UUID from the table
+                request_id = row.get("cells", {}).get("bmc_helix_request_id")["value"]
+                # Get the BMC Helix incident
+                try:
+                    incident, _ = helix_client.get_form_entry(FORM_NAME, request_id)
+                except IntegrationError as e:
+                    if e.value.find("404 Client Error: Not Found") > -1:
+                        # 404 - The incident was probably deleted
+                        LOG.info(f"Unable to find Request ID {request_id} in BMC Helix. It may have been deleted. Continuing to the next ID.")
+                    else:
+                        # Unknown error case - the helix_payload supplied might have a bad key
+                        LOG.error(f"Received error response from BMC Helix when attempting to close Request ID {request_id}.\n"
+                                "Check your helix_payload input to ensure it matches the HPD:IncidentInterface_Create schema.\n"
+                                "Continuing to the next ID.")
+                    skipped.append(incident)
+                    continue  # Move on to the next row
+                # Close the incident if not already closed
+                closed, skipped = self.update_incident_values(helix_client, closed, skipped, incident, helix_payload)
+                self.update_datatable_row(row["id"], {"bmc_helix_status": "Closed"}, incident_id)
 
         return {"closed": closed, "skipped": skipped}, True, None
 
@@ -163,11 +161,12 @@ class FunctionComponent(AppFunctionComponent):
             helix_payload = getattr(fn_inputs, "helix_payload")
             helix_payload = loads(helix_payload)
             incident_id = getattr(fn_inputs, "incident_id")
-            task_id = getattr(fn_inputs, "task_id")
+            bmc_helix_request_id = getattr(fn_inputs, "bmc_helix_request_id", None)
+            task_id = getattr(fn_inputs, "task_id", None)
+            task = None
 
-            # Instantiate a SOAR API client
-            # Get the task data
-            task = self.rest_client().get(f"/tasks/{task_id}")
+            if not task_id and not bmc_helix_request_id:
+                raise ValueError("Either task_id or bmc_helix_request_id must be given.")
 
             # Instantiate a HelixClient
             client = HelixClient(self.options.get("helix_host"),
@@ -177,11 +176,22 @@ class FunctionComponent(AppFunctionComponent):
                                  port=self.options.get("helix_port"),
                                  verify=self.rc.get_verify())
 
-            result, success, reason = self.close_helix_incident(incident_id, task, client, helix_payload)
+            if task_id:
+                # Instantiate a SOAR API client
+                # Get the task data
+                task = self.rest_client().get(f"/tasks/{task_id}")
+                results, success, reason = self.close_helix_incident(incident_id, task, client, helix_payload)
+            else: # If run from a BMC Helix linked SOAR incident
+                incident, _ = client.get_form_entry(FORM_NAME, bmc_helix_request_id)
+                # Close the incident if not already closed
+                closed, skipped = self.update_incident_values(client, [], [], incident, helix_payload)
+                results = {"closed": closed, "skipped": skipped}
+                success = True
+                reason = None
 
             yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(result, success=success, reason=reason)
+            yield FunctionResult(results, success=success, reason=reason)
         except Exception as e:
             yield FunctionError(e)

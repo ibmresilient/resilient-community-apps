@@ -25,13 +25,13 @@ def codegen_reload_data():
         "functions": [u"helix_close_incident", u"helix_create_incident"],
         "workflows": [],
         "actions": [],
-        "incident_fields": [],
+        "incident_fields": [u"bmc_helix_assigned_support_organization", u"bmc_helix_assigned_to", u"bmc_helix_company", u"bmc_helix_created_date", u"bmc_helix_description", u"bmc_helix_impact", u"bmc_helix_incident_number", u"bmc_helix_organization", u"bmc_helix_priority", u"bmc_helix_request_id", u"bmc_helix_status", u"bmc_helix_urgency"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"bmc_helix_incidents"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"bmc_helix_close_incident_from_task", u"bmc_helix_create_incident_from_task"]
+        "playbooks": [u"bmc_helix_close_incident", u"bmc_helix_close_incident_from_task", u"bmc_helix_create_incident", u"bmc_helix_create_incident_from_task"]
     }
 
 
@@ -49,8 +49,23 @@ def customization_data(client=None):
         - helix_close_incident
         - helix_create_incident
     - Playbooks:
+        - bmc_helix_close_incident
         - bmc_helix_close_incident_from_task
+        - bmc_helix_create_incident
         - bmc_helix_create_incident_from_task
+    - Incident Fields:
+        - bmc_helix_assigned_support_organization
+        - bmc_helix_assigned_to
+        - bmc_helix_company
+        - bmc_helix_created_date
+        - bmc_helix_description
+        - bmc_helix_impact
+        - bmc_helix_incident_number
+        - bmc_helix_organization
+        - bmc_helix_priority
+        - bmc_helix_request_id
+        - bmc_helix_status
+        - bmc_helix_urgency
     - Data Tables:
         - bmc_helix_incidents
     """
