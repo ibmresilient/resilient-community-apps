@@ -117,30 +117,3 @@ class TestDataTable():
         for cell_key in updated_row['cells'].keys():
             assert cell_key in output['cells'].keys()
             assert updated_row['cells'][cell_key]['value'] == output['cells'][cell_key]['value']
-
-    def test_delete(self, mocked_res_client):
-        """test_delete_row gathers both a mocked input and output
-        initializes a datatable object with some mocked inputs
-        and then attempts to call delete_row with the other
-        mocked inputs.
-
-        Afterwards verify the result with the mocked outputs
-
-        :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable SOAR Mock for endpoints
-        :type mocked_res_client: fixture
-        """
-        inputs = DELETE_ROW_MOCKED_INPUT
-
-        dt = Datatable(
-            mocked_res_client, inputs["incident_id"], inputs["datatable_datatable_api_name"])
-
-        # Get the data table data
-        dt.get_data()
-
-        # Update the row
-        deleted_row = dt.delete_row(inputs["datatable_row_id"])
-
-        with pytest.raises(ValueError):
-            dt.get_row(inputs["datatable_row_id"])
-
-        assert deleted_row

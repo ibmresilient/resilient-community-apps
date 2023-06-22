@@ -28,9 +28,9 @@ setup(
     description="BMC Helix for IBM SOAR",
     long_description="BMC Helix for IBM SOAR "
                     "This integration provides the capability to create "
-                    "new incidents in BMC Helix from SOAR tasks via the "
+                    "new incidents in BMC Helix from SOAR tasks and incidents via the "
                     "HPD:IncidentInterface_Create form over the REST API. "
-                    "Once the task is complete, this integration also provides "
+                    "Once the task or incident is complete, this integration also provides "
                     "the capability to close existing BMC Helix Incidents.",
     install_requires=[
         "resilient-circuits>=46.0.0"
