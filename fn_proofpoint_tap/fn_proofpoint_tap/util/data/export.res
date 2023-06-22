@@ -3,7 +3,6 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "case_matching_profiles": [],
   "export_date": 1686693704275,
   "export_format_version": 2,
   "export_type": null,
