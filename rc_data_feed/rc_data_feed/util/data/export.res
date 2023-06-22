@@ -118,7 +118,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1687451058367,
+  "export_date": 1687453010581,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -271,29 +271,18 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Data Feeder: Sync Incidents",
-          "object_type": "incident",
-          "programmatic_name": "data_feeder_sync_incidents",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 1
-        }
-      ]
+      "workflows": []
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 4,
+  "id": 5,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1687451056499,
+      "create_date": 1687453008445,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -302,7 +291,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1687451056499,
+      "update_date": 1687453008445,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
