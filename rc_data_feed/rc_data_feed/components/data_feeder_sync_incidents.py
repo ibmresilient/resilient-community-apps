@@ -82,4 +82,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(result_payload)
         except Exception as err:
-            yield FunctionResult(None, False, str(err))
+            result_payload = result.done(False, {}, str(err))
+            yield FunctionResult(result_payload)
