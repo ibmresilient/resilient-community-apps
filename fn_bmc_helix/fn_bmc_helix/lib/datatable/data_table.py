@@ -19,6 +19,23 @@ class Datatable(object):
         self.data = None
         self.rows = None
 
+    def get_data(self):
+        """get_data Function that gets all the data and rows of a Data Table
+            using the SOAR API
+
+        :raises ValueError: If the datatable api call fails or the result contains no rows, raise an Exception
+        """
+
+        uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(
+            self.incident_id, self.api_name)
+
+        try:
+            self.data = self.res_client.get(uri)
+            self.rows = self.data["rows"]
+        except Exception:
+            raise ValueError(
+                "Failed to get {0} Datatable".format(self.api_name))
+
     def get_rows(self, max_rows=0, sort_by=None, sort_direction="ASC", search_column=None, search_value=None):
         """get_rows Searches and returns rows based on a search/sort criteria, else None
 
