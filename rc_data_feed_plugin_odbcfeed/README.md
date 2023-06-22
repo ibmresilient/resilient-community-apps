@@ -1,6 +1,5 @@
 ## Release Notes
 
-* v1.0.8 Allow Data Sync function to continue without failing a workflow/playbook
 * v1.0.7 Fixes for mariaDB and mySQL DB access within App Host
 * v1.0.6 Fixes for removed datatable columns, added caching for db schema updates - improving performance
 * v1.0.5 Support for attachment content
