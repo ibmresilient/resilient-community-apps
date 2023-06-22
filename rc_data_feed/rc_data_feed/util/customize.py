@@ -23,7 +23,7 @@ def codegen_reload_data():
         "package": u"rc_data_feed",
         "message_destinations": [u"feed_data"],
         "functions": [u"data_feeder_sync_incidents"],
-        "workflows": [u"data_feeder_sync_incidents"],
+        "workflows": [],
         "actions": [u"Data Feeder: Artifact", u"Data Feeder: Attachment", u"Data Feeder: Incident", u"Data Feeder: Milestone", u"Data Feeder: Note", u"Data Feeder: Task"],
         "incident_fields": [],
         "incident_artifact_types": [],
@@ -46,8 +46,6 @@ def customization_data(client=None):
     - Message Destinations:
         - feed_data
     - Functions:
-        - data_feeder_sync_incidents
-    - Workflows:
         - data_feeder_sync_incidents
     - Playbooks:
         - data_feeder_sync_incidents_pb
