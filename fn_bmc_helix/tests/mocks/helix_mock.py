@@ -22,7 +22,8 @@ def mock_init():
                 "values": {
                     "Status": "New",
                     "First_Name": "Allen",
-                    "Last_Name": "Allbrook"
+                    "Last_Name": "Allbrook",
+                    "Request ID": "0000000001"
                 },
                 "links": {
                     "foo": "bar"
@@ -45,5 +46,19 @@ def mock_init():
 
         def update_form_entry(self, *args, **kwargs):
             return {}, 204
+
+        def query_form_entry(self, *args, **kwargs):
+            form = {
+                "entries": [{
+                    "values": {
+                        "Status": "New",
+                        "First_Name": "Allen",
+                        "Last_Name": "Allbrook",
+                        "Request ID": "0000000001",
+                        "Incident Number": "INC00000001"
+                    }
+                }]
+            }
+            return form, 200
 
     return MockClient()

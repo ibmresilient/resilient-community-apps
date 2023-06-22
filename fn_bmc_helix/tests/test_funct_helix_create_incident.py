@@ -3,26 +3,26 @@
 
 import pytest
 import json
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock import patch
-from mocks import helix_dt_mock, helix_mock
+from mocks import helix_mock
 
 PACKAGE_NAME = "fn_bmc_helix"
 FUNCTION_NAME = "helix_create_incident"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = """[fn_bmc_helix]
+helix_host=bmc_helix.com
+helix_user=User1
+helix_password=1234
+"""
 
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 helix_side_effect = [
     helix_mock.mock_init()
-]
-
-helix_dt_side_effect = [
-    helix_dt_mock.mock_init()
 ]
 
 def call_helix_create_incident_function(circuits, function_params, timeout=5):
@@ -76,10 +76,8 @@ class TestHelixCreateIncident:
     }
 
     @patch("fn_bmc_helix.components.funct_helix_create_incident.HelixClient", side_effect=helix_side_effect)
-    @patch("fn_bmc_helix.components.funct_helix_create_incident.Datatable", side_effect=helix_dt_side_effect)
-    @pytest.mark.livetest
     @pytest.mark.parametrize("mock_inputs", [(mock_inputs_1)])
-    def test_success(self, helix_mock, helix_dt_mock, circuits_app, mock_inputs):
+    def test_success(self, helix_mock, circuits_app, mock_inputs):
         """ Test calling with sample values for the parameters """
 
         results = call_helix_create_incident_function(circuits_app, mock_inputs)

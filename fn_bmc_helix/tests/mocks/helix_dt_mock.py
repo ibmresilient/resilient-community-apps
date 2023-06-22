@@ -10,7 +10,7 @@ def mock_init():
         def get_data(self, *args, **kwargs):
             pass
         def get_rows(self, *args, **kwargs):
-            rows = [{"id":304, "cells": { "helix_id": { "value": "INC000000000001"}}}]
+            rows = [{"id":304, "cells": { "bmc_helix_request_id": { "value": "INC000000000001"}}}]
             return rows
         def update_row(self, *args, **kwargs):
             pass

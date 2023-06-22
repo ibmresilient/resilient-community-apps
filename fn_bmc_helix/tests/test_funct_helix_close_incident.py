@@ -2,7 +2,7 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 import json
 from mock import patch
@@ -12,7 +12,11 @@ PACKAGE_NAME = "fn_bmc_helix"
 FUNCTION_NAME = "helix_close_incident"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = """[fn_bmc_helix]
+helix_host=bmc_helix.com
+helix_user=User1
+helix_password=1234
+"""
 
 # Provide a simulation of the SOAR REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -75,7 +79,6 @@ class TestHelixCloseIncident:
     # @patch("fn_bmc_helix.lib.helix.HelixAPIClient.HelixClient", side_effect=helix_mock)
     @patch("fn_bmc_helix.components.funct_helix_close_incident.HelixClient", side_effect=helix_side_effect)
     @patch("fn_bmc_helix.components.funct_helix_close_incident.Datatable", side_effect=helix_dt_side_effect)
-    @pytest.mark.livetest
     @pytest.mark.parametrize("mock_inputs", [(mock_inputs_1)])
     def test_success(self, helix_mock, helix_dt_mock, circuits_app, mock_inputs):
         """ Test calling with sample values for the parameters """
