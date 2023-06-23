@@ -149,7 +149,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **doest** support a proxy server.
+The app **does** support a proxy server.
 
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
