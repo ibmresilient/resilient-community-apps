@@ -39,7 +39,7 @@
 - [Script - PB: Display workflow data](#script---pb-display-workflow-data)
 - [Adding Usage Data for Datatables](#adding-usage-data-for-datatables)
 - [Data Table - Playbook Usage](#data-table---playbook-usage)
-- [Playbooks](#playbooks)
+- [Rules](#rules)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -50,23 +50,12 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.2.0 | 05/2023 | Add Playbooks
 | 1.1.0 | 12/2022 | Playbook import/export
 | 1.0.1 | 09/2021 | Datatable presentation fixes |
 | 1.0.0 | 08/2021 | Initial Release |
----
-### 1.2.0 Changes
-In v2.1, the existing rules and workflows have been replaced with playbooks.
-This change is made to support the ongoing, newer capabilities of playbooks.
-Each playbook has the same functionality as the previous, corresponding rule/workflow.
-
-If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
-For automatic actions, the playbooks will be disabled by default.
-
-You can continue to use the rules/workflows. 
-But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
 
 ---
+
 ## Overview
 <!--
   Provide a high-level description of the function itself and its remote software or application.
@@ -92,17 +81,17 @@ Resilient Circuits Components for 'fn_playbook_utils'
 <!--
   List any Requirements
 -->
-This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
+This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
 
 ### IBM SOAR platform
 The IBM SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a IBM SOAR platform with an App Host, the requirements are:
-* IBM SOAR platform >= `46.0.8131`.
+* IBM SOAR platform >= `45.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a IBM SOAR platform with an integration server, the requirements are:
-* IBM SOAR platform >= `46.0.8131`.
+* IBM SOAR platform >= `45.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=46.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -124,7 +113,7 @@ The following IBM SOAR platform guides provide additional information:
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
-The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your IBM SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
@@ -1039,7 +1028,7 @@ results = {
               "description": null,
               "name": "PB: Get workflow/playbook usage",
               "object_type": 0,
-              "programmatic_name": "pb_pb_get_workflowplaybooks_frequency",
+              "programmatic_name": "wf_get_workflow_data",
               "tags": [
                 {
                   "tag_handle": 215,
@@ -1545,16 +1534,23 @@ workflow_usage
 
 ---
 
+## Rules
+| Rule Name | Object | Workflow/Playbook Triggered |
+| --------- | ------ | ------------------ |
+| PB: Get workflow/playbook frequency | incident | `wf_get_workflow_frequency` |
+| PB: Get workflow/playbook usage | incident | `wf_get_workflow_data` |
+| PB: Get workflow/playbook usage at incident close | incident | `wf_get_workflow_usage_at_incident_close` |
+| PB: Get workflows/playbooks by artifact value | artifact | `wf_get_workflows_by_artifact_value` |
+| PB: Get workflows/playbooks by artifact value for last 30 days | artifact | `pb_get_workflows_by_artifact_value_for_last_30_days` |
+| PB: Get workflows/playbooks by attachment name | attachment | `wf_get_workflows_by_attachment_filename` |
+| PB: Get workflows/playbooks by task name | task | `wf_get_workflows_by_task_name` |
+
 ## Playbooks
-| Playbook Name | Object | Status |
-| --------- | ------ | ------ | 
-| PB: Get workflow/playbooks frequency (PB) | incident | enabled
-| PB: Get workflow/playbook usage at incident close (PB) | incident | disabled
-| PB: Get workflow/playbook usage (PB) | incident | enabled
-| PB: Get workflows/playbooks by artifact value for last 30 days (PB) | Artifact | disabled
-| PB: Get workflows/playbooks by artifact value (PB) | Artifact |enabled
-| PB: Get workflows/playbooks by attachment filename (PB) | Attachment | enabled
-| PB: Get workflows/playbooks by task name (PB) | Task | enabled
+| Playbook Name | Object | 
+| --------- | ------ | 
+| PB: Export Playbook | incident |
+| PB: Get Playbooks | incident |
+| PB: Import Playbook | incident |
 
 Notes:
 1. The rule, PB: Get workflows/playbooks by artifact value for last 30 days, is an automatic rule which can be used to get workflow and playbook insights when an artifact is created. This rule is disabled by default and can be enabled by going to the Customization Settings and the Rules tab.

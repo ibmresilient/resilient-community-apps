@@ -1,0 +1,73 @@
+# This file is used to setup permissions applied to an API key which is
+# automatically generated for this integration.
+# Generated with resilient-sdk v49.0.4423
+# Below are a set of base permissions which should not changed.
+# Add any additional permissions if your app directly makes Resilient API calls.
+##START_BASE_PERMISSIONS - DO NOT CHANGE##
+read_data
+read_function
+##END_BASE_PERMISSIONS - DO NOT CHANGE##
+# Add additional permissions below, one per line.
+#
+## Incident Permissions
+#read_all_incidents
+#create_incident
+#delete_all_incidents
+#download_incident_emails
+#edit_all_incidents_fields
+#edit_all_incidents_owner
+#edit_all_incidents_members
+#edit_all_incidents_status
+#edit_all_incident_notes
+#edit_all_incidents_workspaces
+#
+## Tasks Permissions
+#edit_task_header
+#read_incident_public_task
+#edit_incident_public_task_fields
+#edit_incident_public_task_member
+#edit_all_public_task_notes
+#read_all_private_tasks
+#edit_incident_private_task_fields
+#edit_incident_private_task_member
+#edit_all_private_task_notes
+#
+## Playbook Permissions
+#read_playbook
+#edit_playbook
+#create_playbook
+#delete_playbook
+#
+## Administration Permissions
+#edit_data
+#
+## Customization Permissions
+#read_layouts
+#edit_layouts
+#delete_layouts
+#read_script
+#edit_script
+#create_script
+#delete_script
+#read_workflow
+#edit_workflow
+#create_workflow
+#delete_workflow
+#read_function
+#edit_function
+#create_function
+#delete_function
+#
+## Other Permissions
+#read_all_action_invocations
+#read_stats
+#edit_wiki
+#create_wiki
+#delete_wiki
+#read_inbox_emails
+#download_inbox_emails
+#delete_inbox_emails
+#view_global_artifacts
+#create_global_artifacts
+#edit_global_artifacts
+#delete_global_artifacts
