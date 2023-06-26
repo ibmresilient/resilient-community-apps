@@ -20,11 +20,10 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 
-
 setup(
     name="fn_playbook_utils",
     display_name="Playbook Utils",
-    version="1.2.0",
+    version="1.1.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
