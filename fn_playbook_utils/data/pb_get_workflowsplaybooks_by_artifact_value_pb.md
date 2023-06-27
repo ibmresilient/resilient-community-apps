@@ -4,10 +4,10 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - PB: Get workflow/playbook usage (PB)
+# Playbook - PB: Get workflows/playbooks by artifact value (PB)
 
 ### API Name
-`pb_get_workflowplaybook_usage_pb`
+`pb_get_workflowsplaybooks_by_artifact_value_pb`
 
 ### Status
 `enabled`
@@ -16,10 +16,10 @@
 `manual`
 
 ### Object Type
-`incident`
+`artifact`
 
 ### Description
-Get workflows and playbooks for one or a range of incidents
+Find all the workflows and playbooks across incidents which have been run on a specific artifact value
 
 
 ---
@@ -42,7 +42,8 @@ inputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id
 inputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date
 inputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date
 
-inputs.pb_object_name = inputs.pb_object_type = None
+inputs.pb_object_name = artifact.value
+inputs.pb_object_type = 'artifact'
 ```
 
 ---
@@ -60,12 +61,13 @@ inputs.pb_object_name = inputs.pb_object_type = None
 ### Function-Input Script
 ```python
 inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id
-inputs.pb_min_incident_id =  playbook.inputs.pb_min_incident_id
+inputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id
 
 inputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date
 inputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date
 
-inputs.pb_object_name = inputs.pb_object_type = None
+inputs.pb_object_name = artifact.value
+inputs.pb_object_type = 'artifact'
 ```
 
 ---

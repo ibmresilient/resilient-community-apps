@@ -4,22 +4,22 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - PB: Get workflow/playbook usage (PB)
+# Playbook - PB: Get workflows/playbooks by artifact value for last 30 days (PB)
 
 ### API Name
-`pb_get_workflowplaybook_usage_pb`
+`pb_get_workflowsplaybooks_by_artifact_value_for_last_30_days_pb`
 
 ### Status
-`enabled`
+`disabled`
 
 ### Activation Type
-`manual`
+`automatic`
 
 ### Object Type
-`incident`
+`artifact`
 
 ### Description
-Get workflows and playbooks for one or a range of incidents
+Retrieve workflows and playbooks associated with this artifact run over the last 30 days
 
 
 ---
@@ -36,13 +36,18 @@ Get workflows and playbooks for one or a range of incidents
 
 ### Function-Input Script
 ```python
-inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id
-inputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id
+#import java.util.Date as Date
+from time import time
 
-inputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date
-inputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date
+THIRTY_DAYS = 60*60*24*30*1000
 
-inputs.pb_object_name = inputs.pb_object_type = None
+inputs.pb_min_incident_id = None
+inputs.pb_max_incident_id = None
+inputs.pb_min_incident_date = int(time()*1000) - THIRTY_DAYS
+inputs.pb_max_incident_date = None
+
+inputs.pb_object_name = artifact.value
+inputs.pb_object_type = 'artifact'
 ```
 
 ---
@@ -59,13 +64,18 @@ inputs.pb_object_name = inputs.pb_object_type = None
 
 ### Function-Input Script
 ```python
-inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id
-inputs.pb_min_incident_id =  playbook.inputs.pb_min_incident_id
+#import java.util.Date() as Date
+from time import time
 
-inputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date
-inputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date
+THIRTY_DAYS = 60*60*24*30*1000
 
-inputs.pb_object_name = inputs.pb_object_type = None
+inputs.pb_min_incident_id = None
+inputs.pb_max_incident_id = None
+inputs.pb_min_incident_date = int(time()*1000) - THIRTY_DAYS
+inputs.pb_max_incident_date = None
+
+inputs.pb_object_name = artifact.value
+inputs.pb_object_type = 'artifact'
 ```
 
 ---

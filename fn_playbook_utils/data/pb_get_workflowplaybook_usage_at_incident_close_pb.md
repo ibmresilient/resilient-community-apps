@@ -4,22 +4,22 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - PB: Get workflow/playbook usage (PB)
+# Playbook - PB: Get workflow/playbook usage at incident close (PB)
 
 ### API Name
-`pb_get_workflowplaybook_usage_pb`
+`pb_get_workflowplaybook_usage_at_incident_close_pb`
 
 ### Status
-`enabled`
+`disabled`
 
 ### Activation Type
-`manual`
+`automatic`
 
 ### Object Type
 `incident`
 
 ### Description
-Get workflows and playbooks for one or a range of incidents
+Capture all workflows and playbooks run on an incident when the incident is closed
 
 
 ---
@@ -36,13 +36,11 @@ Get workflows and playbooks for one or a range of incidents
 
 ### Function-Input Script
 ```python
-inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id
-inputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id
+inputs.pb_max_incident_id = incident.id
+inputs.pb_min_incident_id = incident.id
 
-inputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date
-inputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date
-
-inputs.pb_object_name = inputs.pb_object_type = None
+inputs.pb_min_incident_date = None
+inputs.pb_max_incident_date = None
 ```
 
 ---
@@ -59,87 +57,15 @@ inputs.pb_object_name = inputs.pb_object_type = None
 
 ### Function-Input Script
 ```python
-inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id
-inputs.pb_min_incident_id =  playbook.inputs.pb_min_incident_id
+inputs.pb_max_incident_id = incident.id
+inputs.pb_min_incident_id = incident.id
 
-inputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date
-inputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date
-
-inputs.pb_object_name = inputs.pb_object_type = None
+inputs.pb_min_incident_date = None
+inputs.pb_max_incident_date = None
 ```
 
 ---
 
-## Global script - PB: Display workflow data
-
-### Description
-Display usage data for workflows
-This script relies on the workflow property: workflow_data
-
-### Script Type
-`Global script`
-
-### Objet Type
-`incident`
-
-### Script Content
-```python
-from datetime import datetime
-
-current_dt = datetime.now()
-
-URL_MAP  = {
-  'incident': u"<a href='/#incidents/{0}'>{3}</a>",
-  'incident_element': u"<a href='/#incidents/{0}'>{0}</a>",
-  'task': u"<a href='/#incidents/{0}?taskId={1}&tabName=details&org_id={2}'>{3}</a>",
-  'artifact': u"<a href='/#incidents/{0}/artifact/{1}?org_id={2}'>{3}</a>",
-  'workflow': u"<a href='/#customize?tab=workflows&workflow={1}'>{3}</a>",
-  'playbook': u"<a href='/#playbooks/designer/{1}'>{3}</a>"
-}
-
-def make_url(org_id, inc_id, element_type, element_id, element_name):
-  if element_type in URL_MAP:
-    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)
-
-  return str(element_name)
-
-# --- S T A R T
-results = playbook.functions.results.workflow_data
-
-if results.success:
-  org_id = results.content['org_id']
-  data_flg = False
-  for key_incident, value_workflow in results.content['workflow_content'].items():
-    for entity in value_workflow['entities']:
-      # skip these workflows/playbooks
-      if "PB: Get" in entity.get("workflow", {}).get("name"):
-        continue
-
-      if (results.inputs.get('pb_object_name') and results.inputs['pb_object_name'] == entity.get("object", {}).get("object_name")) or not results.inputs.get('pb_object_name'):
-        row = incident.addRow('workflow_usage')
-        incident_name = entity.get("object", {}).get("parent", {}).get("object_name") if entity.get("object", {}).get("parent", {}) else entity.get("object", {}).get("object_name")
-        incident_id = entity.get("object", {}).get("parent", {}).get("object_id") if entity.get("object", {}).get("parent", {}) else entity.get("object", {}).get("object_id")
-        row['report_date'] = current_dt
-        row['incident'] = helper.createRichText(make_url(org_id, key_incident, 'incident', incident_id, incident_name))
-        row['type'] = 'workflow'
-        row['workflow'] = helper.createRichText(make_url(org_id, key_incident, 'workflow', entity.get("workflow", {}).get("workflow_id"), entity.get("workflow", {}).get("name")))
-        row['workflow_id'] = entity.get("workflow", {}).get("workflow_id")
-        row['execution_date'] = entity.get("start_date")
-        row['element_type'] = entity.get("object", {}).get("type_name")
-        if entity.get("object", {}).get("type_name") == 'incident':
-            row['element_value'] = helper.createRichText(make_url(org_id, key_incident, 'incident_element', entity.get("object", {}).get("object_id"), entity.get("object", {}).get("object_id")))
-        else:
-            row['element_value'] = helper.createRichText(make_url(org_id, key_incident, entity.get("object", {}).get("type_name"), entity.get("object", {}).get("object_id"), entity.get("object", {}).get("object_name")))
-        data_flg = True
-  
-  if not data_flg:
-    incident.addNote("PB: Get workflow usage ({}) returned no results for incident range: {}-{}".format(results.inputs.get('pb_object_name'), results.content['min_id'], results.inputs['pb_max_incident_id']))
-else:
-  incident.addNote("PB: Get workflow usage ({}) failed: {}".format(results.inputs.get('pb_object_name'), results.reason))
-
-```
-
----
 ## Global script - PB: Display playbook data
 
 ### Description
@@ -207,6 +133,76 @@ if results.success:
     incident.addNote("PB: Get playbook usage ({}) returned no results for incident range: {}-{}".format(results.inputs.get('pb_object_name'), results.content['min_id'], results.inputs['pb_max_incident_id']))
 else:
   incident.addNote("PB: Get playbook usage ({}) failed: {}".format(results.inputs.get('pb_object_name'), results.reason))
+
+```
+
+---
+## Global script - PB: Display workflow data
+
+### Description
+Display usage data for workflows
+This script relies on the workflow property: workflow_data
+
+### Script Type
+`Global script`
+
+### Objet Type
+`incident`
+
+### Script Content
+```python
+from datetime import datetime
+
+current_dt = datetime.now()
+
+URL_MAP  = {
+  'incident': u"<a href='/#incidents/{0}'>{3}</a>",
+  'incident_element': u"<a href='/#incidents/{0}'>{0}</a>",
+  'task': u"<a href='/#incidents/{0}?taskId={1}&tabName=details&org_id={2}'>{3}</a>",
+  'artifact': u"<a href='/#incidents/{0}/artifact/{1}?org_id={2}'>{3}</a>",
+  'workflow': u"<a href='/#customize?tab=workflows&workflow={1}'>{3}</a>",
+  'playbook': u"<a href='/#playbooks/designer/{1}'>{3}</a>"
+}
+
+def make_url(org_id, inc_id, element_type, element_id, element_name):
+  if element_type in URL_MAP:
+    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)
+
+  return str(element_name)
+
+# --- S T A R T
+results = playbook.functions.results.workflow_data
+
+if results.success:
+  org_id = results.content['org_id']
+  data_flg = False
+  for key_incident, value_workflow in results.content['workflow_content'].items():
+    for entity in value_workflow['entities']:
+      # skip these workflows/playbooks
+      if "PB: Get" in entity.get("workflow", {}).get("name"):
+        continue
+
+      if (results.inputs.get('pb_object_name') and results.inputs['pb_object_name'] == entity.get("object", {}).get("object_name")) or not results.inputs.get('pb_object_name'):
+        row = incident.addRow('workflow_usage')
+        incident_name = entity.get("object", {}).get("parent", {}).get("object_name") if entity.get("object", {}).get("parent", {}) else entity.get("object", {}).get("object_name")
+        incident_id = entity.get("object", {}).get("parent", {}).get("object_id") if entity.get("object", {}).get("parent", {}) else entity.get("object", {}).get("object_id")
+        row['report_date'] = current_dt
+        row['incident'] = helper.createRichText(make_url(org_id, key_incident, 'incident', incident_id, incident_name))
+        row['type'] = 'workflow'
+        row['workflow'] = helper.createRichText(make_url(org_id, key_incident, 'workflow', entity.get("workflow", {}).get("workflow_id"), entity.get("workflow", {}).get("name")))
+        row['workflow_id'] = entity.get("workflow", {}).get("workflow_id")
+        row['execution_date'] = entity.get("start_date")
+        row['element_type'] = entity.get("object", {}).get("type_name")
+        if entity.get("object", {}).get("type_name") == 'incident':
+            row['element_value'] = helper.createRichText(make_url(org_id, key_incident, 'incident_element', entity.get("object", {}).get("object_id"), entity.get("object", {}).get("object_id")))
+        else:
+            row['element_value'] = helper.createRichText(make_url(org_id, key_incident, entity.get("object", {}).get("type_name"), entity.get("object", {}).get("object_id"), entity.get("object", {}).get("object_name")))
+        data_flg = True
+  
+  if not data_flg:
+    incident.addNote("PB: Get workflow usage ({}) returned no results for incident range: {}-{}".format(results.inputs.get('pb_object_name'), results.content['min_id'], results.inputs['pb_max_incident_id']))
+else:
+  incident.addNote("PB: Get workflow usage ({}) failed: {}".format(results.inputs.get('pb_object_name'), results.reason))
 
 ```
 

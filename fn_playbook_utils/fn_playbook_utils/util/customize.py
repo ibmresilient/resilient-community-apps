@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [u"workflow_usage"],
         "automatic_tasks": [],
         "scripts": [u"PB: Display playbook data", u"PB: Display workflow data"],
-        "playbooks": [u"pb_get_workflowplaybook_usage_pb"]
+        "playbooks": [u"pb_get_workflowplaybook_usage_at_incident_close_pb", u"pb_get_workflowplaybook_usage_pb", u"pb_get_workflowplaybooks_frequency_pb", u"pb_get_workflowsplaybooks_by_artifact_value_for_last_30_days_pb", u"pb_get_workflowsplaybooks_by_artifact_value_pb", u"pb_get_workflowsplaybooks_by_attachment_filename_pb", u"pb_get_workflowsplaybooks_by_task_name_pb"]
     }
 
 
@@ -53,7 +53,13 @@ def customization_data(client=None):
         - pb_get_workflow_data
         - pb_import_playbook
     - Playbooks:
+        - pb_get_workflowplaybook_usage_at_incident_close_pb
         - pb_get_workflowplaybook_usage_pb
+        - pb_get_workflowplaybooks_frequency_pb
+        - pb_get_workflowsplaybooks_by_artifact_value_for_last_30_days_pb
+        - pb_get_workflowsplaybooks_by_artifact_value_pb
+        - pb_get_workflowsplaybooks_by_attachment_filename_pb
+        - pb_get_workflowsplaybooks_by_task_name_pb
     - Data Tables:
         - workflow_usage
     - Scripts:
