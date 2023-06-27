@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4368
 
 """Generate the Resilient customizations required for fn_reaqta"""
 
@@ -31,7 +30,7 @@ def codegen_reload_data():
         "datatables": [u"reaqta_process_list", u"reaqta_trigger_events"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"reaqta_create_artifact_from_process_path", u"reaqta_create_attachment_from_process_list", u"reaqta_create_attachment_from_triggered_event"]
+        "playbooks": [u"reaqta_close_alert", u"reaqta_create_artifact_from_process_path", u"reaqta_create_artifact_from_trigger_event", u"reaqta_create_attachment_from_process_list", u"reaqta_create_attachment_from_triggered_event", u"reaqta_create_note", u"reaqta_create_policy_from_artifact", u"reaqta_create_policy_on_triggered_event", u"reaqta_get_alert_information", u"reaqta_get_endpoint_status", u"reaqta_get_processes", u"reaqta_isolate_endpoint", u"reaqta_kill_process", u"reaqta_refresh_alert_information"]
     }
 
 
@@ -40,7 +39,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 47.0.8304
 
     Contents:
     - Message Destinations:
@@ -71,9 +70,20 @@ def customization_data(client=None):
         - reaqta_isolate_endpoint
         - reaqta_kill_process
     - Playbooks:
+        - reaqta_close_alert
         - reaqta_create_artifact_from_process_path
+        - reaqta_create_artifact_from_trigger_event
         - reaqta_create_attachment_from_process_list
         - reaqta_create_attachment_from_triggered_event
+        - reaqta_create_note
+        - reaqta_create_policy_from_artifact
+        - reaqta_create_policy_on_triggered_event
+        - reaqta_get_alert_information
+        - reaqta_get_endpoint_status
+        - reaqta_get_processes
+        - reaqta_isolate_endpoint
+        - reaqta_kill_process
+        - reaqta_refresh_alert_information
     - Rules:
         - ReaQta Get Endpoint Status
         - ReaQta: Close Alert

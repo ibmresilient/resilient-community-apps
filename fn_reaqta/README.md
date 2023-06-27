@@ -56,9 +56,10 @@
   Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
-| Version | Date | Notes |
-| ------- | ---- | ----- |
-| 1.0.0 | 03/2022 | Initial Release |
+| Version | Date    | Notes                      |
+|---------|---------|----------------------------|
+| 1.0.0   | 03/2022 | Initial Release            |
+| 1.1.0   | 06/2023 | Convert rules to Playbooks |
 
 ---
 
