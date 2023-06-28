@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1686832409967,
+  "export_date": 1687941085708,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1818,13 +1818,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 43,
+  "id": 65,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1686832407562,
+      "create_date": 1687941082640,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1833,7 +1833,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1686832407562,
+      "update_date": 1687941082640,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1902,7 +1902,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f\" isExecutable=\"true\" name=\"playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1dkenar\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Exchange Online Create Artifacts from Message\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ddc0513f-fcbc-4582-a4b3-b80a6bd3ff52\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1dkenar\u003c/incoming\u003e\u003coutgoing\u003eFlow_0mk2xb6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0mk2xb6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1dkenar\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0mk2xb6\" sourceRef=\"ScriptTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dkenar\" id=\"Flow_1dkenar_di\"\u003e\u003comgdi:waypoint x=\"580\" y=\"-84\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"18\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mk2xb6\" id=\"Flow_0mk2xb6_di\"\u003e\u003comgdi:waypoint x=\"580\" y=\"102\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"194\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"480\" y=\"-136\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"481.984\" y=\"17.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"513.9839999999999\" y=\"193.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1686812124974,
@@ -1949,12 +1949,12 @@
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "dev-integration",
-        "id": 9,
-        "name": "c3be9c35-c18c-4fac-bae5-9a7d483f1db2",
-        "type": "apikey"
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "hychuang@tw.ibm.com",
+        "type": "user"
       },
-      "last_modified_time": 1686812125466,
+      "last_modified_time": 1687333927021,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -1976,7 +1976,7 @@
       "tags": [],
       "type": "default",
       "uuid": "45f7d606-5f20-4a3b-8bdb-1b9dc501650f",
-      "version": 4
+      "version": 6
     },
     {
       "activation_type": "manual",
@@ -2488,7 +2488,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 9,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89\" isExecutable=\"true\" name=\"playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0r6camt\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Query Messages\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f09fab2-2176-4c27-ab39-cc19568e08e5\"\u003e{\"inputs\":{\"ead214c2-13fe-43f6-a3c7-676a88338dbb\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"092a752f-1297-46a4-bae6-e75d1a9b4804\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9e58d3a3-c54b-4a9b-9164-e6cc0832f644\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"68133b08-816e-4c03-a50d-c68af1b6b205\"]}},\"4ff86946-a8cf-4ae1-804b-87cab7d9dac1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8dd46926-b1dc-4d1e-ab6a-4239510b199d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1c9b3b95-ca24-484c-ad72-f5d64be87402\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"7354f758-b9ea-4029-835d-66d293a22b5d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"51a9c433-07bc-4f04-9932-99211726b9b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"06391a1a-0c2c-4bcd-832a-1f39a3ba77b8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ec20a9f0-1e29-490b-871b-57b05ffbac2e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"\\n\\ninputs.incident_id = incident.id\\n\\n# Get the email address of the user whose mailbox will be queried.\\ninputs.exo_email_address = playbook.inputs.exchange_online_email_address_list\\n\\n# Get the search criteria from the activity rules if available. \\n\\n\\ninputs.exo_mail_folders         = playbook.inputs.exchange_online_mail_folder_id\\ninputs.exo_email_address_sender = playbook.inputs.exchange_online_sender_email_address\\ninputs.exo_message_subject      = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body         = playbook.inputs.exchange_online_message_body\\ninputs.exo_start_date           = playbook.inputs.exchange_online_start_datetime\\ninputs.exo_end_date             = playbook.inputs.exchange_online_end_datetime\\ninputs.exo_has_attachments      = playbook.inputs.exchange_online_has_attachments\\n\\n    \\nif hasattr(playbook.inputs, \\\"exchange_online_query_results_output\\\"):\\n    inputs.exo_query_output_format = [d for d in playbook.inputs.exchange_online_query_results_output]\\n\\n\\n\\n\\n\\n\\n\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_query_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0r6camt\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vnwyn3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Exchange Online: Delete Messages From Query Results\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"af142c3a-3c38-4352-9bca-fa82d53c61af\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_query_messages_results = playbook.functions.results.exchange_online_query_results[\u0027raw\u0027]\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_delete_messages_from_query_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1vnwyn3\u003c/incoming\u003e\u003coutgoing\u003eFlow_1turkjv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0t7a98f\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0r6camt\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1vnwyn3\" sourceRef=\"ServiceTask_1\" targetRef=\"ServiceTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1turkjv\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"exchange_online_delete_messages_from_query_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"af90b5de-2584-4359-b13f-fd9c5cfc2b85\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1turkjv\u003c/incoming\u003e\u003coutgoing\u003eFlow_0t7a98f\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0t7a98f\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0t7a98f\" id=\"Flow_0t7a98f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"682\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"744\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1turkjv\" id=\"Flow_1turkjv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"522\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"598\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vnwyn3\" id=\"Flow_1vnwyn3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"438\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0r6camt\" id=\"Flow_0r6camt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"743.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.25\" y=\"598.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1686812126662,
@@ -2968,7 +2968,7 @@
         "name": "hychuang@tw.ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1686814816776,
+      "last_modified_time": 1687940769195,
       "local_scripts": [
         {
           "actions": [],
@@ -2978,13 +2978,13 @@
           "export_key": "exchange_online_delete_messages_from_query_post_process",
           "id": 12,
           "language": "python3",
-          "last_modified_by": "c3be9c35-c18c-4fac-bae5-9a7d483f1db2",
-          "last_modified_time": 1686812127048,
+          "last_modified_by": "hychuang@tw.ibm.com",
+          "last_modified_time": 1687939676371,
           "name": "exchange_online_delete_messages_from_query_post_process",
           "object_type": "incident",
           "playbook_handle": "example_exchange_online_delete_messages_from_query_results",
           "programmatic_name": "example_exchange_online_delete_messages_from_query_results_exchange_online_delete_messages_from_query_results",
-          "script_text": "from datetime import datetime\nresults=playbook.functions.results.exchange_online_delete_messages_from_query_results\ncontent = results.get(\"content\")\nmessage_row = incident.addRow(\"exo_message_query_results_dt\")\n\n\noutput_format = content.get(\"exo_query_output_format\")\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  user_list = content.get(\"delete_results\")\n  # Add each email as a row in the query results data table\n  for user in user_list:\n    message_row.exo_dt_email_address = user[\"email_address\"]\n    \n    \n    for email in user[\"deleted_list\"]:\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\", \"\")\n      message_row.exo_dt_received_date   = email[\"receivedDateTime\"]\n      if email[\"sender\"]:\n        message_row.exo_dt_sender_email = email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email[\"subject\"]\n      message_row.exo_dt_has_attachments = email[\"hasAttachments\"]\n      message_row.exo_dt_web_link = \"\"\n      text = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status} \u003c/p\u003e\"\"\".format(color=\"red\", status=\"Deleted\")\n      message_row.exo_dt_status = helper.createRichText(text)\n",
+          "script_text": "from datetime import datetime\nresults=playbook.functions.results.exchange_online_delete_messages_from_query_results\ncontent = results.get(\"content\")\noutput_format = content.get(\"exo_query_output_format\")\n\n\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  \n  user_list = content.get(\"delete_results\")\n  # Add each email as a row in the query results data table\n  for user in user_list:\n    \n    for email in user[\"deleted_list\"]:\n      message_row = incident.addRow(\"exo_message_query_results_dt\")\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\", \"\")\n      message_row.exo_dt_received_date   = email.get(\"receivedDateTime\")\n      message_row.exo_dt_email_address = user.get(\"email_address\")\n      if email.get(\"sender\"):\n        message_row.exo_dt_sender_email = email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email.get(\"subject\")\n      message_row.exo_dt_has_attachments = email.get(\"hasAttachments\")\n      message_row.exo_dt_web_link = \"\"\n      \n      text = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status} \u003c/p\u003e\"\"\".format(color=\"red\", status=\"Deleted\")\n      message_row.exo_dt_status = helper.createRichText(text)\n",
           "tags": [],
           "uuid": "af90b5de-2584-4359-b13f-fd9c5cfc2b85"
         }
@@ -3098,7 +3098,7 @@
       "tags": [],
       "type": "default",
       "uuid": "85dc2249-0372-458b-87bd-8ac9efdf3c89",
-      "version": 7
+      "version": 11
     },
     {
       "activation_type": "manual",
@@ -3512,7 +3512,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
+        "content_version": 17,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a\" isExecutable=\"true\" name=\"playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0tw5igv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Query Messages\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f09fab2-2176-4c27-ab39-cc19568e08e5\"\u003e{\"inputs\":{\"ead214c2-13fe-43f6-a3c7-676a88338dbb\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"092a752f-1297-46a4-bae6-e75d1a9b4804\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9e58d3a3-c54b-4a9b-9164-e6cc0832f644\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"68133b08-816e-4c03-a50d-c68af1b6b205\"]}},\"4ff86946-a8cf-4ae1-804b-87cab7d9dac1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8dd46926-b1dc-4d1e-ab6a-4239510b199d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1c9b3b95-ca24-484c-ad72-f5d64be87402\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"7354f758-b9ea-4029-835d-66d293a22b5d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"51a9c433-07bc-4f04-9932-99211726b9b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"06391a1a-0c2c-4bcd-832a-1f39a3ba77b8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ec20a9f0-1e29-490b-871b-57b05ffbac2e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"\\n\\ninputs.incident_id = incident.id\\n\\n# Get the email address of the user whose mailbox will be queried.\\ninputs.exo_email_address = playbook.inputs.exchange_online_email_address_list\\n\\n# Get the search criteria from the activity rules if available. \\n\\n\\ninputs.exo_mail_folders         = playbook.inputs.exchange_online_mail_folder_id\\ninputs.exo_email_address_sender = playbook.inputs.exchange_online_sender_email_address\\ninputs.exo_message_subject      = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body         = playbook.inputs.exchange_online_message_body\\ninputs.exo_start_date           = playbook.inputs.exchange_online_start_datetime\\ninputs.exo_end_date             = playbook.inputs.exchange_online_end_datetime\\ninputs.exo_has_attachments      = playbook.inputs.exchange_online_has_attachments\\n\\n    \\nif hasattr(playbook.inputs, \\\"exchange_online_query_results_output_format\\\"):\\n    inputs.exo_query_output_format = [d for d in playbook.inputs.exchange_online_query_results_output_format]\\n\\n\\n\\n\\n\\n\\n\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_query_messages_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0tw5igv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qox18v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_037maog\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0tw5igv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_query_message_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3c970c09-2637-46b8-af5b-24ecb129c984\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qox18v\u003c/incoming\u003e\u003coutgoing\u003eFlow_037maog\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1qox18v\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_037maog\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_037maog\" id=\"Flow_037maog_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"584\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qox18v\" id=\"Flow_1qox18v_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"408\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tw5igv\" id=\"Flow_0tw5igv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"584\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"408\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1686812128690,
@@ -3524,7 +3524,7 @@
       },
       "deployment_id": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a",
       "description": {
-        "content": null,
+        "content": "This workflow will query the Exchange Online messages for a list of email address and write a row entry into the Exchange Message Query Results data table for each email that matches the search criteria.  If the string \"ALL\" or \"all\" is specified, all user mailboxes of the tenant are queried for the specified messages. The user can also specify the all users starting with specific characters.  For example: \"all:r\" will search all users whose email address begins with the letter \"r\".",
         "format": "text"
       },
       "display_name": "Example: Exchange Online Query Messages (PB)",
@@ -3992,7 +3992,7 @@
         "name": "hychuang@tw.ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1686812896371,
+      "last_modified_time": 1687937812275,
       "local_scripts": [
         {
           "actions": [],
@@ -4002,13 +4002,13 @@
           "export_key": "exchange_online_query_message_post_process",
           "id": 15,
           "language": "python3",
-          "last_modified_by": "c3be9c35-c18c-4fac-bae5-9a7d483f1db2",
-          "last_modified_time": 1686812129057,
+          "last_modified_by": "hychuang@tw.ibm.com",
+          "last_modified_time": 1687929799002,
           "name": "exchange_online_query_message_post_process",
           "object_type": "incident",
           "playbook_handle": "example_exchange_online_query_messages",
           "programmatic_name": "example_exchange_online_query_messages_exchange_online_query_message_post_process",
-          "script_text": "from datetime import datetime\nresults=playbook.functions.results.exchange_online_query_messages_result\ncontent = results.get(\"content\")\nmessage_row = incident.addRow(\"exo_message_query_results_dt\")\n\n\noutput_format = content.get(\"exo_query_output_format\")\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  user_list = content.get(\"email_results\")\n  # Add each email as a row in the query results data table\n  for user in user_list:\n    message_row.exo_dt_email_address = user[\"email_address\"]\n    for email in user[\"email_list\"]:\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\")\n      message_row.exo_dt_received_date   = email[\"receivedDateTime\"]\n      if email[\"sender\"]:\n        message_row.exo_dt_sender_email = email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email[\"subject\"]\n      message_row.exo_dt_has_attachments = email[\"hasAttachments\"]\n      if email[\"webLink\"]:\n        ref_html = u\"\"\"\u003ca href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\"\"\".format(email[\"webLink\"])\n        message_row.exo_dt_web_link = helper.createRichText(ref_html)\n      else:\n        message_row.exo_dt_web_link = \"\"\n \n      message_row.exo_dt_status = helper.createRichText(\"Active\")\n",
+          "script_text": "\nfrom datetime import datetime\nresults=playbook.functions.results.exchange_online_query_messages_result\ncontent = results.get(\"content\")\noutput_format = content.get(\"exo_query_output_format\")\n\n\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  user_list = content.get(\"email_results\")\n  \n  # Add each email as a row in the query results data table\n  for user in user_list:\n    \n    \n    for email in user.get(\"email_list\"):\n      message_row = incident.addRow(\"exo_message_query_results_dt\")\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\")\n      message_row.exo_dt_received_date   = email.get(\"receivedDateTime\")\n      message_row.exo_dt_email_address = user.get(\"email_address\")\n      if email.get(\"sender\"):\n        message_row.exo_dt_sender_email = email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email.get(\"subject\")\n      message_row.exo_dt_has_attachments = email.get(\"hasAttachments\")\n      if email.get(\"webLink\"):\n        ref_html = u\"\"\"\u003ca href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\"\"\".format(email[\"webLink\"])\n        message_row.exo_dt_web_link = helper.createRichText(ref_html)\n      else:\n        message_row.exo_dt_web_link = \"\"\n \n      message_row.exo_dt_status = helper.createRichText(\"Active\")\n\n",
           "tags": [],
           "uuid": "3c970c09-2637-46b8-af5b-24ecb129c984"
         }
@@ -4122,12 +4122,12 @@
       "tags": [],
       "type": "default",
       "uuid": "2cb0995b-534b-4bb3-a669-0e60e2db870a",
-      "version": 6
+      "version": 20
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
+        "content_version": 5,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_07e7c993_f998_4f42_a365_c76422425b61\" isExecutable=\"true\" name=\"playbook_07e7c993_f998_4f42_a365_c76422425b61\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0m3tyxe\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Query Messages\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f09fab2-2176-4c27-ab39-cc19568e08e5\"\u003e{\"inputs\":{\"ead214c2-13fe-43f6-a3c7-676a88338dbb\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"092a752f-1297-46a4-bae6-e75d1a9b4804\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9e58d3a3-c54b-4a9b-9164-e6cc0832f644\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"68133b08-816e-4c03-a50d-c68af1b6b205\"]}},\"4ff86946-a8cf-4ae1-804b-87cab7d9dac1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8dd46926-b1dc-4d1e-ab6a-4239510b199d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1c9b3b95-ca24-484c-ad72-f5d64be87402\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"7354f758-b9ea-4029-835d-66d293a22b5d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"51a9c433-07bc-4f04-9932-99211726b9b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"06391a1a-0c2c-4bcd-832a-1f39a3ba77b8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ec20a9f0-1e29-490b-871b-57b05ffbac2e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.incident_id = incident.id\\n\\n# Get the email address of the user whose mailbox will be queried.\\ninputs.exo_email_address = artifact.value\\n\\n# Get the search criteria from the activity rules if available. \\ninputs.exo_email_address_sender = playbook.inputs.exchange_online_sender_email_address\\ninputs.exo_mail_folders         = playbook.inputs.exchange_online_mail_folder_id\\ninputs.exo_message_subject      = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body         = playbook.inputs.exchange_online_message_body\\ninputs.exo_start_date           = playbook.inputs.exchange_online_start_datetime\\ninputs.exo_end_date             = playbook.inputs.exchange_online_end_datetime\\ninputs.exo_has_attachments      = playbook.inputs.exchange_online_has_attachments\\n\\nif hasattr(playbook.inputs, \\\"exchange_online_query_results_output_format\\\"):\\n    inputs.exo_query_output_format = [d for d in playbook.inputs.exchange_online_query_results_output_format]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_query_message_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0m3tyxe\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ndpwum\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"exchange_online_query_message_on_artifact_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2f4c3d79-5d9b-4ba7-9f2b-f17559bef84f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ndpwum\u003c/incoming\u003e\u003coutgoing\u003eFlow_0m9equj\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0m9equj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0m3tyxe\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1ndpwum\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0m9equj\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_07e7c993_f998_4f42_a365_c76422425b61\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m9equj\" id=\"Flow_0m9equj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"564\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ndpwum\" id=\"Flow_1ndpwum_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m3tyxe\" id=\"Flow_0m3tyxe_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.75\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.75\" y=\"564\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1686812129384,
@@ -4577,7 +4577,7 @@
         "name": "hychuang@tw.ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1686814868104,
+      "last_modified_time": 1687936745482,
       "local_scripts": [
         {
           "actions": [],
@@ -4587,13 +4587,13 @@
           "export_key": "exchange_online_query_message_on_artifact_post_process",
           "id": 16,
           "language": "python3",
-          "last_modified_by": "c3be9c35-c18c-4fac-bae5-9a7d483f1db2",
-          "last_modified_time": 1686812129754,
+          "last_modified_by": "hychuang@tw.ibm.com",
+          "last_modified_time": 1687936742323,
           "name": "exchange_online_query_message_on_artifact_post_process",
           "object_type": "artifact",
           "playbook_handle": "example_exchange_online_query_messages_on_artifact",
           "programmatic_name": "example_exchange_online_query_messages_on_artifact_exchange_online_query_message_on_artifact_post_process",
-          "script_text": "from datetime import datetime\nresults=playbook.functions.results.exchange_online_query_message_result\ncontent = results.get(\"content\")\nmessage_row = incident.addRow(\"exo_message_query_results_dt\")\n\noutput_format = content.get(\"exo_query_output_format\")\n\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  user_list = content.get(\"email_results\")\n\n  # Add each email as a row in the query results data table\n  for user in user_list:\n    message_row.exo_dt_email_address = user[\"email_address\"]\n    for email in user[\"email_list\"]:\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\", \"\")\n      message_row.exo_dt_received_date   = email[\"receivedDateTime\"]\n      \n      if email[\"sender\"]:\n        message_row.exo_dt_sender_email =  email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email[\"subject\"]\n      message_row.exo_dt_has_attachments = email[\"hasAttachments\"]\n      if email[\"webLink\"]:\n        ref_html = u\"\"\"\u003ca href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\"\"\".format(email[\"webLink\"])\n        message_row.exo_dt_web_link = helper.createRichText(ref_html)\n      else:\n        message_row.exo_dt_web_link = \"\"\n \n      message_row.exo_dt_status = helper.createRichText(\"Active\")",
+          "script_text": "\nfrom datetime import datetime\nresults=playbook.functions.results.exchange_online_query_message_result\ncontent = results.get(\"content\")\noutput_format = content.get(\"exo_query_output_format\")\n\n\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  user_list = content.get(\"email_results\")\n  \n  # Add each email as a row in the query results data table\n  for user in user_list:\n    \n    \n    for email in user.get(\"email_list\"):\n      message_row = incident.addRow(\"exo_message_query_results_dt\")\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\")\n      message_row.exo_dt_received_date   = email.get(\"receivedDateTime\")\n      message_row.exo_dt_email_address = user.get(\"email_address\")\n      if email.get(\"sender\"):\n        message_row.exo_dt_sender_email = email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email.get(\"subject\")\n      message_row.exo_dt_has_attachments = email.get(\"hasAttachments\")\n      if email.get(\"webLink\"):\n        ref_html = u\"\"\"\u003ca href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\"\"\".format(email[\"webLink\"])\n        message_row.exo_dt_web_link = helper.createRichText(ref_html)\n      else:\n        message_row.exo_dt_web_link = \"\"\n \n      message_row.exo_dt_status = helper.createRichText(\"Active\")\n\n",
           "tags": [],
           "uuid": "2f4c3d79-5d9b-4ba7-9f2b-f17559bef84f"
         }
@@ -4714,12 +4714,12 @@
       "tags": [],
       "type": "default",
       "uuid": "07e7c993-f998-4f42-a365-c76422425b61",
-      "version": 5
+      "version": 8
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 6,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_a6e61054_fd2e_4ade_86fc_693442bd6688\" isExecutable=\"true\" name=\"playbook_a6e61054_fd2e_4ade_86fc_693442bd6688\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1px5lbw\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Send Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6256b03b-03ae-4972-bba2-63fe629fbb65\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_email_address   = playbook.inputs.exchange_online_sender_address\\ninputs.exo_recipients      = playbook.inputs.exchange_online_recipient_addresses\\ninputs.exo_message_subject = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body    = playbook.inputs.exchange_online_message_body\\ninputs.exo_attachment_names = playbook.inputs.exchange_online_attachment_names\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_send_message_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1px5lbw\u003c/incoming\u003e\u003coutgoing\u003eFlow_05drtat\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fbhro3\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_send_message_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"508b968d-cfd5-4a7c-9182-1220f7538dae\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05drtat\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fbhro3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1px5lbw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_05drtat\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0fbhro3\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a6e61054_fd2e_4ade_86fc_693442bd6688\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fbhro3\" id=\"Flow_0fbhro3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"512\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"624\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05drtat\" id=\"Flow_05drtat_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"428\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1px5lbw\" id=\"Flow_1px5lbw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"624\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"428\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1686812130255,
@@ -4880,6 +4880,7 @@
             "placeholder": "",
             "prefix": null,
             "read_only": false,
+            "required": "always",
             "rich_text": false,
             "tags": [],
             "templates": [],
@@ -4919,7 +4920,7 @@
         "name": "hychuang@tw.ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1686816133306,
+      "last_modified_time": 1687851544158,
       "local_scripts": [
         {
           "actions": [],
@@ -5001,7 +5002,7 @@
       "tags": [],
       "type": "default",
       "uuid": "a6e61054-fd2e-4ade-86fc-693442bd6688",
-      "version": 7
+      "version": 8
     },
     {
       "activation_type": "manual",
