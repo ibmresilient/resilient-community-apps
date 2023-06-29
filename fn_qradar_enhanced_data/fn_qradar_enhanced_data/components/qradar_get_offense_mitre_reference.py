@@ -72,9 +72,11 @@ class FunctionComponent(AppFunctionComponent):
                         break # Exits the loop after it finds a match
 
                 # Get the MITRE mappings for the rule
-                mitre_results = auth_info.make_call("GET",
+                mitre_results = self.rc.execute("GET",
                     f"{api_url[0:len(api_url)-4]}console/plugins/app_proxy:UseCaseManager_Service/api/mitre/mitre_coverage/{rule.get('identifier')}",
-                    headers=header).json()
+                    verify=auth_info.cafile,
+                    headers=header,
+                    timeout=timeout).json()
 
                 # Add the mapping to the rule
                 rules_list[rules_list.index(rule)]["mapping"] = mitre_results[rule['name']]['mapping']
