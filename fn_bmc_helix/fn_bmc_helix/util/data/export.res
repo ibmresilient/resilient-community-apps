@@ -888,7 +888,7 @@
       },
       "deployment_id": "playbook_da7a72b0_f1ea_4e5c_9e83_efec2b9e87b3",
       "description": {
-        "content": "Close a BMC Helix that is linked to a SOAR incident.",
+        "content": "Close a BMC Helix that is linked to a SOAR case.",
         "format": "text"
       },
       "display_name": "BMC Helix Close Incident",
@@ -1084,7 +1084,7 @@
       },
       "deployment_id": "playbook_7c7a5fbc_eba2_4b90_b1fa_a6ba9c4e3b72",
       "description": {
-        "content": "Create a BMC Helix incident from a SOAR incident.",
+        "content": "Create a BMC Helix incident from a SOAR case.",
         "format": "text"
       },
       "display_name": "BMC Helix Create Incident",
@@ -1922,7 +1922,7 @@
       },
       "deployment_id": "playbook_115c6076_05ca_4a8a_9d7b_cbcd47291030",
       "description": {
-        "content": "Create a new Incident in BMC Helix from a SOAR Incident Task",
+        "content": "Create a new Incident in BMC Helix from a SOAR case task",
         "format": "text"
       },
       "display_name": "BMC Helix Create Incident from Task",

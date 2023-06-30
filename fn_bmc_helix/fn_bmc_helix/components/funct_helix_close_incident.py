@@ -35,7 +35,7 @@ class FunctionComponent(AppFunctionComponent):
         the status value on the incident is not changed and we only update the status
         on the SOAR side.
 
-        :param incident_id: SOAR incident id
+        :param incident_id: SOAR case id
         :type incident_id: int
         :param task: SOAR task data
         :type task: dict
@@ -127,7 +127,7 @@ class FunctionComponent(AppFunctionComponent):
         """Gets rows from a SOAR datatable. Rows matching a query
         string concatenated from the task ID and name are returned
 
-        :param incident_id: SOAR incident id
+        :param incident_id: SOAR case id
         :type incident_id: int
         :param task: SOAR task data
         :type task: dict
@@ -181,7 +181,7 @@ class FunctionComponent(AppFunctionComponent):
                 # Get the task data
                 task = self.rest_client().get(f"/tasks/{task_id}")
                 results, success, reason = self.close_helix_incident(incident_id, task, client, helix_payload)
-            else: # If run from a BMC Helix linked SOAR incident
+            else: # If run from a BMC Helix linked SOAR case
                 incident, _ = client.get_form_entry(FORM_NAME, bmc_helix_request_id)
                 # Close the incident if not already closed
                 closed, skipped = self.update_incident_values(client, [], [], incident, helix_payload)

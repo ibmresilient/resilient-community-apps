@@ -19,7 +19,7 @@
 `incident`
 
 ### Description
-Close a BMC Helix that is linked to a SOAR incident.
+Close a BMC Helix that is linked to a SOAR case.
 
 
 ---

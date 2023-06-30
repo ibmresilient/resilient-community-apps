@@ -19,7 +19,7 @@
 `task`
 
 ### Description
-Create a new Incident in BMC Helix from a SOAR Incident Task
+Create a new Incident in BMC Helix from a SOAR case Task
 
 
 ---

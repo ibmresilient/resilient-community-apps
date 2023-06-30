@@ -19,7 +19,7 @@
 `incident`
 
 ### Description
-Create a BMC Helix incident from a SOAR incident.
+Create a BMC Helix incident from a SOAR case.
 
 
 ---

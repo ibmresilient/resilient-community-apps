@@ -115,17 +115,14 @@ class FunctionComponent(AppFunctionComponent):
                     # Add it to the helix_payload dict
                     helix_payload["Detailed_Decription"] = clean_html(task.get("instructions"))
 
-                # Add the task name to the description if one wasn't provided in the inputs
-                if not helix_payload.get("Description"):
-                    helix_payload["Description"] = f"IBM SOAR Case {incident_id}: {helix_incident_name}"
-            else:
-                # If not creating incident from a task
-                if not helix_payload.get("Description"):
-                    helix_payload["Description"] = f"IBM SOAR Case {incident_id}: {helix_incident_name}"
+            # Add the incident name to the description if one wasn't provided in the inputs
+            if not helix_payload.get("Description"):
+                helix_payload["Description"] = f"IBM SOAR Case {incident_id}: {helix_incident_name}"
 
             # Description has a max length of 100
             if len(helix_payload.get("Description", "")) > 100:
                 helix_payload["Description"] = helix_payload["Description"][:100]
+                self.LOG.info("Description field has a max length of 100 characters.")
 
             # Instantiate a HelixClient
             client = HelixClient(app_configs["helix_host"], app_configs["helix_user"],

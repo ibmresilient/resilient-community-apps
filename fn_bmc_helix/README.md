@@ -36,13 +36,13 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-BMC Helix for IBM SOAR This integration provides the capability to create new incidents in BMC Helix from SOAR tasks and incidents via the HPD:IncidentInterface_Create form over the REST API. Once the task or incident is complete, this integration also provides the capability to close existing BMC Helix Incidents.
+This integration provides the capability to create new incidents in BMC Helix from SOAR tasks and cases via the HPD:IncidentInterface_Create form over the REST API. Once the task or case is complete, this integration also provides the capability to close existing BMC Helix Incidents.
 
 ### Key Features
 * Send IBM SOAR Case tasks to BMC Helix as incidents
-* Send IBM SOAR incidents to BMC Helix as incidents
+* Send IBM SOAR Case to BMC Helix as incidents
 * Close BMC Helix incidents from linked IBM SOAR case tasks
-* Close BMC Helix incidents from linked IBM SOAR incidents
+* Close BMC Helix incidents from linked IBM SOAR case
 
 ---
 
@@ -470,7 +470,7 @@ BMC Helix is a highly customizable product, and this integration was designed wi
 
 Note that when creating an incident in BMC Helix via the REST API, any auto-routing that is configured in the BMC Helix platform will continue to apply as it would when creating
 a new incident in the user interface. This can result in a discrepancy between the data that was submitted by the integration and the data that is present in BMC Helix once the incident object is actually created.
-For example, the payload sent to BMC Helix by the integration could indicate a Status of New for an incident (either directly or via a [template](#templating).) However, when that ticket is actually created, the auto-routing in BMC Helix could be configured to assign it to a user and update the Status to Assigned. This is expected, and the true status of the created incident will be reflected in the [datatable](#data-table---bmc-helix-incidents) if the BMC Helix incident is linked to a SOAR task or in the incident field bmc_helix_status if the BMC Helix incident is linked to a SOAR incident.
+For example, the payload sent to BMC Helix by the integration could indicate a Status of New for an incident (either directly or via a [template](#templating).) However, when that ticket is actually created, the auto-routing in BMC Helix could be configured to assign it to a user and update the Status to Assigned. This is expected, and the true status of the created incident will be reflected in the [datatable](#data-table---bmc-helix-incidents) if the BMC Helix incident is linked to a SOAR task or in the incident field bmc_helix_status if the BMC Helix incident is linked to a SOAR case.
 
 **Templating**
 
@@ -874,10 +874,10 @@ bmc_helix_incidents
 ## Playbooks
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| BMC Helix Close Incident | Close a BMC Helix that is linked to a SOAR incident. | incident | `enabled` |
+| BMC Helix Close Incident | Close a BMC Helix that is linked to a SOAR case. | incident | `enabled` |
 | BMC Helix Close Incident from Task | Close a BMC Helix incident that is linked to a SOAR task | task | `enabled` |
-| BMC Helix Create Incident | Create a BMC Helix incident from a SOAR incident. | incident | `enabled` |
-| BMC Helix Create Incident from Task | Create a new Incident in BMC Helix from a SOAR Incident Task | task | `enabled` |
+| BMC Helix Create Incident | Create a BMC Helix incident from a SOAR case. | incident | `enabled` |
+| BMC Helix Create Incident from Task | Create a new Incident in BMC Helix from a SOAR case Task | task | `enabled` |
 
 ---
 
