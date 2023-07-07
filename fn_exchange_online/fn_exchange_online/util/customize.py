@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v49.0.4423
 
 """Generate the Resilient customizations required for fn_exchange_online"""
 
