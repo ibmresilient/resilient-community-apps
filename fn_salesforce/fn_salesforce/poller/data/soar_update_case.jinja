@@ -1,9 +1,10 @@
 {
   {# JINJA template for updating a new SOAR incident from an endpoint #}
   {# modify to specify your specific **data** fields #}
-  "severity_code": "{{ **severity** | soar_substitute('{"Safe": "Low"}') }}",
+  "severity_code": "{{ Priority }}",
   {# specify your custom fields for your endpoint solution #}
   "properties": {
-    "**endpoint_tags**": "{{ **tags** | join(', ') }}",
+    "salesforce_status": "{{ Status }}", 
+    "salesforce_isclosed": {{ IsClosed }}
   }
 }

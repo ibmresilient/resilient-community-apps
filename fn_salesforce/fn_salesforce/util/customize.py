@@ -25,7 +25,7 @@ def codegen_reload_data():
         "functions": [],
         "workflows": [],
         "actions": [],
-        "incident_fields": [],
+        "incident_fields": [u"salesforce_case_link", u"salesforce_case_number", u"salesforce_status"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
@@ -40,11 +40,15 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 49.0.8803
+    IBM SOAR Platform Version: 47.0.8304
 
     Contents:
     - Message Destinations:
         - fn_salesforce
+    - Incident Fields:
+        - salesforce_case_link
+        - salesforce_case_number
+        - salesforce_status
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

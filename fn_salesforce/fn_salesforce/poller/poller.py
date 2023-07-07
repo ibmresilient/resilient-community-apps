@@ -16,11 +16,11 @@ from fn_salesforce.lib.app_common import AppCommon
 
 
 PACKAGE_NAME = "fn_salesforce"
-ENTITY_ID = "<- ::CHANGE_ME:: ->"  # name of field in the endpoint entity (alert, case, etc) with the ID value
-ENTITY_CLOSE_FIELD = "<- ::CHANGE_ME:: ->" # name of field in endpoint entity to reference the close state
-SOAR_ENTITY_ID_FIELD = "<- ::CHANGE_ME:: ->" # name of custom IBM SOAR case field to retain the endpoint entity_id
-ENTITY_LABEL = "<- ::CHANGE_ME:: ->" # label the name the case, alert, event, etc. native to your endpoint solution
-ENTITY_COMMENT_HEADER = "Created by <- ::CHANGE_ME:: ->" # header used to identify comments create by the endpoint entity
+ENTITY_ID = "Id"  # name of field in the endpoint entity (alert, case, etc) with the ID value
+ENTITY_CLOSE_FIELD = "IsClosed" # name of field in endpoint entity to reference the close state
+SOAR_ENTITY_ID_FIELD = "salesforce_case_number" # name of custom IBM SOAR case field to retain the endpoint entity_id
+ENTITY_LABEL = "Salesforce Case" # label the name the case, alert, event, etc. native to your endpoint solution
+ENTITY_COMMENT_HEADER = "Created by Salesforce" # header used to identify comments create by the endpoint entity
 
 LOG = logging.getLogger(__name__)
 
@@ -51,7 +51,7 @@ def init_app(rc, options):
 
     return app_common
 
-def query_entities(app_common, last_poller_time):
+def query_entities(app_common: AppCommon, last_poller_time):
     """
     Method call to query the endpoint solution for newly created or 
     modified entities for synchronization with IBM SOAR
@@ -94,7 +94,6 @@ def is_entity_closed(entity):
     :return: true/false if entity is closed
     :rtype: bool
     """
-    # <::CHANGE_ME:: change this field to reflect the field and logic to determine if the entity is now closed >
     return bool(entity.get(ENTITY_CLOSE_FIELD, False))
 
 class PollerComponent(AppFunctionComponent):
@@ -111,12 +110,16 @@ class PollerComponent(AppFunctionComponent):
         """
         # Validate required fields in app.config are set
         # <::CHANGE_ME:: change this validation to include all the fields required in the app.config file >
-        required_fields = ["polling_interval",
-                        "polling_lookback",
-                        "endpoint_url",
-                        "cafile",
-                        "api_key",
-                        "api_secret"]
+        required_fields = ["my_domain_name",
+                           "my_domain_url",
+                           "api_version",
+                           "consumer_key",
+                           "consumer_secret",
+                           "polling_interval",
+                           "polling_lookback",
+                           "verify"
+                           ]
+
 
         super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)
 
@@ -180,7 +183,7 @@ class PollerComponent(AppFunctionComponent):
 
         if query_results:
             # iterate over all the entities.
-            self.process_query_list(query_results.get("result", [])) # <::CHANGE_ME:: update to the correct value for your API>
+            self.process_query_list(query_results.get("records", []))
 
     def process_query_list(self, query_results):
         """
@@ -194,10 +197,15 @@ class PollerComponent(AppFunctionComponent):
         :type query_results: list
         """
 
-        try:
-            cases_insert = cases_closed = cases_updated = 0
-            for entity in query_results:
+
+        cases_insert = cases_closed = cases_updated = 0
+        processed_cases = []
+        for entity in query_results:
+            try:
                 entity_id = get_entity_id(entity)
+
+                if entity_id in processed_cases:
+                    continue
 
                 # create linkback url
                 entity["entity_url"] = self.app_common.make_linkback_url(entity_id)
@@ -247,8 +255,11 @@ class PollerComponent(AppFunctionComponent):
 
                         cases_updated += 1
                         LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
+                # Add this entity to processed list.
+                processed_cases.append(entity_id)
+                LOG.debug("Salesforce case %s added to processed list", entity_id)
 
-            LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
-                     cases_insert, cases_closed, cases_updated)
-        except Exception as err:
-            LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
+            except Exception as err:
+                LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
+        LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
+             cases_insert, cases_closed, cases_updated)

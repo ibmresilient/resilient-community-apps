@@ -5,9 +5,12 @@
 
 import logging
 from urllib.parse import urljoin
+from base64 import b64encode
+from urllib.parse import quote_plus, urljoin
 
 from requests.exceptions import JSONDecodeError
 from resilient_lib import IntegrationError, readable_datetime, str_to_bool
+from resilient_lib.components.templates_common import iso8601
 
 #----------------------------------------------------------------------------------------
 # This module is an open template for you to develop the methods necessary to interact
@@ -34,9 +37,10 @@ LOG = logging.getLogger(__name__)
 HEADER = { 'Content-Type': 'application/json' }
 
 # E N D P O I N T S
-# define the endpiont api calls your app will make to the endpoint solution. Below are examples
-#ALERT_URI = "alert/{}/"
-#POLICY_URI = "policy/"
+TOKEN_URL = "https://{my_domain_url}/services/oauth2/token"
+BASE_URL = "https://{my_domain_url}/services/data/{api_version}/"
+QUERY_URI = "query/?q=SELECT+FIELDS(ALL)+FROM+Case+LIMIT+200"
+LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
 
 class AppCommon():
     def __init__(self, rc, package_name, app_configs):
@@ -52,14 +56,44 @@ class AppCommon():
         """
 
         self.package_name = package_name
-        self.api_key = app_configs.get("api_key", "<- ::CHANGE_ME:: change to default for API Key or remove default ->")
-        self.api_secret = app_configs.get("api_secret","<- ::CHANGE_ME:: change to default for API secret or remove default ->")
-        self.endpoint_url = app_configs.get("endpoint_url", "<- ::CHANGE_ME:: change to default for endpoint url or remove default ->")
+        self.my_domain_name = app_configs.get("my_domain_name")
+        self.my_domain_url = app_configs.get("my_domain_url")
+        self.api_version = app_configs.get("api_version")
+        self.client_id = app_configs.get("consumer_key")
+        self.client_secret = app_configs.get("consumer_secret")
+        self.base_url = BASE_URL.format(my_domain_url=self.my_domain_url, api_version=self.api_version)
+        self.token_url = TOKEN_URL.format(my_domain_url=self.my_domain_url)
         self.rc = rc
         self.verify = _get_verify_ssl(app_configs)
+        self.access_token = self.get_token()
+        if self.access_token:
+            self.headers = self._make_headers(self.access_token)
+        else:
+            raise IntegrationError("Unable to get access token from Salesforce!")
 
         # Specify any additional parameters needed to communicate with your endpoint solution
 
+    def get_token(self):
+        """
+        Get an API access token for Salesforce authentication.
+
+        :return: API Access token (string)
+        """
+        uri = self.token_url
+
+        auth_str = f"{self.client_id}:{self.client_secret}"
+        auth_bytes = b64encode(auth_str.encode("utf-8"))
+        encoded_auth = str(auth_bytes, "utf-8")
+
+        headers = {
+            "Authorization": "Basic {}".format(encoded_auth),
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
+
+        r = self.rc.execute_call_v2("POST", uri, headers=headers, data="grant_type=client_credentials")
+
+        return r.json()["access_token"]
+    
     def _get_uri(self, cmd):
         """
         Build API url
@@ -81,11 +115,12 @@ class AppCommon():
         :return: complete header
         :rtype: dict
         """
-        raise IntegrationError("UNIMPLEMENTED")
         header = HEADER.copy()
         # modify to represent how to build the header
+        header['Authorization'] = f"Bearer {token}"
+        header['Content-Type'] = 'application/json'
 
-        return header
+        return header  
 
     def _api_call(self, method, url, payload=None):
         """
@@ -124,20 +159,17 @@ class AppCommon():
         """
         # <- ::CHANGE_ME:: -> for the specific API calls
         # and make sure to properly handle pagination!
-        raise IntegrationError("UNIMPLEMENTED")
-        query = {
-            "query_field_name": readable_datetime(timestamp) # utc datetime format
-        }
+        iso_timestamp = iso8601(timestamp)
 
-        LOG.debug("Querying endpoint with %s", query)
-        response, err_msg = self._api_call("GET", 'alerts', query, refresh_authentication=True)
-        if err_msg:
-            LOG.error("%s API call failed: %s", self.package_name, err_msg)
-            return None
+        #query_url = self.base_url + quote_plus(QUERY_URI)
+        query_url = self.base_url + QUERY_URI
+        response = self.rc.execute_call_v2("GET", url=query_url, headers=self.headers)
+
+        LOG.debug("Querying endpoint with %s", query_url)
 
         return response.json()
 
-    def make_linkback_url(self, entity_id, linkback_url):
+    def make_linkback_url(self, entity_id):
         """
         Create a url to link back to the endpoint entity
 
@@ -148,8 +180,9 @@ class AppCommon():
         :return: completed url for linkback
         :rtype: str
         """
-        raise IntegrationError("UNIMPLEMENTED")
-        return urljoin(self.endpoint_url, linkback_url.format(entity_id))
+        #https://ibmc4s-qradar-dev-dev-ed.develop.lightning.force.com/lightning/r/Case/500Hr00001Vhr73IAB/view
+
+        return LINKBACK_URL.format(my_domain_name=self.my_domain_name, entity_id=entity_id)
 
 
 def callback(response):
