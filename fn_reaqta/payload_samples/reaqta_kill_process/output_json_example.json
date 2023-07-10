@@ -2,27 +2,26 @@
   "version": 2.0,
   "success": true,
   "reason": null,
-  "content": [
-    {
-      "pid": 4,
-      "startTime": 1644961331131,
-      "killed": false,
-      "errorCode": -1,
-      "error": "Process not found"
+  "content": {
+    "message": "Endpoint offline",
+    "details": {
+      "endpointId": "982370521729466368",
+      "lastSeenAt": "2023-07-07T22:05:29.109Z"
     }
-  ],
+  },
   "raw": null,
   "inputs": {
-    "reaqta_starttime": 1644961331131,
-    "reaqta_endpoint_id": "831986736375529472",
-    "reaqta_process_pid": 4
+    "reaqta_starttime": 1687544281609,
+    "reaqta_hive": "rhiveam",
+    "reaqta_endpoint_id": "982370521729466368",
+    "reaqta_process_pid": 180
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
-    "package_version": "1.0.0",
-    "host": "local",
-    "execution_time_ms": 953,
-    "timestamp": "2022-02-18 13:48:08"
+    "package_version": "1.1.0",
+    "host": "Henry's IBM 16 inch Macbook Pro",
+    "execution_time_ms": 459,
+    "timestamp": "2023-07-10 12:46:41"
   }
 }

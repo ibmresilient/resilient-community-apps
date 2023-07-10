@@ -3,23 +3,23 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "852892681737605120",
-    "machineId": "9f75814184f0e13f5c3229937d30312d660cf8f9256a1e3d6b279da882095981",
+    "id": "982370521729466368",
+    "machineId": "0c0dcd602f5d65aed629d4199c8f665955c434050d68a634eaf4ba0e1058b7ce",
     "osType": 1,
     "cpuVendor": 1,
     "arch": 2,
-    "cpuDescr": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
+    "cpuDescr": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
     "kernel": "10.0",
     "os": "Windows 10 Enterprise",
-    "name": "LAPTOP-377CDOSQ",
+    "name": "IBM-PF36LBRC",
     "state": 1,
-    "registrationTime": "2022-04-14T14:11:01.315Z",
-    "agentVersion": "3.6.1",
+    "registrationTime": "2023-04-24T21:50:33.146Z",
+    "agentVersion": "3.10.1",
     "componentsVersions": [
       {
         "name": "keeper",
-        "version": "3.6.0",
-        "build": "19.1627291555548.commit"
+        "version": "3.10.1",
+        "build": "27.1668701555901.commit"
       },
       {
         "name": "probos",
@@ -33,40 +33,43 @@
       },
       {
         "name": "rqtnetsentry",
-        "version": "3.6.0",
-        "build": "44.1627295520120.commit"
+        "version": "3.10.0",
+        "build": "45.1666597836648.commit"
       },
       {
         "name": "installer",
-        "version": "3.6.1",
+        "version": "3.10.1",
         "build": ""
       }
     ],
     "isVirtualMachine": false,
     "isDomainController": false,
     "isServer": false,
-    "sessionStart": "2022-04-14T14:11:27.543Z",
-    "sessionEnd": "2022-04-15T16:09:25.661Z",
-    "lastSeenAt": "2022-04-15T16:04:25.661Z",
+    "sessionStart": "2023-07-07T21:20:29.083Z",
+    "sessionEnd": "2023-07-07T22:10:29.109Z",
+    "lastSeenAt": "2023-07-07T22:05:29.109Z",
     "disconnectionReason": 0,
-    "localAddr": "192.168.2.176",
+    "localAddr": "192.168.1.97",
     "hvStatus": 19,
     "macs": [
-      "98:fa:9b:cb:d4:0e",
-      "50:eb:71:1b:8f:9a",
-      "00:05:9a:3c:7a:00",
-      "00:50:56:c0:00:01",
-      "00:50:56:c0:00:08",
-      "80:6d:97:04:b8:08"
+      "5c:e4:2a:2c:f3:a7",
+      "90:2e:16:c4:f7:7d"
     ],
     "isolated": false,
-    "connected": true,
+    "isolationStatus": "PENDING_ISOLATION",
+    "isolationStatusFailure": null,
+    "connected": false,
     "tags": [],
     "groups": [
       {
-        "id": "825429906883088391",
-        "name": "National Market",
-        "description": "National Market"
+        "id": "988899645751033863",
+        "name": "Example Group",
+        "description": "This is an example group.",
+        "parentGroupId": "988899392910000135"
+      },
+      {
+        "id": "988899392910000135",
+        "name": "Example Client"
       }
     ],
     "avInstalled": false
@@ -74,14 +77,14 @@
   "raw": null,
   "inputs": {
     "reaqta_hive": "rhiveam",
-    "reaqta_endpoint_id": "852892681737605120"
+    "reaqta_endpoint_id": "982370521729466368"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
-    "package_version": "1.0.0",
-    "host": "local",
-    "execution_time_ms": 524,
-    "timestamp": "2022-04-15 12:05:10"
+    "package_version": "1.1.0",
+    "host": "Henry's IBM 16 inch Macbook Pro",
+    "execution_time_ms": 468,
+    "timestamp": "2023-07-10 12:50:02"
   }
 }

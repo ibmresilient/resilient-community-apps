@@ -10,24 +10,20 @@
     },
     "reason": {},
     "content": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "pid": {
-            "type": "integer"
-          },
-          "startTime": {
-            "type": "integer"
-          },
-          "killed": {
-            "type": "boolean"
-          },
-          "errorCode": {
-            "type": "integer"
-          },
-          "error": {
-            "type": "string"
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "object",
+          "properties": {
+            "endpointId": {
+              "type": "string"
+            },
+            "lastSeenAt": {
+              "type": "string"
+            }
           }
         }
       }
@@ -38,6 +34,9 @@
       "properties": {
         "reaqta_starttime": {
           "type": "integer"
+        },
+        "reaqta_hive": {
+          "type": "string"
         },
         "reaqta_endpoint_id": {
           "type": "string"

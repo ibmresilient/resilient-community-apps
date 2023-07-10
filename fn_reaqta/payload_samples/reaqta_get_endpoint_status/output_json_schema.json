@@ -101,6 +101,10 @@
         "isolated": {
           "type": "boolean"
         },
+        "isolationStatus": {
+          "type": "string"
+        },
+        "isolationStatusFailure": {},
         "connected": {
           "type": "boolean"
         },
@@ -119,6 +123,9 @@
                 "type": "string"
               },
               "description": {
+                "type": "string"
+              },
+              "parentGroupId": {
                 "type": "string"
               }
             }

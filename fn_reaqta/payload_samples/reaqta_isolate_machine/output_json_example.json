@@ -3,22 +3,19 @@
   "success": true,
   "reason": null,
   "content": {
-    "message": "Endpoint offline",
-    "details": {
-      "endpointId": "820358261151629312",
-      "lastSeenAt": "2022-02-15T18:05:09.113Z"
-    }
+    "success": true
   },
   "raw": null,
   "inputs": {
-    "reaqta_endpoint_id": "820358261151629312"
+    "reaqta_hive": "rhiveam",
+    "reaqta_endpoint_id": "982370521729466368"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
-    "package_version": "1.0.0",
-    "host": "local",
-    "execution_time_ms": 498,
-    "timestamp": "2022-02-18 14:04:55"
+    "package_version": "1.1.0",
+    "host": "Henry's IBM 16 inch Macbook Pro",
+    "execution_time_ms": 1010,
+    "timestamp": "2023-07-10 12:46:41"
   }
 }

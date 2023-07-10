@@ -3,21 +3,22 @@
   "success": true,
   "reason": null,
   "content": {
-    "alertId": "831993910053044226",
+    "alertId": "1015597023501484034",
     "closed": true
   },
   "raw": null,
   "inputs": {
     "reaqta_is_malicious": false,
-    "reaqta_alert_id": "831993910053044226",
-    "reaqta_note": "<div class=\"rte\"><div><strong>this is now complete</strong></div></div>"
+    "reaqta_alert_id": "1015597023501484034",
+    "reaqta_hive": "rhiveam",
+    "reaqta_note": "<div class=\"rte\"><div>test</div></div>"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
-    "package_version": "1.0.0",
-    "host": "local",
-    "execution_time_ms": 1065,
-    "timestamp": "2022-02-18 13:54:56"
+    "package_version": "1.1.0",
+    "host": "Henry's IBM 16 inch Macbook Pro",
+    "execution_time_ms": 1483,
+    "timestamp": "2023-07-10 12:52:38"
   }
 }

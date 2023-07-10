@@ -8,90 +8,11 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {},
+    "reason": {
+      "type": "string"
+    },
     "content": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "integer"
-        },
-        "id": {
-          "type": "string"
-        },
-        "versionId": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "enabled": {
-          "type": "boolean"
-        },
-        "deleted": {
-          "type": "boolean"
-        },
-        "default": {
-          "type": "boolean"
-        },
-        "matchers": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "integer"
-              },
-              "id": {
-                "type": "string"
-              },
-              "hash": {
-                "type": "string"
-              },
-              "alg": {
-                "type": "integer"
-              }
-            }
-          }
-        },
-        "actions": {
-          "type": "array",
-          "items": {
-            "type": "integer"
-          }
-        },
-        "created": {
-          "type": "string"
-        },
-        "lastModified": {
-          "type": "string"
-        },
-        "scope": {
-          "type": "string"
-        },
-        "groups": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "enabled": {
-                "type": "boolean"
-              }
-            }
-          }
-        },
-        "policy_url": {
-          "type": "string"
-        }
-      }
+      "type": "array"
     },
     "raw": {},
     "inputs": {
@@ -113,7 +34,8 @@
         "reaqta_sha256": {
           "type": "string"
         },
-        "reaqta_policy_included_groups": {
+        "reaqta_policy_included_groups": {},
+        "reaqta_hives": {
           "type": "string"
         }
       }

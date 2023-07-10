@@ -1,90 +1,21 @@
 {
   "version": 2.0,
-  "success": true,
-  "reason": null,
-  "content": {
-    "type": "incident",
-    "id": 53,
-    "uuid": "469ef303-d1d5-4124-8265-3786ab2dd50b",
-    "name": "wininit.exe",
-    "content_type": "application/x-msdownload",
-    "created": 1645638429292,
-    "creator_id": 3,
-    "size": 480013,
-    "actions": [
-      {
-        "id": 15,
-        "name": "Example: Attachment Hash",
-        "enabled": true
-      },
-      {
-        "id": 16,
-        "name": "Example: Attachment to Base64",
-        "enabled": true
-      },
-      {
-        "id": 20,
-        "name": "Example: Email Parsing (Attachment)",
-        "enabled": true
-      },
-      {
-        "id": 26,
-        "name": "Example: PDFiD",
-        "enabled": true
-      },
-      {
-        "id": 27,
-        "name": "Example: Resilient Search",
-        "enabled": true
-      },
-      {
-        "id": 32,
-        "name": "Example: Use Excel Data",
-        "enabled": false
-      },
-      {
-        "id": 35,
-        "name": "Example: Zip List",
-        "enabled": false
-      },
-      {
-        "id": 34,
-        "name": "Example: Zip Extract",
-        "enabled": false
-      },
-      {
-        "id": 55,
-        "name": "PB: Get workflows/playbooks by attachment name",
-        "enabled": true
-      },
-      {
-        "id": 90,
-        "name": "Example: Virus Total for Attachments",
-        "enabled": true
-      }
-    ],
-    "task_id": null,
-    "task_name": null,
-    "task_custom": null,
-    "task_members": null,
-    "task_at_id": null,
-    "vers": 9,
-    "inc_id": 2818,
-    "inc_name": "ReaQta Alert - Code Injection, Endpoint: DOMINO",
-    "inc_owner": 3
-  },
+  "success": false,
+  "reason": "ReaQta Error: \n    status code: 422\n    message: Endpoint offline\n    details: {'endpointId': '982370521729466368', 'lastSeenAt': '2023-07-07T22:05:29.109Z'}",
+  "content": {},
   "raw": null,
   "inputs": {
-    "reaqta_program_path": "C:\\Windows\\System32\\wininit.exe",
-    "reaqta_endpoint_id": "825095183572926464",
-    "reaqta_incident_id": 2818
+    "reaqta_hive": "rhiveam",
+    "reaqta_program_path": "c:\\windows\\system32\\net.exe",
+    "reaqta_endpoint_id": "982370521729466368",
+    "reaqta_incident_id": 2131
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
-    "package_version": "1.0.0",
-    "host": "local",
-    "execution_time_ms": 19785,
-    "timestamp": "2022-02-23 12:47:07"
+    "package_version": "1.1.0",
+    "host": "Henry's IBM 16 inch Macbook Pro",
+    "execution_time_ms": 448,
+    "timestamp": "2023-07-10 11:53:28"
   }
 }

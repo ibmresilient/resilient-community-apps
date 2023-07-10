@@ -116,6 +116,10 @@
             "isolated": {
               "type": "boolean"
             },
+            "isolationStatus": {
+              "type": "string"
+            },
+            "isolationStatusFailure": {},
             "connected": {
               "type": "boolean"
             },
@@ -134,6 +138,9 @@
                     "type": "string"
                   },
                   "description": {
+                    "type": "string"
+                  },
+                  "parentGroupId": {
                     "type": "string"
                   }
                 }
@@ -209,15 +216,6 @@
                       "sha256": {
                         "type": "string"
                       },
-                      "size": {
-                        "type": "integer"
-                      },
-                      "arch": {
-                        "type": "string"
-                      },
-                      "fsName": {
-                        "type": "string"
-                      },
                       "certInfo": {
                         "type": "object",
                         "properties": {
@@ -234,6 +232,15 @@
                             "type": "boolean"
                           }
                         }
+                      },
+                      "size": {
+                        "type": "integer"
+                      },
+                      "arch": {
+                        "type": "string"
+                      },
+                      "fsName": {
+                        "type": "string"
                       }
                     }
                   },
@@ -284,8 +291,57 @@
                   "_t": {
                     "type": "string"
                   },
-                  "behaviourType": {
-                    "type": "integer"
+                  "matched": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "policyId": {
+                          "type": "string"
+                        },
+                        "versionId": {
+                          "type": "string"
+                        },
+                        "policyTitle": {
+                          "type": "string"
+                        },
+                        "policyDescription": {
+                          "type": "string"
+                        },
+                        "scope": {
+                          "type": "string"
+                        },
+                        "groups": {
+                          "type": "array"
+                        },
+                        "matcher": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "script": {
+                              "type": "string"
+                            },
+                            "osTypes": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
+                            "eventTypes": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
+                            "type": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -321,8 +377,17 @@
         "closed": {
           "type": "boolean"
         },
+        "closedAt": {
+          "type": "string"
+        },
+        "lastChangedAt": {
+          "type": "string"
+        },
         "activityState": {
           "type": "string"
+        },
+        "terminationReason": {
+          "type": "integer"
         },
         "receivedAt": {
           "type": "string"
@@ -331,7 +396,13 @@
           "type": "string"
         },
         "tags": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
         },
         "endpointState": {
           "type": "object",
@@ -408,11 +479,17 @@
                   },
                   "description": {
                     "type": "string"
+                  },
+                  "parentGroupId": {
+                    "type": "string"
                   }
                 }
               }
             }
           }
+        },
+        "title": {
+          "type": "string"
         },
         "alert_url": {
           "type": "string"

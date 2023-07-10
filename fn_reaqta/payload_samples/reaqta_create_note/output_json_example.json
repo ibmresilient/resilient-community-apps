@@ -2,18 +2,21 @@
   "version": 2.0,
   "success": true,
   "reason": null,
-  "content": "\"\\nIBM SOAR 23/02/2022 12:44:51\\nthis is a note\"",
+  "content": {
+    "note": "{\"notes\":\"Potential APT Detected: powershell.exe\\nIBM SOAR 07/07/2023 21:40:16\\nPotential APT Detected: powershell.exe\\n\\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\\nIBM SOAR 07/07/2023 13:40:42\\nPotential APT Detected: powershell.exe\\nIBM SOAR 07/07/2023 21:40:16\\nPotential APT Detected: powershell.exe\\n\\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\\n\\n[SOAR Case - 2560](https://9.30.24.113:443/#incidents/2560)\\nIBM SOAR 07/07/2023 13:38:32\\nPotential APT Detected: powershell.exe\\nIBM SOAR 07/07/2023 21:40:16\\nPotential APT Detected: powershell.exe\\n\\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\\nIBM SOAR 07/07/2023 13:40:42\\nPotential APT Detected: powershell.exe\\nIBM SOAR 07/07/2023 21:40:16\\nPotential APT Detected: powershell.exe\\n\\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\\n\\n[SOAR Case - 2560](https://9.30.24.113:443/#incidents/2560)\\n\\n[SOAR Case - 17024](https://169.44.147.200:443/#incidents/17024)\\nIBM SOAR 10/07/2023 12:46:44\\nEndpoint Machine Isolated\"}"
+  },
   "raw": null,
   "inputs": {
-    "reaqta_alert_id": "834099413533065218",
-    "reaqta_note": "<div class=\"rte\"><div>this is a note</div></div>"
+    "reaqta_alert_id": "1015597023501484034",
+    "reaqta_hive": "rhiveam",
+    "reaqta_note": "Endpoint Machine Isolated"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
-    "package_version": "1.0.0",
-    "host": "local",
-    "execution_time_ms": 1114,
-    "timestamp": "2022-02-23 12:44:51"
+    "package_version": "1.1.0",
+    "host": "Henry's IBM 16 inch Macbook Pro",
+    "execution_time_ms": 782,
+    "timestamp": "2023-07-10 12:46:44"
   }
 }
