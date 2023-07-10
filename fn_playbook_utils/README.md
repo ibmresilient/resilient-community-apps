@@ -50,7 +50,8 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 12/2022 | Playbook import/export
+| 1.2.0 | 12/2022 | Example rules/workflows converted to Playbooks |
+| 1.1.0 | 12/2022 | Playbook import/export |
 | 1.0.1 | 09/2021 | Datatable presentation fixes |
 | 1.0.0 | 08/2021 | Initial Release |
 
