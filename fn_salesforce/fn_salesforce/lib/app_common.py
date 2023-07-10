@@ -33,6 +33,8 @@ from resilient_lib.components.templates_common import iso8601
 
 LOG = logging.getLogger(__name__)
 
+PACKAGE_NAME = "fn_salesforce"
+
 # change the header as necessary
 HEADER = { 'Content-Type': 'application/json' }
 
@@ -40,6 +42,7 @@ HEADER = { 'Content-Type': 'application/json' }
 TOKEN_URL = "https://{my_domain_url}/services/oauth2/token"
 BASE_URL = "https://{my_domain_url}/services/data/{api_version}/"
 QUERY_URI = "query/?q=SELECT+FIELDS(ALL)+FROM+Case+LIMIT+200"
+QUERY_URI_BY_DATE = "query/?q=SELECT+FIELDS(ALL)+FROM+Case+WHERE+LastModifiedDate+>+{}+LIMIT+200"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
 
 class AppCommon():
@@ -66,6 +69,8 @@ class AppCommon():
         self.rc = rc
         self.verify = _get_verify_ssl(app_configs)
         self.access_token = self.get_token()
+
+        # Setup access token in the header for making Salesforce REST API calls 
         if self.access_token:
             self.headers = self._make_headers(self.access_token)
         else:
@@ -90,9 +95,11 @@ class AppCommon():
             "Content-Type": "application/x-www-form-urlencoded",
         }
 
-        r = self.rc.execute_call_v2("POST", uri, headers=headers, data="grant_type=client_credentials")
+        response = self.rc.execute("POST", uri, headers=headers, data="grant_type=client_credentials")
 
-        return r.json()["access_token"]
+        response_json = response.json()
+
+        return response_json.get("access_token", None)
     
     def _get_uri(self, cmd):
         """
@@ -159,15 +166,15 @@ class AppCommon():
         """
         # <- ::CHANGE_ME:: -> for the specific API calls
         # and make sure to properly handle pagination!
-        iso_timestamp = iso8601(timestamp)
-
-        #query_url = self.base_url + quote_plus(QUERY_URI)
-        query_url = self.base_url + QUERY_URI
-        response = self.rc.execute_call_v2("GET", url=query_url, headers=self.headers)
-
+        readable_time = readable_datetime(timestamp)
+        query_url = self.base_url + QUERY_URI_BY_DATE.format(readable_time)
+        response = self.rc.execute("GET", url=query_url, headers=self.headers)
+        response_json = response.json()
         LOG.debug("Querying endpoint with %s", query_url)
 
-        return response.json()
+        # Implement pagination here
+        
+        return response_json
 
     def make_linkback_url(self, entity_id):
         """

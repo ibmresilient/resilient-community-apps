@@ -20,6 +20,8 @@ Return examples:
 """
 
 import logging
+from resilient_lib import RequestsCommon, IntegrationError
+from fn_salesforce.lib.app_common import PACKAGE_NAME, AppCommon
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -28,12 +30,24 @@ log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Call Salesforce  to make sure we can get access token. 
+
     """
-    app_configs = opts.get("fn_salesforce", {})
+
+    try:
+        app_configs = opts.get(PACKAGE_NAME, {})
+        rc = RequestsCommon(opts, app_configs)
+
+        # If we can create an AppCommon object we are able to get an access token.
+        # Add a call to an endpoint once we have one to call (not implemented yet!)
+        app_common = AppCommon(rc, PACKAGE_NAME, app_configs)
+        reason = None
+        state = "success"
+    except IntegrationError as err:
+        state = "failure"
+        reason = str(err)
 
     return {
-        "state": "unimplemented",
-        "reason": None
+        "state": state,
+        "reason": reason
     }

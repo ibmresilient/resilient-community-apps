@@ -25,7 +25,7 @@ def codegen_reload_data():
         "functions": [],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"salesforce_case_link", u"salesforce_case_number", u"salesforce_status"],
+        "incident_fields": [u"salesforce_case_id", u"salesforce_case_link", u"salesforce_case_number", u"salesforce_status"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
@@ -46,6 +46,7 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_salesforce
     - Incident Fields:
+        - salesforce_case_id
         - salesforce_case_link
         - salesforce_case_number
         - salesforce_status

@@ -30,7 +30,7 @@ setup(
     author_email="",
     url="https://ibm.com/mysupport",
     description="<<::CHANGE_ME::>>Enter a short description of the App",
-    long_description="""Bi-directional App for Salesforce. Query Saesforce for Cases based \
+    long_description="""Bi-directional App for Salesforce. Query Salesforce for Cases based \
          on user-defined query parameters and create and update cases in SOAR.<br>
 
         <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>

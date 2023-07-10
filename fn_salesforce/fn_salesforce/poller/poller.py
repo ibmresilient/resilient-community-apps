@@ -14,11 +14,10 @@ from resilient_lib import (SOARCommon, get_last_poller_date,
 
 from fn_salesforce.lib.app_common import AppCommon
 
-
 PACKAGE_NAME = "fn_salesforce"
 ENTITY_ID = "Id"  # name of field in the endpoint entity (alert, case, etc) with the ID value
-ENTITY_CLOSE_FIELD = "IsClosed" # name of field in endpoint entity to reference the close state
-SOAR_ENTITY_ID_FIELD = "salesforce_case_number" # name of custom IBM SOAR case field to retain the endpoint entity_id
+ENTITY_CLOSE_FIELD = "Status" # name of field in endpoint entity to reference the close state
+SOAR_ENTITY_ID_FIELD = "salesforce_case_id" # name of custom IBM SOAR case field to retain the endpoint entity_id
 ENTITY_LABEL = "Salesforce Case" # label the name the case, alert, event, etc. native to your endpoint solution
 ENTITY_COMMENT_HEADER = "Created by Salesforce" # header used to identify comments create by the endpoint entity
 
@@ -94,7 +93,7 @@ def is_entity_closed(entity):
     :return: true/false if entity is closed
     :rtype: bool
     """
-    return bool(entity.get(ENTITY_CLOSE_FIELD, False))
+    return bool(entity.get(ENTITY_CLOSE_FIELD, "New") == "Closed")
 
 class PollerComponent(AppFunctionComponent):
     """
@@ -119,7 +118,6 @@ class PollerComponent(AppFunctionComponent):
                            "polling_lookback",
                            "verify"
                            ]
-
 
         super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)
 
