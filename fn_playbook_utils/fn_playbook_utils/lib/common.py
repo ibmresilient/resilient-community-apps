@@ -8,7 +8,7 @@ from resilient_lib import IntegrationError, s_to_b
 from resilient import SimpleHTTPException
 from requests import RequestException
 from requests_toolbelt.multipart.encoder import MultipartEncoder
-import defusedxml.ElementTree as ET
+from xml.etree import ElementTree as ET
 import posixpath
 
 LOG = logging.getLogger(__name__)
@@ -368,7 +368,7 @@ def get_process_elements(xml, action_map=ACTION_MAP):
         action_map ([list], optional): [list of elements to extract]. Defaults to ACTION_MAP.
     """
     # parse the xml
-    tree = ET.fromstring(xml, forbid_entities=False)
+    tree = ET.fromstring(xml)
 
     results = {}
     # walk the xml looking for the content we want
