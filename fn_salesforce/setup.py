@@ -29,7 +29,7 @@ setup(
     author="IBM SOAR",
     author_email="",
     url="https://ibm.com/mysupport",
-    description="<<::CHANGE_ME::>>Enter a short description of the App",
+    description="IBM SOAR app - bidirectional synchronization and functions for Salesforce",
     long_description="""Bi-directional App for Salesforce. Query Salesforce for Cases based \
          on user-defined query parameters and create and update cases in SOAR.<br>
 

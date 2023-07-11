@@ -13,6 +13,7 @@ from resilient_lib import (SOARCommon, get_last_poller_date,
                            make_payload_from_template, poller)
 
 from fn_salesforce.lib.app_common import AppCommon
+from fn_salesforce.poller.configure_tab import (init_salesforce_tab)
 
 PACKAGE_NAME = "fn_salesforce"
 ENTITY_ID = "Id"  # name of field in the endpoint entity (alert, case, etc) with the ID value
@@ -46,7 +47,8 @@ def init_app(rc, options):
     # initialize the class for making API calls to your endpoint
     app_common = AppCommon(rc, PACKAGE_NAME, options)
 
-    # <add additional initialization steps for your endpoint as necessary>
+    # initialize Salesforce tab in the SOAR UI
+    init_salesforce_tab()
 
     return app_common
 
@@ -255,7 +257,7 @@ class PollerComponent(AppFunctionComponent):
                         LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
                 # Add this entity to processed list.
                 processed_cases.append(entity_id)
-                LOG.debug("Salesforce case %s added to processed list", entity_id)
+                LOG.debug("Salesforce case Id %s added to processed list", entity_id)
 
             except Exception as err:
                 LOG.error("%s poller run failed: %s", PACKAGE_NAME, str(err))
