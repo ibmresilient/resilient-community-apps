@@ -25,7 +25,7 @@ setup(
     author='IBM SOAR',
     author_email='',
     url='https://ibm.com/mysupport',
-    description="Integrate with Microsoft Exchange Online email and meeting functionality'",
+    description="Integrate with Microsoft Exchange Online email and meeting functionality",
     long_description="Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from Resilient.",
     install_requires=[
         'resilient_circuits>=31.0.0',
