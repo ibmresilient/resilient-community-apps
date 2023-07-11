@@ -19,6 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_exchange_online',
+    display_name='Microsoft Exchange Online',
     version='1.4.0',
     license='MIT',
     author='IBM Resilient',
