@@ -40,9 +40,9 @@ HEADER = { 'Content-Type': 'application/json' }
 
 # E N D P O I N T S
 TOKEN_URL = "https://{my_domain_url}/services/oauth2/token"
-BASE_URL = "https://{my_domain_url}/services/data/{api_version}/"
-QUERY_URI = "query/?q=SELECT+FIELDS(ALL)+FROM+Case+LIMIT+200"
-QUERY_URI_BY_DATE = "query/?q=SELECT+FIELDS(ALL)+FROM+Case+WHERE+LastModifiedDate+>+{}+LIMIT+200"
+BASE_URL = "https://{my_domain_url}"
+QUERY_URI = "/services/data/{api_version}/query/?q=SELECT+FIELDS(ALL)+FROM+Case+LIMIT+200"
+QUERY_URI_BY_DATE = "/services/data/{api_version}/query/?q=SELECT+FIELDS(ALL)+FROM+Case+WHERE+LastModifiedDate+>+{time}+LIMIT+200"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
 
 class AppCommon():
@@ -104,15 +104,12 @@ class AppCommon():
     def _get_uri(self, cmd):
         """
         Build API url
-        <- ::CHANGE_ME:: change this to reflect the correct way to build an API call ->
-
-        :param cmd: portion of API: alerts, endpoints, policies
+        :param cmd: portion of API: 
         :type cmd: str
         :return: complete URL
         :rtype: str
         """
-        raise IntegrationError("UNIMPLEMENTED")
-        return urljoin(self.endpoint_url, cmd)
+        return urljoin(self.base_url, cmd)
 
     def _make_headers(self, token: str) -> dict :
         """Build API header using authorization token
@@ -153,7 +150,7 @@ class AppCommon():
                                verify=self.verify,
                                callback=callback)
 
-    def query_entities_since_ts(self, timestamp: datetime, *args, **kwargs) -> dict:
+    def query_entities_since_ts(self, timestamp: datetime, *args, **kwargs) -> list:
         """
         Get changed entities since last poller run
 
@@ -164,17 +161,36 @@ class AppCommon():
         :return: changed entity list
         :rtype: list
         """
-        # <- ::CHANGE_ME:: -> for the specific API calls
-        # and make sure to properly handle pagination!
+        # Get the first batch of query results based
         readable_time = readable_datetime(timestamp)
-        query_url = self.base_url + QUERY_URI_BY_DATE.format(readable_time)
-        response = self.rc.execute("GET", url=query_url, headers=self.headers)
-        response_json = response.json()
+        query_url = self.base_url + QUERY_URI_BY_DATE.format(api_version=self.api_version, time=readable_time)
         LOG.debug("Querying endpoint with %s", query_url)
 
-        # Implement pagination here
+        response = self.rc.execute("GET", url=query_url, headers=self.headers)
+        response_json = response.json()
+        records = response_json.get("records", [])
+        query_results = []
+        query_results.extend(records)
+            
+        done = response_json.get("done", True)
+        while not done:
+            if response_json.get("nextRecordsUrl", None) == None:
+                IntegrationError("No nextRecordsUrl key returned from Salesforce REST API case query!")
 
-        return response_json
+            # Get URL for next batch of results using the link sent back from Salesforce 
+            query_url = self._get_uri(response_json.get("nextRecordsUrl"))
+            LOG.debug("Querying endpoint with %s", query_url)
+
+            # Get the next batch of cases 
+            response = self.rc.execute("GET", url=query_url, headers=self.headers)
+            response_json = response.json()
+            records = response_json.get("records", [])
+
+            query_results.extend(records)
+
+            # Check if we are done
+            done = response_json.get("done", True)
+        return query_results
 
     def make_linkback_url(self, entity_id: str) -> str:
         """

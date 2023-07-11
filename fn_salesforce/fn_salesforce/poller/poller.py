@@ -183,7 +183,7 @@ class PollerComponent(AppFunctionComponent):
 
         if query_results:
             # iterate over all the entities.
-            self.process_query_list(query_results.get("records", []))
+            self.process_query_list(query_results)
 
     def process_query_list(self, query_results):
         """
