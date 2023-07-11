@@ -25,7 +25,7 @@ def codegen_reload_data():
         "functions": [],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"salesforce_case_id", u"salesforce_case_link", u"salesforce_case_number", u"salesforce_status"],
+        "incident_fields": [u"salesforce_case_id", u"salesforce_case_link", u"salesforce_case_number", u"salesforce_case_type", u"salesforce_contact_email", u"salesforce_contact_fax", u"salesforce_contact_id", u"salesforce_contact_phone", u"salesforce_origin", u"salesforce_owner_id", u"salesforce_reason", u"salesforce_status", u"salesforce_supplied_company", u"salesforce_supplied_email", u"salesforce_supplied_name", u"salesforce_supplied_phone"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
@@ -49,7 +49,19 @@ def customization_data(client=None):
         - salesforce_case_id
         - salesforce_case_link
         - salesforce_case_number
+        - salesforce_case_type
+        - salesforce_contact_email
+        - salesforce_contact_fax
+        - salesforce_contact_id
+        - salesforce_contact_phone
+        - salesforce_origin
+        - salesforce_owner_id
+        - salesforce_reason
         - salesforce_status
+        - salesforce_supplied_company
+        - salesforce_supplied_email
+        - salesforce_supplied_name
+        - salesforce_supplied_phone
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
