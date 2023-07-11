@@ -33,21 +33,19 @@ def load_json(path_file):
     return json.loads(json_data)
 
 @pytest.fixture(scope="function")
-def mock_api():
+def fx_setup_mock_api():
     # create a requests mock and intercept each of the endpoints that have been implemented
     # note that requests to endpoints outside the scope of these that have been implemented
     # will return 
 
     with requests_mock.Mocker() as mock_api:
         mock_api.register_uri("POST", "https://company.develop.my.salesforce.com/services/oauth2/token", json=load_json(PATH_TOKEN_MOCK), status_code=200)
-        yield mock_api
+        rc = RequestsCommon()
+        yield AppCommon(rc, PACKAGE_NAME, APP_CONFIG), mock_api
 
-@pytest.fixture(scope="module")
-def app_common():
-    rc = RequestsCommon()
-    yield AppCommon(rc, PACKAGE_NAME, APP_CONFIG)
-
-def test_make_headers(app_common: AppCommon):
-    headers = app_common._make_header("mock_token")
+def test_make_headers(fx_setup_mock_api):
+    app_common = fx_setup_mock_api[0]
+    mock_api = fx_setup_mock_api[1]
+    headers = app_common._make_headers("mock_token")
 
     assert headers == { 'Content-Type': 'application/json',  'Authorization': "Bearer mock_token" }

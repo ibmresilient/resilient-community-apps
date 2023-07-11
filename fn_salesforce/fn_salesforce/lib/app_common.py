@@ -2,7 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # Generated with resilient-sdk v49.0.4423
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-
+import datetime
 import logging
 from urllib.parse import urljoin
 from base64 import b64encode
@@ -78,7 +78,7 @@ class AppCommon():
 
         # Specify any additional parameters needed to communicate with your endpoint solution
 
-    def get_token(self):
+    def get_token(self) -> str:
         """
         Get an API access token for Salesforce authentication.
 
@@ -114,7 +114,7 @@ class AppCommon():
         raise IntegrationError("UNIMPLEMENTED")
         return urljoin(self.endpoint_url, cmd)
 
-    def _make_headers(self, token):
+    def _make_headers(self, token: str) -> dict :
         """Build API header using authorization token
 
         :param token: authorization token
@@ -153,7 +153,7 @@ class AppCommon():
                                verify=self.verify,
                                callback=callback)
 
-    def query_entities_since_ts(self, timestamp, *args, **kwargs):
+    def query_entities_since_ts(self, timestamp: datetime, *args, **kwargs) -> dict:
         """
         Get changed entities since last poller run
 
@@ -173,10 +173,10 @@ class AppCommon():
         LOG.debug("Querying endpoint with %s", query_url)
 
         # Implement pagination here
-        
+
         return response_json
 
-    def make_linkback_url(self, entity_id):
+    def make_linkback_url(self, entity_id: str) -> str:
         """
         Create a url to link back to the endpoint entity
 
@@ -218,7 +218,7 @@ def callback(response):
 
     return response, error_msg
 
-def _get_verify_ssl(app_configs):
+def _get_verify_ssl(app_configs: dict) -> bool:
     """
     Get ``verify`` parameter from app config.
     Value can be set in the [fn_my_app] section
