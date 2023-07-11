@@ -33,7 +33,7 @@ read_all_incidents
 #edit_all_private_task_notes
 #
 ## Playbook Permissions
-read_playbook
+#read_playbook
 #edit_playbook
 #create_playbook
 #delete_playbook
@@ -49,7 +49,7 @@ read_playbook
 #edit_script
 #create_script
 #delete_script
-read_workflow
+#read_workflow
 #edit_workflow
 #create_workflow
 #delete_workflow
