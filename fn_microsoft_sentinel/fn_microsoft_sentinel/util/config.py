@@ -39,7 +39,8 @@ max_alerts =
 #  if more than one field is specified, all fields need to pass
 #   format: "field1": "value", "field2": ["list_value1", "list_value2"]
 new_incident_filters = "status": ["New", "Active"], "severity": ["High", "Medium","Low"]
-# Either True or False if the SOAR case should be closed when its linked Sentinel incident is closed
+# Either True or False if the SOAR case should be closed when its linked Sentinel incident is closed.
+# If set to False the linked SOAR case will be updated, but not closed.
 close_soar_case=true
 # custom templates to replace the default map of sentinel fields to SOAR incident fields
 #create_incident_template=
