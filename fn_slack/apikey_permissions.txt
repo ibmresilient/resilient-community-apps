@@ -10,11 +10,11 @@ read_function
 # Add additional permissions below, one per line.
 #
 ## Incident Permissions
-#read_all_incidents
+read_all_incidents
 #create_incident
 #delete_all_incidents
 #download_incident_emails
-#edit_all_incidents_fields
+edit_all_incidents_fields
 #edit_all_incidents_owner
 #edit_all_incidents_members
 #edit_all_incidents_status
@@ -24,11 +24,11 @@ read_function
 ## Tasks Permissions
 #edit_task_header
 #read_incident_public_task
-#edit_incident_public_task_fields
+edit_incident_public_task_fields
 #edit_incident_public_task_member
 #edit_all_public_task_notes
 #read_all_private_tasks
-#edit_incident_private_task_fields
+edit_incident_private_task_fields
 #edit_incident_private_task_member
 #edit_all_private_task_notes
 #
