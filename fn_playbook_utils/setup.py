@@ -33,7 +33,6 @@ setup(
     <br>
     <ul>
     <li>to mine information about workflow and playbook usage across incidents so that an enterprise can learn the best practices on past threat intelligence and actions performed.</li>
-    <li>import and export playbooks</li>
     </ul>""",
     install_requires=[
         "resilient-circuits>=46.0.0",
