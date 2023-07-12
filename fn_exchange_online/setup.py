@@ -28,8 +28,7 @@ setup(
     description="Integrate with Microsoft Exchange Online email and meeting functionality",
     long_description="IBM SOAR Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from IBM SOAR.",
     install_requires=[
-        'resilient_circuits>=31.0.0',
-        'resilient_lib>=40.0.1rc0',
+        'resilient_circuits>=49.0.0',
         'pytz>=2019.3',
         'tzlocal>=2.0.0'
     ],
