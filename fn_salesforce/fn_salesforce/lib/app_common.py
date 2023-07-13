@@ -41,6 +41,8 @@ HEADER = { 'Content-Type': 'application/json' }
 TOKEN_URL = "https://{my_domain_url}/services/oauth2/token"
 BASE_URL = "https://{my_domain_url}"
 QUERY_URI = "/services/data/{api_version}/query/"
+
+# C O N S T A N T S
 SOQL_QUERY = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
 LIMIT = 200
@@ -70,6 +72,8 @@ class AppCommon():
         self.verify = _get_verify_ssl(app_configs)
         self.access_token = self.get_token()
         self.polling_filters = eval_mapping(app_configs.get('polling_filters', ''), wrapper='[{}]')
+        if not self.polling_filters:
+            self.polling_filters = []
 
         # Setup access token in the header for making Salesforce REST API calls 
         if self.access_token:
@@ -102,7 +106,7 @@ class AppCommon():
 
         return response_json.get("access_token", None)
     
-    def _get_uri(self, cmd):
+    def _get_uri(self, cmd: str) -> str:
         """
         Build API url
         :param cmd: portion of API: 
@@ -166,30 +170,6 @@ class AppCommon():
         header['Content-Type'] = 'application/json'
 
         return header  
-
-    def _api_call(self, method, url, payload=None):
-        """
-        Make an API call to the endpoint solution and get back the response
-
-        :param method: REST method to execute (GET, POST, PUT, ...)
-        :type method: str
-        :param url: URL to send request to
-        :type url: str
-        :param payload: JSON payload to send if a POST, defaults to None
-        :type payload: dict|None
-        :return: requests.Response object returned from the endpoint call
-        :rtype: ``requests.Response``
-        """    
-        # <- ::CHANGE_ME:: there may be changes needed in here to
-        # work with your endpoint solution ->
-
-        return self.rc.execute(method,
-                               url,
-                               params=params,
-                               json=payload,
-                               headers=self._make_headers(),
-                               verify=self.verify,
-                               callback=callback)
 
     def query_entities_since_ts(self, timestamp: datetime, *args, **kwargs) -> list:
         """

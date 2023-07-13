@@ -18,11 +18,13 @@ class SalesforceTab(Tab):
     UUID = "17b826ac-12ef-4d61-a26f-dbcadff7eada"
 
     CONTAINS = [
-        Field("salesforce_case_id"),
         Field("salesforce_case_number"),
         Field("salesforce_case_type"),
+        Field("salesforce_status"),
         Field("salesforce_case_link"),
         Field("salesforce_origin"),
+        Field("salesforce_reason"),
+        Field("salesforce_case_id"),
         Field("salesforce_owner_id"),
         Field("salesforce_account_id"),
         Field("salesforce_contact_id"),
@@ -32,9 +34,7 @@ class SalesforceTab(Tab):
         Field("salesforce_supplied_name"),
         Field("salesforce_supplied_email"),
         Field("salesforce_supplied_phone"),
-        Field("salesforce_supplied_company"),
-        Field("salesforce_reason"),
-        Field("salesforce_status")
+        Field("salesforce_supplied_company")
     ]
     SHOW_IF = [
         Field("salesforce_case_id").conditions.has_value()
