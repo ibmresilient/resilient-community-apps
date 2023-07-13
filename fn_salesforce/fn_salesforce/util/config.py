@@ -30,15 +30,23 @@ polling_lookback=120
 lightning_link = True
 # 
 verify = True
-# Optional: polling filters that can be applied when querying Salesforce for new cases to cases to be updated.
+# Optional: polling filters that can be applied when querying Salesforce for 
+# new cases to cases to be updated. The app uses SOQL (Salesforce Object Query Language) 
+# to form a SELECT statement to query cases based on the last poll time.  
+# Additional filters can be added to the query by translating polling_filters tuples into 
+# AND clauses added to the WHERE clause of the SELECT statement.
+# 
 # Each filter is a tuple in the following format: ("field","operator","value")
 # Where:
 #   "field" in the Salesforce case field to be queried
-#   "operator" is a string operator as defined in Salesforce (for example: "less", "less_or_equal", "equal") 
+#   "operator" is a comparison operator as defined in Salesforce (for example: "<", "<=", "=", "!=") 
 #   "value" is the value to be compared against in the query
-# If more than one filter is needed separate each tuple with a comma
-#polling_filters=("Priority","=","\'High\'"),("Status","=",),("IsClosed","=","false")
-#
+# If more than one filter is needed separate each tuple with a comma.
+# Note that strings that needs to be single quoted in an SOQL query, need to be escaped.
+# Here are some examples:
+# polling_filters=("Priority","=","\'High\'"),("Status","IN",["\'New\'","\'Working\'","\'In Progress\'"])
+# ("IsClosed","=","false"),("CreatedDate",">","YESTERDAY")
+polling_filters=
 # 
 # # Specify paths to files if client certs are needed to authenticate
 # client_auth_cert = <path_to_cert.pem>
