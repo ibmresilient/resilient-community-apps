@@ -9,8 +9,7 @@ from base64 import b64encode
 from urllib.parse import quote_plus, urljoin
 
 from requests.exceptions import JSONDecodeError
-from resilient_lib import IntegrationError, readable_datetime, str_to_bool
-from resilient_lib.components.templates_common import iso8601
+from resilient_lib import IntegrationError, readable_datetime, eval_mapping, str_to_bool
 
 #----------------------------------------------------------------------------------------
 # This module is an open template for you to develop the methods necessary to interact
@@ -41,9 +40,10 @@ HEADER = { 'Content-Type': 'application/json' }
 # E N D P O I N T S
 TOKEN_URL = "https://{my_domain_url}/services/oauth2/token"
 BASE_URL = "https://{my_domain_url}"
-QUERY_URI = "/services/data/{api_version}/query/?q=SELECT+FIELDS(ALL)+FROM+Case+LIMIT+200"
-QUERY_URI_BY_DATE = "/services/data/{api_version}/query/?q=SELECT+FIELDS(ALL)+FROM+Case+WHERE+LastModifiedDate+>+{time}+LIMIT+200"
+QUERY_URI = "/services/data/{api_version}/query/"
+SOQL_QUERY = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
+LIMIT = 200
 
 class AppCommon():
     def __init__(self, rc, package_name, app_configs):
@@ -69,6 +69,7 @@ class AppCommon():
         self.rc = rc
         self.verify = _get_verify_ssl(app_configs)
         self.access_token = self.get_token()
+        self.polling_filters = eval_mapping(app_configs.get('polling_filters', ''), wrapper='[{}]')
 
         # Setup access token in the header for making Salesforce REST API calls 
         if self.access_token:
@@ -110,7 +111,47 @@ class AppCommon():
         :rtype: str
         """
         return urljoin(self.base_url, cmd)
+    
+    def _add_query_filters(self, base_query: str, filters: list, limit: int) -> str:
+        """ Create an SOQL query string which is sent to Salesforce /query endpoint to 
+        perform a search on Case objects
 
+        Args:
+            base_query (str): Base query string (In our case is a SELECT statement that 
+                            the poller uses to get most recent Cases from Salesforce 
+                            since the last poll time)
+            filters (list): List of tuples (Saleforce Case field, operator, value) that are 
+                            converted to AND statements in the WHERE clause to filter cases 
+                            when querying Salesforce for cases.
+            limit (int): Salesforce has a 2000 limit on the number of query results returned.
+
+        Returns:
+            str: The SOQL SELECT command used to query Cases in Salesforce
+        """
+        soql_query = base_query
+
+        # Loop through the filteres defined by the user to limit the cases returned from the query
+        # Append them to the base query for polling cases based on the last poll time.
+        for filter_tuple in filters:
+            if not isinstance(filter_tuple, tuple) or len(filter_tuple) != 3:
+                LOG.error("polling filter tuple %s : invalid format or does not contain 3 elements - skipping this filter", filter_tuple)
+                continue
+            if isinstance(filter_tuple[2], list):
+                # list of values - loop and add them in between enclosed parentheses.
+                polling_filter_query = " AND {0} {1} (".format(filter_tuple[0], filter_tuple[1])
+                for filter_value in filter_tuple[2]:
+                    polling_filter_query = polling_filter_query + filter_value + ","
+                # Replace last comma with close parentheses
+                if polling_filter_query[-1:] == ",":
+                    polling_filter_query = polling_filter_query[:-1] + ")"
+            else:
+                polling_filter_query = " AND {0} {1} {2}".format(filter_tuple[0], filter_tuple[1], filter_tuple[2])
+            soql_query = soql_query + polling_filter_query
+
+        if limit:
+            soql_query = soql_query + " LIMIT {0}".format(limit)
+        return soql_query
+ 
     def _make_headers(self, token: str) -> dict :
         """Build API header using authorization token
 
@@ -162,11 +203,18 @@ class AppCommon():
         :rtype: list
         """
         # Get the first batch of query results based
-        readable_time = readable_datetime(timestamp)
-        query_url = self.base_url + QUERY_URI_BY_DATE.format(api_version=self.api_version, time=readable_time)
-        LOG.debug("Querying endpoint with %s", query_url)
 
-        response = self.rc.execute("GET", url=query_url, headers=self.headers)
+        readable_time = readable_datetime(timestamp)
+
+        # Form the query endpoint
+        query_url = self.base_url + QUERY_URI.format(api_version=self.api_version)
+
+        # Build the SOQL query based on the polling time and the user input polling_filters
+        soql_query_with_filters = self._add_query_filters(SOQL_QUERY.format(time=readable_time), self.polling_filters, LIMIT)
+        params = {'q': soql_query_with_filters}
+        LOG.debug("Querying endpoint with %s", soql_query_with_filters)
+
+        response = self.rc.execute("GET", url=query_url, headers=self.headers, params=params)
         response_json = response.json()
         records = response_json.get("records", [])
         query_results = []
@@ -178,11 +226,11 @@ class AppCommon():
                 IntegrationError("No nextRecordsUrl key returned from Salesforce REST API case query!")
 
             # Get URL for next batch of results using the link sent back from Salesforce 
-            query_url = self._get_uri(response_json.get("nextRecordsUrl"))
+            next_query_url = self._get_uri(response_json.get("nextRecordsUrl"))
             LOG.debug("Querying endpoint with %s", query_url)
 
             # Get the next batch of cases 
-            response = self.rc.execute("GET", url=query_url, headers=self.headers)
+            response = self.rc.execute("GET", url=next_query_url, headers=self.headers)
             response_json = response.json()
             records = response_json.get("records", [])
 
@@ -195,18 +243,12 @@ class AppCommon():
     def make_linkback_url(self, entity_id: str) -> str:
         """
         Create a url to link back to the endpoint entity
-
         :param entity_id: id representing the entity
         :type entity_id: str
-        :param linkback_url: string to in which one can format the entity ID to join to the base url
-        :type linkback_url: str
         :return: completed url for linkback
         :rtype: str
         """
-        #https://ibmc4s-qradar-dev-dev-ed.develop.lightning.force.com/lightning/r/Case/500Hr00001Vhr73IAB/view
-
         return LINKBACK_URL.format(my_domain_name=self.my_domain_name, entity_id=entity_id)
-
 
 def callback(response):
     """

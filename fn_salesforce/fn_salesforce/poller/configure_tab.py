@@ -24,6 +24,7 @@ class SalesforceTab(Tab):
         Field("salesforce_case_link"),
         Field("salesforce_origin"),
         Field("salesforce_owner_id"),
+        Field("salesforce_account_id"),
         Field("salesforce_contact_id"),
         Field("salesforce_contact_phone"),
         Field("salesforce_contact_email"),
