@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# Generated with resilient-sdk v49.1.51
 
 """Generate the Resilient customizations required for fn_salesforce"""
 
@@ -22,16 +22,16 @@ def codegen_reload_data():
     return {
         "package": u"fn_salesforce",
         "message_destinations": [u"fn_salesforce"],
-        "functions": [],
+        "functions": [u"salesforce_get_case", u"salesforce_update_case_status"],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"salesforce_case_id",u"salesforce_account_id", u"salesforce_case_link", u"salesforce_case_number", u"salesforce_case_type", u"salesforce_contact_email", u"salesforce_contact_fax", u"salesforce_contact_id", u"salesforce_contact_phone", u"salesforce_origin", u"salesforce_owner_id", u"salesforce_reason", u"salesforce_status", u"salesforce_supplied_company", u"salesforce_supplied_email", u"salesforce_supplied_name", u"salesforce_supplied_phone"],
+        "incident_fields": [u"salesforce_account_id", u"salesforce_case_id", u"salesforce_case_link", u"salesforce_case_number", u"salesforce_case_type", u"salesforce_contact_email", u"salesforce_contact_fax", u"salesforce_contact_id", u"salesforce_contact_phone", u"salesforce_origin", u"salesforce_owner_id", u"salesforce_reason", u"salesforce_status", u"salesforce_supplied_company", u"salesforce_supplied_email", u"salesforce_supplied_name", u"salesforce_supplied_phone"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [u"salesforce_close_case", u"salesforce_update_case", u"salesforce_update_case_status_manual"]
     }
 
 
@@ -45,7 +45,15 @@ def customization_data(client=None):
     Contents:
     - Message Destinations:
         - fn_salesforce
+    - Functions:
+        - salesforce_get_case
+        - salesforce_update_case_status
+    - Playbooks:
+        - salesforce_close_case
+        - salesforce_update_case
+        - salesforce_update_case_status_manual
     - Incident Fields:
+        - salesforce_account_id
         - salesforce_case_id
         - salesforce_case_link
         - salesforce_case_number

@@ -7,6 +7,7 @@ import logging
 from urllib.parse import urljoin
 from base64 import b64encode
 from urllib.parse import quote_plus, urljoin
+import json
 
 from requests.exceptions import JSONDecodeError
 from resilient_lib import IntegrationError, readable_datetime, eval_mapping, str_to_bool
@@ -41,9 +42,11 @@ HEADER = { 'Content-Type': 'application/json' }
 TOKEN_URL = "https://{my_domain_url}/services/oauth2/token"
 BASE_URL = "https://{my_domain_url}"
 QUERY_URI = "/services/data/{api_version}/query/"
+CASE_URI = "/services/data/{api_version}/sobjects/Case/{case_id}"
 
 # C O N S T A N T S
-SOQL_QUERY = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
+SOQL_QUERY_LAST_MODIFIED_DATE = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
+SOQL_QUERY_CASE_ID = "SELECT FIELDS(ALL) FROM Case WHERE Id = '{case_id}'"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
 LIMIT = 200
 
@@ -80,8 +83,6 @@ class AppCommon():
             self.headers = self._make_headers(self.access_token)
         else:
             raise IntegrationError("Unable to get access token from Salesforce!")
-
-        # Specify any additional parameters needed to communicate with your endpoint solution
 
     def get_token(self) -> str:
         """
@@ -190,7 +191,7 @@ class AppCommon():
         query_url = self.base_url + QUERY_URI.format(api_version=self.api_version)
 
         # Build the SOQL query based on the polling time and the user input polling_filters
-        soql_query_with_filters = self._add_query_filters(SOQL_QUERY.format(time=readable_time), self.polling_filters, LIMIT)
+        soql_query_with_filters = self._add_query_filters(SOQL_QUERY_LAST_MODIFIED_DATE.format(time=readable_time), self.polling_filters, LIMIT)
         params = {'q': soql_query_with_filters}
         LOG.debug("Querying endpoint with %s", soql_query_with_filters)
 
@@ -230,6 +231,35 @@ class AppCommon():
         """
         return LINKBACK_URL.format(my_domain_name=self.my_domain_name, entity_id=entity_id)
 
+    def get_single_case(self, case_id: str) -> dict:
+        """Get the Salesforce case data for the specified Salesforce case_id
+
+        Args:
+            case_id (str): Salesforce case Id
+
+        Returns:
+            dict: json case data from Salesforce
+        """
+        url = self.base_url + CASE_URI.format(api_version=self.api_version, case_id=case_id)
+        LOG.debug("Querying endpoint with %s", )
+
+        response = self.rc.execute("GET", url=url, headers=self.headers)
+        return response.json()
+    
+    def update_case_status(self, salesforce_case_id, status):
+        """Update the Status field in the Salesforce case
+
+        Args:
+            salesforce_case_id (str): Salesforce CaseId
+            status (str): Salesforce Case Status
+        """
+        url = self.base_url + CASE_URI.format(api_version=self.api_version, case_id=salesforce_case_id)
+        data = {"Status": status}
+        data_string = json.dumps(data)
+
+        response = self.rc.execute("PATCH", url=url, headers=self.headers, data=data_string)
+        return True
+
 def callback(response):
     """
     Callback needed for certain REST API calls to return a formatted error message
@@ -237,7 +267,7 @@ def callback(response):
     :param response: the requests response object
     :type response: ``requests.Response``
     :return: response, error_msg
-    :rtype: tuple(``requests.Reponse``, str)
+    :rtype: tuple(``requests.Response``, str)
     """
     error_msg = None
     if response.status_code >= 300 and response.status_code <= 500:

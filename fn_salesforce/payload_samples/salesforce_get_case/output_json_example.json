@@ -1,0 +1,65 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "salesforce_case": {
+      "attributes": {
+        "type": "Case",
+        "url": "/services/data/v58.0/sobjects/Case/500Hr00001X8WykIAF"
+      },
+      "Id": "500Hr00001X8WykIAF",
+      "IsDeleted": false,
+      "MasterRecordId": null,
+      "CaseNumber": "00001069",
+      "ContactId": "003Hr00002REwc8IAD",
+      "AccountId": "001Hr00001kFBihIAG",
+      "AssetId": null,
+      "ParentId": null,
+      "SuppliedName": null,
+      "SuppliedEmail": null,
+      "SuppliedPhone": null,
+      "SuppliedCompany": null,
+      "Type": "Mechanical",
+      "Status": "Working",
+      "Reason": "Equipment Design",
+      "Origin": "Phone",
+      "Subject": null,
+      "Priority": "High",
+      "Description": null,
+      "IsClosed": false,
+      "ClosedDate": null,
+      "IsEscalated": false,
+      "OwnerId": "005Hr00000COneZIAT",
+      "CreatedDate": "2023-07-13T20:54:09.000+0000",
+      "CreatedById": "005Hr00000COneZIAT",
+      "LastModifiedDate": "2023-07-14T16:43:49.000+0000",
+      "LastModifiedById": "005Hr00000COneZIAT",
+      "SystemModstamp": "2023-07-14T16:43:49.000+0000",
+      "ContactPhone": null,
+      "ContactMobile": null,
+      "ContactEmail": null,
+      "ContactFax": null,
+      "Comments": null,
+      "LastViewedDate": "2023-07-14T16:50:38.000+0000",
+      "LastReferencedDate": "2023-07-14T16:50:38.000+0000",
+      "EngineeringReqNumber__c": null,
+      "SLAViolation__c": null,
+      "Product__c": null,
+      "PotentialLiability__c": null,
+      "entity_url": "https://mycompany.develop.lightning.force.com/lightning/r/Case/500Hr00001X8WykIAF/view"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "salesforce_case_id": "500Hr00001X8WykIAF"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-salesforce",
+    "package_version": "1.0.0",
+    "host": "laptop",
+    "execution_time_ms": 185,
+    "timestamp": "2023-07-14 12:50:54"
+  }
+}
