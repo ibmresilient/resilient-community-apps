@@ -43,7 +43,9 @@ TOKEN_URL = "https://{my_domain_url}/services/oauth2/token"
 BASE_URL = "https://{my_domain_url}"
 QUERY_URI = "/services/data/{api_version}/query/"
 CASE_URI = "/services/data/{api_version}/sobjects/Case/{case_id}"
-
+ACCOUNT_URI = "/services/data/{api_version}/sobjects/Account/{account_id}"
+OWNER_URI = "/services/data/{api_version}/sobjects/Owner/{owner_id}"
+CONTACT_URI = "/services/data/{api_version}/sobjects/Contact/{contact_id}"
 # C O N S T A N T S
 SOQL_QUERY_LAST_MODIFIED_DATE = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
 SOQL_QUERY_CASE_ID = "SELECT FIELDS(ALL) FROM Case WHERE Id = '{case_id}'"
@@ -231,7 +233,7 @@ class AppCommon():
         """
         return LINKBACK_URL.format(my_domain_name=self.my_domain_name, entity_id=entity_id)
 
-    def get_single_case(self, case_id: str) -> dict:
+    def get_case(self, case_id: str) -> dict:
         """Get the Salesforce case data for the specified Salesforce case_id
 
         Args:
@@ -241,7 +243,22 @@ class AppCommon():
             dict: json case data from Salesforce
         """
         url = self.base_url + CASE_URI.format(api_version=self.api_version, case_id=case_id)
-        LOG.debug("Querying endpoint with %s", )
+        LOG.debug("Querying endpoint with %s", url)
+
+        response = self.rc.execute("GET", url=url, headers=self.headers)
+        return response.json()
+    
+    def get_account(self, account_id: str) -> dict:
+        """Get the Salesforce account data for the specified Salesforce AccountId
+
+        Args:
+            account_id (str): Salesforce AccountId
+
+        Returns:
+            dict: json account data from Salesforce
+        """
+        url = self.base_url + ACCOUNT_URI.format(api_version=self.api_version, account_id=account_id)
+        LOG.debug("Querying endpoint with %s", url)
 
         response = self.rc.execute("GET", url=url, headers=self.headers)
         return response.json()

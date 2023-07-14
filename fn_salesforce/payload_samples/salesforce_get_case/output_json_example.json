@@ -41,13 +41,13 @@
       "ContactEmail": null,
       "ContactFax": null,
       "Comments": null,
-      "LastViewedDate": "2023-07-14T16:50:38.000+0000",
-      "LastReferencedDate": "2023-07-14T16:50:38.000+0000",
+      "LastViewedDate": "2023-07-14T20:44:36.000+0000",
+      "LastReferencedDate": "2023-07-14T20:44:36.000+0000",
       "EngineeringReqNumber__c": null,
       "SLAViolation__c": null,
       "Product__c": null,
       "PotentialLiability__c": null,
-      "entity_url": "https://mycompany.develop.lightning.force.com/lightning/r/Case/500Hr00001X8WykIAF/view"
+      "entity_url": "https://my-company.develop.lightning.force.com/lightning/r/Case/500Hr00001X8WykIAF/view"
     }
   },
   "raw": null,
@@ -58,8 +58,8 @@
     "version": "1.0",
     "package": "fn-salesforce",
     "package_version": "1.0.0",
-    "host": "laptop",
-    "execution_time_ms": 185,
-    "timestamp": "2023-07-14 12:50:54"
+    "host": "mylaptop",
+    "execution_time_ms": 182,
+    "timestamp": "2023-07-14 16:57:22"
   }
 }

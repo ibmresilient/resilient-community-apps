@@ -19,22 +19,22 @@ class SalesforceTab(Tab):
 
     CONTAINS = [
         Field("salesforce_case_number"),
-        Field("salesforce_case_type"),
+        Field("salesforce_case_id"),
         Field("salesforce_status"),
+        Field("salesforce_case_type"),
+        Field("salesforce_reason"),
         Field("salesforce_case_link"),
         Field("salesforce_origin"),
-        Field("salesforce_reason"),
-        Field("salesforce_case_id"),
-        Field("salesforce_owner_id"),
-        Field("salesforce_account_id"),
-        Field("salesforce_contact_id"),
         Field("salesforce_contact_phone"),
         Field("salesforce_contact_email"),
         Field("salesforce_contact_fax"),
         Field("salesforce_supplied_name"),
         Field("salesforce_supplied_email"),
         Field("salesforce_supplied_phone"),
-        Field("salesforce_supplied_company")
+        Field("salesforce_supplied_company"),
+        Field("salesforce_account_id"),
+        Field("salesforce_owner_id"),
+        Field("salesforce_contact_id"),
     ]
     SHOW_IF = [
         Field("salesforce_case_id").conditions.has_value()

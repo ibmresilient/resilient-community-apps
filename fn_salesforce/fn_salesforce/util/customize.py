@@ -22,7 +22,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_salesforce",
         "message_destinations": [u"fn_salesforce"],
-        "functions": [u"salesforce_get_case", u"salesforce_update_case_status"],
+        "functions": [u"salesforce_get_account", u"salesforce_get_case", u"salesforce_update_case_status"],
         "workflows": [],
         "actions": [],
         "incident_fields": [u"salesforce_account_id", u"salesforce_case_id", u"salesforce_case_link", u"salesforce_case_number", u"salesforce_case_type", u"salesforce_contact_email", u"salesforce_contact_fax", u"salesforce_contact_id", u"salesforce_contact_phone", u"salesforce_origin", u"salesforce_owner_id", u"salesforce_reason", u"salesforce_status", u"salesforce_supplied_company", u"salesforce_supplied_email", u"salesforce_supplied_name", u"salesforce_supplied_phone"],
@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"salesforce_close_case", u"salesforce_update_case", u"salesforce_update_case_status_manual"]
+        "playbooks": [u"salesforce_close_case", u"salesforce_get_account", u"salesforce_update_case", u"salesforce_update_case_status_manual"]
     }
 
 
@@ -46,10 +46,12 @@ def customization_data(client=None):
     - Message Destinations:
         - fn_salesforce
     - Functions:
+        - salesforce_get_account
         - salesforce_get_case
         - salesforce_update_case_status
     - Playbooks:
         - salesforce_close_case
+        - salesforce_get_account
         - salesforce_update_case
         - salesforce_update_case_status_manual
     - Incident Fields:
