@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1689149722016,
+  "export_date": 1689588055547,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -744,13 +744,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 77,
+  "id": 78,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1689149717231,
+      "create_date": 1689588052005,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -759,7 +759,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1689149717231,
+      "update_date": 1689588052005,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -788,7 +788,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 14,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_96cf233f_1b29_43f1_aa25_fced41f00054\" isExecutable=\"true\" name=\"playbook_96cf233f_1b29_43f1_aa25_fced41f00054\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0i1pu2h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"PB: Get Workflow Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id\\ninputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date\\ninputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date\\n\\ninputs.pb_object_name = inputs.pb_object_type = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0i1pu2h\u003c/incoming\u003e\u003coutgoing\u003eFlow_08l5iiv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"PB: Display workflow data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"52b3f960-ee96-4fff-80bb-71744f6f9a2c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08l5iiv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1t44gs8\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"PB: Display playbook data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fadb0f23-7415-4029-a502-552ccb523002\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kqy65f\u003c/incoming\u003e\u003coutgoing\u003eFlow_1gqhqxf\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"PB: Get Playbook Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id\\ninputs.pb_min_incident_id =  playbook.inputs.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date\\ninputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date\\n\\ninputs.pb_object_name = inputs.pb_object_type = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1t44gs8\u003c/incoming\u003e\u003coutgoing\u003eFlow_1kqy65f\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0i1pu2h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1kqy65f\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_3\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1gqhqxf\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1gqhqxf\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_5\"/\u003e\u003csequenceFlow id=\"Flow_08l5iiv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1t44gs8\" sourceRef=\"ScriptTask_2\" targetRef=\"ServiceTask_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_96cf233f_1b29_43f1_aa25_fced41f00054\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1t44gs8\" id=\"Flow_1t44gs8_di\"\u003e\u003comgdi:waypoint x=\"680\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"680\" y=\"390\"/\u003e\u003comgdi:waypoint x=\"660\" y=\"390\"/\u003e\u003comgdi:waypoint x=\"660\" y=\"408\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08l5iiv\" id=\"Flow_08l5iiv_di\"\u003e\u003comgdi:waypoint x=\"680\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"680\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1gqhqxf\" id=\"Flow_1gqhqxf_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"612\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"638\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"638\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"664\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kqy65f\" id=\"Flow_1kqy65f_di\"\u003e\u003comgdi:waypoint x=\"660\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"660\" y=\"510\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"510\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"528\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0i1pu2h\" id=\"Flow_0i1pu2h_di\"\u003e\u003comgdi:waypoint x=\"680\" y=\"106\"/\u003e\u003comgdi:waypoint x=\"680\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"586\" y=\"54\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"582\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"582\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"528\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"562\" y=\"408\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2188\" x=\"684\" y=\"664\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1689045751379,
@@ -835,7 +835,7 @@
             "tags": [],
             "templates": [],
             "text": "Max incident date",
-            "tooltip": "Date for current incident only.",
+            "tooltip": "",
             "type_id": 1088,
             "uuid": "99719f20-8693-4d2d-a93a-74371370b489",
             "values": []
@@ -893,7 +893,7 @@
             "tags": [],
             "templates": [],
             "text": "Min incident date",
-            "tooltip": "Note \u0027Min incident Id\u0027 or \u0027Min incident Date\u0027 must be set. Date for current incident only.",
+            "tooltip": "Note \u0027Min incident Id\u0027 or \u0027Min incident Date\u0027 must be set.",
             "type_id": 1088,
             "uuid": "a298a551-416c-4117-8134-e82acc6bd84c",
             "values": []
@@ -957,7 +957,7 @@
         "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1689049391696,
+      "last_modified_time": 1689587641197,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -1012,7 +1012,7 @@
       "tags": [],
       "type": "default",
       "uuid": "96cf233f-1b29-43f1-aa25-fced41f00054",
-      "version": 7
+      "version": 16
     },
     {
       "activation_details": {
@@ -1103,7 +1103,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
+        "content_version": 10,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a8dda618_33b4_40de_81b2_a842d77d7ff1\" isExecutable=\"true\" name=\"playbook_a8dda618_33b4_40de_81b2_a842d77d7ff1\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1fy5d1w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"PB: Get Workflow Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id\\ninputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date\\ninputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fy5d1w\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hdy4m9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Get Workflow Data Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"939cf497-b786-4e52-b4d1-98b39d9bb2f5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1hdy4m9\u003c/incoming\u003e\u003coutgoing\u003eFlow_1h6b3o3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1hdy4m9\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1fy5d1w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"PB: Get Playbook Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id\\ninputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date\\ninputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1h6b3o3\u003c/incoming\u003e\u003coutgoing\u003eFlow_09twtoz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Get Playbook Data Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2a012e50-9518-4ff9-890f-d3d27cb75f19\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09twtoz\u003c/incoming\u003e\u003coutgoing\u003eFlow_0kij2bs\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1h6b3o3\" sourceRef=\"ScriptTask_2\" targetRef=\"ServiceTask_3\"/\u003e\u003csequenceFlow id=\"Flow_09twtoz\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0kij2bs\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0kij2bs\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a8dda618_33b4_40de_81b2_a842d77d7ff1\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kij2bs\" id=\"Flow_0kij2bs_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"642\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"653\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"653\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"664\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09twtoz\" id=\"Flow_09twtoz_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"522\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"558\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1h6b3o3\" id=\"Flow_1h6b3o3_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"438\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fy5d1w\" id=\"Flow_1fy5d1w_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hdy4m9\" id=\"Flow_1hdy4m9_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"558\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"644\" y=\"664\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1689045751937,
@@ -1150,7 +1150,7 @@
             "tags": [],
             "templates": [],
             "text": "Max incident date",
-            "tooltip": "Date for current incident only.",
+            "tooltip": "",
             "type_id": 1090,
             "uuid": "2187a823-ce64-4948-a219-c08e94487e7d",
             "values": []
@@ -1208,7 +1208,7 @@
             "tags": [],
             "templates": [],
             "text": "Min incident date",
-            "tooltip": "Note \u0027Min incident Id\u0027 or \u0027Min incident Date\u0027 must be set. Date for current incident only.",
+            "tooltip": "Note \u0027Min incident Id\u0027 or \u0027Min incident Date\u0027 must be set.",
             "type_id": 1090,
             "uuid": "7d27f945-eb9c-4f13-b45f-8a932445eae9",
             "values": []
@@ -1272,7 +1272,7 @@
         "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1689130547228,
+      "last_modified_time": 1689587607107,
       "local_scripts": [
         {
           "actions": [],
@@ -1364,12 +1364,12 @@
       "tags": [],
       "type": "default",
       "uuid": "a8dda618-33b4-40de-81b2-a842d77d7ff1",
-      "version": 10
+      "version": 12
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 7,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_c4d06ff9_f218_438a_abf5_01382d58e1ce\" isExecutable=\"true\" name=\"playbook_c4d06ff9_f218_438a_abf5_01382d58e1ce\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_10se7xi\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"PB: Get Workflow Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id\\ninputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date\\ninputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date\\n\\ninputs.pb_object_name = artifact.value\\ninputs.pb_object_type = \u0027artifact\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10se7xi\u003c/incoming\u003e\u003coutgoing\u003eFlow_1heyx01\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"PB: Get Playbook Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id\\ninputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date\\ninputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date\\n\\ninputs.pb_object_name = artifact.value\\ninputs.pb_object_type = \u0027artifact\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wuuupq\u003c/incoming\u003e\u003coutgoing\u003eFlow_08klq85\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_10se7xi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1heyx01\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_6\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1mlxhso\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_08klq85\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_7\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"PB: Display workflow data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"52b3f960-ee96-4fff-80bb-71744f6f9a2c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1heyx01\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wuuupq\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wuuupq\" sourceRef=\"ScriptTask_6\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_7\" name=\"PB: Display playbook data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fadb0f23-7415-4029-a502-552ccb523002\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08klq85\u003c/incoming\u003e\u003coutgoing\u003eFlow_1mlxhso\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1mlxhso\" sourceRef=\"ScriptTask_7\" targetRef=\"EndPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c4d06ff9_f218_438a_abf5_01382d58e1ce\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mlxhso\" id=\"Flow_1mlxhso_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"642\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"684\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wuuupq\" id=\"Flow_0wuuupq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"448\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08klq85\" id=\"Flow_08klq85_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"532\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"558\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1heyx01\" id=\"Flow_1heyx01_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10se7xi\" id=\"Flow_10se7xi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.51600000000002\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"448\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"655\" y=\"684\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_7\" id=\"ScriptTask_7_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"558\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1689045752293,
@@ -1416,7 +1416,7 @@
             "tags": [],
             "templates": [],
             "text": "Max incident date",
-            "tooltip": "Date for current incident only.",
+            "tooltip": "",
             "type_id": 1091,
             "uuid": "61fc8a73-ff2c-46a2-9a2c-445cfc4f18d4",
             "values": []
@@ -1474,7 +1474,7 @@
             "tags": [],
             "templates": [],
             "text": "Min incident date",
-            "tooltip": "Note \u0027Min incident Id\u0027 or \u0027Min incident Date\u0027 must be set. Date for current incident only.",
+            "tooltip": "Note \u0027Min incident Id\u0027 or \u0027Min incident Date\u0027 must be set.",
             "type_id": 1091,
             "uuid": "4e279549-56f4-47b3-8243-8dcb5d3bda72",
             "values": []
@@ -1538,7 +1538,7 @@
         "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1689049411488,
+      "last_modified_time": 1689587731680,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -1593,7 +1593,7 @@
       "tags": [],
       "type": "default",
       "uuid": "c4d06ff9-f218-438a-abf5-01382d58e1ce",
-      "version": 7
+      "version": 9
     },
     {
       "activation_details": {
@@ -1684,7 +1684,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 6,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_43e12a0d_29af_4f58_8d55_bc9af44e24a3\" isExecutable=\"true\" name=\"playbook_43e12a0d_29af_4f58_8d55_bc9af44e24a3\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1mm58wc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"PB: Get Workflow Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id\\ninputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date\\ninputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date\\n\\ninputs.pb_object_name = attachment.name\\ninputs.pb_object_type = \u0027attachment\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mm58wc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1q4pm4s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"PB: Get Playbook Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id\\ninputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date\\ninputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date\\n\\ninputs.pb_object_name = attachment.name\\ninputs.pb_object_type = \u0027attachment\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0nj34sl\u003c/incoming\u003e\u003coutgoing\u003eFlow_1bq6e6z\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1mm58wc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1bq6e6z\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_7\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ekgreb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1q4pm4s\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_6\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"PB: Display workflow data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"52b3f960-ee96-4fff-80bb-71744f6f9a2c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1q4pm4s\u003c/incoming\u003e\u003coutgoing\u003eFlow_0nj34sl\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0nj34sl\" sourceRef=\"ScriptTask_6\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_7\" name=\"PB: Display playbook data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fadb0f23-7415-4029-a502-552ccb523002\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1bq6e6z\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ekgreb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ekgreb\" sourceRef=\"ScriptTask_7\" targetRef=\"EndPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_43e12a0d_29af_4f58_8d55_bc9af44e24a3\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ekgreb\" id=\"Flow_1ekgreb_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"622\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"654\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0nj34sl\" id=\"Flow_0nj34sl_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"428\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q4pm4s\" id=\"Flow_1q4pm4s_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1bq6e6z\" id=\"Flow_1bq6e6z_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"512\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"538\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mm58wc\" id=\"Flow_1mm58wc_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"209.125\" x=\"617\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"428\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"656\" y=\"654\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_7\" id=\"ScriptTask_7_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"538\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1689045752861,
@@ -1731,7 +1731,7 @@
             "tags": [],
             "templates": [],
             "text": "Max incident date",
-            "tooltip": "Date for current incident only.",
+            "tooltip": "",
             "type_id": 1093,
             "uuid": "25fadcc5-656c-4e1a-970c-d116627010ec",
             "values": []
@@ -1789,7 +1789,7 @@
             "tags": [],
             "templates": [],
             "text": "Min incident date",
-            "tooltip": "Note \u0027Min incident Id\u0027 or \u0027Min incident Date\u0027 must be set. Date for current incident only.",
+            "tooltip": "Note \u0027Min incident Id\u0027 or \u0027Min incident Date\u0027 must be set.",
             "type_id": 1093,
             "uuid": "cb603b70-4985-436f-8be2-9309e1de2eef",
             "values": []
@@ -1853,7 +1853,7 @@
         "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1689049429646,
+      "last_modified_time": 1689587759257,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -1908,12 +1908,12 @@
       "tags": [],
       "type": "default",
       "uuid": "43e12a0d-29af-4f58-8d55-bc9af44e24a3",
-      "version": 7
+      "version": 8
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 6,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b0bfad55_53f6_46c9_aa2a_e74d9996f348\" isExecutable=\"true\" name=\"playbook_b0bfad55_53f6_46c9_aa2a_e74d9996f348\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0itcnor\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"PB: Get Workflow Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ece3eb1b-2c95-4f0b-b00e-c610d418264a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id\\ninputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date\\ninputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date\\n\\ninputs.pb_object_name = task.name\\ninputs.pb_object_type = \u0027task\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"workflow_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0itcnor\u003c/incoming\u003e\u003coutgoing\u003eFlow_01s1xfp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"PB: Get Playbook Data\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d3b215fc-8c94-45eb-97d9-0c1b3a71e3a5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pb_max_incident_id = playbook.inputs.pb_max_incident_id\\ninputs.pb_min_incident_id = playbook.inputs.pb_min_incident_id\\n\\ninputs.pb_min_incident_date = playbook.inputs.pb_min_incident_date\\ninputs.pb_max_incident_date = playbook.inputs.pb_max_incident_date\\n\\ninputs.pb_object_name = task.name\\ninputs.pb_object_type = \u0027task\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"playbook_data\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_01t5bww\u003c/incoming\u003e\u003coutgoing\u003eFlow_0tgcmnf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0itcnor\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_01s1xfp\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_0tgcmnf\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_7\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_082khle\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"PB: Display workflow data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"52b3f960-ee96-4fff-80bb-71744f6f9a2c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_01s1xfp\u003c/incoming\u003e\u003coutgoing\u003eFlow_01t5bww\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_01t5bww\" sourceRef=\"ScriptTask_6\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_7\" name=\"PB: Display playbook data\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fadb0f23-7415-4029-a502-552ccb523002\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0tgcmnf\u003c/incoming\u003e\u003coutgoing\u003eFlow_082khle\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_082khle\" sourceRef=\"ScriptTask_7\" targetRef=\"EndPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b0bfad55_53f6_46c9_aa2a_e74d9996f348\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_082khle\" id=\"Flow_082khle_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"652\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"684\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01t5bww\" id=\"Flow_01t5bww_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"458\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tgcmnf\" id=\"Flow_0tgcmnf_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"542\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"568\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01s1xfp\" id=\"Flow_01s1xfp_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0itcnor\" id=\"Flow_0itcnor_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.5703\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"458\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"655\" y=\"684\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_7\" id=\"ScriptTask_7_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"568\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1689045753196,
@@ -1960,7 +1960,7 @@
             "tags": [],
             "templates": [],
             "text": "Max incident date",
-            "tooltip": "Date for current incident only.",
+            "tooltip": "",
             "type_id": 1094,
             "uuid": "12929ddd-63d2-4f88-97c6-49e7748be804",
             "values": []
@@ -2018,7 +2018,7 @@
             "tags": [],
             "templates": [],
             "text": "Min incident date",
-            "tooltip": "Note \u0027Min incident Id\u0027 or \u0027Min incident Date\u0027 must be set. Date for current incident only.",
+            "tooltip": "Note \u0027Min incident Id\u0027 or \u0027Min incident Date\u0027 must be set. ",
             "type_id": 1094,
             "uuid": "0d265052-b27c-493c-8b8c-66e7d0f19754",
             "values": []
@@ -2082,7 +2082,7 @@
         "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1689049447350,
+      "last_modified_time": 1689587778745,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -2137,7 +2137,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b0bfad55-53f6-46c9-aa2a-e74d9996f348",
-      "version": 7
+      "version": 8
     }
   ],
   "regulators": null,
@@ -2170,12 +2170,12 @@
       "id": 83,
       "language": "python3",
       "last_modified_by": "playbook@ibm.com",
-      "last_modified_time": 1689143161094,
+      "last_modified_time": 1689586905198,
       "name": "PB: Display workflow data",
       "object_type": "incident",
       "playbook_handle": null,
       "programmatic_name": "pb_display_workflow_data",
-      "script_text": "from datetime import datetime\n\ncurrent_dt = datetime.now()\n\nURL_MAP  = {\n  \u0027incident\u0027: u\"\u003ca href=\u0027/#incidents/{0}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027incident_element\u0027: u\"\u003ca href=\u0027/#incidents/{0}\u0027\u003e{0}\u003c/a\u003e\",\n  \u0027task\u0027: u\"\u003ca href=\u0027/#incidents/{0}?taskId={1}\u0026tabName=details\u0026org_id={2}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027artifact\u0027: u\"\u003ca href=\u0027/#incidents/{0}/artifact/{1}?org_id={2}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027workflow\u0027: u\"\u003ca href=\u0027/#customize?tab=workflows\u0026workflow={1}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027playbook\u0027: u\"\u003ca href=\u0027/#playbooks/designer/{1}\u0027\u003e{3}\u003c/a\u003e\"\n}\n\ndef make_url(org_id, inc_id, element_type, element_id, element_name):\n  if element_type in URL_MAP:\n    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)\n\n  return str(element_name)\n\n# --- S T A R T\nresults = playbook.functions.results.workflow_data\n\n\nif results.success:\n  org_id = results.content[\u0027org_id\u0027]\n  data_flg = None\n  for key_incident, value_workflow in results.content[\u0027workflow_content\u0027].items():\n    data_flg = False\n    for entity in value_workflow[\u0027entities\u0027]:\n      # skip these workflows/playbooks\n      if \"PB: Get\" in entity.get(\"workflow\", {}).get(\"name\"):\n        continue\n\n      if (results.inputs.get(\u0027pb_object_name\u0027) and results.inputs[\u0027pb_object_name\u0027] == entity.get(\"object\", {}).get(\"object_name\")) or not results.inputs.get(\u0027pb_object_name\u0027):\n        row = incident.addRow(\u0027workflow_usage\u0027)\n        incident_name = entity.get(\"object\", {}).get(\"parent\", {}).get(\"object_name\") if entity.get(\"object\", {}).get(\"parent\", {}) else entity.get(\"object\", {}).get(\"object_name\")\n        incident_id = entity.get(\"object\", {}).get(\"parent\", {}).get(\"object_id\") if entity.get(\"object\", {}).get(\"parent\", {}) else entity.get(\"object\", {}).get(\"object_id\")\n        row[\u0027report_date\u0027] = current_dt\n        row[\u0027incident\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident\u0027, incident_id, incident_name))\n        row[\u0027type\u0027] = \u0027workflow\u0027\n        row[\u0027workflow\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027workflow\u0027, entity.get(\"workflow\", {}).get(\"workflow_id\"), entity.get(\"workflow\", {}).get(\"name\")))\n        row[\u0027workflow_id\u0027] = entity.get(\"workflow\", {}).get(\"workflow_id\")\n        row[\u0027execution_date\u0027] = entity.get(\"start_date\")\n        row[\u0027element_type\u0027] = entity.get(\"object\", {}).get(\"type_name\")\n        if entity.get(\"object\", {}).get(\"type_name\") == \u0027incident\u0027:\n            row[\u0027element_value\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident_element\u0027, entity.get(\"object\", {}).get(\"object_id\"), entity.get(\"object\", {}).get(\"object_id\")))\n        else:\n            row[\u0027element_value\u0027] = helper.createRichText(make_url(org_id, key_incident, entity.get(\"object\", {}).get(\"type_name\"), entity.get(\"object\", {}).get(\"object_id\"), entity.get(\"object\", {}).get(\"object_name\")))\n        data_flg = True\n  \n  if not data_flg:\n    incident.addNote(\"PB: Get workflow usage ({}) returned no results for incident range: {}-{}\".format(results.inputs.get(\u0027pb_object_name\u0027), results.content[\u0027min_id\u0027], results.content[\u0027max_id\u0027]))\nelse:\n  incident.addNote(\"PB: Get workflow usage ({}) failed: {}\".format(results.inputs.get(\u0027pb_object_name\u0027), results.reason))\n",
+      "script_text": "from datetime import datetime\n\ncurrent_dt = datetime.now()\n\nURL_MAP  = {\n  \u0027incident\u0027: u\"\u003ca href=\u0027/#incidents/{0}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027incident_element\u0027: u\"\u003ca href=\u0027/#incidents/{0}\u0027\u003e{0}\u003c/a\u003e\",\n  \u0027task\u0027: u\"\u003ca href=\u0027/#incidents/{0}?taskId={1}\u0026tabName=details\u0026org_id={2}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027artifact\u0027: u\"\u003ca href=\u0027/#incidents/{0}/artifact/{1}?org_id={2}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027workflow\u0027: u\"\u003ca href=\u0027/#customize?tab=workflows\u0026workflow={1}\u0027\u003e{3}\u003c/a\u003e\",\n  \u0027playbook\u0027: u\"\u003ca href=\u0027/#playbooks/designer/{1}\u0027\u003e{3}\u003c/a\u003e\"\n}\n\ndef make_url(org_id, inc_id, element_type, element_id, element_name):\n  if element_type in URL_MAP:\n    return URL_MAP[element_type].format(inc_id, element_id, org_id, element_name)\n\n  return str(element_name)\n\n# --- S T A R T\nresults = playbook.functions.results.workflow_data\n\n\nif results.success:\n  org_id = results.content[\u0027org_id\u0027]\n  data_flg = False\n  for key_incident, value_workflow in results.content[\u0027workflow_content\u0027].items():\n    for entity in value_workflow[\u0027entities\u0027]:\n      # skip these workflows/playbooks\n      if \"PB: Get\" in entity.get(\"workflow\", {}).get(\"name\"):\n        continue\n\n      if (results.inputs.get(\u0027pb_object_name\u0027) and results.inputs[\u0027pb_object_name\u0027] == entity.get(\"object\", {}).get(\"object_name\")) or not results.inputs.get(\u0027pb_object_name\u0027):\n        row = incident.addRow(\u0027workflow_usage\u0027)\n        incident_name = entity.get(\"object\", {}).get(\"parent\", {}).get(\"object_name\") if entity.get(\"object\", {}).get(\"parent\", {}) else entity.get(\"object\", {}).get(\"object_name\")\n        incident_id = entity.get(\"object\", {}).get(\"parent\", {}).get(\"object_id\") if entity.get(\"object\", {}).get(\"parent\", {}) else entity.get(\"object\", {}).get(\"object_id\")\n        row[\u0027report_date\u0027] = current_dt\n        row[\u0027incident\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident\u0027, incident_id, incident_name))\n        row[\u0027type\u0027] = \u0027workflow\u0027\n        row[\u0027workflow\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027workflow\u0027, entity.get(\"workflow\", {}).get(\"workflow_id\"), entity.get(\"workflow\", {}).get(\"name\")))\n        row[\u0027workflow_id\u0027] = entity.get(\"workflow\", {}).get(\"workflow_id\")\n        row[\u0027execution_date\u0027] = entity.get(\"start_date\")\n        row[\u0027element_type\u0027] = entity.get(\"object\", {}).get(\"type_name\")\n        if entity.get(\"object\", {}).get(\"type_name\") == \u0027incident\u0027:\n            row[\u0027element_value\u0027] = helper.createRichText(make_url(org_id, key_incident, \u0027incident_element\u0027, entity.get(\"object\", {}).get(\"object_id\"), entity.get(\"object\", {}).get(\"object_id\")))\n        else:\n            row[\u0027element_value\u0027] = helper.createRichText(make_url(org_id, key_incident, entity.get(\"object\", {}).get(\"type_name\"), entity.get(\"object\", {}).get(\"object_id\"), entity.get(\"object\", {}).get(\"object_name\")))\n        data_flg = True\n  \n  if not data_flg:\n    incident.addNote(\"PB: Get workflow usage ({}) returned no results for incident range: {}-{}\".format(results.inputs.get(\u0027pb_object_name\u0027), results.content[\u0027min_id\u0027], results.content[\u0027max_id\u0027]))\nelse:\n  incident.addNote(\"PB: Get workflow usage ({}) failed: {}\".format(results.inputs.get(\u0027pb_object_name\u0027), results.reason))\n",
       "tags": [],
       "uuid": "52b3f960-ee96-4fff-80bb-71744f6f9a2c"
     }
