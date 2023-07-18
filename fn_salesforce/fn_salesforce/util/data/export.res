@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1689622730195,
+  "export_date": 1689689180837,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -928,13 +928,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 32,
+  "id": 34,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1689622728343,
+      "create_date": 1689689178853,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -943,7 +943,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1689622728343,
+      "update_date": 1689689178853,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1690,7 +1690,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 7,
+        "content_version": 8,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_cc4762df_970f_45b8_9fdd_bae6e9ee4746\" isExecutable=\"true\" name=\"playbook_cc4762df_970f_45b8_9fdd_bae6e9ee4746\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0fg8fwm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Get Contact\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"777154b4-dc0c-4d8d-ac3b-7a3cd9523255\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.salesforce_contact_id = incident.properties.salesforce_contact_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"contact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0fg8fwm\u003c/incoming\u003e\u003coutgoing\u003eFlow_145slnd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0fg8fwm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Update Contact details when ContactId changes\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f4a8a543-1cd0-43be-890a-78758acc70b5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_145slnd\u003c/incoming\u003e\u003coutgoing\u003eFlow_18t471j\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_145slnd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_18t471j\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_18t471j\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cc4762df_970f_45b8_9fdd_bae6e9ee4746\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18t471j\" id=\"Flow_18t471j_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"132\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"184\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_145slnd\" id=\"Flow_145slnd_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"2\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"48\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fg8fwm\" id=\"Flow_0fg8fwm_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"-154\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"-82\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"616\" y=\"-206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"611.542\" y=\"-82.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"611.542\" y=\"47.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"643.542\" y=\"183.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1689619157018,
@@ -1742,7 +1742,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1689620459196,
+      "last_modified_time": 1689683183252,
       "local_scripts": [
         {
           "actions": [],
@@ -1753,12 +1753,12 @@
           "id": 17,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1689620457096,
+          "last_modified_time": 1689683179866,
           "name": "Salesforce: Update Contact details when ContactId changes",
           "object_type": "incident",
           "playbook_handle": "salesforce_update_contact_details_in_soar",
           "programmatic_name": "salesforce_update_contact_details_in_soar_salesforce_update_contact_details_when_contactid_changes",
-          "script_text": "results = playbook.functions.results.contact_results\n\nif results.success:\n    content = results.get(\"content\", {})\n    contact = content.get(\"salesforce_contact\")\n    if contact:\n        incident.properties.salesforce_contact_name = contact.get(\"Name\", None)\nelse:\n  incident.addNote(\"Unable to get Contact information from ContactId\")\n  ",
+          "script_text": "results = playbook.functions.results.contact_results\n\nif results.success:\n    content = results.get(\"content\", {})\n    contact = content.get(\"salesforce_contact\")\n    if contact:\n        incident.properties.salesforce_contact_name = contact.get(\"Name\")\nelse:\n  incident.addNote(\"Unable to get Contact information from ContactId\")\n  ",
           "tags": [],
           "uuid": "f4a8a543-1cd0-43be-890a-78758acc70b5"
         }
@@ -1776,7 +1776,7 @@
       "tags": [],
       "type": "default",
       "uuid": "cc4762df-970f-45b8-9fdd-bae6e9ee4746",
-      "version": 11
+      "version": 12
     },
     {
       "activation_type": "manual",

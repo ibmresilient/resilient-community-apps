@@ -60,7 +60,7 @@ if results.success:
     content = results.get("content", {})
     contact = content.get("salesforce_contact")
     if contact:
-        incident.properties.salesforce_contact_name = contact.get("Name", None)
+        incident.properties.salesforce_contact_name = contact.get("Name")
 else:
   incident.addNote("Unable to get Contact information from ContactId")
   

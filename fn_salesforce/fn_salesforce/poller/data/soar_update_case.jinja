@@ -11,7 +11,9 @@
     "salesforce_origin": "{{ Origin }}",
     "salesforce_account_id": "{{ AccountId }}",
     "salesforce_owner_id": "{{ OwnerId }}",
+    {% if ContactId is not none %}
     "salesforce_contact_id": "{{ ContactId }}",
+    {% endif %}
     "salesforce_contact_phone": "{{ ContactPhone }}",
     "salesforce_contact_email": "{{ ContactEmail }}",
     "salesforce_contact_fax": "{{ ContactFax }}",
