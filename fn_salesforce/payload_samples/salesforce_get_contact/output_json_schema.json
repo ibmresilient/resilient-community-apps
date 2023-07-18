@@ -12,7 +12,7 @@
     "content": {
       "type": "object",
       "properties": {
-        "salesforce_case": {
+        "salesforce_contact": {
           "type": "object",
           "properties": {
             "attributes": {
@@ -33,51 +33,51 @@
               "type": "boolean"
             },
             "MasterRecordId": {},
-            "CaseNumber": {
+            "AccountId": {},
+            "LastName": {
               "type": "string"
             },
-            "ContactId": {},
-            "AccountId": {
+            "FirstName": {
               "type": "string"
             },
-            "AssetId": {},
-            "ParentId": {},
-            "SuppliedName": {},
-            "SuppliedEmail": {
+            "Salutation": {
               "type": "string"
             },
-            "SuppliedPhone": {
+            "Name": {
               "type": "string"
             },
-            "SuppliedCompany": {},
-            "Type": {
-              "type": "string"
-            },
-            "Status": {
-              "type": "string"
-            },
-            "Reason": {
-              "type": "string"
-            },
-            "Origin": {
-              "type": "string"
-            },
-            "Subject": {
-              "type": "string"
-            },
-            "Priority": {
-              "type": "string"
-            },
-            "Description": {
-              "type": "string"
-            },
-            "IsClosed": {
-              "type": "boolean"
-            },
-            "ClosedDate": {},
-            "IsEscalated": {
-              "type": "boolean"
-            },
+            "OtherStreet": {},
+            "OtherCity": {},
+            "OtherState": {},
+            "OtherPostalCode": {},
+            "OtherCountry": {},
+            "OtherLatitude": {},
+            "OtherLongitude": {},
+            "OtherGeocodeAccuracy": {},
+            "OtherAddress": {},
+            "MailingStreet": {},
+            "MailingCity": {},
+            "MailingState": {},
+            "MailingPostalCode": {},
+            "MailingCountry": {},
+            "MailingLatitude": {},
+            "MailingLongitude": {},
+            "MailingGeocodeAccuracy": {},
+            "MailingAddress": {},
+            "Phone": {},
+            "Fax": {},
+            "MobilePhone": {},
+            "HomePhone": {},
+            "OtherPhone": {},
+            "AssistantPhone": {},
+            "ReportsToId": {},
+            "Email": {},
+            "Title": {},
+            "Department": {},
+            "AssistantName": {},
+            "LeadSource": {},
+            "Birthdate": {},
+            "Description": {},
             "OwnerId": {
               "type": "string"
             },
@@ -96,24 +96,26 @@
             "SystemModstamp": {
               "type": "string"
             },
-            "ContactPhone": {},
-            "ContactMobile": {},
-            "ContactEmail": {},
-            "ContactFax": {},
-            "Comments": {},
+            "LastActivityDate": {},
+            "LastCURequestDate": {},
+            "LastCUUpdateDate": {},
             "LastViewedDate": {
               "type": "string"
             },
             "LastReferencedDate": {
               "type": "string"
             },
-            "EngineeringReqNumber__c": {},
-            "SLAViolation__c": {},
-            "Product__c": {},
-            "PotentialLiability__c": {},
-            "entity_url": {
-              "type": "string"
-            }
+            "EmailBouncedReason": {},
+            "EmailBouncedDate": {},
+            "IsEmailBounced": {
+              "type": "boolean"
+            },
+            "PhotoUrl": {},
+            "Jigsaw": {},
+            "JigsawContactId": {},
+            "IndividualId": {},
+            "Level__c": {},
+            "Languages__c": {}
           }
         }
       }
@@ -122,7 +124,7 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "salesforce_case_id": {
+        "salesforce_contact_id": {
           "type": "string"
         }
       }

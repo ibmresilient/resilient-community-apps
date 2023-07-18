@@ -43,14 +43,21 @@ TOKEN_URL = "https://{my_domain_url}/services/oauth2/token"
 BASE_URL = "https://{my_domain_url}"
 QUERY_URI = "/services/data/{api_version}/query/"
 CASE_URI = "/services/data/{api_version}/sobjects/Case/{case_id}"
+CASE_COMMENTS_URI = "/services/data/{api_version}/sobjects/Case/{case_id}/CaseComments"
 ACCOUNT_URI = "/services/data/{api_version}/sobjects/Account/{account_id}"
 OWNER_URI = "/services/data/{api_version}/sobjects/Owner/{owner_id}"
+USER_URI = "/services/data/{api_version}/sobjects/User/{user_id}"
 CONTACT_URI = "/services/data/{api_version}/sobjects/Contact/{contact_id}"
+
 # C O N S T A N T S
 SOQL_QUERY_LAST_MODIFIED_DATE = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
 SOQL_QUERY_CASE_ID = "SELECT FIELDS(ALL) FROM Case WHERE Id = '{case_id}'"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
 LIMIT = 200
+
+IBM_SOAR = "IBM SOAR" # common label
+SOAR_HEADER = "Created by {}".format(IBM_SOAR)
+ENTITY_COMMENT_HEADER = "Created by Salesforce"
 
 class AppCommon():
     def __init__(self, rc, package_name, app_configs):
@@ -127,7 +134,7 @@ class AppCommon():
             base_query (str): Base query string (In our case is a SELECT statement that 
                             the poller uses to get most recent Cases from Salesforce 
                             since the last poll time)
-            filters (list): List of tuples (Saleforce Case field, operator, value) that are 
+            filters (list): List of tuples (Salesforce Case field, operator, value) that are 
                             converted to AND statements in the WHERE clause to filter cases 
                             when querying Salesforce for cases.
             limit (int): Salesforce has a 2000 limit on the number of query results returned.
@@ -137,7 +144,7 @@ class AppCommon():
         """
         soql_query = base_query
 
-        # Loop through the filteres defined by the user to limit the cases returned from the query
+        # Loop through the filters defined by the user to limit the cases returned from the query
         # Append them to the base query for polling cases based on the last poll time.
         for filter_tuple in filters:
             if not isinstance(filter_tuple, tuple) or len(filter_tuple) != 3:
@@ -195,7 +202,7 @@ class AppCommon():
         # Build the SOQL query based on the polling time and the user input polling_filters
         soql_query_with_filters = self._add_query_filters(SOQL_QUERY_LAST_MODIFIED_DATE.format(time=readable_time), self.polling_filters, LIMIT)
         params = {'q': soql_query_with_filters}
-        LOG.debug("Querying endpoint with %s", soql_query_with_filters)
+        LOG.debug("Querying endpoint with URL %s", soql_query_with_filters)
 
         response = self.rc.execute("GET", url=query_url, headers=self.headers, params=params)
         response_json = response.json()
@@ -210,7 +217,7 @@ class AppCommon():
 
             # Get URL for next batch of results using the link sent back from Salesforce 
             next_query_url = self._get_uri(response_json.get("nextRecordsUrl"))
-            LOG.debug("Querying endpoint with %s", query_url)
+            LOG.debug("Querying next records endpoint with URL %s", next_query_url)
 
             # Get the next batch of cases 
             response = self.rc.execute("GET", url=next_query_url, headers=self.headers)
@@ -243,11 +250,76 @@ class AppCommon():
             dict: json case data from Salesforce
         """
         url = self.base_url + CASE_URI.format(api_version=self.api_version, case_id=case_id)
-        LOG.debug("Querying endpoint with %s", url)
+        LOG.debug("Querying endpoint with URL %s", url)
 
         response = self.rc.execute("GET", url=url, headers=self.headers)
         return response.json()
     
+    def get_case_comments(self, case_id: str) -> list:
+        """Get the comments associated with the specified Salesforce case
+
+        Args:
+            case_id (str): Salesforce case Id (from Salesforce)
+
+        Returns:
+            dict: comments from Salesforce
+        """
+        url = self.base_url + CASE_COMMENTS_URI.format(api_version=self.api_version, case_id=case_id)
+        LOG.debug("Querying /CaseComments endpoint with URL %s", url)
+
+        response = self.rc.execute("GET", url=url, headers=self.headers)
+
+        response_json = response.json()
+
+        records = response_json.get("records", [])
+        comments = []
+        comments.extend(records)
+            
+        done = response_json.get("done", True)
+        while not done:
+            if response_json.get("nextRecordsUrl", None) == None:
+                IntegrationError("No nextRecordsUrl key returned from Salesforce REST API /CaseComments")
+
+            # Get URL for next batch of results using the link sent back from Salesforce 
+            next_records_url = self._get_uri(response_json.get("nextRecordsUrl"))
+            LOG.debug("Querying next records /CaseComments endpoint with URL %s", next_records_url)
+
+            # Get the next batch of cases 
+            response = self.rc.execute("GET", url=next_records_url, headers=self.headers)
+            response_json = response.json()
+            records = response_json.get("records", [])
+
+            comments.extend(records)
+
+            # Check if we are done
+            done = response_json.get("done", True)
+        return comments
+
+
+    def format_salesforce_comment(self, comment: dict) -> str:
+        """Format a Salesforce comment 
+
+        Args:
+            comment (_type_): Salesforce comment (json object)
+
+        Returns:
+            str : formatted string
+        """
+        comment_body = comment.get('CommentBody',"")
+        if comment_body:
+            created_at = comment.get('CreatedDate',"")
+            created_by_id = comment.get('CreatedById',"")
+            if created_by_id:
+                user = self.get_user(created_by_id)
+                created_by = user.get('Name', created_by_id)
+            else:
+                created_by = "Not available"
+                
+            text = f"{comment_body} Created at: {created_at} By: {created_by}"
+            return text
+        else:
+            return None
+        
     def get_account(self, account_id: str) -> dict:
         """Get the Salesforce account data for the specified Salesforce AccountId
 
@@ -258,7 +330,37 @@ class AppCommon():
             dict: json account data from Salesforce
         """
         url = self.base_url + ACCOUNT_URI.format(api_version=self.api_version, account_id=account_id)
-        LOG.debug("Querying endpoint with %s", url)
+        LOG.debug("Querying /Account endpoint with URL %s", url)
+
+        response = self.rc.execute("GET", url=url, headers=self.headers)
+        return response.json()
+    
+    def get_contact(self, contact_id: str) -> dict:
+        """Get the Salesforce case data for the specified Salesforce case_id
+
+        Args:
+            case_id (str): Salesforce case Id
+
+        Returns:
+            dict: json case data from Salesforce
+        """
+        url = self.base_url + CONTACT_URI.format(api_version=self.api_version, contact_id=contact_id)
+        LOG.debug("Querying /Contact endpoint with %s", url)
+
+        response = self.rc.execute("GET", url=url, headers=self.headers)
+        return response.json()
+    
+    def get_user(self, user_id: str) -> dict:
+        """Get the Salesforce case data for the specified Salesforce case_id
+
+        Args:
+            case_id (str): Salesforce case Id
+
+        Returns:
+            dict: json case data from Salesforce
+        """
+        url = self.base_url + USER_URI.format(api_version=self.api_version, user_id=user_id)
+        LOG.debug("Querying /User endpoint with %s", url)
 
         response = self.rc.execute("GET", url=url, headers=self.headers)
         return response.json()

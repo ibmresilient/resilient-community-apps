@@ -4,22 +4,22 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Salesforce: Write Account Details to Note
+# Playbook - Salesforce: Update Account Details in SOAR
 
 ### API Name
-`salesforce_get_account`
+`salesforce_update_account_details_in_soar`
 
 ### Status
 `enabled`
 
 ### Activation Type
-`manual`
+`automatic`
 
 ### Object Type
 `incident`
 
 ### Description
-Get information on the Salesforce account associated with a case and write to a SOAR note.
+None
 
 
 ---
@@ -41,10 +41,10 @@ inputs.salesforce_account_id = incident.properties.salesforce_account_id
 
 ---
 
-## Local script - Salesforce: Write Account information
+## Local script - Salesforce: Update Account details in SOAR
 
 ### Description
-Write account information to a note.
+Update the custom fields in SOAR related to the Salesforce Account.
 
 ### Script Type
 `Local script`
@@ -54,17 +54,16 @@ Write account information to a note.
 
 ### Script Content
 ```python
-import json
-
 results = playbook.functions.results.account_details
 
 if results.success:
   content = results.get("content", {})
-  account = content.get("salesforce_account", {})
-  note_text = "Account Details: <br>{0}".format(json.dumps(account, indent=4))
-  incident.addNote(helper.createRichText(note_text))
+  if content:
+    account = content.get("salesforce_account", None)
+    if account:
+      incident.properties.salesforce_account_name = account.get("Name", None)
 else:
-  incident.addNote("Unable to get Account details from Salesforce.")
+  incident.addNote("Salesforce: unable to get account details for Account Id ")
 ```
 
 ---

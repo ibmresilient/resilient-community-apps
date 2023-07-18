@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Salesforce: Update Case in SOAR
+# Playbook - Salesforce: Update Case in SOAR - Automatic
 
 ### API Name
 `salesforce_update_case`
@@ -37,23 +37,6 @@ Automatic playbook to update the SOAR case with information from Salesforce.
 ### Function-Input Script
 ```python
 inputs.salesforce_case_id = incident.properties.salesforce_case_id
-```
-
----
-## Function - Salesforce: Get Account
-
-### API Name
-`salesforce_get_account`
-
-### Output Name
-`account_details`
-
-### Message Destination
-`fn_salesforce`
-
-### Function-Input Script
-```python
-inputs.salesforce_account_id = incident.properties.salesforce_account_id
 ```
 
 ---
@@ -101,36 +84,6 @@ else:
     sf_case_comments = sf_case.get("Comments", None)
     if sf_case_comments:
         incident.addNote(helper.createRichText("<b>Created by Salesforce:</b><br> {}".format(sf_case_comments)))
-```
-
----
-## Local script - Salesforce: Update Account Name
-
-### Description
-Update the salesforce account name custom field with the information from salesforce.
-
-### Script Type
-`Local script`
-
-### Objet Type
-`incident`
-
-### Script Content
-```python
-results = playbook.functions.results.account_details
-
-if results.success:
-  content = results.get("content", {})
-  if content:
-    account = content.get("salesforce_account", None)
-    if account:
-      incident.properties.salesforce_account_name = account.get("Name")
-    else:
-      incident.addNote("Salesforce unable to get account details for Account Id {0}".format(playbook.functions.inputs.salesforce_account_id))
-  else:
-      incident.addNote("Salesforce unable to get account details for Account Id {0}".format(playbook.functions.inputs.salesforce_account_id))
-else:
-  incident.addNote("Salesforce unable to get account details for Account Id {0}".format(playbook.functions.inputs.salesforce_account_id))
 ```
 
 ---
