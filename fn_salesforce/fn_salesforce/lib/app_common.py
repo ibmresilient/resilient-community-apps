@@ -314,8 +314,8 @@ class AppCommon():
                 created_by = user.get('Name', created_by_id)
             else:
                 created_by = "Not available"
-                
-            text = f"{comment_body} Created at: {created_at} By: {created_by}"
+
+            text = f"{comment_body}<br><br>Created at: {created_at}<br>By: {created_by}"
             return text
         else:
             return None
@@ -364,6 +364,23 @@ class AppCommon():
 
         response = self.rc.execute("GET", url=url, headers=self.headers)
         return response.json()
+
+    def add_comment_to_case(self, case_id: str, comment: str) -> dict:
+        """Post a comment to the Salesforce case
+
+        Args:
+            case_id (str): Salesforce case Id
+
+        Returns:
+            dict: json case data from Salesforce
+        """
+        url = self.base_url + CASE_URI.format(api_version=self.api_version, case_id=case_id)
+        LOG.debug("Querying /User endpoint with %s", url)
+
+        data = {"Comments": comment}
+        data_string = json.dumps(data)
+        response = self.rc.execute("PATCH", url=url, headers=self.headers, data=data_string)
+        return True
     
     def update_case_status(self, salesforce_case_id, status):
         """Update the Status field in the Salesforce case

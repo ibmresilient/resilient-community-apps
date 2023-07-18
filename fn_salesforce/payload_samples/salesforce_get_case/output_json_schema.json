@@ -36,20 +36,26 @@
             "CaseNumber": {
               "type": "string"
             },
-            "ContactId": {},
+            "ContactId": {
+              "type": "string"
+            },
             "AccountId": {
               "type": "string"
             },
             "AssetId": {},
             "ParentId": {},
-            "SuppliedName": {},
+            "SuppliedName": {
+              "type": "string"
+            },
             "SuppliedEmail": {
               "type": "string"
             },
             "SuppliedPhone": {
               "type": "string"
             },
-            "SuppliedCompany": {},
+            "SuppliedCompany": {
+              "type": "string"
+            },
             "Type": {
               "type": "string"
             },
@@ -62,15 +68,11 @@
             "Origin": {
               "type": "string"
             },
-            "Subject": {
-              "type": "string"
-            },
+            "Subject": {},
             "Priority": {
               "type": "string"
             },
-            "Description": {
-              "type": "string"
-            },
+            "Description": {},
             "IsClosed": {
               "type": "boolean"
             },
