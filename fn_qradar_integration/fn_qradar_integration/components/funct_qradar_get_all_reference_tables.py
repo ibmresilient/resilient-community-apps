@@ -16,7 +16,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super().__init__(opts)
+        super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.servers_list = function_utils.get_servers_list(opts)
 
