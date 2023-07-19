@@ -1575,19 +1575,19 @@ exo_message_query_results_dt
 
 
 ## Playbooks
-| Playbook Name | Description | Object | Status |
-| ------------- | ----------- | ------ | ------ |
-| Example: Exchange Online Create Artifacts (PB) | Create an artifact for the selected observable. | exo_message_query_results_dt | `enabled` |
-| Example: Exchange Online Create Meeting (PB) | This Playbook will create a meeting event in the meeting organizer's calendar and send email to the required and optional attendees informing them of the event.  An incident note is added containing the status of creating the meeting. | incident | `enabled` |
-| Example: Exchange Online Delete Message (PB) | Delete an message that is entered as a row in the Exchange Online Message Query Results data table. | exo_message_query_results_dt | `enabled` |
-| Example: Exchange Online Delete Messages from Query Results (PB) | This playbook calls the Query Messages function to find messages that meet user input search criteria.  The results of the query are passed to the Delete Messages From Query Function.  The list of messages is deleted and placed in the data table, an incident note and/or an incident attachment, depending on the user input for the query results output format. | incident | `enabled` |
-| Example: Exchange Online Get User Profile (PB) | This example playbook gets the Exchange Online user profile that matches the input email address and writes the information to a note. | artifact | `enabled` |
-| Example: Exchange Online Move Message to Folder (PB) | This playbook will move a row-entry message in the Exchange Online Message Query Results data table to the specified user mail folder. | exo_message_query_results_dt | `enabled` |
-| Example: Exchange Online Query Messages (PB) | This playbook will query the Exchange Online messages for a list of email address and write a row entry into the Exchange Message Query Results data table for each email that matches the search criteria.  If the string "ALL" or "all" is specified, all user mailboxes of the tenant are queried for the specified messages. The user can also specify the all users starting with specific characters.  For example: "all:r" will search all users whose email address begins with the letter "r". | incident | `enabled` |
-| Example: Exchange Online Query Messages on Artifact (PB) | This playbook will query the Exchange Online messages of the specified artifact value email address and write a row entry into the Exchange Message Query Result | artifact | `enabled` |
-| Example: Exchange Online Send Message (PB) | This playbook will send a message from a specified email address with specified message subject and body to the specified recipients. | incident | `enabled` |
-| Example: Exchange Online Write Message EML as Attachment (PB) | This playbook will get the mime content of an Exchange Online message and write it to an incident attachment. | exo_message_query_results_dt | `enabled` |
-| Example: Exchange Online Write Message JSON as Note (PB) | Get an Exchange Online message and write the JSON content to an incident note. | exo_message_query_results_dt | `enabled` |
+| Playbook Name                                                     | Description | Object | Status |
+|-------------------------------------------------------------------| ----------- | ------ | ------ |
+| Exchange Online Create Artifacts - Example (PB)                   | Create an artifact for the selected observable. | exo_message_query_results_dt | `enabled` |
+| Exchange Online Create Meeting - Example (PB)                     | This Playbook will create a meeting event in the meeting organizer's calendar and send email to the required and optional attendees informing them of the event.  An incident note is added containing the status of creating the meeting. | incident | `enabled` |
+| Exchange Online Delete Message - Example (PB)                     | Delete an message that is entered as a row in the Exchange Online Message Query Results data table. | exo_message_query_results_dt | `enabled` |
+| Exchange Online Delete Messages from Query Results - Example (PB) | This playbook calls the Query Messages function to find messages that meet user input search criteria.  The results of the query are passed to the Delete Messages From Query Function.  The list of messages is deleted and placed in the data table, an incident note and/or an incident attachment, depending on the user input for the query results output format. | incident | `enabled` |
+| Exchange Online Get User Profile - Example (PB)                   | This example playbook gets the Exchange Online user profile that matches the input email address and writes the information to a note. | artifact | `enabled` |
+| Exchange Online Move Message to Folder - Example (PB)             | This playbook will move a row-entry message in the Exchange Online Message Query Results data table to the specified user mail folder. | exo_message_query_results_dt | `enabled` |
+| Exchange Online Query Messages - Example (PB)                     | This playbook will query the Exchange Online messages for a list of email address and write a row entry into the Exchange Message Query Results data table for each email that matches the search criteria.  If the string "ALL" or "all" is specified, all user mailboxes of the tenant are queried for the specified messages. The user can also specify the all users starting with specific characters.  For example: "all:r" will search all users whose email address begins with the letter "r". | incident | `enabled` |
+| Exchange Online Query Messages on Artifact - Example (PB)         | This playbook will query the Exchange Online messages of the specified artifact value email address and write a row entry into the Exchange Message Query Result | artifact | `enabled` |
+| Exchange Online Send Message - Example (PB)                       | This playbook will send a message from a specified email address with specified message subject and body to the specified recipients. | incident | `enabled` |
+| Exchange Online Write Message EML as Attachment - Example (PB)    | This playbook will get the mime content of an Exchange Online message and write it to an incident attachment. | exo_message_query_results_dt | `enabled` |
+| Exchange Online Write Message JSON as Note - Example (PB)         | Get an Exchange Online message and write the JSON content to an incident note. | exo_message_query_results_dt | `enabled` |
 
 ---
 
