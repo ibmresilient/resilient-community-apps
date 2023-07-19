@@ -23,6 +23,7 @@ class FunctionComponent(AppFunctionComponent):
         Function: Update the Status field of a case in Salesforce.
         Inputs:
             -   fn_inputs.salesforce_case_id
+            -   fn_inputs.salesforce_case_status
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
@@ -37,3 +38,4 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)
+

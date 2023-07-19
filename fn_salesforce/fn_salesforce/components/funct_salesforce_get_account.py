@@ -4,7 +4,7 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
 from fn_salesforce.lib.app_common import AppCommon
 
 PACKAGE_NAME = "fn_salesforce"
@@ -37,3 +37,4 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)
+

@@ -6,7 +6,6 @@ import datetime
 import logging
 from urllib.parse import urljoin
 from base64 import b64encode
-from urllib.parse import quote_plus, urljoin
 import json
 
 from requests.exceptions import JSONDecodeError
@@ -19,17 +18,12 @@ from resilient_lib import IntegrationError, readable_datetime, eval_mapping, str
 #       since the last time the poller ran
 # Helper functions:
 #  _make_headers: create the necessary API header for your endpoint communication
-#  make_linkback_url: create a url for your alert, event, etc. to navigate back to your endpoint console
-#  _get_uri: assemble the parts of your URL (base address, version information, command and arguments)
-#  _api_call: perform the API call, passing parameters and check the returned status code before
-#      returning the response object
-#
-# Review these functions which need modification. Currently they `raise IntegrationError("UNIMPLEMENTED")`
-#   _make_headers,
-#   query_entities_since_ts,
-#   make_linkback_url,
-#   _get_uri
-#   _api_call
+#  make_linkback_url: create a url for your alert, event, etc. to navigate back to your 
+#                     endpoint console
+#  _get_uri: assemble the parts of your URL (base address, version information, command
+#            and arguments)
+#  _api_call: perform the API call, passing parameters and check the returned status 
+#             code before returning the response object
 
 LOG = logging.getLogger(__name__)
 
@@ -45,13 +39,11 @@ QUERY_URI = "/services/data/{api_version}/query/"
 CASE_URI = "/services/data/{api_version}/sobjects/Case/{case_id}"
 CASE_COMMENTS_URI = "/services/data/{api_version}/sobjects/Case/{case_id}/CaseComments"
 ACCOUNT_URI = "/services/data/{api_version}/sobjects/Account/{account_id}"
-OWNER_URI = "/services/data/{api_version}/sobjects/Owner/{owner_id}"
 USER_URI = "/services/data/{api_version}/sobjects/User/{user_id}"
 CONTACT_URI = "/services/data/{api_version}/sobjects/Contact/{contact_id}"
 
 # C O N S T A N T S
 SOQL_QUERY_LAST_MODIFIED_DATE = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
-SOQL_QUERY_CASE_ID = "SELECT FIELDS(ALL) FROM Case WHERE Id = '{case_id}'"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
 LIMIT = 200
 
@@ -106,11 +98,12 @@ class AppCommon():
         encoded_auth = str(auth_bytes, "utf-8")
 
         headers = {
-            "Authorization": "Basic {}".format(encoded_auth),
+            "Authorization": "Basic {0}".format(encoded_auth),
             "Content-Type": "application/x-www-form-urlencoded",
         }
 
-        response = self.rc.execute("POST", uri, headers=headers, data="grant_type=client_credentials")
+        response = self.rc.execute("POST", uri, headers=headers, 
+                                   data="grant_type=client_credentials")
 
         response_json = response.json()
 
@@ -200,9 +193,10 @@ class AppCommon():
         query_url = self.base_url + QUERY_URI.format(api_version=self.api_version)
 
         # Build the SOQL query based on the polling time and the user input polling_filters
-        soql_query_with_filters = self._add_query_filters(SOQL_QUERY_LAST_MODIFIED_DATE.format(time=readable_time), self.polling_filters, LIMIT)
-        params = {'q': soql_query_with_filters}
-        LOG.debug("Querying endpoint with URL %s", soql_query_with_filters)
+        soql_query = self._add_query_filters(SOQL_QUERY_LAST_MODIFIED_DATE.format(time=readable_time), 
+                                             self.polling_filters, LIMIT)
+        params = {'q': soql_query}
+        LOG.debug("Querying endpoint with URL %s", soql_query)
 
         response = self.rc.execute("GET", url=query_url, headers=self.headers, params=params)
         response_json = response.json()
@@ -212,7 +206,7 @@ class AppCommon():
             
         done = response_json.get("done", True)
         while not done:
-            if response_json.get("nextRecordsUrl", None) == None:
+            if response_json.get("nextRecordsUrl", None) is None:
                 IntegrationError("No nextRecordsUrl key returned from Salesforce REST API case query!")
 
             # Get URL for next batch of results using the link sent back from Salesforce 
@@ -250,7 +244,7 @@ class AppCommon():
             dict: json case data from Salesforce
         """
         url = self.base_url + CASE_URI.format(api_version=self.api_version, case_id=case_id)
-        LOG.debug("Querying endpoint with URL %s", url)
+        LOG.debug("Querying /Case endpoint with URL %s", url)
 
         response = self.rc.execute("GET", url=url, headers=self.headers)
         return response.json()
@@ -277,7 +271,7 @@ class AppCommon():
             
         done = response_json.get("done", True)
         while not done:
-            if response_json.get("nextRecordsUrl", None) == None:
+            if response_json.get("nextRecordsUrl", None) is None:
                 IntegrationError("No nextRecordsUrl key returned from Salesforce REST API /CaseComments")
 
             # Get URL for next batch of results using the link sent back from Salesforce 
@@ -317,8 +311,7 @@ class AppCommon():
 
             text = f"{comment_body}<br><br>Created at: {created_at}<br>By: {created_by}"
             return text
-        else:
-            return None
+        return None
         
     def get_account(self, account_id: str) -> dict:
         """Get the Salesforce account data for the specified Salesforce AccountId
@@ -375,10 +368,11 @@ class AppCommon():
             dict: json case data from Salesforce
         """
         url = self.base_url + CASE_URI.format(api_version=self.api_version, case_id=case_id)
-        LOG.debug("Querying /User endpoint with %s", url)
+        LOG.debug("PATCHing /Case endpoint with URL%s", url)
 
         data = {"Comments": comment}
         data_string = json.dumps(data)
+
         response = self.rc.execute("PATCH", url=url, headers=self.headers, data=data_string)
         return True
     
@@ -390,6 +384,8 @@ class AppCommon():
             status (str): Salesforce Case Status
         """
         url = self.base_url + CASE_URI.format(api_version=self.api_version, case_id=salesforce_case_id)
+        LOG.debug("PATCHing /Case endpoint with URL%s", url)
+
         data = {"Status": status}
         data_string = json.dumps(data)
 
@@ -419,7 +415,6 @@ def callback(response):
             response.status_code,
             msg,
             details)
-
     return response, error_msg
 
 def _get_verify_ssl(app_configs: dict) -> bool:

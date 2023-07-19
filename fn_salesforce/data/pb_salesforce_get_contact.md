@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Salesforce: Write Contact Details to a Note
+# Playbook - Salesforce: Write Contact Details to Note
 
 ### API Name
 `salesforce_get_contact`

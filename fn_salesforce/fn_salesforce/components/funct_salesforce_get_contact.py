@@ -41,3 +41,4 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)
+
