@@ -49,6 +49,8 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.3.1 | 05/2023 | Bug fix for MITRE playbook |
+| 2.3.0 | 05/2023 | Support configurable settings to retry QRadar query |
 | 2.2.0 | 02/2023 | Add notes & assigned sync |
 | 2.1.0 | 10/2022 | Add Mitre Info from Offense to case |
 | 2.0.1 | 08/2022 | Update documentation |
@@ -133,7 +135,7 @@ Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=45.0.0
 
 ### QRadar Requirements
-The app works with QRadar 7.4.0 or higher and requires the QRadar Analayst Workflow app 1.2 or higher to be installed on QRadar. The QRadar Analyst workflow app can be downloaded from the IBM App Exchange - https://exchange.xforce.ibmcloud.com/hub/extension/123f9ec5a53214cc6e35b1e4700b0806.
+The app works with QRadar 7.4.0 or higher and requires the QRadar Analyst Workflow app 1.2 or higher to be installed on QRadar. The QRadar Analyst workflow app can be downloaded from the IBM App Exchange - https://exchange.xforce.ibmcloud.com/hub/extension/123f9ec5a53214cc6e35b1e4700b0806.
 If the Mitre function is going to be used then the app, QRadar Use Case Manager is required to be installed on the QRadar server.
 
 ---
@@ -159,6 +161,13 @@ The following table provides the settings you need to configure the app. These s
 | **polling_lookback** | No | `60` | *Time in minutes to look back* |
 | **clear_datatables** | No | `True` | *Boolean to clear or not clear content of data tables in incident when poller is run* |
 | **sync_notes** | Yes | `True` | *Boolean if true then notes that are added to QRadar offenses will be added to their linked SOAR incidents*|
+| **empty_query_max** | No | `5` | New to 2.3. Attempt the AQL queries up to the number of times specified. Default is no retries (1) |
+| **empty_query_wait_secs** | No | `60` | New to 2.3. Number of seconds to pause before attempting the next AQL query. Default is 0 |
+|**empty_query_skip_types** | No | `flows` | New to 2.3. Comma separated list of query types to skip retry: topevents, flows, sourceip, destinationip, categories |
+
+#### 2.3.0 Changes
+See new settings `empty_query_max` and `empty_query_wait_secs`. 
+These settings can be added to the app.config `[fn_qradar_integration:edm_global_settings]` section.
 
 #### 1.2.0 Changes
 Starting in version 1.2.0, more than one QRadar instance can be configured for SOAR case data synchronization. For enterprises with only one QRadar instance, your app.config file will continue to define the QRadar instance under the `[fn_qradar_integration]` section header.
@@ -171,7 +180,7 @@ If you have existing custom workflows, see [Creating workflows when server/serve
 
 ### MSSP Configuration
 
-Make sure to follow the instructions in the Integration Server Guide to install the app on the Config org. The custom layout will have to be added manuanlly, see [Custom Layouts](#custom-layouts). Afterwards, have your system administrator push the app to the appropriate child orgs.
+Make sure to follow the instructions in the Integration Server Guide to install the app on the Config org. The custom layout will have to be added manually, see [Custom Layouts](#custom-layouts). Afterwards, have your system administrator push the app to the appropriate child orgs.
 
 ### Custom Layouts
 * Import the Data Tables and Custom Fields like the screenshot below:

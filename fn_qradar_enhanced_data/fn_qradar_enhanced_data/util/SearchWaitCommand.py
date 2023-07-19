@@ -51,9 +51,9 @@ class SearchWaitCommand(object):
         """
         Override this to provide status of the search job
         :param search_id: ID of search
-        :return: One of the search status
+        :return: One of the search status, response data
         """
-        return self.SEARCH_STATUS_ERROR_STOP
+        return self.SEARCH_STATUS_ERROR_STOP, None
 
     def delete_search(self, search_id):
         """
@@ -80,13 +80,14 @@ class SearchWaitCommand(object):
         """
         search_id = self.get_search_id(query)
 
+        response = None
         if search_id:
             # Store the start time
             start_time = time()
             done = False
 
             while not done:
-                status = self.check_status(search_id)
+                status, response = self.check_status(search_id)
                 if status == self.SEARCH_STATUS_COMPLETED:
                     done = True
                 elif status == self.SEARCH_STATUS_ERROR_STOP:
@@ -111,4 +112,4 @@ class SearchWaitCommand(object):
             LOG.error("search_id is None")
             raise SearchJobFailure(query)
 
-        return self.get_search_result(search_id) if return_result else None
+        return self.get_search_result(search_id) if return_result else None, response

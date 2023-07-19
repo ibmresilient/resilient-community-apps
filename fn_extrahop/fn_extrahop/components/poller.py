@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Poller implementation"""
 import datetime
 import logging
@@ -132,7 +132,11 @@ class PollerComponent(ResilientComponent):
             return False
 
         LOG.info("Poller initiated, polling interval %s", self.polling_interval)
-        self.last_poller_time = get_last_poller_date(int(options.get('polling_lookback', 0)))
+        # If polling_lookback is not set to a value, make it default to zero lookback time
+        lookback_str = options.get('polling_lookback', "0")
+        lookback_int = 0 if lookback_str == "" else int(lookback_str)
+
+        self.last_poller_time = get_last_poller_date(lookback_int)
         LOG.info("Poller lookback: %s", self.last_poller_time)
 
         # collect the override templates to use when creating, updating and closing cases
@@ -145,6 +149,7 @@ class PollerComponent(ResilientComponent):
         self.polling_filters = {}
         if options.get("polling_filters"):
             self.polling_filters = eval_mapping(options.get("polling_filters"), wrapper="{{ {} }}")
+        LOG.info("Polling filters: %s", self.polling_filters)
 
         # rest_client is used to make IBM SOAR API calls
         self.rest_client = get_client(opts)
@@ -306,13 +311,6 @@ class PollerComponent(ResilientComponent):
                                                             soar_case_id,
                                                             soar_update_payload
                                                         )
-                            # Add an update note
-                            note = "Updated by ExtraHop from a detection."
-                            comment_header = "ExtraHop"
-                            _update_case_note = self.soar_common.create_case_comment(soar_case_id, entity_id,
-                                                                                     comment_header, note)
-                            cases_updated += 1
-
                             LOG.info("Updated SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
 
             LOG.info("IBM SOAR cases created: %s, cases closed: %s, cases updated: %s",
