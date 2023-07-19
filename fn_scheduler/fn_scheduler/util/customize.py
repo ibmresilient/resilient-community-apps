@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v49.0.4368
 
 """Generate the Resilient customizations required for fn_scheduler"""
 
@@ -20,16 +21,39 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_scheduler",
-        "message_destinations": [u"fn_scheduler"],
-        "functions": [u"create_a_scheduled_rule", u"list_scheduled_rules", u"remove_a_scheduled_rule", u"run_schedule_job_now", u"scheduled_rule_modify", u"scheduled_rule_pause", u"scheduled_rule_resume"],
-        "workflows": [u"list_schedules", u"modify_a_scheduled_rule", u"pause_a_scheduled_job", u"remove_a_schedule", u"resume_a_scheduled_job", u"run_a_scheduled_job_now", u"schedule_a_rule_to_run__task", u"schedule_a_rule_to_run_artifact", u"schedule_rule_to_run"],
-        "actions": [u"List Scheduled Jobs", u"Modify a Scheduled Job", u"Pause a Scheduled Job", u"Remove a Scheduled Job", u"Resume a Scheduled Job", u"Run Scheduled Job Now", u"Schedule a Rule/Playbook to Run", u"Schedule a Rule/Playbook to Run - Artifact", u"Schedule a Rule/Playbook to Run - Task"],
+        "message_destinations": [
+            u"fn_scheduler"
+        ],
+        "functions": [
+            u"create_a_scheduled_rule",
+            u"list_scheduled_rules",
+            u"remove_a_scheduled_rule",
+            u"run_schedule_job_now",
+            u"scheduled_rule_modify",
+            u"scheduled_rule_pause",
+            u"scheduled_rule_resume"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"scheduler_rules"],
+        "datatables": [
+            u"scheduler_rules"
+        ],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [
+            u"Write scheduled job to DataTable"
+        ],
+        "playbooks": [
+            u"pb_scheduler_list_jobs",
+            u"pb_scheduler_modify_job",
+            u"pb_scheduler_pause_job",
+            u"pb_scheduler_remove_job",
+            u"pb_scheduler_resume_job",
+            u"pb_scheduler_run_job_now",
+            u"pb_scheduler_schedule_job",
+            u"pb_scheduler_schedule_job_artifact",
+            u"pb_scheduler_schedule_job_task"
+        ]
     }
 
 
@@ -38,7 +62,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 41.2.41
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
@@ -51,28 +75,20 @@ def customization_data(client=None):
         - scheduled_rule_modify
         - scheduled_rule_pause
         - scheduled_rule_resume
-    - Workflows:
-        - list_schedules
-        - modify_a_scheduled_rule
-        - pause_a_scheduled_job
-        - remove_a_schedule
-        - resume_a_scheduled_job
-        - run_a_scheduled_job_now
-        - schedule_a_rule_to_run__task
-        - schedule_a_rule_to_run_artifact
-        - schedule_rule_to_run
-    - Rules:
-        - List Scheduled Jobs
-        - Modify a Scheduled Job
-        - Pause a Scheduled Job
-        - Remove a Scheduled Job
-        - Resume a Scheduled Job
-        - Run Scheduled Job Now
-        - Schedule a Rule/Playbook to Run
-        - Schedule a Rule/Playbook to Run - Artifact
-        - Schedule a Rule/Playbook to Run - Task
+    - Playbooks:
+        - pb_scheduler_list_jobs
+        - pb_scheduler_modify_job
+        - pb_scheduler_pause_job
+        - pb_scheduler_remove_job
+        - pb_scheduler_resume_job
+        - pb_scheduler_run_job_now
+        - pb_scheduler_schedule_job
+        - pb_scheduler_schedule_job_artifact
+        - pb_scheduler_schedule_job_task
     - Data Tables:
         - scheduler_rules
+    - Scripts:
+        - Write scheduled job to DataTable
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Helper module  for ExtraHop incident tab setup"""
 
 import logging
@@ -38,7 +38,7 @@ class ExtraHopTab(Tab):
         Field("extrahop_site_name"),
         Field("extrahop_site_uuid"),
         Field("extrahop_risk_score"),
-        Field("extrahop_update_time"),
+        Field("extrahop_mod_time"),
         Field("extrahop_end_time"),
         Field("extrahop_status"),
         Field("extrahop_ticket_id"),

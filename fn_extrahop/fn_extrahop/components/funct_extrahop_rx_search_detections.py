@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """AppFunction implementation"""
@@ -29,6 +29,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.extrahop_active_until
             -   fn_inputs.extrahop_active_from
             -   fn_inputs.extrahop_update_time
+            -   fn_inputs.extrahop_mod_time
             -   fn_inputs.extrahop_sort
             -   fn_inputs.extrahop_offset
         """

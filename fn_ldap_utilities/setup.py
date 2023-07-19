@@ -20,7 +20,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_ldap_utilities',
-    version='2.1.0',
+    version='2.1.1',
     license='MIT',
     display_name='SOAR LDAP Utilities',
     author='IBM SOAR',
@@ -28,7 +28,7 @@ setup(
     url='https://github.com/ibmresilient/resilient-community-apps',
     long_description="SOAR components to allow reading and manipulation of your LDAP Server'",
     install_requires=[
-        'resilient_circuits>=46.0.0',
+        'resilient_circuits>=45.0.0',
         'ldap3>=2.0.0'
     ],
     packages=find_packages(),
