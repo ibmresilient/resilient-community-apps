@@ -98,7 +98,7 @@ def get_incident_limit(restclient, sort="desc"):
     inc_id = 0
     query_filter = dict(QUERY_PAGED_FILTER)
     query_filter['sorts'][0]['type'] = sort
-    results = restclient.post(uri=QUERY_PAGED_URL, payload=query_filter, skip_retry=[200])
+    results = restclient.post(uri=QUERY_PAGED_URL, payload=query_filter, timeout=None)
 
     if results and results.get('recordsTotal', 0) > 0:
         inc_id = results['data'][0]['id']
@@ -169,7 +169,7 @@ def get_incidents_by_date(rest_client, min_incident_date, max_incident_date):
     LOG.debug(filter_conditions)
 
     search_results = rest_client.post(
-        QUERY_PAGED_URL, filter_conditions, skip_retry=[200])
+        QUERY_PAGED_URL, filter_conditions, timeout=None)
     min_incident_id = max_incident_id = None
     LOG.debug(search_results)
     if search_results.get('data'):
@@ -203,7 +203,7 @@ def get_playbooks(rest_client, pb_types, pb_filter):
 
     LOG.debug(filter_conditions)
     try:
-        return rest_client.post(PLAYBOOK_QUERY_PAGED_URL, filter_conditions, skip_retry=[200])
+        return rest_client.post(PLAYBOOK_QUERY_PAGED_URL, filter_conditions, timeout=None)
     except SimpleHTTPException as err:
         LOG.error(str(err))
         return {}
@@ -233,7 +233,7 @@ def query_playbooks(rest_client, playbook_id=None, playbook_name=None):
         filter_conditions['query'] = playbook_name
 
     playbooks = rest_client.post(
-        uri=PLAYBOOK_QUERY_PAGED_URL, payload=filter_conditions, skip_retry=[200])
+        uri=PLAYBOOK_QUERY_PAGED_URL, payload=filter_conditions, timeout=None)
 
     return playbooks.get('data')
 
@@ -258,7 +258,7 @@ def export_playbook(rest_client, playbook_id, playbook_name):
 
     # ensure the playbook is found
     export_start_result = rest_client.post(uri=posixpath.join(PLAYBOOK_URL, "exports"),
-                                           payload={"id": find_result[0].get("id")}, skip_retry=[200])
+                                           payload={"id": find_result[0].get("id")}, timeout=None)
 
     if export_start_result.get("success", True):
         multipart_data = {
@@ -270,7 +270,7 @@ def export_playbook(rest_client, playbook_id, playbook_name):
         # now down the specific export
         export_result = rest_client.post(posixpath.join(PLAYBOOK_URL, "exports", str(export_start_result.get("export_id"))),
                                          encoder,
-                                         headers={"content-type": encoder.content_type}, skip_retry=[200])
+                                         headers={"content-type": encoder.content_type}, timeout=None)
 
         return True, export_result
 
@@ -295,7 +295,7 @@ def import_playbook(rest_client, playbook_body):
 
         result = rest_client.post(posixpath.join(PLAYBOOK_URL, "imports"),
                                   encoder,
-                                  headers={"content-type": encoder.content_type}, skip_retry=[200])
+                                  headers={"content-type": encoder.content_type}, timeout=None)
     except RequestException as upload_exception:
         LOG.debug(playbook_body)
         raise IntegrationError(upload_exception)
@@ -356,7 +356,7 @@ def get_playbooks_by_incident_id(rest_client, min_incident_id, max_incident_id):
 
     LOG.debug(filter_conditions)
     try:
-        return rest_client.post(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER_URL, filter_conditions, skip_retry=[200])
+        return rest_client.post(PLAYBOOK_EXECUTION_QUERY_PAGED_FILTER_URL, filter_conditions, timeout=None)
     except SimpleHTTPException as err:
         LOG.error(str(err))
         return {}
