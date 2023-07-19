@@ -98,7 +98,7 @@ def get_incident_limit(restclient, sort="desc"):
     inc_id = 0
     query_filter = dict(QUERY_PAGED_FILTER)
     query_filter['sorts'][0]['type'] = sort
-    results = restclient.post(uri=QUERY_PAGED_URL, payload=query_filter)
+    results = restclient.post(uri=QUERY_PAGED_URL, payload=query_filter, timeout=1)
 
     if results and results.get('recordsTotal', 0) > 0:
         inc_id = results['data'][0]['id']
