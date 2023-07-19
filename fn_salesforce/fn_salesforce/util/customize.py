@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_close_case", u"salesforce_get_account", u"salesforce_get_contact", u"salesforce_update_account_details_in_soar", u"salesforce_update_case", u"salesforce_update_case_status_manual", u"salesforce_update_comments_from_salesforce_case", u"salesforce_update_contact_details_in_soar", u"salesforce_update_owner_details_in_soar"]
+        "playbooks": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_close_case", u"salesforce_get_account", u"salesforce_get_contact", u"salesforce_update_account_details_in_soar", u"salesforce_update_case",u"salesforce_update_comments_from_salesforce_case", u"salesforce_update_contact_details_in_soar", u"salesforce_update_owner_details_in_soar"]
     }
 
 

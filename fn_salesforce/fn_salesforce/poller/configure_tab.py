@@ -34,10 +34,7 @@ class SalesforceTab(Tab):
         Field("salesforce_supplied_name"),
         Field("salesforce_supplied_email"),
         Field("salesforce_supplied_phone"),
-        Field("salesforce_supplied_company"),
-        Field("salesforce_account_id"),
-        Field("salesforce_owner_id"),
-        Field("salesforce_contact_id"),
+        Field("salesforce_supplied_company")
     ]
     SHOW_IF = [
         Field("salesforce_case_id").conditions.has_value()
