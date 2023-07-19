@@ -25,13 +25,13 @@ def codegen_reload_data():
         "functions": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_get_account", u"salesforce_get_case", u"salesforce_get_case_comments", u"salesforce_get_contact", u"salesforce_get_user", u"salesforce_update_case_status"],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"salesforce_account_id", u"salesforce_case_owner", u"salesforce_account_name", u"salesforce_case_id", u"salesforce_case_link", u"salesforce_case_number", u"salesforce_case_type", u"salesforce_contact_email", u"salesforce_contact_fax", u"salesforce_contact_id", u"salesforce_contact_name", u"salesforce_contact_phone", u"salesforce_origin", u"salesforce_owner_id", u"salesforce_reason", u"salesforce_status", u"salesforce_supplied_company", u"salesforce_supplied_email", u"salesforce_supplied_name", u"salesforce_supplied_phone"],
+        "incident_fields": [u"salesforce_account_id", u"salesforce_account_name", u"salesforce_case_id", u"salesforce_case_link", u"salesforce_case_number", u"salesforce_case_owner", u"salesforce_case_type", u"salesforce_contact_email", u"salesforce_contact_fax", u"salesforce_contact_id", u"salesforce_contact_name", u"salesforce_contact_phone", u"salesforce_origin", u"salesforce_owner_id", u"salesforce_reason", u"salesforce_status", u"salesforce_supplied_company", u"salesforce_supplied_email", u"salesforce_supplied_name", u"salesforce_supplied_phone"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_write_owner_details_to_note",u"salesforce_close_case", u"salesforce_get_account", u"salesforce_get_contact", u"salesforce_update_account_details_in_soar", u"salesforce_update_case",u"salesforce_update_comments_from_salesforce_case", u"salesforce_update_contact_details_in_soar", u"salesforce_update_owner_details_in_soar"]
+        "playbooks": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_close_case", u"salesforce_get_account", u"salesforce_get_contact", u"salesforce_update_account_details_in_soar", u"salesforce_update_case", u"salesforce_update_comments_from_salesforce_case", u"salesforce_update_contact_details_in_soar", u"salesforce_update_owner_details_in_soar", u"salesforce_write_owner_details_to_note"]
     }
 
 
@@ -60,16 +60,17 @@ def customization_data(client=None):
         - salesforce_get_contact
         - salesforce_update_account_details_in_soar
         - salesforce_update_case
-        - salesforce_update_case_status_manual
         - salesforce_update_comments_from_salesforce_case
         - salesforce_update_contact_details_in_soar
         - salesforce_update_owner_details_in_soar
+        - salesforce_write_owner_details_to_note
     - Incident Fields:
         - salesforce_account_id
         - salesforce_account_name
         - salesforce_case_id
         - salesforce_case_link
         - salesforce_case_number
+        - salesforce_case_owner
         - salesforce_case_type
         - salesforce_contact_email
         - salesforce_contact_fax

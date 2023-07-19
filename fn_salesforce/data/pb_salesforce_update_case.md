@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Salesforce: Update Case in SOAR - Automatic
+# Playbook - Salesforce: Update Case in SOAR
 
 ### API Name
 `salesforce_update_case`
