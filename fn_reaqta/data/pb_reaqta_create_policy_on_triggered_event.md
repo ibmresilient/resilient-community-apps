@@ -66,12 +66,12 @@ results = playbook.functions.results.reaqta_create_policy_result
 if results.success:
   policies = []
   policies.append("<br>Policy Parameters:<br>Hives: {}<br>Title: {}<br>Description: {}<br>Included Groups: {}<br>Excluded Groups: {}<br>Enabled: {}<br>Block when Triggered: {}<br>".\
-                         format(playbook.inputs.hive_labels if playbook.inputs.hive_labels else incident.properties.reaqta_hive,
+                         format(incident.properties.reaqta_hive, 
                                 playbook.inputs.reaqta_policy_title,
                                 playbook.inputs.reaqta_policy_description,
                                 playbook.inputs.reaqta_policy_included_groups,
                                 playbook.inputs.reaqta_policy_excluded_groups,
-                                playbook.inputs.reaqta_policy_enabled,
+                                None,
                                 playbook.inputs.reaqta_policy_block_when_triggered))
   for policy in results.content:
     policies.append('Hive: {0} <a href="{1}" target="blank">{1}</a>'.format(policy.get('policy_hive'), policy.get("policy_url")))

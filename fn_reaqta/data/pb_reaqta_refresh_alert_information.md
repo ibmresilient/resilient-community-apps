@@ -29,7 +29,7 @@ Refresh alert information and populate the custom fields and datatables
 `reaqta_get_alert_information`
 
 ### Output Name
-`reaqta_get_alert_information_post_process`
+`reaqta_refresh_alert_information_result`
 
 ### Message Destination
 `fn_reaqta`
@@ -72,7 +72,7 @@ TRIGGERCONDITION_LOOKUP = {
     13: "Antimalware Detection"
   }
   
-results = playbook.functions.results.reaqta_get_alert_information_post_process
+results = playbook.functions.results.reaqta_refresh_alert_information_result
 
 if not results.success:
   incident.addNote("ReaQta: Get Alert Information failed: {}".format(results.reason))

@@ -38,12 +38,12 @@ Create a blocking policy from a SHA256 hash
 ```python
 inputs.reaqta_sha256 = artifact.value
 inputs.reaqta_policy_title = playbook.inputs.reaqta_policy_title
-inputs.reaqta_policy_description = playbook.inputs.properties.reaqta_policy_description or ''
+inputs.reaqta_policy_description = playbook.inputs.reaqta_policy_description or ''
 inputs.reaqta_policy_included_groups = playbook.inputs.reaqta_policy_included_groups
 inputs.reaqta_policy_excluded_groups = playbook.inputs.reaqta_policy_excluded_groups
 inputs.reaqta_policy_enabled = True
 inputs.reaqta_policy_block = playbook.inputs.reaqta_block_when_triggered
-inputs.reaqta_hives = playbook.inputs.reaqta_hive_labels if playbook.inputs.reaqta_hive_labels else incident.properties.reaqta_hive 
+inputs.reaqta_hives = playbook.inputs.reaqta_hive_labels if playbook.inputs.reaqta_hive_labels else incident.properties.reaqta_hive
 ```
 
 ---
@@ -66,13 +66,13 @@ results = playbook.functions.results.reaqta_create_policy_result
 if results.success:
   policies = []
   policies.append("<br>Policy Parameters:<br>Hives: {}<br>Title: {}<br>Description: {}<br>Included Groups: {}<br>Excluded Groups: {}<br>Enabled: {}<br>Block when Triggered: {}<br>".\
-                         format(playbook.inputs.hive_labels if playbook.inputs.hive_labels else incident.properties.reaqta_hive,
+                         format(playbook.inputs.reaqta_hive_labels if playbook.inputs.reaqta_hive_labels else incident.properties.reaqta_hive,
                                 playbook.inputs.reaqta_policy_title,
                                 playbook.inputs.reaqta_policy_description,
                                 playbook.inputs.reaqta_policy_included_groups,
                                 playbook.inputs.reaqta_policy_excluded_groups,
-                                playbook.inputs.reaqta_policy_enabled,
-                                playbook.inputs.reaqta_policy_block_when_triggered))
+                                None,
+                                playbook.inputs.reaqta_block_when_triggered))
   for policy in results.content:
     policies.append('Hive: {0} <a href="{1}" target="blank">{1}</a>'.format(policy.get("policy_hive"), policy.get("policy_url")))
   incident.addNote(helper.createRichText("ReaQta Create Policies successful:<br>{}".format("<br>".join(policies))))
