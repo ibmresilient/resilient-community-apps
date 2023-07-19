@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Poller support functionality for interaction with the 3rd party endpoints"""
 import logging
 from datetime import datetime
 from urllib.parse import urljoin
+from ast import literal_eval
 from resilient_lib import clean_html
 from fn_extrahop.lib.rx_client import RxClient
 from fn_extrahop.lib.poller_common import IBM_SOAR
@@ -17,7 +18,7 @@ PACKAGE_NAME = "fn_extrahop"
 LINKBACK_URL = "/extrahop/#/detections/detail/{}"
 # List of fields to check to determine if an update is required.
 UPDATEABLE_FIELDS = [
-    "update_time", "end_time", "risk_score",
+    "mod_time", "end_time", "risk_score",
     "status", "ticket_id", "assignee"
 ]
 # Default prefix for function parameters
@@ -62,7 +63,7 @@ class AppCommon():
             if "category" in search_filter:
                 categories = search_filter_api.pop("category")
 
-        response = self.rx_cli.search_detections(search_filter=search_filter_api, limit=limit, offset=offset)
+        response = self.rx_cli.search_detections(search_filter=search_filter_api, limit=limit, offset=offset, mod_time=timestamp)
 
         result = response.json()
 

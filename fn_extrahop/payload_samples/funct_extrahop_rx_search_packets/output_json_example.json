@@ -4,7 +4,7 @@
   "reason": null,
   "content": {
     "result": {
-      "attachment": "<b>extrahop 2022-05-11 16.00.00 to 2022-05-12 21.39.30 PDT.pcap</b>"
+      "attachment": "<b>extrahop 2023-03-31 21.00.00 to 2023-04-08 21.00.00 PDT_20230410140142.pcap</b>"
     }
   },
   "raw": null,
@@ -13,20 +13,20 @@
     "extrahop_ip2": null,
     "extrahop_ip1": null,
     "extrahop_port2": null,
-    "incident_id": 4307,
+    "incident_id": 3389,
     "extrahop_limit_search_duration": null,
-    "extrahop_active_from": 1652310000000,
-    "extrahop_bpf": "host 192.168.1.2",
+    "extrahop_active_from": 1680321600000,
+    "extrahop_bpf": "host dc1.attack.local",
     "extrahop_output": "pcap",
     "extrahop_limit_bytes": null,
-    "extrahop_active_until": null
+    "extrahop_active_until": 1681012800000
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-extrahop",
     "package_version": "1.0.0",
-    "host": "myhost.ibm.com",
-    "execution_time_ms": 20395,
-    "timestamp": "2022-05-17 11:24:39"
+    "host": "MBP",
+    "execution_time_ms": 28890,
+    "timestamp": "2023-04-10 14:01:44"
   }
 }

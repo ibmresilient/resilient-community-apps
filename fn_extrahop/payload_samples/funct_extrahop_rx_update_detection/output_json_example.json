@@ -7,18 +7,18 @@
   },
   "raw": null,
   "inputs": {
-    "incident_id": 3235,
-    "soar_inc_owner_id": "a@a.com",
+    "incident_id": 3390,
+    "soar_inc_owner_id": "admin@example.com",
     "soar_inc_resolution_id": "Resolved",
-    "extrahop_detection_id": 71,
+    "extrahop_detection_id": 4294967305,
     "soar_inc_plan_status": "C"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-extrahop",
     "package_version": "1.0.0",
-    "host": "myhost.ibm.com",
-    "execution_time_ms": 1084,
-    "timestamp": "2022-04-13 17:21:32"
+    "host": "MBP",
+    "execution_time_ms": 635,
+    "timestamp": "2023-04-10 14:18:31"
   }
 }

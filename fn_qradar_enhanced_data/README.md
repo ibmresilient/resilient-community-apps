@@ -49,6 +49,8 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.3.1 | 05/2023 | Bug fix for MITRE playbook |
+| 2.3.0 | 05/2023 | Support configurable settings to retry QRadar query |
 | 2.2.0 | 02/2023 | Add notes & assigned sync |
 | 2.1.0 | 10/2022 | Add Mitre Info from Offense to case |
 | 2.0.1 | 08/2022 | Update documentation |

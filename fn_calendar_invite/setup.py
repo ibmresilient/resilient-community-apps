@@ -1,20 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 from setuptools import setup, find_packages
 
 setup(
-    name='fn_calendar_invite',
-    version='1.1.1',
+    name="fn_calendar_invite",
+    display_name="Calendar Invite",
+    version='1.1.2',
     license='MIT',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    description="Resilient Circuits Components for 'fn_calendar_invite'",
-    long_description="Resilient Circuits Components for 'fn_calendar_invite'",
+    author='IBM SOAR',
+    author_email='',
+    url="https://ibm.com/mysupport",
+    description="Calendar Invitation Function for IBM Security SOAR",
+    long_description="""Calendar Invitation Function for IBM Security SOAR
+        
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient_lib',
+        'resilient_circuits>=49.0.0',
         'email; python_version<"3.0"'
     ],
     packages=find_packages(),

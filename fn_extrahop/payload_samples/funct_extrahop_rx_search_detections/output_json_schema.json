@@ -26,7 +26,7 @@
               "update_time": {
                 "type": "integer"
               },
-              "end_time": {
+              "mod_time": {
                 "type": "integer"
               },
               "title": {
@@ -47,107 +47,51 @@
               "type": {
                 "type": "string"
               },
+              "properties": {
+                "type": "object"
+              },
               "participants": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "properties": {
-                    "object_type": {
+                    "role": {
                       "type": "string"
                     },
                     "object_id": {
                       "type": "integer"
                     },
-                    "role": {
+                    "object_type": {
                       "type": "string"
                     },
-                    "external": {
-                      "type": "boolean"
+                    "object_value": {
+                      "type": "string"
+                    },
+                    "hostname": {
+                      "type": "string"
                     },
                     "id": {
                       "type": "integer"
                     },
-                    "object_value": {
-                      "type": "string"
+                    "external": {
+                      "type": "boolean"
                     }
                   }
                 }
               },
               "ticket_id": {
-                "type": [
-                  "null",
-                  "string"
-                ]
+                "type": "string"
               },
-              "assignee": {
-                "type": [
-                  "null",
-                  "string"
-                ]
-              },
+              "assignee": {},
               "status": {
-                "type": [
-                  "null",
-                  "string"
-                ]
+                "type": "string"
               },
               "resolution": {},
-              "properties": {
-                "type": "object",
-                "properties": {
-                  "client_port": {
-                    "type": "integer"
-                  },
-                  "server_port": {
-                    "type": "integer"
-                  },
-                  "jndi_strings": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
-              },
               "mitre_tactics": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "url": {
-                      "type": "string"
-                    }
-                  }
-                }
+                "type": "array"
               },
               "mitre_techniques": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "url": {
-                      "type": "string"
-                    },
-                    "legacy_ids": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
+                "type": "array"
               },
               "appliance_id": {
                 "type": "integer"
