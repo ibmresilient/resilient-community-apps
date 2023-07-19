@@ -97,6 +97,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
     @cached(cache=LRUCache(100), key=cache_key)
     def _create_or_update_table(self, type_name, all_fields):
 
+        cursor = None
         for retry in range(2):
             try:
                 cursor = self._start_transaction()
@@ -145,6 +146,9 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         raise err
                     except Exception:
                         pass # nosec
+
+        if cursor:
+            cursor.close()
 
 
     def _add_field_to_table(self, cursor, type_name, field):
@@ -212,6 +216,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
         flat_payload['inc_id'] = context.inc_id
 
+        cursor = None
         for retry in range(2):
             try:
                 cursor = self._start_transaction()
@@ -271,3 +276,6 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         raise err
                     except Exception:
                         pass # nosec
+
+        if cursor:
+            cursor.close()
