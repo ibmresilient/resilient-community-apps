@@ -41,7 +41,7 @@ class TestFnSnowAddAttachmentToRecord:
       "success": True,
       "res_id": "RES-1001-2002",
       "sn_ref_id": "INC123456",
-      "attachment_name": u"Mock Attachment Name",
+      "attachment_name": "Mock Attachment Name",
       "sn_attachment_sys_id": "c1ea807ddb82230044ccd426ca961937"
     }
 
