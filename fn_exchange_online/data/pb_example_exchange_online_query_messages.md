@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Exchange Online Query Messages (PB)
+# Playbook - Exchange Online Query Messages - Example (PB)
 
 ### API Name
 `example_exchange_online_query_messages`

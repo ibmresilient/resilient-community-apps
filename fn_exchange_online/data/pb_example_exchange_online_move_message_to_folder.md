@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Exchange Online Move Message to Folder (PB)
+# Playbook - Exchange Online Move Message to Folder - Example (PB)
 
 ### API Name
 `example_exchange_online_move_message_to_folder`

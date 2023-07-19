@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Exchange Online Query Messages on Artifact (PB)
+# Playbook - Exchange Online Query Messages on Artifact - Example (PB)
 
 ### API Name
 `example_exchange_online_query_messages_on_artifact`

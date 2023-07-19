@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Exchange Online Write Message JSON as Note (PB)
+# Playbook - Exchange Online Write Message JSON as Note - Example (PB)
 
 ### API Name
 `example_exchange_online_write_message_json_as_note`

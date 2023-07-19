@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Exchange Online Send Message (PB)
+# Playbook - Exchange Online Send Message - Example (PB)
 
 ### API Name
 `example_exchange_online_send_message`

@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Exchange Online Delete Messages from Query Results (PB)
+# Playbook - Exchange Online Delete Messages from Query Results - Example (PB)
 
 ### API Name
 `example_exchange_online_delete_messages_from_query_results`

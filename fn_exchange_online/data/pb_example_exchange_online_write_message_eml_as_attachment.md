@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Exchange Online Write Message EML as Attachment (PB)
+# Playbook - Exchange Online Write Message EML as Attachment - Example (PB)
 
 ### API Name
 `example_exchange_online_write_message_eml_as_attachment`

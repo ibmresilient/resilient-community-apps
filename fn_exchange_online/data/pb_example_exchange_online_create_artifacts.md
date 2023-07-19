@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Exchange Online Create Artifacts (PB)
+# Playbook - Exchange Online Create Artifacts - Example (PB)
 
 ### API Name
 `example_exchange_online_create_artifacts`

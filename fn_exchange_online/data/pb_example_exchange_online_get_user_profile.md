@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Exchange Online Get User Profile (PB)
+# Playbook - Exchange Online Get User Profile - Example (PB)
 
 ### API Name
 `example_exchange_online_get_user_profile`

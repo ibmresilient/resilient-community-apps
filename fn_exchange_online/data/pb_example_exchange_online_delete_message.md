@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Exchange Online Delete Message (PB)
+# Playbook - Exchange Online Delete Message - Example (PB)
 
 ### API Name
 `example_exchange_online_delete_message`
