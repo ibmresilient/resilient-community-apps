@@ -63,7 +63,7 @@ class FunctionComponent(ResilientComponent):
                 # text (required)
                 "sn_note_text": kwargs.get("sn_note_text"),
                 # select, text (required)
-                "sn_note_type": kwargs.get("sn_note_type")["name"]
+                "sn_note_type": kwargs.get("sn_note_type", {}).get("name")
             }
 
             # Since v2.1.0, we've changed this to support HTML; the old version cleared the HTML.
