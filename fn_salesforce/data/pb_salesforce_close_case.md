@@ -44,6 +44,7 @@ STATUS_LOOKUP = {
 }
 
 inputs.salesforce_case_id = incident.properties.salesforce_case_id
+inputs.salesforce_case_comment = incident.resolution_summary.content
 inputs.salesforce_case_status = STATUS_LOOKUP.get(incident.resolution_id, "Closed")
 ```
 
@@ -68,6 +69,7 @@ if not update_status.success:
   incident.addNote("ERROR: unable to update case status in Salesforce")
 else:
   incident.properties.salesforce_status = update_status.inputs.salesforce_case_status
+  incident.addNote("Case closed in IBM SOAR by playbook 'Salesforce: Close Case'")
 ```
 
 ---

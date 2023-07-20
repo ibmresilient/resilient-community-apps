@@ -9,8 +9,12 @@
     "salesforce_case_type": "{{ Type }}",
     "salesforce_case_link": "<a target='_blank' href='{{ entity_url }}'>Link</a>",
     "salesforce_origin": "{{ Origin }}",
+    {% if ContactId is not none %}
     "salesforce_account_id": "{{ AccountId }}",
+    {% endif %}
+    {% if OwnerId is not none %}
     "salesforce_owner_id": "{{ OwnerId }}",
+    {% endif %}
     {% if ContactId is not none %}
     "salesforce_contact_id": "{{ ContactId }}",
     {% endif %}

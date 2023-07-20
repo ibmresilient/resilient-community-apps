@@ -37,6 +37,7 @@ TOKEN_URL = "https://{my_domain_url}/services/oauth2/token"
 BASE_URL = "https://{my_domain_url}"
 QUERY_URI = "/services/data/{api_version}/query/"
 CASE_URI = "/services/data/{api_version}/sobjects/Case/{case_id}"
+CASE_POST_URI = "/services/data/{api_version}/sobjects/Case"
 CASE_COMMENTS_URI = "/services/data/{api_version}/sobjects/Case/{case_id}/CaseComments"
 ACCOUNT_URI = "/services/data/{api_version}/sobjects/Account/{account_id}"
 USER_URI = "/services/data/{api_version}/sobjects/User/{user_id}"
@@ -358,7 +359,7 @@ class AppCommon():
         response = self.rc.execute("GET", url=url, headers=self.headers)
         return response.json()
 
-    def add_comment_to_case(self, case_id: str, comment: str) -> dict:
+    def add_comment_to_case(self, case_id: str, comment: str, comment_header: str) -> bool:
         """Post a comment to the Salesforce case
 
         Args:
@@ -370,12 +371,42 @@ class AppCommon():
         url = self.base_url + CASE_URI.format(api_version=self.api_version, case_id=case_id)
         LOG.debug("PATCHing /Case endpoint with URL%s", url)
 
+        if comment_header:
+            comment = "{}:  {}".format(comment_header, comment)
         data = {"Comments": comment}
         data_string = json.dumps(data)
 
         response = self.rc.execute("PATCH", url=url, headers=self.headers, data=data_string)
         return True
     
+    def create_salesforce_case(self, case_data_json: dict) -> dict:
+        """ Create a case in Salesforce with the specified case data in JSON format
+
+        Args:
+            case_data_json (dict): _description_
+
+            case_data_json = {
+                "Type": "Mechanical",
+                "Status": "New",
+                "Reason": "Equipment Design",
+                "Origin": "Web",
+                "Subject": "Inadequate headroom with installation of aircon unit",
+                "Priority": "Medium",
+                "Description": "Test create case in Salesforce",
+                "Comments": "Created by IBM SOAR: This case was created in SOAR"
+            }
+
+        Returns:
+            dict: JSON from Salesforce is returned.  
+            Fields included in the JSON are: "id" (caseId), "success" (bool) and "errors" (list)
+        """
+        url = self.base_url + CASE_POST_URI.format(api_version=self.api_version)
+        LOG.debug("POST /Case endpoint with URL%s", url)
+
+        response = self.rc.execute("POST", url=url, headers=self.headers, json=case_data_json)
+        response_json = response.json()
+        return response_json
+
     def update_case_status(self, salesforce_case_id, status):
         """Update the Status field in the Salesforce case
 

@@ -7,7 +7,6 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from resilient_lib import validate_fields, SOARCommon
 from fn_salesforce.lib.app_common import (AppCommon, ENTITY_COMMENT_HEADER, SOAR_HEADER, PACKAGE_NAME)
 
-PACKAGE_NAME = "fn_salesforce"
 FN_NAME = "salesforce_get_case_comments"
 
 

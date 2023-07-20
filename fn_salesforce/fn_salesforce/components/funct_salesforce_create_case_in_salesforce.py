@@ -2,16 +2,16 @@
 # Generated with resilient-sdk v49.1.51
 
 """AppFunction implementation"""
-
+import json
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 from fn_salesforce.lib.app_common import (AppCommon, PACKAGE_NAME)
 
-FN_NAME = "salesforce_get_contact"
+FN_NAME = "salesforce_create_case_in_salesforce"
 
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'salesforce_get_contact'"""
+    """Component that implements function 'salesforce_create_case_in_salesforce'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -19,25 +19,20 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Get the detailed information on the specified Salesforce Contact, give the ContactId.
-        Inputs:
-            -   fn_inputs.salesforce_contact_id
+        Function: None
         """
-
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields(["salesforce_contact_id"], fn_inputs)
+        validate_fields(["salesforce_case_data"], fn_inputs)
 
-        if fn_inputs.salesforce_contact_id:
-            app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
+        app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
 
-            response = app_common.get_contact(fn_inputs.salesforce_contact_id)
-        else:
-            response = None
-            
-        results = {"salesforce_contact": response}
+        salesforce_case_data = json.loads(fn_inputs.salesforce_case_data)
+
+        response = app_common.create_salesforce_case(salesforce_case_data)
+
+        results = {"salesforce_case": response}
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)
-

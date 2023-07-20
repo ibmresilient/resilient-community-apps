@@ -4,12 +4,10 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields
-from fn_salesforce.lib.app_common import AppCommon
+from resilient_lib import validate_fields, clean_html
+from fn_salesforce.lib.app_common import (AppCommon, PACKAGE_NAME, SOAR_HEADER)
 
-PACKAGE_NAME = "fn_salesforce"
 FN_NAME = "salesforce_update_case_status"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'salesforce_update_case_status'"""
@@ -24,6 +22,7 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.salesforce_case_id
             -   fn_inputs.salesforce_case_status
+            -   fn_inputs.salesforce_case_comment
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
@@ -35,6 +34,11 @@ class FunctionComponent(AppFunctionComponent):
         results = app_common.update_case_status(fn_inputs.salesforce_case_id, 
                                                 fn_inputs.salesforce_case_status)
 
+        if fn_inputs.salesforce_case_comment:
+            note_result = app_common.add_comment_to_case(fn_inputs.salesforce_case_id, 
+                                                         clean_html(fn_inputs.salesforce_case_comment), 
+                                                         comment_header=SOAR_HEADER)
+            
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(results)
