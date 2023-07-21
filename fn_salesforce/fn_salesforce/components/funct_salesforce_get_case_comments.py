@@ -19,7 +19,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Get the comments from the Salesforce case.
+        Function: Get the comments from the Salesforce case and add the new comments that are not in SOAR
         Inputs:
             -   fn_inputs.incident_id
             -   fn_inputs.salesforce_case_id
@@ -48,17 +48,15 @@ class FunctionComponent(AppFunctionComponent):
         new_comments = []
         if sf_case_comment_list:
             new_comments = soar_common.filter_soar_comments(incident_id, sf_case_comment_list, SOAR_HEADER)
+
             # Reverse the order so that older notes are post first.
             if new_comments:
-                new_comments.reverse()
 
                 # Create a new note in SOAR for each new Salesforce comment
                 for comment in new_comments:
-                    #note = "<b>{}:</b><br>{}".format(ENTITY_COMMENT_HEADER, comment)
+                    note = "<b>{}:</b><br>{}".format(ENTITY_COMMENT_HEADER, comment)
                     soar_common.create_case_comment(case_id=incident_id,
-                                                    note=comment, 
-                                                    entity_comment_id=None, 
-                                                    entity_comment_header=ENTITY_COMMENT_HEADER)
+                                                    note=note)
 
         results = {"count": len(new_comments)}
 

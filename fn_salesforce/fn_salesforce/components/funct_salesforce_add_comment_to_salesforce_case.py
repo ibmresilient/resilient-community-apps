@@ -5,7 +5,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
-from fn_salesforce.lib.app_common import (AppCommon, PACKAGE_NAME)
+from fn_salesforce.lib.app_common import (AppCommon, PACKAGE_NAME, SOAR_HEADER)
 
 FN_NAME = "salesforce_add_comment_to_salesforce_case"
 
@@ -30,7 +30,9 @@ class FunctionComponent(AppFunctionComponent):
 
         app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
 
-        results = app_common.add_comment_to_case(fn_inputs.salesforce_case_id, fn_inputs.salesforce_comment_text)
+        results = app_common.add_comment_to_case(fn_inputs.salesforce_case_id, 
+                                                 fn_inputs.salesforce_comment_text, 
+                                                 SOAR_HEADER)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
