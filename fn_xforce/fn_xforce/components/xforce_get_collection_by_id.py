@@ -48,7 +48,7 @@ class FunctionComponent(AppFunctionComponent):
                 # Make the HTTP request through resilient_lib.
                 res = helper.make_xforce_api_request(request_string)
                 # Is the status code in the 2XX family?
-                if int(res.status_code / 100) == 2:
+                if (res.status_code / 100) == 2:
                     case_files = res.json() # Save returned case files
             except Exception:
                 raise ValueError("Encountered issue when contacting XForce API")

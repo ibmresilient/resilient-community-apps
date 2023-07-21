@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Playbook - Example: X-Force Query from Artifact (PB)
+# Playbook - X-Force Query from Artifact - Example (PB)
 
 ### API Name
 `example_xforce_query_from_artifact_pb`
@@ -58,11 +58,11 @@ inputs.xforce_collection_type = "private"
 results = playbook.functions.results.query_collections_results
 if results.get("success"):
   content = results.get("content", {})
-  if content.get("num_of_casefiles") > 0:
-    noteText = """<b>X-Force Query status</b><br>Total matched case files: <b>{}</b>""".format(content.get("num_of_casefiles", 0))
-    incident.addNote(helper.createRichText(noteText))
-  else:
+  if isinstance(content, str):
     noteText = """<b>X-Force Query status</b><br>{}""".format(content)
+    incident.addNote(helper.createRichText(noteText))
+  elif content.get("num_of_casefiles") > 0:
+    noteText = """<b>X-Force Query status</b><br>Total matched case files: <b>{}</b>""".format(content.get("num_of_casefiles", 0))
     incident.addNote(helper.createRichText(noteText))
 ```
 

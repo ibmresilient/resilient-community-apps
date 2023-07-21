@@ -33,7 +33,7 @@ setup(
                      "Additionally, it is possible to query both public and private Collections. "
                      "Information gathered from X-Force can be used for incident and artifact enrichment.",
     install_requires=[
-        'resilient_circuits>=46.0.0'
+        'resilient_circuits>=45.0.0'
     ],
     python_requires='>=3.6',
     packages=find_packages(),

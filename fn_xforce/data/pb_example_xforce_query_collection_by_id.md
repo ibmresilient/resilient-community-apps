@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4368
 -->
 
-# Playbook - Example: X-Force Query Collection by ID (PB)
+# Playbook - X-Force Query Collection by ID - Example (PB)
 
 ### API Name
 `example_xforce_query_collection_by_id`
@@ -57,7 +57,9 @@ inputs.xforce_collection_id = artifact.value
 results = playbook.functions.results.collection_results
 if results.get("success"):
   content = results.get("content", {})
-  if content.get("contents"):
+  if isinstance(content, str):
+    incident.addNote(content)
+  elif content.get("contents", {}):
     noteText = f"""<b>Title:</b> {content.get('title')}
     <b>Created:</b> {content.get('created')}
     <b>Tags:</b> {content.get('tags')}
@@ -65,8 +67,6 @@ if results.get("success"):
     {content.get('contents', {}).get('wiki')}
     """
     incident.addNote(noteText)
-  else:
-   incident.addNote(content)
 ```
 
 ---

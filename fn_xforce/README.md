@@ -22,7 +22,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 05/2023 | Updated code to latest template and added paybooks |
+| 1.1.0 | 05/2023 | Updated code to latest template and added playbooks |
 | 1.0.1 | 09/2020 | App Host support added and proxy support added |
 | 1.0.0 | 12/2018 | Initial Release |
 
@@ -60,13 +60,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `45.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `45.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=46.0.0`.
+* Integration server is running `resilient_circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -82,7 +82,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.8`.
+* IBM Cloud Pak for Security >= `1.10`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -98,7 +98,7 @@ The app does support a proxy server.
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient_circuits>=46.0.0
+* resilient_circuits>=45.0.0
 
 ---
 
@@ -477,7 +477,9 @@ inputs.xforce_collection_id = artifact.value
 results = playbook.functions.results.collection_results
 if results.get("success"):
   content = results.get("content", {})
-  if content.get("contents"):
+  if isinstance(content, str):
+    incident.addNote(content)
+  elif content.get("contents", {}):
     noteText = f"""<b>Title:</b> {content.get('title')}
     <b>Created:</b> {content.get('created')}
     <b>Tags:</b> {content.get('tags')}
@@ -485,8 +487,6 @@ if results.get("success"):
     {content.get('contents', {}).get('wiki')}
     """
     incident.addNote(noteText)
-  else:
-   incident.addNote(content)
 ```
 
 </p>
@@ -690,11 +690,11 @@ inputs.xforce_collection_type = "private"
 results = playbook.functions.results.query_collections_results
 if results.get("success"):
   content = results.get("content", {})
-  if content.get("num_of_casefiles") > 0:
-    noteText = """<b>X-Force Query status</b><br>Total matched case files: <b>{}</b>""".format(content.get("num_of_casefiles", 0))
-    incident.addNote(helper.createRichText(noteText))
-  else:
+  if isinstance(content, str):
     noteText = """<b>X-Force Query status</b><br>{}""".format(content)
+    incident.addNote(helper.createRichText(noteText))
+  elif content.get("num_of_casefiles") > 0:
+    noteText = """<b>X-Force Query status</b><br>Total matched case files: <b>{}</b>""".format(content.get("num_of_casefiles", 0))
     incident.addNote(helper.createRichText(noteText))
 ```
 
@@ -707,9 +707,9 @@ if results.get("success"):
 ## Playbooks
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| Example: X-Force Query Collection by ID (PB) | Takes in a parameter of a xforce_collection_id and then attempts to gather enriching information for that collection via the X-Force API. | artifact | `enabled` |
-| Example: X-Force Query from Artifact (PB) | takes in a provided artifact as a query and then submits this to the X-Force API searching collections for casefiles relevant to the query. | artifact | `enabled` |
-| Example: X-Force Return Top 3 from Collection(s) (PB) | None | artifact | `enabled` |
+| X-Force Query Collection by ID - Example (PB) | Takes in a parameter of a xforce_collection_id and then attempts to gather enriching information for that collection via the X-Force API. | artifact | `enabled` |
+| X-Force Query from Artifact - Example (PB) | takes in a provided artifact as a query and then submits this to the X-Force API searching collections for casefiles relevant to the query. | artifact | `enabled` |
+| X-Force Return Top 3 from Collection(s) - Example (PB) | None | artifact | `enabled` |
 
 ---
 
