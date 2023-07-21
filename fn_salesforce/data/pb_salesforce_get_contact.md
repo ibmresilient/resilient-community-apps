@@ -36,7 +36,7 @@ Manual playbook to get the Contact information associated with the Salesforce ca
 
 ### Function-Input Script
 ```python
-inputs.salesforce_contact_id = incident.properties.salesforce_contact_id
+inputs.salesforce_contact_id = incident.properties.salesforce_contact_id if incident.properties.salesforce_contact_id else helper.fail("Error: ContactId is None")
 ```
 
 ---

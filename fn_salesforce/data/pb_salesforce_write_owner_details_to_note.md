@@ -36,7 +36,7 @@ Write the User details of the Case Owner in Salesforce to a SOAR incident Note.
 
 ### Function-Input Script
 ```python
-inputs.salesforce_user_id = incident.properties.salesforce_owner_id
+inputs.salesforce_user_id = incident.properties.salesforce_owner_id if incident.properties.salesforce_owner_id is None else helper.fail("Error: OwnerId is None")
 ```
 
 ---

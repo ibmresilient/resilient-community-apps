@@ -58,6 +58,15 @@ if playbook.inputs.salesforce_case_internal_comments:
 if playbook.inputs.salesforce_case_reason:
   case_json['Reason'] = playbook.inputs.salesforce_case_reason
 
+if incident.properties.salesforce_account_id:
+  case_json['AccountId'] = incident.properties.salesforce_account_id
+
+if incident.properties.salesforce_owner_id:
+  case_json['OwnerId'] = incident.properties.salesforce_owner_id
+  
+if incident.properties.salesforce_contact_id:
+  case_json['ContactId'] = incident.properties.salesforce_contact_id
+  
 inputs.salesforce_case_data = json.dumps(case_json)
 
 ```

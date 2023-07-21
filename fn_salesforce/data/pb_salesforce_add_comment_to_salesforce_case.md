@@ -23,22 +23,44 @@ Add the specified text as a comment to the specified case.
 
 
 ---
-## Function - Salesforce: Add Comment to Salesforce Case
+## Function - Salesforce: Get Case Comments
 
 ### API Name
-`salesforce_add_comment_to_salesforce_case`
+`salesforce_get_case_comments`
 
 ### Output Name
-`add_comment_results`
+`get_comment_results`
 
 ### Message Destination
 `fn_salesforce`
 
 ### Function-Input Script
 ```python
+inputs.incident_id = incident.id
 inputs.salesforce_case_id = incident.properties.salesforce_case_id
-inputs.salesforce_comment_text = "Created by IBM SOAR: Case {} created in IBM SOAR".format(incident.id)
 ```
 
 ---
 
+## Local script - Salesforce: Check function results to add Salesforce comments to case
+
+### Description
+Check the status of function to add new comments to case
+
+### Script Type
+`Local script`
+
+### Objet Type
+`incident`
+
+### Script Content
+```python
+results  = playbook.functions.results.get_comment_results
+
+if results.success:
+  incident.addNote("Salesforce: automatic playbook added {} notes from Salesforce".format(results.content.count))
+else:
+  incident.addNote("Saleforce: ERROR in automatic playbook to get Salesforce case comments - function not succcessful.")
+```
+
+---
