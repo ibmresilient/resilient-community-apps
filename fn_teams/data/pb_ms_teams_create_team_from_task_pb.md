@@ -40,12 +40,11 @@ if task:
   inputs.task_id = task.id
 
 inputs.incident_id = str(incident.id)
-inputs.ms_team_name = f"Incident {incident.id}: {incident.name}" if playbook.inputs.ms_team_name is None else playbook.inputs.ms_team_name
+inputs.ms_team_name = f"Incident {incident.id}: {incident.name}" if hasattr(playbook.inputs, "ms_team_name") else playbook.inputs.ms_team_name
 
-if playbook.inputs.ms_owners_list:
-  inputs.ms_owners_list = playbook.inputs.ms_owners_list
+inputs.ms_owners_list = getattr(playbook.inputs, "ms_owners_list")
 
-if playbook.inputs.add_members_task:
+if hasattr(playbook.inputs, "add_members_task"):
   _value = playbook.inputs.add_members_task.lower().strip()
   if _value == "all incident members":
     inputs.add_members_from = "Incident"
@@ -54,10 +53,9 @@ if playbook.inputs.add_members_task:
   else:
     inputs.add_members_from = "None"
 
-if playbook.inputs.additional_members.content:
-  inputs.additional_members = playbook.inputs.additional_members.content
+inputs.additional_members = getattr(playbook.inputs, "additional_members", {"content": ""}).content
 
-if playbook.inputs.ms_description:
+if hasattr(playbook.inputs, "ms_description"):
   inputs.ms_description = playbook.inputs.ms_description
 else:
   description = incident.description.content if incident.description else ""
@@ -80,7 +78,7 @@ else:
 ### Script Content
 ```python
 results = playbook.functions.results.create_team
-content = results.get("content")
+content = results.get("content", {})
 
 if not results.get("success"):
   text = "Unable to create Microsoft Team"
@@ -101,8 +99,7 @@ else:
   if content.get("unfoundUsers"):
     text += f'<br />*Note the following users were unable to be added to the group: {content.get("unfoundUsers")}'
 
-note = helper.createRichText(text)
-task.addNote(note)
+task.addNote(helper.createRichText(text))
 ```
 
 ---

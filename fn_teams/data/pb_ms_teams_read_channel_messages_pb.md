@@ -36,20 +36,13 @@ None
 
 ### Function-Input Script
 ```python
-if playbook.inputs.ms_message_id:
-  inputs.ms_message_id = playbook.inputs.ms_message_id
-if playbook.inputs.ms_channel_id:
-  inputs.ms_channel_id = playbook.inputs.ms_channel_id
-if playbook.inputs.ms_groupteam_id:
-  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id
-if playbook.inputs.ms_channel_name:
-  inputs.ms_channel_name = playbook.inputs.ms_channel_name
-if playbook.inputs.ms_groupteam_id:
-  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id
-if playbook.inputs.ms_group_mail_nickname:
-  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
-if playbook.inputs.ms_groupteam_name:
-  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name
+inputs.ms_message_id = getattr(playbook.inputs, "ms_message_id")
+inputs.ms_channel_id = getattr(playbook.inputs, "ms_channel_id")
+inputs.ms_groupteam_id = getattr(playbook.inputs, "ms_groupteam_id")
+inputs.ms_channel_name = getattr(playbook.inputs, "ms_channel_name")
+inputs.ms_groupteam_id = getattr(playbook.inputs, "ms_groupteam_id")
+inputs.ms_group_mail_nickname = getattr(playbook.inputs, "ms_group_mail_nickname")
+inputs.ms_groupteam_name = getattr(playbook.inputs, "ms_groupteam_name")
 ```
 
 ---
@@ -99,8 +92,7 @@ else:
     Web URL : {url} <br />
     <br />'''
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
 ```
 
 ---

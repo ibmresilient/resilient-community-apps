@@ -36,19 +36,19 @@ None
 
 ### Function-Input Script
 ```python
-inputs.ms_channel_name = playbook.inputs.ms_channel_name if playbook.inputs.ms_channel_name else f"Incident {incident.id} {incident.name}"
+inputs.ms_channel_name = playbook.inputs.ms_channel_name if hasattr(playbook.inputs, "ms_channel_name") else f"Incident {incident.id} {incident.name}"
 
-if playbook.inputs.ms_description:
+if hasattr(playbook.inputs, "ms_description"):
     inputs.ms_description = playbook.inputs.ms_description
 else:
     description = incident.description.content if incident.description else ""
     inputs.ms_description = f"Incident {incident.id}: {incident.name} {description}"
 
-if playbook.inputs.ms_groupteam_id:
+if hasattr(playbook.inputs, "ms_groupteam_id"):
   inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id
-elif playbook.inputs.ms_group_mail_nickname:
+elif hasattr(playbook.inputs, "ms_group_mail_nickname"):
   inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
-elif playbook.inputs.ms_groupteam_name:
+elif hasattr(playbook.inputs, "ms_groupteam_name"):
   inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name
 else:
   helper.fail("No input was provided")
@@ -70,7 +70,7 @@ else:
 ### Script Content
 ```python
 results = playbook.functions.results.create_channel_results
-content = results.get("content")
+content = results.get("content", {})
 
 if not results.get("success"):
   text = "Unable to create Microsoft Group"
@@ -79,18 +79,17 @@ if not results.get("success"):
     text = f"{text}:\n\tFailure reason: {fail_reason}"
 
 else:
-  text = f'''<a href="{content.get("webUrl")}">Click here</a>
+  text = f'''<a href="{content.get("webUrl", "")}">Click here</a>
   <b>Microsoft Channel Details:</b><br />
   <br />Name: {content.get("displayName")}
-  <br />Web URL: {url}
+  <br />Web URL: {content.get("webUrl", "")}
   <br />Description: {content.get("description")}
   <br />Teams Enabled: {True}
   <br />ID: {content.get("id")}
   <br />Mail: {content.get("email")}
   <br />Membership Type: {content.get("membershipType")}'''
 
-note = helper.createRichText(text)
-task.addNote(note)
+task.addNote(helper.createRichText(text))
 ```
 
 ---

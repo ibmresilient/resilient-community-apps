@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1684320361537,
+  "export_date": 1690206769126,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -17,7 +17,7 @@
       "deprecated": false,
       "export_key": "__function/ms_group_mail_nickname",
       "hide_notification": false,
-      "id": 4424,
+      "id": 4422,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -46,7 +46,7 @@
       "deprecated": false,
       "export_key": "__function/ms_team_name",
       "hide_notification": false,
-      "id": 4425,
+      "id": 4423,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -75,7 +75,7 @@
       "deprecated": false,
       "export_key": "__function/task_id",
       "hide_notification": false,
-      "id": 4426,
+      "id": 4236,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -104,7 +104,7 @@
       "deprecated": false,
       "export_key": "__function/ms_group_id",
       "hide_notification": false,
-      "id": 4427,
+      "id": 4424,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -133,7 +133,7 @@
       "deprecated": false,
       "export_key": "__function/add_members_from",
       "hide_notification": false,
-      "id": 4428,
+      "id": 4425,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -159,7 +159,7 @@
           "label": "None",
           "properties": null,
           "uuid": "9602467c-8872-4fe0-9992-20498e6b076e",
-          "value": 928
+          "value": 904
         },
         {
           "default": false,
@@ -168,7 +168,7 @@
           "label": "Task",
           "properties": null,
           "uuid": "40b72b22-9485-47ac-9ade-ee2f97a38515",
-          "value": 929
+          "value": 905
         },
         {
           "default": false,
@@ -177,7 +177,7 @@
           "label": "Incident",
           "properties": null,
           "uuid": "054edd56-3fd2-4068-8779-bcc24e8e2c5d",
-          "value": 930
+          "value": 906
         }
       ]
     },
@@ -191,7 +191,7 @@
       "deprecated": false,
       "export_key": "__function/additional_members",
       "hide_notification": false,
-      "id": 4429,
+      "id": 4426,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -220,7 +220,7 @@
       "deprecated": false,
       "export_key": "__function/ms_owners_list",
       "hide_notification": false,
-      "id": 4430,
+      "id": 4427,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -249,7 +249,7 @@
       "deprecated": false,
       "export_key": "__function/ms_group_name",
       "hide_notification": false,
-      "id": 4431,
+      "id": 4428,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -278,7 +278,7 @@
       "deprecated": false,
       "export_key": "__function/ms_channel_id",
       "hide_notification": false,
-      "id": 4432,
+      "id": 4429,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -307,7 +307,7 @@
       "deprecated": false,
       "export_key": "__function/teams_mrkdown",
       "hide_notification": false,
-      "id": 4433,
+      "id": 4430,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -337,7 +337,7 @@
       "deprecated": false,
       "export_key": "__function/teams_payload",
       "hide_notification": false,
-      "id": 4434,
+      "id": 4431,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -367,7 +367,7 @@
       "deprecated": false,
       "export_key": "__function/ms_message_id",
       "hide_notification": false,
-      "id": 4435,
+      "id": 4432,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -396,7 +396,7 @@
       "deprecated": false,
       "export_key": "__function/ms_channel_name",
       "hide_notification": false,
-      "id": 4436,
+      "id": 4433,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -425,7 +425,7 @@
       "deprecated": false,
       "export_key": "__function/ms_groupteam_name",
       "hide_notification": false,
-      "id": 4437,
+      "id": 4434,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -454,7 +454,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 4438,
+      "id": 4237,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -483,7 +483,7 @@
       "deprecated": false,
       "export_key": "__function/ms_groupteam_id",
       "hide_notification": false,
-      "id": 4439,
+      "id": 4435,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -512,7 +512,7 @@
       "deprecated": false,
       "export_key": "__function/archive_operation",
       "hide_notification": false,
-      "id": 4440,
+      "id": 4436,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -537,7 +537,7 @@
           "label": "Archive",
           "properties": null,
           "uuid": "11cbdf5e-aa22-4b99-85d3-98790f9de82e",
-          "value": 931
+          "value": 907
         },
         {
           "default": false,
@@ -546,7 +546,7 @@
           "label": "Unarchive",
           "properties": null,
           "uuid": "7fd9bd61-5f26-4063-8436-5b686ea4d817",
-          "value": 932
+          "value": 908
         }
       ]
     },
@@ -560,7 +560,7 @@
       "deprecated": false,
       "export_key": "__function/ms_description",
       "hide_notification": false,
-      "id": 4441,
+      "id": 4437,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -589,7 +589,7 @@
       "deprecated": false,
       "export_key": "__function/teams_channel",
       "hide_notification": false,
-      "id": 4442,
+      "id": 4438,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -623,7 +623,7 @@
   ],
   "functions": [
     {
-      "created_date": 1683916474191,
+      "created_date": 1690202976032,
       "description": {
         "content": "Function to archive a MS Team",
         "format": "text"
@@ -631,14 +631,14 @@
       "destination_handle": "fn_teams",
       "display_name": "MS Teams: Archive Team",
       "export_key": "ms_teams_archive_team",
-      "id": 40,
+      "id": 71,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683916474236,
+      "last_modified_time": 1690202976072,
       "name": "ms_teams_archive_team",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"id\": \"4dfde5ae-4c27-4461-955d-e90791504987\", \"deletedDateTime\": null, \"classification\": null, \"createdDateTime\": \"2022-11-17T19:38:40Z\", \"creationOptions\": [\"Team\", \"ExchangeProvisioningFlags:3552\"], \"description\": \"Sample\", \"displayName\": \"Admin\", \"expirationDateTime\": null, \"groupTypes\": [\"Unified\"], \"isAssignableToRole\": null, \"mail\": \"Admin@5rf2xs.onmicrosoft.com\", \"mailEnabled\": true, \"mailNickname\": \"Admin\", \"membershipRule\": null, \"membershipRuleProcessingState\": null, \"onPremisesDomainName\": null, \"onPremisesLastSyncDateTime\": null, \"onPremisesNetBiosName\": null, \"onPremisesSamAccountName\": null, \"onPremisesSecurityIdentifier\": null, \"onPremisesSyncEnabled\": null, \"preferredDataLocation\": null, \"preferredLanguage\": null, \"proxyAddresses\": [\"SPO:SPO_6a9b33c4-5b75-4854-8cd8-***********_1d8a5928-8678-408e-ab06-50ca7e01766a\", \"SMTP:Admin@5rf2xs.onmicrosoft.com\"], \"renewedDateTime\": \"2022-11-17T19:38:40Z\", \"resourceBehaviorOptions\": [\"HideGroupInOutlook\", \"SubscribeMembersToCalendarEventsDisabled\", \"WelcomeEmailDisabled\"], \"resourceProvisioningOptions\": [\"Team\"], \"securityEnabled\": false, \"securityIdentifier\": \"S-1-12-1-********-1147227175-132734357-2269728913\", \"theme\": null, \"visibility\": \"Public\", \"onPremisesProvisioningErrors\": [], \"message\": \"Successfully archived Team: Admin\", \"teamsEnabled\": \"Archived\"}, \"raw\": null, \"inputs\": {\"ms_team_name\": \"Admin\", \"archive_operation\": \"Archive\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-teams\", \"package_version\": \"2.0.0\", \"host\": \"appHost\", \"execution_time_ms\": 5367, \"timestamp\": \"2022-11-22 11:21:47\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"deletedDateTime\": {}, \"classification\": {}, \"createdDateTime\": {\"type\": \"string\"}, \"creationOptions\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"description\": {\"type\": \"string\"}, \"displayName\": {\"type\": \"string\"}, \"expirationDateTime\": {}, \"groupTypes\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"isAssignableToRole\": {}, \"mail\": {\"type\": \"string\"}, \"mailEnabled\": {\"type\": \"boolean\"}, \"mailNickname\": {\"type\": \"string\"}, \"membershipRule\": {}, \"membershipRuleProcessingState\": {}, \"onPremisesDomainName\": {}, \"onPremisesLastSyncDateTime\": {}, \"onPremisesNetBiosName\": {}, \"onPremisesSamAccountName\": {}, \"onPremisesSecurityIdentifier\": {}, \"onPremisesSyncEnabled\": {}, \"preferredDataLocation\": {}, \"preferredLanguage\": {}, \"proxyAddresses\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"renewedDateTime\": {\"type\": \"string\"}, \"resourceBehaviorOptions\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"resourceProvisioningOptions\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"securityEnabled\": {\"type\": \"boolean\"}, \"securityIdentifier\": {\"type\": \"string\"}, \"theme\": {}, \"visibility\": {\"type\": \"string\"}, \"onPremisesProvisioningErrors\": {\"type\": \"array\"}, \"message\": {\"type\": \"string\"}, \"teamsEnabled\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"ms_team_name\": {\"type\": \"string\"}, \"archive_operation\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -679,31 +679,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Incident: Archive Unarchive A Microsoft Team",
-          "object_type": "incident",
-          "programmatic_name": "incident_archive_unarchive_a_microsoft_team",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 85
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Task: Archive Unarchive a Microsoft Team",
-          "object_type": "task",
-          "programmatic_name": "task_archive_unarchive_a_microsoft_team",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 83
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1683916474242,
+      "created_date": 1690202976079,
       "description": {
         "content": "Function to create a MS Channel",
         "format": "text"
@@ -711,14 +690,14 @@
       "destination_handle": "fn_teams",
       "display_name": "MS Teams: Create Channel",
       "export_key": "ms_teams_create_channel",
-      "id": 41,
+      "id": 72,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683916474284,
+      "last_modified_time": 1690202976122,
       "name": "ms_teams_create_channel",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"@odata.context\": \"https://graph.microsoft.com/v1.0/$metadata#teams(\u00274e8349d3-a5e1-****-****-3d81f5252b7f\u0027)/channels/$entity\", \"id\": \"19:8d4fbf7358174021ae16374572797fce@thread.tacv2\", \"createdDateTime\": \"2022-11-22T12:21:20.4305814Z\", \"displayName\": \"Engineering Team\", \"description\": \"Engineering 2 subteam\", \"isFavoriteByDefault\": false, \"email\": \"\", \"webUrl\": \"https://teams.microsoft.com/l/channel/19%3a8d4fbf7************72797fce%40thread.tacv2/Engineering Team?groupId=4e8349d3-a5e1-****-*****-3d81f5252b7f\u0026tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a\", \"membershipType\": \"standard\", \"status_code\": 201, \"message\": \"Successfully created channel: Engineering Team\"}, \"raw\": null, \"inputs\": {\"ms_channel_name\": \"Engineering Team\", \"ms_group_description\": \"Engineering 2 subteam\", \"ms_groupteam_name\": \"Engineering Team\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-teams\", \"package_version\": \"2.0.0\", \"host\": \"appHost\", \"execution_time_ms\": 9106, \"timestamp\": \"2022-11-22 12:21:20\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"@odata.context\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"createdDateTime\": {\"type\": \"string\"}, \"displayName\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"isFavoriteByDefault\": {\"type\": \"boolean\"}, \"email\": {\"type\": \"string\"}, \"webUrl\": {\"type\": \"string\"}, \"membershipType\": {\"type\": \"string\"}, \"status_code\": {\"type\": \"integer\"}, \"message\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"ms_channel_name\": {\"type\": \"string\"}, \"ms_group_description\": {\"type\": \"string\"}, \"ms_groupteam_name\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -767,31 +746,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Incident: Create a Teams Channel",
-          "object_type": "incident",
-          "programmatic_name": "incident_create_a_teams_channel",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 78
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "task: Create a Teams Channel",
-          "object_type": "task",
-          "programmatic_name": "task_create_a_teams_channel",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 81
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1683916474289,
+      "created_date": 1690202976128,
       "description": {
         "content": "A function to create a Microsoft Group",
         "format": "text"
@@ -799,14 +757,14 @@
       "destination_handle": "fn_teams",
       "display_name": "MS Teams: Create group",
       "export_key": "ms_teams_create_group",
-      "id": 42,
+      "id": 73,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683916474332,
+      "last_modified_time": 1690202976170,
       "name": "ms_teams_create_group",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"id\": \"489acc09-3bac-4c43-a168-544df4bf40ff\", \"deletedDateTime\": null, \"classification\": null, \"createdDateTime\": \"2022-11-15T16:30:37Z\", \"creationOptions\": [], \"description\": \"Incident 2095: MS Teams This is a sample incident created for MS teams in SOAR v45\", \"displayName\": \"SOAR\", \"expirationDateTime\": null, \"groupTypes\": [\"Unified\"], \"isAssignableToRole\": null, \"mail\": \"SOAR@****.onmicrosoft.com\", \"mailEnabled\": true, \"mailNickname\": \"SOAR\", \"membershipRule\": null, \"membershipRuleProcessingState\": null, \"onPremisesDomainName\": null, \"onPremisesLastSyncDateTime\": null, \"onPremisesNetBiosName\": null, \"onPremisesSamAccountName\": null, \"onPremisesSecurityIdentifier\": null, \"onPremisesSyncEnabled\": null, \"preferredDataLocation\": null, \"preferredLanguage\": null, \"proxyAddresses\": [\"SMTP:SOAR@****.onmicrosoft.com\"], \"renewedDateTime\": \"2022-11-15T16:30:37Z\", \"resourceBehaviorOptions\": [], \"resourceProvisioningOptions\": [], \"securityEnabled\": false, \"securityIdentifier\": \"S-1-12-1-1218104329-1279474604-1297377441-4282433524\", \"theme\": null, \"visibility\": \"Public\", \"onPremisesProvisioningErrors\": [], \"teamsEnabled\": false, \"unfoundUsers\": []}, \"raw\": null, \"inputs\": {\"incident_id\": 2095, \"ms_group_description\": \"Incident 2095: MS Teams This is a sample incident created for MS teams in SOAR v45\", \"ms_owners_list\": \"AdminSoarMS@****.onmicrosoft.com\", \"ms_group_name\": \"SOAR\", \"ms_group_mail_nickname\": \"SOAR\", \"add_members_from\": \"Incident\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-teams\", \"package_version\": \"2.0.0\", \"host\": \"Apphost\", \"execution_time_ms\": 20595, \"timestamp\": \"2022-11-15 16:30:46\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"deletedDateTime\": {}, \"classification\": {}, \"createdDateTime\": {\"type\": \"string\"}, \"creationOptions\": {\"type\": \"array\"}, \"description\": {\"type\": \"string\"}, \"displayName\": {\"type\": \"string\"}, \"expirationDateTime\": {}, \"groupTypes\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"isAssignableToRole\": {}, \"mail\": {\"type\": \"string\"}, \"mailEnabled\": {\"type\": \"boolean\"}, \"mailNickname\": {\"type\": \"string\"}, \"membershipRule\": {}, \"membershipRuleProcessingState\": {}, \"onPremisesDomainName\": {}, \"onPremisesLastSyncDateTime\": {}, \"onPremisesNetBiosName\": {}, \"onPremisesSamAccountName\": {}, \"onPremisesSecurityIdentifier\": {}, \"onPremisesSyncEnabled\": {}, \"preferredDataLocation\": {}, \"preferredLanguage\": {}, \"proxyAddresses\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"renewedDateTime\": {\"type\": \"string\"}, \"resourceBehaviorOptions\": {\"type\": \"array\"}, \"resourceProvisioningOptions\": {\"type\": \"array\"}, \"securityEnabled\": {\"type\": \"boolean\"}, \"securityIdentifier\": {\"type\": \"string\"}, \"theme\": {}, \"visibility\": {\"type\": \"string\"}, \"onPremisesProvisioningErrors\": {\"type\": \"array\"}, \"teamsEnabled\": {\"type\": \"boolean\"}, \"unfoundUsers\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"ms_group_description\": {\"type\": \"string\"}, \"ms_owners_list\": {\"type\": \"string\"}, \"ms_group_name\": {\"type\": \"string\"}, \"ms_group_mail_nickname\": {\"type\": \"string\"}, \"add_members_from\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -879,31 +837,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Incident: Create a Microsoft Group",
-          "object_type": "incident",
-          "programmatic_name": "incident_create_a_microsoft_group",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 74
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Task: Create a Microsoft Group",
-          "object_type": "task",
-          "programmatic_name": "task_create_a_microsoft_group",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 71
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1683916474337,
+      "created_date": 1690202976176,
       "description": {
         "content": "Create a Microsoft Team",
         "format": "text"
@@ -911,14 +848,14 @@
       "destination_handle": "fn_teams",
       "display_name": "MS Teams: Create team",
       "export_key": "ms_teams_create_team",
-      "id": 43,
+      "id": 74,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683916474380,
+      "last_modified_time": 1690202976219,
       "name": "ms_teams_create_team",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"@odata.context\": \"https://graph.microsoft.com/v1.0/$metadata#groups/$entity\", \"id\": \"db7350fc-b6df-4041-b6cd-2cd7588fa7da\", \"deletedDateTime\": null, \"classification\": null, \"createdDateTime\": \"2022-11-16T12:11:47Z\", \"creationOptions\": [\"Team\", \"ExchangeProvisioningFlags:3552\"], \"description\": \"SOARAPPS\", \"displayName\": \"SOARGROUP\", \"expirationDateTime\": null, \"groupTypes\": [\"Unified\"], \"isAssignableToRole\": null, \"mail\": \"soargroup@****.onmicrosoft.com\", \"mailEnabled\": true, \"mailNickname\": \"soargroup\", \"membershipRule\": null, \"membershipRuleProcessingState\": null, \"onPremisesDomainName\": null, \"onPremisesLastSyncDateTime\": null, \"onPremisesNetBiosName\": null, \"onPremisesSamAccountName\": null, \"onPremisesSecurityIdentifier\": null, \"onPremisesSyncEnabled\": null, \"preferredDataLocation\": null, \"preferredLanguage\": null, \"proxyAddresses\": [\"SMTP:soargroup@****.onmicrosoft.com\"], \"renewedDateTime\": \"2022-11-16T12:11:47Z\", \"resourceBehaviorOptions\": [\"HideGroupInOutlook\", \"SubscribeMembersToCalendarEventsDisabled\", \"WelcomeEmailDisabled\"], \"resourceProvisioningOptions\": [\"Team\"], \"securityEnabled\": false, \"securityIdentifier\": \"S-1-12-1-3681767676-1078048479-3610037686-3668414296\", \"theme\": null, \"visibility\": \"Public\", \"onPremisesProvisioningErrors\": [], \"status_code\": 200, \"teamsEnabled\": true, \"unfoundUsers\": null}, \"raw\": null, \"inputs\": {\"ms_team_name\": \"SOARAPPS\", \"incident_id\": 2095, \"ms_owners_list\": \"AdminSoarMS@****.onmicrosoft.com\", \"add_members_from\": \"Incident\", \"ms_team_description\": \"soargroup\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-teams\", \"package_version\": \"2.0.0\", \"host\": \"AppHost\", \"execution_time_ms\": 18257, \"timestamp\": \"2022-11-16 12:11:53\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"@odata.context\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"deletedDateTime\": {}, \"classification\": {}, \"createdDateTime\": {\"type\": \"string\"}, \"creationOptions\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"description\": {\"type\": \"string\"}, \"displayName\": {\"type\": \"string\"}, \"expirationDateTime\": {}, \"groupTypes\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"isAssignableToRole\": {}, \"mail\": {\"type\": \"string\"}, \"mailEnabled\": {\"type\": \"boolean\"}, \"mailNickname\": {\"type\": \"string\"}, \"membershipRule\": {}, \"membershipRuleProcessingState\": {}, \"onPremisesDomainName\": {}, \"onPremisesLastSyncDateTime\": {}, \"onPremisesNetBiosName\": {}, \"onPremisesSamAccountName\": {}, \"onPremisesSecurityIdentifier\": {}, \"onPremisesSyncEnabled\": {}, \"preferredDataLocation\": {}, \"preferredLanguage\": {}, \"proxyAddresses\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"renewedDateTime\": {\"type\": \"string\"}, \"resourceBehaviorOptions\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"resourceProvisioningOptions\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"securityEnabled\": {\"type\": \"boolean\"}, \"securityIdentifier\": {\"type\": \"string\"}, \"theme\": {}, \"visibility\": {\"type\": \"string\"}, \"onPremisesProvisioningErrors\": {\"type\": \"array\"}, \"status_code\": {\"type\": \"integer\"}, \"teamsEnabled\": {\"type\": \"boolean\"}, \"unfoundUsers\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"ms_team_name\": {\"type\": \"string\"}, \"incident_id\": {\"type\": \"integer\"}, \"ms_owners_list\": {\"type\": \"string\"}, \"add_members_from\": {\"type\": \"string\"}, \"ms_team_description\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -983,31 +920,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Incident: Create a Microsoft Team",
-          "object_type": "incident",
-          "programmatic_name": "incident_create_a_microsoft_team",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 75
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Task: Create a Microsoft Team",
-          "object_type": "task",
-          "programmatic_name": "task_create_a_microsoft_team",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 68
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1683916474385,
+      "created_date": 1690202976227,
       "description": {
         "content": "Function to create a MS Channel",
         "format": "text"
@@ -1015,14 +931,14 @@
       "destination_handle": "fn_teams",
       "display_name": "MS Teams: Delete Channel",
       "export_key": "ms_teams_delete_channel",
-      "id": 44,
+      "id": 75,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683916474426,
+      "last_modified_time": 1690202976271,
       "name": "ms_teams_delete_channel",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"status_code\": 204, \"message\": \"Successfully deleted channel: Engineering Team\"}, \"raw\": null, \"inputs\": {\"ms_channel_name\": \"Engineering Team\", \"ms_groupteam_name\": \"Engineering Team\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-teams\", \"package_version\": \"2.0.0\", \"host\": \"appHost\", \"execution_time_ms\": 6253, \"timestamp\": \"2022-11-22 12:31:03\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"status_code\": {\"type\": \"integer\"}, \"message\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"ms_channel_name\": {\"type\": \"string\"}, \"ms_groupteam_name\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -1063,31 +979,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Incident: Delete a Teams Channel",
-          "object_type": "incident",
-          "programmatic_name": "incident_delete_a_teams_channel",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 72
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Task: Delete a Teams Channel",
-          "object_type": "task",
-          "programmatic_name": "task_delete_a_teams_channel",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 82
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1683916474431,
+      "created_date": 1690202976277,
       "description": {
         "content": "Delete a Microsoft Group",
         "format": "text"
@@ -1095,14 +990,14 @@
       "destination_handle": "fn_teams",
       "display_name": "MS Teams: Delete Group",
       "export_key": "ms_teams_delete_group",
-      "id": 45,
+      "id": 76,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683916474472,
+      "last_modified_time": 1690202976319,
       "name": "ms_teams_delete_group",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"status_code\": 204, \"message\": \"Successfully deleted Group: Production Team\"}, \"raw\": null, \"inputs\": {\"ms_group_mail_nickname\": \"ProductionTeamm@******.onmicrosoft.com\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-teams\", \"package_version\": \"2.0.0\", \"host\": \"AppHost\", \"execution_time_ms\": 2996, \"timestamp\": \"2022-11-22 12:14:11\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"status_code\": {\"type\": \"integer\"}, \"message\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"ms_group_mail_nickname\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -1135,31 +1030,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Incident: Delete a Microsoft Group",
-          "object_type": "incident",
-          "programmatic_name": "incident_delete_a_microsoft_group",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 69
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Task: Delete a Microsoft Group",
-          "object_type": "task",
-          "programmatic_name": "task_delete_a_microsoft_group",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 77
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1683916474476,
+      "created_date": 1690202976325,
       "description": {
         "content": "Allows for enabling a team for an existing Group",
         "format": "text"
@@ -1167,14 +1041,14 @@
       "destination_handle": "fn_teams",
       "display_name": "MS Teams: Enable Team",
       "export_key": "ms_teams_enable_team",
-      "id": 46,
+      "id": 77,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683916474519,
+      "last_modified_time": 1690202976367,
       "name": "ms_teams_enable_team",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"id\": \"764a62f2-b759-4dd9-86e7-1a4949e4b77d\", \"deletedDateTime\": null, \"classification\": null, \"createdDateTime\": \"2022-11-17T15:35:29Z\", \"creationOptions\": [], \"description\": \"This is a sample group\", \"displayName\": \"Engineering Team\", \"expirationDateTime\": null, \"groupTypes\": [\"Unified\"], \"isAssignableToRole\": null, \"mail\": \"example@******.onmicrosoft.com\", \"mailEnabled\": true, \"mailNickname\": \"example\", \"membershipRule\": null, \"membershipRuleProcessingState\": null, \"onPremisesDomainName\": null, \"onPremisesLastSyncDateTime\": null, \"onPremisesNetBiosName\": null, \"onPremisesSamAccountName\": null, \"onPremisesSecurityIdentifier\": null, \"onPremisesSyncEnabled\": null, \"preferredDataLocation\": null, \"preferredLanguage\": null, \"proxyAddresses\": [\"SMTP:example@******.onmicrosoft.com\"], \"renewedDateTime\": \"2022-11-17T15:35:29Z\", \"resourceBehaviorOptions\": [], \"resourceProvisioningOptions\": [], \"securityEnabled\": false, \"securityIdentifier\": \"S-1-12-1-1984586482-1306113881-1226499974-2109203529\", \"theme\": null, \"visibility\": \"Public\", \"onPremisesProvisioningErrors\": [], \"message\": \"Successfully enabled Teams for Group: Engineering Team\", \"teamsEnabled\": true}, \"raw\": null, \"inputs\": {\"ms_group_mail_nickname\": \"EngineeringTeam@******.onmicrosoft.com\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-teams\", \"package_version\": \"2.0.0\", \"host\": \"AppHost\", \"execution_time_ms\": 5220, \"timestamp\": \"2022-11-17 15:37:00\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"deletedDateTime\": {}, \"classification\": {}, \"createdDateTime\": {\"type\": \"string\"}, \"creationOptions\": {\"type\": \"array\"}, \"description\": {\"type\": \"string\"}, \"displayName\": {\"type\": \"string\"}, \"expirationDateTime\": {}, \"groupTypes\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"isAssignableToRole\": {}, \"mail\": {\"type\": \"string\"}, \"mailEnabled\": {\"type\": \"boolean\"}, \"mailNickname\": {\"type\": \"string\"}, \"membershipRule\": {}, \"membershipRuleProcessingState\": {}, \"onPremisesDomainName\": {}, \"onPremisesLastSyncDateTime\": {}, \"onPremisesNetBiosName\": {}, \"onPremisesSamAccountName\": {}, \"onPremisesSecurityIdentifier\": {}, \"onPremisesSyncEnabled\": {}, \"preferredDataLocation\": {}, \"preferredLanguage\": {}, \"proxyAddresses\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"renewedDateTime\": {\"type\": \"string\"}, \"resourceBehaviorOptions\": {\"type\": \"array\"}, \"resourceProvisioningOptions\": {\"type\": \"array\"}, \"securityEnabled\": {\"type\": \"boolean\"}, \"securityIdentifier\": {\"type\": \"string\"}, \"theme\": {}, \"visibility\": {\"type\": \"string\"}, \"onPremisesProvisioningErrors\": {\"type\": \"array\"}, \"message\": {\"type\": \"string\"}, \"teamsEnabled\": {\"type\": \"boolean\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"ms_group_mail_nickname\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -1207,31 +1081,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Incident: Enable Microsoft Team for Group",
-          "object_type": "incident",
-          "programmatic_name": "incident_enable_microsoft_team_for_group",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 73
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Task: Enable Microsoft Team for Group",
-          "object_type": "task",
-          "programmatic_name": "task_enable_microsoft_team_for_group",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 80
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1683916474524,
+      "created_date": 1690202976373,
       "description": {
         "content": "Post a message to a Microsoft Teams channel",
         "format": "text"
@@ -1239,14 +1092,14 @@
       "destination_handle": "fn_teams",
       "display_name": "MS Teams: Post Message",
       "export_key": "ms_teams_post_message",
-      "id": 47,
+      "id": 78,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683916474566,
+      "last_modified_time": 1690202976411,
       "name": "ms_teams_post_message",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"message\": \"Information successfully posted in channel Engineering\"}, \"raw\": null, \"inputs\": {\"teams_channel\": \"resilient\", \"incident_id\": 2096, \"task_id\": 78, \"teams_mrkdown\": true, \"teams_payload\": \"{ \\\"summary\\\": \\\"SOAR Incident\\\", \\\"sections\\\": [ \\n  { \\\"facts\\\": [ \\n    { \\\"name\\\": \\\"Name\\\", \\\"value\\\": \\\"Gootloader\\\" }, \\n    { \\\"name\\\": \\\"Description\\\", \\\"value\\\": \\\"\u003cdiv class=\\\\\\\"rte\\\\\\\"\u003e\u003cdiv\u003eDelivery method: Distributed via web download\u003c/div\u003e\u003cdiv\u003eDropped by: Gootloader\u003c/div\u003e\u003cdiv\u003eLink: \u003ca href=\\\\\\\"https://example.com/gootloadersites\\\\\\\" target=\\\\\\\"_blank\\\\\\\"\u003ehttps://example.com/gootloadersites\u003c/a\u003e\u003c/div\u003e\u003c/div\u003e\\\" }, \\n    { \\\"name\\\": \\\"Id\\\", \\\"value\\\": \\\"2096\\\" }, \\n    { \\\"name\\\": \\\"Owner\\\", \\\"value\\\": \\\"adminsoarms@5rf2xs.onmicrosoft.com\\\" }, \\n    { \\\"name\\\": \\\"Types\\\", \\\"value\\\": \\\"Malware\\\" }, \\n    { \\\"name\\\": \\\"NIST Attack Vectors\\\", \\\"value\\\": \\\"\\\" }, \\n    { \\\"name\\\": \\\"Create Date\\\", \\\"value\\\": \\\"Wed Nov 16 14:35:03 GMT 2022\\\" }, \\n    { \\\"name\\\": \\\"Date Occurred\\\", \\\"value\\\": \\\"Wed Oct 26 00:00:00 IST 2022\\\" }, \\n    { \\\"name\\\": \\\"Discovered Date\\\", \\\"value\\\": \\\"Wed Oct 26 14:25:12 IST 2022\\\" }, \\n    { \\\"name\\\": \\\"Confirmed\\\", \\\"value\\\": \\\"True\\\" }, \\n    { \\\"name\\\": \\\"Severity\\\", \\\"value\\\": \\\"High\\\" } \\n   ]\\n  },\\n  { \\\"text\\\": \\\"Task\\\", \\\"facts\\\": [ \\n    { \\\"name\\\": \\\"Task\\\", \\\"value\\\": \\\"Research AV vendor databases\\\" }, \\n    { \\\"name\\\": \\\"Owner\\\", \\\"value\\\": \\\"-\\\" },\\n    { \\\"name\\\": \\\"Instructions\\\", \\\"value\\\": \\\"Research AV vendor databases for recent outbreaks, symptoms and remediation guidance based on observed symptoms and findings. Possible source for intelligence include the following.\\n\u003cul\u003e\\n\u003cli\u003eKaspersky: http://www.securelist.com/en/threats/detect \u003c/li\u003e\\n\u003cli\u003eMicrosoft: http://www.microsoft.com/security/portal/threat/threats.aspx \u003c/li\u003e\\n\u003cli\u003eSymantec:  http://example.com/security_response/landing/azlisting.jsp\u003c/li\u003e\\n\u003cli\u003eTrend Micro: http://example.com/us/threatencyclopedia#malware \u003c/li\u003e\\n\u003c/ul\u003e\\\" },\\n    { \\\"name\\\": \\\"Due Date\\\", \\\"value\\\": \\\"-\\\" }\\n    ]\\n  }\\n ] \\n} \\n\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-teams\", \"package_version\": \"2.0.0\", \"host\": \"Apphost\", \"execution_time_ms\": 25451, \"timestamp\": \"2022-11-23 12:22:20\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"message\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"teams_channel\": {\"type\": \"string\"}, \"incident_id\": {\"type\": \"integer\"}, \"task_id\": {\"type\": \"integer\"}, \"teams_mrkdown\": {\"type\": \"boolean\"}, \"teams_payload\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -1295,31 +1148,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Incident: Post message to Teams",
-          "object_type": "incident",
-          "programmatic_name": "incident_post_message_to_teams",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 76
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Task: Post message to Teams",
-          "object_type": "task",
-          "programmatic_name": "task_post_message_to_teams",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 84
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1683916474571,
+      "created_date": 1690202976417,
       "description": {
         "content": "Read messages from a Teams Channel",
         "format": "text"
@@ -1327,14 +1159,14 @@
       "destination_handle": "fn_teams",
       "display_name": "MS Teams: Read Message",
       "export_key": "ms_teams_read_message",
-      "id": 48,
+      "id": 79,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1683916474615,
+      "last_modified_time": 1690202976456,
       "name": "ms_teams_read_message",
       "output_json_example": "{\"raw\": null, \"reason\": null, \"success\": true, \"version\": 2.0, \"content\": [{\"attachments\": [{\"content\": {\"value\": \"It begins with a user searching for specific information in a search engine. In this case, the user had searched for the keywords \\u201cdisclosure agreement real estate transaction\\u201d. A website compromised by Gootkit operators was among the results, meaning that the user did not open this compromised website by chance. Indeed, the operators had tweaked the odds in their favor by using Search Engine Optimization (SEO) poisoning to make this website rank high in the search results, leading the user to visit the compromised website. This also means that the website\\u2019s URL will not be available for long and that a full analysis would be difficult to conduct if not done immediately\"}, \"contentType\": \"application/vnd.microsoft.teams.card.o365connector\", \"contentUrl\": null, \"id\": \"7c0997dc1b1f481ab4cacf3da1ad76ac\", \"name\": null, \"thumbnailUrl\": null}], \"body\": {\"content\": \"\u003cattachment id=\\\"7c0997dc1b1f481ab4cacf3da1ad76ac\\\"\u003e\u003c/attachment\u003e\", \"contentType\": \"html\"}, \"channelIdentity\": {\"channelId\": \"19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2\", \"teamId\": \"66475ea6-d085-461b-8d25-7818274b6cf0\"}, \"chatId\": null, \"createdDateTime\": \"2022-12-12T21:06:16.484Z\", \"deletedDateTime\": null, \"etag\": \"1670879176484\", \"eventDetail\": null, \"from\": {\"application\": {\"applicationIdentityType\": \"office365Connector\", \"displayName\": \"SOAR\", \"id\": \"203a1e2c-26cc-47ca-83ae-be98f960b6b2\"}, \"device\": null, \"user\": null}, \"id\": \"1670879176484\", \"importance\": \"normal\", \"lastEditedDateTime\": null, \"lastModifiedDateTime\": \"2022-12-12T21:06:16.484Z\", \"locale\": \"en-us\", \"mentions\": [], \"messageType\": \"message\", \"policyViolation\": null, \"reactions\": [], \"replyToId\": null, \"subject\": null, \"summary\": null, \"webUrl\": \"https://teams.microsoft.com/l/message/******\"}, {\"attachments\": [{\"content\": \"{\\r\\n  \\\"summary\\\": \\\"Incoming Webhook is now connected to soarmessages\\\",\\r\\n  \\\"sections\\\": [\\r\\n    {\\r\\n      \\\"activitySubtitle\\\": \\\"\u003cp\u003eMiriam Graham has set up a connection to Incoming Webhook so group members will be notified for this configuration with name \u003cstrong\u003eSOAR\u003c/strong\u003e\u003c/p\u003e\\\",\\r\\n      \\\"activityText\\\": \\\"\\\",\\r\\n      \\\"markdown\\\": true,\\r\\n      \\\"startGroup\\\": false\\r\\n    }\\r\\n  ]\\r\\n}\", \"contentType\": \"application/vnd.microsoft.teams.card.o365connector\", \"contentUrl\": null, \"id\": \"2afcb94fd474482484883803d78a22e1\", \"name\": null, \"thumbnailUrl\": null}], \"body\": {\"content\": \"\u003cattachment id=\\\"2afcb94fd474482484883803d78a22e1\\\"\u003e\u003c/attachment\u003e\", \"contentType\": \"html\"}, \"channelIdentity\": {\"channelId\": \"19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2\", \"teamId\": \"66475ea6-d085-461b-8d25-7818274b6cf0\"}, \"chatId\": null, \"createdDateTime\": \"2022-12-08T17:27:53.277Z\", \"deletedDateTime\": null, \"etag\": \"1670520473277\", \"eventDetail\": null, \"from\": {\"application\": {\"applicationIdentityType\": \"office365Connector\", \"displayName\": \"SOAR\", \"id\": \"203a1e2c-26cc-47ca-83ae-be98f960b6b2\"}, \"device\": null, \"user\": null}, \"id\": \"1670520473277\", \"importance\": \"normal\", \"lastEditedDateTime\": null, \"lastModifiedDateTime\": \"2022-12-08T17:27:53.277Z\", \"locale\": \"en-us\", \"mentions\": [], \"messageType\": \"message\", \"policyViolation\": null, \"reactions\": [], \"replyToId\": null, \"subject\": null, \"summary\": \"Incoming Webhook is now connected to soarmessages\", \"webUrl\": \"https://teams.microsoft.com/l/messages****\"}, {\"attachments\": [], \"body\": {\"content\": \"Hello!\", \"contentType\": \"text\"}, \"channelIdentity\": {\"channelId\": \"19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2\", \"teamId\": \"66475ea6-d085-461b-8d25-7818274b6cf0\"}, \"chatId\": null, \"createdDateTime\": \"2022-12-08T11:53:30.188Z\", \"deletedDateTime\": null, \"etag\": \"1670500410188\", \"eventDetail\": null, \"from\": {\"application\": null, \"device\": null, \"user\": {\"displayName\": \"user2\", \"id\": \"6c259569-f2c0-430b-af73-40081b5de19d\", \"tenantId\": \"1d8a5928-8678-408e-ab06-50ca7e01766a\", \"userIdentityType\": \"aadUser\"}}, \"id\": \"1670500410188\", \"importance\": \"normal\", \"lastEditedDateTime\": null, \"lastModifiedDateTime\": \"2022-12-08T11:53:30.188Z\", \"locale\": \"en-us\", \"mentions\": [], \"messageType\": \"message\", \"policyViolation\": null, \"reactions\": [], \"replyToId\": null, \"subject\": null, \"summary\": null, \"webUrl\": \"https://teams.microsoft.com/l/message/******\"}, {\"attachments\": [], \"body\": {\"content\": \"Message 1\", \"contentType\": \"text\"}, \"channelIdentity\": {\"channelId\": \"19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2\", \"teamId\": \"66475ea6-d085-461b-8d25-7818274b6cf0\"}, \"chatId\": null, \"createdDateTime\": \"2022-12-08T11:15:26.534Z\", \"deletedDateTime\": null, \"etag\": \"1670498126534\", \"eventDetail\": null, \"from\": {\"application\": null, \"device\": null, \"user\": {\"displayName\": \"user1\", \"id\": \"a27544ce-79dc-4d26-a277-d7d4a7cd19cc\", \"tenantId\": \"1d8a5928-8678-408e-ab06-50ca7e01766a\", \"userIdentityType\": \"aadUser\"}}, \"id\": \"1670498126534\", \"importance\": \"normal\", \"lastEditedDateTime\": null, \"lastModifiedDateTime\": \"2022-12-08T11:15:26.534Z\", \"locale\": \"en-us\", \"mentions\": [], \"messageType\": \"message\", \"policyViolation\": null, \"reactions\": [], \"replyToId\": null, \"subject\": null, \"summary\": null, \"webUrl\": \"https://teams.microsoft.com/l/message/*****\"}], \"inputs\": {\"ms_channel_name\": \"ychannel\", \"ms_groupteam_name\": \"soarmessages\"}, \"metrics\": {\"execution_time_ms\": 5030, \"host\": \"apphost\", \"package\": \"fn-teams\", \"package_version\": \"2.0.0\", \"timestamp\": \"2022-12-13 16:56:51\", \"version\": \"1.0\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"replyToId\": {}, \"etag\": {\"type\": \"string\"}, \"messageType\": {\"type\": \"string\"}, \"createdDateTime\": {\"type\": \"string\"}, \"lastModifiedDateTime\": {\"type\": \"string\"}, \"lastEditedDateTime\": {}, \"deletedDateTime\": {}, \"subject\": {}, \"summary\": {\"type\": [\"null\", \"string\"]}, \"chatId\": {}, \"importance\": {\"type\": \"string\"}, \"locale\": {\"type\": \"string\"}, \"webUrl\": {\"type\": \"string\"}, \"policyViolation\": {}, \"eventDetail\": {}, \"from\": {\"type\": \"object\", \"properties\": {\"device\": {}, \"user\": {}, \"application\": {}}}, \"body\": {\"type\": \"object\", \"properties\": {\"contentType\": {\"type\": \"string\"}, \"content\": {\"type\": \"string\"}}}, \"channelIdentity\": {\"type\": \"object\", \"properties\": {\"teamId\": {\"type\": \"string\"}, \"channelId\": {\"type\": \"string\"}}}, \"attachments\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"contentType\": {\"type\": \"string\"}, \"contentUrl\": {}, \"content\": {\"type\": \"string\"}, \"name\": {}, \"thumbnailUrl\": {}}}}, \"mentions\": {\"type\": \"array\"}, \"reactions\": {\"type\": \"array\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"ms_channel_name\": {\"type\": \"string\"}, \"ms_groupteam_name\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
@@ -1391,39 +1223,18 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Incident: Read a Channel Messages",
-          "object_type": "incident",
-          "programmatic_name": "incident_read_a_channels_messages",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 79
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Task: Read a Channel Messages",
-          "object_type": "task",
-          "programmatic_name": "task_read_a_channels_messages",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 70
-        }
-      ]
+      "workflows": []
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 28,
+  "id": 14,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1684320360422,
+      "create_date": 1690206767316,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1432,7 +1243,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1684320360422,
+      "update_date": 1690206767316,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1449,7 +1260,7 @@
       "programmatic_name": "fn_teams",
       "tags": [],
       "users": [
-        "i@example.com"
+        "admin1@example.com"
       ],
       "uuid": "44d59a45-1647-438d-ba45-0bbf0c7506f7"
     }
@@ -1461,14 +1272,14 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e\" isExecutable=\"true\" name=\"playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_03q0vdw\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Archive Team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"553efbec-00dc-4205-8845-fbda91742028\"\u003e{\"inputs\":{\"5bc4e7ce-8aa4-42b9-af61-7a9a1c51de1f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11cbdf5e-aa22-4b99-85d3-98790f9de82e\"}},\"4b0f234f-0474-4334-b146-a42f8b941d59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"86fbad8b-a5dd-45b8-a7e8-f3f19afce0a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"31e87c41-6cc5-4a48-809b-69fc8a1d9671\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"inputs.archive_operation = \\\"Archive\\\"\\nif playbook.inputs.archive_operation:\\n  inputs.archive_operation = playbook.inputs.archive_operation\\n\\nif playbook.inputs.ms_groupteam_id:\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\n\\nelif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\n\\nelif playbook.inputs.ms_groupteam_name:\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\n\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"archive_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03q0vdw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1665dyd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_03q0vdw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d45664be-5872-4e30-9ba8-3f840a432993\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1665dyd\u003c/incoming\u003e\u003coutgoing\u003eFlow_16v2dsw\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1665dyd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_16v2dsw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_16v2dsw\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16v2dsw\" id=\"Flow_16v2dsw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1665dyd\" id=\"Flow_1665dyd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03q0vdw\" id=\"Flow_03q0vdw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e\" isExecutable=\"true\" name=\"playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_03q0vdw\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Archive Team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"553efbec-00dc-4205-8845-fbda91742028\"\u003e{\"inputs\":{\"5bc4e7ce-8aa4-42b9-af61-7a9a1c51de1f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11cbdf5e-aa22-4b99-85d3-98790f9de82e\"}},\"4b0f234f-0474-4334-b146-a42f8b941d59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"86fbad8b-a5dd-45b8-a7e8-f3f19afce0a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"31e87c41-6cc5-4a48-809b-69fc8a1d9671\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"inputs.archive_operation = \\\"Archive\\\"\\ninputs.archive_operation = getattr(playbook.inputs, \\\"archive_operation\\\")\\n\\nif hasattr(playbook.inputs, \\\"ms_groupteam_id\\\"):\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\n\\nelif hasattr(playbook.inputs, \\\"ms_group_mail_nickname\\\"):\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\n\\nelif hasattr(playbook.inputs, \\\"ms_groupteam_name\\\"):\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\n\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"archive_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03q0vdw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1665dyd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_03q0vdw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d45664be-5872-4e30-9ba8-3f840a432993\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1665dyd\u003c/incoming\u003e\u003coutgoing\u003eFlow_16v2dsw\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1665dyd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_16v2dsw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_16v2dsw\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16v2dsw\" id=\"Flow_16v2dsw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1665dyd\" id=\"Flow_1665dyd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03q0vdw\" id=\"Flow_03q0vdw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683916863334,
+      "create_date": 1690202976744,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e",
@@ -1494,7 +1305,7 @@
             "deprecated": false,
             "export_key": "playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e/archive_operation",
             "hide_notification": false,
-            "id": 4443,
+            "id": 4439,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1509,7 +1320,7 @@
             "templates": [],
             "text": "Operation",
             "tooltip": "Specify the operation to be performed",
-            "type_id": 1039,
+            "type_id": 1022,
             "uuid": "4e9a9df6-0d91-48ec-823d-1ce80e0cce06",
             "values": [
               {
@@ -1519,7 +1330,7 @@
                 "label": "Archive",
                 "properties": null,
                 "uuid": "b399712b-77e7-4f90-a441-26f20a58ea92",
-                "value": 933
+                "value": 909
               },
               {
                 "default": false,
@@ -1528,7 +1339,7 @@
                 "label": "Unarchive",
                 "properties": null,
                 "uuid": "6426478b-4ef9-4d9b-b12c-35495d3549c4",
-                "value": 934
+                "value": 910
               }
             ]
           },
@@ -1542,7 +1353,7 @@
             "deprecated": false,
             "export_key": "playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4444,
+            "id": 4440,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1557,7 +1368,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1039,
+            "type_id": 1022,
             "uuid": "cce6bc2f-335a-46e3-b07e-bed9132decbe",
             "values": []
           },
@@ -1571,7 +1382,7 @@
             "deprecated": false,
             "export_key": "playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e/ms_groupteam_id",
             "hide_notification": false,
-            "id": 4445,
+            "id": 4441,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1586,7 +1397,7 @@
             "templates": [],
             "text": "Group/Team ID",
             "tooltip": "Unique ID assigned to the Group or Team object while being created",
-            "type_id": 1039,
+            "type_id": 1022,
             "uuid": "984d7b1e-0d13-4728-9606-4053786b2431",
             "values": []
           },
@@ -1600,7 +1411,7 @@
             "deprecated": false,
             "export_key": "playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e/ms_groupteam_name",
             "hide_notification": false,
-            "id": 4446,
+            "id": 4442,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1615,7 +1426,7 @@
             "templates": [],
             "text": "Group/Team Name",
             "tooltip": "Name of the Microsoft Group or Team",
-            "type_id": 1039,
+            "type_id": 1022,
             "uuid": "245453f5-c63f-4089-b84c-6603ce9da8a8",
             "values": []
           }
@@ -1640,32 +1451,32 @@
         "uuid": "b816d046-4ad4-4bf4-8047-101439eee969"
       },
       "has_logical_errors": false,
-      "id": 27,
+      "id": 12,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684169869300,
+      "last_modified_time": 1690204943722,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1683920413463,
+          "created_date": 1690202976945,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 54,
+          "id": 35,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684169867416,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690203641629,
           "name": "post process",
           "object_type": "incident",
           "playbook_handle": "ms_teams_archive_team_pb",
           "programmatic_name": "ms_teams_archive_team_pb_post_process",
-          "script_text": "results = playbook.functions.results.archive_results\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to archive the Microsoft Team\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Team Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eThe Team associated with this Group has now been {content.get(\u0027teamsEnabled\u0027)}.\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\u0027displayName\u0027)}\n  \u003cbr /\u003eDescription: {content.get(\u0027description\u0027)}\n  \u003cbr /\u003eTeams Enabled: {content.get(\u0027teamsEnabled\u0027)}\n  \u003cbr /\u003eID: {content.get(\u0027id\u0027)}\n  \u003cbr /\u003eMail: {content.get(\u0027mail\u0027)}\n  \u003cbr /\u003eVisibility: {content.get(\u0027visibility\u0027)}\n  \u003cbr /\u003eGroup Types: {content.get(\u0027groupTypes\u0027)}\n  \u003cbr /\u003eCreated date and time: {content.get(\u0027createdDateTime\u0027)}\"\"\"\n  if content.get(\"unfoundUsers\"):\n    text += f\"\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\u0027unfoundUsers\u0027)}\"\n\nnote = helper.createRichText(text)\nincident.addNote(note)",
+          "script_text": "results = playbook.functions.results.archive_results\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to archive the Microsoft Team\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Team Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eThe Team associated with this Group has now been {content.get(\u0027teamsEnabled\u0027)}.\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\u0027displayName\u0027)}\n  \u003cbr /\u003eDescription: {content.get(\u0027description\u0027)}\n  \u003cbr /\u003eTeams Enabled: {content.get(\u0027teamsEnabled\u0027)}\n  \u003cbr /\u003eID: {content.get(\u0027id\u0027)}\n  \u003cbr /\u003eMail: {content.get(\u0027mail\u0027)}\n  \u003cbr /\u003eVisibility: {content.get(\u0027visibility\u0027)}\n  \u003cbr /\u003eGroup Types: {content.get(\u0027groupTypes\u0027)}\n  \u003cbr /\u003eCreated date and time: {content.get(\u0027createdDateTime\u0027)}\"\"\"\n  if content.get(\"unfoundUsers\"):\n    text += f\"\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\u0027unfoundUsers\u0027)}\"\n\nincident.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "d45664be-5872-4e30-9ba8-3f840a432993"
         }
@@ -1715,7 +1526,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_bd5bf29c-0441-4f49-bc6d-955dbc8b903e",
-        "id": 27,
+        "id": 14,
         "name": "playbook_bd5bf29c_0441_4f49_bc6d_955dbc8b903e",
         "type": "playbook",
         "uuid": "479025d0-11ae-4ccc-a0e1-2c3e15620f88"
@@ -1723,19 +1534,19 @@
       "tags": [],
       "type": "default",
       "uuid": "bd5bf29c-0441-4f49-bc6d-955dbc8b903e",
-      "version": 8
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0f085466_0984_4ad4_b822_0f71dd9a75af\" isExecutable=\"true\" name=\"playbook_0f085466_0984_4ad4_b822_0f71dd9a75af\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1o3ijgc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Archive Team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"553efbec-00dc-4205-8845-fbda91742028\"\u003e{\"inputs\":{\"5bc4e7ce-8aa4-42b9-af61-7a9a1c51de1f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11cbdf5e-aa22-4b99-85d3-98790f9de82e\"}},\"4b0f234f-0474-4334-b146-a42f8b941d59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"86fbad8b-a5dd-45b8-a7e8-f3f19afce0a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"31e87c41-6cc5-4a48-809b-69fc8a1d9671\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"inputs.archive_operation = \\\"Archive\\\"\\nif playbook.inputs.archive_operation:\\n  inputs.archive_operation = playbook.inputs.archive_operation\\n\\nif playbook.inputs.ms_groupteam_id:\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\n\\nelif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\n\\nelif playbook.inputs.ms_groupteam_name:\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\n\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"archive_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1o3ijgc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1o2aght\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1o3ijgc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9057c6e3-89b9-4b79-98a3-9a8e5582e4bd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1o2aght\u003c/incoming\u003e\u003coutgoing\u003eFlow_0jlwb5l\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1o2aght\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0jlwb5l\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0jlwb5l\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0f085466_0984_4ad4_b822_0f71dd9a75af\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jlwb5l\" id=\"Flow_0jlwb5l_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1o2aght\" id=\"Flow_1o2aght_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1o3ijgc\" id=\"Flow_1o3ijgc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0f085466_0984_4ad4_b822_0f71dd9a75af\" isExecutable=\"true\" name=\"playbook_0f085466_0984_4ad4_b822_0f71dd9a75af\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1o3ijgc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Archive Team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"553efbec-00dc-4205-8845-fbda91742028\"\u003e{\"inputs\":{\"5bc4e7ce-8aa4-42b9-af61-7a9a1c51de1f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"11cbdf5e-aa22-4b99-85d3-98790f9de82e\"}},\"4b0f234f-0474-4334-b146-a42f8b941d59\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"86fbad8b-a5dd-45b8-a7e8-f3f19afce0a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"31e87c41-6cc5-4a48-809b-69fc8a1d9671\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"inputs.archive_operation = \\\"Archive\\\"\\ninputs.archive_operation = getattr(playbook.inputs, \\\"archive_operation\\\")\\n\\nif hasattr(playbook.inputs, \\\"ms_groupteam_id\\\"):\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\n\\nelif hasattr(playbook.inputs, \\\"ms_group_mail_nickname\\\"):\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\n\\nelif hasattr(playbook.inputs, \\\"ms_groupteam_name\\\"):\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\n\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"archive_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1o3ijgc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1o2aght\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1o3ijgc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9057c6e3-89b9-4b79-98a3-9a8e5582e4bd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1o2aght\u003c/incoming\u003e\u003coutgoing\u003eFlow_0jlwb5l\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1o2aght\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0jlwb5l\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0jlwb5l\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0f085466_0984_4ad4_b822_0f71dd9a75af\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jlwb5l\" id=\"Flow_0jlwb5l_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1o2aght\" id=\"Flow_1o2aght_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1o3ijgc\" id=\"Flow_1o3ijgc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683917083765,
+      "create_date": 1690202977353,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_0f085466_0984_4ad4_b822_0f71dd9a75af",
@@ -1761,7 +1572,7 @@
             "deprecated": false,
             "export_key": "playbook_0f085466_0984_4ad4_b822_0f71dd9a75af/archive_operation",
             "hide_notification": false,
-            "id": 4447,
+            "id": 4443,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1776,7 +1587,7 @@
             "templates": [],
             "text": "Operation",
             "tooltip": "Specify the operation to be performed",
-            "type_id": 1040,
+            "type_id": 1023,
             "uuid": "62027768-ffb0-45b3-8ca4-bde246374a4d",
             "values": [
               {
@@ -1786,7 +1597,7 @@
                 "label": "Archive",
                 "properties": null,
                 "uuid": "86ac6cbb-180d-4910-a27c-2dc878012032",
-                "value": 935
+                "value": 911
               },
               {
                 "default": false,
@@ -1795,7 +1606,7 @@
                 "label": "Unarchive",
                 "properties": null,
                 "uuid": "179a08f4-3ad7-4844-8f74-f593b615949c",
-                "value": 936
+                "value": 912
               }
             ]
           },
@@ -1809,7 +1620,7 @@
             "deprecated": false,
             "export_key": "playbook_0f085466_0984_4ad4_b822_0f71dd9a75af/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4448,
+            "id": 4444,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1824,7 +1635,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1040,
+            "type_id": 1023,
             "uuid": "fb98882b-cc71-4eaf-8c37-ae3cc888c0de",
             "values": []
           },
@@ -1838,7 +1649,7 @@
             "deprecated": false,
             "export_key": "playbook_0f085466_0984_4ad4_b822_0f71dd9a75af/ms_groupteam_id",
             "hide_notification": false,
-            "id": 4449,
+            "id": 4445,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1853,7 +1664,7 @@
             "templates": [],
             "text": "Group/Team ID",
             "tooltip": "Unique ID assigned to the Group or Team object while being created",
-            "type_id": 1040,
+            "type_id": 1023,
             "uuid": "f638ba2e-997f-4a4f-b2f8-51ed63dafcc6",
             "values": []
           },
@@ -1867,7 +1678,7 @@
             "deprecated": false,
             "export_key": "playbook_0f085466_0984_4ad4_b822_0f71dd9a75af/ms_groupteam_name",
             "hide_notification": false,
-            "id": 4450,
+            "id": 4446,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1882,7 +1693,7 @@
             "templates": [],
             "text": "Group/Team Name",
             "tooltip": "Name of the Microsoft Group or Team",
-            "type_id": 1040,
+            "type_id": 1023,
             "uuid": "e2d74c72-4d17-4f11-b931-da452ec02be4",
             "values": []
           }
@@ -1907,32 +1718,32 @@
         "uuid": "ccc32e4b-5b72-46e0-b1e7-0245aef0a15e"
       },
       "has_logical_errors": false,
-      "id": 28,
+      "id": 13,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684172109840,
+      "last_modified_time": 1690204883138,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1683919974613,
+          "created_date": 1690202977540,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 53,
+          "id": 36,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684172107355,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690203604058,
           "name": "post process",
           "object_type": "task",
           "playbook_handle": "ms_teams_archive_team_from_task_pb",
           "programmatic_name": "ms_teams_archive_team_from_task_pb_post_process",
-          "script_text": "results = playbook.functions.results.archive_results\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to archive the Microsoft Team\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Team Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eThe Team associated with this Group has now been {content.get(\u0027teamsEnabled\u0027)}.\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\u0027displayName\u0027)}\n  \u003cbr /\u003eDescription: {content.get(\u0027description\u0027)}\n  \u003cbr /\u003eTeams Enabled: {content.get(\u0027teamsEnabled\u0027)}\n  \u003cbr /\u003eID: {content.get(\u0027id\u0027)}\n  \u003cbr /\u003eMail: {content.get(\u0027mail\u0027)}\n  \u003cbr /\u003eVisibility: {content.get(\u0027visibility\u0027)}\n  \u003cbr /\u003eGroup Types: {content.get(\u0027groupTypes\u0027)}\n  \u003cbr /\u003eCreated date and time: {content.get(\u0027createdDateTime\u0027)}\"\"\"\n  if content.get(\"unfoundUsers\"):\n    text += f\"\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\u0027unfoundUsers\u0027)}\"\n\nnote = helper.createRichText(text)\ntask.addNote(note)",
+          "script_text": "results = playbook.functions.results.archive_results\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to archive the Microsoft Team\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Team Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eThe Team associated with this Group has now been {content.get(\u0027teamsEnabled\u0027)}.\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\u0027displayName\u0027)}\n  \u003cbr /\u003eDescription: {content.get(\u0027description\u0027)}\n  \u003cbr /\u003eTeams Enabled: {content.get(\u0027teamsEnabled\u0027)}\n  \u003cbr /\u003eID: {content.get(\u0027id\u0027)}\n  \u003cbr /\u003eMail: {content.get(\u0027mail\u0027)}\n  \u003cbr /\u003eVisibility: {content.get(\u0027visibility\u0027)}\n  \u003cbr /\u003eGroup Types: {content.get(\u0027groupTypes\u0027)}\n  \u003cbr /\u003eCreated date and time: {content.get(\u0027createdDateTime\u0027)}\"\"\"\n  if content.get(\"unfoundUsers\"):\n    text += f\"\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\u0027unfoundUsers\u0027)}\"\n\ntask.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "9057c6e3-89b9-4b79-98a3-9a8e5582e4bd"
         }
@@ -1982,7 +1793,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_0f085466-0984-4ad4-b822-0f71dd9a75af",
-        "id": 28,
+        "id": 15,
         "name": "playbook_0f085466_0984_4ad4_b822_0f71dd9a75af",
         "type": "playbook",
         "uuid": "8d41b99c-088d-46b2-a28d-f98dac0a3429"
@@ -1990,19 +1801,19 @@
       "tags": [],
       "type": "default",
       "uuid": "0f085466-0984-4ad4-b822-0f71dd9a75af",
-      "version": 9
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef\" isExecutable=\"true\" name=\"playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1176dgu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create Channel\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d89ac27e-9c8b-4383-a4da-3c5f901a74cb\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ms_channel_name = playbook.inputs.ms_channel_name if playbook.inputs.ms_channel_name else f\\\"Incident {incident.id} {incident.name}\\\"\\n\\nif playbook.inputs.ms_description:\\n    inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n    description = incident.description.content if incident.description else \\\"\\\"\\n    inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\\n\\nif playbook.inputs.ms_groupteam_id:\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nelif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif playbook.inputs.ms_groupteam_name:\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_channel_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1176dgu\u003c/incoming\u003e\u003coutgoing\u003eFlow_0sb1n5d\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1176dgu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"79588f42-bbab-4d18-adfd-251cab14ec40\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0sb1n5d\u003c/incoming\u003e\u003coutgoing\u003eFlow_04tjv73\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0sb1n5d\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_04tjv73\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_04tjv73\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04tjv73\" id=\"Flow_04tjv73_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0sb1n5d\" id=\"Flow_0sb1n5d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1176dgu\" id=\"Flow_1176dgu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef\" isExecutable=\"true\" name=\"playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1176dgu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create Channel\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d89ac27e-9c8b-4383-a4da-3c5f901a74cb\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ms_channel_name = playbook.inputs.ms_channel_name if hasattr(playbook.inputs, \\\"ms_channel_name\\\") else f\\\"Incident {incident.id} {incident.name}\\\"\\n\\nif hasattr(playbook.inputs, \\\"ms_description\\\"):\\n    inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n    description = incident.description.content if incident.description else \\\"\\\"\\n    inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\\n\\nif hasattr(playbook.inputs, \\\"ms_groupteam_id\\\"):\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nelif hasattr(playbook.inputs, \\\"ms_group_mail_nickname\\\"):\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif hasattr(playbook.inputs, \\\"ms_groupteam_name\\\"):\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_channel_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1176dgu\u003c/incoming\u003e\u003coutgoing\u003eFlow_0sb1n5d\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1176dgu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"79588f42-bbab-4d18-adfd-251cab14ec40\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0sb1n5d\u003c/incoming\u003e\u003coutgoing\u003eFlow_04tjv73\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0sb1n5d\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_04tjv73\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_04tjv73\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04tjv73\" id=\"Flow_04tjv73_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0sb1n5d\" id=\"Flow_0sb1n5d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1176dgu\" id=\"Flow_1176dgu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683917238851,
+      "create_date": 1690202977917,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef",
@@ -2028,7 +1839,7 @@
             "deprecated": false,
             "export_key": "playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef/ms_channel_name",
             "hide_notification": false,
-            "id": 4451,
+            "id": 4447,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2043,7 +1854,7 @@
             "templates": [],
             "text": "Channel Name",
             "tooltip": "Name of the Microsoft Teams Channel",
-            "type_id": 1041,
+            "type_id": 1024,
             "uuid": "ac6e3754-75f2-4a2f-b791-0a21b00a18f8",
             "values": []
           },
@@ -2057,7 +1868,7 @@
             "deprecated": false,
             "export_key": "playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef/ms_description",
             "hide_notification": false,
-            "id": 4452,
+            "id": 4448,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2072,7 +1883,7 @@
             "templates": [],
             "text": "Description",
             "tooltip": "Description for the MS Graph Object (Group / Team / Channel) that is being created",
-            "type_id": 1041,
+            "type_id": 1024,
             "uuid": "235b02dd-f0dd-41f1-9238-e5eac1e11770",
             "values": []
           },
@@ -2086,7 +1897,7 @@
             "deprecated": false,
             "export_key": "playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4453,
+            "id": 4449,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2101,7 +1912,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1041,
+            "type_id": 1024,
             "uuid": "1e791c2a-a91a-41b5-932c-39fb7372a564",
             "values": []
           },
@@ -2115,7 +1926,7 @@
             "deprecated": false,
             "export_key": "playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef/ms_groupteam_id",
             "hide_notification": false,
-            "id": 4454,
+            "id": 4450,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2130,7 +1941,7 @@
             "templates": [],
             "text": "Group/Team ID",
             "tooltip": "Unique ID assigned to the Group or Team object while being created",
-            "type_id": 1041,
+            "type_id": 1024,
             "uuid": "e6ee5a94-8853-43ba-9fa0-41e4b213585c",
             "values": []
           },
@@ -2144,7 +1955,7 @@
             "deprecated": false,
             "export_key": "playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef/ms_groupteam_name",
             "hide_notification": false,
-            "id": 4455,
+            "id": 4451,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2159,7 +1970,7 @@
             "templates": [],
             "text": "Group/Team Name",
             "tooltip": "Name of the Microsoft Group or Team",
-            "type_id": 1041,
+            "type_id": 1024,
             "uuid": "c1b99de8-7ddd-4536-a1a7-d91205370171",
             "values": []
           }
@@ -2184,32 +1995,32 @@
         "uuid": "86c59edf-9e14-4728-a5c2-9ff98e8ebf3c"
       },
       "has_logical_errors": false,
-      "id": 29,
+      "id": 14,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684175169764,
+      "last_modified_time": 1690205113307,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1683921780062,
+          "created_date": 1690202978198,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 56,
+          "id": 37,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684173617905,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690203253987,
           "name": "post process",
           "object_type": "incident",
           "playbook_handle": "ms_teams_create_channel_pb",
           "programmatic_name": "ms_teams_create_channel_pb_post_process",
-          "script_text": "results = playbook.functions.results.create_channel_results\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text = f\u0027\u0027\u0027\u003ca href=\"{content.get(\"webUrl\")}\"\u003eClick here\u003c/a\u003e\n  \u003cb\u003eMicrosoft Channel Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eWeb URL: {url}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {True}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"email\")}\n  \u003cbr /\u003eMembership Type: {content.get(\"membershipType\")}\u0027\u0027\u0027\n\nnote = helper.createRichText(text)\nincident.addNote(note)",
+          "script_text": "results = playbook.functions.results.create_channel_results\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text = f\u0027\u0027\u0027\u003ca href=\"{content.get(\"webUrl\", \"\")}\"\u003eClick here\u003c/a\u003e\n  \u003cb\u003eMicrosoft Channel Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\", \"\")}\n  \u003cbr /\u003eWeb URL: {content.get(\"webUrl\", \"\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\", \"\")}\n  \u003cbr /\u003eTeams Enabled: {True}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"email\", \"\")}\n  \u003cbr /\u003eMembership Type: {content.get(\"membershipType\")}\u0027\u0027\u0027\n\nincident.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "79588f42-bbab-4d18-adfd-251cab14ec40"
         }
@@ -2267,7 +2078,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_bdf7f089-7ca1-47e5-b648-b3961244b7ef",
-        "id": 29,
+        "id": 16,
         "name": "playbook_bdf7f089_7ca1_47e5_b648_b3961244b7ef",
         "type": "playbook",
         "uuid": "b8a706a0-c3b8-45f1-a975-196c593f7549"
@@ -2275,19 +2086,19 @@
       "tags": [],
       "type": "default",
       "uuid": "bdf7f089-7ca1-47e5-b648-b3961244b7ef",
-      "version": 11
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6\" isExecutable=\"true\" name=\"playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1fz42o7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create Channel\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d89ac27e-9c8b-4383-a4da-3c5f901a74cb\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ms_channel_name = playbook.inputs.ms_channel_name if playbook.inputs.ms_channel_name else f\\\"Incident {incident.id} {incident.name}\\\"\\n\\nif playbook.inputs.ms_description:\\n    inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n    description = incident.description.content if incident.description else \\\"\\\"\\n    inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\\n\\nif playbook.inputs.ms_groupteam_id:\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nelif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif playbook.inputs.ms_groupteam_name:\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_channel_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fz42o7\u003c/incoming\u003e\u003coutgoing\u003eFlow_07iubb6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1fz42o7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1fe93bc8-ef65-43ee-8c2a-8bfb42792c24\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07iubb6\u003c/incoming\u003e\u003coutgoing\u003eFlow_1eb6oel\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_07iubb6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1eb6oel\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1eb6oel\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1eb6oel\" id=\"Flow_1eb6oel_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07iubb6\" id=\"Flow_07iubb6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fz42o7\" id=\"Flow_1fz42o7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6\" isExecutable=\"true\" name=\"playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1fz42o7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create Channel\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d89ac27e-9c8b-4383-a4da-3c5f901a74cb\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ms_channel_name = playbook.inputs.ms_channel_name if hasattr(playbook.inputs, \\\"ms_channel_name\\\") else f\\\"Incident {incident.id} {incident.name}\\\"\\n\\nif hasattr(playbook.inputs, \\\"ms_description\\\"):\\n    inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n    description = incident.description.content if incident.description else \\\"\\\"\\n    inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\\n\\nif hasattr(playbook.inputs, \\\"ms_groupteam_id\\\"):\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nelif hasattr(playbook.inputs, \\\"ms_group_mail_nickname\\\"):\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif hasattr(playbook.inputs, \\\"ms_groupteam_name\\\"):\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_channel_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fz42o7\u003c/incoming\u003e\u003coutgoing\u003eFlow_07iubb6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1fz42o7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1fe93bc8-ef65-43ee-8c2a-8bfb42792c24\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07iubb6\u003c/incoming\u003e\u003coutgoing\u003eFlow_1eb6oel\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_07iubb6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1eb6oel\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1eb6oel\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1eb6oel\" id=\"Flow_1eb6oel_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07iubb6\" id=\"Flow_07iubb6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fz42o7\" id=\"Flow_1fz42o7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683917400064,
+      "create_date": 1690202978559,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6",
@@ -2313,7 +2124,7 @@
             "deprecated": false,
             "export_key": "playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6/ms_channel_name",
             "hide_notification": false,
-            "id": 4456,
+            "id": 4452,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2328,7 +2139,7 @@
             "templates": [],
             "text": "Channel Name",
             "tooltip": "Name of the Microsoft Teams Channel",
-            "type_id": 1042,
+            "type_id": 1025,
             "uuid": "778a1174-6909-425e-8701-f422ef0e17de",
             "values": []
           },
@@ -2342,7 +2153,7 @@
             "deprecated": false,
             "export_key": "playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6/ms_description",
             "hide_notification": false,
-            "id": 4457,
+            "id": 4453,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2357,7 +2168,7 @@
             "templates": [],
             "text": "Description",
             "tooltip": "Description for the MS Graph Object (Group / Team / Channel) that is being created",
-            "type_id": 1042,
+            "type_id": 1025,
             "uuid": "91e7b293-2b2c-44ea-9ef5-aa7af4c2228c",
             "values": []
           },
@@ -2371,7 +2182,7 @@
             "deprecated": false,
             "export_key": "playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4458,
+            "id": 4454,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2386,7 +2197,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1042,
+            "type_id": 1025,
             "uuid": "6f0e9363-4aed-49c8-a36b-51619b325010",
             "values": []
           },
@@ -2400,7 +2211,7 @@
             "deprecated": false,
             "export_key": "playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6/ms_groupteam_id",
             "hide_notification": false,
-            "id": 4459,
+            "id": 4455,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2415,7 +2226,7 @@
             "templates": [],
             "text": "Group/Team ID",
             "tooltip": "Unique ID assigned to the Group or Team object while being created",
-            "type_id": 1042,
+            "type_id": 1025,
             "uuid": "24dd5883-df8b-4d3a-b52a-4c041634e5fa",
             "values": []
           },
@@ -2429,7 +2240,7 @@
             "deprecated": false,
             "export_key": "playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6/ms_groupteam_name",
             "hide_notification": false,
-            "id": 4460,
+            "id": 4456,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2444,7 +2255,7 @@
             "templates": [],
             "text": "Group/Team Name",
             "tooltip": "Name of the Microsoft Group or Team",
-            "type_id": 1042,
+            "type_id": 1025,
             "uuid": "822f39a1-19d7-4b59-9b97-d84f869f66e6",
             "values": []
           }
@@ -2469,32 +2280,32 @@
         "uuid": "fce1c58d-ed4a-4394-a731-9b08b0eafda1"
       },
       "has_logical_errors": false,
-      "id": 30,
+      "id": 15,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684173709756,
+      "last_modified_time": 1690205029180,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1683921715354,
+          "created_date": 1690202978772,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 55,
+          "id": 38,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684173707823,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690203697295,
           "name": "post process",
           "object_type": "task",
           "playbook_handle": "ms_teams_create_channel_from_task_pb",
           "programmatic_name": "ms_teams_create_channel_from_task_pb_post_process",
-          "script_text": "results = playbook.functions.results.create_channel_results\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text = f\u0027\u0027\u0027\u003ca href=\"{content.get(\"webUrl\")}\"\u003eClick here\u003c/a\u003e\n  \u003cb\u003eMicrosoft Channel Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eWeb URL: {url}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {True}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"email\")}\n  \u003cbr /\u003eMembership Type: {content.get(\"membershipType\")}\u0027\u0027\u0027\n\nnote = helper.createRichText(text)\ntask.addNote(note)",
+          "script_text": "results = playbook.functions.results.create_channel_results\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text = f\u0027\u0027\u0027\u003ca href=\"{content.get(\"webUrl\", \"\")}\"\u003eClick here\u003c/a\u003e\n  \u003cb\u003eMicrosoft Channel Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eWeb URL: {content.get(\"webUrl\", \"\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {True}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"email\")}\n  \u003cbr /\u003eMembership Type: {content.get(\"membershipType\")}\u0027\u0027\u0027\n\ntask.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "1fe93bc8-ef65-43ee-8c2a-8bfb42792c24"
         }
@@ -2552,7 +2363,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_b24e38a1-567d-48c6-9bfd-194debb4b5a6",
-        "id": 30,
+        "id": 17,
         "name": "playbook_b24e38a1_567d_48c6_9bfd_194debb4b5a6",
         "type": "playbook",
         "uuid": "8c7a43a6-908d-4c01-a083-4e713a327059"
@@ -2560,19 +2371,19 @@
       "tags": [],
       "type": "default",
       "uuid": "b24e38a1-567d-48c6-9bfd-194debb4b5a6",
-      "version": 10
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
         "content_version": 4,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6437d8f9_acb1_4233_a4e7_5421820108f2\" isExecutable=\"true\" name=\"playbook_6437d8f9_acb1_4233_a4e7_5421820108f2\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0vi9wbb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"120d2055-a0de-413b-b5d7-444d289dd469\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}},\"958f0953-8b6f-4472-b786-b9ae4351ddfe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"3f35f1a9-f5d6-440a-a825-66a340aeaefe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d6f67e8d-3562-48a3-8164-c2440b2c70f0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"caa4ac0d-4869-46bb-b0f5-e585c43b396e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6c7730f3-4872-4709-b60a-cabee7e5a208\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"86fbad8b-a5dd-45b8-a7e8-f3f19afce0a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"if task:\\n  inputs.task_id = task.id\\n\\ninputs.incident_id = str(incident.id)\\ninputs.ms_group_name = f\\\"Incident {incident.id}: {incident.name}\\\" if playbook.inputs.ms_group_name is None else playbook.inputs.ms_group_name\\n\\nif playbook.inputs.ms_owners_list:\\n  inputs.ms_owners_list = playbook.inputs.ms_owners_list\\n\\nif playbook.inputs.add_members_incident:\\n  _value = playbook.inputs.add_members_incident.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n\\nif playbook.inputs.additional_members.content:\\n  inputs.additional_members = playbook.inputs.additional_members.content\\n\\nif playbook.inputs.ms_description:\\n  inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n  description = incident.description.content if incident.description else \\\"\\\"\\n  inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\\n\\nif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_group_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0vi9wbb\u003c/incoming\u003e\u003coutgoing\u003eFlow_17gq7wu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0vi9wbb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0e806448-9b11-4e40-a548-a7aaa943edd3\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17gq7wu\u003c/incoming\u003e\u003coutgoing\u003eFlow_1l3tl7l\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17gq7wu\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1l3tl7l\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1l3tl7l\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6437d8f9_acb1_4233_a4e7_5421820108f2\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0vi9wbb\" id=\"Flow_0vi9wbb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17gq7wu\" id=\"Flow_17gq7wu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1l3tl7l\" id=\"Flow_1l3tl7l_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6437d8f9_acb1_4233_a4e7_5421820108f2\" isExecutable=\"true\" name=\"playbook_6437d8f9_acb1_4233_a4e7_5421820108f2\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0vi9wbb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"120d2055-a0de-413b-b5d7-444d289dd469\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}},\"958f0953-8b6f-4472-b786-b9ae4351ddfe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"3f35f1a9-f5d6-440a-a825-66a340aeaefe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d6f67e8d-3562-48a3-8164-c2440b2c70f0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"caa4ac0d-4869-46bb-b0f5-e585c43b396e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6c7730f3-4872-4709-b60a-cabee7e5a208\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"86fbad8b-a5dd-45b8-a7e8-f3f19afce0a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"if task:\\n  inputs.task_id = task.id\\n\\ninputs.incident_id = str(incident.id)\\ninputs.ms_group_name = f\\\"Incident {incident.id}: {incident.name}\\\" if hasattr(playbook.inputs, \\\"ms_group_name\\\") else playbook.inputs.ms_group_name\\ninputs.ms_owners_list = getattr(playbook.inputs, \\\"ms_owners_list\\\")\\n\\nif hasattr(playbook.inputs, \\\"add_members_incident\\\"):\\n  _value = playbook.inputs.add_members_incident.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n\\ninputs.additional_members = getattr(playbook.inputs, \\\"additional_members\\\", {\\\"content\\\": \\\"\\\"}).content\\n\\nif hasattr(playbook.inputs, \\\"ms_description\\\"):\\n  inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n  description = incident.description.content if incident.description else \\\"\\\"\\n  inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\\n\\ninputs.ms_group_mail_nickname = getattr(playbook.inputs, \\\"ms_group_mail_nickname\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_group_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0vi9wbb\u003c/incoming\u003e\u003coutgoing\u003eFlow_17gq7wu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0vi9wbb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0e806448-9b11-4e40-a548-a7aaa943edd3\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17gq7wu\u003c/incoming\u003e\u003coutgoing\u003eFlow_1l3tl7l\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17gq7wu\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1l3tl7l\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1l3tl7l\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6437d8f9_acb1_4233_a4e7_5421820108f2\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1l3tl7l\" id=\"Flow_1l3tl7l_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17gq7wu\" id=\"Flow_17gq7wu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0vi9wbb\" id=\"Flow_0vi9wbb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683917663523,
+      "create_date": 1690202979159,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_6437d8f9_acb1_4233_a4e7_5421820108f2",
@@ -2598,7 +2409,7 @@
             "deprecated": false,
             "export_key": "playbook_6437d8f9_acb1_4233_a4e7_5421820108f2/add_members_incident",
             "hide_notification": false,
-            "id": 4461,
+            "id": 4457,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2613,7 +2424,7 @@
             "templates": [],
             "text": "Add members",
             "tooltip": "Allows for adding incident members to Team/Group",
-            "type_id": 1043,
+            "type_id": 1026,
             "uuid": "6303c4bc-c8ff-46fc-b9af-36c24c85a5be",
             "values": [
               {
@@ -2623,7 +2434,7 @@
                 "label": "None",
                 "properties": null,
                 "uuid": "df814c3f-46b6-4afa-98c6-a7980263024d",
-                "value": 937
+                "value": 913
               },
               {
                 "default": false,
@@ -2632,7 +2443,7 @@
                 "label": "Al incident members",
                 "properties": null,
                 "uuid": "fbce810f-1ecc-4e36-9a07-b71e0855a648",
-                "value": 938
+                "value": 914
               }
             ]
           },
@@ -2646,7 +2457,7 @@
             "deprecated": false,
             "export_key": "playbook_6437d8f9_acb1_4233_a4e7_5421820108f2/additional_members",
             "hide_notification": false,
-            "id": 4462,
+            "id": 4458,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -2661,7 +2472,7 @@
             "templates": [],
             "text": "Additional members",
             "tooltip": "Add members who are not members of this incident or task",
-            "type_id": 1043,
+            "type_id": 1026,
             "uuid": "151982ab-3cac-4f34-a884-bbc076b71dd1",
             "values": []
           },
@@ -2675,7 +2486,7 @@
             "deprecated": false,
             "export_key": "playbook_6437d8f9_acb1_4233_a4e7_5421820108f2/ms_description",
             "hide_notification": false,
-            "id": 4463,
+            "id": 4459,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2690,7 +2501,7 @@
             "templates": [],
             "text": "Description",
             "tooltip": "Description for the MS Graph Object (Group / Team / Channel) that is being created",
-            "type_id": 1043,
+            "type_id": 1026,
             "uuid": "c2231c8b-681b-4a42-846c-65e8b4d15885",
             "values": []
           },
@@ -2704,7 +2515,7 @@
             "deprecated": false,
             "export_key": "playbook_6437d8f9_acb1_4233_a4e7_5421820108f2/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4464,
+            "id": 4460,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2714,12 +2525,13 @@
             "placeholder": "",
             "prefix": null,
             "read_only": false,
+            "required": "always",
             "rich_text": false,
             "tags": [],
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1043,
+            "type_id": 1026,
             "uuid": "a17fc7db-9ef6-46fb-a96f-3d86e3004d40",
             "values": []
           },
@@ -2733,7 +2545,7 @@
             "deprecated": false,
             "export_key": "playbook_6437d8f9_acb1_4233_a4e7_5421820108f2/ms_group_name",
             "hide_notification": false,
-            "id": 4465,
+            "id": 4461,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2748,7 +2560,7 @@
             "templates": [],
             "text": "Group name",
             "tooltip": "Name of the Group to be created",
-            "type_id": 1043,
+            "type_id": 1026,
             "uuid": "6a35d917-75a5-4719-a41b-781936e61921",
             "values": []
           },
@@ -2762,7 +2574,7 @@
             "deprecated": false,
             "export_key": "playbook_6437d8f9_acb1_4233_a4e7_5421820108f2/ms_owners_list",
             "hide_notification": false,
-            "id": 4466,
+            "id": 4462,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2777,7 +2589,7 @@
             "templates": [],
             "text": "Owners",
             "tooltip": "Email addresses of the MS Team/Group Owners.",
-            "type_id": 1043,
+            "type_id": 1026,
             "uuid": "c47d5d3d-5dc7-4210-b78f-b60fe2d7f378",
             "values": []
           }
@@ -2802,32 +2614,32 @@
         "uuid": "02a9f610-7e00-45d3-af57-a3598b671d57"
       },
       "has_logical_errors": false,
-      "id": 31,
+      "id": 16,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684162705091,
+      "last_modified_time": 1690205761596,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684162687386,
+          "created_date": 1690202979378,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 58,
+          "id": 39,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684162687402,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690203889487,
           "name": "post process",
           "object_type": "incident",
           "playbook_handle": "ms_teams_create_group_pb",
           "programmatic_name": "ms_teams_create_group_pb_post_process",
-          "script_text": "results = playbook.functions.results.create_group_results\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\nnote = helper.createRichText(text)\nincident.addNote(note)",
+          "script_text": "results = playbook.functions.results.create_group_results\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\nincident.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "0e806448-9b11-4e40-a548-a7aaa943edd3"
         }
@@ -2893,7 +2705,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_6437d8f9-acb1-4233-a4e7-5421820108f2",
-        "id": 31,
+        "id": 18,
         "name": "playbook_6437d8f9_acb1_4233_a4e7_5421820108f2",
         "type": "playbook",
         "uuid": "068abff3-773b-4329-9d15-64f40ddd297b"
@@ -2901,19 +2713,19 @@
       "tags": [],
       "type": "default",
       "uuid": "6437d8f9-acb1-4233-a4e7-5421820108f2",
-      "version": 8
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049\" isExecutable=\"true\" name=\"playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1nz9r2e\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"120d2055-a0de-413b-b5d7-444d289dd469\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}},\"958f0953-8b6f-4472-b786-b9ae4351ddfe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"3f35f1a9-f5d6-440a-a825-66a340aeaefe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d6f67e8d-3562-48a3-8164-c2440b2c70f0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"caa4ac0d-4869-46bb-b0f5-e585c43b396e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6c7730f3-4872-4709-b60a-cabee7e5a208\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"86fbad8b-a5dd-45b8-a7e8-f3f19afce0a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"if task:\\n  inputs.task_id = task.id\\n\\ninputs.incident_id = str(incident.id)\\ninputs.ms_group_name = f\\\"Incident {incident.id}: {incident.name}\\\" if playbook.inputs.ms_group_name is None else playbook.inputs.ms_group_name\\n\\nif playbook.inputs.ms_owners_list:\\n  inputs.ms_owners_list = playbook.inputs.ms_owners_list\\n\\nif playbook.inputs.add_members_incident:\\n  _value = playbook.inputs.add_members_incident.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n\\nif playbook.inputs.additional_members.content:\\n  inputs.additional_members = playbook.inputs.additional_members.content\\n\\nif playbook.inputs.ms_description:\\n  inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n  description = incident.description.content if incident.description else \\\"\\\"\\n  inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\\n\\nif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_group_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1nz9r2e\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qwu3nh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1nz9r2e\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"97056667-5e07-496e-925b-63c4c8ca71fd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qwu3nh\u003c/incoming\u003e\u003coutgoing\u003eFlow_074smyn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1qwu3nh\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_074smyn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_074smyn\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_074smyn\" id=\"Flow_074smyn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qwu3nh\" id=\"Flow_1qwu3nh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nz9r2e\" id=\"Flow_1nz9r2e_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 4,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049\" isExecutable=\"true\" name=\"playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1nz9r2e\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"120d2055-a0de-413b-b5d7-444d289dd469\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}},\"958f0953-8b6f-4472-b786-b9ae4351ddfe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"3f35f1a9-f5d6-440a-a825-66a340aeaefe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d6f67e8d-3562-48a3-8164-c2440b2c70f0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"caa4ac0d-4869-46bb-b0f5-e585c43b396e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6c7730f3-4872-4709-b60a-cabee7e5a208\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"86fbad8b-a5dd-45b8-a7e8-f3f19afce0a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"if task:\\n  inputs.task_id = task.id\\n\\ninputs.incident_id = str(incident.id)\\ninputs.ms_group_name = f\\\"Incident {incident.id}: {incident.name}\\\" if playbook.inputs.ms_group_name else playbook.inputs.ms_group_name\\ninputs.ms_owners_list = getattr(playbook.inputs, \\\"ms_owners_list\\\")\\n\\nif hasattr(playbook.inputs, \\\"add_members_task\\\"):\\n  _value = playbook.inputs.add_members_task.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n\\ninputs.additional_members = getattr(playbook.inputs, \\\"additional_members\\\", {\\\"content\\\": \\\"\\\"}).content\\n\\nif hasattr(playbook.inputs, \\\"ms_description\\\"):\\n  inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n  description = incident.description.content if incident.description else \\\"\\\"\\n  inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\\n\\ninputs.ms_group_mail_nickname = getattr(playbook.inputs, \\\"ms_group_mail_nickname\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_group_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1nz9r2e\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qwu3nh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1nz9r2e\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"97056667-5e07-496e-925b-63c4c8ca71fd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qwu3nh\u003c/incoming\u003e\u003coutgoing\u003eFlow_074smyn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1qwu3nh\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_074smyn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_074smyn\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_074smyn\" id=\"Flow_074smyn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qwu3nh\" id=\"Flow_1qwu3nh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nz9r2e\" id=\"Flow_1nz9r2e_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683917892056,
+      "create_date": 1690202979665,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049",
@@ -2939,7 +2751,7 @@
             "deprecated": false,
             "export_key": "playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049/add_members_task",
             "hide_notification": false,
-            "id": 4467,
+            "id": 4463,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2954,7 +2766,7 @@
             "templates": [],
             "text": "Add members",
             "tooltip": "Allows for adding incident or task members to Team/Group",
-            "type_id": 1044,
+            "type_id": 1027,
             "uuid": "b0d41182-ecea-433e-87ec-1034dc10d972",
             "values": [
               {
@@ -2964,7 +2776,7 @@
                 "label": "None",
                 "properties": null,
                 "uuid": "0b5de91e-b928-4572-af84-d00761741391",
-                "value": 939
+                "value": 915
               },
               {
                 "default": false,
@@ -2973,7 +2785,7 @@
                 "label": "All task members",
                 "properties": null,
                 "uuid": "762145d3-a469-4c5f-9fbf-24b2cbdffc00",
-                "value": 940
+                "value": 916
               },
               {
                 "default": false,
@@ -2982,7 +2794,7 @@
                 "label": "All incident members",
                 "properties": null,
                 "uuid": "4ba83f3e-5baa-4b60-8086-6551beea365e",
-                "value": 941
+                "value": 917
               }
             ]
           },
@@ -2996,7 +2808,7 @@
             "deprecated": false,
             "export_key": "playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049/additional_members",
             "hide_notification": false,
-            "id": 4468,
+            "id": 4464,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -3011,7 +2823,7 @@
             "templates": [],
             "text": "Additional members",
             "tooltip": "Add members who are not members of this incident or task",
-            "type_id": 1044,
+            "type_id": 1027,
             "uuid": "29855bd5-0d37-4b30-8d63-db9e24964693",
             "values": []
           },
@@ -3025,7 +2837,7 @@
             "deprecated": false,
             "export_key": "playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049/ms_description",
             "hide_notification": false,
-            "id": 4469,
+            "id": 4465,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3040,7 +2852,7 @@
             "templates": [],
             "text": "Description",
             "tooltip": "Description for the MS Graph Object (Group / Team / Channel) that is being created",
-            "type_id": 1044,
+            "type_id": 1027,
             "uuid": "3b3104b0-7941-400d-bb16-bb96ffc4cbf0",
             "values": []
           },
@@ -3054,7 +2866,7 @@
             "deprecated": false,
             "export_key": "playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4470,
+            "id": 4466,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3069,7 +2881,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1044,
+            "type_id": 1027,
             "uuid": "f0e67de4-f231-4546-a36a-b759d461bc16",
             "values": []
           },
@@ -3083,7 +2895,7 @@
             "deprecated": false,
             "export_key": "playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049/ms_group_name",
             "hide_notification": false,
-            "id": 4471,
+            "id": 4467,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3098,7 +2910,7 @@
             "templates": [],
             "text": "Group name",
             "tooltip": "Name of the Group to be created",
-            "type_id": 1044,
+            "type_id": 1027,
             "uuid": "538a972d-4cab-4389-9452-323e13f5dca3",
             "values": []
           },
@@ -3112,7 +2924,7 @@
             "deprecated": false,
             "export_key": "playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049/ms_owners_list",
             "hide_notification": false,
-            "id": 4472,
+            "id": 4468,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3127,7 +2939,7 @@
             "templates": [],
             "text": "Owners",
             "tooltip": "Email addresses of the MS Team/Group Owners.",
-            "type_id": 1044,
+            "type_id": 1027,
             "uuid": "2a188f65-5308-481c-bacd-1e0abd7eb73a",
             "values": []
           }
@@ -3152,32 +2964,32 @@
         "uuid": "dea34eb1-8306-48b2-91ca-083b06cece5f"
       },
       "has_logical_errors": false,
-      "id": 32,
+      "id": 17,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684162800848,
+      "last_modified_time": 1690206037430,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1683922137569,
+          "created_date": 1690202979870,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 57,
+          "id": 40,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684162756828,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690203857258,
           "name": "post process",
           "object_type": "task",
           "playbook_handle": "ms_teams_create_group_from_task_pb",
           "programmatic_name": "ms_teams_create_group_from_task_pb_post_process",
-          "script_text": "results = playbook.functions.results.create_group_results\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\nnote = helper.createRichText(text)\ntask.addNote(note)",
+          "script_text": "results = playbook.functions.results.create_group_results\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\ntask.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "97056667-5e07-496e-925b-63c4c8ca71fd"
         }
@@ -3243,7 +3055,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_f204cb1e-ce81-4839-a7dd-1c1a28253049",
-        "id": 32,
+        "id": 19,
         "name": "playbook_f204cb1e_ce81_4839_a7dd_1c1a28253049",
         "type": "playbook",
         "uuid": "d53912ae-672b-48f3-b800-60a3809bd4d9"
@@ -3251,19 +3063,19 @@
       "tags": [],
       "type": "default",
       "uuid": "f204cb1e-ce81-4839-a7dd-1c1a28253049",
-      "version": 9
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87\" isExecutable=\"true\" name=\"playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_08v9x15\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9acc046d-60f3-4be8-97cf-c966436e6f9b\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}},\"958f0953-8b6f-4472-b786-b9ae4351ddfe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"3f35f1a9-f5d6-440a-a825-66a340aeaefe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"8c740ee5-6b2d-4555-be2e-e0dce0fe93fc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6c7730f3-4872-4709-b60a-cabee7e5a208\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"caa4ac0d-4869-46bb-b0f5-e585c43b396e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"if task:\\n  inputs.task_id = task.id\\n\\ninputs.incident_id = str(incident.id)\\ninputs.ms_team_name = f\\\"Incident {incident.id}: {incident.name}\\\" if playbook.inputs.ms_team_name is None else playbook.inputs.ms_team_name\\n\\nif playbook.inputs.ms_owners_list:\\n  inputs.ms_owners_list = playbook.inputs.ms_owners_list\\n\\nif playbook.inputs.add_members_incident:\\n  _value = playbook.inputs.add_members_incident.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n\\nif playbook.inputs.additional_members.content:\\n  inputs.additional_members = playbook.inputs.additional_members.content\\n\\nif playbook.inputs.ms_description:\\n  inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n  description = incident.description.content if incident.description else \\\"\\\"\\n  inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_team\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08v9x15\u003c/incoming\u003e\u003coutgoing\u003eFlow_1cklqm4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_08v9x15\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5944ec76-664f-4635-af08-c3e0debc17b5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cklqm4\u003c/incoming\u003e\u003coutgoing\u003eFlow_1foedcn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1cklqm4\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1foedcn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1foedcn\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08v9x15\" id=\"Flow_08v9x15_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cklqm4\" id=\"Flow_1cklqm4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1foedcn\" id=\"Flow_1foedcn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87\" isExecutable=\"true\" name=\"playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_08v9x15\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9acc046d-60f3-4be8-97cf-c966436e6f9b\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}},\"958f0953-8b6f-4472-b786-b9ae4351ddfe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"3f35f1a9-f5d6-440a-a825-66a340aeaefe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"8c740ee5-6b2d-4555-be2e-e0dce0fe93fc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6c7730f3-4872-4709-b60a-cabee7e5a208\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"caa4ac0d-4869-46bb-b0f5-e585c43b396e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"if task:\\n  inputs.task_id = task.id\\n\\ninputs.incident_id = str(incident.id)\\ninputs.ms_team_name = f\\\"Incident {incident.id}: {incident.name}\\\" if hasattr(playbook.inputs, \\\"ms_team_name\\\") else playbook.inputs.ms_team_name\\n\\ninputs.ms_owners_list = getattr(playbook.inputs, \\\"ms_owners_list\\\")\\n\\nif hasattr(playbook.inputs, \\\"add_members_incident\\\"):\\n  _value = playbook.inputs.add_members_incident.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n\\ninputs.additional_members = getattr(playbook.inputs, \\\"additional_members\\\", {\\\"content\\\", \\\"\\\"}).content\\n\\nif hasattr(playbook.inputs, \\\"ms_description\\\"):\\n  inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n  description = incident.description.content if incident.description else \\\"\\\"\\n  inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_team\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08v9x15\u003c/incoming\u003e\u003coutgoing\u003eFlow_1cklqm4\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_08v9x15\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5944ec76-664f-4635-af08-c3e0debc17b5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cklqm4\u003c/incoming\u003e\u003coutgoing\u003eFlow_1foedcn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1cklqm4\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1foedcn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1foedcn\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1foedcn\" id=\"Flow_1foedcn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cklqm4\" id=\"Flow_1cklqm4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08v9x15\" id=\"Flow_08v9x15_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.042\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683918072970,
+      "create_date": 1690202980204,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87",
@@ -3289,7 +3101,7 @@
             "deprecated": false,
             "export_key": "playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87/add_members_incident",
             "hide_notification": false,
-            "id": 4473,
+            "id": 4469,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -3304,7 +3116,7 @@
             "templates": [],
             "text": "Add members",
             "tooltip": "Allows for adding incident members to Team/Group",
-            "type_id": 1045,
+            "type_id": 1028,
             "uuid": "6e7d1e88-4052-4f2d-a553-8f8239f83e5a",
             "values": [
               {
@@ -3314,7 +3126,7 @@
                 "label": "None",
                 "properties": null,
                 "uuid": "ba8116af-d879-4806-bdeb-d5c35eea7274",
-                "value": 942
+                "value": 918
               },
               {
                 "default": false,
@@ -3323,7 +3135,7 @@
                 "label": "All incident members",
                 "properties": null,
                 "uuid": "4f92de1f-3f60-4b63-a2ce-697f6020a806",
-                "value": 943
+                "value": 919
               }
             ]
           },
@@ -3337,7 +3149,7 @@
             "deprecated": false,
             "export_key": "playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87/additional_members",
             "hide_notification": false,
-            "id": 4474,
+            "id": 4470,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -3352,7 +3164,7 @@
             "templates": [],
             "text": "Additional members",
             "tooltip": "Add members who are not members of this incident or task",
-            "type_id": 1045,
+            "type_id": 1028,
             "uuid": "f022ca56-c84f-4fae-b8be-b6e677a7b81b",
             "values": []
           },
@@ -3366,7 +3178,7 @@
             "deprecated": false,
             "export_key": "playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87/ms_description",
             "hide_notification": false,
-            "id": 4475,
+            "id": 4471,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3381,7 +3193,7 @@
             "templates": [],
             "text": "Description",
             "tooltip": "Description for the MS Graph Object (Group / Team / Channel) that is being created",
-            "type_id": 1045,
+            "type_id": 1028,
             "uuid": "33e1f5da-f660-42ca-911b-29986d37d27c",
             "values": []
           },
@@ -3395,7 +3207,7 @@
             "deprecated": false,
             "export_key": "playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87/ms_owners_list",
             "hide_notification": false,
-            "id": 4476,
+            "id": 4472,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3410,7 +3222,7 @@
             "templates": [],
             "text": "Owners",
             "tooltip": "Email addresses of the MS Team/Group Owners.",
-            "type_id": 1045,
+            "type_id": 1028,
             "uuid": "457c615a-a10a-4979-a5d6-0eed15ad217a",
             "values": []
           },
@@ -3424,7 +3236,7 @@
             "deprecated": false,
             "export_key": "playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87/ms_team_name",
             "hide_notification": false,
-            "id": 4477,
+            "id": 4473,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3439,7 +3251,7 @@
             "templates": [],
             "text": "Team Name",
             "tooltip": "A name for the team.",
-            "type_id": 1045,
+            "type_id": 1028,
             "uuid": "74b19b27-631e-488d-b1ad-bd124e139269",
             "values": []
           }
@@ -3464,32 +3276,32 @@
         "uuid": "9c69c241-8289-461e-87f2-b4a9419421c5"
       },
       "has_logical_errors": false,
-      "id": 33,
+      "id": 18,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684163970600,
+      "last_modified_time": 1690206247290,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684163898696,
+          "created_date": 1690202980422,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 60,
+          "id": 41,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684163962162,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690203961304,
           "name": "post process",
           "object_type": "incident",
           "playbook_handle": "ms_teams_create_team_pb",
           "programmatic_name": "ms_teams_create_team_pb_post_process",
-          "script_text": "results = playbook.functions.results.create_team\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Team\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\nnote = helper.createRichText(text)\nincident.addNote(note)",
+          "script_text": "results = playbook.functions.results.create_team\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Team\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\nincident.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "5944ec76-664f-4635-af08-c3e0debc17b5"
         }
@@ -3547,7 +3359,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_f7eeb7c4-07a7-4735-bc2b-537ee3a3ab87",
-        "id": 33,
+        "id": 20,
         "name": "playbook_f7eeb7c4_07a7_4735_bc2b_537ee3a3ab87",
         "type": "playbook",
         "uuid": "2b3ef9ce-c095-4ec8-a479-e827f59895c5"
@@ -3555,19 +3367,19 @@
       "tags": [],
       "type": "default",
       "uuid": "f7eeb7c4-07a7-4735-bc2b-537ee3a3ab87",
-      "version": 9
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b\" isExecutable=\"true\" name=\"playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_013vgj1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9acc046d-60f3-4be8-97cf-c966436e6f9b\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}},\"958f0953-8b6f-4472-b786-b9ae4351ddfe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"3f35f1a9-f5d6-440a-a825-66a340aeaefe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"8c740ee5-6b2d-4555-be2e-e0dce0fe93fc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6c7730f3-4872-4709-b60a-cabee7e5a208\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"caa4ac0d-4869-46bb-b0f5-e585c43b396e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"if task:\\n  inputs.task_id = task.id\\n\\ninputs.incident_id = str(incident.id)\\ninputs.ms_team_name = f\\\"Incident {incident.id}: {incident.name}\\\" if playbook.inputs.ms_team_name is None else playbook.inputs.ms_team_name\\n\\nif playbook.inputs.ms_owners_list:\\n  inputs.ms_owners_list = playbook.inputs.ms_owners_list\\n\\nif playbook.inputs.add_members_task:\\n  _value = playbook.inputs.add_members_task.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  elif _value == \\\"all task members\\\":\\n    inputs.add_members_from = \\\"Task\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n\\nif playbook.inputs.additional_members.content:\\n  inputs.additional_members = playbook.inputs.additional_members.content\\n\\nif playbook.inputs.ms_description:\\n  inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n  description = incident.description.content if incident.description else \\\"\\\"\\n  inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_team\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_013vgj1\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xmsdde\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_013vgj1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"20914e0b-0ead-43b1-a6e7-67e0b5f785fd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xmsdde\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ckb2w1\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xmsdde\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ckb2w1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ckb2w1\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ckb2w1\" id=\"Flow_0ckb2w1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xmsdde\" id=\"Flow_0xmsdde_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_013vgj1\" id=\"Flow_013vgj1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.242\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 4,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b\" isExecutable=\"true\" name=\"playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_013vgj1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Create team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9acc046d-60f3-4be8-97cf-c966436e6f9b\"\u003e{\"inputs\":{\"b246d664-7c89-47a7-bdce-e7bb6cf47321\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9602467c-8872-4fe0-9992-20498e6b076e\"}},\"958f0953-8b6f-4472-b786-b9ae4351ddfe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"3f35f1a9-f5d6-440a-a825-66a340aeaefe\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"8c740ee5-6b2d-4555-be2e-e0dce0fe93fc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d2f9e887-fd44-4b64-98f8-a642b4b1738c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"6c7730f3-4872-4709-b60a-cabee7e5a208\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"caa4ac0d-4869-46bb-b0f5-e585c43b396e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"if task:\\n  inputs.task_id = task.id\\n\\ninputs.incident_id = str(incident.id)\\ninputs.ms_team_name = f\\\"Incident {incident.id}: {incident.name}\\\" if hasattr(playbook.inputs, \\\"ms_team_name\\\") else playbook.inputs.ms_team_name\\n\\ninputs.ms_owners_list = getattr(playbook.inputs, \\\"ms_owners_list\\\")\\n\\nif hasattr(playbook.inputs, \\\"add_members_task\\\"):\\n  _value = playbook.inputs.add_members_task.lower().strip()\\n  if _value == \\\"all incident members\\\":\\n    inputs.add_members_from = \\\"Incident\\\"\\n  elif _value == \\\"all task members\\\":\\n    inputs.add_members_from = \\\"Task\\\"\\n  else:\\n    inputs.add_members_from = \\\"None\\\"\\n\\ninputs.additional_members = getattr(playbook.inputs, \\\"additional_members\\\", {\\\"content\\\": \\\"\\\"}).content\\n\\nif hasattr(playbook.inputs, \\\"ms_description\\\"):\\n  inputs.ms_description = playbook.inputs.ms_description\\nelse:\\n  description = incident.description.content if incident.description else \\\"\\\"\\n  inputs.ms_description = f\\\"Incident {incident.id}: {incident.name} {description}\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_team\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_013vgj1\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xmsdde\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_013vgj1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"20914e0b-0ead-43b1-a6e7-67e0b5f785fd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xmsdde\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ckb2w1\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xmsdde\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ckb2w1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ckb2w1\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ckb2w1\" id=\"Flow_0ckb2w1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xmsdde\" id=\"Flow_0xmsdde_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_013vgj1\" id=\"Flow_013vgj1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.242\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683918224669,
+      "create_date": 1690202980779,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b",
@@ -3593,7 +3405,7 @@
             "deprecated": false,
             "export_key": "playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b/add_members_task",
             "hide_notification": false,
-            "id": 4478,
+            "id": 4474,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -3608,7 +3420,7 @@
             "templates": [],
             "text": "Add members",
             "tooltip": "Allows for adding incident or task members to Team/Group",
-            "type_id": 1046,
+            "type_id": 1029,
             "uuid": "859198ba-2bde-4f3f-b7cf-3c66afcf912a",
             "values": [
               {
@@ -3618,7 +3430,7 @@
                 "label": "None",
                 "properties": null,
                 "uuid": "5f89b49a-7d0d-4c7c-a575-dcdb29630bee",
-                "value": 944
+                "value": 920
               },
               {
                 "default": false,
@@ -3627,7 +3439,7 @@
                 "label": "All task members",
                 "properties": null,
                 "uuid": "56cfce32-45fb-43e6-9ffc-cd019c063caa",
-                "value": 945
+                "value": 921
               },
               {
                 "default": false,
@@ -3636,7 +3448,7 @@
                 "label": "All incident members",
                 "properties": null,
                 "uuid": "62258974-e2e2-454b-9423-83c5342c241c",
-                "value": 946
+                "value": 922
               }
             ]
           },
@@ -3650,7 +3462,7 @@
             "deprecated": false,
             "export_key": "playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b/additional_members",
             "hide_notification": false,
-            "id": 4479,
+            "id": 4475,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -3665,7 +3477,7 @@
             "templates": [],
             "text": "Additional members",
             "tooltip": "Add members who are not members of this incident or task",
-            "type_id": 1046,
+            "type_id": 1029,
             "uuid": "f874937f-367b-4f16-8dcd-842519cfdeeb",
             "values": []
           },
@@ -3679,7 +3491,7 @@
             "deprecated": false,
             "export_key": "playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b/ms_description",
             "hide_notification": false,
-            "id": 4480,
+            "id": 4476,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3694,7 +3506,7 @@
             "templates": [],
             "text": "Description",
             "tooltip": "Description for the MS Graph Object (Group / Team / Channel) that is being created",
-            "type_id": 1046,
+            "type_id": 1029,
             "uuid": "4a56d657-3550-4e83-afb3-355a31e7b136",
             "values": []
           },
@@ -3708,7 +3520,7 @@
             "deprecated": false,
             "export_key": "playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b/ms_owners_list",
             "hide_notification": false,
-            "id": 4481,
+            "id": 4477,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3723,7 +3535,7 @@
             "templates": [],
             "text": "Owners",
             "tooltip": "Email addresses of the MS Team/Group Owners.",
-            "type_id": 1046,
+            "type_id": 1029,
             "uuid": "258ba1bf-ca5b-4a56-9ba3-5dee40716f59",
             "values": []
           },
@@ -3737,7 +3549,7 @@
             "deprecated": false,
             "export_key": "playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b/ms_team_name",
             "hide_notification": false,
-            "id": 4482,
+            "id": 4478,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3752,7 +3564,7 @@
             "templates": [],
             "text": "Team Name",
             "tooltip": "A name for the team.",
-            "type_id": 1046,
+            "type_id": 1029,
             "uuid": "8019080b-c667-4c8b-b891-fd708beccd5f",
             "values": []
           }
@@ -3777,32 +3589,32 @@
         "uuid": "b489a306-65e2-4045-91dc-d0efa6d4261b"
       },
       "has_logical_errors": false,
-      "id": 34,
+      "id": 19,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684163972471,
+      "last_modified_time": 1690206135420,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684163522683,
+          "created_date": 1690202981002,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 59,
+          "id": 42,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684163948626,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690203930732,
           "name": "post process",
           "object_type": "task",
           "playbook_handle": "ms_teams_create_team_from_task_pb",
           "programmatic_name": "ms_teams_create_team_from_task_pb_post_process",
-          "script_text": "results = playbook.functions.results.create_team\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Team\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\nnote = helper.createRichText(text)\ntask.addNote(note)",
+          "script_text": "results = playbook.functions.results.create_team\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to create Microsoft Team\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\ntask.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "20914e0b-0ead-43b1-a6e7-67e0b5f785fd"
         }
@@ -3860,7 +3672,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_4fb57529-c89a-4f75-9f80-264cc6b4513b",
-        "id": 34,
+        "id": 21,
         "name": "playbook_4fb57529_c89a_4f75_9f80_264cc6b4513b",
         "type": "playbook",
         "uuid": "b383c51b-1fde-4c36-a93b-4e3390ecccbb"
@@ -3868,19 +3680,19 @@
       "tags": [],
       "type": "default",
       "uuid": "4fb57529-c89a-4f75-9f80-264cc6b4513b",
-      "version": 9
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
         "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f843c4d8_7f91_4894_b7d9_a6132750c723\" isExecutable=\"true\" name=\"playbook_f843c4d8_7f91_4894_b7d9_a6132750c723\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_09vl8hf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Delete Channel\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2ea7a99c-b4df-4e5d-860f-d2d4d841f3d9\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ms_channel_name = playbook.inputs.ms_channel_name\\n\\nif playbook.inputs.ms_groupteam_id:\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nelif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif playbook.inputs.ms_groupteam_name:\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_channel\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09vl8hf\u003c/incoming\u003e\u003coutgoing\u003eFlow_1blh3yd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_09vl8hf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0de1919e-ad77-4b73-a404-e92d54daf634\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1blh3yd\u003c/incoming\u003e\u003coutgoing\u003eFlow_1l64nm6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1blh3yd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1l64nm6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1l64nm6\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f843c4d8_7f91_4894_b7d9_a6132750c723\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09vl8hf\" id=\"Flow_09vl8hf_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1blh3yd\" id=\"Flow_1blh3yd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1l64nm6\" id=\"Flow_1l64nm6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f843c4d8_7f91_4894_b7d9_a6132750c723\" isExecutable=\"true\" name=\"playbook_f843c4d8_7f91_4894_b7d9_a6132750c723\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_09vl8hf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Delete Channel\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2ea7a99c-b4df-4e5d-860f-d2d4d841f3d9\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ms_channel_name = playbook.inputs.ms_channel_name\\n\\nif hasattr(playbook.inputs, \\\"ms_groupteam_id\\\"):\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nelif hasattr(playbook.inputs, \\\"ms_group_mail_nickname\\\"):\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif hasattr(playbook.inputs, \\\"ms_groupteam_name\\\"):\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_channel\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09vl8hf\u003c/incoming\u003e\u003coutgoing\u003eFlow_1blh3yd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_09vl8hf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0de1919e-ad77-4b73-a404-e92d54daf634\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1blh3yd\u003c/incoming\u003e\u003coutgoing\u003eFlow_1l64nm6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1blh3yd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1l64nm6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1l64nm6\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f843c4d8_7f91_4894_b7d9_a6132750c723\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1l64nm6\" id=\"Flow_1l64nm6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1blh3yd\" id=\"Flow_1blh3yd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09vl8hf\" id=\"Flow_09vl8hf_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683918375074,
+      "create_date": 1690202981357,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_f843c4d8_7f91_4894_b7d9_a6132750c723",
@@ -3906,7 +3718,7 @@
             "deprecated": false,
             "export_key": "playbook_f843c4d8_7f91_4894_b7d9_a6132750c723/ms_channel_name",
             "hide_notification": false,
-            "id": 4483,
+            "id": 4479,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3921,7 +3733,7 @@
             "templates": [],
             "text": "Channel Name",
             "tooltip": "Name of the Microsoft Teams Channel",
-            "type_id": 1047,
+            "type_id": 1030,
             "uuid": "a4bb6d9d-9ca6-4c21-bbbd-c645e13ad7cd",
             "values": []
           },
@@ -3935,7 +3747,7 @@
             "deprecated": false,
             "export_key": "playbook_f843c4d8_7f91_4894_b7d9_a6132750c723/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4484,
+            "id": 4480,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3950,7 +3762,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1047,
+            "type_id": 1030,
             "uuid": "8811ea29-ee17-4406-a654-38a8304010b4",
             "values": []
           },
@@ -3964,7 +3776,7 @@
             "deprecated": false,
             "export_key": "playbook_f843c4d8_7f91_4894_b7d9_a6132750c723/ms_groupteam_id",
             "hide_notification": false,
-            "id": 4485,
+            "id": 4481,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3979,7 +3791,7 @@
             "templates": [],
             "text": "Group/Team ID",
             "tooltip": "Unique ID assigned to the Group or Team object while being created",
-            "type_id": 1047,
+            "type_id": 1030,
             "uuid": "82a3d35a-17b6-4549-9734-01c90a1560b2",
             "values": []
           },
@@ -3993,7 +3805,7 @@
             "deprecated": false,
             "export_key": "playbook_f843c4d8_7f91_4894_b7d9_a6132750c723/ms_groupteam_name",
             "hide_notification": false,
-            "id": 4486,
+            "id": 4482,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4008,7 +3820,7 @@
             "templates": [],
             "text": "Group/Team Name",
             "tooltip": "Name of the Microsoft Group or Team",
-            "type_id": 1047,
+            "type_id": 1030,
             "uuid": "3c73f6e3-f98d-44f2-82d8-2a5ac3fd1ee0",
             "values": []
           }
@@ -4033,32 +3845,32 @@
         "uuid": "1aca441f-0300-4736-bd42-78ee4cff1f7d"
       },
       "has_logical_errors": false,
-      "id": 35,
+      "id": 20,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684164331165,
+      "last_modified_time": 1690206365630,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684164313745,
+          "created_date": 1690202981623,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 62,
+          "id": 43,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684164313758,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690204018339,
           "name": "post process",
           "object_type": "incident",
           "playbook_handle": "ms_teams_delete_channel_pb",
           "programmatic_name": "ms_teams_delete_channel_pb_post_process",
-          "script_text": "results = playbook.functions.results.delete_channel\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to delete Microsoft Channel\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Channels:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003e{content.get(\u0027message\u0027)}\"\"\"\n\nnote = helper.createRichText(text)\nincident.addNote(note)",
+          "script_text": "results = playbook.functions.results.delete_channel\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to delete Microsoft Channel\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Channels:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003e{content.get(\u0027message\u0027)}\"\"\"\n\nincident.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "0de1919e-ad77-4b73-a404-e92d54daf634"
         }
@@ -4108,7 +3920,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_f843c4d8-7f91-4894-b7d9-a6132750c723",
-        "id": 35,
+        "id": 22,
         "name": "playbook_f843c4d8_7f91_4894_b7d9_a6132750c723",
         "type": "playbook",
         "uuid": "9648cce6-1692-496f-ab00-10b6899f4df3"
@@ -4116,19 +3928,19 @@
       "tags": [],
       "type": "default",
       "uuid": "f843c4d8-7f91-4894-b7d9-a6132750c723",
-      "version": 7
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0a2df326_3ebb_4f24_b519_f02313606113\" isExecutable=\"true\" name=\"playbook_0a2df326_3ebb_4f24_b519_f02313606113\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_19zjsyp\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Delete Channel\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2ea7a99c-b4df-4e5d-860f-d2d4d841f3d9\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ms_channel_name = playbook.inputs.ms_channel_name\\n\\nif playbook.inputs.ms_groupteam_id:\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nelif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif playbook.inputs.ms_groupteam_name:\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_channel\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_19zjsyp\u003c/incoming\u003e\u003coutgoing\u003eFlow_0m0vivl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_19zjsyp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7cf1ce08-e848-4632-aa21-ff203d192bb5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0m0vivl\u003c/incoming\u003e\u003coutgoing\u003eFlow_079g6e6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0m0vivl\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_079g6e6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_079g6e6\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0a2df326_3ebb_4f24_b519_f02313606113\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_079g6e6\" id=\"Flow_079g6e6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m0vivl\" id=\"Flow_0m0vivl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19zjsyp\" id=\"Flow_19zjsyp_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0a2df326_3ebb_4f24_b519_f02313606113\" isExecutable=\"true\" name=\"playbook_0a2df326_3ebb_4f24_b519_f02313606113\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_19zjsyp\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Delete Channel\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2ea7a99c-b4df-4e5d-860f-d2d4d841f3d9\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ms_channel_name = playbook.inputs.ms_channel_name\\n\\nif hasattr(playbook.inputs, \\\"ms_groupteam_id\\\"):\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nelif hasattr(playbook.inputs, \\\"ms_group_mail_nickname\\\"):\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif hasattr(playbook.inputs, \\\"ms_groupteam_name\\\"):\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\\nelse:\\n  helper.fail(\\\"No input was provided\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_channel\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_19zjsyp\u003c/incoming\u003e\u003coutgoing\u003eFlow_0m0vivl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_19zjsyp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7cf1ce08-e848-4632-aa21-ff203d192bb5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0m0vivl\u003c/incoming\u003e\u003coutgoing\u003eFlow_079g6e6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0m0vivl\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_079g6e6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_079g6e6\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0a2df326_3ebb_4f24_b519_f02313606113\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_079g6e6\" id=\"Flow_079g6e6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m0vivl\" id=\"Flow_0m0vivl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19zjsyp\" id=\"Flow_19zjsyp_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683918481405,
+      "create_date": 1690202981971,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_0a2df326_3ebb_4f24_b519_f02313606113",
@@ -4154,7 +3966,7 @@
             "deprecated": false,
             "export_key": "playbook_0a2df326_3ebb_4f24_b519_f02313606113/ms_channel_name",
             "hide_notification": false,
-            "id": 4487,
+            "id": 4483,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4169,7 +3981,7 @@
             "templates": [],
             "text": "Channel Name",
             "tooltip": "Name of the Microsoft Teams Channel",
-            "type_id": 1048,
+            "type_id": 1031,
             "uuid": "900208fa-b56a-4328-a83d-516b607ab2aa",
             "values": []
           },
@@ -4183,7 +3995,7 @@
             "deprecated": false,
             "export_key": "playbook_0a2df326_3ebb_4f24_b519_f02313606113/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4488,
+            "id": 4484,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4198,7 +4010,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1048,
+            "type_id": 1031,
             "uuid": "b6883800-3f43-44cc-bbcc-1b36506e6caf",
             "values": []
           },
@@ -4212,7 +4024,7 @@
             "deprecated": false,
             "export_key": "playbook_0a2df326_3ebb_4f24_b519_f02313606113/ms_groupteam_id",
             "hide_notification": false,
-            "id": 4489,
+            "id": 4485,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4227,7 +4039,7 @@
             "templates": [],
             "text": "Group/Team ID",
             "tooltip": "Unique ID assigned to the Group or Team object while being created",
-            "type_id": 1048,
+            "type_id": 1031,
             "uuid": "8e18d652-d6fa-4d52-848f-56cd9e4cca33",
             "values": []
           },
@@ -4241,7 +4053,7 @@
             "deprecated": false,
             "export_key": "playbook_0a2df326_3ebb_4f24_b519_f02313606113/ms_groupteam_name",
             "hide_notification": false,
-            "id": 4490,
+            "id": 4486,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4256,7 +4068,7 @@
             "templates": [],
             "text": "Group/Team Name",
             "tooltip": "Name of the Microsoft Group or Team",
-            "type_id": 1048,
+            "type_id": 1031,
             "uuid": "af98219a-a026-4f20-9ef4-9bb83e9886f0",
             "values": []
           }
@@ -4281,32 +4093,32 @@
         "uuid": "ba94e50e-8e28-4601-91e7-7e539eba74e5"
       },
       "has_logical_errors": false,
-      "id": 36,
+      "id": 21,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684174159506,
+      "last_modified_time": 1690206304117,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684164211416,
+          "created_date": 1690202982148,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 61,
+          "id": 44,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684164211431,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690203992248,
           "name": "post process",
           "object_type": "task",
           "playbook_handle": "ms_teams_delete_channel_from_task_pb",
           "programmatic_name": "ms_teams_delete_channel_from_task_pb_post_process",
-          "script_text": "results = playbook.functions.results.delete_channel\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to delete Microsoft Channel\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Channels:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003e{content.get(\u0027message\u0027)}\"\"\"\n\nnote = helper.createRichText(text)\ntask.addNote(note)",
+          "script_text": "results = playbook.functions.results.delete_channel\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to delete Microsoft Channel\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Channels:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003e{content.get(\u0027message\u0027)}\"\"\"\n\ntask.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "7cf1ce08-e848-4632-aa21-ff203d192bb5"
         }
@@ -4356,7 +4168,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_0a2df326-3ebb-4f24-b519-f02313606113",
-        "id": 36,
+        "id": 23,
         "name": "playbook_0a2df326_3ebb_4f24_b519_f02313606113",
         "type": "playbook",
         "uuid": "a6b8eb35-8d01-415c-b231-c0d37d1ad22a"
@@ -4364,19 +4176,19 @@
       "tags": [],
       "type": "default",
       "uuid": "0a2df326-3ebb-4f24-b519-f02313606113",
-      "version": 8
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_75e62b5d_17f1_458c_a2e1_4968bd20780d\" isExecutable=\"true\" name=\"playbook_75e62b5d_17f1_458c_a2e1_4968bd20780d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1v5bq9h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Delete Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c710fb72-c934-45ce-9205-e36794fee376\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if playbook.inputs.ms_group_id:\\n  inputs.ms_group_id = playbook.inputs.ms_group_id\\n\\nelif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\n\\nelif playbook.inputs.ms_group_name:\\n  inputs.ms_group_name = playbook.inputs.ms_group_name\\n\\nelse:\\n  helper.fail(\\\"Atleast one option must be specified to delete a group\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_group\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1v5bq9h\u003c/incoming\u003e\u003coutgoing\u003eFlow_0qa88vv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1v5bq9h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"432ae5de-fe7f-4a77-81ed-fdcbb798cb63\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qa88vv\u003c/incoming\u003e\u003coutgoing\u003eFlow_058zao6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_058zao6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0qa88vv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_058zao6\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_75e62b5d_17f1_458c_a2e1_4968bd20780d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1v5bq9h\" id=\"Flow_1v5bq9h_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qa88vv\" id=\"Flow_0qa88vv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_058zao6\" id=\"Flow_058zao6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_75e62b5d_17f1_458c_a2e1_4968bd20780d\" isExecutable=\"true\" name=\"playbook_75e62b5d_17f1_458c_a2e1_4968bd20780d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1v5bq9h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Delete Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c710fb72-c934-45ce-9205-e36794fee376\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if hasattr(playbook.inputs, \\\"ms_group_id\\\"):\\n  inputs.ms_group_id = playbook.inputs.ms_group_id\\n\\nelif hasattr(playbook.inputs, \\\"ms_group_mail_nickname\\\"):\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\n\\nelif hasattr(playbook.inputs, \\\"ms_group_name\\\"):\\n  inputs.ms_group_name = playbook.inputs.ms_group_name\\n\\nelse:\\n  helper.fail(\\\"Atleast one option must be specified to delete a group\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_group\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1v5bq9h\u003c/incoming\u003e\u003coutgoing\u003eFlow_0qa88vv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1v5bq9h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"432ae5de-fe7f-4a77-81ed-fdcbb798cb63\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qa88vv\u003c/incoming\u003e\u003coutgoing\u003eFlow_058zao6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_058zao6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0qa88vv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_058zao6\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_75e62b5d_17f1_458c_a2e1_4968bd20780d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_058zao6\" id=\"Flow_058zao6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qa88vv\" id=\"Flow_0qa88vv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1v5bq9h\" id=\"Flow_1v5bq9h_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683918638748,
+      "create_date": 1690202982486,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_75e62b5d_17f1_458c_a2e1_4968bd20780d",
@@ -4402,7 +4214,7 @@
             "deprecated": false,
             "export_key": "playbook_75e62b5d_17f1_458c_a2e1_4968bd20780d/ms_group_id",
             "hide_notification": false,
-            "id": 4491,
+            "id": 4487,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4417,7 +4229,7 @@
             "templates": [],
             "text": "Microsoft Group Id",
             "tooltip": "If a Microsoft Group already exists, it\u0027s Group ID can be specified to create a team",
-            "type_id": 1049,
+            "type_id": 1032,
             "uuid": "41150b95-759f-486b-bd94-1f2aa05f2ec8",
             "values": []
           },
@@ -4431,7 +4243,7 @@
             "deprecated": false,
             "export_key": "playbook_75e62b5d_17f1_458c_a2e1_4968bd20780d/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4492,
+            "id": 4488,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4446,7 +4258,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1049,
+            "type_id": 1032,
             "uuid": "168ac7ea-ad9f-4c17-9264-60c19182c15f",
             "values": []
           },
@@ -4460,7 +4272,7 @@
             "deprecated": false,
             "export_key": "playbook_75e62b5d_17f1_458c_a2e1_4968bd20780d/ms_group_name",
             "hide_notification": false,
-            "id": 4493,
+            "id": 4489,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4475,7 +4287,7 @@
             "templates": [],
             "text": "Group name",
             "tooltip": "Name of the Group to be created",
-            "type_id": 1049,
+            "type_id": 1032,
             "uuid": "025b93e3-75b3-4cfe-99e0-e4ca2c257f0f",
             "values": []
           }
@@ -4500,32 +4312,32 @@
         "uuid": "bdff64b2-4587-456e-b3aa-a95836284c60"
       },
       "has_logical_errors": false,
-      "id": 37,
+      "id": 22,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684164672475,
+      "last_modified_time": 1690206474468,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684164655947,
+          "created_date": 1690202982659,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 64,
+          "id": 45,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684164655959,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690204070249,
           "name": "post process",
           "object_type": "incident",
           "playbook_handle": "ms_teams_delete_group_pb",
           "programmatic_name": "ms_teams_delete_group_pb_post_process",
-          "script_text": "results = playbook.functions.results.delete_group\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to delete Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Groups:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003e{content.get(\"message\")}\u0027\u0027\u0027\n\nnote = helper.createRichText(text)\nincident.addNote(note)",
+          "script_text": "results = playbook.functions.results.delete_group\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to delete Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Groups:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003e{content.get(\"message\")}\u0027\u0027\u0027\n\nincident.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "432ae5de-fe7f-4a77-81ed-fdcbb798cb63"
         }
@@ -4567,7 +4379,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_75e62b5d-17f1-458c-a2e1-4968bd20780d",
-        "id": 37,
+        "id": 24,
         "name": "playbook_75e62b5d_17f1_458c_a2e1_4968bd20780d",
         "type": "playbook",
         "uuid": "7d4edd28-7317-4200-b194-305c51627c63"
@@ -4575,19 +4387,19 @@
       "tags": [],
       "type": "default",
       "uuid": "75e62b5d-17f1-458c-a2e1-4968bd20780d",
-      "version": 7
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_34cf929a_3119_4c10_b0ba_f85b4eb3989d\" isExecutable=\"true\" name=\"playbook_34cf929a_3119_4c10_b0ba_f85b4eb3989d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1i843q5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Delete Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c710fb72-c934-45ce-9205-e36794fee376\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if playbook.inputs.ms_group_id:\\n  inputs.ms_group_id = playbook.inputs.ms_group_id\\n\\nelif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\n\\nelif playbook.inputs.ms_group_name:\\n  inputs.ms_group_name = playbook.inputs.ms_group_name\\n\\nelse:\\n  helper.fail(\\\"Atleast one option must be specified to delete a group\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_group\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1i843q5\u003c/incoming\u003e\u003coutgoing\u003eFlow_12jllyv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1i843q5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"8a1dc60b-b32b-45a4-9a2f-0b6e75e938f7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12jllyv\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rchymm\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_12jllyv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0rchymm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0rchymm\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_34cf929a_3119_4c10_b0ba_f85b4eb3989d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i843q5\" id=\"Flow_1i843q5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12jllyv\" id=\"Flow_12jllyv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rchymm\" id=\"Flow_0rchymm_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_34cf929a_3119_4c10_b0ba_f85b4eb3989d\" isExecutable=\"true\" name=\"playbook_34cf929a_3119_4c10_b0ba_f85b4eb3989d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1i843q5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Delete Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c710fb72-c934-45ce-9205-e36794fee376\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if hasattr(playbook.inputs, \\\"ms_group_id\\\"):\\n  inputs.ms_group_id = playbook.inputs.ms_group_id\\n\\nelif hasattr(playbook.inputs, \\\"ms_group_mail_nickname\\\"):\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\n\\nelif hasattr(playbook.inputs, \\\"ms_group_name\\\"):\\n  inputs.ms_group_name = playbook.inputs.ms_group_name\\n\\nelse:\\n  helper.fail(\\\"Atleast one option must be specified to delete a group\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_group\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1i843q5\u003c/incoming\u003e\u003coutgoing\u003eFlow_12jllyv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1i843q5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"8a1dc60b-b32b-45a4-9a2f-0b6e75e938f7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12jllyv\u003c/incoming\u003e\u003coutgoing\u003eFlow_0rchymm\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_12jllyv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0rchymm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0rchymm\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_34cf929a_3119_4c10_b0ba_f85b4eb3989d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rchymm\" id=\"Flow_0rchymm_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12jllyv\" id=\"Flow_12jllyv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i843q5\" id=\"Flow_1i843q5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683918769752,
+      "create_date": 1690202983021,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_34cf929a_3119_4c10_b0ba_f85b4eb3989d",
@@ -4613,7 +4425,7 @@
             "deprecated": false,
             "export_key": "playbook_34cf929a_3119_4c10_b0ba_f85b4eb3989d/ms_group_id",
             "hide_notification": false,
-            "id": 4494,
+            "id": 4490,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4628,7 +4440,7 @@
             "templates": [],
             "text": "Microsoft Group Id",
             "tooltip": "If a Microsoft Group already exists, it\u0027s Group ID can be specified to create a team",
-            "type_id": 1050,
+            "type_id": 1033,
             "uuid": "fa862df0-8bb4-442d-87e8-0d74cd5d3097",
             "values": []
           },
@@ -4642,7 +4454,7 @@
             "deprecated": false,
             "export_key": "playbook_34cf929a_3119_4c10_b0ba_f85b4eb3989d/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4495,
+            "id": 4491,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4657,7 +4469,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1050,
+            "type_id": 1033,
             "uuid": "aaad50fe-1e4b-4248-b3d8-19c42275923b",
             "values": []
           },
@@ -4671,7 +4483,7 @@
             "deprecated": false,
             "export_key": "playbook_34cf929a_3119_4c10_b0ba_f85b4eb3989d/ms_group_name",
             "hide_notification": false,
-            "id": 4496,
+            "id": 4492,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4686,7 +4498,7 @@
             "templates": [],
             "text": "Group name",
             "tooltip": "Name of the Group to be created",
-            "type_id": 1050,
+            "type_id": 1033,
             "uuid": "5369a705-e278-4873-94e1-3120a4ac1bf0",
             "values": []
           }
@@ -4711,32 +4523,32 @@
         "uuid": "1aad41eb-8921-49b1-9354-03d194f2b8cb"
       },
       "has_logical_errors": false,
-      "id": 38,
+      "id": 23,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684164591277,
+      "last_modified_time": 1690206421285,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684164552479,
+          "created_date": 1690202983241,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 63,
+          "id": 46,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684164552492,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690204047233,
           "name": "post process",
           "object_type": "task",
           "playbook_handle": "ms_teams_delete_group_from_task_pb",
           "programmatic_name": "ms_teams_delete_group_from_task_pb_post_process",
-          "script_text": "results = playbook.functions.results.delete_group\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to delete Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Groups:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003e{content.get(\"message\")}\u0027\u0027\u0027\n\nnote = helper.createRichText(text)\ntask.addNote(note)",
+          "script_text": "results = playbook.functions.results.delete_group\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to delete Microsoft Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Groups:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003e{content.get(\"message\")}\u0027\u0027\u0027\n\ntask.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "8a1dc60b-b32b-45a4-9a2f-0b6e75e938f7"
         }
@@ -4778,7 +4590,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_34cf929a-3119-4c10-b0ba-f85b4eb3989d",
-        "id": 38,
+        "id": 25,
         "name": "playbook_34cf929a_3119_4c10_b0ba_f85b4eb3989d",
         "type": "playbook",
         "uuid": "86a0b5d4-f30a-423e-937d-edef006bc0aa"
@@ -4786,19 +4598,19 @@
       "tags": [],
       "type": "default",
       "uuid": "34cf929a-3119-4c10-b0ba-f85b4eb3989d",
-      "version": 7
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
         "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a6a9e53b_fe2e_4fc5_9a1b_fda6dc513eef\" isExecutable=\"true\" name=\"playbook_a6a9e53b_fe2e_4fc5_9a1b_fda6dc513eef\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_18ko9h1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Enable Team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0e597a9e-7ce0-4580-86fa-11204e2f1caf\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if playbook.inputs.ms_group_id:\\n  inputs.ms_group_id = playbook.inputs.ms_group_id\\nelif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif playbook.inputs.ms_group_name:\\n  inputs.ms_group_name = playbook.inputs.ms_group_name\\nelse:\\n  helper.fail(\\\"No input was provided.\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"enable_team\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_18ko9h1\u003c/incoming\u003e\u003coutgoing\u003eFlow_14roicy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_18ko9h1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post porcess\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1781cbc5-2c45-478f-8e16-9065fc26a5b5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14roicy\u003c/incoming\u003e\u003coutgoing\u003eFlow_1a04k3c\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14roicy\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1a04k3c\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1a04k3c\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a6a9e53b_fe2e_4fc5_9a1b_fda6dc513eef\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18ko9h1\" id=\"Flow_18ko9h1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14roicy\" id=\"Flow_14roicy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1a04k3c\" id=\"Flow_1a04k3c_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a6a9e53b_fe2e_4fc5_9a1b_fda6dc513eef\" isExecutable=\"true\" name=\"playbook_a6a9e53b_fe2e_4fc5_9a1b_fda6dc513eef\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_18ko9h1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Enable Team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0e597a9e-7ce0-4580-86fa-11204e2f1caf\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if hasattr(playbook.inputs, \\\"ms_group_id\\\"):\\n  inputs.ms_group_id = playbook.inputs.ms_group_id\\nelif hasattr(playbook.inputs, \\\"ms_group_mail_nickname\\\"):\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif hasattr(playbook.inputs, \\\"ms_group_name\\\"):\\n  inputs.ms_group_name = playbook.inputs.ms_group_name\\nelse:\\n  helper.fail(\\\"No input was provided.\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"enable_team\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_18ko9h1\u003c/incoming\u003e\u003coutgoing\u003eFlow_14roicy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_18ko9h1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post porcess\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1781cbc5-2c45-478f-8e16-9065fc26a5b5\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14roicy\u003c/incoming\u003e\u003coutgoing\u003eFlow_1a04k3c\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14roicy\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1a04k3c\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1a04k3c\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a6a9e53b_fe2e_4fc5_9a1b_fda6dc513eef\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1a04k3c\" id=\"Flow_1a04k3c_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14roicy\" id=\"Flow_14roicy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18ko9h1\" id=\"Flow_18ko9h1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683918901142,
+      "create_date": 1690202983598,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_a6a9e53b_fe2e_4fc5_9a1b_fda6dc513eef",
@@ -4824,7 +4636,7 @@
             "deprecated": false,
             "export_key": "playbook_a6a9e53b_fe2e_4fc5_9a1b_fda6dc513eef/ms_group_id",
             "hide_notification": false,
-            "id": 4497,
+            "id": 4493,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4839,7 +4651,7 @@
             "templates": [],
             "text": "Microsoft Group Id",
             "tooltip": "If a Microsoft Group already exists, it\u0027s Group ID can be specified to create a team",
-            "type_id": 1051,
+            "type_id": 1034,
             "uuid": "517d78ec-e35c-41bb-94f5-0219cda6f49a",
             "values": []
           },
@@ -4853,7 +4665,7 @@
             "deprecated": false,
             "export_key": "playbook_a6a9e53b_fe2e_4fc5_9a1b_fda6dc513eef/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4498,
+            "id": 4494,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4868,7 +4680,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1051,
+            "type_id": 1034,
             "uuid": "4d422719-f1af-4fff-a3bc-72509805296c",
             "values": []
           },
@@ -4882,7 +4694,7 @@
             "deprecated": false,
             "export_key": "playbook_a6a9e53b_fe2e_4fc5_9a1b_fda6dc513eef/ms_group_name",
             "hide_notification": false,
-            "id": 4499,
+            "id": 4495,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4897,7 +4709,7 @@
             "templates": [],
             "text": "Group name",
             "tooltip": "Name of the Group to be created",
-            "type_id": 1051,
+            "type_id": 1034,
             "uuid": "5322c603-a22b-4729-a313-f95b9817a5df",
             "values": []
           }
@@ -4922,32 +4734,32 @@
         "uuid": "33ead2a9-dd2e-4ee7-952f-3f7b37de2872"
       },
       "has_logical_errors": false,
-      "id": 39,
+      "id": 24,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684165000498,
+      "last_modified_time": 1690206558871,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684164975014,
+          "created_date": 1690202983772,
           "description": "",
           "enabled": false,
           "export_key": "post porcess",
-          "id": 66,
+          "id": 47,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684164975026,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690204116842,
           "name": "post porcess",
           "object_type": "incident",
           "playbook_handle": "ms_teams_enable_teams_for_group_pb",
           "programmatic_name": "ms_teams_enable_teams_for_group_pb_post_porcess",
-          "script_text": "results = playbook.functions.results.enable_team\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Could not enable Teams for this MS Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\nnote = helper.createRichText(text)\nincident.addNote(note)",
+          "script_text": "results = playbook.functions.results.enable_team\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Could not enable Teams for this MS Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\nincident.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "1781cbc5-2c45-478f-8e16-9065fc26a5b5"
         }
@@ -4989,7 +4801,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_a6a9e53b-fe2e-4fc5-9a1b-fda6dc513eef",
-        "id": 39,
+        "id": 26,
         "name": "playbook_a6a9e53b_fe2e_4fc5_9a1b_fda6dc513eef",
         "type": "playbook",
         "uuid": "a443bcc5-7946-484c-a6e2-36e94361e5f2"
@@ -4997,19 +4809,19 @@
       "tags": [],
       "type": "default",
       "uuid": "a6a9e53b-fe2e-4fc5-9a1b-fda6dc513eef",
-      "version": 7
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d0addb18_ad1e_4c52_b22f_345e12fd01d3\" isExecutable=\"true\" name=\"playbook_d0addb18_ad1e_4c52_b22f_345e12fd01d3\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0rk0617\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Enable Team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0e597a9e-7ce0-4580-86fa-11204e2f1caf\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if playbook.inputs.ms_group_id:\\n  inputs.ms_group_id = playbook.inputs.ms_group_id\\nelif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif playbook.inputs.ms_group_name:\\n  inputs.ms_group_name = playbook.inputs.ms_group_name\\nelse:\\n  helper.fail(\\\"No input was provided.\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"enable_team\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rk0617\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hp3pg6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0rk0617\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f3e75982-3110-4899-bd09-89030673a0bd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1hp3pg6\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fs4kpv\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1hp3pg6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1fs4kpv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1fs4kpv\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d0addb18_ad1e_4c52_b22f_345e12fd01d3\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rk0617\" id=\"Flow_0rk0617_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hp3pg6\" id=\"Flow_1hp3pg6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fs4kpv\" id=\"Flow_1fs4kpv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d0addb18_ad1e_4c52_b22f_345e12fd01d3\" isExecutable=\"true\" name=\"playbook_d0addb18_ad1e_4c52_b22f_345e12fd01d3\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0rk0617\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Enable Team\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0e597a9e-7ce0-4580-86fa-11204e2f1caf\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if hasattr(playbook.inputs, \\\"ms_group_id\\\"):\\n  inputs.ms_group_id = playbook.inputs.ms_group_id\\nelif hasattr(playbook.inputs, \\\"ms_group_mail_nickname\\\"):\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nelif hasattr(playbook.inputs, \\\"ms_group_name\\\"):\\n  inputs.ms_group_name = playbook.inputs.ms_group_name\\nelse:\\n  helper.fail(\\\"No input was provided.\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"enable_team\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rk0617\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hp3pg6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0rk0617\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f3e75982-3110-4899-bd09-89030673a0bd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1hp3pg6\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fs4kpv\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1hp3pg6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1fs4kpv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1fs4kpv\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d0addb18_ad1e_4c52_b22f_345e12fd01d3\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fs4kpv\" id=\"Flow_1fs4kpv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hp3pg6\" id=\"Flow_1hp3pg6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rk0617\" id=\"Flow_0rk0617_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683919170598,
+      "create_date": 1690202984121,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_d0addb18_ad1e_4c52_b22f_345e12fd01d3",
@@ -5035,7 +4847,7 @@
             "deprecated": false,
             "export_key": "playbook_d0addb18_ad1e_4c52_b22f_345e12fd01d3/ms_group_id",
             "hide_notification": false,
-            "id": 4500,
+            "id": 4496,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5050,7 +4862,7 @@
             "templates": [],
             "text": "Microsoft Group Id",
             "tooltip": "If a Microsoft Group already exists, it\u0027s Group ID can be specified to create a team",
-            "type_id": 1052,
+            "type_id": 1035,
             "uuid": "d8fb7b5e-3786-4410-8f09-c7183fe18404",
             "values": []
           },
@@ -5064,7 +4876,7 @@
             "deprecated": false,
             "export_key": "playbook_d0addb18_ad1e_4c52_b22f_345e12fd01d3/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4501,
+            "id": 4497,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5079,7 +4891,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1052,
+            "type_id": 1035,
             "uuid": "e93a88bd-d1de-4085-b916-14b696d5d71a",
             "values": []
           },
@@ -5093,7 +4905,7 @@
             "deprecated": false,
             "export_key": "playbook_d0addb18_ad1e_4c52_b22f_345e12fd01d3/ms_group_name",
             "hide_notification": false,
-            "id": 4502,
+            "id": 4498,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5108,7 +4920,7 @@
             "templates": [],
             "text": "Group name",
             "tooltip": "Name of the Group to be created",
-            "type_id": 1052,
+            "type_id": 1035,
             "uuid": "871e40b0-5c8d-4554-bcda-a72b926e5f3c",
             "values": []
           }
@@ -5133,32 +4945,32 @@
         "uuid": "6de426a8-545e-4038-8800-e357496fbdc8"
       },
       "has_logical_errors": false,
-      "id": 40,
+      "id": 25,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684164918252,
+      "last_modified_time": 1690206514499,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684164889045,
+          "created_date": 1690202984314,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 65,
+          "id": 48,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684164889057,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690204092132,
           "name": "post process",
           "object_type": "task",
           "playbook_handle": "ms_teams_enable_teams_for_group_from_task_pb",
           "programmatic_name": "ms_teams_enable_teams_for_group_from_task_pb_post_process",
-          "script_text": "results = playbook.functions.results.enable_team\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Could not enable Teams for this MS Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\nnote = helper.createRichText(text)\ntask.addNote(note)",
+          "script_text": "results = playbook.functions.results.enable_team\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Could not enable Teams for this MS Group\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\u0027\u0027\u0027\u003cb\u003eMicrosoft Group Details:\u003c/b\u003e\u003cbr /\u003e\n  \u003cbr /\u003eName: {content.get(\"displayName\")}\n  \u003cbr /\u003eDescription: {content.get(\"description\")}\n  \u003cbr /\u003eTeams Enabled: {content.get(\"teamsEnabled\")}\n  \u003cbr /\u003eID: {content.get(\"id\")}\n  \u003cbr /\u003eMail: {content.get(\"mail\")}\n  \u003cbr /\u003eVisibility: {content.get(\"visibility\")}\n  \u003cbr /\u003eGroup Types: {content.get(\"groupTypes\")}\n  \u003cbr /\u003eCreated date and time: {content.get(\"createdDateTime\")}\u0027\u0027\u0027\n  if content.get(\"unfoundUsers\"):\n    text += f\u0027\u003cbr /\u003e*Note the following users were unable to be added to the group: {content.get(\"unfoundUsers\")}\u0027\n\ntask.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "f3e75982-3110-4899-bd09-89030673a0bd"
         }
@@ -5200,7 +5012,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_d0addb18-ad1e-4c52-b22f-345e12fd01d3",
-        "id": 40,
+        "id": 27,
         "name": "playbook_d0addb18_ad1e_4c52_b22f_345e12fd01d3",
         "type": "playbook",
         "uuid": "441ae530-26ee-4851-a9e8-3abb826079fa"
@@ -5208,19 +5020,19 @@
       "tags": [],
       "type": "default",
       "uuid": "d0addb18-ad1e-4c52-b22f-345e12fd01d3",
-      "version": 7
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_83e58015_bc8e_41d7_8387_2a47fb102d59\" isExecutable=\"true\" name=\"playbook_83e58015_bc8e_41d7_8387_2a47fb102d59\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0iiwdxy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Post Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0c8e4497-c131-4d5d-bdf3-3153d30b9bbc\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\n\\n\\\"\\\"\\\"\\nformat of a payload. * = optional\\n{ \\\"title\\\"*: xx, \\n  \\\"summary\\\": xx, \\n  \\\"sections\\\": [{ \\\"title\\\"*: yy, \\\"text\\\"*: yy, \\n                        \\\"facts\\\"*: [{\\\"name\\\": zz, \\\"value\\\": zz}]\\n              }]\\n}\\n\\\"\\\"\\\"\\n\\npayload = \u0027\u0027\u0027{{ \\\"summary\\\": \\\"SOAR Incident\\\", \\\"sections\\\": [ \\n  {{ \\\"facts\\\": [ \\n    {{ \\\"name\\\": \\\"Name\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Description\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Id\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Owner\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Types\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"NIST Attack Vectors\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Create Date\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Date Occurred\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Discovered Date\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Confirmed\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Severity\\\", \\\"value\\\": \\\"{}\\\" }} \\n   ]\\n  }}\\n ] \\n}} \\n\u0027\u0027\u0027.format(incident.name, incident.description.content.replace(\u0027\\\"\u0027, \u0027\\\\\\\\\\\"\u0027) if incident.description else \\\"-\\\", incident.id,\\n  incident.owner_id if incident.owner_id else \\\"-\\\",\\n  \\\", \\\".join(str(x) for x in incident.incident_type_ids), \\\", \\\".join(str(x) for x in incident.nist_attack_vectors),\\n  incident.create_date, incident.start_date if incident.start_date else \\\"-\\\", incident.discovered_date,\\n  \\\"True\\\" if incident.confirmed else \\\"False\\\",\\n  \\\"-\\\" if not incident.severity_code else incident.severity_code)\\n\\ninputs.teams_payload = payload\\ninputs.teams_channel = \\\"General\\\"\\ninputs.teams_mrkdown = True\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"post_message\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0iiwdxy\u003c/incoming\u003e\u003coutgoing\u003eFlow_0gb1nfv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0iiwdxy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3219c350-8dcf-44f6-8c7b-819f4d232af7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0gb1nfv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1sbn03n\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1sbn03n\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0gb1nfv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1sbn03n\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_83e58015_bc8e_41d7_8387_2a47fb102d59\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sbn03n\" id=\"Flow_1sbn03n_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0gb1nfv\" id=\"Flow_0gb1nfv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0iiwdxy\" id=\"Flow_0iiwdxy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683919273393,
+      "create_date": 1690202984696,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_83e58015_bc8e_41d7_8387_2a47fb102d59",
@@ -5256,32 +5068,32 @@
         "uuid": "26bdd660-6321-4e7b-9233-5a761b45718e"
       },
       "has_logical_errors": false,
-      "id": 41,
+      "id": 26,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684174649297,
+      "last_modified_time": 1690204168051,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684165395846,
+          "created_date": 1690202984795,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 67,
+          "id": 49,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684165395858,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690204162323,
           "name": "post process",
           "object_type": "incident",
           "playbook_handle": "ms_teams_post_incident_information_pb",
           "programmatic_name": "ms_teams_post_incident_information_pb_post_process",
-          "script_text": "results = playbook.functions.results.post_message\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to Post message\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n  text = helper.createRichText(text)\n  incident.addNote(text)",
+          "script_text": "results = playbook.functions.results.post_message\n\nif not results.get(\"success\"):\n  text = \"Unable to Post message\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n  incident.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "3219c350-8dcf-44f6-8c7b-819f4d232af7"
         }
@@ -5298,7 +5110,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_83e58015-bc8e-41d7-8387-2a47fb102d59",
-        "id": 41,
+        "id": 28,
         "name": "playbook_83e58015_bc8e_41d7_8387_2a47fb102d59",
         "type": "playbook",
         "uuid": "3beb76b4-5084-4ec3-8944-9ccdc2302057"
@@ -5306,19 +5118,19 @@
       "tags": [],
       "type": "default",
       "uuid": "83e58015-bc8e-41d7-8387-2a47fb102d59",
-      "version": 8
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
+        "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3ef2de1d_3e94_4e02_9653_1745cc1cf467\" isExecutable=\"true\" name=\"playbook_3ef2de1d_3e94_4e02_9653_1745cc1cf467\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_12nz36d\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Post Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0c8e4497-c131-4d5d-bdf3-3153d30b9bbc\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.task_id = task.id\\n\\\"\\\"\\\"\\nformat of a payload. * = optional\\n{ \\\"title\\\"*: xx, \\n  \\\"summary\\\": xx, \\n  \\\"sections\\\": [{ \\\"title\\\"*: yy, \\\"text\\\"*: yy, \\n                        \\\"facts\\\"*: [{\\\"name\\\": zz, \\\"value\\\": zz}]\\n              }]\\n}\\n\\\"\\\"\\\"\\n\\npayload = \u0027\u0027\u0027{{ \\\"summary\\\": \\\"SOAR Incident\\\", \\\"sections\\\": [ \\n  {{ \\\"facts\\\": [ \\n    {{ \\\"name\\\": \\\"Name\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Description\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Id\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Owner\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Types\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"NIST Attack Vectors\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Create Date\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Date Occurred\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Discovered Date\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Confirmed\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Severity\\\", \\\"value\\\": \\\"{}\\\" }} \\n   ]\\n  }},\\n  {{ \\\"text\\\": \\\"Task\\\", \\\"facts\\\": [ \\n    {{ \\\"name\\\": \\\"Task\\\", \\\"value\\\": \\\"{}\\\" }}, \\n    {{ \\\"name\\\": \\\"Owner\\\", \\\"value\\\": \\\"{}\\\" }},\\n    {{ \\\"name\\\": \\\"Instructions\\\", \\\"value\\\": \\\"{}\\\" }},\\n    {{ \\\"name\\\": \\\"Due Date\\\", \\\"value\\\": \\\"{}\\\" }}\\n    ]\\n  }}\\n ] \\n}} \\n\u0027\u0027\u0027.format(incident.name, incident.description.content.replace(\u0027\\\"\u0027, \u0027\\\\\\\\\\\"\u0027) if incident.description else \\\"-\\\", incident.id,\\n  incident.owner_id if incident.owner_id else \\\"-\\\",\\n  \\\", \\\".join(str(x) for x in incident.incident_type_ids), \\\", \\\".join(str(x) for x in incident.nist_attack_vectors),\\n  incident.create_date, incident.start_date if incident.start_date else \\\"-\\\", incident.discovered_date,\\n  \\\"True\\\" if incident.confirmed else \\\"False\\\",\\n  \\\"-\\\" if not incident.severity_code else incident.severity_code,\\n  task.name, task.owner_id if task.owner_id else \\\"-\\\", task.instructions.content.replace(\u0027\\\"\u0027, \\\"\u0027\\\") if task.instructions else \\\"-\\\",\\n  task.due_date if task.due_date else \\\"-\\\"\\n  )\\n\\ninputs.teams_payload = payload\\ninputs.teams_channel = \\\"General\\\"\\ninputs.teams_mrkdown = True\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"post_message\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12nz36d\u003c/incoming\u003e\u003coutgoing\u003eFlow_1szkqvq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_12nz36d\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"54bc6fae-7d26-42c4-bd12-fbf00256851e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1szkqvq\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ixnax2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1szkqvq\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ixnax2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ixnax2\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3ef2de1d_3e94_4e02_9653_1745cc1cf467\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ixnax2\" id=\"Flow_0ixnax2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1szkqvq\" id=\"Flow_1szkqvq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12nz36d\" id=\"Flow_12nz36d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683919310643,
+      "create_date": 1690202985108,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_3ef2de1d_3e94_4e02_9653_1745cc1cf467",
@@ -5354,32 +5166,32 @@
         "uuid": "a96ef695-3f9d-484d-9396-eb0e7529117e"
       },
       "has_logical_errors": false,
-      "id": 42,
+      "id": 27,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684174668091,
+      "last_modified_time": 1690202985649,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684165911473,
+          "created_date": 1690202985195,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 68,
+          "id": 50,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684165911485,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690204192713,
           "name": "post process",
           "object_type": "task",
           "playbook_handle": "ms_teams_post_task_information_pb",
           "programmatic_name": "ms_teams_post_task_information_pb_post_process",
-          "script_text": "results = playbook.functions.results.post_message\ncontent = results.get(\"content\")\n\nif not results.get(\"success\"):\n  text = \"Unable to Post message\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n  text = helper.createRichText(text)\n  task.addNote(str(text))",
+          "script_text": "results = playbook.functions.results.post_message\n\nif not results.get(\"success\"):\n  text = \"Unable to Post message\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n  task.addNote(str(helper.createRichText(text)))",
           "tags": [],
           "uuid": "54bc6fae-7d26-42c4-bd12-fbf00256851e"
         }
@@ -5396,7 +5208,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_3ef2de1d-3e94-4e02-9653-1745cc1cf467",
-        "id": 42,
+        "id": 29,
         "name": "playbook_3ef2de1d_3e94_4e02_9653_1745cc1cf467",
         "type": "playbook",
         "uuid": "6f1ddb44-0d53-44d0-8db6-afa7a7dffd0b"
@@ -5404,19 +5216,19 @@
       "tags": [],
       "type": "default",
       "uuid": "3ef2de1d-3e94-4e02-9653-1745cc1cf467",
-      "version": 8
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
         "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5\" isExecutable=\"true\" name=\"playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0uigar5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Read Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"789a5606-7fcf-407e-a218-d96aabf5e543\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if playbook.inputs.ms_message_id:\\n  inputs.ms_message_id = playbook.inputs.ms_message_id\\nif playbook.inputs.ms_channel_id:\\n  inputs.ms_channel_id = playbook.inputs.ms_channel_id\\nif playbook.inputs.ms_groupteam_id:\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nif playbook.inputs.ms_channel_name:\\n  inputs.ms_channel_name = playbook.inputs.ms_channel_name\\nif playbook.inputs.ms_groupteam_id:\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nif playbook.inputs.ms_groupteam_name:\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"read_message\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0uigar5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1o6hyln\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0uigar5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0c5ec74d-074b-4fae-9c37-2d1b3c3deb27\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1o6hyln\u003c/incoming\u003e\u003coutgoing\u003eFlow_060w9zy\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1o6hyln\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_060w9zy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_060w9zy\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0uigar5\" id=\"Flow_0uigar5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1o6hyln\" id=\"Flow_1o6hyln_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_060w9zy\" id=\"Flow_060w9zy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5\" isExecutable=\"true\" name=\"playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0uigar5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Read Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"789a5606-7fcf-407e-a218-d96aabf5e543\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ms_message_id = getattr(playbook.inputs, \\\"ms_message_id\\\")\\ninputs.ms_channel_id = getattr(playbook.inputs, \\\"ms_channel_id\\\")\\ninputs.ms_groupteam_id = getattr(playbook.inputs, \\\"ms_groupteam_id\\\")\\ninputs.ms_channel_name = getattr(playbook.inputs, \\\"ms_channel_name\\\")\\ninputs.ms_groupteam_id = getattr(playbook.inputs, \\\"ms_groupteam_id\\\")\\ninputs.ms_group_mail_nickname = getattr(playbook.inputs, \\\"ms_group_mail_nickname\\\")\\ninputs.ms_groupteam_name = getattr(playbook.inputs, \\\"ms_groupteam_name\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"read_message\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0uigar5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1o6hyln\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0uigar5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0c5ec74d-074b-4fae-9c37-2d1b3c3deb27\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1o6hyln\u003c/incoming\u003e\u003coutgoing\u003eFlow_060w9zy\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1o6hyln\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_060w9zy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_060w9zy\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_060w9zy\" id=\"Flow_060w9zy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1o6hyln\" id=\"Flow_1o6hyln_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0uigar5\" id=\"Flow_0uigar5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683919338552,
+      "create_date": 1690202985585,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5",
@@ -5442,7 +5254,7 @@
             "deprecated": false,
             "export_key": "playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5/ms_channel_id",
             "hide_notification": false,
-            "id": 4503,
+            "id": 4499,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5457,7 +5269,7 @@
             "templates": [],
             "text": "Channel Id",
             "tooltip": "Unique Id assigned to a channel while being created",
-            "type_id": 1055,
+            "type_id": 1038,
             "uuid": "6dd1628a-aa46-42d2-859d-1f7efc82fb6e",
             "values": []
           },
@@ -5471,7 +5283,7 @@
             "deprecated": false,
             "export_key": "playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5/ms_channel_name",
             "hide_notification": false,
-            "id": 4504,
+            "id": 4500,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5486,7 +5298,7 @@
             "templates": [],
             "text": "Channel Name",
             "tooltip": "Name of the Microsoft Teams Channel",
-            "type_id": 1055,
+            "type_id": 1038,
             "uuid": "ac1a2008-7b50-4690-b01e-87db64df8e9f",
             "values": []
           },
@@ -5500,7 +5312,7 @@
             "deprecated": false,
             "export_key": "playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4505,
+            "id": 4501,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5515,7 +5327,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1055,
+            "type_id": 1038,
             "uuid": "67896ec8-fb54-45cf-9b4e-896872ffff36",
             "values": []
           },
@@ -5529,7 +5341,7 @@
             "deprecated": false,
             "export_key": "playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5/ms_groupteam_id",
             "hide_notification": false,
-            "id": 4506,
+            "id": 4502,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5544,7 +5356,7 @@
             "templates": [],
             "text": "Group/Team ID",
             "tooltip": "Unique ID assigned to the Group or Team object while being created",
-            "type_id": 1055,
+            "type_id": 1038,
             "uuid": "4832e4d7-4ab2-4dcd-90e9-ebd7b8bde70e",
             "values": []
           },
@@ -5558,7 +5370,7 @@
             "deprecated": false,
             "export_key": "playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5/ms_groupteam_name",
             "hide_notification": false,
-            "id": 4507,
+            "id": 4503,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5573,7 +5385,7 @@
             "templates": [],
             "text": "Group/Team Name",
             "tooltip": "Name of the Microsoft Group or Team",
-            "type_id": 1055,
+            "type_id": 1038,
             "uuid": "50cfc522-a9f3-48ed-931e-155abd14f937",
             "values": []
           },
@@ -5587,7 +5399,7 @@
             "deprecated": false,
             "export_key": "playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5/ms_message_id",
             "hide_notification": false,
-            "id": 4508,
+            "id": 4504,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5602,7 +5414,7 @@
             "templates": [],
             "text": "Message Id",
             "tooltip": "The unique id assigned to a message posted in the Teams channel",
-            "type_id": 1055,
+            "type_id": 1038,
             "uuid": "dcd9a2bc-18e4-40d6-92c7-0e7603741e22",
             "values": []
           }
@@ -5627,32 +5439,32 @@
         "uuid": "f27575be-2419-4ea5-a49f-97532a8892f3"
       },
       "has_logical_errors": false,
-      "id": 43,
+      "id": 28,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684166805390,
+      "last_modified_time": 1690206749150,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684166768028,
+          "created_date": 1690202985892,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 70,
+          "id": 51,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684166768040,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690204240519,
           "name": "post process",
           "object_type": "incident",
           "playbook_handle": "ms_teams_read_channel_messages_pb",
           "programmatic_name": "ms_teams_read_channel_messages_pb_post_process",
-          "script_text": "results = playbook.functions.results.read_message\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to read messages from Microsoft Channel\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Channels:\u003c/b\u003e\u003cbr /\u003e\n  Successfully retrieved \u003cb\u003e{len(content)}\u003c/b\u003e messages \u003cbr /\u003e\u003cbr /\u003e\"\"\"\n\n  for message in content:\n    url = f\u0027\u0027\u0027\u003ca href=\"{message.get(\"webUrl\")}\"\u003eClick here\u003c/a\u003e\n    Message Id : {message.get(\"id\")} \u003cbr /\u003e\n    Channel Id : {message.get(\"channelIdentity\", {}).get(\"channelId\")} \u003cbr /\u003e\n    Team Id : {message.get(\"channelIdentity\", {}).get(\"teamId\")} \u003cbr /\u003e\u0027\u0027\u0027\n\n    if message.get(\"from\"):\n      user_messages = message.get(\"from\", {}).get(\"user\", {})\n      if user_messages:\n        text += f\u0027From User : {user_messages.get(\"displayName\")} \u003cbr /\u003e\u0027\n      else:\n        text += f\u0027From Application : {message.get(\"from\", {}).get(\"application\", {}).get(\"displayName\")} \u003cbr /\u003e\u0027\n\n    text += f\u0027\u0027\u0027Body Content : {message.get(\"body\", {}).get(\"content\")} \u003cbr /\u003e\n    Content Type : {message.get(\"body\", {}).get(\"contentType\")} \u003cbr /\u003e\n    Created Time : {message.get(\"createdDateTime\")} \u003cbr /\u003e\n    Web URL : {url} \u003cbr /\u003e\n    \u003cbr /\u003e\u0027\u0027\u0027\n\nnote = helper.createRichText(text)\nincident.addNote(note)",
+          "script_text": "results = playbook.functions.results.read_message\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to read messages from Microsoft Channel\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Channels:\u003c/b\u003e\u003cbr /\u003e\n  Successfully retrieved \u003cb\u003e{len(content)}\u003c/b\u003e messages \u003cbr /\u003e\u003cbr /\u003e\"\"\"\n\n  for message in content:\n    url = f\u0027\u0027\u0027\u003ca href=\"{message.get(\"webUrl\")}\"\u003eClick here\u003c/a\u003e\n    Message Id : {message.get(\"id\")} \u003cbr /\u003e\n    Channel Id : {message.get(\"channelIdentity\", {}).get(\"channelId\")} \u003cbr /\u003e\n    Team Id : {message.get(\"channelIdentity\", {}).get(\"teamId\")} \u003cbr /\u003e\u0027\u0027\u0027\n\n    if message.get(\"from\"):\n      user_messages = message.get(\"from\", {}).get(\"user\", {})\n      if user_messages:\n        text += f\u0027From User : {user_messages.get(\"displayName\")} \u003cbr /\u003e\u0027\n      else:\n        text += f\u0027From Application : {message.get(\"from\", {}).get(\"application\", {}).get(\"displayName\")} \u003cbr /\u003e\u0027\n\n    text += f\u0027\u0027\u0027Body Content : {message.get(\"body\", {}).get(\"content\")} \u003cbr /\u003e\n    Content Type : {message.get(\"body\", {}).get(\"contentType\")} \u003cbr /\u003e\n    Created Time : {message.get(\"createdDateTime\")} \u003cbr /\u003e\n    Web URL : {url} \u003cbr /\u003e\n    \u003cbr /\u003e\u0027\u0027\u0027\n\nincident.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "0c5ec74d-074b-4fae-9c37-2d1b3c3deb27"
         }
@@ -5718,7 +5530,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_b750649b-eb02-4265-a4aa-f1414e5e55c5",
-        "id": 43,
+        "id": 30,
         "name": "playbook_b750649b_eb02_4265_a4aa_f1414e5e55c5",
         "type": "playbook",
         "uuid": "d68c79f6-bef6-459a-9e73-0a4a90812d16"
@@ -5726,19 +5538,19 @@
       "tags": [],
       "type": "default",
       "uuid": "b750649b-eb02-4265-a4aa-f1414e5e55c5",
-      "version": 7
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_5b743fae_3a1c_415c_b982_99c4e546250a\" isExecutable=\"true\" name=\"playbook_5b743fae_3a1c_415c_b982_99c4e546250a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0awweg8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Read Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"789a5606-7fcf-407e-a218-d96aabf5e543\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if playbook.inputs.ms_message_id:\\n  inputs.ms_message_id = playbook.inputs.ms_message_id\\nif playbook.inputs.ms_channel_id:\\n  inputs.ms_channel_id = playbook.inputs.ms_channel_id\\nif playbook.inputs.ms_groupteam_id:\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nif playbook.inputs.ms_channel_name:\\n  inputs.ms_channel_name = playbook.inputs.ms_channel_name\\nif playbook.inputs.ms_groupteam_id:\\n  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id\\nif playbook.inputs.ms_group_mail_nickname:\\n  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname\\nif playbook.inputs.ms_groupteam_name:\\n  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"read_message\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0awweg8\u003c/incoming\u003e\u003coutgoing\u003eFlow_0uyfvqi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0awweg8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1bac6717-36df-45f9-bb13-63e53aaca459\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0uyfvqi\u003c/incoming\u003e\u003coutgoing\u003eFlow_18t8x6m\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0uyfvqi\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_18t8x6m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_18t8x6m\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_5b743fae_3a1c_415c_b982_99c4e546250a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0awweg8\" id=\"Flow_0awweg8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0uyfvqi\" id=\"Flow_0uyfvqi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18t8x6m\" id=\"Flow_18t8x6m_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_5b743fae_3a1c_415c_b982_99c4e546250a\" isExecutable=\"true\" name=\"playbook_5b743fae_3a1c_415c_b982_99c4e546250a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0awweg8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MS Teams: Read Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"789a5606-7fcf-407e-a218-d96aabf5e543\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.ms_message_id = getattr(playbook.inputs, \\\"ms_message_id\\\")\\ninputs.ms_channel_id = getattr(playbook.inputs, \\\"ms_channel_id\\\")\\ninputs.ms_groupteam_id = getattr(playbook.inputs, \\\"ms_groupteam_id\\\")\\ninputs.ms_channel_name = getattr(playbook.inputs, \\\"ms_channel_name\\\")\\ninputs.ms_groupteam_id = getattr(playbook.inputs, \\\"ms_groupteam_id\\\")\\ninputs.ms_group_mail_nickname = getattr(playbook.inputs, \\\"ms_group_mail_nickname\\\")\\ninputs.ms_groupteam_name = getattr(playbook.inputs, \\\"ms_groupteam_name\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"read_message\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0awweg8\u003c/incoming\u003e\u003coutgoing\u003eFlow_0uyfvqi\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0awweg8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1bac6717-36df-45f9-bb13-63e53aaca459\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0uyfvqi\u003c/incoming\u003e\u003coutgoing\u003eFlow_18t8x6m\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0uyfvqi\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_18t8x6m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_18t8x6m\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_5b743fae_3a1c_415c_b982_99c4e546250a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18t8x6m\" id=\"Flow_18t8x6m_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0uyfvqi\" id=\"Flow_0uyfvqi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0awweg8\" id=\"Flow_0awweg8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1683919548158,
+      "create_date": 1690202986307,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_5b743fae_3a1c_415c_b982_99c4e546250a",
@@ -5764,7 +5576,7 @@
             "deprecated": false,
             "export_key": "playbook_5b743fae_3a1c_415c_b982_99c4e546250a/ms_channel_id",
             "hide_notification": false,
-            "id": 4509,
+            "id": 4505,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5779,7 +5591,7 @@
             "templates": [],
             "text": "Channel Id",
             "tooltip": "Unique Id assigned to a channel while being created",
-            "type_id": 1056,
+            "type_id": 1039,
             "uuid": "be950cc1-da97-49fd-82f7-ae5146f06c88",
             "values": []
           },
@@ -5793,7 +5605,7 @@
             "deprecated": false,
             "export_key": "playbook_5b743fae_3a1c_415c_b982_99c4e546250a/ms_channel_name",
             "hide_notification": false,
-            "id": 4510,
+            "id": 4506,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5808,7 +5620,7 @@
             "templates": [],
             "text": "Channel Name",
             "tooltip": "Name of the Microsoft Teams Channel",
-            "type_id": 1056,
+            "type_id": 1039,
             "uuid": "bc744024-d37b-4cfd-b77c-1f99ae7eff99",
             "values": []
           },
@@ -5822,7 +5634,7 @@
             "deprecated": false,
             "export_key": "playbook_5b743fae_3a1c_415c_b982_99c4e546250a/ms_group_mail_nickname",
             "hide_notification": false,
-            "id": 4511,
+            "id": 4507,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5837,7 +5649,7 @@
             "templates": [],
             "text": "Mail nickname",
             "tooltip": "This value must be a unique value as no two MS Objects can have the same email ID. The mail address need not include the domain suffix (i.e. @example.com)",
-            "type_id": 1056,
+            "type_id": 1039,
             "uuid": "39585207-ec06-4ab1-960f-47cafe63d83c",
             "values": []
           },
@@ -5851,7 +5663,7 @@
             "deprecated": false,
             "export_key": "playbook_5b743fae_3a1c_415c_b982_99c4e546250a/ms_groupteam_id",
             "hide_notification": false,
-            "id": 4512,
+            "id": 4508,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5866,7 +5678,7 @@
             "templates": [],
             "text": "Group/Team ID",
             "tooltip": "Unique ID assigned to the Group or Team object while being created",
-            "type_id": 1056,
+            "type_id": 1039,
             "uuid": "f16bb4c7-e485-4efa-8049-abb40f53b78f",
             "values": []
           },
@@ -5880,7 +5692,7 @@
             "deprecated": false,
             "export_key": "playbook_5b743fae_3a1c_415c_b982_99c4e546250a/ms_groupteam_name",
             "hide_notification": false,
-            "id": 4513,
+            "id": 4509,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5895,7 +5707,7 @@
             "templates": [],
             "text": "Group/Team Name",
             "tooltip": "Name of the Microsoft Group or Team",
-            "type_id": 1056,
+            "type_id": 1039,
             "uuid": "8f0e2e58-be25-45bf-8432-b2f712f5f64e",
             "values": []
           },
@@ -5909,7 +5721,7 @@
             "deprecated": false,
             "export_key": "playbook_5b743fae_3a1c_415c_b982_99c4e546250a/ms_message_id",
             "hide_notification": false,
-            "id": 4514,
+            "id": 4510,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -5924,7 +5736,7 @@
             "templates": [],
             "text": "Message Id",
             "tooltip": "The unique id assigned to a message posted in the Teams channel",
-            "type_id": 1056,
+            "type_id": 1039,
             "uuid": "802be649-7c40-42e2-a77a-25589dd53db4",
             "values": []
           }
@@ -5949,32 +5761,32 @@
         "uuid": "5d9dd5b5-5637-477c-9792-68f1fa9f1ffe"
       },
       "has_logical_errors": false,
-      "id": 44,
+      "id": 29,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 35,
-        "name": "i@example.com",
+        "id": 36,
+        "name": "admin1@example.com",
         "type": "user"
       },
-      "last_modified_time": 1684166710610,
+      "last_modified_time": 1690206733505,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1684166692095,
+          "created_date": 1690202986645,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 69,
+          "id": 52,
           "language": "python3",
-          "last_modified_by": "i@example.com",
-          "last_modified_time": 1684166692109,
+          "last_modified_by": "admin1@example.com",
+          "last_modified_time": 1690204221781,
           "name": "post process",
           "object_type": "task",
           "playbook_handle": "ms_teams_read_channel_messages_from_task_pb",
           "programmatic_name": "ms_teams_read_channel_messages_from_task_pb_post_process",
-          "script_text": "results = playbook.functions.results.read_message\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to read messages from Microsoft Channel\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Channels:\u003c/b\u003e\u003cbr /\u003e\n  Successfully retrieved \u003cb\u003e{len(content)}\u003c/b\u003e messages \u003cbr /\u003e\u003cbr /\u003e\"\"\"\n\n  for message in content:\n    url = f\u0027\u0027\u0027\u003ca href=\"{message.get(\"webUrl\")}\"\u003eClick here\u003c/a\u003e\n    Message Id : {message.get(\"id\")} \u003cbr /\u003e\n    Channel Id : {message.get(\"channelIdentity\", {}).get(\"channelId\")} \u003cbr /\u003e\n    Team Id : {message.get(\"channelIdentity\", {}).get(\"teamId\")} \u003cbr /\u003e\u0027\u0027\u0027\n\n    if message.get(\"from\"):\n      user_messages = message.get(\"from\", {}).get(\"user\", {})\n      if user_messages:\n        text += f\u0027From User : {user_messages.get(\"displayName\")} \u003cbr /\u003e\u0027\n      else:\n        text += f\u0027From Application : {message.get(\"from\", {}).get(\"application\", {}).get(\"displayName\")} \u003cbr /\u003e\u0027\n\n    text += f\u0027\u0027\u0027Body Content : {message.get(\"body\", {}).get(\"content\")} \u003cbr /\u003e\n    Content Type : {message.get(\"body\", {}).get(\"contentType\")} \u003cbr /\u003e\n    Created Time : {message.get(\"createdDateTime\")} \u003cbr /\u003e\n    Web URL : {url} \u003cbr /\u003e\n    \u003cbr /\u003e\u0027\u0027\u0027\n\nnote = helper.createRichText(text)\ntask.addNote(note)",
+          "script_text": "results = playbook.functions.results.read_message\ncontent = results.get(\"content\", {})\n\nif not results.get(\"success\"):\n  text = \"Unable to read messages from Microsoft Channel\"\n  fail_reason = results.get(\"reason\")\n  if fail_reason:\n    text = f\"{text}:\\n\\tFailure reason: {fail_reason}\"\n\nelse:\n  text  = f\"\"\"\u003cb\u003eMicrosoft Channels:\u003c/b\u003e\u003cbr /\u003e\n  Successfully retrieved \u003cb\u003e{len(content)}\u003c/b\u003e messages \u003cbr /\u003e\u003cbr /\u003e\"\"\"\n\n  for message in content:\n    url = f\u0027\u0027\u0027\u003ca href=\"{message.get(\"webUrl\")}\"\u003eClick here\u003c/a\u003e\n    Message Id : {message.get(\"id\")} \u003cbr /\u003e\n    Channel Id : {message.get(\"channelIdentity\", {}).get(\"channelId\")} \u003cbr /\u003e\n    Team Id : {message.get(\"channelIdentity\", {}).get(\"teamId\")} \u003cbr /\u003e\u0027\u0027\u0027\n\n    if message.get(\"from\"):\n      user_messages = message.get(\"from\", {}).get(\"user\", {})\n      if user_messages:\n        text += f\u0027From User : {user_messages.get(\"displayName\")} \u003cbr /\u003e\u0027\n      else:\n        text += f\u0027From Application : {message.get(\"from\", {}).get(\"application\", {}).get(\"displayName\")} \u003cbr /\u003e\u0027\n\n    text += f\u0027\u0027\u0027Body Content : {message.get(\"body\", {}).get(\"content\")} \u003cbr /\u003e\n    Content Type : {message.get(\"body\", {}).get(\"contentType\")} \u003cbr /\u003e\n    Created Time : {message.get(\"createdDateTime\")} \u003cbr /\u003e\n    Web URL : {url} \u003cbr /\u003e\n    \u003cbr /\u003e\u0027\u0027\u0027\n\ntask.addNote(helper.createRichText(text))",
           "tags": [],
           "uuid": "1bac6717-36df-45f9-bb13-63e53aaca459"
         }
@@ -6040,7 +5852,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_5b743fae-3a1c-415c-b982-99c4e546250a",
-        "id": 44,
+        "id": 31,
         "name": "playbook_5b743fae_3a1c_415c_b982_99c4e546250a",
         "type": "playbook",
         "uuid": "2e7191bf-1b88-45ce-bfc0-b3408ea9e6f3"
@@ -6048,17 +5860,17 @@
       "tags": [],
       "type": "default",
       "uuid": "5b743fae-3a1c-415c-b982-99c4e546250a",
-      "version": 7
+      "version": 5
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 8131,
-    "major": 46,
+    "build_number": 7899,
+    "major": 45,
     "minor": 0,
-    "version": "46.0.8131"
+    "version": "45.0.7899"
   },
   "tags": [],
   "task_order": [],

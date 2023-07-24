@@ -36,13 +36,13 @@ None
 
 ### Function-Input Script
 ```python
-if playbook.inputs.ms_group_id:
+if hasattr(playbook.inputs, "ms_group_id"):
   inputs.ms_group_id = playbook.inputs.ms_group_id
 
-elif playbook.inputs.ms_group_mail_nickname:
+elif hasattr(playbook.inputs, "ms_group_mail_nickname"):
   inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
 
-elif playbook.inputs.ms_group_name:
+elif hasattr(playbook.inputs, "ms_group_name"):
   inputs.ms_group_name = playbook.inputs.ms_group_name
 
 else:
@@ -65,7 +65,7 @@ else:
 ### Script Content
 ```python
 results = playbook.functions.results.delete_group
-content = results.get("content")
+content = results.get("content", {})
 
 if not results.get("success"):
   text = "Unable to delete Microsoft Group"
@@ -77,8 +77,7 @@ else:
   text = f'''<b>Microsoft Groups:</b><br />
   <br />{content.get("message")}'''
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
 ```
 
 ---

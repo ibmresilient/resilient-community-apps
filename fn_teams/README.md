@@ -41,7 +41,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.1.0 | 05/2023 | Add playbooks |
+| 2.1.0 | 05/2023 | Add playbooks and removed workflows|
 | 2.0.1 | 12/2022 | Bug fix in workflows for MS Teams: Enable Teams for Groups and MS Teams: Read messages |
 | 2.0.0 | 12/2022 | Added support for creating and deleting MS Groups, Teams and Channels |
 | 1.0.0 | 10/2019 | Post Incident/task information to MS Teams |
@@ -51,11 +51,11 @@ In v2.1, the existing rules and workflows have been replaced with playbooks.
 This change is made to support the ongoing, newer capabilities of playbooks.
 Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
-If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end.
+If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
 For automatic actions, the playbooks will be disabled by default.
 
-You can continue to use the rules/workflows. 
-But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
+You can continue to use the rules/workflows.
+But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 ---
 
@@ -93,13 +93,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `46.0`.
+* SOAR platform >= `45.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0`.
+* SOAR platform >= `45.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=46.0.0`.
+* Integration server is running `resilient_circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -137,7 +137,7 @@ Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * msal ~= 1.19
 * pymsteams ~= 0.2.1
-* resilient_circuits>=46.0.0
+* resilient_circuits>=45.0.0
 
 ### Endpoint Developed With
 

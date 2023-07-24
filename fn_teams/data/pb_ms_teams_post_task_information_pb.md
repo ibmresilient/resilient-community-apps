@@ -103,15 +103,13 @@ inputs.teams_mrkdown = True
 ### Script Content
 ```python
 results = playbook.functions.results.post_message
-content = results.get("content")
 
 if not results.get("success"):
   text = "Unable to Post message"
   fail_reason = results.get("reason")
   if fail_reason:
     text = f"{text}:\n\tFailure reason: {fail_reason}"
-  text = helper.createRichText(text)
-  task.addNote(str(text))
+  task.addNote(str(helper.createRichText(text)))
 ```
 
 ---

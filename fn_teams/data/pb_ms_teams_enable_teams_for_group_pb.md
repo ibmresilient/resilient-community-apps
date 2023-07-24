@@ -36,11 +36,11 @@ None
 
 ### Function-Input Script
 ```python
-if playbook.inputs.ms_group_id:
+if hasattr(playbook.inputs, "ms_group_id"):
   inputs.ms_group_id = playbook.inputs.ms_group_id
-elif playbook.inputs.ms_group_mail_nickname:
+elif hasattr(playbook.inputs, "ms_group_mail_nickname"):
   inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
-elif playbook.inputs.ms_group_name:
+elif hasattr(playbook.inputs, "ms_group_name"):
   inputs.ms_group_name = playbook.inputs.ms_group_name
 else:
   helper.fail("No input was provided.")
@@ -62,7 +62,7 @@ else:
 ### Script Content
 ```python
 results = playbook.functions.results.enable_team
-content = results.get("content")
+content = results.get("content", {})
 
 if not results.get("success"):
   text = "Could not enable Teams for this MS Group"
@@ -83,8 +83,7 @@ else:
   if content.get("unfoundUsers"):
     text += f'<br />*Note the following users were unable to be added to the group: {content.get("unfoundUsers")}'
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
 ```
 
 ---

@@ -38,11 +38,11 @@ None
 ```python
 inputs.ms_channel_name = playbook.inputs.ms_channel_name
 
-if playbook.inputs.ms_groupteam_id:
+if hasattr(playbook.inputs, "ms_groupteam_id"):
   inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id
-elif playbook.inputs.ms_group_mail_nickname:
+elif hasattr(playbook.inputs, "ms_group_mail_nickname"):
   inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
-elif playbook.inputs.ms_groupteam_name:
+elif hasattr(playbook.inputs, "ms_groupteam_name"):
   inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name
 else:
   helper.fail("No input was provided")
@@ -64,7 +64,7 @@ else:
 ### Script Content
 ```python
 results = playbook.functions.results.delete_channel
-content = results.get("content")
+content = results.get("content", {})
 
 if not results.get("success"):
   text = "Unable to delete Microsoft Channel"
@@ -76,8 +76,7 @@ else:
   text  = f"""<b>Microsoft Channels:</b><br />
   <br />{content.get('message')}"""
 
-note = helper.createRichText(text)
-task.addNote(note)
+task.addNote(helper.createRichText(text))
 ```
 
 ---

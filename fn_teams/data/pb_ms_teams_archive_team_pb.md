@@ -37,16 +37,15 @@ None
 ### Function-Input Script
 ```python
 inputs.archive_operation = "Archive"
-if playbook.inputs.archive_operation:
-  inputs.archive_operation = playbook.inputs.archive_operation
+inputs.archive_operation = getattr(playbook.inputs, "archive_operation")
 
-if playbook.inputs.ms_groupteam_id:
+if hasattr(playbook.inputs, "ms_groupteam_id"):
   inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id
 
-elif playbook.inputs.ms_group_mail_nickname:
+elif hasattr(playbook.inputs, "ms_group_mail_nickname"):
   inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
 
-elif playbook.inputs.ms_groupteam_name:
+elif hasattr(playbook.inputs, "ms_groupteam_name"):
   inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name
 
 else:
@@ -69,7 +68,7 @@ else:
 ### Script Content
 ```python
 results = playbook.functions.results.archive_results
-content = results.get("content")
+content = results.get("content", {})
 
 if not results.get("success"):
   text = "Unable to archive the Microsoft Team"
@@ -91,8 +90,7 @@ else:
   if content.get("unfoundUsers"):
     text += f"<br />*Note the following users were unable to be added to the group: {content.get('unfoundUsers')}"
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
 ```
 
 ---
