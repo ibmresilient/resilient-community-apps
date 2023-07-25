@@ -36,6 +36,8 @@ HEADER = { 'Content-Type': 'application/json' }
 TOKEN_URL = "https://{my_domain_url}/services/oauth2/token"
 BASE_URL = "https://{my_domain_url}"
 QUERY_URI = "/services/data/{api_version}/query/"
+ATTACHMENT_URI = "/services/data/{api_version}/sobjects/Attachment"
+CONTENT_VERSION_URI = "/services/data/{api_version}/sobjects/ContentVersion/{content_version_id}"
 CASE_URI = "/services/data/{api_version}/sobjects/Case/{case_id}"
 CASE_POST_URI = "/services/data/{api_version}/sobjects/Case"
 CASE_COMMENTS_URI = "/services/data/{api_version}/sobjects/Case/{case_id}/CaseComments"
@@ -423,6 +425,88 @@ class AppCommon():
         response = self.rc.execute("PATCH", url=url, headers=self.headers, data=data_string)
         return True
 
+    def get_content_version_ids(self, salesforce_case_id: str) -> list:
+        """ Get the LatestPublishedVersionIds of a case.  
+        (This is really the latest version of each attachment know as a 
+         ContentVersion is Salesforce)
+
+        Args:
+            salesforce_case_id (str): Salesforce CaseId
+
+        Returns:
+            list of str: List of ContentVersion Ids associated with a Salesforce Case
+        """
+        # Define the query to get the ContentDocuments (attachments) associated with the Salesforce case
+        query = "SELECT id, ContentDocumentId, ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId='{}'".format(salesforce_case_id)
+        url = self.base_url + QUERY_URI.format(api_version=self.api_version)
+        params = {'q': query}
+        LOG.debug("GET /query endpoint with URL%s", url)
+
+        response = self.rc.execute("GET", url=url, headers=self.headers, params=params)
+        response_json = response.json()
+        records = response_json.get("records")
+        content_version_ids = []
+        for record in records:
+            # Get the LatestPublishedVersionId of the document (attachment) and return in the list
+            content_doc = record.get("ContentDocument")
+            content_version_id = content_doc.get("LatestPublishedVersionId")
+            content_version_ids.append(content_version_id)
+        return content_version_ids
+
+    def get_content_version(self, content_version_id) -> dict:
+        """Get the ContentVersion information of an attachment in Salesforce
+
+        Args:
+            content_version_id (str): ContentVersion Id
+
+        Returns:
+            dict : JSON format info of the ContentVersion (attachment)
+        """
+        url = self.base_url + CONTENT_VERSION_URI.format(api_version=self.api_version, 
+                                                        content_version_id=content_version_id)
+        response = self.rc.execute("GET", url=url, headers=self.headers)
+        response_json = response.json()
+        return response_json
+
+    def get_content_version_data(self, content_version_data_uri: str) -> bytes:
+        """Return the ContentVersion data (actual attachment data)
+
+        Args:
+            content_version_data_uri (str): URI from Salesforce used to get 
+            the ContentVersion data
+
+        Returns:
+            byte stream attachment data 
+        """
+        content_version_data_url = self.base_url + content_version_data_uri
+        content_header = {}
+        content_header["Authorization"] = self.headers["Authorization"]
+        content_header["Content-Type"] = "application/octet-stream"
+        response_version_data = self.rc.execute("GET", url=content_version_data_url, headers=content_header)
+        if response_version_data.ok:
+            return(response_version_data.content)
+        else:
+            LOG.debug(f"Get Content Version Data couldn't download %s" % content_version_data_url)
+        return None
+
+    def build_attachment_name(self, content_version: dict) -> str:
+        """Build the attachment name from the ContentVersion information 
+
+        Args:
+            content_version (dict): ContentVersion (attachment) information
+
+        Returns:
+            str: Attachment name to be used to post Salesforce attachment in SOAR
+        """
+        attachment_name = content_version.get("Title", "")
+        extension = content_version.get("FileExtension", "")
+        if attachment_name == "":
+            attachment_name = "salesforce-attachment"
+
+        if extension != "":
+            attachment_name =F"{attachment_name}.{extension}"
+        return attachment_name
+
 def callback(response):
     """
     Callback needed for certain REST API calls to return a formatted error message
@@ -435,6 +519,7 @@ def callback(response):
     error_msg = None
     if response.status_code >= 300 and response.status_code <= 500:
         try:
+            
             resp = response.json()
             msg = resp.get('messages') or resp.get('message')
             details = resp.get('details')

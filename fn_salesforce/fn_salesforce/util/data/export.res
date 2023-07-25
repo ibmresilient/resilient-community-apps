@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1689946287546,
+  "export_date": 1690302857999,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -36,6 +36,35 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "ba2f906f-6db5-43ef-8ebd-55333e41341c",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/task_id",
+      "hide_notification": false,
+      "id": 339,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "task_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "task_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "bee6fc4d-440c-484d-a37e-2090fd8e4eae",
       "values": []
     },
     {
@@ -998,6 +1027,55 @@
       "workflows": []
     },
     {
+      "created_date": 1689948689730,
+      "description": {
+        "content": "Get attachments associated with a Salesforce case and add the attachments in the corresponding SOAR case.",
+        "format": "text"
+      },
+      "destination_handle": "fn_salesforce",
+      "display_name": "Salesforce: Get Attachments from Salesforce",
+      "export_key": "salesforce_get_attachments_from_salesforce",
+      "id": 9,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1690302150082,
+      "name": "salesforce_get_attachments_from_salesforce",
+      "tags": [],
+      "uuid": "ae3237f6-af1f-4b0f-a39f-73f35dd3208d",
+      "version": 5,
+      "view_items": [
+        {
+          "content": "ba2f906f-6db5-43ef-8ebd-55333e41341c",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "bee6fc4d-440c-484d-a37e-2090fd8e4eae",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "cdbb2fab-1d25-4140-8041-14a2c495f262",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
       "created_date": 1689277585013,
       "description": {
         "content": "Get Case information from a specified Salesforce CaseId.",
@@ -1189,13 +1267,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 55,
+  "id": 66,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1689946285407,
+      "create_date": 1690302855895,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1204,7 +1282,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1689946285407,
+      "update_date": 1690302855895,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2036,6 +2114,104 @@
       "type": "default",
       "uuid": "53b2cb7f-7d97-4da5-acbf-89fdee65baaa",
       "version": 19
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 5,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815\" isExecutable=\"true\" name=\"playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0bchg87\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Get Attachments from Salesforce\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ae3237f6-af1f-4b0f-a39f-73f35dd3208d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.task_id = None\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_attachments_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0bchg87\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xmivdt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0bchg87\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Get Attachments write results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e081b66b-c20a-43e3-ba90-c3e88861db98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xmivdt\u003c/incoming\u003e\u003coutgoing\u003eFlow_19rxtya\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xmivdt\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_19rxtya\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_19rxtya\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19rxtya\" id=\"Flow_19rxtya_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xmivdt\" id=\"Flow_0xmivdt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bchg87\" id=\"Flow_0bchg87_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1690302707277,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815",
+      "description": {
+        "content": "Get attachments from Salesforce case and add them to the SOAR case.",
+        "format": "text"
+      },
+      "display_name": "Salesforce: Get Attachments from Salesforce Case",
+      "export_key": "salesforce_get_attachments_from_salesforce_case",
+      "field_type_handle": "playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Salesforce: Get Attachments from Salesforce Case copy",
+        "export_key": "playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815",
+        "uuid": "f55f418c-c05a-4198-8a1f-d695c0591873"
+      },
+      "has_logical_errors": false,
+      "id": 17,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1690302794995,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1690302707348,
+          "description": "Write the results of Get Attachments function to a note.",
+          "enabled": false,
+          "export_key": "Salesforce: Get Attachments write results to a note",
+          "id": 23,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1690302707355,
+          "name": "Salesforce: Get Attachments write results to a note",
+          "object_type": "incident",
+          "playbook_handle": "salesforce_get_attachments_from_salesforce_case",
+          "programmatic_name": "salesforce_get_attachments_from_salesforce_case_salesforce_get_attachments_write_results_to_a_note",
+          "script_text": "results = playbook.functions.results.get_attachments_results\n\nif results.success:\n  salesforce_attachments = results.content.salesforce_attachments\n  note_text = \"\u003cb\u003eSaleforce: Get Attachments:\u003c/b\u003e added {} attachments to incident:\u003cbr\u003e\".format(len(salesforce_attachments))\n  for attachment_name in salesforce_attachments:\n    note_text = note_text + \"\u003cbr\u003e{}\".format(attachment_name)\nelse:\n  note_text = \"\u003cb\u003eSaleforce: Get Attachments\u003c/b\u003e failed to get attachments from Salesforce.\"\nincident.addNote(note_text)\n",
+          "tags": [],
+          "uuid": "e081b66b-c20a-43e3-ba90-c3e88861db98"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "salesforce_get_attachments_from_salesforce_case",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_e43fa5c0-2ea2-4965-abc7-c5525e3c7815",
+        "id": 17,
+        "name": "playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815",
+        "type": "playbook",
+        "uuid": "9bc12c5f-be3f-4b5f-9e09-00126c565279"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "e43fa5c0-2ea2-4965-abc7-c5525e3c7815",
+      "version": 9
     },
     {
       "activation_details": {
