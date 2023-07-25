@@ -59,6 +59,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 ```python
 from datetime import datetime
 now = datetime.now()
+results = playbook.functions.results.reaqta_kill_process_result
 
 if results.success:
   for process in results.content:

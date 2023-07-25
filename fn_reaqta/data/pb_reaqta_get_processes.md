@@ -80,6 +80,10 @@ if results.success:
         row["has_incident"] = process.get("hasIncident")
         row["suspended"] = process.get("suspended")
         row["start_time"] = process.get("startTime")
+      
+      process_num = len(results.content)
+      incident.addNote("Number of processes queried: {}\nQuery Inputs: \nReaQta End Point id: {}, Has Incident: {}, Suspended: {}, ReaQta Hive: {}\nReaQta Process List Data table updated!\n".format(process_num,incident.properties.reaqta_endpoint_id, playbook.inputs.reaqta_has_incident, playbook.inputs.reaqta_suspended, incident.properties.reaqta_hive))
+        
     else:
         incident.addNote(u"ReaQta Get Processes - no processes found for input parameters: Has Incident: {}, Suspended: {}".\
             format(bool_to_str(results.inputs.get("reaqta_has_incident")), bool_to_str(results.inputs.get("reaqta_suspended"))))

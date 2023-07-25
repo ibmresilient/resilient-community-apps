@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1689750758034,
+  "export_date": 1690284963787,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1477,13 +1477,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 143,
+  "id": 148,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1689750755335,
+      "create_date": 1690284961297,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1492,7 +1492,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1689750755335,
+      "update_date": 1690284961297,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1733,7 +1733,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
+        "content_version": 17,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_fd7482b4_b9db_4a68_8aef_9773691275f4\" isExecutable=\"true\" name=\"playbook_fd7482b4_b9db_4a68_8aef_9773691275f4\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0ycfi08\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Create Artifact\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"172eb03f-e7fd-4290-b98b-388ecedcd0e3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_incident_id = incident.id\\ninputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_program_path = row[\u0027process_path\u0027]\\ninputs.reaqta_artifact_type = \\\"Malware Sample\\\"\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ycfi08\u003c/incoming\u003e\u003coutgoing\u003eFlow_1e5jg2j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0ycfi08\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"ReaQta: write create artifact results to note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"cd96a3f4-4214-434b-8dd0-0673e8e74745\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1e5jg2j\u003c/incoming\u003e\u003coutgoing\u003eFlow_0efhjqr\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1e5jg2j\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0efhjqr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0efhjqr\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_fd7482b4_b9db_4a68_8aef_9773691275f4\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0efhjqr\" id=\"Flow_0efhjqr_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1e5jg2j\" id=\"Flow_1e5jg2j_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ycfi08\" id=\"Flow_0ycfi08_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1687333854981,
@@ -1785,7 +1785,7 @@
         "name": "hychuang@tw.ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1687836983011,
+      "last_modified_time": 1690283814512,
       "local_scripts": [
         {
           "actions": [],
@@ -1795,13 +1795,13 @@
           "export_key": "ReaQta: write create artifact results to note",
           "id": 19,
           "language": "python3",
-          "last_modified_by": "c3be9c35-c18c-4fac-bae5-9a7d483f1db2",
-          "last_modified_time": 1687333855151,
+          "last_modified_by": "hychuang@tw.ibm.com",
+          "last_modified_time": 1690283700825,
           "name": "ReaQta: write create artifact results to note",
           "object_type": "reaqta_process_list",
           "playbook_handle": "reaqta_create_artifact_from_process_path",
           "programmatic_name": "reaqta_create_artifact_from_process_path_reaqta_write_create_artifact_results_to_note",
-          "script_text": "results = playbook.functions.results.create_artifact_results\nif not results.success:\n  incident.addNote(\"ReaQta Create Artifact failed: {}\".format(results.reason))",
+          "script_text": "results = playbook.functions.results.create_artifact_results\nif not results.success:\n  incident.addNote(\"ReaQta Create Artifact failed: {}\".format(results.reason))\nelse:\n  incident.addNote(u\"ReaQta Artifact created: {}\".format(results.inputs[\u0027reaqta_program_path\u0027]))\n",
           "tags": [],
           "uuid": "cd96a3f4-4214-434b-8dd0-0673e8e74745"
         }
@@ -1841,7 +1841,7 @@
       "tags": [],
       "type": "default",
       "uuid": "fd7482b4-b9db-4a68-8aef-9773691275f4",
-      "version": 6
+      "version": 20
     },
     {
       "activation_details": {
@@ -3070,7 +3070,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
+        "content_version": 17,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_63dafde3_2d60_400e_a404_b0d9462fefb8\" isExecutable=\"true\" name=\"playbook_63dafde3_2d60_400e_a404_b0d9462fefb8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0kllugb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Get Processes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f97be6f0-081a-47af-931f-5e2b101aec3a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_has_incident = playbook.inputs.reaqta_has_incident\\ninputs.reaqta_suspended = playbook.inputs.reaqta_suspended\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_get_processes_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kllugb\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fco4u8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"reaqta_get_processes_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1cd7622d-057a-4074-8f9e-7f098081518d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fco4u8\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vsuhls\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1vsuhls\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0kllugb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1fco4u8\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1vsuhls\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_63dafde3_2d60_400e_a404_b0d9462fefb8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vsuhls\" id=\"Flow_1vsuhls_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"574\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fco4u8\" id=\"Flow_1fco4u8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"408\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kllugb\" id=\"Flow_0kllugb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"407.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"573.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1687779103923,
@@ -3181,7 +3181,7 @@
         "name": "hychuang@tw.ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1688622374475,
+      "last_modified_time": 1690276456250,
       "local_scripts": [
         {
           "actions": [],
@@ -3192,12 +3192,12 @@
           "id": 28,
           "language": "python3",
           "last_modified_by": "hychuang@tw.ibm.com",
-          "last_modified_time": 1688622371681,
+          "last_modified_time": 1690276413961,
           "name": "reaqta_get_processes_post_process",
           "object_type": "incident",
           "playbook_handle": "reaqta_get_processes",
           "programmatic_name": "reaqta_get_processes_reaqta_get_processes_post_process",
-          "script_text": "from datetime import datetime\nnow = datetime.now()\n\ndef bool_to_str(value):\n  return \u0027True\u0027 if value else \u0027False\u0027\n\nresults = playbook.functions.results.reaqta_get_processes_result\n\nif results.success:\n  if isinstance(results.content, list):\n    if results.content:\n      for process in results.content:\n        row = incident.addRow(\"reaqta_process_list\")\n        \n        row[\u0027report_date\u0027] = now\n        row[\"pid\"] = process.get(\"pid\")\n        row[\"process_name\"] = process.get(\"processName\")\n        row[\"process_path\"] = process.get(\"programPath\")\n        row[\"privilege_level\"] = process.get(\"privilegeLevel\")\n        row[\"user\"] = process.get(\"user\")\n        row[\"has_incident\"] = process.get(\"hasIncident\")\n        row[\"suspended\"] = process.get(\"suspended\")\n        row[\"start_time\"] = process.get(\"startTime\")\n    else:\n        incident.addNote(u\"ReaQta Get Processes - no processes found for input parameters: Has Incident: {}, Suspended: {}\".\\\n            format(bool_to_str(results.inputs.get(\"reaqta_has_incident\")), bool_to_str(results.inputs.get(\"reaqta_suspended\"))))\n  else:\n    incident.addNote(u\"ReaQta Get Processes unsuccessful: {}\".format(results.content.get(\u0027message\u0027)))\nelse:\n  incident.addNote(u\"ReaQta Get Processes failed: {}\".format(results.reason))",
+          "script_text": "from datetime import datetime\nnow = datetime.now()\n\ndef bool_to_str(value):\n  return \u0027True\u0027 if value else \u0027False\u0027\n\nresults = playbook.functions.results.reaqta_get_processes_result\n\nif results.success:\n  if isinstance(results.content, list):\n    if results.content:\n      for process in results.content:\n        row = incident.addRow(\"reaqta_process_list\")\n        \n        row[\u0027report_date\u0027] = now\n        row[\"pid\"] = process.get(\"pid\")\n        row[\"process_name\"] = process.get(\"processName\")\n        row[\"process_path\"] = process.get(\"programPath\")\n        row[\"privilege_level\"] = process.get(\"privilegeLevel\")\n        row[\"user\"] = process.get(\"user\")\n        row[\"has_incident\"] = process.get(\"hasIncident\")\n        row[\"suspended\"] = process.get(\"suspended\")\n        row[\"start_time\"] = process.get(\"startTime\")\n      \n      process_num = len(results.content)\n      incident.addNote(\"Number of processes queried: {}\\nQuery Inputs: \\nReaQta End Point id: {}, Has Incident: {}, Suspended: {}, ReaQta Hive: {}\\nReaQta Process List Data table updated!\\n\".format(process_num,incident.properties.reaqta_endpoint_id, playbook.inputs.reaqta_has_incident, playbook.inputs.reaqta_suspended, incident.properties.reaqta_hive))\n        \n    else:\n        incident.addNote(u\"ReaQta Get Processes - no processes found for input parameters: Has Incident: {}, Suspended: {}\".\\\n            format(bool_to_str(results.inputs.get(\"reaqta_has_incident\")), bool_to_str(results.inputs.get(\"reaqta_suspended\"))))\n  else:\n    incident.addNote(u\"ReaQta Get Processes unsuccessful: {}\".format(results.content.get(\u0027message\u0027)))\nelse:\n  incident.addNote(u\"ReaQta Get Processes failed: {}\".format(results.reason))",
           "tags": [],
           "uuid": "1cd7622d-057a-4074-8f9e-7f098081518d"
         }
@@ -3247,7 +3247,7 @@
       "tags": [],
       "type": "default",
       "uuid": "63dafde3-2d60-400e-a404-b0d9462fefb8",
-      "version": 13
+      "version": 23
     },
     {
       "activation_type": "manual",
@@ -3367,7 +3367,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
+        "content_version": 11,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_0f8002a2_404d_48c4_9369_57b0f3915fe9\" isExecutable=\"true\" name=\"playbook_0f8002a2_404d_48c4_9369_57b0f3915fe9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0yzf35e\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Kill Process\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f8f32b38-a279-4657-8419-5ce82fcdb36d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_process_pid = row[\u0027pid\u0027]\\ninputs.reaqta_starttime = row[\u0027start_time\u0027]\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_kill_process_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0yzf35e\u003c/incoming\u003e\u003coutgoing\u003eFlow_0cu2wmu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_084fmj9\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"reaqta_kill_process_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"81060bab-099c-4838-9ba5-70d5d0d47a0e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0cu2wmu\u003c/incoming\u003e\u003coutgoing\u003eFlow_084fmj9\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0yzf35e\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0cu2wmu\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_084fmj9\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0f8002a2_404d_48c4_9369_57b0f3915fe9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_084fmj9\" id=\"Flow_084fmj9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0cu2wmu\" id=\"Flow_0cu2wmu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0yzf35e\" id=\"Flow_0yzf35e_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.75\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1687781213258,
@@ -3419,7 +3419,7 @@
         "name": "hychuang@tw.ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1687847976653,
+      "last_modified_time": 1690284505616,
       "local_scripts": [
         {
           "actions": [],
@@ -3430,12 +3430,12 @@
           "id": 30,
           "language": "python3",
           "last_modified_by": "hychuang@tw.ibm.com",
-          "last_modified_time": 1687781544097,
+          "last_modified_time": 1690284503172,
           "name": "reaqta_kill_process_post_process",
           "object_type": "reaqta_process_list",
           "playbook_handle": "reaqta_kill_process",
           "programmatic_name": "reaqta_kill_process_reaqta_kill_process_post_process",
-          "script_text": "from datetime import datetime\nnow = datetime.now()\n\nif results.success:\n  for process in results.content:\n    row[\u0027report_date\u0027] = now\n    if process.get(\u0027killed\u0027):\n      row[\u0027status\u0027] = \u0027killed\u0027\n      msg = u\"Process: {} ({}) killed\".format(row[\u0027process_name\u0027], row[\u0027pid\u0027])\n    else:\n      row[\u0027status\u0027] = process.get(\u0027error\u0027)\n      msg = u\"Process: {} ({}) kill failed: {}\".format(row[\u0027process_name\u0027], row[\u0027pid\u0027], process.get(\u0027error\u0027))\n    incident.addNote(msg)\n    break;\nelse:\n  incident.addNote(u\"ReaQta Kill Process failed: {}\".format(results.reason))",
+          "script_text": "from datetime import datetime\nnow = datetime.now()\nresults = playbook.functions.results.reaqta_kill_process_result\n\nif results.success:\n  for process in results.content:\n    row[\u0027report_date\u0027] = now\n    if process.get(\u0027killed\u0027):\n      row[\u0027status\u0027] = \u0027killed\u0027\n      msg = u\"Process: {} ({}) killed\".format(row[\u0027process_name\u0027], row[\u0027pid\u0027])\n    else:\n      row[\u0027status\u0027] = process.get(\u0027error\u0027)\n      msg = u\"Process: {} ({}) kill failed: {}\".format(row[\u0027process_name\u0027], row[\u0027pid\u0027], process.get(\u0027error\u0027))\n    incident.addNote(msg)\n    break;\nelse:\n  incident.addNote(u\"ReaQta Kill Process failed: {}\".format(results.reason))",
           "tags": [],
           "uuid": "81060bab-099c-4838-9ba5-70d5d0d47a0e"
         }
@@ -3484,7 +3484,7 @@
       "tags": [],
       "type": "default",
       "uuid": "0f8002a2-404d-48c4-9369-57b0f3915fe9",
-      "version": 13
+      "version": 16
     },
     {
       "activation_type": "manual",

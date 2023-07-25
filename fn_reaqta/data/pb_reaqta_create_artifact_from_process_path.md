@@ -61,6 +61,9 @@ Write a note to SOAR if there is an error creating artifacts.
 results = playbook.functions.results.create_artifact_results
 if not results.success:
   incident.addNote("ReaQta Create Artifact failed: {}".format(results.reason))
+else:
+  incident.addNote(u"ReaQta Artifact created: {}".format(results.inputs['reaqta_program_path']))
+
 ```
 
 ---
