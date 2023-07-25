@@ -33,11 +33,14 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
 - [Function - Salesforce: Add Comment to Salesforce Case](#function---salesforce-add-comment-to-salesforce-case)
+- [Function - Salesforce: Create Case in Salesforce](#function---salesforce-create-case-in-salesforce)
 - [Function - Salesforce: Get Account](#function---salesforce-get-account)
+- [Function - Salesforce: Get Attachments from Salesforce](#function---salesforce-get-attachments-from-salesforce)
 - [Function - Salesforce: Get Case](#function---salesforce-get-case)
 - [Function - Salesforce: Get Case Comments](#function---salesforce-get-case-comments)
 - [Function - Salesforce: Get Contact](#function---salesforce-get-contact)
 - [Function - Salesforce: Get User](#function---salesforce-get-user)
+- [Function - Salesforce: Post Attachment to Salesforce Case](#function---salesforce-post-attachment-to-salesforce-case)
 - [Function - Salesforce: Update Case Status](#function---salesforce-update-case-status)
 - [Custom Fields](#custom-fields)
 - [Playbooks](#playbooks)
@@ -63,7 +66,7 @@
 -->
 **IBM SOAR app - bidirectional synchronization and functions for Salesforce**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
 Bi-directional App for Salesforce. Query Salesforce for Cases based 
          on user-defined query parameters and create and update cases in SOAR.
@@ -177,15 +180,15 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_version** | Yes | `v58.0` | *Salesforce REST API version |
-| **consumer_key** | Yes | `xxx` | *Consumer Key of a Salesforce Connected App* |
-| **consumer_secret** | Yes | `xxx` | *Consumer Secret of a Salesforce Connected App* |
-| **my_domain_name** | Yes | `company.develop` | *My Domain name in Salesforce* |
-| **my_domain_url** | Yes | `company.develop.my.salesforce.com` | *My Domain URL in Salesforce* |
-| **polling_filters** | Yes | `("Status","IN",["\'New\'","\'Working\'","\'In Progress\'"])` | *Query filters: Comma separated tuples ("field","operator","value") where "field" is a case field name* |
-| **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off.* |
-| **polling_lookback** | Yes | `120` | *Number of minutes to look back for Salesforce caes. Value is only used on the first time polling when the app starts.* |
-| **verify** | Yes | `True` | *Boolean indicating whether to verify the Salesforce client certificate.* |
+-| **api_version** | Yes | `v58.0` | *Salesforce REST API version |
+-| **consumer_key** | Yes | `xxx` | *Consumer Key of a Salesforce Connected App* |
+-| **consumer_secret** | Yes | `xxx` | *Consumer Secret of a Salesforce Connected App* |
+-| **my_domain_name** | Yes | `company.develop` | *My Domain name in Salesforce* |
+-| **my_domain_url** | Yes | `company.develop.my.salesforce.com` | *My Domain URL in Salesforce* |
+-| **polling_filters** | Yes | `("Status","IN",["\'New\'","\'Working\'","\'In Progress\'"])` | *Query filters: Comma separated tuples ("field","operator","value") where "field" is a case field name* |
+-| **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off.* |
+-| **polling_lookback** | Yes | `120` | *Number of minutes to look back for Salesforce caes. Value is only used on the first time polling when the app starts.* |
+-| **verify** | Yes | `True` | *Boolean indicating whether to verify the Salesforce client certificate.* |
 
 
 ---
@@ -257,8 +260,79 @@ None
 </details>
 
 ---
+## Function - Salesforce: Create Case in Salesforce
+Create a Salesforce case in Salesforce using the specified JSON case data.
+
+ ![screenshot: fn-salesforce-create-case-in-salesforce ](./doc/screenshots/fn-salesforce-create-case-in-salesforce.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `salesforce_case_data` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "salesforce_case": {
+      "errors": [],
+      "id": "500Hr00001X906jIAB",
+      "success": true
+    }
+  },
+  "inputs": {
+    "salesforce_case_data": "{\"Origin\": \"Web\", \"Status\": \"In Progress\", \"Description\": \"My Description\", \"Subject\": \"My Subject testing\", \"Reason\": \"Installation\"}"
+  },
+  "metrics": {
+    "execution_time_ms": 12850,
+    "host": "MacBook-Pro.local",
+    "package": "fn-salesforce",
+    "package_version": "1.0.0",
+    "timestamp": "2023-07-20 11:18:51",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
 ## Function - Salesforce: Get Account
-Get the account information
+Get the Salesforce account information for the specified Salesforce AccountId.
 
  ![screenshot: fn-salesforce-get-account ](./doc/screenshots/fn-salesforce-get-account.png) <!-- ::CHANGE_ME:: -->
 
@@ -393,8 +467,81 @@ None
 </details>
 
 ---
+## Function - Salesforce: Get Attachments from Salesforce
+Get attachments associated with a Salesforce case and add the attachments in the corresponding SOAR case.
+
+ ![screenshot: fn-salesforce-get-attachments-from-salesforce ](./doc/screenshots/fn-salesforce-get-attachments-from-salesforce.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | No | `-` | - |
+| `salesforce_case_id` | `text` | Yes | `-` | - |
+| `task_id` | `number` | No | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "salesforce_attachments": [
+      "test.txt"
+    ]
+  },
+  "inputs": {
+    "incident_id": 2522,
+    "salesforce_case_id": "500Hr00001X98NnIAJ",
+    "task_id": null
+  },
+  "metrics": {
+    "execution_time_ms": 6912,
+    "host": "MacBook-Pro.local",
+    "package": "fn-salesforce",
+    "package_version": "1.0.0",
+    "timestamp": "2023-07-25 12:50:08",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
 ## Function - Salesforce: Get Case
-Get Case information from Salesforce.
+Get Case information from a specified Salesforce CaseId.
 
  ![screenshot: fn-salesforce-get-case ](./doc/screenshots/fn-salesforce-get-case.png) <!-- ::CHANGE_ME:: -->
 
@@ -451,7 +598,7 @@ results = {
       "Status": "New",
       "Subject": "SOAR Test Case",
       "SuppliedCompany": null,
-      "SuppliedEmail": "annmarie.norcross@qradar.dev",
+      "SuppliedEmail": "user@qradar.dev",
       "SuppliedName": null,
       "SuppliedPhone": "444-444-4444",
       "SystemModstamp": "2023-07-17T19:04:23.000+0000",
@@ -515,7 +662,7 @@ Get the comments from the Salesforce case.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `incident_id` | `number` | Yes | `-` | - |
+| `incident_id` | `number` | No | `-` | - |
 | `salesforce_case_id` | `text` | Yes | `-` | - |
 
 </p>
@@ -749,7 +896,7 @@ results = {
       "Department": null,
       "DigestFrequency": "D",
       "Division": null,
-      "Email": "annmarie.meier.norcross@ibm.com",
+      "Email": "users@example.com",
       "EmailEncodingKey": "UTF-8",
       "EmailPreferencesAutoBcc": true,
       "EmailPreferencesAutoBccStayInTouch": false,
@@ -758,7 +905,7 @@ results = {
       "Extension": null,
       "Fax": null,
       "FederationIdentifier": null,
-      "FirstName": "AnnMarie",
+      "FirstName": "Joe",
       "ForecastEnabled": false,
       "FullPhotoUrl": "https://ibmc4s-qradar-dev-dev-ed.develop.file.force.com/profilephoto/005/F",
       "GeocodeAccuracy": null,
@@ -783,7 +930,7 @@ results = {
       "MediumBannerPhotoUrl": "/profilephoto/005/E",
       "MediumPhotoUrl": "https://ibmc4s-qradar-dev-dev-ed.develop.file.force.com/profilephoto/005/M",
       "MobilePhone": null,
-      "Name": "AnnMarie Norcross",
+      "Name": "Joe Last",
       "NumberOfFailedLogins": 0,
       "OfflinePdaTrialExpirationDate": null,
       "OfflineTrialExpirationDate": null,
@@ -888,7 +1035,7 @@ results = {
       "UserPreferencesUserDebugModePref": false,
       "UserRoleId": "00EHr000002MWZLMA4",
       "UserType": "Standard",
-      "Username": "annmarie.norcross@qradar.dev",
+      "Username": "user@qradar.dev",
       "attributes": {
         "type": "User",
         "url": "/services/data/v58.0/sobjects/User/005Hr00000COneZIAT"
@@ -900,10 +1047,90 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 225,
-    "host": "AnnMaries-MacBook-Pro.local",
+    "host": "MacBook-Pro.local",
     "package": "fn-salesforce",
     "package_version": "1.0.0",
     "timestamp": "2023-07-18 16:46:43",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
+## Function - Salesforce: Post Attachment to Salesforce Case
+Post the SOAR attachment to the corresponding Case in Salesforce.
+
+ ![screenshot: fn-salesforce-post-attachment-to-salesforce-case ](./doc/screenshots/fn-salesforce-post-attachment-to-salesforce-case.png) <!-- ::CHANGE_ME:: -->
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `artifact_id` | `number` | No | `-` | - |
+| `attachment_id` | `number` | No | `-` | - |
+| `incident_id` | `number` | No | `-` | - |
+| `salesforce_case_id` | `text` | Yes | `-` | - |
+| `task_id` | `number` | No | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "content_document_link": {
+      "errors": [],
+      "id": "06AHr00000R0Rl0MAF",
+      "success": true
+    },
+    "salesforce_attachment": "temp.txt"
+  },
+  "inputs": {
+    "artifact_id": null,
+    "attachment_id": 50,
+    "incident_id": 2522,
+    "salesforce_case_id": "500Hr00001X98NnIAJ",
+    "task_id": null
+  },
+  "metrics": {
+    "execution_time_ms": 13321,
+    "host": "MacBook-Pro.local",
+    "package": "fn-salesforce",
+    "package_version": "1.0.0",
+    "timestamp": "2023-07-25 16:15:49",
     "version": "1.0"
   },
   "raw": null,
@@ -947,6 +1174,7 @@ Update the Status field of a case in Salesforce.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `salesforce_case_comment` | `text` | No | `-` | - |
 | `salesforce_case_id` | `text` | Yes | `-` | - |
 | `salesforce_case_status` | `text` | Yes | `-` | - |
 
@@ -967,7 +1195,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 8467,
-    "host": "AnnMaries-MBP",
+    "host": "My-MBP",
     "package": "fn-salesforce",
     "package_version": "1.0.0",
     "timestamp": "2023-07-14 12:43:49",
@@ -1015,6 +1243,7 @@ None
 | Case Id | `salesforce_case_id` | `text` | `properties` | - | - |
 | Link to Case in Salesforce | `salesforce_case_link` | `textarea` | `properties` | - | - |
 | Case Number | `salesforce_case_number` | `text` | `properties` | - | - |
+| Case Owner | `salesforce_case_owner` | `text` | `properties` | - | - |
 | Case Type | `salesforce_case_type` | `text` | `properties` | - | The type of case, such as Feature Request or Question. |
 | Contact Email | `salesforce_contact_email` | `text` | `properties` | - | Email address for the contact. The Case.ContactEmail field displays the Email field on the contact that is referenced by Case.ContactId. Label is Contact Email. This field is available in API version 38.0 and later. |
 | Contact FAX | `salesforce_contact_fax` | `text` | `properties` | - | Fax number for the contact. Label is Contact Fax. This field is available in API version 38.0 and later. |
@@ -1039,14 +1268,18 @@ None
 | ------------- | ----------- | ------ | ------ |
 | Salesforce: Add Comment to Salesforce Case | Add the specified text as a comment to the specified case. | incident | `enabled` |
 | Salesforce: Close Case | Automatic playbook to close a case in Salesforce.  | incident | `enabled` |
+| Salesforce: Create Salesforce Case | Create a case in Salesforce. | incident | `enabled` |
 | Salesforce: Write Account Details to Note | Get information on the Salesforce account associated with a case and write to a SOAR note. | incident | `enabled` |
-| Salesforce: Write Contact Details to a Note | Manual playbook to get the Contact information associated with the Salesforce case.  Write the details to a note in SOAR. | incident | `enabled` |
+| Salesforce: Get Attachments from Salesforce Case | Get attachments from Salesforce case and add them to the SOAR case. | incident | `enabled` |
+| Salesforce: Write Contact Details to Note | Manual playbook to get the Contact information associated with the Salesforce case.  Write the details to a note in SOAR. | incident | `enabled` |
+| Salesforce: Post Artifact File to Salesforce Case | Post a SOAR artifact file to a Salesforce cases as an attachment. | artifact | `enabled` |
+| Salesforce: Post Attachment to Salesforce Case | Post the SOAR attachment to the corresponding case in Salesforce. | attachment | `enabled` |
 | Salesforce: Update Account Details in SOAR | None | incident | `enabled` |
-| Salesforce: Update Case in SOAR - Automatic | Automatic playbook to update the SOAR case with information from Salesforce. | incident | `enabled` |
-| Salesforce: Update Case Status in Salesforce | Manual playbook to update the case Status field in Salesforce | incident | `enabled` |
+| Salesforce: Update Case in SOAR | Automatic playbook to update the SOAR case with information from Salesforce. | incident | `enabled` |
 | Salesforce: Update Comments from Salesforce Case | Get the comments from the specified Salesforce case and update the notes in corresponding  SOAR case. | incident | `enabled` |
 | Salesforce: Update Contact Details in SOAR | Automatic playbook to update the Contact details in SOAR when the ContactId has changed. | incident | `enabled` |
 | Salesforce: Update Owner Details in SOAR | Get the Case Owner details and update the Case Owner field in the SOAR case. | incident | `enabled` |
+| Salesforce: Write Owner Details to Note | Write the User details of the Case Owner in Salesforce to a SOAR incident Note. | incident | `enabled` |
 
 ---
 

@@ -9,10 +9,10 @@
         "url": "/services/data/v58.0/sobjects/User/005Hr00000COneZIAT"
       },
       "Id": "005Hr00000COneZIAT",
-      "Username": "annmarie.norcross@qradar.dev",
-      "LastName": "Norcross",
-      "FirstName": "AnnMarie",
-      "Name": "AnnMarie Norcross",
+      "Username": "user@qradar.dev",
+      "LastName": "MyLastName",
+      "FirstName": "Joe",
+      "Name": "Joe MyLastName",
       "CompanyName": null,
       "Division": null,
       "Department": null,
@@ -26,7 +26,7 @@
       "Longitude": null,
       "GeocodeAccuracy": null,
       "Address": null,
-      "Email": "annmarie.meier.norcross@ibm.com",
+      "Email": "user@example.com",
       "EmailPreferencesAutoBcc": true,
       "EmailPreferencesAutoBccStayInTouch": false,
       "EmailPreferencesStayInTouchReminder": true,
@@ -177,7 +177,7 @@
     "version": "1.0",
     "package": "fn-salesforce",
     "package_version": "1.0.0",
-    "host": "AnnMaries-MacBook-Pro.local",
+    "host": "MacBook-Pro.local",
     "execution_time_ms": 225,
     "timestamp": "2023-07-18 16:46:43"
   }
