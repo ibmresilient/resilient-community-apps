@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1690302857999,
+  "export_date": 1690317612226,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -28,7 +28,6 @@
       "placeholder": "",
       "prefix": null,
       "read_only": false,
-      "required": "always",
       "rich_text": false,
       "tags": [],
       "templates": [],
@@ -95,6 +94,35 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "cdbb2fab-1d25-4140-8041-14a2c495f262",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/artifact_id",
+      "hide_notification": false,
+      "id": 341,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "artifact_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "artifact_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "cfe97ace-78c6-416d-8feb-db3ec95a53c4",
       "values": []
     },
     {
@@ -214,6 +242,35 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "de33f782-0597-4064-a533-91c6e8aec5bd",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/attachment_id",
+      "hide_notification": false,
+      "id": 340,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "attachment_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "attachment_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "fcf2276c-054e-4f3a-83fa-aaefa06379a7",
       "values": []
     },
     {
@@ -1216,6 +1273,71 @@
       "workflows": []
     },
     {
+      "created_date": 1690307505297,
+      "description": {
+        "content": "Post the SOAR attachment to the corresponding Case in Salesforce.",
+        "format": "text"
+      },
+      "destination_handle": "fn_salesforce",
+      "display_name": "Salesforce: Post Attachment to Salesforce Case",
+      "export_key": "salesforce_post_attachment_to_salesforce_case",
+      "id": 10,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1690307557045,
+      "name": "salesforce_post_attachment_to_salesforce_case",
+      "tags": [],
+      "uuid": "ecdac742-4e8a-4b9e-9ec9-4734d48ab62d",
+      "version": 2,
+      "view_items": [
+        {
+          "content": "ba2f906f-6db5-43ef-8ebd-55333e41341c",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "fcf2276c-054e-4f3a-83fa-aaefa06379a7",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "bee6fc4d-440c-484d-a37e-2090fd8e4eae",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "cfe97ace-78c6-416d-8feb-db3ec95a53c4",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "cdbb2fab-1d25-4140-8041-14a2c495f262",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
       "created_date": 1689342345037,
       "description": {
         "content": "Update the Status field of a case in Salesforce.",
@@ -1267,13 +1389,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 66,
+  "id": 73,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1690302855895,
+      "create_date": 1690317610204,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1282,7 +1404,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1690302855895,
+      "update_date": 1690317610204,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2212,6 +2334,233 @@
       "type": "default",
       "uuid": "e43fa5c0-2ea2-4965-abc7-c5525e3c7815",
       "version": 9
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_05ce7276_b7fc_4e8c_afcf_41831acab3d6\" isExecutable=\"true\" name=\"playbook_05ce7276_b7fc_4e8c_afcf_41831acab3d6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0vaelh5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Post Attachment to Salesforce Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ecdac742-4e8a-4b9e-9ec9-4734d48ab62d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.attachment_id = None\\ninputs.task_id = None\\ninputs.artifact_id = artifact.id\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"post_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0vaelh5\u003c/incoming\u003e\u003coutgoing\u003eFlow_15v5is0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0vaelh5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0qr2uq0\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Salesforce: Post Artifact File to Salesforce Case\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c6e996e2-47ab-4da6-b6ef-0498e9177708\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15v5is0\u003c/incoming\u003e\u003coutgoing\u003eFlow_0qr2uq0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_15v5is0\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0qr2uq0\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_05ce7276_b7fc_4e8c_afcf_41831acab3d6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0vaelh5\" id=\"Flow_0vaelh5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15v5is0\" id=\"Flow_15v5is0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qr2uq0\" id=\"Flow_0qr2uq0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1690316726463,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_05ce7276_b7fc_4e8c_afcf_41831acab3d6",
+      "description": {
+        "content": "Post a SOAR artifact file to a Salesforce cases as an attachment.",
+        "format": "text"
+      },
+      "display_name": "Salesforce: Post Artifact File to Salesforce Case",
+      "export_key": "salesforce_post_artifact_file_to_salesforce_case",
+      "field_type_handle": "playbook_05ce7276_b7fc_4e8c_afcf_41831acab3d6",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Salesforce: Post Artifact File to Salesforce Case",
+        "export_key": "playbook_05ce7276_b7fc_4e8c_afcf_41831acab3d6",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_05ce7276_b7fc_4e8c_afcf_41831acab3d6",
+        "uuid": "8750eac5-289c-4753-a4f2-ecd500f38f59"
+      },
+      "has_logical_errors": false,
+      "id": 19,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1690317195305,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1690317170614,
+          "description": "Write the results of posting an artifact file to a Salesforce case as an attachment.",
+          "enabled": false,
+          "export_key": "Salesforce: Post Artifact File to Salesforce Case",
+          "id": 25,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1690317170627,
+          "name": "Salesforce: Post Artifact File to Salesforce Case",
+          "object_type": "artifact",
+          "playbook_handle": "salesforce_post_artifact_file_to_salesforce_case",
+          "programmatic_name": "salesforce_post_artifact_file_to_salesforce_case_salesforce_post_artifact_file_to_salesforce_case",
+          "script_text": "results = playbook.functions.results.post_artifact_results\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Post Artifact File to Salesforce Case\u003c/b\u003e post attachment to case:\u003cbr\u003e{}\".format(results.content.salesforce_attachment)\nelse:\n  note_text = \"\u003cb\u003eSalesforce: Post Artifact File to Salesforce Case\u003c/b\u003e was NOT successful.\"\n\nincident.addNote(note_text)",
+          "tags": [],
+          "uuid": "c6e996e2-47ab-4da6-b6ef-0498e9177708"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": 2,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "Email Attachment"
+            },
+            {
+              "evaluation_id": 3,
+              "field_name": "artifact.type",
+              "method": "equals",
+              "type": null,
+              "value": "Malware Sample"
+            },
+            {
+              "evaluation_id": 1,
+              "field_name": "incident.properties.salesforce_case_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            }
+          ],
+          "custom_condition": "(1 AND 2) OR (1 AND 3)",
+          "logic_type": "advanced"
+        },
+        "view_items": []
+      },
+      "name": "salesforce_post_artifact_file_to_salesforce_case",
+      "object_type": "artifact",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_05ce7276-b7fc-4e8c-afcf-41831acab3d6",
+        "id": 19,
+        "name": "playbook_05ce7276_b7fc_4e8c_afcf_41831acab3d6",
+        "type": "playbook",
+        "uuid": "b211c0dd-5da7-4a31-b862-226688ccd144"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "05ce7276-b7fc-4e8c-afcf-41831acab3d6",
+      "version": 6
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 6,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df\" isExecutable=\"true\" name=\"playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1191hgv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Post Attachment to Salesforce Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ecdac742-4e8a-4b9e-9ec9-4734d48ab62d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\ninputs.task_id = None\\ninputs.artifact_id = None\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"post_attachment_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1191hgv\u003c/incoming\u003e\u003coutgoing\u003eFlow_06yoptt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1191hgv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Write Results of Post Attachment to Salesforce case \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6f85e283-5988-4a28-a61a-1b7c729e54b2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06yoptt\u003c/incoming\u003e\u003coutgoing\u003eFlow_1l04h11\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_06yoptt\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1l04h11\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1l04h11\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1l04h11\" id=\"Flow_1l04h11_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"152\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"204\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06yoptt\" id=\"Flow_06yoptt_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"22\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"68\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1191hgv\" id=\"Flow_1191hgv_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"-124\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"-62\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"209.017\" x=\"605\" y=\"-176\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.008\" y=\"-62\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.008\" y=\"68\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644.008\" y=\"204\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1690306210794,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df",
+      "description": {
+        "content": "Post the SOAR attachment to the corresponding case in Salesforce.",
+        "format": "text"
+      },
+      "display_name": "Salesforce: Post Attachment to Salesforce Case",
+      "export_key": "salesforce_post_attachment_to_salesforce_case",
+      "field_type_handle": "playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Salesforce: Post Attachment to Salesforce Case",
+        "export_key": "playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df",
+        "uuid": "5f49777e-12b3-4c69-ab4e-177557cf79d4"
+      },
+      "has_logical_errors": false,
+      "id": 18,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1690315728188,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1690307900998,
+          "description": "Write the results of posting a SOAR attachment to case in Salesforce",
+          "enabled": false,
+          "export_key": "Salesforce: Write Results of Post Attachment to Salesforce case ",
+          "id": 24,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1690315725421,
+          "name": "Salesforce: Write Results of Post Attachment to Salesforce case ",
+          "object_type": "attachment",
+          "playbook_handle": "salesforce_post_attachment_to_salesforce_case",
+          "programmatic_name": "salesforce_post_attachment_to_salesforce_case_salesforce_write_results_of_post_attachment_to_salesforce_case_",
+          "script_text": "results = playbook.functions.results.post_attachment_results\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Post Attachment to Salesforce Case\u003c/b\u003e post attachment to case:\u003cbr\u003e{}\".format(results.content.salesforce_attachment)\nelse:\n  note_text = \"\u003cb\u003eSalesforce: Post Attachment to Salesforce Case\u003c/b\u003e was NOT successful.\"\n\nincident.addNote(note_text)",
+          "tags": [],
+          "uuid": "6f85e283-5988-4a28-a61a-1b7c729e54b2"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.salesforce_case_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            }
+          ],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "salesforce_post_attachment_to_salesforce_case",
+      "object_type": "attachment",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_c9b4fe8b-8d4a-4e1f-a3cd-6cf4204f70df",
+        "id": 18,
+        "name": "playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df",
+        "type": "playbook",
+        "uuid": "345302a7-3350-434f-b963-e2e56905dde6"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "c9b4fe8b-8d4a-4e1f-a3cd-6cf4204f70df",
+      "version": 10
     },
     {
       "activation_details": {

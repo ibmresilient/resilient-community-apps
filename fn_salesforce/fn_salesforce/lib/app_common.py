@@ -37,7 +37,9 @@ TOKEN_URL = "https://{my_domain_url}/services/oauth2/token"
 BASE_URL = "https://{my_domain_url}"
 QUERY_URI = "/services/data/{api_version}/query/"
 ATTACHMENT_URI = "/services/data/{api_version}/sobjects/Attachment"
-CONTENT_VERSION_URI = "/services/data/{api_version}/sobjects/ContentVersion/{content_version_id}"
+CONTENT_DOCUMENT_LINK = "/services/data/{api_version}/sobjects/ContentDocumentLink"
+CONTENT_VERSION_GET = "/services/data/{api_version}/sobjects/ContentVersion/{content_version_id}"
+CONTENT_VERSION_POST = "/services/data/{api_version}/sobjects/ContentVersion"
 CASE_URI = "/services/data/{api_version}/sobjects/Case/{case_id}"
 CASE_POST_URI = "/services/data/{api_version}/sobjects/Case"
 CASE_COMMENTS_URI = "/services/data/{api_version}/sobjects/Case/{case_id}/CaseComments"
@@ -506,6 +508,49 @@ class AppCommon():
         if extension != "":
             attachment_name =F"{attachment_name}.{extension}"
         return attachment_name
+
+    def post_attachment_to_salesforce_case(self, attachment_name: str, 
+                                           encoded_string: bytes,
+                                           salesforce_case_id: str)-> dict:
+        """ Post SOAR attachment data to a Salesforce case.
+
+        Args:
+            attachment_name (str): attachment name in SOAR
+            encoded_string (bytes): attachment data
+            salesforce_case_id (str): Salesforce CaseId
+
+        Returns:
+            dict : JSON returned from /ContentDocumentLink endpoint associating the case with the 
+            document (attachment).
+        """
+        # Create a ContentVersion
+        content_version_url = self.base_url + CONTENT_VERSION_POST.format(api_version=self.api_version)
+        b64_encoded_string = b64encode(encoded_string).decode("utf-8")
+        param = {'Title': attachment_name,
+                 'PathOnClient': attachment_name,
+                 'VersionData': b64_encoded_string}
+        response = self.rc.execute("POST", url=content_version_url, headers=self.headers, json=param)
+        response_json = response.json()
+
+        content_version_id = response_json.get('id')
+
+        content_version_get_url = self.base_url + CONTENT_VERSION_GET.format(api_version=self.api_version, 
+                                                                             content_version_id=content_version_id)
+        # Get the ContentDocument id
+        response_get = self.rc.execute("GET", url=content_version_get_url, headers=self.headers)
+        response_get_json = response_get.json()
+        #ContentVersion = sf_api_call('/services/data/v40.0/sobjects/ContentVersion/%s' % ContentVersion_id)
+        content_document_id = response_get_json.get('ContentDocumentId')
+
+
+        # Create a ContentDocumentLink to link the document to the case
+        data = {'ContentDocumentId': content_document_id,
+                'LinkedEntityId': salesforce_case_id,
+                'ShareType': 'V'}
+        content_document_link_url = self.base_url + CONTENT_DOCUMENT_LINK.format(api_version=self.api_version)
+        content_document_link = self.rc.execute("POST", url=content_document_link_url, headers=self.headers, json=data)
+        content_document_link_json = content_document_link.json()
+        return content_document_link_json
 
 def callback(response):
     """
