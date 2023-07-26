@@ -505,7 +505,7 @@ class AppCommon():
         if attachment_name == "":
             attachment_name = "salesforce-attachment"
 
-        if extension != "":
+        if extension != "" and extension not in attachment_name:
             attachment_name =F"{attachment_name}.{extension}"
         return attachment_name
 
