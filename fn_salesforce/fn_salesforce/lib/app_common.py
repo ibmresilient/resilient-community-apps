@@ -464,8 +464,8 @@ class AppCommon():
         Returns:
             dict : JSON format info of the ContentVersion (attachment)
         """
-        url = self.base_url + CONTENT_VERSION_URI.format(api_version=self.api_version, 
-                                                        content_version_id=content_version_id)
+        url = self.base_url + CONTENT_VERSION_GET.format(api_version=self.api_version, 
+                                                         content_version_id=content_version_id)
         response = self.rc.execute("GET", url=url, headers=self.headers)
         response_json = response.json()
         return response_json
