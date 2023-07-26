@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1690317612226,
+  "export_date": 1690390259113,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1389,13 +1389,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 73,
+  "id": 75,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1690317610204,
+      "create_date": 1690390256939,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1404,7 +1404,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1690317610204,
+      "update_date": 1690390256939,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1663,7 +1663,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 13,
+        "content_version": 17,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\" isExecutable=\"true\" name=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_09qrncb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Create Case in Salesforce\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"74337648-8bfe-4aa6-9cdd-34dd819a2bdd\"\u003e{\"inputs\":{},\"pre_processing_script\":\"import json\\n\\ncase_json = {}\\ncase_json[\u0027Origin\u0027] = \\\"Web\\\"\\n\\nif playbook.inputs.salesforce_case_status:\\n  case_json[\u0027Status\u0027] = playbook.inputs.salesforce_case_status\\nelse: \\n  case_json[\u0027Status\u0027] = \\\"New\\\"\\n  \\nif playbook.inputs.salesforce_case_description:\\n  case_json[\u0027Description\u0027] = playbook.inputs.salesforce_case_description\\n\\nif playbook.inputs.salesforce_case_subject:\\n  case_json[\u0027Subject\u0027] = playbook.inputs.salesforce_case_subject\\n\\nif playbook.inputs.salesforce_case_internal_comments:\\n  case_json[\u0027Comments\u0027] = playbook.inputs.salesforce_case_internal_comments\\n\\nif playbook.inputs.salesforce_case_reason:\\n  case_json[\u0027Reason\u0027] = playbook.inputs.salesforce_case_reason\\n\\nif incident.properties.salesforce_account_id:\\n  case_json[\u0027AccountId\u0027] = incident.properties.salesforce_account_id\\n\\nif incident.properties.salesforce_owner_id:\\n  case_json[\u0027OwnerId\u0027] = incident.properties.salesforce_owner_id\\n  \\nif incident.properties.salesforce_contact_id:\\n  case_json[\u0027ContactId\u0027] = incident.properties.salesforce_contact_id\\n  \\ninputs.salesforce_case_data = json.dumps(case_json)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_salesforce_case_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09qrncb\u003c/incoming\u003e\u003coutgoing\u003eFlow_0eyyvr2\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_09qrncb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Write results of Create Salesforce Case function\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"295aaaa0-6cc9-4e54-b426-8bf585223f67\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0eyyvr2\u003c/incoming\u003e\u003coutgoing\u003eFlow_1dmb1fs\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0eyyvr2\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1dmb1fs\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1dmb1fs\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dmb1fs\" id=\"Flow_1dmb1fs_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"72\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0eyyvr2\" id=\"Flow_0eyyvr2_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"-48\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09qrncb\" id=\"Flow_09qrncb_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"-174\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"-132\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"466\" y=\"-226\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462.48400000000004\" y=\"-132\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462.48400000000004\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"493.48400000000004\" y=\"124\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1689793606803,
@@ -2121,7 +2121,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1689945365249,
+      "last_modified_time": 1690390036652,
       "local_scripts": [
         {
           "actions": [],
@@ -2132,12 +2132,12 @@
           "id": 20,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1689878050028,
+          "last_modified_time": 1690390034895,
           "name": "Salesforce: Write results of Create Salesforce Case function",
           "object_type": "incident",
           "playbook_handle": "salesforce_create_salesforce_case",
           "programmatic_name": "salesforce_create_salesforce_case_salesforce_write_results_of_create_salesforce_case_function",
-          "script_text": "results = playbook.functions.results.create_salesforce_case_results\ncontent = results.get(\"content\")\nsalesforce_case = content.get(\"salesforce_case\")\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Create Case in Salesforce\u003c/b\u003e created Case with CaseId: {}\".format(salesforce_case.get(\"id\", None))\nelse:\n  note_text = \"\u003cb\u003eSalesforce: Create Case in Saleforce\u003c/b\u003e failed:\u003cbr\u003e{}\".format(salesforce_case.get(\"error\", None))\n  \nincident.addNote(note_text)",
+          "script_text": "results = playbook.functions.results.create_salesforce_case_results\ncontent = results.get(\"content\")\nsalesforce_case = content.get(\"salesforce_case\")\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Create Case in Salesforce\u003c/b\u003e created Case with CaseId: {}\".format(salesforce_case.get(\"id\", None))\n  if salesforce_case.get(\"entity_url\", None):\n    note_text = note_text + \"   \u003ca target=\u0027_blank\u0027 href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\".format(salesforce_case.get(\"entity_url\"))\nelse:\n  note_text = \"\u003cb\u003eSalesforce: Create Case in Saleforce\u003c/b\u003e failed:\u003cbr\u003e{}\".format(salesforce_case.get(\"error\", None))\n  \nincident.addNote(note_text)",
           "tags": [],
           "uuid": "295aaaa0-6cc9-4e54-b426-8bf585223f67"
         }
@@ -2235,7 +2235,7 @@
       "tags": [],
       "type": "default",
       "uuid": "53b2cb7f-7d97-4da5-acbf-89fdee65baaa",
-      "version": 19
+      "version": 23
     },
     {
       "activation_type": "manual",

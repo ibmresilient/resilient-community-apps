@@ -92,6 +92,8 @@ salesforce_case = content.get("salesforce_case")
 
 if results.success:
   note_text = "<b>Salesforce: Create Case in Salesforce</b> created Case with CaseId: {}".format(salesforce_case.get("id", None))
+  if salesforce_case.get("entity_url", None):
+    note_text = note_text + "   <a target='_blank' href='{0}'>Link</a>".format(salesforce_case.get("entity_url"))
 else:
   note_text = "<b>Salesforce: Create Case in Saleforce</b> failed:<br>{}".format(salesforce_case.get("error", None))
   

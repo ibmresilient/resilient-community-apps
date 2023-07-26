@@ -30,6 +30,7 @@ class FunctionComponent(AppFunctionComponent):
         salesforce_case_data = json.loads(fn_inputs.salesforce_case_data)
 
         response = app_common.create_salesforce_case(salesforce_case_data)
+        response["entity_url"] = app_common.make_linkback_url(response.get("id"))
 
         results = {"salesforce_case": response}
 
