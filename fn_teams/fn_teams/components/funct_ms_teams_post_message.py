@@ -60,10 +60,8 @@ class FunctionComponent(AppFunctionComponent):
                 teams_payload = fn_inputs.teams_payload,
                 org_id = self.rest_client().org_id,
                 incident_id = fn_inputs.incident_id,
-                task_id = fn_inputs.task_id if hasattr(fn_inputs,
-                    'task_id') else False,
-                teams_mrkdown = fn_inputs.teams_mrkdown if hasattr(fn_inputs,
-                    'teams_mrkdown') else False)
+                task_id = getattr(fn_inputs, 'task_id', False),
+                teams_mrkdown = getattr(fn_inputs,'teams_mrkdown', False))
 
             yield FunctionResult({
                 "message" : (constants

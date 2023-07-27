@@ -36,13 +36,20 @@ None
 
 ### Function-Input Script
 ```python
-inputs.ms_message_id = getattr(playbook.inputs, "ms_message_id")
-inputs.ms_channel_id = getattr(playbook.inputs, "ms_channel_id")
-inputs.ms_groupteam_id = getattr(playbook.inputs, "ms_groupteam_id")
-inputs.ms_channel_name = getattr(playbook.inputs, "ms_channel_name")
-inputs.ms_groupteam_id = getattr(playbook.inputs, "ms_groupteam_id")
-inputs.ms_group_mail_nickname = getattr(playbook.inputs, "ms_group_mail_nickname")
-inputs.ms_groupteam_name = getattr(playbook.inputs, "ms_groupteam_name")
+if hasattr(playbook.inputs, "ms_message_id"):
+  inputs.ms_message_id = getattr(playbook.inputs, "ms_message_id")
+if hasattr(playbook.inputs, "ms_channel_id"):
+  inputs.ms_channel_id = getattr(playbook.inputs, "ms_channel_id")
+if hasattr(playbook.inputs, "ms_groupteam_id"):
+  inputs.ms_groupteam_id = getattr(playbook.inputs, "ms_groupteam_id")
+if hasattr(playbook.inputs, "ms_channel_name"):
+  inputs.ms_channel_name = getattr(playbook.inputs, "ms_channel_name")
+if hasattr(playbook.inputs, "ms_groupteam_id"):
+  inputs.ms_groupteam_id = getattr(playbook.inputs, "ms_groupteam_id")
+if hasattr(playbook.inputs, "ms_group_mail_nickname"):
+  inputs.ms_group_mail_nickname = getattr(playbook.inputs, "ms_group_mail_nickname")
+if hasattr(playbook.inputs, "ms_groupteam_name"):
+  inputs.ms_groupteam_name = getattr(playbook.inputs, "ms_groupteam_name")
 ```
 
 ---

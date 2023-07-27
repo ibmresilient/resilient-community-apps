@@ -80,15 +80,15 @@ class FunctionComponent(AppFunctionComponent):
             try:
                 channel_manager = ChannelInterface(required_parameters)
 
-                if hasattr(fn_inputs, 'ms_groupteam_id'):
+                if getattr(fn_inputs, 'ms_groupteam_id', ""):
                     options.update(
                         {"group_id" : fn_inputs.ms_groupteam_id})
 
-                elif hasattr(fn_inputs, 'ms_group_mail_nickname'):
+                elif getattr(fn_inputs, 'ms_group_mail_nickname', ""):
                     options.update(
                         {"group_mail_nickname" : fn_inputs.ms_group_mail_nickname})
 
-                elif hasattr(fn_inputs, 'ms_groupteam_name'):
+                elif getattr(fn_inputs, 'ms_groupteam_name', ""):
                     options.update(
                         {"group_name" : fn_inputs.ms_groupteam_name})
                 else:
