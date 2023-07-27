@@ -489,14 +489,14 @@ slack_conversations_db
 ## Playbooks
 | Rule Name | Object | Status |
 | --------- | ------ | ------------------ |
-| Archive Incident Slack Channel - Example (PB) | incident | `enabled` |
-| Archive Task Slack Channel - Example (PB) | task | `enabled` |
-| Post Artifact Attachment to Slack - Example (PB)) | artifact | `enabled` |
-| Post Artifact to Slack - Example (PB) | artifact | `enabled` |
-| Post Incident / Task Attachment to Slack - Example (PB) | attachment | `enabled` |
-| Post Incident to Slack - Example (PB) | incident | `enabled` |
-| Post Note to Slack - Example (PB) | note | `enabled` |
-| Post Task to Slack - Example (PB) | task | `enabled` |
+| Slack: Archive Incident Slack Channel - Example (PB) | incident | `enabled` |
+| Slack: Archive Task Slack Channel - Example (PB) | task | `enabled` |
+| Slack: Post Artifact Attachment to Slack - Example (PB)) | artifact | `enabled` |
+| Slack: Post Artifact to Slack - Example (PB) | artifact | `enabled` |
+| Slack: Post Incident / Task Attachment to Slack - Example (PB) | attachment | `enabled` |
+| Slack: Post Incident to Slack - Example (PB) | incident | `enabled` |
+| Slack: Post Note to Slack - Example (PB) | note | `enabled` |
+| Slack: Post Task to Slack - Example (PB) | task | `enabled` |
 
 ---
 ## Troubleshooting & Support
