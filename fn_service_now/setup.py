@@ -33,7 +33,7 @@ setup(
         - Sync notes between a related IBM SOAR Incident/Task and a ServiceNow Record.<br>
         - Send Attachments from an IBM SOAR Incident/Task to a related ServiceNow Record.""",
     install_requires=[
-        "resilient_circuits>=46.0"
+        "resilient_circuits>=45.0"
     ],
     packages=find_packages(),
     include_package_data=True,

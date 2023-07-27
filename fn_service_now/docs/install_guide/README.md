@@ -20,8 +20,8 @@
 * ServiceNow Instance with ITSM enabled and running `Kingston` or newer releases
 * Access to the `Incident Table` in ServiceNow
 * A user in ServiceNow with an `admin` role
-* IBM Cloud Pak for Security `>= 1.9.0` *or* IBM SOAR `>= v46.0.0`
-* An App Host >= `v1.9.0` or an Integrations Server running `resilient-circuits >= v46.0.0`.
+* IBM Cloud Pak for Security `>= 1.9.0` *or* IBM SOAR `>= v45.0.0`
+* An App Host >= `v1.9.0` or an Integrations Server running `resilient-circuits >= v45.0.0`.
   > - To setup an App Host see: [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
   > - To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 * If SOAR instance is not publicly accessible (behind a firewall), a `ServiceNow MID Server` is required
