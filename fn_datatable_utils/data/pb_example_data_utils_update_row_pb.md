@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example Data Utils: Update Row (PB)
+# Playbook - Data Table: Update Row - Example (PB)
 
 ### API Name
 `example_data_utils_update_row_pb`

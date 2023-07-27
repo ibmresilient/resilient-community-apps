@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Data Table Utils: Add Row (PB)
+# Playbook - Data Table Utils: Add Row - Example (PB)
 
 ### API Name
 `example_data_table_utils_add_row_pb`

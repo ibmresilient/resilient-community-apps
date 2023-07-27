@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Data Table Utils: Delete Row (PB)
+# Playbook - Data Table Utils: Delete Row - Example (PB)
 
 ### API Name
 `example_data_table_utils_delete_row_pb`

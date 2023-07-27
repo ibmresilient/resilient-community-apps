@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Data Table Utils: Clear Datatable (PB)
+# Playbook - Data Table Utils: Clear Datatable - Example (PB)
 
 ### API Name
 `example_data_table_utils_clear_datatable_pb`

@@ -29,7 +29,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| v2.1.0  | 5/2023 | Add playbooks
+| v2.1.0  | 7/2023 | Add playbooks
 | v2.0.0  | 5/2022 | <ul><li>Added function dt_utils_add_row that adds a row to a datatable</li><li>Function dt_utils_get_row can now get a row from menu of a datatable row</li><li>Added function dt_utils_get_all_data_table_rows that gets all rows from a data table in SOAR</li><li>Update example workflows</li><li>Added function dt_utils_clear_datatable that deletes all the contents of a datatable</li></ul> |
 | v1.2.0  | 2/2021 | Functions dt_utils_get_rows and dt_utils_delete_rows can now return or delete all datatable rows |
 | v1.1.0  | 11/2020 | Added support for App Host. New functions: `dt_utils_get_row`, `dt_utils_get_rows`, `dt_utils_delete_row`, `dt_utils_delete_rows`, `dt_utils_create_csv_table`|
@@ -1494,21 +1494,20 @@ dt_utils_test_data_table
 ## Playbooks
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| Example: Create CSV Datatable (PB) | None | Attachment | `enabled` |
-| Example: Data Table Utils: Add Row (PB) | None | Data Table | `enabled` |
-| Example: Data Table Utils: Add Row to Datatable (PB) | None | Artifact | `enabled` |
-| Example: Data Table Utils: Clear Datatable (PB) | None | Incident | `enabled` |
-| Example: Data Table Utils: Delete Row from Datatable (PB) | None | Data Table | `enabled` |
-| Example: Data Table Utils: Delete Row (PB) | None | Artifact | `enabled` |
-| Example: Data Table Utils: Delete Rows from Datatable (PB) | None | Data Table | `enabled` |
-| Example: Data Table Utils: Delete Rows (PB) | None | Artifact | `enabled` |
-| Example: Data Table Utils: Get All Data Table Rows (PB) | None | Data Table | `enabled` |
-| Example: Data Table Utils: Get Current Row (PB) | None | Data Table | `enabled` |
-| Example: Data Table Utils: Get Row (PB) | None | Artifact | `enabled` |
-| Example: Data Table Utils: Get Rows (PB) | None | Artifact | `enabled` |
-| Example: Data Table Utils: Update Row (PB) | None | Artifact | `enabled` |
-| Example Data Utils: Update Row (PB) | None | Data Table | `enabled` |
----
+| Data Table Utils: Create CSV Datatable - Example (PB) | Take CSV data and add the results to a named datatable. Results of the function are written to an incident note. | attachment | `enabled` |
+| Data Table Utils: Add Row - Example (PB) | Add a row to the given datatable. | dt_utils_test_data_table | `enabled` |
+| Data Table Utils: Add Row to Datatable - Example (PB) | Add a row to the given datatable. | artifact | `enabled` |
+| Data Table Utils: Clear Datatable - Example (PB) | Clear the content of a given datatable. | incident | `enabled` |
+| Data Table Utils: Delete Row from Datatable - Example (PB) | Delete a row from a datatable. | dt_utils_test_data_table | `enabled` |
+| Data Table Utils: Delete Row - Example (PB) | An example Playbook showing how to use the Data Table Utils: Delete Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then deletes that row from the Data Table. | artifact | `enabled` |
+| Data Table Utils: Delete Rows from Datatable - Example (PB) | Deletes rows from a Data Table given a list of internal row IDs or a 'search_column and search_value' pair. | dt_utils_test_data_table | `enabled` |
+| Data Table Utils: Delete Rows - Example (PB) | An example Playbook showing how to use the Data Table Utils: Delete Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then deletes that row from the Data Table. | artifact | `enabled` |
+| Data Table Utils: Get All Data Table Rows - Example (PB) | Return all of the rows from a data table. | dt_utils_test_data_table | `enabled` |
+| Data Table Utils: Get Current Row - Example (PB) | An example Playbook showing how to use the Data Table Utils: Get Row Function. Get the the current row of the datatable. | dt_utils_test_data_table | `enabled` |
+| Data Table Utils: Get Row - Example (PB) | An example Playbook showing how to use the Data Table Utils: Get Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then returns that row from the Data Table. | artifact | `enabled` |
+| Data Table Utils: Get Rows - Example (PB) | An example Playbook showing how to use the Data Table Utils: Get Rows Function. It uses an Artifact value to search the Data Table and find rows containing that value and then deletes those rows from the Data Table. The results will be written in an Incident note. | artifact | `enabled` |
+| Data Table Utils: Update Row - Example (PB) | An example Playbook showing how to use the Data Table Utils: Delete Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then deletes that row from the Data Table. | artifact | `enabled` |
+| Data Table: Update Row - Example (PB) | An example Playbook showing how to use the Data Table Utils: Update Row Function. It illustrates updating the current row with static values. | dt_utils_test_data_table | `enabled` |
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.

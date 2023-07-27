@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Data Table Utils: Get All Data Table Rows (PB)
+# Playbook - Data Table Utils: Get All Data Table Rows - Example (PB)
 
 ### API Name
 `example_data_table_utils_get_all_data_table_rows_pb`

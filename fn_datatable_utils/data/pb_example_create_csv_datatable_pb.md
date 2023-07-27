@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.0.4423
 -->
 
-# Playbook - Example: Create CSV Datatable (PB)
+# Playbook - Data Table Utils: Create CSV Datatable - Example (PB)
 
 ### API Name
 `example_create_csv_datatable_pb`
