@@ -662,7 +662,7 @@ incident.addNote(helper.createRichText(note))
 ## Function - Data Table Utils: Get All Data Table Rows
 Function that returns the information for all the rows in a data table.
 
-An example playbook exist for using this function on the example datatable from an artifact value.
+An example playbook exists for using this function on the example datatable from an artifact value.
 
 ![Alt text](doc/screenshots/get_all_data_table_rows.png)
 
@@ -904,7 +904,7 @@ incident.addNote(helper.createRichText(note_text))
 ## Function - Data Table Utils: Get Row
 Function that searches for a row using a internal row ID or a search_column and search_value pair, and returns the information on the row that is found, if such a row exists.
 
-An example playbook exist for using this function on the example datatable from an artifact value.
+An example playbook exists for using this function on the example datatable from an artifact value.
 
 ![Alt text](doc/screenshots/get_row.png)
 
@@ -1079,7 +1079,7 @@ incident.addNote(helper.createRichText(note_text))
 ## Function - Data Table Utils: Get Rows
 Function that returns the full unsorted list of JSON objects which contain all information regarding each row found, if no searching/sorting criteria were provided.
 
-An example playbook exist for searching the example datatable based on an artifact value.
+An example playbook exists for searching the example datatable based on an artifact value.
 
 ![Alt text](doc/screenshots/get_rows.png)
 

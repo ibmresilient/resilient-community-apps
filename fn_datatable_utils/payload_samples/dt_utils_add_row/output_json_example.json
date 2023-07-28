@@ -26,7 +26,7 @@
     "version": "1.0",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "host": "AppTestAllen02241.fyre.ibm.com",
+    "host": "dummy",
     "execution_time_ms": 432,
     "timestamp": "2023-06-06 01:04:07"
   }
