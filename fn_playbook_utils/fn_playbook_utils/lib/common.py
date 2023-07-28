@@ -64,7 +64,7 @@ def parse_inputs(restclient, fn_inputs):
     min_date = fn_inputs.pb_min_incident_date if hasattr(fn_inputs, 'pb_min_incident_date') else None
     max_date = fn_inputs.pb_max_incident_date if hasattr(fn_inputs, 'pb_max_incident_date') else None
     
-    if min_id and max_id == None:
+    if not (min_id and max_id):
         min_id == 0
 
     # need at least min_id or min_date to avoid excessive calls
