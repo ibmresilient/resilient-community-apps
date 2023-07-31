@@ -54,9 +54,8 @@ class FunctionComponent(AppFunctionComponent):
 
                 # Create a new note in SOAR for each new Salesforce comment
                 for comment in new_comments:
-                    note = "<b>{}:</b><br>{}".format(ENTITY_COMMENT_HEADER, comment)
                     soar_common.create_case_comment(case_id=incident_id,
-                                                    note=note)
+                                                    note=comment)
 
         results = {"count": len(new_comments)}
 
