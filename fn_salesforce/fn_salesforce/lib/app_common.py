@@ -49,6 +49,8 @@ CONTACT_URI = "/services/data/{api_version}/sobjects/Contact/{contact_id}"
 
 # C O N S T A N T S
 SOQL_QUERY_LAST_MODIFIED_DATE = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
+SOQL_QUERY_BY_RECORD_TYPE_ID = " AND RecordTypeId IN ({record_type_id_list})"
+SOQL_QUERY_RECORD_TYPE = "SELECT Id,Name from RecordType WHERE sObjectType=\'Case\'"
 SOQL_QUERY_CONTENT_DOCUMENT = "SELECT id, ContentDocumentId, ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId='{case_id}'"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
 LIMIT = 200
@@ -84,12 +86,18 @@ class AppCommon():
         self.polling_filters = eval_mapping(app_configs.get('polling_filters', ''), wrapper='[{}]')
         if not self.polling_filters:
             self.polling_filters = []
+        self.polling_record_type_names = eval_mapping(app_configs.get('polling_record_type_names', ''), wrapper='[{}]')
+        if not self.polling_record_type_names:
+            self.polling_record_type_names = []
+        self.record_type_id_list = ""
 
         # Setup access token in the header for making Salesforce REST API calls 
         if self.access_token:
             self.headers = self._make_headers(self.access_token)
         else:
             raise IntegrationError("Unable to get access token from Salesforce!")
+
+        
 
     def get_token(self) -> str:
         """
@@ -125,7 +133,7 @@ class AppCommon():
         """
         return urljoin(self.base_url, cmd)
     
-    def _add_query_filters(self, base_query: str, filters: list, limit: int) -> str:
+    def _add_query_filters(self, base_query: str, record_type_id_list, filters: list, limit: int) -> str:
         """ Create an SOQL query string which is sent to Salesforce /query endpoint to 
         perform a search on Case objects
 
@@ -142,6 +150,10 @@ class AppCommon():
             str: The SOQL SELECT command used to query Cases in Salesforce
         """
         soql_query = base_query
+
+        # Add record type ID filter list if any are defined
+        if record_type_id_list:
+            soql_query = soql_query + SOQL_QUERY_BY_RECORD_TYPE_ID.format(record_type_id_list=record_type_id_list)
 
         # Loop through the filters defined by the user to limit the cases returned from the query
         # Append them to the base query for polling cases based on the last poll time.
@@ -200,6 +212,7 @@ class AppCommon():
 
         # Build the SOQL query based on the polling time and the user input polling_filters
         soql_query = self._add_query_filters(SOQL_QUERY_LAST_MODIFIED_DATE.format(time=readable_time), 
+                                             self.record_type_id_list,
                                              self.polling_filters, LIMIT)
         params = {'q': soql_query}
         LOG.debug("Querying endpoint with URL %s", soql_query)
@@ -431,6 +444,75 @@ class AppCommon():
         response = self.rc.execute("PATCH", url=url, headers=self.headers, data=data_string)
         return True
 
+    def build_record_type_id_list_string(self) -> bool:
+        """ Build a string of RecordTypeId in SOQL format.  Get the list of Record Type Names
+        that is dedfined by the user in the app.config and convert the Record Type Names into
+        RecordTypeIds. Each Id must be enclosed in escaped single quotes and separated by 
+        a comma.
+
+        Returns:
+            bool: True if successful.
+            AppCommon record_type_id_list string field is implicitly returned so that the string 
+            can be stored and used for each poller call.
+        """
+        record_id_str = ""
+        for record_type in self.polling_record_type_names:
+            record_type_id = self.get_record_type_id(record_type)
+            record_id_str = record_id_str + "\'" + record_type_id + "\',"
+        if record_id_str[-1:] == ",":
+            record_id_str = record_id_str[:-1]
+
+        self.record_type_id_list = record_id_str
+        return True
+
+    def get_record_type_id(self, record_type_name) -> str:
+        """Get the records types of all cases in Salesforce and look for the RecordTypeID of 
+        the one that matches SOAR Case Record Type.  The poller uses the RecordTypeId to
+        only search for SOAR Cases in Salesforce.
+
+        Args:
+
+        Returns:
+            bool: return True if the SOAR Case record type Id was found, else return False
+        """
+        query_url = self.base_url + QUERY_URI.format(api_version=self.api_version)
+
+        params = {'q': SOQL_QUERY_RECORD_TYPE}
+        LOG.debug("Querying endpoint with URL %s", SOQL_QUERY_RECORD_TYPE)
+
+        response = self.rc.execute("GET", url=query_url, headers=self.headers, params=params)
+
+        response_json = response.json()
+        records = response_json.get("records", [])
+
+        all_records = []
+        all_records.extend(records)
+
+        # Implement pagination in case there are pages of record types in the Salesforce platform
+        done = response_json.get("done", True)
+        while not done:
+            if response_json.get("nextRecordsUrl", None) is None:
+                IntegrationError("No nextRecordsUrl key returned from Salesforce REST API ")
+
+            # Get URL for next batch of results using the link sent back from Salesforce 
+            next_records_url = self._get_uri(response_json.get("nextRecordsUrl"))
+            LOG.debug("Querying next records endpoint with URL %s", next_records_url)
+
+            # Get the next batch of cases 
+            response = self.rc.execute("GET", url=next_records_url, headers=self.headers)
+            response_json = response.json()
+            records = response_json.get("records", [])
+
+            all_records.extend(records)
+
+            # Check if we are done
+            done = response_json.get("done", True)
+
+        for record in all_records:
+            if record.get("Name") == record_type_name:
+                return record.get("Id")
+        return None
+    
     def get_content_version_ids(self, salesforce_case_id: str) -> list:
         """ Get the LatestPublishedVersionIds of a case.  
         (This is really the latest version of each attachment know as a 

@@ -9,7 +9,7 @@ import os
 from threading import Thread
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
-from resilient_lib import (SOARCommon, get_last_poller_date,
+from resilient_lib import (SOARCommon, IntegrationError, get_last_poller_date, 
                            make_payload_from_template, poller)
 
 from fn_salesforce.lib.app_common import AppCommon
@@ -46,6 +46,11 @@ def init_app(rc, options):
     """
     # initialize the class for making API calls to your endpoint
     app_common = AppCommon(rc, PACKAGE_NAME, options)
+
+    # Form the string used to query case by RecordTypeId. 
+    # This is an expensive operation, so only do it once when the poller starts up.
+    # The string is stored in the app_common object for later use.
+    app_common.build_record_type_id_list_string()
 
     # initialize Salesforce tab in the SOAR UI
     init_salesforce_tab()
