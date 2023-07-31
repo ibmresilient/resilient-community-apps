@@ -49,6 +49,7 @@ CONTACT_URI = "/services/data/{api_version}/sobjects/Contact/{contact_id}"
 
 # C O N S T A N T S
 SOQL_QUERY_LAST_MODIFIED_DATE = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
+SOQL_QUERY_CONTENT_DOCUMENT = "SELECT id, ContentDocumentId, ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId='{case_id}'"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
 LIMIT = 200
 
@@ -315,7 +316,10 @@ class AppCommon():
                 created_by = "Not available"
 
             text = f"{comment_body}<br><br>Created at: {created_at}<br>By: {created_by}"
-            return text
+
+            # Add entity comment header
+            note = "<b>{}:</b><br>{}".format(ENTITY_COMMENT_HEADER, text)
+            return note
         return None
         
     def get_account(self, account_id: str) -> dict:
@@ -439,7 +443,7 @@ class AppCommon():
             list of str: List of ContentVersion Ids associated with a Salesforce Case
         """
         # Define the query to get the ContentDocuments (attachments) associated with the Salesforce case
-        query = "SELECT id, ContentDocumentId, ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId='{}'".format(salesforce_case_id)
+        query = SOQL_QUERY_CONTENT_DOCUMENT.format(case_id=salesforce_case_id)
         url = self.base_url + QUERY_URI.format(api_version=self.api_version)
         params = {'q': query}
         LOG.debug("GET /query endpoint with URL%s", url)
@@ -539,7 +543,6 @@ class AppCommon():
         # Get the ContentDocument id
         response_get = self.rc.execute("GET", url=content_version_get_url, headers=self.headers)
         response_get_json = response_get.json()
-        #ContentVersion = sf_api_call('/services/data/v40.0/sobjects/ContentVersion/%s' % ContentVersion_id)
         content_document_id = response_get_json.get('ContentDocumentId')
 
 
