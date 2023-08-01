@@ -36,7 +36,7 @@ Get information on the Salesforce account associated with a case and write to a 
 
 ### Function-Input Script
 ```python
-inputs.salesforce_account_id = incident.properties.salesforce_account_id if incident.properties.salesforce_account_id is None else helper.fail("Error: AccountId is None")
+inputs.salesforce_account_id = incident.properties.salesforce_account_id if incident.properties.salesforce_account_id else helper.fail("Error: AccountId is None")
 ```
 
 ---
