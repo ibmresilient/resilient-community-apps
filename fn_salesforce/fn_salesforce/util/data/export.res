@@ -3481,9 +3481,9 @@
   "scripts": [],
   "server_version": {
     "build_number": 8304,
-    "major": 45,
+    "major": 46,
     "minor": 0,
-    "version": "45.0.0"
+    "version": "46.0.0"
   },
   "tags": [],
   "task_order": [],
