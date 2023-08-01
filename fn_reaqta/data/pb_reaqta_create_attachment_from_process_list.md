@@ -36,10 +36,16 @@ Attach a file from an endpoint's process list
 
 ### Function-Input Script
 ```python
-inputs.reaqta_program_path = row['process_path'].replace("\\\\", "\\")
+if row['process_path']:
+  inputs.reaqta_program_path = row['process_path'].replace("\\\\", "\\")
+else:
+  inputs.reaqta_program_path = None
 inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
 inputs.reaqta_incident_id = incident.id
 inputs.reaqta_hive = incident.properties.reaqta_hive
+
+  
+
 ```
 
 ---
