@@ -50,7 +50,7 @@ def init_app(rc, options):
     # Form the string used to query case by RecordTypeId. 
     # This is an expensive operation, so only do it once when the poller starts up.
     # The string is stored in the app_common object for later use.
-    app_common.build_record_type_id_list_string()
+    app_common.build_record_type_id_query_string()
 
     # initialize Salesforce tab in the SOAR UI
     init_salesforce_tab()

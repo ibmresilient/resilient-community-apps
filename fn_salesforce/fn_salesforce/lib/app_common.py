@@ -444,7 +444,7 @@ class AppCommon():
         response = self.rc.execute("PATCH", url=url, headers=self.headers, data=data_string)
         return True
 
-    def build_record_type_id_list_string(self) -> bool:
+    def build_record_type_id_query_string(self) -> bool:
         """ Build a string of RecordTypeId in SOQL format.  Get the list of Record Type Names
         that is dedfined by the user in the app.config and convert the Record Type Names into
         RecordTypeIds. Each Id must be enclosed in escaped single quotes and separated by 

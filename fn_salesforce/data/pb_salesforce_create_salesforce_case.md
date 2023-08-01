@@ -55,9 +55,6 @@ if playbook.inputs.salesforce_case_subject:
 if playbook.inputs.salesforce_case_internal_comments:
   case_json['Comments'] = playbook.inputs.salesforce_case_internal_comments
 
-if playbook.inputs.salesforce_case_reason:
-  case_json['Reason'] = playbook.inputs.salesforce_case_reason
-
 if incident.properties.salesforce_account_id:
   case_json['AccountId'] = incident.properties.salesforce_account_id
 

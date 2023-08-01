@@ -22,7 +22,6 @@ class SalesforceTab(Tab):
         Field("salesforce_case_id"),
         Field("salesforce_status"),
         Field("salesforce_case_type"),
-        Field("salesforce_reason"),
         Field("salesforce_case_link"),
         Field("salesforce_account_name"),
         Field("salesforce_case_owner"),

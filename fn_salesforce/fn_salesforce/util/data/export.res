@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1690390259113,
+  "export_date": 1690895560933,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1389,13 +1389,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 75,
+  "id": 77,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1690390256939,
+      "create_date": 1690895559196,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1404,7 +1404,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1690390256939,
+      "update_date": 1690895559196,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1663,8 +1663,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 17,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\" isExecutable=\"true\" name=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_09qrncb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Create Case in Salesforce\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"74337648-8bfe-4aa6-9cdd-34dd819a2bdd\"\u003e{\"inputs\":{},\"pre_processing_script\":\"import json\\n\\ncase_json = {}\\ncase_json[\u0027Origin\u0027] = \\\"Web\\\"\\n\\nif playbook.inputs.salesforce_case_status:\\n  case_json[\u0027Status\u0027] = playbook.inputs.salesforce_case_status\\nelse: \\n  case_json[\u0027Status\u0027] = \\\"New\\\"\\n  \\nif playbook.inputs.salesforce_case_description:\\n  case_json[\u0027Description\u0027] = playbook.inputs.salesforce_case_description\\n\\nif playbook.inputs.salesforce_case_subject:\\n  case_json[\u0027Subject\u0027] = playbook.inputs.salesforce_case_subject\\n\\nif playbook.inputs.salesforce_case_internal_comments:\\n  case_json[\u0027Comments\u0027] = playbook.inputs.salesforce_case_internal_comments\\n\\nif playbook.inputs.salesforce_case_reason:\\n  case_json[\u0027Reason\u0027] = playbook.inputs.salesforce_case_reason\\n\\nif incident.properties.salesforce_account_id:\\n  case_json[\u0027AccountId\u0027] = incident.properties.salesforce_account_id\\n\\nif incident.properties.salesforce_owner_id:\\n  case_json[\u0027OwnerId\u0027] = incident.properties.salesforce_owner_id\\n  \\nif incident.properties.salesforce_contact_id:\\n  case_json[\u0027ContactId\u0027] = incident.properties.salesforce_contact_id\\n  \\ninputs.salesforce_case_data = json.dumps(case_json)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_salesforce_case_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09qrncb\u003c/incoming\u003e\u003coutgoing\u003eFlow_0eyyvr2\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_09qrncb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Write results of Create Salesforce Case function\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"295aaaa0-6cc9-4e54-b426-8bf585223f67\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0eyyvr2\u003c/incoming\u003e\u003coutgoing\u003eFlow_1dmb1fs\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0eyyvr2\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1dmb1fs\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1dmb1fs\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dmb1fs\" id=\"Flow_1dmb1fs_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"72\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0eyyvr2\" id=\"Flow_0eyyvr2_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"-48\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09qrncb\" id=\"Flow_09qrncb_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"-174\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"-132\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"466\" y=\"-226\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462.48400000000004\" y=\"-132\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462.48400000000004\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"493.48400000000004\" y=\"124\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 19,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\" isExecutable=\"true\" name=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_09qrncb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Create Case in Salesforce\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"74337648-8bfe-4aa6-9cdd-34dd819a2bdd\"\u003e{\"inputs\":{},\"pre_processing_script\":\"import json\\n\\ncase_json = {}\\ncase_json[\u0027Origin\u0027] = \\\"Web\\\"\\n\\nif playbook.inputs.salesforce_case_status:\\n  case_json[\u0027Status\u0027] = playbook.inputs.salesforce_case_status\\nelse: \\n  case_json[\u0027Status\u0027] = \\\"New\\\"\\n  \\nif playbook.inputs.salesforce_case_description:\\n  case_json[\u0027Description\u0027] = playbook.inputs.salesforce_case_description\\n\\nif playbook.inputs.salesforce_case_subject:\\n  case_json[\u0027Subject\u0027] = playbook.inputs.salesforce_case_subject\\n\\nif playbook.inputs.salesforce_case_internal_comments:\\n  case_json[\u0027Comments\u0027] = playbook.inputs.salesforce_case_internal_comments\\n\\nif incident.properties.salesforce_account_id:\\n  case_json[\u0027AccountId\u0027] = incident.properties.salesforce_account_id\\n\\nif incident.properties.salesforce_owner_id:\\n  case_json[\u0027OwnerId\u0027] = incident.properties.salesforce_owner_id\\n  \\nif incident.properties.salesforce_contact_id:\\n  case_json[\u0027ContactId\u0027] = incident.properties.salesforce_contact_id\\n  \\ninputs.salesforce_case_data = json.dumps(case_json)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_salesforce_case_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09qrncb\u003c/incoming\u003e\u003coutgoing\u003eFlow_0eyyvr2\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_09qrncb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Write results of Create Salesforce Case function\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"295aaaa0-6cc9-4e54-b426-8bf585223f67\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0eyyvr2\u003c/incoming\u003e\u003coutgoing\u003eFlow_1dmb1fs\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0eyyvr2\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1dmb1fs\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1dmb1fs\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dmb1fs\" id=\"Flow_1dmb1fs_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"72\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0eyyvr2\" id=\"Flow_0eyyvr2_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"-48\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09qrncb\" id=\"Flow_09qrncb_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"-174\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"-132\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"466\" y=\"-226\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462.48400000000004\" y=\"-132\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462.48400000000004\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"493.48400000000004\" y=\"124\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1689793606803,
       "creator_principal": {
@@ -2048,6 +2048,15 @@
                 "default": false,
                 "enabled": true,
                 "hidden": false,
+                "label": "Communication error (fax; email)",
+                "properties": null,
+                "uuid": "70b82986-4030-4f89-ade2-00d13e598634",
+                "value": 152
+              },
+              {
+                "default": false,
+                "enabled": false,
+                "hidden": false,
                 "label": "Mechanical",
                 "properties": null,
                 "uuid": "90b081fb-db27-4de5-a7ce-eb4ad53e2d81",
@@ -2057,6 +2066,15 @@
                 "default": false,
                 "enabled": true,
                 "hidden": false,
+                "label": "Customization Packages (internal)",
+                "properties": null,
+                "uuid": "8260c36c-0caa-4a52-9776-0c3ed6c9d099",
+                "value": 153
+              },
+              {
+                "default": false,
+                "enabled": false,
+                "hidden": false,
                 "label": "Electrical",
                 "properties": null,
                 "uuid": "ef80f63f-6a55-44a4-8294-37b7016d7e9b",
@@ -2064,7 +2082,7 @@
               },
               {
                 "default": false,
-                "enabled": true,
+                "enabled": false,
                 "hidden": false,
                 "label": "Electronic",
                 "properties": null,
@@ -2075,6 +2093,24 @@
                 "default": false,
                 "enabled": true,
                 "hidden": false,
+                "label": "Denial of Service",
+                "properties": null,
+                "uuid": "96b26a24-7bc2-4f07-9440-bdd6a24c8c3d",
+                "value": 154
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Improper disposal: digital assets",
+                "properties": null,
+                "uuid": "3e640e1c-a8b2-4931-988c-928eb4943749",
+                "value": 155
+              },
+              {
+                "default": false,
+                "enabled": false,
+                "hidden": false,
                 "label": "Structural",
                 "properties": null,
                 "uuid": "1a12b73c-3550-4f3a-86d7-b1df06b63923",
@@ -2084,10 +2120,136 @@
                 "default": false,
                 "enabled": true,
                 "hidden": false,
+                "label": "Improper disposal: documents / files / records",
+                "properties": null,
+                "uuid": "d0000238-49e4-4d6e-b297-4db146d3c298",
+                "value": 156
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Lost documents / files / records",
+                "properties": null,
+                "uuid": "e8c6ff29-7df3-4d06-b621-b8d8355d89ae",
+                "value": 157
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Lost PC / laptop / tablet",
+                "properties": null,
+                "uuid": "996bdb00-c35b-4f73-9426-ae692e83a390",
+                "value": 158
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Lost storage device / media",
+                "properties": null,
+                "uuid": "deaa25a4-40e1-40d8-a371-1d8fc061636e",
+                "value": 159
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Malware",
+                "properties": null,
+                "uuid": "f6adf257-10ea-4d10-b87b-c7d3334ae1ad",
+                "value": 160
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Not an Issue",
+                "properties": null,
+                "uuid": "e7d72181-f212-4d5c-a6de-da2744139cb4",
+                "value": 161
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
                 "label": "Other",
                 "properties": null,
                 "uuid": "a59f8832-e4f9-488c-8aef-2db46c7466b8",
                 "value": 139
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Phishing",
+                "properties": null,
+                "uuid": "86098bbc-d75b-44d2-8e8a-b5c92eb722fc",
+                "value": 162
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Stolen documents / files / records",
+                "properties": null,
+                "uuid": "91a4d8b3-52d6-44fb-81c2-b44acd655c23",
+                "value": 163
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Stolen PC / laptop / tablet",
+                "properties": null,
+                "uuid": "1caf95cc-9675-49e7-b4c1-fb75a420aa1d",
+                "value": 164
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Stolen PDA / smartphone",
+                "properties": null,
+                "uuid": "4dabba55-e167-4b6d-b0f6-b340caa3d87a",
+                "value": 165
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Stolen storage device / media",
+                "properties": null,
+                "uuid": "7991638e-16a7-4d4d-abf2-61d67c4df3ce",
+                "value": 166
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "System Intrusion",
+                "properties": null,
+                "uuid": "d0ecdfd1-3b60-4b9f-99dd-72d4a824c43b",
+                "value": 167
+              },
+              {
+                "default": true,
+                "enabled": true,
+                "hidden": false,
+                "label": "TBD / Unknown",
+                "properties": null,
+                "uuid": "ba167ad6-329d-4d98-b68c-893e68ffd98c",
+                "value": 168
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Vendor / 3rd party error",
+                "properties": null,
+                "uuid": "52fa6873-b501-4e6a-aa81-9ba87bdc725d",
+                "value": 169
               }
             ]
           }
@@ -2121,7 +2283,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1690390036652,
+      "last_modified_time": 1690895329007,
       "local_scripts": [
         {
           "actions": [],
@@ -2235,7 +2397,7 @@
       "tags": [],
       "type": "default",
       "uuid": "53b2cb7f-7d97-4da5-acbf-89fdee65baaa",
-      "version": 23
+      "version": 25
     },
     {
       "activation_type": "manual",
