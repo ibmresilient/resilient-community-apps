@@ -86,7 +86,6 @@ def customization_data(client=None):
         - salesforce_contact_phone
         - salesforce_origin
         - salesforce_owner_id
-        - salesforce_reason
         - salesforce_status
         - salesforce_supplied_company
         - salesforce_supplied_email
