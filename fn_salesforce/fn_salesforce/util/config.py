@@ -50,7 +50,7 @@ verify = True
 # ("IsClosed","=","false"),("CreatedDate",">","YESTERDAY")
 polling_filters=
 # OPTIONAL: Record Type Names to search in Salesforce
-polling_record_type_names=["Security Incident","Incident"]
+polling_record_type_names="Security Incident","Incident"
 # 
 # # Specify paths to files if client certs are needed to authenticate
 # client_auth_cert = <path_to_cert.pem>

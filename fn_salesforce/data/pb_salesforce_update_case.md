@@ -74,7 +74,6 @@ else:
     incident.properties.salesforce_supplied_email = sf_case.get("SuppliedEmail")    
     incident.properties.salesforce_supplied_company = sf_case.get("SuppliedCompany")
     incident.properties.salesforce_origin = sf_case.get("Origin")
-    incident.properties.salesforce_reason = sf_case.get("Reason")
     incident.properties.salesforce_status = sf_case.get("Status")
     entity_url = sf_case.get("entity_url", None)
     if entity_url:

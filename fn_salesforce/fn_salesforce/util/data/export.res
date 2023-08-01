@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1690896153120,
+  "export_date": 1690902188156,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1359,13 +1359,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 79,
+  "id": 81,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1690896151504,
+      "create_date": 1690902186489,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1374,7 +1374,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1690896151504,
+      "update_date": 1690902186489,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2736,7 +2736,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 26,
+        "content_version": 28,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_a6db8735_3d90_4c38_866d_2f91ca038490\" isExecutable=\"true\" name=\"playbook_a6db8735_3d90_4c38_866d_2f91ca038490\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0qwx89d\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Get Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"055485d3-e8ab-434a-9500-3b8ae61680b2\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.salesforce_case_id = incident.properties.salesforce_case_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"salesforce_case_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qwx89d\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xv3h3v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0qwx89d\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Update case in SOAR\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"322f86b9-0a67-4ad1-a53c-97dac97b17fb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xv3h3v\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ajzbls\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ajzbls\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1xv3h3v\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0ajzbls\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a6db8735_3d90_4c38_866d_2f91ca038490\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ajzbls\" id=\"Flow_0ajzbls_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"364\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xv3h3v\" id=\"Flow_1xv3h3v_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"212\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qwx89d\" id=\"Flow_0qwx89d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"76\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"128\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"24\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"128\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"364\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1689277723804,
@@ -2788,7 +2788,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1689788338118,
+      "last_modified_time": 1690902092855,
       "local_scripts": [
         {
           "actions": [],
@@ -2817,12 +2817,12 @@
           "id": 2,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1689340858000,
+          "last_modified_time": 1690902064723,
           "name": "Salesforce: Update case in SOAR",
           "object_type": "incident",
           "playbook_handle": "salesforce_update_case",
           "programmatic_name": "salesforce_update_case_salesforce_update_case_in_soar",
-          "script_text": "results = playbook.functions.results.salesforce_case_results\n\nif not results.success:\n    incident.addNote(\"Salesforce: Update custom fields: Unable to get case data to update custom fields.\")\nelse:\n    content = results.get(\"content\", {})\n    sf_case =content.get(\"salesforce_case\")\n    incident.properties.salesforce_account_id = sf_case.get(\"AccountId\")\n    incident.properties.salesforce_contact_id = sf_case.get(\"ContactId\")\n    incident.properties.salesforce_owner_id = sf_case.get(\"OwnerId\")\n    incident.properties.salesforce_case_number = sf_case.get(\"CaseNumber\")\n    incident.properties.salesforce_case_type = sf_case.get(\"Type\")\n    incident.properties.salesforce_contact_phone = sf_case.get(\"ContactPhone\")\n    incident.properties.salesforce_contact_email = sf_case.get(\"ContactEmail\")    \n    incident.properties.salesforce_contact_fax = sf_case.get(\"ContactFax\")\n    incident.properties.salesforce_supplied_name = sf_case.get(\"SuppliedName\")\n    incident.properties.salesforce_supplied_phone = sf_case.get(\"SuppliedPhone\")\n    incident.properties.salesforce_supplied_email = sf_case.get(\"SuppliedEmail\")    \n    incident.properties.salesforce_supplied_company = sf_case.get(\"SuppliedCompany\")\n    incident.properties.salesforce_origin = sf_case.get(\"Origin\")\n    incident.properties.salesforce_reason = sf_case.get(\"Reason\")\n    incident.properties.salesforce_status = sf_case.get(\"Status\")\n    entity_url = sf_case.get(\"entity_url\", None)\n    if entity_url:\n      incident.properties.salesforce_case_link = \"\u003ca target=\u0027_blank\u0027 href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\".format(entity_url)\n      \n    # Add Salesforce case Comments as a note\n    sf_case_comments = sf_case.get(\"Comments\", None)\n    if sf_case_comments:\n        incident.addNote(helper.createRichText(\"\u003cb\u003eCreated by Salesforce:\u003c/b\u003e\u003cbr\u003e {}\".format(sf_case_comments)))",
+          "script_text": "results = playbook.functions.results.salesforce_case_results\n\nif not results.success:\n    incident.addNote(\"Salesforce: Update custom fields: Unable to get case data to update custom fields.\")\nelse:\n    content = results.get(\"content\", {})\n    sf_case =content.get(\"salesforce_case\")\n    incident.properties.salesforce_account_id = sf_case.get(\"AccountId\")\n    incident.properties.salesforce_contact_id = sf_case.get(\"ContactId\")\n    incident.properties.salesforce_owner_id = sf_case.get(\"OwnerId\")\n    incident.properties.salesforce_case_number = sf_case.get(\"CaseNumber\")\n    incident.properties.salesforce_case_type = sf_case.get(\"Type\")\n    incident.properties.salesforce_contact_phone = sf_case.get(\"ContactPhone\")\n    incident.properties.salesforce_contact_email = sf_case.get(\"ContactEmail\")    \n    incident.properties.salesforce_contact_fax = sf_case.get(\"ContactFax\")\n    incident.properties.salesforce_supplied_name = sf_case.get(\"SuppliedName\")\n    incident.properties.salesforce_supplied_phone = sf_case.get(\"SuppliedPhone\")\n    incident.properties.salesforce_supplied_email = sf_case.get(\"SuppliedEmail\")    \n    incident.properties.salesforce_supplied_company = sf_case.get(\"SuppliedCompany\")\n    incident.properties.salesforce_origin = sf_case.get(\"Origin\")\n    incident.properties.salesforce_status = sf_case.get(\"Status\")\n    entity_url = sf_case.get(\"entity_url\", None)\n    if entity_url:\n      incident.properties.salesforce_case_link = \"\u003ca target=\u0027_blank\u0027 href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\".format(entity_url)\n      \n    # Add Salesforce case Comments as a note\n    sf_case_comments = sf_case.get(\"Comments\", None)\n    if sf_case_comments:\n        incident.addNote(helper.createRichText(\"\u003cb\u003eCreated by Salesforce:\u003c/b\u003e\u003cbr\u003e {}\".format(sf_case_comments)))",
           "tags": [],
           "uuid": "322f86b9-0a67-4ad1-a53c-97dac97b17fb"
         },
@@ -2876,7 +2876,7 @@
       "tags": [],
       "type": "default",
       "uuid": "a6db8735-3d90-4c38-866d-2f91ca038490",
-      "version": 32
+      "version": 34
     },
     {
       "activation_type": "manual",
