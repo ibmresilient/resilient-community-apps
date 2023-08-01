@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1690903720248,
+  "export_date": 1690905244240,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1359,13 +1359,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 84,
+  "id": 86,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1690903718606,
+      "create_date": 1690905242501,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1374,7 +1374,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1690903718606,
+      "update_date": 1690905242501,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2592,6 +2592,85 @@
       "type": "default",
       "uuid": "c9b4fe8b-8d4a-4e1f-a3cd-6cf4204f70df",
       "version": 10
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_2e3e51f7_d0a9_42e0_b863_3e8b5c096c16\" isExecutable=\"true\" name=\"playbook_2e3e51f7_d0a9_42e0_b863_3e8b5c096c16\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_029fukv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Add Comment to Salesforce Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c13836c0-4432-4cb3-81ed-146422c3939c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.salesforce_case_id = incident.properties.salesforce_case_id\\ninputs.salesforce_comment_text = note.text.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_comment_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_029fukv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1sjf3va\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_029fukv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1sjf3va\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1sjf3va\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2e3e51f7_d0a9_42e0_b863_3e8b5c096c16\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sjf3va\" id=\"Flow_1sjf3va_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"334\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_029fukv\" id=\"Flow_029fukv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"334\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1690905154007,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_2e3e51f7_d0a9_42e0_b863_3e8b5c096c16",
+      "description": {
+        "content": "Send the specified SOAR case note as a comment in the corresponding Salesforce case.",
+        "format": "text"
+      },
+      "display_name": "Salesforce: Send Note to Salesforce Case",
+      "export_key": "salesforce_send_note_to_salesforce_case",
+      "field_type_handle": "playbook_2e3e51f7_d0a9_42e0_b863_3e8b5c096c16",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Salesforce: Send Note to Salesforce Case copy",
+        "export_key": "playbook_2e3e51f7_d0a9_42e0_b863_3e8b5c096c16",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_2e3e51f7_d0a9_42e0_b863_3e8b5c096c16",
+        "uuid": "938f4fa6-ce40-459f-b8aa-e18c805aad81"
+      },
+      "has_logical_errors": false,
+      "id": 20,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1690905218001,
+      "local_scripts": [],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "salesforce_send_note_to_salesforce_case",
+      "object_type": "note",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_2e3e51f7-d0a9-42e0-b863-3e8b5c096c16",
+        "id": 20,
+        "name": "playbook_2e3e51f7_d0a9_42e0_b863_3e8b5c096c16",
+        "type": "playbook",
+        "uuid": "30c92484-f065-46c9-b3ec-b54aec14ae78"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "2e3e51f7-d0a9-42e0-b863-3e8b5c096c16",
+      "version": 6
     },
     {
       "activation_details": {
