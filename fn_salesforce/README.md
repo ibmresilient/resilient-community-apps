@@ -290,7 +290,7 @@ results = {
     }
   },
   "inputs": {
-    "salesforce_case_data": "{\"Origin\": \"Web\", \"Status\": \"In Progress\", \"Description\": \"My Description\", \"Subject\": \"My Subject testing\", \"Reason\": \"Installation\"}"
+    "salesforce_case_data": "{\"Origin\": \"Web\", \"Status\": \"In Progress\", \"Description\": \"My Description\", \"Subject\": \"My Subject testing\"}"
   },
   "metrics": {
     "execution_time_ms": 12850,
@@ -1252,7 +1252,6 @@ None
 | Contact Phone | `salesforce_contact_phone` | `text` | `properties` | - | Telephone number for the contact. Label is Contact Phone. This field is available in API version 38.0 and later. |
 | Case Origin | `salesforce_origin` | `text` | `properties` | - | The source of the case, such as Email, Phone, or Web. Label is Case Origin. |
 | Owner Id | `salesforce_owner_id` | `text` | `properties` | - | - |
-| Reason | `salesforce_reason` | `text` | `properties` | - | The reason why the case was created, such as Instructions not clear, or User didn’t attend training. |
 | Case Status | `salesforce_status` | `text` | `properties` | - | - |
 | Company | `salesforce_supplied_company` | `text` | `properties` | - | The company name that was entered when the case was created. Label is Company. |
 | Email | `salesforce_supplied_email` | `text` | `properties` | - | The email address that was entered when the case was created. Label is Email.  If your organization has an active auto-response rule, SuppliedEmail is required when creating a case via the API. Auto-response rules use the email in the contact specified by ContactId. If no email address is in the contact record, the email specified here is used. |
