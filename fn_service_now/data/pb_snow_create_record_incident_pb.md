@@ -44,7 +44,7 @@ inputs.sn_query_field = "name"
 
 # The value to equate the cell to
 # Get the group name from the Rule Activity Field with:
-inputs.sn_query_value = playbook.inputs.sn_assignment_group
+inputs.sn_query_value = getattr(playbook.inputs, "sn_assignment_group")
 
 ## OR Set group name statically with:
 ## inputs.sn_query_value = "IT Securities"
@@ -102,8 +102,9 @@ init_snow_note_text = f"""Record created from a IBM SOAR Incident ID: {incident.
                           Incident Type(s): {', '.join(incident.incident_type_ids)}"""
 
 # If the user adds a comment when they invoke the rule, that comment gets concatenated here
-if playbook.inputs.sn_initial_note.content
-  init_snow_note_text = "{init_snow_note_text}\n\n{playbook.inputs.sn_initial_note.content}"
+initial_note = getattr(playbook.inputs, "sn_initial_note").content
+if initial_note:
+  init_snow_note_text = f"{init_snow_note_text}\n\n{initial_note}"
 
 # ID of this incident
 inputs.incident_id = incident.id

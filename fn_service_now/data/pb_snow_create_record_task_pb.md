@@ -44,7 +44,7 @@ inputs.sn_query_field = "name"
 
 # The value to equate the cell to
 # Get the group name from the Rule Activity Field with:
-inputs.sn_query_value = playbook.inputs.sn_assignment_group
+inputs.sn_query_value = getattr(playbook.inputs, "sn_assignment_group")
 
 ## OR Set group name statically with:
 ## inputs.sn_query_value = "IT Securities"
@@ -93,8 +93,9 @@ from json import dumps
 init_snow_note_text = f"""Record created from IBM SOAR Task ID: {task.id}. Associated IBM SOAR Incident ID: {incident.id}."""
 
 # If the user adds a comment when they invoke the playbook, that comment gets concatenated here
-if playbook.inputs.sn_initial_note.content:
-  init_snow_note_text = f"{init_snow_note_text}\n\n{playbook.inputs.sn_initial_note.content}"
+initial_note = getattr(playbook.inputs, "sn_initial_note").content
+if initial_note:
+  init_snow_note_text = f"{init_snow_note_text}\n\n{initial_note}"
 
 # ID of this incident
 inputs.incident_id = incident.id
@@ -109,7 +110,7 @@ inputs.sn_init_work_note = init_snow_note_text
 # ServiceNow Example:: setValue('assignment_group', request.body.data.sn_optional_fields.assignment_group)
 inputs.sn_optional_fields = dumps({
   "short_description": f"RES-{incident.id}-{task.id}: {task.name}",
-  "assignment_group": playbook..functions.results.assignment_group.get("sys_id"),
+  "assignment_group": playbook.functions.results.assignment_group.get("sys_id"),
   "caller_id": playbook.functions.results.caller_id.get("sys_id")
 })
 ```
