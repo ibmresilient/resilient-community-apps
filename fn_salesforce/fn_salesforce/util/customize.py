@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_close_case", u"salesforce_create_salesforce_case", u"salesforce_get_account", u"salesforce_get_attachments_from_salesforce_case", u"salesforce_get_contact", u"salesforce_post_artifact_file_to_salesforce_case", u"salesforce_post_attachment_to_salesforce_case", u"salesforce_send_note_to_salesforce_case", u"salesforce_update_account_details_in_soar", u"salesforce_update_case", u"salesforce_update_comments_from_salesforce_case", u"salesforce_update_contact_details_in_soar", u"salesforce_update_owner_details_in_soar", u"salesforce_write_owner_details_to_note"]
+        "playbooks": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_close_case", u"salesforce_create_salesforce_case", u"salesforce_get_account", u"salesforce_get_attachments_from_salesforce_case", u"salesforce_get_contact", u"salesforce_post_artifact_file_to_salesforce_case", u"salesforce_post_attachment_to_salesforce_case", u"salesforce_send_note_to_salesforce_case", u"salesforce_update_account_details_in_soar", u"salesforce_update_case", u"salesforce_update_case_status_manual", u"salesforce_update_comments_from_salesforce_case", u"salesforce_update_contact_details_in_soar", u"salesforce_update_owner_details_in_soar", u"salesforce_write_owner_details_to_note"]
     }
 
 
@@ -68,6 +68,7 @@ def customization_data(client=None):
         - salesforce_send_note_to_salesforce_case
         - salesforce_update_account_details_in_soar
         - salesforce_update_case
+        - salesforce_update_case_status_manual
         - salesforce_update_comments_from_salesforce_case
         - salesforce_update_contact_details_in_soar
         - salesforce_update_owner_details_in_soar

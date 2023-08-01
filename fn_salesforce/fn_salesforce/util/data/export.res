@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1690905244240,
+  "export_date": 1690908895638,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1359,13 +1359,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 86,
+  "id": 87,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1690905242501,
+      "create_date": 1690908894015,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1374,7 +1374,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1690905242501,
+      "update_date": 1690908894015,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2956,6 +2956,272 @@
       "type": "default",
       "uuid": "a6db8735-3d90-4c38-866d-2f91ca038490",
       "version": 34
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 11,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_c53f6cfd_04c9_4713_9806_7758148cba62\" isExecutable=\"true\" name=\"playbook_c53f6cfd_04c9_4713_9806_7758148cba62\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_134aeuk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Update Case Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5639e9ca-ac5f-421e-9f87-5d9638a8cf67\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.salesforce_case_id = incident.properties.salesforce_case_id\\ninputs.salesforce_case_status = playbook.inputs.salesforce_case_status\\ninputs.salesforce_case_comment = playbook.inputs.salesforce_case_comment\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"update_status\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_134aeuk\u003c/incoming\u003e\u003coutgoing\u003eFlow_1bwxtiz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_134aeuk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Update Status write results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d952e676-eba0-4b83-8bb4-dfd032366308\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1bwxtiz\u003c/incoming\u003e\u003coutgoing\u003eFlow_09cg46s\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1bwxtiz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_09cg46s\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_09cg46s\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c53f6cfd_04c9_4713_9806_7758148cba62\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09cg46s\" id=\"Flow_09cg46s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"32\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"64\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1bwxtiz\" id=\"Flow_1bwxtiz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-78\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-52\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_134aeuk\" id=\"Flow_134aeuk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"-184\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"-162\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"-236\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"-162\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"-52\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"64\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1689352279490,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_c53f6cfd_04c9_4713_9806_7758148cba62",
+      "description": {
+        "content": "Manual playbook to update the case Status field in Salesforce",
+        "format": "text"
+      },
+      "display_name": "Salesforce: Update Case Status in Salesforce",
+      "export_key": "salesforce_update_case_status_manual",
+      "field_type_handle": "playbook_c53f6cfd_04c9_4713_9806_7758148cba62",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Salesforce: Update Case Status in Salesforce",
+        "export_key": "playbook_c53f6cfd_04c9_4713_9806_7758148cba62",
+        "fields": {
+          "salesforce_case_comment": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_c53f6cfd_04c9_4713_9806_7758148cba62/salesforce_case_comment",
+            "hide_notification": false,
+            "id": 338,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "salesforce_case_comment",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Comment",
+            "tooltip": "Optional: Comment sent to Salesforce case.",
+            "type_id": 1003,
+            "uuid": "5f474f5c-8285-4ad7-8d1a-b5e17fb417c3",
+            "values": []
+          },
+          "salesforce_case_status": {
+            "allow_default_value": false,
+            "blank_option": true,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_c53f6cfd_04c9_4713_9806_7758148cba62/salesforce_case_status",
+            "hide_notification": false,
+            "id": 320,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "salesforce_case_status",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Status",
+            "tooltip": "",
+            "type_id": 1003,
+            "uuid": "ebf31fae-9de5-47da-bd82-e8e6553d98de",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "New",
+                "properties": null,
+                "uuid": "b9b34135-aa12-4116-b503-86f000069164",
+                "value": 110
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Working",
+                "properties": null,
+                "uuid": "234d68ee-ad37-4751-a921-f79d73131194",
+                "value": 111
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Escalated",
+                "properties": null,
+                "uuid": "6b566249-d08a-4c8d-bb23-f3044a005da3",
+                "value": 112
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "In Progress",
+                "properties": null,
+                "uuid": "03432e3b-65f0-4ad1-a264-0d24ef0f0042",
+                "value": 113
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "On Hold",
+                "properties": null,
+                "uuid": "e079db15-21d2-4d30-95cc-d76b36182211",
+                "value": 114
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Waiting for Customer",
+                "properties": null,
+                "uuid": "c825f499-edda-44af-b70f-9ae65131357d",
+                "value": 115
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Response Received",
+                "properties": null,
+                "uuid": "8a236f88-5c61-45d8-bf27-c4776caf867e",
+                "value": 116
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Closed",
+                "properties": null,
+                "uuid": "50d86072-de33-4894-9797-655c0219d893",
+                "value": 117
+              }
+            ]
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_c53f6cfd_04c9_4713_9806_7758148cba62",
+        "uuid": "83cd18f8-8a34-40a0-be7f-911b92fc736d"
+      },
+      "has_logical_errors": false,
+      "id": 4,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1689876506683,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1689366441495,
+          "description": "",
+          "enabled": false,
+          "export_key": "Salesforce: Update Account Name",
+          "id": 7,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1689366441508,
+          "name": "Salesforce: Update Account Name",
+          "object_type": "incident",
+          "playbook_handle": "salesforce_update_case_status_manual",
+          "programmatic_name": "salesforce_update_case_status_manual_salesforce_update_account_name",
+          "script_text": "results = playbook.functions.account_details\n\nif results.success:\n  content = results.get(\"content\", {})\n  if content:\n    account = content.get(\"salesforce_account\", None)\n    incident.properties.account_name = account.get(\"Name\")\nelse:\n  incident.addNote(\"Salesforce unable to get account details for Account Id {0}\".format(playbook.functions.inputs.salesforce_account_id))",
+          "tags": [],
+          "uuid": "2564a146-28bb-4fe5-85ec-baf03b0559ea"
+        },
+        {
+          "actions": [],
+          "created_date": 1689352279570,
+          "description": "Write the results from Update Status to a note",
+          "enabled": false,
+          "export_key": "Salesforce: Update Status write results",
+          "id": 5,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1689352279580,
+          "name": "Salesforce: Update Status write results",
+          "object_type": "incident",
+          "playbook_handle": "salesforce_update_case_status_manual",
+          "programmatic_name": "salesforce_update_case_status_manual_salesforce_update_status_write_results",
+          "script_text": "update_status = playbook.functions.results.update_status\n\nif not update_status.success:\n  incident.addNote(\"Salesforce: ERROR: Unable to Update Case Status to \u003cb\u003e{}\u003c/b\u003e\".format(update_status.inputs.salesforce_case_status))\nelse:\n  incident.properties.salesforce_status = update_status.inputs.salesforce_case_status\n  incident.addNote(\"Salesforce: Updated Case Status to \u003cb\u003e{}\u003c/b\u003e in Salesforce\".format(incident.properties.salesforce_status))",
+          "tags": [],
+          "uuid": "d952e676-eba0-4b83-8bb4-dfd032366308"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "ebf31fae-9de5-47da-bd82-e8e6553d98de",
+            "element": "field_uuid",
+            "field_type": "playbook_c53f6cfd_04c9_4713_9806_7758148cba62",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "5f474f5c-8285-4ad7-8d1a-b5e17fb417c3",
+            "element": "field_uuid",
+            "field_type": "playbook_c53f6cfd_04c9_4713_9806_7758148cba62",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "salesforce_update_case_status_manual",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_c53f6cfd-04c9-4713-9806-7758148cba62",
+        "id": 4,
+        "name": "playbook_c53f6cfd_04c9_4713_9806_7758148cba62",
+        "type": "playbook",
+        "uuid": "239b96be-de34-49f4-8ff8-d7546dacf5fe"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "c53f6cfd-04c9-4713-9806-7758148cba62",
+      "version": 14
     },
     {
       "activation_type": "manual",

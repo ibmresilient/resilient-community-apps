@@ -38,6 +38,7 @@ Manual playbook to update the case Status field in Salesforce
 ```python
 inputs.salesforce_case_id = incident.properties.salesforce_case_id
 inputs.salesforce_case_status = playbook.inputs.salesforce_case_status
+inputs.salesforce_case_comment = playbook.inputs.salesforce_case_comment
 ```
 
 ---
