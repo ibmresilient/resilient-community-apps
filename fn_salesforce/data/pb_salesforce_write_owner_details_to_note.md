@@ -10,7 +10,7 @@
 `salesforce_write_owner_details_to_note`
 
 ### Status
-`enabled`
+`disabled`
 
 ### Activation Type
 `manual`

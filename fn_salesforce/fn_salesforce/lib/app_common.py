@@ -407,11 +407,10 @@ class AppCommon():
             case_data_json (dict): _description_
 
             case_data_json = {
-                "Type": "Mechanical",
+                "Type": "System Intrusion",
                 "Status": "New",
-                "Reason": "Equipment Design",
                 "Origin": "Web",
-                "Subject": "Inadequate headroom with installation of aircon unit",
+                "Subject": "Break-in detected",
                 "Priority": "Medium",
                 "Description": "Test create case in Salesforce",
                 "Comments": "Created by IBM SOAR: This case was created in SOAR"

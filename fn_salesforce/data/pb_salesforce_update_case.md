@@ -56,6 +56,30 @@ Update the case in SOAR with the data from the case in Salesforce.
 ```python
 results = playbook.functions.results.salesforce_case_results
 
+TYPE_LOOKUP = {
+  'None': "TBD / Unknown",
+  'Communication error (fax; email)' : 'Communication error (fax; email)',
+  'Customization Packages (internal)': 'Customization Packages (internal)',
+  'Denial of Service':                 'Denial of Service',
+  'Improper disposal: digital assets': 'Improper disposal: digital assets',
+  'Improper disposal: documents / files / records': 'Improper disposal: documents / files / records',
+  'Lost documents / files / records':  'Lost documents / files / records',
+  'Lost PC / laptop / tablet':         'Lost PC / laptop / tablet',
+  'Lost storage device / media':       'Lost storage device / media',
+  'Malware':                           'Malware',
+  'Not an Issue':                      'Not an Issue',
+  'Other':                             'Other',
+  'Phishing':                          'Phishing',
+  'Stolen documents / files / records':'Stolen documents / files / records',
+  'Stolen PC / laptop / tablet':       'Stolen PC / laptop / tablet',
+  'Stolen PDA / smartphone':           'Stolen PDA / smartphone',
+  'Stolen storage device / media':     'Stolen storage device / media',
+  'System Intrusion':                  'System Intrusion',
+  'TBD / Unknown':                     'TBD / Unknown',
+  'Vendor / 3rd party error':          'Vendor / 3rd party error'
+}
+
+
 if not results.success:
     incident.addNote("Salesforce: Update custom fields: Unable to get case data to update custom fields.")
 else:
@@ -65,7 +89,7 @@ else:
     incident.properties.salesforce_contact_id = sf_case.get("ContactId")
     incident.properties.salesforce_owner_id = sf_case.get("OwnerId")
     incident.properties.salesforce_case_number = sf_case.get("CaseNumber")
-    incident.properties.salesforce_case_type = sf_case.get("Type")
+    incident.properties.salesforce_case_type = TYPE_LOOKUP.get(sf_case.get("Type"), "None")
     incident.properties.salesforce_contact_phone = sf_case.get("ContactPhone")
     incident.properties.salesforce_contact_email = sf_case.get("ContactEmail")    
     incident.properties.salesforce_contact_fax = sf_case.get("ContactFax")
@@ -77,7 +101,7 @@ else:
     incident.properties.salesforce_status = sf_case.get("Status")
     entity_url = sf_case.get("entity_url", None)
     if entity_url:
-      incident.properties.salesforce_case_link = "<a target='_blank' href='{0}'>Link</a>".format(entity_url)
+      incident.properties.salesforce_case_link = "<a target='_blank' href='{0}'>{1}</a>".format(entity_url, sf_case.get("CaseNumber"))
       
     # Add Salesforce case Comments as a note
     sf_case_comments = sf_case.get("Comments", None)

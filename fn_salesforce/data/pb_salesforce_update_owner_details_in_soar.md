@@ -60,7 +60,7 @@ if results.success:
     content = results.get("content", {})
     user = content.get("salesforce_user")
     if user:
-        incident.properties.salesforce_case_owner = user.get("Name")
+        incident.properties.salesforce_case_owner = user.get("Name", "")
 else:
   incident.addNote("Unable to get User information from OwnerId")
   

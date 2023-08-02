@@ -10,7 +10,7 @@
 `salesforce_get_account`
 
 ### Status
-`enabled`
+`disabled`
 
 ### Activation Type
 `manual`
