@@ -9,7 +9,7 @@ from base64 import b64encode
 import json
 
 from requests.exceptions import JSONDecodeError
-from resilient_lib import IntegrationError, readable_datetime, eval_mapping, str_to_bool
+from resilient_lib import IntegrationError, readable_datetime, eval_mapping, str_to_bool, clean_html
 
 #----------------------------------------------------------------------------------------
 # This module is an open template for you to develop the methods necessary to interact
@@ -46,6 +46,7 @@ CASE_COMMENTS_URI = "/services/data/{api_version}/sobjects/Case/{case_id}/CaseCo
 ACCOUNT_URI = "/services/data/{api_version}/sobjects/Account/{account_id}"
 USER_URI = "/services/data/{api_version}/sobjects/User/{user_id}"
 CONTACT_URI = "/services/data/{api_version}/sobjects/Contact/{contact_id}"
+TASK_POST_URI = "/services/data/{api_version}/sobjects/Task"
 
 # C O N S T A N T S
 SOQL_QUERY_LAST_MODIFIED_DATE = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
@@ -417,13 +418,41 @@ class AppCommon():
             }
 
         Returns:
-            dict: JSON from Salesforce is returned.  
+            dict: JSON from Salesforce is returned.
             Fields included in the JSON are: "id" (caseId), "success" (bool) and "errors" (list)
         """
         url = self.base_url + CASE_POST_URI.format(api_version=self.api_version)
         LOG.debug("POST /Case endpoint with URL%s", url)
 
         response = self.rc.execute("POST", url=url, headers=self.headers, json=case_data_json)
+        response_json = response.json()
+        return response_json
+
+    def create_task(self, task_data_json: dict) -> dict:
+        """ Create a task in Salesforce with the specified task data in JSON format
+
+        Args:
+            task_data_json (dict): Salesforce task data in JSON format
+
+            task_data_json = {
+                "WhatId": "500Hr00001Wthb4IAB", 
+                "Description": "Task from IBM SOAR case", 
+                "Subject": "Investigate Exposure of Personal Information/Data", 
+                "Priority": "Normal", 
+                "Status": "In Progress"
+            }
+
+        Returns:
+            dict: JSON from Salesforce is returned.  
+            Fields included in the JSON are: "id" (TaskId), "success" (bool) and "errors" (list)
+        """
+        url = self.base_url + TASK_POST_URI.format(api_version=self.api_version)
+        LOG.debug("POST /Task endpoint with URL%s", url)
+
+        # Remove html tags as Salesforce does not process them
+        if task_data_json['Description']:
+            task_data_json['Description'] = clean_html(task_data_json['Description'])
+        response = self.rc.execute("POST", url=url, headers=self.headers, json=task_data_json)
         response_json = response.json()
         return response_json
 
