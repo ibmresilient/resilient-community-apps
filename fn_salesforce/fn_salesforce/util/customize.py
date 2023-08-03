@@ -22,7 +22,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_salesforce",
         "message_destinations": [u"fn_salesforce"],
-        "functions": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_create_case_in_salesforce", u"salesforce_create_task_in_salesforce_case", u"salesforce_get_account", u"salesforce_get_attachments_from_salesforce", u"salesforce_get_case", u"salesforce_get_case_comments", u"salesforce_get_contact", u"salesforce_get_user", u"salesforce_post_attachment_to_salesforce_case", u"salesforce_update_case_status"],
+        "functions": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_create_case_in_salesforce", u"salesforce_create_task_in_salesforce_case", u"salesforce_get_account", u"salesforce_get_attachments_from_salesforce", u"salesforce_get_case", u"salesforce_get_case_comments", u"salesforce_get_contact", u"salesforce_get_user", u"salesforce_post_attachment_to_salesforce_case", u"salesforce_send_soar_tasks_to_salesforce", u"salesforce_update_case_status"],
         "workflows": [],
         "actions": [],
         "incident_fields": [u"salesforce_account_id", u"salesforce_account_name", u"salesforce_case_id", u"salesforce_case_link", u"salesforce_case_number", u"salesforce_case_owner", u"salesforce_case_type", u"salesforce_contact_email", u"salesforce_contact_fax", u"salesforce_contact_id", u"salesforce_contact_name", u"salesforce_contact_phone", u"salesforce_origin", u"salesforce_owner_id", u"salesforce_status", u"salesforce_supplied_company", u"salesforce_supplied_email", u"salesforce_supplied_name", u"salesforce_supplied_phone"],
@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_close_case", u"salesforce_create_salesforce_case", u"salesforce_get_account", u"salesforce_get_attachments_from_salesforce_case", u"salesforce_get_contact", u"salesforce_post_artifact_file_to_salesforce_case", u"salesforce_post_attachment_to_salesforce_case", u"salesforce_send_note_to_salesforce_case", u"salesforce_send_task_to_salesforce_case", u"salesforce_update_account_details_in_soar", u"salesforce_update_case", u"salesforce_update_case_status_manual", u"salesforce_update_comments_from_salesforce_case", u"salesforce_update_contact_details_in_soar", u"salesforce_update_owner_details_in_soar", u"salesforce_write_owner_details_to_note"]
+        "playbooks": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_close_case", u"salesforce_create_salesforce_case", u"salesforce_create_salesforce_case_from_this_soar_case", u"salesforce_get_account", u"salesforce_get_attachments_from_salesforce_case", u"salesforce_get_contact", u"salesforce_post_artifact_file_to_salesforce_case", u"salesforce_post_attachment_to_salesforce_case", u"salesforce_send_note_to_salesforce_case", u"salesforce_send_task_to_salesforce_case", u"salesforce_sync_tasks_between_soar_and_salesforce", u"salesforce_update_account_details_in_soar", u"salesforce_update_case", u"salesforce_update_case_status_manual", u"salesforce_update_comments_from_salesforce_case", u"salesforce_update_contact_details_in_soar", u"salesforce_update_owner_details_in_soar", u"salesforce_write_owner_details_to_note"]
     }
 
 
@@ -56,11 +56,13 @@ def customization_data(client=None):
         - salesforce_get_contact
         - salesforce_get_user
         - salesforce_post_attachment_to_salesforce_case
+        - salesforce_send_soar_tasks_to_salesforce
         - salesforce_update_case_status
     - Playbooks:
         - salesforce_add_comment_to_salesforce_case
         - salesforce_close_case
         - salesforce_create_salesforce_case
+        - salesforce_create_salesforce_case_from_this_soar_case
         - salesforce_get_account
         - salesforce_get_attachments_from_salesforce_case
         - salesforce_get_contact
@@ -68,6 +70,7 @@ def customization_data(client=None):
         - salesforce_post_attachment_to_salesforce_case
         - salesforce_send_note_to_salesforce_case
         - salesforce_send_task_to_salesforce_case
+        - salesforce_sync_tasks_between_soar_and_salesforce
         - salesforce_update_account_details_in_soar
         - salesforce_update_case
         - salesforce_update_case_status_manual

@@ -10,7 +10,7 @@
 `salesforce_get_contact`
 
 ### Status
-`enabled`
+`disabled`
 
 ### Activation Type
 `manual`

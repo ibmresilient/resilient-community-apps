@@ -52,6 +52,7 @@ TASK_POST_URI = "/services/data/{api_version}/sobjects/Task"
 SOQL_QUERY_LAST_MODIFIED_DATE = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
 SOQL_QUERY_BY_RECORD_TYPE_ID = " AND RecordTypeId IN ({record_type_id_list})"
 SOQL_QUERY_RECORD_TYPE = "SELECT Id,Name from RecordType WHERE sObjectType=\'Case\'"
+SOQL_QUERY_CASE_TASK = "SELECT FIELDS(ALL) FROM Task WHERE WhatId='{case_id}' LIMIT 200"
 SOQL_QUERY_CONTENT_DOCUMENT = "SELECT id, ContentDocumentId, ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId='{case_id}'"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
 LIMIT = 200
@@ -178,7 +179,7 @@ class AppCommon():
             soql_query = soql_query + " LIMIT {0}".format(limit)
         return soql_query
  
-    def _make_headers(self, token: str) -> dict :
+    def _make_headers(self, token: str) -> dict:
         """Build API header using authorization token
 
         :param token: authorization token
@@ -456,7 +457,27 @@ class AppCommon():
         response_json = response.json()
         return response_json
 
-    def update_case_status(self, salesforce_case_id, status):
+    def get_case_tasks(self, case_id: str) -> list:
+        """ Get the tasks associated with a case
+
+        Args:
+            case_id (str): Salesforce CaseId
+        Returns:
+            list : returns a list of tasks 
+        """
+        query_url = self.base_url + QUERY_URI.format(api_version=self.api_version)
+        soql_query = SOQL_QUERY_CASE_TASK.format(case_id=case_id)    
+        params = {'q': soql_query}
+        LOG.debug("Querying endpoint with URL %s", query_url)
+
+        response = self.rc.execute("GET", url=query_url, headers=self.headers, params=params)
+        response_json = response.json()
+        records = response_json.get("records", [])
+        query_results = []
+        query_results.extend(records)
+        return query_results
+    
+    def update_case_status(self, salesforce_case_id: str, status: str) -> bool:
         """Update the Status field in the Salesforce case
 
         Args:
@@ -493,7 +514,7 @@ class AppCommon():
         self.record_type_id_list = record_id_str
         return True
 
-    def get_record_type_id(self, record_type_name) -> str:
+    def get_record_type_id(self, record_type_name: str) -> str:
         """Get the records types of all cases in Salesforce and look for the RecordTypeID of 
         the one that matches SOAR Case Record Type.  The poller uses the RecordTypeId to
         only search for SOAR Cases in Salesforce.
@@ -569,7 +590,7 @@ class AppCommon():
             content_version_ids.append(content_version_id)
         return content_version_ids
 
-    def get_content_version(self, content_version_id) -> dict:
+    def get_content_version(self, content_version_id: str) -> dict:
         """Get the ContentVersion information of an attachment in Salesforce
 
         Args:
