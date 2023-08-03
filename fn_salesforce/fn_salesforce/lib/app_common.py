@@ -221,28 +221,9 @@ class AppCommon():
 
         response = self.rc.execute("GET", url=query_url, headers=self.headers, params=params)
         response_json = response.json()
-        records = response_json.get("records", [])
-        query_results = []
-        query_results.extend(records)
-            
-        done = response_json.get("done", True)
-        while not done:
-            if response_json.get("nextRecordsUrl", None) is None:
-                IntegrationError("No nextRecordsUrl key returned from Salesforce REST API case query!")
 
-            # Get URL for next batch of results using the link sent back from Salesforce 
-            next_query_url = self._get_uri(response_json.get("nextRecordsUrl"))
-            LOG.debug("Querying next records endpoint with URL %s", next_query_url)
+        query_results = self.paginate_results(response_json)
 
-            # Get the next batch of cases 
-            response = self.rc.execute("GET", url=next_query_url, headers=self.headers)
-            response_json = response.json()
-            records = response_json.get("records", [])
-
-            query_results.extend(records)
-
-            # Check if we are done
-            done = response_json.get("done", True)
         return query_results
 
     def make_linkback_url(self, entity_id: str) -> str:
@@ -286,28 +267,7 @@ class AppCommon():
 
         response_json = response.json()
 
-        records = response_json.get("records", [])
-        comments = []
-        comments.extend(records)
-            
-        done = response_json.get("done", True)
-        while not done:
-            if response_json.get("nextRecordsUrl", None) is None:
-                IntegrationError("No nextRecordsUrl key returned from Salesforce REST API /CaseComments")
-
-            # Get URL for next batch of results using the link sent back from Salesforce 
-            next_records_url = self._get_uri(response_json.get("nextRecordsUrl"))
-            LOG.debug("Querying next records /CaseComments endpoint with URL %s", next_records_url)
-
-            # Get the next batch of cases 
-            response = self.rc.execute("GET", url=next_records_url, headers=self.headers)
-            response_json = response.json()
-            records = response_json.get("records", [])
-
-            comments.extend(records)
-
-            # Check if we are done
-            done = response_json.get("done", True)
+        comments = self.paginate_results(response_json)
         return comments
 
 
@@ -519,7 +479,7 @@ class AppCommon():
         the one that matches SOAR Case Record Type.  The poller uses the RecordTypeId to
         only search for SOAR Cases in Salesforce.
 
-        Args:
+        Args: record_type_name (str) : Name of the RecordTypeId we are looking for
 
         Returns:
             bool: return True if the SOAR Case record type Id was found, else return False
@@ -532,30 +492,8 @@ class AppCommon():
         response = self.rc.execute("GET", url=query_url, headers=self.headers, params=params)
 
         response_json = response.json()
-        records = response_json.get("records", [])
 
-        all_records = []
-        all_records.extend(records)
-
-        # Implement pagination in case there are pages of record types in the Salesforce platform
-        done = response_json.get("done", True)
-        while not done:
-            if response_json.get("nextRecordsUrl", None) is None:
-                IntegrationError("No nextRecordsUrl key returned from Salesforce REST API ")
-
-            # Get URL for next batch of results using the link sent back from Salesforce 
-            next_records_url = self._get_uri(response_json.get("nextRecordsUrl"))
-            LOG.debug("Querying next records endpoint with URL %s", next_records_url)
-
-            # Get the next batch of cases 
-            response = self.rc.execute("GET", url=next_records_url, headers=self.headers)
-            response_json = response.json()
-            records = response_json.get("records", [])
-
-            all_records.extend(records)
-
-            # Check if we are done
-            done = response_json.get("done", True)
+        all_records = self.paginate_results(response_json)
 
         for record in all_records:
             if record.get("Name") == record_type_name:
@@ -685,7 +623,42 @@ class AppCommon():
         content_document_link = self.rc.execute("POST", url=content_document_link_url, headers=self.headers, json=data)
         content_document_link_json = content_document_link.json()
         return content_document_link_json
+    
+    def paginate_results(self, response_json: dict) -> list:
+        """Use this function to return paginated results from Salesforce REST API.
+        When calling some REST API endpoints, some results may be large and not 
+        returned in one call.  Subsequent calls to get the results have a 
+        "nextRecordsUrl" that contains a URL to get the next results.  There is also
+        a "done" field returned that is set to True when there are no more results.
 
+        Args:
+            response_json (dict): The first response from REST API call 
+
+        Returns:
+            list: the whole list of results from a call to REST API
+        """
+        records = response_json.get("records", [])
+            
+        done = response_json.get("done", True)
+        while not done:
+            if response_json.get("nextRecordsUrl", None) is None:
+                IntegrationError("No nextRecordsUrl key returned from Salesforce REST API case query!")
+
+            # Get URL for next batch of results using the link sent back from Salesforce 
+            next_query_url = self._get_uri(response_json.get("nextRecordsUrl"))
+            LOG.debug("Querying next records endpoint with URL %s", next_query_url)
+
+            # Get the next batch of cases 
+            response = self.rc.execute("GET", url=next_query_url, headers=self.headers)
+            response_json = response.json()
+            records = response_json.get("records", [])
+
+            records.extend(records)
+
+            # Check if we are done
+            done = response_json.get("done", True)
+        return records
+    
 def callback(response):
     """
     Callback needed for certain REST API calls to return a formatted error message
