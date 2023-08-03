@@ -23,13 +23,13 @@ class FunctionComponent(AppFunctionComponent):
         """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields(["salesforce_case_data"], fn_inputs)
+        validate_fields(["salesforce_case_payload"], fn_inputs)
 
         app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
 
-        salesforce_case_data = json.loads(fn_inputs.salesforce_case_data)
+        salesforce_case_payload = json.loads(fn_inputs.salesforce_case_payload)
 
-        response = app_common.create_salesforce_case(salesforce_case_data)
+        response = app_common.create_salesforce_case(salesforce_case_payload)
         response["entity_url"] = app_common.make_linkback_url(response.get("id"))
 
         results = {"salesforce_case": response}

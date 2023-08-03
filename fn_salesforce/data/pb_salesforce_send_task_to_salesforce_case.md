@@ -63,7 +63,7 @@ if playbook.inputs.task_priority:
 if playbook.inputs.task_status:
   task_json['Status'] = playbook.inputs.task_status
   
-inputs.salesforce_task_data = json.dumps(task_json)
+inputs.salesforce_task_payload = json.dumps(task_json)
 ```
 
 ---

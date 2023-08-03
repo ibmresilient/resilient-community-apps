@@ -270,7 +270,7 @@ Create a Salesforce case in Salesforce using the specified JSON case data.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `salesforce_case_data` | `text` | Yes | `-` | - |
+| `salesforce_case_payload` | `text` | Yes | `-` | - |
 
 </p>
 </details>
@@ -290,7 +290,7 @@ results = {
     }
   },
   "inputs": {
-    "salesforce_case_data": "{\"Origin\": \"Web\", \"Status\": \"In Progress\", \"Description\": \"My Description\", \"Subject\": \"My Subject testing\"}"
+    "salesforce_case_payload": "{\"Origin\": \"Web\", \"Status\": \"In Progress\", \"Description\": \"My Description\", \"Subject\": \"My Subject testing\"}"
   },
   "metrics": {
     "execution_time_ms": 12850,

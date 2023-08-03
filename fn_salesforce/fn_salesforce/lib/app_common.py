@@ -401,13 +401,13 @@ class AppCommon():
         response = self.rc.execute("PATCH", url=url, headers=self.headers, data=data_string)
         return True
     
-    def create_salesforce_case(self, case_data_json: dict) -> dict:
+    def create_salesforce_case(self, case_payload: dict) -> dict:
         """ Create a case in Salesforce with the specified case data in JSON format
 
         Args:
-            case_data_json (dict): _description_
+            case_payload (dict): _description_
 
-            case_data_json = {
+            case_payload = {
                 "Type": "System Intrusion",
                 "Status": "New",
                 "Origin": "Web",
@@ -424,17 +424,17 @@ class AppCommon():
         url = self.base_url + CASE_POST_URI.format(api_version=self.api_version)
         LOG.debug("POST /Case endpoint with URL%s", url)
 
-        response = self.rc.execute("POST", url=url, headers=self.headers, json=case_data_json)
+        response = self.rc.execute("POST", url=url, headers=self.headers, json=case_payload)
         response_json = response.json()
         return response_json
 
-    def create_task(self, task_data_json: dict) -> dict:
+    def create_task(self, task_payload: dict) -> dict:
         """ Create a task in Salesforce with the specified task data in JSON format
 
         Args:
-            task_data_json (dict): Salesforce task data in JSON format
+            task_payload (dict): Salesforce task data in JSON format
 
-            task_data_json = {
+            task_payload = {
                 "WhatId": "500Hr00001Wthb4IAB", 
                 "Description": "Task from IBM SOAR case", 
                 "Subject": "Investigate Exposure of Personal Information/Data", 
@@ -450,9 +450,9 @@ class AppCommon():
         LOG.debug("POST /Task endpoint with URL%s", url)
 
         # Remove html tags as Salesforce does not process them
-        if task_data_json['Description']:
-            task_data_json['Description'] = clean_html(task_data_json['Description'])
-        response = self.rc.execute("POST", url=url, headers=self.headers, json=task_data_json)
+        if task_payload['Description']:
+            task_payload['Description'] = clean_html(task_payload['Description'])
+        response = self.rc.execute("POST", url=url, headers=self.headers, json=task_payload)
         response_json = response.json()
         return response_json
 

@@ -26,17 +26,18 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.incident_id
             -   fn_inputs.task_id
             -   fn_inputs.salesforce_case_id
+            -   fn_inputs.salesforce_case_payload
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields(["salesforce_case_id"], fn_inputs)
+        validate_fields(["salesforce_case_id", "salesforce_task_payload"], fn_inputs)
 
         app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
 
-        salesforce_task_data = json.loads(fn_inputs.salesforce_task_data)
+        salesforce_task_payload = json.loads(fn_inputs.salesforce_task_payload)
 
-        response = app_common.create_task(salesforce_task_data)
+        response = app_common.create_task(salesforce_task_payload)
 
         results = {"salesforce_task": response}
 

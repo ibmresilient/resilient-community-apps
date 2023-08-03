@@ -64,7 +64,7 @@ if incident.properties.salesforce_owner_id:
 if incident.properties.salesforce_contact_id:
   case_json['ContactId'] = incident.properties.salesforce_contact_id
   
-inputs.salesforce_case_data = json.dumps(case_json)
+inputs.salesforce_case_payload = json.dumps(case_json)
 
 ```
 
