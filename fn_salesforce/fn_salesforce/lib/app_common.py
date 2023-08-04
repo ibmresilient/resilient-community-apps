@@ -432,10 +432,8 @@ class AppCommon():
 
         response = self.rc.execute("GET", url=query_url, headers=self.headers, params=params)
         response_json = response.json()
-        records = response_json.get("records", [])
-        query_results = []
-        query_results.extend(records)
-        return query_results
+
+        return self.paginate_results(response_json)
     
     def update_case_status(self, salesforce_case_id: str, status: str) -> bool:
         """Update the Status field in the Salesforce case

@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Salesforce: Sync Tasks between SOAR and Salesforce
+# Playbook - Salesforce: Sync Tasks Between SOAR and Salesforce
 
 ### API Name
 `salesforce_sync_tasks_between_soar_and_salesforce`
@@ -23,13 +23,13 @@ None
 
 
 ---
-## Function - Salesforce: Send SOAR Tasks to Salesforce
+## Function - Salesforce: Sync Tasks Between Cases
 
 ### API Name
-`salesforce_send_soar_tasks_to_salesforce`
+`salesforce_sync_tasks_between_cases`
 
 ### Output Name
-`send_task_results`
+`sync_task_results`
 
 ### Message Destination
 `fn_salesforce`
@@ -55,12 +55,12 @@ Write results of task sync to note.
 
 ### Script Content
 ```python
-results = playbook.functions.results.send_task_results
+results = playbook.functions.results.sync_task_results
 
 if results.success:
-  note_text = "<b>Salesforce: Send SOAR Tasks to Salesforce Case</b> added {} task(s)".format(results.task_count)
+  note_text = "<b>Salesforce: Sync Tasks</b> added:<br> {} task(s) in Salesforce<br> task(s) in SOAR".format(results.task_count_to_salesforce, results.task_count_to_soar)
 else:
-  note_text = "<b>Salesforce: Send SOAR Tasks to Salesforce Case</b> FAILED and was unable to add tasks"
+  note_text = "<b>Salesforce: Sync Tasks</b> FAILED and was unable to add tasks"
 
 incident.addNote(note_text)
 ```
