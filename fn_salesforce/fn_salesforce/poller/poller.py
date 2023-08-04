@@ -213,7 +213,7 @@ class PollerComponent(AppFunctionComponent):
                     continue
 
                 # create linkback url
-                entity["entity_url"] = self.app_common.make_linkback_url(entity_id)
+                entity["entity_url"] = self.app_common.make_linkback_url(entity_type='Case', entity_id=entity_id)
 
                 # determine if this is an existing SOAR case
                 soar_case, _error_msg = self.soar_common.get_soar_case({ SOAR_ENTITY_ID_FIELD: entity_id }, open_cases=False)

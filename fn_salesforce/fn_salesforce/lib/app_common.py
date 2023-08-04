@@ -54,7 +54,7 @@ SOQL_QUERY_BY_RECORD_TYPE_ID = " AND RecordTypeId IN ({record_type_id_list})"
 SOQL_QUERY_RECORD_TYPE = "SELECT Id,Name from RecordType WHERE sObjectType=\'Case\'"
 SOQL_QUERY_CASE_TASK = "SELECT FIELDS(ALL) FROM Task WHERE WhatId='{case_id}' LIMIT 200"
 SOQL_QUERY_CONTENT_DOCUMENT = "SELECT id, ContentDocumentId, ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId='{case_id}'"
-LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/Case/{entity_id}/view"
+LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/{entity_type}/{entity_id}/view"
 LIMIT = 200
 
 IBM_SOAR = "IBM SOAR" # common label
@@ -226,7 +226,7 @@ class AppCommon():
 
         return query_results
 
-    def make_linkback_url(self, entity_id: str) -> str:
+    def make_linkback_url(self, entity_type: str, entity_id: str) -> str:
         """
         Create a url to link back to the endpoint entity
         :param entity_id: id representing the entity
@@ -234,7 +234,7 @@ class AppCommon():
         :return: completed url for linkback
         :rtype: str
         """
-        return LINKBACK_URL.format(my_domain_name=self.my_domain_name, entity_id=entity_id)
+        return LINKBACK_URL.format(my_domain_name=self.my_domain_name, entity_type=entity_type, entity_id=entity_id)
 
     def get_case(self, case_id: str) -> dict:
         """Get the Salesforce case data for the specified Salesforce case_id

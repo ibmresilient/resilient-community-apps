@@ -33,7 +33,7 @@ class FunctionComponent(AppFunctionComponent):
         response = app_common.get_case(fn_inputs.salesforce_case_id)
 
         # Add the link back to Salesforce case
-        response["entity_url"] = app_common.make_linkback_url(fn_inputs.salesforce_case_id)
+        response["entity_url"] = app_common.make_linkback_url(entity_type='Case', entity_id=fn_inputs.salesforce_case_id)
 
         results = {"salesforce_case": response}
 

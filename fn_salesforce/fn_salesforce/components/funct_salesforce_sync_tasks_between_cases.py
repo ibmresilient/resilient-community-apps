@@ -4,11 +4,10 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import SOARCommon, validate_fields, clean_html
+from resilient_lib import SOARCommon, validate_fields, clean_html, build_task_url
 from fn_salesforce.lib.app_common import (AppCommon, PACKAGE_NAME)
 
 FN_NAME = "salesforce_sync_tasks_between_cases"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'salesforce_sync_tasks_between_cases'"""
@@ -38,9 +37,10 @@ class FunctionComponent(AppFunctionComponent):
         sf_tasks = app_common.get_case_tasks(fn_inputs.salesforce_case_id)
 
         # Use a description header when sending SOAR tasks to Salesforce to easily identify 
-        # where  
+        # where the originated from so we don't sent multiple times.
         soar_description_header =  "Task from IBM SOAR case {0}:".format(fn_inputs.incident_id)
         sf_description_header =  "Task from Salesforce case {0}:".format(fn_inputs.salesforce_case_id)
+
 
         # Look for SOAR tasks to send to Salesforce 
         soar_tasks_to_send = []
@@ -62,7 +62,8 @@ class FunctionComponent(AppFunctionComponent):
                 soar_tasks_to_send.append(soar_task)
             
         for soar_task in soar_tasks_to_send:
-            description = "{0} {1}".format(soar_description_header, clean_html(soar_task.get("instr_text")))
+            task_link = build_task_url(rest_client.base_url, fn_inputs.incident_id, soar_task.get("id"), rest_client.org_id)
+            description = "{0} {1} {2}".format(soar_description_header, task_link, clean_html(soar_task.get("instr_text")))
 
             salesforce_task_payload = {"WhatId": fn_inputs.salesforce_case_id,
                                        "Subject": soar_task.get("name", "Task from SOAR"),
@@ -93,7 +94,8 @@ class FunctionComponent(AppFunctionComponent):
 
         # Add the tasks to SOAR case
         for sf_task in sf_tasks_to_get:
-            description = "{0} {1}".format(sf_description_header, sf_task.get("Description"))
+            sf_task_link = app_common.make_linkback_url(entity_type='Task', entity_id=sf_task.get("Id"))
+            description = "{0} {1} {2}".format(sf_description_header, sf_task_link, sf_task.get("Description"))
             soar_task_payload = {"name": sf_task.get("Subject"),
                                  "instr_text": description,
                                  "due_date": sf_task.get("ActivityDate")}
