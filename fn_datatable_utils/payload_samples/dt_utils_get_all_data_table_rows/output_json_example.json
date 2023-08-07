@@ -5,166 +5,205 @@
   "content": {
     "rows": [
       {
-        "id": 641,
+        "id": 92,
         "cells": {
           "boolean": {
             "id": "boolean",
-            "row_id": 641,
-            "value": true
+            "row_id": 92
           },
           "datetime": {
             "id": "datetime",
-            "row_id": 641,
-            "value": 1654018496000
+            "row_id": 92
           },
           "dt_col_name": {
             "id": "dt_col_name",
-            "row_id": 641,
-            "value": "dgzsfhcjv"
-          },
-          "multi_select": {
-            "id": "multi_select",
-            "row_id": 641,
-            "value": [
-              "e",
-              "g",
-              "b"
-            ]
-          },
-          "number": {
-            "id": "number",
-            "row_id": 641,
-            "value": 4598
-          },
-          "select": {
-            "id": "select",
-            "row_id": 641,
-            "value": "3"
-          },
-          "text": {
-            "id": "text",
-            "row_id": 641,
-            "value": "Update from datatable"
-          }
-        },
-        "actions": [
-          {
-            "id": 43,
-            "name": "Get Current Row",
-            "enabled": true
-          },
-          {
-            "id": 56,
-            "name": "Get All Rows",
-            "enabled": true
-          },
-          {
-            "id": 38,
-            "name": "Delete Current Row",
-            "enabled": true
-          },
-          {
-            "id": 41,
-            "name": "Delete Rows by Name",
-            "enabled": true
-          },
-          {
-            "id": 46,
-            "name": "Update Current Row",
-            "enabled": true
-          },
-          {
-            "id": 58,
-            "name": "Add Row",
-            "enabled": true
-          }
-        ],
-        "type_id": 1002,
-        "table_name": "Example CSV Datatable",
-        "inc_id": 2269,
-        "inc_name": "f",
-        "inc_owner": "admin@example.com",
-        "version": 2
-      },
-      {
-        "id": 644,
-        "cells": {
-          "boolean": {
-            "id": "boolean",
-            "row_id": 644,
-            "value": true
-          },
-          "datetime": {
-            "id": "datetime",
-            "row_id": 644,
-            "value": 1654019149216
-          },
-          "dt_col_name": {
-            "id": "dt_col_name",
-            "row_id": 644,
-            "value": "fGzfdhgxj"
-          },
-          "multi_select": {
-            "id": "multi_select",
-            "row_id": 644,
-            "value": [
-              "b",
-              "a"
-            ]
-          },
-          "number": {
-            "id": "number",
-            "row_id": 644,
-            "value": 1
-          },
-          "select": {
-            "id": "select",
-            "row_id": 644,
+            "row_id": 92,
             "value": "1"
           },
+          "multi_select": {
+            "id": "multi_select",
+            "row_id": 92,
+            "value": []
+          },
+          "number": {
+            "id": "number",
+            "row_id": 92,
+            "value": 2
+          },
+          "select": {
+            "id": "select",
+            "row_id": 92
+          },
           "text": {
             "id": "text",
-            "row_id": 644,
-            "value": "example add row"
+            "row_id": 92,
+            "value": "3"
           }
         },
         "actions": [
           {
-            "id": 43,
-            "name": "Get Current Row",
-            "enabled": true
-          },
-          {
-            "id": 56,
-            "name": "Get All Rows",
-            "enabled": true
-          },
-          {
-            "id": 38,
-            "name": "Delete Current Row",
-            "enabled": true
-          },
-          {
-            "id": 41,
+            "id": 117,
             "name": "Delete Rows by Name",
             "enabled": true
           },
           {
-            "id": 46,
+            "id": 119,
+            "name": "Get All Rows",
+            "enabled": true
+          },
+          {
+            "id": 123,
             "name": "Update Current Row",
             "enabled": true
           },
           {
-            "id": 58,
+            "id": 111,
             "name": "Add Row",
+            "enabled": true
+          },
+          {
+            "id": 114,
+            "name": "Delete Current Row",
+            "enabled": true
+          },
+          {
+            "id": 120,
+            "name": "Get Current Row",
             "enabled": true
           }
         ],
-        "type_id": 1002,
+        "playbooks": [
+          {
+            "playbook_handle": "example_data_table_utils_add_row_pb",
+            "display_name": "Example: Data Table Utils: Add Row (PB)"
+          },
+          {
+            "playbook_handle": "example_data_table_utils_get_current_row_pb",
+            "display_name": "Example: Data Table Utils: Get Current Row (PB)"
+          },
+          {
+            "playbook_handle": "example_data_table_utils_delete_row_from_datatable_pb",
+            "display_name": "Example: Data Table Utils: Delete Row from Datatable (PB)"
+          },
+          {
+            "playbook_handle": "example_data_table_utils_delete_rows_from_datatable_pb",
+            "display_name": "Example: Data Table Utils: Delete Rows from Datatable (PB)"
+          },
+          {
+            "playbook_handle": "example_data_table_utils_get_all_data_table_rows_pb",
+            "display_name": "Example: Data Table Utils: Get All Data Table Rows (PB)"
+          },
+          {
+            "playbook_handle": "example_data_utils_update_row_pb",
+            "display_name": "Example Data Utils: Update Row (PB)"
+          }
+        ],
+        "type_id": 1010,
         "table_name": "Example CSV Datatable",
-        "inc_id": 2269,
-        "inc_name": "f",
-        "inc_owner": "admin@example.com",
+        "inc_id": 2101,
+        "inc_name": "datatable",
+        "inc_owner": "datatable@ibm.com",
+        "version": 1
+      },
+      {
+        "id": 93,
+        "cells": {
+          "boolean": {
+            "id": "boolean",
+            "row_id": 93
+          },
+          "datetime": {
+            "id": "datetime",
+            "row_id": 93
+          },
+          "dt_col_name": {
+            "id": "dt_col_name",
+            "row_id": 93,
+            "value": "4"
+          },
+          "multi_select": {
+            "id": "multi_select",
+            "row_id": 93,
+            "value": []
+          },
+          "number": {
+            "id": "number",
+            "row_id": 93,
+            "value": 5
+          },
+          "select": {
+            "id": "select",
+            "row_id": 93
+          },
+          "text": {
+            "id": "text",
+            "row_id": 93,
+            "value": "6"
+          }
+        },
+        "actions": [
+          {
+            "id": 117,
+            "name": "Delete Rows by Name",
+            "enabled": true
+          },
+          {
+            "id": 119,
+            "name": "Get All Rows",
+            "enabled": true
+          },
+          {
+            "id": 123,
+            "name": "Update Current Row",
+            "enabled": true
+          },
+          {
+            "id": 111,
+            "name": "Add Row",
+            "enabled": true
+          },
+          {
+            "id": 114,
+            "name": "Delete Current Row",
+            "enabled": true
+          },
+          {
+            "id": 120,
+            "name": "Get Current Row",
+            "enabled": true
+          }
+        ],
+        "playbooks": [
+          {
+            "playbook_handle": "example_data_table_utils_add_row_pb",
+            "display_name": "Example: Data Table Utils: Add Row (PB)"
+          },
+          {
+            "playbook_handle": "example_data_table_utils_get_current_row_pb",
+            "display_name": "Example: Data Table Utils: Get Current Row (PB)"
+          },
+          {
+            "playbook_handle": "example_data_table_utils_delete_row_from_datatable_pb",
+            "display_name": "Example: Data Table Utils: Delete Row from Datatable (PB)"
+          },
+          {
+            "playbook_handle": "example_data_table_utils_delete_rows_from_datatable_pb",
+            "display_name": "Example: Data Table Utils: Delete Rows from Datatable (PB)"
+          },
+          {
+            "playbook_handle": "example_data_table_utils_get_all_data_table_rows_pb",
+            "display_name": "Example: Data Table Utils: Get All Data Table Rows (PB)"
+          },
+          {
+            "playbook_handle": "example_data_utils_update_row_pb",
+            "display_name": "Example Data Utils: Update Row (PB)"
+          }
+        ],
+        "type_id": 1010,
+        "table_name": "Example CSV Datatable",
+        "inc_id": 2101,
+        "inc_name": "datatable",
+        "inc_owner": "datatable@ibm.com",
         "version": 1
       }
     ]
@@ -172,14 +211,14 @@
   "raw": null,
   "inputs": {
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "incident_id": 2269
+    "incident_id": 2101
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "host": "local",
-    "execution_time_ms": 173,
-    "timestamp": "2022-05-31 13:45:59"
+    "host": "dummy",
+    "execution_time_ms": 66,
+    "timestamp": "2023-06-06 01:01:08"
   }
 }
