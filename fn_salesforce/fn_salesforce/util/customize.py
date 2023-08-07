@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.1.51
+# Generated with resilient-sdk v50.0.85
 
 """Generate the Resilient customizations required for fn_salesforce"""
 

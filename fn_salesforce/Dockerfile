@@ -1,4 +1,4 @@
-# Generated with resilient-sdk v49.1.51
+# Generated with resilient-sdk v50.0.85
 # docker build -t ibmresilient/fn_salesforce:1.0.0 -t ibmresilient/fn_salesforce:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python

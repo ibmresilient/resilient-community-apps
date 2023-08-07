@@ -3,10 +3,67 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1691175272809,
+  "export_date": 1691411007501,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/task_sync_direction",
+      "hide_notification": false,
+      "id": 317,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "task_sync_direction",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "task_sync_direction",
+      "tooltip": "Direction to push tasks",
+      "type_id": 11,
+      "uuid": "91991ce4-0ef6-488f-9b28-01b99f8fa5c7",
+      "values": [
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "SOAR",
+          "properties": null,
+          "uuid": "74078907-7127-4500-bae5-5fe1973e2afd",
+          "value": 105
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Salesforce",
+          "properties": null,
+          "uuid": "c63e10cb-3517-4b4f-959f-02df04c92bcb",
+          "value": 106
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Both",
+          "properties": null,
+          "uuid": "326b5d59-3cb1-4de8-8dc2-2aa22e1885ad",
+          "value": 107
+        }
+      ]
+    },
     {
       "allow_default_value": false,
       "blank_option": false,
@@ -1034,14 +1091,22 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1690992689536,
+      "last_modified_time": 1691327866833,
       "name": "salesforce_create_case_in_salesforce",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"salesforce_case\": {\"id\": \"500Hr00001X906jIAB\", \"success\": true, \"errors\": []}}, \"raw\": null, \"inputs\": {\"salesforce_case_data\": \"{\\\"Origin\\\": \\\"Web\\\", \\\"Status\\\": \\\"In Progress\\\", \\\"Description\\\": \\\"My Description\\\", \\\"Subject\\\": \\\"My Subject testing\\\", \\\"Reason\\\": \\\"Installation\\\"}\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-salesforce\", \"package_version\": \"1.0.0\", \"host\": \"MacBook-Pro.local\", \"execution_time_ms\": 12850, \"timestamp\": \"2023-07-20 11:18:51\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"salesforce_case\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"errors\": {\"type\": \"array\"}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"salesforce_case_data\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "74337648-8bfe-4aa6-9cdd-34dd819a2bdd",
-      "version": 1,
+      "version": 2,
       "view_items": [
+        {
+          "content": "ba2f906f-6db5-43ef-8ebd-55333e41341c",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
         {
           "content": "70f56caf-384e-4a84-81c2-b5a80eda6ad5",
           "element": "field_uuid",
@@ -1427,11 +1492,11 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1691173086874,
+      "last_modified_time": 1691322876543,
       "name": "salesforce_sync_tasks_between_cases",
       "tags": [],
       "uuid": "f9907018-0770-4e2c-9620-cb623b5a43f1",
-      "version": 2,
+      "version": 3,
       "view_items": [
         {
           "content": "ba2f906f-6db5-43ef-8ebd-55333e41341c",
@@ -1443,6 +1508,14 @@
         },
         {
           "content": "cdbb2fab-1d25-4140-8041-14a2c495f262",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "91991ce4-0ef6-488f-9b28-01b99f8fa5c7",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1506,13 +1579,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 30,
+  "id": 36,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1691175271000,
+      "create_date": 1691411005728,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1521,7 +1594,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1691175271000,
+      "update_date": 1691411005728,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1573,8 +1646,8 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 1,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7e933741_7c74_4711_96d7_0b8d31d67343\" isExecutable=\"true\" name=\"playbook_7e933741_7c74_4711_96d7_0b8d31d67343\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0id8d9e\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_0id8d9e\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_3\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_17fsmpd\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Salesforce: Get Case Comments\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8e4f5ac0-996d-400f-b84d-0e2e5cd9fe4c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_comment_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0id8d9e\u003c/incoming\u003e\u003coutgoing\u003eFlow_0he6g1o\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0he6g1o\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_4\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Salesforce: Check function results to add Salesforce comments to case\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"202e8dcc-9ab8-41ef-be29-9acbdc5a7a0c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0he6g1o\u003c/incoming\u003e\u003coutgoing\u003eFlow_17fsmpd\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17fsmpd\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7e933741_7c74_4711_96d7_0b8d31d67343\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0id8d9e\" id=\"Flow_0id8d9e_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0he6g1o\" id=\"Flow_0he6g1o_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17fsmpd\" id=\"Flow_17fsmpd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"167.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"307.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7e933741_7c74_4711_96d7_0b8d31d67343\" isExecutable=\"true\" name=\"playbook_7e933741_7c74_4711_96d7_0b8d31d67343\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0id8d9e\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_0id8d9e\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_3\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_17fsmpd\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Salesforce: Get Case Comments\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8e4f5ac0-996d-400f-b84d-0e2e5cd9fe4c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_comment_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0id8d9e\u003c/incoming\u003e\u003coutgoing\u003eFlow_0he6g1o\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0he6g1o\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_4\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Salesforce: Check function results to add Salesforce comments to case\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"202e8dcc-9ab8-41ef-be29-9acbdc5a7a0c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0he6g1o\u003c/incoming\u003e\u003coutgoing\u003eFlow_17fsmpd\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17fsmpd\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7e933741_7c74_4711_96d7_0b8d31d67343\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17fsmpd\" id=\"Flow_17fsmpd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0he6g1o\" id=\"Flow_0he6g1o_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0id8d9e\" id=\"Flow_0id8d9e_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"167.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"307.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1690992690137,
       "creator_principal": {
@@ -1625,7 +1698,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1690992690713,
+      "last_modified_time": 1691410437094,
       "local_scripts": [
         {
           "actions": [],
@@ -1636,12 +1709,12 @@
           "id": 2,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1690992690214,
+          "last_modified_time": 1691410362988,
           "name": "Salesforce: Check function results to add Salesforce comments to case",
           "object_type": "incident",
           "playbook_handle": "salesforce_add_comment_to_salesforce_case",
           "programmatic_name": "salesforce_add_comment_to_salesforce_case_salesforce_check_function_results_to_add_salesforce_comments_to_case",
-          "script_text": "results  = playbook.functions.results.get_comment_results\n\nif results.success:\n  incident.addNote(\"Salesforce: automatic playbook added {} notes from Salesforce\".format(results.content.count))\nelse:\n  incident.addNote(\"Saleforce: ERROR in automatic playbook to get Salesforce case comments - function not succcessful.\")",
+          "script_text": "results  = playbook.functions.results.get_comment_results\n\nif results.success:\n  incident.addNote(\"Salesforce: automatic playbook added {} notes from Salesforce\".format(results.content.count))\nelse:\n  incident.addNote(\"Salesforce: ERROR in automatic playbook to get Salesforce case comments - function not successful.\")",
           "tags": [],
           "uuid": "202e8dcc-9ab8-41ef-be29-9acbdc5a7a0c"
         }
@@ -1659,7 +1732,7 @@
       "tags": [],
       "type": "default",
       "uuid": "7e933741-7c74-4711-96d7-0b8d31d67343",
-      "version": 4
+      "version": 6
     },
     {
       "activation_details": {
@@ -1783,8 +1856,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\" isExecutable=\"true\" name=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_09qrncb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Create Case in Salesforce\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"74337648-8bfe-4aa6-9cdd-34dd819a2bdd\"\u003e{\"inputs\":{},\"pre_processing_script\":\"import json\\n\\ncase_json = {}\\ncase_json[\u0027Origin\u0027] = \\\"Web\\\"\\n\\nif playbook.inputs.salesforce_case_status:\\n  case_json[\u0027Status\u0027] = playbook.inputs.salesforce_case_status\\nelse: \\n  case_json[\u0027Status\u0027] = \\\"New\\\"\\n  \\nif playbook.inputs.salesforce_case_description:\\n  case_json[\u0027Description\u0027] = playbook.inputs.salesforce_case_description\\n\\nif playbook.inputs.salesforce_case_subject:\\n  case_json[\u0027Subject\u0027] = playbook.inputs.salesforce_case_subject\\n\\nif playbook.inputs.salesforce_case_internal_comments:\\n  case_json[\u0027Comments\u0027] = playbook.inputs.salesforce_case_internal_comments\\n\\nif incident.properties.salesforce_account_id:\\n  case_json[\u0027AccountId\u0027] = incident.properties.salesforce_account_id\\n\\nif incident.properties.salesforce_owner_id:\\n  case_json[\u0027OwnerId\u0027] = incident.properties.salesforce_owner_id\\n  \\nif incident.properties.salesforce_contact_id:\\n  case_json[\u0027ContactId\u0027] = incident.properties.salesforce_contact_id\\n  \\ninputs.salesforce_case_payload = json.dumps(case_json)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_salesforce_case_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09qrncb\u003c/incoming\u003e\u003coutgoing\u003eFlow_0eyyvr2\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_09qrncb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Write results of Create Salesforce Case function\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"295aaaa0-6cc9-4e54-b426-8bf585223f67\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0eyyvr2\u003c/incoming\u003e\u003coutgoing\u003eFlow_1dmb1fs\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0eyyvr2\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1dmb1fs\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1dmb1fs\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dmb1fs\" id=\"Flow_1dmb1fs_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"72\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0eyyvr2\" id=\"Flow_0eyyvr2_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"-48\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09qrncb\" id=\"Flow_09qrncb_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"-174\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"-132\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"466\" y=\"-226\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462.48400000000004\" y=\"-132\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462.48400000000004\" y=\"-12\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"493.48400000000004\" y=\"124\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 7,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\" isExecutable=\"true\" name=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_09qrncb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Create Case in Salesforce\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"74337648-8bfe-4aa6-9cdd-34dd819a2bdd\"\u003e{\"inputs\":{},\"pre_processing_script\":\"import json\\n\\ncase_json = {}\\ncase_json[\u0027Origin\u0027] = \\\"Web\\\"\\n\\nif playbook.inputs.salesforce_case_status:\\n  case_json[\u0027Status\u0027] = playbook.inputs.salesforce_case_status\\nelse: \\n  case_json[\u0027Status\u0027] = \\\"New\\\"\\n  \\nif playbook.inputs.salesforce_case_description:\\n  case_json[\u0027Description\u0027] = playbook.inputs.salesforce_case_description\\n\\nif playbook.inputs.salesforce_case_subject:\\n  case_json[\u0027Subject\u0027] = playbook.inputs.salesforce_case_subject\\n\\nif playbook.inputs.salesforce_case_internal_comments:\\n  case_json[\u0027Comments\u0027] = playbook.inputs.salesforce_case_internal_comments\\n\\nif incident.properties.salesforce_account_id:\\n  case_json[\u0027AccountId\u0027] = incident.properties.salesforce_account_id\\n\\nif incident.properties.salesforce_owner_id:\\n  case_json[\u0027OwnerId\u0027] = incident.properties.salesforce_owner_id\\n  \\nif incident.properties.salesforce_contact_id:\\n  case_json[\u0027ContactId\u0027] = incident.properties.salesforce_contact_id\\n  \\ninputs.salesforce_case_payload = json.dumps(case_json)\\ninputs.incident_id = incident.id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_salesforce_case_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09qrncb\u003c/incoming\u003e\u003coutgoing\u003eFlow_0eyyvr2\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_09qrncb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Write results of Create Salesforce Case function\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"295aaaa0-6cc9-4e54-b426-8bf585223f67\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0eyyvr2\u003c/incoming\u003e\u003coutgoing\u003eFlow_1dmb1fs\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0eyyvr2\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0g3b0di\u003c/incoming\u003e\u003cincoming\u003eFlow_1etib8x\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1dmb1fs\" sourceRef=\"ScriptTask_2\" targetRef=\"ConditionPoint_4\"/\u003e\u003cexclusiveGateway default=\"Flow_0g3b0di\" id=\"ConditionPoint_4\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_1dmb1fs\u003c/incoming\u003e\u003coutgoing\u003eFlow_0f72l4g\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0g3b0di\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Salesforce: Sync Tasks Between Cases\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f9907018-0770-4e2c-9620-cb623b5a43f1\"\u003e{\"inputs\":{\"cdbb2fab-1d25-4140-8041-14a2c495f262\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ba2f906f-6db5-43ef-8ebd-55333e41341c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"91991ce4-0ef6-488f-9b28-01b99f8fa5c7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"74078907-7127-4500-bae5-5fe1973e2afd\"}}},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\\ninputs.task_sync_direction = \\\"Salesforce\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"sync_task_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0f72l4g\u003c/incoming\u003e\u003coutgoing\u003eFlow_0eeigkq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"Salesforce: Write sync task results to a note \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0b355962-6d5f-4269-ae8c-b86832246bf8\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0eeigkq\u003c/incoming\u003e\u003coutgoing\u003eFlow_1etib8x\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0eeigkq\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_1etib8x\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_0f72l4g\" name=\"Test if Tasks should be added to the Salesforce case\" sourceRef=\"ConditionPoint_4\" targetRef=\"ServiceTask_5\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"Test if Tasks should be added to the Salesforce case\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"if incident.properties.salesforce_case_id and playbook.inputs.include_soar_tasks:\\n  result = True\\nelse:\\n  result = False\\n\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0g3b0di\" name=\"Else\" sourceRef=\"ConditionPoint_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0g3b0di\" id=\"Flow_0g3b0di_di\"\u003e\u003comgdi:waypoint x=\"550\" y=\"-14\"/\u003e\u003comgdi:waypoint x=\"550\" y=\"284\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"554\" y=\"132\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0f72l4g\" id=\"Flow_0f72l4g_di\"\u003e\u003comgdi:waypoint x=\"550\" y=\"-14\"/\u003e\u003comgdi:waypoint x=\"550\" y=\"22\"/\u003e\u003comgdi:waypoint x=\"350\" y=\"22\"/\u003e\u003comgdi:waypoint x=\"350\" y=\"58\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"53\" width=\"86\" x=\"407\" y=\"4\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1etib8x\" id=\"Flow_1etib8x_di\"\u003e\u003comgdi:waypoint x=\"448\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"466\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"466\" y=\"310\"/\u003e\u003comgdi:waypoint x=\"484\" y=\"310\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0eeigkq\" id=\"Flow_0eeigkq_di\"\u003e\u003comgdi:waypoint x=\"350\" y=\"142\"/\u003e\u003comgdi:waypoint x=\"350\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dmb1fs\" id=\"Flow_1dmb1fs_di\"\u003e\u003comgdi:waypoint x=\"550\" y=\"-88\"/\u003e\u003comgdi:waypoint x=\"550\" y=\"-66\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0eyyvr2\" id=\"Flow_0eyyvr2_di\"\u003e\u003comgdi:waypoint x=\"550\" y=\"-208\"/\u003e\u003comgdi:waypoint x=\"550\" y=\"-172\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09qrncb\" id=\"Flow_09qrncb_di\"\u003e\u003comgdi:waypoint x=\"550\" y=\"-314\"/\u003e\u003comgdi:waypoint x=\"550\" y=\"-292\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"456\" y=\"-366\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"452\" y=\"-292\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"452\" y=\"-172\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"484\" y=\"284\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_4\" id=\"ConditionPoint_4_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"428\" y=\"-66\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"252\" y=\"58\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"252\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1690992691023,
       "creator_principal": {
@@ -1806,6 +1879,35 @@
         "display_name": "Salesforce: Create Salesforce Case",
         "export_key": "playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa",
         "fields": {
+          "include_soar_tasks": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa/include_soar_tasks",
+            "hide_notification": false,
+            "id": 318,
+            "input_type": "boolean",
+            "internal": false,
+            "is_tracked": false,
+            "name": "include_soar_tasks",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Include SOAR Tasks",
+            "tooltip": "Select whether  SOAR tasks are included in the Salesforce case",
+            "type_id": 1002,
+            "uuid": "4a13602f-fab7-40d1-b68d-3f43de2680d6",
+            "values": []
+          },
           "salesforce_case_description": {
             "allow_default_value": false,
             "blank_option": false,
@@ -2274,7 +2376,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1691077386215,
+      "last_modified_time": 1691330324449,
       "local_scripts": [
         {
           "actions": [],
@@ -2293,6 +2395,24 @@
           "script_text": "results = playbook.functions.results.create_salesforce_case_results\ncontent = results.get(\"content\")\nsalesforce_case = content.get(\"salesforce_case\")\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Create Case in Salesforce\u003c/b\u003e created Case with CaseId: {}\".format(salesforce_case.get(\"id\", None))\n  if salesforce_case.get(\"entity_url\", None):\n    note_text = note_text + \"   \u003ca target=\u0027_blank\u0027 href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\".format(salesforce_case.get(\"entity_url\"))\nelse:\n  note_text = \"\u003cb\u003eSalesforce: Create Case in Saleforce\u003c/b\u003e failed:\u003cbr\u003e{}\".format(salesforce_case.get(\"error\", None))\n  \nincident.addNote(note_text)",
           "tags": [],
           "uuid": "295aaaa0-6cc9-4e54-b426-8bf585223f67"
+        },
+        {
+          "actions": [],
+          "created_date": 1691329395270,
+          "description": "Write results of sync task function to a note.",
+          "enabled": false,
+          "export_key": "Salesforce: Write sync task results to a note ",
+          "id": 25,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1691330322147,
+          "name": "Salesforce: Write sync task results to a note ",
+          "object_type": "incident",
+          "playbook_handle": "salesforce_create_salesforce_case",
+          "programmatic_name": "salesforce_create_salesforce_case_salesforce_write_sync_task_results_to_a_note_",
+          "script_text": "results = playbook.functions.results.sync_task_results\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Sync Tasks\u003c/b\u003e added:\u003cbr\u003e {0} tasks in Salesforce\u003cbr\u003e {1} tasks in SOAR\".format(results.content.task_count_to_salesforce, results.content.task_count_to_soar)\nelse:\n  note_text = \"\u003cb\u003eSalesforce: Sync Tasks\u003c/b\u003e FAILED and was unable to add tasks\"\n\nincident.addNote(note_text)",
+          "tags": [],
+          "uuid": "0b355962-6d5f-4269-ae8c-b86832246bf8"
         }
       ],
       "manual_settings": {
@@ -2335,6 +2455,14 @@
           },
           {
             "content": "d88cdc49-85d5-431d-84f6-a1a4b0ce60d7",
+            "element": "field_uuid",
+            "field_type": "playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "4a13602f-fab7-40d1-b68d-3f43de2680d6",
             "element": "field_uuid",
             "field_type": "playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa",
             "show_if": null,
@@ -2388,13 +2516,13 @@
       "tags": [],
       "type": "default",
       "uuid": "53b2cb7f-7d97-4da5-acbf-89fdee65baaa",
-      "version": 6
+      "version": 10
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 19,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a9666b4d_02ff_47be_a8c7_719b9b51541b\" isExecutable=\"true\" name=\"playbook_a9666b4d_02ff_47be_a8c7_719b9b51541b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_17mzlly\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_17mzlly\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Update SOAR Case with Salesforce Case Details\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"361b2f7a-5938-45d6-9d54-2410aadf9f15\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0nmmye0\u003c/incoming\u003e\u003coutgoing\u003eFlow_0axyoi4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fx92y3\u003c/incoming\u003e\u003cincoming\u003eFlow_1hej2ug\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0axyoi4\" sourceRef=\"ScriptTask_2\" targetRef=\"ConditionPoint_5\"/\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"Salesforce: Create Case in Salesforce\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"74337648-8bfe-4aa6-9cdd-34dd819a2bdd\"\u003e{\"inputs\":{},\"pre_processing_script\":\"import json\\n\\ncase_json = {}\\ncase_json[\u0027Origin\u0027] = \\\"Web\\\"\\ncase_json[\u0027Status\u0027] = \\\"New\\\"\\ncase_json[\u0027Priority\u0027] = incident.severity_code \\nif incident.description:\\n  case_json[\u0027Description\u0027] = incident.description.content\\nelse:\\n  case_json[\u0027Description\u0027] = \\\"Case created from SOAR case {}\\\".format(incident.id)\\ncase_json[\u0027Subject\u0027] = incident.name\\n  \\ninputs.salesforce_case_payload = json.dumps(case_json)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"salesforce_case_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17mzlly\u003c/incoming\u003e\u003coutgoing\u003eFlow_0nmmye0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0nmmye0\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_2\"/\u003e\u003cexclusiveGateway default=\"Flow_0fx92y3\" id=\"ConditionPoint_5\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_0axyoi4\u003c/incoming\u003e\u003coutgoing\u003eFlow_1u0fchy\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0fx92y3\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003cserviceTask id=\"ServiceTask_8\" name=\"Salesforce: Sync Tasks Between Cases\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f9907018-0770-4e2c-9620-cb623b5a43f1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"sync_task_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1u0fchy\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ve9jxo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0ve9jxo\" sourceRef=\"ServiceTask_8\" targetRef=\"ScriptTask_9\"/\u003e\u003cscriptTask id=\"ScriptTask_9\" name=\"Salesforce: Write sync task results to a note \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"41a8cbe5-2350-4188-ae41-40763eada20a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ve9jxo\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hej2ug\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1hej2ug\" sourceRef=\"ScriptTask_9\" targetRef=\"EndPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_1u0fchy\" name=\"Test if Tasks should be added to the case\" sourceRef=\"ConditionPoint_5\" targetRef=\"ServiceTask_8\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"Test if Tasks should be added to the case\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"if incident.properties.salesforce_case_id and playbook.inputs.include_soar_tasks:\\n  result = True\\nelse:\\n  result = False\\n\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0fx92y3\" name=\"Else\" sourceRef=\"ConditionPoint_5\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a9666b4d_02ff_47be_a8c7_719b9b51541b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fx92y3\" id=\"Flow_0fx92y3_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"376\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"700\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"720\" y=\"483\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1u0fchy\" id=\"Flow_1u0fchy_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"376\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"559\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"559\" y=\"448\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"84\" x=\"506.0000000000002\" y=\"370\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hej2ug\" id=\"Flow_1hej2ug_di\"\u003e\u003comgdi:waypoint x=\"657\" y=\"633\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"633\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"700\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ve9jxo\" id=\"Flow_0ve9jxo_di\"\u003e\u003comgdi:waypoint x=\"548\" y=\"532\"/\u003e\u003comgdi:waypoint x=\"548\" y=\"555\"/\u003e\u003comgdi:waypoint x=\"559\" y=\"555\"/\u003e\u003comgdi:waypoint x=\"559\" y=\"578\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0nmmye0\" id=\"Flow_0nmmye0_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"162\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0axyoi4\" id=\"Flow_0axyoi4_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"324\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17mzlly\" id=\"Flow_17mzlly_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"26\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"78\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"616\" y=\"-26\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644\" y=\"704\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"78\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_5\" id=\"ConditionPoint_5_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"588\" y=\"324\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_9\" id=\"ScriptTask_9_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"461\" y=\"578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_8\" id=\"ServiceTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"461\" y=\"448\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 39,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a9666b4d_02ff_47be_a8c7_719b9b51541b\" isExecutable=\"true\" name=\"playbook_a9666b4d_02ff_47be_a8c7_719b9b51541b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_17mzlly\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_17mzlly\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Update SOAR Case with Salesforce Case Details\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"361b2f7a-5938-45d6-9d54-2410aadf9f15\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0nmmye0\u003c/incoming\u003e\u003coutgoing\u003eFlow_0axyoi4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fx92y3\u003c/incoming\u003e\u003cincoming\u003eFlow_1hej2ug\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0axyoi4\" sourceRef=\"ScriptTask_2\" targetRef=\"ServiceTask_10\"/\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"Salesforce: Create Case in Salesforce\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"74337648-8bfe-4aa6-9cdd-34dd819a2bdd\"\u003e{\"inputs\":{},\"pre_processing_script\":\"import json\\n\\ncase_json = {}\\ncase_json[\u0027Origin\u0027] = \\\"Web\\\"\\ncase_json[\u0027Status\u0027] = \\\"New\\\"\\ncase_json[\u0027Priority\u0027] = incident.severity_code \\nif incident.description:\\n  case_json[\u0027Description\u0027] = incident.description.content\\nelse:\\n  case_json[\u0027Description\u0027] = \\\"Case created from SOAR case {}\\\".format(incident.id)\\ncase_json[\u0027Subject\u0027] = incident.name\\n  \\ninputs.salesforce_case_payload = json.dumps(case_json)\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"salesforce_case_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17mzlly\u003c/incoming\u003e\u003coutgoing\u003eFlow_0nmmye0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0nmmye0\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_2\"/\u003e\u003cexclusiveGateway default=\"Flow_0fx92y3\" id=\"ConditionPoint_5\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_1ogpsjr\u003c/incoming\u003e\u003coutgoing\u003eFlow_1u0fchy\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0fx92y3\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003cserviceTask id=\"ServiceTask_8\" name=\"Salesforce: Sync Tasks Between Cases\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f9907018-0770-4e2c-9620-cb623b5a43f1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\\ninputs.task_sync_direction = \\\"Salesforce\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"sync_task_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1u0fchy\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ve9jxo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0ve9jxo\" sourceRef=\"ServiceTask_8\" targetRef=\"ScriptTask_9\"/\u003e\u003cscriptTask id=\"ScriptTask_9\" name=\"Salesforce: Write sync task results to a note \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"41a8cbe5-2350-4188-ae41-40763eada20a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ve9jxo\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hej2ug\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1hej2ug\" sourceRef=\"ScriptTask_9\" targetRef=\"EndPoint_3\"/\u003e\u003cserviceTask id=\"ServiceTask_10\" name=\"Salesforce: Add Comment to Salesforce Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c13836c0-4432-4cb3-81ed-146422c3939c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.salesforce_case_id = incident.properties.salesforce_case_id\\nresults = playbook.functions.results.salesforce_case_results\\ninputs.salesforce_comment_text = \\\"This Salesforce case created from SOAR case {0} URL: {1}\\\".format(incident.id, playbook.functions.results.salesforce_case_results.content.salesforce_case.soar_case_url)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_comment_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0axyoi4\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ogpsjr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1ogpsjr\" sourceRef=\"ServiceTask_10\" targetRef=\"ConditionPoint_5\"/\u003e\u003csequenceFlow id=\"Flow_1u0fchy\" name=\"Test if Tasks should be added to the case\" sourceRef=\"ConditionPoint_5\" targetRef=\"ServiceTask_8\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"Test if Tasks should be added to the case\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"if incident.properties.salesforce_case_id and playbook.inputs.include_soar_tasks:\\n  result = True\\nelse:\\n  result = False\\n\\n# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0fx92y3\" name=\"Else\" sourceRef=\"ConditionPoint_5\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a9666b4d_02ff_47be_a8c7_719b9b51541b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fx92y3\" id=\"Flow_0fx92y3_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"446\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"704\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"720\" y=\"530\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1u0fchy\" id=\"Flow_1u0fchy_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"446\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"520\"/\u003e\u003comgdi:waypoint x=\"578\" y=\"520\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"40\" width=\"84\" x=\"628\" y=\"445\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ogpsjr\" id=\"Flow_1ogpsjr_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"394\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hej2ug\" id=\"Flow_1hej2ug_di\"\u003e\u003comgdi:waypoint x=\"578\" y=\"643\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"643\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"704\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ve9jxo\" id=\"Flow_0ve9jxo_di\"\u003e\u003comgdi:waypoint x=\"469\" y=\"562\"/\u003e\u003comgdi:waypoint x=\"469\" y=\"575\"/\u003e\u003comgdi:waypoint x=\"480\" y=\"575\"/\u003e\u003comgdi:waypoint x=\"480\" y=\"588\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0nmmye0\" id=\"Flow_0nmmye0_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"132\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0axyoi4\" id=\"Flow_0axyoi4_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17mzlly\" id=\"Flow_17mzlly_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"26\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"48\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"616\" y=\"-26\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644\" y=\"704\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"48\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_5\" id=\"ConditionPoint_5_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"588\" y=\"394\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_8\" id=\"ServiceTask_8_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"382\" y=\"478\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_9\" id=\"ScriptTask_9_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"382\" y=\"588\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_10\" id=\"ServiceTask_10_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1691077942853,
       "creator_principal": {
@@ -2475,7 +2603,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1691175104242,
+      "last_modified_time": 1691330290914,
       "local_scripts": [
         {
           "actions": [],
@@ -2522,12 +2650,12 @@
           "id": 24,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1691174378388,
+          "last_modified_time": 1691330287635,
           "name": "Salesforce: Write sync task results to a note ",
           "object_type": "incident",
           "playbook_handle": "salesforce_create_salesforce_case_from_this_soar_case",
           "programmatic_name": "salesforce_create_salesforce_case_from_this_soar_case_salesforce_write_sync_task_results_to_a_note_",
-          "script_text": "results = playbook.functions.results.sync_task_results\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Sync Tasks\u003c/b\u003e added:\u003cbr\u003e {} task(s) in Salesforce\u003cbr\u003e task(s) in SOAR\".format(results.task_count_to_salesforce, results.task_count_to_soar)\nelse:\n  note_text = \"\u003cb\u003eSalesforce: Sync Tasks\u003c/b\u003e FAILED and was unable to add tasks\"\n\nincident.addNote(note_text)",
+          "script_text": "results = playbook.functions.results.sync_task_results\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Sync Tasks\u003c/b\u003e added:\u003cbr\u003e {0} tasks in Salesforce\u003cbr\u003e {1} tasks in SOAR\".format(results.content.task_count_to_salesforce, results.content.task_count_to_soar)\nelse:\n  note_text = \"\u003cb\u003eSalesforce: Sync Tasks\u003c/b\u003e FAILED and was unable to add tasks\"\n\nincident.addNote(note_text)",
           "tags": [],
           "uuid": "41a8cbe5-2350-4188-ae41-40763eada20a"
         }
@@ -2569,12 +2697,12 @@
       "tags": [],
       "type": "default",
       "uuid": "a9666b4d-02ff-47be-a8c7-719b9b51541b",
-      "version": 23
+      "version": 43
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815\" isExecutable=\"true\" name=\"playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0bchg87\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Get Attachments from Salesforce\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ae3237f6-af1f-4b0f-a39f-73f35dd3208d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.task_id = None\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_attachments_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0bchg87\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xmivdt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0bchg87\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Get Attachments write results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e081b66b-c20a-43e3-ba90-c3e88861db98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xmivdt\u003c/incoming\u003e\u003coutgoing\u003eFlow_19rxtya\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xmivdt\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_19rxtya\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_19rxtya\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19rxtya\" id=\"Flow_19rxtya_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xmivdt\" id=\"Flow_0xmivdt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bchg87\" id=\"Flow_0bchg87_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1690992691485,
@@ -2626,7 +2754,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1691077416711,
+      "last_modified_time": 1691410469606,
       "local_scripts": [
         {
           "actions": [],
@@ -2637,12 +2765,12 @@
           "id": 5,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1690992691546,
+          "last_modified_time": 1691410467014,
           "name": "Salesforce: Get Attachments write results to a note",
           "object_type": "incident",
           "playbook_handle": "salesforce_get_attachments_from_salesforce_case",
           "programmatic_name": "salesforce_get_attachments_from_salesforce_case_salesforce_get_attachments_write_results_to_a_note",
-          "script_text": "results = playbook.functions.results.get_attachments_results\n\nif results.success:\n  salesforce_attachments = results.content.salesforce_attachments\n  note_text = \"\u003cb\u003eSaleforce: Get Attachments:\u003c/b\u003e added {} attachments to incident:\u003cbr\u003e\".format(len(salesforce_attachments))\n  for attachment_name in salesforce_attachments:\n    note_text = note_text + \"\u003cbr\u003e{}\".format(attachment_name)\nelse:\n  note_text = \"\u003cb\u003eSaleforce: Get Attachments\u003c/b\u003e failed to get attachments from Salesforce.\"\nincident.addNote(note_text)\n",
+          "script_text": "results = playbook.functions.results.get_attachments_results\n\nif results.success:\n  salesforce_attachments = results.content.salesforce_attachments\n  note_text = \"\u003cb\u003eSalesforce: Get Attachments:\u003c/b\u003e added {} attachments to incident:\u003cbr\u003e\".format(len(salesforce_attachments))\n  for attachment_name in salesforce_attachments:\n    note_text = note_text + \"\u003cbr\u003e{}\".format(attachment_name)\nelse:\n  note_text = \"\u003cb\u003eSalesforce: Get Attachments\u003c/b\u003e failed to get attachments from Salesforce.\"\nincident.addNote(note_text)\n",
           "tags": [],
           "uuid": "e081b66b-c20a-43e3-ba90-c3e88861db98"
         }
@@ -2675,7 +2803,7 @@
       "tags": [],
       "type": "default",
       "uuid": "e43fa5c0-2ea2-4965-abc7-c5525e3c7815",
-      "version": 5
+      "version": 6
     },
     {
       "activation_type": "manual",
@@ -2994,7 +3122,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 14,
+        "content_version": 16,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7aaf3494_d064_4357_b92e_095fc9c740a7\" isExecutable=\"true\" name=\"playbook_7aaf3494_d064_4357_b92e_095fc9c740a7\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0uavjhb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Create Task in Salesforce Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"aa8d86b1-e94d-4906-b175-6889001f67c6\"\u003e{\"inputs\":{},\"pre_processing_script\":\"import json\\n\\ninputs.incident_id = incident.id\\ninputs.task_id = task.id\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\\ntask_json = {}\\n\\ntask_json[\u0027WhatId\u0027] = inputs.salesforce_case_id\\n\\ndescription = \\\"Task from IBM SOAR case {}\\\".format(incident.id)\\nif task.instructions:\\n  description = description + \\\": {}\\\".format(task.instructions.content)\\n\\ntask_json[\u0027Description\u0027] = description\\n\\nif task.due_date:\\n  task_json[\u0027ActivityDate\u0027] = task.due_date\\n  \\nif task.name:\\n  task_json[\u0027Subject\u0027] = task.name\\n\\nif playbook.inputs.task_priority:\\n  task_json[\u0027Priority\u0027] = playbook.inputs.task_priority\\n  \\nif playbook.inputs.task_status:\\n  task_json[\u0027Status\u0027] = playbook.inputs.task_status\\n  \\ninputs.salesforce_task_payload = json.dumps(task_json)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_task_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0uavjhb\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qvkqjc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0uavjhb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Write Create Task to Note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9a5d6c5e-2d67-4f2f-b171-699e7a032e9b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qvkqjc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1sm5iud\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1qvkqjc\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1sm5iud\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1sm5iud\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7aaf3494_d064_4357_b92e_095fc9c740a7\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sm5iud\" id=\"Flow_1sm5iud_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qvkqjc\" id=\"Flow_1qvkqjc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0uavjhb\" id=\"Flow_0uavjhb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1691000065786,
@@ -3179,7 +3307,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1691075229984,
+      "last_modified_time": 1691410562370,
       "local_scripts": [
         {
           "actions": [],
@@ -3190,12 +3318,12 @@
           "id": 20,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1691008940353,
+          "last_modified_time": 1691410529128,
           "name": "Salesforce: Write Create Task to Note",
           "object_type": "task",
           "playbook_handle": "salesforce_send_task_to_salesforce_case",
           "programmatic_name": "salesforce_send_task_to_salesforce_case_salesforce_write_create_task_to_note",
-          "script_text": "results = playbook.functions.results.create_task_results\ncontent = results.get(\"content\")\nsalesforce_task = content.get(\"salesforce_task\")\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Create Task in Salesforce\u003c/b\u003e created with TaskId: {}\".format(salesforce_task.get(\"id\", None))\nelse:\n    note_text = \"\u003cb\u003eSalesforce: Create Task in Saleforce\u003c/b\u003e failed:\u003cbr\u003e{}\".format(salesforce_task.get(\"error\", None))\n  \nincident.addNote(note_text)",
+          "script_text": "results = playbook.functions.results.create_task_results\ncontent = results.get(\"content\")\nsalesforce_task = content.get(\"salesforce_task\")\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Create Task in Salesforce\u003c/b\u003e created with TaskId: {}\".format(salesforce_task.get(\"id\", None))\nelse:\n    note_text = \"\u003cb\u003eSalesforce: Create Task in Salesforce\u003c/b\u003e failed:\u003cbr\u003e{}\".format(salesforce_task.get(\"error\", None))\n  \nincident.addNote(note_text)",
           "tags": [],
           "uuid": "9a5d6c5e-2d67-4f2f-b171-699e7a032e9b"
         }
@@ -3245,13 +3373,13 @@
       "tags": [],
       "type": "default",
       "uuid": "7aaf3494-d064-4357-b92e-095fc9c740a7",
-      "version": 18
+      "version": 20
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 9,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a0042da4_5e03_462a_b3dd_ebc7b67f6568\" isExecutable=\"true\" name=\"playbook_a0042da4_5e03_462a_b3dd_ebc7b67f6568\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0jniqug\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_0jniqug\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1sz571p\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Salesforce: Write results of task sync to note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7ce3de1b-7858-4116-aebc-9055c2560cfd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0drzqdl\u003c/incoming\u003e\u003coutgoing\u003eFlow_1sz571p\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1sz571p\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"Salesforce: Sync Tasks Between Cases\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f9907018-0770-4e2c-9620-cb623b5a43f1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"sync_task_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0jniqug\u003c/incoming\u003e\u003coutgoing\u003eFlow_0drzqdl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0drzqdl\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a0042da4_5e03_462a_b3dd_ebc7b67f6568\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0drzqdl\" id=\"Flow_0drzqdl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sz571p\" id=\"Flow_1sz571p_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jniqug\" id=\"Flow_0jniqug_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"307.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"167.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 14,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a0042da4_5e03_462a_b3dd_ebc7b67f6568\" isExecutable=\"true\" name=\"playbook_a0042da4_5e03_462a_b3dd_ebc7b67f6568\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0jniqug\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_0jniqug\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1sz571p\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Salesforce: Write results of task sync to note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7ce3de1b-7858-4116-aebc-9055c2560cfd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0drzqdl\u003c/incoming\u003e\u003coutgoing\u003eFlow_1sz571p\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1sz571p\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"Salesforce: Sync Tasks Between Cases\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f9907018-0770-4e2c-9620-cb623b5a43f1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\\ninputs.task_sync_direction = playbook.inputs.task_sync_direction\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"sync_task_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0jniqug\u003c/incoming\u003e\u003coutgoing\u003eFlow_0drzqdl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0drzqdl\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a0042da4_5e03_462a_b3dd_ebc7b67f6568\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0drzqdl\" id=\"Flow_0drzqdl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sz571p\" id=\"Flow_1sz571p_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jniqug\" id=\"Flow_0jniqug_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"307.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"167.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1691085086507,
       "creator_principal": {
@@ -3270,9 +3398,67 @@
       "field_type_handle": "playbook_a0042da4_5e03_462a_b3dd_ebc7b67f6568",
       "fields_type": {
         "actions": [],
-        "display_name": "Salesforce: Sync Tasks between SOAR and Salesforce",
+        "display_name": "Salesforce: Sync Tasks Between SOAR and Salesforce",
         "export_key": "playbook_a0042da4_5e03_462a_b3dd_ebc7b67f6568",
-        "fields": {},
+        "fields": {
+          "task_sync_direction": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_a0042da4_5e03_462a_b3dd_ebc7b67f6568/task_sync_direction",
+            "hide_notification": false,
+            "id": 316,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "task_sync_direction",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Task Sync Direction",
+            "tooltip": "Select direction to push tasks: Push to Salesforce, Push to SOAR, Push to both Salesforce and SOAR ",
+            "type_id": 1018,
+            "uuid": "8d17b08d-67e6-46a2-a5ec-93db19f9ecdd",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Salesforce",
+                "properties": null,
+                "uuid": "93111665-b185-403d-8271-34277be7c523",
+                "value": 108
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "SOAR",
+                "properties": null,
+                "uuid": "0e41ca6d-2edd-492f-9e4d-3af845adfeae",
+                "value": 109
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Both",
+                "properties": null,
+                "uuid": "7a8b253c-4127-4c4f-a2fd-509608e7aec8",
+                "value": 110
+              }
+            ]
+          }
+        },
         "for_actions": false,
         "for_custom_fields": false,
         "for_notifications": false,
@@ -3302,7 +3488,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1691174289520,
+      "last_modified_time": 1691330157327,
       "local_scripts": [
         {
           "actions": [],
@@ -3313,12 +3499,12 @@
           "id": 23,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1691172981265,
+          "last_modified_time": 1691330154955,
           "name": "Salesforce: Write results of task sync to note",
           "object_type": "incident",
           "playbook_handle": "salesforce_sync_tasks_between_soar_and_salesforce",
           "programmatic_name": "salesforce_sync_tasks_between_soar_and_salesforce_salesforce_write_results_of_task_sync_to_note",
-          "script_text": "results = playbook.functions.results.sync_task_results\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Sync Tasks\u003c/b\u003e added:\u003cbr\u003e {} task(s) in Salesforce\u003cbr\u003e task(s) in SOAR\".format(results.task_count_to_salesforce, results.task_count_to_soar)\nelse:\n  note_text = \"\u003cb\u003eSalesforce: Sync Tasks\u003c/b\u003e FAILED and was unable to add tasks\"\n\nincident.addNote(note_text)",
+          "script_text": "results = playbook.functions.results.sync_task_results\n\nif results.success:\n  note_text = \"\u003cb\u003eSalesforce: Sync Tasks\u003c/b\u003e added:\u003cbr\u003e {1} tasks in Salesforce\u003cbr\u003e {1} tasks in SOAR\".format(results.content.task_count_to_salesforce, results.content.task_count_to_soar)\nelse:\n  note_text = \"\u003cb\u003eSalesforce: Sync Tasks\u003c/b\u003e FAILED and was unable to add tasks\"\n\nincident.addNote(note_text)",
           "tags": [],
           "uuid": "7ce3de1b-7858-4116-aebc-9055c2560cfd"
         }
@@ -3336,7 +3522,16 @@
           ],
           "logic_type": "all"
         },
-        "view_items": []
+        "view_items": [
+          {
+            "content": "8d17b08d-67e6-46a2-a5ec-93db19f9ecdd",
+            "element": "field_uuid",
+            "field_type": "playbook_a0042da4_5e03_462a_b3dd_ebc7b67f6568",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
       },
       "name": "salesforce_sync_tasks_between_soar_and_salesforce",
       "object_type": "incident",
@@ -3351,7 +3546,7 @@
       "tags": [],
       "type": "default",
       "uuid": "a0042da4-5e03-462a-b3dd-ebc7b67f6568",
-      "version": 15
+      "version": 20
     },
     {
       "activation_details": {
