@@ -54,6 +54,9 @@
             "name": {
               "type": "string"
             },
+            "domain": {
+              "type": "string"
+            },
             "state": {
               "type": "integer"
             },
@@ -124,7 +127,10 @@
               "type": "boolean"
             },
             "tags": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "groups": {
               "type": "array",
@@ -138,9 +144,6 @@
                     "type": "string"
                   },
                   "description": {
-                    "type": "string"
-                  },
-                  "parentGroupId": {
                     "type": "string"
                   }
                 }
@@ -279,18 +282,6 @@
               "data": {
                 "type": "object",
                 "properties": {
-                  "cmdLine": {
-                    "type": "string"
-                  },
-                  "cmdLineArgs": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "_t": {
-                    "type": "string"
-                  },
                   "matched": {
                     "type": "array",
                     "items": {
@@ -320,20 +311,11 @@
                             "id": {
                               "type": "string"
                             },
-                            "script": {
+                            "hash": {
                               "type": "string"
                             },
-                            "osTypes": {
-                              "type": "array",
-                              "items": {
-                                "type": "integer"
-                              }
-                            },
-                            "eventTypes": {
-                              "type": "array",
-                              "items": {
-                                "type": "integer"
-                              }
+                            "alg": {
+                              "type": "integer"
                             },
                             "type": {
                               "type": "integer"
@@ -342,6 +324,9 @@
                         }
                       }
                     }
+                  },
+                  "_t": {
+                    "type": "string"
                   }
                 }
               },
@@ -396,10 +381,7 @@
           "type": "string"
         },
         "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "array"
         },
         "notes": {
           "type": "string"
@@ -429,6 +411,9 @@
               "type": "integer"
             },
             "name": {
+              "type": "string"
+            },
+            "domain": {
               "type": "string"
             },
             "isolated": {
@@ -464,7 +449,10 @@
               "type": "string"
             },
             "tags": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "groups": {
               "type": "array",
@@ -478,9 +466,6 @@
                     "type": "string"
                   },
                   "description": {
-                    "type": "string"
-                  },
-                  "parentGroupId": {
                     "type": "string"
                   }
                 }

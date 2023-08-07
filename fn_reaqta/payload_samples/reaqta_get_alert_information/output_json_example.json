@@ -3,22 +3,23 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "1015597023501484034",
-    "localId": "1015596879049656322",
-    "endpointId": "982370521729466368",
-    "triggerCondition": 12,
+    "id": "1022070806768779266",
+    "localId": "1022070249672935426",
+    "endpointId": "876174682842202112",
+    "triggerCondition": 6,
     "endpoint": {
-      "id": "982370521729466368",
-      "machineId": "0c0dcd602f5d65aed629d4199c8f665955c434050d68a634eaf4ba0e1058b7ce",
+      "id": "876174682842202112",
+      "machineId": "857d21c8a80297fb0078cdc036b290b61cb4eec5c1889eab4c7ae3daeeeaa655",
       "osType": 1,
       "cpuVendor": 1,
       "arch": 2,
-      "cpuDescr": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
+      "cpuDescr": "Intel(R) Xeon(R) Platinum 8260 CPU @ 2.40GHz",
       "kernel": "10.0",
-      "os": "Windows 10 Enterprise",
-      "name": "IBM-PF36LBRC",
+      "os": "Windows Server 2019 Standard",
+      "name": "ADDAL10-01",
+      "domain": "americas.cloudpaksecurity.com",
       "state": 1,
-      "registrationTime": "2023-04-24T21:50:33.146Z",
+      "registrationTime": "2022-06-17T20:05:22.942Z",
       "agentVersion": "3.10.1",
       "componentsVersions": [
         {
@@ -33,8 +34,8 @@
         },
         {
           "name": "rqtsentry",
-          "version": "3.6.1",
-          "build": "119.1632119719010.commit"
+          "version": "3.10.0",
+          "build": "121.1666598992258.commit"
         },
         {
           "name": "rqtnetsentry",
@@ -48,216 +49,150 @@
         }
       ],
       "isVirtualMachine": false,
-      "isDomainController": false,
-      "isServer": false,
-      "sessionStart": "2023-07-07T21:20:29.083Z",
-      "sessionEnd": "2023-07-07T22:10:29.109Z",
-      "lastSeenAt": "2023-07-07T22:05:29.109Z",
+      "isDomainController": true,
+      "isServer": true,
+      "sessionStart": "2023-04-25T09:11:13.842Z",
+      "sessionEnd": "2023-08-01T07:23:21.342Z",
+      "lastSeenAt": "2023-08-01T07:18:21.342Z",
       "disconnectionReason": 0,
-      "localAddr": "192.168.1.97",
+      "localAddr": "52.118.133.13",
       "hvStatus": 19,
       "macs": [
-        "5c:e4:2a:2c:f3:a7",
-        "90:2e:16:c4:f7:7d"
+        "06:c3:1d:18:2c:3a",
+        "06:d7:b5:4f:18:0e"
       ],
       "isolated": false,
-      "isolationStatus": "PENDING_ISOLATION",
+      "isolationStatus": "DEISOLATED",
       "isolationStatusFailure": null,
-      "connected": false,
-      "tags": [],
+      "connected": true,
+      "tags": [
+        "dc"
+      ],
       "groups": [
         {
-          "id": "988899645751033863",
-          "name": "Example Group",
-          "description": "This is an example group.",
-          "parentGroupId": "988899392910000135"
-        },
-        {
-          "id": "988899392910000135",
-          "name": "Example Client"
+          "id": "839608851933167623",
+          "name": "Latin America",
+          "description": "Latin America Hive"
         }
       ],
       "avInstalled": false
     },
     "triggerEvents": [
       {
-        "id": "1015597023866388481",
-        "category": "hive",
-        "localId": "1015596878957389825",
-        "endpointId": "982370521729466368",
-        "receivedAt": "2023-07-07T13:39:59.370Z",
-        "happenedAt": "2023-07-07T13:39:24.821Z",
-        "relevance": 0,
-        "severity": "none",
-        "trigger": true,
-        "manuallyAdded": false,
-        "process": {
-          "id": "982370521729466368:27136:1688737164600",
-          "parentId": "982370521729466368:18816:1688737159302",
-          "endpointId": "982370521729466368",
-          "program": {
-            "path": "c:\\windows\\system32\\net.exe",
-            "filename": "net.exe",
-            "md5": "bb1ae49b6b7c53499e94613761a6ac56",
-            "sha1": "76866dde54ee3fa5bc8efefb9d44e6bf859973aa",
-            "sha256": "afbe51517092256504f797f6a5abc02515a09d603e8c046ae31d7d7855568e91",
-            "certInfo": {
-              "signer": "Microsoft Windows",
-              "issuer": "Microsoft Windows Production PCA 2011",
-              "trusted": true,
-              "expired": false
-            },
-            "size": 81920,
-            "arch": "x64",
-            "fsName": "net.exe"
-          },
-          "user": "NT AUTHORITY\\SYSTEM",
-          "pid": 27136,
-          "startTime": "2023-07-07T13:39:24.600Z",
-          "ppid": 18816,
-          "pstartTime": "2023-07-07T13:39:19.302Z",
-          "userSID": "S-1-5-18",
-          "privilegeLevel": "SYSTEM",
-          "noGui": false,
-          "logonId": "0x3e7"
-        },
-        "eventType": 2,
-        "data": {
-          "cmdLine": "\"C:\\windows\\system32\\net.exe\" accounts",
-          "cmdLineArgs": [
-            "C:\\windows\\system32\\net.exe",
-            "accounts"
-          ],
-          "_t": "l"
-        },
-        "happenedAt_ts": 1688737164000
-      },
-      {
-        "id": "1015597023866392577",
+        "id": "1022070807062380545",
         "category": "policies",
-        "localId": "1015596878957393921",
-        "endpointId": "982370521729466368",
-        "receivedAt": "2023-07-07T13:39:59.370Z",
-        "happenedAt": "2023-07-07T13:39:24.821Z",
-        "relevance": 100,
-        "severity": "high",
+        "localId": "1022070249601636353",
+        "endpointId": "876174682842202112",
+        "receivedAt": "2023-07-25T10:24:29.561Z",
+        "happenedAt": "2023-07-25T10:22:16.652Z",
+        "relevance": 88,
+        "severity": "medium",
         "trigger": true,
         "manuallyAdded": false,
         "process": {
-          "id": "982370521729466368:27136:1688737164600",
-          "parentId": "982370521729466368:18816:1688737159302",
-          "endpointId": "982370521729466368",
+          "id": "876174682842202112:8944:1690280536643",
+          "parentId": "876174682842202112:4780:1690280518291",
+          "endpointId": "876174682842202112",
           "program": {
-            "path": "c:\\windows\\system32\\net.exe",
-            "filename": "net.exe",
-            "md5": "bb1ae49b6b7c53499e94613761a6ac56",
-            "sha1": "76866dde54ee3fa5bc8efefb9d44e6bf859973aa",
-            "sha256": "afbe51517092256504f797f6a5abc02515a09d603e8c046ae31d7d7855568e91",
+            "path": "c:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe",
+            "filename": "powershell.exe",
+            "md5": "7353f60b1739074eb17c5f4dddefe239",
+            "sha1": "6cbce4a295c163791b60fc23d285e6d84f28ee4c",
+            "sha256": "de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c",
             "certInfo": {
               "signer": "Microsoft Windows",
               "issuer": "Microsoft Windows Production PCA 2011",
               "trusted": true,
               "expired": false
             },
-            "size": 81920,
+            "size": 448000,
             "arch": "x64",
-            "fsName": "net.exe"
+            "fsName": "powershell.exe"
           },
           "user": "NT AUTHORITY\\SYSTEM",
-          "pid": 27136,
-          "startTime": "2023-07-07T13:39:24.600Z",
-          "ppid": 18816,
-          "pstartTime": "2023-07-07T13:39:19.302Z",
+          "pid": 8944,
+          "startTime": "2023-07-25T10:22:16.643Z",
+          "ppid": 4780,
+          "pstartTime": "2023-07-25T10:21:58.291Z",
           "userSID": "S-1-5-18",
           "privilegeLevel": "SYSTEM",
           "noGui": false,
           "logonId": "0x3e7"
         },
-        "eventType": 49,
+        "eventType": 28,
         "data": {
           "matched": [
             {
-              "policyId": "992023020967034884",
-              "versionId": "1004361409577877509",
-              "policyTitle": "Potential APT",
-              "policyDescription": "",
+              "policyId": "1020293408461160452",
+              "versionId": "1020293408461164549",
+              "policyTitle": "johns policy 2007",
+              "policyDescription": "test",
               "scope": "global",
               "groups": [],
               "matcher": {
-                "id": "992023020967043078",
-                "script": "-- Title: Potential APT\n-- Description: This policy will notify every time a series of suspicious app runs within a stipulated timeframe\n-- Binding Events: Process Created\n-- Platform: Windows\n--\n-- Configuration parameters:\n--      app_count :            Number of app_count before triggering and incident\n--      time_span_millis :     Time span between the app_count could happen. Definied in milliseconds.\n--\n-- Adjust the variables accordingly\n-- The timezone is the local time\n\napp_count = 3\ntime_span_millis = 1*60*1000 -- 1 min\n\n------------------ DO NOT CHANGE THE CODE BELOW ---------------------\n\nlocal function notify(event)\n    title = \"Potential APT Detected: \" .. event.process.get_parent_ofn()\n    notes = title\n    impact = 80\n    tags = {\"apt\"}\n    create_alert({event}, title, impact, notes, tags)\n    msg_box (title)\nend\n\n\nlocal apps = {\n    \"net.exe\",\n    \"systeminfo.exe\",\n    \"hostname.exe\",\n    \"whoami.exe\",\n    \"tasklist.exe\"\n}\n\nlocal function match_app(app)\n    for key, value in pairs(apps) do\n        if app:lower():find(value) then\n            return true\n        end\n    end\n    return false\nend\n\nlocal app = match_app(event.process.get_ofn())\n\nif not app then\n    return\nend\n\n\nif tbox == nil then\n    tbox = timebox.new(app_count, time_span_millis)\nend\n\nif tbox:count() then\n    if event.parentProcess then kill_process(event.parentProcess.pid, event.parentProcess.startTime) end\n    kill_process(event)\n    notify(event)\nend",
-                "osTypes": [
-                  1
-                ],
-                "eventTypes": [
-                  2
-                ],
-                "type": 28
+                "id": "1020293408461168646",
+                "hash": "de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c",
+                "alg": 1,
+                "type": 2
               }
             }
           ],
           "_t": "r"
         },
-        "happenedAt_ts": 1688737164000
+        "happenedAt_ts": 1690280536000
       }
     ],
-    "totalEventCount": 9,
+    "totalEventCount": 6,
     "byTypeEventCount": [
       {
         "type": 2,
-        "count": 6
+        "count": 3
       },
       {
         "type": 3,
         "count": 1
       },
       {
-        "type": 30,
+        "type": 28,
         "count": 1
       },
       {
-        "type": 49,
+        "type": 30,
         "count": 1
       }
     ],
-    "impact": 80,
+    "impact": 88,
     "severity": "medium",
     "closed": true,
-    "closedAt": "2023-07-09T00:00:03.317Z",
-    "lastChangedAt": "2023-07-10T04:46:44.747Z",
+    "closedAt": "2023-07-27T00:00:01.673Z",
+    "lastChangedAt": "2023-07-27T00:01:03.899Z",
     "activityState": "archived",
     "terminationReason": 1,
-    "receivedAt": "2023-07-07T13:39:59.283Z",
-    "happenedAt": "2023-07-07T13:39:24.843Z",
-    "tags": [
-      "apt"
-    ],
-    "notes": "Potential APT Detected: powershell.exe\nIBM SOAR 07/07/2023 21:40:16\nPotential APT Detected: powershell.exe\n\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\nIBM SOAR 07/07/2023 13:40:42\nPotential APT Detected: powershell.exe\nIBM SOAR 07/07/2023 21:40:16\nPotential APT Detected: powershell.exe\n\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\n\n[SOAR Case - 2560](https://9.30.24.113:443/#incidents/2560)\nIBM SOAR 07/07/2023 13:38:32\nPotential APT Detected: powershell.exe\nIBM SOAR 07/07/2023 21:40:16\nPotential APT Detected: powershell.exe\n\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\nIBM SOAR 07/07/2023 13:40:42\nPotential APT Detected: powershell.exe\nIBM SOAR 07/07/2023 21:40:16\nPotential APT Detected: powershell.exe\n\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\n\n[SOAR Case - 2560](https://9.30.24.113:443/#incidents/2560)\n\n[SOAR Case - 17024](https://169.44.147.200:443/#incidents/17024)\nIBM SOAR 10/07/2023 12:46:44\nEndpoint Machine Isolated",
+    "receivedAt": "2023-07-25T10:24:29.491Z",
+    "happenedAt": "2023-07-25T10:22:16.669Z",
+    "tags": [],
+    "notes": "\nIBM SOAR 25/07/2023 10:25:05\nNone\n\n[SOAR Case - 2825](https://9.30.229.231:443/#incidents/2825)\nIBM SOAR 25/07/2023 18:25:21\nNone\n\n[SOAR Case - 2151](https://9.30.211.113:443/#incidents/2151)\nIBM SOAR 25/07/2023 10:25:32\n\nIBM SOAR 25/07/2023 10:22:23\nNone\n\n[SOAR Case - 17384](https://169.44.147.200:443/#incidents/17384)\n\n[SOAR Case - 2828](https://9.30.229.231:443/#incidents/2828)\nIBM SOAR 27/07/2023 00:01:03\n\nIBM SOAR 25/07/2023 10:25:05\nNone\n\n[SOAR Case - 2825](https://9.30.229.231:443/#incidents/2825)\nIBM SOAR 25/07/2023 18:25:21\nNone\n\n[SOAR Case - 2151](https://9.30.211.113:443/#incidents/2151)\nIBM SOAR 25/07/2023 10:25:32\n\nIBM SOAR 25/07/2023 10:22:23\nNone\n\n[SOAR Case - 17384](https://169.44.147.200:443/#incidents/17384)\n\n[SOAR Case - 2828](https://9.30.229.231:443/#incidents/2828)\n\n[SOAR Case - 2943](https://9.30.24.113:443/#incidents/2943)",
     "endpointState": {
       "osType": 1,
       "cpuVendor": 1,
       "arch": 2,
-      "cpuDescr": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
+      "cpuDescr": "Intel(R) Xeon(R) Platinum 8260 CPU @ 2.40GHz",
       "kernel": "10.0",
-      "os": "Windows 10 Enterprise",
+      "os": "Windows Server 2019 Standard",
       "hvStatus": 19,
-      "name": "IBM-PF36LBRC",
+      "name": "ADDAL10-01",
+      "domain": "americas.cloudpaksecurity.com",
       "isolated": false,
-      "localAddr": "192.168.1.97",
+      "localAddr": "52.118.133.13",
       "macs": [
-        "5c:e4:2a:2c:f3:a7",
-        "90:2e:16:c4:f7:7d"
+        "06:c3:1d:18:2c:3a",
+        "06:d7:b5:4f:18:0e"
       ],
       "componentsVersions": [
         {
-          "name": "rqtsentry",
-          "version": "3.6.1",
-          "build": "119.1632119719010.commit"
-        },
-        {
-          "name": "installer",
+          "name": "keeper",
           "version": "3.10.1",
-          "build": ""
+          "build": "27.1668701555901.commit"
         },
         {
           "name": "probos",
@@ -265,45 +200,47 @@
           "build": "3.5.0"
         },
         {
-          "name": "keeper",
-          "version": "3.10.1",
-          "build": "27.1668701555901.commit"
+          "name": "rqtsentry",
+          "version": "3.10.0",
+          "build": "121.1666598992258.commit"
         },
         {
           "name": "rqtnetsentry",
           "version": "3.10.0",
           "build": "45.1666597836648.commit"
+        },
+        {
+          "name": "installer",
+          "version": "3.10.1",
+          "build": ""
         }
       ],
       "endpointVersion": "3.10.1",
-      "tags": [],
+      "tags": [
+        "dc"
+      ],
       "groups": [
         {
-          "id": "988899645751033863",
-          "name": "Example Group",
-          "description": "This is an example group.",
-          "parentGroupId": "988899392910000135"
-        },
-        {
-          "id": "988899392910000135",
-          "name": "Example Client"
+          "id": "839608851933167623",
+          "name": "Latin America",
+          "description": "Latin America Hive"
         }
       ]
     },
-    "title": "Destra: Potential APT Detected: powershell.exe",
-    "alert_url": "https://rhiveam.techzone.ibm.com/alerts/1015597023501484034"
+    "title": "Policy hit: johns policy 2007",
+    "alert_url": "https://rhiveam.techzone.ibm.com/alerts/1022070806768779266"
   },
   "raw": null,
   "inputs": {
-    "reaqta_alert_id": "1015597023501484034",
+    "reaqta_alert_id": "1022070806768779266",
     "reaqta_hive": "rhiveam"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
     "package_version": "1.1.0",
-    "host": "Henry's IBM 16 inch Macbook Pro",
-    "execution_time_ms": 604,
-    "timestamp": "2023-07-10 12:50:31"
+    "host": "local",
+    "execution_time_ms": 1786,
+    "timestamp": "2023-08-01 15:18:53"
   }
 }

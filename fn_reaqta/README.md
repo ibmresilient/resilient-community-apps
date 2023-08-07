@@ -33,6 +33,7 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
+- [Poller Considerations](#poller-considerations)
 - [Function - ReaQta Get Endpoint Status](#function---reaqta-get-endpoint-status)
 - [Function - ReaQta: Attach File](#function---reaqta-attach-file)
 - [Function - ReaQta: Close Alert](#function---reaqta-close-alert)
@@ -47,6 +48,7 @@
 - [Data Table - ReaQta Trigger Events](#data-table---reaqta-trigger-events)
 - [Custom Fields](#custom-fields)
 - [Playbooks](#playbooks)
+- [Templates for SOAR Cases](#templates-for-soar-cases)
 - [Troubleshooting & Support](#troubleshooting--support)
 
 ---
@@ -71,7 +73,7 @@ You can continue to use the rules/workflows. But migrating to playbooks provides
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 03/2022 | Initial Release | 
-| 1.1.0 | 08/2023 | Convert Rules and Workflows to Playbooks |<!-- ::CHANGE_ME:: -->
+| 1.1.0 | 08/2023 | Convert Rules and Workflows to Playbooks |
 
 
 
@@ -86,7 +88,7 @@ You can continue to use the rules/workflows. But migrating to playbooks provides
 -->
 **IBM SOAR app bidirectional synchronization and functions for ReaQta**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png) 
 
 Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
 
@@ -115,7 +117,7 @@ Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
 <!--
   List any Requirements 
 --> 
-<!-- ::CHANGE_ME:: -->
+
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -135,7 +137,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Org Data | Read |
   | Function | Read |
   | Incidents | Create, Read, Edit, Edit Status |
-  <!-- ::CHANGE_ME:: -->
+
 
 The following SOAR platform guides provide additional information: 
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -157,7 +159,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does/does not** <!-- ::CHANGE_ME:: --> support a proxy server.
+The app **does**  support a proxy server.
 
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
@@ -166,15 +168,13 @@ Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=46.0.0
 * retry2
 
-### <!-- ::CHANGE_ME:: --> Development Version
+###  Development Version
 
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
 | ------------ | --------------- | ------- | ----------- |
 |ReaQta Hive | 3.7 | rqt-api/1/ | 1 |
- <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> |
 
-#### Prerequisites
 <!--
 List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
 -->
@@ -188,7 +188,7 @@ In order to make API calls to ReaQta, create an API Application, prodiving the e
 
 ![screenshot: custom_layouts](./doc/screenshots/reaqta_configuration.png)
 
-#### Permissions
+
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
@@ -241,7 +241,7 @@ Repeat this section for each ReaQta hive. Add the `hive_label` used in the `poll
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) <!-- ::CHANGE_ME:: -->
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
 ---
 
@@ -256,7 +256,7 @@ When using another source of ReaQta Alert escalation to IBM SOAR, disable the po
 ## Function - ReaQta Get Endpoint Status
 Get the current status of an endpoint
 
- ![screenshot: fn-reaqta-get-endpoint-status ](./doc/screenshots/fn-reaqta-get-endpoint-status.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-reaqta-get-endpoint-status ](./doc/screenshots/fn-reaqta-get-endpoint-status.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -394,7 +394,7 @@ None
 ## Function - ReaQta: Attach File
 Attach the file associated with a running process
 
- ![screenshot: fn-reaqta-attach-file ](./doc/screenshots/fn-reaqta-attach-file.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-reaqta-attach-file ](./doc/screenshots/fn-reaqta-attach-file.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -416,93 +416,43 @@ Attach the file associated with a running process
 
 ```python
 results = {
-  "content": {},
-  "inputs": {
-    "reaqta_endpoint_id": "982370521729466368",
-    "reaqta_hive": "rhiveam",
-    "reaqta_incident_id": 2131,
-    "reaqta_program_path": "c:\\windows\\system32\\net.exe"
-  },
-  "metrics": {
-    "execution_time_ms": 448,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
-    "package": "fn-reaqta",
-    "package_version": "1.1.0",
-    "timestamp": "2023-07-10 11:53:28",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": "ReaQta Error: \n    status code: 422\n    message: Endpoint offline\n    details: {\u0027endpointId\u0027: \u0027982370521729466368\u0027, \u0027lastSeenAt\u0027: \u00272023-07-07T22:05:29.109Z\u0027}",
-  "success": false,
-  "version": 2.0
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-None
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-None
-```
-
-</p>
-</details>
-
----
-## Function - ReaQta: Close Alert
-Close a ReaQta Alert
-
- ![screenshot: fn-reaqta-close-alert ](./doc/screenshots/fn-reaqta-close-alert.png) <!-- ::CHANGE_ME:: -->
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `reaqta_alert_id` | `text` | Yes | `-` | - |
-| `reaqta_hive` | `text` | No | `-` | Label used to identify which ReaQta hive this alert is associated with |
-| `reaqta_is_malicious` | `boolean` | Yes | `-` | - |
-| `reaqta_note` | `text` | No | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
   "content": {
-    "alertId": "1015597023501484034",
-    "closed": true
+    "actions": [
+      {
+        "enabled": true,
+        "id": 90,
+        "name": "ReaQta: Kill Process"
+      }
+    ],
+    "content_type": "application/x-msdownload",
+    "created": 1645210092202,
+    "creator_id": 3,
+    "id": 48,
+    "inc_id": 2377,
+    "inc_name": "ReaQta Alert - Hive alert Title, Endpoint: AUTISTIC1",
+    "inc_owner": 3,
+    "name": "notepad.exe",
+    "size": 334262,
+    "task_at_id": null,
+    "task_custom": null,
+    "task_id": null,
+    "task_members": null,
+    "task_name": null,
+    "type": "incident",
+    "uuid": "50df0c2a-e222-4353-90f0-f4f2a2fad3f5",
+    "vers": 7
   },
   "inputs": {
-    "reaqta_alert_id": "1015597023501484034",
-    "reaqta_hive": "rhiveam",
-    "reaqta_is_malicious": false,
-    "reaqta_note": "\u003cdiv class=\"rte\"\u003e\u003cdiv\u003etest\u003c/div\u003e\u003c/div\u003e"
+    "reaqta_endpoint_id": "831986736375529472",
+    "reaqta_incident_id": 2377,
+    "reaqta_program_path": "C:\\Windows\\System32\\notepad.exe"
   },
   "metrics": {
-    "execution_time_ms": 1483,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "execution_time_ms": 18981,
+    "host": "endpoint.local",
     "package": "fn-reaqta",
-    "package_version": "1.1.0",
-    "timestamp": "2023-07-10 12:52:38",
+    "package_version": "1.0.0",
+    "timestamp": "2022-02-18 13:48:11",
     "version": "1.0"
   },
   "raw": null,
@@ -536,10 +486,318 @@ None
 </details>
 
 ---
+## Function - ReaQta: Close Alert
+Close a ReaQta Alert
+
+ ![screenshot: fn-reaqta-close-alert ](./doc/screenshots/fn-reaqta-close-alert.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `reaqta_alert_id` | `text` | Yes | `-` | - |
+| `reaqta_hive` | `text` | No | `-` | Label used to identify which ReaQta hive this alert is associated with |
+| `reaqta_is_malicious` | `boolean` | Yes | `-` | - |
+| `reaqta_note` | `text` | No | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': [
+    {
+      'id': 2141,
+      'type': 12,
+      'value': 'chrome.exe',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': None,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339889974,
+      'last_modified_time': 1646398787005,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': 'cb702049ff10bce20e09e04024c6654a78c85d54ea71de07f328f76426a42ed5',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    },
+    {
+      'id': 2142,
+      'type': 13,
+      'value': '87d2ffd6a891119062b89decb05c89d8',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': 2141,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339890099,
+      'last_modified_time': 1646398787006,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': '881c60fa0d9f9fd6c9a568e65f1ab1061e7de130f4c2268b600b7c092e72470d',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    },
+    {
+      'id': 2143,
+      'type': 14,
+      'value': '4d224080d73d0e18a84e5eac43e52aba16161f23',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': 2141,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339890117,
+      'last_modified_time': 1646398787005,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': 'b8ea66ed6adba64778a93233cd636a6978bb34f9d91924c6a1480d5dfcdf71ef',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    },
+    {
+      'id': 2144,
+      'type': 38,
+      'value': '93c68561a63428b1fe70b3d7b0e02af7c9cdcfefc1f6867ecb9ddcc05794bac9',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': 2141,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339890136,
+      'last_modified_time': 1646398787005,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': '95b8f0eafd6b31fba895dc7e517e1fac8b10a8a27a08c1d434d2e3ae4b6638be',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    }
+  ],
+  'raw': None,
+  'inputs': {
+    'reaqta_artifact_type': 'Malware Sample',
+    'reaqta_program_path': 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    'reaqta_endpoint_id': '833847379160465408',
+    'reaqta_incident_id': 2857
+  },
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-reaqta',
+    'package_version': '1.0.0',
+    'host': 'local',
+    'execution_time_ms': 20461,
+    'timestamp': '2022-03-04 07:59:46'
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
 ## Function - ReaQta: Create Artifact
 Create an artifact from a ReaQta endpoint process file
 
- ![screenshot: fn-reaqta-create-artifact ](./doc/screenshots/fn-reaqta-create-artifact.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-reaqta-create-artifact ](./doc/screenshots/fn-reaqta-create-artifact.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -562,26 +820,262 @@ Create an artifact from a ReaQta endpoint process file
 
 ```python
 results = {
-  "content": {},
-  "inputs": {
-    "reaqta_artifact_type": "Malware Sample",
-    "reaqta_endpoint_id": "982370521729466368",
-    "reaqta_hive": "rhiveam",
-    "reaqta_incident_id": 2131,
-    "reaqta_program_path": "c:\\windows\\system32\\net.exe"
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': [
+    {
+      'id': 2141,
+      'type': 12,
+      'value': 'chrome.exe',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': None,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339889974,
+      'last_modified_time': 1646398787005,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': 'cb702049ff10bce20e09e04024c6654a78c85d54ea71de07f328f76426a42ed5',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    },
+    {
+      'id': 2142,
+      'type': 13,
+      'value': '87d2ffd6a891119062b89decb05c89d8',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': 2141,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339890099,
+      'last_modified_time': 1646398787006,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': '881c60fa0d9f9fd6c9a568e65f1ab1061e7de130f4c2268b600b7c092e72470d',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    },
+    {
+      'id': 2143,
+      'type': 14,
+      'value': '4d224080d73d0e18a84e5eac43e52aba16161f23',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': 2141,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339890117,
+      'last_modified_time': 1646398787005,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': 'b8ea66ed6adba64778a93233cd636a6978bb34f9d91924c6a1480d5dfcdf71ef',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    },
+    {
+      'id': 2144,
+      'type': 38,
+      'value': '93c68561a63428b1fe70b3d7b0e02af7c9cdcfefc1f6867ecb9ddcc05794bac9',
+      'description': 'Extracted from ReaQta',
+      'attachment': None,
+      'parent_id': 2141,
+      'creator': {
+        'id': 3,
+        'fname': 'Resilient',
+        'lname': 'Sysadmin',
+        'display_name': 'Resilient Sysadmin',
+        'status': 'A',
+        'email': 'a@example.com',
+        'locked': False,
+        'password_changed': False,
+        'is_external': False,
+        'ui_theme': 'verydarkmode'
+      },
+      'inc_id': 2857,
+      'inc_name': 'ReaQta Alert - Ransomware Behavior Detected, Endpoint: REAQTAWIN10-CSP',
+      'inc_owner': 2,
+      'hits': [
+
+      ],
+      'created': 1646339890136,
+      'last_modified_time': 1646398787005,
+      'last_modified_by': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'pending_sources': [
+
+      ],
+      'perms': None,
+      'properties': None,
+      'actions': [
+
+      ],
+      'hash': '95b8f0eafd6b31fba895dc7e517e1fac8b10a8a27a08c1d434d2e3ae4b6638be',
+      'relating': True,
+      'creator_principal': {
+        'id': 3,
+        'type': 'user',
+        'name': 'a@example.com',
+        'display_name': 'Resilient Sysadmin'
+      },
+      'related_incident_count': None,
+      'pending_scan_result': False,
+      'ip': {
+        'source': None,
+        'destination': None
+      },
+      'global_artifact': [
+
+      ]
+    }
+  ],
+  'raw': None,
+  'inputs': {
+    'reaqta_artifact_type': 'Malware Sample',
+    'reaqta_program_path': 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    'reaqta_endpoint_id': '833847379160465408',
+    'reaqta_incident_id': 2857
   },
-  "metrics": {
-    "execution_time_ms": 992,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
-    "package": "fn-reaqta",
-    "package_version": "1.1.0",
-    "timestamp": "2023-07-10 12:50:36",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": "ReaQta Error: \n    status code: 422\n    message: Endpoint offline\n    details: {\u0027endpointId\u0027: \u0027982370521729466368\u0027, \u0027lastSeenAt\u0027: \u00272023-07-07T22:05:29.109Z\u0027}",
-  "success": false,
-  "version": 2.0
+  'metrics': {
+    'version': '1.0',
+    'package': 'fn-reaqta',
+    'package_version': '1.0.0',
+    'host': 'local',
+    'execution_time_ms': 20461,
+    'timestamp': '2022-03-04 07:59:46'
+  }
 }
 ```
 
@@ -612,7 +1106,7 @@ None
 ## Function - ReaQta: Create Note
 Append a note to the ReaQta notes
 
- ![screenshot: fn-reaqta-create-note ](./doc/screenshots/fn-reaqta-create-note.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-reaqta-create-note ](./doc/screenshots/fn-reaqta-create-note.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -633,20 +1127,17 @@ Append a note to the ReaQta notes
 
 ```python
 results = {
-  "content": {
-    "note": "{\"notes\":\"Potential APT Detected: powershell.exe\\nIBM SOAR 07/07/2023 21:40:16\\nPotential APT Detected: powershell.exe\\n\\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\\nIBM SOAR 07/07/2023 13:40:42\\nPotential APT Detected: powershell.exe\\nIBM SOAR 07/07/2023 21:40:16\\nPotential APT Detected: powershell.exe\\n\\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\\n\\n[SOAR Case - 2560](https://9.30.24.113:443/#incidents/2560)\\nIBM SOAR 07/07/2023 13:38:32\\nPotential APT Detected: powershell.exe\\nIBM SOAR 07/07/2023 21:40:16\\nPotential APT Detected: powershell.exe\\n\\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\\nIBM SOAR 07/07/2023 13:40:42\\nPotential APT Detected: powershell.exe\\nIBM SOAR 07/07/2023 21:40:16\\nPotential APT Detected: powershell.exe\\n\\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\\n\\n[SOAR Case - 2560](https://9.30.24.113:443/#incidents/2560)\\n\\n[SOAR Case - 17024](https://169.44.147.200:443/#incidents/17024)\\nIBM SOAR 10/07/2023 12:46:44\\nEndpoint Machine Isolated\"}"
-  },
+  "content": "this is a note in the hive alert\nIBM SOAR 18/02/2022 14:04:57\nReaQta Isolate Machine failed: Endpoint offline",
   "inputs": {
-    "reaqta_alert_id": "1015597023501484034",
-    "reaqta_hive": "rhiveam",
-    "reaqta_note": "Endpoint Machine Isolated"
+    "reaqta_alert_id": "830607817638412290",
+    "reaqta_note": "ReaQta Isolate Machine: Endpoint offline"
   },
   "metrics": {
-    "execution_time_ms": 782,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "execution_time_ms": 738,
+    "host": "endpoint.local",
     "package": "fn-reaqta",
-    "package_version": "1.1.0",
-    "timestamp": "2023-07-10 12:46:44",
+    "package_version": "1.0.0",
+    "timestamp": "2022-02-18 14:04:58",
     "version": "1.0"
   },
   "raw": null,
@@ -683,7 +1174,7 @@ None
 ## Function - ReaQta: Create Policy
 Create an alert trigger based on a program's SHA256 hash
 
- ![screenshot: fn-reaqta-create-policy ](./doc/screenshots/fn-reaqta-create-policy.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-reaqta-create-policy ](./doc/screenshots/fn-reaqta-create-policy.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -709,29 +1200,56 @@ Create an alert trigger based on a program's SHA256 hash
 
 ```python
 results = {
-  "content": [],
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "type": 2,
+      "id": "1026728858289700868",
+      "versionId": "1026728858289704965",
+      "title": "test 123",
+      "description": "",
+      "enabled": true,
+      "deleted": false,
+      "default": false,
+      "matchers": [
+        {
+          "type": 2,
+          "id": "1026728858289709062",
+          "hash": "de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c",
+          "alg": 1
+        }
+      ],
+      "actions": [
+        2
+      ],
+      "created": "2023-08-07T06:53:55.516Z",
+      "lastModified": "2023-08-07T06:53:55.516Z",
+      "scope": "global",
+      "policy_url": "https://rhiveam.techzone.ibm.com/policies/details/1026728858289700868",
+      "policy_hive": "rhiveam"
+    }
+  ],
+  "raw": null,
   "inputs": {
-    "reaqta_hives": "rhiveam",
+    "reaqta_policy_title": "test 123",
     "reaqta_policy_block": false,
-    "reaqta_policy_description": "test PB",
-    "reaqta_policy_enabled": true,
     "reaqta_policy_excluded_groups": null,
+    "reaqta_policy_enabled": true,
+    "reaqta_policy_description": "",
+    "reaqta_sha256": "de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c",
     "reaqta_policy_included_groups": null,
-    "reaqta_policy_title": "test_soar_apps_policy_1_PB",
-    "reaqta_sha256": "afbe51517092256504f797f6a5abc02515a09d603e8c046ae31d7d7855568e91"
+    "reaqta_hives": "rhiveam"
   },
   "metrics": {
-    "execution_time_ms": 1048,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "version": "1.0",
     "package": "fn-reaqta",
     "package_version": "1.1.0",
-    "timestamp": "2023-07-10 11:38:54",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": "A policy already exists for this file hash: afbe51517092256504f797f6a5abc02515a09d603e8c046ae31d7d7855568e91. \u003ca href=\"https://rhiveam.techzone.ibm.com/policies/details/1015604998647578628\" target=\"blank\"\u003ehttps://rhiveam.techzone.ibm.com/policies/details/1015604998647578628\u003c/a\u003e",
-  "success": false,
-  "version": 2.0
+    "host": "local",
+    "execution_time_ms": 1317,
+    "timestamp": "2023-08-07 14:53:55"
+  }
 }
 ```
 
@@ -762,7 +1280,7 @@ None
 ## Function - ReaQta: Get Alert Information
 Get all the ReaQta Alert information to populate custom fields and datatables
 
- ![screenshot: fn-reaqta-get-alert-information ](./doc/screenshots/fn-reaqta-get-alert-information.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-reaqta-get-alert-information ](./doc/screenshots/fn-reaqta-get-alert-information.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -783,312 +1301,319 @@ Get all the ReaQta Alert information to populate custom fields and datatables
 ```python
 results = {
   "content": {
-    "activityState": "archived",
-    "alert_url": "https://rhiveam.techzone.ibm.com/alerts/1015597023501484034",
-    "byTypeEventCount": [
-      {
-        "count": 6,
-        "type": 2
-      },
-      {
-        "count": 1,
-        "type": 3
-      },
-      {
-        "count": 1,
-        "type": 30
-      },
-      {
-        "count": 1,
-        "type": 49
-      }
-    ],
-    "closed": true,
-    "closedAt": "2023-07-09T00:00:03.317Z",
+    "id": "834832646071648258",
+    "localId": "834832599212890114",
+    "endpointId": "833847379160465408",
+    "triggerCondition": 7,
     "endpoint": {
-      "agentVersion": "3.10.1",
+      "id": "833847379160465408",
+      "machineId": "de64775b529ad34495bc51cd8b227c254d112185cfd06a92e0d5bd8a9ca19124",
+      "osType": 1,
+      "cpuVendor": 1,
       "arch": 2,
-      "avInstalled": false,
+      "cpuDescr": "Intel(R) Xeon(R) CPU E5-2450 0 @ 2.10GHz",
+      "kernel": "10.0",
+      "os": "Windows 10 Pro",
+      "name": "REAQTAWIN10-CSP",
+      "domain": "csplab.local",
+      "state": 1,
+      "registrationTime": "2022-02-21T00:51:47.330Z",
+      "agentVersion": "3.6.1",
       "componentsVersions": [
         {
-          "build": "27.1668701555901.commit",
           "name": "keeper",
-          "version": "3.10.1"
+          "version": "3.6.0",
+          "build": "19.1627291555548.commit"
         },
         {
-          "build": "3.5.0",
           "name": "probos",
-          "version": "3.5.0"
+          "version": "3.5.0",
+          "build": "3.5.0"
         },
         {
-          "build": "119.1632119719010.commit",
           "name": "rqtsentry",
-          "version": "3.6.1"
+          "version": "3.6.1",
+          "build": "119.1632119719010.commit"
         },
         {
-          "build": "45.1666597836648.commit",
           "name": "rqtnetsentry",
-          "version": "3.10.0"
+          "version": "3.6.0",
+          "build": "44.1627295520120.commit"
         },
         {
-          "build": "",
           "name": "installer",
-          "version": "3.10.1"
+          "version": "3.6.1",
+          "build": ""
         }
       ],
-      "connected": false,
-      "cpuDescr": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
-      "cpuVendor": 1,
-      "disconnectionReason": 0,
-      "groups": [
-        {
-          "description": "This is an example group.",
-          "id": "988899645751033863",
-          "name": "Example Group",
-          "parentGroupId": "988899392910000135"
-        },
-        {
-          "id": "988899392910000135",
-          "name": "Example Client"
-        }
-      ],
-      "hvStatus": 19,
-      "id": "982370521729466368",
+      "isVirtualMachine": true,
       "isDomainController": false,
       "isServer": false,
-      "isVirtualMachine": false,
-      "isolated": false,
-      "isolationStatus": "PENDING_ISOLATION",
-      "isolationStatusFailure": null,
-      "kernel": "10.0",
-      "lastSeenAt": "2023-07-07T22:05:29.109Z",
-      "localAddr": "192.168.1.97",
-      "machineId": "0c0dcd602f5d65aed629d4199c8f665955c434050d68a634eaf4ba0e1058b7ce",
+      "sessionStart": "2022-02-21T00:51:49.215Z",
+      "sessionEnd": "2022-02-24T01:09:59.043Z",
+      "lastSeenAt": "2022-02-24T01:04:59.043Z",
+      "disconnectionReason": 0,
+      "localAddr": "172.16.253.37",
+      "hvStatus": 19,
       "macs": [
-        "5c:e4:2a:2c:f3:a7",
-        "90:2e:16:c4:f7:7d"
+        "00:50:56:bf:9f:16"
       ],
-      "name": "IBM-PF36LBRC",
-      "os": "Windows 10 Enterprise",
-      "osType": 1,
-      "registrationTime": "2023-04-24T21:50:33.146Z",
-      "sessionEnd": "2023-07-07T22:10:29.109Z",
-      "sessionStart": "2023-07-07T21:20:29.083Z",
-      "state": 1,
-      "tags": []
-    },
-    "endpointId": "982370521729466368",
-    "endpointState": {
-      "arch": 2,
-      "componentsVersions": [
-        {
-          "build": "119.1632119719010.commit",
-          "name": "rqtsentry",
-          "version": "3.6.1"
-        },
-        {
-          "build": "",
-          "name": "installer",
-          "version": "3.10.1"
-        },
-        {
-          "build": "3.5.0",
-          "name": "probos",
-          "version": "3.5.0"
-        },
-        {
-          "build": "27.1668701555901.commit",
-          "name": "keeper",
-          "version": "3.10.1"
-        },
-        {
-          "build": "45.1666597836648.commit",
-          "name": "rqtnetsentry",
-          "version": "3.10.0"
-        }
+      "isolated": false,
+      "connected": true,
+      "tags": [
+        "vm"
       ],
-      "cpuDescr": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
-      "cpuVendor": 1,
-      "endpointVersion": "3.10.1",
       "groups": [
         {
-          "description": "This is an example group.",
-          "id": "988899645751033863",
-          "name": "Example Group",
-          "parentGroupId": "988899392910000135"
-        },
-        {
-          "id": "988899392910000135",
-          "name": "Example Client"
+          "id": "822878129902059527",
+          "name": "Partner Team",
+          "description": "Partner Team Ambassador Rob Fichtel"
         }
       ],
-      "hvStatus": 19,
-      "isolated": false,
-      "kernel": "10.0",
-      "localAddr": "192.168.1.97",
-      "macs": [
-        "5c:e4:2a:2c:f3:a7",
-        "90:2e:16:c4:f7:7d"
-      ],
-      "name": "IBM-PF36LBRC",
-      "os": "Windows 10 Enterprise",
-      "osType": 1,
-      "tags": []
+      "avInstalled": false
     },
-    "happenedAt": "2023-07-07T13:39:24.843Z",
-    "id": "1015597023501484034",
-    "impact": 80,
-    "lastChangedAt": "2023-07-10T04:46:44.747Z",
-    "localId": "1015596879049656322",
-    "notes": "Potential APT Detected: powershell.exe\nIBM SOAR 07/07/2023 21:40:16\nPotential APT Detected: powershell.exe\n\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\nIBM SOAR 07/07/2023 13:40:42\nPotential APT Detected: powershell.exe\nIBM SOAR 07/07/2023 21:40:16\nPotential APT Detected: powershell.exe\n\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\n\n[SOAR Case - 2560](https://9.30.24.113:443/#incidents/2560)\nIBM SOAR 07/07/2023 13:38:32\nPotential APT Detected: powershell.exe\nIBM SOAR 07/07/2023 21:40:16\nPotential APT Detected: powershell.exe\n\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\nIBM SOAR 07/07/2023 13:40:42\nPotential APT Detected: powershell.exe\nIBM SOAR 07/07/2023 21:40:16\nPotential APT Detected: powershell.exe\n\n[SOAR Case - 2131](https://9.30.211.113:443/#incidents/2131)\n\n[SOAR Case - 2560](https://9.30.24.113:443/#incidents/2560)\n\n[SOAR Case - 17024](https://169.44.147.200:443/#incidents/17024)\nIBM SOAR 10/07/2023 12:46:44\nEndpoint Machine Isolated",
-    "receivedAt": "2023-07-07T13:39:59.283Z",
-    "severity": "medium",
-    "tags": [
-      "apt"
-    ],
-    "terminationReason": 1,
-    "title": "Destra: Potential APT Detected: powershell.exe",
-    "totalEventCount": 9,
-    "triggerCondition": 12,
     "triggerEvents": [
       {
+        "id": "834832645178261505",
         "category": "hive",
-        "data": {
-          "_t": "l",
-          "cmdLine": "\"C:\\windows\\system32\\net.exe\" accounts",
-          "cmdLineArgs": [
-            "C:\\windows\\system32\\net.exe",
-            "accounts"
-          ]
-        },
-        "endpointId": "982370521729466368",
-        "eventType": 2,
-        "happenedAt": "2023-07-07T13:39:24.821Z",
-        "happenedAt_ts": 1688737164000,
-        "id": "1015597023866388481",
-        "localId": "1015596878957389825",
-        "manuallyAdded": false,
-        "process": {
-          "endpointId": "982370521729466368",
-          "id": "982370521729466368:27136:1688737164600",
-          "logonId": "0x3e7",
-          "noGui": false,
-          "parentId": "982370521729466368:18816:1688737159302",
-          "pid": 27136,
-          "ppid": 18816,
-          "privilegeLevel": "SYSTEM",
-          "program": {
-            "arch": "x64",
-            "certInfo": {
-              "expired": false,
-              "issuer": "Microsoft Windows Production PCA 2011",
-              "signer": "Microsoft Windows",
-              "trusted": true
-            },
-            "filename": "net.exe",
-            "fsName": "net.exe",
-            "md5": "bb1ae49b6b7c53499e94613761a6ac56",
-            "path": "c:\\windows\\system32\\net.exe",
-            "sha1": "76866dde54ee3fa5bc8efefb9d44e6bf859973aa",
-            "sha256": "afbe51517092256504f797f6a5abc02515a09d603e8c046ae31d7d7855568e91",
-            "size": 81920
-          },
-          "pstartTime": "2023-07-07T13:39:19.302Z",
-          "startTime": "2023-07-07T13:39:24.600Z",
-          "user": "NT AUTHORITY\\SYSTEM",
-          "userSID": "S-1-5-18"
-        },
-        "receivedAt": "2023-07-07T13:39:59.370Z",
+        "localId": "834832599133194241",
+        "endpointId": "833847379160465408",
+        "receivedAt": "2022-02-23T18:06:53.051Z",
+        "happenedAt": "2022-02-23T18:06:42.073Z",
         "relevance": 0,
         "severity": "none",
-        "trigger": true
-      },
-      {
-        "category": "policies",
-        "data": {
-          "_t": "r",
-          "matched": [
-            {
-              "groups": [],
-              "matcher": {
-                "eventTypes": [
-                  2
-                ],
-                "id": "992023020967043078",
-                "osTypes": [
-                  1
-                ],
-                "script": "-- Title: Potential APT\n-- Description: This policy will notify every time a series of suspicious app runs within a stipulated timeframe\n-- Binding Events: Process Created\n-- Platform: Windows\n--\n-- Configuration parameters:\n--      app_count :            Number of app_count before triggering and incident\n--      time_span_millis :     Time span between the app_count could happen. Definied in milliseconds.\n--\n-- Adjust the variables accordingly\n-- The timezone is the local time\n\napp_count = 3\ntime_span_millis = 1*60*1000 -- 1 min\n\n------------------ DO NOT CHANGE THE CODE BELOW ---------------------\n\nlocal function notify(event)\n    title = \"Potential APT Detected: \" .. event.process.get_parent_ofn()\n    notes = title\n    impact = 80\n    tags = {\"apt\"}\n    create_alert({event}, title, impact, notes, tags)\n    msg_box (title)\nend\n\n\nlocal apps = {\n    \"net.exe\",\n    \"systeminfo.exe\",\n    \"hostname.exe\",\n    \"whoami.exe\",\n    \"tasklist.exe\"\n}\n\nlocal function match_app(app)\n    for key, value in pairs(apps) do\n        if app:lower():find(value) then\n            return true\n        end\n    end\n    return false\nend\n\nlocal app = match_app(event.process.get_ofn())\n\nif not app then\n    return\nend\n\n\nif tbox == nil then\n    tbox = timebox.new(app_count, time_span_millis)\nend\n\nif tbox:count() then\n    if event.parentProcess then kill_process(event.parentProcess.pid, event.parentProcess.startTime) end\n    kill_process(event)\n    notify(event)\nend",
-                "type": 28
-              },
-              "policyDescription": "",
-              "policyId": "992023020967034884",
-              "policyTitle": "Potential APT",
-              "scope": "global",
-              "versionId": "1004361409577877509"
-            }
-          ]
-        },
-        "endpointId": "982370521729466368",
-        "eventType": 49,
-        "happenedAt": "2023-07-07T13:39:24.821Z",
-        "happenedAt_ts": 1688737164000,
-        "id": "1015597023866392577",
-        "localId": "1015596878957393921",
+        "trigger": true,
         "manuallyAdded": false,
         "process": {
-          "endpointId": "982370521729466368",
-          "id": "982370521729466368:27136:1688737164600",
-          "logonId": "0x3e7",
-          "noGui": false,
-          "parentId": "982370521729466368:18816:1688737159302",
-          "pid": 27136,
-          "ppid": 18816,
-          "privilegeLevel": "SYSTEM",
+          "id": "833847379160465408:7868:1645639602071",
+          "parentId": "833847379160465408:872:1645639598803",
+          "endpointId": "833847379160465408",
           "program": {
-            "arch": "x64",
-            "certInfo": {
-              "expired": false,
-              "issuer": "Microsoft Windows Production PCA 2011",
-              "signer": "Microsoft Windows",
-              "trusted": true
-            },
-            "filename": "net.exe",
-            "fsName": "net.exe",
-            "md5": "bb1ae49b6b7c53499e94613761a6ac56",
-            "path": "c:\\windows\\system32\\net.exe",
-            "sha1": "76866dde54ee3fa5bc8efefb9d44e6bf859973aa",
-            "sha256": "afbe51517092256504f797f6a5abc02515a09d603e8c046ae31d7d7855568e91",
-            "size": 81920
+            "path": "c:\\users\\melody\\appdata\\local\\temp\\tryme.exe",
+            "filename": "tryme.exe",
+            "md5": "a3ce5c07dc7b7d58740b4407a7d3f9d2",
+            "sha1": "9fa6c5f1cff4ca41c441e428a847a924627210cc",
+            "sha256": "cf8c1b234ad4d72dd6a455b82bf48ff16cd794aaefb682729b0151f0e1c374dd",
+            "size": 84992,
+            "arch": "x32",
+            "fsName": "tryme.exe"
           },
-          "pstartTime": "2023-07-07T13:39:19.302Z",
-          "startTime": "2023-07-07T13:39:24.600Z",
-          "user": "NT AUTHORITY\\SYSTEM",
-          "userSID": "S-1-5-18"
+          "user": "REAQTAWIN10-CSP\\Melody",
+          "pid": 7868,
+          "startTime": "2022-02-23T18:06:42.071Z",
+          "ppid": 872,
+          "pstartTime": "2022-02-23T18:06:38.803Z",
+          "userSID": "S-1-5-21-2250471729-4061103233-1630355673-1002",
+          "privilegeLevel": "MEDIUM",
+          "noGui": false,
+          "logonId": "0x154d314"
         },
-        "receivedAt": "2023-07-07T13:39:59.370Z",
-        "relevance": 100,
-        "severity": "high",
-        "trigger": true
+        "eventType": 2,
+        "data": {
+          "cmdLine": "C:\\Users\\Melody\\AppData\\Local\\Temp\\tryme.exe",
+          "cmdLineArgs": [
+            "C:\\Users\\Melody\\AppData\\Local\\Temp\\tryme.exe"
+          ],
+          "_t": "l"
+        },
+        "happenedAt_ts": 1645639602000
+      },
+      {
+        "id": "834832645488640001",
+        "category": "hive",
+        "localId": "834832599212886017",
+        "endpointId": "833847379160465408",
+        "receivedAt": "2022-02-23T18:06:53.125Z",
+        "happenedAt": "2022-02-23T18:06:42.092Z",
+        "relevance": 83,
+        "severity": "medium",
+        "trigger": true,
+        "manuallyAdded": false,
+        "process": {
+          "id": "833847379160465408:872:1645639598803",
+          "parentId": "833847379160465408:6580:1645471843080",
+          "endpointId": "833847379160465408",
+          "program": {
+            "path": "c:\\program files\\microsoft office\\root\\office16\\winword.exe",
+            "filename": "winword.exe",
+            "md5": "313009918ec71770c8f2fdcd416a4485",
+            "sha1": "5d36f6ef6d0f76aaf837c4f7e65b611acd92e0ae",
+            "sha256": "d76c3d25eb625a8475488b14b501e775b3186ad4ff77e9c07edb4ec2ff6923d9",
+            "certInfo": {
+              "signer": "Microsoft Corporation",
+              "issuer": "Microsoft Code Signing PCA 2011",
+              "trusted": true,
+              "expired": false
+            },
+            "size": 1638704,
+            "arch": "x64",
+            "fsName": "winword.exe"
+          },
+          "user": "REAQTAWIN10-CSP\\Melody",
+          "pid": 872,
+          "startTime": "2022-02-23T18:06:38.803Z",
+          "ppid": 6580,
+          "pstartTime": "2022-02-21T19:30:43.080Z",
+          "userSID": "S-1-5-21-2250471729-4061103233-1630355673-1002",
+          "privilegeLevel": "MEDIUM",
+          "noGui": false,
+          "logonId": "0x154d314"
+        },
+        "eventType": 31,
+        "data": {
+          "behaviourType": 1,
+          "_t": "l"
+        },
+        "happenedAt_ts": 1645639602000
       }
-    ]
-  },
-  "inputs": {
-    "reaqta_alert_id": "1015597023501484034",
-    "reaqta_hive": "rhiveam"
-  },
-  "metrics": {
-    "execution_time_ms": 604,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
-    "package": "fn-reaqta",
-    "package_version": "1.1.0",
-    "timestamp": "2023-07-10 12:50:31",
-    "version": "1.0"
+    ],
+    "totalEventCount": 452,
+    "byTypeEventCount": [
+      {
+        "type": 11,
+        "count": 140
+      },
+      {
+        "type": 21,
+        "count": 73
+      },
+      {
+        "type": 10,
+        "count": 59
+      },
+      {
+        "type": 5,
+        "count": 37
+      },
+      {
+        "type": 12,
+        "count": 34
+      },
+      {
+        "type": 65,
+        "count": 29
+      },
+      {
+        "type": 8,
+        "count": 28
+      },
+      {
+        "type": 38,
+        "count": 21
+      },
+      {
+        "type": 2,
+        "count": 8
+      },
+      {
+        "type": 57,
+        "count": 8
+      },
+      {
+        "type": 37,
+        "count": 6
+      },
+      {
+        "type": 6,
+        "count": 3
+      },
+      {
+        "type": 3,
+        "count": 2
+      },
+      {
+        "type": 30,
+        "count": 1
+      },
+      {
+        "type": 31,
+        "count": 1
+      },
+      {
+        "type": 62,
+        "count": 1
+      },
+      {
+        "type": 89,
+        "count": 1
+      }
+    ],
+    "impact": 83,
+    "severity": "medium",
+    "closed": false,
+    "activityState": "inactive",
+    "terminationReason": 1,
+    "receivedAt": "2022-02-23T18:06:53.264Z",
+    "happenedAt": "2022-02-23T18:06:42.092Z",
+    "tags": [],
+    "endpointState": {
+      "osType": 1,
+      "cpuVendor": 1,
+      "arch": 2,
+      "cpuDescr": "Intel(R) Xeon(R) CPU E5-2450 0 @ 2.10GHz",
+      "kernel": "10.0",
+      "os": "Windows 10 Pro",
+      "hvStatus": 19,
+      "name": "REAQTAWIN10-CSP",
+      "domain": "csplab.local",
+      "isolated": false,
+      "localAddr": "172.16.253.37",
+      "macs": [
+        "00:50:56:bf:9f:16"
+      ],
+      "componentsVersions": [
+        {
+          "name": "keeper",
+          "version": "3.6.0",
+          "build": "19.1627291555548.commit"
+        },
+        {
+          "name": "probos",
+          "version": "3.5.0",
+          "build": "3.5.0"
+        },
+        {
+          "name": "rqtsentry",
+          "version": "3.6.1",
+          "build": "119.1632119719010.commit"
+        },
+        {
+          "name": "rqtnetsentry",
+          "version": "3.6.0",
+          "build": "44.1627295520120.commit"
+        },
+        {
+          "name": "installer",
+          "version": "3.6.1",
+          "build": ""
+        }
+      ],
+      "endpointVersion": "3.6.1",
+      "tags": [
+        "vm"
+      ],
+      "groups": [
+        {
+          "id": "822878129902059527",
+          "name": "Partner Team",
+          "description": "Partner Team Ambassador Rob Fichtel"
+        }
+      ]
+    },
+    "alert_url": "https://rhiveam.techzone.ibm.com/alerts/834832646071648258"
   },
   "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
+  "inputs": {
+    "reaqta_alert_id": "834832646071648258"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 663,
+    "timestamp": "2022-02-23 20:04:58"
+  }
 }
 ```
 
@@ -1119,7 +1644,7 @@ None
 ## Function - ReaQta: Get Processes
 Get active processes from a given endpoint
 
- ![screenshot: fn-reaqta-get-processes ](./doc/screenshots/fn-reaqta-get-processes.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-reaqta-get-processes ](./doc/screenshots/fn-reaqta-get-processes.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -4297,7 +4822,7 @@ None
 ## Function - ReaQta: Isolate Machine
 Isolate a ReaQta controlled machine based on it's endpoint ID
 
- ![screenshot: fn-reaqta-isolate-machine ](./doc/screenshots/fn-reaqta-isolate-machine.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-reaqta-isolate-machine ](./doc/screenshots/fn-reaqta-isolate-machine.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -4326,7 +4851,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 1010,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "host": "local",
     "package": "fn-reaqta",
     "package_version": "1.1.0",
     "timestamp": "2023-07-10 12:46:41",
@@ -4366,7 +4891,7 @@ None
 ## Function - ReaQta: Kill Process
 Kill a process on a machine by the process PID
 
- ![screenshot: fn-reaqta-kill-process ](./doc/screenshots/fn-reaqta-kill-process.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-reaqta-kill-process ](./doc/screenshots/fn-reaqta-kill-process.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -4403,7 +4928,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 459,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "host": "local",
     "package": "fn-reaqta",
     "package_version": "1.1.0",
     "timestamp": "2023-07-10 12:46:41",
@@ -4444,7 +4969,7 @@ None
 
 ## Data Table - ReaQta Process List
 
- ![screenshot: dt-reaqta-process-list](./doc/screenshots/dt-reaqta-process-list.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-reaqta-process-list](./doc/screenshots/dt-reaqta-process-list.png)
 
 #### API Name:
 reaqta_process_list
@@ -4466,7 +4991,7 @@ reaqta_process_list
 ---
 ## Data Table - ReaQta Trigger Events
 
- ![screenshot: dt-reaqta-trigger-events](./doc/screenshots/dt-reaqta-trigger-events.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-reaqta-trigger-events](./doc/screenshots/dt-reaqta-trigger-events.png) 
 
 #### API Name:
 reaqta_trigger_events

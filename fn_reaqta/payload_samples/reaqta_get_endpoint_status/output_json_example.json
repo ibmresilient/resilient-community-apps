@@ -3,17 +3,18 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "982370521729466368",
-    "machineId": "0c0dcd602f5d65aed629d4199c8f665955c434050d68a634eaf4ba0e1058b7ce",
+    "id": "836686917654282240",
+    "machineId": "d67dc4211cb83f014c33af976208cc601e35abf251e405e8841e1cb449a48b0e",
     "osType": 1,
     "cpuVendor": 1,
     "arch": 2,
-    "cpuDescr": "Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz",
+    "cpuDescr": "Intel(R) Xeon(R) Platinum 8260 CPU @ 2.40GHz",
     "kernel": "10.0",
-    "os": "Windows 10 Enterprise",
-    "name": "IBM-PF36LBRC",
+    "os": "Windows Server 2019 Standard",
+    "name": "ACTIVEDIRECTORY",
+    "domain": "infosec.local",
     "state": 1,
-    "registrationTime": "2023-04-24T21:50:33.146Z",
+    "registrationTime": "2022-02-28T20:55:06.087Z",
     "agentVersion": "3.10.1",
     "componentsVersions": [
       {
@@ -28,8 +29,8 @@
       },
       {
         "name": "rqtsentry",
-        "version": "3.6.1",
-        "build": "119.1632119719010.commit"
+        "version": "3.10.0",
+        "build": "121.1666598992258.commit"
       },
       {
         "name": "rqtnetsentry",
@@ -42,34 +43,37 @@
         "build": ""
       }
     ],
-    "isVirtualMachine": false,
-    "isDomainController": false,
-    "isServer": false,
-    "sessionStart": "2023-07-07T21:20:29.083Z",
-    "sessionEnd": "2023-07-07T22:10:29.109Z",
-    "lastSeenAt": "2023-07-07T22:05:29.109Z",
+    "isVirtualMachine": true,
+    "isDomainController": true,
+    "isServer": true,
+    "sessionStart": "2023-06-22T09:11:49.712Z",
+    "sessionEnd": "2023-08-07T06:29:44.472Z",
+    "lastSeenAt": "2023-08-07T06:24:44.472Z",
     "disconnectionReason": 0,
-    "localAddr": "192.168.1.97",
+    "localAddr": "172.16.60.189",
     "hvStatus": 19,
     "macs": [
-      "5c:e4:2a:2c:f3:a7",
-      "90:2e:16:c4:f7:7d"
+      "00:0c:29:8f:93:ee"
     ],
-    "isolated": false,
-    "isolationStatus": "PENDING_ISOLATION",
+    "isolated": true,
+    "isolationStatus": "ISOLATED",
     "isolationStatusFailure": null,
-    "connected": false,
-    "tags": [],
+    "connected": true,
+    "tags": [
+      "vm",
+      "pci",
+      "production",
+      "dc"
+    ],
     "groups": [
       {
-        "id": "988899645751033863",
-        "name": "Example Group",
-        "description": "This is an example group.",
-        "parentGroupId": "988899392910000135"
+        "id": "939525795968188423",
+        "name": "Servers",
+        "parentGroupId": "817450822869712903"
       },
       {
-        "id": "988899392910000135",
-        "name": "Example Client"
+        "id": "817450822869712903",
+        "name": "Product Team"
       }
     ],
     "avInstalled": false
@@ -77,14 +81,14 @@
   "raw": null,
   "inputs": {
     "reaqta_hive": "rhiveam",
-    "reaqta_endpoint_id": "982370521729466368"
+    "reaqta_endpoint_id": "836686917654282240"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
     "package_version": "1.1.0",
-    "host": "Henry's IBM 16 inch Macbook Pro",
-    "execution_time_ms": 468,
-    "timestamp": "2023-07-10 12:50:02"
+    "host": "local",
+    "execution_time_ms": 1008,
+    "timestamp": "2023-08-07 14:25:34"
   }
 }

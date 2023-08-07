@@ -39,6 +39,9 @@
         "name": {
           "type": "string"
         },
+        "domain": {
+          "type": "string"
+        },
         "state": {
           "type": "integer"
         },
@@ -109,7 +112,10 @@
           "type": "boolean"
         },
         "tags": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "groups": {
           "type": "array",
@@ -120,9 +126,6 @@
                 "type": "string"
               },
               "name": {
-                "type": "string"
-              },
-              "description": {
                 "type": "string"
               },
               "parentGroupId": {

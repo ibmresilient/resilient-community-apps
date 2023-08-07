@@ -8,11 +8,79 @@
     "success": {
       "type": "boolean"
     },
-    "reason": {
-      "type": "string"
-    },
+    "reason": {},
     "content": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "string"
+          },
+          "versionId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "default": {
+            "type": "boolean"
+          },
+          "matchers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "integer"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "hash": {
+                  "type": "string"
+                },
+                "alg": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "created": {
+            "type": "string"
+          },
+          "lastModified": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "policy_url": {
+            "type": "string"
+          },
+          "policy_hive": {
+            "type": "string"
+          }
+        }
+      }
     },
     "raw": {},
     "inputs": {

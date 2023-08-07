@@ -10,20 +10,24 @@
     },
     "reason": {},
     "content": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "object",
-          "properties": {
-            "endpointId": {
-              "type": "string"
-            },
-            "lastSeenAt": {
-              "type": "string"
-            }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "integer"
+          },
+          "startTime": {
+            "type": "integer"
+          },
+          "killed": {
+            "type": "boolean"
+          },
+          "errorCode": {
+            "type": "integer"
+          },
+          "error": {
+            "type": "string"
           }
         }
       }
