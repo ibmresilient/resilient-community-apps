@@ -47,7 +47,12 @@ if incident.description:
 else:
   case_json['Description'] = "Case created from SOAR case {}".format(incident.id)
 case_json['Subject'] = incident.name
-  
+
+# Need to make incident type multi-select in Salesforce to support multi-select in SOAR
+# For now just take the first incident type in the list.
+if incident.incident_type_ids != []:
+  case_json['Type'] = incident.incident_type_ids[0]
+
 inputs.salesforce_case_payload = json.dumps(case_json)
 inputs.incident_id = incident.id
 ```

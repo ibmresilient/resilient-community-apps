@@ -30,6 +30,8 @@ class FunctionComponent(AppFunctionComponent):
         salesforce_case_payload = json.loads(fn_inputs.salesforce_case_payload)
 
         response = app_common.create_salesforce_case(salesforce_case_payload)
+
+        # Store the case link URLs for access in the post scripts
         response["entity_url"] = app_common.make_linkback_url(entity_type='Case', entity_id=response.get("id"))
         rest_client = self.rest_client()
         response["soar_case_url"] = build_incident_url(rest_client.base_url, fn_inputs.incident_id, rest_client.org_id)

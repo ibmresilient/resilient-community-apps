@@ -46,6 +46,9 @@ if playbook.inputs.salesforce_case_status:
 else: 
   case_json['Status'] = "New"
   
+if playbook.inputs.salesforce_case_type:
+  case_json['Type'] = playbook.inputs.salesforce_case_type
+  
 if playbook.inputs.salesforce_case_description:
   case_json['Description'] = playbook.inputs.salesforce_case_description
 
@@ -55,13 +58,13 @@ if playbook.inputs.salesforce_case_subject:
 if playbook.inputs.salesforce_case_internal_comments:
   case_json['Comments'] = playbook.inputs.salesforce_case_internal_comments
 
-if incident.properties.salesforce_account_id:
+if incident.properties.salesforce_account_id and incident.properties.salesforce_account_id != "None":
   case_json['AccountId'] = incident.properties.salesforce_account_id
 
-if incident.properties.salesforce_owner_id:
+if incident.properties.salesforce_owner_id and incident.properties.salesforce_owner_id != "None":
   case_json['OwnerId'] = incident.properties.salesforce_owner_id
   
-if incident.properties.salesforce_contact_id:
+if incident.properties.salesforce_contact_id and incident.properties.salesforce_contact_id != "None":
   case_json['ContactId'] = incident.properties.salesforce_contact_id
   
 inputs.salesforce_case_payload = json.dumps(case_json)
