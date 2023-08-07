@@ -49,8 +49,13 @@ verify = True
 # polling_filters=("Priority","=","\'High\'"),("Status","IN",["\'New\'","\'Working\'","\'In Progress\'"])
 # ("IsClosed","=","false"),("CreatedDate",">","YESTERDAY")
 polling_filters=
-# OPTIONAL: Record Type Names to search in Salesforce
-polling_record_type_names="Security Incident","Incident"
+# OPTIONAL: Case Record Type Names used to by the poller to search for cases Salesforce.
+# If no record type names are provided, all case record types are searched when the poller runs.
+# This parameter is a comma separated list of record type names that must exist 
+# in the Salesforce platform.
+# For example: 
+# polling_record_type_names="Security Incident","Incident"
+polling_record_type_names=
 # 
 # # Specify paths to files if client certs are needed to authenticate
 # client_auth_cert = <path_to_cert.pem>
