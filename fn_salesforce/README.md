@@ -403,13 +403,13 @@ if playbook.inputs.salesforce_case_subject:
 if playbook.inputs.salesforce_case_internal_comments:
   case_json['Comments'] = playbook.inputs.salesforce_case_internal_comments
 
-if incident.properties.salesforce_account_id and incident.properties.salesforce_account_id != "None":
+if incident.properties.salesforce_account_id and incident.properties.salesforce_account_id.lower() != "none":
   case_json['AccountId'] = incident.properties.salesforce_account_id
 
-if incident.properties.salesforce_owner_id and incident.properties.salesforce_owner_id != "None":
+if incident.properties.salesforce_owner_id and incident.properties.salesforce_owner_id.lower() != "none":
   case_json['OwnerId'] = incident.properties.salesforce_owner_id
   
-if incident.properties.salesforce_contact_id and incident.properties.salesforce_contact_id != "None":
+if incident.properties.salesforce_contact_id and incident.properties.salesforce_contact_id.lower() != "none":
   case_json['ContactId'] = incident.properties.salesforce_contact_id
   
 inputs.salesforce_case_payload = json.dumps(case_json)
