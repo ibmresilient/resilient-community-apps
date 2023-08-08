@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1691430609420,
+  "export_date": 1691507971144,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1579,13 +1579,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 42,
+  "id": 44,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1691430607445,
+      "create_date": 1691507969034,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1594,7 +1594,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1691430607445,
+      "update_date": 1691507969034,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1604,7 +1604,8 @@
   "message_destinations": [
     {
       "api_keys": [
-        "4c101212-330b-4f3d-8973-d50b8e67aace"
+        "4c101212-330b-4f3d-8973-d50b8e67aace",
+        "ad261c1f-f1cc-4115-bbce-a151f88bac5e"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -2929,8 +2930,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df\" isExecutable=\"true\" name=\"playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1191hgv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Post Attachment to Salesforce Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ecdac742-4e8a-4b9e-9ec9-4734d48ab62d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\ninputs.task_id = task.id\\ninputs.artifact_id = None\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"post_attachment_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1191hgv\u003c/incoming\u003e\u003coutgoing\u003eFlow_06yoptt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1191hgv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Write Results of Post Attachment to Salesforce case \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6f85e283-5988-4a28-a61a-1b7c729e54b2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06yoptt\u003c/incoming\u003e\u003coutgoing\u003eFlow_1l04h11\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_06yoptt\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1l04h11\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1l04h11\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1l04h11\" id=\"Flow_1l04h11_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"152\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"204\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06yoptt\" id=\"Flow_06yoptt_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"22\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"68\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1191hgv\" id=\"Flow_1191hgv_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"-124\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"-62\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"209.017\" x=\"605\" y=\"-176\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.008\" y=\"-62\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.008\" y=\"68\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644.008\" y=\"204\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df\" isExecutable=\"true\" name=\"playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1191hgv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Salesforce: Post Attachment to Salesforce Case\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ecdac742-4e8a-4b9e-9ec9-4734d48ab62d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\ninputs.task_id = task.id if attachment.type == \u0027task\u0027 else None\\ninputs.artifact_id = None\\ninputs.salesforce_case_id = incident.properties.salesforce_case_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"post_attachment_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1191hgv\u003c/incoming\u003e\u003coutgoing\u003eFlow_06yoptt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1191hgv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Salesforce: Write Results of Post Attachment to Salesforce case \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6f85e283-5988-4a28-a61a-1b7c729e54b2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06yoptt\u003c/incoming\u003e\u003coutgoing\u003eFlow_1l04h11\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_06yoptt\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1l04h11\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1l04h11\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1l04h11\" id=\"Flow_1l04h11_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"152\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"204\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06yoptt\" id=\"Flow_06yoptt_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"22\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"68\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1191hgv\" id=\"Flow_1191hgv_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"-124\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"-62\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"209.017\" x=\"605\" y=\"-176\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.008\" y=\"-62\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.008\" y=\"68\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644.008\" y=\"204\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1690992692271,
       "creator_principal": {
@@ -2981,7 +2982,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1691160366834,
+      "last_modified_time": 1691507529784,
       "local_scripts": [
         {
           "actions": [],
@@ -3030,7 +3031,7 @@
       "tags": [],
       "type": "default",
       "uuid": "c9b4fe8b-8d4a-4e1f-a3cd-6cf4204f70df",
-      "version": 5
+      "version": 6
     },
     {
       "activation_type": "manual",

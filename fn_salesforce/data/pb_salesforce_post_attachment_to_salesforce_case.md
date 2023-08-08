@@ -38,7 +38,7 @@ Post the SOAR attachment to the corresponding case in Salesforce.
 ```python
 inputs.incident_id = incident.id
 inputs.attachment_id = attachment.id
-inputs.task_id = task.id
+inputs.task_id = task.id if attachment.type == 'task' else None
 inputs.artifact_id = None
 inputs.salesforce_case_id = incident.properties.salesforce_case_id
 ```

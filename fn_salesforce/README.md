@@ -143,7 +143,7 @@ Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=49.0.0
 
-### <!-- ::CHANGE_ME:: --> Development Version
+### Salesforce Development Version
 
 This app has been implemented using:
 | Product Name | Product Version | API URL | API Version |
@@ -188,16 +188,16 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_version** | Yes | `v58.0` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **consumer_key** | Yes | `xxx` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **consumer_secret** | Yes | `xxx` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **my_domain_name** | Yes | `xxx` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **my_domain_url** | Yes | `xxx` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **polling_filters** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **polling_interval** | Yes | `60` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **polling_lookback** | Yes | `120` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **polling_record_type_names** | Yes | `"Security Incident","Incident"` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **verify** | Yes | `True` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **api_version** | Yes | `v58.0` | *Salesforce REST API version |
+| **consumer_key** | Yes | `xxx` | *Consumer Key of a Salesforce Connected App* |
+| **consumer_secret** | Yes | `xxx` | *Consumer Secret of a Salesforce Connected App* |
+| **my_domain_name** | Yes | `company.develop` | *My Domain name in Salesforce* |
+| **my_domain_url** | Yes | `company.develop.my.salesforce.com` | *My Domain URL in Salesforce* |
+| **polling_filters** | Yes | `("Status","IN",["\'New\'","\'Working\'","\'In Progress\'"])` | *Query filters: Comma separated tuples ("field","operator","value") where "field" is a case field name* |
+| **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off.* |
+| **polling_lookback** | Yes | `120` | *Number of minutes to look back for Salesforce caes. Value is only used on the first time polling when the app starts.* |
+| **polling_record_type_names** | No | `"Security Incident","Incident"` | *Case record type names the poller queries each polling interval.  If not set all case record types are queried* |
+| **verify** | Yes | `True` | *Boolean indicating whether to verify the Salesforce client certificate.* |
 
 
 ---
@@ -253,8 +253,8 @@ results = {
 
 ```python
 inputs.salesforce_case_id = incident.properties.salesforce_case_id
-inputs.salesforce_comment_text = note.text.content
-
+results = playbook.functions.results.salesforce_case_results
+inputs.salesforce_comment_text = "This Salesforce case created from SOAR case {0} URL: {1}".format(incident.id, playbook.functions.results.salesforce_case_results.content.salesforce_case.soar_case_url)
 ```
 
 </p>
@@ -281,6 +281,7 @@ Create a Salesforce case in Salesforce using the specified JSON case data.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | No | `-` | - |
 | `salesforce_case_payload` | `text` | Yes | `-` | - |
 
 </p>
@@ -335,6 +336,9 @@ if playbook.inputs.salesforce_case_status:
 else: 
   case_json['Status'] = "New"
   
+if playbook.inputs.salesforce_case_type:
+  case_json['Type'] = playbook.inputs.salesforce_case_type
+  
 if playbook.inputs.salesforce_case_description:
   case_json['Description'] = playbook.inputs.salesforce_case_description
 
@@ -344,16 +348,17 @@ if playbook.inputs.salesforce_case_subject:
 if playbook.inputs.salesforce_case_internal_comments:
   case_json['Comments'] = playbook.inputs.salesforce_case_internal_comments
 
-if incident.properties.salesforce_account_id:
+if incident.properties.salesforce_account_id and incident.properties.salesforce_account_id != "None":
   case_json['AccountId'] = incident.properties.salesforce_account_id
 
-if incident.properties.salesforce_owner_id:
+if incident.properties.salesforce_owner_id and incident.properties.salesforce_owner_id != "None":
   case_json['OwnerId'] = incident.properties.salesforce_owner_id
   
-if incident.properties.salesforce_contact_id:
+if incident.properties.salesforce_contact_id and incident.properties.salesforce_contact_id != "None":
   case_json['ContactId'] = incident.properties.salesforce_contact_id
   
 inputs.salesforce_case_payload = json.dumps(case_json)
+inputs.incident_id = incident.id
 
 ```
 
@@ -486,7 +491,7 @@ salesforce_task = content.get("salesforce_task")
 if results.success:
   note_text = "<b>Salesforce: Create Task in Salesforce</b> created with TaskId: {}".format(salesforce_task.get("id", None))
 else:
-    note_text = "<b>Salesforce: Create Task in Saleforce</b> failed:<br>{}".format(salesforce_task.get("error", None))
+    note_text = "<b>Salesforce: Create Task in Salesforce</b> failed:<br>{}".format(salesforce_task.get("error", None))
   
 incident.addNote(note_text)
 ```
@@ -614,7 +619,7 @@ results = {
 <p>
 
 ```python
-inputs.salesforce_account_id = incident.properties.salesforce_account_id if incident.properties.salesforce_account_id else helper.fail("Error: AccountId is None")
+inputs.salesforce_account_id = incident.properties.salesforce_account_id
 ```
 
 </p>
@@ -624,17 +629,16 @@ inputs.salesforce_account_id = incident.properties.salesforce_account_id if inci
 <p>
 
 ```python
-import json
-
 results = playbook.functions.results.account_details
 
 if results.success:
   content = results.get("content", {})
-  account = content.get("salesforce_account", {})
-  note_text = "Account Details: <br>{0}".format(json.dumps(account, indent=4))
-  incident.addNote(helper.createRichText(note_text))
+  if content:
+    account = content.get("salesforce_account", None)
+    if account:
+      incident.properties.salesforce_account_name = account.get("Name", None)
 else:
-  incident.addNote("Unable to get Account details from Salesforce.")
+  incident.addNote("Salesforce: unable to get account details for Account Id ")
 ```
 
 </p>
@@ -713,11 +717,11 @@ results = playbook.functions.results.get_attachments_results
 
 if results.success:
   salesforce_attachments = results.content.salesforce_attachments
-  note_text = "<b>Saleforce: Get Attachments:</b> added {} attachments to incident:<br>".format(len(salesforce_attachments))
+  note_text = "<b>Salesforce: Get Attachments:</b> added {} attachments to incident:<br>".format(len(salesforce_attachments))
   for attachment_name in salesforce_attachments:
     note_text = note_text + "<br>{}".format(attachment_name)
 else:
-  note_text = "<b>Saleforce: Get Attachments</b> failed to get attachments from Salesforce."
+  note_text = "<b>Salesforce: Get Attachments</b> failed to get attachments from Salesforce."
 incident.addNote(note_text)
 
 ```
@@ -958,7 +962,7 @@ results  = playbook.functions.results.get_comment_results
 if results.success:
   incident.addNote("Salesforce: automatic playbook added {} notes from Salesforce".format(results.content.count))
 else:
-  incident.addNote("Saleforce: ERROR in automatic playbook to get Salesforce case comments - function not succcessful.")
+  incident.addNote("Salesforce: ERROR in automatic playbook to get Salesforce case comments - function not successful.")
 ```
 
 </p>
@@ -1321,7 +1325,7 @@ results = {
 <p>
 
 ```python
-inputs.salesforce_user_id = incident.properties.salesforce_owner_id if incident.properties.salesforce_owner_id else helper.fail("Error: OwnerId is None")
+inputs.salesforce_user_id = incident.properties.salesforce_owner_id
 ```
 
 </p>
@@ -1331,17 +1335,16 @@ inputs.salesforce_user_id = incident.properties.salesforce_owner_id if incident.
 <p>
 
 ```python
-import json
-
 results = playbook.functions.results.get_user_results
 
 if results.success:
-  content = results.get("content", {})
-  user = content.get("salesforce_user", {})
-  note_text = "Owner Details: <br>{0}".format(json.dumps(user, indent=4))
-  incident.addNote(helper.createRichText(note_text))
+    content = results.get("content", {})
+    user = content.get("salesforce_user")
+    if user:
+        incident.properties.salesforce_case_owner = user.get("Name", "")
 else:
-  incident.addNote("Unable to get User details from Salesforce.")
+  incident.addNote("Unable to get User information from OwnerId")
+  
 ```
 
 </p>
@@ -1412,9 +1415,9 @@ results = {
 
 ```python
 inputs.incident_id = incident.id
-inputs.attachment_id = None
-inputs.task_id = None
-inputs.artifact_id = artifact.id
+inputs.attachment_id = attachment.id
+inputs.task_id = task.id
+inputs.artifact_id = None
 inputs.salesforce_case_id = incident.properties.salesforce_case_id
 ```
 
@@ -1425,12 +1428,12 @@ inputs.salesforce_case_id = incident.properties.salesforce_case_id
 <p>
 
 ```python
-results = playbook.functions.results.post_artifact_results
+results = playbook.functions.results.post_attachment_results
 
 if results.success:
-  note_text = "<b>Salesforce: Post Artifact File to Salesforce Case</b> post attachment to case:<br>{}".format(results.content.salesforce_attachment)
+  note_text = "<b>Salesforce: Post Attachment to Salesforce Case</b> post attachment to case:<br>{}".format(results.content.salesforce_attachment)
 else:
-  note_text = "<b>Salesforce: Post Artifact File to Salesforce Case</b> was NOT successful."
+  note_text = "<b>Salesforce: Post Attachment to Salesforce Case</b> was NOT successful."
 
 incident.addNote(note_text)
 ```
@@ -1451,6 +1454,7 @@ Synchronize tasks between Salesforce case and SOAR case. If the SOAR case name m
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | No | `-` | - |
 | `salesforce_case_id` | `text` | Yes | `-` | - |
+| `task_sync_direction` | `select` | No | `-` | Direction to push tasks |
 
 </p>
 </details>
@@ -1481,6 +1485,7 @@ results = {
 ```python
 inputs.incident_id = incident.id
 inputs.salesforce_case_id = incident.properties.salesforce_case_id
+inputs.task_sync_direction = "Salesforce"
 ```
 
 </p>
@@ -1493,7 +1498,7 @@ inputs.salesforce_case_id = incident.properties.salesforce_case_id
 results = playbook.functions.results.sync_task_results
 
 if results.success:
-  note_text = "<b>Salesforce: Sync Tasks</b> added:<br> {} task(s) in Salesforce<br> task(s) in SOAR".format(results.task_count_to_salesforce, results.task_count_to_soar)
+  note_text = "<b>Salesforce: Sync Tasks</b> added:<br> {0} tasks in Salesforce<br> {1} tasks in SOAR".format(results.content.task_count_to_salesforce, results.content.task_count_to_soar)
 else:
   note_text = "<b>Salesforce: Sync Tasks</b> FAILED and was unable to add tasks"
 
