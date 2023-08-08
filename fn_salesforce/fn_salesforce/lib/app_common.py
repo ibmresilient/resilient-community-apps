@@ -9,7 +9,7 @@ from base64 import b64encode
 import json
 
 from requests.exceptions import JSONDecodeError
-from resilient_lib import IntegrationError, readable_datetime, eval_mapping, str_to_bool, clean_html
+from resilient_lib import IntegrationError, readable_datetime, eval_mapping, clean_html
 
 #----------------------------------------------------------------------------------------
 # This module is an open template for you to develop the methods necessary to interact
@@ -83,7 +83,6 @@ class AppCommon():
         self.base_url = BASE_URL.format(my_domain_url=self.my_domain_url, api_version=self.api_version)
         self.token_url = TOKEN_URL.format(my_domain_url=self.my_domain_url)
         self.rc = rc
-        self.verify = _get_verify_ssl(app_configs)
         self.access_token = self.get_token()
         self.polling_filters = eval_mapping(app_configs.get('polling_filters', ''), wrapper='[{}]')
         if not self.polling_filters:
@@ -682,28 +681,3 @@ def callback(response):
             msg,
             details)
     return response, error_msg
-
-def _get_verify_ssl(app_configs: dict) -> bool:
-    """
-    Get ``verify`` parameter from app config.
-    Value can be set in the [fn_my_app] section
-
-    :param opts: All of the app.config file as a dict
-    :type opts: dict
-    :param app_options: App specific configs
-    :type app_options: dict
-    :return: Value to set ``requests.request.verify`` to. Either a path or a boolean. Defaults to ``True``
-    :rtype: bool|str(path)
-    """
-    # start checking the app specific settings
-    verify = app_configs.get("verify")
-
-    # because verify can be either a boolean or a path,
-    # we need to check if it is a string with a boolean 
-    # value first then, and only then, we convert it to a bool
-    # NOTE: that this will then only support "true" or "false"
-    # (case-insensitive) rather than the normal "true", "yes", etc...
-    if isinstance(verify, str) and verify.lower() in ["false", "true"]:
-        verify = str_to_bool(verify)
-
-    return verify

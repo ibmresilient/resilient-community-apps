@@ -26,12 +26,7 @@ consumer_secret=xxx
 polling_interval=60
 # Number of minutes to lookback for queries the first time the poller runs
 polling_lookback=120
-#
-# OPTIONAL: use the 'verify' config to set a value for SSL verification
-# if 'False', no SSL will be used. if 'True' or unset, the default SSL root cert
-# will be used. if 'verify' is a path, the value of the path will override the
-# root cert bundle and the file found at the path will be used for server-side SSL.
-verify = True
+
 # OPTIONAL: polling filters that can be applied when querying Salesforce for 
 # new cases to cases to be updated. The app uses SOQL (Salesforce Object Query Language) 
 # to form a SELECT statement to query cases based on the last poll time.  
@@ -57,6 +52,14 @@ polling_filters=
 # polling_record_type_names="Security Incident","Incident"
 polling_record_type_names=
 # 
+# OPTIONAL: Specify a timeout value value for accessing the Salesforce REST API
+timeout=60
+#
+# OPTIONAL: use the 'verify' config to set a value for SSL verification
+# if 'False', no SSL will be used. if 'True' or unset, the default SSL root cert
+# will be used. if 'verify' is a path, the value of the path will override the
+# root cert bundle and the file found at the path will be used for server-side SSL.
+# verify = True
 # # Specify paths to files if client certs are needed to authenticate
 # client_auth_cert = <path_to_cert.pem>
 # client_auth_key = <path_to_cert_private_key.pem>
