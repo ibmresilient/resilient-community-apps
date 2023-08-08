@@ -1,0 +1,22 @@
+{
+  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
+     for details on available jinja methods. Examples for `soar_substitute` and more are included below.
+  #}
+  {# modify to specify your specific **data** fields #}
+  "name": "Salesforce Case - {{ CaseNumber }} - {{ Subject }}",
+  "description": "{{ Description | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  "discovered_date": {{ CreatedDate | soar_datetimeformat(split_at='.') }},
+  "start_date": {{ CreatedDate | soar_datetimeformat(split_at='.') }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ OwnerId  }}", #}
+  {#"plan_status": "{{ Status|soar_substitute('{"Closed": "C", "New": "A", "Escalated": "A"}') }}",#}
+  "plan_status": "A",
+  "severity_code": "{{ Priority }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "salesforce_case_id": "{{ Id }}",
+    "salesforce_status": "{{ Status }}"
+  }
+}
