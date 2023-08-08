@@ -37,10 +37,10 @@ Automatic playbook to close a case in Salesforce.
 ### Function-Input Script
 ```python
 STATUS_LOOKUP = {
-  'Unresolved': "Closed",   # Unresolved
-  'Duplicate': "Closed",    # Duplicate
-  'Not an Issue': "Closed", # Not an Issue
-  'Resolved': "Closed"      # Resolved
+  "Unresolved": "Closed",   # Unresolved
+  "Duplicate": "Closed",    # Duplicate
+  "Not an Issue": "Closed", # Not an Issue
+  "Resolved": "Closed"      # Resolved
 }
 
 inputs.salesforce_case_id = incident.properties.salesforce_case_id

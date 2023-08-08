@@ -19,7 +19,7 @@
 `incident`
 
 ### Description
-Create a case in Salesforce.
+Create a case in Salesforce. Activation form input and custom field data are used in function input script to create the JSON format payload used to create the case in Salesforce.
 
 
 ---
@@ -38,6 +38,7 @@ Create a case in Salesforce.
 ```python
 import json
 
+# Form the payload from input in the activation form and custom fields to create a Salesforce case from SOAR. 
 case_json = {}
 case_json['Origin'] = "Web"
 
@@ -58,13 +59,13 @@ if playbook.inputs.salesforce_case_subject:
 if playbook.inputs.salesforce_case_internal_comments:
   case_json['Comments'] = playbook.inputs.salesforce_case_internal_comments
 
-if incident.properties.salesforce_account_id and incident.properties.salesforce_account_id != "None":
+if incident.properties.salesforce_account_id and (incident.properties.salesforce_account_id).tolower != "none":
   case_json['AccountId'] = incident.properties.salesforce_account_id
 
-if incident.properties.salesforce_owner_id and incident.properties.salesforce_owner_id != "None":
+if incident.properties.salesforce_owner_id and (incident.properties.salesforce_owner_id).tolower != "none":
   case_json['OwnerId'] = incident.properties.salesforce_owner_id
   
-if incident.properties.salesforce_contact_id and incident.properties.salesforce_contact_id != "None":
+if incident.properties.salesforce_contact_id and (incident.properties.salesforce_contact_id).tolower != "none":
   case_json['ContactId'] = incident.properties.salesforce_contact_id
   
 inputs.salesforce_case_payload = json.dumps(case_json)

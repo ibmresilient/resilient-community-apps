@@ -71,21 +71,20 @@
  ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
 
 Bi-directional App for Salesforce. Query Salesforce for Cases based 
-         on user-defined query parameters and create and update cases in SOAR.<br>
-
-
-
-        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
-
-        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
+         on user-defined query parameters and create and update cases in SOAR.
 
 ### Key Features
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1 <!-- ::CHANGE_ME:: -->
-* Key Feature 2 <!-- ::CHANGE_ME:: -->
-* Key Feature 3 <!-- ::CHANGE_ME:: -->
+* Poll Salesforce cases and create and update the corresponding cases in SOAR 
+* Set the Salesforce cases Status (and other case fields) from the corresponding case in SOAR
+* Create cases in SOAR based on user define Salesforce case field polling filters and case record type names
+* Create a case in Salesforce from a (non-Salesforce case) in SOAR
+* Create a case in Salesforce manually from SOAR with user defined case fields
+* Sync case tasks between a Salesforce case and the corresponding SOAR case
+* Sync case attachments between Salesforce case and corresponding SOAR case
+* Sync case comments between Salesforce case and corresponding SOAR case
 
 ---
 
@@ -198,7 +197,63 @@ The following table provides the settings you need to configure the app. These s
 | **polling_lookback** | Yes | `120` | *Number of minutes to look back for Salesforce caes. Value is only used on the first time polling when the app starts.* |
 | **polling_record_type_names** | No | `"Security Incident","Incident"` | *Case record type names the poller queries each polling interval.  If not set all case record types are queried* |
 | **verify** | Yes | `True` | *Boolean indicating whether to verify the Salesforce client certificate.* |
+| **soar_create_case_template** | No | `/var/rescircuits/create_case.jinja` | *Path to override template for automatic case creation. See [Poller Considerations](#poller-considerations).* |
+| **soar_update_case_template** | No | `/var/rescircuits/update_case.jinja` | *Path to override template for automatic case updating. See [Poller Considerations](#poller-considerations).* |
+| **soar_close_case_template** | No | `/var/rescircuits/close_case.jinja` | *Path to override template for automatic case closing. See [Poller Considerations](#poller-considerations).* |
 
+---
+### Poller Considerations
+The poller is just one way to escalate Salesforce cases to SOAR cases. It's also possible to send Salesforce information to a SIEM, such as IBM QRadar, which would then correlate cases into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Salesforce Case ID is preserved in the custom case field `salesforce_case_id`, then all the remaining details about the case synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Salesforce Case ID.
+
+When using another source of Salesforce case escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
+
+#### Poller Templates for SOAR Cases
+It may be necessary to modify the templates used to create, update, or close SOAR cases based on your required custom fields in SOAR.
+
+This is especially relevant if you have required custom _close_ fields that need to be filled when closing a case in SOAR. If that is the case, be sure to implement a custom `close_case_template` and reference those required close fields in the template.
+
+When overriding the template in App Host, specify the file path for each file as `/var/rescircuits`.
+
+Below are the default templates used which can be copied, modified, and used with app_config's
+`soar_create_case_template`, `soar_update_case_template`, and `soar_close_case_template` settings to override the default templates.
+
+---
+### Case Filtering 
+
+To limit the number of Salesforce cases escalated to SOAR, consider using the optional `polling_filter` parameter in the app configuration file. Each filter is a tuple in the following format: ("field","operator","value"),
+Where:
+  * "field" is the Salesforce Case field to be queried
+  * "operator" is a string operator performed in query 
+  * "value" is the value to be compared against in the query
+<p>
+If more than one filter is needed, separate each tuple with a comma. Enclose string values in quotes. Escape single quotes are required in some SOQL query strings. 
+<p>
+Here is a polling filter example that adds or updates cases that have a "Priority" equal to 'High':
+
+    polling_filters=("Priority","=","\'High\'")
+
+This polling filter example adds or updates cases that are Closed and have a "CreatedDate" equal to "YESTERDAY":
+
+    polling_filters=("IsClosed","=","true"),("CreatedDate","=","YESTERDAY")
+
+This polling filter example adds or updates cases that have a case Status of 'New', 'Working' or 'In Progress':
+
+    polling_filters=("Status","IN",["\'New\'","\'Working\'","\'In Progress\'"])
+
+The list of SOQL supported `operators`:
+
+  | Operator | Name | Description |
+  | -------- | ------ | ------------| 
+  | = | Equals | Expression is true if the value in the fieldName equals the value in the expression. |
+  | != | Not equals | Expression is true if the value in the fieldName doesn’t equal the specified value. |
+  | < | Less than | Expression is true if the value in the fieldName is less than the specified value. |
+  | <= | Less or equal | Expression is true if the value in the fieldName is less than or equal to the specified value. |
+  | > | Greater than | Expression is true if the value in the fieldName is greater than the specified value. |
+  | >= | Greater or equal | Expression is true if the value in the fieldName is greater than or equal to the specified value. |
+  | LIKE | Like | Expression is true if the value in the fieldName matches the characters of the text string in the specified value. The text string in the specified value must be enclosed in single quotes. |
+  | IN |IN | If the value equals any one of the values in a WHERE clause. The string values for IN must be in parentheses and surrounded by single quotes. |
+  |NOT IN |	NOT IN | If the value doesn’t equal any of the values in a WHERE clause. The string values for NOT IN must be in parentheses and surrounded by single quotes. |
+  |INCLUDES EXCLUDES | 		| Applies only to multi-select picklists. See Query Multi-Select Picklists in Salesforce documentation. |
 
 ---
 
@@ -1620,7 +1675,7 @@ else:
 | ------------- | ----------- | --------------- | ------ | ------ | ---------- |
 | Salesforce: Add Comment to Salesforce Case | Add the specified text as a comment to the specified case. | Automatic | incident | `enabled` | `incident.properties.salesforce_case_id has_a_value AND object_added` |
 | Salesforce: Close Case | Automatic playbook to close a case in Salesforce.  | Automatic | incident | `enabled` | `incident.properties.salesforce_case_id has_a_value AND incident.resolution_id changed AND incident.resolution_summary not_contains Closed by Salesforce` |
-| Salesforce: Create Salesforce Case | Create a case in Salesforce. | Manual | incident | `enabled` | `incident.properties.salesforce_case_id has_a_value` |
+| Salesforce: Create Salesforce Case | Create a case in Salesforce. Activation form input and custom field data are used in function input script to create the JSON format payload used to create the Salesforce case.  | Manual | incident | `enabled` | `incident.properties.salesforce_case_id has_a_value` |
 | Salesforce: Create Salesforce Case from This SOAR Case | Create a Salesforce case from the SOAR case which activated the playbook.  This playbook is only available to SOAR cases that are not associated with a Salesforce case. | Manual | incident | `enabled` | `incident.properties.salesforce_case_id not_has_a_value` |
 | Salesforce: Write Account Details to Note | Get information on the Salesforce account associated with a case and write to a SOAR note. | Manual | incident | `disabled` | `-` |
 | Salesforce: Get Attachments from Salesforce Case | Get attachments from Salesforce case and add them to the SOAR case. | Manual | incident | `enabled` | `incident.properties.salesforce_case_id has_a_value` |
@@ -1638,6 +1693,82 @@ else:
 | Salesforce: Update Owner Details in SOAR | Get the Case Owner details and update the Case Owner field in the SOAR case. | Automatic | incident | `enabled` | `incident.properties.salesforce_owner_id changed AND incident.properties.salesforce_owner_id not_equals None` |
 | Salesforce: Write Owner Details to Note | Write the User details of the Case Owner in Salesforce to a SOAR incident Note. | Manual | incident | `disabled` | `incident.properties.salesforce_case_id has_a_value` |
 
+## Templates for SOAR Cases
+It may necessary to modify the templates used to create or close SOAR cases based on a customer's required custom fields. Below are the default templates used which can be copied, modified and used with app_config's
+`soar_create_case_template` and `soar_close_case_template` settings to override the default templates.
+
+### soar_create_case.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+
+```
+{
+  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
+     for details on available jinja methods. Examples for `soar_substitute` and more are included below.
+  #}
+  {# modify to specify your specific **data** fields #}
+  "name": "Salesforce Case - {{ CaseNumber }} - {{ Subject }}",
+  "description": "{{ Description | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  "discovered_date": {{ CreatedDate | soar_datetimeformat(split_at='.') }},
+  "start_date": {{ CreatedDate | soar_datetimeformat(split_at='.') }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ OwnerId  }}", #}
+  {#"plan_status": "{{ Status|soar_substitute('{"Closed": "C", "New": "A", "Escalated": "A"}') }}",#}
+  "plan_status": "A",
+  "severity_code": "{{ Priority }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "salesforce_case_id": "{{ Id }}",
+    "salesforce_status": "{{ Status }}"
+  }
+}
+```
+
+### soar_close_case.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+```
+{
+  {# JINJA template for closing a SOAR incident using endpoint data #}
+  {# modify to specify your specific **data** fields #}
+  "plan_status": "C",
+  "resolution_id": "{{ "Resolved" }}",
+  "resolution_summary": "Closed by Salesforce, Status: {{ Status }}",
+  {# add additional fields based on your 'on close' field requirements #}
+  "properties": {
+    "salesforce_status": "{{ Status }}"
+  }
+}
+```
+
+### soar_update_case.jinja
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+```
+{
+  {# JINJA template for updating a new SOAR incident from an endpoint #}
+  {# modify to specify your specific **data** fields #}
+  "severity_code": "{{ Priority }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "salesforce_case_id": "{{ Id }}",
+    "salesforce_case_number": "{{ CaseNumber }}",
+    "salesforce_case_type": "{{ Type }}",
+    "salesforce_case_link": "<a target='_blank' href='{{ entity_url }}'>{{ CaseNumber }}</a>",
+    "salesforce_origin": "{{ Origin }}",
+    "salesforce_account_id": "{{ AccountId }}",
+    "salesforce_owner_id": "{{ OwnerId }}",
+    "salesforce_contact_id": "{{ ContactId }}",
+    "salesforce_contact_phone": "{{ ContactPhone }}",
+    "salesforce_contact_email": "{{ ContactEmail }}",
+    "salesforce_contact_fax": "{{ ContactFax }}",
+    "salesforce_supplied_name": "{{ SuppliedName }}",
+    "salesforce_supplied_email": "{{ SuppliedEmail }}",
+    "salesforce_supplied_phone": "{{ SuppliedPhone }}",
+    "salesforce_supplied_company": "{{ SuppliedCompany }}",
+    "salesforce_status": "{{ Status }}"
+  }
+}
+```
 ---
 
 ## Troubleshooting & Support
