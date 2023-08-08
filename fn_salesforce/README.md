@@ -205,7 +205,7 @@ The following table provides the settings you need to configure the app. These s
 ## Function - Salesforce: Add Comment to Salesforce Case
 Add a comment to a Salesforce case.
 
- ![screenshot: fn-salesforce-add-comment-to-salesforce-case ](./doc/screenshots/fn-salesforce-add-comment-to-salesforce-case.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-add-comment-to-salesforce-case ](./doc/screenshots/fn-salesforce-add-comment-to-salesforce-case.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -274,7 +274,7 @@ None
 ## Function - Salesforce: Create Case in Salesforce
 Create a Salesforce case in Salesforce using the specified JSON case data.
 
- ![screenshot: fn-salesforce-create-case-in-salesforce ](./doc/screenshots/fn-salesforce-create-case-in-salesforce.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-create-case-in-salesforce ](./doc/screenshots/fn-salesforce-create-case-in-salesforce.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -390,7 +390,7 @@ incident.addNote(note_text)
 ## Function - Salesforce: Create Task in Salesforce Case
 Create a SOAR task in a Salesforce case.
 
- ![screenshot: fn-salesforce-create-task-in-salesforce-case ](./doc/screenshots/fn-salesforce-create-task-in-salesforce-case.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-create-task-in-salesforce-case ](./doc/screenshots/fn-salesforce-create-task-in-salesforce-case.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -503,7 +503,7 @@ incident.addNote(note_text)
 ## Function - Salesforce: Get Account
 Get the Salesforce account information for the specified Salesforce AccountId.
 
- ![screenshot: fn-salesforce-get-account ](./doc/screenshots/fn-salesforce-get-account.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-get-account ](./doc/screenshots/fn-salesforce-get-account.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -648,7 +648,7 @@ else:
 ## Function - Salesforce: Get Attachments from Salesforce
 Get attachments associated with a Salesforce case and add the attachments in the corresponding SOAR case.
 
- ![screenshot: fn-salesforce-get-attachments-from-salesforce ](./doc/screenshots/fn-salesforce-get-attachments-from-salesforce.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-get-attachments-from-salesforce ](./doc/screenshots/fn-salesforce-get-attachments-from-salesforce.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -733,7 +733,7 @@ incident.addNote(note_text)
 ## Function - Salesforce: Get Case
 Get Case information from a specified Salesforce CaseId.
 
- ![screenshot: fn-salesforce-get-case ](./doc/screenshots/fn-salesforce-get-case.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-get-case ](./doc/screenshots/fn-salesforce-get-case.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1416,7 +1416,7 @@ results = {
 ```python
 inputs.incident_id = incident.id
 inputs.attachment_id = attachment.id
-inputs.task_id = task.id
+inputs.task_id = task.id if attachment.type == 'task' else None
 inputs.artifact_id = None
 inputs.salesforce_case_id = incident.properties.salesforce_case_id
 ```
@@ -1445,7 +1445,7 @@ incident.addNote(note_text)
 ## Function - Salesforce: Sync Tasks Between Cases
 Synchronize tasks between Salesforce case and SOAR case. If the SOAR case name matches the Salesforce case Subject and the Description field contains the SOAR header text (indicating it was already sent from SOAR), then the task is not sent to Salesforce.
 
- ![screenshot: fn-salesforce-sync-tasks-between-cases ](./doc/screenshots/fn-salesforce-sync-tasks-between-cases.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-sync-tasks-between-cases ](./doc/screenshots/fn-salesforce-sync-tasks-between-cases.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1512,7 +1512,7 @@ incident.addNote(note_text)
 ## Function - Salesforce: Update Case Status
 Update the Status field of a case in Salesforce.
 
- ![screenshot: fn-salesforce-update-case-status ](./doc/screenshots/fn-salesforce-update-case-status.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-update-case-status ](./doc/screenshots/fn-salesforce-update-case-status.png)
 
 <details><summary>Inputs:</summary>
 <p>
