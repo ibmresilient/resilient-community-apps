@@ -39,6 +39,9 @@
         "name": {
           "type": "string"
         },
+        "domain": {
+          "type": "string"
+        },
         "state": {
           "type": "integer"
         },
@@ -101,11 +104,18 @@
         "isolated": {
           "type": "boolean"
         },
+        "isolationStatus": {
+          "type": "string"
+        },
+        "isolationStatusFailure": {},
         "connected": {
           "type": "boolean"
         },
         "tags": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "groups": {
           "type": "array",
@@ -118,7 +128,7 @@
               "name": {
                 "type": "string"
               },
-              "description": {
+              "parentGroupId": {
                 "type": "string"
               }
             }
