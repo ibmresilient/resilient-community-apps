@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v49.0.4423
 
 """Generate the Resilient customizations required for fn_datatable_utils"""
 
@@ -22,15 +23,15 @@ def codegen_reload_data():
         "package": u"fn_datatable_utils",
         "message_destinations": [u"fn_datatable_utils"],
         "functions": [u"dt_utils_add_row", u"dt_utils_clear_datatable", u"dt_utils_create_csv_table", u"dt_utils_delete_row", u"dt_utils_delete_rows", u"dt_utils_get_all_data_table_rows", u"dt_utils_get_row", u"dt_utils_get_rows", u"dt_utils_update_row"],
-        "workflows": [u"example_create_csv_datatable", u"example_data_table_utils_add_row", u"example_data_table_utils_add_row_to_datatable", u"example_data_table_utils_clear_datatable", u"example_data_table_utils_delete_row", u"example_data_table_utils_delete_row_from_datatable", u"example_data_table_utils_delete_rows", u"example_data_table_utils_delete_rows_from_datatable", u"example_data_table_utils_get_all_data_table_rows", u"example_data_table_utils_get_current_row", u"example_data_table_utils_get_row", u"example_data_table_utils_get_rows", u"example_data_table_utils_update_row", u"update_row"],
-        "actions": [u"Add Row", u"Add Row to Datatable", u"Clear Datatable", u"Delete Current Row", u"Delete Data Table Row", u"Delete Data Table Rows", u"Delete Rows by Name", u"Example: Create CSV Datatable", u"Get All Rows", u"Get Current Row", u"Get Data Table Row", u"Get Data Table Rows", u"Update Current Row", u"Update Data Table Row"],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"dt_utils_test_data_table"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [u"example_create_csv_datatable_pb", u"example_data_table_utils_add_row_pb", u"example_data_table_utils_add_row_to_datatable_pb", u"example_data_table_utils_clear_datatable_pb", u"example_data_table_utils_delete_row_from_datatable_pb", u"example_data_table_utils_delete_row_pb", u"example_data_table_utils_delete_rows_from_datatable_pb", u"example_data_table_utils_delete_rows_pb", u"example_data_table_utils_get_all_data_table_rows_pb", u"example_data_table_utils_get_current_row_pb", u"example_data_table_utils_get_row_pb", u"example_data_table_utils_get_rows_pb", u"example_data_table_utils_update_row_pb", u"example_data_utils_update_row_pb"]
     }
 
 
@@ -39,7 +40,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 41.0.6783
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
@@ -54,36 +55,21 @@ def customization_data(client=None):
         - dt_utils_get_row
         - dt_utils_get_rows
         - dt_utils_update_row
-    - Workflows:
-        - example_create_csv_datatable
-        - example_data_table_utils_add_row
-        - example_data_table_utils_add_row_to_datatable
-        - example_data_table_utils_clear_datatable
-        - example_data_table_utils_delete_row
-        - example_data_table_utils_delete_row_from_datatable
-        - example_data_table_utils_delete_rows
-        - example_data_table_utils_delete_rows_from_datatable
-        - example_data_table_utils_get_all_data_table_rows
-        - example_data_table_utils_get_current_row
-        - example_data_table_utils_get_row
-        - example_data_table_utils_get_rows
-        - example_data_table_utils_update_row
-        - update_row
-    - Rules:
-        - Add Row
-        - Add Row to Datatable
-        - Clear Datatable
-        - Delete Current Row
-        - Delete Data Table Row
-        - Delete Data Table Rows
-        - Delete Rows by Name
-        - Example: Create CSV Datatable
-        - Get All Rows
-        - Get Current Row
-        - Get Data Table Row
-        - Get Data Table Rows
-        - Update Current Row
-        - Update Data Table Row
+    - Playbooks:
+        - example_create_csv_datatable_pb
+        - example_data_table_utils_add_row_pb
+        - example_data_table_utils_add_row_to_datatable_pb
+        - example_data_table_utils_clear_datatable_pb
+        - example_data_table_utils_delete_row_from_datatable_pb
+        - example_data_table_utils_delete_row_pb
+        - example_data_table_utils_delete_rows_from_datatable_pb
+        - example_data_table_utils_delete_rows_pb
+        - example_data_table_utils_get_all_data_table_rows_pb
+        - example_data_table_utils_get_current_row_pb
+        - example_data_table_utils_get_row_pb
+        - example_data_table_utils_get_rows_pb
+        - example_data_table_utils_update_row_pb
+        - example_data_utils_update_row_pb
     - Data Tables:
         - dt_utils_test_data_table
     """

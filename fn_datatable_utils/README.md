@@ -22,18 +22,28 @@
 - [Function - Data Table Utils: Get Rows](#function---data-table-utils-get-rows)
 - [Function - Data Table Utils: Update Row](#function---data-table-utils-update-row)
 - [Data Table - Example CSV Datatable](#data-table---example-csv-datatable)
-- [Rules](#rules)
+- [Playbooks](#Playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v2.1.0  | 7/2023 | Add playbooks
 | v2.0.0  | 5/2022 | <ul><li>Added function dt_utils_add_row that adds a row to a datatable</li><li>Function dt_utils_get_row can now get a row from menu of a datatable row</li><li>Added function dt_utils_get_all_data_table_rows that gets all rows from a data table in SOAR</li><li>Update example workflows</li><li>Added function dt_utils_clear_datatable that deletes all the contents of a datatable</li></ul> |
 | v1.2.0  | 2/2021 | Functions dt_utils_get_rows and dt_utils_delete_rows can now return or delete all datatable rows |
 | v1.1.0  | 11/2020 | Added support for App Host. New functions: `dt_utils_get_row`, `dt_utils_get_rows`, `dt_utils_delete_row`, `dt_utils_delete_rows`, `dt_utils_create_csv_table`|
 | v1.0.0  | 2/2019 | Initial Release |
 
+---
+## 2.1.0 Changes
+In v2.1, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end. For automatic actions, the playbooks will be disabled by default.
+
+You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
+
+![screenshot: main](./doc/screenshots/playbooks.png)
 ---
 
 ## Overview
@@ -119,8 +129,7 @@ To reference the example datatable, create a new incident tab and drag the `Exam
 
 ## Function - Data Table Utils: Add Row
 Add a row to a given datatable.
-
- ![screenshot: fn-data-table-utils-add-row ](./doc/screenshots/dt_add_row.png)
+![screenshot](./doc/screenshots/add_row.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -243,10 +252,10 @@ None
 ---
 ## Function - Data Table Utils: Clear Datatable
 Delete all the contents of a datatable.
-
+![Alt text](doc/screenshots/clear_datatable.png)
  **NOTE:** This function can not be used with Rule object type Data Table
 
- ![screenshot: fn-data-table-utils-clear-datatable ](./doc/screenshots/dt_clear_dt.png)
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -327,6 +336,8 @@ if results["success"]:
 ## Function - Data Table Utils: Create CSV Datatable
 Add CVS data to a named datatable. CSV data can originate from another function or from a referenced attachment with CSV encoded data.
 
+![Alt text](doc/screenshots/create_csv_datatable.png)
+
 A mapping table is used to map CSV header row labels to datatable column (API) names. For csv_data with headers, either a string-encoded list can be used, referencing the column order of the CSV data for the associated datatable column names:
 
 ```
@@ -350,7 +361,6 @@ For csv data without headers, the mapping table will contain a string-encoded li
 
 Attempts are made to match the field type of the datatable. CSV data matched to `select` and `multi-select` datatables columns must contain the correct values specified for those columns. String-based date fields will be converted into epoch timestamp values based on a date format pattern (ex. '%Y-%m-%d %H:%M:%S.%f') for `datetimepicker` and `datepicker` datatable column types. See [https://strftime.org/](https://strftime.org/) for the formatted values to use. Epoch date field values are also supported.
 
- ![screenshot: fn-data-table-utils-create-csv-datatable ](./doc/screenshots/dt_add_csv_data.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -465,9 +475,11 @@ Function that deletes a row from a Data Table given the internal row ID.
 
 When used on a datatable, specify dt_utils_row_id = 0 to reference the currently referenced datatable row. The delete operation will be delayed as the workflow will first terminate before the row is deleted.
 
-An example Rule and Workflow are available for deleting datatable rows based on an artifact value and against a row in the example datatable.
+An example playbook available for deleting datatable rows based on an artifact value and against a row in the example datatable.
 
- ![screenshot](./doc/screenshots/dt_delete_row.png)
+![Alt text](doc/screenshots/delete_row.png)
+
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -555,9 +567,10 @@ incident.addNote(note)
 ## Function - Data Table Utils: Delete Rows
 Function that deletes rows from a Data Table given a list of internal row IDs or a 'search_column and search_value' pair.
 
-An example Rule and Workflow are available for deleting datatable rows based on an artifact value.
+An example playbook available for deleting datatable rows based on an artifact value.
 
- ![screenshot](./doc/screenshots/dt_delete_rows.png)
+![Alt text](doc/screenshots/delete_rows.png)
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -649,9 +662,9 @@ incident.addNote(helper.createRichText(note))
 ## Function - Data Table Utils: Get All Data Table Rows
 Function that returns the information for all the rows in a data table.
 
-An example Rule and Workflow exist for using this function on the example datatable from an artifact value.
+An example playbook exists for using this function on the example datatable from an artifact value.
 
- ![screenshot: fn-data-table-utils-get-row ](./doc/screenshots/dt_get_all_data_table_rows.png)
+![Alt text](doc/screenshots/get_all_data_table_rows.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -891,9 +904,9 @@ incident.addNote(helper.createRichText(note_text))
 ## Function - Data Table Utils: Get Row
 Function that searches for a row using a internal row ID or a search_column and search_value pair, and returns the information on the row that is found, if such a row exists.
 
-An example Rule and Workflow exist for using this function on the example datatable from an artifact value.
+An example playbook exists for using this function on the example datatable from an artifact value.
 
- ![screenshot: fn-data-table-utils-get-row ](./doc/screenshots/dt_get_row.png)
+![Alt text](doc/screenshots/get_row.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1066,9 +1079,9 @@ incident.addNote(helper.createRichText(note_text))
 ## Function - Data Table Utils: Get Rows
 Function that returns the full unsorted list of JSON objects which contain all information regarding each row found, if no searching/sorting criteria were provided.
 
-An example Rule and Workflow exist for searching the example datatable based on an artifact value.
+An example playbook exists for searching the example datatable based on an artifact value.
 
- ![screenshot](./doc/screenshots/dt_get_rows.png)
+![Alt text](doc/screenshots/get_rows.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1260,9 +1273,10 @@ Function that takes a JSON String of 'search_column and search_value' pairs to u
 
 When used on a datatable, specify dt_utils_row_id = 0 to refer to the currently referenced datatable row.
 
-Two sets example Rule and Workflow are available for changing the example datatable from an artifact value and directly from a row in the datatable.
+Two sets example playbooks are available for changing the example datatable from an artifact value and directly from a row in the datatable.
 
- ![screenshot](./doc/screenshots/dt_update_row.png)
+![Alt text](doc/screenshots/update_row_1.png)
+![Alt text](doc/screenshots/update_row_2.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1477,26 +1491,23 @@ dt_utils_test_data_table
 | text | `text` | `text` | - |
 
 ---
-
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Add Row | dt_utils_test_data_table | `example_data_table_utils_add_row` |
-| Add Row to Datatable | artifact | `example_data_table_utils_add_row_to_datatable` |
-| Clear Datatable | incident | `example_data_table_utils_clear_datatable` |
-| Delete Current Row | dt_utils_test_data_table | `example_data_table_utils_delete_row_from_datatable` |
-| Delete Data Table Row | artifact | `example_data_table_utils_delete_row` |
-| Delete Data Table Rows | artifact | `example_data_table_utils_delete_rows` |
-| Delete Rows by Name | dt_utils_test_data_table | `example_data_table_utils_delete_rows_from_datatable` |
-| Example: Create CSV Datatable | attachment | `example_create_csv_datatable` |
-| Get All Rows | dt_utils_test_data_table | `example_data_table_utils_get_all_data_table_rows` |
-| Get Current Row | dt_utils_test_data_table | `example_data_table_utils_get_current_row` |
-| Get Data Table Row | artifact | `example_data_table_utils_get_row` |
-| Get Data Table Rows | artifact | `example_data_table_utils_get_rows` |
-| Update Current Row | dt_utils_test_data_table | `update_row` |
-| Update Data Table Row | artifact | `example_data_table_utils_update_row` |
-
----
+## Playbooks
+| Playbook Name | Description | Object | Status |
+| ------------- | ----------- | ------ | ------ |
+| Data Table Utils: Create CSV Datatable - Example (PB) | Take CSV data and add the results to a named datatable. Results of the function are written to an incident note. | attachment | `enabled` |
+| Data Table Utils: Add Row - Example (PB) | Add a row to the given datatable. | dt_utils_test_data_table | `enabled` |
+| Data Table Utils: Add Row to Datatable - Example (PB) | Add a row to the given datatable. | artifact | `enabled` |
+| Data Table Utils: Clear Datatable - Example (PB) | Clear the content of a given datatable. | incident | `enabled` |
+| Data Table Utils: Delete Row from Datatable - Example (PB) | Delete a row from a datatable. | dt_utils_test_data_table | `enabled` |
+| Data Table Utils: Delete Row - Example (PB) | An example Playbook showing how to use the Data Table Utils: Delete Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then deletes that row from the Data Table. | artifact | `enabled` |
+| Data Table Utils: Delete Rows from Datatable - Example (PB) | Deletes rows from a Data Table given a list of internal row IDs or a 'search_column and search_value' pair. | dt_utils_test_data_table | `enabled` |
+| Data Table Utils: Delete Rows - Example (PB) | An example Playbook showing how to use the Data Table Utils: Delete Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then deletes that row from the Data Table. | artifact | `enabled` |
+| Data Table Utils: Get All Data Table Rows - Example (PB) | Return all of the rows from a data table. | dt_utils_test_data_table | `enabled` |
+| Data Table Utils: Get Current Row - Example (PB) | An example Playbook showing how to use the Data Table Utils: Get Row Function. Get the the current row of the datatable. | dt_utils_test_data_table | `enabled` |
+| Data Table Utils: Get Row - Example (PB) | An example Playbook showing how to use the Data Table Utils: Get Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then returns that row from the Data Table. | artifact | `enabled` |
+| Data Table Utils: Get Rows - Example (PB) | An example Playbook showing how to use the Data Table Utils: Get Rows Function. It uses an Artifact value to search the Data Table and find rows containing that value and then deletes those rows from the Data Table. The results will be written in an Incident note. | artifact | `enabled` |
+| Data Table Utils: Update Row - Example (PB) | An example Playbook showing how to use the Data Table Utils: Delete Row Function. It uses an Artifact value to search the Data Table and find a row containing that value and then deletes that row from the Data Table. | artifact | `enabled` |
+| Data Table: Update Row - Example (PB) | An example Playbook showing how to use the Data Table Utils: Update Row Function. It illustrates updating the current row with static values. | dt_utils_test_data_table | `enabled` |
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.

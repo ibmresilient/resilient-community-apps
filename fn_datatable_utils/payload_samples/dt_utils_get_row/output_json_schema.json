@@ -102,9 +102,6 @@
                     },
                     "row_id": {
                       "type": "integer"
-                    },
-                    "value": {
-                      "type": "string"
                     }
                   }
                 },
@@ -137,6 +134,20 @@
                   },
                   "enabled": {
                     "type": "boolean"
+                  }
+                }
+              }
+            },
+            "playbooks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "playbook_handle": {
+                    "type": "string"
+                  },
+                  "display_name": {
+                    "type": "string"
                   }
                 }
               }
