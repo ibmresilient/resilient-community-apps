@@ -6,7 +6,6 @@
 from random import sample
 from string import ascii_letters, digits
 
-from ldap3 import MODIFY_REPLACE
 from ldap3.extend.microsoft.modifyPassword import ad_modify_password
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function)
@@ -89,7 +88,7 @@ class FunctionComponent(AppFunctionComponent):
 
         except Exception as err:
             self.LOG.error(f"Error: {err}")
-            raise ValueError("Could not change password. Check ldap_dn are valid")
+            raise ValueError("Could not change password.")
 
         finally:
             # Unbind connection

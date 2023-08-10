@@ -12,17 +12,17 @@
   },
   "raw": null,
   "inputs": {
-    "ldap_domain_name": "Domain1",
-    "ldap_dn": "cn=Franky,cn=Users,dc=dev,dc=co3sys,dc=com",
-    "ldap_multiple_group_dn": "['CN=Charles-3,CN=Users,DC=dev,DC=co3sys,DC=com', 'CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com']",
-    "ldap_attribute_name_values": "\"objectClass\": \"user\", \"uid\": \"Franky\", \"telephoneNumber\": \"9340249504\", \"name\": \"Franky\", \"mail\": \"Franky@mail.com\", \"sn\": \"Stevens\""
+    "ldap_domain_name": "Domain2",
+    "ldap_dn": "cn=Gary1,cn=Users,dc=dev,dc=co3sys,dc=com",
+    "ldap_multiple_group_dn": "[]",
+    "ldap_attribute_name_values": "\"objectClass\": [\"top\",\"person\",\"organizationalPerson\",\"user\"], \"name\": \"Gary\", \"mail\": \"gary1@dev.co3sys.com\", \"sAMAccountName\": \"gary1\""
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-ldap-utilities",
-    "package_version": "2.1.0",
+    "package_version": "2.1.1",
     "host": "local",
-    "execution_time_ms": 1615,
-    "timestamp": "2023-03-30 10:41:39"
+    "execution_time_ms": 545,
+    "timestamp": "2023-08-09 09:54:11"
   }
 }

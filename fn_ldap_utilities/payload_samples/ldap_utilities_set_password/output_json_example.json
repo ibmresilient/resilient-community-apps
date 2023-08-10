@@ -3,23 +3,23 @@
   "success": true,
   "reason": null,
   "content": {
-    "user_dn": "CN=Franky,CN=Users,DC=dev,DC=co3sys,DC=com",
-    "ldap_new_password": "5U!8PjHvMdDuCwm"
+    "user_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_new_password": null
   },
   "raw": null,
   "inputs": {
     "ldap_domain_name": "Domain2",
-    "ldap_dn": "CN=Franky,CN=Users,DC=dev,DC=co3sys,DC=com",
-    "ldap_new_password": null,
-    "ldap_return_new_password": true,
-    "ldap_new_auto_password_len": 15
+    "ldap_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_new_password": "superDuperSecret@9",
+    "ldap_return_new_password": false,
+    "ldap_old_password": "Passw0rd"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-ldap-utilities",
-    "package_version": "2.1.0",
+    "package_version": "2.1.2",
     "host": "local",
-    "execution_time_ms": 1095,
-    "timestamp": "2023-03-31 08:56:04"
+    "execution_time_ms": 10756,
+    "timestamp": "2023-08-10 10:39:08"
   }
 }

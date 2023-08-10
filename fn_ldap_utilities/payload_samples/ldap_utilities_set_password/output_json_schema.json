@@ -15,9 +15,7 @@
         "user_dn": {
           "type": "string"
         },
-        "ldap_new_password": {
-          "type": "string"
-        }
+        "ldap_new_password": {}
       }
     },
     "raw": {},
@@ -30,12 +28,14 @@
         "ldap_dn": {
           "type": "string"
         },
-        "ldap_new_password": {},
+        "ldap_new_password": {
+          "type": "string"
+        },
         "ldap_return_new_password": {
           "type": "boolean"
         },
-        "ldap_new_auto_password_len": {
-          "type": "integer"
+        "ldap_old_password": {
+          "type": "string"
         }
       }
     },

@@ -672,7 +672,7 @@ if results.get("success"):
 
 ---
 ## Function - LDAP Utilities: Set Password
-A function that allows you to set a new password for an LDAP entry given the entry's DN
+A function that allows you to set a new password for an LDAP entry given the entry's DN. To use this you have to connect to the LDAP server using ssl.
 
  ![screenshot: fn-ldap-utilities-set-password ](./doc/screenshots/fn-ldap-utilities-set-password.png)
 
@@ -684,8 +684,9 @@ A function that allows you to set a new password for an LDAP entry given the ent
 | `ldap_dn` | `text` | Yes | `CN=user1,CN=Users,DC=dev,DC=example,DC=com` | Distinguished Name of entry you want to access |
 | `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
 | `ldap_new_auto_password_len` | `number` | No | `12` | Length of password to generate |
+| `ldap_old_password` | `text` | No | `-` | The current ldap user password. This is required if user has a password currently set. |
 | `ldap_new_password` | `text` | No | `-` | The new password you want to set for the entry |
-| `ldap_return_new_password` | `boolean` | No | `-` | - |
+| `ldap_return_new_password` | `boolean` | No | `-` | True or false to return the new password. |
 
 </p>
 </details>
@@ -697,27 +698,29 @@ A function that allows you to set a new password for an LDAP entry given the ent
 
 ```python
 results = {
-  "version": "1.0",
+  "version": 2.0,
   "success": true,
   "reason": null,
-  "content": null,
-  "raw": "null",
+  "content": {
+    "user_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_new_password": null
+  },
+  "raw": null,
   "inputs": {
-    "ldap_domain_name": "Domain1",
-    "ldap_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
-    "ldap_new_password": "65zQ24h7Bx?i",
-    "ldap_return_new_password": true,
-    "ldap_new_auto_password_len": 12
+    "ldap_domain_name": "Domain2",
+    "ldap_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_new_password": "superDuperSecret@9",
+    "ldap_return_new_password": false,
+    "ldap_old_password": "Passw0rd"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-ldap-utilities",
-    "package_version": "2.0.0",
+    "package_version": "2.1.2",
     "host": "local",
-    "execution_time_ms": 0,
-    "timestamp": "2022-05-19 14:52:55"
-  },
-  "user_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com"
+    "execution_time_ms": 10756,
+    "timestamp": "2023-08-10 10:39:08"
+  }
 }
 ```
 
@@ -733,6 +736,7 @@ results = playbook.functions.results.search_results
 # which will be the DN of the account you want to set a Set a New Password for
 inputs.ldap_domain_name = results.get("inputs", {}).get("ldap_domain_name")
 inputs.ldap_dn = results.get("content", {}).get("entries", [])[0]["dn"]
+inputs.ldap_old_password = playbook.inputs.ldap_user_old_password
 inputs.ldap_new_password = playbook.inputs.ldap_user_new_password
 pass_len = playbook.inputs.ldap_new_auto_password_length
 if pass_len:
