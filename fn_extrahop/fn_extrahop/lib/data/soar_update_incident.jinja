@@ -2,7 +2,10 @@
   {# JINJA template for updating a SOAR incident from an ExtraHop detection. #}
   "name": "ExtraHop detection - {{ title }}",
   {# Remove escapes and backticks unnecessary for payload, introduced by api for some detections. #}
-  "description": "{{ description | replace('"', '\\"') | replace('\\-', '-') | replace('\\.', '.') | replace('`', '') }}",
+  "description": {
+    "format": "html",
+    "content": {{description | e | replace('\n','<br>')  | replace('\_', '_') | replace ('\.', '.') | tojson}}
+  },
 {% if end_time %}
   "end_date": {{ end_time }},
 {% endif %}
@@ -18,6 +21,7 @@
 {% endif %}
   "properties": {
     "extrahop_update_time": {{ update_time }},
+    "extrahop_mod_time": {{ mod_time }},
      {% if end_time %}
         "extrahop_end_time": {{ end_time }},
      {% endif %}
@@ -26,6 +30,6 @@
     "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",
     "extrahop_assignee": "{{ assignee | string |soar_substitute('{"None": "None"}') }}",
     "extrahop_detection_updated": {{ epoch_now }},
-    "extrahop_update_notification": "<span style='color:red;'>The ExtraHop Detection has been updated.</span><br><div>To refresh the incident run the action: Example: Extrahop Reveal(x) refresh incident.<div/>"
+    "extrahop_update_notification": "<span style='color:red;'>The ExtraHop Detection has been updated.</span><br><div>To refresh the case run the playbook: Extrahop Reveal(x) Refresh Case.<div/>"
   }
 }

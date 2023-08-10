@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult

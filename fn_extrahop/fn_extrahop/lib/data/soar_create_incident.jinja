@@ -2,7 +2,10 @@
   {# JINJA template for creating a new SOAR incident from an ExtraHop detection. #}
   "name": "ExtraHop detection - {{ title }}",
   {# Remove escapes and backticks unnecessary for payload, introduced by api for some detections. #}
-  "description": "{{ description | replace('"', '\\"') | replace('\\-', '-') | replace('\\.', '.') | replace('`', '') }}",
+  "description": {
+    "format": "html",
+    "content": {{description | e | replace('\n','<br>')  | replace('\_', '_') | replace ('\.', '.') | tojson}}
+  },
   {# start_date cannot be after discovered_date #}
   "discovered_date": {{ start_time }},
   "start_date": {{ start_time }},
@@ -18,6 +21,7 @@
 {% endif %}
   "properties": {
     "extrahop_detection_id": {{ id }},
+    "extrahop_mod_time": {{ mod_time }},
     "extrahop_update_time": {{ update_time }},
      {% if end_time %}
         "extrahop_end_time": {{ end_time }},
@@ -26,7 +30,7 @@
     "extrahop_status": "{{ status | string |soar_substitute('{"None": "None"}') }}",
     "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",
     "extrahop_assignee": "{{ assignee | string |soar_substitute('{"None": "None"}') }}",
-    "extrahop_detection_link": "<a target='blank' href='{{ detection_url }}'>ExtraHop detection</a>",
+    "extrahop_detection_link": "<a target='blank' href='{{ detection_url }}'>ExtraHop detection - {{ id }}</a>",
     "extrahop_console_url": "{{ console_url }}",
     "extrahop_site_name": "{{ network.name }}",
     "extrahop_site_uuid": "{{ network.appliance_uuid }}"

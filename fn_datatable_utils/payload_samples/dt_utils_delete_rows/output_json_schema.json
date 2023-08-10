@@ -30,7 +30,10 @@
         "dt_utils_datatable_api_name": {
           "type": "string"
         },
-        "dt_utils_rows_ids": {
+        "dt_utils_search_value": {
+          "type": "string"
+        },
+        "dt_utils_search_column": {
           "type": "string"
         }
       }

@@ -17,98 +17,99 @@
           "items": {
             "type": "object",
             "properties": {
-              "mod_time": {
+              "analysis_level": {
                 "type": "integer"
               },
-              "node_id": {},
-              "id": {
+              "custom_model": {},
+              "dns_name": {
+                "type": "string"
+              },
+              "ipaddr6": {},
+              "custom_criticality": {},
+              "custom_name": {},
+              "cdp_name": {
+                "type": "string"
+              },
+              "vendor": {},
+              "ipaddr4": {
+                "type": "string"
+              },
+              "vlanid": {
                 "type": "integer"
               },
-              "extrahop_id": {
+              "macaddr": {
                 "type": "string"
               },
-              "discovery_id": {
+              "auto_role": {
                 "type": "string"
               },
-              "display_name": {
+              "dhcp_name": {
                 "type": "string"
               },
-              "description": {},
+              "default_name": {
+                "type": "string"
+              },
+              "vpc_id": {},
+              "custom_type": {
+                "type": "string"
+              },
+              "subnet_id": {},
+              "cloud_account": {},
+              "custom_make": {},
               "user_mod_time": {
                 "type": "integer"
               },
               "discover_time": {
                 "type": "integer"
               },
-              "vlanid": {
+              "mod_time": {
                 "type": "integer"
-              },
-              "parent_id": {},
-              "macaddr": {
-                "type": "string"
-              },
-              "vendor": {},
-              "is_l3": {
-                "type": "boolean"
-              },
-              "ipaddr4": {
-                "type": "string"
-              },
-              "ipaddr6": {},
-              "device_class": {
-                "type": "string"
-              },
-              "default_name": {
-                "type": "string"
-              },
-              "custom_name": {},
-              "cdp_name": {
-                "type": "string"
-              },
-              "dhcp_name": {
-                "type": "string"
-              },
-              "netbios_name": {
-                "type": "string"
-              },
-              "dns_name": {
-                "type": "string"
-              },
-              "custom_type": {
-                "type": "string"
-              },
-              "auto_role": {
-                "type": "string"
-              },
-              "analysis_level": {
-                "type": "integer"
-              },
-              "analysis": {
-                "type": "string"
               },
               "role": {
                 "type": "string"
               },
+              "display_name": {
+                "type": "string"
+              },
+              "last_seen_time": {},
               "on_watchlist": {
                 "type": "boolean"
               },
-              "last_seen_time": {
-                "type": "integer"
-              },
-              "model": {},
-              "model_override": {},
-              "custom_make": {},
-              "custom_model": {},
               "critical": {
                 "type": "boolean"
               },
-              "custom_criticality": {},
-              "cloud_instance_id": {},
-              "cloud_instance_type": {},
+              "discovery_id": {
+                "type": "string"
+              },
+              "node_id": {
+                "type": "integer"
+              },
+              "extrahop_id": {
+                "type": "string"
+              },
               "cloud_instance_name": {},
-              "cloud_account": {},
-              "vpc_id": {},
-              "subnet_id": {}
+              "cloud_instance_description": {},
+              "cloud_instance_type": {},
+              "cloud_instance_id": {},
+              "model_override": {},
+              "model": {},
+              "netbios_name": {
+                "type": "string"
+              },
+              "device_class": {
+                "type": "string"
+              },
+              "is_l3": {
+                "type": "boolean"
+              },
+              "parent_id": {},
+              "description": {},
+              "id": {
+                "type": "integer"
+              },
+              "analysis": {
+                "type": "string"
+              }
             }
           }
         }

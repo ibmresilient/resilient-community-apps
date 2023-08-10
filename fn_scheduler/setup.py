@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     display_name='Scheduler',
     name='fn_scheduler',
-    version='2.0.0',
+    version='2.1.1',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
@@ -32,11 +32,11 @@ setup(
             3) Pause and resume scheduled job<br>
             4) Removing a scheduled job""",
     install_requires=[
-        'resilient_circuits>=42.0.0',
+        'resilient_circuits>=46.0.0',
         'pytz',
         "APScheduler < 3.9;python_version < '3.6'",
         "APScheduler >= 3.9;python_version >= '3.6'",
-        'SQLAlchemy>=1.3.8',
+        'SQLAlchemy[postgresql]>=1.3.8',
         'python-dateutil>=2.8.1'
     ],
     extras_require={
