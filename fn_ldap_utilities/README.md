@@ -9,10 +9,10 @@
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
-  - [Endpoint Developed With](#endpoint-developed-with)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+  - [2.0.0 Changes](#200-changes)
   - [Custom Layouts](#custom-layouts)
 - [Function - LDAP Utilities: Add](#function---ldap-utilities-add)
 - [Function - LDAP Utilities: Add to Group(s)](#function---ldap-utilities-add-to-groups)
@@ -29,8 +29,9 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.2 | 08/2023 | Bug fix for set password function |
 | 2.1.1 | 06/2023 | Bug fix for CP4S |
-| 2.1.0 | 04/2023 | <ul><li>Update search function to perform a paged search.</li><li>Fix bug in set password function.</li><li>Convert all Rules and Workflows to Playbooks.</li></ul>
+| 2.1.0 | 04/2023 | <ul><li>Update search function to perform a paged search.</li><li>Fix bug in set password function.</li><li>Convert all Rules and Workflows to Playbooks.</li></ul> |
 | 2.0.1 | 07/2022 | Fix helper.py so that ldap_connect_timeout is not required in app.config |
 | 2.0.0 | 04/2022 | <ul><li>Add ability to have multiple LDAP Domains</li><li>New rule to add users, groups, organizational units, etc.</li></ul>|
 | 1.1.1 | 07/2021 | Support added for App Host |

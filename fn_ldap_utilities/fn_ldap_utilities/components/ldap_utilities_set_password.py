@@ -7,6 +7,7 @@ from random import sample
 from string import ascii_letters, digits
 
 from ldap3 import MODIFY_REPLACE
+from ldap3.extend.microsoft.modifyPassword import ad_modify_password
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function)
 from resilient_lib import validate_fields
@@ -32,6 +33,7 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.ldap_domain_name
             -   fn_inputs.ldap_dn
+            -   fn_inputs.ldap_old_password
             -   fn_inputs.ldap_new_password
             -   fn_inputs.ldap_new_auto_password_len
             -   fn_inputs.ldap_return_new_password
@@ -44,6 +46,7 @@ class FunctionComponent(AppFunctionComponent):
         # Get function inputs
         ldap_domain_name = getattr(fn_inputs, "ldap_domain_name", "") # text
         ldap_dn = getattr(fn_inputs, "ldap_dn") # text (required)
+        ldap_old_password = getattr(fn_inputs, "ldap_old_password") # text (required)
         ldap_new_password = getattr(fn_inputs, "ldap_new_password") # text
         ldap_new_auto_password_len = getattr(fn_inputs, "ldap_new_auto_password_len", DEFAULT_MAX_PASSWORD_LEN) # int Default length is 12
         ldap_return_new_password = getattr(fn_inputs, "ldap_return_new_password") # boolean
@@ -82,7 +85,7 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             yield self.status_message("Attempting to change password")
-            success = c.modify(ldap_dn, {'userPassword': [(MODIFY_REPLACE, [ldap_new_password])]})
+            success = ad_modify_password(c, ldap_dn, ldap_new_password, ldap_old_password)
 
         except Exception as err:
             self.LOG.error(f"Error: {err}")
