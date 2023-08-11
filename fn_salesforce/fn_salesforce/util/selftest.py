@@ -36,10 +36,9 @@ def selftest_function(opts):
 
     try:
         app_configs = opts.get(PACKAGE_NAME, {})
-        rc = RequestsCommon(opts, app_configs)
 
         # If we can create an AppCommon object we are able to get an access token.
-        app_common = AppCommon(rc, PACKAGE_NAME, app_configs)
+        app_common = AppCommon(PACKAGE_NAME, app_configs)
         reason = None
         state = "success"
     except IntegrationError as err:

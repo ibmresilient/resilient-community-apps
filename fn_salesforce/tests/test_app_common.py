@@ -41,7 +41,7 @@ def fx_setup_mock_api():
     with requests_mock.Mocker() as mock_api:
         mock_api.register_uri("POST", "https://company.develop.my.salesforce.com/services/oauth2/token", json=load_json(PATH_TOKEN_MOCK), status_code=200)
         rc = RequestsCommon()
-        yield AppCommon(rc, PACKAGE_NAME, APP_CONFIG), mock_api
+        yield AppCommon(PACKAGE_NAME, APP_CONFIG), mock_api
 
 def test_make_headers(fx_setup_mock_api):
     app_common = fx_setup_mock_api[0]
