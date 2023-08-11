@@ -1,0 +1,350 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/tester183/modules/Microsoft.PowerShell.Management/activities/Add-Computer",
+    "name": "Add-Computer",
+    "type": null,
+    "properties": {
+      "definition": "",
+      "description": "\nAdd-Computer [-DomainName] <string> -Credential <pscredential> [-ComputerName <string[]>] [-LocalCredential <pscredential>] [-UnjoinDomainCredential <pscredential>] [-OUPath <string>] [-Server <string>] [-Unsecure] [-Options <JoinOptions>] [-Restart] [-PassThru] [-NewName <string>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]\n\nAdd-Computer [-WorkgroupName] <string> [-ComputerName <string[]>] [-LocalCredential <pscredential>] [-Credential <pscredential>] [-Restart] [-PassThru] [-NewName <string>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]\n ^https://go.microsoft.com/fwlink/?LinkID=135194^",
+      "type": null,
+      "parameterSets": [
+        {
+          "name": "Domain",
+          "parameters": [
+            {
+              "name": "PassThru",
+              "type": "System.Management.Automation.SwitchParameter",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Restart",
+              "type": "System.Management.Automation.SwitchParameter",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "UnjoinDomainCredential",
+              "type": "System.Management.Automation.PSCredential",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Confirm",
+              "type": "System.Management.Automation.SwitchParameter",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Force",
+              "type": "System.Management.Automation.SwitchParameter",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "LocalCredential",
+              "type": "System.Management.Automation.PSCredential",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "OUPath",
+              "type": "System.String",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Server",
+              "type": "System.String",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "WhatIf",
+              "type": "System.Management.Automation.SwitchParameter",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Options",
+              "type": "Microsoft.PowerShell.Commands.JoinOptions",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "ComputerName",
+              "type": "System.String[]",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": true,
+              "valueFromPipelineByPropertyName": true,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Credential",
+              "type": "System.Management.Automation.PSCredential",
+              "isMandatory": true,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "NewName",
+              "type": "System.String",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": true,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Unsecure",
+              "type": "System.Management.Automation.SwitchParameter",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "DomainName",
+              "type": "System.String",
+              "isMandatory": true,
+              "isDynamic": false,
+              "position": 0,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            }
+          ]
+        },
+        {
+          "name": "Workgroup",
+          "parameters": [
+            {
+              "name": "PassThru",
+              "type": "System.Management.Automation.SwitchParameter",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Force",
+              "type": "System.Management.Automation.SwitchParameter",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Confirm",
+              "type": "System.Management.Automation.SwitchParameter",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Credential",
+              "type": "System.Management.Automation.PSCredential",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "LocalCredential",
+              "type": "System.Management.Automation.PSCredential",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "WhatIf",
+              "type": "System.Management.Automation.SwitchParameter",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "ComputerName",
+              "type": "System.String[]",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": true,
+              "valueFromPipelineByPropertyName": true,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "NewName",
+              "type": "System.String",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": true,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Restart",
+              "type": "System.Management.Automation.SwitchParameter",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "WorkgroupName",
+              "type": "System.String",
+              "isMandatory": true,
+              "isDynamic": false,
+              "position": 0,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            }
+          ]
+        }
+      ],
+      "outputTypes": [
+        {
+          "name": "Microsoft.PowerShell.Commands.ComputerChangeInfo",
+          "type": "Microsoft.PowerShell.Commands.ComputerChangeInfo"
+        }
+      ],
+      "creationTime": "2023-07-27T08:32:28.12+00:00",
+      "lastModifiedTime": "2023-07-27T08:32:28.12+00:00"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "activity_name": "Add-Computer",
+    "account_name": "tester183",
+    "resource_group_name": "DemoAssets",
+    "module_name": "Microsoft.PowerShell.Management"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-azure-automation-utilities",
+    "package_version": "1.0.0",
+    "host": "Richards-MBP-2.hsd1.ma.comcast.net",
+    "execution_time_ms": 1618,
+    "timestamp": "2023-07-28 12:11:57"
+  }
+}
