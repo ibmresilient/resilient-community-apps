@@ -122,8 +122,7 @@ class PollerComponent(AppFunctionComponent):
                            "consumer_key",
                            "consumer_secret",
                            "polling_interval",
-                           "polling_lookback",
-                           "verify"
+                           "polling_lookback"
                            ]
 
         super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)

@@ -53,7 +53,13 @@ polling_filters=
 polling_record_type_names=
 # 
 # OPTIONAL: Specify a timeout value value for accessing the Salesforce REST API
-timeout=60
+# timeout=60
+#
+#
+# OPTIONAL: Override value for templates used for creating/updating/closing SOAR cases
+# soar_create_case_template=
+# soar_close_case_template=
+# soar_update_case_template=
 #
 # OPTIONAL: use the 'verify' config to set a value for SSL verification
 # if 'False', no SSL will be used. if 'True' or unset, the default SSL root cert
