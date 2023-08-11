@@ -25,7 +25,7 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["incident_id", "salesforce_case_payload"], fn_inputs)
 
-        app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
+        app_common = AppCommon(self.PACKAGE_NAME, self.options)
 
         salesforce_case_payload = json.loads(fn_inputs.salesforce_case_payload)
 

@@ -29,7 +29,7 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["salesforce_contact_id"], fn_inputs)
 
         if fn_inputs.salesforce_contact_id:
-            app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
+            app_common = AppCommon(self.PACKAGE_NAME, self.options)
 
             response = app_common.get_contact(fn_inputs.salesforce_contact_id)
         else:
