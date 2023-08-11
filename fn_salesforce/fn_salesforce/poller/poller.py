@@ -45,7 +45,7 @@ def init_app(rc, options):
     :rtype: ``AppCommon``
     """
     # initialize the class for making API calls to your endpoint
-    app_common = AppCommon(rc, PACKAGE_NAME, options)
+    app_common = AppCommon(PACKAGE_NAME, options)
 
     # Form the string used to query case by RecordTypeId. 
     # This is an expensive operation, so only do it once when the poller starts up.

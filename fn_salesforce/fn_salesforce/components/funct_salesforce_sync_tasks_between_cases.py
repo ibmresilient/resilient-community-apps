@@ -29,7 +29,7 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["incident_id", "salesforce_case_id"], fn_inputs)
 
-        app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
+        app_common = AppCommon(self.PACKAGE_NAME, self.options)
         rest_client = self.rest_client()
         soar_common = SOARCommon(rest_client)
         

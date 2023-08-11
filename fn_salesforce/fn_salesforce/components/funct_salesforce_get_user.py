@@ -28,7 +28,7 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["salesforce_user_id"], fn_inputs)
 
-        app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
+        app_common = AppCommon(self.PACKAGE_NAME, self.options)
 
         response = app_common.get_user(fn_inputs.salesforce_user_id)
 

@@ -33,7 +33,7 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["salesforce_case_id", "salesforce_task_payload"], fn_inputs)
 
-        app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
+        app_common = AppCommon(self.PACKAGE_NAME, self.options)
 
         salesforce_task_payload = json.loads(fn_inputs.salesforce_task_payload)
 

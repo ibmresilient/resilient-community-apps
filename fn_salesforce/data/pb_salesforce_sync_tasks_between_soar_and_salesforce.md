@@ -59,7 +59,7 @@ Write results of task sync to note.
 results = playbook.functions.results.sync_task_results
 
 if results.success:
-  note_text = "<b>Salesforce: Sync Tasks</b> added:<br> {1} tasks in Salesforce<br> {1} tasks in SOAR".format(results.content.task_count_to_salesforce, results.content.task_count_to_soar)
+  note_text = "<b>Salesforce: Sync Tasks</b> added:<br> {0} tasks in Salesforce<br> {1} tasks in SOAR".format(results.content.task_count_to_salesforce, results.content.task_count_to_soar)
 else:
   note_text = "<b>Salesforce: Sync Tasks</b> FAILED and was unable to add tasks"
 

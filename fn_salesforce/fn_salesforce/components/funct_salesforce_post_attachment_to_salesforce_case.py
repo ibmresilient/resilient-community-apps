@@ -45,7 +45,7 @@ class FunctionComponent(AppFunctionComponent):
         log.info("artifact_id: %s", artifact_id)
         log.info("salesforce_case_id: %s", salesforce_case_id)
 
-        app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
+        app_common = AppCommon(self.PACKAGE_NAME, self.options)
         rest_client = self.rest_client()
 
         # Get the file attachment name
