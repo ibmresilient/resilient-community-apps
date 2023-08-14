@@ -36,11 +36,14 @@ Execute a runbook on Azure
 
 ### Function-Input Script
 ```python
-inputs.account_name = "automation1"
-inputs.input_parameters = "{'runbook_name': 'get_all_runbooks'}"
-inputs.resource_group_name = "DemoAssets"
-inputs.runbook_name = "Get_given_runbook"
-inputs.time_to_wait = 20
+inputs.account_name = playbook.inputs.azure_automation_account_name
+inputs.input_parameters = playbook.inputs.azure_automation_runbook_input_parameters
+inputs.resource_group_name = playbook.inputs.azure_resource_group
+inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
+
+time_to_wait = getattr(playbook.inputs, "time_to_wait")
+# If no time_to_wait is given then default to 30 seconds
+inputs.time_to_wait = time_to_wait if time_to_wait else 30
 ```
 
 ---
