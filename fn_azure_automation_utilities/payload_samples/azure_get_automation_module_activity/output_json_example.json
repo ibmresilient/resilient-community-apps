@@ -3,23 +3,35 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/tester183/modules/Microsoft.PowerShell.Management/activities/Add-Computer",
-    "name": "Add-Computer",
+    "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Set-AzAdvisorConfiguration",
+    "name": "Set-AzAdvisorConfiguration",
     "type": null,
     "properties": {
       "definition": "",
-      "description": "\nAdd-Computer [-DomainName] <string> -Credential <pscredential> [-ComputerName <string[]>] [-LocalCredential <pscredential>] [-UnjoinDomainCredential <pscredential>] [-OUPath <string>] [-Server <string>] [-Unsecure] [-Options <JoinOptions>] [-Restart] [-PassThru] [-NewName <string>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]\n\nAdd-Computer [-WorkgroupName] <string> [-ComputerName <string[]>] [-LocalCredential <pscredential>] [-Credential <pscredential>] [-Restart] [-PassThru] [-NewName <string>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]\n ^https://go.microsoft.com/fwlink/?LinkID=135194^",
+      "description": "Updates or creates the Azure Advisor Configuration. ^https://docs.microsoft.com/powershell/module/az.advisor/set-azadvisorConfiguration^",
       "type": null,
       "parameterSets": [
         {
-          "name": "Domain",
+          "name": "InputObjectLowCpuExcludeParameterSet",
           "parameters": [
             {
-              "name": "PassThru",
+              "name": "DefaultProfile",
+              "type": "Microsoft.Azure.Commands.Common.Authentication.Abstractions.Core.IAzureContextContainer",
+              "isMandatory": false,
+              "isDynamic": false,
+              "position": -2147483648,
+              "valueFromPipeline": false,
+              "valueFromPipelineByPropertyName": false,
+              "valueFromRemainingArguments": false,
+              "description": null,
+              "validationSet": []
+            },
+            {
+              "name": "Exclude",
               "type": "System.Management.Automation.SwitchParameter",
               "isMandatory": false,
               "isDynamic": false,
-              "position": -2147483648,
+              "position": 2,
               "valueFromPipeline": false,
               "valueFromPipelineByPropertyName": false,
               "valueFromRemainingArguments": false,
@@ -27,83 +39,11 @@
               "validationSet": []
             },
             {
-              "name": "Restart",
-              "type": "System.Management.Automation.SwitchParameter",
-              "isMandatory": false,
+              "name": "LowCpuThreshold",
+              "type": "System.Int32",
+              "isMandatory": true,
               "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": false,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "UnjoinDomainCredential",
-              "type": "System.Management.Automation.PSCredential",
-              "isMandatory": false,
-              "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": false,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "Confirm",
-              "type": "System.Management.Automation.SwitchParameter",
-              "isMandatory": false,
-              "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": false,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "Force",
-              "type": "System.Management.Automation.SwitchParameter",
-              "isMandatory": false,
-              "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": false,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "LocalCredential",
-              "type": "System.Management.Automation.PSCredential",
-              "isMandatory": false,
-              "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": false,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "OUPath",
-              "type": "System.String",
-              "isMandatory": false,
-              "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": false,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "Server",
-              "type": "System.String",
-              "isMandatory": false,
-              "isDynamic": false,
-              "position": -2147483648,
+              "position": 0,
               "valueFromPipeline": false,
               "valueFromPipelineByPropertyName": false,
               "valueFromRemainingArguments": false,
@@ -123,71 +63,23 @@
               "validationSet": []
             },
             {
-              "name": "Options",
-              "type": "Microsoft.PowerShell.Commands.JoinOptions",
+              "name": "InputObject",
+              "type": "Microsoft.Azure.Commands.Advisor.Cmdlets.Models.PsAzureAdvisorConfigurationData",
               "isMandatory": false,
               "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": false,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "ComputerName",
-              "type": "System.String[]",
-              "isMandatory": false,
-              "isDynamic": false,
-              "position": -2147483648,
+              "position": 1,
               "valueFromPipeline": true,
-              "valueFromPipelineByPropertyName": true,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "Credential",
-              "type": "System.Management.Automation.PSCredential",
-              "isMandatory": true,
-              "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
               "valueFromPipelineByPropertyName": false,
               "valueFromRemainingArguments": false,
               "description": null,
               "validationSet": []
             },
             {
-              "name": "NewName",
-              "type": "System.String",
-              "isMandatory": false,
-              "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": true,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "Unsecure",
+              "name": "Confirm",
               "type": "System.Management.Automation.SwitchParameter",
               "isMandatory": false,
               "isDynamic": false,
               "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": false,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "DomainName",
-              "type": "System.String",
-              "isMandatory": true,
-              "isDynamic": false,
-              "position": 0,
               "valueFromPipeline": false,
               "valueFromPipelineByPropertyName": false,
               "valueFromRemainingArguments": false,
@@ -197,26 +89,26 @@
           ]
         },
         {
-          "name": "Workgroup",
+          "name": "InputObjectRgExcludeParameterSet",
           "parameters": [
             {
-              "name": "PassThru",
-              "type": "System.Management.Automation.SwitchParameter",
+              "name": "InputObject",
+              "type": "Microsoft.Azure.Commands.Advisor.Cmdlets.Models.PsAzureAdvisorConfigurationData",
               "isMandatory": false,
               "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
+              "position": 1,
+              "valueFromPipeline": true,
               "valueFromPipelineByPropertyName": false,
               "valueFromRemainingArguments": false,
               "description": null,
               "validationSet": []
             },
             {
-              "name": "Force",
+              "name": "Exclude",
               "type": "System.Management.Automation.SwitchParameter",
               "isMandatory": false,
               "isDynamic": false,
-              "position": -2147483648,
+              "position": 2,
               "valueFromPipeline": false,
               "valueFromPipelineByPropertyName": false,
               "valueFromRemainingArguments": false,
@@ -236,23 +128,11 @@
               "validationSet": []
             },
             {
-              "name": "Credential",
-              "type": "System.Management.Automation.PSCredential",
+              "name": "ResourceGroupName",
+              "type": "System.String",
               "isMandatory": false,
               "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": false,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "LocalCredential",
-              "type": "System.Management.Automation.PSCredential",
-              "isMandatory": false,
-              "isDynamic": false,
-              "position": -2147483648,
+              "position": 0,
               "valueFromPipeline": false,
               "valueFromPipelineByPropertyName": false,
               "valueFromRemainingArguments": false,
@@ -272,47 +152,11 @@
               "validationSet": []
             },
             {
-              "name": "ComputerName",
-              "type": "System.String[]",
+              "name": "DefaultProfile",
+              "type": "Microsoft.Azure.Commands.Common.Authentication.Abstractions.Core.IAzureContextContainer",
               "isMandatory": false,
               "isDynamic": false,
               "position": -2147483648,
-              "valueFromPipeline": true,
-              "valueFromPipelineByPropertyName": true,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "NewName",
-              "type": "System.String",
-              "isMandatory": false,
-              "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": true,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "Restart",
-              "type": "System.Management.Automation.SwitchParameter",
-              "isMandatory": false,
-              "isDynamic": false,
-              "position": -2147483648,
-              "valueFromPipeline": false,
-              "valueFromPipelineByPropertyName": false,
-              "valueFromRemainingArguments": false,
-              "description": null,
-              "validationSet": []
-            },
-            {
-              "name": "WorkgroupName",
-              "type": "System.String",
-              "isMandatory": true,
-              "isDynamic": false,
-              "position": 0,
               "valueFromPipeline": false,
               "valueFromPipelineByPropertyName": false,
               "valueFromRemainingArguments": false,
@@ -324,27 +168,27 @@
       ],
       "outputTypes": [
         {
-          "name": "Microsoft.PowerShell.Commands.ComputerChangeInfo",
-          "type": "Microsoft.PowerShell.Commands.ComputerChangeInfo"
+          "name": "Microsoft.Azure.Commands.Advisor.Cmdlets.Models.PsAzureAdvisorConfigurationData",
+          "type": "Microsoft.Azure.Commands.Advisor.Cmdlets.Models.PsAzureAdvisorConfigurationData"
         }
       ],
-      "creationTime": "2023-07-27T08:32:28.12+00:00",
-      "lastModifiedTime": "2023-07-27T08:32:28.12+00:00"
+      "creationTime": "2022-07-06T10:01:53.9133333+00:00",
+      "lastModifiedTime": "2022-07-06T10:01:53.9133333+00:00"
     }
   },
   "raw": null,
   "inputs": {
-    "activity_name": "Add-Computer",
-    "account_name": "tester183",
-    "resource_group_name": "DemoAssets",
-    "module_name": "Microsoft.PowerShell.Management"
+    "activity_name": "Set-AzAdvisorConfiguration",
+    "account_name": "automation1",
+    "resource_group_name": "demoassets",
+    "module_name": "Az.Advisor"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-azure-automation-utilities",
     "package_version": "1.0.0",
-    "host": "Richards-MBP-2.hsd1.ma.comcast.net",
-    "execution_time_ms": 1618,
-    "timestamp": "2023-07-28 12:11:57"
+    "host": "local",
+    "execution_time_ms": 2203,
+    "timestamp": "2023-08-14 10:52:19"
   }
 }
