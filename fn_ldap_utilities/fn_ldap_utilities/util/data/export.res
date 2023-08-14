@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1691679495641,
+  "export_date": 1692018277748,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -320,35 +320,6 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "c886d097-52d8-4281-a68a-988496f28d11",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
-      "export_key": "__function/ldap_old_password",
-      "hide_notification": false,
-      "id": 348,
-      "input_type": "text",
-      "internal": false,
-      "is_tracked": false,
-      "name": "ldap_old_password",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": null,
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "ldap_old_password",
-      "tooltip": "The current ldap user password",
-      "type_id": 11,
-      "uuid": "c935ce8f-f8de-44aa-ac90-edbc15bc6b45",
       "values": []
     },
     {
@@ -859,7 +830,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1691679307511,
+      "last_modified_time": 1692018245279,
       "name": "ldap_utilities_set_password",
       "output_description": {
         "content": null,
@@ -867,7 +838,7 @@
       },
       "tags": [],
       "uuid": "b75c2ee2-759b-4d01-9649-6ec46f6a646e",
-      "version": 3,
+      "version": 4,
       "view_items": [
         {
           "content": "bf1fbfd3-3b2d-4919-a4e2-0a22449d0921",
@@ -879,14 +850,6 @@
         },
         {
           "content": "c276dce4-c3c6-420e-8430-85ba7e388cf8",
-          "element": "field_uuid",
-          "field_type": "__function",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
-          "content": "c935ce8f-f8de-44aa-ac90-edbc15bc6b45",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1037,13 +1000,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 2,
+  "id": 3,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1691679494180,
+      "create_date": 1692018275887,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1052,7 +1015,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1691679494180,
+      "update_date": 1692018275887,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2041,8 +2004,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_53558c49_4278_4e05_954d_61a71d88f720\" isExecutable=\"true\" name=\"playbook_53558c49_4278_4e05_954d_61a71d88f720\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1yg0ig5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"LDAP Utilities: Set Password\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b75c2ee2-759b-4d01-9649-6ec46f6a646e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"results = playbook.functions.results.search_results\\n# Once the LDAP Utilities: Search completes, get the DN of the first entry\\n# which will be the DN of the account you want to set a Set a New Password for\\ninputs.ldap_domain_name = results.get(\\\"inputs\\\", {}).get(\\\"ldap_domain_name\\\")\\ninputs.ldap_dn = results.get(\\\"content\\\", {}).get(\\\"entries\\\", [])[0][\\\"dn\\\"]\\ninputs.ldap_old_password = playbook.inputs.ldap_user_old_password\\ninputs.ldap_new_password = playbook.inputs.ldap_user_new_password\\npass_len = playbook.inputs.ldap_new_auto_password_length\\nif pass_len:\\n  inputs.ldap_new_auto_password_len = pass_len\\ninputs.ldap_return_new_password = playbook.inputs.ldap_return_new_password\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"pass_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0nfw787\u003c/incoming\u003e\u003coutgoing\u003eFlow_04cx373\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"660de09d-1730-4761-b480-141ab608a9c3\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_04cx373\u003c/incoming\u003e\u003coutgoing\u003eFlow_13o7neh\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_04cx373\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_13o7neh\u003c/incoming\u003e\u003cincoming\u003eFlow_1xeywpz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_13o7neh\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Set the ldap_search_base and ldap_search_filter\\n# using the ldap_param wildcard then get the email\\n# address the user you want to set a new password for from the artifact\u0027s value\\ninputs.ldap_search_filter = \\\"(\u0026amp;(objectClass=person)(mail=%ldap_param%))\\\"\\ninputs.ldap_search_param =  artifact.value\\n\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif playbook.inputs.ldap_search_base:\\n  inputs.ldap_search_base = playbook.inputs.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif playbook.inputs.ldap_domain_name:\\n    inputs.ldap_domain_name = playbook.inputs.ldap_domain_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1yg0ig5\u003c/incoming\u003e\u003coutgoing\u003eFlow_01yxuaw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1yg0ig5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cexclusiveGateway default=\"Flow_1mrqn4f\" id=\"ConditionPoint_5\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_01yxuaw\u003c/incoming\u003e\u003coutgoing\u003eFlow_0nfw787\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1mrqn4f\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_01yxuaw\" sourceRef=\"ServiceTask_4\" targetRef=\"ConditionPoint_5\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"No search results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4546bfdd-a324-47b2-9f14-0b6a466374e8\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mrqn4f\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xeywpz\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1xeywpz\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_0nfw787\" name=\"if_results\" sourceRef=\"ConditionPoint_5\" targetRef=\"ServiceTask_1\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"if_results\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"results = playbook.functions.results.search_results\\nif results.get(\\\"success\\\"):\\n  result = True\\nelse:\\n  result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_1mrqn4f\" name=\"Else\" sourceRef=\"ConditionPoint_5\" targetRef=\"ScriptTask_6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_53558c49_4278_4e05_954d_61a71d88f720\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mrqn4f\" id=\"Flow_1mrqn4f_di\"\u003e\u003comgdi:waypoint x=\"822\" y=\"360\"/\u003e\u003comgdi:waypoint x=\"1070\" y=\"360\"/\u003e\u003comgdi:waypoint x=\"1070\" y=\"478\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"944\" y=\"338\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0nfw787\" id=\"Flow_0nfw787_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"386\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"478\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"46\" x=\"677\" y=\"415\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xeywpz\" id=\"Flow_1xeywpz_di\"\u003e\u003comgdi:waypoint x=\"1070\" y=\"562\"/\u003e\u003comgdi:waypoint x=\"1070\" y=\"850\"/\u003e\u003comgdi:waypoint x=\"766\" y=\"850\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01yxuaw\" id=\"Flow_01yxuaw_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"334\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1yg0ig5\" id=\"Flow_1yg0ig5_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13o7neh\" id=\"Flow_13o7neh_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"742\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"824\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04cx373\" id=\"Flow_04cx373_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"562\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"658\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"609\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"478\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"658\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"824\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_5\" id=\"ConditionPoint_5_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"578\" y=\"334\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"972\" y=\"478\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 5,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_53558c49_4278_4e05_954d_61a71d88f720\" isExecutable=\"true\" name=\"playbook_53558c49_4278_4e05_954d_61a71d88f720\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1yg0ig5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"LDAP Utilities: Set Password\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b75c2ee2-759b-4d01-9649-6ec46f6a646e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"results = playbook.functions.results.search_results\\n# Once the LDAP Utilities: Search completes, get the DN of the first entry\\n# which will be the DN of the account you want to set a Set a New Password for\\ninputs.ldap_domain_name = results.get(\\\"inputs\\\", {}).get(\\\"ldap_domain_name\\\")\\ninputs.ldap_dn = results.get(\\\"content\\\", {}).get(\\\"entries\\\", [])[0][\\\"dn\\\"]\\ninputs.ldap_new_password = playbook.inputs.ldap_user_new_password\\npass_len = playbook.inputs.ldap_new_auto_password_length\\nif pass_len:\\n  inputs.ldap_new_auto_password_len = pass_len\\ninputs.ldap_return_new_password = playbook.inputs.ldap_return_new_password\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"pass_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0nfw787\u003c/incoming\u003e\u003coutgoing\u003eFlow_04cx373\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"660de09d-1730-4761-b480-141ab608a9c3\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_04cx373\u003c/incoming\u003e\u003coutgoing\u003eFlow_13o7neh\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_04cx373\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_13o7neh\u003c/incoming\u003e\u003cincoming\u003eFlow_1xeywpz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_13o7neh\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"LDAP Utilities: Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"892075c1-64ba-46c9-aba1-f1f1aa040bb7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Set the ldap_search_base and ldap_search_filter\\n# using the ldap_param wildcard then get the email\\n# address the user you want to set a new password for from the artifact\u0027s value\\ninputs.ldap_search_filter = \\\"(\u0026amp;(objectClass=person)(mail=%ldap_param%))\\\"\\ninputs.ldap_search_param =  artifact.value\\n\\n# If the incident field ldap_base_dn contains a value then set ldap_search_base to that value\\nif incident.properties.ldap_base_dn:\\n  inputs.ldap_search_base = incident.properties.ldap_base_dn\\n# If a value is given in the rule ldap_search_base field then set ldap_search_base to that value\\nif playbook.inputs.ldap_search_base:\\n  inputs.ldap_search_base = playbook.inputs.ldap_search_base\\n\\n# If the incident field ldap_domain_name contains a value then set ldap_domain_name to that value\\nif incident.properties.ldap_domain_name:\\n  inputs.ldap_domain_name = incident.properties.ldap_domain_name\\n# If a value is given in the rule ldap_domain_name field then set ldap_domain_name to that value\\nif playbook.inputs.ldap_domain_name:\\n    inputs.ldap_domain_name = playbook.inputs.ldap_domain_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"search_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1yg0ig5\u003c/incoming\u003e\u003coutgoing\u003eFlow_01yxuaw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1yg0ig5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cexclusiveGateway default=\"Flow_1mrqn4f\" id=\"ConditionPoint_5\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_01yxuaw\u003c/incoming\u003e\u003coutgoing\u003eFlow_0nfw787\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1mrqn4f\u003c/outgoing\u003e\u003c/exclusiveGateway\u003e\u003csequenceFlow id=\"Flow_01yxuaw\" sourceRef=\"ServiceTask_4\" targetRef=\"ConditionPoint_5\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"No search results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4546bfdd-a324-47b2-9f14-0b6a466374e8\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mrqn4f\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xeywpz\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1xeywpz\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_0nfw787\" name=\"if_results\" sourceRef=\"ConditionPoint_5\" targetRef=\"ServiceTask_1\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"if_results\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"results = playbook.functions.results.search_results\\nif results.get(\\\"success\\\"):\\n  result = True\\nelse:\\n  result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_1mrqn4f\" name=\"Else\" sourceRef=\"ConditionPoint_5\" targetRef=\"ScriptTask_6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_53558c49_4278_4e05_954d_61a71d88f720\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mrqn4f\" id=\"Flow_1mrqn4f_di\"\u003e\u003comgdi:waypoint x=\"822\" y=\"360\"/\u003e\u003comgdi:waypoint x=\"1070\" y=\"360\"/\u003e\u003comgdi:waypoint x=\"1070\" y=\"478\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"944\" y=\"338\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0nfw787\" id=\"Flow_0nfw787_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"386\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"478\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"46\" x=\"677\" y=\"415\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xeywpz\" id=\"Flow_1xeywpz_di\"\u003e\u003comgdi:waypoint x=\"1070\" y=\"562\"/\u003e\u003comgdi:waypoint x=\"1070\" y=\"850\"/\u003e\u003comgdi:waypoint x=\"766\" y=\"850\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01yxuaw\" id=\"Flow_01yxuaw_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"334\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1yg0ig5\" id=\"Flow_1yg0ig5_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13o7neh\" id=\"Flow_13o7neh_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"742\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"824\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04cx373\" id=\"Flow_04cx373_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"562\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"658\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"609\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"478\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"658\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"634\" y=\"824\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_5\" id=\"ConditionPoint_5_di\" isMarkerVisible=\"true\"\u003e\u003comgdc:Bounds height=\"52\" width=\"243.6\" x=\"578\" y=\"334\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"972\" y=\"478\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1691583529572,
       "creator_principal": {
@@ -2208,35 +2171,6 @@
             "type_id": 1005,
             "uuid": "853d54e9-049b-4e66-955f-982d303c990f",
             "values": []
-          },
-          "ldap_user_old_password": {
-            "allow_default_value": false,
-            "blank_option": false,
-            "calculated": false,
-            "changeable": true,
-            "chosen": false,
-            "default_chosen_by_server": false,
-            "deprecated": false,
-            "export_key": "playbook_53558c49_4278_4e05_954d_61a71d88f720/ldap_user_old_password",
-            "hide_notification": false,
-            "id": 349,
-            "input_type": "text",
-            "internal": false,
-            "is_tracked": false,
-            "name": "ldap_user_old_password",
-            "operation_perms": {},
-            "operations": [],
-            "placeholder": "",
-            "prefix": null,
-            "read_only": false,
-            "rich_text": false,
-            "tags": [],
-            "templates": [],
-            "text": "LDAP User Old Password",
-            "tooltip": "The current password for the LDAP user",
-            "type_id": 1005,
-            "uuid": "03bdfc0c-22bf-4efb-b823-4e7c3fdfa861",
-            "values": []
           }
         },
         "for_actions": false,
@@ -2268,7 +2202,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1691587865293,
+      "last_modified_time": 1692018219910,
       "local_scripts": [
         {
           "actions": [],
@@ -2334,14 +2268,6 @@
             "step_label": null
           },
           {
-            "content": "03bdfc0c-22bf-4efb-b823-4e7c3fdfa861",
-            "element": "field_uuid",
-            "field_type": "playbook_53558c49_4278_4e05_954d_61a71d88f720",
-            "show_if": null,
-            "show_link_header": false,
-            "step_label": null
-          },
-          {
             "content": "853d54e9-049b-4e66-955f-982d303c990f",
             "element": "field_uuid",
             "field_type": "playbook_53558c49_4278_4e05_954d_61a71d88f720",
@@ -2380,7 +2306,7 @@
       "tags": [],
       "type": "default",
       "uuid": "53558c49-4278-4e05-954d-61a71d88f720",
-      "version": 7
+      "version": 9
     },
     {
       "activation_type": "manual",
@@ -2931,10 +2857,10 @@
     }
   ],
   "server_version": {
-    "build_number": 16,
-    "major": 48,
-    "minor": 2,
-    "version": "48.2.16"
+    "build_number": 0,
+    "major": 45,
+    "minor": 0,
+    "version": "45.0.0"
   },
   "tags": [],
   "task_order": [],

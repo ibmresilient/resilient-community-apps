@@ -41,7 +41,6 @@ results = playbook.functions.results.search_results
 # which will be the DN of the account you want to set a Set a New Password for
 inputs.ldap_domain_name = results.get("inputs", {}).get("ldap_domain_name")
 inputs.ldap_dn = results.get("content", {}).get("entries", [])[0]["dn"]
-inputs.ldap_old_password = playbook.inputs.ldap_user_old_password
 inputs.ldap_new_password = playbook.inputs.ldap_user_new_password
 pass_len = playbook.inputs.ldap_new_auto_password_length
 if pass_len:

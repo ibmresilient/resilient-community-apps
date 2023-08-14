@@ -11,8 +11,7 @@
     "ldap_domain_name": "Domain2",
     "ldap_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
     "ldap_new_password": "superDuperSecret@9",
-    "ldap_return_new_password": false,
-    "ldap_old_password": "Passw0rd"
+    "ldap_return_new_password": false
   },
   "metrics": {
     "version": "1.0",

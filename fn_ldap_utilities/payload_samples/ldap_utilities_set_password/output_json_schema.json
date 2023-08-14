@@ -33,9 +33,6 @@
         },
         "ldap_return_new_password": {
           "type": "boolean"
-        },
-        "ldap_old_password": {
-          "type": "string"
         }
       }
     },

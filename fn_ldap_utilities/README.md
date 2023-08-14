@@ -41,6 +41,14 @@
 * For customers upgrading from a previous release to 2.0.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [2.0.0 Changes](#2.0.0-changes)
 
 ---
+## 2.1.0 Changes
+In v2.1, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end. For automatic actions, the playbooks will be disabled by default.
+
+You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
+
+---
 
 ## Overview
 These LDAP Utility integrations allow multiple activities to be initiated from workflows in the IBM SOAR platform to an external LDAP server. Functions include: search, update, set password, toggle access, and add user.
@@ -684,7 +692,6 @@ A function that allows you to set a new password for an LDAP entry given the ent
 | `ldap_dn` | `text` | Yes | `CN=user1,CN=Users,DC=dev,DC=example,DC=com` | Distinguished Name of entry you want to access |
 | `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
 | `ldap_new_auto_password_len` | `number` | No | `12` | Length of password to generate |
-| `ldap_old_password` | `text` | No | `-` | The current ldap user password. This is required if user has a password currently set. |
 | `ldap_new_password` | `text` | No | `-` | The new password you want to set for the entry |
 | `ldap_return_new_password` | `boolean` | No | `-` | True or false to return the new password. |
 
@@ -710,8 +717,7 @@ results = {
     "ldap_domain_name": "Domain2",
     "ldap_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
     "ldap_new_password": "superDuperSecret@9",
-    "ldap_return_new_password": false,
-    "ldap_old_password": "Passw0rd"
+    "ldap_return_new_password": false
   },
   "metrics": {
     "version": "1.0",
@@ -736,7 +742,6 @@ results = playbook.functions.results.search_results
 # which will be the DN of the account you want to set a Set a New Password for
 inputs.ldap_domain_name = results.get("inputs", {}).get("ldap_domain_name")
 inputs.ldap_dn = results.get("content", {}).get("entries", [])[0]["dn"]
-inputs.ldap_old_password = playbook.inputs.ldap_user_old_password
 inputs.ldap_new_password = playbook.inputs.ldap_user_new_password
 pass_len = playbook.inputs.ldap_new_auto_password_length
 if pass_len:

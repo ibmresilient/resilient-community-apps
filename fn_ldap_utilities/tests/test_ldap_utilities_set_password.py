@@ -40,7 +40,6 @@ class TestLdapUtilitiesSetPassword:
 
     inputs = {
         "ldap_dn": "CN=Test User8,CN=Users,dc=example,DC=com",
-        "ldap_old_password": "PASSW0rd",
         "ldap_new_password": "Passw8rd!",
         "ldap_return_new_password": False
     }
