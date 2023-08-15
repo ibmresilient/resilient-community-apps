@@ -570,12 +570,12 @@ class AppCommon():
         Returns:
             str: Attachment name to be used to post Salesforce attachment in SOAR
         """
-        attachment_name = content_version.get("Title", "")
-        extension = content_version.get("FileExtension", "")
-        if attachment_name == "":
+        attachment_name = content_version.get("Title", None)
+        extension = content_version.get("FileExtension", None)
+        if not attachment_name or attachment_name == "":
             attachment_name = "salesforce-attachment"
 
-        if extension != "" and extension not in attachment_name:
+        if extension and extension != "" and extension not in attachment_name:
             attachment_name =F"{attachment_name}.{extension}"
         return attachment_name
 

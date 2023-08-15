@@ -161,9 +161,43 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-* Config A <!-- ::CHANGE_ME:: -->
-* Config B <!-- ::CHANGE_ME:: -->
-* Config C <!-- ::CHANGE_ME:: -->
+#### Created a Connected App in Salesforce
+
+To run the IBM QRadar SOAR app for Salesforce you first need to create a Connected App in Salesforce.
+
+Navigate to the App Manager in Salesforce from the Service Setup page and search for App Manager
+
+ ![screenshot: app-manager ](./doc/screenshots/app-manager.png)
+
+ Click on the **New Connected App** button in the upper right hand corner:
+
+ ![screenshot: create-new-connected-app ](./doc/screenshots/create-new-connected-app.png)
+
+Fill in the required **Basic Information** with a Connected App Name that identifies that App as a Salesforce App for IBM QRadar SOAR.  
+
+Under **API (Enable OAuth Settings)** click on the **Enable OAuth Settings** checkbox and fill in the information as shown below. 
+
+* Callback URL: https://login.salesforce.com/services/oauth2/callback
+* In **Selected OAuth Scopes** section select:
+  * Access Connect REST API resources (chatter_api)
+  * Manage user data via APIs (api)
+* Enable checkboxes:
+  * Required Secret for Web Server Flow
+  * Require Secret for Refresh Token Flow
+  * Enable Client Credential Flow
+  * Enable Authorization Code and Credentials Flow
+* Hit the **Save** button at the bottom of the screen
+
+![screenshot: manage-connected-apps-API ](./doc/screenshots/manage-connected-apps-API.png)
+
+Once the Connected App is created, you can **View** the Connected App from the **App Manager** page:
+
+![screenshot: view-connected-app ](./doc/screenshots/view-connected-app.png)
+ 
+Get the **Consumer Key** and **Consumer Secret** by hitting the **Manage Consumer Details** button:
+
+![screenshot: manage-consumer-details ](./doc/screenshots/manage-consumer-details.png)
+
 
 #### Permissions
 <!--
@@ -190,18 +224,27 @@ The following table provides the settings you need to configure the app. These s
 | **api_version** | Yes | `v58.0` | *Salesforce REST API version |
 | **consumer_key** | Yes | `xxx` | *Consumer Key of a Salesforce Connected App* |
 | **consumer_secret** | Yes | `xxx` | *Consumer Secret of a Salesforce Connected App* |
-| **my_domain_name** | Yes | `company.develop` | *My Domain name in Salesforce* |
-| **my_domain_url** | Yes | `company.develop.my.salesforce.com` | *My Domain URL in Salesforce* |
+| **my_domain_name** | Yes | `company.develop` | *My Domain Name defined in My Domain Settings page in Salesforce Setup* |
+| **my_domain_url** | Yes | `company.develop.my.salesforce.com` | *My Domain URL defined in My Domain Settings page in Salesforce Setup* |
 | **polling_filters** | Yes | `("Status","IN",["\'New\'","\'Working\'","\'In Progress\'"])` | *Query filters: Comma separated tuples ("field","operator","value") where "field" is a case field name* |
 | **polling_interval** | Yes | `60` | *Poller interval time in seconds. Value of zero to turn poller off.* |
-| **polling_lookback** | Yes | `120` | *Number of minutes to look back for Salesforce caes. Value is only used on the first time polling when the app starts.* |
+| **polling_lookback** | Yes | `120` | *Number of minutes to poller looks back for Salesforce cases. Value is only used on the first time polling when the app starts.* |
 | **polling_record_type_names** | No | `"Security Incident","Incident"` | *Case record type names the poller queries each polling interval.  If not set all case record types are queried* |
-| **verify** | Yes | `True` | *Boolean indicating whether to verify the Salesforce client certificate.* |
+| **verify** | No | `True` | *Boolean indicating whether to verify the Salesforce client certificate.* |
 | **soar_create_case_template** | No | `/var/rescircuits/create_case.jinja` | *Path to override template for automatic case creation. See [Poller Considerations](#poller-considerations).* |
 | **soar_update_case_template** | No | `/var/rescircuits/update_case.jinja` | *Path to override template for automatic case updating. See [Poller Considerations](#poller-considerations).* |
 | **soar_close_case_template** | No | `/var/rescircuits/close_case.jinja` | *Path to override template for automatic case closing. See [Poller Considerations](#poller-considerations).* |
 
 ---
+
+### Custom Layouts
+
+The app automatically creates a custom **Salesforce** tab on first install:
+
+![screenshot: custom-layouts ](./doc/screenshots/custom-layouts.png) 
+
+The Salesforce platform is highly customizable.  If custom fields are created used in your Salesforce cases, corresponding custom fields can be created in SOAR and you can drag them onto the Salesforce tab layout.  Custom fields can be updated by the poller in SOAR by creating the 
+
 ### Poller Considerations
 The poller is just one way to escalate Salesforce cases to SOAR cases. It's also possible to send Salesforce information to a SIEM, such as IBM QRadar, which would then correlate cases into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Salesforce Case ID is preserved in the custom case field `salesforce_case_id`, then all the remaining details about the case synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Salesforce Case ID.
 
@@ -1712,6 +1755,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
   {# start_date cannot be after discovered_date #}
   "discovered_date": {{ CreatedDate | soar_datetimeformat(split_at='.') }},
   "start_date": {{ CreatedDate | soar_datetimeformat(split_at='.') }},
+  "incident_type_ids": ["{{ Type }}"],
   {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
   {# "owner_id": "{{ OwnerId  }}", #}
   {#"plan_status": "{{ Status|soar_substitute('{"Closed": "C", "New": "A", "Escalated": "A"}') }}",#}
