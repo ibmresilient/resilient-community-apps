@@ -17,7 +17,7 @@ create_incident
 edit_all_incidents_fields
 #edit_all_incidents_owner
 #edit_all_incidents_members
-#edit_all_incidents_status
+edit_all_incidents_status
 #edit_all_incident_notes
 #edit_all_incidents_workspaces
 #
