@@ -39,8 +39,8 @@ class FunctionComponent(AppFunctionComponent):
 
         # Use a description header when sending SOAR tasks to Salesforce to easily identify 
         # where the originated from so we don't sent multiple times.
-        soar_description_header =  "Task from IBM SOAR case {0}:".format(fn_inputs.incident_id)
-        sf_description_header =  "Task from Salesforce case {0}:".format(fn_inputs.salesforce_case_id)
+        soar_description_header =  "Task from IBM SOAR case"
+        sf_description_header =  "Task from Salesforce case"
 
         soar_tasks_to_send = []
         if fn_inputs.task_sync_direction in ["Salesforce", "Both"]:
@@ -65,7 +65,7 @@ class FunctionComponent(AppFunctionComponent):
             
             for soar_task in soar_tasks_to_send:
                 task_link = build_task_url(rest_client.base_url, fn_inputs.incident_id, soar_task.get("id"), rest_client.org_id)
-                description = "{0} {1} {2}".format(soar_description_header, task_link, clean_html(soar_task.get("instr_text")))
+                description = "{0}: {1} {2} {3}".format(soar_description_header, fn_inputs.incident_id, task_link, clean_html(soar_task.get("instr_text")))
 
                 salesforce_task_payload = {"WhatId": fn_inputs.salesforce_case_id,
                                            "Subject": soar_task.get("name", "Task from SOAR"),
@@ -97,7 +97,7 @@ class FunctionComponent(AppFunctionComponent):
             # Add the tasks to SOAR case
             for sf_task in sf_tasks_to_get:
                 sf_task_link = app_common.make_linkback_url(entity_type='Task', entity_id=sf_task.get("Id"))
-                description = "{0} {1} {2}".format(sf_description_header, sf_task_link, sf_task.get("Description"))
+                description = "{0}: {1} {2} {3}".format(sf_description_header, fn_inputs.salesforce_case_id, sf_task_link, sf_task.get("Description"))
                 soar_task_payload = {"name": sf_task.get("Subject"),
                                      "instr_text": description,
                                      "due_date": sf_task.get("ActivityDate")}
