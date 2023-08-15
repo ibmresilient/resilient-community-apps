@@ -3,7 +3,6 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "case_matching_profiles": [],
   "export_date": 1690894052871,
   "export_format_version": 2,
   "export_type": null,
@@ -3590,9 +3589,9 @@
   "scripts": [],
   "server_version": {
     "build_number": 8304,
-    "major": 47,
+    "major": 46,
     "minor": 0,
-    "version": "47.0.8304"
+    "version": "46.0.8304"
   },
   "tags": [],
   "task_order": [],
