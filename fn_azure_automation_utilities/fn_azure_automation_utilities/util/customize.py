@@ -22,7 +22,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_azure_automation_utilities",
         "message_destinations": [u"fn_azure_automation_utilities"],
-        "functions": [u"azure_add_or_update_automation_account", u"azure_delete_automation_account", u"azure_execute_runbook", u"azure_get_automation_account", u"azure_get_automation_module_activity", u"azure_list_automation_accounts", u"azure_list_automation_accounts_by_resource_group", u"azure_list_automation_module_activities"],
+        "functions": [u"azure_add_or_update_automation_account", u"azure_delete_automation_account", u"azure_execute_runbook", u"azure_get_automation_account", u"azure_get_automation_module_activity", u"azure_get_runbook", u"azure_list_automation_accounts", u"azure_list_automation_accounts_by_resource_group", u"azure_list_automation_module_activities"],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
@@ -51,6 +51,7 @@ def customization_data(client=None):
         - azure_execute_runbook
         - azure_get_automation_account
         - azure_get_automation_module_activity
+        - azure_get_runbook
         - azure_list_automation_accounts
         - azure_list_automation_accounts_by_resource_group
         - azure_list_automation_module_activities

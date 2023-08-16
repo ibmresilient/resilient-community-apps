@@ -309,3 +309,21 @@ class AzureClient(object):
             return self.rc.execute("GET", url, headers=headers).json()
         except Exception as err:
             raise IntegrationError(str(err))
+
+    def get_runbook(self, runbook_name: str):
+        """
+        Retrieve the runbook identified by runbook name.
+        :param runbook_name: Name of an Azure runbook
+        :type runbook_name: str
+        :return: Response to GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/runbooks/{runbook_name}?api-version=2019-06-01"
+        headers = self.header
+        headers['Content-Type'] = 'application/json'
+
+        try:
+            return self.rc.execute("GET", url, headers=headers).json()
+        except Exception as err:
+            raise IntegrationError(str(err))
+
