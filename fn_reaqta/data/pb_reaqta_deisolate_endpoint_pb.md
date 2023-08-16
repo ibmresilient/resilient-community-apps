@@ -4,10 +4,10 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Isolate Endpoint (PB)
+# Playbook - ReaQta: Deisolate Endpoint (PB)
 
 ### API Name
-`reaqta_isolate_endpoint`
+`reaqta_deisolate_endpoint_pb`
 
 ### Status
 `enabled`
@@ -22,17 +22,17 @@
 `incident`
 
 ### Description
-Isolate the endpoint machine from the network
+De-isolate the endpoint machine from the network
 
 
 ---
-## Function - ReaQta: Isolate Machine
+## Function - ReaQta: Deisolate Machine
 
 ### API Name
-`reaqta_isolate_machine`
+`reaqta_deisolate_machine`
 
 ### Output Name
-`reaqta_isolate_machine_result`
+`reaqta_deisolate_machine_result`
 
 ### Message Destination
 `fn_reaqta`
@@ -45,7 +45,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_isolate_endpoint_post_process
+## Local script - reaqta_deisolate_endpoint_post_process
 
 ### Description
 
@@ -58,13 +58,13 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ### Script Content
 ```python
-results = playbook.functions.results.reaqta_isolate_machine_result
+results = playbook.functions.results.reaqta_deisolate_machine_result
 if results.success and results.content.get('success'):
-  msg = "Endpoint Machine Isolated"
+  msg = "Endpoint Machine Deisolated"
 elif results.reason:
-  msg = u"ReaQta Isolate Machine failed: {}".format(results.reason)
+  msg = u"ReaQta Deisolate Machine failed: {}".format(results.reason)
 else:
-  msg = u"ReaQta Isolate Machine failed: {}".format(results.content.get('message'))
+  msg = u"ReaQta Deisolate Machine failed: {}".format(results.content.get('message'))
 
 incident.addNote(msg)
 ```
