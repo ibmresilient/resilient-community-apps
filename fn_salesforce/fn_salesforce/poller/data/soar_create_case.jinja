@@ -6,9 +6,11 @@
   {# modify to specify your specific **data** fields #}
   "name": "Salesforce Case - {{ CaseNumber }} - {{ Subject }}",
   "description": "{{ Description | replace('"', '\\"') }}",
+
   {# start_date cannot be after discovered_date #}
   "discovered_date": {{ CreatedDate | soar_datetimeformat(split_at='.') }},
   "start_date": {{ CreatedDate | soar_datetimeformat(split_at='.') }},
+  "incident_type_ids": ["{{ Type }}"],
   {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
   {# "owner_id": "{{ OwnerId  }}", #}
   {#"plan_status": "{{ Status|soar_substitute('{"Closed": "C", "New": "A", "Escalated": "A"}') }}",#}

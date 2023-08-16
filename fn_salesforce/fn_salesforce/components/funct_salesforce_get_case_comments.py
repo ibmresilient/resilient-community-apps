@@ -33,7 +33,7 @@ class FunctionComponent(AppFunctionComponent):
         salesforce_case_id = fn_inputs.salesforce_case_id
 
         soar_common = SOARCommon(self.rest_client())
-        app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
+        app_common = AppCommon(self.PACKAGE_NAME, self.options)
 
         sf_case_comments = app_common.get_case_comments(salesforce_case_id)
 

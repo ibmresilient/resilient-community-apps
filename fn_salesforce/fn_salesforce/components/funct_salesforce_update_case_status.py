@@ -29,7 +29,7 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["salesforce_case_id", "salesforce_case_status"], fn_inputs)
 
-        app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
+        app_common = AppCommon(self.PACKAGE_NAME, self.options)
 
         results = app_common.update_case_status(fn_inputs.salesforce_case_id, 
                                                 fn_inputs.salesforce_case_status)

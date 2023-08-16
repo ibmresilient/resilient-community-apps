@@ -30,7 +30,7 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["incident_id", "salesforce_case_id"], fn_inputs)
 
-        app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
+        app_common = AppCommon(self.PACKAGE_NAME, self.options)
 
         attachment_name_list = []
         content_versions = app_common.get_content_version_ids(fn_inputs.salesforce_case_id)

@@ -28,7 +28,7 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["salesforce_case_id", "salesforce_comment_text"], fn_inputs)
 
-        app_common = AppCommon(self.rc, self.PACKAGE_NAME, self.options)
+        app_common = AppCommon(self.PACKAGE_NAME, self.options)
 
         results = app_common.add_comment_to_case(fn_inputs.salesforce_case_id, 
                                                  clean_html(fn_inputs.salesforce_comment_text), 

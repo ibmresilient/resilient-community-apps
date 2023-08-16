@@ -9,7 +9,7 @@ from base64 import b64encode
 import json
 
 from requests.exceptions import JSONDecodeError
-from resilient_lib import IntegrationError, readable_datetime, eval_mapping, clean_html
+from resilient_lib import IntegrationError, readable_datetime, eval_mapping, clean_html, RequestsCommonWithoutSession
 
 #----------------------------------------------------------------------------------------
 # This module is an open template for you to develop the methods necessary to interact
@@ -62,7 +62,7 @@ SOAR_HEADER = "Created by {}".format(IBM_SOAR)
 ENTITY_COMMENT_HEADER = "Created by Salesforce"
 
 class AppCommon():
-    def __init__(self, rc, package_name, app_configs):
+    def __init__(self, package_name, app_configs):
         """
         Initialize the parameters needed to communicate to the endpoint solution
 
@@ -82,7 +82,7 @@ class AppCommon():
         self.client_secret = app_configs.get("consumer_secret")
         self.base_url = BASE_URL.format(my_domain_url=self.my_domain_url, api_version=self.api_version)
         self.token_url = TOKEN_URL.format(my_domain_url=self.my_domain_url)
-        self.rc = rc
+        self.rc = RequestsCommonWithoutSession(function_opts=app_configs)
         self.access_token = self.get_token()
         self.polling_filters = eval_mapping(app_configs.get('polling_filters', ''), wrapper='[{}]')
         if not self.polling_filters:
@@ -570,12 +570,12 @@ class AppCommon():
         Returns:
             str: Attachment name to be used to post Salesforce attachment in SOAR
         """
-        attachment_name = content_version.get("Title", "")
-        extension = content_version.get("FileExtension", "")
-        if attachment_name == "":
+        attachment_name = content_version.get("Title", None)
+        extension = content_version.get("FileExtension", None)
+        if not attachment_name or attachment_name == "":
             attachment_name = "salesforce-attachment"
 
-        if extension != "" and extension not in attachment_name:
+        if extension and extension != "" and extension not in attachment_name:
             attachment_name =F"{attachment_name}.{extension}"
         return attachment_name
 
