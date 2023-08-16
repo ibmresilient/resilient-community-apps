@@ -46,7 +46,8 @@ sync_notes=True
 host=localhost
 username=admin
 qradarpassword=changeme
-#Note, if both qradarpassword and qradartoken are given, password will be used
+#Note, if both qradarpassword and qradartoken are given, password will be used.
+# qradartoken must be configured to use the MITRE function.
 qradartoken=changeme
 verify_cert=false|/path/to/cert
 #search_timeout=
@@ -63,7 +64,8 @@ verify_cert=false|/path/to/cert
 host=localhost
 username=admin
 qradarpassword=changeme
-#Note, if both qradarpassword and qradartoken are given, password will be used
+#Note, if both qradarpassword and qradartoken are given, password will be used.
+# qradartoken must be configured to use the MITRE function.
 qradartoken=changeme
 verify_cert=false|/path/to/cert
 #search_timeout=

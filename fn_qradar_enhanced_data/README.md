@@ -268,6 +268,9 @@ None
 ---
 ## Function - QRadar Get Offense MITRE Reference
 Get the MITRE Tactics and Techniques in relation to the rules that were fired to cause the offense in QRadar.
+In order to use this function the connection to the QRadar server has to be with a qradartoken and not qradarpassword.
+The QRadar token used to connect to the QRadar server has to be the same QRadar token used to configure the Use Case Manager app
+installed on the QRadar server.
 
  ![screenshot: fn-qradar-get-offense-mitre-reference ](./doc/screenshots/fn-qradar-get-offense-mitre-reference.png)
 
