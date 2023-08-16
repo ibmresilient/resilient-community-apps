@@ -149,21 +149,15 @@ This app has been implemented using:
 | ------------ | --------------- | ------- | ----------- |
 | Salesforce | N/A |  | 58.0 |
 
-#### Prerequisites
-<!--
-List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
--->
-* Prereq A <!-- ::CHANGE_ME:: -->
-* Prereq B <!-- ::CHANGE_ME:: -->
-* Prereq C <!-- ::CHANGE_ME:: -->
 
-#### Configuration
+
+### Salesforce Configuration
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
 #### Created a Connected App in Salesforce
 
-To run the IBM QRadar SOAR app for Salesforce you first need to create a Connected App in Salesforce.
+To run the IBM QRadar SOAR app for Salesforce, first create a Connected App in Salesforce.
 
 Navigate to the App Manager in Salesforce from the Service Setup page and search for App Manager
 
@@ -203,10 +197,7 @@ Get the **Consumer Key** and **Consumer Secret** by hitting the **Manage Consume
 <!--
 List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
 -->
-* Permission A <!-- ::CHANGE_ME:: -->
-* Permission B <!-- ::CHANGE_ME:: -->
-* Permission C <!-- ::CHANGE_ME:: -->
-
+* Salesforce recommends running 
 
 ---
 
@@ -297,6 +288,47 @@ The list of SOQL supported `operators`:
   | IN |IN | If the value equals any one of the values in a WHERE clause. The string values for IN must be in parentheses and surrounded by single quotes. |
   |NOT IN |	NOT IN | If the value doesn’t equal any of the values in a WHERE clause. The string values for NOT IN must be in parentheses and surrounded by single quotes. |
   |INCLUDES EXCLUDES | 		| Applies only to multi-select picklists. See Query Multi-Select Picklists in Salesforce documentation. |
+
+---
+### Salesforce Case Record Types
+
+Consider using Case Record Types for security cases that are escalated from Salesforce to SOAR.  The case Record Type Names can be specified in the app.config file `polling_record_type_names` parameter so that the poller queries only those record types in the platform.  If this parameter is not specified all case record types are searched each polling interval.  
+
+See the Salesforce documentation on creating Support Processes and Case Record Types.
+
+ ![screenshot: support-process ](./doc/screenshots/support-process.png)
+
+ ![screenshot: case-record-types](./doc/screenshots/case-record-types.png)
+
+ ![screenshot: case-record-types-security](./doc/screenshots/case-record-types-security.png)
+
+### Salesforce Case Type Picklist
+
+It is recommended that Case `Type` field picklist values be updated in Salesforce to include the QRadar SOAR case types which are:
+
+- Communication error (fax; email)
+- Customization Packages (internal)
+- Denial of Service
+- Improper disposal: digital assets
+- Improper disposal: documents / files / records
+- Lost documents / files / records
+- Lost PC / laptop / tablet
+- Lost storage device / media
+- Malware
+- Not an Issue
+- Other 
+- Phishing
+- Stolen documents / files / records
+- Stolen PC / laptop / tablet
+- Stolen PDA / smartphone
+- Stolen storage device / media
+- System Intrusion
+- TBD / Unknown
+- Vendor / 3rd party error
+
+Any custom incident types created in SOAR can be also be added to the Case Type Picklist values in Salesforce.
+
+ ![screenshot: case-type-picklist ](./doc/screenshots/case-type-picklist.png)
 
 ---
 
