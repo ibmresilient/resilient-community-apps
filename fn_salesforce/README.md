@@ -68,7 +68,7 @@
 -->
 **IBM SOAR app - bidirectional synchronization and functions for Salesforce**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
 Bi-directional App for Salesforce. Query Salesforce for Cases based 
          on user-defined query parameters and create and update cases in SOAR.
@@ -81,10 +81,10 @@ Bi-directional App for Salesforce. Query Salesforce for Cases based
 * Set the Salesforce cases Status (and other case fields) from the corresponding case in SOAR
 * Create cases in SOAR based on user define Salesforce case field polling filters and case record type names
 * Create a case in Salesforce from a (non-Salesforce case) in SOAR
-* Create a case in Salesforce manually from SOAR with user defined case fields
-* Sync case tasks between a Salesforce case and the corresponding SOAR case
-* Sync case attachments between Salesforce case and corresponding SOAR case
-* Sync case comments between Salesforce case and corresponding SOAR case
+* Create a case in Salesforce manually from SOAR with user specified case data
+* Synchronize case tasks between a Salesforce case and the corresponding SOAR case
+* Synchronize case attachments between Salesforce case and corresponding SOAR case
+* Syncchronize case comments between Salesforce case and corresponding SOAR case
 
 ---
 
@@ -92,7 +92,6 @@ Bi-directional App for Salesforce. Query Salesforce for Cases based
 <!--
   List any Requirements 
 --> 
-<!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -155,49 +154,51 @@ This app has been implemented using:
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-#### Created a Connected App in Salesforce
+#### Create a Connected App in Salesforce
 
-To run the IBM QRadar SOAR app for Salesforce, first create a Connected App in Salesforce.
-
-Navigate to the App Manager in Salesforce from the Service Setup page and search for App Manager
+To run the IBM QRadar SOAR app for Salesforce, first create a Connected App in Salesforce.  Navigate to the `App Manager` in Salesforce from the `Service Setup` page and search for `App Manager`:
 
  ![screenshot: app-manager ](./doc/screenshots/app-manager.png)
 
- Click on the **New Connected App** button in the upper right hand corner:
+ Click on the `New Connected App` button in the upper right hand corner:
 
  ![screenshot: create-new-connected-app ](./doc/screenshots/create-new-connected-app.png)
 
-Fill in the required **Basic Information** with a Connected App Name that identifies that App as a Salesforce App for IBM QRadar SOAR.  
+Fill in the required `Basic Information` with a Connected App Name that identifies that App as a Salesforce App for IBM QRadar SOAR.  
 
-Under **API (Enable OAuth Settings)** click on the **Enable OAuth Settings** checkbox and fill in the information as shown below. 
+Under `API (Enable OAuth Settings)` check the `Enable OAuth Settings` checkbox and fill in the information as shown below. 
 
 * Callback URL: https://login.salesforce.com/services/oauth2/callback
-* In **Selected OAuth Scopes** section select:
+* In `Selected OAuth Scopes` section select:
   * Access Connect REST API resources (chatter_api)
   * Manage user data via APIs (api)
-* Enable checkboxes:
+* Check checkboxes:
   * Required Secret for Web Server Flow
   * Require Secret for Refresh Token Flow
   * Enable Client Credential Flow
   * Enable Authorization Code and Credentials Flow
-* Hit the **Save** button at the bottom of the screen
+* Hit the `Save` button at the bottom of the screen
 
 ![screenshot: manage-connected-apps-API ](./doc/screenshots/manage-connected-apps-API.png)
 
-Once the Connected App is created, you can **View** the Connected App from the **App Manager** page:
+Once the Connected App is created, you can `View` the Connected App from the `App Manager` page:
 
 ![screenshot: view-connected-app ](./doc/screenshots/view-connected-app.png)
  
-Get the **Consumer Key** and **Consumer Secret** by hitting the **Manage Consumer Details** button:
+Get the `Consumer Key` and `Consumer Secret` by hitting the `Manage Consumer Details` button:
 
 ![screenshot: manage-consumer-details ](./doc/screenshots/manage-consumer-details.png)
 
+Use the Consumer Key and Secret in the app.config settings `consumer_key` and `consumer_secret`.
 
-#### Permissions
-<!--
-List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
--->
-* Salesforce recommends running 
+#### Select an execution user for Client Credential Flow
+
+Although there’s no user interaction in the client credentials flow, Salesforce still requires you to specify an execution user. By selecting an execution user, you allow Salesforce to return access tokens on behalf of this user.
+
+* From the connected app detail page, click `Manage`.
+* Click `Edit Policies`.
+* Under `Client Credentials Flow`, for `Run As`, click Magnifying glass icon, and find the user that you want to assign the client credentials flow. For Enterprise Edition orgs, Salesforce recommends that you select an execution user who has the API Only User permission.
+* Save your changes.
 
 ---
 
@@ -225,9 +226,13 @@ The following table provides the settings you need to configure the app. These s
 | **soar_create_case_template** | No | `/var/rescircuits/create_case.jinja` | *Path to override template for automatic case creation. See [Poller Considerations](#poller-considerations).* |
 | **soar_update_case_template** | No | `/var/rescircuits/update_case.jinja` | *Path to override template for automatic case updating. See [Poller Considerations](#poller-considerations).* |
 | **soar_close_case_template** | No | `/var/rescircuits/close_case.jinja` | *Path to override template for automatic case closing. See [Poller Considerations](#poller-considerations).* |
-
 ---
 
+Get the `my_domain_name` and `my_domain_url` from the `My Domain Settings` page under `Company Settings`: 
+
+![screenshot: my-domain-settings ](./doc/screenshots/my-domain-settings.png)
+
+---
 ### Custom Layouts
 
 The app automatically creates a custom **Salesforce** tab on first install:
@@ -253,14 +258,13 @@ Below are the default templates used which can be copied, modified, and used wit
 
 ---
 ### Case Filtering 
-
-To limit the number of Salesforce cases escalated to SOAR, consider using the optional `polling_filter` parameter in the app configuration file. Each filter is a tuple in the following format: ("field","operator","value"),
+The Salesforce app uses Salesforce Object Query Language (SOQL) to query for new or updated cases that need to be created or updated in SOAR. Additional query clauses can be added to the SQOL query statement to limit the Salesforce cases escalated to SOAR, by using the optional `polling_filter` parameter in the app configuration file. Each filter is a tuple in the following format: ("field","operator","value"),
 Where:
   * "field" is the Salesforce Case field to be queried
   * "operator" is a string operator performed in query 
   * "value" is the value to be compared against in the query
 <p>
-If more than one filter is needed, separate each tuple with a comma. Enclose string values in quotes. Escape single quotes are required in some SOQL query strings. 
+If more than one filter is needed, separate each tuple with a comma. Enclose string values in quotes. Escaped single quotes are required in some SOQL query strings. 
 <p>
 Here is a polling filter example that adds or updates cases that have a "Priority" equal to 'High':
 
@@ -292,9 +296,9 @@ The list of SOQL supported `operators`:
 ---
 ### Salesforce Case Record Types
 
-Consider using Case Record Types for security cases that are escalated from Salesforce to SOAR.  The case Record Type Names can be specified in the app.config file `polling_record_type_names` parameter so that the poller queries only those record types in the platform.  If this parameter is not specified all case record types are searched each polling interval.  
+Consider using Case Record Types for security cases that are escalated from Salesforce to SOAR.  The case Record Type Names can be specified in the app.config file `polling_record_type_names` parameter so that the poller queries only those record types in the platform.  If this parameter is not specified, all case record types are searched each polling interval.  
 
-See the Salesforce documentation on creating Support Processes and Case Record Types.
+See the Salesforce documentation for information on creating Support Processes and Case Record Types.
 
  ![screenshot: support-process ](./doc/screenshots/support-process.png)
 
@@ -1027,7 +1031,7 @@ else:
 ## Function - Salesforce: Get Case Comments
 Get the comments from the Salesforce case.
 
- ![screenshot: fn-salesforce-get-case-comments ](./doc/screenshots/fn-salesforce-get-case-comments.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-get-case-comments ](./doc/screenshots/fn-salesforce-get-case-comments.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1102,7 +1106,7 @@ else:
 ## Function - Salesforce: Get Contact
 Get the detailed information on the specified Salesforce Contact, give the ContactId.
 
- ![screenshot: fn-salesforce-get-contact ](./doc/screenshots/fn-salesforce-get-contact.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-get-contact ](./doc/screenshots/fn-salesforce-get-contact.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1244,7 +1248,7 @@ else:
 ## Function - Salesforce: Get User
 Get the detailed information of a Salesforce User, given the UserId.
 
- ![screenshot: fn-salesforce-get-user ](./doc/screenshots/fn-salesforce-get-user.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-get-user ](./doc/screenshots/fn-salesforce-get-user.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1484,7 +1488,7 @@ else:
 ## Function - Salesforce: Post Attachment to Salesforce Case
 Post the SOAR attachment to the corresponding Case in Salesforce.
 
- ![screenshot: fn-salesforce-post-attachment-to-salesforce-case ](./doc/screenshots/fn-salesforce-post-attachment-to-salesforce-case.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-salesforce-post-attachment-to-salesforce-case ](./doc/screenshots/fn-salesforce-post-attachment-to-salesforce-case.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1594,16 +1598,30 @@ Synchronize tasks between Salesforce case and SOAR case. If the SOAR case name m
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_salesforce --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_salesforce
-} 
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "task_count_to_salesforce": 1,
+    "task_count_to_soar": 0
+  },
+  "raw": null,
+  "inputs": {
+    "task_sync_direction": "Salesforce",
+    "incident_id": 2199,
+    "salesforce_case_id": "500Hr00001Wu3EtIAJ"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-salesforce",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 914,
+    "timestamp": "2023-08-08 16:12:06"
+  }
+}
 ```
 
 </p>
@@ -1752,7 +1770,7 @@ else:
 | Salesforce: Close Case | Automatic playbook to close a case in Salesforce.  | Automatic | incident | `enabled` | `incident.properties.salesforce_case_id has_a_value AND incident.resolution_id changed AND incident.resolution_summary not_contains Closed by Salesforce` |
 | Salesforce: Create Salesforce Case | Create a case in Salesforce. Activation form input and custom field data are used in function input script to create the JSON format payload used to create the Salesforce case.  | Manual | incident | `enabled` | `incident.properties.salesforce_case_id has_a_value` |
 | Salesforce: Create Salesforce Case from This SOAR Case | Create a Salesforce case from the SOAR case which activated the playbook.  This playbook is only available to SOAR cases that are not associated with a Salesforce case. | Manual | incident | `enabled` | `incident.properties.salesforce_case_id not_has_a_value` |
-| Salesforce: Write Account Details to Note | Get information on the Salesforce account associated with a case and write to a SOAR note. | Manual | incident | `disabled` | `-` |
+| Salesforce: Write Account Details to Note | Get information on the Salesforce account associated with a case and write to a SOAR note. | Manual | incident | `disabled` | `incident.properties.salesforce_case_id has_a_value` |
 | Salesforce: Get Attachments from Salesforce Case | Get attachments from Salesforce case and add them to the SOAR case. | Manual | incident | `enabled` | `incident.properties.salesforce_case_id has_a_value` |
 | Salesforce: Write Contact Details to Note | Manual playbook to get the Contact information associated with the Salesforce case.  Write the details to a note in SOAR. | Manual | incident | `disabled` | `incident.properties.salesforce_case_id has_a_value` |
 | Salesforce: Post Artifact File to Salesforce Case | Post a SOAR artifact file to a Salesforce cases as an attachment. | Manual | artifact | `enabled` | `(incident.properties.salesforce_case_id has_a_value AND artifact.type equals Email Attachment) OR (incident.properties.salesforce_case_id has_a_value AND artifact.type equals Malware Sample)` |
