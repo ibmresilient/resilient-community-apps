@@ -51,6 +51,7 @@
   - [Function - ReaQta: Get Alert Information](#function---reaqta-get-alert-information)
   - [Function - ReaQta: Get Processes](#function---reaqta-get-processes)
   - [Function - ReaQta: Isolate Machine](#function---reaqta-isolate-machine)
+  - [Function - ReaQta: Deisolate Machine](#function---reaqta-deisolate-machine)
   - [Function - ReaQta: Kill Process](#function---reaqta-kill-process)
   - [Data Table - ReaQta Process List](#data-table---reaqta-process-list)
       - [API Name:](#api-name)
@@ -89,7 +90,7 @@ You can continue to use the rules/workflows. But migrating to playbooks provides
 | ------- | ---- | ----- |
 | 1.0.0 | 03/2022 | Initial Release | 
 | 1.1.0 | 08/2023 | Convert Rules and Workflows to Playbooks |
-| 1.2.0 | 08/2023 | Added support for deisolate endpoint |
+| 1.2.0 | 08/2023 | Added support for Deisolate endpoint |
 
 
 
@@ -4898,6 +4899,85 @@ None
 
 ```python
 None
+```
+
+</p>
+</details>
+
+---
+
+## Function - ReaQta: Deisolate Machine
+Isolate a ReaQta controlled machine based on it's endpoint ID
+
+ ![screenshot: fn-reaqta-Deisolate-machine ](./doc/screenshots/fn-reaqta-Deisolate-machine.png) 
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `reaqta_endpoint_id` | `text` | Yes | `-` | - |
+| `reaqta_hive` | `text` | No | `-` | Label used to identify which ReaQta hive this alert is associated with |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "success": true
+  },
+  "inputs": {
+    "reaqta_endpoint_id": "982370521729466368",
+    "reaqta_hive": "rhiveam"
+  },
+  "metrics": {
+    "execution_time_ms": 1010,
+    "host": "local",
+    "package": "fn-reaqta",
+    "package_version": "1.1.0",
+    "timestamp": "2023-07-10 12:46:41",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
+inputs.reaqta_hive = incident.properties.reaqta_hive
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+results = playbook.functions.results.reaqta_deisolate_machine_result
+if results.success and results.content.get('success'):
+  msg = "Endpoint Machine Deisolated"
+elif results.reason:
+  msg = u"ReaQta Deisolate Machine failed: {}".format(results.reason)
+else:
+  msg = u"ReaQta Deisolate Machine failed: {}".format(results.content.get('message'))
+
+incident.addNote(msg)
 ```
 
 </p>
