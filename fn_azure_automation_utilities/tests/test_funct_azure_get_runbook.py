@@ -2,15 +2,15 @@
 # Generated with resilient-sdk v49.1.51
 """Tests using pytest_resilient_circuits"""
 
-import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+from unittest.mock import patch
+import pytest, helper
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "fn_azure_automation_utilities"
 FUNCTION_NAME = "azure_get_runbook"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = helper.config_data
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -45,31 +45,23 @@ class TestAzureGetRunbook:
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
-        func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
+        func = get_function_definition(helper.PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
     mock_inputs_1 = {
-        "account_name": "sample text",
-        "runbook_name": "sample text",
-        "resource_group_name": "sample text"
+        "account_name": "automation1",
+        "runbook_name": "demoassets",
+        "resource_group_name": "Hello_world"
     }
 
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-        "account_name": "sample text",
-        "runbook_name": "sample text",
-        "resource_group_name": "sample text"
-    }
-
-    expected_results_2 = {"value": "xyz"}
+    expected_results_1 = helper.get_runbook_results()
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
+        (mock_inputs_1, expected_results_1)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-
-        results = call_azure_get_runbook_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        with patch("fn_azure_automation_utilities.components.funct_azure_get_runbook.AzureClient") as patch_ack:
+            patch_ack.return_value = helper.mock_init()
+            results = call_azure_get_runbook_function(circuits_app, mock_inputs)
+            assert(expected_results == results.get("content", {}))

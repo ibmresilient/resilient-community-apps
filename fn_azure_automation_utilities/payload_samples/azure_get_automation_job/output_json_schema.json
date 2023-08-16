@@ -21,56 +21,58 @@
         "type": {
           "type": "string"
         },
-        "location": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "object"
-        },
-        "etag": {
-          "type": "string"
-        },
         "properties": {
           "type": "object",
           "properties": {
-            "description": {
+            "jobId": {
               "type": "string"
-            },
-            "logVerbose": {
-              "type": "boolean"
-            },
-            "logProgress": {
-              "type": "boolean"
-            },
-            "logActivityTrace": {
-              "type": "integer"
-            },
-            "runbookType": {
-              "type": "string"
-            },
-            "parameters": {
-              "type": "object"
-            },
-            "state": {
-              "type": "string"
-            },
-            "jobCount": {
-              "type": "integer"
-            },
-            "draft": {},
-            "provisioningState": {
-              "type": "string"
-            },
-            "serviceManagementTags": {},
-            "outputTypes": {
-              "type": "array"
             },
             "creationTime": {
               "type": "string"
             },
-            "lastModifiedBy": {},
+            "provisioningState": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "statusDetails": {
+              "type": "string"
+            },
+            "startedBy": {
+              "type": "string"
+            },
+            "startTime": {
+              "type": "string"
+            },
+            "endTime": {
+              "type": "string"
+            },
             "lastModifiedTime": {
               "type": "string"
+            },
+            "lastStatusModifiedTime": {
+              "type": "string"
+            },
+            "exception": {},
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "runbook_name": {
+                  "type": "string"
+                }
+              }
+            },
+            "runOn": {
+              "type": "string"
+            },
+            "runbook": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              }
             }
           }
         }
@@ -80,13 +82,13 @@
     "inputs": {
       "type": "object",
       "properties": {
+        "job_name": {
+          "type": "string"
+        },
         "account_name": {
           "type": "string"
         },
         "resource_group_name": {
-          "type": "string"
-        },
-        "runbook_name": {
           "type": "string"
         }
       }

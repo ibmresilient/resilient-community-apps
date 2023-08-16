@@ -2,23 +2,23 @@
 # Generated with resilient-sdk v49.1.51
 """Tests using pytest_resilient_circuits"""
 
-from unittest.mock import patch
-import pytest, helper
-from resilient_circuits.util import get_function_definition
+import pytest
+from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-FUNCTION_NAME = "azure_list_automation_accounts_by_resource_group"
+PACKAGE_NAME = "fn_azure_automation_utilities"
+FUNCTION_NAME = "azure_stop_automation_job"
 
 # Read the default configuration-data section from the package
-config_data = helper.config_data
+config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_azure_list_automation_accounts_by_resource_group_function(circuits, function_params, timeout=5):
+def call_azure_stop_automation_job_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("azure_list_automation_accounts_by_resource_group", function_params)
+    evt = SubmitTestFunction("azure_stop_automation_job", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -33,33 +33,43 @@ def call_azure_list_automation_accounts_by_resource_group_function(circuits, fun
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("azure_list_automation_accounts_by_resource_group_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("azure_stop_automation_job_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
 
-class TestAzureListAutomationAccountsByResourceGroup:
-    """ Tests for the azure_list_automation_accounts_by_resource_group function"""
+class TestAzureStopAutomationJob:
+    """ Tests for the azure_stop_automation_job function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
-        func = get_function_definition(helper.PACKAGE_NAME, FUNCTION_NAME)
+        func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
     mock_inputs_1 = {
-        "resource_group_name": "DemoAssets"
+        "resource_group_name": "sample text",
+        "job_name": "sample text",
+        "account_name": "sample text"
     }
 
-    expected_results_1 = helper.list_automation_accounts_by_resource_group_result()
+    expected_results_1 = {"value": "xyz"}
+
+    mock_inputs_2 = {
+        "resource_group_name": "sample text",
+        "job_name": "sample text",
+        "account_name": "sample text"
+    }
+
+    expected_results_2 = {"value": "xyz"}
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1)
+        (mock_inputs_1, expected_results_1),
+        (mock_inputs_2, expected_results_2)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        with patch("fn_azure_automation_utilities.components.funct_azure_list_automation_accounts_by_resource_group.AzureClient") as patch_ack:
-            patch_ack.return_value = helper.mock_init()
-            results = call_azure_list_automation_accounts_by_resource_group_function(circuits_app, mock_inputs)
-            assert(expected_results == results.get("content", {}))
+
+        results = call_azure_stop_automation_job_function(circuits_app, mock_inputs)
+        assert(expected_results == results)

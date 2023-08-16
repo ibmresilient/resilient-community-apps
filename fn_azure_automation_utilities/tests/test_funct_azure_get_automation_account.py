@@ -53,57 +53,7 @@ class TestAzureGetAutomationAccount:
         "resource_group_name": "DemoAssets"
     }
 
-    expected_results_1 = {
-        "name": "testing352",
-        "systemData": {
-        "createdAt": "2023-07-25T12:05:22.16+00:00",
-        "lastModifiedAt": "2023-07-25T12:05:22.16+00:00"
-        },
-        "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/testing352",
-        "type": "Microsoft.Automation/AutomationAccounts",
-        "location": "eastus",
-        "identity": {
-        "type": "SystemAssigned",
-        "principalId": "ee616124-e026-4ca0-8c64-d34bae779faf",
-        "tenantId": "50ad7d3e-b889-434d-802d-13b87c68047b"
-        },
-        "tags": {},
-        "etag": None,
-        "properties": {
-        "publicNetworkAccess": True,
-        "disableLocalAuth": False,
-        "sku": {
-            "name": "Basic",
-            "family": None,
-            "capacity": None
-        },
-        "state": "Ok",
-        "RegistrationUrl": "https://99f846f3-c84d-4c96-af2b-cd0f7a5bd5d5.agentsvc.eus.azure-automation.net/accounts/99f846f3-c84d-4c96-af2b-cd0f7a5bd5d5",
-        "encryption": {
-            "keySource": "Microsoft.Automation",
-            "identity": {
-            "userAssignedIdentity": None
-            }
-        },
-        "privateEndpointConnections": [],
-        "automationHybridServiceUrl": "https://99f846f3-c84d-4c96-af2b-cd0f7a5bd5d5.jrds.eus.azure-automation.net/automationAccounts/99f846f3-c84d-4c96-af2b-cd0f7a5bd5d5",
-        "RuntimeConfiguration": {
-            "powershell": {
-            "builtinModules": {
-                "Az": "8.0.0"
-            }
-            },
-            "powershell7": {
-            "builtinModules": {
-                "Az": "8.0.0"
-            }
-            }
-        },
-        "creationTime": "2023-07-25T12:05:22.16+00:00",
-        "lastModifiedBy": None,
-        "lastModifiedTime": "2023-07-25T12:05:22.16+00:00"
-        }
-    }
+    expected_results_1 = helper.get_automation_acc_results()
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1)

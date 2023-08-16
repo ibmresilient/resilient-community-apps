@@ -130,27 +130,29 @@ class AzureClient(object):
         except Exception as err:
             raise IntegrationError(str(err))
 
-    def get_job_status(self, job_name: int):
+    def get_job(self, job_name: str):
         """
-        Get the status of a Azure run job.
-        :param job_name: The name given to the run.
-        :type job_name: int
+        Get the Azure run job.
+        :param job_name: The name given to the run job.
+        :type job_name: str
+        :return: Get response to Azure
+        :return type: dict
         """
         headers = self.header
         headers['Content-Type'] = 'application/json'
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}?api-version=2019-06-01"
         try:
             response = self.rc.execute("GET", url, headers=headers).json()
-            return response.get("properties", {}).get("status")
+            return response
         except Exception as err:
             raise IntegrationError(str(err))
 
-    def get_runbook_results(self, job_name: int):
+    def get_job_results(self, job_name: str):
         """
-        Get the output of a Azure runbook
-        :param job_name: The name given to the run job for the runbook.
-        :type job_name: int
-        :return response: String reponse of the output of the Azure runbook
+        Get the output of a Azure Automation job
+        :param job_name: The name given to the run job.
+        :type job_name: str
+        :return response: String reponse of the output of the Azure Automation job
         :retrun type: str
         """
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}/output?api-version=2019-06-01"
@@ -163,11 +165,11 @@ class AzureClient(object):
         except Exception as err:
             raise IntegrationError(str(err))
 
-    def get_job_final_status(self, job_name: int, time_to_wait: int = 30):
+    def get_job_final_status(self, job_name: str, time_to_wait: int = 30):
         """
         Get the final status of an Azure run job
         :param job_name: The name given to the run job.
-        :type job_name: int
+        :type job_name: str
         :param time_to_wait: The time in seconds to wait before checking status of the job.
         :type time_to_wait: int
         """
@@ -176,7 +178,7 @@ class AzureClient(object):
         # If the job status equals Completed then break the loop
         while True:
             time.sleep(time_to_wait)
-            job_status = self.get_job_status(job_name)
+            job_status = self.get_job(job_name).get("properties", {}).get("status")
             if job_status == "Completed":
                 return job_status
             if job_status == "Failed":
@@ -327,3 +329,47 @@ class AzureClient(object):
         except Exception as err:
             raise IntegrationError(str(err))
 
+    def list_runbooks_by_automation_account(self):
+        """
+        Retrieve a list of runbooks on the given automation account.
+        :return: Response to GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/runbooks?api-version=2019-06-01"
+        headers = self.header
+        headers['Content-Type'] = 'application/json'
+
+        try:
+            return self.rc.execute("GET", url, headers=headers).json()
+        except Exception as err:
+            raise IntegrationError(str(err))
+
+    def delete_runbook(self, runbook_name: str):
+        """
+        Delete given runbook
+        :param runbook_name: Name of the runbook
+        :type runbook_name: str
+        :return: Response to Delete request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/runbooks/{runbook_name}?api-version=2019-06-01"
+
+        try:
+            return self.rc.execute("DELETE", url, headers=self.header)
+        except Exception as err:
+            raise IntegrationError(str(err))
+
+    def list_jobs_by_automation_account(self):
+        """
+        Retrieve a list of jobs.
+        :return: Reponse from GET request to Azure
+        :return trype: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+
+        try:
+            return self.rc.execute("GET", url, headers=header).json()
+        except Exception as err:
+            raise IntegrationError(str(err))

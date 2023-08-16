@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# Generated with resilient-sdk v49.1.51
 
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 from fn_azure_automation_utilities.util.helper import AzureClient, PACKAGE_NAME
-from ast import literal_eval
 
-FN_NAME = "azure_execute_runbook"
+FN_NAME = "azure_list_automation_jobs_by_automation_account"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'azure_execute_runbook'"""
+    """Component that implements function 'azure_list_automation_jobs_by_automation_account'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -19,21 +18,16 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Execute a given Azure runbook and retrieve the results
+        Function: Retrieve a list of jobs
         Inputs:
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
-            -   fn_inputs.input_parameters
-            -   fn_inputs.runbook_name
-            -   fn_inputs.time_to_wait
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate inputs
-        validate_fields(["account_name", "resource_group_name", "runbook_name"], fn_inputs)
-        input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
-        time_to_wait = getattr(fn_inputs, "time_to_wait", 30)
+        validate_fields(["account_name", "resource_group_name"], fn_inputs)
 
         client = AzureClient(
             self.rc,
@@ -48,13 +42,8 @@ class FunctionComponent(AppFunctionComponent):
             refresh_token=self.options.get("refresh_token")
         )
 
-        # Start an Azure job to run the given runbook
-        start_runbook = client.run_runbook(getattr(fn_inputs, "runbook_name"), runbook_parameters=input_parameters)
-        job_name = start_runbook.get("name")
-        # Wait a given amount of time and then get the status of the Azure run job started above. When the status equals Completed return that status
-        runbook_status = client.get_job_final_status(job_name, time_to_wait)
-        # Get the results from the completed Azure runbook
-        results = client.get_job_results(job_name)
+        # Make call to Azure to list automation jobs
+        results = client.list_jobs_by_automation_account()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

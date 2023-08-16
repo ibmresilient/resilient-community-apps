@@ -7,7 +7,7 @@ import pytest, helper
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-FUNCTION_NAME = "azure_list_automation_accounts_by_resource_group"
+FUNCTION_NAME = "azure_list_runbooks_by_automation_account"
 
 # Read the default configuration-data section from the package
 config_data = helper.config_data
@@ -16,9 +16,9 @@ config_data = helper.config_data
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_azure_list_automation_accounts_by_resource_group_function(circuits, function_params, timeout=5):
+def call_azure_list_runbooks_by_automation_account_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("azure_list_automation_accounts_by_resource_group", function_params)
+    evt = SubmitTestFunction("azure_list_runbooks_by_automation_account", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -33,15 +33,15 @@ def call_azure_list_automation_accounts_by_resource_group_function(circuits, fun
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("azure_list_automation_accounts_by_resource_group_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("azure_list_runbooks_by_automation_account_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
 
-class TestAzureListAutomationAccountsByResourceGroup:
-    """ Tests for the azure_list_automation_accounts_by_resource_group function"""
+class TestAzureListRunbooksByAutomationAccount:
+    """ Tests for the azure_list_runbooks_by_automation_account function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -49,17 +49,18 @@ class TestAzureListAutomationAccountsByResourceGroup:
         assert func is not None
 
     mock_inputs_1 = {
-        "resource_group_name": "DemoAssets"
+        "resource_group_name": "demoassets",
+        "account_name": "automation1"
     }
 
-    expected_results_1 = helper.list_automation_accounts_by_resource_group_result()
+    expected_results_1 = helper.list_runbooks_by_automation_account_results()
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        with patch("fn_azure_automation_utilities.components.funct_azure_list_automation_accounts_by_resource_group.AzureClient") as patch_ack:
+        with patch("fn_azure_automation_utilities.components.funct_azure_list_runbooks_by_automation_account.AzureClient") as patch_ack:
             patch_ack.return_value = helper.mock_init()
-            results = call_azure_list_automation_accounts_by_resource_group_function(circuits_app, mock_inputs)
+            results = call_azure_list_runbooks_by_automation_account_function(circuits_app, mock_inputs)
             assert(expected_results == results.get("content", {}))
