@@ -13,7 +13,7 @@
     "version": "1.0",
     "package": "fn-azure-automation-utilities",
     "package_version": "1.0.0",
-    "host": "Richards-MBP-2.hsd1.ma.comcast.net",
+    "host": "local",
     "execution_time_ms": 8047,
     "timestamp": "2023-08-16 14:46:30"
   }

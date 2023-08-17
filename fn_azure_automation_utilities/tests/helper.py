@@ -484,7 +484,7 @@ def list_automation_module_activities_results():
         ]
     }
 
-def execute_runbook_results():
+def get_job_output_results():
     return "\r\nLocation              : eastus\r\nTags                  : {}\r\nJobCount              : 0\r\nRunbookType           : PowerShell\r\nParameters            : {}\r\nLogVerbose            : False\r\nLogProgress           : False\r\nLastModifiedBy        : \r\nState                 : Published\r\nResourceGroupName     : DemoAssets\r\nAutomationAccountName : automation1\r\nName                  : get_all_runbooks\r\nCreationTime          : 7/19/2023 3:39:27 PM +00:00\r\nLastModifiedTime      : 7/19/2023 4:03:24 PM +00:00\r\nDescription           : Return all runbooks\r\n\r\n\r\nEnvironments                                                                                                            \r\n------------                                                                                                            \r\n{[AzureChinaCloud, AzureChinaCloud], [AzureCloud, AzureCloud], [AzureGermanCloud, AzureGermanCloud], [AzureUSGovernme...\r\n\r\n"
 
 def list_runbooks_by_automation_account_results():
@@ -552,6 +552,71 @@ def get_runbook_results():
         }
     }
 
+def get_job_results():
+    return {
+        "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1692024049238",
+        "name": "1692024049238",
+        "type": "Microsoft.Automation/AutomationAccounts/Jobs",
+        "properties": {
+            "jobId": "efe4db52-a124-4bea-9582-7b0c7f7133e4",
+            "creationTime": "2023-08-14T14:42:29.5306946+00:00",
+            "provisioningState": "Succeeded",
+            "status": "Completed",
+            "statusDetails": "None",
+            "startedBy": "{scrubbed}",
+            "startTime": "2023-08-14T14:42:41.9604553+00:00",
+            "endTime": "2023-08-14T14:42:55.9297673+00:00",
+            "lastModifiedTime": "2023-08-14T14:42:55.9297673+00:00",
+            "lastStatusModifiedTime": "2023-08-14T14:42:55.9297673+00:00",
+            "exception": None,
+            "parameters": {
+                "runbook_name": "get_all_runbooks"
+            },
+            "runOn": "",
+            "runbook": {
+                "name": "Get_given_runbook"
+            }
+        }
+    }
+
+def list_jobs_by_automation_account_results():
+    return {
+        "value": [
+            {
+                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1692024049238",
+                "name": "1692024049238",
+                "type": "Microsoft.Automation/AutomationAccounts/Jobs",
+                "properties": {
+                    "jobId": "efe4db52-a124-4bea-9582-7b0c7f7133e4",
+                    "runbook": {"name": "Get_given_runbook"},
+                    "provisioningState": "Succeeded",
+                    "status": "Completed",
+                    "creationTime": "2023-08-14T14:42:29.5306946+00:00",
+                    "startTime": "2023-08-14T14:42:41.9604553+00:00",
+                    "lastModifiedTime": "2023-08-14T14:42:55.9297673+00:00",
+                    "endTime": "2023-08-14T14:42:55.9297673+00:00",
+                    "runOn": ""
+                }
+            },
+            {
+                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1691761457680",
+                "name": "1691761457680",
+                "type": "Microsoft.Automation/AutomationAccounts/Jobs",
+                "properties": {
+                    "jobId": "ee72f62a-e732-41ea-a55a-1ae0e9a6d5e5",
+                    "runbook": {"name": "Get_given_runbook"},
+                    "provisioningState": "Succeeded",
+                    "status": "Completed",
+                    "creationTime": "2023-08-11T14:02:36.9532796+00:00",
+                    "startTime": "2023-08-11T14:03:03.5818149+00:00",
+                    "lastModifiedTime": "2023-08-11T14:03:16.661328+00:00",
+                    "endTime": "2023-08-11T14:03:16.661328+00:00",
+                    "runOn": ""
+                }
+            }
+        ]
+    }
+
 def mock_init():
     class MockClient(object):
         """ Add Mock connection data """
@@ -603,9 +668,9 @@ def mock_init():
             """ Mock get job final status return """
             return "Completed"
 
-        def get_runbook_results(self, job_name):
-            """ Mock get runbook results return """
-            return execute_runbook_results()
+        def get_job_results(self, job_name):
+            """ Mock get job results return """
+            return get_job_output_results()
 
         def get_runbook(self, runbook_name):
             """ Mock get runbook return """
@@ -625,5 +690,46 @@ def mock_init():
                     pass
 
             return MockDeleteRunbook()
+
+        def get_job(self, job_name):
+            """ Mock get job return """
+            return get_job_results()
+
+        def list_jobs_by_automation_account(self):
+            """ Mock List jobs by automation account return """
+            return list_jobs_by_automation_account_results()
+
+        def stop_automation_job(self, job_name):
+            """ Mock stop automation job results """
+            class MockStopJob(object):
+                status_code = 200
+                text = ""
+                def __init__(self):
+                    """ Mock """
+                    pass
+
+            return MockStopJob()
+
+        def resume_automation_job(self, job_name):
+            """ Mock resume automation job results """
+            class MockResumeJob(object):
+                status_code = 200
+                text = ""
+                def __init__(self):
+                    """ Mock """
+                    pass
+
+            return MockResumeJob()
+
+        def suspend_automation_job(self, job_name):
+            """ Mock resume automation job results """
+            class MockSuspendJob(object):
+                status_code = 200
+                text = ""
+                def __init__(self):
+                    """ Mock """
+                    pass
+
+            return MockSuspendJob()
 
     return MockClient()

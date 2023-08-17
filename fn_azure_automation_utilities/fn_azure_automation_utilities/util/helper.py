@@ -373,3 +373,48 @@ class AzureClient(object):
             return self.rc.execute("GET", url, headers=header).json()
         except Exception as err:
             raise IntegrationError(str(err))
+        
+    def stop_automation_job(self, job_name: str):
+        """
+        Stop the job identified by jobName
+        :param job_name: Name of the Azure automation job
+        :type job_name: str
+        :return: Reponse from POST request to Azure
+        :return trype: response object
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}/stop?api-version=2019-06-01"
+
+        try:
+            return self.rc.execute("POST", url, headers=self.header)
+        except Exception as err:
+            raise IntegrationError(str(err))
+
+    def resume_automation_job(self, job_name: str):
+        """
+        Resume the job identified by jobName
+        :param job_name: Name of the Azure automation job
+        :type job_name: str
+        :return: Reponse from POST request to Azure
+        :return trype: response object
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}/resume?api-version=2019-06-01"
+
+        try:
+            return self.rc.execute("POST", url, headers=self.header)
+        except Exception as err:
+            raise IntegrationError(str(err))
+
+    def suspend_automation_job(self, job_name: str):
+        """
+        Suspend the job identified by jobName
+        :param job_name: Name of the Azure automation job
+        :type job_name: str
+        :return: Reponse from POST request to Azure
+        :return trype: response object
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}/suspend?api-version=2019-06-01"
+
+        try:
+            return self.rc.execute("POST", url, headers=self.header)
+        except Exception as err:
+            raise IntegrationError(str(err))

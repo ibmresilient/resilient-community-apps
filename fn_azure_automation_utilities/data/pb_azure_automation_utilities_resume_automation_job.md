@@ -4,10 +4,10 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Azure Automation Utilities: List Automation Jobs by Automation Account - Example (PB)
+# Playbook - Azure Automation Utilities: Resume Automation Job - Example (PB)
 
 ### API Name
-`azure_automation_utilities_list_automation_jobs_by_automation_account`
+`azure_automation_utilities_resume_automation_job`
 
 ### Status
 `enabled`
@@ -19,17 +19,17 @@
 `incident`
 
 ### Description
-Retrieve a list of jobs
+Resume the job identified by jobName.
 
 
 ---
-## Function - Azure List Automation Jobs by Automation Account
+## Function - Azure Resume Automation Job
 
 ### API Name
-`azure_list_automation_jobs_by_automation_account`
+`azure_resume_automation_job`
 
 ### Output Name
-`jobs`
+`resume_job`
 
 ### Message Destination
 `fn_azure_automation_utilities`
@@ -37,6 +37,7 @@ Retrieve a list of jobs
 ### Function-Input Script
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
+inputs.job_name = playbook.inputs.azure_automation_job_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
 ```
 
@@ -55,10 +56,9 @@ inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_nam
 
 ### Script Content
 ```python
-from json import dumps
-results = playbook.functions.results.jobs
+results = playbook.functions.results.resume_job
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"Job {playbook.inputs.azure_automation_job_name} has resumed.")
 ```
 
 ---

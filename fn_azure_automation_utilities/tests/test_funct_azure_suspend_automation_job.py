@@ -7,7 +7,7 @@ import pytest, helper
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-FUNCTION_NAME = "azure_list_automation_jobs_by_automation_account"
+FUNCTION_NAME = "azure_suspend_automation_job"
 
 # Read the default configuration-data section from the package
 config_data = helper.config_data
@@ -16,9 +16,9 @@ config_data = helper.config_data
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_azure_list_automation_jobs_by_automation_account_function(circuits, function_params, timeout=5):
+def call_azure_suspend_automation_job_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
-    evt = SubmitTestFunction("azure_list_automation_jobs_by_automation_account", function_params)
+    evt = SubmitTestFunction("azure_suspend_automation_job", function_params)
 
     # Fire a message to the function
     circuits.manager.fire(evt)
@@ -33,15 +33,15 @@ def call_azure_list_automation_jobs_by_automation_account_function(circuits, fun
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("azure_list_automation_jobs_by_automation_account_result", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("azure_suspend_automation_job_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
 
-class TestAzureListAutomationJobsByAutomationAccount:
-    """ Tests for the azure_list_automation_jobs_by_automation_account function"""
+class TestAzureSuspendAutomationJob:
+    """ Tests for the azure_suspend_automation_job function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -50,17 +50,18 @@ class TestAzureListAutomationJobsByAutomationAccount:
 
     mock_inputs_1 = {
         "resource_group_name": "demoassets",
+        "job_name": "0e66ff84-7912-42fe-bfd5-7fbae056d8c9",
         "account_name": "automation1"
     }
 
-    expected_results_1 = helper.list_jobs_by_automation_account_results()
+    expected_results_1 = {"status": 200}
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        with patch("fn_azure_automation_utilities.components.funct_azure_list_automation_jobs_by_automation_account.AzureClient") as patch_ack:
+        with patch("fn_azure_automation_utilities.components.funct_azure_suspend_automation_job.AzureClient") as patch_ack:
             patch_ack.return_value = helper.mock_init()
-            results = call_azure_list_automation_jobs_by_automation_account_function(circuits_app, mock_inputs)
+            results = call_azure_suspend_automation_job_function(circuits_app, mock_inputs)
             assert(expected_results == results.get("content", {}))

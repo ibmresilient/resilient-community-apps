@@ -7,10 +7,10 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from resilient_lib import validate_fields
 from fn_azure_automation_utilities.util.helper import AzureClient, PACKAGE_NAME
 
-FN_NAME = "azure_resume_automation_job"
+FN_NAME = "azure_suspend_automation_job"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'azure_resume_automation_job'"""
+    """Component that implements function 'azure_suspend_automation_job'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Resume the job identified by jobName.
+        Function: Suspend the job identified by job name.
         Inputs:
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
@@ -44,7 +44,7 @@ class FunctionComponent(AppFunctionComponent):
         )
 
         # Make call to Azure to list runbooks on the given account
-        response = client.resume_automation_job(getattr(fn_inputs, "job_name"))
+        response = client.suspend_automation_job(getattr(fn_inputs, "job_name"))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

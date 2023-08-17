@@ -55,7 +55,7 @@ class TestAzureExecuteRunbook:
         "resource_group_name": "DemoAssets"
     }
 
-    expected_results_1 = helper.execute_runbook_results()
+    expected_results_1 = helper.get_job_output_results()
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1)

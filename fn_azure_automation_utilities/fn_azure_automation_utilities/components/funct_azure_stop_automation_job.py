@@ -4,11 +4,10 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields
+from resilient_lib import validate_fields
+from fn_azure_automation_utilities.util.helper import AzureClient, PACKAGE_NAME
 
-PACKAGE_NAME = "fn_azure_automation_utilities"
 FN_NAME = "azure_stop_automation_job"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'azure_stop_automation_job'"""
@@ -28,56 +27,25 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        # Example validating app_configs
-        # validate_fields([
-        #     {"name": "api_key", "placeholder": "<your-api-key>"},
-        #     {"name": "base_url", "placeholder": "<api-base-url>"}],
-        #     self.app_configs)
+        # Validate inputs
+        validate_fields(["account_name", "resource_group_name", "job_name"], fn_inputs)
 
-        # Example validating required fn_inputs
-        # validate_fields(["required_input_one", "required_input_two"], fn_inputs)
+        client = AzureClient(
+            self.rc,
+            self.options.get("client_id"),
+            self.options.get("client_secret"),
+            self.options.get("tenant_id"),
+            self.options.get("subscription_id"),
+            self.options.get("scope"),
+            self.rc.get_proxies(),
+            getattr(fn_inputs, "resource_group_name", None),
+            getattr(fn_inputs, "account_name", None),
+            refresh_token=self.options.get("refresh_token")
+        )
 
-        # Example accessing optional attribute in fn_inputs and initializing it to None if it does not exist (this is similar for app_configs)
-        # optional_input =  getattr(fn_inputs, "optional_input", None)
-
-        # Example getting access to self.get_fn_msg()
-        # fn_msg = self.get_fn_msg()
-        # self.LOG.info("fn_msg: %s", fn_msg)
-
-        # Example interacting with REST API
-        # res_client = self.rest_client()
-        # function_details = res_client.get(f"/functions/{FN_NAME}?handle_format=names")
-
-        # Example raising an exception
-        # raise IntegrationError("Example raising custom error")
-
-        ##############################################
-        # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE #
-        ##############################################
-
-        # Call API implementation example:
-        # params = {
-        #     "api_key": self.app_configs.api_key,
-        #     "ip_address": fn_inputs.artifact_value
-        # }
-        #
-        # response = self.rc.execute(
-        #     method="get",
-        #     url=self.app_configs.api_base_url,
-        #     params=params
-        # )
-        #
-        # results = response.json()
-        #
-        # yield self.status_message(f"Endpoint reached successfully and returning results for App Function: '{FN_NAME}'")
-        #
-        # yield FunctionResult(results)
-        ##############################################
+        # Make call to Azure to list runbooks on the given account
+        response = client.stop_automation_job(getattr(fn_inputs, "job_name"))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        # Note this is only used for demo purposes! Put your own key/value pairs here that you want to access on the Platform
-        results = {"mock_key": "Mock Value!"}
-
-        yield FunctionResult(results)
-        # yield FunctionResult({}, success=False, reason="Bad call")
+        yield FunctionResult({"status": response.status_code}, reason=response.text)
