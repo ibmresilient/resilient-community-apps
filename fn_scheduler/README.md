@@ -45,6 +45,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.1   | Jul. 2023 | Added optional dependency postgresql to SQLalchemy |
 | 2.1.0   | Apr. 2023 | Migrated all workflows to playbooks |
 | 2.0.0   | May  2022 | Support for Playbooks. Added support for Datatables |
 | 1.1.2   | Feb. 2022 | Use ``APScheduler < 3.9`` if ``Python Version < 3.6`` |

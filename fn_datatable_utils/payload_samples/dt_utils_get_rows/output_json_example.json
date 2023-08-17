@@ -3,96 +3,14 @@
   "success": true,
   "reason": null,
   "content": {
-    "rows": [
-      {
-        "id": 643,
-        "cells": {
-          "boolean": {
-            "id": "boolean",
-            "row_id": 643,
-            "value": true
-          },
-          "datetime": {
-            "id": "datetime",
-            "row_id": 643,
-            "value": 1654019072126
-          },
-          "dt_col_name": {
-            "id": "dt_col_name",
-            "row_id": 643,
-            "value": "fGzfdhgxj"
-          },
-          "multi_select": {
-            "id": "multi_select",
-            "row_id": 643,
-            "value": [
-              "a",
-              "b"
-            ]
-          },
-          "number": {
-            "id": "number",
-            "row_id": 643,
-            "value": 1
-          },
-          "select": {
-            "id": "select",
-            "row_id": 643,
-            "value": "1"
-          },
-          "text": {
-            "id": "text",
-            "row_id": 643,
-            "value": "Updated from Artifact"
-          }
-        },
-        "actions": [
-          {
-            "id": 43,
-            "name": "Get Current Row",
-            "enabled": true
-          },
-          {
-            "id": 56,
-            "name": "Get All Rows",
-            "enabled": true
-          },
-          {
-            "id": 38,
-            "name": "Delete Current Row",
-            "enabled": true
-          },
-          {
-            "id": 41,
-            "name": "Delete Rows by Name",
-            "enabled": true
-          },
-          {
-            "id": 46,
-            "name": "Update Current Row",
-            "enabled": true
-          },
-          {
-            "id": 58,
-            "name": "Add Row",
-            "enabled": true
-          }
-        ],
-        "type_id": 1002,
-        "table_name": "Example CSV Datatable",
-        "inc_id": 2269,
-        "inc_name": "f",
-        "inc_owner": "admin@example.com",
-        "version": 2
-      }
-    ]
+    "rows": []
   },
   "raw": null,
   "inputs": {
     "dt_utils_sort_direction": "ASC",
-    "incident_id": 2269,
+    "incident_id": 2101,
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "dt_utils_search_value": "fGzfdhgxj",
+    "dt_utils_search_value": "2",
     "dt_utils_sort_by": null,
     "dt_utils_search_column": "dt_col_name",
     "dt_utils_max_rows": 0
@@ -101,8 +19,8 @@
     "version": "1.0",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "host": "local",
-    "execution_time_ms": 192,
-    "timestamp": "2022-05-31 13:45:11"
+    "host": "dummy",
+    "execution_time_ms": 59,
+    "timestamp": "2023-06-06 01:07:54"
   }
 }
