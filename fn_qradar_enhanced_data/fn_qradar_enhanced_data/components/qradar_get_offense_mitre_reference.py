@@ -71,15 +71,20 @@ class FunctionComponent(AppFunctionComponent):
                         rule_uuid.remove(uuid) # Removes the uuid from the rule_uuid list after it has been added to rules_list
                         break # Exits the loop after it finds a match
 
-                # Get the MITRE mappings for the rule
-                mitre_results = self.rc.execute("GET",
-                    f"{api_url[0:len(api_url)-4]}console/plugins/app_proxy:UseCaseManager_Service/api/mitre/mitre_coverage/{rule.get('identifier')}",
-                    verify=auth_info.cafile,
-                    headers=header,
-                    timeout=timeout).json()
+                try:
+                    # Get the MITRE mappings for the rule
+                    mitre_results = self.rc.execute("GET",
+                        f"{api_url[0:len(api_url)-4]}console/plugins/app_proxy:UseCaseManager_Service/api/mappings/by_name?rule_id={rule.get('identifier')}",
+                        verify=auth_info.cafile,
+                        headers=header,
+                        timeout=timeout).json()
 
-                # Add the mapping to the rule
-                rules_list[rules_list.index(rule)]["mapping"] = mitre_results[rule['name']]['mapping']
+                    if mitre_results:
+                        # Add the mapping to the rule
+                        rules_list[rules_list.index(rule)]["mapping"] = mitre_results[rule['name']]['mapping']
+                except Exception as er:
+                    # This will catch the api calls to use case manager that error
+                    self.LOG.error(str(er))
 
             yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
