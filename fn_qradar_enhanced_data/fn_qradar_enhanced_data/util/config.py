@@ -28,7 +28,7 @@ clear_datatables=True
 #  that are configured under the individual QRadar servers will be ignored
 # If true then notes that are added to QRadar offenses will be added to their linked SOAR incidents
 sync_notes=True
-# specify empty_query settings to indicate what to do when an AQL query returns empty results, 
+# specify empty_query settings to indicate what to do when an AQL query returns empty results,
 #  empty_query_max will attempt the AQL queries up to the number of times specified. Default is no retries (1)
 #empty_query_max=
 #  empty_query_wait_secs will pause the number of seconds before attempting the next query. Default is 0
