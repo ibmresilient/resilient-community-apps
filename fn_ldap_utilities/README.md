@@ -2,6 +2,7 @@
 
 ## Table of Contents
 - [Release Notes](#release-notes)
+- [2.1.0 Changes](#210-changes)
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
