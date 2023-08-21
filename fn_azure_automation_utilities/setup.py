@@ -28,8 +28,12 @@ setup(
     license="MIT",
     author="IBM QRadar SOAR",
     url="https://ibm.com/mysupport",
-    description="<<::CHANGE_ME::>>Enter a short description of the App",
-    long_description="""<<::CHANGE_ME::>> Enter a long description, including the key features of the App. \\\nMultiple continuation lines are supported with a backslash. Line breaks are supported too:\n<br>- This will be rendered like a list\n<br>- once the App is installed in SOAR""",
+    description="IBM SOAR App for Azure Automation",
+    long_description="""This app allows interaction with the following Azure Automation resources:\n
+    - Automation Accounts
+    - Activity
+    - Job
+    - Runbook""",
     install_requires=[
         "resilient-circuits>=47.0.0"
     ],
