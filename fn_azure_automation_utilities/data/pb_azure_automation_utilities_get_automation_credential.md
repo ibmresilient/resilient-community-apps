@@ -4,10 +4,10 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Azure Automation Utilities: Suspend Automation Job - Example (PB)
+# Playbook - Azure Automation Utilities: Get Automation Credential - Example (PB)
 
 ### API Name
-`azure_automation_utilities_suspend_automation_job`
+`azure_automation_utilities_get_automation_credential`
 
 ### Status
 `enabled`
@@ -19,17 +19,17 @@
 `incident`
 
 ### Description
-Suspend the job identified by job name.
+Get a credential
 
 
 ---
-## Function - Azure Suspend Automation Job
+## Function - Azure Get Automation Credential
 
 ### API Name
-`azure_suspend_automation_job`
+`azure_get_automation_credential`
 
 ### Output Name
-`suspend_job`
+`cred`
 
 ### Message Destination
 `fn_azure_automation_utilities`
@@ -37,8 +37,8 @@ Suspend the job identified by job name.
 ### Function-Input Script
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.job_name = playbook.inputs.azure_automation_job_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
+inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
+inputs.credential_name = playbook.inputs.azure_automation_credential_name
 ```
 
 ---
@@ -56,9 +56,11 @@ inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_nam
 
 ### Script Content
 ```python
-results = playbook.functions.results.suspend_job
+from json import dumps
+results = playbook.functions.results.cred
+
 if results.get("success"):
-  incident.addNote(f"Job {playbook.inputs.azure_automation_job_name} has been suspended")
+  incident.addNote(dumps(results.get("content", {}), indent=4))
 ```
 
 ---

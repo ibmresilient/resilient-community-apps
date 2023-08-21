@@ -304,7 +304,7 @@ class AzureClient(object):
         :param runbook_name: Name of the runbook
         :type runbook_name: str
         :return: Response to Delete request to Azure
-        :return type: dict
+        :return type: object
         """
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/runbooks/{runbook_name}?api-version=2019-06-01"
         return self.rc.execute("DELETE", url, headers=self.header)
@@ -370,9 +370,94 @@ class AzureClient(object):
         :param payload: Dictionary that sets the agent registration key name
         :type payload: Dict
         :return: Response from POST request to Azure
-        :return type: Dict
+        :return type: dict
         """
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/agentRegistrationInformation/regenerateKey?api-version=2019-06-01"
         header = self.header
         header["Content-Type"] = 'application/json'
         return self.rc.execute("POST", url, json=payload, headers=header).json()
+
+    def create_automation_credential(self, credential_name: str, payload: dict):
+        """
+        Create a credential.
+        :param credential_name: Name of the Azure automation credential
+        :type credential_name: str
+        :param payload: The credentials properties
+        :type payload: dict
+        :return: Response from PUT request to Azure
+        :return type: dict
+
+        Example payload:
+        {
+            "name": "myCredential",
+            "properties": {
+                "userName": "mylingaiah",
+                "password": "<password>",
+                "description": "my description goes here"
+            }
+        }
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/credentials/{credential_name}?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("PUT", url, json=payload, headers=header).json()
+
+    def delete_automation_credential(self, credential_name: str):
+        """
+        Delete a credential.
+         :param credential_name: Name of the Azure automation credential
+        :type credential_name: str
+        :return: Response from DELETE request to Azure
+        :return type: object
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/credentials/{credential_name}?api-version=2019-06-01"
+        return self.rc.execute("DELETE", url, headers=self.header)
+
+    def get_automation_credential(self, credential_name: str):
+        """
+        Get a credential.
+        :param credential_name: Name of the Azure automation credential
+        :type credential_name: str
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/credentials/{credential_name}?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("GET", url, headers=header).json()
+
+    def list_automation_credentials_by_automation_account(self):
+        """
+        Retrieve a list of credentials.
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/credentials?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("GET", url, headers=header).json()
+
+    def update_automation_credential(self, credential_name: str, payload: dict):
+        """
+        Update a credential.
+        :param credential_name: Name of the Azure automation credential
+        :type credential_name: str
+        :param payload: The credentials properties
+        :type payload: dict
+        :return: Response from PATCH request to Azure
+        :return type: dict
+
+        Example payload:
+        {
+            "name": "myCredential",
+            "properties": {
+                "userName": "mylingaiah",
+                "password": "<password>",
+                "description": "my description goes here"
+            }
+        }
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/credentials/{credential_name}?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("PATCH", url, json=payload, headers=header).json()

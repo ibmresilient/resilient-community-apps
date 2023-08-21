@@ -639,6 +639,106 @@ def regenerate_automation_account_registration_key_results():
         "dscMetaConfiguration": None
     }
 
+def create_automation_credential_results():
+    return {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/tes43",
+        "name": "tes43",
+        "type": "Microsoft.Automation/AutomationAccounts/Credentials",
+        "properties": {
+            "userName": "tes43",
+            "description": None,
+            "creationTime": "2023-08-21T18:14:38.87+00:00",
+            "lastModifiedTime": "2023-08-21T18:14:38.87+00:00"
+        }
+    }
+
+def get_automation_credential_results():
+    return {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/tes43",
+        "name": "tes43",
+        "type": "Microsoft.Automation/AutomationAccounts/Credentials",
+        "properties": {
+            "userName": "tes43",
+            "description": None,
+            "creationTime": "2023-08-21T18:14:38.87+00:00",
+            "lastModifiedTime": "2023-08-21T18:14:38.87+00:00"
+        }
+    }
+
+def list_automation_credentials_by_automation_account_results():
+    return {
+        "value": [
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/tes43",
+                "name": "tes43",
+                "type": "Microsoft.Automation/AutomationAccounts/Credentials",
+                "properties": {
+                "userName": "tes43",
+                "description": None,
+                "creationTime": "2023-08-21T18:14:38.87+00:00",
+                "lastModifiedTime": "2023-08-21T18:14:38.87+00:00"
+                }
+            },
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/test",
+                "name": "test",
+                "type": "Microsoft.Automation/AutomationAccounts/Credentials",
+                "properties": {
+                "userName": "tester",
+                "description": None,
+                "creationTime": "2023-07-19T15:33:17.5333333+00:00",
+                "lastModifiedTime": "2023-07-19T15:33:17.5333333+00:00"
+                }
+            },
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/test12",
+                "name": "test12",
+                "type": "Microsoft.Automation/AutomationAccounts/Credentials",
+                "properties": {
+                "userName": "test12",
+                "description": None,
+                "creationTime": "2023-08-21T18:12:39.2033333+00:00",
+                "lastModifiedTime": "2023-08-21T18:12:39.2033333+00:00"
+                }
+            },
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/test22",
+                "name": "test22",
+                "type": "Microsoft.Automation/AutomationAccounts/Credentials",
+                "properties": {
+                "userName": "test22",
+                "description": None,
+                "creationTime": "2023-08-21T18:10:15.51+00:00",
+                "lastModifiedTime": "2023-08-21T18:10:15.51+00:00"
+                }
+            },
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/test32",
+                "name": "test32",
+                "type": "Microsoft.Automation/AutomationAccounts/Credentials",
+                "properties": {
+                "userName": "test32",
+                "description": None,
+                "creationTime": "2023-08-21T17:59:44.38+00:00",
+                "lastModifiedTime": "2023-08-21T17:59:44.38+00:00"
+                }
+            }
+        ]
+    }
+
+def update_automation_credential_results():
+    return {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/test32",
+        "name": "test32",
+        "type": "Microsoft.Automation/AutomationAccounts/Credentials",
+        "properties": {
+            "userName": "tester",
+            "description": "something",
+            "creationTime": "2023-08-21T17:59:44.38+00:00",
+            "lastModifiedTime": "2023-08-21T17:59:44.38+00:00"
+        }
+    }
+
 def mock_init():
     class MockClient(object):
         """ Add Mock connection data """
@@ -761,5 +861,32 @@ def mock_init():
         def regenerate_automation_account_registration_key(self, payload):
             """ Mock regenerate automation account registration key results """
             return regenerate_automation_account_registration_key_results()
+
+        def create_automation_credential(self, credential_name: str, payload: dict):
+            """ Mock create automation credential results """
+            return create_automation_credential_results()
+
+        def delete_automation_credential(self, credential_name: str):
+            """ Mock delete automation credential results """
+            class MockDeleteCred(object):
+                status_code = 200
+                text = ""
+                def __init__(self):
+                    """ Mock """
+                    pass
+
+            return MockDeleteCred()
+
+        def get_automation_credential(self, credential_name: str):
+            """ Mock get automation credential results """
+            return get_automation_credential_results()
+
+        def list_automation_credentials_by_automation_account(self):
+            """ Mock list automation credentials by automation account results """
+            return list_automation_credentials_by_automation_account_results()
+
+        def update_automation_credential(self, credential_name: str, payload: dict):
+            """ Mock update automation credential results """
+            return update_automation_credential_results()
 
     return MockClient()

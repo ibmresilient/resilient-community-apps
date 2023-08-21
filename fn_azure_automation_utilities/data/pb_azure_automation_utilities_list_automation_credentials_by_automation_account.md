@@ -4,10 +4,10 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Azure Automation Utilities: Suspend Automation Job - Example (PB)
+# Playbook - Azure Automation Utilities: List Automation Credentials by Automation Account - Example (PB)
 
 ### API Name
-`azure_automation_utilities_suspend_automation_job`
+`azure_automation_utilities_list_automation_credentials_by_automation_account`
 
 ### Status
 `enabled`
@@ -19,17 +19,17 @@
 `incident`
 
 ### Description
-Suspend the job identified by job name.
+Retrieve a list of credentials.
 
 
 ---
-## Function - Azure Suspend Automation Job
+## Function - Azure List Automation Credentials by Automation Account
 
 ### API Name
-`azure_suspend_automation_job`
+`azure_list_automation_credentials_by_automation_account`
 
 ### Output Name
-`suspend_job`
+`list_creds`
 
 ### Message Destination
 `fn_azure_automation_utilities`
@@ -37,8 +37,7 @@ Suspend the job identified by job name.
 ### Function-Input Script
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.job_name = playbook.inputs.azure_automation_job_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
+inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
 ```
 
 ---
@@ -56,9 +55,11 @@ inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_nam
 
 ### Script Content
 ```python
-results = playbook.functions.results.suspend_job
+from json import dumps
+results = playbook.functions.results.delete_cred
+
 if results.get("success"):
-  incident.addNote(f"Job {playbook.inputs.azure_automation_job_name} has been suspended")
+  incident.addNote(dumps(results.get("content", {}), indent=4))
 ```
 
 ---
