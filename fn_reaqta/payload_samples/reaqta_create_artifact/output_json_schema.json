@@ -33,41 +33,6 @@
               "null"
             ]
           },
-          "creator": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "integer"
-              },
-              "fname": {
-                "type": "string"
-              },
-              "lname": {
-                "type": "string"
-              },
-              "display_name": {
-                "type": "string"
-              },
-              "status": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "locked": {
-                "type": "boolean"
-              },
-              "password_changed": {
-                "type": "boolean"
-              },
-              "is_external": {
-                "type": "boolean"
-              },
-              "ui_theme": {
-                "type": "string"
-              }
-            }
-          },
           "inc_id": {
             "type": "integer"
           },
@@ -111,6 +76,9 @@
           "actions": {
             "type": "array"
           },
+          "playbooks": {
+            "type": "array"
+          },
           "hash": {
             "type": "string"
           },
@@ -138,6 +106,7 @@
           "pending_scan_result": {
             "type": "boolean"
           },
+          "global_info": {},
           "ip": {
             "type": "object",
             "properties": {
