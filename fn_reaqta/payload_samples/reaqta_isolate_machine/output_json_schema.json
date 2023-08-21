@@ -12,19 +12,8 @@
     "content": {
       "type": "object",
       "properties": {
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "object",
-          "properties": {
-            "endpointId": {
-              "type": "string"
-            },
-            "lastSeenAt": {
-              "type": "string"
-            }
-          }
+        "success": {
+          "type": "boolean"
         }
       }
     },
@@ -32,6 +21,9 @@
     "inputs": {
       "type": "object",
       "properties": {
+        "reaqta_hive": {
+          "type": "string"
+        },
         "reaqta_endpoint_id": {
           "type": "string"
         }
