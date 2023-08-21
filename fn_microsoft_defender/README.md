@@ -50,7 +50,7 @@
 | 1.0.1 | 3/2022 | Bug fix for defender_update_incident |
 | 1.0.2 | 7/2022 | Bug fix for defender_get_related_alert_information |
 | 1.1.0 | 9/2022 | Added filtering at the alert level |
-| 1.2.0 | 5/2023 | Add playbooks |
+| 1.2.0 | 8/2023 | Add playbooks |
 
 ### 1.2.0 Changes
 In v1.2, the existing rules and workflows have been replaced with playbooks.
@@ -94,13 +94,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `45.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `45.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=46.0.0`.
+* Integration server is running `resilient_circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
