@@ -5,7 +5,7 @@
   "content": {
     "value": [
       {
-        "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1692024049238",
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1692024049238",
         "name": "1692024049238",
         "type": "Microsoft.Automation/AutomationAccounts/Jobs",
         "properties": {
@@ -23,7 +23,7 @@
         }
       },
       {
-        "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1691761457680",
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1691761457680",
         "name": "1691761457680",
         "type": "Microsoft.Automation/AutomationAccounts/Jobs",
         "properties": {

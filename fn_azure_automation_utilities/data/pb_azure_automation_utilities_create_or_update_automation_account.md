@@ -37,7 +37,7 @@ Create or update an Azure automation account
 ### Function-Input Script
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_resource_group
+inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
 
 payload = {
   "name": playbook.inputs.azure_automation_account_name,

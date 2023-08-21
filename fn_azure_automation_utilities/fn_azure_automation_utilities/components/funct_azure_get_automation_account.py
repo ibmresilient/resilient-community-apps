@@ -7,9 +7,7 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from resilient_lib import validate_fields
 from fn_azure_automation_utilities.util.helper import AzureClient, PACKAGE_NAME
 
-PACKAGE_NAME = "fn_azure_automation_utilities"
 FN_NAME = "azure_get_automation_account"
-
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'azure_get_automation_account'"""
@@ -44,8 +42,8 @@ class FunctionComponent(AppFunctionComponent):
             refresh_token=self.options.get("refresh_token")
         )
 
-        response = client.get_automation_account()
+        results = client.get_automation_account()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        yield FunctionResult(response)
+        yield FunctionResult(results)

@@ -22,7 +22,7 @@ def create_update_results():
             "createdAt": "2023-07-25T12:23:38.673+00:00",
             "lastModifiedAt": "2023-07-25T12:23:38.673+00:00"
         },
-        "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/test-account",
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/test-account",
         "type": "Microsoft.Automation/AutomationAccounts",
         "location": "East US 2",
         "tags": {},
@@ -69,7 +69,7 @@ def get_automation_acc_results():
         "createdAt": "2023-07-25T12:05:22.16+00:00",
         "lastModifiedAt": "2023-07-25T12:05:22.16+00:00"
         },
-        "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/testing352",
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/testing352",
         "type": "Microsoft.Automation/AutomationAccounts",
         "location": "eastus",
         "identity": {
@@ -117,7 +117,7 @@ def get_automation_acc_results():
 
 def get_automation_module_activity_results():
     return {
-        "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Set-AzAdvisorConfiguration",
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Set-AzAdvisorConfiguration",
         "name": "Set-AzAdvisorConfiguration",
         "type": None,
         "properties": {
@@ -295,7 +295,7 @@ def list_automation_accounts_by_resource_group_result():
     return {
         "value": [
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1",
                 "location": "eastus",
                 "name": "automation1",
                 "type": "Microsoft.Automation/AutomationAccounts",
@@ -316,7 +316,7 @@ def list_automation_accounts_by_resource_group_result():
                 }
             },
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/testing352",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/testing352",
                 "location": "eastus",
                 "name": "testing352",
                 "type": "Microsoft.Automation/AutomationAccounts",
@@ -335,7 +335,7 @@ def list_automation_accounts_by_resource_group_result():
                 }
             },
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/tester183",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/tester183",
                 "location": "Canada Central",
                 "name": "tester183",
                 "type": "Microsoft.Automation/AutomationAccounts",
@@ -355,7 +355,7 @@ def list_automation_accounts_result():
     return {
         "value": [
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1",
                 "location": "eastus",
                 "name": "automation1",
                 "type": "Microsoft.Automation/AutomationAccounts",
@@ -375,7 +375,7 @@ def list_automation_accounts_result():
                 }
             },
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/testing352",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/testing352",
                 "location": "eastus",
                 "name": "testing352",
                 "type": "Microsoft.Automation/AutomationAccounts",
@@ -393,7 +393,7 @@ def list_automation_accounts_result():
                 }
             },
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/tester183",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/tester183",
                 "location": "Canada Central",
                 "name": "tester183",
                 "type": "Microsoft.Automation/AutomationAccounts",
@@ -412,7 +412,7 @@ def list_automation_module_activities_results():
     return {
         "value": [
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Disable-AzAdvisorRecommendation",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Disable-AzAdvisorRecommendation",
                 "name": "Disable-AzAdvisorRecommendation",
                 "type": None,
                 "properties": {
@@ -426,7 +426,7 @@ def list_automation_module_activities_results():
                 }
             },
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Enable-AzAdvisorRecommendation",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Enable-AzAdvisorRecommendation",
                 "name": "Enable-AzAdvisorRecommendation",
                 "type": None,
                 "properties": {
@@ -440,7 +440,7 @@ def list_automation_module_activities_results():
                 }
             },
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Get-AzAdvisorConfiguration",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Get-AzAdvisorConfiguration",
                 "name": "Get-AzAdvisorConfiguration",
                 "type": None,
                 "properties": {
@@ -454,7 +454,7 @@ def list_automation_module_activities_results():
                 }
             },
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Get-AzAdvisorRecommendation",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Get-AzAdvisorRecommendation",
                 "name": "Get-AzAdvisorRecommendation",
                 "type": None,
                 "properties": {
@@ -468,7 +468,7 @@ def list_automation_module_activities_results():
                 }
             },
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Set-AzAdvisorConfiguration",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Set-AzAdvisorConfiguration",
                 "name": "Set-AzAdvisorConfiguration",
                 "type": None,
                 "properties": {
@@ -491,7 +491,7 @@ def list_runbooks_by_automation_account_results():
     return {
         "value": [
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/runbooks/AzureAutomationTutorialWithIdentity",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/runbooks/AzureAutomationTutorialWithIdentity",
                 "location": "eastus",
                 "name": "AzureAutomationTutorialWithIdentity",
                 "type": "Microsoft.Automation/AutomationAccounts/Runbooks",
@@ -507,7 +507,7 @@ def list_runbooks_by_automation_account_results():
                 }
             },
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/runbooks/AzureAutomationTutorialWithIdentityGraphical",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/runbooks/AzureAutomationTutorialWithIdentityGraphical",
                 "location": "eastus",
                 "name": "AzureAutomationTutorialWithIdentityGraphical",
                 "type": "Microsoft.Automation/AutomationAccounts/Runbooks",
@@ -527,7 +527,7 @@ def list_runbooks_by_automation_account_results():
 
 def get_runbook_results():
     return {
-        "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/runbooks/Hello_world",
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/runbooks/Hello_world",
         "name": "Hello_world",
         "type": "Microsoft.Automation/AutomationAccounts/Runbooks",
         "location": "eastus",
@@ -554,7 +554,7 @@ def get_runbook_results():
 
 def get_job_results():
     return {
-        "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1692024049238",
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1692024049238",
         "name": "1692024049238",
         "type": "Microsoft.Automation/AutomationAccounts/Jobs",
         "properties": {
@@ -583,7 +583,7 @@ def list_jobs_by_automation_account_results():
     return {
         "value": [
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1692024049238",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1692024049238",
                 "name": "1692024049238",
                 "type": "Microsoft.Automation/AutomationAccounts/Jobs",
                 "properties": {
@@ -599,7 +599,7 @@ def list_jobs_by_automation_account_results():
                 }
             },
             {
-                "id": "/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1691761457680",
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1691761457680",
                 "name": "1691761457680",
                 "type": "Microsoft.Automation/AutomationAccounts/Jobs",
                 "properties": {
@@ -615,6 +615,28 @@ def list_jobs_by_automation_account_results():
                 }
             }
         ]
+    }
+
+def get_automation_agent_registration_information_results():
+    return {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/agentRegistrationInformation/https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6",
+        "keys": {
+            "primary": "1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==",
+            "secondary": "bC6hr123456789qPD2eeowEt9rDRqfJMnJmUOhP123450/x53Vezc3rqDhherrLzb123456MWhub+86IKwxssg=="
+        },
+        "endpoint": "https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6",
+        "dscMetaConfiguration": "\r\n\tinstance of MSFT_WebDownloadManager as $MSFT_WebDownloadManager1ref\r\n\t{\r\n\tResourceID = \"[ConfigurationRepositoryWeb]AzureAutomationDSC\";\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::20::9::ConfigurationRepositoryWeb\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t};\r\n\r\n\tinstance of MSFT_WebResourceManager as $MSFT_WebResourceManager1ref\r\n\t{\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::27::9::ResourceRepositoryWeb\";\r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t ResourceID = \"[ResourceRepositoryWeb]AzureAutomationDSC\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t};\r\n\r\n\tinstance of MSFT_WebReportManager as $MSFT_WebReportManager1ref\r\n\t{\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::34::9::ReportServerWeb\";\r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t ResourceID = \"[ReportServerWeb]AzureAutomationDSC\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t};\r\n\r\n\tinstance of MSFT_DSCMetaConfiguration as $MSFT_DSCMetaConfiguration1ref\r\n\t{\r\n\t RefreshMode = \"Pull\";\r\n\t AllowModuleOverwrite = False;\r\n\t ActionAfterReboot = \"ContinueConfiguration\";\r\n\t RefreshFrequencyMins = 30;\r\n\t RebootNodeIfNeeded = False;\r\n\t ConfigurationModeFrequencyMins = 15;\r\n\t ConfigurationMode = \"ApplyAndMonitor\";\r\n\r\n\t  ResourceModuleManagers = {\r\n\t  $MSFT_WebResourceManager1ref  \r\n\t};\r\n\t  ReportManagers = {\r\n\t  $MSFT_WebReportManager1ref  \r\n\t };\r\n\t  ConfigurationDownloadManagers = {\r\n\t  $MSFT_WebDownloadManager1ref  \r\n\t };\r\n\t};\r\n\r\n\tinstance of OMI_ConfigurationDocument\r\n\t{\r\n\t Version=\"2.0.0\";\r\n\t MinimumCompatibleVersion = \"2.0.0\";\r\n\t CompatibleVersionAdditionalProperties= { \"MSFT_DSCMetaConfiguration:StatusRetentionTimeInDays\" };\r\n\t Author=\"azureautomation\";\r\n\t GenerationDate=\"04/17/2015 11:41:09\";\r\n\t GenerationHost=\"azureautomation-01\";\r\n\t Name=\"RegistrationMetaConfig\";\r\n\t};\r\n\t"
+    }
+
+def regenerate_automation_account_registration_key_results():
+    return {
+        "id": None,
+        "keys": {
+            "primary": "g+Z4E/12345678c/YbuFnwTe4yI12EYPRTdmFHVj+SI12345b0R8ghU8YNWe7BM3hjYDCzkqWhZGd0r5V4YHag==",
+            "secondary": "bC6hr123456789qPD2eeowEt9rDRqfJMnJmUOhP123450/x53Vezc3rqDhherrLzb123456MWhub+86IKwxssg=="
+        },
+        "endpoint": "https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6",
+        "dscMetaConfiguration": None
     }
 
 def mock_init():
@@ -731,5 +753,13 @@ def mock_init():
                     pass
 
             return MockSuspendJob()
+
+        def get_automation_agent_registration_information(self):
+            """ Mock get automation agent registration information results """
+            return get_automation_agent_registration_information_results()
+
+        def regenerate_automation_account_registration_key(self, payload):
+            """ Mock regenerate automation account registration key results """
+            return regenerate_automation_account_registration_key_results()
 
     return MockClient()

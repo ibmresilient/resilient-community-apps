@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# Generated with resilient-sdk v49.1.51
 
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 from fn_azure_automation_utilities.util.helper import AzureClient, PACKAGE_NAME
-from ast import literal_eval
 
-FN_NAME = "azure_add_or_update_automation_account"
+FN_NAME = "azure_get_automation_agent_registration_information"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'azure_add_or_update_automation_account'"""
+    """Component that implements function 'azure_get_automation_agent_registration_information'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -19,23 +18,17 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Create or update an automation account on Azure
+        Function: Retrieve the automation agent registration information.
         Inputs:
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
-            -   fn_inputs.input_parameters
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate inputs
-        validate_fields(["account_name", "resource_group_name", "input_parameters"], fn_inputs)
-        input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
-        # If no tags given then remove it from the dictionary
-        if input_parameters.get("tags") == None:
-            del input_parameters["tags"]
+        validate_fields(["account_name", "resource_group_name"], fn_inputs)
 
-        # Connect to Azure
         client = AzureClient(
             self.rc,
             self.options.get("client_id"),
@@ -49,7 +42,7 @@ class FunctionComponent(AppFunctionComponent):
             refresh_token=self.options.get("refresh_token")
         )
 
-        results = client.create_update_automation_account(input_parameters)
+        results = client.get_automation_agent_registration_information()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

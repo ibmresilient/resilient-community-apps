@@ -116,19 +116,16 @@ class AzureClient(object):
         else:
             LOG.info(f"Executing Runbook '{runbook_name}' with NO inputs")
 
-        try:
-            response = self.rc.execute("PUT", url, headers=headers, json=payload)
-            if response.status_code in [200, 201]:
-                LOG.info(f"Runbook '{runbook_name}' successfully executed.")
-                return response.json()
-            else:
-                LOG.exception(f"Runbook '{runbook_name}' execution error.")
-                raise RunPlaybookRequestError(f"Runbook '{runbook_name}' execution error.",
-                                              {'responseCode': response.status_code,
-                                               'responseContent': response.text})
+        response = self.rc.execute("PUT", url, headers=headers, json=payload)
+        if response.status_code in [200, 201]:
+            LOG.info(f"Runbook '{runbook_name}' successfully executed.")
+            return response.json()
+        else:
+            LOG.exception(f"Runbook '{runbook_name}' execution error.")
+            raise RunPlaybookRequestError(f"Runbook '{runbook_name}' execution error.",
+                                            {'responseCode': response.status_code,
+                                            'responseContent': response.text})
 
-        except Exception as err:
-            raise IntegrationError(str(err))
 
     def get_job(self, job_name: str):
         """
@@ -141,11 +138,7 @@ class AzureClient(object):
         headers = self.header
         headers['Content-Type'] = 'application/json'
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}?api-version=2019-06-01"
-        try:
-            response = self.rc.execute("GET", url, headers=headers).json()
-            return response
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("GET", url, headers=headers).json()
 
     def get_job_results(self, job_name: str):
         """
@@ -158,12 +151,8 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}/output?api-version=2019-06-01"
         header = self.header
         header["Content-Type"] = "text/plain"
-
-        try:
-            response = self.rc.execute("GET", url, headers=header).content
-            return response.decode("utf-8")
-        except Exception as err:
-            raise IntegrationError(str(err))
+        response = self.rc.execute("GET", url, headers=header).content
+        return response.decode("utf-8")
 
     def get_job_final_status(self, job_name: str, time_to_wait: int = 30):
         """
@@ -213,11 +202,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}?api-version=2021-06-22"
         headers = self.header
         headers['Content-Type'] = 'application/json'
-
-        try:
-            return self.rc.execute("PUT", url, headers=headers, json=payload).json()
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("PUT", url, headers=headers, json=payload).json()
 
     def delete_automation_acount(self):
         """
@@ -226,10 +211,7 @@ class AzureClient(object):
         :return type: request object
         """
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}?api-version=2021-06-22"
-        try:
-            return self.rc.execute("Delete", url, headers=self.header)
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("Delete", url, headers=self.header)
 
     def get_automation_account(self):
         """
@@ -240,11 +222,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}?api-version=2021-06-22"
         headers = self.header
         headers['Content-Type'] = 'application/json'
-
-        try:
-            return self.rc.execute("GET", url, headers=headers).json()
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("GET", url, headers=headers).json()
 
     def list_automation_accounts(self):
         """
@@ -255,11 +233,7 @@ class AzureClient(object):
         url = f"https://management.azure.com/subscriptions/{self.subscription_id}/providers/Microsoft.Automation/automationAccounts?api-version=2021-06-22"
         headers = self.header
         headers['Content-Type'] = 'application/json'
-
-        try:
-            return self.rc.execute("GET", url, headers=headers).json()
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("GET", url, headers=headers).json()
 
     def list_automation_accounts_by_resource_group(self):
         """
@@ -270,11 +244,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts?api-version=2021-06-22"
         headers = self.header
         headers['Content-Type'] = 'application/json'
-
-        try:
-            return self.rc.execute("GET", url, headers=headers).json()
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("GET", url, headers=headers).json()
 
     def get_automation_module_activity(self, moduleName: str, activityName: str):
         """
@@ -289,11 +259,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/modules/{moduleName}/activities/{activityName}?api-version=2019-06-01"
         headers = self.header
         headers['Content-Type'] = 'application/json'
-
-        try:
-            return self.rc.execute("GET", url, headers=headers).json()
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("GET", url, headers=headers).json()
 
     def list_automation_module_activities(self, moduleName: str):
         """
@@ -306,11 +272,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/modules/{moduleName}/activities?api-version=2019-06-01"
         headers = self.header
         headers['Content-Type'] = 'application/json'
-
-        try:
-            return self.rc.execute("GET", url, headers=headers).json()
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("GET", url, headers=headers).json()
 
     def get_runbook(self, runbook_name: str):
         """
@@ -323,11 +285,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/runbooks/{runbook_name}?api-version=2019-06-01"
         headers = self.header
         headers['Content-Type'] = 'application/json'
-
-        try:
-            return self.rc.execute("GET", url, headers=headers).json()
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("GET", url, headers=headers).json()
 
     def list_runbooks_by_automation_account(self):
         """
@@ -338,11 +296,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/runbooks?api-version=2019-06-01"
         headers = self.header
         headers['Content-Type'] = 'application/json'
-
-        try:
-            return self.rc.execute("GET", url, headers=headers).json()
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("GET", url, headers=headers).json()
 
     def delete_runbook(self, runbook_name: str):
         """
@@ -353,11 +307,7 @@ class AzureClient(object):
         :return type: dict
         """
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/runbooks/{runbook_name}?api-version=2019-06-01"
-
-        try:
-            return self.rc.execute("DELETE", url, headers=self.header)
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("DELETE", url, headers=self.header)
 
     def list_jobs_by_automation_account(self):
         """
@@ -368,12 +318,8 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs?api-version=2019-06-01"
         header = self.header
         header["Content-Type"] = 'application/json'
+        return self.rc.execute("GET", url, headers=header).json()
 
-        try:
-            return self.rc.execute("GET", url, headers=header).json()
-        except Exception as err:
-            raise IntegrationError(str(err))
-        
     def stop_automation_job(self, job_name: str):
         """
         Stop the job identified by jobName
@@ -383,11 +329,7 @@ class AzureClient(object):
         :return trype: response object
         """
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}/stop?api-version=2019-06-01"
-
-        try:
-            return self.rc.execute("POST", url, headers=self.header)
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("POST", url, headers=self.header)
 
     def resume_automation_job(self, job_name: str):
         """
@@ -398,11 +340,7 @@ class AzureClient(object):
         :return trype: response object
         """
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}/resume?api-version=2019-06-01"
-
-        try:
-            return self.rc.execute("POST", url, headers=self.header)
-        except Exception as err:
-            raise IntegrationError(str(err))
+        return self.rc.execute("POST", url, headers=self.header)
 
     def suspend_automation_job(self, job_name: str):
         """
@@ -413,8 +351,28 @@ class AzureClient(object):
         :return trype: response object
         """
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}/suspend?api-version=2019-06-01"
+        return self.rc.execute("POST", url, headers=self.header)
 
-        try:
-            return self.rc.execute("POST", url, headers=self.header)
-        except Exception as err:
-            raise IntegrationError(str(err))
+    def get_automation_agent_registration_information(self):
+        """
+        Retrieve the automation agent registration information.
+        :return: Response from GET request to Azure
+        :return type: Dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/agentRegistrationInformation?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("GET", url, headers=header).json()
+
+    def regenerate_automation_account_registration_key(self, payload):
+        """
+        Regenerate a primary or secondary agent registration key
+        :param payload: Dictionary that sets the agent registration key name
+        :type payload: Dict
+        :return: Response from POST request to Azure
+        :return type: Dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/agentRegistrationInformation/regenerateKey?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("POST", url, json=payload, headers=header).json()
