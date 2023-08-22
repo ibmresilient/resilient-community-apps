@@ -21,32 +21,50 @@
 # Salesforce
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-- [Function - Salesforce: Add Comment to Salesforce Case](#function---salesforce-add-comment-to-salesforce-case)
-- [Function - Salesforce: Create Case in Salesforce](#function---salesforce-create-case-in-salesforce)
-- [Function - Salesforce: Create Task in Salesforce Case](#function---salesforce-create-task-in-salesforce-case)
-- [Function - Salesforce: Get Account](#function---salesforce-get-account)
-- [Function - Salesforce: Get Attachments from Salesforce](#function---salesforce-get-attachments-from-salesforce)
-- [Function - Salesforce: Get Case](#function---salesforce-get-case)
-- [Function - Salesforce: Get Case Comments](#function---salesforce-get-case-comments)
-- [Function - Salesforce: Get Contact](#function---salesforce-get-contact)
-- [Function - Salesforce: Get User](#function---salesforce-get-user)
-- [Function - Salesforce: Post Attachment to Salesforce Case](#function---salesforce-post-attachment-to-salesforce-case)
-- [Function - Salesforce: Sync Tasks Between Cases](#function---salesforce-sync-tasks-between-cases)
-- [Function - Salesforce: Update Case Status](#function---salesforce-update-case-status)
-- [Custom Fields](#custom-fields)
-- [Playbooks](#playbooks)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Salesforce](#salesforce)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+    - [Salesforce Development Version](#salesforce-development-version)
+    - [Salesforce Configuration](#salesforce-configuration)
+      - [Create a Connected App in Salesforce](#create-a-connected-app-in-salesforce)
+      - [Select an execution user for Client Credential Flow](#select-an-execution-user-for-client-credential-flow)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+  - [| **soar\_close\_case\_template** | No | `/var/rescircuits/close_case.jinja` | *Path to override template for automatic case closing. See Poller Considerations.* |](#-soar_close_case_template--no--varrescircuitsclose_casejinja--path-to-override-template-for-automatic-case-closing-see-poller-considerations-)
+    - [Custom Layouts](#custom-layouts)
+    - [Poller Considerations](#poller-considerations)
+      - [Poller Templates for SOAR Cases](#poller-templates-for-soar-cases)
+    - [Case Filtering](#case-filtering)
+    - [Salesforce Case Record Types](#salesforce-case-record-types)
+    - [Salesforce Case Type Picklist](#salesforce-case-type-picklist)
+  - [Function - Salesforce: Add Comment to Salesforce Case](#function---salesforce-add-comment-to-salesforce-case)
+  - [Function - Salesforce: Create Case in Salesforce](#function---salesforce-create-case-in-salesforce)
+  - [Function - Salesforce: Create Task in Salesforce Case](#function---salesforce-create-task-in-salesforce-case)
+  - [Function - Salesforce: Get Account](#function---salesforce-get-account)
+  - [Function - Salesforce: Get Attachments from Salesforce](#function---salesforce-get-attachments-from-salesforce)
+  - [Function - Salesforce: Get Case](#function---salesforce-get-case)
+  - [Function - Salesforce: Get Case Comments](#function---salesforce-get-case-comments)
+  - [Function - Salesforce: Get Contact](#function---salesforce-get-contact)
+  - [Function - Salesforce: Get User](#function---salesforce-get-user)
+  - [Function - Salesforce: Post Attachment to Salesforce Case](#function---salesforce-post-attachment-to-salesforce-case)
+  - [Function - Salesforce: Sync Tasks Between Cases](#function---salesforce-sync-tasks-between-cases)
+  - [Function - Salesforce: Update Case Status](#function---salesforce-update-case-status)
+  - [Custom Fields](#custom-fields)
+  - [Playbooks](#playbooks)
+  - [Templates for SOAR Cases](#templates-for-soar-cases)
+    - [soar\_create\_case.jinja](#soar_create_casejinja)
+    - [soar\_close\_case.jinja](#soar_close_casejinja)
+    - [soar\_update\_case.jinja](#soar_update_casejinja)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 
 ---
 
@@ -84,7 +102,7 @@ Bi-directional App for Salesforce. Query Salesforce for Cases based
 * Create a case in Salesforce manually from SOAR with user specified case data
 * Synchronize case tasks between a Salesforce case and the corresponding SOAR case
 * Synchronize case attachments between Salesforce case and corresponding SOAR case
-* Syncchronize case comments between Salesforce case and corresponding SOAR case
+* Synchronize case comments between Salesforce case and corresponding SOAR case
 
 ---
 
@@ -213,7 +231,7 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_version** | Yes | `v58.0` | *Salesforce REST API version |
+| **api_version** | Yes | `v58.0` | *Salesforce REST API version* |
 | **consumer_key** | Yes | `xxx` | *Consumer Key of a Salesforce Connected App* |
 | **consumer_secret** | Yes | `xxx` | *Consumer Secret of a Salesforce Connected App* |
 | **my_domain_name** | Yes | `company.develop` | *My Domain Name defined in My Domain Settings page in Salesforce Setup* |
@@ -239,7 +257,7 @@ The app automatically creates a custom **Salesforce** tab on first install:
 
 ![screenshot: custom-layouts ](./doc/screenshots/custom-layouts.png) 
 
-The Salesforce platform is highly customizable.  If custom fields are created used in your Salesforce cases, corresponding custom fields can be created in SOAR and you can drag them onto the Salesforce tab layout.  Custom fields can be updated by the poller in SOAR by creating the 
+The Salesforce platform is highly customizable.  If custom fields are created and used in Salesforce cases, corresponding custom fields can be created in SOAR and you can drag them onto the Salesforce tab layout.  
 
 ### Poller Considerations
 The poller is just one way to escalate Salesforce cases to SOAR cases. It's also possible to send Salesforce information to a SIEM, such as IBM QRadar, which would then correlate cases into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Salesforce Case ID is preserved in the custom case field `salesforce_case_id`, then all the remaining details about the case synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Salesforce Case ID.
