@@ -146,7 +146,14 @@ Additional package dependencies may exist for each of these packages:
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
-No application specific configuration settings are required.
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
+
+| Config | Required | Example | Description |
+| ------ | :------: | ------- | ----------- |
+| **request_max_retries** | Yes | `1` | *The maximum number of attempts to retry a request to SOAR Platform before exiting.* |
+| **request_retry_delay** | Yes | `1` | *The number of seconds to wait between repeated attempts to connect to the SOAR Platform.* |
+| **request_retry_backof** | Yes | `1` | *The multiplier that is applied to delay between repeated attempts to connect to the SOAR Platform.* |
+---
 
 ### Custom Layouts
 <!--
@@ -1535,27 +1542,21 @@ workflow_usage
 
 ---
 
-## Rules
-| Rule Name | Object | Workflow/Playbook Triggered |
-| --------- | ------ | ------------------ |
-| PB: Get workflow/playbook frequency | incident | `wf_get_workflow_frequency` |
-| PB: Get workflow/playbook usage | incident | `wf_get_workflow_data` |
-| PB: Get workflow/playbook usage at incident close | incident | `wf_get_workflow_usage_at_incident_close` |
-| PB: Get workflows/playbooks by artifact value | artifact | `wf_get_workflows_by_artifact_value` |
-| PB: Get workflows/playbooks by artifact value for last 30 days | artifact | `pb_get_workflows_by_artifact_value_for_last_30_days` |
-| PB: Get workflows/playbooks by attachment name | attachment | `wf_get_workflows_by_attachment_filename` |
-| PB: Get workflows/playbooks by task name | task | `wf_get_workflows_by_task_name` |
-
 ## Playbooks
-| Playbook Name | Object | 
-| --------- | ------ | 
-| PB: Export Playbook | incident |
-| PB: Get Playbooks | incident |
-| PB: Import Playbook | incident |
+| Playbook Name | Object | Activation Type | Status |
+| --------- | ------ | --------- | ------ |
+| PBUtil: Get workflow/playbooks frequency (PB) | incident | Manual | `enabled`
+| PBUtil: Get workflow/playbook usage at incident close (PB) | incident | Automatic | `disabled`
+| PBUtil: Get workflow/playbook usage (PB) | incident | Manual | `enabled`
+| PBUtil: Get workflows/playbooks by artifact value for last 30 days (PB) | Artifact | Automatic | `disabled`
+| PBUtil: Get workflows/playbooks by artifact value (PB) | Artifact | Manual | `enabled`
+| PBUtil: Get workflows/playbooks by attachment filename (PB) | Attachment | Manual | `enabled`
+| PBUtil: Get workflows/playbooks by task name (PB) | Task | Manual | `enabled`
 
 Notes:
-1. The rule, PB: Get workflows/playbooks by artifact value for last 30 days, is an automatic rule which can be used to get workflow and playbook insights when an artifact is created. This rule is disabled by default and can be enabled by going to the Customization Settings and the Rules tab.
-2. The rule, PB: Get workflow/playbook usage at incident close, is an automatic rule which can be used to preserve a searchable record of the workflows and playbooks associated with an incident. This rule is disabled by default and can be enabled by going to the Customization Settings and the Rules tab.
+1. The playbook, PBUtil: Get workflows/playbooks by artifact value for last 30 days (PB), is an automatic rule which can be used to get workflow and playbook insights when an artifact is created. This playbook is disabled by default and can be enabled by going to the Playbooks and the Status tab.
+
+2. The playbook, PPBUtil: Get workflow/playbook usage at incident close (PB), is an automatic rule which can be used to preserve a searchable record of the workflows and playbooks associated with an incident. This playbook is disabled by default and can be enabled by going to the Playbooks and the Status tab.
 ---
 
 ## Troubleshooting & Support

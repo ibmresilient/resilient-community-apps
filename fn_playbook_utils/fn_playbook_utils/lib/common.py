@@ -71,7 +71,6 @@ def parse_inputs(restclient, fn_inputs):
     # if ids are missing then it will query on the current incident
     if (min_id and max_id) and (min_date and max_date):
         min_id = sys_min_id = get_incident_limit(restclient, sort="asc")
-        max_id = sys_min_id = get_incident_limit(restclient, sort="asc")
 
     # if ids are missing and at least one date is available
     if not (min_id and max_id) and (min_date or max_date):
