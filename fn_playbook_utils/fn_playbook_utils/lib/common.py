@@ -64,9 +64,14 @@ def parse_inputs(restclient, fn_inputs):
     min_date = fn_inputs.pb_min_incident_date if hasattr(fn_inputs, 'pb_min_incident_date') else None
     max_date = fn_inputs.pb_max_incident_date if hasattr(fn_inputs, 'pb_max_incident_date') else None
     
-    # need at least min_id or min_date to avoid excessive calls
-    if not (min_id or min_date):
-        raise ValueError("Either 'Min Incident Id' or 'Min Incident Date' is required")
+    # need at least min_id or min_date to avoid excessive calls - removed
+    # if not (min_id or min_date):
+    #     raise ValueError("Either 'Min Incident Id' or 'Min Incident Date' is required")
+
+    # if ids are missing then it will query on the current incident
+    if (min_id and max_id) and (min_date and max_date):
+        min_id = sys_min_id = get_incident_limit(restclient, sort="asc")
+        max_id = sys_min_id = get_incident_limit(restclient, sort="asc")
 
     # if ids are missing and at least one date is available
     if not (min_id and max_id) and (min_date or max_date):
