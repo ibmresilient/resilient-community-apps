@@ -61,6 +61,7 @@
   - [Playbooks](#playbooks)
   - [Templates for SOAR Cases](#templates-for-soar-cases)
     - [soar\_create\_case.jinja](#soar_create_casejinja)
+    - [soar\_create\_case\_with\_artifacts.jinja](#soar_create_case_with_artifactsjinja)
     - [soar\_close\_case.jinja](#soar_close_casejinja)
     - [soar\_update\_case.jinja](#soar_update_casejinja)
   - [Troubleshooting \& Support](#troubleshooting--support)
@@ -1834,6 +1835,107 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "salesforce_case_id": "{{ Id }}",
     "salesforce_status": "{{ Status }}"
   }
+}
+```
+
+### soar_create_case_with_artifacts.jinja
+This example "create case" jinja template, in addition to creating a SOAR case, creates artifacts from Salesforce custom fields.
+In this example, the custom fields are named similarly to SOAR artifact types.  
+Note: The appended "__c" denotes custom fields in Salesforce. 
+
+When overriding the template in App Host, specify the file path as `/var/rescircuits`.
+
+```
+{
+  {%- set comma = joiner(",") -%}
+  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
+     for details on available jinja methods. Examples for `soar_substitute` and more are included below.
+  #}
+  {# modify to specify your specific **data** fields #}
+  "name": "Salesforce Case - {{ CaseNumber }} - {{ Subject }}",
+  "description": "{{ Description | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  "discovered_date": {{ CreatedDate | soar_datetimeformat(split_at='.') }},
+  "start_date": {{ CreatedDate | soar_datetimeformat(split_at='.') }},
+  "incident_type_ids": ["{{ Type }}"],soar_create_case_with_artifacts.jinja
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ OwnerId  }}", #}
+  {#"plan_status": "{{ Status|soar_substitute('{"Closed": "C", "New": "A", "Escalated": "A"}') }}",#}
+  "plan_status": "A",
+  "severity_code": "{{ Priority }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "salesforce_case_id": "{{ Id }}",
+    "salesforce_status": "{{ Status }}"
+  },
+  "artifacts": [
+    {% if IP_Address__c %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "IP Address"
+        },
+        "value": "{{ IP_Address__c }}",
+        "description": {
+          "format": "text",
+          "content": "IP Address artifact from Salesforce"
+        }
+      }
+      {% endif %}
+    {% if Malware_MD5_Hash__c %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "Malware MD5 Hash"
+        },
+        "value": "{{ Malware_MD5_Hash__c }}",
+        "description": {
+          "format": "text",
+          "content": "Malware MD5 Hash from Salesforce case"
+        }
+      }
+      {% endif %}
+    {% if URL__c %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "URL"
+        },
+        "value": "{{ URL__c }}",
+        "description": {
+          "format": "text",
+          "content": "URL artifact from Salesforce case"
+        }
+      }
+      {% endif %}
+    {% if Email_Recipient__c %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "Email Recipient"
+        },
+        "value": "{{ Email_Recipient__c }}",
+        "description": {
+          "format": "text",
+          "content": "Email Recipient artifact from Salesforce case"
+        }
+      }
+      {% endif %}
+    {% if Email_Sender__c %}
+      {{- comma() }}
+      {
+        "type": {
+          "name": "Email Sender"
+        },
+        "value": "{{ Email_Sender__c }}",
+        "description": {
+          "format": "text",
+          "content": "Email Sender artifact from Salesforce case"
+        }
+      }
+      {% endif %}
+  ]
 }
 ```
 
