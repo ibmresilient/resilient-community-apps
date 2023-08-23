@@ -91,6 +91,7 @@ class AppCommon():
         if not self.polling_record_type_names:
             self.polling_record_type_names = []
         self.record_type_id_list = ""
+        self.soql_limit = app_configs.get("soql_limit", LIMIT)
 
         # Setup access token in the header for making Salesforce REST API calls 
         if self.access_token:
@@ -214,7 +215,7 @@ class AppCommon():
         # Build the SOQL query based on the polling time and the user input polling_filters
         soql_query = self._add_query_filters(SOQL_QUERY_LAST_MODIFIED_DATE.format(time=readable_time), 
                                              self.record_type_id_list,
-                                             self.polling_filters, LIMIT)
+                                             self.polling_filters, self.soql_limit)
         params = {'q': soql_query}
         LOG.debug("Querying endpoint with URL %s", soql_query)
 
@@ -634,7 +635,7 @@ class AppCommon():
         Returns:
             list: the whole list of results from a call to REST API
         """
-        records = response_json.get("records", [])
+        all_records = response_json.get("records", [])
             
         done = response_json.get("done", True)
         while not done:
@@ -650,11 +651,11 @@ class AppCommon():
             response_json = response.json()
             records = response_json.get("records", [])
 
-            records.extend(records)
+            all_records.extend(records)
 
             # Check if we are done
             done = response_json.get("done", True)
-        return records
+        return all_records
     
 def callback(response):
     """
