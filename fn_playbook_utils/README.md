@@ -38,8 +38,8 @@
 - [Script - PB: Display playbook data](#script---pb-display-playbook-data)
 - [Script - PB: Display workflow data](#script---pb-display-workflow-data)
 - [Adding Usage Data for Datatables](#adding-usage-data-for-datatables)
-- [Data Table - Playbook Usage](#data-table---playbook-usage)
-- [Rules](#rules)
+- [Data Table - Playbook/Workflow Usage](#data-table---Playbook/Workflow-usage)
+- [Playbooks](#Playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -1521,7 +1521,7 @@ It's possible to create rules to get usage data on your custom datatables follow
 4. Make sure to reference your completed workflow in the rule created in step 1.
 ---
 
-## Data Table - Playbook usage
+## Data Table - Playbook/Workflow Usage
 
  ![screenshot: dt-workflow-usage](./doc/screenshots/dt-workflow-usage.png)
 
