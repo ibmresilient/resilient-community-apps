@@ -16,14 +16,16 @@
 
 # fn_google_cloud_dlp
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
   - [Resilient platform](#resilient-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Authenticating to Google Cloud](#authenticating-to-google-cloud) 
+  - [Authenticating to Google Cloud](#authenticating-to-google-cloud)
+    - [Using an Integration Server:](#using-an-integration-server)
+    - [Using App Host:](#using-app-host)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
 - [Installation](#installation)
@@ -32,7 +34,8 @@
 - [Function - Google Cloud DLP: De-Identify Content](#function---google-cloud-dlp-de-identify-content)
 - [Function - Google Cloud DLP: Inspect Content](#function---google-cloud-dlp-inspect-content)
 - [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 ---
 
 ## Release Notes
@@ -44,7 +47,8 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 06/2019 | Initial Release |
 | 1.1.0 | 09/2021 | Added App Host Support |
-| 1.2.0 | 06/2022 | Dropped Python v2 Support |
+| 1.2.0 | 06/2022 | Only Python 3.6 or 3.9 supported |
+| 1.2.1 | 08/2023 | Only Python 3.9 supported |
 
 ---
 
@@ -125,7 +129,7 @@ When configuring the app after installing, you must create a new file in the "Co
 The app does support a proxy server.
 
 ### Python Environment
-Both Python 3.6 and Python 3.9 are supported.
+Python 3.9 is the only officially supported version of Python for this app.
 Additional package dependencies may exist for each of these packages:
 *'resilient_circuits>=45.0.0',
 *'google-cloud-dlp~=3.7.1',
