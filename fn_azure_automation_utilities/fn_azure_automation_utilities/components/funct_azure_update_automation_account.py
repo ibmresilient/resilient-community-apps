@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# Generated with resilient-sdk v49.1.51
 
 """AppFunction implementation"""
 
@@ -8,10 +8,10 @@ from resilient_lib import validate_fields
 from fn_azure_automation_utilities.util.helper import AzureClient, PACKAGE_NAME
 from ast import literal_eval
 
-FN_NAME = "azure_add_or_update_automation_account"
+FN_NAME = "azure_update_automation_account"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'azure_add_or_update_automation_account'"""
+    """Component that implements function 'azure_update_automation_account'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -19,7 +19,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Create or update an automation account on Azure
+        Function: Update an automation account.
         Inputs:
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
@@ -31,9 +31,6 @@ class FunctionComponent(AppFunctionComponent):
         # Validate inputs
         validate_fields(["account_name", "resource_group_name", "input_parameters"], fn_inputs)
         input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
-        # If no tags given then remove it from the dictionary
-        if input_parameters.get("tags") == None:
-            del input_parameters["tags"]
 
         # Connect to Azure
         client = AzureClient(
@@ -49,7 +46,7 @@ class FunctionComponent(AppFunctionComponent):
             refresh_token=self.options.get("refresh_token")
         )
 
-        results = client.create_update_automation_account(input_parameters)
+        results = client.update_automation_account(input_parameters)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

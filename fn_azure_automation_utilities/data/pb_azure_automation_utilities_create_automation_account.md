@@ -4,10 +4,10 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Azure Automation Utilities: Create or Update automation account - Example (PB)
+# Playbook - Azure Automation Utilities: Create automation account - Example (PB)
 
 ### API Name
-`azure_automation_utilities_create_or_update_automation_account`
+`azure_automation_utilities_create_automation_account`
 
 ### Status
 `enabled`
@@ -19,14 +19,14 @@
 `incident`
 
 ### Description
-Create or update an Azure automation account
+Create an Azure automation account
 
 
 ---
-## Function - Azure Add or update Automation account
+## Function - Azure Create Automation account
 
 ### API Name
-`azure_add_or_update_automation_account`
+`azure_create_automation_account`
 
 ### Output Name
 `account_results`
@@ -72,7 +72,7 @@ inputs.input_parameters = str(payload)
 ```python
 results = playbook.functions.results.account_results
 if results.get("success"):
-  incident.addNote(f"Account '{playbook.inputs.azure_automation_account_name}' was create/updated successfully.")
+  incident.addNote(f"Account '{playbook.inputs.azure_automation_account_name}' was created successfully.")
 ```
 
 ---

@@ -126,7 +126,6 @@ class AzureClient(object):
                                             {'responseCode': response.status_code,
                                             'responseContent': response.text})
 
-
     def get_job(self, job_name: str):
         """
         Get the Azure run job.
@@ -173,12 +172,12 @@ class AzureClient(object):
             if job_status == "Failed":
                 raise AzureRunJobFailed(f"Run job: {job_name} failed.")
 
-    def create_update_automation_account(self, payload: dict):
+    def create_automation_account(self, payload: dict):
         """
-        Create or update an Azure automation account.
+        Create an Azure automation account.
         :param payload: Payload to send to azure that contains automation account properties.
         :type payload: dict
-        :return: Response from the PUT request to create/update Azure automation account.
+        :return: Response from the PUT request to create Azure automation account.
         :return type: dict
 
         Example payload:
@@ -203,6 +202,37 @@ class AzureClient(object):
         headers = self.header
         headers['Content-Type'] = 'application/json'
         return self.rc.execute("PUT", url, headers=headers, json=payload).json()
+
+    def update_automation_account(self, payload: dict):
+        """
+        Update an Azure automation account.
+        :param payload: Payload to send to azure that contains automation account properties.
+        :type payload: dict
+        :return: Response from the PATCH request to update Azure automation account.
+        :return type: dict
+
+        Example payload:
+        {
+            "name": "testAutomationAccount",
+            "location": "eastus",
+            "tags": {
+                "client": "sentinel"
+            },
+            "properties": {
+                "publicNetworkAccess": True,
+                "disableLocalAuth": False,
+                "sku": {
+                    "name": "Basic",
+                    "family": None,
+                    "capacity": None
+                }
+            }
+        }
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}?api-version=2021-06-22"
+        headers = self.header
+        headers['Content-Type'] = 'application/json'
+        return self.rc.execute("PATCH", url, headers=headers, json=payload).json()
 
     def delete_automation_acount(self):
         """

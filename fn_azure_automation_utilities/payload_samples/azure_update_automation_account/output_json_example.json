@@ -1,0 +1,64 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "name": "autotester24",
+    "systemData": {
+      "createdAt": "2023-08-22T12:44:27.9+00:00",
+      "lastModifiedAt": "2023-08-22T13:16:59.3333333+00:00"
+    },
+    "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/autotester24",
+    "type": "Microsoft.Automation/AutomationAccounts",
+    "location": "Canada East",
+    "tags": {},
+    "etag": null,
+    "properties": {
+      "publicNetworkAccess": false,
+      "disableLocalAuth": false,
+      "sku": {
+        "name": "Basic",
+        "family": null,
+        "capacity": null
+      },
+      "state": "Ok",
+      "RegistrationUrl": "https://55555555-3333-4444-bb0f-030397ea7fc1.agentsvc.yq.azure-automation.net/accounts/55555555-3333-4444-bb0f-030397ea7fc1",
+      "encryption": {
+        "keySource": "Microsoft.Automation",
+        "identity": {
+          "userAssignedIdentity": null
+        }
+      },
+      "automationHybridServiceUrl": "https://55555555-3333-4444-bb0f-030397ea7fc1.jrds.yq.azure-automation.net/automationAccounts/55555555-3333-4444-bb0f-030397ea7fc1",
+      "RuntimeConfiguration": {
+        "powershell": {
+          "builtinModules": {
+            "Az": "8.0.0"
+          }
+        },
+        "powershell7": {
+          "builtinModules": {
+            "Az": "8.0.0"
+          }
+        }
+      },
+      "creationTime": "2023-08-22T12:44:27.9+00:00",
+      "lastModifiedBy": null,
+      "lastModifiedTime": "2023-08-22T13:16:59.3333333+00:00"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "input_parameters": "{'name': 'autotester24', 'properties': {'sku': {'name': 'Basic'}, 'publicNetworkAccess': False}}",
+    "account_name": "autotester24",
+    "resource_group_name": "demoassets"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-azure-automation-utilities",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 529,
+    "timestamp": "2023-08-22 09:16:59"
+  }
+}

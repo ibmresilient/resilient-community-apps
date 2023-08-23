@@ -15,7 +15,7 @@ scope = https://management.azure.com/user_impersonation openid profile offline_a
 refresh_token = 0.AXwAdjrtUIm4TUOALRO4kr8Ee7zHLGYr_9
 """
 
-def create_update_results():
+def create_account_results():
     return {
         "name": "test-account",
         "systemData": {
@@ -59,6 +59,53 @@ def create_update_results():
             "creationTime": "2023-07-25T12:23:38.673+00:00",
             "lastModifiedBy": None,
             "lastModifiedTime": "2023-07-25T12:23:38.673+00:00"
+        }
+    }
+
+def update_account_results():
+    return {
+        "name": "autotester24",
+        "systemData": {
+        "createdAt": "2023-08-22T12:44:27.9+00:00",
+        "lastModifiedAt": "2023-08-22T13:16:59.3333333+00:00"
+        },
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/autotester24",
+        "type": "Microsoft.Automation/AutomationAccounts",
+        "location": "Canada East",
+        "tags": {},
+        "etag": None,
+        "properties": {
+        "publicNetworkAccess": False,
+        "disableLocalAuth": False,
+        "sku": {
+            "name": "Basic",
+            "family": None,
+            "capacity": None
+        },
+        "state": "Ok",
+        "RegistrationUrl": "https://55555555-3333-4444-bb0f-030397ea7fc1.agentsvc.yq.azure-automation.net/accounts/55555555-3333-4444-bb0f-030397ea7fc1",
+        "encryption": {
+            "keySource": "Microsoft.Automation",
+            "identity": {
+            "userAssignedIdentity": None
+            }
+        },
+        "automationHybridServiceUrl": "https://55555555-3333-4444-bb0f-030397ea7fc1.jrds.yq.azure-automation.net/automationAccounts/55555555-3333-4444-bb0f-030397ea7fc1",
+        "RuntimeConfiguration": {
+            "powershell": {
+            "builtinModules": {
+                "Az": "8.0.0"
+            }
+            },
+            "powershell7": {
+            "builtinModules": {
+                "Az": "8.0.0"
+            }
+            }
+        },
+        "creationTime": "2023-08-22T12:44:27.9+00:00",
+        "lastModifiedBy": None,
+        "lastModifiedTime": "2023-08-22T13:16:59.3333333+00:00"
         }
     }
 
@@ -747,9 +794,13 @@ def mock_init():
             """ Mock """
             pass
 
-        def create_update_automation_account(self, payload):
-            """ Mock create/update automation account return """
-            return create_update_results()
+        def create_automation_account(self, payload):
+            """ Mock create automation account return """
+            return create_account_results()
+
+        def update_automation_account(self, payload):
+            """ Mock update automation account return """
+            return update_account_results()
 
         def delete_automation_acount(self):
             """ Mock delete automation account return """
