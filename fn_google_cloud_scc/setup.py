@@ -34,7 +34,7 @@ setup(
         "resilient-circuits          >= 49.0",
         "google-cloud-securitycenter ~= 1.11"
     ],
-    python_requires='>=3.9',
+    python_requires='>=3.7',
     packages=find_packages(),
     include_package_data=True,
     platforms="any",
