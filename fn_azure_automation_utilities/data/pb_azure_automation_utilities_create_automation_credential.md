@@ -69,7 +69,7 @@ inputs.input_parameters = str(payload)
 ```python
 results = playbook.functions.results.create_results
 if results.get("success"):
-  incident.addNote(f"Credential '{playbook.inputs.azure_automation_credential_name}' was updated successfully.")
+  incident.addNote(f"Credential '{playbook.inputs.azure_automation_credential_name}' was created successfully.")
 ```
 
 ---

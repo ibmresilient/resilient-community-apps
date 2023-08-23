@@ -22,7 +22,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_azure_automation_utilities",
         "message_destinations": [u"fn_azure_automation_utilities"],
-        "functions": [u"azure_create_automation_account", u"azure_create_automation_credential", u"azure_delete_automation_account", u"azure_delete_automation_credential", u"azure_delete_runbook", u"azure_execute_runbook", u"azure_get_automation_account", u"azure_get_automation_agent_registration_information", u"azure_get_automation_credential", u"azure_get_automation_job", u"azure_get_automation_job_output", u"azure_get_automation_module_activity", u"azure_get_runbook", u"azure_list_automation_accounts", u"azure_list_automation_accounts_by_resource_group", u"azure_list_automation_credentials_by_automation_account", u"azure_list_automation_jobs_by_automation_account", u"azure_list_automation_module_activities", u"azure_list_runbooks_by_automation_account", u"azure_regenerate_automation_agent_registration_key", u"azure_resume_automation_job", u"azure_stop_automation_job", u"azure_suspend_automation_job", u"azure_update_automation_account", u"azure_update_automation_credential"],
+        "functions": [u"azure_create_automation_account", u"azure_create_automation_credential", u"azure_create_automation_job_schedule", u"azure_delete_automation_account", u"azure_delete_automation_credential", u"azure_delete_automation_job_schedule", u"azure_delete_runbook", u"azure_execute_runbook", u"azure_get_automation_account", u"azure_get_automation_agent_registration_information", u"azure_get_automation_credential", u"azure_get_automation_job", u"azure_get_automation_job_output", u"azure_get_automation_job_schedule", u"azure_get_automation_module_activity", u"azure_get_runbook", u"azure_list_automation_accounts", u"azure_list_automation_accounts_by_resource_group", u"azure_list_automation_credentials_by_automation_account", u"azure_list_automation_job_schedule_by_automation_account", u"azure_list_automation_jobs_by_automation_account", u"azure_list_automation_module_activities", u"azure_list_runbooks_by_automation_account", u"azure_regenerate_automation_agent_registration_key", u"azure_resume_automation_job", u"azure_stop_automation_job", u"azure_suspend_automation_job", u"azure_update_automation_account", u"azure_update_automation_credential"],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"azure_automation_utilities_create_automation_account", u"azure_automation_utilities_create_automation_credential", u"azure_automation_utilities_delete_automation_account", u"azure_automation_utilities_delete_automation_credential", u"azure_automation_utilities_delete_runbook", u"azure_automation_utilities_execute_runbook", u"azure_automation_utilities_get_automation_account", u"azure_automation_utilities_get_automation_agent_registration_information", u"azure_automation_utilities_get_automation_credential", u"azure_automation_utilities_get_automation_job", u"azure_automation_utilities_get_automation_job_output", u"azure_automation_utilities_get_automation_module_activity", u"azure_automation_utilities_get_runbook", u"azure_automation_utilities_list_automation_accounts", u"azure_automation_utilities_list_automation_accounts_by_resource_group", u"azure_automation_utilities_list_automation_credentials_by_automation_account", u"azure_automation_utilities_list_automation_jobs_by_automation_account", u"azure_automation_utilities_list_automation_module_activities", u"azure_automation_utilities_list_runbooks_by_automation_account", u"azure_automation_utilities_regenerate_automation_agent_registration_key", u"azure_automation_utilities_resume_automation_job", u"azure_automation_utilities_stop_automation_job", u"azure_automation_utilities_suspend_automation_job", u"azure_automation_utilities_update_automation_account", u"azure_automation_utilities_update_automation_credential"]
+        "playbooks": [u"azure_automation_utilities_create_automation_account", u"azure_automation_utilities_create_automation_credential", u"azure_automation_utilities_create_automation_job_schedule", u"azure_automation_utilities_delete_automation_account", u"azure_automation_utilities_delete_automation_credential", u"azure_automation_utilities_delete_automation_job_schedule", u"azure_automation_utilities_delete_runbook", u"azure_automation_utilities_execute_runbook", u"azure_automation_utilities_get_automation_account", u"azure_automation_utilities_get_automation_agent_registration_information", u"azure_automation_utilities_get_automation_credential", u"azure_automation_utilities_get_automation_job", u"azure_automation_utilities_get_automation_job_output", u"azure_automation_utilities_get_automation_job_schedule", u"azure_automation_utilities_get_automation_module_activity", u"azure_automation_utilities_get_runbook", u"azure_automation_utilities_list_automation_accounts", u"azure_automation_utilities_list_automation_accounts_by_resource_group", u"azure_automation_utilities_list_automation_credentials_by_automation_account", u"azure_automation_utilities_list_automation_job_schedule_by_automation_account", u"azure_automation_utilities_list_automation_jobs_by_automation_account", u"azure_automation_utilities_list_automation_module_activities", u"azure_automation_utilities_list_runbooks_by_automation_account", u"azure_automation_utilities_regenerate_automation_agent_registration_key", u"azure_automation_utilities_resume_automation_job", u"azure_automation_utilities_stop_automation_job", u"azure_automation_utilities_suspend_automation_job", u"azure_automation_utilities_update_automation_account", u"azure_automation_utilities_update_automation_credential"]
     }
 
 
@@ -48,8 +48,10 @@ def customization_data(client=None):
     - Functions:
         - azure_create_automation_account
         - azure_create_automation_credential
+        - azure_create_automation_job_schedule
         - azure_delete_automation_account
         - azure_delete_automation_credential
+        - azure_delete_automation_job_schedule
         - azure_delete_runbook
         - azure_execute_runbook
         - azure_get_automation_account
@@ -57,11 +59,13 @@ def customization_data(client=None):
         - azure_get_automation_credential
         - azure_get_automation_job
         - azure_get_automation_job_output
+        - azure_get_automation_job_schedule
         - azure_get_automation_module_activity
         - azure_get_runbook
         - azure_list_automation_accounts
         - azure_list_automation_accounts_by_resource_group
         - azure_list_automation_credentials_by_automation_account
+        - azure_list_automation_job_schedule_by_automation_account
         - azure_list_automation_jobs_by_automation_account
         - azure_list_automation_module_activities
         - azure_list_runbooks_by_automation_account
@@ -74,8 +78,10 @@ def customization_data(client=None):
     - Playbooks:
         - azure_automation_utilities_create_automation_account
         - azure_automation_utilities_create_automation_credential
+        - azure_automation_utilities_create_automation_job_schedule
         - azure_automation_utilities_delete_automation_account
         - azure_automation_utilities_delete_automation_credential
+        - azure_automation_utilities_delete_automation_job_schedule
         - azure_automation_utilities_delete_runbook
         - azure_automation_utilities_execute_runbook
         - azure_automation_utilities_get_automation_account
@@ -83,11 +89,13 @@ def customization_data(client=None):
         - azure_automation_utilities_get_automation_credential
         - azure_automation_utilities_get_automation_job
         - azure_automation_utilities_get_automation_job_output
+        - azure_automation_utilities_get_automation_job_schedule
         - azure_automation_utilities_get_automation_module_activity
         - azure_automation_utilities_get_runbook
         - azure_automation_utilities_list_automation_accounts
         - azure_automation_utilities_list_automation_accounts_by_resource_group
         - azure_automation_utilities_list_automation_credentials_by_automation_account
+        - azure_automation_utilities_list_automation_job_schedule_by_automation_account
         - azure_automation_utilities_list_automation_jobs_by_automation_account
         - azure_automation_utilities_list_automation_module_activities
         - azure_automation_utilities_list_runbooks_by_automation_account

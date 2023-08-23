@@ -491,3 +491,69 @@ class AzureClient(object):
         header = self.header
         header["Content-Type"] = 'application/json'
         return self.rc.execute("PATCH", url, json=payload, headers=header).json()
+
+    def create_automation_job_schedule(self, job_schedule_name: str, payload: dict):
+        """
+        Create a job schedule.
+        :param job_schedule_name: Name of the Azure automation job schedule
+        :type job_schedule_name: str
+        :param payload: Properties of the job schedule
+        :type payload: dict
+        :return: Response from PUT request to Azure
+        :return type: dict
+
+        Example payload:
+        {
+            "properties": {
+                "schedule": {
+                "name": "ScheduleNameGoesHere332204b5-debe-4348-a5c7-6357457189f2"
+                },
+                "runbook": {
+                "name": "TestRunbook"
+                },
+                "parameters": {
+                "jobscheduletag01": "jobschedulevalue01",
+                "jobscheduletag02": "jobschedulevalue02"
+                }
+            }
+        }
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobSchedules/{job_schedule_name}?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("PUT", url, json=payload, headers=header).json()
+
+    def delete_automation_job_schedule(self, job_schedule_name: str):
+        """
+        Delete the job schedule identified by job schedule name.
+        :param job_schedule_name: Name of the Azure automation job schedule
+        :type job_schedule_name: str
+        :return: Response from DELETE request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobSchedules/{job_schedule_name}?api-version=2019-06-01"
+        return self.rc.execute("Delete", url, headers=self.header)
+
+    def get_automation_job_schedule(self, job_schedule_name: str):
+        """
+        Retrieve the job schedule identified by job schedule name.
+        :param job_schedule_name: Name of the Azure automation job schedule
+        :type job_schedule_name: str
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobSchedules/{job_schedule_name}?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("GET", url, headers=header).json()
+
+    def list_automation_job_schedule_by_automation_account(self):
+        """
+        Retrieve a list of job schedules.
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobSchedules?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("GET", url, headers=header).json()
