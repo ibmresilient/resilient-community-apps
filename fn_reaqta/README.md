@@ -18,72 +18,53 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# ReaQta
+# ReaQta <!-- omit in toc -->
 
-## Table of Contents
-- [ReaQta](#reaqta)
-  - [Table of Contents](#table-of-contents)
-  - [Release Notes](#release-notes)
-    - [1.4.0](#140)
-  - [History](#history)
-  - [Overview](#overview)
-    - [Key Features](#key-features)
-  - [Requirements](#requirements)
-    - [SOAR platform](#soar-platform)
-    - [Cloud Pak for Security](#cloud-pak-for-security)
-    - [Proxy Server](#proxy-server)
-    - [Python Environment](#python-environment)
-    - [Development Version](#development-version)
-      - [Configuration](#configuration)
-  - [Installation](#installation)
-    - [Install](#install)
-    - [App Configuration](#app-configuration)
-      - [\[fn\_reaqta\]](#fn_reaqta)
-      - [\[fn\_reaqta:hive\_label\]](#fn_reaqtahive_label)
-    - [Custom Layouts](#custom-layouts)
-  - [Poller Considerations](#poller-considerations)
-  - [Function - ReaQta Get Endpoint Status](#function---reaqta-get-endpoint-status)
-  - [Function - ReaQta: Attach File](#function---reaqta-attach-file)
-  - [Function - ReaQta: Close Alert](#function---reaqta-close-alert)
-  - [Function - ReaQta: Create Artifact](#function---reaqta-create-artifact)
-  - [Function - ReaQta: Create Note](#function---reaqta-create-note)
-  - [Function - ReaQta: Create Policy](#function---reaqta-create-policy)
-  - [Function - ReaQta: Get Alert Information](#function---reaqta-get-alert-information)
-  - [Function - ReaQta: Get Processes](#function---reaqta-get-processes)
-  - [Function - ReaQta: Isolate Machine](#function---reaqta-isolate-machine)
-  - [Function - ReaQta: Deisolate Machine](#function---reaqta-deisolate-machine)
-  - [Function - ReaQta: Kill Process](#function---reaqta-kill-process)
-  - [Data Table - ReaQta Process List](#data-table---reaqta-process-list)
-      - [API Name:](#api-name)
-      - [Columns:](#columns)
-  - [Data Table - ReaQta Trigger Events](#data-table---reaqta-trigger-events)
-      - [API Name:](#api-name-1)
-      - [Columns:](#columns-1)
-  - [Custom Fields](#custom-fields)
-  - [Playbooks](#playbooks)
-  - [Templates for SOAR Cases](#templates-for-soar-cases)
-    - [soar\_create\_case\_template.jinja](#soar_create_case_templatejinja)
-    - [soar\_close\_case\_template.jinja](#soar_close_case_templatejinja)
-  - [Troubleshooting \& Support](#troubleshooting--support)
-    - [For Support](#for-support)
+## Table of Contents <!-- omit in toc -->
+- [History](#history)
+- [Release Notes](#release-notes)
+- [Overview](#overview)
+  - [Key Features](#key-features)
+- [Requirements](#requirements)
+  - [SOAR platform](#soar-platform)
+  - [Cloud Pak for Security](#cloud-pak-for-security)
+  - [Proxy Server](#proxy-server)
+  - [Python Environment](#python-environment)
+  - [Development Version](#development-version)
+    - [Configuration](#configuration)
+- [Installation](#installation)
+  - [Install](#install)
+  - [App Configuration](#app-configuration)
+    - [\[fn\_reaqta\]](#fn_reaqta)
+    - [\[fn\_reaqta:hive\_label\]](#fn_reaqtahive_label)
+  - [Custom Layouts](#custom-layouts)
+- [Poller Considerations](#poller-considerations)
+- [Function - ReaQta Get Endpoint Status](#function---reaqta-get-endpoint-status)
+- [Function - ReaQta: Attach File](#function---reaqta-attach-file)
+- [Function - ReaQta: Close Alert](#function---reaqta-close-alert)
+- [Function - ReaQta: Create Artifact](#function---reaqta-create-artifact)
+- [Function - ReaQta: Create Note](#function---reaqta-create-note)
+- [Function - ReaQta: Create Policy](#function---reaqta-create-policy)
+- [Function - ReaQta: Get Alert Information](#function---reaqta-get-alert-information)
+- [Function - ReaQta: Get Processes](#function---reaqta-get-processes)
+- [Function - ReaQta: Isolate Machine](#function---reaqta-isolate-machine)
+- [Function - ReaQta: Deisolate Machine](#function---reaqta-deisolate-machine)
+- [Function - ReaQta: Kill Process](#function---reaqta-kill-process)
+- [Data Table - ReaQta Process List](#data-table---reaqta-process-list)
+    - [API Name:](#api-name)
+    - [Columns:](#columns)
+- [Data Table - ReaQta Trigger Events](#data-table---reaqta-trigger-events)
+    - [API Name:](#api-name-1)
+    - [Columns:](#columns-1)
+- [Custom Fields](#custom-fields)
+- [Playbooks](#playbooks)
+- [Templates for SOAR Cases](#templates-for-soar-cases)
+  - [soar\_create\_case\_template.jinja](#soar_create_case_templatejinja)
+  - [soar\_close\_case\_template.jinja](#soar_close_case_templatejinja)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 
 ---
-
-## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
-
-
--->
-
-### 1.4.0
-
-In v1.4.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
-
-If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
-
-You can continue to use the rules/workflows. But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 ## History
 | Version | Date | Notes |
@@ -92,8 +73,15 @@ You can continue to use the rules/workflows. But migrating to playbooks provides
 | 1.1.0 | 08/2023 | Convert Rules and Workflows to Playbooks |
 | 1.2.0 | 08/2023 | Added support for Deisolate endpoint |
 
+## Release Notes
 
+### 1.2.0 <!-- omit in toc -->
 
+In v1.2.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows. But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 
 ---
@@ -4907,7 +4895,7 @@ None
 ---
 
 ## Function - ReaQta: Deisolate Machine
-Isolate a ReaQta controlled machine based on it's endpoint ID
+Deisolate a ReaQta controlled machine based on it's endpoint ID
 
  ![screenshot: fn-reaqta-Deisolate-machine ](./doc/screenshots/fn-reaqta-Deisolate-machine.png) 
 
