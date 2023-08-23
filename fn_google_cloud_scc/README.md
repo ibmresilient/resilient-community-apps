@@ -45,6 +45,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.2 | 08/2023 | Only Python 3.9 supported |
 | 1.0.1 | 02/2023 | Proxy bug fix |
 | 1.0.0 | 08/2022 | Initial Release |
 
@@ -121,7 +122,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app supports a proxy server.
 
 ### Python Environment
-Python 3.6 and 3.9 are officially supported.
+Python 3.9 is the only officially supported version of Python for this app.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits >= 45.0
 * google-cloud-securitycenter ~= 1.12
