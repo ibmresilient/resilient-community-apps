@@ -23,6 +23,19 @@
       - [Example:](#example-1)
     - [Hint:](#hint)
       - [Example:](#example-2)
+  - [Authentication](#authentication)
+  - [OAuth 2.0](#oauth-20)
+    - [Method 1: Using CODE:](#method-1-using-code)
+    - [Method 2: Using REFRESH\_TOKEN](#method-2-using-refresh_token)
+    - [Method 3: Using ACCESS\_TOKEN](#method-3-using-access_token)
+  - [Client-side authentication with certificates](#client-side-authentication-with-certificates)
+    - [1. Client Authentication Certificate (client\_auth\_cert):](#1-client-authentication-certificate-client_auth_cert)
+    - [2. Client Authentication Private Key (client\_auth\_key):](#2-client-authentication-private-key-client_auth_key)
+    - [3. Client Authentication PEM (client\_auth\_pem):](#3-client-authentication-pem-client_auth_pem)
+    - [INPUT FORMAT:](#input-format-1)
+  - [JSON Web Token Authentication](#json-web-token-authentication)
+    - [1. Using Endpoint provided token](#1-using-endpoint-provided-token)
+    - [2. Compiling a Token using JWT parameters](#2-compiling-a-token-using-jwt-parameters)
   - [Playbooks](#playbooks)
   - [Troubleshooting \& Support](#troubleshooting--support)
     - [For Support](#for-support)
@@ -33,6 +46,7 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 05/2023 | Initial Release |
+| 1.1.0 | 06/2023 | Added support for OAuth, Client Side Authentication using certificates, JWT
 
 ---
 
@@ -208,19 +222,189 @@ This key can be directly referenced from within a playbook. For instance, a head
     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
   ```
 
+--- 
+
+## Authentication 
+
+The Call REST API function offers support for various authentication protocols that can be employed alongside the REST
+request. These authentication methods are optional. If the endpoint does not necessitate any form of 
+authentication, you can easily disregard this section, and the Call REST API function will not execute the authentication
+process.
+
+## OAuth 2.0
+
+OAuth2 is an authorization framework that allows a user to grant limited access to their resources on a particular endpoint
+to QRadar SOAR without sharing their credentials (such as username and password). This process typically involves 2 different
+flows: Authorization and Authentication. It is expected for the user to have already performed the authorization flow and 
+possesses all the necessary parameters for the Authentication flow. There are three methods available for performing the 
+Authentication flow, as mentioned below.
+
+ Note:   The exact implementation details of OAuth2 can vary depending on the
+         authorization server and the API you are integrating with. Make sure to consult
+         the OAuth2 documentation specific to the service you are working with.
+
+### Method 1: Using CODE:
+
+     The authorization server redirects the user back to address specified on the 
+     redirect URI with an authorization CODE. This CODE is a temporary token
+     that represents the user's authorization and usually can be used only once.
+     This function exchanges the authorization code for an ACCESS_TOKEN (and 
+     possibly also a REFRESH_TOKEN depending on the endpoint). This requires making
+     a request to the authorization server's token endpoint, providing the 
+     authorization CODE, client ID, client secret, token URL and redirect URI.
+
+     Note: These codes are generally one time use only.
+
+### Method 2: Using REFRESH_TOKEN
+
+     It is a credential that is used to obtain a new access token from the
+     authorization server when the original access token expires. It is an integral
+     part of the OAuth 2.0 protocol and enables long-lived access to protected 
+     resources without requiring the user to repeatedly authenticate. This can 
+     be used for prolonged authentication as using a REFRESH_TOKEN generally extends
+     the validity of the token. Client ID, Client secret, Redirect URI and token URL
+     might also have to be provided.
+
+     Note: These can be used more than once. The validity of the REFRESH_TOKEN is
+           generally extended on use, making it viable for long lived access.
+
+### Method 3: Using ACCESS_TOKEN
+
+      If an ACCESS_TOKEN is available, it can be directly used without having to 
+      perform authentication. In order to use the ACCESS_TOKEN, all that is required
+      is the ACCESS_TOKEN & the TOKEN_TYPE. If the TOKEN_TYPE is not specified, the
+      DEFAULT_TOKEN_TYPE (bearer) is used.
+
+
+## Client-side authentication with certificates
+
+Also known as mutual authentication or two-way SSL/TLS authentication, is a security mechanism used in web applications to
+verify the identities of both the client (user or device) and the server during the SSL/TLS handshake. In traditional SSL/TLS
+authentication, only the server is authenticated using a digital certificate issued by a trusted Certificate Authority (CA).
+However, with client-side authentication, the client also presents a digital certificate to the server for verification.
+
+Note:   Client-side authentication with certificates provides an extra layer of
+        security by ensuring that the client is trusted and authenticated before
+        allowing access to sensitive resources or data. And so this can be used 
+        in tandem with other authentication methods
+
+### 1. Client Authentication Certificate (client_auth_cert):
+   
+      A client authentication certificate, also known as a client certificate,
+      is a digital certificate that is issued to the client (user or device) as
+      part of the mutual authentication process. It contains the client's public
+      key, identifying information (such as the client's name or ID), and is
+      signed by a trusted Certificate Authority (CA) or a self-signed certificate
+      if it is a closed system.
+
+### 2. Client Authentication Private Key (client_auth_key):
+   
+      Private key is a cryptographic key that corresponds to the client's public
+      key in the client authentication certificate. The private key is securely
+      stored by the client and kept confidential. During the SSL/TLS handshake,
+      when the server sends a challenge to the client, the client uses its 
+      private key to decrypt the challenge and generate a response. 
+      The server then verifies this response to ensure that the client possesses
+      the corresponding private key and is thus authenticated.
+
+### 3. Client Authentication PEM (client_auth_pem): 
+   
+      This is simply the file format used to store both the client authentication
+      certificate and private key in a single PEM (Privacy-Enhanced Mail) file. PEM
+      files are a common format for storing cryptographic objects, such as
+      certificates and private keys, in a human-readable and ASCII-encoded format.
+
+Note:   The client authentication certificate and private key are commonly given
+        together, whereas the PEM file is typically provided separately as an 
+        independent file.
+
+### INPUT FORMAT:
+
+   The information within these certificates can be directly copied and pasted as
+   plain text into the appropriate certificate type, enclosed within quotation marks.
+   When making an API call, the application should automatically generate the
+   certificates using the pasted content and will securely discard them upon execution.
+   All three inputs (client_auth_cert, client_auth_key and client_auth_pem) follow the
+   same input format, as shown below.
+
+```python
+  inputs.client_auth_cert = """
+      Bag Attributes
+          friendlyName: Authentication certificate
+          localKeyID: 78 94 0E 86 8D 30 EC D3 90 C8 6A 69 0F XX XX XX XX
+      Key Attributes: <No Attributes>
+      -----BEGIN CERTIFICATE-----
+      MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G
+      9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E
+      FEgCxB3Rdkim5Dfog6SCCFWIa4YAyv0rdgNLeRbQNTKyT14+inqWE+CLKvZ/T+56
+      OEdDSh0RPCg+UxjyCnkSiMce+/8RT+FXK41q1iQZAREJGEpZJIizVYB+aW2caCdq
+      PteGybdmFFeRIP/qbo0u17zc+Urj+MbuqYcEtx5YriF39+xRrReDbteSTnigQQP4
+      7zQHgQkU+U6MOuFTICtqVBuH9LX8qCJAG+92FLseh6I4qg0gd1ilyTG8PnhKuBRi
+      vkuz+SOtAgMBAAECggEAFkbnNQxamWGs6DpNT9j6V7412yZMZatVtaguR5CXJ9KU
+      0GTV1+9qwGIKnt4tZPOmQYh2h+8WUn2xHFVY5I7seX6mo8EXmCq2cT21PmI4QYCf
+      cNOKjYkEgwKBgAktKQorCoDvo5oiI89zpUhRHbJIlGWHuZFCCmEIQb4z+dUr72LL
+      uhZP0s22aRkqXMzDblFYrS0H3p7clhqEsoD9DO9WsiQK/2G85nR+IZd9U0bQ7z/t
+      7FOMkDbMPHkmkwAHlFC/UbS4XWJCZzrOoi6Zl/Cx4nFwvWyn7OtJfI/xAoGAdgat
+      PtFt97+wPDuSdVIbXjArSSq9F22J/cpG+wOMIGdgtNfPbNJFRG7Q/Lc/eDMPB5Nw
+      9O9YOnDFpqb8S+aE+4/Yfcxg4gGrKazXu+flYNhzpCTx3SpVawQCrUF3dE/2hbV+
+      FbGVFPaJziRDeH3UA1+1q0/bRg1trxqkZtGSGukCgYAA7SWvZ3lGJ42tiFzoH4F5
+      SfTZXQytCwyxXF6BIWTIXQBcCep5TrfOnYz4iEDwMdp4Qb/QhyjaUsIlo+JldquZ
+      k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ
+      Y20A9hExGKyHns4hW5KgvA==
+      -----END CERTIFICATE-----
+      """
+```
+
+## JSON Web Token Authentication
+
+  JWT is also a supported form of authentication. The application has functionality builtin
+  that allows for the creation, compilation, and manipulation of JWTs. It can accept several
+  optional parameters to customize the authentication process.
+  JWT based authentication can be performed in 2 ways:
+
+### 1. Using Endpoint provided token
+
+      This application can function with a predefined jwt token. A fully generated JWT 
+      token can be directly provided, and the application will automatically form the REST
+      headers required for a request.
+
+### 2. Compiling a Token using JWT parameters
+
+      This application can also generate a jwt token. (Skip if you have already specified 
+      a jwt_token). The application can automatically compile a jwt token using certain 
+      parameters which can be provided in json string or line separated format (similar to
+      REST body/header/cookies). These arguments are usually provided by the endpoint itself.
+      The application should be able to create and sign a JWT and automatically incorporate it
+      into the REST request.
+
+
+
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `rest_api_allowed_status_codes` | `text` | No | `"305, 404, 500"` | Comma separated list. All codes < 300 are allowed by default |
-| `rest_api_body` | `textarea` | No | `-` | Request body. See [Input Considerations](#input-considerations) for format |
-| `rest_api_cookies` | `textarea` | No | `-` | Cookies required for the API call. See [Input Considerations](#input-considerations) for format |
-| `rest_api_headers` | `textarea` | No | `-` | Request headers. See [Input Considerations](#input-considerations) for format |
 | `rest_api_method` | `select` | Yes | `GET` | REST methods: GET, HEAD, POST, PUT, DELETE, OPTIONS and PATCH |
-| `rest_api_timeout` | `number` | No | `60` | Request timeout in seconds |
 | `rest_api_url` | `text` | Yes | `www.example.com` | Endpoint URL |
+| `rest_api_headers` | `textarea` | No | `-` | Request headers. See [Input Considerations](#input-considerations) for format |
+| `rest_api_cookies` | `textarea` | No | `-` | Cookies required for the API call. See [Input Considerations](#input-considerations) for format |
+| `rest_api_body` | `textarea` | No | `-` | Request body. See [Input Considerations](#input-considerations) for format |
 | `rest_api_verify` | `boolean` | No | `True` | Verify SSL certificate |
+| `rest_api_timeout` | `number` | No | `60` | Request timeout in seconds |
+| `rest_api_allowed_status_codes` | `text` | No | `"305, 404, 500"` | Comma separated list. All codes < 300 are allowed by default |
+| `oauth_token_url` | `text` | No | `https://www.example.com/oauth/token` | URL for the Authorization server endpoint |
+| `oauth_client_id` | `text` | No | `-` | Identifies the client application |
+| `oauth_client_secret` | `text` | No | `-` | Authenticates the client application (required for certain grant types) |
+| `oauth_redirect_uri` | `text` | No | `https://www.example.com/redirect` | The redirect URI used during the authorization flow (for authorization code grant) |
+| `oauth_scope` | `text` | No | `read write delete offline_access` | Set of permissions granted by the resource owner (user) to the client application |
+| `oauth_code` | `text` | No | `-` | The authorization code received during the authorization flow (for authorization code grant) |
+| `oauth_access_token` | `text` | No | `-` | Resultant token of the Authentication process |
+| `oauth_refresh_token` | `text` | No | `-` | The refresh token used to obtain a new access token (for refresh token grant) |
+| `oauth_token_type` | `text` | No | `Bearer` |  Provides information to the client application about the token's characteristics. Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer |
+| `oauth_auth_cert` | `text` | No | `-` | .csr file contents to be pasted. Requires client_auth_key to function |
+| `oauth_auth_key` | `text` | No | `-` | .key file contents to be pasted. To be provided with client_auth_cert |
+| `oauth_auth_pem` | `text` | No | `-` | .pem file contents to be pasted. Standalone attribute, does not require the above two attribute |
+
 
 </p>
 </details>

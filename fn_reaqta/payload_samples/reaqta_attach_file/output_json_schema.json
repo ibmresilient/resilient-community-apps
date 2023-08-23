@@ -37,27 +37,19 @@
           "type": "integer"
         },
         "actions": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "integer"
-              },
-              "name": {
-                "type": "string"
-              },
-              "enabled": {
-                "type": "boolean"
-              }
-            }
-          }
+          "type": "array"
+        },
+        "playbooks": {
+          "type": "array"
         },
         "task_id": {},
         "task_name": {},
         "task_custom": {},
         "task_members": {},
         "task_at_id": {},
+        "reconciliation_status": {
+          "type": "string"
+        },
         "vers": {
           "type": "integer"
         },
@@ -76,6 +68,9 @@
     "inputs": {
       "type": "object",
       "properties": {
+        "reaqta_hive": {
+          "type": "string"
+        },
         "reaqta_program_path": {
           "type": "string"
         },

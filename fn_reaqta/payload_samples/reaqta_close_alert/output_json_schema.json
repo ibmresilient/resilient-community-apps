@@ -30,6 +30,9 @@
         "reaqta_alert_id": {
           "type": "string"
         },
+        "reaqta_hive": {
+          "type": "string"
+        },
         "reaqta_note": {
           "type": "string"
         }
