@@ -129,7 +129,7 @@ When configuring the app after installing, you must create a new file in the "Co
 The app does support a proxy server.
 
 ### Python Environment
-Python 3.9 is the only officially supported version of Python for this app.
+Python 3.7 or greater is supported for this app.
 Additional package dependencies may exist for each of these packages:
 *'resilient_circuits>=45.0.0',
 *'google-cloud-dlp~=3.7.1',

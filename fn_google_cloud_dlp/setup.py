@@ -35,7 +35,7 @@ setup(
         'python-docx~=0.8.11',
         'defusedxml~=0.7.1',
     ],
-    python_requires='>=3.9',
+    python_requires='>=3.7',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
