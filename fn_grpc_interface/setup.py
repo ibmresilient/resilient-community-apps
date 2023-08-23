@@ -33,10 +33,10 @@ setup(
                     making it easier for you create distributed application and services with IBM Resilient.""",
     install_requires=[
         "resilient_circuits>=30.0.0",
-        "grpcio ~= 1.53.0",
-        "grpcio-tools ~= 1.53.0"
+        "grpcio ~= 1.57.0",
+        "grpcio-tools ~= 1.57.0"
     ],
-    python_requires='>=3.9',
+    python_requires='>=3.7',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

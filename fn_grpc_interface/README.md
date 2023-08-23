@@ -116,7 +116,7 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.9 is the only officially supported version of Python for this app.
+Python 3.7 or greater is supported for this app.
 Additional package dependencies may exist for each of these packages:
 * grpcio-tools>=1.19.0
 * grpcio>=1.19.0
