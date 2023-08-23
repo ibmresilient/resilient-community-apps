@@ -69,7 +69,7 @@ def parse_inputs(restclient, fn_inputs):
     #     raise ValueError("Either 'Min Incident Id' or 'Min Incident Date' is required")
 
     # if ids are missing then it will query on the current incident
-    if (min_id and max_id) and (min_date and max_date):
+    if not (min_id or max_id or min_date or max_date):
         min_id = sys_min_id = get_incident_limit(restclient, sort="asc")
 
     # if ids are missing and at least one date is available
