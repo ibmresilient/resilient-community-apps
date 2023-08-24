@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1690447393967,
+  "export_date": 1692849148346,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -17,7 +17,7 @@
       "deprecated": false,
       "export_key": "__function/slack_text",
       "hide_notification": false,
-      "id": 1372,
+      "id": 638,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -47,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/task_id",
       "hide_notification": false,
-      "id": 1373,
+      "id": 639,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -76,7 +76,7 @@
       "deprecated": false,
       "export_key": "__function/slack_channel_id",
       "hide_notification": false,
-      "id": 1374,
+      "id": 640,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -105,7 +105,7 @@
       "deprecated": false,
       "export_key": "__function/attachment_id",
       "hide_notification": false,
-      "id": 1375,
+      "id": 641,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -134,7 +134,7 @@
       "deprecated": false,
       "export_key": "__function/slack_channel",
       "hide_notification": false,
-      "id": 1376,
+      "id": 642,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -163,7 +163,7 @@
       "deprecated": false,
       "export_key": "__function/slack_participant_emails",
       "hide_notification": false,
-      "id": 1377,
+      "id": 643,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -192,7 +192,7 @@
       "deprecated": false,
       "export_key": "__function/slack_is_channel_private",
       "hide_notification": false,
-      "id": 1378,
+      "id": 644,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -221,7 +221,7 @@
       "deprecated": false,
       "export_key": "__function/artifact_id",
       "hide_notification": false,
-      "id": 1379,
+      "id": 645,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -250,7 +250,7 @@
       "deprecated": false,
       "export_key": "__function/slack_mrkdwn",
       "hide_notification": false,
-      "id": 1380,
+      "id": 646,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -279,7 +279,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 1381,
+      "id": 647,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -309,7 +309,7 @@
       "deprecated": false,
       "export_key": "__function/slack_as_user",
       "hide_notification": false,
-      "id": 1382,
+      "id": 648,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -338,7 +338,7 @@
       "deprecated": false,
       "export_key": "__function/slack_username",
       "hide_notification": false,
-      "id": 1383,
+      "id": 649,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -371,7 +371,7 @@
   ],
   "functions": [
     {
-      "created_date": 1685449030072,
+      "created_date": 1687853043190,
       "description": {
         "content": "Function exports conversation history from Slack channel to a text file, saves the text file as an Attachment and archives the Slack channel.",
         "format": "text"
@@ -379,20 +379,20 @@
       "destination_handle": "slack",
       "display_name": "Archive Slack Channel",
       "export_key": "slack_archive_channel",
-      "id": 61,
+      "id": 19,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
-        "name": "slack@ibm.com",
+        "id": 6,
+        "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1689222898634,
+      "last_modified_time": 1692722029156,
       "name": "slack_archive_channel",
       "output_json_example": "{\"channel\": \"allentest4\"}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"channel\": {\"type\": \"string\"}}}",
       "tags": [],
       "uuid": "8f3a9d1d-8182-4c5b-b422-cfeee33de0dc",
-      "version": 6,
+      "version": 3,
       "view_items": [
         {
           "content": "3f35f1a9-f5d6-440a-a825-66a340aeaefe",
@@ -419,31 +419,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Archive Incident Slack Channel",
-          "object_type": "incident",
-          "programmatic_name": "archive_slack_channel",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 499
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Archive Task Slack Channel",
-          "object_type": "task",
-          "programmatic_name": "slack_example_archive_slack_channel__task",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 497
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1685449030097,
+      "created_date": 1687853043228,
       "description": {
         "content": "Function uploads Incident, Task or Artifact Attachments to Slack channel.",
         "format": "text"
@@ -451,20 +430,20 @@
       "destination_handle": "slack",
       "display_name": "Post attachment to Slack",
       "export_key": "slack_post_attachment",
-      "id": 62,
+      "id": 20,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
-        "name": "slack@ibm.com",
+        "id": 6,
+        "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1689222898672,
+      "last_modified_time": 1692722029156,
       "name": "slack_post_attachment",
       "output_json_example": "{\"channel\": \"allentest4\", \"url\": \"https://allentest-group.slack.com/archives/C05AJ3JFM52/p1685963738488479\", \"user_info\": [\": allenlee.tw0814@gmail.com\"]}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"channel\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"user_info\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}}}",
       "tags": [],
       "uuid": "5fed4dd5-9ccc-492a-90e1-4f17e6a5c5c8",
-      "version": 6,
+      "version": 3,
       "view_items": [
         {
           "content": "9caadb86-3cb1-44f8-81f4-4da30e68a106",
@@ -539,31 +518,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Post Artifact Attachment to Slack",
-          "object_type": "artifact",
-          "programmatic_name": "example_post_attachment_to_slack__artifact",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 494
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Post Incident / Task Attachment to Slack",
-          "object_type": "attachment",
-          "programmatic_name": "slack_example_post_attachment_to_slack",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 500
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1685449030121,
+      "created_date": 1687853043269,
       "description": {
         "content": "Function sends a message from an Incident, Task, Note or an Artifact to a Slack channel.",
         "format": "text"
@@ -571,20 +529,20 @@
       "destination_handle": "slack",
       "display_name": "Post message to Slack",
       "export_key": "slack_post_message",
-      "id": 63,
+      "id": 21,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
-        "name": "slack@ibm.com",
+        "id": 6,
+        "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1689222898710,
+      "last_modified_time": 1692722029156,
       "name": "slack_post_message",
       "output_json_example": "{\"channel\": \"allentest6\", \"url\": \"https://allentest-group.slack.com/archives/C05B1BN21UL/p1685963831956749\", \"user_info\": [\": allenlee.tw0814@gmail.com\"]}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"channel\": {\"type\": \"string\"}, \"url\": {\"type\": \"string\"}, \"user_info\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}}}",
       "tags": [],
       "uuid": "ded2826c-6528-4a26-b2c8-0cf215dce3c3",
-      "version": 6,
+      "version": 3,
       "view_items": [
         {
           "content": "9caadb86-3cb1-44f8-81f4-4da30e68a106",
@@ -667,59 +625,18 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Post Artifact to Slack",
-          "object_type": "artifact",
-          "programmatic_name": "slack_example_post_message_to_slack__artifact",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 498
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Post Incident to Slack",
-          "object_type": "incident",
-          "programmatic_name": "create_slack_message",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 496
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Post Note to Slack",
-          "object_type": "note",
-          "programmatic_name": "create_slack_reply",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 495
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Post Task to Slack",
-          "object_type": "task",
-          "programmatic_name": "slack_example_post_message_to_slack__task",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 501
-        }
-      ]
+      "workflows": []
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 87,
+  "id": 12,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1690447389968,
+      "create_date": 1692849144225,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -728,7 +645,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1690447389968,
+      "update_date": 1692849144225,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -738,7 +655,7 @@
   "message_destinations": [
     {
       "api_keys": [
-        "c3a9b700-ed7e-4c26-8a56-56c41122bab0"
+        "6ec8b75c-272e-45ca-8b85-a0e36f5ac500"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -746,9 +663,7 @@
       "name": "slack",
       "programmatic_name": "slack",
       "tags": [],
-      "users": [
-        "slack@ibm.com"
-      ],
+      "users": [],
       "uuid": "611f10f7-1b7d-49c5-8692-3b838156d42b"
     }
   ],
@@ -759,13 +674,13 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 14,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f64c0ae6_cf29_4ca9_82cb_12804c304a58\" isExecutable=\"true\" name=\"playbook_f64c0ae6_cf29_4ca9_82cb_12804c304a58\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0b0xqym\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Archive Slack Channel\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8f3a9d1d-8182-4c5b-b422-cfeee33de0dc\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# ID of this incident\\ninputs.incident_id = incident.id\\ninputs.slack_channel_id =  playbook.inputs.slack_channel_id if playbook.inputs.slack_channel_id else inputs.slack_channel_id\\n#inputs.slack_channel_id =  playbook.functions.inputs.slack_channel_id if playbook.functions.inputs.slack_channel_id else inputs.slack_channel_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0b0xqym\u003c/incoming\u003e\u003coutgoing\u003eFlow_00ylawe\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0b0xqym\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_00ylawe\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_00ylawe\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f64c0ae6_cf29_4ca9_82cb_12804c304a58\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_00ylawe\" id=\"Flow_00ylawe_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"304\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b0xqym\" id=\"Flow_0b0xqym_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"656\" y=\"304\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1685515117373,
+      "create_date": 1687853043521,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
+        "id": 10,
         "name": "slack@ibm.com",
         "type": "user"
       },
@@ -779,7 +694,7 @@
       "field_type_handle": "playbook_f64c0ae6_cf29_4ca9_82cb_12804c304a58",
       "fields_type": {
         "actions": [],
-        "display_name": "Example: Archive Incident Slack Channel (PB)",
+        "display_name": "Slack: Archive Incident Slack Channel - Example (PB)",
         "export_key": "playbook_f64c0ae6_cf29_4ca9_82cb_12804c304a58",
         "fields": {
           "slack_channel_id": {
@@ -792,7 +707,7 @@
             "deprecated": false,
             "export_key": "playbook_f64c0ae6_cf29_4ca9_82cb_12804c304a58/slack_channel_id",
             "hide_notification": false,
-            "id": 1384,
+            "id": 650,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -807,7 +722,7 @@
             "templates": [],
             "text": "Slack Channel ID",
             "tooltip": "Optional. Executing without channel ID archives the channel that this is associated with.",
-            "type_id": 1026,
+            "type_id": 1009,
             "uuid": "ed6eedab-21b3-47f9-8ed8-b8cf399af97e",
             "values": []
           }
@@ -832,27 +747,27 @@
         "uuid": "dcf1fff6-1f8b-4cf7-86f2-454cbd70404f"
       },
       "has_logical_errors": false,
-      "id": 23,
+      "id": 8,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
-        "name": "slack@ibm.com",
+        "id": 6,
+        "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1690447148805,
+      "last_modified_time": 1692722029938,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1685515320422,
+          "created_date": 1687853043600,
           "description": "",
           "enabled": false,
           "export_key": "Archive Slack Channel Post-Process Script",
-          "id": 22,
+          "id": 9,
           "language": "python3",
           "last_modified_by": "slack@ibm.com",
-          "last_modified_time": 1685515320431,
+          "last_modified_time": 1687853043617,
           "name": "Archive Slack Channel Post-Process Script",
           "object_type": "incident",
           "playbook_handle": "example_archive_incident_slack_channel_pb",
@@ -883,7 +798,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_f64c0ae6-cf29-4ca9-82cb-12804c304a58",
-        "id": 27,
+        "id": 10,
         "name": "playbook_f64c0ae6_cf29_4ca9_82cb_12804c304a58",
         "type": "playbook",
         "uuid": "37f6a781-1a51-43f7-a7a3-1dd89306009c"
@@ -891,18 +806,18 @@
       "tags": [],
       "type": "default",
       "uuid": "f64c0ae6-cf29-4ca9-82cb-12804c304a58",
-      "version": 22
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 11,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ec053ff0_3316_4e30_8498_e03efad45d95\" isExecutable=\"true\" name=\"playbook_ec053ff0_3316_4e30_8498_e03efad45d95\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_08pmylt\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Archive Slack Channel\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8f3a9d1d-8182-4c5b-b422-cfeee33de0dc\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# ID of this Task\\ninputs.task_id = task.id\\n\\n# Slack Channel ID, faster than finding via channel name\\ninputs.slack_channel_id = playbook.inputs.slack_channel_id if playbook.inputs.slack_channel_id else inputs.slack_channel_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"slack_info\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08pmylt\u003c/incoming\u003e\u003coutgoing\u003eFlow_11hdocl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Archive Slack Channel Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"69011e0f-54ff-47f7-9319-2b36730df65e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_11hdocl\u003c/incoming\u003e\u003coutgoing\u003eFlow_1l0dtma\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_08pmylt\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_11hdocl\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1l0dtma\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1l0dtma\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ec053ff0_3316_4e30_8498_e03efad45d95\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1l0dtma\" id=\"Flow_1l0dtma_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"413\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"413\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11hdocl\" id=\"Flow_11hdocl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08pmylt\" id=\"Flow_08pmylt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.5703\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1685515391022,
+      "create_date": 1687853043846,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
+        "id": 10,
         "name": "slack@ibm.com",
         "type": "user"
       },
@@ -916,7 +831,7 @@
       "field_type_handle": "playbook_ec053ff0_3316_4e30_8498_e03efad45d95",
       "fields_type": {
         "actions": [],
-        "display_name": "Example: Archive Task Slack Channel (PB)",
+        "display_name": "Slack: Archive Task Slack Channel - Example (PB)",
         "export_key": "playbook_ec053ff0_3316_4e30_8498_e03efad45d95",
         "fields": {
           "slack_channel_id": {
@@ -929,7 +844,7 @@
             "deprecated": false,
             "export_key": "playbook_ec053ff0_3316_4e30_8498_e03efad45d95/slack_channel_id",
             "hide_notification": false,
-            "id": 1385,
+            "id": 651,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -944,7 +859,7 @@
             "templates": [],
             "text": "Slack Channel ID",
             "tooltip": "Optional. Executing without channel ID archives the channel that this is associated with.",
-            "type_id": 1027,
+            "type_id": 1010,
             "uuid": "53c08b62-5149-4e43-a0b5-fb5e32a6889b",
             "values": []
           }
@@ -969,27 +884,27 @@
         "uuid": "d14dcee7-b9ef-45c3-bd91-32e0d76021cc"
       },
       "has_logical_errors": false,
-      "id": 24,
+      "id": 9,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
-        "name": "slack@ibm.com",
+        "id": 6,
+        "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1690447155400,
+      "last_modified_time": 1692722030330,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1685515533040,
+          "created_date": 1687853043925,
           "description": "",
           "enabled": false,
           "export_key": "Archive Slack Channel Post-Process Script",
-          "id": 23,
+          "id": 10,
           "language": "python3",
           "last_modified_by": "slack@ibm.com",
-          "last_modified_time": 1685964237053,
+          "last_modified_time": 1687853043937,
           "name": "Archive Slack Channel Post-Process Script",
           "object_type": "task",
           "playbook_handle": "example_archive_task_slack_channel_pb",
@@ -1020,7 +935,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_ec053ff0-3316-4e30-8498-e03efad45d95",
-        "id": 28,
+        "id": 11,
         "name": "playbook_ec053ff0_3316_4e30_8498_e03efad45d95",
         "type": "playbook",
         "uuid": "ded14058-2fbd-4fbb-87a3-6b546fb97f8c"
@@ -1028,18 +943,18 @@
       "tags": [],
       "type": "default",
       "uuid": "ec053ff0-3316-4e30-8498-e03efad45d95",
-      "version": 18
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 12,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_edbbfb37_f3a9_4993_8000_dc3c9f1630af\" isExecutable=\"true\" name=\"playbook_edbbfb37_f3a9_4993_8000_dc3c9f1630af\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0av0jfn\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Post attachment to Slack\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5fed4dd5-9ccc-492a-90e1-4f17e6a5c5c8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"#####################\\n# Attachment data   #\\n#####################\\n\\n# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.artifact_id = artifact.id\\n\\n# Slack channel name\\n# Name of the existing Slack Workspace channel or a new Slack channel you are posting to. \\n# Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. \\n# If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. \\n# If there isn\u2019t one defined, the workflow will terminate.\\ninputs.slack_channel = playbook.inputs.rule_slack_channel if playbook.inputs.rule_slack_channel is not None else playbook.inputs.rule_slack_channel\\n\\n# Is channel private\\n# Indicate if the channel you are posting to should be private.\\ninputs.slack_is_channel_private = playbook.inputs.rule_slack_is_channel_private if playbook.inputs.rule_slack_is_channel_private is not None else playbook.inputs.rule_slack_is_channel_private\\n\\n# Slack user emails\\n# Comma separated list of emails belonging to Slack users in your workspace that will be added to your channel.\\ninputs.slack_participant_emails = playbook.inputs.rule_slack_participant_emails if playbook.inputs.rule_slack_participant_emails is not None else playbook.inputs.rule_slack_participant_emails\\n\\n# Slack additional text message\\n# Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.\\ninputs.slack_text = playbook.inputs.rule_slack_text if playbook.inputs.rule_slack_text is not None else \u0027\u0027\\n\\n# Slack Channel ID, faster than finding via channel name\\ninputs.slack_channel_id = playbook.inputs.slack_channel_id if playbook.inputs.slack_channel_id else playbook.inputs.slack_channel_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"slack_info\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0av0jfn\u003c/incoming\u003e\u003coutgoing\u003eFlow_02pwuie\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0av0jfn\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post attachment to Slack Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b1a156b3-b2bd-41b0-a3e7-fadca2232386\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_02pwuie\u003c/incoming\u003e\u003coutgoing\u003eFlow_0bsemfe\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_02pwuie\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0bsemfe\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0bsemfe\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_edbbfb37_f3a9_4993_8000_dc3c9f1630af\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bsemfe\" id=\"Flow_0bsemfe_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"423\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"423\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_02pwuie\" id=\"Flow_02pwuie_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"285\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"285\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0av0jfn\" id=\"Flow_0av0jfn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.51600000000002\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1685516095602,
+      "create_date": 1687853044216,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
+        "id": 10,
         "name": "slack@ibm.com",
         "type": "user"
       },
@@ -1053,7 +968,7 @@
       "field_type_handle": "playbook_edbbfb37_f3a9_4993_8000_dc3c9f1630af",
       "fields_type": {
         "actions": [],
-        "display_name": "Example: Post Artifact Attachment to Slack (PB)",
+        "display_name": "Slack: Post Artifact Attachment to Slack - Example (PB)",
         "export_key": "playbook_edbbfb37_f3a9_4993_8000_dc3c9f1630af",
         "fields": {
           "rule_slack_channel": {
@@ -1066,7 +981,7 @@
             "deprecated": false,
             "export_key": "playbook_edbbfb37_f3a9_4993_8000_dc3c9f1630af/rule_slack_channel",
             "hide_notification": false,
-            "id": 1386,
+            "id": 652,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1081,7 +996,7 @@
             "templates": [],
             "text": "Slack channel name",
             "tooltip": "Name of the existing Slack channel or a new Slack channel you are posting to. Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. If there isn\u2019t one defined, the workflow will terminate.",
-            "type_id": 1028,
+            "type_id": 1011,
             "uuid": "5a8cd4ee-212b-42bf-bf05-9bd569bbc291",
             "values": []
           },
@@ -1095,7 +1010,7 @@
             "deprecated": false,
             "export_key": "playbook_edbbfb37_f3a9_4993_8000_dc3c9f1630af/rule_slack_is_channel_private",
             "hide_notification": false,
-            "id": 1387,
+            "id": 653,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -1110,7 +1025,7 @@
             "templates": [],
             "text": "Slack is channel private",
             "tooltip": "Indicate if the channel you are posting to should be private.",
-            "type_id": 1028,
+            "type_id": 1011,
             "uuid": "769edc9e-777a-4252-85df-5930b9cf873d",
             "values": []
           },
@@ -1124,7 +1039,7 @@
             "deprecated": false,
             "export_key": "playbook_edbbfb37_f3a9_4993_8000_dc3c9f1630af/rule_slack_participant_emails",
             "hide_notification": false,
-            "id": 1388,
+            "id": 654,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1139,7 +1054,7 @@
             "templates": [],
             "text": "Slack users emails",
             "tooltip": "Comma separated list of emails belonging to Slack users in your workspace that will be added to the channel you are posting to.",
-            "type_id": 1028,
+            "type_id": 1011,
             "uuid": "37472dd2-3596-4c5b-b6a8-7383b85be8da",
             "values": []
           },
@@ -1153,7 +1068,7 @@
             "deprecated": false,
             "export_key": "playbook_edbbfb37_f3a9_4993_8000_dc3c9f1630af/rule_slack_text",
             "hide_notification": false,
-            "id": 1389,
+            "id": 655,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1168,7 +1083,7 @@
             "templates": [],
             "text": "Additional text",
             "tooltip": "Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.",
-            "type_id": 1028,
+            "type_id": 1011,
             "uuid": "015d9760-6f73-474d-8043-fa564bf95408",
             "values": []
           },
@@ -1182,7 +1097,7 @@
             "deprecated": false,
             "export_key": "playbook_edbbfb37_f3a9_4993_8000_dc3c9f1630af/slack_channel_id",
             "hide_notification": false,
-            "id": 1390,
+            "id": 656,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1197,7 +1112,7 @@
             "templates": [],
             "text": "Slack Channel ID",
             "tooltip": "Optional. Executing without channel ID archives the channel that this is associated with.",
-            "type_id": 1028,
+            "type_id": 1011,
             "uuid": "1c9c244f-6c8e-4789-976a-2a06aa15ba4c",
             "values": []
           }
@@ -1222,27 +1137,27 @@
         "uuid": "57f1afdf-59e4-429f-8c0a-591c190e54b4"
       },
       "has_logical_errors": false,
-      "id": 25,
+      "id": 10,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
-        "name": "slack@ibm.com",
+        "id": 6,
+        "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1690447117181,
+      "last_modified_time": 1692722030740,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1685516478735,
+          "created_date": 1687853044353,
           "description": "",
           "enabled": false,
           "export_key": "Post attachment to Slack Post-Process Script",
-          "id": 24,
+          "id": 11,
           "language": "python3",
           "last_modified_by": "slack@ibm.com",
-          "last_modified_time": 1685691721377,
+          "last_modified_time": 1687853044366,
           "name": "Post attachment to Slack Post-Process Script",
           "object_type": "artifact",
           "playbook_handle": "example_post_artifact_attachment_to_slack_pb",
@@ -1319,7 +1234,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_edbbfb37-f3a9-4993-8000-dc3c9f1630af",
-        "id": 29,
+        "id": 12,
         "name": "playbook_edbbfb37_f3a9_4993_8000_dc3c9f1630af",
         "type": "playbook",
         "uuid": "80e4182e-171f-410a-ab03-2c7fe8c96791"
@@ -1327,18 +1242,18 @@
       "tags": [],
       "type": "default",
       "uuid": "edbbfb37-f3a9-4993-8000-dc3c9f1630af",
-      "version": 19
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_983c792d_6396_4caa_afbd_15db8d91dbb9\" isExecutable=\"true\" name=\"playbook_983c792d_6396_4caa_afbd_15db8d91dbb9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1wpqkbh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Post message to Slack\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ded2826c-6528-4a26-b2c8-0cf215dce3c3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"#####################\\n# Artifact data     #\\n#####################\\n\\n# Slack additional text message\\n# Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.\\nrule_additional_text = playbook.inputs.rule_slack_text if playbook.inputs.rule_slack_text is not None else \u0027\u0027\\n\\n# Incident id for the URL\\nincident_id_str = str(incident.id)\\n\\n# Slack text message in JSON format\\n# ---------------------------------\\n# Do not remove first 3 elements \\\"Additional Text\\\", \\\"Resilient URL\\\" and \\\"Type of data\\\",\\n# the information is used to generate the title of the message.\\n#\\n# Add/remove information using the syntax:\\n# \\\"label\\\": {{ \\\"type\\\": \\\"[string|richtext|boolean|datetime\\\", \\\"data\\\": \\\"resilient field data\\\" }}\\n#\\n# Make sure to send \\\"datetime\\\" types as integers and not strings:\\n# without double quotes: { \\\"type\\\": \\\"datetime\\\", \\\"data\\\": resilient datetime data}  \\n#\\n# Text fields like \u0027artifact.value\u0027, or \u0027Slack additional text message\u0027 can include double quotes.\\n# Watch out for embedded double quotes in these text fields and escape with field.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027) otherwise json.loads will fail.\\nslack_text = u\\\"\\\"\\\"{{\\n  \\\"Additional Text\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{0}\\\" }},\\n  \\\"Resilient URL\\\": {{\\\"type\\\": \\\"incident\\\", \\\"data\\\": \\\"{1}\\\" }},\\n  \\\"Type of data\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{2}\\\" }},\\n  \\\"Incident ID\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{3}\\\" }},\\n  \\\"Artifact Type\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{4}\\\" }},\\n  \\\"Artifact Value\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{5}\\\" }},\\n  \\\"Artifact Created By\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{6}\\\" }},\\n  \\\"Artifact Created on\\\": {{\\\"type\\\": \\\"datetime\\\", \\\"data\\\": {7} }}\\n}}\\\"\\\"\\\".format(\\n  rule_additional_text.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027),\\n  incident_id_str,\\n  \\\"Artifact\\\",\\n  incident_id_str,\\n  artifact.type,\\n  artifact.value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027),\\n  artifact.creator.display_name,\\n  artifact.created)\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# Slack channel name\\n# Name of the existing Slack Workspace channel or a new Slack channel you are posting to. \\n# Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. \\n# If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. \\n# If there isn\u2019t one defined, the workflow will terminate.\\ninputs.slack_channel = playbook.inputs.rule_slack_channel if playbook.inputs.rule_slack_channel is not None else playbook.inputs.rule_slack_channel\\n\\n# Is channel private\\n# Indicate if the channel you are posting to should be private.\\ninputs.slack_is_channel_private = playbook.inputs.rule_slack_is_channel_private if playbook.inputs.rule_slack_is_channel_private is not None else playbook.inputs.rule_slack_is_channel_private\\n\\n# Slack user emails\\n# Comma separated list of emails belonging to Slack users in your workspace that will be added to your channel.\\ninputs.slack_participant_emails = playbook.inputs.rule_slack_participant_emails if playbook.inputs.rule_slack_participant_emails is not None else playbook.inputs.rule_slack_participant_emails\\n\\n# Slack text message\\n# Container field to retain JSON fields to send to Slack.\\ninputs.slack_text = slack_text\\n\\n# Slack Channel ID, faster than finding via channel name\\ninputs.slack_channel_id = playbook.inputs.slack_channel_id if playbook.inputs.slack_channel_id else playbook.inputs.slack_channel_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"user_info\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wpqkbh\u003c/incoming\u003e\u003coutgoing\u003eFlow_1q5cm7f\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post message to Slack\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"078d6518-62bb-47a8-b91e-9a72ec34878b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1q5cm7f\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fnmn03\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1wpqkbh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1q5cm7f\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1fnmn03\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1fnmn03\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_983c792d_6396_4caa_afbd_15db8d91dbb9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fnmn03\" id=\"Flow_1fnmn03_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"413\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"413\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q5cm7f\" id=\"Flow_1q5cm7f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"285\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"285\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wpqkbh\" id=\"Flow_1wpqkbh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.51600000000002\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"624\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 4,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_983c792d_6396_4caa_afbd_15db8d91dbb9\" isExecutable=\"true\" name=\"playbook_983c792d_6396_4caa_afbd_15db8d91dbb9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1wpqkbh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Post message to Slack\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ded2826c-6528-4a26-b2c8-0cf215dce3c3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"#####################\\n# Artifact data     #\\n#####################\\n\\n# Slack additional text message\\n# Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.\\nrule_additional_text = playbook.inputs.rule_slack_text if playbook.inputs.rule_slack_text is not None else \u0027\u0027\\n\\n# Incident id for the URL\\nincident_id_str = str(incident.id)\\n\\n# Slack text message in JSON format\\n# ---------------------------------\\n# Do not remove first 3 elements \\\"Additional Text\\\", \\\"Resilient URL\\\" and \\\"Type of data\\\",\\n# the information is used to generate the title of the message.\\n#\\n# Add/remove information using the syntax:\\n# \\\"label\\\": {{ \\\"type\\\": \\\"[string|richtext|boolean|datetime\\\", \\\"data\\\": \\\"resilient field data\\\" }}\\n#\\n# Make sure to send \\\"datetime\\\" types as integers and not strings:\\n# without double quotes: { \\\"type\\\": \\\"datetime\\\", \\\"data\\\": resilient datetime data}  \\n#\\n# Text fields like \u0027artifact.value\u0027, or \u0027Slack additional text message\u0027 can include double quotes.\\n# Watch out for embedded double quotes in these text fields and escape with field.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027) otherwise json.loads will fail.\\nslack_text = u\\\"\\\"\\\"{{\\n  \\\"Additional Text\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{0}\\\" }},\\n  \\\"Resilient URL\\\": {{\\\"type\\\": \\\"incident\\\", \\\"data\\\": \\\"{1}\\\" }},\\n  \\\"Type of data\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{2}\\\" }},\\n  \\\"Incident ID\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{3}\\\" }},\\n  \\\"Artifact Type\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{4}\\\" }},\\n  \\\"Artifact Value\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{5}\\\" }},\\n  \\\"Artifact Created By\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{6}\\\" }},\\n  \\\"Artifact Created on\\\": {{\\\"type\\\": \\\"datetime\\\", \\\"data\\\": {7} }}\\n}}\\\"\\\"\\\".format(\\n  rule_additional_text.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027),\\n  incident_id_str,\\n  \\\"Artifact\\\",\\n  incident_id_str,\\n  artifact.type,\\n  artifact.value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027),\\n  artifact.creator.display_name,\\n  artifact.created)\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# Slack channel name\\n# Name of the existing Slack Workspace channel or a new Slack channel you are posting to. \\n# Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. \\n# If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. \\n# If there isn\u2019t one defined, the workflow will terminate.\\ninputs.slack_channel = playbook.inputs.rule_slack_channel if playbook.inputs.rule_slack_channel is not None else playbook.inputs.rule_slack_channel\\n\\n# Is channel private\\n# Indicate if the channel you are posting to should be private.\\ninputs.slack_is_channel_private = playbook.inputs.rule_slack_is_channel_private if playbook.inputs.rule_slack_is_channel_private is not None else playbook.inputs.rule_slack_is_channel_private\\n\\n# Slack user emails\\n# Comma separated list of emails belonging to Slack users in your workspace that will be added to your channel.\\ninputs.slack_participant_emails = playbook.inputs.rule_slack_participant_emails if playbook.inputs.rule_slack_participant_emails is not None else playbook.inputs.rule_slack_participant_emails\\n\\n# Slack text message\\n# Container field to retain JSON fields to send to Slack.\\ninputs.slack_text = slack_text\\n\\n# Slack Channel ID, faster than finding via channel name\\ninputs.slack_channel_id = playbook.inputs.slack_channel_id if playbook.inputs.slack_channel_id else playbook.inputs.slack_channel_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"slack_info\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wpqkbh\u003c/incoming\u003e\u003coutgoing\u003eFlow_1q5cm7f\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post message to Slack\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"078d6518-62bb-47a8-b91e-9a72ec34878b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1q5cm7f\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fnmn03\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1wpqkbh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1q5cm7f\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1fnmn03\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1fnmn03\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_983c792d_6396_4caa_afbd_15db8d91dbb9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fnmn03\" id=\"Flow_1fnmn03_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"413\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"413\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q5cm7f\" id=\"Flow_1q5cm7f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"285\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"285\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wpqkbh\" id=\"Flow_1wpqkbh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.51600000000002\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"624\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1685516585396,
+      "create_date": 1687853044676,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
+        "id": 10,
         "name": "slack@ibm.com",
         "type": "user"
       },
@@ -1352,7 +1267,7 @@
       "field_type_handle": "playbook_983c792d_6396_4caa_afbd_15db8d91dbb9",
       "fields_type": {
         "actions": [],
-        "display_name": "Example: Post Artifact to Slack (PB)",
+        "display_name": "Slack: Post Artifact to Slack - Example (PB)",
         "export_key": "playbook_983c792d_6396_4caa_afbd_15db8d91dbb9",
         "fields": {
           "rule_slack_channel": {
@@ -1365,7 +1280,7 @@
             "deprecated": false,
             "export_key": "playbook_983c792d_6396_4caa_afbd_15db8d91dbb9/rule_slack_channel",
             "hide_notification": false,
-            "id": 1391,
+            "id": 657,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1380,7 +1295,7 @@
             "templates": [],
             "text": "Slack channel name",
             "tooltip": "Name of the existing Slack channel or a new Slack channel you are posting to. Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. If there isn\u2019t one defined, the workflow will terminate.",
-            "type_id": 1029,
+            "type_id": 1012,
             "uuid": "1d3847d0-b639-46b6-8fd8-7dd81464475d",
             "values": []
           },
@@ -1394,7 +1309,7 @@
             "deprecated": false,
             "export_key": "playbook_983c792d_6396_4caa_afbd_15db8d91dbb9/rule_slack_is_channel_private",
             "hide_notification": false,
-            "id": 1392,
+            "id": 658,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -1409,7 +1324,7 @@
             "templates": [],
             "text": "Slack is channel private",
             "tooltip": "Indicate if the channel you are posting to should be private.",
-            "type_id": 1029,
+            "type_id": 1012,
             "uuid": "9c743954-4f87-412a-a21c-64d39c872d44",
             "values": []
           },
@@ -1423,7 +1338,7 @@
             "deprecated": false,
             "export_key": "playbook_983c792d_6396_4caa_afbd_15db8d91dbb9/rule_slack_participant_emails",
             "hide_notification": false,
-            "id": 1393,
+            "id": 659,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1438,7 +1353,7 @@
             "templates": [],
             "text": "Slack users emails",
             "tooltip": "Comma separated list of emails belonging to Slack users in your workspace that will be added to the channel you are posting to.",
-            "type_id": 1029,
+            "type_id": 1012,
             "uuid": "c1cc0f48-b7fc-4b15-8d21-a09f6c0fb5cc",
             "values": []
           },
@@ -1452,7 +1367,7 @@
             "deprecated": false,
             "export_key": "playbook_983c792d_6396_4caa_afbd_15db8d91dbb9/rule_slack_text",
             "hide_notification": false,
-            "id": 1394,
+            "id": 660,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1467,7 +1382,7 @@
             "templates": [],
             "text": "Additional text",
             "tooltip": "Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.",
-            "type_id": 1029,
+            "type_id": 1012,
             "uuid": "b803b5f7-b789-49b7-b9bb-14598e141594",
             "values": []
           },
@@ -1481,7 +1396,7 @@
             "deprecated": false,
             "export_key": "playbook_983c792d_6396_4caa_afbd_15db8d91dbb9/slack_channel_id",
             "hide_notification": false,
-            "id": 1395,
+            "id": 661,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1496,7 +1411,7 @@
             "templates": [],
             "text": "Slack Channel ID",
             "tooltip": "Optional. Executing without channel ID archives the channel that this is associated with.",
-            "type_id": 1029,
+            "type_id": 1012,
             "uuid": "4c358baf-1d51-4713-a4fd-11b61e90cfdd",
             "values": []
           }
@@ -1521,27 +1436,27 @@
         "uuid": "514a4e78-f359-45be-890e-f7b870ea383d"
       },
       "has_logical_errors": false,
-      "id": 26,
+      "id": 11,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
+        "id": 10,
         "name": "slack@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1690447123132,
+      "last_modified_time": 1692797366145,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1685516956847,
+          "created_date": 1687853044814,
           "description": "",
           "enabled": false,
           "export_key": "Post message to Slack",
-          "id": 25,
+          "id": 12,
           "language": "python3",
           "last_modified_by": "slack@ibm.com",
-          "last_modified_time": 1685692873092,
+          "last_modified_time": 1687853044827,
           "name": "Post message to Slack",
           "object_type": "artifact",
           "playbook_handle": "example_post_artifact_to_slack_pb",
@@ -1618,7 +1533,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_983c792d-6396-4caa-afbd-15db8d91dbb9",
-        "id": 30,
+        "id": 13,
         "name": "playbook_983c792d_6396_4caa_afbd_15db8d91dbb9",
         "type": "playbook",
         "uuid": "added629-9037-45c7-9e37-132c719cbf61"
@@ -1626,18 +1541,18 @@
       "tags": [],
       "type": "default",
       "uuid": "983c792d-6396-4caa-afbd-15db8d91dbb9",
-      "version": 14
+      "version": 8
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 10,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8cbc1fd1_6da8_4f58_aeb3_45783ff6c318\" isExecutable=\"true\" name=\"playbook_8cbc1fd1_6da8_4f58_aeb3_45783ff6c318\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1mvx3ep\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Post attachment to Slack\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5fed4dd5-9ccc-492a-90e1-4f17e6a5c5c8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"#####################\\n# Attachment data   #\\n#####################\\n\\n# Required inputs are: the incident id and attachment id\\ninputs.incident_id = incident.id\\ninputs.attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.task_id = task.id\\n\\n# Slack channel name\\n# Name of the existing Slack Workspace channel or a new Slack channel you are posting to. \\n# Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. \\n# If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. \\n# If there isn\u2019t one defined, the workflow will terminate.\\ninputs.slack_channel = playbook.inputs.rule_slack_channel if playbook.inputs.rule_slack_channel is not None else playbook.inputs.rule_slack_channel\\n\\n# Is channel private\\n# Indicate if the channel you are posting to should be private.\\ninputs.slack_is_channel_private = playbook.inputs.rule_slack_is_channel_private if playbook.inputs.rule_slack_is_channel_private is not None else playbook.inputs.rule_slack_is_channel_private\\n\\n# Slack user emails\\n# Comma separated list of emails belonging to Slack users in your workspace that will be added to your channel.\\ninputs.slack_participant_emails = playbook.inputs.rule_slack_participant_emails if playbook.inputs.rule_slack_participant_emails is not None else playbook.inputs.rule_slack_participant_emails\\n\\n# Slack additional text message\\n# Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.\\ninputs.slack_text = playbook.inputs.rule_slack_text if playbook.inputs.rule_slack_text is not None else \u0027\u0027\\n\\n# Slack Channel ID, faster than finding via channel name\\ninputs.slack_channel_id = playbook.inputs.slack_channel_id if playbook.inputs.slack_channel_id else playbook.inputs.slack_channel_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"slack_info\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mvx3ep\u003c/incoming\u003e\u003coutgoing\u003eFlow_0c9ut1s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1mvx3ep\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post attachment to Slack Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0157189b-8e2f-4d9e-a1b8-ca88d965def0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0c9ut1s\u003c/incoming\u003e\u003coutgoing\u003eFlow_0k682hl\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0k682hl\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0c9ut1s\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0k682hl\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8cbc1fd1_6da8_4f58_aeb3_45783ff6c318\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0k682hl\" id=\"Flow_0k682hl_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c9ut1s\" id=\"Flow_0c9ut1s_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mvx3ep\" id=\"Flow_1mvx3ep_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"209.125\" x=\"617\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"664\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1685517013949,
+      "create_date": 1687853045129,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
+        "id": 10,
         "name": "slack@ibm.com",
         "type": "user"
       },
@@ -1651,7 +1566,7 @@
       "field_type_handle": "playbook_8cbc1fd1_6da8_4f58_aeb3_45783ff6c318",
       "fields_type": {
         "actions": [],
-        "display_name": "Example: Post Incident / Task Attachment to Slack (PB)",
+        "display_name": "Slack: Post Incident / Task Attachment to Slack - Example (PB)",
         "export_key": "playbook_8cbc1fd1_6da8_4f58_aeb3_45783ff6c318",
         "fields": {
           "rule_slack_channel": {
@@ -1664,7 +1579,7 @@
             "deprecated": false,
             "export_key": "playbook_8cbc1fd1_6da8_4f58_aeb3_45783ff6c318/rule_slack_channel",
             "hide_notification": false,
-            "id": 1396,
+            "id": 662,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1679,7 +1594,7 @@
             "templates": [],
             "text": "Slack channel name",
             "tooltip": "Name of the existing Slack channel or a new Slack channel you are posting to. Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. If there isn\u2019t one defined, the workflow will terminate.",
-            "type_id": 1030,
+            "type_id": 1013,
             "uuid": "4021ae7b-3ba0-49f8-a6bc-d6a80c6bfef0",
             "values": []
           },
@@ -1693,7 +1608,7 @@
             "deprecated": false,
             "export_key": "playbook_8cbc1fd1_6da8_4f58_aeb3_45783ff6c318/rule_slack_is_channel_private",
             "hide_notification": false,
-            "id": 1397,
+            "id": 663,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -1708,7 +1623,7 @@
             "templates": [],
             "text": "Slack is channel private",
             "tooltip": "Indicate if the channel you are posting to should be private.",
-            "type_id": 1030,
+            "type_id": 1013,
             "uuid": "b593cc52-e1c0-426c-9440-61dced2d7dc5",
             "values": []
           },
@@ -1722,7 +1637,7 @@
             "deprecated": false,
             "export_key": "playbook_8cbc1fd1_6da8_4f58_aeb3_45783ff6c318/rule_slack_participant_emails",
             "hide_notification": false,
-            "id": 1398,
+            "id": 664,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1737,7 +1652,7 @@
             "templates": [],
             "text": "Slack users emails",
             "tooltip": "Comma separated list of emails belonging to Slack users in your workspace that will be added to the channel you are posting to.",
-            "type_id": 1030,
+            "type_id": 1013,
             "uuid": "c4f14c34-d2ba-4f23-9f46-9dbc95801e09",
             "values": []
           },
@@ -1751,7 +1666,7 @@
             "deprecated": false,
             "export_key": "playbook_8cbc1fd1_6da8_4f58_aeb3_45783ff6c318/rule_slack_text",
             "hide_notification": false,
-            "id": 1399,
+            "id": 665,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1766,7 +1681,7 @@
             "templates": [],
             "text": "Additional text",
             "tooltip": "Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.",
-            "type_id": 1030,
+            "type_id": 1013,
             "uuid": "3d0143cc-e161-4277-9d1e-f221988045ee",
             "values": []
           },
@@ -1780,7 +1695,7 @@
             "deprecated": false,
             "export_key": "playbook_8cbc1fd1_6da8_4f58_aeb3_45783ff6c318/slack_channel_id",
             "hide_notification": false,
-            "id": 1400,
+            "id": 666,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1795,7 +1710,7 @@
             "templates": [],
             "text": "Slack Channel ID",
             "tooltip": "Optional. Executing without channel ID archives the channel that this is associated with.",
-            "type_id": 1030,
+            "type_id": 1013,
             "uuid": "1ae882ee-09ae-4cf2-af4b-934f985fb6ac",
             "values": []
           }
@@ -1820,27 +1735,27 @@
         "uuid": "7393a3a3-6e2d-4955-90f0-7966fc0a6f30"
       },
       "has_logical_errors": false,
-      "id": 27,
+      "id": 12,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
-        "name": "slack@ibm.com",
+        "id": 6,
+        "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1690447127205,
+      "last_modified_time": 1692722031465,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1685517284314,
+          "created_date": 1687853045268,
           "description": "",
           "enabled": false,
           "export_key": "Post attachment to Slack Post-Process Script",
-          "id": 26,
+          "id": 13,
           "language": "python3",
           "last_modified_by": "slack@ibm.com",
-          "last_modified_time": 1685691223667,
+          "last_modified_time": 1687853045285,
           "name": "Post attachment to Slack Post-Process Script",
           "object_type": "attachment",
           "playbook_handle": "example_post_incident__task_attachment_to_slack_pb",
@@ -1903,7 +1818,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8cbc1fd1-6da8-4f58-aeb3-45783ff6c318",
-        "id": 31,
+        "id": 14,
         "name": "playbook_8cbc1fd1_6da8_4f58_aeb3_45783ff6c318",
         "type": "playbook",
         "uuid": "e3305743-e52a-4104-89b3-03f7fe940440"
@@ -1911,18 +1826,18 @@
       "tags": [],
       "type": "default",
       "uuid": "8cbc1fd1-6da8-4f58-aeb3-45783ff6c318",
-      "version": 16
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 25,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7e56abfb_53ba_49ca_9c67_f5a023b313e6\" isExecutable=\"true\" name=\"playbook_7e56abfb_53ba_49ca_9c67_f5a023b313e6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_18e994r\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Post message to Slack\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ded2826c-6528-4a26-b2c8-0cf215dce3c3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"#####################\\n# Incident data     #\\n#####################\\n\\n# Slack additional text message\\n# Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.\\nrule_additional_text = playbook.inputs.rule_slack_text if playbook.inputs.rule_slack_text is not None else \u0027\u0027\\n\\n# \\\"datetime\\\" fields: Assign 0 if it\u0027s None\\ndate_occured = incident.start_date if incident.start_date else 0\\ndate_discovered = incident.discovered_date if incident.discovered_date else 0\\n\\n# Incident id for the URL\\nincident_id_str = str(incident.id)\\n\\n# Slack text message in JSON format\\n# ---------------------------------\\n# Do not remove first 3 elements \\\"Additional Text\\\", \\\"Resilient URL\\\" and \\\"Type of data\\\",\\n# the information is used to generate the title of the message.\\n#\\n# Add/remove information using the syntax:\\n# \\\"label\\\": {{ \\\"type\\\": \\\"[string|richtext|boolean|datetime\\\", \\\"data\\\": \\\"resilient field data\\\" }}\\n#\\n# Make sure to send \\\"datetime\\\" types as integers and not strings:\\n# without double quotes: { \\\"type\\\": \\\"datetime\\\", \\\"data\\\": resilient datetime data}  \\n#\\n# Text fields like \u0027incident name\u0027, \u0027description\u0027 or \u0027Slack additional text message\u0027 can include double quotes.\\n# Watch out for embedded double quotes in these text fields and escape with field.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027) otherwise json.loads will fail.\\nslack_text = u\\\"\\\"\\\"{{\\n  \\\"Additional Text\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{0}\\\" }},\\n  \\\"Resilient URL\\\": {{\\\"type\\\": \\\"incident\\\", \\\"data\\\": \\\"{1}\\\" }},\\n  \\\"Type of data\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{2}\\\" }},\\n  \\\"Incident ID\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{3}\\\" }},\\n  \\\"Incident name\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{4}\\\" }},\\n  \\\"Description\\\": {{\\\"type\\\": \\\"richtext\\\", \\\"data\\\": \\\"{5}\\\" }},\\n  \\\"Incident Types\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{6}\\\" }},\\n  \\\"NIST Attack Vectors\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{7}\\\" }},\\n  \\\"Confirmed\\\": {{\\\"type\\\": \\\"boolean\\\", \\\"data\\\": \\\"{8}\\\" }},\\n  \\\"Date Created\\\": {{\\\"type\\\": \\\"datetime\\\", \\\"data\\\": {9} }},\\n  \\\"Date Occurred\\\": {{\\\"type\\\": \\\"datetime\\\", \\\"data\\\": {10} }},\\n  \\\"Date Discovered\\\": {{\\\"type\\\": \\\"datetime\\\", \\\"data\\\": {11} }},\\n  \\\"Severity\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{12}\\\" }}\\n}}\\\"\\\"\\\".format(\\n  rule_additional_text.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027),\\n  incident_id_str,\\n  \\\"Incident\\\",\\n  incident_id_str,\\n  incident.name.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027),\\n  incident.description.content.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027) if incident.description is not None else \u0027\u0027,\\n  incident.incident_type_ids,\\n  incident.nist_attack_vectors,\\n  incident.confirmed,\\n  incident.create_date,\\n  date_occured,\\n  date_discovered,\\n  incident.severity_code)\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# Slack channel name\\n# Name of the existing Slack Workspace channel or a new Slack channel you are posting to. \\n# Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. \\n# If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. \\n# If there isn\u2019t one defined, the workflow will terminate.\\ninputs.slack_channel = playbook.inputs.rule_slack_channel if playbook.inputs.rule_slack_channel is not None else playbook.inputs.rule_slack_channel\\n\\n# Is channel private\\n# Indicate if the channel you are posting to should be private.\\ninputs.slack_is_channel_private = playbook.inputs.rule_slack_is_channel_private if playbook.inputs.rule_slack_is_channel_private is not None else playbook.inputs.rule_slack_is_channel_private \\n\\n# Slack user emails\\n# Comma separated list of emails belonging to Slack users in your workspace that will be added to the channel you are posting to.\\ninputs.slack_participant_emails = playbook.inputs.rule_slack_participant_emails if playbook.inputs.rule_slack_participant_emails is not None else playbook.inputs.rule_slack_participant_emails\\n\\n# Slack text message\\n# Container field to retain JSON fields to send to Slack.\\ninputs.slack_text = slack_text\\n\\n# Slack Channel ID, faster than finding via channel name\\ninputs.slack_channel_id = playbook.inputs.slack_channel_id if playbook.inputs.slack_channel_id else playbook.inputs.slack_channel_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"slack_info\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_18e994r\u003c/incoming\u003e\u003coutgoing\u003eFlow_01yjun8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post message to Slack Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0fe49f12-e387-405a-8771-4d7de5454034\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_01yjun8\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xalo7u\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_18e994r\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_01yjun8\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1xalo7u\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1xalo7u\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7e56abfb_53ba_49ca_9c67_f5a023b313e6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xalo7u\" id=\"Flow_1xalo7u_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"413\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"413\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01yjun8\" id=\"Flow_01yjun8_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18e994r\" id=\"Flow_18e994r_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"143\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"143\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"656\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1685517334903,
+      "create_date": 1687853045588,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
+        "id": 10,
         "name": "slack@ibm.com",
         "type": "user"
       },
@@ -1936,7 +1851,7 @@
       "field_type_handle": "playbook_7e56abfb_53ba_49ca_9c67_f5a023b313e6",
       "fields_type": {
         "actions": [],
-        "display_name": "Example: Post Incident to Slack (PB)",
+        "display_name": "Slack: Post Incident to Slack - Example (PB)",
         "export_key": "playbook_7e56abfb_53ba_49ca_9c67_f5a023b313e6",
         "fields": {
           "rule_slack_channel": {
@@ -1949,7 +1864,7 @@
             "deprecated": false,
             "export_key": "playbook_7e56abfb_53ba_49ca_9c67_f5a023b313e6/rule_slack_channel",
             "hide_notification": false,
-            "id": 1401,
+            "id": 667,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1964,7 +1879,7 @@
             "templates": [],
             "text": "Slack channel name",
             "tooltip": "Name of the existing Slack channel or a new Slack channel you are posting to. Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. If there isn\u2019t one defined, the workflow will terminate.",
-            "type_id": 1031,
+            "type_id": 1014,
             "uuid": "4f0c6dfc-5afd-4e4e-85ab-012e109b6bca",
             "values": []
           },
@@ -1978,7 +1893,7 @@
             "deprecated": false,
             "export_key": "playbook_7e56abfb_53ba_49ca_9c67_f5a023b313e6/rule_slack_is_channel_private",
             "hide_notification": false,
-            "id": 1402,
+            "id": 668,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -1993,7 +1908,7 @@
             "templates": [],
             "text": "Slack is channel private",
             "tooltip": "Indicate if the channel you are posting to should be private.",
-            "type_id": 1031,
+            "type_id": 1014,
             "uuid": "b7552e08-b4fb-4900-91fa-23dbe448b431",
             "values": []
           },
@@ -2007,7 +1922,7 @@
             "deprecated": false,
             "export_key": "playbook_7e56abfb_53ba_49ca_9c67_f5a023b313e6/rule_slack_participant_emails",
             "hide_notification": false,
-            "id": 1403,
+            "id": 669,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2022,7 +1937,7 @@
             "templates": [],
             "text": "Slack users emails",
             "tooltip": "Comma separated list of emails belonging to Slack users in your workspace that will be added to the channel you are posting to.",
-            "type_id": 1031,
+            "type_id": 1014,
             "uuid": "4cb7cf15-5053-43c8-9e15-e14ad14613d6",
             "values": []
           },
@@ -2036,7 +1951,7 @@
             "deprecated": false,
             "export_key": "playbook_7e56abfb_53ba_49ca_9c67_f5a023b313e6/rule_slack_text",
             "hide_notification": false,
-            "id": 1404,
+            "id": 670,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2051,7 +1966,7 @@
             "templates": [],
             "text": "Additional text",
             "tooltip": "Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.",
-            "type_id": 1031,
+            "type_id": 1014,
             "uuid": "19562da3-7f2e-41e2-bf42-6252619b8743",
             "values": []
           },
@@ -2065,7 +1980,7 @@
             "deprecated": false,
             "export_key": "playbook_7e56abfb_53ba_49ca_9c67_f5a023b313e6/slack_channel_id",
             "hide_notification": false,
-            "id": 1405,
+            "id": 671,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2080,7 +1995,7 @@
             "templates": [],
             "text": "Slack Channel ID",
             "tooltip": "Optional. Executing without channel ID archives the channel that this is associated with.",
-            "type_id": 1031,
+            "type_id": 1014,
             "uuid": "16dfec53-9777-4ac5-aba2-f09e7f649ccf",
             "values": []
           }
@@ -2105,27 +2020,27 @@
         "uuid": "515ec18e-6c3f-4c1b-ba66-9a335ca72bdb"
       },
       "has_logical_errors": false,
-      "id": 28,
+      "id": 13,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
-        "name": "slack@ibm.com",
+        "id": 6,
+        "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1690447131954,
+      "last_modified_time": 1692722031785,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1685517608084,
+          "created_date": 1687853045759,
           "description": "",
           "enabled": false,
           "export_key": "Post message to Slack Post-Process Script",
-          "id": 27,
+          "id": 14,
           "language": "python3",
           "last_modified_by": "slack@ibm.com",
-          "last_modified_time": 1685688397173,
+          "last_modified_time": 1687853045772,
           "name": "Post message to Slack Post-Process Script",
           "object_type": "incident",
           "playbook_handle": "example_post_incident_to_slack_pb",
@@ -2188,7 +2103,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_7e56abfb-53ba-49ca-9c67-f5a023b313e6",
-        "id": 32,
+        "id": 15,
         "name": "playbook_7e56abfb_53ba_49ca_9c67_f5a023b313e6",
         "type": "playbook",
         "uuid": "34fa4bdb-fbcd-429f-88e7-ef5f48d61ccc"
@@ -2196,18 +2111,18 @@
       "tags": [],
       "type": "default",
       "uuid": "7e56abfb-53ba-49ca-9c67-f5a023b313e6",
-      "version": 31
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 9,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_75ed7c8c_78ef_4d6d_8208_9cfcfcff17b4\" isExecutable=\"true\" name=\"playbook_75ed7c8c_78ef_4d6d_8208_9cfcfcff17b4\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1t7bpwv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Post message to Slack\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ded2826c-6528-4a26-b2c8-0cf215dce3c3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"#####################\\n# Note data         #\\n#####################\\n\\n# Slack additional text message\\n# Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.\\nrule_additional_text = playbook.inputs.rule_slack_text if playbook.inputs.rule_slack_text is not None else \u0027\u0027\\n\\n# Incident id for the URL\\nincident_id = str(incident.id)\\ntype_data = \\\"Incident Note\\\"\\nif task:\\n  incident_id += \\\"?task_id=\\\"+str(task.id)\\n  type_data = \\\"Task Note\\\"\\n\\n# Slack text message in JSON format\\n# ---------------------------------\\n# Do not remove first 3 elements \\\"Additional Text\\\", \\\"Resilient URL\\\" and \\\"Type of data\\\",\\n# the information is used to generate the title of the message.\\n#\\n# Add/remove information using the syntax:\\n# \\\"label\\\": {{ \\\"type\\\": \\\"[string|richtext|boolean|datetime\\\", \\\"data\\\": \\\"resilient field data\\\" }}\\n#\\n# Make sure to send \\\"datetime\\\" types as integers and not strings:\\n# without double quotes: { \\\"type\\\": \\\"datetime\\\", \\\"data\\\": resilient datetime data} \\n#\\n# Text fields like \u0027note.text.content\u0027, \u0027task.name\u0027 or \u0027Slack additional text message\u0027 can include double quotes.\\n# Watch out for embedded double quotes in these text fields and escape with field.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027) otherwise json.loads will fail.\\nslack_text = u\\\"\\\"\\\"{{\\n  \\\"Additional Text\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{0}\\\" }},\\n  \\\"Resilient URL\\\": {{\\\"type\\\": \\\"incident\\\", \\\"data\\\": \\\"{1}\\\" }},\\n  \\\"Type of data\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{2}\\\" }},\\n  \\\"Incident ID\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{3}\\\" }},\\n  \\\"Task\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{4}\\\" }},\\n  \\\"Note\\\": {{\\\"type\\\": \\\"richtext\\\", \\\"data\\\": \\\"{5}\\\" }}\\n}}\\\"\\\"\\\".format(\\n  rule_additional_text.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027),\\n  incident_id,\\n  type_data,\\n  str(incident.id),\\n  task.name.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027) if task else \\\"\\\", \\n  note.text.content.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027) if note.text is not None else \u0027\u0027)\\n\\n# Slack username - optional setting\\n# Set to true and the authenticated user of the Slack App will appear as the author of the message, ignoring any values provided for slack_username. \\n# Set your bot\u0027s name to Note\u0027s creator to appear as the author of the message. Must be used in conjunction with slack_as_user set to false, otherwise ignored.\\n#inputs.slack_as_user = False\\n#inputs.slack_username = note.user_id\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# ID of this Task\\nif task:\\n  inputs.task_id = task.id\\n\\n# Slack channel name\\n# Name of the existing Slack Workspace channel or a new Slack channel you are posting to. \\n# Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. \\n# If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. \\n# If there isn\u2019t one defined, the workflow will terminate.\\ninputs.slack_channel = playbook.inputs.rule_slack_channel if playbook.inputs.rule_slack_channel is not None else playbook.inputs.slack_channel\\n\\n# Is channel private\\n# Indicate if the channel you are posting to should be private.\\ninputs.slack_is_channel_private = playbook.inputs.rule_slack_is_channel_private if playbook.inputs.rule_slack_is_channel_private is not None else playbook.inputs.rule_slack_is_channel_private\\n\\n# Slack user emails\\n# Comma separated list of emails belonging to Slack users in your workspace that will be added to your channel.\\ninputs.slack_participant_emails = playbook.inputs.rule_slack_participant_emails if playbook.inputs.rule_slack_participant_emails is not None else playbook.inputs.rule_slack_participant_emails\\n\\n# Slack text message\\n# Container field to retain JSON fields to send to Slack.\\ninputs.slack_text = slack_text\\n\\n# Slack Channel ID, faster than finding via channel name\\ninputs.slack_channel_id = playbook.inputs.slack_channel_id if playbook.inputs.slack_channel_id else playbook.inputs.slack_channel_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"slack_info\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1t7bpwv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1h9jb14\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1t7bpwv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post Note to Slack Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"04af258b-e38c-41f8-8246-9d178bac1454\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1h9jb14\u003c/incoming\u003e\u003coutgoing\u003eFlow_1gvenkm\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1h9jb14\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1gvenkm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1gvenkm\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_75ed7c8c_78ef_4d6d_8208_9cfcfcff17b4\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1gvenkm\" id=\"Flow_1gvenkm_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1h9jb14\" id=\"Flow_1h9jb14_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"265\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"265\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1t7bpwv\" id=\"Flow_1t7bpwv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.6328\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"664\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1685518230046,
+      "create_date": 1687853046062,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
+        "id": 10,
         "name": "slack@ibm.com",
         "type": "user"
       },
@@ -2221,7 +2136,7 @@
       "field_type_handle": "playbook_75ed7c8c_78ef_4d6d_8208_9cfcfcff17b4",
       "fields_type": {
         "actions": [],
-        "display_name": "Example: Post Note to Slack (PB)",
+        "display_name": "Slack: Post Note to Slack - Example (PB)",
         "export_key": "playbook_75ed7c8c_78ef_4d6d_8208_9cfcfcff17b4",
         "fields": {
           "rule_slack_channel": {
@@ -2234,7 +2149,7 @@
             "deprecated": false,
             "export_key": "playbook_75ed7c8c_78ef_4d6d_8208_9cfcfcff17b4/rule_slack_channel",
             "hide_notification": false,
-            "id": 1406,
+            "id": 672,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2249,7 +2164,7 @@
             "templates": [],
             "text": "Slack channel name",
             "tooltip": "Name of the existing Slack channel or a new Slack channel you are posting to. Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. If there isn\u2019t one defined, the workflow will terminate.",
-            "type_id": 1033,
+            "type_id": 1015,
             "uuid": "3a7fe4bc-a145-4bed-8870-26d3be4bdee9",
             "values": []
           },
@@ -2263,7 +2178,7 @@
             "deprecated": false,
             "export_key": "playbook_75ed7c8c_78ef_4d6d_8208_9cfcfcff17b4/rule_slack_is_channel_private",
             "hide_notification": false,
-            "id": 1407,
+            "id": 673,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2278,7 +2193,7 @@
             "templates": [],
             "text": "Slack is channel private",
             "tooltip": "Indicate if the channel you are posting to should be private.",
-            "type_id": 1033,
+            "type_id": 1015,
             "uuid": "c3549f01-5e65-4ad5-bf61-4a85bac91b15",
             "values": []
           },
@@ -2292,7 +2207,7 @@
             "deprecated": false,
             "export_key": "playbook_75ed7c8c_78ef_4d6d_8208_9cfcfcff17b4/rule_slack_participant_emails",
             "hide_notification": false,
-            "id": 1408,
+            "id": 674,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2307,7 +2222,7 @@
             "templates": [],
             "text": "Slack users emails",
             "tooltip": "Comma separated list of emails belonging to Slack users in your workspace that will be added to the channel you are posting to.",
-            "type_id": 1033,
+            "type_id": 1015,
             "uuid": "25ab3583-32ba-48e5-a57c-045060be9f72",
             "values": []
           },
@@ -2321,7 +2236,7 @@
             "deprecated": false,
             "export_key": "playbook_75ed7c8c_78ef_4d6d_8208_9cfcfcff17b4/rule_slack_text",
             "hide_notification": false,
-            "id": 1409,
+            "id": 675,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2336,7 +2251,7 @@
             "templates": [],
             "text": "Additional text",
             "tooltip": "Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.",
-            "type_id": 1033,
+            "type_id": 1015,
             "uuid": "c693609c-3e59-4e0c-b45a-7ade7379b363",
             "values": []
           },
@@ -2350,7 +2265,7 @@
             "deprecated": false,
             "export_key": "playbook_75ed7c8c_78ef_4d6d_8208_9cfcfcff17b4/slack_channel_id",
             "hide_notification": false,
-            "id": 1410,
+            "id": 676,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2365,7 +2280,7 @@
             "templates": [],
             "text": "Slack Channel ID",
             "tooltip": "Optional. Executing without channel ID archives the channel that this is associated with.",
-            "type_id": 1033,
+            "type_id": 1015,
             "uuid": "0fc5bf72-c0e1-4fc7-a79c-fc8d8323da66",
             "values": []
           }
@@ -2390,27 +2305,27 @@
         "uuid": "ae06b9d7-1529-4300-8112-7ce9f6045614"
       },
       "has_logical_errors": false,
-      "id": 30,
+      "id": 14,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
-        "name": "slack@ibm.com",
+        "id": 6,
+        "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1690447136852,
+      "last_modified_time": 1692722032137,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1685518454038,
+          "created_date": 1687853046222,
           "description": "",
           "enabled": false,
           "export_key": "Post Note to Slack Post-Process Script",
-          "id": 28,
+          "id": 15,
           "language": "python3",
           "last_modified_by": "slack@ibm.com",
-          "last_modified_time": 1685690951572,
+          "last_modified_time": 1687853046236,
           "name": "Post Note to Slack Post-Process Script",
           "object_type": "note",
           "playbook_handle": "example_post_note_to_slack_pb",
@@ -2473,7 +2388,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_75ed7c8c-78ef-4d6d-8208-9cfcfcff17b4",
-        "id": 34,
+        "id": 16,
         "name": "playbook_75ed7c8c_78ef_4d6d_8208_9cfcfcff17b4",
         "type": "playbook",
         "uuid": "cf0964b8-5b71-4dc5-bccc-a5cddc5f1ee0"
@@ -2481,18 +2396,18 @@
       "tags": [],
       "type": "default",
       "uuid": "75ed7c8c-78ef-4d6d-8208-9cfcfcff17b4",
-      "version": 16
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 15,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2bcb265a_9fee_4659_be16_d90ffed74dda\" isExecutable=\"true\" name=\"playbook_2bcb265a_9fee_4659_be16_d90ffed74dda\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1s2nr0d\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Post message to Slack\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ded2826c-6528-4a26-b2c8-0cf215dce3c3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"#####################\\n# Task data         #\\n#####################\\n\\n# Incident id for the URL\\nincident_id_str = str(incident.id)\\nif task:\\n  incident_id_str += \\\"?task_id=\\\"+str(task.id)\\n\\n# Task due date, send 0 if it\u0027s None\\ntask_due_date = task.due_date if task.due_date else 0\\n\\n# Task Status\\ntask_status = \\\"Open\\\" if task.status == \\\"O\\\" else \\\"Closed\\\"\\n\\n# Slack additional text message\\n# Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.\\nrule_additional_text = playbook.inputs.rule_slack_text if playbook.inputs.rule_slack_text is not None else \u0027\u0027\\n\\n# Slack text message in JSON format\\n# ---------------------------------\\n# Do not remove first 3 elements \\\"Additional Text\\\", \\\"Resilient URL\\\" and \\\"Type of data\\\",\\n# the information is used to generate the title of the message.\\n#\\n# Add/remove information using the syntax:\\n# \\\"label\\\": {{ \\\"type\\\": \\\"[string|richtext|boolean|datetime\\\", \\\"data\\\": \\\"resilient field data\\\" }}\\n#\\n# Make sure to send \\\"datetime\\\" types as integers and not strings:\\n# without double quotes: { \\\"type\\\": \\\"datetime\\\", \\\"data\\\": resilient datetime data} \\n#\\n# Text fields like \u0027task name\u0027 or \u0027Slack additional text message\u0027 can include double quotes.\\n# Watch out for embedded double quotes in these text fields and escape with field.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027) otherwise json.loads will fail.\\nslack_text = u\\\"\\\"\\\"{{\\n  \\\"Additional Text\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{0}\\\" }},\\n  \\\"Resilient URL\\\": {{\\\"type\\\": \\\"incident\\\", \\\"data\\\": \\\"{1}\\\" }},\\n  \\\"Type of data\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{2}\\\" }},\\n  \\\"Incident ID\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{3}\\\" }},\\n  \\\"Task Name\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{4}\\\" }},\\n  \\\"Task Status\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{5}\\\" }},\\n  \\\"Task Owner\\\": {{\\\"type\\\": \\\"string\\\", \\\"data\\\": \\\"{6}\\\" }},\\n  \\\"Task Due Date\\\": {{\\\"type\\\": \\\"datetime\\\", \\\"data\\\": {7} }}\\n}}\\\"\\\"\\\".format(\\n  rule_additional_text.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027),\\n  incident_id_str,\\n  \\\"Task\\\",\\n  str(incident.id),\\n  task.name.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027),\\n  task_status,\\n  task.owner_id,\\n  task_due_date)\\n\\n# Slack username - optional setting\\n# Set to true and the authenticated user of the Slack App will appear as the author of the message, ignoring any values provided for slack_username. \\n# Set your bot\u0027s name to Task\u0027s creator to appear as the author of the message. Must be used in conjunction with slack_as_user set to false, otherwise ignored.\\n#inputs.slack_as_user = False\\n#inputs.slack_username = task.creator_id\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# ID of this Task\\ninputs.task_id = task.id\\n\\n# Slack channel name\\n# Name of the existing Slack Workspace channel or a new Slack channel you are posting to. \\n# Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. \\n# If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. \\n# If there isn\u2019t one defined, the workflow will terminate.\\ninputs.slack_channel = playbook.inputs.rule_slack_channel if playbook.inputs.rule_slack_channel is not None else playbook.inputs.slack_channel\\n\\n# Is channel private\\n# Indicate if the channel you are posting to should be private.\\ninputs.slack_is_channel_private = playbook.inputs.rule_slack_is_channel_private if playbook.inputs.rule_slack_is_channel_private is not None else playbook.inputs.rule_slack_is_channel_private \\n\\n# Slack user emails\\n# Comma separated list of emails belonging to Slack users in your workspace that will be added to your channel.\\ninputs.slack_participant_emails = playbook.inputs.rule_slack_participant_emails if playbook.inputs.rule_slack_participant_emails is not None else playbook.inputs.rule_slack_participant_emails\\n\\n# Slack text message\\n# Container field to retain JSON fields to send to Slack\\ninputs.slack_text = slack_text\\n\\n# Slack Channel ID, faster than finding via channel name\\ninputs.slack_channel_id = playbook.inputs.slack_channel_id if playbook.inputs.slack_channel_id else playbook.inputs.slack_channel_id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"slack_info\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1s2nr0d\u003c/incoming\u003e\u003coutgoing\u003eFlow_1az8dbu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post Task to Slack Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2974d37b-560f-4945-af74-ae486c74b1fd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1az8dbu\u003c/incoming\u003e\u003coutgoing\u003eFlow_0h7a1ly\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1s2nr0d\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1az8dbu\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0h7a1ly\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0h7a1ly\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2bcb265a_9fee_4659_be16_d90ffed74dda\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0h7a1ly\" id=\"Flow_0h7a1ly_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"384\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1az8dbu\" id=\"Flow_1az8dbu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"268\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1s2nr0d\" id=\"Flow_1s2nr0d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.5703\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"655\" y=\"384\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1685518514305,
+      "create_date": 1687853046532,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
+        "id": 10,
         "name": "slack@ibm.com",
         "type": "user"
       },
@@ -2506,7 +2421,7 @@
       "field_type_handle": "playbook_2bcb265a_9fee_4659_be16_d90ffed74dda",
       "fields_type": {
         "actions": [],
-        "display_name": "Example: Post Task to Slack (PB)",
+        "display_name": "Slack: Post Task to Slack - Example (PB)",
         "export_key": "playbook_2bcb265a_9fee_4659_be16_d90ffed74dda",
         "fields": {
           "rule_slack_channel": {
@@ -2519,7 +2434,7 @@
             "deprecated": false,
             "export_key": "playbook_2bcb265a_9fee_4659_be16_d90ffed74dda/rule_slack_channel",
             "hide_notification": false,
-            "id": 1411,
+            "id": 677,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2534,7 +2449,7 @@
             "templates": [],
             "text": "Slack channel name",
             "tooltip": "Name of the existing Slack channel or a new Slack channel you are posting to. Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be 21 characters or less. If you leave this field empty, function will try to use the slack_channel associated with the Incident or Task found in the Slack Conversations datatable. If there isn\u2019t one defined, the workflow will terminate.",
-            "type_id": 1034,
+            "type_id": 1016,
             "uuid": "6e12e09d-86aa-4dd4-a60c-3bacb1a4b7e1",
             "values": []
           },
@@ -2548,7 +2463,7 @@
             "deprecated": false,
             "export_key": "playbook_2bcb265a_9fee_4659_be16_d90ffed74dda/rule_slack_is_channel_private",
             "hide_notification": false,
-            "id": 1412,
+            "id": 678,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2563,7 +2478,7 @@
             "templates": [],
             "text": "Slack is channel private",
             "tooltip": "Indicate if the channel you are posting to should be private.",
-            "type_id": 1034,
+            "type_id": 1016,
             "uuid": "8af203e0-1485-4cc1-81d5-ca571d350fe0",
             "values": []
           },
@@ -2577,7 +2492,7 @@
             "deprecated": false,
             "export_key": "playbook_2bcb265a_9fee_4659_be16_d90ffed74dda/rule_slack_participant_emails",
             "hide_notification": false,
-            "id": 1413,
+            "id": 679,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2592,7 +2507,7 @@
             "templates": [],
             "text": "Slack users emails",
             "tooltip": "Comma separated list of emails belonging to Slack users in your workspace that will be added to the channel you are posting to.",
-            "type_id": 1034,
+            "type_id": 1016,
             "uuid": "43c57513-8fcd-4e73-91d3-8716c5290a18",
             "values": []
           },
@@ -2606,7 +2521,7 @@
             "deprecated": false,
             "export_key": "playbook_2bcb265a_9fee_4659_be16_d90ffed74dda/rule_slack_text",
             "hide_notification": false,
-            "id": 1414,
+            "id": 680,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2621,7 +2536,7 @@
             "templates": [],
             "text": "Additional text",
             "tooltip": "Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.",
-            "type_id": 1034,
+            "type_id": 1016,
             "uuid": "8174b60f-8935-4c69-9122-0da6bc0801b0",
             "values": []
           },
@@ -2635,7 +2550,7 @@
             "deprecated": false,
             "export_key": "playbook_2bcb265a_9fee_4659_be16_d90ffed74dda/slack_channel_id",
             "hide_notification": false,
-            "id": 1415,
+            "id": 681,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2650,7 +2565,7 @@
             "templates": [],
             "text": "Slack Channel ID",
             "tooltip": "Optional. Executing without channel ID archives the channel that this is associated with.",
-            "type_id": 1034,
+            "type_id": 1016,
             "uuid": "89898279-318a-4d96-ab49-dd4b99593c6d",
             "values": []
           }
@@ -2675,27 +2590,27 @@
         "uuid": "e8755cd9-18ab-4367-b279-762dd880181b"
       },
       "has_logical_errors": false,
-      "id": 31,
+      "id": 15,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 21,
-        "name": "slack@ibm.com",
+        "id": 6,
+        "name": "playbook@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1690447140842,
+      "last_modified_time": 1692722032393,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1685518741404,
+          "created_date": 1687853046679,
           "description": "",
           "enabled": false,
           "export_key": "Post Task to Slack Post-Process Script",
-          "id": 29,
+          "id": 16,
           "language": "python3",
           "last_modified_by": "slack@ibm.com",
-          "last_modified_time": 1685688545140,
+          "last_modified_time": 1687853046693,
           "name": "Post Task to Slack Post-Process Script",
           "object_type": "task",
           "playbook_handle": "example_post_task_to_slack_pb",
@@ -2758,7 +2673,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2bcb265a-9fee-4659-be16-d90ffed74dda",
-        "id": 35,
+        "id": 17,
         "name": "playbook_2bcb265a_9fee_4659_be16_d90ffed74dda",
         "type": "playbook",
         "uuid": "746b16e4-f7f1-48a9-85e0-1847e5ea45e0"
@@ -2766,7 +2681,7 @@
       "tags": [],
       "type": "default",
       "uuid": "2bcb265a-9fee-4659-be16-d90ffed74dda",
-      "version": 21
+      "version": 6
     }
   ],
   "regulators": null,
@@ -2797,7 +2712,7 @@
           "deprecated": false,
           "export_key": "slack_conversations_db/slack_db_channel",
           "hide_notification": false,
-          "id": 1311,
+          "id": 633,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2813,7 +2728,7 @@
           "templates": [],
           "text": "Slack channel name",
           "tooltip": "",
-          "type_id": 1025,
+          "type_id": 1008,
           "uuid": "df0165d4-6367-4914-b80c-c8877b20c011",
           "values": [],
           "width": 165
@@ -2828,7 +2743,7 @@
           "deprecated": false,
           "export_key": "slack_conversations_db/slack_db_channel_type",
           "hide_notification": false,
-          "id": 1312,
+          "id": 634,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2844,7 +2759,7 @@
           "templates": [],
           "text": "Slack channel type",
           "tooltip": "",
-          "type_id": 1025,
+          "type_id": 1008,
           "uuid": "ce4c8399-09e3-481a-976f-b076c98965f7",
           "values": [],
           "width": 67
@@ -2859,7 +2774,7 @@
           "deprecated": false,
           "export_key": "slack_conversations_db/slack_db_permalink",
           "hide_notification": false,
-          "id": 1313,
+          "id": 635,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2875,7 +2790,7 @@
           "templates": [],
           "text": "Slack URL",
           "tooltip": "",
-          "type_id": 1025,
+          "type_id": 1008,
           "uuid": "2f95366b-dd32-4035-8811-549646c0af5c",
           "values": [],
           "width": 79
@@ -2890,7 +2805,7 @@
           "deprecated": false,
           "export_key": "slack_conversations_db/slack_db_res_id",
           "hide_notification": false,
-          "id": 1314,
+          "id": 636,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2906,7 +2821,7 @@
           "templates": [],
           "text": "Resilient ID",
           "tooltip": "",
-          "type_id": 1025,
+          "type_id": 1008,
           "uuid": "ce3c9a1e-2800-47da-a5b9-c37825790943",
           "values": [],
           "width": 211
@@ -2921,7 +2836,7 @@
           "deprecated": false,
           "export_key": "slack_conversations_db/slack_db_time",
           "hide_notification": false,
-          "id": 1315,
+          "id": 637,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -2937,7 +2852,7 @@
           "templates": [],
           "text": "Time",
           "tooltip": "",
-          "type_id": 1025,
+          "type_id": 1008,
           "uuid": "656a7daf-b64a-4559-987d-b789d0ec4c4b",
           "values": [],
           "width": 123
