@@ -49,13 +49,14 @@ CONTACT_URI = "/services/data/{api_version}/sobjects/Contact/{contact_id}"
 TASK_POST_URI = "/services/data/{api_version}/sobjects/Task"
 
 # C O N S T A N T S
-SOQL_QUERY_LAST_MODIFIED_DATE = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
+LIMIT = 200
+SOQL_QUERY_LAST_MODIFIED_DATE_ALL_FIELDS = "SELECT FIELDS(ALL) FROM Case WHERE LastModifiedDate > {time}"
+SOQL_QUERY_LAST_MODIFIED_DATE_USER_DEFINED_FIELDS = "SELECT {case_field_list} FROM Case WHERE LastModifiedDate > "
 SOQL_QUERY_BY_RECORD_TYPE_ID = " AND RecordTypeId IN ({record_type_id_list})"
 SOQL_QUERY_RECORD_TYPE = "SELECT Id,Name from RecordType WHERE sObjectType=\'Case\'"
-SOQL_QUERY_CASE_TASK = "SELECT FIELDS(ALL) FROM Task WHERE WhatId='{case_id}' LIMIT 200"
+SOQL_QUERY_CASE_TASK = "SELECT FIELDS(ALL) FROM Task WHERE WhatId='{case_id}' LIMIT {LIMIT}"
 SOQL_QUERY_CONTENT_DOCUMENT = "SELECT id, ContentDocumentId, ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId='{case_id}'"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/{entity_type}/{entity_id}/view"
-LIMIT = 200
 
 IBM_SOAR = "IBM SOAR" # common label
 SOAR_HEADER = "Created by {}".format(IBM_SOAR)
@@ -91,7 +92,20 @@ class AppCommon():
         if not self.polling_record_type_names:
             self.polling_record_type_names = []
         self.record_type_id_list = ""
-        self.soql_limit = app_configs.get("soql_limit", LIMIT)
+        # 
+        self.case_fields_to_query = app_configs.get("case_fields_to_query", None)
+        # Use a different SOQL query string to query cases depending on whether the user specifies 
+        # case_fields_to_query in the app.config.
+        if self.case_fields_to_query:
+            # Substitute the user specified case fields to create the query string.
+            # In this case there is no limit specified, unless the user overrides in the app.config
+            self.soql_case_query_string = SOQL_QUERY_LAST_MODIFIED_DATE_USER_DEFINED_FIELDS.format(case_field_list=self.case_fields_to_query) + "{time}"
+            self.soql_limit = app_configs.get("soql_limit", None)
+        else:
+            # This query string gets ALL case fields from Salesforce.
+            # However when using SELECT FIELDS(ALL) in a query a LIMIT must also be specified
+            self.soql_case_query_string = SOQL_QUERY_LAST_MODIFIED_DATE_ALL_FIELDS
+            self.soql_limit = app_configs.get("soql_limit", LIMIT)
 
         # Setup access token in the header for making Salesforce REST API calls 
         if self.access_token:
@@ -213,7 +227,7 @@ class AppCommon():
         query_url = self.base_url + QUERY_URI.format(api_version=self.api_version)
 
         # Build the SOQL query based on the polling time and the user input polling_filters
-        soql_query = self._add_query_filters(SOQL_QUERY_LAST_MODIFIED_DATE.format(time=readable_time), 
+        soql_query = self._add_query_filters(self.soql_case_query_string.format(time=readable_time), 
                                              self.record_type_id_list,
                                              self.polling_filters, self.soql_limit)
         params = {'q': soql_query}

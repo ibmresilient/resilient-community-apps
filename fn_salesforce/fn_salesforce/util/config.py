@@ -51,6 +51,15 @@ polling_filters=
 # For example: 
 # polling_record_type_names="Security Incident","Incident"
 polling_record_type_names=
+# OPTIONAL: Use the case_fields_to_query parameter to list the Salesforce Case field names
+# to retrieve when querying for cases on each poll interval.  The default parameter lists the
+# fields that are used in the jinja templates that are shipped with the integration.
+# If you use custom fields in Salesforce that you want to import into SOAR, add them to 
+# this comma separated list. 
+# If this parameter is not defined, the app will use SOQL SELECT FIELDS(ALL) clause to retrieve 
+# all case fields in a the case query each polling interval.  The limitation here is that 
+# Salesforce only returned LIMIT=200 cases each poll when getting cases with ALL fields.
+# case_fields_to_query=Id,CaseNumber,Type,CreatedDate,Description,Subject,Priority,OwnerId,AccountId,ContactId,Origin,ContactPhone,ContactEmail,ContactFax,SuppliedName,SuppliedEmail,SuppliedPhone,SuppliedCompany
 # 
 # OPTIONAL: Specify a timeout value value for accessing the Salesforce REST API
 # timeout=60
