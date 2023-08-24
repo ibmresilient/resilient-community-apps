@@ -151,11 +151,11 @@ class PollerComponent(ResilientComponent):
             id_list = list(case_server_dict[server].keys())
             for id in id_list:
                 filter_note.append(f"id={str(id)}")
-                qr_lat_updated = case_server_dict[server][id].get('properties', {}).get('qr_last_updated_time', 0)
+                qr_last_updated = case_server_dict[server][id].get('properties', {}).get('qr_last_updated_time', 0)
                 # If not in SOAR case then set time to 0
-                if not qr_lat_updated:
-                    qr_lat_updated = 0
-                filter.append(f"id={str(id)} and last_persisted_time > {int(qr_lat_updated)}")
+                if not qr_last_updated:
+                    qr_last_updated = 0
+                filter.append(f"id={str(id)} and last_persisted_time > {int(qr_last_updated)}")
 
             filters = " or ".join(filter)
             filter_notes = " or ".join(filter_note)
