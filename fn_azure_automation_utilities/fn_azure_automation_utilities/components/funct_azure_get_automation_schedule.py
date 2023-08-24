@@ -7,10 +7,10 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from resilient_lib import validate_fields
 from fn_azure_automation_utilities.util.helper import AzureClient, PACKAGE_NAME
 
-FN_NAME = "azure_list_automation_job_schedule_by_automation_account"
+FN_NAME = "azure_get_automation_schedule"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'azure_list_automation_job_schedule_by_automation_account'"""
+    """Component that implements function 'azure_get_automation_schedule'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -18,16 +18,17 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Retrieve a list of job schedules.
+        Function: Retrieve the schedule identified by schedule name.
         Inputs:
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
+            -   fn_inputs.schedule_name
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        # Validate inputs
-        validate_fields(["account_name", "resource_group_name", "job_schedule_name"], fn_inputs)
+       # Validate inputs
+        validate_fields(["account_name", "resource_group_name", "schedule_name"], fn_inputs)
 
         # Connect to Azure
         client = AzureClient(
@@ -43,7 +44,7 @@ class FunctionComponent(AppFunctionComponent):
             refresh_token=self.options.get("refresh_token")
         )
 
-        results = client.list_automation_job_schedule_by_automation_account()
+        results = client.get_automation_schedule(getattr(fn_inputs, "schedule_name"))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

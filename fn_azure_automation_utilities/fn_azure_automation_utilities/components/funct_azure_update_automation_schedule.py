@@ -8,10 +8,10 @@ from resilient_lib import validate_fields
 from fn_azure_automation_utilities.util.helper import AzureClient, PACKAGE_NAME
 from ast import literal_eval
 
-FN_NAME = "azure_create_automation_job_schedule"
+FN_NAME = "azure_update_automation_schedule"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'azure_create_automation_job_schedule'"""
+    """Component that implements function 'azure_update_automation_schedule'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -19,19 +19,22 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Create a job schedule.
+        Function: Update the schedule identified by schedule name.
         Inputs:
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
             -   fn_inputs.input_parameters
-            -   fn_inputs.job_schedule_name
+            -   fn_inputs.schedule_name
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate inputs
-        validate_fields(["account_name", "resource_group_name", "input_parameters", "job_schedule_name"], fn_inputs)
+        validate_fields(["account_name", "resource_group_name", "input_parameters", "schedule_name"], fn_inputs)
         input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
+        # Either description or isEnabled must be given.
+        if not input_parameters.get("properties", {}).get("description") and input_parameters.get("properties", {}).get("isEnabled") == None:
+            raise ValueError("Either description or isEnabled need to be given.")
 
         # Connect to Azure
         client = AzureClient(
@@ -47,7 +50,7 @@ class FunctionComponent(AppFunctionComponent):
             refresh_token=self.options.get("refresh_token")
         )
 
-        results = client.create_automation_job_schedule(getattr(fn_inputs, "job_schedule_name"), input_parameters)
+        results = client.update_automation_schedule(getattr(fn_inputs, "schedule_name"), input_parameters)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

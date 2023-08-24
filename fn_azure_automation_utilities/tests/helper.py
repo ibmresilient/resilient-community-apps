@@ -786,6 +786,144 @@ def update_automation_credential_results():
         }
     }
 
+def create_automation_schedule_results():
+    return {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/tester1324",
+        "name": "tester1324",
+        "type": "Microsoft.Automation/AutomationAccounts/Schedules",
+        "properties": {
+            "description": "something",
+            "startTime": "2023-08-25T08:40:00+00:00",
+            "startTimeOffsetMinutes": 0.0,
+            "expiryTime": "2023-08-25T08:40:00+00:00",
+            "expiryTimeOffsetMinutes": 0.0,
+            "isEnabled": True,
+            "nextRun": "2023-08-25T08:40:00+00:00",
+            "nextRunOffsetMinutes": 0.0,
+            "interval": None,
+            "frequency": "OneTime",
+            "creationTime": "2023-08-24T15:31:44.2666667+00:00",
+            "lastModifiedTime": "2023-08-24T15:31:44.2666667+00:00",
+            "timeZone": "Etc/UTC",
+            "advancedSchedule": None
+        }
+    }
+
+def get_automation_schedule_results():
+    return {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/tester1324",
+        "name": "tester1324",
+        "type": "Microsoft.Automation/AutomationAccounts/Schedules",
+        "properties": {
+        "description": "something",
+        "startTime": "2023-08-25T08:40:00+00:00",
+        "startTimeOffsetMinutes": 0.0,
+        "expiryTime": "2023-08-25T08:40:00+00:00",
+        "expiryTimeOffsetMinutes": 0.0,
+        "isEnabled": True,
+        "nextRun": "2023-08-25T08:40:00+00:00",
+        "nextRunOffsetMinutes": 0.0,
+        "interval": None,
+        "frequency": "OneTime",
+        "creationTime": "2023-08-24T15:31:44.2666667+00:00",
+        "lastModifiedTime": "2023-08-24T15:31:44.2666667+00:00",
+        "timeZone": "Etc/UTC",
+        "advancedSchedule": None
+        }
+    }
+
+def list_automation_schedule_by_automation_account_results():
+    return {
+        "value": [
+        {
+            "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/s",
+            "name": "s",
+            "type": "Microsoft.Automation/AutomationAccounts/Schedules",
+            "properties": {
+            "description": "",
+            "startTime": "2023-08-29T12:05:00-04:00",
+            "startTimeOffsetMinutes": -240.0,
+            "expiryTime": "2023-08-29T12:05:00-04:00",
+            "expiryTimeOffsetMinutes": -240.0,
+            "isEnabled": True,
+            "nextRun": "2023-08-29T12:05:00-04:00",
+            "nextRunOffsetMinutes": -240.0,
+            "interval": None,
+            "frequency": "OneTime",
+            "creationTime": "2023-08-23T16:05:14.3633333+00:00",
+            "lastModifiedTime": "2023-08-23T17:09:35.4666667+00:00",
+            "timeZone": "America/New_York",
+            "advancedSchedule": None
+            }
+        },
+        {
+            "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/tester",
+            "name": "tester",
+            "type": "Microsoft.Automation/AutomationAccounts/Schedules",
+            "properties": {
+            "description": "",
+            "startTime": "2023-08-08T14:35:00-04:00",
+            "startTimeOffsetMinutes": -240.0,
+            "expiryTime": "2023-08-08T14:35:00-04:00",
+            "expiryTimeOffsetMinutes": -240.0,
+            "isEnabled": True,
+            "nextRun": None,
+            "nextRunOffsetMinutes": 0.0,
+            "interval": None,
+            "frequency": "OneTime",
+            "creationTime": "2023-08-08T18:05:08.1333333+00:00",
+            "lastModifiedTime": "2023-08-08T18:05:08.1333333+00:00",
+            "timeZone": "America/New_York",
+            "advancedSchedule": None
+            }
+        },
+        {
+            "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/tester1324",
+            "name": "tester1324",
+            "type": "Microsoft.Automation/AutomationAccounts/Schedules",
+            "properties": {
+            "description": "something",
+            "startTime": "2023-08-25T08:40:00+00:00",
+            "startTimeOffsetMinutes": 0.0,
+            "expiryTime": "2023-08-25T08:40:00+00:00",
+            "expiryTimeOffsetMinutes": 0.0,
+            "isEnabled": True,
+            "nextRun": "2023-08-25T08:40:00+00:00",
+            "nextRunOffsetMinutes": 0.0,
+            "interval": None,
+            "frequency": "OneTime",
+            "creationTime": "2023-08-24T15:31:44.2666667+00:00",
+            "lastModifiedTime": "2023-08-24T15:31:44.2666667+00:00",
+            "timeZone": "Etc/UTC",
+            "advancedSchedule": None
+            }
+        }
+        ]
+    }
+
+def update_automation_schedule_results():
+    return {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/s",
+        "name": "s",
+        "type": "Microsoft.Automation/AutomationAccounts/Schedules",
+        "properties": {
+            "description": "",
+            "startTime": "2023-08-29T12:05:00-04:00",
+            "startTimeOffsetMinutes": -240.0,
+            "expiryTime": "2023-08-29T12:05:00-04:00",
+            "expiryTimeOffsetMinutes": -240.0,
+            "isEnabled": False,
+            "nextRun": "2023-08-29T12:05:00-04:00",
+            "nextRunOffsetMinutes": -240.0,
+            "interval": None,
+            "frequency": "OneTime",
+            "creationTime": "2023-08-23T16:05:14.3633333+00:00",
+            "lastModifiedTime": "2023-08-23T17:09:35.4666667+00:00",
+            "timeZone": "America/New_York",
+            "advancedSchedule": None
+        }
+    }
+
 def mock_init():
     class MockClient(object):
         """ Add Mock connection data """
@@ -939,5 +1077,32 @@ def mock_init():
         def update_automation_credential(self, credential_name: str, payload: dict):
             """ Mock update automation credential results """
             return update_automation_credential_results()
+
+        def create_automation_schedule(self, schedule_name: str, payload: dict):
+            """ Mock create automation schedule results """
+            return create_automation_schedule_results()
+
+        def delete_automation_schedule(self, schedule_name: str):
+            """ Mock delete automation schedule results """
+            class MockDeleteSchedule(object):
+                status_code = 200
+                text = ""
+                def __init__(self):
+                    """ Mock """
+                    pass
+
+            return MockDeleteSchedule()
+
+        def get_automation_schedule(self, schedule_name: str):
+            """ Mock get automation schedule results """
+            return get_automation_schedule_results()
+
+        def list_automation_schedule_by_automation_account(self):
+            """ Mock list automation schedule by automation account results """
+            return list_automation_schedule_by_automation_account_results()
+
+        def update_automation_schedule(self, schedule_name: str, payload: dict):
+            """ Mock update automation schedule results """
+            return update_automation_schedule_results()
 
     return MockClient()

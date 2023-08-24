@@ -4,10 +4,10 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Azure Automation Utilities: Get Automation Job Schedule - Example (PB)
+# Playbook - Azure Automation Utilities: List Automation Schedule by Automation Account
 
 ### API Name
-`azure_automation_utilities_get_automation_job_schedule`
+`azure_automation_utilities_list_automation_schedule_by_automation_account`
 
 ### Status
 `enabled`
@@ -19,17 +19,17 @@
 `incident`
 
 ### Description
-Retrieve the job schedule identified by job schedule name.
+Retrieve a list of schedules.
 
 
 ---
-## Function - Azure Get Automation Job Schedule
+## Function - Azure List Automation Schedule by Automation Account
 
 ### API Name
-`azure_get_automation_job_schedule`
+`azure_list_automation_schedule_by_automation_account`
 
 ### Output Name
-`get_job_schedule`
+`list_schedule`
 
 ### Message Destination
 `fn_azure_automation_utilities`
@@ -37,8 +37,7 @@ Retrieve the job schedule identified by job schedule name.
 ### Function-Input Script
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.job_schedule_name = playbook.inputs.azure_automation_job_schedule_name
+inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
 ```
 
 ---
@@ -57,7 +56,7 @@ inputs.job_schedule_name = playbook.inputs.azure_automation_job_schedule_name
 ### Script Content
 ```python
 from json import dumps
-results = playbook.functions.results.get_job_schedule
+results = playbook.functions.results.list_schedule
 
 if results.get("success"):
   incident.addNote(dumps(results.get("content", {}), indent=4))

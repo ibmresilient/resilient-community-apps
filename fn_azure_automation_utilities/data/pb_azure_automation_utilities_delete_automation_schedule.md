@@ -4,10 +4,10 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Azure Automation Utilities: Delete Automation Job Schedule - Example (PB)
+# Playbook - Azure Automation Utilities: Delete Automation Schedule - Example (PB)
 
 ### API Name
-`azure_automation_utilities_delete_automation_job_schedule`
+`azure_automation_utilities_delete_automation_schedule`
 
 ### Status
 `enabled`
@@ -19,17 +19,17 @@
 `incident`
 
 ### Description
-Delete the job schedule identified by job schedule name.
+Delete the schedule identified by schedule name.
 
 
 ---
-## Function - Azure Delete Automation Job Schedule
+## Function - Azure Delete Automation Schedule
 
 ### API Name
-`azure_delete_automation_job_schedule`
+`azure_delete_automation_schedule`
 
 ### Output Name
-`delete_job_schedule`
+`delete_schedule`
 
 ### Message Destination
 `fn_azure_automation_utilities`
@@ -38,7 +38,7 @@ Delete the job schedule identified by job schedule name.
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.job_schedule_name = playbook.inputs.azure_automation_job_schedule_name
+inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
 ```
 
 ---
@@ -56,14 +56,14 @@ inputs.job_schedule_name = playbook.inputs.azure_automation_job_schedule_name
 
 ### Script Content
 ```python
-results = playbook.functions.results.delete_job_schedule
+results = playbook.functions.results.delete_schedule
 
 if results.get("success"):
   status = results.get("content", {}).get("status")
   if status == 200:
-    incident.addNote(f"Job schedule '{playbook.inputs.azure_automation_job_schedule_name}' was deleted.")
+    incident.addNote(f"Schedule '{playbook.inputs.azure_automation_schedule_name}' was deleted.")
   elif status == 204:
-    incident.addNote(f"Job schedule '{playbook.inputs.azure_automation_job_schedule_name}' not found.")
+    incident.addNote(f"Schedule '{playbook.inputs.azure_automation_schedule_name}' not found.")
 ```
 
 ---
