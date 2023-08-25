@@ -54,7 +54,7 @@ SOQL_QUERY_LAST_MODIFIED_DATE_ALL_FIELDS = "SELECT FIELDS(ALL) FROM Case WHERE L
 SOQL_QUERY_LAST_MODIFIED_DATE_USER_DEFINED_FIELDS = "SELECT {case_field_list} FROM Case WHERE LastModifiedDate > "
 SOQL_QUERY_BY_RECORD_TYPE_ID = " AND RecordTypeId IN ({record_type_id_list})"
 SOQL_QUERY_RECORD_TYPE = "SELECT Id,Name from RecordType WHERE sObjectType=\'Case\'"
-SOQL_QUERY_CASE_TASK = "SELECT FIELDS(ALL) FROM Task WHERE WhatId='{case_id}' LIMIT {LIMIT}"
+SOQL_QUERY_CASE_TASK = "SELECT Id,Description,Subject,ActivityDate FROM Task WHERE WhatId='{case_id}'"
 SOQL_QUERY_CONTENT_DOCUMENT = "SELECT id, ContentDocumentId, ContentDocument.LatestPublishedVersionId from ContentDocumentLink where LinkedEntityId='{case_id}'"
 LINKBACK_URL = "https://{my_domain_name}.lightning.force.com/lightning/r/{entity_type}/{entity_id}/view"
 
@@ -440,7 +440,7 @@ class AppCommon():
             list : returns a list of tasks 
         """
         query_url = self.base_url + QUERY_URI.format(api_version=self.api_version)
-        soql_query = SOQL_QUERY_CASE_TASK.format(case_id=case_id)    
+        soql_query = SOQL_QUERY_CASE_TASK.format(case_id=case_id, LIMIT=LIMIT)
         params = {'q': soql_query}
         LOG.debug("Querying endpoint with URL %s", query_url)
 

@@ -59,7 +59,7 @@ polling_record_type_names=
 # If this parameter is not defined, the app will use SOQL SELECT FIELDS(ALL) clause to retrieve 
 # all case fields in a the case query each polling interval.  The limitation here is that 
 # Salesforce only returns LIMIT=200 cases each poll when getting cases with ALL fields.
-# case_fields_to_query=Id,CaseNumber,Type,CreatedDate,Description,Subject,Priority,OwnerId,AccountId,ContactId,Origin,ContactPhone,ContactEmail,ContactFax,SuppliedName,SuppliedEmail,SuppliedPhone,SuppliedCompany
+# case_fields_to_query=Id,CaseNumber,Type,CreatedDate,Description,Subject,Priority,Status,OwnerId,AccountId,ContactId,Origin,ContactPhone,ContactEmail,ContactFax,SuppliedName,SuppliedEmail,SuppliedPhone,SuppliedCompany
 # 
 # OPTIONAL: Specify a timeout value value for accessing the Salesforce REST API
 # timeout=60

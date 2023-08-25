@@ -42,6 +42,7 @@
     - [Custom Layouts](#custom-layouts)
     - [Poller Considerations](#poller-considerations)
       - [Poller Templates for SOAR Cases](#poller-templates-for-soar-cases)
+    - [Case Fields Returned from Query and Case Update Limits](#case-fields-returned-from-query-and-case-update-limits)
     - [Case Filtering](#case-filtering)
     - [Salesforce Case Record Types](#salesforce-case-record-types)
     - [Salesforce Case Type Picklist](#salesforce-case-type-picklist)
@@ -233,6 +234,7 @@ The following table provides the settings you need to configure the app. These s
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **api_version** | Yes | `v58.0` | *Salesforce REST API version* |
+| **case_fields_to_query** | No | `Id,CaseNumber,Type,CreatedDate,Description,Subject,Priority,Status` | *Case field names values to return from each polling interval query of Salesforce cases. Add Salesforce custom fields to the comma separated list if you want the values to map to SOAR cases* | 
 | **consumer_key** | Yes | `xxx` | *Consumer Key of a Salesforce Connected App* |
 | **consumer_secret** | Yes | `xxx` | *Consumer Secret of a Salesforce Connected App* |
 | **my_domain_name** | Yes | `company.develop` | *My Domain Name defined in My Domain Settings page in Salesforce Setup* |
@@ -274,6 +276,17 @@ When overriding the template in App Host, specify the file path for each file as
 
 Below are the default templates used which can be copied, modified, and used with app_config's
 `soar_create_case_template`, `soar_update_case_template`, and `soar_close_case_template` settings to override the default templates.
+
+---
+### Case Fields Returned from Query and Case Update Limits
+
+Salesforce case fields a can be mapped into a corresponding SOAR case as SOAR case fields, custom fields and artifacts using jinja templates. The app uses Salesforce Object Query Language (SOQL) to query for new or updated cases that need to be created or updated in SOAR.  
+<p>
+
+By default, the app uses an SOQL `SELECT FIELDS(ALL)` clause that allows for all fields of a case to be returned in a query and jinja templates can then be used to apply the mapping.  However, use of this clause has a hard LIMIT of 200 cases that can be returned in a single REST API query to Salesforce.   If the `polling_interval` can be set to a reasonable value, where it is known that the results returned are 200 or less, then using this query method may be easiest and preferred. 
+<p>
+
+A second method of querying cases is also provided.  If the case fields are explicitly listed in the SOQL `SELECT` clause query, then the Salesforce REST API query uses pagination to return all cases matching the search criteria.  Define the `case_fields_to_query` parameter in the app.config if you have large data sets returned from the polling interval query and you need them all processed. In the app.config file define `case_fields_to_query` as a comma separate list of all case field names used in the jinja templates.  The app.config file contains a default list of fields in the comments. Uncomment and add or remove from this list if you use other fields or custom fields in your custom jinja templates.
 
 ---
 ### Case Filtering 
@@ -1870,7 +1883,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "salesforce_status": "{{ Status }}"
   },
   "artifacts": [
-    {% if IP_Address__c %}
+    {% if IP_Address__c is defined and IP_Address__c is not none %}
       {{- comma() }}
       {
         "type": {
@@ -1883,33 +1896,33 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
         }
       }
       {% endif %}
-    {% if Malware_MD5_Hash__c %}
+    {% if Malware_SHA_256_Hash__c is defined and Malware_SHA_256_Hash__c is not none %}
       {{- comma() }}
       {
         "type": {
-          "name": "Malware MD5 Hash"
+          "name": "Malware SHA-256 Hash"
         },
-        "value": "{{ Malware_MD5_Hash__c }}",
+        "value": "{{ Malware_SHA_256_Hash__c }}",
         "description": {
           "format": "text",
-          "content": "Malware MD5 Hash from Salesforce case"
+          "content": "Malware SHA-256 Hash from Salesforce case"
         }
       }
       {% endif %}
-    {% if URL__c %}
+    {% if URL_artifact__c is defined and URL_artifact__c is not none %}
       {{- comma() }}
       {
         "type": {
           "name": "URL"
         },
-        "value": "{{ URL__c }}",
+        "value": "{{ URL_artifact__c }}",
         "description": {
           "format": "text",
           "content": "URL artifact from Salesforce case"
         }
       }
       {% endif %}
-    {% if Email_Recipient__c %}
+    {% if Email_Recipient__c is defined and Email_Recipient__c is not none %}
       {{- comma() }}
       {
         "type": {
@@ -1922,7 +1935,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
         }
       }
       {% endif %}
-    {% if Email_Sender__c %}
+    {% if Email_Sender__c is defined and Email_Sender__c is not none %}
       {{- comma() }}
       {
         "type": {
