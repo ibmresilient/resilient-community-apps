@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+PACKAGE_NAME = "fn_jira"
+
 def get_mock_config():
     """ Mock configuration data """
     return """
