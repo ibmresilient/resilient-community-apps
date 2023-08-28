@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1693245497427,
+  "export_date": 1693255225101,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1081,13 +1081,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 69,
+  "id": 71,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1693245495746,
+      "create_date": 1693255223474,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1096,7 +1096,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1693245495746,
+      "update_date": 1693255223474,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1359,8 +1359,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\" isExecutable=\"true\" name=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0hvjt5z\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Disconnect From Network\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"49a731e0-8b31-473a-9911-cccfb794e6c5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"disconnect_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0hvjt5z\u003c/incoming\u003e\u003coutgoing\u003eFlow_0n0rnet\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0hvjt5z\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Write Disconnect from Network Results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2f061767-9970-4a98-8074-33d5c9276726\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0n0rnet\u003c/incoming\u003e\u003coutgoing\u003eFlow_17z1mh0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0n0rnet\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_17z1mh0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_17z1mh0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0hvjt5z\" id=\"Flow_0hvjt5z_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0n0rnet\" id=\"Flow_0n0rnet_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17z1mh0\" id=\"Flow_17z1mh0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 5,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\" isExecutable=\"true\" name=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0hvjt5z\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_0hvjt5z\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1cmiqdi\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"SentinelOne: Connect to Network\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"517e7712-cf4f-42da-91a2-06d028dad318\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"connect_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0hvjt5z\u003c/incoming\u003e\u003coutgoing\u003eFlow_0kqv3y7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0kqv3y7\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_5\"/\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"SentinelOne: Update data table with Connect to Network results \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9016f826-c891-463e-948a-f6f2bd9c4ab4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kqv3y7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1cmiqdi\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1cmiqdi\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0hvjt5z\" id=\"Flow_0hvjt5z_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kqv3y7\" id=\"Flow_0kqv3y7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"268\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cmiqdi\" id=\"Flow_1cmiqdi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"157.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"267.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1692725904189,
       "creator_principal": {
@@ -1411,8 +1411,26 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1692726262098,
+      "last_modified_time": 1693250500203,
       "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1693250464655,
+          "description": "Update the agent data table Network Status with results of Connect to Network function. ",
+          "enabled": false,
+          "export_key": "SentinelOne: Update data table with Connect to Network results ",
+          "id": 45,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1693250464690,
+          "name": "SentinelOne: Update data table with Connect to Network results ",
+          "object_type": "sentinelone_agents_dt",
+          "playbook_handle": "sentinelone_connect_agent_to_network_pb",
+          "programmatic_name": "sentinelone_connect_agent_to_network_pb_sentinelone_update_data_table_with_connect_to_network_results_",
+          "script_text": "results = playbook.functions.results.connect_results\n\nso_inputs = results.get(\"inputs\")\nagent_id = so_inputs.get(\"sentinelone_agent_id\")\nnote = u\"\u003cb\u003eSentinelOne: Connect to Network \u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\ncontent = results.get(\"content\")\nif content:\n  data = content.get(\"data\")\n  if data:\n    if int(data.get(\"affected\")) \u003c= 0:\n      note = u\"{0} is NOT connected to network\".format(note)\n    else:\n      networkStatus = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=\"green\", status=\"connected\")\n      row[\"sentinelone_dt_network_status\"] = helper.createRichText(networkStatus)\n      note = u\"{0} is connected to network\".format(note)\n  else:\n    note = u\"{0} no data returned from function\".format(note)\nelse:\n    note = u\"{0} no content data returned from function\".format(note)  \n\nincident.addNote(helper.createRichText(note))\n",
+          "tags": [],
+          "uuid": "9016f826-c891-463e-948a-f6f2bd9c4ab4"
+        },
         {
           "actions": [],
           "created_date": 1692726234273,
@@ -1447,14 +1465,14 @@
               "field_name": "sentinelone_agents_dt.sentinelone_dt_network_status",
               "method": "equals",
               "type": null,
-              "value": "connected"
+              "value": "disconnected"
             },
             {
               "evaluation_id": 2,
               "field_name": "sentinelone_agents_dt.sentinelone_dt_network_status",
               "method": "equals",
               "type": null,
-              "value": "connecting"
+              "value": "disconnecting"
             }
           ],
           "custom_condition": "(1 OR 2) AND 3",
@@ -1475,13 +1493,13 @@
       "tags": [],
       "type": "default",
       "uuid": "cef9752c-b644-40ac-8854-457f28f86344",
-      "version": 6
+      "version": 9
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_48614130_af03_4470_810d_9dc0aeed330f\" isExecutable=\"true\" name=\"playbook_48614130_af03_4470_810d_9dc0aeed330f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0grk3o5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Disconnect From Network\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"49a731e0-8b31-473a-9911-cccfb794e6c5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"disconnect_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0grk3o5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1mfd309\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0grk3o5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Write Disconnect from Network results \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4a65e32f-d740-44de-b6b7-6b4e883847d2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mfd309\u003c/incoming\u003e\u003coutgoing\u003eFlow_0v8rihs\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1mfd309\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0v8rihs\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0v8rihs\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_48614130_af03_4470_810d_9dc0aeed330f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0grk3o5\" id=\"Flow_0grk3o5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mfd309\" id=\"Flow_1mfd309_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0v8rihs\" id=\"Flow_0v8rihs_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 5,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_48614130_af03_4470_810d_9dc0aeed330f\" isExecutable=\"true\" name=\"playbook_48614130_af03_4470_810d_9dc0aeed330f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0grk3o5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Disconnect From Network\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"49a731e0-8b31-473a-9911-cccfb794e6c5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"disconnect_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0grk3o5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1mfd309\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0grk3o5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Write Disconnect from Network results \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4a65e32f-d740-44de-b6b7-6b4e883847d2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mfd309\u003c/incoming\u003e\u003coutgoing\u003eFlow_0v8rihs\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1mfd309\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0v8rihs\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0v8rihs\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_48614130_af03_4470_810d_9dc0aeed330f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0v8rihs\" id=\"Flow_0v8rihs_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mfd309\" id=\"Flow_1mfd309_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0grk3o5\" id=\"Flow_0grk3o5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1693239500609,
       "creator_principal": {
@@ -1532,7 +1550,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1693239902631,
+      "last_modified_time": 1693249901958,
       "local_scripts": [
         {
           "actions": [],
@@ -1543,20 +1561,43 @@
           "id": 44,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1693239876396,
+          "last_modified_time": 1693249271619,
           "name": "SentinelOne: Write Disconnect from Network results ",
           "object_type": "sentinelone_agents_dt",
           "playbook_handle": "sentinelone_disconnect_agent_from_network_pb",
           "programmatic_name": "sentinelone_disconnect_agent_from_network_pb_sentinelone_write_disconnect_from_network_results_",
-          "script_text": "results = playbook.functions.results.disconnect_results\n\nnote = u\"\u003cb\u003eSentinelOne: Disconnect From Network \u003c/b\u003e\"\n\nif results.success:\n  so_inputs = results.get(\"inputs\")\n  agent_id = so_inputs.get(\"sentinelone_agent_id\")\n  note = \"{0}\u003cbr\u003e  SentinelOne Agent Id: {1}\".format(note, agent_id)\n  content = results.get(\"content\")\n  if content:\n    data = content.get(\"data\")\n    if data:\n      if int(data.get(\"affected\")) \u003c= 0:\n        note = \"{0} was not disconnected from network\".format(note)\n      else:\n        networkStatus = \"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=\"red\", status=\"disconnected\")\n        row[\"sentinelone_dt_network_status\"] = helper.createRichText(networkStatus)      \n        note = \"{0} is disconnected from network\".format(note)\n    else:\n      note = \"{0} no data returned from function\".format(note)\n  else:\n    note = \"{0} no content data returned from function\".format(note)  \nelse:\n  note = \"{0} Disconnect from Network function did not return success\".format(note)\n  \nincident.addNote(helper.createRichText(note))",
+          "script_text": "results = playbook.functions.results.disconnect_results\n\nnote = u\"\u003cb\u003eSentinelOne: Disconnect From Network \u003c/b\u003e\"\n\nif results.get(\"success\"):\n  so_inputs = results.get(\"inputs\")\n  agent_id = so_inputs.get(\"sentinelone_agent_id\")\n  note = \"{0}\u003cbr\u003e  SentinelOne Agent Id: {1}\".format(note, agent_id)\n  content = results.get(\"content\")\n  if content:\n    data = content.get(\"data\")\n    if data:\n      if int(data.get(\"affected\")) \u003c= 0:\n        note = \"{0} was not disconnected from network\".format(note)\n      else:\n        networkStatus = \"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=\"red\", status=\"disconnected\")\n        row[\"sentinelone_dt_network_status\"] = helper.createRichText(networkStatus)      \n        note = \"{0} is disconnected from network\".format(note)\n    else:\n      note = \"{0} no data returned from function\".format(note)\n  else:\n    note = \"{0} no content data returned from function\".format(note)  \nelse:\n  note = \"{0} Disconnect from Network function did not return success\".format(note)\n  \nincident.addNote(helper.createRichText(note))",
           "tags": [],
           "uuid": "4a65e32f-d740-44de-b6b7-6b4e883847d2"
         }
       ],
       "manual_settings": {
         "activation_conditions": {
-          "conditions": [],
-          "logic_type": "all"
+          "conditions": [
+            {
+              "evaluation_id": 3,
+              "field_name": "sentinelone_agents_dt.sentinelone_dt_is_active",
+              "method": "equals",
+              "type": null,
+              "value": true
+            },
+            {
+              "evaluation_id": 1,
+              "field_name": "sentinelone_agents_dt.sentinelone_dt_network_status",
+              "method": "equals",
+              "type": null,
+              "value": "connected"
+            },
+            {
+              "evaluation_id": 2,
+              "field_name": "sentinelone_agents_dt.sentinelone_dt_network_status",
+              "method": "equals",
+              "type": null,
+              "value": "connecting"
+            }
+          ],
+          "custom_condition": "(1 OR 2) AND 3",
+          "logic_type": "advanced"
         },
         "view_items": []
       },
@@ -1573,7 +1614,7 @@
       "tags": [],
       "type": "default",
       "uuid": "48614130-af03-4470-810d-9dc0aeed330f",
-      "version": 8
+      "version": 10
     },
     {
       "activation_type": "manual",
@@ -2038,8 +2079,8 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 2,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\" isExecutable=\"true\" name=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0feam4k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Send SOAR Note to SentinelOne\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fbf44fc5-ae3d-4e67-ad31-1b79fd87bdb8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id\\ninputs.sentinelone_note_text = note.text.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"send_note_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0feam4k\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ev7vmx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0feam4k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Add Header to indicate note was sent to SentinelOne\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"518e8850-8a62-4d29-a7d1-baf3ace93147\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ev7vmx\u003c/incoming\u003e\u003coutgoing\u003eFlow_1j5gog2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ev7vmx\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1j5gog2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1j5gog2\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0feam4k\" id=\"Flow_0feam4k_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ev7vmx\" id=\"Flow_1ev7vmx_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1j5gog2\" id=\"Flow_1j5gog2_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"639\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 5,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\" isExecutable=\"true\" name=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0feam4k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Send SOAR Note to SentinelOne\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fbf44fc5-ae3d-4e67-ad31-1b79fd87bdb8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id\\ninputs.sentinelone_note_text = note.text.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"send_note_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0feam4k\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ev7vmx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0feam4k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Add Header to indicate note was sent to SentinelOne\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"518e8850-8a62-4d29-a7d1-baf3ace93147\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ev7vmx\u003c/incoming\u003e\u003coutgoing\u003eFlow_1j5gog2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ev7vmx\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1j5gog2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1j5gog2\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1j5gog2\" id=\"Flow_1j5gog2_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ev7vmx\" id=\"Flow_1ev7vmx_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0feam4k\" id=\"Flow_0feam4k_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"639\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1692724939695,
       "creator_principal": {
@@ -2090,7 +2131,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1693240013701,
+      "last_modified_time": 1693247963571,
       "local_scripts": [
         {
           "actions": [],
@@ -2101,12 +2142,12 @@
           "id": 31,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692725394538,
+          "last_modified_time": 1693247961629,
           "name": "SentinelOne: Add Header to indicate note was sent to SentinelOne",
           "object_type": "note",
           "playbook_handle": "sentinelone_send_soar_note_to_sentinelone_pb",
           "programmatic_name": "sentinelone_send_soar_note_to_sentinelone_pb_sentinelone_add_header_to_indicate_note_was_sent_to_sentinelone",
-          "script_text": "import datetime\n\nresults = playbook.functions.results.send_note_results\n\n# Edit note in SOAR to indicate it was sent to SentinelOne\nif results.success:\n  # Get the current time\n  dt_now = datetime.now()\n  note.text = u\"\u003cb\u003eSent to SentinelOne at {0}\u003c/b\u003e\u003cbr\u003e{1}\".format(dt_now, unicode(note.text.content))",
+          "script_text": "from datetime import datetime\n\nresults = playbook.functions.results.send_note_results\n\n# Edit note in SOAR to indicate it was sent to SentinelOne\n#if results.get(\"success\"):\n  # Get the current time\n#  dt_now = datetime.now()\n#  note.text = u\"\u003cb\u003eSent to SentinelOne at {0}\u003c/b\u003e\u003cbr\u003e{1}\".format(dt_now, note.text.content)",
           "tags": [],
           "uuid": "518e8850-8a62-4d29-a7d1-baf3ace93147"
         }
@@ -2124,7 +2165,7 @@
       "tags": [],
       "type": "default",
       "uuid": "47bec986-769f-4ce4-ba97-a2f766568601",
-      "version": 6
+      "version": 9
     },
     {
       "activation_type": "manual",
@@ -2242,7 +2283,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
+        "content_version": 6,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_364b744a_dd86_4e4a_960b_b18f3ce7744f\" isExecutable=\"true\" name=\"playbook_364b744a_dd86_4e4a_960b_b18f3ce7744f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_16rp92e\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Get Agent Details\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3bc833b4-0545-4db6-8ede-515d7439279a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = incident.properties.sentinelone_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"update_agent_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_16rp92e\u003c/incoming\u003e\u003coutgoing\u003eFlow_1cnp0xy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_16rp92e\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Update Agent Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e011505d-b789-4116-8c11-c8f566107caa\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cnp0xy\u003c/incoming\u003e\u003coutgoing\u003eFlow_1a68xyy\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1cnp0xy\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1a68xyy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1a68xyy\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_364b744a_dd86_4e4a_960b_b18f3ce7744f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1a68xyy\" id=\"Flow_1a68xyy_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"394\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cnp0xy\" id=\"Flow_1cnp0xy_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16rp92e\" id=\"Flow_16rp92e_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"620\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654\" y=\"394\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1693233468690,
@@ -2294,7 +2335,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1693240128708,
+      "last_modified_time": 1693249618354,
       "local_scripts": [
         {
           "actions": [],
@@ -2305,12 +2346,12 @@
           "id": 38,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1693233957349,
+          "last_modified_time": 1693249615496,
           "name": "SentinelOne: Update Agent Data Table",
           "object_type": "sentinelone_agents_dt",
           "playbook_handle": "sentinelone_update_agent_in_data_table_pb",
           "programmatic_name": "sentinelone_update_agent_in_data_table_pb_sentinelone_update_agent_data_table",
-          "script_text": "import datetime\n\nresults = playbook.functions.results.update_agent_results\n\nnote = u\"\u003cb\u003eSentinelOne: Update Agent in Data Table: \u003c/b\u003e \\n\"\nif results.success:\n  content = results.get(\"content\")\n  if content:\n    data = content.get(\"data\")\n    if data:\n      for agent in data:\n        row.sentinelone_dt_query_date = datetime.now()\n        row.sentinelone_dt_agent_id = agent.get(\"id\")\n        networkStatus = agent.get(\"networkStatus\")\n        display_color = \"green\" if networkStatus == \"connected\" else \"red\"\n        networkStatus = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=display_color, status=networkStatus)\n        row.sentinelone_dt_network_status = helper.createRichText(networkStatus)\n        row.sentinelone_dt_computername = agent.get(\"computerName\")\n        row.sentinelone_dt_external_ip = agent.get(\"externalIp\")\n        row.sentinelone_dt_site = agent.get(\"siteName\")\n        row.sentinelone_dt_agent_version = agent.get(\"agentVersion\")\n        row.sentinelone_dt_threat_count = agent.get(\"activeThreats\")\n        row.sentinelone_dt_domain = agent.get(\"domain\")\n        row.sentinelone_dt_os_name = agent.get(\"osName\")\n        row.sentinelone_dt_uuid = agent.get(\"uuid\")\n        row.sentinelone_dt_is_active = agent.get(\"isActive\")\n        row.sentinelone_dt_registered = agent.get(\"registeredAt\")\n        row.sentinelone_dt_created = agent.get(\"createdAt\")\n        row.sentinelone_dt_updated = agent.get(\"updatedAt\")\n        note = \"{0} success.\".format(note)\n    else:\n      note = \"{0} No agent data returned from function.\".format(note)\n  else:\n    note = \"{0} No content data returned from function.\".format(note)\nelse:\n  note = \"{0} Get Agent Details function did not return success.\".format(note)\n  \nincident.addNote(helper.createRichText(note))",
+          "script_text": "from datetime import datetime\n\nresults = playbook.functions.results.update_agent_results\n\nnote = u\"\u003cb\u003eSentinelOne: Update Agent in Data Table: \u003c/b\u003e \\n\"\nif results.get(\"success\"):\n  content = results.get(\"content\")\n  if content:\n    data = content.get(\"data\")\n    if data:\n      for agent in data:\n        row.sentinelone_dt_query_date = datetime.now()\n        row.sentinelone_dt_agent_id = agent.get(\"id\")\n        networkStatus = agent.get(\"networkStatus\")\n        display_color = \"green\" if networkStatus == \"connected\" else \"red\"\n        networkStatus = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=display_color, status=networkStatus)\n        row.sentinelone_dt_network_status = helper.createRichText(networkStatus)\n        row.sentinelone_dt_computername = agent.get(\"computerName\")\n        row.sentinelone_dt_external_ip = agent.get(\"externalIp\")\n        row.sentinelone_dt_site = agent.get(\"siteName\")\n        row.sentinelone_dt_agent_version = agent.get(\"agentVersion\")\n        row.sentinelone_dt_threat_count = agent.get(\"activeThreats\")\n        row.sentinelone_dt_domain = agent.get(\"domain\")\n        row.sentinelone_dt_os_name = agent.get(\"osName\")\n        row.sentinelone_dt_uuid = agent.get(\"uuid\")\n        row.sentinelone_dt_is_active = agent.get(\"isActive\")\n        row.sentinelone_dt_registered = agent.get(\"registeredAt\")\n        row.sentinelone_dt_created = agent.get(\"createdAt\")\n        row.sentinelone_dt_updated = agent.get(\"updatedAt\")\n        note = \"{0} success.\".format(note)\n    else:\n      note = \"{0} No agent data returned from function.\".format(note)\n  else:\n    note = \"{0} No content data returned from function.\".format(note)\nelse:\n  note = \"{0} Get Agent Details function did not return success.\".format(note)\n  \nincident.addNote(helper.createRichText(note))",
           "tags": [],
           "uuid": "e011505d-b789-4116-8c11-c8f566107caa"
         }
@@ -2335,12 +2376,12 @@
       "tags": [],
       "type": "default",
       "uuid": "364b744a-dd86-4e4a-960b-b18f3ce7744f",
-      "version": 9
+      "version": 11
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 7,
+        "content_version": 8,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_bb713a02_68fa_47c4_942c_cb0054aac3b9\" isExecutable=\"true\" name=\"playbook_bb713a02_68fa_47c4_942c_cb0054aac3b9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1c8zhoq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Sentinelone: Update Threat Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"174b4b88-28d3-4596-97af-abbb3aef87f3\"\u003e{\"inputs\":{\"f0f85d50-0f6e-4a99-9b5c-a568c69772ce\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"e823e746-184b-4ae8-9b7e-ce7f6d99d19e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"8e342407-677a-450f-b7d1-3cb9a231f2be\"}},\"e0ed407a-e9e0-40f8-b46b-5167eab16a70\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"55fe7fb5-9ad9-4588-bc2b-cac8cf797a2c\"}}},\"pre_processing_script\":\"inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id\\ninputs.sentinelone_threat_status = playbook.inputs.sentinelone_threat_status\\ninputs.sentinelone_threat_analyst_verdict = playbook.inputs.sentinelone_threat_analyst_verdict\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"update_status_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1c8zhoq\u003c/incoming\u003e\u003coutgoing\u003eFlow_0clmfjg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1c8zhoq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1w7pguc\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"SentinelOne: Update Threat Status and Analyst Verdict results \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"aa660a03-23ff-4474-b519-bc7df20bdc86\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0clmfjg\u003c/incoming\u003e\u003coutgoing\u003eFlow_1w7pguc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0clmfjg\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1w7pguc\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_bb713a02_68fa_47c4_942c_cb0054aac3b9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1w7pguc\" id=\"Flow_1w7pguc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0clmfjg\" id=\"Flow_0clmfjg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1c8zhoq\" id=\"Flow_1c8zhoq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1693234506309,
@@ -2518,7 +2559,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1693240108999,
+      "last_modified_time": 1693252917050,
       "local_scripts": [
         {
           "actions": [],
@@ -2529,12 +2570,12 @@
           "id": 39,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1693235311544,
+          "last_modified_time": 1693252914115,
           "name": "SentinelOne: Update Threat Status and Analyst Verdict results ",
           "object_type": "incident",
           "playbook_handle": "sentinelone_update_analyst_verdict_and_threat_status",
           "programmatic_name": "sentinelone_update_analyst_verdict_and_threat_status_script_update_threat_status_and_analyst_verdict_resultsentinelones_to_a_note_",
-          "script_text": "results = playbook.functions.results.update_status_results\n\nnote = \"\u003cb\u003eSentinelOne: Update Threat Status \u003c/b\u003e\nif results.success:\n  content = results.get(\"content\")\n  threat_id = content.get(\"threat_id\")\n  success_verdict = content.get(\"success_verdict\")\n  success_status = content.get(\"success_status\")\n  status = content.get(\"threat_status\")\n  verdict = content.get(\"threat_analyst_verdict\")\n  note = \"{0}\u003e\u003cbr\u003e  SentinelOne Threat Id: {1}\u003cbr\u003e\".format(note, threat_id)\n  content = results.get(\"content\")\n  if success_verdict and success_status:\n    note = \"{0} analystVerdict set to \u003cb\u003e{1}\u003c/b\u003e\u003cbr\u003e incidentStatus set to \u003cb\u003e{2}\u003c/b\u003e in SentinelOne\".format(note, verdict, status)\n  elif success_verdict:\n    note = \"{0} analystVerdict set to \u003cb\u003e{1}\u003c/b\u003e\u003cbr\u003e incidentStatus was NOT set to {2} in SentinelOne\".format(note, verdict, status)\n  elif success_status:\n    note = \"{0} incidentStatus set to \u003cb\u003e{1}\u003c/b\u003e\u003cbr\u003e analystVerdict was NOT set to {2} in SentinelOne\".format(note, status, verdict)\n  else:\n    note = \"{0} analystVerdict: \u003cb\u003e{1}\u003c/b\u003e and incidentStatus: \u003cb\u003e{2}\u003c/b\u003e were NOT set in SentinelOne\".format(note, verdict, status)\nelse:\n  note = \"{0} function did not return success.\".format(note)\n  \nincident.addNote(helper.createRichText(note))",
+          "script_text": "results = playbook.functions.results.update_status_results\n\nnote = \"\u003cb\u003eSentinelOne: Update Threat Status \u003c/b\u003e\"\nif results.get(\"success\"):\n  content = results.get(\"content\")\n  threat_id = content.get(\"threat_id\")\n  success_verdict = content.get(\"success_verdict\")\n  success_status = content.get(\"success_status\")\n  status = content.get(\"threat_status\")\n  verdict = content.get(\"threat_analyst_verdict\")\n  note = \"{0}\u003e\u003cbr\u003e  SentinelOne Threat Id: {1}\u003cbr\u003e\".format(note, threat_id)\n  content = results.get(\"content\")\n  if success_verdict and success_status:\n    note = \"{0} analystVerdict set to \u003cb\u003e{1}\u003c/b\u003e\u003cbr\u003e incidentStatus set to \u003cb\u003e{2}\u003c/b\u003e in SentinelOne\".format(note, verdict, status)\n  elif success_verdict:\n    note = \"{0} analystVerdict set to \u003cb\u003e{1}\u003c/b\u003e\u003cbr\u003e incidentStatus was NOT set to {2} in SentinelOne\".format(note, verdict, status)\n  elif success_status:\n    note = \"{0} incidentStatus set to \u003cb\u003e{1}\u003c/b\u003e\u003cbr\u003e analystVerdict was NOT set to {2} in SentinelOne\".format(note, status, verdict)\n  else:\n    note = \"{0} analystVerdict: \u003cb\u003e{1}\u003c/b\u003e and incidentStatus: \u003cb\u003e{2}\u003c/b\u003e were NOT set in SentinelOne\".format(note, verdict, status)\nelse:\n  note = \"{0} function did not return success.\".format(note)\n  \nincident.addNote(helper.createRichText(note))",
           "tags": [],
           "uuid": "aa660a03-23ff-4474-b519-bc7df20bdc86"
         }
@@ -2584,7 +2625,7 @@
       "tags": [],
       "type": "default",
       "uuid": "bb713a02-68fa-47c4-942c-cb0054aac3b9",
-      "version": 13
+      "version": 14
     },
     {
       "activation_type": "manual",

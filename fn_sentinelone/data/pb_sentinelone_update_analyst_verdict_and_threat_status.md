@@ -67,8 +67,8 @@ Write Status and Analyst Verdict results to a note.
 ```python
 results = playbook.functions.results.update_status_results
 
-note = "<b>SentinelOne: Update Threat Status </b>
-if results.success:
+note = "<b>SentinelOne: Update Threat Status </b>"
+if results.get("success"):
   content = results.get("content")
   threat_id = content.get("threat_id")
   success_verdict = content.get("success_verdict")

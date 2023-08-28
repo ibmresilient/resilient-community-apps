@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`-`
+`(sentinelone_agents_dt.sentinelone_dt_network_status equals connected OR sentinelone_agents_dt.sentinelone_dt_network_status equals connecting) AND sentinelone_agents_dt.sentinelone_dt_is_active equals True`
 
 ### Object Type
 `sentinelone_agents_dt`
@@ -61,7 +61,7 @@ results = playbook.functions.results.disconnect_results
 
 note = u"<b>SentinelOne: Disconnect From Network </b>"
 
-if results.success:
+if results.get("success"):
   so_inputs = results.get("inputs")
   agent_id = so_inputs.get("sentinelone_agent_id")
   note = "{0}<br>  SentinelOne Agent Id: {1}".format(note, agent_id)

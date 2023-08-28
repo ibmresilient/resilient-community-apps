@@ -57,12 +57,12 @@ Update agent data table and write results to a note.
 
 ### Script Content
 ```python
-import datetime
+from datetime import datetime
 
 results = playbook.functions.results.update_agent_results
 
 note = u"<b>SentinelOne: Update Agent in Data Table: </b> \n"
-if results.success:
+if results.get("success"):
   content = results.get("content")
   if content:
     data = content.get("data")

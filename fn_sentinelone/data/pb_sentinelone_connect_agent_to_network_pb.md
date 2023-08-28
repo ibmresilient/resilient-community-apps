@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`(sentinelone_agents_dt.sentinelone_dt_network_status equals connected OR sentinelone_agents_dt.sentinelone_dt_network_status equals connecting) AND sentinelone_agents_dt.sentinelone_dt_is_active equals True`
+`(sentinelone_agents_dt.sentinelone_dt_network_status equals disconnected OR sentinelone_agents_dt.sentinelone_dt_network_status equals disconnecting) AND sentinelone_agents_dt.sentinelone_dt_is_active equals True`
 
 ### Object Type
 `sentinelone_agents_dt`
@@ -26,13 +26,13 @@ Disconnect a SentinelOne managed endpoint from the network.
 
 
 ---
-## Function - SentinelOne: Disconnect From Network
+## Function - SentinelOne: Connect to Network
 
 ### API Name
-`sentinelone_disconnect_from_network`
+`sentinelone_connect_to_network`
 
 ### Output Name
-`disconnect_results`
+`connect_results`
 
 ### Message Destination
 `fn_sentinelone`
@@ -44,10 +44,10 @@ inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
 
 ---
 
-## Local script - SentinelOne: Write Disconnect from Network Results
+## Local script - SentinelOne: Update data table with Connect to Network results 
 
 ### Description
-Write disconnect from network results to a note and update the networkStatus in the Agent Data Table
+Update the agent data table Network Status with results of Connect to Network function. 
 
 ### Script Type
 `Local script`
@@ -57,27 +57,28 @@ Write disconnect from network results to a note and update the networkStatus in 
 
 ### Script Content
 ```python
-results = playbook.functions.results.disconnect_results
+results = playbook.functions.results.connect_results
 
 so_inputs = results.get("inputs")
 agent_id = so_inputs.get("sentinelone_agent_id")
-note = u"<b>SentinelOne: Disconnect From Network </b><br>  SentinelOne Agent Id: {0}".format(agent_id)
+note = u"<b>SentinelOne: Connect to Network </b><br>  SentinelOne Agent Id: {0}".format(agent_id)
 content = results.get("content")
 if content:
   data = content.get("data")
   if data:
     if int(data.get("affected")) <= 0:
-      note = u"{0} was not disconnected from network".format(note)
+      note = u"{0} is NOT connected to network".format(note)
     else:
-      networkStatus = u"""<p style= "color:{color}">{status}</p>""".format(color="red", status="disconnected")
-      row["sentinelone_dt_network_status"] = helper.createRichText(networkStatus)      
-      note = u"{0} is disconnected from network".format(note)
+      networkStatus = u"""<p style= "color:{color}">{status}</p>""".format(color="green", status="connected")
+      row["sentinelone_dt_network_status"] = helper.createRichText(networkStatus)
+      note = u"{0} is connected to network".format(note)
   else:
     note = u"{0} no data returned from function".format(note)
 else:
     note = u"{0} no content data returned from function".format(note)  
 
 incident.addNote(helper.createRichText(note))
+
 ```
 
 ---

@@ -58,15 +58,15 @@ Update note to indicate it was sent to SentinelOne.
 
 ### Script Content
 ```python
-import datetime
+from datetime import datetime
 
 results = playbook.functions.results.send_note_results
 
 # Edit note in SOAR to indicate it was sent to SentinelOne
-if results.success:
+#if results.get("success"):
   # Get the current time
-  dt_now = datetime.now()
-  note.text = u"<b>Sent to SentinelOne at {0}</b><br>{1}".format(dt_now, unicode(note.text.content))
+#  dt_now = datetime.now()
+#  note.text = u"<b>Sent to SentinelOne at {0}</b><br>{1}".format(dt_now, note.text.content)
 ```
 
 ---
