@@ -1,14 +1,13 @@
 include README.md
 include Dockerfile
-include entrypoint.sh
 include apikey_permissions.txt
+include entrypoint.sh
 recursive-include fn_sentinelone/util *
-recursive-include fn_sentinelone/lib *
 include fn_sentinelone/LICENSE
 include doc/*.md
 include doc/screenshots/*
-recursive-include payload_samples/*/ *.json
 include icons/*.png
+recursive-include payload_samples/*/ *.json
 include tox.ini
 recursive-include tests/ *
 

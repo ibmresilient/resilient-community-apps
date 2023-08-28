@@ -32,9 +32,7 @@ setup(
     long_description="""This app allows bi-directional synchronization between IBM SOAR and SentinelOne.
     SentinelOne threats are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the threat.""",
     install_requires=[
-        "resilient-circuits>=40.0.0",
-                "resilient-lib",
-                "jinja2"
+        "resilient-circuits>=49.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
