@@ -280,7 +280,7 @@ Below are the default templates used which can be copied, modified, and used wit
 ---
 ### Case Fields Returned from Query and Case Update Limits
 
-Salesforce case fields a can be mapped into a corresponding SOAR case as SOAR case fields, custom fields and artifacts using jinja templates. The app uses Salesforce Object Query Language (SOQL) to query for new or updated cases that need to be created or updated in SOAR.  
+Salesforce case fields are mapped into a corresponding SOAR case as SOAR case fields, custom fields and artifacts using jinja templates. The app uses Salesforce Object Query Language (SOQL) to query for new or updated cases that need to be created or updated in SOAR.
 <p>
 
 By default, the app uses an SOQL `SELECT FIELDS(ALL)` clause that allows for all fields of a case to be returned in a query and jinja templates can then be used to apply the mapping.  However, use of this clause has a hard LIMIT of 200 cases that can be returned in a single REST API query to Salesforce.   If the `polling_interval` can be set to a reasonable value, where it is known that the results returned are 200 or less, then using this query method may be easiest and preferred. 
