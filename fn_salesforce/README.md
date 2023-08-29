@@ -77,7 +77,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 08/2023 | Initial Release |
+| 1.0.0 | 09/2023 | Initial Release |
 
 ---
 
