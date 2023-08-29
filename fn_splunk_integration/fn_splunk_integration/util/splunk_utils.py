@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 #   Util classes for Splunk
 
 import requests
@@ -136,8 +136,9 @@ class SplunkUtils(object):
                              "email_intel", "service_intel", "process_intel",
                              "registry_intel", "certificate_intel"]
 
-    def __init__(self, host, port, username, password, token, verify):
+    def __init__(self, host, port, username, password, token, verify, proxies):
         self.base_url = f"https://{host}:{port}"
+        self.proxies = proxies
         if username and password:
             self.get_session_key(username, password, verify)
         elif token:
@@ -158,7 +159,8 @@ class SplunkUtils(object):
                                  headers={"Accept": "application/html"},
                                  data=urlparse.urlencode({"username": username,
                                                           "password": password}),
-                                 verify=verify)
+                                 verify=verify,
+                                 proxies=self.proxies)
             # This one we only allows 200. Otherwise login failed
             if resp.status_code == 200:
                 # docs.splunk.com/Documentation/Splunk/7.0.2/RESTTUT/RESTsearches
@@ -179,7 +181,7 @@ class SplunkUtils(object):
         :return: Request response in json
         """
         try:
-            resp = requests.post(url, headers=self.header, data=args, verify=cafile)
+            resp = requests.post(url, headers=self.header, data=args, verify=cafile, proxies=self.proxies)
             # We shall just return the response in json and let the post process
             # to make decision.
             return {"status_code": resp.status_code,
@@ -228,7 +230,7 @@ class SplunkUtils(object):
             raise IntegrationError(f"Request to url [{url}] throws exception. Error [{threat_type} is not supported]")
 
         try:
-            resp = requests.delete(url, headers=self.header, verify=cafile)
+            resp = requests.delete(url, headers=self.header, verify=cafile, proxies=self.proxies)
             # We shall just return the response in json and let the post process
             # to make decision.
             return {"status_code": resp.status_code,

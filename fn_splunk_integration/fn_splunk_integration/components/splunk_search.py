@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
@@ -38,7 +38,6 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.info(f"Splunk query to be executed: {query_string}")
 
         splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=False)
-
 
         if getattr(fn_inputs, "splunk_max_return", None):
             splunk.set_max_return(fn_inputs.splunk_max_return)

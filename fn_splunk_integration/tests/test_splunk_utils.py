@@ -52,7 +52,8 @@ class TestSplunkUtils:
                                                username=self.fake_username,
                                                password=self.fake_password,
                                                token=None,
-                                               verify=self.verify)
+                                               verify=self.verify,
+                                               proxies={})
 
         post_data = urlparse.urlencode({"username": self.fake_username,
                                         "password": self.fake_password})
@@ -61,7 +62,8 @@ class TestSplunkUtils:
         mocked_requests_post.assert_called_with(self.auth_url,
                                                 headers={"Accept": "application/html"},
                                                 data=post_data,
-                                                verify=self.verify)
+                                                verify=self.verify,
+                                                proxies={})
 
         # Assert that we extract the session key properly from the response.content
         assert splnk_utils.session_key == self.simSessionKey
@@ -80,7 +82,8 @@ class TestSplunkUtils:
                                                    username=self.fake_username,
                                                    password=self.fake_password,
                                                    token=None,
-                                                   verify=self.verify)
+                                                   verify=self.verify,
+                                                   proxies={})
 
             ret_key = splnk_utils.session_key
             post_data = urlparse.urlencode({"username": self.fake_username,
@@ -89,7 +92,8 @@ class TestSplunkUtils:
             mocked_requests_post.assert_called_with(self.auth_url,
                                                     headers={"Accept": "application/html"},
                                                     data=post_data,
-                                                    verify=self.verify)
+                                                    verify=self.verify,
+                                                    proxies={})
         except IntegrationError:
             assert True
 
@@ -108,7 +112,8 @@ class TestSplunkUtils:
                                                    username=self.fake_username,
                                                    password=self.fake_password,
                                                    token=None,
-                                                   verify=self.verify)
+                                                   verify=self.verify,
+                                                   proxies={})
 
             sim_content = dumps({"success": True, "message": "Updated successfuly"})
             mocked_requests_post.return_value = self._generateResponse(sim_content, 200)
@@ -124,7 +129,8 @@ class TestSplunkUtils:
             mocked_requests_post.assert_called_with(self.update_notable_url,
                                                     headers={"Authorization": f"Splunk {self.simSessionKey}"},
                                                     data=args,
-                                                    verify=self.verify)
+                                                    verify=self.verify,
+                                                    proxies={})
             assert ret["status_code"] == 200
         except Exception:
             assert False
@@ -142,7 +148,8 @@ class TestSplunkUtils:
                                      username=self.fake_username,
                                      password=self.fake_password,
                                      token=None,
-                                     verify=self.verify)
+                                     verify=self.verify,
+                                     proxies={})
 
             # Failed to connect during login will throw exception
             assert False
@@ -165,7 +172,8 @@ class TestSplunkUtils:
                                                    username=self.fake_username,
                                                    password=self.fake_password,
                                                    token=None,
-                                                   verify=self.verify)
+                                                   verify=self.verify,
+                                                   proxies={})
 
             mocked_requests_post.side_effect = requests.RequestException(Mock(status=404), "Ambiguous excetpion.")
 
@@ -192,7 +200,8 @@ class TestSplunkUtils:
                                                    username=self.fake_username,
                                                    password=self.fake_password,
                                                    token=None,
-                                                   verify=self.verify)
+                                                   verify=self.verify,
+                                                   proxies={})
 
             mocked_requests_post.side_effect = requests.ConnectionError(Mock(status=404), "Ambiguous excetpion.")
 
@@ -219,7 +228,8 @@ class TestSplunkUtils:
                                                    username=self.fake_username,
                                                    password=self.fake_password,
                                                    token=None,
-                                                   verify=self.verify)
+                                                   verify=self.verify,
+                                                   proxies={})
 
             mocked_requests_post.side_effect = requests.ConnectionError(Mock(status=404), "Ambiguous excetpion.")
 
@@ -246,7 +256,8 @@ class TestSplunkUtils:
                                                    username=self.fake_username,
                                                    password=self.fake_password,
                                                    token=None,
-                                                   verify=self.verify)
+                                                   verify=self.verify,
+                                                   proxies={})
 
             mocked_requests_post.side_effect = requests.HTTPError(Mock(status=404), "Ambiguous excetpion.")
 
@@ -273,7 +284,8 @@ class TestSplunkUtils:
                                                    username=self.fake_username,
                                                    password=self.fake_password,
                                                    token=None,
-                                                   verify=self.verify)
+                                                   verify=self.verify,
+                                                   proxies={})
 
             mocked_requests_post.side_effect = requests.URLRequired(Mock(status=404), "Ambiguous excetpion.")
 
@@ -300,7 +312,8 @@ class TestSplunkUtils:
                                                    username=self.fake_username,
                                                    password=self.fake_password,
                                                    token=None,
-                                                   verify=self.verify)
+                                                   verify=self.verify,
+                                                   proxies={})
 
             mocked_requests_post.side_effect = requests.TooManyRedirects(Mock(status=404), "Ambiguous excetpion.")
 
@@ -554,7 +567,8 @@ class TestSplunkUtils:
                                                username=self.fake_username,
                                                password=self.fake_password,
                                                token=None,
-                                               verify=self.verify)
+                                               verify=self.verify,
+                                               proxies={})
         itemDict = {"ip":"8.8.8.8", "domain":"fake.domain.com"}
         threat_type = "ip_intel"
         splunk_verify = False
@@ -568,7 +582,8 @@ class TestSplunkUtils:
         mocked_requests_post.assert_called_with(self.threat_post_url + threat_type,
                                                 headers={"Authorization": f"Splunk {self.simSessionKey}"},
                                                 data={"item": dumps(itemDict)},
-                                                verify=splunk_verify)
+                                                verify=splunk_verify,
+                                                proxies={})
 
         assert ret["status_code"] == 201
 
@@ -582,7 +597,8 @@ class TestSplunkUtils:
                                                username=self.fake_username,
                                                password=self.fake_password,
                                                token=None,
-                                               verify=self.verify)
+                                               verify=self.verify,
+                                               proxies={})
         # 2. Simulate wrong intel type
         try:
             splnk_utils.add_threat_intel_item("Fake type", {}, False)
@@ -637,7 +653,8 @@ class TestSplunkUtils:
                                                username=self.fake_username,
                                                password=self.fake_password,
                                                token=None,
-                                               verify=self.verify)
+                                               verify=self.verify,
+                                               proxies={})
         # 2. Call delete
         threat_type = "ip_intel"
         item_key = "FakeItemKeyForItemToDelete"
@@ -649,7 +666,8 @@ class TestSplunkUtils:
         # 3. Verify sessionkey has been used in the post call
         mocked_requests_delete.assert_called_with(f"{self.threat_post_url}{threat_type}/{item_key}",
                                                   headers={"Authorization": f"Splunk {self.simSessionKey}"},
-                                                  verify=self.verify)
+                                                  verify=self.verify,
+                                                  proxies={})
         assert ret["status_code"] == 200
 
     @patch("requests.delete")
@@ -663,7 +681,8 @@ class TestSplunkUtils:
                                                username=self.fake_username,
                                                password=self.fake_password,
                                                token=None,
-                                               verify=self.verify)
+                                               verify=self.verify,
+                                               proxies={})
 
         # 2. Call delete with wrong threat_type
         item_key = "FakeKeyDoesNotExist"

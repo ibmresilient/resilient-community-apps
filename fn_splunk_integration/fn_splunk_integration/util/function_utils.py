@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 from logging import getLogger
 from resilient_lib import validate_fields, IntegrationError, str_to_bool
@@ -91,13 +91,19 @@ def function_basics(fn_inputs, servers_list, utils=True):
     # Log the splunk server we are using
     LOG.info(f"Splunk host: {options.get('host')}, port: {options.get('port')}")
 
+    # Create proxy dictionary
+    proxies = {}
+    if options.get("https_proxy"):
+        proxies["https": options.get("https_proxy")]
+
     if utils:
         splunk = SplunkUtils(host=options.get("host"),
                              port=options.get("port"),
                              username=options.get("username", None),
                              password=options.get("splunkpassword", None),
                              token=options.get("token", None),
-                             verify=splunk_verify_cert)
+                             verify=splunk_verify_cert,
+                             proxies=proxies)
     else:
         splunk = SplunkClient(host=options.get("host"),
                               port=options.get("port"),

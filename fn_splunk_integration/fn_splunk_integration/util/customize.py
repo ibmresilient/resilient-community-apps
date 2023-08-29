@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v50.0.131
 
-"""Generate the SOAR customizations required for fn_splunk_integration"""
+"""Generate the Resilient customizations required for fn_splunk_integration"""
 
 import base64
 import os
@@ -20,25 +22,42 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_splunk_integration",
-        "message_destinations": [u"splunk_es_rest"],
-        "functions": [u"splunk_add_intel_item", u"splunk_delete_threat_intel_item", u"splunk_search", u"splunk_update_notable"],
-        "workflows": [u"example_of_deleting_an_intel_entry_in_splunk_es", u"search_splunk_ip_intel", u"splunk_add_new_ip_intel", u"splunk_update_notable"],
-        "actions": [u"Add artifact to Splunk ES", u"Delete an intel entry in Splunk ES", u"Search Splunk ES for an artifact", u"Update Splunk ES notable event"],
-        "incident_fields": [u"splunk_notable_event_id"],
+        "message_destinations": [
+            u"splunk_es_rest"
+        ],
+        "functions": [
+            u"splunk_add_intel_item",
+            u"splunk_delete_threat_intel_item",
+            u"splunk_search",
+            u"splunk_update_notable"
+        ],
+        "workflows": [],
+        "actions": [],
+        "incident_fields": [
+            u"splunk_notable_event_id"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"splunk_intel_results"],
+        "datatables": [
+            u"splunk_intel_results"
+        ],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [
+            u"splunk_add_artifact",
+            u"splunk_delete_an_intel_entry",
+            u"splunk_search_for_an_artifact",
+            u"splunk_update_notable_event"
+        ]
     }
+
 
 def customization_data(client=None):
     """
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 43.1.49
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
@@ -48,16 +67,11 @@ def customization_data(client=None):
         - splunk_delete_threat_intel_item
         - splunk_search
         - splunk_update_notable
-    - Workflows:
-        - example_of_deleting_an_intel_entry_in_splunk_es
-        - search_splunk_ip_intel
-        - splunk_add_new_ip_intel
-        - splunk_update_notable
-    - Rules:
-        - Add artifact to Splunk ES
-        - Delete an intel entry in Splunk ES
-        - Search Splunk ES for an artifact
-        - Update Splunk ES notable event
+    - Playbooks:
+        - splunk_add_artifact
+        - splunk_delete_an_intel_entry
+        - splunk_search_for_an_artifact
+        - splunk_update_notable_event
     - Incident Fields:
         - splunk_notable_event_id
     - Data Tables:
