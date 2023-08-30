@@ -67,3 +67,20 @@ else:
 ```
 
 ---
+## Local script - Salesforce: Set Account fields to None
+
+### Description
+ Set Account fields to None
+
+### Script Type
+`Local script`
+
+### Objet Type
+`incident`
+
+### Script Content
+```python
+incident.properties.salesforce_account_name = None
+```
+
+---
