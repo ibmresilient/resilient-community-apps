@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4368
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v50.0.131
 
 """Generate the Resilient customizations required for fn_microsoft_defender"""
 
@@ -21,17 +22,76 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_microsoft_defender",
-        "message_destinations": [u"fn_microsoft_defender"],
-        "functions": [u"defender_alert_search", u"defender_app_execution", u"defender_collect_machine_investigation_package", u"defender_delete_indicator", u"defender_find_machines", u"defender_find_machines_by_file", u"defender_find_machines_by_filter", u"defender_get_file_information", u"defender_get_incident", u"defender_get_related_alert_information", u"defender_list_indicators", u"defender_machine_isolation", u"defender_machine_scan", u"defender_machine_vulnerabilities", u"defender_quarantine_file", u"defender_set_indicator", u"defender_update_alert", u"defender_update_incident"],
+        "message_destinations": [
+            u"fn_microsoft_defender"
+        ],
+        "functions": [
+            u"defender_alert_search",
+            u"defender_app_execution",
+            u"defender_collect_machine_investigation_package",
+            u"defender_delete_indicator",
+            u"defender_find_machines",
+            u"defender_find_machines_by_file",
+            u"defender_find_machines_by_filter",
+            u"defender_get_file_information",
+            u"defender_get_incident",
+            u"defender_get_related_alert_information",
+            u"defender_list_indicators",
+            u"defender_machine_isolation",
+            u"defender_machine_scan",
+            u"defender_machine_vulnerabilities",
+            u"defender_quarantine_file",
+            u"defender_set_indicator",
+            u"defender_update_alert",
+            u"defender_update_incident"
+        ],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"defender_classification", u"defender_determination", u"defender_incident_createtime", u"defender_incident_id", u"defender_incident_lastupdatetime", u"defender_incident_url", u"defender_tags"],
+        "incident_fields": [
+            u"defender_classification",
+            u"defender_determination",
+            u"defender_incident_createtime",
+            u"defender_incident_id",
+            u"defender_incident_lastupdatetime",
+            u"defender_incident_url",
+            u"defender_tags"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"defender_alerts", u"defender_indicators", u"defender_machines"],
+        "datatables": [
+            u"defender_alerts",
+            u"defender_indicators",
+            u"defender_machines"
+        ],
         "automatic_tasks": [],
-        "scripts": [u"Create Artifact from Indicator"],
-        "playbooks": [u"create_artifact_from_indicator_pb", u"defender_close_incident_pb", u"defender_find_machine_by_dns_name_pb", u"defender_find_machines_by_file_hash_pb", u"defender_find_machines_by_internal_ip_address_pb", u"defender_get_file_information_pb", u"defender_get_incident_pb", u"defender_list_indicators_pb", u"defender_machine_app_execution_restriction_pb", u"defender_machine_collect_investigation_package_pb", u"defender_machine_isolate_action_pb", u"defender_machine_quarantine_file_pb", u"defender_machine_refresh_information_pb", u"defender_machine_scan_pb", u"defender_machine_update_information_pb", u"defender_machine_vulnerabilities_pb", u"defender_refresh_incident_pb", u"defender_set_indicator_pb", u"defender_sync_comment_pb", u"defender_sync_incident_pb", u"defender_update_alert_pb", u"delete_indicator_pb", u"update_indicator_pb"]
+        "scripts": [
+            u"Create Artifact from Indicator"
+        ],
+        "playbooks": [
+            u"create_artifact_from_indicator_pb",
+            u"defender_close_incident_pb",
+            u"defender_find_machine_by_dns_name_pb",
+            u"defender_find_machines_by_file_hash_pb",
+            u"defender_find_machines_by_internal_ip_address_pb",
+            u"defender_get_file_information_pb",
+            u"defender_get_incident_pb",
+            u"defender_list_indicators_pb",
+            u"defender_machine_app_execution_restriction_pb",
+            u"defender_machine_collect_investigation_package_pb",
+            u"defender_machine_isolate_action_pb",
+            u"defender_machine_quarantine_file_pb",
+            u"defender_machine_refresh_information_pb",
+            u"defender_machine_scan_pb",
+            u"defender_machine_update_information_pb",
+            u"defender_machine_vulnerabilities_pb",
+            u"defender_refresh_incident_pb",
+            u"defender_set_indicator_pb",
+            u"defender_sync_comment_pb",
+            u"defender_sync_incident_pb",
+            u"defender_update_alert_pb",
+            u"delete_indicator_pb",
+            u"update_indicator_pb"
+        ]
     }
 
 
@@ -40,7 +100,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.0
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
