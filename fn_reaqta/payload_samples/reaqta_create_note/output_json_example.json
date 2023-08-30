@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "note": "{\"notes\":\"An attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\nIBM SOAR 31/07/2023 11:13:45\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 2973](https://9.30.229.231:443/#incidents/2973)\\nIBM SOAR 31/07/2023 19:14:00\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 2154](https://9.30.211.113:443/#incidents/2154)\\nIBM SOAR 31/07/2023 11:14:18\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\nIBM SOAR 31/07/2023 11:13:45\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 2973](https://9.30.229.231:443/#incidents/2973)\\nIBM SOAR 31/07/2023 19:14:00\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 2154](https://9.30.211.113:443/#incidents/2154)\\n\\n[SOAR Case - 2975](https://9.30.229.231:443/#incidents/2975)\\nIBM SOAR 31/07/2023 11:11:27\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\nIBM SOAR 31/07/2023 11:13:45\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 2973](https://9.30.229.231:443/#incidents/2973)\\nIBM SOAR 31/07/2023 19:14:00\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 2154](https://9.30.211.113:443/#incidents/2154)\\n\\n[SOAR Case - 17488](https://169.44.147.200:443/#incidents/17488)\\nIBM SOAR 07/08/2023 14:26:53\\nProcess: csrss.exe (428) kill failed: Process not found\\nIBM SOAR 07/08/2023 14:32:06\\nEndpoint Machine Isolated\"}"
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_alert_id": "1024257396198866946",
+    "reaqta_hive": "rhiveam",
+    "reaqta_note": "Endpoint Machine Isolated"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 796,
+    "timestamp": "2023-08-07 14:32:06"
+  }
+}
