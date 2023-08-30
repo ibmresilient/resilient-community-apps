@@ -49,11 +49,11 @@ Update a Defender Alert: Status, Classification, Assigned to, and Determination
 ### Function-Input Script
 ```python
 inputs.defender_alert_id = row['alert_id']
-if playbook.inputs.defender_alert_classification:
+if getattr(playbook.inputs, "defender_alert_classification"):
   inputs.defender_classification = str(playbook.inputs.defender_alert_classification)
-if playbook.inputs.defender_alert_determination:
+if getattr(playbook.inputs, "defender_alert_determination"):
   inputs.defender_determination = str(playbook.inputs.defender_alert_determination)
-if playbook.inputs.defender_alert_status:
+if getattr(playbook.inputs, "defender_alert_status"):
   inputs.defender_alert_status = str(playbook.inputs.defender_alert_status)
 inputs.defender_description = playbook.inputs.defender_action_comment
 inputs.defender_alert_assigned_to = playbook.inputs.defender_alert_assigned_to
@@ -81,13 +81,13 @@ msg = u"Defender Action {}.\nAction: Update Alert\nAlert: {}\nMachine: {}\nComme
  row['alert_id'],
  row['computer_name'],
  playbook.inputs.defender_action_comment)
-if playbook.inputs.defender_alert_assigned_to:
+if getattr(playbook.inputs, "defender_alert_assigned_to"):
   msg = u"{}\nAssigned to: {}".format(msg, playbook.inputs.defender_alert_assigned_to)
-if playbook.inputs.defender_alert_status:
+if getattr(playbook.inputs, "defender_alert_status"):
   msg = u"{}\nStatus: {}".format(msg, str(playbook.inputs.defender_alert_status))
-if playbook.inputs.defender_alert_classification:
+if getattr(playbook.inputs, "defender_alert_classification"):
   msg = u"{}\nClassification: {}".format(msg, str(playbook.inputs.defender_alert_classification))
-if playbook.inputs.defender_alert_determination:
+if getattr(playbook.inputs, "defender_alert_determination"):
   msg = u"{}\nDetermination: {}".format(msg, str(playbook.inputs.defender_alert_determination))
 
 if not results.get("success"):

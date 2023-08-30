@@ -66,20 +66,21 @@ inputs.defender_indicator_field = playbook.inputs.defender_indicator_field if pl
 ```python
 from datetime import datetime
 results = playbook.functions.results.list_indicators
+
 if results.get("success") and results.get("content", {}).get("value"):
   for indicator in results.get("content", {}).get("value"):
     row = incident.addRow("defender_indicators")
     row['report_date'] = int(datetime.now().timestamp()*1000)
-    row['ind_id'] = indicator['id']
-    row['ind_value'] = indicator['indicatorValue']
-    row['ind_type'] = indicator['indicatorType']
-    row['ind_title'] = indicator['title']
-    row['ind_description'] = indicator['description']
-    row['ind_action'] = indicator['action']
-    row['ind_severity'] = indicator['severity']
-    row['ind_created_by'] = indicator['createdByDisplayName']
-    row['ind_creation_date'] = indicator['creationTimeDateTimeUtc_ts']
-    row['ind_expiration_date'] = indicator['expirationTime_ts']
+    row['ind_id'] = indicator.get('id')
+    row['ind_value'] = indicator.get('indicatorValue')
+    row['ind_type'] = indicator.get('indicatorType')
+    row['ind_title'] = indicator.get('title')
+    row['ind_description'] = indicator.get('description')
+    row['ind_action'] = indicator.get('action')
+    row['ind_severity'] = indicator.get('severity')
+    row['ind_created_by'] = indicator.get('createdByDisplayName')
+    row['ind_creation_date'] = indicator.get('creationTimeDateTimeUtc_ts')
+    row['ind_expiration_date'] = indicator.get('expirationTime_ts')
     row['status'] = 'Active'
 else:
   msg = f"Defender ATP Action unsuccessful.\nAction: List indicators\nReason: {results.get('reason')}"

@@ -66,11 +66,10 @@ inputs.defender_machine_scantype = str(playbook.inputs.defender_machine_scantype
 ### Script Content
 ```python
 from datetime import datetime
-now = int(datetime.now().timestamp()*1000)
 results = playbook.functions.results.machone_scan
 
 if results.get("success"):
-  row['report_date'] = now
+  row['report_date'] = int(datetime.now().timestamp()*1000)
   action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
     results.get("content", {}).get('type'),
     results.get("content", {}).get('requestorComment'),

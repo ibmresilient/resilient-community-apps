@@ -85,7 +85,7 @@ msg = u"Defender Action {}.\nAction: {}\nArtifact: {}\nTitle: {}\nComment: {}\nS
  playbook.inputs.indicator_expiration)
 
 if not results.get("success"):
-    msg = u"{}\nReason: {}".format(msg, results.get("reason"))
+  msg = u"{}\nReason: {}".format(msg, results.get("reason"))
 
 incident.addNote(msg)
 

@@ -61,64 +61,63 @@ from datetime import datetime
 results = playbook.functions.results.get_incident
 
 def mk_mitre_link(technique_list):
-    links = []
-    if isinstance(technique_list, list):
-        for technique in technique_list:
-            links.append('<a target="blank" href="https://attack.mitre.org/techniques/{}">{}</a>'.format(
-                         technique.replace(".", "/"), technique))
-                         
-    return links
-            
+  links = []
+  if isinstance(technique_list, list):
+      for technique in technique_list:
+          links.append('<a target="blank" href="https://attack.mitre.org/techniques/{}">{}</a>'.format(
+                       technique.replace(".", "/"), technique))
+
+  return links
+
 now = int(datetime.now().timestamp()*1000)
 
 if results.get("success"):
-    # get max alert setting
-    max_alerts = int(results.get("inputs", {}).get('defender_alert_result_max', 0))
-    row_count = 0
-    machine_list = []
-    for alert in results.get("content", {}).get('alerts', {}):
-        for device in alert.get('devices', {}):
-            if device['mdatpDeviceId'] not in machine_list:
-                machine_list.append(device['mdatpDeviceId'])
-                row = incident.addRow('defender_machines')
-                row['report_date'] = now
-                row['machine_link'] = "<a target='blank' href='https://security.microsoft.com/machines/{}/overview'>Machine</a>".format(device['mdatpDeviceId'])
-                row['machine_id'] = device['mdatpDeviceId']
-                row['machine_name'] = device['deviceDnsName']
-                row['machine_ip'] = device['lastExternalIpAddress']
-                row['machine_internal_ip'] = device['lastIpAddress']
-                row['machine_platform'] = device['osPlatform']
-                row['machine_firstseen'] = device['firstSeen_ts']
-                row['machine_health_status'] = device.get('healthStatus')
-                row['machine_risk_score'] = device.get('riskScore')
-                row['machine_tags'] = ', '.join(device.get('tags', []))
+  # get max alert setting
+  max_alerts = int(results.get("inputs", {}).get('defender_alert_result_max', 0))
+  row_count = 0
+  machine_list = []
+  for alert in results.get("content", {}).get('alerts', {}):
+    for device in alert.get('devices', {}):
+      if device.get('mdatpDeviceId') not in machine_list:
+        machine_list.append(device.get('mdatpDeviceId'))
+        row = incident.addRow('defender_machines')
+        row['report_date'] = now
+        row['machine_link'] = "<a target='blank' href='https://security.microsoft.com/machines/{}/overview'>Machine</a>".format(device.get('mdatpDeviceId'))
+        row['machine_id'] = device.get('mdatpDeviceId')
+        row['machine_name'] = device.get('deviceDnsName')
+        row['machine_ip'] = device.get('lastExternalIpAddress')
+        row['machine_internal_ip'] = device.get('lastIpAddress')
+        row['machine_platform'] = device.get('osPlatform')
+        row['machine_firstseen'] = device.get('firstSeen_ts')
+        row['machine_health_status'] = device.get('healthStatus')
+        row['machine_risk_score'] = device.get('riskScore')
+        row['machine_tags'] = ', '.join(device.get('tags', []))
 
-            if row_count < max_alerts or not max_alerts:
-                row = incident.addRow("defender_alerts")
-                row['report_date'] = now
-                row['alert_link'] = "<a target='blank' href='https://security.microsoft.com/alerts/{}'>Alert</a>".format(alert['alertId'])
-                row['alert_id'] = alert['alertId']
-                row['assigned_to'] = alert['assignedTo']
-                row['severity'] = alert['severity']
-                row['status'] = alert['status']
-                row['title'] = alert['title']
-                row['alert_description'] = alert['description']
-                row['classification'] = alert['classification']
-                row['determination'] = alert['determination']
-                row['category'] = alert['category']
-                row['mitre_techniques'] = str(', '.join(mk_mitre_link(alert['mitreTechniques'])))
-    
-                # include the machine inform
-                row['computer_name'] = device['deviceDnsName']
-                row['machine_id'] = device['mdatpDeviceId']
-                row['risk_score'] = device['riskScore']
-                row['first_seen'] = device['firstSeen']
-            row_count += 1
+      if row_count < max_alerts or not max_alerts:
+        row = incident.addRow("defender_alerts")
+        row['report_date'] = now
+        row['alert_link'] = "<a target='blank' href='https://security.microsoft.com/alerts/{}'>Alert</a>".format(alert.get('alertId'))
+        row['alert_id'] = alert.get('alertId')
+        row['assigned_to'] = alert.get('assignedTo')
+        row['severity'] = alert.get('severity')
+        row['status'] = alert.get('status')
+        row['title'] = alert.get('title')
+        row['alert_description'] = alert.get('description')
+        row['classification'] = alert.get('classification')
+        row['determination'] = alert.get('determination')
+        row['category'] = alert.get('category')
+        row['mitre_techniques'] = str(', '.join(mk_mitre_link(alert.get('mitreTechniques'))))
+
+        # include the machine inform
+        row['computer_name'] = device.get('deviceDnsName')
+        row['machine_id'] = device.get('mdatpDeviceId')
+        row['risk_score'] = device.get('riskScore')
+        row['first_seen'] = device.get('firstSeen')
+      row_count += 1
 
 else:
-    msg = u"Defender Get Incident unsuccessful.\nReason: {}".format(results.get("reason"))
-    incident.addNote(msg)
-
+  msg = u"Defender Get Incident unsuccessful.\nReason: {}".format(results.get("reason"))
+  incident.addNote(msg)
 ```
 
 ---

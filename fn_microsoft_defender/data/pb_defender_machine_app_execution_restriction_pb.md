@@ -66,16 +66,15 @@ inputs.defender_restriction_type = str(playbook.inputs.defender_app_execution_ac
 ### Script Content
 ```python
 from datetime import datetime
-now = int(datetime.now().timestamp()*1000)
 
 msg = "Defender Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
  .format("successful" if results.get("success") else "unsuccessful",
          playbook.inputs.defender_app_execution_action,
          row['machine_id'],
          playbook.inputs.defender_action_comment)
-           
+
 if results.get("success"):
-  row['report_date'] = now
+  row['report_date'] = int(datetime.now().timestamp()*1000)
   action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
     results.get("content", {}).get('type'),
     results.get("content", {}).get('requestorComment'),

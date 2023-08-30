@@ -64,7 +64,6 @@ inputs.defender_lookback_timeframe = playbook.inputs.defender_lookback_timeframe
 ### Script Content
 ```python
 from datetime import datetime
-now = int(datetime.now().timestamp()*1000)
 """
 "value": [
     {
@@ -83,15 +82,15 @@ if results.get("success"):
   else:
     for machine in results.get("content", {}).get('value'):
       row = incident.addRow("defender_machines")
-      row['report_date'] = now
-      row['machine_link'] = f"<a target='blank' href='https://security.microsoft.com/machines/{machine['mdatpDeviceId']}/overview'>Machine</a>"
-      row['machine_id'] = machine['id']
-      row['machine_ip'] = machine['lastExternalIpAddress']
-      row['machine_internal_ip'] = machine['lastIpAddress']
-      row['machine_name'] = machine['computerDnsName']
-      row['machine_platform'] = machine['osPlatform']
-      row['machine_firstseen'] = machine['firstSeen_ts']
-      row['machine_lastseen'] = machine['lastSeen_ts']
+      row['report_date'] = int(datetime.now().timestamp()*1000)
+      row['machine_link'] = f"<a target='blank' href='https://security.microsoft.com/machines/{machine.get('mdatpDeviceId')}/overview'>Machine</a>"
+      row['machine_id'] = machine.get('id')
+      row['machine_ip'] = machine.get('lastExternalIpAddress')
+      row['machine_internal_ip'] = machine.get('lastIpAddress')
+      row['machine_name'] = machine.get('computerDnsName')
+      row['machine_platform'] = machine.get('osPlatform')
+      row['machine_firstseen'] = machine.get('firstSeen_ts')
+      row['machine_lastseen'] = machine.get('lastSeen_ts')
       row['machine_health_status'] = machine.get('healthStatus')
       row['machine_risk_score'] = machine.get('riskScore')
       row['machine_exposure_level'] = machine.get('exposureLevel')

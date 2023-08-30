@@ -29,7 +29,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        validate_fields([{"name": "tenant_id"}, {"name": "client_id"}, {"name": "app_secret"}], self._app_configs_as_dict)
+        validate_fields(["tenant_id", "client_id", "app_secret"], fn_inputs)
 
         # Get the function parameters:
         defender_machine_id = fn_inputs.defender_machine_id  # text

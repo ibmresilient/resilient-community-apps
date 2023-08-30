@@ -64,8 +64,8 @@ inputs.defender_description = playbook.inputs.defender_action_comment
 ### Script Content
 ```python
 from datetime import datetime
-now = int(datetime.now().timestamp()*1000)
 results = playbook.functions.results.collect_machine_package
+
 if results.get("success"):
   msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
     results.get("content", {}).get('type'),
@@ -74,7 +74,7 @@ if results.get("success"):
     results.get("content", {}).get('creationDateTimeUtc')
   )
   row['machine_last_action'] = helper.createPlainText(msg)
-  row['report_date'] = now
+  row['report_date'] = int(datetime.now().timestamp()*1000)
   
 """
     'type': 'CollectInvestigationPackage',

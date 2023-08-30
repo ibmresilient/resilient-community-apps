@@ -108,11 +108,11 @@ if results.get('success'):
       note_info = ["Defender Machine Vulnerabilities:"]
       note_info.append(format_line("Machine", row['machine_name']))
       note_info.append(format_line("Machine Id", row['machine_id']))
-      note_info.append(format_line("Vulnerability", risk['name']))
-      note_info.append(format_line("Description", risk['description']))
-      note_info.append(format_line("Severity", risk['severity']))
-      note_info.append(format_line("Published", risk['publishedOn']))
-      note_info.append(format_line("Updated", risk['updatedOn']))
+      note_info.append(format_line("Vulnerability", risk.get('name')))
+      note_info.append(format_line("Description", risk.get('description')))
+      note_info.append(format_line("Severity", risk.get('severity')))
+      note_info.append(format_line("Published", risk.get('publishedOn')))
+      note_info.append(format_line("Updated", risk.get('updatedOn')))
 
       note.append(note_info)
     incident.addNote(helper.createRichText(mk_note(note)))

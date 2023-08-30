@@ -59,7 +59,6 @@ inputs.defender_filter_value = row['machine_id']
 ### Script Content
 ```python
 from datetime import datetime
-now = int(datetime.now().timestamp()*1000)
 results = playbook.functions.results.find_machine
 """
 "value": [
@@ -73,10 +72,10 @@ results = playbook.functions.results.find_machine
 """
 if results.get("success"):
   for machine in results.get("content", {}).get('value', []):
-    row['report_date'] = now
-    row['machine_internal_ip'] = machine['lastIpAddress']
-    row['machine_ip'] = machine['lastExternalIpAddress']
-    row['machine_lastseen'] = machine['lastSeen_ts']
+    row['report_date'] = int(datetime.now().timestamp()*1000)
+    row['machine_internal_ip'] = machine.get('lastIpAddress')
+    row['machine_ip'] = machine.get('lastExternalIpAddress')
+    row['machine_lastseen'] = machine.get('lastSeen_ts')
     row['machine_health_status'] = machine.get('healthStatus')
     row['machine_risk_score'] = machine.get('riskScore')
     row['machine_exposure_level'] = machine.get('exposureLevel')
