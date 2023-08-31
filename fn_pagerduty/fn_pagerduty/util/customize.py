@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Generated with resilient-sdk v49.0.4423
 
 """Generate the Resilient customizations required for fn_pagerduty"""
 
@@ -22,15 +23,15 @@ def codegen_reload_data():
         "package": u"fn_pagerduty",
         "message_destinations": [u"pagerduty"],
         "functions": [u"pagerduty_create_incident", u"pagerduty_create_note", u"pagerduty_transition_incident"],
-        "workflows": [u"pagerduty_create_incident", u"pagerduty_create_note", u"pagerduty_transition_incident"],
-        "actions": [u"Create PagerDuty Note", u"Resolve PagerDuty Incident", u"Trigger PagerDuty Incident", u"Update PagerDuty Incident"],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [u"pd_incident_id", u"pd_incident_url"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [u"pagerduty_create_incident_pb", u"pagerduty_create_pagerduty_note_pb", u"pagerduty_resolve_pagerduty_incident_pb", u"pagerduty_update_pagerduty_incident_pb"]
     }
 
 
@@ -39,7 +40,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 43.1.49
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
@@ -48,15 +49,11 @@ def customization_data(client=None):
         - pagerduty_create_incident
         - pagerduty_create_note
         - pagerduty_transition_incident
-    - Workflows:
-        - pagerduty_create_incident
-        - pagerduty_create_note
-        - pagerduty_transition_incident
-    - Rules:
-        - Create PagerDuty Note
-        - Resolve PagerDuty Incident
-        - Trigger PagerDuty Incident
-        - Update PagerDuty Incident
+    - Playbooks:
+        - pagerduty_create_incident_pb
+        - pagerduty_create_pagerduty_note_pb
+        - pagerduty_resolve_pagerduty_incident_pb
+        - pagerduty_update_pagerduty_incident_pb
     - Incident Fields:
         - pd_incident_id
         - pd_incident_url

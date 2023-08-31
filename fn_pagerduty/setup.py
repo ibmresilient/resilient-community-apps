@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='fn_pagerduty',
     display_name="PagerDuty App",
-    version='1.0.2',
+    version='1.1.0',
     url='https://ibm.biz/soarcommunity',
     license='MIT',
     author='IBM SOAR',

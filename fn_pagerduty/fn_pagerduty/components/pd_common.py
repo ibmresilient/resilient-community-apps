@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 import logging
 import json
 from pdpyras import APISession, PDClientError
@@ -9,7 +9,7 @@ SERVICES = 'services'
 INCIDENT_FRAGMENT = 'incidents'
 UPDATE_FRAGMENT = '/'.join((INCIDENT_FRAGMENT, '{}'))
 NOTE_FRAGMENT = '/'.join((UPDATE_FRAGMENT, 'notes'))
-
+PACKAGE_NAME = "fn_pagerduty"
 
 LOG = logging.getLogger(__name__)
 

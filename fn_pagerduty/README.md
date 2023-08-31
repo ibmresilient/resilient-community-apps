@@ -17,7 +17,7 @@
 - [Function - PagerDuty Create Note](#function---pagerduty-create-note)
 - [Function - PagerDuty Transition Incident](#function---pagerduty-transition-incident)
 - [Custom Fields](#custom-fields)
-- [Rules](#rules)
+- [Playbooks](#Playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -27,8 +27,14 @@
 | 1.0.0 | 09/2018 | Initial Release |
 | 1.0.1 | 05/2020 | Support added for App Host |
 | 1.0.2 | 07/2022 | Updated documentation to new format |
-
+| 1.1.0 | 09/2022 | Add Playbooks
 ---
+### fn_pagerduty 2.1.0 Changes
+In v1.1.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end. For automatic actions, the playbooks will be disabled by default.
+
+You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
 
 ## Overview
 
@@ -52,13 +58,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `43.1.49`.
+* SOAR platform >= `46.0.8131`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `43.1.49`.
+* SOAR platform >= `46.0.8131`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=43.0.0`.
+* Integration server is running `resilient_circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -134,6 +140,9 @@ The following table provides the settings you need to configure the app. These s
 ## Function - PagerDuty Create Incident
 Create a PagerDuty Incident based on a Resilient Incident
 
+ ![screenshot: create_incident ](./doc/screenshots/create_incident.png) 
+
+  ![screenshot: create_incident_pb ](./doc/screenshots/create_incident_pb.png) 
 
 
 <details><summary>Inputs:</summary>
@@ -285,6 +294,7 @@ incident.properties.pd_incident_url = "<a href='{}' target='blank'>Link</a>".for
 ---
 ## Function - PagerDuty Create Note
 Create a PagerDuty Note based on a Resilient Incident's Note
+ ![screenshot: create_pagerduty_note ](./doc/screenshots/create_pagerduty_note.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -350,6 +360,9 @@ None
 ## Function - PagerDuty Transition Incident
 Transition a PagerDuty Incident based on changes to a Resilient Incident (such as Closing the Incident)
 
+ ![screenshot: resolve_pagerduty_incident.png ](./doc/screenshots/resolve_pagerduty_incident.png) 
+ 
+  ![screenshot: update_pagerduty_incident_severity.png ](./doc/screenshots/update_pagerduty_incident_severity.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -488,13 +501,13 @@ None
 ---
 
 
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Create PagerDuty Note | note | `pagerduty_create_note` |
-| Resolve PagerDuty Incident | incident | `pagerduty_transition_incident` |
-| Trigger PagerDuty Incident | incident | `pagerduty_create_incident` |
-| Update PagerDuty Incident | incident | `pagerduty_transition_incident` |
+## Playbooks
+| Rule Name | Object | Activation type | Status |
+| --------- | ------ | ------ | ------------------ |
+| PagerDuty: Create Incident (PB) | incident |Manual| `enabled` |
+| PagerDuty: Create PagerDuty Note (PB) | note |Automatic| `enabled` |
+| PagerDuty: Resolve PagerDuty Incident (PB) | incident | Automatic |`enabled` |
+| PagerDuty: Update PagerDuty Incident Severity (PB) | incident | Automatic | `enabled` |
 
 ---
 
