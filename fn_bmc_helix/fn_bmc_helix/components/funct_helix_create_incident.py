@@ -86,7 +86,7 @@ class FunctionComponent(AppFunctionComponent):
             verify = self.rc.get_verify()
 
             # Get function inputs
-            helix_payload = getattr(fn_inputs, "helix_payload")
+            helix_payload = getattr(fn_inputs, "helix_payload", "{}")
             helix_payload = loads(helix_payload)
             helix_incident_name = getattr(fn_inputs, "helix_incident_name", "")
             # SOAR incident_id

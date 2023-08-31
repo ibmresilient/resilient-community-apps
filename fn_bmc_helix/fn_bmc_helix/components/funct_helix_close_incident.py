@@ -158,7 +158,7 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message("Validations complete. Starting business logic")
 
             # Get function inputs
-            helix_payload = getattr(fn_inputs, "helix_payload")
+            helix_payload = getattr(fn_inputs, "helix_payload", "{}")
             helix_payload = loads(helix_payload)
             incident_id = getattr(fn_inputs, "incident_id")
             bmc_helix_request_id = getattr(fn_inputs, "bmc_helix_request_id", None)

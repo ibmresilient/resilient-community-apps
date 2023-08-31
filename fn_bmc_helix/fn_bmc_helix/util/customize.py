@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v50.0.131
 
 """Generate the Resilient customizations required for fn_bmc_helix"""
 
@@ -21,17 +22,43 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_bmc_helix",
-        "message_destinations": [u"fn_bmc_helix"],
-        "functions": [u"helix_close_incident", u"helix_create_incident"],
+        "message_destinations": [
+            u"fn_bmc_helix"
+        ],
+        "functions": [
+            u"helix_close_incident",
+            u"helix_create_incident"
+        ],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"bmc_helix_assigned_support_organization", u"bmc_helix_assigned_to", u"bmc_helix_company", u"bmc_helix_created_date", u"bmc_helix_description", u"bmc_helix_impact", u"bmc_helix_incident_number", u"bmc_helix_organization", u"bmc_helix_priority", u"bmc_helix_request_id", u"bmc_helix_status", u"bmc_helix_urgency"],
+        "incident_fields": [
+            u"bmc_helix_assigned_support_organization",
+            u"bmc_helix_assigned_to",
+            u"bmc_helix_company",
+            u"bmc_helix_created_date",
+            u"bmc_helix_description",
+            u"bmc_helix_impact",
+            u"bmc_helix_incident_number",
+            u"bmc_helix_organization",
+            u"bmc_helix_priority",
+            u"bmc_helix_request_id",
+            u"bmc_helix_status",
+            u"bmc_helix_task_linked",
+            u"bmc_helix_urgency"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"bmc_helix_incidents"],
+        "datatables": [
+            u"bmc_helix_incidents"
+        ],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"bmc_helix_close_incident", u"bmc_helix_close_incident_from_task", u"bmc_helix_create_incident", u"bmc_helix_create_incident_from_task"]
+        "playbooks": [
+            u"bmc_helix_close_incident",
+            u"bmc_helix_close_incident_from_task",
+            u"bmc_helix_create_incident",
+            u"bmc_helix_create_incident_from_task"
+        ]
     }
 
 
@@ -40,7 +67,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 47.0.8304
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
@@ -65,6 +92,7 @@ def customization_data(client=None):
         - bmc_helix_priority
         - bmc_helix_request_id
         - bmc_helix_status
+        - bmc_helix_task_linked
         - bmc_helix_urgency
     - Data Tables:
         - bmc_helix_incidents

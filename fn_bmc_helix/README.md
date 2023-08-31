@@ -56,13 +56,13 @@ This app requires BMC Helix ITSM 22.x or above with Helix AR System 22.x or abov
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `47.0.8304`.
+* SOAR platform >= `45.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `47.0.8304`.
+* SOAR platform >= `45.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=46.0.0`.
+* Integration server is running `resilient-circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -413,9 +413,9 @@ inputs.bmc_helix_request_id = incident.properties.bmc_helix_request_id
 # Use this section to add key, value pairs to send to Helix
 # These values will be added/updated on the target Helix incident,
 # so they must conform with the "HPD:IncidentInterface_Create" schema
-payload = """{"Status_Reason": "Done"}"""
+payload = {"Status_Reason": "Done"}
 
-inputs.helix_payload = payload if payload else ''
+inputs.helix_payload = str(payload)
 ```
 
 </p>
@@ -497,7 +497,7 @@ The keys provided in this dictionary string must match the API names of fields i
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `helix_incident_name` | `text` | No | `-` | - |
-| `helix_payload` | `text` | No | `-` | - |
+| `helix_payload` | `text` | Yes | `-` | - |
 | `incident_id` | `number` | Yes | `-` | - |
 | `task_id` | `number` | No | `-` | - |
 
@@ -781,12 +781,12 @@ payload = """{{ "ApplyTemplate": {},
   mk_str(playbook.inputs.bmc_helix_customer_last_name),
   mk_str(playbook.inputs.bmc_helix_impact),
   mk_str(playbook.inputs.bmc_helix_urgency),
-  mk_str(playbook.inputs.bmc_helix_service_type),
+  mk_str(playbook.inputs.bmc_helix_incident_type),
   mk_str(playbook.inputs.bmc_helix_status),
   mk_str(playbook.inputs.bmc_helix_reported_source),
   mk_str(playbook.inputs.bmc_helix_note),
   mk_str(playbook.inputs.bmc_helix_support_group),
-  playbook.inputs.bmc_helix_additional_data.content if playbook.inputs.bmc_helix_additional_data.content else "null"
+  playbook.inputs.bmc_helix_additional_data.content if getattr(playbook.inputs, "bmc_helix_additional_data").content else "null"
 )
 
 # set inputs
