@@ -66,6 +66,7 @@ inputs.defender_restriction_type = str(playbook.inputs.defender_app_execution_ac
 ### Script Content
 ```python
 from datetime import datetime
+results = playbook.functions.results.app_execution
 
 msg = "Defender Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
  .format("successful" if results.get("success") else "unsuccessful",
@@ -74,13 +75,13 @@ msg = "Defender Action {}.\nAction: {}\nMachine: {}\nComment: {}"\
          playbook.inputs.defender_action_comment)
 
 if results.get("success"):
+  res_content = results.get("content", {})
   row['report_date'] = int(datetime.now().timestamp()*1000)
   action_msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
-    results.get("content", {}).get('type'),
-    results.get("content", {}).get('requestorComment'),
-    results.get("content", {}).get('status'),
-    results.get("content", {}).get('creationDateTimeUtc')
-    )
+    res_content.get('type'),
+    res_content.get('requestorComment'),
+    res_content.get('status'),
+    res_content.get('creationDateTimeUtc'))
   row['machine_last_action'] = helper.createPlainText(action_msg)
 else:
   msg = f"{msg}\nReason: {results.get('reason')}"

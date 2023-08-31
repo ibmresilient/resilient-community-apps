@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1693408080403,
+  "export_date": 1693486598663,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -2598,13 +2598,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 72,
+  "id": 73,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1693408078744,
+      "create_date": 1693486597209,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -2613,7 +2613,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1693408078744,
+      "update_date": 1693486597209,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -3610,7 +3610,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_dd248a1c_7ec4_42f2_ac76_fd66437fcd5b\" isExecutable=\"true\" name=\"playbook_dd248a1c_7ec4_42f2_ac76_fd66437fcd5b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_15hmywm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Defender App Execution\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92906dbe-9be4-4277-8f50-c6f15fb5dcbc\"\u003e{\"inputs\":{\"b35bd7fe-d52a-483e-ab06-16f8131ce093\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"c099160c-f83c-461d-9b8e-4d0edd66716d\"}},\"c4707a3e-777e-4bc8-a9b9-5f9e54b7058a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ea5d9a08-3bd3-4515-99d7-a661dd634d38\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"inputs.defender_description = playbook.inputs.defender_action_comment\\ninputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_restriction_type = str(playbook.inputs.defender_app_execution_action)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"app_execution\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15hmywm\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ca0s6e\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_15hmywm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"37d1b273-1c6f-46ba-a426-f473b7f01cba\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ca0s6e\u003c/incoming\u003e\u003coutgoing\u003eFlow_05w24fl\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ca0s6e\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_05w24fl\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_05w24fl\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_dd248a1c_7ec4_42f2_ac76_fd66437fcd5b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05w24fl\" id=\"Flow_05w24fl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ca0s6e\" id=\"Flow_1ca0s6e_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15hmywm\" id=\"Flow_15hmywm_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1693394145657,
@@ -3742,7 +3742,7 @@
         "name": "c@example.com",
         "type": "user"
       },
-      "last_modified_time": 1693407366616,
+      "last_modified_time": 1693485635110,
       "local_scripts": [
         {
           "actions": [],
@@ -3753,12 +3753,12 @@
           "id": 188,
           "language": "python3",
           "last_modified_by": "c@example.com",
-          "last_modified_time": 1693407364024,
+          "last_modified_time": 1693485632327,
           "name": "post process",
           "object_type": "defender_machines",
           "playbook_handle": "defender_machine_app_execution_restriction_pb",
           "programmatic_name": "defender_machine_app_execution_restriction_pb_post_process",
-          "script_text": "from datetime import datetime\n\nmsg = \"Defender Action {}.\\nAction: {}\\nMachine: {}\\nComment: {}\"\\\n .format(\"successful\" if results.get(\"success\") else \"unsuccessful\",\n         playbook.inputs.defender_app_execution_action,\n         row[\u0027machine_id\u0027],\n         playbook.inputs.defender_action_comment)\n\nif results.get(\"success\"):\n  row[\u0027report_date\u0027] = int(datetime.now().timestamp()*1000)\n  action_msg = \"Action: {}\\nComment: {}\\nStatus: {}\\nStart Date: {}\".format(\n    results.get(\"content\", {}).get(\u0027type\u0027),\n    results.get(\"content\", {}).get(\u0027requestorComment\u0027),\n    results.get(\"content\", {}).get(\u0027status\u0027),\n    results.get(\"content\", {}).get(\u0027creationDateTimeUtc\u0027)\n    )\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(action_msg)\nelse:\n  msg = f\"{msg}\\nReason: {results.get(\u0027reason\u0027)}\"\n\nincident.addNote(helper.createPlainText(msg))",
+          "script_text": "from datetime import datetime\nresults = playbook.functions.results.app_execution\n\nmsg = \"Defender Action {}.\\nAction: {}\\nMachine: {}\\nComment: {}\"\\\n .format(\"successful\" if results.get(\"success\") else \"unsuccessful\",\n         playbook.inputs.defender_app_execution_action,\n         row[\u0027machine_id\u0027],\n         playbook.inputs.defender_action_comment)\n\nif results.get(\"success\"):\n  res_content = results.get(\"content\", {})\n  row[\u0027report_date\u0027] = int(datetime.now().timestamp()*1000)\n  action_msg = \"Action: {}\\nComment: {}\\nStatus: {}\\nStart Date: {}\".format(\n    res_content.get(\u0027type\u0027),\n    res_content.get(\u0027requestorComment\u0027),\n    res_content.get(\u0027status\u0027),\n    res_content.get(\u0027creationDateTimeUtc\u0027))\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(action_msg)\nelse:\n  msg = f\"{msg}\\nReason: {results.get(\u0027reason\u0027)}\"\n\nincident.addNote(helper.createPlainText(msg))",
           "tags": [],
           "uuid": "37d1b273-1c6f-46ba-a426-f473b7f01cba"
         }
@@ -3800,12 +3800,12 @@
       "tags": [],
       "type": "default",
       "uuid": "dd248a1c-7ec4-42f2-ac76-fd66437fcd5b",
-      "version": 5
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e9378e0e_1df8_4401_9bf6_ad67ae9e0da5\" isExecutable=\"true\" name=\"playbook_e9378e0e_1df8_4401_9bf6_ad67ae9e0da5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1chcyyd\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Defender Collect Machine Investigation Package\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bfa88004-c394-4504-92ad-d3e1cb717b20\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.defender_machine_id = row[\u0027machine_id\u0027]\\ninputs.defender_description = playbook.inputs.defender_action_comment\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"collect_machine_package\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1chcyyd\u003c/incoming\u003e\u003coutgoing\u003eFlow_1j47kki\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1chcyyd\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2210e20b-a81f-4718-8c47-304871c733b1\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1j47kki\u003c/incoming\u003e\u003coutgoing\u003eFlow_1cl6ofn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1j47kki\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1cl6ofn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1cl6ofn\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e9378e0e_1df8_4401_9bf6_ad67ae9e0da5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cl6ofn\" id=\"Flow_1cl6ofn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1j47kki\" id=\"Flow_1j47kki_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1chcyyd\" id=\"Flow_1chcyyd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1693394146323,
@@ -3888,7 +3888,7 @@
         "name": "c@example.com",
         "type": "user"
       },
-      "last_modified_time": 1693407402304,
+      "last_modified_time": 1693485859363,
       "local_scripts": [
         {
           "actions": [],
@@ -3899,12 +3899,12 @@
           "id": 189,
           "language": "python3",
           "last_modified_by": "c@example.com",
-          "last_modified_time": 1693407399795,
+          "last_modified_time": 1693485834179,
           "name": "post process",
           "object_type": "defender_machines",
           "playbook_handle": "defender_machine_collect_investigation_package_pb",
           "programmatic_name": "defender_machine_collect_investigation_package_pb_post_process",
-          "script_text": "from datetime import datetime\nresults = playbook.functions.results.collect_machine_package\n\nif results.get(\"success\"):\n  msg = \"Action: {}\\nComment: {}\\nStatus: {}\\nStart Date: {}\".format(\n    results.get(\"content\", {}).get(\u0027type\u0027),\n    results.get(\"content\", {}).get(\u0027requestorComment\u0027),\n    results.get(\"content\", {}).get(\u0027status\u0027),\n    results.get(\"content\", {}).get(\u0027creationDateTimeUtc\u0027)\n  )\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(msg)\n  row[\u0027report_date\u0027] = int(datetime.now().timestamp()*1000)\n  \n\"\"\"\n    \u0027type\u0027: \u0027CollectInvestigationPackage\u0027,\n    \u0027title\u0027: None,\n    \u0027requestor\u0027: \u0027f0dc3f88-f617-449c-960c-6b54818cd110\u0027,\n    \u0027requestorComment\u0027: \u0027ss\u0027,\n    \u0027status\u0027: \u0027Succeeded\u0027,\n    \u0027machineId\u0027: \u00272a94aaf80aa31094790ce40da6fdfc03a9a145c5\u0027,\n    \u0027computerDnsName\u0027: \u0027windowsvmos\u0027,\n    \u0027creationDateTimeUtc\u0027: \u00272021-08-12T18:53:06.5259227Z\u0027,\n    \u0027lastUpdateDateTimeUtc\u0027: \u00272021-08-12T18:54:20.4259984Z\u0027,\n\"\"\"",
+          "script_text": "from datetime import datetime\nresults = playbook.functions.results.collect_machine_package\n\nif results.get(\"success\"):\n  res_content = results.get(\"content\", {})\n  msg = \"Action: {}\\nComment: {}\\nStatus: {}\\nStart Date: {}\".format(\n    res_content.get(\u0027type\u0027),\n    res_content.get(\u0027requestorComment\u0027),\n    res_content.get(\u0027status\u0027),\n    res_content.get(\u0027creationDateTimeUtc\u0027))\n  row[\u0027machine_last_action\u0027] = helper.createPlainText(msg)\n  row[\u0027report_date\u0027] = int(datetime.now().timestamp()*1000)\n  \n\"\"\"\n  \u0027type\u0027: \u0027CollectInvestigationPackage\u0027,\n  \u0027title\u0027: None,\n  \u0027requestor\u0027: \u0027f0dc3f88-f617-449c-960c-6b54818cd110\u0027,\n  \u0027requestorComment\u0027: \u0027ss\u0027,\n  \u0027status\u0027: \u0027Succeeded\u0027,\n  \u0027machineId\u0027: \u00272a94aaf80aa31094790ce40da6fdfc03a9a145c5\u0027,\n  \u0027computerDnsName\u0027: \u0027windowsvmos\u0027,\n  \u0027creationDateTimeUtc\u0027: \u00272021-08-12T18:53:06.5259227Z\u0027,\n  \u0027lastUpdateDateTimeUtc\u0027: \u00272021-08-12T18:54:20.4259984Z\u0027,\n\"\"\"",
           "tags": [],
           "uuid": "2210e20b-a81f-4718-8c47-304871c733b1"
         }
@@ -3938,7 +3938,7 @@
       "tags": [],
       "type": "default",
       "uuid": "e9378e0e-1df8-4401-9bf6-ad67ae9e0da5",
-      "version": 5
+      "version": 7
     },
     {
       "activation_type": "manual",

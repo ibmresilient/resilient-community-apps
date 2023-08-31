@@ -67,25 +67,25 @@ from datetime import datetime
 results = playbook.functions.results.collect_machine_package
 
 if results.get("success"):
+  res_content = results.get("content", {})
   msg = "Action: {}\nComment: {}\nStatus: {}\nStart Date: {}".format(
-    results.get("content", {}).get('type'),
-    results.get("content", {}).get('requestorComment'),
-    results.get("content", {}).get('status'),
-    results.get("content", {}).get('creationDateTimeUtc')
-  )
+    res_content.get('type'),
+    res_content.get('requestorComment'),
+    res_content.get('status'),
+    res_content.get('creationDateTimeUtc'))
   row['machine_last_action'] = helper.createPlainText(msg)
   row['report_date'] = int(datetime.now().timestamp()*1000)
   
 """
-    'type': 'CollectInvestigationPackage',
-    'title': None,
-    'requestor': 'f0dc3f88-f617-449c-960c-6b54818cd110',
-    'requestorComment': 'ss',
-    'status': 'Succeeded',
-    'machineId': '2a94aaf80aa31094790ce40da6fdfc03a9a145c5',
-    'computerDnsName': 'windowsvmos',
-    'creationDateTimeUtc': '2021-08-12T18:53:06.5259227Z',
-    'lastUpdateDateTimeUtc': '2021-08-12T18:54:20.4259984Z',
+  'type': 'CollectInvestigationPackage',
+  'title': None,
+  'requestor': 'f0dc3f88-f617-449c-960c-6b54818cd110',
+  'requestorComment': 'ss',
+  'status': 'Succeeded',
+  'machineId': '2a94aaf80aa31094790ce40da6fdfc03a9a145c5',
+  'computerDnsName': 'windowsvmos',
+  'creationDateTimeUtc': '2021-08-12T18:53:06.5259227Z',
+  'lastUpdateDateTimeUtc': '2021-08-12T18:54:20.4259984Z',
 """
 ```
 
