@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.85
 -->
 
-# Playbook - Salesforce: Create Salesforce Case
+# Playbook - Salesforce: Create Another Salesforce Case
 
 ### API Name
 `salesforce_create_salesforce_case`

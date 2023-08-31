@@ -70,3 +70,23 @@ else:
 ```
 
 ---
+## Local script - Salesforce: Set Contact custom fields to None
+
+### Description
+Set contact custom fields to None when ContactId is null 
+
+### Script Type
+`Local script`
+
+### Objet Type
+`incident`
+
+### Script Content
+```python
+incident.properties.salesforce_contact_name = None
+incident.properties.salesforce_contact_email = None
+incident.properties.salesforce_contact_fax = None
+incident.properties.salesforce_contact_phone = None
+```
+
+---

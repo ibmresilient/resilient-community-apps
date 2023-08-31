@@ -1810,12 +1810,12 @@ else:
 | Salesforce: Send Note to Salesforce Case | Send the specified SOAR case note as a comment in the corresponding Salesforce case. | Manual | note | `enabled` | `incident.properties.salesforce_case_id has_a_value` |
 | Salesforce: Send Task to Salesforce Case | Send the task to corresponding Salesforce case. | Manual | task | `enabled` | `incident.properties.salesforce_case_id has_a_value` |
 | Salesforce: Sync Tasks Between SOAR and Salesforce | None | Manual | incident | `enabled` | `incident.properties.salesforce_case_id has_a_value` |
-| Salesforce: Update Account Details in SOAR | None | Automatic | incident | `enabled` | `incident.properties.salesforce_account_id changed AND incident.properties.salesforce_account_id not_equals None` |
+| Salesforce: Update Account Details in SOAR | None | Automatic | incident | `enabled` | `incident.properties.salesforce_account_id changed` |
 | Salesforce: Update Case in SOAR | Automatic playbook to update the SOAR case with information from Salesforce. | Automatic | incident | `enabled` | `incident.plan_status equals Active AND incident.properties.salesforce_case_id has_a_value AND object_added` |
 | Salesforce: Update Case Status in Salesforce | Manual playbook to update the case Status field in Salesforce | Manual | incident | `enabled` | `incident.properties.salesforce_case_id has_a_value` |
 | Salesforce: Update Comments from Salesforce Case | Get the comments from the specified Salesforce case and update the notes in corresponding  SOAR case. | Manual | incident | `enabled` | `incident.properties.salesforce_case_id has_a_value` |
-| Salesforce: Update Contact Details in SOAR | Automatic playbook to update the Contact details in SOAR when the ContactId has changed. | Automatic | incident | `enabled` | `incident.properties.salesforce_contact_id changed AND incident.properties.salesforce_contact_id not_equals None` |
-| Salesforce: Update Owner Details in SOAR | Get the Case Owner details and update the Case Owner field in the SOAR case. | Automatic | incident | `enabled` | `incident.properties.salesforce_owner_id changed AND incident.properties.salesforce_owner_id not_equals None` |
+| Salesforce: Update Contact Details in SOAR | Automatic playbook to update the Contact details in SOAR when the ContactId has changed. | Automatic | incident | `enabled` | `incident.properties.salesforce_contact_id changed` |
+| Salesforce: Update Owner Details in SOAR | Get the Case Owner details and update the Case Owner field in the SOAR case. | Automatic | incident | `enabled` | `incident.properties.salesforce_owner_id changed` |
 | Salesforce: Write Owner Details to Note | Write the User details of the Case Owner in Salesforce to a SOAR incident Note. | Manual | incident | `disabled` | `incident.properties.salesforce_case_id has_a_value` |
 
 ## Templates for SOAR Cases
@@ -1982,16 +1982,16 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
     "salesforce_case_type": "{{ Type }}",
     "salesforce_case_link": "<a target='_blank' href='{{ entity_url }}'>{{ CaseNumber }}</a>",
     "salesforce_origin": "{{ Origin }}",
-    "salesforce_account_id": "{{ AccountId }}",
-    "salesforce_owner_id": "{{ OwnerId }}",
-    "salesforce_contact_id": "{{ ContactId }}",
-    "salesforce_contact_phone": "{{ ContactPhone }}",
-    "salesforce_contact_email": "{{ ContactEmail }}",
-    "salesforce_contact_fax": "{{ ContactFax }}",
-    "salesforce_supplied_name": "{{ SuppliedName }}",
-    "salesforce_supplied_email": "{{ SuppliedEmail }}",
-    "salesforce_supplied_phone": "{{ SuppliedPhone }}",
-    "salesforce_supplied_company": "{{ SuppliedCompany }}",
+    "salesforce_account_id": {% if AccountId is none %} null {% else %} "{{ AccountId }}" {% endif %},
+    "salesforce_owner_id": {% if OwnerId is none %} null {% else %} "{{ OwnerId }}" {% endif %},
+    "salesforce_contact_id": {% if ContactId is none %} null {% else %} "{{ ContactId }}" {% endif %},
+    "salesforce_contact_phone": {% if ContactPhone  is none %} null {% else %} "{{ ContactPhone }}" {% endif %},
+    "salesforce_contact_email": {% if ContactEmail is none %} null {% else %} "{{ ContactEmail }}" {% endif %},
+    "salesforce_contact_fax": {% if ContactFax is none %} null {% else %} "{{ ContactFax }}" {% endif %},
+    "salesforce_supplied_name": {% if SuppliedName is none %} null {% else %} "{{ SuppliedName }}" {% endif %},
+    "salesforce_supplied_email": {% if SuppliedEmail is none %} null {% else %} "{{ SuppliedEmail }}" {% endif %},
+    "salesforce_supplied_phone": {% if SuppliedPhone is none %} null {% else %} "{{ SuppliedPhone }}" {% endif %},
+    "salesforce_supplied_company": {% if SuppliedCompany is none %} null {% else %} "{{ SuppliedCompany }}" {% endif %},
     "salesforce_status": "{{ Status }}"
   }
 }
