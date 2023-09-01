@@ -35,6 +35,7 @@
 
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
+| 2.2.6 | June. 2023 | Fix bug in qradar_search function |
 | 2.2.5 | July. 2022 | Bug Fix for windows clients |
 | 2.2.4 | July. 2022 | Update SOAR required version |
 | 2.2.3 | June. 2022 | Bug fix for using with MSSP |

@@ -16,48 +16,48 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 MOCK_GET_TABLE_RESPONSE = [
-  {
-    "timeout_type": "LAST_SEEN",
-    "number_of_elements": 0,
-    "creation_time": 1464119414213,
-    "name": "Mock URLs Data",
-    "namespace": "SHARED",
-    "key_name_types": {
-      "Brand": "ALNIC",
-      "First Seen Date": "DATE",
-      "Identifier": "NUM",
-      "Confidence": "NUM",
-      "Last Seen Date": "DATE",
-      "Report URL": "ALNIC",
-      "Malware Family": "ALNIC",
-      "Portal URL": "ALNIC",
-      "Infrastructure Type": "ALNIC",
-      "Provider": "ALN"
+    {
+        "timeout_type": "LAST_SEEN",
+        "number_of_elements": 0,
+        "creation_time": 1464119414213,
+        "name": "Mock URLs Data",
+        "namespace": "SHARED",
+        "key_name_types": {
+            "Brand": "ALNIC",
+            "First Seen Date": "DATE",
+            "Identifier": "NUM",
+            "Confidence": "NUM",
+            "Last Seen Date": "DATE",
+            "Report URL": "ALNIC",
+            "Malware Family": "ALNIC",
+            "Portal URL": "ALNIC",
+            "Infrastructure Type": "ALNIC",
+            "Provider": "ALN"
+        },
+        "element_type": "ALNIC",
+        "collection_id": 181
     },
-    "element_type": "ALNIC",
-    "collection_id": 181
-  },
-  {
-    "timeout_type": "LAST_SEEN",
-    "number_of_elements": 100,
-    "creation_time": 1464119421471,
-    "name": "Les faux logiciels malveillants hachent les données SHA",
-    "namespace": "SHARED",
-    "key_name_types": {
-      "Brand": "ALNIC",
-      "First Seen Date": "DATE",
-      "Identifier": "NUM",
-      "Confidence": "NUM",
-      "Last Seen Date": "DATE",
-      "Portal URL": "ALNIC",
-      "Malware Family": "ALNIC",
-      "Report URL": "ALNIC",
-      "Infrastructure Type": "ALNIC",
-      "Provider": "ALN"
-    },
-    "element_type": "ALNIC",
-    "collection_id": 190
-  }]
+    {
+        "timeout_type": "LAST_SEEN",
+        "number_of_elements": 100,
+        "creation_time": 1464119421471,
+        "name": "Les faux logiciels malveillants hachent les données SHA",
+        "namespace": "SHARED",
+        "key_name_types": {
+            "Brand": "ALNIC",
+            "First Seen Date": "DATE",
+            "Identifier": "NUM",
+            "Confidence": "NUM",
+            "Last Seen Date": "DATE",
+            "Portal URL": "ALNIC",
+            "Malware Family": "ALNIC",
+            "Report URL": "ALNIC",
+            "Infrastructure Type": "ALNIC",
+            "Provider": "ALN"
+        },
+        "element_type": "ALNIC",
+        "collection_id": 190
+    }]
 
 def call_qradar_get_all_reference_tables_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event
@@ -90,13 +90,11 @@ class TestQradarGetAllReferenceTables:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    mock_inputs_1 = {"qradar_label": "SOAR_Plugin_Destination_Name1"
-    }
+    mock_inputs_1 = {"qradar_label": "SOAR_Plugin_Destination_Name1"}
 
     expected_results_1 = MOCK_GET_TABLE_RESPONSE
 
-    mock_inputs_2 = {"qradar_label": "SOAR_Plugin_Destination_Name2"
-    }
+    mock_inputs_2 = {"qradar_label": "SOAR_Plugin_Destination_Name2"}
 
     expected_results_2 = MOCK_GET_TABLE_RESPONSE
 
@@ -115,7 +113,7 @@ class TestQradarGetAllReferenceTables:
             assert entry.get('collection_id', False)
             assert entry.get('name', False)
             assert isinstance(entry.get('number_of_elements', False), int)
-    
+
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
         (mock_inputs_2, expected_results_2)
