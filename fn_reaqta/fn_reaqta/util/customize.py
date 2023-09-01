@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# Generated with resilient-sdk v50.0.108
 
 """Generate the Resilient customizations required for fn_reaqta"""
 
@@ -21,17 +21,61 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_reaqta",
-        "message_destinations": [u"fn_reaqta"],
-        "functions": [u"reaqta_attach_file", u"reaqta_close_alert", u"reaqta_create_artifact", u"reaqta_create_note", u"reaqta_create_policy", u"reaqta_get_alert_information", u"reaqta_get_endpoint_status", u"reaqta_get_processes", u"reaqta_isolate_machine", u"reaqta_kill_process"],
+        "message_destinations": [
+            u"fn_reaqta"
+        ],
+        "functions": [
+            u"reaqta_attach_file",
+            u"reaqta_close_alert",
+            u"reaqta_create_artifact",
+            u"reaqta_create_note",
+            u"reaqta_create_policy",
+            u"reaqta_deisolate_machine",
+            u"reaqta_get_alert_information",
+            u"reaqta_get_endpoint_status",
+            u"reaqta_get_processes",
+            u"reaqta_isolate_machine",
+            u"reaqta_kill_process"
+        ],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"reaqta_alert_link", u"reaqta_endpoint_id", u"reaqta_endpoint_link", u"reaqta_groups", u"reaqta_hive", u"reaqta_id", u"reaqta_impact", u"reaqta_machine_info", u"reaqta_tags", u"reaqta_trigger_condition"],
+        "incident_fields": [
+            u"reaqta_alert_link",
+            u"reaqta_endpoint_id",
+            u"reaqta_endpoint_link",
+            u"reaqta_groups",
+            u"reaqta_hive",
+            u"reaqta_id",
+            u"reaqta_impact",
+            u"reaqta_machine_info",
+            u"reaqta_tags",
+            u"reaqta_trigger_condition"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"reaqta_process_list", u"reaqta_trigger_events"],
+        "datatables": [
+            u"reaqta_process_list",
+            u"reaqta_trigger_events"
+        ],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"reaqta_close_alert", u"reaqta_create_artifact_from_process_path", u"reaqta_create_artifact_from_trigger_event", u"reaqta_create_attachment_from_process_list", u"reaqta_create_attachment_from_triggered_event", u"reaqta_create_note", u"reaqta_create_policy_from_artifact", u"reaqta_create_policy_on_triggered_event", u"reaqta_get_alert_information", u"reaqta_get_endpoint_status", u"reaqta_get_processes", u"reaqta_isolate_endpoint", u"reaqta_kill_process", u"reaqta_refresh_alert_information"]
+        "playbooks": [
+            u"reaqta_close_alert",
+            u"reaqta_create_artifact_from_process_path",
+            u"reaqta_create_artifact_from_trigger_event",
+            u"reaqta_create_attachment_from_process_list",
+            u"reaqta_create_attachment_from_triggered_event",
+            u"reaqta_create_note",
+            u"reaqta_create_policy_from_artifact",
+            u"reaqta_create_policy_on_triggered_event",
+            u"reaqta_deisolate_endpoint_pb",
+            u"reaqta_get_alert_information",
+            u"reaqta_get_endpoint_status",
+            u"reaqta_get_processes",
+            u"reaqta_isolate_endpoint",
+            u"reaqta_kill_process",
+            u"reaqta_refresh_alert_information"
+        ]
     }
 
 
@@ -40,7 +84,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 47.0.8304
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
@@ -51,6 +95,7 @@ def customization_data(client=None):
         - reaqta_create_artifact
         - reaqta_create_note
         - reaqta_create_policy
+        - reaqta_deisolate_machine
         - reaqta_get_alert_information
         - reaqta_get_endpoint_status
         - reaqta_get_processes
@@ -65,6 +110,7 @@ def customization_data(client=None):
         - reaqta_create_note
         - reaqta_create_policy_from_artifact
         - reaqta_create_policy_on_triggered_event
+        - reaqta_deisolate_endpoint_pb
         - reaqta_get_alert_information
         - reaqta_get_endpoint_status
         - reaqta_get_processes

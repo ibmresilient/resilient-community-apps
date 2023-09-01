@@ -18,9 +18,10 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# ReaQta
+# ReaQta <!-- omit in toc -->
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
+- [History](#history)
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
@@ -29,9 +30,13 @@
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
+  - [Development Version](#development-version)
+    - [Configuration](#configuration)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+    - [\[fn\_reaqta\]](#fn_reaqta)
+    - [\[fn\_reaqta:hive\_label\]](#fn_reaqtahive_label)
   - [Custom Layouts](#custom-layouts)
 - [Poller Considerations](#poller-considerations)
 - [Function - ReaQta Get Endpoint Status](#function---reaqta-get-endpoint-status)
@@ -43,40 +48,40 @@
 - [Function - ReaQta: Get Alert Information](#function---reaqta-get-alert-information)
 - [Function - ReaQta: Get Processes](#function---reaqta-get-processes)
 - [Function - ReaQta: Isolate Machine](#function---reaqta-isolate-machine)
+- [Function - ReaQta: Deisolate Machine](#function---reaqta-deisolate-machine)
 - [Function - ReaQta: Kill Process](#function---reaqta-kill-process)
 - [Data Table - ReaQta Process List](#data-table---reaqta-process-list)
+    - [API Name:](#api-name)
+    - [Columns:](#columns)
 - [Data Table - ReaQta Trigger Events](#data-table---reaqta-trigger-events)
+    - [API Name:](#api-name-1)
+    - [Columns:](#columns-1)
 - [Custom Fields](#custom-fields)
 - [Playbooks](#playbooks)
 - [Templates for SOAR Cases](#templates-for-soar-cases)
-- [Troubleshooting & Support](#troubleshooting--support)
+  - [soar\_create\_case\_template.jinja](#soar_create_case_templatejinja)
+  - [soar\_close\_case\_template.jinja](#soar_close_case_templatejinja)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 
 ---
-
-## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
-
-
--->
-
-### 1.4.0
-
-In v1.4.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
-
-If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
-
-You can continue to use the rules/workflows. But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 ## History
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 03/2022 | Initial Release | 
 | 1.1.0 | 08/2023 | Convert Rules and Workflows to Playbooks |
+| 1.2.0 | 09/2023 | Added support to deisolate a previously isolated endpoint |
 
+## Release Notes
 
+### 1.2.0 <!-- omit in toc -->
 
+In v1.2.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows. But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 
 ---
@@ -4882,6 +4887,85 @@ None
 
 ```python
 None
+```
+
+</p>
+</details>
+
+---
+
+## Function - ReaQta: Deisolate Machine
+Deisolate a ReaQta controlled machine based on it's endpoint ID
+
+ ![screenshot: fn-reaqta-Deisolate-machine ](./doc/screenshots/fn-reaqta-Deisolate-machine.png) 
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `reaqta_endpoint_id` | `text` | Yes | `-` | - |
+| `reaqta_hive` | `text` | No | `-` | Label used to identify which ReaQta hive this alert is associated with |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "success": true
+  },
+  "inputs": {
+    "reaqta_endpoint_id": "982370521729466368",
+    "reaqta_hive": "rhiveam"
+  },
+  "metrics": {
+    "execution_time_ms": 1010,
+    "host": "local",
+    "package": "fn-reaqta",
+    "package_version": "1.1.0",
+    "timestamp": "2023-07-10 12:46:41",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id
+inputs.reaqta_hive = incident.properties.reaqta_hive
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+results = playbook.functions.results.reaqta_deisolate_machine_result
+if results.success and results.content.get('success'):
+  msg = "Endpoint Machine Deisolated"
+elif results.reason:
+  msg = u"ReaQta Deisolate Machine failed: {}".format(results.reason)
+else:
+  msg = u"ReaQta Deisolate Machine failed: {}".format(results.content.get('message'))
+
+incident.addNote(msg)
 ```
 
 </p>
