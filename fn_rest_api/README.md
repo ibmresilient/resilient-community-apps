@@ -47,7 +47,6 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 05/2023 | Initial Release |
 | 1.1.0 | 06/2023 | Added support for OAuth, Client Side Authentication using certificates, JWT |
-| 1.2.0 | 09/2023 | Added support to deisolate a previously isolated endpoint |
 
 
 ---

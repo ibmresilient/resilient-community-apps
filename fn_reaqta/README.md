@@ -71,7 +71,7 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 03/2022 | Initial Release | 
 | 1.1.0 | 08/2023 | Convert Rules and Workflows to Playbooks |
-| 1.2.0 | 08/2023 | Added support for Deisolate endpoint |
+| 1.2.0 | 09/2023 | Added support to deisolate a previously isolated endpoint |
 
 ## Release Notes
 
