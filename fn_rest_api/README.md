@@ -48,7 +48,6 @@
 | 1.0.0 | 05/2023 | Initial Release |
 | 1.1.0 | 06/2023 | Added support for OAuth, Client Side Authentication using certificates, JWT 
 
-
 ---
 
 ## Overview
