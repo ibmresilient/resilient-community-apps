@@ -1,0 +1,52 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "type": 2,
+      "id": "1026728858289700868",
+      "versionId": "1026728858289704965",
+      "title": "test 123",
+      "description": "",
+      "enabled": true,
+      "deleted": false,
+      "default": false,
+      "matchers": [
+        {
+          "type": 2,
+          "id": "1026728858289709062",
+          "hash": "de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c",
+          "alg": 1
+        }
+      ],
+      "actions": [
+        2
+      ],
+      "created": "2023-08-07T06:53:55.516Z",
+      "lastModified": "2023-08-07T06:53:55.516Z",
+      "scope": "global",
+      "policy_url": "https://rhiveam.techzone.ibm.com/policies/details/1026728858289700868",
+      "policy_hive": "rhiveam"
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "reaqta_policy_title": "test 123",
+    "reaqta_policy_block": false,
+    "reaqta_policy_excluded_groups": null,
+    "reaqta_policy_enabled": true,
+    "reaqta_policy_description": "",
+    "reaqta_sha256": "de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c",
+    "reaqta_policy_included_groups": null,
+    "reaqta_hives": "rhiveam"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 1317,
+    "timestamp": "2023-08-07 14:53:55"
+  }
+}
