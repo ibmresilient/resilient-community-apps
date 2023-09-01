@@ -38,7 +38,6 @@
   - [Installation](#installation)
     - [Install](#install)
     - [App Configuration](#app-configuration)
-  - [| **soar\_close\_case\_template** | No | `/var/rescircuits/close_case.jinja` | *Path to override template for automatic case closing. See Poller Considerations.* |](#-soar_close_case_template--no--varrescircuitsclose_casejinja--path-to-override-template-for-automatic-case-closing-see-poller-considerations-)
     - [Custom Layouts](#custom-layouts)
     - [Poller Considerations](#poller-considerations)
       - [Poller Templates for SOAR Cases](#poller-templates-for-soar-cases)
@@ -247,6 +246,7 @@ The following table provides the settings you need to configure the app. These s
 | **soar_create_case_template** | No | `/var/rescircuits/create_case.jinja` | *Path to override template for automatic case creation. See [Poller Considerations](#poller-considerations).* |
 | **soar_update_case_template** | No | `/var/rescircuits/update_case.jinja` | *Path to override template for automatic case updating. See [Poller Considerations](#poller-considerations).* |
 | **soar_close_case_template** | No | `/var/rescircuits/close_case.jinja` | *Path to override template for automatic case closing. See [Poller Considerations](#poller-considerations).* |
+
 ---
 
 Get the `my_domain_name` and `my_domain_url` from the `My Domain Settings` page under `Company Settings`: 
