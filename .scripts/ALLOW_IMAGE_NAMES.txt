@@ -86,6 +86,7 @@ fn_reaqta
 fn_remedy
 fn_rest_api
 fn_rsa_netwitness
+fn_salesforce
 fn_soar_utils
 fn_scheduler
 fn_secureworks_ctp
