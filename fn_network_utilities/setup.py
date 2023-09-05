@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_network_utilities",
     display_name="Network Utilities Function for SOAR",
-    version="1.0.1",
+    version="1.0.2",
     license="MIT",
     author="IBM SOAR",
     author_email="",
