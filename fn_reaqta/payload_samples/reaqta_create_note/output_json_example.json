@@ -2,18 +2,21 @@
   "version": 2.0,
   "success": true,
   "reason": null,
-  "content": "\"\\nIBM SOAR 23/02/2022 12:44:51\\nthis is a note\"",
+  "content": {
+    "note": "{\"notes\":\"An attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\nIBM SOAR 15/08/2023 15:19:23\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 3490](https://9.30.229.231:443/#incidents/3490)\\nIBM SOAR 15/08/2023 15:19:43\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\nIBM SOAR 15/08/2023 15:19:23\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 3490](https://9.30.229.231:443/#incidents/3490)\\n\\n[SOAR Case - 13804](https://uax01.americas.cloudpaksecurity.com:443/app/respond/#cases/13804)\\nIBM SOAR 15/08/2023 16:19:54\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\nIBM SOAR 15/08/2023 15:19:23\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 3490](https://9.30.229.231:443/#incidents/3490)\\n\\n[SOAR Case - 2097](https://calluses1.fyre.ibm.com:443/#incidents/2097)\\nIBM SOAR 15/08/2023 15:20:07\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\nIBM SOAR 15/08/2023 15:19:23\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 3490](https://9.30.229.231:443/#incidents/3490)\\nIBM SOAR 15/08/2023 15:19:43\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\nIBM SOAR 15/08/2023 15:19:23\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 3490](https://9.30.229.231:443/#incidents/3490)\\n\\n[SOAR Case - 13804](https://uax01.americas.cloudpaksecurity.com:443/app/respond/#cases/13804)\\n\\n[SOAR Case - 3492](https://9.30.229.231:443/#incidents/3492)\\nIBM SOAR 15/08/2023 15:14:47\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\nIBM SOAR 15/08/2023 15:19:23\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 3490](https://9.30.229.231:443/#incidents/3490)\\nIBM SOAR 15/08/2023 15:19:43\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\nIBM SOAR 15/08/2023 15:19:23\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 3490](https://9.30.229.231:443/#incidents/3490)\\n\\n[SOAR Case - 13804](https://uax01.americas.cloudpaksecurity.com:443/app/respond/#cases/13804)\\nIBM SOAR 15/08/2023 16:19:54\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\nIBM SOAR 15/08/2023 15:19:23\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\n\\n[SOAR Case - 3490](https://9.30.229.231:443/#incidents/3490)\\n\\n[SOAR Case - 2097](https://calluses1.fyre.ibm.com:443/#incidents/2097)\\n\\n[SOAR Case - 3731](https://deployment-yfrujyoe.xdr.security.ibm.com:443/app/respond/#cases/3731)\\nIBM SOAR 16/08/2023 08:10:11\\nEndpoint Machine Isolated\\nIBM SOAR 16/08/2023 08:10:57\\nEndpoint Machine Deisolated\\nIBM SOAR 16/08/2023 08:13:17\\nEndpoint Machine Isolated\\nIBM SOAR 16/08/2023 08:14:30\\nEndpoint Machine Deisolated\"}"
+  },
   "raw": null,
   "inputs": {
-    "reaqta_alert_id": "834099413533065218",
-    "reaqta_note": "<div class=\"rte\"><div>this is a note</div></div>"
+    "reaqta_alert_id": "1029755084809961474",
+    "reaqta_hive": "rHiveam",
+    "reaqta_note": "Endpoint Machine Deisolated"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
-    "package_version": "1.0.0",
-    "host": "local",
-    "execution_time_ms": 1114,
-    "timestamp": "2022-02-23 12:44:51"
+    "package_version": "1.1.0",
+    "host": "appHost",
+    "execution_time_ms": 600,
+    "timestamp": "2023-08-16 08:14:31"
   }
 }

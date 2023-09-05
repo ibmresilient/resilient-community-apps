@@ -19,16 +19,16 @@ def snake_to_camel(word):
 
 setup(
     name='fn_exchange_online',
-    version='1.3.0',
+    display_name='Microsoft Exchange Online',
+    version='1.4.0',
     license='MIT',
-    author='IBM Resilient',
+    author='IBM SOAR',
     author_email='',
     url='https://ibm.com/mysupport',
-    description="Resilient Circuits Components for 'fn_exchange_online'",
-    long_description="Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from Resilient.",
+    description="Integrate with Microsoft Exchange Online email and meeting functionality",
+    long_description="IBM SOAR Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from IBM SOAR.",
     install_requires=[
-        'resilient_circuits>=31.0.0',
-        'resilient_lib>=40.0.1rc0',
+        'resilient_circuits>=49.0.0',
         'pytz>=2019.3',
         'tzlocal>=2.0.0'
     ],

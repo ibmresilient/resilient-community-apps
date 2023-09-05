@@ -23,14 +23,17 @@ def snake_to_camel(word):
 setup(
     name="fn_reaqta",
     display_name="ReaQta",
-    version="1.0.0",
+    version="1.2.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
     url="https://ibm.com/mysupport",
     description="IBM SOAR app bidirectional synchronization and functions for ReaQta",
     long_description="""Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
-    Additional functions exists to list and kill endpoint processes, isolate the endpoint and synchronize notes and close events.""",
+    Additional functions exists to list and kill endpoint processes, isolate the endpoint and synchronize notes and close events.<br>
+
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
         "resilient-circuits>=46.0.0",
         "cachetools", # versions of cachetools and retry2 are specified in resilient

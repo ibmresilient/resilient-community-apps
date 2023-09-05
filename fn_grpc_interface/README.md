@@ -16,10 +16,9 @@
 
 # fn_grpc_interface
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
 - [Release Notes](#release-notes)
 - [Overview](#overview)
-  - [Key Features](#key-features)
 - [Requirements](#requirements)
   - [Resilient platform](#resilient-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
@@ -30,7 +29,8 @@
   - [App Configuration](#app-configuration)
 - [Function - GRPC](#function---grpc)
 - [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 ---
 
 ## Release Notes
@@ -40,6 +40,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.2 | 08/2023 | Only Python 3.9 supported |
 | 1.1.1 | 04/2022 | Pinned `grpcio==1.44.0` and `grpcio-tools==1.44.0` |
 | 1.1.0 | 09/2021 | Add app host support; add configuration options for channel and function definition |
 | 1.0.0 | 04/2019 | Initial Release |
@@ -115,7 +116,7 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 The app **does** support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Python 3.7 or greater is supported for this app.
 Additional package dependencies may exist for each of these packages:
 * grpcio-tools>=1.19.0
 * grpcio>=1.19.0

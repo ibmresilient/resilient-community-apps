@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     display_name='Scheduler',
     name='fn_scheduler',
-    version='2.1.0',
+    version='2.1.1',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
@@ -36,7 +36,7 @@ setup(
         'pytz',
         "APScheduler < 3.9;python_version < '3.6'",
         "APScheduler >= 3.9;python_version >= '3.6'",
-        'SQLAlchemy>=1.3.8',
+        'SQLAlchemy[postgresql]>=1.3.8',
         'python-dateutil>=2.8.1'
     ],
     extras_require={

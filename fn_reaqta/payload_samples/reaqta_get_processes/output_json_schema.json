@@ -35,10 +35,10 @@
           "privilegeLevel": {
             "type": "string"
           },
-          "programPath": {
+          "user": {
             "type": "string"
           },
-          "user": {
+          "programPath": {
             "type": "string"
           }
         }
@@ -49,6 +49,9 @@
       "type": "object",
       "properties": {
         "reaqta_has_incident": {},
+        "reaqta_hive": {
+          "type": "string"
+        },
         "reaqta_endpoint_id": {
           "type": "string"
         },

@@ -3,28 +3,29 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "853282059173494786",
-    "localId": "853279134984443906",
-    "endpointId": "853260775773437952",
-    "triggerCondition": 7,
+    "id": "1022070806768779266",
+    "localId": "1022070249672935426",
+    "endpointId": "876174682842202112",
+    "triggerCondition": 6,
     "endpoint": {
-      "id": "853260775773437952",
-      "machineId": "01531b51db1faae8e9526eee6d3b91c2c530517cc44bef9c5bb5ebfcb2f4ab39",
+      "id": "876174682842202112",
+      "machineId": "857d21c8a80297fb0078cdc036b290b61cb4eec5c1889eab4c7ae3daeeeaa655",
       "osType": 1,
       "cpuVendor": 1,
       "arch": 2,
-      "cpuDescr": "Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz",
+      "cpuDescr": "Intel(R) Xeon(R) Platinum 8260 CPU @ 2.40GHz",
       "kernel": "10.0",
-      "os": "Windows 10 Pro",
-      "name": "DESKTOP-MITCH",
+      "os": "Windows Server 2019 Standard",
+      "name": "ADDAL10-01",
+      "domain": "americas.cloudpaksecurity.com",
       "state": 1,
-      "registrationTime": "2022-04-15T14:33:41.773Z",
-      "agentVersion": "3.6.1",
+      "registrationTime": "2022-06-17T20:05:22.942Z",
+      "agentVersion": "3.10.1",
       "componentsVersions": [
         {
           "name": "keeper",
-          "version": "3.6.0",
-          "build": "19.1627291555548.commit"
+          "version": "3.10.1",
+          "build": "27.1668701555901.commit"
         },
         {
           "name": "probos",
@@ -33,220 +34,165 @@
         },
         {
           "name": "rqtsentry",
-          "version": "3.6.1",
-          "build": "119.1632119719010.commit"
+          "version": "3.10.0",
+          "build": "121.1666598992258.commit"
         },
         {
           "name": "rqtnetsentry",
-          "version": "3.6.0",
-          "build": "44.1627295520120.commit"
+          "version": "3.10.0",
+          "build": "45.1666597836648.commit"
         },
         {
           "name": "installer",
-          "version": "3.6.1",
+          "version": "3.10.1",
           "build": ""
         }
       ],
       "isVirtualMachine": false,
-      "isDomainController": false,
-      "isServer": false,
-      "sessionStart": "2022-04-15T14:33:43.044Z",
-      "sessionEnd": "2022-04-15T16:03:24.293Z",
-      "lastSeenAt": "2022-04-15T15:58:24.293Z",
+      "isDomainController": true,
+      "isServer": true,
+      "sessionStart": "2023-04-25T09:11:13.842Z",
+      "sessionEnd": "2023-08-01T07:23:21.342Z",
+      "lastSeenAt": "2023-08-01T07:18:21.342Z",
       "disconnectionReason": 0,
-      "localAddr": "10.0.0.119",
-      "hvStatus": 0,
+      "localAddr": "52.118.133.13",
+      "hvStatus": 19,
       "macs": [
-        "00:50:56:13:a4:c6"
+        "06:c3:1d:18:2c:3a",
+        "06:d7:b5:4f:18:0e"
       ],
       "isolated": false,
+      "isolationStatus": "DEISOLATED",
+      "isolationStatusFailure": null,
       "connected": true,
-      "tags": [],
+      "tags": [
+        "dc"
+      ],
       "groups": [
         {
-          "id": "847194699834851335",
-          "name": "Digital Sales",
-          "description": "Digital Sales Group"
+          "id": "839608851933167623",
+          "name": "Latin America",
+          "description": "Latin America Hive"
         }
       ],
       "avInstalled": false
     },
     "triggerEvents": [
       {
-        "id": "853282022443974657",
-        "category": "hive",
-        "localId": "853279044794320897",
-        "endpointId": "853260775773437952",
-        "receivedAt": "2022-04-15T15:58:07.364Z",
-        "happenedAt": "2022-04-15T15:46:17.437Z",
-        "relevance": 0,
-        "severity": "none",
-        "trigger": true,
-        "manuallyAdded": false,
-        "process": {
-          "id": "853260775773437952:7576:1650037576457",
-          "parentId": "853260775773437952:4568:1650037572779",
-          "endpointId": "853260775773437952",
-          "program": {
-            "path": "c:\\users\\admin\\appdata\\local\\temp\\tryme.exe",
-            "filename": "tryme.exe",
-            "md5": "a3ce5c07dc7b7d58740b4407a7d3f9d2",
-            "sha1": "9fa6c5f1cff4ca41c441e428a847a924627210cc",
-            "sha256": "cf8c1b234ad4d72dd6a455b82bf48ff16cd794aaefb682729b0151f0e1c374dd",
-            "size": 84992,
-            "arch": "x64",
-            "fsName": "tryme.exe"
-          },
-          "user": "DESKTOP-MITCH\\Admin",
-          "pid": 7576,
-          "startTime": "2022-04-15T15:46:16.457Z",
-          "ppid": 4568,
-          "pstartTime": "2022-04-15T15:46:12.779Z",
-          "userSID": "S-1-5-21-979315260-1110968185-3366233752-1001",
-          "privilegeLevel": "MEDIUM",
-          "noGui": false,
-          "logonId": "0x91fa6"
-        },
-        "eventType": 2,
-        "data": {
-          "cmdLine": "C:\\Users\\Admin\\AppData\\Local\\Temp\\tryme.exe",
-          "cmdLineArgs": [
-            "C:\\Users\\Admin\\AppData\\Local\\Temp\\tryme.exe"
-          ],
-          "_t": "l"
-        },
-        "happenedAt_ts": 1650037577000
-      },
-      {
-        "id": "853282056220704769",
-        "category": "hive",
-        "localId": "853279134984439809",
-        "endpointId": "853260775773437952",
-        "receivedAt": "2022-04-15T15:58:15.417Z",
-        "happenedAt": "2022-04-15T15:46:38.940Z",
-        "relevance": 83,
+        "id": "1022070807062380545",
+        "category": "policies",
+        "localId": "1022070249601636353",
+        "endpointId": "876174682842202112",
+        "receivedAt": "2023-07-25T10:24:29.561Z",
+        "happenedAt": "2023-07-25T10:22:16.652Z",
+        "relevance": 88,
         "severity": "medium",
         "trigger": true,
         "manuallyAdded": false,
         "process": {
-          "id": "853260775773437952:4568:1650037572779",
-          "parentId": "853260775773437952:3960:1650033309123",
-          "endpointId": "853260775773437952",
+          "id": "876174682842202112:8944:1690280536643",
+          "parentId": "876174682842202112:4780:1690280518291",
+          "endpointId": "876174682842202112",
           "program": {
-            "path": "c:\\program files\\microsoft office\\root\\office16\\winword.exe",
-            "filename": "winword.exe",
-            "md5": "eb9b2b5179e1fd9c3e0d11c8191f1963",
-            "sha1": "c08b8a54593258f62f16e7a1045d4c40e39fb423",
-            "sha256": "7092f1ab2c59297fa1f6f70cf7c4de570c6e3babc2085fa69e1e5b9872792daf",
+            "path": "c:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe",
+            "filename": "powershell.exe",
+            "md5": "7353f60b1739074eb17c5f4dddefe239",
+            "sha1": "6cbce4a295c163791b60fc23d285e6d84f28ee4c",
+            "sha256": "de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c",
             "certInfo": {
-              "signer": "Microsoft Corporation",
-              "issuer": "Microsoft Code Signing PCA 2011",
+              "signer": "Microsoft Windows",
+              "issuer": "Microsoft Windows Production PCA 2011",
               "trusted": true,
               "expired": false
             },
-            "size": 1639800,
+            "size": 448000,
             "arch": "x64",
-            "fsName": "winword.exe"
+            "fsName": "powershell.exe"
           },
-          "user": "DESKTOP-MITCH\\Admin",
-          "pid": 4568,
-          "startTime": "2022-04-15T15:46:12.779Z",
-          "ppid": 3960,
-          "pstartTime": "2022-04-15T14:35:09.123Z",
-          "userSID": "S-1-5-21-979315260-1110968185-3366233752-1001",
-          "privilegeLevel": "MEDIUM",
+          "user": "NT AUTHORITY\\SYSTEM",
+          "pid": 8944,
+          "startTime": "2023-07-25T10:22:16.643Z",
+          "ppid": 4780,
+          "pstartTime": "2023-07-25T10:21:58.291Z",
+          "userSID": "S-1-5-18",
+          "privilegeLevel": "SYSTEM",
           "noGui": false,
-          "logonId": "0x91fa6"
+          "logonId": "0x3e7"
         },
-        "eventType": 31,
+        "eventType": 28,
         "data": {
-          "behaviourType": 1,
-          "_t": "l"
+          "matched": [
+            {
+              "policyId": "1020293408461160452",
+              "versionId": "1020293408461164549",
+              "policyTitle": "johns policy 2007",
+              "policyDescription": "test",
+              "scope": "global",
+              "groups": [],
+              "matcher": {
+                "id": "1020293408461168646",
+                "hash": "de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c",
+                "alg": 1,
+                "type": 2
+              }
+            }
+          ],
+          "_t": "r"
         },
-        "happenedAt_ts": 1650037598000
+        "happenedAt_ts": 1690280536000
       }
     ],
-    "totalEventCount": 166,
+    "totalEventCount": 6,
     "byTypeEventCount": [
       {
-        "type": 21,
-        "count": 59
-      },
-      {
-        "type": 65,
-        "count": 24
-      },
-      {
-        "type": 8,
-        "count": 23
-      },
-      {
-        "type": 11,
-        "count": 23
-      },
-      {
-        "type": 10,
-        "count": 16
-      },
-      {
-        "type": 57,
-        "count": 6
-      },
-      {
-        "type": 37,
-        "count": 5
-      },
-      {
-        "type": 38,
-        "count": 4
-      },
-      {
         "type": 2,
-        "count": 2
+        "count": 3
       },
       {
         "type": 3,
         "count": 1
       },
       {
-        "type": 5,
+        "type": 28,
         "count": 1
       },
       {
-        "type": 31,
-        "count": 1
-      },
-      {
-        "type": 62,
+        "type": 30,
         "count": 1
       }
     ],
-    "impact": 83,
+    "impact": 88,
     "severity": "medium",
-    "closed": false,
-    "activityState": "active",
-    "receivedAt": "2022-04-15T15:58:16.121Z",
-    "happenedAt": "2022-04-15T15:46:38.940Z",
+    "closed": true,
+    "closedAt": "2023-07-27T00:00:01.673Z",
+    "lastChangedAt": "2023-07-27T00:01:03.899Z",
+    "activityState": "archived",
+    "terminationReason": 1,
+    "receivedAt": "2023-07-25T10:24:29.491Z",
+    "happenedAt": "2023-07-25T10:22:16.669Z",
     "tags": [],
+    "notes": "\nIBM SOAR 25/07/2023 10:25:05\nNone\n\n[SOAR Case - 2825](https://9.30.229.231:443/#incidents/2825)\nIBM SOAR 25/07/2023 18:25:21\nNone\n\n[SOAR Case - 2151](https://9.30.211.113:443/#incidents/2151)\nIBM SOAR 25/07/2023 10:25:32\n\nIBM SOAR 25/07/2023 10:22:23\nNone\n\n[SOAR Case - 17384](https://169.44.147.200:443/#incidents/17384)\n\n[SOAR Case - 2828](https://9.30.229.231:443/#incidents/2828)\nIBM SOAR 27/07/2023 00:01:03\n\nIBM SOAR 25/07/2023 10:25:05\nNone\n\n[SOAR Case - 2825](https://9.30.229.231:443/#incidents/2825)\nIBM SOAR 25/07/2023 18:25:21\nNone\n\n[SOAR Case - 2151](https://9.30.211.113:443/#incidents/2151)\nIBM SOAR 25/07/2023 10:25:32\n\nIBM SOAR 25/07/2023 10:22:23\nNone\n\n[SOAR Case - 17384](https://169.44.147.200:443/#incidents/17384)\n\n[SOAR Case - 2828](https://9.30.229.231:443/#incidents/2828)\n\n[SOAR Case - 2943](https://9.30.24.113:443/#incidents/2943)",
     "endpointState": {
       "osType": 1,
       "cpuVendor": 1,
       "arch": 2,
-      "cpuDescr": "Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz",
+      "cpuDescr": "Intel(R) Xeon(R) Platinum 8260 CPU @ 2.40GHz",
       "kernel": "10.0",
-      "os": "Windows 10 Pro",
-      "hvStatus": 0,
-      "name": "DESKTOP-MITCH",
+      "os": "Windows Server 2019 Standard",
+      "hvStatus": 19,
+      "name": "ADDAL10-01",
+      "domain": "americas.cloudpaksecurity.com",
       "isolated": false,
-      "localAddr": "10.0.0.119",
+      "localAddr": "52.118.133.13",
       "macs": [
-        "00:50:56:13:a4:c6"
+        "06:c3:1d:18:2c:3a",
+        "06:d7:b5:4f:18:0e"
       ],
       "componentsVersions": [
         {
           "name": "keeper",
-          "version": "3.6.0",
-          "build": "19.1627291555548.commit"
+          "version": "3.10.1",
+          "build": "27.1668701555901.commit"
         },
         {
           "name": "probos",
@@ -255,43 +201,46 @@
         },
         {
           "name": "rqtsentry",
-          "version": "3.6.1",
-          "build": "119.1632119719010.commit"
+          "version": "3.10.0",
+          "build": "121.1666598992258.commit"
         },
         {
           "name": "rqtnetsentry",
-          "version": "3.6.0",
-          "build": "44.1627295520120.commit"
+          "version": "3.10.0",
+          "build": "45.1666597836648.commit"
         },
         {
           "name": "installer",
-          "version": "3.6.1",
+          "version": "3.10.1",
           "build": ""
         }
       ],
-      "endpointVersion": "3.6.1",
-      "tags": [],
+      "endpointVersion": "3.10.1",
+      "tags": [
+        "dc"
+      ],
       "groups": [
         {
-          "id": "847194699834851335",
-          "name": "Digital Sales",
-          "description": "Digital Sales Group"
+          "id": "839608851933167623",
+          "name": "Latin America",
+          "description": "Latin America Hive"
         }
       ]
     },
-    "alert_url": "https://rhiveam.techzone.ibm.com/alerts/853282059173494786"
+    "title": "Policy hit: johns policy 2007",
+    "alert_url": "https://rhiveam.techzone.ibm.com/alerts/1022070806768779266"
   },
   "raw": null,
   "inputs": {
-    "reaqta_alert_id": "853282059173494786",
+    "reaqta_alert_id": "1022070806768779266",
     "reaqta_hive": "rhiveam"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
-    "package_version": "1.0.0",
+    "package_version": "1.1.0",
     "host": "local",
-    "execution_time_ms": 8138,
-    "timestamp": "2022-04-15 11:59:06"
+    "execution_time_ms": 1786,
+    "timestamp": "2023-08-01 15:18:53"
   }
 }

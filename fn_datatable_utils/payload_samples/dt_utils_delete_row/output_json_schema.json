@@ -21,7 +21,10 @@
             "title": {},
             "message": {},
             "hints": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
             }
           }
         }
@@ -31,11 +34,11 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "incident_id": {
-          "type": "integer"
-        },
         "dt_utils_datatable_api_name": {
           "type": "string"
+        },
+        "incident_id": {
+          "type": "integer"
         },
         "dt_utils_row_id": {
           "type": "integer"
