@@ -755,44 +755,27 @@ results = {
 <p>
 
 ```python
-def mk_str(value, quotes='"'):
-  if value is None:
-    return "null"
-  else:
-    esc_value = value.replace('"', '\\"')
-    if quotes:
-      return '{0}{1}{0}'.format(quotes, esc_value)
-    else:
-      return esc_value
-
-payload = """{{ "ApplyTemplate": {},
-  "First_Name": {},
-  "Last_Name": {},
-  "Impact": {},
-  "Urgency": {},
-  "Service_Type": {},
-  "Status": {},
-  "Reported Source": {},
-  "Description": {},
-  "Assigned Support Organization": {},
-  "additional_data": {}
-}}""".format(mk_str(playbook.inputs.bmc_helix_template),
-  mk_str(playbook.inputs.bmc_helix_customer_first_name),
-  mk_str(playbook.inputs.bmc_helix_customer_last_name),
-  mk_str(playbook.inputs.bmc_helix_impact),
-  mk_str(playbook.inputs.bmc_helix_urgency),
-  mk_str(playbook.inputs.bmc_helix_incident_type),
-  mk_str(playbook.inputs.bmc_helix_status),
-  mk_str(playbook.inputs.bmc_helix_reported_source),
-  mk_str(playbook.inputs.bmc_helix_note),
-  mk_str(playbook.inputs.bmc_helix_support_group),
-  playbook.inputs.bmc_helix_additional_data.content if getattr(playbook.inputs, "bmc_helix_additional_data").content else "null"
-)
+payload = {
+  "First_Name": playbook.inputs.bmc_helix_customer_first_name,
+  "Last_Name": playbook.inputs.bmc_helix_customer_last_name,
+  "Impact": playbook.inputs.bmc_helix_impact,
+  "Urgency": playbook.inputs.bmc_helix_urgency,
+  "Service_Type": playbook.inputs.bmc_helix_incident_type,
+  "Status": playbook.inputs.bmc_helix_status,
+  "Reported Source": playbook.inputs.bmc_helix_reported_source,
+  "Assigned Support Organization": playbook.inputs.bmc_helix_support_group
+}
+if getattr(playbook.inputs, "bmc_helix_additional_data").content:
+  payload["additional_data"] = playbook.inputs.bmc_helix_additional_data.content
+if getattr(playbook.inputs, "bmc_helix_note"):
+  payload["Description"] = playbook.inputs.bmc_helix_note
+if getattr(playbook.inputs, "bmc_helix_template"):
+  payload["ApplyTemplate"] = playbook.inputs.bmc_helix_template
 
 # set inputs
 inputs.incident_id = incident.id
 inputs.helix_incident_name = incident.name
-inputs.helix_payload = payload
+inputs.helix_payload = str(payload)
 ```
 
 </p>
@@ -837,19 +820,19 @@ bmc_helix_incidents
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Assigned Support Organization | `bmc_helix_assigned_support_organization` | `text` | BMC Helix assigned support organization |
-| Assigned To | `bmc_helix_assigned_to` | `text` | BMC Helix user assigned to the incident |
-| Company | `bmc_helix_company` | `text` | BMC Helix Company assigned to the incident |
-| Created Date | `bmc_helix_created_date` | `datetimepicker` | Date BMC Heiix incident was created. |
-| Description | `bmc_helix_description` | `text` | Description of the incident |
-| Impact | `bmc_helix_impact` | `text` | BMC Helix impact status assigned to the incident |
-| Incident Number | `bmc_helix_incident_number` | `text` | BMC Helix incident number |
-| Organization | `bmc_helix_organization` | `text` | BMC Helix organization assigned to the incident |
-| Priority | `bmc_helix_priority` | `text` | BMC Helix priority status assigned to the incident |
-| Request ID | `bmc_helix_request_id` | `text` | Request ID of the BMC Helix form entry |
+| Assigned Support Organization | `helix_assigned_support_organization` | `text` | BMC Helix assigned support organization |
+| Assigned To | `helix_assigned_to` | `text` | BMC Helix user assigned to the incident |
+| Company | `helix_company` | `text` | BMC Helix Company assigned to the incident |
+| Created Date | `helix_created_date` | `datetimepicker` | Date BMC Heiix incident was created. |
+| Description | `helix_description` | `text` | Description of the incident |
+| Impact | `helix_impact` | `text` | BMC Helix impact status assigned to the incident |
+| Incident Number | `helix_incident_number` | `text` | BMC Helix incident number |
+| Organization | `helix_organization` | `text` | BMC Helix organization assigned to the incident |
+| Priority | `helix_priority` | `text` | BMC Helix priority status assigned to the incident |
+| Request ID | `helix_request_id` | `text` | Request ID of the BMC Helix form entry |
 | SOAR Task ID | `soar_task_id` | `text` | ID of the Task and its description |
-| Status | `bmc_helix_status` | `text` | Last status applied to the BMC Helix Incident |
-| Urgency | `bmc_helix_urgency` | `text` | BMC Helix urgency status assigned to the incident |
+| Status | `helix_status` | `text` | Last status applied to the BMC Helix Incident |
+| Urgency | `helix_urgency` | `text` | BMC Helix urgency status assigned to the incident |
 
 ---
 

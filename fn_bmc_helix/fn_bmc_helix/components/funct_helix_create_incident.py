@@ -2,7 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Function implementation"""
 
-from json import loads
+from ast import literal_eval
 from fn_bmc_helix.lib.helix.HelixAPIClient import HelixClient
 from fn_bmc_helix.lib.helix.HelixConstants import PACKAGE_NAME
 from resilient_lib import validate_fields, IntegrationError, clean_html
@@ -87,7 +87,7 @@ class FunctionComponent(AppFunctionComponent):
 
             # Get function inputs
             helix_payload = getattr(fn_inputs, "helix_payload", "{}")
-            helix_payload = loads(helix_payload)
+            helix_payload = literal_eval(helix_payload)
             helix_incident_name = getattr(fn_inputs, "helix_incident_name", "")
             # SOAR incident_id
             incident_id = getattr(fn_inputs, "incident_id")
@@ -95,8 +95,9 @@ class FunctionComponent(AppFunctionComponent):
             task_id = getattr(fn_inputs, "task_id", None)
 
             # Add in the additional data
-            addl_data = helix_payload.pop("additional_data")
-            addl_data and helix_payload.update(addl_data)
+            if helix_payload.get("additional_data"):
+                addl_data = helix_payload.pop("additional_data")
+                addl_data and helix_payload.update(addl_data)
 
             # Required metadata field to create a resource
             helix_payload["z1D_Action"] = "CREATE"

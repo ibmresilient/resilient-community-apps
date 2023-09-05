@@ -65,12 +65,11 @@ class TestHelixCreateIncident:
         "Reported Source": "Direct Input",
         "Service_Type": "User Service Restoration",
         "ApplyTemplate": "Email Issue",
-        "z1D_Action": "CREATE",
-        "additional_data": {}
+        "z1D_Action": "CREATE"
     }
 
     mock_inputs_1 = {
-        "helix_payload": json.dumps(content),
+        "helix_payload": str(content),
         "task_id": 1,
         "incident_id": 2
     }
