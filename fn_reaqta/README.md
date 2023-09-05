@@ -82,11 +82,11 @@ You can continue to use the rules/workflows. But migrating to playbooks provides
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**IBM SOAR app bidirectional synchronization and functions for ReaQta**
+**IBM SOAR app bidirectional synchronization and functions for QRadar EDR**
 
  ![screenshot: main](./doc/screenshots/main.png) 
 
-Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
+Bidirectional synchronization of QRadar EDR (formally known as ReaQta) Alerts to IBM SOAR.
 
   Additional functions exists to list and kill endpoint processes, isolate the endpoint and synchronize notes and close events.
 
@@ -98,12 +98,12 @@ Bidirectional synchronization of ReaQta Alerts to IBM SOAR.
   List the Key Features of the Integration
 -->
 * Sync alerts to SOAR cases via user defined filter criteria
-* Sync SOAR case notes to ReaQta
-* ReaQta alert closing closes the SOAR case and SOAR case closing closes the ReaQta alert
+* Sync SOAR case notes to QRadar EDR
+* QRadar EDR alert closing closes the SOAR case and SOAR case closing closes the QRadar EDR alert
 * Get running processes on a give endpoint
-* Download ReaQta endpoint process file to an attachment
-* Kill ReaQta endpoint processes
-* Isolate ReaQta endpoint
+* Download QRadar EDR endpoint process file to an attachment
+* Kill QRadar EDR endpoint processes
+* Isolate QRadar EDR endpoint
 * Create a new Alert or Blocking policy based on a file hash
 
 
@@ -180,7 +180,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-In order to make API calls to ReaQta, create an API Application, prodiving the endpoint group restrictions as appropiate. The API ID and secret will be copied into your app.config file
+In order to make API calls to QRadar EDR, create an API Application, prodiving the endpoint group restrictions as appropiate. The API ID and secret will be copied into your app.config file
 
 ![screenshot: custom_layouts](./doc/screenshots/reaqta_configuration.png)
 
@@ -213,7 +213,7 @@ For each hive, use the section definition below
 | **soar_close_case_template** | No | `/path/to/template.jina` | *Override template used to close a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
 | **https_proxy** | No | `https://xxx/` | *Proxy URL for HTTPS connections* |
 | **http_proxy** | No | `http://xxx/` | *Proxy URL for HTTP connections* |
-| **timeout** | No | `60` | *Seconds to wait for APIs calls back to ReaQta. Default is 30* |
+| **timeout** | No | `60` | *Seconds to wait for APIs calls back to QRadar EDR. Default is 30* |
 | **polling_hives** | Yes | hive_label1, hive_label2 | *Comma separated list of hives to poll.* |
 | **policy_hives** | Yes |  hive_label1, hive_label2 | *Comma separated list of hives to set a policy if not specified from the SOAR function call* |
 
