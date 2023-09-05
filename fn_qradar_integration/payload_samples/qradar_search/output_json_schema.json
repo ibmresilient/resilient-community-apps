@@ -3,7 +3,27 @@
   "type": "object",
   "properties": {
     "events": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "StartTime": {
+            "type": "string"
+          },
+          "categoryname_category": {
+            "type": "string"
+          },
+          "logsourcename_logsourceid": {
+            "type": "string"
+          },
+          "protocolname_protocolid": {
+            "type": "string"
+          },
+          "rulename_creeventlist": {
+            "type": "string"
+          }
+        }
+      }
     },
     "inputs": {
       "type": "object",
