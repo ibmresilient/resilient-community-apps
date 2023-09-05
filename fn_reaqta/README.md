@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# ReaQta <!-- omit in toc -->
+#  QRadar EDR <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 - [History](#history)
@@ -35,8 +35,6 @@
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
-    - [\[fn\_reaqta\]](#fn_reaqta)
-    - [\[fn\_reaqta:hive\_label\]](#fn_reaqtahive_label)
   - [Custom Layouts](#custom-layouts)
 - [Poller Considerations](#poller-considerations)
 - [Function - ReaQta Get Endpoint Status](#function---reaqta-get-endpoint-status)
@@ -51,16 +49,9 @@
 - [Function - ReaQta: Deisolate Machine](#function---reaqta-deisolate-machine)
 - [Function - ReaQta: Kill Process](#function---reaqta-kill-process)
 - [Data Table - ReaQta Process List](#data-table---reaqta-process-list)
-    - [API Name:](#api-name)
-    - [Columns:](#columns)
 - [Data Table - ReaQta Trigger Events](#data-table---reaqta-trigger-events)
-    - [API Name:](#api-name-1)
-    - [Columns:](#columns-1)
-- [Custom Fields](#custom-fields)
 - [Playbooks](#playbooks)
 - [Templates for SOAR Cases](#templates-for-soar-cases)
-  - [soar\_create\_case\_template.jinja](#soar_create_case_templatejinja)
-  - [soar\_close\_case\_template.jinja](#soar_close_case_templatejinja)
 - [Troubleshooting \& Support](#troubleshooting--support)
   - [For Support](#for-support)
 
@@ -71,13 +62,13 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 03/2022 | Initial Release | 
 | 1.1.0 | 08/2023 | Convert Rules and Workflows to Playbooks |
-| 1.2.0 | 09/2023 | Added support to deisolate a previously isolated endpoint |
+| 1.2.0 | 09/2023 | Added support to deisolate a previously isolated endpoint and renamed application to  QRadar EDR |
 
 ## Release Notes
 
 ### 1.2.0 <!-- omit in toc -->
 
-In v1.2.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+In v1.2.0, the applications name has been updated to  QRadar EDR and the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
 If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
 
@@ -210,7 +201,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 
-#### [fn_reaqta]
+#### [fn_reaqta] <!-- omit in toc -->
 This section defines the global settings, including the poller configuration.
 For each hive, use the section definition below
 
@@ -226,7 +217,7 @@ For each hive, use the section definition below
 | **polling_hives** | Yes | hive_label1, hive_label2 | *Comma separated list of hives to poll.* |
 | **policy_hives** | Yes |  hive_label1, hive_label2 | *Comma separated list of hives to set a policy if not specified from the SOAR function call* |
 
-#### [fn_reaqta:hive_label]
+#### [fn_reaqta:hive_label] <!-- omit in toc -->
 Repeat this section for each ReaQta hive. Add the `hive_label` used in the `polling_hives` parameter above.
 
 | Config | Required | Example | Description |
@@ -5055,10 +5046,10 @@ None
 
  ![screenshot: dt-reaqta-process-list](./doc/screenshots/dt-reaqta-process-list.png)
 
-#### API Name:
+#### API Name: <!-- omit in toc -->
 reaqta_process_list
 
-#### Columns:
+#### Columns: <!-- omit in toc -->
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
 | PID | `pid` | `number` | - |
@@ -5077,10 +5068,10 @@ reaqta_process_list
 
  ![screenshot: dt-reaqta-trigger-events](./doc/screenshots/dt-reaqta-trigger-events.png) 
 
-#### API Name:
+#### API Name: <!-- omit in toc -->
 reaqta_trigger_events
 
-#### Columns:
+#### Columns: <!-- omit in toc -->
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
 | Category | `category` | `text` | - |
@@ -5098,7 +5089,7 @@ reaqta_trigger_events
 
 ---
 
-## Custom Fields
+## Custom Fields <!-- omit in toc -->
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
 | ReaQta Alert Link | `reaqta_alert_link` | `textarea` | `properties` | - | Link back to the Alert for further review |
@@ -5139,7 +5130,7 @@ reaqta_trigger_events
 It may necessary to modify the templates used to create or close SOAR cases based on a customer's required custom fields. Below are the default templates used which can be copied, modified and used with app_config's
 `soar_create_case_template` and `soar_close_case_template` settings to override the default templates.
 
-### soar_create_case_template.jinja
+### soar_create_case_template.jinja <!-- omit in toc -->
 When overriding the template in App Host, specify the file path as `/var/rescircuits`.
 ```
 {
@@ -5200,7 +5191,7 @@ When overriding the template in App Host, specify the file path as `/var/rescirc
 }
 ```
 
-### soar_close_case_template.jinja
+### soar_close_case_template.jinja <!-- omit in toc -->
 When overriding the template in App Host, specify the file path as `/var/rescircuits`.
 ```
 {
