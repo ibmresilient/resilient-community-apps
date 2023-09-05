@@ -49,7 +49,7 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 02/2023 | Initial Release |
 | 1.0.1 | 3/2023 | Add a timeout option for Linux shell command |
-
+| 1.0.2 | 9/2023 | Added missing OS packages: dig, whois, traceroute |
 ---
 
 ## Overview
