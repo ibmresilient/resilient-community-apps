@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-#  QRadar EDR <!-- omit in toc -->
+#  QRadar EDR (formally IBM ReaQta) <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 - [History](#history)
