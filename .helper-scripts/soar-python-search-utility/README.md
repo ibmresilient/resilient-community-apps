@@ -9,14 +9,13 @@ One script is provided:
 
 
 ### Initialization
-* Create a Python 3 virtual environment
-* source <path to your Python3 virtual environment>>/bin/activate
-* pip3 install resilient
+Only perform the first 2 steps if a Python virtual environment fits your need
+* (Only as needed) Create a Python 3 virtual environment
+* (Only as needed) source <path to your Python3 virtual environment>>/bin/activate
+* pip3 install resilient requests getpass
 
 ## soar-python2-search.py
-This script is used to copy all container images from the IBM official registry, quay.io,
-to a customer's private registry. It uses local container tools such as `docker` or `podman` to 
-pull containers down from quay.io and then push them to the private registry.
+This script reports on any use of Python2 within SOAR-based scripts, workflows, and playbooks
 
 ### Usage
 python3 soar-python2-search.py https://[host] [org] [API key ID]  

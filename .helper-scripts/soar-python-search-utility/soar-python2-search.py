@@ -2,7 +2,7 @@
 objective: this is a user-prompted tool to query scripts, workflows and playbooks to detect python2
 pre-requisites:
     - python v3.6+ with the following python packages installed: resilient, requests, getpass
-    - API key will permissions to read scripts, workflows and playbooks
+    - API key with permissions to read scripts, workflows and playbooks
 usage:
     - python <name of this file>.py "https://<host>" "<org>" "<API key ID>"
 
