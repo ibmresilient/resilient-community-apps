@@ -582,3 +582,53 @@ class AzureClient(object):
         header = self.header
         header["Content-Type"] = 'application/json'
         return self.rc.execute("PATCH", url, json=payload, headers=header).json()
+
+    def get_node_report(self, node_id: str, report_id: str):
+        """
+        Retrieve the Dsc node report data by node id and report id.
+        :param node_id: The Dsc node id.
+        :type node_id: str
+        :param report_id: The report id.
+        :type report_id: str
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/nodes/{node_id}/reports/{report_id}?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("GET", url, headers=header).json()
+
+    def list_node_report_by_node(self, node_id: str):
+        """
+        Retrieve the Dsc node report list by node id.
+        :param node_id: The Dsc node id.
+        :type node_id: str
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/nodes/{node_id}/reports?api-version=2019-06-01"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("GET", url, headers=header).json()
+
+    def list_statistics_by_automation_account(self):
+        """
+        Retrieve the statistics for the account.
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/statistics?api-version=2021-06-22"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("GET", url, headers=header).json()
+
+    def list_usage_by_automation_account(self):
+        """
+        Retrieve the usage for the account id.
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/usages?api-version=2021-06-22"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("GET", url, headers=header).json()

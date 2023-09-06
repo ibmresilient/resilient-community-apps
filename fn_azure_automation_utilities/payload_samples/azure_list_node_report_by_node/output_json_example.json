@@ -1,0 +1,62 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "value": [
+      {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/nodes/24939717-e819-4059-aa08-82862c65f3c8/reports/3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+        "reportId": "3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+        "type": "Consistency",
+        "startTime": "2023-09-06T13:30:01.9451859+00:00",
+        "endTime": "2023-09-06T13:30:02.1606975+00:00",
+        "lastModifiedTime": "2023-09-06T13:30:02.2533333+00:00",
+        "status": "Compliant",
+        "configurationVersion": "2.0.0",
+        "rebootRequested": null,
+        "refreshMode": null,
+        "reportFormatVersion": "2.0"
+      },
+      {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/nodes/24939717-e819-4059-aa08-82862c65f3c8/reports/73335fdb-bf2b-4e91-9409-0766b7533424",
+        "reportId": "73335fdb-bf2b-4e91-9409-0766b7533424",
+        "type": "Consistency",
+        "startTime": "2023-09-06T13:00:01.3984203+00:00",
+        "endTime": "2023-09-06T13:00:01.591596+00:00",
+        "lastModifiedTime": "2023-09-06T13:00:01.7+00:00",
+        "status": "Compliant",
+        "configurationVersion": "2.0.0",
+        "rebootRequested": null,
+        "refreshMode": null,
+        "reportFormatVersion": "2.0"
+      },
+      {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/nodes/24939717-e819-4059-aa08-82862c65f3c8/reports/c9152779-51af-4cc6-8d3e-d09089280beb",
+        "reportId": "c9152779-51af-4cc6-8d3e-d09089280beb",
+        "type": "Consistency",
+        "startTime": "2023-09-06T12:30:01.4923996+00:00",
+        "endTime": "2023-09-06T12:30:02.066503+00:00",
+        "lastModifiedTime": "2023-09-06T12:30:02.17+00:00",
+        "status": "Compliant",
+        "configurationVersion": "2.0.0",
+        "rebootRequested": null,
+        "refreshMode": null,
+        "reportFormatVersion": "2.0"
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "account_name": "automation1",
+    "resource_group_name": "DemoAssets",
+    "node_id": "24939717-e819-4059-aa08-82862c65f3c8"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-azure-automation-utilities",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 837,
+    "timestamp": "2023-09-06 09:56:43"
+  }
+}

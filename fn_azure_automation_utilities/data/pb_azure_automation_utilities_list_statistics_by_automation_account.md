@@ -4,10 +4,10 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: List Runbooks by Automation Account - Example (PB)
+# Playbook - Azure Automation Utilities: List Statistics by Automation Account - Example (PB)
 
 ### API Name
-`azure_automation_utilities_list_runbooks_by_automation_account`
+`azure_automation_utilities_list_statistics_by_automation_account`
 
 ### Status
 `enabled`
@@ -21,24 +21,24 @@
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
-| Azure resource group | `azure_resource_group` | text | The Azure resource group the account is in | Always |
+| Account name | `azure_automation_account_name` | text | azure_automation_account_name | Always |
+| Resource Group Name | `azure_automation_resource_group_name` | text | Azure automation resource group name | Always |
 
 ### Object Type
 `incident`
 
 ### Description
-Retrieve a list of runbooks on the given automation account.
+Retrieve the statistics for the account.
 
 
 ---
-## Function - Azure List Runbooks by Automation Account
+## Function - Azure List Statistics by Automation Account
 
 ### API Name
-`azure_list_runbooks_by_automation_account`
+`azure_list_statistics_by_automation_account`
 
 ### Output Name
-`runbooks_result`
+`statistics`
 
 ### Message Destination
 `fn_azure_automation_utilities`
@@ -46,7 +46,7 @@ Retrieve a list of runbooks on the given automation account.
 ### Function-Input Script
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_resource_group
+inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
 ```
 
 ---
@@ -65,7 +65,8 @@ inputs.resource_group_name = playbook.inputs.azure_resource_group
 ### Script Content
 ```python
 from json import dumps
-results = playbook.functions.results.runbooks_result
+results = playbook.functions.results.statistics
+
 if results.get("success"):
   incident.addNote(dumps(results.get("content", {}), indent=4))
 ```

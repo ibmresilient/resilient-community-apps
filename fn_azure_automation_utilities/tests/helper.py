@@ -924,6 +924,151 @@ def update_automation_schedule_results():
         }
     }
 
+def get_node_report_results():
+    return {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/nodes/24939717-e819-4059-aa08-82862c65f3c8/reports/3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+        "reportId": "3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+        "type": "Consistency",
+        "startTime": "2023-09-06T13:30:01.9451859+00:00",
+        "endTime": "2023-09-06T13:30:02.1606975+00:00",
+        "lastModifiedTime": "2023-09-06T13:30:02.2533333+00:00",
+        "status": "Compliant",
+        "refreshMode": None,
+        "rebootRequested": None,
+        "reportFormatVersion": "2.0",
+        "configurationVersion": "2.0.0",
+        "errors": [],
+        "resources": [],
+        "metaConfiguration": None,
+        "hostName": None,
+        "iPV4Addresses": [],
+        "iPV6Addresses": [],
+        "numberOfResources": 0,
+        "rawErrors": None
+    }
+
+def list_node_report_by_node_results():
+    return {
+        "value": [
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/nodes/24939717-e819-4059-aa08-82862c65f3c8/reports/3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+                "reportId": "3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+                "type": "Consistency",
+                "startTime": "2023-09-06T13:30:01.9451859+00:00",
+                "endTime": "2023-09-06T13:30:02.1606975+00:00",
+                "lastModifiedTime": "2023-09-06T13:30:02.2533333+00:00",
+                "status": "Compliant",
+                "configurationVersion": "2.0.0",
+                "rebootRequested": None,
+                "refreshMode": None,
+                "reportFormatVersion": "2.0"
+            },
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/nodes/24939717-e819-4059-aa08-82862c65f3c8/reports/73335fdb-bf2b-4e91-9409-0766b7533424",
+                "reportId": "73335fdb-bf2b-4e91-9409-0766b7533424",
+                "type": "Consistency",
+                "startTime": "2023-09-06T13:00:01.3984203+00:00",
+                "endTime": "2023-09-06T13:00:01.591596+00:00",
+                "lastModifiedTime": "2023-09-06T13:00:01.7+00:00",
+                "status": "Compliant",
+                "configurationVersion": "2.0.0",
+                "rebootRequested": None,
+                "refreshMode": None,
+                "reportFormatVersion": "2.0"
+            },
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/nodes/24939717-e819-4059-aa08-82862c65f3c8/reports/c9152779-51af-4cc6-8d3e-d09089280beb",
+                "reportId": "c9152779-51af-4cc6-8d3e-d09089280beb",
+                "type": "Consistency",
+                "startTime": "2023-09-06T12:30:01.4923996+00:00",
+                "endTime": "2023-09-06T12:30:02.066503+00:00",
+                "lastModifiedTime": "2023-09-06T12:30:02.17+00:00",
+                "status": "Compliant",
+                "configurationVersion": "2.0.0",
+                "rebootRequested": None,
+                "refreshMode": None,
+                "reportFormatVersion": "2.0"
+            }
+        ]
+    }
+
+def list_statistics_by_automation_account_results():
+    return {
+        "value": [
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/statistics/New",
+                "counterProperty": "New",
+                "counterValue": 0,
+                "startTime": "2023-08-30T13:58:01.5985342+00:00",
+                "endTime": "2023-09-06T13:58:01.5985342+00:00"
+            },
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/statistics/Activating",
+                "counterProperty": "Activating",
+                "counterValue": 0,
+                "startTime": "2023-08-30T13:58:01.5985342+00:00",
+                "endTime": "2023-09-06T13:58:01.5985342+00:00"
+            },
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/statistics/Running",
+                "counterProperty": "Running",
+                "counterValue": 0,
+                "startTime": "2023-08-30T13:58:01.5985342+00:00",
+                "endTime": "2023-09-06T13:58:01.5985342+00:00"
+            },
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/statistics/Completed",
+                "counterProperty": "Completed",
+                "counterValue": 0,
+                "startTime": "2023-08-30T13:58:01.5985342+00:00",
+                "endTime": "2023-09-06T13:58:01.5985342+00:00"
+            },
+            {
+                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/statistics/Failed",
+                "counterProperty": "Failed",
+                "counterValue": 0,
+                "startTime": "2023-08-30T13:58:01.5985342+00:00",
+                "endTime": "2023-09-06T13:58:01.5985342+00:00"
+            }
+        ]
+    }
+
+def list_usage_by_automation_account_results():
+    return {
+        "value": [
+            {
+                "name": {
+                "value": "AccountUsage",
+                "localizedValue": "AccountUsage"
+                },
+                "unit": "Minute",
+                "currentValue": 0.0,
+                "limit": -1,
+                "throttleStatus": "NotThrottled"
+            },
+            {
+                "name": {
+                "value": "SubscriptionUsage",
+                "localizedValue": "SubscriptionUsage"
+                },
+                "unit": "Minute",
+                "currentValue": 0.0,
+                "limit": -1,
+                "throttleStatus": "NotThrottled"
+            },
+            {
+                "name": {
+                "value": "DscAccountUsage",
+                "localizedValue": "DscAccountUsage"
+                },
+                "unit": "Count",
+                "currentValue": 0.0,
+                "limit": -1,
+                "throttleStatus": "NotThrottled"
+            }
+        ]
+    }
+
 def mock_init():
     class MockClient(object):
         """ Add Mock connection data """

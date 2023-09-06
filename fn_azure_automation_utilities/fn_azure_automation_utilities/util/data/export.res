@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1692901456030,
+  "export_date": 1694008002272,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -210,6 +210,66 @@
       "tooltip": "The name of the Azure automation module.",
       "type_id": 11,
       "uuid": "d69adcd1-f315-44ad-a1de-c562a7832a2f",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/node_id",
+      "hide_notification": false,
+      "id": 5414,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "node_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "node_id",
+      "tooltip": "Azure Automation Dsc node ID",
+      "type_id": 11,
+      "uuid": "f4855092-76d0-4ef1-9a43-d598c517f065",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/report_id",
+      "hide_notification": false,
+      "id": 5415,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "report_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "report_id",
+      "tooltip": "Azure Automation Dsc node report ID",
+      "type_id": 11,
+      "uuid": "2ce47e6f-ae74-4b65-8482-62f1e45af7e9",
       "values": []
     },
     {
@@ -1067,6 +1127,63 @@
       "workflows": []
     },
     {
+      "created_date": 1694003060077,
+      "description": {
+        "content": "Retrieve the Dsc node report data by node id and report id.",
+        "format": "text"
+      },
+      "destination_handle": "fn_azure_automation_utilities",
+      "display_name": "Azure Get Node Report",
+      "export_key": "azure_get_node_report",
+      "id": 208,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1694003766567,
+      "name": "azure_get_node_report",
+      "tags": [],
+      "uuid": "b6be2eb3-dc2a-44d6-9e8c-eeda1ee4fb8e",
+      "version": 3,
+      "view_items": [
+        {
+          "content": "51ef78a6-b822-45fd-b0fb-278212456763",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "4632537d-f6b3-437e-b8df-adb8ceef6e52",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "f4855092-76d0-4ef1-9a43-d598c517f065",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "2ce47e6f-ae74-4b65-8482-62f1e45af7e9",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
       "created_date": 1692037451853,
       "description": {
         "content": "Retrieve the runbook identified by runbook name.",
@@ -1345,6 +1462,55 @@
       "workflows": []
     },
     {
+      "created_date": 1694003288743,
+      "description": {
+        "content": "Retrieve the Dsc node report list by node id.",
+        "format": "text"
+      },
+      "destination_handle": "fn_azure_automation_utilities",
+      "display_name": "Azure List Node Report By Node",
+      "export_key": "azure_list_node_report_by_node",
+      "id": 209,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1694003288769,
+      "name": "azure_list_node_report_by_node",
+      "tags": [],
+      "uuid": "42ac0ca9-417e-40ac-bba7-bbdb7e48d98d",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "51ef78a6-b822-45fd-b0fb-278212456763",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "4632537d-f6b3-437e-b8df-adb8ceef6e52",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "f4855092-76d0-4ef1-9a43-d598c517f065",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
       "created_date": 1692206964460,
       "description": {
         "content": "Retrieve a list of runbooks on the given automation account.",
@@ -1364,6 +1530,88 @@
       "name": "azure_list_runbooks_by_automation_account",
       "tags": [],
       "uuid": "9eb7af47-513e-4ef4-8057-a1dae0462e85",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "51ef78a6-b822-45fd-b0fb-278212456763",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "4632537d-f6b3-437e-b8df-adb8ceef6e52",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
+      "created_date": 1694003461428,
+      "description": {
+        "content": "Retrieve the statistics for the account.",
+        "format": "text"
+      },
+      "destination_handle": "fn_azure_automation_utilities",
+      "display_name": "Azure List Statistics by Automation Account",
+      "export_key": "azure_list_statistics_by_automation_account",
+      "id": 210,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1694003461453,
+      "name": "azure_list_statistics_by_automation_account",
+      "tags": [],
+      "uuid": "1050bf6c-ff35-4572-b089-4c8039da9f4d",
+      "version": 1,
+      "view_items": [
+        {
+          "content": "51ef78a6-b822-45fd-b0fb-278212456763",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "4632537d-f6b3-437e-b8df-adb8ceef6e52",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
+      "created_date": 1694003914179,
+      "description": {
+        "content": "Retrieve the usage for the account id.",
+        "format": "text"
+      },
+      "destination_handle": "fn_azure_automation_utilities",
+      "display_name": "Azure List Usage by Automation Account",
+      "export_key": "azure_list_usage_by_automation_account",
+      "id": 211,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1694003914205,
+      "name": "azure_list_usage_by_automation_account",
+      "tags": [],
+      "uuid": "e83fc01c-0f97-4664-84d9-e61ca3fc2ada",
       "version": 1,
       "view_items": [
         {
@@ -1747,13 +1995,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 62,
+  "id": 82,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1692901454144,
+      "create_date": 1694008000265,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1762,7 +2010,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1692901454144,
+      "update_date": 1694008000265,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -5677,6 +5925,258 @@
     {
       "activation_type": "manual",
       "content": {
+        "content_version": 7,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d\" isExecutable=\"true\" name=\"playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_10b5prx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Azure Get Node Report\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b6be2eb3-dc2a-44d6-9e8c-eeda1ee4fb8e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.account_name = playbook.inputs.azure_automation_account_name\\ninputs.node_id = playbook.inputs.azure_automation_node_id\\ninputs.report_id = playbook.inputs.azure_automation_report_id\\ninputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"node_report\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10b5prx\u003c/incoming\u003e\u003coutgoing\u003eFlow_0igv7ig\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_10b5prx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7f214c64-e0ce-4524-a5b2-87ced5f8282b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0igv7ig\u003c/incoming\u003e\u003coutgoing\u003eFlow_0b4tsjz\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0igv7ig\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0b4tsjz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0b4tsjz\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b4tsjz\" id=\"Flow_0b4tsjz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0igv7ig\" id=\"Flow_0igv7ig_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10b5prx\" id=\"Flow_10b5prx_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1694006826961,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d",
+      "description": {
+        "content": "Retrieve the Dsc node report data by node id and report id.",
+        "format": "text"
+      },
+      "display_name": "Azure Automation Utilities: Get Node Report - Example (PB)",
+      "export_key": "azure_automation_utilities_get_node_report",
+      "field_type_handle": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Azure Automation Utilities: Get Node Report",
+        "export_key": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d",
+        "fields": {
+          "azure_automation_account_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d/azure_automation_account_name",
+            "hide_notification": false,
+            "id": 5416,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "azure_automation_account_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Account name",
+            "tooltip": "Azure automation account name",
+            "type_id": 1216,
+            "uuid": "02096aeb-e240-4b07-8a16-a0bcb85249d1",
+            "values": []
+          },
+          "azure_automation_node_id": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d/azure_automation_node_id",
+            "hide_notification": false,
+            "id": 5417,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "azure_automation_node_id",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Node ID",
+            "tooltip": "Azure Automation Dsc node ID",
+            "type_id": 1216,
+            "uuid": "643560ca-a685-42fd-a1c0-541d86bfb887",
+            "values": []
+          },
+          "azure_automation_report_id": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d/azure_automation_report_id",
+            "hide_notification": false,
+            "id": 5418,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "azure_automation_report_id",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Report ID",
+            "tooltip": "Dsc node report ID",
+            "type_id": 1216,
+            "uuid": "58a0ede8-1133-4191-bec0-9ce74793291a",
+            "values": []
+          },
+          "azure_automation_resource_group_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d/azure_automation_resource_group_name",
+            "hide_notification": false,
+            "id": 5419,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "azure_automation_resource_group_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Resource Group Name",
+            "tooltip": "Azure automation resource group name",
+            "type_id": 1216,
+            "uuid": "2cc47469-278d-4884-9663-aa58aa907b8b",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d",
+        "uuid": "860636e9-37d4-4d6b-8de1-ba101423ded3"
+      },
+      "has_logical_errors": false,
+      "id": 179,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1694007844078,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1694007151381,
+          "description": "",
+          "enabled": false,
+          "export_key": "post process",
+          "id": 205,
+          "language": "python3",
+          "last_modified_by": "g@example.com",
+          "last_modified_time": 1694007151402,
+          "name": "post process",
+          "object_type": "incident",
+          "playbook_handle": "azure_automation_utilities_get_node_report",
+          "programmatic_name": "azure_automation_utilities_get_node_report_post_process",
+          "script_text": "from json import dumps\nresults = playbook.functions.results.node_report\n\nif results.get(\"success\"):\n  incident.addNote(dumps(results.get(\"content\", {}), indent=4))",
+          "tags": [],
+          "uuid": "7f214c64-e0ce-4524-a5b2-87ced5f8282b"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "02096aeb-e240-4b07-8a16-a0bcb85249d1",
+            "element": "field_uuid",
+            "field_type": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "2cc47469-278d-4884-9663-aa58aa907b8b",
+            "element": "field_uuid",
+            "field_type": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "58a0ede8-1133-4191-bec0-9ce74793291a",
+            "element": "field_uuid",
+            "field_type": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "643560ca-a685-42fd-a1c0-541d86bfb887",
+            "element": "field_uuid",
+            "field_type": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "azure_automation_utilities_get_node_report",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_d2805bb1-0b2c-402c-b13e-0a4b9c8c053d",
+        "id": 182,
+        "name": "playbook_d2805bb1_0b2c_402c_b13e_0a4b9c8c053d",
+        "type": "playbook",
+        "uuid": "7c705418-8f24-4ade-b7aa-6b47a0063b9b"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "d2805bb1-0b2c-402c-b13e-0a4b9c8c053d",
+      "version": 12
+    },
+    {
+      "activation_type": "manual",
+      "content": {
         "content_version": 8,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_4829f208_33ee_4384_940a_515f8589c14d\" isExecutable=\"true\" name=\"playbook_4829f208_33ee_4384_940a_515f8589c14d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_16q7pop\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Azure Get Runbook\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92b783e3-9338-4599-be20-8547670c4f67\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.account_name = playbook.inputs.azure_automation_account_name\\ninputs.resource_group_name = playbook.inputs.azure_resource_group\\ninputs.runbook_name = playbook.inputs.azure_automation_runbook_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"runbook_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_16q7pop\u003c/incoming\u003e\u003coutgoing\u003eFlow_1095mgo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_16q7pop\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7d1e280d-9064-4a4a-9920-f688959a9240\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1095mgo\u003c/incoming\u003e\u003coutgoing\u003eFlow_03dyu29\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1095mgo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_03dyu29\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_03dyu29\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_4829f208_33ee_4384_940a_515f8589c14d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03dyu29\" id=\"Flow_03dyu29_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1095mgo\" id=\"Flow_1095mgo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16q7pop\" id=\"Flow_16q7pop_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
@@ -6869,6 +7369,220 @@
     {
       "activation_type": "manual",
       "content": {
+        "content_version": 6,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c\" isExecutable=\"true\" name=\"playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_147e4ai\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Azure List Node Report By Node\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"42ac0ca9-417e-40ac-bba7-bbdb7e48d98d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.account_name = playbook.inputs.azure_automation_account_name\\ninputs.node_id = playbook.inputs.azure_automation_node_id\\ninputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"node_reports\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_147e4ai\u003c/incoming\u003e\u003coutgoing\u003eFlow_0y4savy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_147e4ai\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"99bd9ed0-ae45-4dca-8ee6-2de9272eabc1\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0y4savy\u003c/incoming\u003e\u003coutgoing\u003eFlow_17hxop7\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0y4savy\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_17hxop7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_17hxop7\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17hxop7\" id=\"Flow_17hxop7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0y4savy\" id=\"Flow_0y4savy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_147e4ai\" id=\"Flow_147e4ai_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1694007239071,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c",
+      "description": {
+        "content": "Retrieve the Dsc node report list by node id.",
+        "format": "text"
+      },
+      "display_name": "Azure Automation Utilities: List Node Report by Node - Example (PB)",
+      "export_key": "azure_automation_utilities_list_node_report_by_node",
+      "field_type_handle": "playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Azure Automation Utilities: List Node Report by Node",
+        "export_key": "playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c",
+        "fields": {
+          "azure_automation_account_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c/azure_automation_account_name",
+            "hide_notification": false,
+            "id": 5420,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "azure_automation_account_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Account name",
+            "tooltip": "Azure automation account name",
+            "type_id": 1217,
+            "uuid": "3029f562-17ea-4f07-adb7-59a2f6778b01",
+            "values": []
+          },
+          "azure_automation_node_id": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c/azure_automation_node_id",
+            "hide_notification": false,
+            "id": 5421,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "azure_automation_node_id",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Node ID",
+            "tooltip": "Azure Automation Dsc node ID",
+            "type_id": 1217,
+            "uuid": "02d38058-8468-4335-a61d-999cd165ed6b",
+            "values": []
+          },
+          "azure_automation_resource_group_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c/azure_automation_resource_group_name",
+            "hide_notification": false,
+            "id": 5422,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "azure_automation_resource_group_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Resource Group Name",
+            "tooltip": "Azure automation resource group name",
+            "type_id": 1217,
+            "uuid": "4bc21d57-41eb-4530-9dc8-0f5fdec9dadf",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c",
+        "uuid": "faa8b032-0563-4c82-9b55-2cfccfa250cd"
+      },
+      "has_logical_errors": false,
+      "id": 180,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1694007871602,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1694007407465,
+          "description": "",
+          "enabled": false,
+          "export_key": "post process",
+          "id": 206,
+          "language": "python3",
+          "last_modified_by": "g@example.com",
+          "last_modified_time": 1694007407477,
+          "name": "post process",
+          "object_type": "incident",
+          "playbook_handle": "azure_automation_utilities_list_node_report_by_node",
+          "programmatic_name": "azure_automation_utilities_list_node_report_by_node_post_process",
+          "script_text": "from json import dumps\nresults = playbook.functions.results.node_reports\n\nif results.get(\"success\"):\n  incident.addNote(dumps(results.get(\"content\", {}), indent=4))",
+          "tags": [],
+          "uuid": "99bd9ed0-ae45-4dca-8ee6-2de9272eabc1"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "3029f562-17ea-4f07-adb7-59a2f6778b01",
+            "element": "field_uuid",
+            "field_type": "playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "4bc21d57-41eb-4530-9dc8-0f5fdec9dadf",
+            "element": "field_uuid",
+            "field_type": "playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "02d38058-8468-4335-a61d-999cd165ed6b",
+            "element": "field_uuid",
+            "field_type": "playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "azure_automation_utilities_list_node_report_by_node",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_1b40a24d-86ed-43be-a8c0-2acd9f4e108c",
+        "id": 183,
+        "name": "playbook_1b40a24d_86ed_43be_a8c0_2acd9f4e108c",
+        "type": "playbook",
+        "uuid": "a5986160-c4de-4cd0-ad03-f60dcc6d43fa"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "1b40a24d-86ed-43be-a8c0-2acd9f4e108c",
+      "version": 11
+    },
+    {
+      "activation_type": "manual",
+      "content": {
         "content_version": 9,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_94faaa52_f1c6_4136_9599_bf096b20dce6\" isExecutable=\"true\" name=\"playbook_94faaa52_f1c6_4136_9599_bf096b20dce6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_10soj0n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Azure List Runbooks by Automation Account\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9eb7af47-513e-4ef4-8057-a1dae0462e85\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.account_name = playbook.inputs.azure_automation_account_name\\ninputs.resource_group_name = playbook.inputs.azure_resource_group\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"runbooks_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10soj0n\u003c/incoming\u003e\u003coutgoing\u003eFlow_0cfi98d\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_10soj0n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d763e9ee-d2aa-4d98-a22a-5ad53737e51d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0cfi98d\u003c/incoming\u003e\u003coutgoing\u003eFlow_02o5cne\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0cfi98d\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_02o5cne\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_02o5cne\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_94faaa52_f1c6_4136_9599_bf096b20dce6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10soj0n\" id=\"Flow_10soj0n_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0cfi98d\" id=\"Flow_0cfi98d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_02o5cne\" id=\"Flow_02o5cne_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
@@ -7041,6 +7755,358 @@
       "type": "default",
       "uuid": "94faaa52-f1c6-4136-9599-bf096b20dce6",
       "version": 14
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 5,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3\" isExecutable=\"true\" name=\"playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1xa13ar\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Azure List Statistics by Automation Account\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1050bf6c-ff35-4572-b089-4c8039da9f4d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.account_name = playbook.inputs.azure_automation_account_name\\ninputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"statistics\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xa13ar\u003c/incoming\u003e\u003coutgoing\u003eFlow_0mjm8da\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1xa13ar\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"bb4a2738-b133-4b72-b0c3-0838633c9e62\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mjm8da\u003c/incoming\u003e\u003coutgoing\u003eFlow_0dfkoxo\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0mjm8da\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0dfkoxo\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0dfkoxo\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dfkoxo\" id=\"Flow_0dfkoxo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mjm8da\" id=\"Flow_0mjm8da_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xa13ar\" id=\"Flow_1xa13ar_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1694007471809,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3",
+      "description": {
+        "content": "Retrieve the statistics for the account.",
+        "format": "text"
+      },
+      "display_name": "Azure Automation Utilities: List Statistics by Automation Account - Example (PB)",
+      "export_key": "azure_automation_utilities_list_statistics_by_automation_account",
+      "field_type_handle": "playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Azure Automation Utilities: List Statistics by Automation Account",
+        "export_key": "playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3",
+        "fields": {
+          "azure_automation_account_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3/azure_automation_account_name",
+            "hide_notification": false,
+            "id": 5423,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "azure_automation_account_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Account name",
+            "tooltip": "azure_automation_account_name",
+            "type_id": 1218,
+            "uuid": "656a674d-7315-496b-92ad-cc6d00701595",
+            "values": []
+          },
+          "azure_automation_resource_group_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3/azure_automation_resource_group_name",
+            "hide_notification": false,
+            "id": 5424,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "azure_automation_resource_group_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Resource Group Name",
+            "tooltip": "Azure automation resource group name",
+            "type_id": 1218,
+            "uuid": "1a6fa63e-4183-43d6-836e-d2322aded4f7",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3",
+        "uuid": "f63563a4-5b0f-4dd4-925c-6a9b9ac28941"
+      },
+      "has_logical_errors": false,
+      "id": 181,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1694007891869,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1694007585956,
+          "description": "",
+          "enabled": false,
+          "export_key": "post process",
+          "id": 207,
+          "language": "python3",
+          "last_modified_by": "g@example.com",
+          "last_modified_time": 1694007585970,
+          "name": "post process",
+          "object_type": "incident",
+          "playbook_handle": "azure_automation_utilities_list_statistics_by_automation_account",
+          "programmatic_name": "azure_automation_utilities_list_statistics_by_automation_account_post_process",
+          "script_text": "from json import dumps\nresults = playbook.functions.results.statistics\n\nif results.get(\"success\"):\n  incident.addNote(dumps(results.get(\"content\", {}), indent=4))",
+          "tags": [],
+          "uuid": "bb4a2738-b133-4b72-b0c3-0838633c9e62"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "656a674d-7315-496b-92ad-cc6d00701595",
+            "element": "field_uuid",
+            "field_type": "playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "1a6fa63e-4183-43d6-836e-d2322aded4f7",
+            "element": "field_uuid",
+            "field_type": "playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "azure_automation_utilities_list_statistics_by_automation_account",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_7317b5d2-1771-43cf-b506-d2ae3b3aafb3",
+        "id": 184,
+        "name": "playbook_7317b5d2_1771_43cf_b506_d2ae3b3aafb3",
+        "type": "playbook",
+        "uuid": "b9b912f4-d946-4a5b-be0e-e43f0760f57d"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "7317b5d2-1771-43cf-b506-d2ae3b3aafb3",
+      "version": 10
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 6,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_bedb2572_f89a_47a0_a24c_a07bfe378864\" isExecutable=\"true\" name=\"playbook_bedb2572_f89a_47a0_a24c_a07bfe378864\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_10nqc1d\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Azure List Usage by Automation Account\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e83fc01c-0f97-4664-84d9-e61ca3fc2ada\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.account_name = playbook.inputs.azure_automation_account_name\\ninputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"usage\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10nqc1d\u003c/incoming\u003e\u003coutgoing\u003eFlow_1gjpirj\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_10nqc1d\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"28c9dd69-96b2-4b41-9621-48551444f97a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1gjpirj\u003c/incoming\u003e\u003coutgoing\u003eFlow_006pi0f\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1gjpirj\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_006pi0f\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_006pi0f\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_bedb2572_f89a_47a0_a24c_a07bfe378864\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_006pi0f\" id=\"Flow_006pi0f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1gjpirj\" id=\"Flow_1gjpirj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10nqc1d\" id=\"Flow_10nqc1d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1694007677621,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_bedb2572_f89a_47a0_a24c_a07bfe378864",
+      "description": {
+        "content": "Retrieve the usage for the account id.",
+        "format": "text"
+      },
+      "display_name": "Azure Automation Utilities: List Usage by Automation Account - Example (PB)",
+      "export_key": "azure_automation_utilities_list_usage_by_automation_account",
+      "field_type_handle": "playbook_bedb2572_f89a_47a0_a24c_a07bfe378864",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Azure Automation Utilities: List Usage by Automation Account",
+        "export_key": "playbook_bedb2572_f89a_47a0_a24c_a07bfe378864",
+        "fields": {
+          "azure_automation_account_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_bedb2572_f89a_47a0_a24c_a07bfe378864/azure_automation_account_name",
+            "hide_notification": false,
+            "id": 5425,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "azure_automation_account_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Account name",
+            "tooltip": "Azure automation account name",
+            "type_id": 1219,
+            "uuid": "5ffe631b-9944-44a7-b854-bcf70e6b3a69",
+            "values": []
+          },
+          "azure_automation_resource_group_name": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_bedb2572_f89a_47a0_a24c_a07bfe378864/azure_automation_resource_group_name",
+            "hide_notification": false,
+            "id": 5426,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "azure_automation_resource_group_name",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Resource Group Name",
+            "tooltip": "Azure automation resource group name",
+            "type_id": 1219,
+            "uuid": "5cdb4fd8-5071-45b2-a160-c89aada1222a",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_bedb2572_f89a_47a0_a24c_a07bfe378864",
+        "uuid": "6497d658-daf8-43b0-894f-dc4080308779"
+      },
+      "has_logical_errors": false,
+      "id": 182,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 43,
+        "name": "g@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1694007908258,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1694007788733,
+          "description": "",
+          "enabled": false,
+          "export_key": "post process",
+          "id": 208,
+          "language": "python3",
+          "last_modified_by": "g@example.com",
+          "last_modified_time": 1694007788745,
+          "name": "post process",
+          "object_type": "incident",
+          "playbook_handle": "azure_automation_utilities_list_usage_by_automation_account",
+          "programmatic_name": "azure_automation_utilities_list_usage_by_automation_account_post_process",
+          "script_text": "from json import dumps\nresults = playbook.functions.results.usage\n\nif results.get(\"success\"):\n  incident.addNote(dumps(results.get(\"content\", {}), indent=4))",
+          "tags": [],
+          "uuid": "28c9dd69-96b2-4b41-9621-48551444f97a"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "5ffe631b-9944-44a7-b854-bcf70e6b3a69",
+            "element": "field_uuid",
+            "field_type": "playbook_bedb2572_f89a_47a0_a24c_a07bfe378864",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "5cdb4fd8-5071-45b2-a160-c89aada1222a",
+            "element": "field_uuid",
+            "field_type": "playbook_bedb2572_f89a_47a0_a24c_a07bfe378864",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "azure_automation_utilities_list_usage_by_automation_account",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_bedb2572-f89a-47a0-a24c-a07bfe378864",
+        "id": 185,
+        "name": "playbook_bedb2572_f89a_47a0_a24c_a07bfe378864",
+        "type": "playbook",
+        "uuid": "2332f56e-e018-4ac8-819a-a564bc41df3e"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "bedb2572-f89a-47a0-a24c-a07bfe378864",
+      "version": 11
     },
     {
       "activation_type": "manual",
