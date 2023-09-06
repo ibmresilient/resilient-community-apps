@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_slack',
     display_name='Slack Integration for SOAR',
-    version='2.0.0',
+    version='2.1.0',
     license='MIT',
     author='IBM SOAR',
     author_email='',
