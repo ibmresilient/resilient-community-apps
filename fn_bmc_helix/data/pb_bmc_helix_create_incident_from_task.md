@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`incident.properties.bmc_helix_task_linked not_equals True`
+`-`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
