@@ -1250,4 +1250,20 @@ def mock_init():
             """ Mock update automation schedule results """
             return update_automation_schedule_results()
 
+        def get_node_report(self, node_id: str, report_id: str):
+            """ Mock get node report results """
+            return get_node_report_results()
+
+        def list_node_report_by_node(self, node_id: str):
+            """ Mock list node report by node results """
+            return list_node_report_by_node_results()
+
+        def list_statistics_by_automation_account(self):
+            """ Mock list statistics by automation account results """
+            return list_statistics_by_automation_account_results()
+
+        def list_usage_by_automation_account(self):
+            """ Mock list usage by automation account results """
+            return list_usage_by_automation_account_results()
+
     return MockClient()

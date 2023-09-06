@@ -2,15 +2,15 @@
 # Generated with resilient-sdk v50.0.151
 """Tests using pytest_resilient_circuits"""
 
-import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+from unittest.mock import patch
+import pytest, helper
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "fn_azure_automation_utilities"
 FUNCTION_NAME = "azure_get_node_report"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = helper.config_data
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -45,33 +45,24 @@ class TestAzureGetNodeReport:
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
-        func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
+        func = get_function_definition(helper.PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
     mock_inputs_1 = {
-        "account_name": "sample text",
-        "report_id": "sample text",
-        "resource_group_name": "sample text",
-        "node_id": "sample text"
+        "account_name": "automation1",
+        "report_id": "3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+        "resource_group_name": "DemoAssets",
+        "node_id": "24939717-e819-4059-aa08-82862c65f3c8"
     }
 
-    expected_results_1 = {"value": "xyz"}
-
-    mock_inputs_2 = {
-        "account_name": "sample text",
-        "report_id": "sample text",
-        "resource_group_name": "sample text",
-        "node_id": "sample text"
-    }
-
-    expected_results_2 = {"value": "xyz"}
+    expected_results_1 = helper.get_node_report_results()
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
+        (mock_inputs_1, expected_results_1)
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-
-        results = call_azure_get_node_report_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        with patch("fn_azure_automation_utilities.components.funct_azure_get_node_report.AzureClient") as patch_ack:
+            patch_ack.return_value = helper.mock_init()
+            results = call_azure_get_node_report_function(circuits_app, mock_inputs)
+            assert(expected_results == results.get("content", {}))
