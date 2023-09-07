@@ -54,6 +54,9 @@
             "name": {
               "type": "string"
             },
+            "domain": {
+              "type": "string"
+            },
             "state": {
               "type": "integer"
             },
@@ -116,11 +119,18 @@
             "isolated": {
               "type": "boolean"
             },
+            "isolationStatus": {
+              "type": "string"
+            },
+            "isolationStatusFailure": {},
             "connected": {
               "type": "boolean"
             },
             "tags": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "groups": {
               "type": "array",
@@ -209,15 +219,6 @@
                       "sha256": {
                         "type": "string"
                       },
-                      "size": {
-                        "type": "integer"
-                      },
-                      "arch": {
-                        "type": "string"
-                      },
-                      "fsName": {
-                        "type": "string"
-                      },
                       "certInfo": {
                         "type": "object",
                         "properties": {
@@ -234,6 +235,15 @@
                             "type": "boolean"
                           }
                         }
+                      },
+                      "size": {
+                        "type": "integer"
+                      },
+                      "arch": {
+                        "type": "string"
+                      },
+                      "fsName": {
+                        "type": "string"
                       }
                     }
                   },
@@ -272,20 +282,51 @@
               "data": {
                 "type": "object",
                 "properties": {
-                  "cmdLine": {
-                    "type": "string"
-                  },
-                  "cmdLineArgs": {
+                  "matched": {
                     "type": "array",
                     "items": {
-                      "type": "string"
+                      "type": "object",
+                      "properties": {
+                        "policyId": {
+                          "type": "string"
+                        },
+                        "versionId": {
+                          "type": "string"
+                        },
+                        "policyTitle": {
+                          "type": "string"
+                        },
+                        "policyDescription": {
+                          "type": "string"
+                        },
+                        "scope": {
+                          "type": "string"
+                        },
+                        "groups": {
+                          "type": "array"
+                        },
+                        "matcher": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "hash": {
+                              "type": "string"
+                            },
+                            "alg": {
+                              "type": "integer"
+                            },
+                            "type": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
                     }
                   },
                   "_t": {
                     "type": "string"
-                  },
-                  "behaviourType": {
-                    "type": "integer"
                   }
                 }
               },
@@ -321,8 +362,17 @@
         "closed": {
           "type": "boolean"
         },
+        "closedAt": {
+          "type": "string"
+        },
+        "lastChangedAt": {
+          "type": "string"
+        },
         "activityState": {
           "type": "string"
+        },
+        "terminationReason": {
+          "type": "integer"
         },
         "receivedAt": {
           "type": "string"
@@ -332,6 +382,9 @@
         },
         "tags": {
           "type": "array"
+        },
+        "notes": {
+          "type": "string"
         },
         "endpointState": {
           "type": "object",
@@ -358,6 +411,9 @@
               "type": "integer"
             },
             "name": {
+              "type": "string"
+            },
+            "domain": {
               "type": "string"
             },
             "isolated": {
@@ -393,7 +449,10 @@
               "type": "string"
             },
             "tags": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "groups": {
               "type": "array",
@@ -413,6 +472,9 @@
               }
             }
           }
+        },
+        "title": {
+          "type": "string"
         },
         "alert_url": {
           "type": "string"

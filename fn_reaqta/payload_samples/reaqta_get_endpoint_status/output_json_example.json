@@ -3,23 +3,24 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "852892681737605120",
-    "machineId": "9f75814184f0e13f5c3229937d30312d660cf8f9256a1e3d6b279da882095981",
+    "id": "836686917654282240",
+    "machineId": "d67dc4211cb83f014c33af976208cc601e35abf251e405e8841e1cb449a48b0e",
     "osType": 1,
     "cpuVendor": 1,
     "arch": 2,
-    "cpuDescr": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
+    "cpuDescr": "Intel(R) Xeon(R) Platinum 8260 CPU @ 2.40GHz",
     "kernel": "10.0",
-    "os": "Windows 10 Enterprise",
-    "name": "LAPTOP-377CDOSQ",
+    "os": "Windows Server 2019 Standard",
+    "name": "ACTIVEDIRECTORY",
+    "domain": "infosec.local",
     "state": 1,
-    "registrationTime": "2022-04-14T14:11:01.315Z",
-    "agentVersion": "3.6.1",
+    "registrationTime": "2022-02-28T20:55:06.087Z",
+    "agentVersion": "3.10.1",
     "componentsVersions": [
       {
         "name": "keeper",
-        "version": "3.6.0",
-        "build": "19.1627291555548.commit"
+        "version": "3.10.1",
+        "build": "27.1668701555901.commit"
       },
       {
         "name": "probos",
@@ -28,45 +29,51 @@
       },
       {
         "name": "rqtsentry",
-        "version": "3.6.1",
-        "build": "119.1632119719010.commit"
+        "version": "3.10.0",
+        "build": "121.1666598992258.commit"
       },
       {
         "name": "rqtnetsentry",
-        "version": "3.6.0",
-        "build": "44.1627295520120.commit"
+        "version": "3.10.0",
+        "build": "45.1666597836648.commit"
       },
       {
         "name": "installer",
-        "version": "3.6.1",
+        "version": "3.10.1",
         "build": ""
       }
     ],
-    "isVirtualMachine": false,
-    "isDomainController": false,
-    "isServer": false,
-    "sessionStart": "2022-04-14T14:11:27.543Z",
-    "sessionEnd": "2022-04-15T16:09:25.661Z",
-    "lastSeenAt": "2022-04-15T16:04:25.661Z",
+    "isVirtualMachine": true,
+    "isDomainController": true,
+    "isServer": true,
+    "sessionStart": "2023-06-22T09:11:49.712Z",
+    "sessionEnd": "2023-08-07T06:29:44.472Z",
+    "lastSeenAt": "2023-08-07T06:24:44.472Z",
     "disconnectionReason": 0,
-    "localAddr": "192.168.2.176",
+    "localAddr": "172.16.60.189",
     "hvStatus": 19,
     "macs": [
-      "98:fa:9b:cb:d4:0e",
-      "50:eb:71:1b:8f:9a",
-      "00:05:9a:3c:7a:00",
-      "00:50:56:c0:00:01",
-      "00:50:56:c0:00:08",
-      "80:6d:97:04:b8:08"
+      "00:0c:29:8f:93:ee"
     ],
-    "isolated": false,
+    "isolated": true,
+    "isolationStatus": "ISOLATED",
+    "isolationStatusFailure": null,
     "connected": true,
-    "tags": [],
+    "tags": [
+      "vm",
+      "pci",
+      "production",
+      "dc"
+    ],
     "groups": [
       {
-        "id": "825429906883088391",
-        "name": "National Market",
-        "description": "National Market"
+        "id": "939525795968188423",
+        "name": "Servers",
+        "parentGroupId": "817450822869712903"
+      },
+      {
+        "id": "817450822869712903",
+        "name": "Product Team"
       }
     ],
     "avInstalled": false
@@ -74,14 +81,14 @@
   "raw": null,
   "inputs": {
     "reaqta_hive": "rhiveam",
-    "reaqta_endpoint_id": "852892681737605120"
+    "reaqta_endpoint_id": "836686917654282240"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-reaqta",
-    "package_version": "1.0.0",
+    "package_version": "1.1.0",
     "host": "local",
-    "execution_time_ms": 524,
-    "timestamp": "2022-04-15 12:05:10"
+    "execution_time_ms": 1008,
+    "timestamp": "2023-08-07 14:25:34"
   }
 }
