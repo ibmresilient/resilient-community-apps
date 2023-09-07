@@ -2,7 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Function implementation"""
 
-from json import loads
+from ast import literal_eval
 from logging import getLogger
 from fn_bmc_helix.lib.datatable.data_table import Datatable
 from fn_bmc_helix.lib.helix.HelixAPIClient import HelixClient
@@ -59,7 +59,7 @@ class FunctionComponent(AppFunctionComponent):
             # Handle multiple rows
             for row in rows:
                 # Get BMC Helix UUID from the table
-                request_id = row.get("cells", {}).get("bmc_helix_request_id")["value"]
+                request_id = row.get("cells", {}).get("helix_request_id")["value"]
                 # Get the BMC Helix incident
                 try:
                     incident, _ = helix_client.get_form_entry(FORM_NAME, request_id)
@@ -76,7 +76,7 @@ class FunctionComponent(AppFunctionComponent):
                     continue  # Move on to the next row
                 # Close the incident if not already closed
                 closed, skipped = self.update_incident_values(helix_client, closed, skipped, incident, helix_payload)
-                self.update_datatable_row(row["id"], {"bmc_helix_status": "Closed"}, incident_id)
+                self.update_datatable_row(row["id"], {"helix_status": "Closed"}, incident_id)
 
         return {"closed": closed, "skipped": skipped}, True, None
 
@@ -159,7 +159,7 @@ class FunctionComponent(AppFunctionComponent):
 
             # Get function inputs
             helix_payload = getattr(fn_inputs, "helix_payload", "{}")
-            helix_payload = loads(helix_payload)
+            helix_payload = literal_eval(helix_payload)
             incident_id = getattr(fn_inputs, "incident_id")
             bmc_helix_request_id = getattr(fn_inputs, "bmc_helix_request_id", None)
             task_id = getattr(fn_inputs, "task_id", None)

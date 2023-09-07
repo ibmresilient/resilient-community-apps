@@ -110,6 +110,7 @@ if results.get("success"):
   incident.properties.bmc_helix_urgency = values.get("Urgency")
   incident.properties.bmc_helix_impact = values.get("Impact")
   incident.properties.bmc_helix_priority = values.get("Priority")
+  incident.addNote(f"Helix incident {values.get('Incident Number')} was successfully created from SOAR incident {incident.id}.")
 ```
 
 ---

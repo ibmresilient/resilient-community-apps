@@ -114,6 +114,7 @@ if results.get("success"):
   dt_row["helix_impact"] = values.get("Impact")
   dt_row["helix_priority"] = values.get("Priority")
   incident.properties.bmc_helix_task_linked = True
+  task.addNote(f"Helix incident {values.get('Incident Number')} was successfully created from SOAR task {task.id}.")
 ```
 
 ---
