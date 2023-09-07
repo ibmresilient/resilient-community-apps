@@ -32,9 +32,6 @@ class FunctionComponent(ResilientComponent):
         """Function: """
         try:
             # validate the function parameters:
-            validate_fields([u'pd_incident_id'], kwargs)
-
-
             yield StatusMessage("starting...")
             resp = list_incidents(self.options)
             yield StatusMessage("pagerduty incidents listed")
