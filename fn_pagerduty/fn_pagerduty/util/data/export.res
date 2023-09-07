@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1693462594701,
+  "export_date": 1694062940301,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -17,7 +17,7 @@
       "deprecated": false,
       "export_key": "__function/pd_service",
       "hide_notification": false,
-      "id": 1190,
+      "id": 547,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -47,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/pd_priority",
       "hide_notification": false,
-      "id": 1191,
+      "id": 548,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -76,7 +76,7 @@
       "deprecated": false,
       "export_key": "__function/pd_incident_id",
       "hide_notification": false,
-      "id": 1192,
+      "id": 549,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -106,7 +106,7 @@
       "deprecated": false,
       "export_key": "__function/pd_incident_key",
       "hide_notification": false,
-      "id": 1193,
+      "id": 550,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -135,7 +135,7 @@
       "deprecated": false,
       "export_key": "__function/pd_status",
       "hide_notification": false,
-      "id": 1194,
+      "id": 551,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -164,7 +164,7 @@
       "deprecated": false,
       "export_key": "__function/pd_title",
       "hide_notification": false,
-      "id": 1195,
+      "id": 552,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -194,7 +194,7 @@
       "deprecated": false,
       "export_key": "__function/pd_escalation_policy",
       "hide_notification": false,
-      "id": 1196,
+      "id": 553,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -224,7 +224,7 @@
       "deprecated": false,
       "export_key": "__function/incidentID",
       "hide_notification": false,
-      "id": 1197,
+      "id": 554,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -253,7 +253,7 @@
       "deprecated": false,
       "export_key": "__function/pd_description",
       "hide_notification": false,
-      "id": 1198,
+      "id": 555,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -282,7 +282,7 @@
       "deprecated": false,
       "export_key": "incident/pd_incident_id",
       "hide_notification": false,
-      "id": 1188,
+      "id": 544,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -311,7 +311,7 @@
       "deprecated": false,
       "export_key": "incident/pd_incident_url",
       "hide_notification": false,
-      "id": 1189,
+      "id": 545,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -344,7 +344,7 @@
   ],
   "functions": [
     {
-      "created_date": 1692857815190,
+      "created_date": 1694004986862,
       "description": {
         "content": "Create a PagerDuty Incident based on a Resilient Incident",
         "format": "text"
@@ -352,14 +352,14 @@
       "destination_handle": "pagerduty",
       "display_name": "PagerDuty Create Incident",
       "export_key": "pagerduty_create_incident",
-      "id": 86,
+      "id": 1,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 10,
-        "name": "dummy@ibm.com",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692857815235,
+      "last_modified_time": 1694004986915,
       "name": "pagerduty_create_incident",
       "output_json_example": "{\"pd\": {\"incident\": {\"incident_number\": 8, \"title\": \"Resilient: pd_test\", \"description\": \"Resilient: pd_test\", \"created_at\": \"2022-07-15T19:47:21Z\", \"status\": \"triggered\", \"incident_key\": \"RES-2100\", \"service\": {\"id\": \"PFA4BVU\", \"type\": \"service_reference\", \"summary\": \"API Service\", \"self\": \"https://api.pagerduty.com/services/PFA4BVU\", \"html_url\": \"https://soar-hydra.pagerduty.com/service-directory/PFA4BVU\"}, \"assignments\": [{\"at\": \"2022-07-15T19:47:21Z\", \"assignee\": {\"id\": \"PMTNPRV\", \"type\": \"user_reference\", \"summary\": \"Sami Amer\", \"self\": \"https://api.pagerduty.com/users/PMTNPRV\", \"html_url\": \"https://soar-hydra.pagerduty.com/users/PMTNPRV\"}}], \"assigned_via\": \"escalation_policy\", \"last_status_change_at\": \"2022-07-15T19:47:21Z\", \"first_trigger_log_entry\": {\"id\": \"R5OQSQS81S9AS5KS9FLX770IG4\", \"type\": \"trigger_log_entry_reference\", \"summary\": \"Triggered through the website.\", \"self\": \"https://api.pagerduty.com/log_entries/R5OQSQS81S9AS5KS9FLX770IG4\", \"html_url\": \"https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB/log_entries/R5OQSQS81S9AS5KS9FLX770IG4\"}, \"alert_counts\": {\"all\": 0, \"triggered\": 0, \"resolved\": 0}, \"is_mergeable\": true, \"escalation_policy\": {\"id\": \"PYAMD55\", \"type\": \"escalation_policy_reference\", \"summary\": \"Default\", \"self\": \"https://api.pagerduty.com/escalation_policies/PYAMD55\", \"html_url\": \"https://soar-hydra.pagerduty.com/escalation_policies/PYAMD55\"}, \"teams\": [], \"impacted_services\": [{\"id\": \"PFA4BVU\", \"type\": \"service_reference\", \"summary\": \"API Service\", \"self\": \"https://api.pagerduty.com/services/PFA4BVU\", \"html_url\": \"https://soar-hydra.pagerduty.com/service-directory/PFA4BVU\"}], \"pending_actions\": [], \"acknowledgements\": [], \"basic_alert_grouping\": null, \"alert_grouping\": null, \"last_status_change_by\": {\"id\": \"PFA4BVU\", \"type\": \"service_reference\", \"summary\": \"API Service\", \"self\": \"https://api.pagerduty.com/services/PFA4BVU\", \"html_url\": \"https://soar-hydra.pagerduty.com/service-directory/PFA4BVU\"}, \"incidents_responders\": [], \"responder_requests\": [], \"subscriber_requests\": [], \"urgency\": \"high\", \"id\": \"Q1I8E2P0CJSIIB\", \"type\": \"incident\", \"summary\": \"[#8] Resilient: pd_test\", \"self\": \"https://api.pagerduty.com/incidents/Q1I8E2P0CJSIIB\", \"html_url\": \"https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB\", \"body\": {\"details\": \"https://murine1.fyre.ibm.com:443/#incidents/2100\\n\"}}}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"pd\": {\"type\": \"object\", \"properties\": {\"incident\": {\"type\": \"object\", \"properties\": {\"incident_number\": {\"type\": \"integer\"}, \"title\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"created_at\": {\"type\": \"string\"}, \"status\": {\"type\": \"string\"}, \"incident_key\": {\"type\": \"string\"}, \"service\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}, \"assignments\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"at\": {\"type\": \"string\"}, \"assignee\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}}}}, \"assigned_via\": {\"type\": \"string\"}, \"last_status_change_at\": {\"type\": \"string\"}, \"first_trigger_log_entry\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}, \"alert_counts\": {\"type\": \"object\", \"properties\": {\"all\": {\"type\": \"integer\"}, \"triggered\": {\"type\": \"integer\"}, \"resolved\": {\"type\": \"integer\"}}}, \"is_mergeable\": {\"type\": \"boolean\"}, \"escalation_policy\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}, \"teams\": {\"type\": \"array\"}, \"impacted_services\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}}, \"pending_actions\": {\"type\": \"array\"}, \"acknowledgements\": {\"type\": \"array\"}, \"basic_alert_grouping\": {}, \"alert_grouping\": {}, \"last_status_change_by\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}, \"incidents_responders\": {\"type\": \"array\"}, \"responder_requests\": {\"type\": \"array\"}, \"subscriber_requests\": {\"type\": \"array\"}, \"urgency\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}, \"body\": {\"type\": \"object\", \"properties\": {\"details\": {\"type\": \"string\"}}}}}}}}}",
@@ -424,21 +424,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "PagerDuty Create Incident",
-          "object_type": "incident",
-          "programmatic_name": "pagerduty_create_incident",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 88
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1692857815241,
+      "created_date": 1694004986924,
       "description": {
         "content": "Create a PagerDuty Note based on a Resilient Incident\u0027s Note",
         "format": "text"
@@ -446,14 +435,14 @@
       "destination_handle": "pagerduty",
       "display_name": "PagerDuty Create Note",
       "export_key": "pagerduty_create_note",
-      "id": 87,
+      "id": 2,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 10,
-        "name": "dummy@ibm.com",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692857815286,
+      "last_modified_time": 1694004986955,
       "name": "pagerduty_create_note",
       "output_json_example": "{\"note\": {\"id\": \"PNL36C8\", \"user\": {\"id\": \"PMTNPRV\", \"type\": \"user_reference\", \"summary\": \"Sami Amer\", \"self\": \"https://api.pagerduty.com/users/PMTNPRV\", \"html_url\": \"https://soar-hydra.pagerduty.com/users/PMTNPRV\"}, \"content\": \"Test Note\", \"created_at\": \"2022-07-15T15:48:12-04:00\", \"channel\": {\"summary\": \"The PagerDuty website or APIs\"}}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"note\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"user\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}, \"content\": {\"type\": \"string\"}, \"created_at\": {\"type\": \"string\"}, \"channel\": {\"type\": \"object\", \"properties\": {\"summary\": {\"type\": \"string\"}}}}}}}",
@@ -478,21 +467,10 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "PagerDuty Create Note",
-          "object_type": "note",
-          "programmatic_name": "pagerduty_create_note",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 86
-        }
-      ]
+      "workflows": []
     },
     {
-      "created_date": 1692857815292,
+      "created_date": 1694004986961,
       "description": {
         "content": "Transition a PagerDuty Incident based on changes to a Resilient Incident (such as Closing the Incident)",
         "format": "text"
@@ -500,14 +478,14 @@
       "destination_handle": "pagerduty",
       "display_name": "PagerDuty Transition Incident",
       "export_key": "pagerduty_transition_incident",
-      "id": 88,
+      "id": 3,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 10,
-        "name": "dummy@ibm.com",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692857815363,
+      "last_modified_time": 1694004986990,
       "name": "pagerduty_transition_incident",
       "output_json_example": "{\"incident\": {\"incident_number\": 8, \"title\": \"Resilient: pd_test\", \"description\": \"Resilient: pd_test\", \"created_at\": \"2022-07-15T19:47:21Z\", \"status\": \"resolved\", \"incident_key\": \"RES-2100\", \"service\": {\"id\": \"PFA4BVU\", \"type\": \"service_reference\", \"summary\": \"API Service\", \"self\": \"https://api.pagerduty.com/services/PFA4BVU\", \"html_url\": \"https://soar-hydra.pagerduty.com/service-directory/PFA4BVU\"}, \"assignments\": [], \"assigned_via\": \"escalation_policy\", \"last_status_change_at\": \"2022-07-15T19:55:22Z\", \"first_trigger_log_entry\": {\"id\": \"R5OQSQS81S9AS5KS9FLX770IG4\", \"type\": \"trigger_log_entry_reference\", \"summary\": \"Triggered through the website.\", \"self\": \"https://api.pagerduty.com/log_entries/R5OQSQS81S9AS5KS9FLX770IG4\", \"html_url\": \"https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB/log_entries/R5OQSQS81S9AS5KS9FLX770IG4\"}, \"alert_counts\": {\"all\": 0, \"triggered\": 0, \"resolved\": 0}, \"is_mergeable\": true, \"escalation_policy\": {\"id\": \"PYAMD55\", \"type\": \"escalation_policy_reference\", \"summary\": \"Default\", \"self\": \"https://api.pagerduty.com/escalation_policies/PYAMD55\", \"html_url\": \"https://soar-hydra.pagerduty.com/escalation_policies/PYAMD55\"}, \"teams\": [], \"impacted_services\": [{\"id\": \"PFA4BVU\", \"type\": \"service_reference\", \"summary\": \"API Service\", \"self\": \"https://api.pagerduty.com/services/PFA4BVU\", \"html_url\": \"https://soar-hydra.pagerduty.com/service-directory/PFA4BVU\"}], \"pending_actions\": [], \"acknowledgements\": [], \"basic_alert_grouping\": null, \"alert_grouping\": null, \"last_status_change_by\": {\"id\": \"PMTNPRV\", \"type\": \"user_reference\", \"summary\": \"Sami Amer\", \"self\": \"https://api.pagerduty.com/users/PMTNPRV\", \"html_url\": \"https://soar-hydra.pagerduty.com/users/PMTNPRV\"}, \"resolve_reason\": null, \"incidents_responders\": [], \"responder_requests\": [], \"subscriber_requests\": [], \"urgency\": \"high\", \"id\": \"Q1I8E2P0CJSIIB\", \"type\": \"incident\", \"summary\": \"[#8] Resilient: pd_test\", \"self\": \"https://api.pagerduty.com/incidents/Q1I8E2P0CJSIIB\", \"html_url\": \"https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"incident\": {\"type\": \"object\", \"properties\": {\"incident_number\": {\"type\": \"integer\"}, \"title\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"created_at\": {\"type\": \"string\"}, \"status\": {\"type\": \"string\"}, \"incident_key\": {\"type\": \"string\"}, \"service\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}, \"assignments\": {\"type\": \"array\"}, \"assigned_via\": {\"type\": \"string\"}, \"last_status_change_at\": {\"type\": \"string\"}, \"first_trigger_log_entry\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}, \"alert_counts\": {\"type\": \"object\", \"properties\": {\"all\": {\"type\": \"integer\"}, \"triggered\": {\"type\": \"integer\"}, \"resolved\": {\"type\": \"integer\"}}}, \"is_mergeable\": {\"type\": \"boolean\"}, \"escalation_policy\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}, \"teams\": {\"type\": \"array\"}, \"impacted_services\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}}, \"pending_actions\": {\"type\": \"array\"}, \"acknowledgements\": {\"type\": \"array\"}, \"basic_alert_grouping\": {}, \"alert_grouping\": {}, \"last_status_change_by\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}, \"resolve_reason\": {}, \"incidents_responders\": {\"type\": \"array\"}, \"responder_requests\": {\"type\": \"array\"}, \"subscriber_requests\": {\"type\": \"array\"}, \"urgency\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"summary\": {\"type\": \"string\"}, \"self\": {\"type\": \"string\"}, \"html_url\": {\"type\": \"string\"}}}}}",
@@ -548,29 +526,18 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "PagerDuty Transition Incident",
-          "object_type": "incident",
-          "programmatic_name": "pagerduty_transition_incident",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 87
-        }
-      ]
+      "workflows": []
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 14,
+  "id": 1,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1693462591095,
+      "create_date": 1694062929941,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -579,7 +546,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1693462591095,
+      "update_date": 1694062929941,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -589,7 +556,7 @@
   "message_destinations": [
     {
       "api_keys": [
-        "75cc3769-cdfc-403a-87fd-b1921dd51ce4"
+        "8b5611cd-229f-451a-919d-03152a22dcbf"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -608,14 +575,14 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 34,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d81928d0_aa0d_42c5_8fcf_815649d78187\" isExecutable=\"true\" name=\"playbook_d81928d0_aa0d_42c5_8fcf_815649d78187\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0sp8sb9\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"PagerDuty Create Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"dec7e0d3-fd7f-4f22-b74a-d825428eda34\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if not playbook.inputs.pd_escalation_policy:\\n  inputs.pd_escalation_policy = \\\"default\\\"\\n\\ninputs.pd_service = playbook.inputs.pd_service\\ninputs.incidentID = incident.id\\ninputs.pd_title = \\\"Resilient: {}\\\".format(incident.name)\\ninputs.pd_incident_key = \u0027RES-\u0027+str(incident.id)\\n    \\npriority = { \u0027Low\u0027: \u0027p3\u0027, \u0027Medium\u0027: \u0027p2\u0027, \u0027High\u0027: \u0027p1\u0027 }\\nif incident.severity_code in priority:\\n  inputs.pd_priority = priority.get(incident.severity_code)\\nelse:\\n  inputs.pd_priority = \u0027p4\u0027 # lowest\\n    \\nif not incident.description is None:\\n  inputs.pd_description = incident.description\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_incident\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0sp8sb9\u003c/incoming\u003e\u003coutgoing\u003eFlow_15fxl8s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0sp8sb9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1q3dvs4\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"PagerDuty Create Incident Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3fa80e77-e91a-4bc6-9dc8-0dc032dcb659\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15fxl8s\u003c/incoming\u003e\u003coutgoing\u003eFlow_1q3dvs4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_15fxl8s\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1q3dvs4\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d81928d0_aa0d_42c5_8fcf_815649d78187\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q3dvs4\" id=\"Flow_1q3dvs4_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"513\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"513\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"614\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15fxl8s\" id=\"Flow_15fxl8s_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"300\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"300\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0sp8sb9\" id=\"Flow_0sp8sb9_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"592\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2188\" x=\"624\" y=\"614\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d81928d0_aa0d_42c5_8fcf_815649d78187\" isExecutable=\"true\" name=\"playbook_d81928d0_aa0d_42c5_8fcf_815649d78187\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0sp8sb9\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"PagerDuty Create Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"dec7e0d3-fd7f-4f22-b74a-d825428eda34\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if not playbook.inputs.pd_escalation_policy:\\n  inputs.pd_escalation_policy = \\\"default\\\"\\n\\ninputs.pd_service = playbook.inputs.pd_service\\ninputs.incidentID = incident.id\\ninputs.pd_title = \\\"SOAR: {}\\\".format(incident.name)\\ninputs.pd_incident_key = \u0027RES-\u0027+str(incident.id)\\n    \\npriority = { \u0027Low\u0027: \u0027p3\u0027, \u0027Medium\u0027: \u0027p2\u0027, \u0027High\u0027: \u0027p1\u0027 }\\nif incident.severity_code in priority:\\n  inputs.pd_priority = priority.get(incident.severity_code)\\nelse:\\n  inputs.pd_priority = \u0027p4\u0027 # lowest\\n    \\nif not incident.description is None:\\n  inputs.pd_description = incident.description\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_incident\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0sp8sb9\u003c/incoming\u003e\u003coutgoing\u003eFlow_15fxl8s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0sp8sb9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1q3dvs4\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"PagerDuty Create Incident Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3fa80e77-e91a-4bc6-9dc8-0dc032dcb659\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15fxl8s\u003c/incoming\u003e\u003coutgoing\u003eFlow_1q3dvs4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_15fxl8s\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1q3dvs4\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d81928d0_aa0d_42c5_8fcf_815649d78187\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q3dvs4\" id=\"Flow_1q3dvs4_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"513\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"513\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"614\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15fxl8s\" id=\"Flow_15fxl8s_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"300\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"300\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0sp8sb9\" id=\"Flow_0sp8sb9_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"592\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2188\" x=\"624\" y=\"614\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692863018305,
+      "create_date": 1694004987259,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 25,
-        "name": "dummy@ibm.com",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
         "type": "user"
       },
       "deployment_id": "playbook_d81928d0_aa0d_42c5_8fcf_815649d78187",
@@ -628,7 +595,7 @@
       "field_type_handle": "playbook_d81928d0_aa0d_42c5_8fcf_815649d78187",
       "fields_type": {
         "actions": [],
-        "display_name": "PagerDuty Create Incident (PB)",
+        "display_name": "PagerDuty: Create Incident (PB)",
         "export_key": "playbook_d81928d0_aa0d_42c5_8fcf_815649d78187",
         "fields": {
           "pd_description": {
@@ -641,7 +608,7 @@
             "deprecated": false,
             "export_key": "playbook_d81928d0_aa0d_42c5_8fcf_815649d78187/pd_description",
             "hide_notification": false,
-            "id": 1232,
+            "id": 556,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -656,7 +623,7 @@
             "templates": [],
             "text": "Incident Description",
             "tooltip": "",
-            "type_id": 1035,
+            "type_id": 1000,
             "uuid": "d5a3879f-6d00-4268-bdd5-fc729493627f",
             "values": []
           },
@@ -670,7 +637,7 @@
             "deprecated": false,
             "export_key": "playbook_d81928d0_aa0d_42c5_8fcf_815649d78187/pd_escalation_policy",
             "hide_notification": false,
-            "id": 1236,
+            "id": 557,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -685,7 +652,7 @@
             "templates": [],
             "text": "Escalation policy name from pagerduty",
             "tooltip": "If left empty, it will be set to \u0027default\u0027.",
-            "type_id": 1035,
+            "type_id": 1000,
             "uuid": "1e8ab1bc-b52d-4821-a5d6-6441e989c365",
             "values": []
           },
@@ -699,7 +666,7 @@
             "deprecated": false,
             "export_key": "playbook_d81928d0_aa0d_42c5_8fcf_815649d78187/pd_service",
             "hide_notification": false,
-            "id": 1237,
+            "id": 558,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -715,7 +682,7 @@
             "templates": [],
             "text": "Pagerduty Service Name",
             "tooltip": "",
-            "type_id": 1035,
+            "type_id": 1000,
             "uuid": "52616ad3-8a02-4906-a06b-35952ddcc23d",
             "values": []
           }
@@ -740,27 +707,27 @@
         "uuid": "9a05a6e7-690e-445b-bf6b-47f0b173750d"
       },
       "has_logical_errors": false,
-      "id": 31,
+      "id": 1,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 25,
-        "name": "dummy@ibm.com",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1693211905922,
+      "last_modified_time": 1694006941716,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692863316099,
+          "created_date": 1694004987380,
           "description": "",
           "enabled": false,
           "export_key": "PagerDuty Create Incident Post-Process Script",
-          "id": 30,
+          "id": 3,
           "language": "python3",
-          "last_modified_by": "dummy@ibm.com",
-          "last_modified_time": 1693211903723,
+          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_time": 1694004987393,
           "name": "PagerDuty Create Incident Post-Process Script",
           "object_type": "incident",
           "playbook_handle": "pagerduty_create_incident_pb",
@@ -815,7 +782,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_d81928d0-aa0d-42c5-8fcf-815649d78187",
-        "id": 38,
+        "id": 2,
         "name": "playbook_d81928d0_aa0d_42c5_8fcf_815649d78187",
         "type": "playbook",
         "uuid": "1301bf5e-340c-4767-aec8-ddf491193ae7"
@@ -823,7 +790,7 @@
       "tags": [],
       "type": "default",
       "uuid": "d81928d0-aa0d-42c5-8fcf-815649d78187",
-      "version": 45
+      "version": 5
     },
     {
       "activation_details": {
@@ -856,14 +823,14 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 3,
+        "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_281c86de_1184_4c69_aa90_8e6940b935fb\" isExecutable=\"true\" name=\"playbook_281c86de_1184_4c69_aa90_8e6940b935fb\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_04zf566\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"PagerDuty Create Note\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"efdef5a6-796a-412a-bee7-5edd42ef92b3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pd_incident_id = incident.properties.pd_incident_id\\ninputs.pd_description = note.text.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_note\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_04zf566\u003c/incoming\u003e\u003coutgoing\u003eFlow_08s8xgr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_04zf566\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_08s8xgr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_08s8xgr\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_281c86de_1184_4c69_aa90_8e6940b935fb\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04zf566\" id=\"Flow_04zf566_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08s8xgr\" id=\"Flow_08s8xgr_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"313\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"313\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"344\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.6406\" x=\"639\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2188\" x=\"624\" y=\"344\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1693212131550,
+      "create_date": 1694004988053,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 25,
-        "name": "dummy@ibm.com",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
         "type": "user"
       },
       "deployment_id": "playbook_281c86de_1184_4c69_aa90_8e6940b935fb",
@@ -899,23 +866,23 @@
         "uuid": "887e408b-6601-4a69-89c0-1149eb8816af"
       },
       "has_logical_errors": false,
-      "id": 33,
+      "id": 2,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 25,
-        "name": "dummy@ibm.com",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1693228140751,
+      "last_modified_time": 1694004988393,
       "local_scripts": [],
       "name": "pagerduty_create_pagerduty_note_pb",
       "object_type": "note",
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_281c86de-1184-4c69-aa90-8e6940b935fb",
-        "id": 42,
+        "id": 3,
         "name": "playbook_281c86de_1184_4c69_aa90_8e6940b935fb",
         "type": "playbook",
         "uuid": "6d5c4f8e-4fea-4003-80bd-739e572e6389"
@@ -923,40 +890,62 @@
       "tags": [],
       "type": "default",
       "uuid": "281c86de-1184-4c69-aa90-8e6940b935fb",
-      "version": 11
+      "version": 4
     },
     {
       "activation_details": {
         "activation_conditions": {
           "conditions": [
             {
-              "evaluation_id": null,
+              "evaluation_id": 1,
               "field_name": "incident.properties.pd_incident_id",
               "method": "has_a_value",
               "type": null,
               "value": null
             },
             {
-              "evaluation_id": null,
+              "evaluation_id": 2,
               "field_name": "incident.resolution_id",
               "method": "changed_to",
               "type": null,
               "value": "Resolved"
+            },
+            {
+              "evaluation_id": 3,
+              "field_name": "incident.resolution_id",
+              "method": "changed_to",
+              "type": null,
+              "value": "Duplicate"
+            },
+            {
+              "evaluation_id": 4,
+              "field_name": "incident.resolution_id",
+              "method": "changed_to",
+              "type": null,
+              "value": "Unresolved"
+            },
+            {
+              "evaluation_id": 5,
+              "field_name": "incident.resolution_id",
+              "method": "changed_to",
+              "type": null,
+              "value": "Not an Issue"
             }
           ],
-          "logic_type": "all"
+          "custom_condition": "1 AND (2 OR 3 OR 4 OR 5)",
+          "logic_type": "advanced"
         }
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d367c01c_906c_4987_83bd_1ec8d73be199\" isExecutable=\"true\" name=\"playbook_d367c01c_906c_4987_83bd_1ec8d73be199\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_03yzwwd\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"PagerDuty Transition Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1b89c0c8-91fc-407a-8ec0-1b63851eaa20\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pd_incident_id = incident.properties.pd_incident_id\\nif incident.resolution_id:\\n  inputs.pd_status = \u0027resolved\u0027\\n  inputs.pd_description = incident.resolution_summary.content\\n#else:\\n#  inputs.pd_status = \u0027acknowledged\u0027\\n  \\npriority = { \u0027Low\u0027: \u0027p3\u0027, \u0027Medium\u0027: \u0027p2\u0027, \u0027High\u0027: \u0027p1\u0027 }\\nif incident.severity_code in priority:\\n  inputs.pd_priority = priority.get(incident.severity_code)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"transition_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03yzwwd\u003c/incoming\u003e\u003coutgoing\u003eFlow_1lalwu9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_03yzwwd\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Transition Post-Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5f87c1a8-2285-425a-a70b-f1a57090a2dd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1lalwu9\u003c/incoming\u003e\u003coutgoing\u003eFlow_08ixres\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_08ixres\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1lalwu9\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_08ixres\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d367c01c_906c_4987_83bd_1ec8d73be199\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03yzwwd\" id=\"Flow_03yzwwd_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lalwu9\" id=\"Flow_1lalwu9_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08ixres\" id=\"Flow_08ixres_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"438\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"438\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2188\" x=\"644\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d367c01c_906c_4987_83bd_1ec8d73be199\" isExecutable=\"true\" name=\"playbook_d367c01c_906c_4987_83bd_1ec8d73be199\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_03yzwwd\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"PagerDuty Transition Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1b89c0c8-91fc-407a-8ec0-1b63851eaa20\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pd_incident_id = incident.properties.pd_incident_id\\nif incident.resolution_id:\\n  inputs.pd_status = \u0027resolved\u0027\\n  inputs.pd_description = incident.resolution_summary.content\\n#else:\\n#  inputs.pd_status = \u0027acknowledged\u0027\\n  \\npriority = { \u0027Low\u0027: \u0027p3\u0027, \u0027Medium\u0027: \u0027p2\u0027, \u0027High\u0027: \u0027p1\u0027 }\\nif incident.severity_code in priority:\\n  inputs.pd_priority = priority.get(incident.severity_code)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"transition_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03yzwwd\u003c/incoming\u003e\u003coutgoing\u003eFlow_1lalwu9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_03yzwwd\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Transition Post-Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5f87c1a8-2285-425a-a70b-f1a57090a2dd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1lalwu9\u003c/incoming\u003e\u003coutgoing\u003eFlow_08ixres\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_08ixres\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1lalwu9\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_08ixres\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d367c01c_906c_4987_83bd_1ec8d73be199\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08ixres\" id=\"Flow_08ixres_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"438\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"438\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lalwu9\" id=\"Flow_1lalwu9_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03yzwwd\" id=\"Flow_03yzwwd_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2188\" x=\"644\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1693212787416,
+      "create_date": 1694004988377,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 25,
-        "name": "dummy@ibm.com",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
         "type": "user"
       },
       "deployment_id": "playbook_d367c01c_906c_4987_83bd_1ec8d73be199",
@@ -992,27 +981,27 @@
         "uuid": "f9836b36-c3e4-4bd3-a343-a385e4ea785e"
       },
       "has_logical_errors": false,
-      "id": 34,
+      "id": 3,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 25,
-        "name": "dummy@ibm.com",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1693213685406,
+      "last_modified_time": 1694008510444,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1693212911244,
+          "created_date": 1694004988434,
           "description": "",
           "enabled": false,
           "export_key": "Transition Post-Script",
-          "id": 32,
+          "id": 4,
           "language": "python3",
-          "last_modified_by": "dummy@ibm.com",
-          "last_modified_time": 1693213681949,
+          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_time": 1694004988445,
           "name": "Transition Post-Script",
           "object_type": "incident",
           "playbook_handle": "pagerduty_resolve_pagerduty_incident_pb",
@@ -1027,7 +1016,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_d367c01c-906c-4987-83bd-1ec8d73be199",
-        "id": 43,
+        "id": 4,
         "name": "playbook_d367c01c_906c_4987_83bd_1ec8d73be199",
         "type": "playbook",
         "uuid": "10f10c64-3b7b-40b7-b1b5-88ea3f340fb3"
@@ -1035,7 +1024,7 @@
       "tags": [],
       "type": "default",
       "uuid": "d367c01c-906c-4987-83bd-1ec8d73be199",
-      "version": 9
+      "version": 5
     },
     {
       "activation_details": {
@@ -1061,14 +1050,14 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 7,
+        "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_37d2162e_8d92_4504_b9fc_6e7761b3984a\" isExecutable=\"true\" name=\"playbook_37d2162e_8d92_4504_b9fc_6e7761b3984a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_04gg4td\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"PagerDuty Transition Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1b89c0c8-91fc-407a-8ec0-1b63851eaa20\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.pd_incident_id = incident.properties.pd_incident_id\\nif incident.resolution_id:\\n  inputs.pd_status = \u0027resolved\u0027\\n  inputs.pd_description = incident.resolution_summary.content\\n#else:\\n#  inputs.pd_status = \u0027acknowledged\u0027\\n  \\npriority = { \u0027Low\u0027: \u0027p3\u0027, \u0027Medium\u0027: \u0027p2\u0027, \u0027High\u0027: \u0027p1\u0027 }\\nif incident.severity_code in priority:\\n  inputs.pd_priority = priority.get(incident.severity_code)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"transition_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_04gg4td\u003c/incoming\u003e\u003coutgoing\u003eFlow_19tncnf\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_04gg4td\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1x809vy\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Severity Post-Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"45834252-2dd5-40be-8f99-3fecc0a4eccb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_19tncnf\u003c/incoming\u003e\u003coutgoing\u003eFlow_1x809vy\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_19tncnf\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1x809vy\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_37d2162e_8d92_4504_b9fc_6e7761b3984a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1x809vy\" id=\"Flow_1x809vy_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"468\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"468\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19tncnf\" id=\"Flow_19tncnf_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"330\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"330\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04gg4td\" id=\"Flow_04gg4td_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2188\" x=\"634\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1693210798741,
+      "create_date": 1694004988708,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 25,
-        "name": "dummy@ibm.com",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
         "type": "user"
       },
       "deployment_id": "playbook_37d2162e_8d92_4504_b9fc_6e7761b3984a",
@@ -1104,27 +1093,27 @@
         "uuid": "11b400d4-4186-4bd6-aafd-53744022b7a7"
       },
       "has_logical_errors": false,
-      "id": 32,
+      "id": 4,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 25,
-        "name": "dummy@ibm.com",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1693225215079,
+      "last_modified_time": 1694004989088,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1693211109290,
+          "created_date": 1694004988763,
           "description": "",
           "enabled": false,
           "export_key": "Severity Post-Script",
-          "id": 31,
+          "id": 5,
           "language": "python3",
-          "last_modified_by": "dummy@ibm.com",
-          "last_modified_time": 1693211874540,
+          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_time": 1694004988773,
           "name": "Severity Post-Script",
           "object_type": "incident",
           "playbook_handle": "pagerduty_update_pagerduty_incident_pb",
@@ -1139,7 +1128,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_37d2162e-8d92-4504-b9fc-6e7761b3984a",
-        "id": 41,
+        "id": 5,
         "name": "playbook_37d2162e_8d92_4504_b9fc_6e7761b3984a",
         "type": "playbook",
         "uuid": "bfa322da-a7c8-4056-a585-32652ac86e8d"
@@ -1147,7 +1136,7 @@
       "tags": [],
       "type": "default",
       "uuid": "37d2162e-8d92-4504-b9fc-6e7761b3984a",
-      "version": 12
+      "version": 4
     }
   ],
   "regulators": null,
