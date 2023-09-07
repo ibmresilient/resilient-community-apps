@@ -6,11 +6,11 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, clean_html, IntegrationError
-from .pd_common import list_incidents
+from .pd_common import list_services
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'pagerduty_list_incidents"""
+    """Component that implements Resilient function 'pagerduty_list_services"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -27,22 +27,21 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("pagerduty", {})
         validate_fields(['api_token'], self.options)
 
-    @function("pagerduty_list_incidents")
-    def _pagerduty_list_incidents_function(self, event, *args, **kwargs):
+    @function("pagerduty_list_services")
+    def _pagerduty_list_services_function(self, event, *args, **kwargs):
         """Function: """
         try:
-            timestamp = kwargs.get(u'pd_search_date')
-            
+            # validate the function parameters:
             yield StatusMessage("starting...")
-            resp = list_incidents(self.options, timestamp)
-            yield StatusMessage("pagerduty incidents listed")
+            resp = list_services(self.options)
+            yield StatusMessage("pagerduty services listed")
 
             # Produce a FunctionResult with the results - if not error, the response is not used
             yield FunctionResult(resp)
         except Exception as err:
             yield FunctionError(err)
 
-    def list_incidents_callback(self, resp):
+    def list_services_callback(self, resp):
         """ handle results such as this
             {"error":{"message":"Invalid Input Provided","code":2001,"errors":["Content cannot be empty."]}}
         """

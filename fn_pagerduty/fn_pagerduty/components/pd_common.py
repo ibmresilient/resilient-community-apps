@@ -7,6 +7,7 @@ PRIORITIES = 'priorities'
 ESCALATION_POLICIES = 'escalation_policies'
 SERVICES = 'services'
 INCIDENT_FRAGMENT = 'incidents'
+SINCE = 'since='
 UPDATE_FRAGMENT = '/'.join((INCIDENT_FRAGMENT, '{}'))
 NOTE_FRAGMENT = '/'.join((UPDATE_FRAGMENT, 'notes'))
 PACKAGE_NAME = "fn_pagerduty"
@@ -83,14 +84,33 @@ def create_note(appDict, incident_id, note):
     resp = session.post(url, payload)
     return resp.json()
 
-def list_incidents(appDict):
+
+def list_incidents(appDict, timestamp):
     """
     List all the incidents
     :param appDict:
     :return: the json string from the PD API
     """    
+    
+    if timestamp:
+        timestamp_seconds = str(timestamp)[:-3]
+        since_date = datetime.fromtimestamp(timestamp_seconds)
+        since_date_str = since_date.strftime("%Y-%m-%d")
+
+    
     session = APISession(appDict['api_token'])
-    resp = session.get(INCIDENT_FRAGMENT)
+    resp = session.get(INCIDENT_FRAGMENT + "?" + SINCE + since_date_str)
+    return resp.json()
+
+
+def list_services(appDict):
+    """
+    List all the services
+    :param appDict:
+    :return: the json string from the PD API
+    """
+    session = APISession(appDict['api_token'])
+    resp = session.get(SERVICES)
     return resp.json()
 
 def build_incident_payload(appDict):
