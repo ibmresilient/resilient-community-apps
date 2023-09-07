@@ -29,7 +29,8 @@ setup(
         "resilient.circuits.components": [
             "PagerdutyCreateNoteFunctionComponent = fn_pagerduty.components.funct_pagerduty_create_note:FunctionComponent",
             "PagerdutyTransitionIncidentFunctionComponent = fn_pagerduty.components.funct_pagerduty_transition_incident:FunctionComponent",
-            "PagerdutyCreateIncidentFunctionComponent = fn_pagerduty.components.funct_pagerduty_create_incident:FunctionComponent"
+            "PagerdutyCreateIncidentFunctionComponent = fn_pagerduty.components.funct_pagerduty_create_incident:FunctionComponent",
+            "PagerdutyCreateIncidentFunctionComponent = fn_pagerduty.components.funct_pagerduty_list_incidents:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_pagerduty.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_pagerduty.util.customize:customization_data"],

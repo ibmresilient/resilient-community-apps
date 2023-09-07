@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1694062940301,
+  "export_date": 1694064617877,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -470,6 +470,30 @@
       "workflows": []
     },
     {
+      "created_date": 1694063498285,
+      "description": {
+        "content": "List all incidents on Pagerduty",
+        "format": "text"
+      },
+      "destination_handle": "pagerduty",
+      "display_name": "PagerDuty List Incidents",
+      "export_key": "pagerduty_list_incidents",
+      "id": 23,
+      "last_modified_by": {
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "allen.ch.lee@ibm.com",
+        "type": "user"
+      },
+      "last_modified_time": 1694064242580,
+      "name": "pagerduty_list_incidents",
+      "tags": [],
+      "uuid": "1e9896a9-f499-4a48-933a-ca0005ee3368",
+      "version": 3,
+      "view_items": [],
+      "workflows": []
+    },
+    {
       "created_date": 1694004986961,
       "description": {
         "content": "Transition a PagerDuty Incident based on changes to a Resilient Incident (such as Closing the Incident)",
@@ -531,13 +555,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 1,
+  "id": 2,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1694062929941,
+      "create_date": 1694064607128,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -546,7 +570,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1694062929941,
+      "update_date": 1694064607128,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],

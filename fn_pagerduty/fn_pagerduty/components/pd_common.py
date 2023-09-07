@@ -83,6 +83,15 @@ def create_note(appDict, incident_id, note):
     resp = session.post(url, payload)
     return resp.json()
 
+def list_incidents(appDict):
+    """
+    List all the incidents
+    :param appDict:
+    :return: the json string from the PD API
+    """    
+    session = APISession(appDict['api_token'])
+    resp = session.get(INCIDENT_FRAGMENT)
+    return resp.json()
 
 def build_incident_payload(appDict):
     """

@@ -22,7 +22,7 @@ def codegen_reload_data():
     return {
         "package": u"fn_pagerduty",
         "message_destinations": [u"pagerduty"],
-        "functions": [u"pagerduty_create_incident", u"pagerduty_create_note", u"pagerduty_transition_incident"],
+        "functions": [u"pagerduty_create_incident", u"pagerduty_create_note", u"pagerduty_list_incidents", u"pagerduty_transition_incident"],
         "workflows": [],
         "actions": [],
         "incident_fields": [u"pd_incident_id", u"pd_incident_url"],
@@ -48,6 +48,7 @@ def customization_data(client=None):
     - Functions:
         - pagerduty_create_incident
         - pagerduty_create_note
+        - pagerduty_list_incidents
         - pagerduty_transition_incident
     - Playbooks:
         - pagerduty_create_incident_pb
