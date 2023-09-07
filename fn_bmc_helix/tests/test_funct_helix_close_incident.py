@@ -71,7 +71,7 @@ class TestHelixCloseIncident:
     }
 
     mock_inputs_1 = {
-        "helix_payload": json.dumps(content),
+        "helix_payload": str(content),
         "task_id": 1,
         "incident_id": 2
     }
