@@ -2,6 +2,7 @@
 import logging
 import json
 from pdpyras import APISession, PDClientError
+from datetime import datetime
 
 PRIORITIES = 'priorities'
 ESCALATION_POLICIES = 'escalation_policies'
@@ -92,14 +93,14 @@ def list_incidents(appDict, timestamp):
     :return: the json string from the PD API
     """    
     
+    session = APISession(appDict['api_token'])
     if timestamp:
         timestamp_seconds = str(timestamp)[:-3]
         since_date = datetime.fromtimestamp(timestamp_seconds)
         since_date_str = since_date.strftime("%Y-%m-%d")
-
-    
-    session = APISession(appDict['api_token'])
-    resp = session.get(INCIDENT_FRAGMENT + "?" + SINCE + since_date_str)
+        resp = session.get(INCIDENT_FRAGMENT + "?" + SINCE + since_date_str)
+    else:
+        resp = session.get(INCIDENT_FRAGMENT)
     return resp.json()
 
 

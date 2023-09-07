@@ -31,6 +31,7 @@ class FunctionComponent(ResilientComponent):
     def _pagerduty_list_incidents_function(self, event, *args, **kwargs):
         """Function: """
         try:
+            timestamp = ""
             timestamp = kwargs.get(u'pd_search_date')
             
             yield StatusMessage("starting...")
