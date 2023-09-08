@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# Generated with resilient-sdk v50.0.151
 
 """Generate the Resilient customizations required for fn_network_utilities"""
 
@@ -20,17 +22,33 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_network_utilities",
-        "message_destinations": [u"fn_network_utilities"],
-        "functions": [u"network_utilities_domain_distance", u"network_utilities_expand_url", u"network_utilities_extract_ssl_cert_from_url", u"network_utilities_linux_shell_command", u"network_utilities_local_shell_command", u"network_utilities_windows_shell_command"],
-        "workflows": [u"example_network_utilities_domain_distance", u"example_network_utilities_expand_url", u"example_network_utilities_extract_ssl_cert_from_url", u"example_network_utilities_linux_shell_command", u"example_network_utilities_local_command", u"example_network_utilities_windows_shell_command"],
-        "actions": [u"Example: Network Utilities Domain Distance", u"Example: Network Utilities Expand URL", u"Example: Network Utilities Extract SSL Certificate from URL", u"Example: Network Utilities Linux Shell Command", u"Example: Network Utilities Local Shell Command", u"Example: Network Utilities Windows Shell Command"],
+        "message_destinations": [
+            u"fn_network_utilities"
+        ],
+        "functions": [
+            u"network_utilities_domain_distance",
+            u"network_utilities_expand_url",
+            u"network_utilities_extract_ssl_cert_from_url",
+            u"network_utilities_linux_shell_command",
+            u"network_utilities_local_shell_command",
+            u"network_utilities_windows_shell_command"
+        ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [
+            u"network_utilities_domain_distance_pb_example",
+            u"network_utilities_expand_url_pb_example",
+            u"network_utilities_extract_ssl_certificate_from_url_pb_example",
+            u"network_utilities_linux_shell_command_pb_example",
+            u"network_utilities_local_shell_command",
+            u"network_utilities_windows_shell_command_pb_example"
+        ]
     }
 
 
@@ -39,7 +57,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
@@ -51,20 +69,13 @@ def customization_data(client=None):
         - network_utilities_linux_shell_command
         - network_utilities_local_shell_command
         - network_utilities_windows_shell_command
-    - Workflows:
-        - example_network_utilities_domain_distance
-        - example_network_utilities_expand_url
-        - example_network_utilities_extract_ssl_cert_from_url
-        - example_network_utilities_linux_shell_command
-        - example_network_utilities_local_command
-        - example_network_utilities_windows_shell_command
-    - Rules:
-        - Example: Network Utilities Domain Distance
-        - Example: Network Utilities Expand URL
-        - Example: Network Utilities Extract SSL Certificate from URL
-        - Example: Network Utilities Linux Shell Command
-        - Example: Network Utilities Local Shell Command
-        - Example: Network Utilities Windows Shell Command
+    - Playbooks:
+        - network_utilities_domain_distance_pb_example
+        - network_utilities_expand_url_pb_example
+        - network_utilities_extract_ssl_certificate_from_url_pb_example
+        - network_utilities_linux_shell_command_pb_example
+        - network_utilities_local_shell_command
+        - network_utilities_windows_shell_command_pb_example
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

@@ -50,6 +50,8 @@
 | 1.0.0 | 02/2023 | Initial Release |
 | 1.0.1 | 3/2023 | Add a timeout option for Linux shell command |
 | 1.0.2 | 9/2023 | Added missing OS packages: dig, whois, traceroute |
+| 1.1.0 | 9/2023 | Allow ad_hoc shell execution. Added close connection for Remote Shell when complete. String encoded JSON shell parameters allowed. Support for escaping commas within parameters  |
+
 ---
 
 ## Overview
@@ -149,9 +151,10 @@ The following table provides the settings you need to configure the app. These s
 | **nslookup** | Yes | `nslookup "{{shell_param1}}"` | -- |
 | **remote_auth_transport** | Yes | `ntlm` | remote auth transport one of [ntlm, basic] |
 | **remote_command_linux** | Yes | `bash command or path to bash script` | -- |
-| **remote_command_powershell** | Yes | `powershell command or path to powershell script` | -- |
+| **remote_command_powershell** | Yes | `powershell.exe -file c:\path\to\myscript.ps1 {{shell_param1}}` | `powershell command or path to powershell script` |
 | **remote_computer** | Yes | `username:password@server` | -- |
 | **remote_powershell_extensions** | Yes | `ps1, psm1, etc` | accepted remote powershell extensions in a comma separated list |
+| **allow_ad_hoc_execution** | No | True/False | New to 1.1. Allow any shell cmd to run avoiding **remote_command_linux** and **remote_command_powershell** | 
 | **shell_escaping** | Yes | `sh` | -- |
 | **traceroute** | Yes | `traceroute -m 15 "{{shell_param1}}"` | -- |
 | **whois** | Yes | `whois "{{shell_param1}}"` | -- |
@@ -365,7 +368,7 @@ This function allows your workflows/playbooks to execute shell-scripts remotely 
 
  ![screenshot: fn-network-utilities-linux-shell-command ](./doc/screenshots/fn-network-utilities-linux-shell-command.png)
 
-For security, the list of available shell commands must be configured explicitly by the administrator. To do this, edit the [fn_utilities] section of the app.config file.
+For security, the list of available shell commands must be configured explicitly by the administrator. To do this, edit the [fn_network_utilities] section of the app.config file.
 NOTE: The parameter values {{shell_param1}}, {{shell_param2}}, {{shell_param3}} may contain spaces, dashes and other characters. In your command configuration, they must be surrounded with double-quotes. Failure to properly quote your command parameters creates a security risk, since the parameter values usually come from artifacts and other untrusted data. Additionally, timeouts do not yield any exceptions to notify when it has occurred.
 
 ### app.config examples:
@@ -405,7 +408,7 @@ The second parameter is the Volatility profile ("Win7SP0x64" etc).
 | ---- | :--: | :------: | ------- | ------- |
 | `network_utilities_remote_computer` | `text` | No | `username:password@server` | Remote computer in place of the value used in the app.config |
 | `network_utilities_shell_command` | `text` | Yes | `remote_command:remote_computer` | Use remote_shell_command:remote_computer syntax if network_utilities_remote_computer is left blank. |
-| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list |
+| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list. If a parameter has embedded commas, specify as '\,'. Ex. '-p 80\,443\,8080' |
 
 </p>
 </details>
@@ -515,7 +518,7 @@ For local and remote Windows environments:
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `network_utilities_shell_command` | `text` | Yes | `remote_command:remote_computer` | Use remote_shell_command:remote_computer syntax if network_utilities_remote_computer is left blank. |
-| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list |
+| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list. If a parameter has embedded commas, specify as '\,'. Ex. '-p 80\,443\,8080' |
 
 </p>
 </details>
@@ -647,7 +650,7 @@ remote_computer2=(domain\admin:P@ssw0rd@server2)
 | ---- | :--: | :------: | ------- | ------- |
 | `network_utilities_remote_computer` | `text` | No | `username:password@server` | Remote computer in place of the value used in the app.config |
 | `network_utilities_shell_command` | `text` | Yes | `remote_command:remote_computer` | Use remote_shell_command:remote_computer syntax if network_utilities_remote_computer is left blank. |
-| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list |
+| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list. If a parameter has embedded commas, specify as '\,'. Ex. '-p 80\,443\,8080' |
 
 </p>
 </details>
