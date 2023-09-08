@@ -62,7 +62,7 @@ def create_service(appDict):
     # build url
     session = APISession(
         appDict['api_token'], name=appDict['resilient_client'])
-    resp = session.post(INCIDENT_FRAGMENT, payload)
+    resp = session.post(SERVICES, payload)
     return resp.json()
 
 def update_incident(appDict, incident_id, status, priority, resolution):
