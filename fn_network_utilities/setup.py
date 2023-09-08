@@ -32,7 +32,7 @@ setup(
     long_description="""This app contains useful functions that allows your workflows/playbooks to execute shell-scripts remotely and locally,
      gain information about URLs, and extract SSL certificates from URLs.""",
     install_requires=[
-        'resilient-circuits>=50.0.0',
+        'resilient-circuits',
         'pyOpenSSL',
         'cryptography',
         'pywinrm',

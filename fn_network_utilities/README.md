@@ -50,7 +50,13 @@
 | 1.0.0 | 02/2023 | Initial Release |
 | 1.0.1 | 3/2023 | Add a timeout option for Linux shell command |
 | 1.0.2 | 9/2023 | Added missing OS packages: dig, whois, traceroute |
-| 1.1.0 | 9/2023 | Allow ad_hoc shell execution. Added close connection for Remote Shell when complete. String encoded JSON shell parameters allowed. Support for escaping commas within parameters  |
+| 1.1.0 | 9/2023 | Allow ad_hoc shell execution. Added close connection for Remote Shell when complete. String encoded JSON shell parameters allowed. Support for escaping commas within parameters. Converted rules/workflows to playbooks  |
+
+Note: Upgrading from version 1.0.x to 1.1.0 will introduce playbooks to replace equivalent rules/workflows. Previously installed rules and workflows will remain after the upgrade and use can be deleted at your convenience. The naming of playbooks are as follows:
+
+| Rule Name | Playbook Name |
+| --------- | ------------- |
+| Example: Network Utilities Extract URL | Network Utilities Extract URL (PB) Example |
 
 ---
 
@@ -88,13 +94,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `46.0.8131`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `46.0.8131`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=47.0.0`.
+* Integration server is running `resilient-circuits>=48.0.0` is recommended.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -110,7 +116,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.9`.
+* IBM Cloud Pak for Security >= `1.10`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -126,13 +132,12 @@ The app does support a proxy server.
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* chardet==4.0.0
-* cryptography~=39.0
-* paramiko~=2.10
-* pyOpenSSL~=23.0
-* pywinrm~=0.4
-* resilient-circuits>=47.0.0
-
+* chardet
+* cryptography
+* paramiko
+* pyOpenSSL
+* pywinrm
+* resilient-circuits
 
 ---
 
@@ -144,6 +149,8 @@ Additional package dependencies may exist for each of these packages:
 
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
+
+Settings such as `remote_command_linux`, `remote_command_powershell` and `remote_computer` can be named anything and more than one will likely be used. The names will then be used in your functions: Network Utilities Linux Shell and Network Utilities Windows Shell functions.
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
@@ -160,7 +167,7 @@ The following table provides the settings you need to configure the app. These s
 | **whois** | Yes | `whois "{{shell_param1}}"` | -- |
 | **timeout_linux** | no | `20` | time in seconds to timeout, default is 20 seconds |
 
-Important to Note: Linux Shell Command, Windows Shell Command, and Local Shell Command come from Utility Functions for SOAR's Shell Command function. In that version, `remote_computer` was required to be wrapped in parantheses (). This is no longer the case, but is still accepted for backwards compatibility. Additionally, `remote_command_linux` and `remote_command_powershell` were required to be wrapped in parantheses () and brackets [], respectively. Again, this is no longer the case, but is still accepted for backwards compatibility.
+Important to Note: Linux Shell Command, Windows Shell Command, and Local Shell Command come from Utility Functions for SOAR's Shell Command function. In that version, `remote_computer` was required to be wrapped in parentheses (). This is no longer the case, but is still accepted for backwards compatibility. Additionally, `remote_command_linux` and `remote_command_powershell` were required to be wrapped in parentheses () and brackets [], respectively. Again, this is no longer the case, but is still accepted for backwards compatibility.
 
 
 ---
@@ -232,7 +239,7 @@ inputs.network_utilities_domain_list = "ibm.com, resilientsystems.com, ibmcloud.
 ```python
 # The result includes:
 #   "domain_name" - the name being tested
-#   "distances" - a dicctionary of all the distances
+#   "distances" - a dictionary of all the distances
 #   "closest" - the closest match from the list.
 # If the match distance is only 1 or 0, the domain name is very easily confused with one on the list!
 
@@ -499,7 +506,7 @@ incident.addNote(helper.createPlainText(note_text))
 ## Function - Network Utilities: Local Shell Command
 This function allows your workflows/playbooks to execute shell-scripts locally and return the result into the workflow/playbook. The results include the `stdout` and `stderr` streams, the return code, and information about the execution time. If the output of the shell script is JSON, it is returned as structured data. Results can then be added to the incident as file attachments, artifacts, data tables, or any other uses.
 
-This is not reccomended for use in App Host because the base image of the container (registry.access.redhat.com/ubi8/python-39) has limited OS commands available.
+This is not recommended for use in App Host because the base image of the container (registry.access.redhat.com/ubi8/python-39) has limited OS commands available.
 
 Different modes supported:
 * Local command execution of Linux commands such as nslookup, dig, traceroute and whois
@@ -736,19 +743,15 @@ incident.addNote(helper.createPlainText(note_text))
 
 ---
 
-
-
-
-
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Example: Network Utilities Domain Distance | artifact | `example_network_utilities_domain_distance` |
-| Example: Network Utilities Expand URL | artifact | `example_network_utilities_expand_url` |
-| Example: Network Utilities Extract SSL Certificate from URL | artifact | `example_network_utilities_extract_ssl_cert_from_url` |
-| Example: Network Utilities Linux Shell Command | artifact | `example_network_utilities_linux_shell_command` |
-| Example: Network Utilities Local Shell Command | artifact | `example_network_utilities_local_command` |
-| Example: Network Utilities Windows Shell Command | artifact | `example_network_utilities_windows_shell_command` |
+## Playbooks
+| Playbook Name | Object | 
+| --------- | ------ |
+| Network Utilities Domain Distance (PB) Example | artifact |
+| Network Utilities Expand URL (PB) Example | artifact |
+| Network Utilities Extract SSL Certificate from URL (PB) Example| artifact |
+| Network Utilities Linux Shell Command (PB) Example| artifact |
+| Network Utilities Local Shell Command (PB) Example| artifact |
+| Network Utilities Windows Shell Command (PB) Example| artifact |
 
 ---
 
