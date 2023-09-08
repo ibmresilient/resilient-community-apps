@@ -2,7 +2,7 @@
 import logging
 import json
 from pdpyras import APISession, PDClientError
-from datetime import datetime
+from datetime import datetime, timedelta
 
 PRIORITIES = 'priorities'
 ESCALATION_POLICIES = 'escalation_policies'
@@ -98,7 +98,12 @@ def list_incidents(appDict, timestamp):
         timestamp_seconds =int(str(timestamp)[:-3])
         since_date = datetime.fromtimestamp(timestamp_seconds)
         since_date_str = since_date.strftime("%Y-%m-%d")
-        resp = session.get(INCIDENT_FRAGMENT + "?" + SINCE + since_date_str)
+        six_months_ago = datetime.now() - timedelta(days=6*30)
+        
+        if since_date < six_months_ago:
+            raise ValueError("The maximum range is 6 months")
+        else:
+            resp = session.get(INCIDENT_FRAGMENT + "?" + SINCE + since_date_str)
     else:
         resp = session.get(INCIDENT_FRAGMENT)
     return resp.json()
