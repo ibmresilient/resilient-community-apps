@@ -203,10 +203,8 @@ def build_service_payload(appDict):
     
     # optional parts
     if appDict['description']:
-        payload['service']= {
-            'description': appDict['description']
-        }
-
+        payload['service']['description'] = appDict['description']
+        
     if appDict.get('escalation_policy'):
         # find the escalation policy
         escalationId = find_element_by_name(
