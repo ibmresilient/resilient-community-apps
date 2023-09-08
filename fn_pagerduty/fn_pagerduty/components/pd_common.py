@@ -49,6 +49,22 @@ def create_incident(appDict):
     resp = session.post(INCIDENT_FRAGMENT, payload)
     return resp.json()
 
+def create_service(appDict):
+    """
+    logic to create a pagerduty service
+    :param appDict:
+    :return: the json string from the PD API
+    """
+
+    payload = build_service_payload(appDict)
+    LOG.debug(payload)
+
+    # build url
+    session = APISession(
+        appDict['api_token'], name=appDict['resilient_client'])
+    resp = session.post(INCIDENT_FRAGMENT, payload)
+    return resp.json()
+
 def update_incident(appDict, incident_id, status, priority, resolution):
     """
     update an incident. Used to raise the severity or to close the Incident
@@ -169,6 +185,38 @@ def build_incident_payload(appDict):
                 "id": priorityId
             }
 
+    return json.dumps(payload)
+
+
+def build_service_payload(appDict):
+    """
+    build the JSON payload to create a service
+    :param appDict:
+    :return: json
+    """
+    payload = {'service':
+               {
+                   'type': 'service',
+                   'name': appDict['title']
+               }
+               }
+    
+    # optional parts
+    if appDict['description']:
+        payload['service']= {
+            'description': appDict['description']
+        }
+
+    if appDict.get('escalation_policy'):
+        # find the escalation policy
+        escalationId = find_element_by_name(
+            appDict, ESCALATION_POLICIES, appDict['escalation_policy'])
+        if escalationId:
+            payload['service']['escalation_policy'] = {
+                "type": "escalation_policy_reference",
+                "id": escalationId
+            }
+            
     return json.dumps(payload)
 
 def build_update_payload(appDict, status, priority, resolution):

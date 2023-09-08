@@ -31,7 +31,8 @@ setup(
             "PagerdutyTransitionIncidentFunctionComponent = fn_pagerduty.components.funct_pagerduty_transition_incident:FunctionComponent",
             "PagerdutyCreateIncidentFunctionComponent = fn_pagerduty.components.funct_pagerduty_create_incident:FunctionComponent",
             "PagerdutyListIncidentsFunctionComponent = fn_pagerduty.components.funct_pagerduty_list_incidents:FunctionComponent",
-            "PagerdutyListServicesFunctionComponent = fn_pagerduty.components.funct_pagerduty_list_services:FunctionComponent"
+            "PagerdutyListServicesFunctionComponent = fn_pagerduty.components.funct_pagerduty_list_services:FunctionComponent",
+            "PagerdutyCreateServiceFunctionComponent = fn_pagerduty.components.funct_pagerduty_create_service:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_pagerduty.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_pagerduty.util.customize:customization_data"],

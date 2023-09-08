@@ -41,7 +41,7 @@ if not playbook.inputs.pd_escalation_policy:
 
 inputs.pd_service = playbook.inputs.pd_service
 inputs.incidentID = incident.id
-inputs.pd_title = "Resilient: {}".format(incident.name)
+inputs.pd_title = "SOAR: {}".format(incident.name)
 inputs.pd_incident_key = 'RES-'+str(incident.id)
     
 priority = { 'Low': 'p3', 'Medium': 'p2', 'High': 'p1' }
