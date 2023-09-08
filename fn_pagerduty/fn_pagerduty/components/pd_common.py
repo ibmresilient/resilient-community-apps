@@ -95,7 +95,7 @@ def list_incidents(appDict, timestamp):
     
     session = APISession(appDict['api_token'])
     if timestamp:
-        timestamp_seconds = str(timestamp)[:-3]
+        timestamp_seconds =int(str(timestamp)[:-3])
         since_date = datetime.fromtimestamp(timestamp_seconds)
         since_date_str = since_date.strftime("%Y-%m-%d")
         resp = session.get(INCIDENT_FRAGMENT + "?" + SINCE + since_date_str)
