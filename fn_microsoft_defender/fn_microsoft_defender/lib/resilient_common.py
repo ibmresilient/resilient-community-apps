@@ -32,7 +32,7 @@ class ResilientCommon():
             'filters': [{
                 'conditions': [
                     {
-                        'field_name': 'properties.{0}'.format(DEFENDER_INCIDENT_ID),
+                        'field_name': f'properties.{DEFENDER_INCIDENT_ID}',
                         'method': 'equals',
                         'value': defender_incident_id
                     }
@@ -89,7 +89,7 @@ class ResilientCommon():
         """
         try:
             # Update incident
-            incident_url = "/incidents/{0}".format(incident_id)
+            incident_url = f"/incidents/{incident_id}"
             incident = self.rest_client.get(incident_url)
             patch = resilient.Patch(incident)
 
@@ -119,7 +119,7 @@ class ResilientCommon():
         :return: Response from Resilient for debug
         """
         try:
-            uri = u'/incidents/{0}/comments'.format(incident_id)
+            uri = f'/incidents/{incident_id}/comments'
             note_json = {
                 'format': 'text',
                 'content': note
@@ -135,7 +135,7 @@ class ResilientCommon():
 
     def get_incident_comments(self, incident_id):
         try:
-            uri = u'/incidents/{0}/comments'.format(incident_id)
+            uri = f'/incidents/{incident_id}/comments'
 
             comment_response = self.rest_client.get(uri=uri)
             return comment_response
@@ -154,9 +154,9 @@ class ResilientCommon():
         if hasattr(resp, "status_code"):
             if isinstance(rc, list):
                 if resp.status_code < rc[0] or resp.status_code > rc[1]:
-                    raise IntegrationError(u"status code failure: {0}".format(resp.status_code))
+                    raise IntegrationError(f"status code failure: {resp.status_code}")
             elif resp.status_code != rc:
-                raise IntegrationError(u"status code failure: {0}".format(resp.status_code))
+                raise IntegrationError(f"status code failure: {resp.status_code}")
 
             return resp.json()
 

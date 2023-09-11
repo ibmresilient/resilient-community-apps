@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2020 - Confidential Information
+# Copyright IBM Corp. 2010, 2023 - Confidential Information
 
 """Function implementation"""
 
@@ -38,7 +38,7 @@ class FunctionComponent(ResilientComponent):
             defender_indicator_value = kwargs.get("defender_indicator_value")  # text
 
             log = logging.getLogger(__name__)
-            log.info(u"defender_indicator_value: %s", defender_indicator_value)
+            log.info(f"defender_indicator_value: {defender_indicator_value}")
 
             # Get the function parameters:
             defender_api = DefenderAPI(self.options['tenant_id'],
@@ -52,11 +52,11 @@ class FunctionComponent(ResilientComponent):
             machines_result, status, reason = defender_api.call(url, content_type=None)
 
             if not status:
-                yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
+                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
 
             # convert dates to timestamps
             if status:
-                yield StatusMessage("Machines found: {}".format(len(machines_result.get('value', []))))
+                yield StatusMessage(f"Machines found: {len(machines_result.get('value', []))}")
                 for machine in machines_result.get('value', []):
                     machine['firstSeen_ts'] = convert_date(machine['firstSeen'])
                     machine['lastSeen_ts'] = convert_date(machine['lastSeen'])

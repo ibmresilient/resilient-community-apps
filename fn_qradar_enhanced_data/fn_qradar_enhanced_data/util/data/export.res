@@ -2271,10 +2271,10 @@
     }
   ],
   "server_version": {
-    "build_number": 8131,
-    "major": 46,
+    "build_number": 0,
+    "major": 45,
     "minor": 0,
-    "version": "46.0.8131"
+    "version": "45.0.0"
   },
   "tags": [],
   "task_order": [],

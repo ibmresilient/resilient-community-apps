@@ -52,11 +52,12 @@ class FunctionComponent(AppFunctionComponent):
             # Get api call header
             header = auth_info.headers.copy()
 
-            # Get rules
+            # Get rules associated with given QRadar offense
             rules_list = qradar_client.graphql_query({"id": fn_inputs.qradar_offense_id}, qradar_graphql_queries.GRAPHQL_RULESQUERY)["content"]["rules"]
             # Make list of rule IDs into a string
             ids_list_str = ', '.join([rule.get("id") for rule in rules_list])
-            # Create a dict that contains the rules ID and UUID
+            # Perform GET request to QRadar server to get the UUID for the rule ID's from the ids_list_str
+            # Create a dictionary that contains the rules ID and UUID
             rule_uuid = auth_info.make_call("GET",
                 f"{api_url}analytics/rules?fields=id, identifier&filter=id in ({ids_list_str})",
                 headers=header, timeout=timeout).json()
@@ -64,20 +65,29 @@ class FunctionComponent(AppFunctionComponent):
             # Get the mappings for all of the rules associated with the QRadar case
             for rule in rules_list:
 
-                # Add identifier/uuid to the rule
+                # Add identifier/uuid to its corresponding rule
                 for uuid in rule_uuid:
                     if str(uuid.get("id")) == rule.get("id"):
                         rules_list[rules_list.index(rule)]["identifier"] = uuid.get("identifier")
-                        rule_uuid.remove(uuid) # Removes the uuid from the rule_uuid list after it has been added to rules_list
-                        break # Exits the loop after it finds a match
+                        rule_uuid.remove(uuid) # Removes the uuid from the rule_uuid list after its added to rules_list
+                        break # Exits the loop after a match is found
 
-                # Get the MITRE mappings for the rule
-                mitre_results = auth_info.make_call("GET",
-                    f"{api_url[0:len(api_url)-4]}console/plugins/app_proxy:UseCaseManager_Service/api/mitre/mitre_coverage/{rule.get('identifier')}",
-                    headers=header).json()
+                try:
+                    # Perform api call to the Use Case Manager app on the QRadar server to get the MITRE mappings
+                    # for the current rule using the rules UUID
+                    mitre_results = self.rc.execute("GET",
+                        f"{api_url[0:len(api_url)-4]}console/plugins/app_proxy:UseCaseManager_Service/api/mappings/by_name?rule_id={rule.get('identifier')}",
+                        verify=auth_info.cafile,
+                        headers=header,
+                        timeout=timeout).json()
 
-                # Add the mapping to the rule
-                rules_list[rules_list.index(rule)]["mapping"] = mitre_results[rule['name']]['mapping']
+                    # Check if mappings are returned and not an empty dictionary
+                    if mitre_results:
+                        # Add the mapping to its corresponding rule
+                        rules_list[rules_list.index(rule)]["mapping"] = mitre_results[rule['name']]['mapping']
+                except Exception as er:
+                    # If the api call to Use Case Manager errors than Log error and continue
+                    self.LOG.error(str(er))
 
             yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
