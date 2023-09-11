@@ -1,0 +1,44 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "productId": "EPOAGENTMETA",
+      "typeName": "McAfee Agent: McAfee Agent Statistics",
+      "objectName": "Collect All",
+      "typeId": 4,
+      "objectId": 7,
+      "productName": "McAfee Agent "
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "typeName": "McAfee Agent: McAfee Agent Wakeup",
+      "objectName": "Get changed properties",
+      "typeId": 3,
+      "objectId": 14,
+      "productName": "McAfee Agent "
+    },
+    {
+      "productId": "EPOAGENTMETA",
+      "typeName": "McAfee Agent: Product Update",
+      "objectName": "Update all packages",
+      "typeId": 1,
+      "objectId": 15,
+      "productName": "McAfee Agent "
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "incident_id": 2108,
+    "datatable_name": "mcafee_epo_client_tasks"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 1088,
+    "timestamp": "2022-08-12 09:58:29"
+  }
+}

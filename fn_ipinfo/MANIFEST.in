@@ -1,0 +1,4 @@
+include README.md
+include fn_ipinfo/util/*
+include fn_ipinfo/LICENSE
+include fn_ipinfo/doc/*
