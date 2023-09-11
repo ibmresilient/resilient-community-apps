@@ -40,7 +40,7 @@ def call_azure_list_credentials_by_automation_account_function(circuits, functio
         return event.kwargs["result"].value
 
 
-class TestAzureListAutomationCredentialsByAutomationAccount:
+class TestAzureListCredentialsByAutomationAccount:
     """ Tests for the azure_list_credentials_by_automation_account function"""
 
     def test_function_definition(self):

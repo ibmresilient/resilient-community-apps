@@ -40,7 +40,7 @@ def call_azure_get_account_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestAzureGetAutomationAccount:
+class TestAzureGetAccount:
     """ Tests for the azure_get_account function"""
 
     def test_function_definition(self):

@@ -40,7 +40,7 @@ def call_azure_update_schedule_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestAzureUpdateAutomationSchedule:
+class TestAzureUpdateSchedule:
     """ Tests for the azure_update_schedule function"""
 
     def test_function_definition(self):

@@ -40,7 +40,7 @@ def call_azure_regenerate_agent_registration_key_function(circuits, function_par
         return event.kwargs["result"].value
 
 
-class TestAzureRegenerateAutomationAgentRegistrationKey:
+class TestAzureRegenerateAgentRegistrationKey:
     """ Tests for the azure_regenerate_agent_registration_key function"""
 
     def test_function_definition(self):

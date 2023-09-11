@@ -41,7 +41,7 @@ def call_azure_delete_credential_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestAzureDeleteAutomationCredential:
+class TestAzureDeleteCredential:
     """ Tests for the azure_delete_credential function"""
 
     def test_function_definition(self):

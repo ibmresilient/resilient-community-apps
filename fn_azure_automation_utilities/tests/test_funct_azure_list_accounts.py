@@ -40,7 +40,7 @@ def call_azure_list_accounts_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestAzureListAutomationAccounts:
+class TestAzureListAccounts:
     """ Tests for the azure_list_accounts function"""
 
     def test_function_definition(self):

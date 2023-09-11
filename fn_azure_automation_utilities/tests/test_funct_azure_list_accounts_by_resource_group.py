@@ -33,14 +33,14 @@ def call_azure_list_accounts_by_resource_group_function(circuits, function_param
 
     # else return the FunctionComponent's results
     else:
-        event = circuits.watcher.wait("azure_list_accounts_by_resource_group_results", parent=evt, timeout=timeout)
+        event = circuits.watcher.wait("azure_list_accounts_by_resource_group_result", parent=evt, timeout=timeout)
         assert event
         assert isinstance(event.kwargs["result"], FunctionResult)
         pytest.wait_for(event, "complete", True)
         return event.kwargs["result"].value
 
 
-class TestAzureListAutomationAccountsByResourceGroup:
+class TestAzureListAccountsByResourceGroup:
     """ Tests for the azure_list_accounts_by_resource_group function"""
 
     def test_function_definition(self):

@@ -40,7 +40,7 @@ def call_azure_create_credential_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestAzureCreateAutomationCredential:
+class TestAzureCreateCredential:
     """ Tests for the azure_create_credential function"""
 
     def test_function_definition(self):

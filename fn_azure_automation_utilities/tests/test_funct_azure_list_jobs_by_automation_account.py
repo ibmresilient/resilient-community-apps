@@ -40,7 +40,7 @@ def call_azure_list_jobs_by_automation_account_function(circuits, function_param
         return event.kwargs["result"].value
 
 
-class TestAzureListAutomationJobsByAutomationAccount:
+class TestAzureListJobsByAutomationAccount:
     """ Tests for the azure_list_jobs_by_automation_account function"""
 
     def test_function_definition(self):

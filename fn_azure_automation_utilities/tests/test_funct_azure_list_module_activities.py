@@ -40,7 +40,7 @@ def call_azure_list_module_activities_function(circuits, function_params, timeou
         return event.kwargs["result"].value
 
 
-class TestAzureListAutomationModuleActivities:
+class TestAzureListModuleActivities:
     """ Tests for the azure_list_module_activities function"""
 
     def test_function_definition(self):

@@ -39,7 +39,7 @@ def call_azure_list_schedule_by_automation_account_function(circuits, function_p
         return event.kwargs["result"].value
 
 
-class TestAzureListAutomationScheduleByAutomationAccount:
+class TestAzureListScheduleByAutomationAccount:
     """ Tests for the azure_list_schedule_by_automation_account function"""
 
     def test_function_definition(self):

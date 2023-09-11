@@ -40,7 +40,7 @@ def call_azure_delete_schedule_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestAzureDeleteAutomationSchedule:
+class TestAzureDeleteSchedule:
     """ Tests for the azure_delete_schedule function"""
 
     def test_function_definition(self):

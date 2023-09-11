@@ -40,7 +40,7 @@ def call_azure_stop_job_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestAzureStopAutomationJob:
+class TestAzureStopJob:
     """ Tests for the azure_stop_job function"""
 
     def test_function_definition(self):

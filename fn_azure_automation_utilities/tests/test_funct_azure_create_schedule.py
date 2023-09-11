@@ -40,7 +40,7 @@ def call_azure_create_schedule_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestAzureCreateAutomationSchedule:
+class TestAzureCreateSchedule:
     """ Tests for the azure_create_schedule function"""
 
     def test_function_definition(self):

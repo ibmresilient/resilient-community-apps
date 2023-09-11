@@ -40,7 +40,7 @@ def call_azure_update_account_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestAzureUpdateAutomationAccount:
+class TestAzureUpdateAccount:
     """ Tests for the azure_update_account function"""
 
     def test_function_definition(self):

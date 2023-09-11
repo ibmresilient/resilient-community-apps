@@ -40,7 +40,7 @@ def call_azure_get_agent_registration_information_function(circuits, function_pa
         return event.kwargs["result"].value
 
 
-class TestAzureGetAutomationAgentRegistrationInformation:
+class TestAzureGetAgentRegistrationInformation:
     """ Tests for the azure_get_agent_registration_information function"""
 
     def test_function_definition(self):

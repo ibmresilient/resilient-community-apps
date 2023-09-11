@@ -40,7 +40,7 @@ def call_azure_get_module_activity_function(circuits, function_params, timeout=5
         return event.kwargs["result"].value
 
 
-class TestAzureGetAutomationModuleActivity:
+class TestAzureGetModuleActivity:
     """ Tests for the azure_get_module_activity function"""
 
     def test_function_definition(self):

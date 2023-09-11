@@ -39,7 +39,7 @@ def call_azure_create_account_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestAzureCreateAutomationAccount:
+class TestAzureCreateAccount:
     """ Tests for the azure_create_account function"""
 
     def test_function_definition(self):

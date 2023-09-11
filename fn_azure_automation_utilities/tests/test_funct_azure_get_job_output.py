@@ -40,7 +40,7 @@ def call_azure_get_job_output_function(circuits, function_params, timeout=5):
         return event.kwargs["result"].value
 
 
-class TestAzureGetAutomationJobOutput:
+class TestAzureGetJobOutput:
     """ Tests for the azure_get_job_output function"""
 
     def test_function_definition(self):
