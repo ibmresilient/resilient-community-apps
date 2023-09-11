@@ -109,7 +109,7 @@ def update_account_results():
         }
     }
 
-def get_automation_acc_results():
+def get_acc_results():
     return {
         "name": "testing352",
         "systemData": {
@@ -162,7 +162,7 @@ def get_automation_acc_results():
         }
     }
 
-def get_automation_module_activity_results():
+def get_module_activity_results():
     return {
         "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/modules/Az.Advisor/activities/Set-AzAdvisorConfiguration",
         "name": "Set-AzAdvisorConfiguration",
@@ -338,7 +338,7 @@ def get_automation_module_activity_results():
         }
     }
 
-def list_automation_accounts_by_resource_group_result():
+def list_accounts_by_resource_group_results():
     return {
         "value": [
             {
@@ -398,7 +398,7 @@ def list_automation_accounts_by_resource_group_result():
         ]
     }
 
-def list_automation_accounts_result():
+def list_accounts_results():
     return {
         "value": [
             {
@@ -455,7 +455,7 @@ def list_automation_accounts_result():
         ]
     }
 
-def list_automation_module_activities_results():
+def list_module_activities_results():
     return {
         "value": [
             {
@@ -664,7 +664,7 @@ def list_jobs_by_automation_account_results():
         ]
     }
 
-def get_automation_agent_registration_information_results():
+def get_agent_registration_information_results():
     return {
         "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/agentRegistrationInformation/https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6",
         "keys": {
@@ -675,7 +675,7 @@ def get_automation_agent_registration_information_results():
         "dscMetaConfiguration": "\r\n\tinstance of MSFT_WebDownloadManager as $MSFT_WebDownloadManager1ref\r\n\t{\r\n\tResourceID = \"[ConfigurationRepositoryWeb]AzureAutomationDSC\";\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::20::9::ConfigurationRepositoryWeb\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t};\r\n\r\n\tinstance of MSFT_WebResourceManager as $MSFT_WebResourceManager1ref\r\n\t{\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::27::9::ResourceRepositoryWeb\";\r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t ResourceID = \"[ResourceRepositoryWeb]AzureAutomationDSC\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t};\r\n\r\n\tinstance of MSFT_WebReportManager as $MSFT_WebReportManager1ref\r\n\t{\r\n\t SourceInfo = \"C:\\\\OaaS-RegistrationMetaConfig2.ps1::34::9::ReportServerWeb\";\r\n\t ServerURL = \"https://abcdefgh-1234-abcd-1234-a1b2c3d4e5f6.agentsvc.eus.azure-automation.net/accounts/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6\";\r\n\t ResourceID = \"[ReportServerWeb]AzureAutomationDSC\";\r\n\t RegistrationKey = \"1234RYKSRuyfmINzCvic0Oz7DpGskIbty5W12345QbKWlsYT0BGp6qzfwz12345678vuh28cqRMoxDD39Iut7w==\"; \r\n\t};\r\n\r\n\tinstance of MSFT_DSCMetaConfiguration as $MSFT_DSCMetaConfiguration1ref\r\n\t{\r\n\t RefreshMode = \"Pull\";\r\n\t AllowModuleOverwrite = False;\r\n\t ActionAfterReboot = \"ContinueConfiguration\";\r\n\t RefreshFrequencyMins = 30;\r\n\t RebootNodeIfNeeded = False;\r\n\t ConfigurationModeFrequencyMins = 15;\r\n\t ConfigurationMode = \"ApplyAndMonitor\";\r\n\r\n\t  ResourceModuleManagers = {\r\n\t  $MSFT_WebResourceManager1ref  \r\n\t};\r\n\t  ReportManagers = {\r\n\t  $MSFT_WebReportManager1ref  \r\n\t };\r\n\t  ConfigurationDownloadManagers = {\r\n\t  $MSFT_WebDownloadManager1ref  \r\n\t };\r\n\t};\r\n\r\n\tinstance of OMI_ConfigurationDocument\r\n\t{\r\n\t Version=\"2.0.0\";\r\n\t MinimumCompatibleVersion = \"2.0.0\";\r\n\t CompatibleVersionAdditionalProperties= { \"MSFT_DSCMetaConfiguration:StatusRetentionTimeInDays\" };\r\n\t Author=\"azureautomation\";\r\n\t GenerationDate=\"04/17/2015 11:41:09\";\r\n\t GenerationHost=\"azureautomation-01\";\r\n\t Name=\"RegistrationMetaConfig\";\r\n\t};\r\n\t"
     }
 
-def regenerate_automation_account_registration_key_results():
+def regenerate_account_registration_key_results():
     return {
         "id": None,
         "keys": {
@@ -686,7 +686,7 @@ def regenerate_automation_account_registration_key_results():
         "dscMetaConfiguration": None
     }
 
-def create_automation_credential_results():
+def create_credential_results():
     return {
         "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/tes43",
         "name": "tes43",
@@ -699,7 +699,7 @@ def create_automation_credential_results():
         }
     }
 
-def get_automation_credential_results():
+def get_credential_results():
     return {
         "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/tes43",
         "name": "tes43",
@@ -712,7 +712,7 @@ def get_automation_credential_results():
         }
     }
 
-def list_automation_credentials_by_automation_account_results():
+def list_credentials_by_automation_account_results():
     return {
         "value": [
             {
@@ -773,7 +773,7 @@ def list_automation_credentials_by_automation_account_results():
         ]
     }
 
-def update_automation_credential_results():
+def update_credential_results():
     return {
         "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/test32",
         "name": "test32",
@@ -786,7 +786,7 @@ def update_automation_credential_results():
         }
     }
 
-def create_automation_schedule_results():
+def create_schedule_results():
     return {
         "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/tester1324",
         "name": "tester1324",
@@ -809,7 +809,7 @@ def create_automation_schedule_results():
         }
     }
 
-def get_automation_schedule_results():
+def get_schedule_results():
     return {
         "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/tester1324",
         "name": "tester1324",
@@ -832,7 +832,7 @@ def get_automation_schedule_results():
         }
     }
 
-def list_automation_schedule_by_automation_account_results():
+def list_schedule_by_automation_account_results():
     return {
         "value": [
         {
@@ -901,7 +901,7 @@ def list_automation_schedule_by_automation_account_results():
         ]
     }
 
-def update_automation_schedule_results():
+def update_schedule_results():
     return {
         "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/s",
         "name": "s",
@@ -1077,16 +1077,16 @@ def mock_init():
             """ Mock """
             pass
 
-        def create_automation_account(self, payload):
-            """ Mock create automation account return """
+        def create_account(self, payload):
+            """ Mock create account results """
             return create_account_results()
 
-        def update_automation_account(self, payload):
-            """ Mock update automation account return """
+        def update_account(self, payload):
+            """ Mock update account results """
             return update_account_results()
 
-        def delete_automation_acount(self):
-            """ Mock delete automation account return """
+        def delete_acount(self):
+            """ Mock delete account results """
             class MockDeleteAccount(object):
                 status_code = 200
                 text = ""
@@ -1096,48 +1096,48 @@ def mock_init():
 
             return MockDeleteAccount()
 
-        def get_automation_account(self):
-            """ Mock get automation account return """
-            return get_automation_acc_results()
+        def get_account(self):
+            """ Mock get account results """
+            return get_acc_results()
 
-        def get_automation_module_activity(self, moduleName, activityName):
-            """ Mock get automation module activity return """
-            return get_automation_module_activity_results()
+        def get_module_activity(self, moduleName, activityName):
+            """ Mock get module activity results """
+            return get_module_activity_results()
 
-        def list_automation_accounts_by_resource_group(self):
-            """ Mock list automation accounts by resource group return """
-            return list_automation_accounts_by_resource_group_result()
+        def list_accounts_by_resource_group(self):
+            """ Mock list accounts by resource group results """
+            return list_accounts_by_resource_group_results()
 
-        def list_automation_accounts(self):
-            """ Mock list automation accounts return """
-            return list_automation_accounts_result()
+        def list_accounts(self):
+            """ Mock list accounts results """
+            return list_accounts_results()
 
-        def list_automation_module_activities(self, moduleName):
-            """ Mock list automation module activities return """
-            return list_automation_module_activities_results()
+        def list_module_activities(self, moduleName):
+            """ Mock list module activities results """
+            return list_module_activities_results()
 
         def run_runbook(self, runbook_name, job_name = 0, runbook_parameters = {}):
-            """ Mock run runbook return """
+            """ Mock run runbook results """
             return {"name": job_name}
 
         def get_job_final_status(self, job_name, time_to_wait):
-            """ Mock get job final status return """
+            """ Mock get job final status results """
             return "Completed"
 
         def get_job_results(self, job_name):
-            """ Mock get job results return """
+            """ Mock get job results results """
             return get_job_output_results()
 
         def get_runbook(self, runbook_name):
-            """ Mock get runbook return """
+            """ Mock get runbook results """
             return get_runbook_results()
 
         def list_runbooks_by_automation_account(self):
-            """ Mock list runbooks by automation account return """
+            """ Mock list runbooks by automation account results """
             return list_runbooks_by_automation_account_results()
 
         def delete_runbook(self, runbook_name):
-            """ Mock delete runbook return """
+            """ Mock delete runbook results """
             class MockDeleteRunbook(object):
                 status_code = 200
                 text = ""
@@ -1148,15 +1148,15 @@ def mock_init():
             return MockDeleteRunbook()
 
         def get_job(self, job_name):
-            """ Mock get job return """
+            """ Mock get job results """
             return get_job_results()
 
         def list_jobs_by_automation_account(self):
-            """ Mock List jobs by automation account return """
+            """ Mock List jobs by automation account results """
             return list_jobs_by_automation_account_results()
 
-        def stop_automation_job(self, job_name):
-            """ Mock stop automation job results """
+        def stop_job(self, job_name):
+            """ Mock stop job results """
             class MockStopJob(object):
                 status_code = 200
                 text = ""
@@ -1166,8 +1166,8 @@ def mock_init():
 
             return MockStopJob()
 
-        def resume_automation_job(self, job_name):
-            """ Mock resume automation job results """
+        def resume_job(self, job_name):
+            """ Mock resume job results """
             class MockResumeJob(object):
                 status_code = 200
                 text = ""
@@ -1177,8 +1177,8 @@ def mock_init():
 
             return MockResumeJob()
 
-        def suspend_automation_job(self, job_name):
-            """ Mock resume automation job results """
+        def suspend_job(self, job_name):
+            """ Mock suspend job results """
             class MockSuspendJob(object):
                 status_code = 200
                 text = ""
@@ -1188,20 +1188,20 @@ def mock_init():
 
             return MockSuspendJob()
 
-        def get_automation_agent_registration_information(self):
-            """ Mock get automation agent registration information results """
-            return get_automation_agent_registration_information_results()
+        def get_agent_registration_information(self):
+            """ Mock get agent registration information results """
+            return get_agent_registration_information_results()
 
-        def regenerate_automation_account_registration_key(self, payload):
-            """ Mock regenerate automation account registration key results """
-            return regenerate_automation_account_registration_key_results()
+        def regenerate_account_registration_key(self, payload):
+            """ Mock regenerate account registration key results """
+            return regenerate_account_registration_key_results()
 
-        def create_automation_credential(self, credential_name: str, payload: dict):
-            """ Mock create automation credential results """
-            return create_automation_credential_results()
+        def create_credential(self, credential_name: str, payload: dict):
+            """ Mock create credential results """
+            return create_credential_results()
 
-        def delete_automation_credential(self, credential_name: str):
-            """ Mock delete automation credential results """
+        def delete_credential(self, credential_name: str):
+            """ Mock delete credential results """
             class MockDeleteCred(object):
                 status_code = 200
                 text = ""
@@ -1211,24 +1211,24 @@ def mock_init():
 
             return MockDeleteCred()
 
-        def get_automation_credential(self, credential_name: str):
-            """ Mock get automation credential results """
-            return get_automation_credential_results()
+        def get_credential(self, credential_name: str):
+            """ Mock get credential results """
+            return get_credential_results()
 
-        def list_automation_credentials_by_automation_account(self):
-            """ Mock list automation credentials by automation account results """
-            return list_automation_credentials_by_automation_account_results()
+        def list_credentials_by_automation_account(self):
+            """ Mock list credentials by automation account results """
+            return list_credentials_by_automation_account_results()
 
-        def update_automation_credential(self, credential_name: str, payload: dict):
-            """ Mock update automation credential results """
-            return update_automation_credential_results()
+        def update_credential(self, credential_name: str, payload: dict):
+            """ Mock update credential results """
+            return update_credential_results()
 
-        def create_automation_schedule(self, schedule_name: str, payload: dict):
-            """ Mock create automation schedule results """
-            return create_automation_schedule_results()
+        def create_schedule(self, schedule_name: str, payload: dict):
+            """ Mock create schedule results """
+            return create_schedule_results()
 
-        def delete_automation_schedule(self, schedule_name: str):
-            """ Mock delete automation schedule results """
+        def delete_schedule(self, schedule_name: str):
+            """ Mock delete schedule results """
             class MockDeleteSchedule(object):
                 status_code = 200
                 text = ""
@@ -1238,17 +1238,17 @@ def mock_init():
 
             return MockDeleteSchedule()
 
-        def get_automation_schedule(self, schedule_name: str):
-            """ Mock get automation schedule results """
-            return get_automation_schedule_results()
+        def get_schedule(self, schedule_name: str):
+            """ Mock get schedule results """
+            return get_schedule_results()
 
-        def list_automation_schedule_by_automation_account(self):
-            """ Mock list automation schedule by automation account results """
-            return list_automation_schedule_by_automation_account_results()
+        def list_schedule_by_automation_account(self):
+            """ Mock list schedule by automation account results """
+            return list_schedule_by_automation_account_results()
 
-        def update_automation_schedule(self, schedule_name: str, payload: dict):
-            """ Mock update automation schedule results """
-            return update_automation_schedule_results()
+        def update_schedule(self, schedule_name: str, payload: dict):
+            """ Mock update schedule results """
+            return update_schedule_results()
 
         def get_node_report(self, node_id: str, report_id: str):
             """ Mock get node report results """

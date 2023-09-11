@@ -172,7 +172,7 @@ class AzureClient(object):
             if job_status == "Failed":
                 raise AzureRunJobFailed(f"Run job: {job_name} failed.")
 
-    def create_automation_account(self, payload: dict):
+    def create_account(self, payload: dict):
         """
         Create an Azure automation account.
         :param payload: Payload to send to azure that contains automation account properties.
@@ -203,7 +203,7 @@ class AzureClient(object):
         headers['Content-Type'] = 'application/json'
         return self.rc.execute("PUT", url, headers=headers, json=payload).json()
 
-    def update_automation_account(self, payload: dict):
+    def update_account(self, payload: dict):
         """
         Update an Azure automation account.
         :param payload: Payload to send to azure that contains automation account properties.
@@ -234,7 +234,7 @@ class AzureClient(object):
         headers['Content-Type'] = 'application/json'
         return self.rc.execute("PATCH", url, headers=headers, json=payload).json()
 
-    def delete_automation_acount(self):
+    def delete_acount(self):
         """
         Delete an Azure automation account
         :return: Response from Delete request to delete an Azure automation account.
@@ -243,7 +243,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}?api-version=2021-06-22"
         return self.rc.execute("Delete", url, headers=self.header)
 
-    def get_automation_account(self):
+    def get_account(self):
         """
         Get an Azure automation accounts information.
         :return: Response from GET request to get an Azure automation account
@@ -254,7 +254,7 @@ class AzureClient(object):
         headers['Content-Type'] = 'application/json'
         return self.rc.execute("GET", url, headers=headers).json()
 
-    def list_automation_accounts(self):
+    def list_accounts(self):
         """
         Lists the Automation Accounts within an Azure subscription
         :return: Response from GET request to list Azure automation accounts
@@ -265,7 +265,7 @@ class AzureClient(object):
         headers['Content-Type'] = 'application/json'
         return self.rc.execute("GET", url, headers=headers).json()
 
-    def list_automation_accounts_by_resource_group(self):
+    def list_accounts_by_resource_group(self):
         """
         Retrieve a list of accounts within a given resource group
         :return: Response from GET request to list Azure automation accounts
@@ -276,7 +276,7 @@ class AzureClient(object):
         headers['Content-Type'] = 'application/json'
         return self.rc.execute("GET", url, headers=headers).json()
 
-    def get_automation_module_activity(self, moduleName: str, activityName: str):
+    def get_module_activity(self, moduleName: str, activityName: str):
         """
         Retrieve the activity in the module identified by module name and activity name.
         :param moduleName: The name of module.
@@ -291,7 +291,7 @@ class AzureClient(object):
         headers['Content-Type'] = 'application/json'
         return self.rc.execute("GET", url, headers=headers).json()
 
-    def list_automation_module_activities(self, moduleName: str):
+    def list_module_activities(self, moduleName: str):
         """
         Retrieve a list of activities in the module identified by module name.
         :param moduleName: The name of module.
@@ -350,7 +350,7 @@ class AzureClient(object):
         header["Content-Type"] = 'application/json'
         return self.rc.execute("GET", url, headers=header).json()
 
-    def stop_automation_job(self, job_name: str):
+    def stop_job(self, job_name: str):
         """
         Stop the job identified by jobName
         :param job_name: Name of the Azure automation job
@@ -361,7 +361,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}/stop?api-version=2019-06-01"
         return self.rc.execute("POST", url, headers=self.header)
 
-    def resume_automation_job(self, job_name: str):
+    def resume_job(self, job_name: str):
         """
         Resume the job identified by jobName
         :param job_name: Name of the Azure automation job
@@ -372,7 +372,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}/resume?api-version=2019-06-01"
         return self.rc.execute("POST", url, headers=self.header)
 
-    def suspend_automation_job(self, job_name: str):
+    def suspend_job(self, job_name: str):
         """
         Suspend the job identified by jobName
         :param job_name: Name of the Azure automation job
@@ -383,7 +383,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/jobs/{job_name}/suspend?api-version=2019-06-01"
         return self.rc.execute("POST", url, headers=self.header)
 
-    def get_automation_agent_registration_information(self):
+    def get_agent_registration_information(self):
         """
         Retrieve the automation agent registration information.
         :return: Response from GET request to Azure
@@ -394,7 +394,7 @@ class AzureClient(object):
         header["Content-Type"] = 'application/json'
         return self.rc.execute("GET", url, headers=header).json()
 
-    def regenerate_automation_account_registration_key(self, payload):
+    def regenerate_account_registration_key(self, payload):
         """
         Regenerate a primary or secondary agent registration key
         :param payload: Dictionary that sets the agent registration key name
@@ -407,7 +407,7 @@ class AzureClient(object):
         header["Content-Type"] = 'application/json'
         return self.rc.execute("POST", url, json=payload, headers=header).json()
 
-    def create_automation_credential(self, credential_name: str, payload: dict):
+    def create_credential(self, credential_name: str, payload: dict):
         """
         Create a credential.
         :param credential_name: Name of the Azure automation credential
@@ -432,7 +432,7 @@ class AzureClient(object):
         header["Content-Type"] = 'application/json'
         return self.rc.execute("PUT", url, json=payload, headers=header).json()
 
-    def delete_automation_credential(self, credential_name: str):
+    def delete_credential(self, credential_name: str):
         """
         Delete a credential.
          :param credential_name: Name of the Azure automation credential
@@ -443,7 +443,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/credentials/{credential_name}?api-version=2019-06-01"
         return self.rc.execute("DELETE", url, headers=self.header)
 
-    def get_automation_credential(self, credential_name: str):
+    def get_credential(self, credential_name: str):
         """
         Get a credential.
         :param credential_name: Name of the Azure automation credential
@@ -456,7 +456,7 @@ class AzureClient(object):
         header["Content-Type"] = 'application/json'
         return self.rc.execute("GET", url, headers=header).json()
 
-    def list_automation_credentials_by_automation_account(self):
+    def list_credentials_by_automation_account(self):
         """
         Retrieve a list of credentials.
         :return: Response from GET request to Azure
@@ -467,7 +467,7 @@ class AzureClient(object):
         header["Content-Type"] = 'application/json'
         return self.rc.execute("GET", url, headers=header).json()
 
-    def update_automation_credential(self, credential_name: str, payload: dict):
+    def update_credential(self, credential_name: str, payload: dict):
         """
         Update a credential.
         :param credential_name: Name of the Azure automation credential
@@ -492,7 +492,7 @@ class AzureClient(object):
         header["Content-Type"] = 'application/json'
         return self.rc.execute("PATCH", url, json=payload, headers=header).json()
 
-    def create_automation_schedule(self, schedule_name: str, payload: dict):
+    def create_schedule(self, schedule_name: str, payload: dict):
         """
         Create a schedule.
         :param schedule_name: Name of the Azure automation schedule
@@ -520,7 +520,7 @@ class AzureClient(object):
         header["Content-Type"] = 'application/json'
         return self.rc.execute("PUT", url, json=payload, headers=header).json()
 
-    def delete_automation_schedule(self, schedule_name: str):
+    def delete_schedule(self, schedule_name: str):
         """
         Delete the schedule identified by schedule name.
         :param schedule_name: Name of the Azure automation schedule
@@ -531,7 +531,7 @@ class AzureClient(object):
         url = f"{self.base_url}/automationAccounts/{self.automation_account_name}/schedules/{schedule_name}?api-version=2019-06-01"
         return self.rc.execute("Delete", url, headers=self.header)
 
-    def get_automation_schedule(self, schedule_name: str):
+    def get_schedule(self, schedule_name: str):
         """
         Retrieve the schedule identified by schedule name.
         :param schedule_name: Name of the Azure automation schedule
@@ -544,7 +544,7 @@ class AzureClient(object):
         header["Content-Type"] = 'application/json'
         return self.rc.execute("GET", url, headers=header).json()
 
-    def list_automation_schedule_by_automation_account(self):
+    def list_schedule_by_automation_account(self):
         """
         Retrieve a list of schedules.
         :return: Response from GET request to Azure
@@ -555,7 +555,7 @@ class AzureClient(object):
         header["Content-Type"] = 'application/json'
         return self.rc.execute("GET", url, headers=header).json()
 
-    def update_automation_schedule(self, schedule_name: str, payload: dict):
+    def update_schedule(self, schedule_name: str, payload: dict):
         """
         Update the schedule identified by schedule name.
         :param schedule_name: Name of the Azure automation schedule

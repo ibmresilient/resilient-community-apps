@@ -31,9 +31,16 @@ setup(
     description="IBM SOAR App for Azure Automation",
     long_description="""This app allows interaction with the following Azure Automation resources:\n
     - Automation Accounts
-    - Activity
-    - Job
-    - Runbook""",
+    - Activities
+    - Jobs
+    - Runbooks
+    - Nodes
+    - Credentials
+    - Schedules
+    - Modules
+    - Agent Registration
+    - Statistics
+    - Usage""",
     install_requires=[
         "resilient-circuits>=47.0.0"
     ],
