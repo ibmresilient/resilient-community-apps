@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
-import os
-import pytest, random
-
+import pytest
 from unittest.mock import patch
 from resilient_lib import IntegrationError
-
 from tests import testcommons
 from tests.testcommons import required_parameters
 from fn_teams.lib.microsoft_channels import ChannelInterface
@@ -50,9 +47,7 @@ def patch_create_channel(method, url, headers, callback, data=None):
         assert ret["value"][0]["id"] in url_sections
         assert "displayName" in body and body.get("displayName")
         assert "description" in body and body.get("description")
-        return {
-            "status_code" : 201}
-
+        return {"status_code" : 201}
 
 @patch('resilient_lib.RequestsCommon.execute', side_effect=patch_create_channel)
 def test_create_channel(patch, required_parameters):
