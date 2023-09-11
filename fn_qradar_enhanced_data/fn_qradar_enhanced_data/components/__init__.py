@@ -2,9 +2,9 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 from resilient_lib.ui import Datatable, Tab, Field, create_tab
 from resilient_circuits.app import AppArgumentParser
-import logging
+from logging import getLogger
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 class QRadarTab(Tab):
     SECTION = "fn_qradar_integration"
