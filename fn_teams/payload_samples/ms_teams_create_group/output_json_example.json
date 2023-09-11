@@ -3,21 +3,21 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "489acc09-3bac-4c43-a168-544df4bf40ff",
+    "id": "3cde21c1-7e9c-4f6d-b986-06d879c43dad",
     "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2022-11-15T16:30:37Z",
+    "createdDateTime": "2023-05-15T18:13:38Z",
     "creationOptions": [],
-    "description": "Incident 2095: MS Teams This is a sample incident created for MS teams in SOAR v45",
-    "displayName": "SOAR",
+    "description": "test1",
+    "displayName": "test1",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "SOAR@****.onmicrosoft.com",
+    "mail": "test1@swivrllc.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "SOAR",
+    "mailNickname": "test1",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
@@ -29,34 +29,36 @@
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:SOAR@****.onmicrosoft.com"
+      "SMTP:test1@swivrllc.onmicrosoft.com"
     ],
-    "renewedDateTime": "2022-11-15T16:30:37Z",
+    "renewedDateTime": "2023-05-15T18:13:38Z",
     "resourceBehaviorOptions": [],
     "resourceProvisioningOptions": [],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-1218104329-1279474604-1297377441-4282433524",
+    "securityIdentifier": "S-1-12-1-1021190593-1332575900-3624306361-2906506361",
     "theme": null,
-    "visibility": "Public",
+    "visibility": "Private",
     "onPremisesProvisioningErrors": [],
     "teamsEnabled": false,
     "unfoundUsers": []
   },
   "raw": null,
   "inputs": {
-    "incident_id": 2095,
-    "ms_group_description": "Incident 2095: MS Teams This is a sample incident created for MS teams in SOAR v45",
-    "ms_owners_list": "AdminSoarMS@****.onmicrosoft.com",
-    "ms_group_name": "SOAR",
-    "ms_group_mail_nickname": "SOAR",
-    "add_members_from": "Incident"
+    "incident_id": 2122,
+    "additional_members": "",
+    "ms_owners_list": "markscherfling@swivrllc.onmicrosoft.com",
+    "ms_group_name": "test1",
+    "ms_group_mail_nickname": "test1",
+    "add_members_from": "None",
+    "task_id": null,
+    "ms_description": "test1"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.0.0",
-    "host": "Apphost",
-    "execution_time_ms": 20595,
-    "timestamp": "2022-11-15 16:30:46"
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 1560,
+    "timestamp": "2023-05-15 14:13:39"
   }
 }

@@ -1,69 +1,62 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 from resilient_circuits import FunctionError
-import logging
+from logging import getLogger
+from resilient_lib import validate_fields, RequestsCommon
+
+PACKAGE_NAME = 'fn_xforce'
+LOG = getLogger(__name__)
 
 class XForceHelper:
 
-  def str_to_bool(self, str):
-    """Convert unicode string to equivalent boolean value. Converts a "true" or "false" string to a boolean value , string is case insensitive."""
-    if str.lower() == 'true':
-        return True
-    elif str.lower() == 'false':
-        return False
-    else:
-        raise ValueError
+    def __init__(self, options):
+        self.options = options
 
-  def get_config_option(self, option_name, optional=False):
-    """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-    option = self.options.get(option_name)
+    def get_baseurl(self):
+        validate_fields(["xforce_baseurl"], self.options)
+        return self.options.get("xforce_baseurl")
 
-    if option is None and optional is False:
-      err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function properly".format(option_name)
-      raise ValueError(err)
-    else:
-      return option
-  
-  def get_function_input(self, inputs, input_name, optional=False):
-    """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
-    input = inputs.get(input_name)
+    def setup_proxies(self):
+        # Get http proxies from the app.config
+        http_proxy = self.options.get("xforce_http_proxy")
+        # Get https proxies from the app.config
+        https_proxy = self.options.get("xforce_https_proxy")
+        LOG.info(f"X-Force Proxies: HTTP {http_proxy} and HTTPS {https_proxy}")
 
-    if input is None and optional is False:
-      err = "'{0}' is a mandatory function input".format(input_name)
-      raise ValueError(err)
-    else:
-      return input
+        # Set proxies as empty dict
+        proxies = {}
 
-  def setup_config(self):
-    XFORCE_APIKEY = self.get_config_option("xforce_apikey")
-    XFORCE_PASSWORD = self.get_config_option("xforce_password")
-    XFORCE_BASEURL = self.get_config_option("xforce_baseurl")
-    HTTP_PROXY = self.get_config_option("xforce_http_proxy", True)
-    HTTPS_PROXY = self.get_config_option("xforce_https_proxy", True)
-    return HTTPS_PROXY, HTTP_PROXY, XFORCE_APIKEY, XFORCE_BASEURL, XFORCE_PASSWORD
+        if http_proxy:
+            proxies["http"] = http_proxy
+        if https_proxy:
+            proxies["https"] = https_proxy
 
-  def setup_proxies(self, proxies, http_proxy, https_proxy):
-    if http_proxy:
-        proxies["http"] = http_proxy
-    if https_proxy:
-        proxies["https"] = https_proxy
-    if len(proxies) == 0:
-        proxies = None
-    return proxies
+        return proxies
 
-  def handle_case_response(self, res):
-    if int(res.status_code / 100) == 2:
-      return res
-    elif res.status_code == 401:
-      raise FunctionError("401 Status code returned. Retry function with updated credentials")
-    elif res.status_code == 403:
-      raise FunctionError("403 Forbidden response received by API")
-    else:
-      logging.getLogger(__name__).error("Got unexpected result from request.")
-      return res
+    def handle_case_response(self, res):
+        results = None
+        if int(res.status_code / 100) == 2:
+            results = res
+        elif res.status_code == 401:
+            raise FunctionError(
+                "401 Status code returned. Retry function with updated credentials")
+        elif res.status_code == 403:
+            raise FunctionError("403 Forbidden response received by API")
+        else:
+            LOG.error("Got unexpected result from request.")
+            results = res
 
-  def __init__(self, opts, options):
-    self.opts = opts
-    self.options = options
+        return results
+
+    def make_xforce_api_request(self, request_string):
+        """
+        Make the api request to the Xforce server
+        :param request_string: The request url
+        :return: Response of the request to Xforce
+        """
+        validate_fields(["xforce_apikey", "xforce_password"], self.options)
+        XFORCE_APIKEY = self.options.get("xforce_apikey")
+        XFORCE_PASSWORD = self.options.get("xforce_password")
+        return RequestsCommon(function_opts=self.options).execute("get", request_string, proxies=self.setup_proxies(), auth=(XFORCE_APIKEY, XFORCE_PASSWORD), callback=self.handle_case_response)

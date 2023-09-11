@@ -3,24 +3,25 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "4dfde5ae-4c27-4461-955d-e90791504987",
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
+    "id": "87fd1ea0-6a3f-4078-b271-e4f8e6f8469e",
     "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2022-11-17T19:38:40Z",
+    "createdDateTime": "2023-05-15T17:39:58Z",
     "creationOptions": [
       "Team",
       "ExchangeProvisioningFlags:3552"
     ],
-    "description": "Sample",
-    "displayName": "Admin",
+    "description": "task testing",
+    "displayName": "task testing",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "Admin@5rf2xs.onmicrosoft.com",
+    "mail": "tasktesting@swivrllc.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "Admin",
+    "mailNickname": "tasktesting",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
@@ -32,10 +33,9 @@
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SPO:SPO_6a9b33c4-5b75-4854-8cd8-***********_1d8a5928-8678-408e-ab06-50ca7e01766a",
-      "SMTP:Admin@5rf2xs.onmicrosoft.com"
+      "SMTP:tasktesting@swivrllc.onmicrosoft.com"
     ],
-    "renewedDateTime": "2022-11-17T19:38:40Z",
+    "renewedDateTime": "2023-05-15T17:39:58Z",
     "resourceBehaviorOptions": [
       "HideGroupInOutlook",
       "SubscribeMembersToCalendarEventsDisabled",
@@ -45,24 +45,27 @@
       "Team"
     ],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-********-1147227175-132734357-2269728913",
+    "securityIdentifier": "S-1-12-1-2281512608-1081633343-4175720882-2655451366",
     "theme": null,
-    "visibility": "Public",
+    "visibility": "Private",
     "onPremisesProvisioningErrors": [],
-    "message": "Successfully archived Team: Admin",
+    "status_code": 200,
+    "message": "Successfully archived Team: task testing",
     "teamsEnabled": "Archived"
   },
   "raw": null,
   "inputs": {
-    "ms_team_name": "Admin",
-    "archive_operation": "Archive"
+    "ms_groupteam_id": "87fd1ea0-6a3f-4078-b271-e4f8e6f8469e",
+    "archive_operation": "Archive",
+    "ms_group_mail_nickname": "",
+    "ms_groupteam_name": ""
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.0.0",
-    "host": "appHost",
-    "execution_time_ms": 5367,
-    "timestamp": "2022-11-22 11:21:47"
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 2030,
+    "timestamp": "2023-05-15 13:47:58"
   }
 }

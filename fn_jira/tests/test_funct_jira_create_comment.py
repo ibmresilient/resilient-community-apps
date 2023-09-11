@@ -7,7 +7,6 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 from data import mock_data
 from unittest.mock import patch
 
-PACKAGE_NAME = "fn_jira"
 FUNCTION_NAME = "jira_create_comment"
 
 # Read the default configuration-data section from the package
@@ -44,7 +43,7 @@ class TestJiraCreateComment:
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
-        func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
+        func = get_function_definition(mock_data.PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
     mock_inputs_1 = {

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4368
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v50.0.131
 
 """Generate the Resilient customizations required for fn_jira"""
 
@@ -21,17 +22,39 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_jira",
-        "message_destinations": [u"fn_jira"],
-        "functions": [u"jira_create_comment", u"jira_open_issue", u"jira_transition_issue"],
+        "message_destinations": [
+            u"fn_jira"
+        ],
+        "functions": [
+            u"jira_create_comment",
+            u"jira_open_issue",
+            u"jira_transition_issue"
+        ],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"jira_internal_url", u"jira_issue_id", u"jira_issue_status", u"jira_linked_to_incident", u"jira_project_key", u"jira_server", u"jira_url"],
+        "incident_fields": [
+            u"jira_internal_url",
+            u"jira_issue_id",
+            u"jira_issue_status",
+            u"jira_linked_to_incident",
+            u"jira_project_key",
+            u"jira_server",
+            u"jira_url"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"jira_task_references"],
+        "datatables": [
+            u"jira_task_references"
+        ],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"example_create_jira_issue", u"example_create_jira_issue_task", u"example_jira_close_issue", u"example_jira_close_issue_task", u"example_jira_create_comment"]
+        "playbooks": [
+            u"example_create_jira_issue",
+            u"example_create_jira_issue_task",
+            u"example_jira_close_issue",
+            u"example_jira_close_issue_task",
+            u"example_jira_create_comment"
+        ]
     }
 
 
@@ -40,7 +63,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:

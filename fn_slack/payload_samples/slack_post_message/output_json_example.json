@@ -1,4 +1,7 @@
 {
-  "channel": "testingv2",
-  "url": "https://ibm-resilient-test.slack.com/archives/C03QZGV0YJU/p1658330751752819"
+  "channel": "dummy",
+  "url": "https://dummy-group.slack.com/archives/dummy/dummy",
+  "user_info": [
+    ": dummy@dummy.com"
+  ]
 }

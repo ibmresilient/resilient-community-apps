@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name="fn_microsoft_sentinel",
     display_name="Microsoft Sentinel",
-    version="1.1.0",
+    version="1.2.0",
     license="MIT",
     author="IBM QRadar SOAR",
     url="https://github.com/ibmresilient/fn_microsoft_sentinel",
@@ -33,7 +33,7 @@ setup(
     <br>* Sync comments to and from Sentinel Incidents
     <br>* Support editable templates for field mapping between the two systems""",
     install_requires=[
-        "resilient_circuits>=46.0.0",
+        "resilient_circuits>=45.0.0",
         "jinja2",
         "simplejson"
     ],
