@@ -2,6 +2,7 @@ include README.md
 include Dockerfile
 include apikey_permissions.txt
 include entrypoint.sh
+recursive-include fn_sentinelone/lib *
 recursive-include fn_sentinelone/util *
 include fn_sentinelone/LICENSE
 include doc/*.md
