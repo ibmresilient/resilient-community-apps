@@ -1,4 +1,3 @@
-import pytest
 from fn_service_now.util.resilient_helper import (
     SECOPS_PLAYBOOK_TASK_PREFIX, SECOPS_PLAYBOOK_TASK_TABLE_NAME,
     SECOPS_TABLE_NAME, ResilientHelper)

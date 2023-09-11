@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2020 - Confidential Information
+# Copyright IBM Corp. 2010, 2023 - Confidential Information
 
 
 """Function implementation"""
@@ -43,9 +43,9 @@ class FunctionComponent(ResilientComponent):
                              "defender_description"], kwargs)
 
             log = logging.getLogger(__name__)
-            log.info(u"defender_machine_id: %s", defender_machine_id)
-            log.info(u"defender_restriction_type: %s", defender_restriction_type)
-            log.info(u"defender_description: %s", action_description)
+            log.info(f"defender_machine_id: {defender_machine_id}")
+            log.info(f"defender_restriction_type: {defender_restriction_type}")
+            log.info(f"defender_description: {action_description}")
 
 
             defender_api = DefenderAPI(self.options['tenant_id'],
@@ -56,9 +56,7 @@ class FunctionComponent(ResilientComponent):
 
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            payload = {
-                "Comment": action_description
-            }
+            payload = {"Comment": action_description}
             log.debug(payload)
 
             # build the url
@@ -71,7 +69,7 @@ class FunctionComponent(ResilientComponent):
                 app_result, status, reason = defender_api.wait_for_action(url)
 
             if not status:
-                yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
+                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
 
             results = rp.done(status, app_result, reason=reason)
 

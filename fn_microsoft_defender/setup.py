@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_microsoft_defender",
     display_name="Microsoft Defender",
-    version="1.1.0",
+    version="1.2.0",
     license="MIT",
     author="IBM SOAR",
     author_email="mscherfling@ibm.com",
@@ -31,8 +31,8 @@ setup(
     description="IBM SOAR App for Microsoft Defender ATP",
     long_description="""Perform operations against Defender such as synchronize incidents and alerts, set indicators, isolate and quarantine machines, and block file execution""",
     install_requires=[
-        "resilient_circuits>=37.0.0",
-        "resilient_lib>=37.0.0",
+        "resilient_circuits>=45.0.0",
+        "resilient_lib>=45.0.0",
         "msal",
         "simplejson",
         "python-rapidjson"
@@ -46,7 +46,7 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "{}FunctionComponent = fn_microsoft_defender.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_microsoft_defender/components/f[a-zA-Z]*.py")
+            f"{snake_to_camel(get_module_name(filename))}FunctionComponent = fn_microsoft_defender.components.{get_module_name(filename)}:FunctionComponent" for filename in glob.glob("./fn_microsoft_defender/components/f[a-zA-Z]*.py")
         ]+
         [ "PollerComponent = fn_microsoft_defender.components.defender_poller:DefenderPollerComponent" ],
         "resilient.circuits.configsection": ["gen_config = fn_microsoft_defender.util.config:config_section_data"],

@@ -49,7 +49,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.3.2 | 08/2023 | Bug fix for MITRE function |
+| 2.3.2 | 08/2023 | Bug fix for MITRE function and poller search |
 | 2.3.1 | 05/2023 | Bug fix for MITRE playbook |
 | 2.3.0 | 05/2023 | Support configurable settings to retry QRadar query |
 | 2.2.0 | 02/2023 | Add notes & assigned sync |

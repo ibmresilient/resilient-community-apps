@@ -88,10 +88,7 @@
           "type": "boolean"
         },
         "unfoundUsers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "array"
         }
       }
     },
@@ -102,7 +99,7 @@
         "incident_id": {
           "type": "integer"
         },
-        "ms_group_description": {
+        "additional_members": {
           "type": "string"
         },
         "ms_owners_list": {
@@ -115,6 +112,10 @@
           "type": "string"
         },
         "add_members_from": {
+          "type": "string"
+        },
+        "task_id": {},
+        "ms_description": {
           "type": "string"
         }
       }

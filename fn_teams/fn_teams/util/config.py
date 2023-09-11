@@ -9,7 +9,7 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    config_data = u"""[fn_teams]
+    return u"""[fn_teams]
 #
 # <channel_name> = <channel webhook url> 
 # (<channel_name> and the <teams_channel> input for the MS Teams: Post Message function must be the same.
@@ -31,4 +31,3 @@ secret_value = <Secret Value>
 # refresh_token = <Refresh token> 
 
 """
-    return config_data
