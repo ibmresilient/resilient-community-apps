@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "casefiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "caseFileID": {
+                "type": "string"
+              },
+              "created": {
+                "type": "string"
+              },
+              "owner": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "userid": {
+                    "type": "string"
+                  },
+                  "isDisabled": {
+                    "type": "boolean"
+                  },
+                  "verified": {
+                    "type": "string"
+                  }
+                }
+              },
+              "title": {
+                "type": "string"
+              },
+              "shared": {
+                "type": "boolean"
+              },
+              "writable": {
+                "type": "boolean"
+              },
+              "links": {
+                "type": "array"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "totalVotes": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "num_of_casefiles": {
+          "type": "integer"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "xforce_query": {
+          "type": "string"
+        },
+        "xforce_collection_type": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

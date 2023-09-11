@@ -1,0 +1,68 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "4dfde5ae-4c27-4461-955d-e90791504987",
+    "deletedDateTime": null,
+    "classification": null,
+    "createdDateTime": "2022-11-17T19:38:40Z",
+    "creationOptions": [
+      "Team",
+      "ExchangeProvisioningFlags:3552"
+    ],
+    "description": "Sample",
+    "displayName": "Admin",
+    "expirationDateTime": null,
+    "groupTypes": [
+      "Unified"
+    ],
+    "isAssignableToRole": null,
+    "mail": "Admin@5rf2xs.onmicrosoft.com",
+    "mailEnabled": true,
+    "mailNickname": "Admin",
+    "membershipRule": null,
+    "membershipRuleProcessingState": null,
+    "onPremisesDomainName": null,
+    "onPremisesLastSyncDateTime": null,
+    "onPremisesNetBiosName": null,
+    "onPremisesSamAccountName": null,
+    "onPremisesSecurityIdentifier": null,
+    "onPremisesSyncEnabled": null,
+    "preferredDataLocation": null,
+    "preferredLanguage": null,
+    "proxyAddresses": [
+      "SPO:SPO_6a9b33c4-5b75-4854-8cd8-***********_1d8a5928-8678-408e-ab06-50ca7e01766a",
+      "SMTP:Admin@5rf2xs.onmicrosoft.com"
+    ],
+    "renewedDateTime": "2022-11-17T19:38:40Z",
+    "resourceBehaviorOptions": [
+      "HideGroupInOutlook",
+      "SubscribeMembersToCalendarEventsDisabled",
+      "WelcomeEmailDisabled"
+    ],
+    "resourceProvisioningOptions": [
+      "Team"
+    ],
+    "securityEnabled": false,
+    "securityIdentifier": "S-1-12-1-********-1147227175-132734357-2269728913",
+    "theme": null,
+    "visibility": "Public",
+    "onPremisesProvisioningErrors": [],
+    "message": "Successfully archived Team: Admin",
+    "teamsEnabled": "Archived"
+  },
+  "raw": null,
+  "inputs": {
+    "ms_team_name": "Admin",
+    "archive_operation": "Archive"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "2.0.0",
+    "host": "appHost",
+    "execution_time_ms": 5367,
+    "timestamp": "2022-11-22 11:21:47"
+  }
+}
