@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
 """Tests using pytest_resilient_circuits"""
 
 import pytest
 from mock import patch
-from resilient_circuits.util import get_function_definition
+from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from fn_xforce.util.helper import PACKAGE_NAME
 
+PACKAGE_NAME = "fn_xforce"
 FUNCTION_NAME = "xforce_get_collection_by_id"
 
 # Use mock config_data
-config_data = f"""[{PACKAGE_NAME}]
+config_data = """[{0}]
 xforce_apikey = abc
 xforce_password = 1234
 #xforce_https_proxy = <YOUR_PROXY_URL>
 #xforce_http_proxy = <YOUR_PROXY_URL>
 xforce_baseurl = https://example.com
-"""
+""".format(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -27,7 +27,7 @@ class MockedResponse:
     def __init__(self, success=True):
         if success:
             self.status_code = 200
-            self.json_data = {"caseFileID": "e7dd02a139820860866a4fdd82cf9d8e", "contents": "hello"}
+            self.json_data = {'casefiles': [{"case1":"mock"},{"case2":"mock2"}]}
 
         else:
             self.status_code = 400
@@ -39,12 +39,13 @@ class MockedResponse:
 
 def call_xforce_get_collection_by_id_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
+    evt = SubmitTestFunction("xforce_get_collection_by_id", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait(f"{FUNCTION_NAME}_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("xforce_get_collection_by_id_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
+
     return event.kwargs["result"].value
 
 
@@ -59,11 +60,11 @@ class TestXforceGetCollectionById:
         function_params = { 
             "xforce_collection_id": xforce_collection_id
         }
-        with patch('fn_xforce.util.helper.RequestsCommon.execute') as mock:
+        with patch('fn_xforce.components.xforce_query_collection.RequestsCommon.execute_call_v2') as mock:
             mock.return_value = MockedResponse(True)
             results = call_xforce_get_collection_by_id_function(circuits_app, function_params)
 
-            assert(expected_results.get("success") == results.get("success"))
+            assert(expected_results["success"] == results["success"])
 
 
     @pytest.mark.parametrize("xforce_collection_id, expected_results", [
@@ -76,10 +77,10 @@ class TestXforceGetCollectionById:
         function_params = { 
             "xforce_collection_id": xforce_collection_id
         }
-        with patch('fn_xforce.util.helper.RequestsCommon.execute') as mock:
+        with patch('fn_xforce.components.xforce_query_collection.RequestsCommon.execute_call_v2') as mock:
             mock.return_value = MockedResponse(True)
             results = call_xforce_get_collection_by_id_function(circuits_app, function_params)
-            assert(expected_results.get("success") == results.get("success"))
+            assert(expected_results["success"] == results["success"])
 
 
 class TestXforceDefinition:

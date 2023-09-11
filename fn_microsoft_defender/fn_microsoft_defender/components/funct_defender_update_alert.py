@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2023 - Confidential Information
+# Copyright IBM Corp. 2010, 2020 - Confidential Information
 
 """Function implementation"""
 
@@ -44,12 +44,12 @@ class FunctionComponent(ResilientComponent):
             defender_alert_id = kwargs.get("defender_alert_id")  # text
 
             log = logging.getLogger(__name__)
-            log.info(f"defender_alert_status: {defender_alert_status}")
-            log.info(f"defender_alert_assigned_to: {defender_alert_assigned_to}")
-            log.info(f"defender_description: {defender_description}")
-            log.info(f"defender_alert_determination: {defender_alert_determination}")
-            log.info(f"defender_alert_classification: {defender_alert_classification}")
-            log.info(f"defender_alert_id: {defender_alert_id}")
+            log.info("defender_alert_status: %s", defender_alert_status)
+            log.info("defender_alert_assigned_to: %s", defender_alert_assigned_to)
+            log.info("defender_description: %s", defender_description)
+            log.info("defender_alert_determination: %s", defender_alert_determination)
+            log.info("defender_alert_classification: %s", defender_alert_classification)
+            log.info("defender_alert_id: %s", defender_alert_id)
 
             defender_api = DefenderAPI(self.options['tenant_id'],
                                        self.options['client_id'],
@@ -78,7 +78,7 @@ class FunctionComponent(ResilientComponent):
             alert_payload, status, reason = defender_api.call(url, payload=payload, oper="PATCH")
 
             if not status:
-                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
+                yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
 
             yield StatusMessage("Finished 'defender_update_alert'")
 

@@ -43,8 +43,8 @@ class FunctionComponent(ResilientComponent):
 
             indicator_filter = kwargs.get('defender_indicator_filter')
             indicator_field = self.get_select_param(kwargs.get('defender_indicator_field'))
-            log.info(f"defender_indicator_filter: {indicator_filter}")
-            log.info(f"defender_indicator_field: {indicator_field}")
+            log.info("defender_indicator_filter: %s", indicator_filter)
+            log.info("defender_indicator_field: %s", indicator_field)
 
             # convert to field used by the API call
             indicator_field = FILTER_FIELD_LOOKUP.get(indicator_field, indicator_field)
@@ -60,7 +60,7 @@ class FunctionComponent(ResilientComponent):
             indicator_payload, status, reason = defender_api.call(INDICATOR_URL, content_type=None)
 
             if status:
-                yield StatusMessage(f"Indicators found: {len(indicator_payload.get('value', []))}")
+                yield StatusMessage("Indicators found: {}".format(len(indicator_payload.get('value', []))))
                 filtered_payload = filter_indicators(indicator_payload, indicator_field, indicator_filter)
 
                 # convert dates to timestamps
@@ -68,7 +68,7 @@ class FunctionComponent(ResilientComponent):
                     indicator['creationTimeDateTimeUtc_ts'] = convert_date(indicator['creationTimeDateTimeUtc'])
                     indicator['expirationTime_ts'] = convert_date(indicator['expirationTime'])
             else:
-                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
+                yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
                 filtered_payload = indicator_payload
 
             yield StatusMessage("Finished 'defender_list_indicators'")

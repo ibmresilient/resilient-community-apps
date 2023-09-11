@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2023 - Confidential Information
+# Copyright IBM Corp. 2010, 2020 - Confidential Information
 
 """Function implementation"""
 
@@ -42,11 +42,11 @@ class FunctionComponent(ResilientComponent):
             defender_alert_creationdate = kwargs.get("defender_alert_creationdate")  # datetimepicker
 
             log = logging.getLogger(__name__)
-            log.info(f"defender_alert_severity: {defender_alert_severity}")
-            log.info(f"defender_alert_result_max: {defender_alert_result_max}")
-            log.info(f"defender_machine_id: {defender_machine_id}")
-            log.info(f"defender_alert_lastupdatetime: {defender_alert_lastupdatetime}")
-            log.info(f"defender_alert_creationdate: {defender_alert_creationdate}")
+            log.info("defender_alert_severity: %s", defender_alert_severity)
+            log.info("defender_alert_result_max: %s", defender_alert_result_max)
+            log.info("defender_machine_id: %s", defender_machine_id)
+            log.info("defender_alert_lastupdatetime: %s", defender_alert_lastupdatetime)
+            log.info("defender_alert_creationdate: %s", defender_alert_creationdate)
 
             defender_api = DefenderAPI(self.options['tenant_id'],
                                        self.options['client_id'],
@@ -63,11 +63,11 @@ class FunctionComponent(ResilientComponent):
             if defender_alert_result_max:
                 params['$top'] = defender_alert_result_max
             if defender_alert_severity:
-                filters.append(f"severity+eq+'{defender_alert_severity}'")
+                filters.append("severity+eq+'{}'".format(defender_alert_severity))
             if defender_alert_lastupdatetime:
-                filters.append(f"lastUpdateTime+ge+{readable_datetime(defender_alert_lastupdatetime)}")
+                filters.append("lastUpdateTime+ge+{}".format(readable_datetime(defender_alert_lastupdatetime)))
             if defender_alert_creationdate:
-                filters.append(f"alertCreationDate+ge+{readable_datetime(defender_alert_creationdate)}")
+                filters.append("alertCreationDate+ge+{}".format(readable_datetime(defender_alert_creationdate)))
 
             if filters:
                 params['$filter'] = "+and+".join(filters)
@@ -95,7 +95,7 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Alerts found: {} for machine_id: {}"\
                         .format(len(alert_payload['value']), defender_machine_id))
             else:
-                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
+                yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
 
             yield StatusMessage("Finished 'defender_alert_search'")
 

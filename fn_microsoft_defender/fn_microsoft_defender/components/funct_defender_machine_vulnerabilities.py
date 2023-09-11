@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2023 - Confidential Information
+# Copyright IBM Corp. 2010, 2020 - Confidential Information
 
 """AppFunction implementation"""
 
@@ -30,7 +30,7 @@ class FunctionComponent(ResilientComponent):
     def _defender_machine_vulnerabilities(self, event, *args, **kwargs):
         """Function: Perform either an 'isolate' or 'unisolate' operation on a MS defender machine"""
         try:
-            yield StatusMessage(f"Starting '{FN_NAME}'")
+            yield StatusMessage("Starting '{}'".format(FN_NAME))
             validate_fields(["tenant_id", "client_id", "app_secret"], self.options)
             validate_fields(["defender_machine_id"], kwargs)
 
@@ -38,7 +38,7 @@ class FunctionComponent(ResilientComponent):
             defender_machine_id = kwargs.get("defender_machine_id")  # text
 
             log = logging.getLogger(__name__)
-            log.info(f"defender_machine_id: {defender_machine_id}")
+            log.info("defender_machine_id: %s", defender_machine_id)
 
             defender_api = DefenderAPI(self.options['tenant_id'],
                                        self.options['client_id'],
@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
             recommendation_payload, status, reason = defender_api.call(MACHINE_RECOMMENDATIONS_URL.format(defender_machine_id),
                                                                   content_type=None)
 
-            yield StatusMessage(f"Finished '{FN_NAME}'")
+            yield StatusMessage("Finished '{}'".format(FN_NAME))
 
             results = rp.done(status, recommendation_payload, reason=reason)
 

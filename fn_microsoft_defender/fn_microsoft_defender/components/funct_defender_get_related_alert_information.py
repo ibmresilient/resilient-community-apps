@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
-# Copyright IBM Corp. 2010, 2023 - Confidential Information
+# Copyright IBM Corp. 2010, 2020 - Confidential Information
 
 """AppFunction implementation"""
 
@@ -31,7 +31,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.defender_alert_id
         """
 
-        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
+        yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
         alert_id = fn_inputs.defender_alert_id
         alert_info = fn_inputs.defender_alert_info
@@ -47,7 +47,7 @@ class FunctionComponent(AppFunctionComponent):
 
         result = {}
         url = '/'.join([ALERTS_URL, alert_id])
-        url = f"{url}?{EXPAND_PARAMS_URL}"
+        url = "{}?{}".format(url, EXPAND_PARAMS_URL)
         alert_payload, _status, _reason = defender_api.call(url)
         self.LOG.debug(alert_payload)
         result['General'] = alert_payload.get('value') if alert_payload.get('value') else alert_payload
@@ -58,6 +58,6 @@ class FunctionComponent(AppFunctionComponent):
             self.LOG.debug(alert_payload)
             result[alert_type] = alert_payload.get('value') if alert_payload.get('value') else alert_payload
 
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+        yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(result)

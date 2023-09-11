@@ -306,4 +306,4 @@ def make_filter_url(url, filter_template, value):
     if filter_template in MACHINES_FILTER:
         return "?$filter=".join([url, MACHINES_FILTER[filter_template].format(value)])
 
-    raise ValueError(f"{filter_template} is invalid filter template name")
+    raise ValueError("{} is invalid filter template name".format(filter_template))

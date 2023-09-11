@@ -3,13 +3,12 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import functools
-from traceback import format_exc
 from datetime import datetime, timedelta
 from logging import getLogger
-from threading import Thread, Event
+from threading import Thread
 from resilient_circuits import ResilientComponent
 from resilient_lib import IntegrationError, SOARCommon
+from fn_qradar_enhanced_data.lib.poller_common import poller
 from fn_qradar_enhanced_data.util.function_utils import (get_qradar_client, get_server_settings, get_sync_notes)
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
@@ -18,44 +17,6 @@ from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_POLLERQU
 LOG = getLogger(__name__)
 AUTO_ESCALATION_NOTE = "Case created in SOAR"
 MANUAL_ESCALATION = "Manual escalation of offense to SOAR"
-
-# P O L L E R   L O G I C
-def poller(named_poller_interval, named_last_poller_time, package_name):
-    """
-    Decorator for poller, manage poller time, calling the customized method for getting the next entities
-    :param named_poller_interval: (str) Name of instance variable containing the poller interval in seconds
-    :param named_last_poller_time: (datetime) Name of instance variable containing the lookback value in mseconds
-    :param package_name: (str) Name of package for loggging
-    """
-    def poller_wrapper(func):
-        # Decorator for running a function forever, passing the ms timestamp of
-        # when the last poller run to the function it's calling
-        @functools.wraps(func)
-        def wrapped(self):
-            last_poller_time = getattr(self, named_last_poller_time)
-            exit_event = Event()
-
-            while not exit_event.is_set():
-                try:
-                    LOG.info(f"{package_name} polling start.")
-                    poller_start = datetime.now()
-                    # Function execution with the last poller time in ms
-                    func(self, last_poller_time = int(last_poller_time.timestamp()*1000))
-
-                except Exception as err:
-                    LOG.error(str(err))
-                    LOG.error(format_exc())
-                finally:
-                    LOG.info(f"{package_name} polling complete.")
-                    # Set the last poller time for next cycle
-                    last_poller_time = poller_start
-
-                    # Sleep before the next poller execution
-                    exit_event.wait(getattr(self, named_poller_interval))
-            exit_event.set() # Loop complete
-
-        return wrapped
-    return poller_wrapper
 
 class PollerComponent(ResilientComponent):
     """Poller to synchronize Offense and Case data"""

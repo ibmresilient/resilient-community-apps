@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2023 - Confidential Information
+# Copyright IBM Corp. 2010, 2020 - Confidential Information
 
 """AppFunction implementation"""
 
@@ -27,7 +27,7 @@ class FunctionComponent(ResilientComponent):
             -   fn_inputs.defender_file_hash
         """
         try:
-            yield StatusMessage(f"Starting '{FN_NAME}'")
+            yield StatusMessage("Starting '{}'".format(FN_NAME))
             validate_fields(["tenant_id", "client_id", "app_secret"], self.options)
             validate_fields(["defender_file_hash"], kwargs)
 
@@ -35,7 +35,7 @@ class FunctionComponent(ResilientComponent):
             defender_file_hash = kwargs.get("defender_file_hash")  # text
 
             log = logging.getLogger(__name__)
-            log.info(f"defender_file_hash: {defender_file_hash}")
+            log.info(u"defender_file_hash: %s", defender_file_hash)
 
             # Get the function parameters:
             defender_api = DefenderAPI(self.options['tenant_id'],
@@ -49,11 +49,11 @@ class FunctionComponent(ResilientComponent):
             file_result, status, reason = defender_api.call(url, content_type=None)
 
             if not status:
-                yield StatusMessage(f"{FN_NAME} failure. Status: {status} Reason: {reason}")
+                yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FN_NAME, status, reason))
 
             results = rp.done(status, file_result, reason=reason)
 
-            yield StatusMessage(f"Finished '{FN_NAME}'")
+            yield StatusMessage("Finished '{}'".format(FN_NAME))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

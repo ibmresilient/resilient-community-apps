@@ -42,9 +42,9 @@ class FunctionComponent(ResilientComponent):
             defender_indicator_value = kwargs.get("defender_indicator_value")  # text
 
             log = logging.getLogger(__name__)
-            log.info(f"defender_description: {defender_description}")
-            log.info(f"defender_machine_id: {defender_machine_id}")
-            log.info(f"defender_indicator_value: {defender_indicator_value}")
+            log.info("defender_description: %s", defender_description)
+            log.info("defender_machine_id: %s", defender_machine_id)
+            log.info("defender_indicator_value: %s", defender_indicator_value)
 
             defender_api = DefenderAPI(self.options['tenant_id'],
                                        self.options['client_id'],
@@ -70,7 +70,7 @@ class FunctionComponent(ResilientComponent):
                 file_result, status, reason = defender_api.wait_for_action(url)
 
             if not status:
-                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
+                yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
 
             results = rp.done(status, file_result, reason=reason)
 

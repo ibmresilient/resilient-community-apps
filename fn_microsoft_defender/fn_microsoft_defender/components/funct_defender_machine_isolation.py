@@ -43,10 +43,10 @@ class FunctionComponent(ResilientComponent):
             defender_isolation_action = self.get_select_param(kwargs.get("defender_isolation_action"))  # select, values: "isolate", "unisolate"
 
             log = logging.getLogger(__name__)
-            log.info(f"defender_machine_id: {defender_machine_id}")
-            log.info(f"defender_isolation_type: {defender_isolation_type}")
-            log.info(f"defender_isolation_action: {defender_isolation_action}")
-            log.info(f"action_description: {action_description}")
+            log.info("defender_machine_id: %s", defender_machine_id)
+            log.info("defender_isolation_type: %s", defender_isolation_type)
+            log.info("defender_isolation_action: %s", defender_isolation_action)
+            log.info("action_description: %s", action_description)
 
             defender_api = DefenderAPI(self.options['tenant_id'],
                                        self.options['client_id'],
@@ -74,7 +74,7 @@ class FunctionComponent(ResilientComponent):
                 isolate_result, status, reason = defender_api.wait_for_action(url)
 
             if not status:
-                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
+                yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
 
             yield StatusMessage("Finished 'defender_machine_isolation'")
 

@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
 """Tests using pytest_resilient_circuits"""
 
 import pytest
 from mock import patch
 
-from resilient_circuits.util import get_function_definition
+from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from fn_xforce.util.helper import PACKAGE_NAME
 
+PACKAGE_NAME = "fn_xforce"
 FUNCTION_NAME = "xforce_query_collection"
 
 # Use mock config_data
-config_data = f"""[{PACKAGE_NAME}]
+config_data = """[{0}]
 xforce_apikey = abc
 xforce_password = 1234
 #xforce_https_proxy = <YOUR_PROXY_URL>
 #xforce_http_proxy = <YOUR_PROXY_URL>
 xforce_baseurl = https://example.com
-"""
+""".format(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -37,11 +37,12 @@ class MockedResponse:
     def json(self):
         return self.json_data
 
+
 def call_xforce_query_collection_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
+    evt = SubmitTestFunction("xforce_query_collection", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait(f"{FUNCTION_NAME}_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("xforce_query_collection_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -67,10 +68,10 @@ class TestXforceQueryCollection:
             "xforce_collection_type": xforce_collection_type,
             "xforce_query": xforce_query
         }
-        with patch('fn_xforce.util.helper.RequestsCommon.execute') as mock:
-            mock.return_value = MockedResponse(False)
+        with patch('fn_xforce.components.xforce_query_collection.RequestsCommon.execute_call_v2') as mock:
+            mock.return_value = MockedResponse(True)
             results = call_xforce_query_collection_function(circuits_app, function_params)
-            assert(expected_results.get("success") == results.get("success"))
+            assert(expected_results["success"] == results["success"])
 
     @pytest.mark.parametrize("xforce_collection_type, xforce_query, expected_results", [
         ({'name': 'public'}, "badquery123", {"success": True}),
@@ -84,10 +85,10 @@ class TestXforceQueryCollection:
             "xforce_collection_type": xforce_collection_type,
             "xforce_query": xforce_query
         }
-        with patch('fn_xforce.util.helper.RequestsCommon.execute') as mock:
+        with patch('fn_xforce.components.xforce_query_collection.RequestsCommon.execute_call_v2') as mock:
             mock.return_value = MockedResponse(False)
             results = call_xforce_query_collection_function(circuits_app, function_params)
-            assert(expected_results.get("success") == results.get("success"))
+            assert(expected_results["success"] == results["success"])
 
     @pytest.mark.parametrize("xforce_collection_type, xforce_query, expected_results", [
         ({'name': 'public'}, "coinminer", {"success": True}),
@@ -99,8 +100,10 @@ class TestXforceQueryCollection:
             "xforce_collection_type": xforce_collection_type,
             "xforce_query": xforce_query
         }
-        with patch('fn_xforce.util.helper.RequestsCommon.execute') as mock:
+        with patch('fn_xforce.components.xforce_query_collection.RequestsCommon.execute_call_v2') as mock:
             mock.return_value = MockedResponse(True)
             results = call_xforce_query_collection_function(circuits_app, function_params)
-            assert(expected_results.get("success") == results.get("success"))
-            assert(results.get("content", {}).get("num_of_casefiles") >= 1)
+            assert(expected_results["success"] == results["success"])
+            assert(results["num_of_casefiles"] >= 1)
+
+    
