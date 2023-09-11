@@ -34,28 +34,16 @@
   - [Function - MS Teams: Post Message](#function---ms-teams-post-message)
   - [Function - MS Teams: Read Message](#function---ms-teams-read-message)
   - [Rules](#rules)
-  - [Troubleshooting & Support](#troubleshooting--support)
+  - [Troubleshooting \& Support](#troubleshooting--support)
     - [For Support](#for-support)
 ---
 
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.1.0 | 05/2023 | Add playbooks and removed workflows|
 | 2.0.1 | 12/2022 | Bug fix in workflows for MS Teams: Enable Teams for Groups and MS Teams: Read messages |
 | 2.0.0 | 12/2022 | Added support for creating and deleting MS Groups, Teams and Channels |
 | 1.0.0 | 10/2019 | Post Incident/task information to MS Teams |
-
-### 2.1.0 Changes
-In v2.1, the existing rules and workflows have been replaced with playbooks.
-This change is made to support the ongoing, newer capabilities of playbooks.
-Each playbook has the same functionality as the previous, corresponding rule/workflow.
-
-If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
-For automatic actions, the playbooks will be disabled by default.
-
-You can continue to use the rules/workflows.
-But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
 ---
 
@@ -328,43 +316,42 @@ This function allows for archiving or unarchiving a Microsoft Team. The `archive
 
 ```python
 results = {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
   "content": {
-    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
-    "id": "87fd1ea0-6a3f-4078-b271-e4f8e6f8469e",
-    "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2023-05-15T17:39:58Z",
+    "createdDateTime": "2022-11-17T19:38:40Z",
     "creationOptions": [
       "Team",
       "ExchangeProvisioningFlags:3552"
     ],
-    "description": "task testing",
-    "displayName": "task testing",
+    "deletedDateTime": null,
+    "description": "Sample",
+    "displayName": "Admin",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
+    "id": "4dfde5ae-4c27-4461",
     "isAssignableToRole": null,
-    "mail": "tasktesting@swivrllc.onmicrosoft.com",
+    "mail": "Engineering@.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "tasktesting",
+    "mailNickname": "Engineering",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
+    "message": "Successfully archived Team: Engineering",
     "onPremisesDomainName": null,
     "onPremisesLastSyncDateTime": null,
     "onPremisesNetBiosName": null,
+    "onPremisesProvisioningErrors": [],
     "onPremisesSamAccountName": null,
     "onPremisesSecurityIdentifier": null,
     "onPremisesSyncEnabled": null,
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:tasktesting@swivrllc.onmicrosoft.com"
+      "SPO:SPO_6a9b33c4-5b75-4854-8cd8-***********_1d8a5928-8678-408e-ab06-50ca7e01766a",
+      "SMTP:Engineering@.onmicrosoft.com"
     ],
-    "renewedDateTime": "2023-05-15T17:39:58Z",
+    "renewedDateTime": "2022-11-17T19:38:40Z",
     "resourceBehaviorOptions": [
       "HideGroupInOutlook",
       "SubscribeMembersToCalendarEventsDisabled",
@@ -374,29 +361,27 @@ results = {
       "Team"
     ],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-2281512608-1081633343-4175720882-2655451366",
+    "securityIdentifier": "S-1-12-1-********-1147227175-132734357-2269728913",
+    "teamsEnabled": "Archived",
     "theme": null,
-    "visibility": "Private",
-    "onPremisesProvisioningErrors": [],
-    "status_code": 200,
-    "message": "Successfully archived Team: task testing",
-    "teamsEnabled": "Archived"
+    "visibility": "Public"
   },
-  "raw": null,
   "inputs": {
-    "ms_groupteam_id": "87fd1ea0-6a3f-4078-b271-e4f8e6f8469e",
     "archive_operation": "Archive",
-    "ms_group_mail_nickname": "",
-    "ms_groupteam_name": ""
+    "ms_team_name": "Engineering"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 5367,
+    "host": "appHost",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 2030,
-    "timestamp": "2023-05-15 13:47:58"
-  }
+    "package_version": "2.0.0",
+    "timestamp": "2022-11-22 11:21:47",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -407,18 +392,17 @@ results = {
 <p>
 
 ```python
-inputs.archive_operation = "Archive"
-if playbook.inputs.archive_operation:
-  inputs.archive_operation = playbook.inputs.archive_operation
+if rule.properties.archive_operation:
+  inputs.archive_operation = rule.properties.archive_operation
 
-if playbook.inputs.ms_groupteam_id:
-  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id
+if rule.properties.ms_groupteam_id:
+  inputs.ms_groupteam_id = rule.properties.ms_groupteam_id
 
-elif playbook.inputs.ms_group_mail_nickname:
-  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
+elif rule.properties.ms_group_mail_nickname:
+  inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname
 
-elif playbook.inputs.ms_groupteam_name:
-  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name
+elif rule.properties.ms_groupteam_name:
+  inputs.ms_groupteam_name = rule.properties.ms_groupteam_name
 
 else:
   helper.fail("No input was provided")
@@ -431,31 +415,35 @@ else:
 <p>
 
 ```python
-results = playbook.functions.results.archive_results
 content = results.get("content")
 
-if not results.get("success"):
-  text = "Unable to archive the Microsoft Team"
-  fail_reason = results.get("reason")
+if not results.success:
+  text = u"Unable to create Microsoft Group"
+  fail_reason = results.reason
   if fail_reason:
-    text = f"{text}:\n\tFailure reason: {fail_reason}"
-
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
 else:
-  text  = f"""<b>Microsoft Team Details:</b><br />
-  <br />The Team associated with this Group has now been {content.get('teamsEnabled')}.<br />
-  <br />Name: {content.get('displayName')}
-  <br />Description: {content.get('description')}
-  <br />Teams Enabled: {content.get('teamsEnabled')}
-  <br />ID: {content.get('id')}
-  <br />Mail: {content.get('mail')}
-  <br />Visibility: {content.get('visibility')}
-  <br />Group Types: {content.get('groupTypes')}
-  <br />Created date and time: {content.get('createdDateTime')}"""
+  text  = u"<b>Microsoft Group Details:</b><br />"
+  text += u"<br />The Team associated with this Group has now been {}.<br />".format(content.get("teamsEnabled"))
+  text += u"<br />Name: {}".format(content.get("displayName"))
+  text += u"<br />Description: {}".format(content.get("description"))
+  text += u"<br />Teams Enabled: {}".format(content.get("teamsEnabled"))
+  text += u"<br />ID: {}".format(content.get("id"))
+  text += u"<br />Mail: {}".format(content.get("mail"))
+  text += u"<br />Visibility: {}".format(content.get("visibility"))
+  text += u"<br />Group Types: {}".format(content.get("groupTypes"))
+  text += u"<br />Created date and time: {}".format(content.get("createdDateTime"))
   if content.get("unfoundUsers"):
-    text += f"<br />*Note the following users were unable to be added to the group: {content.get('unfoundUsers')}"
+    text += u"<br />*Note the following users were unable to be added to the group: {}".format(content.get("unfoundUsers"))
 
 note = helper.createRichText(text)
-incident.addNote(note)
+
+if task:
+  task.addNote(note)
+else:
+  incident.addNote(note)
+
 ```
 
 </p>
@@ -502,36 +490,36 @@ To create a Channel for an MS Team, 3 key attributes are required, namely: teamI
 
 ```python
 results = {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
   "content": {
-    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('322d20bf-450e-46d6-9338-f7e3b66a064c')/channels/$entity",
-    "id": "19:c875f7333fb843aeacb01d1cbfa52ae5@thread.tacv2",
-    "createdDateTime": "2023-05-15T18:26:57.6422279Z",
-    "displayName": "test 1234",
-    "description": "test 1234",
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams(\u00274e8349d3-a5e1-****-****-3d81f5252b7f\u0027)/channels/$entity",
+    "createdDateTime": "2022-11-22T12:21:20.4305814Z",
+    "description": "Engineering SubTeam 2",
+    "displayName": "Team 2",
+    "email": "engineering2",
+    "id": "19:8d4fbf7358174021ae16374572797fce@thread.tacv2",
     "isFavoriteByDefault": false,
-    "email": "",
-    "webUrl": "https://teams.microsoft.com/l/channel/19%3ac875f7333fb843aeacb01d1cbfa52ae5%40thread.tacv2/test+1234?groupId=322d20bf-450e-46d6-9338-f7e3b66a064c&tenantId=50ad7d3e-b889-434d-802d-13b87c68047b",
     "membershipType": "standard",
+    "message": "Successfully created channel: Team 2",
     "status_code": 201,
-    "message": "Successfully created channel: test 1234"
+    "webUrl": "https://teams.microsoft.com/l/channel/19%3a8d4fbf7************72797fce%40thread.tacv2/Engineering Team?groupId=4e8349d3-a5e1-****-*****-3d81f5252b7f\u0026tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a"
   },
-  "raw": null,
   "inputs": {
-    "ms_groupteam_id": "322d20bf-450e-46d6-9338-f7e3b66a064c",
-    "ms_channel_name": "test 1234",
-    "ms_description": "test 1234"
+    "ms_channel_name": "Team 2",
+    "ms_group_description": "Engineering SubTeam 2",
+    "ms_groupteam_name": "Engineering"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 9106,
+    "host": "appHost",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 4593,
-    "timestamp": "2023-05-15 14:26:57"
-  }
+    "package_version": "2.0.0",
+    "timestamp": "2022-11-22 12:21:20",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -542,20 +530,15 @@ results = {
 <p>
 
 ```python
-inputs.ms_channel_name = playbook.inputs.ms_channel_name if playbook.inputs.ms_channel_name else f"Incident {incident.id} {incident.name}"
+inputs.ms_channel_name = rule.properties.ms_channel_name if rule.properties.ms_channel_name else f"Incident {incident.id} {incident.name}"
+inputs.ms_description = rule.properties.ms_description if rule.properties.ms_description else f"{incident.description.content}"
 
-if playbook.inputs.ms_description:
-    inputs.ms_description = playbook.inputs.ms_description
-else:
-    description = incident.description.content if incident.description else ""
-    inputs.ms_description = f"Incident {incident.id}: {incident.name} {description}"
-
-if playbook.inputs.ms_groupteam_id:
-  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id
-elif playbook.inputs.ms_group_mail_nickname:
-  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
-elif playbook.inputs.ms_groupteam_name:
-  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name
+if rule.properties.ms_groupteam_id:
+  inputs.ms_groupteam_id = rule.properties.ms_groupteam_id
+elif rule.properties.ms_group_mail_nickname:
+  inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname
+elif rule.properties.ms_groupteam_name:
+  inputs.ms_groupteam_name = rule.properties.ms_groupteam_name
 else:
   helper.fail("No input was provided")
 ```
@@ -567,28 +550,28 @@ else:
 <p>
 
 ```python
-results = playbook.functions.results.create_channel_results
 content = results.get("content")
 
-if not results.get("success"):
-  text = "Unable to create Microsoft Group"
-  fail_reason = results.get("reason")
+if not results.success:
+  text = u"Unable to create Microsoft Group"
+  fail_reason = results.reason
   if fail_reason:
-    text = f"{text}:\n\tFailure reason: {fail_reason}"
-
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
 else:
-  text = f'''<a href="{content.get("webUrl")}">Click here</a>
-  <b>Microsoft Channel Details:</b><br />
-  <br />Name: {content.get("displayName")}
-  <br />Web URL: {url}
-  <br />Description: {content.get("description")}
-  <br />Teams Enabled: {True}
-  <br />ID: {content.get("id")}
-  <br />Mail: {content.get("email")}
-  <br />Membership Type: {content.get("membershipType")}'''
+  url   = u'<a href="{}">Click here</a>'.format(content.get("webUrl"))
+  text  = u"<b>Microsoft Channel Details:</b><br />"
+  text += u"<br />Name: {}".format(content.get("displayName"))
+  text += u"<br />Web URL: {}".format(url)
+  text += u"<br />Description: {}".format(content.get("description"))
+  text += u"<br />Teams Enabled: {}".format(True)
+  text += u"<br />ID: {}".format(content.get("id"))
+  text += u"<br />Mail: {}".format(content.get("email"))
+  text += u"<br />Membership Type: {}".format(content.get("membershipType"))
 
 note = helper.createRichText(text)
 incident.addNote(note)
+
 ```
 
 </p>
@@ -632,68 +615,66 @@ The function is developed to automatically add all members of an incident or a t
 
 ```python
 results = {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
   "content": {
-    "id": "3cde21c1-7e9c-4f6d-b986-06d879c43dad",
-    "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2023-05-15T18:13:38Z",
+    "createdDateTime": "2022-11-15T16:30:37Z",
     "creationOptions": [],
-    "description": "test1",
-    "displayName": "test1",
+    "deletedDateTime": null,
+    "description": "Incident 2095: MS Teams This is a sample incident created for MS teams in SOAR v45",
+    "displayName": "SOAR",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
+    "id": "489acc09-3bac-4c43-a168-544df4bf40ff",
     "isAssignableToRole": null,
-    "mail": "test1@swivrllc.onmicrosoft.com",
+    "mail": "SOAR@.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "test1",
+    "mailNickname": "SOAR",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
     "onPremisesLastSyncDateTime": null,
     "onPremisesNetBiosName": null,
+    "onPremisesProvisioningErrors": [],
     "onPremisesSamAccountName": null,
     "onPremisesSecurityIdentifier": null,
     "onPremisesSyncEnabled": null,
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:test1@swivrllc.onmicrosoft.com"
+      "SMTP:SOAR@.onmicrosoft.com"
     ],
-    "renewedDateTime": "2023-05-15T18:13:38Z",
+    "renewedDateTime": "2022-11-15T16:30:37Z",
     "resourceBehaviorOptions": [],
     "resourceProvisioningOptions": [],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-1021190593-1332575900-3624306361-2906506361",
-    "theme": null,
-    "visibility": "Private",
-    "onPremisesProvisioningErrors": [],
+    "securityIdentifier": "S-1-12-1-1218104329-1279474604-1297377441-4282433524",
     "teamsEnabled": false,
-    "unfoundUsers": []
+    "theme": null,
+    "unfoundUsers": [],
+    "visibility": "Public"
   },
-  "raw": null,
   "inputs": {
-    "incident_id": 2122,
-    "additional_members": "",
-    "ms_owners_list": "markscherfling@swivrllc.onmicrosoft.com",
-    "ms_group_name": "test1",
-    "ms_group_mail_nickname": "test1",
-    "add_members_from": "None",
-    "task_id": null,
-    "ms_description": "test1"
+    "add_members_from": "Incident",
+    "incident_id": 2095,
+    "ms_group_description": "Incident 2095: MS Teams This is a sample incident created for MS teams in SOAR v45",
+    "ms_group_mail_nickname": "SOAR",
+    "ms_group_name": "SOAR",
+    "ms_owners_list": "AdminSoarMS@.onmicrosoft.com"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 20595,
+    "host": "Apphost",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 1560,
-    "timestamp": "2023-05-15 14:13:39"
-  }
+    "package_version": "2.0.0",
+    "timestamp": "2022-11-15 16:30:46",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -705,32 +686,33 @@ results = {
 
 ```python
 if task:
-  inputs.task_id = task.id
-
+    inputs.task_id = task.id
+  
 inputs.incident_id = str(incident.id)
-inputs.ms_group_name = f"Incident {incident.id}: {incident.name}" if playbook.inputs.ms_group_name is None else playbook.inputs.ms_group_name
+inputs.ms_group_name = "Incident {}: {}".format(str(incident.id),  incident.name) if rule.properties.ms_group_name is None else rule.properties.ms_group_name
 
-if playbook.inputs.ms_owners_list:
-  inputs.ms_owners_list = playbook.inputs.ms_owners_list
-
-if playbook.inputs.add_members_incident:
-  _value = playbook.inputs.add_members_incident.lower().strip()
+if rule.properties.ms_owners_list is not None:
+    inputs.ms_owners_list = rule.properties.ms_owners_list
+    
+if rule.properties.add_members_incident is not None:
+  _value = rule.properties.add_members_incident.lower().strip()
   if _value == "all incident members":
     inputs.add_members_from = "Incident"
   else:
     inputs.add_members_from = "None"
-
-if playbook.inputs.additional_members.content:
-  inputs.additional_members = playbook.inputs.additional_members.content
-
-if playbook.inputs.ms_description:
-  inputs.ms_description = playbook.inputs.ms_description
+    
+if rule.properties.additional_members.content is not None:
+    inputs.additional_members = rule.properties.additional_members.content
+    
+if rule.properties.ms_description is not None:
+    inputs.ms_description = rule.properties.ms_description
 else:
-  description = incident.description.content if incident.description else ""
-  inputs.ms_description = f"Incident {incident.id}: {incident.name} {description}"
+    inputs.ms_description = f"Incident {incident.id}: {incident.name} {incident.description.content}"
+  
 
-if playbook.inputs.ms_group_mail_nickname:
-  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
+if rule.properties.ms_group_mail_nickname is not None:
+    inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname
+
 ```
 
 </p>
@@ -740,30 +722,30 @@ if playbook.inputs.ms_group_mail_nickname:
 <p>
 
 ```python
-results = playbook.functions.results.create_group_results
 content = results.get("content")
 
-if not results.get("success"):
-  text = "Unable to create Microsoft Group"
-  fail_reason = results.get("reason")
+if not results.success:
+  text = u"Unable to create Microsoft Group"
+  fail_reason = results.reason
   if fail_reason:
-    text = f"{text}:\n\tFailure reason: {fail_reason}"
-
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
 else:
-  text  = f'''<b>Microsoft Group Details:</b><br />
-  <br />Name: {content.get("displayName")}
-  <br />Description: {content.get("description")}
-  <br />Teams Enabled: {content.get("teamsEnabled")}
-  <br />ID: {content.get("id")}
-  <br />Mail: {content.get("mail")}
-  <br />Visibility: {content.get("visibility")}
-  <br />Group Types: {content.get("groupTypes")}
-  <br />Created date and time: {content.get("createdDateTime")}'''
+  text  = u"<b>Microsoft Group Details:</b><br />"
+  text += u"<br />Name: {}".format(content.get("displayName"))
+  text += u"<br />Description: {}".format(content.get("description"))
+  text += u"<br />Teams Enabled: {}".format(content.get("teamsEnabled"))
+  text += u"<br />ID: {}".format(content.get("id"))
+  text += u"<br />Mail: {}".format(content.get("mail"))
+  text += u"<br />Visibility: {}".format(content.get("visibility"))
+  text += u"<br />Group Types: {}".format(content.get("groupTypes"))
+  text += u"<br />Created date and time: {}".format(content.get("createdDateTime"))
   if content.get("unfoundUsers"):
-    text += f'<br />*Note the following users were unable to be added to the group: {content.get("unfoundUsers")}'
+    text += u"<br />*Note the following users were unable to be added to the group: {}".format(content.get("unfoundUsers"))
 
 note = helper.createRichText(text)
 incident.addNote(note)
+
 ```
 
 </p>
@@ -807,43 +789,41 @@ The function is developed to automatically add all members of an incident or a t
 
 ```python
 results = {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
   "content": {
     "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
-    "id": "87fd1ea0-6a3f-4078-b271-e4f8e6f8469e",
-    "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2023-05-15T17:39:58Z",
+    "createdDateTime": "2022-11-16T12:11:47Z",
     "creationOptions": [
       "Team",
       "ExchangeProvisioningFlags:3552"
     ],
-    "description": "task testing",
-    "displayName": "task testing",
+    "deletedDateTime": null,
+    "description": "SoarTeam",
+    "displayName": "SoarTeam",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
+    "id": "db7350fc-b6df-4041",
     "isAssignableToRole": null,
-    "mail": "tasktesting@swivrllc.onmicrosoft.com",
+    "mail": "soargroup@.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "tasktesting",
+    "mailNickname": "soargroup",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
     "onPremisesLastSyncDateTime": null,
     "onPremisesNetBiosName": null,
+    "onPremisesProvisioningErrors": [],
     "onPremisesSamAccountName": null,
     "onPremisesSecurityIdentifier": null,
     "onPremisesSyncEnabled": null,
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:tasktesting@swivrllc.onmicrosoft.com"
+      "SMTP:soargroup@.onmicrosoft.com"
     ],
-    "renewedDateTime": "2023-05-15T17:39:58Z",
+    "renewedDateTime": "2022-11-16T12:11:47Z",
     "resourceBehaviorOptions": [
       "HideGroupInOutlook",
       "SubscribeMembersToCalendarEventsDisabled",
@@ -853,32 +833,32 @@ results = {
       "Team"
     ],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-2281512608-1081633343-4175720882-2655451366",
-    "theme": null,
-    "visibility": "Private",
-    "onPremisesProvisioningErrors": [],
+    "securityIdentifier": "S-1-12-1-3681767676-1078048479-3610037686-3668414296",
     "status_code": 200,
     "teamsEnabled": true,
-    "unfoundUsers": null
+    "theme": null,
+    "unfoundUsers": null,
+    "visibility": "Public"
   },
-  "raw": null,
   "inputs": {
-    "ms_team_name": "task testing",
-    "incident_id": 2120,
-    "additional_members": "",
-    "ms_owners_list": "markscherfling@swivrllc.onmicrosoft.com",
-    "add_members_from": "None",
-    "task_id": 126,
-    "ms_description": "task testing"
+    "add_members_from": "Incident",
+    "incident_id": 2095,
+    "ms_owners_list": "AdminSoarMS@.onmicrosoft.com",
+    "ms_team_description": "SoarTeam",
+    "ms_team_name": "SoarTeam"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 18257,
+    "host": "AppHost",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 50594,
-    "timestamp": "2023-05-15 13:40:47"
-  }
+    "package_version": "2.0.0",
+    "timestamp": "2022-11-16 12:11:53",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -890,29 +870,29 @@ results = {
 
 ```python
 if task:
-  inputs.task_id = task.id
-
+    inputs.task_id = task.id
+  
 inputs.incident_id = str(incident.id)
-inputs.ms_team_name = f"Incident {incident.id}: {incident.name}" if playbook.inputs.ms_team_name is None else playbook.inputs.ms_team_name
+inputs.ms_team_name = "Incident {}: {}".format(str(incident.id),  incident.name) if rule.properties.ms_team_name is None else rule.properties.ms_team_name
 
-if playbook.inputs.ms_owners_list:
-  inputs.ms_owners_list = playbook.inputs.ms_owners_list
-
-if playbook.inputs.add_members_incident:
-  _value = playbook.inputs.add_members_incident.lower().strip()
+if rule.properties.ms_owners_list is not None:
+    inputs.ms_owners_list = rule.properties.ms_owners_list
+    
+if rule.properties.add_members_incident is not None:
+  _value = rule.properties.add_members_incident.lower().strip()
   if _value == "all incident members":
     inputs.add_members_from = "Incident"
   else:
     inputs.add_members_from = "None"
-
-if playbook.inputs.additional_members.content:
-  inputs.additional_members = playbook.inputs.additional_members.content
-
-if playbook.inputs.ms_description:
-  inputs.ms_description = playbook.inputs.ms_description
+    
+if rule.properties.additional_members.content is not None:
+    inputs.additional_members = rule.properties.additional_members.content
+    
+if rule.properties.ms_description is not None:
+    inputs.ms_description = rule.properties.ms_description
 else:
-  description = incident.description.content if incident.description else ""
-  inputs.ms_description = f"Incident {incident.id}: {incident.name} {description}"
+    inputs.ms_description = f"Incident {incident.id}: {incident.name} {incident.description.content}"
+
 ```
 
 </p>
@@ -922,30 +902,30 @@ else:
 <p>
 
 ```python
-results = playbook.functions.results.create_team
 content = results.get("content")
 
-if not results.get("success"):
-  text = "Unable to create Microsoft Team"
-  fail_reason = results.get("reason")
+if not results.success:
+  text = u"Unable to create Microsoft Group"
+  fail_reason = results.reason
   if fail_reason:
-    text = f"{text}:\n\tFailure reason: {fail_reason}"
-
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
 else:
-  text  = f'''<b>Microsoft Group Details:</b><br />
-  <br />Name: {content.get("displayName")}
-  <br />Description: {content.get("description")}
-  <br />Teams Enabled: {content.get("teamsEnabled")}
-  <br />ID: {content.get("id")}
-  <br />Mail: {content.get("mail")}
-  <br />Visibility: {content.get("visibility")}
-  <br />Group Types: {content.get("groupTypes")}
-  <br />Created date and time: {content.get("createdDateTime")}'''
+  text  = u"<b>Microsoft Group Details:</b><br />"
+  text += u"<br />Name: {}".format(content.get("displayName"))
+  text += u"<br />Description: {}".format(content.get("description"))
+  text += u"<br />Teams Enabled: {}".format(content.get("teamsEnabled"))
+  text += u"<br />ID: {}".format(content.get("id"))
+  text += u"<br />Mail: {}".format(content.get("mail"))
+  text += u"<br />Visibility: {}".format(content.get("visibility"))
+  text += u"<br />Group Types: {}".format(content.get("groupTypes"))
+  text += u"<br />Created date and time: {}".format(content.get("createdDateTime"))
   if content.get("unfoundUsers"):
-    text += f'<br />*Note the following users were unable to be added to the group: {content.get("unfoundUsers")}'
+    text += u"<br />*Note the following users were unable to be added to the group: {}".format(content.get("unfoundUsers"))
 
 note = helper.createRichText(text)
 incident.addNote(note)
+
 ```
 
 </p>
@@ -990,26 +970,26 @@ This function deletes a MS Channel. A MS Team can be assigned to multiple channe
 
 ```python
 results = {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
   "content": {
-    "status_code": 204,
-    "message": "Successfully deleted channel: Incident 2121 testing channels"
+    "message": "Successfully deleted channel: Engineering Team",
+    "status_code": 204
   },
-  "raw": null,
   "inputs": {
-    "ms_groupteam_id": "322d20bf-450e-46d6-9338-f7e3b66a064c",
-    "ms_channel_name": "Incident 2121 testing channels"
+    "ms_channel_name": "Engineering Channel",
+    "ms_groupteam_name": "Engineering Team"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 6253,
+    "host": "appHost",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 3172,
-    "timestamp": "2023-05-15 14:09:04"
-  }
+    "package_version": "2.0.0",
+    "timestamp": "2022-11-22 12:31:03",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -1020,14 +1000,14 @@ results = {
 <p>
 
 ```python
-inputs.ms_channel_name = playbook.inputs.ms_channel_name
+inputs.ms_channel_name = rule.properties.ms_channel_name if rule.properties.ms_channel_name else f"Incident {incident.id} {incident.name}"
 
-if playbook.inputs.ms_groupteam_id:
-  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id
-elif playbook.inputs.ms_group_mail_nickname:
-  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
-elif playbook.inputs.ms_groupteam_name:
-  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name
+if rule.properties.ms_groupteam_id:
+  inputs.ms_groupteam_id = rule.properties.ms_groupteam_id
+elif rule.properties.ms_group_mail_nickname:
+  inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname
+elif rule.properties.ms_groupteam_name:
+  inputs.ms_groupteam_name = rule.properties.ms_groupteam_name
 else:
   helper.fail("No input was provided")
 ```
@@ -1039,18 +1019,17 @@ else:
 <p>
 
 ```python
-results = playbook.functions.results.delete_channel
 content = results.get("content")
 
-if not results.get("success"):
-  text = "Unable to delete Microsoft Channel"
-  fail_reason = results.get("reason")
+if not results.success:
+  text = u"Unable to delete Microsoft Channel"
+  fail_reason = results.reason
   if fail_reason:
-    text = f"{text}:\n\tFailure reason: {fail_reason}"
-
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
 else:
-  text  = f"""<b>Microsoft Channels:</b><br />
-  <br />{content.get('message')}"""
+  text  = u"<b>Microsoft Channels:</b><br />"
+  text += u"<br />{}".format(content.get("message"))
 
 note = helper.createRichText(text)
 incident.addNote(note)
@@ -1097,25 +1076,25 @@ This function deletes a MS Group. To identify this Group, one of the following i
 
 ```python
 results = {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
   "content": {
-    "status_code": 204,
-    "message": "Successfully deleted Group: test1"
+    "message": "Successfully deleted Group: Production Team",
+    "status_code": 204
   },
-  "raw": null,
   "inputs": {
-    "ms_group_id": "3cde21c1-7e9c-4f6d-b986-06d879c43dad"
+    "ms_group_mail_nickname": "ProductionTeam@.onmicrosoft.com"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 2996,
+    "host": "AppHost",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 2032,
-    "timestamp": "2023-05-15 14:15:02"
-  }
+    "package_version": "2.0.0",
+    "timestamp": "2022-11-22 12:14:11",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -1126,17 +1105,17 @@ results = {
 <p>
 
 ```python
-if playbook.inputs.ms_group_id:
-  inputs.ms_group_id = playbook.inputs.ms_group_id
+if rule.properties.ms_group_id:
+    inputs.ms_group_id = rule.properties.ms_group_id
 
-elif playbook.inputs.ms_group_mail_nickname:
-  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
+elif rule.properties.ms_group_mail_nickname:
+    inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname
 
-elif playbook.inputs.ms_group_name:
-  inputs.ms_group_name = playbook.inputs.ms_group_name
+elif rule.properties.ms_group_name:
+    inputs.ms_group_name = rule.properties.ms_group_name
 
 else:
-  helper.fail("Atleast one option must be specified to delete a group")
+    helper.fail("At least one option must be specified to delete a group")
 ```
 
 </p>
@@ -1146,21 +1125,21 @@ else:
 <p>
 
 ```python
-results = playbook.functions.results.delete_group
 content = results.get("content")
 
-if not results.get("success"):
-  text = "Unable to delete Microsoft Group"
-  fail_reason = results.get("reason")
+if not results.success:
+  text = u"Unable to delete Microsoft Group"
+  fail_reason = results.reason
   if fail_reason:
-    text = f"{text}:\n\tFailure reason: {fail_reason}"
-
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
 else:
-  text = f'''<b>Microsoft Groups:</b><br />
-  <br />{content.get("message")}'''
+  text = u"<b>Microsoft Groups:</b><br />"
+  text += u"<br />{}".format(content.get("message"))
 
 note = helper.createRichText(text)
 incident.addNote(note)
+
 ```
 
 </p>
@@ -1206,63 +1185,61 @@ To identify the Group, one of the following inputs can be used:
 
 ```python
 results = {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
   "content": {
-    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
-    "id": "3cde21c1-7e9c-4f6d-b986-06d879c43dad",
-    "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2023-05-15T18:13:38Z",
+    "createdDateTime": "2022-11-17T15:35:29Z",
     "creationOptions": [],
-    "description": "test1",
-    "displayName": "test1",
+    "deletedDateTime": null,
+    "description": "This is a sample group",
+    "displayName": "Engineering Team",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
+    "id": "764a62f2-b759-4dd9",
     "isAssignableToRole": null,
-    "mail": "test1@swivrllc.onmicrosoft.com",
+    "mail": "example@.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "test1",
+    "mailNickname": "example",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
+    "message": "Successfully enabled Teams for Group: Engineering Team",
     "onPremisesDomainName": null,
     "onPremisesLastSyncDateTime": null,
     "onPremisesNetBiosName": null,
+    "onPremisesProvisioningErrors": [],
     "onPremisesSamAccountName": null,
     "onPremisesSecurityIdentifier": null,
     "onPremisesSyncEnabled": null,
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:test1@swivrllc.onmicrosoft.com"
+      "SMTP:example@.onmicrosoft.com"
     ],
-    "renewedDateTime": "2023-05-15T18:13:38Z",
+    "renewedDateTime": "2022-11-17T15:35:29Z",
     "resourceBehaviorOptions": [],
     "resourceProvisioningOptions": [],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-1021190593-1332575900-3624306361-2906506361",
+    "securityIdentifier": "S-1-12-1-1984586482-1306113881-1226499974-2109203529",
+    "teamsEnabled": true,
     "theme": null,
-    "visibility": "Private",
-    "onPremisesProvisioningErrors": [],
-    "status_code": 200,
-    "message": "Successfully enabled Teams for Group: test1",
-    "teamsEnabled": true
+    "visibility": "Public"
   },
-  "raw": null,
   "inputs": {
-    "ms_group_id": "3cde21c1-7e9c-4f6d-b986-06d879c43dad"
+    "ms_group_mail_nickname": "engineeringTeam@.onmicrosoft.com"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 5220,
+    "host": "AppHost",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 4333,
-    "timestamp": "2023-05-15 14:14:23"
-  }
+    "package_version": "2.0.0",
+    "timestamp": "2022-11-17 15:37:00",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -1273,12 +1250,12 @@ results = {
 <p>
 
 ```python
-if playbook.inputs.ms_group_id:
-  inputs.ms_group_id = playbook.inputs.ms_group_id
-elif playbook.inputs.ms_group_mail_nickname:
-  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
-elif playbook.inputs.ms_group_name:
-  inputs.ms_group_name = playbook.inputs.ms_group_name
+if rule.properties.ms_group_id:
+  inputs.ms_group_id = rule.properties.ms_group_id
+elif rule.properties.ms_group_mail_nickname:
+  inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname
+elif rule.properties.ms_group_name:
+  inputs.ms_group_name = rule.properties.ms_group_name
 else:
   helper.fail("No input was provided.")
 ```
@@ -1290,30 +1267,31 @@ else:
 <p>
 
 ```python
-results = playbook.functions.results.enable_team
 content = results.get("content")
 
-if not results.get("success"):
-  text = "Could not enable Teams for this MS Group"
-  fail_reason = results.get("reason")
+if not results.success:
+  text = u"Unable to create Microsoft Group"
+  fail_reason = results.reason
   if fail_reason:
-    text = f"{text}:\n\tFailure reason: {fail_reason}"
-
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
 else:
-  text  = f'''<b>Microsoft Group Details:</b><br />
-  <br />Name: {content.get("displayName")}
-  <br />Description: {content.get("description")}
-  <br />Teams Enabled: {content.get("teamsEnabled")}
-  <br />ID: {content.get("id")}
-  <br />Mail: {content.get("mail")}
-  <br />Visibility: {content.get("visibility")}
-  <br />Group Types: {content.get("groupTypes")}
-  <br />Created date and time: {content.get("createdDateTime")}'''
+  text  = u"<b>Microsoft Group Details:</b><br />"
+  text += u"<br />Teams functionality has now been enabled for this Group.<br />"
+  text += u"<br />Name: {}".format(content.get("displayName"))
+  text += u"<br />Description: {}".format(content.get("description"))
+  text += u"<br />Teams Enabled: {}".format(content.get("teamsEnabled"))
+  text += u"<br />ID: {}".format(content.get("id"))
+  text += u"<br />Mail: {}".format(content.get("mail"))
+  text += u"<br />Visibility: {}".format(content.get("visibility"))
+  text += u"<br />Group Types: {}".format(content.get("groupTypes"))
+  text += u"<br />Created date and time: {}".format(content.get("createdDateTime"))
   if content.get("unfoundUsers"):
-    text += f'<br />*Note the following users were unable to be added to the group: {content.get("unfoundUsers")}'
+    text += u"<br />*Note the following users were unable to be added to the group: {}".format(content.get("unfoundUsers"))
 
 note = helper.createRichText(text)
 incident.addNote(note)
+
 ```
 
 </p>
@@ -1353,27 +1331,28 @@ This application posts Incident or Task details to a MS Teams channel.  The chan
 
 ```python
 results = {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
   "content": {
-    "message": "Information successfully posted in channel General"
+    "message": "Information successfully posted in channel Engineering"
   },
-  "raw": null,
   "inputs": {
-    "teams_channel": "General",
-    "incident_id": 2121,
+    "incident_id": 2096,
+    "task_id": 78,
+    "teams_channel": "Soar Incident",
     "teams_mrkdown": true,
-    "teams_payload": "{ \"summary\": \"SOAR Incident\", \"sections\": [ \n  { \"facts\": [ \n    { \"name\": \"Name\", \"value\": \"testing channels\" }, \n    { \"name\": \"Description\", \"value\": \"-\" }, \n    { \"name\": \"Id\", \"value\": \"2121\" }, \n    { \"name\": \"Owner\", \"value\": \"i@example.com\" }, \n    { \"name\": \"Types\", \"value\": \"\" }, \n    { \"name\": \"NIST Attack Vectors\", \"value\": \"\" }, \n    { \"name\": \"Create Date\", \"value\": \"1684173230796\" }, \n    { \"name\": \"Date Occurred\", \"value\": \"-\" }, \n    { \"name\": \"Discovered Date\", \"value\": \"1684173210301\" }, \n    { \"name\": \"Confirmed\", \"value\": \"True\" }, \n    { \"name\": \"Severity\", \"value\": \"Low\" } \n   ]\n  }\n ] \n} \n"
+    "teams_payload": "{ \"summary\": \"SOAR Incident\", \"sections\": [ \n  { \"facts\": [ \n    { \"name\": \"Name\", \"value\": \"Gootloader\" }, \n    { \"name\": \"Description\", \"value\": \"\u003cdiv class=\\\"rte\\\"\u003e\u003cdiv\u003eDelivery method: Distributed via web download\u003c/div\u003e\u003cdiv\u003eDropped by: example\u003c/div\u003e\u003cdiv\u003eLink: \u003ca href=\\\"https://example.com/example\\\" target=\\\"_blank\\\"\u003ehttps://example.com/gootloadersites\u003c/a\u003e\u003c/div\u003e\u003c/div\u003e\" }, \n    { \"name\": \"Id\", \"value\": \"2096\" }, \n    { \"name\": \"Owner\", \"value\": \"adminsoarms@.onmicrosoft.com\" }, \n    { \"name\": \"Types\", \"value\": \"Malware\" }, \n    { \"name\": \"NIST Attack Vectors\", \"value\": \"\" }, \n    { \"name\": \"Create Date\", \"value\": \"Wed Nov 16 14:35:03 GMT 2022\" }, \n    { \"name\": \"Date Occurred\", \"value\": \"Wed Oct 26 00:00:00 IST 2022\" }, \n    { \"name\": \"Discovered Date\", \"value\": \"Wed Oct 26 14:25:12 IST 2022\" }, \n    { \"name\": \"Confirmed\", \"value\": \"True\" }, \n    { \"name\": \"Severity\", \"value\": \"High\" } \n   ]\n  },\n  { \"text\": \"Task\", \"facts\": [ \n    { \"name\": \"Task\", \"value\": \"Research AV vendor databases\" }, \n    { \"name\": \"Owner\", \"value\": \"-\" },\n    { \"name\": \"Instructions\", \"value\": \"Research AV vendor databases for recent outbreaks, symptoms and remediation guidance based on observed symptoms and findings. Possible source for intelligence include the following.\n\u003cul\u003e\n\u003cli\u003eexample: http://www.example.com/en/threats/detect \u003c/li\u003e\n\u003cli\u003eexample: http://www.example.com/security/portal/threat/threats.aspx \u003c/li\u003e\n\u003cli\u003eexample:  http://example.com/security_response/landing/azlisting.jsp\u003c/li\u003e\n\u003cli\u003eexample: http://example.com/us/threatencyclopedia#malware \u003c/li\u003e\n\u003c/ul\u003e\" },\n    { \"name\": \"Due Date\", \"value\": \"-\" }\n    ]\n  }\n ] \n} \n"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 25451,
+    "host": "Apphost",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 2038,
-    "timestamp": "2023-05-15 14:21:57"
-  }
+    "package_version": "2.0.0",
+    "timestamp": "2022-11-23 12:22:20",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -1384,6 +1363,8 @@ results = {
 <p>
 
 ```python
+from java.util import Date
+
 inputs.incident_id = incident.id
 
 """
@@ -1396,7 +1377,7 @@ format of a payload. * = optional
 }
 """
 
-payload = '''{{ "summary": "SOAR Incident", "sections": [ 
+payload = u"""{{ "summary": "SOAR Incident", "sections": [ 
   {{ "facts": [ 
     {{ "name": "Name", "value": "{}" }}, 
     {{ "name": "Description", "value": "{}" }}, 
@@ -1413,16 +1394,15 @@ payload = '''{{ "summary": "SOAR Incident", "sections": [
   }}
  ] 
 }} 
-'''.format(incident.name, incident.description.content.replace('"', '\\"') if incident.description else "-", incident.id,
-  incident.owner_id if incident.owner_id else "-",
-  ", ".join(str(x) for x in incident.incident_type_ids), ", ".join(str(x) for x in incident.nist_attack_vectors),
-  incident.create_date, incident.start_date if incident.start_date else "-", incident.discovered_date,
-  "True" if incident.confirmed else "False",
-  "-" if not incident.severity_code else incident.severity_code)
+""".format(incident.name, incident.description.content.replace('"', '\\"') if incident.description else "-", incident.id,
+   incident.owner_id if incident.owner_id else "-",
+   ", ".join(str(x) for x in incident.incident_type_ids), ", ".join(str(x) for x in incident.nist_attack_vectors),
+   Date(incident.create_date), Date(incident.start_date) if incident.start_date else "-", Date(incident.discovered_date),
+   "True" if incident.confirmed else "False",
+   "-" if not incident.severity_code else incident.severity_code
+   )
 
 inputs.teams_payload = payload
-inputs.teams_channel = "General"
-inputs.teams_mrkdown = True
 ```
 
 </p>
@@ -1432,14 +1412,13 @@ inputs.teams_mrkdown = True
 <p>
 
 ```python
-results = playbook.functions.results.post_message
 content = results.get("content")
 
-if not results.get("success"):
-  text = "Unable to Post message"
-  fail_reason = results.get("reason")
+if not results.success:
+  text = u"Unable to Post message"
+  fail_reason = results.reason
   if fail_reason:
-    text = f"{text}:\n\tFailure reason: {fail_reason}"
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
   text = helper.createRichText(text)
   incident.addNote(text)
 ```
@@ -1481,64 +1460,196 @@ Read messages from a Teams Channel
 
 ```python
 results = {
-  "version": 2.0,
-  "success": true,
-  "reason": null,
   "content": [
     {
-      "id": "1684173756348",
-      "replyToId": null,
-      "etag": "1684173756348",
-      "messageType": "message",
-      "createdDateTime": "2023-05-15T18:02:36.348Z",
-      "lastModifiedDateTime": "2023-05-15T18:02:36.348Z",
-      "lastEditedDateTime": null,
+      "attachments": [
+        {
+          "content": {"value\": \"\u003cdiv\u003e\u003cdiv\u003eIt begins with a user searching for specific information in a search engine. In this case, the user had searched for the keywords \u201cdisclosure agreement real estate transaction\u201d. A website compromised by Gootkit operators was among the results, meaning that the user did not open this compromised website by chance. Indeed, the operators had tweaked the odds in their favor by using Search Engine Optimization (SEO) poisoning to make this website rank high in the search results, leading the user to visit the compromised website. This also means that the website\u2019s URL will not be available for long and that a full analysis would be difficult to conduct if not done immediately.\u003c/div\u003e\u003c/div\u003e\"\r\n"},
+          "contentType": "application/vnd.microsoft.teams.card.o365connector",
+          "contentUrl": null,
+          "id": "7c0997dc1b1f481ab4cacf3da1ad76ac",
+          "name": null,
+          "thumbnailUrl": null
+        }
+      ],
+      "body": {
+        "content": "\u003cattachment id=\"7c0997dc1b1f481ab4cacf3da1ad76ac\"\u003e\u003c/attachment\u003e",
+        "contentType": "html"
+      },
+      "channelIdentity": {
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
+      },
+      "chatId": null,
+      "createdDateTime": "2022-12-12T21:06:16.484Z",
       "deletedDateTime": null,
+      "etag": "1670879176484",
+      "eventDetail": null,
+      "from": {
+        "application": {
+          "applicationIdentityType": "office365Connector",
+          "displayName": "SOAR",
+          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2"
+        },
+        "device": null,
+        "user": null
+      },
+      "id": "1670879176484",
+      "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-12T21:06:16.484Z",
+      "locale": "en-us",
+      "mentions": [],
+      "messageType": "message",
+      "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
       "subject": null,
       "summary": null,
+      "webUrl": "https://teams.microsoft.com/l/message/******"
+    },
+    {
+      "attachments": [
+        {
+          "content": "{\r\n  \"summary\": \"Incoming Webhook is now connected to soarmessages\",\r\n  \"sections\": [\r\n    {\r\n      \"activitySubtitle\": \"\u003cp\u003eMiriam Graham has set up a connection to Incoming Webhook so group members will be notified for this configuration with name \u003cstrong\u003eSOAR\u003c/strong\u003e\u003c/p\u003e\",\r\n      \"activityText\": \"\",\r\n      \"markdown\": true,\r\n      \"startGroup\": false\r\n    }\r\n  ]\r\n}",
+          "contentType": "application/vnd.microsoft.teams.card.o365connector",
+          "contentUrl": null,
+          "id": "2afcb94fd474482484883803d78a22e1",
+          "name": null,
+          "thumbnailUrl": null
+        }
+      ],
+      "body": {
+        "content": "\u003cattachment id=\"2afcb94fd474482484883803d78a22e1\"\u003e\u003c/attachment\u003e",
+        "contentType": "html"
+      },
+      "channelIdentity": {
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
+      },
       "chatId": null,
+      "createdDateTime": "2022-12-08T17:27:53.277Z",
+      "deletedDateTime": null,
+      "etag": "1670520473277",
+      "eventDetail": null,
+      "from": {
+        "application": {
+          "applicationIdentityType": "office365Connector",
+          "displayName": "SOAR",
+          "id": "203a1e2c-26cc-47ca-83ae-be98f960b6b2"
+        },
+        "device": null,
+        "user": null
+      },
+      "id": "1670520473277",
       "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-08T17:27:53.277Z",
       "locale": "en-us",
-      "webUrl": "https://teams.microsoft.com/l/message/19%3Aa62cab990d8648b6a9047787e030fa7e%40thread.tacv2/1684173756348?groupId=322d20bf-450e-46d6-9338-f7e3b66a064c&tenantId=50ad7d3e-b889-434d-802d-13b87c68047b&createdTime=1684173756348&parentMessageId=1684173756348",
+      "mentions": [],
+      "messageType": "message",
       "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
+      "subject": null,
+      "summary": "Incoming Webhook is now connected to soarmessages",
+      "webUrl": "https://teams.microsoft.com/l/messages****"
+    },
+    {
+      "attachments": [],
+      "body": {
+        "content": "Hello!",
+        "contentType": "text"
+      },
+      "channelIdentity": {
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
+      },
+      "chatId": null,
+      "createdDateTime": "2022-12-08T11:53:30.188Z",
+      "deletedDateTime": null,
+      "etag": "1670500410188",
       "eventDetail": null,
       "from": {
         "application": null,
         "device": null,
         "user": {
-          "@odata.type": "#microsoft.graph.teamworkUserIdentity",
-          "id": "43dd7b73-6a70-475e-88c3-609a9f30b514",
-          "displayName": "Mark Scherfling",
-          "userIdentityType": "aadUser",
-          "tenantId": "50ad7d3e-b889-434d-802d-13b87c68047b"
+          "displayName": "user2",
+          "id": "6c259569-f2c0-430b-af73-40081b5de19d",
+          "tenantId": "1d8a5928-8678-408e-ab06-50ca7e01766a",
+          "userIdentityType": "aadUser"
         }
       },
+      "id": "1670500410188",
+      "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-08T11:53:30.188Z",
+      "locale": "en-us",
+      "mentions": [],
+      "messageType": "message",
+      "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
+      "subject": null,
+      "summary": null,
+      "webUrl": "https://teams.microsoft.com/l/message/******"
+    },
+    {
+      "attachments": [],
       "body": {
-        "contentType": "text",
-        "content": "hello world"
+        "content": "Message 1",
+        "contentType": "text"
       },
       "channelIdentity": {
-        "teamId": "322d20bf-450e-46d6-9338-f7e3b66a064c",
-        "channelId": "19:a62cab990d8648b6a9047787e030fa7e@thread.tacv2"
+        "channelId": "19:2bcae5884bd4439788c6f6639000e7f5@thread.tacv2",
+        "teamId": "66475ea6-d085-461b-8d25-7818274b6cf0"
       },
-      "attachments": [],
+      "chatId": null,
+      "createdDateTime": "2022-12-08T11:15:26.534Z",
+      "deletedDateTime": null,
+      "etag": "1670498126534",
+      "eventDetail": null,
+      "from": {
+        "application": null,
+        "device": null,
+        "user": {
+          "displayName": "user1",
+          "id": "a27544ce-79dc-4d26-a277-d7d4a7cd19cc",
+          "tenantId": "1d8a5928-8678-408e-ab06-50ca7e01766a",
+          "userIdentityType": "aadUser"
+        }
+      },
+      "id": "1670498126534",
+      "importance": "normal",
+      "lastEditedDateTime": null,
+      "lastModifiedDateTime": "2022-12-08T11:15:26.534Z",
+      "locale": "en-us",
       "mentions": [],
-      "reactions": []
+      "messageType": "message",
+      "policyViolation": null,
+      "reactions": [],
+      "replyToId": null,
+      "subject": null,
+      "summary": null,
+      "webUrl": "https://teams.microsoft.com/l/message/*****"
     }
   ],
-  "raw": null,
   "inputs": {
-    "ms_groupteam_id": "322d20bf-450e-46d6-9338-f7e3b66a064c",
-    "ms_channel_name": "Incident 2121 testing channels"
+    "ms_channel_name": "ychannel",
+    "ms_groupteam_name": "soarmessages"
   },
   "metrics": {
-    "version": "1.0",
+    "execution_time_ms": 5030,
+    "host": "apphost",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 3707,
-    "timestamp": "2023-05-15 14:06:30"
-  }
+    "package_version": "2.0.0",
+    "timestamp": "2022-12-13 16:56:51",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -1549,20 +1660,22 @@ results = {
 <p>
 
 ```python
-if playbook.inputs.ms_message_id:
-  inputs.ms_message_id = playbook.inputs.ms_message_id
-if playbook.inputs.ms_channel_id:
-  inputs.ms_channel_id = playbook.inputs.ms_channel_id
-if playbook.inputs.ms_groupteam_id:
-  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id
-if playbook.inputs.ms_channel_name:
-  inputs.ms_channel_name = playbook.inputs.ms_channel_name
-if playbook.inputs.ms_groupteam_id:
-  inputs.ms_groupteam_id = playbook.inputs.ms_groupteam_id
-if playbook.inputs.ms_group_mail_nickname:
-  inputs.ms_group_mail_nickname = playbook.inputs.ms_group_mail_nickname
-if playbook.inputs.ms_groupteam_name:
-  inputs.ms_groupteam_name = playbook.inputs.ms_groupteam_name
+if rule.properties.ms_message_id:
+  inputs.ms_message_id = rule.properties.ms_message_id
+if rule.properties.ms_channel_id:
+  inputs.ms_channel_id = rule.properties.ms_channel_id
+if rule.properties.ms_groupteam_id:
+  inputs.ms_groupteam_id = rule.properties.ms_groupteam_id
+
+if rule.properties.ms_channel_name:
+  inputs.ms_channel_name = rule.properties.ms_channel_name
+if rule.properties.ms_groupteam_id:
+  inputs.ms_groupteam_id = rule.properties.ms_groupteam_id
+if rule.properties.ms_group_mail_nickname:
+  inputs.ms_group_mail_nickname = rule.properties.ms_group_mail_nickname
+if rule.properties.ms_groupteam_name:
+  inputs.ms_groupteam_name = rule.properties.ms_groupteam_name
+
 ```
 
 </p>
@@ -1572,40 +1685,39 @@ if playbook.inputs.ms_groupteam_name:
 <p>
 
 ```python
-results = playbook.functions.results.read_message
-content = results.get("content", {})
+content = results.get("content")
 
-if not results.get("success"):
-  text = "Unable to read messages from Microsoft Channel"
-  fail_reason = results.get("reason")
+if not results.success:
+  text = u"Unable to read messages from Microsoft Channel"
+  fail_reason = results.reason
   if fail_reason:
-    text = f"{text}:\n\tFailure reason: {fail_reason}"
-
+    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    
 else:
-  text  = f"""<b>Microsoft Channels:</b><br />
-  Successfully retrieved <b>{len(content)}</b> messages <br /><br />"""
-
+  text  = u"<b>Microsoft Channels:</b><br />"
+  text += u"Successfully retrieved <b>{}</b> messages <br /><br />".format(len(content))
+  
   for message in content:
-    url = f'''<a href="{message.get("webUrl")}">Click here</a>
-    Message Id : {message.get("id")} <br />
-    Channel Id : {message.get("channelIdentity", {}).get("channelId")} <br />
-    Team Id : {message.get("channelIdentity", {}).get("teamId")} <br />'''
-
-    if message.get("from"):
-      user_messages = message.get("from", {}).get("user", {})
-      if user_messages:
-        text += f'From User : {user_messages.get("displayName")} <br />'
-      else:
-        text += f'From Application : {message.get("from", {}).get("application", {}).get("displayName")} <br />'
-
-    text += f'''Body Content : {message.get("body", {}).get("content")} <br />
-    Content Type : {message.get("body", {}).get("contentType")} <br />
-    Created Time : {message.get("createdDateTime")} <br />
-    Web URL : {url} <br />
-    <br />'''
-
+    url   = u'<a href="{}">Click here</a>'.format(message.get("webUrl"))
+    text += "Message Id : {} <br />".format(message.get("id"))
+    text += "Channel Id : {} <br />".format(message.get("channelIdentity").get("channelId"))
+    text += "Team Id : {} <br />".format(message.get("channelIdentity").get("teamId"))
+  
+    user_messages = message.get("from").get("user")
+    if user_messages:
+      text += "From User : {} <br />".format(user_messages.get("displayName"))
+    else:
+      text += "From Application : {} <br />".format(message.get("from").get("application").get("displayName"))
+  
+    text += "Body Content : {} <br />".format(message.get("body").get("content"))
+    text += "Content Type : {} <br />".format(message.get("body").get("contentType"))
+    text += "Created Time : {} <br />".format(message.get("createdDateTime"))
+    text += "Web URL : {} <br />".format(url)
+    text += "<br />"
+    
 note = helper.createRichText(text)
 incident.addNote(note)
+
 ```
 
 </p>
@@ -1614,28 +1726,30 @@ incident.addNote(note)
 ---
 
 
-## Playbooks
-| Playbook Name | Description | Object | Status |
-| ------------- | ----------- | ------ | ------ |
-| MS Teams: Archive Team From Task (PB) | None | task | `enabled` |
-| MS Teams: Archive Team (PB) | None | incident | `enabled` |
-| MS Teams: Create Channel From Task (PB) | None | task | `enabled` |
-| MS Teams: Create Channel (PB) | None | incident | `enabled` |
-| MS Teams: Create Group From Task (PB) | None | task | `enabled` |
-| MS Teams: Create Group (PB) | None | incident | `enabled` |
-| MS Teams: Create Team From Task (PB) | None | task | `enabled` |
-| MS Teams: Create Team (PB) | None | incident | `enabled` |
-| MS Teams: Delete Channel From Task (PB) | None | task | `enabled` |
-| MS Teams: Delete Channel (PB) | None | incident | `enabled` |
-| MS Teams: Delete Group From Task (PB) | None | task | `enabled` |
-| MS Teams: Delete Group (PB) | None | incident | `enabled` |
-| MS Teams: Enable Teams for Group From Task (PB) | None | task | `enabled` |
-| MS Teams: Enable Teams for Group (PB) | None | incident | `enabled` |
-| MS Teams: Post Incident Information (PB) | None | incident | `enabled` |
-| MS Teams: Post Task Information (PB) | None | task | `enabled` |
-| MS Teams: Read Channel Messages From task (PB) | None | task | `enabled` |
-| MS Teams: Read Channel Messages (PB) | None | incident | `enabled` |
 
+
+
+## Rules
+| Rule Name | Object | Workflow Triggered |
+| --------- | ------ | ------------------ |
+| MS Teams: Archive Team | incident | `common_archive_unarchive_a_microsoft_team` |
+| MS Teams: Archive Team From Task | task | `common_archive_unarchive_a_microsoft_team` |
+| MS Teams: Create Channel | incident | `common_create_a_teams_channel` |
+| MS Teams: Create Channel From Task | task | `common_create_a_teams_channel` |
+| MS Teams: Create Group | incident | `incident_create_a_microsoft_group` |
+| MS Teams: Create Group From Task | task | `task_create_a_microsoft_group` |
+| MS Teams: Create Team | incident | `incident_create_a_microsoft_team` |
+| MS Teams: Create Team From Task | task | `task_create_a_microsoft_team` |
+| MS Teams: Delete Channel | incident | `common_delete_a_teams_channel` |
+| MS Teams: Delete Channel From Task | task | `common_delete_a_teams_channel` |
+| MS Teams: Delete Group | incident | `common_delete_a_microsoft_group` |
+| MS Teams: Delete Group From Task | task | `common_delete_a_microsoft_group` |
+| MS Teams: Enable Teams for Group | incident | `common_enable_microsoft_team_for_group` |
+| MS Teams: Enable Teams for Group From Task | task | `common_enable_microsoft_team_for_group` |
+| MS Teams: Post Incident Information | incident | `incident_post_message_to_teams` |
+| MS Teams: Post Task Information | task | `task_post_message_to_teams` |
+| MS Teams: Read Channel Messages | incident | `common_read_a_channels_messages` |
+| MS Teams: Read Channel Messages From task | task | `common_read_a_channels_messages` |
 
 ---
 

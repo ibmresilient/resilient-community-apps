@@ -3,30 +3,30 @@
   "success": true,
   "reason": null,
   "content": {
-    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('322d20bf-450e-46d6-9338-f7e3b66a064c')/channels/$entity",
-    "id": "19:c875f7333fb843aeacb01d1cbfa52ae5@thread.tacv2",
-    "createdDateTime": "2023-05-15T18:26:57.6422279Z",
-    "displayName": "test 1234",
-    "description": "test 1234",
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('4e8349d3-a5e1-****-****-3d81f5252b7f')/channels/$entity",
+    "id": "19:8d4fbf7358174021ae16374572797fce@thread.tacv2",
+    "createdDateTime": "2022-11-22T12:21:20.4305814Z",
+    "displayName": "Engineering Team",
+    "description": "Engineering 2 subteam",
     "isFavoriteByDefault": false,
     "email": "",
-    "webUrl": "https://teams.microsoft.com/l/channel/19%3ac875f7333fb843aeacb01d1cbfa52ae5%40thread.tacv2/test+1234?groupId=322d20bf-450e-46d6-9338-f7e3b66a064c&tenantId=50ad7d3e-b889-434d-802d-13b87c68047b",
+    "webUrl": "https://teams.microsoft.com/l/channel/19%3a8d4fbf7************72797fce%40thread.tacv2/Engineering Team?groupId=4e8349d3-a5e1-****-*****-3d81f5252b7f&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a",
     "membershipType": "standard",
     "status_code": 201,
-    "message": "Successfully created channel: test 1234"
+    "message": "Successfully created channel: Engineering Team"
   },
   "raw": null,
   "inputs": {
-    "ms_groupteam_id": "322d20bf-450e-46d6-9338-f7e3b66a064c",
-    "ms_channel_name": "test 1234",
-    "ms_description": "test 1234"
+    "ms_channel_name": "Engineering Team",
+    "ms_group_description": "Engineering 2 subteam",
+    "ms_groupteam_name": "Engineering Team"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 4593,
-    "timestamp": "2023-05-15 14:26:57"
+    "package_version": "2.0.0",
+    "host": "appHost",
+    "execution_time_ms": 9106,
+    "timestamp": "2022-11-22 12:21:20"
   }
 }

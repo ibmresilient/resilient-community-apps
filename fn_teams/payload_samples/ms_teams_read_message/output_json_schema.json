@@ -33,7 +33,12 @@
           "lastEditedDateTime": {},
           "deletedDateTime": {},
           "subject": {},
-          "summary": {},
+          "summary": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
           "chatId": {},
           "importance": {
             "type": "string"
@@ -49,28 +54,9 @@
           "from": {
             "type": "object",
             "properties": {
-              "application": {},
               "device": {},
-              "user": {
-                "type": "object",
-                "properties": {
-                  "@odata.type": {
-                    "type": "string"
-                  },
-                  "id": {
-                    "type": "string"
-                  },
-                  "displayName": {
-                    "type": "string"
-                  },
-                  "userIdentityType": {
-                    "type": "string"
-                  },
-                  "tenantId": {
-                    "type": "string"
-                  }
-                }
-              }
+              "user": {},
+              "application": {}
             }
           },
           "body": {
@@ -96,7 +82,24 @@
             }
           },
           "attachments": {
-            "type": "array"
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "contentType": {
+                  "type": "string"
+                },
+                "contentUrl": {},
+                "content": {
+                  "type": "string"
+                },
+                "name": {},
+                "thumbnailUrl": {}
+              }
+            }
           },
           "mentions": {
             "type": "array"
@@ -111,10 +114,10 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "ms_groupteam_id": {
+        "ms_channel_name": {
           "type": "string"
         },
-        "ms_channel_name": {
+        "ms_groupteam_name": {
           "type": "string"
         }
       }

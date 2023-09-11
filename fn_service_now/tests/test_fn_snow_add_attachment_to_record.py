@@ -3,11 +3,11 @@
 
 from __future__ import print_function
 import pytest
-from resilient_circuits.util import get_function_definition
+from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from sn_test_helper import *
-from fn_service_now.util.resilient_helper import ResilientHelper
 
+PACKAGE_NAME = "fn_service_now"
 FUNCTION_NAME = "fn_snow_add_attachment_to_record"
 
 # Get mock config data
@@ -41,7 +41,7 @@ class TestFnSnowAddAttachmentToRecord:
       "success": True,
       "res_id": "RES-1001-2002",
       "sn_ref_id": "INC123456",
-      "attachment_name": "Mock Attachment Name",
+      "attachment_name": u"Mock Attachment Name",
       "sn_attachment_sys_id": "c1ea807ddb82230044ccd426ca961937"
     }
 

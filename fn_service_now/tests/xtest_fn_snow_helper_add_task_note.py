@@ -5,8 +5,8 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from sn_test_helper import PACKAGE_NAME
 
+PACKAGE_NAME = "fn_service_now"
 FUNCTION_NAME = "fn_snow_helper_add_task_note"
 
 # Read the default configuration-data section from the package

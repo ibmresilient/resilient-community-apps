@@ -1,5 +1,6 @@
 import os, json
 import pytest, logging
+
 from resilient_lib import RequestsCommon
 
 APP_CONFIG = {
@@ -32,7 +33,7 @@ class MockRestClient:
     def __init__(self):
         self.get_db  = {}
         self.post_db = {}
-
+    
     def add_get_request(self, url, response):
         self.get_db[url] = response
 

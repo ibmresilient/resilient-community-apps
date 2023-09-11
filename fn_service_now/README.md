@@ -1,7 +1,6 @@
 # IBM Security QRadar SOAR App for ServiceNow
 
 - [Release Notes](#release-notes)
-  - [v2.2.0](#v220)
   - [v2.1.0](#v210)
   - [v2.0.9](#v209)
 - [Overview](#overview)
@@ -17,20 +16,6 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v2.2.0
-* Added playbooks
-
-### 2.2.0 Changes
-In v2.2, the existing rules and workflows have been replaced with playbooks.
-This change is made to support the ongoing, newer capabilities of playbooks.
-Each playbook has the same functionality as the previous, corresponding rule/workflow.
-
-If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
-For automatic actions, the playbooks will be disabled by default.
-
-You can continue to use the rules/workflows.
-But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
-
 ### v2.1.0
 * Added optional `render_rich_text` configuration. If set to True, rich text notes will be sent to SNOW.
 * Verified on ServiceNow Tokyo release
@@ -85,8 +70,8 @@ Bi-directional app with ServiceNow and IBM Security QRadar SOAR allows SEC Ops P
 * ServiceNow `IBM SOAR App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
   * If integrating with ServiceNow Security Incident Table (SIR), `IBM SOAR App >= 2.0.9` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
 * If IBM SOAR is not publicly accessible (behind a firewall), a ServiceNow MID Server is required. See the [Install Guide](./docs/install_guide) for more information
-* IBM Cloud Pak for Security `>= 1.6.0` *or* IBM SOAR `>= v45.0.0`
-* App Host `>= v1.10.0` (recommended) *or* an Integrations Server running `resilient-circuits >= v45.0.0`.
+* IBM Cloud Pak for Security `>= 1.6.0` *or* IBM SOAR `>= v41.2.0`
+* App Host `>= v1.10.0` (recommended) *or* an Integrations Server running `resilient-circuits >= v46.0.0`.
   - `fn_service_now >= v1.0.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
   - If integrating with SIR, `fn_service_now >= v2.1.0` is recommended
 

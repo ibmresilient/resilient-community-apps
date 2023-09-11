@@ -2,9 +2,13 @@
 """Tests using pytest_resilient_circuits"""
 import os
 import logging
+import json
 import pytest
+
+from urllib import parse
 from unittest.mock import patch
 from resilient_lib import RequestsCommon, IntegrationError
+
 from tests import testcommons
 from fn_teams.lib import constants
 from fn_teams.lib.microsoft_teams import TeamsInterface
@@ -39,7 +43,7 @@ def patch_archive_unarchive_team(method, url, headers, callback):
         url=url,
         headers=headers,
         callback=callback)
-
+    
     if method == "get":
         if "=" in url:
             base_url, query = url.split("=")

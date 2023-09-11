@@ -1,23 +1,23 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-from json import dumps
-from logging import getLogger
-from time import time
+import json
+import logging
+import time
+
 from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
                                                   ResilientHelper)
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import RequestsCommon, ResultPayload, validate_fields
+from resilient_lib import RequestsCommon, ResultPayload
 
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
-
     def __init__(self, inputs):
         self.success = True
         self.reason = None
@@ -49,31 +49,23 @@ class FunctionComponent(ResilientComponent):
 
         err_msg = None
 
-        log = getLogger(__name__)
+        log = logging.getLogger(__name__)
 
         try:
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
-            validate_fields(["incident_id", "sn_record_state"], kwargs)
 
             # Get the function inputs:
             inputs = {
-                # number (required)
-                "incident_id": kwargs.get("incident_id"),
-                # number (optional)
-                "task_id": kwargs.get("task_id"),
-                # number (optional)
-                "sn_res_id": kwargs.get("sn_res_id"),
-                # number (required)
-                "sn_record_state": kwargs.get("sn_record_state"),
-                # text (optional)
-                "sn_close_notes": kwargs.get("sn_close_notes"),
-                # text (optional)
-                "sn_close_code": kwargs.get("sn_close_code"),
-                # text (optional)
-                "sn_close_work_note": kwargs.get("sn_close_work_note"),
+                "incident_id": res_helper.get_function_input(kwargs, "incident_id"),  # number (required)
+                "task_id": res_helper.get_function_input(kwargs, "task_id", True),  # number (optional)
+                "sn_res_id": res_helper.get_function_input(kwargs, "sn_res_id", True),  # number (optional)
+                "sn_record_state": res_helper.get_function_input(kwargs, "sn_record_state"),  # number (required)
+                "sn_close_notes": res_helper.get_function_input(kwargs, "sn_close_notes", True),  # text (optional)
+                "sn_close_code": res_helper.get_function_input(kwargs, "sn_close_code", True),  # text (optional)
+                "sn_close_work_note": res_helper.get_function_input(kwargs, "sn_close_work_note", True),  # text (optional)
             }
 
             # Create payload dict with inputs
@@ -85,12 +77,10 @@ class FunctionComponent(ResilientComponent):
             res_client = self.rest_client()
 
             # Get the datatable and its data
-            datatable = ServiceNowRecordsDataTable(
-                res_client, payload.inputs["incident_id"])
+            datatable = ServiceNowRecordsDataTable(res_client, payload.inputs["incident_id"])
 
             # Generate the res_id
-            res_id = res_helper.generate_res_id(
-                payload.inputs["incident_id"], payload.inputs["task_id"], payload.inputs["sn_res_id"])
+            res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"], payload.inputs["sn_res_id"])
 
             # Get the sn_ref_id
             sn_ref_id = datatable.get_sn_ref_id(res_id)
@@ -102,8 +92,7 @@ class FunctionComponent(ResilientComponent):
                     err_msg = err_msg.format("Task", payload.inputs["task_id"])
 
                 else:
-                    err_msg = err_msg.format(
-                        "Incident", payload.inputs["incident_id"])
+                    err_msg = err_msg.format("Incident", payload.inputs["incident_id"])
 
                 payload.success = False
                 payload.reason = err_msg
@@ -121,20 +110,18 @@ class FunctionComponent(ResilientComponent):
                 }
 
                 try:
-                    yield StatusMessage(f"Closing ServiceNow Record {sn_ref_id}")
-                    close_in_sn_response = res_helper.sn_api_request(
-                        rc, "POST", "/close_record", data=dumps(request_data))
+                    yield StatusMessage("Closing ServiceNow Record {0}".format(sn_ref_id))
+                    close_in_sn_response = res_helper.sn_api_request(rc, "POST", "/close_record", data=json.dumps(request_data))
                     payload.sn_ref_id = sn_ref_id
                     payload.sn_record_state = close_in_sn_response["sn_state"]
 
                     try:
-                        yield StatusMessage(f"Updating ServiceNow Records Data Table Status to {close_in_sn_response['sn_state']}")
+                        yield StatusMessage("Updating ServiceNow Records Data Table Status to {0}".format(close_in_sn_response["sn_state"]))
 
-                        row_to_update = datatable.get_row(
-                            "sn_records_dt_sn_ref_id", sn_ref_id)
+                        row_to_update = datatable.get_row("sn_records_dt_sn_ref_id", sn_ref_id)
 
                         cells_to_update = {
-                            "sn_records_dt_time": int(time() * 1000),
+                            "sn_records_dt_time": int(time.time() * 1000),
                             "sn_records_dt_snow_status": res_helper.convert_text_to_richtext(close_in_sn_response["sn_state"], "red")
                         }
 
@@ -143,19 +130,17 @@ class FunctionComponent(ResilientComponent):
 
                     except Exception as err:
                         payload.success = False
-                        raise ValueError(
-                            f"Failed to update ServiceNow Status in Datatable: {err}")
+                        raise ValueError("Failed to update ServiceNow Status in Datatable: {0}".format(err))
 
                 except Exception as err:
-                    err_msg = f"Failed to close ServiceNow Record {err}"
+                    err_msg = "Failed to close ServiceNow Record {0}".format(err)
                     payload.success = False
                     payload.reason = err_msg
                     yield StatusMessage(err_msg)
 
             results = payload.as_dict()
             rp_results = rp.done(results.get("success"), results)
-            # add in all results for backward-compatibility
-            rp_results.update(results)
+            rp_results.update(results) # add in all results for backward-compatibility
 
             log.debug("RESULTS: %s", rp_results)
             log.info("Complete")

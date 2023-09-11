@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_teams',
     display_name="Microsoft Teams",
-    version='2.1.0',
+    version='2.0.1',
     license='MIT License',
     author='IBM SOAR',
     author_email='',

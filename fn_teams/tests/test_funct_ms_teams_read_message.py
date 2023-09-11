@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 import os
+import pytest
 from unittest.mock import patch
+
 from tests import testcommons
 from fn_teams.lib import constants
 from fn_teams.lib.microsoft_messages import MessageClient
@@ -25,7 +27,7 @@ def patch_archive_unarchive_team(method, url, headers, callback):
     if method == "get":
         if "groups" in url:
             assert "https://graph.microsoft.com/v1.0/groups" in url
-        elif "channels" in url:
+        elif "channels":
             assert "teams" in url
             assert "graph.microsoft.com/v1.0" in url
         return ret

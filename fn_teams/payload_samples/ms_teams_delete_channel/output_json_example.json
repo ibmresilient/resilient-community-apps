@@ -4,19 +4,19 @@
   "reason": null,
   "content": {
     "status_code": 204,
-    "message": "Successfully deleted channel: Incident 2121 testing channels"
+    "message": "Successfully deleted channel: Engineering Team"
   },
   "raw": null,
   "inputs": {
-    "ms_groupteam_id": "322d20bf-450e-46d6-9338-f7e3b66a064c",
-    "ms_channel_name": "Incident 2121 testing channels"
+    "ms_channel_name": "Engineering Team",
+    "ms_groupteam_name": "Engineering Team"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 3172,
-    "timestamp": "2023-05-15 14:09:04"
+    "package_version": "2.0.0",
+    "host": "appHost",
+    "execution_time_ms": 6253,
+    "timestamp": "2022-11-22 12:31:03"
   }
 }

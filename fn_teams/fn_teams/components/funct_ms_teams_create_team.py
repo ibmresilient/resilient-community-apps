@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
 from resilient_lib import validate_fields, IntegrationError
@@ -56,16 +56,23 @@ class FunctionComponent(AppFunctionComponent):
         required_parameters["logger"] = self.LOG
         required_parameters["resclient"] = self.rest_client()
 
-        validate_fields(["incident_id", "ms_team_name", "ms_owners_list", "add_members_from"], fn_inputs)
+        validate_fields([
+            "incident_id",
+            "ms_team_name",
+            "ms_owners_list",
+            "add_members_from"], fn_inputs)
 
         required_parameters["incident_id"] = fn_inputs.incident_id
         required_parameters["displayName"] = fn_inputs.ms_team_name
         required_parameters["owners_list"] = fn_inputs.ms_owners_list
         required_parameters["add_members_from"] = fn_inputs.add_members_from
 
-        required_parameters["task_id"] = getattr(fn_inputs, 'task_id', None)
-        required_parameters["description"] = getattr(fn_inputs, 'ms_description', "")
-        required_parameters["additional_members"] = getattr(fn_inputs, 'additional_members', None)
+        required_parameters["task_id"] = fn_inputs.task_id if hasattr(
+            fn_inputs, 'task_id') else None
+        required_parameters["description"] = fn_inputs.ms_description if hasattr(
+            fn_inputs, 'ms_description') else ""
+        required_parameters["additional_members"] = fn_inputs.additional_members if hasattr(
+            fn_inputs, 'additional_members') else None
 
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)

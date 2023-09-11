@@ -1,20 +1,20 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-from logging import getLogger
+import logging
+
 from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
                                                   ResilientHelper)
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import ResultPayload, validate_fields
+from resilient_lib import ResultPayload
 
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
-
     def __init__(self, inputs):
         self.success = True
         self.inputs = inputs
@@ -41,21 +41,18 @@ class FunctionComponent(ResilientComponent):
     def _fn_snow_helper_add_task_note_function(self, event, *args, **kwargs):
         """Function: A helper function to add a Note to a Task from a Workflow with a different parent object type"""
 
-        log = getLogger(__name__)
+        log = logging.getLogger(__name__)
 
         try:
 
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
-            validate_fields(["sn_res_id", "sn_note_text"], kwargs)
 
             # Get the function inputs:
             inputs = {
-                # text (required)
-                "sn_res_id": kwargs.get("sn_res_id"),
-                # number (required)
-                "sn_note_text": kwargs.get("sn_note_text")
+                "sn_res_id": res_helper.get_function_input(kwargs, "sn_res_id"),  # text (required)
+                "sn_note_text": res_helper.get_function_input(kwargs, "sn_note_text")  # number (required)
             }
 
             # Create payload dict with inputs
@@ -69,6 +66,9 @@ class FunctionComponent(ResilientComponent):
             # Parse incident_id and task_id from sn_res_id
             ids = res_helper.parse_res_id(payload.inputs["sn_res_id"])
 
+            # url for POST
+            url = "/tasks/{0}/comments".format(ids.get("task_id"))
+
             # Create data for POST
             request_data = {
                 "text": {
@@ -77,17 +77,15 @@ class FunctionComponent(ResilientComponent):
                 }
             }
 
-            yield StatusMessage(f"Adding Task Note to {payload.inputs['sn_res_id']}")
+            yield StatusMessage("Adding Task Note to {0}".format(payload.inputs["sn_res_id"]))
 
             # POST to Resilient API, add the Note
-            res_client.post(
-                f"/tasks/{ids.get('task_id')}/comments", request_data)
+            res_client.post(url, request_data)
 
             # Set results
             results = payload.as_dict()
             rp_results = rp.done(results.get("success"), results)
-            # add in all results for backward-compatibility
-            rp_results.update(results)
+            rp_results.update(results) # add in all results for backward-compatibility
 
             log.debug("RESULTS: %s", rp_results)
             log.info("Complete")

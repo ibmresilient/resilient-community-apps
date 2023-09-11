@@ -1,6 +1,6 @@
 
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 """AppFunction implementation"""
 from resilient_lib import validate_fields, IntegrationError
@@ -73,9 +73,12 @@ class FunctionComponent(AppFunctionComponent):
         required_parameters["group_description"] = fn_inputs.ms_description
         required_parameters["group_mail_nickname"] = fn_inputs.ms_group_mail_nickname
 
-        required_parameters["task_id"] = getattr(fn_inputs, 'task_id', None)
+        required_parameters["task_id"] = fn_inputs.task_id if hasattr(
+            fn_inputs, 'task_id') else None
 
-        required_parameters["additional_members"] = getattr(fn_inputs, 'additional_members', "")
+        required_parameters["additional_members"] = fn_inputs.additional_members if hasattr(
+            fn_inputs, 'additional_members') else None
+
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)
             authenticator = MicrosoftAuthentication(self.rc, self.options)

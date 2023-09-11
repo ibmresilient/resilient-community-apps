@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
@@ -43,7 +43,7 @@ def selftest_function(opts):
 
         else:
 
-            if res and res.content:
+            if res is not None and res.content is not None:
                 response_result = json.loads(res.content)
                 err_msg = response_result["error"]["message"]
                 err_detail = response_result["error"]["detail"]
@@ -52,18 +52,17 @@ def selftest_function(opts):
                 err_msg = "Could not connect to ServiceNow"
                 err_detail = "Unknown"
 
-            err_reason_msg = f"""Could not connect to ServiceNow.
-            status_code: {status_code}
-            reason: {err_msg}
-            detail: {err_detail}
+            err_reason_msg = """Could not connect to ServiceNow.
+            status_code: {0}
+            reason: {1}
+            detail: {2}
             ---------
             Current Configs in app.config file::
             ---------
-            sn_host: {res_helper.SN_HOST}
-            sn_username: {res_helper.SN_USERNAME}
-            sn_table_name: {res_helper.SN_TABLE_NAME}
-            sn_api_uri: {res_helper.SN_API_URI}
-            """
+            sn_host: {3}
+            sn_username: {4}
+            sn_table_name: {5}
+            sn_api_uri: {6}\n""".format(status_code, err_msg, err_detail, res_helper.SN_HOST, res_helper.SN_USERNAME, res_helper.SN_TABLE_NAME, res_helper.SN_API_URI)
 
             LOG.error(err_reason_msg)
 
@@ -73,16 +72,15 @@ def selftest_function(opts):
             }
 
     except Exception as err:
-        err_reason_msg = f"""Could not connect to ServiceNow.
-            error: {err}
+        err_reason_msg = """Could not connect to ServiceNow.
+            error: {0}
             ---------
             Current Configs in app.config file::
             ---------
-            sn_host: {res_helper.SN_HOST}
-            sn_username: {res_helper.SN_USERNAME}
-            sn_table_name: {res_helper.SN_TABLE_NAME}
-            sn_api_uri: {res_helper.SN_API_URI}
-            """
+            sn_host: {1}
+            sn_username: {2}
+            sn_table_name: {3}
+            sn_api_uri: {4}\n""".format(err, res_helper.SN_HOST, res_helper.SN_USERNAME, res_helper.SN_TABLE_NAME, res_helper.SN_API_URI)
 
         LOG.error(err_reason_msg)
 

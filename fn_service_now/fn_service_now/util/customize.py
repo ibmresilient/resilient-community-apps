@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.1.51
 
 """Generate the Resilient customizations required for fn_service_now"""
 
@@ -23,15 +22,14 @@ def codegen_reload_data():
         "package": u"fn_service_now",
         "message_destinations": [u"fn_service_now"],
         "functions": [u"fn_snow_add_attachment_to_record", u"fn_snow_add_note_to_record", u"fn_snow_close_record", u"fn_snow_create_record", u"fn_snow_helper_add_task_note", u"fn_snow_helper_update_datatable", u"fn_snow_lookup_sysid", u"fn_snow_update_record"],
-        "workflows": [],
-        "actions": [],
+        "workflows": [u"example_sir_snow_update_record_on_severity_change", u"example_snow_add_attachment_to_record", u"example_snow_add_comment_to_record", u"example_snow_add_worknote_to_record", u"example_snow_close_record_from_data_table", u"example_snow_close_record_incident", u"example_snow_close_record_task", u"example_snow_create_record_incident", u"example_snow_create_record_task", u"example_snow_update_datatable_on_status_change_incident", u"example_snow_update_datatable_on_status_change_task", u"example_snow_update_record_on_severity_change"],
+        "actions": [u"SNOW: [INC] Update Record on Severity Change", u"SNOW: [SIR] Update Record on Severity Change", u"SNOW: Add Attachment to Record", u"SNOW: Create Record [Incident]", u"SNOW: Create Record [Task]", u"SNOW: Send as Additional Comment", u"SNOW: Send as Work Note", u"SNOW: Update Data Table on Status Change [Incident]", u"SNOW: Update Data Table on Status Change [Task]", u"SNOW: Update/Close Record", u"SNOW: Update/Close Record [Incident]", u"SNOW: Update/Close Record [Task]"],
         "incident_fields": [u"sn_snow_record_id", u"sn_snow_record_link"],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [u"sn_records_dt"],
         "automatic_tasks": [],
-        "scripts": [],
-        "playbooks": [u"snow_add_attachment_to_record", u"snow_create_record_incident_pb", u"snow_create_record_task_pb", u"snow_inc_update_record_on_severity_change_pb", u"snow_send_as_additional_comment_pb", u"snow_send_as_work_note_pb", u"snow_sir_update_record_on_severity_change_pb", u"snow_update_data_table_on_status_change_incident_pb", u"snow_update_data_table_on_status_change_task_pb", u"snow_updateclose_record_incident_pb", u"snow_updateclose_record_pb", u"snow_updateclose_record_task_pb"]
+        "scripts": []
     }
 
 
@@ -40,7 +38,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM Resilient Platform Version: 41.2.41
 
     Contents:
     - Message Destinations:
@@ -54,19 +52,32 @@ def customization_data(client=None):
         - fn_snow_helper_update_datatable
         - fn_snow_lookup_sysid
         - fn_snow_update_record
-    - Playbooks:
-        - snow_add_attachment_to_record
-        - snow_create_record_incident_pb
-        - snow_create_record_task_pb
-        - snow_inc_update_record_on_severity_change_pb
-        - snow_send_as_additional_comment_pb
-        - snow_send_as_work_note_pb
-        - snow_sir_update_record_on_severity_change_pb
-        - snow_update_data_table_on_status_change_incident_pb
-        - snow_update_data_table_on_status_change_task_pb
-        - snow_updateclose_record_incident_pb
-        - snow_updateclose_record_pb
-        - snow_updateclose_record_task_pb
+    - Workflows:
+        - example_sir_snow_update_record_on_severity_change
+        - example_snow_add_attachment_to_record
+        - example_snow_add_comment_to_record
+        - example_snow_add_worknote_to_record
+        - example_snow_close_record_from_data_table
+        - example_snow_close_record_incident
+        - example_snow_close_record_task
+        - example_snow_create_record_incident
+        - example_snow_create_record_task
+        - example_snow_update_datatable_on_status_change_incident
+        - example_snow_update_datatable_on_status_change_task
+        - example_snow_update_record_on_severity_change
+    - Rules:
+        - SNOW: [INC] Update Record on Severity Change
+        - SNOW: [SIR] Update Record on Severity Change
+        - SNOW: Add Attachment to Record
+        - SNOW: Create Record [Incident]
+        - SNOW: Create Record [Task]
+        - SNOW: Send as Additional Comment
+        - SNOW: Send as Work Note
+        - SNOW: Update Data Table on Status Change [Incident]
+        - SNOW: Update Data Table on Status Change [Task]
+        - SNOW: Update/Close Record
+        - SNOW: Update/Close Record [Incident]
+        - SNOW: Update/Close Record [Task]
     - Incident Fields:
         - sn_snow_record_id
         - sn_snow_record_link

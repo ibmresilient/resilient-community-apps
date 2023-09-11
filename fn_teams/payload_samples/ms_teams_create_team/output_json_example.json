@@ -4,24 +4,24 @@
   "reason": null,
   "content": {
     "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
-    "id": "87fd1ea0-6a3f-4078-b271-e4f8e6f8469e",
+    "id": "db7350fc-b6df-4041-b6cd-2cd7588fa7da",
     "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2023-05-15T17:39:58Z",
+    "createdDateTime": "2022-11-16T12:11:47Z",
     "creationOptions": [
       "Team",
       "ExchangeProvisioningFlags:3552"
     ],
-    "description": "task testing",
-    "displayName": "task testing",
+    "description": "SOARAPPS",
+    "displayName": "SOARGROUP",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "tasktesting@swivrllc.onmicrosoft.com",
+    "mail": "soargroup@****.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "tasktesting",
+    "mailNickname": "soargroup",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
@@ -33,9 +33,9 @@
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:tasktesting@swivrllc.onmicrosoft.com"
+      "SMTP:soargroup@****.onmicrosoft.com"
     ],
-    "renewedDateTime": "2023-05-15T17:39:58Z",
+    "renewedDateTime": "2022-11-16T12:11:47Z",
     "resourceBehaviorOptions": [
       "HideGroupInOutlook",
       "SubscribeMembersToCalendarEventsDisabled",
@@ -45,9 +45,9 @@
       "Team"
     ],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-2281512608-1081633343-4175720882-2655451366",
+    "securityIdentifier": "S-1-12-1-3681767676-1078048479-3610037686-3668414296",
     "theme": null,
-    "visibility": "Private",
+    "visibility": "Public",
     "onPremisesProvisioningErrors": [],
     "status_code": 200,
     "teamsEnabled": true,
@@ -55,20 +55,18 @@
   },
   "raw": null,
   "inputs": {
-    "ms_team_name": "task testing",
-    "incident_id": 2120,
-    "additional_members": "",
-    "ms_owners_list": "markscherfling@swivrllc.onmicrosoft.com",
-    "add_members_from": "None",
-    "task_id": 126,
-    "ms_description": "task testing"
+    "ms_team_name": "SOARAPPS",
+    "incident_id": 2095,
+    "ms_owners_list": "AdminSoarMS@****.onmicrosoft.com",
+    "add_members_from": "Incident",
+    "ms_team_description": "soargroup"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.1.0",
-    "host": "local",
-    "execution_time_ms": 50594,
-    "timestamp": "2023-05-15 13:40:47"
+    "package_version": "2.0.0",
+    "host": "AppHost",
+    "execution_time_ms": 18257,
+    "timestamp": "2022-11-16 12:11:53"
   }
 }

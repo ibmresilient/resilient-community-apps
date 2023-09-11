@@ -3,14 +3,12 @@
 
 from __future__ import print_function
 import pytest
-from resilient_circuits.util import get_function_definition
+from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from sn_test_helper import *
 from copy import deepcopy
-from fn_service_now.util.resilient_helper import ResilientHelper
-from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 
-
+PACKAGE_NAME = "fn_service_now"
 FUNCTION_NAME = "fn_snow_create_record"
 
 # Get mock config data

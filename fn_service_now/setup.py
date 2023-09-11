@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_service_now',
     display_name="ServiceNow App",
-    version="2.2.0",
+    version="2.1.0",
     license="MIT",
     author="IBM SOAR",
     url="https://ibm.com/mysupport",
@@ -33,7 +33,7 @@ setup(
         - Sync notes between a related IBM SOAR Incident/Task and a ServiceNow Record.<br>
         - Send Attachments from an IBM SOAR Incident/Task to a related ServiceNow Record.""",
     install_requires=[
-        "resilient_circuits>=45.0"
+        "resilient_circuits>=46.0"
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -44,7 +44,7 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            f"{snake_to_camel(get_module_name(filename))}FunctionComponent = fn_service_now.components.{get_module_name(filename)}:FunctionComponent" for filename in glob.glob("./fn_service_now/components/[a-zA-Z]*.py")
+            "{}FunctionComponent = fn_service_now.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_service_now/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_service_now.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_service_now.util.customize:customization_data"],

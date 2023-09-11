@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2022. All Rights Reserved.
 """Class to handle manipulating the ServiceNow Records Data Table"""
 
 class ServiceNowRecordsDataTable(object):
@@ -18,7 +18,7 @@ class ServiceNowRecordsDataTable(object):
 
     def get_data(self):
         """Gets that data and rows of the data table"""
-        uri = f"/incidents/{self.incident_id}/table_data/{self.api_name}?handle_format=names"
+        uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(self.incident_id, self.api_name)
         try:
             self.data = self.res_client.get(uri)
             self.rows = self.data["rows"]
@@ -37,7 +37,7 @@ class ServiceNowRecordsDataTable(object):
         """Returns the sn_ref_id that relates to the res_id"""
         row = self.get_row("sn_records_dt_res_id", res_id)
 
-        if row:
+        if row is not None:
             cells = row["cells"]
             return str(cells["sn_records_dt_sn_ref_id"]["value"])
 
@@ -46,7 +46,7 @@ class ServiceNowRecordsDataTable(object):
     def add_row(self, time, name, res_type, res_id, sn_ref_id, res_status, snow_status, link):
         """Adds a new row to the data table and returns that row"""
         # Generate uri to POST datatable row
-        uri = f"/incidents/{self.incident_id}/table_data/{self.api_name}/row_data?handle_format=names"
+        uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(self.incident_id, self.api_name)
 
         cells = [
             ("sn_records_dt_time", time),
@@ -74,7 +74,7 @@ class ServiceNowRecordsDataTable(object):
     def update_row(self, row, cells_to_update):
         """Updates the row with the given cells_to_update and returns the updated row"""
         # Generate uri to POST datatable row
-        uri = f"/incidents/{self.incident_id}/table_data/{self.api_name}/row_data/{row['id']}?handle_format=names"
+        uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(self.incident_id, self.api_name, row["id"])
 
         def get_value(cell_name):
             """Gets the new or old value of the cell"""

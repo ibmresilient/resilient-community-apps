@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
+import os
+import pytest
+
+from urllib import parse
 from unittest.mock import patch
+from resilient_lib import RequestsCommon
+
 from tests import testcommons
-from fn_teams.lib.microsoft_groups import GroupsInterface
 from tests.testcommons import required_parameters
+from fn_teams.lib import constants, microsoft_commons
+from fn_teams.lib.microsoft_groups import GroupsInterface
 
 
 def patch_write_group(method, url, data, headers, callback):

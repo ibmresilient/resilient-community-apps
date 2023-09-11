@@ -51,13 +51,13 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "ms_groupteam_id": {
-          "type": "string"
-        },
         "ms_channel_name": {
           "type": "string"
         },
-        "ms_description": {
+        "ms_group_description": {
+          "type": "string"
+        },
+        "ms_groupteam_name": {
           "type": "string"
         }
       }

@@ -1,13 +1,26 @@
-from mock import patch, Mock, MagicMock
+try:
+    from unittest.mock import patch, Mock, MagicMock
+except:
+    from mock import patch, Mock, MagicMock
+from fn_service_now.util.resilient_helper import ResilientHelper
+from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
 import requests_mock
 from mock_data import task
 import json
 import six
 
-basestring = str
-unicode = str
-PACKAGE_NAME = "fn_service_now"
+# Handle basestring in 2.x and 3.x
+try:
+  basestring
+except NameError:
+  basestring = str
+
+# Handle unicode in 2.x and 3.x
+try:
+    unicode
+except NameError:
+    unicode = str
 
 def get_mock_config_data():
   return u"""[fn_service_now]
@@ -53,7 +66,7 @@ def mock_pre_scrip_dict_to_json_str(d):
     else:
       entries.append(json_entry.format(key, value))
 
-  return f"{{ {','.join(entries)} }}"
+  return '{0} {1} {2}'.format('{', ','.join(entries), '}')
 
 # Convert unicode dict to str dict
 def mock_byteify(data):

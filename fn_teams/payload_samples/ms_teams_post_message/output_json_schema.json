@@ -27,6 +27,9 @@
         "incident_id": {
           "type": "integer"
         },
+        "task_id": {
+          "type": "integer"
+        },
         "teams_mrkdown": {
           "type": "boolean"
         },
