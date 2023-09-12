@@ -58,7 +58,7 @@ class SendSMTPEmail(ResilientComponent):
         self.smtp_port = str(self.smtp_config_section.get("smtp_port", SMTP_DEFAULT_PORT))
         # cafile can be false or a path to a cafile cert
         if self.smtp_config_section.get("smtp_ssl_cafile", 'false').lower() == 'false':
-            self.smtp_cafile = False
+            self.smtp_cafile = None
         else:
             self.smtp_cafile = self.smtp_config_section.get("smtp_ssl_cafile")
         if self.smtp_config_section.get("smtp_password", None) and self.smtp_config_section.get("oauth2_client_id", None):
@@ -209,6 +209,7 @@ class SendSMTPEmail(ResilientComponent):
                     raise SimpleSendEmailException('An SMTP user has been set; '
                                                    'the SMTP password from app.config cannot be null')
                 LOG.info("Logging in to SMTP...")
+                smtp_connection.set_debuglevel(1)
                 smtp_connection.login(user=self.smtp_user, password=self.smtp_password)
 
             if self.client_id:
@@ -248,10 +249,7 @@ class SendSMTPEmail(ResilientComponent):
 
     def get_smtp_ssl_context(self):
         ssl_context = create_default_context(purpose=Purpose.SERVER_AUTH)
-        ssl_context.check_hostname = self.smtp_config_section.get("smtp_ssl_cafile") not in ['False', 'false']
-
-        # if True set to default context
-        if self.smtp_config_section.get("smtp_ssl_cafile") in ['True', 'true']:
+        if self.smtp_config_section.get("smtp_ssl_cafile") in [None, 'False', 'false']:
             return ssl_context
 
         if not path.isfile(self.smtp_config_section.get("smtp_ssl_cafile")):

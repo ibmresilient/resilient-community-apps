@@ -147,7 +147,7 @@ def send_msg(send_smtp_email, content, encryption_certs=None):
         content (str): body of email
 
     Returns:
-        str: any error which occured
+        str: any error which occurred
     """
     encryption_certs_list = [s_to_b(cert) for cert in encryption_certs.split(',')] if encryption_certs else None
 
