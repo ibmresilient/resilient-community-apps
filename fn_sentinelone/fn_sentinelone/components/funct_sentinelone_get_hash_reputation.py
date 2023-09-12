@@ -5,9 +5,8 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
+from fn_sentinelone.lib.app_common import (AppCommon, PACKAGE_NAME)
 
-PACKAGE_NAME = "fn_sentinelone"
 FN_NAME = "sentinelone_get_hash_reputation"
 
 
@@ -27,9 +26,9 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        sentinelone_client = SentinelOneClient(self.opts, self.options)
+        app_common = AppCommon(self.rc, PACKAGE_NAME, self.options)
         s1_hash = fn_inputs.sentinelone_hash
-        results = sentinelone_client.get_hash_reputation(s1_hash)
+        results = app_common.get_hash_reputation(s1_hash)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

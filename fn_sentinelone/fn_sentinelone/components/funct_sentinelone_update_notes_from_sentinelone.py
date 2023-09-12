@@ -5,9 +5,8 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from fn_sentinelone.lib.resilient_common import ResilientCommon
-from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
+from fn_sentinelone.lib.app_common import (AppCommon, PACKAGE_NAME)
 
-PACKAGE_NAME = "fn_sentinelone"
 FN_NAME = "sentinelone_update_notes_from_sentinelone"
 
 
@@ -32,9 +31,9 @@ class FunctionComponent(AppFunctionComponent):
         threat_id = fn_inputs.sentinelone_threat_id
 
         resilient_api = ResilientCommon(self.rest_client())
-        sentinelone_api = SentinelOneClient(self.opts, self.options)
+        app_common = AppCommon(self.rc, PACKAGE_NAME, self.options)
 
-        threat_notes = sentinelone_api.get_threat_notes(threat_id)
+        threat_notes = app_common.get_threat_notes(threat_id)
 
         new_comments = resilient_api.filter_resilient_comments(incident_id, threat_notes)
 

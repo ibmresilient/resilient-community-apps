@@ -10,7 +10,7 @@
 `sentinelone_send_soar_note_to_sentinelone_pb`
 
 ### Status
-`enabled`
+`disabled`
 
 ### Activation Type
 `Automatic`

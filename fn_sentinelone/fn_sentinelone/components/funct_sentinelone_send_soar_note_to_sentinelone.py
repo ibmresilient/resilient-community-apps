@@ -7,9 +7,8 @@
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, clean_html
 from fn_sentinelone.lib.constants import FROM_SENTINELONE_COMMENT_HDR, SENT_TO_SENTINELONE_HDR
-from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
+from fn_sentinelone.lib.app_common import (AppCommon, PACKAGE_NAME)
 
-PACKAGE_NAME = "fn_sentinelone"
 FN_NAME = "sentinelone_send_soar_note_to_sentinelone"
 
 
@@ -39,8 +38,8 @@ class FunctionComponent(AppFunctionComponent):
             success = True
         else:
             try:
-                sentinelone_api = SentinelOneClient(self.opts, self.options)
-                response = sentinelone_api.add_threat_note(threat_id, clean_html(note_text))
+                app_common = AppCommon(self.rc, PACKAGE_NAME, self.options)
+                response = app_common.add_threat_note(threat_id, clean_html(note_text))
 
                 data = response.get("data")
                 affected = int(data.get("affected"))

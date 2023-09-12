@@ -5,9 +5,8 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
+from fn_sentinelone.lib.app_common import (AppCommon, PACKAGE_NAME)
 
-PACKAGE_NAME = "fn_sentinelone"
 FN_NAME = "sentinelone_disconnect_from_network"
 
 
@@ -27,9 +26,9 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        sentinelone_client = SentinelOneClient(self.opts, self.options)
+        app_common = AppCommon(self.rc, PACKAGE_NAME, self.options)
         agent_id = fn_inputs.sentinelone_agent_id
-        results = sentinelone_client.disconnect_from_network(agent_id)
+        results = app_common.disconnect_from_network(agent_id)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 

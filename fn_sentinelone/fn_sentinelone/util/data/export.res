@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1694466818111,
+  "export_date": 1694548585904,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -330,7 +330,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Threat Analyst Verdict",
+      "text": "Analyst Verdict",
       "tooltip": "SentinelOne threat analyst verdict",
       "type_id": 0,
       "uuid": "d377bf25-737a-44f4-924b-8c6531e62ceb",
@@ -397,7 +397,7 @@
       "short_text": "",
       "tags": [],
       "templates": [],
-      "text": "Threat Confidence Level",
+      "text": "Confidence Level",
       "tooltip": "",
       "type_id": 0,
       "uuid": "d88cd581-5fb3-4dce-8c97-42c5b391f72e",
@@ -1090,13 +1090,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 84,
+  "id": 87,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1694466816310,
+      "create_date": 1694548584178,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1105,7 +1105,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1694466816310,
+      "update_date": 1694548584178,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2088,7 +2088,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 5,
+        "content_version": 6,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\" isExecutable=\"true\" name=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0feam4k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Send SOAR Note to SentinelOne\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fbf44fc5-ae3d-4e67-ad31-1b79fd87bdb8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id\\ninputs.sentinelone_note_text = note.text.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"send_note_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0feam4k\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ev7vmx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0feam4k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Add Header to indicate note was sent to SentinelOne\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"518e8850-8a62-4d29-a7d1-baf3ace93147\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ev7vmx\u003c/incoming\u003e\u003coutgoing\u003eFlow_1j5gog2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ev7vmx\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1j5gog2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1j5gog2\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1j5gog2\" id=\"Flow_1j5gog2_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ev7vmx\" id=\"Flow_1ev7vmx_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0feam4k\" id=\"Flow_0feam4k_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"639\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1692724939695,
@@ -2140,7 +2140,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1693247963571,
+      "last_modified_time": 1694535162594,
       "local_scripts": [
         {
           "actions": [],
@@ -2163,7 +2163,7 @@
       ],
       "name": "sentinelone_send_soar_note_to_sentinelone_pb",
       "object_type": "note",
-      "status": "enabled",
+      "status": "disabled",
       "tag": {
         "display_name": "Playbook_47bec986-769f-4ce4-ba97-a2f766568601",
         "id": 25,
@@ -2174,7 +2174,7 @@
       "tags": [],
       "type": "default",
       "uuid": "47bec986-769f-4ce4-ba97-a2f766568601",
-      "version": 9
+      "version": 10
     },
     {
       "activation_type": "manual",
@@ -2635,6 +2635,125 @@
       "type": "default",
       "uuid": "bb713a02-68fa-47c4-942c-cb0054aac3b9",
       "version": 15
+    },
+    {
+      "activation_details": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.plan_status",
+              "method": "equals",
+              "type": null,
+              "value": "Active"
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.sentinelone_threat_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": null,
+              "method": "object_added",
+              "type": null,
+              "value": null
+            }
+          ],
+          "logic_type": "all"
+        }
+      },
+      "activation_type": "automatic",
+      "content": {
+        "content_version": 18,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_c4d419dd_4143_4585_8544_ec638e350f1b\" isExecutable=\"true\" name=\"playbook_c4d419dd_4143_4585_8544_ec638e350f1b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_081rbam\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Get Threat Details\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2a2f6e9e-0fda-428e-adc0-cf0e7ca833fd\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_threat_details_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_081rbam\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qov47s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_081rbam\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Update Case with threat info\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f4aa44ce-9fcf-4141-bd87-6f703743c685\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qov47s\u003c/incoming\u003e\u003coutgoing\u003eFlow_1b3j6nj\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1qov47s\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1b3j6nj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1b3j6nj\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c4d419dd_4143_4585_8544_ec638e350f1b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1b3j6nj\" id=\"Flow_1b3j6nj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qov47s\" id=\"Flow_1qov47s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"232\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_081rbam\" id=\"Flow_081rbam_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"148\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1694539424463,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_c4d419dd_4143_4585_8544_ec638e350f1b",
+      "description": {
+        "content": "Automatic playbook to update the SentinelOne case in SOAR.",
+        "format": "text"
+      },
+      "display_name": "SentinelOne: Update Case in SOAR",
+      "export_key": "sentinelone_update_case_in_soar",
+      "field_type_handle": "playbook_c4d419dd_4143_4585_8544_ec638e350f1b",
+      "fields_type": {
+        "actions": [],
+        "display_name": "SentinelOne: Update Case in SOAR",
+        "export_key": "playbook_c4d419dd_4143_4585_8544_ec638e350f1b",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_c4d419dd_4143_4585_8544_ec638e350f1b",
+        "uuid": "61952d28-ae85-4a0d-924e-2c303352a18d"
+      },
+      "has_logical_errors": false,
+      "id": 37,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1694547946869,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1694541857500,
+          "description": "Update custom fields and add artifact with threat information from SentinelOne threat.",
+          "enabled": false,
+          "export_key": "SentinelOne: Update Case with threat info",
+          "id": 48,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1694547945234,
+          "name": "SentinelOne: Update Case with threat info",
+          "object_type": "incident",
+          "playbook_handle": "sentinelone_update_case_in_soar",
+          "programmatic_name": "sentinelone_update_case_in_soar_sentinelone_update_case_with_threat_info",
+          "script_text": "results = playbook.functions.results.get_threat_details_results\n\nsuccess = results.get(\"success\", False)\nif success:\n  content = results.get(\"content\", False)\n  if content:\n    data = content.get(\"data\", [])\n    if data and isinstance(data, list):\n      threat_data = data[0]\n      threat_info = threat_data.get(\"threatInfo\", False)\n      if threat_info:\n\n        incident.properties.sentinelone_classification = threat_info.get(\"classification\")\n        incident.properties.sentinelone_confidence_level = threat_info.get(\"confidenceLevel\")\n        incident.properties.sentinelone_incident_status = threat_info.get(\"incidentStatus\")\n        incident.properties.sentinelone_mitigation_status = threat_info.get(\"mitigationStatus\")\n        incident.properties.sentinelone_threat_analyst_verdict = threat_info.get(\"analystVerdict\")\n        incident.properties.sentinelone_mitigation_status_description = threat_info.get(\"mitigationStatusDescription\")\n        \n        entity_url = content.get(\"entity_url\", False)\n        if entity_url:\n          threat_url_link = \"\u003ca target=\u0027blank\u0027 href=\u0027{0}\u0027\u003e{1}\u003c/a\u003e\".format(entity_url, threat_info.get(\"threatId\"))\n          incident.properties.sentinelone_threat_overview_url = threat_url_link\n            \n        # CREATE ARTIFACTS\n        # Create any artifacts from the threat or agent info here\n        agent_realtime_info = threat_data.get(\"agentRealtimeInfo\", False)\n        if agent_realtime_info and agent_realtime_info.get(\"agentComputerName\"):\n            incident.addArtifact(\"System Name\", agent_realtime_info.get(\"agentComputerName\"), \"Created by SentinelOne\")\n\n        agent_detection_info = threat_data.get(\"agentDetectionInfo\")\n        if agent_detection_info and agent_detection_info.get(\"externalIp\", False):\n            incident.addArtifact(\"IP Address\", agent_detection_info.get(\"externalIp\"), \"Created by SentinelOne\")\n            \n        if threat_info.get(\"processUser\"):\n            incident.addArtifact(\"Process Name\", threat_info.get(\"processUser\"), \"Created by SentinelOne\")\n           \n        if threat_info.get(\"sha1\"):\n            incident.addArtifact(\"Malware SHA-1 Hash\", threat_info.get(\"sha1\"), \"Created by SentinelOne\")\n            \n        if threat_info.get(\"filePath\"):\n            incident.addArtifact(\"File Path\", threat_info.get(\"filePath\"), \"Created by SentinelOne\")\n            \n        if threat_info.get(\"threatName\"):\n            threat_name = threat_info.get(\"threatName\")\n            threat_name = threat_name.replace(\u0027\\\\\u0027, \u0027\\\\\\\\\u0027)\n            threat_name = threat_name.replace(\u0027\"\u0027, \u0027\\\\\"\u0027)\n            incident.addArtifact(\"File Name\", threat_name, \"Created by SentinelOne\")\n      else:\n        incident.addNote(\"SentinelOne: Update Case: Unable to get threat info data to update case.\")\n    else: \n      incident.addNote(\"SentinelOne: Update Case: Unable to get data to update case.\")\n  else:\n    incident.addNote(\"SentinelOne: Update Case: Unable to get content data to update case.\")\nelse:\n  incident.addNote(\"SentinelOne: Update Case: Unable to get threat data to update case.\")\n            ",
+          "tags": [],
+          "uuid": "f4aa44ce-9fcf-4141-bd87-6f703743c685"
+        }
+      ],
+      "name": "sentinelone_update_case_in_soar",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_c4d419dd-4143-4585-8544-ec638e350f1b",
+        "id": 39,
+        "name": "playbook_c4d419dd_4143_4585_8544_ec638e350f1b",
+        "type": "playbook",
+        "uuid": "88c5251f-fb8b-4a39-8222-7e23fe8aed3f"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "c4d419dd-4143-4585-8544-ec638e350f1b",
+      "version": 22
     },
     {
       "activation_type": "manual",

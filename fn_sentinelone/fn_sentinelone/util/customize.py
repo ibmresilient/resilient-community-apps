@@ -76,6 +76,7 @@ def codegen_reload_data():
             u"sentinelone_shutdown_agent_pb",
             u"sentinelone_update_agent_in_data_table_pb",
             u"sentinelone_update_analyst_verdict_and_threat_status",
+            u"sentinelone_update_case_in_soar",
             u"sentinelone_update_notes_from_sentinelone_pb",
             u"sentinelone_write_agent_details_to_note_pb",
             u"sentinelone_write_threat_details_to_note_pb"
@@ -120,6 +121,7 @@ def customization_data(client=None):
         - sentinelone_shutdown_agent_pb
         - sentinelone_update_agent_in_data_table_pb
         - sentinelone_update_analyst_verdict_and_threat_status
+        - sentinelone_update_case_in_soar
         - sentinelone_update_notes_from_sentinelone_pb
         - sentinelone_write_agent_details_to_note_pb
         - sentinelone_write_threat_details_to_note_pb

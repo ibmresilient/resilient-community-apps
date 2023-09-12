@@ -45,8 +45,11 @@ setup(
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
             "{}FunctionComponent = fn_sentinelone.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_sentinelone/components/f[a-zA-Z]*.py")
-            ]+
-            [ "PollerComponent = fn_sentinelone.components.sentinelone_poller:SentinelOnePollerComponent" ],
+            ]
+        + [
+            "PollerComponent = fn_sentinelone.poller.poller:PollerComponent"
+          ]
+        ,
         "resilient.circuits.configsection": ["gen_config = fn_sentinelone.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_sentinelone.util.customize:customization_data"],
         "resilient.circuits.selftest": ["selftest = fn_sentinelone.util.selftest:selftest_function"]

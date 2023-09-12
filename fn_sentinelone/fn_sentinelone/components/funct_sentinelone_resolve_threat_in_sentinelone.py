@@ -6,9 +6,8 @@
 import logging
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError
-from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
+from fn_sentinelone.lib.app_common import (AppCommon, PACKAGE_NAME)
 
-PACKAGE_NAME = "fn_sentinelone"
 FN_NAME = "sentinelone_resolve_threat_in_sentinelone"
 
 
@@ -28,7 +27,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        sentinelone_client = SentinelOneClient(self.opts, self.options)
+        app_common = AppCommon(self.rc, PACKAGE_NAME, self.options)
         incident_id = fn_inputs.incident_id
         success = False
 
@@ -53,13 +52,13 @@ class FunctionComponent(AppFunctionComponent):
             IntegrationError("SentinelOne Resolve Threat: incident {0} is not closed due to 'analystVerdict' set to 'undefined'.".format(incident_id))
 
         log = logging.getLogger(__name__)
-        verdict_response = sentinelone_client.update_threat_analyst_verdict(threat_id, threat_analyst_verdict)
+        verdict_response = app_common.update_threat_analyst_verdict(threat_id, threat_analyst_verdict)
 
         verdict_data = verdict_response.get("data")
         if int(verdict_data.get("affected")) <= 0:
             log.info("Unable to update analystVerdict in SentinelOne threat: %s", threat_id)
         else:
-            status_response = sentinelone_client.update_threat_status(threat_id, "resolved")
+            status_response = app_common.update_threat_status(threat_id, "resolved")
             status_data = status_response.get("data")
             if int(status_data.get("affected")) <= 0:
                 log.info("Unable to update incidentStatus to resolved in SentinelOne threat: %s", threat_id)
