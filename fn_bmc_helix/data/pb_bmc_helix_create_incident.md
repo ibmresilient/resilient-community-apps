@@ -67,7 +67,7 @@ payload = {
 if getattr(playbook.inputs, "bmc_helix_additional_data").content:
   payload["additional_data"] = playbook.inputs.bmc_helix_additional_data.content
 if getattr(playbook.inputs, "bmc_helix_description"):
-  payload["Description"] = playbook.inputs.bmc_helix_description
+  payload["Detailed_Decription"] = playbook.inputs.bmc_helix_description
 if getattr(playbook.inputs, "bmc_helix_template"):
   payload["ApplyTemplate"] = playbook.inputs.bmc_helix_template
 
