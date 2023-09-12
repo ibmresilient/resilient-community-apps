@@ -96,8 +96,7 @@ class FunctionComponent(AppFunctionComponent):
 
             # Add in the additional data
             if helix_payload.get("additional_data"):
-                addl_data = helix_payload.pop("additional_data")
-                addl_data and helix_payload.update(addl_data)
+                helix_payload.update(literal_eval(helix_payload.pop("additional_data")))
 
             # Required metadata field to create a resource
             helix_payload["z1D_Action"] = "CREATE"

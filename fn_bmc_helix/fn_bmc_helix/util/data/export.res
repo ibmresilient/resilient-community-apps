@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1694111231107,
+  "export_date": 1694530504213,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -17,7 +17,7 @@
       "deprecated": false,
       "export_key": "__function/bmc_helix_request_id",
       "hide_notification": false,
-      "id": 4120,
+      "id": 5360,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -46,7 +46,7 @@
       "deprecated": false,
       "export_key": "__function/helix_payload",
       "hide_notification": false,
-      "id": 4121,
+      "id": 5363,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -75,7 +75,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 4122,
+      "id": 5362,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -104,7 +104,7 @@
       "deprecated": false,
       "export_key": "__function/task_id",
       "hide_notification": false,
-      "id": 4123,
+      "id": 5361,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -133,7 +133,7 @@
       "deprecated": false,
       "export_key": "__function/helix_incident_name",
       "hide_notification": false,
-      "id": 4124,
+      "id": 5364,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -162,7 +162,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_company",
       "hide_notification": false,
-      "id": 4093,
+      "id": 5367,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -192,7 +192,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_assigned_support_organization",
       "hide_notification": false,
-      "id": 4094,
+      "id": 5365,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -222,7 +222,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_description",
       "hide_notification": false,
-      "id": 4095,
+      "id": 5369,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -252,7 +252,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_incident_number",
       "hide_notification": false,
-      "id": 4096,
+      "id": 5371,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -282,7 +282,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_assigned_to",
       "hide_notification": false,
-      "id": 4097,
+      "id": 5366,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -312,7 +312,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_urgency",
       "hide_notification": false,
-      "id": 4098,
+      "id": 5376,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -338,7 +338,7 @@
           "label": "1-Critical",
           "properties": null,
           "uuid": "2bec40e9-c239-40aa-bc31-b5c47990438d",
-          "value": 752
+          "value": 1511
         },
         {
           "default": false,
@@ -347,7 +347,7 @@
           "label": "2-High",
           "properties": null,
           "uuid": "0d6c87c7-b57a-47a7-a3b3-422e9ca8d8b6",
-          "value": 753
+          "value": 1512
         },
         {
           "default": false,
@@ -356,7 +356,7 @@
           "label": "3-Medium",
           "properties": null,
           "uuid": "9b0f4c73-b63e-45c3-b9f4-a6aa3e3018c3",
-          "value": 754
+          "value": 1513
         },
         {
           "default": false,
@@ -365,7 +365,7 @@
           "label": "4-Low",
           "properties": null,
           "uuid": "c1a6104f-fec2-42ee-aa01-e06f6b4b683f",
-          "value": 755
+          "value": 1514
         }
       ]
     },
@@ -379,7 +379,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_request_id",
       "hide_notification": false,
-      "id": 4099,
+      "id": 5374,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -409,7 +409,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_priority",
       "hide_notification": false,
-      "id": 4100,
+      "id": 5373,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -435,7 +435,7 @@
           "label": "Low",
           "properties": null,
           "uuid": "cd83dd7b-c938-4d40-9207-bceced7104f5",
-          "value": 756
+          "value": 1500
         },
         {
           "default": false,
@@ -444,7 +444,7 @@
           "label": "Medium",
           "properties": null,
           "uuid": "31e30bc4-bfca-45f4-acb6-e8415d4681af",
-          "value": 757
+          "value": 1501
         },
         {
           "default": false,
@@ -453,7 +453,7 @@
           "label": "High",
           "properties": null,
           "uuid": "1db2d8bd-f211-4d35-b3bc-2be0b1ec8381",
-          "value": 758
+          "value": 1502
         },
         {
           "default": false,
@@ -462,7 +462,7 @@
           "label": "Critical",
           "properties": null,
           "uuid": "140be509-1419-4c55-9147-c488d6299a92",
-          "value": 759
+          "value": 1503
         }
       ]
     },
@@ -476,7 +476,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_impact",
       "hide_notification": false,
-      "id": 4101,
+      "id": 5370,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -502,7 +502,7 @@
           "label": "1-Extensive/Widespread",
           "properties": null,
           "uuid": "1862aa58-38e9-4e70-bff8-7a3a76bba8e4",
-          "value": 760
+          "value": 1496
         },
         {
           "default": false,
@@ -511,7 +511,7 @@
           "label": "2-Significant/Large",
           "properties": null,
           "uuid": "7248675b-0b47-456e-9a5d-342d98ea6d11",
-          "value": 761
+          "value": 1497
         },
         {
           "default": false,
@@ -520,7 +520,7 @@
           "label": "3-Moderate/Limited",
           "properties": null,
           "uuid": "c2b36817-3dce-43d0-b040-bfc0b6df9a83",
-          "value": 762
+          "value": 1498
         },
         {
           "default": false,
@@ -529,7 +529,7 @@
           "label": "4-Minor/Localized",
           "properties": null,
           "uuid": "c9a47f7b-6b76-4ef1-a995-71390abbbc37",
-          "value": 763
+          "value": 1499
         }
       ]
     },
@@ -543,7 +543,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_status",
       "hide_notification": false,
-      "id": 4102,
+      "id": 5375,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -569,7 +569,7 @@
           "label": "New",
           "properties": null,
           "uuid": "2bb5ae89-1bac-443e-b94e-8b72edb1818b",
-          "value": 764
+          "value": 1504
         },
         {
           "default": false,
@@ -578,7 +578,7 @@
           "label": "Assigned",
           "properties": null,
           "uuid": "45c2040c-9d17-4bd2-962f-e54b09fb8dc0",
-          "value": 765
+          "value": 1505
         },
         {
           "default": false,
@@ -587,7 +587,7 @@
           "label": "In Progress",
           "properties": null,
           "uuid": "df17135c-23b9-4365-ac51-0d6b66e8ae67",
-          "value": 766
+          "value": 1506
         },
         {
           "default": false,
@@ -596,7 +596,7 @@
           "label": "Pending",
           "properties": null,
           "uuid": "0fbe0b41-e32c-4fec-a01d-63230b03eeab",
-          "value": 767
+          "value": 1507
         },
         {
           "default": false,
@@ -605,7 +605,7 @@
           "label": "Resolved",
           "properties": null,
           "uuid": "65cf7e95-3074-4b3b-9126-d5334bb981a6",
-          "value": 768
+          "value": 1508
         },
         {
           "default": false,
@@ -614,7 +614,7 @@
           "label": "Closed",
           "properties": null,
           "uuid": "a40a621d-68a5-40b9-9d77-c452d4f8eb0f",
-          "value": 769
+          "value": 1509
         },
         {
           "default": false,
@@ -623,7 +623,7 @@
           "label": "Cancelled",
           "properties": null,
           "uuid": "7aefc7f1-5233-458a-914d-56a1d69d26c5",
-          "value": 770
+          "value": 1510
         }
       ]
     },
@@ -637,7 +637,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_task_linked",
       "hide_notification": false,
-      "id": 4103,
+      "id": 5412,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -667,7 +667,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_organization",
       "hide_notification": false,
-      "id": 4104,
+      "id": 5372,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -697,7 +697,7 @@
       "deprecated": false,
       "export_key": "incident/bmc_helix_created_date",
       "hide_notification": false,
-      "id": 4105,
+      "id": 5368,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -731,7 +731,7 @@
   ],
   "functions": [
     {
-      "created_date": 1694107807954,
+      "created_date": 1693490305104,
       "description": {
         "content": "Close an incident ticket in Helix",
         "format": "text"
@@ -739,14 +739,14 @@
       "destination_handle": "fn_bmc_helix",
       "display_name": "Helix: Close Incident",
       "export_key": "helix_close_incident",
-      "id": 8,
+      "id": 206,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 12,
+        "id": 37,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694107808017,
+      "last_modified_time": 1693490305125,
       "name": "helix_close_incident",
       "tags": [],
       "uuid": "d144e958-5526-414d-9c77-ca7736e891cc",
@@ -788,7 +788,7 @@
       "workflows": []
     },
     {
-      "created_date": 1694107808027,
+      "created_date": 1693490597632,
       "description": {
         "content": "Create a new incident in Helix.",
         "format": "text"
@@ -796,14 +796,14 @@
       "destination_handle": "fn_bmc_helix",
       "display_name": "Helix: Create Incident",
       "export_key": "helix_create_incident",
-      "id": 9,
+      "id": 207,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 12,
+        "id": 37,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694107808078,
+      "last_modified_time": 1693490597652,
       "name": "helix_create_incident",
       "tags": [],
       "uuid": "b1cd7c7c-bdee-4455-8e73-fb26ea250f51",
@@ -847,13 +847,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 4,
+  "id": 87,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1694111229570,
+      "create_date": 1694530502144,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -862,7 +862,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1694111229570,
+      "update_date": 1694530502144,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -912,13 +912,13 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 1,
+        "content_version": 5,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8760781f_e662_458a_a706_4913f0426fa6\" isExecutable=\"true\" name=\"playbook_8760781f_e662_458a_a706_4913f0426fa6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0dxaxts\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Helix: Close Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d144e958-5526-414d-9c77-ca7736e891cc\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.bmc_helix_request_id = incident.properties.bmc_helix_request_id\\n\\n# Use this section to add key, value pairs to send to Helix\\n# These values will be added/updated on the target Helix incident,\\n# so they must conform with the \\\"HPD:IncidentInterface_Create\\\" schema\\npayload = {\\\"Status_Reason\\\": \\\"Done\\\"}\\n\\ninputs.helix_payload = str(payload)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"closed_incident\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0dxaxts\u003c/incoming\u003e\u003coutgoing\u003eFlow_0yfdxko\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0dxaxts\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"706cad81-6246-407a-a14e-7502f79e9cd2\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0yfdxko\u003c/incoming\u003e\u003coutgoing\u003eFlow_0u8wsfn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0yfdxko\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0u8wsfn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0u8wsfn\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8760781f_e662_458a_a706_4913f0426fa6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dxaxts\" id=\"Flow_0dxaxts_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0yfdxko\" id=\"Flow_0yfdxko_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0u8wsfn\" id=\"Flow_0u8wsfn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1694107808487,
+      "create_date": 1693491415584,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 12,
+        "id": 37,
         "name": "a@example.com",
         "type": "user"
       },
@@ -955,27 +955,27 @@
         "uuid": "7fa1c649-27ab-402f-9efa-ae2ecd1b10e5"
       },
       "has_logical_errors": false,
-      "id": 1,
+      "id": 175,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 12,
+        "id": 37,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694107809433,
+      "last_modified_time": 1694526454471,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1694107808605,
+          "created_date": 1693491809848,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 16,
+          "id": 201,
           "language": "python3",
           "last_modified_by": "a@example.com",
-          "last_modified_time": 1694107808635,
+          "last_modified_time": 1693491809858,
           "name": "post process",
           "object_type": "incident",
           "playbook_handle": "bmc_helix_close_incident",
@@ -990,7 +990,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8760781f-e662-458a-a706-4913f0426fa6",
-        "id": 2,
+        "id": 178,
         "name": "playbook_8760781f_e662_458a_a706_4913f0426fa6",
         "type": "playbook",
         "uuid": "9a8cf028-0534-451b-ab04-8db23e7536bf"
@@ -998,7 +998,7 @@
       "tags": [],
       "type": "default",
       "uuid": "8760781f-e662-458a-a706-4913f0426fa6",
-      "version": 3
+      "version": 8
     },
     {
       "activation_details": {
@@ -1024,13 +1024,13 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 1,
+        "content_version": 7,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_773cce43_294b_42e0_b534_98f9fadb25e4\" isExecutable=\"true\" name=\"playbook_773cce43_294b_42e0_b534_98f9fadb25e4\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_016893m\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Helix: Close Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d144e958-5526-414d-9c77-ca7736e891cc\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.task_id = task.id\\ninputs.incident_id = incident.id\\n\\n# Use this section to add key, value pairs to send to Helix\\n# These values will be added/updated on the target Helix incident,\\n# so they must conform with the \\\"HPD:IncidentInterface_Create\\\" schema\\npayload = {\\\"Status_Reason\\\": \\\"foo\\\"}\\n\\ninputs.helix_payload = str(payload)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"closed_incident\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_016893m\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wtf53e\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_016893m\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1e1a75ad-497b-4cc9-9064-640cb5862ac0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wtf53e\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ubg574\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wtf53e\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ubg574\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ubg574\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_773cce43_294b_42e0_b534_98f9fadb25e4\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ubg574\" id=\"Flow_0ubg574_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"534\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wtf53e\" id=\"Flow_0wtf53e_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_016893m\" id=\"Flow_016893m_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"534\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1694107809456,
+      "create_date": 1693491908043,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 12,
+        "id": 37,
         "name": "a@example.com",
         "type": "user"
       },
@@ -1067,27 +1067,27 @@
         "uuid": "54f51f49-0c69-4359-8149-e3c14d2c0ae6"
       },
       "has_logical_errors": false,
-      "id": 2,
+      "id": 176,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 12,
+        "id": 37,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694107810162,
+      "last_modified_time": 1694526454835,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1694107809564,
+          "created_date": 1693492133345,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 17,
+          "id": 202,
           "language": "python3",
           "last_modified_by": "a@example.com",
-          "last_modified_time": 1694107809589,
+          "last_modified_time": 1693492133386,
           "name": "post process",
           "object_type": "task",
           "playbook_handle": "bmc_helix_close_incident_from_task",
@@ -1102,7 +1102,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_773cce43-294b-42e0-b534-98f9fadb25e4",
-        "id": 3,
+        "id": 179,
         "name": "playbook_773cce43_294b_42e0_b534_98f9fadb25e4",
         "type": "playbook",
         "uuid": "69701b45-2a36-46cc-8ac3-b8ecc3d42910"
@@ -1110,18 +1110,18 @@
       "tags": [],
       "type": "default",
       "uuid": "773cce43-294b-42e0-b534-98f9fadb25e4",
-      "version": 4
+      "version": 11
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814\" isExecutable=\"true\" name=\"playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0mxuc5x\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Helix: Create Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b1cd7c7c-bdee-4455-8e73-fb26ea250f51\"\u003e{\"inputs\":{},\"pre_processing_script\":\"payload = {\\n  \\\"First_Name\\\": playbook.inputs.bmc_helix_customer_first_name,\\n  \\\"Last_Name\\\": playbook.inputs.bmc_helix_customer_last_name,\\n  \\\"Impact\\\": playbook.inputs.bmc_helix_impact,\\n  \\\"Urgency\\\": playbook.inputs.bmc_helix_urgency,\\n  \\\"Service_Type\\\": playbook.inputs.bmc_helix_incident_type,\\n  \\\"Status\\\": playbook.inputs.bmc_helix_status,\\n  \\\"Reported Source\\\": playbook.inputs.bmc_helix_reported_source,\\n  \\\"Assigned Support Organization\\\": playbook.inputs.bmc_helix_support_group\\n}\\nif getattr(playbook.inputs, \\\"bmc_helix_additional_data\\\").content:\\n  payload[\\\"additional_data\\\"] = playbook.inputs.bmc_helix_additional_data.content\\nif getattr(playbook.inputs, \\\"bmc_helix_note\\\"):\\n  payload[\\\"Description\\\"] = playbook.inputs.bmc_helix_note\\nif getattr(playbook.inputs, \\\"bmc_helix_template\\\"):\\n  payload[\\\"ApplyTemplate\\\"] = playbook.inputs.bmc_helix_template\\n\\n# set inputs\\ninputs.task_id = task.id\\ninputs.incident_id = incident.id\\ninputs.helix_incident_name = task.name\\ninputs.helix_payload = str(payload)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"created_incident\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mxuc5x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wayi3v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0mxuc5x\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6138d362-69b8-4c72-986f-47ad07b04b25\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wayi3v\u003c/incoming\u003e\u003coutgoing\u003eFlow_1i55eey\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1wayi3v\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1i55eey\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1i55eey\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i55eey\" id=\"Flow_1i55eey_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wayi3v\" id=\"Flow_1wayi3v_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mxuc5x\" id=\"Flow_0mxuc5x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 22,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814\" isExecutable=\"true\" name=\"playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0mxuc5x\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Helix: Create Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b1cd7c7c-bdee-4455-8e73-fb26ea250f51\"\u003e{\"inputs\":{},\"pre_processing_script\":\"payload = {\\n  \\\"First_Name\\\": playbook.inputs.bmc_helix_customer_first_name,\\n  \\\"Last_Name\\\": playbook.inputs.bmc_helix_customer_last_name,\\n  \\\"Impact\\\": playbook.inputs.bmc_helix_impact,\\n  \\\"Urgency\\\": playbook.inputs.bmc_helix_urgency,\\n  \\\"Service_Type\\\": playbook.inputs.bmc_helix_incident_type,\\n  \\\"Status\\\": playbook.inputs.bmc_helix_status,\\n  \\\"Reported Source\\\": playbook.inputs.bmc_helix_reported_source,\\n  \\\"Assigned Support Organization\\\": playbook.inputs.bmc_helix_support_group\\n}\\nif getattr(playbook.inputs, \\\"bmc_helix_additional_data\\\").content:\\n  payload[\\\"additional_data\\\"] = playbook.inputs.bmc_helix_additional_data.content\\nif getattr(playbook.inputs, \\\"bmc_helix_description\\\"):\\n  payload[\\\"Description\\\"] = playbook.inputs.bmc_helix_description\\nif getattr(playbook.inputs, \\\"bmc_helix_template\\\"):\\n  payload[\\\"ApplyTemplate\\\"] = playbook.inputs.bmc_helix_template\\n\\n# set inputs\\ninputs.task_id = task.id\\ninputs.incident_id = incident.id\\ninputs.helix_incident_name = task.name\\ninputs.helix_payload = str(payload)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"created_incident\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mxuc5x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wayi3v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0mxuc5x\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6138d362-69b8-4c72-986f-47ad07b04b25\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wayi3v\u003c/incoming\u003e\u003coutgoing\u003eFlow_1i55eey\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1wayi3v\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1i55eey\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1i55eey\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i55eey\" id=\"Flow_1i55eey_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wayi3v\" id=\"Flow_1wayi3v_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mxuc5x\" id=\"Flow_0mxuc5x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1694107810132,
+      "create_date": 1693492743236,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 12,
+        "id": 37,
         "name": "a@example.com",
         "type": "user"
       },
@@ -1148,7 +1148,7 @@
             "deprecated": false,
             "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_additional_data",
             "hide_notification": false,
-            "id": 4125,
+            "id": 5401,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -1163,7 +1163,7 @@
             "templates": [],
             "text": "Additional Data",
             "tooltip": "Addtional key value pairs to send to BMC Helix. Keys must match the incident schema in the BMC Helix system.",
-            "type_id": 1003,
+            "type_id": 1215,
             "uuid": "942d3396-74ea-4df2-af91-f12a95398ac0",
             "values": []
           },
@@ -1177,7 +1177,7 @@
             "deprecated": false,
             "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_customer_first_name",
             "hide_notification": false,
-            "id": 4126,
+            "id": 5402,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1193,7 +1193,7 @@
             "templates": [],
             "text": "Existing Customer First Name",
             "tooltip": "First name of the affected customer. Must be an existing customer on BMC Helix.",
-            "type_id": 1003,
+            "type_id": 1215,
             "uuid": "babb7502-5605-47a7-bfbe-502754cff6a2",
             "values": []
           },
@@ -1207,7 +1207,7 @@
             "deprecated": false,
             "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_customer_last_name",
             "hide_notification": false,
-            "id": 4127,
+            "id": 5403,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1223,8 +1223,37 @@
             "templates": [],
             "text": "Existing Customer Last Name",
             "tooltip": "Last name of the affected customer. Must be an existing customer on BMC Helix.",
-            "type_id": 1003,
+            "type_id": 1215,
             "uuid": "9f75e263-2c32-48a1-93be-a75216c0c7fa",
+            "values": []
+          },
+          "bmc_helix_description": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_description",
+            "hide_notification": false,
+            "id": 5405,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "bmc_helix_description",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Description",
+            "tooltip": "Optionally, define the description of the Helix form",
+            "type_id": 1215,
+            "uuid": "b80534d5-ebb9-4411-9d3d-771a29db93fa",
             "values": []
           },
           "bmc_helix_impact": {
@@ -1237,7 +1266,7 @@
             "deprecated": false,
             "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_impact",
             "hide_notification": false,
-            "id": 4128,
+            "id": 5404,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1253,7 +1282,7 @@
             "templates": [],
             "text": "Impact",
             "tooltip": "Impact to assign to the BMC Helix form",
-            "type_id": 1003,
+            "type_id": 1215,
             "uuid": "130b5004-f3ce-46fa-a7c8-e9ba4003c2b2",
             "values": [
               {
@@ -1263,7 +1292,7 @@
                 "label": "1-Extensive/Widespread",
                 "properties": null,
                 "uuid": "9460e9c8-a557-4fd9-b468-0c73b7f7d9fd",
-                "value": 771
+                "value": 1551
               },
               {
                 "default": false,
@@ -1272,7 +1301,7 @@
                 "label": "2-Significant/Large",
                 "properties": null,
                 "uuid": "5e1c7843-ff77-4e7f-9f4a-d0c44668e125",
-                "value": 772
+                "value": 1552
               },
               {
                 "default": false,
@@ -1281,7 +1310,7 @@
                 "label": "3-Moderate/Limited",
                 "properties": null,
                 "uuid": "a6e52c62-5b9f-418c-8b9b-138994b8742d",
-                "value": 773
+                "value": 1553
               },
               {
                 "default": false,
@@ -1290,7 +1319,7 @@
                 "label": "4-Minor/Localized",
                 "properties": null,
                 "uuid": "8d1cf579-cb34-445d-a33b-2ade9401eca6",
-                "value": 774
+                "value": 1554
               }
             ]
           },
@@ -1304,7 +1333,7 @@
             "deprecated": false,
             "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_incident_type",
             "hide_notification": false,
-            "id": 4129,
+            "id": 5407,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1320,7 +1349,7 @@
             "templates": [],
             "text": "Incident Type",
             "tooltip": "Incident type to assign to the BMC Helix incident.",
-            "type_id": 1003,
+            "type_id": 1215,
             "uuid": "6b4da8c3-aef6-494e-b7ed-81275d76d8b9",
             "values": [
               {
@@ -1330,7 +1359,7 @@
                 "label": "User Service Restoration",
                 "properties": null,
                 "uuid": "9b24c964-202c-4211-9349-bfcec0f2163c",
-                "value": 775
+                "value": 1568
               },
               {
                 "default": false,
@@ -1339,7 +1368,7 @@
                 "label": "User Service Request",
                 "properties": null,
                 "uuid": "07a375f9-145a-422f-9352-9a5a89576b41",
-                "value": 776
+                "value": 1569
               },
               {
                 "default": false,
@@ -1348,7 +1377,7 @@
                 "label": "Infrastructure Restoration",
                 "properties": null,
                 "uuid": "5bb68a40-648f-4ef0-a8de-01657be02a06",
-                "value": 777
+                "value": 1570
               },
               {
                 "default": false,
@@ -1357,7 +1386,7 @@
                 "label": "Infrastructure Event",
                 "properties": null,
                 "uuid": "efab4df8-bf4d-460a-ad7d-7b41bb0a6b74",
-                "value": 778
+                "value": 1571
               },
               {
                 "default": false,
@@ -1366,38 +1395,9 @@
                 "label": "Security Incident",
                 "properties": null,
                 "uuid": "178ce25f-22e8-45b5-a863-e8b27dde35d8",
-                "value": 779
+                "value": 1572
               }
             ]
-          },
-          "bmc_helix_note": {
-            "allow_default_value": false,
-            "blank_option": false,
-            "calculated": false,
-            "changeable": true,
-            "chosen": false,
-            "default_chosen_by_server": false,
-            "deprecated": false,
-            "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_note",
-            "hide_notification": false,
-            "id": 4130,
-            "input_type": "text",
-            "internal": false,
-            "is_tracked": false,
-            "name": "bmc_helix_note",
-            "operation_perms": {},
-            "operations": [],
-            "placeholder": "",
-            "prefix": null,
-            "read_only": false,
-            "rich_text": false,
-            "tags": [],
-            "templates": [],
-            "text": "Note",
-            "tooltip": "Optionally, define the note/description of the Helix form",
-            "type_id": 1003,
-            "uuid": "b80534d5-ebb9-4411-9d3d-771a29db93fa",
-            "values": []
           },
           "bmc_helix_reported_source": {
             "allow_default_value": false,
@@ -1409,7 +1409,7 @@
             "deprecated": false,
             "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_reported_source",
             "hide_notification": false,
-            "id": 4131,
+            "id": 5406,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1425,7 +1425,7 @@
             "templates": [],
             "text": "Reported Source",
             "tooltip": "The originating source of this Incident. Must be configured with values present in your BMC Helix system.",
-            "type_id": 1003,
+            "type_id": 1215,
             "uuid": "d9caefff-7701-442a-8f39-2f1b5ee87168",
             "values": [
               {
@@ -1435,7 +1435,7 @@
                 "label": "Direct Input",
                 "properties": null,
                 "uuid": "ae30fb8e-4ee9-4fca-a5c5-7148bcf1190d",
-                "value": 780
+                "value": 1555
               },
               {
                 "default": false,
@@ -1444,7 +1444,7 @@
                 "label": "Email",
                 "properties": null,
                 "uuid": "60cd7b41-cdde-42f1-837c-fb0c2d198386",
-                "value": 781
+                "value": 1556
               },
               {
                 "default": false,
@@ -1453,7 +1453,7 @@
                 "label": "External Escalation",
                 "properties": null,
                 "uuid": "c2d2cfc6-6ba2-4959-a32b-f14ee9c920ad",
-                "value": 782
+                "value": 1557
               },
               {
                 "default": false,
@@ -1462,7 +1462,7 @@
                 "label": "Fax",
                 "properties": null,
                 "uuid": "ff6a07ea-8142-459d-b246-ab94ad10a6c9",
-                "value": 783
+                "value": 1558
               },
               {
                 "default": false,
@@ -1471,7 +1471,7 @@
                 "label": "Self Service",
                 "properties": null,
                 "uuid": "b54a3ebc-1744-4f0a-b695-963023e9f33a",
-                "value": 784
+                "value": 1559
               },
               {
                 "default": false,
@@ -1480,7 +1480,7 @@
                 "label": "Systems Management",
                 "properties": null,
                 "uuid": "1f0c0b43-c5e3-492e-b63b-67cc237a172f",
-                "value": 785
+                "value": 1560
               },
               {
                 "default": false,
@@ -1489,7 +1489,7 @@
                 "label": "Phone",
                 "properties": null,
                 "uuid": "e0c92b91-1c01-45e3-ae93-8726bbe8c562",
-                "value": 786
+                "value": 1561
               },
               {
                 "default": false,
@@ -1498,7 +1498,7 @@
                 "label": "Voice Mail",
                 "properties": null,
                 "uuid": "c239a193-e6b5-4eec-a5fa-70c8ca5c57c7",
-                "value": 787
+                "value": 1562
               },
               {
                 "default": false,
@@ -1507,7 +1507,7 @@
                 "label": "Walk In",
                 "properties": null,
                 "uuid": "ea83bd27-f7b6-4e16-9b16-a494f4e8a92c",
-                "value": 788
+                "value": 1563
               },
               {
                 "default": false,
@@ -1516,7 +1516,7 @@
                 "label": "Web",
                 "properties": null,
                 "uuid": "94b05cdd-74df-4a90-8979-7ad43f6332e7",
-                "value": 789
+                "value": 1564
               },
               {
                 "default": false,
@@ -1525,7 +1525,7 @@
                 "label": "Other",
                 "properties": null,
                 "uuid": "9e094b5b-2e3b-434e-b3c8-960a52bfc4a2",
-                "value": 790
+                "value": 1565
               },
               {
                 "default": false,
@@ -1534,7 +1534,7 @@
                 "label": "BMC Impact Manager Event",
                 "properties": null,
                 "uuid": "a960ad8b-2aa3-4625-a7c3-a847af4e65be",
-                "value": 791
+                "value": 1566
               },
               {
                 "default": false,
@@ -1543,7 +1543,7 @@
                 "label": "Chat",
                 "properties": null,
                 "uuid": "0f140cec-0a76-470e-b8af-6792a3fc53b3",
-                "value": 792
+                "value": 1567
               }
             ]
           },
@@ -1557,7 +1557,7 @@
             "deprecated": false,
             "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_status",
             "hide_notification": false,
-            "id": 4132,
+            "id": 5408,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1573,7 +1573,7 @@
             "templates": [],
             "text": "Status",
             "tooltip": "Status to assign to the BMC Helix incident.",
-            "type_id": 1003,
+            "type_id": 1215,
             "uuid": "e476534d-46dc-48f4-8f9a-088ee11bec00",
             "values": [
               {
@@ -1583,7 +1583,7 @@
                 "label": "New",
                 "properties": null,
                 "uuid": "2f9f02e7-6bad-497d-ad4f-376d1adc2020",
-                "value": 793
+                "value": 1573
               },
               {
                 "default": false,
@@ -1592,7 +1592,7 @@
                 "label": "Assigned",
                 "properties": null,
                 "uuid": "f7d32016-ebff-4670-9ccf-c51f510d6d93",
-                "value": 794
+                "value": 1574
               },
               {
                 "default": false,
@@ -1601,7 +1601,7 @@
                 "label": "In Progress",
                 "properties": null,
                 "uuid": "0b71c47c-6e7a-4601-85c2-3601fb22f446",
-                "value": 795
+                "value": 1575
               },
               {
                 "default": false,
@@ -1610,7 +1610,7 @@
                 "label": "Pending",
                 "properties": null,
                 "uuid": "0f128f0c-b0e4-4a2e-b0a1-3f6119e90660",
-                "value": 796
+                "value": 1576
               },
               {
                 "default": false,
@@ -1619,7 +1619,7 @@
                 "label": "Resolved",
                 "properties": null,
                 "uuid": "0645c5bf-fffd-40d4-b497-5ae51c5d34a8",
-                "value": 797
+                "value": 1577
               },
               {
                 "default": false,
@@ -1628,7 +1628,7 @@
                 "label": "Closed",
                 "properties": null,
                 "uuid": "025e6525-912c-4262-b140-dee0fb17ca30",
-                "value": 798
+                "value": 1578
               },
               {
                 "default": false,
@@ -1637,7 +1637,7 @@
                 "label": "Cancelled",
                 "properties": null,
                 "uuid": "db64ddef-f467-483c-89f1-3b412adaf70c",
-                "value": 799
+                "value": 1579
               }
             ]
           },
@@ -1651,7 +1651,7 @@
             "deprecated": false,
             "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_support_group",
             "hide_notification": false,
-            "id": 4133,
+            "id": 5409,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1667,7 +1667,7 @@
             "templates": [],
             "text": "Support Group",
             "tooltip": "Support Organization to assign the BMC Helix incident.",
-            "type_id": 1003,
+            "type_id": 1215,
             "uuid": "dee5f80a-ece7-4679-9121-e44fc399a3b5",
             "values": [
               {
@@ -1677,7 +1677,7 @@
                 "label": "Service Desk",
                 "properties": null,
                 "uuid": "0dd415e6-2c8b-4891-9b8c-e96de86e448c",
-                "value": 800
+                "value": 1580
               },
               {
                 "default": false,
@@ -1686,7 +1686,7 @@
                 "label": "SOC",
                 "properties": null,
                 "uuid": "820cf76e-7a34-4363-b006-ac78594844e6",
-                "value": 801
+                "value": 1581
               }
             ]
           },
@@ -1700,7 +1700,7 @@
             "deprecated": false,
             "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_template",
             "hide_notification": false,
-            "id": 4134,
+            "id": 5410,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1715,7 +1715,7 @@
             "templates": [],
             "text": "Template",
             "tooltip": "Template to apply to the incident to prefill values",
-            "type_id": 1003,
+            "type_id": 1215,
             "uuid": "489f2c5a-298d-4def-affb-b92a9d1aa2e8",
             "values": [
               {
@@ -1725,7 +1725,7 @@
                 "label": "Email Issue",
                 "properties": null,
                 "uuid": "78b714b7-d8ce-473b-a092-0a494dd92df2",
-                "value": 802
+                "value": 1582
               }
             ]
           },
@@ -1739,7 +1739,7 @@
             "deprecated": false,
             "export_key": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814/bmc_helix_urgency",
             "hide_notification": false,
-            "id": 4135,
+            "id": 5411,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1755,7 +1755,7 @@
             "templates": [],
             "text": "Urgency",
             "tooltip": "Urgency to assign to the BMC Helix incident.",
-            "type_id": 1003,
+            "type_id": 1215,
             "uuid": "2deb2918-29cc-42fc-a819-03e889a96c23",
             "values": [
               {
@@ -1765,7 +1765,7 @@
                 "label": "1-Critical",
                 "properties": null,
                 "uuid": "a5ce4a26-9bee-4a4e-ad31-0109aaebf7d3",
-                "value": 803
+                "value": 1583
               },
               {
                 "default": false,
@@ -1774,7 +1774,7 @@
                 "label": "2-High",
                 "properties": null,
                 "uuid": "d9082d02-7fe3-4e83-a9ca-63ed525ad0a7",
-                "value": 804
+                "value": 1584
               },
               {
                 "default": false,
@@ -1783,7 +1783,7 @@
                 "label": "3-Medium",
                 "properties": null,
                 "uuid": "6bc03350-734f-4eef-8127-cfd7af06f5b3",
-                "value": 805
+                "value": 1585
               },
               {
                 "default": false,
@@ -1792,7 +1792,7 @@
                 "label": "4-Low",
                 "properties": null,
                 "uuid": "84255d14-9f0b-4afe-8687-0a2dcc99c451",
-                "value": 806
+                "value": 1586
               }
             ]
           }
@@ -1817,27 +1817,27 @@
         "uuid": "1f12f41e-bf45-4d9d-8488-195bcbb03994"
       },
       "has_logical_errors": false,
-      "id": 3,
+      "id": 178,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 12,
+        "id": 37,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694109145030,
+      "last_modified_time": 1694530450939,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1694107810608,
+          "created_date": 1693493092819,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 18,
+          "id": 204,
           "language": "python3",
           "last_modified_by": "a@example.com",
-          "last_modified_time": 1694108601208,
+          "last_modified_time": 1694523405061,
           "name": "post process",
           "object_type": "task",
           "playbook_handle": "bmc_helix_create_incident_from_task",
@@ -1948,7 +1948,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_6c109cf5-83a5-4cbf-a7b6-5d90c8970814",
-        "id": 4,
+        "id": 181,
         "name": "playbook_6c109cf5_83a5_4cbf_a7b6_5d90c8970814",
         "type": "playbook",
         "uuid": "20bc5ef5-9169-4464-bad9-b3e9d9304530"
@@ -1956,18 +1956,18 @@
       "tags": [],
       "type": "default",
       "uuid": "6c109cf5-83a5-4cbf-a7b6-5d90c8970814",
-      "version": 11
+      "version": 26
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0\" isExecutable=\"true\" name=\"playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_050pi86\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Helix: Create Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b1cd7c7c-bdee-4455-8e73-fb26ea250f51\"\u003e{\"inputs\":{},\"pre_processing_script\":\"payload = {\\n  \\\"First_Name\\\": playbook.inputs.bmc_helix_customer_first_name,\\n  \\\"Last_Name\\\": playbook.inputs.bmc_helix_customer_last_name,\\n  \\\"Impact\\\": playbook.inputs.bmc_helix_impact,\\n  \\\"Urgency\\\": playbook.inputs.bmc_helix_urgency,\\n  \\\"Service_Type\\\": playbook.inputs.bmc_helix_incident_type,\\n  \\\"Status\\\": playbook.inputs.bmc_helix_status,\\n  \\\"Reported Source\\\": playbook.inputs.bmc_helix_reported_source,\\n  \\\"Assigned Support Organization\\\": playbook.inputs.bmc_helix_support_group\\n}\\nif getattr(playbook.inputs, \\\"bmc_helix_additional_data\\\").content:\\n  payload[\\\"additional_data\\\"] = playbook.inputs.bmc_helix_additional_data.content\\nif getattr(playbook.inputs, \\\"bmc_helix_note\\\"):\\n  payload[\\\"Description\\\"] = playbook.inputs.bmc_helix_note\\nif getattr(playbook.inputs, \\\"bmc_helix_template\\\"):\\n  payload[\\\"ApplyTemplate\\\"] = playbook.inputs.bmc_helix_template\\n\\n# set inputs\\ninputs.incident_id = incident.id\\ninputs.helix_incident_name = incident.name\\ninputs.helix_payload = str(payload)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"created_incident\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_050pi86\u003c/incoming\u003e\u003coutgoing\u003eFlow_1gwj2s0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_050pi86\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4f925ce1-4da0-4ab8-b724-93b4109be85d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1gwj2s0\u003c/incoming\u003e\u003coutgoing\u003eFlow_1t3wuhm\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1gwj2s0\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1t3wuhm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1t3wuhm\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1t3wuhm\" id=\"Flow_1t3wuhm_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1gwj2s0\" id=\"Flow_1gwj2s0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_050pi86\" id=\"Flow_050pi86_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 24,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0\" isExecutable=\"true\" name=\"playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_050pi86\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Helix: Create Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b1cd7c7c-bdee-4455-8e73-fb26ea250f51\"\u003e{\"inputs\":{},\"pre_processing_script\":\"payload = {\\n  \\\"First_Name\\\": playbook.inputs.bmc_helix_customer_first_name,\\n  \\\"Last_Name\\\": playbook.inputs.bmc_helix_customer_last_name,\\n  \\\"Impact\\\": playbook.inputs.bmc_helix_impact,\\n  \\\"Urgency\\\": playbook.inputs.bmc_helix_urgency,\\n  \\\"Service_Type\\\": playbook.inputs.bmc_helix_incident_type,\\n  \\\"Status\\\": playbook.inputs.bmc_helix_status,\\n  \\\"Reported Source\\\": playbook.inputs.bmc_helix_reported_source,\\n  \\\"Assigned Support Organization\\\": playbook.inputs.bmc_helix_support_group\\n}\\nif getattr(playbook.inputs, \\\"bmc_helix_additional_data\\\").content:\\n  payload[\\\"additional_data\\\"] = playbook.inputs.bmc_helix_additional_data.content\\nif getattr(playbook.inputs, \\\"bmc_helix_description\\\"):\\n  payload[\\\"Description\\\"] = playbook.inputs.bmc_helix_description\\nif getattr(playbook.inputs, \\\"bmc_helix_template\\\"):\\n  payload[\\\"ApplyTemplate\\\"] = playbook.inputs.bmc_helix_template\\n\\n# set inputs\\ninputs.incident_id = incident.id\\ninputs.helix_incident_name = incident.name\\ninputs.helix_payload = str(payload)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"created_incident\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_050pi86\u003c/incoming\u003e\u003coutgoing\u003eFlow_1gwj2s0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_050pi86\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4f925ce1-4da0-4ab8-b724-93b4109be85d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1gwj2s0\u003c/incoming\u003e\u003coutgoing\u003eFlow_1t3wuhm\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1gwj2s0\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1t3wuhm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1t3wuhm\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1t3wuhm\" id=\"Flow_1t3wuhm_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1gwj2s0\" id=\"Flow_1gwj2s0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_050pi86\" id=\"Flow_050pi86_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1694107811192,
+      "create_date": 1693492181444,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 12,
+        "id": 37,
         "name": "a@example.com",
         "type": "user"
       },
@@ -1994,7 +1994,7 @@
             "deprecated": false,
             "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_additional_data",
             "hide_notification": false,
-            "id": 4136,
+            "id": 5390,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -2009,7 +2009,7 @@
             "templates": [],
             "text": "Additional Data",
             "tooltip": "Addtional key value pairs to send to BMC Helix. Keys must match the incident schema in the BMC Helix system.",
-            "type_id": 1004,
+            "type_id": 1214,
             "uuid": "bd6fa2c5-8a8b-4731-9f36-004b122959cf",
             "values": []
           },
@@ -2023,7 +2023,7 @@
             "deprecated": false,
             "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_customer_first_name",
             "hide_notification": false,
-            "id": 4137,
+            "id": 5391,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2039,7 +2039,7 @@
             "templates": [],
             "text": "Existing Customer First Name",
             "tooltip": "First name of the affected customer. Must be an existing customer on BMC Helix.",
-            "type_id": 1004,
+            "type_id": 1214,
             "uuid": "59e50c10-17d6-4723-9fcc-855f4696c0cf",
             "values": []
           },
@@ -2053,7 +2053,7 @@
             "deprecated": false,
             "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_customer_last_name",
             "hide_notification": false,
-            "id": 4138,
+            "id": 5392,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2069,8 +2069,37 @@
             "templates": [],
             "text": "Existing Customer Last Name",
             "tooltip": "Last name of the affected customer. Must be an existing customer on BMC Helix.",
-            "type_id": 1004,
+            "type_id": 1214,
             "uuid": "6b3879ff-d470-4bff-9cc1-590d27b919e1",
+            "values": []
+          },
+          "bmc_helix_description": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_description",
+            "hide_notification": false,
+            "id": 5394,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "bmc_helix_description",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Description",
+            "tooltip": "Optionally, define the description of the Helix form",
+            "type_id": 1214,
+            "uuid": "889c50ca-5596-4877-806c-fbda995bbc94",
             "values": []
           },
           "bmc_helix_impact": {
@@ -2083,7 +2112,7 @@
             "deprecated": false,
             "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_impact",
             "hide_notification": false,
-            "id": 4139,
+            "id": 5393,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2099,7 +2128,7 @@
             "templates": [],
             "text": "Impact",
             "tooltip": "Impact to assign to the BMC Helix incident",
-            "type_id": 1004,
+            "type_id": 1214,
             "uuid": "2470a5ca-af88-4fd4-8697-6cd187bf1617",
             "values": [
               {
@@ -2109,7 +2138,7 @@
                 "label": "1-Extensive/Widespread",
                 "properties": null,
                 "uuid": "7892b90e-8d35-4b6d-8ca5-2f324c3a5b1e",
-                "value": 807
+                "value": 1515
               },
               {
                 "default": false,
@@ -2118,7 +2147,7 @@
                 "label": "2-Significant/Large",
                 "properties": null,
                 "uuid": "8e0b2da1-6d27-44ab-a706-8a4802970a56",
-                "value": 808
+                "value": 1516
               },
               {
                 "default": false,
@@ -2127,7 +2156,7 @@
                 "label": "3-Moderate/Limited",
                 "properties": null,
                 "uuid": "9dfcb50e-9bd2-49c8-97c6-eaefd12decc5",
-                "value": 809
+                "value": 1517
               },
               {
                 "default": false,
@@ -2136,7 +2165,7 @@
                 "label": "4-Minor/Localized",
                 "properties": null,
                 "uuid": "696a50bf-c87c-4694-9c87-82ab4cba369c",
-                "value": 810
+                "value": 1518
               }
             ]
           },
@@ -2150,7 +2179,7 @@
             "deprecated": false,
             "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_incident_type",
             "hide_notification": false,
-            "id": 4140,
+            "id": 5396,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2166,7 +2195,7 @@
             "templates": [],
             "text": "Incident Type",
             "tooltip": "Incident type to assign to the BMC Helix incident.",
-            "type_id": 1004,
+            "type_id": 1214,
             "uuid": "cab110f7-ba25-480f-87e8-3ffa8ebc1392",
             "values": [
               {
@@ -2176,7 +2205,7 @@
                 "label": "User Service Restoration",
                 "properties": null,
                 "uuid": "7d8b6c61-cace-49ab-bf33-537815587c8a",
-                "value": 811
+                "value": 1532
               },
               {
                 "default": false,
@@ -2185,7 +2214,7 @@
                 "label": "User Service Request",
                 "properties": null,
                 "uuid": "a67eea51-8493-49b2-bf67-287118d60904",
-                "value": 812
+                "value": 1533
               },
               {
                 "default": false,
@@ -2194,7 +2223,7 @@
                 "label": "Infrastructure Restoration",
                 "properties": null,
                 "uuid": "808d90e6-cd4e-4a79-865b-0ea532a57bc3",
-                "value": 813
+                "value": 1534
               },
               {
                 "default": false,
@@ -2203,7 +2232,7 @@
                 "label": "Infrastructure Event",
                 "properties": null,
                 "uuid": "4d06ca3b-3763-4173-8d00-772244e98dba",
-                "value": 814
+                "value": 1535
               },
               {
                 "default": false,
@@ -2212,38 +2241,9 @@
                 "label": "Security Incident",
                 "properties": null,
                 "uuid": "e3b9074b-a200-4c15-a3bd-9e020ad7c4b5",
-                "value": 815
+                "value": 1536
               }
             ]
-          },
-          "bmc_helix_note": {
-            "allow_default_value": false,
-            "blank_option": false,
-            "calculated": false,
-            "changeable": true,
-            "chosen": false,
-            "default_chosen_by_server": false,
-            "deprecated": false,
-            "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_note",
-            "hide_notification": false,
-            "id": 4141,
-            "input_type": "text",
-            "internal": false,
-            "is_tracked": false,
-            "name": "bmc_helix_note",
-            "operation_perms": {},
-            "operations": [],
-            "placeholder": "",
-            "prefix": null,
-            "read_only": false,
-            "rich_text": false,
-            "tags": [],
-            "templates": [],
-            "text": "Note",
-            "tooltip": "Optionally, define the note/description of the Helix form",
-            "type_id": 1004,
-            "uuid": "889c50ca-5596-4877-806c-fbda995bbc94",
-            "values": []
           },
           "bmc_helix_reported_source": {
             "allow_default_value": false,
@@ -2255,7 +2255,7 @@
             "deprecated": false,
             "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_reported_source",
             "hide_notification": false,
-            "id": 4142,
+            "id": 5395,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2271,7 +2271,7 @@
             "templates": [],
             "text": "Reported Source",
             "tooltip": "The originating source of this Incident. Must be configured with values present in your BMC Helix system.",
-            "type_id": 1004,
+            "type_id": 1214,
             "uuid": "b9106ba7-10e8-4724-b012-7fe16a76cc1c",
             "values": [
               {
@@ -2281,7 +2281,7 @@
                 "label": "Direct Input",
                 "properties": null,
                 "uuid": "70842231-de42-419f-8e3f-144ab672f911",
-                "value": 816
+                "value": 1519
               },
               {
                 "default": false,
@@ -2290,7 +2290,7 @@
                 "label": "Email",
                 "properties": null,
                 "uuid": "4b37633b-de12-4481-9278-67d7df73a57a",
-                "value": 817
+                "value": 1520
               },
               {
                 "default": false,
@@ -2299,7 +2299,7 @@
                 "label": "External Escalation",
                 "properties": null,
                 "uuid": "9777953f-2c19-4dbc-a44c-45117025c77d",
-                "value": 818
+                "value": 1521
               },
               {
                 "default": false,
@@ -2308,7 +2308,7 @@
                 "label": "Fax",
                 "properties": null,
                 "uuid": "a7985da7-6e0b-4349-b323-df0bc2d3e961",
-                "value": 819
+                "value": 1522
               },
               {
                 "default": false,
@@ -2317,7 +2317,7 @@
                 "label": "Self Service",
                 "properties": null,
                 "uuid": "f29bcb86-c336-4471-b163-8494de5f57b3",
-                "value": 820
+                "value": 1523
               },
               {
                 "default": false,
@@ -2326,7 +2326,7 @@
                 "label": "Systems Management",
                 "properties": null,
                 "uuid": "a3cd9f85-7c54-4107-a11a-19d84c4c7cc3",
-                "value": 821
+                "value": 1524
               },
               {
                 "default": false,
@@ -2335,7 +2335,7 @@
                 "label": "Phone",
                 "properties": null,
                 "uuid": "77db69d5-48cf-4371-a0d3-5598de62f420",
-                "value": 822
+                "value": 1525
               },
               {
                 "default": false,
@@ -2344,7 +2344,7 @@
                 "label": "Voice Mail",
                 "properties": null,
                 "uuid": "e6064fd0-2201-4260-9fc4-cbcc1491f87f",
-                "value": 823
+                "value": 1526
               },
               {
                 "default": false,
@@ -2353,7 +2353,7 @@
                 "label": "Walk In",
                 "properties": null,
                 "uuid": "3764e5d8-3b20-471b-be2e-db0121bc4ced",
-                "value": 824
+                "value": 1527
               },
               {
                 "default": false,
@@ -2362,7 +2362,7 @@
                 "label": "Web",
                 "properties": null,
                 "uuid": "f487615f-4d05-44ee-b878-05a66aab5f4b",
-                "value": 825
+                "value": 1528
               },
               {
                 "default": false,
@@ -2371,7 +2371,7 @@
                 "label": "Other",
                 "properties": null,
                 "uuid": "ff428e6a-84c1-4da0-be1d-1857333d034e",
-                "value": 826
+                "value": 1529
               },
               {
                 "default": false,
@@ -2380,7 +2380,7 @@
                 "label": "BMC Impact Manager Event",
                 "properties": null,
                 "uuid": "ab811b53-03ec-431b-b42b-7935e9f1de83",
-                "value": 827
+                "value": 1530
               },
               {
                 "default": false,
@@ -2389,7 +2389,7 @@
                 "label": "Chat",
                 "properties": null,
                 "uuid": "9be7d119-18a1-42d4-a8b6-184f23a44a7c",
-                "value": 828
+                "value": 1531
               }
             ]
           },
@@ -2403,7 +2403,7 @@
             "deprecated": false,
             "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_status",
             "hide_notification": false,
-            "id": 4143,
+            "id": 5397,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2419,7 +2419,7 @@
             "templates": [],
             "text": "Status",
             "tooltip": "The status to assign to the BMC Helix incident",
-            "type_id": 1004,
+            "type_id": 1214,
             "uuid": "c0563cc9-428d-4979-a846-a7cf09edf6ec",
             "values": [
               {
@@ -2429,7 +2429,7 @@
                 "label": "New",
                 "properties": null,
                 "uuid": "2cd07abb-53ba-4666-ac8f-8745c5971786",
-                "value": 829
+                "value": 1537
               },
               {
                 "default": false,
@@ -2438,7 +2438,7 @@
                 "label": "Assigned",
                 "properties": null,
                 "uuid": "00e5ea45-d86c-43a8-906f-753f43dc3a84",
-                "value": 830
+                "value": 1538
               },
               {
                 "default": false,
@@ -2447,7 +2447,7 @@
                 "label": "In Progress",
                 "properties": null,
                 "uuid": "15144363-fada-43eb-ad90-9386e00fddce",
-                "value": 831
+                "value": 1539
               },
               {
                 "default": false,
@@ -2456,7 +2456,7 @@
                 "label": "Pending",
                 "properties": null,
                 "uuid": "6bcf5cd7-8f07-4623-beb5-e6f8e3fd4614",
-                "value": 832
+                "value": 1540
               },
               {
                 "default": false,
@@ -2465,7 +2465,7 @@
                 "label": "Resolved",
                 "properties": null,
                 "uuid": "4d93fdcf-2b21-4a9b-8c89-d0693aa25cf6",
-                "value": 833
+                "value": 1541
               },
               {
                 "default": false,
@@ -2474,7 +2474,7 @@
                 "label": "Closed",
                 "properties": null,
                 "uuid": "fd3f1ce6-30bf-4c71-b8ad-1a8a856da6ca",
-                "value": 834
+                "value": 1542
               },
               {
                 "default": false,
@@ -2483,7 +2483,7 @@
                 "label": "Cancelled",
                 "properties": null,
                 "uuid": "afae82be-6305-47f8-beec-d40f3827748c",
-                "value": 835
+                "value": 1543
               }
             ]
           },
@@ -2497,7 +2497,7 @@
             "deprecated": false,
             "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_support_group",
             "hide_notification": false,
-            "id": 4144,
+            "id": 5398,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2513,7 +2513,7 @@
             "templates": [],
             "text": "Support Group",
             "tooltip": "Support Organization to assign the BMC Helix incident to",
-            "type_id": 1004,
+            "type_id": 1214,
             "uuid": "37b8eea3-0369-4eef-8d8b-716173988a10",
             "values": [
               {
@@ -2523,7 +2523,7 @@
                 "label": "Service Desk",
                 "properties": null,
                 "uuid": "103cdc9d-4206-4bbd-b8f9-b93d2313beb2",
-                "value": 836
+                "value": 1544
               },
               {
                 "default": false,
@@ -2532,7 +2532,7 @@
                 "label": "SOC",
                 "properties": null,
                 "uuid": "c88d0642-7975-4549-bf35-ab014c0f34f5",
-                "value": 837
+                "value": 1545
               }
             ]
           },
@@ -2546,7 +2546,7 @@
             "deprecated": false,
             "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_template",
             "hide_notification": false,
-            "id": 4145,
+            "id": 5399,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2561,7 +2561,7 @@
             "templates": [],
             "text": "Template",
             "tooltip": "BMC Helix Incident creation template",
-            "type_id": 1004,
+            "type_id": 1214,
             "uuid": "39a8a2df-79fb-4a75-8f70-e39d8083fa42",
             "values": [
               {
@@ -2571,7 +2571,7 @@
                 "label": "Email Issue",
                 "properties": null,
                 "uuid": "e9946f5f-7a76-4a46-a4e0-bb2ae91297ca",
-                "value": 838
+                "value": 1546
               }
             ]
           },
@@ -2585,7 +2585,7 @@
             "deprecated": false,
             "export_key": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0/bmc_helix_urgency",
             "hide_notification": false,
-            "id": 4146,
+            "id": 5400,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2601,7 +2601,7 @@
             "templates": [],
             "text": "Urgency",
             "tooltip": "Urgency to assign to the BMC Helix incident",
-            "type_id": 1004,
+            "type_id": 1214,
             "uuid": "f8d9c722-6bbc-4e81-92a9-7d511863cc86",
             "values": [
               {
@@ -2611,7 +2611,7 @@
                 "label": "1-Critical",
                 "properties": null,
                 "uuid": "a2ab4cb1-d92f-4b93-bb33-0a18a7a6bb72",
-                "value": 839
+                "value": 1547
               },
               {
                 "default": false,
@@ -2620,7 +2620,7 @@
                 "label": "2-High",
                 "properties": null,
                 "uuid": "a9927c4d-79b6-4eac-985e-1a9aed36a59c",
-                "value": 840
+                "value": 1548
               },
               {
                 "default": false,
@@ -2629,7 +2629,7 @@
                 "label": "3-Medium",
                 "properties": null,
                 "uuid": "1fba9245-70e6-4cdf-8d05-c52da0f93ae1",
-                "value": 841
+                "value": 1549
               },
               {
                 "default": false,
@@ -2638,7 +2638,7 @@
                 "label": "4-Low",
                 "properties": null,
                 "uuid": "c1ae4491-3bed-4eb8-8a68-52e4a79d265b",
-                "value": 842
+                "value": 1550
               }
             ]
           }
@@ -2663,27 +2663,27 @@
         "uuid": "057e8dc9-4dbd-4f90-a7da-e52d10586d39"
       },
       "has_logical_errors": false,
-      "id": 4,
+      "id": 177,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 12,
+        "id": 37,
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694108156743,
+      "last_modified_time": 1694530320891,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1694107811698,
+          "created_date": 1693492677996,
           "description": "",
           "enabled": false,
           "export_key": "post process",
-          "id": 19,
+          "id": 203,
           "language": "python3",
           "last_modified_by": "a@example.com",
-          "last_modified_time": 1694108154675,
+          "last_modified_time": 1694523405407,
           "name": "post process",
           "object_type": "incident",
           "playbook_handle": "bmc_helix_create_incident",
@@ -2802,7 +2802,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_cb7f4d93-bfb1-406b-93fc-19d29d0e8ce0",
-        "id": 5,
+        "id": 180,
         "name": "playbook_cb7f4d93_bfb1_406b_93fc_19d29d0e8ce0",
         "type": "playbook",
         "uuid": "d4a0446c-0356-424f-b4e6-d5e33d8755d4"
@@ -2810,17 +2810,17 @@
       "tags": [],
       "type": "default",
       "uuid": "cb7f4d93-bfb1-406b-93fc-19d29d0e8ce0",
-      "version": 5
+      "version": 28
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 8131,
-    "major": 46,
+    "build_number": 7899,
+    "major": 45,
     "minor": 0,
-    "version": "46.0.8131"
+    "version": "45.0.7899"
   },
   "tags": [],
   "task_order": [],
@@ -2841,7 +2841,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_assigned_support_organization",
           "hide_notification": false,
-          "id": 4107,
+          "id": 5377,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2858,7 +2858,7 @@
           "templates": [],
           "text": "Assigned Support Organization",
           "tooltip": "BMC Helix assigned support organization",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "1fb4945f-4e2d-46ee-afdc-bc5e82d20762",
           "values": [],
           "width": 98
@@ -2873,7 +2873,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_assigned_to",
           "hide_notification": false,
-          "id": 4108,
+          "id": 5378,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2890,7 +2890,7 @@
           "templates": [],
           "text": "Assigned To",
           "tooltip": "BMC Helix user assigned to the incident",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "30f7f46b-431c-4f10-9f26-bd0de86ab375",
           "values": [],
           "width": 70
@@ -2905,7 +2905,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_company",
           "hide_notification": false,
-          "id": 4109,
+          "id": 5379,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2922,7 +2922,7 @@
           "templates": [],
           "text": "Company",
           "tooltip": "BMC Helix Company assigned to the incident",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "b712d706-a86f-40f4-81c4-afc53ab09db6",
           "values": [],
           "width": 71
@@ -2937,7 +2937,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_created_date",
           "hide_notification": false,
-          "id": 4110,
+          "id": 5380,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -2954,7 +2954,7 @@
           "templates": [],
           "text": "Created Date",
           "tooltip": "Date BMC Heiix incident was created.",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "a90bdc91-2d6f-4bff-ba8b-5efb7820b627",
           "values": [],
           "width": 60
@@ -2969,7 +2969,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_description",
           "hide_notification": false,
-          "id": 4111,
+          "id": 5381,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2986,7 +2986,7 @@
           "templates": [],
           "text": "Description",
           "tooltip": "Description of the incident",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "a0a7de79-7700-4eff-b90c-856b41e8700e",
           "values": [],
           "width": 88
@@ -3001,7 +3001,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_impact",
           "hide_notification": false,
-          "id": 4112,
+          "id": 5382,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3018,7 +3018,7 @@
           "templates": [],
           "text": "Impact",
           "tooltip": "BMC Helix impact status assigned to the incident",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "a1debf95-5d16-4c4c-a7ad-955b938c39c7",
           "values": [],
           "width": 55
@@ -3033,7 +3033,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_incident_number",
           "hide_notification": false,
-          "id": 4113,
+          "id": 5383,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3050,7 +3050,7 @@
           "templates": [],
           "text": "Incident Number",
           "tooltip": "BMC Helix incident number",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "30730571-a04c-4440-a828-ba38d3e88530",
           "values": [],
           "width": 65
@@ -3065,7 +3065,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_organization",
           "hide_notification": false,
-          "id": 4114,
+          "id": 5384,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3082,7 +3082,7 @@
           "templates": [],
           "text": "Organization",
           "tooltip": "BMC Helix organization assigned to the incident",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "8ef4abfb-efb0-4f7f-8653-2ddcbdab253d",
           "values": [],
           "width": 98
@@ -3097,7 +3097,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_priority",
           "hide_notification": false,
-          "id": 4115,
+          "id": 5385,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3114,7 +3114,7 @@
           "templates": [],
           "text": "Priority",
           "tooltip": "BMC Helix priority status assigned to the incident",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "7091aab9-6b2c-4578-84b8-41b12af1e4f1",
           "values": [],
           "width": 57
@@ -3129,7 +3129,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_request_id",
           "hide_notification": false,
-          "id": 4116,
+          "id": 5386,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3146,7 +3146,7 @@
           "templates": [],
           "text": "Request ID",
           "tooltip": "Request ID of the BMC Helix form entry",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "bc0f9471-8775-493c-b3b0-e0b0f86447ba",
           "values": [],
           "width": 63
@@ -3161,7 +3161,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_status",
           "hide_notification": false,
-          "id": 4117,
+          "id": 5387,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3178,7 +3178,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "Last status applied to the BMC Helix Incident",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "bedb0f2e-c3a9-4f53-8699-bb6a72dfd55b",
           "values": [],
           "width": 49
@@ -3193,7 +3193,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/helix_urgency",
           "hide_notification": false,
-          "id": 4118,
+          "id": 5388,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3210,7 +3210,7 @@
           "templates": [],
           "text": "Urgency",
           "tooltip": "BMC Helix urgency status assigned to the incident",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "34e88adc-e2ec-41a0-8d3f-1d2415343500",
           "values": [],
           "width": 62
@@ -3225,7 +3225,7 @@
           "deprecated": false,
           "export_key": "bmc_helix_incidents/soar_task_id",
           "hide_notification": false,
-          "id": 4119,
+          "id": 5389,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3243,7 +3243,7 @@
           "templates": [],
           "text": "SOAR Task ID",
           "tooltip": "ID of the Task and its description",
-          "type_id": 1000,
+          "type_id": 1211,
           "uuid": "bc001b0b-fec4-43b2-99da-7f17c9499802",
           "values": [],
           "width": 43

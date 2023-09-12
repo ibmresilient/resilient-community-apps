@@ -22,11 +22,11 @@
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Additional Data | `bmc_helix_additional_data` | textarea | Addtional key value pairs to send to BMC Helix. Keys must match the incident schema in the BMC Helix system. | Optional |
+| Description | `bmc_helix_description` | text | Optionally, define the description of the Helix form | Optional |
 | Existing Customer First Name | `bmc_helix_customer_first_name` | text | First name of the affected customer. Must be an existing customer on BMC Helix. | Always |
 | Existing Customer Last Name | `bmc_helix_customer_last_name` | text | Last name of the affected customer. Must be an existing customer on BMC Helix. | Always |
 | Impact | `bmc_helix_impact` | select | Impact to assign to the BMC Helix form | Always |
 | Incident Type | `bmc_helix_incident_type` | select | Incident type to assign to the BMC Helix incident. | Always |
-| Note | `bmc_helix_note` | text | Optionally, define the note/description of the Helix form | Optional |
 | Reported Source | `bmc_helix_reported_source` | select | The originating source of this Incident. Must be configured with values present in your BMC Helix system. | Always |
 | Status | `bmc_helix_status` | select | Status to assign to the BMC Helix incident. | Always |
 | Support Group | `bmc_helix_support_group` | select | Support Organization to assign the BMC Helix incident. | Always |
@@ -66,8 +66,8 @@ payload = {
 }
 if getattr(playbook.inputs, "bmc_helix_additional_data").content:
   payload["additional_data"] = playbook.inputs.bmc_helix_additional_data.content
-if getattr(playbook.inputs, "bmc_helix_note"):
-  payload["Description"] = playbook.inputs.bmc_helix_note
+if getattr(playbook.inputs, "bmc_helix_description"):
+  payload["Description"] = playbook.inputs.bmc_helix_description
 if getattr(playbook.inputs, "bmc_helix_template"):
   payload["ApplyTemplate"] = playbook.inputs.bmc_helix_template
 
