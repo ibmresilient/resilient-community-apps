@@ -113,11 +113,10 @@ class FunctionComponent(AppFunctionComponent):
                     # Set the description to the task instructions
                     # Detailed description is the biggest text field we have available to us
                     # Add it to the helix_payload dict
-                    helix_payload["Detailed_Decription"] = clean_html(task.get("instructions"))
+                    helix_payload["Detailed_Decription"] += f"\n{clean_html(task.get('instructions'))}"
 
-            # Add the incident name to the description if one wasn't provided in the inputs
-            if not helix_payload.get("Description"):
-                helix_payload["Description"] = f"IBM SOAR Case {incident_id}: {helix_incident_name}"
+            # Add the incident name to the description and append user given description
+            helix_payload["Description"] = f"IBM SOAR Case {incident_id}: {helix_incident_name}"
 
             # Description has a max length of 100
             if len(helix_payload.get("Description", "")) > 100:
