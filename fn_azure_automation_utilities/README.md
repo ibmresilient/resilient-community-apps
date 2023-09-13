@@ -66,21 +66,21 @@
 
 **IBM SOAR App for Azure Automation**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png)
 
 This app allows interaction with the following Azure Automation resources:
 
-    - Automation Accounts
-    - Activities
-    - Jobs
-    - Runbooks
-    - Nodes
-    - Credentials
-    - Schedules
-    - Modules
-    - Agent Registration
-    - Statistics
-    - Usage
+  - Automation Accounts
+  - Activities
+  - Jobs
+  - Runbooks
+  - Nodes
+  - Credentials
+  - Schedules
+  - Modules
+  - Agent Registration
+  - Statistics
+  - Usage
 
 ### Key Features
 <!--
@@ -113,7 +113,7 @@ If deploying to a SOAR platform with an Edge Gateway, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `45.0.7899`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=47.0.0`.
+* Integration server is running `resilient-circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -145,7 +145,7 @@ The app does support a proxy server.
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient-circuits>=47.0.0
+* resilient-circuits>=45.0.0
 
 ---
 
@@ -160,7 +160,7 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **auth_url** | Yes | `https://login.microsoftonline.com/(tenant_id)/oauth2/v2.0/authorize` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **auth_url** | Yes | `https://login.microsoftonline.com/(tenant_id)/oauth2/v2.0/authorize` | *The auth_url setting is used to get a new refresh token.*|
 | **client_id** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
 | **client_secret** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
 | **refresh_token** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
