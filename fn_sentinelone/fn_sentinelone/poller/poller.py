@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 # Generated with resilient-sdk v50.0.151
 """Poller implementation"""
@@ -217,6 +217,10 @@ class PollerComponent(AppFunctionComponent):
                     soar_case_id = create_soar_case.get("id") # get newly created case_id
 
                     cases_insert += 1
+
+                    # Send note to SentinelOne is parameter is set in app.config
+                    self.app_common.send_case_url_note_to_sentinelone(soar_case_id, entity_id, self.rest_client)
+
                     LOG.info("Created SOAR case %s from %s %s", soar_case_id, ENTITY_LABEL, entity_id)
                 else:
                     soar_case_id = soar_case.get("id")

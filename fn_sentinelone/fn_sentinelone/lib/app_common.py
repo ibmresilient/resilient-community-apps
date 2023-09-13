@@ -7,7 +7,7 @@ import logging
 from urllib.parse import urljoin
 
 from requests.exceptions import JSONDecodeError
-from resilient_lib import IntegrationError, readable_datetime, str_to_bool, validate_fields
+from resilient_lib import IntegrationError, readable_datetime, str_to_bool, validate_fields, build_incident_url
 
 #----------------------------------------------------------------------------------------
 # This module is an open template for you to develop the methods necessary to interact
@@ -46,11 +46,6 @@ DEFAULT_LIMIT = 25
 DEFAULT_SORT_BY = "createdDate"
 DEFAULT_SORT_ORDER = "desc"
 
-# E N D P O I N T S
-# define the endpiont api calls your app will make to the endpoint solution. Below are examples
-#ALERT_URI = "alert/{}/"
-#POLICY_URI = "policy/"
-
 class AppCommon():
     def __init__(self, rc, package_name, app_configs):
         """
@@ -87,21 +82,6 @@ class AppCommon():
 
         self.verify = _get_verify_ssl(app_configs)
 
-        # Specify any additional parameters needed to communicate with your endpoint solution
-
-    def _get_uri(self, cmd):
-        """
-        Build API url
-        <- ::CHANGE_ME:: change this to reflect the correct way to build an API call ->
-
-        :param cmd: portion of API: alerts, endpoints, policies
-        :type cmd: str
-        :return: complete URL
-        :rtype: str
-        """
-        raise IntegrationError("UNIMPLEMENTED")
-        return urljoin(self.endpoint_url, cmd)
-
     def _make_headers(self, token):
         """Build API header using authorization token
 
@@ -116,7 +96,7 @@ class AppCommon():
             'Accept': 'application/json'
         }
         return headers
-    
+
     def make_linkback_url(self, entity_id: str) -> str:
         """
         Create a url to link back to the endpoint entity
@@ -199,8 +179,7 @@ class AppCommon():
         """
         url = u"{0}/agents".format(self.base_url)
 
-        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("GET", url, headers=self.headers, params=params)
 
         return response.json()
 
@@ -213,8 +192,7 @@ class AppCommon():
             'ids': agent_id
         }
 
-        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("GET", url, headers=self.headers, params=params)
         return response.json()
 
     def get_agents_passphrases(self):
@@ -225,8 +203,8 @@ class AppCommon():
             'accountIds': self.account_ids,
             'siteIds': self.site_ids
         }
-        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("GET", url, headers=self.headers, params=params) 
+
         return response.json()
 
     def get_threat_details(self, threat_id):
@@ -238,8 +216,7 @@ class AppCommon():
             'ids': threat_id
         }
 
-        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("GET", url, headers=self.headers, params=params)
         response_json = response.json()
 
         # create linkback url
@@ -258,8 +235,7 @@ class AppCommon():
         nextCursor = "true"
 
         while nextCursor:
-            response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                        verify=self.verify, proxies=self.rc.get_proxies())
+            response = self.rc.execute("GET", url, headers=self.headers, params=params)
 
             response_json = response.json()
             pagination = response_json.get("pagination")
@@ -286,8 +262,7 @@ class AppCommon():
         
         # nextCursor will be null when the list of threat notes is complete.
         while nextCursor:
-            response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                        verify=self.verify, proxies=self.rc.get_proxies())
+            response = self.rc.execute("GET", url, headers=self.headers, params=params)
 
             response_json = response.json()
             pagination = response_json.get("pagination")
@@ -344,8 +319,7 @@ class AppCommon():
             }
         }
 
-        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload)
         return response.json()
 
     def get_system_info(self):
@@ -356,8 +330,7 @@ class AppCommon():
         params = {
         }
 
-        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("GET", url, headers=self.headers, params=params)
 
         return response.json()
 
@@ -366,8 +339,7 @@ class AppCommon():
         """
         url = u"{0}/threats/{1}/download-from-cloud".format(self.base_url, threat_id)
 
-        response = self.rc.execute("GET", url, headers=self.headers,
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("GET", url, headers=self.headers)
         
         response_json = response.json()
         
@@ -376,7 +348,6 @@ class AppCommon():
         threat_filename = data.get("fileName")
 
         response = self.rc.execute("GET", download_url, timeout=self.download_timeout, headers=self.headers, 
-                                    verify=self.verify, proxies=self.rc.get_proxies(),
                                     callback=_download_callback)
 
         datastream = BytesIO(response.content)
@@ -398,8 +369,7 @@ class AppCommon():
             "data": {}
         }
 
-        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload)
 
         return response.json()
 
@@ -415,8 +385,7 @@ class AppCommon():
             "data": {}
         }
 
-        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload)
 
         return response.json()
 
@@ -432,8 +401,7 @@ class AppCommon():
             "data": {}
         }
 
-        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload)
 
         return response.json()
 
@@ -449,8 +417,7 @@ class AppCommon():
             "data": {}
         }
 
-        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload)
 
         return response.json()
 
@@ -466,8 +433,7 @@ class AppCommon():
             "data": {}
         }
 
-        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload)
 
         return response.json()
 
@@ -483,8 +449,7 @@ class AppCommon():
             "data": {}
         }
 
-        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload)
 
         return response.json()
 
@@ -502,8 +467,7 @@ class AppCommon():
             }
         }
 
-        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload)
 
         return response.json()
 
@@ -521,8 +485,7 @@ class AppCommon():
             }
         }
 
-        response = self.rc.execute("POST", url, headers=self.headers, json=payload, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("POST", url, headers=self.headers, json=payload)
         return response.json()
 
     def get_hash_reputation(self, s1_hash):
@@ -533,11 +496,34 @@ class AppCommon():
         params = {
         }
 
-        response = self.rc.execute("GET", url, headers=self.headers, params=params, 
-                                    verify=self.verify, proxies=self.rc.get_proxies())
+        response = self.rc.execute("GET", url, headers=self.headers, params=params)
 
         return response.json()
 
+    def send_case_url_note_to_sentinelone(self, case_id, threat_id, rest_client):
+        """ Send a threat note to the SentinelOne Threat containing the link to the SOAR case
+
+        Args:
+            case_id (dict): [SOAR case id]
+            threat_id (string): [SentinelOne threat Id]
+            rest_client (object): [ SOAR SimpleClient]
+
+        Returns:
+            [string]: [URLto SOAR casae corresponding to the the SentinelOne threat Id]
+        """
+        # If app.config setting says don't sent threat note to SentinelOne then return None
+        if not self.send_soar_link_to_sentinelone:
+            return None
+
+        # Build the SOAR case URL
+        soar_case_url = build_incident_url(rest_client.base_url, case_id)
+
+        # Send a threat note containing the case URL to SentinelOne 
+        case_url_link_note = "IBM SOAR created case {0}: {1}".format(case_id, soar_case_url)
+        self.add_threat_note(threat_id, case_url_link_note, SOAR_HEADER)
+
+        return soar_case_url
+        
 def _download_callback(self, response):
     """
     callback to review status code, 200 - Success
