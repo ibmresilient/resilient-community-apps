@@ -58,7 +58,7 @@ payload = {
   "tags": getattr(playbook.inputs, "azure_automation_account_tags", {}),
   "properties": {
     "publicNetworkAccess": getattr(playbook.inputs, "azure_automation_account_public_network_access", True),
-    "disableLocalAuth": getattr(playbook.inputs, "azure_automation_account_disbale_local_auth", False),
+    "disableLocalAuth": getattr(playbook.inputs, "azure_automation_account_disable_local_auth", False),
     "sku":{
       "name": "Basic"
     }
