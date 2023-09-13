@@ -72,6 +72,7 @@ def codegen_reload_data():
             u"sentinelone_initiate_disk_scan_pb",
             u"sentinelone_resolve_threat_in_sentinelone_pb",
             u"sentinelone_restart_agent_pb",
+            u"sentinelone_send_note_to_sentinelone_threat_pb",
             u"sentinelone_send_soar_note_to_sentinelone_pb",
             u"sentinelone_shutdown_agent_pb",
             u"sentinelone_update_agent_in_data_table_pb",
@@ -117,6 +118,7 @@ def customization_data(client=None):
         - sentinelone_initiate_disk_scan_pb
         - sentinelone_resolve_threat_in_sentinelone_pb
         - sentinelone_restart_agent_pb
+        - sentinelone_send_note_to_sentinelone_threat_pb
         - sentinelone_send_soar_note_to_sentinelone_pb
         - sentinelone_shutdown_agent_pb
         - sentinelone_update_agent_in_data_table_pb

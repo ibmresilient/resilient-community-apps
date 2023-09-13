@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1694611381020,
+  "export_date": 1694618641967,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1090,13 +1090,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 90,
+  "id": 93,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1694611379277,
+      "create_date": 1694618640289,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1105,7 +1105,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1694611379277,
+      "update_date": 1694618640289,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2058,6 +2058,119 @@
       "version": 11
     },
     {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 10,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_55933303_af6a_4c75_a2a5_7ac777940095\" isExecutable=\"true\" name=\"playbook_55933303_af6a_4c75_a2a5_7ac777940095\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1bxkxo5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Send SOAR Note to SentinelOne\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fbf44fc5-ae3d-4e67-ad31-1b79fd87bdb8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id\\ninputs.sentinelone_note_text = note.text.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"send_note_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1bxkxo5\u003c/incoming\u003e\u003coutgoing\u003eFlow_0meys1l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1bxkxo5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Add sent header to SOAR note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"162a63e2-28a2-4a7b-b6b7-03d86184690f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0meys1l\u003c/incoming\u003e\u003coutgoing\u003eFlow_17ri8ji\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0meys1l\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_17ri8ji\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_17ri8ji\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_55933303_af6a_4c75_a2a5_7ac777940095\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17ri8ji\" id=\"Flow_17ri8ji_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"384\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0meys1l\" id=\"Flow_0meys1l_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"232\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"268\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1bxkxo5\" id=\"Flow_1bxkxo5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"148\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"268\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"384\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1693231767738,
+      "creator_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_55933303_af6a_4c75_a2a5_7ac777940095",
+      "description": {
+        "content": "Send a note created in SOAR to the corresponding SentinelOne threat as a threat note.",
+        "format": "text"
+      },
+      "display_name": "SentinelOne: Send Note to SentinelOne Threat (PB)",
+      "export_key": "sentinelone_send_note_to_sentinelone_threat_pb",
+      "field_type_handle": "playbook_55933303_af6a_4c75_a2a5_7ac777940095",
+      "fields_type": {
+        "actions": [],
+        "display_name": "SentinelOne: Send Note to SentinelOne Threat (PB)",
+        "export_key": "playbook_55933303_af6a_4c75_a2a5_7ac777940095",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_55933303_af6a_4c75_a2a5_7ac777940095",
+        "uuid": "f42cf019-02a7-4e4d-b59e-ea63c7aaf055"
+      },
+      "has_logical_errors": false,
+      "id": 29,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1694610204658,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1693232130916,
+          "description": " Add sent header to SOAR note so it is only sent once.",
+          "enabled": false,
+          "export_key": "SentinelOne: Add sent header to SOAR note",
+          "id": 36,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1693248111954,
+          "name": "SentinelOne: Add sent header to SOAR note",
+          "object_type": "note",
+          "playbook_handle": "sentinelone_send_note_to_sentinelone_threat_pb",
+          "programmatic_name": "sentinelone_send_note_to_sentinelone_threat_pb_sentinelone_add_sent_header_to_soar_note",
+          "script_text": "from datetime import datetime\n\nresults = playbook.functions.results.send_note_results\n\n# Edit note in SOAR to indicate it was sent to SentinelOne\nif results.get(\"success\"):\n  # Get the current time\n  dt_now = datetime.now()\n  \n  # Add header to note so we know it\u0027s been sent to S1 once\n  note.text = \"\u003cb\u003eSent to SentinelOne at {0}\u003c/b\u003e\u003cbr\u003e{1}\".format(dt_now, note.text.content)",
+          "tags": [],
+          "uuid": "162a63e2-28a2-4a7b-b6b7-03d86184690f"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.sentinelone_threat_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "note.text",
+              "method": "not_contains",
+              "type": null,
+              "value": "Sent to SentinelOne at "
+            }
+          ],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "sentinelone_send_note_to_sentinelone_threat_pb",
+      "object_type": "note",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_55933303-af6a-4c75-a2a5-7ac777940095",
+        "id": 31,
+        "name": "playbook_55933303_af6a_4c75_a2a5_7ac777940095",
+        "type": "playbook",
+        "uuid": "22a3e8a2-77f2-4763-96a2-5938bab3eeeb"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "55933303-af6a-4c75-a2a5-7ac777940095",
+      "version": 15
+    },
+    {
       "activation_details": {
         "activation_conditions": {
           "conditions": [
@@ -2088,7 +2201,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 6,
+        "content_version": 8,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\" isExecutable=\"true\" name=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0feam4k\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Send SOAR Note to SentinelOne\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fbf44fc5-ae3d-4e67-ad31-1b79fd87bdb8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id\\ninputs.sentinelone_note_text = note.text.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"send_note_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0feam4k\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ev7vmx\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0feam4k\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Add Header to indicate note was sent to SentinelOne\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"518e8850-8a62-4d29-a7d1-baf3ace93147\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ev7vmx\u003c/incoming\u003e\u003coutgoing\u003eFlow_1j5gog2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ev7vmx\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1j5gog2\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1j5gog2\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_47bec986_769f_4ce4_ba97_a2f766568601\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1j5gog2\" id=\"Flow_1j5gog2_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ev7vmx\" id=\"Flow_1ev7vmx_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0feam4k\" id=\"Flow_0feam4k_di\"\u003e\u003comgdi:waypoint x=\"720\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"639\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1692724939695,
@@ -2140,7 +2253,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694535162594,
+      "last_modified_time": 1694618315137,
       "local_scripts": [
         {
           "actions": [],
@@ -2174,7 +2287,7 @@
       "tags": [],
       "type": "default",
       "uuid": "47bec986-769f-4ce4-ba97-a2f766568601",
-      "version": 10
+      "version": 12
     },
     {
       "activation_type": "manual",
