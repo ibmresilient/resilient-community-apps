@@ -46,9 +46,9 @@ inputs.incident_id = incident.id
 # These values will be added/updated on the target Helix incident,
 # so they must conform with the "HPD:IncidentInterface_Create" schema
 payload = {
-  "Status_Reason": "No further action required",
+  "Status_Reason": "No Further Action Required",
   "Status": "Resolved",
-  "Resolution": " Closed from IBM SOAR"
+  "Resolution": "Closed from IBM SOAR"
 }
 
 inputs.helix_payload = str(payload)
