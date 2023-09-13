@@ -2,9 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 # Generated with resilient-sdk v50.0.151
-
 import logging
-from urllib.parse import urljoin
 
 from requests.exceptions import JSONDecodeError
 from resilient_lib import IntegrationError, readable_datetime, str_to_bool, validate_fields, build_incident_url
@@ -305,7 +303,7 @@ class AppCommon():
     def add_threat_note(self, threat_id: str, note_text: str, comment_header: str) -> dict:
         """ Add threat note to a threat
         """
-        url = u"{0}/threats/notes".format(self.base_url, threat_id)
+        url = u"{0}/threats/notes".format(self.base_url)
 
         if comment_header:
             note_text = "{}:\n  {}".format(comment_header, note_text)
@@ -333,29 +331,6 @@ class AppCommon():
         response = self.rc.execute("GET", url, headers=self.headers, params=params)
 
         return response.json()
-
-    def download_from_cloud(self, threat_id):
-        """ Get download a threat file from cloud
-        """
-        url = u"{0}/threats/{1}/download-from-cloud".format(self.base_url, threat_id)
-
-        response = self.rc.execute("GET", url, headers=self.headers)
-        
-        response_json = response.json()
-        
-        data = response_json.get("data")
-        download_url = data.get("downloadUrl")
-        threat_filename = data.get("fileName")
-
-        response = self.rc.execute("GET", download_url, timeout=self.download_timeout, headers=self.headers, 
-                                    callback=_download_callback)
-
-        datastream = BytesIO(response.content)
-
-        return {"threat_filename": threat_filename,
-                "datastream": datastream,
-                "download_url": download_url 
-            }
 
     def connect_to_network(self, agents_id):
         """ Connect the endpoint to the network
