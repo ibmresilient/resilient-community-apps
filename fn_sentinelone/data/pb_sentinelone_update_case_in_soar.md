@@ -16,7 +16,7 @@
 `Automatic`
 
 ### Activation Conditions
-`incident.plan_status equals Active AND incident.properties.sentinelone_threat_id has_a_value AND object_added`
+`incident.properties.sentinelone_threat_id has_a_value AND object_added`
 
 ### Object Type
 `incident`

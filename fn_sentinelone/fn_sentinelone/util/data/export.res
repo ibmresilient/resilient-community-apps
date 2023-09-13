@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1694548585904,
+  "export_date": 1694611381020,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1090,13 +1090,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 87,
+  "id": 90,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1694548584178,
+      "create_date": 1694611379277,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1105,7 +1105,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1694548584178,
+      "update_date": 1694611379277,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2390,7 +2390,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 9,
+        "content_version": 10,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_bb713a02_68fa_47c4_942c_cb0054aac3b9\" isExecutable=\"true\" name=\"playbook_bb713a02_68fa_47c4_942c_cb0054aac3b9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1c8zhoq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Sentinelone: Update Threat Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"174b4b88-28d3-4596-97af-abbb3aef87f3\"\u003e{\"inputs\":{\"f0f85d50-0f6e-4a99-9b5c-a568c69772ce\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"e823e746-184b-4ae8-9b7e-ce7f6d99d19e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"8e342407-677a-450f-b7d1-3cb9a231f2be\"}},\"e0ed407a-e9e0-40f8-b46b-5167eab16a70\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"55fe7fb5-9ad9-4588-bc2b-cac8cf797a2c\"}}},\"pre_processing_script\":\"inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id\\ninputs.sentinelone_threat_status = playbook.inputs.sentinelone_threat_status\\ninputs.sentinelone_threat_analyst_verdict = playbook.inputs.sentinelone_threat_analyst_verdict\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"update_status_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1c8zhoq\u003c/incoming\u003e\u003coutgoing\u003eFlow_0clmfjg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1c8zhoq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1w7pguc\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"SentinelOne: Update Threat Status and Analyst Verdict results \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"aa660a03-23ff-4474-b519-bc7df20bdc86\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0clmfjg\u003c/incoming\u003e\u003coutgoing\u003eFlow_1w7pguc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0clmfjg\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1w7pguc\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_bb713a02_68fa_47c4_942c_cb0054aac3b9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1w7pguc\" id=\"Flow_1w7pguc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0clmfjg\" id=\"Flow_0clmfjg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1c8zhoq\" id=\"Flow_1c8zhoq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1693234506309,
@@ -2437,7 +2437,7 @@
             "rich_text": false,
             "tags": [],
             "templates": [],
-            "text": "Threat Analyst Verdict",
+            "text": "Analyst Verdict",
             "tooltip": "Select the SentinelOne incidentStatus",
             "type_id": 1032,
             "uuid": "a0a6737f-6a25-4340-94a7-24d41d652ff2",
@@ -2568,7 +2568,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694464769356,
+      "last_modified_time": 1694552905803,
       "local_scripts": [
         {
           "actions": [],
@@ -2634,19 +2634,12 @@
       "tags": [],
       "type": "default",
       "uuid": "bb713a02-68fa-47c4-942c-cb0054aac3b9",
-      "version": 15
+      "version": 16
     },
     {
       "activation_details": {
         "activation_conditions": {
           "conditions": [
-            {
-              "evaluation_id": null,
-              "field_name": "incident.plan_status",
-              "method": "equals",
-              "type": null,
-              "value": "Active"
-            },
             {
               "evaluation_id": null,
               "field_name": "incident.properties.sentinelone_threat_id",
@@ -2667,7 +2660,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 18,
+        "content_version": 20,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_c4d419dd_4143_4585_8544_ec638e350f1b\" isExecutable=\"true\" name=\"playbook_c4d419dd_4143_4585_8544_ec638e350f1b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_081rbam\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Get Threat Details\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2a2f6e9e-0fda-428e-adc0-cf0e7ca833fd\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_threat_details_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_081rbam\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qov47s\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_081rbam\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Update Case with threat info\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f4aa44ce-9fcf-4141-bd87-6f703743c685\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qov47s\u003c/incoming\u003e\u003coutgoing\u003eFlow_1b3j6nj\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1qov47s\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1b3j6nj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1b3j6nj\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c4d419dd_4143_4585_8544_ec638e350f1b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1b3j6nj\" id=\"Flow_1b3j6nj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qov47s\" id=\"Flow_1qov47s_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"232\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_081rbam\" id=\"Flow_081rbam_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"148\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1694539424463,
@@ -2719,7 +2712,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694547946869,
+      "last_modified_time": 1694608816458,
       "local_scripts": [
         {
           "actions": [],
@@ -2753,7 +2746,7 @@
       "tags": [],
       "type": "default",
       "uuid": "c4d419dd-4143-4585-8544-ec638e350f1b",
-      "version": 22
+      "version": 24
     },
     {
       "activation_type": "manual",

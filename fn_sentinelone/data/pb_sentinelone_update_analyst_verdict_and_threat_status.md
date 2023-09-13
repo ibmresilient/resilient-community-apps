@@ -21,7 +21,7 @@
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| Threat Analyst Verdict | `sentinelone_threat_analyst_verdict` | select | Select the SentinelOne incidentStatus | Always |
+| Analyst Verdict | `sentinelone_threat_analyst_verdict` | select | Select the SentinelOne incidentStatus | Always |
 | Threat Status | `sentinelone_threat_status` | select | - | Always |
 
 ### Object Type

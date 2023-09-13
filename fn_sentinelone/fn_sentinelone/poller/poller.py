@@ -95,7 +95,7 @@ def is_entity_closed(entity):
     :rtype: bool
     """
     threat_info = entity.get("threatInfo")
-    return bool(threat_info.get(ENTITY_CLOSE_FIELD, False))
+    return bool(threat_info.get(ENTITY_CLOSE_FIELD, False) in ['resolved', 'Resolved'])
 
 class PollerComponent(AppFunctionComponent):
     """
@@ -110,7 +110,6 @@ class PollerComponent(AppFunctionComponent):
         :type opts: dict
         """
         # Validate required fields in app.config are set
-        # <::CHANGE_ME:: change this validation to include all the fields required in the app.config file >
         required_fields = ["sentinelone_server", "api_token", "api_version"]
         super(PollerComponent, self).__init__(opts, PACKAGE_NAME, required_app_configs=required_fields)
 

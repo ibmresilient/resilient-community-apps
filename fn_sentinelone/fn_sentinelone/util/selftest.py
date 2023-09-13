@@ -21,7 +21,7 @@ Return examples:
 
 import logging
 from resilient_lib import validate_fields, IntegrationError, RequestsCommon
-from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
+from fn_sentinelone.lib.app_common import (AppCommon, PACKAGE_NAME)
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -40,11 +40,11 @@ def selftest_function(opts):
 
     # Create api client
     rc = RequestsCommon(opts, app_configs)
-    sentinelone_client = SentinelOneClient(opts, app_configs)
+    app_common = AppCommon(rc, PACKAGE_NAME, app_configs)
 
     reason = None
     try:
-        state = "success" if sentinelone_client.get_system_info() else "failure"
+        state = "success" if app_common.get_system_info() else "failure"
     except IntegrationError as err:
         state = "failure"
         reason = str(err)

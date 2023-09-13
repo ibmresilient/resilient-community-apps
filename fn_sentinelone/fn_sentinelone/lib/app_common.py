@@ -38,6 +38,10 @@ HEADER = { 'Content-Type': 'application/json' }
 # URL prefix to refer back to your console for a specific alert, event, etc.
 LINKBACK_URL = "https://{server}/incidents/threats/{threat_id}/overview"
 
+IBM_SOAR = "IBM SOAR" # common label
+SOAR_HEADER = "Created by {}".format(IBM_SOAR)
+ENTITY_COMMENT_HEADER = "Created by SentinelOne"
+
 DEFAULT_LIMIT = 25
 DEFAULT_SORT_BY = "createdDate"
 DEFAULT_SORT_ORDER = "desc"
@@ -297,10 +301,39 @@ class AppCommon():
 
         return threat_notes
 
-    def add_threat_note(self, threat_id, note_text):
+    def format_threat_note(self, comment: dict) -> str:
+        """Format a Salesforce comment 
+        Args:
+            comment (_type_): Salesforce comment (json object)
+        Returns:
+            str : formatted string
+        """
+        comment_body = comment.get('text', None)
+        if comment_body:
+            created_at = comment.get('createdAt',"NA")
+            creator = comment.get("creator", None)
+            created_by_id = comment.get('creatorId', None)
+            if creator:
+                created_by = creator
+            elif created_by_id:
+                created_by = created_by_id
+            else:
+                created_by = "Not available"
+
+            text = f"{comment_body}<br><br>Created at: {created_at}<br>By: {created_by}"
+
+            # Add entity comment header
+            note = "<b>{}:</b><br>{}".format(ENTITY_COMMENT_HEADER, text)
+            return note
+        return None
+ 
+    def add_threat_note(self, threat_id: str, note_text: str, comment_header: str) -> dict:
         """ Add threat note to a threat
         """
         url = u"{0}/threats/notes".format(self.base_url, threat_id)
+
+        if comment_header:
+            note_text = "{}:\n  {}".format(comment_header, note_text)
 
         payload = {
             "filter": {

@@ -1,4 +1,4 @@
-# Generated with resilient-sdk v50.0.141
+# Generated with resilient-sdk v50.0.151
 # docker build -t ibmresilient/fn_sentinelone:1.0.1 -t ibmresilient/fn_sentinelone:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
