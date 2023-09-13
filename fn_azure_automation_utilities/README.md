@@ -160,14 +160,15 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **auth_url** | Yes | `https://login.microsoftonline.com/(tenant_id)/oauth2/v2.0/authorize` | *The auth_url setting is used to get a new refresh token.*|
-| **client_id** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **client_secret** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **refresh_token** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **scope** | Yes | `https://management.azure.com/user_impersonation openid profile offline_access` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **subscription_id** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **tenant_id** | Yes | `` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **token_url** | Yes | `https://login.microsoftonline.com/(tenant_id)/oauth2/v2.0/token` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **auth_url** | Yes | `https://login.microsoftonline.com/(tenant_id)/oauth2/v2.0/authorize` | *The auth_url setting is used to get a new refresh token.* |
+| **client_id** | Yes | `` | *Azure AD Application client ID* |
+| **client_secret** | Yes | `` | *Azure AD Application client secret* |
+| **refresh_token** | Yes | `` | *The refresh token used to obtain a new access token (for refresh token grant)* |
+| **scope** | Yes | `https://management.azure.com/user_impersonation openid profile offline_access` | *Scopes are a way to limit the amount of access that is granted to an access token.* |
+| **subscription_id** | Yes | `` | *Azure subscription ID* |
+| **tenant_id** | Yes | `` | *Azure AD Application tenant ID* |
+| **token_url** | Yes | `https://login.microsoftonline.com/(tenant_id)/oauth2/v2.0/token` | *The token_url setting is used to get a new access token.* |
+| **https_proxy** | No | `https://proxy:443` | *Proxy url and port* |
 
 
 ---
