@@ -29,7 +29,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| v2.1.0 | 5/2023 | Added message signing and encryption capabilities |
+| v2.1.0 | 5/2023 | Added message signing and encryption capabilities. Replaced workflows with playbooks |
 | v2.0.2 | 12/2022 | Bug fix when specifying your own default template |
 | v2.0.1 | 10/2022 | Bug fix |
 | v2.0.0 | 10/2022 | Added OAuth 2.0 support for SMTP. Multiple out of box changes |
