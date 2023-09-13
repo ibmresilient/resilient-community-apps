@@ -4,6 +4,7 @@ include apikey_permissions.txt
 include entrypoint.sh
 recursive-include fn_sentinelone/lib *
 recursive-include fn_sentinelone/util *
+recursive-include fn_sentinelone/poller *
 include fn_sentinelone/LICENSE
 include doc/*.md
 include doc/screenshots/*
