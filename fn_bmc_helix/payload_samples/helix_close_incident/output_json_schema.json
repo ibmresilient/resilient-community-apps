@@ -13,9 +13,6 @@
       "type": "object",
       "properties": {
         "closed": {
-          "type": "array"
-        },
-        "skipped": {
           "type": "array",
           "items": {
             "type": "object",
@@ -252,7 +249,9 @@
                   "Status_Reason": {
                     "type": "string"
                   },
-                  "Detailed Decription": {},
+                  "Detailed Decription": {
+                    "type": "string"
+                  },
                   "Resolution": {
                     "type": "string"
                   },
@@ -379,6 +378,9 @@
               }
             }
           }
+        },
+        "skipped": {
+          "type": "array"
         }
       }
     },

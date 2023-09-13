@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-"""Generate Mock responses to simulate BMC Helix Datatable for Unit and function tests """
+""" Generate Mock responses to simulate BMC Helix Datatable for Unit and function tests """
 
 def mock_init():
     class MockDT(object):

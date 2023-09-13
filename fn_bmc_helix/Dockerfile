@@ -4,7 +4,7 @@
 FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_bmc_helix
-ARG RESILIENT_CIRCUITS_VERSION=39
+ARG RESILIENT_CIRCUITS_VERSION=45
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container

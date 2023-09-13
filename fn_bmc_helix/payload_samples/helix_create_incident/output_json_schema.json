@@ -359,9 +359,6 @@
         },
         "helix_incident_name": {
           "type": "string"
-        },
-        "task_id": {
-          "type": "integer"
         }
       }
     },

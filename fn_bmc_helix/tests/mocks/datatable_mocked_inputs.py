@@ -6,6 +6,7 @@ GET_ROW_MOCKED_INPUT = {
     "datatable_search_column": "dt_col_email",
     "datatable_search_value": "joe@example.com"
 }
+
 GET_ROW_MOCKED_OUTPUT = {
     u'id': 1,
     u'cells': {
@@ -27,33 +28,32 @@ GET_ROWS_MOCKED_INPUT = {
 }
 
 GET_ROWS_MOCKED_OUTPUT = [
-        {
-            u'id': 3,
-            u'cells': {
-                u'dt_col_name': {
-                    u'id': u'dt_col_name',
-                    u'value': u'Mary Blogs',
-                    u'row_id': 3
-                },
-                u'dt_col_email': {
-                    u'id': u'dt_col_email',
-                    u'value': u'mary@example.com',
-                    u'row_id': 3
-                },
-                u'dt_col_status': {
-                    u'id': u'dt_col_status',
-                    u'value': u'Active',
-                    u'row_id': 3
-                },
-                u'dt_col_id': {
-                    u'id': u'dt_col_id',
-                    u'value': 3003,
-                    u'row_id': 3
-                }
+    {
+        u'id': 3,
+        u'cells': {
+            u'dt_col_name': {
+                u'id': u'dt_col_name',
+                u'value': u'Mary Blogs',
+                u'row_id': 3
+            },
+            u'dt_col_email': {
+                u'id': u'dt_col_email',
+                u'value': u'mary@example.com',
+                u'row_id': 3
+            },
+            u'dt_col_status': {
+                u'id': u'dt_col_status',
+                u'value': u'Active',
+                u'row_id': 3
+            },
+            u'dt_col_id': {
+                u'id': u'dt_col_id',
+                u'value': 3003,
+                u'row_id': 3
             }
         }
-    ]
-
+    }
+]
 
 UPDATE_ROW_MOCKED_INPUT = {
     "incident_id": 1001,
@@ -73,7 +73,6 @@ UPDATE_ROW_MOCKED_OUTPUT = {
         u'dt_col_status': {u'id': u'dt_col_status', u'row_id': 1, u'value': u'Complete'}
     }
 }
-
 
 DELETE_ROW_MOCKED_INPUT = {
     "incident_id": 1001,

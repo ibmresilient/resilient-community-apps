@@ -7,7 +7,7 @@ from logging import getLogger
 from fn_bmc_helix.lib.datatable.data_table import Datatable
 from fn_bmc_helix.lib.helix.HelixAPIClient import HelixClient
 from fn_bmc_helix.lib.helix.HelixConstants import PACKAGE_NAME, TABLE_NAME
-from resilient_lib import validate_fields, IntegrationError
+from resilient_lib import validate_fields, IntegrationError, clean_html
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function, FunctionError)
 
@@ -75,7 +75,7 @@ class FunctionComponent(AppFunctionComponent):
                     skipped.append(incident)
                     continue  # Move on to the next row
                 # Close the incident if not already closed
-                closed, skipped = self.update_incident_values(helix_client, closed, skipped, incident, helix_payload)
+                closed, skipped = self.update_helix_incident_values(helix_client, closed, skipped, incident, helix_payload)
                 self.update_datatable_row(row["id"], {"helix_status": "Closed"}, incident_id)
 
         return {"closed": closed, "skipped": skipped}, True, None
@@ -94,7 +94,7 @@ class FunctionComponent(AppFunctionComponent):
         dt.get_data()
         dt.update_row(row_id, row)
 
-    def update_incident_values(self, helix_client, closed, skipped, incident, helix_payload):
+    def update_helix_incident_values(self, helix_client, closed, skipped, incident, helix_payload):
         """Updates the values dictionary of a BMC Helix incident to indicate the incident is closed.
 
         :param helix_client: BMC Helix API client
@@ -112,9 +112,14 @@ class FunctionComponent(AppFunctionComponent):
         """
         request_id = incident["values"]["Request ID"]
         if incident["values"]["Status"] not in CLOSED_LIST:
-            helix_payload["Status"] = "Resolved"
-            helix_payload["Status_Reason"] = "No Further Action Required"
-            helix_payload["Resolution"] = "Closed from IBM SOAR"
+            if not helix_payload.get("Status"): # If status not given set to Resolved
+                helix_payload["Status"] = "Resolved"
+            if not helix_payload.get("Status_Reason"): # If Status_Reason not given set to No Further Action Required
+                helix_payload["Status_Reason"] = "No Further Action Required"
+            if not helix_payload.get("Resolution"): # If Resolution not given set to Closed from IBM SOAR
+                helix_payload["Resolution"] = "Closed from IBM SOAR"
+            else: # Remove html from Resolution
+                helix_payload["Resolution"] = clean_html(helix_payload.get("Resolution"))
             incident, _ = helix_client.update_form_entry(FORM_NAME, request_id, helix_payload)
             closed.append(incident)
             LOG.info(f"Successfully closed Request ID {request_id}")
@@ -176,15 +181,14 @@ class FunctionComponent(AppFunctionComponent):
                                  port=self.options.get("helix_port"),
                                  verify=self.rc.get_verify())
 
-            if task_id:
-                # Instantiate a SOAR API client
+            if task_id: # If run from a BMC Helix linked SOAR task
                 # Get the task data
                 task = self.rest_client().get(f"/tasks/{task_id}")
                 results, success, reason = self.close_helix_incident(incident_id, task, client, helix_payload)
             else: # If run from a BMC Helix linked SOAR case
                 incident, _ = client.get_form_entry(FORM_NAME, bmc_helix_request_id)
                 # Close the incident if not already closed
-                closed, skipped = self.update_incident_values(client, [], [], incident, helix_payload)
+                closed, skipped = self.update_helix_incident_values(client, [], [], incident, helix_payload)
                 results = {"closed": closed, "skipped": skipped}
                 success = True
                 reason = None

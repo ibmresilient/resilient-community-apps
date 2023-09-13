@@ -21,7 +21,7 @@
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| Additional Data | `bmc_helix_additional_data` | textarea | Addtional key value pairs to send to BMC Helix. Keys must match the incident schema in the BMC Helix system. | Optional |
+| Additional Data | `bmc_helix_additional_data` | textarea | Additional key value pairs to send to BMC Helix. Keys must match the incident schema in the BMC Helix system. | Optional |
 | Description | `bmc_helix_description` | text | Optionally, define the description of the Helix form | Optional |
 | Existing Customer First Name | `bmc_helix_customer_first_name` | text | First name of the affected customer. Must be an existing customer on BMC Helix. | Always |
 | Existing Customer Last Name | `bmc_helix_customer_last_name` | text | Last name of the affected customer. Must be an existing customer on BMC Helix. | Always |

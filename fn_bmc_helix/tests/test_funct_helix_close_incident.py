@@ -4,7 +4,6 @@
 import pytest
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-import json
 from mock import patch
 from mocks import helix_dt_mock, helix_mock
 

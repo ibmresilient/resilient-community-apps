@@ -5,11 +5,11 @@ import json
 import six
 
 class DTResilientMock(BasicResilientMock):
-    """DTResilientMock a Mock class which inherits the base
-    endpoints and adds mock endpoints for the DataTable object
+    """
+    DTResilientMock a Mock class which inherits the base endpoints and adds mock endpoints for the DataTable object
     for testing.
 
-    :param BasicResilientMock: A mock object which covers some of the most common endpoints, this class inherits from it to avoid you needing to use it seperately
+    :param BasicResilientMock: A mock object which covers some of the most common endpoints, this class inherits from it to avoid you needing to use it separately
     :type BasicResilientMock: object
     """
     mock_data_table_rows = [

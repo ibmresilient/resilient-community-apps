@@ -6,7 +6,7 @@
 DEFAULT_HTTPS_PORT = 8443
 
 # Interpreted values
-HTTPS_BASE_URL = lambda host, port: "https://{0}:{1}/api".format(host, str(port))
+HTTPS_BASE_URL = lambda host, port: f"https://{host}:{str(port)}/api"
 
 PACKAGE_NAME = "fn_bmc_helix"
 TABLE_NAME = "bmc_helix_incidents"

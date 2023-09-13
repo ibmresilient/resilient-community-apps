@@ -7,12 +7,10 @@ from mocks.datatable_mocked_inputs import *
 
 @pytest.fixture(scope="class")
 def mocked_res_client():
-    """mocked_res_client a pytest fixture which
-    uses the SOAR package to get a mocked client.
-    Calls resilient.get_client() with mocked user values
-    and also passes a custom mock module 
-    which has definitions to mock certain
-    SOAR/CP4S Datatable endpoints
+    """
+    mocked_res_client a pytest fixture which uses the SOAR package to get a mocked client.
+    Calls resilient.get_client() with mocked user values and also passes a custom mock module
+    which has definitions to mock certain SOAR/CP4S Datatable endpoints.
 
     :return: A mocked ResClient
     :rtype: SimpleClient
@@ -25,11 +23,9 @@ def mocked_res_client():
         "resilient_mock": "mocks.datatable_mock.DTResilientMock"})
     return mocked_res_client
 
-
 class TestDataTable():
-    """TestDataTable a Test Module
-    which is used verify functionality 
-    of the Datatable class. 
+    """
+    TestDataTable a Test Module which is used verify functionality of the Datatable class.
 
     Each test uses a pytest fixture - mocked_res_client
     This fixture instantiates a resilient_client with mocked info
@@ -37,11 +33,9 @@ class TestDataTable():
     """
 
     def test_get_row(self, mocked_res_client):
-        """test_get_row gathers both a mocked input and output
-        initializes a datatable object with some mocked inputs
-        and then attempts to call get_row with the other
-        mocked inputs.
-
+        """
+        test_get_row gathers both a mocked input and output.
+        Initializes a datatable object with some mocked inputs and then attempts to call get_row with the other mocked inputs.
         Afterwards verify the result with the mocked outputs
 
         :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable SOAR Mock for endpoints
@@ -62,12 +56,10 @@ class TestDataTable():
         assert row['id'] == output['id']
 
     def test_get_rows(self, mocked_res_client):
-        """test_get_rows gathers both a mocked input and output
-        initializes a datatable object with some mocked inputs
-        and then attempts to call get_rows with the other
-        mocked inputs.
-
-        Afterwards verify the result with the mocked outputs
+        """
+        test_get_rows gathers both a mocked input and output.
+        Initializes a datatable object with some mocked inputs and then attempts to call get_rows with the other mocked inputs.
+        Afterwards verify the result with the mocked outputs.
 
         :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable SOAR Mock for endpoints
         :type mocked_res_client: fixture
@@ -89,11 +81,10 @@ class TestDataTable():
         assert len(rows[0]['cells']) == len(output[0]['cells'])
 
     def test_update_row(self, mocked_res_client):
-        """test_update_row gathers both a mocked input and output
-        initializes a datatable object with some mocked inputs
-        and then attempts to call update_row with the other
+        """
+        test_update_row gathers both a mocked input and output.
+        Initializes a datatable object with some mocked inputs and then attempts to call update_row with the other
         mocked inputs.
-
         Afterwards verify the result with the mocked outputs
 
         :param mocked_res_client: A instance of ResClient with mocked values and a custom Datatable SOAR Mock for endpoints
@@ -113,7 +104,7 @@ class TestDataTable():
             inputs["datatable_row_id"], inputs["datatable_cells_to_update"])
 
         assert updated_row
-        
+
         for cell_key in updated_row['cells'].keys():
             assert cell_key in output['cells'].keys()
             assert updated_row['cells'][cell_key]['value'] == output['cells'][cell_key]['value']

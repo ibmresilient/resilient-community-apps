@@ -45,7 +45,11 @@ inputs.bmc_helix_request_id = incident.properties.bmc_helix_request_id
 # Use this section to add key, value pairs to send to Helix
 # These values will be added/updated on the target Helix incident,
 # so they must conform with the "HPD:IncidentInterface_Create" schema
-payload = {"Status_Reason": "Done"}
+payload = {
+  "Status_Reason": "No Further Action Required",
+  "Status": "Resolved",
+  "Resolution": f"{incident.resolution_summary.content}\nClosed from IBM SOAR"
+}
 
 inputs.helix_payload = str(payload)
 ```
@@ -75,18 +79,19 @@ if results.get("success"):
   if closed:
     noteText += "<p>The following incidents were matched in Helix and successfully closed:</p>"
     for item in closed:
-      noteText += "<p>    Incident Number {}, Request ID: {}</p>".format(item.get("values", {}).get("Incident Number"), item.get("values", {}).get("Request ID"))
+      item_values = item.get("values", {})
+      noteText += f"<p>    Incident Number {item_values.get('Incident Number')}, Request ID: {item_values.get('Request ID')}</p>"
   if skipped:
     noteText += "<p>The following incidents were not able to be closed. Common reasons include that the incident has been previously closed, " \
     "the incident has been deleted, or the payload sent to Helix was incomplete according to the requirements of your specific system:</p>"
     for item in skipped:
-      noteText += "<p>    Incident Number {}, Request ID: {}</p>".format(item.get("values", {}).get("Incident Number"), item.get("values", {}).get("Request ID"))
-  incident.properties.bmc_helix_status = "Closed"
+      item_values = item.get("values", {})
+      noteText += f"<p>    Incident Number {item_values.get('Incident Number')}, Request ID: {item_values.get('Request ID')}</p>"
 elif not closed and not skipped:
   # no sync to helix, just exit
   noteText = None
 else:
-  noteText += "<p>Function failed to complete. Reason: {}</p>".format(results.get("reason"))
+  noteText += f"<p>Function failed to complete. Reason: {results.get('reason')}</p>"
 
 if noteText:
   richText = helper.createRichText(noteText)

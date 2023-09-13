@@ -3,20 +3,19 @@
   "success": true,
   "reason": null,
   "content": {
-    "closed": [],
-    "skipped": [
+    "closed": [
       {
         "values": {
-          "Request ID": "INC000000000110|INC000000000110",
+          "Request ID": "INC000000005009|INC000000005009",
           "Submitter": "Ian_Agent",
-          "Submit Date": "2023-06-22T12:56:30.000+0000",
-          "Assignee Login ID": "Sally Agent",
+          "Submit Date": "2023-09-13T11:46:13.000+0000",
+          "Assignee Login ID": "Agent",
           "Last Modified By": "Ian_Agent",
-          "Last Modified Date": "2023-06-22T14:30:49.000+0000",
+          "Last Modified Date": "2023-09-13T11:47:25.000+0000",
           "Status": "Resolved",
           "Assignee Groups": "1000000005;'Ian_Agent';",
-          "InstanceId": "AGGADOP1EB0FUARWNNYGRWNNYGE04Q",
-          "Record ID": "AGGADOP1EB0FUARWNNYGRWNNYGE04Q|AGGADOP1EB0FUARWNNYGRWNNYGE04Q",
+          "InstanceId": "AGGI8NI7JMR52ASAX0BBSAX0BB0EN3",
+          "Record ID": "AGGI8NI7JMR52ASAX0BBSAX0BB0EN3|AGGI8NI7JMR52ASAX0BBSAX0BB0EN3",
           "Vendor Assignee Groups": null,
           "Vendor Assignee Groups_parent": null,
           "Assignee Groups_parent": "",
@@ -42,7 +41,7 @@
           "SRInstanceID": "NA",
           "zTmpEventGUID": null,
           "AppInterfaceForm": null,
-          "Entry ID": "INC000000000110",
+          "Entry ID": "INC000000005009",
           "z1D_Activity_Type": null,
           "z1D_Summary": null,
           "z1D_Details": null,
@@ -98,7 +97,7 @@
           "Chat Session ID": null,
           "Modified Chat Session ID": null,
           "Auto Open Session": null,
-          "TimeOfEvent": "2023-06-22T12:56:30.000+0000",
+          "TimeOfEvent": "2023-09-13T11:46:13.000+0000",
           "FirstWIPDate": null,
           "LastWIPDate": null,
           "Broker Vendor Name": null,
@@ -112,7 +111,7 @@
           "COG_CognSuppGrpName": null,
           "COG_CognSuppGrpID": null,
           "z1D_COG_SuppGrpWorkInfoTag": null,
-          "Description": "IBM SOAR Case 2099: Hello World",
+          "Description": "IBM SOAR Case 4035: testing richard 436",
           "Company": "Calbro Services",
           "Country": "Netherlands",
           "State Province": "Amsterdam",
@@ -127,8 +126,8 @@
           "Contact Sensitivity": "Standard",
           "Desk Location": null,
           "Mail Station": null,
-          "Street": "B Avenue 123",
-          "Zip/Postal Code": "1234",
+          "Street": "Boeing Avenue 245",
+          "Zip/Postal Code": "1119 PD",
           "Internet E-mail": null,
           "Corporate ID": null,
           "Phone Number": "###",
@@ -148,16 +147,16 @@
           "Service Type": "Infrastructure Event",
           "z1D Integer02": null,
           "Status_Reason": "No Further Action Required",
-          "Detailed Decription": null,
-          "Resolution": "Closed from IBM SOAR",
-          "Incident Number": "INC000000000225",
+          "Detailed Decription": "Hello World",
+          "Resolution": "something here \nClosed from IBM SOAR",
+          "Incident Number": "INC000000018070",
           "Urgency": "2-High",
-          "Impact": "3-Moderate/Limited",
-          "Priority": "High",
-          "Priority Weight": 18,
-          "Reported Source": "Systems Management",
+          "Impact": "4-Minor/Localized",
+          "Priority": "Medium",
+          "Priority Weight": 15,
+          "Reported Source": "Walk In",
           "Assigned Group": "Service Desk",
-          "Assignee": "Sally Agent",
+          "Assignee": "Hap Agent",
           "Assigned Support Company": "Calbro Services",
           "Assigned Group Shift Name": null,
           "Assigned Group Shift ID": null,
@@ -167,10 +166,10 @@
           "Owner Group": "Service Desk",
           "Owner Support Company": "Calbro Services",
           "Owner Group ID": "SGP000000000011",
-          "Reported Date": "2023-06-22T12:56:30.000+0000",
-          "Responded Date": "2023-06-22T12:56:30.000+0000",
+          "Reported Date": "2023-09-13T11:46:13.000+0000",
+          "Responded Date": "2023-09-13T11:46:13.000+0000",
           "Last Acknowledged Date": null,
-          "Last Resolved Date": "2023-06-22T14:30:48.000+0000",
+          "Last Resolved Date": "2023-09-13T11:47:24.000+0000",
           "Closed Date": null,
           "Vendor Ticket Number": null,
           "z1D Permission Group ID": null,
@@ -223,25 +222,26 @@
         "_links": {
           "self": [
             {
-              "href": "https://bmc.com/api/arsys/v1/entry/HPD:IncidentInterface/INC000000000110%7CINC000000000110"
+              "href": "https://helix.com/api/arsys/v1/entry/HPD:IncidentInterface/INC000000005009%7CINC000000005009"
             }
           ]
         }
       }
-    ]
+    ],
+    "skipped": []
   },
   "raw": null,
   "inputs": {
-    "incident_id": 2099,
-    "helix_payload": "{\"Status_Reason\": \"Done\"}",
-    "bmc_helix_request_id": "INC000000000110|INC000000000110"
+    "incident_id": 4035,
+    "helix_payload": "{'Status_Reason': 'No Further Action Required', 'Status': 'Resolved', 'Resolution': '<div class=\"rte\"><div>something here</div></div>\\nClosed from IBM SOAR'}",
+    "bmc_helix_request_id": "INC000000005009|INC000000005009"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-bmc-helix",
     "package_version": "1.0.0",
     "host": "local",
-    "execution_time_ms": 442,
-    "timestamp": "2023-06-22 10:31:44"
+    "execution_time_ms": 19449,
+    "timestamp": "2023-09-13 07:47:25"
   }
 }

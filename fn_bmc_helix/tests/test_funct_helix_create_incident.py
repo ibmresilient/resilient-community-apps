@@ -2,7 +2,6 @@
 """Tests using pytest_resilient_circuits"""
 
 import pytest
-import json
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from mock import patch
