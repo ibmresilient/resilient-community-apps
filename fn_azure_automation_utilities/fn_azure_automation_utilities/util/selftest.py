@@ -35,7 +35,7 @@ def selftest_function(opts):
     app_configs = opts.get("fn_azure_automation_utilities", {})
     rc = RequestsCommon(opts, app_configs)
 
-    # If the below can run without an IntegrationError occuring then connection to Azure is successful
+    # If the below can run without an IntegrationError occurring then connection to Azure is successful
     client = AzureClient(
         rc,
         app_configs.get("client_id"),

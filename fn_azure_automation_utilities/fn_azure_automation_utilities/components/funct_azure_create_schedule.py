@@ -5,7 +5,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
-from fn_azure_automation_utilities.util.helper import AzureClient, PACKAGE_NAME
+from fn_azure_automation_utilities.util.helper import get_azure_client, PACKAGE_NAME
 from ast import literal_eval
 from datetime import datetime
 
@@ -38,19 +38,9 @@ class FunctionComponent(AppFunctionComponent):
         input_parameters["properties"]["startTime"] = start_time.strftime("%Y-%m-%dT%H:%M:%SZ")
 
         # Connect to Azure
-        client = AzureClient(
-            self.rc,
-            self.options.get("client_id"),
-            self.options.get("client_secret"),
-            self.options.get("tenant_id"),
-            self.options.get("subscription_id"),
-            self.options.get("scope"),
-            self.rc.get_proxies(),
-            getattr(fn_inputs, "resource_group_name", None),
-            getattr(fn_inputs, "account_name", None),
-            refresh_token=self.options.get("refresh_token")
-        )
+        client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
+        # Make call to Azure and retrieve results
         results = client.create_schedule(getattr(fn_inputs, "schedule_name"), input_parameters)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")

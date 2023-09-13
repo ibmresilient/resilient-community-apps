@@ -3207,7 +3207,7 @@
             "tags": [],
             "templates": [],
             "text": "Schedule Name",
-            "tooltip": "Name of the Azure automatio schedule",
+            "tooltip": "Name of the Azure automation schedule",
             "type_id": 1008,
             "uuid": "a0bb9985-d400-4921-9559-402d77c94383",
             "values": []
@@ -4071,7 +4071,7 @@
             "tags": [],
             "templates": [],
             "text": "Schedule Name",
-            "tooltip": "Name of the Azure automatio schedule",
+            "tooltip": "Name of the Azure automation schedule",
             "type_id": 1011,
             "uuid": "5071d9f4-edad-437e-979c-5dd5cca6dab7",
             "values": []
@@ -5537,7 +5537,7 @@
             "tags": [],
             "templates": [],
             "text": "Activity Name",
-            "tooltip": "The Azure automaion module activity name",
+            "tooltip": "The Azure automation module activity name",
             "type_id": 1019,
             "uuid": "a5e2d840-181a-42e3-90b7-a410e1c8d68b",
             "values": []
@@ -5596,7 +5596,7 @@
             "rich_text": false,
             "tags": [],
             "templates": [],
-            "text": "Resouce Group name",
+            "text": "Resource Group name",
             "tooltip": "The Azure automation resource group name",
             "type_id": 1019,
             "uuid": "3883471a-ac8d-4891-9f14-1a90ac90b1f1",
@@ -6285,7 +6285,7 @@
             "tags": [],
             "templates": [],
             "text": "Schedule Name",
-            "tooltip": "Name of the Azure automatio schedule",
+            "tooltip": "Name of the Azure automation schedule",
             "type_id": 1020,
             "uuid": "d82a47d7-0853-479a-8855-2109fb78bd4a",
             "values": []
@@ -9764,7 +9764,7 @@
             "tags": [],
             "templates": [],
             "text": "Schedule Name",
-            "tooltip": "Name of the Azure automatio schedule",
+            "tooltip": "Name of the Azure automation schedule",
             "type_id": 1039,
             "uuid": "d91821d5-28fa-4c98-b120-3db0e895328c",
             "values": []

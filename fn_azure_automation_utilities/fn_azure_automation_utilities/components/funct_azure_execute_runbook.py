@@ -5,7 +5,7 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
-from fn_azure_automation_utilities.util.helper import AzureClient, PACKAGE_NAME
+from fn_azure_automation_utilities.util.helper import get_azure_client, PACKAGE_NAME
 from ast import literal_eval
 
 FN_NAME = "azure_execute_runbook"
@@ -35,24 +35,14 @@ class FunctionComponent(AppFunctionComponent):
         input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
         time_to_wait = getattr(fn_inputs, "time_to_wait", 30)
 
-        client = AzureClient(
-            self.rc,
-            self.options.get("client_id"),
-            self.options.get("client_secret"),
-            self.options.get("tenant_id"),
-            self.options.get("subscription_id"),
-            self.options.get("scope"),
-            self.rc.get_proxies(),
-            getattr(fn_inputs, "resource_group_name", None),
-            getattr(fn_inputs, "account_name", None),
-            refresh_token=self.options.get("refresh_token")
-        )
+        # Connect to Azure
+        client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
         # Start an Azure job to run the given runbook
         start_runbook = client.run_runbook(getattr(fn_inputs, "runbook_name"), runbook_parameters=input_parameters)
         job_name = start_runbook.get("name")
         # Wait a given amount of time and then get the status of the Azure run job started above. When the status equals Completed return that status
-        runbook_status = client.get_job_final_status(job_name, time_to_wait)
+        _ = client.get_job_final_status(job_name, time_to_wait)
         # Get the results from the completed Azure runbook
         results = client.get_job_results(job_name)
 

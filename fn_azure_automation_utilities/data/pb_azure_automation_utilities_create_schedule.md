@@ -24,7 +24,7 @@
 | Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
 | Schedule description | `azure_automation_schedule_description` | text | Description of the schedule | Optional |
-| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automatio schedule | Always |
+| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
 | Schedule Start Time | `azure_automation_schedule_start_time` | datetimepicker | The start time of the schedule | Always |
 
 ### Object Type

@@ -23,7 +23,7 @@
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
-| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automatio schedule | Always |
+| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
 
 ### Object Type
 `incident`
