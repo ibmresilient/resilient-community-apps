@@ -12,6 +12,9 @@
     "content": {
       "type": "object",
       "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
         "id": {
           "type": "string"
         },
@@ -84,6 +87,9 @@
         "onPremisesProvisioningErrors": {
           "type": "array"
         },
+        "status_code": {
+          "type": "integer"
+        },
         "message": {
           "type": "string"
         },
@@ -96,7 +102,7 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "ms_group_mail_nickname": {
+        "ms_group_id": {
           "type": "string"
         }
       }

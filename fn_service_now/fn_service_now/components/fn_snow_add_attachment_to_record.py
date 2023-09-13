@@ -1,21 +1,21 @@
-# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import json
-import logging
-
+from json import dumps
+from logging import getLogger
 from fn_service_now.util.resilient_helper import ResilientHelper, CONFIG_DATA_SECTION
 from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import RequestsCommon, ResultPayload
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
+
     def __init__(self, inputs):
         self.success = True
         self.inputs = inputs
@@ -46,19 +46,23 @@ class FunctionComponent(ResilientComponent):
     def _fn_snow_add_attachment_to_record_function(self, event, *args, **kwargs):
         """Function: Function that adds a Resilient Attachment to a ServiceNow Record."""
 
-        log = logging.getLogger(__name__)
+        log = getLogger(__name__)
 
         try:
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
+            validate_fields(["attachment_id", "incident_id"], kwargs)
 
             # Get the function inputs:
             inputs = {
-                "attachment_id": res_helper.get_function_input(kwargs, "attachment_id"),  # number (required)
-                "incident_id": res_helper.get_function_input(kwargs, "incident_id"),  # number (required)
-                "task_id": res_helper.get_function_input(kwargs, "task_id", True)  # number (optional)
+                # number (required)
+                "attachment_id": kwargs.get("attachment_id"),
+                # number (required)
+                "incident_id": kwargs.get("incident_id"),
+                # number (optional)
+                "task_id": kwargs.get("task_id")
             }
 
             # Create payload dict with inputs
@@ -69,7 +73,7 @@ class FunctionComponent(ResilientComponent):
             # Instansiate new Resilient API object
             res_client = self.rest_client()
 
-            yield StatusMessage("Getting attachment data. ID: {0}".format(payload.inputs["attachment_id"]))
+            yield StatusMessage(f"Getting attachment data. ID: {payload.inputs['attachment_id']}")
 
             # Get the attachment
             attachment = res_helper.get_attachment(res_client,
@@ -78,10 +82,12 @@ class FunctionComponent(ResilientComponent):
                                                    payload.inputs["task_id"])
 
             # Get the datatable
-            datatable = ServiceNowRecordsDataTable(res_client, payload.inputs["incident_id"])
+            datatable = ServiceNowRecordsDataTable(
+                res_client, payload.inputs["incident_id"])
 
             # Generate res_id using incident and task id
-            res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"])
+            res_id = res_helper.generate_res_id(
+                payload.inputs["incident_id"], payload.inputs["task_id"])
 
             # Get the sn_ref_id from the datatable
             sn_ref_id = datatable.get_sn_ref_id(res_id)
@@ -94,7 +100,8 @@ class FunctionComponent(ResilientComponent):
                     err_msg = err_msg.format("Task", payload.inputs["task_id"])
 
                 else:
-                    err_msg = err_msg.format("Incident", payload.inputs["incident_id"])
+                    err_msg = err_msg.format(
+                        "Incident", payload.inputs["incident_id"])
 
                 raise ValueError(err_msg)
 
@@ -109,10 +116,11 @@ class FunctionComponent(ResilientComponent):
                     "attachment_content_type": attachment["content_type"]
                 }
 
-                yield StatusMessage("Adding Attachment to ServiceNow Record {0}".format(sn_ref_id))
+                yield StatusMessage(f"Adding Attachment to ServiceNow Record {sn_ref_id}")
 
                 # Call POST and get response
-                add_in_sn_response = res_helper.sn_api_request(rc, "POST", "/add", data=json.dumps(request_data))
+                add_in_sn_response = res_helper.sn_api_request(
+                    rc, "POST", "/add", data=dumps(request_data))
                 payload.res_id = res_id
                 payload.sn_ref_id = sn_ref_id
                 payload.attachment_name = attachment["name"]
@@ -120,7 +128,8 @@ class FunctionComponent(ResilientComponent):
 
             results = payload.as_dict()
             rp_results = rp.done(results.get("success"), results)
-            rp_results.update(results) # add in all results for backward-compatibility
+            # add in all results for backward-compatibility
+            rp_results.update(results)
 
             log.debug("RESULTS: %s", rp_results)
             log.info("Complete")

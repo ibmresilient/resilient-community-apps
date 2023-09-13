@@ -39,8 +39,8 @@ class FunctionComponent(ResilientComponent):
             defender_filter_value = kwargs.get("defender_filter_value")  # text
 
             log = logging.getLogger(__name__)
-            log.info("defender_filter_name: %s", defender_filter_name)
-            log.info("defender_filter_value: %s", defender_filter_value)
+            log.info(f"defender_filter_name: {defender_filter_name}")
+            log.info(f"defender_filter_value: {defender_filter_value}")
 
             # HTTP GET  https://api.securitycenter.microsoft.com/api/machines?$filter=startswith(computerDnsName,'mymachine')
             # GET /api/machines/findbyip(ip='{IP}',timestamp={TimeStamp})
@@ -59,12 +59,12 @@ class FunctionComponent(ResilientComponent):
 
             # convert the timestamp
             if status:
-                yield StatusMessage("Machines found: {}".format(len(machines_result.get('value', []))))
+                yield StatusMessage(f"Machines found: {len(machines_result.get('value', []))}")
                 for machine in machines_result.get('value', []):
                     machine['firstSeen_ts'] = convert_date(machine['firstSeen'])
                     machine['lastSeen_ts'] = convert_date(machine['lastSeen'])
             else:
-                yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
+                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
 
             yield StatusMessage("Finished 'defender_find_machines_by_filter'")
 

@@ -3,12 +3,13 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
+import functools
+from traceback import format_exc
 from datetime import datetime, timedelta
 from logging import getLogger
-from threading import Thread
+from threading import Thread, Event
 from resilient_circuits import ResilientComponent
 from resilient_lib import IntegrationError, SOARCommon
-from fn_qradar_enhanced_data.lib.poller_common import poller
 from fn_qradar_enhanced_data.util.function_utils import (get_qradar_client, get_server_settings, get_sync_notes)
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
@@ -17,6 +18,46 @@ from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_POLLERQU
 LOG = getLogger(__name__)
 AUTO_ESCALATION_NOTE = "Case created in SOAR"
 MANUAL_ESCALATION = "Manual escalation of offense to SOAR"
+# The max number of QRadar offenses that can be searched for at once
+MAX_OFFENSES_TO_SEARCH = 50
+
+# P O L L E R   L O G I C
+def poller(named_poller_interval, named_last_poller_time, package_name):
+    """
+    Decorator for poller, manage poller time, calling the customized method for getting the next entities
+    :param named_poller_interval: (str) Name of instance variable containing the poller interval in seconds
+    :param named_last_poller_time: (datetime) Name of instance variable containing the lookback value in mseconds
+    :param package_name: (str) Name of package for loggging
+    """
+    def poller_wrapper(func):
+        # Decorator for running a function forever, passing the ms timestamp of
+        # when the last poller run to the function it's calling
+        @functools.wraps(func)
+        def wrapped(self):
+            last_poller_time = getattr(self, named_last_poller_time)
+            exit_event = Event()
+
+            while not exit_event.is_set():
+                try:
+                    LOG.info(f"{package_name} polling start.")
+                    poller_start = datetime.now()
+                    # Function execution with the last poller time in ms
+                    func(self, last_poller_time = int(last_poller_time.timestamp()*1000))
+
+                except Exception as err:
+                    LOG.error(str(err))
+                    LOG.error(format_exc())
+                finally:
+                    LOG.info(f"{package_name} polling complete.")
+                    # Set the last poller time for next cycle
+                    last_poller_time = poller_start
+
+                    # Sleep before the next poller execution
+                    exit_event.wait(getattr(self, named_poller_interval))
+            exit_event.set() # Loop complete
+
+        return wrapped
+    return poller_wrapper
 
 class PollerComponent(ResilientComponent):
     """Poller to synchronize Offense and Case data"""
@@ -115,7 +156,15 @@ class PollerComponent(ResilientComponent):
         if error_msg:
             raise IntegrationError(error_msg)
 
-        self.process_case_list(case_list)
+        def split(cases_list: list):
+            """ Split up case_list into lists of the max size """
+            for c in range(0, len(cases_list), MAX_OFFENSES_TO_SEARCH):
+                yield cases_list[c:c + MAX_OFFENSES_TO_SEARCH]
+
+        case_lists = list(split(case_list))
+        # Loop through list of lists. This will help keep the calls to QRadar from erroring because of to many filters.
+        for list_cases in case_lists:
+            self.process_case_list(list_cases)
 
     def process_case_list(self, case_list):
         """
@@ -141,22 +190,23 @@ class PollerComponent(ResilientComponent):
             id_list = list(case_server_dict[server].keys())
             for id in id_list:
                 filter_note.append(f"id={str(id)}")
-                LOG.debug(str(case_server_dict[server][id].get('properties')))
-                qr_lat_updated = int(case_server_dict[server][id].get('properties').get('qr_last_updated_time'))
-                filter.append(f"id={str(id)} and last_persisted_time > {qr_lat_updated}")
+                qr_last_updated = case_server_dict[server][id].get('properties', {}).get('qr_last_updated_time', 0)
+                # If not in SOAR case then set time to 0
+                if not qr_last_updated:
+                    qr_last_updated = 0
+                filter.append(f"id={str(id)} and last_persisted_time > {int(qr_last_updated)}")
 
             filters = " or ".join(filter)
-            LOG.debug(str(filters))
             filter_notes = " or ".join(filter_note)
-            LOG.debug(str(filter_notes))
 
             # Create connection to QRadar server
             qradar_client = get_qradar_client(self.opts, get_server_settings(self.opts, server))
 
             auth_info = AuthInfo.get_authInfo()
-            # Makes GET call to QRadar server using api
+            # Makes a call to the QRadar server to get all the QRadar offense that have a last_persisted_time that is greater than its
+            # corresponding SOAR incidents last_persisted_time.
             offenses_update_list = auth_info.make_call("GET",
-                                                       f"{auth_info.api_url}siem/offenses?fields=id, last_persisted_time, assigned_to&filter={filters}"
+                                                       f"{auth_info.api_url}siem/offenses?fields=id,last_persisted_time,assigned_to&filter={filters}"
                                                       ).json()
 
             LOG.debug(f"QRadar returned matching offenses: {str(offenses_update_list)}")
@@ -174,7 +224,7 @@ class PollerComponent(ResilientComponent):
                     case_dict = case_server_dict[server][offense_id]
                     case_id = case_dict.get('id')
                     case_lastPersistedTime = case_dict.get("properties", {}).get("qr_last_updated_time")
-                    if offense_lastPersistedTime > case_lastPersistedTime:
+                    if not case_lastPersistedTime or offense_lastPersistedTime > case_lastPersistedTime:
                         # If time is different then update the case
                         updated_cases.append(case_id)
                         # Create payload to update cases

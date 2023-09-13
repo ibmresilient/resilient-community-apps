@@ -180,7 +180,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <!--
 List any steps that are needed to configure the endpoint to use this app.
 -->
-In order to make API calls to QRadar EDR, create an API Application, prodiving the endpoint group restrictions as appropiate. The API ID and secret will be copied into your app.config file
+In order to make API calls to QRadar EDR, create an API Application, providing the endpoint group restrictions as appropriate. The API ID and secret will be copied into your app.config file
 
 ![screenshot: custom_layouts](./doc/screenshots/reaqta_configuration.png)
 
@@ -209,8 +209,8 @@ For each hive, use the section definition below
 | ------ | :------: | ------- | ----------- |
 | **polling_interval** | Yes | `60` | *Number of seconds between polling queries for new alerts *  |
 | **polling_lookback** | Yes | `120` | *Number of minutes to look back for new alerts the first time the app starts or restarts*  |
-| **soar_create_case_template** | No | `/path/to/template.jina` | *Override template used to create a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
-| **soar_close_case_template** | No | `/path/to/template.jina` | *Override template used to close a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
+| **soar_create_case_template** | No | `/path/to/template.jinja` | *Override template used to create a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
+| **soar_close_case_template** | No | `/path/to/template.jinja` | *Override template used to close a SOAR case from the poller. See [Templates for SOAR Cases](#templates-for-soar-cases)* |
 | **https_proxy** | No | `https://xxx/` | *Proxy URL for HTTPS connections* |
 | **http_proxy** | No | `http://xxx/` | *Proxy URL for HTTP connections* |
 | **timeout** | No | `60` | *Seconds to wait for APIs calls back to QRadar EDR. Default is 30* |
@@ -243,7 +243,7 @@ Repeat this section for each ReaQta hive. Add the `hive_label` used in the `poll
 
 ## Poller Considerations
 
-The poller is just one way to escalate ReaQta alerts to SOAR cases. It's also possible to send alert information to a SIEM, such as IBM QRadar, which would then coorelate alerts into Offenses. With the QRadar Plugin for SOAR, offenses can then be ecalated to SOAR cases. As long as the ReaQta alert ID is preserved in the custom case field `reaqta_id` and `reaqta_hive`, then all the remaining details about the alert will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the ReaQta Alert ID.
+The poller is just one way to escalate ReaQta alerts to SOAR cases. It's also possible to send alert information to a SIEM, such as IBM QRadar, which would then corelate alerts into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the ReaQta alert ID is preserved in the custom case field `reaqta_id` and `reaqta_hive`, then all the remaining details about the alert will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the ReaQta Alert ID.
 
 When using another source of ReaQta Alert escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
 
@@ -350,7 +350,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 468,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "host": "Apphost",
     "package": "fn-reaqta",
     "package_version": "1.1.0",
     "timestamp": "2023-07-10 12:50:02",
@@ -4778,7 +4778,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 1071,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "host": "Macbook Pro",
     "package": "fn-reaqta",
     "package_version": "1.1.0",
     "timestamp": "2023-07-07 22:10:52",

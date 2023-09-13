@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 """AppFunction implementation"""
 from resilient_lib import IntegrationError, validate_fields
@@ -76,17 +76,17 @@ class FunctionComponent(AppFunctionComponent):
         if authenticated:
             team_manager = TeamsInterface(required_parameters)
 
-            if hasattr(fn_inputs, 'ms_groupteam_id'):
+            if getattr(fn_inputs, 'ms_groupteam_id', ""):
                 response = team_manager.archive_unarchive_team(
                     {"group_id"  : fn_inputs.ms_groupteam_id,
                      "operation" : fn_inputs.archive_operation})
 
-            elif hasattr(fn_inputs, 'ms_group_mail_nickname'):
+            elif getattr(fn_inputs, 'ms_group_mail_nickname', ""):
                 response = team_manager.archive_unarchive_team(
                     {"group_mail_nickname" : fn_inputs.ms_group_mail_nickname,
                      "operation" : fn_inputs.archive_operation})
 
-            elif hasattr(fn_inputs, 'ms_groupteam_name'):
+            elif getattr(fn_inputs, 'ms_groupteam_name', ""):
                 response = team_manager.archive_unarchive_team(
                     {"group_name" : fn_inputs.ms_groupteam_name,
                      "operation"  : fn_inputs.archive_operation})

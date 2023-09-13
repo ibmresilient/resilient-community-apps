@@ -1,20 +1,13 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 import os
-import logging
-import json
 import pytest
-
-from urllib import parse
 from unittest.mock import patch
-from resilient_lib import RequestsCommon, IntegrationError
-
+from resilient_lib import IntegrationError
 from tests import testcommons
-from fn_teams.lib import constants
-from tests.testcommons import required_parameters
 from fn_teams.lib.microsoft_channels import ChannelInterface
+from tests.testcommons import required_parameters
 
-PACKAGE_NAME = constants.PACKAGE_NAME
 FUNCTION_NAME = "ms_teams_archive_teams"
 
 PATH_TEST_DATA = os.path.join(os.path.abspath(os.path.dirname(__file__)), "data")
@@ -28,7 +21,7 @@ def patch_archive_unarchive_team(method, url, headers, callback):
         url=url,
         headers=headers,
         callback=callback)
-    
+
     if method == "get":
         if "groups" in url:
             base_url, query = url.split("=")

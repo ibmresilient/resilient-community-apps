@@ -3,14 +3,12 @@
 
 from __future__ import print_function
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from sn_test_helper import *
 from copy import deepcopy
 import sys
 
-
-PACKAGE_NAME = "fn_service_now"
 FUNCTION_NAME = "fn_snow_helper_update_datatable"
 
 # Read the default configuration-data section from the package

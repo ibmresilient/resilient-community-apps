@@ -3,22 +3,21 @@
   "success": true,
   "reason": null,
   "content": {
-    "message": "Information successfully posted in channel Engineering"
+    "message": "Information successfully posted in channel General"
   },
   "raw": null,
   "inputs": {
-    "teams_channel": "resilient",
-    "incident_id": 2096,
-    "task_id": 78,
+    "teams_channel": "General",
+    "incident_id": 2121,
     "teams_mrkdown": true,
-    "teams_payload": "{ \"summary\": \"SOAR Incident\", \"sections\": [ \n  { \"facts\": [ \n    { \"name\": \"Name\", \"value\": \"Gootloader\" }, \n    { \"name\": \"Description\", \"value\": \"<div class=\\\"rte\\\"><div>Delivery method: Distributed via web download</div><div>Dropped by: Gootloader</div><div>Link: <a href=\\\"https://example.com/gootloadersites\\\" target=\\\"_blank\\\">https://example.com/gootloadersites</a></div></div>\" }, \n    { \"name\": \"Id\", \"value\": \"2096\" }, \n    { \"name\": \"Owner\", \"value\": \"adminsoarms@5rf2xs.onmicrosoft.com\" }, \n    { \"name\": \"Types\", \"value\": \"Malware\" }, \n    { \"name\": \"NIST Attack Vectors\", \"value\": \"\" }, \n    { \"name\": \"Create Date\", \"value\": \"Wed Nov 16 14:35:03 GMT 2022\" }, \n    { \"name\": \"Date Occurred\", \"value\": \"Wed Oct 26 00:00:00 IST 2022\" }, \n    { \"name\": \"Discovered Date\", \"value\": \"Wed Oct 26 14:25:12 IST 2022\" }, \n    { \"name\": \"Confirmed\", \"value\": \"True\" }, \n    { \"name\": \"Severity\", \"value\": \"High\" } \n   ]\n  },\n  { \"text\": \"Task\", \"facts\": [ \n    { \"name\": \"Task\", \"value\": \"Research AV vendor databases\" }, \n    { \"name\": \"Owner\", \"value\": \"-\" },\n    { \"name\": \"Instructions\", \"value\": \"Research AV vendor databases for recent outbreaks, symptoms and remediation guidance based on observed symptoms and findings. Possible source for intelligence include the following.\n<ul>\n<li>Kaspersky: http://www.securelist.com/en/threats/detect </li>\n<li>Microsoft: http://www.microsoft.com/security/portal/threat/threats.aspx </li>\n<li>Symantec:  http://example.com/security_response/landing/azlisting.jsp</li>\n<li>Trend Micro: http://example.com/us/threatencyclopedia#malware </li>\n</ul>\" },\n    { \"name\": \"Due Date\", \"value\": \"-\" }\n    ]\n  }\n ] \n} \n"
+    "teams_payload": "{ \"summary\": \"SOAR Incident\", \"sections\": [ \n  { \"facts\": [ \n    { \"name\": \"Name\", \"value\": \"testing channels\" }, \n    { \"name\": \"Description\", \"value\": \"-\" }, \n    { \"name\": \"Id\", \"value\": \"2121\" }, \n    { \"name\": \"Owner\", \"value\": \"i@example.com\" }, \n    { \"name\": \"Types\", \"value\": \"\" }, \n    { \"name\": \"NIST Attack Vectors\", \"value\": \"\" }, \n    { \"name\": \"Create Date\", \"value\": \"1684173230796\" }, \n    { \"name\": \"Date Occurred\", \"value\": \"-\" }, \n    { \"name\": \"Discovered Date\", \"value\": \"1684173210301\" }, \n    { \"name\": \"Confirmed\", \"value\": \"True\" }, \n    { \"name\": \"Severity\", \"value\": \"Low\" } \n   ]\n  }\n ] \n} \n"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.0.0",
-    "host": "Apphost",
-    "execution_time_ms": 25451,
-    "timestamp": "2022-11-23 12:22:20"
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 2038,
+    "timestamp": "2023-05-15 14:21:57"
   }
 }

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v50.0.131
 
 """Generate the Resilient customizations required for fn_microsoft_defender"""
 
@@ -20,16 +22,76 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_microsoft_defender",
-        "message_destinations": [u"fn_microsoft_defender"],
-        "functions": [u"defender_alert_search", u"defender_app_execution", u"defender_collect_machine_investigation_package", u"defender_delete_indicator", u"defender_find_machines", u"defender_find_machines_by_file", u"defender_find_machines_by_filter", u"defender_get_file_information", u"defender_get_incident", u"defender_get_related_alert_information", u"defender_list_indicators", u"defender_machine_isolation", u"defender_machine_scan", u"defender_machine_vulnerabilities", u"defender_quarantine_file", u"defender_set_indicator", u"defender_update_alert", u"defender_update_incident"],
-        "workflows": [u"defender_atp_app_execution", u"defender_atp_collect_machine_investigation_package", u"defender_atp_delete_indicator", u"defender_atp_find_machines", u"defender_atp_find_machines_by_file_hash", u"defender_atp_get_file_information", u"defender_atp_machine_isolation", u"defender_atp_machine_scan", u"defender_atp_machine_vulnerabilities", u"defender_atp_set_indicator", u"defender_atp_update_alert", u"defender_atp_update_indicator", u"defender_close_incident", u"defender_find_machines_by_filter", u"defender_get_incident", u"defender_get_updated_machine_information", u"defender_list_indicators", u"defender_quarantine_file", u"defender_refresh_incident", u"defender_sync_comment", u"defender_sync_incident"],
-        "actions": [u"Create Artifact from Indicator", u"Defender Close Incident", u"Defender Find Machine by DNS name", u"Defender Find Machines by File Hash", u"Defender Find Machines by Internal IP Address", u"Defender Get File Information", u"Defender Get Incident", u"Defender List Indicators", u"Defender Machine App Execution Restriction", u"Defender Machine Collect Investigation Package", u"Defender Machine Isolate Action", u"Defender Machine Quarantine File", u"Defender Machine Refresh Information", u"Defender Machine Scan", u"Defender Machine Update Information", u"Defender Machine Vulnerabilities", u"Defender Refresh Incident", u"Defender Set Indicator", u"Defender Sync Comment", u"Defender Sync Incident", u"Defender Update Alert", u"Delete Indicator", u"Update Indicator"],
-        "incident_fields": [u"defender_classification", u"defender_determination", u"defender_incident_createtime", u"defender_incident_id", u"defender_incident_lastupdatetime", u"defender_incident_url", u"defender_tags"],
+        "message_destinations": [
+            u"fn_microsoft_defender"
+        ],
+        "functions": [
+            u"defender_alert_search",
+            u"defender_app_execution",
+            u"defender_collect_machine_investigation_package",
+            u"defender_delete_indicator",
+            u"defender_find_machines",
+            u"defender_find_machines_by_file",
+            u"defender_find_machines_by_filter",
+            u"defender_get_file_information",
+            u"defender_get_incident",
+            u"defender_get_related_alert_information",
+            u"defender_list_indicators",
+            u"defender_machine_isolation",
+            u"defender_machine_scan",
+            u"defender_machine_vulnerabilities",
+            u"defender_quarantine_file",
+            u"defender_set_indicator",
+            u"defender_update_alert",
+            u"defender_update_incident"
+        ],
+        "workflows": [],
+        "actions": [],
+        "incident_fields": [
+            u"defender_classification",
+            u"defender_determination",
+            u"defender_incident_createtime",
+            u"defender_incident_id",
+            u"defender_incident_lastupdatetime",
+            u"defender_incident_url",
+            u"defender_tags"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"defender_alerts", u"defender_indicators", u"defender_machines"],
+        "datatables": [
+            u"defender_alerts",
+            u"defender_indicators",
+            u"defender_machines"
+        ],
         "automatic_tasks": [],
-        "scripts": [u"Create Artifact from Indicator"],
+        "scripts": [
+            u"Create Artifact from Indicator"
+        ],
+        "playbooks": [
+            u"create_artifact_from_indicator_pb",
+            u"defender_close_incident_pb",
+            u"defender_find_machine_by_dns_name_pb",
+            u"defender_find_machines_by_file_hash_pb",
+            u"defender_find_machines_by_internal_ip_address_pb",
+            u"defender_get_file_information_pb",
+            u"defender_get_incident_pb",
+            u"defender_list_indicators_pb",
+            u"defender_machine_app_execution_restriction_pb",
+            u"defender_machine_collect_investigation_package_pb",
+            u"defender_machine_isolate_action_pb",
+            u"defender_machine_quarantine_file_pb",
+            u"defender_machine_refresh_information_pb",
+            u"defender_machine_scan_pb",
+            u"defender_machine_update_information_pb",
+            u"defender_machine_vulnerabilities_pb",
+            u"defender_refresh_incident_pb",
+            u"defender_set_indicator_pb",
+            u"defender_sync_comment_pb",
+            u"defender_sync_incident_pb",
+            u"defender_update_alert_pb",
+            u"delete_indicator_pb",
+            u"update_indicator_pb"
+        ]
     }
 
 
@@ -38,7 +100,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 39.0.6328
+    IBM SOAR Platform Version: 45.0.7899
 
     Contents:
     - Message Destinations:
@@ -62,52 +124,30 @@ def customization_data(client=None):
         - defender_set_indicator
         - defender_update_alert
         - defender_update_incident
-    - Workflows:
-        - defender_atp_app_execution
-        - defender_atp_collect_machine_investigation_package
-        - defender_atp_delete_indicator
-        - defender_atp_find_machines
-        - defender_atp_find_machines_by_file_hash
-        - defender_atp_get_file_information
-        - defender_atp_machine_isolation
-        - defender_atp_machine_scan
-        - defender_atp_machine_vulnerabilities
-        - defender_atp_set_indicator
-        - defender_atp_update_alert
-        - defender_atp_update_indicator
-        - defender_close_incident
-        - defender_find_machines_by_filter
-        - defender_get_incident
-        - defender_get_updated_machine_information
-        - defender_list_indicators
-        - defender_quarantine_file
-        - defender_refresh_incident
-        - defender_sync_comment
-        - defender_sync_incident
-    - Rules:
-        - Create Artifact from Indicator
-        - Defender Close Incident
-        - Defender Find Machine by DNS name
-        - Defender Find Machines by File Hash
-        - Defender Find Machines by Internal IP Address
-        - Defender Get File Information
-        - Defender Get Incident
-        - Defender List Indicators
-        - Defender Machine App Execution Restriction
-        - Defender Machine Collect Investigation Package
-        - Defender Machine Isolate Action
-        - Defender Machine Quarantine File
-        - Defender Machine Refresh Information
-        - Defender Machine Scan
-        - Defender Machine Update Information
-        - Defender Machine Vulnerabilities
-        - Defender Refresh Incident
-        - Defender Set Indicator
-        - Defender Sync Comment
-        - Defender Sync Incident
-        - Defender Update Alert
-        - Delete Indicator
-        - Update Indicator
+    - Playbooks:
+        - create_artifact_from_indicator_pb
+        - defender_close_incident_pb
+        - defender_find_machine_by_dns_name_pb
+        - defender_find_machines_by_file_hash_pb
+        - defender_find_machines_by_internal_ip_address_pb
+        - defender_get_file_information_pb
+        - defender_get_incident_pb
+        - defender_list_indicators_pb
+        - defender_machine_app_execution_restriction_pb
+        - defender_machine_collect_investigation_package_pb
+        - defender_machine_isolate_action_pb
+        - defender_machine_quarantine_file_pb
+        - defender_machine_refresh_information_pb
+        - defender_machine_scan_pb
+        - defender_machine_update_information_pb
+        - defender_machine_vulnerabilities_pb
+        - defender_refresh_incident_pb
+        - defender_set_indicator_pb
+        - defender_sync_comment_pb
+        - defender_sync_incident_pb
+        - defender_update_alert_pb
+        - delete_indicator_pb
+        - update_indicator_pb
     - Incident Fields:
         - defender_classification
         - defender_determination

@@ -9,7 +9,7 @@ def config_section_data():
     for fn_microsoft_defender when called by `resilient-circuits config [-c|-u]`
     """
 
-    config_data = u"""[fn_microsoft_defender]
+    return u"""[fn_microsoft_defender]
 # specify the settings for your Azure and Defender access
 tenant_id=xxx
 client_id=xxx
@@ -42,4 +42,3 @@ new_incident_filters="status": ["New", "Active"],"severity": ["High", "Medium","
 #http_proxy=http://yourproxy.com
 #https_proxy=https://yourproxy.com
 """
-    return config_data
