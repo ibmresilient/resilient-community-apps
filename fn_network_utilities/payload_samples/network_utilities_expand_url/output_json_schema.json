@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "urllist": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
