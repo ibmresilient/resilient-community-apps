@@ -34,6 +34,8 @@ setup(
  The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.""",
     install_requires=[
         "resilient-circuits<49.0.0",
+        "resilient<49.0.0",
+        "resilient-lib<49.0.0",
         "PyJWT"
     ],
     python_requires='>=3.6',
