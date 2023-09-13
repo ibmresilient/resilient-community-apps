@@ -1102,7 +1102,7 @@ if results.get("success"):
 ## Function - Azure Get Credential
 Retrieve the credential identified by credential name.
 
- ![screenshot: fn-azure-get-credential ](./doc/screenshots/fn-azure-get-credential.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-get-credential ](./doc/screenshots/fn-azure-get-credential.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1187,7 +1187,7 @@ if results.get("success"):
 ## Function - Azure Get Job
 Retrieve the job identified by job name
 
- ![screenshot: fn-azure-get-job ](./doc/screenshots/fn-azure-get-job.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-get-job ](./doc/screenshots/fn-azure-get-job.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1285,7 +1285,7 @@ if results.get("success"):
 ## Function - Azure Get Job Output
 Retrieve the job output identified by job name
 
- ![screenshot: fn-azure-get-job-output ](./doc/screenshots/fn-azure-get-job-output.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-get-job-output ](./doc/screenshots/fn-azure-get-job-output.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1358,7 +1358,7 @@ if results.get("success"):
 ## Function - Azure Get Module Activity
 Retrieve the activity in the module identified by module name and activity name.
 
- ![screenshot: fn-azure-get-module-activity ](./doc/screenshots/fn-azure-get-module-activity.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-get-module-activity ](./doc/screenshots/fn-azure-get-module-activity.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1585,7 +1585,7 @@ results = {
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.activity_name = playbook.inputs.azure_automation_activity_name
 inputs.module_name = playbook.inputs.azure_automation_module_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resouce_group_name
+inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
 ```
 
 </p>
@@ -1609,7 +1609,7 @@ if results.get("success"):
 ## Function - Azure Get Node Report
 Retrieve the Dsc node report data by node id and report id.
 
- ![screenshot: fn-azure-get-node-report ](./doc/screenshots/fn-azure-get-node-report.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-get-node-report ](./doc/screenshots/fn-azure-get-node-report.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1629,16 +1629,48 @@ Retrieve the Dsc node report data by node id and report id.
 
 > **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
 
-<!-- ::CHANGE_ME:: -->
 ```python
 results = {
-    # TODO: Generate an example of the Function Output within this code block.
-    # To get the output of a Function:
-    #   1. Run resilient-circuits in DEBUG mode: $ resilient-circuits run --loglevel=DEBUG
-    #   2. Invoke the Function in SOAR
-    #   3. Gather the results using: $ resilient-sdk codegen -p fn_azure_automation_utilities --gather-results
-    #   4. Run docgen again: $ resilient-sdk docgen -p fn_azure_automation_utilities
-} 
+    "content": {
+        "configurationVersion": "2.0.0",
+        "endTime": "2023-09-06T13:30:02.1606975+00:00",
+        "errors": [],
+        "hostName": null,
+        "iPV4Addresses": [],
+        "iPV6Addresses": [],
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/nodes/24939717-e819-4059-aa08-82862c65f3c8/reports/3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+        "lastModifiedTime": "2023-09-06T13:30:02.2533333+00:00",
+        "metaConfiguration": null,
+        "numberOfResources": 0,
+        "rawErrors": null,
+        "rebootRequested": null,
+        "refreshMode": null,
+        "reportFormatVersion": "2.0",
+        "reportId": "3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+        "resources": [],
+        "startTime": "2023-09-06T13:30:01.9451859+00:00",
+        "status": "Compliant",
+        "type": "Consistency"
+    },
+    "inputs": {
+        "account_name": "automation1",
+        "node_id": "24939717-e819-4059-aa08-82862c65f3c8",
+        "report_id": "3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+        "resource_group_name": "DemoAssets"
+    },
+    "metrics": {
+        "execution_time_ms": 1084,
+        "host": "local",
+        "package": "fn-azure-automation-utilities",
+        "package_version": "1.0.0",
+        "timestamp": "2023-09-06 09:55:00",
+        "version": "1.0"
+    },
+    "raw": null,
+    "reason": null,
+    "success": true,
+    "version": 2.0
+}
 ```
 
 </p>
@@ -1675,7 +1707,7 @@ if results.get("success"):
 ## Function - Azure Get Runbook
 Retrieve the runbook identified by runbook name.
 
- ![screenshot: fn-azure-get-runbook ](./doc/screenshots/fn-azure-get-runbook.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-get-runbook ](./doc/screenshots/fn-azure-get-runbook.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1774,7 +1806,7 @@ if results.get("success"):
 ## Function - Azure Get Schedule
 Retrieve the schedule identified by schedule name.
 
- ![screenshot: fn-azure-get-schedule ](./doc/screenshots/fn-azure-get-schedule.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-get-schedule ](./doc/screenshots/fn-azure-get-schedule.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1869,7 +1901,7 @@ if results.get("success"):
 ## Function - Azure List Accounts
 Lists the Automation Accounts within an Azure subscription
 
- ![screenshot: fn-azure-list-accounts ](./doc/screenshots/fn-azure-list-accounts.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-list-accounts ](./doc/screenshots/fn-azure-list-accounts.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1989,7 +2021,7 @@ if results.get("success"):
 ## Function - Azure List Accounts By Resource Group
 Retrieve a list of accounts within a given resource group
 
- ![screenshot: fn-azure-list-accounts-by-resource-group ](./doc/screenshots/fn-azure-list-accounts-by-resource-group.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-list-accounts-by-resource-group ](./doc/screenshots/fn-azure-list-accounts-by-resource-group.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2115,7 +2147,7 @@ if results.get("success"):
 ## Function - Azure List Credentials by Automation Account
 Retrieve a list of credentials
 
- ![screenshot: fn-azure-list-credentials-by-automation-account ](./doc/screenshots/fn-azure-list-credentials-by-automation-account.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-list-credentials-by-automation-account ](./doc/screenshots/fn-azure-list-credentials-by-automation-account.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2241,7 +2273,7 @@ None
 ## Function - Azure List Jobs by Automation Account
 Retrieve a list of jobs
 
- ![screenshot: fn-azure-list-jobs-by-automation-account ](./doc/screenshots/fn-azure-list-jobs-by-automation-account.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-list-jobs-by-automation-account ](./doc/screenshots/fn-azure-list-jobs-by-automation-account.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2351,7 +2383,7 @@ if results.get("success"):
 ## Function - Azure List Module Activities
 Retrieve a list of activities in the module identified by module name.
 
- ![screenshot: fn-azure-list-module-activities ](./doc/screenshots/fn-azure-list-module-activities.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-list-module-activities ](./doc/screenshots/fn-azure-list-module-activities.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2499,7 +2531,7 @@ if results.get("success"):
 ## Function - Azure List Node Report By Node
 Retrieve the Dsc node report list by node id.
 
- ![screenshot: fn-azure-list-node-report-by-node ](./doc/screenshots/fn-azure-list-node-report-by-node.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-list-node-report-by-node ](./doc/screenshots/fn-azure-list-node-report-by-node.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2616,7 +2648,7 @@ if results.get("success"):
 ## Function - Azure List Runbooks by Automation Account
 Retrieve a list of runbooks on the given automation account.
 
- ![screenshot: fn-azure-list-runbooks-by-automation-account ](./doc/screenshots/fn-azure-list-runbooks-by-automation-account.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-list-runbooks-by-automation-account ](./doc/screenshots/fn-azure-list-runbooks-by-automation-account.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2722,7 +2754,7 @@ if results.get("success"):
 ## Function - Azure List Schedule by Automation Account
 Retrieve a list of schedules.
 
- ![screenshot: fn-azure-list-schedule-by-automation-account ](./doc/screenshots/fn-azure-list-schedule-by-automation-account.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-list-schedule-by-automation-account ](./doc/screenshots/fn-azure-list-schedule-by-automation-account.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2860,7 +2892,7 @@ if results.get("success"):
 ## Function - Azure List Statistics by Automation Account
 Retrieve the statistics for the account.
 
- ![screenshot: fn-azure-list-statistics-by-automation-account ](./doc/screenshots/fn-azure-list-statistics-by-automation-account.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-list-statistics-by-automation-account ](./doc/screenshots/fn-azure-list-statistics-by-automation-account.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2970,7 +3002,7 @@ if results.get("success"):
 ## Function - Azure List Usage by Automation Account
 Retrieve the usage for the account id.
 
- ![screenshot: fn-azure-list-usage-by-automation-account ](./doc/screenshots/fn-azure-list-usage-by-automation-account.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-list-usage-by-automation-account ](./doc/screenshots/fn-azure-list-usage-by-automation-account.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -3075,7 +3107,7 @@ if results.get("success"):
 ## Function - Azure Regenerate Agent Registration Key
 Regenerate a primary or secondary agent registration key
 
- ![screenshot: fn-azure-regenerate-agent-registration-key ](./doc/screenshots/fn-azure-regenerate-agent-registration-key.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-regenerate-agent-registration-key ](./doc/screenshots/fn-azure-regenerate-agent-registration-key.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -3160,7 +3192,7 @@ if results.get("success"):
 ## Function - Azure Resume Job
 Resume the job identified by jobName.
 
- ![screenshot: fn-azure-resume-job ](./doc/screenshots/fn-azure-resume-job.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-resume-job ](./doc/screenshots/fn-azure-resume-job.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -3235,7 +3267,7 @@ if results.get("success"):
 ## Function - Azure Stop Job
 Stop the job identified by jobName.
 
- ![screenshot: fn-azure-stop-job ](./doc/screenshots/fn-azure-stop-job.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-stop-job ](./doc/screenshots/fn-azure-stop-job.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -3310,7 +3342,7 @@ if results.get("success"):
 ## Function - Azure Suspend Job
 Suspend the job identified by job name.
 
- ![screenshot: fn-azure-suspend-job ](./doc/screenshots/fn-azure-suspend-job.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-suspend-job ](./doc/screenshots/fn-azure-suspend-job.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -3385,7 +3417,7 @@ if results.get("success"):
 ## Function - Azure Update Account
 Update an automation account.
 
- ![screenshot: fn-azure-update-account ](./doc/screenshots/fn-azure-update-account.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-update-account ](./doc/screenshots/fn-azure-update-account.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -3493,8 +3525,8 @@ if getattr(playbook.inputs, "azure_automation_account_tags"):
   payload["tags"] = getattr(playbook.inputs, "azure_automation_account_tags", {})
 if hasattr(playbook.inputs, "azure_automation_account_public_network_access"):
   payload["properties"]["publicNetworkAccess"] = getattr(playbook.inputs, "azure_automation_account_public_network_access")
-if hasattr(playbook.inputs, "azure_automation_account_disbale_local_auth"):
-  payload["properties"]["disableLocalAuth"] = getattr(playbook.inputs, "azure_automation_account_disbale_local_auth")
+if hasattr(playbook.inputs, "azure_automation_account_disable_local_auth"):
+  payload["properties"]["disableLocalAuth"] = getattr(playbook.inputs, "azure_automation_account_disable_local_auth")
 
 inputs.input_parameters = str(payload)
 ```
@@ -3518,7 +3550,7 @@ if results.get("success"):
 ## Function - Azure Update Credential
 Update a credential
 
- ![screenshot: fn-azure-update-credential ](./doc/screenshots/fn-azure-update-credential.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-update-credential ](./doc/screenshots/fn-azure-update-credential.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -3617,7 +3649,7 @@ if results.get("success"):
 ## Function - Azure Update Schedule
 Update the schedule identified by schedule name.
 
- ![screenshot: fn-azure-update-schedule ](./doc/screenshots/fn-azure-update-schedule.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-azure-update-schedule ](./doc/screenshots/fn-azure-update-schedule.png)
 
 <details><summary>Inputs:</summary>
 <p>

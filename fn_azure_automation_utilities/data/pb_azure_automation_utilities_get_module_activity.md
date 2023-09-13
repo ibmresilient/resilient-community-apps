@@ -24,7 +24,7 @@
 | Account name | `azure_automation_account_name` | text | The Azure automation account name | Always |
 | Activity Name | `azure_automation_activity_name` | text | The Azure automaion module activity name | Always |
 | Module Name | `azure_automation_module_name` | text | The Azure automation module name | Always |
-| Resouce Group name | `azure_automation_resouce_group_name` | text | The Azure automation resource group name | Always |
+| Resouce Group name | `azure_automation_resource_group_name` | text | The Azure automation resource group name | Always |
 
 ### Object Type
 `incident`
@@ -50,7 +50,7 @@ Retrieve the activity in the module identified by module name and activity name.
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.activity_name = playbook.inputs.azure_automation_activity_name
 inputs.module_name = playbook.inputs.azure_automation_module_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resouce_group_name
+inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
 ```
 
 ---

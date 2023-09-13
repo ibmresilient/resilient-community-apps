@@ -63,8 +63,8 @@ if getattr(playbook.inputs, "azure_automation_account_tags"):
   payload["tags"] = getattr(playbook.inputs, "azure_automation_account_tags", {})
 if hasattr(playbook.inputs, "azure_automation_account_public_network_access"):
   payload["properties"]["publicNetworkAccess"] = getattr(playbook.inputs, "azure_automation_account_public_network_access")
-if hasattr(playbook.inputs, "azure_automation_account_disbale_local_auth"):
-  payload["properties"]["disableLocalAuth"] = getattr(playbook.inputs, "azure_automation_account_disbale_local_auth")
+if hasattr(playbook.inputs, "azure_automation_account_disable_local_auth"):
+  payload["properties"]["disableLocalAuth"] = getattr(playbook.inputs, "azure_automation_account_disable_local_auth")
 
 inputs.input_parameters = str(payload)
 ```
