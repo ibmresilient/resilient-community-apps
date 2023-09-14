@@ -50,6 +50,9 @@ class FunctionComponent(AppFunctionComponent):
 
         # Get the newly created form entry object
         entries, status_code = helix_client.query_form_entry(ENTRY_NAME, incident_number)
+        # Test if entries are returned
+        if not entries.get('entries', []) or not len(entries.get('entries', [])):
+            return {}, False, "query_form_entry returned no entries"
         entry = entries.get("entries", [])[0]
         # Save the incident number so we can log it. This is the ID that shows in the BMC Helix UI
         incident_number = entry.get("values", {}).get("Incident Number")

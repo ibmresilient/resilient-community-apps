@@ -195,7 +195,8 @@ class HelixClient(HelixAPI):
 
     # Used in selftest
     def get_form_schema(self, form_name):
-        """Gets a form definition schema from BMC Helix
+        """
+        Gets a form definition schema from BMC Helix
 
         :param form_name: Name of the form schema to retrieve
         :type form_name: str

@@ -198,4 +198,4 @@ class FunctionComponent(AppFunctionComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results, success=success, reason=reason)
         except Exception as e:
-            yield FunctionError(e)
+            yield FunctionResult({}, success=False, reason=str(e))
