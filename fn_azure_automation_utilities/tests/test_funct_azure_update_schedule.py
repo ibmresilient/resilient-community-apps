@@ -62,7 +62,7 @@ class TestAzureUpdateSchedule:
     ])
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        with patch("fn_azure_automation_utilities.components.funct_azure_update_schedule.AzureClient") as patch_ack:
+        with patch("fn_azure_automation_utilities.components.funct_azure_update_schedule.get_azure_client") as patch_ack:
             patch_ack.return_value = helper.mock_init()
             results = call_azure_update_schedule_function(circuits_app, mock_inputs)
             assert(expected_results == results.get("content", {}))
