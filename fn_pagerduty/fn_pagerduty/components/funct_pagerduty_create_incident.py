@@ -37,14 +37,14 @@ class FunctionComponent(ResilientComponent):
 
             createDict = self._buildIncidentPayload(kwargs, self.options, self.res_options)
             #
-            yield StatusMessage("starting...")
+            yield StatusMessage("Starting Create Incident...")
             resp = create_incident(createDict)
-            yield StatusMessage("pagerduty incident created")
+            yield StatusMessage("Pagerduty Incident Created")
 
             # Produce a FunctionResult with the results
             yield FunctionResult({"pd": resp})
         except Exception as err:
-            yield FunctionError(err)
+            yield FunctionError(str(err))
 
 
     def _buildIncidentPayload(self, kwargs, pd_options, res_options):

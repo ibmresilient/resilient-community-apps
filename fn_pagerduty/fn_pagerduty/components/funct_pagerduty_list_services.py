@@ -32,14 +32,14 @@ class FunctionComponent(ResilientComponent):
         """Function: """
         try:
             # validate the function parameters:
-            yield StatusMessage("starting...")
+            yield StatusMessage("Starting List Services...")
             resp = list_services(self.options)
-            yield StatusMessage("pagerduty services listed")
+            yield StatusMessage("Pagerduty Services Listed")
 
             # Produce a FunctionResult with the results - if not error, the response is not used
             yield FunctionResult(resp)
         except Exception as err:
-            yield FunctionError(err)
+            yield FunctionError(str(err))
 
     def list_services_callback(self, resp):
         """ handle results such as this

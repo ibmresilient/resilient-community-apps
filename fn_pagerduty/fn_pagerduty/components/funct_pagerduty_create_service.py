@@ -30,21 +30,21 @@ class FunctionComponent(ResilientComponent):
 
     @function("pagerduty_create_service")
     def _pagerduty_create_service_function(self, event, *args, **kwargs):
-        """Function: create an incident"""
+        """Function: create a Service"""
         try:
             # validate required fields
             validate_fields(['pd_title', 'pd_escalation_policy'], kwargs)
 
             createDict = self._buildServicePayload(kwargs, self.options, self.res_options)
             
-            yield StatusMessage("starting...")
+            yield StatusMessage("Starting Create Service...")
             resp = create_service(createDict)
-            yield StatusMessage("pagerduty service created")
+            yield StatusMessage("Pagerduty Service Created")
 
             # Produce a FunctionResult with the results
             yield FunctionResult({"pd": resp})
         except Exception as err:
-            yield FunctionError(err)
+            yield FunctionError(str(err))
 
 
     def _buildServicePayload(self, kwargs, pd_options, res_options):

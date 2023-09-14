@@ -31,17 +31,16 @@ class FunctionComponent(ResilientComponent):
     def _pagerduty_list_incidents_function(self, event, *args, **kwargs):
         """Function: """
         try:
-            timestamp = ""
-            timestamp = kwargs.get(u'pd_search_date')
+            timestamp = kwargs.get(u"pb_search_date", "")
             
-            yield StatusMessage("starting...")
+            yield StatusMessage("Starting List Incidents...")
             resp = list_incidents(self.options, timestamp)
-            yield StatusMessage("pagerduty incidents listed")
+            yield StatusMessage("Paerduty Incidents Listed")
 
             # Produce a FunctionResult with the results - if not error, the response is not used
             yield FunctionResult(resp)
         except Exception as err:
-            yield FunctionError(err)
+            yield FunctionError(str(err))
 
     def list_incidents_callback(self, resp):
         """ handle results such as this
