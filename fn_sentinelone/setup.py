@@ -23,14 +23,16 @@ def snake_to_camel(word):
 setup(
     name="fn_sentinelone",
     display_name="SentinelOne",
-    version="1.0.1",
+    version="1.1.0",
     license="MIT",
-    author="IBM Resilient",
+    author="IBM SOAR",
     author_email="",
-    url="https://github.com/ibmresilient/fn_sentinelone",
-    description="IBM Security SOAR app for SentinelOne",
-    long_description="""This app allows bi-directional synchronization between IBM SOAR and SentinelOne.
-    SentinelOne threats are escalated to IBM SOAR as cases with the creation of artifacts and notes in SOAR from the threat.""",
+    url="https://ibm.com/mysupport",
+    description="IBM SOAR app - bidirectional synchronization and functions for SentinelOne",
+    long_description="""Bi-directional App for SentinelOne. Query SentinelOne for Threats based \
+         on user-defined query parameters and create and update cases in SOAR.<br>
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
         "resilient-circuits>=49.0.0"
     ],
