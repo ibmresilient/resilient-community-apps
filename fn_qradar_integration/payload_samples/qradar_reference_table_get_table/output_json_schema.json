@@ -12,14 +12,39 @@
     "content": {
       "type": "object",
       "properties": {
-        "time_to_live": {
-          "type": "string"
-        },
         "timeout_type": {
           "type": "string"
         },
         "number_of_elements": {
           "type": "integer"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "None": {
+              "type": "object",
+              "properties": {
+                "None": {
+                  "type": "object",
+                  "properties": {
+                    "last_seen": {
+                      "type": "integer"
+                    },
+                    "first_seen": {
+                      "type": "integer"
+                    },
+                    "source": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "domain_id": {}
+                  }
+                }
+              }
+            }
+          }
         },
         "creation_time": {
           "type": "integer"
@@ -29,6 +54,14 @@
         },
         "namespace": {
           "type": "string"
+        },
+        "key_name_types": {
+          "type": "object",
+          "properties": {
+            "Inner Key 1": {
+              "type": "string"
+            }
+          }
         },
         "element_type": {
           "type": "string"
