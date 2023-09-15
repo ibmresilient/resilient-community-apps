@@ -32,7 +32,7 @@ An example running shell commands on a Linux machine
 `network_utilities_linux_shell_command`
 
 ### Output Name
-`linux_shell_result`
+`network_utilities_shell_result`
 
 ### Message Destination
 `fn_network_utilities`
@@ -48,20 +48,20 @@ inputs.network_utilities_shell_command = "remote_command_linux:remote_computer"
 
 ---
 
-## Local script - linux_shell_result
+## Global script - network_utilities_shell_results
 
 ### Description
-
+parse and display the results from fn_network_utilities: local_shell, linux_shell and remote powershell functions
 
 ### Script Type
-`Local script`
+`Global script`
 
 ### Object Type
-`artifact`
+`incident`
 
 ### Script Content
 ```python
-results = playbook.functions.results.linux_shell_result
+results = playbook.functions.results.network_utilities_shell_result
 
 # Outputs are:
 #  - "commandline": the command that ran

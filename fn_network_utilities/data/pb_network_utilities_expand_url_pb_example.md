@@ -63,15 +63,18 @@ results = playbook.functions.results.expand_url_result
 
 # Add the url expansions to the Artifact Description
 expansions = results.get("urllist", [])
-expansion_list = u"Expansions:\n\n{0}".format("\n\n".join(expansions)) if expansions else "No Expansions"
-
-if artifact.description:
-  artifact.description = "{}\n\n{}".format(artifact.description.content, expansion_list)
-else:
-  artifact.description = expansion_list
   
-for url in expansions:
+hits = []
+for count, url in enumerate(expansions):
   incident.addArtifact("URL", url, u"expansion from {}".format(artifact.value))
+  hits.append({
+    "name": f"Expansion: #{count}",
+    "type": "uri",
+    "value": url
+  })
+  
+if hits:
+  artifact.addHit("Network Utilities Expand URL", hits)
 
 ```
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
 # Generated with resilient-sdk v50.0.151
 
 """Generate the Resilient customizations required for fn_network_utilities"""
@@ -40,7 +40,9 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": [],
+        "scripts": [
+            u"network_utilities_shell_results"
+        ],
         "playbooks": [
             u"network_utilities_domain_distance_pb_example",
             u"network_utilities_expand_url_pb_example",
@@ -76,6 +78,8 @@ def customization_data(client=None):
         - network_utilities_linux_shell_command_pb_example
         - network_utilities_local_shell_command
         - network_utilities_windows_shell_command_pb_example
+    - Scripts:
+        - network_utilities_shell_results
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

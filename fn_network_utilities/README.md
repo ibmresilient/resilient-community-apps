@@ -254,9 +254,11 @@ if results.closest.get("distance") <= 1:
 
 ---
 ## Function - Network Utilities: Expand URL
-Takes a URL (mostly shortened) and follows it through redirects as it expands. The results include each URL, which are added to a new artifact.
+Takes a URL (mostly shortened) and follows it through redirects as it expands. The results include each URL, which are added as a new artifact and as artifact hits on the original artifact.
 
  ![screenshot: fn-network-utilities-expand-url ](./doc/screenshots/fn-network-utilities-expand-url.png)
+
+![screenshot: fn-network-utilities-expand-url ](./doc/screenshots/expand_url_hits.png)
 
 <details><summary>Inputs:</summary>
 <p>

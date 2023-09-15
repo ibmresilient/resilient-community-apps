@@ -32,7 +32,7 @@ An example running powershell scripts in a Windows environment
 `network_utilities_windows_shell_command`
 
 ### Output Name
-`windows_powershell_result`
+`network_utilities_shell_result`
 
 ### Message Destination
 `fn_network_utilities`
@@ -41,25 +41,25 @@ An example running powershell scripts in a Windows environment
 ```python
 inputs.network_utilities_shell_params = artifact.value
 # change to your app.config definitions of a powershell script and windows compouter
-inputs.network_utilities_shell_command = "remote_command:remote_computer"
+inputs.network_utilities_shell_command = "remote_command_powershell:remote_windows"
 ```
 
 ---
 
-## Local script - windows_powershell_result
+## Global script - network_utilities_shell_results
 
 ### Description
-
+parse and display the results from fn_network_utilities: local_shell, linux_shell and remote powershell functions
 
 ### Script Type
-`Local script`
+`Global script`
 
 ### Object Type
-`artifact`
+`incident`
 
 ### Script Content
 ```python
-results = playbook.functions.results.windows_powershell_result
+results = playbook.functions.results.network_utilities_shell_result
 
 # Outputs are:
 #  - "commandline": the command that ran
