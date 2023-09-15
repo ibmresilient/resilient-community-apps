@@ -31,6 +31,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # Validate inputs
         validate_fields(["account_name", "resource_group_name", "input_parameters", "credential_name"], fn_inputs)
+        # fn_inputs.input_parameters is a string dictionary. Convert it into a dictionary from a string.
         input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
         if not input_parameters.get("properties", {}).get("userName") and not input_parameters.get("properties", {}).get("password"):
             raise KeyError("Either Credential Username or Credential password have to be given.")

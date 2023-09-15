@@ -30,8 +30,9 @@ class FunctionComponent(AppFunctionComponent):
 
         # Validate inputs
         validate_fields(["account_name", "resource_group_name", "input_parameters"], fn_inputs)
+        # fn_inputs.input_parameters is a string dictionary. Convert it into a dictionary from a string.
         input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
-        # If no tags given then remove it from the dictionary
+        # If no tags given then remove it from the dictionary. If left in the dictionary when empty it will cause the request to Azure to fail.
         if input_parameters.get("tags") == None:
             del input_parameters["tags"]
 

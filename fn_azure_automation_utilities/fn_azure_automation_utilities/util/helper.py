@@ -3,6 +3,10 @@ from resilient_lib import IntegrationError
 import time
 
 PACKAGE_NAME = "fn_azure_automation_utilities"
+STATUS_CODE_200 = 200
+STATUS_CODE_201 = 201
+API_VERSION_2019 = "api-version=2019-06-01"
+API_VERSION_2021 = "api-version=2021-06-22"
 
 LOG = getLogger(__name__)
 
@@ -86,7 +90,6 @@ class AzureClient(object):
         self.header = {"Authorization": f"Bearer {self.token}",
                        "Content-Type": "application/json"}
         self.base_url = f"https://management.azure.com/subscriptions/{self.subscription_id}/resourceGroups/{self.resource_group_name}/providers/Microsoft.Automation/automationAccounts/{self.automation_account_name}"
-        self.api_version = "api-version=2019-06-01"
 
     def get_token(self):
         """
@@ -106,7 +109,7 @@ class AzureClient(object):
         try:
             response = self.rc.execute("POST", url, data=payload)
             response.raise_for_status()
-            if response.status_code == 200:
+            if response.status_code == STATUS_CODE_200:
                 response = response.json()
                 self.token = response['access_token']
                 return response['access_token']
@@ -127,7 +130,7 @@ class AzureClient(object):
         :rtype response_json: dict
         :raises: ExpiredAuthenticationTokenError, RunPlaybookAzureError
         """
-        url = f'{self.base_url}/jobs/{job_name}?{self.api_version}'
+        url = f'{self.base_url}/jobs/{job_name}?{API_VERSION_2019}'
         payload = {
             "properties": {
                 "runbook": {
@@ -144,7 +147,7 @@ class AzureClient(object):
             LOG.info(f"Executing Runbook '{runbook_name}' with NO inputs")
 
         response = self.rc.execute("PUT", url, headers=self.header, json=payload)
-        if response.status_code in [200, 201]:
+        if response.status_code in [STATUS_CODE_200, STATUS_CODE_201]:
             LOG.info(f"Runbook '{runbook_name}' successfully executed.")
             return response.json()
         else:
@@ -161,7 +164,7 @@ class AzureClient(object):
         :return: Get response to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/jobs/{job_name}?{self.api_version}"
+        url = f"{self.base_url}/jobs/{job_name}?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def get_job_results(self, job_name: str):
@@ -172,7 +175,7 @@ class AzureClient(object):
         :return response: String response of the output of the Azure Automation job
         :return type: str
         """
-        url = f"{self.base_url}/jobs/{job_name}/output?{self.api_version}"
+        url = f"{self.base_url}/jobs/{job_name}/output?{API_VERSION_2019}"
         header = self.header
         header["Content-Type"] = "text/plain"
         response = self.rc.execute("GET", url, headers=header).content
@@ -223,7 +226,7 @@ class AzureClient(object):
             }
         }
         """
-        url = f"{self.base_url}?api-version=2021-06-22"
+        url = f"{self.base_url}?{API_VERSION_2021}"
         return self.rc.execute("PUT", url, headers=self.header, json=payload).json()
 
     def update_account(self, payload: dict):
@@ -252,7 +255,7 @@ class AzureClient(object):
             }
         }
         """
-        url = f"{self.base_url}?api-version=2021-06-22"
+        url = f"{self.base_url}?{API_VERSION_2021}"
         return self.rc.execute("PATCH", url, headers=self.header, json=payload).json()
 
     def delete_acount(self):
@@ -261,7 +264,7 @@ class AzureClient(object):
         :return: Response from Delete request to delete an Azure automation account.
         :return type: request object
         """
-        url = f"{self.base_url}?api-version=2021-06-22"
+        url = f"{self.base_url}?{API_VERSION_2021}"
         return self.rc.execute("Delete", url, headers={"Authorization": self.header.get("Authorization")})
 
     def get_account(self):
@@ -270,7 +273,7 @@ class AzureClient(object):
         :return: Response from GET request to get an Azure automation account
         :return type: dict
         """
-        url = f"{self.base_url}?api-version=2021-06-22"
+        url = f"{self.base_url}?{API_VERSION_2021}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def list_accounts(self):
@@ -279,7 +282,7 @@ class AzureClient(object):
         :return: Response from GET request to list Azure automation accounts
         :return type: dict
         """
-        url = f"https://management.azure.com/subscriptions/{self.subscription_id}/providers/Microsoft.Automation/automationAccounts?api-version=2021-06-22"
+        url = f"https://management.azure.com/subscriptions/{self.subscription_id}/providers/Microsoft.Automation/automationAccounts?{API_VERSION_2021}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def list_accounts_by_resource_group(self):
@@ -288,7 +291,7 @@ class AzureClient(object):
         :return: Response from GET request to list Azure automation accounts
         :return type: dict
         """
-        url = f"https://management.azure.com/subscriptions/{self.subscription_id}/resourceGroups/{self.resource_group_name}/providers/Microsoft.Automation/automationAccounts?api-version=2021-06-22"
+        url = f"https://management.azure.com/subscriptions/{self.subscription_id}/resourceGroups/{self.resource_group_name}/providers/Microsoft.Automation/automationAccounts?{API_VERSION_2021}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def get_module_activity(self, moduleName: str, activityName: str):
@@ -301,7 +304,7 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/modules/{moduleName}/activities/{activityName}?{self.api_version}"
+        url = f"{self.base_url}/modules/{moduleName}/activities/{activityName}?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def list_module_activities(self, moduleName: str):
@@ -312,7 +315,7 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/modules/{moduleName}/activities?{self.api_version}"
+        url = f"{self.base_url}/modules/{moduleName}/activities?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def get_runbook(self, runbook_name: str):
@@ -323,7 +326,7 @@ class AzureClient(object):
         :return: Response to GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/runbooks/{runbook_name}?{self.api_version}"
+        url = f"{self.base_url}/runbooks/{runbook_name}?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def list_runbooks_by_automation_account(self):
@@ -332,7 +335,7 @@ class AzureClient(object):
         :return: Response to GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/runbooks?{self.api_version}"
+        url = f"{self.base_url}/runbooks?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def delete_runbook(self, runbook_name: str):
@@ -343,7 +346,7 @@ class AzureClient(object):
         :return: Response to Delete request to Azure
         :return type: object
         """
-        url = f"{self.base_url}/runbooks/{runbook_name}?{self.api_version}"
+        url = f"{self.base_url}/runbooks/{runbook_name}?{API_VERSION_2019}"
         return self.rc.execute("DELETE", url, headers={"Authorization": self.header.get("Authorization")})
 
     def list_jobs_by_automation_account(self):
@@ -352,7 +355,7 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return trype: dict
         """
-        url = f"{self.base_url}/jobs?{self.api_version}"
+        url = f"{self.base_url}/jobs?{API_VERSION_2019}"
         header = self.header
         header["Content-Type"] = 'application/json'
         return self.rc.execute("GET", url, headers=header).json()
@@ -365,7 +368,7 @@ class AzureClient(object):
         :return: Response from POST request to Azure
         :return trype: response object
         """
-        url = f"{self.base_url}/jobs/{job_name}/stop?{self.api_version}"
+        url = f"{self.base_url}/jobs/{job_name}/stop?{API_VERSION_2019}"
         return self.rc.execute("POST", url, headers=self.header)
 
     def resume_job(self, job_name: str):
@@ -376,7 +379,7 @@ class AzureClient(object):
         :return: Response from POST request to Azure
         :return trype: response object
         """
-        url = f"{self.base_url}/jobs/{job_name}/resume?{self.api_version}"
+        url = f"{self.base_url}/jobs/{job_name}/resume?{API_VERSION_2019}"
         return self.rc.execute("POST", url, headers=self.header)
 
     def suspend_job(self, job_name: str):
@@ -387,7 +390,7 @@ class AzureClient(object):
         :return: Response from POST request to Azure
         :return trype: response object
         """
-        url = f"{self.base_url}/jobs/{job_name}/suspend?{self.api_version}"
+        url = f"{self.base_url}/jobs/{job_name}/suspend?{API_VERSION_2019}"
         return self.rc.execute("POST", url, headers=self.header)
 
     def get_agent_registration_information(self):
@@ -396,7 +399,7 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return type: Dict
         """
-        url = f"{self.base_url}/agentRegistrationInformation?{self.api_version}"
+        url = f"{self.base_url}/agentRegistrationInformation?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def regenerate_account_registration_key(self, payload):
@@ -407,7 +410,7 @@ class AzureClient(object):
         :return: Response from POST request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/agentRegistrationInformation/regenerateKey?{self.api_version}"
+        url = f"{self.base_url}/agentRegistrationInformation/regenerateKey?{API_VERSION_2019}"
         return self.rc.execute("POST", url, json=payload, headers=self.header).json()
 
     def create_credential(self, credential_name: str, payload: dict):
@@ -430,7 +433,7 @@ class AzureClient(object):
             }
         }
         """
-        url = f"{self.base_url}/credentials/{credential_name}?{self.api_version}"
+        url = f"{self.base_url}/credentials/{credential_name}?{API_VERSION_2019}"
         return self.rc.execute("PUT", url, json=payload, headers=self.header).json()
 
     def delete_credential(self, credential_name: str):
@@ -441,7 +444,7 @@ class AzureClient(object):
         :return: Response from DELETE request to Azure
         :return type: object
         """
-        url = f"{self.base_url}/credentials/{credential_name}?{self.api_version}"
+        url = f"{self.base_url}/credentials/{credential_name}?{API_VERSION_2019}"
         return self.rc.execute("DELETE", url, headers={"Authorization": self.header.get("Authorization")})
 
     def get_credential(self, credential_name: str):
@@ -452,7 +455,7 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/credentials/{credential_name}?{self.api_version}"
+        url = f"{self.base_url}/credentials/{credential_name}?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def list_credentials_by_automation_account(self):
@@ -461,7 +464,7 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/credentials?{self.api_version}"
+        url = f"{self.base_url}/credentials?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def update_credential(self, credential_name: str, payload: dict):
@@ -484,7 +487,7 @@ class AzureClient(object):
             }
         }
         """
-        url = f"{self.base_url}/credentials/{credential_name}?{self.api_version}"
+        url = f"{self.base_url}/credentials/{credential_name}?{API_VERSION_2019}"
         return self.rc.execute("PATCH", url, json=payload, headers=self.header).json()
 
     def create_schedule(self, schedule_name: str, payload: dict):
@@ -510,7 +513,7 @@ class AzureClient(object):
             }
         }
         """
-        url = f"{self.base_url}/schedules/{schedule_name}?{self.api_version}"
+        url = f"{self.base_url}/schedules/{schedule_name}?{API_VERSION_2019}"
         return self.rc.execute("PUT", url, json=payload, headers=self.header).json()
 
     def delete_schedule(self, schedule_name: str):
@@ -521,7 +524,7 @@ class AzureClient(object):
         :return: Response from DELETE request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/schedules/{schedule_name}?{self.api_version}"
+        url = f"{self.base_url}/schedules/{schedule_name}?{API_VERSION_2019}"
         return self.rc.execute("Delete", url, headers={"Authorization": self.header.get("Authorization")})
 
     def get_schedule(self, schedule_name: str):
@@ -532,7 +535,7 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/schedules/{schedule_name}?{self.api_version}"
+        url = f"{self.base_url}/schedules/{schedule_name}?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def list_schedule_by_automation_account(self):
@@ -541,7 +544,7 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/schedules?{self.api_version}"
+        url = f"{self.base_url}/schedules?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def update_schedule(self, schedule_name: str, payload: dict):
@@ -567,7 +570,7 @@ class AzureClient(object):
             }
         }
         """
-        url = f"{self.base_url}/schedules/{schedule_name}?{self.api_version}"
+        url = f"{self.base_url}/schedules/{schedule_name}?{API_VERSION_2019}"
         return self.rc.execute("PATCH", url, json=payload, headers=self.header).json()
 
     def get_node_report(self, node_id: str, report_id: str):
@@ -580,7 +583,7 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/nodes/{node_id}/reports/{report_id}?{self.api_version}"
+        url = f"{self.base_url}/nodes/{node_id}/reports/{report_id}?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def list_node_report_by_node(self, node_id: str):
@@ -591,7 +594,7 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/nodes/{node_id}/reports?{self.api_version}"
+        url = f"{self.base_url}/nodes/{node_id}/reports?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def list_statistics_by_automation_account(self):
@@ -600,7 +603,7 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/statistics?api-version=2021-06-22"
+        url = f"{self.base_url}/statistics?{API_VERSION_2021}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def list_usage_by_automation_account(self):
@@ -609,5 +612,5 @@ class AzureClient(object):
         :return: Response from GET request to Azure
         :return type: dict
         """
-        url = f"{self.base_url}/usages?api-version=2021-06-22"
+        url = f"{self.base_url}/usages?{API_VERSION_2021}"
         return self.rc.execute("GET", url, headers=self.header).json()

@@ -31,6 +31,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # Validate inputs
         validate_fields(["account_name", "resource_group_name", "input_parameters", "schedule_name"], fn_inputs)
+        # fn_inputs.input_parameters is a string dictionary. Convert it into a dictionary from a string.
         input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
         # Either description or isEnabled must be given.
         if not input_parameters.get("properties", {}).get("description") and input_parameters.get("properties", {}).get("isEnabled") == None:

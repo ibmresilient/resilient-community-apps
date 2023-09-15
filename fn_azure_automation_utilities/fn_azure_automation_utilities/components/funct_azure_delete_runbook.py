@@ -29,7 +29,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # Validate inputs
         validate_fields(["account_name", "resource_group_name", "runbook_name"], fn_inputs)
-        
+
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
