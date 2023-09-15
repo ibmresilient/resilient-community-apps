@@ -7,24 +7,25 @@
     "content": {
       "timeout_type": "FIRST_SEEN",
       "number_of_elements": 1,
-      "creation_time": 1440703811218,
-      "name": "SSH Servers",
+      "creation_time": 1440703735265,
+      "name": "DNS Servers",
       "namespace": "SHARED",
       "element_type": "IP",
-      "collection_id": 17
+      "collection_id": 12
     }
   },
-  "raw": "{\"status_code\": 200, \"content\": {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 1, \"creation_time\": 1440703811218, \"name\": \"SSH Servers\", \"namespace\": \"SHARED\", \"element_type\": \"IP\", \"collection_id\": 17}}",
+  "raw": "{\"status_code\": 200, \"content\": {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 1, \"creation_time\": 1440703735265, \"name\": \"DNS Servers\", \"namespace\": \"SHARED\", \"element_type\": \"IP\", \"collection_id\": 12}}",
   "inputs": {
-    "qradar_reference_set_name": "SSH Servers",
-    "qradar_reference_set_item_value": "1.1.1.1",
-    "qradar_label": "SOAR_Plugin_Destination_Name"
+    "qradar_reference_set_name": "DNS Servers",
+    "qradar_reference_set_item_value": "9.9.9.9",
+    "qradar_label": "9.21.118.188"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-qradar-integration",
-    "package_version": "2.2.0",
-    "execution_time_ms": 496,
-    "timestamp": "2022-01-28 13:25:05"
+    "package_version": "2.2.6",
+    "host": "Henry's IBM 16 inch Macbook Pro",
+    "execution_time_ms": 1306,
+    "timestamp": "2023-09-14 21:08:54"
   }
 }

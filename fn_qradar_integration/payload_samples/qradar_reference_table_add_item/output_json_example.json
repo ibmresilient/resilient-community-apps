@@ -5,30 +5,33 @@
   "content": {
     "status_code": 200,
     "content": {
-      "time_to_live": "0 years 1 mons 0 days 0 hours 0 mins 0.0 secs",
-      "timeout_type": "LAST_SEEN",
-      "number_of_elements": 6,
-      "creation_time": 1637336107774,
-      "name": "Generated_Cases",
+      "timeout_type": "FIRST_SEEN",
+      "number_of_elements": 1,
+      "creation_time": 1694502585199,
+      "name": "test_ref_tabe_1",
       "namespace": "SHARED",
+      "key_name_types": {
+        "Inner Key 1": "ALN"
+      },
       "element_type": "ALN",
-      "collection_id": 51,
-      "key_label": "offense_id"
+      "collection_id": 44,
+      "key_label": "Outer Key Label"
     }
   },
-  "raw": "{\"status_code\": 200, \"content\": {\"time_to_live\": \"0 years 1 mons 0 days 0 hours 0 mins 0.0 secs\", \"timeout_type\": \"LAST_SEEN\", \"number_of_elements\": 6, \"creation_time\": 1637336107774, \"name\": \"Generated_Cases\", \"namespace\": \"SHARED\", \"element_type\": \"ALN\", \"collection_id\": 51, \"key_label\": \"offense_id\"}}",
+  "raw": "{\"status_code\": 200, \"content\": {\"timeout_type\": \"FIRST_SEEN\", \"number_of_elements\": 1, \"creation_time\": 1694502585199, \"name\": \"test_ref_tabe_1\", \"namespace\": \"SHARED\", \"key_name_types\": {\"Inner Key 1\": \"ALN\"}, \"element_type\": \"ALN\", \"collection_id\": 44, \"key_label\": \"Outer Key Label\"}}",
   "inputs": {
-    "qradar_reference_table_item_value": "1.1.1.1",
-    "qradar_reference_table_item_inner_key": "09",
-    "qradar_reference_table_item_outer_key": "785",
-    "qradar_reference_table_name": "Generated_Cases",
-    "qradar_label": "SOAR_Plugin_Destination_Name"
+    "qradar_reference_table_item_value": "192.168.107.107",
+    "qradar_reference_table_item_inner_key": null,
+    "qradar_reference_table_item_outer_key": null,
+    "qradar_reference_table_name": "test_ref_tabe_1",
+    "qradar_label": "9.21.118.188"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-qradar-integration",
-    "package_version": "2.2.0",
-    "execution_time_ms": 829,
-    "timestamp": "2022-01-28 13:24:01"
+    "package_version": "2.2.6",
+    "host": "Henry's IBM 16 inch Macbook Pro",
+    "execution_time_ms": 1659,
+    "timestamp": "2023-09-12 15:10:39"
   }
 }

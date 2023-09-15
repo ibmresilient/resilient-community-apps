@@ -37,8 +37,8 @@ Look for an item in QRadar reference set and add a note to the Incident
 ### Function-Input Script
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
-inputs.qradar_reference_set_name = playbook.functions.results.qradar_reference_set_name
-inputs.qradar_label = playbook.functions.results.qradar_servers
+inputs.qradar_reference_set_name = playbook.inputs.qradar_reference_set_name
+inputs.qradar_label = playbook.inputs.qradar_server
 ```
 
 ---

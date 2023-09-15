@@ -55,7 +55,7 @@ inputs.qradar_label = row["qradar_server"]
 
 ### Script Content
 ```python
-resuts = playbook.functions.results.qradar_refrence_table_get_table_data_result
+results = playbook.functions.results.qradar_refrence_table_get_table_data_result
 if results.success:
   for outer_key, item in results.content.get('data',[]).items():
     for inner_key, inner_item in item.items():

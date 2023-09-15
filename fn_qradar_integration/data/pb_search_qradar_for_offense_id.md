@@ -36,12 +36,20 @@ Use the qradar_id field of the incident to search qradar events, and update the 
 
 ### Function-Input Script
 ```python
-inputs.qradar_search_param2 = incident.properties.qradar_id
-
 inputs.qradar_label = playbook.inputs.qradar_server
-  
+
+
 if playbook.inputs.qradar_query_all_results:
   inputs.qradar_query_all_results = playbook.inputs.qradar_query_all_results
+
+  
+inputs.qradar_query = "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days"
+inputs.qradar_search_param1  = "DATEFORMAT(starttime, 'YYYY-MM-dd HH:mm') as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)"
+inputs.qradar_search_param2 = incident.properties.qradar_id
+inputs.qradar_search_param3 = '7'
+inputs.qradar_query_range_start = '1'
+inputs.qradar_query_range_end = '5'
+
 ```
 
 ---
