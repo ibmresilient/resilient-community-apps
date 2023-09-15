@@ -1,4 +1,4 @@
-# docker build -t ibmresilient/fn_service_now:2.2.1 -t ibmresilient/fn_service_now:latest .
+# docker build -t ibmresilient/fn_service_now:2.2.0 -t ibmresilient/fn_service_now:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest

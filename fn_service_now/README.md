@@ -1,7 +1,6 @@
 # IBM Security QRadar SOAR App for ServiceNow
 
 - [Release Notes](#release-notes)
-  - [v2.2.1](#v221)
   - [v2.2.0](#v220)
   - [v2.1.0](#v210)
   - [v2.0.9](#v209)
@@ -18,9 +17,6 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v2.2.1
-* Fix README links
-
 ### v2.2.0
 * Added playbooks
 
