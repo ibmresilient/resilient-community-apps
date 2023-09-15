@@ -46,7 +46,7 @@ class FunctionComponent(ResilientComponent):
         log = getLogger(__name__)
 
         try:
-            # Instansiate helper (which gets appconfigs from file)
+            # Instantiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)

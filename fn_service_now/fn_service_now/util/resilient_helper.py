@@ -356,7 +356,7 @@ class ResilientHelper(object):
         attachment["id"] = attachment_id
         attachment["name"] = meta_data["name"]
 
-        # Get attachment contencts url
+        # Get attachment contents url
         get_contents_url = f"{get_url}/contents"
 
         # Get attachment contents
@@ -448,7 +448,7 @@ class ResilientHelper(object):
         return self.SN_TABLE_NAME
 
     def sn_api_request(self, rc, method, endpoint, params=None, data=None, headers=None):
-        """Method to handle resquests to our custom APIs in ServiceNow"""
+        """Method to handle requests to our custom APIs in ServiceNow"""
         res, return_value = None, None
 
         SUPPORTED_METHODS = ["GET", "POST", "PATCH"]

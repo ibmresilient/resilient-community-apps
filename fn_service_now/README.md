@@ -84,7 +84,7 @@ Bi-directional app with ServiceNow and IBM Security QRadar SOAR allows SEC Ops P
 * Access to the **Incident Table** in ServiceNow
 * ServiceNow `IBM SOAR App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
   * If integrating with ServiceNow Security Incident Table (SIR), `IBM SOAR App >= 2.0.9` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
-* If IBM SOAR is not publicly accessible (behind a firewall), a ServiceNow MID Server is required. See the [Install Guide](./docs/install_guide) for more information
+* If IBM SOAR is not publicly accessible (behind a firewall), a ServiceNow MID Server is required. See the [Install Guide](https://github.com/ibmresilient/resilient-community-apps/tree/main/fn_service_now/docs/install_guide) for more information
 * IBM Cloud Pak for Security `>= 1.6.0` *or* IBM SOAR `>= v45.0.0`
 * App Host `>= v1.10.0` (recommended) *or* an Integrations Server running `resilient-circuits >= v45.0.0`.
   - `fn_service_now >= v1.0.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
@@ -93,14 +93,14 @@ Bi-directional app with ServiceNow and IBM Security QRadar SOAR allows SEC Ops P
 ---
 
 ## Install
-Follow our [Install Guide](./docs/install_guide) to get up and running. 
+Follow our [Install Guide](https://github.com/ibmresilient/resilient-community-apps/tree/main/fn_service_now/docs/install_guide) to get up and running. 
 
 ---
 
 ## Customize
 The default configuration satisfies the requirements for a number of use cases. To adapt the app for your specific requirements, see these customization guides:
-- [Customize ServiceNow App Guide](./docs/customize_snow_guide)
-- [Customize SOAR Functions Guide](./docs/customize_resilient_guide)
+- [Customize ServiceNow App Guide](https://github.com/ibmresilient/resilient-community-apps/tree/main/fn_service_now/docs/customize_snow_guide)
+- [Customize SOAR Functions Guide](https://github.com/ibmresilient/resilient-community-apps/tree/main/fn_service_now/docs/customize_resilient_guide)
 
 ---
 
