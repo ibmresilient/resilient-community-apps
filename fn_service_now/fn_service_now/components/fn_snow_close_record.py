@@ -52,7 +52,7 @@ class FunctionComponent(ResilientComponent):
         log = getLogger(__name__)
 
         try:
-            # Instansiate helper (which gets appconfigs from file)
+            # Instantiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
@@ -81,7 +81,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Function Inputs OK")
 
-            # Instansiate new Resilient API object
+            # Instantiate new Resilient API object
             res_client = self.rest_client()
 
             # Get the datatable and its data

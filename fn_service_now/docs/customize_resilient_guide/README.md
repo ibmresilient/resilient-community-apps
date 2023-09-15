@@ -146,7 +146,7 @@ results = {
 </details>
 
 
-<details><summary>Example inputing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 * We also make use of user inputs from **Rule Activity Fields** by using: `playbook.inputs.sn_initial_note`.
 * In the supplied example playbook, there are 3 Functions chained together, with this Function being the third. 
@@ -276,7 +276,7 @@ results = {
 
 </details>
 
-<details><summary>inputing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 ```python
 from json import dumps
@@ -402,7 +402,7 @@ results = {
 
 </details>
 
-<details><summary>inputing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 * This example **creates a Python Dictionary** to map the ServiceNow States to their corresponding numeric value.
 > * *Note that for SIR tables, the record state options are new. If you intend to only use this with SIR or INC tables exclusively, you can remove the ones here that you don't need. These string values correspond to the Activity Field SN Record State which can be customized as well.*
@@ -525,7 +525,7 @@ results = {
 
 </details>
 
-<details><summary>inputing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 ```python
 inputs.sn_note_type = "work_note"
@@ -612,7 +612,7 @@ results = {
 
 </details>
 
-<details><summary>inputing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 ```python
 # The id of this attachment
@@ -703,7 +703,7 @@ results = {
 
 </details>
 
-<details><summary>inputing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 ```python
 # The table in ServiceNow to query
@@ -782,7 +782,7 @@ results = {
 
 </details>
 
-<details><summary>inputing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 ```python
 # Get the incident id
