@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "filename": {
+      "type": "string"
+    },
+    "content_type": {
+      "type": "string"
+    },
+    "size": {
+      "type": "integer"
+    },
+    "created": {
+      "type": "integer"
+    },
+    "content": {
+      "type": "string"
+    }
+  }
+}

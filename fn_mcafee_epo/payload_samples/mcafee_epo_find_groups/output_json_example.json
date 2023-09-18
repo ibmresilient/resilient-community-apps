@@ -1,0 +1,36 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "groupId": 2,
+      "groupPath": "My Organization"
+    },
+    {
+      "groupId": 3,
+      "groupPath": "My Organization\\Lost and Found"
+    },
+    {
+      "groupId": 4,
+      "groupPath": "My Organization\\Lost and Found\\rtp.raleigh.ibm.com"
+    },
+    {
+      "groupId": 5,
+      "groupPath": "My Organization\\Test"
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "incident_id": 2108,
+    "datatable_name": "mcafee_epo_groups"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 1217,
+    "timestamp": "2022-08-11 08:48:38"
+  }
+}

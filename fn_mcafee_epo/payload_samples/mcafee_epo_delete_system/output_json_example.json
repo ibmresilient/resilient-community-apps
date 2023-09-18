@@ -1,0 +1,25 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "name": "toDelete",
+      "id": "15",
+      "message": "Computer deleted successfully",
+      "status": 0
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "mcafee_epo_system_name_or_id": "toDelete"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 615,
+    "timestamp": "2022-08-12 09:11:56"
+  }
+}
