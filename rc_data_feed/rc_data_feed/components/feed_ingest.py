@@ -40,7 +40,9 @@ class PluginPool():
         self.pool = multiprocessing.pool.ThreadPool(thread_pool_size)
 
     def run_plugin(self, task, args):
-        _async_result = self.pool.apply_async(task, args=args)
+        #_async_result = self.pool.apply_async(task, args=args)
+        # run without pooling until sqlendtran can be worked out
+        task(*args)
 
     def async_send_data(self, type_name, workspace, context, payload):
         """handler for asynchronously sending data to a plugin 
@@ -92,16 +94,24 @@ class PluginPool():
         # collect attachment data to pass on
         elif not is_deleted and incl_attachment_data \
                 and type_name == 'attachment':
-            # this will return a byte string
-            payload['content'] = get_file_attachment(self.rest_client_helper.inst_rest_client, inc_id,
-                                                     task_id=payload.get('task_id'),
-                                                     attachment_id=payload['id'])
+            try:
+                # this will return a byte string
+                payload['content'] = get_file_attachment(self.rest_client_helper.inst_rest_client, inc_id,
+                                                         task_id=payload.get('task_id'),
+                                                         attachment_id=payload['id'])
+            except Exception as err:
+                LOG.error("Unable to get attachment content for incident {0} attachment {1}".format(inc_id, payload['id']))
+                payload['content'] = None
         elif not is_deleted and incl_attachment_data \
                 and type_name == 'artifact' \
                 and payload.get('attachment'):
-            # this will return a byte string
-            payload['content'] = get_file_attachment(self.rest_client_helper.inst_rest_client, inc_id,
-                                                     artifact_id=payload['id'])
+            try:
+                # this will return a byte string
+                payload['content'] = get_file_attachment(self.rest_client_helper.inst_rest_client, inc_id,
+                                                         artifact_id=payload['id'])
+            except Exception as err:
+                LOG.error("Unable to get artifact content for incident {0} artifact {1}".format(inc_id, payload['id']))
+                payload['content'] = None
 
         # get the incident workspace for this data
         # reload=true will not work as type_info is the wrong object type
