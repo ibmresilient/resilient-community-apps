@@ -60,6 +60,7 @@
 -->
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
+| 2.3.0 | September. 2023 | Python3 / Playbook Conversion |
 | 2.2.6 | June. 2023 | Fix bug in qradar_search function |
 | 2.2.5 | July. 2022 | Bug Fix for windows clients |
 | 2.2.4 | July. 2022 | Update SOAR required version |
@@ -165,16 +166,7 @@ Additional package dependencies may exist for each of these packages:
 
 
 
-#### Configuration
-<!--
-List any steps that are needed to configure the endpoint to use this app.
--->
 
-
-#### Permissions
-<!--
-List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
--->
 
 
 
@@ -191,16 +183,27 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **host** | Yes | `localhost` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **host** | Yes | `localhost` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **qradarpassword** | Yes | `changeme` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **qradarpassword** | Yes | `changeme` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **qradartoken** | Yes | `changeme` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **qradartoken** | Yes | `changeme` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **username** | Yes | `admin` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **username** | Yes | `admin` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **verify_cert** | Yes | `false|/path/to/cert` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
-| **verify_cert** | Yes | `false|/path/to/cert` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **host** | Yes | `localhost` | *QRadar host name or IP Address * |
+| **qradarpassword** | Yes | `changeme` |  *username password for QRadar authentication* |
+| **qradartoken** | Yes | `changeme` | *QRadar token to use rather than password* |
+| **username** | Yes | `admin` | *Username for QRadar authentication* |
+| **verify_cert** | Yes | `false|/path/to/cert` | *false or path to the certificate file* |
+
+#### 2.3.0 Changes
+In v2.3.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows. But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
+
+#### 2.2.0 Changes
+Starting in version 2.2.0, more than one QRadar instance can be configured for SOAR case data synchronization. For enterprises with only one QRadar instance, your app.config file will continue to define the QRadar instance under the `[fn_qradar_integration]` section header.
+
+For enterprises with more than one QRadar instance, each instance will have it's own section header, such as `[fn_qradar_integration:qradar_instance_label]` where `qradar_instance_label` represents any label helpful to define you QRadar environment.
+
+Be aware that modifications to the workflows will be needed to correctly pass this label through the `qradar_label` function input field if the QRadar server/servers in the app.config have labels.
+
+If you have existing custom workflows, see [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled) for more information about changing them to reference the `qradar_label` function input field.
 
 ### Custom Layouts
 <!--
@@ -249,7 +252,7 @@ results = {
     "timeout_type": "FIRST_SEEN"
   },
   "inputs": {
-    "qradar_label": "9.21.118.188",
+    "qradar_label": "1.1.1.1",
     "qradar_reference_set_item_value": "9.9.9.9",
     "qradar_reference_set_name": "DHCP Servers"
   },
@@ -318,15 +321,15 @@ results = {
     "status_code": 200
   },
   "inputs": {
-    "qradar_label": "9.21.118.188",
+    "qradar_label": "1.1.1.1",
     "qradar_reference_set_item_value": "9.9.9.9",
     "qradar_reference_set_name": "DNS Servers"
   },
   "metrics": {
     "execution_time_ms": 1306,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "host": "local",
     "package": "fn-qradar-integration",
-    "package_version": "2.2.6",
+    "package_version": "2.3.0",
     "timestamp": "2023-09-14 21:08:54",
     "version": "1.0"
   },
@@ -405,7 +408,7 @@ results = {
   },
   "found": "True",
   "inputs": {
-    "qradar_label": "9.21.118.188",
+    "qradar_label": "1.1.1.1",
     "qradar_reference_set_item_value": "192.168.107.107",
     "qradar_reference_set_name": "EC Compromised Hosts"
   },
@@ -440,7 +443,7 @@ None
 ## Function - QRadar Find Reference Sets
 Find reference sets that contain a given item value, together with information about this item in those reference sets. Information includes whether this item is added to the reference set manually or by a rule.
 
- ![screenshot: fn-qradar-find-reference-sets ](./doc/screenshots/fn-qradar-find-reference-sets.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-qradar-find-reference-sets ](./doc/screenshots/fn-qradar-find-reference-sets.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -461,7 +464,7 @@ Find reference sets that contain a given item value, together with information a
 ```python
 results = {
   "inputs": {
-    "qradar_label": "9.21.118.188",
+    "qradar_label": "1.1.1.1",
     "qradar_reference_set_item_value": "192.168.107.107"
   },
   "reference_items": [
@@ -554,7 +557,7 @@ results = {
     "status_code": 200
   },
   "inputs": {
-    "qradar_label": "9.21.118.188",
+    "qradar_label": "1.1.1.1",
     "qradar_reference_table_item_inner_key": null,
     "qradar_reference_table_item_outer_key": null,
     "qradar_reference_table_item_value": "192.168.107.107",
@@ -562,9 +565,9 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 1659,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "host": "local",
     "package": "fn-qradar-integration",
-    "package_version": "2.2.6",
+    "package_version": "2.3.0",
     "timestamp": "2023-09-12 15:10:39",
     "version": "1.0"
   },
@@ -638,7 +641,7 @@ results = {
     "status_code": 200
   },
   "inputs": {
-    "qradar_label": "9.21.118.188",
+    "qradar_label": "1.1.1.1",
     "qradar_reference_table_item_inner_key": "part-3",
     "qradar_reference_table_item_outer_key": "pulse-a142f062-f41b-4c2c-96b8-4ab4e3b7bde4",
     "qradar_reference_table_item_value": "test123",
@@ -646,9 +649,9 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 1420,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "host": "local",
     "package": "fn-qradar-integration",
-    "package_version": "2.2.6",
+    "package_version": "2.3.0",
     "timestamp": "2023-09-15 16:58:55",
     "version": "1.0"
   },
@@ -741,13 +744,13 @@ results = {
     }
   ],
   "inputs": {
-    "qradar_label": "9.21.118.188"
+    "qradar_label": "1.1.1.1"
   },
   "metrics": {
     "execution_time_ms": 1442,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "host": "local",
     "package": "fn-qradar-integration",
-    "package_version": "2.2.6",
+    "package_version": "2.3.0",
     "timestamp": "2023-09-15 18:47:24",
     "version": "1.0"
   },
@@ -830,14 +833,14 @@ results = {
     "timeout_type": "FIRST_SEEN"
   },
   "inputs": {
-    "qradar_label": "9.21.118.188",
+    "qradar_label": "1.1.1.1",
     "qradar_reference_table_name": "test_ref_tabe_1"
   },
   "metrics": {
     "execution_time_ms": 1392,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "host": "local",
     "package": "fn-qradar-integration",
-    "package_version": "2.2.6",
+    "package_version": "2.3.0",
     "timestamp": "2023-09-15 19:00:19",
     "version": "1.0"
   },
@@ -911,7 +914,7 @@ results = {
     "status_code": 200
   },
   "inputs": {
-    "qradar_label": "9.21.118.188",
+    "qradar_label": "1.1.1.1",
     "qradar_reference_table_item_inner_key": "part-3",
     "qradar_reference_table_item_outer_key": "pulse-a142f062-f41b-4c2c-96b8-4ab4e3b7bde4",
     "qradar_reference_table_item_value": "test123",
@@ -919,9 +922,9 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 1365,
-    "host": "Henry\u0027s IBM 16 inch Macbook Pro",
+    "host": "local",
     "package": "fn-qradar-integration",
-    "package_version": "2.2.6",
+    "package_version": "2.3.0",
     "timestamp": "2023-09-15 16:57:43",
     "version": "1.0"
   },
@@ -1816,7 +1819,7 @@ results = {
     }
   ],
   "inputs": {
-    "qradar_label": "9.21.118.188",
+    "qradar_label": "1.1.1.1",
     "qradar_query": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days",
     "qradar_query_all_results": true,
     "qradar_search_param1": "DATEFORMAT(starttime, \u0027YYYY-MM-dd HH:mm\u0027) as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)",

@@ -19,14 +19,14 @@
     "qradar_reference_table_item_value": "test123",
     "qradar_reference_table_item_inner_key": "part-3",
     "qradar_reference_table_item_outer_key": "pulse-a142f062-f41b-4c2c-96b8-4ab4e3b7bde4",
-    "qradar_label": "9.21.118.188",
+    "qradar_label": "1.1.1.1",
     "qradar_reference_table_name": "pulse_imports"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-qradar-integration",
-    "package_version": "2.2.6",
-    "host": "Henry's IBM 16 inch Macbook Pro",
+    "package_version": "2.3.0",
+    "host": "local",
     "execution_time_ms": 1365,
     "timestamp": "2023-09-15 16:57:43"
   }

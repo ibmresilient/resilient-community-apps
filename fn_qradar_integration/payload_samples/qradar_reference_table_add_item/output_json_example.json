@@ -24,13 +24,13 @@
     "qradar_reference_table_item_inner_key": null,
     "qradar_reference_table_item_outer_key": null,
     "qradar_reference_table_name": "test_ref_tabe_1",
-    "qradar_label": "9.21.118.188"
+    "qradar_label": "1.1.1.1"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-qradar-integration",
-    "package_version": "2.2.6",
-    "host": "Henry's IBM 16 inch Macbook Pro",
+    "package_version": "2.3.0",
+    "host": "local",
     "execution_time_ms": 1659,
     "timestamp": "2023-09-12 15:10:39"
   }

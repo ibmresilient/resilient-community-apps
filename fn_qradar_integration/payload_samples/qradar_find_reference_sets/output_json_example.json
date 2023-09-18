@@ -20,7 +20,7 @@
     }
   ],
   "inputs": {
-    "qradar_label": "9.21.118.188",
+    "qradar_label": "1.1.1.1",
     "qradar_reference_set_item_value": "192.168.107.107"
   }
 }
