@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='rc_data_feed',
     display_name='Data Feeder for SOAR',
-    version='3.0.0',
+    version='2.2.2',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -14,7 +14,7 @@ setup(
     description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     install_requires=[
-        'resilient_circuits>=48.2',
+        'resilient_circuits>=45'
     ],
     packages=find_packages(),
     include_package_data=True,
