@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -9,7 +9,7 @@ import sys
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, str_to_bool
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
-from .feed_ingest import Reload, build_feed_outputs, PluginPool
+from .feed_ingest import Reload, build_feed_outputs
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'data_feeder_sync_incidents"""
@@ -63,12 +63,7 @@ class FunctionComponent(ResilientComponent):
             # expose attachment content setting
             self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
-            plugin_pool = PluginPool(rest_client_helper,
-                                     int(self.opts.get("resilient", {}).get("num_workers", 0)),
-                                     feed_outputs,
-                                     self.workspaces)
-
-            df = Reload(plugin_pool,
+            df = Reload(rest_client_helper, feed_outputs, self.workspaces,
                         [ type.strip() for type in self.options.get("reload_types", "").split(",") \
                             if type ],
                         query_api_method=df_query_api_method,
@@ -81,5 +76,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(result_payload)
-        except Exception as err:
-            yield FunctionResult(None, False, str(err))
+        except Exception:
+            yield FunctionError()
