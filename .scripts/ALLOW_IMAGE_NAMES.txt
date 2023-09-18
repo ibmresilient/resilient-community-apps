@@ -11,6 +11,7 @@ fn_aws_guardduty
 fn_aws_iam
 fn_aws_utilities
 fn_bigfix
+fn_bmc_helix
 fn_calendar_invite
 fn_cisco_amp4ep
 fn_cisco_asa
