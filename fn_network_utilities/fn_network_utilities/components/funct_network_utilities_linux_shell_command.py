@@ -42,6 +42,7 @@ class FunctionComponent(AppFunctionComponent):
         shell_command = fn_inputs.network_utilities_shell_command  # text
         shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
         remote_computer = getattr(fn_inputs, "network_utilities_remote_computer", None) #text
+        remote_sudo_password = getattr(fn_inputs, "network_utilities_send_sudo_password", None) #bool
         timeout_linux = int(self.options.get("timeout_linux", DEFAULT_TIMEOUT_SEC))
 
         ad_hoc_shell = str_to_bool(self.options.get("allow_ad_hoc_execution", "False"))
@@ -50,6 +51,7 @@ class FunctionComponent(AppFunctionComponent):
         LOG.info(f"shell_params: {shell_params}")
         LOG.info(f"remote_computer: {remote_computer}")
         LOG.info(f"timeout_linux: {timeout_linux}")
+        LOG.info(f"sudo_password: {remote_sudo_password}")
         LOG.info(f"ad_hoc_shell: {ad_hoc_shell}")
 
         validate_fields(["network_utilities_shell_command"], fn_inputs)
@@ -94,7 +96,7 @@ class FunctionComponent(AppFunctionComponent):
         # Previous version required parenthesis around command, this is for backwards compatibility
         shell_command_base = remove_punctuation(shell_command_base, True)
 
-        run_cmd = RunCmd(remote, shell_command_base, rendered_shell_params)
+        run_cmd = RunCmd(remote, shell_command_base, rendered_shell_params, remote_sudo_password)
         run_cmd.run_remote_linux(timeout_linux)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
@@ -102,13 +104,14 @@ class FunctionComponent(AppFunctionComponent):
         yield FunctionResult(run_cmd.make_result())
 
 class RunCmd():
-    def __init__(self, remote, shell_command, rendered_shell_params):
+    def __init__(self, remote, shell_command, rendered_shell_params, send_sudo_password: bool):
         # Get remote credentials
         if remote:
             self.get_creds(remote)
 
         self.shell_command = shell_command
         self.rendered_shell_params = rendered_shell_params
+        self.send_sudo_password = send_sudo_password
 
         self.tstart = time.time()
         self.retcode = None
@@ -144,7 +147,12 @@ class RunCmd():
             client.connect(hostname=self.remote_server, username=self.remote_user,
                         password=self.remote_password)
 
-            _stdin, stdout, stderr = client.exec_command(self.commandline, timeout=timeout_linux) # nosec
+            stdin, stdout, stderr = client.exec_command(self.commandline, timeout=timeout_linux) # nosec
+            if self.send_sudo_password:
+                LOG.info("sending sudo")
+                stdin.write(f"{self.remote_password}\n")
+                stdin.flush()
+
             self.stdoutdata = stdout.read().decode()
             self.stderrdata = stderr.read().decode()
             self.retcode = stdout.channel.recv_exit_status()

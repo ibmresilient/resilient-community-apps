@@ -50,7 +50,7 @@
 | 1.0.0 | 02/2023 | Initial Release |
 | 1.0.1 | 3/2023 | Add a timeout option for Linux shell command |
 | 1.0.2 | 9/2023 | Added missing OS packages: dig, whois, traceroute |
-| 1.1.0 | 9/2023 | Allow ad_hoc shell execution. Added close connection for Remote Shell when complete. String encoded JSON shell parameters allowed. Support for escaping commas within parameters. Converted rules/workflows to playbooks  |
+| 1.1.0 | 9/2023 | Allow ad_hoc shell execution. Added close connection for Remote Shell when complete. String encoded JSON shell parameters allowed. Added support for running linux scripts in sudo. Support for escaping commas within parameters. Converted rules/workflows to playbooks  |
 
 Note: Upgrading from version 1.0.x to 1.1.0 will introduce playbooks to replace equivalent rules/workflows. Previously installed rules and workflows will remain after the upgrade and use can be deleted at your convenience. The naming of playbooks are as follows:
 
@@ -157,9 +157,9 @@ Settings such as `remote_command_linux`, `remote_command_powershell` and `remote
 | **dig** | Yes | `dig "{{shell_param1}}"` | -- |
 | **nslookup** | Yes | `nslookup "{{shell_param1}}"` | -- |
 | **remote_auth_transport** | Yes | `ntlm` | remote auth transport one of [ntlm, basic] |
-| **remote_command_linux** | Yes | `bash command or path to bash script` | -- |
-| **remote_command_powershell** | Yes | `powershell.exe -file c:\path\to\myscript.ps1 {{shell_param1}}` | `powershell command or path to powershell script` |
-| **remote_computer** | Yes | `username:password@server` | -- |
+| **remote_command_linux** | Yes | `bash command or path to bash script` | This is a place holder parameter as any number of shell scripts can be specified and then used with the Linux Remote Shell function. |
+| **remote_command_powershell** | Yes | `powershell.exe -file c:\path\to\myscript.ps1 {{shell_param1}}` | `powershell command or path to powershell script`. This is a place holder parameter as any number of scripts can be specified and then used with the Windows Remote Shell function. |
+| **remote_computer** | Yes | `username:password@server` | This is a place holder parameter as any number of remote computers can be specified and then used. |
 | **remote_powershell_extensions** | Yes | `ps1, psm1, etc` | accepted remote powershell extensions in a comma separated list |
 | **allow_ad_hoc_execution** | No | True/False | New to 1.1. Allow any shell cmd to run avoiding **remote_command_linux** and **remote_command_powershell** | 
 | **shell_escaping** | Yes | `sh` | -- |
@@ -377,22 +377,28 @@ This function allows your workflows/playbooks to execute shell-scripts remotely 
 
  ![screenshot: fn-network-utilities-linux-shell-command ](./doc/screenshots/fn-network-utilities-linux-shell-command.png)
 
-For security, the list of available shell commands must be configured explicitly by the administrator. To do this, edit the [fn_network_utilities] section of the app.config file.
+ ![screenshot: network_utilities_linux_shell_command_arguments](./doc/screenshots/network_utilities_linux_shell_command_arguments.png)
+
+In 1.1.0, a new app.config setting, allow_ad_hoc_execution, allows ad-hoc commands to be specified in the `network_utilities_shell_command` function argument.
+If `allow_ad_hoc_execution` is false or unspecified, a list of available shell commands must be configured explicitly by the administrator. To do this, edit the [fn_network_utilities] section of the app.config file.
 NOTE: The parameter values {{shell_param1}}, {{shell_param2}}, {{shell_param3}} may contain spaces, dashes and other characters. In your command configuration, they must be surrounded with double-quotes. Failure to properly quote your command parameters creates a security risk, since the parameter values usually come from artifacts and other untrusted data. Additionally, timeouts do not yield any exceptions to notify when it has occurred.
 
 ### app.config examples:
 * Linux Operating Systems basic examples:
   ```
   # Remote Linux and Windows servers:
-  remote_computer=(usr1:password@192.168.1.186)
-  remote_computer_windows=(usr2:password@192.168.1.184)
+  remote_computer=usr1:password@192.168.1.186
+  remote_computer_windows=usr2:password@192.168.1.184
   
   # Remote Windows commands:
-  traceroute_windows_ps=[\Users\ms\traceroute.ps1]
-  traceroute_windows_cmd=[tracert.exe -h 10 {{shell_param1}}]
+  traceroute_windows_ps=\Users\ms\traceroute.ps1
+  traceroute_windows_cmd=tracert.exe -h 10 {{shell_param1}}
   
   # Remote Linux command:
-  tracepath=(tracepath -m 10 '{{shell_param1}}')
+  tracepath=tracepath -m 10 '{{shell_param1}}'
+
+  # sudo-base shell 
+  sudo_shell=sudo -S /path/to/shell.sh
   
   # Local Linux server commands:
   nslookup=nslookup "{{shell_param1}}"
@@ -416,9 +422,9 @@ The second parameter is the Volatility profile ("Win7SP0x64" etc).
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `network_utilities_remote_computer` | `text` | No | `username:password@server` | Remote computer in place of the value used in the app.config |
-| `network_utilities_shell_command` | `text` | Yes | `remote_command:remote_computer` | Use remote_shell_command:remote_computer syntax if network_utilities_remote_computer is left blank. |
+| `network_utilities_shell_command` | `text` | Yes | `remote_command:remote_computer` | Use remote_shell_command:remote_computer syntax if network_utilities_remote_computer is left blank. If `allow_ad_hoc_execution=true`, ad hoc commands can be specified. |
 | `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list. If a parameter has embedded commas, specify as '\,'. Ex. '-p 80\,443\,8080' |
-
+| `network_utilities_send_sudo_password` | `boolean` | No | Yes|No | New to version 1.1.0. Allows scripts to be run as sudo by sending the remote computer user's password. Specify the script using the sudo -S argument to read the sudo password from stdin. Ex. `sudo -S shell.sh` |
 </p>
 </details>
 

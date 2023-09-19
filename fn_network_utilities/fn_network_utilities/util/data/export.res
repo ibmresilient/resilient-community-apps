@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1694797386009,
+  "export_date": 1695127211626,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -34,6 +34,35 @@
       "tooltip": "",
       "type_id": 11,
       "uuid": "049f1125-47dd-4cce-aa2d-8464662ddd7a",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/network_utilities_send_sudo_password",
+      "hide_notification": false,
+      "id": 703,
+      "input_type": "boolean",
+      "internal": false,
+      "is_tracked": false,
+      "name": "network_utilities_send_sudo_password",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "network_utilities_send_sudo_password",
+      "tooltip": "If Yes, send the remote password for sudo shell execution",
+      "type_id": 11,
+      "uuid": "242c3e42-3714-43b2-8653-3b6f11d2511f",
       "values": []
     },
     {
@@ -387,13 +416,13 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694198651206,
+      "last_modified_time": 1695126747680,
       "name": "network_utilities_linux_shell_command",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"commandline\": \"bash /root/test.sh\", \"start\": 1677188203275, \"end\": 1677188204773, \"elapsed\": 1497, \"exitcode\": 0, \"stdout\": \"This is a test\\nanaconda-ks.cfg\\ntest.sh\\nWW-falcon-sensor-6.40.0-13707.el7.x86_64.rpm\\n/root\\nSuccess!\\n\", \"stderr\": \"\", \"stdout_json\": null, \"stderr_json\": null}, \"raw\": null, \"inputs\": {\"network_utilities_shell_command\": \"remote_command_linux:remote_computer\", \"network_utilities_shell_params\": \"0.0.0.0\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-network-utilities\", \"package_version\": \"1.0.0\", \"host\": \"My Host\", \"execution_time_ms\": 1501, \"timestamp\": \"2023-02-23 16:36:44\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"commandline\": {\"type\": \"string\"}, \"start\": {\"type\": \"integer\"}, \"end\": {\"type\": \"integer\"}, \"elapsed\": {\"type\": \"integer\"}, \"exitcode\": {\"type\": \"integer\"}, \"stdout\": {\"type\": \"string\"}, \"stderr\": {\"type\": \"string\"}, \"stdout_json\": {}, \"stderr_json\": {}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"network_utilities_shell_command\": {\"type\": \"string\"}, \"network_utilities_shell_params\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "743e7638-20e7-4cc5-ab80-f669d641c438",
-      "version": 1,
+      "version": 4,
       "view_items": [
         {
           "content": "4f01a5af-4481-4a81-b995-982aaea91491",
@@ -413,6 +442,14 @@
         },
         {
           "content": "47b2737a-4419-4139-b164-3abea0b8da45",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "242c3e42-3714-43b2-8653-3b6f11d2511f",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -552,13 +589,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 4,
+  "id": 5,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1694797383534,
+      "create_date": 1695127209294,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -567,7 +604,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1694797383534,
+      "update_date": 1695127209294,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
