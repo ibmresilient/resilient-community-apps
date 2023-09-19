@@ -76,7 +76,8 @@ class FunctionComponent(AppFunctionComponent):
 
             remote = self.options.get(colon_split[1].lower()).strip()
         else:
-            remote = remote_computer
+            # determine if remote_computer is from the app_config settings
+            remote = self.options.get(remote_computer.strip(), remote_computer)
 
         shell_command = colon_split[0].strip()
 
