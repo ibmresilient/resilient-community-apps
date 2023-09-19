@@ -38,8 +38,8 @@
 - [Script - PB: Display playbook data](#script---pb-display-playbook-data)
 - [Script - PB: Display workflow data](#script---pb-display-workflow-data)
 - [Adding Usage Data for Datatables](#adding-usage-data-for-datatables)
-- [Data Table - Playbook/Workflow Usage](#data-table---Playbook/Workflow-usage)
-- [Playbooks](#Playbooks)
+- [Data Table - Playbook/Workflow Usage](#data-table---playbookworkflow-usage)
+- [Playbooks](#playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -1562,5 +1562,6 @@ Notes:
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
+---
 ### For Support
 This is a IBM Community provided App. Please search the Community https://ibm.biz/resilientcommunity for assistance.

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v50.0.151
 
 """Generate the Resilient customizations required for fn_playbook_utils"""
 
@@ -21,17 +22,39 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_playbook_utils",
-        "message_destinations": [u"fn_playbook_utils"],
-        "functions": [u"pb_export_playbook", u"pb_get_playbook_data", u"pb_get_playbooks", u"pb_get_workflow_content", u"pb_get_workflow_data", u"pb_import_playbook"],
+        "message_destinations": [
+            u"fn_playbook_utils"
+        ],
+        "functions": [
+            u"pb_export_playbook",
+            u"pb_get_playbook_data",
+            u"pb_get_playbooks",
+            u"pb_get_workflow_content",
+            u"pb_get_workflow_data",
+            u"pb_import_playbook"
+        ],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"workflow_usage"],
+        "datatables": [
+            u"workflow_usage"
+        ],
         "automatic_tasks": [],
-        "scripts": [u"PB: Display playbook data", u"PB: Display workflow data"],
-        "playbooks": [u"pb_get_workflowplaybook_usage_at_incident_close_pb", u"pb_get_workflowplaybook_usage_pb", u"pb_get_workflowplaybooks_frequency_pb", u"pb_get_workflowsplaybooks_by_artifact_value_for_last_30_days_pb", u"pb_get_workflowsplaybooks_by_artifact_value_pb", u"pb_get_workflowsplaybooks_by_attachment_filename_pb", u"pb_get_workflowsplaybooks_by_task_name_pb"]
+        "scripts": [
+            u"PB: Display playbook data",
+            u"PB: Display workflow data"
+        ],
+        "playbooks": [
+            u"pb_get_workflowplaybook_usage_at_incident_close_pb",
+            u"pb_get_workflowplaybook_usage_pb",
+            u"pb_get_workflowplaybooks_frequency_pb",
+            u"pb_get_workflowsplaybooks_by_artifact_value_for_last_30_days_pb",
+            u"pb_get_workflowsplaybooks_by_artifact_value_pb",
+            u"pb_get_workflowsplaybooks_by_attachment_filename_pb",
+            u"pb_get_workflowsplaybooks_by_task_name_pb"
+        ]
     }
 
 
