@@ -70,6 +70,7 @@ class FunctionComponent(ResilientComponent):
                 "es_auth_password", True)
             ELASTICSEARCH_VERIFY_CERTS = str_to_bool(value=helper.get_config_option(
                 "es_verify_certs", True))
+            ELASTICSEARCH_TIMEOUT = kwargs.get("es_timeout", None)
             # Get the function parameters:
             es_index = kwargs.get("es_index")  # text
             es_doc_type = kwargs.get("es_doc_type")  # text
@@ -105,15 +106,15 @@ class FunctionComponent(ResilientComponent):
                     # Connect to the ElasticSearch instance
                     es = Elasticsearch(ELASTICSEARCH_SCHEME.lower() + "://" + ELASTICSEARCH_URL, verify_certs=ELASTICSEARCH_VERIFY_CERTS,
                                        ssl_context=context, http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD),
-                                       connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies())
+                                       connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies(), timeout=ELASTICSEARCH_TIMEOUT)
                 else:
                     # This handles for HTTP statements
                     if ELASTICSEARCH_BOOL_HTTP_AUTH:
                         es = Elasticsearch([ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT, http_auth=(
-                            ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD), connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies())
+                            ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD), connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies(), timeout=ELASTICSEARCH_TIMEOUT)
                     else:
                         es = Elasticsearch(
-                            [ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT, connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies())
+                            [ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT, connection_class=ProxiedConnection, proxies=self.requestscommon.get_proxies(), timeout=ELASTICSEARCH_TIMEOUT)
             except Exception as e:
                 raise FunctionError(
                     "Encountered error while connecting to ElasticSearch {0}".format(e))
