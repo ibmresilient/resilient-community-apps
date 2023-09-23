@@ -42,6 +42,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.9 | 09/2023 | Added support for setting Timeout request |
 | 1.0.9 | 06/2022 | Added support for disabling SSL Certificate verification |
 | 1.0.8 |  | Pinned dependency ``elasticsearch~=7.17`` |
 | 1.0.7 |  | Add support for AppHost |
@@ -150,6 +151,7 @@ The following table provides the settings you need to configure the app. These s
 | **es_datastore_scheme** | Yes | `<HTTPS OR HTTP>` | *If HTTPS is provided, an SSL Context is configured for the connection* |
 | **es_datastore_url** | Yes | `<ELASTICSEARCH_URL>` | *URL of the elastic instance* |
 | **es_use_http** | Yes | `<True OR False>` | *If true, connection to the elastic instance uses HTTP. Set to False if the es_veryify_certs is True.* |
+| **es_timeout** | No | `10` | *The number of seconds to timeout after when making a request to the elastic instance.* |
 
 
 ## Function - ElasticSearch Utilities: Query
