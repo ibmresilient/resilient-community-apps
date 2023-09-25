@@ -1,0 +1,23 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "message": "Delete operation successful.",
+    "status": true
+  },
+  "raw": null,
+  "inputs": {
+    "splunk_threat_intel_key": "56e8bb321f184e8e925d150eb4e731d6",
+    "splunk_threat_intel_type": "ip_intel",
+    "splunk_label": "splunk_76"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-splunk-integration",
+    "package_version": "1.3.0",
+    "host": "local",
+    "execution_time_ms": 615,
+    "timestamp": "2022-06-15 09:03:32"
+  }
+}

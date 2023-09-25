@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": "Done",
+  "raw": null,
+  "inputs": {
+    "jira_issue_id": "JRA-46",
+    "jira_transition_id": "Done",
+    "jira_fields": "{  }",
+    "jira_label": "my-server",
+    "jira_comment": "Closed in IBM SOAR\n\nResolution: Done\n"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-jira",
+    "package_version": "3.0.0",
+    "host": "local",
+    "execution_time_ms": 1760,
+    "timestamp": "2023-01-31 10:18:08"
+  }
+}
