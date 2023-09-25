@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4368
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# Generated with resilient-sdk v50.0.151
 
 """Generate the Resilient customizations required for fn_cisco_asa"""
 
@@ -21,17 +22,38 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_cisco_asa",
-        "message_destinations": [u"fn_cisco_asa"],
-        "functions": [u"cisco_asa_add_artifact_to_network_object_group", u"cisco_asa_get_network_object_details", u"cisco_asa_get_network_objects", u"cisco_asa_remove_network_object_from_network_object_group"],
+        "message_destinations": [
+            u"fn_cisco_asa"
+        ],
+        "functions": [
+            u"cisco_asa_add_artifact_to_network_object_group",
+            u"cisco_asa_get_network_object_details",
+            u"cisco_asa_get_network_objects",
+            u"cisco_asa_remove_network_object_from_network_object_group"
+        ],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"cisco_asa_network_object_dt"],
+        "datatables": [
+            u"cisco_asa_network_object_dt"
+        ],
         "automatic_tasks": [],
-        "scripts": [u"Cisco ASA: Write Artifact to Network Object data table", u"Convert JSON to rich text v1.3"],
-        "playbooks": [u"cisco_asa_add_fqdn_to_network_object_group", u"cisco_asa_add_ip_address_to_network_object_group", u"cisco_asa_add_ip_range_to_network_object_group", u"cisco_asa_add_ipv4network_to_network_object_group", u"cisco_asa_add_ipv6network_to_network_object_group", u"cisco_asa_get_network_object_details", u"cisco_asa_get_network_object_group", u"cisco_asa_remove_network_object_from_network_object_group"]
+        "scripts": [
+            u"Cisco ASA: Write Artifact to Network Object data table",
+            u"Convert JSON to rich text v1.3"
+        ],
+        "playbooks": [
+            u"cisco_asa_add_fqdn_to_network_object_group",
+            u"cisco_asa_add_ip_address_to_network_object_group",
+            u"cisco_asa_add_ip_range_to_network_object_group",
+            u"cisco_asa_add_ipv4network_to_network_object_group",
+            u"cisco_asa_add_ipv6network_to_network_object_group",
+            u"cisco_asa_get_network_object_details",
+            u"cisco_asa_get_network_object_group",
+            u"cisco_asa_remove_network_object_from_network_object_group"
+        ]
     }
 
 
