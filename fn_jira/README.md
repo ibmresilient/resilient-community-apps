@@ -33,6 +33,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.0.3 | 09/2023 | Bug fix for transition issue function |
 | 3.0.2 | 08/2023 | Bug fix for playbook, Example: Jira Create Comment |
 | 3.0.1 | 05/2023 | Bug fix for SOAR note synchronization |
 | 3.0.0 | 01/2023 | <ul><li>Add poller for bidirectional sync</li><li>Updated to work with Jira Cloud</li><li>Add global_settings to app.config that contains the settings for the poller</li></ul> |
@@ -1032,7 +1033,7 @@ verify_cert=True
 poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search
 max_issues_returned = 50
-# Proxys to use
+# Proxies to use
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # If templates under [fn_jira:global_settings] are configured, then templates
@@ -1069,7 +1070,7 @@ verify_cert=False
 poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search
 max_issues_returned = 50
-# Proxys to use
+# Proxies to use
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # If templates under [fn_jira:global_settings] are configured, then templates
@@ -1109,8 +1110,8 @@ polling_lookback=60
 # If max_issues_returned [fn_jira:global_settings] is configured, then max_issues_returned
 #  that are configured under the individual Jira servers will be ignored.
 max_issues_returned = 50
-# Proxys to use
-# If proxys are defined under [fn_jira:global_settings], then proxys defined
+# Proxies to use
+# If proxies are defined under [fn_jira:global_settings], then proxies defined
 #  under the individual Jira servers will be ignored
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.

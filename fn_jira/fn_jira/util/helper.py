@@ -22,7 +22,7 @@ class JiraServers():
         """
         Create list of label names and a dictionary of the servers and their configs
         :param opts: Dict of options
-        :return servers: Dictonary of all the Jira servers from the app.config that contains each servers configurations
+        :return servers: Dictionary of all the Jira servers from the app.config that contains each servers configurations
         :return server_name_list: List filled with all of the labels for the servers from the app.config
         """
         servers = {}
@@ -41,7 +41,7 @@ class JiraServers():
         Check if the given jira_label is in the app.config
         :param jira_label: User selected server
         :param servers_list: List of jira servers
-        :return: Dictionary of options for choosen server
+        :return: Dictionary of options for chosen server
         """
         # If label not given and using previous versions app.config [fn_jira]
         if not jira_label and servers_list.get(PACKAGE_NAME):
@@ -111,7 +111,7 @@ def get_id_from_jira_issue_description(description):
 
 def get_server_settings(opts, jira_label):
     """
-    Used for initilizing or reloading the options variable
+    Used for initializing or reloading the options variable
     :param opts: List of options
     :param jira_label: Label of the server in the app.config to use
     :return: Jira server settings for specified server
