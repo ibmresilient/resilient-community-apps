@@ -33,7 +33,6 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 3.0.3 | 09/2023 | Bug fix for transition issue function |
 | 3.0.2 | 08/2023 | Bug fix for playbook, Example: Jira Create Comment |
 | 3.0.1 | 05/2023 | Bug fix for SOAR note synchronization |
 | 3.0.0 | 01/2023 | <ul><li>Add poller for bidirectional sync</li><li>Updated to work with Jira Cloud</li><li>Add global_settings to app.config that contains the settings for the poller</li></ul> |
@@ -865,26 +864,26 @@ See example workflow for configuration of function pre-processor and post-proces
 
 ```python
 results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
   "content": "Done",
+  "raw": null,
   "inputs": {
-    "jira_comment": "Closed in IBM SOAR\n\nResolution: Done\n",
-    "jira_fields": "{  }",
-    "jira_issue_id": "JRA-46",
+    "jira_issue_id": "JRA-239",
+    "jira_transition_id": "Done",
+    "jira_fields": "{\"customfield_10041\": {\"value\": \"Resolved\"}}",
     "jira_label": "my-server",
-    "jira_transition_id": "Done"
+    "jira_comment": "Closed in IBM SOAR\n\nResolution: Done\n"
   },
   "metrics": {
-    "execution_time_ms": 1760,
-    "host": "local",
+    "version": "1.0",
     "package": "fn-jira",
-    "package_version": "3.0.0",
-    "timestamp": "2023-01-31 10:18:08",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
+    "package_version": "3.0.3",
+    "host": "local",
+    "execution_time_ms": 2387,
+    "timestamp": "2023-09-25 15:31:42"
+  }
 }
 ```
 

@@ -23,7 +23,7 @@ class AppCommon():
         :type app_configs: dict
         """
 
-        # Get global_settings if defined in the app.config
+        # Get global_settings if definied in the app.config
         global_settings = opts.get(GLOBAL_SETTINGS, {})
 
         # Validate the app.config settings for fn_jira
