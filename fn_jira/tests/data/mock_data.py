@@ -449,7 +449,7 @@ def mock_init():
                     return "https://example.com/browse/JRA-47"
             return MockCreateIssue()
 
-        def transition_issue(self, issue, transition):
+        def transition_issue(self, issue, transition, fields={}):
             """ Mock transition_issue return """
             class MockTransitionIssue(object):
                 def __init__(self):
@@ -465,7 +465,7 @@ def mock_init():
                     """ Mock init """
                     pass
 
-                def update(self, comment, fields):
+                def update(self, comment, fields={}):
                     """ Mock update return """
                     class MockUpdate(object):
                         def __init__(self):
