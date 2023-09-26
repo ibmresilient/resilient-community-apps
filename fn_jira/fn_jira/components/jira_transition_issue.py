@@ -10,6 +10,7 @@ from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function)
 from resilient_lib import validate_fields, IntegrationError
 from fn_jira.lib.app_common import AppCommon
+from jira.exceptions import JIRAError
 
 FN_NAME = "jira_transition_issue"
 
@@ -56,14 +57,16 @@ class FunctionComponent(AppFunctionComponent):
             jira_client.transition_issue(issue=jira_issue_id, transition=jira_transition_id, fields=jira_fields)
             # Add comment to Jira issue
             jira_client.issue(jira_issue_id).update(comment=jira_comment)
-        except Exception as err:
-            if err.status_code == 400:
+        except JIRAError as err:
+            if err.status_code == 400 or "Invalid transition name." in err.text:
                 # Update fields of the Jira issue
                 jira_client.issue(jira_issue_id).update(comment=jira_comment, fields=jira_fields)
                 # Transition Jira Issue
                 jira_client.transition_issue(issue=jira_issue_id, transition=jira_transition_id)
             else:
                 raise IntegrationError(str(err))
+        except Exception as er:
+            raise IntegrationError(str(er))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
