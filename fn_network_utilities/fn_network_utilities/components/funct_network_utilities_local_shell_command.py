@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2023. All Rights Reserved.
+# pragma pylint: disable=pointless-string-statement, line-too-long, wrong-import-order
 
 """AppFunction implementation"""
 
@@ -9,10 +11,9 @@ import shlex
 import subprocess
 import json
 import chardet
-from fn_network_utilities.util.utils_common import remove_punctuation
+from fn_network_utilities.util.utils_common import remove_punctuation, separate_params
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, render, b_to_s
-from resilient_lib.components.templates_common import sh_filter, ps_filter
+from resilient_lib import validate_fields, render, b_to_s, str_to_bool
 
 PACKAGE_NAME = "fn_network_utilities"
 FN_NAME = "network_utilities_local_shell_command"
@@ -36,47 +37,38 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.network_utilities_shell_params
             -   fn_inputs.network_utilities_shell_command
         """
+        validate_fields(["network_utilities_shell_command"], fn_inputs)
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
-
 
         # Get the function parameters:
         shell_command = fn_inputs.network_utilities_shell_command  # text
         shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
 
-        LOG.info(f"network_utilities_shell_command: {shell_command}")
-        LOG.info(f"network_utilities_shell_params: {shell_params}")
+        ad_hoc_shell = str_to_bool(self.options.get("allow_ad_hoc_execution", "False"))
 
-        validate_fields(["network_utilities_shell_command"], fn_inputs)
+        LOG.info(f"shell_command: {shell_command}")
+        LOG.info(f"shell_params: {shell_params}")
+        LOG.info(f"ad_hoc_shell: {ad_hoc_shell}")
 
-        params_list = shell_params.split(",")
-        rendered_shell_params = {}
-        for i, param in enumerate(params_list):
-            param_name = f"shell_param{i+1}"
-            escaping = self.options.get("shell_escaping", "sh")
-            if escaping == "sh":
-                rendered_shell_params[param_name] = sh_filter(param)
-            else:
-                rendered_shell_params[param_name] = ps_filter(param)
+        rendered_shell_params = separate_params(shell_params, self.options.get("shell_escaping", "sh"))
 
         # Options keys are lowercase, so the shell command name needs to be lowercase
         if shell_command:
             shell_command = shell_command.lower()
 
         # Check if command is configured
-        if shell_command not in self.options:
-            if ':' in shell_command:
-                raise ValueError(f"Syntax for a remote command {shell_command} was used but remote_shell was set to False")
+        if shell_command in self.options:
+            shell_command_base = self.options[shell_command].strip()
+        elif ad_hoc_shell:
+            shell_command_base = shell_command.strip()
+        elif ':' in shell_command:
+            raise ValueError(f"Syntax for a remote command {shell_command} was used but remote_shell was set to False")
+        else:
             raise ValueError(f'{shell_command} command not configured')
-
-        shell_command_base = self.options[shell_command].strip()
 
         # Previous version required parenthesis around command for linux, this is for backwards compatability
         shell_command_base = remove_punctuation(shell_command_base, True)
-
-        # Previous version required brackets around command for powershell, this is for backwards compatability
-        shell_command_base = remove_punctuation(shell_command_base, False)
-
 
         run_cmd = RunCmd(None, shell_command_base, rendered_shell_params)
         run_cmd.run_local_cmd()

@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2023. All Rights Reserved.
+# pragma pylint: disable=line-too-long, wrong-import-order
 
 """AppFunction implementation"""
 
 import logging
 import time
-import shlex
 import json
 import paramiko
-from fn_network_utilities.util.utils_common import remove_punctuation
+from fn_network_utilities.util.utils_common import remove_punctuation, separate_params
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, render, b_to_s
-from resilient_lib.components.templates_common import sh_filter
+from resilient_lib import validate_fields, render, b_to_s, str_to_bool
 
 PACKAGE_NAME = "fn_network_utilities"
 FN_NAME = "network_utilities_linux_shell_command"
-DEFAULT_TIMEOUT_SEC = 20
+DEFAULT_TIMEOUT_SEC = 30
 
 LOG = logging.getLogger(__name__)
 
@@ -42,24 +42,21 @@ class FunctionComponent(AppFunctionComponent):
         shell_command = fn_inputs.network_utilities_shell_command  # text
         shell_params = getattr(fn_inputs, "network_utilities_shell_params", None)  # text
         remote_computer = getattr(fn_inputs, "network_utilities_remote_computer", None) #text
-        if self.options.get("timeout_linux") is not None:
-            timeout_sec = int(self.options.get("timeout_linux"))
-        else: 
-            timeout_sec = DEFAULT_TIMEOUT_SEC
+        remote_sudo_password = getattr(fn_inputs, "network_utilities_send_sudo_password", None) #bool
+        timeout_linux = int(self.options.get("timeout_linux", DEFAULT_TIMEOUT_SEC))
 
-        LOG.info(f"network_utilities_shell_command: {shell_command}")
-        LOG.info(f"network_utilities_shell_params: {shell_params}")
-        LOG.info(f"network_utilities_remote_computer: {remote_computer}")
-        LOG.info(f"network_utilities_timeout_sec: {timeout_sec}")
+        ad_hoc_shell = str_to_bool(self.options.get("allow_ad_hoc_execution", "False"))
+
+        LOG.info(f"shell_command: {shell_command}")
+        LOG.info(f"shell_params: {shell_params}")
+        LOG.info(f"remote_computer: {remote_computer}")
+        LOG.info(f"timeout_linux: {timeout_linux}")
+        LOG.info(f"sudo_password: {remote_sudo_password}")
+        LOG.info(f"ad_hoc_shell: {ad_hoc_shell}")
 
         validate_fields(["network_utilities_shell_command"], fn_inputs)
 
-
-        params_list = shell_params.split(",")
-        rendered_shell_params = {}
-        for i, param in enumerate(params_list):
-            param_name = f"shell_param{i+1}"
-            rendered_shell_params[param_name] = sh_filter(param)
+        rendered_shell_params = separate_params(shell_params)
 
         # Options keys are lowercase, so the shell command name needs to be lowercase
         if shell_command:
@@ -68,49 +65,54 @@ class FunctionComponent(AppFunctionComponent):
         # Get the remote computer and the remote command
         colon_split = shell_command.split(':')
         if len(colon_split) != 2 and remote_computer is None:
-            raise ValueError(f"Remote commands must be of the format remote_command_name:remote_computer_name"
-                                "or have remote_computer defined, {shell_command} was specified")
-        elif len(colon_split) == 2:
+            raise ValueError("Remote commands must be of the format remote_command_name:remote_computer_name"
+                               f"or have remote_computer defined, {shell_command} was specified")
+
+        if len(colon_split) == 2:
             if remote_computer:
                 raise ValueError('A remote computer is configured in both network_utilities_remote_computer and network_utilities_shell_command. Choose one to use.')
-            elif self.options.get(colon_split[1]) is None:
+            if self.options.get(colon_split[1].lower()) is None:
                 raise ValueError(f'The remote computer {colon_split[1]} is not configured')
-            else:
-                remote = self.options.get(colon_split[1]).strip()
+
+            remote = self.options.get(colon_split[1].lower()).strip()
         else:
-            remote = remote_computer
+            # determine if remote_computer is from the app_config settings
+            remote = self.options.get(remote_computer.strip(), remote_computer)
 
         shell_command = colon_split[0].strip()
 
-        # Previous version required parenthesis around remote computer, this is for backwards compatability
+        # Previous version required parenthesis around remote computer, this is for backwards compatibility
         remote = remove_punctuation(remote, True)
 
         # Check if command is configured
-        if shell_command not in self.options:
-            if ':' in shell_command:
-                raise ValueError(f"Syntax for a remote command {shell_command} was used but remote_shell was set to False")
+        if shell_command.lower() in self.options:
+            shell_command_base = self.options[shell_command.lower()].strip()
+        elif ad_hoc_shell:
+            shell_command_base = shell_command.strip()
+        elif ':' in shell_command:
+            raise ValueError(f"Syntax for a remote command {shell_command} was used but remote_shell was set to False")
+        else:
             raise ValueError(f"{shell_command} command not configured")
 
-        shell_command_base = self.options[shell_command].strip()
-
-        # Previous version required parenthesis around command, this is for backwards compatability
+        # Previous version required parenthesis around command, this is for backwards compatibility
         shell_command_base = remove_punctuation(shell_command_base, True)
 
-        run_cmd = RunCmd(remote, shell_command_base.strip(), rendered_shell_params)
-        run_cmd.run_remote_linux(timeout_sec)
+        run_cmd = RunCmd(remote, shell_command_base, rendered_shell_params, remote_sudo_password)
+        run_cmd.run_remote_linux(timeout_linux)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         yield FunctionResult(run_cmd.make_result())
 
 class RunCmd():
-    def __init__(self, remote, shell_command, rendered_shell_params):
+    def __init__(self, remote, shell_command, rendered_shell_params, send_sudo_password: bool):
         # Get remote credentials
         if remote:
             self.get_creds(remote)
 
         self.shell_command = shell_command
         self.rendered_shell_params = rendered_shell_params
+        self.send_sudo_password = send_sudo_password
 
         self.tstart = time.time()
         self.retcode = None
@@ -134,19 +136,24 @@ class RunCmd():
         self.remote_password = user_pswd_splits[1]
 
 
-    def run_remote_linux(self, timeout_sec):
+    def run_remote_linux(self, timeout_linux):
         self.commandline = render(self.shell_command, self.rendered_shell_params)
-        LOG.debug("Remote cmd: %s", self.commandline)
+        LOG.debug("Remote cmd: %s params %s", self.commandline, self.rendered_shell_params)
 
         # initialize the SSH client
         client = paramiko.SSHClient()
         # add to known hosts
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         try:
-            client.connect(hostname=self.remote_server, username=self.remote_user, 
+            client.connect(hostname=self.remote_server, username=self.remote_user,
                         password=self.remote_password)
 
-            stdin, stdout, stderr = client.exec_command(self.commandline, timeout=timeout_sec) # nosec
+            stdin, stdout, stderr = client.exec_command(self.commandline, timeout=timeout_linux) # nosec
+            if self.send_sudo_password:
+                LOG.info("sending sudo")
+                stdin.write(f"{self.remote_password}\n")
+                stdin.flush()
+
             self.stdoutdata = stdout.read().decode()
             self.stderrdata = stderr.read().decode()
             self.retcode = stdout.channel.recv_exit_status()
@@ -154,6 +161,9 @@ class RunCmd():
             self.stderrdata = str(err)
             LOG.error(str(err))
             LOG.error(f"Unable to run cmd: {self.commandline} on remote server: {self.remote_server}")
+        finally:
+            if client:
+                client.close()
 
 
     def make_result(self):
