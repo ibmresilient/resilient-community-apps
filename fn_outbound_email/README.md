@@ -52,6 +52,12 @@ If upgrading from a previous release, you'll notice that the previous release's 
 You can continue to use the rules/workflows. 
 But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
 
+Finally, the following Playbooks use an activation form field `Template (mail_template_select)` which needs to be modified manually to list the labels used for templates specified in app.config:
+
+* Outbound Email Reply to Message (PB)
+* Send Incident Email HTML2 (PB) Example
+* Send Task Email HTML2 (PB) Example
+
 ### v2.0 Changes
 Version 2.0 represents a comprehensive set of changes to make the use of outbound email more out-the-box
 with inbound mail. This release incorporates many changes which are summarized here:

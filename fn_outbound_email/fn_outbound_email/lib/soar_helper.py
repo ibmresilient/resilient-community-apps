@@ -88,37 +88,5 @@ class SoarHelper():
     def get_note_data(self, mail_incident_id):
         return self.rest_client.post(f"/incidents/{mail_incident_id}/comments/query?include_tasks=false", payload={})
 
-    def update_select_list(self, field_name, selection_list):
-        """
-        Update values in a select field
-        :param field_name: Activity field name
-        :param selection_list: list of items to replace in the field_name selection list
-        :return: True/False if the operation is successful
-        """
-
-        try:
-            payload = self.rest_client.get(GET_FIELD.format(field_name))
-
-            if type(payload) == list or payload.get("input_type") != "select":
-                return None
-
-            # Put payload with no values to delete old values
-            #del payload["values"]
-            #self.rest_client.put(UPDATE_FIELD.format(field_name), payload)
-
-            # Add values to the payload
-            payload["values"] = [
-                {"label": str(value), "enabled": True, "hidden": False}
-                    for value in selection_list
-            ]
-
-            # update the selection list
-            self.rest_client.put(UPDATE_FIELD.format(field_name), payload)
-            return True
-        except Exception as err_msg:
-            LOG.error("Action failed for field: %s error: %s", field_name, str(err_msg))
-            return False
-
-
 def split_string(in_string):
     return in_string.split(',') if in_string else []

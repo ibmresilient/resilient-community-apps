@@ -9,7 +9,7 @@ from resilient_lib import validate_fields, str_to_bool, s_to_b
 from fn_outbound_email.lib.soar_helper import SoarHelper, split_string
 from fn_outbound_email.lib.configure_tab import init_email_tab
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
-from fn_outbound_email.lib.template_helper import get_template, get_template_names, CONFIG_DATA_SECTION
+from fn_outbound_email.lib.template_helper import get_template, CONFIG_DATA_SECTION
 
 FN_NAME = "send_email2"
 MAIL_TEMPLATE_SELECT = "mail_template_select" # activity field to change update the select list
@@ -24,13 +24,6 @@ class FunctionComponent(AppFunctionComponent):
         app_config = opts.get(CONFIG_DATA_SECTION)
         if str_to_bool(app_config.get("enable_email_conversations", "false")):
             init_email_tab()
-
-        # read the template names to include in the selection list
-
-        select_list = get_template_names(opts)
-        if select_list:
-            soar_helper = SoarHelper(self.rest_client())
-            soar_helper.update_select_list(MAIL_TEMPLATE_SELECT, select_list)
 
 
     @app_function(FN_NAME)
