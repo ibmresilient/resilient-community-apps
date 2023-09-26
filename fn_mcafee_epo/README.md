@@ -54,6 +54,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.0.1 | 09/2023 | Bug fix for running resilient-circuits customize from an integration server. |
 | 2.0.0 | 07/2022 | <ul><li>Add 20 new functions</li><li>Added 7 new data tables</li><li>Update funct_mcafee_epo_find_a_system function to allow a list of systems properties to be used and return a list of systems</li></ul> |
 | 1.0.3 | 10/2020 | Added functions: find system, get system info, remove tags and Updated capability to rule for add tag function |
 | 1.0.2 | 04/2020 | Support added for App Host |
@@ -63,13 +64,13 @@
 ---
 
 ## Overview
-The McAfee ePO functions allow for manipilation of tags, systems, users, issues, policies and permission sets on the McAfee ePO server. 
+The McAfee ePO functions allow for manipulation of tags, systems, users, issues, policies and permission sets on the McAfee ePO server. 
 
 **IBM Security SOAR app for McAfee ePO**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-The McAfee ePO functions allow for manipilation of tags, systems, users, issues, policies and permission sets.
+The McAfee ePO functions allow for manipulation of tags, systems, users, issues, policies and permission sets.
 
 ### Key Features
 * Add permission set(s) to an ePO user
@@ -108,13 +109,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `43.1.49`.
+* SOAR platform >= `44.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `43.1.49`.
+* SOAR platform >= `44.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=43.0.0`.
+* Integration server is running `resilient_circuits>=44.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -148,7 +149,7 @@ The app does support a proxy server.
 Both Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-lib
-* resilient_circuits>=43.0.0
+* resilient_circuits>=44.0.0
 
 ---
 
@@ -264,11 +265,11 @@ Add a system to the ePO server
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `mcafee_epo_allow_duplicates` | `boolean` | No | `-` | Weither to allow duplicates or not |
+| `mcafee_epo_allow_duplicates` | `boolean` | No | `-` | Whether to allow duplicates or not |
 | `mcafee_epo_delete_if_removed` | `boolean` | No | `-` | Should system be deleted if removed |
 | `mcafee_epo_flatten_tree_structure` | `boolean` | No | `-` | Should flatten tree structure |
 | `mcafee_epo_group_id` | `number` | No | `-` | Id for the group on the ePO server |
-| `mcafee_epo_push_agent` | `boolean` | No | `-` | wiether to push the agent to the system or not |
+| `mcafee_epo_push_agent` | `boolean` | No | `-` | Whether to push the agent to the system or not |
 | `mcafee_epo_push_agent_domain_name` | `text` | No | `-` | Domain name for system to push agent |
 | `mcafee_epo_push_agent_force_install` | `boolean` | No | `-` | force install if agent on new system |
 | `mcafee_epo_push_agent_install_path` | `text` | No | `-` | path to where the agent should be installed on the system |
@@ -277,7 +278,7 @@ Add a system to the ePO server
 | `mcafee_epo_push_agent_skip_if_installed` | `boolean` | No | `-` | Skip pushing agent if it is installed |
 | `mcafee_epo_push_agent_suppress_ui` | `boolean` | No | `-` | Push agent and suppress ui |
 | `mcafee_epo_push_agent_username` | `text` | No | `-` | username for system |
-| `mcafee_epo_system_name_or_id` | `text` | No | `-` | Comma seperated list of systems name or system ids |
+| `mcafee_epo_system_name_or_id` | `text` | No | `-` | Comma separated list of systems name or system ids |
 | `mcafee_epo_uninstall` | `boolean` | No | `-` | True or false to uninstall system |
 
 </p>
@@ -438,7 +439,7 @@ inputs.mcafee_epo_email = rule.properties.epo_email
 inputs.mcafee_epo_fullname = rule.properties.epo_full_name
 inputs.mcafee_epo_notes = rule.properties.epo_notes
 inputs.mcafee_epo_phone_number = rule.properties.epo_phone_number
-inputs.mcafee_epo_user_disabled = rule.properties.epo_user_disbabled
+inputs.mcafee_epo_user_disabled = rule.properties.epo_user_disabled
 ```
 
 </p>
@@ -542,7 +543,7 @@ Assigns the policy to a supplied list of systems on the ePO server
 | `mcafee_epo_object_id` | `number` | No | `-` | ID if object |
 | `mcafee_epo_product_id` | `text` | No | `-` | The product ID for the task |
 | `mcafee_epo_reset_inheritance` | `boolean` | No | `-` | Boolean to reset inheritance |
-| `mcafee_epo_system_name_or_id` | `text` | No | `-` | Comma seperated list of systems name or system ids |
+| `mcafee_epo_system_name_or_id` | `text` | No | `-` | Comma separated list of systems name or system ids |
 | `mcafee_epo_type_id` | `number` | No | `-` | Type ID |
 
 </p>
@@ -799,7 +800,7 @@ Delete a system from the ePO server
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `mcafee_epo_system_name_or_id` | `text` | No | `-` | Comma seperated list of systems name or system ids |
+| `mcafee_epo_system_name_or_id` | `text` | No | `-` | Comma separated list of systems name or system ids |
 | `mcafee_epo_uninstall` | `boolean` | No | `-` | True or false to uninstall system |
 | `mcafee_epo_uninstall_software` | `boolean` | No | `-` | True or false to uninstall software on system |
 
@@ -2402,16 +2403,16 @@ Run a client task on specified system(s)
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `mcafee_epo_abort_after_minutes` | `number` | No | `-` | Number of minutes to wait to abort a call that isnt responding |
+| `mcafee_epo_abort_after_minutes` | `number` | No | `-` | Number of minutes to wait to abort a call that is not responding |
 | `mcafee_epo_product_id` | `text` | No | `-` | The product ID for the task |
 | `mcafee_epo_random_minutes` | `number` | No | `-` | number of random minutes |
 | `mcafee_epo_retry_attempts` | `number` | No | `-` | Number of times to retry call |
-| `mcafee_epo_retry_intervals_in_seconds` | `number` | No | `-` | Number of seconds to wait between retrys |
+| `mcafee_epo_retry_intervals_in_seconds` | `number` | No | `-` | Number of seconds to wait between retries |
 | `mcafee_epo_stop_after_minutes` | `number` | No | `-` | number of minutes to wait until stopping retry call |
-| `mcafee_epo_system_name_or_id` | `text` | No | `-` | Comma seperated list of systems name or system ids |
+| `mcafee_epo_system_name_or_id` | `text` | No | `-` | Comma separated list of systems name or system ids |
 | `mcafee_epo_task_id` | `number` | No | `-` | The ID of the client task |
 | `mcafee_epo_timeout_in_hours` | `number` | No | `-` | Number of hours to wait until timeout |
-| `mcafee_epo_use_all_agent_handlers` | `boolean` | No | `-` | True or false to use all agent handers |
+| `mcafee_epo_use_all_agent_handlers` | `boolean` | No | `-` | True or false to use all agent handlers |
 
 </p>
 </details>
@@ -2616,7 +2617,7 @@ Update a user on the ePO server
 | `mcafee_epo_allowed_ips` | `text` | No | `-` | A list of ips that can access the new user |
 | `mcafee_epo_email` | `text` | No | `-` | Email for the new user |
 | `mcafee_epo_fullname` | `text` | No | `-` | Full name for the new user |
-| `mcafee_epo_new_username` | `text` | No | `-` | Change the ePO users usernam |
+| `mcafee_epo_new_username` | `text` | No | `-` | Change the ePO users username |
 | `mcafee_epo_notes` | `text` | No | `-` | Notes to add to the new user |
 | `mcafee_epo_pass` | `text` | No | `-` | Password for ePO user |
 | `mcafee_epo_phone_number` | `text` | No | `-` | Phone number for the new user |
@@ -2681,7 +2682,7 @@ inputs.mcafee_epo_fullname = rule.properties.epo_full_name
 inputs.mcafee_epo_notes = rule.properties.epo_notes
 inputs.mcafee_epo_pass = rule.properties.epo_user_password
 inputs.mcafee_epo_phone_number = rule.properties.epo_phone_number
-inputs.mcafee_epo_user_disabled = rule.properties.epo_user_disbabled
+inputs.mcafee_epo_user_disabled = rule.properties.epo_user_disabled
 inputs.mcafee_epo_username = row.user_name
 inputs.mcafee_epo_new_username = rule.properties.epo_new_username
 inputs.mcafee_epo_subjectdn = rule.properties.epo_subject_dn
@@ -2713,7 +2714,7 @@ if results.get("success"):
     note += "Phone number updated: {}\n".format(inputs.get("mcafee_epo_phone_number"))
   if inputs.get("mcafee_epo_user_disabled") != None:
     row.disabled = bool(inputs.get("mcafee_epo_user_disabled"))
-    note += "User disbaled updated: {}\n".format(bool(inputs.get("mcafee_epo_user_disabled")))
+    note += "User disabled updated: {}\n".format(bool(inputs.get("mcafee_epo_user_disabled")))
   if inputs.get("mcafee_epo_admin") != None:
     row.admin = bool(inputs.get("mcafee_epo_admin"))
     note += "Admin updated: {}\n".format(bool(inputs.get("mcafee_epo_admin")))

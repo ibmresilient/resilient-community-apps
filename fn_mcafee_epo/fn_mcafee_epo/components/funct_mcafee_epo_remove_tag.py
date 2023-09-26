@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """AppFunction implementation"""
 
 from fn_mcafee_epo.lib.epo_helper import init_client, get_list, PACKAGE_NAME
@@ -27,7 +27,7 @@ class FunctionComponent(AppFunctionComponent):
         """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        # Get the function parameters:
+        # Validate required parameters
         validate_fields(["mcafee_epo_systems", "mcafee_epo_tag"], fn_inputs)
 
         # Log parameters
