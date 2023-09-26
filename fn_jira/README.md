@@ -33,6 +33,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.0.3 | 09/2023 | Bug fix for jira_transition_issue function |
 | 3.0.2 | 08/2023 | Bug fix for playbook, Example: Jira Create Comment |
 | 3.0.1 | 05/2023 | Bug fix for SOAR note synchronization |
 | 3.0.0 | 01/2023 | <ul><li>Add poller for bidirectional sync</li><li>Updated to work with Jira Cloud</li><li>Add global_settings to app.config that contains the settings for the poller</li></ul> |
