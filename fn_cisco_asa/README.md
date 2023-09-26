@@ -40,7 +40,7 @@
     - [Cisco ASA Configuration](#cisco-asa-configuration)
       - [Install and Configure ASA REST API Agent and Client](#install-and-configure-asa-rest-api-agent-and-client)
       - [Create Cisco ASA Network Object Groups](#create-cisco-asa-network-object-groups)
-  - [The app makes REST API calls to add and remove network objects from the BLOCKLIST\_IN network object group.](#the-app-makes-rest-api-calls-to-add-and-remove-network-objects-from-the-blocklist_in-network-object-group)
+      - [Add Firewall Network Object Group pairs to Activation form](#add-firewall-network-object-group-pairs-to-activation-form)
   - [Function - Cisco ASA Add Artifact to Network Object Group](#function---cisco-asa-add-artifact-to-network-object-group)
   - [Function - Cisco ASA Get Network Object Details](#function---cisco-asa-get-network-object-details)
   - [Function - Cisco ASA Get Network Objects](#function---cisco-asa-get-network-objects)
@@ -77,6 +77,8 @@ If upgrading from a previous release, notice that the previous release's rules/w
 
 You can continue to use the rules/workflows, but migrating to playbooks provides greater functionality along with future app enhancements and bug fixes. 
 
+Starting with the 1.2.0 release, the Cisco ASA app no longer loads the Cisco ASA Firewall Network Object Group select field values at app startup.  You must edit the playbook activation form for playbooks that have use a select list for Firewall Network Object Group pairing input selection.  
+See section [Add Firewall Network Object Group pairs to Activation form ](#add-firewall-network-object-group-pairs-to-activation-form) for more detail.
 ## Overview
 <!--
   Provide a high-level description of the function itself and its remote software or application.
@@ -234,6 +236,16 @@ hostname(config)# access-group my-internet-access in interface inside
 </code></pre>
  
 The app makes REST API calls to add and remove network objects from the BLOCKLIST_IN network object group.
+
+#### Add Firewall Network Object Group pairs to Activation form
+
+To add your firewall and network object group select values make a copy of the playbooks that use the **cisco_asa_firewall_network_object_group** select list and add your firewall:network_object_group pairs to the list of values as shown in the red box in the screenshot below.
+
+ ![screenshot: fn-cisco-asa-edit-activation-form-values ](./doc/screenshots/fn-cisco-asa-edit-activation-form-values.png)
+
+ <p>
+ NOTE: if you edit the playbooks shipped with the app your playbook may be overwritten with future upgrades, therefore making a copy is recommended.
+ 
 ---
 
 ## Function - Cisco ASA Add Artifact to Network Object Group

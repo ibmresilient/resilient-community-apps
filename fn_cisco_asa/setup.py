@@ -30,7 +30,7 @@ setup(
     description="IBM SOAR app for Cisco ASA",
     long_description="""IBM SOAR integration with Cisco ASA - Adaptive Security Appliance. Manage Cisco ASA network objects from SOAR.""",
     install_requires=[
-        "resilient-circuits>=48.0.0"
+        "resilient-circuits>=50.0.0"
     ],
     packages=find_packages(),
     include_package_data=True,

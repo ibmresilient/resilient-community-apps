@@ -6,7 +6,6 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, RequestsCommon
-from fn_cisco_asa.lib.resilient_helper import init_select_list_choices
 from fn_cisco_asa.lib.functions_common import CiscoASAFirewalls
 from fn_cisco_asa.lib.cisco_asa_client import CiscoASAClient
 
@@ -23,23 +22,8 @@ class FunctionComponent(ResilientComponent):
         """ Load the options """
         self.fn_options = opts.get(PACKAGE_NAME, {})
 
-        rest_client = self.rest_client()
-
         # Load the firewall options from the app.config
         self.firewalls = CiscoASAFirewalls(opts, self.fn_options)
-
-        firewall_group_select_list = []
-        # Load the rule activity select field with the firewall options from app.config
-        firewall_name_list = self.firewalls.get_firewall_name_list()
-        for firewall_name in firewall_name_list:
-            firewall_options = self.firewalls.get_firewall(firewall_name)
-            network_object_groups_list = self._convert_csv_to_list(firewall_options.get("network_object_groups"))
-            for group in network_object_groups_list:
-                select_item = "{0}:{1}".format(firewall_name, group)
-                firewall_group_select_list.append(select_item)
-
-        # Load the rule activity select field with the network object group options from app.config
-        init_select_list_choices(rest_client, "cisco_asa_firewall_network_object_group", firewall_group_select_list)
 
     def __init__(self, opts):
         """Constructor provides access to the configuration options"""
