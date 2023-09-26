@@ -27,7 +27,7 @@ setup(
     long_description="The McAfee ePO functions allow for manipulation of tags, systems, users, issues, policies and permission sets.",
     python_requires='>=3.6',
     install_requires=[
-        'resilient_circuits>=44.0.0',
+        'resilient_circuits>=45.0.0',
         'resilient-lib'
     ],
     packages=find_packages(),
