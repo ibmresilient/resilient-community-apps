@@ -1,28 +1,12 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2023. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=pointless-string-statement, line-too-long, wrong-import-order
 
 """Function implementation"""
 
-try:
-    import httplib
-except:
-    import http.client as httplib
-
-try:
-    import urlparse
-except:
-    import urllib.parse as urlparse
-
-try:
-    from urllib2 import urlopen
-except:
-    from urllib.request import urlopen
-
 import logging
-import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, validate_fields
 
 MAX_DEPTH_LIMIT = 10  # number of redirects to follow before giving up
 SOCKET_TIMEOUT = 10 # number of seconds to wait for request to complete - this is socket level timeout, not http timeout
@@ -46,27 +30,14 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(SECTION_HDR, {})
 
-    def init_proxies(self):
-        self.proxy_host = None
-        self.proxy_port = None
-
-        rc = RequestsCommon(self.opts, self.options)
-        proxies = rc.get_proxies()
-
-        if proxies:
-            proxy = proxies.get('https', proxies.get('http'))
-
-            if proxy:
-                proxy_url = urlparse.urlparse(proxy)
-                self.proxy_host = proxy_url.hostname
-                self.proxy_port = proxy_url.port
-
     @function("network_utilities_expand_url")
     def _utilities_resilient_url_expander_function(self, event, *args, **kwargs):
         """Function: Follow a URL until it's destination URL. Returned is a list of the URLs found. """
         try:
+            validate_fields(["network_utilities_resilient_url"], kwargs)
+
             # Get the function parameters:
-            resilient_url = kwargs.get("network_utilities_resilient_url")  # text
+            resilient_url = kwargs.get("network_utilities_resilient_url").strip()  # text
 
             self.log = logging.getLogger(__name__)
             self.log.info("resilient_url: %s", resilient_url)
@@ -74,8 +45,9 @@ class FunctionComponent(ResilientComponent):
             # Run the search and return the results
             yield StatusMessage("Starting...")
 
-            self.init_proxies()
-            results = self.expand_url(resilient_url.strip())
+            rc = RequestsCommon(self.opts, self.options)
+            results = self.expand_url(rc, resilient_url, 1)
+            results = results[1:] # pop the first as that is the original url
             self.log.debug(results)
 
             # Produce a FunctionResult with the results
@@ -85,51 +57,27 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError()
 
 
-    def expand_url(self, url):
+    def expand_url(self, rc: RequestsCommon, url: str, depth: int):
         """ Starting point. Make sure the URL has a prefix. """
         if not url.lower().startswith('http'):
             url = 'https://' + url
-        urls = []
-        return self.follow_url(url, urls, 1)
 
-
-    def follow_url(self, url, url_list, depth):
-        """ This is called recursively to follow any redirects on a URL. The max depth is checked so not be unlimited """
         if depth > MAX_DEPTH_LIMIT:
             self.log.warning("Exceeded depth limit")
-            return url_list
+            return [url]
 
-        self.log.debug("{} depth {}".format(url, depth))
+        self.log.debug(f"{url} depth {depth}")
+
+        url_list = [url]
+
         try:
-            parsed = urlparse.urlparse(url)     # this ensures we have a valid url
-            # add proxy logic, if specified
-            if self.proxy_host:
-                self.log.debug("Using proxy: %s:%s", self.proxy_host, self.proxy_port)
-                h = httplib.HTTPConnection(self.proxy_host, self.proxy_port, timeout=SOCKET_TIMEOUT)
-                h.set_tunnel(parsed.netloc, parsed.port)
+            response = rc.execute('HEAD', url, allow_redirects=False)
 
-            else:
-                h = httplib.HTTPConnection(parsed.netloc, parsed.port, timeout=SOCKET_TIMEOUT)
-
-            h.request('HEAD', parsed.path)
-            response = h.getresponse()
+            self.log.info(f"{response.status_code}:{response.next}")
+            if int(response.status_code/100) == 3:
+                url_list.extend(self.expand_url(rc, response.next.url, depth+1))
         except Exception as err:
             self.log.error(err)
             return list()
-
-        new_url = response.getheader('location') if response.getheader('location') else None
-
-        if int(response.status/100) == 3 and new_url:
-            if new_url in url_list:
-                return url_list
-            else:
-                url_list.append(new_url)
-                return self.follow_url(new_url, url_list, depth+1)
-
-        elif int(response.status/100) == 2 and new_url:
-            self.log.info("Status code: {} on url {}".format(response.status, new_url))
-
-        if new_url and new_url not in url_list:
-            url_list.append(new_url)
 
         return url_list
