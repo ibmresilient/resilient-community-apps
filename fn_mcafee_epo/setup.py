@@ -23,13 +23,14 @@ setup(
     version='2.0.1',
     license='MIT',
     author='IBM SOAR',
+    author_email="",
+    url="https://ibm.com/mysupport",
     description="IBM Security SOAR app for McAfee ePO",
     long_description="The McAfee ePO functions allow for manipulation of tags, systems, users, issues, policies and permission sets.",
-    python_requires='>=3.6',
     install_requires=[
-        'resilient_circuits>=45.0.0',
-        'resilient-lib'
+        'resilient_circuits>=45.0.0'
     ],
+    python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
@@ -39,7 +40,7 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "{}FunctionComponent = fn_mcafee_epo.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_mcafee_epo/components/[a-zA-Z]*.py")
+            "{}FunctionComponent = fn_mcafee_epo.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_mcafee_epo/components/funct_mcafee_[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mcafee_epo.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_mcafee_epo.util.customize:customization_data"],

@@ -25,7 +25,7 @@ inputs.mcafee_epo_permsetname = row.permission_set_name
 
 ### Post-Processing Script
 ```python
-if results['success']:
+if results.get('success'):
   if rule.properties.epo_username not in row.users:
     if row.users:
       row.users = "{}, {}".format(row.users, rule.properties.epo_username)

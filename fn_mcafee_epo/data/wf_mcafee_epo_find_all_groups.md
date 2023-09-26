@@ -39,7 +39,7 @@ None
 `mcafee_epo_execute_query`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `mcafee_epo_message_destination`

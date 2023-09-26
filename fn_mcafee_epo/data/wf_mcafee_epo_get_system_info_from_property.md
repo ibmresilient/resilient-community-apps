@@ -26,10 +26,10 @@ inputs.mcafee_epo_systems = rule.properties.epo_system
 ```python
 note = ''
 if results.get("success"):
-  for x in range(len(results['content'])):
-    content = dict((k, v) for k, v in results['content'][x].iteritems() if v and "N/A" not in str(v))
-    note += "{}\n{}".format(results['content'][x].get('EPOComputerProperties.ComputerName'), str(content))
-    
+  for x in range(len(results.get('content'))):
+    content = dict((k, v) for k, v in results.get('content')[x].iteritems() if v and "N/A" not in str(v))
+    note += "{}\n{}".format(results.get('content')[x].get('EPOComputerProperties.ComputerName'), str(content))
+
   incident.addNote(note.replace("{","").replace("u'","'").replace("}","\n\n"))
 ```
 

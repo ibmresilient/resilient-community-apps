@@ -26,12 +26,12 @@ inputs.mcafee_epo_tag = str(rule.properties.ss_tags)
 ### Post-Processing Script
 ```python
 if results.get("success"):
-  note = u"ePO tag(s) added: {}".format(str(rule.properties.ss_tags))
+  note = "ePO tag(s) added: {}".format(str(rule.properties.ss_tags))
 else:
-  note = u"ePO system not found or tag already applied: {}".format(str(rule.properties.ss_tags))
+  note = "ePO system not found or tag already applied: {}".format(str(rule.properties.ss_tags))
 
 if artifact.description:
-  artifact.description = u"{}\n\n{}".format(artifact.description.content, note)
+  artifact.description = "{}\n\n{}".format(artifact.description.content, note)
 else:
   artifact.description = note
 ```

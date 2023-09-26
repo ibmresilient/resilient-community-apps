@@ -20,7 +20,7 @@
 ### Pre-Processing Script
 ```python
 inputs.mcafee_epo_systems = rule.properties.epo_system
-inputs.mcafee_epo_tag = row['epo_tag']
+inputs.mcafee_epo_tag = row.epo_tag
 ```
 
 ### Post-Processing Script

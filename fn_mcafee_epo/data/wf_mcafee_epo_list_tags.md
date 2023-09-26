@@ -26,7 +26,7 @@ inputs.incident_id = incident.id
 ### Post-Processing Script
 ```python
 if results.get("success"):
-  for tag in sorted(results.content, key = lambda i: i['tagName'].lower()):
+  for tag in sorted(results.get("content"), key = lambda i: i['tagName'].lower()):
     row = incident.addRow("mcafee_epo_tags")
     row['epo_id'] = tag['tagId']
     row['epo_tag'] = tag['tagName']
