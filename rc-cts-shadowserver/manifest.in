@@ -1,0 +1,3 @@
+include README.md
+include rc_cts_shadow_server/*
+include rc_cts_shadow_server/LICENSE
