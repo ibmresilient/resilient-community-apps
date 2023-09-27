@@ -39,7 +39,7 @@ None
 `mcafee_epo_execute_query`
 
 ### Output Name
-``
+`None`
 
 ### Message Destination
 `mcafee_epo_message_destination`
@@ -67,7 +67,7 @@ if results.get("success"):
       # EPOBranchNode.NodeTextPath2 returns the path, Lost and Found, as, Lost&Found,
       # so it needs to be converted in order to compare paths.
       path2 = path2.replace("Lost&Found", "Lost and Found")
-      # Add, My Organization, to the begining of the path
+      # Add, My Organization, to the beginning of the path
       path2 = "My Organization{}".format(path2[:len(path2)-1])
 
       if groupPath == path2:

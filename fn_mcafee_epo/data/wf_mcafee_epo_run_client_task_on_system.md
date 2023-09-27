@@ -19,7 +19,7 @@
 
 ### Pre-Processing Script
 ```python
-inputs.mcafee_epo_system_name_or_id = row.system_name
+inputs.mcafee_epo_system_name_or_id = row.epo_system_name
 inputs.mcafee_epo_product_id = rule.properties.epo_product_id
 inputs.mcafee_epo_task_id = rule.properties.epo_task_id
 ```
@@ -27,7 +27,7 @@ inputs.mcafee_epo_task_id = rule.properties.epo_task_id
 ### Post-Processing Script
 ```python
 if results.get("content") and results.get("content") == "Succeeded":
-  incident.addNote("System(s): '{}' ran client task: '{}' successfully.".format(row.system_name, rule.properties.epo_task_id))
+  incident.addNote("System(s): '{}' ran client task: '{}' successfully.".format(row.epo_system_name, rule.properties.epo_task_id))
 ```
 
 ---

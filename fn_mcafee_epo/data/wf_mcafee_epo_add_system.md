@@ -42,8 +42,8 @@ inputs.mcafee_epo_push_agent_install_path = rule.properties.epo_push_agent_insta
 ### Post-Processing Script
 ```python
 if results.get("success"):
-  row = incident.addRow("mcafee_epo_systems")
-  row["system_name"] = rule.properties.epo_system_names_or_ids
+  row = incident.addRow("mcafee_epo_systems_dt")
+  row["epo_system_name"] = rule.properties.epo_system_names_or_ids
 ```
 
 ---

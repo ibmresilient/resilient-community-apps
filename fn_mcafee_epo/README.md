@@ -359,8 +359,8 @@ inputs.mcafee_epo_push_agent_install_path = rule.properties.epo_push_agent_insta
 
 ```python
 if results.get("success"):
-  row = incident.addRow("mcafee_epo_systems")
-  row["system_name"] = rule.properties.epo_system_names_or_ids
+  row = incident.addRow("mcafee_epo_systems_dt")
+  row["epo_system_name"] = rule.properties.epo_system_names_or_ids
 ```
 
 </p>
@@ -847,7 +847,7 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_system_name_or_id = row.system_name
+inputs.mcafee_epo_system_name_or_id = row.epo_system_name
 ```
 
 </p>
@@ -859,7 +859,7 @@ inputs.mcafee_epo_system_name_or_id = row.system_name
 ```python
 if results.get("success"):
   row.deleted = True
-  incident.addNote("System: {} deleted".format(row.system_name))
+  incident.addNote("System: {} deleted".format(row.epo_system_name))
 ```
 
 </p>
@@ -1011,7 +1011,7 @@ results = {
 
 ```python
 inputs.mcafee_epo_target = "EPOLeafNode"
-inputs.datatable_name = "mcafee_epo_systems"
+inputs.datatable_name = "mcafee_epo_systems_dt"
 inputs.incident_id = incident.id
 ```
 
@@ -1023,14 +1023,14 @@ inputs.incident_id = incident.id
 
 ```python
 if results.get('success'):
-  for system in results['content']:
-    table_row = incident.addRow("mcafee_epo_systems")
-    table_row["system_name"] = system.get("EPOLeafNode.NodeName")
-    table_row["agent_guid"] = system.get("EPOLeafNode.AgentGUID")
-    table_row["last_communication"] = system.get("EPOLeafNode.LastUpdate")
-    table_row["tags"] = system.get("EPOLeafNode.Tags")
-    table_row["operating_system"] = system.get("EPOLeafNode.os").replace("|", " | ")
-    table_row["deleted"] = False
+  for system in results.get('content', {}):
+    table_row = incident.addRow("mcafee_epo_systems_dt")
+    table_row["epo_system_name"] = system.get("EPOLeafNode.NodeName")
+    table_row["epo_agent_guid"] = system.get("EPOLeafNode.AgentGUID")
+    table_row["epo_last_communication"] = system.get("EPOLeafNode.LastUpdate")
+    table_row["epo_tags"] = system.get("EPOLeafNode.Tags")
+    table_row["epo_operating_system"] = system.get("EPOLeafNode.os").replace("|", " | ")
+    table_row["epo_deleted"] = False
 ```
 
 </p>
@@ -2452,9 +2452,9 @@ results = {
 <p>
 
 ```python
-inputs.mcafee_epo_system_name_or_id = rule.properties.epo_system_names_or_ids
-inputs.mcafee_epo_product_id = row.product_id
-inputs.mcafee_epo_task_id = int(row.task_id)
+inputs.mcafee_epo_system_name_or_id = row.epo_system_name
+inputs.mcafee_epo_product_id = rule.properties.epo_product_id
+inputs.mcafee_epo_task_id = rule.properties.epo_task_id
 ```
 
 </p>
@@ -2464,8 +2464,8 @@ inputs.mcafee_epo_task_id = int(row.task_id)
 <p>
 
 ```python
-if results.get("success"):
-  incident.addNote("System(s): '{}' ran client task: '{}' successfully.".format(rule.properties.epo_system_names_or_ids, row.object_name))
+if results.get("content") and results.get("content") == "Succeeded":
+  incident.addNote("System(s): '{}' ran client task: '{}' successfully.".format(row.epo_system_name, rule.properties.epo_task_id))
 ```
 
 </p>

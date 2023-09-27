@@ -59,7 +59,7 @@ inputs.incident_id = incident.id
 ### Post-Processing Script
 ```python
 if results.get("success"):
-  for policy in workflow.properties.policyresults.get("content"):
+  for policy in workflow.properties.policyresults["content"]:
     policyId = int(policy.get("objectId"))
     table_row = incident.addRow("mcafee_epo_policies")
     table_row["object_name"] = policy.get("objectName")

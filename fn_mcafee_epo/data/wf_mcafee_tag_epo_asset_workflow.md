@@ -14,7 +14,7 @@
 ``
 
 ### Message Destination
-`mcafee_epo`
+`mcafee_epo_message_destination`
 
 ### Pre-Processing Script
 ```python

@@ -25,19 +25,21 @@ inputs.mcafee_epo_systems = artifact.value
 ### Post-Processing Script
 ```python
 if not results.get("success"):
-  info = "ePO system not found"
+  info = u"ePO system not found"
 else:
-  info = "ePO system info\n"
+  info = u"ePO system info\n"
   for system in results.content:
     for setting in system:
-      info = "{}\n{}: {}".format(info, setting, system.get("setting"))
+      info = u"{}\n{}: {}".format(info, setting, system.get("setting"))
 
 if artifact.description:
-  artifact.description = "{}\n\n{}".format(artifact.description.content, info)
+  artifact.description = u"{}\n\n{}".format(artifact.description.content, info)
 else:
   artifact.description = info
 
 incident.addNote(info)
+
+
 ```
 
 ---

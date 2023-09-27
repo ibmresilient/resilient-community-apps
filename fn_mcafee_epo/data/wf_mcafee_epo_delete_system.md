@@ -19,14 +19,14 @@
 
 ### Pre-Processing Script
 ```python
-inputs.mcafee_epo_system_name_or_id = row.system_name
+inputs.mcafee_epo_system_name_or_id = row.epo_system_name
 ```
 
 ### Post-Processing Script
 ```python
 if results.get("success"):
   row.deleted = True
-  incident.addNote("System: {} deleted".format(row.system_name))
+  incident.addNote("System: {} deleted".format(row.epo_system_name))
 ```
 
 ---

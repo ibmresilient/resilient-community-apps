@@ -26,7 +26,7 @@ inputs.mcafee_epo_fullname = rule.properties.epo_full_name
 inputs.mcafee_epo_notes = rule.properties.epo_notes
 inputs.mcafee_epo_pass = rule.properties.epo_user_password
 inputs.mcafee_epo_phone_number = rule.properties.epo_phone_number
-inputs.mcafee_epo_user_disabled = rule.properties.epo_user_disbabled
+inputs.mcafee_epo_user_disabled = rule.properties.epo_user_disabled
 inputs.mcafee_epo_username = row.user_name
 inputs.mcafee_epo_new_username = rule.properties.epo_new_username
 inputs.mcafee_epo_subjectdn = rule.properties.epo_subject_dn
@@ -53,7 +53,7 @@ if results.get("success"):
     note += "Phone number updated: {}\n".format(inputs.get("mcafee_epo_phone_number"))
   if inputs.get("mcafee_epo_user_disabled") != None:
     row.disabled = bool(inputs.get("mcafee_epo_user_disabled"))
-    note += "User disbaled updated: {}\n".format(bool(inputs.get("mcafee_epo_user_disabled")))
+    note += "User disabled updated: {}\n".format(bool(inputs.get("mcafee_epo_user_disabled")))
   if inputs.get("mcafee_epo_admin") != None:
     row.admin = bool(inputs.get("mcafee_epo_admin"))
     note += "Admin updated: {}\n".format(bool(inputs.get("mcafee_epo_admin")))

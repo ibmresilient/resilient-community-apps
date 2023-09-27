@@ -128,7 +128,7 @@ def codegen_reload_data():
             u"mcafee_epo_issues",
             u"mcafee_epo_permission_sets",
             u"mcafee_epo_policies",
-            u"mcafee_epo_systems",
+            u"mcafee_epo_systems_dt",
             u"mcafee_epo_tags",
             u"mcafee_epo_users"
         ],
@@ -245,7 +245,7 @@ def customization_data(client=None):
         - mcafee_epo_issues
         - mcafee_epo_permission_sets
         - mcafee_epo_policies
-        - mcafee_epo_systems
+        - mcafee_epo_systems_dt
         - mcafee_epo_tags
         - mcafee_epo_users
     """
