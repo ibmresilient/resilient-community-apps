@@ -6,6 +6,7 @@
 import cx_Oracle
 import logging
 import pyodbc
+from retry import retry
 
 from data_feeder_plugins.sqllib.sql_feed_base import SqlFeedDestinationBase
 from data_feeder_plugins.sqllib.sql_dialect import OracleDialect
@@ -34,6 +35,7 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
 
         self._init_tables()
 
+    @retry(pyodbc.OperationalError, tries=10, delay=5, backoff=3, logger=LOG)
     def _reinit(self, connect_str, uid, pwd, dialect=None):
         # pylint: disable=c-extension-no-member
         if dialect and isinstance(dialect, OracleDialect):

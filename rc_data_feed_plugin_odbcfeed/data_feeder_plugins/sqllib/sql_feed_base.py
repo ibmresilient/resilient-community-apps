@@ -183,7 +183,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                 LOG.error(ddl)
                 raise db_exception
 
-    @retry(RetrySendDataException, tries=3, delay=5, backoff=5, logger=LOG)
+    @retry(RetrySendDataException, tries=3, delay=5, backoff=3, logger=LOG)
     def send_data(self, context, payload):
         # We'll use the type's name as the table name.
         #
