@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Create Attachment from Triggered Event (PB)
+# Playbook - QRadar EDR: Create Attachment from Triggered Event (PB)
 
 ### API Name
 `reaqta_create_attachment_from_triggered_event`
@@ -26,7 +26,7 @@ Attach a file from an endpoint.
 
 
 ---
-## Function - ReaQta: Attach File
+## Function - QRadar EDR: Attach File
 
 ### API Name
 `reaqta_attach_file`

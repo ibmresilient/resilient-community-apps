@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Isolate Endpoint (PB)
+# Playbook - QRadar EDR: Isolate Endpoint (PB)
 
 ### API Name
 `reaqta_isolate_endpoint`
@@ -26,7 +26,7 @@ Isolate the endpoint machine from the network
 
 
 ---
-## Function - ReaQta: Isolate Machine
+## Function - QRadar EDR: Isolate Machine
 
 ### API Name
 `reaqta_isolate_machine`

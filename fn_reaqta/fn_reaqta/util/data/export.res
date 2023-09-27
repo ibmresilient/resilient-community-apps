@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1690894052871,
+  "export_date": 1695803055525,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -17,7 +17,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_hive",
       "hide_notification": false,
-      "id": 384,
+      "id": 710,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -46,7 +46,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_note",
       "hide_notification": false,
-      "id": 385,
+      "id": 711,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -75,7 +75,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_program_path",
       "hide_notification": false,
-      "id": 386,
+      "id": 712,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -105,7 +105,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_policy_excluded_groups",
       "hide_notification": false,
-      "id": 387,
+      "id": 713,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -134,7 +134,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_sha256",
       "hide_notification": false,
-      "id": 388,
+      "id": 714,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -164,7 +164,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_is_malicious",
       "hide_notification": false,
-      "id": 389,
+      "id": 715,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -194,7 +194,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_incident_id",
       "hide_notification": false,
-      "id": 390,
+      "id": 716,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -224,7 +224,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_policy_description",
       "hide_notification": false,
-      "id": 391,
+      "id": 717,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -253,7 +253,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_policy_enabled",
       "hide_notification": false,
-      "id": 392,
+      "id": 718,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -283,7 +283,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_policy_title",
       "hide_notification": false,
-      "id": 393,
+      "id": 719,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -312,7 +312,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_policy_block",
       "hide_notification": false,
-      "id": 394,
+      "id": 720,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -342,7 +342,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_starttime",
       "hide_notification": false,
-      "id": 395,
+      "id": 721,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -372,7 +372,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_hives",
       "hide_notification": false,
-      "id": 396,
+      "id": 722,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -401,7 +401,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_process_pid",
       "hide_notification": false,
-      "id": 397,
+      "id": 723,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -431,7 +431,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_endpoint_id",
       "hide_notification": false,
-      "id": 398,
+      "id": 724,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -461,7 +461,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_artifact_type",
       "hide_notification": false,
-      "id": 399,
+      "id": 725,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -491,7 +491,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_alert_id",
       "hide_notification": false,
-      "id": 400,
+      "id": 726,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -521,7 +521,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_has_incident",
       "hide_notification": false,
-      "id": 401,
+      "id": 727,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -550,7 +550,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_suspended",
       "hide_notification": false,
-      "id": 402,
+      "id": 728,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -579,7 +579,7 @@
       "deprecated": false,
       "export_key": "__function/reaqta_policy_included_groups",
       "hide_notification": false,
-      "id": 403,
+      "id": 729,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -608,7 +608,7 @@
       "deprecated": false,
       "export_key": "incident/reaqta_endpoint_id",
       "hide_notification": false,
-      "id": 352,
+      "id": 678,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -637,7 +637,7 @@
       "deprecated": false,
       "export_key": "incident/reaqta_endpoint_link",
       "hide_notification": false,
-      "id": 353,
+      "id": 679,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -666,7 +666,7 @@
       "deprecated": false,
       "export_key": "incident/reaqta_groups",
       "hide_notification": false,
-      "id": 354,
+      "id": 680,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -695,7 +695,7 @@
       "deprecated": false,
       "export_key": "incident/reaqta_trigger_condition",
       "hide_notification": false,
-      "id": 355,
+      "id": 681,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -724,7 +724,7 @@
       "deprecated": false,
       "export_key": "incident/reaqta_tags",
       "hide_notification": false,
-      "id": 356,
+      "id": 682,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -753,7 +753,7 @@
       "deprecated": false,
       "export_key": "incident/reaqta_alert_link",
       "hide_notification": false,
-      "id": 357,
+      "id": 683,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -782,7 +782,7 @@
       "deprecated": false,
       "export_key": "incident/reaqta_id",
       "hide_notification": false,
-      "id": 358,
+      "id": 684,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -811,7 +811,7 @@
       "deprecated": false,
       "export_key": "incident/reaqta_machine_info",
       "hide_notification": false,
-      "id": 359,
+      "id": 685,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -840,7 +840,7 @@
       "deprecated": false,
       "export_key": "incident/reaqta_hive",
       "hide_notification": false,
-      "id": 360,
+      "id": 686,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -869,7 +869,7 @@
       "deprecated": false,
       "export_key": "incident/reaqta_impact",
       "hide_notification": false,
-      "id": 361,
+      "id": 687,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -902,28 +902,28 @@
   ],
   "functions": [
     {
-      "created_date": 1692109241477,
+      "created_date": 1695797018727,
       "description": {
         "content": "Attach the file associated with a running process",
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta: Attach File",
+      "display_name": "QRadar EDR: Attach File",
       "export_key": "reaqta_attach_file",
-      "id": 20,
+      "id": 18,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109241511,
+      "last_modified_time": 1695798090443,
       "name": "reaqta_attach_file",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"type\": \"incident\", \"id\": 32, \"uuid\": \"b50616ee-8c1b-4830-a0d5-601b3a550ab9\", \"name\": \"powershell.exe\", \"content_type\": \"application/x-msdownload\", \"created\": 1691389665926, \"creator_id\": 9, \"size\": 720768, \"actions\": [], \"playbooks\": [], \"task_id\": null, \"task_name\": null, \"task_custom\": null, \"task_members\": null, \"task_at_id\": null, \"reconciliation_status\": \"matched\", \"vers\": 8, \"inc_id\": 2154, \"inc_name\": \"ReaQta Alert - Detection Strategy, Endpoint: ACTIVEDIRECTORY\", \"inc_owner\": 8}, \"raw\": null, \"inputs\": {\"reaqta_hive\": \"rhiveam\", \"reaqta_program_path\": \"c:\\\\windows\\\\system32\\\\windowspowershell\\\\v1.0\\\\powershell.exe\", \"reaqta_endpoint_id\": \"836686917654282240\", \"reaqta_incident_id\": 2154}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-reaqta\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 22507, \"timestamp\": \"2023-08-07 14:27:46\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"type\": {\"type\": \"string\"}, \"id\": {\"type\": \"integer\"}, \"uuid\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"content_type\": {\"type\": \"string\"}, \"created\": {\"type\": \"integer\"}, \"creator_id\": {\"type\": \"integer\"}, \"size\": {\"type\": \"integer\"}, \"actions\": {\"type\": \"array\"}, \"playbooks\": {\"type\": \"array\"}, \"task_id\": {}, \"task_name\": {}, \"task_custom\": {}, \"task_members\": {}, \"task_at_id\": {}, \"reconciliation_status\": {\"type\": \"string\"}, \"vers\": {\"type\": \"integer\"}, \"inc_id\": {\"type\": \"integer\"}, \"inc_name\": {\"type\": \"string\"}, \"inc_owner\": {\"type\": \"integer\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"reaqta_hive\": {\"type\": \"string\"}, \"reaqta_program_path\": {\"type\": \"string\"}, \"reaqta_endpoint_id\": {\"type\": \"string\"}, \"reaqta_incident_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "6cf8dd59-9465-49a4-8ce8-6538f6c61a4b",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "d587ce18-7232-448f-98a7-23babb4b6e62",
@@ -961,28 +961,28 @@
       "workflows": []
     },
     {
-      "created_date": 1692109241515,
+      "created_date": 1695797018792,
       "description": {
         "content": "Close a ReaQta Alert",
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta: Close Alert",
+      "display_name": "QRadar EDR: Close Alert",
       "export_key": "reaqta_close_alert",
-      "id": 21,
+      "id": 19,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109241547,
+      "last_modified_time": 1695798106459,
       "name": "reaqta_close_alert",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"alertId\": \"1024257396198866946\", \"closed\": true}, \"raw\": null, \"inputs\": {\"reaqta_is_malicious\": false, \"reaqta_alert_id\": \"1024257396198866946\", \"reaqta_hive\": \"rhiveam\", \"reaqta_note\": \"\u003cdiv class=\\\"rte\\\"\u003e\u003cdiv\u003eclosing\u003c/div\u003e\u003c/div\u003e\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-reaqta\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 932, \"timestamp\": \"2023-08-07 14:34:06\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"alertId\": {\"type\": \"string\"}, \"closed\": {\"type\": \"boolean\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"reaqta_is_malicious\": {\"type\": \"boolean\"}, \"reaqta_alert_id\": {\"type\": \"string\"}, \"reaqta_hive\": {\"type\": \"string\"}, \"reaqta_note\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "5801a66d-6b78-40dc-8ec4-f6ab0d842d7c",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "8328e505-3176-4864-b179-7da5dc9e9251",
@@ -1020,28 +1020,28 @@
       "workflows": []
     },
     {
-      "created_date": 1692109241551,
+      "created_date": 1695797018853,
       "description": {
         "content": "Create an artifact from a ReaQta endpoint process file",
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta: Create Artifact",
+      "display_name": "QRadar EDR: Create Artifact",
       "export_key": "reaqta_create_artifact",
-      "id": 22,
+      "id": 20,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109241585,
+      "last_modified_time": 1695798124759,
       "name": "reaqta_create_artifact",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"id\": 313, \"type\": 12, \"value\": \"smss.exe\", \"description\": \"Extracted from ReaQta\", \"attachment\": {\"type\": \"artifact\", \"id\": 33, \"uuid\": \"275ab471-16b0-4c1e-aed0-15c2ad940931\", \"name\": \"smss.exe\", \"content_type\": \"application/x-msdownload\", \"created\": 1691389806738, \"creator_id\": 9, \"size\": 214866, \"actions\": [], \"playbooks\": [], \"task_id\": null, \"task_name\": null, \"task_custom\": null, \"task_members\": null, \"task_at_id\": null, \"reconciliation_status\": \"matched\", \"vers\": 9, \"inc_id\": 2154, \"inc_name\": \"ReaQta Alert - Detection Strategy, Endpoint: ACTIVEDIRECTORY\", \"inc_owner\": 8}, \"parent_id\": null, \"inc_id\": 2154, \"inc_name\": \"ReaQta Alert - Detection Strategy, Endpoint: ACTIVEDIRECTORY\", \"inc_owner\": 8, \"hits\": [], \"created\": 1691389806319, \"last_modified_time\": 1691389806757, \"last_modified_by\": {\"id\": 9, \"type\": \"apikey\", \"name\": \"c3be9c35-c18c-4fac-bae5-9a7d483f1db2\", \"display_name\": \"dev-integration\"}, \"pending_sources\": [], \"perms\": null, \"properties\": null, \"actions\": [], \"playbooks\": [], \"hash\": \"dc968f62938179dc007bced955b9a27c1a9949e00f168868c5e68fbff5742f93\", \"relating\": true, \"creator_principal\": {\"id\": 9, \"type\": \"apikey\", \"name\": \"c3be9c35-c18c-4fac-bae5-9a7d483f1db2\", \"display_name\": \"dev-integration\"}, \"related_incident_count\": null, \"pending_scan_result\": false, \"global_info\": null, \"ip\": {\"source\": null, \"destination\": null}, \"global_artifact\": []}, {\"id\": 314, \"type\": 13, \"value\": \"c5e36a0098f54a6d4bf33037c5c68bf4\", \"description\": \"Extracted from ReaQta\", \"attachment\": null, \"parent_id\": 313, \"inc_id\": 2154, \"inc_name\": \"ReaQta Alert - Detection Strategy, Endpoint: ACTIVEDIRECTORY\", \"inc_owner\": 8, \"hits\": [], \"created\": 1691389806467, \"last_modified_time\": 1691389806476, \"last_modified_by\": {\"id\": 9, \"type\": \"apikey\", \"name\": \"c3be9c35-c18c-4fac-bae5-9a7d483f1db2\", \"display_name\": \"dev-integration\"}, \"pending_sources\": [], \"perms\": null, \"properties\": null, \"actions\": [], \"playbooks\": [], \"hash\": \"31ab03c62b67b4d4162d9c5d92212cd732cc664ec65926c938c71c30d731f53f\", \"relating\": true, \"creator_principal\": {\"id\": 9, \"type\": \"apikey\", \"name\": \"c3be9c35-c18c-4fac-bae5-9a7d483f1db2\", \"display_name\": \"dev-integration\"}, \"related_incident_count\": null, \"pending_scan_result\": false, \"global_info\": null, \"ip\": {\"source\": null, \"destination\": null}, \"global_artifact\": []}, {\"id\": 315, \"type\": 14, \"value\": \"cc7cdc7674ebaa353386f4529c800cd78ac5dd88\", \"description\": \"Extracted from ReaQta\", \"attachment\": null, \"parent_id\": 313, \"inc_id\": 2154, \"inc_name\": \"ReaQta Alert - Detection Strategy, Endpoint: ACTIVEDIRECTORY\", \"inc_owner\": 8, \"hits\": [], \"created\": 1691389806491, \"last_modified_time\": 1691389806500, \"last_modified_by\": {\"id\": 9, \"type\": \"apikey\", \"name\": \"c3be9c35-c18c-4fac-bae5-9a7d483f1db2\", \"display_name\": \"dev-integration\"}, \"pending_sources\": [], \"perms\": null, \"properties\": null, \"actions\": [], \"playbooks\": [], \"hash\": \"b41a290abff3ef1770ec7570fcee8575e7bb93a995c562119709087fdbd933ea\", \"relating\": true, \"creator_principal\": {\"id\": 9, \"type\": \"apikey\", \"name\": \"c3be9c35-c18c-4fac-bae5-9a7d483f1db2\", \"display_name\": \"dev-integration\"}, \"related_incident_count\": null, \"pending_scan_result\": false, \"global_info\": null, \"ip\": {\"source\": null, \"destination\": null}, \"global_artifact\": []}, {\"id\": 316, \"type\": 38, \"value\": \"5580c55feaeaeb35e8a9f88dd9dac69d70acaacfabb39012c7ae9c26b4c2a239\", \"description\": \"Extracted from ReaQta\", \"attachment\": null, \"parent_id\": 313, \"inc_id\": 2154, \"inc_name\": \"ReaQta Alert - Detection Strategy, Endpoint: ACTIVEDIRECTORY\", \"inc_owner\": 8, \"hits\": [], \"created\": 1691389806514, \"last_modified_time\": 1691389806743, \"last_modified_by\": {\"id\": 9, \"type\": \"apikey\", \"name\": \"c3be9c35-c18c-4fac-bae5-9a7d483f1db2\", \"display_name\": \"dev-integration\"}, \"pending_sources\": [], \"perms\": null, \"properties\": null, \"actions\": [], \"playbooks\": [], \"hash\": \"23596a1e546d7c2aaa48e72c615bb1d72690da5559454acda41c4eb7ab07b2cf\", \"relating\": true, \"creator_principal\": {\"id\": 9, \"type\": \"apikey\", \"name\": \"c3be9c35-c18c-4fac-bae5-9a7d483f1db2\", \"display_name\": \"dev-integration\"}, \"related_incident_count\": null, \"pending_scan_result\": false, \"global_info\": null, \"ip\": {\"source\": null, \"destination\": null}, \"global_artifact\": []}], \"raw\": null, \"inputs\": {\"reaqta_artifact_type\": \"Malware Sample\", \"reaqta_hive\": \"rhiveam\", \"reaqta_program_path\": \"C:\\\\Windows\\\\System32\\\\smss.exe\", \"reaqta_endpoint_id\": \"836686917654282240\", \"reaqta_incident_id\": 2154}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-reaqta\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 21204, \"timestamp\": \"2023-08-07 14:30:07\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"type\": {\"type\": \"integer\"}, \"value\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"attachment\": {}, \"parent_id\": {\"type\": [\"integer\", \"null\"]}, \"inc_id\": {\"type\": \"integer\"}, \"inc_name\": {\"type\": \"string\"}, \"inc_owner\": {\"type\": \"integer\"}, \"hits\": {\"type\": \"array\"}, \"created\": {\"type\": \"integer\"}, \"last_modified_time\": {\"type\": \"integer\"}, \"last_modified_by\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"type\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"display_name\": {\"type\": \"string\"}}}, \"pending_sources\": {\"type\": \"array\"}, \"perms\": {}, \"properties\": {}, \"actions\": {\"type\": \"array\"}, \"playbooks\": {\"type\": \"array\"}, \"hash\": {\"type\": \"string\"}, \"relating\": {\"type\": \"boolean\"}, \"creator_principal\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"type\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"display_name\": {\"type\": \"string\"}}}, \"related_incident_count\": {}, \"pending_scan_result\": {\"type\": \"boolean\"}, \"global_info\": {}, \"ip\": {\"type\": \"object\", \"properties\": {\"source\": {}, \"destination\": {}}}, \"global_artifact\": {\"type\": \"array\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"reaqta_artifact_type\": {\"type\": \"string\"}, \"reaqta_hive\": {\"type\": \"string\"}, \"reaqta_program_path\": {\"type\": \"string\"}, \"reaqta_endpoint_id\": {\"type\": \"string\"}, \"reaqta_incident_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "172eb03f-e7fd-4290-b98b-388ecedcd0e3",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "d587ce18-7232-448f-98a7-23babb4b6e62",
@@ -1087,28 +1087,28 @@
       "workflows": []
     },
     {
-      "created_date": 1692109241590,
+      "created_date": 1695797018916,
       "description": {
         "content": "Append a note to the ReaQta notes",
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta: Create Note",
+      "display_name": "QRadar EDR: Create Note",
       "export_key": "reaqta_create_note",
-      "id": 23,
+      "id": 21,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109241625,
+      "last_modified_time": 1695798139425,
       "name": "reaqta_create_note",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"note\": \"{\\\"notes\\\":\\\"An attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\\\nIBM SOAR 31/07/2023 11:13:45\\\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\\\n\\\\n[SOAR Case - 2973](https://9.30.229.231:443/#incidents/2973)\\\\nIBM SOAR 31/07/2023 19:14:00\\\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\\\n\\\\n[SOAR Case - 2154](https://9.30.211.113:443/#incidents/2154)\\\\nIBM SOAR 31/07/2023 11:14:18\\\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\\\nIBM SOAR 31/07/2023 11:13:45\\\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\\\n\\\\n[SOAR Case - 2973](https://9.30.229.231:443/#incidents/2973)\\\\nIBM SOAR 31/07/2023 19:14:00\\\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\\\n\\\\n[SOAR Case - 2154](https://9.30.211.113:443/#incidents/2154)\\\\n\\\\n[SOAR Case - 2975](https://9.30.229.231:443/#incidents/2975)\\\\nIBM SOAR 31/07/2023 11:11:27\\\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\\\nIBM SOAR 31/07/2023 11:13:45\\\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\\\n\\\\n[SOAR Case - 2973](https://9.30.229.231:443/#incidents/2973)\\\\nIBM SOAR 31/07/2023 19:14:00\\\\nAn attempt to run encoded commands in the command line has been detected, often used to obfuscate malicious intent.\\\\n\\\\n[SOAR Case - 2154](https://9.30.211.113:443/#incidents/2154)\\\\n\\\\n[SOAR Case - 17488](https://169.44.147.200:443/#incidents/17488)\\\\nIBM SOAR 07/08/2023 14:26:53\\\\nProcess: csrss.exe (428) kill failed: Process not found\\\\nIBM SOAR 07/08/2023 14:32:06\\\\nEndpoint Machine Isolated\\\"}\"}, \"raw\": null, \"inputs\": {\"reaqta_alert_id\": \"1024257396198866946\", \"reaqta_hive\": \"rhiveam\", \"reaqta_note\": \"Endpoint Machine Isolated\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-reaqta\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 796, \"timestamp\": \"2023-08-07 14:32:06\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"note\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"reaqta_alert_id\": {\"type\": \"string\"}, \"reaqta_hive\": {\"type\": \"string\"}, \"reaqta_note\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "21db5c06-30af-4619-b1ed-1c78b76f36b7",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "8328e505-3176-4864-b179-7da5dc9e9251",
@@ -1138,28 +1138,28 @@
       "workflows": []
     },
     {
-      "created_date": 1692109241628,
+      "created_date": 1695797018977,
       "description": {
         "content": "Create an alert trigger based on a program\u0027s SHA256 hash",
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta: Create Policy",
+      "display_name": "QRadar EDR: Create Policy",
       "export_key": "reaqta_create_policy",
-      "id": 24,
+      "id": 22,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109241662,
+      "last_modified_time": 1695798155527,
       "name": "reaqta_create_policy",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"type\": 2, \"id\": \"1026728858289700868\", \"versionId\": \"1026728858289704965\", \"title\": \"test 123\", \"description\": \"\", \"enabled\": true, \"deleted\": false, \"default\": false, \"matchers\": [{\"type\": 2, \"id\": \"1026728858289709062\", \"hash\": \"de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c\", \"alg\": 1}], \"actions\": [2], \"created\": \"2023-08-07T06:53:55.516Z\", \"lastModified\": \"2023-08-07T06:53:55.516Z\", \"scope\": \"global\", \"policy_url\": \"https://rhiveam.techzone.ibm.com/policies/details/1026728858289700868\", \"policy_hive\": \"rhiveam\"}], \"raw\": null, \"inputs\": {\"reaqta_policy_title\": \"test 123\", \"reaqta_policy_block\": false, \"reaqta_policy_excluded_groups\": null, \"reaqta_policy_enabled\": true, \"reaqta_policy_description\": \"\", \"reaqta_sha256\": \"de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c\", \"reaqta_policy_included_groups\": null, \"reaqta_hives\": \"rhiveam\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-reaqta\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 1317, \"timestamp\": \"2023-08-07 14:53:55\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"type\": {\"type\": \"integer\"}, \"id\": {\"type\": \"string\"}, \"versionId\": {\"type\": \"string\"}, \"title\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"enabled\": {\"type\": \"boolean\"}, \"deleted\": {\"type\": \"boolean\"}, \"default\": {\"type\": \"boolean\"}, \"matchers\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"type\": {\"type\": \"integer\"}, \"id\": {\"type\": \"string\"}, \"hash\": {\"type\": \"string\"}, \"alg\": {\"type\": \"integer\"}}}}, \"actions\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}, \"created\": {\"type\": \"string\"}, \"lastModified\": {\"type\": \"string\"}, \"scope\": {\"type\": \"string\"}, \"policy_url\": {\"type\": \"string\"}, \"policy_hive\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"reaqta_policy_title\": {\"type\": \"string\"}, \"reaqta_policy_block\": {\"type\": \"boolean\"}, \"reaqta_policy_excluded_groups\": {}, \"reaqta_policy_enabled\": {\"type\": \"boolean\"}, \"reaqta_policy_description\": {\"type\": \"string\"}, \"reaqta_sha256\": {\"type\": \"string\"}, \"reaqta_policy_included_groups\": {}, \"reaqta_hives\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "7d727515-5a39-4213-8dee-ce9a56e8f26d",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "5492fa28-94a7-4b75-85a6-0f3cdd892206",
@@ -1229,22 +1229,22 @@
       "workflows": []
     },
     {
-      "created_date": 1692110895990,
+      "created_date": 1695797019039,
       "description": {
         "content": "De-isolate a previously isolated ReaQta controlled machine based on it\u0027s endpoint ID",
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta: Deisolate Machine",
+      "display_name": "QRadar EDR: Deisolate Machine",
       "export_key": "reaqta_deisolate_machine",
-      "id": 30,
+      "id": 23,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692169765732,
+      "last_modified_time": 1695798173949,
       "name": "reaqta_deisolate_machine",
       "tags": [],
       "uuid": "5e404dd9-3fa4-4d26-8d01-ffb543f82731",
@@ -1270,28 +1270,28 @@
       "workflows": []
     },
     {
-      "created_date": 1692109241666,
+      "created_date": 1695797019099,
       "description": {
         "content": "Get all the ReaQta Alert information to populate custom fields and datatables",
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta: Get Alert Information",
+      "display_name": "QRadar EDR: Get Alert Information",
       "export_key": "reaqta_get_alert_information",
-      "id": 25,
+      "id": 24,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109241700,
+      "last_modified_time": 1695798193961,
       "name": "reaqta_get_alert_information",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"id\": \"1022070806768779266\", \"localId\": \"1022070249672935426\", \"endpointId\": \"876174682842202112\", \"triggerCondition\": 6, \"endpoint\": {\"id\": \"876174682842202112\", \"machineId\": \"857d21c8a80297fb0078cdc036b290b61cb4eec5c1889eab4c7ae3daeeeaa655\", \"osType\": 1, \"cpuVendor\": 1, \"arch\": 2, \"cpuDescr\": \"Intel(R) Xeon(R) Platinum 8260 CPU @ 2.40GHz\", \"kernel\": \"10.0\", \"os\": \"Windows Server 2019 Standard\", \"name\": \"ADDAL10-01\", \"domain\": \"americas.cloudpaksecurity.com\", \"state\": 1, \"registrationTime\": \"2022-06-17T20:05:22.942Z\", \"agentVersion\": \"3.10.1\", \"componentsVersions\": [{\"name\": \"keeper\", \"version\": \"3.10.1\", \"build\": \"27.1668701555901.commit\"}, {\"name\": \"probos\", \"version\": \"3.5.0\", \"build\": \"3.5.0\"}, {\"name\": \"rqtsentry\", \"version\": \"3.10.0\", \"build\": \"121.1666598992258.commit\"}, {\"name\": \"rqtnetsentry\", \"version\": \"3.10.0\", \"build\": \"45.1666597836648.commit\"}, {\"name\": \"installer\", \"version\": \"3.10.1\", \"build\": \"\"}], \"isVirtualMachine\": false, \"isDomainController\": true, \"isServer\": true, \"sessionStart\": \"2023-04-25T09:11:13.842Z\", \"sessionEnd\": \"2023-08-01T07:23:21.342Z\", \"lastSeenAt\": \"2023-08-01T07:18:21.342Z\", \"disconnectionReason\": 0, \"localAddr\": \"52.118.133.13\", \"hvStatus\": 19, \"macs\": [\"06:c3:1d:18:2c:3a\", \"06:d7:b5:4f:18:0e\"], \"isolated\": false, \"isolationStatus\": \"DEISOLATED\", \"isolationStatusFailure\": null, \"connected\": true, \"tags\": [\"dc\"], \"groups\": [{\"id\": \"839608851933167623\", \"name\": \"Latin America\", \"description\": \"Latin America Hive\"}], \"avInstalled\": false}, \"triggerEvents\": [{\"id\": \"1022070807062380545\", \"category\": \"policies\", \"localId\": \"1022070249601636353\", \"endpointId\": \"876174682842202112\", \"receivedAt\": \"2023-07-25T10:24:29.561Z\", \"happenedAt\": \"2023-07-25T10:22:16.652Z\", \"relevance\": 88, \"severity\": \"medium\", \"trigger\": true, \"manuallyAdded\": false, \"process\": {\"id\": \"876174682842202112:8944:1690280536643\", \"parentId\": \"876174682842202112:4780:1690280518291\", \"endpointId\": \"876174682842202112\", \"program\": {\"path\": \"c:\\\\windows\\\\system32\\\\windowspowershell\\\\v1.0\\\\powershell.exe\", \"filename\": \"powershell.exe\", \"md5\": \"7353f60b1739074eb17c5f4dddefe239\", \"sha1\": \"6cbce4a295c163791b60fc23d285e6d84f28ee4c\", \"sha256\": \"de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c\", \"certInfo\": {\"signer\": \"Microsoft Windows\", \"issuer\": \"Microsoft Windows Production PCA 2011\", \"trusted\": true, \"expired\": false}, \"size\": 448000, \"arch\": \"x64\", \"fsName\": \"powershell.exe\"}, \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"pid\": 8944, \"startTime\": \"2023-07-25T10:22:16.643Z\", \"ppid\": 4780, \"pstartTime\": \"2023-07-25T10:21:58.291Z\", \"userSID\": \"S-1-5-18\", \"privilegeLevel\": \"SYSTEM\", \"noGui\": false, \"logonId\": \"0x3e7\"}, \"eventType\": 28, \"data\": {\"matched\": [{\"policyId\": \"1020293408461160452\", \"versionId\": \"1020293408461164549\", \"policyTitle\": \"johns policy 2007\", \"policyDescription\": \"test\", \"scope\": \"global\", \"groups\": [], \"matcher\": {\"id\": \"1020293408461168646\", \"hash\": \"de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c\", \"alg\": 1, \"type\": 2}}], \"_t\": \"r\"}, \"happenedAt_ts\": 1690280536000}], \"totalEventCount\": 6, \"byTypeEventCount\": [{\"type\": 2, \"count\": 3}, {\"type\": 3, \"count\": 1}, {\"type\": 28, \"count\": 1}, {\"type\": 30, \"count\": 1}], \"impact\": 88, \"severity\": \"medium\", \"closed\": true, \"closedAt\": \"2023-07-27T00:00:01.673Z\", \"lastChangedAt\": \"2023-07-27T00:01:03.899Z\", \"activityState\": \"archived\", \"terminationReason\": 1, \"receivedAt\": \"2023-07-25T10:24:29.491Z\", \"happenedAt\": \"2023-07-25T10:22:16.669Z\", \"tags\": [], \"notes\": \"\\nIBM SOAR 25/07/2023 10:25:05\\nNone\\n\\n[SOAR Case - 2825](https://9.30.229.231:443/#incidents/2825)\\nIBM SOAR 25/07/2023 18:25:21\\nNone\\n\\n[SOAR Case - 2151](https://9.30.211.113:443/#incidents/2151)\\nIBM SOAR 25/07/2023 10:25:32\\n\\nIBM SOAR 25/07/2023 10:22:23\\nNone\\n\\n[SOAR Case - 17384](https://169.44.147.200:443/#incidents/17384)\\n\\n[SOAR Case - 2828](https://9.30.229.231:443/#incidents/2828)\\nIBM SOAR 27/07/2023 00:01:03\\n\\nIBM SOAR 25/07/2023 10:25:05\\nNone\\n\\n[SOAR Case - 2825](https://9.30.229.231:443/#incidents/2825)\\nIBM SOAR 25/07/2023 18:25:21\\nNone\\n\\n[SOAR Case - 2151](https://9.30.211.113:443/#incidents/2151)\\nIBM SOAR 25/07/2023 10:25:32\\n\\nIBM SOAR 25/07/2023 10:22:23\\nNone\\n\\n[SOAR Case - 17384](https://169.44.147.200:443/#incidents/17384)\\n\\n[SOAR Case - 2828](https://9.30.229.231:443/#incidents/2828)\\n\\n[SOAR Case - 2943](https://9.30.24.113:443/#incidents/2943)\", \"endpointState\": {\"osType\": 1, \"cpuVendor\": 1, \"arch\": 2, \"cpuDescr\": \"Intel(R) Xeon(R) Platinum 8260 CPU @ 2.40GHz\", \"kernel\": \"10.0\", \"os\": \"Windows Server 2019 Standard\", \"hvStatus\": 19, \"name\": \"ADDAL10-01\", \"domain\": \"americas.cloudpaksecurity.com\", \"isolated\": false, \"localAddr\": \"52.118.133.13\", \"macs\": [\"06:c3:1d:18:2c:3a\", \"06:d7:b5:4f:18:0e\"], \"componentsVersions\": [{\"name\": \"keeper\", \"version\": \"3.10.1\", \"build\": \"27.1668701555901.commit\"}, {\"name\": \"probos\", \"version\": \"3.5.0\", \"build\": \"3.5.0\"}, {\"name\": \"rqtsentry\", \"version\": \"3.10.0\", \"build\": \"121.1666598992258.commit\"}, {\"name\": \"rqtnetsentry\", \"version\": \"3.10.0\", \"build\": \"45.1666597836648.commit\"}, {\"name\": \"installer\", \"version\": \"3.10.1\", \"build\": \"\"}], \"endpointVersion\": \"3.10.1\", \"tags\": [\"dc\"], \"groups\": [{\"id\": \"839608851933167623\", \"name\": \"Latin America\", \"description\": \"Latin America Hive\"}]}, \"title\": \"Policy hit: johns policy 2007\", \"alert_url\": \"https://rhiveam.techzone.ibm.com/alerts/1022070806768779266\"}, \"raw\": null, \"inputs\": {\"reaqta_alert_id\": \"1022070806768779266\", \"reaqta_hive\": \"rhiveam\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-reaqta\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 1786, \"timestamp\": \"2023-08-01 15:18:53\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"localId\": {\"type\": \"string\"}, \"endpointId\": {\"type\": \"string\"}, \"triggerCondition\": {\"type\": \"integer\"}, \"endpoint\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"machineId\": {\"type\": \"string\"}, \"osType\": {\"type\": \"integer\"}, \"cpuVendor\": {\"type\": \"integer\"}, \"arch\": {\"type\": \"integer\"}, \"cpuDescr\": {\"type\": \"string\"}, \"kernel\": {\"type\": \"string\"}, \"os\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"domain\": {\"type\": \"string\"}, \"state\": {\"type\": \"integer\"}, \"registrationTime\": {\"type\": \"string\"}, \"agentVersion\": {\"type\": \"string\"}, \"componentsVersions\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"version\": {\"type\": \"string\"}, \"build\": {\"type\": \"string\"}}}}, \"isVirtualMachine\": {\"type\": \"boolean\"}, \"isDomainController\": {\"type\": \"boolean\"}, \"isServer\": {\"type\": \"boolean\"}, \"sessionStart\": {\"type\": \"string\"}, \"sessionEnd\": {\"type\": \"string\"}, \"lastSeenAt\": {\"type\": \"string\"}, \"disconnectionReason\": {\"type\": \"integer\"}, \"localAddr\": {\"type\": \"string\"}, \"hvStatus\": {\"type\": \"integer\"}, \"macs\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"isolated\": {\"type\": \"boolean\"}, \"isolationStatus\": {\"type\": \"string\"}, \"isolationStatusFailure\": {}, \"connected\": {\"type\": \"boolean\"}, \"tags\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"groups\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}}}}, \"avInstalled\": {\"type\": \"boolean\"}}}, \"triggerEvents\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"category\": {\"type\": \"string\"}, \"localId\": {\"type\": \"string\"}, \"endpointId\": {\"type\": \"string\"}, \"receivedAt\": {\"type\": \"string\"}, \"happenedAt\": {\"type\": \"string\"}, \"relevance\": {\"type\": \"integer\"}, \"severity\": {\"type\": \"string\"}, \"trigger\": {\"type\": \"boolean\"}, \"manuallyAdded\": {\"type\": \"boolean\"}, \"process\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"parentId\": {\"type\": \"string\"}, \"endpointId\": {\"type\": \"string\"}, \"program\": {\"type\": \"object\", \"properties\": {\"path\": {\"type\": \"string\"}, \"filename\": {\"type\": \"string\"}, \"md5\": {\"type\": \"string\"}, \"sha1\": {\"type\": \"string\"}, \"sha256\": {\"type\": \"string\"}, \"certInfo\": {\"type\": \"object\", \"properties\": {\"signer\": {\"type\": \"string\"}, \"issuer\": {\"type\": \"string\"}, \"trusted\": {\"type\": \"boolean\"}, \"expired\": {\"type\": \"boolean\"}}}, \"size\": {\"type\": \"integer\"}, \"arch\": {\"type\": \"string\"}, \"fsName\": {\"type\": \"string\"}}}, \"user\": {\"type\": \"string\"}, \"pid\": {\"type\": \"integer\"}, \"startTime\": {\"type\": \"string\"}, \"ppid\": {\"type\": \"integer\"}, \"pstartTime\": {\"type\": \"string\"}, \"userSID\": {\"type\": \"string\"}, \"privilegeLevel\": {\"type\": \"string\"}, \"noGui\": {\"type\": \"boolean\"}, \"logonId\": {\"type\": \"string\"}}}, \"eventType\": {\"type\": \"integer\"}, \"data\": {\"type\": \"object\", \"properties\": {\"matched\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"policyId\": {\"type\": \"string\"}, \"versionId\": {\"type\": \"string\"}, \"policyTitle\": {\"type\": \"string\"}, \"policyDescription\": {\"type\": \"string\"}, \"scope\": {\"type\": \"string\"}, \"groups\": {\"type\": \"array\"}, \"matcher\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"hash\": {\"type\": \"string\"}, \"alg\": {\"type\": \"integer\"}, \"type\": {\"type\": \"integer\"}}}}}}, \"_t\": {\"type\": \"string\"}}}, \"happenedAt_ts\": {\"type\": \"integer\"}}}}, \"totalEventCount\": {\"type\": \"integer\"}, \"byTypeEventCount\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"type\": {\"type\": \"integer\"}, \"count\": {\"type\": \"integer\"}}}}, \"impact\": {\"type\": \"integer\"}, \"severity\": {\"type\": \"string\"}, \"closed\": {\"type\": \"boolean\"}, \"closedAt\": {\"type\": \"string\"}, \"lastChangedAt\": {\"type\": \"string\"}, \"activityState\": {\"type\": \"string\"}, \"terminationReason\": {\"type\": \"integer\"}, \"receivedAt\": {\"type\": \"string\"}, \"happenedAt\": {\"type\": \"string\"}, \"tags\": {\"type\": \"array\"}, \"notes\": {\"type\": \"string\"}, \"endpointState\": {\"type\": \"object\", \"properties\": {\"osType\": {\"type\": \"integer\"}, \"cpuVendor\": {\"type\": \"integer\"}, \"arch\": {\"type\": \"integer\"}, \"cpuDescr\": {\"type\": \"string\"}, \"kernel\": {\"type\": \"string\"}, \"os\": {\"type\": \"string\"}, \"hvStatus\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"domain\": {\"type\": \"string\"}, \"isolated\": {\"type\": \"boolean\"}, \"localAddr\": {\"type\": \"string\"}, \"macs\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"componentsVersions\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"version\": {\"type\": \"string\"}, \"build\": {\"type\": \"string\"}}}}, \"endpointVersion\": {\"type\": \"string\"}, \"tags\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"groups\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}}}}}}, \"title\": {\"type\": \"string\"}, \"alert_url\": {\"type\": \"string\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"reaqta_alert_id\": {\"type\": \"string\"}, \"reaqta_hive\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "13918f45-5268-41b0-8ff0-e6a6223ad302",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "8328e505-3176-4864-b179-7da5dc9e9251",
@@ -1313,28 +1313,28 @@
       "workflows": []
     },
     {
-      "created_date": 1692109241704,
+      "created_date": 1695797019160,
       "description": {
         "content": "Get the current status of an endpoint",
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta Get Endpoint Status",
+      "display_name": "QRadar EDR: Get Endpoint Status",
       "export_key": "reaqta_get_endpoint_status",
-      "id": 26,
+      "id": 25,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109241738,
+      "last_modified_time": 1695798292675,
       "name": "reaqta_get_endpoint_status",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"id\": \"836686917654282240\", \"machineId\": \"d67dc4211cb83f014c33af976208cc601e35abf251e405e8841e1cb449a48b0e\", \"osType\": 1, \"cpuVendor\": 1, \"arch\": 2, \"cpuDescr\": \"Intel(R) Xeon(R) Platinum 8260 CPU @ 2.40GHz\", \"kernel\": \"10.0\", \"os\": \"Windows Server 2019 Standard\", \"name\": \"ACTIVEDIRECTORY\", \"domain\": \"infosec.local\", \"state\": 1, \"registrationTime\": \"2022-02-28T20:55:06.087Z\", \"agentVersion\": \"3.10.1\", \"componentsVersions\": [{\"name\": \"keeper\", \"version\": \"3.10.1\", \"build\": \"27.1668701555901.commit\"}, {\"name\": \"probos\", \"version\": \"3.5.0\", \"build\": \"3.5.0\"}, {\"name\": \"rqtsentry\", \"version\": \"3.10.0\", \"build\": \"121.1666598992258.commit\"}, {\"name\": \"rqtnetsentry\", \"version\": \"3.10.0\", \"build\": \"45.1666597836648.commit\"}, {\"name\": \"installer\", \"version\": \"3.10.1\", \"build\": \"\"}], \"isVirtualMachine\": true, \"isDomainController\": true, \"isServer\": true, \"sessionStart\": \"2023-06-22T09:11:49.712Z\", \"sessionEnd\": \"2023-08-07T06:29:44.472Z\", \"lastSeenAt\": \"2023-08-07T06:24:44.472Z\", \"disconnectionReason\": 0, \"localAddr\": \"172.16.60.189\", \"hvStatus\": 19, \"macs\": [\"00:0c:29:8f:93:ee\"], \"isolated\": true, \"isolationStatus\": \"ISOLATED\", \"isolationStatusFailure\": null, \"connected\": true, \"tags\": [\"vm\", \"pci\", \"production\", \"dc\"], \"groups\": [{\"id\": \"939525795968188423\", \"name\": \"Servers\", \"parentGroupId\": \"817450822869712903\"}, {\"id\": \"817450822869712903\", \"name\": \"Product Team\"}], \"avInstalled\": false}, \"raw\": null, \"inputs\": {\"reaqta_hive\": \"rhiveam\", \"reaqta_endpoint_id\": \"836686917654282240\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-reaqta\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 1008, \"timestamp\": \"2023-08-07 14:25:34\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"machineId\": {\"type\": \"string\"}, \"osType\": {\"type\": \"integer\"}, \"cpuVendor\": {\"type\": \"integer\"}, \"arch\": {\"type\": \"integer\"}, \"cpuDescr\": {\"type\": \"string\"}, \"kernel\": {\"type\": \"string\"}, \"os\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"domain\": {\"type\": \"string\"}, \"state\": {\"type\": \"integer\"}, \"registrationTime\": {\"type\": \"string\"}, \"agentVersion\": {\"type\": \"string\"}, \"componentsVersions\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"version\": {\"type\": \"string\"}, \"build\": {\"type\": \"string\"}}}}, \"isVirtualMachine\": {\"type\": \"boolean\"}, \"isDomainController\": {\"type\": \"boolean\"}, \"isServer\": {\"type\": \"boolean\"}, \"sessionStart\": {\"type\": \"string\"}, \"sessionEnd\": {\"type\": \"string\"}, \"lastSeenAt\": {\"type\": \"string\"}, \"disconnectionReason\": {\"type\": \"integer\"}, \"localAddr\": {\"type\": \"string\"}, \"hvStatus\": {\"type\": \"integer\"}, \"macs\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"isolated\": {\"type\": \"boolean\"}, \"isolationStatus\": {\"type\": \"string\"}, \"isolationStatusFailure\": {}, \"connected\": {\"type\": \"boolean\"}, \"tags\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"groups\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"parentGroupId\": {\"type\": \"string\"}}}}, \"avInstalled\": {\"type\": \"boolean\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"reaqta_hive\": {\"type\": \"string\"}, \"reaqta_endpoint_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "ace62dbf-09f6-4c75-b11f-1ca5a59262f7",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "57fc46a2-de15-48ea-966c-277c2e5f8cda",
@@ -1356,28 +1356,28 @@
       "workflows": []
     },
     {
-      "created_date": 1692109241742,
+      "created_date": 1695797019221,
       "description": {
         "content": "Get active processes from a given endpoint",
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta: Get Processes",
+      "display_name": "QRadar EDR: Get Processes",
       "export_key": "reaqta_get_processes",
-      "id": 27,
+      "id": 26,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109241777,
+      "last_modified_time": 1695798207429,
       "name": "reaqta_get_processes",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"pid\": 0, \"ppid\": 0, \"processName\": \"[System Process]\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 0}, {\"pid\": 4, \"ppid\": 0, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"System\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857459354}, {\"pid\": 104, \"ppid\": 4, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"Registry\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857454562}, {\"pid\": 316, \"ppid\": 4, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"smss.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\smss.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857459360}, {\"pid\": 428, \"ppid\": 416, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"csrss.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\csrss.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857462103}, {\"pid\": 532, \"ppid\": 416, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"wininit.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\wininit.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857462246}, {\"pid\": 540, \"ppid\": 524, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"csrss.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\csrss.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857462248}, {\"pid\": 600, \"ppid\": 524, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"winlogon.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\winlogon.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857462267}, {\"pid\": 676, \"ppid\": 532, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"services.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\services.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857462392}, {\"pid\": 716, \"ppid\": 532, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"lsass.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\lsass.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857462441}, {\"pid\": 928, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857463992}, {\"pid\": 952, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464035}, {\"pid\": 1000, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\NETWORK SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464115}, {\"pid\": 288, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464133}, {\"pid\": 528, \"ppid\": 600, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"LogonUI.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\LogonUI.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464195}, {\"pid\": 788, \"ppid\": 600, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"dwm.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\dwm.exe\", \"user\": \"Window Manager\\\\DWM-1\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464228}, {\"pid\": 1020, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464259}, {\"pid\": 432, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464259}, {\"pid\": 524, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464259}, {\"pid\": 1104, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464267}, {\"pid\": 1120, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464268}, {\"pid\": 1152, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464271}, {\"pid\": 1220, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\NETWORK SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464280}, {\"pid\": 1396, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464309}, {\"pid\": 1416, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464312}, {\"pid\": 1492, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\NETWORK SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464343}, {\"pid\": 1548, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464376}, {\"pid\": 1564, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464379}, {\"pid\": 1608, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464387}, {\"pid\": 1616, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\NETWORK SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464387}, {\"pid\": 1624, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464388}, {\"pid\": 1680, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464398}, {\"pid\": 1756, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464411}, {\"pid\": 1820, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464425}, {\"pid\": 1900, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464449}, {\"pid\": 1908, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464449}, {\"pid\": 1932, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464451}, {\"pid\": 2028, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464523}, {\"pid\": 2116, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464552}, {\"pid\": 2188, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464579}, {\"pid\": 2248, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464599}, {\"pid\": 2288, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464610}, {\"pid\": 2344, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\NETWORK SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857464635}, {\"pid\": 2808, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\NETWORK SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857466649}, {\"pid\": 2984, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857473991}, {\"pid\": 2668, \"ppid\": 600, \"privilegeLevel\": \"LOW\", \"processName\": \"fontdrvhost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\fontdrvhost.exe\", \"user\": \"Font Driver Host\\\\UMFD-1\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485108}, {\"pid\": 2124, \"ppid\": 532, \"privilegeLevel\": \"LOW\", \"processName\": \"fontdrvhost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\fontdrvhost.exe\", \"user\": \"Font Driver Host\\\\UMFD-0\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485108}, {\"pid\": 2912, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"spoolsv.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\spoolsv.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485129}, {\"pid\": 1800, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485156}, {\"pid\": 2652, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485156}, {\"pid\": 2952, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"Microsoft.ActiveDirectory.WebServices.exe\", \"programPath\": \"C:\\\\Windows\\\\ADWS\\\\Microsoft.ActiveDirectory.WebServices.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485158}, {\"pid\": 3092, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485164}, {\"pid\": 3100, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485164}, {\"pid\": 3108, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\NETWORK SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485164}, {\"pid\": 3116, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"ismserv.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\ismserv.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485165}, {\"pid\": 3124, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"dfsrs.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\dfsrs.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485166}, {\"pid\": 3136, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"dns.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\dns.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485168}, {\"pid\": 3148, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485170}, {\"pid\": 3156, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"vm3dservice.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\vm3dservice.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485175}, {\"pid\": 3164, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"vmtoolsd.exe\", \"programPath\": \"C:\\\\Program Files\\\\VMware\\\\VMware Tools\\\\vmtoolsd.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485176}, {\"pid\": 3176, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"MsMpEng.exe\", \"programPath\": \"C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\Platform\\\\4.18.23050.5-0\\\\MsMpEng.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485181}, {\"pid\": 3184, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"VGAuthService.exe\", \"programPath\": \"C:\\\\Program Files\\\\VMware\\\\VMware Tools\\\\VMware VGAuth\\\\VGAuthService.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485184}, {\"pid\": 3396, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"dfssvc.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\dfssvc.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485250}, {\"pid\": 3500, \"ppid\": 3156, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"vm3dservice.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\vm3dservice.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485278}, {\"pid\": 3672, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485381}, {\"pid\": 4080, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"vds.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\vds.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485735}, {\"pid\": 4104, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"dllhost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\dllhost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485768}, {\"pid\": 4116, \"ppid\": 952, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"WmiPrvSE.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\wbem\\\\WmiPrvSE.exe\", \"user\": \"NT AUTHORITY\\\\NETWORK SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857485773}, {\"pid\": 4868, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"msdtc.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\msdtc.exe\", \"user\": \"NT AUTHORITY\\\\NETWORK SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857486284}, {\"pid\": 5088, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857486681}, {\"pid\": 4036, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857486795}, {\"pid\": 5568, \"ppid\": 3200, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"keeper.exe\", \"programPath\": \"C:\\\\Program Files\\\\ReaQta\\\\keeper.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857489492}, {\"pid\": 5684, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"NisSrv.exe\", \"programPath\": \"C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\Platform\\\\4.18.23050.5-0\\\\NisSrv.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857491007}, {\"pid\": 5140, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857606087}, {\"pid\": 1084, \"ppid\": 3296, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"GoogleCrashHandler.exe\", \"programPath\": \"C:\\\\Program Files (x86)\\\\Google\\\\Update\\\\1.3.36.272\\\\GoogleCrashHandler.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857606810}, {\"pid\": 672, \"ppid\": 3296, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"GoogleCrashHandler64.exe\", \"programPath\": \"C:\\\\Program Files (x86)\\\\Google\\\\Update\\\\1.3.36.272\\\\GoogleCrashHandler64.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857606921}, {\"pid\": 1356, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857606989}, {\"pid\": 356, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857611856}, {\"pid\": 1640, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\LOCAL SERVICE\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689857612336}, {\"pid\": 5184, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689859046435}, {\"pid\": 1716, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"svchost.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\svchost.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1689943866540}, {\"pid\": 2680, \"ppid\": 676, \"privilegeLevel\": \"SYSTEM\", \"processName\": \"SecurityHealthService.exe\", \"programPath\": \"C:\\\\Windows\\\\System32\\\\SecurityHealthService.exe\", \"user\": \"NT AUTHORITY\\\\SYSTEM\", \"hasIncident\": false, \"suspended\": false, \"startTime\": 1690339871083}], \"raw\": null, \"inputs\": {\"reaqta_has_incident\": null, \"reaqta_hive\": \"rhiveam\", \"reaqta_endpoint_id\": \"836686917654282240\", \"reaqta_suspended\": null}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-reaqta\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 1889, \"timestamp\": \"2023-08-01 15:49:17\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"pid\": {\"type\": \"integer\"}, \"ppid\": {\"type\": \"integer\"}, \"processName\": {\"type\": \"string\"}, \"hasIncident\": {\"type\": \"boolean\"}, \"suspended\": {\"type\": \"boolean\"}, \"startTime\": {\"type\": \"integer\"}, \"privilegeLevel\": {\"type\": \"string\"}, \"user\": {\"type\": \"string\"}, \"programPath\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"reaqta_has_incident\": {}, \"reaqta_hive\": {\"type\": \"string\"}, \"reaqta_endpoint_id\": {\"type\": \"string\"}, \"reaqta_suspended\": {}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "f97be6f0-081a-47af-931f-5e2b101aec3a",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "8328e505-3176-4864-b179-7da5dc9e9251",
@@ -1415,28 +1415,28 @@
       "workflows": []
     },
     {
-      "created_date": 1692109241782,
+      "created_date": 1695797019289,
       "description": {
         "content": "Isolate a ReaQta controlled machine based on it\u0027s endpoint ID",
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta: Isolate Machine",
+      "display_name": "QRadar EDR: Isolate Machine",
       "export_key": "reaqta_isolate_machine",
-      "id": 28,
+      "id": 27,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109241818,
+      "last_modified_time": 1695798220974,
       "name": "reaqta_isolate_machine",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"success\": true}, \"raw\": null, \"inputs\": {\"reaqta_hive\": \"rhiveam\", \"reaqta_endpoint_id\": \"836686917654282240\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-reaqta\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 443, \"timestamp\": \"2023-08-07 14:32:03\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"success\": {\"type\": \"boolean\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"reaqta_hive\": {\"type\": \"string\"}, \"reaqta_endpoint_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "79d595f7-b9dc-435c-87bf-e2845fddda94",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "8328e505-3176-4864-b179-7da5dc9e9251",
@@ -1458,28 +1458,28 @@
       "workflows": []
     },
     {
-      "created_date": 1692109241822,
+      "created_date": 1695797019351,
       "description": {
         "content": "Kill a process on a machine by the process PID",
         "format": "text"
       },
       "destination_handle": "fn_reaqta",
-      "display_name": "ReaQta: Kill Process",
+      "display_name": "QRadar EDR: Kill Process",
       "export_key": "reaqta_kill_process",
-      "id": 29,
+      "id": 28,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109241860,
+      "last_modified_time": 1695798236184,
       "name": "reaqta_kill_process",
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": [{\"pid\": 428, \"startTime\": 1689857462103, \"killed\": false, \"errorCode\": -1, \"error\": \"Process not found\"}], \"raw\": null, \"inputs\": {\"reaqta_starttime\": 1689857462103, \"reaqta_hive\": \"rhiveam\", \"reaqta_endpoint_id\": \"836686917654282240\", \"reaqta_process_pid\": 428}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-reaqta\", \"package_version\": \"1.1.0\", \"host\": \"local\", \"execution_time_ms\": 971, \"timestamp\": \"2023-08-07 14:26:49\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"pid\": {\"type\": \"integer\"}, \"startTime\": {\"type\": \"integer\"}, \"killed\": {\"type\": \"boolean\"}, \"errorCode\": {\"type\": \"integer\"}, \"error\": {\"type\": \"string\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"reaqta_starttime\": {\"type\": \"integer\"}, \"reaqta_hive\": {\"type\": \"string\"}, \"reaqta_endpoint_id\": {\"type\": \"string\"}, \"reaqta_process_pid\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "f8f32b38-a279-4657-8419-5ce82fcdb36d",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "8328e505-3176-4864-b179-7da5dc9e9251",
@@ -1519,13 +1519,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 34,
+  "id": 69,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1692170250851,
+      "create_date": 1695803052802,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1534,7 +1534,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1692170250851,
+      "update_date": 1695803052802,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1544,8 +1544,7 @@
   "message_destinations": [
     {
       "api_keys": [
-        "a74b4108-b5aa-4bf7-ad9f-92233a1dc943",
-        "dcf298e4-8875-49fc-962f-f2e3a82ab248"
+        "bfde63ec-7eae-4aeb-8a0f-346ea9219d43"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -1561,112 +1560,6 @@
   "overrides": null,
   "phases": [],
   "playbooks": [
-    {
-      "activation_type": "manual",
-      "content": {
-        "content_version": 1,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253\" isExecutable=\"true\" name=\"playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0vlru2d\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta Get Endpoint Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ace62dbf-09f6-4c75-b11f-1ca5a59262f7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_get_endpoint_status_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0vlru2d\u003c/incoming\u003e\u003coutgoing\u003eFlow_0v2c9gy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"reaqta_get_endpoint_status_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e623e9ab-1bc3-42bf-afff-2f7ae9f2e2ba\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0v2c9gy\u003c/incoming\u003e\u003coutgoing\u003eFlow_1i00y6h\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1i00y6h\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0vlru2d\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0v2c9gy\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1i00y6h\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i00y6h\" id=\"Flow_1i00y6h_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"512\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"654\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0v2c9gy\" id=\"Flow_0v2c9gy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"428\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0vlru2d\" id=\"Flow_0vlru2d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"428\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"654\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "create_date": 1692109242072,
-      "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
-      "deployment_id": "playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253",
-      "description": {
-        "content": "Get the current status of a ReaQta Endpoint",
-        "format": "text"
-      },
-      "display_name": "ReaQta Get Endpoint Status (PB)",
-      "export_key": "reaqta_get_endpoint_status",
-      "field_type_handle": "playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253",
-      "fields_type": {
-        "actions": [],
-        "display_name": "ReaQta Get Endpoint Status (PB)",
-        "export_key": "playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253",
-        "fields": {},
-        "for_actions": false,
-        "for_custom_fields": false,
-        "for_notifications": false,
-        "for_workflows": false,
-        "id": null,
-        "parent_types": [
-          "__playbook"
-        ],
-        "properties": {
-          "can_create": false,
-          "can_destroy": false,
-          "for_who": []
-        },
-        "scripts": [],
-        "tags": [],
-        "type_id": 28,
-        "type_name": "playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253",
-        "uuid": "4e94ab00-631b-4d10-871c-18842b68a946"
-      },
-      "has_logical_errors": false,
-      "id": 10,
-      "is_deleted": false,
-      "is_locked": false,
-      "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
-      },
-      "last_modified_time": 1692109242391,
-      "local_scripts": [
-        {
-          "actions": [],
-          "created_date": 1692109242128,
-          "description": "",
-          "enabled": false,
-          "export_key": "reaqta_get_endpoint_status_post_process",
-          "id": 4,
-          "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109242140,
-          "name": "reaqta_get_endpoint_status_post_process",
-          "object_type": "incident",
-          "playbook_handle": "reaqta_get_endpoint_status",
-          "programmatic_name": "reaqta_get_endpoint_status_reaqta_get_endpoint_status_post_process",
-          "script_text": "DISCONNECTION_LOOKUP = {\n  0: \"Session timeout\",\n  1: \"Deregistration\"\n}\nresults = playbook.functions.results.reaqta_get_endpoint_status_result\n\nif results.success:\n  endpoint = results.content\n  msg = \"\"\"ReaQta Get Endpoint Status:\nID: {}\nEndpoint: {}\nAgent version: {}\nLast Seen At: {}\nConnected: {}\nIsolated: {}\nDisconnection Reason: {}\nTags: {}\nGroups: {}\n\"\"\".format(endpoint.get(\"id\"),\n           endpoint.get(\"name\"), \n           endpoint.get(\"agentVersion\"),\n           endpoint.get(\"lastSeenAt\"),\n           endpoint.get(\"connected\"),\n           endpoint.get(\"isolated\"),\n           DISCONNECTION_LOOKUP.get(endpoint.get(\"disconnectionReason\")),\n           \", \".join(endpoint.get(\"tags\")),\n           \", \".join([group.get(\"name\") for group in endpoint.get(\"groups\", [])])\n           )\n  incident.addNote(helper.createPlainText(msg))\nelse:\n  incident.addNote(u\"ReaQta Get Endpoint Status failed: {}\".format(results.reason))",
-          "tags": [],
-          "uuid": "e623e9ab-1bc3-42bf-afff-2f7ae9f2e2ba"
-        }
-      ],
-      "manual_settings": {
-        "activation_conditions": {
-          "conditions": [
-            {
-              "evaluation_id": null,
-              "field_name": "incident.properties.reaqta_endpoint_id",
-              "method": "has_a_value",
-              "type": null,
-              "value": null
-            }
-          ],
-          "logic_type": "all"
-        },
-        "view_items": []
-      },
-      "name": "reaqta_get_endpoint_status",
-      "object_type": "incident",
-      "status": "enabled",
-      "tag": {
-        "display_name": "Playbook_d16cbc71-e2d9-4fe3-8bcb-1f8496ce8253",
-        "id": 13,
-        "name": "playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253",
-        "type": "playbook",
-        "uuid": "8bbadc42-7981-4df9-ac70-cfc458a851d8"
-      },
-      "tags": [],
-      "type": "default",
-      "uuid": "d16cbc71-e2d9-4fe3-8bcb-1f8496ce8253",
-      "version": 4
-    },
     {
       "activation_details": {
         "activation_conditions": {
@@ -1705,27 +1598,27 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_5fecd4ee_1d2f_49ff_b1cd_ce039659f24d\" isExecutable=\"true\" name=\"playbook_5fecd4ee_1d2f_49ff_b1cd_ce039659f24d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1ksizhr\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Close Alert\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5801a66d-6b78-40dc-8ec4-f6ab0d842d7c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Modify this table for custom resolution types\\nIS_MALICIOUS_LOOKUP = {\\n  7: False, # Unresolved\\n  8: False, # Duplicate\\n  9: False, # Not a Issue\\n  10: True  # Resolved\\n}\\n\\ninputs.reaqta_alert_id = incident.properties.reaqta_id\\ninputs.reaqta_note = incident.resolution_summary.content\\ninputs.reaqta_is_malicious = IS_MALICIOUS_LOOKUP.get(incident.resolution_id, False) # if resolution_id is not found, set to not malicious\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_close_alert_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ksizhr\u003c/incoming\u003e\u003coutgoing\u003eFlow_1q4esmq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1q4esmq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ksizhr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1q4esmq\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_5fecd4ee_1d2f_49ff_b1cd_ce039659f24d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1q4esmq\" id=\"Flow_1q4esmq_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"112\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"224\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ksizhr\" id=\"Flow_1ksizhr_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"-84\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"28\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"616\" y=\"-136\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612.042\" y=\"28\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"644.042\" y=\"224\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109242375,
+      "create_date": 1695797020400,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_5fecd4ee_1d2f_49ff_b1cd_ce039659f24d",
       "description": {
         "content": "Close the ReaQta Alert",
         "format": "text"
       },
-      "display_name": "ReaQta: Close Alert (PB)",
+      "display_name": "QRadar EDR: Close Alert (PB)",
       "export_key": "reaqta_close_alert",
       "field_type_handle": "playbook_5fecd4ee_1d2f_49ff_b1cd_ce039659f24d",
       "fields_type": {
         "actions": [],
-        "display_name": "ReaQta: Close Alert (PB)",
+        "display_name": "QRadar EDR: Close Alert (PB)",
         "export_key": "playbook_5fecd4ee_1d2f_49ff_b1cd_ce039659f24d",
         "fields": {},
         "for_actions": false,
@@ -1748,23 +1641,23 @@
         "uuid": "b200f601-f00e-418f-9c9e-3391e98e656f"
       },
       "has_logical_errors": false,
-      "id": 11,
+      "id": 16,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109242636,
+      "last_modified_time": 1695797357437,
       "local_scripts": [],
       "name": "reaqta_close_alert",
       "object_type": "incident",
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_5fecd4ee-1d2f-49ff-b1cd-ce039659f24d",
-        "id": 14,
+        "id": 16,
         "name": "playbook_5fecd4ee_1d2f_49ff_b1cd_ce039659f24d",
         "type": "playbook",
         "uuid": "7834445b-40d0-4f83-b74b-ff9a2fceecd6"
@@ -1772,27 +1665,27 @@
       "tags": [],
       "type": "default",
       "uuid": "5fecd4ee-1d2f-49ff-b1cd-ce039659f24d",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_fd7482b4_b9db_4a68_8aef_9773691275f4\" isExecutable=\"true\" name=\"playbook_fd7482b4_b9db_4a68_8aef_9773691275f4\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0ycfi08\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Create Artifact\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"172eb03f-e7fd-4290-b98b-388ecedcd0e3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_incident_id = incident.id\\ninputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_program_path = row[\u0027process_path\u0027]\\ninputs.reaqta_artifact_type = \\\"Malware Sample\\\"\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ycfi08\u003c/incoming\u003e\u003coutgoing\u003eFlow_1e5jg2j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0ycfi08\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"ReaQta: write create artifact results to note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"cd96a3f4-4214-434b-8dd0-0673e8e74745\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1e5jg2j\u003c/incoming\u003e\u003coutgoing\u003eFlow_0efhjqr\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1e5jg2j\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0efhjqr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0efhjqr\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_fd7482b4_b9db_4a68_8aef_9773691275f4\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0efhjqr\" id=\"Flow_0efhjqr_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1e5jg2j\" id=\"Flow_1e5jg2j_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ycfi08\" id=\"Flow_0ycfi08_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109242620,
+      "create_date": 1695797020846,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_fd7482b4_b9db_4a68_8aef_9773691275f4",
       "description": {
         "content": "Create an artifact from a ReaQta Endpoint process file.",
         "format": "text"
       },
-      "display_name": "ReaQta: Create Artifact from Process Path (PB)",
+      "display_name": "QRadar EDR: Create Artifact from Process Path (PB)",
       "export_key": "reaqta_create_artifact_from_process_path",
       "field_type_handle": "playbook_fd7482b4_b9db_4a68_8aef_9773691275f4",
       "fields_type": {
@@ -1820,27 +1713,27 @@
         "uuid": "439ac34a-87d4-49f2-92f8-791e3cbadd00"
       },
       "has_logical_errors": false,
-      "id": 12,
+      "id": 17,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109242961,
+      "last_modified_time": 1695797425621,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109242682,
+          "created_date": 1695797020970,
           "description": "Write a note to SOAR if there is an error creating artifacts.",
           "enabled": false,
           "export_key": "ReaQta: write create artifact results to note",
-          "id": 5,
+          "id": 21,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109242696,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797020998,
           "name": "ReaQta: write create artifact results to note",
           "object_type": "reaqta_process_list",
           "playbook_handle": "reaqta_create_artifact_from_process_path",
@@ -1877,7 +1770,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_fd7482b4-b9db-4a68-8aef-9773691275f4",
-        "id": 15,
+        "id": 17,
         "name": "playbook_fd7482b4_b9db_4a68_8aef_9773691275f4",
         "type": "playbook",
         "uuid": "a2b4aa08-3a0d-49cb-a24c-e03891f99e9b"
@@ -1885,7 +1778,7 @@
       "tags": [],
       "type": "default",
       "uuid": "fd7482b4-b9db-4a68-8aef-9773691275f4",
-      "version": 4
+      "version": 7
     },
     {
       "activation_details": {
@@ -1925,27 +1818,27 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_fe7dc722_f484_4ada_a456_1be9f0e68f55\" isExecutable=\"true\" name=\"playbook_fe7dc722_f484_4ada_a456_1be9f0e68f55\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1mmoty0\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0mzobde\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1mmoty0\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"create_policy_on_triggered_event_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ef37a9be-cca3-4ebb-b804-fa4697f511fe\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0e5xj54\u003c/incoming\u003e\u003coutgoing\u003eFlow_0mzobde\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0mzobde\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"ReaQta: Create Artifact\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"172eb03f-e7fd-4290-b98b-388ecedcd0e3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_incident_id = incident.id\\ninputs.reaqta_artifact_type = \\\"Malware Sample\\\"\\ninputs.reaqta_program_path = row[\u0027program_path\u0027]\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_create_artifact_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mmoty0\u003c/incoming\u003e\u003coutgoing\u003eFlow_0e5xj54\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0e5xj54\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_fe7dc722_f484_4ada_a456_1be9f0e68f55\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0e5xj54\" id=\"Flow_0e5xj54_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"112\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mzobde\" id=\"Flow_0mzobde_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"334\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mmoty0\" id=\"Flow_1mmoty0_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"-94\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"28\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"590\" y=\"-146\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"624.325\" y=\"334\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"592.325\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"591.881\" y=\"27.599990844726562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109242944,
+      "create_date": 1695797021455,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_fe7dc722_f484_4ada_a456_1be9f0e68f55",
       "description": {
         "content": null,
         "format": "text"
       },
-      "display_name": "ReaQta: Create Artifact from Trigger Event (PB)",
+      "display_name": "QRadar EDR: Create Artifact from Trigger Event (PB)",
       "export_key": "reaqta_create_artifact_from_trigger_event",
       "field_type_handle": "playbook_fe7dc722_f484_4ada_a456_1be9f0e68f55",
       "fields_type": {
         "actions": [],
-        "display_name": "ReaQta: Create Artifact from Trigger Event (PB)",
+        "display_name": "QRadar EDR: Create Artifact from Trigger Event (PB)",
         "export_key": "playbook_fe7dc722_f484_4ada_a456_1be9f0e68f55",
         "fields": {},
         "for_actions": false,
@@ -1968,27 +1861,27 @@
         "uuid": "e7c98872-252b-4ded-9c85-821219d71943"
       },
       "has_logical_errors": false,
-      "id": 13,
+      "id": 18,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109243303,
+      "last_modified_time": 1695797432981,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109243009,
+          "created_date": 1695797021576,
           "description": "",
           "enabled": false,
           "export_key": "create_policy_on_triggered_event_post_process",
-          "id": 6,
+          "id": 22,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109243022,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797021604,
           "name": "create_policy_on_triggered_event_post_process",
           "object_type": "reaqta_trigger_events",
           "playbook_handle": "reaqta_create_artifact_from_trigger_event",
@@ -2003,7 +1896,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_fe7dc722-f484-4ada-a456-1be9f0e68f55",
-        "id": 16,
+        "id": 18,
         "name": "playbook_fe7dc722_f484_4ada_a456_1be9f0e68f55",
         "type": "playbook",
         "uuid": "88879a56-c7a1-40e8-b661-402e1ef2b56a"
@@ -2011,27 +1904,27 @@
       "tags": [],
       "type": "default",
       "uuid": "fe7dc722-f484-4ada-a456-1be9f0e68f55",
-      "version": 4
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_253e1224_e817_466d_9483_948e0f5e679c\" isExecutable=\"true\" name=\"playbook_253e1224_e817_466d_9483_948e0f5e679c\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0mw4mji\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Attach File\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6cf8dd59-9465-49a4-8ce8-6538f6c61a4b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if row[\u0027process_path\u0027]:\\n  inputs.reaqta_program_path = row[\u0027process_path\u0027].replace(\\\"\\\\\\\\\\\\\\\\\\\", \\\"\\\\\\\\\\\")\\nelse:\\n  inputs.reaqta_program_path = None\\ninputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_incident_id = incident.id\\ninputs.reaqta_hive = incident.properties.reaqta_hive\\n\\n  \\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_attach_file_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mw4mji\u003c/incoming\u003e\u003coutgoing\u003eFlow_11d1s76\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0mw4mji\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0xnknu0\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ReaQta: Write attach files to note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"92c7b647-2697-43c5-92fd-b5c2a5220341\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_11d1s76\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xnknu0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_11d1s76\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0xnknu0\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_253e1224_e817_466d_9483_948e0f5e679c\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xnknu0\" id=\"Flow_0xnknu0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11d1s76\" id=\"Flow_11d1s76_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mw4mji\" id=\"Flow_0mw4mji_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109243287,
+      "create_date": 1695797022024,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_253e1224_e817_466d_9483_948e0f5e679c",
       "description": {
         "content": "Attach a file from an endpoint\u0027s process list",
         "format": "text"
       },
-      "display_name": "ReaQta: Create Attachment from Process List (PB)",
+      "display_name": "QRadar EDR: Create Attachment from Process List (PB)",
       "export_key": "reaqta_create_attachment_from_process_list",
       "field_type_handle": "playbook_253e1224_e817_466d_9483_948e0f5e679c",
       "fields_type": {
@@ -2059,27 +1952,27 @@
         "uuid": "e18b12c8-8d1c-4f19-a4ce-a0468a24121d"
       },
       "has_logical_errors": false,
-      "id": 14,
+      "id": 19,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109243621,
+      "last_modified_time": 1695797442238,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109243346,
+          "created_date": 1695797022150,
           "description": "Write the results of create attachment file to note.",
           "enabled": false,
           "export_key": "ReaQta: Write attach files to note",
-          "id": 7,
+          "id": 23,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109243359,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797022186,
           "name": "ReaQta: Write attach files to note",
           "object_type": "reaqta_process_list",
           "playbook_handle": "reaqta_create_attachment_from_process_list",
@@ -2116,7 +2009,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_253e1224-e817-466d-9483-948e0f5e679c",
-        "id": 17,
+        "id": 19,
         "name": "playbook_253e1224_e817_466d_9483_948e0f5e679c",
         "type": "playbook",
         "uuid": "bfa0967a-afd7-4bcc-8d9f-d037cc60207e"
@@ -2124,27 +2017,27 @@
       "tags": [],
       "type": "default",
       "uuid": "253e1224-e817-466d-9483-948e0f5e679c",
-      "version": 4
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_60a805fb_7c7a_4130_a124_3faac85103a9\" isExecutable=\"true\" name=\"playbook_60a805fb_7c7a_4130_a124_3faac85103a9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1wwjecm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Attach File\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6cf8dd59-9465-49a4-8ce8-6538f6c61a4b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_program_path = row[\u0027program_path\u0027]\\ninputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_incident_id = incident.id\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_attach_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wwjecm\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wtf8l5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1wwjecm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0e89cau\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ReaQta: Write attachment results to note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"cfc43d09-3cec-4a01-ad83-c5b707ebf069\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wtf8l5\u003c/incoming\u003e\u003coutgoing\u003eFlow_0e89cau\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wtf8l5\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0e89cau\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_60a805fb_7c7a_4130_a124_3faac85103a9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wwjecm\" id=\"Flow_1wwjecm_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wtf8l5\" id=\"Flow_0wtf8l5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0e89cau\" id=\"Flow_0e89cau_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_60a805fb_7c7a_4130_a124_3faac85103a9\" isExecutable=\"true\" name=\"playbook_60a805fb_7c7a_4130_a124_3faac85103a9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1wwjecm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Attach File\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6cf8dd59-9465-49a4-8ce8-6538f6c61a4b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_program_path = row[\u0027program_path\u0027]\\ninputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_incident_id = incident.id\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_attach_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wwjecm\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wtf8l5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1wwjecm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0e89cau\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"ReaQta: Write attachment results to note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"cfc43d09-3cec-4a01-ad83-c5b707ebf069\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wtf8l5\u003c/incoming\u003e\u003coutgoing\u003eFlow_0e89cau\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wtf8l5\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0e89cau\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_60a805fb_7c7a_4130_a124_3faac85103a9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0e89cau\" id=\"Flow_0e89cau_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wtf8l5\" id=\"Flow_0wtf8l5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wwjecm\" id=\"Flow_1wwjecm_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109243604,
+      "create_date": 1695797022620,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_60a805fb_7c7a_4130_a124_3faac85103a9",
       "description": {
         "content": "Attach a file from an endpoint.",
         "format": "text"
       },
-      "display_name": "ReaQta: Create Attachment from Triggered Event (PB)",
+      "display_name": "QRadar EDR: Create Attachment from Triggered Event (PB)",
       "export_key": "reaqta_create_attachment_from_triggered_event",
       "field_type_handle": "playbook_60a805fb_7c7a_4130_a124_3faac85103a9",
       "fields_type": {
@@ -2172,27 +2065,27 @@
         "uuid": "94aa94f3-c175-44ed-8e77-f7b498f0c834"
       },
       "has_logical_errors": false,
-      "id": 15,
+      "id": 20,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109243946,
+      "last_modified_time": 1695797450168,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109243668,
+          "created_date": 1695797022747,
           "description": "Write attachment results to note.",
           "enabled": false,
           "export_key": "ReaQta: Write attachment results to note",
-          "id": 8,
+          "id": 24,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109243681,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797022777,
           "name": "ReaQta: Write attachment results to note",
           "object_type": "reaqta_trigger_events",
           "playbook_handle": "reaqta_create_attachment_from_triggered_event",
@@ -2229,7 +2122,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_60a805fb-7c7a-4130-a124-3faac85103a9",
-        "id": 18,
+        "id": 20,
         "name": "playbook_60a805fb_7c7a_4130_a124_3faac85103a9",
         "type": "playbook",
         "uuid": "7ab84c2c-6b5c-4f55-8070-3cf869069617"
@@ -2237,7 +2130,7 @@
       "tags": [],
       "type": "default",
       "uuid": "60a805fb-7c7a-4130-a124-3faac85103a9",
-      "version": 4
+      "version": 7
     },
     {
       "activation_details": {
@@ -2277,27 +2170,27 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_eb96d3ff_729a_4fd4_9b8a_76045a56cb3b\" isExecutable=\"true\" name=\"playbook_eb96d3ff_729a_4fd4_9b8a_76045a56cb3b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0fwuhqo\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Create Note\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"21db5c06-30af-4619-b1ed-1c78b76f36b7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_alert_id = incident.properties.reaqta_id\\ninputs.reaqta_note = note.text.content\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_create_note_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0fwuhqo\u003c/incoming\u003e\u003coutgoing\u003eFlow_07szywz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"reaqta_create_note_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"dd7e35fa-4c4a-4767-a956-bc83e6a4a041\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07szywz\u003c/incoming\u003e\u003coutgoing\u003eFlow_0r7pq3c\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0r7pq3c\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0fwuhqo\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_07szywz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0r7pq3c\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_eb96d3ff_729a_4fd4_9b8a_76045a56cb3b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0r7pq3c\" id=\"Flow_0r7pq3c_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"594\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07szywz\" id=\"Flow_07szywz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"408\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fwuhqo\" id=\"Flow_0fwuhqo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"408\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"594\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109243928,
+      "create_date": 1695797023209,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_eb96d3ff_729a_4fd4_9b8a_76045a56cb3b",
       "description": {
         "content": "Add a note from SOAR to ReaQta",
         "format": "text"
       },
-      "display_name": "ReaQta: Create Note (PB)",
+      "display_name": "QRadar EDR: Create Note (PB)",
       "export_key": "reaqta_create_note",
       "field_type_handle": "playbook_eb96d3ff_729a_4fd4_9b8a_76045a56cb3b",
       "fields_type": {
         "actions": [],
-        "display_name": "ReaQta: Create Note (PB)",
+        "display_name": "QRadar EDR: Create Note (PB)",
         "export_key": "playbook_eb96d3ff_729a_4fd4_9b8a_76045a56cb3b",
         "fields": {},
         "for_actions": false,
@@ -2320,27 +2213,27 @@
         "uuid": "48a22131-e29f-4a14-af3a-f6ed7420391a"
       },
       "has_logical_errors": false,
-      "id": 16,
+      "id": 21,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109244285,
+      "last_modified_time": 1695797615423,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109243995,
+          "created_date": 1695797023329,
           "description": "",
           "enabled": false,
           "export_key": "reaqta_create_note_post_process",
-          "id": 9,
+          "id": 25,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109244009,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797023356,
           "name": "reaqta_create_note_post_process",
           "object_type": "note",
           "playbook_handle": "reaqta_create_note",
@@ -2355,7 +2248,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_eb96d3ff-729a-4fd4-9b8a-76045a56cb3b",
-        "id": 19,
+        "id": 21,
         "name": "playbook_eb96d3ff_729a_4fd4_9b8a_76045a56cb3b",
         "type": "playbook",
         "uuid": "f7866e91-1c3b-463c-be5c-c2418b36ff11"
@@ -2363,27 +2256,27 @@
       "tags": [],
       "type": "default",
       "uuid": "eb96d3ff-729a-4fd4-9b8a-76045a56cb3b",
-      "version": 4
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d\" isExecutable=\"true\" name=\"playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0d7fcm0\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Create Policy\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7d727515-5a39-4213-8dee-ce9a56e8f26d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_sha256 = artifact.value\\ninputs.reaqta_policy_title = playbook.inputs.reaqta_policy_title\\ninputs.reaqta_policy_description = playbook.inputs.reaqta_policy_description or \u0027\u0027\\ninputs.reaqta_policy_included_groups = playbook.inputs.reaqta_policy_included_groups\\ninputs.reaqta_policy_excluded_groups = playbook.inputs.reaqta_policy_excluded_groups\\ninputs.reaqta_policy_enabled = True\\ninputs.reaqta_policy_block = playbook.inputs.reaqta_block_when_triggered\\ninputs.reaqta_hives = playbook.inputs.reaqta_hive_labels if playbook.inputs.reaqta_hive_labels else incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_create_policy_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0d7fcm0\u003c/incoming\u003e\u003coutgoing\u003eFlow_16cyo5c\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"reaqta_create_policy_from_artifact_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7780a909-f97b-49ce-8109-5af021a07d29\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_16cyo5c\u003c/incoming\u003e\u003coutgoing\u003eFlow_0yd0pr8\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0yd0pr8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0d7fcm0\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_16cyo5c\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0yd0pr8\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0yd0pr8\" id=\"Flow_0yd0pr8_di\"\u003e\u003comgdi:waypoint x=\"570\" y=\"92\"/\u003e\u003comgdi:waypoint x=\"570\" y=\"214\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16cyo5c\" id=\"Flow_16cyo5c_di\"\u003e\u003comgdi:waypoint x=\"570\" y=\"-98\"/\u003e\u003comgdi:waypoint x=\"570\" y=\"8\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0d7fcm0\" id=\"Flow_0d7fcm0_di\"\u003e\u003comgdi:waypoint x=\"570\" y=\"-294\"/\u003e\u003comgdi:waypoint x=\"570\" y=\"-182\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"479\" y=\"-346\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"472.2\" y=\"-182\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"472.2\" y=\"7.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"504.2\" y=\"213.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109244268,
+      "create_date": 1695797023771,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d",
       "description": {
         "content": "Create a blocking policy from a SHA256 hash",
         "format": "text"
       },
-      "display_name": "ReaQta: Create Policy from Artifact (PB)",
+      "display_name": "QRadar EDR: Create Policy from Artifact (PB)",
       "export_key": "reaqta_create_policy_from_artifact",
       "field_type_handle": "playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d",
       "fields_type": {
@@ -2401,7 +2294,7 @@
             "deprecated": false,
             "export_key": "playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d/reaqta_block_when_triggered",
             "hide_notification": false,
-            "id": 404,
+            "id": 730,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2417,7 +2310,7 @@
             "templates": [],
             "text": "Block when Triggered",
             "tooltip": "Yes - block file, No - create alert only",
-            "type_id": 1018,
+            "type_id": 1030,
             "uuid": "f589dcb6-eb32-4b52-a8e0-137609895a43",
             "values": []
           },
@@ -2431,7 +2324,7 @@
             "deprecated": false,
             "export_key": "playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d/reaqta_hive_labels",
             "hide_notification": false,
-            "id": 405,
+            "id": 731,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2446,7 +2339,7 @@
             "templates": [],
             "text": "Hive Labels",
             "tooltip": "Comma separated list of hive labels",
-            "type_id": 1018,
+            "type_id": 1030,
             "uuid": "34c3c439-4af6-46b8-925f-a3ce0716aeea",
             "values": []
           },
@@ -2460,7 +2353,7 @@
             "deprecated": false,
             "export_key": "playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d/reaqta_policy_description",
             "hide_notification": false,
-            "id": 406,
+            "id": 732,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2475,7 +2368,7 @@
             "templates": [],
             "text": "Description",
             "tooltip": "",
-            "type_id": 1018,
+            "type_id": 1030,
             "uuid": "aa61d8ef-ffe7-4143-842d-5a2659873753",
             "values": []
           },
@@ -2489,7 +2382,7 @@
             "deprecated": false,
             "export_key": "playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d/reaqta_policy_excluded_groups",
             "hide_notification": false,
-            "id": 407,
+            "id": 733,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2504,7 +2397,7 @@
             "templates": [],
             "text": "Excluded Groups",
             "tooltip": "Comma separated list of groups to exclude in policy. Use either include or exclude groups.",
-            "type_id": 1018,
+            "type_id": 1030,
             "uuid": "e166d906-0a8e-4f38-b0d6-fc5063e4cec5",
             "values": []
           },
@@ -2518,7 +2411,7 @@
             "deprecated": false,
             "export_key": "playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d/reaqta_policy_included_groups",
             "hide_notification": false,
-            "id": 408,
+            "id": 734,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2533,7 +2426,7 @@
             "templates": [],
             "text": "Included Groups",
             "tooltip": "Comma separated list of groups to include in policy. Use either include or exclude groups.",
-            "type_id": 1018,
+            "type_id": 1030,
             "uuid": "0d9d8d6e-ff62-48c4-adc3-29036574e420",
             "values": []
           },
@@ -2547,7 +2440,7 @@
             "deprecated": false,
             "export_key": "playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d/reaqta_policy_title",
             "hide_notification": false,
-            "id": 409,
+            "id": 735,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2563,7 +2456,7 @@
             "templates": [],
             "text": "Title",
             "tooltip": "Policy names must be at least 5 characters",
-            "type_id": 1018,
+            "type_id": 1030,
             "uuid": "87b19635-de7e-4a1a-ae71-01949d7914fe",
             "values": []
           }
@@ -2588,27 +2481,27 @@
         "uuid": "9554f085-fab9-4832-aa2a-3efe34bd8d46"
       },
       "has_logical_errors": false,
-      "id": 17,
+      "id": 22,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109244768,
+      "last_modified_time": 1695797521663,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109244428,
+          "created_date": 1695797024091,
           "description": "",
           "enabled": false,
           "export_key": "reaqta_create_policy_from_artifact_post_process",
-          "id": 10,
+          "id": 26,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109244442,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797024118,
           "name": "reaqta_create_policy_from_artifact_post_process",
           "object_type": "artifact",
           "playbook_handle": "reaqta_create_policy_from_artifact",
@@ -2695,7 +2588,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_9ab06151-e059-4522-ad86-cb54cbd7c46d",
-        "id": 20,
+        "id": 22,
         "name": "playbook_9ab06151_e059_4522_ad86_cb54cbd7c46d",
         "type": "playbook",
         "uuid": "cdc7f2f2-8f3d-4684-ac2b-92a1a747e6f7"
@@ -2703,27 +2596,27 @@
       "tags": [],
       "type": "default",
       "uuid": "9ab06151-e059-4522-ad86-cb54cbd7c46d",
-      "version": 4
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_9f5b902b_6562_4dc0_b9a7_7c4d62e574e0\" isExecutable=\"true\" name=\"playbook_9f5b902b_6562_4dc0_b9a7_7c4d62e574e0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_11otwhg\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Create Policy\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7d727515-5a39-4213-8dee-ce9a56e8f26d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_sha256 = row[\u0027sha256_hash\u0027]\\ninputs.reaqta_policy_title = playbook.inputs.reaqta_policy_title\\ninputs.reaqta_policy_description = playbook.inputs.reaqta_policy_description or \u0027\u0027\\ninputs.reaqta_policy_included_groups = playbook.inputs.reaqta_policy_included_groups\\ninputs.reaqta_policy_excluded_groups = playbook.inputs.reaqta_policy_excluded_groups\\ninputs.reaqta_policy_enabled = True\\ninputs.reaqta_policy_block = playbook.inputs.reaqta_policy_block_when_triggered\\ninputs.reaqta_hives = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_create_policy_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_11otwhg\u003c/incoming\u003e\u003coutgoing\u003eFlow_108o98p\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"reaqta_create_policy_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"8421db80-c5e8-44a3-a907-3f34aa884841\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_108o98p\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ryxlf7\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ryxlf7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_11otwhg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_108o98p\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1ryxlf7\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_9f5b902b_6562_4dc0_b9a7_7c4d62e574e0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ryxlf7\" id=\"Flow_1ryxlf7_di\"\u003e\u003comgdi:waypoint x=\"450\" y=\"52\"/\u003e\u003comgdi:waypoint x=\"450\" y=\"154\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_108o98p\" id=\"Flow_108o98p_di\"\u003e\u003comgdi:waypoint x=\"450\" y=\"-118\"/\u003e\u003comgdi:waypoint x=\"450\" y=\"-32\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11otwhg\" id=\"Flow_11otwhg_di\"\u003e\u003comgdi:waypoint x=\"450\" y=\"-294\"/\u003e\u003comgdi:waypoint x=\"450\" y=\"-202\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"350\" y=\"-346\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"352.25\" y=\"-201.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"351.75\" y=\"-31.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"383.75\" y=\"154.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109244752,
+      "create_date": 1695797024661,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_9f5b902b_6562_4dc0_b9a7_7c4d62e574e0",
       "description": {
         "content": "Create an alert trigger policy based on a file hash",
         "format": "text"
       },
-      "display_name": "ReaQta: Create Policy on Triggered Event (PB)",
+      "display_name": "QRadar EDR: Create Policy on Triggered Event (PB)",
       "export_key": "reaqta_create_policy_on_triggered_event",
       "field_type_handle": "playbook_9f5b902b_6562_4dc0_b9a7_7c4d62e574e0",
       "fields_type": {
@@ -2741,7 +2634,7 @@
             "deprecated": false,
             "export_key": "playbook_9f5b902b_6562_4dc0_b9a7_7c4d62e574e0/reaqta_policy_block_when_triggered",
             "hide_notification": false,
-            "id": 410,
+            "id": 736,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2757,7 +2650,7 @@
             "templates": [],
             "text": "Block when Triggered",
             "tooltip": "Yes - block file, No - create alert only",
-            "type_id": 1019,
+            "type_id": 1031,
             "uuid": "ff44d062-951e-45ce-8df2-dec0f2ee585a",
             "values": []
           },
@@ -2771,7 +2664,7 @@
             "deprecated": false,
             "export_key": "playbook_9f5b902b_6562_4dc0_b9a7_7c4d62e574e0/reaqta_policy_description",
             "hide_notification": false,
-            "id": 411,
+            "id": 737,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2786,7 +2679,7 @@
             "templates": [],
             "text": "Description",
             "tooltip": "",
-            "type_id": 1019,
+            "type_id": 1031,
             "uuid": "8b193969-5139-40f3-8276-25bc01ccc4dc",
             "values": []
           },
@@ -2800,7 +2693,7 @@
             "deprecated": false,
             "export_key": "playbook_9f5b902b_6562_4dc0_b9a7_7c4d62e574e0/reaqta_policy_excluded_groups",
             "hide_notification": false,
-            "id": 412,
+            "id": 738,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2815,7 +2708,7 @@
             "templates": [],
             "text": "Excluded Groups",
             "tooltip": "Comma separated list of groups to exclude in policy. Use either include or exclude groups.",
-            "type_id": 1019,
+            "type_id": 1031,
             "uuid": "90f78486-3161-4239-84ff-128d86049ce9",
             "values": []
           },
@@ -2829,7 +2722,7 @@
             "deprecated": false,
             "export_key": "playbook_9f5b902b_6562_4dc0_b9a7_7c4d62e574e0/reaqta_policy_included_groups",
             "hide_notification": false,
-            "id": 413,
+            "id": 739,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2844,7 +2737,7 @@
             "templates": [],
             "text": "Included Groups",
             "tooltip": "Comma separated list of groups to include in policy. Use either include or exclude groups.",
-            "type_id": 1019,
+            "type_id": 1031,
             "uuid": "916d2446-5d86-436b-a45b-c2b4e1c90818",
             "values": []
           },
@@ -2858,7 +2751,7 @@
             "deprecated": false,
             "export_key": "playbook_9f5b902b_6562_4dc0_b9a7_7c4d62e574e0/reaqta_policy_title",
             "hide_notification": false,
-            "id": 414,
+            "id": 740,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2873,7 +2766,7 @@
             "templates": [],
             "text": "Title",
             "tooltip": "Policy names must be at least 5 characters",
-            "type_id": 1019,
+            "type_id": 1031,
             "uuid": "716fabb9-90dd-4137-ad7c-17a1814bee78",
             "values": []
           }
@@ -2898,27 +2791,27 @@
         "uuid": "a5bab57a-ca64-4382-a4b2-ad8456f2091b"
       },
       "has_logical_errors": false,
-      "id": 18,
+      "id": 23,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109245181,
+      "last_modified_time": 1695797529637,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109244893,
+          "created_date": 1695797024959,
           "description": "",
           "enabled": false,
           "export_key": "reaqta_create_policy_post_process",
-          "id": 11,
+          "id": 27,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109244907,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797024988,
           "name": "reaqta_create_policy_post_process",
           "object_type": "reaqta_trigger_events",
           "playbook_handle": "reaqta_create_policy_on_triggered_event",
@@ -2989,7 +2882,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_9f5b902b-6562-4dc0-b9a7-7c4d62e574e0",
-        "id": 21,
+        "id": 23,
         "name": "playbook_9f5b902b_6562_4dc0_b9a7_7c4d62e574e0",
         "type": "playbook",
         "uuid": "6197279f-e6c8-493f-b2bd-342056424e57"
@@ -2997,27 +2890,27 @@
       "tags": [],
       "type": "default",
       "uuid": "9f5b902b-6562-4dc0-b9a7-7c4d62e574e0",
-      "version": 4
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_43e5c7d7_c80d_4f4c_ba6f_e933141097dd\" isExecutable=\"true\" name=\"playbook_43e5c7d7_c80d_4f4c_ba6f_e933141097dd\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0mp5xmg\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Deisolate Machine\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5e404dd9-3fa4-4d26-8d01-ffb543f82731\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_deisolate_machine_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mp5xmg\u003c/incoming\u003e\u003coutgoing\u003eFlow_0maxilh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0mp5xmg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"reaqta_deisolate_endpoint_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d8ef5f12-006f-4e01-b6c1-10a194bf4633\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0maxilh\u003c/incoming\u003e\u003coutgoing\u003eFlow_0dw5g21\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0maxilh\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0dw5g21\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0dw5g21\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_43e5c7d7_c80d_4f4c_ba6f_e933141097dd\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dw5g21\" id=\"Flow_0dw5g21_di\"\u003e\u003comgdi:waypoint x=\"530\" y=\"572\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"714\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0maxilh\" id=\"Flow_0maxilh_di\"\u003e\u003comgdi:waypoint x=\"530\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"488\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mp5xmg\" id=\"Flow_0mp5xmg_di\"\u003e\u003comgdi:waypoint x=\"530\" y=\"186\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"436\" y=\"134\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"432\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"431.5\" y=\"487.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"463.5\" y=\"713.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692110950480,
+      "create_date": 1695797025446,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_43e5c7d7_c80d_4f4c_ba6f_e933141097dd",
       "description": {
         "content": "De-isolate the endpoint machine from the network",
         "format": "text"
       },
-      "display_name": "ReaQta: Deisolate Endpoint (PB)",
+      "display_name": "QRadar EDR: Deisolate Endpoint (PB)",
       "export_key": "reaqta_deisolate_endpoint_pb",
       "field_type_handle": "playbook_43e5c7d7_c80d_4f4c_ba6f_e933141097dd",
       "fields_type": {
@@ -3049,23 +2942,23 @@
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692170228426,
+      "last_modified_time": 1695797537223,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692111050758,
+          "created_date": 1695797025564,
           "description": "",
           "enabled": false,
           "export_key": "reaqta_deisolate_endpoint_post_process",
-          "id": 17,
+          "id": 28,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692111050770,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797025591,
           "name": "reaqta_deisolate_endpoint_post_process",
           "object_type": "incident",
           "playbook_handle": "reaqta_deisolate_endpoint_pb",
@@ -3104,7 +2997,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_43e5c7d7-c80d-4f4c-ba6f-e933141097dd",
-        "id": 27,
+        "id": 24,
         "name": "playbook_43e5c7d7_c80d_4f4c_ba6f_e933141097dd",
         "type": "playbook",
         "uuid": "69b81cb2-5892-4885-88bf-f510687b834a"
@@ -3112,7 +3005,7 @@
       "tags": [],
       "type": "default",
       "uuid": "43e5c7d7-c80d-4f4c-ba6f-e933141097dd",
-      "version": 11
+      "version": 6
     },
     {
       "activation_details": {
@@ -3138,27 +3031,27 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_415499ad_d962_4e36_8b4e_180802363b44\" isExecutable=\"true\" name=\"playbook_415499ad_d962_4e36_8b4e_180802363b44\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0wmj9l2\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Get Alert Information\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"13918f45-5268-41b0-8ff0-e6a6223ad302\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_alert_id = incident.properties.reaqta_id\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_get_alert_information_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wmj9l2\u003c/incoming\u003e\u003coutgoing\u003eFlow_1yyt7o3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0zggnb5\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"reaqta_get_alert_information_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6dd922b1-4403-408d-bf63-b9d94dd54f59\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1yyt7o3\u003c/incoming\u003e\u003coutgoing\u003eFlow_0zggnb5\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wmj9l2\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1yyt7o3\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0zggnb5\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_415499ad_d962_4e36_8b4e_180802363b44\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0zggnb5\" id=\"Flow_0zggnb5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1yyt7o3\" id=\"Flow_1yyt7o3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wmj9l2\" id=\"Flow_0wmj9l2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"237.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"553.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"387.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109245166,
+      "create_date": 1695797026006,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_415499ad_d962_4e36_8b4e_180802363b44",
       "description": {
         "content": "Get alert information and populate the custom fields and datatables",
         "format": "text"
       },
-      "display_name": "ReaQta: Get Alert Information (PB)",
+      "display_name": "QRadar EDR: Get Alert Information (PB)",
       "export_key": "reaqta_get_alert_information",
       "field_type_handle": "playbook_415499ad_d962_4e36_8b4e_180802363b44",
       "fields_type": {
         "actions": [],
-        "display_name": "ReaQta: Get Alert Information (PB)",
+        "display_name": "QRadar EDR: Get Alert Information (PB)",
         "export_key": "playbook_415499ad_d962_4e36_8b4e_180802363b44",
         "fields": {},
         "for_actions": false,
@@ -3181,27 +3074,27 @@
         "uuid": "41cbd747-a539-458e-8b26-a63c51c0b35a"
       },
       "has_logical_errors": false,
-      "id": 19,
+      "id": 25,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109245475,
+      "last_modified_time": 1695797549938,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109245227,
+          "created_date": 1695797026137,
           "description": "",
           "enabled": false,
           "export_key": "reaqta_get_alert_information_post_process",
-          "id": 12,
+          "id": 29,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109245240,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797026167,
           "name": "reaqta_get_alert_information_post_process",
           "object_type": "incident",
           "playbook_handle": "reaqta_get_alert_information",
@@ -3216,7 +3109,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_415499ad-d962-4e36-8b4e-180802363b44",
-        "id": 22,
+        "id": 25,
         "name": "playbook_415499ad_d962_4e36_8b4e_180802363b44",
         "type": "playbook",
         "uuid": "661b43f0-8fe7-4166-80f3-17e3b47f7a6e"
@@ -3224,27 +3117,133 @@
       "tags": [],
       "type": "default",
       "uuid": "415499ad-d962-4e36-8b4e-180802363b44",
-      "version": 4
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253\" isExecutable=\"true\" name=\"playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0vlru2d\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta Get Endpoint Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ace62dbf-09f6-4c75-b11f-1ca5a59262f7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_get_endpoint_status_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0vlru2d\u003c/incoming\u003e\u003coutgoing\u003eFlow_0v2c9gy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"reaqta_get_endpoint_status_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e623e9ab-1bc3-42bf-afff-2f7ae9f2e2ba\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0v2c9gy\u003c/incoming\u003e\u003coutgoing\u003eFlow_1i00y6h\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1i00y6h\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0vlru2d\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0v2c9gy\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1i00y6h\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i00y6h\" id=\"Flow_1i00y6h_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"512\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"654\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0v2c9gy\" id=\"Flow_0v2c9gy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"312\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"428\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0vlru2d\" id=\"Flow_0vlru2d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"228\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"228\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"428\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"654\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1695797019846,
+      "creator_principal": {
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
+      },
+      "deployment_id": "playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253",
+      "description": {
+        "content": "Get the current status of a ReaQta Endpoint",
+        "format": "text"
+      },
+      "display_name": "QRadar EDR: Get Endpoint Status (PB)",
+      "export_key": "reaqta_get_endpoint_status",
+      "field_type_handle": "playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253",
+      "fields_type": {
+        "actions": [],
+        "display_name": "ReaQta Get Endpoint Status (PB)",
+        "export_key": "playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253",
+        "fields": {},
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253",
+        "uuid": "4e94ab00-631b-4d10-871c-18842b68a946"
+      },
+      "has_logical_errors": false,
+      "id": 15,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
+        "type": "user"
+      },
+      "last_modified_time": 1695797572297,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1695797019991,
+          "description": "",
+          "enabled": false,
+          "export_key": "reaqta_get_endpoint_status_post_process",
+          "id": 20,
+          "language": "python3",
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797020020,
+          "name": "reaqta_get_endpoint_status_post_process",
+          "object_type": "incident",
+          "playbook_handle": "reaqta_get_endpoint_status",
+          "programmatic_name": "reaqta_get_endpoint_status_reaqta_get_endpoint_status_post_process",
+          "script_text": "DISCONNECTION_LOOKUP = {\n  0: \"Session timeout\",\n  1: \"Deregistration\"\n}\nresults = playbook.functions.results.reaqta_get_endpoint_status_result\n\nif results.success:\n  endpoint = results.content\n  msg = \"\"\"ReaQta Get Endpoint Status:\nID: {}\nEndpoint: {}\nAgent version: {}\nLast Seen At: {}\nConnected: {}\nIsolated: {}\nDisconnection Reason: {}\nTags: {}\nGroups: {}\n\"\"\".format(endpoint.get(\"id\"),\n           endpoint.get(\"name\"), \n           endpoint.get(\"agentVersion\"),\n           endpoint.get(\"lastSeenAt\"),\n           endpoint.get(\"connected\"),\n           endpoint.get(\"isolated\"),\n           DISCONNECTION_LOOKUP.get(endpoint.get(\"disconnectionReason\")),\n           \", \".join(endpoint.get(\"tags\")),\n           \", \".join([group.get(\"name\") for group in endpoint.get(\"groups\", [])])\n           )\n  incident.addNote(helper.createPlainText(msg))\nelse:\n  incident.addNote(u\"ReaQta Get Endpoint Status failed: {}\".format(results.reason))",
+          "tags": [],
+          "uuid": "e623e9ab-1bc3-42bf-afff-2f7ae9f2e2ba"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.reaqta_endpoint_id",
+              "method": "has_a_value",
+              "type": null,
+              "value": null
+            }
+          ],
+          "logic_type": "all"
+        },
+        "view_items": []
+      },
+      "name": "reaqta_get_endpoint_status",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_d16cbc71-e2d9-4fe3-8bcb-1f8496ce8253",
+        "id": 15,
+        "name": "playbook_d16cbc71_e2d9_4fe3_8bcb_1f8496ce8253",
+        "type": "playbook",
+        "uuid": "8bbadc42-7981-4df9-ac70-cfc458a851d8"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "d16cbc71-e2d9-4fe3-8bcb-1f8496ce8253",
+      "version": 6
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_63dafde3_2d60_400e_a404_b0d9462fefb8\" isExecutable=\"true\" name=\"playbook_63dafde3_2d60_400e_a404_b0d9462fefb8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0kllugb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Get Processes\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f97be6f0-081a-47af-931f-5e2b101aec3a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_has_incident = playbook.inputs.reaqta_has_incident\\ninputs.reaqta_suspended = playbook.inputs.reaqta_suspended\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_get_processes_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kllugb\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fco4u8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"reaqta_get_processes_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1cd7622d-057a-4074-8f9e-7f098081518d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fco4u8\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vsuhls\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1vsuhls\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0kllugb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1fco4u8\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1vsuhls\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_63dafde3_2d60_400e_a404_b0d9462fefb8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vsuhls\" id=\"Flow_1vsuhls_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"574\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fco4u8\" id=\"Flow_1fco4u8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"408\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kllugb\" id=\"Flow_0kllugb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"407.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"573.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109245459,
+      "create_date": 1695797026563,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_63dafde3_2d60_400e_a404_b0d9462fefb8",
       "description": {
         "content": "Get the running processes on a given machine",
         "format": "text"
       },
-      "display_name": "ReaQta: Get Processes (PB)",
+      "display_name": "QRadar EDR: Get Processes (PB)",
       "export_key": "reaqta_get_processes",
       "field_type_handle": "playbook_63dafde3_2d60_400e_a404_b0d9462fefb8",
       "fields_type": {
@@ -3262,7 +3261,7 @@
             "deprecated": false,
             "export_key": "playbook_63dafde3_2d60_400e_a404_b0d9462fefb8/reaqta_has_incident",
             "hide_notification": false,
-            "id": 415,
+            "id": 741,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -3277,7 +3276,7 @@
             "templates": [],
             "text": "Has Incident",
             "tooltip": "Select only processes associated with an Alert",
-            "type_id": 1021,
+            "type_id": 1034,
             "uuid": "3c7adf1b-2fd2-4afc-8001-f2ae59d2c7a8",
             "values": []
           },
@@ -3291,7 +3290,7 @@
             "deprecated": false,
             "export_key": "playbook_63dafde3_2d60_400e_a404_b0d9462fefb8/reaqta_suspended",
             "hide_notification": false,
-            "id": 416,
+            "id": 742,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -3306,7 +3305,7 @@
             "templates": [],
             "text": "Suspended",
             "tooltip": "Select only processes which are suspended",
-            "type_id": 1021,
+            "type_id": 1034,
             "uuid": "dc44fb27-dec0-4c48-92d6-7dadc987f58c",
             "values": []
           }
@@ -3331,27 +3330,27 @@
         "uuid": "b0b3847a-1271-43a9-b0f1-d7baa271c96e"
       },
       "has_logical_errors": false,
-      "id": 20,
+      "id": 26,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109245814,
+      "last_modified_time": 1695797580437,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109245558,
+          "created_date": 1695797026757,
           "description": "",
           "enabled": false,
           "export_key": "reaqta_get_processes_post_process",
-          "id": 13,
+          "id": 30,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109245573,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797026789,
           "name": "reaqta_get_processes_post_process",
           "object_type": "incident",
           "playbook_handle": "reaqta_get_processes",
@@ -3398,7 +3397,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_63dafde3-2d60-400e-a404-b0d9462fefb8",
-        "id": 23,
+        "id": 26,
         "name": "playbook_63dafde3_2d60_400e_a404_b0d9462fefb8",
         "type": "playbook",
         "uuid": "3ba55c21-7d28-4cd2-95b6-13bc4b18de58"
@@ -3406,27 +3405,27 @@
       "tags": [],
       "type": "default",
       "uuid": "63dafde3-2d60-400e-a404-b0d9462fefb8",
-      "version": 4
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7a2340ae_8c7d_45d6_9de5_cdd46501f484\" isExecutable=\"true\" name=\"playbook_7a2340ae_8c7d_45d6_9de5_cdd46501f484\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1d476nq\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Isolate Machine\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"79d595f7-b9dc-435c-87bf-e2845fddda94\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_isolate_machine_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1d476nq\u003c/incoming\u003e\u003coutgoing\u003eFlow_0mbbvv0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"reaqta_isolate_endpoint_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"41164b44-0a48-44b1-9e99-7cf62db319ca\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mbbvv0\u003c/incoming\u003e\u003coutgoing\u003eFlow_07r5k9r\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_07r5k9r\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1d476nq\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0mbbvv0\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_07r5k9r\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7a2340ae_8c7d_45d6_9de5_cdd46501f484\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07r5k9r\" id=\"Flow_07r5k9r_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mbbvv0\" id=\"Flow_0mbbvv0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1d476nq\" id=\"Flow_1d476nq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.25\" y=\"207.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.25\" y=\"387.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655.25\" y=\"553.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109245798,
+      "create_date": 1695797027196,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_7a2340ae_8c7d_45d6_9de5_cdd46501f484",
       "description": {
         "content": "Isolate the endpoint machine from the network",
         "format": "text"
       },
-      "display_name": "ReaQta: Isolate Endpoint (PB)",
+      "display_name": "QRadar EDR: Isolate Endpoint (PB)",
       "export_key": "reaqta_isolate_endpoint",
       "field_type_handle": "playbook_7a2340ae_8c7d_45d6_9de5_cdd46501f484",
       "fields_type": {
@@ -3454,27 +3453,27 @@
         "uuid": "bc4e653e-84e8-4600-93e9-16a21edb5fde"
       },
       "has_logical_errors": false,
-      "id": 21,
+      "id": 27,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109246120,
+      "last_modified_time": 1695797588389,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109245858,
+          "created_date": 1695797027348,
           "description": "",
           "enabled": false,
           "export_key": "reaqta_isolate_endpoint_post_process",
-          "id": 14,
+          "id": 31,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109245872,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797027383,
           "name": "reaqta_isolate_endpoint_post_process",
           "object_type": "incident",
           "playbook_handle": "reaqta_isolate_endpoint",
@@ -3513,7 +3512,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_7a2340ae-8c7d-45d6-9de5-cdd46501f484",
-        "id": 24,
+        "id": 27,
         "name": "playbook_7a2340ae_8c7d_45d6_9de5_cdd46501f484",
         "type": "playbook",
         "uuid": "d3a1f83b-5843-4049-99ca-a2925d1a34e4"
@@ -3521,27 +3520,27 @@
       "tags": [],
       "type": "default",
       "uuid": "7a2340ae-8c7d-45d6-9de5-cdd46501f484",
-      "version": 4
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0f8002a2_404d_48c4_9369_57b0f3915fe9\" isExecutable=\"true\" name=\"playbook_0f8002a2_404d_48c4_9369_57b0f3915fe9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0yzf35e\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Kill Process\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f8f32b38-a279-4657-8419-5ce82fcdb36d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_endpoint_id = incident.properties.reaqta_endpoint_id\\ninputs.reaqta_process_pid = row[\u0027pid\u0027]\\ninputs.reaqta_starttime = row[\u0027start_time\u0027]\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_kill_process_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0yzf35e\u003c/incoming\u003e\u003coutgoing\u003eFlow_0cu2wmu\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_084fmj9\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"reaqta_kill_process_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"81060bab-099c-4838-9ba5-70d5d0d47a0e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0cu2wmu\u003c/incoming\u003e\u003coutgoing\u003eFlow_084fmj9\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0yzf35e\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0cu2wmu\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_084fmj9\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0f8002a2_404d_48c4_9369_57b0f3915fe9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_084fmj9\" id=\"Flow_084fmj9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0cu2wmu\" id=\"Flow_0cu2wmu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0yzf35e\" id=\"Flow_0yzf35e_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.75\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109246104,
+      "create_date": 1695797027810,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_0f8002a2_404d_48c4_9369_57b0f3915fe9",
       "description": {
         "content": "Get the running processes on a given machine",
         "format": "text"
       },
-      "display_name": "ReaQta: Kill Process (PB)",
+      "display_name": "QRadar EDR: Kill Process (PB)",
       "export_key": "reaqta_kill_process",
       "field_type_handle": "playbook_0f8002a2_404d_48c4_9369_57b0f3915fe9",
       "fields_type": {
@@ -3569,27 +3568,27 @@
         "uuid": "cd35d107-fbf9-4103-a4e6-92b16a7c4689"
       },
       "has_logical_errors": false,
-      "id": 22,
+      "id": 28,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109246454,
+      "last_modified_time": 1695797596950,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109246168,
+          "created_date": 1695797027948,
           "description": "",
           "enabled": false,
           "export_key": "reaqta_kill_process_post_process",
-          "id": 15,
+          "id": 32,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109246183,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797027981,
           "name": "reaqta_kill_process_post_process",
           "object_type": "reaqta_process_list",
           "playbook_handle": "reaqta_kill_process",
@@ -3635,7 +3634,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_0f8002a2-404d-48c4-9369-57b0f3915fe9",
-        "id": 25,
+        "id": 28,
         "name": "playbook_0f8002a2_404d_48c4_9369_57b0f3915fe9",
         "type": "playbook",
         "uuid": "740b42a6-1d99-4b86-a5a1-2413253c29ea"
@@ -3643,27 +3642,27 @@
       "tags": [],
       "type": "default",
       "uuid": "0f8002a2-404d-48c4-9369-57b0f3915fe9",
-      "version": 4
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a1a5893b_6bad_49f2_bbed_67ee3cd6f1da\" isExecutable=\"true\" name=\"playbook_a1a5893b_6bad_49f2_bbed_67ee3cd6f1da\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1d734ho\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"ReaQta: Get Alert Information\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"13918f45-5268-41b0-8ff0-e6a6223ad302\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.reaqta_alert_id = incident.properties.reaqta_id\\ninputs.reaqta_hive = incident.properties.reaqta_hive\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"reaqta_refresh_alert_information_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1d734ho\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ea3tbe\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"reaqta_refresh_alert_information_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"939d87e7-c06f-424a-983f-2d85ac074f3a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0ea3tbe\u003c/incoming\u003e\u003coutgoing\u003eFlow_1lg9305\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1lg9305\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1d734ho\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0ea3tbe\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1lg9305\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a1a5893b_6bad_49f2_bbed_67ee3cd6f1da\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lg9305\" id=\"Flow_1lg9305_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"502\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"594\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ea3tbe\" id=\"Flow_0ea3tbe_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"418\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1d734ho\" id=\"Flow_1d734ho_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"418\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"594\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1692109246436,
+      "create_date": 1695797028451,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
       "deployment_id": "playbook_a1a5893b_6bad_49f2_bbed_67ee3cd6f1da",
       "description": {
         "content": "Refresh alert information and populate the custom fields and datatables",
         "format": "text"
       },
-      "display_name": "ReaQta: Refresh Alert Information (PB)",
+      "display_name": "QRadar EDR: Refresh Alert Information (PB)",
       "export_key": "reaqta_refresh_alert_information",
       "field_type_handle": "playbook_a1a5893b_6bad_49f2_bbed_67ee3cd6f1da",
       "fields_type": {
@@ -3691,27 +3690,27 @@
         "uuid": "f5d04011-cc51-4ff2-b6af-10d63a543f57"
       },
       "has_logical_errors": false,
-      "id": 23,
+      "id": 29,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1692109246738,
+      "last_modified_time": 1695797606018,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1692109246503,
+          "created_date": 1695797028595,
           "description": "",
           "enabled": false,
           "export_key": "reaqta_refresh_alert_information_post_process",
-          "id": 16,
+          "id": 33,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1692109246517,
+          "last_modified_by": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+          "last_modified_time": 1695797028628,
           "name": "reaqta_refresh_alert_information_post_process",
           "object_type": "incident",
           "playbook_handle": "reaqta_refresh_alert_information",
@@ -3733,7 +3732,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_a1a5893b-6bad-49f2-bbed-67ee3cd6f1da",
-        "id": 26,
+        "id": 29,
         "name": "playbook_a1a5893b_6bad_49f2_bbed_67ee3cd6f1da",
         "type": "playbook",
         "uuid": "eedb7717-ff18-4380-b4fc-c8e426a75c5f"
@@ -3741,17 +3740,17 @@
       "tags": [],
       "type": "default",
       "uuid": "a1a5893b-6bad-49f2-bbed-67ee3cd6f1da",
-      "version": 4
+      "version": 6
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 0,
+    "build_number": 8131,
     "major": 46,
     "minor": 0,
-    "version": "46.0.0"
+    "version": "46.0.8131"
   },
   "tags": [],
   "task_order": [],
@@ -3759,7 +3758,7 @@
   "types": [
     {
       "actions": [],
-      "display_name": "ReaQta Process List",
+      "display_name": "QRadar EDR Process List",
       "export_key": "reaqta_process_list",
       "fields": {
         "has_incident": {
@@ -3772,7 +3771,7 @@
           "deprecated": false,
           "export_key": "reaqta_process_list/has_incident",
           "hide_notification": false,
-          "id": 362,
+          "id": 688,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -3784,11 +3783,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Related to Alert",
           "tooltip": "",
-          "type_id": 1009,
+          "type_id": 1021,
           "uuid": "f94aa912-ab1e-4c53-8149-672be5cc546e",
           "values": [],
           "width": 70
@@ -3803,7 +3803,7 @@
           "deprecated": false,
           "export_key": "reaqta_process_list/pid",
           "hide_notification": false,
-          "id": 363,
+          "id": 689,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -3815,11 +3815,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "PID",
           "tooltip": "",
-          "type_id": 1009,
+          "type_id": 1021,
           "uuid": "69e512f0-cb2d-4cae-9793-f04c71b8959e",
           "values": [],
           "width": 29
@@ -3834,7 +3835,7 @@
           "deprecated": false,
           "export_key": "reaqta_process_list/privilege_level",
           "hide_notification": false,
-          "id": 364,
+          "id": 690,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3846,11 +3847,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Privilege Level",
           "tooltip": "",
-          "type_id": 1009,
+          "type_id": 1021,
           "uuid": "1f072df1-cd16-4f08-8d61-97c5ca4c4eda",
           "values": [],
           "width": 74
@@ -3865,7 +3867,7 @@
           "deprecated": false,
           "export_key": "reaqta_process_list/process_name",
           "hide_notification": false,
-          "id": 365,
+          "id": 691,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3877,11 +3879,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Program Name",
           "tooltip": "",
-          "type_id": 1009,
+          "type_id": 1021,
           "uuid": "84b0484d-6ac9-47c7-9f9b-4c51c0700a59",
           "values": [],
           "width": 68
@@ -3896,7 +3899,7 @@
           "deprecated": false,
           "export_key": "reaqta_process_list/process_path",
           "hide_notification": false,
-          "id": 366,
+          "id": 692,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3908,11 +3911,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Process Path",
           "tooltip": "",
-          "type_id": 1009,
+          "type_id": 1021,
           "uuid": "757fdae8-3496-4c86-9818-b93fcbcfc7dd",
           "values": [],
           "width": 66
@@ -3927,7 +3931,7 @@
           "deprecated": false,
           "export_key": "reaqta_process_list/report_date",
           "hide_notification": false,
-          "id": 367,
+          "id": 693,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -3939,11 +3943,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Report Date",
           "tooltip": "",
-          "type_id": 1009,
+          "type_id": 1021,
           "uuid": "060eb4ae-dbb1-410d-9a47-cdbdd4c8dde7",
           "values": [],
           "width": 67
@@ -3958,7 +3963,7 @@
           "deprecated": false,
           "export_key": "reaqta_process_list/start_time",
           "hide_notification": false,
-          "id": 368,
+          "id": 694,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -3970,11 +3975,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Start Time",
           "tooltip": "",
-          "type_id": 1009,
+          "type_id": 1021,
           "uuid": "9c2ba4f8-ba17-4f7c-afff-15be464a0dda",
           "values": [],
           "width": 45
@@ -3989,7 +3995,7 @@
           "deprecated": false,
           "export_key": "reaqta_process_list/status",
           "hide_notification": false,
-          "id": 369,
+          "id": 695,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4001,11 +4007,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Status",
           "tooltip": "",
-          "type_id": 1009,
+          "type_id": 1021,
           "uuid": "332e07f6-7ec3-46fe-b07a-60635b38c8be",
           "values": [],
           "width": 49
@@ -4020,7 +4027,7 @@
           "deprecated": false,
           "export_key": "reaqta_process_list/suspended",
           "hide_notification": false,
-          "id": 370,
+          "id": 696,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -4032,11 +4039,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Process Suspended",
           "tooltip": "",
-          "type_id": 1009,
+          "type_id": 1021,
           "uuid": "2f867983-970a-4035-8569-dd632738fe9c",
           "values": [],
           "width": 85
@@ -4051,7 +4059,7 @@
           "deprecated": false,
           "export_key": "reaqta_process_list/user",
           "hide_notification": false,
-          "id": 371,
+          "id": 697,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4063,11 +4071,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "User",
           "tooltip": "",
-          "type_id": 1009,
+          "type_id": 1021,
           "uuid": "3c6051f4-cf12-475a-a7c4-7e47b58aae98",
           "values": [],
           "width": 42
@@ -4094,7 +4103,7 @@
     },
     {
       "actions": [],
-      "display_name": "ReaQta Trigger Events",
+      "display_name": "QRadar EDR Trigger Events",
       "export_key": "reaqta_trigger_events",
       "fields": {
         "category": {
@@ -4107,7 +4116,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/category",
           "hide_notification": false,
-          "id": 372,
+          "id": 698,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4119,11 +4128,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Category",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "a1582531-a236-4b08-a1c9-2c2c840f741a",
           "values": [],
           "width": 93
@@ -4138,7 +4148,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/happened_at",
           "hide_notification": false,
-          "id": 373,
+          "id": 699,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -4150,11 +4160,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Happened At",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "3b2b8e17-dbbe-4b45-920f-a601f5ebf84a",
           "values": [],
           "width": 114
@@ -4169,7 +4180,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/policy_match",
           "hide_notification": false,
-          "id": 374,
+          "id": 700,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4181,11 +4192,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Policy Match",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "f19a95d7-6171-4ccf-a1b0-7178e6cc948d",
           "values": [],
           "width": 46
@@ -4200,7 +4212,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/process_pid",
           "hide_notification": false,
-          "id": 375,
+          "id": 701,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -4212,11 +4224,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "PID",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "13d11555-26cc-4511-b329-d8aaa7af46fc",
           "values": [],
           "width": 111
@@ -4231,7 +4244,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/program_path",
           "hide_notification": false,
-          "id": 376,
+          "id": 702,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4243,11 +4256,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Program Path",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "2c662898-94ae-4ddd-8f85-bf6a106c5b42",
           "values": [],
           "width": 130
@@ -4262,7 +4276,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/relevance",
           "hide_notification": false,
-          "id": 377,
+          "id": 703,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -4274,11 +4288,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Relevance",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "9a7db901-6331-4229-a087-510456f8b707",
           "values": [],
           "width": 90
@@ -4293,7 +4308,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/severity",
           "hide_notification": false,
-          "id": 378,
+          "id": 704,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4305,11 +4320,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Severity",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "42ba61a7-6374-464f-980d-646bd691498b",
           "values": [],
           "width": 93
@@ -4324,7 +4340,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/sha256_hash",
           "hide_notification": false,
-          "id": 379,
+          "id": 705,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4336,11 +4352,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "SHA256 Hash",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "358fda9a-86eb-4bac-b8e5-836b75bf505b",
           "values": [],
           "width": 62
@@ -4355,7 +4372,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/windows_event_account",
           "hide_notification": false,
-          "id": 380,
+          "id": 706,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4367,11 +4384,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Windows Event Account",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "539528fc-5872-45fb-8e90-e6ae1d79b31b",
           "values": [],
           "width": 70
@@ -4386,7 +4404,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/windows_event_description",
           "hide_notification": false,
-          "id": 381,
+          "id": 707,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4398,11 +4416,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Windows Event Description",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "6467231f-af25-489d-a229-74269b2c3699",
           "values": [],
           "width": 88
@@ -4417,7 +4436,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/windows_event_ipport",
           "hide_notification": false,
-          "id": 382,
+          "id": 708,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4429,11 +4448,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Windows Event IP/Port",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "6d32324a-fdf7-4390-8325-012b43a7a2f1",
           "values": [],
           "width": 70
@@ -4448,7 +4468,7 @@
           "deprecated": false,
           "export_key": "reaqta_trigger_events/windows_event_workstation",
           "hide_notification": false,
-          "id": 383,
+          "id": 709,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4460,11 +4480,12 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Windows Event Workstation",
           "tooltip": "",
-          "type_id": 1010,
+          "type_id": 1022,
           "uuid": "9cad1857-f542-477f-b9db-b41969a458a0",
           "values": [],
           "width": 93
