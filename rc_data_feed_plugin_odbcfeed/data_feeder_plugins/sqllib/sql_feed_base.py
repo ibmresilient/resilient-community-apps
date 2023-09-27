@@ -6,12 +6,21 @@ import abc
 import logging
 
 from cachetools import cached, LRUCache
+from retry import retry
 from rc_data_feed.lib.feed import FeedDestinationBase
 from rc_data_feed.lib.type_info import TypeInfo
 from .sql_dialect import PostgreSQL96Dialect, SqliteDialect, MySqlDialect, SqlServerDialect, OracleDialect
 
 LOG = logging.getLogger(__name__)
 PYODBC_CONNECTION_LOST = ('08001', '08S01', '08003', 'HY000') # 08S01 = connection lost, 08003 = Connection not open, HY000 - catch all error
+
+class RetrySendDataException(Exception):
+    """Class used to signal a retry of an operation to ensure transactional completeness
+
+    :param Exception:
+    :type Exception:
+    """
+    pass
 
 class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-public-methods
     """
@@ -174,6 +183,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                 LOG.error(ddl)
                 raise db_exception
 
+    @retry(RetrySendDataException, tries=3, delay=5, backoff=5, logger=LOG)
     def send_data(self, context, payload):
         # We'll use the type's name as the table name.
         #
@@ -269,6 +279,8 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                     LOG.warning("ODBC Connection lost, reestablishing connection")
                     # try reestablishing the connection
                     self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
+                    # trigger a restart of this operation
+                    raise RetrySendDataException
                 else:
                     try:
                         if cursor:
@@ -276,6 +288,6 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         raise err
                     except Exception:
                         pass # nosec
-
-        if cursor:
-            cursor.close()
+            finally:
+                if cursor:
+                    cursor.close()
