@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1695733433129,
+  "export_date": 1695844998088,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -618,13 +618,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 121,
+  "id": 123,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1695733431131,
+      "create_date": 1695844996389,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -633,7 +633,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1695733431131,
+      "update_date": 1695844996389,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -662,7 +662,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b22b8944_4384_409a_8692_d92a9afbba72\" isExecutable=\"true\" name=\"playbook_b22b8944_4384_409a_8692_d92a9afbba72\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1hvjfbc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_052t9qz\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Cisco ASA Add Artifact to Network Object Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{\"6e5a3cb6-18fe-4dae-9b87-a8c5d889b070\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"737cf112-4adc-4e54-b7a1-a5d696340dcc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ed9ad5be-b3c3-4105-926d-57c63228a592\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2f25706e-1951-4911-b198-11fb4c73c973\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"81b3ce67-7d3a-4c7d-9024-3959fefdf49f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0231aa2a-1167-4eb8-95a6-8c77ec5da5a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9f3b3e08-6648-4f28-ab82-a4fadf68c91d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c78dedd5-1780-40fd-8561-5246ed6dbf32\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"95639c4a-a104-4598-abba-6b1438432ba6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2c351503-8d83-440c-8d7d-6c1de9550c93\"}}},\"pre_processing_script\":\"# Parse the firewall name and network object group from the colon separated string\\nfirewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\\n# Get input from the artifact type and value\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\\n\\n# Optional network object description and object name\\nif playbook.inputs.cisco_asa_network_object_description:\\n  inputs.cisco_asa_network_object_description = playbook.inputs.cisco_asa_network_object_description\\n  \\nif playbook.inputs.cisco_asa_network_object_name:\\n  inputs.cisco_asa_network_object_name = playbook.inputs.cisco_asa_network_object_name\\n\\nif playbook.inputs.cisco_asa_ipv4_netmask:\\n  inputs.cisco_asa_netmask = playbook.inputs.cisco_asa_ipv4_netmask\\n\\n  \",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1hvjfbc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1baxhfp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1hvjfbc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Cisco ASA: Write Artifact to Network Object data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9ee6bbf2-bf9e-4e80-a86b-1a651c6dd36c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1baxhfp\u003c/incoming\u003e\u003coutgoing\u003eFlow_052t9qz\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1baxhfp\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_052t9qz\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b22b8944_4384_409a_8692_d92a9afbba72\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_052t9qz\" id=\"Flow_052t9qz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1baxhfp\" id=\"Flow_1baxhfp_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hvjfbc\" id=\"Flow_1hvjfbc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434.3000030517578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178.3000030517578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308.3000030517578\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1695658187652,
@@ -731,6 +731,24 @@
                 "properties": null,
                 "uuid": "0a911ef5-6545-4d4c-9137-5d33adc02582",
                 "value": 209
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:ALLOWLIST_IN",
+                "properties": null,
+                "uuid": "81ae14e2-1fe5-41ed-8772-bce988587acf",
+                "value": 242
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:ALLOWLIST_OUT",
+                "properties": null,
+                "uuid": "6fab4ec0-4794-4fd5-a074-e9e5996fa8da",
+                "value": 243
               }
             ]
           },
@@ -961,7 +979,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1695658188532,
+      "last_modified_time": 1695844775329,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -1031,12 +1049,12 @@
       "tags": [],
       "type": "default",
       "uuid": "b22b8944-4384-409a-8692-d92a9afbba72",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6\" isExecutable=\"true\" name=\"playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1wezt00\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ltyq12\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Cisco ASA Add Artifact to Network Object Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{\"6e5a3cb6-18fe-4dae-9b87-a8c5d889b070\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"737cf112-4adc-4e54-b7a1-a5d696340dcc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ed9ad5be-b3c3-4105-926d-57c63228a592\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2f25706e-1951-4911-b198-11fb4c73c973\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"81b3ce67-7d3a-4c7d-9024-3959fefdf49f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0231aa2a-1167-4eb8-95a6-8c77ec5da5a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9f3b3e08-6648-4f28-ab82-a4fadf68c91d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c78dedd5-1780-40fd-8561-5246ed6dbf32\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"95639c4a-a104-4598-abba-6b1438432ba6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2c351503-8d83-440c-8d7d-6c1de9550c93\"}}},\"pre_processing_script\":\"# Parse the firewall name and network object group from the colon separated string\\nfirewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\\n# Get input from the artifact type and value\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\\ninputs.cisco_asa_network_object_name = playbook.inputs.cisco_asa_network_object_name\\n\\n# Optional network object description\\nif playbook.inputs.cisco_asa_network_object_description:\\n  inputs.cisco_asa_network_object_description = playbook.inputs.cisco_asa_network_object_description\\n\\n# FQDN version\\ninputs.cisco_asa_fqdn_ip_version = playbook.inputs.cisco_asa_fqdn_ip_version\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wezt00\u003c/incoming\u003e\u003coutgoing\u003eFlow_0mfth9l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1wezt00\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0mfth9l\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Cisco ASA: Write Artifact to Network Object data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9ee6bbf2-bf9e-4e80-a86b-1a651c6dd36c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mfth9l\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ltyq12\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0ltyq12\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ba5b49b4_e9fb_4203_b0dc_e039a2150eb6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ltyq12\" id=\"Flow_0ltyq12_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mfth9l\" id=\"Flow_0mfth9l_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wezt00\" id=\"Flow_1wezt00_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"308.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1695658188495,
@@ -1105,6 +1123,24 @@
                 "properties": null,
                 "uuid": "355d6b41-f692-4b9b-bcc9-51c2b3bdcde7",
                 "value": 223
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:ALLOWLIST_IN",
+                "properties": null,
+                "uuid": "824fcdbf-271d-44fb-84c0-1a109492a8f9",
+                "value": 236
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:ALLOWLIST_OUT",
+                "properties": null,
+                "uuid": "61bf89cb-7966-44f4-82a2-87307a4bc4f4",
+                "value": 237
               }
             ]
           },
@@ -1245,7 +1281,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1695658189370,
+      "last_modified_time": 1695844694044,
       "local_scripts": [
         {
           "actions": [],
@@ -1327,12 +1363,12 @@
       "tags": [],
       "type": "default",
       "uuid": "ba5b49b4-e9fb-4203-b0dc-e039a2150eb6",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ea888208_7601_4257_a499_489f49aa0a4b\" isExecutable=\"true\" name=\"playbook_ea888208_7601_4257_a499_489f49aa0a4b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1vrthep\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Cisco ASA Add Artifact to Network Object Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{\"6e5a3cb6-18fe-4dae-9b87-a8c5d889b070\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"737cf112-4adc-4e54-b7a1-a5d696340dcc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ed9ad5be-b3c3-4105-926d-57c63228a592\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2f25706e-1951-4911-b198-11fb4c73c973\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"81b3ce67-7d3a-4c7d-9024-3959fefdf49f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0231aa2a-1167-4eb8-95a6-8c77ec5da5a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9f3b3e08-6648-4f28-ab82-a4fadf68c91d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c78dedd5-1780-40fd-8561-5246ed6dbf32\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"95639c4a-a104-4598-abba-6b1438432ba6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2c351503-8d83-440c-8d7d-6c1de9550c93\"}}},\"pre_processing_script\":\"# Parse the firewall name and network object group from the colon separated string\\nfirewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\\n# Get input from the artifact type and value\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\\n\\n# Optional network object description\\nif playbook.inputs.cisco_asa_network_object_description:\\n  inputs.cisco_asa_network_object_description = playbook.inputs.cisco_asa_network_object_description\\n  \\nif playbook.inputs.cisco_asa_network_object_name:\\n  inputs.cisco_asa_network_object_name = playbook.inputs.cisco_asa_network_object_name\\n  \",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1vrthep\u003c/incoming\u003e\u003coutgoing\u003eFlow_1oa2pl5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1vrthep\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0bh3tr3\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Cisco ASA: Write Artifact to Network Object data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9ee6bbf2-bf9e-4e80-a86b-1a651c6dd36c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1oa2pl5\u003c/incoming\u003e\u003coutgoing\u003eFlow_0bh3tr3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1oa2pl5\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0bh3tr3\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ea888208_7601_4257_a499_489f49aa0a4b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0bh3tr3\" id=\"Flow_0bh3tr3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1oa2pl5\" id=\"Flow_1oa2pl5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vrthep\" id=\"Flow_1vrthep_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"444.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1695658189337,
@@ -1401,6 +1437,24 @@
                 "properties": null,
                 "uuid": "0dc286bb-77b8-4cb1-a68b-a4aaa5dcac05",
                 "value": 227
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:ALLOWLIST_IN",
+                "properties": null,
+                "uuid": "8ea0fffb-a790-4adb-aa9e-8383c4d4bf72",
+                "value": 238
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:ALLOWLIST_OUT",
+                "properties": null,
+                "uuid": "83566c44-13dd-4167-9040-119546409fe2",
+                "value": 239
               }
             ]
           },
@@ -1492,7 +1546,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1695658190114,
+      "last_modified_time": 1695844720896,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -1554,12 +1608,12 @@
       "tags": [],
       "type": "default",
       "uuid": "ea888208-7601-4257-a499-489f49aa0a4b",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2\" isExecutable=\"true\" name=\"playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_177645j\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_1\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0xgi9jg\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Cisco ASA Add Artifact to Network Object Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{\"6e5a3cb6-18fe-4dae-9b87-a8c5d889b070\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"737cf112-4adc-4e54-b7a1-a5d696340dcc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ed9ad5be-b3c3-4105-926d-57c63228a592\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2f25706e-1951-4911-b198-11fb4c73c973\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"81b3ce67-7d3a-4c7d-9024-3959fefdf49f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0231aa2a-1167-4eb8-95a6-8c77ec5da5a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9f3b3e08-6648-4f28-ab82-a4fadf68c91d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c78dedd5-1780-40fd-8561-5246ed6dbf32\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"95639c4a-a104-4598-abba-6b1438432ba6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2c351503-8d83-440c-8d7d-6c1de9550c93\"}}},\"pre_processing_script\":\"# Parse the firewall name and network object group from the colon separated string\\nfirewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\\n# Get input from the artifact type and value\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\\n\\n# Optional network object description\\nif playbook.inputs.cisco_asa_network_object_description:\\n  inputs.cisco_asa_network_object_description = playbook.inputs.cisco_asa_network_object_description\\n  \\nif playbook.inputs.cisco_asa_network_object_name:\\n  inputs.cisco_asa_network_object_name = playbook.inputs.cisco_asa_network_object_name\\n\\n# Option params for IP netmask or end IP for IP range\\nif playbook.inputs.cisco_asa_end_range:\\n  inputs.cisco_asa_end_range = playbook.inputs.cisco_asa_end_range\\n  \",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_177645j\u003c/incoming\u003e\u003coutgoing\u003eFlow_1l1uhqy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_177645j\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Cisco ASA: Write Artifact to Network Object data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9ee6bbf2-bf9e-4e80-a86b-1a651c6dd36c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1l1uhqy\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xgi9jg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1l1uhqy\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0xgi9jg\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3a521756_192b_425d_b0f9_c1e3f3c8ecd2\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xgi9jg\" id=\"Flow_0xgi9jg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1l1uhqy\" id=\"Flow_1l1uhqy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_177645j\" id=\"Flow_177645j_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_1\" id=\"EndPoint_1_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1695658190082,
@@ -1658,6 +1712,24 @@
                 "properties": null,
                 "uuid": "3635eaa9-8cc8-42d1-848b-ec71c9df46aa",
                 "value": 229
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:ALLOWLIST_IN",
+                "properties": null,
+                "uuid": "943db830-c032-4071-a370-dec8cf2e117f",
+                "value": 240
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:ALLOWLIST_OUT",
+                "properties": null,
+                "uuid": "23b91a72-5f2b-46f3-bce0-046eda9d8fed",
+                "value": 241
               }
             ]
           },
@@ -1750,7 +1822,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1695658190885,
+      "last_modified_time": 1695844745938,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -1820,7 +1892,7 @@
       "tags": [],
       "type": "default",
       "uuid": "3a521756-192b-425d-b0f9-c1e3f3c8ecd2",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
