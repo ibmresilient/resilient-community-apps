@@ -1155,39 +1155,6 @@ def mock_init():
             """ Mock List jobs by automation account results """
             return list_jobs_by_automation_account_results()
 
-        def stop_job(self, job_name):
-            """ Mock stop job results """
-            class MockStopJob(object):
-                status_code = 200
-                text = ""
-                def __init__(self):
-                    """ Mock """
-                    pass
-
-            return MockStopJob()
-
-        def resume_job(self, job_name):
-            """ Mock resume job results """
-            class MockResumeJob(object):
-                status_code = 200
-                text = ""
-                def __init__(self):
-                    """ Mock """
-                    pass
-
-            return MockResumeJob()
-
-        def suspend_job(self, job_name):
-            """ Mock suspend job results """
-            class MockSuspendJob(object):
-                status_code = 200
-                text = ""
-                def __init__(self):
-                    """ Mock """
-                    pass
-
-            return MockSuspendJob()
-
         def get_agent_registration_information(self):
             """ Mock get agent registration information results """
             return get_agent_registration_information_results()

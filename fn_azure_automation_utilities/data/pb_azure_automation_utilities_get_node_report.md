@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: Get Node Report - Example (PB)
+# Playbook - Azure Automation: Node Get Report - Example (PB)
 
 ### API Name
 `azure_automation_utilities_get_node_report`

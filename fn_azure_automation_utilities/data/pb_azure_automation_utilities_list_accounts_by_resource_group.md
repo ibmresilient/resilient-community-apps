@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: List Accounts by Resource Group - Example (PB)
+# Playbook - Azure Automation: Accounts List by Resource Group - Example (PB)
 
 ### API Name
 `azure_automation_utilities_list_accounts_by_resource_group`

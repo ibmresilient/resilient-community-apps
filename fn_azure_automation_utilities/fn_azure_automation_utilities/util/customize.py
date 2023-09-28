@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
 # Generated with resilient-sdk v50.0.151
 
 """Generate the Resilient customizations required for fn_azure_automation_utilities"""
@@ -54,9 +54,6 @@ def codegen_reload_data():
             u"azure_list_statistics_by_automation_account",
             u"azure_list_usage_by_automation_account",
             u"azure_regenerate_agent_registration_key",
-            u"azure_resume_job",
-            u"azure_stop_job",
-            u"azure_suspend_job",
             u"azure_update_account",
             u"azure_update_credential",
             u"azure_update_schedule"
@@ -98,9 +95,6 @@ def codegen_reload_data():
             u"azure_automation_utilities_list_statistics_by_automation_account",
             u"azure_automation_utilities_list_usage_by_automation_account",
             u"azure_automation_utilities_regenerate_agent_registration_key",
-            u"azure_automation_utilities_resume_job",
-            u"azure_automation_utilities_stop_job",
-            u"azure_automation_utilities_suspend_job",
             u"azure_automation_utilities_update_account",
             u"azure_automation_utilities_update_credential",
             u"azure_automation_utilities_update_schedule"
@@ -147,9 +141,6 @@ def customization_data(client=None):
         - azure_list_statistics_by_automation_account
         - azure_list_usage_by_automation_account
         - azure_regenerate_agent_registration_key
-        - azure_resume_job
-        - azure_stop_job
-        - azure_suspend_job
         - azure_update_account
         - azure_update_credential
         - azure_update_schedule
@@ -182,9 +173,6 @@ def customization_data(client=None):
         - azure_automation_utilities_list_statistics_by_automation_account
         - azure_automation_utilities_list_usage_by_automation_account
         - azure_automation_utilities_regenerate_agent_registration_key
-        - azure_automation_utilities_resume_job
-        - azure_automation_utilities_stop_job
-        - azure_automation_utilities_suspend_job
         - azure_automation_utilities_update_account
         - azure_automation_utilities_update_credential
         - azure_automation_utilities_update_schedule

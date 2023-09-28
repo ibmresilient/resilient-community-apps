@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: Get Module Activity - Example (PB)
+# Playbook - Azure Automation: Module Get Activity - Example (PB)
 
 ### API Name
 `azure_automation_utilities_get_module_activity`
@@ -22,9 +22,9 @@
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account name | `azure_automation_account_name` | text | The Azure automation account name | Always |
-| Activity Name | `azure_automation_activity_name` | text | The Azure automation module activity name | Always |
+| Activity Name | `azure_automation_activity_name` | text | The Azure automaion module activity name | Always |
 | Module Name | `azure_automation_module_name` | text | The Azure automation module name | Always |
-| Resource Group name | `azure_automation_resource_group_name` | text | The Azure automation resource group name | Always |
+| Resouce Group name | `azure_automation_resource_group_name` | text | The Azure automation resource group name | Always |
 
 ### Object Type
 `incident`

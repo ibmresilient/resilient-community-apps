@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: Create Credential - Example (PB)
+# Playbook - Azure Automation: Credential Create - Example (PB)
 
 ### API Name
 `azure_automation_utilities_create_credential`

@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: Execute Runbook - Example (PB)
+# Playbook - Azure Automation: Runbook Execute - Example (PB)
 
 ### API Name
 `azure_automation_utilities_execute_runbook`

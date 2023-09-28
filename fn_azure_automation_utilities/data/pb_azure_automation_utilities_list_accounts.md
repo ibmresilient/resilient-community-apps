@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: List Accounts - Example (PB)
+# Playbook - Azure Automation: Accounts List - Example (PB)
 
 ### API Name
 `azure_automation_utilities_list_accounts`

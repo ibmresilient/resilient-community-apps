@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: Delete Schedule - Example (PB)
+# Playbook - Azure Automation: Schedule Delete - Example (PB)
 
 ### API Name
 `azure_automation_utilities_delete_schedule`
@@ -23,7 +23,7 @@
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
-| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
+| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automatio schedule | Always |
 
 ### Object Type
 `incident`

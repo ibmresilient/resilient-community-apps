@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: Get Agent Registration Information - Example (PB)
+# Playbook - Azure Automation: Agent Registration Get Information - Example (PB)
 
 ### API Name
 `azure_automation_utilities_get_agent_registration_information`

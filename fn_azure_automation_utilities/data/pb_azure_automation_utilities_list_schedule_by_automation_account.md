@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: List Schedule by Automation Account - Example (PB)
+# Playbook - Azure Automation: Schedule List by Automation Account - Example (PB)
 
 ### API Name
 `azure_automation_utilities_list_schedule_by_automation_account`

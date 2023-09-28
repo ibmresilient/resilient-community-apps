@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: Update Schedule - Example (PB)
+# Playbook - Azure Automation: Schedule Update - Example (PB)
 
 ### API Name
 `azure_automation_utilities_update_schedule`
@@ -25,7 +25,7 @@
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
 | Schedule description | `azure_automation_schedule_description` | text | Description of the schedule | Optional |
 | Schedule Enabled | `azure_automation_schedule_enabled` | boolean | a value indicating whether this schedule is enabled. | Optional |
-| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
+| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automatio schedule | Always |
 
 ### Object Type
 `incident`

@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: Regenerate Agent Registration Key - Example (PB)
+# Playbook - Azure Automation: Agent Registration Regenerate Key - Example (PB)
 
 ### API Name
 `azure_automation_utilities_regenerate_agent_registration_key`

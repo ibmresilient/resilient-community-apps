@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - Azure Automation Utilities: Update Account - Example (PB)
+# Playbook - Azure Automation: Account Update - Example (PB)
 
 ### API Name
 `azure_automation_utilities_update_account`
