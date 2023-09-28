@@ -66,7 +66,7 @@
 
 
 ## Release Notes
-### 1.2.1
+### 1.3.0
 In v1.3.0, since Reaqta has been renamed to QRadar EDR, all the labels of functions and playbooks are renamed to refect the product name change.
 
 ### 1.2.0 <!-- omit in toc -->
