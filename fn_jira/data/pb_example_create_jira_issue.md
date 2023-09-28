@@ -96,6 +96,7 @@ if create_result.get("success"):
   incident.properties.jira_issue_status = "To Do"
   # This is needed for the poller to pick up this incident
   incident.properties.jira_linked_to_incident = True
+  incident.properties.jira_issue_type = results_content.get("issue", {}).get("fields", {}).get("issuetype", {}).get("name")
 ```
 
 ---

@@ -116,6 +116,7 @@ if create_result.get("success"):
   row['status'] = 'Open'
   row['server'] = playbook.inputs.jira_label
   row['last_updated'] = time_now
+  row['issue_type'] = results_content.get("issue", {}).get("fields", {}).get("issuetype", {}).get("name")
 ```
 
 ---

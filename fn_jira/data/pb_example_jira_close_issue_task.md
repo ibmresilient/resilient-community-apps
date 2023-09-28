@@ -47,7 +47,7 @@ inputs.jira_transition_id = "Done"
 inputs.jira_comment = "Closed in IBM SOAR\n\nResolution: Done\n"
 
 # Define JIRA fields here
-# inputs.jira_fields = dumps({"customfield_10041":{"value":"Resolved"}})
+inputs.jira_fields = dumps({"customfield_10041":{"value":"Resolved"}})
 ```
 
 ---
