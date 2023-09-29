@@ -8,8 +8,9 @@ from fn_jira.util.helper import (PACKAGE_NAME,
                                  get_server_settings, to_markdown)
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function)
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, IntegrationError
 from fn_jira.lib.app_common import AppCommon
+from jira.exceptions import JIRAError
 
 FN_NAME = "jira_transition_issue"
 
@@ -44,16 +45,28 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["jira_issue_id", "jira_transition_id"], fn_inputs)
         self.LOG.info(f"Validated function inputs: {fn_inputs._asdict()}")
 
-        jira_fields = loads(getattr(fn_inputs, "jira_fields", None))
+        jira_fields = loads(getattr(fn_inputs, "jira_fields", "{}"))
         jira_comment = to_markdown(getattr(fn_inputs, "jira_comment", None))
         jira_issue_id = fn_inputs.jira_issue_id
         jira_transition_id = fn_inputs.jira_transition_id
 
         yield self.status_message(f"Transition issue {jira_issue_id} to '{jira_transition_id}'")
 
-        jira_client.transition_issue(issue=jira_issue_id, transition=jira_transition_id)
-
-        jira_client.issue(jira_issue_id).update(comment=jira_comment, fields=jira_fields)
+        try:
+            # Transition Jira issue and update fields
+            jira_client.transition_issue(issue=jira_issue_id, transition=jira_transition_id, fields=jira_fields)
+            # Add comment to Jira issue
+            jira_client.issue(jira_issue_id).update(comment=jira_comment)
+        except JIRAError as err:
+            if err.status_code == 400 or "Invalid transition name." in err.text:
+                # Update fields of the Jira issue
+                jira_client.issue(jira_issue_id).update(comment=jira_comment, fields=jira_fields)
+                # Transition Jira Issue
+                jira_client.transition_issue(issue=jira_issue_id, transition=jira_transition_id)
+            else:
+                raise IntegrationError(str(err))
+        except Exception as er:
+            raise IntegrationError(str(er))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
