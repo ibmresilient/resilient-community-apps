@@ -47,10 +47,10 @@ Create a Jira issue from the SOAR incident
 ### Function-Input Script
 ```python
 from json import dumps
-if playbook.inputs.jira_label:
+if getattr(playbook.inputs, "jira_label"):
   inputs.jira_label = playbook.inputs.jira_label
-else:
-  inputs.jira_label = incident.properties.jira_label
+elif incident.properties.jira_server:
+  inputs.jira_label = incident.properties.jira_server
 
 # ID of this incident
 inputs.incident_id = incident.id
@@ -91,7 +91,7 @@ if create_result.get("success"):
   incident.properties.jira_url = "<a href='{}' target='blank'>{}</a>".format(results_content.get("issue_url"), issue_key)
   incident.properties.jira_internal_url = results_content.get("issue_url_internal")
   incident.properties.jira_issue_id = issue_key
-  incident.properties.jira_server = playbook.inputs.jira_label
+  incident.properties.jira_server = getattr(playbook.inputs, "jira_label")
   incident.properties.jira_project_key = issue_key[:issue_key.index("-")]
   incident.properties.jira_issue_status = "To Do"
   # This is needed for the poller to pick up this incident

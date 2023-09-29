@@ -49,7 +49,10 @@ Create a Jira issue from a SOAR task
 # Example: Jira Open Issue [Task] pre-processing script
 from json import dumps
 
-inputs.jira_label = playbook.inputs.jira_label
+if getattr(playbook.inputs, "jira_label"):
+  inputs.jira_label = playbook.inputs.jira_label
+elif incident.properties.jira_server:
+  inputs.jira_label = incident.properties.jira_server
 
 # ID of this incident
 inputs.incident_id = incident.id
