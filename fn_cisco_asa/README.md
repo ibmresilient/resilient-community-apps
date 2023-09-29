@@ -77,7 +77,7 @@ If upgrading from a previous release, notice that the previous release's rules/w
 
 You can continue to use the rules/workflows, but migrating to playbooks provides greater functionality along with future app enhancements and bug fixes. 
 
-Starting with the 1.2.0 release, the Cisco ASA app no longer loads the Cisco ASA Firewall Network Object Group select field values at app startup.  You must edit the playbook activation form for playbooks that have use a select list for Firewall Network Object Group pairing input selection.  
+Starting with the 1.2.0 release, the Cisco ASA app no longer loads the Cisco ASA Firewall Network Object Group select field values at app startup and the **network_object_groups** parameter is removed from the app.config file.  You must edit the playbook activation form for playbooks that use a select list for Firewall / Network Object Group pairing input selection.  
 See section [Add Firewall Network Object Group pairs to Activation form ](#add-firewall-network-object-group-pairs-to-activation-form) for more detail.
 ## Overview
 <!--
@@ -117,7 +117,7 @@ Key capabilities include the following:
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
 * SOAR platform >= `46.0.8131`.
@@ -199,7 +199,6 @@ The following table provides the settings you need to configure the app. These s
 | **host** | Yes | `<asa_ip>` | *IP Address of the Cisco ASA firewall.* |
 | **username** | No | `<asa_username>` | *Username of the Cisco ASA firewall* |
 | **password** | No | `<asa_password>` | *Password of the Cisco ASA firewall.* |
-| **network_object_groups** | Yes | `BLOCKLIST_IN, BLOCKLIST_OUT` | *Comma separated list of the Cisco ASA network object groups.* |
 | **cafile** | No | - | *Path to certificate file.* |
 
 ### Custom Layouts
@@ -250,6 +249,8 @@ To add your firewall and network object group select values make a copy of the p
 
 ## Function - Cisco ASA Add Artifact to Network Object Group
 Add an artifact to a Cisco ASA network object group.
+
+NOTE: Objects must have unique names that are limited to 64 characters, including letters and numbers. Space and these special characters: .!@#$%^&()-_{} are NOT permitted.  Object names are case-sensitive.
 
  ![screenshot: fn-cisco-asa-add-artifact-to-network-object-group ](./doc/screenshots/fn-cisco-asa-add-artifact-to-network-object-group.png)
 

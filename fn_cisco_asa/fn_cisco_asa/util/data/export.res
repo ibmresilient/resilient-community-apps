@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1695844998088,
+  "export_date": 1695995710811,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -618,13 +618,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 123,
+  "id": 126,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1695844996389,
+      "create_date": 1695995708964,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -633,7 +633,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1695844996389,
+      "update_date": 1695995708964,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1897,7 +1897,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25\" isExecutable=\"true\" name=\"playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1rkfpxx\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Cisco ASA Add Artifact to Network Object Group\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"95186e9d-4ebe-438e-aa4a-6f03d1a75055\"\u003e{\"inputs\":{\"6e5a3cb6-18fe-4dae-9b87-a8c5d889b070\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"737cf112-4adc-4e54-b7a1-a5d696340dcc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ed9ad5be-b3c3-4105-926d-57c63228a592\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2f25706e-1951-4911-b198-11fb4c73c973\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"81b3ce67-7d3a-4c7d-9024-3959fefdf49f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"0231aa2a-1167-4eb8-95a6-8c77ec5da5a6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9f3b3e08-6648-4f28-ab82-a4fadf68c91d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c78dedd5-1780-40fd-8561-5246ed6dbf32\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"95639c4a-a104-4598-abba-6b1438432ba6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"2c351503-8d83-440c-8d7d-6c1de9550c93\"}}},\"pre_processing_script\":\"# Parse the firewall name and network object group from the colon separated string\\nfirewall_group_pair = playbook.inputs.cisco_asa_firewall_network_object_group\\n\\n# Parse the firewall group pair, which is a string in \\\"firewall:network_object_group\\\" format\\nfirewall_group_pair_list = firewall_group_pair.split(\\\":\\\")\\ninputs.cisco_asa_firewall = firewall_group_pair_list[0]\\ninputs.cisco_asa_network_object_group = firewall_group_pair_list[1]\\n\\n# Get input from the artifact type and value\\ninputs.cisco_asa_network_object_value = artifact.value\\ninputs.cisco_asa_artifact_type = artifact.type\\n\\n# Optional network object description and object name\\nif playbook.inputs.cisco_asa_network_object_description:\\n  inputs.cisco_asa_network_object_description = playbook.inputs.cisco_asa_network_object_description\\n  \\nif playbook.inputs.cisco_asa_network_object_name:\\n  inputs.cisco_asa_network_object_name = playbook.inputs.cisco_asa_network_object_name\\n\\nif playbook.inputs.cisco_asa_ipv6_prefix_length:\\n  inputs.cisco_asa_netmask = playbook.inputs.cisco_asa_ipv6_prefix_length\\n\\n  \",\"pre_processing_script_language\":\"python3\",\"result_name\":\"add_artifact_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1rkfpxx\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ba70o0\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1rkfpxx\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Cisco ASA: Write Artifact to Network Object data table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9ee6bbf2-bf9e-4e80-a86b-1a651c6dd36c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ba70o0\u003c/incoming\u003e\u003coutgoing\u003eFlow_0v5ownu\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ba70o0\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0v5ownu\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0v5ownu\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f2bfe21e_5b8b_4663_b59a_dcde43a92c25\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0v5ownu\" id=\"Flow_0v5ownu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ba70o0\" id=\"Flow_1ba70o0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rkfpxx\" id=\"Flow_1rkfpxx_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188.35000610351562\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"338.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494.3500061035156\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1695658190850,
@@ -1966,6 +1966,24 @@
                 "properties": null,
                 "uuid": "f51c45e2-ae51-4f76-bf34-fa3452b4f101",
                 "value": 231
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:ALLOWLIST_IN",
+                "properties": null,
+                "uuid": "24d55e63-d233-43a9-a768-903bdd7abfdc",
+                "value": 244
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "firewall_1:ALLOWLIST_OUT",
+                "properties": null,
+                "uuid": "721ab4a0-c77e-4db4-8cd2-8f3e53bd1152",
+                "value": 245
               }
             ]
           },
@@ -2087,7 +2105,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1695658191662,
+      "last_modified_time": 1695927990273,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -2150,7 +2168,7 @@
       "tags": [],
       "type": "default",
       "uuid": "f2bfe21e-5b8b-4663-b59a-dcde43a92c25",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
