@@ -117,7 +117,7 @@ Key capabilities include the following:
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
 * SOAR platform >= `46.0.8131`.
