@@ -1,0 +1,59 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
+    "id": "3cde21c1-7e9c-4f6d-b986-06d879c43dad",
+    "deletedDateTime": null,
+    "classification": null,
+    "createdDateTime": "2023-05-15T18:13:38Z",
+    "creationOptions": [],
+    "description": "test1",
+    "displayName": "test1",
+    "expirationDateTime": null,
+    "groupTypes": [
+      "Unified"
+    ],
+    "isAssignableToRole": null,
+    "mail": "test1@swivrllc.onmicrosoft.com",
+    "mailEnabled": true,
+    "mailNickname": "test1",
+    "membershipRule": null,
+    "membershipRuleProcessingState": null,
+    "onPremisesDomainName": null,
+    "onPremisesLastSyncDateTime": null,
+    "onPremisesNetBiosName": null,
+    "onPremisesSamAccountName": null,
+    "onPremisesSecurityIdentifier": null,
+    "onPremisesSyncEnabled": null,
+    "preferredDataLocation": null,
+    "preferredLanguage": null,
+    "proxyAddresses": [
+      "SMTP:test1@swivrllc.onmicrosoft.com"
+    ],
+    "renewedDateTime": "2023-05-15T18:13:38Z",
+    "resourceBehaviorOptions": [],
+    "resourceProvisioningOptions": [],
+    "securityEnabled": false,
+    "securityIdentifier": "S-1-12-1-1021190593-1332575900-3624306361-2906506361",
+    "theme": null,
+    "visibility": "Private",
+    "onPremisesProvisioningErrors": [],
+    "status_code": 200,
+    "message": "Successfully enabled Teams for Group: test1",
+    "teamsEnabled": true
+  },
+  "raw": null,
+  "inputs": {
+    "ms_group_id": "3cde21c1-7e9c-4f6d-b986-06d879c43dad"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 4333,
+    "timestamp": "2023-05-15 14:14:23"
+  }
+}
