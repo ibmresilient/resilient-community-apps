@@ -4,7 +4,7 @@
 import re
 from resilient_lib import validate_fields
 
-REQUIRED_FIREWALL_FIELDS = ["host", "network_object_groups"]
+REQUIRED_FIREWALL_FIELDS = ["host"]
 
 PACKAGE_NAME = "fn_cisco_asa"
 

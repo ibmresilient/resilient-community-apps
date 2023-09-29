@@ -21,13 +21,11 @@ def config_section_data():
 
 # Copy this firewall template for each firewall to be managed. 
 # Each firewall_name should be unique. 
-# Each firewall section requires a mandatory "host" parameter and "network_object_lists". 
+# Each firewall section requires a mandatory "host" parameter. 
 [fn_cisco_asa:firewall_name]
 host=<asa_ip>
 username=<asa_username>
 password=<asa_password>
-# Comma separated list of network object groups to manage.
-network_object_groups=BLOCKLIST_IN, BLOCKLIST_OUT
 #cafile=<path to certificate file>
 """
     return config_data
