@@ -9,7 +9,6 @@ def config_section_data():
     for fn_cisco_asa when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_cisco_asa]
-
 #
 # Optional Global username and password to be used if not defined in the individual firewall
 # sections.
@@ -18,11 +17,11 @@ def config_section_data():
 # Optional proxy settings
 #http_proxy=
 #https_proxy=
-
-# Copy this firewall template for each firewall to be managed. 
-# Each firewall_name should be unique. 
+# Copy this firewall template for each named firewall to be managed.
+# In this example the firewall name is firewall_1
+# Each firewall name must be unique.
 # Each firewall section requires a mandatory "host" parameter. 
-[fn_cisco_asa:firewall_name]
+[fn_cisco_asa:firewall_1]
 host=<asa_ip>
 username=<asa_username>
 password=<asa_password>
