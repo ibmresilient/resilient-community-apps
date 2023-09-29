@@ -21,6 +21,7 @@ class IncidentGroupsTab(Tab):
         Field("jira_server"),
         Field("jira_ticket_url"),
         Field("jira_issue_status"),
+        Field("jira_issue_type"),
         Datatable(DEFAULT_JIRA_DT_NAME)
     ]
 

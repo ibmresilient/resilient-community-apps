@@ -76,6 +76,7 @@
                 },
                 "timespent": {},
                 "customfield_10030": {},
+                "customfield_10031": {},
                 "project": {
                   "type": "object",
                   "properties": {
@@ -116,13 +117,14 @@
                     }
                   }
                 },
-                "customfield_10031": {},
                 "fixVersions": {
                   "type": "array"
                 },
                 "aggregatetimespent": {},
-                "resolution": {},
                 "customfield_10035": {},
+                "resolution": {},
+                "customfield_10036": {},
+                "customfield_10037": {},
                 "customfield_10027": {},
                 "customfield_10028": {},
                 "customfield_10029": {},
@@ -130,6 +132,7 @@
                 "workratio": {
                   "type": "integer"
                 },
+                "lastViewed": {},
                 "issuerestriction": {
                   "type": "object",
                   "properties": {
@@ -155,14 +158,12 @@
                     }
                   }
                 },
-                "lastViewed": {},
                 "created": {
                   "type": "string"
                 },
                 "customfield_10020": {},
                 "customfield_10021": {},
                 "customfield_10022": {},
-                "customfield_10023": {},
                 "priority": {
                   "type": "object",
                   "properties": {
@@ -180,12 +181,13 @@
                     }
                   }
                 },
+                "customfield_10023": {},
                 "customfield_10024": {},
                 "customfield_10025": {},
+                "customfield_10026": {},
                 "labels": {
                   "type": "array"
                 },
-                "customfield_10026": {},
                 "customfield_10016": {},
                 "customfield_10017": {},
                 "customfield_10018": {
@@ -316,20 +318,20 @@
                 },
                 "customfield_10010": {},
                 "customfield_10014": {},
+                "customfield_10015": {},
                 "timetracking": {
                   "type": "object"
                 },
-                "customfield_10015": {},
                 "customfield_10005": {},
                 "customfield_10006": {},
                 "customfield_10007": {},
                 "security": {},
                 "customfield_10008": {},
-                "customfield_10009": {},
-                "aggregatetimeestimate": {},
                 "attachment": {
                   "type": "array"
                 },
+                "customfield_10009": {},
+                "aggregatetimeestimate": {},
                 "summary": {
                   "type": "string"
                 },
@@ -379,6 +381,7 @@
                 "subtasks": {
                   "type": "array"
                 },
+                "customfield_10041": {},
                 "reporter": {
                   "type": "object",
                   "properties": {
@@ -450,6 +453,20 @@
                     }
                   }
                 },
+                "votes": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    },
+                    "votes": {
+                      "type": "integer"
+                    },
+                    "hasVoted": {
+                      "type": "boolean"
+                    }
+                  }
+                },
                 "comment": {
                   "type": "object",
                   "properties": {
@@ -467,20 +484,6 @@
                     },
                     "startAt": {
                       "type": "integer"
-                    }
-                  }
-                },
-                "votes": {
-                  "type": "object",
-                  "properties": {
-                    "self": {
-                      "type": "string"
-                    },
-                    "votes": {
-                      "type": "integer"
-                    },
-                    "hasVoted": {
-                      "type": "boolean"
                     }
                   }
                 },
@@ -519,6 +522,9 @@
         },
         "jira_fields": {
           "type": "string"
+        },
+        "task_id": {
+          "type": "integer"
         },
         "jira_label": {
           "type": "string"

@@ -3,16 +3,16 @@
   "success": true,
   "reason": null,
   "content": {
-    "issue_url": "https://example.com/browse/JRA-47",
-    "issue_url_internal": "https://example.com/rest/api/2/issue/10058",
-    "issue_key": "JRA-47",
+    "issue_url": "https://example.com/browse/JRA-239",
+    "issue_url_internal": "https://example.com/rest/api/2/issue/10318",
+    "issue_key": "JRA-239",
     "issue": {
       "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice",
-      "id": "10058",
-      "self": "https://example.com/rest/api/2/issue/10058",
-      "key": "JRA-47",
+      "id": "10318",
+      "self": "https://example.com/rest/api/2/issue/10318",
+      "key": "JRA-239",
       "fields": {
-        "statuscategorychangedate": "2023-01-31T12:57:59.508-0500",
+        "statuscategorychangedate": "2023-09-25T15:29:01.286-0400",
         "issuetype": {
           "self": "https://example.com/rest/api/2/issuetype/10007",
           "id": "10007",
@@ -26,6 +26,7 @@
         },
         "timespent": null,
         "customfield_10030": null,
+        "customfield_10031": null,
         "project": {
           "self": "https://example.com/rest/api/2/project/10001",
           "id": "10001",
@@ -40,41 +41,42 @@
             "32x32": "https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=medium"
           }
         },
-        "customfield_10031": null,
         "fixVersions": [],
         "aggregatetimespent": null,
-        "resolution": null,
         "customfield_10035": null,
+        "resolution": null,
+        "customfield_10036": null,
+        "customfield_10037": null,
         "customfield_10027": null,
         "customfield_10028": null,
         "customfield_10029": null,
         "resolutiondate": null,
         "workratio": -1,
+        "lastViewed": null,
         "issuerestriction": {
           "issuerestrictions": {},
           "shouldDisplay": true
         },
         "watches": {
-          "self": "https://example.com/rest/api/2/issue/JRA-47/watchers",
+          "self": "https://example.com/rest/api/2/issue/JRA-239/watchers",
           "watchCount": 1,
           "isWatching": true
         },
-        "lastViewed": null,
-        "created": "2023-01-31T12:57:59.000-0500",
+        "created": "2023-09-25T15:29:00.925-0400",
         "customfield_10020": null,
         "customfield_10021": null,
         "customfield_10022": null,
-        "customfield_10023": null,
         "priority": {
           "self": "https://example.com/rest/api/2/priority/4",
           "iconUrl": "https://example.com/images/icons/priorities/low.svg",
           "name": "Low",
           "id": "4"
         },
+        "customfield_10023": null,
         "customfield_10024": null,
         "customfield_10025": null,
-        "labels": [],
         "customfield_10026": null,
+        "labels": [],
         "customfield_10016": null,
         "customfield_10017": null,
         "customfield_10018": {
@@ -85,27 +87,27 @@
             "message": "The Parent Link is only available to Jira Premium users."
           }
         },
-        "customfield_10019": "0|i0000v:",
+        "customfield_10019": "0|i000yv:",
         "timeestimate": null,
         "aggregatetimeoriginalestimate": null,
         "versions": [],
         "issuelinks": [],
         "assignee": {
-          "self": "https://example.com/rest/api/2/user?accountId=123456",
-          "accountId": "123456",
-          "emailAddress": "test@example.com",
+          "self": "https://example.com/rest/api/2/user?accountId=63a069fc8a07cbd184a8258d",
+          "accountId": "63a069fc8a07cbd184a8258d",
+          "emailAddress": "soar@example.com",
           "avatarUrls": {
             "48x48": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png",
             "24x24": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png",
             "16x16": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png",
             "32x32": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png"
           },
-          "displayName": "test",
+          "displayName": "SOAR",
           "active": true,
           "timeZone": "America/New_York",
           "accountType": "atlassian"
         },
-        "updated": "2023-01-31T12:57:59.000-0500",
+        "updated": "2023-09-25T15:29:01.138-0400",
         "status": {
           "self": "https://example.com/rest/api/2/status/10003",
           "description": "",
@@ -122,47 +124,48 @@
         },
         "components": [],
         "timeoriginalestimate": null,
-        "description": "IBM SOAR Link: https://test.com:443/#incidents/2231\n\nCreated in IBM SOAR",
+        "description": "IBM SOAR Link: https://soar.com:443/#incidents/4037?task_id=2220\n\nCreated in IBM SOAR",
         "customfield_10010": null,
         "customfield_10014": null,
-        "timetracking": {},
         "customfield_10015": null,
+        "timetracking": {},
         "customfield_10005": null,
         "customfield_10006": null,
         "customfield_10007": null,
         "security": null,
         "customfield_10008": null,
+        "attachment": [],
         "customfield_10009": null,
         "aggregatetimeestimate": null,
-        "attachment": [],
-        "summary": "IBM SOAR: h",
+        "summary": "IBM SOAR: test2",
         "creator": {
-          "self": "https://example.com/rest/api/2/user?accountId=123456",
-          "accountId": "123456",
-          "emailAddress": "test@example.com",
+          "self": "https://example.com/rest/api/2/user?accountId=63a069fc8a07cbd184a8258d",
+          "accountId": "63a069fc8a07cbd184a8258d",
+          "emailAddress": "soar@example.com",
           "avatarUrls": {
             "48x48": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png",
             "24x24": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png",
             "16x16": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png",
             "32x32": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png"
           },
-          "displayName": "test",
+          "displayName": "SOAR",
           "active": true,
           "timeZone": "America/New_York",
           "accountType": "atlassian"
         },
         "subtasks": [],
+        "customfield_10041": null,
         "reporter": {
-          "self": "https://example.com/rest/api/2/user?accountId=123456",
-          "accountId": "123456",
-          "emailAddress": "test@example.com",
+          "self": "https://example.com/rest/api/2/user?accountId=63a069fc8a07cbd184a8258d",
+          "accountId": "63a069fc8a07cbd184a8258d",
+          "emailAddress": "soar@example.com",
           "avatarUrls": {
             "48x48": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png",
             "24x24": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png",
             "16x16": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png",
             "32x32": "https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FR-1.png"
           },
-          "displayName": "test",
+          "displayName": "SOAR",
           "active": true,
           "timeZone": "America/New_York",
           "accountType": "atlassian"
@@ -181,17 +184,17 @@
           "progress": 0,
           "total": 0
         },
+        "votes": {
+          "self": "https://example.com/rest/api/2/issue/JRA-239/votes",
+          "votes": 0,
+          "hasVoted": false
+        },
         "comment": {
           "comments": [],
-          "self": "https://example.com/rest/api/2/issue/10058/comment",
+          "self": "https://example.com/rest/api/2/issue/10318/comment",
           "maxResults": 0,
           "total": 0,
           "startAt": 0
-        },
-        "votes": {
-          "self": "https://example.com/rest/api/2/issue/JRA-47/votes",
-          "votes": 0,
-          "hasVoted": false
         },
         "worklog": {
           "startAt": 0,
@@ -205,16 +208,17 @@
   },
   "raw": null,
   "inputs": {
-    "incident_id": 2231,
-    "jira_fields": "{ \"summary\":\"IBM SOAR: h\",\"issuetype\":\"Story\",\"project\":\"JRA\",\"description\":\"Created in IBM SOAR\",\"priority\":{ \"name\":\"Low\" } }",
+    "incident_id": 4037,
+    "jira_fields": "{\"project\": \"JRA\", \"issuetype\": \"Story\", \"priority\": {\"name\": \"Low\"}, \"summary\": \"IBM SOAR: test2\", \"description\": \"Created in IBM SOAR\"}",
+    "task_id": 2220,
     "jira_label": "my-server"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-jira",
-    "package_version": "3.0.0",
+    "package_version": "3.0.3",
     "host": "local",
-    "execution_time_ms": 1748,
-    "timestamp": "2023-01-31 12:57:59"
+    "execution_time_ms": 2127,
+    "timestamp": "2023-09-25 15:29:01"
   }
 }
