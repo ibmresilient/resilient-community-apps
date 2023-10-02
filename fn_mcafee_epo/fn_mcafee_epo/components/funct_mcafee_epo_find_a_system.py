@@ -17,8 +17,7 @@ class FunctionComponent(AppFunctionComponent):
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
-        """Function: Find ePO systems based on property such as system name, tag, IP address, MAC address, etc.
-           Return: List of systems found and information about the systems"""
+        """Function: Find an ePO system based on a property such as system name, tag, IP address, MAC address, etc. McAfee user requires permission to at least one group in the System Tree for this function."""
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 

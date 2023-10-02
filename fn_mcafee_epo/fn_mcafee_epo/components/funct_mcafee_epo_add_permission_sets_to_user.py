@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Add permission set(s) to an ePO user
+        Function: Add permission set(s) to an ePO user. McAfee user requires administrator rights for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_username
             -   fn_inputs.mcafee_epo_permsetname

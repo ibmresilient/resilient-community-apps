@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Assigns policy to the specified group no ePO server
+        Function: Assigns policy to the specified group no ePO server. McAfee user requires permission to at least one group in the System Tree and edit permission for at least one product for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_group_id
             -   fn_inputs.mcafee_epo_reset_inheritance

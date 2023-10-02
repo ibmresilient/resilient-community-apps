@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Delete an issue from the ePO server
+        Function: Delete an issue from the ePO server. McAfee user requires permission to edit issues for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_issue_id
         """

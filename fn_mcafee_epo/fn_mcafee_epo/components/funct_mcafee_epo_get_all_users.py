@@ -17,7 +17,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Get all the users on a ePO server
+        Function: Get all the users on a ePO server. McAfee user requires administrator rights for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_permsetname
             -   fn_inputs.datatable_name

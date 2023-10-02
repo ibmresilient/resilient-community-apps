@@ -180,7 +180,7 @@ The following table provides the settings you need to configure the app. These s
 ---
 
 ## Function - McAfee ePO Add Permission sets to user
-Add permission set(s) to an ePO user
+Add permission set(s) to an ePO user. McAfee user requires administrator rights for this function.
 
  ![screenshot: fn-mcafee-epo-add-permission-sets-to-user ](./doc/screenshots/fn-mcafee-epo-add-permission-sets-to-user.png)
 
@@ -256,7 +256,7 @@ if results['success']:
 
 ---
 ## Function - McAfee ePO Add System
-Add a system to the ePO server
+Add a system to the ePO server. McAfee user requires permission to edit System Tree for this function.
 
  ![screenshot: fn-mcafee-epo-add-system ](./doc/screenshots/fn-mcafee-epo-add-system.png)
 
@@ -368,7 +368,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Add User
-Add a user to the ePO server
+Add a user to the ePO server. McAfee user requires administrator rights for this function.
 
  ![screenshot: fn-mcafee-epo-add-user ](./doc/screenshots/fn-mcafee-epo-add-user.png)
 
@@ -458,7 +458,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Assign Policy to Group
-Assigns policy to the specified group no ePO server
+Assigns policy to the specified group no ePO server. McAfee user requires permission to at least one group in the System Tree and edit permission for at least one product for this function.
 
  ![screenshot: fn-mcafee-epo-assign-policy-to-group ](./doc/screenshots/fn-mcafee-epo-assign-policy-to-group.png)
 
@@ -531,7 +531,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Assign Policy to Systems
-Assigns the policy to a supplied list of systems on the ePO server
+Assigns the policy to a supplied list of systems on the ePO server. McAfee user requires permission to at least one group in the System Tree and edit permission for at least one product for this function.
 
  ![screenshot: fn-mcafee-epo-assign-policy-to-systems ](./doc/screenshots/fn-mcafee-epo-assign-policy-to-systems.png)
 
@@ -614,7 +614,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Create Issue
-Create an issue on the ePO server
+Create an issue on the ePO server. McAfee user requires permission to edit issues for this function.
 
  ![screenshot: fn-mcafee-epo-create-issue ](./doc/screenshots/fn-mcafee-epo-create-issue.png)
 
@@ -724,7 +724,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Delete Issue
-Delete an issue from the ePO server
+Delete an issue from the ePO server. McAfee user requires permission to edit issues for this function.
 
  ![screenshot: fn-mcafee-epo-delete-issue ](./doc/screenshots/fn-mcafee-epo-delete-issue.png)
 
@@ -791,7 +791,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Delete System
-Delete a system from the ePO server
+Delete an issue from the ePO server. McAfee user requires permission to edit issues for this function.
 
  ![screenshot: fn-mcafee-epo-delete-system ](./doc/screenshots/fn-mcafee-epo-delete-system.png)
 
@@ -867,7 +867,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Execute Query
-Execute a query on the ePO server
+Execute a query on the ePO server. McAfee user requires permission to use queries for this function.
 
  ![screenshot: fn-mcafee-epo-execute-query ](./doc/screenshots/fn-mcafee-epo-execute-query.png)
 
@@ -1038,7 +1038,7 @@ if results.get('success'):
 
 ---
 ## Function - McAfee ePO Find a System
-Find an ePO system based on a property such as system name, tag, IP address, MAC address, etc.
+Find an ePO system based on a property such as system name, tag, IP address, MAC address, etc. McAfee user requires permission to at least one group in the System Tree for this function.
 
  ![screenshot: fn-mcafee-epo-find-a-system ](./doc/screenshots/fn-mcafee-epo-find-a-system.png)
 
@@ -1174,7 +1174,7 @@ incident.addNote(info)
 
 ---
 ## Function - McAfee ePO Find Client Tasks
-Find client tasks on the ePO server
+Find client tasks on the ePO server. McAfee user requires view permission for at least one product for this function.
 
  ![screenshot: fn-mcafee-epo-find-client-tasks ](./doc/screenshots/fn-mcafee-epo-find-client-tasks.png)
 
@@ -1275,7 +1275,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Find Groups
-Find groups on the ePO server
+Find groups on the ePO server. McAfee user requires access to at least one group in the System Tree for this function.
 
  ![screenshot: fn-mcafee-epo-find-groups ](./doc/screenshots/fn-mcafee-epo-find-groups.png)
 
@@ -1365,7 +1365,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Find Policies
-Finds all policies that match the given search text or find all policies if no search text is given
+Finds all policies that match the given search text or find all policies if no search text is given. McAfee user requires view permission for at least one product for this function.
 
  ![screenshot: fn-mcafee-epo-find-policies ](./doc/screenshots/fn-mcafee-epo-find-policies.png)
 
@@ -1652,7 +1652,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Find Systems in Group
-Find systems in a specified group on ePO server
+Find systems in a specified group on ePO server. McAfee user requires access to at least one group for this function.
 
  ![screenshot: fn-mcafee-epo-find-systems-in-group ](./doc/screenshots/fn-mcafee-epo-find-systems-in-group.png)
 
@@ -1778,7 +1778,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Get All Permission sets
-Get all of the permission sets on an ePO server
+Get all of the permission sets on an ePO server. McAfee user requires administrator rights for this function.
 
  ![screenshot: fn-mcafee-epo-get-all-permission-sets ](./doc/screenshots/fn-mcafee-epo-get-all-permission-sets.png)
 
@@ -1864,7 +1864,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Get All Users
-Get all the users on a ePO server
+Get all the users on a ePO server. McAfee user requires administrator rights for this function.
 
  ![screenshot: fn-mcafee-epo-get-all-users ](./doc/screenshots/fn-mcafee-epo-get-all-users.png)
 
@@ -1943,7 +1943,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO List Issues
-List the issues on the ePO server
+List the issues on the ePO server. McAfee user requires permission to view issues for this function.
 
  ![screenshot: fn-mcafee-epo-list-issues ](./doc/screenshots/fn-mcafee-epo-list-issues.png)
 
@@ -2057,7 +2057,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO List Tags
-Find all tags specified in ePO
+Find all tags specified in ePO. McAfee user requires Tag use permission for this function.
 
  ![screenshot: fn-mcafee-epo-list-tags ](./doc/screenshots/fn-mcafee-epo-list-tags.png)
 
@@ -2178,7 +2178,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Remove Permission sets from user
-Remove permission set(s) from an ePO user
+Remove permission set(s) from an ePO user. McAfee user requires administrator rights for this function.
 
  ![screenshot: fn-mcafee-epo-remove-permission-sets-from-user ](./doc/screenshots/fn-mcafee-epo-remove-permission-sets-from-user.png)
 
@@ -2251,7 +2251,7 @@ if results.get('success'):
 
 ---
 ## Function - McAfee ePO Remove Tag
-Remove a tag associated with an ePO system(s).
+Remove a tag associated with an ePO system(s). McAfee user requires Tag use permission for this function.
 
  ![screenshot: fn-mcafee-epo-remove-tag ](./doc/screenshots/fn-mcafee-epo-remove-tag.png)
 
@@ -2327,7 +2327,7 @@ else:
 
 ---
 ## Function - McAfee ePO Remove User
-Delete a user from the ePO server
+Delete a user from the ePO server. McAfee user requires administrator rights for this function.
 
  ![screenshot: fn-mcafee-epo-remove-user ](./doc/screenshots/fn-mcafee-epo-remove-user.png)
 
@@ -2394,7 +2394,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Run Client Task
-Run a client task on specified system(s)
+Run a client task on specified system(s). McAfee user requires edit permission for at least one product for this function.
 
  ![screenshot: fn-mcafee-epo-run-client-task ](./doc/screenshots/fn-mcafee-epo-run-client-task.png)
 
@@ -2473,7 +2473,7 @@ if results.get("content") and results.get("content") == "Succeeded":
 
 ---
 ## Function - McAfee ePO Update Issue
-Update an issue on the ePO server
+Update an issue on the ePO server. McAfee user requires permission to edit the issue for this function.
 
  ![screenshot: fn-mcafee-epo-update-issue ](./doc/screenshots/fn-mcafee-epo-update-issue.png)
 
@@ -2604,7 +2604,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Update User
-Update a user on the ePO server
+Update a user on the ePO server. McAfee user requires administrator rights for this function.
 
  ![screenshot: fn-mcafee-epo-update-user ](./doc/screenshots/fn-mcafee-epo-update-user.png)
 
@@ -2732,7 +2732,7 @@ if results.get("success"):
 
 ---
 ## Function - McAfee ePO Wake up agent
-Wake up an ePO agent
+Wake up an ePO agent. McAfee user requires Agent wakeup permission for this function.
 
  ![screenshot: fn-mcafee-epo-wake-up-agent ](./doc/screenshots/fn-mcafee-epo-wake-up-agent.png)
 
@@ -2800,6 +2800,7 @@ incident.addNote(results.get("content"))
 Applies tag to the systems in ePO. Inputs include:
 - mcafee_epo_system: Comma separated list of Hostnames/IpAddress. These systems must be managed on ePO.
 - mcafee_epo_tag: A tag managed on ePO.
+McAfee user requires Tag use permission for this function.
 
  ![screenshot: fn-mcafee-tag-an-epo-asset ](./doc/screenshots/fn-mcafee-tag-an-epo-asset.png)
 

@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Delete a user from the ePO server
+        Function: Delete a user from the ePO server. McAfee user requires administrator rights for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_username
         """

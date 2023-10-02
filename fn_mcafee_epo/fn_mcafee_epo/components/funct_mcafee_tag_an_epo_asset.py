@@ -24,6 +24,7 @@ class FunctionComponent(AppFunctionComponent):
         mcafee_epo_tag: A Tag managed on ePO.
 
         Applies tag to the systems in ePO.
+        McAfee user requires Tag use permission for this function.
         """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 

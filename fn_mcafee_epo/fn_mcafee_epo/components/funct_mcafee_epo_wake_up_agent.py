@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Wake up an ePO agent
+        Function: Wake up an ePO agent. McAfee user requires Agent wakeup permission for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_systems
         """

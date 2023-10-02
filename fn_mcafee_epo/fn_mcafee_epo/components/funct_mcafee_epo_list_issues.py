@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: List the issues on the ePO server
+        Function: List the issues on the ePO server. McAfee user requires permission to view issues for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_issue_id
             -   fn_inputs.mcafee_epo_search_text

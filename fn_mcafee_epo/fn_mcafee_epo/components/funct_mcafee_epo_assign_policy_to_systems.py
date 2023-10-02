@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Assigns the policy to a supplied list of systems on the ePO server
+        Function: Assigns the policy to a supplied list of systems on the ePO server. McAfee user requires permission to at least one group in the System Tree and edit permission for at least one product for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_system_name_or_id
             -   fn_inputs.mcafee_epo_reset_inheritance

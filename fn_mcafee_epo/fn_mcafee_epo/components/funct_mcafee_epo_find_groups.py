@@ -17,7 +17,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Find groups on the ePO server
+        Function: Find groups on the ePO server. McAfee user requires access to at least one group in the System Tree for this function.
         Inputs:
             -   fn_inputs.incident_id
             -   fn_inputs.mcafee_epo_search_text

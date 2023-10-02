@@ -17,7 +17,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Find client tasks on the ePO server
+        Function: Find client tasks on the ePO server. McAfee user requires view permission for at least one product for this function.
         Inputs:
             -   fn_inputs.incident_id
             -   fn_inputs.mcafee_epo_search_text

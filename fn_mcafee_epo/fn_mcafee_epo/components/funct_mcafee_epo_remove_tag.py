@@ -18,12 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: A function which takes two inputs:
-
-        mcafee_epo_system: Comma separated list of Hostnames/IpAddress. These systems must be managed on ePO.
-        mcafee_epo_tag: A Tag managed on ePO.
-
-        Applies tag to the systems in ePO.
+        Function: Remove a tag associated with an ePO system(s). McAfee user requires Tag use permission for this function.
         """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 

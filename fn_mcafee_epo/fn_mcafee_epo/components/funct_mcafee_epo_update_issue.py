@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Update an issue on the ePO server
+        Function: Update an issue on the ePO server. McAfee user requires permission to edit the issue for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_issue_id
             -   fn_inputs.mcafee_epo_issue_properties

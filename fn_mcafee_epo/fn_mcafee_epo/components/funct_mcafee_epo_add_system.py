@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Add a system to the ePO server
+        Function: Add a system to the ePO server. McAfee user requires permission to edit System Tree for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_flatten_tree_structure
             -   fn_inputs.mcafee_epo_system_name_or_id

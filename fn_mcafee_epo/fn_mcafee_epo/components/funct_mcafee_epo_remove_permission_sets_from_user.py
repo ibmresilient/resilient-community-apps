@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Remove permission set(s) from an ePO user
+        Function: Remove permission set(s) from an ePO user. McAfee user requires administrator rights for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_username
             -   fn_inputs.mcafee_epo_permsetname

@@ -17,7 +17,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Execute a query on the ePO server
+        Function: Execute a query on the ePO server. McAfee user requires permission to use queries for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_target
             -   fn_inputs.mcafee_epo_queryid

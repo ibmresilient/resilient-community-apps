@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Run a client task on specified system(s)
+        Function: Run a client task on specified system(s). McAfee user requires edit permission for at least one product for this function.
         Inputs:
             -   fn_inputs.mcafee_epo_system_name_or_id
             -   fn_inputs.mcafee_epo_task_id
