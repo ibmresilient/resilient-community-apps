@@ -52,13 +52,16 @@ Create an Azure automation account
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
 
+public_network_access = getattr(playbook.inputs, "azure_automation_account_public_network_access")
+disbale_local_auth = getattr(playbook.inputs, "azure_automation_account_disable_local_auth")
+
 payload = {
   "name": playbook.inputs.azure_automation_account_name,
   "location": playbook.inputs.azure_automation_account_location,
   "tags": getattr(playbook.inputs, "azure_automation_account_tags", {}),
   "properties": {
-    "publicNetworkAccess": getattr(playbook.inputs, "azure_automation_account_public_network_access", True),
-    "disableLocalAuth": getattr(playbook.inputs, "azure_automation_account_disable_local_auth", False),
+    "publicNetworkAccess": True if public_network_access == None else public_network_access,
+    "disableLocalAuth": False if disbale_local_auth == None else disbale_local_auth,
     "sku":{
       "name": "Basic"
     }
