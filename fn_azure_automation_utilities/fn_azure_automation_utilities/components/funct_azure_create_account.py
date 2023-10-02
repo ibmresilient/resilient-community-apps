@@ -35,6 +35,8 @@ class FunctionComponent(AppFunctionComponent):
         # If no tags given then remove it from the dictionary. If left in the dictionary when empty it will cause the request to Azure to fail.
         if input_parameters.get("tags") == None:
             del input_parameters["tags"]
+        else:
+            input_parameters["tags"] = literal_eval(input_parameters.get("tags"))
 
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
