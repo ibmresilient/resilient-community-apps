@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_mcafee_epo',
     display_name='McAfee ePO Integration for SOAR ',
-    version='2.0.1',
+    version='3.0.0',
     license='MIT',
     author='IBM SOAR',
     author_email="",
