@@ -63,6 +63,17 @@
 
 ---
 
+## 3.0.0 Changes
+In v3,0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end. For automatic actions, the playbooks will be disabled by default.
+
+You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
+
+The data table mcafee_epo_systems has been replaced by mcafee_epo_systems_dt and its columns names have been updated. 
+
+---
+
 ## Overview
 The McAfee ePO functions allow for manipulation of tags, systems, users, issues, policies and permission sets on the McAfee ePO server. 
 
