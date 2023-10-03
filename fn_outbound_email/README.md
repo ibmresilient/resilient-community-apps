@@ -1,3 +1,5 @@
+# Outbound Email
+
 ## Table of Contents
 - [Release Notes](#release-notes)
   - [v2.0 Changes](#v2_0-changes)
