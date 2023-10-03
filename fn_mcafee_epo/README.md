@@ -70,7 +70,7 @@ If upgrading from a previous release, you'll noticed that the previous release's
 
 You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
 
-The data table mcafee_epo_systems has been replaced by mcafee_epo_systems_dt and its columns names have been updated. 
+The data table mcafee_epo_systems has been replaced by mcafee_epo_systems_dt and its columns names have been updated. The original data table was not compatible with SOAR v45+. When upgrading from a pervious version both data tables will be present, so make sure to use the new data table mcafee_epo_systems_dt.
 
 ---
 

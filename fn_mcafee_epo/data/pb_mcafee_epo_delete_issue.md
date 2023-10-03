@@ -4,26 +4,60 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# McAfee ePO Delete Issue
+# Playbook - McAfee ePO Delete Issue (PB)
 
+### API Name
+`mcafee_epo_delete_issue`
+
+### Status
+`enabled`
+
+### Activation Type
+`Manual`
+
+### Activation Conditions
+`-`
+
+### Object Type
+`mcafee_epo_issues`
+
+### Description
+None
+
+
+---
 ## Function - McAfee ePO Delete Issue
 
 ### API Name
 `mcafee_epo_delete_issue`
 
 ### Output Name
-``
+`delete_issue`
 
 ### Message Destination
 `mcafee_epo_message_destination`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.mcafee_epo_issue_id = row.issue_id
 ```
 
-### Post-Processing Script
+---
+
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Object Type
+`mcafee_epo_issues`
+
+### Script Content
 ```python
+results = playbook.functions.results.delete_issue
 if results.get("success"):
   row.issue_deleted = True
   incident.addNote("Issue: '{}' deleted successfully.".format(row.issue_id))

@@ -70,7 +70,34 @@ def codegen_reload_data():
         ],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [],
+        "playbooks": [
+            u"mcafee_epo_add_permission_set_to_user",
+            u"mcafee_epo_add_system",
+            u"mcafee_epo_add_user",
+            u"mcafee_epo_apply_a_tag",
+            u"mcafee_epo_assign_policy_to_group_from_group",
+            u"mcafee_epo_assign_policy_to_group_from_policy",
+            u"mcafee_epo_assign_policy_to_systems_from_policy",
+            u"mcafee_epo_create_issue",
+            u"mcafee_epo_delete_issue",
+            u"mcafee_epo_find_all_client_tasks",
+            u"mcafee_epo_find_all_groups",
+            u"mcafee_epo_find_policies",
+            u"mcafee_epo_get_all_permission_sets",
+            u"mcafee_epo_get_all_systems",
+            u"mcafee_epo_get_all_users",
+            u"mcafee_epo_get_system_info",
+            u"mcafee_epo_get_system_info_from_property",
+            u"mcafee_epo_list_issues",
+            u"mcafee_epo_list_tags",
+            u"mcafee_epo_remove_permission_set_from_user",
+            u"mcafee_epo_remove_tags",
+            u"mcafee_epo_remove_user",
+            u"mcafee_epo_run_client_task",
+            u"mcafee_epo_update_issue",
+            u"mcafee_epo_update_user",
+            u"mcafee_epo_wake_up_agent"
+        ]
     }
 
 
@@ -111,6 +138,33 @@ def customization_data(client=None):
         - mcafee_epo_update_user
         - mcafee_epo_wake_up_agent
         - mcafee_tag_an_epo_asset
+    - Playbooks:
+        - mcafee_epo_add_permission_set_to_user
+        - mcafee_epo_add_system
+        - mcafee_epo_add_user
+        - mcafee_epo_apply_a_tag
+        - mcafee_epo_assign_policy_to_group_from_group
+        - mcafee_epo_assign_policy_to_group_from_policy
+        - mcafee_epo_assign_policy_to_systems_from_policy
+        - mcafee_epo_create_issue
+        - mcafee_epo_delete_issue
+        - mcafee_epo_find_all_client_tasks
+        - mcafee_epo_find_all_groups
+        - mcafee_epo_find_policies
+        - mcafee_epo_get_all_permission_sets
+        - mcafee_epo_get_all_systems
+        - mcafee_epo_get_all_users
+        - mcafee_epo_get_system_info
+        - mcafee_epo_get_system_info_from_property
+        - mcafee_epo_list_issues
+        - mcafee_epo_list_tags
+        - mcafee_epo_remove_permission_set_from_user
+        - mcafee_epo_remove_tags
+        - mcafee_epo_remove_user
+        - mcafee_epo_run_client_task
+        - mcafee_epo_update_issue
+        - mcafee_epo_update_user
+        - mcafee_epo_wake_up_agent
     - Data Tables:
         - mcafee_epo_client_tasks
         - mcafee_epo_groups

@@ -4,27 +4,61 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# McAfee ePO List Issues
+# Playbook - McAfee ePO List Issues (PB)
 
+### API Name
+`mcafee_epo_list_issues`
+
+### Status
+`enabled`
+
+### Activation Type
+`Manual`
+
+### Activation Conditions
+`-`
+
+### Object Type
+`incident`
+
+### Description
+None
+
+
+---
 ## Function - McAfee ePO List Issues
 
 ### API Name
 `mcafee_epo_list_issues`
 
 ### Output Name
-``
+`issues`
 
 ### Message Destination
 `mcafee_epo_message_destination`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.datatable_name = "mcafee_epo_issues"
 inputs.incident_id = incident.id
 ```
 
-### Post-Processing Script
+---
+
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Object Type
+`incident`
+
+### Script Content
 ```python
+results = playbook.functions.results.issues
 if results.get("success"):
   for c in results.get("content"):
     row = incident.addRow("mcafee_epo_issues")

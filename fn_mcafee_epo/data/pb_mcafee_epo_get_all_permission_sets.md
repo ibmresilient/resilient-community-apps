@@ -4,46 +4,57 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# McAfee ePO Get all Permission Sets
+# Playbook - McAfee ePO Get All Permission Sets (PB)
 
+### API Name
+`mcafee_epo_get_all_permission_sets`
+
+### Status
+`enabled`
+
+### Activation Type
+`Manual`
+
+### Activation Conditions
+`-`
+
+### Object Type
+`incident`
+
+### Description
+None
+
+
+---
 ## Function - McAfee ePO Get All Permission sets
 
 ### API Name
 `mcafee_epo_get_all_permission_sets`
 
 ### Output Name
-`permsets`
+`perm_sets`
 
 ### Message Destination
 `mcafee_epo_message_destination`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
-None
-```
 
-### Post-Processing Script
-```python
-# if results.get("success"):
-#   for permset in results["content"]:
-#     table_row = incident.addRow("mcafee_epo_permission_sets")
-#     table_row["permission_set_name"] = permset.get("name")
 ```
 
 ---
-
 ## Function - McAfee ePO Execute Query
 
 ### API Name
 `mcafee_epo_execute_query`
 
 ### Output Name
-`None`
+`query`
 
 ### Message Destination
 `mcafee_epo_message_destination`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.datatable_name = "mcafee_epo_permission_sets"
 inputs.incident_id = incident.id
@@ -51,10 +62,25 @@ inputs.mcafee_epo_target = "EntitlementView"
 inputs.mcafee_epo_query_select = "EntitlementView.PrincipalName EntitlementView.GroupName"
 ```
 
-### Post-Processing Script
+---
+
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Object Type
+`incident`
+
+### Script Content
 ```python
+results = playbook.functions.results.query
+perm_sets = playbook.functions.results.perm_sets
 if results.get("success"):
-  for permset in workflow.properties.permsets.get("content"):
+  for permset in perm_sets.get("content"):
     permsetName = permset.get("name")
     table_row = incident.addRow("mcafee_epo_permission_sets")
     table_row["permission_set_name"] = permsetName

@@ -4,47 +4,57 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# McAfee ePO Find All Groups
+# Playbook - McAfee ePO Find All Groups (PB)
 
+### API Name
+`mcafee_epo_find_all_groups`
+
+### Status
+`enabled`
+
+### Activation Type
+`Manual`
+
+### Activation Conditions
+`-`
+
+### Object Type
+`incident`
+
+### Description
+None
+
+
+---
 ## Function - McAfee ePO Find Groups
 
 ### API Name
 `mcafee_epo_find_groups`
 
 ### Output Name
-`groupsresults`
+`groups`
 
 ### Message Destination
 `mcafee_epo_message_destination`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
-None
-```
 
-### Post-Processing Script
-```python
-# if results.get("success"):
-#   for x in results.get("content"):
-#     table = incident.addRow("mcafee_epo_groups")
-#     table["group_id"] = int(x.get("groupId"))
-#     table["group_path"] = x.get("groupPath")
 ```
 
 ---
-
 ## Function - McAfee ePO Execute Query
 
 ### API Name
 `mcafee_epo_execute_query`
 
 ### Output Name
-`None`
+`query`
 
 ### Message Destination
 `mcafee_epo_message_destination`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.datatable_name = "mcafee_epo_groups"
 inputs.incident_id = incident.id
@@ -52,10 +62,25 @@ inputs.mcafee_epo_target = "EPOLeafNode"
 inputs.mcafee_epo_query_select = "EPOLeafNode.NodeName EPOBranchNode.NodeName EPOBranchNode.NodeTextPath2"
 ```
 
-### Post-Processing Script
+---
+
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Object Type
+`incident`
+
+### Script Content
 ```python
+results = playbook.functions.results.query
+groupsResults = playbook.functions.results.groups
 if results.get("success"):
-  for groupInfo in workflow.properties.groupsresults.get("content"):
+  for groupInfo in groupsResults.get("content"):
     groupPath = groupInfo.get("groupPath")
     table = incident.addRow("mcafee_epo_groups")
     table["group_id"] = int(groupInfo.get("groupId"))

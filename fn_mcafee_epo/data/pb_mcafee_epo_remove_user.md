@@ -4,26 +4,60 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# McAfee ePO Remove User
+# Playbook - McAfee ePO Remove User (PB)
 
+### API Name
+`mcafee_epo_remove_user`
+
+### Status
+`enabled`
+
+### Activation Type
+`Manual`
+
+### Activation Conditions
+`-`
+
+### Object Type
+`mcafee_epo_users`
+
+### Description
+None
+
+
+---
 ## Function - McAfee ePO Remove User
 
 ### API Name
 `mcafee_epo_remove_user`
 
 ### Output Name
-`None`
+`remove_user`
 
 ### Message Destination
 `mcafee_epo_message_destination`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.mcafee_epo_username = row.user_name
 ```
 
-### Post-Processing Script
+---
+
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Object Type
+`mcafee_epo_users`
+
+### Script Content
 ```python
+results = playbook.functions.results.remove_user
 if results.get("success"):
   row.user_deleted = True
   incident.addNote("User: {} removed  from ePO server".format(row.user_name))

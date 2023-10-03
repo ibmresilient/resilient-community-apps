@@ -4,27 +4,61 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# McAfee ePO Find All Client Tasks
+# Playbook - McAfee ePO Find All Client Tasks (PB)
 
+### API Name
+`mcafee_epo_find_all_client_tasks`
+
+### Status
+`enabled`
+
+### Activation Type
+`Manual`
+
+### Activation Conditions
+`-`
+
+### Object Type
+`incident`
+
+### Description
+None
+
+
+---
 ## Function - McAfee ePO Find Client Tasks
 
 ### API Name
 `mcafee_epo_find_client_tasks`
 
 ### Output Name
-``
+`client_task`
 
 ### Message Destination
 `mcafee_epo_message_destination`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.datatable_name = "mcafee_epo_client_tasks"
 inputs.incident_id = incident.id
 ```
 
-### Post-Processing Script
+---
+
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Object Type
+`incident`
+
+### Script Content
 ```python
+results = playbook.functions.results.client_task
 if results.get("success"):
   for x in results.get("content"):
     table = incident.addRow("mcafee_epo_client_tasks")

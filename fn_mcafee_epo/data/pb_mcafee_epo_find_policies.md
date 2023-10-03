@@ -4,51 +4,57 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# McAfee ePO Find Policies
+# Playbook - McAfee ePO Find Policies (PB)
 
+### API Name
+`mcafee_epo_find_policies`
+
+### Status
+`enabled`
+
+### Activation Type
+`Manual`
+
+### Activation Conditions
+`-`
+
+### Object Type
+`incident`
+
+### Description
+None
+
+
+---
 ## Function - McAfee ePO Find Policies
 
 ### API Name
 `mcafee_epo_find_policies`
 
 ### Output Name
-`policyresults`
+`policies`
 
 ### Message Destination
 `mcafee_epo_message_destination`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
-None
-```
 
-### Post-Processing Script
-```python
-# if results.get("success"):
-#   for policy in results["content"]:
-#     table_row = incident.addRow("mcafee_epo_policies")
-#     table_row["object_name"] = policy.get("objectName")
-#     table_row["object_id"] = int(policy.get("objectId"))
-#     table_row["type_name"] = policy.get("typeName")
-#     table_row["type_id"] = int(policy.get("typeId"))
-#     table_row["product_id"] = policy.get("productId")
-#     table_row["object_notes"] = policy.get("objectNotes")
 ```
 
 ---
-
 ## Function - McAfee ePO Execute Query
 
 ### API Name
 `mcafee_epo_execute_query`
 
 ### Output Name
-``
+`query`
 
 ### Message Destination
 `mcafee_epo_message_destination`
 
-### Pre-Processing Script
+### Function-Input Script
 ```python
 inputs.mcafee_epo_target = "EPOAssignedPolicy"
 inputs.mcafee_epo_query_select = "EPOAssignedPolicy.NodeName EPOAssignedPolicy.PolicyObjectID"
@@ -56,10 +62,25 @@ inputs.datatable_name = "mcafee_epo_policies"
 inputs.incident_id = incident.id
 ```
 
-### Post-Processing Script
+---
+
+## Local script - post process
+
+### Description
+
+
+### Script Type
+`Local script`
+
+### Object Type
+`incident`
+
+### Script Content
 ```python
+results = playbook.functions.results.query
+policiesResults = playbook.functions.results.policies
 if results.get("success"):
-  for policy in workflow.properties.policyresults["content"]:
+  for policy in policiesResults.get("content", {}):
     policyId = int(policy.get("objectId"))
     table_row = incident.addRow("mcafee_epo_policies")
     table_row["object_name"] = policy.get("objectName")
