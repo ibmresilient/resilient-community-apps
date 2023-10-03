@@ -1,69 +1,95 @@
 # -*- coding: utf-8 -*-
 # Generated with resilient-sdk v50.0.108
 """Tests using pytest_resilient_circuits"""
+import unittest, time
 
-import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
+from fn_mandiant.lib.mandiant_client import *
+from unittest.mock import MagicMock
 
 PACKAGE_NAME = "fn_mandiant"
 FUNCTION_NAME = "mandiant_threat_intelligence"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+def mock_authentication_request(method, url, headers, data):
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+    class response:
+        request_count = 0
 
+        def __init__(self, value):
+            self.value = value
+        
+        def json(self):
+            return self.value
 
-def call_mandiant_threat_intelligence_function(circuits, function_params, timeout=5):
-    # Create the submitTestFunction event
-    evt = SubmitTestFunction("mandiant_threat_intelligence", function_params)
-
-    # Fire a message to the function
-    circuits.manager.fire(evt)
-
-    # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
-    # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=timeout)
-
-    if exception_event is not False:
-        exception = exception_event.args[1]
-        raise exception
-
-    # else return the FunctionComponent's results
-    else:
-        event = circuits.watcher.wait("mandiant_threat_intelligence_result", parent=evt, timeout=timeout)
-        assert event
-        assert isinstance(event.kwargs["result"], FunctionResult)
-        pytest.wait_for(event, "complete", True)
-        return event.kwargs["result"].value
+    assert method == "post"
+    assert url == TOKEN_URL
+    assert headers
+    assert data
+    assert "Authorization" in headers
+    assert headers["Authorization"] == "Basic a2V5MTIzOnNlY3JldDEyMw=="
+    assert "grant_type" in data
+    assert data["grant_type"] == "client_credentials"
+    return response({
+        "access_token" : "accesstoken123",
+        "token_type"   : "bearer",
+        "expires_in"   : 100000})
 
 
-class TestMandiantThreatIntelligence:
-    """ Tests for the mandiant_threat_intelligence function"""
+def mock_search_artifact(method, url, headers):
+    exp_url = 'https://api.intelligence.mandiant.com/v4/indicator/{}/data?explainer=true'
+    assert method == "get"
+    assert any([exp_url.format(artifact) == url  for artifact in ["ipv4", "url", "fqdn", "md5"]])
+    assert headers
+    assert "Authorization" in headers
+    assert "bearer" in headers["Authorization"]
+    ret = MagicMock()
+    ret.json.return_value = {"success" : True}
+    return ret
 
-    def test_function_definition(self):
-        """ Test that the package provides customization_data that defines the function """
-        func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
-        assert func is not None
 
-    mock_inputs_1 = {
-    }
+class TestMandiantClient(unittest.TestCase):
 
-    expected_results_1 = {"value": "xyz"}
+    def test_mandiant_client_constructor(self):
+        rc = MagicMock()
+        options = {
+            AUTH_KEY : "key123",
+            AUTH_SECRET : "secret123"}
 
-    mock_inputs_2 = {
-    }
+        mc = MandiantClient(rc, options)
+        self.assertDictEqual(mc._client_common, {
+            'key': 'key123',
+            'secret': 'secret123',
+            'authenticated': False})
 
-    expected_results_2 = {"value": "xyz"}
 
-    @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1),
-        (mock_inputs_2, expected_results_2)
-    ])
-    def test_success(self, circuits_app, mock_inputs, expected_results):
-        """ Test calling with sample values for the parameters """
+    def test_authenticate(self):
+        rc = MagicMock()
+        rc.execute = mock_authentication_request
+        options = {
+            AUTH_KEY : "key123",
+            AUTH_SECRET : "secret123"}
 
-        results = call_mandiant_threat_intelligence_function(circuits_app, mock_inputs)
-        assert(expected_results == results)
+        mc = MandiantClient(rc, options)
+        mc.authenticate()
+        self.assertDictEqual(mc._client_common["headers"], {
+            'Accept'  : "application/json",
+            'Authorization' : "bearer accesstoken123"})
+        assert mc._client_common[AUTHENTICATED]
+        assert mc._client_common["expires_in"] > int(time.time())
+
+
+    def test_search_artifact(self):
+        rc = MagicMock()
+        rc.execute = mock_authentication_request
+        options = {
+            AUTH_KEY : "key123",
+            AUTH_SECRET : "secret123"}
+
+        mc = MandiantClient(rc, options)
+        mc.authenticate()
+
+        rc.execute = mock_search_artifact
+        assert mc.search_artifact("ip address", "data")["success"]
+        assert mc.search_artifact("url", "data")["success"]
+        assert mc.search_artifact("dns name", "data")["success"]
+        assert mc.search_artifact("malware md5 hash", "data")["success"]
+        self.assertDictEqual({"error": "IoC Type not supported"}, mc.search_artifact("email", "data"))
