@@ -49,6 +49,7 @@ fn_joe_sandbox_analysis
 fn_kafka
 fn_ldap_utilities
 fn_maas360
+fn_mandiant
 fn_mcafee_atd
 fn_mcafee_epo
 fn_mcafee_esm
