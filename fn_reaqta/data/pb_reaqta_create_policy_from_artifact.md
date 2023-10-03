@@ -61,7 +61,7 @@ inputs.reaqta_hives = playbook.inputs.reaqta_hive_labels if playbook.inputs.reaq
 
 ---
 
-## Local script - reaqta_create_policy_from_artifact_post_process
+## Local script - qradar_edr_create_policy_from_artifact_post_process
 
 ### Description
 

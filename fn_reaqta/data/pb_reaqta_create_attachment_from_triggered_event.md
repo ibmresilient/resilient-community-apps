@@ -47,7 +47,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - ReaQta: Write attachment results to note
+## Local script - QRadar EDR: Write attachment results to note
 
 ### Description
 Write attachment results to note.

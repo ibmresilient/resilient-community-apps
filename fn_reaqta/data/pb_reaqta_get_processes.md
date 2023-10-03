@@ -53,7 +53,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_get_processes_post_process
+## Local script - qradar_edr_get_processes_post_process
 
 ### Description
 

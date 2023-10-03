@@ -47,7 +47,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_kill_process_post_process
+## Local script - qradar_edr_kill_process_post_process
 
 ### Description
 

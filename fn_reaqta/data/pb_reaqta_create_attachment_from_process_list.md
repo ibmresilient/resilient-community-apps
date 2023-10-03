@@ -53,7 +53,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - ReaQta: Write attach files to note
+## Local script - QRadar EDR: Write attach files to note
 
 ### Description
 Write the results of create attachment file to note.

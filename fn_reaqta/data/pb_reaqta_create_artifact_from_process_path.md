@@ -48,7 +48,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - ReaQta: write create artifact results to note
+## Local script - QRadar EDR: write create artifact results to note
 
 ### Description
 Write a note to SOAR if there is an error creating artifacts.

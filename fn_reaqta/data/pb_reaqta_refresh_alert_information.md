@@ -45,7 +45,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_refresh_alert_information_post_process
+## Local script - qradar_edr_refresh_alert_information_post_process
 
 ### Description
 

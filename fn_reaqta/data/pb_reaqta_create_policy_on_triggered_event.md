@@ -60,7 +60,7 @@ inputs.reaqta_hives = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_create_policy_post_process
+## Local script - qradar_edr_create_policy_post_process
 
 ### Description
 

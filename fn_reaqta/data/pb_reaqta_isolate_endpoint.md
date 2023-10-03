@@ -45,7 +45,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_isolate_endpoint_post_process
+## Local script - qradar_edr_isolate_endpoint_post_process
 
 ### Description
 

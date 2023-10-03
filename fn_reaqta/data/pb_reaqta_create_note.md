@@ -46,7 +46,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_create_note_post_process
+## Local script - qradar_edr_create_note_post_process
 
 ### Description
 
