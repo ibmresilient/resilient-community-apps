@@ -58,7 +58,6 @@ inputs.mandiant_artifact_type = artifact.type
 
 ### Script Content
 ```python
-
 def compile_section_by_dtype(value, name):
     """
     Complies received information into HIT Cards. The information can have varied datatype. This function
@@ -165,23 +164,23 @@ def compile_hits_section(gathered_info, compiled_section:list) -> list:
     Here's a breakdown of its functionality:
         1. It iterates through the keys of the `gathered_info` dictionary.
         2. If a key corresponds to a dictionary, it recursively calls itself with the nested
-           dictionary, aiming to flatten it, and appends the results to the `compiled_section`.
+            dictionary, aiming to flatten it, and appends the results to the `compiled_section`.
         3. If the `gathered_info` is not a list and the value associated with the current key
-           is a dictionary, it also recursively calls itself to flatten the nested dictionary.
+            is a dictionary, it also recursively calls itself to flatten the nested dictionary.
         4. If the current key is not a list, and the value is a list, it iterates through the
-           list and checks if the elements are dictionaries or lists. If so, it recursively
-           calls itself on each element and appends the results to the `compiled_section`.
+            list and checks if the elements are dictionaries or lists. If so, it recursively
+            calls itself on each element and appends the results to the `compiled_section`.
         5. If neither of the above conditions is met (i.e., the key or value is not a list or
-           dictionary), it formats the key and value into a subsection using a function called
-           `compile_section_by_dtype`. It then appends this subsection to the `compiled_section`.
+            dictionary), it formats the key and value into a subsection using a function called
+            `compile_section_by_dtype`. It then appends this subsection to the `compiled_section`.
         6. Finally, it returns the `compiled_section` containing the flattened and organized data.
 
     Args:
     ----
         gathered_info   (dict or list) : Could either be a dictionary or a list that requires
-                                         flattening.
+                                            flattening.
         compiled_section        (list) : Final flattened result. Contains a list of dictionaries.
-                                         The function starts of with an empty list.
+                                            The function starts of with an empty list.
 
     Returns:
     -------
@@ -210,7 +209,6 @@ def compile_hits_section(gathered_info, compiled_section:list) -> list:
             for each_entity in gathered_info[each_key]:
                 if isinstance(each_entity, dict) or isinstance(each_entity, list):
                     subsection = compile_hits_section(each_entity, compiled_section)
-                    compiled_section.append(subsection)
 
         # Finally, if the key or value is not a list or dict, then it's classified based on
         # it's datatype and formatted into a section.
@@ -230,7 +228,7 @@ def add_response_as_hits(response):
     Args:
     ----
         response (dict): response from the function that contains information that is to be displayed
-                         as HITS.
+                            as HITS.
     Returns:
     -------
         None
@@ -258,14 +256,14 @@ def add_response_as_hits(response):
     section = compile_hits_section(main_section, [])
     section = dedup_section(section)
     artifact.addHit("Mandiant Threat intelligence: MScore", section)
-
-
+    
+    
+    
 result = playbook.functions.results.mandiant_results
 if not result.success:
     incident.addNote(helper.createRichText(result.reason))
 elif "error" not in result.content:
     add_response_as_hits(result.content)
-
 ```
 
 ---
