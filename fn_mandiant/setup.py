@@ -33,8 +33,7 @@ setup(
     long_description="""Investigate publicly known threats with insights from Mandiant. Upon artifact creation, the application is shipped with a disabled playbook which when activated, automatically scans Mandiant for any related information.""",
     install_requires=[
         "resilient-circuits>=49.1.0",
-        "retry",
-        "base64"
+        "retry"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
