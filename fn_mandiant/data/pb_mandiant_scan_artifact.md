@@ -10,7 +10,7 @@
 `mandiant_scan_artifact`
 
 ### Status
-`enabled`
+`disabled`
 
 ### Activation Type
 `Automatic`
