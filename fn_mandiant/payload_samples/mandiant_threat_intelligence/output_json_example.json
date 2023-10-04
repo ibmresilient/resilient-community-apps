@@ -1,3 +1,475 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "url--30347ecb-ecc0-5d63-a422-2f0aa046d48c",
+    "mscore": 99,
+    "type": "url",
+    "value": "http://achren.org",
+    "is_publishable": true,
+    "sources": [
+      {
+        "first_seen": "2020-07-31T00:15:02.614+0000",
+        "last_seen": "2020-07-31T00:15:02.614+0000",
+        "osint": true,
+        "category": [],
+        "source_name": "malwaredomainlist"
+      }
+    ],
+    "verdict": {
+      "analystVerdict": {
+        "timestamp": null,
+        "verdict": null,
+        "confidenceScore": 0
+      },
+      "authoritativeVerdict": "mlVerdict",
+      "mlVerdict": {
+        "confidenceScore": 0.9888736570875306,
+        "verdict": "malicious",
+        "timestamp": "2022-02-17T22:00:35.914+0000",
+        "modelVersion": "6.1.0",
+        "reasoning": {
+          "malicious_count": 4,
+          "source_count": 185,
+          "neighbor_influence": null,
+          "mandiant": {
+            "bp_hosting": {
+              "benign_count": 0,
+              "confidence": null,
+              "malicious_count": 0,
+              "name": "Bulletproof Hosting",
+              "response_count": 0,
+              "source_count": 1
+            },
+            "fqdn_analysis": {
+              "benign_count": 1,
+              "confidence": "low",
+              "malicious_count": 0,
+              "name": "FQDN Analysis",
+              "response_count": 1,
+              "source_count": 2
+            },
+            "knowledge_graph": {
+              "benign_count": 0,
+              "confidence": null,
+              "malicious_count": 0,
+              "name": "Knowledge Graph",
+              "response_count": 0,
+              "source_count": 1
+            },
+            "malware_analysis": {
+              "benign_count": 0,
+              "confidence": null,
+              "malicious_count": 0,
+              "name": "Malware Analysis",
+              "response_count": 0,
+              "source_count": 3
+            },
+            "name": "Mandiant",
+            "spam": {
+              "benign_count": 0,
+              "confidence": null,
+              "malicious_count": 0,
+              "name": "Spam Monitoring",
+              "response_count": 0,
+              "source_count": 1
+            },
+            "url_analysis": {
+              "benign_count": 1,
+              "confidence": "low",
+              "malicious_count": 0,
+              "name": "URL Analysis",
+              "response_count": 1,
+              "source_count": 4
+            }
+          },
+          "response_count": 6,
+          "confidence_count": {
+            "benign": {
+              "high": 0,
+              "low": 2,
+              "med": 0
+            },
+            "malicious": {
+              "high": 0,
+              "low": 0,
+              "med": 4
+            }
+          },
+          "tp": {
+            "crowdsource": {
+              "benign_count": 0,
+              "confidence": "med",
+              "malicious_count": 3,
+              "name": "Crowdsourced Threat Analysis",
+              "response_count": 3,
+              "source_count": 91
+            },
+            "misp": {
+              "dch": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Dynamic Cloud Hosting (DCH) Provider",
+                "response_count": 0,
+                "source_count": 9
+              },
+              "edu": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Educational Institution",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "name": "MISP",
+              "other": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Other",
+                "response_count": 0,
+                "source_count": 14
+              },
+              "popular_infra": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Popular Internet Infrastructure",
+                "response_count": 0,
+                "source_count": 18
+              },
+              "popular_web": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Popular Website",
+                "response_count": 0,
+                "source_count": 8
+              },
+              "sinkhole": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Internet Sinkhole",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "vpn": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Known VPN Hosting Provider",
+                "response_count": 0,
+                "source_count": 1
+              }
+            },
+            "name": "Third Party",
+            "tif": {
+              "aa419": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Aa419",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "azorult-tracker": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Azorult-tracker",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "benkow": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Benkow",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "botvrij_urls": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Botvrij Urls",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "cryptolaemus": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Cryptolaemus",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "cybercrimetracker": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Cybercrimetracker",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "davidonzo_hashes": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Davidonzo Hashes",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "dev": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Dev",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "digitalside_it_hashes": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Digitalside It Hashes",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "digitalside_it_urls": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Digitalside It Urls",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "dyndns_ponmocup": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Dyndns Ponmocup",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "feodo": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Feodo",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "feodo_ids": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Feodo Ids",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "fumik0": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Fumik0",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "futex.re": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Futex.re",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "h3x_1day": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "H3x 1day",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "malc0de": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Malc0de",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "malshare": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Malshare",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "malwared": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Malwared",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "malwaredomainlist": {
+                "benign_count": 0,
+                "confidence": "med",
+                "malicious_count": 1,
+                "name": "Malwaredomainlist",
+                "response_count": 1,
+                "source_count": 1
+              },
+              "malwaremustdie": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Malwaremustdie",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "name": "Threat Intelligence Feeds",
+              "openphish": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Openphish",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "phishing_database": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Phishing Database",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "phishstats": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Phishstats",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "phishtank": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Phishtank",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "phishtank_valid_online": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Phishtank Valid Online",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "urlhaus": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Urlhaus",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "urlscan_phishing": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Urlscan Phishing",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "viriback": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Viriback",
+                "response_count": 0,
+                "source_count": 1
+              },
+              "vxvault_virilist": {
+                "benign_count": 0,
+                "confidence": null,
+                "malicious_count": 0,
+                "name": "Vxvault Virilist",
+                "response_count": 0,
+                "source_count": 1
+              }
+            }
+          },
+          "benign_count": 2,
+          "version": "1.0.1"
+        }
+      }
+    },
+    "misp": {
+      "akamai": false,
+      "alexa_1M": false,
+      "apple": false,
+      "bank-website": false,
+      "cisco_1M": false,
+      "cisco_top1000": false,
+      "cisco_top20k": false,
+      "common-contact-emails": false,
+      "covid-19-cyber-threat-coalition-whitelist": false,
+      "covid-19-krassi-whitelist": false,
+      "dax30": false,
+      "empty-hashes": false,
+      "google-gcp": false,
+      "google-gmail-sending-ips": false,
+      "googlebot": false,
+      "majestic_million_1M": false,
+      "microsoft": false,
+      "microsoft-attack-simulator": false,
+      "microsoft-azure": false,
+      "microsoft-azure-china": false,
+      "microsoft-azure-germany": false,
+      "microsoft-azure-us-gov": false,
+      "microsoft-win10-connection-endpoints": false,
+      "mozilla-IntermediateCA": false,
+      "multicast": false,
+      "nioc-filehash": false,
+      "ovh-cluster": false,
+      "public-dns-v4": false,
+      "public-dns-v6": false,
+      "sinkholes": false,
+      "smtp-receiving-ips": false,
+      "smtp-sending-ips": false,
+      "university_domains": false,
+      "url-shortener": false,
+      "vpn-ipv4": false,
+      "vpn-ipv6": false,
+      "whats-my-ip": false,
+      "wikimedia": false
+    },
+    "last_updated": "2022-02-17T22:00:36.968Z",
+    "first_seen": "2020-07-31T00:15:02.000Z",
+    "last_seen": "2020-07-31T00:15:02.000Z"
+  },
+  "raw": null,
+  "inputs": {
+    "mandiant_artifact_data": "http://achren.org",
+    "mandiant_artifact_type": "URL"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mandiant",
+    "package_version": "1.0.0",
+    "host": "App Host",
+    "execution_time_ms": 223,
+    "timestamp": "2023-10-03 13:20:15"
+  }
 }

@@ -4,6 +4,7 @@ import logging
 from retry import retry
 from base64 import b64encode
 from resilient_lib import IntegrationError
+from resilient_lib import validate_fields
 
 TOKEN_TYPE = "token_type"
 ACCESS_TOKEN = "access_token"
@@ -26,6 +27,10 @@ class MandiantClient:
     Client that allows for connecting to Mandiant endpoint and searching information on IOC.
     """
     def __init__(self, rc, options):
+
+        # Checking if AUTH_KEY and SECRET is available in app.conf
+        validate_fields([AUTH_KEY, AUTH_SECRET], options)
+
         self.rc = rc
         self._client_common = {
             AUTH_KEY : options.get(AUTH_KEY),
