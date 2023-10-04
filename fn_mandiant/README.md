@@ -52,7 +52,7 @@
 ---
 
 ## Overview
-**Automatically search Mandiant for information on certain artifact types**
+**Automatically search Mandiant for information on artifacts**
 
  ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
 

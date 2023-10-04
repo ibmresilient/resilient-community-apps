@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v50.0.108
 """Tests using pytest_resilient_circuits"""
 import unittest, time

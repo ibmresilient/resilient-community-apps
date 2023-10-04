@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+
 import unittest
 
 import data.pb_mandiant_scan_artifact_script as playbook

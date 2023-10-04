@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v50.0.108
 
 from setuptools import setup, find_packages
@@ -24,16 +24,17 @@ def snake_to_camel(word):
 
 setup(
     name="fn_mandiant",
-    display_name="<<display name of your app here>>",
+    display_name="Mandiant Threat Intelligence",
     version="1.0.0",
-    license="<<insert here>>",
-    author="<<your name here>>",
-    author_email="you@example.com",
-    url="<<your company url>>",
-    description="<<::CHANGE_ME::>>Enter a short description of the App",
-    long_description="""<<::CHANGE_ME::>> Enter a long description, including the key features of the App. \\\nMultiple continuation lines are supported with a backslash. Line breaks are supported too:\n<br>- This will be rendered like a list\n<br>- once the App is installed in SOAR""",
+    license="MIT",
+    author="IBM SOAR",
+    url="https://ibm.com/mysupport",
+    description="Automatically search Mandiant for information on artifacts",
+    long_description="""Investigate publicly known threats with insights from Mandiant. Upon artifact creation, the application is shipped with a disabled playbook which when activated, automatically scans Mandiant for any related information.""",
     install_requires=[
-        "resilient-circuits>=49.1.0"
+        "resilient-circuits>=49.1.0",
+        "retry",
+        "base64"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

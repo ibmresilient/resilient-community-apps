@@ -1,24 +1,6 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v50.0.108
-
-"""
-Function implementation test.
-Usage: 
-    resilient-circuits selftest -l fn-mandiant
-    resilient-circuits selftest --print-env -l fn-mandiant
-
-Return examples:
-    return {
-        "state": "success",
-        "reason": "Successful connection to third party endpoint"
-    }
-
-    return {
-        "state": "failure",
-        "reason": "Failed to connect to third party endpoint"
-    }
-"""
 
 import logging
 
