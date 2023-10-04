@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# Mandiant Integraiton for QRadar Soar  <!-- omit in toc -->
+# Mandiant Threat Intelligence for QRadar Soar <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
 - [Release Notes](#release-notes)
