@@ -75,11 +75,14 @@ def codegen_reload_data():
             u"mcafee_epo_add_system",
             u"mcafee_epo_add_user",
             u"mcafee_epo_apply_a_tag",
+            u"mcafee_epo_apply_tags",
             u"mcafee_epo_assign_policy_to_group_from_group",
             u"mcafee_epo_assign_policy_to_group_from_policy",
+            u"mcafee_epo_assign_policy_to_system_from_system",
             u"mcafee_epo_assign_policy_to_systems_from_policy",
             u"mcafee_epo_create_issue",
             u"mcafee_epo_delete_issue",
+            u"mcafee_epo_delete_system",
             u"mcafee_epo_find_all_client_tasks",
             u"mcafee_epo_find_all_groups",
             u"mcafee_epo_find_policies",
@@ -94,6 +97,7 @@ def codegen_reload_data():
             u"mcafee_epo_remove_tags",
             u"mcafee_epo_remove_user",
             u"mcafee_epo_run_client_task",
+            u"mcafee_epo_run_client_task_on_system",
             u"mcafee_epo_update_issue",
             u"mcafee_epo_update_user",
             u"mcafee_epo_wake_up_agent"
@@ -143,11 +147,14 @@ def customization_data(client=None):
         - mcafee_epo_add_system
         - mcafee_epo_add_user
         - mcafee_epo_apply_a_tag
+        - mcafee_epo_apply_tags
         - mcafee_epo_assign_policy_to_group_from_group
         - mcafee_epo_assign_policy_to_group_from_policy
+        - mcafee_epo_assign_policy_to_system_from_system
         - mcafee_epo_assign_policy_to_systems_from_policy
         - mcafee_epo_create_issue
         - mcafee_epo_delete_issue
+        - mcafee_epo_delete_system
         - mcafee_epo_find_all_client_tasks
         - mcafee_epo_find_all_groups
         - mcafee_epo_find_policies
@@ -162,6 +169,7 @@ def customization_data(client=None):
         - mcafee_epo_remove_tags
         - mcafee_epo_remove_user
         - mcafee_epo_run_client_task
+        - mcafee_epo_run_client_task_on_system
         - mcafee_epo_update_issue
         - mcafee_epo_update_user
         - mcafee_epo_wake_up_agent
