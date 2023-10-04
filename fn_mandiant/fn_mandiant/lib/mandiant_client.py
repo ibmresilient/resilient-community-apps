@@ -10,8 +10,8 @@ ACCESS_TOKEN = "access_token"
 ERROR_RESPONSE = "error"
 CONTENT_TYPE = "application/json"
 
-AUTH_KEY = "key"
-AUTH_SECRET = "secret"
+AUTH_KEY = "api_key"
+AUTH_SECRET = "api_secret"
 AUTHENTICATED = "authenticated"
 
 TOKEN_URL = "https://api.intelligence.fireeye.com/token"
@@ -65,7 +65,7 @@ class MandiantClient:
         """
         LOG.info("Initiating Authentication process")
 
-        _key, _secret = self._client_common.get("key"), self._client_common.get("secret")
+        _key, _secret = self._client_common.get(AUTH_KEY), self._client_common.get(AUTH_SECRET)
         _cur_time = int(time.time())
 
         # base64Encoding the key and secret to generate the required token for a basic 

@@ -56,8 +56,8 @@ class TestMandiantClient(unittest.TestCase):
 
         mc = MandiantClient(rc, options)
         self.assertDictEqual(mc._client_common, {
-            'key': 'key123',
-            'secret': 'secret123',
+            'api_key': 'key123',
+            'api_secret': 'secret123',
             'authenticated': False})
 
 
