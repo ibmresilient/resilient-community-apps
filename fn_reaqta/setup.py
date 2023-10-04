@@ -22,7 +22,7 @@ def snake_to_camel(word):
 
 setup(
     name="fn_reaqta",
-    display_name="ReaQta",
+    display_name="QRadar EDR",
     version="1.3.0",
     license="MIT",
     author="IBM SOAR",
