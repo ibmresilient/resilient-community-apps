@@ -18,29 +18,27 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# <<display name of your app here>>
+# Mandiant Integraiton for QRadar Soar  <!-- omit in toc -->
 
-## Table of Contents
-- [\<\>](#)
-  - [Table of Contents](#table-of-contents)
-  - [Release Notes](#release-notes)
-  - [Overview](#overview)
-    - [Supported Artifacts](#supported-artifacts)
-    - [Key Features](#key-features)
-  - [Requirements](#requirements)
-    - [SOAR platform](#soar-platform)
-    - [Cloud Pak for Security](#cloud-pak-for-security)
-    - [Proxy Server](#proxy-server)
-    - [Python Environment](#python-environment)
-    - [Development Version](#development-version)
-    - [Endpoint Configuration](#endpoint-configuration)
-  - [Installation](#installation)
-    - [Install](#install)
-    - [App Configuration](#app-configuration)
-  - [Function - Mandiant: Threat Intelligence](#function---mandiant-threat-intelligence)
-  - [Playbooks](#playbooks)
-  - [Troubleshooting \& Support](#troubleshooting--support)
-    - [For Support](#for-support)
+## Table of Contents <!-- omit in toc -->
+- [Release Notes](#release-notes)
+- [Overview](#overview)
+  - [Supported Artifacts](#supported-artifacts)
+  - [Key Features](#key-features)
+- [Requirements](#requirements)
+  - [SOAR platform](#soar-platform)
+  - [Cloud Pak for Security](#cloud-pak-for-security)
+  - [Proxy Server](#proxy-server)
+  - [Python Environment](#python-environment)
+  - [Development Version](#development-version)
+  - [Endpoint Configuration](#endpoint-configuration)
+- [Installation](#installation)
+  - [Install](#install)
+  - [App Configuration](#app-configuration)
+- [Function - Mandiant: Threat Intelligence](#function---mandiant-threat-intelligence)
+- [Playbooks](#playbooks)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 
 ---
 

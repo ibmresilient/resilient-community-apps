@@ -114,7 +114,8 @@ class FunctionComponent(AppFunctionComponent):
         LOG.info(f"allowed_status_codes : {allowed_status_codes}")
         LOG.info(f"rest_properties      : {json.dumps(rest_properties, indent=2)}")
 
-        # Rendering rest url with values from app.conf        rest_url = render(rest_url, self.options)
+        # Rendering rest url with values from app.conf
+        rest_url = render(rest_url, self.options)
 
         # Rendering any OAuth property that has values from app.conf
         LOG.info("Rendering OAuth properties")
