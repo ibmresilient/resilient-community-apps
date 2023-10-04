@@ -52,10 +52,12 @@
 ---
 
 ## Overview
-**Automatically search Mandiant for information on artifacts**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+<p align="center">
+<img src="./doc/screenshots/main.png" />
+</p>
 
+**Automatically search Mandiant for information on artifacts** \
 Investigate publicly known threats with insights from Mandiant. Upon artifact creation, the application is shipped with a disabled playbook which when activated, automatically scans Mandiant for any related information.
 
 ### Supported Artifacts
@@ -71,7 +73,9 @@ Investigate publicly known threats with insights from Mandiant. Upon artifact cr
 * Identifies other sources or similar candidates.
 * Generates a verdict by gathering information on various analysis performed on the artifact.
 
- ![screenshot: main](./doc/screenshots/main.png) 
+<p align="center">
+<img src="./doc/screenshots/mandiant-hits.png" />
+</p>
 
 ---
 
@@ -146,15 +150,17 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| api_key | Yes | 7659xxxx29bc6cxxxx | API key required for authentication |
-| api_secret | Yes | 6546xxxx29bc6cxxxx | API secret required for authentication |
+| api_key | `Yes` | `7659xxxx29bc6cxxxx` | API key required for authentication |
+| api_secret | `Yes` | `6546xxxx29bc6cxxxx` | API secret required for authentication |
 
 ---
 
 ## Function - Mandiant: Threat Intelligence
 Provides customers with intelligence on who is most likely going to attack them, how they are going to attack, and what tools they will use.  This allows customers to prepare their defenses against an imminent attack.
 
- ![screenshot: fn-mandiant-threat-intelligence ](./doc/screenshots/fn-mandiant-threat-intelligence.png) 
+<p align="center">
+<img src="./doc/screenshots/fn-mandiant-threat-intelligence.png" />
+</p>
 
 <details><summary>Inputs:</summary>
 <p>
