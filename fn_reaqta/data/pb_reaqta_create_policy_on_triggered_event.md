@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Create Policy on Triggered Event (PB)
+# Playbook - QRadar EDR: Create Policy on Triggered Event (PB)
 
 ### API Name
 `reaqta_create_policy_on_triggered_event`
@@ -35,7 +35,7 @@ Create an alert trigger policy based on a file hash
 
 
 ---
-## Function - ReaQta: Create Policy
+## Function - QRadar EDR: Create Policy
 
 ### API Name
 `reaqta_create_policy`
@@ -60,7 +60,7 @@ inputs.reaqta_hives = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_create_policy_post_process
+## Local script - qradar_edr_create_policy_post_process
 
 ### Description
 

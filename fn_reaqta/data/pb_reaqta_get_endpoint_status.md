@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta Get Endpoint Status (PB)
+# Playbook - QRadar EDR: Get Endpoint Status (PB)
 
 ### API Name
 `reaqta_get_endpoint_status`
@@ -26,7 +26,7 @@ Get the current status of a ReaQta Endpoint
 
 
 ---
-## Function - ReaQta Get Endpoint Status
+## Function - QRadar EDR: Get Endpoint Status
 
 ### API Name
 `reaqta_get_endpoint_status`
@@ -45,7 +45,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_get_endpoint_status_post_process
+## Local script - qradar_edr_get_endpoint_status_post_process
 
 ### Description
 

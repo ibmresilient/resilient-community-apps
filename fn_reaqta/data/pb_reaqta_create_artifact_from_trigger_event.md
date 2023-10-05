@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Create Artifact from Trigger Event (PB)
+# Playbook - QRadar EDR: Create Artifact from Trigger Event (PB)
 
 ### API Name
 `reaqta_create_artifact_from_trigger_event`
@@ -26,7 +26,7 @@ None
 
 
 ---
-## Function - ReaQta: Create Artifact
+## Function - QRadar EDR: Create Artifact
 
 ### API Name
 `reaqta_create_artifact`
