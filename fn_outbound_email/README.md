@@ -1,3 +1,5 @@
+# Outbound Email
+
 ## Table of Contents
 - [Release Notes](#release-notes)
   - [v2.0 Changes](#v2_0-changes)
@@ -29,6 +31,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v2.1.0 | 5/2023 | Added message signing and encryption capabilities. Replaced workflows with playbooks |
 | v2.0.2 | 12/2022 | Bug fix when specifying your own default template |
 | v2.0.1 | 10/2022 | Bug fix |
 | v2.0.0 | 10/2022 | Added OAuth 2.0 support for SMTP. Multiple out of box changes |
@@ -41,6 +44,21 @@
 | v1.0.9 | 5/2020 | Edge Gateway (formerly App Host) compatibility |
 | v1.0.8 | 4/2020 | Initial Release |
 
+### 2.1 Changes
+In v2.1, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow. 
+
+If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows. 
+But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
+
+Finally, the following Playbooks use an activation form field `Template (mail_template_select)` which needs to be modified manually to list the labels used for templates specified in app.config:
+
+* Outbound Email Reply to Message (PB)
+* Send Incident Email HTML2 (PB) Example
+* Send Task Email HTML2 (PB) Example
 
 ### v2.0 Changes
 Version 2.0 represents a comprehensive set of changes to make the use of outbound email more out-the-box
@@ -53,7 +71,7 @@ with inbound mail. This release incorporates many changes which are summarized h
 * Additional header available for outbound email (i.e. message-id, in-reply-to, importance).
 * A new function to preserve the original outbound email capability and allow all the new functionality in
 v2.0 to be added. See [Function - Outbound Email: Send Email2](#function---outbound-email-send-email2).
-* OAuth authenticateion
+* OAuth authentication
 ---
 
 ## Overview
@@ -95,11 +113,11 @@ This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Securit
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `43.1.0`.
+* SOAR platform >= `45.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `43.1.0`.
+* SOAR platform >= `45.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -117,7 +135,7 @@ The above guides are available on the IBM Knowledge Center at [ibm.biz/soar-docs
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.9.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -137,7 +155,9 @@ Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=39.0.0
 * resilient_lib>=32.0.0
 * six
-* BeautifulSoup 
+* BeautifulSoup
+* python-smail
+* cryptography
 
 #### Prerequisites
 <!--
@@ -248,15 +268,32 @@ The following table provides the settings you need to configure the app. These s
 | **smtp_port** | Yes | `25` | *Defaults to unauthenticated, 587/2525 for TLS.* |
 | **smtp_conn_timeout** | Yes | `20` | *Timeout value in seconds to wait for a connection.* |
 | **smtp_ssl_mode** | Yes | `None` | *Set to 'starttls' when using smtp_user and smtp_password.* |
-| **smtp_ssl_cafile** | No | `false or /path/to/smtp_certifcate.pem or crt file` | *TLS certificate setting. Can be a path to a CA bundle or 'false'.* |
+| **smtp_ssl_cafile** | No | `false or /path/to/smtp_certificate.pem or crt file` | *TLS certificate setting. Can be a path to a CA bundle or 'false'.* |
 | **template_file** | No | `data/example_send_email.jinja` | *Path to template.jinja for rendering the email body.* |
 | **enable_email_conversations** | No | `true/false` | *enhance the 'email' tab with email conversation fields and datatable *  |
+| p12_signing_cert | No | /path/to/signing_encrypting_cert.p12 | certificate for email signing. In p12 format. |
+| p12_signing_cert_password | No | $USE_PRIVATE_SECRET | password, if any, needed to  unlock private key |
 
-**_NOTE:_** The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.
+#### P12 Signing and Unencrypting Certificates
+The signing and unencrypting certificates are bundled in the pkcs12 format which includes both the email sender's private key and public certificate needed for signing emails. 
+The public certificate needs to have the `emailProtection` trust in order to be used for signing. 
 
-**_NOTE:_** The auth_url setting is optional and is not used by the SOAR app itself. It can be used by the generate_oauth2_refresh_token utility from the oauth-utils package to generate a refresh token.
+It should be noted that this same pkcs12 bundle should be added to the recipients' email client app. Adding the certificate allows the email client to verify the sender's email digital signature. If using a self-signed CA certificate with your email certificate, make sure to also add the CA certificate to each recipient's CA trust store.
 
-**_NOTE:_** For customers upgrading from a pervious release, the app.config file must be manually edited.
+Each mail client has it's own way of importing email certificates. Consult your application's documentation on how to configure those certificates. Below is how  the Thunderbird Email Client imports email certificates used for both email signature verification and for unencrypting recipient emails.
+
+![screenshot: fn-send-email ](./doc/screenshots/p12_certificates.png)
+
+When the certificates are properly imported, your emails will have some indication that the digital signature is verified and, if encrypted, that the message was successfully unencrypted.
+
+![screenshot: fn-send-email ](./doc/screenshots/signed_and_encrypted_email.png)
+
+
+#### Notes
+* The SMTP user will use either OAuth2 2.0 authorization settings or use a password for basic authentication.
+* The auth_url setting is optional and is not used by the SOAR app itself. It can be used by the generate_oauth2_refresh_token utility from the oauth-utils package to generate a refresh token.
+* For customers upgrading from a pervious release, the app.config file must be manually edited.
+* For App Host, the file referenced in `p12_signing_encrypting_cert` needs to be in base64 format.
 
 For the oauth-utils package see [IBM Resilient Community](https://github.com/ibmresilient/resilient-community-apps)  or [IBM X-Force App Exchange](https://exchange.xforce.ibmcloud.com).
 
@@ -434,6 +471,12 @@ Send a plain text or HTML-formatted email with SOAR incident details in the emai
 | `mail_message_id` | `text` | No | `-` | message-id header to use: ex: 1638585706.2677204.1655401056967@mail.com. See pre-processor scripts for auto-generation |
 | `mail_template_label` | `text` | No | `template_xx` | The label of a specific template as defined in app.config. |
 | `mail_merge_body` | `bool` | No | `Yes` | Flag to merge `mail_body` with either the results from `mail_line_template` or `mail_template_label`. This setting is useful when including the original email message in a reply. |
+| `mail_encryption_recipients` | `text` | No | -----BEGIN CERTIFICATE----- ... -----END CERTIFICATE----- | Comma separated list of PEM formated public keys used for encrypting the message for the recipients |
+
+NOTE: 
+*  When constructing the public certificates for message encryption, ensure to specify it will be used for email signing. Here's an example of generating that certificate using openssl: `openssl x509 -req -days 3650 -in smime_user.csr -CA ca.crt -CAkey ca.key -set_serial 1 -out smime_user.crt -addtrust emailProtection -addreject clientAuth -addreject serverAuth -trustout`.
+* Some processes for creating public certificates will use headers and trailers such as `-----BEGIN TRUSTED CERTIFICATE-----`. These will not be recognized by the software and should be edited to remove the 'Trusted' entry.
+
 
 </p>
 </details>
@@ -788,7 +831,7 @@ To include a link back to the SOAR incident, add the following information to yo
 
 ### Task Links
 
-To include a link back to the SOAR task, add the following information to your inline template. Unfortunetely, this cannot be added to a template defined in your app.config file.
+To include a link back to the SOAR task, add the following information to your inline template. Unfortunately, this cannot be added to a template defined in your app.config file.
 
 ```
 "Task: <a target='_blank' href='{{{{ template_helper.generate_task_url({inc_id}, {task_id}) }}}}'>{task_name}</a>".format(inc_id=incident.id, task_id=task.id, task_name=task.name)
@@ -822,9 +865,34 @@ https://pepipost.com/blog/25-465-587-2525-choose-the-right-smtp-port/
 
   https://pepipost.com/blog/what-is-smtp
 
-* Some mailservers do not work with this level of authentication/protocal.
+* Some mail servers do not work with this level of authentication/protocol.
 
+### Message Signing and Encryption
+The following references can be useful if creating your own email signing certificates.
+
+* https://www.dalesandro.net/create-self-signed-smime-certificates/
+* https://access.redhat.com/solutions/28965
+
+The first link refers to the general procedure for creating an email certificate using a self-signed CA certificate. This procedure is sufficient for use with this app.
+
+The second link refers to a way to designate your email certificate with the correct emailProtection enhanced key usage attribute. My 'some_extensions.txt` file has the following setting for emailProtection:
+
+```
+[some_ext]
+extendedKeyUsage = 1.3.6.1.5.5.7.3.4
+```
+
+The modified command to sign the certificate signing request file is:
+```
+openssl x509 -req -days 365 -in your_smime_user.csr -CA your_ca.crt -CAkey your_ca_private.key -set_serial 1 -out your_smime_user.crt -addtrust emailProtection -addreject clientAuth -addreject serverAuth -trustout -extensions some_ext -extfile some_extensions.txt
+```
+
+If this extendedKeyUsage attribute is missing, the certificate bundle is still valid, but your logs will show the following warning which can be ignored:
+
+```
+2023-01-05 21:03:55,584 WARNING [smtp_mailer] Unable to confirm public certificate has trust for 'emailProtection'. Continuing.
+```
 ---
 
 ### For Support
-This is a IBM Community provided App. Please search the Community https://ibm.biz/soarcommunity for assistance and use the [My Support link](https://ibm.com/mysupport) to open a support case.
+This is an IBM supported app. Please search the Community https://ibm.biz/soarcommunity for community assistance and use the [My Support link](https://ibm.com/mysupport) to open a support case.
