@@ -53,10 +53,8 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Transition issue {jira_issue_id} to '{jira_transition_id}'")
 
         try:
-            # Transition Jira issue and update fields
-            jira_client.transition_issue(issue=jira_issue_id, transition=jira_transition_id, fields=jira_fields)
-            # Add comment to Jira issue
-            jira_client.issue(jira_issue_id).update(comment=jira_comment)
+            # Transition Jira issue, update fields, and add comment
+            jira_client.transition_issue(issue=jira_issue_id, transition=jira_transition_id, fields=jira_fields, comment=jira_comment)
         except JIRAError as err:
             if err.status_code == 400 or "Invalid transition name." in err.text:
                 # Update fields of the Jira issue
