@@ -18,7 +18,7 @@
   NOTE: If your app is available in the container-format only, there is no need to mention the integration server in this readme.
 -->
 
-# ReaQta
+# QRadar EDR (formally IBM ReaQta)
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -44,8 +44,8 @@
 - [Function - QRadar EDR: Get Processes](#function---qradar-edr-get-processes)
 - [Function - QRadar EDR: Isolate Machine](#function---qradar-edr-isolate-machine)
 - [Function - QRadar EDR: Kill Process](#function---qradar-edr-kill-process)
-- [Data Table - ReaQta Process List](#data-table---reaqta-process-list)
-- [Data Table - ReaQta Trigger Events](#data-table---reaqta-trigger-events)
+- [Data Table - QRadar EDR Process List](#data-table---qradar-edr-process-list)
+- [Data Table - QRadar EDR Trigger Events](#data-table---qradar-edr-trigger-events)
 - [Custom Fields](#custom-fields)
 - [Playbooks](#playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
@@ -111,10 +111,7 @@ Bidirectional synchronization of QRadar EDR (formally known as ReaQta) Alerts to
 ---
 
 ## Requirements
-<!--
-  List any Requirements 
---> 
-<!-- ::CHANGE_ME:: -->
+
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -155,7 +152,7 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app **does/does not** <!-- ::CHANGE_ME:: --> support a proxy server.
+The app does support a proxy server.
 
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
@@ -233,8 +230,15 @@ Repeat this section for each ReaQta hive. Add the `hive_label` used in the `poll
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) <!-- ::CHANGE_ME:: -->
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
+---
+
+## Poller Considerations
+
+The poller is just one way to escalate ReaQta alerts to SOAR cases. It's also possible to send alert information to a SIEM, such as IBM QRadar, which would then corelate alerts into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the ReaQta alert ID is preserved in the custom case field `reaqta_id` and `reaqta_hive`, then all the remaining details about the alert will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the ReaQta Alert ID.
+
+When using another source of ReaQta Alert escalation to IBM SOAR, disable the poller by changing the app.config setting to `poller_interval=0`.
 
 ---
 
@@ -2760,16 +2764,16 @@ reaqta_trigger_events
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| ReaQta Alert Link | `reaqta_alert_link` | `textarea` | `properties` | - | - |
-| ReaQta Endpoint ID | `reaqta_endpoint_id` | `text` | `properties` | - | - |
-| Reaqta Endpoint Link | `reaqta_endpoint_link` | `textarea` | `properties` | - | - |
-| ReaQta Groups | `reaqta_groups` | `text` | `properties` | - | - |
-| ReaQta Hive | `reaqta_hive` | `text` | `properties` | - | ReaQta hive reference when multiple hives are present |
-| ReaQta Alert ID | `reaqta_id` | `text` | `properties` | - | - |
-| ReaQta Impact | `reaqta_impact` | `number` | `properties` | - | - |
-| ReaQta Machine Info | `reaqta_machine_info` | `textarea` | `properties` | - | - |
-| ReaQta Tags | `reaqta_tags` | `text` | `properties` | - | - |
-| ReaQta Trigger Condition | `reaqta_trigger_condition` | `text` | `properties` | - | - |
+| QRadar EDR Alert Link | `reaqta_alert_link` | `textarea` | `properties` | - | - |
+| QRadar EDR Endpoint ID | `reaqta_endpoint_id` | `text` | `properties` | - | - |
+| QRadar EDR Endpoint Link | `reaqta_endpoint_link` | `textarea` | `properties` | - | - |
+| QRadar EDR Groups | `reaqta_groups` | `text` | `properties` | - | - |
+| QRadar EDR Hive | `reaqta_hive` | `text` | `properties` | - | ReaQta hive reference when multiple hives are present |
+| QRadar EDR Alert ID | `reaqta_id` | `text` | `properties` | - | - |
+| QRadar EDR Impact | `reaqta_impact` | `number` | `properties` | - | - |
+| QRadar EDR Machine Info | `reaqta_machine_info` | `textarea` | `properties` | - | - |
+| QRadar EDR Tags | `reaqta_tags` | `text` | `properties` | - | - |
+| QRadar EDR Trigger Condition | `reaqta_trigger_condition` | `text` | `properties` | - | - |
 
 ---
 
