@@ -5,7 +5,7 @@ from mock import patch
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from mock_incident import IncidentMock
+from .mock_incident import IncidentMock
 
 PACKAGE_NAME = "fn_outbound_email"
 FUNCTION_NAME = "send_email2"
