@@ -59,7 +59,7 @@ Write the results of shutdown agent function to a note.
 ```python
 results = playbook.functions.results.shutdown_agent_results
 
-if results.success:
+if results.get("success", False):
   so_inputs = results.get("inputs")
   agent_id = so_inputs.get("sentinelone_agent_id")
   note = "<b>SentinelOne: Shutdown Agent </b><br>  SentinelOne Agent Id: {0}".format(agent_id)

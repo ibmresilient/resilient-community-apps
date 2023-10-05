@@ -194,7 +194,6 @@ List any user permissions that are needed to use this endpoint. For example, lis
 
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
-The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
@@ -324,7 +323,7 @@ incident.addNote(helper.createRichText(note))
 
 ---
 ## Function - SentinelOne: Connect to Network
-Connect an endpoint managed by Sentinel to the network.
+Connect an endpoint managed by SentinelOne to the network.
 
  ![screenshot: fn-sentinelone-connect-to-network ](./doc/screenshots/fn-sentinelone-connect-to-network.png)
 
@@ -1465,7 +1464,7 @@ inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id
 ```python
 results = playbook.functions.results.shutdown_agent_results
 
-if results.success:
+if results.get("success"):
   so_inputs = results.get("inputs")
   agent_id = so_inputs.get("sentinelone_agent_id")
   note = "<b>SentinelOne: Shutdown Agent </b><br>  SentinelOne Agent Id: {0}".format(agent_id)
@@ -1677,7 +1676,7 @@ Features:
 <p>
 
 ```python
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 VERSION = 1.3
 """
   This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note.

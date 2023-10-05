@@ -61,8 +61,7 @@ from datetime import datetime
 import json
 
 results = playbook.functions.results.get_agent_results
-success = results.get("success", False)
-if success:
+if results.get("success", False):
   note = "<b>SentinelOne: Add Agent to Data Table (PB): </b> \n"
   content = results.get("content", False)
   if content:

@@ -3,10 +3,89 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1694718039310,
+  "export_date": 1696521274857,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/sentinelone_agent_file_path",
+      "hide_notification": false,
+      "id": 362,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sentinelone_agent_file_path",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "sentinelone_agent_file_path",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "8a71db80-bf87-4493-ac66-10eebf8f3598",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": true,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/sentinelone_file_artifact_type",
+      "hide_notification": false,
+      "id": 373,
+      "input_type": "select",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sentinelone_file_artifact_type",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "sentinelone_file_artifact_type",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "b4b5ef55-b2e7-465c-a7c4-2bce58006401",
+      "values": [
+        {
+          "default": true,
+          "enabled": true,
+          "hidden": false,
+          "label": "Malware Sample",
+          "properties": null,
+          "uuid": "4530d5a6-f528-4a09-8b4b-f4b8a9f45aca",
+          "value": 202
+        },
+        {
+          "default": false,
+          "enabled": true,
+          "hidden": false,
+          "label": "Other File",
+          "properties": null,
+          "uuid": "119082fe-fd0e-4062-86f7-2db1161e46c1",
+          "value": 203
+        }
+      ]
+    },
     {
       "allow_default_value": false,
       "blank_option": false,
@@ -168,6 +247,36 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/sentinelone_fetch_file_password",
+      "hide_notification": false,
+      "id": 363,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sentinelone_fetch_file_password",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "sentinelone_fetch_file_password",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "ebf4071c-407f-467d-b74c-4e1d343c18a2",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/sentinelone_threat_id",
       "hide_notification": false,
       "id": 357,
@@ -226,6 +335,66 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/sentinelone_incident_id",
+      "hide_notification": false,
+      "id": 368,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sentinelone_incident_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "sentinelone_incident_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "5d0fdc26-ff81-43da-ba75-093e54bf6133",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/incident_id",
+      "hide_notification": false,
+      "id": 292,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "incident_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "incident_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "68e6aeb2-30a3-4103-b8ef-aef67489a5b0",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/sentinelone_note_text",
       "hide_notification": false,
       "id": 359,
@@ -249,31 +418,32 @@
     },
     {
       "allow_default_value": false,
-      "blank_option": false,
+      "blank_option": true,
       "calculated": false,
       "changeable": true,
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/incident_id",
+      "export_key": "__function/sentinelone_zip_file_bool",
       "hide_notification": false,
-      "id": 292,
-      "input_type": "number",
+      "id": 372,
+      "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
-      "name": "incident_id",
+      "name": "sentinelone_zip_file_bool",
       "operation_perms": {},
       "operations": [],
       "placeholder": "",
       "prefix": null,
       "read_only": false,
+      "required": "always",
       "rich_text": false,
       "tags": [],
       "templates": [],
-      "text": "incident_id",
+      "text": "sentinelone_zip_file_bool",
       "tooltip": "",
       "type_id": 11,
-      "uuid": "780d2cdb-f5d8-4be5-81d6-93927c72eb34",
+      "uuid": "7941e8e4-5591-43e1-bfa4-ebaaf9f0cb31",
       "values": []
     },
     {
@@ -662,7 +832,7 @@
     {
       "created_date": 1692720239743,
       "description": {
-        "content": "Connect an endpoint managed by Sentinel to the network.",
+        "content": "Connect an endpoint managed by SentinelOne to the network.",
         "format": "text"
       },
       "destination_handle": "fn_sentinelone",
@@ -675,11 +845,11 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1692720239779,
+      "last_modified_time": 1696448660984,
       "name": "sentinelone_connect_to_network",
       "tags": [],
       "uuid": "517e7712-cf4f-42da-91a2-06d028dad318",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "dbfe950b-d843-4105-ae4d-a586a96850f8",
@@ -716,6 +886,136 @@
       "view_items": [
         {
           "content": "dbfe950b-d843-4105-ae4d-a586a96850f8",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
+      "created_date": 1695328994734,
+      "description": {
+        "content": "Fetch a file from an agent machine managed by SentinelOne and add as Malware Sample or Other File artifact in the SOAR case.",
+        "format": "text"
+      },
+      "destination_handle": "fn_sentinelone",
+      "display_name": "SentinelOne: Fetch Agent File as an Artifact",
+      "export_key": "sentinelone_fetch_agent_file_artifact",
+      "id": 42,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1695329449130,
+      "name": "sentinelone_fetch_agent_file_artifact",
+      "tags": [],
+      "uuid": "86b8b101-cb7e-4849-a499-f5b4bd478a93",
+      "version": 3,
+      "view_items": [
+        {
+          "content": "5d0fdc26-ff81-43da-ba75-093e54bf6133",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "8a71db80-bf87-4493-ac66-10eebf8f3598",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "b4b5ef55-b2e7-465c-a7c4-2bce58006401",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "dbfe950b-d843-4105-ae4d-a586a96850f8",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "ebf4071c-407f-467d-b74c-4e1d343c18a2",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        }
+      ],
+      "workflows": []
+    },
+    {
+      "created_date": 1694788510778,
+      "description": {
+        "content": "Fetch a file from an agent machine managed by SentinelOne and add an attachment. There is an option to add the SentinelOne generated zip file containing the requested file as an attachment or to add the actual agent file contained in the zip file as an attachment.  If the requested file is possible malware strongly consider adding the SentinelOne generated zip as an attachment or adding the file as a Malware Sample artifact.",
+        "format": "text"
+      },
+      "destination_handle": "fn_sentinelone",
+      "display_name": "SentinelOne: Fetch Agent File as an Attachment",
+      "export_key": "sentinelone_fetch_agent_file_attachment",
+      "id": 41,
+      "last_modified_by": {
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1695330341824,
+      "name": "sentinelone_fetch_agent_file_attachment",
+      "tags": [],
+      "uuid": "30f6d458-0b74-458a-b633-4cfb12c797e4",
+      "version": 10,
+      "view_items": [
+        {
+          "content": "5d0fdc26-ff81-43da-ba75-093e54bf6133",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "dbfe950b-d843-4105-ae4d-a586a96850f8",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "8a71db80-bf87-4493-ac66-10eebf8f3598",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "7941e8e4-5591-43e1-bfa4-ebaaf9f0cb31",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "ebf4071c-407f-467d-b74c-4e1d343c18a2",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -873,14 +1173,14 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1692720240105,
+      "last_modified_time": 1696338425139,
       "name": "sentinelone_resolve_threat_in_sentinelone",
       "tags": [],
       "uuid": "c7a26323-ba72-4ac7-a3fc-60b3abcfaca0",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
-          "content": "780d2cdb-f5d8-4be5-81d6-93927c72eb34",
+          "content": "68e6aeb2-30a3-4103-b8ef-aef67489a5b0",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1013,14 +1313,14 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1692720240340,
+      "last_modified_time": 1696338425139,
       "name": "sentinelone_update_notes_from_sentinelone",
       "tags": [],
       "uuid": "351d4c78-2c26-40f5-889f-6111e408068d",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
-          "content": "780d2cdb-f5d8-4be5-81d6-93927c72eb34",
+          "content": "68e6aeb2-30a3-4103-b8ef-aef67489a5b0",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1090,13 +1390,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 96,
+  "id": 130,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1694718037475,
+      "create_date": 1696521272705,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1105,7 +1405,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1694718037475,
+      "update_date": 1696521272705,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1277,7 +1577,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 13,
+        "content_version": 14,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_96a64463_72c2_4dae_b106_68987e03f1d2\" isExecutable=\"true\" name=\"playbook_96a64463_72c2_4dae_b106_68987e03f1d2\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_098e2l6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Get Agent Details\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3bc833b4-0545-4db6-8ede-515d7439279a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = incident.properties.sentinelone_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_agent_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_098e2l6\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ogdb4c\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_098e2l6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Write Agent Details to Data Table\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"8849f75b-4c6a-4519-a230-a7c93bc3f87f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ogdb4c\u003c/incoming\u003e\u003coutgoing\u003eFlow_1i2dmup\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1ogdb4c\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1i2dmup\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1i2dmup\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_96a64463_72c2_4dae_b106_68987e03f1d2\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i2dmup\" id=\"Flow_1i2dmup_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ogdb4c\" id=\"Flow_1ogdb4c_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_098e2l6\" id=\"Flow_098e2l6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1692720584835,
@@ -1329,7 +1629,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694463294721,
+      "last_modified_time": 1696449548420,
       "local_scripts": [
         {
           "actions": [],
@@ -1340,12 +1640,12 @@
           "id": 29,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1694463292456,
+          "last_modified_time": 1696449584345,
           "name": "SentinelOne: Write Agent Details to Data Table",
           "object_type": "incident",
           "playbook_handle": "sentinelone_add_agent_to_data_table_pb",
           "programmatic_name": "sentinelone_add_agent_to_data_table_pb_sentinelone_write_agent_details_to_data_table",
-          "script_text": "from datetime import datetime\nimport json\n\nresults = playbook.functions.results.get_agent_results\nsuccess = results.get(\"success\", False)\nif success:\n  note = \"\u003cb\u003eSentinelOne: Add Agent to Data Table (PB): \u003c/b\u003e \\n\"\n  content = results.get(\"content\", False)\n  if content:\n    data = content.get(\"data\", False)\n    if data:\n      data_len = len(data)\n      note = \"{0} {1} agent added to SentinelOne Agent data table.\".format(note, data_len)\n      for agent in data:\n        agent_row = incident.addRow(\"sentinelone_agents_dt\")\n        agent_row.sentinelone_dt_query_date = datetime.now()\n        agent_row.sentinelone_dt_agent_id = agent.get(\"id\")\n        networkStatus = agent.get(\"networkStatus\")\n        display_color = \"green\" if networkStatus ==\"connected\" else \"red\"\n        networkStatus = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=display_color, status=networkStatus)\n        agent_row.sentinelone_dt_network_status = helper.createRichText(networkStatus)\n        agent_row.sentinelone_dt_computername = agent.get(\"computerName\")\n        agent_row.sentinelone_dt_external_ip = agent.get(\"externalIp\")\n        agent_row.sentinelone_dt_site = agent.get(\"siteName\")\n        agent_row.sentinelone_dt_agent_version = agent.get(\"agentVersion\")\n        agent_row.sentinelone_dt_threat_count = agent.get(\"activeThreats\")\n        agent_row.sentinelone_dt_domain = agent.get(\"domain\")\n        agent_row.sentinelone_dt_os_name = agent.get(\"osName\")\n        agent_row.sentinelone_dt_uuid = agent.get(\"uuid\")\n        agent_row.sentinelone_dt_is_active = agent.get(\"isActive\")\n        agent_row.sentinelone_dt_registered = agent.get(\"registeredAt\")\n        agent_row.sentinelone_dt_created = agent.get(\"createdAt\")\n        agent_row.sentinelone_dt_updated = agent.get(\"updatedAt\")\n    else:\n      note = \"{0} No data returned from function.\".format(note)\n  else:\n    note = \"{0} No content data returned from function.\".format(note)\nelse:\n  note = \"{0} function did not return success.\".format(note)\n\nincident.addNote(helper.createRichText(note))",
+          "script_text": "from datetime import datetime\nimport json\n\nresults = playbook.functions.results.get_agent_results\nif results.get(\"success\", False):\n  note = \"\u003cb\u003eSentinelOne: Add Agent to Data Table (PB): \u003c/b\u003e \\n\"\n  content = results.get(\"content\", False)\n  if content:\n    data = content.get(\"data\", False)\n    if data:\n      data_len = len(data)\n      note = \"{0} {1} agent added to SentinelOne Agent data table.\".format(note, data_len)\n      for agent in data:\n        agent_row = incident.addRow(\"sentinelone_agents_dt\")\n        agent_row.sentinelone_dt_query_date = datetime.now()\n        agent_row.sentinelone_dt_agent_id = agent.get(\"id\")\n        networkStatus = agent.get(\"networkStatus\")\n        display_color = \"green\" if networkStatus ==\"connected\" else \"red\"\n        networkStatus = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=display_color, status=networkStatus)\n        agent_row.sentinelone_dt_network_status = helper.createRichText(networkStatus)\n        agent_row.sentinelone_dt_computername = agent.get(\"computerName\")\n        agent_row.sentinelone_dt_external_ip = agent.get(\"externalIp\")\n        agent_row.sentinelone_dt_site = agent.get(\"siteName\")\n        agent_row.sentinelone_dt_agent_version = agent.get(\"agentVersion\")\n        agent_row.sentinelone_dt_threat_count = agent.get(\"activeThreats\")\n        agent_row.sentinelone_dt_domain = agent.get(\"domain\")\n        agent_row.sentinelone_dt_os_name = agent.get(\"osName\")\n        agent_row.sentinelone_dt_uuid = agent.get(\"uuid\")\n        agent_row.sentinelone_dt_is_active = agent.get(\"isActive\")\n        agent_row.sentinelone_dt_registered = agent.get(\"registeredAt\")\n        agent_row.sentinelone_dt_created = agent.get(\"createdAt\")\n        agent_row.sentinelone_dt_updated = agent.get(\"updatedAt\")\n    else:\n      note = \"{0} No data returned from function.\".format(note)\n  else:\n    note = \"{0} No content data returned from function.\".format(note)\nelse:\n  note = \"{0} function did not return success.\".format(note)\n\nincident.addNote(helper.createRichText(note))",
           "tags": [],
           "uuid": "8849f75b-4c6a-4519-a230-a7c93bc3f87f"
         }
@@ -1363,7 +1663,7 @@
       "tags": [],
       "type": "default",
       "uuid": "96a64463-72c2-4dae-b106-68987e03f1d2",
-      "version": 17
+      "version": 18
     },
     {
       "activation_type": "manual",
@@ -1875,7 +2175,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 5,
+        "content_version": 7,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1a40d0bd_210a_4623_b9e6_a9c75ba9fb5e\" isExecutable=\"true\" name=\"playbook_1a40d0bd_210a_4623_b9e6_a9c75ba9fb5e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1tv9a80\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Resolve Threat in SentinelOne\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c7a26323-ba72-4ac7-a3fc-60b3abcfaca0\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"resolve_threat_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1tv9a80\u003c/incoming\u003e\u003coutgoing\u003eFlow_13dp9rc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1tv9a80\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Write Resolve Threat results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"93ecc80b-7ce8-45e4-aaa8-00177fd2663d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_13dp9rc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ngry6m\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_13dp9rc\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ngry6m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ngry6m\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1a40d0bd_210a_4623_b9e6_a9c75ba9fb5e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ngry6m\" id=\"Flow_1ngry6m_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13dp9rc\" id=\"Flow_13dp9rc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"232\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1tv9a80\" id=\"Flow_1tv9a80_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"148\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"148\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1692724391160,
@@ -1927,7 +2227,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1694716123979,
+      "last_modified_time": 1696521083207,
       "local_scripts": [
         {
           "actions": [],
@@ -1938,12 +2238,12 @@
           "id": 30,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1694716121937,
+          "last_modified_time": 1696520967560,
           "name": "SentinelOne: Write Resolve Threat results to a note",
           "object_type": "incident",
           "playbook_handle": "sentinelone_resolve_threat_in_sentinelone_pb",
           "programmatic_name": "sentinelone_resolve_threat_in_sentinelone_pb_sentinelone_write_resolve_threat_results_to_a_note",
-          "script_text": "results = playbook.functions.results.resolve_threat_results\n\ncontent = results.get(\"content\")\nsuccess = content.get(\"success\", False)\nthreat_id = content.get(\"threat_id\", None)\nif success:\n  noteText = u\u0027\u003cb\u003eSentinelOne: Resolve Threat in SentinelOne\u003c/b\u003e\u003cbr\u003e threatId {0} resolved.\u0027.format(threat_id)\n  incident.properties.sentinelone_incident_status = \"resolved\"\nelse:\n  noteText = u\u0027\u003cb\u003eSentinelOne: Resolve Threat in SentinelOne\u003c/b\u003e\u003cbr\u003e threatId {0}: check analystVerdict and incidentStatus in SentinelOne.\u0027.format(threat_id)\n\nincident.addNote(noteText)",
+          "script_text": "results = playbook.functions.results.resolve_threat_results\n\ncontent = results.get(\"content\")\nthreat_id = content.get(\"threat_id\", None)\nif content.get(\"success\", False):\n  noteText = u\u0027\u003cb\u003eSentinelOne: Resolve Threat in SentinelOne\u003c/b\u003e\u003cbr\u003e threatId {0} resolved.\u0027.format(threat_id)\n  incident.properties.sentinelone_incident_status = \"resolved\"\nelse:\n  noteText = u\u0027\u003cb\u003eSentinelOne: Resolve Threat in SentinelOne\u003c/b\u003e\u003cbr\u003e threatId {0}: check analystVerdict and incidentStatus in SentinelOne.\u0027.format(threat_id)\n\nincident.addNote(noteText)",
           "tags": [],
           "uuid": "93ecc80b-7ce8-45e4-aaa8-00177fd2663d"
         }
@@ -1961,7 +2261,7 @@
       "tags": [],
       "type": "default",
       "uuid": "1a40d0bd-210a-4623-b9e6-a9c75ba9fb5e",
-      "version": 10
+      "version": 12
     },
     {
       "activation_type": "manual",
@@ -2292,8 +2592,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\" isExecutable=\"true\" name=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_07evlnu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Shutdown Agent\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"41479530-59cd-432f-bc33-562dad5322db\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"shutdown_agent_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07evlnu\u003c/incoming\u003e\u003coutgoing\u003eFlow_05ms2uc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_07evlnu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1vz17y2\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"SentinelOne: Write shutdown agent results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"eea92321-26bf-4462-846e-d2df381cea6e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05ms2uc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vz17y2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05ms2uc\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1vz17y2\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07evlnu\" id=\"Flow_07evlnu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05ms2uc\" id=\"Flow_05ms2uc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vz17y2\" id=\"Flow_1vz17y2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 6,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\" isExecutable=\"true\" name=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_07evlnu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Shutdown Agent\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"41479530-59cd-432f-bc33-562dad5322db\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"shutdown_agent_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07evlnu\u003c/incoming\u003e\u003coutgoing\u003eFlow_05ms2uc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_07evlnu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1vz17y2\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"SentinelOne: Write shutdown agent results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"eea92321-26bf-4462-846e-d2df381cea6e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05ms2uc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vz17y2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05ms2uc\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1vz17y2\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vz17y2\" id=\"Flow_1vz17y2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05ms2uc\" id=\"Flow_05ms2uc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07evlnu\" id=\"Flow_07evlnu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1693232464357,
       "creator_principal": {
@@ -2344,7 +2644,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1693240038848,
+      "last_modified_time": 1696521123399,
       "local_scripts": [
         {
           "actions": [],
@@ -2355,12 +2655,12 @@
           "id": 37,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1693232942721,
+          "last_modified_time": 1696521121237,
           "name": "SentinelOne: Write shutdown agent results to a note",
           "object_type": "sentinelone_agents_dt",
           "playbook_handle": "sentinelone_shutdown_agent_pb",
           "programmatic_name": "sentinelone_shutdown_agent_pb_sentinelone_write_shutdown_agent_results_to_a_note",
-          "script_text": "results = playbook.functions.results.shutdown_agent_results\n\nif results.success:\n  so_inputs = results.get(\"inputs\")\n  agent_id = so_inputs.get(\"sentinelone_agent_id\")\n  note = \"\u003cb\u003eSentinelOne: Shutdown Agent \u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\n  content = results.get(\"content\")\n  if content:\n    data = content.get(\"data\")\n    if data:\n      if int(data.get(\"affected\")) \u003c= 0:\n        note = \"{0} Agent was NOT shutdown.\".format(note)\n      else:\n        note = \"{0} Agent shutdown initiated.\".format(note)\n    else:\n      note = \"{0} Agent shutdown was NOT initiated. No \u0027data\u0027 returned from function\".format(note)\n  else:\n    note = \"{0} Agent shutdown was NOT initiated. No content returned from function\".format(note)  \nelse:\n  note = \"{0} Agent shutdown was NOT initiated. Function did no return success\".format(note)  \n  \nincident.addNote(helper.createRichText(note))",
+          "script_text": "results = playbook.functions.results.shutdown_agent_results\n\nif results.get(\"success\", False):\n  so_inputs = results.get(\"inputs\")\n  agent_id = so_inputs.get(\"sentinelone_agent_id\")\n  note = \"\u003cb\u003eSentinelOne: Shutdown Agent \u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\n  content = results.get(\"content\")\n  if content:\n    data = content.get(\"data\")\n    if data:\n      if int(data.get(\"affected\")) \u003c= 0:\n        note = \"{0} Agent was NOT shutdown.\".format(note)\n      else:\n        note = \"{0} Agent shutdown initiated.\".format(note)\n    else:\n      note = \"{0} Agent shutdown was NOT initiated. No \u0027data\u0027 returned from function\".format(note)\n  else:\n    note = \"{0} Agent shutdown was NOT initiated. No content returned from function\".format(note)  \nelse:\n  note = \"{0} Agent shutdown was NOT initiated. Function did no return success\".format(note)  \n  \nincident.addNote(helper.createRichText(note))",
           "tags": [],
           "uuid": "eea92321-26bf-4462-846e-d2df381cea6e"
         }
@@ -2400,7 +2700,7 @@
       "tags": [],
       "type": "default",
       "uuid": "494c0e8d-8cd2-4c46-b8b7-bf331d174d58",
-      "version": 9
+      "version": 11
     },
     {
       "activation_type": "manual",
@@ -3184,12 +3484,12 @@
       "id": 40,
       "language": "python3",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1693236532681,
+      "last_modified_time": 1696449305184,
       "name": "Convert JSON to rich text v1.3",
       "object_type": "incident",
       "playbook_handle": null,
       "programmatic_name": "convert_json_to_rich_text_13",
-      "script_text": "# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.\nVERSION = 1.3\n\"\"\"\n  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident\u0027s rich text (custom) field or an incident note.\n  A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.\n  Typically, a function will create workflow property and this script will run after that function to perform the conversion.\n  Features:\n    * Display the hierarchical nature of json, presenting the json keys as bold labels\n    * Provide links to found URLs\n    * Create either an incident note or add results to an incident (custom) rich text field.\n  \n  In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.\n  Workflow properties can be added using a command similar to this:\n  workflow.addProperty(\u0027convert_json_to_rich_text\u0027, {\n    \"version\": 1.3,\n    \"header\": \"Artifact scan results for: {}\".format(artifact.value),\n    \"padding\": 10,\n    \"separator\": u\"\u003cbr /\u003e\",\n    \"sort\": True,\n    \"json\": results.content,\n    \"json_omit_list\": [\"omit\"],\n    \"incident_field\": None\n  })\n  \n  Format of workflow.property.convert_json_to_rich_text:\n  { \n    \"version\": 1.3, [this is for future compatibility]\n    \"header\": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]\n    \"padding\": 10, [padding for nested json elements, or defaults to 10]\n    \"separator\": u\"\u003cbr /\u003e\"|list such as [\u0027\u003cspan\u003e\u0027,\u0027\u003c/span\u003e\u0027], [html separator between json keys and lists or defaults to html break: \u0027\u003cbr /\u003e\u0027. \n                                                If a list, then the data is brackets by the pair specified]\n    \"sort\": True|False, [sort the json keys at each level when displayed]\n    \"json\": json, [required json to convert]\n    \"json_omit_list\": [list of json keys to exclude or None]\n    \"incident_field\": \"\u003cincident_field\u003e\" [indicates a builtin rich text incident field, such as \u0027description\u0027 \n                                          or a custom rich text field in the format: \u0027properties.\u003cfield\u003e\u0027. default: create an incident note]\n  }\n\n  For playbooks, use playbook.addProperty() with the same format as workflow.addProperty()\n\n  Playbooks can also use playbook.functions.results.convert_json_to_rich_text using the standard function output which contains the \u0027content\u0027 json element.\n  When using playbook.functions.results.convert_json_to_rich_text with standard function results, all the defaults for padding, separator, etc. are used.\n\"\"\"\n\nimport re\n\n# needed for python 3\ntry:\n    unicode(\"abc\") # fails in py3\n    py2 = True\nexcept:\n    unicode = str\n    py2 = False\n\n\nrc = re.compile(r\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026+#\\?]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027)\n\nclass ConvertJson:\n    \"\"\"Class to hold the conversion parameters and perform the conversion\"\"\"\n\n    def __init__(self, omit_keys=[], padding=10, separator=u\"\u003cbr /\u003e\", sort_keys=False):\n        self.omit_keys = omit_keys\n        self.padding = padding\n        self.separator = separator\n        self.sort_keys = sort_keys\n\n\n    def format_link(self, item):\n        \"\"\"[summary]\n          Find embedded urls (http(s)) and add html anchor tags to display as links\n          Args:\n              item ([string])\n\n          Returns:\n              [str]: None|original text if no links|text with html links\n        \"\"\"\n        formatted_item = item\n        if py2:\n            num_type = bool(item and isinstance(item, (int, long, bool, float)))\n        else:\n            num_type = bool(item and isinstance(item, (int, bool, float)))\n\n        if item and not num_type:\n            list = rc.findall(item)\n            if list:\n                for link in list:\n                    formatted_item = formatted_item.replace(link, u\"\u003ca target=\u0027blank\u0027 href=\u0027{0}\u0027\u003e{0}\u003c/a\u003e\".format(link))\n\n        return formatted_item\n\n    def expand_list(self, list_value, is_list=False):\n        \"\"\"[summary]\n          convert items to html, adding indents to nested dictionaries.\n          Args:\n              list_value ([dict|list]): json element\n\n          Returns:\n              [str]: html converted code\n        \"\"\"\n        if not isinstance(list_value, list):\n            return self.format_link(list_value)\n        elif not list_value:\n            return u\"None\u003cbr\u003e\"\n\n        try:\n            items_list = []  # this will ensure list starts on second line of key label\n            for item in list_value:\n                if isinstance(item, dict):\n                    result = self.convert_json_to_rich_text(item)\n                    if is_list:\n                        items_list.append(u\"\u003cli\u003e{}\u003c/li\u003e\".format(result))\n                    else:\n                        items_list.append(result)\n                elif isinstance(item, list):\n                    items_list.append(self.expand_list(item, is_list=True))\n                elif is_list:\n                    items_list.append(u\"\u003cli\u003e{}\u003c/li\u003e\".format(self.format_link(unicode(item))))\n                else:\n                    items_list.append(self.format_link(unicode(item)))\n\n            expand_list_result = self.add_separator(self.separator if not is_list else u\"\",\n                                                    items_list,\n                                                    is_list=is_list)\n\n            if is_list:\n                return u\"\u003cul\u003e{}\u003c/ul\u003e\".format(expand_list_result)\n            else:\n                return u\"\u003cdiv style=\u0027padding:5px\u0027\u003e{}\u003c/div\u003e\".format(expand_list_result)\n        except Exception as err:\n            return str(err)\n\n    def convert_json_to_rich_text(self, sub_dict):\n        \"\"\"[summary]\n          Walk dictionary tree and convert to html for better display\n          Args:\n              sub_dict ([type]): [description]\n\n          Returns:\n              [type]: [description]\n        \"\"\"\n        notes = []\n        if sub_dict and isinstance(sub_dict, (list, dict)):\n            if isinstance(sub_dict, list):\n                expanded_list = self.expand_list(sub_dict, is_list=True)\n                notes.append(self.add_separator(self.separator, expanded_list))\n            else:\n                keys = sorted (sub_dict.keys()) if self.sort_keys else sub_dict.keys()\n\n                for key in keys:\n                    if key not in self.omit_keys:\n                        value = sub_dict[key]\n                        is_list = isinstance(value, list)\n                        item_list = [u\"\u003cstrong\u003e{0}\u003c/strong\u003e: \".format(key)]\n                        if isinstance(value, dict):\n                            convert_result = self.convert_json_to_rich_text(value)\n                            if convert_result:\n                                item_list.append(u\"\u003cdiv style=\u0027padding:{}px\u0027\u003e{}\u003c/div\u003e\".format(self.padding, convert_result))\n                            else:\n                                item_list.append(u\"None\u003cbr\u003e\")\n                        else:\n                            item_list.append(self.expand_list(value, is_list=is_list))\n\n                        notes.append(self.add_separator(self.separator, u\"\".join(make_unicode(v) for v in item_list), is_list=is_list))\n\n        result_notes = u\"\".join(notes)\n        if isinstance(self.separator, list):\n            return result_notes\n        else:\n            return result_notes.replace(\n                u\"\u003c/div\u003e{0}\".format(self.separator), u\"\u003c/div\u003e\").replace(\n                u\"{0}\u003c/div\u003e\".format(self.separator), u\"\u003c/div\u003e\"\n            )  # tighten up result\n\n    def add_separator(self, separator, items, is_list=False):\n        \"\"\"\n        apply the separator to the data\n        :param separator: None, str or list such as [\u0027\u003cspan\u003e\u0027, \u0027\u003c/span\u003e\u0027]\n        :param items: str or list to add separator\n        :return: text with separator applied\n        \"\"\"\n        _items = items\n\n        if not _items:\n            return \"\u003cbr\u003e\"\n\n        if not isinstance(_items, list):\n            _items = [_items]\n\n        if isinstance(separator, list):\n            return u\"\".join([u\"{}{}{}\".format(separator[0], item, separator[1]) for item in _items])\n\n        return u\"{}{}\".format(separator.join(_items), separator if not is_list else u\"\")\n\ndef make_unicode(value):\n    if value is None:\n        return \u0027None\u0027\n\n    return unicode(value)\n\ndef get_results(property_name):\n    if playbook and playbook.functions.results[property_name] is not None:\n        return playbook.functions.results[property_name]\n    elif playbook and playbook.properties[property_name] is not None:\n        return playbook.properties[property_name]\n    elif workflow and workflow.properties[property_name] is not None:\n        return workflow.properties[property_name]\n\n    return None\n\ndef get_properties(property_name):\n    \"\"\"\n    Logic to collect the json and parameters from a workflow property.\n    Args:\n      property_name: workflow property to reference\n    Returns:\n      padding, separator, header, json_omit_list, incident_field, json, sort_keys\n    \"\"\"\n    result_properties = get_results(property_name)\n    if not result_properties:\n        helper.fail(\"Playbook/workflow property not found: {}\".format(property_name))\n\n    padding = int(result_properties.get(\"padding\", 10))\n    separator = result_properties.get(\"separator\", u\"\u003cbr /\u003e\")\n    if isinstance(separator, list) and len(separator) != 2:\n        helper.fail(\"list of separators should be specified as a pair such as [\u0027\u003cdiv\u003e\u0027, \u0027\u003c/div\u003e\u0027]: {}\".format(separator))\n\n    header = result_properties.get(\"header\")\n    sort_keys = bool(result_properties.get(\"sort\", False))\n    json_omit_list = result_properties.get(\"json_omit_list\")\n    if not json_omit_list:\n        json_omit_list = []\n    incident_field = result_properties.get(\"incident_field\")\n    \n    # workflow formatted content is \u0027json\u0027. Standard functions is \u0027content\u0027\n    json = result_properties.get(\"json\") if result_properties.get(\"json\") else result_properties.get(\"content\")\n    json_err = None\n    # is there an issue we need handle now?\n    if not json and \\\n        result_properties.get(\"success\") == False and result_properties.get(\"reason\"):\n        json_err = result_properties.get(\"reason\")\n    \n    return padding, separator, header, json_omit_list, incident_field, json, json_err, sort_keys\n\n\n## S T A R T\npadding, separator, header, json_omit_list, incident_field, json, json_err, sort_keys = get_properties(\u0027convert_json_to_rich_text\u0027)\nif json_err:\n    result = \"Result error: {}\".format(json_err)\nelse:\n    if header:\n        if isinstance(separator, list):\n            hdr = u\"{0}{1}{2}\".format(separator[0], header, separator[1])\n        else:\n            hdr = u\"{0}{1}\".format(header, separator)\n    else:\n        hdr = u\"\"\n\n    convert = ConvertJson(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)\n    converted_json = convert.convert_json_to_rich_text(json)\n    result = u\"{}{}\".format(hdr, converted_json if converted_json else \"\\nNone\")\n\nrich_text_note = helper.createRichText(result)\nif incident_field:\n    incident[incident_field] = rich_text_note\nelse:\n    incident.addNote(rich_text_note)\n",
+      "script_text": "# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.\nVERSION = 1.3\n\"\"\"\n  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident\u0027s rich text (custom) field or an incident note.\n  A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.\n  Typically, a function will create workflow property and this script will run after that function to perform the conversion.\n  Features:\n    * Display the hierarchical nature of json, presenting the json keys as bold labels\n    * Provide links to found URLs\n    * Create either an incident note or add results to an incident (custom) rich text field.\n  \n  In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.\n  Workflow properties can be added using a command similar to this:\n  workflow.addProperty(\u0027convert_json_to_rich_text\u0027, {\n    \"version\": 1.3,\n    \"header\": \"Artifact scan results for: {}\".format(artifact.value),\n    \"padding\": 10,\n    \"separator\": u\"\u003cbr /\u003e\",\n    \"sort\": True,\n    \"json\": results.content,\n    \"json_omit_list\": [\"omit\"],\n    \"incident_field\": None\n  })\n  \n  Format of workflow.property.convert_json_to_rich_text:\n  { \n    \"version\": 1.3, [this is for future compatibility]\n    \"header\": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]\n    \"padding\": 10, [padding for nested json elements, or defaults to 10]\n    \"separator\": u\"\u003cbr /\u003e\"|list such as [\u0027\u003cspan\u003e\u0027,\u0027\u003c/span\u003e\u0027], [html separator between json keys and lists or defaults to html break: \u0027\u003cbr /\u003e\u0027. \n                                                If a list, then the data is brackets by the pair specified]\n    \"sort\": True|False, [sort the json keys at each level when displayed]\n    \"json\": json, [required json to convert]\n    \"json_omit_list\": [list of json keys to exclude or None]\n    \"incident_field\": \"\u003cincident_field\u003e\" [indicates a builtin rich text incident field, such as \u0027description\u0027 \n                                          or a custom rich text field in the format: \u0027properties.\u003cfield\u003e\u0027. default: create an incident note]\n  }\n\n  For playbooks, use playbook.addProperty() with the same format as workflow.addProperty()\n\n  Playbooks can also use playbook.functions.results.convert_json_to_rich_text using the standard function output which contains the \u0027content\u0027 json element.\n  When using playbook.functions.results.convert_json_to_rich_text with standard function results, all the defaults for padding, separator, etc. are used.\n\"\"\"\n\nimport re\n\n# needed for python 3\ntry:\n    unicode(\"abc\") # fails in py3\n    py2 = True\nexcept:\n    unicode = str\n    py2 = False\n\n\nrc = re.compile(r\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026+#\\?]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027)\n\nclass ConvertJson:\n    \"\"\"Class to hold the conversion parameters and perform the conversion\"\"\"\n\n    def __init__(self, omit_keys=[], padding=10, separator=u\"\u003cbr /\u003e\", sort_keys=False):\n        self.omit_keys = omit_keys\n        self.padding = padding\n        self.separator = separator\n        self.sort_keys = sort_keys\n\n\n    def format_link(self, item):\n        \"\"\"[summary]\n          Find embedded urls (http(s)) and add html anchor tags to display as links\n          Args:\n              item ([string])\n\n          Returns:\n              [str]: None|original text if no links|text with html links\n        \"\"\"\n        formatted_item = item\n        if py2:\n            num_type = bool(item and isinstance(item, (int, long, bool, float)))\n        else:\n            num_type = bool(item and isinstance(item, (int, bool, float)))\n\n        if item and not num_type:\n            list = rc.findall(item)\n            if list:\n                for link in list:\n                    formatted_item = formatted_item.replace(link, u\"\u003ca target=\u0027blank\u0027 href=\u0027{0}\u0027\u003e{0}\u003c/a\u003e\".format(link))\n\n        return formatted_item\n\n    def expand_list(self, list_value, is_list=False):\n        \"\"\"[summary]\n          convert items to html, adding indents to nested dictionaries.\n          Args:\n              list_value ([dict|list]): json element\n\n          Returns:\n              [str]: html converted code\n        \"\"\"\n        if not isinstance(list_value, list):\n            return self.format_link(list_value)\n        elif not list_value:\n            return u\"None\u003cbr\u003e\"\n\n        try:\n            items_list = []  # this will ensure list starts on second line of key label\n            for item in list_value:\n                if isinstance(item, dict):\n                    result = self.convert_json_to_rich_text(item)\n                    if is_list:\n                        items_list.append(u\"\u003cli\u003e{}\u003c/li\u003e\".format(result))\n                    else:\n                        items_list.append(result)\n                elif isinstance(item, list):\n                    items_list.append(self.expand_list(item, is_list=True))\n                elif is_list:\n                    items_list.append(u\"\u003cli\u003e{}\u003c/li\u003e\".format(self.format_link(unicode(item))))\n                else:\n                    items_list.append(self.format_link(unicode(item)))\n\n            expand_list_result = self.add_separator(self.separator if not is_list else u\"\",\n                                                    items_list,\n                                                    is_list=is_list)\n\n            if is_list:\n                return u\"\u003cul\u003e{}\u003c/ul\u003e\".format(expand_list_result)\n            else:\n                return u\"\u003cdiv style=\u0027padding:5px\u0027\u003e{}\u003c/div\u003e\".format(expand_list_result)\n        except Exception as err:\n            return str(err)\n\n    def convert_json_to_rich_text(self, sub_dict):\n        \"\"\"[summary]\n          Walk dictionary tree and convert to html for better display\n          Args:\n              sub_dict ([type]): [description]\n\n          Returns:\n              [type]: [description]\n        \"\"\"\n        notes = []\n        if sub_dict and isinstance(sub_dict, (list, dict)):\n            if isinstance(sub_dict, list):\n                expanded_list = self.expand_list(sub_dict, is_list=True)\n                notes.append(self.add_separator(self.separator, expanded_list))\n            else:\n                keys = sorted (sub_dict.keys()) if self.sort_keys else sub_dict.keys()\n\n                for key in keys:\n                    if key not in self.omit_keys:\n                        value = sub_dict[key]\n                        is_list = isinstance(value, list)\n                        item_list = [u\"\u003cstrong\u003e{0}\u003c/strong\u003e: \".format(key)]\n                        if isinstance(value, dict):\n                            convert_result = self.convert_json_to_rich_text(value)\n                            if convert_result:\n                                item_list.append(u\"\u003cdiv style=\u0027padding:{}px\u0027\u003e{}\u003c/div\u003e\".format(self.padding, convert_result))\n                            else:\n                                item_list.append(u\"None\u003cbr\u003e\")\n                        else:\n                            item_list.append(self.expand_list(value, is_list=is_list))\n\n                        notes.append(self.add_separator(self.separator, u\"\".join(make_unicode(v) for v in item_list), is_list=is_list))\n\n        result_notes = u\"\".join(notes)\n        if isinstance(self.separator, list):\n            return result_notes\n        else:\n            return result_notes.replace(\n                u\"\u003c/div\u003e{0}\".format(self.separator), u\"\u003c/div\u003e\").replace(\n                u\"{0}\u003c/div\u003e\".format(self.separator), u\"\u003c/div\u003e\"\n            )  # tighten up result\n\n    def add_separator(self, separator, items, is_list=False):\n        \"\"\"\n        apply the separator to the data\n        :param separator: None, str or list such as [\u0027\u003cspan\u003e\u0027, \u0027\u003c/span\u003e\u0027]\n        :param items: str or list to add separator\n        :return: text with separator applied\n        \"\"\"\n        _items = items\n\n        if not _items:\n            return \"\u003cbr\u003e\"\n\n        if not isinstance(_items, list):\n            _items = [_items]\n\n        if isinstance(separator, list):\n            return u\"\".join([u\"{}{}{}\".format(separator[0], item, separator[1]) for item in _items])\n\n        return u\"{}{}\".format(separator.join(_items), separator if not is_list else u\"\")\n\ndef make_unicode(value):\n    if value is None:\n        return \u0027None\u0027\n\n    return unicode(value)\n\ndef get_results(property_name):\n    if playbook and playbook.functions.results[property_name] is not None:\n        return playbook.functions.results[property_name]\n    elif playbook and playbook.properties[property_name] is not None:\n        return playbook.properties[property_name]\n    elif workflow and workflow.properties[property_name] is not None:\n        return workflow.properties[property_name]\n\n    return None\n\ndef get_properties(property_name):\n    \"\"\"\n    Logic to collect the json and parameters from a workflow property.\n    Args:\n      property_name: workflow property to reference\n    Returns:\n      padding, separator, header, json_omit_list, incident_field, json, sort_keys\n    \"\"\"\n    result_properties = get_results(property_name)\n    if not result_properties:\n        helper.fail(\"Playbook/workflow property not found: {}\".format(property_name))\n\n    padding = int(result_properties.get(\"padding\", 10))\n    separator = result_properties.get(\"separator\", u\"\u003cbr /\u003e\")\n    if isinstance(separator, list) and len(separator) != 2:\n        helper.fail(\"list of separators should be specified as a pair such as [\u0027\u003cdiv\u003e\u0027, \u0027\u003c/div\u003e\u0027]: {}\".format(separator))\n\n    header = result_properties.get(\"header\")\n    sort_keys = bool(result_properties.get(\"sort\", False))\n    json_omit_list = result_properties.get(\"json_omit_list\")\n    if not json_omit_list:\n        json_omit_list = []\n    incident_field = result_properties.get(\"incident_field\")\n    \n    # workflow formatted content is \u0027json\u0027. Standard functions is \u0027content\u0027\n    json = result_properties.get(\"json\") if result_properties.get(\"json\") else result_properties.get(\"content\")\n    json_err = None\n    # is there an issue we need handle now?\n    if not json and \\\n        result_properties.get(\"success\") == False and result_properties.get(\"reason\"):\n        json_err = result_properties.get(\"reason\")\n    \n    return padding, separator, header, json_omit_list, incident_field, json, json_err, sort_keys\n\n\n## S T A R T\npadding, separator, header, json_omit_list, incident_field, json, json_err, sort_keys = get_properties(\u0027convert_json_to_rich_text\u0027)\nif json_err:\n    result = \"Result error: {}\".format(json_err)\nelse:\n    if header:\n        if isinstance(separator, list):\n            hdr = u\"{0}{1}{2}\".format(separator[0], header, separator[1])\n        else:\n            hdr = u\"{0}{1}\".format(header, separator)\n    else:\n        hdr = u\"\"\n\n    convert = ConvertJson(omit_keys=json_omit_list, padding=padding, separator=separator, sort_keys=sort_keys)\n    converted_json = convert.convert_json_to_rich_text(json)\n    result = u\"{}{}\".format(hdr, converted_json if converted_json else \"\\nNone\")\n\nrich_text_note = helper.createRichText(result)\nif incident_field:\n    incident[incident_field] = rich_text_note\nelse:\n    incident.addNote(rich_text_note)\n",
       "tags": [],
       "uuid": "64d3e6da-8b56-4d19-9ce8-a75586f71dad"
     }

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v50.0.151
 
 """Generate the Resilient customizations required for fn_sentinelone"""
@@ -99,6 +99,8 @@ def customization_data(client=None):
         - sentinelone_abort_disk_scan
         - sentinelone_connect_to_network
         - sentinelone_disconnect_from_network
+        - sentinelone_fetch_agent_file_artifact
+        - sentinelone_fetch_agent_file_attachment
         - sentinelone_get_agent_details
         - sentinelone_get_hash_reputation
         - sentinelone_get_threat_details

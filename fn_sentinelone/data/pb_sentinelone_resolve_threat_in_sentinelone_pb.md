@@ -60,9 +60,8 @@ Write the results of Resolve Threat in SentinelOne function to a note.
 results = playbook.functions.results.resolve_threat_results
 
 content = results.get("content")
-success = content.get("success", False)
 threat_id = content.get("threat_id", None)
-if success:
+if content.get("success", False):
   noteText = u'<b>SentinelOne: Resolve Threat in SentinelOne</b><br> threatId {0} resolved.'.format(threat_id)
   incident.properties.sentinelone_incident_status = "resolved"
 else:
