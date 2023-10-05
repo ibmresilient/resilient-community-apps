@@ -27,8 +27,8 @@ polling_lookback=60
 # If max_issues_returned under [fn_jira:global_settings] is configured, then max_issues_returned
 #  that are configured under the individual Jira servers will be ignored.
 max_issues_returned = 50
-# Proxys to use
-# If proxys are defined under [fn_jira:global_settings], then proxys defined
+# Proxies to use
+# If proxies are defined under [fn_jira:global_settings], then proxies defined
 #  under the individual Jira servers will be ignored
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
@@ -66,7 +66,7 @@ max_issues_returned = 50
 # Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
 #  same timezone as the Jira servers timezone. Value must start with + or -, then hours followed by : and then minutes.
 #timezone_offset = -4:00
-# Proxys to use
+# Proxies to use
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # See documentation section "Templates for SOAR Cases" for more details
@@ -101,7 +101,7 @@ max_issues_returned = 50
 # Set the timezone off set from UTC time. This off set is used to make sure the poller time is set to the
 #  same timezone as the Jira servers timezone. Value must start with + or -, then hours followed by : and then minutes.
 #timezone_offset = -4:00
-# Proxys to use
+# Proxies to use
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # See documentation section "Templates for SOAR Cases" for more details
