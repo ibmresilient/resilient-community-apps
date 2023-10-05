@@ -43,6 +43,7 @@ inputs.mail_cc = rule.properties.mail_cc
 inputs.mail_attachments = rule.properties.mail_attachments
 inputs.mail_incident_id = incident.id
 inputs.mail_subject = u"[{0}] {1} Task: {2}".format(incident.id, incident.name, task.name)
+inputs.mail_encryption_recipients = rule.properties.mail_encryption_key.content
 
 creation_date = datetime.fromtimestamp( incident.create_date/1000)
 type_ids = u", ".join(incident.incident_type_ids)

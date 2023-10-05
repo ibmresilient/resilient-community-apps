@@ -29,6 +29,7 @@ inputs.mail_attachments = rule.properties.mail_attachments
 inputs.mail_incident_id = incident.id
 inputs.mail_from = rule.properties.mail_from
 inputs.mail_subject = "[{0}] {1}".format(incident.id, incident.name) if not rule.properties.get('mail_subject') else rule.properties.mail_subject
+inputs.mail_encryption_recipients = rule.properties.mail_encryption_key.content
 
 if rule.properties.get('mail_message_id'):
   # generate a message-id
