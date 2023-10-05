@@ -1,0 +1,83 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "qrhost": "1.1.1.0",
+    "offenseid": "13",
+    "events": [
+      {
+        "sourceip": "2.2.2.2",
+        "eventcount": "728.0",
+        "categorycount": "6.0",
+        "usernamecount": "1.0",
+        "MAX_starttime": "1666114282856.0",
+        "domainid": 0,
+        "vulnerabilityCount": 0,
+        "macAddress": "",
+        "network": "",
+        "domain": "Default Domain"
+      },
+      {
+        "sourceip": "3.3.3.3",
+        "eventcount": "7.0",
+        "categorycount": "1.0",
+        "usernamecount": "1.0",
+        "MAX_starttime": "1666114280756.0",
+        "domainid": 0,
+        "vulnerabilityCount": 0,
+        "macAddress": "",
+        "network": "",
+        "domain": "Default Domain"
+      },
+      {
+        "sourceip": "4.4.4.4",
+        "eventcount": "14.0",
+        "categorycount": "2.0",
+        "usernamecount": "1.0",
+        "MAX_starttime": "1666114279942.0",
+        "domainid": 0,
+        "vulnerabilityCount": 0,
+        "macAddress": "",
+        "network": "",
+        "domain": "Default Domain"
+      },
+      {
+        "sourceip": "5.5.5.5",
+        "eventcount": "14.0",
+        "categorycount": "2.0",
+        "usernamecount": "1.0",
+        "MAX_starttime": "1666114279022.0",
+        "domainid": 0,
+        "vulnerabilityCount": 0,
+        "macAddress": "",
+        "network": "",
+        "domain": "Default Domain"
+      }
+    ],
+    "current_time": 1666275957000
+  },
+  "raw": null,
+  "inputs": {
+    "qradar_search_param3": "13",
+    "qradar_search_param2": "WHERE INOFFENSE(%param3%)",
+    "qradar_search_param1": "sourceip as sourceip,SUM(eventcount) as eventcount,UNIQUECOUNT(category) as categorycount,UNIQUECOUNT(username) as usernamecount,max(starttime)",
+    "qradar_query_type": "sourceip",
+    "qradar_search_param7": "5 days",
+    "qradar_search_param6": "LIMIT 10",
+    "soar_incident_id": 2111,
+    "soar_table_name": "qr_top_source_ips",
+    "qradar_search_param5": "ORDER BY max(starttime) DESC",
+    "qradar_search_param4": "GROUP BY sourceip",
+    "qradar_query": "SELECT %param1% FROM events %param2% %param4% %param5% %param6% LAST %param7% PARAMETERS PROGRESSDETAILSRESOLUTION=60",
+    "qradar_label": "qradar_label1"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "unknown",
+    "package_version": "unknown",
+    "host": "local",
+    "execution_time_ms": 13137,
+    "timestamp": "2022-10-20 10:25:58"
+  }
+}
