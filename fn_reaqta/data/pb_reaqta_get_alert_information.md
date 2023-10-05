@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Get Alert Information (PB)
+# Playbook - QRadar EDR: Get Alert Information (PB)
 
 ### API Name
 `reaqta_get_alert_information`
@@ -26,7 +26,7 @@ Get alert information and populate the custom fields and datatables
 
 
 ---
-## Function - ReaQta: Get Alert Information
+## Function - QRadar EDR: Get Alert Information
 
 ### API Name
 `reaqta_get_alert_information`
@@ -45,7 +45,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_get_alert_information_post_process
+## Local script - qradar_edr_get_alert_information_post_process
 
 ### Description
 

@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Close Alert (PB)
+# Playbook - QRadar EDR: Close Alert (PB)
 
 ### API Name
 `reaqta_close_alert`
@@ -26,7 +26,7 @@ Close the ReaQta Alert
 
 
 ---
-## Function - ReaQta: Close Alert
+## Function - QRadar EDR: Close Alert
 
 ### API Name
 `reaqta_close_alert`

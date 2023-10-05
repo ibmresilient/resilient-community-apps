@@ -10,7 +10,7 @@ import logging
 
 LOG = logging.getLogger(__name__)
 
-TAB_NAME = "ReaQta"
+TAB_NAME = "QRadar EDR"
 
 class ReaQtaTab(Tab):
     SECTION = PACKAGE_NAME
