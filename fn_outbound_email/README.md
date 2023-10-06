@@ -113,11 +113,11 @@ This app supports the IBM QRadar SOAR Platform and the IBM Cloud Pak for Securit
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.0`.
+* SOAR platform >= `46.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.0`.
+* SOAR platform >= `46.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -271,8 +271,8 @@ The following table provides the settings you need to configure the app. These s
 | **smtp_ssl_cafile** | No | `false or /path/to/smtp_certificate.pem or crt file` | *TLS certificate setting. Can be a path to a CA bundle or 'false'.* |
 | **template_file** | No | `data/example_send_email.jinja` | *Path to template.jinja for rendering the email body.* |
 | **enable_email_conversations** | No | `true/false` | *enhance the 'email' tab with email conversation fields and datatable *  |
-| p12_signing_cert | No | /path/to/signing_encrypting_cert.p12 | certificate for email signing. In p12 format. |
-| p12_signing_cert_password | No | $USE_PRIVATE_SECRET | password, if any, needed to  unlock private key |
+| **p12_signing_cert** | No | `/path/to/signing_encrypting_cert.p12` | certificate for email signing. In p12 format. |
+| **p12_signing_cert_password** | No | `$USE_PRIVATE_SECRET` | password, if any, needed to  unlock private key |
 
 #### P12 Signing and Unencrypting Certificates
 The signing and unencrypting certificates are bundled in the pkcs12 format which includes both the email sender's private key and public certificate needed for signing emails. 
