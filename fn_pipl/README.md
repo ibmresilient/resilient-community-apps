@@ -17,6 +17,7 @@
 # Pipl Function for IBM SOAR
 
 ## Table of Contents
+- [Table of Contents](#table-of-contents)
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
@@ -24,6 +25,7 @@
   - [SOAR platform](#soar-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
+  - [Python Environment](#python-environment)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
@@ -31,8 +33,11 @@
 - [Function - Pipl search function](#function---pipl-search-function)
 - [Script - Create Artifact from Pipl Data](#script---create-artifact-from-pipl-data)
 - [Data Table - Pipl person data](#data-table---pipl-person-data)
+    - [API Name:](#api-name)
+    - [Columns:](#columns)
 - [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 ---
 
 ## Release Notes
@@ -42,6 +47,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.2 | 10/2023 | Only Python 3 supported |
 | 1.1.1 | 05/2022 | Submission fix |
 | 1.1.0 | 01/2021 | App Host Support |
 | 1.0.0 | 12/2018 | Initial Release |
@@ -113,6 +119,9 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 
 ### Proxy Server
 The app does not support a proxy server.
+
+### Python Environment
+Only Python 3.6 and 3.9 are officially supported. Since v1.1.2 support for Python 2.7 was removed.
 
 ---
 
