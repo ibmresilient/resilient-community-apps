@@ -182,12 +182,20 @@ class MandiantClient:
         elif artifact_type == 'malware md5 hash':
             url  = QUERY_URL.format(host=HOST_URL, type="md5", value=str(artifact_data))
         else:
-            return {"error": "IoC Type not supported"}
+            raise ValueError("error: IoC Type not supported")
         try:
             response = self.rc.execute("get", url, headers=self._client_common["headers"]).json()
         except Exception as e:
+            err = str(e)
+            
             # Reauthenticates to eliminate the possibility of an expired ACCESS_TOKEN and raises
             # an Integration error to be caught by the retry logic.
-            self.authenticate()
-            raise IntegrationError(str(e))
+            if "401" in err:
+                self.authenticate()
+
+            # Skipping 404 as no threat intelligence has been found for this artifact
+            if "404" in err and "Not Found" in err:
+                return {"Not Found" : url}
+
+            raise IntegrationError(err)
         return response
