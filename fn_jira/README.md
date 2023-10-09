@@ -33,6 +33,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.0.4 | 10/2023 | Bug fix for transitioning a Jira issue from SOAR |
 | 3.0.3 | 09/2023 | Bug fix for jira_transition_issue function |
 | 3.0.2 | 08/2023 | Bug fix for playbook, Example: Jira Create Comment |
 | 3.0.1 | 05/2023 | Bug fix for SOAR note synchronization |
