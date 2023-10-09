@@ -3,6 +3,7 @@
 # Generated with resilient-sdk v50.0.108
 """Tests using pytest_resilient_circuits"""
 import unittest, time
+import pytest
 
 from fn_mandiant.lib.mandiant_client import *
 from unittest.mock import MagicMock
@@ -93,4 +94,5 @@ class TestMandiantClient(unittest.TestCase):
         assert mc.search_artifact("url", "data")["success"]
         assert mc.search_artifact("dns name", "data")["success"]
         assert mc.search_artifact("malware md5 hash", "data")["success"]
-        self.assertDictEqual({"error": "IoC Type not supported"}, mc.search_artifact("email", "data"))
+        with pytest.raises(ValueError):
+            mc.search_artifact("email", "data")
