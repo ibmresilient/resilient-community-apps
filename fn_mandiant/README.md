@@ -45,7 +45,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 10/2023 | Automatically search Mandiant for information on certain artifact types |
+| 1.0.0 | 10/2023 | Automatically search Mandiant for threat intelligence on artifacts |
 
 ---
 
@@ -62,7 +62,7 @@ Investigate publicly known threats with insights from Mandiant. Upon artifact cr
 * URLs
 * Domain names
 * Ip addresses
-* md5 hashes
+* MD5 hashes
 
 ### Key Features
 * All enrichment information is displayed as Hits in the artifact section.

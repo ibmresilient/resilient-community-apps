@@ -29,7 +29,7 @@ setup(
     license="MIT",
     author="IBM SOAR",
     url="https://ibm.com/mysupport",
-    description="Automatically search Mandiant for information on artifacts",
+    description="Automatically search Mandiant for threat intelligence on artifacts",
     long_description="""Investigate publicly known threats with insights from Mandiant. Upon artifact creation, the application is shipped with a disabled playbook which when activated, automatically scans Mandiant for any related information.""",
     install_requires=[
         "resilient-circuits>=49.1.0",
