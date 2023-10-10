@@ -21,7 +21,7 @@
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| List of tags | `list_of_tags` | text | Comman seperated list of tags | Optional |
+| List of tags | `list_of_tags` | text | Comman separated list of tags | Optional |
 
 ### Object Type
 `artifact`

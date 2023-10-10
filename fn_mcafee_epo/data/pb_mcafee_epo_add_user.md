@@ -22,7 +22,7 @@
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | ePO Admin | `epo_admin` | boolean | If user should be admin | Optional |
-| ePO Allowed IPs | `epo_allowed_ips` | boolean | List if IPs allowed to access the user | Optional |
+| ePO Allowed IPs | `epo_allowed_ips` | text | A list of allowed IPs that can access ths user | Optional |
 | ePO Email | `epo_email` | text | Email for the ePO user | Optional |
 | ePO Full Name | `epo_full_name` | text | Full name of the ePO user | Optional |
 | ePO Notes | `epo_notes` | text | Notes to add to the ePO user | Optional |

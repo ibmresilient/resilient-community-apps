@@ -20,17 +20,21 @@
         "mcafee_epo_issue_properties": {},
         "mcafee_epo_ticket_server_name": {},
         "mcafee_epo_issue_due": {},
-        "mcafee_epo_issue_state": {
-          "type": "string"
-        },
         "mcafee_epo_issue_id": {
           "type": "integer"
         },
-        "mcafee_epo_issue_severity": {},
+        "mcafee_epo_issue_state": {},
         "mcafee_epo_issue_description": {},
-        "mcafee_epo_issue_assignee": {},
+        "mcafee_epo_issue_severity": {
+          "type": "string"
+        },
+        "mcafee_epo_issue_assignee": {
+          "type": "string"
+        },
         "mcafee_epo_ticket_id": {},
-        "mcafee_epo_issue_priority": {},
+        "mcafee_epo_issue_priority": {
+          "type": "string"
+        },
         "mcafee_epo_issue_resolution": {
           "type": "string"
         }

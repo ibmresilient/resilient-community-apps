@@ -7,26 +7,26 @@
   "inputs": {
     "mcafee_epo_push_agent_install_path": null,
     "mcafee_epo_push_agent_package_path": null,
-    "mcafee_epo_push_agent_force_install": null,
+    "mcafee_epo_push_agent_force_install": false,
     "mcafee_epo_group_id": 2,
-    "mcafee_epo_push_agent": null,
+    "mcafee_epo_push_agent": false,
     "mcafee_epo_push_agent_domain_name": null,
-    "mcafee_epo_flatten_tree_structure": null,
-    "mcafee_epo_allow_duplicates": null,
-    "mcafee_epo_delete_if_removed": null,
+    "mcafee_epo_flatten_tree_structure": false,
+    "mcafee_epo_allow_duplicates": false,
+    "mcafee_epo_delete_if_removed": false,
     "mcafee_epo_push_agent_username": null,
-    "mcafee_epo_uninstall": null,
-    "mcafee_epo_push_agent_skip_if_installed": null,
-    "mcafee_epo_system_name_or_id": "fffff",
-    "mcafee_epo_push_agent_suppress_ui": null,
+    "mcafee_epo_uninstall": false,
+    "mcafee_epo_push_agent_skip_if_installed": false,
+    "mcafee_epo_system_name_or_id": "richard test1",
+    "mcafee_epo_push_agent_suppress_ui": false,
     "mcafee_epo_push_agent_password": null
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
-    "package_version": "1.1.0",
+    "package_version": "3.0.0",
     "host": "local",
-    "execution_time_ms": 176568,
-    "timestamp": "2022-08-16 14:16:44"
+    "execution_time_ms": 787,
+    "timestamp": "2023-10-09 10:26:00"
   }
 }

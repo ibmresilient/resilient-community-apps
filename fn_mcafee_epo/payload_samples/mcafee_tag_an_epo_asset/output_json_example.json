@@ -5,15 +5,15 @@
   "content": 1,
   "raw": null,
   "inputs": {
-    "mcafee_epo_systems": "test_server",
-    "mcafee_epo_tag": "[u'Workstation']"
+    "mcafee_epo_systems": "int-mcafee-tie",
+    "mcafee_epo_tag": "Server"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
-    "package_version": "1.1.0",
+    "package_version": "3.0.0",
     "host": "local",
-    "execution_time_ms": 596,
-    "timestamp": "2022-07-01 12:42:07"
+    "execution_time_ms": 514,
+    "timestamp": "2023-10-09 13:22:08"
   }
 }

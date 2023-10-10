@@ -4,22 +4,22 @@
   "reason": null,
   "content": [
     {
-      "name": "toDelete",
-      "id": "15",
+      "name": "SomethingNew",
+      "id": "1010",
       "message": "Computer deleted successfully",
       "status": 0
     }
   ],
   "raw": null,
   "inputs": {
-    "mcafee_epo_system_name_or_id": "toDelete"
+    "mcafee_epo_system_name_or_id": "SomethingNew"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
-    "package_version": "1.1.0",
+    "package_version": "3.0.0",
     "host": "local",
-    "execution_time_ms": 615,
-    "timestamp": "2022-08-12 09:11:56"
+    "execution_time_ms": 799,
+    "timestamp": "2023-10-09 13:11:41"
   }
 }

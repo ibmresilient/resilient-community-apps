@@ -21,7 +21,7 @@
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| ePO System | `epo_system` | text | Comma seperated list of systems properties or one system  | Always |
+| ePO System | `epo_system` | text | Comma separated list of systems properties or one system  | Always |
 
 ### Object Type
 `incident`
@@ -65,9 +65,10 @@ inputs.mcafee_epo_systems = getattr(playbook.inputs, "epo_system")
 results = playbook.functions.results.system
 note = ''
 if results.get("success"):
-  for x in range(len(results['content'])):
-    content = dict((k, v) for k, v in results['content'][x].iteritems() if v and "N/A" not in str(v))
-    note += "{}\n{}".format(results['content'][x].get('EPOComputerProperties.ComputerName'), str(content))
+  resContent = results.get('content', [])
+  for x in range(len(resContent)):
+    content = dict((k, v) for k, v in resContent[x].items() if v and "N/A" not in str(v))
+    note += "{}\n{}".format(resContent[x].get('EPOComputerProperties.ComputerName'), str(content))
 
   incident.addNote(note.replace("{","").replace("u'","'").replace("}","\n\n"))
 ```

@@ -5,22 +5,22 @@
   "content": true,
   "raw": null,
   "inputs": {
-    "mcafee_epo_pass": "password",
+    "mcafee_epo_pass": "R3silient1",
     "mcafee_epo_allowed_ips": null,
-    "mcafee_epo_phone_number": "534-452-0287",
-    "mcafee_epo_email": "jeff@example.com",
-    "mcafee_epo_username": "jeff",
-    "mcafee_epo_notes": "jefferson notes",
-    "mcafee_epo_user_disabled": false,
-    "mcafee_epo_fullname": "jeff",
-    "mcafee_epo_admin": true
+    "mcafee_epo_phone_number": "7394034758",
+    "mcafee_epo_email": "richard@test.com",
+    "mcafee_epo_username": "richard-test",
+    "mcafee_epo_notes": "Hello",
+    "mcafee_epo_user_disabled": null,
+    "mcafee_epo_fullname": "Richard Test",
+    "mcafee_epo_admin": false
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
-    "package_version": "1.1.0",
+    "package_version": "3.0.0",
     "host": "local",
-    "execution_time_ms": 604,
-    "timestamp": "2022-08-10 12:55:56"
+    "execution_time_ms": 825,
+    "timestamp": "2023-10-09 10:37:10"
   }
 }

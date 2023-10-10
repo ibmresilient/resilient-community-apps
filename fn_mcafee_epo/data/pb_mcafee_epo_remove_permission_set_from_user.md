@@ -63,6 +63,7 @@ inputs.mcafee_epo_username = getattr(playbook.inputs, "epo_username")
 
 ### Script Content
 ```python
+results = playbook.functions.results.remove_perms
 if results.get('success'):
   incident.addNote("Permissions set: {} was removed from user: {}".format(row.permission_set_name, getattr(playbook.inputs, "epo_username")))
   if row.users:

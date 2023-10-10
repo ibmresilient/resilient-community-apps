@@ -2,17 +2,71 @@
   "version": 2.0,
   "success": true,
   "reason": null,
-  "content": [],
+  "content": [
+    {
+      "id": 1,
+      "name": "admin",
+      "fullName": "",
+      "email": "",
+      "phoneNumber": "",
+      "disabled": false,
+      "admin": true,
+      "authType": "pwd",
+      "authDetails": "",
+      "notes": "",
+      "allowedIPs": ""
+    },
+    {
+      "id": 6,
+      "name": "New user",
+      "fullName": "",
+      "email": "",
+      "phoneNumber": "",
+      "disabled": false,
+      "admin": false,
+      "authType": "pwd",
+      "authDetails": "",
+      "notes": "",
+      "allowedIPs": ""
+    },
+    {
+      "id": 5,
+      "name": "richard-test",
+      "fullName": "Richard Test",
+      "email": "richard@test.com",
+      "phoneNumber": "7394034758",
+      "disabled": false,
+      "admin": false,
+      "authType": "pwd",
+      "authDetails": "",
+      "notes": "Hello",
+      "allowedIPs": ""
+    },
+    {
+      "id": 2,
+      "name": "system",
+      "fullName": "",
+      "email": "",
+      "phoneNumber": "",
+      "disabled": true,
+      "admin": true,
+      "authType": "pwd",
+      "authDetails": "",
+      "notes": "",
+      "allowedIPs": ""
+    }
+  ],
   "raw": null,
   "inputs": {
-    "mcafee_epo_permsetname": "Global Reviewer"
+    "incident_id": 4057,
+    "datatable_name": "mcafee_epo_users"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
-    "package_version": "1.1.0",
+    "package_version": "3.0.0",
     "host": "local",
-    "execution_time_ms": 566,
-    "timestamp": "2022-08-11 08:07:14"
+    "execution_time_ms": 820,
+    "timestamp": "2023-10-09 10:55:20"
   }
 }

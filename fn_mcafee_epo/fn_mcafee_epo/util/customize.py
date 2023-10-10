@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v50.0.151
 
 """Generate the Resilient customizations required for fn_mcafee_epo"""

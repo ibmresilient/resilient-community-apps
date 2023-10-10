@@ -2,28 +2,28 @@
   "version": 2.0,
   "success": true,
   "reason": null,
-  "content": 13,
+  "content": 1,
   "raw": null,
   "inputs": {
     "mcafee_epo_issue_name": null,
     "mcafee_epo_issue_properties": null,
     "mcafee_epo_ticket_server_name": null,
     "mcafee_epo_issue_due": null,
-    "mcafee_epo_issue_state": "Resolved",
-    "mcafee_epo_issue_id": 13,
-    "mcafee_epo_issue_severity": null,
+    "mcafee_epo_issue_id": 1,
+    "mcafee_epo_issue_state": null,
     "mcafee_epo_issue_description": null,
-    "mcafee_epo_issue_assignee": null,
+    "mcafee_epo_issue_severity": "Medium",
+    "mcafee_epo_issue_assignee": "richard-test",
     "mcafee_epo_ticket_id": null,
-    "mcafee_epo_issue_priority": null,
-    "mcafee_epo_issue_resolution": "Fixed"
+    "mcafee_epo_issue_priority": "Medium",
+    "mcafee_epo_issue_resolution": "None"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
-    "package_version": "1.1.0",
+    "package_version": "3.0.0",
     "host": "local",
-    "execution_time_ms": 576,
-    "timestamp": "2022-08-19 09:05:15"
+    "execution_time_ms": 491,
+    "timestamp": "2023-10-09 13:14:30"
   }
 }

@@ -5,14 +5,14 @@
   "content": true,
   "raw": null,
   "inputs": {
-    "mcafee_epo_username": "testUser"
+    "mcafee_epo_username": "New user"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-mcafee-epo",
-    "package_version": "1.1.0",
+    "package_version": "3.0.0",
     "host": "local",
-    "execution_time_ms": 597,
-    "timestamp": "2022-08-11 08:07:17"
+    "execution_time_ms": 1017,
+    "timestamp": "2023-10-09 13:23:23"
   }
 }

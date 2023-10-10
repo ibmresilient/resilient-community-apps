@@ -87,7 +87,8 @@ if results.get("success"):
     users = ""
     for perm in results.get("content"):
       user = perm.get("EntitlementView.PrincipalName")
-      if user and permsetName.lower() == perm.get("EntitlementView.GroupName").lower() and user not in users:
+      permGroup = perm.get("EntitlementView.GroupName")
+      if user and permGroup and permsetName.lower() == permGroup.lower() and user not in users:
         users = "{}, {}".format(users, user)
     table_row["users"] = users[2:]
 ```

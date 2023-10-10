@@ -21,7 +21,7 @@
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| List of tags | `list_of_tags` | text | Comma seperated list of tags to remove | Always |
+| List of tags | `list_of_tags` | text | Comma separated list of tags to remove | Always |
 
 ### Object Type
 `artifact`

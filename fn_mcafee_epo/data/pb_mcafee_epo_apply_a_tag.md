@@ -21,7 +21,7 @@
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| ePO System | `epo_system` | text | Comma seperated list of systems properties or one system  | Always |
+| ePO System | `epo_system` | text | Comma separated list of systems properties or one system  | Always |
 
 ### Object Type
 `mcafee_epo_tags`

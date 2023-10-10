@@ -65,7 +65,7 @@ inputs.mcafee_epo_permsetname = row.permission_set_name
 ```python
 results = playbook.functions.results.add_perm_set
 username = playbook.inputs.epo_username
-if result.get('success'):
+if results.get('success'):
   if username not in row.users:
     if row.users:
       row.users = "{}, {}".format(row.users, username)

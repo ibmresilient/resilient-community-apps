@@ -34,7 +34,7 @@
 | ePO Push Agent Skip If Installed | `epo_push_agent_skip_if_installed` | boolean | Skip pushing agent if it is installed | Optional |
 | ePO Push Agent Suppress UI | `epo_push_agent_suppress_ui` | boolean | Push agent and suppress ui | Optional |
 | ePO Push Agent User Name | `epo_push_agent_user_name` | text | username for system | Optional |
-| ePO System Names or IDs | `epo_system_names_or_ids` | text | Comma seperated list of system names or IDs | Always |
+| ePO System Names or IDs | `epo_system_names_or_ids` | text | Comma separated list of system names or IDs | Always |
 | ePO Uninstall Removed | `epo_uninstall_removed` | boolean | True or false to uninstall system | Optional |
 
 ### Object Type
