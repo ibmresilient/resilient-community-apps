@@ -238,10 +238,10 @@ def add_response_as_hits(response):
     # into separate HIT cards.
     main_section , other_sections, verdict_section = {}, {}, {}
     for section in response:
-        if isinstance(response[section], list) or isinstance(response[section], dict):
-            other_sections["Additional Information"] = {section : response[section]}
-        elif section == "verdict" and isinstance(response[section], dict):
+        if section.lower().strip() == "verdict":
             verdict_section = {section : response[section]}
+        elif isinstance(response[section], list) or isinstance(response[section], dict):
+            other_sections["Additional Information"] = {section : response[section]}
         else:
             main_section[section] = response[section]
 
@@ -254,20 +254,25 @@ def add_response_as_hits(response):
     _othr_section = dedup_verdict_section(_othr_section)
     _othr_section = dedup_section(_othr_section)
     artifact.addHit(f"Mandiant Threat Intelligence: Additional Information", _othr_section)
+    
+    _main_section = compile_hits_section(main_section, [])
+    _main_section = dedup_section(_main_section)
+    artifact.addHit("Mandiant Threat Intelligence: MScore", _main_section)
 
     _verd_section = compile_hits_section(verdict_section, [])
     _verd_section = dedup_verdict_section(_verd_section)
     _verd_section = dedup_section(_verd_section)
-    artifact.addHit(f"Mandiant Threat Intelligence: Verdict", _verd_section)
+    artifact.addHit(f"Mandiant Threat Intelligence: Verdict ", _verd_section)
 
-    _main_section = compile_hits_section(main_section, [])
-    _main_section = dedup_section(_main_section)
-    artifact.addHit("Mandiant Threat Intelligence: MScore", _main_section)
-    
+
+
 result = playbook.functions.results.mandiant_results
 if not result.success:
     incident.addNote(helper.createRichText(result.reason))
-elif "error" not in result.content:
+elif "Not Found" in result.content:
+  # Insert code here to modify behavior when no results are found
+  pass
+else:
     add_response_as_hits(result.content)
 ```
 
