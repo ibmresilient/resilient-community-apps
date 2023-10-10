@@ -236,28 +236,33 @@ def add_response_as_hits(response):
     # Extract information found in the top level of the response and create a standalone HIT card
     # for those values. This usually has information related to MScore. Other sections are created
     # into separate HIT cards.
-    main_section , other_sections = {}, {}
+    main_section , other_sections, verdict_section = {}, {}, {}
     for section in response:
         if isinstance(response[section], list) or isinstance(response[section], dict):
-            other_sections[section] = response[section]
+            other_sections["Additional Information"] = {section : response[section]}
+        elif section == "verdict" and isinstance(response[section], dict):
+            verdict_section = {section : response[section]}
         else:
-            main_section[section ] = response[section]
+            main_section[section] = response[section]
 
-    # Each of the other sections are create into separate HIT cards, with special processing done
-    # for Verdict to accommodate various analysis results. Each section is then deduplicated to
-    # avoid any conflicts.
-    for each_section in other_sections:
-        section = compile_hits_section(other_sections[each_section], [])
-        if each_section == "verdict":
-            section = dedup_verdict_section(section)
-        section = dedup_section(section)
-        artifact.addHit(f"Mandiant Threat intelligence: {each_section.title()}", section)
-    
-    section = compile_hits_section(main_section, [])
-    section = dedup_section(section)
-    artifact.addHit("Mandiant Threat intelligence: MScore", section)
-    
-    
+    # Three primary sections are created MScore, Verdict and Additional Information
+    # Each of these sections are create into separate HIT cards.
+    # Special processing done for Verdict to accommodate various analysis results.
+    # Each section is then deduplicated to avoid any conflicts.
+
+    _othr_section = compile_hits_section(other_sections, [])
+    _othr_section = dedup_verdict_section(_othr_section)
+    _othr_section = dedup_section(_othr_section)
+    artifact.addHit(f"Mandiant Threat Intelligence: Additional Information", _othr_section)
+
+    _verd_section = compile_hits_section(verdict_section, [])
+    _verd_section = dedup_verdict_section(_verd_section)
+    _verd_section = dedup_section(_verd_section)
+    artifact.addHit(f"Mandiant Threat Intelligence: Verdict", _verd_section)
+
+    _main_section = compile_hits_section(main_section, [])
+    _main_section = dedup_section(_main_section)
+    artifact.addHit("Mandiant Threat Intelligence: MScore", _main_section)
     
 result = playbook.functions.results.mandiant_results
 if not result.success:
