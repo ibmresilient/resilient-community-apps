@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1696521274857,
+  "export_date": 1697032876074,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1390,13 +1390,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 130,
+  "id": 140,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1696521272705,
+      "create_date": 1697032874234,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1405,7 +1405,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1696521272705,
+      "update_date": 1697032874234,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -3368,7 +3368,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
+        "content_version": 5,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2275e891_cc0b_460f_8a72_890033330f60\" isExecutable=\"true\" name=\"playbook_2275e891_cc0b_460f_8a72_890033330f60\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0izp0u1\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Get Threat Details\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"2a2f6e9e-0fda-428e-adc0-cf0e7ca833fd\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_threat_id = incident.properties.sentinelone_threat_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_threat_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0izp0u1\u003c/incoming\u003e\u003coutgoing\u003eFlow_1i3p7dw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0izp0u1\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Prepare input to JSON Converter Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c67639fd-ac50-40f0-bada-5a323453c3ca\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1i3p7dw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1mn7jl3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1i3p7dw\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Convert JSON to rich text v1.3\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"64d3e6da-8b56-4d19-9ce8-a75586f71dad\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mn7jl3\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hml24a\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1mn7jl3\" sourceRef=\"ScriptTask_2\" targetRef=\"ScriptTask_3\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1hml24a\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1hml24a\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2275e891_cc0b_460f_8a72_890033330f60\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hml24a\" id=\"Flow_1hml24a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mn7jl3\" id=\"Flow_1mn7jl3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"408\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i3p7dw\" id=\"Flow_1i3p7dw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0izp0u1\" id=\"Flow_0izp0u1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"408\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1693238964395,
@@ -3420,7 +3420,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1693240057429,
+      "last_modified_time": 1697032448233,
       "local_scripts": [
         {
           "actions": [],
@@ -3431,12 +3431,12 @@
           "id": 43,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1693239258402,
+          "last_modified_time": 1697032446025,
           "name": "SentinelOne: Prepare input to JSON Converter Script",
           "object_type": "incident",
           "playbook_handle": "sentinelone_write_threat_details_to_note_pb",
           "programmatic_name": "sentinelone_write_threat_details_to_note_pb_sentinelone_prepare_input_to_json_converter_script",
-          "script_text": "results = playbook.functions.results.get_threat_results\n\ninputs = results.get(\"inputs\")\nthreat_id = inputs.get(\"sentinelone_threat_id\")\ncontent = results.get(\"content\")\ndata = content.get(\"data\")\n\nheader = u\"SentinelOne Threat Id: {0} Details:\".format(threat_id)\n\njson_note = {\n              \"version\": \"1.1\",\n              \"header\": header, \n              \"json\": data,\n              \"sort\": False\n            }\n\nworkflow.addProperty(\u0027convert_json_to_rich_text\u0027, json_note)",
+          "script_text": "results = playbook.functions.results.get_threat_results\n\ninputs = results.get(\"inputs\")\nthreat_id = inputs.get(\"sentinelone_threat_id\")\ncontent = results.get(\"content\")\ndata = content.get(\"data\")\n\nheader = u\"SentinelOne Threat Id: {0} Details:\".format(threat_id)\n\njson_note = {\n              \"version\": \"1.3\",\n              \"header\": header, \n              \"json\": data,\n              \"sort\": False\n            }\n\nplaybook.addProperty(\u0027convert_json_to_rich_text\u0027, json_note)",
           "tags": [],
           "uuid": "c67639fd-ac50-40f0-bada-5a323453c3ca"
         }
@@ -3469,7 +3469,7 @@
       "tags": [],
       "type": "default",
       "uuid": "2275e891-cc0b-460f-8a72-890033330f60",
-      "version": 8
+      "version": 9
     }
   ],
   "regulators": null,

@@ -67,13 +67,13 @@ data = content.get("data")
 header = u"SentinelOne Threat Id: {0} Details:".format(threat_id)
 
 json_note = {
-              "version": "1.1",
+              "version": "1.3",
               "header": header, 
               "json": data,
               "sort": False
             }
 
-workflow.addProperty('convert_json_to_rich_text', json_note)
+playbook.addProperty('convert_json_to_rich_text', json_note)
 ```
 
 ---
