@@ -30,7 +30,7 @@
 | 1.0.0 | 09/2018 | Initial Release |
 | 1.0.1 | 05/2020 | Support added for App Host |
 | 1.0.2 | 07/2022 | Updated documentation to new format |
-| 1.1.0 | 09/2022 | Add Playbooks also implement new features
+| 1.1.0 | 10/2023 | Add Playbooks and implement Create Service, List Services, and List Incidents functions| 
 ---
 ### PagerDuty App  2.1.0 Changes
 In v1.1.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
