@@ -1,15 +1,17 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 import logging
 import json
 from pdpyras import APISession, PDClientError
+from datetime import datetime, timedelta
 
 PRIORITIES = 'priorities'
 ESCALATION_POLICIES = 'escalation_policies'
 SERVICES = 'services'
 INCIDENT_FRAGMENT = 'incidents'
+SINCE = 'since='
 UPDATE_FRAGMENT = '/'.join((INCIDENT_FRAGMENT, '{}'))
 NOTE_FRAGMENT = '/'.join((UPDATE_FRAGMENT, 'notes'))
-
+PACKAGE_NAME = "fn_pagerduty"
 
 LOG = logging.getLogger(__name__)
 
@@ -45,6 +47,22 @@ def create_incident(appDict):
     # build url
     session = APISession(appDict['api_token'], name=appDict['resilient_client'], default_from=appDict['from_email'])
     resp = session.post(INCIDENT_FRAGMENT, payload)
+    return resp.json()
+
+def create_service(appDict):
+    """
+    logic to create a pagerduty service
+    :param appDict:
+    :return: the json string from the PD API
+    """
+
+    payload = build_service_payload(appDict)
+    LOG.debug(payload)
+
+    # build url
+    session = APISession(
+        appDict['api_token'], name=appDict['resilient_client'])
+    resp = session.post(SERVICES, payload)
     return resp.json()
 
 def update_incident(appDict, incident_id, status, priority, resolution):
@@ -83,6 +101,39 @@ def create_note(appDict, incident_id, note):
     resp = session.post(url, payload)
     return resp.json()
 
+
+def list_incidents(appDict, timestamp):
+    """
+    List all the incidents
+    :param appDict:
+    :return: the json string from the PD API
+    """    
+    
+    session = APISession(appDict['api_token'])
+    if timestamp:
+        timestamp_seconds =int(str(timestamp)[:-3])
+        since_date = datetime.fromtimestamp(timestamp_seconds)
+        since_date_str = since_date.strftime("%Y-%m-%d")
+        six_months_ago = datetime.now() - timedelta(days=6*30)
+        
+        if since_date < six_months_ago:
+            raise ValueError("The maximum range is 6 months")
+        else:
+            resp = session.get(INCIDENT_FRAGMENT + "?" + SINCE + since_date_str)
+    else:
+        resp = session.get(INCIDENT_FRAGMENT)
+    return resp.json()
+
+
+def list_services(appDict):
+    """
+    List all the services
+    :param appDict:
+    :return: the json string from the PD API
+    """
+    session = APISession(appDict['api_token'])
+    resp = session.get(SERVICES)
+    return resp.json()
 
 def build_incident_payload(appDict):
     """
@@ -134,6 +185,36 @@ def build_incident_payload(appDict):
                 "id": priorityId
             }
 
+    return json.dumps(payload)
+
+
+def build_service_payload(appDict):
+    """
+    build the JSON payload to create a service
+    :param appDict:
+    :return: json
+    """
+    payload = {'service':
+               {
+                   'type': 'service',
+                   'name': appDict['title']
+               }
+               }
+    
+    # optional parts
+    if appDict['description']:
+        payload['service']['description'] = appDict['description']
+        
+    if appDict.get('escalation_policy'):
+        # find the escalation policy
+        escalationId = find_element_by_name(
+            appDict, ESCALATION_POLICIES, appDict['escalation_policy'])
+        if escalationId:
+            payload['service']['escalation_policy'] = {
+                "type": "escalation_policy_reference",
+                "id": escalationId
+            }
+            
     return json.dumps(payload)
 
 def build_update_payload(appDict, status, priority, resolution):
