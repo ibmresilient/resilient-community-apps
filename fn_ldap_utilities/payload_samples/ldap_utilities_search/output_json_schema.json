@@ -44,10 +44,13 @@
                   "type": "string"
                 }
               },
+              "displayName": {
+                "type": "string"
+              },
               "distinguishedName": {
                 "type": "string"
               },
-              "homePhone": {
+              "givenName": {
                 "type": "string"
               },
               "instanceType": {
@@ -57,6 +60,12 @@
                 "type": "string"
               },
               "lastLogon": {
+                "type": "string"
+              },
+              "lastLogonTimestamp": {
+                "type": "string"
+              },
+              "lockoutTime": {
                 "type": "string"
               },
               "logonCount": {
@@ -104,20 +113,11 @@
               "sn": {
                 "type": "string"
               },
-              "telephoneNumber": {
-                "type": "string"
-              },
               "uSNChanged": {
                 "type": "integer"
               },
               "uSNCreated": {
                 "type": "integer"
-              },
-              "uid": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "userAccountControl": {
                 "type": "integer"
@@ -127,6 +127,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "userPrincipalName": {
+                "type": "string"
               },
               "whenChanged": {
                 "type": "string"

@@ -39,12 +39,12 @@ class FunctionComponent(ResilientComponent):
             defender_indicator_value = kwargs.get("defender_indicator_value")  # text
 
             log = logging.getLogger(__name__)
-            log.info("defender_lookback_timeframe: %s", defender_lookback_timeframe)
-            log.info("defender_indicator_value: %s", defender_indicator_value)
+            log.info(f"defender_lookback_timeframe: {defender_lookback_timeframe}")
+            log.info(f"defender_indicator_value: {defender_indicator_value}")
 
             # GET /api/machines/findbyip(ip='{IP}',timestamp={TimeStamp})
             timestamp_str = readable_datetime(defender_lookback_timeframe)
-            query = "findbyip(ip='{}',timestamp={})".format(defender_indicator_value, timestamp_str)
+            query = f"findbyip(ip='{defender_indicator_value}',timestamp={timestamp_str})"
             url = "/".join([MACHINES_URL, query])
 
             # Get the function parameters:
@@ -60,11 +60,11 @@ class FunctionComponent(ResilientComponent):
 
             # convert the timestamp
             if status:
-                yield StatusMessage("Machines found: {}".format(len(machines_result.get('value', []))))
+                yield StatusMessage(f"Machines found: {len(machines_result.get('value', []))}")
                 for machine in machines_result.get('value', []):
                     machine['firstSeen_ts'] = convert_date(machine['firstSeen'])
             else:
-                yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
+                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
 
             yield StatusMessage("Finished 'defender_find_machines'")
 

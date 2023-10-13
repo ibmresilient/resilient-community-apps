@@ -16,8 +16,11 @@
 - [Function - PagerDuty Create Incident](#function---pagerduty-create-incident)
 - [Function - PagerDuty Create Note](#function---pagerduty-create-note)
 - [Function - PagerDuty Transition Incident](#function---pagerduty-transition-incident)
+- [Function - PagerDuty Create Service](#function---pagerduty-create-services)
+- [Function - PagerDuty List Services](#function---pagerduty-list-incidents)
+- [Function - PagerDuty List Incidents](#function---pagerduty-create-service)
 - [Custom Fields](#custom-fields)
-- [Rules](#rules)
+- [Playbooks](#Playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -27,8 +30,16 @@
 | 1.0.0 | 09/2018 | Initial Release |
 | 1.0.1 | 05/2020 | Support added for App Host |
 | 1.0.2 | 07/2022 | Updated documentation to new format |
-
+| 1.1.0 | 10/2023 | Add Playbooks and implement Create Service, List Services, and List Incidents functions| 
 ---
+### PagerDuty App  2.1.0 Changes
+In v1.1.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end. For automatic actions, the playbooks will be disabled by default.
+
+You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
+
+Add Create Service, List Services and List Incidents functions.
 
 ## Overview
 
@@ -52,13 +63,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `43.1.49`.
+* SOAR platform >= `46.0.8131`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `43.1.49`.
+* SOAR platform >= `46.0.8131`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=43.0.0`.
+* Integration server is running `resilient_circuits>=45.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -134,6 +145,9 @@ The following table provides the settings you need to configure the app. These s
 ## Function - PagerDuty Create Incident
 Create a PagerDuty Incident based on a Resilient Incident
 
+ ![screenshot: create_incident ](./doc/screenshots/create_incident.png) 
+
+  ![screenshot: create_incident_pb ](./doc/screenshots/create_incident_pb.png) 
 
 
 <details><summary>Inputs:</summary>
@@ -285,6 +299,7 @@ incident.properties.pd_incident_url = "<a href='{}' target='blank'>Link</a>".for
 ---
 ## Function - PagerDuty Create Note
 Create a PagerDuty Note based on a Resilient Incident's Note
+ ![screenshot: create_pagerduty_note ](./doc/screenshots/create_pagerduty_note.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -350,6 +365,9 @@ None
 ## Function - PagerDuty Transition Incident
 Transition a PagerDuty Incident based on changes to a Resilient Incident (such as Closing the Incident)
 
+ ![screenshot: resolve_pagerduty_incident.png ](./doc/screenshots/resolve_pagerduty_incident.png) 
+ 
+  ![screenshot: update_pagerduty_incident_severity.png ](./doc/screenshots/update_pagerduty_incident_severity.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -476,25 +494,538 @@ None
 </details>
 
 ---
+## Function - PagerDuty Create Service
+Create a PagerDuty Service
+
+ ![screenshot: resolve_pagerduty_incident.png ](./doc/screenshots/create_sevice.png) 
+ 
+<details><summary>Inputs:</summary>
+<p>
+
+```python
+if not playbook.inputs.pd_escalation_policy:
+  inputs.pd_escalation_policy = "default"
+
+if playbook.inputs.pd_description:
+  inputs.pd_description = playbook.inputs.pd_description
+
+inputs.pd_title = playbook.inputs.pd_title
+```
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+`create_service`
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+None
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+results = playbook.functions.results.create_service
+
+if results.pd['service']:
+  incident.addNote("Service Created:<a href='{}' target='blank'>{}</a> " .format(results.pd['service']['html_url'], results.pd['service']['name']))
+elif results.pd['error']:
+  incident.addNote("Create Service Failed : {}" .format(results.pd['error']['errors']))
+else:
+  incident.addNote("Create Service Failed")
+```
+
+</p>
+</details>
+
+---
+## Function - PagerDuty List Incidents
+List all incidents on PagerDuty
+
+ ![screenshot: list_incidents.png ](./doc/screenshots/list_incidents.png) 
+ 
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `pd_search_date` | `text` | No | `-` | descrption from pagerduty |
 
 
+</p>
+</details>
 
-## Custom Fields
-| Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
-| ----- | --------------- | ---- | ------ | ----------- | ------- |
-| PagerDuty Incident ID | `pd_incident_id` | `text` | `properties` | - | field to contain the pagerduty incident Id created |
-| PagerDuty Incident URL | `pd_incident_url` | `textarea` | `properties` | - | - |
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+{
+  "incidents": [
+    {
+      "incident_number": 1,
+      "title": "TestService",
+      "description": "TestService",
+      "created_at": "2023-08-24T06:53:30Z",
+      "updated_at": "2023-08-24T07:32:29Z",
+      "status": "acknowledged",
+      "incident_key": "e9120574be8c45e1a92d1a0d34199b56",
+      "service": {
+        "id": "P94IRVL",
+        "type": "service_reference",
+        "summary": "dummyTestService",
+        "self": "https://api.pagerduty.com/services/P94IRVL",
+        "html_url": "https://dev-resilient.pagerduty.com/service-directory/P94IRVL"
+      },
+      "assignments": [
+        {
+          "at": "2023-08-24T06:53:30Z",
+          "assignee": {
+            "id": "P7V7SAJ",
+            "type": "user_reference",
+            "summary": "dummy Lee",
+            "self": "https://api.pagerduty.com/users/P7V7SAJ",
+            "html_url": "https://dev-resilient.pagerduty.com/users/P7V7SAJ"
+          }
+        }
+      ],
+      "assigned_via": "escalation_policy",
+      "last_status_change_at": "2023-08-24T07:32:28Z",
+      "resolved_at": null,
+      "first_trigger_log_entry": {
+        "id": "R2RPSI1N0M3C53904CK0QKVA18",
+        "type": "trigger_log_entry_reference",
+        "summary": "Triggered through the website.",
+        "self": "https://api.pagerduty.com/log_entries/R2RPSI1N0M3C53904CK0QKVA18",
+        "html_url": "https://dev-resilient.pagerduty.com/incidents/Q0JC5FKZB7QKWA/log_entries/R2RPSI1N0M3C53904CK0QKVA18"
+      },
+      "alert_counts": {
+        "all": 0,
+        "triggered": 0,
+        "resolved": 0
+      },
+      "is_mergeable": true,
+      "escalation_policy": {
+        "id": "PMV0LFG",
+        "type": "escalation_policy_reference",
+        "summary": "dummyTestService-ep",
+        "self": "https://api.pagerduty.com/escalation_policies/PMV0LFG",
+        "html_url": "https://dev-resilient.pagerduty.com/escalation_policies/PMV0LFG"
+      },
+      "teams": [],
+      "pending_actions": [],
+      "acknowledgements": [
+        {
+          "at": "2023-08-24T07:32:28Z",
+          "acknowledger": {
+            "id": "P7V7SAJ",
+            "type": "user_reference",
+            "summary": "dummy Lee",
+            "self": "https://api.pagerduty.com/users/P7V7SAJ",
+            "html_url": "https://dev-resilient.pagerduty.com/users/P7V7SAJ"
+          }
+        }
+      ],
+      "basic_alert_grouping": null,
+      "alert_grouping": null,
+      "last_status_change_by": {
+        "id": "P7V7SAJ",
+        "type": "user_reference",
+        "summary": "dummy Lee",
+        "self": "https://api.pagerduty.com/users/P7V7SAJ",
+        "html_url": "https://dev-resilient.pagerduty.com/users/P7V7SAJ"
+      },
+      "priority": null,
+      "incidents_responders": [],
+      "responder_requests": [],
+      "subscriber_requests": [],
+      "urgency": "high",
+      "id": "Q0JC5FKZB7QKWA",
+      "type": "incident",
+      "summary": "[#1] TestService",
+      "self": "https://api.pagerduty.com/incidents/Q0JC5FKZB7QKWA",
+      "html_url": "https://dev-resilient.pagerduty.com/incidents/Q0JC5FKZB7QKWA"
+    }
+  ],
+  "limit": 25,
+  "offset": 0,
+  "total": null,
+  "more": false
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+import json
+
+results = playbook.functions.results.list_incidents
+
+if results['incidents']:
+  incident.addNote(json.dumps(results, indent=2))
+else:
+  incident.addNote("Get Incidents Failed (No Incidents returned)")
+```
+
+</p>
+</details>
+
+---
+## Function - PagerDuty List Services
+List all services on PagerDuty
+
+ ![screenshot: list_services.png ](./doc/screenshots/list_services.png) 
+
+<details><summary>Inputs:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+
+```python
+{
+  "services": [
+    {
+      "id": "P94IRVL",
+      "name": "dummyTestService",
+      "description": null,
+      "created_at": "2023-08-24T14:52:50+08:00",
+      "updated_at": "2023-08-24T14:52:50+08:00",
+      "status": "critical",
+      "teams": [],
+      "alert_creation": "create_alerts_and_incidents",
+      "addons": [],
+      "scheduled_actions": [],
+      "support_hours": null,
+      "last_incident_timestamp": "2023-09-11T11:31:14Z",
+      "escalation_policy": {
+        "id": "PMV0LFG",
+        "type": "escalation_policy_reference",
+        "summary": "dummyTestService-ep",
+        "self": "https://api.pagerduty.com/escalation_policies/PMV0LFG",
+        "html_url": "https://dev-resilient.pagerduty.com/escalation_policies/PMV0LFG"
+      },
+      "incident_urgency_rule": {
+        "type": "constant",
+        "urgency": "high"
+      },
+      "acknowledgement_timeout": null,
+      "auto_resolve_timeout": null,
+      "alert_grouping": "intelligent",
+      "alert_grouping_timeout": null,
+      "alert_grouping_parameters": {
+        "type": "intelligent",
+        "config": {
+          "time_window": 300,
+          "recommended_time_window": 300
+        }
+      },
+      "integrations": [
+        {
+          "id": "P4WG9MK",
+          "type": "generic_email_inbound_integration_reference",
+          "summary": "Email",
+          "self": "https://api.pagerduty.com/services/P94IRVL/integrations/P4WG9MK",
+          "html_url": "https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/P4WG9MK"
+        },
+        {
+          "id": "P0KV9NX",
+          "type": "events_api_v2_inbound_integration_reference",
+          "summary": "Events API V2",
+          "self": "https://api.pagerduty.com/services/P94IRVL/integrations/P0KV9NX",
+          "html_url": "https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/P0KV9NX"
+        },
+        {
+          "id": "PJGE9XE",
+          "type": "generic_events_api_inbound_integration_reference",
+          "summary": "Prometheus",
+          "self": "https://api.pagerduty.com/services/P94IRVL/integrations/PJGE9XE",
+          "html_url": "https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PJGE9XE"
+        },
+        {
+          "id": "PG7T8IR",
+          "type": "event_transformer_api_inbound_integration_reference",
+          "summary": "Amazon CloudWatch",
+          "self": "https://api.pagerduty.com/services/P94IRVL/integrations/PG7T8IR",
+          "html_url": "https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PG7T8IR"
+        },
+        {
+          "id": "PCY5861",
+          "type": "event_transformer_api_inbound_integration_reference",
+          "summary": "Splunk",
+          "self": "https://api.pagerduty.com/services/P94IRVL/integrations/PCY5861",
+          "html_url": "https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PCY5861"
+        },
+        {
+          "id": "PYLH7TB",
+          "type": "nagios_inbound_integration_reference",
+          "summary": "Nagios",
+          "self": "https://api.pagerduty.com/services/P94IRVL/integrations/PYLH7TB",
+          "html_url": "https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PYLH7TB"
+        },
+        {
+          "id": "PVPW6EO",
+          "type": "generic_events_api_inbound_integration_reference",
+          "summary": "Zabbix",
+          "self": "https://api.pagerduty.com/services/P94IRVL/integrations/PVPW6EO",
+          "html_url": "https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PVPW6EO"
+        },
+        {
+          "id": "PRD861L",
+          "type": "generic_events_api_inbound_integration_reference",
+          "summary": "Datadog",
+          "self": "https://api.pagerduty.com/services/P94IRVL/integrations/PRD861L",
+          "html_url": "https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PRD861L"
+        },
+        {
+          "id": "PO3K5PY",
+          "type": "events_api_v2_inbound_integration_reference",
+          "summary": "SolarWinds Orion",
+          "self": "https://api.pagerduty.com/services/P94IRVL/integrations/PO3K5PY",
+          "html_url": "https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PO3K5PY"
+        },
+        {
+          "id": "P7UZ4A8",
+          "type": "generic_events_api_inbound_integration_reference",
+          "summary": "New Relic",
+          "self": "https://api.pagerduty.com/services/P94IRVL/integrations/P7UZ4A8",
+          "html_url": "https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/P7UZ4A8"
+        }
+      ],
+      "response_play": null,
+      "type": "service",
+      "summary": "dummyTestService",
+      "self": "https://api.pagerduty.com/services/P94IRVL",
+      "html_url": "https://dev-resilient.pagerduty.com/service-directory/P94IRVL"
+    },
+    {
+      "id": "P8WS4HA",
+      "name": "dummyTestService2",
+      "description": null,
+      "created_at": "2023-09-08T22:47:55+08:00",
+      "updated_at": "2023-09-08T22:47:55+08:00",
+      "status": "active",
+      "teams": [],
+      "alert_creation": "create_incidents",
+      "addons": [],
+      "scheduled_actions": [],
+      "support_hours": null,
+      "last_incident_timestamp": null,
+      "escalation_policy": {
+        "id": "P8021BT",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/P8021BT",
+        "html_url": "https://dev-resilient.pagerduty.com/escalation_policies/P8021BT"
+      },
+      "incident_urgency_rule": {
+        "type": "constant",
+        "urgency": "high"
+      },
+      "acknowledgement_timeout": null,
+      "auto_resolve_timeout": null,
+      "alert_grouping": null,
+      "alert_grouping_timeout": null,
+      "alert_grouping_parameters": {
+        "type": null,
+        "config": null
+      },
+      "integrations": [],
+      "response_play": null,
+      "type": "service",
+      "summary": "dummyTestService2",
+      "self": "https://api.pagerduty.com/services/P8WS4HA",
+      "html_url": "https://dev-resilient.pagerduty.com/service-directory/P8WS4HA"
+    },
+    {
+      "id": "PK723D4",
+      "name": "dummyTestService3",
+      "description": "TestDes",
+      "created_at": "2023-09-08T22:48:49+08:00",
+      "updated_at": "2023-09-08T22:48:49+08:00",
+      "status": "active",
+      "teams": [],
+      "alert_creation": "create_incidents",
+      "addons": [],
+      "scheduled_actions": [],
+      "support_hours": null,
+      "last_incident_timestamp": null,
+      "escalation_policy": {
+        "id": "P8021BT",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/P8021BT",
+        "html_url": "https://dev-resilient.pagerduty.com/escalation_policies/P8021BT"
+      },
+      "incident_urgency_rule": {
+        "type": "constant",
+        "urgency": "high"
+      },
+      "acknowledgement_timeout": null,
+      "auto_resolve_timeout": null,
+      "alert_grouping": null,
+      "alert_grouping_timeout": null,
+      "alert_grouping_parameters": {
+        "type": null,
+        "config": null
+      },
+      "integrations": [],
+      "response_play": null,
+      "type": "service",
+      "summary": "dummyTestService3",
+      "self": "https://api.pagerduty.com/services/PK723D4",
+      "html_url": "https://dev-resilient.pagerduty.com/service-directory/PK723D4"
+    },
+    {
+      "id": "PQNVIL9",
+      "name": "My Web App",
+      "description": "My cool web application that does things.",
+      "created_at": "2023-09-05T15:44:12+08:00",
+      "updated_at": "2023-09-05T15:44:12+08:00",
+      "status": "active",
+      "teams": [],
+      "alert_creation": "create_alerts_and_incidents",
+      "addons": [],
+      "scheduled_actions": [
+        {
+          "type": "urgency_change",
+          "at": {
+            "type": "named_time",
+            "name": "support_hours_start"
+          },
+          "to_urgency": "high"
+        }
+      ],
+      "support_hours": {
+        "type": "fixed_time_per_day",
+        "time_zone": "America/Lima",
+        "days_of_week": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "start_time": "09:00:00",
+        "end_time": "17:00:00"
+      },
+      "last_incident_timestamp": null,
+      "escalation_policy": {
+        "id": "P8021BT",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/P8021BT",
+        "html_url": "https://dev-resilient.pagerduty.com/escalation_policies/P8021BT"
+      },
+      "incident_urgency_rule": {
+        "type": "use_support_hours",
+        "during_support_hours": {
+          "type": "constant",
+          "urgency": "high"
+        },
+        "outside_support_hours": {
+          "type": "constant",
+          "urgency": "low"
+        }
+      },
+      "acknowledgement_timeout": 600,
+      "auto_resolve_timeout": 14400,
+      "alert_grouping": "time",
+      "alert_grouping_timeout": 2,
+      "alert_grouping_parameters": {
+        "type": "time",
+        "config": {
+          "timeout": 2
+        }
+      },
+      "integrations": [],
+      "response_play": null,
+      "type": "service",
+      "summary": "My Web App",
+      "self": "https://api.pagerduty.com/services/PQNVIL9",
+      "html_url": "https://dev-resilient.pagerduty.com/service-directory/PQNVIL9"
+    }
+  ],
+  "limit": 25,
+  "offset": 0,
+  "total": null,
+  "more": false
+}
+
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+import json
+
+results = playbook.functions.results.list_incidents
+
+if results['incidents']:
+  incident.addNote(json.dumps(results, indent=2))
+else:
+  incident.addNote("Get Incidents Failed (No Incidents returned)")
+```
+
+</p>
+</details>
 
 ---
 
 
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Create PagerDuty Note | note | `pagerduty_create_note` |
-| Resolve PagerDuty Incident | incident | `pagerduty_transition_incident` |
-| Trigger PagerDuty Incident | incident | `pagerduty_create_incident` |
-| Update PagerDuty Incident | incident | `pagerduty_transition_incident` |
+
+## Playbooks
+| Playbook Name | Object | Activation type | Status |
+| --------- | ------ | ------ | ------------------ |
+| PagerDuty: Create Incident (PB) | incident |Manual| `enabled` |
+| PagerDuty: Create PagerDuty Note (PB) | note |Automatic| `enabled` |
+| PagerDuty: Resolve PagerDuty Incident (PB) | incident | Automatic |`enabled` |
+| PagerDuty: Update PagerDuty Incident Severity (PB) | incident | Automatic | `enabled` |
+| PagerDuty: List Incidents (PB) | incident | Manual | `enabled` |
+| PagerDuty: List Services (PB) | incident | Manual | `enabled` |
+| PagerDuty: Create Service (PB) | incident | Manual | `enabled` |
 
 ---
 

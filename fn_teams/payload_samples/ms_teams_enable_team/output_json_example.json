@@ -3,21 +3,22 @@
   "success": true,
   "reason": null,
   "content": {
-    "id": "764a62f2-b759-4dd9-86e7-1a4949e4b77d",
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
+    "id": "3cde21c1-7e9c-4f6d-b986-06d879c43dad",
     "deletedDateTime": null,
     "classification": null,
-    "createdDateTime": "2022-11-17T15:35:29Z",
+    "createdDateTime": "2023-05-15T18:13:38Z",
     "creationOptions": [],
-    "description": "This is a sample group",
-    "displayName": "Engineering Team",
+    "description": "test1",
+    "displayName": "test1",
     "expirationDateTime": null,
     "groupTypes": [
       "Unified"
     ],
     "isAssignableToRole": null,
-    "mail": "example@******.onmicrosoft.com",
+    "mail": "test1@swivrllc.onmicrosoft.com",
     "mailEnabled": true,
-    "mailNickname": "example",
+    "mailNickname": "test1",
     "membershipRule": null,
     "membershipRuleProcessingState": null,
     "onPremisesDomainName": null,
@@ -29,29 +30,30 @@
     "preferredDataLocation": null,
     "preferredLanguage": null,
     "proxyAddresses": [
-      "SMTP:example@******.onmicrosoft.com"
+      "SMTP:test1@swivrllc.onmicrosoft.com"
     ],
-    "renewedDateTime": "2022-11-17T15:35:29Z",
+    "renewedDateTime": "2023-05-15T18:13:38Z",
     "resourceBehaviorOptions": [],
     "resourceProvisioningOptions": [],
     "securityEnabled": false,
-    "securityIdentifier": "S-1-12-1-1984586482-1306113881-1226499974-2109203529",
+    "securityIdentifier": "S-1-12-1-1021190593-1332575900-3624306361-2906506361",
     "theme": null,
-    "visibility": "Public",
+    "visibility": "Private",
     "onPremisesProvisioningErrors": [],
-    "message": "Successfully enabled Teams for Group: Engineering Team",
+    "status_code": 200,
+    "message": "Successfully enabled Teams for Group: test1",
     "teamsEnabled": true
   },
   "raw": null,
   "inputs": {
-    "ms_group_mail_nickname": "EngineeringTeam@******.onmicrosoft.com"
+    "ms_group_id": "3cde21c1-7e9c-4f6d-b986-06d879c43dad"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.0.0",
-    "host": "AppHost",
-    "execution_time_ms": 5220,
-    "timestamp": "2022-11-17 15:37:00"
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 4333,
+    "timestamp": "2023-05-15 14:14:23"
   }
 }

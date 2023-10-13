@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2020 - Confidential Information
+# Copyright IBM Corp. 2010, 2023 - Confidential Information
 
 """Function implementation"""
 
@@ -39,7 +39,7 @@ class FunctionComponent(ResilientComponent):
             defender_indicator_id = kwargs.get("defender_indicator_id")  # text
 
             log = logging.getLogger(__name__)
-            log.info("defender_indicator_id: %s", defender_indicator_id)
+            log.info(f"defender_indicator_id: {defender_indicator_id}")
 
             defender_api = DefenderAPI(self.options['tenant_id'],
                                        self.options['client_id'],
@@ -54,7 +54,7 @@ class FunctionComponent(ResilientComponent):
             indicator_payload, status, reason = defender_api.call(url, oper="DELETE")
 
             if not status:
-                yield StatusMessage("{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
+                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
 
             yield StatusMessage("Finished 'defender_list_indicators'")
 

@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
@@ -72,6 +72,11 @@ smtp_ssl_mode=starttls
 # The integration will use this template out of the box. If removed, it will default to the pre-processing script.
 # template_file=data/templates/example_send_email.jinja
 template_file=data/templates/example_send_email.jinja
+
+# Optional - P12 formatted cert for signing email account
+#  App Host file needs to be *base64* P12 formatted cert
+p12_signing_cert=
+p12_signing_cert_password=
 
 [fn_outbound_email:templates]
 ## specify templates for email processing. These templates are added to the mail_template_select activity field

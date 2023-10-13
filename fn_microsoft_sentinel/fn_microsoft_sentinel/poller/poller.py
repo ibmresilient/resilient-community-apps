@@ -8,7 +8,7 @@ from threading import Thread
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (SOARCommon, get_last_poller_date, poller,
-                           validate_fields)
+                           validate_fields, str_to_bool)
 
 from fn_microsoft_sentinel.lib.function_common import (
     DEFAULT_INCIDENT_CLOSE_TEMPLATE, DEFAULT_INCIDENT_CREATION_TEMPLATE,
@@ -156,6 +156,8 @@ class PollerComponent(AppFunctionComponent):
         :param new_incident_filters [dict]: [filter to apply to new incidents]
         :return: soar_incident [dict]
         """
+        # Check if the close_soar_case setting was configured in the app.config. Default to True
+        close_soar_case = str_to_bool(profile_data.get("close_soar_case", "true"))
         sentinel_incident_id, sentinel_incident_number = get_sentinel_incident_ids(sentinel_incident)
         # SOAR incident found
         updated_soar_incident = None
@@ -163,7 +165,7 @@ class PollerComponent(AppFunctionComponent):
             soar_incident_id = soar_incident['id']
             if soar_incident["plan_status"] == "C":
                 LOG.info(f"Bypassing update to closed incident {soar_incident_id} from Sentinel incident {sentinel_incident_number}")
-            elif sentinel_incident['properties']['status'] == "Closed":
+            elif sentinel_incident['properties']['status'] == "Closed" and close_soar_case:
                 # Close the incident
                 incident_payload = self.jinja_env.make_payload_from_template(
                     profile_data.get("close_incident_template"),

@@ -5,27 +5,33 @@
   "content": {
     "entries": [
       {
-        "dn": "CN=Franky,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
         "accountExpires": "9999-12-31 23:59:59.999999+00:00",
-        "badPasswordTime": "1601-01-01 00:00:00+00:00",
+        "badPasswordTime": "2023-08-09 12:37:03.680271+00:00",
         "badPwdCount": 0,
-        "cn": "Franky",
+        "cn": "Billy Bremner",
         "codePage": 0,
         "countryCode": 0,
         "dSCorePropagationData": [
-          "1601-01-01 00:00:00+00:00"
+          "2023-08-10 14:22:07+00:00",
+          "2023-08-10 14:19:35+00:00",
+          "1601-01-01 00:04:17+00:00"
         ],
-        "distinguishedName": "CN=Franky,CN=Users,DC=dev,DC=co3sys,DC=com",
-        "homePhone": "8493772734",
+        "displayName": "Billy Bremner",
+        "distinguishedName": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+        "givenName": "Billy",
         "instanceType": 4,
         "lastLogoff": "1601-01-01 00:00:00+00:00",
-        "lastLogon": "1601-01-01 00:00:00+00:00",
-        "logonCount": 0,
-        "mail": "Franky@mail.com",
+        "lastLogon": "2023-08-10 14:37:11.119774+00:00",
+        "lastLogonTimestamp": "2023-08-10 14:37:04.349319+00:00",
+        "lockoutTime": "1601-01-01 00:00:00+00:00",
+        "logonCount": 15,
+        "mail": "bbremner@example.com",
         "memberOf": [
-          "CN=Edward-2,CN=Users,DC=dev,DC=co3sys,DC=com"
+          "CN=DermotGroup2,DC=dev,DC=co3sys,DC=com",
+          "CN=DermotGroup,CN=Users,DC=dev,DC=co3sys,DC=com"
         ],
-        "name": "Franky",
+        "name": "Billy Bremner",
         "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
         "objectClass": [
           "top",
@@ -33,25 +39,22 @@
           "organizationalPerson",
           "user"
         ],
-        "objectGUID": "{407be9cc-4008-4fc4-8d80-b736ba946630}",
-        "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-7434",
+        "objectGUID": "{af8b16cd-968a-448b-92fd-6b281d07ffde}",
+        "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-3118",
         "primaryGroupID": 513,
-        "pwdLastSet": "1601-01-01 00:00:00+00:00",
-        "sAMAccountName": "$A87000-SM877LBEC42J",
+        "pwdLastSet": "2023-08-10 14:38:59.250429+00:00",
+        "sAMAccountName": "bbremner",
         "sAMAccountType": 805306368,
-        "sn": "Stevens",
-        "telephoneNumber": "9340249504",
-        "uSNChanged": 1050234,
-        "uSNCreated": 1050109,
-        "uid": [
-          "Franky"
-        ],
-        "userAccountControl": 514,
+        "sn": "Bremner",
+        "uSNChanged": 1139323,
+        "uSNCreated": 803064,
+        "userAccountControl": 66048,
         "userPassword": [
-          "5U!8PjHvMdDuCwm"
+          "superDuperSecret@9"
         ],
-        "whenChanged": "2023-03-31 13:28:09+00:00",
-        "whenCreated": "2023-03-30 14:41:26+00:00"
+        "userPrincipalName": "bbremner@dev.co3sys.com",
+        "whenChanged": "2023-08-10 14:38:59+00:00",
+        "whenCreated": "2020-05-20 08:47:45+00:00"
       }
     ]
   },
@@ -59,15 +62,15 @@
   "inputs": {
     "ldap_domain_name": "Domain2",
     "ldap_search_filter": "(&(mail=%ldap_param%))",
-    "ldap_search_param": "franky@mail.com",
+    "ldap_search_param": "bbremner@example.com",
     "ldap_search_base": "DC=dev,DC=co3sys,DC=com"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-ldap-utilities",
-    "package_version": "2.1.0",
+    "package_version": "2.1.2",
     "host": "local",
-    "execution_time_ms": 1094,
-    "timestamp": "2023-03-31 09:32:08"
+    "execution_time_ms": 1230,
+    "timestamp": "2023-08-10 10:39:53"
   }
 }

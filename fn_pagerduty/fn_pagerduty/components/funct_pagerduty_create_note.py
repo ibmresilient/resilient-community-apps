@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -37,14 +37,14 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get(u'pd_incident_id')  # text
             description = clean_html(kwargs.get(u'pd_description'))  # text
 
-            yield StatusMessage("starting...")
+            yield StatusMessage("Starting Create Note for Incidents...")
             resp = create_note(self.options, incident_id, description)
-            yield StatusMessage("pagerduty note created")
+            yield StatusMessage("Pagerduty Note created")
 
             # Produce a FunctionResult with the results - if not error, the response is not used
             yield FunctionResult(resp)
         except Exception as err:
-            yield FunctionError(err)
+            yield FunctionError(str(err))
 
 
     def create_note_callback(self, resp):

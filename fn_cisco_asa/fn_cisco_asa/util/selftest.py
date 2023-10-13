@@ -52,7 +52,7 @@ def selftest_function(opts):
             # See if we can get just one object.
             status_code, response = asa.get_network_objects(limit=1)
             if status_code == 200:
-                reason = "Successfull connection to firewall {0}.".format(firewall_name)
+                reason = "Successful connection to firewall {0}.".format(firewall_name)
                 return {
                     "state": "success",
                     "reason": reason

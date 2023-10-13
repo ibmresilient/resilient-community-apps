@@ -1,21 +1,21 @@
-# (c) Copyright IBM Corp. 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import json
-import logging
-
+from json import loads
+from logging import getLogger
 from fn_service_now.util.resilient_helper import (CONFIG_DATA_SECTION,
                                                   ResilientHelper)
 from resilient_circuits import (FunctionError, FunctionResult,
                                 ResilientComponent, StatusMessage, function,
                                 handler)
-from resilient_lib import RequestsCommon, ResultPayload
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
+
     def __init__(self, inputs):
         self.success = False
         self.inputs = inputs
@@ -43,19 +43,23 @@ class FunctionComponent(ResilientComponent):
     def _fn_snow_lookup_sysid_function(self, event, *args, **kwargs):
         """Function: Function that gets the 'sys_id' of a ServiceNow Record."""
 
-        log = logging.getLogger(__name__)
+        log = getLogger(__name__)
 
         try:
-            # Instansiate helper (which gets appconfigs from file)
+            # Instantiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rc = RequestsCommon(self.opts, self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
+            validate_fields(["sn_query_field", "sn_table_name", "sn_query_value"], kwargs)
 
             # Get the function inputs:
             inputs = {
-                "sn_query_field": res_helper.get_function_input(kwargs, "sn_query_field"),  # text (required)
-                "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name"),  # text (required)
-                "sn_query_value": res_helper.get_function_input(kwargs, "sn_query_value")  # text (required)
+                # text (required)
+                "sn_query_field": kwargs.get("sn_query_field"),
+                # text (required)
+                "sn_table_name": kwargs.get("sn_table_name"),
+                # text (required)
+                "sn_query_value": kwargs.get("sn_query_value")
             }
 
             # Create payload dict with inputs
@@ -67,35 +71,37 @@ class FunctionComponent(ResilientComponent):
                 payload.inputs.get("sn_table_name"), payload.inputs.get("sn_query_field"), payload.inputs.get("sn_query_value")))
 
             # Call custom endpoint '/get_sys_id' with 3 params
-            get_sys_id_response = res_helper.sn_api_request(rc, "GET", "/get_sys_id", params=payload.inputs)
+            get_sys_id_response = res_helper.sn_api_request(
+                rc, "GET", "/get_sys_id", params=payload.inputs)
 
             # Get response text
             response_result = get_sys_id_response.text
 
             # Check if result is there
-            if response_result is not None and "result" in response_result:
-                response_result = json.loads(response_result)
+            if response_result and "result" in response_result:
+                response_result = loads(response_result)
 
                 # Check if sys_id is defined
                 if response_result["result"]["sys_id"]:
                     payload.success = True
                     payload.sys_id = response_result["result"]["sys_id"]
-                    yield StatusMessage("sys_id found: {0}".format(payload.sys_id))
+                    yield StatusMessage(f"sys_id found: {payload.sys_id}")
                 else:
                     yield StatusMessage("No sys_id found")
 
             # Handle error messages
-            elif response_result is not None and "error" in response_result:
-                response_result = json.loads(response_result)
+            elif response_result and "error" in response_result:
+                response_result = loads(response_result)
                 err_msg = response_result["error"]["message"]
                 if "invalid table name" in err_msg:
-                    err_msg = '"{0}" is an invalid ServiceNow table name'.format(payload.inputs["sn_table_name"])
+                    err_msg = f'"{payload.inputs["sn_table_name"]}" is an invalid ServiceNow table name'
                 raise ValueError(err_msg)
 
             # Set results to the payload
             results = payload.as_dict()
             rp_results = rp.done(results.get("success"), results)
-            rp_results.update(results) # add in all results for backward-compatibility
+            # add in all results for backward-compatibility
+            rp_results.update(results)
 
             log.debug("RESULTS: %s", rp_results)
             log.info("Complete")

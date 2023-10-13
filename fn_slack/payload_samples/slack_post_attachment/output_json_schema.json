@@ -7,6 +7,12 @@
     },
     "url": {
       "type": "string"
+    },
+    "user_info": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   }
 }

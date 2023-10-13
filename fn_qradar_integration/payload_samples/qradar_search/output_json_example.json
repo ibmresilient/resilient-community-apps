@@ -1,13 +1,49 @@
 {
-  "events": [],
+  "events": [
+    {
+      "StartTime": "2023-06-14 14:14",
+      "categoryname_category": "User Login Attempt",
+      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
+      "protocolname_protocolid": "Reserved",
+      "rulename_creeventlist": "['BB:NetworkDefinition: Honeypot like Addresses', 'EC: AWS Cloud - Detected A Successful Login From Different Geographies For the Same Username', 'BB:CategoryDefinition: Medium Magnitude Events', 'BB:CategoryDefinition: High Magnitude Events', 'Source Asset Weight is Low', 'ECBB:CategoryDefinition: Destination IP is a Third Country/Region', 'Destination Asset Weight is Low', 'BB:NetworkDefinition: Darknet Addresses', 'Load Basic Building Blocks']"
+    },
+    {
+      "StartTime": "2023-06-14 14:14",
+      "categoryname_category": "Misc Login Succeeded",
+      "logsourcename_logsourceid": "Custom Rule Engine-8 :: qavm118-43",
+      "protocolname_protocolid": "Reserved",
+      "rulename_creeventlist": "['EC: AWS Cloud - Detected A Successful Login From Different Geographies For the Same Username', 'BB:NetworkDefinition: Honeypot like Addresses', 'BB:CategoryDefinition: Authentication Success', 'BB:CategoryDefinition: Medium Magnitude Events', 'BB:CategoryDefinition: High Magnitude Events', 'Source Asset Weight is Low', 'ECBB:CategoryDefinition: Destination IP is a Third Country/Region', 'Destination Asset Weight is Low', 'BB:CategoryDefinition: Post Exploit Account Activity', 'BB:NetworkDefinition: Darknet Addresses', 'Load Basic Building Blocks']"
+    },
+    {
+      "StartTime": "2023-06-14 14:14",
+      "categoryname_category": "Virtual Machine Creation Attempt",
+      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
+      "protocolname_protocolid": "Reserved",
+      "rulename_creeventlist": "['BB:NetworkDefinition: Honeypot like Addresses', 'EC: AWS Cloud - An AWS API Has Been Invoked From Kali', 'BB:CategoryDefinition: Medium Magnitude Events', 'BB:CategoryDefinition: High Magnitude Events', 'Source Asset Weight is Low', 'ECBB:CategoryDefinition: Destination IP is a Third Country/Region', 'Destination Asset Weight is Low', 'BB:NetworkDefinition: Darknet Addresses', 'Load Basic Building Blocks']"
+    },
+    {
+      "StartTime": "2023-06-14 14:14",
+      "categoryname_category": "Virtual Machine Creation Attempt",
+      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
+      "protocolname_protocolid": "Reserved",
+      "rulename_creeventlist": "['BB:NetworkDefinition: Honeypot like Addresses', 'EC: AWS Cloud - An AWS API Has Been Invoked From Kali', 'BB:CategoryDefinition: Medium Magnitude Events', 'BB:CategoryDefinition: High Magnitude Events', 'Source Asset Weight is Low', 'ECBB:CategoryDefinition: Destination IP is a Third Country/Region', 'Destination Asset Weight is Low', 'BB:NetworkDefinition: Darknet Addresses', 'Load Basic Building Blocks']"
+    },
+    {
+      "StartTime": "2023-06-14 14:14",
+      "categoryname_category": "Virtual Machine Creation Attempt",
+      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
+      "protocolname_protocolid": "Reserved",
+      "rulename_creeventlist": "['BB:NetworkDefinition: Honeypot like Addresses', 'EC: AWS Cloud - An AWS API Has Been Invoked From Kali', 'BB:CategoryDefinition: Medium Magnitude Events', 'BB:CategoryDefinition: High Magnitude Events', 'Source Asset Weight is Low', 'ECBB:CategoryDefinition: Destination IP is a Third Country/Region', 'Destination Asset Weight is Low', 'BB:NetworkDefinition: Darknet Addresses', 'Load Basic Building Blocks']"
+    }
+  ],
   "inputs": {
     "qradar_query": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days",
     "qradar_query_all_results": false,
     "qradar_search_param1": "DATEFORMAT(starttime, 'YYYY-MM-dd HH:mm') as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)",
-    "qradar_search_param2": "8",
+    "qradar_search_param2": "6241",
     "qradar_search_param3": "7",
     "qradar_search_param4": null,
     "qradar_search_param5": null,
-    "qradar_label": "SOAR_Plugin_Destination_Name"
+    "qradar_label": "qradar_9_21_118_67_1301"
   }
 }

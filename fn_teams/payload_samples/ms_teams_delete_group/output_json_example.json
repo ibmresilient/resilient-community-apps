@@ -4,18 +4,18 @@
   "reason": null,
   "content": {
     "status_code": 204,
-    "message": "Successfully deleted Group: Production Team"
+    "message": "Successfully deleted Group: test1"
   },
   "raw": null,
   "inputs": {
-    "ms_group_mail_nickname": "ProductionTeamm@******.onmicrosoft.com"
+    "ms_group_id": "3cde21c1-7e9c-4f6d-b986-06d879c43dad"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-teams",
-    "package_version": "2.0.0",
-    "host": "AppHost",
-    "execution_time_ms": 2996,
-    "timestamp": "2022-11-22 12:14:11"
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 2032,
+    "timestamp": "2023-05-15 14:15:02"
   }
 }

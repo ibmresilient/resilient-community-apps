@@ -33,6 +33,9 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.0.4 | 10/2023 | Bug fix for transitioning a Jira issue from SOAR |
+| 3.0.3 | 09/2023 | Bug fix for jira_transition_issue function |
+| 3.0.2 | 08/2023 | Bug fix for playbook, Example: Jira Create Comment |
 | 3.0.1 | 05/2023 | Bug fix for SOAR note synchronization |
 | 3.0.0 | 01/2023 | <ul><li>Add poller for bidirectional sync</li><li>Updated to work with Jira Cloud</li><li>Add global_settings to app.config that contains the settings for the poller</li></ul> |
 | 2.2.0 | 10/2022 | <ul><li>Added support for multi-tenancy</li><li>Added support for authentication with token</li><li>Removed support for python 2</li></ul> |
@@ -863,26 +866,26 @@ See example workflow for configuration of function pre-processor and post-proces
 
 ```python
 results = {
+  "version": 2.0,
+  "success": true,
+  "reason": null,
   "content": "Done",
+  "raw": null,
   "inputs": {
-    "jira_comment": "Closed in IBM SOAR\n\nResolution: Done\n",
-    "jira_fields": "{  }",
-    "jira_issue_id": "JRA-46",
+    "jira_issue_id": "JRA-239",
+    "jira_transition_id": "Done",
+    "jira_fields": "{\"customfield_10041\": {\"value\": \"Resolved\"}}",
     "jira_label": "my-server",
-    "jira_transition_id": "Done"
+    "jira_comment": "Closed in IBM SOAR\n\nResolution: Done\n"
   },
   "metrics": {
-    "execution_time_ms": 1760,
-    "host": "local",
+    "version": "1.0",
     "package": "fn-jira",
-    "package_version": "3.0.0",
-    "timestamp": "2023-01-31 10:18:08",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
+    "package_version": "3.0.3",
+    "host": "local",
+    "execution_time_ms": 2387,
+    "timestamp": "2023-09-25 15:31:42"
+  }
 }
 ```
 
@@ -1031,7 +1034,7 @@ verify_cert=True
 poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search
 max_issues_returned = 50
-# Proxys to use
+# Proxies to use
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # If templates under [fn_jira:global_settings] are configured, then templates
@@ -1068,7 +1071,7 @@ verify_cert=False
 poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)
 # Max number of issues that can be returned from Jira issue search
 max_issues_returned = 50
-# Proxys to use
+# Proxies to use
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.
 # If templates under [fn_jira:global_settings] are configured, then templates
@@ -1108,8 +1111,8 @@ polling_lookback=60
 # If max_issues_returned [fn_jira:global_settings] is configured, then max_issues_returned
 #  that are configured under the individual Jira servers will be ignored.
 max_issues_returned = 50
-# Proxys to use
-# If proxys are defined under [fn_jira:global_settings], then proxys defined
+# Proxies to use
+# If proxies are defined under [fn_jira:global_settings], then proxies defined
 #  under the individual Jira servers will be ignored
 #https_proxy=
 # OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.

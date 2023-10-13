@@ -2,6 +2,7 @@
 
 ## Table of Contents
 - [Release Notes](#release-notes)
+- [2.1.0 Changes](#210-changes)
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
@@ -9,10 +10,10 @@
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
-  - [Endpoint Developed With](#endpoint-developed-with)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+  - [2.0.0 Changes](#200-changes)
   - [Custom Layouts](#custom-layouts)
 - [Function - LDAP Utilities: Add](#function---ldap-utilities-add)
 - [Function - LDAP Utilities: Add to Group(s)](#function---ldap-utilities-add-to-groups)
@@ -29,8 +30,9 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.2 | 08/2023 | Bug fix for set password function |
 | 2.1.1 | 06/2023 | Bug fix for CP4S |
-| 2.1.0 | 04/2023 | <ul><li>Update search function to perform a paged search.</li><li>Fix bug in set password function.</li><li>Convert all Rules and Workflows to Playbooks.</li></ul>
+| 2.1.0 | 04/2023 | <ul><li>Update search function to perform a paged search.</li><li>Fix bug in set password function.</li><li>Convert all Rules and Workflows to Playbooks.</li></ul> |
 | 2.0.1 | 07/2022 | Fix helper.py so that ldap_connect_timeout is not required in app.config |
 | 2.0.0 | 04/2022 | <ul><li>Add ability to have multiple LDAP Domains</li><li>New rule to add users, groups, organizational units, etc.</li></ul>|
 | 1.1.1 | 07/2021 | Support added for App Host |
@@ -38,6 +40,14 @@
 | 1.0.0 | 07/2018 | Initial Release |
 
 * For customers upgrading from a previous release to 2.0.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [2.0.0 Changes](#2.0.0-changes)
+
+---
+## 2.1.0 Changes
+In v2.1, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end. For automatic actions, the playbooks will be disabled by default.
+
+You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
 
 ---
 
@@ -671,7 +681,7 @@ if results.get("success"):
 
 ---
 ## Function - LDAP Utilities: Set Password
-A function that allows you to set a new password for an LDAP entry given the entry's DN
+A function that allows you to set a new password for an LDAP entry given the entry's DN. To use this you have to connect to the LDAP server using ssl.
 
  ![screenshot: fn-ldap-utilities-set-password ](./doc/screenshots/fn-ldap-utilities-set-password.png)
 
@@ -684,7 +694,7 @@ A function that allows you to set a new password for an LDAP entry given the ent
 | `ldap_domain_name` | `text` | No | `Domain1` | Name of the LDAP server to use from the app.config |
 | `ldap_new_auto_password_len` | `number` | No | `12` | Length of password to generate |
 | `ldap_new_password` | `text` | No | `-` | The new password you want to set for the entry |
-| `ldap_return_new_password` | `boolean` | No | `-` | - |
+| `ldap_return_new_password` | `boolean` | No | `-` | True or false to return the new password. |
 
 </p>
 </details>
@@ -696,27 +706,28 @@ A function that allows you to set a new password for an LDAP entry given the ent
 
 ```python
 results = {
-  "version": "1.0",
+  "version": 2.0,
   "success": true,
   "reason": null,
-  "content": null,
-  "raw": "null",
+  "content": {
+    "user_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_new_password": null
+  },
+  "raw": null,
   "inputs": {
-    "ldap_domain_name": "Domain1",
-    "ldap_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com",
-    "ldap_new_password": "65zQ24h7Bx?i",
-    "ldap_return_new_password": true,
-    "ldap_new_auto_password_len": 12
+    "ldap_domain_name": "Domain2",
+    "ldap_dn": "CN=Billy Bremner,CN=Users,DC=dev,DC=co3sys,DC=com",
+    "ldap_new_password": "superDuperSecret@9",
+    "ldap_return_new_password": false
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-ldap-utilities",
-    "package_version": "2.0.0",
+    "package_version": "2.1.2",
     "host": "local",
-    "execution_time_ms": 0,
-    "timestamp": "2022-05-19 14:52:55"
-  },
-  "user_dn": "CN=Gary,CN=Users,DC=dev,DC=co3sys,DC=com"
+    "execution_time_ms": 10756,
+    "timestamp": "2023-08-10 10:39:08"
+  }
 }
 ```
 

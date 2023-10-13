@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2020 - Confidential Information
+# Copyright IBM Corp. 2010, 2023 - Confidential Information
 
 """Function implementation"""
 
@@ -43,9 +43,9 @@ class FunctionComponent(ResilientComponent):
             defender_machine_id = kwargs.get("defender_machine_id")  # text
 
             log = logging.getLogger(__name__)
-            log.info("defender_description: %s", action_description)
-            log.info("defender_machine_scantype: %s", defender_machine_scantype)
-            log.info("defender_machine_id: %s", defender_machine_id)
+            log.info(f"defender_description: {action_description}")
+            log.info(f"defender_machine_scantype: {defender_machine_scantype}")
+            log.info(f"defender_machine_id: {defender_machine_id}")
 
             defender_api = DefenderAPI(self.options['tenant_id'],
                                        self.options['client_id'],
@@ -71,8 +71,7 @@ class FunctionComponent(ResilientComponent):
                 scan_result, status, reason = defender_api.wait_for_action(url)
 
             if not status:
-                yield StatusMessage(u"{} failure. Status: {} Reason: {}"\
-                        .format(FUNCTION, status, reason))
+                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
 
             yield StatusMessage("Finished 'defender_machine_scan'")
 
