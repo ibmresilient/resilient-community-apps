@@ -58,6 +58,7 @@ inputs.mandiant_artifact_type = artifact.type
 
 ### Script Content
 ```python
+
 def compile_section_by_dtype(value, name):
     """
     Complies received information into HIT Cards. The information can have varied datatype. This function
@@ -122,7 +123,7 @@ def dedup_section(section):
     return section
 
 
-def dedup_verdict_section(section):
+def dedup_verdict_section(section, verdict_name=""):
     """
     Verdict is a special section that contains the result of multiple analysis. Each analysis has
     its own "name", "response_count", "source_count", "benign_count", "confidence", and "malicious_count".
@@ -142,7 +143,7 @@ def dedup_verdict_section(section):
     Returns:
         dict :  Similar dictionary with "name" values modified with their appropriate analysis type.
     """
-    verdict_name = ""
+   
 
     for each_item in section:
         # Saving the analysis name for subsequent fields
@@ -155,7 +156,7 @@ def dedup_verdict_section(section):
     return section
 
 
-def compile_hits_section(gathered_info, compiled_section:list) -> list:
+def compile_hits_section(gathered_info, compiled_section:list, section_name:str=None) -> list:
     """ 
     The purpose of this function is to flatten and organize data from the `gathered_info`
     dictionary and append it to the `compiled_section` list. The function can also handle
@@ -187,6 +188,11 @@ def compile_hits_section(gathered_info, compiled_section:list) -> list:
         list: compiled_section
     """
     for each_key in gathered_info:
+    
+        if section_name:
+            _new_section_name = f"{section_name} {each_key}"
+        else:
+            _new_section_name = each_key
 
         # This function has been designed with recursion in mind. This means that
         # gathered_info can be a dict and at times even a list. And therefore 
@@ -196,24 +202,24 @@ def compile_hits_section(gathered_info, compiled_section:list) -> list:
         # the previous output list. This is done to flatten the newly found dict and
         # append its contents to the existing section.
         if isinstance(each_key, dict):
-            compile_hits_section(each_key, compiled_section)
+            compile_hits_section(each_key, compiled_section, _new_section_name)
 
         # If gathered_info is not a list and the current value of the gathered_info is a dict
         # the function is called recursively to flatten the newly found dict.
         elif not isinstance(gathered_info, list) and isinstance(gathered_info[each_key], dict):
-            compile_hits_section(gathered_info[each_key], compiled_section)
+            compile_hits_section(gathered_info[each_key], compiled_section, _new_section_name)
 
         # Similarly if a list is found for the current value or key, it is then iterated further
         # and flattened out.
         elif not isinstance(each_key, list) and isinstance(gathered_info[each_key], list):
             for each_entity in gathered_info[each_key]:
                 if isinstance(each_entity, dict) or isinstance(each_entity, list):
-                    subsection = compile_hits_section(each_entity, compiled_section)
+                    subsection = compile_hits_section(each_entity, compiled_section, _new_section_name)
 
         # Finally, if the key or value is not a list or dict, then it's classified based on
         # it's datatype and formatted into a section.
         else:
-            subsection = compile_section_by_dtype(str(gathered_info[each_key]), each_key)
+            subsection = compile_section_by_dtype(str(gathered_info[each_key]), _new_section_name)
             compiled_section.append(subsection)
 
     return compiled_section
@@ -239,9 +245,9 @@ def add_response_as_hits(response):
     main_section , other_sections, verdict_section = {}, {}, {}
     for section in response:
         if section.lower().strip() == "verdict":
-            verdict_section = {section : response[section]}
+            verdict_section =  response[section]
         elif isinstance(response[section], list) or isinstance(response[section], dict):
-            other_sections["Additional Information"] = {section : response[section]}
+            other_sections[section] = response[section]
         else:
             main_section[section] = response[section]
 
@@ -250,16 +256,16 @@ def add_response_as_hits(response):
     # Special processing done for Verdict to accommodate various analysis results.
     # Each section is then deduplicated to avoid any conflicts.
 
-    _othr_section = compile_hits_section(other_sections, [])
+    _othr_section = compile_hits_section(other_sections, [], None)
     _othr_section = dedup_verdict_section(_othr_section)
     _othr_section = dedup_section(_othr_section)
     artifact.addHit(f"Mandiant Threat Intelligence: Additional Information", _othr_section)
     
-    _main_section = compile_hits_section(main_section, [])
+    _main_section = compile_hits_section(main_section, [], None)
     _main_section = dedup_section(_main_section)
     artifact.addHit("Mandiant Threat Intelligence: MScore", _main_section)
 
-    _verd_section = compile_hits_section(verdict_section, [])
+    _verd_section = compile_hits_section(verdict_section, [], None)
     _verd_section = dedup_verdict_section(_verd_section)
     _verd_section = dedup_section(_verd_section)
     artifact.addHit(f"Mandiant Threat Intelligence: Verdict ", _verd_section)
@@ -270,8 +276,8 @@ result = playbook.functions.results.mandiant_results
 if not result.success:
     incident.addNote(helper.createRichText(result.reason))
 elif "Not Found" in result.content:
-  # Insert code here to modify behavior when no results are found
-  pass
+    # Insert code here to modify behavior when no results are found
+    incident.addNote(f"No enrichment data found for artifact {artifact.value} from Mandiant")
 else:
     add_response_as_hits(result.content)
 ```
