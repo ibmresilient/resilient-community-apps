@@ -4,7 +4,7 @@
 
 from unittest.mock import patch
 import pytest, helper
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 FUNCTION_NAME = "splunk_delete_threat_intel_item"
