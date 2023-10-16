@@ -40,11 +40,10 @@ class FunctionComponent(AppFunctionComponent):
         # Log it for debug
         self.LOG.debug(f"item dict: {str(item_dict)}")
 
-        splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
+        splunk = function_basics(fn_inputs, self.servers_list)
 
         splunk_result = splunk.add_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
-                                                     threat_dict=item_dict,
-                                                     cafile=splunk_verify_cert)
+                                                     threat_dict=item_dict)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

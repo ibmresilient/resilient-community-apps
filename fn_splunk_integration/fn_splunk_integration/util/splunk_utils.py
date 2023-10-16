@@ -4,134 +4,19 @@
 
 import requests
 from json import dumps
-from time import time, sleep
+from time import sleep
 from logging import getLogger
 import urllib.parse as urlparse
-import splunklib.client as splunk_client
-import splunklib.results as splunk_results
 from resilient_lib import IntegrationError
 
 PACKAGE_NAME = "fn_splunk_integration"
 LOG = getLogger(__name__)
-
-class SplunkClient(object):
-    """ Wrapper of splunklib.client"""
-
-    # Member variables
-    splunk_service = None
-    time_out = 600
-    polling_interval = 5
-    max_return = 0
-
-    def __init__(self, host, port, username=None, password=None, token=None, verify=True):
-        """Init splunk_service"""
-        self.splunk_service = self.connect(host, port, username, password, token, verify)
-
-    @staticmethod
-    def connect(host, port, username, password, token, verify):
-        """
-        Connect to Splunk
-        :param host: Hostname for splunk
-        :param port: Port for splunk
-        :param username: Username to login
-        :param password: Password to login
-        :param token: Token string
-        :param verify: True to validate the SSL cert
-        :return: Connection to splunk
-        """
-        LOG.info(f"Splunk SDK verify flag is {verify}")
-        return splunk_client.connect(host=host,
-                                     port=port,
-                                     username=username,
-                                     password=password,
-                                     token=token,
-                                     verify=verify)
-
-    def set_timeout(self, timeout):
-        self.time_out = timeout
-
-    def set_polling_interval(self, pollinginterval):
-        self.polling_interval = pollinginterval
-
-    def set_max_return(self, max):
-        self.max_return = max
-
-    def start_search(self, query, job_ttl=None):
-        """Start a search for a query"""
-
-        query_args = {"search_mode": "normal",
-                      "enable_lookups": True}
-        if self.max_return:
-            query_args["max_count"] = self.max_return
-
-        try:
-            job = self.splunk_service.jobs.create(query, **query_args)
-            if job_ttl:
-                job.set_ttl(job_ttl)
-            return job
-        except Exception:
-            LOG.exception("Search job creation failed")
-            # If we failed to create a search job, it does not make sense to go further
-            raise IntegrationError(f"Failed to create search job for query [{query}] ")
-
-    def execute_query(self, query):
-        """
-        Execute splunk query
-        :param query: Query string
-        :return: Results of the query
-        """
-
-        LOG.debug(u"Query: {}" .format(query))
-
-        splunk_job = self.start_search(query)
-
-        # Poll Splunk for result
-        start_time = time()
-        done = False
-
-        while not done:
-            dispatch_state = splunk_job["dispatchState"]
-            if splunk_job.is_ready():
-                splunk_job.refresh()
-                done = dispatch_state in ("FAILED", "DONE")
-
-                stats = {"name": splunk_job.name,
-                         "isDone": splunk_job.isDone,
-                         "scanCount": int(splunk_job["scanCount"]),
-                         "eventCount": int(splunk_job["eventCount"]),
-                         "doneProgress": float(splunk_job["doneProgress"]) * 100,
-                         "resultCount": int(splunk_job["resultCount"])}
-
-                status = ("\r%(doneProgress)03.1f%%   %(scanCount)d scanned   "
-                          "%(eventCount)d matched   %(resultCount)d results") % stats
-
-                LOG.debug(status)
-
-            if not done:
-                if self.time_out != 0:
-                    if ((time() - start_time) > self.time_out):
-                        splunk_job.cancel()
-                        raise IntegrationError(f"Query [{splunk_job.name}] timed out. Final Status was [{dispatch_state}]")
-                LOG.debug(f"Sleeping for {self.polling_interval}")
-                sleep(self.polling_interval)
-
-        if dispatch_state != "DONE" or splunk_job["isFailed"] == True:
-            raise IntegrationError(f"Query [{splunk_job.name}] failed with status [{dispatch_state}], {str(splunk_job['messages'])}")
-
-        results_args = {}
-        if self.max_return:
-            results_args["count"] = self.max_return
-
-        reader = splunk_results.ResultsReader(splunk_job.results(**results_args))
-        return {"events": list([dict(row) for row in reader])}
-
 class SplunkUtils(object):
     """ Use python requests to call Splunk REST API"""
 
     # Member variables
     header = ""
     session_key = ""
-    base_url = ""
     SUPPORTED_THREAT_TYPE = ["ip_intel", "file_intel", "user_intel", "http_intel",
                              "email_intel", "service_intel", "process_intel",
                              "registry_intel", "certificate_intel"]
@@ -139,6 +24,7 @@ class SplunkUtils(object):
     def __init__(self, host, port, username, password, token, verify, proxies):
         self.base_url = f"https://{host}:{port}"
         self.proxies = proxies
+        self.verify = verify
         if username and password:
             self.get_session_key(username, password, verify)
         elif token:
@@ -173,16 +59,15 @@ class SplunkUtils(object):
         except Exception as e:
             raise e
 
-    def send_post(self, url, args, cafile):
+    def send_post(self, url, args):
         """
         Send POST request to splunk server
         :param url: The url api call
         :param args: args for the api call
-        :param cafile: Certificate file
         :return: Request response in json
         """
         try:
-            resp = requests.post(url, headers=self.header, data=args, verify=cafile, proxies=self.proxies)
+            resp = requests.post(url, headers=self.header, data=args, verify=self.verify, proxies=self.proxies)
             # We shall just return the response in json and let the post process
             # to make decision.
             return {"status_code": resp.status_code,
@@ -199,29 +84,26 @@ class SplunkUtils(object):
         except requests.RequestException as e:
             raise IntegrationError(f"Request to url [{url}] throws exception. Error [Ambiguous exception when handling request. {str(e)}]")
 
-    def update_notable(self, event_id, comment, status, cafile):
+    def update_notable(self, event_id, comment, status):
         """
         Update notable event
         :param event_id: event_id for notable event to be updated
         :param comment: Comment to add to the notable event
         :param status: Status of the notable event to change to
-        :param cafile: Verify HTTPS cert or not
         :return: Response in json
         """
 
         return self.send_post(f"{self.base_url}/services/notable_update",
                               {"comment": comment,
                                "status": status,
-                               "ruleUIDs": [event_id]},
-                              cafile)
+                               "ruleUIDs": [event_id]})
 
-    def delete_threat_intel_item(self, threat_type, item_key, cafile):
+    def delete_threat_intel_item(self, threat_type, item_key):
         """
         Delete an item from the threat_intel collections.
         :param threat_type: ip_intel, file_intel, user_intel, http_intel, email_intel, service_intel
                             process_intel, registry_intel, or certificate_intel
         :param item_key: The _key for ite to delete
-        :param cafile: CA cert or False to skip cert verification
         :return: Response in json
         """
 
@@ -231,7 +113,7 @@ class SplunkUtils(object):
             raise IntegrationError(f"Request to url [{url}] throws exception. Error [{threat_type} is not supported]")
 
         try:
-            resp = requests.delete(url, headers=self.header, verify=cafile, proxies=self.proxies)
+            resp = requests.delete(url, headers=self.header, verify=self.verify, proxies=self.proxies)
             # We shall just return the response in json and let the post process
             # to make decision.
             return {"status_code": resp.status_code,
@@ -240,13 +122,12 @@ class SplunkUtils(object):
         except Exception as e:
             raise IntegrationError(f"Delete request to url [{url}] throws exception. Error [Failed to delete: {str(e)}]")
 
-    def add_threat_intel_item(self, threat_type, threat_dict, cafile):
+    def add_threat_intel_item(self, threat_type, threat_dict):
         """
         Add a new threat intel item to the ThreatIntelligence collections
         :param threat_type: ip_intel, file_intel, user_intel, http_intel, email_intel, service_intel
                          process_intel, registry_intel, or certificate_intel
         :param threat_dict:
-        :param cafile: CA cert or False to skip cert verification
         :return: Response in json
         """
 
@@ -255,13 +136,34 @@ class SplunkUtils(object):
         if threat_type not in self.SUPPORTED_THREAT_TYPE:
             raise IntegrationError(f"Request to url [{url}] throws exception. Error [{threat_type} is not supported]")
 
-        return self.send_post(url, {"item": dumps(threat_dict)}, cafile)
+        return self.send_post(url, {"item": dumps(threat_dict)})
 
-    def search(self, query, cafile):
+    def get_search_results(self, search_id, max_return):
         """
+        Get the results from a Jira search
         """
-        url = f"{self.base_url}/services/search/jobs"
-        return self.send_post(url,{"search": query}, cafile)
+        resp = requests.get(f"{self.base_url}/services/search/v2/jobs/{search_id}/results", data={"output_mode": "json", "count": max_return}, headers=self.header, verify=self.verify, proxies=self.proxies)
+        if not resp.content: # If content is empty then the search has not finished running yet
+            return
+        return resp.json()
+
+    def search(self, query, max_return, time_to_wait):
+        """
+        Perform a search on splunk
+        """
+        header = self.header
+        header["Accept"] = "application/json"
+        # Create splunk search
+        search_job = requests.post(f"{self.base_url}/services/search/v2/jobs", data={"search": query, "output_mode": "json"}, headers=header, verify=self.verify, proxies=self.proxies).json()
+        search_id = search_job.get("sid")
+
+        while True:
+            sleep(time_to_wait)
+            search_results = self.get_search_results(search_id, max_return)
+            if search_results.get("results"):
+                break
+
+        return search_results.get("results")
 
 class SplunkServers():
     def __init__(self, opts):
@@ -271,10 +173,10 @@ class SplunkServers():
         servers = {}
         server_name_list = self._get_server_name_list(opts)
         for server in server_name_list:
-            server_name = u"{}".format(server)
+            server_name = f"{server}"
             server_data = opts.get(server_name)
             if not server_data:
-                raise KeyError(u"Unable to find Splunk server: {}".format(server_name))
+                raise KeyError("Unable to find Splunk server: {}".format(server_name))
 
             servers[server] = server_data
 

@@ -3,7 +3,7 @@
 
 from logging import getLogger
 from resilient_lib import validate_fields, IntegrationError, str_to_bool
-from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils, SplunkClient
+from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils
 
 PACKAGE_NAME = "fn_splunk_integration"
 QUERY_PARAM = "splunk_query_param"
@@ -79,7 +79,7 @@ def get_servers_list(opts):
 
     return servers_list
 
-def function_basics(fn_inputs, servers_list, utils=True):
+def function_basics(fn_inputs, servers_list):
     # Make that calls that all of the functions use
     options = SplunkServers.splunk_label_test(getattr(fn_inputs, "splunk_label", None), servers_list)
 
@@ -96,20 +96,10 @@ def function_basics(fn_inputs, servers_list, utils=True):
     if options.get("https_proxy"):
         proxies["https": options.get("https_proxy")]
 
-    if utils:
-        splunk = SplunkUtils(host=options.get("host"),
-                             port=options.get("port"),
-                             username=options.get("username", None),
-                             password=options.get("splunkpassword", None),
-                             token=options.get("token", None),
-                             verify=splunk_verify_cert,
-                             proxies=proxies)
-    else:
-        splunk = SplunkClient(host=options.get("host"),
-                              port=options.get("port"),
-                              username=options.get("username", None),
-                              password=options.get("splunkpassword", None),
-                              token=options.get("token", None),
-                              verify=splunk_verify_cert)
-
-    return splunk, splunk_verify_cert
+    return SplunkUtils(host=options.get("host"),
+                            port=options.get("port"),
+                            username=options.get("username", None),
+                            password=options.get("splunkpassword", None),
+                            token=options.get("token", None),
+                            verify=splunk_verify_cert,
+                            proxies=proxies)

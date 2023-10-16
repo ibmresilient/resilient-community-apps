@@ -27,11 +27,10 @@ class FunctionComponent(AppFunctionComponent):
         # Validate required parameters
         validate_fields(["splunk_threat_intel_type", "splunk_threat_intel_key"], fn_inputs)
 
-        splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
+        splunk = function_basics(fn_inputs, self.servers_list)
 
         splunk_result = splunk.delete_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
-                                                        item_key=fn_inputs.splunk_threat_intel_key,
-                                                        cafile=splunk_verify_cert)
+                                                        item_key=fn_inputs.splunk_threat_intel_key)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

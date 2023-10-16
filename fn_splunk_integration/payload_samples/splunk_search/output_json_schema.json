@@ -51,6 +51,9 @@
         "splunk_max_return": {
           "type": "integer"
         },
+        "splunk_search_time_to_wait": {
+          "type": "integer"
+        },
         "splunk_query": {
           "type": "string"
         },

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v50.0.131
+# Generated with resilient-sdk v50.1.262
 
 """Generate the Resilient customizations required for fn_splunk_integration"""
 
