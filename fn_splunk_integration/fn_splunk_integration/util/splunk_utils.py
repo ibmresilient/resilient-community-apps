@@ -174,10 +174,11 @@ class SplunkUtils(object):
             raise e
 
     def send_post(self, url, args, cafile):
-        """ These exacte commands are used for both update_notable and add_threat_intel_item
+        """
+        Send POST request to splunk server
         :param url: The url api call
         :param args: args for the api call
-        :param cafile: Certificae file
+        :param cafile: Certificate file
         :return: Request response in json
         """
         try:
@@ -256,6 +257,12 @@ class SplunkUtils(object):
 
         return self.send_post(url, {"item": dumps(threat_dict)}, cafile)
 
+    def search(self, query, cafile):
+        """
+        """
+        url = f"{self.base_url}/services/search/jobs"
+        return self.send_post(url,{"search": query}, cafile)
+
 class SplunkServers():
     def __init__(self, opts):
         self.servers, self.server_name_list = self._load_servers(opts)
@@ -279,7 +286,7 @@ class SplunkServers():
         Check if the given splunk_label is in the app.config
         :param splunk_label: User selected server
         :param servers_list: List of Splunk servers
-        :return: Dictionary of options for choosen server
+        :return: Dictionary of options for chosen server
         """
         # If label not given and using previous versions app.config [fn_splunk_integration]
         if not splunk_label and servers_list.get(PACKAGE_NAME):

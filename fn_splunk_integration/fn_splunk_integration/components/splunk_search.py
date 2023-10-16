@@ -37,12 +37,14 @@ class FunctionComponent(AppFunctionComponent):
 
         self.LOG.info(f"Splunk query to be executed: {query_string}")
 
-        splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=False)
+        splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
 
-        if getattr(fn_inputs, "splunk_max_return", None):
-            splunk.set_max_return(fn_inputs.splunk_max_return)
+        splunk_result = splunk.search(query_string, splunk_verify_cert)
 
-        splunk_result = splunk.execute_query(query_string)
+        # if getattr(fn_inputs, "splunk_max_return", None):
+        #     splunk.set_max_return(fn_inputs.splunk_max_return)
+
+        # splunk_result = splunk.execute_query(query_string)
         self.LOG.debug(splunk_result)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")

@@ -14,7 +14,7 @@ def make_query_string(query_string, params):
     Substitute parameters into the query
     :param query: Input query with params
     :param params: Values used to substitute
-    :return: (str) Query with params substitued
+    :return: (str) Query with params substituted
     """
 
     for param in params:
@@ -49,7 +49,7 @@ def make_item_dict(params):
 
 def get_servers_list(opts):
     """
-    Used for initilizing or reloading the options variable
+    Used for initializing or reloading the options variable
     :param opts: List of options
     :return: List of splunk servers
     """

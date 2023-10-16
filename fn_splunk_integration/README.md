@@ -36,7 +36,7 @@
 | 1.2.0 | 05/2022 | Add more documentation and bug fix |
 | 1.3.0 | 06/222 | Add authentication using tokens |
 | 1.3.1 | 11/2022 | Bug Fix |
-| 1.4.0 | 08/2023 | Add Proxy support & Convert workflows/rules to playbooks |
+| 1.4.0 | 10/2023 | Add Proxy support & Convert workflows/rules to playbooks |
 
 * For customers upgrading from a previous release to 1.1.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [1.1.0 Changes](#1.1.0-changes)
 
@@ -692,7 +692,7 @@ splunk_intel_results
 | Splunk: Add Artifact - Example (PB) | artifact | `splunk_add_artifact` |
 | Splunk: Delete an intel entry - Example (PB) | datatable | `splunk_delete_an_intel_entry` |
 | Splunk: Search for an artifact - Example (PB) | artifact | `splunk_search_for_an_artifact` |
-| Splunk: Update notable event - Examle (PB) | incident | `splunk_update_notable_event` |
+| Splunk: Update notable event - Example (PB) | incident | `splunk_update_notable_event` |
 
 ---
 
