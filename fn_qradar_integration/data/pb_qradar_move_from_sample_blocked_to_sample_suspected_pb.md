@@ -23,7 +23,7 @@ Remove an item from QRadar reference set and add it to reference set. Add a note
 
 
 ---
-## Function - QRadar Delete Reference Set Item
+## Function - QRadar SIEM: Delete Reference Set Item
 
 ### API Name
 `qradar_delete_reference_set_item`
@@ -42,7 +42,7 @@ inputs.qradar_label = playbook.inputs.qradar_server
 ```
 
 ---
-## Function - QRadar Add Reference Set Item
+## Function - QRadar SIEM: Add Reference Set Item
 
 ### API Name
 `qradar_add_reference_set_item`

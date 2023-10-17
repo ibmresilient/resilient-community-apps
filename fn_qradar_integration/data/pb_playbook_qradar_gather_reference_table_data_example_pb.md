@@ -23,7 +23,7 @@ Make a query on a reference table and return its results into another datatable
 
 
 ---
-## Function - QRadar Reference Table Get Table Data
+## Function - QRadar SIEM: Reference Table Get Table Data
 
 ### API Name
 `qradar_reference_table_get_table`

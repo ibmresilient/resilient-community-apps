@@ -23,7 +23,7 @@ Add an IP address artifact to QRadar reference set
 
 
 ---
-## Function - QRadar Add Reference Set Item
+## Function - QRadar SIEM: Add Reference Set Item
 
 ### API Name
 `qradar_add_reference_set_item`

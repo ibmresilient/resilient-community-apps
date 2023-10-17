@@ -23,7 +23,7 @@ An example workflow that returns a list of all Reference Tables on the QRadar in
 
 
 ---
-## Function - QRadar Reference Table Get All Tables
+## Function - QRadar SIEM: Reference Table Get All Tables
 
 ### API Name
 `qradar_get_all_reference_tables`

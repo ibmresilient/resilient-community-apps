@@ -23,7 +23,7 @@ Update an existing reference table item. If it does not exist, it will be added
 
 
 ---
-## Function - QRadar Reference Table Update Item
+## Function - QRadar SIEM: Reference Table Update Item
 
 ### API Name
 `qradar_reference_table_update_item`

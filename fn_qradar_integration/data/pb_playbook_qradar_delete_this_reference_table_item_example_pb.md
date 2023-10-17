@@ -23,7 +23,7 @@ An example workflow that takes in a Reference Table name, an inner key, an outer
 
 
 ---
-## Function - QRadar Reference Table Delete Item
+## Function - QRadar SIEM: Reference Table Delete Item
 
 ### API Name
 `qradar_reference_table_delete_item`

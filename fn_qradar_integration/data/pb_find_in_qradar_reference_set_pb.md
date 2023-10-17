@@ -23,7 +23,7 @@ Look for an item in QRadar reference set and add a note to the Incident
 
 
 ---
-## Function - QRadar Find Reference Set Item
+## Function - QRadar SIEM: Find Reference Set Item
 
 ### API Name
 `qradar_find_reference_set_item`

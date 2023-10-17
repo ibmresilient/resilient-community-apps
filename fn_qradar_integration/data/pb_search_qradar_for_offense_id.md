@@ -23,7 +23,7 @@ Use the qradar_id field of the incident to search qradar events, and update the 
 
 
 ---
-## Function - QRadar Search
+## Function - QRadar SIEM: QRadar Search
 
 ### API Name
 `qradar_search`
@@ -46,7 +46,10 @@ if playbook.inputs.qradar_query_all_results:
 inputs.qradar_query = "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days"
 inputs.qradar_search_param1  = "DATEFORMAT(starttime, 'YYYY-MM-dd HH:mm') as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)"
 inputs.qradar_search_param2 = incident.properties.qradar_id
-inputs.qradar_search_param3 = '7'
+if playbook.inputs.days_to_search_back: 
+  inputs.qradar_search_param3 = playbook.inputs.days_to_search_back
+else:
+  inputs.qradar_search_param3 = '7'
 inputs.qradar_query_range_start = '1'
 inputs.qradar_query_range_end = '5'
 

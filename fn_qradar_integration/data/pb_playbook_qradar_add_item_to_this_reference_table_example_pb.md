@@ -23,7 +23,7 @@ Add a reference table item based on an existing named reference table
 
 
 ---
-## Function - QRadar Reference Table Add Item
+## Function - QRadar SIEM: Reference Table Add Item
 
 ### API Name
 `qradar_reference_table_add_item`

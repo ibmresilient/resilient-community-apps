@@ -23,7 +23,7 @@ Find all the QRadar reference sets that contain the given artifact
 
 
 ---
-## Function - QRadar Find Reference Sets
+## Function - QRadar SIEM: Find Reference Sets
 
 ### API Name
 `qradar_find_reference_sets`
