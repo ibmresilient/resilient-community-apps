@@ -29,7 +29,7 @@
 | ePO Notes | `epo_notes` | text | Notes to add to the ePO user | Optional |
 | ePO Phone Number | `epo_phone_number` | text | Phone number for the ePO user | Optional |
 | ePO Subject DN | `epo_subject_dn` | text | Subject DN to add to ePO user | Optional |
-| ePO User Disbabled | `epo_user_disbabled` | boolean | If the user should be disabled | Optional |
+| ePO User Disabled | `epo_user_disabled` | boolean | If the user should be disabled | Optional |
 | ePO User Password | `epo_user_password` | text | Password for the ePO user | Optional |
 | ePO Windows Domain | `epo_windows_domain` | text | A windows domain to add to ePO server | Optional |
 | ePO Windows Username | `epo_windows_username` | text | Windows username for ePO server | Optional |
