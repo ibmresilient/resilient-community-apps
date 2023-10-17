@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Find All QRadar Reference Sets (PB)
+# Playbook - QRadar SIEM: Find All Reference Sets -Example (PB)
 
 ### API Name
 `find_all_qradar_reference_sets_pb`

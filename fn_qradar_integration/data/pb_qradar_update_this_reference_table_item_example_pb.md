@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - QRadar Update this Reference Table Item Example (PB)
+# Playbook - QRadar SIEM: Update this Reference Table Item - Example (PB)
 
 ### API Name
 `qradar_update_this_reference_table_item_example_pb`

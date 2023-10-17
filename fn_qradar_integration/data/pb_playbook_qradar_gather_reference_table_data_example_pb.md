@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - QRadar Gather Reference Table Data - Example (PB)
+# Playbook - QRadar SIEM: Gather Reference Table Data - Example (PB)
 
 ### API Name
 `playbook_qradar_gather_reference_table_data_example_pb`

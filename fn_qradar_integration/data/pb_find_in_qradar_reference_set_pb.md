@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - Find in QRadar Reference Set (PB)
+# Playbook - QRadar SIEM: Find in Reference Set - Example (PB)
 
 ### API Name
 `find_in_qradar_reference_set_pb`

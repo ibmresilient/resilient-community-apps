@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - QRadar Delete this Reference Table Item - Example (PB)
+# Playbook - QRadar SIEM: Delete this Reference Table Item - Example (PB)
 
 ### API Name
 `playbook_qradar_delete_this_reference_table_item_example_pb`

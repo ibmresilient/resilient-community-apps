@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - QRadar Move from Sample Blocked to Sample Suspected (PB)
+# Playbook - QRadar SIEM: Move from Sample Blocked to Sample Suspected - Example (PB)
 
 ### API Name
 `qradar_move_from_sample_blocked_to_sample_suspected_pb`

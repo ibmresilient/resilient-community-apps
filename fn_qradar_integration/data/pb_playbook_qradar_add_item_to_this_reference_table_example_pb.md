@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - QRadar Add Item to this Reference Table - Example (PB)
+# Playbook - QRadar SIEM: Add Item to this Reference Table - Example (PB)
 
 ### API Name
 `playbook_qradar_add_item_to_this_reference_table_example_pb`
