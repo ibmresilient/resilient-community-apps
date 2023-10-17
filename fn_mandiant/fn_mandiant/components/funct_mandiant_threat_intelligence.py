@@ -46,7 +46,7 @@ class FunctionComponent(AppFunctionComponent):
         # Checks if the application is authenticated and if the acquired ACCESS_TOKEN has not expired.
         # Otherwise simply reauthenticates with the endpoint.
         if not self.client.check_authenticated():
-            self.LOG("Reauthenticate application with endpoint")
+            self.LOG.info("Reauthenticate application with endpoint")
             self.client.authenticate()
 
         # Searching for artifact related information
