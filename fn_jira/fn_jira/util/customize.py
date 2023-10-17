@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v50.0.151
+# Generated with resilient-sdk v50.1.262
 
 """Generate the Resilient customizations required for fn_jira"""
 
@@ -34,6 +34,7 @@ def codegen_reload_data():
         "actions": [],
         "incident_fields": [
             u"jira_internal_url",
+            u"jira_issue_closed_on_jira",
             u"jira_issue_id",
             u"jira_issue_status",
             u"jira_issue_type",
@@ -81,6 +82,7 @@ def customization_data(client=None):
         - example_jira_create_comment
     - Incident Fields:
         - jira_internal_url
+        - jira_issue_closed_on_jira
         - jira_issue_id
         - jira_issue_status
         - jira_issue_type
