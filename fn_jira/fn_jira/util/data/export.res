@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1695986343135,
+  "export_date": 1697468775384,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -449,6 +449,36 @@
       "values": []
     },
     {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "incident/jira_issue_closed_on_jira",
+      "hide_notification": false,
+      "id": 6028,
+      "input_type": "boolean",
+      "internal": false,
+      "is_tracked": false,
+      "name": "jira_issue_closed_on_jira",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Jira Issue closed on Jira",
+      "tooltip": "If the linked Jira issue is closed on Jira. This is used by Jira close Issue playbook to have it not run if the poller closes the SOAR incident.",
+      "type_id": 0,
+      "uuid": "40532803-df60-4ba7-bc04-c7e91a41772a",
+      "values": []
+    },
+    {
       "export_key": "incident/internal_customizations_field",
       "id": 0,
       "input_type": "text",
@@ -657,13 +687,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 127,
+  "id": 148,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1695986341270,
+      "create_date": 1697468773192,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -672,7 +702,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1695986341270,
+      "update_date": 1697468773192,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -701,10 +731,10 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f34be12b_5dfc_4765_ab2f_5717c94fe9c8\" isExecutable=\"true\" name=\"playbook_f34be12b_5dfc_4765_ab2f_5717c94fe9c8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_15sv3oj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Jira Open Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"84476441-4b16-40fe-96c4-d07f94bda06a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"from json import dumps\\nif getattr(playbook.inputs, \\\"jira_label\\\"):\\n  inputs.jira_label = playbook.inputs.jira_label\\nelif incident.properties.jira_server:\\n  inputs.jira_label = incident.properties.jira_server\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# A map for JIRA priorities\\npriority_map = { \\\"Lowest\\\": {\\\"name\\\": \\\"Lowest\\\"}, \\\"Low\\\": {\\\"name\\\": \\\"Low\\\"}, \\\"Medium\\\": {\\\"name\\\": \\\"Medium\\\"}, \\\"High\\\": {\\\"name\\\": \\\"High\\\"}, \\\"Highest\\\": {\\\"name\\\": \\\"Highest\\\"} }\\njira_priority = priority_map.get(incident.severity_code, {\\\"name\\\": \\\"Low\\\"})\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dumps({\\n  \\\"project\\\": playbook.inputs.jira_project_id,\\n  \\\"issuetype\\\": playbook.inputs.jira_issue_type,\\n  \\\"priority\\\": jira_priority,\\n  \\\"summary\\\": f\\\"IBM SOAR: {incident.name}\\\",\\n  \\\"description\\\": incident.description.content if incident.get(\\\"description\\\") else \\\"Created in IBM SOAR\\\"\\n})\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15sv3oj\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fnd9nw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_15sv3oj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1e3be103-44b8-43b9-9476-9204c9a2cd2d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1fnd9nw\u003c/incoming\u003e\u003coutgoing\u003eFlow_0hr0vq3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1fnd9nw\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0hr0vq3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0hr0vq3\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f34be12b_5dfc_4765_ab2f_5717c94fe9c8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0hr0vq3\" id=\"Flow_0hr0vq3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fnd9nw\" id=\"Flow_1fnd9nw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15sv3oj\" id=\"Flow_15sv3oj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1695651569666,
+      "create_date": 1696515366175,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 46,
@@ -734,7 +764,7 @@
             "deprecated": false,
             "export_key": "playbook_f34be12b_5dfc_4765_ab2f_5717c94fe9c8/jira_issue_type",
             "hide_notification": false,
-            "id": 5470,
+            "id": 5834,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -750,7 +780,7 @@
             "templates": [],
             "text": "Jira Issue Type",
             "tooltip": "The type of issue to create in Jira Story/Bug etc.",
-            "type_id": 1222,
+            "type_id": 1266,
             "uuid": "1c7590cc-4a8b-4e9d-8975-9a643472fa4c",
             "values": [
               {
@@ -760,7 +790,7 @@
                 "label": "Story",
                 "properties": null,
                 "uuid": "8f7a2015-a44f-4fbe-8bbb-416f0845879d",
-                "value": 1602
+                "value": 1761
               },
               {
                 "default": false,
@@ -769,7 +799,7 @@
                 "label": "Bug",
                 "properties": null,
                 "uuid": "62a6ae33-8692-4db0-aa17-14e6e46eafea",
-                "value": 1603
+                "value": 1762
               },
               {
                 "default": false,
@@ -778,7 +808,7 @@
                 "label": "Task",
                 "properties": null,
                 "uuid": "7cb18e02-c33b-463d-b008-d565198c3357",
-                "value": 1604
+                "value": 1763
               }
             ]
           },
@@ -792,7 +822,7 @@
             "deprecated": false,
             "export_key": "playbook_f34be12b_5dfc_4765_ab2f_5717c94fe9c8/jira_label",
             "hide_notification": false,
-            "id": 5471,
+            "id": 5835,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -807,7 +837,7 @@
             "templates": [],
             "text": "Jira Label",
             "tooltip": "Label of the Jira server to use",
-            "type_id": 1222,
+            "type_id": 1266,
             "uuid": "29f3780d-7f69-4a42-b1b4-2eb1e3eb88a5",
             "values": []
           },
@@ -821,7 +851,7 @@
             "deprecated": false,
             "export_key": "playbook_f34be12b_5dfc_4765_ab2f_5717c94fe9c8/jira_project_id",
             "hide_notification": false,
-            "id": 5472,
+            "id": 5836,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -837,9 +867,18 @@
             "templates": [],
             "text": "Jira Project ID",
             "tooltip": "The id of the project you want to send this to in your Jira system. Ex: \"JRA\"",
-            "type_id": 1222,
+            "type_id": 1266,
             "uuid": "e7c9974e-a7c2-43f0-816b-5662c8f772c0",
             "values": [
+              {
+                "default": true,
+                "enabled": true,
+                "hidden": false,
+                "label": "TES",
+                "properties": null,
+                "uuid": "e1976c96-dee4-4fea-88b5-a16fd45d2d97",
+                "value": 1771
+              },
               {
                 "default": false,
                 "enabled": true,
@@ -847,7 +886,7 @@
                 "label": "JRA",
                 "properties": null,
                 "uuid": "984aead8-bf1a-41c4-9a35-d90eb0b99e86",
-                "value": 1605
+                "value": 1764
               },
               {
                 "default": false,
@@ -856,7 +895,7 @@
                 "label": "POL",
                 "properties": null,
                 "uuid": "82641476-cd92-426a-9215-6ba36052dc77",
-                "value": 1606
+                "value": 1765
               }
             ]
           }
@@ -881,7 +920,7 @@
         "uuid": "40f49ab0-7753-4668-8f7e-2210336f69dd"
       },
       "has_logical_errors": false,
-      "id": 183,
+      "id": 218,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -890,18 +929,18 @@
         "name": "j@example.com",
         "type": "user"
       },
-      "last_modified_time": 1695986285625,
+      "last_modified_time": 1696515392373,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1695651569848,
+          "created_date": 1696515366336,
           "description": "",
           "enabled": false,
           "export_key": "Post-process",
-          "id": 209,
+          "id": 244,
           "language": "python3",
           "last_modified_by": "j@example.com",
-          "last_modified_time": 1695986062536,
+          "last_modified_time": 1696515366354,
           "name": "Post-process",
           "object_type": "incident",
           "playbook_handle": "example_create_jira_issue",
@@ -956,7 +995,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_f34be12b-5dfc-4765-ab2f-5717c94fe9c8",
-        "id": 187,
+        "id": 223,
         "name": "playbook_f34be12b_5dfc_4765_ab2f_5717c94fe9c8",
         "type": "playbook",
         "uuid": "8b0cce07-a213-4fd0-9611-f08a70d03055"
@@ -964,15 +1003,15 @@
       "tags": [],
       "type": "default",
       "uuid": "f34be12b-5dfc-4765-ab2f-5717c94fe9c8",
-      "version": 10
+      "version": 4
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_24103625_cd78_4375_a575_a039921c805a\" isExecutable=\"true\" name=\"playbook_24103625_cd78_4375_a575_a039921c805a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0byvkqv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Jira Open Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"84476441-4b16-40fe-96c4-d07f94bda06a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Example: Jira Open Issue [Task] pre-processing script\\nfrom json import dumps\\n\\nif getattr(playbook.inputs, \\\"jira_label\\\"):\\n  inputs.jira_label = playbook.inputs.jira_label\\nelif incident.properties.jira_server:\\n  inputs.jira_label = incident.properties.jira_server\\n\\n# ID of this incident\\ninputs.incident_id = incident.id\\n\\n# ID of this task\\ninputs.task_id = task.id\\n\\n# A map for JIRA priorities\\npriority_map = { \\\"Lowest\\\": {\\\"name\\\": \\\"Lowest\\\"}, \\\"Low\\\": {\\\"name\\\": \\\"Low\\\"}, \\\"Medium\\\": {\\\"name\\\": \\\"Medium\\\"}, \\\"High\\\": {\\\"name\\\": \\\"High\\\"}, \\\"Highest\\\": {\\\"name\\\": \\\"Highest\\\"} }\\njira_priority = priority_map.get(incident.severity_code, {\\\"name\\\": \\\"Low\\\"})\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dumps({\\n  \\\"project\\\": playbook.inputs.jira_project_id,\\n  \\\"issuetype\\\": playbook.inputs.jira_issue_type,\\n  \\\"priority\\\": jira_priority,\\n  \\\"summary\\\": \\\"IBM SOAR: {}\\\".format(str(task.name)),\\n  \\\"description\\\": task.instructions.content if task.get(\\\"instructions\\\") else \\\"Created in IBM SOAR\\\"\\n})\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0byvkqv\u003c/incoming\u003e\u003coutgoing\u003eFlow_0r059pw\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0byvkqv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0e2aef11-a4ab-4005-bee8-1dcfe89a200a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0r059pw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1cuf6qd\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0r059pw\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1cuf6qd\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1cuf6qd\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_24103625_cd78_4375_a575_a039921c805a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cuf6qd\" id=\"Flow_1cuf6qd_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0r059pw\" id=\"Flow_0r059pw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0byvkqv\" id=\"Flow_0byvkqv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.48329999999999\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1695651570267,
+      "create_date": 1696515366651,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 46,
@@ -1002,7 +1041,7 @@
             "deprecated": false,
             "export_key": "playbook_24103625_cd78_4375_a575_a039921c805a/jira_issue_type",
             "hide_notification": false,
-            "id": 5473,
+            "id": 5837,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1018,7 +1057,7 @@
             "templates": [],
             "text": "Jira Issue Type",
             "tooltip": "The type of issue to create in Jira Story/Bug etc.",
-            "type_id": 1223,
+            "type_id": 1267,
             "uuid": "20628cc6-8d78-457e-b368-6f95dac6039b",
             "values": [
               {
@@ -1028,7 +1067,7 @@
                 "label": "Story",
                 "properties": null,
                 "uuid": "e9489c87-652d-4a2c-9a34-66ae25abd6a5",
-                "value": 1607
+                "value": 1766
               },
               {
                 "default": false,
@@ -1037,7 +1076,7 @@
                 "label": "Bug",
                 "properties": null,
                 "uuid": "885acd11-e1ab-44c3-bd27-0bddc4662ddd",
-                "value": 1608
+                "value": 1767
               },
               {
                 "default": false,
@@ -1046,7 +1085,7 @@
                 "label": "Task",
                 "properties": null,
                 "uuid": "a281a412-651a-4f21-a91c-86fb5922c201",
-                "value": 1609
+                "value": 1768
               }
             ]
           },
@@ -1060,7 +1099,7 @@
             "deprecated": false,
             "export_key": "playbook_24103625_cd78_4375_a575_a039921c805a/jira_label",
             "hide_notification": false,
-            "id": 5474,
+            "id": 5838,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1075,7 +1114,7 @@
             "templates": [],
             "text": "Jira Label",
             "tooltip": "Label of the Jira server to use",
-            "type_id": 1223,
+            "type_id": 1267,
             "uuid": "07021820-d141-4fac-9d67-bb362a08bccd",
             "values": []
           },
@@ -1089,7 +1128,7 @@
             "deprecated": false,
             "export_key": "playbook_24103625_cd78_4375_a575_a039921c805a/jira_project_id",
             "hide_notification": false,
-            "id": 5475,
+            "id": 5839,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1105,17 +1144,26 @@
             "templates": [],
             "text": "Jira Project ID",
             "tooltip": "The id of the project you want to send this to in your Jira system. Ex: \"JRA\"",
-            "type_id": 1223,
+            "type_id": 1267,
             "uuid": "9de5b47a-d2b6-4f8b-b0a7-5043f698d270",
             "values": [
               {
                 "default": true,
                 "enabled": true,
                 "hidden": false,
+                "label": "TES",
+                "properties": null,
+                "uuid": "97d2ddf6-6efa-4b09-848f-87e734825d92",
+                "value": 1772
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
                 "label": "JRA",
                 "properties": null,
                 "uuid": "043dc14f-c6d9-4231-b51a-7be09129d856",
-                "value": 1610
+                "value": 1769
               },
               {
                 "default": false,
@@ -1124,7 +1172,7 @@
                 "label": "POL",
                 "properties": null,
                 "uuid": "e57faafe-c92b-41ea-8bdb-daf9acefc1f1",
-                "value": 1611
+                "value": 1770
               }
             ]
           }
@@ -1149,7 +1197,7 @@
         "uuid": "9e3face9-57d8-49e1-b766-116cb3a3d57f"
       },
       "has_logical_errors": false,
-      "id": 184,
+      "id": 219,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
@@ -1158,18 +1206,18 @@
         "name": "j@example.com",
         "type": "user"
       },
-      "last_modified_time": 1695986312668,
+      "last_modified_time": 1696515411453,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1695651570443,
+          "created_date": 1696515366840,
           "description": "",
           "enabled": false,
           "export_key": "Post-process",
-          "id": 210,
+          "id": 245,
           "language": "python3",
           "last_modified_by": "j@example.com",
-          "last_modified_time": 1695912532996,
+          "last_modified_time": 1696515366858,
           "name": "Post-process",
           "object_type": "task",
           "playbook_handle": "example_create_jira_issue_task",
@@ -1224,7 +1272,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_24103625-cd78-4375-a575-a039921c805a",
-        "id": 188,
+        "id": 224,
         "name": "playbook_24103625_cd78_4375_a575_a039921c805a",
         "type": "playbook",
         "uuid": "01427c93-ebf5-43fd-8f20-ea371a2ffc15"
@@ -1232,7 +1280,7 @@
       "tags": [],
       "type": "default",
       "uuid": "24103625-cd78-4375-a575-a039921c805a",
-      "version": 7
+      "version": 5
     },
     {
       "activation_details": {
@@ -1244,6 +1292,13 @@
               "method": "has_a_value",
               "type": null,
               "value": null
+            },
+            {
+              "evaluation_id": null,
+              "field_name": "incident.properties.jira_issue_closed_on_jira",
+              "method": "not_equals",
+              "type": null,
+              "value": true
             },
             {
               "evaluation_id": null,
@@ -1265,7 +1320,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 1,
+        "content_version": 10,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a29bef25_a2fc_4628_9473_73ec6b85eda0\" isExecutable=\"true\" name=\"playbook_a29bef25_a2fc_4628_9473_73ec6b85eda0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0co6vna\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Jira Transition Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"94056ccf-b3ad-4a17-9760-93b3c24b71d8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"from json import dumps\\n\\ninputs.jira_label = incident.properties.jira_server\\ninputs.jira_issue_id = incident.properties.jira_issue_id\\ninputs.jira_transition_id = \\\"Done\\\"\\ninputs.jira_comment = \\\"Closed in IBM SOAR\\\\n\\\\nResolution: {}\\\\n{}\\\".format(incident.resolution_id, incident.resolution_summary.content)\\n\\n# Define JIRA fields here\\ninputs.jira_fields = dumps({})\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0co6vna\u003c/incoming\u003e\u003coutgoing\u003eFlow_0urpd3j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0co6vna\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a12405e7-af26-4e5b-8934-95eb7524e308\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0urpd3j\u003c/incoming\u003e\u003coutgoing\u003eFlow_1klssy9\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0urpd3j\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1klssy9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1klssy9\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a29bef25_a2fc_4628_9473_73ec6b85eda0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1klssy9\" id=\"Flow_1klssy9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0urpd3j\" id=\"Flow_0urpd3j_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0co6vna\" id=\"Flow_0co6vna_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1695651570848,
@@ -1317,7 +1372,7 @@
         "name": "j@example.com",
         "type": "user"
       },
-      "last_modified_time": 1695651571267,
+      "last_modified_time": 1697463486451,
       "local_scripts": [
         {
           "actions": [],
@@ -1351,12 +1406,12 @@
       "tags": [],
       "type": "default",
       "uuid": "a29bef25-a2fc-4628-9473-73ec6b85eda0",
-      "version": 3
+      "version": 12
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 15,
+        "content_version": 29,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f936bb8d_c939_464e_90c7_f96947f95be7\" isExecutable=\"true\" name=\"playbook_f936bb8d_c939_464e_90c7_f96947f95be7\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_00s0xga\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Jira Transition Issue\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"94056ccf-b3ad-4a17-9760-93b3c24b71d8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"from json import dumps\\n\\ninputs.jira_label = row.server\\ninputs.jira_issue_id = row.jira_issue_id_col\\ninputs.jira_transition_id = \\\"Done\\\"\\ninputs.jira_comment = \\\"Closed in IBM SOAR\\\\n\\\\nResolution: Done\\\\n\\\"\\n\\n# Define JIRA fields here\\n#inputs.jira_fields = dumps({\\\"customfield_10041\\\":{\\\"value\\\":\\\"Resolved\\\"}})\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"close_task\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_00s0xga\u003c/incoming\u003e\u003coutgoing\u003eFlow_0qtd7av\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2d3bc136-f629-4d4f-bfdf-41c2da568f32\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qtd7av\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fie3t1\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0qtd7av\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fie3t1\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0fie3t1\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_00s0xga\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f936bb8d_c939_464e_90c7_f96947f95be7\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_00s0xga\" id=\"Flow_00s0xga_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fie3t1\" id=\"Flow_0fie3t1_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qtd7av\" id=\"Flow_0qtd7av_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1695651571280,
@@ -1408,7 +1463,7 @@
         "name": "j@example.com",
         "type": "user"
       },
-      "last_modified_time": 1695914789417,
+      "last_modified_time": 1697468768305,
       "local_scripts": [
         {
           "actions": [],
@@ -1457,7 +1512,7 @@
       "tags": [],
       "type": "default",
       "uuid": "f936bb8d-c939-464e-90c7-f96947f95be7",
-      "version": 18
+      "version": 32
     },
     {
       "activation_details": {
@@ -1519,7 +1574,7 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 1,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6757c283_ca2c_435c_b3b8_0debc7d1c38f\" isExecutable=\"true\" name=\"playbook_6757c283_ca2c_435c_b3b8_0debc7d1c38f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_12t2klh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Jira Create Comment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d0e6089a-69f7-469d-8e51-a840ec2c493a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if note.type == \\\"task\\\":\\n  inputs.task_id = task.id\\n  inputs.jira_issue_id = \\\"\\\" # leave empty for tasks\\nelse:\\n  inputs.jira_issue_id = incident.properties.jira_issue_id\\n\\ninputs.jira_label = incident.properties.jira_server\\ninputs.jira_comment = note.text.content\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"comment\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12t2klh\u003c/incoming\u003e\u003coutgoing\u003eFlow_1y5q6u9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_12t2klh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1y5q6u9\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_3\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1y5q6u9\u003c/incoming\u003e\u003c/endEvent\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6757c283_ca2c_435c_b3b8_0debc7d1c38f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1y5q6u9\" id=\"Flow_1y5q6u9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"354\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12t2klh\" id=\"Flow_12t2klh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"354\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1695651571742,
@@ -1571,7 +1626,7 @@
         "name": "j@example.com",
         "type": "user"
       },
-      "last_modified_time": 1695651572168,
+      "last_modified_time": 1696515368231,
       "local_scripts": [
         {
           "actions": [],
@@ -1605,7 +1660,7 @@
       "tags": [],
       "type": "default",
       "uuid": "6757c283-ca2c-435c-b3b8-0debc7d1c38f",
-      "version": 4
+      "version": 7
     }
   ],
   "regulators": null,

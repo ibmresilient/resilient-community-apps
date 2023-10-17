@@ -33,6 +33,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.0.5 | 10/2023 | Bug fix for poller not closing SOAR incident |
 | 3.0.4 | 10/2023 | Bug fix for transitioning a Jira issue from SOAR |
 | 3.0.3 | 09/2023 | Bug fix for jira_transition_issue function |
 | 3.0.2 | 08/2023 | Bug fix for playbook, Example: Jira Create Comment |
@@ -318,6 +319,12 @@ Below are the default templates used which can be copied, modified, and used wit
       "old_value": {"text": "A"},
       "new_value": {"text": "C"},
       "field": {"name": "plan_status"}
+    },
+    {# The following is required for the automation playbook, Jira Close Issue, to not run when the poller closes a SOAR incident. #}
+    {
+      "old_value": {"boolean": {% if soar["properties"]["jira_issue_closed_on_jira"] is none %} null {% elif soar["properties"]["jira_issue_closed_on_jira"] is False %} false {% else %} true {% endif %}},
+      "new_value": {"boolean": true},
+      "field": {"name": "jira_issue_closed_on_jira"}
     }
   ]
 }
@@ -991,6 +998,7 @@ jira_task_references
 | Jira Server | `jira_server` | `text` | `properties` | - | Label of the server you wish to use |
 | Jira Ticket URL | `jira_url` | `textarea` | `properties` | - | Contains URL back to the Jira issue created via the UI |
 | Jira Issue Status | `jira_issue_status` | `text` | `properties` | - | The status of the linked Jira issue |
+| Jira Issue Closed on Jira | `jira_issue_closed_on_jira` | `boolean` | `properties` | - | If the linked Jira issue is closed on Jira. This is used by Jira close Issue playbook to have it not run if the poller closes the SOAR incident. |
 
 
 ---

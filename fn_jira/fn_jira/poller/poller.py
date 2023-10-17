@@ -319,7 +319,7 @@ class PollerComponent(AppFunctionComponent):
                 elif jira_issue_key in soar_cases_jira_key:
                     # Add the Jira issue that was found on SOAR to jira_issues_with_soar_case
                     jira_issues_with_soar_case.append(jira_issue)
-                elif not jira_issue.get("fields").get("resolutiondate"):
+                elif jira_issue.get("fields").get("status", {}).get("statusCategory", {}).get("name") != "Done":
                     # If the Jira issue is not found on SOAR than add to jira_issues_to_add_to_soar list
                     jira_issues_to_add_to_soar.append(jira_issue)
 
@@ -340,7 +340,7 @@ class PollerComponent(AppFunctionComponent):
                         # Check if SOAR incident needs to be updated
                         if jira_issue.get("key") == soar_case.get("properties").get("jira_issue_id"):
                             # Check if the Jira issue has been closed
-                            if jira_issue.get("fields").get("resolutiondate"):
+                            if jira_issue.get("fields").get("status", {}).get("statusCategory", {}).get("name") == "Done":
                                 # Add matching SOAR case and Jira issue to soar_cases_to_close list
                                 soar_cases_to_close.append([jira_issue, soar_case])
                                 break
@@ -550,8 +550,8 @@ class PollerComponent(AppFunctionComponent):
             # Update datatable
             self.update_task_datatable(task, jira)
 
-            # If the Jira issue has a resolutiondate then the issue is closed
-            if jira.get("fields", {}).get("resolutiondate") and not task.get("closed_date"):
+            # If the Jira issue's status has a status category equal to Done, then the Jira issue is closed
+            if jira.get("fields", {}).get("status", {}).get("statusCategory", {}).get("name") == "Done" and not task.get("closed_date"):
                 try:
                     self.res_client.get_put(f"/tasks/{task.get('id')}", lambda soar_task: close_task_status(soar_task))
                 except Exception as err:
