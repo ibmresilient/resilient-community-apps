@@ -36,7 +36,7 @@ Exchange email and meeting capabilities. The package provided has the following 
     install_requires=[
         "resilient_circuits>=45.0.0",
         "exchangelib ~= 4.6.2;python_version=='3.6'",
-        "backports-datetime-fromisoformat == 2.0.0;python_version=='3.6'"
+        "backports-datetime-fromisoformat == 2.0.0;python_version=='3.6'",
         "exchangelib ~= 4.9.0;python_version>='3.9'"
     ],
     python_requires='>=3.6',
