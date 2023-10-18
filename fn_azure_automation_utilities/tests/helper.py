@@ -666,19 +666,6 @@ def list_credentials_by_automation_account_results():
         ]
     }
 
-def update_credential_results():
-    return {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/test32",
-        "name": "test32",
-        "type": "Microsoft.Automation/AutomationAccounts/Credentials",
-        "properties": {
-            "userName": "tester",
-            "description": "something",
-            "creationTime": "2023-08-21T17:59:44.38+00:00",
-            "lastModifiedTime": "2023-08-21T17:59:44.38+00:00"
-        }
-    }
-
 def create_schedule_results():
     return {
         "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/tester1324",
@@ -792,29 +779,6 @@ def list_schedule_by_automation_account_results():
             }
         }
         ]
-    }
-
-def update_schedule_results():
-    return {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/s",
-        "name": "s",
-        "type": "Microsoft.Automation/AutomationAccounts/Schedules",
-        "properties": {
-            "description": "",
-            "startTime": "2023-08-29T12:05:00-04:00",
-            "startTimeOffsetMinutes": -240.0,
-            "expiryTime": "2023-08-29T12:05:00-04:00",
-            "expiryTimeOffsetMinutes": -240.0,
-            "isEnabled": False,
-            "nextRun": "2023-08-29T12:05:00-04:00",
-            "nextRunOffsetMinutes": -240.0,
-            "interval": None,
-            "frequency": "OneTime",
-            "creationTime": "2023-08-23T16:05:14.3633333+00:00",
-            "lastModifiedTime": "2023-08-23T17:09:35.4666667+00:00",
-            "timeZone": "America/New_York",
-            "advancedSchedule": None
-        }
     }
 
 def get_node_report_results():
@@ -1048,7 +1012,7 @@ def mock_init():
             """ Mock regenerate account registration key results """
             return regenerate_account_registration_key_results()
 
-        def create_credential(self, credential_name: str, payload: dict):
+        def create_credential(self, credential_name: str, payload: dict, update: bool = False):
             """ Mock create credential results """
             return create_credential_results()
 
@@ -1071,11 +1035,7 @@ def mock_init():
             """ Mock list credentials by automation account results """
             return list_credentials_by_automation_account_results()
 
-        def update_credential(self, credential_name: str, payload: dict):
-            """ Mock update credential results """
-            return update_credential_results()
-
-        def create_schedule(self, schedule_name: str, payload: dict):
+        def create_schedule(self, schedule_name: str, payload: dict, update: bool = False):
             """ Mock create schedule results """
             return create_schedule_results()
 
@@ -1097,10 +1057,6 @@ def mock_init():
         def list_schedule_by_automation_account(self):
             """ Mock list schedule by automation account results """
             return list_schedule_by_automation_account_results()
-
-        def update_schedule(self, schedule_name: str, payload: dict):
-            """ Mock update schedule results """
-            return update_schedule_results()
 
         def get_node_report(self, node_id: str, report_id: str):
             """ Mock get node report results """

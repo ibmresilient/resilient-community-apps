@@ -26,6 +26,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.account_name
             -   fn_inputs.input_parameters
             -   fn_inputs.schedule_name
+            -   fn_inputs.schedule_update
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")

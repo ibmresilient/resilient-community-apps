@@ -35,10 +35,10 @@ Update the schedule identified by schedule name.
 
 
 ---
-## Function - Azure Update Schedule
+## Function - Azure Create Schedule
 
 ### API Name
-`azure_update_schedule`
+`azure_create_schedule`
 
 ### Output Name
 `update_schedule`
@@ -51,6 +51,8 @@ Update the schedule identified by schedule name.
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
 inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
+# schedule_update is True, so the given schedule will be updated
+inputs.schedule_update = True
 
 payload = {
   "name": playbook.inputs.azure_automation_schedule_name,

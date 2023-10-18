@@ -36,10 +36,10 @@ Update a credential.
 
 
 ---
-## Function - Azure Update Credential
+## Function - Azure Create Credential
 
 ### API Name
-`azure_update_credential`
+`azure_create_credential`
 
 ### Output Name
 `update_cred`
@@ -52,6 +52,8 @@ Update a credential.
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
 inputs.credential_name = playbook.inputs.azure_automation_credential_name
+# credential_update is True, so the given credential will be updated
+inputs.credential_update = True
 
 payload = {
   "name": playbook.inputs.azure_automation_credential_name,

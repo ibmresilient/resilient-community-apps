@@ -38,7 +38,6 @@ def codegen_reload_data():
             u"azure_get_agent_registration_information",
             u"azure_get_credential",
             u"azure_get_job",
-            u"azure_get_job_output",
             u"azure_get_module_activity",
             u"azure_get_node_report",
             u"azure_get_runbook",
@@ -52,9 +51,7 @@ def codegen_reload_data():
             u"azure_list_schedule_by_automation_account",
             u"azure_list_statistics_by_automation_account",
             u"azure_list_usage_by_automation_account",
-            u"azure_regenerate_agent_registration_key",
-            u"azure_update_credential",
-            u"azure_update_schedule"
+            u"azure_regenerate_agent_registration_key"
         ],
         "workflows": [],
         "actions": [],
@@ -122,7 +119,6 @@ def customization_data(client=None):
         - azure_get_agent_registration_information
         - azure_get_credential
         - azure_get_job
-        - azure_get_job_output
         - azure_get_module_activity
         - azure_get_node_report
         - azure_get_runbook
@@ -137,8 +133,6 @@ def customization_data(client=None):
         - azure_list_statistics_by_automation_account
         - azure_list_usage_by_automation_account
         - azure_regenerate_agent_registration_key
-        - azure_update_credential
-        - azure_update_schedule
     - Playbooks:
         - azure_automation_utilities_create_account
         - azure_automation_utilities_create_credential

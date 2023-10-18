@@ -330,39 +330,6 @@ class AzureClient(object):
         header["Content-Type"] = 'application/json'
         return self.rc.execute("GET", url, headers=header).json()
 
-    def stop_job(self, job_name: str):
-        """
-        Stop the job identified by jobName
-        :param job_name: Name of the Azure automation job
-        :type job_name: str
-        :return: Response from POST request to Azure
-        :return trype: response object
-        """
-        url = f"{self.base_url}/jobs/{job_name}/stop?{API_VERSION_2019}"
-        return self.rc.execute("POST", url, headers=self.header)
-
-    def resume_job(self, job_name: str):
-        """
-        Resume the job identified by jobName
-        :param job_name: Name of the Azure automation job
-        :type job_name: str
-        :return: Response from POST request to Azure
-        :return trype: response object
-        """
-        url = f"{self.base_url}/jobs/{job_name}/resume?{API_VERSION_2019}"
-        return self.rc.execute("POST", url, headers=self.header)
-
-    def suspend_job(self, job_name: str):
-        """
-        Suspend the job identified by jobName
-        :param job_name: Name of the Azure automation job
-        :type job_name: str
-        :return: Response from POST request to Azure
-        :return trype: response object
-        """
-        url = f"{self.base_url}/jobs/{job_name}/suspend?{API_VERSION_2019}"
-        return self.rc.execute("POST", url, headers=self.header)
-
     def get_agent_registration_information(self):
         """
         Retrieve the automation agent registration information.
@@ -383,13 +350,15 @@ class AzureClient(object):
         url = f"{self.base_url}/agentRegistrationInformation/regenerateKey?{API_VERSION_2019}"
         return self.rc.execute("POST", url, json=payload, headers=self.header).json()
 
-    def create_credential(self, credential_name: str, payload: dict):
+    def create_credential(self, credential_name: str, payload: dict, update: bool = False):
         """
-        Create a credential.
+        Create or update a credential.
         :param credential_name: Name of the Azure automation credential
         :type credential_name: str
         :param payload: The credentials properties
         :type payload: dict
+        :param update: Update the credential or not
+        :type update: boolean
         :return: Response from PUT request to Azure
         :return type: dict
 
@@ -404,7 +373,10 @@ class AzureClient(object):
         }
         """
         url = f"{self.base_url}/credentials/{credential_name}?{API_VERSION_2019}"
-        return self.rc.execute("PUT", url, json=payload, headers=self.header).json()
+        if update:
+            return self.rc.execute("PATCH", url, json=payload, headers=self.header).json()
+        else:
+            return self.rc.execute("PUT", url, json=payload, headers=self.header).json()
 
     def delete_credential(self, credential_name: str):
         """
@@ -437,36 +409,15 @@ class AzureClient(object):
         url = f"{self.base_url}/credentials?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
-    def update_credential(self, credential_name: str, payload: dict):
+    def create_schedule(self, schedule_name: str, payload: dict, update: bool = False):
         """
-        Update a credential.
-        :param credential_name: Name of the Azure automation credential
-        :type credential_name: str
-        :param payload: The credentials properties
-        :type payload: dict
-        :return: Response from PATCH request to Azure
-        :return type: dict
-
-        Example payload:
-        {
-            "name": "myCredential",
-            "properties": {
-                "userName": "username1",
-                "password": "<password>",
-                "description": "my description goes here"
-            }
-        }
-        """
-        url = f"{self.base_url}/credentials/{credential_name}?{API_VERSION_2019}"
-        return self.rc.execute("PATCH", url, json=payload, headers=self.header).json()
-
-    def create_schedule(self, schedule_name: str, payload: dict):
-        """
-        Create a schedule.
+        Create or update a schedule.
         :param schedule_name: Name of the Azure automation schedule
         :type schedule_name: str
         :param payload: Properties of the schedule
         :type payload: dict
+        :param update: Update the schedule or not
+        :type update: boolean
         :return: Response from PUT request to Azure
         :return type: dict
 
@@ -484,7 +435,10 @@ class AzureClient(object):
         }
         """
         url = f"{self.base_url}/schedules/{schedule_name}?{API_VERSION_2019}"
-        return self.rc.execute("PUT", url, json=payload, headers=self.header).json()
+        if update:
+            return self.rc.execute("PATCH", url, json=payload, headers=self.header).json()
+        else:
+            return self.rc.execute("PUT", url, json=payload, headers=self.header).json()
 
     def delete_schedule(self, schedule_name: str):
         """
@@ -516,32 +470,6 @@ class AzureClient(object):
         """
         url = f"{self.base_url}/schedules?{API_VERSION_2019}"
         return self.rc.execute("GET", url, headers=self.header).json()
-
-    def update_schedule(self, schedule_name: str, payload: dict):
-        """
-        Update the schedule identified by schedule name.
-        :param schedule_name: Name of the Azure automation schedule
-        :type schedule_name: str
-        :param payload: Properties of the schedule
-        :type payload: dict
-        :return: Response from PATCH request to Azure
-        :return type: dict
-
-        Example payload:
-        {
-            "name": "mySchedule",
-            "properties": {
-                "description": "my description of schedule goes here",
-                "startTime": "2017-03-27T17:28:57.2494819Z",
-                "expiryTime": "2017-04-01T17:28:57.2494819Z",
-                "interval": 1,
-                "frequency": "Hour",
-                "advancedSchedule": {}
-            }
-        }
-        """
-        url = f"{self.base_url}/schedules/{schedule_name}?{API_VERSION_2019}"
-        return self.rc.execute("PATCH", url, json=payload, headers=self.header).json()
 
     def get_node_report(self, node_id: str, report_id: str):
         """

@@ -33,10 +33,10 @@ Retrieve the job output identified by job name.
 
 
 ---
-## Function - Azure Get Job Output
+## Function - Azure Get Job
 
 ### API Name
-`azure_get_job_output`
+`azure_get_job`
 
 ### Output Name
 `job_output`
@@ -49,6 +49,8 @@ Retrieve the job output identified by job name.
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.job_name = playbook.inputs.azure_automation_job_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
+# job_output is True, so the output of the Job will be returned
+inputs.job_output = True
 ```
 
 ---
