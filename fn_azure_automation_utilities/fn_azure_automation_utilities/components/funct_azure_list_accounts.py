@@ -18,6 +18,8 @@ class FunctionComponent(AppFunctionComponent):
     def _app_function(self, fn_inputs):
         """
         Function: Lists the Automation Accounts within an Azure subscription
+        Inputs:
+            -   fn_inputs.resource_group_name
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")

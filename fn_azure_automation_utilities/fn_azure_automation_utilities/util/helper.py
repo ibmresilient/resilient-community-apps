@@ -200,11 +200,13 @@ class AzureClient(object):
             if job_status == "Failed":
                 raise AzureRunJobFailed(f"Run job: {job_name} failed.")
 
-    def create_account(self, payload: dict):
+    def create_account(self, payload: dict, update: bool = False):
         """
-        Create an Azure automation account.
+        Create or update an Azure automation account.
         :param payload: Payload to send to azure that contains automation account properties.
         :type payload: dict
+        :param update: True if the account is being updated
+        :type update: boolean
         :return: Response from the PUT request to create Azure automation account.
         :return type: dict
 
@@ -227,36 +229,10 @@ class AzureClient(object):
         }
         """
         url = f"{self.base_url}?{API_VERSION_2021}"
-        return self.rc.execute("PUT", url, headers=self.header, json=payload).json()
-
-    def update_account(self, payload: dict):
-        """
-        Update an Azure automation account.
-        :param payload: Payload to send to azure that contains automation account properties.
-        :type payload: dict
-        :return: Response from the PATCH request to update Azure automation account.
-        :return type: dict
-
-        Example payload:
-        {
-            "name": "testAutomationAccount",
-            "location": "eastus",
-            "tags": {
-                "client": "sentinel"
-            },
-            "properties": {
-                "publicNetworkAccess": True,
-                "disableLocalAuth": False,
-                "sku": {
-                    "name": "Basic",
-                    "family": None,
-                    "capacity": None
-                }
-            }
-        }
-        """
-        url = f"{self.base_url}?{API_VERSION_2021}"
-        return self.rc.execute("PATCH", url, headers=self.header, json=payload).json()
+        if update:
+            return self.rc.execute("PATCH", url, headers=self.header, json=payload).json()
+        else:
+            return self.rc.execute("PUT", url, headers=self.header, json=payload).json()
 
     def delete_acount(self):
         """
@@ -282,16 +258,10 @@ class AzureClient(object):
         :return: Response from GET request to list Azure automation accounts
         :return type: dict
         """
-        url = f"https://management.azure.com/subscriptions/{self.subscription_id}/providers/Microsoft.Automation/automationAccounts?{API_VERSION_2021}"
-        return self.rc.execute("GET", url, headers=self.header).json()
-
-    def list_accounts_by_resource_group(self):
-        """
-        Retrieve a list of accounts within a given resource group
-        :return: Response from GET request to list Azure automation accounts
-        :return type: dict
-        """
-        url = f"https://management.azure.com/subscriptions/{self.subscription_id}/resourceGroups/{self.resource_group_name}/providers/Microsoft.Automation/automationAccounts?{API_VERSION_2021}"
+        if self.resource_group_name: # If resource group name is given, then list accounts in that resource group
+            url = f"https://management.azure.com/subscriptions/{self.subscription_id}/resourceGroups/{self.resource_group_name}/providers/Microsoft.Automation/automationAccounts?{API_VERSION_2021}"
+        else:# If resource group is ot given, then list all accounts
+            url = f"https://management.azure.com/subscriptions/{self.subscription_id}/providers/Microsoft.Automation/automationAccounts?{API_VERSION_2021}"
         return self.rc.execute("GET", url, headers=self.header).json()
 
     def get_module_activity(self, moduleName: str, activityName: str):

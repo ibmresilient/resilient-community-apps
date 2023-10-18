@@ -24,6 +24,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
             -   fn_inputs.input_parameters
+            -   fn_inputs.account_update
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
@@ -33,16 +34,14 @@ class FunctionComponent(AppFunctionComponent):
         # fn_inputs.input_parameters is a string dictionary. Convert it into a dictionary from a string.
         input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
         # If no tags given then remove it from the dictionary. If left in the dictionary when empty it will cause the request to Azure to fail.
-        if input_parameters.get("tags") == None:
-            del input_parameters["tags"]
-        else:
+        if input_parameters.get("tags"):
             input_parameters["tags"] = literal_eval(input_parameters.get("tags"))
 
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
         # Make call to Azure and retrieve results
-        results = client.create_account(input_parameters)
+        results = client.create_account(input_parameters, getattr(fn_inputs, "account_update", False))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

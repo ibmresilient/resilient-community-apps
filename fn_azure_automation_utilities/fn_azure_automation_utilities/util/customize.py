@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v50.0.151
+# Generated with resilient-sdk v50.1.262
 
 """Generate the Resilient customizations required for fn_azure_automation_utilities"""
 
@@ -44,7 +44,6 @@ def codegen_reload_data():
             u"azure_get_runbook",
             u"azure_get_schedule",
             u"azure_list_accounts",
-            u"azure_list_accounts_by_resource_group",
             u"azure_list_credentials_by_automation_account",
             u"azure_list_jobs_by_automation_account",
             u"azure_list_module_activities",
@@ -54,7 +53,6 @@ def codegen_reload_data():
             u"azure_list_statistics_by_automation_account",
             u"azure_list_usage_by_automation_account",
             u"azure_regenerate_agent_registration_key",
-            u"azure_update_account",
             u"azure_update_credential",
             u"azure_update_schedule"
         ],
@@ -85,7 +83,6 @@ def codegen_reload_data():
             u"azure_automation_utilities_get_runbook",
             u"azure_automation_utilities_get_schedule",
             u"azure_automation_utilities_list_accounts",
-            u"azure_automation_utilities_list_accounts_by_resource_group",
             u"azure_automation_utilities_list_credentials_by_automation_account",
             u"azure_automation_utilities_list_jobs_by_automation_account",
             u"azure_automation_utilities_list_module_activities",
@@ -131,7 +128,6 @@ def customization_data(client=None):
         - azure_get_runbook
         - azure_get_schedule
         - azure_list_accounts
-        - azure_list_accounts_by_resource_group
         - azure_list_credentials_by_automation_account
         - azure_list_jobs_by_automation_account
         - azure_list_module_activities
@@ -141,7 +137,6 @@ def customization_data(client=None):
         - azure_list_statistics_by_automation_account
         - azure_list_usage_by_automation_account
         - azure_regenerate_agent_registration_key
-        - azure_update_account
         - azure_update_credential
         - azure_update_schedule
     - Playbooks:
@@ -163,7 +158,6 @@ def customization_data(client=None):
         - azure_automation_utilities_get_runbook
         - azure_automation_utilities_get_schedule
         - azure_automation_utilities_list_accounts
-        - azure_automation_utilities_list_accounts_by_resource_group
         - azure_automation_utilities_list_credentials_by_automation_account
         - azure_automation_utilities_list_jobs_by_automation_account
         - azure_automation_utilities_list_module_activities

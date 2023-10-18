@@ -62,53 +62,6 @@ def create_account_results():
         }
     }
 
-def update_account_results():
-    return {
-        "name": "autotester24",
-        "systemData": {
-        "createdAt": "2023-08-22T12:44:27.9+00:00",
-        "lastModifiedAt": "2023-08-22T13:16:59.3333333+00:00"
-        },
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/autotester24",
-        "type": "Microsoft.Automation/AutomationAccounts",
-        "location": "Canada East",
-        "tags": {},
-        "etag": None,
-        "properties": {
-        "publicNetworkAccess": False,
-        "disableLocalAuth": False,
-        "sku": {
-            "name": "Basic",
-            "family": None,
-            "capacity": None
-        },
-        "state": "Ok",
-        "RegistrationUrl": "https://55555555-3333-4444-bb0f-030397ea7fc1.agentsvc.yq.azure-automation.net/accounts/55555555-3333-4444-bb0f-030397ea7fc1",
-        "encryption": {
-            "keySource": "Microsoft.Automation",
-            "identity": {
-            "userAssignedIdentity": None
-            }
-        },
-        "automationHybridServiceUrl": "https://55555555-3333-4444-bb0f-030397ea7fc1.jrds.yq.azure-automation.net/automationAccounts/55555555-3333-4444-bb0f-030397ea7fc1",
-        "RuntimeConfiguration": {
-            "powershell": {
-            "builtinModules": {
-                "Az": "8.0.0"
-            }
-            },
-            "powershell7": {
-            "builtinModules": {
-                "Az": "8.0.0"
-            }
-            }
-        },
-        "creationTime": "2023-08-22T12:44:27.9+00:00",
-        "lastModifiedBy": None,
-        "lastModifiedTime": "2023-08-22T13:16:59.3333333+00:00"
-        }
-    }
-
 def get_acc_results():
     return {
         "name": "testing352",
@@ -336,66 +289,6 @@ def get_module_activity_results():
             "creationTime": "2022-07-06T10:01:53.9133333+00:00",
             "lastModifiedTime": "2022-07-06T10:01:53.9133333+00:00"
         }
-    }
-
-def list_accounts_by_resource_group_results():
-    return {
-        "value": [
-            {
-                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1",
-                "location": "eastus",
-                "name": "automation1",
-                "type": "Microsoft.Automation/AutomationAccounts",
-                "tags": {
-                    "client": "sentinel"
-                },
-                "properties": {
-                    "creationTime": "2023-04-28T14:04:03.0766667+00:00",
-                    "lastModifiedTime": "2023-07-21T14:25:01.7+00:00",
-                    "state": "Ok",
-                    "publicNetworkAccess": True,
-                    "disableLocalAuth": False
-                },
-                "identity": {
-                    "type": "SystemAssigned",
-                    "principalId": "5c1a54ee-a043-4852-9b87-ed53005d9c62",
-                    "tenantId": "50ad7d3e-b889-434d-802d-13b87c68047b"
-                }
-            },
-            {
-                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/testing352",
-                "location": "eastus",
-                "name": "testing352",
-                "type": "Microsoft.Automation/AutomationAccounts",
-                "tags": {},
-                "properties": {
-                    "creationTime": "2023-07-25T12:05:22.16+00:00",
-                    "lastModifiedTime": "2023-07-25T12:05:22.16+00:00",
-                    "state": "Ok",
-                    "publicNetworkAccess": True,
-                    "disableLocalAuth": False
-                },
-                "identity": {
-                    "type": "SystemAssigned",
-                    "principalId": "ee616124-e026-4ca0-8c64-d34bae779faf",
-                    "tenantId": "50ad7d3e-b889-434d-802d-13b87c68047b"
-                }
-            },
-            {
-                "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/tester183",
-                "location": "Canada Central",
-                "name": "tester183",
-                "type": "Microsoft.Automation/AutomationAccounts",
-                "tags": {},
-                "properties": {
-                    "creationTime": "2023-07-25T12:12:11.663+00:00",
-                    "lastModifiedTime": "2023-07-25T12:12:11.663+00:00",
-                    "state": "Ok",
-                    "publicNetworkAccess": True,
-                    "disableLocalAuth": False
-                }
-            }
-        ]
     }
 
 def list_accounts_results():
@@ -1081,10 +974,6 @@ def mock_init():
             """ Mock create account results """
             return create_account_results()
 
-        def update_account(self, payload):
-            """ Mock update account results """
-            return update_account_results()
-
         def delete_acount(self):
             """ Mock delete account results """
             class MockDeleteAccount(object):
@@ -1103,10 +992,6 @@ def mock_init():
         def get_module_activity(self, moduleName, activityName):
             """ Mock get module activity results """
             return get_module_activity_results()
-
-        def list_accounts_by_resource_group(self):
-            """ Mock list accounts by resource group results """
-            return list_accounts_by_resource_group_results()
 
         def list_accounts(self):
             """ Mock list accounts results """
