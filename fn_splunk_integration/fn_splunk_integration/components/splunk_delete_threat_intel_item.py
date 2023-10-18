@@ -27,7 +27,7 @@ class FunctionComponent(AppFunctionComponent):
         # Validate required parameters
         validate_fields(["splunk_threat_intel_type", "splunk_threat_intel_key"], fn_inputs)
 
-        splunk = function_basics(fn_inputs, self.servers_list)
+        splunk = function_basics(fn_inputs, self.servers_list, self.opts)
 
         splunk_result = splunk.delete_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
                                                         item_key=fn_inputs.splunk_threat_intel_key)

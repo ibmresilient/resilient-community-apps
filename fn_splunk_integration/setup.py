@@ -14,8 +14,7 @@ setup(
     url="https://github.com/ibmresilient/resilient-community-apps",
     install_requires=[
         'resilient_circuits>=45.0.0',
-        'resilient_lib',
-        'splunk-sdk'
+        'resilient_lib'
     ],
     python_requires='>=3.6',
     packages=find_packages(),

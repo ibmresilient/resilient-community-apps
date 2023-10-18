@@ -120,7 +120,6 @@ Python 3.6 and above are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=45.0.0
 * resilient_lib
-* splunk-sdk
 
 ---
 

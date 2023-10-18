@@ -51,7 +51,7 @@ class FunctionComponent(AppFunctionComponent):
 
         self.LOG.info(f"Splunk query to be executed: {query_string}")
 
-        splunk = function_basics(fn_inputs, self.servers_list)
+        splunk = function_basics(fn_inputs, self.servers_list, self.opts)
 
         splunk_result = splunk.search(query_string,
                                       getattr(fn_inputs, "splunk_max_return", 50),

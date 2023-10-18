@@ -7,8 +7,8 @@
 
 import logging
 from fn_splunk_integration.util.function_utils import get_servers_list
-from fn_splunk_integration.util.splunk_utils import SplunkClient
-from resilient_lib import str_to_bool
+from fn_splunk_integration.util.splunk_utils import SplunkUtils
+from resilient_lib import str_to_bool, RequestsCommon
 
 LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.INFO)
@@ -24,20 +24,26 @@ def selftest_function(opts):
 
     try:
         for server_name in servers_list:
-            server = opts.get(server_name, {})
+            options = opts.get(server_name, {})
 
-            splunk_verify_cert = str_to_bool(server.get("verify_cert", ""))
+            rc = RequestsCommon(opts, options)
 
-            LOG.info(f"Trying to connect to {server.get('host')}")
+            splunk_verify_cert = str_to_bool(options.get("verify_cert", ""))
 
-            SplunkClient.connect(host=server.get("host"),
-                                 port=server.get("port"),
-                                 username=server.get("username", None),
-                                 password=server.get("splunkpassword", None),
-                                 token=server.get("token", None),
-                                 verify=splunk_verify_cert)
+            LOG.info(f"Trying to connect to {options.get('host')}")
 
-            LOG.info(f"Test for {server.get('host')} was successful\n")
+            splunk = SplunkUtils(host=options.get("host"),
+                            port=options.get("port"),
+                            username=options.get("username", None),
+                            password=options.get("splunkpassword", None),
+                            token=options.get("token", None),
+                            verify=splunk_verify_cert,
+                            proxies=rc.get_proxies(),
+                            rc=rc)
+
+            splunk.get_messages()
+
+            LOG.info(f"Test for {options.get('host')} was successful\n")
 
         return {"state": "success"}
 
@@ -45,9 +51,9 @@ def selftest_function(opts):
         err_reason_msg = f"""Could not connect to Splunk.
             error: {err}
             ---------
-            host: {server.get("host")}
-            port: {server.get("port")}
-            username: {server.get("username")}\n"""
+            host: {options.get("host")}
+            port: {options.get("port")}
+            username: {options.get("username")}\n"""
 
         LOG.error(err_reason_msg)
 

@@ -2,7 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 from logging import getLogger
-from resilient_lib import validate_fields, IntegrationError, str_to_bool
+from resilient_lib import validate_fields, IntegrationError, str_to_bool, RequestsCommon
 from fn_splunk_integration.util.splunk_utils import SplunkServers, SplunkUtils
 
 PACKAGE_NAME = "fn_splunk_integration"
@@ -79,9 +79,10 @@ def get_servers_list(opts):
 
     return servers_list
 
-def function_basics(fn_inputs, servers_list):
+def function_basics(fn_inputs, servers_list, opts):
     # Make that calls that all of the functions use
     options = SplunkServers.splunk_label_test(getattr(fn_inputs, "splunk_label", None), servers_list)
+    rc = RequestsCommon(opts, options)
 
     splunk_verify_cert = str_to_bool(options.get("verify_cert", ""))
 
@@ -91,15 +92,11 @@ def function_basics(fn_inputs, servers_list):
     # Log the splunk server we are using
     LOG.info(f"Splunk host: {options.get('host')}, port: {options.get('port')}")
 
-    # Create proxy dictionary
-    proxies = {}
-    if options.get("https_proxy"):
-        proxies["https": options.get("https_proxy")]
-
     return SplunkUtils(host=options.get("host"),
                             port=options.get("port"),
                             username=options.get("username", None),
                             password=options.get("splunkpassword", None),
                             token=options.get("token", None),
                             verify=splunk_verify_cert,
-                            proxies=proxies)
+                            proxies=rc.get_proxies(),
+                            rc=rc)

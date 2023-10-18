@@ -40,7 +40,7 @@ class FunctionComponent(AppFunctionComponent):
         # Log it for debug
         self.LOG.debug(f"item dict: {str(item_dict)}")
 
-        splunk = function_basics(fn_inputs, self.servers_list)
+        splunk = function_basics(fn_inputs, self.servers_list, self.opts)
 
         splunk_result = splunk.add_threat_intel_item(threat_type=fn_inputs.splunk_threat_intel_type,
                                                      threat_dict=item_dict)

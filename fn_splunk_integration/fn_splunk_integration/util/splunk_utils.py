@@ -21,10 +21,21 @@ class SplunkUtils(object):
                              "email_intel", "service_intel", "process_intel",
                              "registry_intel", "certificate_intel"]
 
-    def __init__(self, host, port, username, password, token, verify, proxies):
+    def __init__(self, host, port, username, password, token, verify, proxies, rc):
+        """
+        :param host: Host address of splunk server
+        :param port: Port for splunk server
+        :param username: Username for splunk
+        :param password: Password for splunk user
+        :param token: Token for splunk account
+        :param verify: True or False or path to certificate
+        :param proxies: Dictionary of proxies
+        :param rc: RequestCommon
+        """
         self.base_url = f"https://{host}:{port}"
         self.proxies = proxies
         self.verify = verify
+        self.rc = rc
         if username and password:
             self.get_session_key(username, password, verify)
         elif token:
@@ -41,17 +52,18 @@ class SplunkUtils(object):
 
         url = f"{self.base_url}/services/auth/login"
         try:
-            resp = requests.post(url,
+            resp = self.rc.execute("post", url,
                                  headers={"Accept": "application/html"},
                                  data=urlparse.urlencode({"username": username,
-                                                          "password": password}),
+                                                          "password": password,
+                                                          "output_mode": "json"}),
                                  verify=verify,
                                  proxies=self.proxies)
             # This one we only allows 200. Otherwise login failed
             if resp.status_code == 200:
                 # docs.splunk.com/Documentation/Splunk/7.0.2/RESTTUT/RESTsearches
-                session_key = str(resp.content)
-                self.session_key = session_key[session_key.index("<sessionKey>")+12:session_key.index("</sessionKey>")]
+                session_key = resp.json()
+                self.session_key = session_key.get("sessionKey")
                 self.header = {"Authorization": f"Splunk {self.session_key}"}
             else:
                 error_msg = f"Splunk login failed with status {resp.status_code}"
@@ -67,7 +79,7 @@ class SplunkUtils(object):
         :return: Request response in json
         """
         try:
-            resp = requests.post(url, headers=self.header, data=args, verify=self.verify, proxies=self.proxies)
+            resp = self.rc.execute("post", url, headers=self.header, data=args, verify=self.verify, proxies=self.proxies)
             # We shall just return the response in json and let the post process
             # to make decision.
             return {"status_code": resp.status_code,
@@ -113,7 +125,7 @@ class SplunkUtils(object):
             raise IntegrationError(f"Request to url [{url}] throws exception. Error [{threat_type} is not supported]")
 
         try:
-            resp = requests.delete(url, headers=self.header, verify=self.verify, proxies=self.proxies)
+            resp = self.rc.execute("delete", url, headers=self.header, verify=self.verify, proxies=self.proxies)
             # We shall just return the response in json and let the post process
             # to make decision.
             return {"status_code": resp.status_code,
@@ -142,7 +154,7 @@ class SplunkUtils(object):
         """
         Get the results from a Jira search
         """
-        resp = requests.get(f"{self.base_url}/services/search/v2/jobs/{search_id}/results", data={"output_mode": "json", "count": max_return}, headers=self.header, verify=self.verify, proxies=self.proxies)
+        resp = self.rc.execute("get", f"{self.base_url}/services/search/v2/jobs/{search_id}/results", data={"output_mode": "json", "count": max_return}, headers=self.header, verify=self.verify, proxies=self.proxies)
         if not resp.content: # If content is empty then the search has not finished running yet
             return
         return resp.json()
@@ -151,10 +163,8 @@ class SplunkUtils(object):
         """
         Perform a search on splunk
         """
-        header = self.header
-        header["Accept"] = "application/json"
         # Create splunk search
-        search_job = requests.post(f"{self.base_url}/services/search/v2/jobs", data={"search": query, "output_mode": "json"}, headers=header, verify=self.verify, proxies=self.proxies).json()
+        search_job = self.rc.execute("post", f"{self.base_url}/services/search/v2/jobs", data={"search": query, "output_mode": "json"}, headers=self.header, verify=self.verify, proxies=self.proxies).json()
         search_id = search_job.get("sid")
 
         while True:
@@ -164,6 +174,12 @@ class SplunkUtils(object):
                 break
 
         return search_results.get("results")
+
+    def get_messages(self):
+        """
+        Get system messages (Used by selftest)
+        """
+        return self.rc.execute("get", f"{self.base_url}/services/messages", headers=self.header, verify=self.verify, proxies=self.proxies)
 
 class SplunkServers():
     def __init__(self, opts):

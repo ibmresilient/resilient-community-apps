@@ -30,7 +30,7 @@ class FunctionComponent(AppFunctionComponent):
         # Validate required parameters
         validate_fields(["event_id"], fn_inputs)
 
-        splunk = function_basics(fn_inputs, self.servers_list)
+        splunk = function_basics(fn_inputs, self.servers_list, self.opts)
 
         splunk_result = splunk.update_notable(event_id=fn_inputs.event_id,
                                               comment=getattr(fn_inputs, "comment", None),
