@@ -71,14 +71,21 @@ inputs.qradar_query_range_end = '5'
 ### Script Content
 ```python
 results = playbook.functions.results.qradar_search_result
+from datetime import datetime
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
 for event in results["events"]:
   qradar_event = incident.addRow("qradar_offense_event")
+  qradar_event.query_time = current_time
   qradar_event.qradar_server = results.inputs.get("qradar_label")
   qradar_event.start_time = event["StartTime"]
   qradar_event.category = event["categoryname_category"]
   qradar_event.log_source = event["logsourcename_logsourceid"]
   qradar_event.protocol = event["protocolname_protocolid"]
   qradar_event.rule = event["rulename_creeventlist"]
+incident.addNote("{} offenses have successfully been queried".format(len(results["events"])))
+
+
 ```
 
 ---

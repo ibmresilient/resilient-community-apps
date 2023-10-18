@@ -417,7 +417,7 @@ class QRadarClient(object):
 
         ret = []
         for r_set in ref_sets:
-            LOG.info(u"Looking for {} in reference set {}".format(
+            LOG.debug(u"Looking for {} in reference set {}".format(
                 value, r_set["name"]))
             element = QRadarClient.search_ref_set(r_set["name"], value)
             if element["found"] == "True":

@@ -33,20 +33,20 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
   - [Custom Layouts](#custom-layouts)
-- [Function - QRadar Add Reference Set Item](#function---qradar-add-reference-set-item)
-- [Function - QRadar Delete Reference Set Item](#function---qradar-delete-reference-set-item)
-- [Function - QRadar Find Reference Set Item](#function---qradar-find-reference-set-item)
-- [Function - QRadar Find Reference Sets](#function---qradar-find-reference-sets)
-- [Function - QRadar Reference Table Add Item](#function---qradar-reference-table-add-item)
-- [Function - QRadar Reference Table Delete Item](#function---qradar-reference-table-delete-item)
-- [Function - QRadar Reference Table Get All Tables](#function---qradar-reference-table-get-all-tables)
-- [Function - QRadar Reference Table Get Table Data](#function---qradar-reference-table-get-table-data)
-- [Function - QRadar Reference Table Update Item](#function---qradar-reference-table-update-item)
-- [Function - QRadar Search](#function---qradar-search)
-- [Data Table - QRadar Offense Events](#data-table---qradar-offense-events)
-- [Data Table - QRadar Reference Sets](#data-table---qradar-reference-sets)
-- [Data Table - QRadar Reference Table Queried Rows](#data-table---qradar-reference-table-queried-rows)
-- [Data Table - QRadar Reference Tables](#data-table---qradar-reference-tables)
+- [Function - QRadar SIEM: Add Reference Set Item ](#function---qradar-siem-add-reference-set-item)
+- [Function - QRadar SIEM: Delete Reference Set Item ](#function---qradar-siem-delete-reference-set-item)
+- [Function - QRadar SIEM: Find Reference Set Item ](#function---qradar-siem-find-reference-set-item)
+- [Function - QRadar SIEM: Find Reference Sets ](#function---qradar-siem-find-reference-sets)
+- [Function - QRadar SIEM: Reference Table Add Item ](#function---qradar-siem-reference-table-add-item)
+- [Function - QRadar SIEM: Reference Table Delete Item ](#function---qradar-siem-reference-table-delete-item)
+- [Function - QRadar SIEM: Reference Table Get All Tables ](#function---qradar-siem-reference-table-get-all-tables)
+- [Function - QRadar SIEM: Reference Table Get Table Data ](#function---qradar-siem-reference-table-get-table-data)
+- [Function - QRadar SIEM: Reference Table Update Item ](#function---qradar-siem-reference-table-update-item)
+- [Function - QRadar SIEM: QRadar Search ](#function---qradar-siem-qradar-search)
+- [Data Table - QRadar SIEM Offense Events](#data-table---qradar-siem-offense-events)
+- [Data Table - QRadar SIEM Reference Sets](#data-table---qradar-siem-reference-sets)
+- [Data Table - QRadar SIEM Reference Table Queried Rows](#data-table---qradar-siem-reference-table-queried-rows)
+- [Data Table - QRadar SIEM Reference Tables](#data-table---qradar-siem-reference-tables)
 - [Custom Fields](#custom-fields)
 - [Playbooks](#playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
@@ -218,7 +218,7 @@ If you have existing custom workflows, see [Creating workflows when server/serve
 
 ---
 
-## Function - QRadar Add Reference Set Item
+## Function - QRadar SIEM: Add Reference Set Item 
 Add an item to a given QRadar reference set
 
  ![screenshot: fn-qradar-add-reference-set-item ](./doc/screenshots/fn-qradar-add-reference-set-item.png) <!-- ::CHANGE_ME:: -->
@@ -267,7 +267,9 @@ results = {
 <p>
 
 ```python
-None
+inputs.qradar_reference_set_item_value = artifact.value
+inputs.qradar_reference_set_name  = playbook.inputs.qradar_reference_set_name
+inputs.qradar_label = playbook.inputs.qradar_server
 ```
 
 </p>
@@ -277,14 +279,18 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.qradar_add_reference_set_item_result
+if results["status_code"] == 200:
+  incident.addNote(u"IP: {} added to reference set: {} on QRadar server: {}".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
+else:
+  incident.addNote(u"Failed to add IP: {} to reference set on QRadar server: {}. Status Code: {}, message: {}".format(artifact.value, results.inputs["qradar_label"], str(results["status_code"]), results.inputs["qradar_reference_set_name"]))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar Delete Reference Set Item
+## Function - QRadar SIEM: Delete Reference Set Item 
 Delete an item from a given QRadar reference set
 
  ![screenshot: fn-qradar-delete-reference-set-item ](./doc/screenshots/fn-qradar-delete-reference-set-item.png) <!-- ::CHANGE_ME:: -->
@@ -347,7 +353,9 @@ results = {
 <p>
 
 ```python
-None
+inputs.qradar_reference_set_item_value = artifact.value
+inputs.qradar_reference_set_name = playbook.inputs.qradar_reference_set_name
+inputs.qradar_label = playbook.inputs.qradar_server
 ```
 
 </p>
@@ -357,14 +365,20 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.qradar_add_reference_set_item_result
+
+if results.get("status_code") == 200:
+  incident.addNote(u"Successfully added {} to {} on QRadar Server: {}".format(artifact.value, playbook.inputs.qradar_reference_set_name, results.inputs["qradar_label"]))
+else:
+  incident.addNote(u"Failed to add {} to {} on QRadar server: {}. Status code: {}, message: {}".format(artifact.value, playbook.inputs.qradar_reference_set_name, results.inputs["qradar_label"], results.get("status_code"), results['message']))
+  
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar Find Reference Set Item
+## Function - QRadar SIEM: Find Reference Set Item 
 Find an item in a given QRadar reference set
 
  ![screenshot: fn-qradar-find-reference-set-item ](./doc/screenshots/fn-qradar-find-reference-set-item.png) <!-- ::CHANGE_ME:: -->
@@ -423,7 +437,9 @@ results = {
 <p>
 
 ```python
-None
+inputs.qradar_reference_set_item_value = artifact.value
+inputs.qradar_reference_set_name = playbook.inputs.qradar_reference_set_name
+inputs.qradar_label = playbook.inputs.qradar_server
 ```
 
 </p>
@@ -433,14 +449,18 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.qradar_find_reference_set_item_result
+if results.found == "True":
+  incident.addNote(u"Found IP: {} in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
+else:
+  incident.addNote("IP:{} not found in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar Find Reference Sets
+## Function - QRadar SIEM: Find Reference Sets 
 Find reference sets that contain a given item value, together with information about this item in those reference sets. Information includes whether this item is added to the reference set manually or by a rule.
 
  ![screenshot: fn-qradar-find-reference-sets ](./doc/screenshots/fn-qradar-find-reference-sets.png) 
@@ -497,7 +517,8 @@ results = {
 <p>
 
 ```python
-None
+inputs.qradar_reference_set_item_value = artifact.value
+inputs.qradar_label = playbook.inputs.qradar_server
 ```
 
 </p>
@@ -507,14 +528,27 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.qradar_find_reference_sets_result
+from datetime import datetime
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
+if results.reference_items:
+  for item in results.reference_items:
+    item_row = incident.addRow("qradar_reference_set")
+    item_row["query_time"] = current_time
+    item_row["qradar_server"] = results.inputs["qradar_label"]
+    item_row["reference_set"] = item["name"]
+    item_row["item_value"] = item["data"][0]["value"]
+    item_row["source"] = item["data"][0]["source"]
+  incident.addNote("{} Reference sets found".format(len(results.reference_items)))
+else:
+  incident.addNote("No reference sets contain artifact: {} on QRadar server: {}".format(artifact.value, results.inputs["qradar_label"]))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar Reference Table Add Item
+## Function - QRadar SIEM: Reference Table Add Item 
 Add an item to a given QRadar reference table
 
  ![screenshot: fn-qradar-reference-table-add-item ](./doc/screenshots/fn-qradar-reference-table-add-item.png) <!-- ::CHANGE_ME:: -->
@@ -585,7 +619,11 @@ results = {
 <p>
 
 ```python
-None
+inputs.qradar_reference_table_item_value = artifact.value
+inputs.qradar_reference_table_item_inner_key = playbook.inputs.qradar_ref_table_inner_key
+inputs.qradar_reference_table_item_outer_key = playbook.inputs.qradar_ref_table_outer_key
+inputs.qradar_reference_table_name = playbook.inputs.qradar_reference_table_name
+inputs.qradar_label = playbook.inputs.qradar_server
 ```
 
 </p>
@@ -595,14 +633,27 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.qradar_reference_table_add_item_result
+note = u"""Outer key: {}
+Inner key: {}
+Entry: {}
+Reference table: {}
+QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
+                              results.inputs.qradar_reference_table_item_inner_key,
+                              results.inputs.qradar_reference_table_item_value, 
+                              results.inputs.qradar_reference_table_name,
+                              results.inputs["qradar_label"])
+if results.success:
+    incident.addNote(u"Successful add\n{}".format(note))
+else:
+    incident.addNote(u"Failure to add item: {}\n{}".format(results['reason'], note))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar Reference Table Delete Item
+## Function - QRadar SIEM: Reference Table Delete Item 
 Delete an item from a given QRadar reference table
 
  ![screenshot: fn-qradar-reference-table-delete-item ](./doc/screenshots/fn-qradar-reference-table-delete-item.png) <!-- ::CHANGE_ME:: -->
@@ -669,7 +720,11 @@ results = {
 <p>
 
 ```python
-None
+inputs.qradar_reference_table_name = row.table
+inputs.qradar_reference_table_item_outer_key = row.outer_key
+inputs.qradar_reference_table_item_inner_key = row.inner_key
+inputs.qradar_reference_table_item_value = row.value
+inputs.qradar_label = row["qradar_server"]
 ```
 
 </p>
@@ -679,14 +734,28 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.qradar_reference_table_delete_item_result
+note = u"""Outer key: {}
+Inner key: {}
+Entry: {}
+Reference table: {}
+QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
+                              results.inputs.qradar_reference_table_item_inner_key,
+                              results.inputs.qradar_reference_table_item_value, 
+                              results.inputs.qradar_reference_table_name,
+                              row["qradar_server"])
+if results.success:
+    incident.addNote(u"Successful delete\n{}".format(note))
+    row['status'] = "deleted"
+else:
+    incident.addNote(u"Failure to delete item: {}\n{}".format(results.reason, note))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar Reference Table Get All Tables
+## Function - QRadar SIEM: Reference Table Get All Tables
 Get all reference tables from a QRadar instance
 
  ![screenshot: fn-qradar-reference-table-get-all-tables ](./doc/screenshots/fn-qradar-reference-table-get-all-tables.png) <!-- ::CHANGE_ME:: -->
@@ -768,7 +837,7 @@ results = {
 <p>
 
 ```python
-None
+inputs.qradar_label = playbook.inputs.qradar_server
 ```
 
 </p>
@@ -778,14 +847,31 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.qradar_reference_table_get_all_tables_result
+from datetime import datetime
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
+if results.success:
+  if results.content:
+    for item in results.content:
+      item_row = incident.addRow("qradar_reference_table")
+      item_row["query_time"] = current_time
+      item_row["qradar_server"] = results.inputs["qradar_label"]
+      item_row["reference_table"] = item["name"]
+      item_row["collection_id"] = item["collection_id"]
+      item_row["number_of_elements"] = item["number_of_elements"]
+      item_row["namespace"] = item["namespace"]
+    incident.addNote("{} Reference tables have successfully been queried".format(len(results.content)))
+  else:
+    incident.addNote("No reference tables found")
+else:
+  incident.addNote("An error occurred getting the reference tables: {} from QRadar server: {}".format(results.reason, rule.properties.qradar_label))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar Reference Table Get Table Data
+## Function - QRadar SIEM: Reference Table Get Table Data 
 Get the elements in the reference table
 
  ![screenshot: fn-qradar-reference-table-get-table-data ](./doc/screenshots/fn-qradar-reference-table-get-table-data.png) <!-- ::CHANGE_ME:: -->
@@ -858,7 +944,8 @@ results = {
 <p>
 
 ```python
-None
+inputs.qradar_reference_table_name = row['reference_table']
+inputs.qradar_label = row["qradar_server"]
 ```
 
 </p>
@@ -868,14 +955,32 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.qradar_refrence_table_get_table_data_result
+from datetime import datetime
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
+if results.success:
+  for outer_key, item in results.content.get('data',[]).items():
+    for inner_key, inner_item in item.items():
+      table_row = incident.addRow('qradar_reference_table_queried_rows')
+      table_row['query_time'] = current_time
+      table_row['qradar_server'] = row["qradar_server"]
+      table_row['table'] = results.inputs.qradar_reference_table_name
+      table_row['outer_key'] = outer_key
+      table_row['inner_key'] = inner_key
+      
+      table_row['value'] = inner_item['value']
+      table_row['status'] = 'active'
+  num_data_gathered = len(results.content.get('data',[]).items()) * len(item.items())
+  incident.addNote("{} Reference table data have been gathered".format(num_data_gathered))
+else:
+  incident.addNote("An error occurred getting the reference table data: {}".format(results.reason))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar Reference Table Update Item
+## Function - QRadar SIEM: Reference Table Update Item
 Update an item in a given QRadar reference table
 
  ![screenshot: fn-qradar-reference-table-update-item ](./doc/screenshots/fn-qradar-reference-table-update-item.png) <!-- ::CHANGE_ME:: -->
@@ -942,7 +1047,15 @@ results = {
 <p>
 
 ```python
-None
+inputs.qradar_label = row["qradar_server"]
+inputs.qradar_reference_table_name = row.table
+inputs.qradar_reference_table_item_outer_key = row.outer_key
+inputs.qradar_reference_table_item_inner_key = row.inner_key
+
+if playbook.inputs.qradar_ref_table_update:
+  inputs.qradar_reference_table_item_value = playbook.inputs.qradar_ref_table_update
+else:
+  inputs.qradar_reference_table_item_value = "This is an example"
 ```
 
 </p>
@@ -952,14 +1065,29 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.qradar_ference_table_update_result
+note = u"""Outer key: {}
+Inner key: {}
+Entry: {}
+Reference table: {}
+QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
+                              results.inputs.qradar_reference_table_item_inner_key,
+                              results.inputs.qradar_reference_table_item_value, 
+                              results.inputs.qradar_reference_table_name,
+                              row["qradar_server"])
+if results.success:
+    incident.addNote(u"Successful updated\n{}".format(note))
+    row['status'] = 'updated'
+    row['value'] = results.inputs.qradar_reference_table_item_value
+else:
+    incident.addNote(u"Failure to updated item: {}\n{}".format(results['reason'], note))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar Search
+## Function - QRadar SIEM: QRadar Search
 Search QRadar for events
 
  ![screenshot: fn-qradar-search ](./doc/screenshots/fn-qradar-search.png) <!-- ::CHANGE_ME:: -->
@@ -1838,7 +1966,23 @@ results = {
 <p>
 
 ```python
-None
+inputs.qradar_label = playbook.inputs.qradar_server
+
+
+if playbook.inputs.qradar_query_all_results:
+  inputs.qradar_query_all_results = playbook.inputs.qradar_query_all_results
+
+  
+inputs.qradar_query = "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days"
+inputs.qradar_search_param1  = "DATEFORMAT(starttime, 'YYYY-MM-dd HH:mm') as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)"
+inputs.qradar_search_param2 = incident.properties.qradar_id
+if playbook.inputs.days_to_search_back: 
+  inputs.qradar_search_param3 = playbook.inputs.days_to_search_back
+else:
+  inputs.qradar_search_param3 = '7'
+inputs.qradar_query_range_start = '1'
+inputs.qradar_query_range_end = '5'
+
 ```
 
 </p>
@@ -1848,7 +1992,22 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.qradar_search_result
+from datetime import datetime
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+for event in results["events"]:
+  qradar_event = incident.addRow("qradar_offense_event")
+  qradar_event.query_time = current_time
+  qradar_event.qradar_server = results.inputs.get("qradar_label")
+  qradar_event.start_time = event["StartTime"]
+  qradar_event.category = event["categoryname_category"]
+  qradar_event.log_source = event["logsourcename_logsourceid"]
+  qradar_event.protocol = event["protocolname_protocolid"]
+  qradar_event.rule = event["rulename_creeventlist"]
+incident.addNote("{} offenses have successfully been queried".format(len(results["events"])))
+
+
 ```
 
 </p>
@@ -1857,7 +2016,7 @@ None
 ---
 
 
-## Data Table - QRadar Offense Events
+## Data Table - QRadar SIEM Offense Events
 
  ![screenshot: dt-qradar-offense-events](./doc/screenshots/dt-qradar-offense-events.png) <!-- ::CHANGE_ME:: -->
 
@@ -1875,7 +2034,7 @@ qradar_offense_event
 | Start Time | `start_time` | `text` | starttime |
 
 ---
-## Data Table - QRadar Reference Sets
+## Data Table - QRadar SIEM Reference Sets
 
  ![screenshot: dt-qradar-reference-sets](./doc/screenshots/dt-qradar-reference-sets.png) <!-- ::CHANGE_ME:: -->
 
@@ -1891,7 +2050,7 @@ qradar_reference_set
 | Source | `source` | `text` | how this value is added to the reference set |
 
 ---
-## Data Table - QRadar Reference Table Queried Rows
+## Data Table - QRadar SIEM Reference Table Queried Rows
 
  ![screenshot: dt-qradar-reference-table-queried-rows](./doc/screenshots/dt-qradar-reference-table-queried-rows.png) <!-- ::CHANGE_ME:: -->
 
@@ -1909,7 +2068,7 @@ qradar_reference_table_queried_rows
 | Value | `value` | `text` | - |
 
 ---
-## Data Table - QRadar Reference Tables
+## Data Table - QRadar SIEM Reference Tables
 
  ![screenshot: dt-qradar-reference-tables](./doc/screenshots/dt-qradar-reference-tables.png) <!-- ::CHANGE_ME:: -->
 
@@ -1940,17 +2099,17 @@ qradar_reference_table
 ## Playbooks
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| Find All QRadar Reference Sets (PB) | Find all the QRadar reference sets that contain the given artifact | artifact | `enabled` |
-| Find in QRadar Reference Set (PB) | Look for an item in QRadar reference set and add a note to the Incident | artifact | `enabled` |
-| QRadar Add Item to this Reference Table - Example (PB) | Add a reference table item based on an existing named reference table | qradar_reference_table | `enabled` |
-| QRadar Delete this Reference Table Item - Example (PB) | An example workflow that takes in a Reference Table name, an inner key, an outer key and a value to delete for the table | qradar_reference_table_queried_rows | `enabled` |
-| QRadar Gather Reference Table Data - Example (PB) | Make a query on a reference table and return its results into another datatable | qradar_reference_table | `enabled` |
-| QRadar Add to Reference Set (PB) | Add an IP address artifact to QRadar reference set | artifact | `enabled` |
-| QRadar Add to Reference Table (PB) | Add a reference table item based on an artifact value | artifact | `enabled` |
-| QRadar Get all Reference Tables - Example (PB)  | An example workflow that returns a list of all Reference Tables on the QRadar instance. | incident | `enabled` |
-| QRadar Move from Sample Blocked to Sample Suspected (PB) | Remove an item from QRadar reference set and add it to reference set. Add a note to the Incident after completing each step. | artifact | `enabled` |
-| QRadar Update this Reference Table Item Example (PB) | Update an existing reference table item. If it does not exist, it will be added | qradar_reference_table_queried_rows | `enabled` |
-| Search QRadar for offense id | Use the qradar_id field of the incident to search qradar events, and update the data table, qradar_offense_event, with the first 5 results. | incident | `enabled` |
+| QRadar SIEM: Find All Reference Sets -Example (PB) | Find all the QRadar reference sets that contain the given artifact | artifact | `enabled` |
+| QRadar SIEM: Find in Reference Set - Example (PB) | Look for an item in QRadar reference set and add a note to the Incident | artifact | `enabled` |
+| QRadar SIEM: Add Item to this Reference Table - Example (PB) | Add a reference table item based on an existing named reference table | qradar_reference_table | `enabled` |
+| QRadar SIEM: Delete this Reference Table Item - Example (PB) | An example workflow that takes in a Reference Table name, an inner key, an outer key and a value to delete for the table | qradar_reference_table_queried_rows | `enabled` |
+| QRadar SIEM: Gather Reference Table Data - Example (PB)) | Make a query on a reference table and return its results into another datatable | qradar_reference_table | `enabled` |
+| QRadar SIEM: Add to Reference Set -Example (PB) | Add an IP address artifact to QRadar reference set | artifact | `enabled` |
+| QRadar SIEM: Add to Reference Table -Example (PB) | Add a reference table item based on an artifact value | artifact | `enabled` |
+| QRadar SIEM: Get all Reference Tables - Example (PB)   | An example workflow that returns a list of all Reference Tables on the QRadar instance. | incident | `enabled` |
+| QRadar SIEM: Move from Sample Blocked to Sample Suspected - Example (PB)) | Remove an item from QRadar reference set and add it to reference set. Add a note to the Incident after completing each step. | artifact | `enabled` |
+| QRadar SIEM: Update this Reference Table Item - Example (PB) | Update an existing reference table item. If it does not exist, it will be added | qradar_reference_table_queried_rows | `enabled` |
+| QRadar SIEM: Search QRadar for offense id -Example (PB) | Use the qradar_id field of the incident to search qradar events, and update the data table, qradar_offense_event, with the first 5 results. | incident | `enabled` |
 
 ---
 

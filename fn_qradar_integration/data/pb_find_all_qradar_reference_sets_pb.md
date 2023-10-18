@@ -56,13 +56,17 @@ inputs.qradar_label = playbook.inputs.qradar_server
 ### Script Content
 ```python
 results = playbook.functions.results.qradar_find_reference_sets_result
+from datetime import datetime
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
 if results.reference_items:
   for item in results.reference_items:
     item_row = incident.addRow("qradar_reference_set")
+    item_row["query_time"] = current_time
     item_row["qradar_server"] = results.inputs["qradar_label"]
     item_row["reference_set"] = item["name"]
     item_row["item_value"] = item["data"][0]["value"]
     item_row["source"] = item["data"][0]["source"]
+  incident.addNote("{} Reference sets found".format(len(results.reference_items)))
 else:
   incident.addNote("No reference sets contain artifact: {} on QRadar server: {}".format(artifact.value, results.inputs["qradar_label"]))
 ```
