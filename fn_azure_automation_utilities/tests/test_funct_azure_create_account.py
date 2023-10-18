@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# Generated with resilient-sdk v50.1.262
 """Tests using pytest_resilient_circuits"""
 
 from unittest.mock import patch
 import pytest, helper
-from resilient_circuits.util import get_function_definition
+from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 FUNCTION_NAME = "azure_create_account"
 
 # Read the default configuration-data section from the package
-config_data = helper.config_data
+config_data = get_config_data(helper.PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+
 
 def call_azure_create_account_function(circuits, function_params, timeout=5):
     # Create the submitTestFunction event

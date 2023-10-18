@@ -970,7 +970,7 @@ def mock_init():
             """ Mock """
             pass
 
-        def create_account(self, payload):
+        def create_account(self, payload: dict, update: bool = False):
             """ Mock create account results """
             return create_account_results()
 
