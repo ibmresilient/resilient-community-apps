@@ -7,11 +7,13 @@ import abc
 import json
 import logging
 import pytz
+import traceback
 from cachetools import cached, TTLCache
 from datetime import datetime
 
 LOG = logging.getLogger(__name__)
 
+INCIDENT_NOT_FOUND_ERROR = 404
 
 class TypeInfo(object):
     """
@@ -619,4 +621,9 @@ class FullTypeInfo(TypeInfo):
 @cached(cache=TTLCache(maxsize=1000, ttl=60), key=lambda rest_client_helper, inc_id: str(inc_id))
 def get_incident(rest_client_helper, inc_id):
     """ get an incident based on it's id. Results are cached """
-    return rest_client_helper.get("/incidents/{}".format(inc_id))
+    # don't retry incident not found errors (404)
+    try:
+        return rest_client_helper.get("/incidents/{}".format(inc_id), skip_retry=[INCIDENT_NOT_FOUND_ERROR])
+    except Exception:
+        traceback.print_exc()
+        return None
