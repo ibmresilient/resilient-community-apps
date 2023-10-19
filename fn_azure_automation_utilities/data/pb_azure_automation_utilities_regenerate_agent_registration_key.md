@@ -72,7 +72,14 @@ from json import dumps
 results = playbook.functions.results.registration_key
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Agent Registration Regenerate Key - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group Name: {playbook.inputs.azure_automation_resource_group}
+  Key to Regenerate: {playbook.inputs.azure_automation_agent_key_to_regenerate}
+
+Results -
+  {dumps(results.get('content', {}), indent=4)}""")
 ```
 
 ---

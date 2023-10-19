@@ -23,13 +23,13 @@
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account is in | Always |
-| Credential Name | `azure_automation_credential_name` | text | Azure automation credential name | Always |
+| Credential Name | `azure_automation_credential_name` | text | If credential name given will get that credential. If no name given then will get all credentials on given resource | Optional |
 
 ### Object Type
 `incident`
 
 ### Description
-Get a credential
+Get credential from given credential name or list all credentials on given resource group.
 
 
 ---
@@ -48,7 +48,8 @@ Get a credential
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.credential_name = playbook.inputs.azure_automation_credential_name
+if getattr(playbook.inputs, "azure_automation_credential_name"):
+  inputs.credential_name = getattr(playbook.inputs, "azure_automation_credential_name")
 ```
 
 ---
@@ -70,7 +71,14 @@ from json import dumps
 results = playbook.functions.results.cred
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Credential Get - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group}
+  Credential Name: {getattr(playbook.inputs, 'azure_automation_credential_name')}
+
+Results -
+  {dumps(results.get('content', {}), indent=4)}""")
 ```
 
 ---

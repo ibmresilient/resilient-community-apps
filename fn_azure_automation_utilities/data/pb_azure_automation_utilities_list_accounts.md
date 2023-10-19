@@ -67,7 +67,7 @@ from json import dumps
 results = playbook.functions.results.accounts
 
 if results.get("success"):
-  incident.addNote("""Azure Automation: Accounts List - Example (PB)
+  incident.addNote(f"""Azure Automation: Accounts List - Example (PB)
 Inputs -
   Resource Group Name: {getattr(playbook.inputs, 'resource_group_name', None)}
 Results -

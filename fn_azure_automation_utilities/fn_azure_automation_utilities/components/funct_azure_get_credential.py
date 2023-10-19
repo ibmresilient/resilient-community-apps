@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Retrieve the credential identified by credential name.
+        Function: Get credential from given credential name or list all credentials on given resource group.
         Inputs:
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
@@ -28,13 +28,16 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate inputs
-        validate_fields(["account_name", "resource_group_name", "credential_name"], fn_inputs)
+        validate_fields(["account_name", "resource_group_name"], fn_inputs)
 
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
-        # Make call to Azure and retrieve results
-        results = client.get_credential(getattr(fn_inputs, "credential_name"))
+        # If credential name given get that credential
+        if getattr(fn_inputs, "credential_name", None):
+            results = client.get_credential(getattr(fn_inputs, "credential_name"))
+        else: # If credential name not given get all credentials on given resource
+            results = client.list_credentials_by_automation_account()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

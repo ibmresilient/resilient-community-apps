@@ -71,9 +71,18 @@ results = playbook.functions.results.delete_cred
 if results.get("success"):
   status = results.get("content", {}).get("status")
   if status == 200:
-    incident.addNote(f"Azure automation credential '{playbook.inputs.azure_automation_credential_name}' was deleted.")
+    result = f"Azure automation credential '{playbook.inputs.azure_automation_credential_name}' was deleted."
   elif status == 204:
-    incident.addNote(f"Azure automation credential '{playbook.inputs.azure_automation_credential_name}' not found.")
+    result = f"Azure automation credential '{playbook.inputs.azure_automation_credential_name}' not found."
+
+  incident.addNote(f"""Azure Automation: Credential Delete - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group}
+  Credential Name: {playbook.inputs.azure_automation_credential_name}
+
+Results -
+  {result}""")
 ```
 
 ---

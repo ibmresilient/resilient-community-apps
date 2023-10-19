@@ -93,8 +93,8 @@ Inputs -
   Resource Group: {playbook.inputs.azure_automation_resource_group}
   Account Update: True
   Tags: {getattr(playbook.inputs, 'azure_automation_account_tags', {})}
-  Public Network Access: {getattr(playbook.inputs, "azure_automation_account_public_network_access")}
-  Disable Local Auth: {getattr(playbook.inputs, "azure_automation_account_disable_local_auth")}
+  Public Network Access: {getattr(playbook.inputs, 'azure_automation_account_public_network_access')}
+  Disable Local Auth: {getattr(playbook.inputs, 'azure_automation_account_disable_local_auth')}
 Results -
   Account '{playbook.inputs.azure_automation_account_name}' was updated successfully.""")
 ```

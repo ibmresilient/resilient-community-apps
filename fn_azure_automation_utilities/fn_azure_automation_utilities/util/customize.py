@@ -43,7 +43,6 @@ def codegen_reload_data():
             u"azure_get_runbook",
             u"azure_get_schedule",
             u"azure_list_accounts",
-            u"azure_list_credentials_by_automation_account",
             u"azure_list_jobs_by_automation_account",
             u"azure_list_module_activities",
             u"azure_list_node_report_by_node",
@@ -80,7 +79,6 @@ def codegen_reload_data():
             u"azure_automation_utilities_get_runbook",
             u"azure_automation_utilities_get_schedule",
             u"azure_automation_utilities_list_accounts",
-            u"azure_automation_utilities_list_credentials_by_automation_account",
             u"azure_automation_utilities_list_jobs_by_automation_account",
             u"azure_automation_utilities_list_module_activities",
             u"azure_automation_utilities_list_node_report_by_node",
@@ -124,7 +122,6 @@ def customization_data(client=None):
         - azure_get_runbook
         - azure_get_schedule
         - azure_list_accounts
-        - azure_list_credentials_by_automation_account
         - azure_list_jobs_by_automation_account
         - azure_list_module_activities
         - azure_list_node_report_by_node
@@ -152,7 +149,6 @@ def customization_data(client=None):
         - azure_automation_utilities_get_runbook
         - azure_automation_utilities_get_schedule
         - azure_automation_utilities_list_accounts
-        - azure_automation_utilities_list_credentials_by_automation_account
         - azure_automation_utilities_list_jobs_by_automation_account
         - azure_automation_utilities_list_module_activities
         - azure_automation_utilities_list_node_report_by_node
