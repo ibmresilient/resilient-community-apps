@@ -84,7 +84,12 @@ def function_basics(fn_inputs, servers_list, opts):
     options = SplunkServers.splunk_label_test(getattr(fn_inputs, "splunk_label", None), servers_list)
     rc = RequestsCommon(opts, options)
 
-    splunk_verify_cert = str_to_bool(options.get("verify_cert", ""))
+    verify = options.get("verify_cert", True)
+    # convert potential strings to boolean if necessary
+    # NOTE: it is possible that a string path should be returned,
+    # in which case we don't want there to be a boolean conversion
+    if isinstance(verify, str) and verify.lower() in ["false", "true"]:
+        verify = str_to_bool(verify)
 
     # Log all the info
     LOG.info(str(fn_inputs))
@@ -97,6 +102,6 @@ def function_basics(fn_inputs, servers_list, opts):
                             username=options.get("username", None),
                             password=options.get("splunkpassword", None),
                             token=options.get("token", None),
-                            verify=splunk_verify_cert,
+                            verify=verify,
                             proxies=rc.get_proxies(),
                             rc=rc)
