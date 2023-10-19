@@ -19,6 +19,7 @@
 # AbuseIPDB Function for IBM SOAR
 
 ## Table of Contents
+- [Table of Contents](#table-of-contents)
 - [Release Notes](#release-notes)
 - [Overview](#overview)
   - [Key Features](#key-features)
@@ -28,12 +29,14 @@
   - [Proxy Server](#proxy-server)
   - [Python Environment](#python-environment)
   - [Endpoint Developed With](#endpoint-developed-with)
+    - [Prerequisites](#prerequisites)
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
 - [Function - AbuseIPDB](#function---abuseipdb)
 - [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 ---
 
 ## Release Notes
@@ -43,6 +46,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.2 | 10/2023 | Fix for selftest function |
 | 1.0.1 | 03/2022 | Update Workflow Post-Processing Script |
 | 1.0.0 | 02/2022 | Initial Release |
 
@@ -71,7 +75,7 @@ This app pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artif
 <!--
   List any Requirements 
 --> 
-* resilient-circuits>=43.0.0
+* resilient-circuits>=50.1.0
 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
