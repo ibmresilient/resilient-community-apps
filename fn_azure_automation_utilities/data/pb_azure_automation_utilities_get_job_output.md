@@ -70,7 +70,15 @@ inputs.job_output = True
 ```python
 results = playbook.functions.results.job_output
 if results.get("success"):
-  incident.addNote(str(results.get("content", "")))
+  incident.addNote(f"""Azure Automation: Job Get Output - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group_name}
+  Job Name: {playbook.inputs.azure_automation_job_name}
+  Job Output: True
+  
+Results -
+  {str(results.get('content', ''))}""")
 ```
 
 ---

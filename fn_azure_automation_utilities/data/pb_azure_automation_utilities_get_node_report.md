@@ -23,14 +23,15 @@
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Node ID | `azure_automation_node_id` | text | Azure Automation Dsc node ID | Always |
-| Report ID | `azure_automation_report_id` | text | Dsc node report ID | Always |
+| Report ID | `azure_automation_report_id` | text | Dsc node report ID. If given will get the specified report. If not given then will list all reports on the given node. | Optional |
 | Resource Group Name | `azure_automation_resource_group_name` | text | Azure automation resource group name | Always |
 
 ### Object Type
 `incident`
 
 ### Description
-Retrieve the Dsc node report data by node id and report id.
+Retrieve the Dsc node report data by node id and report id or
+List Dsc node reports by node id.
 
 
 ---
@@ -49,8 +50,9 @@ Retrieve the Dsc node report data by node id and report id.
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.node_id = playbook.inputs.azure_automation_node_id
-inputs.report_id = playbook.inputs.azure_automation_report_id
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
+if getattr(playbook.inputs, "azure_automation_report_id", None):
+  inputs.report_id = playbook.inputs.azure_automation_report_id
 ```
 
 ---
@@ -72,7 +74,15 @@ from json import dumps
 results = playbook.functions.results.node_report
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Node Get Report - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group_name}
+  Node ID: {playbook.inputs.azure_automation_node_id}
+  Report ID: {getattr(playbook.inputs, 'azure_automation_report_id', None)}
+
+Results -
+  {dumps(results.get('content', {}), indent=4)}""")
 ```
 
 ---

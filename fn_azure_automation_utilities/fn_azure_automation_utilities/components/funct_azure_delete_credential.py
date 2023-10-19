@@ -34,7 +34,7 @@ class FunctionComponent(AppFunctionComponent):
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
         # Make call to Azure and retrieve results
-        response = client.delete_credential(getattr(fn_inputs, "credential_name"))
+        response = client.delete_credential(getattr(fn_inputs, "credential_name", None))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

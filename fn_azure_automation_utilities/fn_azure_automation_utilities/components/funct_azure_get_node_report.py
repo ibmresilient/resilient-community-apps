@@ -19,7 +19,8 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Retrieve the Dsc node report data by node id and report id.
+        Function: Retrieve the Dsc node report data by node id and report id or
+        List Dsc node reports by node id.
         Inputs:
             -   fn_inputs.report_id
             -   fn_inputs.resource_group_name
@@ -30,13 +31,16 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate inputs
-        validate_fields(["account_name", "resource_group_name", "report_id", "node_id"], fn_inputs)
+        validate_fields(["account_name", "resource_group_name", "node_id"], fn_inputs)
 
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
-        # Make call to Azure and retrieve results
-        results = client.get_node_report(getattr(fn_inputs, "node_id"), getattr(fn_inputs, "report_id"))
+        # If report id given then get the specified node report
+        if getattr(fn_inputs, "report_id", None):
+            results = client.get_node_report(getattr(fn_inputs, "node_id", None), getattr(fn_inputs, "report_id", None))
+        else: # If report id not given then list all reports on the specified node
+            results = client.list_node_report_by_node(getattr(fn_inputs, "node_id", None))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

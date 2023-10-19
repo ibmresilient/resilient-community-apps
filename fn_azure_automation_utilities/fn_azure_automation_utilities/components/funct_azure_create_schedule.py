@@ -43,7 +43,7 @@ class FunctionComponent(AppFunctionComponent):
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
         # Make call to Azure and retrieve results
-        results = client.create_schedule(getattr(fn_inputs, "schedule_name"), input_parameters)
+        results = client.create_schedule(getattr(fn_inputs, "schedule_name", None), input_parameters)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

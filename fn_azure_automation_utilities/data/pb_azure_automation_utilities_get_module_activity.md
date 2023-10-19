@@ -22,9 +22,9 @@
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account name | `azure_automation_account_name` | text | The Azure automation account name | Always |
-| Activity Name | `azure_automation_activity_name` | text | The Azure automaion module activity name | Always |
+| Activity Name | `azure_automation_activity_name` | text | If activity name given then get the given activity. If activity name not given then get all activities in the given module | Optional |
 | Module Name | `azure_automation_module_name` | text | The Azure automation module name | Always |
-| Resouce Group name | `azure_automation_resource_group_name` | text | The Azure automation resource group name | Always |
+| Resource Group name | `azure_automation_resource_group_name` | text | The Azure automation resource group name | Always |
 
 ### Object Type
 `incident`
@@ -48,9 +48,11 @@ Retrieve the activity in the module identified by module name and activity name.
 ### Function-Input Script
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.activity_name = playbook.inputs.azure_automation_activity_name
 inputs.module_name = playbook.inputs.azure_automation_module_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
+
+if getattr(playbook.inputs, "azure_automation_activity_name", None):
+  inputs.activity_name = playbook.inputs.azure_automation_activity_name
 ```
 
 ---
@@ -72,7 +74,15 @@ from json import dumps
 results = playbook.functions.results.module_activity
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Module Get Activity - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group_name}
+  Module Name: {playbook.inputs.azure_automation_module_name}
+  Activity Name: {getattr(playbook.inputs, 'azure_automation_activity_name')}
+  
+Results -
+  {dumps(results.get("content", {}), indent=4)}""")
 ```
 
 ---

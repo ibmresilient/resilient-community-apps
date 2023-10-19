@@ -67,7 +67,13 @@ inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_nam
 from json import dumps
 results = playbook.functions.results.jobs
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Jobs List by Automation Account - Example (PB)
+Inputs -
+  Account name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group_name}
+
+Results -
+  {dumps(results.get('content', {}), indent=4)}""")
 ```
 
 ---

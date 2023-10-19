@@ -87,7 +87,17 @@ inputs.input_parameters = str(payload)
 ```python
 results = playbook.functions.results.update_cred
 if results.get("success"):
-  incident.addNote(f"Credential '{playbook.inputs.azure_automation_credential_name}' was updated successfully.")
+  incident.addNote(f"""Azure Automation: Credential Update - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group}
+  Credential Name: {playbook.inputs.azure_automation_credential_name}
+  Credential Update: True
+  Credential Username: {getattr(playbook.inputs, 'azure_automation_credential_username')}
+  Credential Description: {getattr(playbook.inputs, 'azure_automation_credential_description')}
+
+Results -
+  Credential '{playbook.inputs.azure_automation_credential_name}' was updated successfully.""")
 ```
 
 ---

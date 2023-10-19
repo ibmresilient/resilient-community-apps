@@ -40,7 +40,7 @@ class FunctionComponent(AppFunctionComponent):
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
         # Start an Azure job to run the given runbook
-        start_runbook = client.run_runbook(getattr(fn_inputs, "runbook_name"), runbook_parameters=input_parameters)
+        start_runbook = client.run_runbook(getattr(fn_inputs, "runbook_name", None), runbook_parameters=input_parameters)
         job_name = start_runbook.get("name")
         # Wait a given amount of time and then get the status of the Azure run job started above. When the status equals Completed return that status
         _ = client.get_job_final_status(job_name, time_to_wait)

@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Retrieve the activity in the module identified by module name and activity name.
+        Function: Retrieve the activity in the module identified by module name and activity name or Retrieve a list of activities in the module identified by module name.
         Inputs:
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
@@ -29,16 +29,16 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate inputs
-        validate_fields(["account_name", "resource_group_name", "module_name", "activity_name"], fn_inputs)
+        validate_fields(["account_name", "resource_group_name", "module_name"], fn_inputs)
 
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
-        # Make call to Azure to get automation module activity
-        results = client.get_module_activity(
-            getattr(fn_inputs, "module_name"),
-            getattr(fn_inputs, "activity_name")
-        )
+        # If activity name given then get the given activity
+        if getattr(fn_inputs, "activity_name", None):
+            results = client.get_module_activity(getattr(fn_inputs, "module_name", None), getattr(fn_inputs, "activity_name", None))
+        else: # If activity name not given then get all activities in the given module
+            results = client.list_module_activities(getattr(fn_inputs, "module_name", None))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

@@ -35,10 +35,10 @@ class FunctionComponent(AppFunctionComponent):
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
         if getattr(fn_inputs, "job_output", False):
-            results = client.get_job_results(getattr(fn_inputs, "job_name"))
+            results = client.get_job_results(getattr(fn_inputs, "job_name", None))
         else:
             # Make call to Azure to get job
-            results = client.get_job(getattr(fn_inputs, "job_name"))
+            results = client.get_job(getattr(fn_inputs, "job_name", None))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
