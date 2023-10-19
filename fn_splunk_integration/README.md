@@ -20,7 +20,7 @@
 - [Data Table - Splunk Intel Results](#data-table---splunk-intel-results)
 - [Rules](#rules)
 - [How to configure to use a single Splunk Server](#how-to-configure-to-use-a-single-splunk-server)
-- [Creating playbooks when server/servers in app.config are labeled](#creating-workflows-when-server/servers-in-app.config-are-labeled)
+- [Creating playbooks when server/servers in app.config are labeled](#creating-playbooks-when-server/servers-in-app.config-are-labeled)
 - [Troubleshooting & Support](#troubleshooting--support)
 ---
 
@@ -724,7 +724,6 @@ input field `splunk_label` is defined the following way,
 ```python
 inputs.splunk_label = playbook.inputs.splunk_server
 ```
-The playbook field `splunk_server` is a select field that is filled with the labels of the splunk servers from the app.config when the integration is initialized.
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
