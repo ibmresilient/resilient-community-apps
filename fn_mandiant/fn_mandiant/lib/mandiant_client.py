@@ -14,10 +14,10 @@ ACCESS_TOKEN = "access_token"
 ERROR_RESPONSE = "error"
 CONTENT_TYPE = "application/json"
 
+X_APP_NAME = 'ibm-app'
 AUTH_KEY = "api_key"
 AUTH_SECRET = "api_secret"
 AUTHENTICATED = "authenticated"
-X_APP_NAME = 'ibm-app'
 
 TOKEN_URL = "https://api.intelligence.fireeye.com/token"
 HOST_URL  = "https://api.intelligence.mandiant.com"
