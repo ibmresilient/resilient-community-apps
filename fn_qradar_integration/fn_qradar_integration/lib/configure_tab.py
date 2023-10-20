@@ -26,7 +26,7 @@ class QRadarSIEMTab(Tab):
     ]
 
     SHOW_IF = [
-        Field("reaqta_id").conditions.has_value()
+        Field("qradar_id").conditions.has_value()
     ]
 
 # Continue if exception is thrown
