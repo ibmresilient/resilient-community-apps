@@ -7,7 +7,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_lib import ResultPayload
 from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
 from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
-#from fn_qradar_integration.lib.configure_tab import init_qradar_siem_tab
+from fn_qradar_integration.lib.configure_tab import init_qradar_siem_tab
 import fn_qradar_integration.util.function_utils as function_utils
 
 
@@ -18,7 +18,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        #init_qradar_siem_tab()
+        init_qradar_siem_tab()
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.servers_list = function_utils.get_servers_list(opts)

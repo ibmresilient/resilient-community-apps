@@ -4,14 +4,14 @@
 
 from resilient_lib.ui import Datatable, Tab, Field, create_tab
 from resilient_circuits.app import AppArgumentParser
-from fn_qradar_integration.lib.app_common import PACKAGE_NAME
+
 
 import logging
 
 LOG = logging.getLogger(__name__)
 
 TAB_NAME = "QRadar SIEM"
-
+PACKAGE_NAME =  "fn_qradar_integration"
 class QRadarSIEMTab(Tab):
     SECTION = PACKAGE_NAME
     NAME = TAB_NAME
