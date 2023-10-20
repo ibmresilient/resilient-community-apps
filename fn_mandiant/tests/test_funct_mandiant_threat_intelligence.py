@@ -74,6 +74,7 @@ class TestMandiantClient(unittest.TestCase):
         mc.authenticate()
         self.assertDictEqual(mc._client_common["headers"], {
             'Accept'  : "application/json",
+            'X-App-Name': 'ibm-app',
             'Authorization' : "bearer accesstoken123"})
         assert mc._client_common[AUTHENTICATED]
         assert mc._client_common["expires_in"] > int(time.time())
