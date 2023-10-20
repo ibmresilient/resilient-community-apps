@@ -60,8 +60,8 @@ payload = {
     "password": playbook.inputs.azure_automation_credential_password
   }
 }
-if getattr(playbook.inputs, "azure_automation_credential_description"):
-  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_credential_description")
+if getattr(playbook.inputs, "azure_automation_credential_description", None):
+  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_credential_description", None)
 inputs.input_parameters = str(payload)
 ```
 
@@ -88,7 +88,7 @@ Inputs -
   Resource Group: {playbook.inputs.azure_automation_resource_group}
   Credential Name: {playbook.inputs.azure_automation_credential_name}
   Credential Username: {playbook.inputs.azure_automation_credential_username}
-  Credential Description: {getattr(playbook.inputs, 'azure_automation_credential_description')}
+  Credential Description: {getattr(playbook.inputs, 'azure_automation_credential_description', None)}
 
 Results -
   Credential '{playbook.inputs.azure_automation_credential_name}' was created successfully.""")

@@ -53,7 +53,7 @@ inputs.input_parameters = playbook.inputs.azure_automation_runbook_input_paramet
 inputs.resource_group_name = playbook.inputs.azure_resource_group
 inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
 
-time_to_wait = getattr(playbook.inputs, "time_to_wait")
+time_to_wait = getattr(playbook.inputs, "time_to_wait", 30)
 # If no time_to_wait is given then default to 30 seconds
 inputs.time_to_wait = time_to_wait if time_to_wait else 30
 ```
@@ -75,7 +75,16 @@ inputs.time_to_wait = time_to_wait if time_to_wait else 30
 ```python
 results = playbook.functions.results.runbook_results
 if results.get("success"):
-  incident.addNote(str(results.get("content", {})))
+  incident.addNote(f"""Azure Automation: Runbook Execute - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_resource_group}
+  Runbook Name: {playbook.inputs.azure_automation_runbook_name}
+  Time to Wait: {getattr(playbook.inputs, 'time_to_wait', 30)}
+  Input Parameters: {playbook.inputs.azure_automation_runbook_input_parameters}
+
+Results -  
+  {str(results.get('content', {}))}""")
 ```
 
 ---

@@ -70,7 +70,14 @@ from json import dumps
 results = playbook.functions.results.runbook_results
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content"), indent=4))
+  incident.addNote(f"""Azure Automation: Runbook Get - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_resource_group}
+  Runbook Name: {playbook.inputs.azure_automation_runbook_name}
+
+Results -
+  {dumps(results.get('content'), indent=4)}""")
 ```
 
 ---

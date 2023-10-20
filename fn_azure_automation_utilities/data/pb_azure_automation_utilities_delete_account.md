@@ -74,8 +74,8 @@ if results.get("success"):
   if result:
     incident.addNote(f"""Azure Automation: Account Delete - Example (PB)
 Inputs -
-  name: {playbook.inputs.azure_automation_account_name}
-  resource group: {playbook.inputs.azure_automation_account_resource_group}
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_account_resource_group}
 
 Results -
   {result}""")

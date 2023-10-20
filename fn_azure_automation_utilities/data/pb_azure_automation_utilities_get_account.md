@@ -70,8 +70,9 @@ results = playbook.functions.results.account_info
 if results.get("success"):
   incident.addNote(f"""Azure Automation: Account Get - Example (PB)
 Inputs -
-  name: {playbook.inputs.azure_automation_account_name}
-  resource group: {playbook.inputs.azure_automation_resource_group_name}
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group_name}
+
 Results -
   {dumps(results.get('content', {}), indent=4)}""")
 ```

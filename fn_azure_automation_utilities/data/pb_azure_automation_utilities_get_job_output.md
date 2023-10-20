@@ -76,7 +76,7 @@ Inputs -
   Resource Group: {playbook.inputs.azure_automation_resource_group_name}
   Job Name: {playbook.inputs.azure_automation_job_name}
   Job Output: True
-  
+
 Results -
   {str(results.get('content', ''))}""")
 ```

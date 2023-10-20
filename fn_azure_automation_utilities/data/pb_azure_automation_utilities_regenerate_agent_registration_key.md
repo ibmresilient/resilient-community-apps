@@ -48,9 +48,7 @@ Regenerate a primary or secondary agent registration key
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-
-payload = {"keyName": playbook.inputs.azure_automation_agent_key_to_regenerate}
-inputs.input_parameters = str(payload)
+inputs.input_parameters = str({"keyName": playbook.inputs.azure_automation_agent_key_to_regenerate})
 ```
 
 ---
@@ -75,7 +73,7 @@ if results.get("success"):
   incident.addNote(f"""Azure Automation: Agent Registration Regenerate Key - Example (PB)
 Inputs -
   Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group Name: {playbook.inputs.azure_automation_resource_group}
+  Resource Group: {playbook.inputs.azure_automation_resource_group}
   Key to Regenerate: {playbook.inputs.azure_automation_agent_key_to_regenerate}
 
 Results -

@@ -67,7 +67,13 @@ inputs.resource_group_name = playbook.inputs.azure_resource_group
 from json import dumps
 results = playbook.functions.results.runbooks_result
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Runbooks List by Automation Account - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_resource_group}
+
+Results -
+  {dumps(results.get('content', {}), indent=4)}""")
 ```
 
 ---

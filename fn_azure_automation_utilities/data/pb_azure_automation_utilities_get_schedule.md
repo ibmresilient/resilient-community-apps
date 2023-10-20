@@ -23,7 +23,7 @@
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
-| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automatio schedule | Always |
+| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
 
 ### Object Type
 `incident`
@@ -70,7 +70,14 @@ from json import dumps
 results = playbook.functions.results.get_schedule
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Schedule Get - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group}
+  Schedule Name: {playbook.inputs.azure_automation_schedule_name}
+
+Results -
+  {dumps(results.get("content", {}), indent=4)}""")
 ```
 
 ---

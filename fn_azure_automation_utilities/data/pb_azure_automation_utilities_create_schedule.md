@@ -24,7 +24,7 @@
 | Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
 | Schedule description | `azure_automation_schedule_description` | text | Description of the schedule | Optional |
-| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automatio schedule | Always |
+| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
 | Schedule Start Time | `azure_automation_schedule_start_time` | datetimepicker | The start time of the schedule | Always |
 
 ### Object Type
@@ -59,8 +59,8 @@ payload = {
     "frequency": "OneTime"
   }
 }
-if getattr(playbook.inputs, "azure_automation_schedule_description"):
-  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description")
+if getattr(playbook.inputs, "azure_automation_schedule_description", None):
+  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description", None)
 inputs.input_parameters = str(payload)
 ```
 
@@ -81,7 +81,16 @@ inputs.input_parameters = str(payload)
 ```python
 results = playbook.functions.results.schedule
 if results.get("success"):
-  incident.addNote(f"Schedule '{playbook.inputs.azure_automation_schedule_name}' was created successfully.")
+  incident.addNote(f"""Azure Automation: Schedule Create - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group}
+  Schedule Name: {playbook.inputs.azure_automation_schedule_name}
+  Start Time: {playbook.inputs.azure_automation_schedule_start_time}
+  Description: {getattr(playbook.inputs, 'azure_automation_schedule_description', None)}
+
+Results -
+  Schedule '{playbook.inputs.azure_automation_schedule_name}' was created successfully.""")
 ```
 
 ---

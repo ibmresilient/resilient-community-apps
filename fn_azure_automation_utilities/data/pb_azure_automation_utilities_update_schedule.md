@@ -25,7 +25,7 @@
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
 | Schedule description | `azure_automation_schedule_description` | text | Description of the schedule | Optional |
 | Schedule Enabled | `azure_automation_schedule_enabled` | boolean | a value indicating whether this schedule is enabled. | Optional |
-| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automatio schedule | Always |
+| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
 
 ### Object Type
 `incident`
@@ -59,10 +59,10 @@ payload = {
   "properties": {
   }
 }
-if getattr(playbook.inputs, "azure_automation_schedule_description"):
-  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description")
-if getattr(playbook.inputs, "azure_automation_schedule_enabled") != None:
-  payload["properties"]["isEnabled"] = getattr(playbook.inputs, "azure_automation_schedule_enabled")
+if getattr(playbook.inputs, "azure_automation_schedule_description", None):
+  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description", None)
+if getattr(playbook.inputs, "azure_automation_schedule_enabled", None) != None:
+  payload["properties"]["isEnabled"] = getattr(playbook.inputs, "azure_automation_schedule_enabled", None)
 inputs.input_parameters = str(payload)
 ```
 
@@ -83,7 +83,17 @@ inputs.input_parameters = str(payload)
 ```python
 results = playbook.functions.results.update_schedule
 if results.get("success"):
-  incident.addNote(f"Schedule '{playbook.inputs.azure_automation_schedule_name}' was updated successfully.")
+  incident.addNote(f"""Azure Automation: Schedule Update - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group}
+  Schedule Name: {playbook.inputs.azure_automation_schedule_name}
+  Schedule Update: True
+  Schedule Description: {getattr(playbook.inputs, 'azure_automation_schedule_description', None)}
+  Schedule Enabled: {getattr(playbook.inputs, 'azure_automation_schedule_enabled', None)}
+
+Results -
+  Schedule '{playbook.inputs.azure_automation_schedule_name}' was updated successfully.""")
 ```
 
 ---

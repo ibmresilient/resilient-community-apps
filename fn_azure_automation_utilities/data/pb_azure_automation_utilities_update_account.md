@@ -60,12 +60,12 @@ payload = {
     }
   }
 }
-if getattr(playbook.inputs, "azure_automation_account_tags"):
+if getattr(playbook.inputs, "azure_automation_account_tags", None):
   payload["tags"] = getattr(playbook.inputs, "azure_automation_account_tags", {})
-if hasattr(playbook.inputs, "azure_automation_account_public_network_access"):
-  payload["properties"]["publicNetworkAccess"] = getattr(playbook.inputs, "azure_automation_account_public_network_access")
-if hasattr(playbook.inputs, "azure_automation_account_disable_local_auth"):
-  payload["properties"]["disableLocalAuth"] = getattr(playbook.inputs, "azure_automation_account_disable_local_auth")
+if hasattr(playbook.inputs, "azure_automation_account_public_network_access", None):
+  payload["properties"]["publicNetworkAccess"] = getattr(playbook.inputs, "azure_automation_account_public_network_access", None)
+if hasattr(playbook.inputs, "azure_automation_account_disable_local_auth", None):
+  payload["properties"]["disableLocalAuth"] = getattr(playbook.inputs, "azure_automation_account_disable_local_auth", None)
 
 inputs.input_parameters = str(payload)
 ```
@@ -89,12 +89,13 @@ results = playbook.functions.results.update_account
 if results.get("success"):
   incident.addNote(f"""Azure Automation: Account Update - Example (PB)
 Inputs -
-  Name: {playbook.inputs.azure_automation_account_name}
+  Account Name: {playbook.inputs.azure_automation_account_name}
   Resource Group: {playbook.inputs.azure_automation_resource_group}
   Account Update: True
   Tags: {getattr(playbook.inputs, 'azure_automation_account_tags', {})}
-  Public Network Access: {getattr(playbook.inputs, 'azure_automation_account_public_network_access')}
-  Disable Local Auth: {getattr(playbook.inputs, 'azure_automation_account_disable_local_auth')}
+  Public Network Access: {getattr(playbook.inputs, 'azure_automation_account_public_network_access', None)}
+  Disable Local Auth: {getattr(playbook.inputs, 'azure_automation_account_disable_local_auth', None)}
+
 Results -
   Account '{playbook.inputs.azure_automation_account_name}' was updated successfully.""")
 ```

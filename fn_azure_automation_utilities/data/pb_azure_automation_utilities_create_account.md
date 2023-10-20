@@ -52,21 +52,21 @@ Create an Azure automation account
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
 
-public_network_access = getattr(playbook.inputs, "azure_automation_account_public_network_access")
-disbale_local_auth = getattr(playbook.inputs, "azure_automation_account_disable_local_auth")
+public_network_access = getattr(playbook.inputs, "azure_automation_account_public_network_access", True)
+disable_local_auth = getattr(playbook.inputs, "azure_automation_account_disable_local_auth", False)
 
 payload = {
   "name": playbook.inputs.azure_automation_account_name,
   "location": playbook.inputs.azure_automation_account_location,
   "properties": {
     "publicNetworkAccess": True if public_network_access == None else public_network_access,
-    "disableLocalAuth": False if disbale_local_auth == None else disbale_local_auth,
+    "disableLocalAuth": False if disable_local_auth == None else disable_local_auth,
     "sku":{
       "name": "Basic"
     }
   }
 }
-if getattr(playbook.inputs, "azure_automation_account_tags"):
+if getattr(playbook.inputs, "azure_automation_account_tags", None):
   payload["tags"] = getattr(playbook.inputs, "azure_automation_account_tags", {})
 inputs.input_parameters = str(payload)
 ```
@@ -87,22 +87,21 @@ inputs.input_parameters = str(payload)
 ### Script Content
 ```python
 results = playbook.functions.results.account_results
-public_network_access = getattr(playbook.inputs, "azure_automation_account_public_network_access")
-disbale_local_auth = getattr(playbook.inputs, "azure_automation_account_disable_local_auth")
+public_network_access = getattr(playbook.inputs, "azure_automation_account_public_network_access", True)
+disable_local_auth = getattr(playbook.inputs, "azure_automation_account_disable_local_auth", False)
 
 if results.get("success"):
   incident.addNote(f"""Azure Automation: Account Create - Example (PB)
-  Inputs -
-    name: {playbook.inputs.azure_automation_account_name}
-    location: {playbook.inputs.azure_automation_account_location}
-    tags: {getattr(playbook.inputs, 'azure_automation_account_tags', {})}
-    publicNetworkAccess: {True if public_network_access == None else public_network_access}
-    disableLocalAuth: {False if disbale_local_auth == None else disbale_local_auth}
-    automation account name: {playbook.inputs.azure_automation_account_name}
-    automation resource group name: {playbook.inputs.azure_automation_resource_group}
-  
-  Results - 
-    Account '{playbook.inputs.azure_automation_account_name}' was created successfully.""")
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group}
+  Location: {playbook.inputs.azure_automation_account_location}
+  Tags: {getattr(playbook.inputs, 'azure_automation_account_tags', {})}
+  PublicNetworkAccess: {True if public_network_access == None else public_network_access}
+  DisableLocalAuth: {False if disable_local_auth == None else disable_local_auth}
+
+Results - 
+  Account '{playbook.inputs.azure_automation_account_name}' was created successfully.""")
 ```
 
 ---

@@ -68,7 +68,14 @@ inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
 ```python
 results = playbook.functions.results.delete_runbook
 if results.get("success"):
-  incident.addNote(f"The runbook {results.get('inputs', {}).get('runbook_name')} was deleted.")
+  incident.addNote(f"""Azure Automation: Runbook Delete - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_resource_group}
+  Runbook Name: {playbook.inputs.azure_automation_runbook_name}
+
+Results -
+  The runbook {playbook.inputs.azure_automation_runbook_name} was deleted.""")
 ```
 
 ---

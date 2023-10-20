@@ -23,7 +23,7 @@
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
-| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automatio schedule | Always |
+| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
 
 ### Object Type
 `incident`
@@ -71,9 +71,18 @@ results = playbook.functions.results.delete_schedule
 if results.get("success"):
   status = results.get("content", {}).get("status")
   if status == 200:
-    incident.addNote(f"Schedule '{playbook.inputs.azure_automation_schedule_name}' was deleted.")
+    result = f"Schedule '{playbook.inputs.azure_automation_schedule_name}' was deleted."
   elif status == 204:
-    incident.addNote(f"Schedule '{playbook.inputs.azure_automation_schedule_name}' not found.")
+    result = f"Schedule '{playbook.inputs.azure_automation_schedule_name}' not found."
+
+  incident.addNote(f"""Azure Automation: Schedule Delete - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group}
+  Schedule Name: {playbook.inputs.azure_automation_schedule_name}
+
+Results -
+  {result}""")
 ```
 
 ---

@@ -60,12 +60,12 @@ payload = {
   "properties": {
   }
 }
-if getattr(playbook.inputs, "azure_automation_credential_username"):
-  payload["properties"]["userName"] = getattr(playbook.inputs, "azure_automation_credential_username")
-if getattr(playbook.inputs, "azure_automation_credential_password"):
-  payload["properties"]["password"] = getattr(playbook.inputs, "azure_automation_credential_password")
-if getattr(playbook.inputs, "azure_automation_credential_description"):
-  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_credential_description")
+if getattr(playbook.inputs, "azure_automation_credential_username", None):
+  payload["properties"]["userName"] = getattr(playbook.inputs, "azure_automation_credential_username", None)
+if getattr(playbook.inputs, "azure_automation_credential_password", None):
+  payload["properties"]["password"] = getattr(playbook.inputs, "azure_automation_credential_password", None)
+if getattr(playbook.inputs, "azure_automation_credential_description", None):
+  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_credential_description", None)
 
 inputs.input_parameters = str(payload)
 ```
@@ -93,8 +93,8 @@ Inputs -
   Resource Group: {playbook.inputs.azure_automation_resource_group}
   Credential Name: {playbook.inputs.azure_automation_credential_name}
   Credential Update: True
-  Credential Username: {getattr(playbook.inputs, 'azure_automation_credential_username')}
-  Credential Description: {getattr(playbook.inputs, 'azure_automation_credential_description')}
+  Credential Username: {getattr(playbook.inputs, 'azure_automation_credential_username', None)}
+  Credential Description: {getattr(playbook.inputs, 'azure_automation_credential_description', None)}
 
 Results -
   Credential '{playbook.inputs.azure_automation_credential_name}' was updated successfully.""")

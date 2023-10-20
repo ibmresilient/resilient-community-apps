@@ -79,10 +79,10 @@ Inputs -
   Account Name: {playbook.inputs.azure_automation_account_name}
   Resource Group: {playbook.inputs.azure_automation_resource_group_name}
   Module Name: {playbook.inputs.azure_automation_module_name}
-  Activity Name: {getattr(playbook.inputs, 'azure_automation_activity_name')}
-  
+  Activity Name: {getattr(playbook.inputs, 'azure_automation_activity_name', None)}
+
 Results -
-  {dumps(results.get("content", {}), indent=4)}""")
+  {dumps(results.get('content', {}), indent=4)}""")
 ```
 
 ---
