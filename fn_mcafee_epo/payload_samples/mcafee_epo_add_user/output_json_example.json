@@ -1,0 +1,26 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": true,
+  "raw": null,
+  "inputs": {
+    "mcafee_epo_pass": "password",
+    "mcafee_epo_allowed_ips": null,
+    "mcafee_epo_phone_number": "534-452-0287",
+    "mcafee_epo_email": "jeff@example.com",
+    "mcafee_epo_username": "jeff",
+    "mcafee_epo_notes": "jefferson notes",
+    "mcafee_epo_user_disabled": false,
+    "mcafee_epo_fullname": "jeff",
+    "mcafee_epo_admin": true
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 604,
+    "timestamp": "2022-08-10 12:55:56"
+  }
+}

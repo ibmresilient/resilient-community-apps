@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "id",
+    "name": "Test Blacklist 13 of testing purpose",
+    "hashType": "MD5",
+    "source": "WEBSERVICE",
+    "description": "This is test of adding files in blacklist.",
+    "data": [
+      "data"
+    ],
+    "groupIds": []
+  },
+  "raw": "{\"id\": \"id\", \"name\": \"Test Blacklist 13 of testing purpose\", \"hashType\": \"MD5\", \"source\": \"WEBSERVICE\", \"description\": \"This is test of adding files in blacklist.\", \"data\": [\"data\"], \"groupIds\": []}",
+  "inputs": {
+    "sep_domainid": "sep_domainid",
+    "sep_fingerprintlist_name": "Test blacklist updated",
+    "sep_fingerprintlist_id": "sep_fingerprintlist_id"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.0.1",
+    "host": "host",
+    "execution_time_ms": 2092,
+    "timestamp": "2023-01-06 06:41:50"
+  }
+}
