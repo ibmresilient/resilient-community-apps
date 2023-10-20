@@ -90,7 +90,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 48.2.16
 
     Contents:
     - Message Destinations:
@@ -99,8 +99,6 @@ def customization_data(client=None):
         - sentinelone_abort_disk_scan
         - sentinelone_connect_to_network
         - sentinelone_disconnect_from_network
-        - sentinelone_fetch_agent_file_artifact
-        - sentinelone_fetch_agent_file_attachment
         - sentinelone_get_agent_details
         - sentinelone_get_hash_reputation
         - sentinelone_get_threat_details
