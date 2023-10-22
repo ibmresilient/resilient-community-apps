@@ -43,6 +43,7 @@ def mock_search_artifact(method, url, headers):
     assert headers
     assert "Authorization" in headers
     assert "bearer" in headers["Authorization"]
+    assert "X-App-Name" in headers
     ret = MagicMock()
     ret.json.return_value = {"success" : True}
     return ret
@@ -89,6 +90,11 @@ class TestMandiantClient(unittest.TestCase):
 
         mc = MandiantClient(rc, options)
         mc.authenticate()
+        assert "Authorization" in mc._client_common["headers"]
+        assert "X-App-Name" in mc._client_common["headers"]
+        assert "ibm-app" == mc._client_common["headers"]["X-App-Name"]
+
+
 
         rc.execute = mock_search_artifact
         assert mc.search_artifact("ip address", "data")["success"]
