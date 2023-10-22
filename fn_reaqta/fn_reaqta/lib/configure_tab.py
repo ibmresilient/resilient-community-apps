@@ -32,9 +32,9 @@ class ReaQtaTab(Tab):
         Datatable("reaqta_process_list")
     ]
 
-    #SHOW_IF = [
-    #    Field("reaqta_id").conditions.has_value()
-    #]
+    SHOW_IF = [
+        Field("reaqta_id").conditions.has_value()
+    ]
 
 # Continue if exception is thrown
 def init_reaqta_tab():

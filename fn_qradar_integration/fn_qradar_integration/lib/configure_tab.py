@@ -26,9 +26,9 @@ class QRadarSIEMTab(Tab):
         Datatable("qradar_reference_table")
     ]
 
-    SHOW_IF = [
-        Field("qradar_id").conditions.has_value()
-    ]
+    #SHOW_IF = [
+    #    Field("qradar_id").conditions.has_value()
+    #]
 
 # Continue if exception is thrown
 def init_qradar_siem_tab():
