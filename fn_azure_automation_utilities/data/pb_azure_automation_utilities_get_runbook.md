@@ -23,7 +23,7 @@
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Azure resource group | `azure_resource_group` | text | The Azure resource group the account is in | Always |
-| Runbook Name | `azure_automation_runbook_name` | text | The name of the Azure Automation runbook to get | Always |
+| Runbook Name | `azure_automation_runbook_name` | text | The name of the Azure Automation runbook to get. If given then get that runbook. If not given then list all runbooks on given account | Optional |
 
 ### Object Type
 `incident`
@@ -48,7 +48,8 @@ Retrieve the runbook identified by runbook name.
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_resource_group
-inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
+if getattr(playbook.inputs, 'azure_automation_runbook_name', None):
+  inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
 ```
 
 ---
@@ -74,7 +75,7 @@ if results.get("success"):
 Inputs -
   Account Name: {playbook.inputs.azure_automation_account_name}
   Resource Group: {playbook.inputs.azure_resource_group}
-  Runbook Name: {playbook.inputs.azure_automation_runbook_name}
+  Runbook Name: {getattr(playbook.inputs, 'azure_automation_runbook_name', None)}
 
 Results -
   {dumps(results.get('content'), indent=4)}""")

@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Retrieve the runbook identified by runbook name.
+        Function: Retrieve the runbook identified by runbook name or list runbooks on given account.
         Inputs:
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
@@ -28,13 +28,16 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate inputs
-        validate_fields(["account_name", "resource_group_name", "runbook_name"], fn_inputs)
+        validate_fields(["account_name", "resource_group_name"], fn_inputs)
 
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
-        # Get the given Azure runbook
-        results = client.get_runbook(getattr(fn_inputs, "runbook_name", None))
+        # If runbook_name given then get that runbook
+        if getattr(fn_inputs, "runbook_name", None):
+            results = client.get_runbook(getattr(fn_inputs, "runbook_name", None))
+        else: # If runbook_name not given then list all runbooks on given account
+            results = client.list_runbooks_by_automation_account()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
