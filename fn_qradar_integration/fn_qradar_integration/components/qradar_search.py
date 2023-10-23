@@ -7,7 +7,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_lib import validate_fields
 from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
 from fn_qradar_integration.util import function_utils
-from fn_qradar_integration.lib.configure_tab import init_qradar_siem_tab
+
 LOG = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
