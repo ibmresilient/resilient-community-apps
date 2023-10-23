@@ -12,6 +12,7 @@ fn_aws_iam
 fn_aws_utilities
 fn_azure_automation_utilities
 fn_bigfix
+fn_bmc_helix
 fn_calendar_invite
 fn_cisco_amp4ep
 fn_cisco_asa
@@ -49,6 +50,7 @@ fn_joe_sandbox_analysis
 fn_kafka
 fn_ldap_utilities
 fn_maas360
+fn_mandiant
 fn_mcafee_atd
 fn_mcafee_epo
 fn_mcafee_esm

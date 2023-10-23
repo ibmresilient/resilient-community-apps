@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 import re
 from resilient_lib import validate_fields
 
-REQUIRED_FIREWALL_FIELDS = ["host", "network_object_groups"]
+REQUIRED_FIREWALL_FIELDS = ["host"]
 
 PACKAGE_NAME = "fn_cisco_asa"
 

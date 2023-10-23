@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Create Policy from Artifact (PB)
+# Playbook - QRadar EDR: Create Policy from Artifact (PB)
 
 ### API Name
 `reaqta_create_policy_from_artifact`
@@ -36,7 +36,7 @@ Create a blocking policy from a SHA256 hash
 
 
 ---
-## Function - ReaQta: Create Policy
+## Function - QRadar EDR: Create Policy
 
 ### API Name
 `reaqta_create_policy`
@@ -61,7 +61,7 @@ inputs.reaqta_hives = playbook.inputs.reaqta_hive_labels if playbook.inputs.reaq
 
 ---
 
-## Local script - reaqta_create_policy_from_artifact_post_process
+## Local script - qradar_edr_create_policy_from_artifact_post_process
 
 ### Description
 

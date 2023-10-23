@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
 # Generated with resilient-sdk v50.0.108
 
 """Generate the Resilient customizations required for fn_reaqta"""

@@ -1,10 +1,11 @@
-# docker build -t ibmresilient/fn_cisco_asa:1.1.0 -t ibmresilient/fn_cisco_asa:latest .
+# Generated with resilient-sdk v50.0.151
+# docker build -t ibmresilient/fn_cisco_asa:1.2.0 -t ibmresilient/fn_cisco_asa:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_cisco_asa
-ARG RESILIENT_CIRCUITS_VERSION=45.0.0
+ARG RESILIENT_CIRCUITS_VERSION=50.0.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
@@ -31,6 +32,10 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>
+
+# uncomment and replicate if additional pypi packages in requirements file are needed
+#COPY /path/to/<requirements.txt> /tmp/packages/.
+#RUN pip install -r /tmp/packages/<requirements.txt>
 
 # uncomment and replicate if additional local packages are needed
 #COPY /path/to/extra_package /tmp/packages/.

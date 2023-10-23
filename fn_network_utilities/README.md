@@ -50,6 +50,14 @@
 | 1.0.0 | 02/2023 | Initial Release |
 | 1.0.1 | 3/2023 | Add a timeout option for Linux shell command |
 | 1.0.2 | 9/2023 | Added missing OS packages: dig, whois, traceroute |
+| 1.1.0 | 9/2023 | Allow ad_hoc shell execution. Added close connection for Remote Shell when complete. String encoded JSON shell parameters allowed. Added support for running linux scripts in sudo. Support for escaping commas within parameters. Converted rules/workflows to playbooks  |
+
+Note: Upgrading from version 1.0.x to 1.1.0 will introduce playbooks to replace equivalent rules/workflows. Previously installed rules and workflows will remain after the upgrade and use can be deleted at your convenience. The naming of playbooks are as follows:
+
+| Rule Name | Playbook Name |
+| --------- | ------------- |
+| Example: Network Utilities Extract URL | Network Utilities Extract URL (PB) Example |
+
 ---
 
 ## Overview
@@ -86,13 +94,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `46.0.8131`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `46.0.8131`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=47.0.0`.
+* Integration server is running `resilient-circuits>=48.0.0` is recommended.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -108,7 +116,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.9`.
+* IBM Cloud Pak for Security >= `1.10`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -124,13 +132,12 @@ The app does support a proxy server.
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* chardet==4.0.0
-* cryptography~=39.0
-* paramiko~=2.10
-* pyOpenSSL~=23.0
-* pywinrm~=0.4
-* resilient-circuits>=47.0.0
-
+* chardet
+* cryptography
+* paramiko
+* pyOpenSSL
+* pywinrm
+* resilient-circuits
 
 ---
 
@@ -143,21 +150,24 @@ Additional package dependencies may exist for each of these packages:
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 
+Settings such as `remote_command_linux`, `remote_command_powershell` and `remote_computer` can be named anything and more than one will likely be used. The names will then be used in your functions: Network Utilities Linux Shell and Network Utilities Windows Shell functions.
+
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **dig** | Yes | `dig "{{shell_param1}}"` | -- |
 | **nslookup** | Yes | `nslookup "{{shell_param1}}"` | -- |
 | **remote_auth_transport** | Yes | `ntlm` | remote auth transport one of [ntlm, basic] |
-| **remote_command_linux** | Yes | `bash command or path to bash script` | -- |
-| **remote_command_powershell** | Yes | `powershell command or path to powershell script` | -- |
-| **remote_computer** | Yes | `username:password@server` | -- |
+| **remote_command_linux** | Yes | `bash command or path to bash script` | This is a place holder parameter as any number of shell scripts can be specified and then used with the Linux Remote Shell function. |
+| **remote_command_powershell** | Yes | `powershell.exe -file c:\path\to\myscript.ps1 {{shell_param1}}` | `powershell command or path to powershell script`. This is a place holder parameter as any number of scripts can be specified and then used with the Windows Remote Shell function. |
+| **remote_computer** | Yes | `username:password@server` | This is a place holder parameter as any number of remote computers can be specified and then used. |
 | **remote_powershell_extensions** | Yes | `ps1, psm1, etc` | accepted remote powershell extensions in a comma separated list |
+| **allow_ad_hoc_execution** | No | True/False | New to 1.1. Allow any shell cmd to run avoiding **remote_command_linux** and **remote_command_powershell** | 
 | **shell_escaping** | Yes | `sh` | -- |
 | **traceroute** | Yes | `traceroute -m 15 "{{shell_param1}}"` | -- |
 | **whois** | Yes | `whois "{{shell_param1}}"` | -- |
 | **timeout_linux** | no | `20` | time in seconds to timeout, default is 20 seconds |
 
-Important to Note: Linux Shell Command, Windows Shell Command, and Local Shell Command come from Utility Functions for SOAR's Shell Command function. In that version, `remote_computer` was required to be wrapped in parantheses (). This is no longer the case, but is still accepted for backwards compatibility. Additionally, `remote_command_linux` and `remote_command_powershell` were required to be wrapped in parantheses () and brackets [], respectively. Again, this is no longer the case, but is still accepted for backwards compatibility.
+Important to Note: Linux Shell Command, Windows Shell Command, and Local Shell Command come from Utility Functions for SOAR's Shell Command function. In that version, `remote_computer` was required to be wrapped in parentheses (). This is no longer the case, but is still accepted for backwards compatibility. Additionally, `remote_command_linux` and `remote_command_powershell` were required to be wrapped in parentheses () and brackets [], respectively. Again, this is no longer the case, but is still accepted for backwards compatibility.
 
 
 ---
@@ -229,7 +239,7 @@ inputs.network_utilities_domain_list = "ibm.com, resilientsystems.com, ibmcloud.
 ```python
 # The result includes:
 #   "domain_name" - the name being tested
-#   "distances" - a dicctionary of all the distances
+#   "distances" - a dictionary of all the distances
 #   "closest" - the closest match from the list.
 # If the match distance is only 1 or 0, the domain name is very easily confused with one on the list!
 
@@ -244,9 +254,11 @@ if results.closest.get("distance") <= 1:
 
 ---
 ## Function - Network Utilities: Expand URL
-Takes a URL (mostly shortened) and follows it through redirects as it expands. The results include each URL, which are added to a new artifact.
+Takes a URL (mostly shortened) and follows it through redirects as it expands. The results include each URL, which are added as a new artifact and as artifact hits on the original artifact.
 
  ![screenshot: fn-network-utilities-expand-url ](./doc/screenshots/fn-network-utilities-expand-url.png)
+
+![screenshot: fn-network-utilities-expand-url ](./doc/screenshots/expand_url_hits.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -365,22 +377,28 @@ This function allows your workflows/playbooks to execute shell-scripts remotely 
 
  ![screenshot: fn-network-utilities-linux-shell-command ](./doc/screenshots/fn-network-utilities-linux-shell-command.png)
 
-For security, the list of available shell commands must be configured explicitly by the administrator. To do this, edit the [fn_utilities] section of the app.config file.
+ ![screenshot: network_utilities_linux_shell_command_arguments](./doc/screenshots/network_utilities_linux_shell_command_arguments.png)
+
+In 1.1.0, a new app.config setting, allow_ad_hoc_execution, allows ad-hoc commands to be specified in the `network_utilities_shell_command` function argument.
+If `allow_ad_hoc_execution` is false or unspecified, a list of available shell commands must be configured explicitly by the administrator. To do this, edit the [fn_network_utilities] section of the app.config file.
 NOTE: The parameter values {{shell_param1}}, {{shell_param2}}, {{shell_param3}} may contain spaces, dashes and other characters. In your command configuration, they must be surrounded with double-quotes. Failure to properly quote your command parameters creates a security risk, since the parameter values usually come from artifacts and other untrusted data. Additionally, timeouts do not yield any exceptions to notify when it has occurred.
 
 ### app.config examples:
 * Linux Operating Systems basic examples:
   ```
   # Remote Linux and Windows servers:
-  remote_computer=(usr1:password@192.168.1.186)
-  remote_computer_windows=(usr2:password@192.168.1.184)
+  remote_computer=usr1:password@192.168.1.186
+  remote_computer_windows=usr2:password@192.168.1.184
   
   # Remote Windows commands:
-  traceroute_windows_ps=[\Users\ms\traceroute.ps1]
-  traceroute_windows_cmd=[tracert.exe -h 10 {{shell_param1}}]
+  traceroute_windows_ps=\Users\ms\traceroute.ps1
+  traceroute_windows_cmd=tracert.exe -h 10 {{shell_param1}}
   
   # Remote Linux command:
-  tracepath=(tracepath -m 10 '{{shell_param1}}')
+  tracepath=tracepath -m 10 '{{shell_param1}}'
+
+  # sudo-base shell 
+  sudo_shell=sudo -S /path/to/shell.sh
   
   # Local Linux server commands:
   nslookup=nslookup "{{shell_param1}}"
@@ -404,9 +422,9 @@ The second parameter is the Volatility profile ("Win7SP0x64" etc).
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `network_utilities_remote_computer` | `text` | No | `username:password@server` | Remote computer in place of the value used in the app.config |
-| `network_utilities_shell_command` | `text` | Yes | `remote_command:remote_computer` | Use remote_shell_command:remote_computer syntax if network_utilities_remote_computer is left blank. |
-| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list |
-
+| `network_utilities_shell_command` | `text` | Yes | `remote_command:remote_computer` | Use remote_shell_command:remote_computer syntax if network_utilities_remote_computer is left blank. If `allow_ad_hoc_execution=true`, ad hoc commands can be specified. |
+| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list. If a parameter has embedded commas, specify as '\,'. Ex. '-p 80\,443\,8080' |
+| `network_utilities_send_sudo_password` | `boolean` | No | Yes|No | New to version 1.1.0. Allows scripts to be run as sudo by sending the remote computer user's password. Specify the script using the sudo -S argument to read the sudo password from stdin. Ex. `sudo -S shell.sh` |
 </p>
 </details>
 
@@ -496,7 +514,7 @@ incident.addNote(helper.createPlainText(note_text))
 ## Function - Network Utilities: Local Shell Command
 This function allows your workflows/playbooks to execute shell-scripts locally and return the result into the workflow/playbook. The results include the `stdout` and `stderr` streams, the return code, and information about the execution time. If the output of the shell script is JSON, it is returned as structured data. Results can then be added to the incident as file attachments, artifacts, data tables, or any other uses.
 
-This is not reccomended for use in App Host because the base image of the container (registry.access.redhat.com/ubi8/python-39) has limited OS commands available.
+This is not recommended for use in App Host because the base image of the container (registry.access.redhat.com/ubi8/python-39) has limited OS commands available.
 
 Different modes supported:
 * Local command execution of Linux commands such as nslookup, dig, traceroute and whois
@@ -515,7 +533,7 @@ For local and remote Windows environments:
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `network_utilities_shell_command` | `text` | Yes | `remote_command:remote_computer` | Use remote_shell_command:remote_computer syntax if network_utilities_remote_computer is left blank. |
-| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list |
+| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list. If a parameter has embedded commas, specify as '\,'. Ex. '-p 80\,443\,8080' |
 
 </p>
 </details>
@@ -647,7 +665,7 @@ remote_computer2=(domain\admin:P@ssw0rd@server2)
 | ---- | :--: | :------: | ------- | ------- |
 | `network_utilities_remote_computer` | `text` | No | `username:password@server` | Remote computer in place of the value used in the app.config |
 | `network_utilities_shell_command` | `text` | Yes | `remote_command:remote_computer` | Use remote_shell_command:remote_computer syntax if network_utilities_remote_computer is left blank. |
-| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list |
+| `network_utilities_shell_params` | `text` | No | `0.0.0.0,sample_profile,param3` | Comma separated list. If a parameter has embedded commas, specify as '\,'. Ex. '-p 80\,443\,8080' |
 
 </p>
 </details>
@@ -733,19 +751,15 @@ incident.addNote(helper.createPlainText(note_text))
 
 ---
 
-
-
-
-
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| Example: Network Utilities Domain Distance | artifact | `example_network_utilities_domain_distance` |
-| Example: Network Utilities Expand URL | artifact | `example_network_utilities_expand_url` |
-| Example: Network Utilities Extract SSL Certificate from URL | artifact | `example_network_utilities_extract_ssl_cert_from_url` |
-| Example: Network Utilities Linux Shell Command | artifact | `example_network_utilities_linux_shell_command` |
-| Example: Network Utilities Local Shell Command | artifact | `example_network_utilities_local_command` |
-| Example: Network Utilities Windows Shell Command | artifact | `example_network_utilities_windows_shell_command` |
+## Playbooks
+| Playbook Name | Object | 
+| --------- | ------ |
+| Network Utilities Domain Distance (PB) Example | artifact |
+| Network Utilities Expand URL (PB) Example | artifact |
+| Network Utilities Extract SSL Certificate from URL (PB) Example| artifact |
+| Network Utilities Linux Shell Command (PB) Example| artifact |
+| Network Utilities Local Shell Command (PB) Example| artifact |
+| Network Utilities Windows Shell Command (PB) Example| artifact |
 
 ---
 

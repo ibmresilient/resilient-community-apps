@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Get Processes (PB)
+# Playbook - QRadar EDR: Get Processes (PB)
 
 ### API Name
 `reaqta_get_processes`
@@ -32,7 +32,7 @@ Get the running processes on a given machine
 
 
 ---
-## Function - ReaQta: Get Processes
+## Function - QRadar EDR: Get Processes
 
 ### API Name
 `reaqta_get_processes`
@@ -53,7 +53,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_get_processes_post_process
+## Local script - qradar_edr_get_processes_post_process
 
 ### Description
 

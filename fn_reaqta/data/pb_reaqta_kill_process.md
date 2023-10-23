@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Kill Process (PB)
+# Playbook - QRadar EDR: Kill Process (PB)
 
 ### API Name
 `reaqta_kill_process`
@@ -26,7 +26,7 @@ Get the running processes on a given machine
 
 
 ---
-## Function - ReaQta: Kill Process
+## Function - QRadar EDR: Kill Process
 
 ### API Name
 `reaqta_kill_process`
@@ -47,7 +47,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_kill_process_post_process
+## Local script - qradar_edr_kill_process_post_process
 
 ### Description
 

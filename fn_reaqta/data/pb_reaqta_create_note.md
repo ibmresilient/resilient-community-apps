@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Create Note (PB)
+# Playbook - QRadar EDR: Create Note (PB)
 
 ### API Name
 `reaqta_create_note`
@@ -26,7 +26,7 @@ Add a note from SOAR to ReaQta
 
 
 ---
-## Function - ReaQta: Create Note
+## Function - QRadar EDR: Create Note
 
 ### API Name
 `reaqta_create_note`
@@ -46,7 +46,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - reaqta_create_note_post_process
+## Local script - qradar_edr_create_note_post_process
 
 ### Description
 

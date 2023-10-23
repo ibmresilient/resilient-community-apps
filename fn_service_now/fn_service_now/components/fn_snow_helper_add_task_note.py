@@ -45,7 +45,7 @@ class FunctionComponent(ResilientComponent):
 
         try:
 
-            # Instansiate helper (which gets appconfigs from file)
+            # Instantiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
             validate_fields(["sn_res_id", "sn_note_text"], kwargs)
@@ -63,7 +63,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Function Inputs OK")
 
-            # Instansiate new Resilient API object
+            # Instantiate new Resilient API object
             res_client = self.rest_client()
 
             # Parse incident_id and task_id from sn_res_id

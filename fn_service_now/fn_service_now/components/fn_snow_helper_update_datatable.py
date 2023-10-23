@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
         log = getLogger(__name__)
 
         try:
-            # Instansiate helper (which gets appconfigs from file)
+            # Instantiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
             rp = ResultPayload(CONFIG_DATA_SECTION)
             validate_fields(["incident_id", "sn_resilient_status"], kwargs)
@@ -71,10 +71,10 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Function Inputs OK")
 
-            # Instansiate new Resilient API object
+            # Instantiate new Resilient API object
             res_client = self.rest_client()
 
-            # Instansiate a reference to the ServiceNow Datatable
+            # Instantiate a reference to the ServiceNow Datatable
             res_datatable = ServiceNowRecordsDataTable(
                 res_client, payload.inputs["incident_id"])
 

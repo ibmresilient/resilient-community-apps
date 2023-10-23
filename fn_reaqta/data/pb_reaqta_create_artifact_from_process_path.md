@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.108
 -->
 
-# Playbook - ReaQta: Create Artifact from Process Path (PB)
+# Playbook - QRadar EDR: Create Artifact from Process Path (PB)
 
 ### API Name
 `reaqta_create_artifact_from_process_path`
@@ -26,7 +26,7 @@ Create an artifact from a ReaQta Endpoint process file.
 
 
 ---
-## Function - ReaQta: Create Artifact
+## Function - QRadar EDR: Create Artifact
 
 ### API Name
 `reaqta_create_artifact`
@@ -48,7 +48,7 @@ inputs.reaqta_hive = incident.properties.reaqta_hive
 
 ---
 
-## Local script - ReaQta: write create artifact results to note
+## Local script - QRadar EDR: write create artifact results to note
 
 ### Description
 Write a note to SOAR if there is an error creating artifacts.
