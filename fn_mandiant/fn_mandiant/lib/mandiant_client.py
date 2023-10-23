@@ -14,6 +14,7 @@ ACCESS_TOKEN = "access_token"
 ERROR_RESPONSE = "error"
 CONTENT_TYPE = "application/json"
 
+X_APP_NAME = 'ibm-app'
 AUTH_KEY = "api_key"
 AUTH_SECRET = "api_secret"
 AUTHENTICATED = "authenticated"
@@ -106,6 +107,7 @@ class MandiantClient:
             LOG.info("ACCESS_TOKEN received. Compiling request headers.")
             self._client_common["headers"] = {
                 'Accept'        : CONTENT_TYPE,
+                'X-App-Name'    : X_APP_NAME,
                 'Authorization' : f"{res.get(TOKEN_TYPE)} {res.get(ACCESS_TOKEN)}"}
             self._client_common['expires_in']  = _cur_time + res.get('expires_in')
             self._client_common[AUTHENTICATED] = True
