@@ -23,7 +23,7 @@
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
-| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
+| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule. If given will return information on that schedule. If not given will return a list of schedules. | Optional |
 
 ### Object Type
 `incident`
@@ -48,7 +48,8 @@ Retrieve the schedule identified by schedule name.
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
+if getattr(playbook.inputs, "azure_automation_schedule_name", None):
+  inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
 ```
 
 ---
@@ -74,7 +75,7 @@ if results.get("success"):
 Inputs -
   Account Name: {playbook.inputs.azure_automation_account_name}
   Resource Group: {playbook.inputs.azure_automation_resource_group}
-  Schedule Name: {playbook.inputs.azure_automation_schedule_name}
+  Schedule Name: {getattr(playbook.inputs, 'azure_automation_schedule_name', None)}
 
 Results -
   {dumps(results.get("content", {}), indent=4)}""")

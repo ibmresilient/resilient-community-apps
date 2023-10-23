@@ -42,9 +42,7 @@ def codegen_reload_data():
             u"azure_get_node_report",
             u"azure_get_runbook",
             u"azure_get_schedule",
-            u"azure_list_jobs_by_automation_account",
             u"azure_list_runbooks_by_automation_account",
-            u"azure_list_schedule_by_automation_account",
             u"azure_list_statistics_by_automation_account",
             u"azure_list_usage_by_automation_account",
             u"azure_regenerate_agent_registration_key"
@@ -78,9 +76,7 @@ def codegen_reload_data():
             u"azure_automation_utilities_get_node_report",
             u"azure_automation_utilities_get_runbook",
             u"azure_automation_utilities_get_schedule",
-            u"azure_automation_utilities_list_jobs_by_automation_account",
             u"azure_automation_utilities_list_runbooks_by_automation_account",
-            u"azure_automation_utilities_list_schedule_by_automation_account",
             u"azure_automation_utilities_list_statistics_by_automation_account",
             u"azure_automation_utilities_list_usage_by_automation_account",
             u"azure_automation_utilities_regenerate_agent_registration_key",
@@ -117,9 +113,7 @@ def customization_data(client=None):
         - azure_get_node_report
         - azure_get_runbook
         - azure_get_schedule
-        - azure_list_jobs_by_automation_account
         - azure_list_runbooks_by_automation_account
-        - azure_list_schedule_by_automation_account
         - azure_list_statistics_by_automation_account
         - azure_list_usage_by_automation_account
         - azure_regenerate_agent_registration_key
@@ -142,9 +136,7 @@ def customization_data(client=None):
         - azure_automation_utilities_get_node_report
         - azure_automation_utilities_get_runbook
         - azure_automation_utilities_get_schedule
-        - azure_automation_utilities_list_jobs_by_automation_account
         - azure_automation_utilities_list_runbooks_by_automation_account
-        - azure_automation_utilities_list_schedule_by_automation_account
         - azure_automation_utilities_list_statistics_by_automation_account
         - azure_automation_utilities_list_usage_by_automation_account
         - azure_automation_utilities_regenerate_agent_registration_key

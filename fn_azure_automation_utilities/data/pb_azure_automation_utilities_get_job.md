@@ -22,7 +22,7 @@
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account name | `azure_automation_account_name` | text | Azure automation account name | Always |
-| Job Name | `azure_automation_job_name` | text | Azure automation job name | Always |
+| Job Name | `azure_automation_job_name` | text | Azure automation job name. If given will get specified job. If not given will list jobs. | Optional |
 | Resource Group Name | `azure_automation_resource_group_name` | text | Azure automation resource group name | Always |
 
 ### Object Type
@@ -47,8 +47,9 @@ Retrieve the job identified by job name.
 ### Function-Input Script
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.job_name = playbook.inputs.azure_automation_job_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
+if getattr(playbook.inputs, "azure_automation_job_name", None):
+  inputs.job_name = playbook.inputs.azure_automation_job_name
 ```
 
 ---
@@ -73,7 +74,7 @@ if results.get("success"):
 Inputs -
   Account Name: {playbook.inputs.azure_automation_account_name}
   Resource Group: {playbook.inputs.azure_automation_resource_group_name}
-  Job Name: {playbook.inputs.azure_automation_job_name}
+  Job Name: {getattr(playbook.inputs, 'azure_automation_job_name', None)}
 
 Results -
   {dumps(results.get('content', {}), indent=4)}""")
