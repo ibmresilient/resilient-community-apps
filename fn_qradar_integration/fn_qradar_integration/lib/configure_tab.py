@@ -12,7 +12,7 @@ import logging
 LOG = logging.getLogger(__name__)
 
 TAB_NAME = "QRadar SIEM"
-#PACKAGE_NAME =  "fn_qradar_integration"
+
 class QRadarSIEMTab(Tab):
     SECTION = PACKAGE_NAME
     NAME = TAB_NAME
@@ -26,9 +26,9 @@ class QRadarSIEMTab(Tab):
         Datatable("qradar_reference_table")
     ]
 
-    #SHOW_IF = [
-    #    Field("qradar_id").conditions.has_value()
-    #]
+    SHOW_IF = [
+        Field("qradar_id").conditions.has_value()
+    ]
 
 # Continue if exception is thrown
 def init_qradar_siem_tab():
