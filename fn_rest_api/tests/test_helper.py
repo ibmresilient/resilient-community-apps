@@ -86,6 +86,12 @@ class TestRenderDictComponents(unittest.TestCase):
             {"test_input" : {'key1': 'new !@#$/%/%^^$#@!@#$!%',
              'key2': 'new line separated text 2'}})
 
+    def test_str_dict_to_py_dict_value_sub(self):
+        processed_value = {"test_input" : {"sample1" : "normal {TO-BE-SUBSTITUTED}"}}
+        render_dict_components(processed_value, {"TO-BE-SUBSTITUTED" : "plain text but substituted"}),
+        self.assertDictEqual(processed_value,
+            {"test_input" : {'sample1': 'normal plain text but substituted'}})
+
     def test_simple_dict_with_numbers(self):
         # Simple new line kv-pair with numbers and decimals to dict
         processed_value = {"test_input" : """
@@ -113,22 +119,42 @@ class TestRenderDictComponents(unittest.TestCase):
 
 class TestValidateURL(unittest.TestCase):
 
-    def test_validate_url(self):
-        # valid url
-        validate_url("http://www.example.com/uk-en")
-        validate_url("https://www.example.com/uk-en")
+    def test_valid_url(self):
+        # Http adapter
+        url_http = "http://www.example.com/uk-en"
+        assert url_http == validate_url(url_http)
 
-        # missing adapter
+        # Https adapter
+        url_https = "https://www.example.com/uk-en"
+        validate_url(url_https)
+
+    def test_missing_invalid_adapter(self):
+        # Missing adapter
         with pytest.raises(URLError) as err:
             validate_url("www.ibm.com/uk-en")
 
+        # Invalid adapter
+        with pytest.raises(URLError) as err:
+            validate_url("hppt:www.ibm.com/uk-en")
+
+    def test_missing_schema(self):
         # missing schema
         with pytest.raises(URLError) as err:
             validate_url('www.example.com')
 
+    def test_missing_netloc(self):
         # missing netloc
         with pytest.raises(URLError) as err:
             validate_url('https://')
 
-        # empty url
-        validate_url('')
+    def test_missing_value(self):
+        # empty string in url
+        assert validate_url('') == None
+
+    def test_none_value(self):
+        # None in url
+        assert validate_url(None) == None
+    
+    def test_empty_dict_value(self):
+        # None in url
+        assert validate_url({}) == None
