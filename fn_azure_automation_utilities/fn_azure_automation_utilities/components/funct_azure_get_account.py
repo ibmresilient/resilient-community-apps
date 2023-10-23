@@ -18,7 +18,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Get a specified Azure automation account information.
+        Function: Get a specified Azure automation account information or list accounts.
         Inputs:
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
@@ -26,14 +26,16 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        # Validate inputs
-        validate_fields(["account_name", "resource_group_name"], fn_inputs)
-
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
-        # Make call to Azure and retrieve results
-        results = client.get_account()
+        # If account name given then get information for that account
+        if getattr(fn_inputs, "account_name", None):
+            # Validate inputs
+            validate_fields(["resource_group_name"], fn_inputs)
+            results = client.get_account()
+        else: # If no account name given then list all accounts
+            results = results = client.list_accounts()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

@@ -42,7 +42,6 @@ def codegen_reload_data():
             u"azure_get_node_report",
             u"azure_get_runbook",
             u"azure_get_schedule",
-            u"azure_list_accounts",
             u"azure_list_jobs_by_automation_account",
             u"azure_list_runbooks_by_automation_account",
             u"azure_list_schedule_by_automation_account",
@@ -55,14 +54,17 @@ def codegen_reload_data():
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [],
+        "datatables": [
+            u"azure_automation_accounts"
+        ],
         "automatic_tasks": [],
         "scripts": [],
         "playbooks": [
+            u"azure_automation_account_delete",
+            u"azure_automation_account_update",
             u"azure_automation_utilities_create_account",
             u"azure_automation_utilities_create_credential",
             u"azure_automation_utilities_create_schedule",
-            u"azure_automation_utilities_delete_account",
             u"azure_automation_utilities_delete_credential",
             u"azure_automation_utilities_delete_runbook",
             u"azure_automation_utilities_delete_schedule",
@@ -76,14 +78,12 @@ def codegen_reload_data():
             u"azure_automation_utilities_get_node_report",
             u"azure_automation_utilities_get_runbook",
             u"azure_automation_utilities_get_schedule",
-            u"azure_automation_utilities_list_accounts",
             u"azure_automation_utilities_list_jobs_by_automation_account",
             u"azure_automation_utilities_list_runbooks_by_automation_account",
             u"azure_automation_utilities_list_schedule_by_automation_account",
             u"azure_automation_utilities_list_statistics_by_automation_account",
             u"azure_automation_utilities_list_usage_by_automation_account",
             u"azure_automation_utilities_regenerate_agent_registration_key",
-            u"azure_automation_utilities_update_account",
             u"azure_automation_utilities_update_credential",
             u"azure_automation_utilities_update_schedule"
         ]
@@ -117,7 +117,6 @@ def customization_data(client=None):
         - azure_get_node_report
         - azure_get_runbook
         - azure_get_schedule
-        - azure_list_accounts
         - azure_list_jobs_by_automation_account
         - azure_list_runbooks_by_automation_account
         - azure_list_schedule_by_automation_account
@@ -125,10 +124,11 @@ def customization_data(client=None):
         - azure_list_usage_by_automation_account
         - azure_regenerate_agent_registration_key
     - Playbooks:
+        - azure_automation_account_delete
+        - azure_automation_account_update
         - azure_automation_utilities_create_account
         - azure_automation_utilities_create_credential
         - azure_automation_utilities_create_schedule
-        - azure_automation_utilities_delete_account
         - azure_automation_utilities_delete_credential
         - azure_automation_utilities_delete_runbook
         - azure_automation_utilities_delete_schedule
@@ -142,16 +142,16 @@ def customization_data(client=None):
         - azure_automation_utilities_get_node_report
         - azure_automation_utilities_get_runbook
         - azure_automation_utilities_get_schedule
-        - azure_automation_utilities_list_accounts
         - azure_automation_utilities_list_jobs_by_automation_account
         - azure_automation_utilities_list_runbooks_by_automation_account
         - azure_automation_utilities_list_schedule_by_automation_account
         - azure_automation_utilities_list_statistics_by_automation_account
         - azure_automation_utilities_list_usage_by_automation_account
         - azure_automation_utilities_regenerate_agent_registration_key
-        - azure_automation_utilities_update_account
         - azure_automation_utilities_update_credential
         - azure_automation_utilities_update_schedule
+    - Data Tables:
+        - azure_automation_accounts
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

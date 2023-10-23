@@ -21,8 +21,8 @@
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| Account name | `azure_automation_account_name` | text | Azure automation account name | Always |
-| Resource Group Name | `azure_automation_resource_group_name` | text | Azure automation resource group name | Always |
+| Account name | `azure_automation_account_name` | text | Azure automation account name. If given will return information for given account. If not given then will return list of all accounts. | Optional |
+| Resource Group Name | `azure_automation_resource_group_name` | text | Azure automation resource group name | Optional |
 
 ### Object Type
 `incident`
@@ -45,8 +45,10 @@ Get the details of the given Azure automation account.
 
 ### Function-Input Script
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
+if getattr(playbook.inputs, "azure_automation_account_name", None):
+  inputs.account_name = playbook.inputs.azure_automation_account_name
+if getattr(playbook.inputs, "azure_automation_resource_group_name", None):
+  inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
 ```
 
 ---
@@ -64,17 +66,22 @@ inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_nam
 
 ### Script Content
 ```python
-from json import dumps
 results = playbook.functions.results.account_info
 
 if results.get("success"):
-  incident.addNote(f"""Azure Automation: Account Get - Example (PB)
-Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_automation_resource_group_name}
+  for account in results.get("content", {}).get("value", []):
+    account_id = account.get("id", "")
+    resourceGroup_start = account_id.find("resourceGroups/")+15
+    resource_group = account_id[resourceGroup_start:account_id.find("/providers", resourceGroup_start)]
 
-Results -
-  {dumps(results.get('content', {}), indent=4)}""")
+    row = incident.addRow("azure_automation_accounts")
+    row["account_name"] = account.get("name", "")
+    row["resource_group"] = resource_group
+    row["location"] = account.get("location", "")
+    row["tags"] = str(account.get("tags"))
+    row["publicnetworkaccess"] = account.get("properties", {}).get("publicNetworkAccess", None)
+    row["disablelocalauth"] = account.get("properties", {}).get("disableLocalAuth", None)
+    row["account_deleted"] = False
 ```
 
 ---

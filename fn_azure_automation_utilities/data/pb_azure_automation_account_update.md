@@ -7,7 +7,7 @@
 # Playbook - Azure Automation: Account Update - Example (PB)
 
 ### API Name
-`azure_automation_utilities_update_account`
+`azure_automation_account_update`
 
 ### Status
 `enabled`
@@ -16,19 +16,17 @@
 `Manual`
 
 ### Activation Conditions
-`-`
+`azure_automation_accounts.account_deleted not_equals True AND azure_automation_accounts.account_name has_a_value AND azure_automation_accounts.resource_group has_a_value`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Account Tags | `azure_automation_account_tags` | text | dictionary of Azure automation account tags | Optional |
-| Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
-| Disable Local Auth | `azure_automation_account_disable_local_auth` | boolean | Should Local Auth be disabled on the account | Optional |
-| Public Network Access | `azure_automation_account_public_network_access` | boolean | Allow the account to have public network access | Optional |
+| Disable Local Auth | `azure_automation_account_disable_local_auth` | boolean | Either disable or enable local Auth. A value of True would mean local auth is disabled. | Optional |
+| Public Network Access | `azure_automation_account_public_network_access` | boolean | Either allow or deny access to public network from account | Optional |
 
 ### Object Type
-`incident`
+`azure_automation_accounts`
 
 ### Description
 Update an automation account.
@@ -48,12 +46,12 @@ Update an automation account.
 
 ### Function-Input Script
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
+inputs.account_name = row.account_name
+inputs.resource_group_name = row.resource_group
 inputs.account_update = True
 
 payload = {
-  "name": playbook.inputs.azure_automation_account_name,
+  "name": row.account_name,
   "properties": {
     "sku":{
       "name": "Basic"
@@ -62,9 +60,9 @@ payload = {
 }
 if getattr(playbook.inputs, "azure_automation_account_tags", None):
   payload["tags"] = getattr(playbook.inputs, "azure_automation_account_tags", {})
-if hasattr(playbook.inputs, "azure_automation_account_public_network_access", None):
+if hasattr(playbook.inputs, "azure_automation_account_public_network_access"):
   payload["properties"]["publicNetworkAccess"] = getattr(playbook.inputs, "azure_automation_account_public_network_access", None)
-if hasattr(playbook.inputs, "azure_automation_account_disable_local_auth", None):
+if hasattr(playbook.inputs, "azure_automation_account_disable_local_auth"):
   payload["properties"]["disableLocalAuth"] = getattr(playbook.inputs, "azure_automation_account_disable_local_auth", None)
 
 inputs.input_parameters = str(payload)
@@ -81,23 +79,16 @@ inputs.input_parameters = str(payload)
 `Local script`
 
 ### Object Type
-`incident`
+`azure_automation_accounts`
 
 ### Script Content
 ```python
 results = playbook.functions.results.update_account
 if results.get("success"):
-  incident.addNote(f"""Azure Automation: Account Update - Example (PB)
-Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_automation_resource_group}
-  Account Update: True
-  Tags: {getattr(playbook.inputs, 'azure_automation_account_tags', {})}
-  Public Network Access: {getattr(playbook.inputs, 'azure_automation_account_public_network_access', None)}
-  Disable Local Auth: {getattr(playbook.inputs, 'azure_automation_account_disable_local_auth', None)}
-
-Results -
-  Account '{playbook.inputs.azure_automation_account_name}' was updated successfully.""")
+  content = results.get("content", "")
+  row["tags"] = str(content.get("tags"))
+  row["publicnetworkaccess"] = content.get("properties", {}).get("publicNetworkAccess", None)
+  row["disablelocalauth"] = content.get("properties", {}).get("disableLocalAuth", None)
 ```
 
 ---

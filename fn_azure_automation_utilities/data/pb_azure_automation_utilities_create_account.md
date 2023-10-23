@@ -26,7 +26,7 @@
 | Account Tags | `azure_automation_account_tags` | text | dictionary of Azure automation account tags | Optional |
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
 | Disable Local Auth | `azure_automation_account_disable_local_auth` | boolean | False | Optional |
-| Public Network Access | `azure_automation_account_public_network_access` | boolean | True | Optional |
+| Public Network Access | `azure_automation_account_public_network_access` | boolean | Either allow or deny access to public network from account | Optional |
 
 ### Object Type
 `incident`
@@ -91,17 +91,19 @@ public_network_access = getattr(playbook.inputs, "azure_automation_account_publi
 disable_local_auth = getattr(playbook.inputs, "azure_automation_account_disable_local_auth", False)
 
 if results.get("success"):
-  incident.addNote(f"""Azure Automation: Account Create - Example (PB)
-Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_automation_resource_group}
-  Location: {playbook.inputs.azure_automation_account_location}
-  Tags: {getattr(playbook.inputs, 'azure_automation_account_tags', {})}
-  PublicNetworkAccess: {True if public_network_access == None else public_network_access}
-  DisableLocalAuth: {False if disable_local_auth == None else disable_local_auth}
-
-Results - 
-  Account '{playbook.inputs.azure_automation_account_name}' was created successfully.""")
+  content = results.get("content", {})
+  account_id = content.get("id", "")
+  resourceGroup_start = account_id.find("resourceGroups/")+15
+  resource_group = account_id[resourceGroup_start:account_id.find("/providers", resourceGroup_start)]
+  
+  row = incident.addRow("azure_automation_accounts")
+  row["account_name"] = content.get("name", "")
+  row["resource_group"] = resource_group
+  row["location"] = content.get("location", "")
+  row["tags"] = str(content.get("tags"))
+  row["publicnetworkaccess"] = content.get("properties", {}).get("publicNetworkAccess", None)
+  row["disablelocalauth"] = content.get("properties", {}).get("disableLocalAuth", None)
+  row["account_deleted"] = False
 ```
 
 ---

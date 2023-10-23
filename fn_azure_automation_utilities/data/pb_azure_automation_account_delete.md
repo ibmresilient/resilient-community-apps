@@ -7,7 +7,7 @@
 # Playbook - Azure Automation: Account Delete - Example (PB)
 
 ### API Name
-`azure_automation_utilities_delete_account`
+`azure_automation_account_delete`
 
 ### Status
 `enabled`
@@ -16,16 +16,10 @@
 `Manual`
 
 ### Activation Conditions
-`-`
-
-### Activation Form Elements
-| Input Field Label | API Name | Element Type | Tooltip | Requirement |
-| ----------------- | -------- | ------------ | ------- | ----------- |
-| Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
-| Account Resource Group | `azure_automation_account_resource_group` | text | Azure Automation account resource group | Always |
+`azure_automation_accounts.account_deleted not_equals True AND azure_automation_accounts.account_name has_a_value AND azure_automation_accounts.resource_group has_a_value`
 
 ### Object Type
-`incident`
+`azure_automation_accounts`
 
 ### Description
 Delete an Azure automation account
@@ -38,20 +32,20 @@ Delete an Azure automation account
 `azure_delete_account`
 
 ### Output Name
-`delete_results`
+`account_delete`
 
 ### Message Destination
 `fn_azure_automation_utilities`
 
 ### Function-Input Script
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_account_resource_group
+inputs.account_name = row.account_name
+inputs.resource_group_name = row.resource_group
 ```
 
 ---
 
-## Local script - delete output
+## Local script - post process
 
 ### Description
 
@@ -60,25 +54,24 @@ inputs.resource_group_name = playbook.inputs.azure_automation_account_resource_g
 `Local script`
 
 ### Object Type
-`incident`
+`azure_automation_accounts`
 
 ### Script Content
 ```python
-results = playbook.functions.results.delete_results
+results = playbook.functions.results.account_delete
+
 if results.get("success"):
   status = results.get("content", {}).get("status")
   if status == 200:
-    result = f"Azure automation account '{playbook.inputs.azure_automation_account_name}' was deleted."
+    row.account_deleted = True
   elif status == 204:
-    result = f"Azure automation account '{playbook.inputs.azure_automation_account_name}' not found."
-  if result:
     incident.addNote(f"""Azure Automation: Account Delete - Example (PB)
 Inputs -
   Account Name: {playbook.inputs.azure_automation_account_name}
   Resource Group: {playbook.inputs.azure_automation_account_resource_group}
 
 Results -
-  {result}""")
+  Azure automation account '{playbook.inputs.azure_automation_account_name}' not found.""")
 ```
 
 ---
