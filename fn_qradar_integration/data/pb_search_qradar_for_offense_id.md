@@ -83,7 +83,7 @@ for event in results["events"]:
   qradar_event.log_source = event["logsourcename_logsourceid"]
   qradar_event.protocol = event["protocolname_protocolid"]
   qradar_event.rule = event["rulename_creeventlist"]
-incident.addNote("{} offenses have successfully been queried".format(len(results["events"])))
+incident.addNote("{} offenses have successfully been queried for the last {} days".format(len(results["events"]), playbook.inputs.days_to_search_back))
 
 
 ```
