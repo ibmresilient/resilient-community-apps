@@ -7,7 +7,7 @@ git:
   depth: false
 
 stages:
-  - name: run tests and sonar scan on all packages
+  - name: cron run tests and sonar scan on all packages
     if: tag IS blank AND branch = master AND type = cron
   - name: run package tests
     if: type != cron
@@ -84,8 +84,8 @@ matrix:
   fast_finish: true
 
   include:
-    - stage: run tests and sonar scan on all packages
-      name: Python 2.7 Unit Tests - Main - PyPi
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 2.7 Unit Tests (1/2) - Main - PyPi
       python: 2.7
       env:
         - RUN_TYPE=unit_test_main_pp TOXENV=py27
@@ -93,11 +93,23 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
-        - echo "Starting Python 2.7 Unit Tests - Main - PyPi"
-        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
+        - echo "Starting Python 2.7 Unit Tests (1/2) - Main - PyPi"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" "FIRST_HALF"
 
-    - stage: run tests and sonar scan on all packages
-      name: Python 3.6 Unit Tests - Main - PyPi
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 2.7 Unit Tests (2/2) - Main - PyPi
+      python: 2.7
+      env:
+        - RUN_TYPE=unit_test_main_pp TOXENV=py27
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 2.7 Unit Tests (2/2) - Main - PyPi"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" "SECOND_HALF"
+
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 3.6 Unit Tests (1/2) - Main - PyPi
       python: 3.6
       env:
         - RUN_TYPE=unit_test_main_pp TOXENV=py36
@@ -105,11 +117,23 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
-        - echo "Starting Python 3.6 Unit Tests - Main - PyPi"
-        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
+        - echo "Starting Python 3.6 Unit Tests (1/2) - Main - PyPi"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" "FIRST_HALF"
 
-    - stage: run tests and sonar scan on all packages
-      name: Python 3.9 Unit Tests - Main - PyPi
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 3.6 Unit Tests (2/2) - Main - PyPi
+      python: 3.6
+      env:
+        - RUN_TYPE=unit_test_main_pp TOXENV=py36
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 3.6 Unit Tests (2/2) - Main - PyPi"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" "SECOND_HALF"
+
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 3.9 Unit Tests (1/2) - Main - PyPi
       python: 3.9
       env:
         - RUN_TYPE=unit_test_main_pp TOXENV=py39
@@ -117,11 +141,23 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
-        - echo "Starting Python 3.9 Unit Tests - Main - PyPi"
-        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX"
+        - echo "Starting Python 3.9 Unit Tests (1/2) - Main - PyPi"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" "FIRST_HALF"
 
-    - stage: run tests and sonar scan on all packages
-      name: Python 2.7 Unit Tests - Main - Artifactory
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 3.9 Unit Tests (2/2) - Main - PyPi
+      python: 3.9
+      env:
+        - RUN_TYPE=unit_test_main_pp TOXENV=py39
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 3.9 Unit Tests (2/2) - Main - PyPi"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$PYPI_INDEX" "SECOND_HALF"
+
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 2.7 Unit Tests (1/2) - Main - Artifactory
       python: 2.7
       env:
         - RUN_TYPE=unit_test_main_af TOXENV=py27
@@ -129,11 +165,23 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
-        - echo "Starting Python 2.7 Unit Tests - Main - Artifactory"
-        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+        - echo "Starting Python 2.7 Unit Tests (1/2) - Main - Artifactory"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX" "FIRST_HALF"
 
-    - stage: run tests and sonar scan on all packages
-      name: Python 3.6 Unit Tests - Main - Artifactory
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 2.7 Unit Tests (2/2) - Main - Artifactory
+      python: 2.7
+      env:
+        - RUN_TYPE=unit_test_main_af TOXENV=py27
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 2.7 Unit Tests (2/2) - Main - Artifactory"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX" "SECOND_HALF"
+
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 3.6 Unit Tests (1/2) - Main - Artifactory
       python: 3.6
       env:
         - RUN_TYPE=unit_test_main_af TOXENV=py36
@@ -141,11 +189,23 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
-        - echo "Starting Python 3.6 Unit Tests - Main - Artifactory"
-        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+        - echo "Starting Python 3.6 Unit Tests (1/2) - Main - Artifactory"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX" "FIRST_HALF"
 
-    - stage: run tests and sonar scan on all packages
-      name: Python 3.9 Unit Tests - Main - Artifactory
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 3.6 Unit Tests (2/2) - Main - Artifactory
+      python: 3.6
+      env:
+        - RUN_TYPE=unit_test_main_af TOXENV=py36
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 3.6 Unit Tests (2/2) - Main - Artifactory"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX" "SECOND_HALF"
+
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 3.9 Unit Tests (1/2) - Main - Artifactory
       python: 3.9
       env:
         - RUN_TYPE=unit_test_main_af TOXENV=py39
@@ -153,10 +213,22 @@ matrix:
         - pip install -U -r "$PATH_PIP_REQ_MAIN"
         - pip install -U -r "$PATH_PIP_REQ_TESTS"
       script:
-        - echo "Starting Python 3.9 Unit Tests - Main - Artifactory"
-        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX"
+        - echo "Starting Python 3.9 Unit Tests (1/2) - Main - Artifactory"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX" "FIRST_HALF"
 
-    - stage: run tests and sonar scan on all packages
+    - stage: cron run tests and sonar scan on all packages
+      name: Python 3.9 Unit Tests (2/2) - Main - Artifactory
+      python: 3.9
+      env:
+        - RUN_TYPE=unit_test_main_af TOXENV=py39
+      install:
+        - pip install -U -r "$PATH_PIP_REQ_MAIN"
+        - pip install -U -r "$PATH_PIP_REQ_TESTS"
+      script:
+        - echo "Starting Python 3.9 Unit Tests (2/2) - Main - Artifactory"
+        - $PATH_SCRIPTS_DIR/run_tests.sh "ALL" "$ARTIFACTORY_PYPI_INDEX" "SECOND_HALF"
+
+    - stage: cron run tests and sonar scan on all packages
       name: SonarQube Scan on All Packages
       language: java
       env: RUN_TYPE=sonarqube
