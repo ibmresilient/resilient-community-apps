@@ -320,7 +320,7 @@ class TestMakeRestCall(unittest.TestCase):
             self.opts, self.options,
             rest_method=self.method,
             rest_url=self.url,
-            headers_dict={"Content-type" : "application/json"},
+            headers_dict={"content-type" : "application/json"},
             cookies_dict=None,
             body_dict={"key1" : "body1"},
             rest_verify=None,
@@ -329,7 +329,7 @@ class TestMakeRestCall(unittest.TestCase):
 
         assert response["url"] == self.url
         assert response["method"] == self.method
-        self.assertDictEqual(response["headers"], {"Content-type" : "application/json"})
+        self.assertDictEqual(response["headers"], {"content-type" : "application/json"})
         self.assertDictEqual(response["json"], {"key1" : "body1"})
         self.assertIsNone(response["data"])
 
