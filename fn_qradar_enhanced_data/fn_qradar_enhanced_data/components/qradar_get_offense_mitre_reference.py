@@ -9,6 +9,7 @@ import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_que
 from fn_qradar_enhanced_data.util.function_utils import (clear_table, get_qradar_client, get_search_timeout, get_server_settings)
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
+import requests
 
 FN_NAME = "qradar_get_offense_mitre_reference"
 
@@ -75,10 +76,10 @@ class FunctionComponent(AppFunctionComponent):
                 try:
                     # Perform api call to the Use Case Manager app on the QRadar server to get the MITRE mappings
                     # for the current rule using the rules UUID
-                    mitre_results = self.rc.execute("GET",
-                        f"{api_url[0:len(api_url)-4]}console/plugins/app_proxy:UseCaseManager_Service/api/mappings/by_name?rule_id={rule.get('identifier')}",
+                    mitre_results = requests.get(f"{api_url[0:len(api_url)-4]}console/plugins/app_proxy:UseCaseManager_Service/api/mappings/by_name?rule_id={rule.get('identifier')}",
                         verify=auth_info.cafile,
                         headers=header,
+                        proxies=self.rc.get_proxies(),
                         timeout=timeout).json()
 
                     # Check if mappings are returned and not an empty dictionary
