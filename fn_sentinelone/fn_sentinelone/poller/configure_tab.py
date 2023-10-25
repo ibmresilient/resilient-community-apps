@@ -15,7 +15,7 @@ TAB_NAME = "SentinelOne"
 class SentinelOneTab(Tab):
     SECTION = PACKAGE_NAME
     NAME = TAB_NAME
-    UUID = "f7ea99b0-76e2-45d7-ae35-e95dff66661f"
+    UUID = "c3f03a15-8904-40c8-bb20-42e7af83d874"
 
     CONTAINS = [
         Field("sentinelone_threat_overview_url"),
