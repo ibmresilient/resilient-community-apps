@@ -13,6 +13,7 @@ from resilient_lib import (SOARCommon, get_last_poller_date,
                            make_payload_from_template, poller)
 
 from fn_sentinelone.lib.app_common import AppCommon
+from fn_sentinelone.poller.configure_tab import init_sentinelone_tab
 
 
 PACKAGE_NAME = "fn_sentinelone"
@@ -47,7 +48,8 @@ def init_app(rc, options):
     # initialize the class for making API calls to your endpoint
     app_common = AppCommon(rc, PACKAGE_NAME, options)
 
-    # <add additional initialization steps for your endpoint as necessary>
+    # initialize Randori tab in the SOAR UI
+    init_sentinelone_tab()
 
     return app_common
 
