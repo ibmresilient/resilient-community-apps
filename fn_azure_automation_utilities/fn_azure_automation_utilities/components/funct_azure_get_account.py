@@ -33,7 +33,7 @@ class FunctionComponent(AppFunctionComponent):
         if getattr(fn_inputs, "account_name", None):
             # Validate inputs
             validate_fields(["resource_group_name"], fn_inputs)
-            results = client.get_account()
+            results = [client.get_account()]
         else: # If no account name given then list all accounts
             results = results = client.list_accounts().get("value", [])
 
