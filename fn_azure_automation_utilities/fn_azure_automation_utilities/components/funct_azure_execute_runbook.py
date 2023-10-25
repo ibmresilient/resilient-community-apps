@@ -33,7 +33,9 @@ class FunctionComponent(AppFunctionComponent):
         # Validate inputs
         validate_fields(["account_name", "resource_group_name", "runbook_name"], fn_inputs)
         # fn_inputs.input_parameters is a string dictionary. Convert it into a dictionary from a string.
-        input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
+        input_parameters = {}
+        if getattr(fn_inputs, "input_parameters"):
+            input_parameters = literal_eval(getattr(fn_inputs, "input_parameters"))
         time_to_wait = getattr(fn_inputs, "time_to_wait", 30)
 
         # Connect to Azure

@@ -52,20 +52,21 @@ def codegen_reload_data():
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [
-            u"azure_automation_accounts"
+            u"azure_automation_accounts",
+            u"azure_automation_runbooks"
         ],
         "automatic_tasks": [],
         "scripts": [],
         "playbooks": [
             u"azure_automation_account_delete",
             u"azure_automation_account_update",
+            u"azure_automation_runbook_delete",
+            u"azure_automation_runbook_execute",
             u"azure_automation_utilities_create_account",
             u"azure_automation_utilities_create_credential",
             u"azure_automation_utilities_create_schedule",
             u"azure_automation_utilities_delete_credential",
-            u"azure_automation_utilities_delete_runbook",
             u"azure_automation_utilities_delete_schedule",
-            u"azure_automation_utilities_execute_runbook",
             u"azure_automation_utilities_get_account",
             u"azure_automation_utilities_get_agent_registration_information",
             u"azure_automation_utilities_get_credential",
@@ -117,13 +118,13 @@ def customization_data(client=None):
     - Playbooks:
         - azure_automation_account_delete
         - azure_automation_account_update
+        - azure_automation_runbook_delete
+        - azure_automation_runbook_execute
         - azure_automation_utilities_create_account
         - azure_automation_utilities_create_credential
         - azure_automation_utilities_create_schedule
         - azure_automation_utilities_delete_credential
-        - azure_automation_utilities_delete_runbook
         - azure_automation_utilities_delete_schedule
-        - azure_automation_utilities_execute_runbook
         - azure_automation_utilities_get_account
         - azure_automation_utilities_get_agent_registration_information
         - azure_automation_utilities_get_credential
@@ -140,6 +141,7 @@ def customization_data(client=None):
         - azure_automation_utilities_update_schedule
     - Data Tables:
         - azure_automation_accounts
+        - azure_automation_runbooks
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

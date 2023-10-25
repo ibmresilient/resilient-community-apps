@@ -7,7 +7,7 @@
 # Playbook - Azure Automation: Runbook Execute - Example (PB)
 
 ### API Name
-`azure_automation_utilities_execute_runbook`
+`azure_automation_runbook_execute`
 
 ### Status
 `enabled`
@@ -16,19 +16,16 @@
 `Manual`
 
 ### Activation Conditions
-`-`
+`azure_automation_runbooks.account_name has_a_value AND azure_automation_runbooks.resource_group has_a_value AND azure_automation_runbooks.runbook_name has_a_value`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
-| Azure resource group | `azure_resource_group` | text | The Azure resource group the account is in | Always |
 | Input Parameters | `azure_automation_runbook_input_parameters` | text | A dictionary of input parameters for the Azure Automation runbook specified | Optional |
-| Runbook Name | `azure_automation_runbook_name` | text | The name of the Azure Automation runbook to execute | Always |
 | Time to Wait | `time_to_wait` | number | Time is seconds to wait before checking the status of the runbook job. This should be the average amount of time it takes for the runbook to complete. | Optional |
 
 ### Object Type
-`incident`
+`azure_automation_runbooks`
 
 ### Description
 Execute a runbook on Azure
@@ -48,10 +45,10 @@ Execute a runbook on Azure
 
 ### Function-Input Script
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
+inputs.account_name = row.account_name
 inputs.input_parameters = playbook.inputs.azure_automation_runbook_input_parameters
-inputs.resource_group_name = playbook.inputs.azure_resource_group
-inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
+inputs.resource_group_name = row.resource_group
+inputs.runbook_name = row.runbook_name
 
 time_to_wait = getattr(playbook.inputs, "time_to_wait", 30)
 # If no time_to_wait is given then default to 30 seconds
@@ -69,7 +66,7 @@ inputs.time_to_wait = time_to_wait if time_to_wait else 30
 `Local script`
 
 ### Object Type
-`incident`
+`azure_automation_runbooks`
 
 ### Script Content
 ```python
@@ -77,9 +74,9 @@ results = playbook.functions.results.runbook_results
 if results.get("success"):
   incident.addNote(f"""Azure Automation: Runbook Execute - Example (PB)
 Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_resource_group}
-  Runbook Name: {playbook.inputs.azure_automation_runbook_name}
+  Account Name: {row.account_name}
+  Resource Group: {row.resource_group}
+  Runbook Name: {row.runbook_name}
   Time to Wait: {getattr(playbook.inputs, 'time_to_wait', 30)}
   Input Parameters: {playbook.inputs.azure_automation_runbook_input_parameters}
 

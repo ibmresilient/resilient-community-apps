@@ -71,14 +71,15 @@ from json import dumps
 results = playbook.functions.results.runbook_results
 
 if results.get("success"):
-  incident.addNote(f"""Azure Automation: Runbook Get - Example (PB)
-Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_resource_group}
-  Runbook Name: {getattr(playbook.inputs, 'azure_automation_runbook_name', None)}
-
-Results -
-  {dumps(results.get('content'), indent=4)}""")
+  # Add runbooks info to the data table
+  for runbook in results.get("content", {}).get("value", []):
+    row = incident.addRow("azure_automation_runbooks")
+    row["runbook_name"] = runbook.get("name")
+    row["runbook_type"] = runbook.get("properties", {}).get("runbookType")
+    row["runbook_state"] = runbook.get("properties", {}).get("state")
+    row["runbook_tags"] = str(runbook.get("tags"))
+    row["account_name"] = playbook.inputs.azure_automation_account_name
+    row["resource_group"] = playbook.inputs.azure_resource_group
 ```
 
 ---
