@@ -1,5 +1,6 @@
 import unittest, pytest
 
+from collections import OrderedDict
 from resilient_lib import IntegrationError
 from fn_rest_api.lib.authentication_handler import JWTHandler
 from fn_rest_api.lib.authentication_handler import JWT_KEY, JWT_TOKEN, JWT_HEADERS, JWT_PAYLOAD, \
@@ -113,31 +114,34 @@ class TestAddJWTHeaders(unittest.TestCase):
 
 class TestCompileJWTTokens(unittest.TestCase):
     def test_compile_tokens_key(self):
-        jwt_client = JWTHandler({
+        _props = OrderedDict({
             JWT_KEY : "encryptionkey",
             JWT_ALGORITHM : "HS256"
         })
+        jwt_client = JWTHandler(_props)
         jwt_client._compile_jwt_token()
         assert len(jwt_client._jwt_properties[JWT_TOKEN].split(".")) == 3
         assert jwt_client._jwt_properties[JWT_TOKEN] == 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.xptMQAf_YCcAM7MSt3xifgItgCQAYUDFccm0uz-ENFc'
 
     def test_compile_tokens_key_header(self):
-        jwt_client = JWTHandler({
+        _props = OrderedDict({
             JWT_KEY : "encryptionkey",
-            JWT_HEADERS: {"key1" : "value1", "key2": "value2"},
+            JWT_HEADERS: OrderedDict({"key1" : "value1", "key2": "value2"}),
             JWT_ALGORITHM : "HS256"
         })
+        jwt_client = JWTHandler(_props)
         jwt_client._compile_jwt_token()
         assert len(jwt_client._jwt_properties[JWT_TOKEN].split(".")) == 3
         assert jwt_client._jwt_properties[JWT_TOKEN] == 'eyJhbGciOiJIUzI1NiIsImtleTEiOiJ2YWx1ZTEiLCJrZXkyIjoidmFsdWUyIiwidHlwIjoiSldUIn0.e30.yRfHHke4q-bNQ2paunR_iRBRO72KZnRSPARvYyP3kpA'
 
     def test_compile_tokens_key_header_payload(self):
-        jwt_client = JWTHandler({
+        _props = OrderedDict({
             JWT_KEY : "encryptionkey",
-            JWT_HEADERS : {"key1" : "value1", "key2": "value2"},
-            JWT_PAYLOAD : {"key1" : "value1", "key2": "value2"},
+            JWT_HEADERS : OrderedDict({"key1" : "value1", "key2": "value2"}),
+            JWT_PAYLOAD : OrderedDict({"key1" : "value1", "key2": "value2"}),
             JWT_ALGORITHM : "HS256"
         })
+        jwt_client = JWTHandler(_props)
         jwt_client._compile_jwt_token()
         assert len(jwt_client._jwt_properties[JWT_TOKEN].split(".")) == 3
         assert jwt_client._jwt_properties[JWT_TOKEN] == 'eyJhbGciOiJIUzI1NiIsImtleTEiOiJ2YWx1ZTEiLCJrZXkyIjoidmFsdWUyIiwidHlwIjoiSldUIn0.eyJrZXkxIjoidmFsdWUxIiwia2V5MiI6InZhbHVlMiJ9.Vl6UkvGJycRS9uwraqmLPQnU44vp-MtTG7PyXzIZfqM'
