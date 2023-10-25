@@ -37,7 +37,7 @@ class FunctionComponent(AppFunctionComponent):
         if getattr(fn_inputs, "credential_name", None):
             results = client.get_credential(getattr(fn_inputs, "credential_name", None))
         else: # If credential name not given get all credentials on given resource
-            results = client.list_credentials_by_automation_account()
+            results = client.list_credentials_by_automation_account().get("value", [])
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

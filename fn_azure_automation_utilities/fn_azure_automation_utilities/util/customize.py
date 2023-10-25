@@ -53,6 +53,7 @@ def codegen_reload_data():
         "incident_types": [],
         "datatables": [
             u"azure_automation_accounts",
+            u"azure_automation_credentials",
             u"azure_automation_runbooks"
         ],
         "automatic_tasks": [],
@@ -141,6 +142,7 @@ def customization_data(client=None):
         - azure_automation_utilities_update_schedule
     - Data Tables:
         - azure_automation_accounts
+        - azure_automation_credentials
         - azure_automation_runbooks
     """
 

@@ -37,7 +37,7 @@ class FunctionComponent(AppFunctionComponent):
         if getattr(fn_inputs, "runbook_name", None):
             results = client.get_runbook(getattr(fn_inputs, "runbook_name", None))
         else: # If runbook_name not given then list all runbooks on given account
-            results = client.list_runbooks_by_automation_account()
+            results = client.list_runbooks_by_automation_account().get("value", [])
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

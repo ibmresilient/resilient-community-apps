@@ -35,7 +35,7 @@ class FunctionComponent(AppFunctionComponent):
             validate_fields(["resource_group_name"], fn_inputs)
             results = client.get_account()
         else: # If no account name given then list all accounts
-            results = results = client.list_accounts()
+            results = results = client.list_accounts().get("value", [])
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
