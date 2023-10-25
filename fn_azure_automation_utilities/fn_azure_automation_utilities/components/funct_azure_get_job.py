@@ -42,7 +42,7 @@ class FunctionComponent(AppFunctionComponent):
             else: # If job_output equals False then return job information
                 results = client.get_job(getattr(fn_inputs, "job_name", None))
         else: # If job_name not given then list jobs
-            results = client.list_jobs_by_automation_account()
+            results = client.list_jobs_by_automation_account().get("value", [])
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

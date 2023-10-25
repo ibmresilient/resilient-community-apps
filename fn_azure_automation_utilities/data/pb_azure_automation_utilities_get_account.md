@@ -69,7 +69,7 @@ if getattr(playbook.inputs, "azure_automation_resource_group_name", None):
 results = playbook.functions.results.account_info
 
 if results.get("success"):
-  for account in results.get("content", {}).get("value", []):
+  for account in results.get("content", {}):
     account_id = account.get("id", "")
     resourceGroup_start = account_id.find("resourceGroups/")+15
     resource_group = account_id[resourceGroup_start:account_id.find("/providers", resourceGroup_start)]

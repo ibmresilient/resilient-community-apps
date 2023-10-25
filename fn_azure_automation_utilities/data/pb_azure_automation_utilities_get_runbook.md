@@ -72,7 +72,7 @@ results = playbook.functions.results.runbook_results
 
 if results.get("success"):
   # Add runbooks info to the data table
-  for runbook in results.get("content", {}).get("value", []):
+  for runbook in results.get("content", {}):
     row = incident.addRow("azure_automation_runbooks")
     row["runbook_name"] = runbook.get("name")
     row["runbook_type"] = runbook.get("properties", {}).get("runbookType")

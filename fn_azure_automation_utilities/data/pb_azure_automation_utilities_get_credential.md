@@ -67,18 +67,16 @@ if getattr(playbook.inputs, "azure_automation_credential_name", None):
 
 ### Script Content
 ```python
-from json import dumps
 results = playbook.functions.results.cred
-
 if results.get("success"):
-  incident.addNote(f"""Azure Automation: Credential Get - Example (PB)
-Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_automation_resource_group}
-  Credential Name: {getattr(playbook.inputs, 'azure_automation_credential_name', None)}
-
-Results -
-  {dumps(results.get('content', {}), indent=4)}""")
+  # Add credential information to data table
+  for credential in results.get('content', {}):
+    row = incident.addRow("azure_automation_credentials")
+    row["credential_name"] = credential.get("name")
+    row["credential_username"] = credential.get("properties", {}).get("userName")
+    row["credential_description"] = credential.get("properties", {}).get("description")
+    row["account_name"] = playbook.inputs.azure_automation_account_name
+    row["resource_group"] = playbook.inputs.azure_automation_resource_group
 ```
 
 ---

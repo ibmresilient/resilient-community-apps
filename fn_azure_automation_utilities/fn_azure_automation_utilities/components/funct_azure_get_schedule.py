@@ -37,7 +37,7 @@ class FunctionComponent(AppFunctionComponent):
         if getattr(fn_inputs, "schedule_name", None):
             results = client.get_schedule(getattr(fn_inputs, "schedule_name", None))
         else: # If schedule_name not given then list schedules
-            results = client.list_schedule_by_automation_account()
+            results = client.list_schedule_by_automation_account().get("value", [])
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
