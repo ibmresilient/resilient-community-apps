@@ -37,6 +37,7 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
         -------
             -   fn_inputs.rest_api_body
+            -   fn_inputs.rest_api_query_parameters
             -   fn_inputs.rest_api_url
             -   fn_inputs.rest_api_method
             -   fn_inputs.rest_api_timeout
@@ -79,7 +80,8 @@ class FunctionComponent(AppFunctionComponent):
         rest_properties = {
             "headers" : self.get_textarea_param(getattr(fn_inputs, "rest_api_headers", None)), # textarea
             "cookies" : self.get_textarea_param(getattr(fn_inputs, "rest_api_cookies", None)), # textarea
-            "body"    : self.get_textarea_param(getattr(fn_inputs, "rest_api_body", None))}    # textarea
+            "body"    : self.get_textarea_param(getattr(fn_inputs, "rest_api_body", None)),    # textarea
+            "query_params": self.get_textarea_param(getattr(fn_inputs, "rest_api_query_parameters", None))}    # textarea
 
         # Properties required for OAuth Authentication
         oauth_properties = {
@@ -159,6 +161,7 @@ class FunctionComponent(AppFunctionComponent):
                 rest_properties.get("headers"),
                 rest_properties.get("cookies"),
                 rest_properties.get("body"),
+                rest_properties.get("query_params"),
                 rest_verify,
                 rest_timeout,
                 rest_certificate,
@@ -182,6 +185,7 @@ class FunctionComponent(AppFunctionComponent):
                 rest_properties.get("headers"),
                 rest_properties.get("cookies"),
                 rest_properties.get("body"),
+                rest_properties.get("query_params"),
                 rest_verify,
                 rest_timeout,
                 rest_certificate,
