@@ -46,7 +46,6 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 10/2023 | Automatically search Mandiant for threat intelligence on artifacts |
-| 1.0.1 | 10/2023 | Added X-App-Name header to all search requests being made |
 
 ---
 
