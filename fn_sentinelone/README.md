@@ -69,7 +69,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 10/2023 | Convert to playbooks; add upload file support; poller template improvements |
+| 1.1.0 | 10/2023 | Convert to playbooks; add upload file support; poller improvements; SentinelOne tab |
 | 1.0.1 | 1/2022 | Update payload schema files |
 | 1.0.0 | 1/2022 | Initial Release |
 
@@ -130,8 +130,9 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
-  | Incident | Read, Edit, Create, Owner, Status |
+  | Incident | Edit, Read, Create, Owner, Status |
   | Incident Notes | Edit |
+  | Layouts | Edit, Read |
 
 The following SOAR platform guides provide additional information: 
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -221,7 +222,7 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Create a SentinelOne incident tab and import the data table and custom fields as shown in the screenshot:
+* A SentinelOne incident tab is included in the app and appears in any incident that has a SentineOne Thread ID. The default tabs contains the SentinelOne custom fields and agent data table. The screenshot below shows SentinelOne custom incident fields included on the tab:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
