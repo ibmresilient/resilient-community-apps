@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 from resilient_lib import render, RequestsCommon
 
 LOG = logging.getLogger()
-CONTENT_TYPE = "content-type"
+CONTENT_TYPE = "Content-type"
 CONTENT_TYPE_JSON = "application/json"
 
 
