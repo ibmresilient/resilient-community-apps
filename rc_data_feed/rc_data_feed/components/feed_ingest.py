@@ -40,12 +40,12 @@ class PluginPool():
         self.pool = multiprocessing.pool.ThreadPool(thread_pool_size)
 
     def run_plugin(self, task, args):
-        #_async_result = self.pool.apply_async(task, args=args)
+        _async_result = self.pool.apply_async(task, args=args)
         # run without pooling until sqlendtran can be worked out
-        task(*args)
+        #task(*args)
 
     def async_send_data(self, type_name, workspace, context, payload):
-        """handler for asynchronously sending data to a plugin 
+        """handler for asynchronously sending data to a plugin
 
         :param type_name: type of incident to sync: incident, task, note, artifact, etc.
         :type type_name: str
