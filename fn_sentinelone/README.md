@@ -222,7 +222,7 @@ The following table provides the settings you need to configure the app. These s
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* A SentinelOne incident tab is included in the app and appears in any incident that has a SentineOne Thread ID. The default tabs contains the SentinelOne custom fields and agent data table. The screenshot below shows SentinelOne custom incident fields included on the tab:
+* A SentinelOne incident tab is included in the app and appears in any incident that has a SentinelOne Threat ID. The default tab contains the SentinelOne custom fields and agent data table. The screenshot below shows SentinelOne custom incident fields included on the tab:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) 
 
