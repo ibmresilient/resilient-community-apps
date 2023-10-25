@@ -1,0 +1,29 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "pid": 428,
+      "startTime": 1689857462103,
+      "killed": false,
+      "errorCode": -1,
+      "error": "Process not found"
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "reaqta_starttime": 1689857462103,
+    "reaqta_hive": "rhiveam",
+    "reaqta_endpoint_id": "836686917654282240",
+    "reaqta_process_pid": 428
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 971,
+    "timestamp": "2023-08-07 14:26:49"
+  }
+}
