@@ -2,6 +2,7 @@
 
 - [Release Notes](#release-notes)
   - [v2.2.0](#v220)
+  - [2.2.0 Changes](#220-changes)
   - [v2.1.0](#v210)
   - [v2.0.9](#v209)
 - [Overview](#overview)
@@ -19,6 +20,7 @@
 -->
 ### v2.2.0
 * Added playbooks
+* Validated on ServiceNow Vancouver release (use v2.1.0 on ServiceNow)
 
 ### 2.2.0 Changes
 In v2.2, the existing rules and workflows have been replaced with playbooks.
