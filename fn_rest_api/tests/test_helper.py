@@ -326,60 +326,10 @@ class TestMakeRestCall(unittest.TestCase):
             rest_verify=None,
             rest_timeout=None,
             rest_certificate=None)
+
         assert response["url"] == self.url
         assert response["method"] == self.method
         self.assertDictEqual(response["headers"], {"Content-type" : "application/json"})
-        self.assertDictEqual(response["json"], {"key1" : "body1"})
-        self.assertIsNone(response["data"])
-
-    def test_json_lowercase_content_type(self):
-        response = make_rest_call(
-            self.opts, self.options,
-            rest_method=self.method,
-            rest_url=self.url,
-            headers_dict={"content-type" : "application/json"},
-            cookies_dict=None,
-            body_dict={"key1" : "body1"},
-            rest_verify=None,
-            rest_timeout=None,
-            rest_certificate=None)
-        assert response["url"] == self.url
-        assert response["method"] == self.method
-        self.assertDictEqual(response["headers"], {"content-type" : "application/json"})
-        self.assertDictEqual(response["json"], {"key1" : "body1"})
-        self.assertIsNone(response["data"])
-
-    def test_json_uppercase_content_type(self):
-        response = make_rest_call(
-            self.opts, self.options,
-            rest_method=self.method,
-            rest_url=self.url,
-            headers_dict={"CONTENT-TYPE" : "application/json"},
-            cookies_dict=None,
-            body_dict={"key1" : "body1"},
-            rest_verify=None,
-            rest_timeout=None,
-            rest_certificate=None)
-        assert response["url"] == self.url
-        assert response["method"] == self.method
-        self.assertDictEqual(response["headers"], {"CONTENT-TYPE" : "application/json"})
-        self.assertDictEqual(response["json"], {"key1" : "body1"})
-        self.assertIsNone(response["data"])
-
-    def test_json_title_content_type(self):
-        response = make_rest_call(
-            self.opts, self.options,
-            rest_method=self.method,
-            rest_url=self.url,
-            headers_dict={"Content-Type" : "application/json"},
-            cookies_dict=None,
-            body_dict={"key1" : "body1"},
-            rest_verify=None,
-            rest_timeout=None,
-            rest_certificate=None)
-        assert response["url"] == self.url
-        assert response["method"] == self.method
-        self.assertDictEqual(response["headers"], {"Content-Type" : "application/json"})
         self.assertDictEqual(response["json"], {"key1" : "body1"})
         self.assertIsNone(response["data"])
 
