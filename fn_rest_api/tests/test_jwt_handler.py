@@ -114,9 +114,8 @@ class TestAddJWTHeaders(unittest.TestCase):
 
 class TestCompileJWTTokens(unittest.TestCase):
     def test_compile_tokens_key(self):
-        _props = OrderedDict({
-            JWT_KEY : "encryptionkey",
-            JWT_ALGORITHM : "HS256"
+        jwt_client = JWTHandler({
+            JWT_KEY : "encryptionkey"
         })
         jwt_client = JWTHandler(_props)
         jwt_client._compile_jwt_token()
@@ -126,8 +125,7 @@ class TestCompileJWTTokens(unittest.TestCase):
     def test_compile_tokens_key_header(self):
         _props = OrderedDict({
             JWT_KEY : "encryptionkey",
-            JWT_HEADERS: OrderedDict({"key1" : "value1", "key2": "value2"}),
-            JWT_ALGORITHM : "HS256"
+            JWT_HEADERS: {"key1" : "value1", "key2": "value2"}
         })
         jwt_client = JWTHandler(_props)
         jwt_client._compile_jwt_token()
@@ -137,9 +135,8 @@ class TestCompileJWTTokens(unittest.TestCase):
     def test_compile_tokens_key_header_payload(self):
         _props = OrderedDict({
             JWT_KEY : "encryptionkey",
-            JWT_HEADERS : OrderedDict({"key1" : "value1", "key2": "value2"}),
-            JWT_PAYLOAD : OrderedDict({"key1" : "value1", "key2": "value2"}),
-            JWT_ALGORITHM : "HS256"
+            JWT_HEADERS : {"key1" : "value1", "key2": "value2"},
+            JWT_PAYLOAD : {"key1" : "value1", "key2": "value2"},
         })
         jwt_client = JWTHandler(_props)
         jwt_client._compile_jwt_token()
