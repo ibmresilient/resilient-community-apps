@@ -41,7 +41,7 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
         if dialect and isinstance(dialect, OracleDialect):
             connection = cx_Oracle.connect(uid, pwd, connect_str, encoding="UTF-8")
         else:
-            connection = pyodbc.connect(connect_str, uid=uid, pwd=pwd)
+            connection = pyodbc.connect(connect_str, uid=uid, pwd=pwd, autocommit=True)
 
         self.dialect.configure_connection(connection)
 
