@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - QRadar SIEM: Find All Reference Sets -Example (PB)
+# Playbook - QRadar SIEM: Get All Reference Sets -Example (PB)
 
 ### API Name
 `find_all_qradar_reference_sets_pb`
@@ -19,7 +19,7 @@
 `artifact`
 
 ### Description
-Find all the QRadar reference sets that contain the given artifact
+Get all the QRadar reference sets that contain the given artifact
 
 
 ---
@@ -60,12 +60,15 @@ from datetime import datetime
 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
 if results.reference_items:
   for item in results.reference_items:
-    item_row = incident.addRow("qradar_reference_set")
-    item_row["query_time"] = current_time
-    item_row["qradar_server"] = results.inputs["qradar_label"]
-    item_row["reference_set"] = item["name"]
-    item_row["item_value"] = item["data"][0]["value"]
-    item_row["source"] = item["data"][0]["source"]
+    
+    for ref_set_data in item["data"]:
+      item_row = incident.addRow("qradar_reference_set")
+      item_row["query_time"] = current_time
+      item_row["qradar_server"] = results.inputs["qradar_label"]
+      item_row["reference_set"] = item["name"]
+      item_row["item_value"] = ref_set_data["value"]
+      item_row["source"] = ref_set_data["source"]
+
   incident.addNote("{} Reference sets found".format(len(results.reference_items)))
 else:
   incident.addNote("No reference sets contain artifact: {} on QRadar server: {}".format(artifact.value, results.inputs["qradar_label"]))

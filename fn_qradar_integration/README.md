@@ -2099,7 +2099,7 @@ qradar_reference_table
 ## Playbooks
 | Playbook Name | Description | Object | Status |
 | ------------- | ----------- | ------ | ------ |
-| QRadar SIEM: Find All Reference Sets -Example (PB) | Find all the QRadar reference sets that contain the given artifact | artifact | `enabled` |
+| QRadar SIEM: Get All Reference Sets -Example (PB) | Find all the QRadar reference sets that contain the given artifact | artifact | `enabled` |
 | QRadar SIEM: Find in Reference Set - Example (PB) | Look for an item in QRadar reference set and add a note to the Incident | artifact | `enabled` |
 | QRadar SIEM: Add Item to this Reference Table - Example (PB) | Add a reference table item based on an existing named reference table | qradar_reference_table | `enabled` |
 | QRadar SIEM: Delete this Reference Table Item - Example (PB) | An example workflow that takes in a Reference Table name, an inner key, an outer key and a value to delete for the table | qradar_reference_table_queried_rows | `enabled` |
