@@ -9,7 +9,6 @@ import fn_qradar_enhanced_data.util.qradar_graphql_queries as qradar_graphql_que
 from fn_qradar_enhanced_data.util.function_utils import (clear_table, get_qradar_client, get_search_timeout, get_server_settings)
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
-import requests
 
 FN_NAME = "qradar_get_offense_mitre_reference"
 
