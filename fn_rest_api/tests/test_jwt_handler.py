@@ -114,7 +114,8 @@ class TestAddJWTHeaders(unittest.TestCase):
 class TestCompileJWTTokens(unittest.TestCase):
     def test_compile_tokens_key(self):
         jwt_client = JWTHandler({
-            JWT_KEY : "encryptionkey"
+            JWT_KEY : "encryptionkey",
+            JWT_ALGORITHM : "HS256"
         })
         jwt_client._compile_jwt_token()
         assert len(jwt_client._jwt_properties[JWT_TOKEN].split(".")) == 3
@@ -123,7 +124,8 @@ class TestCompileJWTTokens(unittest.TestCase):
     def test_compile_tokens_key_header(self):
         jwt_client = JWTHandler({
             JWT_KEY : "encryptionkey",
-            JWT_HEADERS: {"key1" : "value1", "key2": "value2"}
+            JWT_HEADERS: {"key1" : "value1", "key2": "value2"},
+            JWT_ALGORITHM : "HS256"
         })
         jwt_client._compile_jwt_token()
         assert len(jwt_client._jwt_properties[JWT_TOKEN].split(".")) == 3
@@ -134,6 +136,7 @@ class TestCompileJWTTokens(unittest.TestCase):
             JWT_KEY : "encryptionkey",
             JWT_HEADERS : {"key1" : "value1", "key2": "value2"},
             JWT_PAYLOAD : {"key1" : "value1", "key2": "value2"},
+            JWT_ALGORITHM : "HS256"
         })
         jwt_client._compile_jwt_token()
         assert len(jwt_client._jwt_properties[JWT_TOKEN].split(".")) == 3
