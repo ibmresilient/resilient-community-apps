@@ -69,7 +69,7 @@ if results.reference_items:
       item_row["item_value"] = ref_set_data["value"]
       item_row["source"] = ref_set_data["source"]
 
-  incident.addNote("{} Reference sets found".format(len(results.reference_items)))
+  incident.addNote("{} Reference sets found. Please refer to the QRadar SIEM Reference Sets data table".format(len(results.reference_items)))
 else:
   incident.addNote("No reference sets contain artifact: {} on QRadar server: {}".format(artifact.value, results.inputs["qradar_label"]))
 ```
