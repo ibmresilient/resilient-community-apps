@@ -6,12 +6,16 @@
 import cx_Oracle
 import logging
 import pyodbc
+import threading
 from retry import retry
 
 from data_feeder_plugins.sqllib.sql_feed_base import SqlFeedDestinationBase
 from data_feeder_plugins.sqllib.sql_dialect import OracleDialect
 
 LOG = logging.getLogger(__name__)
+
+# retain a connection pool per thread
+THREAD_CONNECTION = {}
 
 class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-public-methods
     """Feed for writing Resilient data to an ODBC destination."""
@@ -31,7 +35,7 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
         self.pwd = options.get("pwd")
         self.uid = options.get("uid")
 
-        self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
+        #self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
 
         self._init_tables()
 
@@ -51,15 +55,22 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
         """Creates a new cursor and returns it to the caller.
 
         :returns A new DB cursor."""
-        return self.connection.cursor()
+        # is there a connection pool for this thread?
+        thread_id = threading.current_thread().ident
+        if not thread_id in THREAD_CONNECTION:
+            THREAD_CONNECTION[thread_id] = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
+            
+        return THREAD_CONNECTION[thread_id].cursor()
 
     def _commit_transaction(self, context):
         """Commits the currently open transaction."""
-        self.connection.commit()
+        thread_id = threading.current_thread().ident
+        THREAD_CONNECTION[thread_id].commit()
 
     def _rollback_transaction(self, context):
         """Rolls back the currently open transaction."""
-        self.connection.rollback()
+        thread_id = threading.current_thread().ident
+        THREAD_CONNECTION[thread_id].rollback()
 
     def _execute_sql(self, cursor, sql, data=None):
         """Executes the specified SQL.
@@ -84,4 +95,5 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
 
     def _close_connection(self):
         """Close the connection to the database"""
-        self.connection.close()
+        thread_id = threading.current_thread().ident
+        THREAD_CONNECTION[thread_id].close()
