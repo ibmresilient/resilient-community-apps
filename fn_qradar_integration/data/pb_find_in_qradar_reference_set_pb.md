@@ -58,9 +58,9 @@ inputs.qradar_label = playbook.inputs.qradar_server
 ```python
 results = playbook.functions.results.qradar_find_reference_set_item_result
 if results.found == "True":
-  incident.addNote(u"Found IP: {} in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
+  incident.addNote(u"Found {} in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
 else:
-  incident.addNote("IP:{} not found in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
+  incident.addNote("{} not found in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
 ```
 
 ---

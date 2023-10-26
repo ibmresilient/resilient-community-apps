@@ -60,14 +60,14 @@ from datetime import datetime
 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
 if results.reference_items:
   for item in results.reference_items:
-    
     for ref_set_data in item["data"]:
-      item_row = incident.addRow("qradar_reference_set")
-      item_row["query_time"] = current_time
-      item_row["qradar_server"] = results.inputs["qradar_label"]
-      item_row["reference_set"] = item["name"]
-      item_row["item_value"] = ref_set_data["value"]
-      item_row["source"] = ref_set_data["source"]
+      if artifact.value == ref_set_data["value"]:
+        item_row = incident.addRow("qradar_reference_set")
+        item_row["query_time"] = current_time
+        item_row["qradar_server"] = results.inputs["qradar_label"]
+        item_row["reference_set"] = item["name"]
+        item_row["item_value"] = ref_set_data["value"]
+        item_row["source"] = ref_set_data["source"]
 
   incident.addNote("{} Reference sets found. Please refer to the QRadar SIEM Reference Sets data table".format(len(results.reference_items)))
 else:
