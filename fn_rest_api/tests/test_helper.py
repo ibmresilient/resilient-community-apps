@@ -2,12 +2,16 @@ import pytest, unittest
 
 from requests.exceptions import HTTPError
 
-from unittest.mock import MagicMock
 from fn_rest_api.lib import helper
 from urllib.error import URLError
 from fn_rest_api.lib.helper import (validate_url,
     render_dict_components, build_dict, make_rest_call)
 
+class TestConsants(unittest.TestCase):
+
+    def test_constants(self):
+        self.assertEqual(helper.CONTENT_TYPE, "Content-type")
+        self.assertEqual(helper.CONTENT_TYPE_JSON, "application/json")
 
 class TestRenderDictComponents(unittest.TestCase):
 

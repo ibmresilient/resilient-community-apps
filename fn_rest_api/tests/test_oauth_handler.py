@@ -44,6 +44,31 @@ def mock_fetch_renew_tokens(*args, **kwargs):
     return mock_response
 
 
+class TestOauthConstants(unittest.TestCase):
+    def test_constants(self):
+        self.assertEqual(DEFAULT_AUTH_CONTENT_TYPE, "application/x-www-form-urlencoded")
+        self.assertEqual(REFRESH_GRANT_TYPE, "refresh_token")
+        self.assertEqual(ACCESS_GRANT_TYPE , "authorization_code")
+        self.assertEqual(AUTH_URL, "auth_url")
+        self.assertEqual(TOKEN_URL, "token_url")
+        self.assertEqual(CODE , "code")
+        self.assertEqual(STATE, "state")
+        self.assertEqual(SCOPE, "scope")
+        self.assertEqual(CLIENT_ID , "client_id")
+        self.assertEqual(GRANT_TYPE, "grant_type")
+        self.assertEqual(TOKEN_TYPE, "token_type")
+        self.assertEqual(EXPIRES_IN, "expires_in")
+        self.assertEqual(ACCESS_TOKEN, "access_token")
+        self.assertEqual(CLIENT_SECRET, "client_secret")
+        self.assertEqual(REFRESH_TOKEN, "refresh_token")
+        self.assertEqual(RESPONSE_MODE, "response_mode")
+        self.assertEqual(RESPONSE_TYPE, "response_type")
+        self.assertEqual(REDIRECT_URI , "redirect_uri")
+        self.assertEqual(CONTENT_TYPE , "content_type")
+        self.assertEqual(ADDITIONAL_HEADERS, "additional_headers")
+        self.assertEqual(ADDITIONAL_ATTRIBUTES, "additional_attributes")
+
+
 class TestCheckOauthReady(unittest.TestCase):
 
     client = OAuth2Authorization(None, {})

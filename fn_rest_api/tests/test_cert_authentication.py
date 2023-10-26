@@ -3,6 +3,15 @@ from unittest.mock import patch
 from fn_rest_api.lib.authentication_handler import *
 from fn_rest_api.lib.helper import *
 
+def test_constants():
+    assert FILE_TYPE_KEY == ".key"
+    assert FILE_TYPE_CSR == ".csr"
+    assert FILE_TYPE_PEM == ".pem"
+    assert CLIENT_AUTH_CERT == "client_auth_cert"
+    assert CLIENT_AUTH_KEY  == "client_auth_key"
+    assert CLIENT_AUTH_PEM  == "client_auth_pem"
+
+
 def test_prepare_certificates():
     cert_content = """
     -----BEGIN PRIVATE KEY-----
