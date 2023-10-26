@@ -29,8 +29,8 @@ def validate_url(url):
 
 def render_dict_components(input_properties, options):
     """
-    Read newline-separated or json formatted 'headers', 'body' and 'cookies' into a 
-    dictionary, if None, skipped. The input values are not required to be returned
+    Read newline-separated or json formatted 'headers', 'body' 'query_parameters', and 'cookies'
+    into a dictionary, if None, skipped. The input values are not required to be returned
     as they are passed by reference.
     """
     for key in input_properties:
@@ -79,7 +79,7 @@ def build_dict(kv_string:str) -> dict:
 
 def make_rest_call(opts, options, rest_method : str,
     rest_url  : str, headers_dict : dict, cookies_dict : dict,
-    body_dict : dict, rest_verify : bool, rest_timeout : int,
+    body_dict : dict, query_params: dict, rest_verify : bool, rest_timeout : int,
     rest_certificate : tuple=None, allowed_status_codes : list=[200]) -> requests.Response:
     '''
     A wrapper function that makes the rest call and returns the response object. The callback function
@@ -92,6 +92,7 @@ def make_rest_call(opts, options, rest_method : str,
     :param headers_dict: dictionary of headers. Supports json and new-line separated key-value string
     :param cookies_dict: dictionary of cookies. Supports json and new-line separated key-value string
     :param body_dict: dictionary of body. Supports json and new-line separated key-value string
+    :param query_params: dictionary of GET method url values. Supports json and new-line separated key-value string
     :param rest_verify: indicates whether to verify SSL certificates. Default is True
     :param rest_timeout: timeout in seconds. Default is 600 seconds
     :param rest_certificate: Tuple (.csr, .key), or a string .key. Required to perform client side authentication
@@ -128,6 +129,7 @@ def make_rest_call(opts, options, rest_method : str,
                     headers=headers_dict,
                     cookies=cookies_dict,
                     json=body_dict,
+                    params=query_params,
                     verify=rest_verify,
                     timeout=rest_timeout,
                     clientauth=rest_certificate,
@@ -138,6 +140,7 @@ def make_rest_call(opts, options, rest_method : str,
         headers=headers_dict,
         cookies=cookies_dict,
         data=body_dict,
+        params=query_params,
         verify=rest_verify,
         timeout=rest_timeout,
         clientauth=rest_certificate,
