@@ -84,9 +84,9 @@ for event in results["events"]:
   qradar_event.protocol = event["protocolname_protocolid"]
   qradar_event.rule = event["rulename_creeventlist"]
 if playbook.inputs.days_to_search_back:
-  incident.addNote("{} events have successfully been queried for the last {} days".format(len(results["events"]), playbook.inputs.days_to_search_back))
+  incident.addNote("QRadar SIEM: Get QRadar Offense Events: {} events have successfully been queried for the last {} days".format(len(results["events"]), playbook.inputs.days_to_search_back))
 else:
-  incident.addNote("{} events have successfully been queried for the last 7 days".format(len(results["events"])))
+  incident.addNote("QRadar SIEM: Get QRadar Offense Events: {} events have successfully been queried for the last 7 days".format(len(results["events"])))
 
 
 ```

@@ -67,7 +67,7 @@ if results.success:
       item_row["collection_id"] = item["collection_id"]
       item_row["number_of_elements"] = item["number_of_elements"]
       item_row["namespace"] = item["namespace"]
-    incident.addNote("{} Reference tables have successfully been queried".format(len(results.content)))
+    incident.addNote("QRadar SIEM: Get all Reference Tables: {} Reference tables have successfully been queried".format(len(results.content)))
   else:
     incident.addNote("No reference tables found")
 else:

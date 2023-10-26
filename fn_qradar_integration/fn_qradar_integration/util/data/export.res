@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1698317181048,
+  "export_date": 1698331968238,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1154,13 +1154,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 192,
+  "id": 195,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1698317172817,
+      "create_date": 1698331955480,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1169,7 +1169,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1698317172817,
+      "update_date": 1698331955480,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2373,7 +2373,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 28,
+        "content_version": 29,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3e15a087_0799_4b05_87ce_32cffbffa5c7\" isExecutable=\"true\" name=\"playbook_3e15a087_0799_4b05_87ce_32cffbffa5c7\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0c33c8w\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: Reference Table Get All Tables\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0abff118-314e-4728-964d-03558088a62a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_label = playbook.inputs.qradar_server\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_reference_table_get_all_tables_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0c33c8w\u003c/incoming\u003e\u003coutgoing\u003eFlow_1or4mlg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1f5g0cc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0c33c8w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1or4mlg\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\" qradar_reference_table_get_all_tables_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7a5feda6-77ba-4091-9a92-6cc70ef8f635\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1or4mlg\u003c/incoming\u003e\u003coutgoing\u003eFlow_1f5g0cc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1f5g0cc\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3e15a087_0799_4b05_87ce_32cffbffa5c7\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1f5g0cc\" id=\"Flow_1f5g0cc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1or4mlg\" id=\"Flow_1or4mlg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c33c8w\" id=\"Flow_0c33c8w_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1693557405458,
@@ -2455,7 +2455,7 @@
         "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1697615615225,
+      "last_modified_time": 1698329554003,
       "local_scripts": [
         {
           "actions": [],
@@ -2466,12 +2466,12 @@
           "id": 8,
           "language": "python3",
           "last_modified_by": "soar_apps_dev@ibm.com",
-          "last_modified_time": 1697615612516,
+          "last_modified_time": 1698329547702,
           "name": " qradar_reference_table_get_all_tables_post_process",
           "object_type": "incident",
           "playbook_handle": "qradar_get_all_reference_tables__example_pb",
           "programmatic_name": "qradar_get_all_reference_tables__example_pb_script_qradar_reference_table_get_all_tables_post_process",
-          "script_text": "results = playbook.functions.results.qradar_reference_table_get_all_tables_result\nfrom datetime import datetime\ncurrent_time = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\") \nif results.success:\n  if results.content:\n    for item in results.content:\n      item_row = incident.addRow(\"qradar_reference_table\")\n      item_row[\"query_time\"] = current_time\n      item_row[\"qradar_server\"] = results.inputs[\"qradar_label\"]\n      item_row[\"reference_table\"] = item[\"name\"]\n      item_row[\"collection_id\"] = item[\"collection_id\"]\n      item_row[\"number_of_elements\"] = item[\"number_of_elements\"]\n      item_row[\"namespace\"] = item[\"namespace\"]\n    incident.addNote(\"{} Reference tables have successfully been queried\".format(len(results.content)))\n  else:\n    incident.addNote(\"No reference tables found\")\nelse:\n  incident.addNote(\"An error occurred getting the reference tables: {} from QRadar server: {}\".format(results.reason, rule.properties.qradar_label))",
+          "script_text": "results = playbook.functions.results.qradar_reference_table_get_all_tables_result\nfrom datetime import datetime\ncurrent_time = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\") \nif results.success:\n  if results.content:\n    for item in results.content:\n      item_row = incident.addRow(\"qradar_reference_table\")\n      item_row[\"query_time\"] = current_time\n      item_row[\"qradar_server\"] = results.inputs[\"qradar_label\"]\n      item_row[\"reference_table\"] = item[\"name\"]\n      item_row[\"collection_id\"] = item[\"collection_id\"]\n      item_row[\"number_of_elements\"] = item[\"number_of_elements\"]\n      item_row[\"namespace\"] = item[\"namespace\"]\n    incident.addNote(\"QRadar SIEM: Get all Reference Tables: {} Reference tables have successfully been queried\".format(len(results.content)))\n  else:\n    incident.addNote(\"No reference tables found\")\nelse:\n  incident.addNote(\"An error occurred getting the reference tables: {} from QRadar server: {}\".format(results.reason, rule.properties.qradar_label))",
           "tags": [],
           "uuid": "7a5feda6-77ba-4091-9a92-6cc70ef8f635"
         }
@@ -2505,12 +2505,12 @@
       "tags": [],
       "type": "default",
       "uuid": "3e15a087-0799-4b05-87ce-32cffbffa5c7",
-      "version": 37
+      "version": 38
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 50,
+        "content_version": 51,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b8c11ef3_56fb_484d_ae61_160c1c8adf69\" isExecutable=\"true\" name=\"playbook_b8c11ef3_56fb_484d_ae61_160c1c8adf69\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1mlt7oj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar SIEM: QRadar Search\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c3e6f6cc-8905-41e6-9841-ebe99845d778\"\u003e{\"inputs\":{\"a49a50f2-68ba-4ccb-87d5-c7e55d2cbfef\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"048ba39a-ab94-4d1f-a0f8-2462de3c044c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"01ed4652-fe61-4dbf-bc83-f81c62c5563c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9d8fc645-5067-4ab0-b151-1d106dad91d6\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"b6053690-d7b2-4204-b48a-f86503b419d9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"eefc9e56-2806-4534-b409-42e25154ecc9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"19778fc0-9a30-4b8b-9c21-642495f9eebc\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"c33fbe1d-125c-4a79-82e8-6608d1c7bb5e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d21f2814-40e6-4f7a-b269-6ff2c7a3196e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d7a544ff-689b-4f15-b3c1-a7ebd20bbf3b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"54c4eb52-d955-4e05-9f76-c3819853ff68\"}}},\"pre_processing_script\":\"inputs.qradar_label = playbook.inputs.qradar_server\\n\\n\\nif playbook.inputs.qradar_query_all_results:\\n  inputs.qradar_query_all_results = playbook.inputs.qradar_query_all_results\\n\\n  \\ninputs.qradar_query = \\\"SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days\\\"\\ninputs.qradar_search_param1  = \\\"DATEFORMAT(starttime, \u0027YYYY-MM-dd HH:mm\u0027) as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)\\\"\\ninputs.qradar_search_param2 = incident.properties.qradar_id\\nif playbook.inputs.days_to_search_back: \\n  inputs.qradar_search_param3 = playbook.inputs.days_to_search_back\\nelse:\\n  inputs.qradar_search_param3 = \u00277\u0027\\ninputs.qradar_query_range_start = \u00271\u0027\\ninputs.qradar_query_range_end = \u00275\u0027\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"qradar_search_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mlt7oj\u003c/incoming\u003e\u003coutgoing\u003eFlow_10dtv7a\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1mlt7oj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_09zi6q9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_10dtv7a\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"qradar_search_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"7db7d19a-729f-4c31-9345-c95b6cfb2b03\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_10dtv7a\u003c/incoming\u003e\u003coutgoing\u003eFlow_09zi6q9\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_09zi6q9\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b8c11ef3_56fb_484d_ae61_160c1c8adf69\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09zi6q9\" id=\"Flow_09zi6q9_di\"\u003e\u003comgdi:waypoint x=\"420\" y=\"522\"/\u003e\u003comgdi:waypoint x=\"420\" y=\"574\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10dtv7a\" id=\"Flow_10dtv7a_di\"\u003e\u003comgdi:waypoint x=\"420\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"420\" y=\"438\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mlt7oj\" id=\"Flow_1mlt7oj_di\"\u003e\u003comgdi:waypoint x=\"420\" y=\"146\"/\u003e\u003comgdi:waypoint x=\"420\" y=\"268\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"326\" y=\"94\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"321.5\" y=\"267.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"353.5\" y=\"573.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"321.5\" y=\"437.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1693989179033,
@@ -2669,7 +2669,7 @@
         "name": "soar_apps_dev@ibm.com",
         "type": "user"
       },
-      "last_modified_time": 1698317115374,
+      "last_modified_time": 1698329492778,
       "local_scripts": [
         {
           "actions": [],
@@ -2680,12 +2680,12 @@
           "id": 16,
           "language": "python3",
           "last_modified_by": "soar_apps_dev@ibm.com",
-          "last_modified_time": 1698244818654,
+          "last_modified_time": 1698329482335,
           "name": "qradar_search_post_process",
           "object_type": "incident",
           "playbook_handle": "search_qradar_for_offense_id",
           "programmatic_name": "search_qradar_for_offense_id_qradar_search_post_process",
-          "script_text": "results = playbook.functions.results.qradar_search_result\nfrom datetime import datetime\ncurrent_time = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n\nfor event in results[\"events\"]:\n  qradar_event = incident.addRow(\"qradar_offense_event\")\n  qradar_event.query_time = current_time\n  qradar_event.qradar_server = results.inputs.get(\"qradar_label\")\n  qradar_event.start_time = event[\"StartTime\"]\n  qradar_event.category = event[\"categoryname_category\"]\n  qradar_event.log_source = event[\"logsourcename_logsourceid\"]\n  qradar_event.protocol = event[\"protocolname_protocolid\"]\n  qradar_event.rule = event[\"rulename_creeventlist\"]\nif playbook.inputs.days_to_search_back:\n  incident.addNote(\"{} events have successfully been queried for the last {} days\".format(len(results[\"events\"]), playbook.inputs.days_to_search_back))\nelse:\n  incident.addNote(\"{} events have successfully been queried for the last 7 days\".format(len(results[\"events\"])))\n\n",
+          "script_text": "results = playbook.functions.results.qradar_search_result\nfrom datetime import datetime\ncurrent_time = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n\nfor event in results[\"events\"]:\n  qradar_event = incident.addRow(\"qradar_offense_event\")\n  qradar_event.query_time = current_time\n  qradar_event.qradar_server = results.inputs.get(\"qradar_label\")\n  qradar_event.start_time = event[\"StartTime\"]\n  qradar_event.category = event[\"categoryname_category\"]\n  qradar_event.log_source = event[\"logsourcename_logsourceid\"]\n  qradar_event.protocol = event[\"protocolname_protocolid\"]\n  qradar_event.rule = event[\"rulename_creeventlist\"]\nif playbook.inputs.days_to_search_back:\n  incident.addNote(\"QRadar SIEM: Get QRadar Offense Events: {} events have successfully been queried for the last {} days\".format(len(results[\"events\"]), playbook.inputs.days_to_search_back))\nelse:\n  incident.addNote(\"QRadar SIEM: Get QRadar Offense Events: {} events have successfully been queried for the last 7 days\".format(len(results[\"events\"])))\n\n",
           "tags": [],
           "uuid": "7db7d19a-729f-4c31-9345-c95b6cfb2b03"
         }
@@ -2743,7 +2743,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b8c11ef3-56fb-484d-ae61-160c1c8adf69",
-      "version": 59
+      "version": 60
     },
     {
       "activation_type": "manual",
