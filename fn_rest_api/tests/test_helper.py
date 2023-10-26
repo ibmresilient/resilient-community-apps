@@ -3,7 +3,6 @@ import pytest, unittest
 from requests.exceptions import HTTPError
 
 from fn_rest_api.lib import helper
-
 from urllib.error import URLError
 from fn_rest_api.lib.helper import (validate_url,
     render_dict_components, build_dict, make_rest_call)
