@@ -23,6 +23,7 @@ from rc_data_feed.lib.rest_client_helper import RestClientHelper
 LOG = logging.getLogger(__name__)
 
 DEF_NUM_WORKERS = 25
+POOL_RATIO = 1.0 # multiplier for number of pool threads to allow
 
 class PluginPool():
     """This class allows for separate, long running threads to perform the plugin logic.
@@ -35,7 +36,7 @@ class PluginPool():
         self.workspaces = workspaces
 
         # increase the number of threads for handling event messages
-        thread_pool_size = int(self.num_workers*1.5) # increase threads by 50%
+        thread_pool_size = int(self.num_workers*POOL_RATIO) # could be +/- num_workers
         LOG.info(f"ThreadPool size: {thread_pool_size}")
         self.pool = multiprocessing.pool.ThreadPool(thread_pool_size)
 
