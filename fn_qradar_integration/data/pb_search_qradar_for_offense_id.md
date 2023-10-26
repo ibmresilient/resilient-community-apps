@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - QRadar SIEM: Search QRadar for offense id -Example (PB)
+# Playbook - QRadar SIEM: Get QRadar Offense Events - Example (PB)
 
 ### API Name
 `search_qradar_for_offense_id`
