@@ -737,7 +737,7 @@ class JWTHandler:
         
         # Checking if header already has ACCESS_TOKEN present
         elif self._check_jwt_ready() and AUTHORIZATION_KEY in rest_properties.get(HEADERS) and rest_properties[HEADERS][AUTHORIZATION_KEY]:
-            raise f"""Header already has a ACCESS_KEY present {rest_properties[HEADERS]}"""
+            raise IntegrationError(f"""Header already has a ACCESS_KEY present {rest_properties[HEADERS]}""")
 
         # Updating headers with JWT token
         else:

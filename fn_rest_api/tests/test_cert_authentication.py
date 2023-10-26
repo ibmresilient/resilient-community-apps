@@ -3,6 +3,15 @@ from unittest.mock import patch
 from fn_rest_api.lib.authentication_handler import *
 from fn_rest_api.lib.helper import *
 
+def test_constants():
+    assert FILE_TYPE_KEY == ".key"
+    assert FILE_TYPE_CSR == ".csr"
+    assert FILE_TYPE_PEM == ".pem"
+    assert CLIENT_AUTH_CERT == "client_auth_cert"
+    assert CLIENT_AUTH_KEY  == "client_auth_key"
+    assert CLIENT_AUTH_PEM  == "client_auth_pem"
+
+
 def test_prepare_certificates():
     cert_content = """
     -----BEGIN PRIVATE KEY-----
@@ -30,7 +39,7 @@ def test_prepare_certificates():
 
     with open(certs_path.get("privateKey_test").get("file"), "r") as file:
         assert cert_content == file.read()
-    
+
     delete_certificates(certs_path)
 
 
@@ -87,10 +96,18 @@ def test_check_certificate():
 
 
 @pytest.mark.parametrize("test_case, expected_response", [
-    ("title: foo\n body : bar\n  userId:1\n", {'title': 'foo', 'body': 'bar', 'userId': '1'}),
-    ('{"title": "foo", "body" : "bar",  "userId":"1"}', {'title': 'foo', 'body': 'bar', 'userId': '1'}),
-    ('{"title": "foo", "body": ["bar1", "bar2"], "userId": "1"}', {'title': 'foo', 'body': ['bar1', 'bar2'], 'userId': '1'}),
-    ('{"title": "foo", "body" : ["bar1", "bar2"],  "userId":"1", "sub_dict" : {"title": "foo", "body" : ["bar1", "bar2"],  "userId":"1"}}', {'title': 'foo', 'body': ['bar1', 'bar2'], 'userId': '1', 'sub_dict' : {'title': 'foo', 'body': ['bar1', 'bar2'], 'userId': '1'}})
+    (
+        "title: foo\n body : bar\n  userId:1\n", 
+        {'title': 'foo', 'body': 'bar', 'userId': '1'}),
+    (
+        '{"title": "foo", "body" : "bar",  "userId":"1"}',
+        {'title': 'foo', 'body': 'bar', 'userId': '1'}),
+    (
+        '{"title": "foo", "body": ["bar1", "bar2"], "userId": "1"}',
+        {'title': 'foo', 'body': ['bar1', 'bar2'], 'userId': '1'}),
+    (
+        '{"title": "foo", "body" : ["bar1", "bar2"],  "userId":"1", "sub_dict" : {"title": "foo", "body" : ["bar1", "bar2"],  "userId":"1"}}',
+        {'title': 'foo', 'body': ['bar1', 'bar2'], 'userId': '1', 'sub_dict' : {'title': 'foo', 'body': ['bar1', 'bar2'], 'userId': '1'}})
 ])
 def test_build_dict(test_case, expected_response):
     generated_response = build_dict(test_case)

@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 from resilient_lib import render, RequestsCommon
 
 LOG = logging.getLogger()
-CONTENT_TYPE = "Content-type"
+CONTENT_TYPES = ["Content-type", "content-type", "CONTENT-TYPE", "Content-Type"]
 CONTENT_TYPE_JSON = "application/json"
 
 
@@ -119,17 +119,21 @@ def make_rest_call(opts, options, rest_method : str,
     rc = RequestsCommon(opts, options)
 
     # If the content-type is json, then use the json parameter, else use the data parameter
-    if headers_dict and CONTENT_TYPE in headers_dict and CONTENT_TYPE_JSON in headers_dict[CONTENT_TYPE]:
-        return rc.execute(
-            rest_method, rest_url,
-            headers=headers_dict,
-            cookies=cookies_dict,
-            json=body_dict,
-            params=query_params,
-            verify=rest_verify,
-            timeout=rest_timeout,
-            clientauth=rest_certificate,
-            callback=callback)
+    # Content-type is made case agnostic
+    if headers_dict:
+        for content_type in CONTENT_TYPES:
+            if content_type in headers_dict and CONTENT_TYPE_JSON in headers_dict[content_type]:
+                LOG.info(f"Found {content_type} : {CONTENT_TYPE_JSON} in request header. Payload will be json formatted")
+                return rc.execute(
+                    rest_method, rest_url,
+                    headers=headers_dict,
+                    cookies=cookies_dict,
+                    json=body_dict,
+                    params=query_params,
+                    verify=rest_verify,
+                    timeout=rest_timeout,
+                    clientauth=rest_certificate,
+                    callback=callback)
 
     return rc.execute(
         rest_method, rest_url,
