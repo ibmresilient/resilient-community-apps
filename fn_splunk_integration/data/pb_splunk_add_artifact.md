@@ -89,7 +89,7 @@ if artifact.type in lookup_map and lookup_map[artifact.type]:
   inputs.splunk_threat_intel_type = threat_type
   inputs.splunk_query_param1 = threat_field_name
   inputs.splunk_query_param2 = artifact.value
-  inputs.splunk_label = getattr(playbook.inputs, "splunk_server")
+  inputs.splunk_label = getattr(playbook.inputs, "splunk_server", None)
 else:
   helper.fail(f"Artifact type not supported: {artifact.type}")
 ```
@@ -122,13 +122,14 @@ result_note = u"""<b>Artifact</b>: {}<br><br>
 
 if results_content.get("status", False):
   incident.addNote(helper.createRichText(result_note))
+  results_inputs = results.get("inputs", {})
   result_row = incident.addRow("splunk_intel_results")
   result_row.create_date = now
   result_row.status = "Added"
-  result_row.intel_collection = results.inputs['splunk_threat_intel_type']
-  result_row.intel_field = results.inputs['splunk_query_param1']
-  result_row.intel_value = results.inputs['splunk_query_param2']
-  result_row.splunk_server = getattr(playbook.inputs, "splunk_server")
+  result_row.intel_collection = results_inputs.get('splunk_threat_intel_type', None)
+  result_row.intel_field = results_inputs.get('splunk_query_param1', None)
+  result_row.intel_value = results_inputs.get('splunk_query_param2', None)
+  result_row.splunk_server = getattr(playbook.inputs, "splunk_server", None)
 ```
 
 ---

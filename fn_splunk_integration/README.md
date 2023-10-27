@@ -269,7 +269,7 @@ if artifact.type in lookup_map and lookup_map[artifact.type]:
   inputs.splunk_threat_intel_type = threat_type
   inputs.splunk_query_param1 = threat_field_name
   inputs.splunk_query_param2 = artifact.value
-  inputs.splunk_label = getattr(playbook.inputs, "splunk_server")
+  inputs.splunk_label = getattr(playbook.inputs, "splunk_server", None)
 else:
   helper.fail(f"Artifact type not supported: {artifact.type}")
 ```
@@ -294,13 +294,14 @@ result_note = u"""<b>Artifact</b>: {}<br><br>
 
 if results_content.get("status", False):
   incident.addNote(helper.createRichText(result_note))
+  results_inputs = results.get("inputs", {})
   result_row = incident.addRow("splunk_intel_results")
   result_row.create_date = now
   result_row.status = "Added"
-  result_row.intel_collection = results.inputs['splunk_threat_intel_type']
-  result_row.intel_field = results.inputs['splunk_query_param1']
-  result_row.intel_value = results.inputs['splunk_query_param2']
-  result_row.splunk_server = getattr(playbook.inputs, "splunk_server")
+  result_row.intel_collection = results_inputs.get('splunk_threat_intel_type', None)
+  result_row.intel_field = results_inputs.get('splunk_query_param1', None)
+  result_row.intel_value = results_inputs.get('splunk_query_param2', None)
+  result_row.splunk_server = getattr(playbook.inputs, "splunk_server", None)
 ```
 
 </p>
@@ -410,7 +411,6 @@ Define a Splunk query string with parameters. Map parameters from inputs, and pe
 | `splunk_query_param3` | `text` | No | `-` | - |
 | `splunk_query_param4` | `text` | No | `-` | - |
 | `splunk_query_param5` | `text` | No | `-` | - |
-| `splunk_search_time_to_wait` | `number` | No | `2` | Time in seconds to wait before checking if the search has completed |
 
 </p>
 </details>
@@ -519,13 +519,12 @@ if artifact.type in lookup_map and lookup_map.get(artifact.type):
   inputs.splunk_query_param1 = threat_type
   inputs.splunk_query_param2 = threat_field_name
   inputs.splunk_query_param3 = artifact.value
-  inputs.splunk_label = getattr(playbook.inputs, "splunk_server")
+  inputs.splunk_label = getattr(playbook.inputs, "splunk_server", None)
 else:
   helper.fail("Artifact type not supported: {}".format(artifact.type))
 
 inputs.splunk_query = "| `%param1%` | eval item_key=_key | search %param2%=%param3%"
 inputs.splunk_max_return = 10
-inputs.splunk_search_time_to_wait = 2
 ```
 
 </p>
@@ -633,7 +632,7 @@ if incident.properties.splunk_notable_event_id:
   else:
       inputs.notable_event_status = 2
       inputs.comment = "SOAR incident is active"
-  inputs.splunk_label = getattr(playbook.inputs, "splunk_server")
+  inputs.splunk_label = getattr(playbook.inputs, "splunk_server", None)
 else:
   helper.fail("Ensure that the incident custom field is set: splunk_notable_event_id")
 ```

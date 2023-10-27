@@ -150,30 +150,17 @@ class SplunkUtils(object):
 
         return self.send_post(url, {"item": dumps(threat_dict)})
 
-    def get_search_results(self, search_id, max_return):
-        """
-        Get the results from a Jira search
-        """
-        resp = self.rc.execute("get", f"{self.base_url}/services/search/v2/jobs/{search_id}/results", data={"output_mode": "json", "count": max_return}, headers=self.header, verify=self.verify, proxies=self.proxies)
-        if not resp.content: # If content is empty then the search has not finished running yet
-            return
-        return resp.json()
-
-    def search(self, query, max_return, time_to_wait):
+    def search(self, query, max_return):
         """
         Perform a search on splunk
         """
-        # Create splunk search
-        search_job = self.rc.execute("post", f"{self.base_url}/services/search/v2/jobs", data={"search": query, "output_mode": "json"}, headers=self.header, verify=self.verify, proxies=self.proxies).json()
+        # Create a Splunk blocking search job. A blocking search job will not return a result until the job is finished.
+        search_job = self.rc.execute("post", f"{self.base_url}/services/search/v2/jobs", data={"search": query, "output_mode": "json", "exec_mode": "blocking"}, headers=self.header, verify=self.verify, proxies=self.proxies).json()
         search_id = search_job.get("sid")
+        # Get the results from the Splunk search job with the sid
+        resp = self.rc.execute("get", f"{self.base_url}/services/search/v2/jobs/{search_id}/results", data={"output_mode": "json", "count": max_return}, headers=self.header, verify=self.verify, proxies=self.proxies).json()
 
-        while True:
-            sleep(time_to_wait)
-            search_results = self.get_search_results(search_id, max_return)
-            if search_results.get("results"):
-                break
-
-        return search_results.get("results")
+        return resp.get("results")
 
     def get_messages(self):
         """

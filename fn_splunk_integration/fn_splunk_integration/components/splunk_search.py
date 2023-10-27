@@ -9,7 +9,6 @@ from resilient_lib import validate_fields
 
 FN_NAME = "splunk_search"
 MAX_RETURN = 50 # Default max number of search results to be returned
-TIME_TO_WAIT = 10 # Default time to wait before checking the status of the Splunk search
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'splunk_search"""
@@ -31,7 +30,6 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.splunk_query_param5
             -   fn_inputs.max_return
             -   fn_inputs.splunk_label
-            -   fn_inputs.splunk_search_time_to_wait
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
@@ -53,9 +51,7 @@ class FunctionComponent(AppFunctionComponent):
 
         splunk = function_basics(fn_inputs, self.servers_list, self.opts)
 
-        splunk_result = splunk.search(query_string,
-                                      getattr(fn_inputs, "splunk_max_return", 50),
-                                      getattr(fn_inputs, "splunk_search_time_to_wait", TIME_TO_WAIT))
+        splunk_result = splunk.search(query_string, getattr(fn_inputs, "splunk_max_return", 50))
 
         self.LOG.debug(splunk_result)
 

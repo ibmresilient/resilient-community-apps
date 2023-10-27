@@ -89,13 +89,12 @@ if artifact.type in lookup_map and lookup_map.get(artifact.type):
   inputs.splunk_query_param1 = threat_type
   inputs.splunk_query_param2 = threat_field_name
   inputs.splunk_query_param3 = artifact.value
-  inputs.splunk_label = getattr(playbook.inputs, "splunk_server")
+  inputs.splunk_label = getattr(playbook.inputs, "splunk_server", None)
 else:
   helper.fail("Artifact type not supported: {}".format(artifact.type))
 
 inputs.splunk_query = "| `%param1%` | eval item_key=_key | search %param2%=%param3%"
 inputs.splunk_max_return = 10
-inputs.splunk_search_time_to_wait = 2
 ```
 
 ---

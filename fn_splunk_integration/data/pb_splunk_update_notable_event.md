@@ -53,7 +53,7 @@ if incident.properties.splunk_notable_event_id:
   else:
       inputs.notable_event_status = 2
       inputs.comment = "SOAR incident is active"
-  inputs.splunk_label = getattr(playbook.inputs, "splunk_server")
+  inputs.splunk_label = getattr(playbook.inputs, "splunk_server", None)
 else:
   helper.fail("Ensure that the incident custom field is set: splunk_notable_event_id")
 ```

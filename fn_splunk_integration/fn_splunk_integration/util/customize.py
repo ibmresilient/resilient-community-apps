@@ -2,7 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v50.1.262
 
-"""Generate the Resilient customizations required for fn_splunk_integration"""
+"""Generate the SOAR customizations required for fn_splunk_integration"""
 
 import base64
 import os
