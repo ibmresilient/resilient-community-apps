@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1698426939072,
+  "export_date": 1698429318702,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1170,13 +1170,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 7,
+  "id": 9,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1698426937141,
+      "create_date": 1698429316743,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1185,7 +1185,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1698426937141,
+      "update_date": 1698429316743,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2388,7 +2388,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\" isExecutable=\"true\" name=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_07evlnu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Shutdown Agent\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"41479530-59cd-432f-bc33-562dad5322db\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"shutdown_agent_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07evlnu\u003c/incoming\u003e\u003coutgoing\u003eFlow_05ms2uc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_07evlnu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1vz17y2\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"SentinelOne: Write shutdown agent results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"eea92321-26bf-4462-846e-d2df381cea6e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05ms2uc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vz17y2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05ms2uc\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1vz17y2\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vz17y2\" id=\"Flow_1vz17y2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05ms2uc\" id=\"Flow_05ms2uc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07evlnu\" id=\"Flow_07evlnu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1697829316976,
@@ -2440,7 +2440,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1697829317460,
+      "last_modified_time": 1698429284567,
       "local_scripts": [
         {
           "actions": [],
@@ -2451,12 +2451,12 @@
           "id": 13,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1697829317066,
+          "last_modified_time": 1698429281879,
           "name": "SentinelOne: Write shutdown agent results to a note",
           "object_type": "sentinelone_agents_dt",
           "playbook_handle": "sentinelone_shutdown_agent_pb",
           "programmatic_name": "sentinelone_shutdown_agent_pb_sentinelone_write_shutdown_agent_results_to_a_note",
-          "script_text": "results = playbook.functions.results.shutdown_agent_results\n\nif results.get(\"success\", False):\n  so_inputs = results.get(\"inputs\")\n  agent_id = so_inputs.get(\"sentinelone_agent_id\")\n  note = \"\u003cb\u003eSentinelOne: Shutdown Agent \u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\n  content = results.get(\"content\")\n  if content:\n    data = content.get(\"data\")\n    if data:\n      if int(data.get(\"affected\")) \u003c= 0:\n        note = \"{0} Agent was NOT shutdown.\".format(note)\n      else:\n        note = \"{0} Agent shutdown initiated.\".format(note)\n    else:\n      note = \"{0} Agent shutdown was NOT initiated. No \u0027data\u0027 returned from function\".format(note)\n  else:\n    note = \"{0} Agent shutdown was NOT initiated. No content returned from function\".format(note)  \nelse:\n  note = \"{0} Agent shutdown was NOT initiated. Function did no return success\".format(note)  \n  \nincident.addNote(helper.createRichText(note))",
+          "script_text": "results = playbook.functions.results.shutdown_agent_results\n\nif results.get(\"success\", False):\n  so_inputs = results.get(\"inputs\")\n  agent_id = so_inputs.get(\"sentinelone_agent_id\")\n  note = \"\u003cb\u003eSentinelOne: Shutdown Agent \u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\n  content = results.get(\"content\")\n  if content:\n    data = content.get(\"data\")\n    if data:\n      if int(data.get(\"affected\")) \u003c= 0:\n        note = \"{0} Agent was NOT shutdown.\".format(note)\n      else:\n        note = \"{0} Agent shutdown initiated.\u003cbr\u003eNote: The Is Active status may take time to be reflected in the SentinelOne Agent data table.\u003cbr\u003eUse manual playbook to update the data table.\".format(note)\n    else:\n      note = \"{0} Agent shutdown was NOT initiated. No \u0027data\u0027 returned from function\".format(note)\n  else:\n    note = \"{0} Agent shutdown was NOT initiated. No content returned from function\".format(note)  \nelse:\n  note = \"{0} Agent shutdown was NOT initiated. Function did no return success\".format(note)  \n  \nincident.addNote(helper.createRichText(note))",
           "tags": [],
           "uuid": "eea92321-26bf-4462-846e-d2df381cea6e"
         }
@@ -2496,7 +2496,7 @@
       "tags": [],
       "type": "default",
       "uuid": "494c0e8d-8cd2-4c46-b8b7-bf331d174d58",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",

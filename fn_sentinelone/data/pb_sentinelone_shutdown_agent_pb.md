@@ -70,7 +70,7 @@ if results.get("success", False):
       if int(data.get("affected")) <= 0:
         note = "{0} Agent was NOT shutdown.".format(note)
       else:
-        note = "{0} Agent shutdown initiated.".format(note)
+        note = "{0} Agent shutdown initiated.<br>Note: The Is Active status may take time to be reflected in the SentinelOne Agent data table.<br>Use manual playbook to update the data table.".format(note)
     else:
       note = "{0} Agent shutdown was NOT initiated. No 'data' returned from function".format(note)
   else:
