@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1697829830384,
+  "export_date": 1698426939072,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1170,13 +1170,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 2,
+  "id": 7,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1697829828052,
+      "create_date": 1698426937141,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1185,7 +1185,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1697829828052,
+      "update_date": 1698426937141,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1213,7 +1213,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_3563c338_9593_4b3f_a745_796931cbd3a1\" isExecutable=\"true\" name=\"playbook_3563c338_9593_4b3f_a745_796931cbd3a1\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0otf4wz\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Abort Disk Scan\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"25716252-8e8c-43a5-8dbb-f9137266bf70\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"abort_scan_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0otf4wz\u003c/incoming\u003e\u003coutgoing\u003eFlow_06661nc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0otf4wz\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Write Abort Scan Results to a Note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"308b51c4-d2bd-47ce-9f35-3fb9380f9c54\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06661nc\u003c/incoming\u003e\u003coutgoing\u003eFlow_03svtmj\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_06661nc\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_03svtmj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_03svtmj\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3563c338_9593_4b3f_a745_796931cbd3a1\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03svtmj\" id=\"Flow_03svtmj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06661nc\" id=\"Flow_06661nc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0otf4wz\" id=\"Flow_0otf4wz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1697829311625,
@@ -1265,7 +1265,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1697829312471,
+      "last_modified_time": 1698425791976,
       "local_scripts": [
         {
           "actions": [],
@@ -1276,12 +1276,12 @@
           "id": 3,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1697829311725,
+          "last_modified_time": 1698425785692,
           "name": "SentinelOne: Write Abort Scan Results to a Note",
           "object_type": "sentinelone_agents_dt",
           "playbook_handle": "sentinelone_abort_disk_scan_pb",
           "programmatic_name": "sentinelone_abort_disk_scan_pb_sentinelone_write_abort_scan_results_to_a_note",
-          "script_text": "results = playbook.functions.results.abort_scan_results\n\nso_inputs = results.get(\"inputs\")\nagent_id = so_inputs.get(\"sentinelone_agent_id\")\nnote = u\"\u003cb\u003eSentinelOne: Abort Full Disk Scan \u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\ncontent = results.get(\"content\")\nif content:\n  data = content.get(\"data\")\n  if data:\n    if int(data.get(\"affected\")) \u003c= 0:\n      note = u\"{0} Full Disk Scan was NOT aborted.\".format(note)\n    else:\n      note = u\"{0} Full Disk Scan aborted.\".format(note)\n  else:\n    note = u\"{0} Full Disk Scan was NOT aborted. No \u0027data\u0027 returned from function\".format(note)\nelse:\n    note = u\"{0} Full Disk Scan was NOT aborted. No content returned from function\".format(note)  \n\nincident.addNote(helper.createRichText(note))",
+          "script_text": "results = playbook.functions.results.abort_scan_results\n\nso_inputs = results.get(\"inputs\")\nagent_id = so_inputs.get(\"sentinelone_agent_id\")\nnote = u\"\u003cb\u003eSentinelOne: Abort Full Disk Scan \u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\ncontent = results.get(\"content\")\nif content:\n  data = content.get(\"data\")\n  if data:\n    if int(data.get(\"affected\")) \u003c= 0:\n      note = u\"{0} Full Disk Scan was NOT aborted.\".format(note)\n    else:\n      note = u\"{0} Full Disk Scan aborted.\".format(note)\n  else:\n    note = u\"{0} Full Disk Scan was NOT aborted. No \u0027data\u0027 returned from function\".format(note)\nelse:\n  note = u\"{0} Full Disk Scan was NOT aborted. No content returned from function\".format(note)  \n\nincident.addNote(helper.createRichText(note))",
           "tags": [],
           "uuid": "308b51c4-d2bd-47ce-9f35-3fb9380f9c54"
         }
@@ -1321,7 +1321,7 @@
       "tags": [],
       "type": "default",
       "uuid": "3563c338-9593-4b3f-a745-796931cbd3a1",
-      "version": 4
+      "version": 5
     },
     {
       "activation_details": {
@@ -1445,8 +1445,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\" isExecutable=\"true\" name=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0hvjt5z\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_0hvjt5z\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1cmiqdi\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"SentinelOne: Connect to Network\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"517e7712-cf4f-42da-91a2-06d028dad318\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"connect_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0hvjt5z\u003c/incoming\u003e\u003coutgoing\u003eFlow_0kqv3y7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0kqv3y7\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_5\"/\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"SentinelOne: Update data table with Connect to Network results \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9016f826-c891-463e-948a-f6f2bd9c4ab4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kqv3y7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1cmiqdi\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1cmiqdi\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0hvjt5z\" id=\"Flow_0hvjt5z_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kqv3y7\" id=\"Flow_0kqv3y7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"268\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cmiqdi\" id=\"Flow_1cmiqdi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"157.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"267.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\" isExecutable=\"true\" name=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0hvjt5z\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_0hvjt5z\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1cmiqdi\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"SentinelOne: Connect to Network\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"517e7712-cf4f-42da-91a2-06d028dad318\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"connect_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0hvjt5z\u003c/incoming\u003e\u003coutgoing\u003eFlow_0kqv3y7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0kqv3y7\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_5\"/\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"SentinelOne: Update data table with Connect to Network results \"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"9016f826-c891-463e-948a-f6f2bd9c4ab4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kqv3y7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1cmiqdi\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1cmiqdi\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_cef9752c_b644_40ac_8854_457f28f86344\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cmiqdi\" id=\"Flow_1cmiqdi_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"352\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kqv3y7\" id=\"Flow_0kqv3y7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"268\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0hvjt5z\" id=\"Flow_0hvjt5z_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"157.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.325\" y=\"267.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1697829312945,
       "creator_principal": {
@@ -1497,7 +1497,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1697829313669,
+      "last_modified_time": 1698425814163,
       "local_scripts": [
         {
           "actions": [],
@@ -1508,12 +1508,12 @@
           "id": 5,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1697829313036,
+          "last_modified_time": 1698425811506,
           "name": "SentinelOne: Update data table with Connect to Network results ",
           "object_type": "sentinelone_agents_dt",
           "playbook_handle": "sentinelone_connect_agent_to_network_pb",
           "programmatic_name": "sentinelone_connect_agent_to_network_pb_sentinelone_update_data_table_with_connect_to_network_results_",
-          "script_text": "results = playbook.functions.results.connect_results\n\nso_inputs = results.get(\"inputs\")\nagent_id = so_inputs.get(\"sentinelone_agent_id\")\nnote = u\"\u003cb\u003eSentinelOne: Connect to Network \u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\ncontent = results.get(\"content\")\nif content:\n  data = content.get(\"data\")\n  if data:\n    if int(data.get(\"affected\")) \u003c= 0:\n      note = u\"{0} is NOT connected to network\".format(note)\n    else:\n      networkStatus = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=\"green\", status=\"connected\")\n      row[\"sentinelone_dt_network_status\"] = helper.createRichText(networkStatus)\n      note = u\"{0} is connected to network\".format(note)\n  else:\n    note = u\"{0} no data returned from function\".format(note)\nelse:\n    note = u\"{0} no content data returned from function\".format(note)  \n\nincident.addNote(helper.createRichText(note))\n",
+          "script_text": "results = playbook.functions.results.connect_results\n\nso_inputs = results.get(\"inputs\")\nagent_id = so_inputs.get(\"sentinelone_agent_id\")\nnote = u\"\u003cb\u003eSentinelOne: Connect to Network \u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\ncontent = results.get(\"content\")\nif content:\n  data = content.get(\"data\")\n  if data:\n    if int(data.get(\"affected\")) \u003c= 0:\n      note = u\"{0} is NOT connected to network\".format(note)\n    else:\n      networkStatus = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status}\u003c/p\u003e\"\"\".format(color=\"green\", status=\"connected\")\n      row[\"sentinelone_dt_network_status\"] = helper.createRichText(networkStatus)\n      note = u\"{0} is connected to network\".format(note)\n  else:\n    note = u\"{0} no data returned from function\".format(note)\nelse:\n  note = u\"{0} no content data returned from function\".format(note)  \n\nincident.addNote(helper.createRichText(note))\n",
           "tags": [],
           "uuid": "9016f826-c891-463e-948a-f6f2bd9c4ab4"
         },
@@ -1579,7 +1579,7 @@
       "tags": [],
       "type": "default",
       "uuid": "cef9752c-b644-40ac-8854-457f28f86344",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
@@ -1811,8 +1811,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_4f575019_4828_4e15_87d7_2a6e92cfc8f0\" isExecutable=\"true\" name=\"playbook_4f575019_4828_4e15_87d7_2a6e92cfc8f0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0duzt1x\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Initiate Disk Scan\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3e5cb5d4-87c1-4d55-bc4e-917ebe781e6f\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"initiate_scan_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0duzt1x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1h9l4im\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0duzt1x\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Write Initiate Disk Scan results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"deb2b20d-4c24-4f0b-a58e-aa87cffb236b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1h9l4im\u003c/incoming\u003e\u003coutgoing\u003eFlow_13fuu6a\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1h9l4im\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_13fuu6a\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_13fuu6a\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_4f575019_4828_4e15_87d7_2a6e92cfc8f0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0duzt1x\" id=\"Flow_0duzt1x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1h9l4im\" id=\"Flow_1h9l4im_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13fuu6a\" id=\"Flow_13fuu6a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 2,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_4f575019_4828_4e15_87d7_2a6e92cfc8f0\" isExecutable=\"true\" name=\"playbook_4f575019_4828_4e15_87d7_2a6e92cfc8f0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0duzt1x\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Initiate Disk Scan\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3e5cb5d4-87c1-4d55-bc4e-917ebe781e6f\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"initiate_scan_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0duzt1x\u003c/incoming\u003e\u003coutgoing\u003eFlow_1h9l4im\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0duzt1x\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"SentinelOne: Write Initiate Disk Scan results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"deb2b20d-4c24-4f0b-a58e-aa87cffb236b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1h9l4im\u003c/incoming\u003e\u003coutgoing\u003eFlow_13fuu6a\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1h9l4im\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_13fuu6a\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_13fuu6a\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_4f575019_4828_4e15_87d7_2a6e92cfc8f0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13fuu6a\" id=\"Flow_13fuu6a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1h9l4im\" id=\"Flow_1h9l4im_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0duzt1x\" id=\"Flow_0duzt1x_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1697829314708,
       "creator_principal": {
@@ -1863,7 +1863,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1697829315217,
+      "last_modified_time": 1698425854098,
       "local_scripts": [
         {
           "actions": [],
@@ -1874,12 +1874,12 @@
           "id": 9,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1697829314802,
+          "last_modified_time": 1698425851274,
           "name": "SentinelOne: Write Initiate Disk Scan results to a note",
           "object_type": "sentinelone_agents_dt",
           "playbook_handle": "sentinelone_initiate_disk_scan_pb",
           "programmatic_name": "sentinelone_initiate_disk_scan_pb_sentinelone_write_initiate_disk_scan_results_to_a_note",
-          "script_text": "results = playbook.functions.results.initiate_scan_results\nso_inputs = results.get(\"inputs\")\nagent_id = so_inputs.get(\"sentinelone_agent_id\")\nnote = u\"\u003cb\u003eSentinelOne: Initiate Full Disk Scan \u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\ncontent = results.get(\"content\")\nif content:\n  data = content.get(\"data\")\n  if data:\n    if int(data.get(\"affected\")) \u003c= 0:\n      note = u\"{0} Full Disk Scan was NOT initiated.\".format(note)\n    else:\n      note = u\"{0} Full Disk Scan initiated.\".format(note)\n  else:\n    note = u\"{0} Full Disk Scan was NOT initiated. No \u0027data\u0027 returned from function\".format(note)\nelse:\n    note = u\"{0} Full Disk Scan was NOT initiated. No content returned from function\".format(note)  \n\nincident.addNote(helper.createRichText(note))",
+          "script_text": "results = playbook.functions.results.initiate_scan_results\nso_inputs = results.get(\"inputs\")\nagent_id = so_inputs.get(\"sentinelone_agent_id\")\nnote = u\"\u003cb\u003eSentinelOne: Initiate Full Disk Scan \u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\ncontent = results.get(\"content\")\nif content:\n  data = content.get(\"data\")\n  if data:\n    if int(data.get(\"affected\")) \u003c= 0:\n      note = u\"{0} Full Disk Scan was NOT initiated.\".format(note)\n    else:\n      note = u\"{0} Full Disk Scan initiated.\".format(note)\n  else:\n    note = u\"{0} Full Disk Scan was NOT initiated. No \u0027data\u0027 returned from function\".format(note)\nelse:\n  note = u\"{0} Full Disk Scan was NOT initiated. No content returned from function\".format(note)  \n\nincident.addNote(helper.createRichText(note))",
           "tags": [],
           "uuid": "deb2b20d-4c24-4f0b-a58e-aa87cffb236b"
         }
@@ -1919,7 +1919,7 @@
       "tags": [],
       "type": "default",
       "uuid": "4f575019-4828-4e15-87d7-2a6e92cfc8f0",
-      "version": 4
+      "version": 5
     },
     {
       "activation_details": {
@@ -2043,8 +2043,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_b40b46aa_53b5_494b_9324_cb2b541e5574\" isExecutable=\"true\" name=\"playbook_b40b46aa_53b5_494b_9324_cb2b541e5574\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_15m6vbj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Restart Agent\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e0b6e8bc-fd8f-4bc4-9131-8e49b07d9a7b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = incident.properties.sentinelone_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"restart_agent_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15m6vbj\u003c/incoming\u003e\u003coutgoing\u003eFlow_0m2a7r7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_15m6vbj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0m2a7r7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0m2a7r7\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b40b46aa_53b5_494b_9324_cb2b541e5574\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m2a7r7\" id=\"Flow_0m2a7r7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"324\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15m6vbj\" id=\"Flow_15m6vbj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"324\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 5,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_b40b46aa_53b5_494b_9324_cb2b541e5574\" isExecutable=\"true\" name=\"playbook_b40b46aa_53b5_494b_9324_cb2b541e5574\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_15m6vbj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Restart Agent\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e0b6e8bc-fd8f-4bc4-9131-8e49b07d9a7b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = incident.properties.sentinelone_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"restart_agent_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15m6vbj\u003c/incoming\u003e\u003coutgoing\u003eFlow_0m2a7r7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_15m6vbj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0co8yug\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0m2a7r7\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"SentinelOne: Write restart agent results to note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"99233e68-85b4-4ed4-b64e-22686ced890f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0m2a7r7\u003c/incoming\u003e\u003coutgoing\u003eFlow_0co8yug\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0co8yug\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b40b46aa_53b5_494b_9324_cb2b541e5574\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0co8yug\" id=\"Flow_0co8yug_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"361.5\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m2a7r7\" id=\"Flow_0m2a7r7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15m6vbj\" id=\"Flow_15m6vbj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.825\" y=\"277.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1697829315690,
       "creator_principal": {
@@ -2095,8 +2095,27 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1697829316106,
-      "local_scripts": [],
+      "last_modified_time": 1698426413432,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1698426129920,
+          "description": "Write restart agent function results to note.",
+          "enabled": false,
+          "export_key": "SentinelOne: Write restart agent results to note",
+          "id": 20,
+          "language": "python3",
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1698426129966,
+          "name": "SentinelOne: Write restart agent results to note",
+          "object_type": "sentinelone_agents_dt",
+          "playbook_handle": "sentinelone_restart_agent_pb",
+          "programmatic_name": "sentinelone_restart_agent_pb_sentinelone_write_restart_agent_results_to_note",
+          "script_text": "results = playbook.functions.results.restart_agent_results\n\nso_inputs = results.get(\"inputs\")\nagent_id = so_inputs.get(\"sentinelone_agent_id\")\nnote = u\"\u003cb\u003eSentinelOne: Restart Agent\u003c/b\u003e\u003cbr\u003e  SentinelOne Agent Id: {0}\".format(agent_id)\ncontent = results.get(\"content\")\nif content:\n  data = content.get(\"data\")\n  if data:\n    if int(data.get(\"affected\")) \u003c= 0:\n      note = u\"{0} was NOT restarted.\".format(note)\n    else:\n      note = u\"{0} was restarted\".format(note)\n  else:\n    note = u\"{0} was NOT restarted. No \u0027data\u0027 returned from function\".format(note)\nelse:\n  note = u\"{0} was NOT restarted. No content returned from function\".format(note)  \n\nincident.addNote(helper.createRichText(note))",
+          "tags": [],
+          "uuid": "99233e68-85b4-4ed4-b64e-22686ced890f"
+        }
+      ],
       "manual_settings": {
         "activation_conditions": {
           "conditions": [
@@ -2132,7 +2151,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b40b46aa-53b5-494b-9324-cb2b541e5574",
-      "version": 4
+      "version": 8
     },
     {
       "activation_type": "manual",

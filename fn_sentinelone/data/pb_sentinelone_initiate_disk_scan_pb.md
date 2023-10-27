@@ -72,7 +72,7 @@ if content:
   else:
     note = u"{0} Full Disk Scan was NOT initiated. No 'data' returned from function".format(note)
 else:
-    note = u"{0} Full Disk Scan was NOT initiated. No content returned from function".format(note)  
+  note = u"{0} Full Disk Scan was NOT initiated. No content returned from function".format(note)  
 
 incident.addNote(helper.createRichText(note))
 ```

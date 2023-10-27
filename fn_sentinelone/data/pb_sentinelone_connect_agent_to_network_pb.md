@@ -75,7 +75,7 @@ if content:
   else:
     note = u"{0} no data returned from function".format(note)
 else:
-    note = u"{0} no content data returned from function".format(note)  
+  note = u"{0} no content data returned from function".format(note)  
 
 incident.addNote(helper.createRichText(note))
 

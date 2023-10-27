@@ -314,7 +314,7 @@ if content:
   else:
     note = u"{0} Full Disk Scan was NOT aborted. No 'data' returned from function".format(note)
 else:
-    note = u"{0} Full Disk Scan was NOT aborted. No content returned from function".format(note)  
+  note = u"{0} Full Disk Scan was NOT aborted. No content returned from function".format(note)  
 
 incident.addNote(helper.createRichText(note))
 ```
@@ -403,7 +403,7 @@ if content:
   else:
     note = u"{0} no data returned from function".format(note)
 else:
-    note = u"{0} no content data returned from function".format(note)  
+  note = u"{0} no content data returned from function".format(note)  
 
 incident.addNote(helper.createRichText(note))
 
@@ -1164,7 +1164,7 @@ if content:
   else:
     note = u"{0} Full Disk Scan was NOT initiated. No 'data' returned from function".format(note)
 else:
-    note = u"{0} Full Disk Scan was NOT initiated. No content returned from function".format(note)  
+  note = u"{0} Full Disk Scan was NOT initiated. No content returned from function".format(note)  
 
 incident.addNote(helper.createRichText(note))
 ```
@@ -1315,7 +1315,25 @@ inputs.sentinelone_agent_id = incident.properties.sentinelone_agent_id
 <p>
 
 ```python
-None
+results = playbook.functions.results.restart_agent_results
+
+so_inputs = results.get("inputs")
+agent_id = so_inputs.get("sentinelone_agent_id")
+note = u"<b>SentinelOne: Restart Agent</b><br>  SentinelOne Agent Id: {0}".format(agent_id)
+content = results.get("content")
+if content:
+  data = content.get("data")
+  if data:
+    if int(data.get("affected")) <= 0:
+      note = u"{0} was NOT restarted.".format(note)
+    else:
+      note = u"{0} was restarted".format(note)
+  else:
+    note = u"{0} was NOT restarted. No 'data' returned from function".format(note)
+else:
+  note = u"{0} was NOT restarted. No content returned from function".format(note)  
+
+incident.addNote(helper.createRichText(note))
 ```
 
 </p>
