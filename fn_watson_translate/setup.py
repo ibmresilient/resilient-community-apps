@@ -29,7 +29,7 @@ setup(
 Machine learning is incorporated to understand the source language for translation.""",
     install_requires=[
         'resilient_circuits>=39.0.0',
-        'bs4~=4.9',
+        'beautifulsoup4~=4.9',
         'ibm-watson~=7.0',
         'ibm_cloud_sdk_core==3.16.3; python_version=="3.6"', # pinned with SOARAPPS-7332 for 3.6 due to PyJWT conflict
         'ibm_cloud_sdk_core~=3.17; python_version>="3.9"'
