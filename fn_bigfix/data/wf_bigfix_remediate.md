@@ -12,14 +12,17 @@
 `fn_bigfix_remediation`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_bigfix`
 
 ### Pre-Processing Script
 ```python
-None
+inputs.bigfix_asset_id = row.res_bigfix_computer_id
+inputs.bigfix_artifact_value = row.res_artifact_value
+inputs.bigfix_artifact_type = row.res_artifact_type.content
+inputs.bigfix_incident_id = incident.id
 ```
 
 ### Post-Processing Script
