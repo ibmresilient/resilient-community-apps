@@ -50,13 +50,7 @@ def codegen_reload_data():
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        # "datatables": [
-        #     # u"azure_automation_accounts"
-        #     # u"azure_automation_credentials",
-        #     # u"azure_automation_runbooks",
-        #     # u"azure_automation_schedules",
-        #     # u"azure_automation_statistics"
-        # ],
+        "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
         "playbooks": [
@@ -138,12 +132,6 @@ def customization_data(client=None):
         - azure_automation_utilities_get_schedule
         - azure_automation_utilities_list_statistics_by_automation_account
         - azure_automation_utilities_regenerate_agent_registration_key
-    - Data Tables:
-        - azure_automation_accounts
-        - azure_automation_credentials
-        - azure_automation_runbooks
-        - azure_automation_schedules
-        - azure_automation_statistics
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
