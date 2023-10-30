@@ -101,7 +101,7 @@ def mock_init():
             """ Mock add_threat_intel_item results """
             return {"content": add_threat_intel_item_results()}
 
-        def search(self, query, max_return, time_to_wait):
+        def search(self, query, max_return):
             """ Mock search """
             return search_results()
 

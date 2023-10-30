@@ -54,7 +54,6 @@ class TestSplunkSearch:
         "splunk_query_param3": "1.1.1.1",
         "splunk_query_param2": "ip",
         "splunk_label": None,
-        "splunk_search_time_to_wait": 2,
         "splunk_query_param1": "ip_intel"
     }
 
