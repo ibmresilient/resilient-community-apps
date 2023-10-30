@@ -22,7 +22,7 @@
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account name | `azure_automation_account_name` | text | Azure automation account name | Always |
-| Resource Group Name | `azure_automation_resource_group_name` | text | Azure automation resource group name | Always |
+| Resource Group Name | `azure_automation_resource_group_name` | text | Existing Azure automation resource group name | Always |
 
 ### Object Type
 `incident`

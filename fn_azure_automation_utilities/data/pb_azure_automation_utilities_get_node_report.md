@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.1.262
 -->
 
-# Playbook - Azure Automation: Node Get Report - Example (PB)
+# Playbook - Azure Automation: DSC Node Get Report - Example (PB)
 
 ### API Name
 `azure_automation_utilities_get_node_report`
@@ -22,9 +22,9 @@
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account name | `azure_automation_account_name` | text | Azure automation account name | Always |
-| Node ID | `azure_automation_node_id` | text | Azure Automation Dsc node ID | Always |
-| Report ID | `azure_automation_report_id` | text | Dsc node report ID. If given will get the specified report. If not given then will list all reports on the given node. | Optional |
-| Resource Group Name | `azure_automation_resource_group_name` | text | Azure automation resource group name | Always |
+| DSC Node ID | `azure_automation_node_id` | text | Azure Automation Dsc node ID | Always |
+| DSC Report ID | `azure_automation_report_id` | text | Dsc node report ID. If given will get the specified report. If not given then will list all reports on the given node. | Optional |
+| Resource Group Name | `azure_automation_resource_group_name` | text | Existing Azure automation resource group name | Always |
 
 ### Object Type
 `incident`

@@ -24,7 +24,7 @@
 | Account name | `azure_automation_account_name` | text | The Azure automation account name | Always |
 | Activity Name | `azure_automation_activity_name` | text | If activity name given then get the given activity. If activity name not given then get all activities in the given module | Optional |
 | Module Name | `azure_automation_module_name` | text | The Azure automation module name | Always |
-| Resource Group name | `azure_automation_resource_group_name` | text | The Azure automation resource group name | Always |
+| Resource Group name | `azure_automation_resource_group_name` | text | The Existing Azure automation resource group name | Always |
 
 ### Object Type
 `incident`

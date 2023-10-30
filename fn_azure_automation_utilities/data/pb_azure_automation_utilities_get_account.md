@@ -22,7 +22,7 @@
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account name | `azure_automation_account_name` | text | Azure automation account name. If given will return information for given account. If not given then will return list of all accounts. | Optional |
-| Resource Group Name | `azure_automation_resource_group_name` | text | Azure automation resource group name | Optional |
+| Resource Group Name | `azure_automation_resource_group_name` | text | Existing Azure automation resource group name | Optional |
 
 ### Object Type
 `incident`

@@ -23,7 +23,7 @@
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Job Name | `azure_automation_job_name` | text | Azure automation job name. If given will get specified job. If not given will list jobs. | Optional |
-| Resource Group Name | `azure_automation_resource_group_name` | text | Azure automation resource group name | Always |
+| Resource Group Name | `azure_automation_resource_group_name` | text | Existing Azure automation resource group name | Always |
 
 ### Object Type
 `incident`

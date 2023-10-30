@@ -171,7 +171,7 @@ Create an automation account on Azure
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -303,7 +303,7 @@ Create a credential.
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `credential_name` | `text` | No | `-` | Name of the Azure automation credential |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -398,7 +398,7 @@ Create a schedule.
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 | `schedule_name` | `text` | Yes | `The name of the azure automation schedule` | - |
 
 </p>
@@ -503,7 +503,7 @@ Delete an Azure automation account.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -581,7 +581,7 @@ Delete the credential.
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `credential_name` | `text` | No | `-` | Name of the Azure automation credential |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -660,7 +660,7 @@ Delete the runbook by name.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 | `runbook_name` | `text` | Yes | `-` | Runbook name in Azure Automation |
 
 </p>
@@ -735,7 +735,7 @@ Delete the schedule identified by schedule name.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 | `schedule_name` | `text` | Yes | `The name of the azure automation schedule` | - |
 
 </p>
@@ -816,7 +816,7 @@ Execute a given Azure runbook and retrieve the results
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 | `runbook_name` | `text` | Yes | `-` | Runbook name in Azure Automation |
 | `time_to_wait` | `number` | No | `-` | Amount of seconds to wait in between Azure automation job status checks. This should be hold long it takes the given runbook to complete. |
 
@@ -897,7 +897,7 @@ Get a specified Azure automation account information.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -1019,7 +1019,7 @@ Retrieve the automation agent registration information.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -1100,7 +1100,7 @@ Retrieve the credential identified by credential name.
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `credential_name` | `text` | No | `-` | Name of the Azure automation credential |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -1185,7 +1185,7 @@ Retrieve the job identified by job name
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `job_name` | `text` | Yes | `-` | Azure Automation job name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -1284,7 +1284,7 @@ Retrieve the activity in the module identified by module name and activity name.
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `activity_name` | `text` | No | `-` | The Azure automation module activity name |
 | `module_name` | `text` | No | `-` | The name of the Azure automation module. |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -1535,7 +1535,7 @@ Retrieve the Dsc node report data by node id and report id.
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `node_id` | `text` | Yes | `-` | Azure Automation Dsc node ID |
 | `report_id` | `text` | Yes | `-` | Azure Automation Dsc node report ID |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -1631,7 +1631,7 @@ Retrieve the runbook identified by runbook name.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 | `runbook_name` | `text` | Yes | `-` | Runbook name in Azure Automation |
 
 </p>
@@ -1730,7 +1730,7 @@ Retrieve the schedule identified by schedule name.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 | `schedule_name` | `text` | Yes | `The name of the azure automation schedule` | - |
 
 </p>
@@ -1945,7 +1945,7 @@ Retrieve a list of jobs
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -2055,7 +2055,7 @@ Retrieve a list of runbooks on the given automation account.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -2161,7 +2161,7 @@ Retrieve a list of schedules.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -2299,7 +2299,7 @@ Retrieve the statistics for the account.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -2409,7 +2409,7 @@ Retrieve the usage for the account id.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -2515,7 +2515,7 @@ Regenerate a primary or secondary agent registration key
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -2601,7 +2601,7 @@ Update a credential
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `credential_name` | `text` | No | `-` | Name of the Azure automation credential |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -2699,7 +2699,7 @@ Update the schedule identified by schedule name.
 | ---- | :--: | :------: | ------- | ------- |
 | `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Azure Automation Resource Group Name  |
+| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
 | `schedule_name` | `text` | Yes | `The name of the azure automation schedule` | - |
 
 </p>

@@ -22,9 +22,9 @@
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account Location | `azure_automation_account_location` | select | The region the account is in | Always |
-| Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
+| Account Name | `azure_automation_account_name` | text | Account name. No spaces, only letters, numbers and hyphens(-). 6 to 50 characters. | Always |
 | Account Tags | `azure_automation_account_tags` | text | dictionary of Azure automation account tags | Optional |
-| Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in. This needs to be a resource group currently configured on Azure | Always |
+| Azure resource group | `azure_automation_resource_group` | text | The existing Azure resource group this account should be in | Always |
 | Disable Local Auth | `azure_automation_account_disable_local_auth` | boolean | True to disable local auth and False to enable local auth | Optional |
 | Public Network Access | `azure_automation_account_public_network_access` | boolean | Either allow or deny access to public network from account | Optional |
 
