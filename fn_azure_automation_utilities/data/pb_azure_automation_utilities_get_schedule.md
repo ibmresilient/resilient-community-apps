@@ -71,14 +71,16 @@ from json import dumps
 results = playbook.functions.results.get_schedule
 
 if results.get("success"):
-  incident.addNote(f"""Azure Automation: Schedule Get - Example (PB)
-Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_automation_resource_group}
-  Schedule Name: {getattr(playbook.inputs, 'azure_automation_schedule_name', None)}
-
-Results -
-  {dumps(results.get("content", {}), indent=4)}""")
+  # Add information to data table
+  for schedule in results.get("content", []):
+    row = incident.addRow("azure_automation_schedules")
+    row["schedule_name"] = schedule.get("name", "")
+    row["schedule_description"] = schedule.get("properties", {}).get("description", None)
+    row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", False)
+    row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
+    row["account_name"] = playbook.inputs.azure_automation_account_name
+    row["resource_group"] = playbook.inputs.azure_automation_resource_group
+    row["schedule_deleted"] = False
 ```
 
 ---

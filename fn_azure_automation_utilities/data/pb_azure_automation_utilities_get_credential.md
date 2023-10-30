@@ -77,6 +77,7 @@ if results.get("success"):
     row["credential_description"] = credential.get("properties", {}).get("description")
     row["account_name"] = playbook.inputs.azure_automation_account_name
     row["resource_group"] = playbook.inputs.azure_automation_resource_group
+    row["credential_deleted"] = False
 ```
 
 ---

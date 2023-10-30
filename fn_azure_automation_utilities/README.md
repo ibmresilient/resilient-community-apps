@@ -71,7 +71,6 @@ This app allows interaction with the following Azure Automation resources:
   - Modules
   - Agent Registration
   - Statistics
-  - Usage
 
 ### Key Features
 * Automation Accounts
@@ -84,7 +83,6 @@ This app allows interaction with the following Azure Automation resources:
 * Modules
 * Agent Registration
 * Statistics
-* Usage
 
 ---
 

@@ -35,9 +35,10 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["account_name", "resource_group_name", "input_parameters", "schedule_name"], fn_inputs)
         # fn_inputs.input_parameters is a string dictionary. Convert it into a dictionary from a string.
         input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
-        # Convert startTime to the correct format. Milliseconds are removed from the time.
-        start_time = datetime.fromtimestamp(input_parameters.get("properties", {}).get("startTime") / 1e3)
-        input_parameters["properties"]["startTime"] = start_time.strftime("%Y-%m-%dT%H:%M:%SZ")
+        if input_parameters.get("properties", {}).get("startTime"):
+            # Convert startTime to the correct format. Milliseconds are removed from the time.
+            start_time = datetime.fromtimestamp(input_parameters.get("properties", {}).get("startTime") / 1e3)
+            input_parameters["properties"]["startTime"] = start_time.strftime("%Y-%m-%dT%H:%M:%SZ")
 
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))

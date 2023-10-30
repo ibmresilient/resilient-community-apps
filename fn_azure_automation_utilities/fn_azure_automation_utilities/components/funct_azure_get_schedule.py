@@ -35,7 +35,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # If schedule_name given then return information on that schedule
         if getattr(fn_inputs, "schedule_name", None):
-            results = client.get_schedule(getattr(fn_inputs, "schedule_name", None))
+            results = [client.get_schedule(getattr(fn_inputs, "schedule_name", None))]
         else: # If schedule_name not given then list schedules
             results = client.list_schedule_by_automation_account().get("value", [])
 

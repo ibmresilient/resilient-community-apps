@@ -81,16 +81,16 @@ inputs.input_parameters = str(payload)
 ```python
 results = playbook.functions.results.schedule
 if results.get("success"):
-  incident.addNote(f"""Azure Automation: Schedule Create - Example (PB)
-Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_automation_resource_group}
-  Schedule Name: {playbook.inputs.azure_automation_schedule_name}
-  Start Time: {playbook.inputs.azure_automation_schedule_start_time}
-  Description: {getattr(playbook.inputs, 'azure_automation_schedule_description', None)}
-
-Results -
-  Schedule '{playbook.inputs.azure_automation_schedule_name}' was created successfully.""")
+  # Add information to the data table
+  schedule = results.get("content", {})
+  row = incident.addRow("azure_automation_schedules")
+  row["schedule_name"] = schedule.get("name", "")
+  row["schedule_description"] = schedule.get("properties", {}).get("description", None)
+  row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", False)
+  row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
+  row["account_name"] = playbook.inputs.azure_automation_account_name
+  row["resource_group"] = playbook.inputs.azure_automation_resource_group
+  row["schedule_deleted"] = False
 ```
 
 ---

@@ -7,7 +7,7 @@
 # Playbook - Azure Automation: Credential Update - Example (PB)
 
 ### API Name
-`azure_automation_utilities_update_credential`
+`azure_automation_credential_update`
 
 ### Status
 `enabled`
@@ -16,20 +16,17 @@
 `Manual`
 
 ### Activation Conditions
-`-`
+`azure_automation_credentials.account_name has_a_value AND azure_automation_credentials.credential_deleted not_equals True AND azure_automation_credentials.credential_name has_a_value AND azure_automation_credentials.resource_group has_a_value`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
-| Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account is in | Always |
 | Credential Description | `azure_automation_credential_description` | text | Azure automation credential description. | Optional |
-| Credential Name | `azure_automation_credential_name` | text | Azure automation credential name | Always |
 | Credential Password | `azure_automation_credential_password` | text | Azure automation credential password | Optional |
 | Credential Username | `azure_automation_credential_username` | text | Azure automation credential username | Optional |
 
 ### Object Type
-`incident`
+`azure_automation_credentials`
 
 ### Description
 Update a credential.
@@ -49,14 +46,14 @@ Update a credential.
 
 ### Function-Input Script
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.credential_name = playbook.inputs.azure_automation_credential_name
+inputs.account_name = row.account_name
+inputs.resource_group_name = row.resource_group
+inputs.credential_name = row.credential_name
 # credential_update is True, so the given credential will be updated
 inputs.credential_update = True
 
 payload = {
-  "name": playbook.inputs.azure_automation_credential_name,
+  "name": row.credential_name,
   "properties": {
   }
 }
@@ -81,23 +78,15 @@ inputs.input_parameters = str(payload)
 `Local script`
 
 ### Object Type
-`incident`
+`azure_automation_credentials`
 
 ### Script Content
 ```python
 results = playbook.functions.results.update_cred
 if results.get("success"):
-  incident.addNote(f"""Azure Automation: Credential Update - Example (PB)
-Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_automation_resource_group}
-  Credential Name: {playbook.inputs.azure_automation_credential_name}
-  Credential Update: True
-  Credential Username: {getattr(playbook.inputs, 'azure_automation_credential_username', None)}
-  Credential Description: {getattr(playbook.inputs, 'azure_automation_credential_description', None)}
-
-Results -
-  Credential '{playbook.inputs.azure_automation_credential_name}' was updated successfully.""")
+  # Update data table information for the credential
+  row["credential_username"] = getattr(playbook.inputs, "azure_automation_credential_username", None)
+  row["credential_description"] = getattr(playbook.inputs, 'azure_automation_credential_description', None)
 ```
 
 ---

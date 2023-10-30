@@ -7,7 +7,7 @@
 # Playbook - Azure Automation: Schedule Update - Example (PB)
 
 ### API Name
-`azure_automation_utilities_update_schedule`
+`azure_automation_schedule_update`
 
 ### Status
 `enabled`
@@ -16,19 +16,16 @@
 `Manual`
 
 ### Activation Conditions
-`-`
+`azure_automation_schedules.account_name has_a_value AND azure_automation_schedules.resource_group has_a_value AND azure_automation_schedules.schedule_deleted not_equals True AND azure_automation_schedules.schedule_name has_a_value`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
-| Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
 | Schedule description | `azure_automation_schedule_description` | text | Description of the schedule | Optional |
-| Schedule Enabled | `azure_automation_schedule_enabled` | boolean | a value indicating whether this schedule is enabled. | Optional |
-| Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
+| Schedule Enabled | `azure_automation_schedule_enabled` | boolean | If the schedule is enabled or not | Optional |
 
 ### Object Type
-`incident`
+`azure_automation_schedules`
 
 ### Description
 Update the schedule identified by schedule name.
@@ -48,14 +45,14 @@ Update the schedule identified by schedule name.
 
 ### Function-Input Script
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
+inputs.account_name = row.account_name
+inputs.resource_group_name = row.resource_group
+inputs.schedule_name = row.schedule_name
 # schedule_update is True, so the given schedule will be updated
 inputs.schedule_update = True
 
 payload = {
-  "name": playbook.inputs.azure_automation_schedule_name,
+  "name": row.schedule_name,
   "properties": {
   }
 }
@@ -77,23 +74,15 @@ inputs.input_parameters = str(payload)
 `Local script`
 
 ### Object Type
-`incident`
+`azure_automation_schedules`
 
 ### Script Content
 ```python
 results = playbook.functions.results.update_schedule
 if results.get("success"):
-  incident.addNote(f"""Azure Automation: Schedule Update - Example (PB)
-Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_automation_resource_group}
-  Schedule Name: {playbook.inputs.azure_automation_schedule_name}
-  Schedule Update: True
-  Schedule Description: {getattr(playbook.inputs, 'azure_automation_schedule_description', None)}
-  Schedule Enabled: {getattr(playbook.inputs, 'azure_automation_schedule_enabled', None)}
-
-Results -
-  Schedule '{playbook.inputs.azure_automation_schedule_name}' was updated successfully.""")
+  schedule = results.get("content", {})
+  row["schedule_description"] = schedule.get("properties", {}).get("description", None)
+  row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", None)
 ```
 
 ---

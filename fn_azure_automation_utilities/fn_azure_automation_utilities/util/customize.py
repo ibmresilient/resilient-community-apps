@@ -43,7 +43,6 @@ def codegen_reload_data():
             u"azure_get_runbook",
             u"azure_get_schedule",
             u"azure_list_statistics_by_automation_account",
-            u"azure_list_usage_by_automation_account",
             u"azure_regenerate_agent_registration_key"
         ],
         "workflows": [],
@@ -51,23 +50,27 @@ def codegen_reload_data():
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [
-            u"azure_automation_accounts",
-            u"azure_automation_credentials",
-            u"azure_automation_runbooks"
-        ],
+        # "datatables": [
+        #     # u"azure_automation_accounts"
+        #     # u"azure_automation_credentials",
+        #     # u"azure_automation_runbooks",
+        #     # u"azure_automation_schedules",
+        #     # u"azure_automation_statistics"
+        # ],
         "automatic_tasks": [],
         "scripts": [],
         "playbooks": [
             u"azure_automation_account_delete",
             u"azure_automation_account_update",
+            u"azure_automation_credential_delete",
+            u"azure_automation_credential_update",
             u"azure_automation_runbook_delete",
             u"azure_automation_runbook_execute",
+            u"azure_automation_schedule_delete",
+            u"azure_automation_schedule_update",
             u"azure_automation_utilities_create_account",
             u"azure_automation_utilities_create_credential",
             u"azure_automation_utilities_create_schedule",
-            u"azure_automation_utilities_delete_credential",
-            u"azure_automation_utilities_delete_schedule",
             u"azure_automation_utilities_get_account",
             u"azure_automation_utilities_get_agent_registration_information",
             u"azure_automation_utilities_get_credential",
@@ -78,10 +81,7 @@ def codegen_reload_data():
             u"azure_automation_utilities_get_runbook",
             u"azure_automation_utilities_get_schedule",
             u"azure_automation_utilities_list_statistics_by_automation_account",
-            u"azure_automation_utilities_list_usage_by_automation_account",
-            u"azure_automation_utilities_regenerate_agent_registration_key",
-            u"azure_automation_utilities_update_credential",
-            u"azure_automation_utilities_update_schedule"
+            u"azure_automation_utilities_regenerate_agent_registration_key"
         ]
     }
 
@@ -114,18 +114,19 @@ def customization_data(client=None):
         - azure_get_runbook
         - azure_get_schedule
         - azure_list_statistics_by_automation_account
-        - azure_list_usage_by_automation_account
         - azure_regenerate_agent_registration_key
     - Playbooks:
         - azure_automation_account_delete
         - azure_automation_account_update
+        - azure_automation_credential_delete
+        - azure_automation_credential_update
         - azure_automation_runbook_delete
         - azure_automation_runbook_execute
+        - azure_automation_schedule_delete
+        - azure_automation_schedule_update
         - azure_automation_utilities_create_account
         - azure_automation_utilities_create_credential
         - azure_automation_utilities_create_schedule
-        - azure_automation_utilities_delete_credential
-        - azure_automation_utilities_delete_schedule
         - azure_automation_utilities_get_account
         - azure_automation_utilities_get_agent_registration_information
         - azure_automation_utilities_get_credential
@@ -136,14 +137,13 @@ def customization_data(client=None):
         - azure_automation_utilities_get_runbook
         - azure_automation_utilities_get_schedule
         - azure_automation_utilities_list_statistics_by_automation_account
-        - azure_automation_utilities_list_usage_by_automation_account
         - azure_automation_utilities_regenerate_agent_registration_key
-        - azure_automation_utilities_update_credential
-        - azure_automation_utilities_update_schedule
     - Data Tables:
         - azure_automation_accounts
         - azure_automation_credentials
         - azure_automation_runbooks
+        - azure_automation_schedules
+        - azure_automation_statistics
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

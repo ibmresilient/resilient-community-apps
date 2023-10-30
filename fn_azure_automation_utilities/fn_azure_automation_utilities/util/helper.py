@@ -503,12 +503,3 @@ class AzureClient(object):
         """
         url = f"{self.base_url}/statistics?{API_VERSION_2021}"
         return self.rc.execute("GET", url, headers=self.header).json()
-
-    def list_usage_by_automation_account(self):
-        """
-        Retrieve the usage for the account id.
-        :return: Response from GET request to Azure
-        :return type: dict
-        """
-        url = f"{self.base_url}/usages?{API_VERSION_2021}"
-        return self.rc.execute("GET", url, headers=self.header).json()

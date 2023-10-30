@@ -39,8 +39,7 @@ setup(
     - Schedules
     - Modules
     - Agent Registration
-    - Statistics
-    - Usage""",
+    - Statistics""",
     install_requires=[
         "resilient-circuits>=47.0.0"
     ],

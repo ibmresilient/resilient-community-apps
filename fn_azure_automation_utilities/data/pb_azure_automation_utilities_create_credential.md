@@ -82,16 +82,14 @@ inputs.input_parameters = str(payload)
 ```python
 results = playbook.functions.results.create_results
 if results.get("success"):
-  incident.addNote(f"""Azure Automation: Credential Create - Example (PB)
-Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_automation_resource_group}
-  Credential Name: {playbook.inputs.azure_automation_credential_name}
-  Credential Username: {playbook.inputs.azure_automation_credential_username}
-  Credential Description: {getattr(playbook.inputs, 'azure_automation_credential_description', None)}
-
-Results -
-  Credential '{playbook.inputs.azure_automation_credential_name}' was created successfully.""")
+  # Add information to the data table
+  row = incident.addRow("azure_automation_credentials")
+  row["credential_name"] = playbook.inputs.azure_automation_credential_name
+  row["credential_username"] = playbook.inputs.azure_automation_credential_username
+  row["credential_description"] = getattr(playbook.inputs, 'azure_automation_credential_description', None)
+  row["account_name"] = playbook.inputs.azure_automation_account_name
+  row["resource_group"] = playbook.inputs.azure_automation_resource_group
+  row["credential_deleted"] = False
 ```
 
 ---

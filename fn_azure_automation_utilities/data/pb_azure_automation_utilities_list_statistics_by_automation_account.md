@@ -64,17 +64,15 @@ inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_nam
 
 ### Script Content
 ```python
-from json import dumps
 results = playbook.functions.results.statistics
 
 if results.get("success"):
-  incident.addNote(f"""Azure Automation: Statistics List by Automation Account - Example (PB)
-Inputs -
-  Account Name: {playbook.inputs.azure_automation_account_name}
-  Resource Group: {playbook.inputs.azure_automation_resource_group_name}
-
-Results -
-  {dumps(results.get("content", {}), indent=4)}""")
+  for stat in results.get("content", []):
+    row = incident.addRow("azure_automation_statistics")
+    row["statistic_counter_property"] = stat.get("counterProperty", None)
+    row["statistic_counter_value"] = stat.get("counterValue", 0)
+    row["account_name"] = playbook.inputs.azure_automation_account_name
+    row["resource_group"] = playbook.inputs.azure_automation_resource_group_name
 ```
 
 ---

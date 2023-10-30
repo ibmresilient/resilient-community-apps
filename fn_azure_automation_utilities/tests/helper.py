@@ -890,42 +890,6 @@ def list_statistics_by_automation_account_results():
         ]
     }
 
-def list_usage_by_automation_account_results():
-    return {
-        "value": [
-            {
-                "name": {
-                "value": "AccountUsage",
-                "localizedValue": "AccountUsage"
-                },
-                "unit": "Minute",
-                "currentValue": 0.0,
-                "limit": -1,
-                "throttleStatus": "NotThrottled"
-            },
-            {
-                "name": {
-                "value": "SubscriptionUsage",
-                "localizedValue": "SubscriptionUsage"
-                },
-                "unit": "Minute",
-                "currentValue": 0.0,
-                "limit": -1,
-                "throttleStatus": "NotThrottled"
-            },
-            {
-                "name": {
-                "value": "DscAccountUsage",
-                "localizedValue": "DscAccountUsage"
-                },
-                "unit": "Count",
-                "currentValue": 0.0,
-                "limit": -1,
-                "throttleStatus": "NotThrottled"
-            }
-        ]
-    }
-
 def mock_init():
     class MockClient(object):
         """ Add Mock connection data """
@@ -1069,9 +1033,5 @@ def mock_init():
         def list_statistics_by_automation_account(self):
             """ Mock list statistics by automation account results """
             return list_statistics_by_automation_account_results()
-
-        def list_usage_by_automation_account(self):
-            """ Mock list usage by automation account results """
-            return list_usage_by_automation_account_results()
 
     return MockClient()
