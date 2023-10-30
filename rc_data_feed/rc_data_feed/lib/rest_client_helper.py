@@ -14,7 +14,7 @@ class RestClientHelper:
     """
     This wrapper to rest_client is in place to support retry logic for the resilient API when the token has protentially
     expired. It's possible that other errors will be trapped, in which case regenerating the session identifier will
-    have no adjerse effect.
+    have no adverse effect.
     """
     def __init__(self, rest_client):
         self.rest_client = rest_client
@@ -44,12 +44,12 @@ class RestClientHelper:
             return self.inst_rest_client.search(search_input_dto)
 
 
-    def get(self, query):
+    def get(self, query, skip_retry=[]):
         """
         perform the resilient get, catching exceptions that can be caused when the token expires
         """
         try:
-            return self.inst_rest_client.get(query)
+            return self.inst_rest_client.get(query, skip_retry=skip_retry)
         except Exception as err:  # catch issues such as the token expiring
             LOG.warning("Reattempting connection to resilient %s", err)
             self._get_connection()
