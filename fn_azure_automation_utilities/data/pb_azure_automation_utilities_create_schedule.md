@@ -23,8 +23,14 @@
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Account Name | `azure_automation_account_name` | text | Azure automation account name | Always |
 | Azure resource group | `azure_automation_resource_group` | text | The Azure resource group this account should be in | Always |
+| Recur amount | `recur_amount` | number | How often the schedule occurs | Optional |
+| recur frequency | `recur_frequency` | select | The frequency of the schedule | Optional |
+| Recur Interval | `recur_interval` | number | How often the schedule occurs | Optional |
+| Recur week days | `recur_week_days` | multiselect | The days to occur on | Optional |
 | Schedule description | `azure_automation_schedule_description` | text | Description of the schedule | Optional |
+| Schedule Expiration | `schedule_expiration` | datetimepicker | The date and time the schedule expires | Optional |
 | Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
+| Schedule Recurence | `schedule_recurrence` | select | The recurrence of the schedule | Always |
 | Schedule Start Time | `azure_automation_schedule_start_time` | datetimepicker | The start time of the schedule | Always |
 
 ### Object Type
@@ -51,16 +57,26 @@ Create a schedule.
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
 inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
+frequency = getattr(playbook.inputs, "recur_frequency", "once")
 
 payload = {
   "name": playbook.inputs.azure_automation_schedule_name,
   "properties": {
     "startTime": playbook.inputs.azure_automation_schedule_start_time,
-    "frequency": "OneTime"
+    "frequency": frequency
   }
 }
 if getattr(playbook.inputs, "azure_automation_schedule_description", None):
   payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description", None)
+
+if frequency != "once":
+  payload["properties"]["interval"] = int(getattr(playbook.inputs, "recur_interval", 1))
+  if getattr(playbook.inputs, "schedule_expiration", None): # If a expiration data time given then add it to the payload
+    payload["properties"]["expiryTime"] = getattr(playbook.inputs, "schedule_expiration")
+  if frequency == "month":
+    payload["properties"]["advancedSchedule"]["weekDays"] = getattr(playbook.inputs, "recur_week_days", [])
+
+
 inputs.input_parameters = str(payload)
 ```
 

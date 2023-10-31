@@ -3,7 +3,7 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1698677098474,
+  "export_date": 1698690788887,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1418,13 +1418,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 81,
+  "id": 82,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1698677097050,
+      "create_date": 1698690786904,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1433,7 +1433,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1698677097050,
+      "update_date": 1698690786904,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -5474,8 +5474,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 12,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb\" isExecutable=\"true\" name=\"playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0riltre\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Azure Create Schedule\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"980836cc-7dde-40c0-bfb0-dc0cb2f8fed1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.account_name = playbook.inputs.azure_automation_account_name\\ninputs.resource_group_name = playbook.inputs.azure_automation_resource_group\\ninputs.schedule_name = playbook.inputs.azure_automation_schedule_name\\n\\npayload = {\\n  \\\"name\\\": playbook.inputs.azure_automation_schedule_name,\\n  \\\"properties\\\": {\\n    \\\"startTime\\\": playbook.inputs.azure_automation_schedule_start_time,\\n    \\\"frequency\\\": \\\"OneTime\\\"\\n  }\\n}\\nif getattr(playbook.inputs, \\\"azure_automation_schedule_description\\\", None):\\n  payload[\\\"properties\\\"][\\\"description\\\"] = getattr(playbook.inputs, \\\"azure_automation_schedule_description\\\", None)\\ninputs.input_parameters = str(payload)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"schedule\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0riltre\u003c/incoming\u003e\u003coutgoing\u003eFlow_13vb7ou\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0riltre\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1826uov\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"112ce157-d10f-470b-91f1-a23140003922\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_13vb7ou\u003c/incoming\u003e\u003coutgoing\u003eFlow_1826uov\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_13vb7ou\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1826uov\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1826uov\" id=\"Flow_1826uov_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13vb7ou\" id=\"Flow_13vb7ou_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0riltre\" id=\"Flow_0riltre_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 24,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb\" isExecutable=\"true\" name=\"playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0riltre\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Azure Create Schedule\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"980836cc-7dde-40c0-bfb0-dc0cb2f8fed1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.account_name = playbook.inputs.azure_automation_account_name\\ninputs.resource_group_name = playbook.inputs.azure_automation_resource_group\\ninputs.schedule_name = playbook.inputs.azure_automation_schedule_name\\nfrequency = getattr(playbook.inputs, \\\"recur_frequency\\\", \\\"once\\\")\\n\\npayload = {\\n  \\\"name\\\": playbook.inputs.azure_automation_schedule_name,\\n  \\\"properties\\\": {\\n    \\\"startTime\\\": playbook.inputs.azure_automation_schedule_start_time,\\n    \\\"frequency\\\": frequency\\n  }\\n}\\nif getattr(playbook.inputs, \\\"azure_automation_schedule_description\\\", None):\\n  payload[\\\"properties\\\"][\\\"description\\\"] = getattr(playbook.inputs, \\\"azure_automation_schedule_description\\\", None)\\n\\nif frequency != \\\"once\\\":\\n  payload[\\\"properties\\\"][\\\"interval\\\"] = int(getattr(playbook.inputs, \\\"recur_interval\\\", 1))\\n  if getattr(playbook.inputs, \\\"schedule_expiration\\\", None): # If a expiration data time given then add it to the payload\\n    payload[\\\"properties\\\"][\\\"expiryTime\\\"] = getattr(playbook.inputs, \\\"schedule_expiration\\\")\\n  if frequency == \\\"month\\\":\\n    payload[\\\"properties\\\"][\\\"advancedSchedule\\\"][\\\"weekDays\\\"] = getattr(playbook.inputs, \\\"recur_week_days\\\", [])\\n\\n\\ninputs.input_parameters = str(payload)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"schedule\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0riltre\u003c/incoming\u003e\u003coutgoing\u003eFlow_13vb7ou\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0riltre\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1826uov\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"112ce157-d10f-470b-91f1-a23140003922\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_13vb7ou\u003c/incoming\u003e\u003coutgoing\u003eFlow_1826uov\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_13vb7ou\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1826uov\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1826uov\" id=\"Flow_1826uov_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13vb7ou\" id=\"Flow_13vb7ou_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0riltre\" id=\"Flow_0riltre_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1694195068699,
       "creator_principal": {
@@ -5645,6 +5645,292 @@
             "type_id": 1008,
             "uuid": "d2f9cb0e-a2ea-4549-a51b-bffb4a3f417d",
             "values": []
+          },
+          "recur_amount": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb/recur_amount",
+            "hide_notification": false,
+            "id": 4908,
+            "input_type": "number",
+            "internal": false,
+            "is_tracked": false,
+            "name": "recur_amount",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Recur amount",
+            "tooltip": "How often the schedule occurs",
+            "type_id": 1008,
+            "uuid": "cee1697e-0a63-4a49-8ee8-70b9f8eb68d0",
+            "values": []
+          },
+          "recur_frequency": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb/recur_frequency",
+            "hide_notification": false,
+            "id": 4906,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "recur_frequency",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "recur frequency",
+            "tooltip": "The frequency of the schedule",
+            "type_id": 1008,
+            "uuid": "82a6396f-b9ec-47c0-aa82-75fd24aa8941",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Hour",
+                "properties": null,
+                "uuid": "820e5a2e-7cbd-4c17-9de0-09030a5eece1",
+                "value": 1196
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Day",
+                "properties": null,
+                "uuid": "766f6114-cdea-4c20-9acd-231cc8f76a32",
+                "value": 1197
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Week",
+                "properties": null,
+                "uuid": "c0f8eaba-6b9a-4192-90d2-1d84b62b126e",
+                "value": 1198
+              }
+            ]
+          },
+          "recur_interval": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb/recur_interval",
+            "hide_notification": false,
+            "id": 4907,
+            "input_type": "number",
+            "internal": false,
+            "is_tracked": false,
+            "name": "recur_interval",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Recur Interval",
+            "tooltip": "How often the schedule occurs",
+            "type_id": 1008,
+            "uuid": "36968754-e681-4853-aa8d-01b85bc46ab8",
+            "values": []
+          },
+          "recur_week_days": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb/recur_week_days",
+            "hide_notification": false,
+            "id": 4910,
+            "input_type": "multiselect",
+            "internal": false,
+            "is_tracked": false,
+            "name": "recur_week_days",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Recur week days",
+            "tooltip": "The days to occur on",
+            "type_id": 1008,
+            "uuid": "038034cf-70fa-4014-a6c2-411946e7ed5a",
+            "values": [
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Monday",
+                "properties": null,
+                "uuid": "0ec942eb-1246-4138-97e2-e2723ff56ff9",
+                "value": 1199
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Tuesday",
+                "properties": null,
+                "uuid": "2d507145-d91b-4bf2-b721-0b4bc07b850a",
+                "value": 1200
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Wednesday",
+                "properties": null,
+                "uuid": "497b08ec-ef52-4061-a40d-184a3026f122",
+                "value": 1201
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Thursday",
+                "properties": null,
+                "uuid": "f70d16ca-5890-4eee-ab72-14f1c16ea501",
+                "value": 1202
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Friday",
+                "properties": null,
+                "uuid": "f4dc2277-3ad5-4302-ab2f-b3ca58a7e4e7",
+                "value": 1203
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Saturday",
+                "properties": null,
+                "uuid": "4dd7a0c0-4e66-490c-ab79-46c6b374be53",
+                "value": 1204
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Sunday",
+                "properties": null,
+                "uuid": "979972cc-691c-4ceb-9ffd-87a4f7422d1c",
+                "value": 1205
+              }
+            ]
+          },
+          "schedule_expiration": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb/schedule_expiration",
+            "hide_notification": false,
+            "id": 4909,
+            "input_type": "datetimepicker",
+            "internal": false,
+            "is_tracked": false,
+            "name": "schedule_expiration",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Schedule Expiration",
+            "tooltip": "The date and time the schedule expires",
+            "type_id": 1008,
+            "uuid": "56b83564-29c4-4b93-b264-3b24ef9238dc",
+            "values": []
+          },
+          "schedule_recurrence": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb/schedule_recurrence",
+            "hide_notification": false,
+            "id": 4904,
+            "input_type": "select",
+            "internal": false,
+            "is_tracked": false,
+            "name": "schedule_recurrence",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "required": "always",
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Schedule Recurence",
+            "tooltip": "The recurrence of the schedule",
+            "type_id": 1008,
+            "uuid": "6a7bb5bc-c2a8-41cf-9294-49b0bf294d10",
+            "values": [
+              {
+                "default": true,
+                "enabled": true,
+                "hidden": false,
+                "label": "Once",
+                "properties": null,
+                "uuid": "e2f2949a-3368-4f5a-8881-32ff35cf6543",
+                "value": 1194
+              },
+              {
+                "default": false,
+                "enabled": true,
+                "hidden": false,
+                "label": "Recurring",
+                "properties": null,
+                "uuid": "b761ca5b-fd2e-4bf3-81b5-a32281df7c7e",
+                "value": 1195
+              }
+            ]
           }
         },
         "for_actions": false,
@@ -5676,7 +5962,7 @@
         "name": "g@example.com",
         "type": "user"
       },
-      "last_modified_time": 1698673255798,
+      "last_modified_time": 1698690782317,
       "local_scripts": [
         {
           "actions": [],
@@ -5728,6 +6014,14 @@
             "step_label": null
           },
           {
+            "content": "d49a6c33-afc7-49dd-ab3d-47424bc6a9f8",
+            "element": "field_uuid",
+            "field_type": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
             "content": "d2f9cb0e-a2ea-4549-a51b-bffb4a3f417d",
             "element": "field_uuid",
             "field_type": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb",
@@ -5736,7 +6030,55 @@
             "step_label": null
           },
           {
-            "content": "d49a6c33-afc7-49dd-ab3d-47424bc6a9f8",
+            "content": "6a7bb5bc-c2a8-41cf-9294-49b0bf294d10",
+            "element": "field_uuid",
+            "field_type": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "Recurring Settings",
+            "element": "html",
+            "field_type": null,
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "36968754-e681-4853-aa8d-01b85bc46ab8",
+            "element": "field_uuid",
+            "field_type": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "82a6396f-b9ec-47c0-aa82-75fd24aa8941",
+            "element": "field_uuid",
+            "field_type": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "56b83564-29c4-4b93-b264-3b24ef9238dc",
+            "element": "field_uuid",
+            "field_type": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "If Recurrence Frequency Week choosen",
+            "element": "html",
+            "field_type": null,
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "038034cf-70fa-4014-a6c2-411946e7ed5a",
             "element": "field_uuid",
             "field_type": "playbook_79c6cc71_4e8f_4737_9a94_f34b054434eb",
             "show_if": null,
@@ -5758,7 +6100,7 @@
       "tags": [],
       "type": "default",
       "uuid": "79c6cc71-4e8f-4737-9a94-f34b054434eb",
-      "version": 16
+      "version": 29
     },
     {
       "activation_type": "manual",
