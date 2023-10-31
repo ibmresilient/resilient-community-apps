@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v49.1.51
 
 """AppFunction implementation"""
@@ -33,9 +34,9 @@ class FunctionComponent(AppFunctionComponent):
         if getattr(fn_inputs, "account_name", None):
             # Validate inputs
             validate_fields(["resource_group_name"], fn_inputs)
-            results = [client.get_account()]
+            results = client.get_account()
         else: # If no account name given then list all accounts
-            results = results = client.list_accounts().get("value", [])
+            results = client.list_accounts()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

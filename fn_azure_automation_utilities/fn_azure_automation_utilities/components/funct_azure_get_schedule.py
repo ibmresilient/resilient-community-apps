@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v49.1.51
 
 """AppFunction implementation"""
@@ -35,9 +36,9 @@ class FunctionComponent(AppFunctionComponent):
 
         # If schedule_name given then return information on that schedule
         if getattr(fn_inputs, "schedule_name", None):
-            results = [client.get_schedule(getattr(fn_inputs, "schedule_name", None))]
+            results = client.get_schedule(getattr(fn_inputs, "schedule_name", None))
         else: # If schedule_name not given then list schedules
-            results = client.list_schedule_by_automation_account().get("value", [])
+            results = client.list_schedule_by_automation_account()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

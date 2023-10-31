@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v50.0.151
 
 """AppFunction implementation"""
@@ -34,7 +34,7 @@ class FunctionComponent(AppFunctionComponent):
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
         # Make call to Azure and retrieve results
-        results = client.list_statistics_by_automation_account().get("value", [])
+        results = client.list_statistics_by_automation_account()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

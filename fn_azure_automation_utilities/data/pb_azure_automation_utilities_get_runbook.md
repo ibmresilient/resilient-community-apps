@@ -67,19 +67,26 @@ if getattr(playbook.inputs, 'azure_automation_runbook_name', None):
 
 ### Script Content
 ```python
-from json import dumps
 results = playbook.functions.results.runbook_results
 
+# Add runbooks info to the data table
+def add_to_row(runbook):
+  row = incident.addRow("azure_automation_runbooks")
+  row["runbook_name"] = runbook.get("name")
+  row["runbook_type"] = runbook.get("properties", {}).get("runbookType")
+  row["runbook_state"] = runbook.get("properties", {}).get("state")
+  row["runbook_tags"] = str(runbook.get("tags"))
+  row["account_name"] = playbook.inputs.azure_automation_account_name
+  row["resource_group"] = playbook.inputs.azure_resource_group
+
 if results.get("success"):
-  # Add runbooks info to the data table
-  for runbook in results.get("content", {}):
-    row = incident.addRow("azure_automation_runbooks")
-    row["runbook_name"] = runbook.get("name")
-    row["runbook_type"] = runbook.get("properties", {}).get("runbookType")
-    row["runbook_state"] = runbook.get("properties", {}).get("state")
-    row["runbook_tags"] = str(runbook.get("tags"))
-    row["account_name"] = playbook.inputs.azure_automation_account_name
-    row["resource_group"] = playbook.inputs.azure_resource_group
+  content = results.get("content", {})
+  if content.get("value", None):
+    # If list of runbooks returned
+    for runbook in content.get("value", []):
+      add_to_row(runbook)
+  else: # If single runbook returned
+    add_to_row(content)
 ```
 
 ---

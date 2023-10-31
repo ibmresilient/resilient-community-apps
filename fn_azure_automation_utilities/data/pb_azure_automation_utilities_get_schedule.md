@@ -67,20 +67,27 @@ if getattr(playbook.inputs, "azure_automation_schedule_name", None):
 
 ### Script Content
 ```python
-from json import dumps
 results = playbook.functions.results.get_schedule
 
+# Add schedule information to data table
+def row_to_add(schedule):
+  row = incident.addRow("azure_automation_schedules")
+  row["schedule_name"] = schedule.get("name", "")
+  row["schedule_description"] = schedule.get("properties", {}).get("description", None)
+  row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", False)
+  row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
+  row["account_name"] = playbook.inputs.azure_automation_account_name
+  row["resource_group"] = playbook.inputs.azure_automation_resource_group
+  row["schedule_deleted"] = False
+
 if results.get("success"):
-  # Add information to data table
-  for schedule in results.get("content", []):
-    row = incident.addRow("azure_automation_schedules")
-    row["schedule_name"] = schedule.get("name", "")
-    row["schedule_description"] = schedule.get("properties", {}).get("description", None)
-    row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", False)
-    row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
-    row["account_name"] = playbook.inputs.azure_automation_account_name
-    row["resource_group"] = playbook.inputs.azure_automation_resource_group
-    row["schedule_deleted"] = False
+  content = results.get("content", {})
+  if content.get("value", None):
+    # If list of schedules returned
+    for schedule in content.get("value", []):
+      row_to_add(schedule)
+  else: # If single schedule returned
+    row_to_add(content)
 ```
 
 ---

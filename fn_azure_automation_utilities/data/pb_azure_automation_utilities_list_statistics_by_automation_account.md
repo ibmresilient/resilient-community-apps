@@ -67,7 +67,7 @@ inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_nam
 results = playbook.functions.results.statistics
 
 if results.get("success"):
-  for stat in results.get("content", []):
+  for stat in results.get("content", {}).get("value", []):
     row = incident.addRow("azure_automation_statistics")
     row["statistic_counter_property"] = stat.get("counterProperty", None)
     row["statistic_counter_value"] = stat.get("counterValue", 0)

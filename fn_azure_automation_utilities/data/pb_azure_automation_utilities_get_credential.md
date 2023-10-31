@@ -68,16 +68,25 @@ if getattr(playbook.inputs, "azure_automation_credential_name", None):
 ### Script Content
 ```python
 results = playbook.functions.results.cred
+
+# Add credential information to data table
+def add_to_row(credential):
+  row = incident.addRow("azure_automation_credentials")
+  row["credential_name"] = credential.get("name")
+  row["credential_username"] = credential.get("properties", {}).get("userName")
+  row["credential_description"] = credential.get("properties", {}).get("description")
+  row["account_name"] = playbook.inputs.azure_automation_account_name
+  row["resource_group"] = playbook.inputs.azure_automation_resource_group
+  row["credential_deleted"] = False
+
 if results.get("success"):
-  # Add credential information to data table
-  for credential in results.get('content', {}):
-    row = incident.addRow("azure_automation_credentials")
-    row["credential_name"] = credential.get("name")
-    row["credential_username"] = credential.get("properties", {}).get("userName")
-    row["credential_description"] = credential.get("properties", {}).get("description")
-    row["account_name"] = playbook.inputs.azure_automation_account_name
-    row["resource_group"] = playbook.inputs.azure_automation_resource_group
-    row["credential_deleted"] = False
+  content = results.get('content', {})
+  if content.get("value", None):
+    # If list of credentials returned
+    for credential in content.get("value", []):
+      add_to_row(credential)
+  else: # If single credential returned
+    add_to_row(content)
 ```
 
 ---

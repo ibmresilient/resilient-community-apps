@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v49.1.51
 
 """AppFunction implementation"""
@@ -42,7 +43,7 @@ class FunctionComponent(AppFunctionComponent):
             else: # If job_output equals False then return job information
                 results = client.get_job(getattr(fn_inputs, "job_name", None))
         else: # If job_name not given then list jobs
-            results = client.list_jobs_by_automation_account().get("value", [])
+            results = client.list_jobs_by_automation_account()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

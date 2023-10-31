@@ -68,20 +68,27 @@ if getattr(playbook.inputs, "azure_automation_resource_group_name", None):
 ```python
 results = playbook.functions.results.account_info
 
-if results.get("success"):
-  for account in results.get("content", {}):
-    account_id = account.get("id", "")
-    resourceGroup_start = account_id.find("resourceGroups/")+15
-    resource_group = account_id[resourceGroup_start:account_id.find("/providers", resourceGroup_start)]
+def add_to_row(account):
+  account_id = account.get("id", "")
+  resourceGroup_start = account_id.find("resourceGroups/")+15
+  resource_group = account_id[resourceGroup_start:account_id.find("/providers", resourceGroup_start)]
 
-    row = incident.addRow("azure_automation_accounts")
-    row["account_name"] = account.get("name", "")
-    row["resource_group"] = resource_group
-    row["location"] = account.get("location", "")
-    row["tags"] = str(account.get("tags"))
-    row["publicnetworkaccess"] = account.get("properties", {}).get("publicNetworkAccess", None)
-    row["disablelocalauth"] = account.get("properties", {}).get("disableLocalAuth", None)
-    row["account_deleted"] = False
+  row = incident.addRow("azure_automation_accounts")
+  row["account_name"] = account.get("name", "")
+  row["resource_group"] = resource_group
+  row["location"] = account.get("location", "")
+  row["tags"] = str(account.get("tags"))
+  row["publicnetworkaccess"] = account.get("properties", {}).get("publicNetworkAccess", None)
+  row["disablelocalauth"] = account.get("properties", {}).get("disableLocalAuth", None)
+  row["account_deleted"] = False
+
+if results.get("success"):
+  content = results.get("content", {})
+  if content.get("value", None):
+    for account in content.get("value", []):
+      add_to_row(account)
+  else:
+    add_to_row(content)
 ```
 
 ---

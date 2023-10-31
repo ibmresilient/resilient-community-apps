@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v49.1.51
 
 """AppFunction implementation"""
@@ -35,9 +36,9 @@ class FunctionComponent(AppFunctionComponent):
 
         # If runbook_name given then get that runbook
         if getattr(fn_inputs, "runbook_name", None):
-            results = [client.get_runbook(getattr(fn_inputs, "runbook_name", None))]
+            results = client.get_runbook(getattr(fn_inputs, "runbook_name", None))
         else: # If runbook_name not given then list all runbooks on given account
-            results = client.list_runbooks_by_automation_account().get("value", [])
+            results = client.list_runbooks_by_automation_account()
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

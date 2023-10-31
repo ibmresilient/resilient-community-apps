@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v49.1.51
 
 """AppFunction implementation"""
@@ -16,6 +17,13 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+
+    def convertTime(self, time_to_convert):
+        """
+        Convert time_to_convert to the correct format. Milliseconds are removed from the time.
+        """
+        time_to_convert = datetime.fromtimestamp(time_to_convert / 1e3)
+        return time_to_convert.strftime("%Y-%m-%dT%H:%M:%SZ")
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -35,10 +43,12 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["account_name", "resource_group_name", "input_parameters", "schedule_name"], fn_inputs)
         # fn_inputs.input_parameters is a string dictionary. Convert it into a dictionary from a string.
         input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
-        if input_parameters.get("properties", {}).get("startTime"):
-            # Convert startTime to the correct format. Milliseconds are removed from the time.
-            start_time = datetime.fromtimestamp(input_parameters.get("properties", {}).get("startTime") / 1e3)
-            input_parameters["properties"]["startTime"] = start_time.strftime("%Y-%m-%dT%H:%M:%SZ")
+        # Convert startTime to the correct date time format.
+        if input_parameters.get("properties", {}).get("startTime", None):
+            input_parameters["properties"]["startTime"] = self.convertTime(input_parameters.get("properties", {}).get("startTime"))
+        # If expiryTime given convert it to the correct date time format.
+        if input_parameters.get("properties", {}).get("expiryTime", None):
+            input_parameters["properties"]["expiryTime"] = self.convertTime(input_parameters.get("properties", {}).get("expiryTime", None))
 
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))

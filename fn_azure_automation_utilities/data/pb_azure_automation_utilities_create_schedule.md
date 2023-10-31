@@ -57,25 +57,31 @@ Create a schedule.
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
 inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
-frequency = getattr(playbook.inputs, "recur_frequency", "once")
 
 payload = {
   "name": playbook.inputs.azure_automation_schedule_name,
   "properties": {
     "startTime": playbook.inputs.azure_automation_schedule_start_time,
-    "frequency": frequency
+    "frequency": "OneTime",
+    "advancedSchedule": {}
   }
 }
+
 if getattr(playbook.inputs, "azure_automation_schedule_description", None):
   payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description", None)
 
-if frequency != "once":
-  payload["properties"]["interval"] = int(getattr(playbook.inputs, "recur_interval", 1))
-  if getattr(playbook.inputs, "schedule_expiration", None): # If a expiration data time given then add it to the payload
+frequency = getattr(playbook.inputs, "recur_frequency", "once")
+# If the frequency Recurring is selected
+if playbook.inputs.schedule_recurrence == "Recurring":
+  payload["properties"]["frequency"] = frequency # Set user selected frequency
+  payload["properties"]["interval"] = int(getattr(playbook.inputs, "recur_interval", 1)) # Add user given interval to payload
+  # If an expiration date time is given then add it to the payload
+  if getattr(playbook.inputs, "schedule_expiration", None):
     payload["properties"]["expiryTime"] = getattr(playbook.inputs, "schedule_expiration")
-  if frequency == "month":
+  # If the frequency selected equals months, then add the user selected days to the payload
+  if frequency == "Week":
+    # List of selected days
     payload["properties"]["advancedSchedule"]["weekDays"] = getattr(playbook.inputs, "recur_week_days", [])
-
 
 inputs.input_parameters = str(payload)
 ```
