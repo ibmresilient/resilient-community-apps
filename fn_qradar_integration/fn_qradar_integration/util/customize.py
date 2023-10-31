@@ -31,7 +31,7 @@ def codegen_reload_data():
         "datatables": [u"qradar_offense_event", u"qradar_reference_set", u"qradar_reference_table", u"qradar_reference_table_queried_rows"],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"find_all_qradar_reference_sets_pb", u"find_in_qradar_reference_set_pb", u"playbook_qradar_add_item_to_this_reference_table_example_pb", u"playbook_qradar_delete_this_reference_table_item_example_pb", u"playbook_qradar_gather_reference_table_data_example_pb", u"qradar_add_to_reference_set", u"qradar_add_to_reference_table", u"qradar_get_all_reference_tables__example_pb", u"qradar_move_from_sample_blocked_to_sample_suspected_pb", u"qradar_update_this_reference_table_item_example_pb", u"search_qradar_for_offense_id"]
+        "playbooks": [u"find_in_qradar_reference_set_pb", u"get_all_qradar_reference_sets", u"qradar_add_item_to_this_reference_table_example", u"qradar_add_to_reference_set", u"qradar_add_to_reference_table", u"qradar_delete_this_reference_table_item_example", u"qradar_gather_reference_table_data_example", u"qradar_get_all_reference_tables_example", u"qradar_move_from_sample_blocked_to_sample_suspected", u"qradar_update_this_reference_table_item_example", u"search_qradar_for_offense_id"]
     }
 
 
@@ -57,16 +57,16 @@ def customization_data(client=None):
         - qradar_reference_table_update_item
         - qradar_search
     - Playbooks:
-        - find_all_qradar_reference_sets_pb
         - find_in_qradar_reference_set_pb
-        - playbook_qradar_add_item_to_this_reference_table_example_pb
-        - playbook_qradar_delete_this_reference_table_item_example_pb
-        - playbook_qradar_gather_reference_table_data_example_pb
+        - get_all_qradar_reference_sets
+        - qradar_add_item_to_this_reference_table_example
         - qradar_add_to_reference_set
         - qradar_add_to_reference_table
-        - qradar_get_all_reference_tables__example_pb
-        - qradar_move_from_sample_blocked_to_sample_suspected_pb
-        - qradar_update_this_reference_table_item_example_pb
+        - qradar_delete_this_reference_table_item_example
+        - qradar_gather_reference_table_data_example
+        - qradar_get_all_reference_tables_example
+        - qradar_move_from_sample_blocked_to_sample_suspected
+        - qradar_update_this_reference_table_item_example
         - search_qradar_for_offense_id
     - Incident Fields:
         - qradar_destination
