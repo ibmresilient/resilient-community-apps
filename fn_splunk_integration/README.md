@@ -67,7 +67,7 @@ Several functions to operate with Splunk ES intel collections, including updates
 ---
 
 ## Requirements
-- SOAR Server version 45 or later
+- SOAR Server version 48 or later
 - Splunk version 7.0 or later, or Splunk Cloud
 - Splunk ES 4.7.2 or later, or Splunk ES Cloud
 - Ability to connect to SOAR server with HTTPS on port 443 and 65001
@@ -79,13 +79,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `45.0.0`.
+* SOAR platform >= `48.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.0`.
+* SOAR platform >= `48.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=45.0.0`.
+* Integration server is running `resilient_circuits>=48.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -118,7 +118,7 @@ The app does support a proxy server.
 ### Python Environment
 Python 3.6 and above are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient_circuits>=45.0.0
+* resilient_circuits>=48.0.0
 * resilient_lib
 
 ---

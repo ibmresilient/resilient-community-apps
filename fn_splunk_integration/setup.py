@@ -13,7 +13,7 @@ setup(
     long_description="Several functions to operate with Splunk ES intel collections, including updates to SplunkES notable events and add, search and delete operations to intel collections based on artifact type values.",
     url="https://github.com/ibmresilient/resilient-community-apps",
     install_requires=[
-        'resilient_circuits>=45.0.0',
+        'resilient_circuits>=48.0.0',
         'resilient_lib'
     ],
     python_requires='>=3.6',
