@@ -19,8 +19,7 @@
 
 ### Pre-Processing Script
 ```python
-inputs.api_void_artifact_value = artifact.value
-inputs.api_void_artifact_type = artifact.type
+None
 ```
 
 ### Post-Processing Script
