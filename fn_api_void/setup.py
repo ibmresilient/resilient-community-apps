@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -24,7 +24,7 @@ def snake_to_camel(word):
 setup(
     name="fn_api_void",
     display_name="APIVoid Threat Analysis APIs",
-    version="1.0.0",
+    version="1.0.1",
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -32,8 +32,8 @@ setup(
     description="A Resilient Function to integrate with the APIVoid API",
     long_description="Provides APIVoid's threat intelligence to enrich Resilient artifacts",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient_lib>=35.0.0'
+        'resilient_circuits>=47.1.0',
+        'resilient_lib>=47.1.0'
     ],
     packages=find_packages(),
     include_package_data=True,
