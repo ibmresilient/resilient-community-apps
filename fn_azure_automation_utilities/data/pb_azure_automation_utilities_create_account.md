@@ -97,13 +97,13 @@ if results.get("success"):
   resource_group = account_id[resourceGroup_start:account_id.find("/providers", resourceGroup_start)]
   
   row = incident.addRow("azure_automation_accounts")
-  row["account_name"] = content.get("name", "")
-  row["resource_group"] = resource_group
-  row["location"] = content.get("location", "")
-  row["tags"] = str(content.get("tags"))
-  row["publicnetworkaccess"] = content.get("properties", {}).get("publicNetworkAccess", None)
-  row["disablelocalauth"] = content.get("properties", {}).get("disableLocalAuth", None)
-  row["account_deleted"] = False
+  row["account_name_accounts"] = content.get("name", "")
+  row["resource_group_accounts"] = resource_group
+  row["location_accounts"] = content.get("location", "")
+  row["tags_accounts"] = str(content.get("tags"))
+  row["publicnetworkaccess_accounts"] = content.get("properties", {}).get("publicNetworkAccess", None)
+  row["disablelocalauth_accounts"] = content.get("properties", {}).get("disableLocalAuth", None)
+  row["account_deleted_accounts"] = False
 ```
 
 ---

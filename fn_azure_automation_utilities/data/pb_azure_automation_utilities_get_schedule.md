@@ -76,8 +76,8 @@ def row_to_add(schedule):
   row["schedule_description"] = schedule.get("properties", {}).get("description", None)
   row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", False)
   row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
-  row["account_name"] = playbook.inputs.azure_automation_account_name
-  row["resource_group"] = playbook.inputs.azure_automation_resource_group
+  row["account_name_schedules"] = playbook.inputs.azure_automation_account_name
+  row["resource_group_schedules"] = playbook.inputs.azure_automation_resource_group
   row["schedule_deleted"] = False
 
 if results.get("success"):

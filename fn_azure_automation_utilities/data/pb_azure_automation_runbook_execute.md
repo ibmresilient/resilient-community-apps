@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`azure_automation_runbooks.account_name has_a_value AND azure_automation_runbooks.resource_group has_a_value AND azure_automation_runbooks.runbook_name has_a_value`
+`azure_automation_runbooks.account_name_runbooks has_a_value AND azure_automation_runbooks.resource_group_runbooks has_a_value AND azure_automation_runbooks.runbook_name has_a_value`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
@@ -45,9 +45,9 @@ Execute a runbook on Azure
 
 ### Function-Input Script
 ```python
-inputs.account_name = row.account_name
+inputs.account_name = row.account_name_runbooks
 inputs.input_parameters = playbook.inputs.azure_automation_runbook_input_parameters
-inputs.resource_group_name = row.resource_group
+inputs.resource_group_name = row.resource_group_runbooks
 inputs.runbook_name = row.runbook_name
 
 time_to_wait = getattr(playbook.inputs, "time_to_wait", 30)
@@ -74,8 +74,8 @@ results = playbook.functions.results.runbook_results
 if results.get("success"):
   incident.addNote(f"""Azure Automation: Runbook Execute - Example (PB)
 Inputs -
-  Account Name: {row.account_name}
-  Resource Group: {row.resource_group}
+  Account Name: {row.account_name_runbooks}
+  Resource Group: {row.resource_group_runbooks}
   Runbook Name: {row.runbook_name}
   Time to Wait: {getattr(playbook.inputs, 'time_to_wait', 30)}
   Input Parameters: {playbook.inputs.azure_automation_runbook_input_parameters}

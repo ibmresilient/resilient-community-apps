@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`azure_automation_credentials.account_name has_a_value AND azure_automation_credentials.credential_deleted not_equals True AND azure_automation_credentials.credential_name has_a_value AND azure_automation_credentials.resource_group has_a_value`
+`azure_automation_credentials.account_name_credentials has_a_value AND azure_automation_credentials.credential_deleted not_equals True AND azure_automation_credentials.credential_name has_a_value AND azure_automation_credentials.resource_group_credentials has_a_value`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
@@ -46,8 +46,8 @@ Update a credential.
 
 ### Function-Input Script
 ```python
-inputs.account_name = row.account_name
-inputs.resource_group_name = row.resource_group
+inputs.account_name = row.account_name_credentials
+inputs.resource_group_name = row.resource_group_credentials
 inputs.credential_name = row.credential_name
 # credential_update is True, so the given credential will be updated
 inputs.credential_update = True

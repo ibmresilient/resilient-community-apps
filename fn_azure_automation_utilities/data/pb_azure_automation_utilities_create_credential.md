@@ -87,8 +87,8 @@ if results.get("success"):
   row["credential_name"] = playbook.inputs.azure_automation_credential_name
   row["credential_username"] = playbook.inputs.azure_automation_credential_username
   row["credential_description"] = getattr(playbook.inputs, 'azure_automation_credential_description', None)
-  row["account_name"] = playbook.inputs.azure_automation_account_name
-  row["resource_group"] = playbook.inputs.azure_automation_resource_group
+  row["account_name_credentials"] = playbook.inputs.azure_automation_account_name
+  row["resource_group_credentials"] = playbook.inputs.azure_automation_resource_group
   row["credential_deleted"] = False
 ```
 

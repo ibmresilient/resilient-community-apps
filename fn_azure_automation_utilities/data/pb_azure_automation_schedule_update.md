@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`azure_automation_schedules.account_name has_a_value AND azure_automation_schedules.resource_group has_a_value AND azure_automation_schedules.schedule_deleted not_equals True AND azure_automation_schedules.schedule_name has_a_value`
+`azure_automation_schedules.account_name_schedules has_a_value AND azure_automation_schedules.resource_group_schedules has_a_value AND azure_automation_schedules.schedule_deleted not_equals True AND azure_automation_schedules.schedule_name has_a_value`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
@@ -45,8 +45,8 @@ Update the schedule identified by schedule name.
 
 ### Function-Input Script
 ```python
-inputs.account_name = row.account_name
-inputs.resource_group_name = row.resource_group
+inputs.account_name = row.account_name_schedules
+inputs.resource_group_name = row.resource_group_schedules
 inputs.schedule_name = row.schedule_name
 # schedule_update is True, so the given schedule will be updated
 inputs.schedule_update = True

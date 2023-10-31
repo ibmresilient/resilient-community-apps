@@ -74,13 +74,13 @@ def add_to_row(account):
   resource_group = account_id[resourceGroup_start:account_id.find("/providers", resourceGroup_start)]
 
   row = incident.addRow("azure_automation_accounts")
-  row["account_name"] = account.get("name", "")
-  row["resource_group"] = resource_group
-  row["location"] = account.get("location", "")
-  row["tags"] = str(account.get("tags"))
-  row["publicnetworkaccess"] = account.get("properties", {}).get("publicNetworkAccess", None)
-  row["disablelocalauth"] = account.get("properties", {}).get("disableLocalAuth", None)
-  row["account_deleted"] = False
+  row["account_name_accounts"] = account.get("name", "")
+  row["resource_group_accounts"] = resource_group
+  row["location_accounts"] = account.get("location", "")
+  row["tags_accounts"] = str(account.get("tags"))
+  row["publicnetworkaccess_accounts"] = account.get("properties", {}).get("publicNetworkAccess", None)
+  row["disablelocalauth_accounts"] = account.get("properties", {}).get("disableLocalAuth", None)
+  row["account_deleted_accounts"] = False
 
 if results.get("success"):
   content = results.get("content", {})

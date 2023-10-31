@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`azure_automation_runbooks.account_name has_a_value AND azure_automation_runbooks.resource_group has_a_value AND azure_automation_runbooks.runbook_deleted not_equals True AND azure_automation_runbooks.runbook_name has_a_value`
+`azure_automation_runbooks.account_name_runbooks has_a_value AND azure_automation_runbooks.resource_group_runbooks has_a_value AND azure_automation_runbooks.runbook_deleted not_equals True AND azure_automation_runbooks.runbook_name has_a_value`
 
 ### Object Type
 `azure_automation_runbooks`
@@ -39,8 +39,8 @@ Delete an Azure runbook
 
 ### Function-Input Script
 ```python
-inputs.account_name = row.account_name
-inputs.resource_group_name = row.resource_group
+inputs.account_name = row.account_name_runbooks
+inputs.resource_group_name = row.resource_group_runbooks
 inputs.runbook_name = row.runbook_name
 ```
 

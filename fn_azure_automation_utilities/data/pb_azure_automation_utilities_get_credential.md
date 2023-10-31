@@ -75,8 +75,8 @@ def add_to_row(credential):
   row["credential_name"] = credential.get("name")
   row["credential_username"] = credential.get("properties", {}).get("userName")
   row["credential_description"] = credential.get("properties", {}).get("description")
-  row["account_name"] = playbook.inputs.azure_automation_account_name
-  row["resource_group"] = playbook.inputs.azure_automation_resource_group
+  row["account_name_credentials"] = playbook.inputs.azure_automation_account_name
+  row["resource_group_credentials"] = playbook.inputs.azure_automation_resource_group
   row["credential_deleted"] = False
 
 if results.get("success"):

@@ -77,7 +77,7 @@ if playbook.inputs.schedule_recurrence == "Recurring":
   payload["properties"]["interval"] = int(getattr(playbook.inputs, "recur_interval", 1)) # Add user given interval to payload
   # If an expiration date time is given then add it to the payload
   if getattr(playbook.inputs, "schedule_expiration", None):
-    payload["properties"]["expiryTime"] = getattr(playbook.inputs, "schedule_expiration")
+    payload["properties"]["expiryTime"] = getattr(playbook.inputs, "schedule_expiration", None)
   # If the frequency selected equals months, then add the user selected days to the payload
   if frequency == "Week":
     # List of selected days
@@ -110,8 +110,8 @@ if results.get("success"):
   row["schedule_description"] = schedule.get("properties", {}).get("description", None)
   row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", False)
   row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
-  row["account_name"] = playbook.inputs.azure_automation_account_name
-  row["resource_group"] = playbook.inputs.azure_automation_resource_group
+  row["account_name_schedules"] = playbook.inputs.azure_automation_account_name
+  row["resource_group_schedules"] = playbook.inputs.azure_automation_resource_group
   row["schedule_deleted"] = False
 ```
 

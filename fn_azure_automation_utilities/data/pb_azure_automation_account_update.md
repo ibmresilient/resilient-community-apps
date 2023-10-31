@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`azure_automation_accounts.account_deleted not_equals True AND azure_automation_accounts.account_name has_a_value AND azure_automation_accounts.resource_group has_a_value`
+`azure_automation_accounts.account_deleted_accounts not_equals True AND azure_automation_accounts.account_name_accounts has_a_value AND azure_automation_accounts.resource_group_accounts has_a_value`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
@@ -46,12 +46,12 @@ Update an automation account.
 
 ### Function-Input Script
 ```python
-inputs.account_name = row.account_name
-inputs.resource_group_name = row.resource_group
+inputs.account_name = row.account_name_accounts
+inputs.resource_group_name = row.resource_group_accounts
 inputs.account_update = True
 
 payload = {
-  "name": row.account_name,
+  "name": row.account_name_accounts,
   "properties": {
     "sku":{
       "name": "Basic"
@@ -86,9 +86,9 @@ inputs.input_parameters = str(payload)
 results = playbook.functions.results.update_account
 if results.get("success"):
   content = results.get("content", "")
-  row["tags"] = str(content.get("tags"))
-  row["publicnetworkaccess"] = content.get("properties", {}).get("publicNetworkAccess", None)
-  row["disablelocalauth"] = content.get("properties", {}).get("disableLocalAuth", None)
+  row["tags_accounts"] = str(content.get("tags"))
+  row["publicnetworkaccess_accounts"] = content.get("properties", {}).get("publicNetworkAccess", None)
+  row["disablelocalauth_accounts"] = content.get("properties", {}).get("disableLocalAuth", None)
 ```
 
 ---

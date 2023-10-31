@@ -71,8 +71,8 @@ if results.get("success"):
     row = incident.addRow("azure_automation_statistics")
     row["statistic_counter_property"] = stat.get("counterProperty", None)
     row["statistic_counter_value"] = stat.get("counterValue", 0)
-    row["account_name"] = playbook.inputs.azure_automation_account_name
-    row["resource_group"] = playbook.inputs.azure_automation_resource_group_name
+    row["account_name_statistics"] = playbook.inputs.azure_automation_account_name
+    row["resource_group_statistics"] = playbook.inputs.azure_automation_resource_group_name
 ```
 
 ---

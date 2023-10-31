@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`azure_automation_accounts.account_deleted not_equals True AND azure_automation_accounts.account_name has_a_value AND azure_automation_accounts.resource_group has_a_value`
+`azure_automation_accounts.account_deleted_accounts not_equals True AND azure_automation_accounts.account_name_accounts has_a_value AND azure_automation_accounts.resource_group_accounts has_a_value`
 
 ### Object Type
 `azure_automation_accounts`
@@ -39,8 +39,8 @@ Delete an Azure automation account
 
 ### Function-Input Script
 ```python
-inputs.account_name = row.account_name
-inputs.resource_group_name = row.resource_group
+inputs.account_name = row.account_name_accounts
+inputs.resource_group_name = row.resource_group_accounts
 ```
 
 ---
@@ -63,7 +63,7 @@ results = playbook.functions.results.account_delete
 if results.get("success"):
   status = results.get("content", {}).get("status")
   if status == 200:
-    row.account_deleted = True
+    row.account_deleted_accounts = True
   elif status == 204:
     incident.addNote(f"""Azure Automation: Account Delete - Example (PB)
 Inputs -
