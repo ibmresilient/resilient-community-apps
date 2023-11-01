@@ -32,6 +32,7 @@
 | Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
 | Schedule Recurence | `schedule_recurrence` | select | The recurrence of the schedule | Always |
 | Schedule Start Time | `azure_automation_schedule_start_time` | datetimepicker | The start time of the schedule | Always |
+| Time Zone | `schedule_time_zone` | select | The time zone the schedule should be in | Always |
 
 ### Object Type
 `incident`
@@ -67,8 +68,10 @@ payload = {
   }
 }
 
-if getattr(playbook.inputs, "azure_automation_schedule_description", None):
+if getattr(playbook.inputs, "azure_automation_schedule_description", None): # Set the description
   payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description", None)
+if getattr(playbook.inputs, "schedule_time_zone", None): # Set the time zone
+  payload["properties"]["timeZone"] = getattr(playbook.inputs, "schedule_time_zone", None)
 
 frequency = getattr(playbook.inputs, "recur_frequency", "once")
 # If the frequency Recurring is selected
@@ -109,7 +112,12 @@ if results.get("success"):
   row["schedule_name"] = schedule.get("name", "")
   row["schedule_description"] = schedule.get("properties", {}).get("description", None)
   row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", False)
+  row["schedule_start_time"] = schedule.get("properties", {}).get("startTime", None)
+  row["schedule_expiry_time"] = schedule.get("properties", {}).get("expiryTime", None)
   row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
+  row["schedule_interval"] = schedule.get("properties", {}).get("interval", 1)
+  row["schedule_time_zone"] = schedule.get("properties", {}).get("timeZone", None)
+  row["advanced_schedule"] = str(schedule.get("properties", {}).get("advancedSchedule", {}))
   row["account_name_schedules"] = playbook.inputs.azure_automation_account_name
   row["resource_group_schedules"] = playbook.inputs.azure_automation_resource_group
   row["schedule_deleted"] = False

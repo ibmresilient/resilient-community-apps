@@ -78,6 +78,7 @@ def add_to_row(runbook):
   row["runbook_tags"] = str(runbook.get("tags"))
   row["account_name_runbooks"] = playbook.inputs.azure_automation_account_name
   row["resource_group_runbooks"] = playbook.inputs.azure_resource_group
+  row["runbook_deleted"] = False
 
 if results.get("success"):
   content = results.get("content", {})

@@ -75,7 +75,12 @@ def row_to_add(schedule):
   row["schedule_name"] = schedule.get("name", "")
   row["schedule_description"] = schedule.get("properties", {}).get("description", None)
   row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", False)
+  row["schedule_start_time"] = schedule.get("properties", {}).get("startTime", None)
+  row["schedule_expiry_time"] = schedule.get("properties", {}).get("expiryTime", None)
   row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
+  row["schedule_interval"] = schedule.get("properties", {}).get("interval", 1)
+  row["schedule_time_zone"] = schedule.get("properties", {}).get("timeZone", None)
+  row["advanced_schedule"] = str(schedule.get("properties", {}).get("advancedSchedule", {}))
   row["account_name_schedules"] = playbook.inputs.azure_automation_account_name
   row["resource_group_schedules"] = playbook.inputs.azure_automation_resource_group
   row["schedule_deleted"] = False
