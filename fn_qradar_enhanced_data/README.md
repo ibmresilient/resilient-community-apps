@@ -49,6 +49,9 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.3.2 | 08/2023 | Bug fix for MITRE function and poller search |
+| 2.3.1 | 05/2023 | Bug fix for MITRE playbook |
+| 2.3.0 | 05/2023 | Support configurable settings to retry QRadar query |
 | 2.2.0 | 02/2023 | Add notes & assigned sync |
 | 2.1.0 | 10/2022 | Add Mitre Info from Offense to case |
 | 2.0.1 | 08/2022 | Update documentation |
@@ -97,7 +100,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `45.0.7899`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=45.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -105,10 +108,10 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Layouts | Read, Edit |
   | Incident | Edit |
 
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
@@ -118,7 +121,7 @@ If you are deploying to IBM Cloud Pak for Security, the requirements are:
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
@@ -133,7 +136,7 @@ Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=45.0.0
 
 ### QRadar Requirements
-The app works with QRadar 7.4.0 or higher and requires the QRadar Analayst Workflow app 1.2 or higher to be installed on QRadar. The QRadar Analyst workflow app can be downloaded from the IBM App Exchange - https://exchange.xforce.ibmcloud.com/hub/extension/123f9ec5a53214cc6e35b1e4700b0806.
+The app works with QRadar 7.4.0 or higher and requires the QRadar Analyst Workflow app 1.2 or higher to be installed on QRadar. The QRadar Analyst workflow app can be downloaded from the IBM App Exchange - https://exchange.xforce.ibmcloud.com/hub/extension/123f9ec5a53214cc6e35b1e4700b0806.
 If the Mitre function is going to be used then the app, QRadar Use Case Manager is required to be installed on the QRadar server.
 
 ---
@@ -159,6 +162,13 @@ The following table provides the settings you need to configure the app. These s
 | **polling_lookback** | No | `60` | *Time in minutes to look back* |
 | **clear_datatables** | No | `True` | *Boolean to clear or not clear content of data tables in incident when poller is run* |
 | **sync_notes** | Yes | `True` | *Boolean if true then notes that are added to QRadar offenses will be added to their linked SOAR incidents*|
+| **empty_query_max** | No | `5` | *New to 2.3. Attempt the AQL queries up to the number of times specified. Default is no retries (1)* |
+| **empty_query_wait_secs** | No | `60` | *New to 2.3. Number of seconds to pause before attempting the next AQL query. Default is 0* |
+| **empty_query_skip_types** | No | `flows` | *New to 2.3. Comma separated list of query types to skip retry: topevents, flows, sourceip, destinationip, categories* |
+
+#### 2.3.0 Changes
+See new settings `empty_query_max` and `empty_query_wait_secs`.
+These settings can be added to the app.config `[fn_qradar_integration:edm_global_settings]` section.
 
 #### 1.2.0 Changes
 Starting in version 1.2.0, more than one QRadar instance can be configured for SOAR case data synchronization. For enterprises with only one QRadar instance, your app.config file will continue to define the QRadar instance under the `[fn_qradar_integration]` section header.
@@ -171,7 +181,7 @@ If you have existing custom workflows, see [Creating workflows when server/serve
 
 ### MSSP Configuration
 
-Make sure to follow the instructions in the Integration Server Guide to install the app on the Config org. The custom layout will have to be added manuanlly, see [Custom Layouts](#custom-layouts). Afterwards, have your system administrator push the app to the appropriate child orgs.
+Make sure to follow the instructions in the Integration Server Guide to install the app on the Config org. The custom layout will have to be added manually, see [Custom Layouts](#custom-layouts). Afterwards, have your system administrator push the app to the appropriate child orgs.
 
 ### Custom Layouts
 * Import the Data Tables and Custom Fields like the screenshot below:
@@ -258,6 +268,8 @@ None
 ---
 ## Function - QRadar Get Offense MITRE Reference
 Get the MITRE Tactics and Techniques in relation to the rules that were fired to cause the offense in QRadar.
+In order to use this function the connection to the QRadar server has to be with a qradartoken and not qradarpassword.
+The QRadar token used to connect to the QRadar server has to be the same QRadar token used to configure the Use Case Manager app installed on the QRadar server.
 
  ![screenshot: fn-qradar-get-offense-mitre-reference ](./doc/screenshots/fn-qradar-get-offense-mitre-reference.png)
 
@@ -944,13 +956,25 @@ inputs.soar_table_name = "qradar_rules_and_mitre_tactics_and_techniques"
 ```python
 mitre_results = playbook.functions.results.mitre_results
 
-for item in mitre_results.content.get('rules'):
-  mapping = item.get('mapping')
-  if mapping:
-    for tactic in list(mapping):
-      techniques = mapping.get(tactic).get('techniques')
-      if techniques:
-        for technique in list(techniques):
+if mitre_results.get("success"):
+  for item in mitre_results.get("content", {}).get('rules'):
+    mapping = item.get('mapping')
+    if mapping:
+      for tactic in list(mapping):
+        techniques = mapping.get(tactic).get('techniques')
+        if techniques:
+          for technique in list(techniques):
+            new_row = incident.addRow('qradar_rules_and_mitre_tactics_and_techniques')
+            new_row.rule_id = item.get('id')
+            new_row.rule_identifier = item.get('identifier')
+            new_row.rule_name = item.get('name')
+            new_row.mitre_tactic = tactic
+            new_row.mitre_tactic_id = mapping.get(tactic).get('id')
+            new_row.tactic_confidence_level = mapping.get(tactic).get('confidence')
+            new_row.mitre_technique = technique
+            new_row.mitre_technique_id = techniques.get(technique).get('id')
+            new_row.technique_confidence_level = techniques.get(technique).get('confidence')
+        else:
           new_row = incident.addRow('qradar_rules_and_mitre_tactics_and_techniques')
           new_row.rule_id = item.get('id')
           new_row.rule_identifier = item.get('identifier')
@@ -958,22 +982,11 @@ for item in mitre_results.content.get('rules'):
           new_row.mitre_tactic = tactic
           new_row.mitre_tactic_id = mapping.get(tactic).get('id')
           new_row.tactic_confidence_level = mapping.get(tactic).get('confidence')
-          new_row.mitre_technique = technique
-          new_row.mitre_technique_id = techniques.get(technique).get('id')
-          new_row.technique_confidence_level = techniques.get(technique).get('confidence')
-      else:
-        new_row = incident.addRow('qradar_rules_and_mitre_tactics_and_techniques')
-        new_row.rule_id = item.get('id')
-        new_row.rule_identifier = item.get('identifier')
-        new_row.rule_name = item.get('name')
-        new_row.mitre_tactic = tactic
-        new_row.mitre_tactic_id = mapping.get(tactic).get('id')
-        new_row.tactic_confidence_level = mapping.get(tactic).get('confidence')
-  else:
-    new_row = incident.addRow('qradar_rules_and_mitre_tactics_and_techniques')
-    new_row.rule_id = item.get('id')
-    new_row.rule_identifier = item.get('identifier')
-    new_row.rule_name = item.get('name')
+    else:
+      new_row = incident.addRow('qradar_rules_and_mitre_tactics_and_techniques')
+      new_row.rule_id = item.get('id')
+      new_row.rule_identifier = item.get('identifier')
+      new_row.rule_name = item.get('name')
 ```
 
 </p>
@@ -1087,17 +1100,22 @@ Search QRadar Top events for the given Offense ID
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` |  Name of QRadar server to use from the app.config. If empty, the standard `[fn_qradar_integration]` server definition is used. See [1.2.0 Changes](#1.2.0-changes). |
-| `qradar_query` | `textarea` | No | `-` | A QRadar query string with parameters |
-| `qradar_query_type` | `text` | No | `-` | Can equal `flows`, `topevents`, `categories`, `destinationip`, or `sourceip` |
-| `qradar_search_param1` | `text` | No | `-` | - |
-| `qradar_search_param2` | `text` | No | `-` | - |
-| `qradar_search_param3` | `text` | No | `-` | - |
-| `qradar_search_param4` | `text` | No | `-` | - |
-| `qradar_search_param5` | `text` | No | `-` | - |
-| `qradar_search_param6` | `text` | No | `-` | - |
+| `qradar_query` | `textarea` | Yes | `-` | A QRadar query string with place holders for qradar_search_paramX such as %param1% |
+| `qradar_query_type` | `text` | Yes | `-` | Can equal `flows`, `topevents`, `categories`, `destinationip`, or `sourceip` |
+| `qradar_search_param1` | `text` | No | `APPLICATIONNAME(applicationid) as 'Application', sourceip, sourceport, destinationip, destinationport, PROTOCOLNAME(protocolid) as 'Protocol', firstpackettime AS 'FirstPacketTime', sourcebytes, sourcepackets, destinationbytes, destinationpackets` | These are the fields to return from the query |
+| `qradar_search_param2` | `text` | No | `WHERE INOFFENSE(%param3%)` | Typically the `Where` clause for the query |
+| `qradar_search_param3` | `text` | No | `6833` | Optional. Typically the qradar ID used in qradar_search_param2 |
+| `qradar_search_param4` | `text` | No | `GROUP BY category,magnitude` | Optional clause such as `Group by` |
+| `qradar_search_param5` | `text` | No | `ORDER BY starttime` | Optional clause such as `Order by` |
+| `qradar_search_param6` | `text` | No | `LIMIT 10` | Optional clause such as `limit` |
 | `soar_incident_id` | `number` | No | `-` | ID of the SOAR incident the function is running in |
 | `soar_table_name` | `text` | No | `-` | Name of the data table that the workflow updates, so that it can be cleared if specified in the app.config |
 
+Note: This function uses the qradar_search_paramX input fields twice. 
+First, params 2 & 3 are used with `qradar_query` to build a temporary table of results. 
+Then fields 1, 4-6 are combined to return the limited results requested.  
+When reusing these input fields be aware of these purposes.
+ 
 </p>
 </details>
 

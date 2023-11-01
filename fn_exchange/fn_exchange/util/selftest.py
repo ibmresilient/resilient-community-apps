@@ -6,7 +6,8 @@ Usage: resilient-circuits selftest -l fn_exchange
 """
 
 import logging
-from fn_exchange.util.exchange_utils import exchange_utils
+from resilient_lib import RequestsCommon
+from fn_exchange.lib.exchange_utils import exchange_interface
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -15,14 +16,15 @@ log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
-    Simple test to confirm access to Miscrosoft Exchange API connectivity.
+    Simple test to confirm access to Microsoft Exchange API connectivity.
     """
     options = opts.get("fn_exchange", {})
     username = options.get("email")
+    rc = RequestsCommon(opts, options)
+    
     try:
-
         # Initialize utils
-        utils = exchange_utils(options, opts)
+        utils = exchange_interface(rc, options)
 
         # Connect to server
         account = utils.connect_to_account(username)
@@ -30,7 +32,7 @@ def selftest_function(opts):
         # Get mailbox info
         info = account.protocol.resolve_names([username], return_full_contact_data=True)
 
-        if isinstance(info, list) and info[0].email_address == username:
+        if isinstance(info, list) and info[0][0].email_address == username:
             return {"state": "success"}
         else:
             return {"state": "failure"}

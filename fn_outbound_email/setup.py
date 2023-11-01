@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #-- coding: utf-8 --
-#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#(c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 from setuptools import setup, find_packages
@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_outbound_email',
     display_name='Outbound Email',
-    version='2.0.2',
+    version='2.1.0',
     license='MIT',
     author='IBM QRadar SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_outbound_email',
@@ -36,18 +36,24 @@ setup(
 <br>* Send attachments with the email at the incident level or task level.
 <br>* Example rules included at the incident and task levels.
 <br>
-<br>New in version 2.0
+<br>New in version 2.X
 <br>* Ability to reference additional email headers: message-id, importance, in-reply-to.
 <br>* Define multiple templates from the app.config file.
 <br>* Capture outbound email conversations including both inbound and outbound messages.
 <br>* Expanded template support to include artifact, notes and SOAR links (case and task).
-<br>* Support for OAuth authentication.""",
+<br>* Support for OAuth authentication.
+<br>* Message Signing and Encryption
+<br>
+<br><ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+<br><ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
         'b4',
-        'resilient_circuits>=39.0.0',
+        'resilient_circuits>=46.0.0',
         'resilient_lib>=46.0.0',
         'Jinja2>=2.9.6',
-        'six'
+        'six',
+        'python-smail',
+        'cryptography'
     ],
     packages=find_packages(),
     include_package_data=True,

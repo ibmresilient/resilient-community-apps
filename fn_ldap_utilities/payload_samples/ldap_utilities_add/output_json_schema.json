@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
@@ -30,9 +30,7 @@
         }
       }
     },
-    "raw": {
-      "type": "string"
-    },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {

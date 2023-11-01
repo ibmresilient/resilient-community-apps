@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2023. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use, pointless-string-statement
+# pragma pylint: disable=pointless-string-statement, line-too-long, wrong-import-order
+
 """
     Function network_utilities_extract_ssl_cert_from_url receives a HTTPS_URL as a parameter.
     It then attempts to gather the certificate for this provided URL.
-    Uses the built in SSL and urlparse librarys to accomplish the functionality
-    In test cases it uses pyOpenSSL library (https://pyopenssl.org/en/stable/index.html) 
+    Uses the built in SSL and urlparse libraries to accomplish the functionality
+
+    In test cases it uses pyOpenSSL library (https://pyopenssl.org/en/stable/index.html)
     to confirm the output certificate data is in valid PEM format.
     Returns the certificate encoded in JSON along with a 'successful' boolean.
     This indicates whether the operation was successful.
@@ -21,7 +23,7 @@ import ssl
 import json
 from resilient_circuits import ResilientComponent, handler, function,\
      FunctionResult, FunctionError
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, validate_fields
 
 SECTION_HDR = "fn_network_utilities"
 
@@ -56,26 +58,24 @@ class FunctionComponent(ResilientComponent):
 
     @function("network_utilities_extract_ssl_cert_from_url")
     def _utilities_extract_ssl_cert_from_url_function(self, event, *args, **kwargs):
-        """Function: 
+        """Function:
         This function takes in a HTTPS URL and attempts to acquire its Certificate, saving it as an artifact.
         Inputs: A HTTPS_URL.
         Outputs: Certificate file encoded in JSON.
         Schema of the results :
-        results = 
+        results =
         {
             "certificate": Certificate string encoded as JSON or NoneType,
             "successful": True if certificate is not NoneType; False otherwise
         }
         """
+        validate_fields(["network_utilities_https_url"], kwargs)
         try:
             # Get the function parameters:
             https_url = kwargs.get("network_utilities_https_url")  # text
 
             log = logging.getLogger(__name__)
-            log.info("https_url: %s", https_url)
-
-            if https_url is None:
-                raise ValueError("Error: https_url must be specified.")
+            log.info(f"https_url: {https_url}")
 
             self.init_proxies()
             url_dict = urlparse.urlparse(https_url)
@@ -86,7 +86,7 @@ class FunctionComponent(ResilientComponent):
                 '''
                     Not all input URLs will be formed properly
                     Some may be all good and have the Scheme, netloc,path
-                    Others will not e.g www.google.com when passed to urlparse will not have a netloc param 
+                    Others will not e.g www.google.com when passed to urlparse will not have a netloc param
                     In these cases urlparse will stick the URL in the path attribute if at all
                     https://docs.python.org/2/library/ssl.html#ssl.get_server_certificate
                 '''
@@ -105,20 +105,21 @@ class FunctionComponent(ResilientComponent):
                 context = ssl.SSLContext(ssl.PROTOCOL_TLS)
                 sock = context.wrap_socket(conn, server_hostname=url_dict.hostname)
                 certificate = ssl.DER_cert_to_PEM_cert(sock.getpeercert(True))
-            except Exception:
-                raise KeyError("Problem encountered while parsing the cert.")
+            except Exception as err:
+                raise KeyError(f"Problem encountered while parsing the cert.: {str(err)}")
 
             finally:
                 # Close the connection once we have what we want
                 if conn is not None:
-                    conn.close() 
+                    conn.close()
+
             # Prepares a JSON object from the get_server_certificate function result
             serialized_cert = json.dumps(certificate, default=lambda o: o.__dict__,
                                          sort_keys=True, indent=4)
             # Results are used in PostProcessing script to create artifact on the platform
             results = {
                 # If the certificate wasn't parsed; 'null' will be the result
-                "certificate": (serialized_cert if serialized_cert is not 'null' else None),
+                "certificate": (serialized_cert if serialized_cert != 'null' else None),
                 # x509 starts out as a None type; if unsuccessful it will still be a none type
                 "successful": (certificate is not None)
             }

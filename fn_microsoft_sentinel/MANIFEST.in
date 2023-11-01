@@ -1,11 +1,16 @@
 include README.md
 include Dockerfile
+include apikey_permissions.txt
 include entrypoint.sh
-include api_permissions.txt
 recursive-include fn_microsoft_sentinel/util *
+recursive-include fn_microsoft_sentinel/poller *
 recursive-include fn_microsoft_sentinel/lib *
 include fn_microsoft_sentinel/LICENSE
 include doc/*.md
 include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
 
-exclude *.bak
+global-exclude *.bak

@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#(c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 #pragma pylint: disable=line-too-long
 
 """AppFunction implementation"""
 from bs4 import BeautifulSoup
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields, str_to_bool
+from resilient_lib import validate_fields, str_to_bool, s_to_b
 from fn_outbound_email.lib.soar_helper import SoarHelper, split_string
 from fn_outbound_email.lib.configure_tab import init_email_tab
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
-from fn_outbound_email.lib.template_helper import get_template, get_template_names, CONFIG_DATA_SECTION
+from fn_outbound_email.lib.template_helper import get_template, CONFIG_DATA_SECTION
 
 FN_NAME = "send_email2"
 MAIL_TEMPLATE_SELECT = "mail_template_select" # activity field to change update the select list
@@ -24,13 +24,6 @@ class FunctionComponent(AppFunctionComponent):
         app_config = opts.get(CONFIG_DATA_SECTION)
         if str_to_bool(app_config.get("enable_email_conversations", "false")):
             init_email_tab()
-
-        # read the template names to include in the selection list
-
-        select_list = get_template_names(opts)
-        if select_list:
-            soar_helper = SoarHelper(self.rest_client())
-            soar_helper.update_select_list(MAIL_TEMPLATE_SELECT, select_list)
 
 
     @app_function(FN_NAME)
@@ -52,6 +45,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.mail_inline_template
             -   fn_inputs.mail_template_label
             -   fn_inputs.mail_merge_body
+            -   fn_inputs.mail_encryption_recipients
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
@@ -110,11 +104,15 @@ class FunctionComponent(AppFunctionComponent):
                 if mail_data.get('mail_merge_body', False) and mail_data.get('mail_body'):
                     rendered_mail_body= f"{rendered_mail_body}\n{mail_data.get('mail_body')}"
 
-                error_msg = send_msg(send_smtp_email, rendered_mail_body)
+                error_msg = send_msg(send_smtp_email,
+                                     rendered_mail_body,
+                                     encryption_certs=getattr(fn_inputs, 'mail_encryption_recipients'))
         elif mail_data.get('mail_body'):
             self.LOG.info("Non-rendered mail_body")
             rendered_mail_body = mail_data.get('mail_body')
-            error_msg = send_msg(send_smtp_email, rendered_mail_body)
+            error_msg = send_msg(send_smtp_email,
+                                 rendered_mail_body,
+                                 encryption_certs=getattr(fn_inputs, 'mail_encryption_recipients'))
         else:
             error_msg = "No email body or template specified"
 
@@ -134,7 +132,7 @@ class FunctionComponent(AppFunctionComponent):
                              success=not bool(error_msg),
                              reason=error_msg)
 
-def send_msg(send_smtp_email, content):
+def send_msg(send_smtp_email, content, encryption_certs=None):
     """send the message, using the context of the content to send as html or plain text
 
     Args:
@@ -142,12 +140,14 @@ def send_msg(send_smtp_email, content):
         content (str): body of email
 
     Returns:
-        str: any error which occured
+        str: any error which occurred
     """
-    if isHTML(content):
-        return send_smtp_email.send(body_html=content)
+    encryption_certs_list = [s_to_b(cert) for cert in encryption_certs.split(',')] if encryption_certs else None
 
-    return send_smtp_email.send(body_text=content.replace('\n', '\r\n'))
+    if isHTML(content):
+        return send_smtp_email.send(body_html=content, encryption_certs=encryption_certs_list)
+
+    return send_smtp_email.send(body_text=content.replace('\n', '\r\n'), encryption_certs=encryption_certs_list)
 
 
 def isHTML(content):

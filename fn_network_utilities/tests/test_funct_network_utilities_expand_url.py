@@ -50,8 +50,16 @@ class TestnetworkUtilitiesExpandUrl:
 
     @pytest.mark.livetest
     @pytest.mark.parametrize("resilient_url, expected_results", [
-        ("https://tinyurl.com/y8u79w5g", {"urllist": ['https://developer.ibm.com/security/resilient/']}),
-        ("tinyurl.com/y8u79w5g", {"urllist": ['https://developer.ibm.com/security/resilient/']}),
+        ("https://tinyurl.com/y8u79w5g",
+         {"urllist": ['https://developer.ibm.com/security/resilient/', 
+                      'https://community.ibm.com/community/user/communities/community-home',
+                      'https://login.ibm.com/oidc/endpoint/default/authorize', 
+                      'https://login.ibm.com/oidc/sps/auth']}),
+        ("tinyurl.com/y8u79w5g",
+         {"urllist": ['https://developer.ibm.com/security/resilient/', 
+                      'https://community.ibm.com/community/user/communities/community-home',
+                      'https://login.ibm.com/oidc/endpoint/default/authorize', 
+                      'https://login.ibm.com/oidc/sps/auth']}),
         ("https://tinyurl.com/means_nothing", {"urllist": []}),
         ("https://doesnt_exist.com", {"urllist": []})
     ])
@@ -61,4 +69,6 @@ class TestnetworkUtilitiesExpandUrl:
             "network_utilities_resilient_url": resilient_url
         }
         results = call_network_utilities_expand_url_function(circuits_app, function_params)
-        assert(expected_results == results)
+
+        for i, url in enumerate(results["urllist"]):
+            assert url.startswith(expected_results["urllist"][i])

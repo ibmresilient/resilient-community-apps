@@ -3,35 +3,35 @@
   "type": "object",
   "properties": {
     "version": {
-      "type": "string"
+      "type": "number"
     },
     "success": {
       "type": "boolean"
     },
     "reason": {},
-    "content": {},
-    "raw": {
-      "type": "string"
+    "content": {
+      "type": "object",
+      "properties": {
+        "user_dn": {
+          "type": "string"
+        },
+        "user_status": {
+          "type": "string"
+        }
+      }
     },
+    "raw": {},
     "inputs": {
       "type": "object",
       "properties": {
-        "ldap_domain_name": {
-          "type": "string"
-        },
         "ldap_dn": {
           "type": "string"
         },
+        "ldap_domain_name": {
+          "type": "string"
+        },
         "ldap_toggle_access": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer"
-            },
-            "name": {
-              "type": "string"
-            }
-          }
+          "type": "string"
         }
       }
     },
@@ -57,12 +57,6 @@
           "type": "string"
         }
       }
-    },
-    "user_dn": {
-      "type": "string"
-    },
-    "user_status": {
-      "type": "string"
     }
   }
 }

@@ -16,12 +16,12 @@
   - [Step 9: *Test*](#step-9-test)
 ---
 
-## Prerequisites 
+## Prerequisites
 * ServiceNow Instance with ITSM enabled and running `Kingston` or newer releases
 * Access to the `Incident Table` in ServiceNow
 * A user in ServiceNow with an `admin` role
-* IBM Cloud Pak for Security `>= 1.9.0` *or* IBM SOAR `>= v31.0.0`
-* An App Host >= `v1.0.0` or an Integrations Server running `resilient-circuits >= v31.0.0`.
+* IBM Cloud Pak for Security `>= 1.9.0` *or* IBM SOAR `>= v45.0.0`
+* An App Host >= `v1.9.0` or an Integrations Server running `resilient-circuits >= v45.0.0`.
   > - To setup an App Host see: [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
   > - To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 * If SOAR instance is not publicly accessible (behind a firewall), a `ServiceNow MID Server` is required
@@ -101,7 +101,7 @@
   | Password | No | (Required if not using API Key) The Password you used in **Step 3.1** |
   | ServiceNow Username | Yes | The **User ID** you entered in **Step 2** |
   | ServiceNow MID Server Name | No | The MID Server to use with this App or leave blank if not using a MID Server |
-  | Configure with CP4S? | Yes | Defaults to **No**. Should be changed to **Yes** if you are conencting to a Cloud Pak for Security instance |
+  | Configure with CP4S? | Yes | Defaults to **No**. Should be changed to **Yes** if you are connecting to a Cloud Pak for Security instance |
   | CP4S Rest URL | No | (Required if configuring with CP4S) The rest URL of the CP4S instance. Usually this is `cases-rest.<host_name>` but sometimes it is a custom prefix. |
   | ServiceNowAllowedTableNames | Yes | A CSV list of all the **Table Names** in ServiceNow IBM SOAR is allowed to integrate with. *Out-of-the-box this app requires access to the `incident`, `sys_user` and `sys_user_group` tables.* For integrating with ServiceNow Security Incident Response (SIR) this app requires `sn_si_incident` and `sn_si_task` |
   | IBM SOAR Assignment Group Names | No | A CSV list of assignment groups that, upon assignment on a SIR incident, will automatically sync the security incident or task to SOAR |

@@ -1,13 +1,13 @@
 {
-  {# JINJA template for updating a new Resilient incident from a Sentinel incident. #}
+  {# JINJA template for updating a new SOAR incident from a Sentinel incident. #}
   "description": {
     "format": "text",
     "content": "{{ properties.description|replace('"', '\\"') }}"
   },
-  {# if Sentinel users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
-  {# "owner_id": "{{ properties.owner.userPrincipalName|resilient_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
-  "plan_status": "{{ properties.status|resilient_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
-  "severity_code": "{{ properties.severity|resilient_substitute('{"Informational": "Low"}') }}",
+  {# if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ properties.owner.userPrincipalName|soar_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ properties.status|soar_substitute('{"Closed": "A", "Active": "A", "New": "A"}') }}",
+  "severity_code": "{{ properties.severity|soar_substitute('{"Informational": "Low"}') }}",
   "properties": {
     "sentinel_incident_status": "{{ properties.status }}",
     "sentinel_incident_classification": "{{ properties.classification }}",

@@ -18,7 +18,7 @@
 ---
 
 # Overview:
-This package contains 8 Functions, 12 Workflows, 12 Rules and 1 Data Table that, when used along side our ServiceNow App help you integrate with your ServiceNow Instance.
+This package contains 8 Functions, 12 playbooks, and 1 Data Table that, when used along side our ServiceNow App help you integrate with your ServiceNow Instance.
 
 * [SNOW: Create Record](#function---snow-create-record) gives you the ability to create a Record in ServiceNow from a SOAR Case/Incident or Task.
 * [SNOW: Update Record](#function---snow-update-record) allows you to update multiple column fields in a ServiceNow Record.
@@ -74,9 +74,9 @@ Uses the `/create` custom endpoint in ServiceNow to create a ServiceNow Record f
 > * sets `description` in ServiceNow as the `incident.description` or `task.instructions`
 > * sets `work_notes` in ServiceNow as the `sn_init_work_note`
 >
-> **These defaults can be overwritten** by passing values from them in the `sn_optional_fields` input. To do this you would extend the example Pre-Process Script provided with the following:
+> **These defaults can be overwritten** by passing values from them in the `sn_optional_fields` input. To do this you would extend the example input Script provided with the following:
 > ```python
-> inputs.sn_optional_fields = dict_to_json_str({
+> inputs.sn_optional_fields = dumps({
 >     "short_description": "Custom Short Description",
 >     "description": "Custom Long Description"
 > })
@@ -146,63 +146,18 @@ results = {
 </details>
 
 
-<details><summary>Example Pre-Processing Script:</summary>
+<details><summary>Example input Script:</summary>
 
-* This example defines and uses the `dict_to_json_str` function to allow us to easily set optional_fields we want to send to ServiceNow.
-* We also make use of user inputs from **Rule Activity Fields** by using: `rule.properties.sn_initial_note`.
-* In the supplied example Workflow, there are 3 Functions chained together, with this Function being the third. 
+* We also make use of user inputs from **Rule Activity Fields** by using: `playbook.inputs.sn_initial_note`.
+* In the supplied example playbook, there are 3 Functions chained together, with this Function being the third. 
   * We use the output of the first and second functions here: 
     ```python
-        "assignment_group": workflow.properties.assignment_group.sys_id,
-        "caller_id": workflow.properties.caller_id.sys_id
+        "assignment_group": playbooks.functions.results.assignment_group.sys_id,
+        "caller_id": playbooks.functions.results.caller_id.sys_id
     ```
 
 ```python
-#######################################
-### Define pre-processing functions ###
-#######################################
-def dict_to_json_str(d):
-  """Function that converts a dictionary into a JSON string.
-     Supports types: basestring, bool, int and nested dicts.
-     Does not support lists.
-     If the value is None, it sets it to False."""
-
-  json_entry = u'"{0}":{1}'
-  json_entry_str = u'"{0}":"{1}"'
-  entries = [] 
-
-  for entry in d:
-    key = entry
-    value = d[entry]
-
-    if value is None:
-      value = False
-
-    if isinstance(value, list):
-      helper.fail('dict_to_json_str does not support Python Lists')
-
-    if isinstance(value, basestring):
-      value = value.replace(u'"', u'\\"')
-      entries.append(json_entry_str.format(unicode(key), unicode(value)))
-      
-    elif isinstance(value, unicode):
-      entries.append(json_entry.format(unicode(key), unicode(value)))
-    
-    elif isinstance(value, bool):
-      value = 'true' if value == True else 'false'
-      entries.append(json_entry.format(key, value))
-
-    elif isinstance(value, int):
-      entries.append(json_entry.format(unicode(key), value))
-
-    elif isinstance(value, dict):
-      entries.append(json_entry.format(key, dict_to_json_str(value)))
-
-    else:
-      helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
-
-  return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
-
+from json import dumps
 # Map IBM SOAR severity values to ServiceNow severity values
 sn_severity_map = {
   "High": 1,
@@ -210,18 +165,14 @@ sn_severity_map = {
   "Low": 3
 }
 
-#####################
-### Define Inputs ###
-#####################
-
 # Default text of the initial note added to the ServiceNow Record
-init_snow_note_text = u"""Record created from a IBM SOAR Incident ID: {0}.
-                          Severity: {1}
-                          Incident Type(s): {2}""".format(incident.id, incident.severity_code, u", ".join(incident.incident_type_ids))
+init_snow_note_text = f"""Record created from a IBM SOAR Incident ID: {incident.id}.
+                          Severity: {incident.severity_code}
+                          Incident Type(s): {', '.join(incident.incident_type_ids)}"""
 
 # If the user adds a comment when they invoke the rule, that comment gets concatenated here
-if rule.properties.sn_initial_note.content is not None:
-  init_snow_note_text = u"{0}\n\n{1}".format(init_snow_note_text, unicode(rule.properties.sn_initial_note.content))
+if playbook.inputs.sn_initial_note.content
+  init_snow_note_text = "{init_snow_note_text}\n\n{playbook.inputs.sn_initial_note.content}")
 
 # ID of this incident
 inputs.incident_id = incident.id
@@ -233,12 +184,12 @@ inputs.sn_init_work_note = init_snow_note_text
 # ServiceNow Example:: setValue('assignment_group', request.body.data.sn_optional_fields.assignment_group)
 # For SIR tables it is recommended to map "business_criticality" to sn_severity_map as that is visible in the SNOW query_builder
 # (see the example commented out below)
-inputs.sn_optional_fields = dict_to_json_str({
-  "short_description": u"RES-{0}: {1}".format(incident.id, unicode(incident.name)),
+inputs.sn_optional_fields = dumps({
+  "short_description": f"RES-{incident.id,}: {incident.name}",
   "severity": sn_severity_map[incident.severity_code],
   #"business_criticality": sn_severity_map[incident.severity_code],
-  "assignment_group": workflow.properties.assignment_group.sys_id,
-  "caller_id": workflow.properties.caller_id.sys_id
+  "assignment_group": playbook.functions.results.assignment_group.get("sys_id"),
+  "caller_id": playbook.functions.results.caller_id.get("sys_id")
 })
 ```
 
@@ -248,15 +199,15 @@ inputs.sn_optional_fields = dict_to_json_str({
 
 * This example updates two Custom Incident Fields **sn_snow_record_id** and **sn_snow_record_link** then **adds a Note to the Incident**
 ```python
-if results.success:
-
+results = playbook.functions.results.create_record
+if results.get("success"):
   # Set incident fields sn_snow_record_id and sn_snow_record_link
-  incident.sn_snow_record_id = results.sn_ref_id
-  incident.sn_snow_record_link = """<a href='{0}'>Link</a>""".format(results.sn_record_link)
+  incident.sn_snow_record_id = results.get("sn_ref_id")
+  incident.sn_snow_record_link = f"""<a href='{results.get('sn_record_link')}'>Link</a>"""
   
-  noteText = """<br>This Incident has been created in <b>ServiceNow</b>
-              <br><b>ServiceNow ID:</b>  {0}
-              <br><b>ServiceNow Link:</b> <a href='{1}'>{1}</a>""".format(results.sn_ref_id, results.sn_record_link)
+  noteText = f"""<br>This Incident has been created in <b>ServiceNow</b>
+              <br><b>ServiceNow ID:</b>  {results.get('sn_ref_id')}
+              <br><b>ServiceNow Link:</b> <a href='{results.get('sn_record_link')}'>{results.get('sn_record_link')}</a>"""
 
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -325,56 +276,10 @@ results = {
 
 </details>
 
-<details><summary>Pre-Processing Script:</summary>
-
-* This example uses `dict_to_json_str()` to generate a JSON String for the `sn_update_fields` input
+<details><summary>Example input Script:</summary>
 
 ```python
-#######################################
-### Define pre-processing functions ###
-#######################################
-def dict_to_json_str(d):
-  """Function that converts a dictionary into a JSON string.
-     Supports types: basestring, bool, int and nested dicts.
-     Does not support lists.
-     If the value is None, it sets it to False."""
-
-  json_entry = u'"{0}":{1}'
-  json_entry_str = u'"{0}":"{1}"'
-  entries = [] 
-
-  for entry in d:
-    key = entry
-    value = d[entry]
-
-    if value is None:
-      value = False
-
-    if isinstance(value, list):
-      helper.fail('dict_to_json_str does not support Python Lists')
-
-    if isinstance(value, basestring):
-      value = value.replace(u'"', u'\\"')
-      entries.append(json_entry_str.format(unicode(key), unicode(value)))
-      
-    elif isinstance(value, unicode):
-      entries.append(json_entry.format(unicode(key), unicode(value)))
-    
-    elif isinstance(value, bool):
-      value = 'true' if value == True else 'false'
-      entries.append(json_entry.format(key, value))
-
-    elif isinstance(value, int):
-      entries.append(json_entry.format(unicode(key), value))
-
-    elif isinstance(value, dict):
-      entries.append(json_entry.format(key, dict_to_json_str(value)))
-
-    else:
-      helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
-
-  return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
-
+from json import dumps
 # Map IBM SOAR severity values to ServiceNow severity values
 sn_severity_map = {
   "High": 1,
@@ -382,16 +287,11 @@ sn_severity_map = {
   "Low": 3
 }
 
-#####################
-### Define Inputs ###
-#####################
-
 # Get the id of this incident
 inputs.incident_id = incident.id
 
 # List all the fields you want to update in the ServiceNow Record here with the ServiceNow field_name being the key
-# The default here is "severity", however if using the SIR Table we recommend switching to the business_criticality field
-inputs.sn_update_fields = dict_to_json_str({
+inputs.sn_update_fields = dumps({
   "severity": sn_severity_map[incident.severity_code],
 })
 ```
@@ -403,8 +303,7 @@ inputs.sn_update_fields = dict_to_json_str({
 * This example **adds a Note to the Incident**
 ```python
 # Add a Note to the Incident
-note_text = u"The Severity of this Incident was updated to {0} in IBM SOAR".format(incident.severity_code)
-incident.addNote(note_text)
+incident.addNote(f"The Severity of this Incident was updated to {incident.severity_code} in IBM SOAR")
 ```
 
 </details>
@@ -412,18 +311,18 @@ incident.addNote(note_text)
 ### Sending SOAR artifacts to SNOW
 You can utilize the SNOW: Update Record function to send artifact values to SNOW records. The previous example for update is set to synchronize the severity of a SOAR record to the desired field in SNOW on update. To synchronize on artifact values:
 
-1. Using the resilient-sdk, `clone` the example workflow into a new workflow with `changetype` artifact.
+1. Using the resilient-sdk, `clone` the example playbook into a new playbook with `changetype` artifact.
     ```
-    resilient-sdk clone --workflow example_snow_update_record_on_severity_change <new_workflow_name> --changetype artifact
+    resilient-sdk clone --playbook example_snow_update_record_on_severity_change <new_playbook_name> --changetype artifact
     ```
     More information on the resilient-sdk and the `clone` command can be found [here](https://ibmresilient.github.io/resilient-python-api/pages/resilient-sdk/resilient-sdk.html#clone).
-1. Modify the pre-processing script to map desired artifact values to SNOW record fields using the `sn_update_fields` parameter of the "SNOW: Update Record" function.
+1. Modify the input script to map desired artifact values to SNOW record fields using the `sn_update_fields` parameter of the "SNOW: Update Record" function.
     ```python
-    inputs.sn_update_fields = dict_to_json_str({
+    inputs.sn_update_fields = dumps({
       "my_snow_column_name": artifact.value # When the artifact type is IP Address the value will be the IP
     })
     ```
-1. Create a SOAR Rule to either manually or automatically trigger this new workflow.
+1. Create a SOAR Rule to either manually or automatically trigger this new playbook.
 
 ---
 
@@ -503,15 +402,11 @@ results = {
 
 </details>
 
-<details><summary>Pre-Processing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 * This example **creates a Python Dictionary** to map the ServiceNow States to their corresponding numeric value.
 > * *Note that for SIR tables, the record state options are new. If you intend to only use this with SIR or INC tables exclusively, you can remove the ones here that you don't need. These string values correspond to the Activity Field SN Record State which can be customized as well.*
 ```python
-#######################################
-### Define pre-processing functions ###
-#######################################
-
 # A Dictionary that maps Record States to their corresponding codes
 # These codes are defined in ServiceNow and may be different for each ServiceNow configuration
 # Codes prepended with [SIR] are specific to Security Incident Response incidents
@@ -522,62 +417,51 @@ map_sn_record_states = {
   "[INC] Resolved": 6,
   "[INC] Closed": 7,
   "[INC] Canceled": 8,
-  "[SIR] Analysis": 16,
-  "[SIR] Contain": 18,
-  "[SIR] Eradicate": 19,
-  "[SIR] Recover": 20,
-  "[SIR] Review": 100,
-  "[SIR] Closed": 3,
-  "[SIR] Canceled": 7
+	"[SIR] Analysis": 16,
+	"[SIR] Contain": 18,
+	"[SIR] Eradicate": 19,
+	"[SIR] Recover": 20,
+	"[SIR] Review": 100,
+	"[SIR] Closed": 3,
+	"[SIR] Canceled": 7
 }
-
-#####################
-### Define Inputs ###
-#####################
 
 # ID of this incident
 inputs.incident_id = incident.id
 
 # The state to change the record to
 # inputs.sn_record_state = map_sn_record_states["Closed"]
-inputs.sn_record_state = map_sn_record_states[rule.properties.sn_record_state]
+inputs.sn_record_state = map_sn_record_states[playbook.inputs.sn_record_state]
 
 # The resolution notes that are normally required when you close a ServiceNow record
 # inputs.sn_close_notes = "This incident has been resolved in IBM SOAR. No further action required"
-inputs.sn_close_notes = rule.properties.sn_close_notes
+inputs.sn_close_notes = playbook.inputs.sn_close_notes
 
 # The ServiceNow 'close_code' that you normally select when closing a ServiceNow record
 # inputs.sn_close_code = "Solved (Permanently)"
-inputs.sn_close_code = rule.properties.sn_close_code
+inputs.sn_close_code = playbook.inputs.sn_close_code
 
 # Add a Work Note to the Record in ServiceNow
-inputs.sn_close_work_note = u"This record's state has been changed to {0} by IBM SOAR".format(unicode(rule.properties.sn_record_state))
+inputs.sn_close_work_note = f"This record's state has been changed to {playbook.inputs.sn_record_state} by IBM SOAR"
 ```
 
 </details>
 
 <details><summary>Post-Processing Script:</summary>
 
-* This example **adds a Note to the Incident** detailing why the Incident was closed or if the Workflow **fails** to close the ServiceNow Record
+* This example **adds a Note to the Incident** detailing why the Incident was closed or if the playbook **fails** to close the ServiceNow Record
 ```python
-note_text = None
-
-if results.success:
-
-  note_text = u"""<br>This Incident has been updated in <b>ServiceNow</b>
-              <br><b>ServiceNow ID:</b> {0}
-              <br><b>ServiceNow Record State:</b> {1}
-              <br><b>ServiceNow Closing Notes:</b> {2}
-              <br><b>ServiceNow Closing Code:</b> {3}""".format(
-                                      unicode(results.sn_ref_id),
-                                      unicode(results.sn_record_state),
-                                      unicode(results.inputs.sn_close_notes),
-                                      unicode(results.inputs.sn_close_code))
-
+results = playbook.functions.results.close_record
+if results.get("success"):
+  note_text = f"""<br>This Incident has been updated in <b>ServiceNow</b>
+              <br><b>ServiceNow ID:</b> {results.get('sn_ref_id')}
+              <br><b>ServiceNow Record State:</b> {results.get('sn_record_state')}
+              <br><b>ServiceNow Closing Notes:</b> {results.get('inputs', {}).get('sn_close_notes')}
+              <br><b>ServiceNow Closing Code:</b> {results.get('inputs', {}).get('sn_close_code')}"""
 else:
-  note_text = u"""<br>Failed to close this Incident in <b>ServiceNow</b>
-              <br><b>Reason:</b> {0}""".format(unicode(results.reason))
-  
+  note_text = f"""<br>Failed to close this Incident in <b>ServiceNow</b>
+              <br><b>Reason:</b> {results.get('reason')}"""
+
 incident.addNote(helper.createRichText(note_text))
 ```
 
@@ -641,9 +525,10 @@ results = {
 
 </details>
 
-<details><summary>Pre-Processing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 ```python
+inputs.sn_note_type = "work_note"
 # The id of this incident
 inputs.incident_id = incident.id
 
@@ -653,7 +538,7 @@ if note.type == 'task':
   inputs.task_id = task.id
 
 # Get the text of the note
-inputs.sn_note_text = unicode(note.text.content)
+inputs.sn_note_text = note.text.content
 ```
 
 </details>
@@ -662,14 +547,8 @@ inputs.sn_note_text = unicode(note.text.content)
 
 This example prepends a timestamp to the SOAR Note to track when the Note was sent to ServiceNow.
 ```python
-# Import Date
-from java.util import Date
-
-# Get the current time
-dt_now = Date()
-
-# Prepend message and time to the note
-note.text = u"<b>Sent to ServiceNow at {0}</b><br>{1}".format(dt_now, unicode(note.text.content))
+from datetime import datetime
+note.text = f"<b>Sent to ServiceNow at {datetime.now()}</b><br>{note.text.content}"
 ```
 
 </details>
@@ -733,7 +612,7 @@ results = {
 
 </details>
 
-<details><summary>Pre-Processing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 ```python
 # The id of this attachment
@@ -753,11 +632,12 @@ if attachment.type == 'task':
 
 * This example **adds a Note to the Incident/Task** detailing what attachment was sent to ServiceNow.
 ```python
-if results.success:
+results = playbook.functions.results.add_attachment
+if results.get("success"):
 
-  noteText = u"""<br>{0} has added an attachment to <b>ServiceNow</b>
-              <br><b>Attachment Name:</b>  {1}
-              <br><b>ServiceNow ID:</b>  {2}""".format(unicode(principal.display_name), unicode(results.attachment_name), results.sn_ref_id)
+  noteText = f"""<br>{principal.display_name} has added an attachment to <b>ServiceNow</b>
+              <br><b>Attachment Name:</b>  {results.attachment_name}
+              <br><b>ServiceNow ID:</b>  {results.get('sn_ref_id')}"""
 
   # If this is a task attachment, add a note to the Task
   if task:
@@ -823,7 +703,7 @@ results = {
 
 </details>
 
-<details><summary>Pre-Processing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 ```python
 # The table in ServiceNow to query
@@ -833,11 +713,11 @@ inputs.sn_table_name = "sys_user_group"
 inputs.sn_query_field = "name"
 
 # The value to equate the cell to
-## Get the group name from the Rule Activity Field with:
-inputs.sn_query_value = rule.properties.sn_assignment_group
+# Get the group name from the Rule Activity Field with:
+inputs.sn_query_value = playbook.inputs.sn_assignment_group
 
 ## OR Set group name statically with:
-# inputs.sn_query_value = "IT Securities"
+## inputs.sn_query_value = "IT Securities"
 ```
 
 </details>
@@ -902,7 +782,7 @@ results = {
 
 </details>
 
-<details><summary>Pre-Processing Script:</summary>
+<details><summary>Example input Script:</summary>
 
 ```python
 # Get the incident id
@@ -963,6 +843,6 @@ inputs.sn_resilient_status = incident.plan_status
 # Security Incident Response Specific Customizations
 By default the severity of a SOAR incident/case is mapped to the `severity` field in ServiceNow. 
 This field is available in both the `incident` and `sn_si_incident` tables, however, Security Incident (SIR) tables have another field labeled `business_criticality`. 
-It is recommend after the install to customize your workflows in SOAR and SNOW to handle `business_criticality` rather than `severity` in SNOW. 
-Customize the "\[SIR\] SNOW Update Record on Severity Change" workflow and "SNOW: Create Record \[Incident\]". The "RES_WF_CreateIncident" workflow on SNOW should be customized as well. 
+It is recommend after the install to customize your playbooks in SOAR and SNOW to handle `business_criticality` rather than `severity` in SNOW. 
+Customize the "\[SIR\] SNOW Update Record on Severity Change" playbook and "SNOW: Create Record \[Incident\]". The "RES_WF_CreateIncident" playbook on SNOW should be customized as well. 
 See the [Customize ServiceNow App Guide](../customize_snow_guide) for more details.

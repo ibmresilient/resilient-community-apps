@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2023. All Rights Reserved.
+# pragma pylint: disable=pointless-string-statement, line-too-long, wrong-import-order
 
 """AppFunction implementation"""
 
@@ -6,10 +8,9 @@ import logging
 import time
 import json
 import winrm
-from fn_network_utilities.util.utils_common import remove_punctuation
+from fn_network_utilities.util.utils_common import remove_punctuation, separate_params
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import IntegrationError, validate_fields, render, b_to_s
-from resilient_lib.components.templates_common import ps_filter
+from resilient_lib import validate_fields, render, b_to_s
 
 PACKAGE_NAME = "fn_network_utilities"
 FN_NAME = "network_utilities_windows_shell_command"
@@ -47,12 +48,8 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields(["network_utilities_shell_command"], fn_inputs)
 
+        rendered_shell_params = separate_params(shell_params, "ps")
 
-        params_list = shell_params.split(",")
-        rendered_shell_params = {}
-        for i, param in enumerate(params_list):
-            param_name = f"shell_param{i+1}"
-            rendered_shell_params[param_name] = ps_filter(param)
 
         # Options keys are lowercase, so the shell command name needs to be lowercase
         if shell_command:
@@ -63,13 +60,13 @@ class FunctionComponent(AppFunctionComponent):
         if len(colon_split) != 2 and remote_computer is None:
             raise ValueError("Remote commands must be of the format remote_command_name:remote_computer_name, "
                                 f"{shell_command} was specified")
-        elif len(colon_split) == 2:
+        if len(colon_split) == 2:
             if remote_computer:
                 raise ValueError('A remote computer is configured in both network_utilities_remote_computer and network_utilities_shell_command. Choose one to use.')
-            elif self.options.get(colon_split[1]) is None:
+            if self.options.get(colon_split[1]) is None:
                 raise ValueError(f'The remote computer {colon_split[1]} is not configured')
-            else:
-                remote = self.options.get(colon_split[1]).strip()
+
+            remote = self.options.get(colon_split[1]).strip()
         else:
             remote = remote_computer
 
@@ -86,7 +83,7 @@ class FunctionComponent(AppFunctionComponent):
 
         shell_command_base = self.options[shell_command].strip()
 
-        # Previous version required brackets around command, this is for backwards compatability
+        # Previous version required brackets around command, this is for backwards compatibility
         shell_command_base = remove_punctuation(shell_command_base, False)
 
         run_cmd = RunCmd(remote, shell_command_base.strip(), rendered_shell_params)
@@ -141,7 +138,7 @@ class RunCmd():
                                 transport=remote_auth_transport, server_cert_validation="ignore")
 
         if extension in ps_extensions:
-            
+
             for param_name in self.rendered_shell_params:
                 shell_command_base = shell_command_base + ' {{' + param_name + '}}'
 

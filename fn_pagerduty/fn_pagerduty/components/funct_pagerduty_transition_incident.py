@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -42,11 +42,11 @@ class FunctionComponent(ResilientComponent):
             priority = kwargs.get("pd_priority")  # text
             resolution = clean_html(kwargs.get("pd_description"))  # text
 
-            yield StatusMessage("starting...")
+            yield StatusMessage("Starting Update Incident......")
             resp = update_incident(self.options, incident_id, status, priority, resolution)
-            yield StatusMessage("pagerduty incident updated")
+            yield StatusMessage("Pagerduty Incident Updated")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(resp)
         except Exception as err:
-            yield FunctionError(err)
+            yield FunctionError(str(err))

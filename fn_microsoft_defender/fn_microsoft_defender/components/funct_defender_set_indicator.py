@@ -65,14 +65,14 @@ class FunctionComponent(ResilientComponent):
             defender_indicator_action = self.get_select_param(kwargs.get("defender_indicator_action"))  # select, values: "AlertAndBlock", "Alert", "Allowed"
 
             log = logging.getLogger(__name__)
-            log.info("defender_title: %s", defender_title)
-            log.info("defender_expiration_time: %s", defender_expiration_time)
-            log.info("defender_indicator_type: %s", defender_indicator_type)
-            log.info("defender_indicator_id: %s", defender_indicator_id)
-            log.info("defender_indicator_value: %s", defender_indicator_value)
-            log.info("defender_description: %s", defender_description)
-            log.info("defender_severity: %s", defender_severity)
-            log.info("defender_indicator_action: %s", defender_indicator_action)
+            log.info(f"defender_title: {defender_title}")
+            log.info(f"defender_expiration_time: {defender_expiration_time}")
+            log.info(f"defender_indicator_type: {defender_indicator_type}")
+            log.info(f"defender_indicator_id: {defender_indicator_id}")
+            log.info(f"defender_indicator_value: {defender_indicator_value}")
+            log.info(f"defender_description: {defender_description}")
+            log.info(f"defender_severity: {defender_severity}")
+            log.info(f"defender_indicator_action: {defender_indicator_action}")
 
             defender_api = DefenderAPI(self.options['tenant_id'],
                                        self.options['client_id'],
@@ -109,7 +109,7 @@ class FunctionComponent(ResilientComponent):
                 indicator_payload['expirationTime_ts'] = convert_date(indicator_payload['expirationTime'])
                 indicator_payload['lastUpdateTime_ts'] = convert_date(indicator_payload['lastUpdateTime'])
             else:
-                yield StatusMessage(u"{} failure. Status: {} Reason: {}".format(FUNCTION, status, reason))
+                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
 
             yield StatusMessage("Finished 'defender_list_indicators'")
 
@@ -134,9 +134,9 @@ def lookup_artifact_type(artifact_type):
         [str]: [defender indicator type]
     """
     if not artifact_type:
-        return None
+        return
 
     if artifact_type not in LOOKUP_ARTIFACT_TYPES:
-        raise ValueError("Unable to use artifact type: %s", artifact_type)
+        raise ValueError(f"Unable to use artifact type: {artifact_type}")
 
     return LOOKUP_ARTIFACT_TYPES[artifact_type]

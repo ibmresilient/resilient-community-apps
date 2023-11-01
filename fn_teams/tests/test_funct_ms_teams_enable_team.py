@@ -1,18 +1,11 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
-import os
-import logging
-import json
 import pytest
-
-from urllib import parse
 from unittest.mock import patch
-from resilient_lib import RequestsCommon, IntegrationError
-
+from resilient_lib import IntegrationError
 from tests import testcommons
-from tests.testcommons import required_parameters
-from fn_teams.lib import constants
 from fn_teams.lib.microsoft_teams import TeamsInterface
+from tests.testcommons import required_parameters
 
 
 def patch_archive_unarchive_team(method, url, headers, callback, data=None):
@@ -22,7 +15,7 @@ def patch_archive_unarchive_team(method, url, headers, callback, data=None):
         url=url,
         headers=headers,
         callback=callback)
-    
+
     if method == "get":
         if "=" in url:
             base_url, query = url.split("=")
@@ -50,8 +43,7 @@ def patch_archive_unarchive_team(method, url, headers, callback, data=None):
         assert "graph.microsoft.com" in url_sections
         assert 'v1.0' in url_sections
         assert ret["value"][0]["id"] in url_sections
-        return {
-            "status_code" : 204}
+        return {"status_code" : 204}
 
 
 @patch('resilient_lib.RequestsCommon.execute', side_effect=patch_archive_unarchive_team)

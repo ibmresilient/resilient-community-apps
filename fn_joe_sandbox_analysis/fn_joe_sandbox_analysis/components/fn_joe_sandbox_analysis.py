@@ -1,368 +1,142 @@
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
 
-import os
-import jbxapi
-import time
-import tempfile
-import re
-from urllib.parse import urlparse
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon, str_to_bool
+from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
+from resilient_lib import validate_fields, str_to_bool, IntegrationError
+from fn_joe_sandbox_analysis.util.helper import connect_to_joe_sandbox, PACKAGE_NAME
+from io import BytesIO
+from time import sleep
 
-REQUEST_VERIFY_APP_CONFIG = "verify"
-REQUESTS_VERIFY_ENV_VAR = "REQUESTS_CA_BUNDLE"
+FN_NAME = "fn_joe_sandbox_analysis"
 
-class FunctionComponent(ResilientComponent):
+class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function 'fn_joe_sandbox_analysis"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_joe_sandbox_analysis", {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_joe_sandbox_analysis", {})
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
+        """
+        Function: Allows an Attachment or Artifact (File/URL) to be analyzed by Joe Sandbox.
+        Inputs:
+            -   fn_inputs.incident_id
+            -   fn_inputs.attachment_id
+            -   fn_inputs.artifact_value
+            -   fn_inputs.artifact_type
+            -   fn_inputs.artfact_id
+            -   fn_inputs.jsb_report_type
+        """
 
-    @function("fn_joe_sandbox_analysis")
-    def _fn_joe_sandbox_analysis_function(self, event, *args, **kwargs):
-        """Function: A function that allows an Attachment or Artifact (File/URL) to be analyzed by Joe Sandbox"""
+        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        # Get the workflow_instance_id so we can raise an error if the workflow was terminated by the user
-        workflow_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+        # Instansiate new Joe Sandbox object and get ANALYSIS_URL
+        ANALYSIS_URL, joesandbox = connect_to_joe_sandbox(self.opts, self.options)
 
-        # List to store paths of created temp files
-        TEMP_FILES = []
+        # Get Joe Sandbox options from app.config file
+        ANALYSIS_REPORT_PING_DELAY = int(self.options.get("jsb_analysis_report_ping_delay", 120))
+        ANALYSIS_TIMEOUT = int(self.options.get("jsb_analysis_report_request_timeout", 500))
+        if ANALYSIS_TIMEOUT > 500: # Timeout can not be greater than 500
+            ANALYSIS_TIMEOUT = 500
+        email_notification = str_to_bool(self.options.get("jsb_email_notification", True))
+        systems = self.options.get("jsb_systems", None)
+        secondary_results = str_to_bool(self.options.get("jsb_secondary_results", True))
 
-        # Dict to reference related mimetype
+        # Validate required input fields
+        validate_fields(["incident_id", "jsb_report_type"], fn_inputs)
+
+        # Define inputs
+        incident_id = fn_inputs.incident_id
+        jsb_report_type = fn_inputs.jsb_report_type
+
+        # Get optional inputs
+        attachment_id = getattr(fn_inputs, "attachment_id", None)
+        artifact_id = getattr(fn_inputs, "artifact_id", None)
+        artifact_value = getattr(fn_inputs, "artifact_value", None)
+        artifact_type = getattr(fn_inputs, "artifact_type", None)
+
+        # Either `attachment_id` or `artifact_value` and `artifact_type` and `artifact_id` have to be defined
+        if not attachment_id and not (artifact_value and artifact_type and artifact_id):
+            raise ValueError("attachment_id or artifact_value and ( artifact_type and artifact_id ) is required")
+
+        # Initialize variable
+        attachment_content = None
+
+        # Get input content and decide which joe sandbox call to make
+        if artifact_value and artifact_type and artifact_id: # Artifact_value and artifact_type given
+            if artifact_type in ["IP Address", "DNS Name", "URL", "URI Path"]: # URL type submission
+                # Run specified windows machine, because if not specified it might run on android which will fail
+                submission_id = joesandbox.submit_url(artifact_value,
+                                                params={"systems": "w7x64" if not systems else list(systems),
+                                                        "analysis-time": ANALYSIS_TIMEOUT,
+                                                        "email-notification": email_notification,
+                                                        "secondary-results": secondary_results}
+                                                ).get("submission_id")
+                self.LOG.info(f"Submission_id: {submission_id}")
+            elif artifact_type in ["Other File", "Email Attachment"]: # File type submission
+                attachment_content = self.rest_client().get_content(f"/incidents/{incident_id}/artifacts/{artifact_id}/contents")
+        else: # Attachment_id given
+            attachment_content = self.rest_client().get_content(f"/incidents/{incident_id}/attachments/{attachment_id}/contents")
+
+        # If input is an attachment
+        if attachment_content:
+            submission_id = joesandbox.submit_sample(BytesIO(attachment_content),
+                                            params={"systems": list(systems) if systems else None,
+                                                    "analysis-time": ANALYSIS_TIMEOUT,
+                                                    "email-notification": email_notification,
+                                                    "secondary-results": secondary_results}
+                                            ).get("submission_id")
+            self.LOG.info(f"Submission_id: {submission_id}")
+
+        # Get submission status
+        submission_info = joesandbox.submission_info(submission_id)
+        submission_status = submission_info.get("status")
+        yield self.status_message(f"Submission ID: {submission_id}, Submission Status: {submission_status}")
+
+        # Sleep and loop until submission status equals finished
+        while submission_status != 'finished':
+            self.LOG.debug(f"Submission Status: {submission_status}, sleeping: {ANALYSIS_REPORT_PING_DELAY} seconds.")
+            sleep(ANALYSIS_REPORT_PING_DELAY)
+            submission_info = joesandbox.submission_info(submission_id)
+            submission_status = submission_info.get("status")
+
+        yield self.status_message(f"Submission Status: {submission_status}")
+        self.LOG.debug(f"Submission Status: {submission_status}")
+
+        # Get the webid from the submission info after status equals finished
+        webid = submission_info.get("analyses")[0].get("webid")
+
+        # Get analysis information
+        analysis = joesandbox.analysis_info(webid)
+
+        # Download the analysis file
+        name, report = joesandbox.analysis_download(webid, jsb_report_type)
+
         MIMETYPES = {"pdf": "application/pdf",
-                     "json": "application/json", "html": "text/html"}
-
-        def get_workflow_status(workflow_instance_id, res_client):
-            """Function to get the status of the current running workflow"""
-            res = res_client.get(
-                "/workflow_instances/{0}".format(workflow_instance_id))
-            return res["status"]
-
-        def remove_temp_files(files):
-            for f in files:
-                os.remove(f)
-
-        def get_config_option(option_name, optional=False):
-            """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-            option = self.options.get(option_name)
-
-            if option is None and optional is False:
-                err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(
-                    option_name)
-                raise ValueError(err)
-            else:
-                return option
-
-        def get_input_entity(client, incident_id, attachment_id, artifact_id):
-
-            re_uri_match_pattern = r"""(?:(?:https?|ftp):\/\/|\b(?:[a-z\d]+\.))(?:(?:[^\s()<>]+|\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))?\))+(?:\((?:[^\s()<>]+|(?:\(?:[^\s()<>]+\)))?\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))?"""
-            entity = {"incident_id": incident_id, "id": None,
-                      "type": "", "meta_data": None, "data": None}
-
-            if (attachment_id):
-                entity["id"] = attachment_id
-                entity["type"] = "attachment"
-                entity["meta_data"] = client.get(
-                    "/incidents/{0}/attachments/{1}".format(entity["incident_id"], entity["id"]))
-                entity["data"] = client.get_content(
-                    "/incidents/{0}/attachments/{1}/contents".format(entity["incident_id"], entity["id"]))
-
-            elif (artifact_id):
-                entity["id"] = artifact_id
-                entity["type"] = "artifact"
-                entity["meta_data"] = client.get(
-                    "/incidents/{0}/artifacts/{1}".format(entity["incident_id"], entity["id"]))
-
-                # handle if artifact has attachment
-                if (entity["meta_data"]["attachment"]):
-                    entity["data"] = client.get_content(
-                        "/incidents/{0}/artifacts/{1}/contents".format(entity["incident_id"], entity["id"]))
-
-                # else handle if artifact.value contains an URI using RegEx
-                else:
-                    match = re.match(re_uri_match_pattern,
-                                     entity["meta_data"]["value"])
-
-                    if (match):
-                        entity["uri"] = match.group()
-
-                    else:
-                        raise FunctionError(
-                            "Artifact has no attachment or supported URI")
-
-            else:
-                raise ValueError('attachment_id AND artifact_id both None')
-
-            return entity
-
-        def submit_sample(entity):
-            # id of the sample that gets returned from Joe Sandbox
-            sample_webid = None
-
-            # Handle if entity is an attachment or an artifact (with an attachmet)
-            if (entity["type"] == "attachment" or (entity["type"] == "artifact" and entity["data"] != None)):
-
-                # Generate attachment name
-                sample_name = None
-
-                if(entity["type"] == "attachment"):
-                    sample_name = "[{0}_{1}] - {2}".format(
-                        entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"])
-
-                else:
-                    sample_name = "[{0}_{1}] - {2}".format(
-                        entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["attachment"]["name"])
-
-                # Write to temp file
-                path = write_temp_file(entity["data"], sample_name)
-
-                # Submit to Joe Sandbox
-                sample_webid = submit_file(joesandbox, path)
-
-            # Else if the artifact.value contains a url
-            elif (entity["type"] == "artifact" and entity["uri"] != None):
-                sample_webid = submit_uri(joesandbox, entity["uri"])
-
-            return sample_webid
-
-        def fetch_report(joesandbox, sample_webid, ping_delay):
-            time.sleep(ping_delay)
-            return get_sample_info(joesandbox, sample_webid)
-
-        def generate_report_name(entity, jsb_report_type, sample_webid):
-            report_name = None
-
-            if (entity["type"] == "attachment"):
-                report_name = "js-report: {0}.{1}".format(
-                    entity["meta_data"]["name"], jsb_report_type)
-
-            elif (entity["type"] == "artifact" and entity["data"] != None):
-                report_name = "js-report: {0}.{1}".format(
-                    entity["meta_data"]["attachment"]["name"], jsb_report_type)
-
-            elif (entity["type"] == "artifact" and entity["uri"] != None):
-                parsed_uri = urlparse(entity["uri"])
-                if(parsed_uri.hostname):
-                    report_name = "js-report: {0}.{1}".format(
-                        parsed_uri.hostname, jsb_report_type)
-                else:
-                    report_name = "js-report: URL Analysis: {0}.{1}".format(
-                        sample_webid, jsb_report_type)
-
-            return report_name
-
-        def write_temp_file(data, name=None):
-            path = None
-
-            if (name):
-                path = "{0}/{1}".format(tempfile.gettempdir(), name)
-
-            else:
-                tf = tempfile.mkstemp()
-                path = tf[1]
-
-            fo = open(path, 'wb')
-            TEMP_FILES.append(path)
-            fo.write(data)
-            fo.close()
-            return path
-
-        def submit_file(joesandbox, path):
-            f = open(path, "rb")
-            sample_response = joesandbox.submit_sample(f)
-            f.close()
-            return sample_response["webids"][0]
-
-        def submit_uri(joesandbox, uri):
-            sample_response = joesandbox.submit_sample_url(uri)
-            return sample_response["webids"][0]
-
-        def get_sample_info(joesandbox, sample_webid):
-            return joesandbox.info(sample_webid)
-
-        def should_timeout(ping_timeout, start_time):
-            returnValue = (time.time() - start_time) > ping_timeout
-            return returnValue
-
-        def get_proxies(opts, options):
-            rc = RequestsCommon(opts, options)
-            proxies = rc.get_proxies()
-            return proxies
-        ##############################
-        ###### END HELPER FUNCS ######
-        ##############################
-
+                     "json": "application/json",
+                     "html": "text/html"}
 
         try:
-            # Get Joe Sandbox options from app.config file
-            API_KEY = get_config_option("jsb_api_key")
-            ACCEPT_TAC = str_to_bool(get_config_option("jsb_accept_tac"))
-            ANALYSIS_URL = get_config_option("jsb_analysis_url")
-            ANALYSIS_REPORT_PING_DELAY = int(
-                get_config_option("jsb_analysis_report_ping_delay"))
-            ANALYSIS_REPORT_REQUEST_TIMEOUT = float(
-                get_config_option("jsb_analysis_report_request_timeout"))
-            HTTP_PROXY = get_config_option("jsb_http_proxy", True)
-            HTTPS_PROXY = get_config_option("jsb_https_proxy", True)
-
-            # Check required inputs are defined
-            incident_id = kwargs.get("incident_id")  # number (required)
-            if not incident_id:
-                raise ValueError("incident_id is required")
-
-            jsb_report_type = kwargs.get("jsb_report_type")[
-                "name"]  # select (required)
-            if not jsb_report_type:
-                raise ValueError("jsb_report_type is required")
-
-            # Get optional inputs, one of these must be defined
-            attachment_id = kwargs.get("attachment_id")  # number
-            artifact_id = kwargs.get("artifact_id")  # number
-
-            if not attachment_id and not artifact_id:
-                raise ValueError("attachment_id or artifact_id is required")
-
-            # Setup proxies parameter if exist in appconfig file
-            proxies = {}
-
-            try:
-                proxies = get_proxies(self.opts, self.options)
-
-                if (HTTP_PROXY) and (len(proxies) == 0):
-                    proxies["http"] = HTTP_PROXY
-
-                if (HTTPS_PROXY) and (len(proxies) == 0):
-                    proxies["https"] = HTTPS_PROXY
-
-                if (len(proxies) == 0):
-                    proxies = None
-            except Exception as proxy_error:
-                proxies = None
-
-            # get bool or path to custom ca bundle to pass to "verify_ssl"
-            # in jbxapi.JoeSandbox constructor
-            verify_ssl = get_verify_ssl(self.opts, self.options)
-
-            # Instansiate new Joe Sandbox object
-            joesandbox = jbxapi.JoeSandbox(
-                apikey=API_KEY, apiurl=ANALYSIS_URL, accept_tac=ACCEPT_TAC, proxies=proxies, verify_ssl=verify_ssl)
-
-            # Instansiate new SOAR API object
-            client = self.rest_client()
-
-            # Get entity we are dealing with (either attachment or artifact)
-            entity = get_input_entity(
-                client, incident_id, attachment_id, artifact_id)
-
-            # Submit the sample and get its related webid
-            yield StatusMessage("Submitting sample to Joe Sandbox")
-            sample_webid = submit_sample(entity)
-
-            # get the status of the sample
-            sample_status = get_sample_info(joesandbox, sample_webid)
-
-            # Get current time in seconds
-            start_time = time.time()
-
-            # Generate report name
-            report_name = generate_report_name(
-                entity, jsb_report_type, sample_webid)
-
-            yield StatusMessage("{} being analyzed by Joe Sandbox".format(report_name))
-
-            # Keep requesting sample status until the analysis report is ready for download or ANALYSIS_REPORT_REQUEST_TIMEOUT in seconds has passed
-            while (sample_status["status"].lower() != "finished"):
-
-                # Check workflow status, if "terminated, raise error"
-                workflow_status = get_workflow_status(
-                    workflow_instance_id, client)
-
-                if workflow_status == "terminated":
-                    raise ValueError(
-                        "Analysis report not fetched. Workflow was Terminated")
-
-                if (should_timeout(ANALYSIS_REPORT_REQUEST_TIMEOUT, start_time)):
-                    raise ValueError("Timed out trying to get Analysis Report after {0} seconds".format(
-                        ANALYSIS_REPORT_REQUEST_TIMEOUT))
-
-                yield StatusMessage("Analysis Status: {0}. Fetch every {1}s".format(sample_status["status"], ANALYSIS_REPORT_PING_DELAY))
-                sample_status = fetch_report(
-                    joesandbox, sample_webid, ANALYSIS_REPORT_PING_DELAY)
-
-            yield StatusMessage("Analysis Finished. Getting report & attaching to this incident")
-            download = joesandbox.download(sample_webid, jsb_report_type)
-
-            # Write temp file of report
-            path = write_temp_file(download[1], report_name)
-
             # POST report as attachment to incident
-            jsb_analysis_report = client.post_attachment(
-                '/incidents/{}/attachments'.format(incident_id), path, mimetype=MIMETYPES[jsb_report_type])
+            self.rest_client().post_attachment(f'/incidents/{incident_id}/attachments',
+                                               None,
+                                               bytes_handle=report,
+                                               filename=name,
+                                               mimetype=MIMETYPES[jsb_report_type])
+        except Exception as e:
+            self.LOG.debug(str(e))
+            raise IntegrationError(f"Attachment failed to post with error: {str(e)}")
 
-            yield StatusMessage("Upload of attachment complete")
+        # Fill results
+        results = {
+            "analysis_report_name": name,
+            "analysis_report_id": webid,
+            "analysis_report_url": f"{ANALYSIS_URL}/analysis/{webid}",
+            "analysis_status": analysis.get("detection")
+        }
 
-            results = {
-                "analysis_report_name": report_name,
-                "analysis_report_id": jsb_analysis_report["id"],
-                "analysis_report_url": "{0}/{1}".format(ANALYSIS_URL, sample_webid),
-                "analysis_status": sample_status["runs"][0]["detection"]
-            }
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-
-        except Exception:
-            yield FunctionError()
-
-        finally:
-            remove_temp_files(TEMP_FILES)
-
-
-
-def get_verify_ssl(opts, app_options):
-    """
-    Get "verify" parameter from app config or from env var
-    REQUESTS_CA_BUNDLE which is the default way to set
-    verify with python requests library.
-
-    Value can be set in [integrations] or in the [fn_joe_sandbox_analysis] section
-
-    Value in [fn_joe_sandbox_analysis] takes precedence over [integrations]
-    which takes precedence over REQUESTS_CA_BUNDLE
-
-    :param app_options: App config dict
-    :type app_options: dict
-    :return: Value to set requests.session.verify to (as used in jbxapi).
-        Either a path or a boolean
-    :rtype: bool|str(path)
-    """
-
-    verify = app_options.get(REQUEST_VERIFY_APP_CONFIG)
-
-    # NOTE: specifically want ``if verify is None`` rather than
-    # ``if not verify``, as the value of verify can be set to "False"
-    if verify is None:
-        verify = opts.get("integrations", {}).get(REQUEST_VERIFY_APP_CONFIG)
-
-    if verify is None:
-        verify = os.getenv(REQUESTS_VERIFY_ENV_VAR)
-
-    # because verify can be either a boolean or a path,
-    # we need to check if it is a string with a boolean 
-    # value first then, and only then, we convert it to a bool
-    # NOTE: that this will then only support "true" or "false"
-    # (case-insensitive) rather than the normal "true", "yes", etc...
-    if isinstance(verify, str) and verify.lower() in ["false", "true"]:
-        verify = str_to_bool(verify)
-
-    return verify
+        # Produce a FunctionResult with the results
+        yield FunctionResult(results)

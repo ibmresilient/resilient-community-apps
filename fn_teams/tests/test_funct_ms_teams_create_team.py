@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
-import os
 import pytest, random
-
 from unittest.mock import patch
 from resilient_lib import IntegrationError
-
 from tests import testcommons
-from tests.testcommons import required_parameters
 from fn_teams.lib.microsoft_teams import TeamsInterface
+from tests.testcommons import required_parameters
 
 
 def patch_build_member_format(method, url, headers, callback) -> dict:
@@ -98,4 +95,3 @@ def test_add_members(patch_rc, required_parameters):
 
     member_list = [ti._build_member_format(user, random.choice([True, False])) for user in users]
     ti._add_members("ID123123", member_list)
-

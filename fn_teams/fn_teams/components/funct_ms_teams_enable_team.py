@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 """AppFunction implementation"""
 from resilient_lib import IntegrationError
@@ -74,15 +74,15 @@ class FunctionComponent(AppFunctionComponent):
             try:
                 team_manager = TeamsInterface(required_parameters)
 
-                if hasattr(fn_inputs, 'ms_group_id'):
+                if getattr(fn_inputs, 'ms_group_id', ""):
                     response = team_manager.enable_team_group(
                         {"group_id" : fn_inputs.ms_group_id})
 
-                elif hasattr(fn_inputs, 'ms_group_mail_nickname'):
+                elif getattr(fn_inputs, 'ms_group_mail_nickname', ""):
                     response = team_manager.enable_team_group(
                         {"group_mail_nickname" : fn_inputs.ms_group_mail_nickname})
 
-                elif hasattr(fn_inputs, 'ms_group_name'):
+                elif getattr(fn_inputs, 'ms_group_name', ""):
                     response = team_manager.enable_team_group(
                         {"group_name" : fn_inputs.ms_group_name})
 

@@ -37,15 +37,15 @@ def selftest_function(opts):
     try:
         headers = {
             'content-type': 'application/json',
-            'X-Auth-Token': app_configs['abuseipdb_key']
+            'Key': app_configs['abuseipdb_key']
         }
         url = app_configs["abuseipdb_url"]
 
         params = {
-                'ipAddress': '',
-                'isWhitelisted': app_configs['ignore_white_listed'],
-                'verbose': True
-            }
+            'ipAddress': '8.8.8.8',
+            'isWhitelisted': app_configs.get('ignore_white_listed'),
+            'verbose': True
+        }
 
         rc = RequestsCommon(opts, app_configs)
         rc.execute('get', url, params=params, headers=headers)

@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """
@@ -38,14 +38,15 @@ def get_timeout(opts, options):
 
 def parse_proxies(proxies):
     """ Return the first proxy that is defined, else return None."""
-    for key, value in proxies.items():
-        if value:
-            parsed_proxy = urlparse(value)
-            proxy_host = parsed_proxy.hostname
-            proxy_port = parsed_proxy.port
-            proxy_user = parsed_proxy.username
-            proxy_pass = parsed_proxy.password
-            return proxy_host, proxy_port, proxy_user, proxy_pass
+    if proxies:
+        for key, value in proxies.items():
+            if value:
+                parsed_proxy = urlparse(value)
+                proxy_host = parsed_proxy.hostname
+                proxy_port = parsed_proxy.port
+                proxy_user = parsed_proxy.username
+                proxy_pass = parsed_proxy.password
+                return proxy_host, proxy_port, proxy_user, proxy_pass
     return None, None, None, None
 
 

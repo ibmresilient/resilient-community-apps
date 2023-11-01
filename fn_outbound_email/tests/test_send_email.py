@@ -3,11 +3,14 @@
 
 from __future__ import print_function
 import pytest
+from .mock_incident import MOCK_TYPE_DEFS 
+from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_outbound_email"
 FUNCTION_NAME = "send_email"
+
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -34,12 +37,17 @@ class TestSendEmail:
         assert func is not None
 
     @pytest.mark.livetest #can be removed in future when attachment mock endpoint is updated
+    @patch("fn_outbound_email.lib.template_helper.TemplateHelper.get_field_defs")
+    @patch("fn_outbound_email.components.send_email.FunctionComponent.process_attachments")
     @pytest.mark.parametrize("mail_from, mail_incident_id, mail_to, mail_cc, mail_bcc, mail_subject, mail_body_text", [
         ("a@example.com", 123, "b@example.com", "c@example.com", "d@example.com", "text", "text"),
         ("a@example.com", 123, "b@example.com", "c@example.com", "d@example.com", "text", "text")
     ])
-    def test_success(self, circuits_app, mail_from, mail_incident_id, mail_to, mail_cc, mail_bcc, mail_subject, mail_body_text):
+    def test_success(self, patch_process_attachments, patch_get_field_defs, circuits_app, mail_from, mail_incident_id, mail_to, mail_cc, mail_bcc, mail_subject, mail_body_text):
         """ Test calling with sample values for the parameters """
+        patch_process_attachments.return_value = set([])
+        patch_get_field_defs.return_value = MOCK_TYPE_DEFS
+
         function_params = { 
             "mail_from": mail_from,
             "mail_incident_id": mail_incident_id,

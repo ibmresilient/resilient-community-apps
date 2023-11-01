@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2023. All Rights Reserved.
 
 """Function implementation"""
 
@@ -142,7 +142,7 @@ class FunctionComponent(ResilientComponent):
 
                             new_attachment = create_attachment(res_client, file_name, temp_file, incident_id, 'text/plain')
                             if new_attachment is not None:
-                                yield StatusMessage("Report with forensic evidence uploaded as an Attachment")
+                                yield StatusMessage("Report with forensic evidence uploaded as an Attachment: {}".format(file_name))
                             else:
                                 raise FunctionError(
                                     "Failed creating an Attachment with forensic evidence report")

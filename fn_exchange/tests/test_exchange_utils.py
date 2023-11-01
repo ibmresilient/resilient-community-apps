@@ -3,13 +3,15 @@ import pytest
 from exchangelib import Account, Folder, FolderCollection, EWSTimeZone
 from exchangelib.folders import Root
 from exchangelib.restriction import Q
-from fn_exchange.util.exchange_utils import (FolderError, exchange_utils,
-                                             get_config_option, parse_time,
-                                             str_to_bool)
 
-from mock_artifacts import (MOCK_INT_OPTS, MOCK_OPTS, MockAccount,
-                            MockAttachment, MockAttachmentId, MockEmail,
-                            MockFolder, MockSender)
+from fn_exchange.lib.exchange_utils import exchange_interface
+from fn_exchange.lib.exchange_helper import (
+    FolderError, parse_time, go_to_folder, get_proxy_adapter, get_timezone)
+
+from mock_artifacts import (
+    MOCK_INT_OPTS, MOCK_OPTS, MockAccount, return_none,
+    MockAttachment, MockAttachmentId, MockEmail,
+    MockFolder, MockSender, connect_to_account, send_emails, calendar_item)
 
 try:
     from unittest.mock import patch
@@ -42,10 +44,10 @@ class TestExchangeUtils:
 
     def test_create_email_function_results(self):
         """Testing create_email_function_results"""
-        test_utils = exchange_utils(MOCK_OPTS, MOCK_INT_OPTS)
+        test_utils = exchange_interface(MOCK_OPTS, MOCK_INT_OPTS)
 
         # Test when no results are returned
-        emails1 = test_utils.create_email_function_results([])
+        emails1 = test_utils.create_email_function_results([], None)
         emails1_results = {
             'email_ids': [],
             'emails': {}
@@ -54,7 +56,7 @@ class TestExchangeUtils:
 
         # Test one email with no attachments
         emails2 = [MockEmail('1', 'Subject 1', 'Body', MockSender('Sen Der1', 'sender1@example.com'), [], b'abc')]
-        emails2_output = test_utils.create_email_function_results(emails2)
+        emails2_output = test_utils.create_email_function_results(emails2, None)
         emails2_results = {
             'email_ids': ['1'],
             'emails': {
@@ -75,7 +77,7 @@ class TestExchangeUtils:
         emails3 = emails2 + [MockEmail('weio', 'nzxcv', 'vds', MockSender('FIRST LAST', 'firstlast@example.com'),
                                        [MockAttachment(MockAttachmentId('22'), 'ATTCH', 'spreadsheet', 12,
                                                        str.encode('encode me'))], b'def')]
-        emails3_output = test_utils.create_email_function_results(emails3)
+        emails3_output = test_utils.create_email_function_results(emails3, None)
         emails3_results = {
             'email_ids': ['1', 'weio'],
             'emails': {
@@ -110,10 +112,10 @@ class TestExchangeUtils:
 
         # Test that function results only include email items
         emails4 = emails3 + [2, 'not an email', True]
-        emails4_output = test_utils.create_email_function_results(emails4)
+        emails4_output = test_utils.create_email_function_results(emails4, None)
         assert emails4_output == emails3_results
 
-    @patch("fn_exchange.util.exchange_utils.exchange_utils.connect_to_account")
+    @patch("fn_exchange.lib.exchange_utils.exchange_interface.connect_to_account")
     def test_go_to_folder(self, connect_to_account):
         """Testing go_to_folder"""
 
@@ -130,121 +132,130 @@ class TestExchangeUtils:
             })
         })
         connect_to_account.return_value = MockAccount(test_root)
-        test_utils = exchange_utils(MOCK_OPTS, MOCK_INT_OPTS)
+        account = MockAccount(test_root)
+        account.root.refresh = return_none
+        
 
         # Check when go to folder that doesn't exist appropriate error is raised
         with pytest.raises(FolderError):
-            test_utils.go_to_folder('mockemail', '3')
+            go_to_folder('mockemail', account, '3')
 
         # First level navigatino check - root/1
-        test1 = test_utils.go_to_folder('mockemail', '1')
+        test1 = go_to_folder('mockemail', account, '1')
         assert test1 == test_root._subfolders['1']
 
         # Two level navigation check - root/1/1_1
         with pytest.raises(FolderError):
-            test_utils.go_to_folder('mockemail', '1/1_1')
+            go_to_folder('mockemail', account, '1/1_1')
 
         # First level navigation check - root/2
-        test2 = test_utils.go_to_folder('mockemail', '2')
+        test2 = go_to_folder('mockemail', account, '2')
         assert test2 == test_root._subfolders['2']
 
         # Two level navigation check - root/2/2_1
-        test2_1 = test_utils.go_to_folder('mockemail', '2/2_1')
+        test2_1 = go_to_folder('mockemail', account, '2/2_1')
         assert test2_1 == test_root._subfolders['2']._subfolders['2_1']
 
         # Two level navigation check - root/2/2_2
-        test2_2 = test_utils.go_to_folder('mockemail', '2/2_2')
+        test2_2 = go_to_folder('mockemail', account, '2/2_2')
         assert test2_2 == test_root._subfolders['2']._subfolders['2_2']
 
         # Three level navigation check - root/2/2_2/2_2_1
-        test2_2_1 = test_utils.go_to_folder('mockemail', '2/2_2/2_2_1')
+        test2_2_1 = go_to_folder('mockemail', account, '2/2_2/2_2_1')
         assert test2_2_1 == test_root._subfolders['2']._subfolders['2_2']._subfolders['2_2_1']
 
 
-    @patch("fn_exchange.util.exchange_utils.exchange_utils.connect_to_account")
-    def test_create_email_message(self, connect_to_account):
+    @patch("fn_exchange.lib.exchange_utils.exchange_interface.connect_to_account")
+    @patch('fn_exchange.lib.exchange_utils.Message', side_effect=send_emails)
+    def test_create_email_message(self, connect_to_account, send_emails):
         """Testing create_email_message"""
 
-        test_utils = exchange_utils(MOCK_OPTS, MOCK_INT_OPTS)
+        function_parameters = {}
+        test_utils = exchange_interface(MOCK_OPTS, {"email":"user1@a.com"})
         mock_account = MockAccount(MockFolder('root', {}))
         connect_to_account.return_value = mock_account
 
         # Input parameters
-        test_account1 = mock_account
-        test_subject1 = 'subject1'
-        test_body1 = 'body1'
-        test_to_recipients1 = 'a@a.com'
+        function_parameters["username"] = "user1@a.com"
+        function_parameters["msg_subject"] = 'subject1'
+        function_parameters["msg_body"] = 'body1'
+        function_parameters["recipients"] = 'a@a.com'
 
         # Check returned object has correct parameters
-        email1 = test_utils.create_email_message(test_account1, test_subject1, test_body1, test_to_recipients1)
-        assert email1.account == mock_account
-        assert email1.folder == mock_account.sent
-        assert email1.subject == 'subject1'
-        assert email1.body == "<html><body>body1</body></html>"
-        assert email1.to_recipients == ['a@a.com']
+        email1 = test_utils.create_email_message(function_parameters)
+        expected_results = {
+            'recipients' : function_parameters["recipients"],
+            'sender'     : function_parameters["username"],
+            'msg_subject': function_parameters["msg_subject"],
+            'msg_body'   : function_parameters["msg_body"]}
+        assert email1 == expected_results
 
         # More input parameters
-        test_account2 = mock_account
-        test_subject2 = None
-        test_body2 = None
-        test_to_recipients2 = 'a@a.com,b@a.com'
+        function_parameters["recipients"] = 'a@a.com,b@a.com'
 
         # Check input parameters correctly assign None
-        email2 = test_utils.create_email_message(test_account2, test_subject2, test_body2, test_to_recipients2)
-        assert email2.account == mock_account
-        assert email2.folder == mock_account.sent
-        assert email2.subject == None
-        assert email2.body == "<html><body>None</body></html>"
-        assert email2.to_recipients == ['a@a.com', 'b@a.com']
+        email2 = test_utils.create_email_message(function_parameters)
+        expected_results = {
+            'recipients' : function_parameters["recipients"],
+            'sender'     : function_parameters["username"],
+            'msg_subject': function_parameters["msg_subject"],
+            'msg_body'   : function_parameters["msg_body"]}
+        assert email2 == expected_results
 
-    @patch("fn_exchange.util.exchange_utils.exchange_utils.connect_to_account")
-    def test_create_meeting(self, connect_to_account):
+    @patch("fn_exchange.lib.exchange_utils.exchange_interface.connect_to_account", side_effect=connect_to_account)
+    @patch("fn_exchange.lib.exchange_utils.CalendarItem", side_effect=calendar_item)
+    def test_create_meeting(self, connect_to_account, calendar_item):
         """Testing create meeting"""
-        test_utils = exchange_utils(MOCK_OPTS,MOCK_INT_OPTS)
-        mock_account = MockAccount(MockFolder('root', {}))
-        connect_to_account.return_value = mock_account
+        test_utils = exchange_interface(MOCK_OPTS, {"email":"mockemail"})
+
+        function_parameters = {}
+        function_parameters["username"] = "empty_user@exch.com"
+        function_parameters["start_time"] = 1000000
+        function_parameters["end_time"] = 1100000
+        function_parameters["meeting_subject"] = "subject1"
+        function_parameters["meeting_body"] = "body1"
+        function_parameters["required_attendees"] = 'r1@example.com,r2@example.com'
+        function_parameters["optional_attendees"] = None
 
         # Check parameters and that optional_attendees handles None properly
-        meeting1 = test_utils.create_meeting('mockemail', 1000000, 1100000, 'subject1', 'body1',
-                                             'r1@example.com,r2@example.com', None)
-        assert meeting1.account == mock_account
-        assert meeting1.folder == mock_account.calendar
-        assert meeting1.subject == 'subject1'
-        assert meeting1.body == 'body1'
-        assert meeting1.required_attendees == ['r1@example.com', 'r2@example.com']
-        assert meeting1.optional_attendees == None
+        meeting1 = test_utils.create_meeting(function_parameters)
+        assert meeting1.get("sender") == "empty_user@exch.com"
+        assert meeting1.get("subject") == 'subject1'
+        assert meeting1.get("body") == 'body1'
+        assert meeting1.get("required_attendees") == ['r1@example.com', 'r2@example.com']
+        assert meeting1.get("optional_attendees") == None
 
         # Check parameters and that required_attendees handles None properly
-        meeting2 = test_utils.create_meeting('mockemail', 1000000, 1100000, 'qwer', 'tuio',
-                                             None, 'o1@a.com,o2@a.com')
-        assert meeting2.account == mock_account
-        assert meeting2.folder == mock_account.calendar
-        assert meeting2.subject == 'qwer'
-        assert meeting2.body == 'tuio'
-        assert meeting2.required_attendees == None
-        assert meeting2.optional_attendees == ['o1@a.com', 'o2@a.com']
+
+        function_parameters["required_attendees"] = None
+        function_parameters["optional_attendees"] = 'o1@a.com,o2@a.com'
+        meeting2 = test_utils.create_meeting(function_parameters)
+        assert meeting2.get("sender") == "empty_user@exch.com"
+        assert meeting2.get("subject") == 'subject1'
+        assert meeting2.get("body") == 'body1'
+        assert meeting2.get("required_attendees") == None
+        assert meeting2.get("optional_attendees") == ['o1@a.com', 'o2@a.com']
 
         # General use test
-        meeting3 = test_utils.create_meeting('mockemail', 1000000, 1100000, None, None,
-                                             'r1@example.com,r2@example.com', 'o1@a.com,o2@a.com')
-        assert meeting3.account == mock_account
-        assert meeting3.folder == mock_account.calendar
-        assert meeting3.subject == None
-        assert meeting3.body == None
-        assert meeting3.required_attendees == ['r1@example.com', 'r2@example.com']
-        assert meeting3.optional_attendees == ['o1@a.com', 'o2@a.com']
+        function_parameters["required_attendees"] = 'r1@example.com,r2@example.com'
+        function_parameters["optional_attendees"] = 'o1@a.com,o2@a.com'
+        meeting3 = test_utils.create_meeting(function_parameters)
+        assert meeting3.get("sender") == "empty_user@exch.com"
+        assert meeting3.get("subject") == 'subject1'
+        assert meeting3.get("body") == 'body1'
+        assert meeting3.get("required_attendees") == ['r1@example.com', 'r2@example.com']
+        assert meeting3.get("optional_attendees") == ['o1@a.com', 'o2@a.com']
 
     @patch.object(FolderCollection, '__eq__', lambda fc1, fc2: set(fc1) == set(fc2))
-    @patch("fn_exchange.util.exchange_utils.exchange_utils.connect_to_account")
+    @patch("fn_exchange.lib.exchange_utils.exchange_interface.connect_to_account")
     def test_get_email(self, connect_to_account):
         """Testing get_email"""
 
         # Initialize testing variables with Mock objects
         # Mocked account and mocked root with subfolders
         opts = MOCK_OPTS
-        opts_int = MOCK_INT_OPTS
         opts['default_folder_path'] = '1'
-        test_utils = exchange_utils(opts, opts_int)
+        test_utils = exchange_interface(None, opts)
         mock_account = MockAccount(None)
         test_root = MockFolder('root', {
             '1': MockFolder('1', {}, mock_account),
@@ -257,91 +268,64 @@ class TestExchangeUtils:
         }, mock_account)
         rsf = test_root._subfolders
         mock_account.set_root(test_root)
+        mock_account.root.refresh = return_none
         connect_to_account.return_value = mock_account
 
         # Sender filter check
-        emails1 = test_utils.get_emails('mockemail', sender='testsender')
+        emails1 = test_utils.get_emails({"username":'mockemail', "sender" :'testsender'})
         assert emails1.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
         assert emails1.q == Q(sender='testsender')
 
         # Multiple folder check with sender
-        emails2 = test_utils.get_emails('mockemail', folder_path='1,2', sender='another sender')
+        emails2 = test_utils.get_emails({"username":'mockemail', "src_folder":'1,2', "sender":'another sender'})
         assert emails2.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1'], rsf['2']])
         assert emails2.q == Q(sender='another sender')
 
         # Subject filter check
-        emails3 = test_utils.get_emails('mockemail', subject='subject')
+        emails3 = test_utils.get_emails({"username":'mockemail', "msg_subject" :'testsender'})
         assert emails3.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
-        assert emails3.q == Q(subject__contains='subject')
+        assert emails3.q == Q(subject__contains='testsender')
 
         # Body filter check
-        emails4 = test_utils.get_emails('mockemail', body='body')
+        emails4 = test_utils.get_emails({"username":'mockemail', "msg_body" :'testbody'})
         assert emails4.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
-        assert emails4.q == Q(body__contains='body')
+        assert emails4.q == Q(body__contains='testbody')
 
         # Email id filter check
-        emails5 = test_utils.get_emails('mockemail', email_ids='id1,id2,idN')
+        emails5 = test_utils.get_emails({"username":'mockemail', "email_ids":'id1,id2,idN'})
         assert emails5.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
         assert emails5.q == Q(message_id='id1') | Q(message_id='id2') | Q(message_id='idN')
 
         # has_attachments filter check
-        emails6 = test_utils.get_emails('mockemail', has_attachments=True)
+        emails6 = test_utils.get_emails({"username":'mockemail', "has_attachments":True})
         assert emails6.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
         assert emails6.q == Q(has_attachments= True)
 
         # search_subfolders filter check
         with patch.object(Folder, 'walk') as walk:
             walk.return_value = test_root._subfolders['2']
-            emails7 = test_utils.get_emails('mockemail', folder_path='2', search_subfolders=True)
+            emails7 = test_utils.get_emails({"username":'mockemail', "src_folder":'2', "search_subfolders":True})
 
         fc_expected = FolderCollection(folders=[rsf['2']], account=mock_account)
         assert emails7.folder_collection.folders == fc_expected.folders
         assert emails7.folder_collection.account == fc_expected.account
         assert emails7.q == Q()
 
-        emails8 = test_utils.get_emails('mockemail', folder_path='1', sender='sender', subject='subject', body='body',
-                                        has_attachments=False)
+        emails8 = test_utils.get_emails({"username":'mockemail', "src_folder":'1', "sender":'sender',
+                                         "msg_subject":'subject', "msg_body":'body', "has_attachments":False})
         assert emails8.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
-        print(emails8.q)
-        print(Q(sender='sender', subject__contains='subject', body__contains='body', has_attachments=False))
         assert emails8.q == Q(sender='sender') & Q(subject__contains='subject') \
                & Q(body__contains='body') & Q(has_attachments=False)
 
-    def test_str_to_bool(self):
-        """Testing str_to_bool"""
-
-        # Test true values
-        assert str_to_bool('tRUe') == True
-        assert str_to_bool('TRUE') == True
-        assert str_to_bool('true') == True
-        assert str_to_bool('True') == True
-
-        # Test false values
-        assert str_to_bool('FAlse') == False
-        assert str_to_bool('false') == False
-        assert str_to_bool('FALSE') == False
-        assert str_to_bool('False') == False
-
-        # Test errors
-        with pytest.raises(ValueError):
-            str_to_bool('error')
-        with pytest.raises(ValueError):
-            str_to_bool('Fakse')
-        with pytest.raises(ValueError):
-            str_to_bool('true ')
-        with pytest.raises(ValueError):
-            str_to_bool(' true')
-
-    def test_get_config_option(self):
-        """Test get_config_options"""
-
-        assert get_config_option(MOCK_OPTS, 'verify_cert') == 'false'
-        assert get_config_option(MOCK_OPTS, 'server') == 'server'
-        assert get_config_option(MOCK_OPTS, 'default_timezone') == 'Etc/GMT'
-        with pytest.raises(ValueError):
-            get_config_option(MOCK_OPTS, 'option')
-
     def test_get_tz(self):
-        test_utils = exchange_utils(MOCK_OPTS, MOCK_INT_OPTS)
-        tz = test_utils._get_tz()
+        tz = get_timezone(None)
         assert isinstance(tz, EWSTimeZone)
+        assert str(tz) == "Etc/GMT"
+        
+        tz = get_timezone("America/Chicago")
+        assert isinstance(tz, EWSTimeZone)
+        assert str(tz) == "America/Chicago"
+        
+        tz = get_timezone("   America/Chicago   ")
+        assert isinstance(tz, EWSTimeZone)
+        assert str(tz) == "America/Chicago"

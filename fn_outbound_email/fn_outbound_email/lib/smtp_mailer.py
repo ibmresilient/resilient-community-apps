@@ -1,11 +1,11 @@
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 import base64
+import logging
 from errno import ENOENT
 from os import path, strerror
 from smtplib import SMTP, SMTP_SSL
-import logging
 from email.mime.application import MIMEApplication
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -15,8 +15,9 @@ from resilient_circuits import ResilientComponent
 from resilient_lib import RequestsCommon
 from fn_outbound_email.lib.template_helper import TemplateHelper, CONFIG_DATA_SECTION
 from fn_outbound_email.lib.oauth2 import OAuth2
+from .crypto_common import sign_email_message, encrypt_email_message, get_p12_info, isUsageValid
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
 
 SMTP_DEFAULT_CONN_TIMEOUT = 20
 SMTP_DEFAULT_PORT = '25'
@@ -35,6 +36,11 @@ PRIORITY_LOOKUP = {
 }
 
 class SendSMTPEmail(ResilientComponent):
+    """Class for all send mail related activities
+
+    :param ResilientComponent: Base environment
+    :type ResilientComponent: object
+    """
 
     def __init__(self, opts, mail_context):
         self.opts = opts
@@ -52,11 +58,11 @@ class SendSMTPEmail(ResilientComponent):
         self.smtp_port = str(self.smtp_config_section.get("smtp_port", SMTP_DEFAULT_PORT))
         # cafile can be false or a path to a cafile cert
         if self.smtp_config_section.get("smtp_ssl_cafile", 'false').lower() == 'false':
-            self.smtp_cafile = False
+            self.smtp_cafile = None
         else:
             self.smtp_cafile = self.smtp_config_section.get("smtp_ssl_cafile")
         if self.smtp_config_section.get("smtp_password", None) and self.smtp_config_section.get("oauth2_client_id", None):
-            log.warning("The user and api key configuration settings are both enabled. Credentials will default to the "
+            LOG.warning("The user and api key configuration settings are both enabled. Credentials will default to the "
                         "api key settings.")
         self.smtp_user = self.smtp_config_section.get("smtp_user")
         # Basic authentication property
@@ -89,12 +95,34 @@ class SendSMTPEmail(ResilientComponent):
             self.headers[IMPORTANCE_HEADER] = self.mail_context['mail_importance']
             self.headers[PRIORITY_HEADER] = PRIORITY_LOOKUP.get(self.mail_context['mail_importance'].lower(), 2)
 
-    def send(self, body_html="", body_text=""):
+        # signing certs
+        private_key_password = self.smtp_config_section.get('p12_signing_cert_password')
+        self.key_signer_cert, self.cert_signer, self.additional_certs = get_p12_info(
+            self.smtp_config_section.get('p12_signing_cert'),
+            private_key_password)
+
+        # confirm that the signing cert has the permissions for email signing
+        if not isUsageValid(self.cert_signer):
+            LOG.warn("Unable to confirm public certificate has trust for 'emailProtection'. Continuing.")
+
+    def send(self, body_html: str="", body_text: str="", encryption_certs: list=None):
+        """send email
+
+        :param body_html: html formatted message body, defaults to ""
+        :type body_html: str, optional
+        :param body_text: text formatted message body, defaults to ""
+        :type body_text: str, optional
+        :param encryption_certs: list of PEM formatted client public certs, defaults to None
+        :type encryption_certs: list, optional
+        :raises SimpleSendEmailException: errors
+        :return: error message
+        :rtype: str, optional
+        """
         if not self.opts:
             raise SimpleSendEmailException("opts required")
         if not self.from_address:
             raise SimpleSendEmailException("from_address required")
-        log.info("Converting params")
+        LOG.info("Converting params")
 
         if not self.to_address_list or not isinstance(self.to_address_list, (set, list)):
             self.to_address_list = []
@@ -121,7 +149,7 @@ class SendSMTPEmail(ResilientComponent):
             for k,v in self.headers.items():
                 multipart_message.add_header(k, v)
 
-        log.info("Building MIME object")
+        LOG.info("Building MIME object")
         # Set subject
         multipart_message['Subject'] = self.mail_subject
 
@@ -139,27 +167,39 @@ class SendSMTPEmail(ResilientComponent):
             for attachment in processed_attachments:
                 multipart_message.attach(attachment)
 
+        # sign and encrypt?
+        if self.key_signer_cert and self.cert_signer:
+            LOG.info("signing content")
+            multipart_message = sign_email_message(multipart_message,
+                                                   self.key_signer_cert,
+                                                   self.cert_signer,
+                                                   additional_certs=self.additional_certs)
+        if encryption_certs:
+            LOG.info("encrypting content")
+            multipart_message = encrypt_email_message(multipart_message, encryption_certs)
+
         # convert to EML string
         composed = multipart_message.as_string()
+        LOG.debug(composed)
 
-        log.info("Starting email connection...")
+        LOG.info("Starting email connection...")
         smtp_connection = None
         try:
             if self.smtp_config_section.get("smtp_ssl_mode") == "ssl":
-                log.info("Building SSL connection object")
+                LOG.info("Building SSL connection object")
                 smtp_connection = SMTP_SSL(host=self.smtp_server,
                                            port=self.smtp_port,
                                            certfile=self.smtp_cafile,
                                            context=self.get_smtp_ssl_context(),
                                            timeout=self.smtp_conn_timeout)
             else:
-                log.info("Building generic connection object")
+                LOG.info("Building generic connection object")
                 smtp_connection = SMTP(host=self.smtp_server,
                                        port=self.smtp_port,
                                        timeout=self.smtp_conn_timeout)
 
                 if self.smtp_config_section.get("smtp_ssl_mode") == "starttls":
-                    log.info("Starting TLS...")
+                    LOG.info("Starting TLS...")
                     smtp_connection.ehlo()
                     smtp_connection.starttls()
 
@@ -168,22 +208,23 @@ class SendSMTPEmail(ResilientComponent):
                 if not self.smtp_password:
                     raise SimpleSendEmailException('An SMTP user has been set; '
                                                    'the SMTP password from app.config cannot be null')
-                log.info("Logging in to SMTP...")
+                LOG.info("Logging in to SMTP...")
+                smtp_connection.set_debuglevel(1)
                 smtp_connection.login(user=self.smtp_user, password=self.smtp_password)
 
             if self.client_id:
                 # Using OAuth2 authentication.
                 smtp_connection.ehlo()
-                log.info("Authenticating with SMTP server...")
+                LOG.info("Authenticating with SMTP server...")
                 smtp_connection.docmd('AUTH', 'XOAUTH2 ' + base64.b64encode(bytes(self.oauth2.oauth2_string, "utf-8")).decode("utf-8"))
 
-            log.info("Sending mail")
+            LOG.info("Sending mail")
             smtp_connection.sendmail(self.from_address,
                                      set(list(self.to_address_list) + list(self.cc_address_list) +
                                          list(self.bcc_address_list)), composed)
             err_msg =  None
         except Exception as connection_error:
-            log.error(connection_error)
+            LOG.error(connection_error)
             err_msg = str(connection_error)
         finally:
             try:
@@ -208,10 +249,7 @@ class SendSMTPEmail(ResilientComponent):
 
     def get_smtp_ssl_context(self):
         ssl_context = create_default_context(purpose=Purpose.SERVER_AUTH)
-        ssl_context.check_hostname = self.smtp_config_section.get("smtp_ssl_cafile") not in ['False', 'false']
-
-        # if True set to default context
-        if self.smtp_config_section.get("smtp_ssl_cafile") in ['True', 'true']:
+        if self.smtp_config_section.get("smtp_ssl_cafile") in [None, 'False', 'false']:
             return ssl_context
 
         if not path.isfile(self.smtp_config_section.get("smtp_ssl_cafile")):
@@ -238,4 +276,4 @@ class SendSMTPEmail(ResilientComponent):
 class SimpleSendEmailException(Exception):
     """Exception for Send Email errors"""
     def __init__(self, message):
-        log.error("SimpleSendEmailException %s", message)
+        LOG.error("SimpleSendEmailException %s", message)

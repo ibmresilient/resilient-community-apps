@@ -5,16 +5,19 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_proofpoint_tap',
-    version='1.0.3',
+    display_name="Proofpoint TAP",
+    version='1.1.0',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
-    url='https://success.resilientsystems.com/',
+    author='IBM SOAR',
+    author_email='',
+    url='https://ibm.com/mysupport',
     description="Resilient Circuits Components for 'fn_proofpoint_tap'",
-    long_description="Resilient Circuits Components for 'fn_proofpoint_tap'",
+    long_description="""Poll Proofpoint Targeted Attack Protection (TAP) threat events and create cases in IBM SOAR.<br>
+
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'resilient_circuits>=32.0.186',
-        'resilient-lib'
+        'resilient_circuits>=49.0.4423'
     ],
     packages=find_packages(),
     include_package_data=True,

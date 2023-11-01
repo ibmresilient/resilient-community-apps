@@ -41,6 +41,10 @@ whois=whois "{{shell_param1}}"
 # psscan=python /path/to/vol.py -f "{{shell_param1}}" "--profile={{shell_param2}}" psscan --output=json
 # dlllist=python /path/to/vol.py -f "{{shell_param1}}" "--profile={{shell_param2}}" dlllist --output=json
 # (etc)
+# New to 1.1.0 
+# make shell commands directly on remove computers without being specified in this configuration.
+# Note: This capability is very powerful and a potential security risk to run any command
+allow_ad_hoc_execution = False
 
 # Timeout in seconds, default is 20
 #timeout_linux=20

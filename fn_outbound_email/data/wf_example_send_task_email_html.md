@@ -18,6 +18,7 @@
 
 ### Pre-Processing Script
 ```python
+import datetime
 inputs.mail_to = rule.properties.mail_to
 inputs.mail_cc = rule.properties.mail_cc
 inputs.mail_attachments = rule.properties.mail_attachments
@@ -25,8 +26,7 @@ inputs.mail_incident_id = incident.id
 inputs.mail_from = rule.properties.mail_from
 inputs.mail_subject = u"[{0}] {1} Task:{2}".format(incident.id, incident.name, task.name)
 
-from java.util import Date
-creation_date = Date(incident.create_date)
+creation_date = datetime.datetime.fromtimestamp(incident.create_date/1000).strftime('%Y-%m-%d %H:%M:%S')
 type_ids = u", ".join(incident.incident_type_ids)
 sev_code = u"{}".format(incident.severity_code)
 current_plan = u"{}".format(incident.plan_status)

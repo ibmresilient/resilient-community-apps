@@ -5,7 +5,7 @@ from mock import patch
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from mock_incident import IncidentMock
+from .mock_incident import IncidentMock
 
 PACKAGE_NAME = "fn_outbound_email"
 FUNCTION_NAME = "send_email2"
@@ -62,7 +62,8 @@ class TestSendEmail2:
         "mail_subject": "sample text",
         "mail_in_reply_to": None,
         "mail_cc": None,
-        "mail_incident_id": 123
+        "mail_incident_id": 123,
+        "mail_encryption_recipients": None
     }
 
     fail_no_recipient_to = {
@@ -78,7 +79,8 @@ class TestSendEmail2:
         "mail_subject": "sample text",
         "mail_in_reply_to": None,
         "mail_cc": None,
-        "mail_incident_id": 123
+        "mail_incident_id": 123,
+        "mail_encryption_recipients": None
     }
 
     fail_no_body = {
@@ -94,7 +96,8 @@ class TestSendEmail2:
         "mail_subject": "sample text",
         "mail_in_reply_to": None,
         "mail_cc": None,
-        "mail_incident_id": 123
+        "mail_incident_id": 123,
+        "mail_encryption_recipients": None
     }
 
     fail_both_templates = {
@@ -110,7 +113,8 @@ class TestSendEmail2:
         "mail_subject": "sample text",
         "mail_in_reply_to": None,
         "mail_cc": None,
-        "mail_incident_id": 123
+        "mail_incident_id": 123,
+        "mail_encryption_recipients": None
     }
 
     @pytest.mark.parametrize("mock_inputs, expected_results", [
@@ -137,39 +141,7 @@ class TestSendEmail2:
         "mail_inline_template": None,
         "mail_from": None,
         "mail_template_label": None,
-        "mail_body": "This is a body",
-        "mail_importance": None,
-        "mail_bcc": None,
-        "mail_attachments": None,
-        "mail_message_id": None,
-        "mail_to": "a@example.com",
-        "mail_subject": "sample text",
-        "mail_in_reply_to": None,
-        "mail_cc": None,
-        "mail_incident_id": 123
-    }
-
-    success_inline_template = {
-        "mail_inline_template": "{{ incident.id }}",
-        "mail_from": None,
-        "mail_template_label": None,
-        "mail_body": "This is a body",
-        "mail_importance": None,
-        "mail_bcc": None,
-        "mail_attachments": None,
-        "mail_message_id": None,
-        "mail_to": "a@example.com",
-        "mail_subject": "sample text",
-        "mail_in_reply_to": None,
-        "mail_cc": None,
-        "mail_incident_id": 123
-    }
-
-    success_inline_template_with_body = {
-        "mail_inline_template": "{{ incident.id }}",
-        "mail_from": None,
-        "mail_template_label": None,
-        "mail_body": "This is a body",
+        "mail_body": "success_body",
         "mail_importance": None,
         "mail_bcc": None,
         "mail_attachments": None,
@@ -179,14 +151,49 @@ class TestSendEmail2:
         "mail_in_reply_to": None,
         "mail_cc": None,
         "mail_incident_id": 123,
-        "mail_merge_body": True
+        "mail_encryption_recipients": None
+    }
+
+    success_inline_template = {
+        "mail_inline_template": "{{ incident.id }}",
+        "mail_from": None,
+        "mail_template_label": None,
+        "mail_body": "success_inline_template",
+        "mail_importance": None,
+        "mail_bcc": None,
+        "mail_attachments": None,
+        "mail_message_id": None,
+        "mail_to": "a@example.com",
+        "mail_subject": "sample text",
+        "mail_in_reply_to": None,
+        "mail_cc": None,
+        "mail_incident_id": 123,
+        "mail_encryption_recipients": None
+    }
+
+    success_inline_template_with_body = {
+        "mail_inline_template": "{{ incident.id }}-{{ mail.mail_subject }}",
+        "mail_from": None,
+        "mail_template_label": None,
+        "mail_body": "success_inline_template_with_body",
+        "mail_importance": None,
+        "mail_bcc": None,
+        "mail_attachments": None,
+        "mail_message_id": None,
+        "mail_to": "a@example.com",
+        "mail_subject": "sample text",
+        "mail_in_reply_to": None,
+        "mail_cc": None,
+        "mail_incident_id": 123,
+        "mail_merge_body": True,
+        "mail_encryption_recipients": None
     }
 
     @patch('fn_outbound_email.components.funct_send_email2.send_msg')
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (success_body, success_body['mail_body']),
         (success_inline_template, str(success_inline_template['mail_incident_id'])),
-        (success_inline_template_with_body, f"{str(success_inline_template_with_body['mail_incident_id'])}\n{success_inline_template_with_body['mail_body']}")
+        (success_inline_template_with_body, f"{str(success_inline_template_with_body['mail_incident_id'])}-{success_inline_template_with_body['mail_subject']}\n{success_inline_template_with_body['mail_body']}")
     ])
     def test_inline_template(self, mock_send_msg, circuits_app, mock_inputs, expected_results):
         mock_send_msg.return_value = None

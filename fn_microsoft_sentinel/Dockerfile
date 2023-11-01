@@ -1,10 +1,11 @@
-# docker build -t ibmresilient/fn_microsoft_sentinel:1.0.0 -t ibmresilient/fn_microsoft_sentinel:latest .
+# Generated with resilient-sdk v48.0.4034
+# docker build -t ibmresilient/fn_microsoft_sentinel:1.2.0 -t ibmresilient/fn_microsoft_sentinel:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_microsoft_sentinel
-ARG RESILIENT_CIRCUITS_VERSION=39
+ARG RESILIENT_CIRCUITS_VERSION=48.0.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
@@ -36,8 +37,6 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 #COPY /path/to/extra_package /tmp/packages/.
 #RUN pip install /tmp/packages/<extra_package>*.tar.gz
 
-# uncomment to expose port only if a custom threat feed
-#EXPOSE 9000
 ## ---- end section for changes ----
 
 # set up configuration and log locations using /etc and /var/log, the conventional locations for config and logs
@@ -60,6 +59,9 @@ RUN mkdir /var/${PATH_RESILIENT_CIRCUITS}
 # entrypoint for resilient-circuits.  Use /opt, the conventional location for optional software on Linux
 RUN mkdir /opt/${PATH_RESILIENT_CIRCUITS}
 COPY entrypoint.sh /opt/${PATH_RESILIENT_CIRCUITS}/entrypoint.sh
+
+# remove temporary python files
+RUN rm -rf /tmp/packages /tmp/lib
 
 # arbitrary user, support running as non-root. Required on OpenShift. Generally a good practice.
 USER 1001

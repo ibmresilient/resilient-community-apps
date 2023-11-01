@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 import logging
 from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper, get_domains_list
