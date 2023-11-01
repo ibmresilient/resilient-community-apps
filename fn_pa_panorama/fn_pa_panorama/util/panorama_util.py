@@ -122,7 +122,7 @@ class PanoramaServers():
         Check if the given panorama_label is in the app.config
         :param panorama_label: User selected server
         :param servers_list: List of Panorama servers
-        :return: Dictionary of options for choosen server
+        :return: Dictionary of options for chosen server
         """
         # If label not given and using previous versions app.config [fn_pa_panorama]
         if not panorama_label and servers_list.get(PACKAGE_NAME):
@@ -156,7 +156,7 @@ class PanoramaServers():
 
 def get_server_settings(opts, panorama_label):
     """
-    Used for initilizing or reloading the options variable
+    Used for initializing or reloading the options variable
     :param opts: List of options
     :return: panorama server settings for specified server
     """

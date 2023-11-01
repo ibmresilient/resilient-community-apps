@@ -28,13 +28,22 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.3.0 | 04/2023 | Updated to use playbooks |
+| 1.3.0 | 04/2023 | Convert from rules/workflows to playbooks and update Panorama api version to 9.1 |
 | 1.2.0 | 10/2022 | Multi-tenancy support added |
 | 1.1.0 | 04/2021 | Support for different API versions. See app.config `api_version` setting |
 | 1.0.1 | 07/2019 | App Host support |
 | 1.0.0 | 10/2020 | Initial release |
 
 * For customers upgrading from a previous release to 1.2.0 or greater, the app.config file must be manually edited to add new settings required to each server configuration. See [1.2.0 Changes](#1.2.0-changes)
+
+---
+
+## 1.3.0 Changes
+In v1.3, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll noticed that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks will have the same name as it's corresponding rule, but with "(PB)" added at the end. For automatic actions, the playbooks will be disabled by default.
+
+You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
 
 ---
 
@@ -64,13 +73,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `48.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `48.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=46.0.0`.
+* Integration server is running `resilient_circuits>=48.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -102,8 +111,8 @@ The app does support a proxy server.
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient-lib>=46.0.0
-* resilient_circuits>=46.0.0
+* resilient-lib>=48.0.0
+* resilient_circuits>=48.0.0
 * xmltodict>=0.12.0
 
 ---
@@ -129,7 +138,7 @@ The following table provides the settings you need to configure the app. These s
 #### 1.2.0 Changes
 Starting in version 1.2.0, more than one Panorama instance can be configured for SOAR case data synchronization. For enterprises with only one Panorama instance, your app.config file will continue to define the Panorama instance under the `[fn_pa_panorama]` section header.
 
-For enterprises with more than one Panorama instance, each instance will have it's own section header, such as `[fn_pa_panoraman:panorama_label1]` where `panorama_label1` represents any label helpful to define your Panorama environment.
+For enterprises with more than one Panorama instance, each instance will have it's own section header, such as `[fn_pa_panorama:panorama_label1]` where `panorama_label1` represents any label helpful to define your Panorama environment.
 
 Be aware that modifications to the workflows will be needed to correctly pass this label through the `panorama_label` function input field if the Panorama server/servers in the app.config have labels.
 
@@ -438,7 +447,7 @@ elif len(users_list) > 1:
 if artifact.value not in blocked_users:
   blocked_users.append(artifact.value)
 
-# Build xml which the funciton will send to Panorama
+# Build xml which the function will send to Panorama
 panorama_xml = u'''
 <entry name="{}">
     <user>'''.format(str(group_name))

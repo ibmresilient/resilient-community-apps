@@ -33,7 +33,7 @@ class FunctionComponent(AppFunctionComponent):
         # Log inputs
         self.LOG.info(fn_inputs)
 
-        # Create connection to the user specifiec Panorama Server
+        # Create connection to the user specific Panorama Server
         panorama_util = PanoramaClient(self.opts,
                                        get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
                                        self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
@@ -54,7 +54,7 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"{len(user_list)} users returned.")
 
-        # Add list of users recieved from the get_users_in_a_group call to the results dict
+        # Add list of users received from the get_users_in_a_group call to the results dict
         results["user_list"] = user_list
         # Add get_users_in_a_group response to the results dict in xml format
         results["xml_response"] = xml_response

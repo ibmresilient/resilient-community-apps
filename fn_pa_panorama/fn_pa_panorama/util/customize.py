@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v48.1.4243
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v50.1.262
 
 """Generate the Resilient customizations required for fn_pa_panorama"""
 
@@ -21,8 +22,17 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_pa_panorama",
-        "message_destinations": [u"palo_alto_panorama"],
-        "functions": [u"panorama_create_address", u"panorama_edit_address_group", u"panorama_edit_users_in_a_group", u"panorama_get_address_groups", u"panorama_get_addresses", u"panorama_get_users_in_a_group"],
+        "message_destinations": [
+            u"palo_alto_panorama"
+        ],
+        "functions": [
+            u"panorama_create_address",
+            u"panorama_edit_address_group",
+            u"panorama_edit_users_in_a_group",
+            u"panorama_get_address_groups",
+            u"panorama_get_addresses",
+            u"panorama_get_users_in_a_group"
+        ],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
@@ -31,7 +41,14 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"example_panorama_block_dns_name", u"example_panorama_block_ip_address", u"example_panorama_block_user", u"example_panorama_unblock_dns_name", u"example_panorama_unblock_ip_address", u"example_panorama_unblock_user"]
+        "playbooks": [
+            u"example_panorama_block_dns_name",
+            u"example_panorama_block_ip_address",
+            u"example_panorama_block_user",
+            u"example_panorama_unblock_dns_name",
+            u"example_panorama_unblock_ip_address",
+            u"example_panorama_unblock_user"
+        ]
     }
 
 
@@ -40,7 +57,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 48.2.16
 
     Contents:
     - Message Destinations:

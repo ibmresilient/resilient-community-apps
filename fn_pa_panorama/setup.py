@@ -27,8 +27,8 @@ setup(
                      "addresses, and user groups within Palo Alto Panorama. This integration can be"
                      " configured to work with one or multiple Jira instances.",
     install_requires=[
-        'resilient_circuits>=46.0.0',
-        'resilient-lib>=46.0.0',
+        'resilient_circuits>=48.0.0',
+        'resilient-lib>=48.0.0',
         'xmltodict>=0.12.0'
     ],
     packages=find_packages(),
