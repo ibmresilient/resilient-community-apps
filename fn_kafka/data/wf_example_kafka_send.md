@@ -27,7 +27,7 @@ inputs.kafka_key = rule.properties.kafka_key
 
 ### Post-Processing Script
 ```python
-msg = u"Kafka Send Status: {}\nBroker: {} Topic: {} Key: {}".format("success" if results.success else "failure", results.inputs['kafka_broker_label'], results.inputs['kafka_topic'], results.inputs['kafka_key'])
+msg = "Kafka Send Status: {}\nBroker: {} Topic: {} Key: {}".format("success" if results.get("success") else "failure", results.get("inputs", {}).get('kafka_broker_label'), results.get("inputs", {}).get('kafka_topic'), results.get("inputs", {}).get('kafka_key'))
 incident.addNote(helper.createPlainText(msg))
 ```
 
