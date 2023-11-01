@@ -70,18 +70,18 @@ if ip_address_name in member_list:
 
 inputs.panorama_name_parameter = group_name
 
-body = '''{{
+body = f'''{{
   "entry": {{
-    "@name": "{}",
-    "description": "{}",
+    "@name": "{group_name}",
+    "description": "{des}",
     "static": {{
-      "member": {}
+      "member": {list_to_json_str(member_list)}
     }}
   }}
-}}'''.format(group_name, des, list_to_json_str(member_list))
+}}'''
 
 inputs.panorama_request_body = body
-inputs.panorama_label = playbook.inputs.panorama_label
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 ---
@@ -100,7 +100,7 @@ inputs.panorama_label = playbook.inputs.panorama_label
 ```python
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
-inputs.panorama_label = playbook.inputs.panorama_label
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 ---
@@ -120,7 +120,7 @@ inputs.panorama_label = playbook.inputs.panorama_label
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
 inputs.panorama_name_parameter = "Blocked Group"
-inputs.panorama_label = playbook.inputs.panorama_label
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 ---
@@ -140,7 +140,7 @@ inputs.panorama_label = playbook.inputs.panorama_label
 ```python
 results = playbook.functions.results.edit_addresses_results
 if results.get("success"):
-  incident.addNote("IP Address: {} was unblocked.".format(artifact.value))
+  incident.addNote(f"IP Address: {artifact.value} was unblocked.")
 ```
 
 ---

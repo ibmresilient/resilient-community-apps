@@ -46,7 +46,7 @@ Given a User Account artifact, adds the user to the "Blocked_Users" group in Pan
 ```python
 # Set this to the xpath of the group you are interested in
 inputs.panorama_user_group_xpath = "/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']"
-inputs.panorama_label = playbook.inputs.panorama_label
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 inputs.panorama_location = "vsys"
 ```
 
@@ -69,7 +69,7 @@ inputs.panorama_location = "vsys"
 group_name = "Blocked_Users"
 
 # Set this to the xpath of the group you are interested in
-inputs.panorama_user_group_xpath = "/config/shared/local-user-database/user-group/entry[@name='{}']".format(group_name)
+inputs.panorama_user_group_xpath = f"/config/shared/local-user-database/user-group/entry[@name='{group_name}']"
 
 users_list = playbook.functions.results.get_users_results.get("content", {}).get("user_list", [])
 
@@ -87,14 +87,14 @@ elif len(users_list) > 1:
 if artifact.value not in blocked_users:
   blocked_users.append(artifact.value)
 
-# Build xml which the function will send to Panorama
-panorama_xml = u'''
-<entry name="{}">
-    <user>'''.format(str(group_name))
+# Build xml which the funciton will send to Panorama
+panorama_xml = f'''
+<entry name="{str(group_name)}">
+    <user>'''
 
 # Add member nodes with the username to the xml string
 for user in blocked_users:
-  panorama_xml += u"\n      <member>" + user + "</member>"
+  panorama_xml += f"\n      <member>{user}</member>"
 
 # Add the ending of the xml to the string
 xml_ending = """
@@ -104,7 +104,7 @@ xml_ending = """
 panorama_xml += xml_ending
 
 inputs.panorama_user_group_xml = panorama_xml
-inputs.panorama_label = playbook.inputs.panorama_label
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 ---
@@ -124,7 +124,7 @@ inputs.panorama_label = playbook.inputs.panorama_label
 ```python
 results = playbook.functions.results.edit_users_results
 if results.get("success"):
-  incident.addNote("User account: {} was blocked.".format(artifact.value))
+  incident.addNote(f"User account: {artifact.value} was blocked.")
 ```
 
 ---
