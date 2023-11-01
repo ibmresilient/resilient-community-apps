@@ -38,7 +38,8 @@ Look for an item in QRadar reference set and add a note to the Incident
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
 inputs.qradar_reference_set_name = playbook.inputs.qradar_reference_set_name
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
+
 ```
 
 ---
@@ -57,10 +58,10 @@ inputs.qradar_label = playbook.inputs.qradar_server
 ### Script Content
 ```python
 results = playbook.functions.results.qradar_find_reference_set_item_result
-if results.found == "True":
-  incident.addNote(u"Found {} in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
+if results.get("found") == "True":
+  incident.addNote("Found {} in list: {} on QRadar server: {}.".format(artifact.value, results.inputs.get("qradar_reference_set_name"), results.inputs.get("qradar_label")))
 else:
-  incident.addNote("{} not found in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
+  incident.addNote("{} not found in list: {} on QRadar server: {}.".format(artifact.value, results.inputs.get("qradar_reference_set_name"), results.inputs.get("qradar_label")))
 ```
 
 ---

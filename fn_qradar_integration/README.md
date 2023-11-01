@@ -117,7 +117,7 @@ With the above functions, this package includes example workflows that demonstra
 <!--
   List any Requirements 
 --> 
-<!-- ::CHANGE_ME:: -->
+
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -134,9 +134,9 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
-  | Org Data | Read |
+  | Org Data | Read, edit |
   | Function | Read |
-  <!-- ::CHANGE_ME:: -->
+
 
 The following SOAR platform guides provide additional information: 
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
@@ -214,7 +214,7 @@ If you have existing custom workflows, see [Creating workflows when server/serve
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) <!-- ::CHANGE_ME:: -->
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 
 ---
@@ -222,7 +222,7 @@ If you have existing custom workflows, see [Creating workflows when server/serve
 ## Function - QRadar SIEM: Add Reference Set Item 
 Add an item to a given QRadar reference set
 
- ![screenshot: fn-qradar-add-reference-set-item ](./doc/screenshots/fn-qradar-add-reference-set-item.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-qradar-add-reference-set-item ](./doc/screenshots/fn-qradar-add-reference-set-item.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -294,7 +294,7 @@ else:
 ## Function - QRadar SIEM: Delete Reference Set Item 
 Delete an item from a given QRadar reference set
 
- ![screenshot: fn-qradar-delete-reference-set-item ](./doc/screenshots/fn-qradar-delete-reference-set-item.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-qradar-delete-reference-set-item ](./doc/screenshots/fn-qradar-delete-reference-set-item.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -382,7 +382,7 @@ else:
 ## Function - QRadar SIEM: Find Reference Set Item 
 Find an item in a given QRadar reference set
 
- ![screenshot: fn-qradar-find-reference-set-item ](./doc/screenshots/fn-qradar-find-reference-set-item.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-qradar-find-reference-set-item ](./doc/screenshots/fn-qradar-find-reference-set-item.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -552,7 +552,7 @@ else:
 ## Function - QRadar SIEM: Reference Table Add Item 
 Add an item to a given QRadar reference table
 
- ![screenshot: fn-qradar-reference-table-add-item ](./doc/screenshots/fn-qradar-reference-table-add-item.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-qradar-reference-table-add-item ](./doc/screenshots/fn-qradar-reference-table-add-item.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -657,7 +657,7 @@ else:
 ## Function - QRadar SIEM: Reference Table Delete Item 
 Delete an item from a given QRadar reference table
 
- ![screenshot: fn-qradar-reference-table-delete-item ](./doc/screenshots/fn-qradar-reference-table-delete-item.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-qradar-reference-table-delete-item ](./doc/screenshots/fn-qradar-reference-table-delete-item.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -759,8 +759,7 @@ else:
 ## Function - QRadar SIEM: Reference Table Get All Tables
 Get all reference tables from a QRadar instance
 
- ![screenshot: fn-qradar-reference-table-get-all-tables ](./doc/screenshots/fn-qradar-reference-table-get-all-tables.png) <!-- ::CHANGE_ME:: -->
-
+ ![screenshot: fn-qradar-reference-table-get-all-tables ](./doc/screenshots/fn-qradar-reference-table-get-all-tables.png) 
 <details><summary>Inputs:</summary>
 <p>
 
@@ -875,7 +874,7 @@ else:
 ## Function - QRadar SIEM: Reference Table Get Table Data 
 Get the elements in the reference table
 
- ![screenshot: fn-qradar-reference-table-get-table-data ](./doc/screenshots/fn-qradar-reference-table-get-table-data.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-qradar-reference-table-get-table-data ](./doc/screenshots/fn-qradar-reference-table-get-table-data.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -984,7 +983,7 @@ else:
 ## Function - QRadar SIEM: Reference Table Update Item
 Update an item in a given QRadar reference table
 
- ![screenshot: fn-qradar-reference-table-update-item ](./doc/screenshots/fn-qradar-reference-table-update-item.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-qradar-reference-table-update-item ](./doc/screenshots/fn-qradar-reference-table-update-item.png) 
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1091,7 +1090,7 @@ else:
 ## Function - QRadar SIEM: QRadar Search
 Search QRadar for events
 
- ![screenshot: fn-qradar-search ](./doc/screenshots/fn-qradar-search.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: fn-qradar-search ](./doc/screenshots/fn-qradar-search.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1133,819 +1132,9 @@ results = {
       "logsourcename_logsourceid": "Custom Rule Engine-8 :: hychuang-4",
       "protocolname_protocolid": "Reserved",
       "rulename_creeventlist": "[\u0027EC: AWS Cloud - Detected An Email with An Attachment From a Spam Sender\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Context is Local to Local\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Process Creation Success",
-      "logsourcename_logsourceid": "Experience Center: WindowsAuthServer @ IE8WIN7",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027BB:NetworkDefinition: Honeypot like Addresses\u0027, \u0027EC: AWS Cloud - Microsoft Word Launched a Command Shell\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027Source Address is a Bogon IP\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:DeviceDefinition: Operating System\u0027, \u0027BB:NetworkDefinition: Darknet Addresses\u0027, \u0027Load Basic Building Blocks\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Suspicious Windows Events",
-      "logsourcename_logsourceid": "Custom Rule Engine-8 :: hychuang-4",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Microsoft Word Launched a Command Shell\u0027, \u0027BB:NetworkDefinition: Honeypot like Addresses\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027Source Address is a Bogon IP\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:NetworkDefinition: Darknet Addresses\u0027, \u0027Load Basic Building Blocks\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "User Login Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "User Login Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Detected A Successful Login From Different Geographies For the Same Username\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Misc Login Succeeded",
-      "logsourcename_logsourceid": "Custom Rule Engine-8 :: hychuang-4",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Detected A Successful Login From Different Geographies For the Same Username\u0027, \u0027BB:CategoryDefinition: Authentication Success\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:CategoryDefinition: Post Exploit Account Activity\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Detected a Massive Creation of EC2 Instances\u0027, \u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Virtual Machine Creation Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Suspicious Activity",
-      "logsourcename_logsourceid": "Custom Rule Engine-8 :: hychuang-4",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Suspicious Activity",
-      "logsourcename_logsourceid": "Custom Rule Engine-8 :: hychuang-4",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Detected a Massive Creation of EC2 Instances\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Read Activity Attempted",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Object Download Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - A Database backup Has Been Downloaded From S3 Bucket\u0027, \u0027EC: AWS Cloud - An AWS API Has Been Invoked From Kali\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Information",
-      "logsourcename_logsourceid": "Experience Center: Cisco IronPort @ 192.168.0.15",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027Context is Local to Local\u0027, \u0027EC: AWS Cloud - Detected An Email with An Attachment From a Spam Sender\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:DeviceDefinition: Mail\u0027, \u0027BB:DeviceDefinition: Proxy\u0027, \u0027Load Basic Building Blocks\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Suspicious Activity",
-      "logsourcename_logsourceid": "Custom Rule Engine-8 :: hychuang-4",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Detected An Email with An Attachment From a Spam Sender\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Context is Local to Local\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Suspicious Activity",
-      "logsourcename_logsourceid": "Custom Rule Engine-8 :: hychuang-4",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - A Database backup Has Been Downloaded From S3 Bucket\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Process Creation Success",
-      "logsourcename_logsourceid": "Experience Center: WindowsAuthServer @ IE8WIN7",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027BB:NetworkDefinition: Honeypot like Addresses\u0027, \u0027EC: AWS Cloud - Microsoft Word Launched a Command Shell\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027Source Address is a Bogon IP\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:DeviceDefinition: Operating System\u0027, \u0027BB:NetworkDefinition: Darknet Addresses\u0027, \u0027Load Basic Building Blocks\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Suspicious Windows Events",
-      "logsourcename_logsourceid": "Custom Rule Engine-8 :: hychuang-4",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Microsoft Word Launched a Command Shell\u0027, \u0027BB:NetworkDefinition: Honeypot like Addresses\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027Source Address is a Bogon IP\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:NetworkDefinition: Darknet Addresses\u0027, \u0027Load Basic Building Blocks\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "User Login Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Detected A Successful Login From Different Geographies For the Same Username\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Context is Remote to Local\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "User Login Attempt",
-      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Detected A Successful Login From Different Geographies For the Same Username\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Context is Remote to Local\u0027]"
     }
+   
+   
   ],
   "inputs": {
     "qradar_label": "1.1.1.1",
@@ -2019,7 +1208,7 @@ incident.addNote("{} offenses have successfully been queried".format(len(results
 
 ## Data Table - QRadar SIEM Offense Events
 
- ![screenshot: dt-qradar-offense-events](./doc/screenshots/dt-qradar-offense-events.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-qradar-offense-events](./doc/screenshots/dt-qradar-offense-events.png) 
 
 #### API Name:
 qradar_offense_event
@@ -2030,14 +1219,14 @@ qradar_offense_event
 | Category | `category` | `text` | - |
 | Log Source | `log_source` | `text` | logsourceid |
 | Protocol | `protocol` | `text` | protocolid |
-| QRadar Server | `qradar_server` | `text` | - |
+| QRadar Server | `qradar_server` | `text` | Label from app.config of the QRadar server used |
 | Rule | `rule` | `text` | creeventlist |
 | Start Time | `start_time` | `text` | starttime |
 
 ---
 ## Data Table - QRadar SIEM Reference Sets
 
- ![screenshot: dt-qradar-reference-sets](./doc/screenshots/dt-qradar-reference-sets.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-qradar-reference-sets](./doc/screenshots/dt-qradar-reference-sets.png) 
 
 #### API Name:
 qradar_reference_set
@@ -2046,14 +1235,15 @@ qradar_reference_set
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
 | Item Value | `item_value` | `text` | Item value |
-| QRadar Server | `qradar_server` | `text` | - |
+| QRadar Server | `qradar_server` | `text` | Label from app.config of the QRadar server used |
 | Reference Set | `reference_set` | `text` | Name of reference set |
 | Source | `source` | `text` | how this value is added to the reference set |
 
 ---
 ## Data Table - QRadar SIEM Reference Table Queried Rows
 
- ![screenshot: dt-qradar-reference-table-queried-rows](./doc/screenshots/dt-qradar-reference-table-queried-rows.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-qradar-reference-table-queried-rows](./doc/screenshots/dt-qradar-reference-table-queried-rows.png) 
+
 
 #### API Name:
 qradar_reference_table_queried_rows
@@ -2063,7 +1253,7 @@ qradar_reference_table_queried_rows
 | ----------- | --------------- | ---- | ------- |
 | Inner Key | `inner_key` | `text` | - |
 | Outer Key | `outer_key` | `text` | - |
-| QRadar Server | `qradar_server` | `text` | - |
+| QRadar Server | `qradar_server` | `text` | Label from app.config of the QRadar server used |
 | Status | `status` | `text` | - |
 | Table | `table` | `text` | - |
 | Value | `value` | `text` | - |
@@ -2071,7 +1261,7 @@ qradar_reference_table_queried_rows
 ---
 ## Data Table - QRadar SIEM Reference Tables
 
- ![screenshot: dt-qradar-reference-tables](./doc/screenshots/dt-qradar-reference-tables.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: dt-qradar-reference-tables](./doc/screenshots/dt-qradar-reference-tables.png) 
 
 #### API Name:
 qradar_reference_table
@@ -2082,7 +1272,7 @@ qradar_reference_table
 | Collection Id | `collection_id` | `text` | - |
 | Namespace | `namespace` | `text` | - |
 | Number Of Elements | `number_of_elements` | `text` | - |
-| QRadar Server | `qradar_server` | `text` | - |
+| QRadar Server | `qradar_server` | `text` | Label from app.config of the QRadar server used |
 | Reference Table | `reference_table` | `text` | - |
 
 ---
@@ -2091,7 +1281,7 @@ qradar_reference_table
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
 | qradar_destination | `qradar_destination` | `text` | `properties` | - | QRadar Destination to Sync With |
-| qradar_id | `qradar_id` | `text` | `properties` | - | - |
+| qradar_id | `qradar_id` | `text` | `properties` | - | ID number of the QRadar offense |
 
 ---
 
@@ -2113,6 +1303,20 @@ qradar_reference_table
 | QRadar SIEM: Search QRadar for offense id -Example (PB) | Use the qradar_id field of the incident to search qradar events, and update the data table, qradar_offense_event, with the first 5 results. | incident | `enabled` |
 
 ---
+
+## How to configure to use a single QRadar Server
+To use only a single server there are two ways this can be configured
+1. Use the configuration used in QRadar Integration versions prior to V2.2.0
+![screenshot: qr-single-server](./doc/screenshots/qr-single-server.png)
+2. Either keep the label, SOAR_Plugin_Destination_Name1, or change it (The label does not matter when only one server is configured)
+![screenshot: qr-single-label-server](./doc/screenshots/qr-single-label-server.png)
+
+## Creating Playbooks when server/servers in app.config are labeled
+The function input field `qradar_label` is required when QRadar server/servers in the app.config are labeled. In the example playbook pre-process scripts the
+input field `qradar_label` is defined the following way,
+```python
+inputs.qradar_label = incident.properties.qradar_destination
+```
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.

@@ -38,9 +38,9 @@ Add a reference table item based on an existing named reference table
 ```python
 inputs.qradar_label = row["qradar_server"]
 inputs.qradar_reference_table_name = row.reference_table
-inputs.qradar_reference_table_item_outer_key = playbook.inputs.qradar_ref_table_outer_key or "1"
-inputs.qradar_reference_table_item_inner_key = playbook.inputs.qradar_ref_table_inner_key or "city"
-inputs.qradar_reference_table_item_value = playbook.inputs.qradar_ref_table_update
+inputs.qradar_reference_table_item_outer_key = getattr(playbook.inputs, "qradar_ref_table_outer_key") or "1"
+inputs.qradar_reference_table_item_inner_key = getattr(playbook.inputs, "qradar_ref_table_inner_key") or "city"
+inputs.qradar_reference_table_item_value = getattr(playbook.inputs, "qradar_ref_table_update")
 ```
 
 ---
@@ -63,16 +63,18 @@ note = u"""Outer key: {}
 Inner key: {}
 Entry: {}
 Reference table: {}
-QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
-                              results.inputs.qradar_reference_table_item_inner_key,
-                              results.inputs.qradar_reference_table_item_value, 
-                              results.inputs.qradar_reference_table_name,
+QRadar Server: {}""".format(results.get("inputs", {}).qradar_reference_table_item_outer_key,
+                              results.get("inputs", {}).qradar_reference_table_item_inner_key,
+                              results.get("inputs", {}).qradar_reference_table_item_value, 
+                              results.get("inputs", {}).qradar_reference_table_name,
                               row["qradar_server"])
-if results.success:
+if results.get("success"):
     incident.addNote(u"Successful added\n{}".format(note))
-    row.number_of_elements = str(results["content"]["content"]["number_of_elements"])
+    #row.number_of_elements = str(results["content"]["content"]["number_of_elements"])
+    row.number_of_elements = str(results.get("content").get("content").get("number_of_elements"))
 else:
-    incident.addNote(u"Failure to add item: {}\n{}".format(results['reason'], note))
+    #incident.addNote(u"Failure to add item: {}\n{}".format(results['reason'], note))
+    incident.addNote(u"Failure to add item: {}\n{}".format(results.get('reason'), note))
 ```
 
 ---

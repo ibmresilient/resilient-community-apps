@@ -37,8 +37,8 @@ Remove an item from QRadar reference set and add it to reference set. Add a note
 ### Function-Input Script
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
-inputs.qradar_reference_set_name = playbook.inputs.qradar_reference_set_name
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_reference_set_name = getattr(playbook.inputs, "qradar_reference_set_name")
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
 ```
 
 ---
@@ -56,8 +56,8 @@ inputs.qradar_label = playbook.inputs.qradar_server
 ### Function-Input Script
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
-inputs.qradar_reference_set_name = playbook.inputs.qradar_reference_set_to_move_to
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_reference_set_name = getattr(playbook.inputs, "qradar_reference_set_to_move_to")
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
 ```
 
 ---
@@ -78,9 +78,10 @@ inputs.qradar_label = playbook.inputs.qradar_server
 results = playbook.functions.results.qradar_add_reference_set_item_result
 
 if results.get("status_code") == 200:
-  incident.addNote(u"Successfully added {} to {} on QRadar Server: {}".format(artifact.value, playbook.inputs.qradar_reference_set_name, results.inputs["qradar_label"]))
+  incident.addNote(u"Successfully added {} to {} on QRadar Server: {}".format(artifact.value, playbook.get("inputs", {}).qradar_reference_set_name, results.get("inputs", {}).qradar_label))
 else:
-  incident.addNote(u"Failed to add {} to {} on QRadar server: {}. Status code: {}, message: {}".format(artifact.value, playbook.inputs.qradar_reference_set_name, results.inputs["qradar_label"], results.get("status_code"), results['message']))
+  incident.addNote(u"Failed to add {} to {} on QRadar server: {}. Status code: {}, message: {}".format(artifact.value, playbook.get("inputs", {}).qradar_reference_set_name, results.get("inputs", {}).qradar_label, results.get("status_code"), results.get
+  ("message")))
   
 ```
 

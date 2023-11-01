@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - QRadar SIEM: Add to Reference Table -Example (PB)
+# Playbook - QRadar SIEM: Add to Reference Table - Example (PB)
 
 ### API Name
 `qradar_add_to_reference_table`
@@ -37,10 +37,10 @@ Add a reference table item based on an artifact value
 ### Function-Input Script
 ```python
 inputs.qradar_reference_table_item_value = artifact.value
-inputs.qradar_reference_table_item_inner_key = playbook.inputs.qradar_ref_table_inner_key
-inputs.qradar_reference_table_item_outer_key = playbook.inputs.qradar_ref_table_outer_key
-inputs.qradar_reference_table_name = playbook.inputs.qradar_reference_table_name
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_reference_table_item_inner_key = getattr(playbook.inputs, "qradar_ref_table_inner_key")
+inputs.qradar_reference_table_item_outer_key = getattr(playbook.inputs, "qradar_ref_table_outer_key")
+inputs.qradar_reference_table_name = getattr(playbook.inputs, "qradar_reference_table_name")
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
 ```
 
 ---
@@ -63,15 +63,15 @@ note = u"""Outer key: {}
 Inner key: {}
 Entry: {}
 Reference table: {}
-QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
-                              results.inputs.qradar_reference_table_item_inner_key,
-                              results.inputs.qradar_reference_table_item_value, 
-                              results.inputs.qradar_reference_table_name,
-                              results.inputs["qradar_label"])
-if results.success:
+QRadar Server: {}""".format(results.get("inputs", {}).qradar_reference_table_item_outer_key,
+                              results.get("inputs", {}).qradar_reference_table_item_inner_key,
+                              results.get("inputs", {}).qradar_reference_table_item_value, 
+                              results.get("inputs", {}).qradar_reference_table_name,
+                              results.get("inputs", {}).qradar_label)
+if results.get("success"):
     incident.addNote(u"Successful add\n{}".format(note))
 else:
-    incident.addNote(u"Failure to add item: {}\n{}".format(results['reason'], note))
+    incident.addNote(u"Failure to add item: {}\n{}".format(results.get("reason"), note))
 ```
 
 ---

@@ -4,7 +4,7 @@
     Generated with resilient-sdk v49.1.51
 -->
 
-# Playbook - QRadar SIEM: Add to Reference Set -Example (PB)
+# Playbook - QRadar SIEM: Add to Reference Set - Example (PB)
 
 ### API Name
 `qradar_add_to_reference_set`
@@ -37,8 +37,8 @@ Add an IP address artifact to QRadar reference set
 ### Function-Input Script
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
-inputs.qradar_reference_set_name  = playbook.inputs.qradar_reference_set_name
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_reference_set_name  = getattr(playbook.inputs, "qradar_reference_set_name")
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
 ```
 
 ---
@@ -57,10 +57,10 @@ inputs.qradar_label = playbook.inputs.qradar_server
 ### Script Content
 ```python
 results = playbook.functions.results.qradar_add_reference_set_item_result
-if results["status_code"] == 200:
-  incident.addNote(u"IP: {} added to reference set: {} on QRadar server: {}".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
+if results.get("status_code") == 200:
+  incident.addNote(u"IP: {} added to reference set: {} on QRadar server: {}".format(artifact.value, results.get("inputs", {}).qradar_reference_set_name, results.get("inputs", {}).qradar_label))
 else:
-  incident.addNote(u"Failed to add IP: {} to reference set on QRadar server: {}. Status Code: {}, message: {}".format(artifact.value, results.inputs["qradar_label"], str(results["status_code"]), results.inputs["qradar_reference_set_name"]))
+  incident.addNote(u"Failed to add IP: {} to reference set on QRadar server: {}. Status Code: {}, message: {}".format(artifact.value, results.get("inputs", {}).qradar_label, str(results.get("status_code")), results.get("inputs", {}).qradar_reference_set_name))
 ```
 
 ---

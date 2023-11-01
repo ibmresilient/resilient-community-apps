@@ -19,7 +19,7 @@
 `incident`
 
 ### Description
-An example workflow that returns a list of all Reference Tables on the QRadar instance.
+An example playbook that returns a list of all Reference Tables on the QRadar instance.
 
 
 ---
@@ -36,7 +36,7 @@ An example workflow that returns a list of all Reference Tables on the QRadar in
 
 ### Function-Input Script
 ```python
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
 ```
 
 ---
@@ -57,21 +57,21 @@ inputs.qradar_label = playbook.inputs.qradar_server
 results = playbook.functions.results.qradar_reference_table_get_all_tables_result
 from datetime import datetime
 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
-if results.success:
-  if results.content:
-    for item in results.content:
+if results.get("success"):
+  if results.get("content"):
+    for item in results.get("content"):
       item_row = incident.addRow("qradar_reference_table")
       item_row["query_time"] = current_time
-      item_row["qradar_server"] = results.inputs["qradar_label"]
-      item_row["reference_table"] = item["name"]
-      item_row["collection_id"] = item["collection_id"]
-      item_row["number_of_elements"] = item["number_of_elements"]
-      item_row["namespace"] = item["namespace"]
-    incident.addNote("QRadar SIEM: Get all Reference Tables: {} Reference tables have successfully been queried".format(len(results.content)))
+      item_row["qradar_server"] = results.get("inputs", {}).qradar_label
+      item_row["reference_table"] = item.get("name")
+      item_row["collection_id"] = item.get("collection_id")
+      item_row["number_of_elements"] = item.get("number_of_elements")
+      item_row["namespace"] = item.get("namespace")
+    incident.addNote("QRadar SIEM: Get all Reference Tables: {} Reference tables have successfully been queried".format(len(results.get("content"))))
   else:
     incident.addNote("No reference tables found")
 else:
-  incident.addNote("An error occurred getting the reference tables: {} from QRadar server: {}".format(results.reason, rule.properties.qradar_label))
+  incident.addNote("An error occurred getting the reference tables: {} from QRadar server: {}".format(results.get("reason"), getattr(playbook.inputs, "qradar_label")))
 ```
 
 ---

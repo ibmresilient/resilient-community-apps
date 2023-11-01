@@ -36,18 +36,18 @@ Use the qradar_id field of the incident to search qradar events, and update the 
 
 ### Function-Input Script
 ```python
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
 
 
-if playbook.inputs.qradar_query_all_results:
-  inputs.qradar_query_all_results = playbook.inputs.qradar_query_all_results
+if getattr(playbook.inputs, "qradar_query_all_results"):
+  inputs.qradar_query_all_results = getattr(playbook.inputs, "qradar_query_all_results")
 
   
 inputs.qradar_query = "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days"
 inputs.qradar_search_param1  = "DATEFORMAT(starttime, 'YYYY-MM-dd HH:mm') as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)"
 inputs.qradar_search_param2 = incident.properties.qradar_id
-if playbook.inputs.days_to_search_back: 
-  inputs.qradar_search_param3 = playbook.inputs.days_to_search_back
+if getattr(playbook.inputs, "days_to_search_back"): 
+  inputs.qradar_search_param3 = getattr(playbook.inputs, "days_to_search_back")
 else:
   inputs.qradar_search_param3 = '7'
 inputs.qradar_query_range_start = '1'
@@ -74,19 +74,19 @@ results = playbook.functions.results.qradar_search_result
 from datetime import datetime
 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-for event in results["events"]:
+for event in results.get("events"):
   qradar_event = incident.addRow("qradar_offense_event")
   qradar_event.query_time = current_time
   qradar_event.qradar_server = results.inputs.get("qradar_label")
-  qradar_event.start_time = event["StartTime"]
-  qradar_event.category = event["categoryname_category"]
-  qradar_event.log_source = event["logsourcename_logsourceid"]
-  qradar_event.protocol = event["protocolname_protocolid"]
-  qradar_event.rule = event["rulename_creeventlist"]
-if playbook.inputs.days_to_search_back:
-  incident.addNote("QRadar SIEM: Get QRadar Offense Events: {} events have successfully been queried for the last {} days".format(len(results["events"]), playbook.inputs.days_to_search_back))
+  qradar_event.start_time = event.get("StartTime")
+  qradar_event.category = event.get("categoryname_category")
+  qradar_event.log_source = event.get("logsourcename_logsourceid")
+  qradar_event.protocol = event.get("protocolname_protocolid")
+  qradar_event.rule = event.get("rulename_creeventlist")
+if getattr(playbook.inputs, "days_to_search_back"):
+  incident.addNote("QRadar SIEM: Get QRadar Offense Events: {} events have successfully been queried for the last {} days".format(len(results.get("events")), getattr(playbook.inputs,"days_to_search_back")))
 else:
-  incident.addNote("QRadar SIEM: Get QRadar Offense Events: {} events have successfully been queried for the last 7 days".format(len(results["events"])))
+  incident.addNote("QRadar SIEM: Get QRadar Offense Events: {} events have successfully been queried for the last 7 days".format(len(results.get("events"))))
 
 
 ```

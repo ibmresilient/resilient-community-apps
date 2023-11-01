@@ -19,7 +19,7 @@
 `qradar_reference_table_queried_rows`
 
 ### Description
-An example workflow that takes in a Reference Table name, an inner key, an outer key and a value to delete for the table
+An example playbook that deletes a Reference Table Queried Row
 
 
 ---
@@ -63,16 +63,16 @@ note = u"""Outer key: {}
 Inner key: {}
 Entry: {}
 Reference table: {}
-QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
-                              results.inputs.qradar_reference_table_item_inner_key,
-                              results.inputs.qradar_reference_table_item_value, 
-                              results.inputs.qradar_reference_table_name,
+QRadar Server: {}""".format(results.get("inputs", {}).qradar_reference_table_item_outer_key,
+                              results.get("inputs", {}).qradar_reference_table_item_inner_key,
+                              results.get("inputs", {}).qradar_reference_table_item_value, 
+                              results.get("inputs", {}).qradar_reference_table_name,
                               row["qradar_server"])
-if results.success:
+if results.get("success"):
     incident.addNote(u"Successful delete\n{}".format(note))
     row['status'] = "deleted"
 else:
-    incident.addNote(u"Failure to delete item: {}\n{}".format(results.reason, note))
+    incident.addNote(u"Failure to delete item: {}\n{}".format(results.get("reason"), note))
 ```
 
 ---

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 from resilient_lib.ui import Datatable, Tab, Field, create_tab
 from resilient_circuits.app import AppArgumentParser
@@ -20,6 +20,7 @@ class QRadarSIEMTab(Tab):
     UUID = "781f26c5-1ae2-51c5-1f46-fc27a3fb5466"
     CONTAINS = [
         Field("qradar_id"),
+        Field("qradar_destination"),
         Datatable("qradar_offense_event"),
         Datatable("qradar_reference_set"),
         Datatable("qradar_reference_table_queried_rows"),

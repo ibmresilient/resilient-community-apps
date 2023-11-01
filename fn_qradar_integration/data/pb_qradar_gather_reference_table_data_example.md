@@ -58,22 +58,22 @@ inputs.qradar_label = row["qradar_server"]
 results = playbook.functions.results.qradar_refrence_table_get_table_data_result
 from datetime import datetime
 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
-if results.success:
+if results.get("success"):
   for outer_key, item in results.content.get('data',[]).items():
     for inner_key, inner_item in item.items():
       table_row = incident.addRow('qradar_reference_table_queried_rows')
       table_row['query_time'] = current_time
       table_row['qradar_server'] = row["qradar_server"]
-      table_row['table'] = results.inputs.qradar_reference_table_name
+      table_row['table'] = results.get("inputs", {}).qradar_reference_table_name
       table_row['outer_key'] = outer_key
       table_row['inner_key'] = inner_key
       
-      table_row['value'] = inner_item['value']
+      table_row['value'] = inner_item.get('value')
       table_row['status'] = 'active'
   num_data_gathered = len(results.content.get('data',[]).items()) * len(item.items())
   incident.addNote("{} Reference table data have been gathered".format(num_data_gathered))
 else:
-  incident.addNote("An error occurred getting the reference table data: {}".format(results.reason))
+  incident.addNote("An error occurred getting the reference table data: {}".format(results.get("reason")))
 ```
 
 ---
