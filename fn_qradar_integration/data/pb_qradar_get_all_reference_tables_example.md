@@ -62,7 +62,7 @@ if results.get("success"):
     for item in results.get("content"):
       item_row = incident.addRow("qradar_reference_table")
       item_row["query_time"] = current_time
-      item_row["qradar_server"] = results.get("inputs", {}).qradar_label
+      item_row["qradar_server"] = results.get("inputs", {}).get("qradar_label")
       item_row["reference_table"] = item.get("name")
       item_row["collection_id"] = item.get("collection_id")
       item_row["number_of_elements"] = item.get("number_of_elements")

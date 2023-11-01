@@ -19,7 +19,7 @@
 `artifact`
 
 ### Description
-Look for an item in QRadar reference set and add a note to the Incident
+Look for an item in QRadar reference set and add a note to the SOAR Incident
 
 
 ---
@@ -59,9 +59,9 @@ inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
 ```python
 results = playbook.functions.results.qradar_find_reference_set_item_result
 if results.get("found") == "True":
-  incident.addNote("Found {} in list: {} on QRadar server: {}.".format(artifact.value, results.inputs.get("qradar_reference_set_name"), results.inputs.get("qradar_label")))
+  incident.addNote("Found {} in list: {} on QRadar server: {}.".format(artifact.value, results.get("inputs", {}).get("qradar_reference_set_name"), results.get("inputs", {}).get("qradar_label")))
 else:
-  incident.addNote("{} not found in list: {} on QRadar server: {}.".format(artifact.value, results.inputs.get("qradar_reference_set_name"), results.inputs.get("qradar_label")))
+  incident.addNote("{} not found in list: {} on QRadar server: {}.".format(artifact.value, results.get("inputs", {}).get("qradar_reference_set_name"), results.get("inputs", {}).get("qradar_label")))
 ```
 
 ---

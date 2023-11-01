@@ -77,7 +77,7 @@ current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 for event in results.get("events"):
   qradar_event = incident.addRow("qradar_offense_event")
   qradar_event.query_time = current_time
-  qradar_event.qradar_server = results.inputs.get("qradar_label")
+  qradar_event.qradar_server = results.get("inputs", {}).get("qradar_label")
   qradar_event.start_time = event.get("StartTime")
   qradar_event.category = event.get("categoryname_category")
   qradar_event.log_source = event.get("logsourcename_logsourceid")

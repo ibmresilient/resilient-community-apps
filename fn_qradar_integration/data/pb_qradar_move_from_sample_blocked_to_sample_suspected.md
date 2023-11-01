@@ -78,9 +78,9 @@ inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
 results = playbook.functions.results.qradar_add_reference_set_item_result
 
 if results.get("status_code") == 200:
-  incident.addNote(u"Successfully added {} to {} on QRadar Server: {}".format(artifact.value, playbook.get("inputs", {}).qradar_reference_set_name, results.get("inputs", {}).qradar_label))
+  incident.addNote(u"Successfully added {} to {} on QRadar Server: {}".format(artifact.value, playbook.inputs.qradar_reference_set_name, results.get("inputs", {}).get("qradar_label")))
 else:
-  incident.addNote(u"Failed to add {} to {} on QRadar server: {}. Status code: {}, message: {}".format(artifact.value, playbook.get("inputs", {}).qradar_reference_set_name, results.get("inputs", {}).qradar_label, results.get("status_code"), results.get
+  incident.addNote(u"Failed to add {} to {} on QRadar server: {}. Status code: {}, message: {}".format(artifact.value, playbook.inputs.qradar_reference_set_name, results.get("inputs", {}).get("qradar_label"), results.get("status_code"), results.get
   ("message")))
   
 ```

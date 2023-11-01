@@ -63,11 +63,11 @@ note = u"""Outer key: {}
 Inner key: {}
 Entry: {}
 Reference table: {}
-QRadar Server: {}""".format(results.get("inputs", {}).qradar_reference_table_item_outer_key,
-                              results.get("inputs", {}).qradar_reference_table_item_inner_key,
-                              results.get("inputs", {}).qradar_reference_table_item_value, 
-                              results.get("inputs", {}).qradar_reference_table_name,
-                              results.get("inputs", {}).qradar_label)
+QRadar Server: {}""".format(results.get("inputs", {}).get("qradar_reference_table_item_outer_key"),
+                              results.get("inputs", {}).get("qradar_reference_table_item_inner_key"),
+                              results.get("inputs", {}).get("qradar_reference_table_item_value"), 
+                              results.get("inputs", {}).get("qradar_reference_table_name"),
+                              results.get("inputs", {}).get("qradar_label"))
 if results.get("success"):
     incident.addNote(u"Successful add\n{}".format(note))
 else:

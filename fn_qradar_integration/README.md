@@ -88,7 +88,7 @@
 -->
 **IBM QRadar SOAR Compnents for 'fn_qradar_integration'**
 
- ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
+ ![screenshot: main](./doc/screenshots/main.png) 
 
 fn_qradar_integration supports performing ariel search to retrieve data from QRadar. It also provide functions to find/add/delete reference set items.
 

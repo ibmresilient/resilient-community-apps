@@ -63,17 +63,15 @@ note = u"""Outer key: {}
 Inner key: {}
 Entry: {}
 Reference table: {}
-QRadar Server: {}""".format(results.get("inputs", {}).qradar_reference_table_item_outer_key,
-                              results.get("inputs", {}).qradar_reference_table_item_inner_key,
-                              results.get("inputs", {}).qradar_reference_table_item_value, 
-                              results.get("inputs", {}).qradar_reference_table_name,
+QRadar Server: {}""".format(results.get("inputs", {}).get("qradar_reference_table_item_outer_key"),
+                              results.get("inputs", {}).get("qradar_reference_table_item_inner_key"),
+                              results.get("inputs", {}).get("qradar_reference_table_item_value"), 
+                              results.get("inputs", {}).get("qradar_reference_table_name"),
                               row["qradar_server"])
 if results.get("success"):
     incident.addNote(u"Successful added\n{}".format(note))
-    #row.number_of_elements = str(results["content"]["content"]["number_of_elements"])
     row.number_of_elements = str(results.get("content").get("content").get("number_of_elements"))
 else:
-    #incident.addNote(u"Failure to add item: {}\n{}".format(results['reason'], note))
     incident.addNote(u"Failure to add item: {}\n{}".format(results.get('reason'), note))
 ```
 
