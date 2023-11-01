@@ -26,8 +26,8 @@ inputs.close_fields = "{}".format(iu_close_fields)
 
 ### Post-Processing Script
 ```python
-note_text = "Result from Example: Close Incident on Incident {0}: <strong>{1}</strong>".format(results.inputs['incident_id'], \
-"success" if results.success else "failure.<br>Reason: {}".format(results.reason))
+note_text = "Result from Example: Close Incident on Incident {0}: <strong>{1}</strong>".format(results.get("inputs", {}).get("incident_id"), \
+"success" if results.get("success") else "failure.<br>Reason: {}".format(results.get("reason"))
 incident.addNote(helper.createRichText(note_text))
 ```
 
