@@ -51,7 +51,11 @@ class TestInternetUtilitiesCallRestApi:
             "rest_api_url": rest_url,
             "rest_api_headers": {'content': rest_headers},
             "rest_api_body": {'content': rest_body },
-            "rest_api_verify": rest_verify
+            "rest_query_params" : None,
+            "rest_retry_tries" : None,
+            "rest_retry_delay" : None,
+            "rest_retry_backoff" : None,
+            "rest_api_verify": rest_verify,
         }
         results = call_rest_api_function(circuits_app, function_params)
         results = results.get('content').get("json").get("json")

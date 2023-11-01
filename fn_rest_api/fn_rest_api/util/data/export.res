@@ -3,7 +3,8 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1698353133304,
+  "case_matching_profiles": [],
+  "export_date": 1698843289427,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -17,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/client_auth_key",
       "hide_notification": false,
-      "id": 922,
+      "id": 301,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -28,32 +29,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "client_auth_key",
       "tooltip": "Client authentication certificate Private key contents",
@@ -71,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/jwt_token",
       "hide_notification": false,
-      "id": 923,
+      "id": 302,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -82,32 +58,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "jwt_token",
       "tooltip": "JWT token provided by the endpoint",
@@ -125,7 +76,7 @@
       "deprecated": false,
       "export_key": "__function/jwt_algorithm",
       "hide_notification": false,
-      "id": 924,
+      "id": 303,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -136,32 +87,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "jwt_algorithm",
       "tooltip": "Algorithm required to encrypt jwt token",
@@ -177,9 +103,38 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/rest_retry_tries",
+      "hide_notification": false,
+      "id": 326,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "rest_retry_tries",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "3",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "rest_retry_tries",
+      "tooltip": "The maximum number of attempts. Default: `1` (no retry). Use `-1` for unlimited retries.  Matches `tries` parameter of `retry.api.retry_call https://github.com/eSAMTrade/retry#retry_call",
+      "type_id": 11,
+      "uuid": "97a36ebb-5038-4ba1-8fad-a44cf8b55114",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/rest_api_method",
       "hide_notification": false,
-      "id": 925,
+      "id": 304,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -190,32 +145,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "rest_api_method",
       "tooltip": "",
@@ -229,7 +159,7 @@
           "label": "GET",
           "properties": null,
           "uuid": "dbd52017-9fb5-430f-9791-90a86e0f8a7b",
-          "value": 252
+          "value": 102
         },
         {
           "default": false,
@@ -238,7 +168,7 @@
           "label": "HEAD",
           "properties": null,
           "uuid": "b8cc8517-0d5f-4cd9-958e-30fe0d2822ec",
-          "value": 253
+          "value": 103
         },
         {
           "default": false,
@@ -247,7 +177,7 @@
           "label": "POST",
           "properties": null,
           "uuid": "b4627fb2-de27-4776-b6e5-7cefb3823fad",
-          "value": 254
+          "value": 104
         },
         {
           "default": false,
@@ -256,7 +186,7 @@
           "label": "PUT",
           "properties": null,
           "uuid": "34e698d5-d533-4982-99ff-decc295efc77",
-          "value": 255
+          "value": 105
         },
         {
           "default": false,
@@ -265,7 +195,7 @@
           "label": "DELETE",
           "properties": null,
           "uuid": "9f0463a3-c12c-40a1-9add-4295566daea1",
-          "value": 256
+          "value": 106
         },
         {
           "default": false,
@@ -274,7 +204,7 @@
           "label": "OPTIONS",
           "properties": null,
           "uuid": "e0b8ac0a-1f29-471b-9fca-3b6b7e5031ba",
-          "value": 257
+          "value": 107
         },
         {
           "default": false,
@@ -283,7 +213,7 @@
           "label": "PATCH",
           "properties": null,
           "uuid": "e6857ebe-27f1-48bf-84b2-66481548306c",
-          "value": 258
+          "value": 108
         }
       ]
     },
@@ -297,7 +227,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_timeout",
       "hide_notification": false,
-      "id": 926,
+      "id": 305,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -308,32 +238,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "rest_api_timeout",
       "tooltip": "",
@@ -351,7 +256,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_access_token",
       "hide_notification": false,
-      "id": 927,
+      "id": 306,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -362,32 +267,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "oauth_access_token",
       "tooltip": "The access token issued by the authorization server",
@@ -405,7 +285,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_cookies",
       "hide_notification": false,
-      "id": 928,
+      "id": 307,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -416,32 +296,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [
         {
           "id": 1,
@@ -469,7 +324,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_allowed_status_codes",
       "hide_notification": false,
-      "id": 929,
+      "id": 308,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -480,37 +335,41 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "rest_api_allowed_status_codes",
       "tooltip": "Comma separated list",
       "type_id": 11,
       "uuid": "d380e625-4828-4726-9f85-9d588aeeb159",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
+      "export_key": "__function/rest_api_query_parameters",
+      "hide_notification": false,
+      "id": 329,
+      "input_type": "text",
+      "internal": false,
+      "is_tracked": false,
+      "name": "rest_api_query_parameters",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "key1:value\\\\nkey2:value",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "rest_api_query_parameters",
+      "tooltip": "Parameters used for GET API calls added to the URL",
+      "type_id": 11,
+      "uuid": "d56950d0-a87d-4680-86a1-9b87ab745cb6",
       "values": []
     },
     {
@@ -523,7 +382,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_verify",
       "hide_notification": false,
-      "id": 930,
+      "id": 309,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -535,32 +394,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "rest_api_verify",
       "tooltip": "Verify SSL certificate",
@@ -578,7 +412,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_code",
       "hide_notification": false,
-      "id": 931,
+      "id": 310,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -589,32 +423,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "oauth_code",
       "tooltip": "OAuth authentication code ",
@@ -632,7 +441,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_headers",
       "hide_notification": false,
-      "id": 932,
+      "id": 311,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -643,32 +452,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "rest_api_headers",
       "tooltip": "",
@@ -686,7 +470,7 @@
       "deprecated": false,
       "export_key": "__function/client_auth_cert",
       "hide_notification": false,
-      "id": 933,
+      "id": 312,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -697,32 +481,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "client_auth_cert",
       "tooltip": "Client authentication certificate contents",
@@ -740,7 +499,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_client_secret",
       "hide_notification": false,
-      "id": 934,
+      "id": 313,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -751,32 +510,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "oauth_client_secret",
       "tooltip": "Client secret value",
@@ -792,9 +526,38 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/rest_retry_delay",
+      "hide_notification": false,
+      "id": 327,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "rest_retry_delay",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "3",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "rest_retry_delay",
+      "tooltip": "Initial delay between attempts. Default: `1`. Matches `delay` parameter of retry.api.retry_call https://github.com/eSAMTrade/retry#retry_call",
+      "type_id": 11,
+      "uuid": "1c8619c2-2c39-4793-8df8-bea490f9c77e",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/jwt_key",
       "hide_notification": false,
-      "id": 935,
+      "id": 314,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -805,32 +568,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "jwt_key",
       "tooltip": "JWT key required to encrypt token",
@@ -848,7 +586,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_client_id",
       "hide_notification": false,
-      "id": 936,
+      "id": 315,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -859,32 +597,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "oauth_client_id",
       "tooltip": "The client identifier issued to the client during the registration process",
@@ -902,7 +615,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_refresh_token",
       "hide_notification": false,
-      "id": 937,
+      "id": 316,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -913,32 +626,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "oauth_refresh_token",
       "tooltip": "Token required to refresh the access token",
@@ -954,90 +642,23 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/rest_api_query_parameters",
-      "hide_notification": false,
-      "id": 1330,
-      "input_type": "textarea",
-      "internal": false,
-      "is_tracked": false,
-      "name": "rest_api_query_parameters",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "key1:value\\nkey2=value",
-      "prefix": null,
-      "read_only": false,
-      "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        }
-      ],
-      "templates": [],
-      "text": "rest_api_query_parameters",
-      "tooltip": "Parameters used for GET API calls added to the URL",
-      "type_id": 11,
-      "uuid": "2fbdea82-01ae-4b81-94f8-10df3c32a8a6",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
       "export_key": "__function/rest_api_body",
       "hide_notification": false,
-      "id": 938,
+      "id": 317,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
       "name": "rest_api_body",
       "operation_perms": {},
       "operations": [],
-      "placeholder": "key1:value\\nkey2=value",
+      "placeholder": "",
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "rest_api_body",
-      "tooltip": "Parameters used for PUT, POST and PATCH API calls",
+      "tooltip": "",
       "type_id": 11,
       "uuid": "30a4cbd0-09bd-488e-bde6-f1765a14aa8d",
       "values": []
@@ -1052,7 +673,7 @@
       "deprecated": false,
       "export_key": "__function/client_auth_pem",
       "hide_notification": false,
-      "id": 939,
+      "id": 318,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1063,32 +684,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "client_auth_pem",
       "tooltip": "Client authentication certficate contents",
@@ -1106,7 +702,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_token_type",
       "hide_notification": false,
-      "id": 940,
+      "id": 319,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1117,32 +713,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "oauth_token_type",
       "tooltip": "Type of token returned by the Authentication server, which is then used in every REST request being made",
@@ -1160,7 +731,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_redirect_uri",
       "hide_notification": false,
-      "id": 941,
+      "id": 320,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1171,32 +742,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "oauth_redirect_uri",
       "tooltip": "After completing its interaction with the resource owner, the    authorization server directs the resource owner\u0027s user-agent back to  the client",
@@ -1214,7 +760,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_token_url",
       "hide_notification": false,
-      "id": 942,
+      "id": 321,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1225,32 +771,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "oauth_token_url",
       "tooltip": "",
@@ -1268,7 +789,7 @@
       "deprecated": false,
       "export_key": "__function/oauth_scope",
       "hide_notification": false,
-      "id": 943,
+      "id": 322,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1279,32 +800,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "oauth_scope",
       "tooltip": "Strings provided to APIs, so that they know whether to grant access to the type of data and operation requested",
@@ -1320,9 +816,38 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/rest_retry_backoff",
+      "hide_notification": false,
+      "id": 328,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "rest_retry_backoff",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "3",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "rest_retry_backoff",
+      "tooltip": "Multiplier applied to delay between attempts. Default: `1` (no backoff). Matches `backoff` parameter of retry.api.retry_call https://github.com/eSAMTrade/retry#retry_call",
+      "type_id": 11,
+      "uuid": "6d298e96-99ea-4b58-8a77-16adfa8fadad",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/jwt_payload",
       "hide_notification": false,
-      "id": 944,
+      "id": 323,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1333,32 +858,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "jwt_payload",
       "tooltip": "",
@@ -1376,7 +876,7 @@
       "deprecated": false,
       "export_key": "__function/jwt_headers",
       "hide_notification": false,
-      "id": 945,
+      "id": 324,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1387,32 +887,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "jwt_headers",
       "tooltip": "",
@@ -1430,7 +905,7 @@
       "deprecated": false,
       "export_key": "__function/rest_api_url",
       "hide_notification": false,
-      "id": 946,
+      "id": 325,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1441,32 +916,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "rest_api_url",
       "tooltip": "",
@@ -1488,13 +938,7 @@
   ],
   "functions": [
     {
-      "created_date": 1695828366150,
-      "creator": {
-        "display_name": "Resilient Sysadmin",
-        "id": 8,
-        "name": "a@example.com",
-        "type": "user"
-      },
+      "created_date": 1697191029742,
       "description": {
         "content": "This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE, PATCH and OPTIONS.\n\nThe function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.",
         "format": "text"
@@ -1502,45 +946,24 @@
       "destination_handle": "fn_rest_api",
       "display_name": "Call REST API",
       "export_key": "rest_api",
-      "id": 60,
+      "id": 2,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
-        "id": 8,
-        "name": "a@example.com",
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1698351271076,
+      "last_modified_time": 1698843180613,
       "name": "rest_api",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"ok\": true, \"url\": \"https://postman-echo.com/get\", \"status_code\": 200, \"reason\": \"OK\", \"cookies\": {\"sails.sid\": \"s%3AC3qSgEkPLbzV-xtRnnqe-p7zt80yQSTm.SJf3XOyooMFo0wQ8wiWfCzlgieNUBQGRNtSo%2BRSXw54\"}, \"headers\": {\"Date\": \"Thu, 02 Mar 2023 23:47:12 GMT\", \"Content-Type\": \"application/json; charset=utf-8\", \"Content-Length\": \"486\", \"Connection\": \"close\", \"ETag\": \"W/\\\"1e6-/Slr9JmNLSHXgTt5sCvAphvtWyI\\\"\", \"set-cookie\": \"sails.sid=s%3AC3qSgEkPLbzV-xtRnnqe-p7zt80yQSTm.SJf3XOyooMFo0wQ8wiWfCzlgieNUBQGRNtSo%2BRSXw54; Path=/; HttpOnly\"}, \"elapsed\": 711, \"apparent_encoding\": \"ascii\", \"text\": \"{\\n  \\\"args\\\": {\\n    \\\"key\\\": \\\"8.8.8.8\\\"\\n  },\\n  \\\"headers\\\": {\\n    \\\"x-forwarded-proto\\\": \\\"https\\\",\\n    \\\"x-forwarded-port\\\": \\\"443\\\",\\n    \\\"host\\\": \\\"postman-echo.com\\\",\\n    \\\"x-amzn-trace-id\\\": \\\"Root=1-64013580-54708cb41d08344e2a8af58b\\\",\\n    \\\"content-length\\\": \\\"18\\\",\\n    \\\"user-agent\\\": \\\"python-requests/2.28.1\\\",\\n    \\\"accept-encoding\\\": \\\"gzip, deflate\\\",\\n    \\\"accept\\\": \\\"*/*\\\",\\n    \\\"content-type\\\": \\\"application/json\\\",\\n    \\\"x-frooble\\\": \\\"Baz\\\",\\n    \\\"authorization\\\": \\\"\\\"\\n  },\\n  \\\"url\\\": \\\"https://postman-echo.com/get\\\"\\n}\", \"json\": {\"args\": {\"key\": \"8.8.8.8\"}, \"headers\": {\"x-forwarded-proto\": \"https\", \"x-forwarded-port\": \"443\", \"host\": \"postman-echo.com\", \"x-amzn-trace-id\": \"Root=1-64013580-54708cb41d08344e2a8af58b\", \"content-length\": \"18\", \"user-agent\": \"python-requests/2.28.1\", \"accept-encoding\": \"gzip, deflate\", \"accept\": \"*/*\", \"content-type\": \"application/json\", \"x-frooble\": \"Baz\", \"authorization\": \"\"}, \"url\": \"https://postman-echo.com/get\"}, \"links\": {}}, \"raw\": null, \"inputs\": {\"rest_api_headers\": \"Content-Type: application/json\\nX-Frooble: Baz\\nAuthorization: {{auth_header}}\", \"rest_api_method\": \"GET\", \"rest_api_verify\": true, \"rest_api_allowed_status_codes\": \" 305,404,500\", \"rest_api_url\": \"https://postman-echo.com/get\", \"rest_api_body\": \"{\\\"key\\\": \\\"8.8.8.8\\\"}\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-rest-api\", \"package_version\": \"1.0.0\", \"host\": \"My Host\", \"execution_time_ms\": 731, \"timestamp\": \"2023-03-02 18:47:11\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"ok\": {\"type\": \"boolean\"}, \"url\": {\"type\": \"string\"}, \"status_code\": {\"type\": \"integer\"}, \"reason\": {\"type\": \"string\"}, \"cookies\": {\"type\": \"object\", \"properties\": {\"sails.sid\": {\"type\": \"string\"}}}, \"headers\": {\"type\": \"object\", \"properties\": {\"Date\": {\"type\": \"string\"}, \"Content-Type\": {\"type\": \"string\"}, \"Content-Length\": {\"type\": \"string\"}, \"Connection\": {\"type\": \"string\"}, \"ETag\": {\"type\": \"string\"}, \"set-cookie\": {\"type\": \"string\"}}}, \"elapsed\": {\"type\": \"integer\"}, \"apparent_encoding\": {\"type\": \"string\"}, \"text\": {\"type\": \"string\"}, \"json\": {\"type\": \"object\", \"properties\": {\"args\": {\"type\": \"object\", \"properties\": {\"key\": {\"type\": \"string\"}}}, \"headers\": {\"type\": \"object\", \"properties\": {\"x-forwarded-proto\": {\"type\": \"string\"}, \"x-forwarded-port\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"x-amzn-trace-id\": {\"type\": \"string\"}, \"content-length\": {\"type\": \"string\"}, \"user-agent\": {\"type\": \"string\"}, \"accept-encoding\": {\"type\": \"string\"}, \"accept\": {\"type\": \"string\"}, \"content-type\": {\"type\": \"string\"}, \"x-frooble\": {\"type\": \"string\"}, \"authorization\": {\"type\": \"string\"}}}, \"url\": {\"type\": \"string\"}}}, \"links\": {\"type\": \"object\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"rest_api_headers\": {\"type\": \"string\"}, \"rest_api_method\": {\"type\": \"string\"}, \"rest_api_verify\": {\"type\": \"boolean\"}, \"rest_api_allowed_status_codes\": {\"type\": \"string\"}, \"rest_api_url\": {\"type\": \"string\"}, \"rest_api_body\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
+      "tags": [],
       "uuid": "5f728e3d-a4a0-4c6f-9f09-04468edc4d10",
-      "version": 5,
+      "version": 6,
       "view_items": [
         {
           "content": "984922d9-24f1-444f-8967-8199742c8bf9",
@@ -1583,14 +1006,6 @@
           "step_label": null
         },
         {
-          "content": "2fbdea82-01ae-4b81-94f8-10df3c32a8a6",
-          "element": "field_uuid",
-          "field_type": "__function",
-          "show_if": null,
-          "show_link_header": false,
-          "step_label": null
-        },
-        {
           "content": "d978e98d-f0a9-407d-b797-e18f83d43e24",
           "element": "field_uuid",
           "field_type": "__function",
@@ -1608,6 +1023,38 @@
         },
         {
           "content": "d380e625-4828-4726-9f85-9d588aeeb159",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "d56950d0-a87d-4680-86a1-9b87ab745cb6",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "97a36ebb-5038-4ba1-8fad-a44cf8b55114",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "1c8619c2-2c39-4793-8df8-bea490f9c77e",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
+        },
+        {
+          "content": "6d298e96-99ea-4b58-8a77-16adfa8fadad",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1756,13 +1203,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 17,
+  "id": 7,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1698353131913,
+      "create_date": 1698843287176,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1771,70 +1218,43 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1698353131913,
+      "update_date": 1698843287176,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
-  "industries": null,
   "layouts": [],
   "locale": null,
   "message_destinations": [
     {
       "api_keys": [
-        "424df8ff-f1a7-4abf-891f-a66953ac0ff1"
+        "1bd54507-2bd2-415b-983b-3a15be3ce4ad",
+        "26d6dc0a-f920-4abe-8f06-a815b9ca1416"
       ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_rest_api",
       "name": "fn_rest_api",
       "programmatic_name": "fn_rest_api",
-      "tags": [
-        {
-          "tag_handle": "fn_rest_api",
-          "value": null
-        },
-        {
-          "tag_handle": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_22f6cf87_b7ac_4a52_b903_dce0c3159cd1",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_43598fbe_0c11_47c8_9737_1e852c9dade7",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_b0bc1e1e_485f_4ed0_bf67_85e199bd41f8",
-          "value": "Playbook Tag"
-        },
-        {
-          "tag_handle": "playbook_ce85838e_78ab_4d6e_895a_70ff545a40a7",
-          "value": "Playbook Tag"
-        }
-      ],
-      "users": [
-        "a@example.com"
-      ],
+      "tags": [],
+      "users": [],
       "uuid": "f48d3cce-8d24-4afe-a79f-28df9c4c5b19"
     }
   ],
   "notifications": null,
-  "overrides": [],
+  "overrides": null,
   "phases": [],
   "playbooks": [
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\" isExecutable=\"true\" name=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0c2h19h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Call REST API\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5f728e3d-a4a0-4c6f-9f09-04468edc4d10\"\u003e{\"inputs\":{\"d978e98d-f0a9-407d-b797-e18f83d43e24\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"984922d9-24f1-444f-8967-8199742c8bf9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"dbd52017-9fb5-430f-9791-90a86e0f8a7b\"}},\"7d537dd9-c07d-4bb8-8135-e09eb4fe7896\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"db425783-b537-4b32-bd14-0aa247524857\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"c999b7b4-0638-4979-9676-043ea8550f52\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"30a4cbd0-09bd-488e-bde6-f1765a14aa8d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"a1f12637-495d-4de6-a332-130a497bda5c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d380e625-4828-4726-9f85-9d588aeeb159\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# ======================================================================================================================== #\\n#                                                    ===============                                                       #\\n#                                                     CALL REST API                                                        #\\n#                                                    ===============                                                       #\\n# ======================================================================================================================== #\\n\\n# This is a tool that can be used in the field of API (Application Programming Interface) development and testing. It\\n# provides a highly customizable interface for making HTTP requests, sending and receiving data, and testing APIs.\\n# With this, developers can easily create and manage API requests using a variety of HTTP methods such as GET, POST, PUT,\\n# DELETE, etc. Users can also specify request headers, parameters, and body content for different types of requests.\\n# It also supports various authentication methods, including basic authentication, OAuth, API keys, and client side \\n# authentication.\\n\\nmethod  = \\\"GET\\\"\\n\\nurl     = \\\"\\\"\\n\\nheader  = None\\n\\nbody    = None\\n\\ncookie  = None\\n\\nverify  = False\\n\\ntimeout = 60\\n\\nallowed_status_code = \\\"305, 400, 404, 500\\\"\\n\\n# Endpoint url\\ninputs.rest_api_url     = url\\n\\n# Request headers used for Authorization\\ninputs.rest_api_headers = header if header else None\\n\\n# Cookies for request\\ninputs.rest_api_cookies = cookie if cookie else None\\n\\n# Request body\\ninputs.rest_api_body    = body if body else None\\n\\n# Indicates whether to verify SSL certificates (boolean).\\ninputs.rest_api_verify  = verify if verify not in [None, \u0027\u0027] else True\\n\\n# Request timeout\\ninputs.rest_api_timeout = timeout if timeout else 600\\n\\n# Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default\\ninputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else \\\"200\\\"\\n\\n# REST methods: \\\"GET\\\", \\\"HEAD\\\", \\\"POST\\\", \\\"PUT\\\", \\\"DELETE\\\", \\\"OPTIONS\\\" and \\\"PATCH\\\"\\ninputs.rest_api_method  = method if method and method in [\\\"GET\\\", \\\"HEAD\\\", \\\"POST\\\", \\\"PUT\\\", \\\"DELETE\\\", \\\"OPTIONS\\\", \\\"PATCH\\\"] else \\\"GET\\\"\\n\\n\\n#                                                 =====================\\n#                                                  ALLOWED_STATUS_CODE \\n#                                                 =====================\\n\\n\\n# Any status code below 300 is allowed by default. If you specify codes above 300, they are\\n# exempted from raising an exception and thereby returns the endpoint response. Multiple\\n# status codes can be specified as a string in a command separated fashion.\\n#\\n#    Example:\\n#    --------\\n#     inputs.rest_api_allowed_status_codes = \\\"305, 400, 404, 500\\\"\\n\\n\\n#                                                       =========\\n#                                                        SECRETS\\n#                                                       =========\\n\\n# For sensitive information that may be included in the rest_header, rest_url, rest_body, or \\n# rest_cookies, you can substitute values from the app.conf. To do so simply create a Key\\n# and a value pair in app.conf and then directly reference the key here using\\n# double-curly brace.\\n#\\n#    Example:\\n#    --------\\n#      headers = \\\"\\\"\\\"\\n#      Content-Type: application/json\\n#      X-Frooble: Baz\\n#      Authorization: {{auth_header}}\\n#      \\\"\\\"\\\"\\n\\n#                                            ==============================                                                     \\n#                                             HEADER AND BODY INPUT FORMAT                                                      \\n#                                            ==============================                                                     \\n\\n# rest_api_url, rest_api_method and rest_api_verify are mandatory fields.\\n# rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.\\n\\n# 1. New-line separated (Legacy)\\n#    ---------------------------\\n#\\n#    This format allows for specifying inputs as key-value pairs, separated\\n#    by a new line. It let\u0027s us create quick and easy inputs that is properly\\n#    formatted for the request. The primary purpose of this format is to retain\\n#    backwards compatibility.\\n#\\n#    Note: This format does not support complex data structures such as lists\\n#          or nested Key-value pairs.\\n#\\n#    Example:\\n#    -------- \\n#      body = \\\"\\\"\\\"\\n#      name : user1\\n#      password : p@ssword1\\n#      role : admin\\n#      \\\"\\\"\\\"             \\n# \\n#      headers = \\\"\\\"\\\"\\n#      Content-Type: application/json\\n#      X-Frooble: Baz\\n#      Authorization: {{auth_header}}\\n\\n# 2. JSON format:\\n#    ------------\\n#\\n#    Standard json file format. Supports complex data structures such as lists\\n#    or nested Key-value pairs.\\n#\\n#    Example:\\n#    --------\\n#      body = \\\"\\\"\\\"\\n#      \\\"name\\\" : \\\"user1\\\",\\n#      \\\"password\\\" : \\\"p@ssword1\\\",\\n#      \\\"role\\\" : \\\"admin\\\",\\n#      \\\"content\\\" : { \\\"site_url\\\" : \\\"www.example.com\\\", \\\"users\\\" : [\\\"user1\\\", \\\"user2\\\"] }\\n#      \\\"\\\"\\\"\\n\\n#    Hint:\\n#\\n#    An easier way to feed inputs to the above mentioned fields would be using\\n#    python dictionaries. While the inputs don\u0027t directly support dict, the in-built \\n#    json package can be used to convert a python dict to json string.\\n#\\n#    Example:\\n#    --------\\n#      import json\\n#     \\n#      body = {\\n#       \\\"name\\\"     : \\\"user1\\\",\\n#       \\\"password\\\" : \\\"p@ssword1\\\",\\n#       \\\"role\\\"     : \\\"admin\\\",\\n#       \\\"content\\\"  : { \\n#          \\\"site_url\\\" : \\\"www.example.com\\\",\\n#          \\\"users\\\"    : [\\\"user1\\\", \\\"user2\\\"]\\n#          }\\n#      }\\n#\\n#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string\\n\\n\\n#                                                     =============\\n#                                                      REUSABILITY\\n#                                                     =============\\n\\n# The function can be reused to make multiple requests to an endpoint or even access \\n# multiple endpoints. This can be achieved by simply modifying the pre-processing script\\n# as per the request and the endpoint.\\n\\n\\n\\n\\n# ======================================================================================================================== #\\n#                                                    ================                                                      #\\n#                                                     AUTHENTICATION                                                       #\\n#                                                    ================                                                      #\\n# ======================================================================================================================== #\\n\\n# The Call REST API function offers support for various authentication protocols that can be employed alongside the REST\\n# request. These authentication methods are entirely voluntary. If the endpoint does not necessitate any form of \\n# authentication, you can easily disregard this section, and the Call REST API function will not execute the authentication\\n# process.\\n\\n# Note: All input parameters should either be set to None or must be removed if not being used for authentication.\\n\\n#                                                     ============= \\n#                                                       OAuth 2.0   \\n#                                                     ============= \\n\\n# OAuth2 is an authorization framework that allows a user to grant limited access to their resources on a particular endpoint\\n# to QRadar SOAR without sharing their credentials (such as username and password). This process typically involves 2 different\\n# flows: Authorization and Authentication. It is expected for the user to have already performed the authorization flow and \\n# possesses all the necessary parameters for the Authentication flow. There are three methods available for performing the \\n# Authentication flow, as mentioned below.\\n\\n# Note:   The exact implementation details of OAuth2 can vary depending on the\\n#         authorization server and the API you are integrating with. Make sure to consult\\n#         the OAuth2 documentation specific to the service you are working with.\\n\\n# Method 1: Using CODE:\\n#\\n#     The authorization server redirects the user back to address specified on the \\n#     redirect URI with an authorization CODE. This CODE is a temporary token\\n#     that represents the user\u0027s authorization and usually can be used only once.\\n#     This function exchanges the authorization code for an ACCESS_TOKEN (and \\n#     possibly also a REFRESH_TOKEN depending on the endpoint). This requires making\\n#     a request to the authorization server\u0027s token endpoint, providing the \\n#     authorization CODE, client ID, client secret, token URL and redirect URI.\\n#\\n#     Note: These codes are generally one time use only.\\n\\n# Method 2: Using REFRESH_TOKEN\\n#\\n#     It is a credential that is used to obtain a new access token from the\\n#     authorization server when the original access token expires. It is an integral\\n#     part of the OAuth 2.0 protocol and enables long-lived access to protected \\n#     resources without requiring the user to repeatedly authenticate. This can \\n#     be used for prolonged authentication as using a REFRESH_TOKEN generally extends\\n#     the validity of the token. Client ID, Client secret, Redirect URI and token URL\\n#     might also have to be provided.\\n#\\n#     Note: These can be used more than once. The validity of the REFRESH_TOKEN is\\n#           generally extended on use, making it viable for long lived access.\\n\\n# Method 3: Using ACCESS_TOKEN\\n#\\n#      If an ACCESS_TOKEN is available, it can be directly used without having to \\n#      perform authentication. In order to use the ACCESS_TOKEN, all that is required\\n#      is the ACCESS_TOKEN \u0026amp; the TOKEN_TYPE. If the TOKEN_TYPE is not specified, the\\n#      DEFAULT_TOKEN_TYPE (bearer) is used.\\n\\n# URL for the Authorization server endpoint\\ninputs.oauth_token_url     = None\\n\\n# Identifies the client application\\ninputs.oauth_client_id     = None\\n\\n# Authenticates the client application (required for certain grant types)\\ninputs.oauth_client_secret = None\\n\\n# The redirect URI used during the authorization flow (for authorization code grant)\\ninputs.oauth_redirect_uri  = None\\n\\n# Set of permissions granted by the resource owner (user) to the client application\\ninputs.oauth_scope         = None\\n\\n# Provides information to the client application about the token\u0027s characteristics. Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer\\ninputs.oauth_token_type    = None\\n\\n# Resultant token of the Authentication process\\ninputs.oauth_access_token  = None\\n\\n# The authorization code received during the authorization flow (for authorization code grant)\\ninputs.oauth_code          = None\\n\\n# The refresh token used to obtain a new access token (for refresh token grant)\\ninputs.oauth_refresh_token = None\\n\\n\\n\\n#                                     ==============================================          \\n#                                      Client-side authentication with certificates\\n#                                     ==============================================        \\n\\n# Also known as mutual authentication or two-way SSL/TLS authentication, is a security mechanism used in web applications to\\n# verify the identities of both the client (user or device) and the server during the SSL/TLS handshake. In traditional SSL/TLS\\n# authentication, only the server is authenticated using a digital certificate issued by a trusted Certificate Authority (CA).\\n# However, with client-side authentication, the client also presents a digital certificate to the server for verification.\\n\\n# Note:   Client-side authentication with certificates provides an extra layer of\\n#         security by ensuring that the client is trusted and authenticated before\\n#         allowing access to sensitive resources or data. And so this can be used \\n#         in tandem with other authentication methods\\n\\n# 1. Client Authentication Certificate (client_auth_cert):\\n#\\n#    A client authentication certificate, also known as a client certificate,\\n#    is a digital certificate that is issued to the client (user or device) as\\n#    part of the mutual authentication process. It contains the client\u0027s public\\n#    key, identifying information (such as the client\u0027s name or ID), and is\\n#    signed by a trusted Certificate Authority (CA) or a self-signed certificate\\n#    if it is a closed system.\\n\\n# 2. Client Authentication Private Key (client_auth_key):\\n#\\n#    Private key is a cryptographic key that corresponds to the client\u0027s public\\n#    key in the client authentication certificate. The private key is securely\\n#    stored by the client and kept confidential. During the SSL/TLS handshake,\\n#    when the server sends a challenge to the client, the client uses its \\n#    private key to decrypt the challenge and generate a response. \\n#    The server then verifies this response to ensure that the client possesses\\n#    the corresponding private key and is thus authenticated.\\n\\n# 3. Client Authentication PEM (client_auth_pem): \\n# \\n#    This is simply the file format used to store both the client authentication\\n#    certificate and private key in a single PEM (Privacy-Enhanced Mail) file. PEM\\n#    files are a common format for storing cryptographic objects, such as\\n#    certificates and private keys, in a human-readable and ASCII-encoded format.\\n\\n# Note:   The client authentication certificate and private key are commonly given\\n#         together, whereas the PEM file is typically provided separately as an \\n#         independent file.\\n\\n\\n# INPUT FORMAT:\\n# -------------\\n#\\n#    The information within these certificates can be directly copied and pasted as\\n#    plain text into the appropriate certificate type, enclosed within quotation marks.\\n#    When making an API call, the application should automatically generate the\\n#    certificates using the pasted content and will securely discard them upon execution.\\n#    The contents of the certificate/key must always be unencrypted.\\n#\\n#    All three inputs (client_auth_cert, client_auth_key and client_auth_pem) follow the\\n#    same input format, as shown below.\\n#\\n#   inputs.client_auth_cert = \\\"\\\"\\\"\\n#       Bag Attributes\\n#           friendlyName: Authentication certificate\\n#           localKeyID: 78 94 0E 86 8D 30 EC D3 90 C8 6A 69 0F XX XX XX XX\\n#       Key Attributes: \u0026lt;No Attributes\u0026gt;\\n#       -----BEGIN CERTIFICATE-----\\n#       MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G\\n#       9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E\\n#       FEgCxB3Rdkim5Dfog6SCCFWIa4YAyv0rdgNLeRbQNTKyT14+inqWE+CLKvZ/T+56\\n#       OEdDSh0RPCg+UxjyCnkSiMce+/8RT+FXK41q1iQZAREJGEpZJIizVYB+aW2caCdq\\n#       PteGybdmFFeRIP/qbo0u17zc+Urj+MbuqYcEtx5YriF39+xRrReDbteSTnigQQP4\\n#       7zQHgQkU+U6MOuFTICtqVBuH9LX8qCJAG+92FLseh6I4qg0gd1ilyTG8PnhKuBRi\\n#       vkuz+SOtAgMBAAECggEAFkbnNQxamWGs6DpNT9j6V7412yZMZatVtaguR5CXJ9KU\\n#       0GTV1+9qwGIKnt4tZPOmQYh2h+8WUn2xHFVY5I7seX6mo8EXmCq2cT21PmI4QYCf\\n#       cNOKjYkEgwKBgAktKQorCoDvo5oiI89zpUhRHbJIlGWHuZFCCmEIQb4z+dUr72LL\\n#       uhZP0s22aRkqXMzDblFYrS0H3p7clhqEsoD9DO9WsiQK/2G85nR+IZd9U0bQ7z/t\\n#       7FOMkDbMPHkmkwAHlFC/UbS4XWJCZzrOoi6Zl/Cx4nFwvWyn7OtJfI/xAoGAdgat\\n#       PtFt97+wPDuSdVIbXjArSSq9F22J/cpG+wOMIGdgtNfPbNJFRG7Q/Lc/eDMPB5Nw\\n#       9O9YOnDFpqb8S+aE+4/Yfcxg4gGrKazXu+flYNhzpCTx3SpVawQCrUF3dE/2hbV+\\n#       FbGVFPaJziRDeH3UA1+1q0/bRg1trxqkZtGSGukCgYAA7SWvZ3lGJ42tiFzoH4F5\\n#       SfTZXQytCwyxXF6BIWTIXQBcCep5TrfOnYz4iEDwMdp4Qb/QhyjaUsIlo+JldquZ\\n#       k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ\\n#       Y20A9hExGKyHns4hW5KgvA==\\n#       -----END CERTIFICATE-----\\n#       \\\"\\\"\\\"\\n\\n# .CSR file contents to be pasted. Requires client_auth_key to function. Content must be unencrypted.\\ninputs.client_auth_cert = None\\n\\n# .KEY file contents to be pasted. To be provided with client_auth_cert. Content must be unencrypted.\\ninputs.client_auth_key  = None\\n\\n# .PEM file contents to be pasted. Standalone attribute, does not require the above two attribute. Content must be unencrypted.\\ninputs.client_auth_pem  = None\\n\\n#                                                         =======             \\n#                                                           JWT               \\n#                                                         =======             \\n\\n# JWT is also a supported form of authentication. The application has functionality builtin\\n# that allows for the creation, compilation, and manipulation of JWTs. It can accept several\\n# optional parameters to customize the authentication process.\\n\\n# JWT based authentication can be performed in 2 ways:\\n\\n# 1. This application can function with a predefined jwt token. A fully generated JWT \\n# token can be directly provided, and the application will automatically form the REST\\n# headers required for a request.\\n\\ninputs.jwt_token = None\\n\\n# 2. This application can also generate a jwt token. (Skip if you have already specified \\n# a jwt_token). The application can automatically compile a jwt token using certain \\n# parameters which can be provided in json string or line separated format (similar to\\n# REST body/header/cookies). These arguments are usually provided by the endpoint itself.\\n# The application should be able to create and sign a JWT and automatically incorporate it\\n# into the REST request.\\n\\n# headers of the JWT, contains metadata about the token.\\ninputs.jwt_headers   = None\\n\\n# Payload to be included in the token. \\ninputs.jwt_payload   = None\\n\\n# key used for signing the JWT.\\ninputs.jwt_key       = None\\n\\n# Encryption algorithm used for encoding the JWT. Defaults to \\\"HS256\\\" algorithm\\ninputs.jwt_algorithm = None\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"rest_response\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0c2h19h\u003c/incoming\u003e\u003coutgoing\u003eFlow_08s6wnz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0c2h19h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Process REST Response\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"aa0a4d4f-19f0-472b-8c0e-a4b271013452\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08s6wnz\u003c/incoming\u003e\u003coutgoing\u003eFlow_150opgb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_08s6wnz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_150opgb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_150opgb\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_150opgb\" id=\"Flow_150opgb_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08s6wnz\" id=\"Flow_08s6wnz_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c2h19h\" id=\"Flow_0c2h19h_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"429\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"454\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 8,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\" isExecutable=\"true\" name=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0c2h19h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Call REST API\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5f728e3d-a4a0-4c6f-9f09-04468edc4d10\"\u003e{\"inputs\":{\"d978e98d-f0a9-407d-b797-e18f83d43e24\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"984922d9-24f1-444f-8967-8199742c8bf9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"dbd52017-9fb5-430f-9791-90a86e0f8a7b\"}},\"7d537dd9-c07d-4bb8-8135-e09eb4fe7896\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"db425783-b537-4b32-bd14-0aa247524857\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"c999b7b4-0638-4979-9676-043ea8550f52\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"30a4cbd0-09bd-488e-bde6-f1765a14aa8d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_content_value\":{\"format\":\"unknown\",\"content\":\"\"}}},\"a1f12637-495d-4de6-a332-130a497bda5c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d380e625-4828-4726-9f85-9d588aeeb159\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# ======================================================================================================================== #\\n#                                                    ===============                                                       #\\n#                                                     CALL REST API                                                        #\\n#                                                    ===============                                                       #\\n# ======================================================================================================================== #\\n\\n# This is a tool that can be used in the field of API (Application Programming Interface) development and testing. It\\n# provides a highly customizable interface for making HTTP requests, sending and receiving data, and testing APIs.\\n# With this, developers can easily create and manage API requests using a variety of HTTP methods such as GET, POST, PUT,\\n# DELETE, etc. Users can also specify request headers, parameters, and body content for different types of requests.\\n# It also supports various authentication methods, including basic authentication, OAuth, API keys, and client side \\n# authentication.\\n\\nmethod  = \\\"GET\\\"\\n\\nurl     = \\\"\\\"\\n\\nheader  = None\\n\\nbody    = None\\n\\ncookie  = None\\n\\nverify  = False\\n\\ntimeout = 60\\n\\nquery_parameters = None\\n\\n# Endpoint url\\ninputs.rest_api_url     = url\\n\\n# Request headers used for Authorization\\ninputs.rest_api_headers = header if header else None\\n\\n# Cookies for request\\ninputs.rest_api_cookies = cookie if cookie else None\\n\\n# Request body\\ninputs.rest_api_body    = body if body else None\\n\\n# Indicates whether to verify SSL certificates (boolean).\\ninputs.rest_api_verify  = verify if verify not in [None, \u0027\u0027] else True\\n\\n# Request timeout\\ninputs.rest_api_timeout = timeout if timeout else 600\\n\\n# Parameters used for GET API calls added to the URL\\ninputs.rest_api_query_parameters = query_parameters\\n\\n# REST methods: \\\"GET\\\", \\\"HEAD\\\", \\\"POST\\\", \\\"PUT\\\", \\\"DELETE\\\", \\\"OPTIONS\\\" and \\\"PATCH\\\"\\ninputs.rest_api_method  = method if method and method in [\\\"GET\\\", \\\"HEAD\\\", \\\"POST\\\", \\\"PUT\\\", \\\"DELETE\\\", \\\"OPTIONS\\\", \\\"PATCH\\\"] else \\\"GET\\\"\\n\\n\\n#                                                 =====================\\n#                                                  ALLOWED_STATUS_CODE \\n#                                                 =====================\\n\\n# Any status code below 300 is allowed by default. If you specify codes above 300, they are\\n# exempted from raising an exception and thereby returns the endpoint response. Multiple\\n# status codes can be specified as a string in a command separated fashion.\\n#\\n#    Example:\\n#    --------\\n#     inputs.rest_api_allowed_status_codes = \\\"305, 400, 404, 500\\\"\\n\\nallowed_status_code = \\\"305, 400, 404, 500\\\"\\n\\n# Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default\\ninputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else \\\"200\\\"\\n\\n\\n#                                                       =======\\n#                                                        RETRY\\n#                                                       =======\\n\\n# This mechanism ensures the reliable exchange of data by automatically reattempting requests \\n# that have failed.\\n\\n# 1. RETRY_TRIES (rest_retry_tries):\\n#\\n#     This parameter defines the maximum number of retry attempts that will be made for a \\n#     failed request before the system ceases further retry efforts. If the maximum number\\n#     of retry attempts is reached and the request still fails, the system will cease further\\n#     retries and may trigger an error notification or follow an alternative error-handling\\n#     process. Default value : 1 (no retry)\\n\\n# 2. RETRY_DELAY (rest_retry_delay):\\n#\\n#     This parameter used to define the delay between retry attempts when a request fails and\\n#     the request retry mechanism is invoked. This parameter plays a crucial role in controlling\\n#     the timing of automatic retry attempts. Default value : 1 (no delay)\\n\\n# 3. RETRY_BACKOFF (rest_retry_backoff):\\n#\\n#     This parameter is used to specify the multiplier applied to delay between attempts.\\n#     Default: 1 (no backoff).\\n\\n# You can find more information on this in the link below. https://github.com/eSAMTrade/retry#retry_call \\n\\n\\n# The maximum number of request retry attempts. Default: 1 (no retry). Use -1 for unlimited retries.\\ninputs.rest_retry_tries   = 1\\n\\n# Initial delay between attempts. Default: 1\\ninputs.rest_retry_delay   = 1\\n\\n # Multiplier applied to delay between attempts. Default: 1 (no backoff)\\ninputs.rest_retry_backoff = 1\\n\\n\\n#                                                       =========\\n#                                                        SECRETS\\n#                                                       =========\\n\\n# For sensitive information that may be included in the rest_header, rest_url, rest_body, or \\n# rest_cookies, you can substitute values from the app.conf. To do so simply create a Key\\n# and a value pair in app.conf and then directly reference the key here using\\n# double-curly brace.\\n#\\n#    Example:\\n#    --------\\n#      headers = \\\"\\\"\\\"\\n#      Content-Type: application/json\\n#      X-Frooble: Baz\\n#      Authorization: {{auth_header}}\\n#      \\\"\\\"\\\"\\n\\n#                                            ==============================                                                     \\n#                                             HEADER AND BODY INPUT FORMAT                                                      \\n#                                            ==============================                                                     \\n\\n# rest_api_url, rest_api_method and rest_api_verify are mandatory fields.\\n# rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.\\n\\n# 1. New-line separated (Legacy)\\n#    ---------------------------\\n#\\n#    This format allows for specifying inputs as key-value pairs, separated\\n#    by a new line. It let\u0027s us create quick and easy inputs that is properly\\n#    formatted for the request. The primary purpose of this format is to retain\\n#    backwards compatibility.\\n#\\n#    Note: This format does not support complex data structures such as lists\\n#          or nested Key-value pairs.\\n#\\n#    Example:\\n#    -------- \\n#      body = \\\"\\\"\\\"\\n#      name : user1\\n#      password : p@ssword1\\n#      role : admin\\n#      \\\"\\\"\\\"             \\n# \\n#      headers = \\\"\\\"\\\"\\n#      Content-Type: application/json\\n#      X-Frooble: Baz\\n#      Authorization: {{auth_header}}\\n\\n# 2. JSON format:\\n#    ------------\\n#\\n#    Standard json file format. Supports complex data structures such as lists\\n#    or nested Key-value pairs.\\n#\\n#    Example:\\n#    --------\\n#      body = \\\"\\\"\\\"\\n#      \\\"name\\\" : \\\"user1\\\",\\n#      \\\"password\\\" : \\\"p@ssword1\\\",\\n#      \\\"role\\\" : \\\"admin\\\",\\n#      \\\"content\\\" : { \\\"site_url\\\" : \\\"www.example.com\\\", \\\"users\\\" : [\\\"user1\\\", \\\"user2\\\"] }\\n#      \\\"\\\"\\\"\\n\\n#    Hint:\\n#\\n#    An easier way to feed inputs to the above mentioned fields would be using\\n#    python dictionaries. While the inputs don\u0027t directly support dict, the in-built \\n#    json package can be used to convert a python dict to json string.\\n#\\n#    Example:\\n#    --------\\n#      import json\\n#     \\n#      body = {\\n#       \\\"name\\\"     : \\\"user1\\\",\\n#       \\\"password\\\" : \\\"p@ssword1\\\",\\n#       \\\"role\\\"     : \\\"admin\\\",\\n#       \\\"content\\\"  : { \\n#          \\\"site_url\\\" : \\\"www.example.com\\\",\\n#          \\\"users\\\"    : [\\\"user1\\\", \\\"user2\\\"]\\n#          }\\n#      }\\n#\\n#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string\\n\\n\\n#                                                     =============\\n#                                                      REUSABILITY\\n#                                                     =============\\n\\n# The function can be reused to make multiple requests to an endpoint or even access \\n# multiple endpoints. This can be achieved by simply modifying the pre-processing script\\n# as per the request and the endpoint.\\n\\n\\n\\n\\n# ======================================================================================================================== #\\n#                                                    ================                                                      #\\n#                                                     AUTHENTICATION                                                       #\\n#                                                    ================                                                      #\\n# ======================================================================================================================== #\\n\\n# The Call REST API function offers support for various authentication protocols that can be employed alongside the REST\\n# request. These authentication methods are entirely voluntary. If the endpoint does not necessitate any form of \\n# authentication, you can easily disregard this section, and the Call REST API function will not execute the authentication\\n# process.\\n\\n# Note: All input parameters should either be set to None or must be removed if not being used for authentication.\\n\\n#                                                     ============= \\n#                                                       OAuth 2.0   \\n#                                                     ============= \\n\\n# OAuth2 is an authorization framework that allows a user to grant limited access to their resources on a particular endpoint\\n# to QRadar SOAR without sharing their credentials (such as username and password). This process typically involves 2 different\\n# flows: Authorization and Authentication. It is expected for the user to have already performed the authorization flow and \\n# possesses all the necessary parameters for the Authentication flow. There are three methods available for performing the \\n# Authentication flow, as mentioned below.\\n\\n# Note:   The exact implementation details of OAuth2 can vary depending on the\\n#         authorization server and the API you are integrating with. Make sure to consult\\n#         the OAuth2 documentation specific to the service you are working with.\\n\\n# Method 1: Using CODE:\\n#\\n#     The authorization server redirects the user back to address specified on the \\n#     redirect URI with an authorization CODE. This CODE is a temporary token\\n#     that represents the user\u0027s authorization and usually can be used only once.\\n#     This function exchanges the authorization code for an ACCESS_TOKEN (and \\n#     possibly also a REFRESH_TOKEN depending on the endpoint). This requires making\\n#     a request to the authorization server\u0027s token endpoint, providing the \\n#     authorization CODE, client ID, client secret, token URL and redirect URI.\\n#\\n#     Note: These codes are generally one time use only.\\n\\n# Method 2: Using REFRESH_TOKEN\\n#\\n#     It is a credential that is used to obtain a new access token from the\\n#     authorization server when the original access token expires. It is an integral\\n#     part of the OAuth 2.0 protocol and enables long-lived access to protected \\n#     resources without requiring the user to repeatedly authenticate. This can \\n#     be used for prolonged authentication as using a REFRESH_TOKEN generally extends\\n#     the validity of the token. Client ID, Client secret, Redirect URI and token URL\\n#     might also have to be provided.\\n#\\n#     Note: These can be used more than once. The validity of the REFRESH_TOKEN is\\n#           generally extended on use, making it viable for long lived access.\\n\\n# Method 3: Using ACCESS_TOKEN\\n#\\n#      If an ACCESS_TOKEN is available, it can be directly used without having to \\n#      perform authentication. In order to use the ACCESS_TOKEN, all that is required\\n#      is the ACCESS_TOKEN \u0026amp; the TOKEN_TYPE. If the TOKEN_TYPE is not specified, the\\n#      DEFAULT_TOKEN_TYPE (bearer) is used.\\n\\n# URL for the Authorization server endpoint\\ninputs.oauth_token_url     = None\\n\\n# Identifies the client application\\ninputs.oauth_client_id     = None\\n\\n# Authenticates the client application (required for certain grant types)\\ninputs.oauth_client_secret = None\\n\\n# The redirect URI used during the authorization flow (for authorization code grant)\\ninputs.oauth_redirect_uri  = None\\n\\n# Set of permissions granted by the resource owner (user) to the client application\\ninputs.oauth_scope         = None\\n\\n# Provides information to the client application about the token\u0027s characteristics. Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer\\ninputs.oauth_token_type    = None\\n\\n# Resultant token of the Authentication process\\ninputs.oauth_access_token  = None\\n\\n# The authorization code received during the authorization flow (for authorization code grant)\\ninputs.oauth_code          = None\\n\\n# The refresh token used to obtain a new access token (for refresh token grant)\\ninputs.oauth_refresh_token = None\\n\\n\\n\\n#                                     ==============================================          \\n#                                      Client-side authentication with certificates\\n#                                     ==============================================        \\n\\n# Also known as mutual authentication or two-way SSL/TLS authentication, is a security mechanism used in web applications to\\n# verify the identities of both the client (user or device) and the server during the SSL/TLS handshake. In traditional SSL/TLS\\n# authentication, only the server is authenticated using a digital certificate issued by a trusted Certificate Authority (CA).\\n# However, with client-side authentication, the client also presents a digital certificate to the server for verification.\\n\\n# Note:   Client-side authentication with certificates provides an extra layer of\\n#         security by ensuring that the client is trusted and authenticated before\\n#         allowing access to sensitive resources or data. And so this can be used \\n#         in tandem with other authentication methods\\n\\n# 1. Client Authentication Certificate (client_auth_cert):\\n#\\n#    A client authentication certificate, also known as a client certificate,\\n#    is a digital certificate that is issued to the client (user or device) as\\n#    part of the mutual authentication process. It contains the client\u0027s public\\n#    key, identifying information (such as the client\u0027s name or ID), and is\\n#    signed by a trusted Certificate Authority (CA) or a self-signed certificate\\n#    if it is a closed system.\\n\\n# 2. Client Authentication Private Key (client_auth_key):\\n#\\n#    Private key is a cryptographic key that corresponds to the client\u0027s public\\n#    key in the client authentication certificate. The private key is securely\\n#    stored by the client and kept confidential. During the SSL/TLS handshake,\\n#    when the server sends a challenge to the client, the client uses its \\n#    private key to decrypt the challenge and generate a response. \\n#    The server then verifies this response to ensure that the client possesses\\n#    the corresponding private key and is thus authenticated.\\n\\n# 3. Client Authentication PEM (client_auth_pem): \\n# \\n#    This is simply the file format used to store both the client authentication\\n#    certificate and private key in a single PEM (Privacy-Enhanced Mail) file. PEM\\n#    files are a common format for storing cryptographic objects, such as\\n#    certificates and private keys, in a human-readable and ASCII-encoded format.\\n\\n# Note:   The client authentication certificate and private key are commonly given\\n#         together, whereas the PEM file is typically provided separately as an \\n#         independent file.\\n\\n\\n# INPUT FORMAT:\\n# -------------\\n#\\n#    The information within these certificates can be directly copied and pasted as\\n#    plain text into the appropriate certificate type, enclosed within quotation marks.\\n#    When making an API call, the application should automatically generate the\\n#    certificates using the pasted content and will securely discard them upon execution.\\n#    The contents of the certificate/key must always be unencrypted.\\n#\\n#    All three inputs (client_auth_cert, client_auth_key and client_auth_pem) follow the\\n#    same input format, as shown below.\\n#\\n#   inputs.client_auth_cert = \\\"\\\"\\\"\\n#       Bag Attributes\\n#           friendlyName: Authentication certificate\\n#           localKeyID: 78 94 0E 86 8D 30 EC D3 90 C8 6A 69 0F XX XX XX XX\\n#       Key Attributes: \u0026lt;No Attributes\u0026gt;\\n#       -----BEGIN CERTIFICATE-----\\n#       MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G\\n#       9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E\\n#       FEgCxB3Rdkim5Dfog6SCCFWIa4YAyv0rdgNLeRbQNTKyT14+inqWE+CLKvZ/T+56\\n#       OEdDSh0RPCg+UxjyCnkSiMce+/8RT+FXK41q1iQZAREJGEpZJIizVYB+aW2caCdq\\n#       PteGybdmFFeRIP/qbo0u17zc+Urj+MbuqYcEtx5YriF39+xRrReDbteSTnigQQP4\\n#       7zQHgQkU+U6MOuFTICtqVBuH9LX8qCJAG+92FLseh6I4qg0gd1ilyTG8PnhKuBRi\\n#       vkuz+SOtAgMBAAECggEAFkbnNQxamWGs6DpNT9j6V7412yZMZatVtaguR5CXJ9KU\\n#       0GTV1+9qwGIKnt4tZPOmQYh2h+8WUn2xHFVY5I7seX6mo8EXmCq2cT21PmI4QYCf\\n#       cNOKjYkEgwKBgAktKQorCoDvo5oiI89zpUhRHbJIlGWHuZFCCmEIQb4z+dUr72LL\\n#       uhZP0s22aRkqXMzDblFYrS0H3p7clhqEsoD9DO9WsiQK/2G85nR+IZd9U0bQ7z/t\\n#       7FOMkDbMPHkmkwAHlFC/UbS4XWJCZzrOoi6Zl/Cx4nFwvWyn7OtJfI/xAoGAdgat\\n#       PtFt97+wPDuSdVIbXjArSSq9F22J/cpG+wOMIGdgtNfPbNJFRG7Q/Lc/eDMPB5Nw\\n#       9O9YOnDFpqb8S+aE+4/Yfcxg4gGrKazXu+flYNhzpCTx3SpVawQCrUF3dE/2hbV+\\n#       FbGVFPaJziRDeH3UA1+1q0/bRg1trxqkZtGSGukCgYAA7SWvZ3lGJ42tiFzoH4F5\\n#       SfTZXQytCwyxXF6BIWTIXQBcCep5TrfOnYz4iEDwMdp4Qb/QhyjaUsIlo+JldquZ\\n#       k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ\\n#       Y20A9hExGKyHns4hW5KgvA==\\n#       -----END CERTIFICATE-----\\n#       \\\"\\\"\\\"\\n\\n# .CSR file contents to be pasted. Requires client_auth_key to function. Content must be unencrypted.\\ninputs.client_auth_cert = None\\n\\n# .KEY file contents to be pasted. To be provided with client_auth_cert. Content must be unencrypted.\\ninputs.client_auth_key  = None\\n\\n# .PEM file contents to be pasted. Standalone attribute, does not require the above two attribute. Content must be unencrypted.\\ninputs.client_auth_pem  = None\\n\\n#                                                         =======             \\n#                                                           JWT               \\n#                                                         =======             \\n\\n# JWT is also a supported form of authentication. The application has functionality builtin\\n# that allows for the creation, compilation, and manipulation of JWTs. It can accept several\\n# optional parameters to customize the authentication process.\\n\\n# JWT based authentication can be performed in 2 ways:\\n\\n# 1. This application can function with a predefined jwt token. A fully generated JWT \\n# token can be directly provided, and the application will automatically form the REST\\n# headers required for a request.\\n\\ninputs.jwt_token = None\\n\\n# 2. This application can also generate a jwt token. (Skip if you have already specified \\n# a jwt_token). The application can automatically compile a jwt token using certain \\n# parameters which can be provided in json string or line separated format (similar to\\n# REST body/header/cookies). These arguments are usually provided by the endpoint itself.\\n# The application should be able to create and sign a JWT and automatically incorporate it\\n# into the REST request.\\n\\n# headers of the JWT, contains metadata about the token.\\ninputs.jwt_headers   = None\\n\\n# Payload to be included in the token. \\ninputs.jwt_payload   = None\\n\\n# key used for signing the JWT.\\ninputs.jwt_key       = None\\n\\n# Encryption algorithm used for encoding the JWT. Defaults to \\\"HS256\\\" algorithm\\ninputs.jwt_algorithm = None\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"rest_response\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0c2h19h\u003c/incoming\u003e\u003coutgoing\u003eFlow_08s6wnz\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0c2h19h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Process REST Response\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"aa0a4d4f-19f0-472b-8c0e-a4b271013452\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08s6wnz\u003c/incoming\u003e\u003coutgoing\u003eFlow_150opgb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_08s6wnz\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_150opgb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_150opgb\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1570b076_796d_44b2_b916_10a69b2ffee8\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_150opgb\" id=\"Flow_150opgb_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08s6wnz\" id=\"Flow_08s6wnz_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c2h19h\" id=\"Flow_0c2h19h_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"166\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"429\" y=\"114\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"454\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1695828366623,
+      "create_date": 1698321457985,
       "creator_principal": {
-        "display_name": "Resilient Sysadmin",
-        "id": 8,
-        "name": "a@example.com",
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
@@ -1870,28 +1290,27 @@
         "uuid": "8beb9082-8e46-4a00-8840-2c1fb31c6ef6"
       },
       "has_logical_errors": false,
-      "id": 26,
+      "id": 7,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Resilient Sysadmin",
-        "id": 8,
-        "name": "a@example.com",
+        "display_name": "Admin User",
+        "id": 1,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1698351040341,
+      "last_modified_time": 1698843266408,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1695828366738,
-          "creator_id": "a@example.com",
+          "created_date": 1698321458033,
           "description": "Script to process Endpoint response.",
           "enabled": false,
           "export_key": "Process REST Response",
-          "id": 24,
+          "id": 8,
           "language": "python3",
-          "last_modified_by": "a@example.com",
-          "last_modified_time": 1695828366769,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1698321458042,
           "name": "Process REST Response",
           "object_type": "artifact",
           "playbook_handle": "rest_api_pb",
@@ -1913,7 +1332,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_1570b076-796d-44b2-b916-10a69b2ffee8",
-        "id": 33,
+        "id": 9,
         "name": "playbook_1570b076_796d_44b2_b916_10a69b2ffee8",
         "type": "playbook",
         "uuid": "c967a567-18ee-4258-a8f1-158662a2f30a"
@@ -1921,17 +1340,17 @@
       "tags": [],
       "type": "default",
       "uuid": "1570b076-796d-44b2-b916-10a69b2ffee8",
-      "version": 7
+      "version": 10
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 8131,
-    "major": 46,
-    "minor": 0,
-    "version": "46.0.8131"
+    "build_number": 16,
+    "major": 48,
+    "minor": 2,
+    "version": "48.2.16"
   },
   "tags": [],
   "task_order": [],

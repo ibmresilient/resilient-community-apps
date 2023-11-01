@@ -46,6 +46,10 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.rest_api_verify
             -   fn_inputs.rest_api_headers
 
+            -   fn_inputs.rest_retry_tries
+            -   fn_inputs.rest_retry_delay
+            -   fn_inputs.rest_retry_backoff
+
             -   fn_inputs.oauth_token_url
             -   fn_inputs.oauth_client_id
             -   fn_inputs.oauth_client_secret
@@ -81,7 +85,12 @@ class FunctionComponent(AppFunctionComponent):
             "headers" : self.get_textarea_param(getattr(fn_inputs, "rest_api_headers", None)), # textarea
             "cookies" : self.get_textarea_param(getattr(fn_inputs, "rest_api_cookies", None)), # textarea
             "body"    : self.get_textarea_param(getattr(fn_inputs, "rest_api_body", None)),    # textarea
-            "query_params": self.get_textarea_param(getattr(fn_inputs, "rest_api_query_parameters", None))}    # textarea
+            "query_params"  : self.get_textarea_param(getattr(fn_inputs, "rest_api_query_parameters", None))}  # textarea
+
+        retry_properties = {
+            "retry_tries"   : int(getattr(fn_inputs, "rest_retry_tries", 1)),      # integer
+            "retry_delay"   : int(getattr(fn_inputs, "rest_retry_delay", 1)),      # integer
+            "retry_backoff" : int(getattr(fn_inputs, "rest_retry_backoff", 1))}    # integer
 
         # Properties required for OAuth Authentication
         oauth_properties = {
@@ -162,6 +171,9 @@ class FunctionComponent(AppFunctionComponent):
                 rest_properties.get("cookies"),
                 rest_properties.get("body"),
                 rest_properties.get("query_params"),
+                retry_properties.get("retry_tries"),
+                retry_properties.get("retry_delay"),
+                retry_properties.get("retry_backoff"),
                 rest_verify,
                 rest_timeout,
                 rest_certificate,
@@ -186,6 +198,9 @@ class FunctionComponent(AppFunctionComponent):
                 rest_properties.get("cookies"),
                 rest_properties.get("body"),
                 rest_properties.get("query_params"),
+                retry_properties.get("retry_tries"),
+                retry_properties.get("retry_delay"),
+                retry_properties.get("retry_backoff"),
                 rest_verify,
                 rest_timeout,
                 rest_certificate,

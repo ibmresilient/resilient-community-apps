@@ -78,25 +78,31 @@ def build_dict(kv_string:str) -> dict:
 
 
 def make_rest_call(opts, options, rest_method : str,
-    rest_url  : str, headers_dict : dict, cookies_dict : dict,
-    body_dict : dict, query_params: dict, rest_verify : bool, rest_timeout : int,
-    rest_certificate : tuple=None, allowed_status_codes : list=[200]) -> requests.Response:
+    rest_url : str,  headers_dict : dict, cookies_dict : dict, body_dict  : dict,
+    query_params : dict, retry_tries  : int, retry_delay: int, retry_backoff: int,
+    rest_verify : bool, rest_timeout : int, rest_certificate : tuple=None,
+    allowed_status_codes : list=[200]) -> requests.Response:
     '''
     A wrapper function that makes the rest call and returns the response object. The callback function
     allows the response to be returned if the status code is > 300 and in the allowed_status_codes list.
-    
-    :param opts: self.opts,
-    :param options: self.options,
-    :param rest_method: rest method, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
-    :param rest_url: rest url
-    :param headers_dict: dictionary of headers. Supports json and new-line separated key-value string
-    :param cookies_dict: dictionary of cookies. Supports json and new-line separated key-value string
-    :param body_dict: dictionary of body. Supports json and new-line separated key-value string
-    :param query_params: dictionary of GET method url values. Supports json and new-line separated key-value string
-    :param rest_verify: indicates whether to verify SSL certificates. Default is True
-    :param rest_timeout: timeout in seconds. Default is 600 seconds
-    :param rest_certificate: Tuple (.csr, .key), or a string .key. Required to perform client side authentication
-    :param allowed_status_codes: list of allowed status codes. Default is [200]
+
+    Arguments:
+    ---------
+        opts          : Self.opts,
+        options       : Self.options,
+        rest_method   : Rest method, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
+        rest_url      : Rest url
+        headers_dict  : Dictionary of headers. Supports json and new-line separated key-value string
+        cookies_dict  : Dictionary of cookies. Supports json and new-line separated key-value string
+        body_dict     : Dictionary of body. Supports json and new-line separated key-value string
+        query_params  : Dictionary of GET method url values. Supports json and new-line separated key-value string
+        retry_tries   : Maximum number of request retry attempts. Default: 1 (no retry). Use -1 for unlimited retries.
+        retry_delay   : Initial delay between attempts. Default: 0
+        retry_backoff : Multiplier applied to delay between attempts. Default: 1 (no backoff)
+        rest_verify   : Indicates whether to verify SSL certificates. Default is True
+        rest_timeout  : Timeout in seconds. Default is 600 seconds
+        rest_certificate : Tuple (.csr, .key), or a string .key. Required to perform client side authentication
+        allowed_status_codes : List of allowed status codes. Default is [200]
     '''
 
     def callback(response: requests.Response):
@@ -130,6 +136,9 @@ def make_rest_call(opts, options, rest_method : str,
                     cookies=cookies_dict,
                     json=body_dict,
                     params=query_params,
+                    retry_tries=retry_tries,
+                    retry_delay=retry_delay,
+                    retry_backoff=retry_backoff,
                     verify=rest_verify,
                     timeout=rest_timeout,
                     clientauth=rest_certificate,
@@ -141,6 +150,9 @@ def make_rest_call(opts, options, rest_method : str,
         cookies=cookies_dict,
         data=body_dict,
         params=query_params,
+        retry_tries=retry_tries,
+        retry_delay=retry_delay,
+        retry_backoff=retry_backoff,
         verify=rest_verify,
         timeout=rest_timeout,
         clientauth=rest_certificate,

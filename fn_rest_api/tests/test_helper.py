@@ -10,7 +10,7 @@ from fn_rest_api.lib.helper import (validate_url,
 class TestConsants(unittest.TestCase):
 
     def test_constants(self):
-        self.assertEqual(helper.CONTENT_TYPE, "Content-type")
+        self.assertListEqual(helper.CONTENT_TYPES, ["Content-type", "content-type", "CONTENT-TYPE", "Content-Type"])
         self.assertEqual(helper.CONTENT_TYPE_JSON, "application/json")
 
 class TestRenderDictComponents(unittest.TestCase):
@@ -273,9 +273,11 @@ class TestMakeRestCall(unittest.TestCase):
 
         def execute(self,
             method, url, headers,
-            cookies, verify,
-            timeout, clientauth,
-            callback, json=None, data=None):
+            cookies, verify=False,
+            timeout=0, clientauth=None,
+            callback=None, json=None, data=None,
+            params=None, retry_tries=None,
+            retry_delay=None, retry_backoff=None):
 
             if isinstance(method, int):
                 response = TestMakeRestCall.MockResponse(url, "request failed", method)
@@ -287,6 +289,10 @@ class TestMakeRestCall(unittest.TestCase):
                 "cookies" : cookies,
                 "verify"  : verify,
                 "timeout" : timeout,
+                "params"  : params,
+                "tries"   : retry_tries,
+                "delay"   : retry_delay,
+                "backoff" : retry_backoff,
                 "json"    : json,
                 "data"    : data,
                 "clientauth" : clientauth}
@@ -304,6 +310,10 @@ class TestMakeRestCall(unittest.TestCase):
             headers_dict={"key1" : "header1"},
             cookies_dict={"key1" : "cookie1"},
             body_dict={"key1" : "body1"},
+            query_params=None,
+            retry_tries=None,
+            retry_delay=None,
+            retry_backoff=None,
             rest_verify=True,
             rest_timeout=60,
             rest_certificate=""" NOT A CERTIFICATE """)
@@ -314,6 +324,39 @@ class TestMakeRestCall(unittest.TestCase):
         self.assertDictEqual(response["headers"], {"key1" : "header1"})
         self.assertDictEqual(response["cookies"], {"key1" : "cookie1"})
         self.assertDictEqual(response["data"], {"key1" : "body1"})
+        self.assertEqual(response["tries"], None)
+        self.assertEqual(response["delay"], None)
+        self.assertEqual(response["backoff"], None)
+        self.assertIsNone(response["json"])
+        self.assertEqual(response["timeout"], 60)
+        self.assertEqual(response["clientauth"], """ NOT A CERTIFICATE """)
+        self.assertIsNone(response["json"])
+
+    def test_retry_request(self):
+        response = make_rest_call(
+            self.opts, self.options,
+            rest_method=self.method,
+            rest_url=self.url,
+            headers_dict={},
+            cookies_dict={},
+            body_dict={},
+            query_params=None,
+            retry_tries=1,
+            retry_delay=2,
+            retry_backoff=3,
+            rest_verify=True,
+            rest_timeout=60,
+            rest_certificate=""" NOT A CERTIFICATE """)
+
+        assert response["url"] == self.url
+        assert response["method"] == self.method
+        assert response["verify"]
+        self.assertDictEqual(response["headers"], {})
+        self.assertDictEqual(response["cookies"], {})
+        self.assertDictEqual(response["data"], {})
+        self.assertEqual(response["tries"], 1)
+        self.assertEqual(response["delay"], 2)
+        self.assertEqual(response["backoff"], 3)
         self.assertIsNone(response["json"])
         self.assertEqual(response["timeout"], 60)
         self.assertEqual(response["clientauth"], """ NOT A CERTIFICATE """)
@@ -327,6 +370,10 @@ class TestMakeRestCall(unittest.TestCase):
             headers_dict={"Content-type" : "application/json"},
             cookies_dict=None,
             body_dict={"key1" : "body1"},
+            query_params=None,
+            retry_tries=None,
+            retry_delay=None,
+            retry_backoff=None,
             rest_verify=None,
             rest_timeout=None,
             rest_certificate=None)
@@ -345,6 +392,10 @@ class TestMakeRestCall(unittest.TestCase):
             headers_dict={"content-type" : "application/json"},
             cookies_dict=None,
             body_dict={"key1" : "body1"},
+            query_params=None,
+            retry_tries=None,
+            retry_delay=None,
+            retry_backoff=None,
             rest_verify=None,
             rest_timeout=None,
             rest_certificate=None)
@@ -362,6 +413,10 @@ class TestMakeRestCall(unittest.TestCase):
             headers_dict={"CONTENT-TYPE" : "application/json"},
             cookies_dict=None,
             body_dict={"key1" : "body1"},
+            query_params=None,
+            retry_tries=None,
+            retry_delay=None,
+            retry_backoff=None,
             rest_verify=None,
             rest_timeout=None,
             rest_certificate=None)
@@ -379,6 +434,10 @@ class TestMakeRestCall(unittest.TestCase):
             headers_dict={"Content-Type" : "application/json"},
             cookies_dict=None,
             body_dict={"key1" : "body1"},
+            query_params=None,
+            retry_tries=None,
+            retry_delay=None,
+            retry_backoff=None,
             rest_verify=None,
             rest_timeout=None,
             rest_certificate=None)
@@ -397,6 +456,10 @@ class TestMakeRestCall(unittest.TestCase):
                 headers_dict=None,
                 cookies_dict=None,
                 body_dict=None,
+                query_params=None,
+                retry_tries=None,
+                retry_delay=None,
+            retry_backoff=None,
                 rest_verify=None,
                 rest_timeout=None,
                 rest_certificate=None)
@@ -409,6 +472,10 @@ class TestMakeRestCall(unittest.TestCase):
             headers_dict=None,
             cookies_dict=None,
             body_dict=None,
+            query_params=None,
+            retry_tries=None,
+            retry_delay=None,
+            retry_backoff=None,
             rest_verify=None,
             rest_timeout=None,
             rest_certificate=None,
@@ -423,6 +490,10 @@ class TestMakeRestCall(unittest.TestCase):
                 headers_dict=None,
                 cookies_dict=None,
                 body_dict=None,
+                query_params=None,
+                retry_tries=None,
+                retry_delay=None,
+                retry_backoff=None,
                 rest_verify=None,
                 rest_timeout=None,
                 rest_certificate=None,
