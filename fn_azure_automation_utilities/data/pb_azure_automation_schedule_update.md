@@ -21,8 +21,18 @@
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
+| Recur Frequency | `recur_frequency` | select | The frequency of the schedule | Optional |
+| Recur Interval | `recur_interval` | number | How often the schedule occurs | Optional |
+| Recur Week Days | `recur_week_days` | multiselect | The days to occur on | Optional |
 | Schedule description | `azure_automation_schedule_description` | text | Description of the schedule | Optional |
-| Schedule Enabled | `azure_automation_schedule_enabled` | boolean | If the schedule is enabled or not | Optional |
+| Schedule Enabled | `azure_automation_schedule_enabled` | boolean | If the schedule is enabled or not. Defaults to True | Optional |
+| Schedule Expiration | `schedule_expiration` | datetimepicker | The date and time the schedule expires | Optional |
+| Schedule Recurrence | `recurrence_schedule` | select | The recurrence of the schedule. Once or recurring | Optional |
+| Schedule Recurrence | `schedule_recurrence` | select | The recurrence of the schedule | Optional |
+| Schedule Start Time | `azure_automation_schedule_start_time` | datetimepicker | The start time of the schedule | Optional |
+| Schedule Start Time | `schedule_start_time` | datetimepicker | The start time of the schedule | Optional |
+| Time Zone | `schedule_time_zone` | select | The time zone the schedule should be in | Optional |
+| Time Zone | `time_zone` | select | The time zone the schedule should be in | Optional |
 
 ### Object Type
 `azure_automation_schedules`
@@ -54,12 +64,40 @@ inputs.schedule_update = True
 payload = {
   "name": row.schedule_name,
   "properties": {
+    "advancedSchedule": {}
   }
 }
-if getattr(playbook.inputs, "azure_automation_schedule_description", None):
+
+if getattr(playbook.inputs, "azure_automation_schedule_description", None): # Set the description
   payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description", None)
 if getattr(playbook.inputs, "azure_automation_schedule_enabled", None) != None:
-  payload["properties"]["isEnabled"] = getattr(playbook.inputs, "azure_automation_schedule_enabled", None)
+  payload["properties"]["isEnabled"] = getattr(playbook.inputs, "azure_automation_schedule_enabled", True)
+if getattr(playbook.inputs, "schedule_time_zone", None): # Set the time zone
+  payload["properties"]["timeZone"] = getattr(playbook.inputs, "schedule_time_zone", None)
+
+recurrence = getattr(playbook.inputs, "recurrence_schedule", None)
+if recurrence:
+  if recurrence == "Once":
+    payload["properties"]["frequency"] = "OneTime"
+  else:
+    # Get and set recur frequency
+    if getattr(playbook.inputs, "recur_frequency", None):
+      payload["properties"]["frequency"] = getattr(playbook.inputs, "recur_frequency", None)
+    else: # Fail if not given by user
+      helper.fail("If Schedule Recurrence equals Recurring than Recur Frequency must be given.")
+    # Set recur interval
+    payload["properties"]["interval"] = int(getattr(playbook.inputs, "recur_interval", 1))
+    # If an expiration date time is given then add it to the payload
+    if getattr(playbook.inputs, "schedule_expiration", None):
+      payload["properties"]["expiryTime"] = getattr(playbook.inputs, "schedule_expiration", None)
+    # If the frequency selected equals week, then add the user selected days to the payload
+    if getattr(playbook.inputs, "recur_frequency", None) == "Week":
+      if getattr(playbook.inputs, "recur_week_days", []):
+        # List of selected days
+        payload["properties"]["advancedSchedule"]["weekDays"] = getattr(playbook.inputs, "recur_week_days", [])
+      else: # Fail if not given by user
+        helper.fail("If Recur Frequency Week is selected than Recur Week Days must be given.")
+
 inputs.input_parameters = str(payload)
 ```
 
@@ -82,7 +120,13 @@ results = playbook.functions.results.update_schedule
 if results.get("success"):
   schedule = results.get("content", {})
   row["schedule_description"] = schedule.get("properties", {}).get("description", None)
-  row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", None)
+  row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", False)
+  row["schedule_start_time"] = schedule.get("properties", {}).get("startTime", None)
+  row["schedule_expiry_time"] = schedule.get("properties", {}).get("expiryTime", None)
+  row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
+  row["schedule_interval"] = str(schedule.get("properties", {}).get("interval", 1))
+  row["schedule_time_zone"] = schedule.get("properties", {}).get("timeZone", None)
+  row["advanced_schedule"] = str(schedule.get("properties", {}).get("advancedSchedule", {}))
 ```
 
 ---

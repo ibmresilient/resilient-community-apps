@@ -30,7 +30,7 @@
 | Schedule description | `azure_automation_schedule_description` | text | Description of the schedule | Optional |
 | Schedule Expiration | `schedule_expiration` | datetimepicker | The date and time the schedule expires | Optional |
 | Schedule Name | `azure_automation_schedule_name` | text | Name of the Azure automation schedule | Always |
-| Schedule Recurence | `schedule_recurrence` | select | The recurrence of the schedule | Always |
+| Schedule Recurrence | `schedule_recurrence` | select | The recurrence of the schedule | Always |
 | Schedule Start Time | `azure_automation_schedule_start_time` | datetimepicker | The start time of the schedule | Always |
 | Time Zone | `schedule_time_zone` | select | The time zone the schedule should be in | Always |
 
@@ -73,18 +73,24 @@ if getattr(playbook.inputs, "azure_automation_schedule_description", None): # Se
 if getattr(playbook.inputs, "schedule_time_zone", None): # Set the time zone
   payload["properties"]["timeZone"] = getattr(playbook.inputs, "schedule_time_zone", None)
 
-frequency = getattr(playbook.inputs, "recur_frequency", "once")
+frequency = getattr(playbook.inputs, "recur_frequency", None)
 # If the frequency Recurring is selected
 if playbook.inputs.schedule_recurrence == "Recurring":
-  payload["properties"]["frequency"] = frequency # Set user selected frequency
+  if frequency:
+    payload["properties"]["frequency"] = frequency # Set user selected frequency
+  else: # Fail if not given by user
+    helper.fail("If Schedule Recurrence equals Recurring than Recur Frequency must be given.")
   payload["properties"]["interval"] = int(getattr(playbook.inputs, "recur_interval", 1)) # Add user given interval to payload
   # If an expiration date time is given then add it to the payload
   if getattr(playbook.inputs, "schedule_expiration", None):
     payload["properties"]["expiryTime"] = getattr(playbook.inputs, "schedule_expiration", None)
-  # If the frequency selected equals months, then add the user selected days to the payload
+  # If the frequency selected equals Week, then add the user selected days to the payload
   if frequency == "Week":
-    # List of selected days
-    payload["properties"]["advancedSchedule"]["weekDays"] = getattr(playbook.inputs, "recur_week_days", [])
+    if getattr(playbook.inputs, "recur_week_days", []):
+      # List of selected days
+      payload["properties"]["advancedSchedule"]["weekDays"] = getattr(playbook.inputs, "recur_week_days", [])
+    else:
+      helper.fail("If Recur Frequency Week is selected than Recur Week Days must be given.")
 
 inputs.input_parameters = str(payload)
 ```
@@ -115,7 +121,7 @@ if results.get("success"):
   row["schedule_start_time"] = schedule.get("properties", {}).get("startTime", None)
   row["schedule_expiry_time"] = schedule.get("properties", {}).get("expiryTime", None)
   row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
-  row["schedule_interval"] = schedule.get("properties", {}).get("interval", 1)
+  row["schedule_interval"] = str(schedule.get("properties", {}).get("interval", 1))
   row["schedule_time_zone"] = schedule.get("properties", {}).get("timeZone", None)
   row["advanced_schedule"] = str(schedule.get("properties", {}).get("advancedSchedule", {}))
   row["account_name_schedules"] = playbook.inputs.azure_automation_account_name
