@@ -1,24 +1,6 @@
 # -*- coding: utf-8 -*-
 # Generated with resilient-sdk v49.0.4423
 
-"""
-Function implementation test.
-Usage: 
-    resilient-circuits selftest -l fn-azure-automation-utilities
-    resilient-circuits selftest --print-env -l fn-azure-automation-utilities
-
-Return examples:
-    return {
-        "state": "success",
-        "reason": "Successful connection to third party endpoint"
-    }
-
-    return {
-        "state": "failure",
-        "reason": "Failed to connect to third party endpoint"
-    }
-"""
-
 import logging
 from resilient_lib import RequestsCommon
 from fn_azure_automation_utilities.util.helper import AzureClient

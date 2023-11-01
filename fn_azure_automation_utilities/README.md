@@ -12,6 +12,7 @@
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
+  - [Custom Layouts](#custom-layouts)
 - [Function - Azure Create Account](#function---azure-create-account)
 - [Function - Azure Create Credential](#function---azure-create-credential)
 - [Function - Azure Create Schedule](#function---azure-create-schedule)
@@ -28,15 +29,13 @@
 - [Function - Azure Get Node Report](#function---azure-get-node-report)
 - [Function - Azure Get Runbook](#function---azure-get-runbook)
 - [Function - Azure Get Schedule](#function---azure-get-schedule)
-- [Function - Azure List Accounts](#function---azure-list-accounts)
-- [Function - Azure List Jobs by Automation Account](#function---azure-list-jobs-by-automation-account)
-- [Function - Azure List Runbooks by Automation Account](#function---azure-list-runbooks-by-automation-account)
-- [Function - Azure List Schedule by Automation Account](#function---azure-list-schedule-by-automation-account)
 - [Function - Azure List Statistics by Automation Account](#function---azure-list-statistics-by-automation-account)
-- [Function - Azure List Usage by Automation Account](#function---azure-list-usage-by-automation-account)
 - [Function - Azure Regenerate Agent Registration Key](#function---azure-regenerate-agent-registration-key)
-- [Function - Azure Update Credential](#function---azure-update-credential)
-- [Function - Azure Update Schedule](#function---azure-update-schedule)
+- [Data Table - Azure Automation Accounts](#data-table---azure-automation-accounts)
+- [Data Table - Azure Automation Credentials](#data-table---azure-automation-credentials)
+- [Data Table - Azure Automation Runbooks](#data-table---azure-automation-runbooks)
+- [Data Table - Azure Automation Schedules](#data-table---azure-automation-schedules)
+- [Data Table - Azure Automation Statistics](#data-table---azure-automation-statistics)
 - [Playbooks](#playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
 
@@ -49,7 +48,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 09/2023 | Initial Release |
+| 1.0.0 | 11/2023 | Initial Release |
 
 ---
 
@@ -60,7 +59,6 @@
  ![screenshot: main](./doc/screenshots/main.png)
 
 This app allows interaction with the following Azure Automation resources:
-
   - Automation Accounts
   - Activities
   - Jobs
@@ -93,13 +91,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `48.2.16`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.7899`.
+* SOAR platform >= `48.2.16`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=45.0.0`.
+* Integration server is running `resilient-circuits>=48.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -131,7 +129,7 @@ The app **does** support a proxy server.
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient-circuits>=45.0.0
+* resilient-circuits>=48.0.0
 
 ---
 
@@ -156,11 +154,16 @@ The following table provides the settings you need to configure the app. These s
 | **token_url** | Yes | `https://login.microsoftonline.com/(tenant_id)/oauth2/v2.0/token` | *The token_url setting is used to get a new access token.* |
 | **https_proxy** | No | `https://proxy:443` | *Proxy url and port* |
 
+### Custom Layouts
+* Import the Data Tables and Custom Fields like the screenshot below:
+
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.pngcustom_layouts.png)
+
 
 ---
 
 ## Function - Azure Create Account
-Create an automation account on Azure
+Create or update an automation account on Azure
 
  ![screenshot: fn-azure-create-account ](./doc/screenshots/fn-azure-create-account.png)
 
@@ -169,9 +172,10 @@ Create an automation account on Azure
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
+| `account_update` | `boolean` | No | `-` | True if you are updating an account |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -258,19 +262,22 @@ results = {
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
 
+public_network_access = getattr(playbook.inputs, "azure_automation_account_public_network_access", True)
+disable_local_auth = getattr(playbook.inputs, "azure_automation_account_disable_local_auth", False)
+
 payload = {
   "name": playbook.inputs.azure_automation_account_name,
   "location": playbook.inputs.azure_automation_account_location,
-  "tags": getattr(playbook.inputs, "azure_automation_account_tags", {}),
   "properties": {
-    "publicNetworkAccess": getattr(playbook.inputs, "azure_automation_account_public_network_access", True),
-    "disableLocalAuth": getattr(playbook.inputs, "azure_automation_account_disable_local_auth", False),
+    "publicNetworkAccess": True if public_network_access == None else public_network_access,
+    "disableLocalAuth": False if disable_local_auth == None else disable_local_auth,
     "sku":{
       "name": "Basic"
     }
   }
 }
-
+if getattr(playbook.inputs, "azure_automation_account_tags", None):
+  payload["tags"] = getattr(playbook.inputs, "azure_automation_account_tags", {})
 inputs.input_parameters = str(payload)
 ```
 
@@ -282,8 +289,23 @@ inputs.input_parameters = str(payload)
 
 ```python
 results = playbook.functions.results.account_results
+public_network_access = getattr(playbook.inputs, "azure_automation_account_public_network_access", True)
+disable_local_auth = getattr(playbook.inputs, "azure_automation_account_disable_local_auth", False)
+
 if results.get("success"):
-  incident.addNote(f"Account '{playbook.inputs.azure_automation_account_name}' was created successfully.")
+  content = results.get("content", {})
+  account_id = content.get("id", "")
+  resourceGroup_start = account_id.find("resourceGroups/")+15
+  resource_group = account_id[resourceGroup_start:account_id.find("/providers", resourceGroup_start)]
+  
+  row = incident.addRow("azure_automation_accounts")
+  row["account_name_accounts"] = content.get("name", "")
+  row["resource_group_accounts"] = resource_group
+  row["location_accounts"] = content.get("location", "")
+  row["tags_accounts"] = str(content.get("tags"))
+  row["publicnetworkaccess_accounts"] = content.get("properties", {}).get("publicNetworkAccess", None)
+  row["disablelocalauth_accounts"] = content.get("properties", {}).get("disableLocalAuth", None)
+  row["account_deleted_accounts"] = False
 ```
 
 </p>
@@ -291,7 +313,7 @@ if results.get("success"):
 
 ---
 ## Function - Azure Create Credential
-Create a credential.
+Create or update a credential.
 
  ![screenshot: fn-azure-create-credential ](./doc/screenshots/fn-azure-create-credential.png)
 
@@ -300,10 +322,11 @@ Create a credential.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
 | `credential_name` | `text` | No | `-` | Name of the Azure automation credential |
+| `credential_update` | `boolean` | No | `-` | If True will update the given credential. If False will create the given credential |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -354,19 +377,24 @@ results = {
 <p>
 
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.credential_name = playbook.inputs.azure_automation_credential_name
+inputs.account_name = row.account_name_credentials
+inputs.resource_group_name = row.resource_group_credentials
+inputs.credential_name = row.credential_name
+# credential_update is True, so the given credential will be updated
+inputs.credential_update = True
 
 payload = {
-  "name": playbook.inputs.azure_automation_credential_name,
+  "name": row.credential_name,
   "properties": {
-    "userName": playbook.inputs.azure_automation_credential_username,
-    "password": playbook.inputs.azure_automation_credential_password
   }
 }
-if getattr(playbook.inputs, "azure_automation_credential_description"):
-  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_credential_description")
+if getattr(playbook.inputs, "azure_automation_credential_username", None):
+  payload["properties"]["userName"] = getattr(playbook.inputs, "azure_automation_credential_username", None)
+if getattr(playbook.inputs, "azure_automation_credential_password", None):
+  payload["properties"]["password"] = getattr(playbook.inputs, "azure_automation_credential_password", None)
+if getattr(playbook.inputs, "azure_automation_credential_description", None):
+  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_credential_description", None)
+
 inputs.input_parameters = str(payload)
 ```
 
@@ -377,9 +405,11 @@ inputs.input_parameters = str(payload)
 <p>
 
 ```python
-results = playbook.functions.results.create_results
+results = playbook.functions.results.update_cred
 if results.get("success"):
-  incident.addNote(f"Credential '{playbook.inputs.azure_automation_credential_name}' was created successfully.")
+  # Update data table information for the credential
+  row["credential_username"] = getattr(playbook.inputs, "azure_automation_credential_username", None)
+  row["credential_description"] = getattr(playbook.inputs, 'azure_automation_credential_description', None)
 ```
 
 </p>
@@ -387,7 +417,7 @@ if results.get("success"):
 
 ---
 ## Function - Azure Create Schedule
-Create a schedule.
+Create or update a schedule.
 
  ![screenshot: fn-azure-create-schedule ](./doc/screenshots/fn-azure-create-schedule.png)
 
@@ -396,10 +426,11 @@ Create a schedule.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
-| `schedule_name` | `text` | Yes | `The name of the azure automation schedule` | - |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
+| `schedule_name` | `text` | No | `The name of the azure automation schedule` | - |
+| `schedule_update` | `boolean` | No | `-` | If True schedule will update. If False schedule will be created |
 
 </p>
 </details>
@@ -460,19 +491,49 @@ results = {
 <p>
 
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
+inputs.account_name = row.account_name_schedules
+inputs.resource_group_name = row.resource_group_schedules
+inputs.schedule_name = row.schedule_name
+# schedule_update is True, so the given schedule will be updated
+inputs.schedule_update = True
 
 payload = {
-  "name": playbook.inputs.azure_automation_schedule_name,
+  "name": row.schedule_name,
   "properties": {
-    "startTime": playbook.inputs.azure_automation_schedule_start_time,
-    "frequency": "OneTime"
+    "advancedSchedule": {}
   }
 }
-if getattr(playbook.inputs, "azure_automation_schedule_description"):
-  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description")
+
+if getattr(playbook.inputs, "azure_automation_schedule_description", None): # Set the description
+  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description", None)
+if getattr(playbook.inputs, "azure_automation_schedule_enabled", None) != None:
+  payload["properties"]["isEnabled"] = getattr(playbook.inputs, "azure_automation_schedule_enabled", True)
+if getattr(playbook.inputs, "schedule_time_zone", None): # Set the time zone
+  payload["properties"]["timeZone"] = getattr(playbook.inputs, "schedule_time_zone", None)
+
+recurrence = getattr(playbook.inputs, "recurrence_schedule", None)
+if recurrence:
+  if recurrence == "Once":
+    payload["properties"]["frequency"] = "OneTime"
+  else:
+    # Get and set recur frequency
+    if getattr(playbook.inputs, "recur_frequency", None):
+      payload["properties"]["frequency"] = getattr(playbook.inputs, "recur_frequency", None)
+    else: # Fail if not given by user
+      helper.fail("If Schedule Recurrence equals Recurring than Recur Frequency must be given.")
+    # Set recur interval
+    payload["properties"]["interval"] = int(getattr(playbook.inputs, "recur_interval", 1))
+    # If an expiration date time is given then add it to the payload
+    if getattr(playbook.inputs, "schedule_expiration", None):
+      payload["properties"]["expiryTime"] = getattr(playbook.inputs, "schedule_expiration", None)
+    # If the frequency selected equals week, then add the user selected days to the payload
+    if getattr(playbook.inputs, "recur_frequency", None) == "Week":
+      if getattr(playbook.inputs, "recur_week_days", []):
+        # List of selected days
+        payload["properties"]["advancedSchedule"]["weekDays"] = getattr(playbook.inputs, "recur_week_days", [])
+      else: # Fail if not given by user
+        helper.fail("If Recur Frequency Week is selected than Recur Week Days must be given.")
+
 inputs.input_parameters = str(payload)
 ```
 
@@ -483,9 +544,17 @@ inputs.input_parameters = str(payload)
 <p>
 
 ```python
-results = playbook.functions.results.schedule
+results = playbook.functions.results.update_schedule
 if results.get("success"):
-  incident.addNote(f"Schedule '{playbook.inputs.azure_automation_schedule_name}' was created successfully.")
+  schedule = results.get("content", {})
+  row["schedule_description"] = schedule.get("properties", {}).get("description", None)
+  row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", False)
+  row["schedule_start_time"] = schedule.get("properties", {}).get("startTime", None)
+  row["schedule_expiry_time"] = schedule.get("properties", {}).get("expiryTime", None)
+  row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
+  row["schedule_interval"] = str(schedule.get("properties", {}).get("interval", 1))
+  row["schedule_time_zone"] = schedule.get("properties", {}).get("timeZone", None)
+  row["advanced_schedule"] = str(schedule.get("properties", {}).get("advancedSchedule", {}))
 ```
 
 </p>
@@ -502,8 +571,8 @@ Delete an Azure automation account.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -544,8 +613,8 @@ results = {
 <p>
 
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_account_resource_group
+inputs.account_name = row.account_name_accounts
+inputs.resource_group_name = row.resource_group_accounts
 ```
 
 </p>
@@ -555,14 +624,20 @@ inputs.resource_group_name = playbook.inputs.azure_automation_account_resource_g
 <p>
 
 ```python
-results = playbook.functions.results.delete_results
+results = playbook.functions.results.account_delete
 
 if results.get("success"):
   status = results.get("content", {}).get("status")
   if status == 200:
-    incident.addNote(f"Azure automation account '{playbook.inputs.azure_automation_account_name}' was deleted.")
+    row.account_deleted_accounts = True
   elif status == 204:
-    incident.addNote(f"Azure automation account '{playbook.inputs.azure_automation_account_name}' not found.")
+    incident.addNote(f"""Azure Automation: Account Delete - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_account_resource_group}
+
+Results -
+  Azure automation account '{playbook.inputs.azure_automation_account_name}' not found.""")
 ```
 
 </p>
@@ -579,9 +654,9 @@ Delete the credential.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
 | `credential_name` | `text` | No | `-` | Name of the Azure automation credential |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -623,9 +698,9 @@ results = {
 <p>
 
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.credential_name = playbook.inputs.azure_automation_credential_name
+inputs.account_name = row.account_name_credentials
+inputs.resource_group_name = row.resource_group_credentials
+inputs.credential_name = row.credential_name
 ```
 
 </p>
@@ -640,9 +715,16 @@ results = playbook.functions.results.delete_cred
 if results.get("success"):
   status = results.get("content", {}).get("status")
   if status == 200:
-    incident.addNote(f"Azure automation credential '{playbook.inputs.azure_automation_credential_name}' was deleted.")
+    row["credential_deleted"] = True
   elif status == 204:
-    incident.addNote(f"Azure automation credential '{playbook.inputs.azure_automation_credential_name}' not found.")
+    incident.addNote(f"""Azure Automation: Credential Delete - Example (PB)
+Inputs -
+  Account Name: {row.account_name}
+  Resource Group: {row.resource_group}
+  Credential Name: {row.credential_name}
+
+Results -
+  Azure automation credential '{row.credential_name}' not found.""")
 ```
 
 </p>
@@ -659,9 +741,9 @@ Delete the runbook by name.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
-| `runbook_name` | `text` | Yes | `-` | Runbook name in Azure Automation |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
+| `runbook_name` | `text` | No | `-` | Runbook name in Azure Automation |
 
 </p>
 </details>
@@ -703,9 +785,9 @@ results = {
 <p>
 
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_resource_group
-inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
+inputs.account_name = row.account_name_runbooks
+inputs.resource_group_name = row.resource_group_runbooks
+inputs.runbook_name = row.runbook_name
 ```
 
 </p>
@@ -717,7 +799,7 @@ inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
 ```python
 results = playbook.functions.results.delete_runbook
 if results.get("success"):
-  incident.addNote(f"The runbook {results.get('inputs', {}).get('runbook_name')} was deleted.")
+  row.runbook_deleted = True
 ```
 
 </p>
@@ -734,9 +816,9 @@ Delete the schedule identified by schedule name.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
-| `schedule_name` | `text` | Yes | `The name of the azure automation schedule` | - |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
+| `schedule_name` | `text` | No | `The name of the azure automation schedule` | - |
 
 </p>
 </details>
@@ -778,9 +860,9 @@ results = {
 <p>
 
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
+inputs.account_name = row.account_name_schedules
+inputs.resource_group_name = row.resource_group_schedules
+inputs.schedule_name = row.schedule_name
 ```
 
 </p>
@@ -795,9 +877,16 @@ results = playbook.functions.results.delete_schedule
 if results.get("success"):
   status = results.get("content", {}).get("status")
   if status == 200:
-    incident.addNote(f"Schedule '{playbook.inputs.azure_automation_schedule_name}' was deleted.")
+    row["schedule_deleted"] = True
   elif status == 204:
-    incident.addNote(f"Schedule '{playbook.inputs.azure_automation_schedule_name}' not found.")
+    incident.addNote(f"""Azure Automation: Schedule Delete - Example (PB)
+Inputs -
+  Account Name: {row.account_name}
+  Resource Group: {row.resource_group}
+  Schedule Name: {row.schedule_name}
+
+Results -
+  Schedule '{row.schedule_name}' not found.""")
 ```
 
 </p>
@@ -814,10 +903,10 @@ Execute a given Azure runbook and retrieve the results
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
-| `runbook_name` | `text` | Yes | `-` | Runbook name in Azure Automation |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
+| `runbook_name` | `text` | No | `-` | Runbook name in Azure Automation |
 | `time_to_wait` | `number` | No | `-` | Amount of seconds to wait in between Azure automation job status checks. This should be hold long it takes the given runbook to complete. |
 
 </p>
@@ -860,12 +949,12 @@ results = {
 <p>
 
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
+inputs.account_name = row.account_name_runbooks
 inputs.input_parameters = playbook.inputs.azure_automation_runbook_input_parameters
-inputs.resource_group_name = playbook.inputs.azure_resource_group
-inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
+inputs.resource_group_name = row.resource_group_runbooks
+inputs.runbook_name = row.runbook_name
 
-time_to_wait = getattr(playbook.inputs, "time_to_wait")
+time_to_wait = getattr(playbook.inputs, "time_to_wait", 30)
 # If no time_to_wait is given then default to 30 seconds
 inputs.time_to_wait = time_to_wait if time_to_wait else 30
 ```
@@ -879,7 +968,16 @@ inputs.time_to_wait = time_to_wait if time_to_wait else 30
 ```python
 results = playbook.functions.results.runbook_results
 if results.get("success"):
-  incident.addNote(str(results.get("content", {})))
+  incident.addNote(f"""Azure Automation: Runbook Execute - Example (PB)
+Inputs -
+  Account Name: {row.account_name_runbooks}
+  Resource Group: {row.resource_group_runbooks}
+  Runbook Name: {row.runbook_name}
+  Time to Wait: {getattr(playbook.inputs, 'time_to_wait', 30)}
+  Input Parameters: {playbook.inputs.azure_automation_runbook_input_parameters}
+
+Results -  
+  {str(results.get('content', {}))}""")
 ```
 
 </p>
@@ -887,7 +985,7 @@ if results.get("success"):
 
 ---
 ## Function - Azure Get Account
-Get a specified Azure automation account information.
+Get a specified Azure automation account information or list accounts.
 
  ![screenshot: fn-azure-get-account ](./doc/screenshots/fn-azure-get-account.png)
 
@@ -896,8 +994,8 @@ Get a specified Azure automation account information.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -986,8 +1084,10 @@ results = {
 <p>
 
 ```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
+if getattr(playbook.inputs, "azure_automation_account_name", None):
+  inputs.account_name = playbook.inputs.azure_automation_account_name
+if getattr(playbook.inputs, "azure_automation_resource_group_name", None):
+  inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
 ```
 
 </p>
@@ -997,11 +1097,29 @@ inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_nam
 <p>
 
 ```python
-from json import dumps
 results = playbook.functions.results.account_info
 
+def add_to_row(account):
+  account_id = account.get("id", "")
+  resourceGroup_start = account_id.find("resourceGroups/")+15
+  resource_group = account_id[resourceGroup_start:account_id.find("/providers", resourceGroup_start)]
+
+  row = incident.addRow("azure_automation_accounts")
+  row["account_name_accounts"] = account.get("name", "")
+  row["resource_group_accounts"] = resource_group
+  row["location_accounts"] = account.get("location", "")
+  row["tags_accounts"] = str(account.get("tags"))
+  row["publicnetworkaccess_accounts"] = account.get("properties", {}).get("publicNetworkAccess", None)
+  row["disablelocalauth_accounts"] = account.get("properties", {}).get("disableLocalAuth", None)
+  row["account_deleted_accounts"] = False
+
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  content = results.get("content", {})
+  if content.get("value", None):
+    for account in content.get("value", []):
+      add_to_row(account)
+  else:
+    add_to_row(content)
 ```
 
 </p>
@@ -1018,8 +1136,8 @@ Retrieve the automation agent registration information.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -1081,7 +1199,13 @@ from json import dumps
 results = playbook.functions.results.registration_info
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Agent Registration Get Information - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group Name: {playbook.inputs.azure_automation_resource_group_name}
+
+Results -
+  {dumps(results.get('content', {}), indent=4)}""")
 ```
 
 </p>
@@ -1089,7 +1213,7 @@ if results.get("success"):
 
 ---
 ## Function - Azure Get Credential
-Retrieve the credential identified by credential name.
+Get credential from given credential name or list all credentials on given resource group.
 
  ![screenshot: fn-azure-get-credential ](./doc/screenshots/fn-azure-get-credential.png)
 
@@ -1098,9 +1222,9 @@ Retrieve the credential identified by credential name.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
 | `credential_name` | `text` | No | `-` | Name of the Azure automation credential |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -1152,7 +1276,8 @@ results = {
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.credential_name = playbook.inputs.azure_automation_credential_name
+if getattr(playbook.inputs, "azure_automation_credential_name", None):
+  inputs.credential_name = getattr(playbook.inputs, "azure_automation_credential_name", None)
 ```
 
 </p>
@@ -1162,11 +1287,26 @@ inputs.credential_name = playbook.inputs.azure_automation_credential_name
 <p>
 
 ```python
-from json import dumps
 results = playbook.functions.results.cred
 
+# Add credential information to data table
+def add_to_row(credential):
+  row = incident.addRow("azure_automation_credentials")
+  row["credential_name"] = credential.get("name")
+  row["credential_username"] = credential.get("properties", {}).get("userName")
+  row["credential_description"] = credential.get("properties", {}).get("description")
+  row["account_name_credentials"] = playbook.inputs.azure_automation_account_name
+  row["resource_group_credentials"] = playbook.inputs.azure_automation_resource_group
+  row["credential_deleted"] = False
+
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  content = results.get('content', {})
+  if content.get("value", None):
+    # If list of credentials returned
+    for credential in content.get("value", []):
+      add_to_row(credential)
+  else: # If single credential returned
+    add_to_row(content)
 ```
 
 </p>
@@ -1174,7 +1314,7 @@ if results.get("success"):
 
 ---
 ## Function - Azure Get Job
-Retrieve the job identified by job name
+Retrieve the job info or job output identified by job name or list jobs.
 
  ![screenshot: fn-azure-get-job ](./doc/screenshots/fn-azure-get-job.png)
 
@@ -1183,9 +1323,10 @@ Retrieve the job identified by job name
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `job_name` | `text` | Yes | `-` | Azure Automation job name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
+| `job_name` | `text` | No | `-` | Azure Automation job name |
+| `job_output` | `boolean` | No | `-` | If True will return Job output. If False will return job details |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -1252,6 +1393,8 @@ results = {
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.job_name = playbook.inputs.azure_automation_job_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
+# job_output is True, so the output of the Job will be returned
+inputs.job_output = True
 ```
 
 </p>
@@ -1261,10 +1404,17 @@ inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_nam
 <p>
 
 ```python
-from json import dumps
-results = playbook.functions.results.job_results
+results = playbook.functions.results.job_output
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Job Get Output - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group_name}
+  Job Name: {playbook.inputs.azure_automation_job_name}
+  Job Output: True
+
+Results -
+  {str(results.get('content', ''))}""")
 ```
 
 </p>
@@ -1272,7 +1422,8 @@ if results.get("success"):
 
 ---
 ## Function - Azure Get Module Activity
-Retrieve the activity in the module identified by module name and activity name.
+Retrieve the activity in the module identified by module name and activity name or 
+Retrieve a list of activities in the module identified by module name.
 
  ![screenshot: fn-azure-get-module-activity ](./doc/screenshots/fn-azure-get-module-activity.png)
 
@@ -1281,10 +1432,10 @@ Retrieve the activity in the module identified by module name and activity name.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
 | `activity_name` | `text` | No | `-` | The Azure automation module activity name |
 | `module_name` | `text` | No | `-` | The name of the Azure automation module. |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -1499,9 +1650,11 @@ results = {
 
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.activity_name = playbook.inputs.azure_automation_activity_name
 inputs.module_name = playbook.inputs.azure_automation_module_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
+
+if getattr(playbook.inputs, "azure_automation_activity_name", None):
+  inputs.activity_name = playbook.inputs.azure_automation_activity_name
 ```
 
 </p>
@@ -1515,7 +1668,15 @@ from json import dumps
 results = playbook.functions.results.module_activity
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Module Get Activity - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group_name}
+  Module Name: {playbook.inputs.azure_automation_module_name}
+  Activity Name: {getattr(playbook.inputs, 'azure_automation_activity_name', None)}
+
+Results -
+  {dumps(results.get('content', {}), indent=4)}""")
 ```
 
 </p>
@@ -1523,7 +1684,8 @@ if results.get("success"):
 
 ---
 ## Function - Azure Get Node Report
-Retrieve the Dsc node report data by node id and report id.
+Retrieve the Dsc node report data by node id and report id or
+List Dsc node reports by node id.
 
  ![screenshot: fn-azure-get-node-report ](./doc/screenshots/fn-azure-get-node-report.png)
 
@@ -1532,10 +1694,10 @@ Retrieve the Dsc node report data by node id and report id.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
 | `node_id` | `text` | Yes | `-` | Azure Automation Dsc node ID |
-| `report_id` | `text` | Yes | `-` | Azure Automation Dsc node report ID |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `report_id` | `text` | No | `-` | Azure Automation Dsc node report ID |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -1547,45 +1709,45 @@ Retrieve the Dsc node report data by node id and report id.
 
 ```python
 results = {
-    "content": {
-        "configurationVersion": "2.0.0",
-        "endTime": "2023-09-06T13:30:02.1606975+00:00",
-        "errors": [],
-        "hostName": null,
-        "iPV4Addresses": [],
-        "iPV6Addresses": [],
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/nodes/24939717-e819-4059-aa08-82862c65f3c8/reports/3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
-        "lastModifiedTime": "2023-09-06T13:30:02.2533333+00:00",
-        "metaConfiguration": null,
-        "numberOfResources": 0,
-        "rawErrors": null,
-        "rebootRequested": null,
-        "refreshMode": null,
-        "reportFormatVersion": "2.0",
-        "reportId": "3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
-        "resources": [],
-        "startTime": "2023-09-06T13:30:01.9451859+00:00",
-        "status": "Compliant",
-        "type": "Consistency"
-    },
-    "inputs": {
-        "account_name": "automation1",
-        "node_id": "24939717-e819-4059-aa08-82862c65f3c8",
-        "report_id": "3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
-        "resource_group_name": "DemoAssets"
-    },
-    "metrics": {
-        "execution_time_ms": 1084,
-        "host": "local",
-        "package": "fn-azure-automation-utilities",
-        "package_version": "1.0.0",
-        "timestamp": "2023-09-06 09:55:00",
-        "version": "1.0"
-    },
-    "raw": null,
-    "reason": null,
-    "success": true,
-    "version": 2.0
+  "content": {
+    "configurationVersion": "2.0.0",
+    "endTime": "2023-09-06T13:30:02.1606975+00:00",
+    "errors": [],
+    "hostName": null,
+    "iPV4Addresses": [],
+    "iPV6Addresses": [],
+    "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/nodes/24939717-e819-4059-aa08-82862c65f3c8/reports/3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+    "lastModifiedTime": "2023-09-06T13:30:02.2533333+00:00",
+    "metaConfiguration": null,
+    "numberOfResources": 0,
+    "rawErrors": null,
+    "rebootRequested": null,
+    "refreshMode": null,
+    "reportFormatVersion": "2.0",
+    "reportId": "3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+    "resources": [],
+    "startTime": "2023-09-06T13:30:01.9451859+00:00",
+    "status": "Compliant",
+    "type": "Consistency"
+  },
+  "inputs": {
+    "account_name": "automation1",
+    "node_id": "24939717-e819-4059-aa08-82862c65f3c8",
+    "report_id": "3c47f0b6-aeb7-429a-a656-70f2a19ab22a",
+    "resource_group_name": "DemoAssets"
+  },
+  "metrics": {
+    "execution_time_ms": 1084,
+    "host": "local",
+    "package": "fn-azure-automation-utilities",
+    "package_version": "1.0.0",
+    "timestamp": "2023-09-06 09:55:00",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
@@ -1598,8 +1760,9 @@ results = {
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.node_id = playbook.inputs.azure_automation_node_id
-inputs.report_id = playbook.inputs.azure_automation_report_id
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
+if getattr(playbook.inputs, "azure_automation_report_id", None):
+  inputs.report_id = playbook.inputs.azure_automation_report_id
 ```
 
 </p>
@@ -1613,7 +1776,15 @@ from json import dumps
 results = playbook.functions.results.node_report
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Node Get Report - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group_name}
+  Node ID: {playbook.inputs.azure_automation_node_id}
+  Report ID: {getattr(playbook.inputs, 'azure_automation_report_id', None)}
+
+Results -
+  {dumps(results.get('content', {}), indent=4)}""")
 ```
 
 </p>
@@ -1621,7 +1792,7 @@ if results.get("success"):
 
 ---
 ## Function - Azure Get Runbook
-Retrieve the runbook identified by runbook name.
+Retrieve the runbook identified by runbook name or list runbooks on given account.
 
  ![screenshot: fn-azure-get-runbook ](./doc/screenshots/fn-azure-get-runbook.png)
 
@@ -1630,9 +1801,9 @@ Retrieve the runbook identified by runbook name.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
-| `runbook_name` | `text` | Yes | `-` | Runbook name in Azure Automation |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
+| `runbook_name` | `text` | No | `-` | Runbook name in Azure Automation |
 
 </p>
 </details>
@@ -1698,7 +1869,8 @@ results = {
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_resource_group
-inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
+if getattr(playbook.inputs, 'azure_automation_runbook_name', None):
+  inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
 ```
 
 </p>
@@ -1708,11 +1880,27 @@ inputs.runbook_name = playbook.inputs.azure_automation_runbook_name
 <p>
 
 ```python
-from json import dumps
 results = playbook.functions.results.runbook_results
 
+# Add runbooks info to the data table
+def add_to_row(runbook):
+  row = incident.addRow("azure_automation_runbooks")
+  row["runbook_name"] = runbook.get("name")
+  row["runbook_type"] = runbook.get("properties", {}).get("runbookType")
+  row["runbook_state"] = runbook.get("properties", {}).get("state")
+  row["runbook_tags"] = str(runbook.get("tags"))
+  row["account_name_runbooks"] = playbook.inputs.azure_automation_account_name
+  row["resource_group_runbooks"] = playbook.inputs.azure_resource_group
+  row["runbook_deleted"] = False
+
 if results.get("success"):
-  incident.addNote(dumps(results.get("content"), indent=4))
+  content = results.get("content", {})
+  if content.get("value", None):
+    # If list of runbooks returned
+    for runbook in content.get("value", []):
+      add_to_row(runbook)
+  else: # If single runbook returned
+    add_to_row(content)
 ```
 
 </p>
@@ -1720,7 +1908,7 @@ if results.get("success"):
 
 ---
 ## Function - Azure Get Schedule
-Retrieve the schedule identified by schedule name.
+Retrieve the schedule identified by schedule name or list schedules.
 
  ![screenshot: fn-azure-get-schedule ](./doc/screenshots/fn-azure-get-schedule.png)
 
@@ -1729,9 +1917,9 @@ Retrieve the schedule identified by schedule name.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
-| `schedule_name` | `text` | Yes | `The name of the azure automation schedule` | - |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
+| `schedule_name` | `text` | No | `The name of the azure automation schedule` | - |
 
 </p>
 </details>
@@ -1793,7 +1981,8 @@ results = {
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
+if getattr(playbook.inputs, "azure_automation_schedule_name", None):
+  inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
 ```
 
 </p>
@@ -1803,485 +1992,32 @@ inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
 <p>
 
 ```python
-from json import dumps
 results = playbook.functions.results.get_schedule
 
-if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
-```
-
-</p>
-</details>
-
----
-## Function - Azure List Accounts
-Lists the Automation Accounts within an Azure subscription
-
- ![screenshot: fn-azure-list-accounts ](./doc/screenshots/fn-azure-list-accounts.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "content": {
-    "value": [
-      {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1",
-        "identity": {
-          "principalId": "5c1a54ee-a043-4852-9b87-ed53005d9c62",
-          "tenantId": "50ad7d3e-b889-434d-802d-13b87c68047b",
-          "type": "SystemAssigned"
-        },
-        "location": "eastus",
-        "name": "automation1",
-        "properties": {
-          "creationTime": "2023-04-28T14:04:03.0766667+00:00",
-          "disableLocalAuth": false,
-          "lastModifiedTime": "2023-07-21T14:25:01.7+00:00",
-          "publicNetworkAccess": true
-        },
-        "tags": {
-          "client": "sentinel"
-        },
-        "type": "Microsoft.Automation/AutomationAccounts"
-      },
-      {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/testing352",
-        "identity": {
-          "principalId": "ee616124-e026-4ca0-8c64-d34bae779faf",
-          "tenantId": "50ad7d3e-b889-434d-802d-13b87c68047b",
-          "type": "SystemAssigned"
-        },
-        "location": "eastus",
-        "name": "testing352",
-        "properties": {
-          "creationTime": "2023-07-25T12:05:22.16+00:00",
-          "disableLocalAuth": false,
-          "lastModifiedTime": "2023-07-25T12:05:22.16+00:00",
-          "publicNetworkAccess": true
-        },
-        "tags": {},
-        "type": "Microsoft.Automation/AutomationAccounts"
-      },
-      {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/tester183",
-        "location": "Canada Central",
-        "name": "tester183",
-        "properties": {
-          "creationTime": "2023-07-25T12:12:11.663+00:00",
-          "disableLocalAuth": false,
-          "lastModifiedTime": "2023-07-25T12:12:11.663+00:00",
-          "publicNetworkAccess": true
-        },
-        "tags": {},
-        "type": "Microsoft.Automation/AutomationAccounts"
-      }
-    ]
-  },
-  "inputs": {},
-  "metrics": {
-    "execution_time_ms": 1200,
-    "host": "local",
-    "package": "fn-azure-automation-utilities",
-    "package_version": "1.0.0",
-    "timestamp": "2023-07-28 12:12:31",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Input Script:</summary>
-<p>
-
-```python
-None
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-
-```python
-from json import dumps
-results = playbook.functions.results.accounts
+# Add schedule information to data table
+def row_to_add(schedule):
+  row = incident.addRow("azure_automation_schedules")
+  row["schedule_name"] = schedule.get("name", "")
+  row["schedule_description"] = schedule.get("properties", {}).get("description", None)
+  row["schedule_enabled"] = schedule.get("properties", {}).get("isEnabled", False)
+  row["schedule_start_time"] = schedule.get("properties", {}).get("startTime", None)
+  row["schedule_expiry_time"] = schedule.get("properties", {}).get("expiryTime", None)
+  row["schedule_frequency"] = schedule.get("properties", {}).get("frequency", None)
+  row["schedule_interval"] = schedule.get("properties", {}).get("interval", 1)
+  row["schedule_time_zone"] = schedule.get("properties", {}).get("timeZone", None)
+  row["advanced_schedule"] = str(schedule.get("properties", {}).get("advancedSchedule", {}))
+  row["account_name_schedules"] = playbook.inputs.azure_automation_account_name
+  row["resource_group_schedules"] = playbook.inputs.azure_automation_resource_group
+  row["schedule_deleted"] = False
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
-```
-
-</p>
-</details>
-
----
-## Function - Azure List Jobs by Automation Account
-Retrieve a list of jobs
-
- ![screenshot: fn-azure-list-jobs-by-automation-account ](./doc/screenshots/fn-azure-list-jobs-by-automation-account.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "content": {
-    "value": [
-      {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1692024049238",
-        "name": "1692024049238",
-        "properties": {
-          "creationTime": "2023-08-14T14:42:29.5306946+00:00",
-          "endTime": "2023-08-14T14:42:55.9297673+00:00",
-          "jobId": "efe4db52-a124-4bea-9582-7b0c7f7133e4",
-          "lastModifiedTime": "2023-08-14T14:42:55.9297673+00:00",
-          "provisioningState": "Succeeded",
-          "runOn": "",
-          "runbook": {
-            "name": "Get_given_runbook"
-          },
-          "startTime": "2023-08-14T14:42:41.9604553+00:00",
-          "status": "Completed"
-        },
-        "type": "Microsoft.Automation/AutomationAccounts/Jobs"
-      },
-      {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1691761457680",
-        "name": "1691761457680",
-        "properties": {
-          "creationTime": "2023-08-11T14:02:36.9532796+00:00",
-          "endTime": "2023-08-11T14:03:16.661328+00:00",
-          "jobId": "ee72f62a-e732-41ea-a55a-1ae0e9a6d5e5",
-          "lastModifiedTime": "2023-08-11T14:03:16.661328+00:00",
-          "provisioningState": "Succeeded",
-          "runOn": "",
-          "runbook": {
-            "name": "Get_given_runbook"
-          },
-          "startTime": "2023-08-11T14:03:03.5818149+00:00",
-          "status": "Completed"
-        },
-        "type": "Microsoft.Automation/AutomationAccounts/Jobs"
-      }
-    ]
-  },
-  "inputs": {
-    "account_name": "automation1",
-    "resource_group_name": "demoassets"
-  },
-  "metrics": {
-    "execution_time_ms": 1485,
-    "host": "local",
-    "package": "fn-azure-automation-utilities",
-    "package_version": "1.0.0",
-    "timestamp": "2023-08-16 15:05:07",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Input Script:</summary>
-<p>
-
-```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-
-```python
-from json import dumps
-results = playbook.functions.results.jobs
-if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
-```
-
-</p>
-</details>
-
----
-## Function - Azure List Runbooks by Automation Account
-Retrieve a list of runbooks on the given automation account.
-
- ![screenshot: fn-azure-list-runbooks-by-automation-account ](./doc/screenshots/fn-azure-list-runbooks-by-automation-account.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "content": {
-    "value": [
-      {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/runbooks/AzureAutomationTutorialWithIdentity",
-        "location": "eastus",
-        "name": "AzureAutomationTutorialWithIdentity",
-        "properties": {
-          "creationTime": "2023-04-28T14:04:05.0066667+00:00",
-          "lastModifiedTime": "2023-07-19T15:43:27.3633333+00:00",
-          "logActivityTrace": 0,
-          "logProgress": false,
-          "logVerbose": false,
-          "runbookType": "PowerShell",
-          "state": "Published"
-        },
-        "tags": {},
-        "type": "Microsoft.Automation/AutomationAccounts/Runbooks"
-      },
-      {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/runbooks/AzureAutomationTutorialWithIdentityGraphical",
-        "location": "eastus",
-        "name": "AzureAutomationTutorialWithIdentityGraphical",
-        "properties": {
-          "creationTime": "2023-04-28T14:04:05.1166667+00:00",
-          "lastModifiedTime": "2023-07-19T15:43:36.2466667+00:00",
-          "logActivityTrace": 0,
-          "logProgress": false,
-          "logVerbose": false,
-          "runbookType": "GraphPowerShell",
-          "state": "Published"
-        },
-        "tags": {},
-        "type": "Microsoft.Automation/AutomationAccounts/Runbooks"
-      }
-    ]
-  },
-  "inputs": {
-    "account_name": "automation1",
-    "resource_group_name": "demoassets"
-  },
-  "metrics": {
-    "execution_time_ms": 1889,
-    "host": "local",
-    "package": "fn-azure-automation-utilities",
-    "package_version": "1.0.0",
-    "timestamp": "2023-08-16 13:44:13",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Input Script:</summary>
-<p>
-
-```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_resource_group
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-
-```python
-from json import dumps
-results = playbook.functions.results.runbooks_result
-if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
-```
-
-</p>
-</details>
-
----
-## Function - Azure List Schedule by Automation Account
-Retrieve a list of schedules.
-
- ![screenshot: fn-azure-list-schedule-by-automation-account ](./doc/screenshots/fn-azure-list-schedule-by-automation-account.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "content": {
-    "value": [
-      {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/s",
-        "name": "s",
-        "properties": {
-          "advancedSchedule": null,
-          "creationTime": "2023-08-23T16:05:14.3633333+00:00",
-          "description": "",
-          "expiryTime": "2023-08-29T12:05:00-04:00",
-          "expiryTimeOffsetMinutes": -240.0,
-          "frequency": "OneTime",
-          "interval": null,
-          "isEnabled": true,
-          "lastModifiedTime": "2023-08-23T17:09:35.4666667+00:00",
-          "nextRun": "2023-08-29T12:05:00-04:00",
-          "nextRunOffsetMinutes": -240.0,
-          "startTime": "2023-08-29T12:05:00-04:00",
-          "startTimeOffsetMinutes": -240.0,
-          "timeZone": "America/New_York"
-        },
-        "type": "Microsoft.Automation/AutomationAccounts/Schedules"
-      },
-      {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/tester",
-        "name": "tester",
-        "properties": {
-          "advancedSchedule": null,
-          "creationTime": "2023-08-08T18:05:08.1333333+00:00",
-          "description": "",
-          "expiryTime": "2023-08-08T14:35:00-04:00",
-          "expiryTimeOffsetMinutes": -240.0,
-          "frequency": "OneTime",
-          "interval": null,
-          "isEnabled": true,
-          "lastModifiedTime": "2023-08-08T18:05:08.1333333+00:00",
-          "nextRun": null,
-          "nextRunOffsetMinutes": 0.0,
-          "startTime": "2023-08-08T14:35:00-04:00",
-          "startTimeOffsetMinutes": -240.0,
-          "timeZone": "America/New_York"
-        },
-        "type": "Microsoft.Automation/AutomationAccounts/Schedules"
-      },
-      {
-        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/tester1324",
-        "name": "tester1324",
-        "properties": {
-          "advancedSchedule": null,
-          "creationTime": "2023-08-24T15:31:44.2666667+00:00",
-          "description": "something",
-          "expiryTime": "2023-08-25T08:40:00+00:00",
-          "expiryTimeOffsetMinutes": 0.0,
-          "frequency": "OneTime",
-          "interval": null,
-          "isEnabled": true,
-          "lastModifiedTime": "2023-08-24T15:31:44.2666667+00:00",
-          "nextRun": "2023-08-25T08:40:00+00:00",
-          "nextRunOffsetMinutes": 0.0,
-          "startTime": "2023-08-25T08:40:00+00:00",
-          "startTimeOffsetMinutes": 0.0,
-          "timeZone": "Etc/UTC"
-        },
-        "type": "Microsoft.Automation/AutomationAccounts/Schedules"
-      }
-    ]
-  },
-  "inputs": {
-    "account_name": "automation1",
-    "resource_group_name": "demoassets"
-  },
-  "metrics": {
-    "execution_time_ms": 1400,
-    "host": "local",
-    "package": "fn-azure-automation-utilities",
-    "package_version": "1.0.0",
-    "timestamp": "2023-08-24 11:37:57",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Input Script:</summary>
-<p>
-
-```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-
-```python
-from json import dumps
-results = playbook.functions.results.list_schedule
-
-if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  content = results.get("content", {})
+  if content.get("value", None):
+    # If list of schedules returned
+    for schedule in content.get("value", []):
+      row_to_add(schedule)
+  else: # If single schedule returned
+    row_to_add(content)
 ```
 
 </p>
@@ -2298,8 +2034,8 @@ Retrieve the statistics for the account.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -2387,116 +2123,15 @@ inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_nam
 <p>
 
 ```python
-from json import dumps
 results = playbook.functions.results.statistics
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
-```
-
-</p>
-</details>
-
----
-## Function - Azure List Usage by Automation Account
-Retrieve the usage for the account id.
-
- ![screenshot: fn-azure-list-usage-by-automation-account ](./doc/screenshots/fn-azure-list-usage-by-automation-account.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "content": {
-    "value": [
-      {
-        "currentValue": 0.0,
-        "limit": -1,
-        "name": {
-          "localizedValue": "AccountUsage",
-          "value": "AccountUsage"
-        },
-        "throttleStatus": "NotThrottled",
-        "unit": "Minute"
-      },
-      {
-        "currentValue": 0.0,
-        "limit": -1,
-        "name": {
-          "localizedValue": "SubscriptionUsage",
-          "value": "SubscriptionUsage"
-        },
-        "throttleStatus": "NotThrottled",
-        "unit": "Minute"
-      },
-      {
-        "currentValue": 0.0,
-        "limit": -1,
-        "name": {
-          "localizedValue": "DscAccountUsage",
-          "value": "DscAccountUsage"
-        },
-        "throttleStatus": "NotThrottled",
-        "unit": "Count"
-      }
-    ]
-  },
-  "inputs": {
-    "account_name": "automation1",
-    "resource_group_name": "DemoAssets"
-  },
-  "metrics": {
-    "execution_time_ms": 1331,
-    "host": "local",
-    "package": "fn-azure-automation-utilities",
-    "package_version": "1.0.0",
-    "timestamp": "2023-09-06 09:58:55",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Input Script:</summary>
-<p>
-
-```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_name
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-
-```python
-from json import dumps
-results = playbook.functions.results.usage
-
-if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  for stat in results.get("content", {}).get("value", []):
+    row = incident.addRow("azure_automation_statistics")
+    row["statistic_counter_property"] = stat.get("counterProperty", None)
+    row["statistic_counter_value"] = stat.get("counterValue", 0)
+    row["account_name_statistics"] = playbook.inputs.azure_automation_account_name
+    row["resource_group_statistics"] = playbook.inputs.azure_automation_resource_group_name
 ```
 
 </p>
@@ -2513,9 +2148,9 @@ Regenerate a primary or secondary agent registration key
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
+| `account_name` | `text` | No | `-` | Azure Automation Account Name |
 | `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+| `resource_group_name` | `text` | No | `-` | Existing Azure automation resource group name  |
 
 </p>
 </details>
@@ -2565,9 +2200,7 @@ results = {
 ```python
 inputs.account_name = playbook.inputs.azure_automation_account_name
 inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-
-payload = {"keyName": playbook.inputs.azure_automation_agent_key_to_regenerate}
-inputs.input_parameters = str(payload)
+inputs.input_parameters = str({"keyName": playbook.inputs.azure_automation_agent_key_to_regenerate})
 ```
 
 </p>
@@ -2581,250 +2214,148 @@ from json import dumps
 results = playbook.functions.results.registration_key
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f"""Azure Automation: Agent Registration Regenerate Key - Example (PB)
+Inputs -
+  Account Name: {playbook.inputs.azure_automation_account_name}
+  Resource Group: {playbook.inputs.azure_automation_resource_group}
+  Key to Regenerate: {playbook.inputs.azure_automation_agent_key_to_regenerate}
+
+Results -
+  {dumps(results.get('content', {}), indent=4)}""")
 ```
 
 </p>
 </details>
 
 ---
-## Function - Azure Update Credential
-Update a credential
 
- ![screenshot: fn-azure-update-credential ](./doc/screenshots/fn-azure-update-credential.png)
 
-<details><summary>Inputs:</summary>
-<p>
+## Data Table - Azure Automation Accounts
 
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `credential_name` | `text` | No | `-` | Name of the Azure automation credential |
-| `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
+ ![screenshot: dt-azure-automation-accounts](./doc/screenshots/dt-azure-automation-accounts.png)
 
-</p>
-</details>
+#### API Name:
+azure_automation_accounts
 
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "content": {
-    "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/credentials/test32",
-    "name": "test32",
-    "properties": {
-      "creationTime": "2023-08-21T17:59:44.38+00:00",
-      "description": "something",
-      "lastModifiedTime": "2023-08-21T17:59:44.38+00:00",
-      "userName": "tester"
-    },
-    "type": "Microsoft.Automation/AutomationAccounts/Credentials"
-  },
-  "inputs": {
-    "account_name": "automation1",
-    "credential_name": "test32",
-    "input_parameters": "{\u0027name\u0027: \u0027test32\u0027, \u0027properties\u0027: {\u0027userName\u0027: \u0027tester\u0027, \u0027description\u0027: \u0027something\u0027}}",
-    "resource_group_name": "demoassets"
-  },
-  "metrics": {
-    "execution_time_ms": 4271,
-    "host": "local",
-    "package": "fn-azure-automation-utilities",
-    "package_version": "1.0.0",
-    "timestamp": "2023-08-21 14:21:37",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Input Script:</summary>
-<p>
-
-```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.credential_name = playbook.inputs.azure_automation_credential_name
-
-payload = {
-  "name": playbook.inputs.azure_automation_credential_name,
-  "properties": {
-  }
-}
-if getattr(playbook.inputs, "azure_automation_credential_username"):
-  payload["properties"]["userName"] = getattr(playbook.inputs, "azure_automation_credential_username")
-if getattr(playbook.inputs, "azure_automation_credential_password"):
-  payload["properties"]["password"] = getattr(playbook.inputs, "azure_automation_credential_password")
-if getattr(playbook.inputs, "azure_automation_credential_description"):
-  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_credential_description")
-
-inputs.input_parameters = str(payload)
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-
-```python
-results = playbook.functions.results.update_cred
-if results.get("success"):
-  incident.addNote(f"Credential '{playbook.inputs.azure_automation_credential_name}' was updated successfully.")
-```
-
-</p>
-</details>
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Deleted | `account_deleted_accounts` | `boolean` | If the account has been deleted or not |
+| disableLocalAuth | `disablelocalauth_accounts` | `boolean` | Either disable or enable local Auth. A value of True would mean local auth is disabled. |
+| Location | `location_accounts` | `text` | The region the account is in |
+| Name | `account_name_accounts` | `text` | Azure Automation Account Name |
+| publicNetworkAccess | `publicnetworkaccess_accounts` | `boolean` | Either allow or deny access to public network from account |
+| Resource Group | `resource_group_accounts` | `text` | Azure Automation resource group name |
+| Tags | `tags_accounts` | `text` | dictionary of Azure automation account tags |
 
 ---
-## Function - Azure Update Schedule
-Update the schedule identified by schedule name.
+## Data Table - Azure Automation Credentials
 
- ![screenshot: fn-azure-update-schedule ](./doc/screenshots/fn-azure-update-schedule.png)
+ ![screenshot: dt-azure-automation-credentials](./doc/screenshots/dt-azure-automation-credentials.png)
 
-<details><summary>Inputs:</summary>
-<p>
+#### API Name:
+azure_automation_credentials
 
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `account_name` | `text` | Yes | `-` | Azure Automation Account Name |
-| `input_parameters` | `text` | No | `-` | string with dictionary format |
-| `resource_group_name` | `text` | Yes | `-` | Existing Azure automation resource group name  |
-| `schedule_name` | `text` | Yes | `The name of the azure automation schedule` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "content": {
-    "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/s",
-    "name": "s",
-    "properties": {
-      "advancedSchedule": null,
-      "creationTime": "2023-08-23T16:05:14.3633333+00:00",
-      "description": "",
-      "expiryTime": "2023-08-29T12:05:00-04:00",
-      "expiryTimeOffsetMinutes": -240.0,
-      "frequency": "OneTime",
-      "interval": null,
-      "isEnabled": false,
-      "lastModifiedTime": "2023-08-23T17:09:35.4666667+00:00",
-      "nextRun": "2023-08-29T12:05:00-04:00",
-      "nextRunOffsetMinutes": -240.0,
-      "startTime": "2023-08-29T12:05:00-04:00",
-      "startTimeOffsetMinutes": -240.0,
-      "timeZone": "America/New_York"
-    },
-    "type": "Microsoft.Automation/AutomationAccounts/Schedules"
-  },
-  "inputs": {
-    "account_name": "automation1",
-    "input_parameters": "{\u0027name\u0027: \u0027s\u0027, \u0027properties\u0027: {\u0027isEnabled\u0027: False}}",
-    "resource_group_name": "demoassets",
-    "schedule_name": "s"
-  },
-  "metrics": {
-    "execution_time_ms": 1640,
-    "host": "local",
-    "package": "fn-azure-automation-utilities",
-    "package_version": "1.0.0",
-    "timestamp": "2023-08-24 14:00:24",
-    "version": "1.0"
-  },
-  "raw": null,
-  "reason": null,
-  "success": true,
-  "version": 2.0
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Input Script:</summary>
-<p>
-
-```python
-inputs.account_name = playbook.inputs.azure_automation_account_name
-inputs.resource_group_name = playbook.inputs.azure_automation_resource_group
-inputs.schedule_name = playbook.inputs.azure_automation_schedule_name
-
-payload = {
-  "name": playbook.inputs.azure_automation_schedule_name,
-  "properties": {
-  }
-}
-if getattr(playbook.inputs, "azure_automation_schedule_description"):
-  payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description")
-if getattr(playbook.inputs, "azure_automation_schedule_enabled") != None:
-  payload["properties"]["isEnabled"] = getattr(playbook.inputs, "azure_automation_schedule_enabled")
-inputs.input_parameters = str(payload)
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-
-```python
-results = playbook.functions.results.update_schedule
-if results.get("success"):
-  incident.addNote(f"Schedule '{playbook.inputs.azure_automation_schedule_name}' was updated successfully.")
-```
-
-</p>
-</details>
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Account Name | `account_name_credentials` | `text` | Name fo the account the credential is on |
+| Deleted | `credential_deleted` | `boolean` | If the credential is deleted |
+| Description | `credential_description` | `text` | Description for the credential |
+| Name | `credential_name` | `text` | Name of the credential |
+| Resource Group | `resource_group_credentials` | `text` | Resource group the credential is on |
+| Username | `credential_username` | `text` | Username for the credential |
 
 ---
+## Data Table - Azure Automation Runbooks
+
+ ![screenshot: dt-azure-automation-runbooks](./doc/screenshots/dt-azure-automation-runbooks.png)
+
+#### API Name:
+azure_automation_runbooks
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Account Name | `account_name_runbooks` | `text` | Name of the account the runbook is on |
+| Deleted | `runbook_deleted` | `boolean` | If the runbook as been deleted or not |
+| Name | `runbook_name` | `text` | Name of the runbook |
+| Resource Group | `resource_group_runbooks` | `text` | The resource group the account is on |
+| State | `runbook_state` | `text` | State of the runbook |
+| Tags | `runbook_tags` | `text` | Tags given to the runbook |
+| Type | `runbook_type` | `text` | Type of runbook |
+
+---
+## Data Table - Azure Automation Schedules
+
+ ![screenshot: dt-azure-automation-schedules](./doc/screenshots/dt-azure-automation-schedules.png)
+
+#### API Name:
+azure_automation_schedules
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Account Name | `account_name_schedules` | `text` | Azure automation account name |
+| Advanced Schedule | `advanced_schedule` | `text` | The advanced schedule properties |
+| Deleted | `schedule_deleted` | `boolean` | If the schedule is deleted or not |
+| Description | `schedule_description` | `text` | Description of the schedule |
+| Enabled | `schedule_enabled` | `boolean` | Is the schedule enabled |
+| Expiry Time | `schedule_expiry_time` | `text` | The time the schedule expires |
+| Frequency | `schedule_frequency` | `text` | The frequency of the schedule |
+| Interval | `schedule_interval` | `text` | The execute intervals of the schedule |
+| Name | `schedule_name` | `text` | Name of the schedule |
+| Resource Group | `resource_group_schedules` | `text` | Azure Automation resource group |
+| Start Time | `schedule_start_time` | `text` | The time the schedule starts |
+| Time Zone | `schedule_time_zone` | `text` | The time zone the schedule is in |
+
+---
+## Data Table - Azure Automation Statistics
+
+ ![screenshot: dt-azure-automation-statistics](./doc/screenshots/dt-azure-automation-statistics.png)
+
+#### API Name:
+azure_automation_statistics
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Account Name | `account_name_statistics` | `text` | Azure Automation Account Name |
+| Counter Property | `statistic_counter_property` | `text` | Property of the counter statistic |
+| Counter Value | `statistic_counter_value` | `number` | The value of the counter statistic |
+| Resource Group | `resource_group_statistics` | `text` | Azure Automation resource group |
+
+---
+
+
 
 
 ## Playbooks
 | Playbook Name | Description | Activation Type | Object | Status | Condition |
 | ------------- | ----------- | --------------- | ------ | ------ | ---------- |
+| Azure Automation: Account Delete - Example (PB) | Delete an Azure automation account | Manual | azure_automation_accounts | `enabled` | `azure_automation_accounts.account_deleted_accounts not_equals True AND azure_automation_accounts.account_name_accounts has_a_value AND azure_automation_accounts.resource_group_accounts has_a_value` |
+| Azure Automation: Account Update - Example (PB) | Update an automation account. | Manual | azure_automation_accounts | `enabled` | `azure_automation_accounts.account_deleted_accounts not_equals True AND azure_automation_accounts.account_name_accounts has_a_value AND azure_automation_accounts.resource_group_accounts has_a_value` |
+| Azure Automation: Credential Delete - Example (PB) | Delete a credential | Manual | azure_automation_credentials | `enabled` | `azure_automation_credentials.account_name_credentials has_a_value AND azure_automation_credentials.credential_deleted not_equals True AND azure_automation_credentials.credential_name has_a_value AND azure_automation_credentials.resource_group_credentials has_a_value` |
+| Azure Automation: Credential Update - Example (PB) | Update a credential. | Manual | azure_automation_credentials | `enabled` | `azure_automation_credentials.account_name_credentials has_a_value AND azure_automation_credentials.credential_deleted not_equals True AND azure_automation_credentials.credential_name has_a_value AND azure_automation_credentials.resource_group_credentials has_a_value` |
+| Azure Automation: Runbook Delete - Example (PB) | Delete an Azure runbook | Manual | azure_automation_runbooks | `enabled` | `azure_automation_runbooks.account_name_runbooks has_a_value AND azure_automation_runbooks.resource_group_runbooks has_a_value AND azure_automation_runbooks.runbook_deleted not_equals True AND azure_automation_runbooks.runbook_name has_a_value` |
+| Azure Automation: Runbook Execute - Example (PB) | Execute a runbook on Azure | Manual | azure_automation_runbooks | `enabled` | `azure_automation_runbooks.account_name_runbooks has_a_value AND azure_automation_runbooks.resource_group_runbooks has_a_value AND azure_automation_runbooks.runbook_name has_a_value` |
+| Azure Automation: Schedule Delete - Example (PB) | Delete the schedule identified by schedule name. | Manual | azure_automation_schedules | `enabled` | `azure_automation_schedules.account_name_schedules has_a_value AND azure_automation_schedules.resource_group_schedules has_a_value AND azure_automation_schedules.schedule_deleted not_equals True AND azure_automation_schedules.schedule_name has_a_value` |
+| Azure Automation: Schedule Update - Example (PB) | Update the schedule identified by schedule name. | Manual | azure_automation_schedules | `enabled` | `azure_automation_schedules.account_name_schedules has_a_value AND azure_automation_schedules.resource_group_schedules has_a_value AND azure_automation_schedules.schedule_deleted not_equals True AND azure_automation_schedules.schedule_name has_a_value` |
 | Azure Automation: Account Create - Example (PB) | Create an Azure automation account | Manual | incident | `enabled` | `-` |
 | Azure Automation: Credential Create - Example (PB) | Create a credential | Manual | incident | `enabled` | `-` |
-| Azure Automation: Create Schedule - Example (PB) | Create a schedule. | Manual | incident | `enabled` | `-` |
-| Azure Automation: Account Delete - Example (PB) | Delete an Azure automation account | Manual | incident | `enabled` | `-` |
-| Azure Automation: Credential Delete - Example (PB) | Delete a credential | Manual | incident | `enabled` | `-` |
-| Azure Automation: Runbook Delete - Example (PB) | Delete the runbook by name. | Manual | incident | `enabled` | `-` |
-| Azure Automation: Schedule Delete - Example (PB) | Delete the schedule identified by schedule name. | Manual | incident | `enabled` | `-` |
-| Azure Automation: Runbook Execute - Example (PB) | Execute a runbook on Azure | Manual | incident | `enabled` | `-` |
+| Azure Automation: Schedule Create - Example (PB) | Create a schedule. | Manual | incident | `enabled` | `-` |
 | Azure Automation: Account Get - Example (PB) | Get the details of the given Azure automation account. | Manual | incident | `enabled` | `-` |
 | Azure Automation: Agent Registration Get Information - Example (PB) | Retrieve the automation agent registration information. | Manual | incident | `enabled` | `-` |
-| Azure Automation: Credential Get - Example (PB) | Get a credential | Manual | incident | `enabled` | `-` |
+| Azure Automation: Credential Get - Example (PB) | Get credential from given credential name or list all credentials on given resource group. | Manual | incident | `enabled` | `-` |
 | Azure Automation: Job Get - Example (PB) | Retrieve the job identified by job name. | Manual | incident | `enabled` | `-` |
 | Azure Automation: Job Get Output - Example (PB) | Retrieve the job output identified by job name. | Manual | incident | `enabled` | `-` |
 | Azure Automation: Module Get Activity - Example (PB) | Retrieve the activity in the module identified by module name and activity name. | Manual | incident | `enabled` | `-` |
-| Azure Automation: Node Get Report - Example (PB) | Retrieve the Dsc node report data by node id and report id. | Manual | incident | `enabled` | `-` |
+| Azure Automation: DSC Node Get Report - Example (PB) | Retrieve the Dsc node report data by node id and report id or
+List Dsc node reports by node id. | Manual | incident | `enabled` | `-` |
 | Azure Automation: Runbook Get - Example (PB) | Retrieve the runbook identified by runbook name. | Manual | incident | `enabled` | `-` |
 | Azure Automation: Schedule Get - Example (PB) | Retrieve the schedule identified by schedule name. | Manual | incident | `enabled` | `-` |
-| Azure Automation: Accounts List - Example (PB) | Lists the Automation Accounts within an Azure subscription | Manual | incident | `enabled` | `-` |
-| Azure Automation: Credentials List by Automation Account - Example (PB) | Retrieve a list of credentials. | Manual | incident | `enabled` | `-` |
-| Azure Automation: Jobs List by Automation Account - Example (PB) | Retrieve a list of jobs | Manual | incident | `enabled` | `-` |
-| Azure Automation: Runbooks List by Automation Account - Example (PB) | Retrieve a list of runbooks on the given automation account. | Manual | incident | `enabled` | `-` |
-| Azure Automation: Schedule List by Automation Account - Example (PB) | Retrieve a list of schedules. | Manual | incident | `enabled` | `-` |
 | Azure Automation: Statistics List by Automation Account - Example (PB) | Retrieve the statistics for the account. | Manual | incident | `enabled` | `-` |
-| Azure Automation: Usage List by Automation Account - Example (PB) | Retrieve the usage for the account id. | Manual | incident | `enabled` | `-` |
 | Azure Automation: Agent Registration Regenerate Key - Example (PB) | Regenerate a primary or secondary agent registration key | Manual | incident | `enabled` | `-` |
-| Azure Automation: Credential Update - Example (PB) | Update a credential. | Manual | incident | `enabled` | `-` |
-| Azure Automation: Schedule Update - Example (PB) | Update the schedule identified by schedule name. | Manual | incident | `enabled` | `-` |
 
 ---
 

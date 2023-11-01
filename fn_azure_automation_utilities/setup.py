@@ -41,7 +41,7 @@ setup(
     - Agent Registration
     - Statistics""",
     install_requires=[
-        "resilient-circuits>=47.0.0"
+        "resilient-circuits>=48.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),
