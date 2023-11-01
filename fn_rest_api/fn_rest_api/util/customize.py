@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# (c) Copyright My Inc. 2023. All Rights Reserved.
 # Generated with resilient-sdk v51.0.0.0.352
 
 """Generate the SOAR customizations required for fn_rest_api"""
