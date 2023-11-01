@@ -19,7 +19,10 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.bigfix_asset_name = row.res_bigfix_computer_name
+inputs.bigfix_asset_id = row.res_bigfix_computer_id
+inputs.bigfix_incident_id = incident.id
+
 ```
 
 ### Post-Processing Script
