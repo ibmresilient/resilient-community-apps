@@ -20,8 +20,7 @@
 ### Pre-Processing Script
 ```python
 inputs.incident_id = incident.id
-f"{iu_close_fields}" = rule.properties.incident_utils_close_fields.content
-inputs.close_fields = "{}".format(iu_close_fields)
+inputs.close_fields = rule.properties.incident_utils_close_fields.content
 ```
 
 ### Post-Processing Script
