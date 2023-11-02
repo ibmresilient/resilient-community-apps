@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "status_code": 200,
+    "content": {
+      "time_to_live": "0 years 1 mons 0 days 0 hours 0 mins 0.0 secs",
+      "timeout_type": "LAST_SEEN",
+      "number_of_elements": 5,
+      "creation_time": 1637336107774,
+      "name": "Generated_Cases",
+      "namespace": "SHARED",
+      "element_type": "ALN",
+      "collection_id": 51,
+      "key_label": "offense_id"
+    }
+  },
+  "raw": "{\"status_code\": 200, \"content\": {\"time_to_live\": \"0 years 1 mons 0 days 0 hours 0 mins 0.0 secs\", \"timeout_type\": \"LAST_SEEN\", \"number_of_elements\": 5, \"creation_time\": 1637336107774, \"name\": \"Generated_Cases\", \"namespace\": \"SHARED\", \"element_type\": \"ALN\", \"collection_id\": 51, \"key_label\": \"offense_id\"}}",
+  "inputs": {
+    "qradar_reference_table_item_value": "test1",
+    "qradar_reference_table_item_inner_key": "234",
+    "qradar_reference_table_item_outer_key": "123",
+    "qradar_label": "SOAR_Plugin_Destination_Name",
+    "qradar_reference_table_name": "Generated_Cases"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-qradar-integration",
+    "package_version": "2.2.0",
+    "execution_time_ms": 424,
+    "timestamp": "2022-01-28 13:19:42"
+  }
+}
