@@ -51,7 +51,7 @@
 -->
 | Version | Date    | Notes                                                                                                            |
 |---------|---------|------------------------------------------------------------------------------------------------------------------|
-| 1.1.1   | 11/2024 | Convert all scripts to Python3                                                                                   |
+| 1.1.1   | 11/2023 | Convert all scripts to Python3                                                                                   |
 | 1.1.0   | 6/2023  | Playbook support; Add siem_event_types app.config parameter to query threats using different TAP /siem endpoints |
 | 1.0.3   | 8/2020  | Fix for event filtering                                                                                          |
 | 1.0.2   | 5/2020  | Fix for Poller                                                                                                   |
