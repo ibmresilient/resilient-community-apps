@@ -6,17 +6,12 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Kafka Send",
-      "id": 88,
+      "id": 78,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Kafka Send",
       "object_type": "incident",
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "timeout_seconds": 86400,
       "type": 1,
       "uuid": "222ce89f-5532-47ad-b8c1-00fccc659e58",
@@ -61,8 +56,9 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1619621896596,
+  "export_date": 1698827815996,
   "export_format_version": 2,
+  "export_type": null,
   "fields": [
     {
       "allow_default_value": false,
@@ -74,7 +70,7 @@
       "deprecated": false,
       "export_key": "__function/kafka_topic",
       "hide_notification": false,
-      "id": 335,
+      "id": 777,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -86,12 +82,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "kafka_topic",
       "tooltip": "",
@@ -109,7 +100,7 @@
       "deprecated": false,
       "export_key": "__function/kafka_key",
       "hide_notification": false,
-      "id": 336,
+      "id": 778,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -120,12 +111,7 @@
       "prefix": null,
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "kafka_key",
       "tooltip": "optional key/value data sending",
@@ -143,7 +129,7 @@
       "deprecated": false,
       "export_key": "__function/kafka_message",
       "hide_notification": false,
-      "id": 337,
+      "id": 779,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -155,12 +141,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "kafka_message",
       "tooltip": "",
@@ -178,7 +159,7 @@
       "deprecated": false,
       "export_key": "__function/kafka_broker_label",
       "hide_notification": false,
-      "id": 338,
+      "id": 780,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -190,12 +171,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "kafka_broker_label",
       "tooltip": "",
@@ -213,7 +189,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/kafka_topic",
       "hide_notification": false,
-      "id": 331,
+      "id": 773,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -224,12 +200,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Topic",
       "tooltip": "Kafka topic overrides topics defined in Broker settings",
@@ -247,7 +218,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/kafka_key",
       "hide_notification": false,
-      "id": 332,
+      "id": 774,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -258,12 +229,7 @@
       "prefix": "properties",
       "read_only": false,
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Key",
       "tooltip": "optional use of key/value messages",
@@ -281,7 +247,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/kafka_broker_label",
       "hide_notification": false,
-      "id": 333,
+      "id": 775,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -293,12 +259,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Broker Label",
       "tooltip": "Broker label defined in app.config",
@@ -316,7 +277,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/kafka_message",
       "hide_notification": false,
-      "id": 334,
+      "id": 776,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -328,12 +289,7 @@
       "read_only": false,
       "required": "always",
       "rich_text": false,
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "templates": [],
       "text": "Message",
       "tooltip": "Message to send, can be in json format",
@@ -355,12 +311,7 @@
   ],
   "functions": [
     {
-      "creator": {
-        "display_name": "Resilient Sysadmin",
-        "id": 3,
-        "name": "a@example.com",
-        "type": "user"
-      },
+      "created_date": 1698652038666,
       "description": {
         "content": "Send messages through Kafka based on a named topic",
         "format": "text"
@@ -368,21 +319,16 @@
       "destination_handle": "fn_kafka",
       "display_name": "Kafka Send",
       "export_key": "kafka_send",
-      "id": 58,
+      "id": 33,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
-        "id": 3,
-        "name": "a@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
-      "last_modified_time": 1619618685910,
+      "last_modified_time": 1698652038752,
       "name": "kafka_send",
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "6974cf84-6b1c-4f77-985c-17ea824d9ac3",
       "version": 1,
       "view_items": [
@@ -426,26 +372,22 @@
           "name": "Example: Kafka Send",
           "object_type": "incident",
           "programmatic_name": "example_kafka_send",
-          "tags": [
-            {
-              "tag_handle": "fn_kafka",
-              "value": null
-            }
-          ],
+          "tags": [],
           "uuid": null,
-          "workflow_id": 68
+          "workflow_id": 66
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 1,
+  "id": 251,
+  "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1619621894456,
+      "create_date": 1698827813292,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -454,7 +396,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1619621894456,
+      "update_date": 1698827813292,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -464,34 +406,30 @@
   "message_destinations": [
     {
       "api_keys": [
-        "20322ad9-8fd0-45f1-9ca3-a6d8b2d869e4"
+        "bfde63ec-7eae-4aeb-8a0f-346ea9219d43"
       ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_kafka",
       "name": "fn_kafka",
       "programmatic_name": "fn_kafka",
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "users": [],
       "uuid": "babcbb7b-03fb-4ee4-93dc-0c845e47bc5c"
     }
   ],
   "notifications": null,
-  "overrides": [],
+  "overrides": null,
   "phases": [],
+  "playbooks": [],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 6006,
-    "major": 38,
+    "build_number": 8131,
+    "major": 46,
     "minor": 0,
-    "version": "38.0.6006"
+    "version": "46.0.8131"
   },
   "tags": [],
   "task_order": [],
@@ -501,27 +439,21 @@
     {
       "actions": [],
       "content": {
-        "version": 3,
+        "version": 7,
         "workflow_id": "example_kafka_send",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_kafka_send\" isExecutable=\"true\" name=\"Example: Kafka Send\"\u003e\u003cdocumentation\u003eSend a message to a Kafka topic with an optional key\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0haggmv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1sjw8a6\" name=\"Kafka Send\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6974cf84-6b1c-4f77-985c-17ea824d9ac3\"\u003e{\"inputs\":{},\"post_processing_script\":\"msg = u\\\"Kafka Send Status: {}\\\\nBroker: {} Topic: {} Key: {}\\\".format(\\\"success\\\" if results.success else \\\"failure\\\", results.inputs[\u0027kafka_broker_label\u0027], results.inputs[\u0027kafka_topic\u0027], results.inputs[\u0027kafka_key\u0027])\\nincident.addNote(helper.createPlainText(msg))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.kafka_topic = rule.properties.kafka_topic\\ninputs.kafka_message = rule.properties.kafka_message.content\\ninputs.kafka_broker_label = rule.properties.kafka_broker_label\\ninputs.kafka_key = rule.properties.kafka_key\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0haggmv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0o0oang\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0haggmv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1sjw8a6\"/\u003e\u003cendEvent id=\"EndEvent_1tuxcwo\"\u003e\u003cincoming\u003eSequenceFlow_0o0oang\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0o0oang\" sourceRef=\"ServiceTask_1sjw8a6\" targetRef=\"EndEvent_1tuxcwo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_07mgwxd\"\u003e\u003ctext\u003eSend results returned in a note\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0tzq8sf\" sourceRef=\"ServiceTask_1sjw8a6\" targetRef=\"TextAnnotation_07mgwxd\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1sjw8a6\" id=\"ServiceTask_1sjw8a6_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0haggmv\" id=\"SequenceFlow_0haggmv_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1tuxcwo\" id=\"EndEvent_1tuxcwo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0o0oang\" id=\"SequenceFlow_0o0oang_di\"\u003e\u003comgdi:waypoint x=\"358\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"392\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_07mgwxd\" id=\"TextAnnotation_07mgwxd_di\"\u003e\u003comgdc:Bounds height=\"43\" width=\"187\" x=\"346\" y=\"81\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0tzq8sf\" id=\"Association_0tzq8sf_di\"\u003e\u003comgdi:waypoint x=\"353\" xsi:type=\"omgdc:Point\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"413\" xsi:type=\"omgdc:Point\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_kafka_send\" isExecutable=\"true\" name=\"Example: Kafka Send\"\u003e\u003cdocumentation\u003eSend a message to a Kafka topic with an optional key\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0haggmv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1sjw8a6\" name=\"Kafka Send\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6974cf84-6b1c-4f77-985c-17ea824d9ac3\"\u003e{\"inputs\":{},\"post_processing_script\":\"msg = \\\"Kafka Send Status: {}\\\\nBroker: {} Topic: {} Key: {}\\\".format(\\\"success\\\" if results.get(\\\"success\\\") else \\\"failure\\\", results.get(\\\"inputs\\\", {}).get(\u0027kafka_broker_label\u0027), results.get(\\\"inputs\\\", {}).get(\u0027kafka_topic\u0027), results.get(\\\"inputs\\\", {}).get(\u0027kafka_key\u0027))\\nincident.addNote(helper.createPlainText(msg))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.kafka_topic = rule.properties.kafka_topic\\ninputs.kafka_message = rule.properties.kafka_message.content\\ninputs.kafka_broker_label = rule.properties.kafka_broker_label\\ninputs.kafka_key = rule.properties.kafka_key\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0haggmv\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0o0oang\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0haggmv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1sjw8a6\"/\u003e\u003cendEvent id=\"EndEvent_1tuxcwo\"\u003e\u003cincoming\u003eSequenceFlow_0o0oang\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0o0oang\" sourceRef=\"ServiceTask_1sjw8a6\" targetRef=\"EndEvent_1tuxcwo\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_07mgwxd\"\u003e\u003ctext\u003eSend results returned in a note\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0tzq8sf\" sourceRef=\"ServiceTask_1sjw8a6\" targetRef=\"TextAnnotation_07mgwxd\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1sjw8a6\" id=\"ServiceTask_1sjw8a6_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"258\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0haggmv\" id=\"SequenceFlow_0haggmv_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"258\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"228\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1tuxcwo\" id=\"EndEvent_1tuxcwo_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"426\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"444\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0o0oang\" id=\"SequenceFlow_0o0oang_di\"\u003e\u003comgdi:waypoint x=\"358\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"426\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"392\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_07mgwxd\" id=\"TextAnnotation_07mgwxd_di\"\u003e\u003comgdc:Bounds height=\"43\" width=\"187\" x=\"346\" y=\"81\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0tzq8sf\" id=\"Association_0tzq8sf_di\"\u003e\u003comgdi:waypoint x=\"353\" y=\"171\"/\u003e\u003comgdi:waypoint x=\"413\" y=\"124\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 3,
-      "creator_id": "a@example.com",
+      "content_version": 7,
       "description": "Send a message to a Kafka topic with an optional key",
       "export_key": "example_kafka_send",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1619621808275,
+      "last_modified_by": "soar_apps_dev@ibm.com",
+      "last_modified_time": 1698827775710,
       "name": "Example: Kafka Send",
       "object_type": "incident",
       "programmatic_name": "example_kafka_send",
-      "tags": [
-        {
-          "tag_handle": "fn_kafka",
-          "value": null
-        }
-      ],
+      "tags": [],
       "uuid": "dc46b7b4-003a-4735-9166-d5b760295171",
-      "workflow_id": 68
+      "workflow_id": 66
     }
   ],
   "workspaces": []

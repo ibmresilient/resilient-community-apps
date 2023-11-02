@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# Generated with resilient-sdk v50.1.262
 
 """Generate the Resilient customizations required for fn_kafka"""
 
@@ -20,15 +22,25 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_kafka",
-        "message_destinations": [u"fn_kafka"],
-        "functions": [u"kafka_send"],
-        "workflows": [u"example_kafka_send"],
-        "actions": [u"Example: Kafka Send"],
+        "message_destinations": [
+            u"fn_kafka"
+        ],
+        "functions": [
+            u"kafka_send"
+        ],
+        "workflows": [
+            u"example_kafka_send"
+        ],
+        "actions": [
+            u"Example: Kafka Send"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [],
     }
 
 
@@ -37,7 +49,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 38.0.6006
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
