@@ -49,13 +49,14 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-| Version | Date | Notes |
-| ------- | ---- | ----- |
-| 1.1.0 | 6/2023 | Playbook support; Add siem_event_types app.config parameter to query threats using different TAP /siem endpoints |
-| 1.0.3 | 8/2020 | Fix for event filtering |
-| 1.0.2 | 5/2020 | Fix for Poller |
-| 1.0.1 | 4/2020 | Bugfix |
-| 1.0.0 | 12/2019 | Initial release |
+| Version | Date    | Notes                                                                                                            |
+|---------|---------|------------------------------------------------------------------------------------------------------------------|
+| 1.1.1   | 11/2024 | Convert all scripts to Python3                                                                                   |
+| 1.1.0   | 6/2023  | Playbook support; Add siem_event_types app.config parameter to query threats using different TAP /siem endpoints |
+| 1.0.3   | 8/2020  | Fix for event filtering                                                                                          |
+| 1.0.2   | 5/2020  | Fix for Poller                                                                                                   |
+| 1.0.1   | 4/2020  | Bugfix                                                                                                           |
+| 1.0.0   | 12/2019 | Initial release                                                                                                  |
 
 ### 1.1 Changes
 ## Playbooks
