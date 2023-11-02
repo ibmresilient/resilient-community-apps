@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_bigfix',
     display_name="BigFix Integration for SOAR",
-    version='1.2.0',
+    version='1.2.1',
     license='MIT License',
     author='IBM SOAR',
     description="SOAR Components for BigFix",

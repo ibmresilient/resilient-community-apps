@@ -23,13 +23,14 @@
 ---
 
 ## Release Notes
-| Version | Date | Notes |
-| ------- | ---- | ----- |
-| 1.2.0 | 08/2022 | Bug fixes and update code |
-| 1.1.2 | 08/2020 | Added support added for App Host and Added proxy support Added selftest functionality |
-| 1.1.1 | 08/2019 | New configuration option ‘bigfix_endpoints_wait’. Configuration option ‘hunt_results_limit’ renamed to ‘bigfix_hunt_results_limit’. |
-| 1.1.0 | 10/2018 | Bug fixes and redesign for the Resilient Functions feature. Includes Bug fixes. |
-| 1.0.0 | 10/2018 | Initial Release |
+| Version | Date    | Notes                                                                                                                               |
+|---------|---------|-------------------------------------------------------------------------------------------------------------------------------------|
+| 1.2.1   | 10/2023 | Convert Workflows to Python3                                                                                                        |
+| 1.2.0   | 08/2022 | Bug fixes and update code                                                                                                           |
+| 1.1.2   | 08/2020 | Added support added for App Host and Added proxy support Added selftest functionality                                               |
+| 1.1.1   | 08/2019 | New configuration option ‘bigfix_endpoints_wait’. Configuration option ‘hunt_results_limit’ renamed to ‘bigfix_hunt_results_limit’. |
+| 1.1.0   | 10/2018 | Bug fixes and redesign for the Resilient Functions feature. Includes Bug fixes.                                                     |
+| 1.0.0   | 10/2018 | Initial Release                                                                                                                     |
 
 ---
 
