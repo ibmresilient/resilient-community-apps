@@ -6,22 +6,22 @@
     "number_of_elements": 1,
     "data": [
       {
-        "last_seen": 1643389092070,
-        "first_seen": 1643389092070,
-        "source": "reference data api",
-        "value": "1.1.1.1",
+        "last_seen": 1694498079793,
+        "first_seen": 1694498079793,
+        "source": "EC: Sysmon - Detected a Possible Credential Dumping Tool",
+        "value": "192.168.107.107",
         "domain_id": null
       }
     ],
-    "creation_time": 1440703811218,
-    "name": "SSH Servers",
+    "creation_time": 1557250160405,
+    "name": "EC Compromised Hosts",
     "namespace": "SHARED",
     "element_type": "IP",
-    "collection_id": 17
+    "collection_id": 35
   },
   "inputs": {
-    "qradar_reference_set_name": "SSH Servers",
-    "qradar_reference_set_item_value": "1.1.1.1",
-    "qradar_label": "SOAR_Plugin_Destination_Name"
+    "qradar_reference_set_name": "EC Compromised Hosts",
+    "qradar_reference_set_item_value": "192.168.107.107",
+    "qradar_label": "1.1.1.1"
   }
 }

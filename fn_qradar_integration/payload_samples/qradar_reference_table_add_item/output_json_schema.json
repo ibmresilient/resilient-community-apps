@@ -18,9 +18,6 @@
         "content": {
           "type": "object",
           "properties": {
-            "time_to_live": {
-              "type": "string"
-            },
             "timeout_type": {
               "type": "string"
             },
@@ -35,6 +32,14 @@
             },
             "namespace": {
               "type": "string"
+            },
+            "key_name_types": {
+              "type": "object",
+              "properties": {
+                "Inner Key 1": {
+                  "type": "string"
+                }
+              }
             },
             "element_type": {
               "type": "string"
@@ -58,12 +63,8 @@
         "qradar_reference_table_item_value": {
           "type": "string"
         },
-        "qradar_reference_table_item_inner_key": {
-          "type": "string"
-        },
-        "qradar_reference_table_item_outer_key": {
-          "type": "string"
-        },
+        "qradar_reference_table_item_inner_key": {},
+        "qradar_reference_table_item_outer_key": {},
         "qradar_reference_table_name": {
           "type": "string"
         },
