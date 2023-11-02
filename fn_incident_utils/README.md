@@ -41,10 +41,11 @@
   Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
-| Version | Date | Notes |
-| ------- | ---- | ----- |
-| 1.1.0 | 06/2021 | Added create and search functions |
-| 1.0.0 | 12/2020 | Initial Release |
+| Version | Date    | Notes |
+|---------|---------| -- |
+| 1.1.1   | 10/2023 | Convert Workflows to Python3 |
+| 1.1.0   | 06/2021 | Added create and search functions |
+| 1.0.0   | 12/2020 | Initial Release |
 
 ---
 
