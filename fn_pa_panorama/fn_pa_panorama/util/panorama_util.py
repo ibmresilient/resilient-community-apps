@@ -8,7 +8,7 @@ from resilient_lib.components.resilient_common import validate_fields, str_to_bo
 from resilient_lib.components.requests_common import RequestsCommon, IntegrationError
 
 LOG = getLogger(__name__)
-DEFAULT_API_VERSION = "9.0"
+DEFAULT_API_VERSION = "9.1"
 URI_PATH = "restapi"
 PACKAGE_NAME = "fn_pa_panorama"
 
@@ -27,8 +27,8 @@ class PanoramaClient:
         self.verify = str_to_bool(pan_config.get("cert", "True"))
         self.host = pan_config["panorama_host"]
         self.rc = RequestsCommon(opts, pan_config)
-        self.query_parameters = {"key": self.__key,
-                                 "location": location,
+        self.header = {"X-PAN-KEY": self.__key}
+        self.query_parameters = {"location": location,
                                  "output-format": "json"}
         if location in ["vsys", "panorama-pushed"]:
             self.query_parameters["vsys"] = self.__vsys
@@ -39,19 +39,19 @@ class PanoramaClient:
 
     def __get(self, resource_uri, parameters):
         """Generic GET"""
-        response = self.rc.execute("GET", self.__build_url(resource_uri), params=parameters, verify=self.verify)
+        response = self.rc.execute("GET", self.__build_url(resource_uri), params=parameters, verify=self.verify, headers=self.header)
         LOG.debug(f"Response: {response}")
         return response.json()
 
     def __post(self, resource_uri, params, payload):
         """Generic POST"""
-        response = self.rc.execute("POST", self.__build_url(resource_uri), params=params, json=loads(payload), verify=self.verify)
+        response = self.rc.execute("POST", self.__build_url(resource_uri), params=params, json=loads(payload), verify=self.verify, headers=self.header)
         LOG.debug(f"Status code: {response.status_code}, Response: {response.content}")
         return response.json()
 
     def __put(self, resource_uri, params, payload):
         """Generic PUT"""
-        response = self.rc.execute("PUT", self.__build_url(resource_uri), params=params, json=loads(payload), verify=self.verify)
+        response = self.rc.execute("PUT", self.__build_url(resource_uri), params=params, json=loads(payload), verify=self.verify, headers=self.header)
         LOG.debug(f"Status code: {response.status_code}, Response: {response.content}")
         return response.json()
 
@@ -85,7 +85,7 @@ class PanoramaClient:
                   "action": "get",
                   "key": self.__key,
                   "xpath": xpath}
-        response = self.rc.execute("POST", f"{self.host}/api/", params=params, verify=self.verify)
+        response = self.rc.execute("POST", f"{self.host}/api/", params=params, verify=self.verify, headers=self.header)
         response.raise_for_status()
         return response.text
 
@@ -97,7 +97,7 @@ class PanoramaClient:
                   "key": self.__key,
                   "xpath": xpath,
                   "element": xml_object}
-        response = self.rc.execute("POST", f"{self.host}/api/?", params=params, verify=self.verify)
+        response = self.rc.execute("POST", f"{self.host}/api/?", params=params, verify=self.verify, headers=self.header)
         response.raise_for_status()
         return response.text
 

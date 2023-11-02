@@ -27,7 +27,7 @@ def selftest_function(opts):
     try:
         for server_name in server_list:
             options = opts.get(server_name, {})
-            panorama_util = PanoramaClient(opts, options, "vsys", "vsys1")
+            panorama_util = PanoramaClient(opts, options, "shared", "test")
             panorama_util.get_addresses()
 
             status = True if panorama_util else False

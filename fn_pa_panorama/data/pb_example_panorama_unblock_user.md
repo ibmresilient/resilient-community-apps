@@ -47,7 +47,7 @@ Given a User Account artifact, removes the user from the "Blocked_Users" group i
 # Set this to the xpath of the group you are interested in
 inputs.panorama_user_group_xpath = "/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']"
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
-inputs.panorama_location = "vsys"
+inputs.panorama_location = "shared"
 ```
 
 ---
@@ -64,7 +64,7 @@ inputs.panorama_location = "vsys"
 
 ### Function-Input Script
 ```python
-inputs.panorama_location = "vsys"
+inputs.panorama_location = "shared"
 # Set this to the name of the user group you wish to add a user to
 group_name = "Blocked_Users"
 
