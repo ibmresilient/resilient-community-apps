@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_kafka',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='Mark Scherfling',
     author_email='Resilient Labs',
