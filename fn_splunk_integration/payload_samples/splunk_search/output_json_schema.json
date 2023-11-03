@@ -17,16 +17,25 @@
           "_key": {
             "type": "string"
           },
-          "domain": {
+          "disabled": {
+            "type": "string"
+          },
+          "ip": {
             "type": "string"
           },
           "item_key": {
+            "type": "string"
+          },
+          "threat_collection": {
             "type": "string"
           },
           "threat_key": {
             "type": "string"
           },
           "time": {
+            "type": "string"
+          },
+          "updated": {
             "type": "string"
           }
         }
@@ -36,18 +45,19 @@
     "inputs": {
       "type": "object",
       "properties": {
+        "splunk_query_param1": {
+          "type": "string"
+        },
         "splunk_max_return": {
           "type": "integer"
         },
-        "splunk_query_param1": {
-          "type": "string"
+        "splunk_search_time_to_wait": {
+          "type": "integer"
         },
         "splunk_query": {
           "type": "string"
         },
-        "splunk_label": {
-          "type": "string"
-        },
+        "splunk_label": {},
         "splunk_query_param3": {
           "type": "string"
         },
