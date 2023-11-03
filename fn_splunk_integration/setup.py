@@ -6,16 +6,15 @@ from setuptools import setup, find_packages
 setup(
     name='fn_splunk_integration',
     display_name='Splunk Integration for SOAR',
-    version='1.3.1',
+    version='1.4.0',
     license='MIT License',
     author='IBM SOAR',
     description="Add, Search and Delete artifacts to Splunk ES",
     long_description="Several functions to operate with Splunk ES intel collections, including updates to SplunkES notable events and add, search and delete operations to intel collections based on artifact type values.",
     url="https://github.com/ibmresilient/resilient-community-apps",
     install_requires=[
-        'resilient_circuits>=40.0.0',
-        'resilient_lib',
-        'splunk-sdk'
+        'resilient_circuits>=48.0.0',
+        'resilient_lib'
     ],
     python_requires='>=3.6',
     packages=find_packages(),

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """AppFunction implementation"""
 
@@ -30,12 +30,11 @@ class FunctionComponent(AppFunctionComponent):
         # Validate required parameters
         validate_fields(["event_id"], fn_inputs)
 
-        splunk, splunk_verify_cert = function_basics(fn_inputs, self.servers_list, utils=True)
+        splunk = function_basics(fn_inputs, self.servers_list, self.opts)
 
         splunk_result = splunk.update_notable(event_id=fn_inputs.event_id,
                                               comment=getattr(fn_inputs, "comment", None),
-                                              status=getattr(fn_inputs, "notable_event_status", None),
-                                              cafile=splunk_verify_cert)
+                                              status=getattr(fn_inputs, "notable_event_status", None))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

@@ -30,9 +30,7 @@
         "splunk_threat_intel_type": {
           "type": "string"
         },
-        "splunk_label": {
-          "type": "string"
-        },
+        "splunk_label": {},
         "splunk_query_param2": {
           "type": "string"
         }
