@@ -2899,8 +2899,13 @@
       "id": 242,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
+<<<<<<< HEAD
         "id": 8,
         "name": "a@example.com",
+=======
+        "id": 6,
+        "name": "dummy@dummy",
+>>>>>>> 2e7149f36 (SOARAPPS-7228 fn_sep 1.1.1 convet workflows/scripts to py3 [build-dev-app])
         "type": "user"
       },
       "last_modified_time": 1674507183387,
