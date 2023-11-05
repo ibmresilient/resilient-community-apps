@@ -74,6 +74,7 @@
 
 | Date | Version | Notes |
 | ---: | :------: | :---- |
+| 11/2023 | 1.1.1 | Convert Workflow/Script to Python3 |
 | 01/2023 | 1.1.0 | Five more functions added (Cancel a command, Get critical event information, Get all policy summary, Get firewall policy, Get exceptions policy) and relevant test functions implemented. Payload, ReadMe added and bug fix for patch import.|
 | 12/2022 | 1.0.2 | Bug fix for osname and selftest |
 | 11/2020 | 1.0.1 | Support added for App Host |
