@@ -22,7 +22,7 @@ def snake_to_camel(word):
 
 setup(
     name="fn_maas360",
-    version="1.0.1",
+    version="1.0.2",
     license="MIT",
     author="IBM Resilient",
     url='https://ibm.com/mysupport',
