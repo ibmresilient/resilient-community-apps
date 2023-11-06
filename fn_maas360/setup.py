@@ -24,7 +24,7 @@ setup(
     name="fn_maas360",
     version="1.0.2",
     license="MIT",
-    author="IBM Resilient",
+    author="IBM SOAR",
     url='https://ibm.com/mysupport',
     description="This package enables Mobile Device Management (MDM) actions from IBM Resilient.",
     long_description="""
