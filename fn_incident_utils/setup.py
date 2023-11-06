@@ -22,7 +22,7 @@ def snake_to_camel(word):
 
 setup(
     name="fn_incident_utils",
-    version="1.1.0",
+    version="1.1.1",
     license="MIT",
     author="IBM SOAR",
     author_email="IBM SOAR Apps",
@@ -30,8 +30,8 @@ setup(
     description="Incident functions for IBM SOAR",
     long_description="""This package contains functions to create an incident, close an incident and search for incidents based on filtering conditions.""",
     install_requires=[
-        "resilient_circuits>=30.0.0",
-        "resilient-lib>=39.0"
+        "resilient_circuits>=46.0.0",
+        "resilient-lib>=46.0"
     ],
     packages=find_packages(),
     include_package_data=True,
