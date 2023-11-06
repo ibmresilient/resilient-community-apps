@@ -38,8 +38,8 @@ The MaaS360 function package enables users to perform the following Mobile Devic
 - Stop app distribution across specific target devices.<br>
 - Delete an app from the MaaS360 catalog.""",
     install_requires=[
-        "resilient_circuits>=35.0.0",
-        "resilient-lib>35.0.0"
+        "resilient_circuits>=46.0.0",
+        "resilient-lib>46.0.0"
     ],
     packages=find_packages(),
     include_package_data=True,
