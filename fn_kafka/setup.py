@@ -17,7 +17,7 @@ Key features:
 * Send to Kafka allows key/value or just value transmissions on a topic
 * Poller for listening on broker topics with configurable templates""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=46.0.0',
         'kafka>=1.3.5',
         'resilient-lib',
         'resilient'
