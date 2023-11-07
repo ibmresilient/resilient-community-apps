@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use, line-too-long
+# pragma pylint: disable=unused-argument, line-too-long
 """Module contains SqlFeedDestinationBase, the base class for all SQL feed destinations."""
 import abc
 import logging
+import traceback
 
 from cachetools import cached, LRUCache
 from retry import retry
+from threading import Lock
 from rc_data_feed.lib.feed import FeedDestinationBase
 from rc_data_feed.lib.type_info import TypeInfo
 from .sql_dialect import PostgreSQL96Dialect, SqliteDialect, MySqlDialect, SqlServerDialect, OracleDialect
@@ -14,13 +16,62 @@ from .sql_dialect import PostgreSQL96Dialect, SqliteDialect, MySqlDialect, SqlSe
 LOG = logging.getLogger(__name__)
 PYODBC_CONNECTION_LOST = ('08001', '08S01', '08003', 'HY000') # 08S01 = connection lost, 08003 = Connection not open, HY000 - catch all error
 
+# thread lock used to limit the number of simultaneous updates needed to database tables
+UPDATE_LOCK = Lock()
+UPDATE_TABLE_LOCK = {} 
+
+def get_table_lock(table_name) -> Lock:
+    """get a table specific lock for use when updating the table schema 
+
+    :param table_name: name of table
+    :type table_name: str
+    :return: lock for table updates
+    :rtype: threading.Lock
+    """
+    with UPDATE_LOCK:
+        if not UPDATE_TABLE_LOCK.get(table_name):
+            UPDATE_TABLE_LOCK[table_name] = Lock()
+
+        return UPDATE_TABLE_LOCK[table_name]
+    
+# static table column listing needed for multi-threaded lookup
+# This is needed to minimize the number of times the schema of db table is updated
+TABLE_SCHEMA_LOOKUP_LOCK = Lock()
+TABLE_SCHEMA_LOOKUP = {} # structure: { "<table_name>": {<column_name>:<input_type>} } 
+
+def is_table_found(table_name: str) -> bool:
+    return TABLE_SCHEMA_LOOKUP.get(table_name)
+
+def is_field_found(table_name: str, field_name: str, field_type) -> bool:
+    global TABLE_SCHEMA_LOOKUP
+    """determine if the field name already exist in the db table
+
+    :param table_name: object name is identical to table name
+    :type table_name: str
+    :param field_name: field name in object 
+    :type field_name: str
+    :return: <field found>, <field_type same> True if field already added to the db table
+    :rtype: bool, bool
+    """
+    with TABLE_SCHEMA_LOOKUP_LOCK:
+        if not TABLE_SCHEMA_LOOKUP.get(table_name):
+            TABLE_SCHEMA_LOOKUP[table_name] = {field_name: field_type}
+            return False, False   # not found
+
+        field_found = (field_name in TABLE_SCHEMA_LOOKUP[table_name])
+
+        field_type_same = (TABLE_SCHEMA_LOOKUP[table_name].get(field_name) == field_type)
+        # always update
+        TABLE_SCHEMA_LOOKUP[table_name][field_name] = field_type # add/update
+
+        return field_found, field_type_same
+
 class RetrySendDataException(Exception):
     """Class used to signal a retry of an operation to ensure transactional completeness
 
     :param Exception:
     :type Exception:
     """
-    pass
 
 class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-public-methods
     """
@@ -52,7 +103,6 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
             self.dialect = SqlFeedDestinationBase.AVAILABLE_DIALECTS[dialect_name]()
 
-        self.created_tables = {}
         self.sqlparams_helper = self.dialect.get_sqlparams_helper()
 
     def _init_tables(self):
@@ -106,58 +156,63 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
     @cached(cache=LRUCache(100), key=cache_key)
     def _create_or_update_table(self, type_name, all_fields):
 
-        cursor = None
-        for retry in range(2):
-            try:
-                cursor = self._start_transaction()
-                # id and inc_id are special fields.  We always add them.  Then we look at the
-                # fields to add all the other fields.
-                #
-                if type_name not in self.created_tables:
-                    column_spec = {
-                        "id": "integer primary key",
-                        "inc_id": "integer"
-                    }
-
-                    ddl = self.dialect.get_create_table_if_not_exists(type_name, column_spec)
-
-                    self._execute_sql(cursor, ddl)
-
-                    self.created_tables[type_name] = column_spec.copy()
-
-                for field in all_fields:
-                    field_name = field['name']
-                    field_type = field['input_type']
-
-                    # Add the column for the field if it hasn't been already.
-                    #
-                    if field_name not in self.created_tables[type_name].keys():
-                        self._add_field_to_table(cursor, type_name, field)
-
-                        # remember that we've added the field.
-                        self.created_tables[type_name][field_name] = field['input_type']
-                    elif field_name != 'id' and field_type != self.created_tables[type_name][field_name]:
-                        LOG.warning("Field %s.%s type was %s. Will be altered to %s",
-                                    type_name, field_name, self.created_tables[type_name][field_name], field_type)
-
-                self._commit_transaction(cursor)
-                break
-            except Exception as err:
-                LOG.error("_create_or_update_table exception: %s", err)
-                if err.args and err.args[0] in PYODBC_CONNECTION_LOST:
-                    LOG.warning("ODBC Connection lost, reestablishing connection")
-                    # try reestablishing the connection
-                    self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
-                else:
+        # if locked, bypass any schema updates
+        if not get_table_lock(type_name).locked():
+            with get_table_lock(type_name):
+                cursor = None
+                for _retry in range(2):
                     try:
-                        if cursor:
-                            self._rollback_transaction(cursor)
-                        raise err
-                    except Exception:
-                        pass # nosec
+                        cursor = self._start_transaction()
+                        # id and inc_id are special fields.  We always add them.  Then we look at the
+                        # fields to add all the other fields.
+                        #
+                        if not is_table_found(type_name):
+                            column_spec = {
+                                "id": "integer primary key",
+                                "inc_id": "integer"
+                            }
 
-        if cursor:
-            cursor.close()
+                            ddl = self.dialect.get_create_table_if_not_exists(type_name, column_spec)
+
+                            self._execute_sql(cursor, ddl)
+
+                            # add in the initial columns
+                            for k in column_spec.keys():
+                                is_field_found(type_name, k, 'number')
+
+                        for field in all_fields:
+                            field_name = field['name']
+                            field_type = field['input_type']
+
+                            # Add the column for the field if it hasn't been already.
+                            #
+                            field_found, field_type_same = is_field_found(type_name, field_name, field_type)
+                            if not field_found or not field_type_same:
+                                self._add_field_to_table(cursor, type_name, field)
+
+                            elif field_name != 'id' and not field_type_same:
+                                LOG.warning("Field %s.%s type changed. Will be altered to %s",
+                                            type_name, field_name, field_type)
+
+                        self._commit_transaction(cursor)
+                        break
+                    except Exception as err:
+                        LOG.error(traceback.format_exc())
+                        LOG.error("_create_or_update_table exception: %s", err)
+                        if err.args and err.args[0] in PYODBC_CONNECTION_LOST:
+                            LOG.warning("ODBC Connection lost, reestablishing connection")
+                            # try reestablishing the connection
+                            self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
+                        else:
+                            try:
+                                if cursor:
+                                    self._rollback_transaction(cursor)
+                                raise err
+                            except Exception:
+                                pass # nosec
+                    finally:
+                        if cursor:
+                            cursor.close()
 
 
     def _add_field_to_table(self, cursor, type_name, field):
@@ -203,7 +258,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         all_field_names = [field['name'] for field in all_fields]
 
         # some data types, such as datetime, will need a conversion routine
-        all_field_types = dict()
+        all_field_types = {}
         for field in all_fields:
             all_field_types[field['name']] = field['input_type']
 
@@ -227,7 +282,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         flat_payload['inc_id'] = context.inc_id
 
         cursor = None
-        for retry in range(2):
+        for _retry in range(2):
             try:
                 cursor = self._start_transaction()
                 if context.is_deleted:
@@ -281,13 +336,13 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                     self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
                     # trigger a restart of this operation
                     raise RetrySendDataException
-                else:
-                    try:
-                        if cursor:
-                            self._rollback_transaction(cursor)
-                        raise err
-                    except Exception:
-                        pass # nosec
+
+                try:
+                    if cursor:
+                        self._rollback_transaction(cursor)
+                    raise err
+                except Exception:
+                    pass # nosec
             finally:
                 if cursor:
                     cursor.close()
