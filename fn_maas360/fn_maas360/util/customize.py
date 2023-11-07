@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Copyright © IBM Corporation 2010, 2019, 2023
 # Generated with resilient-sdk v50.1.262
 
 """Generate the Resilient customizations required for fn_maas360"""
