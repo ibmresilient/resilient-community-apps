@@ -10,9 +10,8 @@ setup(
     author='IBM SOAR',
     author_email='',
     url='https://github.com/ibmresilient/resilient-circuits-packages',
-    description="Resilient Circuits Functions for calling NetWitness APIs 'fn_rsa_netwitness'",
-    long_description="Resilient Circuits Components to query for "\
-        "NetWitness metadata and retrieve pcap/log data 'fn_rsa_netwitness'",
+    description="IBM QRadar SOAR Functions for RCA NetWitness",
+    long_description="Query NetWitness metadata and retrieve pcap/log data",
     install_requires=[
         'resilient_circuits>=50.0.0',
         'pytz'
