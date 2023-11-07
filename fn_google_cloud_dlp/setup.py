@@ -21,7 +21,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_google_cloud_dlp',
-    version='1.2.1',
+    version='1.2.2',
     license='MIT',
     author='IBM SOAR',
     author_email='',
