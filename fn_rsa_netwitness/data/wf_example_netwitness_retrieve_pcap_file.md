@@ -45,7 +45,7 @@ None
 session_id1 = workflow.properties.nw_query.content.results.id1
 session_id2 = workflow.properties.nw_query.content.results.id2
 
-inputs.nw_event_session_ids = str(session_id1)+", "+str(session_id2)
+inputs.nw_event_session_ids = f"{str(session_id1)}, {str(session_id2)}"
 inputs.incident_id = incident.id
 ```
 
