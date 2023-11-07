@@ -26,7 +26,7 @@ setup(
     license="MIT",
     author="IBM SOAR",
     url='https://ibm.com/mysupport',
-    description="This package enables Mobile Device Management (MDM) actions from IBM Resilient.",
+    description="This package enables Mobile Device Management (MDM) actions from IBM SOAR.",
     long_description="""
 The MaaS360 function package enables users to perform the following Mobile Device Management (MDM) actions:<br>
 - Basic device search.<br>
