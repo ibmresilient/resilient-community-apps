@@ -34,7 +34,7 @@ from datetime import datetime
 
 def add_row(device):
   device_dt = incident.addRow("maas360_device_dt")
-  device_dt.maas360_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+  device_dt.maas360_timestamp = int(datetime.now().timestamp()*1000)
   device_dt.maas360_deviceid = device.get("maas360DeviceID")
   device_dt.maas360_devicename = device.get("deviceName")
   device_dt.maas360_username = device.get("username")
