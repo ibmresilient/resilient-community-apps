@@ -12,7 +12,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Example: Create an Artifact from Pipl data",
-      "id": 91,
+      "id": 132,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Create an Artifact from Pipl data",
@@ -52,7 +52,7 @@
       ],
       "enabled": true,
       "export_key": "Example: Pipl search function",
-      "id": 92,
+      "id": 133,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: Pipl search function",
@@ -69,8 +69,9 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1611339009365,
+  "export_date": 1699323593822,
   "export_format_version": 2,
+  "export_type": null,
   "fields": [
     {
       "allow_default_value": false,
@@ -82,7 +83,7 @@
       "deprecated": false,
       "export_key": "__function/pipl_artifact_value",
       "hide_notification": false,
-      "id": 553,
+      "id": 1008,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -112,7 +113,7 @@
       "deprecated": false,
       "export_key": "__function/pipl_artifact_type",
       "hide_notification": false,
-      "id": 554,
+      "id": 1009,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -142,7 +143,7 @@
       "deprecated": false,
       "export_key": "actioninvocation/pipl_artifact_type",
       "hide_notification": false,
-      "id": 552,
+      "id": 1007,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -168,7 +169,7 @@
           "label": "Email Recipient",
           "properties": null,
           "uuid": "89e35943-281a-48f9-9398-9cb96cca0f5a",
-          "value": 409
+          "value": 410
         },
         {
           "default": false,
@@ -177,7 +178,7 @@
           "label": "Email Sender",
           "properties": null,
           "uuid": "c4e69990-9c52-435c-87f8-f9d10e131391",
-          "value": 410
+          "value": 411
         },
         {
           "default": false,
@@ -186,7 +187,7 @@
           "label": "Email Sender Name",
           "properties": null,
           "uuid": "821ea9df-c690-4af2-8f22-d32a98218bcd",
-          "value": 411
+          "value": 412
         },
         {
           "default": false,
@@ -195,7 +196,7 @@
           "label": "User Account",
           "properties": null,
           "uuid": "48821cbb-8ad8-43de-b9d6-93f7b05cc2cc",
-          "value": 412
+          "value": 413
         },
         {
           "default": false,
@@ -204,7 +205,7 @@
           "label": "Malware MD5 Hash",
           "properties": null,
           "uuid": "c553e313-ae0d-4da6-86ac-33b11e122d55",
-          "value": 413
+          "value": 414
         },
         {
           "default": false,
@@ -213,7 +214,7 @@
           "label": "String",
           "properties": null,
           "uuid": "8e91848e-91bc-4f4c-9b52-1b74fa923040",
-          "value": 414
+          "value": 415
         }
       ]
     },
@@ -231,12 +232,7 @@
   ],
   "functions": [
     {
-      "creator": {
-        "display_name": "Brian Reid",
-        "id": 1,
-        "name": "a@example.com",
-        "type": "user"
-      },
+      "created_date": 1698652532894,
       "description": {
         "content": "Function enriches your leads (name, email address, phone number, or social media username) with Pipl and gets their personal, professional, demographic, and contact information.",
         "format": "text"
@@ -246,12 +242,12 @@
       "export_key": "pipl_search_function",
       "id": 64,
       "last_modified_by": {
-        "display_name": "Brian Reid",
-        "id": 1,
-        "name": "a@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 6,
+        "name": "dummy@dummy.com",
         "type": "user"
       },
-      "last_modified_time": 1611338730364,
+      "last_modified_time": 1698652532988,
       "name": "pipl_search_function",
       "tags": [],
       "uuid": "803df474-2df0-4cf2-8882-cf2c519cca76",
@@ -283,19 +279,20 @@
           "programmatic_name": "example_pipl_search_function",
           "tags": [],
           "uuid": null,
-          "workflow_id": 71
+          "workflow_id": 141
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 1,
+  "id": 42,
+  "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1611776804358,
+      "create_date": 1699323590564,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -304,7 +301,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1611776804358,
+      "update_date": 1699323590564,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -313,46 +310,50 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [],
+      "api_keys": [
+        "50b028eb-7ca6-4209-b502-2670e5ac79b5"
+      ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_pipl",
       "name": "fn_pipl",
       "programmatic_name": "fn_pipl",
       "tags": [],
-      "users": [
-        "a@example.com"
-      ],
+      "users": [],
       "uuid": "cc5c5ad8-cd24-40e8-ad7a-546d3af3cd21"
     }
   ],
   "notifications": null,
-  "overrides": [],
+  "overrides": null,
   "phases": [],
+  "playbooks": [],
   "regulators": null,
   "roles": [],
   "scripts": [
     {
       "actions": [],
-      "creator_id": "a@example.com",
+      "created_date": 1698652532342,
       "description": "Script creates an artifact based from a selected row in Pipl possible person data.",
+      "enabled": false,
       "export_key": "Create Artifact from Pipl Data",
-      "id": 9,
-      "language": "python",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1611338729348,
+      "id": 68,
+      "language": "python3",
+      "last_modified_by": "dummy@dummy.com",
+      "last_modified_time": 1699323308691,
       "name": "Create Artifact from Pipl Data",
       "object_type": "pipl_person_data",
-      "script_text": "# Create an artifact based from a selected row in Pipl possible person data.\n\n# artifact description\nartifact_description = u\"\"\"Created by Pipl Data results generated for artifact_value {}\"\"\".format(row.pipl_artifact_value)\n\n# artifact type - read it from the menu item\u0027s activity field\nartifact_type = rule.properties.pipl_artifact_type\n\n# artifact value\n# pipl_value column in Pip possible person data is in this format {u\u0027format\u0027: u\u0027html\u0027, u\u0027content\u0027: u\u0027your api data\u0027} \nrich_text_pipl_value = row.pipl_value\nartifact_value = rich_text_pipl_value.get(\"content\")\n\n# create an artifact\nif artifact_value:\n  incident.addArtifact(artifact_type, artifact_value, artifact_description)",
+      "playbook_handle": null,
+      "programmatic_name": "create_artifact_from_pipl_data",
+      "script_text": "# Create an artifact based from a selected row in Pipl possible person data.\n\n# artifact description\nartifact_description = \"\"\"Created by Pipl Data results generated for artifact_value {}\"\"\".format(row.pipl_artifact_value)\n\n# artifact type - read it from the menu item\u0027s activity field\nartifact_type = rule.properties.pipl_artifact_type\n\n# artifact value\n# pipl_value column in Pip possible person data is in this format {u\u0027format\u0027: u\u0027html\u0027, u\u0027content\u0027: u\u0027your api data\u0027} \nrich_text_pipl_value = row.pipl_value\nartifact_value = rich_text_pipl_value.get(\"content\")\n\n# create an artifact\nif artifact_value:\n  incident.addArtifact(artifact_type, artifact_value, artifact_description)",
       "tags": [],
       "uuid": "0fe4cc26-a428-4103-8554-7d31656d60df"
     }
   ],
   "server_version": {
-    "build_number": 0,
-    "major": 37,
+    "build_number": 8131,
+    "major": 46,
     "minor": 0,
-    "version": "37.0.0"
+    "version": "46.0.8131"
   },
   "tags": [],
   "task_order": [],
@@ -373,7 +374,7 @@
           "deprecated": false,
           "export_key": "pipl_person_data/pipl_artifact_value",
           "hide_notification": false,
-          "id": 545,
+          "id": 1000,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -389,7 +390,7 @@
           "templates": [],
           "text": "Artifact value",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1079,
           "uuid": "9b4bacc5-3d40-4b70-94a0-8cecd8140bb2",
           "values": [],
           "width": 144
@@ -404,7 +405,7 @@
           "deprecated": false,
           "export_key": "pipl_person_data/pipl_inferred",
           "hide_notification": false,
-          "id": 546,
+          "id": 1001,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -420,7 +421,7 @@
           "templates": [],
           "text": "Inferred",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1079,
           "uuid": "0182c8a1-a618-4c24-9b62-526ec550c03a",
           "values": [],
           "width": 41
@@ -435,7 +436,7 @@
           "deprecated": false,
           "export_key": "pipl_person_data/pipl_match",
           "hide_notification": false,
-          "id": 547,
+          "id": 1002,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -451,7 +452,7 @@
           "templates": [],
           "text": "Match",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1079,
           "uuid": "6ac95e6e-fb35-431f-a599-dde5a376f78e",
           "values": [],
           "width": 33
@@ -466,7 +467,7 @@
           "deprecated": false,
           "export_key": "pipl_person_data/pipl_possible_match_no",
           "hide_notification": false,
-          "id": 548,
+          "id": 1003,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -482,7 +483,7 @@
           "templates": [],
           "text": "Possible people match no.",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1079,
           "uuid": "7fb5cc8a-bc41-46cc-b674-1d08358e8dc9",
           "values": [],
           "width": 45
@@ -497,7 +498,7 @@
           "deprecated": false,
           "export_key": "pipl_person_data/pipl_property",
           "hide_notification": false,
-          "id": 549,
+          "id": 1004,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -513,7 +514,7 @@
           "templates": [],
           "text": "Property",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1079,
           "uuid": "aa4cb686-e6a2-45f9-8ea6-459892b72763",
           "values": [],
           "width": 50
@@ -528,7 +529,7 @@
           "deprecated": false,
           "export_key": "pipl_person_data/pipl_timestamp",
           "hide_notification": false,
-          "id": 550,
+          "id": 1005,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -544,7 +545,7 @@
           "templates": [],
           "text": "Timestamp",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1079,
           "uuid": "c24cec12-f4c8-4f85-9324-25967e04e7da",
           "values": [],
           "width": 115
@@ -559,7 +560,7 @@
           "deprecated": false,
           "export_key": "pipl_person_data/pipl_value",
           "hide_notification": false,
-          "id": 551,
+          "id": 1006,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -575,7 +576,7 @@
           "templates": [],
           "text": "Value",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1079,
           "uuid": "99c807cb-7f2e-42b5-ac44-02bcfd3c8b69",
           "values": [],
           "width": 163
@@ -605,22 +606,21 @@
     {
       "actions": [],
       "content": {
-        "version": 1,
+        "version": 2,
         "workflow_id": "example_pipl_search_function",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_pipl_search_function\" isExecutable=\"true\" name=\"Example: Pipl search\"\u003e\u003cdocumentation\u003eEnriches your leads (name, email address, phone number, or social media username) with Pipl and gets their personal, professional, demographic, and contact information.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1g5v5tg\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0pjeg9h\" name=\"Pipl search function\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"803df474-2df0-4cf2-8882-cf2c519cca76\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ndef add_row_to_pipl_datatable(db_timestamp, db_artifact_value, db_match_no, db_property, db_value, db_match, db_inferred):\\n  pipl_person_data = incident.addRow(\\\"pipl_person_data\\\")\\n  pipl_person_data.pipl_timestamp = db_timestamp\\n  pipl_person_data.pipl_artifact_value = db_artifact_value\\n  pipl_person_data.pipl_possible_match_no = db_match_no\\n  pipl_person_data.pipl_property = db_property\\n  pipl_person_data.pipl_value = db_value\\n  pipl_person_data.pipl_match = db_match\\n  pipl_person_data.pipl_inferred = db_inferred\\n\\nif results.success:\\n\\n  # Create a datatable from pipl response\\n  possible_person_counter = 0\\n  for person in results.person_list:\\n    \\n    # generate result_id and timestamp\\n    possible_person_counter += 1\\n    now = Date()\\n    \\n    # 0-1. The level of confidence we have that this is the person you\u2019re looking for.\\n    match = str(person.get(\\\"@match\\\", \\\"\\\"))\\n    \\n    # Whether this person is made up solely from data inferred by statistical analysis from your search query. \\n    # You can control inference using the minimum_probability parameter, and inference of persons using the infer_persons parameter.\\n    inferred = str(person.get(\\\"@inferred\\\", \\\"\\\"))\\n    \\n    # Person data\\n    names = person.get(\\\"names\\\", [])\\n    for name in names:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"name\\\", name.get(\\\"display\\\", \\\"\\\"), match, inferred)\\n    \\n    emails = person.get(\\\"emails\\\", [])\\n    for email in emails:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"email address\\\", email.get(\\\"address\\\", \\\"\\\"), match, inferred)\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"address_md5\\\", email.get(\\\"address_md5\\\", \\\"\\\"), match, inferred)\\n    \\n    usernames = person.get(\\\"usernames\\\", [])\\n    for usrname in usernames:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"username\\\", usrname.get(\\\"content\\\", \\\"\\\"), match, inferred)\\n      \\n    phones = person.get(\\\"phones\\\", [])\\n    for phone in phones:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"phone\\\", phone.get(\\\"display_international\\\", \\\"\\\"), match, inferred)\\n      \\n    gender = person.get(\\\"gender\\\")\\n    if gender:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"gender\\\", gender.get(\\\"content\\\", \\\"\\\"), match, inferred)\\n    \\n    dob = person.get(\\\"dob\\\")\\n    if dob:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"dob\\\", dob.get(\\\"display\\\", \\\"\\\"), match, inferred)\\n    \\n    addresses = person.get(\\\"addresses\\\", [])\\n    for address in addresses:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"address\\\", address.get(\\\"display\\\", \\\"\\\"), match, inferred)\\n      \\n    jobs = person.get(\\\"jobs\\\", [])\\n    for job in jobs:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"job\\\", job.get(\\\"display\\\", \\\"\\\"), match, inferred)\\n    \\n    educations = person.get(\\\"educations\\\", [])\\n    for edu in educations:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"education\\\", edu.get(\\\"display\\\", \\\"\\\"), match, inferred)\\n      \\n    user_ids = person.get(\\\"user_ids\\\", [])\\n    for usr_id in user_ids:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"user_id\\\", usr_id.get(\\\"content\\\", \\\"\\\"), match, inferred)\\n      \\n    images = person.get(\\\"images\\\", [])\\n    for image in images:\\n      image_url = \\\"\\\"\\\"\u0026lt;a href=\u0027{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\"\\\"\\\".format(image.get(\\\"url\\\", \\\"\\\")) if image.get(\\\"url\\\", \\\"\\\") else \\\"\\\"\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"image\\\", image_url, match, inferred)\\n      \\n    urls = person.get(\\\"urls\\\", [])\\n    for url in urls:\\n      url_url = \\\"\\\"\\\"\u0026lt;a href=\u0027{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\"\\\"\\\".format(url.get(\\\"url\\\", \\\"\\\")) if url.get(\\\"url\\\", \\\"\\\") else \\\"\\\"\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"url\\\", url_url, match, inferred)\\n      \\n  # Save the json result as an Note\\n  raw_data = results.raw_data if results.raw_data else \\\"\\\"\\n  counter = possible_person_counter if possible_person_counter \u0026gt; 0 else \\\"\\\"\\n  noteText = u\\\"\\\"\\\"Pipl Data API response for artifact_value {} returned {} {}: \\\\n{}\\\"\\\"\\\".format(artifact.value, counter, results.pipl_response, raw_data)\\n  incident.addNote(noteText)\",\"pre_processing_script\":\"# Required inputs are: the artifact_type and artifact_value\\ninputs.pipl_artifact_type = artifact.type\\ninputs.pipl_artifact_value = artifact.value\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1g5v5tg\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_113a0bn\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1g5v5tg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0pjeg9h\"/\u003e\u003cendEvent id=\"EndEvent_06zlxqa\"\u003e\u003cincoming\u003eSequenceFlow_113a0bn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_113a0bn\" sourceRef=\"ServiceTask_0pjeg9h\" targetRef=\"EndEvent_06zlxqa\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0pjeg9h\" id=\"ServiceTask_0pjeg9h_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"313\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1g5v5tg\" id=\"SequenceFlow_1g5v5tg_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"313\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"255.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_06zlxqa\" id=\"EndEvent_06zlxqa_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"526\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"544\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_113a0bn\" id=\"SequenceFlow_113a0bn_di\"\u003e\u003comgdi:waypoint x=\"413\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"526\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"469.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_pipl_search_function\" isExecutable=\"true\" name=\"Example: Pipl search\"\u003e\u003cdocumentation\u003eEnriches your leads (name, email address, phone number, or social media username) with Pipl and gets their personal, professional, demographic, and contact information.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1g5v5tg\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0pjeg9h\" name=\"Pipl search function\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"803df474-2df0-4cf2-8882-cf2c519cca76\"\u003e{\"inputs\":{},\"post_processing_script\":\"from java.util import Date\\n\\ndef add_row_to_pipl_datatable(db_timestamp, db_artifact_value, db_match_no, db_property, db_value, db_match, db_inferred):\\n  pipl_person_data = incident.addRow(\\\"pipl_person_data\\\")\\n  pipl_person_data.pipl_timestamp = db_timestamp\\n  pipl_person_data.pipl_artifact_value = db_artifact_value\\n  pipl_person_data.pipl_possible_match_no = db_match_no\\n  pipl_person_data.pipl_property = db_property\\n  pipl_person_data.pipl_value = db_value\\n  pipl_person_data.pipl_match = db_match\\n  pipl_person_data.pipl_inferred = db_inferred\\n\\nif results.success:\\n\\n  # Create a datatable from pipl response\\n  possible_person_counter = 0\\n  for person in results.person_list:\\n    \\n    # generate result_id and timestamp\\n    possible_person_counter += 1\\n    now = Date()\\n    \\n    # 0-1. The level of confidence we have that this is the person you\u2019re looking for.\\n    match = str(person.get(\\\"@match\\\", \\\"\\\"))\\n    \\n    # Whether this person is made up solely from data inferred by statistical analysis from your search query. \\n    # You can control inference using the minimum_probability parameter, and inference of persons using the infer_persons parameter.\\n    inferred = str(person.get(\\\"@inferred\\\", \\\"\\\"))\\n    \\n    # Person data\\n    names = person.get(\\\"names\\\", [])\\n    for name in names:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"name\\\", name.get(\\\"display\\\", \\\"\\\"), match, inferred)\\n    \\n    emails = person.get(\\\"emails\\\", [])\\n    for email in emails:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"email address\\\", email.get(\\\"address\\\", \\\"\\\"), match, inferred)\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"address_md5\\\", email.get(\\\"address_md5\\\", \\\"\\\"), match, inferred)\\n    \\n    usernames = person.get(\\\"usernames\\\", [])\\n    for usrname in usernames:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"username\\\", usrname.get(\\\"content\\\", \\\"\\\"), match, inferred)\\n      \\n    phones = person.get(\\\"phones\\\", [])\\n    for phone in phones:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"phone\\\", phone.get(\\\"display_international\\\", \\\"\\\"), match, inferred)\\n      \\n    gender = person.get(\\\"gender\\\")\\n    if gender:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"gender\\\", gender.get(\\\"content\\\", \\\"\\\"), match, inferred)\\n    \\n    dob = person.get(\\\"dob\\\")\\n    if dob:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"dob\\\", dob.get(\\\"display\\\", \\\"\\\"), match, inferred)\\n    \\n    addresses = person.get(\\\"addresses\\\", [])\\n    for address in addresses:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"address\\\", address.get(\\\"display\\\", \\\"\\\"), match, inferred)\\n      \\n    jobs = person.get(\\\"jobs\\\", [])\\n    for job in jobs:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"job\\\", job.get(\\\"display\\\", \\\"\\\"), match, inferred)\\n    \\n    educations = person.get(\\\"educations\\\", [])\\n    for edu in educations:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"education\\\", edu.get(\\\"display\\\", \\\"\\\"), match, inferred)\\n      \\n    user_ids = person.get(\\\"user_ids\\\", [])\\n    for usr_id in user_ids:\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"user_id\\\", usr_id.get(\\\"content\\\", \\\"\\\"), match, inferred)\\n      \\n    images = person.get(\\\"images\\\", [])\\n    for image in images:\\n      image_url = \\\"\\\"\\\"\u0026lt;a href=\u0027{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\"\\\"\\\".format(image.get(\\\"url\\\", \\\"\\\")) if image.get(\\\"url\\\", \\\"\\\") else \\\"\\\"\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"image\\\", image_url, match, inferred)\\n      \\n    urls = person.get(\\\"urls\\\", [])\\n    for url in urls:\\n      url_url = \\\"\\\"\\\"\u0026lt;a href=\u0027{0}\u0027\u0026gt;{0}\u0026lt;/a\u0026gt;\\\"\\\"\\\".format(url.get(\\\"url\\\", \\\"\\\")) if url.get(\\\"url\\\", \\\"\\\") else \\\"\\\"\\n      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, \\\"url\\\", url_url, match, inferred)\\n      \\n  # Save the json result as an Note\\n  raw_data = results.raw_data if results.raw_data else \\\"\\\"\\n  counter = possible_person_counter if possible_person_counter \u0026gt; 0 else \\\"\\\"\\n  noteText = \\\"\\\"\\\"Pipl Data API response for artifact_value {} returned {} {}: \\\\n{}\\\"\\\"\\\".format(artifact.value, counter, results.pipl_response, raw_data)\\n  incident.addNote(noteText)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# Required inputs are: the artifact_type and artifact_value\\ninputs.pipl_artifact_type = artifact.type\\ninputs.pipl_artifact_value = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1g5v5tg\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_113a0bn\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1g5v5tg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0pjeg9h\"/\u003e\u003cendEvent id=\"EndEvent_06zlxqa\"\u003e\u003cincoming\u003eSequenceFlow_113a0bn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_113a0bn\" sourceRef=\"ServiceTask_0pjeg9h\" targetRef=\"EndEvent_06zlxqa\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0pjeg9h\" id=\"ServiceTask_0pjeg9h_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"313\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1g5v5tg\" id=\"SequenceFlow_1g5v5tg_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"313\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"255.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_06zlxqa\" id=\"EndEvent_06zlxqa_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"526\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"544\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_113a0bn\" id=\"SequenceFlow_113a0bn_di\"\u003e\u003comgdi:waypoint x=\"413\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"526\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"469.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 1,
-      "creator_id": "a@example.com",
+      "content_version": 2,
       "description": "Enriches your leads (name, email address, phone number, or social media username) with Pipl and gets their personal, professional, demographic, and contact information.",
       "export_key": "example_pipl_search_function",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1611338731170,
+      "last_modified_by": "dummy@dummy.com",
+      "last_modified_time": 1699323349838,
       "name": "Example: Pipl search",
       "object_type": "artifact",
       "programmatic_name": "example_pipl_search_function",
       "tags": [],
       "uuid": "06364496-ff28-4e49-b975-82562378f4c5",
-      "workflow_id": 71
+      "workflow_id": 141
     }
   ],
   "workspaces": []
