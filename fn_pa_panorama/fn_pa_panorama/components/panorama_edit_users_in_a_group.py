@@ -56,7 +56,7 @@ class FunctionComponent(AppFunctionComponent):
         else:
             raise FunctionError(f"Editing the user group was unsuccessful with code {dict_response['response'].get('@code')}, raising FunctionError.")
 
-        # add to dict_response to allow for more options in Resilient scripting and make some actions easier
+        # Add to dict_response to allow for more options in SOAR scripting and make some actions easier
         dict_response["xml_response"] = xml_response
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")

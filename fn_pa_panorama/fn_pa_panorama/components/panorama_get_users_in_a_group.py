@@ -28,7 +28,7 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate required parameters
-        validate_fields(["panorama_user_group_xpath"], fn_inputs)
+        validate_fields(["panorama_user_group_xpath", "panorama_location"], fn_inputs)
 
         # Log inputs
         self.LOG.info(fn_inputs)

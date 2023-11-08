@@ -41,7 +41,7 @@ class FunctionComponent(AppFunctionComponent):
 
         response = panorama_util.get_address_groups(fn_inputs.panorama_name_parameter)
 
-        yield self.status_message(f"{response['result'].get('@count')} groups returned.")
+        yield self.status_message(f"{response.get('result', {}).get('@count')} groups returned.")
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results

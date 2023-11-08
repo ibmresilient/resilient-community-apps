@@ -8,7 +8,7 @@ from resilient_lib.components.resilient_common import validate_fields, str_to_bo
 from resilient_lib.components.requests_common import RequestsCommon, IntegrationError
 
 LOG = getLogger(__name__)
-DEFAULT_API_VERSION = "9.1"
+DEFAULT_API_VERSION = "v9.1"
 URI_PATH = "restapi"
 PACKAGE_NAME = "fn_pa_panorama"
 
