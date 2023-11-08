@@ -5,7 +5,7 @@
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, RequestsCommonWithoutSession
 from fn_azure_automation_utilities.util.helper import get_azure_client, PACKAGE_NAME
 from ast import literal_eval
 
@@ -16,6 +16,7 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        self.rc = RequestsCommonWithoutSession(opts, self.options)
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -38,6 +39,13 @@ class FunctionComponent(AppFunctionComponent):
         if getattr(fn_inputs, "input_parameters"):
             input_parameters = literal_eval(getattr(fn_inputs, "input_parameters"))
         time_to_wait = getattr(fn_inputs, "time_to_wait", 30)
+
+        # Log inputs
+        self.LOG.info(f"Azure Automation Account Name: {getattr(fn_inputs, 'account_name', None)}")
+        self.LOG.info(f"Azure Automation Resource Group Name: {getattr(fn_inputs, 'resource_group_name', None)}")
+        self.LOG.info(f'Runbook Name: {getattr(fn_inputs, "runbook_name", None)}')
+        self.LOG.info(f'Input Parameters: {str(input_parameters)}')
+        self.LOG.info(f'Time To Wait: {str(time_to_wait)}')
 
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))

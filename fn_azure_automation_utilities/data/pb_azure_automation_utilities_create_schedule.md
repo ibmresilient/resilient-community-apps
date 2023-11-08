@@ -110,6 +110,7 @@ inputs.input_parameters = str(payload)
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.schedule
 if results.get("success"):
   # Add information to the data table
@@ -127,6 +128,7 @@ if results.get("success"):
   row["account_name_schedules"] = playbook.inputs.azure_automation_account_name
   row["resource_group_schedules"] = playbook.inputs.azure_automation_resource_group
   row["schedule_deleted"] = False
+  row["schedule_query_row"] = int(datetime.now().timestamp()*1000)
 ```
 
 ---

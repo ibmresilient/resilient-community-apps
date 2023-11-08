@@ -82,11 +82,13 @@ inputs.input_parameters = str(payload)
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.update_cred
 if results.get("success"):
   # Update data table information for the credential
   row["credential_username"] = getattr(playbook.inputs, "azure_automation_credential_username", None)
   row["credential_description"] = getattr(playbook.inputs, 'azure_automation_credential_description', None)
+  row["credential_query_date"] = int(datetime.now().timestamp()*1000)
 ```
 
 ---

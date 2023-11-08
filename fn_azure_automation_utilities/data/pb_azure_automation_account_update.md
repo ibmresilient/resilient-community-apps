@@ -83,12 +83,14 @@ inputs.input_parameters = str(payload)
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.update_account
 if results.get("success"):
   content = results.get("content", "")
   row["tags_accounts"] = str(content.get("tags"))
   row["publicnetworkaccess_accounts"] = content.get("properties", {}).get("publicNetworkAccess", None)
   row["disablelocalauth_accounts"] = content.get("properties", {}).get("disableLocalAuth", None)
+  row["account_query_date"] = int(datetime.now().timestamp()*1000)
 ```
 
 ---

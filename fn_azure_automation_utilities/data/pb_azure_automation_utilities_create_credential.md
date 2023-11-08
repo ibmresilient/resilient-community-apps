@@ -80,6 +80,7 @@ inputs.input_parameters = str(payload)
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.create_results
 if results.get("success"):
   # Add information to the data table
@@ -90,6 +91,7 @@ if results.get("success"):
   row["account_name_credentials"] = playbook.inputs.azure_automation_account_name
   row["resource_group_credentials"] = playbook.inputs.azure_automation_resource_group
   row["credential_deleted"] = False
+  row["credential_query_date"] = int(datetime.now().timestamp()*1000)
 ```
 
 ---

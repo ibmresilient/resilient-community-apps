@@ -38,6 +38,12 @@ class FunctionComponent(AppFunctionComponent):
         if input_parameters.get("tags"):
             input_parameters["tags"] = literal_eval(input_parameters.get("tags"))
 
+        # Log inputs
+        self.LOG.info(f"Azure Automation Account Name: {getattr(fn_inputs, 'account_name', None)}")
+        self.LOG.info(f"Azure Automation Resource Group Name: {getattr(fn_inputs, 'resource_group_name', None)}")
+        self.LOG.info(f"Input Parameters: {str(input_parameters)}")
+        self.LOG.info(f"Account Update: {getattr(fn_inputs, 'account_update', False)}")
+
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 

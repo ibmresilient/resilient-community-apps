@@ -67,6 +67,7 @@ if getattr(playbook.inputs, 'azure_automation_runbook_name', None):
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.runbook_results
 
 # Add runbooks info to the data table
@@ -79,6 +80,7 @@ def add_to_row(runbook):
   row["account_name_runbooks"] = playbook.inputs.azure_automation_account_name
   row["resource_group_runbooks"] = playbook.inputs.azure_resource_group
   row["runbook_deleted"] = False
+  row["runbook_query_date"] = int(datetime.now().timestamp()*1000)
 
 if results.get("success"):
   content = results.get("content", {})

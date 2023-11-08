@@ -59,9 +59,11 @@ inputs.runbook_name = row.runbook_name
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.delete_runbook
 if results.get("success"):
   row.runbook_deleted = True
+  row.runbook_query_date = int(datetime.now().timestamp()*1000)
 ```
 
 ---

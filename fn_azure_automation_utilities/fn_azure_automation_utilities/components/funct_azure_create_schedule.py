@@ -28,7 +28,7 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: Create a schedule.
+        Function: Create or update a schedule.
         Inputs:
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
@@ -50,11 +50,18 @@ class FunctionComponent(AppFunctionComponent):
         if input_parameters.get("properties", {}).get("expiryTime", None):
             input_parameters["properties"]["expiryTime"] = self.convertTime(input_parameters.get("properties", {}).get("expiryTime", None))
 
+        # Log inputs
+        self.LOG.info(f"Azure Automation Account Name: {getattr(fn_inputs, 'account_name', None)}")
+        self.LOG.info(f"Azure Automation Resource Group Name: {getattr(fn_inputs, 'resource_group_name', None)}")
+        self.LOG.info(f'Schedule Name: {getattr(fn_inputs, "schedule_name", None)}')
+        self.LOG.info(f'Input Parameters: {str(input_parameters)}')
+        self.LOG.info(f'Schedule Update: {getattr(fn_inputs, "schedule_update", False)}')
+
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 
         # Make call to Azure and retrieve results
-        results = client.create_schedule(getattr(fn_inputs, "schedule_name", None), input_parameters)
+        results = client.create_schedule(getattr(fn_inputs, "schedule_name", None), input_parameters, getattr(fn_inputs, "schedule_update", False))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 

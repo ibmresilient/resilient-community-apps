@@ -59,12 +59,14 @@ inputs.schedule_name = row.schedule_name
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.delete_schedule
 
 if results.get("success"):
   status = results.get("content", {}).get("status")
   if status == 200:
     row["schedule_deleted"] = True
+    row["schedule_query_date"] = int(datetime.now().timestamp()*1000)
   elif status == 204:
     incident.addNote(f"""Azure Automation: Schedule Delete - Example (PB)
 Inputs -

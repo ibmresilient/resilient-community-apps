@@ -36,6 +36,13 @@ class FunctionComponent(AppFunctionComponent):
         # fn_inputs.input_parameters is a string dictionary. Convert it into a dictionary from a string.
         input_parameters = literal_eval(getattr(fn_inputs, "input_parameters", "{}"))
 
+        # Log inputs
+        self.LOG.info(f"Azure Automation Account Name: {getattr(fn_inputs, 'account_name', None)}")
+        self.LOG.info(f"Azure Automation Resource Group Name: {getattr(fn_inputs, 'resource_group_name', None)}")
+        self.LOG.info(f"Credential Name: {getattr(fn_inputs, 'credential_name', None)}")
+        self.LOG.info(f'Input Parameters: {str(input_parameters)}')
+        self.LOG.info(f'Credential Update: {getattr(fn_inputs, "credential_update", False)}')
+
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 

@@ -58,12 +58,14 @@ inputs.resource_group_name = row.resource_group_accounts
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.account_delete
 
 if results.get("success"):
   status = results.get("content", {}).get("status")
   if status == 200:
     row.account_deleted_accounts = True
+    row.account_query_date = int(datetime.now().timestamp()*1000)
   elif status == 204:
     incident.addNote(f"""Azure Automation: Account Delete - Example (PB)
 Inputs -

@@ -86,6 +86,7 @@ inputs.input_parameters = str(payload)
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.account_results
 public_network_access = getattr(playbook.inputs, "azure_automation_account_public_network_access", True)
 disable_local_auth = getattr(playbook.inputs, "azure_automation_account_disable_local_auth", False)
@@ -104,6 +105,7 @@ if results.get("success"):
   row["publicnetworkaccess_accounts"] = content.get("properties", {}).get("publicNetworkAccess", None)
   row["disablelocalauth_accounts"] = content.get("properties", {}).get("disableLocalAuth", None)
   row["account_deleted_accounts"] = False
+  row["account_query_date"] = int(datetime.now().timestamp()*1000)
 ```
 
 ---

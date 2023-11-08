@@ -24,13 +24,19 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.resource_group_name
             -   fn_inputs.account_name
             -   fn_inputs.job_name
-            -   fn_inputs.job_results
+            -   fn_inputs.job_output
         """
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate inputs
         validate_fields(["account_name", "resource_group_name"], fn_inputs)
+
+        # Log inputs
+        self.LOG.info(f"Azure Automation Account Name: {getattr(fn_inputs, 'account_name', None)}")
+        self.LOG.info(f"Azure Automation Resource Group Name: {getattr(fn_inputs, 'resource_group_name', None)}")
+        self.LOG.info(f'Job Name: {getattr(fn_inputs, "job_name", None)}')
+        self.LOG.info(f'Job Output: {getattr(fn_inputs, "job_output", False)}')
 
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))

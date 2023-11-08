@@ -323,7 +323,7 @@ class AzureClient(object):
         """
         Retrieve a list of jobs.
         :return: Response from GET request to Azure
-        :return trype: dict
+        :return rtype: dict
         """
         url = f"{self.base_url}/jobs?{API_VERSION_2019}"
         header = self.header

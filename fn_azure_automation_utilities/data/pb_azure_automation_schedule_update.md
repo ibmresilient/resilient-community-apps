@@ -68,12 +68,14 @@ payload = {
   }
 }
 
+if getattr(playbook.inputs, "schedule_start_time", None): # Set start time
+  payload["properties"]["startTime"] = getattr(playbook.inputs, "schedule_start_time", None)
 if getattr(playbook.inputs, "azure_automation_schedule_description", None): # Set the description
   payload["properties"]["description"] = getattr(playbook.inputs, "azure_automation_schedule_description", None)
 if getattr(playbook.inputs, "azure_automation_schedule_enabled", None) != None:
   payload["properties"]["isEnabled"] = getattr(playbook.inputs, "azure_automation_schedule_enabled", True)
-if getattr(playbook.inputs, "schedule_time_zone", None): # Set the time zone
-  payload["properties"]["timeZone"] = getattr(playbook.inputs, "schedule_time_zone", None)
+if getattr(playbook.inputs, "time_zone", None): # Set the time zone
+  payload["properties"]["timeZone"] = getattr(playbook.inputs, "time_zone", None)
 
 recurrence = getattr(playbook.inputs, "recurrence_schedule", None)
 if recurrence:
@@ -116,6 +118,7 @@ inputs.input_parameters = str(payload)
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.update_schedule
 if results.get("success"):
   schedule = results.get("content", {})
@@ -127,6 +130,7 @@ if results.get("success"):
   row["schedule_interval"] = str(schedule.get("properties", {}).get("interval", 1))
   row["schedule_time_zone"] = schedule.get("properties", {}).get("timeZone", None)
   row["advanced_schedule"] = str(schedule.get("properties", {}).get("advancedSchedule", {}))
+  row["schedule_query_date"] = int(datetime.now().timestamp()*1000)
 ```
 
 ---

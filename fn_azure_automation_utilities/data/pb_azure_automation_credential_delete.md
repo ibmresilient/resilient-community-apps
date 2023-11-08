@@ -59,12 +59,14 @@ inputs.credential_name = row.credential_name
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.delete_cred
 
 if results.get("success"):
   status = results.get("content", {}).get("status")
   if status == 200:
     row["credential_deleted"] = True
+    row["credential_query_date"] = int(datetime.now().timestamp()*1000)
   elif status == 204:
     incident.addNote(f"""Azure Automation: Credential Delete - Example (PB)
 Inputs -

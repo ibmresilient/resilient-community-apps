@@ -64,6 +64,7 @@ inputs.resource_group_name = playbook.inputs.azure_automation_resource_group_nam
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.statistics
 
 if results.get("success"):
@@ -73,6 +74,7 @@ if results.get("success"):
     row["statistic_counter_value"] = stat.get("counterValue", 0)
     row["account_name_statistics"] = playbook.inputs.azure_automation_account_name
     row["resource_group_statistics"] = playbook.inputs.azure_automation_resource_group_name
+    row["statistic_query_date"] = int(datetime.now().timestamp()*1000)
 ```
 
 ---

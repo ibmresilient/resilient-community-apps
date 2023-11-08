@@ -32,6 +32,12 @@ class FunctionComponent(AppFunctionComponent):
         # Validate inputs
         validate_fields(["account_name", "resource_group_name", "module_name"], fn_inputs)
 
+        # Log inputs
+        self.LOG.info(f"Azure Automation Account Name: {getattr(fn_inputs, 'account_name', None)}")
+        self.LOG.info(f"Azure Automation Resource Group Name: {getattr(fn_inputs, 'resource_group_name', None)}")
+        self.LOG.info(f'Activity Name: {getattr(fn_inputs, "activity_name", None)}')
+        self.LOG.info(f'Module Name: {getattr(fn_inputs, "module_name", None)}')
+
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 

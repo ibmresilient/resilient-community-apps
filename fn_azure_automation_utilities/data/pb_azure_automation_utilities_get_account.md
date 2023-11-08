@@ -66,6 +66,7 @@ if getattr(playbook.inputs, "azure_automation_resource_group_name", None):
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.account_info
 
 def add_to_row(account):
@@ -81,6 +82,7 @@ def add_to_row(account):
   row["publicnetworkaccess_accounts"] = account.get("properties", {}).get("publicNetworkAccess", None)
   row["disablelocalauth_accounts"] = account.get("properties", {}).get("disableLocalAuth", None)
   row["account_deleted_accounts"] = False
+  row["account_query_date"] = int(datetime.now().timestamp()*1000)
 
 if results.get("success"):
   content = results.get("content", {})

@@ -33,6 +33,12 @@ class FunctionComponent(AppFunctionComponent):
         # Validate inputs
         validate_fields(["account_name", "resource_group_name", "node_id"], fn_inputs)
 
+        # Log inputs
+        self.LOG.info(f"Azure Automation Account Name: {getattr(fn_inputs, 'account_name', None)}")
+        self.LOG.info(f"Azure Automation Resource Group Name: {getattr(fn_inputs, 'resource_group_name', None)}")
+        self.LOG.info(f'DSC Node ID: {getattr(fn_inputs, "node_id", None)}')
+        self.LOG.info(f'Report ID: {getattr(fn_inputs, "report_id", None)}')
+
         # Connect to Azure
         client = get_azure_client(self.rc, self.options, getattr(fn_inputs, "resource_group_name", None), getattr(fn_inputs, "account_name", None))
 

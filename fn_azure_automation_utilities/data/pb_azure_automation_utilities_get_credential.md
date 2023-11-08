@@ -67,6 +67,7 @@ if getattr(playbook.inputs, "azure_automation_credential_name", None):
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.cred
 
 # Add credential information to data table
@@ -78,6 +79,7 @@ def add_to_row(credential):
   row["account_name_credentials"] = playbook.inputs.azure_automation_account_name
   row["resource_group_credentials"] = playbook.inputs.azure_automation_resource_group
   row["credential_deleted"] = False
+  row["credential_query_date"] = int(datetime.now().timestamp()*1000)
 
 if results.get("success"):
   content = results.get('content', {})

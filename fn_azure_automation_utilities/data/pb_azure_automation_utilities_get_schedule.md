@@ -67,6 +67,7 @@ if getattr(playbook.inputs, "azure_automation_schedule_name", None):
 
 ### Script Content
 ```python
+from datetime import datetime
 results = playbook.functions.results.get_schedule
 
 # Add schedule information to data table
@@ -84,6 +85,7 @@ def row_to_add(schedule):
   row["account_name_schedules"] = playbook.inputs.azure_automation_account_name
   row["resource_group_schedules"] = playbook.inputs.azure_automation_resource_group
   row["schedule_deleted"] = False
+  row["schedule_query_date"] = int(datetime.now().timestamp()*1000)
 
 if results.get("success"):
   content = results.get("content", {})
