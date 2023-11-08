@@ -6,11 +6,11 @@ from setuptools import setup, find_packages
 setup(
     name='fn_cisco_amp4ep',
     version='1.0.1',
-    license='Resilient License',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
-    description="Resilient Circuits Components for Cisco AMP for Endpoints",
-    long_description="The Cisco AMP for Endpoints integration with the Resilient platform allows for the querying and "
+    license='MIT',
+    author='IBM SOAR',
+    author_email='',
+    description="IBM SOAR mponents for Cisco AMP for Endpoints",
+    long_description="The Cisco AMP for Endpoints integration with the SOAR platform allows for the querying and "
                      "updating of an AMP for Endpoints deployment. The integration includes 12 functions that return "
                      "results which show security events for endpoints in the deployment. The returned results can be "
                      "used to make customized updates to the Resilient platform, such as updating incidents, artifacts, "
