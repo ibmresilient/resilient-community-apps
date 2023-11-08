@@ -16,6 +16,10 @@ from fn_rest_api.lib import authentication_handler
 FN_NAME = "rest_api"
 PACKAGE_NAME = "fn_rest_api"
 
+RETRY_TRIES_DEFAULT = 1
+RETRY_DELAY_DEFAULT = 1
+RETRY_BKOFF_DEFAULT = 1
+
 LOG = getLogger(__name__)
 
 class FunctionComponent(AppFunctionComponent):
@@ -27,42 +31,157 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: This function calls a REST web service. It supports the standard REST methods: 
+            The function parameters determine the type of call, the URL, and optionally the headers
+        and body. Users can also specify request headers, parameters, and body content for
+        different types of requests. It also supports various authentication methods, including
+        basic authentication, OAuth, API keys, and client side authentication. The results include
+        the text or structured (JSON) result from the web service, and additional information
+        including the elapsed time.
+        
+        Function: This function calls a REST web service. It supports the standard REST methods:
             GET, HEAD, POST, PUT, DELETE, OPTIONS, and PATCH.
 
-        The function parameters determine the type of call, the URL, and optionally the headers 
-        and body. The results include the text or structured (JSON) result from the web service,
-        and additional information including the elapsed time.
+        :param fn_inputs.rest_api_method: The HTTP method (e.g., GET, POST, PUT) to use for the API call.
+        :type fn_inputs.rest_api_method: str
+        :param fn_inputs.rest_api_url: URL/Endpoint to execute request against
+        :type fn_inputs.rest_api_url: str
+        :param fn_inputs.rest_api_verify: Either a boolean, in which case it controls whether
+            requests verifies  the server's TLS certificate, or a string, in which case it must be a path
+            to a CA bundle to use. Matches ``verify`` parameter of `resilient-lib.request_common.execute
+            <https://github.com/ibmresilient/resilient-python-api/blob/main/resilient-lib/resilient_lib/components/requests_common.py>`_.
 
-        Inputs:
-        -------
-            -   fn_inputs.rest_api_body
-            -   fn_inputs.rest_api_query_parameters
-            -   fn_inputs.rest_api_url
-            -   fn_inputs.rest_api_method
-            -   fn_inputs.rest_api_timeout
-            -   fn_inputs.rest_api_cookies
-            -   fn_inputs.rest_api_allowed_status_codes
-            -   fn_inputs.rest_api_verify
-            -   fn_inputs.rest_api_headers
+            Example:
 
-            -   fn_inputs.rest_retry_tries
-            -   fn_inputs.rest_retry_delay
-            -   fn_inputs.rest_retry_backoff
+            .. code-block::
 
-            -   fn_inputs.oauth_token_url
-            -   fn_inputs.oauth_client_id
-            -   fn_inputs.oauth_client_secret
-            -   fn_inputs.oauth_redirect_uri
-            -   fn_inputs.oauth_scope
-            -   fn_inputs.oauth_code
-            -   fn_inputs.oauth_access_token
-            -   fn_inputs.oauth_refresh_token
-            -   fn_inputs.oauth_token_type
+                ... # some other input params
+                verify=<path/to/CA/bundle/to/use> or True
 
-            -   fn_inputs.client_auth_pem
-            -   fn_inputs.client_auth_key
-            -   fn_inputs.client_auth_cert
+            .. note::
+                The value held in the app's config will be overwritten if a value is passed in by the call
+                to ``execute``.
+        :type fn_inputs.rest_api_verify: bool or str.
+        :param fn_inputs.rest_api_timeout: (Optional) Number of seconds to wait for the server to send data
+            before sending a float or a timeout tuple (connect timeout, read timeout)
+        :type fn_inputs.rest_api_timeout: float or tuple
+        :param fn_inputs.rest_api_allowed_status_codes: (Optional) A list of HTTP status codes that are
+            considered successful. A list of allowed status codes can be passed in as string. The parameter
+            defaults to None and in that case, all status codes < 300 is considered as acceptable response.
+
+            Example:
+
+            .. code-block::
+
+                ... # some other input params
+                inputs.allowed_status_codes = "200, 201, 202"
+                #                     (or)
+                inputs.allowed_status_codes = None
+        :type fn_inputs.rest_api_allowed_status_codes: str. Default:  ``None``.
+        :param fn_inputs.rest_api_body: (Optional) The request body data for the REST API call. The body is to be
+        :type fn_inputs.rest_api_body: json-string format.
+
+            Example:
+
+            .. code-block::
+
+                ... # some other input params
+                inputs.rest_api_body = "" {
+                   "name"     : "user1",
+                   "password" : "p@ssword1",
+                   "role"     : "admin",
+                   "content"  : { 
+                      "site_url" : "www.example.com",
+                      "users"    : ["user1", "user2"]
+                      }
+                  } ""
+        :param fn_inputs.rest_api_query_parameters: The query parameters to include in the REST API call. Input
+            format matches ``fn_inputs.rest_api_body``
+        :type fn_inputs.rest_api_query_parameters: json-string format.
+        :param fn_inputs.rest_api_cookies: (Optional) The cookies to include in the API request. Input
+            format matches ``fn_inputs.rest_api_body``
+        :type fn_inputs.rest_api_cookies: str
+        :param fn_inputs.rest_api_headers: The HTTP headers to include in the API request. Input
+            format matches ``fn_inputs.rest_api_body``
+        :type fn_inputs.rest_api_headers: str
+        :param fn_inputs.rest_retry_tries: (Optional) The maximum number of attempts. Default: ``1`` (no retry).
+            Use ``-1`` for unlimited retries. Matches ``retry_tries`` parameter of `resilient-lib.request_common.execute
+            <https://github.com/ibmresilient/resilient-python-api/blob/main/resilient-lib/resilient_lib/components/requests_common.py>`_.
+        :type fn_inputs.rest_retry_tries: int
+        :param fn_inputs.rest_retry_delay: (Optional) The delay (in seconds) between retry attempts. Default:``1``.
+            Matches ``retry_delay`` parameter of `resilient-lib.request_common.execute
+            <https://github.com/ibmresilient/resilient-python-api/blob/main/resilient-lib/resilient_lib/components/requests_common.py>`_.
+        :type fn_inputs.rest_retry_delay: int
+        :param fn_inputs.rest_retry_backoff: (Optional) The backoff delay (in seconds) to be added for retrying
+            API calls. Default: ``1``. Matches ``retry_delay`` parameter of `resilient-lib.request_common.execute
+            <https://github.com/ibmresilient/resilient-python-api/blob/main/resilient-lib/resilient_lib/components/requests_common.py>`_.
+        :type fn_inputs.rest_retry_backoff: int
+        :param fn_inputs.oauth_token_url: (Optional) The URL to obtain OAuth tokens. Default: ``None``
+        :type fn_inputs.oauth_token_url: str
+        :param fn_inputs.oauth_client_id: (Optional) The OAuth client ID for authentication. Default: ``None``
+        :type fn_inputs.oauth_client_id: str
+        :param fn_inputs.oauth_client_secret: (Optional) The OAuth client secret for authentication. Default: ``None``
+        :type fn_inputs.oauth_client_secret: str
+        :param fn_inputs.oauth_redirect_uri: (Optional) The OAuth redirect URI for the authentication flow. Default: ``None``
+        :type fn_inputs.oauth_redirect_uri: str
+        :param fn_inputs.oauth_scope: (Optional) The scope of access requested during OAuth authentication. Default: ``None``
+        :type fn_inputs.oauth_scope: str
+        :param fn_inputs.oauth_code: (Optional) The OAuth authorization code. Default: ``None``
+        :type fn_inputs.oauth_code: str
+        :param fn_inputs.oauth_access_token: (Optional) The OAuth access token. Default: ``None``
+        :type fn_inputs.oauth_access_token: str
+        :param fn_inputs.oauth_refresh_token: (Optional) The OAuth refresh token for token renewal. Default: ``None``
+        :type fn_inputs.oauth_refresh_token: str
+        :param fn_inputs.oauth_token_type: (Optional) The type of OAuth token (e.g., Bearer) for API authentication. Default: ``None``
+        :type fn_inputs.oauth_token_type: str
+        :param fn_inputs.client_auth_pem: (Optional) The contents of PEM file for client authentication. Default: ``None``
+        :type fn_inputs.client_auth_pem: str
+            Example:
+
+            .. code-block::
+
+            ... # some other input params
+            inputs.client_auth_cert = ""
+               Bag Attributes
+                   friendlyName: Authentication certificate
+                   localKeyID: 78 94 0E 86 8D 30 EC D3 90 C8 6A 69 0F XX XX XX XX
+               Key Attributes: <No Attributes>
+               -----BEGIN CERTIFICATE-----
+               MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G
+               9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E
+               FEgCxB3Rdkim5Dfog6SCCFWIa4YAyv0rdgNLeRbQNTKyT14+inqWE+CLKvZ/T+56
+               OEdDSh0RPCg+UxjyCnkSiMce+/8RT+FXK41q1iQZAREJGEpZJIizVYB+aW2caCdq
+               PteGybdmFFeRIP/qbo0u17zc+Urj+MbuqYcEtx5YriF39+xRrReDbteSTnigQQP4
+               7zQHgQkU+U6MOuFTICtqVBuH9LX8qCJAG+92FLseh6I4qg0gd1ilyTG8PnhKuBRi
+               vkuz+SOtAgMBAAECggEAFkbnNQxamWGs6DpNT9j6V7412yZMZatVtaguR5CXJ9KU
+               0GTV1+9qwGIKnt4tZPOmQYh2h+8WUn2xHFVY5I7seX6mo8EXmCq2cT21PmI4QYCf
+               cNOKjYkEgwKBgAktKQorCoDvo5oiI89zpUhRHbJIlGWHuZFCCmEIQb4z+dUr72LL
+               uhZP0s22aRkqXMzDblFYrS0H3p7clhqEsoD9DO9WsiQK/2G85nR+IZd9U0bQ7z/t
+               7FOMkDbMPHkmkwAHlFC/UbS4XWJCZzrOoi6Zl/Cx4nFwvWyn7OtJfI/xAoGAdgat
+               PtFt97+wPDuSdVIbXjArSSq9F22J/cpG+wOMIGdgtNfPbNJFRG7Q/Lc/eDMPB5Nw
+               9O9YOnDFpqb8S+aE+4/Yfcxg4gGrKazXu+flYNhzpCTx3SpVawQCrUF3dE/2hbV+
+               FbGVFPaJziRDeH3UA1+1q0/bRg1trxqkZtGSGukCgYAA7SWvZ3lGJ42tiFzoH4F5
+               SfTZXQytCwyxXF6BIWTIXQBcCep5TrfOnYz4iEDwMdp4Qb/QhyjaUsIlo+JldquZ
+               k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ
+               Y20A9hExGKyHns4hW5KgvA==
+               -----END CERTIFICATE-----
+               ""
+        :param fn_inputs.client_auth_key: (Optional) The contents of  private key for client authentication. Default: ``None``.
+            Input format matches ``inputs.client_auth_pem``.
+        :type fn_inputs.client_auth_key: str
+        :param fn_inputs.client_auth_cert: (Optional) The contents of client certificate for authentication. Default: ``None``
+            Input format matches ``inputs.client_auth_pem``.
+        :type fn_inputs.client_auth_cert: str
+        :param fn_inputs.jwt_token: (Optional) The JWT (JSON Web Token) for authentication. Default: ``None``
+        :type fn_inputs.jwt_token: str
+        :param fn_inputs.jwt_key: (Optional) The key used to sign or verify the JWT. Default: ``None``
+        :type fn_inputs.jwt_key: str
+        :param fn_inputs.jwt_headers: (Optional) The headers of the JWT. Default: ``None``
+        :type fn_inputs.jwt_headers: str
+        :param fn_inputs.jwt_payload: (Optional) The payload or claims of the JWT. Default: ``None``
+        :type fn_inputs.jwt_payload: str
+        :param fn_inputs.jwt_algorithm: (Optional) The encryption algorithm used for the JWT. Default: ``None``
+        :type fn_inputs.jwt_algorithm: str
+
         """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
         validate_fields([
@@ -71,26 +190,29 @@ class FunctionComponent(AppFunctionComponent):
             "rest_api_verify"
             ], fn_inputs)
 
-        rest_properties = oauth_properties = certs_path = {}
+        rest_options = rest_properties = oauth_properties = certs_path = {}
 
-        # Get the function parameters: 
-        # Select, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
-        rest_method  = self.get_select_param(getattr(fn_inputs, "rest_api_method")) 
-        rest_url     = getattr(fn_inputs, "rest_api_url") # text
-        rest_verify  = getattr(fn_inputs, "rest_api_verify") # boolean
-        rest_timeout = getattr(fn_inputs, "rest_api_timeout", 600) # Default timeout to 600 seconds
+        # Exceptions are not raised for the following codes
         allowed_status_codes = getattr(fn_inputs, "rest_api_allowed_status_codes", None) # text
 
+        # Get the function parameters:
+        # Select, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"
+        rest_options = {
+            "method"  : self.get_select_param(getattr(fn_inputs, "rest_api_method")),
+            "url"     : getattr(fn_inputs, "rest_api_url"), # text
+            "verify"  : getattr(fn_inputs, "rest_api_verify"), # boolean
+            "timeout" : getattr(fn_inputs, "rest_api_timeout", 60)} # Default timeout to 60 seconds
+
         rest_properties = {
+            "body"    : self.get_textarea_param(getattr(fn_inputs, "rest_api_body", None)), # textarea
             "headers" : self.get_textarea_param(getattr(fn_inputs, "rest_api_headers", None)), # textarea
             "cookies" : self.get_textarea_param(getattr(fn_inputs, "rest_api_cookies", None)), # textarea
-            "body"    : self.get_textarea_param(getattr(fn_inputs, "rest_api_body", None)),    # textarea
-            "query_params"  : self.get_textarea_param(getattr(fn_inputs, "rest_api_query_parameters", None))}  # textarea
+            "params"  : self.get_textarea_param(getattr(fn_inputs, "rest_api_query_parameters", None))} # textarea
 
         retry_properties = {
-            "retry_tries"   : int(getattr(fn_inputs, "rest_retry_tries", 1)),      # integer
-            "retry_delay"   : int(getattr(fn_inputs, "rest_retry_delay", 1)),      # integer
-            "retry_backoff" : int(getattr(fn_inputs, "rest_retry_backoff", 1))}    # integer
+            "retry_tries"   : int(getattr(fn_inputs, "rest_retry_tries", RETRY_TRIES_DEFAULT)), # integer
+            "retry_delay"   : int(getattr(fn_inputs, "rest_retry_delay", RETRY_DELAY_DEFAULT)), # integer
+            "retry_backoff" : int(getattr(fn_inputs, "rest_retry_backoff", RETRY_BKOFF_DEFAULT))} # integer
 
         # Properties required for OAuth Authentication
         oauth_properties = {
@@ -118,15 +240,10 @@ class FunctionComponent(AppFunctionComponent):
             authentication_handler.CLIENT_AUTH_KEY  : getattr(fn_inputs, authentication_handler.CLIENT_AUTH_KEY, None),
             authentication_handler.CLIENT_AUTH_PEM  : getattr(fn_inputs, authentication_handler.CLIENT_AUTH_PEM, None)}
 
-        LOG.info(f"rest_method          : {rest_method}")
-        LOG.info(f"rest_url             : {rest_url}")
-        LOG.info(f"rest_verify          : {rest_verify}")
-        LOG.info(f"rest_timeout         : {rest_timeout}")
-        LOG.info(f"allowed_status_codes : {allowed_status_codes}")
-        LOG.info(f"rest_properties      : {json.dumps(rest_properties, indent=2)}")
+        LOG.info(f"REST Options : {json.dumps(rest_options, indent=2)}")
 
         # Rendering rest url with values from app.conf
-        rest_url = render(rest_url, self.options)
+        rest_options["url"] = render(rest_options["url"], self.options)
 
         # Rendering any OAuth property that has values from app.conf
         LOG.info("Rendering OAuth properties")
@@ -134,7 +251,7 @@ class FunctionComponent(AppFunctionComponent):
             if value:
                 oauth_properties[key] = render(value, self.options)
 
-        LOG.info("Rendering rest properties. If values contain SECRETS, they are incorporated.")
+        LOG.info("Rendering REST properties. If values contain SECRETS, they are incorporated.")
         render_dict_components(rest_properties, self.options)
 
         LOG.info("Rendering JWT properties. If values contain SECRETS, they are incorporated.")
@@ -144,74 +261,59 @@ class FunctionComponent(AppFunctionComponent):
         allowed_status_codes = [int(x) for x in allowed_status_codes.split(",")] if allowed_status_codes else []
 
         # Initializing OAuth handler
+        LOG.info("Initializing OAuth Client to handle Authentication")
         oauth_client     = authentication_handler.OAuth2Authorization(self.rc, oauth_properties)
 
         # Performing OAuth authentication if Oauth parameters are provided
+        LOG.info("If OAuth ready, adding OAuth generate ACCESS_TOKEN to request header")
         rest_properties  = authentication_handler.add_oauth_headers(oauth_client, rest_properties)
-        
+
         # Initializing JWT handler
+        LOG.info("Initializing OAuth Client to handle Authentication")
         jwt_client       = authentication_handler.JWTHandler(jwt_properties)
 
         # Generating jwt headers if jwt attributes are provided
+        LOG.info("If JWT ready, adding JWT generate ACCESS_TOKEN to request header")
         rest_properties  = jwt_client.add_jwt_headers(rest_properties)
-        
+
         # Generating certificates for client side authentication, if certificates are provided
-        rest_certificate = authentication_handler.check_certificate(cert_properties, certs_path)
+        LOG.info("If Client-Side Authentication ready, adding appropriate certificates to the request")
+        rest_properties["clientauth"] = authentication_handler.check_certificate(cert_properties, certs_path)
 
-        LOG.debug(f"Request Header : {json.dumps(rest_properties.get('headers'), indent=2)}")
-        LOG.debug(f"Request Body   : {json.dumps(rest_properties.get('body'), indent=2)}")
+        LOG.debug(f"Request Body : {json.dumps(rest_properties.get('body'), indent=2)}")
 
-        retry = False
         try:
             LOG.info("Attempting call")
             response = make_rest_call(
-                self.opts, self.options,
-                rest_method, rest_url,
-                rest_properties.get("headers"),
-                rest_properties.get("cookies"),
-                rest_properties.get("body"),
-                rest_properties.get("query_params"),
-                retry_properties.get("retry_tries"),
-                retry_properties.get("retry_delay"),
-                retry_properties.get("retry_backoff"),
-                rest_verify,
-                rest_timeout,
-                rest_certificate,
-                allowed_status_codes)
+                self.opts, self.options, allowed_status_codes,
+                **rest_options, **rest_properties, **retry_properties)
 
         except (HTTPError, IntegrationError) as err:
-            # If the error raised is either HTTPError else IntegrationError, sets retry to True
+            # If the error raised is either HTTPError or IntegrationError, checks to see if the request is
+            # OAuth ready. If so, it is assumed that the ACCESS_TOKEN has expired, and so it attempts to
+            # renew this by forcing the OAuth client to refresh its credentials, thereby generating new
+            # headers.
             LOG.warning(str(err))
             if oauth_client.check_oauth_ready():
-                retry = True
+                LOG.info("Request seems to be OAuth ready, attempting to generate new header")
+                oauth_client.force_refresh_tokens()
+                rest_properties = authentication_handler.add_oauth_headers(oauth_client, rest_properties)
+                LOG.info("Retrying request with new header")
+                response = make_rest_call(
+                    self.opts, self.options, allowed_status_codes,
+                    **rest_options, **rest_properties, **retry_properties)
             else:
+                LOG.warning("Request is not OAuth ready. Raising exception")
                 raise IntegrationError(str(err))
 
-        if retry:
-            # Retrying request by attempting to refresh_tokens
-            oauth_client.force_refresh_tokens()
-            rest_properties = authentication_handler.add_oauth_headers(oauth_client, rest_properties)
-            response = make_rest_call(
-                self.opts, self.options,
-                rest_method, rest_url,
-                rest_properties.get("headers"),
-                rest_properties.get("cookies"),
-                rest_properties.get("body"),
-                rest_properties.get("query_params"),
-                retry_properties.get("retry_tries"),
-                retry_properties.get("retry_delay"),
-                retry_properties.get("retry_backoff"),
-                rest_verify,
-                rest_timeout,
-                rest_certificate,
-                allowed_status_codes)
-
         try:
+            LOG.info("Attempting to JSON decode response")
             response_json = response.json()
             LOG.debug(json.dumps(response_json, indent=2))
         except:
             response_json = None
 
+        # Formatting response
         results = {
             "ok"                : response.ok,
             "url"               : response.url,
@@ -225,6 +327,7 @@ class FunctionComponent(AppFunctionComponent):
             "json"              : response_json,
             "links"             : response.links}
 
+        # Cleaning up certificates, if any.
         if len(certs_path) == 0:
             LOG.info("No client authentication certificates detected.")
         elif authentication_handler.delete_certificates(certs_path):

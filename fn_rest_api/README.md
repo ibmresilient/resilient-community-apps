@@ -76,13 +76,14 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `46.0`.
+* SOAR platform >= `48.2`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0`.
+* SOAR platform >= `48.2`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* The application underwent testing with Integration server running `resilient-circuits` versions `48.1` and `46.0`. Earlier versions of resilient-circuits may also work correctly as there are no specific required dependencies.
+* The application underwent testing with Integration server running `resilient-circuits` versions `48.1` and `46.0`.
+* Earlier versions of resilient-circuits may also work correctly as there are no specific required dependencies.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -237,24 +238,47 @@ parameters.
     This parameter defines the maximum number of retry attempts that will be made for a
     failed request before the system ceases further retry efforts. If the maximum number
     of retry attempts is reached and the request still fails, the system will cease further
-    retries and may trigger an error notification or follow an alternative error-handling
-    process. Default value : 1 (no retry)
+    retries and trigger an error notification or follow an alternative error-handling
+    process. Setting this value to `-1` results in infinite retries.
+    
+    Default value : 1 (no retry)
 
 ### 2. RETRY DELAY (rest_retry_delay):
 
     This parameter used to define the delay between retry attempts when a request fails and
     the request retry mechanism is invoked. This parameter plays a crucial role in controlling
-    the timing of automatic retry attempts. Default value : 1 (no delay)
+    the timing of automatic retry attempts. 
+    
+    Default value : 1 second (no delay)
 
 ### 3. RETRY BACKOFF (rest_retry_backoff):
 
     This parameter is used to specify the multiplier applied to delay between attempts.
-    Default: 1 (no backoff).
+    The backoff strategy follows the below mentioned algorithm.
+    
+    Default: 1 (no backoff)
+
+    Algorithm:
+
+      `DELAY = RETRY_DELAY * (RETRY_BACKOFF ^ n-1)`
+
+          where `n` is the current attempt count.
+
+    Example:
+
+    For these values:
+      RETRY_TRIES = 4   RETRY_DELAY = 2   RETRY_BACKOFF = 3
+
+    The retry mechanism attempts requests in the following manner:
+
+      - attempts request 1. if failed, attempts retry in 2 seconds.
+      - attempts request 2. if failed, attempts retry in 6 seconds.
+      - attempts request 3. if failed, attempts retry in 18 seconds.
+      - attempts request 4. if failed, raises exception or follows an alternative error-handling process.
 
 Note: These parameters have default values which are assumed when they are not assigned or left unused.
 
 You can find more information on this in the link: [retry2/retry_call](https://github.com/eSAMTrade/retry#retry_call )
-
 
 ---
 
@@ -442,11 +466,11 @@ Note:   The client authentication certificate and private key are commonly given
 | `jwt_token` | `text` | No | `-` | Fully complied JWT token, at times referenced as the Access_token |
 | `rest_api_query_parameters` | `textarea` | No | `60` | Request  timeout in seconds |
 | `rest_retry_tries` | `number` | No | `2` | The maximum number of request retry attempts. Default: 1 (no retry). Use -1 for unlimited retries |
-| `rest_retry_delay` | `number` | No | `2` | Initial delay between attempts. Default: 0 |
-| `rest_retry_backoff` | `number` | No | `2` | Multiplier applied to delay between attempts. Default: 1 (no backoff) |
-| `client_auth_key` | `text` | No | `-` | .key file contents to be pasted. To be provided with client_auth_cert |
-| `client_auth_cert` | `text` | No | `-` | .csr file contents to be pasted. Requires client_auth_key to function |
-| `client_auth_pem` | `text` | No | `-` | .pem file contents to be pasted. Standalone attribute, does not require the above two attribute |
+| `rest_retry_delay` | `number` | No | `2` | Initial delay in seconds between attempts. Default: 0 |
+| `rest_retry_backoff` | `number` | No | `2` | Multiplier applied to delay in seconds between attempts. Default: 1 (no backoff) |
+| `client_auth_key` | `text` | No | `-` | .key file contents to be pasted as plain text. To be provided with client_auth_cert |
+| `client_auth_cert` | `text` | No | `-` | .csr file contents to be pasted as plain text. Requires client_auth_key to function |
+| `client_auth_pem` | `text` | No | `-` | .pem file contents to be pasted as plain text. Standalone attribute, does not require the above two attribute |
 
 
 </p>
@@ -542,7 +566,7 @@ results = {
 # It also supports various authentication methods, including basic authentication, OAuth, API keys, and client side 
 # authentication.
 
-method  = "GET"
+method  = ""
 
 url     = ""
 
@@ -554,29 +578,36 @@ cookie  = None
 
 verify  = False
 
-timeout = 60
+timeout = None
+
+allowed_status_code = "200, 201, 202"
+
+REST_METHODS = ["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
+
 
 # Endpoint url
 inputs.rest_api_url     = url
 
-# Request headers used for Authorization
-inputs.rest_api_headers = header if header else None
-
-# Cookies for request
-inputs.rest_api_cookies = cookie if cookie else None
-
-# Request body
-inputs.rest_api_body    = body if body else None
-
 # Indicates whether to verify SSL certificates (boolean).
 inputs.rest_api_verify  = verify if verify not in [None, ''] else True
 
-# Request timeout
-inputs.rest_api_timeout = timeout if timeout else 600
+# REST methods: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS" and "PATCH". Defaults to GET method
+inputs.rest_api_method  = method if method and method in SUPPORTED_REST_METHODS else REST_METHODS[0] 
 
-# REST methods: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS" and "PATCH"
-inputs.rest_api_method  = method if method and method in ["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"] else "GET"
+# Time in seconds to wait before timingout request. Default: 60 seconds.
+inputs.rest_api_timeout = timeout if timeout else None
 
+# Request headers used for Authorization. Refer to ``DICT/JSON FORMAT`` section for more information.
+inputs.rest_api_headers = header if header else None
+
+# Cookies for request. Refer to ``DICT/JSON FORMAT`` section for more information.
+inputs.rest_api_cookies = cookie if cookie else None
+
+# Request body. Refer to ``DICT/JSON FORMAT`` section for more information.
+inputs.rest_api_body    = body if body else None
+
+# Parameters used for API calls added to the URL. Refer to ``DICT/JSON FORMAT`` section for more information.
+inputs.rest_api_query_parameters = query_parameters
 
 #                                                 =====================
 #                                                  ALLOWED_STATUS_CODE 
@@ -590,10 +621,8 @@ inputs.rest_api_method  = method if method and method in ["GET", "HEAD", "POST",
 #    --------
 #     inputs.rest_api_allowed_status_codes = "305, 400, 404, 500"
 
-allowed_status_code = "305, 400, 404, 500"
-
 # Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default
-inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else "200"
+inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else None
 
 
 #                                                       =======
@@ -620,7 +649,24 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 # 3. RETRY_BACKOFF (rest_retry_backoff):
 #
 #     This parameter is used to specify the multiplier applied to delay between attempts.
-#     Default: 1 (no backoff).
+#     Default: 1 (no backoff). The backoff strategy follows the below algorithm:
+#
+#         `DELAY = RETRY_DELAY * (RETRY_BACKOFF ^ n-1)`
+#
+#             where `n` is the current attempt count.
+#
+#       Example:
+#
+#       For these values:
+#         RETRY_TRIES = 4   RETRY_DELAY = 2   RETRY_BACKOFF = 3
+#
+#       The retry mechanism attempts requests in the following manner:
+#
+#         - attempts request 1. if failed, attempts retry in 2 seconds.
+#         - attempts request 2. if failed, attempts retry in 6 seconds.
+#         - attempts request 3. if failed, attempts retry in 18 seconds.
+#         - attempts request 4. if failed, raises exception or follows an 
+#                               alternative error-handling process.
 
 # You can find more information on this in the link below. https://github.com/eSAMTrade/retry#retry_call 
 
@@ -628,8 +674,8 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 # The maximum number of request retry attempts. Default: 1 (no retry). Use -1 for unlimited retries.
 inputs.rest_retry_tries   = 1
 
-# Initial delay between attempts. Default: 0
-inputs.rest_retry_delay   = 0
+# Initial delay between attempts. Default: 1
+inputs.rest_retry_delay   = 1
 
  # Multiplier applied to delay between attempts. Default: 1 (no backoff)
 inputs.rest_retry_backoff = 1
@@ -652,12 +698,25 @@ inputs.rest_retry_backoff = 1
 #      Authorization: {{auth_header}}
 #      """
 
-#                                            ==============================                                                     
-#                                             HEADER AND BODY INPUT FORMAT                                                      
-#                                            ==============================                                                     
+#                                                  ====================                                                  
+#                                                   DICT / JSON FORMAT                                                      
+#                                                  ====================                                                  
 
-# rest_api_url, rest_api_method and rest_api_verify are mandatory fields.
-# rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.
+# Function inputs can only accept values that are either strings, numbers, or 
+# booleans, and they cannot accommodate more intricate data structures like lists
+# or dictionaries. Nonetheless, specific REST request parameters necessitate input
+# in the form of key-value pairs. To address this constraint, you can provide inputs
+# for such parameters using one of the methods described below.
+# 
+#     Supported fields
+#     ----------------
+#       - inputs.rest_api_headers
+#       - inputs.rest_api_cookies
+#       - inputs.rest_api_body 
+#       - inputs.rest_api_query_parameters
+#       - inputs.jwt_headers
+#       - inputs.jwt_payload
+#
 
 # 1. New-line separated (Legacy)
 #    ---------------------------

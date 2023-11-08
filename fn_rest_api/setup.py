@@ -33,7 +33,7 @@ setup(
  The function parameters determine the type of call, the URL, and optionally the headers, cookies and body.
  The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.""",
     install_requires=[
-        "resilient-circuits",
+        "resilient-circuits>= 51.0",
         "PyJWT"
     ],
     python_requires='>=3.6',

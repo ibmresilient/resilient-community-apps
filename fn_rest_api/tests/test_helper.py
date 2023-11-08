@@ -1,4 +1,4 @@
-import pytest, unittest
+import pytest, unittest, logging
 
 from requests.exceptions import HTTPError
 
@@ -6,6 +6,8 @@ from fn_rest_api.lib import helper
 from urllib.error import URLError
 from fn_rest_api.lib.helper import (validate_url,
     render_dict_components, build_dict, make_rest_call)
+
+from resilient_lib import IntegrationError
 
 class TestConsants(unittest.TestCase):
 
@@ -248,6 +250,54 @@ class TestValidateURL(unittest.TestCase):
         assert validate_url({}) == None
 
 
+class TestMakeRestCallWithRetr(unittest.TestCase):
+
+    opts, options = {}, {}
+    @pytest.fixture(autouse=True)
+    def init_caplog_fixture(self, caplog):
+        self.caplog = caplog
+
+    @pytest.mark.livetest
+    def test_request_retry(self):
+        RETRY_TRIES_COUNT   = 4
+        RETRY_DELAY_COUNT   = 2
+        RETRY_BACKOFF_COUNT = 3
+        ENDPOINT = "https://postman-echo.com/status/404"
+
+        self.caplog.clear()
+        try:
+            make_rest_call(
+                self.opts, self.options,
+                method="GET",
+                url=ENDPOINT,
+                headers={},
+                cookies={},
+                body={},
+                params=None,
+                retry_tries=RETRY_TRIES_COUNT,
+                retry_delay=RETRY_DELAY_COUNT,
+                retry_backoff=RETRY_BACKOFF_COUNT,
+                verify=True,
+                timeout=60,
+                clientauth=None)
+        except IntegrationError as err:
+            records = list(self.caplog.records)
+
+        # For these values: RETRY_TRIES_COUNT = 4   RETRY_DELAY_COUNT = 2   RETRY_BACKOFF_COUNT = 3
+        # requests must be executed in the following order:
+        # failed request 1, retrying in 2 seconds...
+        # failed request 2, retrying in 6 seconds...
+        # failed request 3, retrying in 18 seconds...
+        # request 4
+        assert len(records) == RETRY_TRIES_COUNT
+        assert f"retrying in {RETRY_DELAY_COUNT} seconds..." in records[0].message
+        assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[1].message
+        assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[2].message
+        assert f"404 Client Error:" in records[2].message
+
+        self.caplog.clear() # clear caplog
+
+
 class TestMakeRestCall(unittest.TestCase):
 
     class MockResponse:
@@ -297,26 +347,26 @@ class TestMakeRestCall(unittest.TestCase):
                 "data"    : data,
                 "clientauth" : clientauth}
 
-    helper.RequestsCommon = MockRC
     opts, options = {}, {}
     method = "GET"
     url = "http://www.example.com"
 
     def test_standard_request(self):
+        helper.RequestsCommon = self.MockRC
         response = make_rest_call(
             self.opts, self.options,
-            rest_method=self.method,
-            rest_url=self.url,
-            headers_dict={"key1" : "header1"},
-            cookies_dict={"key1" : "cookie1"},
-            body_dict={"key1" : "body1"},
-            query_params=None,
+            method=self.method,
+            url=self.url,
+            headers={"key1" : "header1"},
+            cookies={"key1" : "cookie1"},
+            body={"key1" : "body1"},
+            params=None,
             retry_tries=None,
             retry_delay=None,
             retry_backoff=None,
-            rest_verify=True,
-            rest_timeout=60,
-            rest_certificate=""" NOT A CERTIFICATE """)
+            verify=True,
+            timeout=60,
+            clientauth=""" NOT A CERTIFICATE """)
 
         assert response["url"] == self.url
         assert response["method"] == self.method
@@ -332,51 +382,23 @@ class TestMakeRestCall(unittest.TestCase):
         self.assertEqual(response["clientauth"], """ NOT A CERTIFICATE """)
         self.assertIsNone(response["json"])
 
-    def test_retry_request(self):
-        response = make_rest_call(
-            self.opts, self.options,
-            rest_method=self.method,
-            rest_url=self.url,
-            headers_dict={},
-            cookies_dict={},
-            body_dict={},
-            query_params=None,
-            retry_tries=1,
-            retry_delay=2,
-            retry_backoff=3,
-            rest_verify=True,
-            rest_timeout=60,
-            rest_certificate=""" NOT A CERTIFICATE """)
-
-        assert response["url"] == self.url
-        assert response["method"] == self.method
-        assert response["verify"]
-        self.assertDictEqual(response["headers"], {})
-        self.assertDictEqual(response["cookies"], {})
-        self.assertDictEqual(response["data"], {})
-        self.assertEqual(response["tries"], 1)
-        self.assertEqual(response["delay"], 2)
-        self.assertEqual(response["backoff"], 3)
-        self.assertIsNone(response["json"])
-        self.assertEqual(response["timeout"], 60)
-        self.assertEqual(response["clientauth"], """ NOT A CERTIFICATE """)
-        self.assertIsNone(response["json"])
 
     def test_json_request(self):
+        helper.RequestsCommon = self.MockRC
         response = make_rest_call(
             self.opts, self.options,
-            rest_method=self.method,
-            rest_url=self.url,
-            headers_dict={"Content-type" : "application/json"},
-            cookies_dict=None,
-            body_dict={"key1" : "body1"},
-            query_params=None,
+            method=self.method,
+            url=self.url,
+            headers={"Content-type" : "application/json"},
+            cookies=None,
+            body={"key1" : "body1"},
+            params=None,
             retry_tries=None,
             retry_delay=None,
             retry_backoff=None,
-            rest_verify=None,
-            rest_timeout=None,
-            rest_certificate=None)
+            verify=None,
+            timeout=None,
+            clientauth=None)
 
         assert response["url"] == self.url
         assert response["method"] == self.method
@@ -385,20 +407,21 @@ class TestMakeRestCall(unittest.TestCase):
         self.assertIsNone(response["data"])
 
     def test_json_lowercase_content_type(self):
+        helper.RequestsCommon = self.MockRC
         response = make_rest_call(
             self.opts, self.options,
-            rest_method=self.method,
-            rest_url=self.url,
-            headers_dict={"content-type" : "application/json"},
-            cookies_dict=None,
-            body_dict={"key1" : "body1"},
-            query_params=None,
+            method=self.method,
+            url=self.url,
+            headers={"content-type" : "application/json"},
+            cookies=None,
+            body={"key1" : "body1"},
+            params=None,
             retry_tries=None,
             retry_delay=None,
             retry_backoff=None,
-            rest_verify=None,
-            rest_timeout=None,
-            rest_certificate=None)
+            verify=None,
+            timeout=None,
+            clientauth=None)
         assert response["url"] == self.url
         assert response["method"] == self.method
         self.assertDictEqual(response["headers"], {"content-type" : "application/json"})
@@ -406,20 +429,21 @@ class TestMakeRestCall(unittest.TestCase):
         self.assertIsNone(response["data"])
 
     def test_json_uppercase_content_type(self):
+        helper.RequestsCommon = self.MockRC
         response = make_rest_call(
             self.opts, self.options,
-            rest_method=self.method,
-            rest_url=self.url,
-            headers_dict={"CONTENT-TYPE" : "application/json"},
-            cookies_dict=None,
-            body_dict={"key1" : "body1"},
-            query_params=None,
+            method=self.method,
+            url=self.url,
+            headers={"CONTENT-TYPE" : "application/json"},
+            cookies=None,
+            body={"key1" : "body1"},
+            params=None,
             retry_tries=None,
             retry_delay=None,
             retry_backoff=None,
-            rest_verify=None,
-            rest_timeout=None,
-            rest_certificate=None)
+            verify=None,
+            timeout=None,
+            clientauth=None)
         assert response["url"] == self.url
         assert response["method"] == self.method
         self.assertDictEqual(response["headers"], {"CONTENT-TYPE" : "application/json"})
@@ -427,20 +451,21 @@ class TestMakeRestCall(unittest.TestCase):
         self.assertIsNone(response["data"])
 
     def test_json_title_content_type(self):
+        helper.RequestsCommon = self.MockRC
         response = make_rest_call(
             self.opts, self.options,
-            rest_method=self.method,
-            rest_url=self.url,
-            headers_dict={"Content-Type" : "application/json"},
-            cookies_dict=None,
-            body_dict={"key1" : "body1"},
-            query_params=None,
+            method=self.method,
+            url=self.url,
+            headers={"Content-Type" : "application/json"},
+            cookies=None,
+            body={"key1" : "body1"},
+            params=None,
             retry_tries=None,
             retry_delay=None,
             retry_backoff=None,
-            rest_verify=None,
-            rest_timeout=None,
-            rest_certificate=None)
+            verify=None,
+            timeout=None,
+            clientauth=None)
         assert response["url"] == self.url
         assert response["method"] == self.method
         self.assertDictEqual(response["headers"], {"Content-Type" : "application/json"})
@@ -448,53 +473,56 @@ class TestMakeRestCall(unittest.TestCase):
         self.assertIsNone(response["data"])
 
     def test_request_raises_exceptions(self):
+        helper.RequestsCommon = self.MockRC
         with pytest.raises(HTTPError) as err:
             make_rest_call(
                 self.opts, self.options,
-                rest_method=400,
-                rest_url=self.url,
-                headers_dict=None,
-                cookies_dict=None,
-                body_dict=None,
-                query_params=None,
+                method=400,
+                url=self.url,
+                headers=None,
+                cookies=None,
+                body=None,
+                params=None,
                 retry_tries=None,
                 retry_delay=None,
             retry_backoff=None,
-                rest_verify=None,
-                rest_timeout=None,
-                rest_certificate=None)
+                verify=None,
+                timeout=None,
+                clientauth=None)
 
     def test_request_bypasses_exceptions(self):
+        helper.RequestsCommon = self.MockRC
         assert make_rest_call(
             self.opts, self.options,
-            rest_method=401,
-            rest_url=self.url,
-            headers_dict=None,
-            cookies_dict=None,
-            body_dict=None,
-            query_params=None,
+            method=401,
+            url=self.url,
+            headers=None,
+            cookies=None,
+            body=None,
+            params=None,
             retry_tries=None,
             retry_delay=None,
             retry_backoff=None,
-            rest_verify=None,
-            rest_timeout=None,
-            rest_certificate=None,
+            verify=None,
+            timeout=None,
+            clientauth=None,
             allowed_status_codes=[400, 401, 402])
 
     def test_request_raises_exceptions_with_different_bypass(self):
+        helper.RequestsCommon = self.MockRC
         with pytest.raises(HTTPError) as err:
             make_rest_call(
                 self.opts, self.options,
-                rest_method=401,
-                rest_url=self.url,
-                headers_dict=None,
-                cookies_dict=None,
-                body_dict=None,
-                query_params=None,
+                method=401,
+                url=self.url,
+                headers=None,
+                cookies=None,
+                body=None,
+                params=None,
                 retry_tries=None,
                 retry_delay=None,
                 retry_backoff=None,
-                rest_verify=None,
-                rest_timeout=None,
-                rest_certificate=None,
+                verify=None,
+                timeout=None,
+                clientauth=None,
                 allowed_status_codes=[400, 403, 402])

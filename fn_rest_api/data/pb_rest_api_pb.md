@@ -52,7 +52,7 @@ This is a general-purpose function to call any REST API or other HTTP service.
 # It also supports various authentication methods, including basic authentication, OAuth, API keys, and client side 
 # authentication.
 
-method  = "GET"
+method  = ""
 
 url     = ""
 
@@ -64,34 +64,36 @@ cookie  = None
 
 verify  = False
 
-timeout = 60
+timeout = None
 
-query_parameters = None
+allowed_status_code = "200, 201, 202"
+
+REST_METHODS = ["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
+
 
 # Endpoint url
 inputs.rest_api_url     = url
 
-# Request headers used for Authorization
-inputs.rest_api_headers = header if header else None
-
-# Cookies for request
-inputs.rest_api_cookies = cookie if cookie else None
-
-# Request body
-inputs.rest_api_body    = body if body else None
-
 # Indicates whether to verify SSL certificates (boolean).
 inputs.rest_api_verify  = verify if verify not in [None, ''] else True
 
-# Request timeout
-inputs.rest_api_timeout = timeout if timeout else 600
+# REST methods: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS" and "PATCH". Defaults to GET method
+inputs.rest_api_method  = method if method and method in SUPPORTED_REST_METHODS else REST_METHODS[0] 
 
-# Parameters used for GET API calls added to the URL
+# Time in seconds to wait before timingout request. Default: 60 seconds.
+inputs.rest_api_timeout = timeout if timeout else 60
+
+# Request headers used for Authorization. Refer to ``DICT/JSON FORMAT`` section for more information.
+inputs.rest_api_headers = header if header else None
+
+# Cookies for request. Refer to ``DICT/JSON FORMAT`` section for more information.
+inputs.rest_api_cookies = cookie if cookie else None
+
+# Request body. Refer to ``DICT/JSON FORMAT`` section for more information.
+inputs.rest_api_body    = body if body else None
+
+# Parameters used for API calls added to the URL. Refer to ``DICT/JSON FORMAT`` section for more information.
 inputs.rest_api_query_parameters = query_parameters
-
-# REST methods: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS" and "PATCH"
-inputs.rest_api_method  = method if method and method in ["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"] else "GET"
-
 
 #                                                 =====================
 #                                                  ALLOWED_STATUS_CODE 
@@ -105,10 +107,8 @@ inputs.rest_api_method  = method if method and method in ["GET", "HEAD", "POST",
 #    --------
 #     inputs.rest_api_allowed_status_codes = "305, 400, 404, 500"
 
-allowed_status_code = "305, 400, 404, 500"
-
 # Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default
-inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else "200"
+inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else None
 
 
 #                                                       =======
@@ -135,7 +135,24 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 # 3. RETRY_BACKOFF (rest_retry_backoff):
 #
 #     This parameter is used to specify the multiplier applied to delay between attempts.
-#     Default: 1 (no backoff).
+#     Default: 1 (no backoff). The backoff strategy follows the below algorithm:
+#
+#         `DELAY = RETRY_DELAY * (RETRY_BACKOFF ^ n-1)`
+#
+#             where `n` is the current attempt count.
+#
+#       Example:
+#
+#       For these values:
+#         RETRY_TRIES = 4   RETRY_DELAY = 2   RETRY_BACKOFF = 3
+#
+#       The retry mechanism attempts requests in the following manner:
+#
+#         - attempts request 1. if failed, attempts retry in 2 seconds.
+#         - attempts request 2. if failed, attempts retry in 6 seconds.
+#         - attempts request 3. if failed, attempts retry in 18 seconds.
+#         - attempts request 4. if failed, raises exception or follows an 
+#                               alternative error-handling process.
 
 # You can find more information on this in the link below. https://github.com/eSAMTrade/retry#retry_call 
 
@@ -167,12 +184,25 @@ inputs.rest_retry_backoff = 1
 #      Authorization: {{auth_header}}
 #      """
 
-#                                            ==============================                                                     
-#                                             HEADER AND BODY INPUT FORMAT                                                      
-#                                            ==============================                                                     
+#                                                  ====================                                                  
+#                                                   DICT / JSON FORMAT                                                      
+#                                                  ====================                                                  
 
-# rest_api_url, rest_api_method and rest_api_verify are mandatory fields.
-# rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.
+# Function inputs can only accept values that are either strings, numbers, or 
+# booleans, and they cannot accommodate more intricate data structures like lists
+# or dictionaries. Nonetheless, specific REST request parameters necessitate input
+# in the form of key-value pairs. To address this constraint, you can provide inputs
+# for such parameters using one of the methods described below.
+# 
+#     Supported fields
+#     ----------------
+#       - inputs.rest_api_headers
+#       - inputs.rest_api_cookies
+#       - inputs.rest_api_body 
+#       - inputs.rest_api_query_parameters
+#       - inputs.jwt_headers
+#       - inputs.jwt_payload
+#
 
 # 1. New-line separated (Legacy)
 #    ---------------------------

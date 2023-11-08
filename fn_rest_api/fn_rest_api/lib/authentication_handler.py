@@ -73,7 +73,6 @@ class OAuth2Authorization():
 
     def __init__(self, rc, oauth_options):
 
-        # Get application specific configurations from app.conf
         self.rc = rc
         LOG.debug("Configuration values")
         LOG.debug(json.dumps(oauth_options, indent=2))
@@ -684,7 +683,7 @@ class JWTHandler:
         -------
             <bool> : True if JWT authentication ready, False if not.
         """
-        LOG.info("Checking if a valid JWT token has been provided or the attributes required to compile a valid token")
+        LOG.info("Checking if a valid JWT token or JWT attributes are provided to compile a valid token")
         if self._jwt_properties.get(JWT_TOKEN) or self._jwt_properties.get(JWT_KEY):
             return True
         return False
