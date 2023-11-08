@@ -9,7 +9,7 @@ setup(
     license='MIT',
     author='IBM SOAR',
     author_email='',
-    description="IBM SOAR mponents for Cisco AMP for Endpoints",
+    description="IBM SOAR components for Cisco AMP for Endpoints",
     long_description="The Cisco AMP for Endpoints integration with the SOAR platform allows for the querying and "
                      "updating of an AMP for Endpoints deployment. The integration includes 12 functions that return "
                      "results which show security events for endpoints in the deployment. The returned results can be "
