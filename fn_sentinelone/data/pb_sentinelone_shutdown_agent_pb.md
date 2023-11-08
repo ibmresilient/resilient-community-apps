@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - SentinelOne: Shutdown Agent (PB)
+# Playbook - SentinelOne: Shutdown Agent Endpoint (PB)
 
 ### API Name
 `sentinelone_shutdown_agent_pb`
@@ -22,7 +22,7 @@
 `sentinelone_agents_dt`
 
 ### Description
-Shutdown an agent managed by SentinelOne.
+Shutdown an agent endpoint managed by SentinelOne.
 
 
 ---

@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1698429318702,
+  "export_date": 1699465200022,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -1170,13 +1170,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 9,
+  "id": 10,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1698429316743,
+      "create_date": 1699465198104,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1185,7 +1185,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1698429316743,
+      "update_date": 1699465198104,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -2043,7 +2043,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 7,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_b40b46aa_53b5_494b_9324_cb2b541e5574\" isExecutable=\"true\" name=\"playbook_b40b46aa_53b5_494b_9324_cb2b541e5574\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_15m6vbj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Restart Agent\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e0b6e8bc-fd8f-4bc4-9131-8e49b07d9a7b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = incident.properties.sentinelone_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"restart_agent_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15m6vbj\u003c/incoming\u003e\u003coutgoing\u003eFlow_0m2a7r7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_15m6vbj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0co8yug\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0m2a7r7\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"SentinelOne: Write restart agent results to note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"99233e68-85b4-4ed4-b64e-22686ced890f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0m2a7r7\u003c/incoming\u003e\u003coutgoing\u003eFlow_0co8yug\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0co8yug\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b40b46aa_53b5_494b_9324_cb2b541e5574\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0co8yug\" id=\"Flow_0co8yug_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"361.5\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m2a7r7\" id=\"Flow_0m2a7r7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15m6vbj\" id=\"Flow_15m6vbj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.825\" y=\"277.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1697829315690,
@@ -2055,10 +2055,10 @@
       },
       "deployment_id": "playbook_b40b46aa_53b5_494b_9324_cb2b541e5574",
       "description": {
-        "content": "Restart an agent managed by SentinelOne.",
+        "content": "Restart an agent endpoint managed by SentinelOne.",
         "format": "text"
       },
-      "display_name": "SentinelOne: Restart Agent (PB)",
+      "display_name": "SentinelOne: Restart Agent Endpoint (PB)",
       "export_key": "sentinelone_restart_agent_pb",
       "field_type_handle": "playbook_b40b46aa_53b5_494b_9324_cb2b541e5574",
       "fields_type": {
@@ -2095,7 +2095,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1698426413432,
+      "last_modified_time": 1699465036741,
       "local_scripts": [
         {
           "actions": [],
@@ -2151,7 +2151,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b40b46aa-53b5-494b-9324-cb2b541e5574",
-      "version": 8
+      "version": 12
     },
     {
       "activation_type": "manual",
@@ -2388,7 +2388,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 2,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\" isExecutable=\"true\" name=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_07evlnu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SentinelOne: Shutdown Agent\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"41479530-59cd-432f-bc33-562dad5322db\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinelone_agent_id = row.sentinelone_dt_agent_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"shutdown_agent_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07evlnu\u003c/incoming\u003e\u003coutgoing\u003eFlow_05ms2uc\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_07evlnu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1vz17y2\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"SentinelOne: Write shutdown agent results to a note\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"eea92321-26bf-4462-846e-d2df381cea6e\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05ms2uc\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vz17y2\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05ms2uc\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1vz17y2\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vz17y2\" id=\"Flow_1vz17y2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05ms2uc\" id=\"Flow_05ms2uc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07evlnu\" id=\"Flow_07evlnu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1697829316976,
@@ -2400,10 +2400,10 @@
       },
       "deployment_id": "playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58",
       "description": {
-        "content": "Shutdown an agent managed by SentinelOne.",
+        "content": "Shutdown an agent endpoint managed by SentinelOne.",
         "format": "text"
       },
-      "display_name": "SentinelOne: Shutdown Agent (PB)",
+      "display_name": "SentinelOne: Shutdown Agent Endpoint (PB)",
       "export_key": "sentinelone_shutdown_agent_pb",
       "field_type_handle": "playbook_494c0e8d_8cd2_4c46_b8b7_bf331d174d58",
       "fields_type": {
@@ -2440,7 +2440,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1698429284567,
+      "last_modified_time": 1699465007393,
       "local_scripts": [
         {
           "actions": [],
@@ -2496,7 +2496,7 @@
       "tags": [],
       "type": "default",
       "uuid": "494c0e8d-8cd2-4c46-b8b7-bf331d174d58",
-      "version": 5
+      "version": 7
     },
     {
       "activation_type": "manual",
@@ -3302,7 +3302,7 @@
   "types": [
     {
       "actions": [],
-      "display_name": "SentinelOne Agent",
+      "display_name": "SentinelOne Agent Endpoint",
       "export_key": "sentinelone_agents_dt",
       "fields": {
         "sentinelone_dt_agent_id": {
@@ -3327,6 +3327,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Agent ID",
@@ -3358,6 +3359,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Agent Version",
@@ -3389,6 +3391,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Computer Name",
@@ -3420,6 +3423,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Created At",
@@ -3451,6 +3455,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Domain",
@@ -3482,6 +3487,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "External IP",
@@ -3513,6 +3519,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Is Active",
@@ -3544,6 +3551,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": true,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Network Status",
@@ -3575,6 +3583,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "OS Name",
@@ -3606,6 +3615,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Query Date",
@@ -3637,6 +3647,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Registered At",
@@ -3668,6 +3679,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Site",
@@ -3699,6 +3711,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Threat Count",
@@ -3730,6 +3743,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "Updated At",
@@ -3761,6 +3775,7 @@
           "prefix": null,
           "read_only": false,
           "rich_text": false,
+          "short_text": "",
           "tags": [],
           "templates": [],
           "text": "UUID",
