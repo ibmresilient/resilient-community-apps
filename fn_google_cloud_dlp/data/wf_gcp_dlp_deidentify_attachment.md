@@ -19,7 +19,21 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.incident_id = incident.id 
+
+# If this workflow has the task_id available, gather it incase we need it.
+if task:
+  inputs.task_id = task.id
+# If this workflow has the attachment_id available, gather it incase we need it.
+if attachment:
+  inputs.attachment_id = attachment.id
+
+# If this workflow has the artifact_id available, gather it incase we need it.
+try: 
+  if artifact:
+    inputs.artifact_id = artifact.id
+except:
+  pass
 ```
 
 ### Post-Processing Script
