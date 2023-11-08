@@ -14,9 +14,10 @@
   - [Function - REST API](#function---rest-api)
   - [Input Considerations](#input-considerations)
     - [Sensitive information using App Secrets](#sensitive-information-using-app-secrets)
+    - [Format:](#format)
   - [Input format](#input-format)
-    - [1. New-line separated (Legacy) format:](#1-new-line-separated-legacy-format)
-    - [2. JSON format:](#2-json-format)
+    - [1. JSON format:](#1-json-format)
+    - [2. New-line separated (Legacy) format:](#2-new-line-separated-legacy-format)
   - [Retry Mechanism](#retry-mechanism)
     - [1. RETRY TRIES (rest\_retry\_tries):](#1-retry-tries-rest_retry_tries)
     - [2. RETRY DELAY (rest\_retry\_delay):](#2-retry-delay-rest_retry_delay)
@@ -139,13 +140,22 @@ This function calls a REST web service. It supports the standard REST methods: G
 
 ### Sensitive information using App Secrets
 
-For sensitive information that may be included in the `rest_header`, `rest_url`, `rest_body`, or `rest_cookies`. To do so simply create a Key and a value pair, `auth_header` shown in the screenshot below. This can then be referenced in the application using the double-curly brace, `{{auth_header}}`.
+For sensitive information that may be included in the `rest_header`, `rest_url`, `rest_body`, or `rest_cookies`, SECRETS can be directly substituted into input parameters, there by avoiding the need to expose any sensitive information as plain text. This can be done by creating a SECRET under the application's configuration tab and referencing the same with a `$` sign followed by the SECRET's name enclosed within curly brace. PAM Credentials can also be referenced it a similar fashion.
 
-<p align="center">
-<img src="./doc/screenshots/fn-rest-api-app-conf.png" />
-</p>
+### Format:
+ * SECRETS : `${SECRET_NAME}`
+ * PAM     : `^{PAM_CREDENTIALS}`
 
-This can also be used in conjunction with app secrets, allows the user to set sensitive values without having them exposed in plaintext.
+  #### Example:  <!-- omit in toc -->
+  ```python
+      headers = """
+        {
+          "Content-Type"  : "application/json",
+          "X-Frooble"     : "Baz",
+          "Authorization" : "bearer ${API_TOKEN}"
+        }
+      """
+  ```
 
 <p align="center">
 <img src="./doc/screenshots/fn-rest-api-secrets.png" />
@@ -162,32 +172,13 @@ This key can be directly referenced from within a playbook. For instance, a head
 
 ## Input format
 
-* Inputs for the fields: `rest_api_headers`, `rest_api_cookies`, `rest_api_body` can be provided in 2 different format.
-### 1. New-line separated (Legacy) format:
-   This format allows for specifying inputs as key-value pairs, separated
-   by a new line. It let's us create quick and easy inputs that is properly
-   formatted for the request. The primary purpose of this format is to retain
-   backwards compatibility.
+* Function inputs can only accept values that are either strings, numbers, or 
+booleans, and they cannot accommodate more intricate data structures like lists
+or dictionaries. Nonetheless, specific REST request parameters necessitate input
+in the form of key-value pairs. To address this constraint, you can provide inputs
+for such parameters using one of the methods described below.
 
-  #### Note:  <!-- omit in toc -->
-   This format does not support complex data structures such as lists or nested Key-value pairs.
-
-  #### Example:  <!-- omit in toc -->
-  ```python
-     body = """
-     name : user1
-     password : p@ssword1
-     role : admin
-     """
-
-     headers = """
-     Content-Type: application/json
-     X-Frooble: Baz
-     Authorization: {{auth_header}}
-     """
-  ```
-
-### 2. JSON format:
+### 1. JSON format:
    Standard json file format. Supports complex data structures such as lists
    or nested Key-value pairs.
 
@@ -223,6 +214,32 @@ This key can be directly referenced from within a playbook. For instance, a head
     
     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
   ```
+
+### 2. New-line separated (Legacy) format:
+   This format allows for specifying inputs as key-value pairs, separated
+   by a new line. It let's us create quick and easy inputs that is properly
+   formatted for the request. The primary purpose of this format is to retain
+   backwards compatibility.
+
+  #### Note:  <!-- omit in toc -->
+   This format does not support complex data structures such as lists or nested Key-value pairs.
+
+  #### Example:  <!-- omit in toc -->
+  ```python
+     body = """
+     name : user1
+     password : p@ssword1
+     role : admin
+     """
+
+     headers = """
+     Content-Type: application/json
+     X-Frooble: Baz
+     Authorization: {{auth_header}}
+     """
+  ```
+
+
 
 ---
 
@@ -621,6 +638,7 @@ inputs.rest_api_query_parameters = query_parameters
 #    --------
 #     inputs.rest_api_allowed_status_codes = "305, 400, 404, 500"
 
+
 # Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default
 inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else None
 
@@ -685,17 +703,26 @@ inputs.rest_retry_backoff = 1
 #                                                        SECRETS
 #                                                       =========
 
-# For sensitive information that may be included in the rest_header, rest_url, rest_body, or 
-# rest_cookies, you can substitute values from the app.conf. To do so simply create a Key
-# and a value pair in app.conf and then directly reference the key here using
-# double-curly brace.
+# SECRETS can be directly substituted into input parameters, there by avoiding
+# the need to expose any sensitive information as plain text. This can be done by
+# creating a SECRET under the application's configuration tab and referencing the 
+# same with a `$` sign followed by the SECRET's name enclosed within curly
+# brace. PAM Credentials can also be referenced it a similar fashion.
+#
+#    Format:
+#    -------
+#      SECRETS : ${SECRET_NAME}
+#      PAM     : ^{PAM_CREDENTIALS}
+#
 #
 #    Example:
 #    --------
 #      headers = """
-#      Content-Type: application/json
-#      X-Frooble: Baz
-#      Authorization: {{auth_header}}
+#      {
+#        "Content-Type"  : "application/json",
+#        "X-Frooble"     : "Baz",
+#        "Authorization" : "bearer ${API_TOKEN}"
+#      }
 #      """
 
 #                                                  ====================                                                  
@@ -718,7 +745,46 @@ inputs.rest_retry_backoff = 1
 #       - inputs.jwt_payload
 #
 
-# 1. New-line separated (Legacy)
+# 1. JSON format:
+#    ------------
+#
+#    Standard json file format. Supports complex data structures such as lists
+#    or nested Key-value pairs.
+#
+#    Example:
+#    --------
+#      body = """
+#      "name" : "user1",
+#      "password" : "p@ssword1",
+#      "role" : "admin",
+#      "content" : { "site_url" : "www.example.com", "users" : ["user1", "user2"] }
+#      """
+
+#    Hint:
+#    -----
+#
+#    An easier way to feed inputs to the above mentioned fields would be using
+#    python dictionaries. While the inputs don't directly support dict, the in-built 
+#    json package can be used to convert a python dict to json string.
+#
+#    Example:
+#    --------
+#      import json
+#     
+#      body = {
+#       "name"     : "user1",
+#       "password" : "p@ssword1",
+#       "role"     : "admin",
+#       "content"  : { 
+#          "site_url" : "www.example.com",
+#          "users"    : ["user1", "user2"]
+#          }
+#      }
+#
+#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
+
+
+# 2. New-line separated (Legacy)
 #    ---------------------------
 #
 #    This format allows for specifying inputs as key-value pairs, separated
@@ -741,44 +807,6 @@ inputs.rest_retry_backoff = 1
 #      Content-Type: application/json
 #      X-Frooble: Baz
 #      Authorization: {{auth_header}}
-
-# 2. JSON format:
-#    ------------
-#
-#    Standard json file format. Supports complex data structures such as lists
-#    or nested Key-value pairs.
-#
-#    Example:
-#    --------
-#      body = """
-#      "name" : "user1",
-#      "password" : "p@ssword1",
-#      "role" : "admin",
-#      "content" : { "site_url" : "www.example.com", "users" : ["user1", "user2"] }
-#      """
-
-#    Hint:
-#
-#    An easier way to feed inputs to the above mentioned fields would be using
-#    python dictionaries. While the inputs don't directly support dict, the in-built 
-#    json package can be used to convert a python dict to json string.
-#
-#    Example:
-#    --------
-#      import json
-#     
-#      body = {
-#       "name"     : "user1",
-#       "password" : "p@ssword1",
-#       "role"     : "admin",
-#       "content"  : { 
-#          "site_url" : "www.example.com",
-#          "users"    : ["user1", "user2"]
-#          }
-#      }
-#
-#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
-
 
 #                                                     =============
 #                                                      REUSABILITY

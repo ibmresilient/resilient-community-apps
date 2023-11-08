@@ -81,7 +81,7 @@ inputs.rest_api_verify  = verify if verify not in [None, ''] else True
 inputs.rest_api_method  = method if method and method in SUPPORTED_REST_METHODS else REST_METHODS[0] 
 
 # Time in seconds to wait before timingout request. Default: 60 seconds.
-inputs.rest_api_timeout = timeout if timeout else 60
+inputs.rest_api_timeout = timeout if timeout else None
 
 # Request headers used for Authorization. Refer to ``DICT/JSON FORMAT`` section for more information.
 inputs.rest_api_headers = header if header else None
@@ -106,6 +106,7 @@ inputs.rest_api_query_parameters = query_parameters
 #    Example:
 #    --------
 #     inputs.rest_api_allowed_status_codes = "305, 400, 404, 500"
+
 
 # Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default
 inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else None
@@ -171,17 +172,26 @@ inputs.rest_retry_backoff = 1
 #                                                        SECRETS
 #                                                       =========
 
-# For sensitive information that may be included in the rest_header, rest_url, rest_body, or 
-# rest_cookies, you can substitute values from the app.conf. To do so simply create a Key
-# and a value pair in app.conf and then directly reference the key here using
-# double-curly brace.
+# SECRETS can be directly substituted into input parameters, there by avoiding
+# the need to expose any sensitive information as plain text. This can be done by
+# creating a SECRET under the application's configuration tab and referencing the 
+# same with a `$` sign followed by the SECRET's name enclosed within curly
+# brace. PAM Credentials can also be referenced it a similar fashion.
+#
+#    Format:
+#    -------
+#      SECRETS : ${SECRET_NAME}
+#      PAM     : ^{PAM_CREDENTIALS}
+#
 #
 #    Example:
 #    --------
 #      headers = """
-#      Content-Type: application/json
-#      X-Frooble: Baz
-#      Authorization: {{auth_header}}
+#      {
+#        "Content-Type"  : "application/json",
+#        "X-Frooble"     : "Baz",
+#        "Authorization" : "bearer ${API_TOKEN}"
+#      }
 #      """
 
 #                                                  ====================                                                  
@@ -204,7 +214,46 @@ inputs.rest_retry_backoff = 1
 #       - inputs.jwt_payload
 #
 
-# 1. New-line separated (Legacy)
+# 1. JSON format:
+#    ------------
+#
+#    Standard json file format. Supports complex data structures such as lists
+#    or nested Key-value pairs.
+#
+#    Example:
+#    --------
+#      body = """
+#      "name" : "user1",
+#      "password" : "p@ssword1",
+#      "role" : "admin",
+#      "content" : { "site_url" : "www.example.com", "users" : ["user1", "user2"] }
+#      """
+
+#    Hint:
+#    -----
+#
+#    An easier way to feed inputs to the above mentioned fields would be using
+#    python dictionaries. While the inputs don't directly support dict, the in-built 
+#    json package can be used to convert a python dict to json string.
+#
+#    Example:
+#    --------
+#      import json
+#     
+#      body = {
+#       "name"     : "user1",
+#       "password" : "p@ssword1",
+#       "role"     : "admin",
+#       "content"  : { 
+#          "site_url" : "www.example.com",
+#          "users"    : ["user1", "user2"]
+#          }
+#      }
+#
+#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
+
+
+# 2. New-line separated (Legacy)
 #    ---------------------------
 #
 #    This format allows for specifying inputs as key-value pairs, separated
@@ -227,44 +276,6 @@ inputs.rest_retry_backoff = 1
 #      Content-Type: application/json
 #      X-Frooble: Baz
 #      Authorization: {{auth_header}}
-
-# 2. JSON format:
-#    ------------
-#
-#    Standard json file format. Supports complex data structures such as lists
-#    or nested Key-value pairs.
-#
-#    Example:
-#    --------
-#      body = """
-#      "name" : "user1",
-#      "password" : "p@ssword1",
-#      "role" : "admin",
-#      "content" : { "site_url" : "www.example.com", "users" : ["user1", "user2"] }
-#      """
-
-#    Hint:
-#
-#    An easier way to feed inputs to the above mentioned fields would be using
-#    python dictionaries. While the inputs don't directly support dict, the in-built 
-#    json package can be used to convert a python dict to json string.
-#
-#    Example:
-#    --------
-#      import json
-#     
-#      body = {
-#       "name"     : "user1",
-#       "password" : "p@ssword1",
-#       "role"     : "admin",
-#       "content"  : { 
-#          "site_url" : "www.example.com",
-#          "users"    : ["user1", "user2"]
-#          }
-#      }
-#
-#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
-
 
 #                                                     =============
 #                                                      REUSABILITY
