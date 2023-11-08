@@ -100,7 +100,7 @@ def main():
     if C_OUTER is not None:
         note_text = "Symantec SEP Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for computer name " \
                    "<b>{2}</b> for Resilient function <b>{3}</b>"\
-            .format(WF_NAME, results["content"]["numberOfElements"], str(INPUTS["sep_computername"]),
+            .format(WF_NAME, results.get("content", {}).get("numberOfElements"), INPUTS.get("sep_computername", {})),
                     FN_NAME)
 
         eps = C_OUTER["content"]
@@ -151,7 +151,7 @@ def main():
     else:
         note_text += "Symantec SEP Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for computer " \
                      "name <b>{1}</b> for Resilient function <b>{2}</b>"\
-            .format(WF_NAME, INPUTS["sep_computername"], FN_NAME)
+            .format(WF_NAME, INPUTS.get("sep_computername", {}), FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 

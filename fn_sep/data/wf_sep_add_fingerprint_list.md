@@ -63,7 +63,7 @@ for i in range(len(content)):
     break
 inputs.sep_hash_value = artifact.value
 inputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name
-inputs.sep_description = "Fingerprint list '{}'".format(inputs.sep_fingerprintlist_name)
+inputs.sep_description = "Fingerprint list '{}'".format(inputs.get("sep_fingerprintlist_name"))
 ```
 
 ### Post-Processing Script
@@ -223,7 +223,7 @@ if fpl_content["name"] ==  rule.properties.sep_fingerprintlist_name:
     else:
         inputs.sep_hash_value = artifact.value
 
-inputs.sep_description = "Fingerprint list '{}'".format(inputs.sep_fingerprintlist_name)
+inputs.sep_description = "Fingerprint list '{}'".format(inputs.get("sep_fingerprintlist_name"))
 
 ```
 

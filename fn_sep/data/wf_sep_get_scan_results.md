@@ -19,7 +19,10 @@
 
 ### Pre-Processing Script
 ```python
-None
+inputs.sep_scan_date = row.query_execution_date
+inputs.sep_incident_id = incident.id
+inputs.sep_commandid = row.scan_commandid
+inputs.sep_status_type = "scan"
 ```
 
 ### Post-Processing Script
