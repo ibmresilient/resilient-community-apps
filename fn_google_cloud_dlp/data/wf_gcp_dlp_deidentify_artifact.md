@@ -12,7 +12,7 @@
 `google_cloud_dlp_deidentify_content`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_google_cloud_dlp`
@@ -32,7 +32,8 @@ else:
 If the integration was successful in operation, return a note with the now de-identified text. 
 """
 if results.success:
-  incident.addNote("""De-Identified using Google Cloud DLP<b>{}<b>""".format(results.content["de_identified_text"]))
+  incident.addNote("""De-Identified using Google Cloud DLP<b>{}<b>""".format(results.get("content", {}).get("de_identified_text"))
+  
 ```
 
 ---
