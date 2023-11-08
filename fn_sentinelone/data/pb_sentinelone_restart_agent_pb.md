@@ -4,7 +4,7 @@
     Generated with resilient-sdk v50.0.151
 -->
 
-# Playbook - SentinelOne: Restart Agent (PB)
+# Playbook - SentinelOne: Restart Agent Endpoint (PB)
 
 ### API Name
 `sentinelone_restart_agent_pb`
@@ -22,7 +22,7 @@
 `sentinelone_agents_dt`
 
 ### Description
-Restart an agent managed by SentinelOne.
+Restart an agent endpoint managed by SentinelOne.
 
 
 ---
