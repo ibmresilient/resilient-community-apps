@@ -26,11 +26,11 @@ setup(
     display_name="APIVoid Threat Analysis APIs",
     version="1.0.1",
     license='MIT',
-    author='IBM Resilient Labs',
-    author_email='resil.labs@gmail.com',
+    author='IBM SOAR',
+    author_email='',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="A Resilient Function to integrate with the APIVoid API",
-    long_description="Provides APIVoid's threat intelligence to enrich Resilient artifacts",
+    description="A IBM QRadar SOAR Function to integrate with the APIVoid API",
+    long_description="Provides APIVoid's threat intelligence to enrich SOAR artifacts",
     install_requires=[
         'resilient_circuits>=47.1.0',
         'resilient_lib>=47.1.0'
