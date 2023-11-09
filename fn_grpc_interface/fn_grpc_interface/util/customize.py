@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# Generated with resilient-sdk v50.1.262
 
 """Generate the Resilient customizations required for fn_grpc_interface"""
 
@@ -20,16 +22,25 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_grpc_interface",
-        "message_destinations": [u"fn_grpc"],
-        "functions": [u"function_grpc"],
-        "workflows": [u"example_grpc_communication_interface"],
-        "actions": [u"Example: Call gRPC Service"],
+        "message_destinations": [
+            u"fn_grpc"
+        ],
+        "functions": [
+            u"function_grpc"
+        ],
+        "workflows": [
+            u"example_grpc_communication_interface"
+        ],
+        "actions": [
+            u"Example: Call gRPC Service"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [],
     }
 
 
@@ -38,7 +49,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 40.0.6554
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
