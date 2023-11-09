@@ -28,10 +28,22 @@ class FunctionComponent(AppFunctionComponent):
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
+    def _status_and_log_message(self, msg):
+        """
+        Logs a message and returns a status message.
+
+        :param msg: The message to be logged and used for the status message.
+        :type msg: str
+        :return: A status message based on the input message.
+        :rtype: status_message
+        """
+        LOG.info(msg)
+        return self.status_message(msg)
+
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-            The function parameters determine the type of call, the URL, and optionally the headers
+        The function parameters determine the type of call, the URL, and optionally the headers
         and body. Users can also specify request headers, parameters, and body content for
         different types of requests. It also supports various authentication methods, including
         basic authentication, OAuth, API keys, and client side authentication. The results include
@@ -252,9 +264,11 @@ class FunctionComponent(AppFunctionComponent):
                 oauth_properties[key] = render(value, self.options)
 
         LOG.info("Rendering REST properties. If values contain SECRETS, they are incorporated.")
+        yield self.status_message("Rendering REST properties")
         render_dict_components(rest_properties, self.options)
 
         LOG.info("Rendering JWT properties. If values contain SECRETS, they are incorporated.")
+        yield self.status_message("Rendering JWT properties")
         render_dict_components(jwt_properties, self.options)
 
         # Converting allowed_status_codes to a list of integers
@@ -265,25 +279,40 @@ class FunctionComponent(AppFunctionComponent):
         oauth_client     = authentication_handler.OAuth2Authorization(self.rc, oauth_properties)
 
         # Performing OAuth authentication if Oauth parameters are provided
-        LOG.info("If OAuth ready, adding OAuth generate ACCESS_TOKEN to request header")
-        rest_properties  = authentication_handler.add_oauth_headers(oauth_client, rest_properties)
+
+        yield self._status_and_log_message("Checking if request is OAuth ready...")
+        if oauth_client.check_oauth_ready():
+            yield self.status_message("OAuth parameters detected, initializing authentication process..")
+            rest_properties  = authentication_handler.add_oauth_headers(oauth_client, rest_properties)
+            yield self.status_message("Successfully authenticated! ACCESS_TOKEN added to header")
+        else:
+            yield self._status_and_log_message("No Oauth parameters were detected. Skipping OAuth authentication")
 
         # Initializing JWT handler
         LOG.info("Initializing OAuth Client to handle Authentication")
         jwt_client       = authentication_handler.JWTHandler(jwt_properties)
 
         # Generating jwt headers if jwt attributes are provided
-        LOG.info("If JWT ready, adding JWT generate ACCESS_TOKEN to request header")
-        rest_properties  = jwt_client.add_jwt_headers(rest_properties)
+        yield self._status_and_log_message("Checking if request is JWT ready...")
+        if jwt_client.check_jwt_ready():
+            yield self.status_message("JWT parameters detected, initiating authentication process")
+            rest_properties  = jwt_client.add_jwt_headers(rest_properties)
+            yield self.status_message("Successfully authenticated! ACCESS_TOKEN added to header")
+        else:
+           yield self._status_and_log_message("No JWT parameters were detected. Skipping JWT authentication")
+
 
         # Generating certificates for client side authentication, if certificates are provided
-        LOG.info("If Client-Side Authentication ready, adding appropriate certificates to the request")
-        rest_properties["clientauth"] = authentication_handler.check_certificate(cert_properties, certs_path)
+        yield self._status_and_log_message("Checking if Client-Side Certificates have been provided ...")
+        if authentication_handler.check_certificates(cert_properties):
+            rest_properties["clientauth"] = authentication_handler.add_certificates(cert_properties, certs_path)
+        else:
+            yield self._status_and_log_message("No certificates were detected. Skipping Client-Side authentication")
 
         LOG.debug(f"Request Body : {json.dumps(rest_properties.get('body'), indent=2)}")
 
         try:
-            LOG.info("Attempting call")
+            yield self._status_and_log_message("Attempting call")
             response = make_rest_call(
                 self.opts, self.options, allowed_status_codes,
                 **rest_options, **rest_properties, **retry_properties)
@@ -293,12 +322,12 @@ class FunctionComponent(AppFunctionComponent):
             # OAuth ready. If so, it is assumed that the ACCESS_TOKEN has expired, and so it attempts to
             # renew this by forcing the OAuth client to refresh its credentials, thereby generating new
             # headers.
-            LOG.warning(str(err))
+            yield self._status_and_log_message(str(err))
             if oauth_client.check_oauth_ready():
-                LOG.info("Request seems to be OAuth ready, attempting to generate new header")
+                LOG.info("Request seems to be OAuth ready, attempting to refresh token")
                 oauth_client.force_refresh_tokens()
                 rest_properties = authentication_handler.add_oauth_headers(oauth_client, rest_properties)
-                LOG.info("Retrying request with new header")
+                yield self._status_and_log_message("Retrying request with new header")
                 response = make_rest_call(
                     self.opts, self.options, allowed_status_codes,
                     **rest_options, **rest_properties, **retry_properties)
@@ -306,8 +335,10 @@ class FunctionComponent(AppFunctionComponent):
                 LOG.warning("Request is not OAuth ready. Raising exception")
                 raise IntegrationError(str(err))
 
+        yield self._status_and_log_message("Attempt Successful!")
+
         try:
-            LOG.info("Attempting to JSON decode response")
+            yield self._status_and_log_message("Attempting to JSON decode response")
             response_json = response.json()
             LOG.debug(json.dumps(response_json, indent=2))
         except:
@@ -336,4 +367,5 @@ class FunctionComponent(AppFunctionComponent):
             LOG.warning(f"Unable to clear all client side authentication certificates {certs_path.keys()}.")
 
         # Produce a FunctionResult with the results
+        yield self._status_and_log_message("Application Execution completed")
         yield FunctionResult(results)

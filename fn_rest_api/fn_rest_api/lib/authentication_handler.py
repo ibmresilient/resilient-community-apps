@@ -437,8 +437,26 @@ CLIENT_AUTH_CERT = "client_auth_cert"
 CLIENT_AUTH_KEY  = "client_auth_key"
 CLIENT_AUTH_PEM  = "client_auth_pem"
 
+def check_certificates(cert_properties:dict) -> None:
+    """
+    Checks to see if the application is Client-Side Authentication compliant. In other
+    words, checks to see if any of the cert_properties have been populated.
 
-def check_certificate(cert_properties:dict, certs_path:dict):
+    :param cert_properties: Contents of certificates
+    :type cert_properties: dict
+    :return: True if compliant else False
+    :rtype: bool
+    """
+    # Creating .csr certificate and key using the values provided as text
+    if cert_properties.get(CLIENT_AUTH_CERT) and cert_properties.get(CLIENT_AUTH_KEY):
+        return True
+    # Creating pem certificate and key using the values provided as text
+    if cert_properties.get(CLIENT_AUTH_PEM):
+        return True
+    return False
+    
+    
+def add_certificates(cert_properties:dict, certs_path:dict) -> tuple:
     """
     Checks if certificates have been provided as string values to the cert_properties argument. if yes, safely
     creates cert files in a temp directory and keeps a track of their location. If not, simply returns None.
@@ -489,6 +507,7 @@ def check_certificate(cert_properties:dict, certs_path:dict):
         prepare_certificates(cert_properties.get(CLIENT_AUTH_PEM), CLIENT_AUTH_PEM, FILE_TYPE_PEM, certs_path)
         return certs_path.get(CLIENT_AUTH_PEM).get("file")
     return None
+
 
 
 def prepare_certificates(cert_content:str, cert_name:str, cert_type:str, certs_path:dict) -> bool:
@@ -673,7 +692,7 @@ class JWTHandler:
         return {AUTHORIZATION_KEY : f"{self._jwt_properties.get(JWT_TOKEN_TYPE)} {self._jwt_properties.get(JWT_TOKEN)}"}
 
 
-    def _check_jwt_ready(self) -> bool:
+    def check_jwt_ready(self) -> bool:
         """
         Responsible for determining if the application is JWT ready. An application needs the following
         parameters to compile a valid JWT token. Failing to provide these would simply return False
@@ -717,7 +736,7 @@ class JWTHandler:
         jwt_headers = {}
 
         # Checking if application is JWT ready
-        if self._check_jwt_ready():
+        if self.check_jwt_ready():
             LOG.info("JWT parameters detected")
 
             # Precompiled JWT TOKEN detected! compiling headers with this token
@@ -735,7 +754,7 @@ class JWTHandler:
             rest_properties[HEADERS] = jwt_headers
         
         # Checking if header already has ACCESS_TOKEN present
-        elif self._check_jwt_ready() and AUTHORIZATION_KEY in rest_properties.get(HEADERS) and rest_properties[HEADERS][AUTHORIZATION_KEY]:
+        elif self.check_jwt_ready() and AUTHORIZATION_KEY in rest_properties.get(HEADERS) and rest_properties[HEADERS][AUTHORIZATION_KEY]:
             raise IntegrationError(f"""Header already has a ACCESS_KEY present {rest_properties[HEADERS]}""")
 
         # Updating headers with JWT token
