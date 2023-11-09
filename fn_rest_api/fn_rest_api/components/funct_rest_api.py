@@ -16,10 +16,6 @@ from fn_rest_api.lib import authentication_handler
 FN_NAME = "rest_api"
 PACKAGE_NAME = "fn_rest_api"
 
-RETRY_TRIES_DEFAULT = 1
-RETRY_DELAY_DEFAULT = 1
-RETRY_BKOFF_DEFAULT = 1
-
 LOG = getLogger(__name__)
 
 class FunctionComponent(AppFunctionComponent):
