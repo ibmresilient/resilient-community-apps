@@ -112,62 +112,6 @@ inputs.rest_api_query_parameters = query_parameters
 inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else None
 
 
-#                                                       =======
-#                                                        RETRY
-#                                                       =======
-
-# This mechanism ensures the reliable exchange of data by automatically reattempting requests 
-# that have failed.
-
-# 1. RETRY_TRIES (rest_retry_tries):
-#
-#     This parameter defines the maximum number of retry attempts that will be made for a 
-#     failed request before the system ceases further retry efforts. If the maximum number
-#     of retry attempts is reached and the request still fails, the system will cease further
-#     retries and may trigger an error notification or follow an alternative error-handling
-#     process. Default value : 1 (no retry)
-
-# 2. RETRY_DELAY (rest_retry_delay):
-#
-#     This parameter used to define the delay between retry attempts when a request fails and
-#     the request retry mechanism is invoked. This parameter plays a crucial role in controlling
-#     the timing of automatic retry attempts. Default value : 1 (no delay)
-
-# 3. RETRY_BACKOFF (rest_retry_backoff):
-#
-#     This parameter is used to specify the multiplier applied to delay between attempts.
-#     Default: 1 (no backoff). The backoff strategy follows the below algorithm:
-#
-#         `DELAY = RETRY_DELAY * (RETRY_BACKOFF ^ n-1)`
-#
-#             where `n` is the current attempt count.
-#
-#       Example:
-#
-#       For these values:
-#         RETRY_TRIES = 4   RETRY_DELAY = 2   RETRY_BACKOFF = 3
-#
-#       The retry mechanism attempts requests in the following manner:
-#
-#         - attempts request 1. if failed, attempts retry in 2 seconds.
-#         - attempts request 2. if failed, attempts retry in 6 seconds.
-#         - attempts request 3. if failed, attempts retry in 18 seconds.
-#         - attempts request 4. if failed, raises exception or follows an 
-#                               alternative error-handling process.
-
-# You can find more information on this in the link below. https://github.com/eSAMTrade/retry#retry_call 
-
-
-# The maximum number of request retry attempts. Default: 1 (no retry). Use -1 for unlimited retries.
-inputs.rest_retry_tries   = 1
-
-# Initial delay between attempts. Default: 1
-inputs.rest_retry_delay   = 1
-
- # Multiplier applied to delay between attempts. Default: 1 (no backoff)
-inputs.rest_retry_backoff = 1
-
-
 #                                                       =========
 #                                                        SECRETS
 #                                                       =========

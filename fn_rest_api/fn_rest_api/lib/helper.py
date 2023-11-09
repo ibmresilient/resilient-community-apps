@@ -34,7 +34,7 @@ def render_dict_components(input_properties, options):
     into a dictionary, if None, skipped. The input values are not required to be returned
     as they are passed by reference.
 
-    :param input_properties: Dictonary of json-type objects passed in as string
+    :param input_properties: Dictionary of json-type objects passed in as string
     :type input_properties: dict
     :return: No return as values are modified directly by reference
     :rtype: None

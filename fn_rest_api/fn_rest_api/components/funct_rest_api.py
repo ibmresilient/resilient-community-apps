@@ -115,18 +115,6 @@ class FunctionComponent(AppFunctionComponent):
         :param fn_inputs.rest_api_headers: The HTTP headers to include in the API request. Input
             format matches ``fn_inputs.rest_api_body``
         :type fn_inputs.rest_api_headers: str
-        :param fn_inputs.rest_retry_tries: (Optional) The maximum number of attempts. Default: ``1`` (no retry).
-            Use ``-1`` for unlimited retries. Matches ``retry_tries`` parameter of `resilient-lib.request_common.execute
-            <https://github.com/ibmresilient/resilient-python-api/blob/main/resilient-lib/resilient_lib/components/requests_common.py>`_.
-        :type fn_inputs.rest_retry_tries: int
-        :param fn_inputs.rest_retry_delay: (Optional) The delay (in seconds) between retry attempts. Default:``1``.
-            Matches ``retry_delay`` parameter of `resilient-lib.request_common.execute
-            <https://github.com/ibmresilient/resilient-python-api/blob/main/resilient-lib/resilient_lib/components/requests_common.py>`_.
-        :type fn_inputs.rest_retry_delay: int
-        :param fn_inputs.rest_retry_backoff: (Optional) The backoff delay (in seconds) to be added for retrying
-            API calls. Default: ``1``. Matches ``retry_delay`` parameter of `resilient-lib.request_common.execute
-            <https://github.com/ibmresilient/resilient-python-api/blob/main/resilient-lib/resilient_lib/components/requests_common.py>`_.
-        :type fn_inputs.rest_retry_backoff: int
         :param fn_inputs.oauth_token_url: (Optional) The URL to obtain OAuth tokens. Default: ``None``
         :type fn_inputs.oauth_token_url: str
         :param fn_inputs.oauth_client_id: (Optional) The OAuth client ID for authentication. Default: ``None``
@@ -221,11 +209,6 @@ class FunctionComponent(AppFunctionComponent):
             "cookies" : self.get_textarea_param(getattr(fn_inputs, "rest_api_cookies", None)), # textarea
             "params"  : self.get_textarea_param(getattr(fn_inputs, "rest_api_query_parameters", None))} # textarea
 
-        retry_properties = {
-            "retry_tries"   : int(getattr(fn_inputs, "rest_retry_tries", RETRY_TRIES_DEFAULT)), # integer
-            "retry_delay"   : int(getattr(fn_inputs, "rest_retry_delay", RETRY_DELAY_DEFAULT)), # integer
-            "retry_backoff" : int(getattr(fn_inputs, "rest_retry_backoff", RETRY_BKOFF_DEFAULT))} # integer
-
         # Properties required for OAuth Authentication
         oauth_properties = {
             authentication_handler.TOKEN_URL     : getattr(fn_inputs, "oauth_token_url", None),
@@ -315,7 +298,7 @@ class FunctionComponent(AppFunctionComponent):
             yield self._status_and_log_message("Attempting call...")
             response = make_rest_call(
                 self.opts, self.options, allowed_status_codes,
-                **rest_options, **rest_properties, **retry_properties)
+                **rest_options, **rest_properties)
 
         except (HTTPError, IntegrationError) as err:
             # If the error raised is either HTTPError or IntegrationError, checks to see if the request is
