@@ -312,7 +312,7 @@ class FunctionComponent(AppFunctionComponent):
         LOG.debug(f"Request Body : {json.dumps(rest_properties.get('body'), indent=2)}")
 
         try:
-            yield self._status_and_log_message("Attempting call")
+            yield self._status_and_log_message("Attempting call...")
             response = make_rest_call(
                 self.opts, self.options, allowed_status_codes,
                 **rest_options, **rest_properties, **retry_properties)
