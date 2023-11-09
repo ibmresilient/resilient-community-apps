@@ -660,7 +660,7 @@ class JWTHandler:
         -------
             <dict> : REST request headers with jwt tokens baked into it
         """
-        LOG.info("Compiling JWT token")
+        LOG.info("Compiling a JWT token using the provided parameters")
         self._jwt_properties[JWT_TOKEN] = jwt.encode(
             self._jwt_properties.get(JWT_PAYLOAD),
             key=self._jwt_properties.get(JWT_KEY),
@@ -688,7 +688,7 @@ class JWTHandler:
         `_jwt_properties` dictionary for successful header compilation. The values for these keys are expected
         to be strings.
         """
-        LOG.info("Compiling JWT headers.")
+        LOG.info("Adding JWT access_token by means of `Authorization` parameter to request header")
         return {AUTHORIZATION_KEY : f"{self._jwt_properties.get(JWT_TOKEN_TYPE)} {self._jwt_properties.get(JWT_TOKEN)}"}
 
 
@@ -702,7 +702,8 @@ class JWTHandler:
         -------
             <bool> : True if JWT authentication ready, False if not.
         """
-        LOG.info("Checking if a valid JWT token or JWT attributes are provided to compile a valid token")
+        LOG.info("Checking to see if a valid JWT token was provided \
+            or appropriate JWT attributes required for token generation is provided")
         if self._jwt_properties.get(JWT_TOKEN) or self._jwt_properties.get(JWT_KEY):
             return True
         return False
@@ -737,26 +738,27 @@ class JWTHandler:
 
         # Checking if application is JWT ready
         if self.check_jwt_ready():
-            LOG.info("JWT parameters detected")
 
             # Precompiled JWT TOKEN detected! compiling headers with this token
             if self._jwt_properties.get(JWT_TOKEN):
-                LOG.info("Precompiled JWT TOKEN detected! Forming headers with token")
+                LOG.info("A precompiled JWT TOKEN detected! Directly creating request header using this token")
                 jwt_headers = self._compile_headers()
 
             # Compiling JWT tokens using provided JWT attributes
             elif self._jwt_properties.get(JWT_KEY):
-                LOG.info("JWT token attributes detected. Compiling JWT token")
+                LOG.info("JWT token attributes detected. Creating a new JWT token")
                 jwt_headers = self._compile_jwt_token()
 
-        # Creating headers with JWT token
+        # If request_properties has no header section, creating a new header section and adding the compiled header
         if not rest_properties.get(HEADERS):
+            LOG.info("No header section was detected. Creating new header section for the request and the compiled header")
             rest_properties[HEADERS] = jwt_headers
-        
+
         # Checking if header already has ACCESS_TOKEN present
         elif self.check_jwt_ready() and AUTHORIZATION_KEY in rest_properties.get(HEADERS) and rest_properties[HEADERS][AUTHORIZATION_KEY]:
-            raise IntegrationError(f"""Header already has a ACCESS_KEY present {rest_properties[HEADERS]}""")
-
+            raise IntegrationError(f"""Conflict detected!! Request header already has an `Authorization` parameter. Please resolve conflict
+                                   by opting out of other authentication mechanisms or opt out of this process by not providing any values for
+                                   JWT parameters""")
         # Updating headers with JWT token
         else:
             rest_properties[HEADERS].update(jwt_headers)
