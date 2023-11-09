@@ -143,7 +143,7 @@ if response is not None:
         c = d["computer"]
         if c is not None:
             for fi in DATA_TBL_FIELDS_COMPUTER:
-                if isinstance(c[fi], unicode) or len(c[fi]) == 0:
+                if isinstance(c[fi], str) or len(c[fi]) == 0:
                     newrow[fi] = c[fi]
                 else:
                     newrow[fi] = '[' + ''.join(c[fi]) + ']'

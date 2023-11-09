@@ -93,7 +93,7 @@ if response is not None and errors is None:
     for f in DATA_TBL_FIELDS:
         if f == "query_execution_time" or "policy" in f:
             continue
-        if isinstance(data[f], unicode) or len(data[f]) == 0:
+        if isinstance(data[f], str) or len(data[f]) == 0:
             newrow[f] = data[f]
         else:
             newrow[f] = ','.join(data[f])

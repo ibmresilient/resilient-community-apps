@@ -218,7 +218,7 @@ if response is not None:
 
     noteText = u"Cisco AMP for Endpoints Integration: There were <b>{0}</b> results returned out of a total of <b>{1}</b>" \
                " for hostname <b>{2}</b> for query  <b>{3}</b> for Resilient function <b>{4}</b>"\
-        .format(len(data["events"]), total, hostname, unicode(q), "fn_amp_get_computer_trajectory")
+        .format(len(data["events"]), total, hostname, q, "fn_amp_get_computer_trajectory")
     for e in events:
         newrow = incident.addRow("amp_computer_trajectory")
         newrow.query_execution_time = query_execution_time

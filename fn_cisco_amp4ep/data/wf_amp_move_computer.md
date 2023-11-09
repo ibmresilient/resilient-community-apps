@@ -157,7 +157,7 @@ if response is not None and response["metadata"]["results"]["total"] > 0:
    pass
    # If we get here do nothing result passed on to function 'fn_amp_move_computer' as 'workflow.properties.get_groups_results'
 else:
-   note_text += u"Cisco AMP for Endpoints Integration: There were <b>no</b> results returned for group name <b>{0}</b> for Resilient function <b>{1}</b>".format(unicode(input_params["name"]), "fn_amp_get_groups")
+   note_text += "Cisco AMP for Endpoints Integration: There were <b>no</b> results returned for group name <b>{0}</b> for Resilient function <b>{1}</b>".format(input_params.get("name",{}), "fn_amp_get_groups")
    incident.addNote(helper.createRichText(note_text))
 
 ```
@@ -253,13 +253,13 @@ if response is not None:
     hostname = response["data"]["hostname"]
     group_guid  = response["data"]["group_guid"]
     row.group_guid = group_guid
-    noteText = u"Cisco AMP for Endpoints Integration: Successfully moved computer with hostname <b>{0}</b> " \
+    noteText = "Cisco AMP for Endpoints Integration: Successfully moved computer with hostname <b>{0}</b> " \
                "to group <b>{1}</b> for Resilient function <b>{2}</b>."\
-        .format(unicode(hostname), unicode(input_params_groups["name"]), "fn_amp_move_computer")
+        .format(hostname, input_params_groups.get("name",{}), "fn_amp_move_computer")
 else:
-  noteText = u"Cisco AMP Integration: Move unsuccessful for computer with guid <b>{0}</b> " \
+  noteText = "Cisco AMP Integration: Move unsuccessful for computer with guid <b>{0}</b> " \
                "to group <b>{1}</b> for Resilient function <b>{2}</b>."\
-        .format(unicode(hostname), unicode(input_params_groups["name"]), "fn_amp_move_computer")
+        .format(hostname, input_params_groups.get("name",{}), "fn_amp_move_computer")
 
 incident.addNote(helper.createRichText(noteText))
 ```

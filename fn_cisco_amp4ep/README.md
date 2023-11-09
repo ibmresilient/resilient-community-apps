@@ -79,11 +79,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for Cisco AMP for Endpoints**
+**IBM SOAR components for Cisco AMP for Endpoints**
 
- ![screenshot: main](./doc/screenshots/main.png)
+ ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
 
-The Cisco AMP for Endpoints integration with the Resilient platform allows for the querying and updating of an AMP for Endpoints deployment. The integration includes 12 functions that return results which show security events for endpoints in the deployment. The returned results can be used to make customized updates to the Resilient platform, such as updating incidents, artifacts, data tables and so on. The integration can also be used to make changes to a deployment including adding or removing a hash to a blacklist and moving an endpoint to a different group.
+The Cisco AMP for Endpoints integration with the SOAR platform allows for the querying and updating of an AMP for Endpoints deployment. The integration includes 12 functions that return results which show security events for endpoints in the deployment. The returned results can be used to make customized updates to the Resilient platform, such as updating incidents, artifacts, data tables and so on. The integration can also be used to make changes to a deployment including adding or removing a hash to a blacklist and moving an endpoint to a different group.
 
 ### Key Features
 <!--
@@ -100,6 +100,7 @@ The Cisco AMP for Endpoints integration with the Resilient platform allows for t
 <!--
   List any Requirements 
 --> 
+<!-- ::CHANGE_ME:: -->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
@@ -139,19 +140,44 @@ The following Cloud Pak guides provide additional information:
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app does support a proxy server.
+The app **does/does not** <!-- ::CHANGE_ME:: --> support a proxy server.
 
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=30.0.0
 
-### Development Version
+### <!-- ::CHANGE_ME:: --> Development Version
 
 This app has been implemented using:
-| Product Name | API URL | API Version |
-| ------------ | ------- | ----------- |
-|Cisco AMP for Endpoint| https://api.amp.cisco.com/ | v1 |
+| Product Name | Product Version | API URL | API Version |
+| ------------ | --------------- | ------- | ----------- |
+| <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> | <!-- ::CHANGE_ME:: --> |
+
+#### Prerequisites
+<!--
+List any prerequisites that are needed to use with this endpoint solution. Remove any section that is unnecessary.
+-->
+* Prereq A <!-- ::CHANGE_ME:: -->
+* Prereq B <!-- ::CHANGE_ME:: -->
+* Prereq C <!-- ::CHANGE_ME:: -->
+
+#### Configuration
+<!--
+List any steps that are needed to configure the endpoint to use this app.
+-->
+* Config A <!-- ::CHANGE_ME:: -->
+* Config B <!-- ::CHANGE_ME:: -->
+* Config C <!-- ::CHANGE_ME:: -->
+
+#### Permissions
+<!--
+List any user permissions that are needed to use this endpoint. For example, list the API key permissions.
+-->
+* Permission A <!-- ::CHANGE_ME:: -->
+* Permission B <!-- ::CHANGE_ME:: -->
+* Permission C <!-- ::CHANGE_ME:: -->
+
 
 ---
 
@@ -166,11 +192,11 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **api_token** | Yes | `<api token>` | Cisco AMP for Endpoint API Token |
-| **api_version** | Yes | `v1` | Cisco AMP for Endpoint API Version |
-| **base_url** | Yes | `https://api.amp.cisco.com/` | Cisco AMP for Endpoint base URL |
-| **client_id** | Yes | `<client id>` | Cisco AMP for Endpoint Client ID |
-| **max_retries** | Yes | `3` | Cisco AMP for Endpoint Max retries |
+| **api_token** | Yes | `<api token>` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **api_version** | Yes | `v1` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **base_url** | Yes | `https://api.amp.cisco.com/` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **client_id** | Yes | `<client id>` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
+| **max_retries** | Yes | `3` | *Enter a description of the config here.* <!-- ::CHANGE_ME:: --> |
 
 ### Custom Layouts
 <!--
@@ -180,9 +206,7 @@ The following table provides the settings you need to configure the app. These s
 -->
 * Import the Data Tables and Custom Fields like the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts2.png)
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts3.png)
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png) <!-- ::CHANGE_ME:: -->
 
 
 ---
@@ -190,7 +214,7 @@ The following table provides the settings you need to configure the app. These s
 ## Function - AMP: Delete File from List
 Delete a SHA-256 from a file list by file_list_guid.
 
- ![screenshot: fn-amp-delete-file-from-list ](./doc/screenshots/fn-amp-delete-file-from-list.png)
+ ![screenshot: fn-amp-delete-file-from-list ](./doc/screenshots/fn-amp-delete-file-from-list.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -283,7 +307,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - AMP: Get Activity
 Returns list of computers from search of Cisco AMP environment for any events or activities associated with a file or network operation.
 
- ![screenshot: fn-amp-get-activity ](./doc/screenshots/fn-amp-get-activity.png)
+ ![screenshot: fn-amp-get-activity ](./doc/screenshots/fn-amp-get-activity.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -400,7 +424,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - AMP: Get Computer
 Returns information on a  computer with an agent deployed on them by connector guid.
 
- ![screenshot: fn-amp-get-computer ](./doc/screenshots/fn-amp-get-computer.png)
+ ![screenshot: fn-amp-get-computer ](./doc/screenshots/fn-amp-get-computer.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -512,7 +536,7 @@ if response is not None:
     for f in DATA_TBL_FIELDS:
         if f == "query_execution_time" or "policy" in f:
             continue
-        if isinstance(data[f], unicode) or len(data[f]) == 0:
+        if isinstance(data[f], str) or len(data[f]) == 0:
             row[f] = data[f]
         else:
             row[f] = ','.join(data[f])
@@ -534,7 +558,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - AMP: Get Computer Trajectory
 Returns a list of all activities associated with a particular computer by connector guid
 
- ![screenshot: fn-amp-get-computer-trajectory ](./doc/screenshots/fn-amp-get-computer-trajectory.png) 
+ ![screenshot: fn-amp-get-computer-trajectory ](./doc/screenshots/fn-amp-get-computer-trajectory.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -684,7 +708,7 @@ if response is not None:
 
     noteText = u"Cisco AMP for Endpoints Integration: There were <b>{0}</b> results returned out of a total of <b>{1}</b>" \
                " for hostname <b>{2}</b> for query  <b>{3}</b> for Resilient function <b>{4}</b>"\
-        .format(len(data["events"]), total, hostname, unicode(q), "fn_amp_get_computer_trajectory")
+        .format(len(data["events"]), total, hostname, q, "fn_amp_get_computer_trajectory")
     for e in events:
         newrow = incident.addRow("amp_computer_trajectory")
         newrow.query_execution_time = query_execution_time
@@ -734,7 +758,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - AMP: Get Computers
 Returns a list of computers with agents deployed on them. You can use parameters to narrow the search by IP address or hostname.
 
- ![screenshot: fn-amp-get-computers ](./doc/screenshots/fn-amp-get-computers.png)
+ ![screenshot: fn-amp-get-computers ](./doc/screenshots/fn-amp-get-computers.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -849,14 +873,14 @@ input_params = results.input_params
 if response is not None and response["metadata"]["results"]["total"] != 0:
     noteText = u"Cisco AMP for Endpoints Integration: Result returned for computer <b>{0}</b> " \
                "for Resilient function <b>{1}</b>"\
-        .format(unicode(input_params["hostname"]), "fn_amp_get_computer")
+        .format(input_params.get("hostname", {}), "fn_amp_get_computer")
     for data in response["data"]:
         newrow = incident.addRow("amp_computers")
         newrow.query_execution_time = query_execution_time
         for f in DATA_TBL_FIELDS:
             if f == "query_execution_time" or "policy" in f:
                 continue
-            if isinstance(data[f], unicode) or len(data[f]) == 0:
+            if isinstance(data[f], str) or len(data[f]) == 0:
                 newrow[f] = data[f]
             else:
                 newrow[f] = ','.join(data[f])
@@ -865,7 +889,7 @@ if response is not None and response["metadata"]["results"]["total"] != 0:
             newrow.policy_name = policy["name"]
 else:
     noteText += u"Cisco AMP for Endpoints Integration: There were <b>no</b> results returned for computer <b>{0}</b> Resilient " \
-                "function <b>{1}</b>".format(unicode(input_params["hostname"]), "fn_amp_get_computers")
+                "function <b>{1}</b>".format(input_params.get("hostname", {}), "fn_amp_get_computers")
 
 incident.addNote(helper.createRichText(noteText))
 ```
@@ -877,7 +901,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - AMP: Get Event Types
 Returns list of events identified and filtered by a unique ID. Provides a human readable name, and short description of each event by ID.
 
- ![screenshot: fn-amp-get-event-types ](./doc/screenshots/fn-amp-get-event-types.png)
+ ![screenshot: fn-amp-get-event-types ](./doc/screenshots/fn-amp-get-event-types.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -992,7 +1016,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - AMP: Get Events
 Returns a  list of events.
 
- ![screenshot: fn-amp-get-events ](./doc/screenshots/fn-amp-get-events.png) 
+ ![screenshot: fn-amp-get-events ](./doc/screenshots/fn-amp-get-events.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1165,7 +1189,7 @@ if response is not None:
         c = d["computer"]
         if c is not None:
             for fi in DATA_TBL_FIELDS_COMPUTER:
-                if isinstance(c[fi], unicode) or len(c[fi]) == 0:
+                if isinstance(c[fi], str) or len(c[fi]) == 0:
                     newrow[fi] = c[fi]
                 else:
                     newrow[fi] = '[' + ''.join(c[fi]) + ']'
@@ -1190,7 +1214,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - AMP: Get File Lists
 Returns a list of simple custom detection file lists. You can filter this list by name.
 
- ![screenshot: fn-amp-get-file-lists ](./doc/screenshots/fn-amp-get-file-lists.png)
+ ![screenshot: fn-amp-get-file-lists ](./doc/screenshots/fn-amp-get-file-lists.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1307,7 +1331,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - AMP: Get Files from List
 Returns a list of items for a particular file_list. You need to provide file_list_guid to retrieve these items.
 
- ![screenshot: fn-amp-get-files-from-list ](./doc/screenshots/fn-amp-get-files-from-list.png)
+ ![screenshot: fn-amp-get-files-from-list ](./doc/screenshots/fn-amp-get-files-from-list.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1465,7 +1489,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - AMP: Get Groups
 Returns basic information on multiple groups or group by name. Returns more detailed information on group by guid.
 
- ![screenshot: fn-amp-get-groups ](./doc/screenshots/fn-amp-get-groups.png) 
+ ![screenshot: fn-amp-get-groups ](./doc/screenshots/fn-amp-get-groups.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1607,7 +1631,7 @@ if response is not None:
 ## Function - AMP: Move Computer
 Move a computer by connector guid to a group by group guid.
 
- ![screenshot: fn-amp-move-computer ](./doc/screenshots/fn-amp-move-computer.png)
+ ![screenshot: fn-amp-move-computer ](./doc/screenshots/fn-amp-move-computer.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1725,13 +1749,13 @@ if response is not None:
     hostname = response["data"]["hostname"]
     group_guid  = response["data"]["group_guid"]
     row.group_guid = group_guid
-    noteText = u"Cisco AMP for Endpoints Integration: Successfully moved computer with hostname <b>{0}</b> " \
+    noteText = "Cisco AMP for Endpoints Integration: Successfully moved computer with hostname <b>{0}</b> " \
                "to group <b>{1}</b> for Resilient function <b>{2}</b>."\
-        .format(unicode(hostname), unicode(input_params_groups["name"]), "fn_amp_move_computer")
+        .format(hostname, input_params_groups.get("name",{}), "fn_amp_move_computer")
 else:
-  noteText = u"Cisco AMP Integration: Move unsuccessful for computer with guid <b>{0}</b> " \
+  noteText = "Cisco AMP Integration: Move unsuccessful for computer with guid <b>{0}</b> " \
                "to group <b>{1}</b> for Resilient function <b>{2}</b>."\
-        .format(unicode(hostname), unicode(input_params_groups["name"]), "fn_amp_move_computer")
+        .format(hostname, input_params_groups.get("name",{}), "fn_amp_move_computer")
 
 incident.addNote(helper.createRichText(noteText))
 ```
@@ -1743,7 +1767,7 @@ incident.addNote(helper.createRichText(noteText))
 ## Function - AMP: Set File in List
 Add a SHA-256 to a file list by file_list_guid.
 
- ![screenshot: fn-amp-set-file-in-list ](./doc/screenshots/fn-amp-set-file-in-list.png)
+ ![screenshot: fn-amp-set-file-in-list ](./doc/screenshots/fn-amp-set-file-in-list.png) <!-- ::CHANGE_ME:: -->
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2073,7 +2097,7 @@ main()
 
 ## Data Table - Cisco AMP activity
 
-
+ ![screenshot: dt-cisco-amp-activity](./doc/screenshots/dt-cisco-amp-activity.png) <!-- ::CHANGE_ME:: -->
 
 #### API Name:
 amp_activity
@@ -2090,6 +2114,7 @@ amp_activity
 ---
 ## Data Table - Cisco AMP computer trajectory
 
+ ![screenshot: dt-cisco-amp-computer-trajectory](./doc/screenshots/dt-cisco-amp-computer-trajectory.png) <!-- ::CHANGE_ME:: -->
 
 #### API Name:
 amp_computer_trajectory
@@ -2118,6 +2143,7 @@ amp_computer_trajectory
 ---
 ## Data Table - Cisco AMP computers
 
+ ![screenshot: dt-cisco-amp-computers](./doc/screenshots/dt-cisco-amp-computers.png) <!-- ::CHANGE_ME:: -->
 
 #### API Name:
 amp_computers
@@ -2141,6 +2167,7 @@ amp_computers
 ---
 ## Data Table - Cisco AMP event types
 
+ ![screenshot: dt-cisco-amp-event-types](./doc/screenshots/dt-cisco-amp-event-types.png) <!-- ::CHANGE_ME:: -->
 
 #### API Name:
 amp_event_types
@@ -2156,6 +2183,7 @@ amp_event_types
 ---
 ## Data Table - Cisco AMP events
 
+ ![screenshot: dt-cisco-amp-events](./doc/screenshots/dt-cisco-amp-events.png) <!-- ::CHANGE_ME:: -->
 
 #### API Name:
 amp_events
@@ -2178,6 +2206,7 @@ amp_events
 ---
 ## Data Table - Cisco AMP file list files
 
+ ![screenshot: dt-cisco-amp-file-list-files](./doc/screenshots/dt-cisco-amp-file-list-files.png) <!-- ::CHANGE_ME:: -->
 
 #### API Name:
 amp_file_list_files
@@ -2195,6 +2224,7 @@ amp_file_list_files
 ---
 ## Data Table - Cisco AMP groups
 
+ ![screenshot: dt-cisco-amp-groups](./doc/screenshots/dt-cisco-amp-groups.png) <!-- ::CHANGE_ME:: -->
 
 #### API Name:
 amp_groups
@@ -2210,6 +2240,7 @@ amp_groups
 ---
 ## Data Table - Cisco AMP Simple Custom Detections  file lists
 
+ ![screenshot: dt-cisco-amp-simple-custom-detections--file-lists](./doc/screenshots/dt-cisco-amp-simple-custom-detections--file-lists.png) <!-- ::CHANGE_ME:: -->
 
 #### API Name:
 amp_scd_file_lists

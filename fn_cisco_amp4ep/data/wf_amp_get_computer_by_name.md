@@ -89,14 +89,14 @@ input_params = results.input_params
 if response is not None and response["metadata"]["results"]["total"] != 0:
     noteText = u"Cisco AMP for Endpoints Integration: Result returned for computer <b>{0}</b> " \
                "for Resilient function <b>{1}</b>"\
-        .format(unicode(input_params["hostname"]), "fn_amp_get_computer")
+        .format(input_params.get("hostname", {}), "fn_amp_get_computer")
     for data in response["data"]:
         newrow = incident.addRow("amp_computers")
         newrow.query_execution_time = query_execution_time
         for f in DATA_TBL_FIELDS:
             if f == "query_execution_time" or "policy" in f:
                 continue
-            if isinstance(data[f], unicode) or len(data[f]) == 0:
+            if isinstance(data[f], str) or len(data[f]) == 0:
                 newrow[f] = data[f]
             else:
                 newrow[f] = ','.join(data[f])
@@ -105,7 +105,7 @@ if response is not None and response["metadata"]["results"]["total"] != 0:
             newrow.policy_name = policy["name"]
 else:
     noteText += u"Cisco AMP for Endpoints Integration: There were <b>no</b> results returned for computer <b>{0}</b> Resilient " \
-                "function <b>{1}</b>".format(unicode(input_params["hostname"]), "fn_amp_get_computers")
+                "function <b>{1}</b>".format(input_params.get("hostname", {}), "fn_amp_get_computers")
 
 incident.addNote(helper.createRichText(noteText))
 ```

@@ -12,7 +12,7 @@
 `fn_amp_get_events`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_cisco_amp`
@@ -124,7 +124,7 @@ if response is not None:
     event_type = input_params["event_type"]
     noteText = u"Cisco AMP for Endpoints Integration: There were <b>{0}</b> results returned out of a total of " \
                u"<b>{1}</b> for event type id <b>{2}</b> for Resilient function <b>{3}</b>"\
-        .format(len(response["data"]), r["total"], unicode(event_type), "fn_amp_get_events")
+        .format(len(response["data"]), r["total"], event_type, "fn_amp_get_events")
     for d in response["data"]:
         newrow = incident.addRow("amp_events")
         newrow.query_execution_time = query_execution_time
@@ -134,7 +134,7 @@ if response is not None:
         c = d["computer"]
         if c is not None:
             for fi in DATA_TBL_FIELDS_COMPUTER:
-                if isinstance(c[fi], unicode) or len(c[fi]) == 0:
+                if isinstance(c[fi], str) or len(c[fi]) == 0:
                     newrow[fi] = c[fi]
                 else:
                     newrow[fi] = '[' + ''.join(c[fi]) + ']'
@@ -148,7 +148,7 @@ if response is not None:
                     newrow[fi] = fl[fi]
 else:
     noteText += u"Cisco AMP for Endpoints Integration: There were <b>no</b> results returned for event type id <b>{0}</b>" \
-                " for Resilient function <b>{1}</b>".format(unicode(event_type), "fn_amp_get_events", )
+                " for Resilient function <b>{1}</b>".format(event_type, "fn_amp_get_events", )
 
 incident.addNote(helper.createRichText(noteText))
 ```
