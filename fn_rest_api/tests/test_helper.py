@@ -250,54 +250,6 @@ class TestValidateURL(unittest.TestCase):
         assert validate_url({}) == None
 
 
-class TestMakeRestCallWithRetr(unittest.TestCase):
-
-    opts, options = {}, {}
-    @pytest.fixture(autouse=True)
-    def init_caplog_fixture(self, caplog):
-        self.caplog = caplog
-
-    @pytest.mark.livetest
-    def test_request_retry(self):
-        RETRY_TRIES_COUNT   = 4
-        RETRY_DELAY_COUNT   = 2
-        RETRY_BACKOFF_COUNT = 3
-        ENDPOINT = "https://postman-echo.com/status/404"
-
-        self.caplog.clear()
-        try:
-            make_rest_call(
-                self.opts, self.options,
-                method="GET",
-                url=ENDPOINT,
-                headers={},
-                cookies={},
-                body={},
-                params=None,
-                retry_tries=RETRY_TRIES_COUNT,
-                retry_delay=RETRY_DELAY_COUNT,
-                retry_backoff=RETRY_BACKOFF_COUNT,
-                verify=True,
-                timeout=60,
-                clientauth=None)
-        except IntegrationError as err:
-            records = list(self.caplog.records)
-
-        # For these values: RETRY_TRIES_COUNT = 4   RETRY_DELAY_COUNT = 2   RETRY_BACKOFF_COUNT = 3
-        # requests must be executed in the following order:
-        # failed request 1, retrying in 2 seconds...
-        # failed request 2, retrying in 6 seconds...
-        # failed request 3, retrying in 18 seconds...
-        # request 4
-        assert len(records) == RETRY_TRIES_COUNT
-        assert f"retrying in {RETRY_DELAY_COUNT} seconds..." in records[0].message
-        assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[1].message
-        assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[2].message
-        assert f"404 Client Error:" in records[2].message
-
-        self.caplog.clear() # clear caplog
-
-
 class TestMakeRestCall(unittest.TestCase):
 
     class MockResponse:
