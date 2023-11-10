@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 from resilient_lib import render, RequestsCommon
 
 LOG = logging.getLogger()
-CONTENT_TYPES = ["Content-type", "content-type", "CONTENT-TYPE", "Content-Type"]
+CONTENT_TYPE = "content-type"
 CONTENT_TYPE_JSON = "application/json"
 
 
@@ -144,12 +144,11 @@ def make_rest_call(opts, options, allowed_status_codes:list=[200], **kwargs) -> 
     kwargs["data"]     = kwargs.pop("body", {})
     kwargs["callback"] = callback
 
-    if _headers:
-        for content_type in CONTENT_TYPES:
-            # checking to see if header has content-type : application/json. If so, assigns body to data
-            if content_type in _headers and CONTENT_TYPE_JSON in _headers[content_type]:
-                LOG.info(f"Found {content_type} : {CONTENT_TYPE_JSON} in request header. Payload will be json formatted")
-                kwargs["json"] = kwargs.pop("data")
+    for each_header in _headers:
+    # checking to see if header has content-type : application/json. If so, assigns body to data
+        if each_header.lower() == CONTENT_TYPE and CONTENT_TYPE_JSON in _headers[each_header]:
+            LOG.info(f"Found {each_header} : {CONTENT_TYPE_JSON} in request header. Payload will be json formatted")
+            kwargs["json"] = kwargs.pop("data")
 
     return rc.execute(**kwargs)
 

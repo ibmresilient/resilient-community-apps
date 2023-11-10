@@ -410,9 +410,6 @@ class OAuth2Authorization():
         # Adding any additional attributes to the request body, if required
         if additional_attributes:
             body.update(additional_attributes)
-        
-        LOG.debug(f"Response Header : {json.dumps(headers, indent=2)}")
-        LOG.debug(f"Response Body : {json.dumps(body, indent=2)}")
 
         response = self.rc.execute(
             "post",

@@ -144,13 +144,13 @@ For sensitive information that may be included in the `rest_header`, `rest_url`,
 
   #### Example:  <!-- omit in toc -->
   ```python
-      headers = """
-        {
+      import json
+
+      inputs.rest_api_headers = json.dumps({
           "Content-Type"  : "application/json",
           "X-Frooble"     : "Baz",
           "Authorization" : "bearer ${API_TOKEN}"
-        }
-      """
+        })
   ```
 
 <p align="center">
@@ -180,7 +180,7 @@ for such parameters using one of the methods described below.
 
   #### Example:  <!-- omit in toc -->
   ```python
-    body = """
+    inputs.rest_api_body = """
      "name" : "user1",
      "password" : "p@ssword1",
      "role" : "admin",
@@ -197,7 +197,6 @@ for such parameters using one of the methods described below.
   #### Example: <!-- omit in toc -->
   ```python
      import json
-    
      body = {
       "name"     : "user1",
       "password" : "p@ssword1",
@@ -213,22 +212,22 @@ for such parameters using one of the methods described below.
 
 ### 2. New-line separated (Legacy) format:
    This format allows for specifying inputs as key-value pairs, separated
-   by a new line. It let's us create quick and easy inputs that is properly
+   by a new line. It lets us create quick and easy inputs that is properly
    formatted for the request. The primary purpose of this format is to retain
    backwards compatibility.
 
   #### Note:  <!-- omit in toc -->
-   This format does not support complex data structures such as lists or nested Key-value pairs.
+   This format does not support complex data structures such as lists or nested key-value pairs.
 
   #### Example:  <!-- omit in toc -->
   ```python
-     body = """
+     inputs.rest_api_body = """
      name : user1
      password : p@ssword1
      role : admin
      """
 
-     headers = """
+     inputs.rest_api_headers = """
      Content-Type: application/json
      X-Frooble: Baz
      Authorization: {{auth_header}}
@@ -552,7 +551,7 @@ inputs.rest_api_verify  = verify if verify not in [None, ''] else True
 # REST methods: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS" and "PATCH". Defaults to GET method
 inputs.rest_api_method  = method if method and method in SUPPORTED_REST_METHODS else REST_METHODS[0] 
 
-# Time in seconds to wait before timingout request. Default: 60 seconds.
+# Time in seconds to wait before timing-out request. Default: 60 seconds.
 inputs.rest_api_timeout = timeout if timeout else None
 
 # Request headers used for Authorization. Refer to ``DICT/JSON FORMAT`` section for more information.
@@ -602,13 +601,13 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #
 #    Example:
 #    --------
-#      headers = """
-#      {
+#      import json
+#
+#      inputs.rest_api_headers = json.dumps({
 #        "Content-Type"  : "application/json",
 #        "X-Frooble"     : "Baz",
 #        "Authorization" : "bearer ${API_TOKEN}"
-#      }
-#      """
+#      })
 
 #                                                  ====================                                                  
 #                                                   DICT / JSON FORMAT                                                      
@@ -624,7 +623,7 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #     ----------------
 #       - inputs.rest_api_headers
 #       - inputs.rest_api_cookies
-#       - inputs.rest_api_body 
+#       - inputs.rest_api_body
 #       - inputs.rest_api_query_parameters
 #       - inputs.jwt_headers
 #       - inputs.jwt_payload
@@ -638,7 +637,7 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #
 #    Example:
 #    --------
-#      body = """
+#      inputs.rest_api_body = """
 #      "name" : "user1",
 #      "password" : "p@ssword1",
 #      "role" : "admin",
@@ -655,8 +654,8 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #    Example:
 #    --------
 #      import json
-#     
-#      body = {
+#
+#      inputs.rest_api_body = json.dumps({
 #       "name"     : "user1",
 #       "password" : "p@ssword1",
 #       "role"     : "admin",
@@ -664,9 +663,9 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #          "site_url" : "www.example.com",
 #          "users"    : ["user1", "user2"]
 #          }
-#      }
+#      })
 #
-#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
+#     json.dumps() -> converts the dict to a json string
 
 
 # 2. New-line separated (Legacy)
@@ -682,13 +681,13 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #
 #    Example:
 #    -------- 
-#      body = """
+#      inputs.rest_api_body = """
 #      name : user1
 #      password : p@ssword1
 #      role : admin
 #      """             
 # 
-#      headers = """
+#      inputs.rest_api_headers = """
 #      Content-Type: application/json
 #      X-Frooble: Baz
 #      Authorization: {{auth_header}}
