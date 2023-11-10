@@ -12,7 +12,7 @@ from resilient_lib import IntegrationError
 class TestConsants(unittest.TestCase):
 
     def test_constants(self):
-        self.assertListEqual(helper.CONTENT_TYPES, ["Content-type", "content-type", "CONTENT-TYPE", "Content-Type"])
+        self.assertEqual(helper.CONTENT_TYPE, "content-type")
         self.assertEqual(helper.CONTENT_TYPE_JSON, "application/json")
 
 class TestRenderDictComponents(unittest.TestCase):
@@ -334,7 +334,6 @@ class TestMakeRestCall(unittest.TestCase):
         self.assertEqual(response["clientauth"], """ NOT A CERTIFICATE """)
         self.assertIsNone(response["json"])
 
-
     def test_json_request(self):
         helper.RequestsCommon = self.MockRC
         response = make_rest_call(
@@ -424,6 +423,50 @@ class TestMakeRestCall(unittest.TestCase):
         self.assertDictEqual(response["json"], {"key1" : "body1"})
         self.assertIsNone(response["data"])
 
+    def test_json_mixed_content_type(self):
+        helper.RequestsCommon = self.MockRC
+        response = make_rest_call(
+            self.opts, self.options,
+            method=self.method,
+            url=self.url,
+            headers={"CoNtEnt-TyPe" : "application/json"},
+            cookies=None,
+            body={"key1" : "body1"},
+            params=None,
+            retry_tries=None,
+            retry_delay=None,
+            retry_backoff=None,
+            verify=None,
+            timeout=None,
+            clientauth=None)
+        assert response["url"] == self.url
+        assert response["method"] == self.method
+        self.assertDictEqual(response["headers"], {"CoNtEnt-TyPe" : "application/json"})
+        self.assertDictEqual(response["json"], {"key1" : "body1"})
+        self.assertIsNone(response["data"])
+
+    def test_data_content_type(self):
+        helper.RequestsCommon = self.MockRC
+        response = make_rest_call(
+            self.opts, self.options,
+            method=self.method,
+            url=self.url,
+            headers={"ctype" : "application/json"},
+            cookies=None,
+            body={"key1" : "body1"},
+            params=None,
+            retry_tries=None,
+            retry_delay=None,
+            retry_backoff=None,
+            verify=None,
+            timeout=None,
+            clientauth=None)
+        assert response["url"] == self.url
+        assert response["method"] == self.method
+        self.assertDictEqual(response["headers"], {"ctype" : "application/json"})
+        self.assertDictEqual(response["data"], {"key1" : "body1"})
+        self.assertIsNone(response["json"])
+
     def test_request_raises_exceptions(self):
         helper.RequestsCommon = self.MockRC
         with pytest.raises(HTTPError) as err:
@@ -437,7 +480,7 @@ class TestMakeRestCall(unittest.TestCase):
                 params=None,
                 retry_tries=None,
                 retry_delay=None,
-            retry_backoff=None,
+                retry_backoff=None,
                 verify=None,
                 timeout=None,
                 clientauth=None)

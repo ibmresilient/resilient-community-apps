@@ -144,11 +144,12 @@ def make_rest_call(opts, options, allowed_status_codes:list=[200], **kwargs) -> 
     kwargs["data"]     = kwargs.pop("body", {})
     kwargs["callback"] = callback
 
-    for each_header in _headers:
-    # checking to see if header has content-type : application/json. If so, assigns body to data
-        if each_header.lower() == CONTENT_TYPE and CONTENT_TYPE_JSON in _headers[each_header]:
-            LOG.info(f"Found {each_header} : {CONTENT_TYPE_JSON} in request header. Payload will be json formatted")
-            kwargs["json"] = kwargs.pop("data")
+    if _headers:
+        for each_header in _headers:
+        # checking to see if header has content-type : application/json. If so, assigns body to data
+            if each_header.lower() == CONTENT_TYPE and CONTENT_TYPE_JSON in _headers[each_header]:
+                LOG.info(f"Found {each_header} : {CONTENT_TYPE_JSON} in request header. Payload will be json formatted")
+                kwargs["json"] = kwargs.pop("data")
 
     return rc.execute(**kwargs)
 
