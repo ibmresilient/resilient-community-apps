@@ -75,7 +75,7 @@ def test_check_certificate():
         "client_auth_key"  : "------>        Private Key         <------"}
     certs_path = {}
 
-    certificates = check_certificate(cert_properties, certs_path)
+    certificates = add_certificates(cert_properties, certs_path)
     assert isinstance(certificates, tuple)
     assert len(certificates) == 2
     assert "client_auth_cert.csr" in certificates[0]
@@ -87,7 +87,7 @@ def test_check_certificate():
     
     cert_properties = {
     "client_auth_pem" : "------> Authentication Certificate PEM <------"}
-    certificates = check_certificate(cert_properties, certs_path)
+    certificates = add_certificates(cert_properties, certs_path)
     assert isinstance(certificates, str)
     assert "client_auth_pem.pem" in certificates
     assert os.path.isfile(certificates)

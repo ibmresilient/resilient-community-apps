@@ -1,8 +1,7 @@
 # REST API Functions for SOAR
 
-## Table of Contents
+## Table of Contents  <!-- omit in toc -->
 - [REST API Functions for SOAR](#rest-api-functions-for-soar)
-  - [Table of Contents](#table-of-contents)
   - [Release Notes](#release-notes)
   - [Overview](#overview)
     - [Key Features](#key-features)
@@ -15,27 +14,23 @@
   - [Function - REST API](#function---rest-api)
   - [Input Considerations](#input-considerations)
     - [Sensitive information using App Secrets](#sensitive-information-using-app-secrets)
-    - [Input format](#input-format)
-    - [1. New-line separated (Legacy)](#1-new-line-separated-legacy)
-      - [Note:](#note)
-      - [Example:](#example)
-    - [2. JSON format:](#2-json-format)
-      - [Example:](#example-1)
-    - [Hint:](#hint)
-      - [Example:](#example-2)
+    - [Format:](#format)
+  - [Input format](#input-format)
+    - [1. JSON format:](#1-json-format)
+    - [2. New-line separated (Legacy) format:](#2-new-line-separated-legacy-format)
   - [Authentication](#authentication)
-  - [OAuth 2.0](#oauth-20)
-    - [Method 1: Using CODE:](#method-1-using-code)
-    - [Method 2: Using REFRESH\_TOKEN](#method-2-using-refresh_token)
-    - [Method 3: Using ACCESS\_TOKEN](#method-3-using-access_token)
-  - [Client-side authentication with certificates](#client-side-authentication-with-certificates)
-    - [1. Client Authentication Certificate (client\_auth\_cert):](#1-client-authentication-certificate-client_auth_cert)
-    - [2. Client Authentication Private Key (client\_auth\_key):](#2-client-authentication-private-key-client_auth_key)
-    - [3. Client Authentication PEM (client\_auth\_pem):](#3-client-authentication-pem-client_auth_pem)
-    - [INPUT FORMAT:](#input-format-1)
-  - [JSON Web Token Authentication](#json-web-token-authentication)
-    - [1. Using Endpoint provided token](#1-using-endpoint-provided-token)
-    - [2. Compiling a Token using JWT parameters](#2-compiling-a-token-using-jwt-parameters)
+    - [OAuth 2.0](#oauth-20)
+      - [Method 1: Using CODE:](#method-1-using-code)
+      - [Method 2: Using REFRESH\_TOKEN](#method-2-using-refresh_token)
+      - [Method 3: Using ACCESS\_TOKEN](#method-3-using-access_token)
+    - [Client-side authentication with certificates](#client-side-authentication-with-certificates)
+      - [1. Client Authentication Certificate (client\_auth\_cert)](#1-client-authentication-certificate-client_auth_cert)
+      - [2. Client Authentication Private Key (client\_auth\_key)](#2-client-authentication-private-key-client_auth_key)
+      - [3. Client Authentication PEM (client\_auth\_pem)](#3-client-authentication-pem-client_auth_pem)
+    - [Input Formats:](#input-formats)
+    - [JSON Web Token Authentication](#json-web-token-authentication)
+      - [1. Using Endpoint provided token](#1-using-endpoint-provided-token)
+      - [2. Compiling a Token using JWT parameters](#2-compiling-a-token-using-jwt-parameters)
   - [Playbooks](#playbooks)
   - [Troubleshooting \& Support](#troubleshooting--support)
     - [For Support](#for-support)
@@ -46,7 +41,8 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 05/2023 | Initial Release |
-| 1.1.0 | 06/2023 | Added support for OAuth, Client Side Authentication using certificates, JWT
+| 1.1.0 | 06/2023 | Added support for OAuth, Client Side Authentication using certificates, JWT |
+| 1.2.0 | 11/2023 | Added support for Retry mechanism, query parameters and json formatted body for content-type/json (case-insensitive) |
 
 ---
 
@@ -77,13 +73,14 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `46.0`.
+* SOAR platform >= `48.2`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0`.
+* SOAR platform >= `48.2`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* The application underwent testing with Integration server running `resilient-circuits` versions `48.1` and `46.0`. Earlier versions of resilient-circuits may also work correctly as there are no specific required dependencies.
+* The application underwent testing with Integration server running `resilient-circuits` versions `48.1` and `46.0`.
+* Earlier versions of resilient-circuits may also work correctly as there are no specific required dependencies.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -139,13 +136,22 @@ This function calls a REST web service. It supports the standard REST methods: G
 
 ### Sensitive information using App Secrets
 
-For sensitive information that may be included in the `rest_header`, `rest_url`, `rest_body`, or `rest_cookies`. To do so simply create a Key and a value pair, `auth_header` shown in the screenshot below. This can then be referenced in the application using the double-curly brace, `{{auth_header}}`.
+For sensitive information that may be included in the `rest_header`, `rest_url`, `rest_body`, or `rest_cookies`, SECRETS can be directly substituted into input parameters, there by avoiding the need to expose any sensitive information as plain text. This can be done by creating a SECRET under the application's configuration tab and referencing the same with a `$` sign followed by the SECRET's name enclosed within curly brace. PAM Credentials can also be referenced it a similar fashion.
 
-<p align="center">
-<img src="./doc/screenshots/fn-rest-api-app-conf.png" />
-</p>
+### Format:
+ * SECRETS : `${SECRET_NAME}`
+ * PAM     : `^{PAM_CREDENTIALS}`
 
-This can also be used in conjunction with app secrets, allows the user to set sensitive values without having them exposed in plaintext.
+  #### Example:  <!-- omit in toc -->
+  ```python
+      import json
+
+      inputs.rest_api_headers = json.dumps({
+          "Content-Type"  : "application/json",
+          "X-Frooble"     : "Baz",
+          "Authorization" : "bearer ${API_TOKEN}"
+        })
+  ```
 
 <p align="center">
 <img src="./doc/screenshots/fn-rest-api-secrets.png" />
@@ -157,41 +163,24 @@ This key can be directly referenced from within a playbook. For instance, a head
 <img src="./doc/screenshots/fn-rest-api-secret-example.png" />
 </p>
 
+---
 
-### Input format
 
-* Inputs for the fields: `rest_api_headers`, `rest_api_cookies`, `rest_api_body` can be provided in 2 different format.
-### 1. New-line separated (Legacy)
-   This format allows for specifying inputs as key-value pairs, separated
-   by a new line. It let's us create quick and easy inputs that is properly
-   formatted for the request. The primary purpose of this format is to retain
-   backwards compatibility.
+## Input format
 
-  #### Note:  
-   This format does not support complex data structures such as lists or nested Key-value pairs.
+* Function inputs can only accept values that are either strings, numbers, or 
+booleans, and they cannot accommodate more intricate data structures like lists
+or dictionaries. Nonetheless, specific REST request parameters necessitate input
+in the form of key-value pairs. To address this constraint, you can provide inputs
+for such parameters using one of the methods described below.
 
-  #### Example:
-  ```python
-     body = """
-     name : user1
-     password : p@ssword1
-     role : admin
-     """
-
-     headers = """
-     Content-Type: application/json
-     X-Frooble: Baz
-     Authorization: {{auth_header}}
-     """
-  ```
-
-### 2. JSON format:
+### 1. JSON format:
    Standard json file format. Supports complex data structures such as lists
    or nested Key-value pairs.
 
-  #### Example:
+  #### Example:  <!-- omit in toc -->
   ```python
-    body = """
+    inputs.rest_api_body = """
      "name" : "user1",
      "password" : "p@ssword1",
      "role" : "admin",
@@ -200,15 +189,14 @@ This key can be directly referenced from within a playbook. For instance, a head
       "users" : ["user1", "user2"] }
     """
   ```
-  ### Hint:
+  ### Hint: <!-- omit in toc -->
    An easier way to feed inputs to the above mentioned fields would be using
    python dictionaries. While the inputs don't directly support dict, the in-built 
    json package can be used to convert a python dict to a json string.
 
-  #### Example:
+  #### Example: <!-- omit in toc -->
   ```python
      import json
-    
      body = {
       "name"     : "user1",
       "password" : "p@ssword1",
@@ -222,7 +210,32 @@ This key can be directly referenced from within a playbook. For instance, a head
     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
   ```
 
---- 
+### 2. New-line separated (Legacy) format:
+   This format allows for specifying inputs as key-value pairs, separated
+   by a new line. It lets us create quick and easy inputs that is properly
+   formatted for the request. The primary purpose of this format is to retain
+   backwards compatibility.
+
+  #### Note:  <!-- omit in toc -->
+   This format does not support complex data structures such as lists or nested key-value pairs.
+
+  #### Example:  <!-- omit in toc -->
+  ```python
+     inputs.rest_api_body = """
+     name : user1
+     password : p@ssword1
+     role : admin
+     """
+
+     inputs.rest_api_headers = """
+     Content-Type: application/json
+     X-Frooble: Baz
+     Authorization: {{auth_header}}
+     """
+  ```
+
+
+---
 
 ## Authentication 
 
@@ -231,7 +244,7 @@ request. These authentication methods are optional. If the endpoint does not nec
 authentication, you can easily disregard this section, and the Call REST API function will not execute the authentication
 process.
 
-## OAuth 2.0
+### OAuth 2.0
 
 OAuth2 is an authorization framework that allows a user to grant limited access to their resources on a particular endpoint
 to QRadar SOAR without sharing their credentials (such as username and password). This process typically involves 2 different
@@ -243,7 +256,7 @@ Authentication flow, as mentioned below.
          authorization server and the API you are integrating with. Make sure to consult
          the OAuth2 documentation specific to the service you are working with.
 
-### Method 1: Using CODE:
+#### Method 1: Using CODE:
 
      The authorization server redirects the user back to address specified on the 
      redirect URI with an authorization CODE. This CODE is a temporary token
@@ -255,7 +268,7 @@ Authentication flow, as mentioned below.
 
      Note: These codes are generally one time use only.
 
-### Method 2: Using REFRESH_TOKEN
+#### Method 2: Using REFRESH_TOKEN
 
      It is a credential that is used to obtain a new access token from the
      authorization server when the original access token expires. It is an integral
@@ -268,7 +281,7 @@ Authentication flow, as mentioned below.
      Note: These can be used more than once. The validity of the REFRESH_TOKEN is
            generally extended on use, making it viable for long lived access.
 
-### Method 3: Using ACCESS_TOKEN
+#### Method 3: Using ACCESS_TOKEN
 
       If an ACCESS_TOKEN is available, it can be directly used without having to 
       perform authentication. In order to use the ACCESS_TOKEN, all that is required
@@ -276,7 +289,7 @@ Authentication flow, as mentioned below.
       DEFAULT_TOKEN_TYPE (bearer) is used.
 
 
-## Client-side authentication with certificates
+### Client-side authentication with certificates
 
 Also known as mutual authentication or two-way SSL/TLS authentication, is a security mechanism used in web applications to
 verify the identities of both the client (user or device) and the server during the SSL/TLS handshake. In traditional SSL/TLS
@@ -288,7 +301,7 @@ Note:   Client-side authentication with certificates provides an extra layer of
         allowing access to sensitive resources or data. And so this can be used 
         in tandem with other authentication methods
 
-### 1. Client Authentication Certificate (client_auth_cert):
+#### 1. Client Authentication Certificate (client_auth_cert)
    
       A client authentication certificate, also known as a client certificate,
       is a digital certificate that is issued to the client (user or device) as
@@ -297,7 +310,7 @@ Note:   Client-side authentication with certificates provides an extra layer of
       signed by a trusted Certificate Authority (CA) or a self-signed certificate
       if it is a closed system.
 
-### 2. Client Authentication Private Key (client_auth_key):
+#### 2. Client Authentication Private Key (client_auth_key)
    
       Private key is a cryptographic key that corresponds to the client's public
       key in the client authentication certificate. The private key is securely
@@ -307,7 +320,7 @@ Note:   Client-side authentication with certificates provides an extra layer of
       The server then verifies this response to ensure that the client possesses
       the corresponding private key and is thus authenticated.
 
-### 3. Client Authentication PEM (client_auth_pem): 
+#### 3. Client Authentication PEM (client_auth_pem)
    
       This is simply the file format used to store both the client authentication
       certificate and private key in a single PEM (Privacy-Enhanced Mail) file. PEM
@@ -318,7 +331,7 @@ Note:   The client authentication certificate and private key are commonly given
         together, whereas the PEM file is typically provided separately as an 
         independent file.
 
-### INPUT FORMAT:
+### Input Formats:
 
    The information within these certificates can be directly copied and pasted as
    plain text into the appropriate certificate type, enclosed within quotation marks.
@@ -355,20 +368,20 @@ Note:   The client authentication certificate and private key are commonly given
       """
 ```
 
-## JSON Web Token Authentication
+### JSON Web Token Authentication
 
   JWT is also a supported form of authentication. The application has functionality builtin
   that allows for the creation, compilation, and manipulation of JWTs. It can accept several
   optional parameters to customize the authentication process.
   JWT based authentication can be performed in 2 ways:
 
-### 1. Using Endpoint provided token
+#### 1. Using Endpoint provided token
 
       This application can function with a predefined jwt token. A fully generated JWT 
       token can be directly provided, and the application will automatically form the REST
       headers required for a request.
 
-### 2. Compiling a Token using JWT parameters
+#### 2. Compiling a Token using JWT parameters
 
       This application can also generate a jwt token. (Skip if you have already specified 
       a jwt_token). The application can automatically compile a jwt token using certain 
@@ -389,7 +402,7 @@ Note:   The client authentication certificate and private key are commonly given
 | `rest_api_headers` | `textarea` | No | `-` | Request headers. See [Input Considerations](#input-considerations) for format |
 | `rest_api_cookies` | `textarea` | No | `-` | Cookies required for the API call. See [Input Considerations](#input-considerations) for format |
 | `rest_api_body` | `textarea` | No | `-` | Request body. See [Input Considerations](#input-considerations) for format |
-| `rest_api_verify` | `boolean` | No | `True` | Verify SSL certificate |
+| `rest_api_verify` | `boolean` | Yes | `True` | Verify SSL certificate |
 | `rest_api_timeout` | `number` | No | `60` | Request timeout in seconds |
 | `rest_api_allowed_status_codes` | `text` | No | `"305, 404, 500"` | Comma separated list. All codes < 300 are allowed by default |
 | `oauth_token_url` | `text` | No | `https://www.example.com/oauth/token` | URL for the Authorization server endpoint |
@@ -401,9 +414,15 @@ Note:   The client authentication certificate and private key are commonly given
 | `oauth_access_token` | `text` | No | `-` | Resultant token of the Authentication process |
 | `oauth_refresh_token` | `text` | No | `-` | The refresh token used to obtain a new access token (for refresh token grant) |
 | `oauth_token_type` | `text` | No | `Bearer` |  Provides information to the client application about the token's characteristics. Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer |
-| `oauth_auth_cert` | `text` | No | `-` | .csr file contents to be pasted. Requires client_auth_key to function |
-| `oauth_auth_key` | `text` | No | `-` | .key file contents to be pasted. To be provided with client_auth_cert |
-| `oauth_auth_pem` | `text` | No | `-` | .pem file contents to be pasted. Standalone attribute, does not require the above two attribute |
+| `jwt_headers` | `text` | No | `-` | headers of the JWT, contains metadata about the token |
+| `jwt_payload` | `text` | No | `-` | Payload to be included in the token |
+| `jwt_key` | `text` | No | `-` | key used for signing the JWT |
+| `jwt_algorithm` | `text` | No | `-` | Encryption algorithm used for encoding the JWT. Defaults to "HS256" algorithm |
+| `jwt_token` | `text` | No | `-` | Fully complied JWT token, at times referenced as the Access_token |
+| `rest_api_query_parameters` | `textarea` | No | `60` | Request  timeout in seconds |
+| `client_auth_key` | `text` | No | `-` | .key file contents to be pasted as plain text. To be provided with client_auth_cert |
+| `client_auth_cert` | `text` | No | `-` | .csr file contents to be pasted as plain text. Requires client_auth_key to function |
+| `client_auth_pem` | `text` | No | `-` | .pem file contents to be pasted as plain text. Standalone attribute, does not require the above two attribute |
 
 
 </p>
@@ -486,66 +505,125 @@ results = {
 <p>
 
 ```python
-#
-# ALLOWED_STATUS_CODE
-# -------------------
+# ======================================================================================================================== #
+#                                                    ===============                                                       #
+#                                                     CALL REST API                                                        #
+#                                                    ===============                                                       #
+# ======================================================================================================================== #
+
+# This is a tool that can be used in the field of API (Application Programming Interface) development and testing. It
+# provides a highly customizable interface for making HTTP requests, sending and receiving data, and testing APIs.
+# With this, developers can easily create and manage API requests using a variety of HTTP methods such as GET, POST, PUT,
+# DELETE, etc. Users can also specify request headers, parameters, and body content for different types of requests.
+# It also supports various authentication methods, including basic authentication, OAuth, API keys, and client side 
+# authentication.
+
+method  = ""
+
+url     = ""
+
+header  = None
+
+body    = None
+
+cookie  = None
+
+verify  = False
+
+timeout = None
+
+allowed_status_code = "200, 201, 202"
+
+REST_METHODS = ["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
+
+
+# Endpoint url
+inputs.rest_api_url     = url
+
+# Indicates whether to verify SSL certificates (boolean).
+inputs.rest_api_verify  = verify if verify not in [None, ''] else True
+
+# REST methods: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS" and "PATCH". Defaults to GET method
+inputs.rest_api_method  = method if method and method in SUPPORTED_REST_METHODS else REST_METHODS[0] 
+
+# Time in seconds to wait before timing-out request. Default: 60 seconds.
+inputs.rest_api_timeout = timeout if timeout else None
+
+# Request headers used for Authorization. Refer to ``DICT/JSON FORMAT`` section for more information.
+inputs.rest_api_headers = header if header else None
+
+# Cookies for request. Refer to ``DICT/JSON FORMAT`` section for more information.
+inputs.rest_api_cookies = cookie if cookie else None
+
+# Request body. Refer to ``DICT/JSON FORMAT`` section for more information.
+inputs.rest_api_body    = body if body else None
+
+# Parameters used for API calls added to the URL. Refer to ``DICT/JSON FORMAT`` section for more information.
+inputs.rest_api_query_parameters = query_parameters
+
+#                                                 =====================
+#                                                  ALLOWED_STATUS_CODE 
+#                                                 =====================
+
 # Any status code below 300 is allowed by default. If you specify codes above 300, they are
 # exempted from raising an exception and thereby returns the endpoint response. Multiple
 # status codes can be specified as a string in a command separated fashion.
-#    
+#
 #    Example:
 #    --------
 #     inputs.rest_api_allowed_status_codes = "305, 400, 404, 500"
+
+
+# Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default
+inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else None
+
+
+#                                                       =========
+#                                                        SECRETS
+#                                                       =========
+
+# SECRETS can be directly substituted into input parameters, there by avoiding
+# the need to expose any sensitive information as plain text. This can be done by
+# creating a SECRET under the application's configuration tab and referencing the 
+# same with a `$` sign followed by the SECRET's name enclosed within curly
+# brace. PAM Credentials can also be referenced it a similar fashion.
 #
+#    Format:
+#    -------
+#      SECRETS : ${SECRET_NAME}
+#      PAM     : ^{PAM_CREDENTIALS}
 #
-# SECRETS
-# -------
-# For sensitive information that may be included in the rest_header, rest_url, rest_body, or 
-# rest_cookies, you can substitute values from the app.conf. To do so simply create a Key
-# and a value pair in app.conf and then directly reference the key here using
-# double-curly brace.
 #
 #    Example:
 #    --------
-#      headers = """
-#      Content-Type: application/json
-#      X-Frooble: Baz
-#      Authorization: {{auth_header}}
-#      """
+#      import json
 #
-#
-# INPUT FORMAT
-# ------------
-# rest_api_url, rest_api_method and rest_api_verify are mandatory fields.
-# rest_api_headers, rest_api_cookies, rest_api_body can accept 2 different formats.
-#
-# 1. New-line separated (Legacy)
-#    ---------------------------
-#
-#    This format allows for specifying inputs as key-value pairs, separated
-#    by a new line. It let's us create quick and easy inputs that is properly
-#    formatted for the request. The primary purpose of this format is to retain
-#    backwards compatibility.
-#
-#    Note:  This format does not support complex data structures such as lists
-#    -----  or nested Key-value pairs.
-#
-#    Example:
-#    -------- 
-#      body = """
-#      name : user1
-#      password : p@ssword1
-#      role : admin
-#      """             
+#      inputs.rest_api_headers = json.dumps({
+#        "Content-Type"  : "application/json",
+#        "X-Frooble"     : "Baz",
+#        "Authorization" : "bearer ${API_TOKEN}"
+#      })
+
+#                                                  ====================                                                  
+#                                                   DICT / JSON FORMAT                                                   
+#                                                  ====================                                                  
+
+# Function inputs can only accept values that are either strings, numbers, or 
+# booleans, and they cannot accommodate more intricate data structures like lists
+# or dictionaries. Nonetheless, specific REST request parameters necessitate input
+# in the form of key-value pairs. To address this constraint, you can provide inputs
+# for such parameters using one of the methods described below.
 # 
-#      headers = """
-#      Content-Type: application/json
-#      X-Frooble: Baz
-#      Authorization: {{auth_header}}
-#
-#
-#
-# 2. JSON format:
+#     Supported fields
+#     ----------------
+#       - inputs.rest_api_headers
+#       - inputs.rest_api_cookies
+#       - inputs.rest_api_body
+#       - inputs.rest_api_query_parameters
+#       - inputs.jwt_headers
+#       - inputs.jwt_payload
+
+# 1. JSON format:
 #    ------------
 #
 #    Standard json file format. Supports complex data structures such as lists
@@ -553,26 +631,25 @@ results = {
 #
 #    Example:
 #    --------
-#      body = """
+#      inputs.rest_api_body = """
 #      "name" : "user1",
 #      "password" : "p@ssword1",
 #      "role" : "admin",
 #      "content" : { "site_url" : "www.example.com", "users" : ["user1", "user2"] }
-#      """      
-#
-#
+#      """
+
 #    Hint:
 #    -----
 #
 #    An easier way to feed inputs to the above mentioned fields would be using
-#    python dictionaries. While the inputs don't directly support dict, the in-built 
+#    python dictionaries. While the inputs don't directly support dict, the in-built
 #    json package can be used to convert a python dict to json string.
 #
 #    Example:
 #    --------
 #      import json
-#     
-#      body = {
+#
+#      inputs.rest_api_body = json.dumps({
 #       "name"     : "user1",
 #       "password" : "p@ssword1",
 #       "role"     : "admin",
@@ -580,49 +657,260 @@ results = {
 #          "site_url" : "www.example.com",
 #          "users"    : ["user1", "user2"]
 #          }
-#      }
-#     
-#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
+#      })
 #
-# REUSABILITY
-# -----------
+#     json.dumps() -> converts the dict to a json string
+
+
+# 2. New-line separated (Legacy)
+#    ---------------------------
+#
+#    This format allows for specifying inputs as key-value pairs, separated
+#    by a new line. It let's us create quick and easy inputs that is properly
+#    formatted for the request. The primary purpose of this format is to retain
+#    backwards compatibility.
+#
+#    Note: This format does not support complex data structures such as lists
+#          or nested Key-value pairs.
+#
+#    Example:
+#    -------- 
+#      inputs.rest_api_body = """
+#      name : user1
+#      password : p@ssword1
+#      role : admin
+#      """             
+# 
+#      inputs.rest_api_headers = """
+#      Content-Type: application/json
+#      X-Frooble: Baz
+#      Authorization: {{auth_header}}
+
+#                                                     =============
+#                                                      REUSABILITY
+#                                                     =============
+
 # The function can be reused to make multiple requests to an endpoint or even access 
 # multiple endpoints. This can be achieved by simply modifying the pre-processing script
 # as per the request and the endpoint.
+
+
+
+
+# ======================================================================================================================== #
+#                                                    ================                                                      #
+#                                                     AUTHENTICATION                                                       #
+#                                                    ================                                                      #
+# ======================================================================================================================== #
+
+# The Call REST API function offers support for various authentication protocols that can be employed alongside the REST
+# request. These authentication methods are entirely voluntary. If the endpoint does not necessitate any form of 
+# authentication, you can easily disregard this section, and the Call REST API function will not execute the authentication
+# process.
+
+# Note: All input parameters should either be set to None or must be removed if not being used for authentication.
+
+#                                                     ============= 
+#                                                       OAuth 2.0   
+#                                                     ============= 
+
+# OAuth2 is an authorization framework that allows a user to grant limited access to their resources on a particular endpoint
+# to QRadar SOAR without sharing their credentials (such as username and password). This process typically involves 2 different
+# flows: Authorization and Authentication. It is expected for the user to have already performed the authorization flow and 
+# possesses all the necessary parameters for the Authentication flow. There are three methods available for performing the 
+# Authentication flow, as mentioned below.
+
+# Note:   The exact implementation details of OAuth2 can vary depending on the
+#         authorization server and the API you are integrating with. Make sure to consult
+#         the OAuth2 documentation specific to the service you are working with.
+
+# Method 1: Using CODE:
 #
-# """
+#     The authorization server redirects the user back to address specified on the 
+#     redirect URI with an authorization CODE. This CODE is a temporary token
+#     that represents the user's authorization and usually can be used only once.
+#     This function exchanges the authorization code for an ACCESS_TOKEN (and 
+#     possibly also a REFRESH_TOKEN depending on the endpoint). This requires making
+#     a request to the authorization server's token endpoint, providing the 
+#     authorization CODE, client ID, client secret, token URL and redirect URI.
+#
+#     Note: These codes are generally one time use only.
 
-method = "POST"
+# Method 2: Using REFRESH_TOKEN
+#
+#     It is a credential that is used to obtain a new access token from the
+#     authorization server when the original access token expires. It is an integral
+#     part of the OAuth 2.0 protocol and enables long-lived access to protected 
+#     resources without requiring the user to repeatedly authenticate. This can 
+#     be used for prolonged authentication as using a REFRESH_TOKEN generally extends
+#     the validity of the token. Client ID, Client secret, Redirect URI and token URL
+#     might also have to be provided.
+#
+#     Note: These can be used more than once. The validity of the REFRESH_TOKEN is
+#           generally extended on use, making it viable for long lived access.
 
-url = "https://www.example.com"
+# Method 3: Using ACCESS_TOKEN
+#
+#      If an ACCESS_TOKEN is available, it can be directly used without having to 
+#      perform authentication. In order to use the ACCESS_TOKEN, all that is required
+#      is the ACCESS_TOKEN & the TOKEN_TYPE. If the TOKEN_TYPE is not specified, the
+#      DEFAULT_TOKEN_TYPE (bearer) is used.
 
-header = """
-Authorization : xxxxx
-Content-type  : application/json
-"""
+# URL for the Authorization server endpoint
+inputs.oauth_token_url     = None
 
-body = """
-"displayName"  : "Library Assist",
-"mailEnabled"  : true,
-"mailNickname" : "library",
-"securityEnabled" : true,
-"groupTypes": ["Unified"]
-"""
+# Identifies the client application
+inputs.oauth_client_id     = None
 
-cookie  = None
-verify  = True
-timeout = 60
-allowed_status_code = "305, 400, 404, 500"
+# Authenticates the client application (required for certain grant types)
+inputs.oauth_client_secret = None
 
-inputs.rest_api_url     = url                          # Endpoint url
-inputs.rest_api_headers = header if header else None   # Request headers used for Authorization
-inputs.rest_api_cookies = cookie if cookie else None   # Cookies for request
-inputs.rest_api_body    = body if body else None       # Request body
-inputs.rest_api_verify  = verify if verify else True   # (Boolean) indicates whether to verify SSL certificates.
-inputs.rest_api_timeout = timeout if timeout else 600  # Request timeout
-inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else "200" # Status codes in a comma separated fashion
-inputs.rest_api_method  = method if method and method in ["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"] else "GET" #REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS
+# The redirect URI used during the authorization flow (for authorization code grant)
+inputs.oauth_redirect_uri  = None
 
+# Set of permissions granted by the resource owner (user) to the client application
+inputs.oauth_scope         = None
+
+# Provides information to the client application about the token's characteristics. Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer
+inputs.oauth_token_type    = None
+
+# Resultant token of the Authentication process
+inputs.oauth_access_token  = None
+
+# The authorization code received during the authorization flow (for authorization code grant)
+inputs.oauth_code          = None
+
+# The refresh token used to obtain a new access token (for refresh token grant)
+inputs.oauth_refresh_token = None
+
+
+
+#                                     ==============================================          
+#                                      Client-side authentication with certificates
+#                                     ==============================================        
+
+# Also known as mutual authentication or two-way SSL/TLS authentication, is a security mechanism used in web applications to
+# verify the identities of both the client (user or device) and the server during the SSL/TLS handshake. In traditional SSL/TLS
+# authentication, only the server is authenticated using a digital certificate issued by a trusted Certificate Authority (CA).
+# However, with client-side authentication, the client also presents a digital certificate to the server for verification.
+
+# Note:   Client-side authentication with certificates provides an extra layer of
+#         security by ensuring that the client is trusted and authenticated before
+#         allowing access to sensitive resources or data. And so this can be used 
+#         in tandem with other authentication methods
+
+# 1. Client Authentication Certificate (client_auth_cert):
+#
+#    A client authentication certificate, also known as a client certificate,
+#    is a digital certificate that is issued to the client (user or device) as
+#    part of the mutual authentication process. It contains the client's public
+#    key, identifying information (such as the client's name or ID), and is
+#    signed by a trusted Certificate Authority (CA) or a self-signed certificate
+#    if it is a closed system.
+
+# 2. Client Authentication Private Key (client_auth_key):
+#
+#    Private key is a cryptographic key that corresponds to the client's public
+#    key in the client authentication certificate. The private key is securely
+#    stored by the client and kept confidential. During the SSL/TLS handshake,
+#    when the server sends a challenge to the client, the client uses its 
+#    private key to decrypt the challenge and generate a response. 
+#    The server then verifies this response to ensure that the client possesses
+#    the corresponding private key and is thus authenticated.
+
+# 3. Client Authentication PEM (client_auth_pem): 
+# 
+#    This is simply the file format used to store both the client authentication
+#    certificate and private key in a single PEM (Privacy-Enhanced Mail) file. PEM
+#    files are a common format for storing cryptographic objects, such as
+#    certificates and private keys, in a human-readable and ASCII-encoded format.
+
+# Note:   The client authentication certificate and private key are commonly given
+#         together, whereas the PEM file is typically provided separately as an 
+#         independent file.
+
+
+# INPUT FORMAT:
+# -------------
+#
+#    The information within these certificates can be directly copied and pasted as
+#    plain text into the appropriate certificate type, enclosed within quotation marks.
+#    When making an API call, the application should automatically generate the
+#    certificates using the pasted content and will securely discard them upon execution.
+#    The contents of the certificate/key must always be unencrypted.
+#
+#    All three inputs (client_auth_cert, client_auth_key and client_auth_pem) follow the
+#    same input format, as shown below.
+#
+#   inputs.client_auth_cert = """
+#       Bag Attributes
+#           friendlyName: Authentication certificate
+#           localKeyID: 78 94 0E 86 8D 30 EC D3 90 C8 6A 69 0F XX XX XX XX
+#       Key Attributes: <No Attributes>
+#       -----BEGIN CERTIFICATE-----
+#       MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G
+#       9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E
+#       FEgCxB3Rdkim5Dfog6SCCFWIa4YAyv0rdgNLeRbQNTKyT14+inqWE+CLKvZ/T+56
+#       OEdDSh0RPCg+UxjyCnkSiMce+/8RT+FXK41q1iQZAREJGEpZJIizVYB+aW2caCdq
+#       PteGybdmFFeRIP/qbo0u17zc+Urj+MbuqYcEtx5YriF39+xRrReDbteSTnigQQP4
+#       7zQHgQkU+U6MOuFTICtqVBuH9LX8qCJAG+92FLseh6I4qg0gd1ilyTG8PnhKuBRi
+#       vkuz+SOtAgMBAAECggEAFkbnNQxamWGs6DpNT9j6V7412yZMZatVtaguR5CXJ9KU
+#       0GTV1+9qwGIKnt4tZPOmQYh2h+8WUn2xHFVY5I7seX6mo8EXmCq2cT21PmI4QYCf
+#       cNOKjYkEgwKBgAktKQorCoDvo5oiI89zpUhRHbJIlGWHuZFCCmEIQb4z+dUr72LL
+#       uhZP0s22aRkqXMzDblFYrS0H3p7clhqEsoD9DO9WsiQK/2G85nR+IZd9U0bQ7z/t
+#       7FOMkDbMPHkmkwAHlFC/UbS4XWJCZzrOoi6Zl/Cx4nFwvWyn7OtJfI/xAoGAdgat
+#       PtFt97+wPDuSdVIbXjArSSq9F22J/cpG+wOMIGdgtNfPbNJFRG7Q/Lc/eDMPB5Nw
+#       9O9YOnDFpqb8S+aE+4/Yfcxg4gGrKazXu+flYNhzpCTx3SpVawQCrUF3dE/2hbV+
+#       FbGVFPaJziRDeH3UA1+1q0/bRg1trxqkZtGSGukCgYAA7SWvZ3lGJ42tiFzoH4F5
+#       SfTZXQytCwyxXF6BIWTIXQBcCep5TrfOnYz4iEDwMdp4Qb/QhyjaUsIlo+JldquZ
+#       k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ
+#       Y20A9hExGKyHns4hW5KgvA==
+#       -----END CERTIFICATE-----
+#       """
+
+# .CSR file contents to be pasted. Requires client_auth_key to function. Content must be unencrypted.
+inputs.client_auth_cert = None
+
+# .KEY file contents to be pasted. To be provided with client_auth_cert. Content must be unencrypted.
+inputs.client_auth_key  = None
+
+# .PEM file contents to be pasted. Standalone attribute, does not require the above two attribute. Content must be unencrypted.
+inputs.client_auth_pem  = None
+
+#                                                         =======             
+#                                                           JWT               
+#                                                         =======             
+
+# JWT is also a supported form of authentication. The application has functionality builtin
+# that allows for the creation, compilation, and manipulation of JWTs. It can accept several
+# optional parameters to customize the authentication process.
+
+# JWT based authentication can be performed in 2 ways:
+
+# 1. This application can function with a predefined jwt token. A fully generated JWT 
+# token can be directly provided, and the application will automatically form the REST
+# headers required for a request.
+
+inputs.jwt_token = None
+
+# 2. This application can also generate a jwt token. (Skip if you have already specified 
+# a jwt_token). The application can automatically compile a jwt token using certain 
+# parameters which can be provided in json string or line separated format (similar to
+# REST body/header/cookies). These arguments are usually provided by the endpoint itself.
+# The application should be able to create and sign a JWT and automatically incorporate it
+# into the REST request.
+
+# headers of the JWT, contains metadata about the token.
+inputs.jwt_headers   = None
+
+# Payload to be included in the token. 
+inputs.jwt_payload   = None
+
+# key used for signing the JWT.
+inputs.jwt_key       = None
+
+# Encryption algorithm used for encoding the JWT. Defaults to "HS256" algorithm
+inputs.jwt_algorithm = None
 ```
 
 </p>

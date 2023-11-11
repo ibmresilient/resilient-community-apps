@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# Generated with resilient-sdk v51.0.0.0.352
 
-"""Generate the Resilient customizations required for fn_rest_api"""
+"""Generate the SOAR customizations required for fn_rest_api"""
 
 import base64
 import os
@@ -20,8 +22,12 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_rest_api",
-        "message_destinations": [u"fn_rest_api"],
-        "functions": [u"rest_api"],
+        "message_destinations": [
+            u"fn_rest_api"
+        ],
+        "functions": [
+            u"rest_api"
+        ],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
@@ -30,7 +36,9 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"rest_api_pb"]
+        "playbooks": [
+            u"rest_api_pb"
+        ]
     }
 
 
@@ -39,7 +47,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 48.2.16
 
     Contents:
     - Message Destinations:

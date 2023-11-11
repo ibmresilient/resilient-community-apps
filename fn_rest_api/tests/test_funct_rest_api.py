@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
-import pytest
+import pytest, unittest, logging
 
 from fn_rest_api.components import funct_rest_api
 from fn_rest_api.lib.helper import build_dict
+from resilient_lib import IntegrationError
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
@@ -38,25 +39,36 @@ class TestInternetUtilitiesCallRestApi:
 
     @pytest.mark.livetest
     @pytest.mark.parametrize(
-        "rest_method, rest_url, rest_headers, rest_body, rest_verify",
+        "method, url, rest_headers, rest_body, rest_verify",
         [
-            ('POST', "https://httpbin.org/post", 'Content-type: application/json; charset=UTF-8', "title: foo\n body : ƱƲ\n  userId:1\n", True),
-            ('POST', "https://httpbin.org/post", 'Content-type: application/json; charset=UTF-8', '{"title": "foo", "body" : "ƱƲ",  "userId":"1"}', True)
+            (
+                'POST',
+                "https://httpbin.org/post",
+                'Content-type: application/json;charset=UTF-8',
+                "title: foo\n body : ƱƲ\n  userId:1\n",
+                True
+            ),
+            (
+                'POST',
+                "https://httpbin.org/post",
+                """Content-type: application/json; charset=UTF-8""",
+                """{"title": "foo", "body" : "ƱƲ",  "userId":"1"}""",
+                True
+            )
         ]
     )
-    def test_success(self, circuits_app, rest_method, rest_url, rest_headers, rest_body, rest_verify):
+    def test_standard_request(self, circuits_app, method, url, rest_headers, rest_body, rest_verify):
         """ Test calling with sample values for the parameters """
         function_params = {
-            "rest_api_method": rest_method,
-            "rest_api_url": rest_url,
-            "rest_api_headers": {'content': rest_headers},
-            "rest_api_body": {'content': rest_body },
-            "rest_api_verify": rest_verify
-        }
-        results = call_rest_api_function(circuits_app, function_params)
-        results = results.get('content').get("json").get("json")
-        rest_body = build_dict(rest_body)
+            "rest_api_method": method,
+            "rest_api_url": url,
+            "rest_api_headers": rest_headers,
+            "rest_api_body"   : rest_body,
+            "rest_api_verify" : rest_verify}
 
-        assert rest_body['title']  == results['title']
-        assert rest_body['body']   == results['body']
-        assert rest_body['userId'] == results['userId']
+        results = call_rest_api_function(circuits_app, function_params)
+        content = results.get('content')
+        rest_body = build_dict(rest_body)
+        tc = unittest.TestCase()
+        tc.assertDictEqual(rest_body, content.get("json").get("json"))
+    

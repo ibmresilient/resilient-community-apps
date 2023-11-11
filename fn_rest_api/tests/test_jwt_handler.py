@@ -58,17 +58,17 @@ class TestJWT(unittest.TestCase):
         _props = {
             JWT_TOKEN : "token123"}
         jwt_client = JWTHandler(_props)
-        assert jwt_client._check_jwt_ready()
+        assert jwt_client.check_jwt_ready()
 
     def test_compile_headers_valid_key_missing_token(self):
         _props = {
             JWT_KEY : "key123"}
         jwt_client = JWTHandler(_props)
-        assert jwt_client._check_jwt_ready()
+        assert jwt_client.check_jwt_ready()
 
     def test_fail_jwt_ready_empty(self):
         jwt_client = JWTHandler({})
-        self.assertFalse(jwt_client._check_jwt_ready())
+        self.assertFalse(jwt_client.check_jwt_ready())
 
     def test_jwt_ready_missing_token_and_key(self):
         _props = {
@@ -77,29 +77,29 @@ class TestJWT(unittest.TestCase):
             JWT_ALGORITHM : "RS256",
             JWT_TOKEN_TYPE : "jwt"}
         jwt_client = JWTHandler(_props)
-        assert jwt_client._check_jwt_ready() == False
+        assert jwt_client.check_jwt_ready() == False
 
 
 class TestAddJWTHeaders(unittest.TestCase):
 
     def test_empty_dict(self):
         jwt_client = JWTHandler({})
-        self.assertFalse(jwt_client._check_jwt_ready())
+        self.assertFalse(jwt_client.check_jwt_ready())
         self.assertDictEqual(jwt_client.add_jwt_headers({}), {'headers': {}})
 
     def test_just_token(self):
         jwt_client = JWTHandler({JWT_TOKEN : "token123"})
-        assert jwt_client._check_jwt_ready()
+        assert jwt_client.check_jwt_ready()
         self.assertDictEqual(jwt_client.add_jwt_headers({}), {'headers': {'Authorization': 'bearer token123'}})
 
     def test_token_with_custom_token_type(self):
         jwt_client = JWTHandler({JWT_TOKEN : "token123", JWT_TOKEN_TYPE : "lock-key"})
-        assert jwt_client._check_jwt_ready()
+        assert jwt_client.check_jwt_ready()
         self.assertDictEqual(jwt_client.add_jwt_headers({}), {'headers': {'Authorization': 'lock-key token123'}})
     
     def test_with_jwt_key(self):
         jwt_client = JWTHandler({JWT_KEY : "key112233"})
-        assert jwt_client._check_jwt_ready()
+        assert jwt_client.check_jwt_ready()
         processed_header = jwt_client.add_jwt_headers({})
         assert "headers" in processed_header
         assert "Authorization" in processed_header["headers"]
@@ -107,7 +107,7 @@ class TestAddJWTHeaders(unittest.TestCase):
 
     def test_with_jwt_key_custom_token_type(self):
         jwt_client = JWTHandler({JWT_KEY : "key112233", JWT_TOKEN_TYPE:'lock-key'})
-        assert jwt_client._check_jwt_ready()
+        assert jwt_client.check_jwt_ready()
         processed_header = jwt_client.add_jwt_headers({})
         assert "headers" in processed_header
         assert "Authorization" in processed_header["headers"]

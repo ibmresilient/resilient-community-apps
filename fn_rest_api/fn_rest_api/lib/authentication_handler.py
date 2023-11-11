@@ -73,7 +73,6 @@ class OAuth2Authorization():
 
     def __init__(self, rc, oauth_options):
 
-        # Get application specific configurations from app.conf
         self.rc = rc
         LOG.debug("Configuration values")
         LOG.debug(json.dumps(oauth_options, indent=2))
@@ -411,9 +410,6 @@ class OAuth2Authorization():
         # Adding any additional attributes to the request body, if required
         if additional_attributes:
             body.update(additional_attributes)
-        
-        LOG.debug(f"Response Header : {json.dumps(headers, indent=2)}")
-        LOG.debug(f"Response Body : {json.dumps(body, indent=2)}")
 
         response = self.rc.execute(
             "post",
@@ -438,8 +434,26 @@ CLIENT_AUTH_CERT = "client_auth_cert"
 CLIENT_AUTH_KEY  = "client_auth_key"
 CLIENT_AUTH_PEM  = "client_auth_pem"
 
+def check_certificates(cert_properties:dict) -> None:
+    """
+    Checks to see if the application is Client-Side Authentication compliant. In other
+    words, checks to see if any of the cert_properties have been populated.
 
-def check_certificate(cert_properties:dict, certs_path:dict):
+    :param cert_properties: Contents of certificates
+    :type cert_properties: dict
+    :return: True if compliant else False
+    :rtype: bool
+    """
+    # Creating .csr certificate and key using the values provided as text
+    if cert_properties.get(CLIENT_AUTH_CERT) and cert_properties.get(CLIENT_AUTH_KEY):
+        return True
+    # Creating pem certificate and key using the values provided as text
+    if cert_properties.get(CLIENT_AUTH_PEM):
+        return True
+    return False
+    
+    
+def add_certificates(cert_properties:dict, certs_path:dict) -> tuple:
     """
     Checks if certificates have been provided as string values to the cert_properties argument. if yes, safely
     creates cert files in a temp directory and keeps a track of their location. If not, simply returns None.
@@ -490,6 +504,7 @@ def check_certificate(cert_properties:dict, certs_path:dict):
         prepare_certificates(cert_properties.get(CLIENT_AUTH_PEM), CLIENT_AUTH_PEM, FILE_TYPE_PEM, certs_path)
         return certs_path.get(CLIENT_AUTH_PEM).get("file")
     return None
+
 
 
 def prepare_certificates(cert_content:str, cert_name:str, cert_type:str, certs_path:dict) -> bool:
@@ -642,7 +657,7 @@ class JWTHandler:
         -------
             <dict> : REST request headers with jwt tokens baked into it
         """
-        LOG.info("Compiling JWT token")
+        LOG.info("Compiling a JWT token using the provided parameters")
         self._jwt_properties[JWT_TOKEN] = jwt.encode(
             self._jwt_properties.get(JWT_PAYLOAD),
             key=self._jwt_properties.get(JWT_KEY),
@@ -670,11 +685,11 @@ class JWTHandler:
         `_jwt_properties` dictionary for successful header compilation. The values for these keys are expected
         to be strings.
         """
-        LOG.info("Compiling JWT headers.")
+        LOG.info("Adding JWT access_token by means of `Authorization` parameter to request header")
         return {AUTHORIZATION_KEY : f"{self._jwt_properties.get(JWT_TOKEN_TYPE)} {self._jwt_properties.get(JWT_TOKEN)}"}
 
 
-    def _check_jwt_ready(self) -> bool:
+    def check_jwt_ready(self) -> bool:
         """
         Responsible for determining if the application is JWT ready. An application needs the following
         parameters to compile a valid JWT token. Failing to provide these would simply return False
@@ -684,7 +699,8 @@ class JWTHandler:
         -------
             <bool> : True if JWT authentication ready, False if not.
         """
-        LOG.info("Checking if a valid JWT token has been provided or the attributes required to compile a valid token")
+        LOG.info("Checking to see if a valid JWT token was provided \
+            or appropriate JWT attributes required for token generation is provided")
         if self._jwt_properties.get(JWT_TOKEN) or self._jwt_properties.get(JWT_KEY):
             return True
         return False
@@ -718,27 +734,28 @@ class JWTHandler:
         jwt_headers = {}
 
         # Checking if application is JWT ready
-        if self._check_jwt_ready():
-            LOG.info("JWT parameters detected")
+        if self.check_jwt_ready():
 
             # Precompiled JWT TOKEN detected! compiling headers with this token
             if self._jwt_properties.get(JWT_TOKEN):
-                LOG.info("Precompiled JWT TOKEN detected! Forming headers with token")
+                LOG.info("A precompiled JWT TOKEN detected! Directly creating request header using this token")
                 jwt_headers = self._compile_headers()
 
             # Compiling JWT tokens using provided JWT attributes
             elif self._jwt_properties.get(JWT_KEY):
-                LOG.info("JWT token attributes detected. Compiling JWT token")
+                LOG.info("JWT token attributes detected. Creating a new JWT token")
                 jwt_headers = self._compile_jwt_token()
 
-        # Creating headers with JWT token
+        # If request_properties has no header section, creating a new header section and adding the compiled header
         if not rest_properties.get(HEADERS):
+            LOG.info("No header section was detected. Creating new header section for the request and the compiled header")
             rest_properties[HEADERS] = jwt_headers
-        
-        # Checking if header already has ACCESS_TOKEN present
-        elif self._check_jwt_ready() and AUTHORIZATION_KEY in rest_properties.get(HEADERS) and rest_properties[HEADERS][AUTHORIZATION_KEY]:
-            raise IntegrationError(f"""Header already has a ACCESS_KEY present {rest_properties[HEADERS]}""")
 
+        # Checking if header already has ACCESS_TOKEN present
+        elif self.check_jwt_ready() and AUTHORIZATION_KEY in rest_properties.get(HEADERS) and rest_properties[HEADERS][AUTHORIZATION_KEY]:
+            raise IntegrationError(f"""Conflict detected!! Request header already has an `Authorization` parameter. Please resolve conflict
+                                   by opting out of other authentication mechanisms or opt out of this process by not providing any values for
+                                   JWT parameters""")
         # Updating headers with JWT token
         else:
             rest_properties[HEADERS].update(jwt_headers)
