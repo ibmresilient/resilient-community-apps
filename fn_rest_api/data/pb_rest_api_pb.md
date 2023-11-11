@@ -56,15 +56,17 @@ method  = ""
 
 url     = ""
 
+verify  = False
+
 header  = None
 
 body    = None
 
 cookie  = None
 
-verify  = False
-
 timeout = None
+
+params  = None
 
 allowed_status_code = "200, 201, 202"
 
@@ -80,7 +82,7 @@ inputs.rest_api_verify  = verify if verify not in [None, ''] else True
 # REST methods: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS" and "PATCH". Defaults to GET method
 inputs.rest_api_method  = method if method and method in SUPPORTED_REST_METHODS else REST_METHODS[0] 
 
-# Time in seconds to wait before timingout request. Default: 60 seconds.
+# Time in seconds to wait before timing-out request. Default: 60 seconds.
 inputs.rest_api_timeout = timeout if timeout else None
 
 # Request headers used for Authorization. Refer to ``DICT/JSON FORMAT`` section for more information.
@@ -93,7 +95,7 @@ inputs.rest_api_cookies = cookie if cookie else None
 inputs.rest_api_body    = body if body else None
 
 # Parameters used for API calls added to the URL. Refer to ``DICT/JSON FORMAT`` section for more information.
-inputs.rest_api_query_parameters = query_parameters
+inputs.rest_api_query_parameters = params
 
 #                                                 =====================
 #                                                  ALLOWED_STATUS_CODE 
@@ -130,13 +132,14 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #
 #    Example:
 #    --------
-#      headers = """
-#      {
+#      import json
+#
+#      inputs.rest_api_headers = json.dumps({
 #        "Content-Type"  : "application/json",
 #        "X-Frooble"     : "Baz",
 #        "Authorization" : "bearer ${API_TOKEN}"
-#      }
-#      """
+#      })
+#
 
 #                                                  ====================                                                  
 #                                                   DICT / JSON FORMAT                                                      
@@ -166,7 +169,7 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #
 #    Example:
 #    --------
-#      body = """
+#      inputs.rest_api_body  = """
 #      "name" : "user1",
 #      "password" : "p@ssword1",
 #      "role" : "admin",
@@ -184,7 +187,7 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #    --------
 #      import json
 #     
-#      body = {
+#      inputs.rest_api_body  = {
 #       "name"     : "user1",
 #       "password" : "p@ssword1",
 #       "role"     : "admin",
@@ -210,13 +213,13 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #
 #    Example:
 #    -------- 
-#      body = """
+#      inputs.rest_api_body = """
 #      name : user1
 #      password : p@ssword1
 #      role : admin
 #      """             
 # 
-#      headers = """
+#      inputs.rest_api_headers = """
 #      Content-Type: application/json
 #      X-Frooble: Baz
 #      Authorization: {{auth_header}}

@@ -24,10 +24,10 @@
       - [Method 2: Using REFRESH\_TOKEN](#method-2-using-refresh_token)
       - [Method 3: Using ACCESS\_TOKEN](#method-3-using-access_token)
     - [Client-side authentication with certificates](#client-side-authentication-with-certificates)
-      - [1. Client Authentication Certificate (client\_auth\_cert):](#1-client-authentication-certificate-client_auth_cert)
-      - [2. Client Authentication Private Key (client\_auth\_key):](#2-client-authentication-private-key-client_auth_key)
-      - [3. Client Authentication PEM (client\_auth\_pem):](#3-client-authentication-pem-client_auth_pem)
-    - [INPUT FORMAT:](#input-format-1)
+      - [1. Client Authentication Certificate (client\_auth\_cert)](#1-client-authentication-certificate-client_auth_cert)
+      - [2. Client Authentication Private Key (client\_auth\_key)](#2-client-authentication-private-key-client_auth_key)
+      - [3. Client Authentication PEM (client\_auth\_pem)](#3-client-authentication-pem-client_auth_pem)
+    - [Input Formats:](#input-formats)
     - [JSON Web Token Authentication](#json-web-token-authentication)
       - [1. Using Endpoint provided token](#1-using-endpoint-provided-token)
       - [2. Compiling a Token using JWT parameters](#2-compiling-a-token-using-jwt-parameters)
@@ -235,11 +235,6 @@ for such parameters using one of the methods described below.
   ```
 
 
-
----
-
-You can find more information on this in the link: [retry2/retry_call](https://github.com/eSAMTrade/retry#retry_call )
-
 ---
 
 ## Authentication 
@@ -306,7 +301,7 @@ Note:   Client-side authentication with certificates provides an extra layer of
         allowing access to sensitive resources or data. And so this can be used 
         in tandem with other authentication methods
 
-#### 1. Client Authentication Certificate (client_auth_cert):
+#### 1. Client Authentication Certificate (client_auth_cert)
    
       A client authentication certificate, also known as a client certificate,
       is a digital certificate that is issued to the client (user or device) as
@@ -315,7 +310,7 @@ Note:   Client-side authentication with certificates provides an extra layer of
       signed by a trusted Certificate Authority (CA) or a self-signed certificate
       if it is a closed system.
 
-#### 2. Client Authentication Private Key (client_auth_key):
+#### 2. Client Authentication Private Key (client_auth_key)
    
       Private key is a cryptographic key that corresponds to the client's public
       key in the client authentication certificate. The private key is securely
@@ -325,7 +320,7 @@ Note:   Client-side authentication with certificates provides an extra layer of
       The server then verifies this response to ensure that the client possesses
       the corresponding private key and is thus authenticated.
 
-#### 3. Client Authentication PEM (client_auth_pem): 
+#### 3. Client Authentication PEM (client_auth_pem)
    
       This is simply the file format used to store both the client authentication
       certificate and private key in a single PEM (Privacy-Enhanced Mail) file. PEM
@@ -336,7 +331,7 @@ Note:   The client authentication certificate and private key are commonly given
         together, whereas the PEM file is typically provided separately as an 
         independent file.
 
-### INPUT FORMAT:
+### Input Formats:
 
    The information within these certificates can be directly copied and pasted as
    plain text into the appropriate certificate type, enclosed within quotation marks.
@@ -407,7 +402,7 @@ Note:   The client authentication certificate and private key are commonly given
 | `rest_api_headers` | `textarea` | No | `-` | Request headers. See [Input Considerations](#input-considerations) for format |
 | `rest_api_cookies` | `textarea` | No | `-` | Cookies required for the API call. See [Input Considerations](#input-considerations) for format |
 | `rest_api_body` | `textarea` | No | `-` | Request body. See [Input Considerations](#input-considerations) for format |
-| `rest_api_verify` | `boolean` | No | `True` | Verify SSL certificate |
+| `rest_api_verify` | `boolean` | Yes | `True` | Verify SSL certificate |
 | `rest_api_timeout` | `number` | No | `60` | Request timeout in seconds |
 | `rest_api_allowed_status_codes` | `text` | No | `"305, 404, 500"` | Comma separated list. All codes < 300 are allowed by default |
 | `oauth_token_url` | `text` | No | `https://www.example.com/oauth/token` | URL for the Authorization server endpoint |
@@ -610,7 +605,7 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #      })
 
 #                                                  ====================                                                  
-#                                                   DICT / JSON FORMAT                                                      
+#                                                   DICT / JSON FORMAT                                                   
 #                                                  ====================                                                  
 
 # Function inputs can only accept values that are either strings, numbers, or 
@@ -627,7 +622,6 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #       - inputs.rest_api_query_parameters
 #       - inputs.jwt_headers
 #       - inputs.jwt_payload
-#
 
 # 1. JSON format:
 #    ------------
@@ -648,7 +642,7 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 #    -----
 #
 #    An easier way to feed inputs to the above mentioned fields would be using
-#    python dictionaries. While the inputs don't directly support dict, the in-built 
+#    python dictionaries. While the inputs don't directly support dict, the in-built
 #    json package can be used to convert a python dict to json string.
 #
 #    Example:
