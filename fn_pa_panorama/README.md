@@ -56,7 +56,7 @@ You can continue to use the rules/workflows. But migrating to playbooks will pro
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-This integration contains Functions to interact with address groups, addresses, and user groups within Palo Alto Panorama. This integration can be configured to work with one or multiple Jira instances.
+This integration contains Functions to interact with address groups, addresses, and user groups within Palo Alto Panorama. This integration can be configured to work with one or multiple Panorama instances.
 
 ### Key Features
 * Edit address groups in Panorama

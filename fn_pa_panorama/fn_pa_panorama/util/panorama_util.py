@@ -20,16 +20,21 @@ class PanoramaClient:
         # validate config fields
         validate_fields(["panorama_host", "api_key", "location"], pan_config)
 
+        api_version = pan_config.get("api_version", DEFAULT_API_VERSION)
         self.__key = pan_config["api_key"] 
-        self.__url_path = "/".join([URI_PATH, pan_config.get("api_version", DEFAULT_API_VERSION)])
+        self.__url_path = "/".join([URI_PATH, api_version])
         self.__vsys = vsys
 
         self.verify = str_to_bool(pan_config.get("cert", "True"))
         self.host = pan_config["panorama_host"]
         self.rc = RequestsCommon(opts, pan_config)
-        self.header = {"X-PAN-KEY": self.__key}
         self.query_parameters = {"location": location,
                                  "output-format": "json"}
+        if api_version == "9.0":
+            self.query_parameters["key"] = self.__key
+        else:
+            self.header = {"X-PAN-KEY": self.__key}
+
         if location in ["vsys", "panorama-pushed"]:
             self.query_parameters["vsys"] = self.__vsys
 
@@ -103,9 +108,19 @@ class PanoramaClient:
 
 class PanoramaServers():
     def __init__(self, opts):
+        """
+        Initialize the PanoramaServers class
+        :param opts: Dictionary of options
+        """
         self.servers, self.server_name_list = self._load_servers(opts)
 
     def _load_servers(self, opts):
+        """
+        Create list of label names and a dictionary of the servers and their configs
+        :param opts: Dict of options
+        :return servers: Dictionary of all the Panorama servers from the app.config that contains each servers configurations
+        :return server_name_list: List filled with all of the labels for the servers from the app.config
+        """
         servers = {}
         server_name_list = self._get_server_name_list(opts)
         for server in server_name_list:
@@ -136,7 +151,7 @@ class PanoramaServers():
         elif len(servers_list) == 1:
             options = servers_list[list(servers_list.keys())[0]]
         else:
-            raise IntegrationError("{} did not match labels given in the app.config".format(panorama_label))
+            raise IntegrationError(f"{panorama_label} did not match labels given in the app.config")
 
         return options
 

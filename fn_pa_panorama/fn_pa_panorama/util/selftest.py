@@ -18,8 +18,8 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
 
-    # Call the getAddresses API with the hardcoded 'vsys' and 'vsys1' for the location since those are typically
-    # function inputs. Returns success if the call is successful
+    # Call the getAddresses API with 'vsys' and 'vsys1' by default for the location if not specified in the app.config
+    # Returns success if the call is successful
 
     server_list = {PACKAGE_NAME} if opts.get(PACKAGE_NAME, {}) else PanoramaServers(opts).get_server_name_list()
 

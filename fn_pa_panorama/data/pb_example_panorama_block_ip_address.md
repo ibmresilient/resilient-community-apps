@@ -64,7 +64,7 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ### Function-Input Script
 ```python
 inputs.panorama_location = "shared"
-inputs.panorama_vsys = "test"
+# inputs.panorama_vsys = "vsys1"
 inputs.panorama_name_parameter = "Blocked Group"
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
