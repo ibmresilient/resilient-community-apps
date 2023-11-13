@@ -16,7 +16,7 @@ GRAPHQL_POLLERQUERY = '''query pollerQuery($filter: String!){
                         }
                         '''
 
-# Basic offense data query to populate summmary fields.
+# Basic offense data query to populate summary fields.
 GRAPHQL_OFFENSEQUERY = '''query offenseQuery($id: ID!) {
                             getOffense(id: $id) {
                                 credibility
