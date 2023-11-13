@@ -412,7 +412,7 @@ class QRadarServers():
         """
         Create list of label names and a dictionary of the databases and their configs
         :param opts: Dict of options
-        :return dbs: Dictonary of all the ODBC databases from the app.config that contains each databases configurations
+        :return dbs: Dictionary of all the ODBC databases from the app.config that contains each databases configurations
         :return db_name_list: List filled with all of the labels for the servers from the app.config
         """
         servers = {}

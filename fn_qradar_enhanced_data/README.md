@@ -49,6 +49,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.3.3 | 10/2023 | Bug fix for making an api call to use case manager on the QRadar server to retrieve MITRE mappings for a rule. |
 | 2.3.2 | 08/2023 | Bug fix for MITRE function and poller search |
 | 2.3.1 | 05/2023 | Bug fix for MITRE playbook |
 | 2.3.0 | 05/2023 | Support configurable settings to retry QRadar query |
