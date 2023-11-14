@@ -15,7 +15,7 @@ from resilient_lib import IntegrationError
 PACKAGE= "fn_misp"
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function(s)"""
+    """Component that implements SOAR function(s)"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -31,7 +31,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("misp_create_attribute")
     def _misp_create_attribute_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Create attribute in MISP"""
         try:
 
             API_KEY, URL, VERIFY_CERT = common.validate(self.options)
@@ -64,11 +64,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Attribute has been created")
 
-            results = { "success": True,
-                        "content": attribute
-                      }
-
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(attribute)
         except Exception:
             yield FunctionError()

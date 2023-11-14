@@ -15,7 +15,7 @@ from fn_misp.lib import common
 PACKAGE= "fn_misp"
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function(s)"""
+    """Component that implements SOAR function(s)"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -56,18 +56,13 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage(u"Creating event {}".format(misp_event_name))
 
-            event = misp_helper.create_misp_event(misp_client, misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name)
+            events = misp_helper.create_misp_event(misp_client, misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name)
 
-            log.debug(event)
+            log.debug(events)
 
             yield StatusMessage("Event has been created")
 
-            results = {
-                "success": True,
-                "content": event
-            }
-
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(events)
         except Exception:
             yield FunctionError()

@@ -20,13 +20,13 @@ def snake_to_camel(word):
 
 setup(
     name='fn_misp',
-    version='3.0.1',
+    version='3.0.2',
     license='MIT',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
+    author='IBM QRadar SOAR',
+    author_email='',
     url='http://ibm.biz/resilientcommunity',
-    description="Creates Events, Attributes and Sightings in MISP from incidents and artifacts in Resilient.",
-    long_description="The purpose of this package is to allow the creation of an event in MISP from an incident in Resilient. "
+    description="Creates Events, Attributes and Sightings in MISP from incidents and artifacts in SOAR.",
+    long_description="The purpose of this package is to allow the creation of an event in MISP from an incident in SOAR. "
                      "This could represent a multiple-to-one or a one-to-one relationship. Once the event is created, "
                      "attributes can be populated to it. "
                      "For artifacts which have a hit in MISP, one can create a sighting back to MISP to show threat "
