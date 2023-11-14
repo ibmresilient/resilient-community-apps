@@ -210,9 +210,9 @@ class FunctionComponent(AppFunctionComponent):
             "params"  : self.get_textarea_param(getattr(fn_inputs, "rest_api_query_parameters", None))} # textarea
 
         retry_properties = {
-            "retry_tries"   : int(getattr(fn_inputs, "rest_retry_tries", RETRY_TRIES_DEFAULT)), # integer
-            "retry_delay"   : int(getattr(fn_inputs, "rest_retry_delay", RETRY_DELAY_DEFAULT)), # integer
-            "retry_backoff" : int(getattr(fn_inputs, "rest_retry_backoff", RETRY_BKOFF_DEFAULT))} # integer
+            "retry_tries"   : int(getattr(fn_inputs, "rest_retry_tries", RETRY_TRIES_DEFAULT) or RETRY_TRIES_DEFAULT), # integer
+            "retry_delay"   : int(getattr(fn_inputs, "rest_retry_delay", RETRY_DELAY_DEFAULT) or RETRY_DELAY_DEFAULT), # integer
+            "retry_backoff" : int(getattr(fn_inputs, "rest_retry_backoff", RETRY_BKOFF_DEFAULT) or RETRY_BKOFF_DEFAULT)} # integer
 
         # Properties required for OAuth Authentication
         oauth_properties = {
