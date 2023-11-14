@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
-from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
+from fn_sentinelone.lib.app_common import (AppCommon, PACKAGE_NAME)
 
-PACKAGE_NAME = "fn_sentinelone"
 FN_NAME = "sentinelone_restart_agent"
 
 
@@ -27,9 +26,9 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
 
-        sentinelone_client = SentinelOneClient(self.opts, self.options)
+        app_common = AppCommon(self.rc, PACKAGE_NAME, self.options)
         agent_id = fn_inputs.sentinelone_agent_id
-        results = sentinelone_client.restart_agent(agent_id)
+        results = app_common.restart_agent(agent_id)
 
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
