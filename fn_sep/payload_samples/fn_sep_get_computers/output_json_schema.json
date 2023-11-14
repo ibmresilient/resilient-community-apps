@@ -1,0 +1,567 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "group": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "fullPathName": {},
+                  "domain": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "externalReferenceId": {},
+                  "source": {}
+                }
+              },
+              "ipAddresses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "macAddresses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "gateways": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "subnetMasks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "dnsServers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "winServers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string"
+              },
+              "computerName": {
+                "type": "string"
+              },
+              "logonUserName": {
+                "type": "string"
+              },
+              "domainOrWorkgroup": {
+                "type": "string"
+              },
+              "computerDescription": {
+                "type": "string"
+              },
+              "processorType": {
+                "type": "string"
+              },
+              "processorClock": {
+                "type": "integer"
+              },
+              "physicalCpus": {
+                "type": "integer"
+              },
+              "logicalCpus": {
+                "type": "integer"
+              },
+              "memory": {
+                "type": "integer"
+              },
+              "biosVersion": {
+                "type": "string"
+              },
+              "osFunction": {
+                "type": "string"
+              },
+              "osFlavorNumber": {
+                "type": "integer"
+              },
+              "osName": {
+                "type": "string"
+              },
+              "operatingSystem": {
+                "type": "string"
+              },
+              "osVersion": {
+                "type": "string"
+              },
+              "osMajor": {
+                "type": "integer"
+              },
+              "osMinor": {
+                "type": "integer"
+              },
+              "osServicePack": {
+                "type": "string"
+              },
+              "osBitness": {
+                "type": "string"
+              },
+              "tmpDevice": {},
+              "uniqueId": {
+                "type": "string"
+              },
+              "hardwareKey": {
+                "type": "string"
+              },
+              "uuid": {
+                "type": "string"
+              },
+              "osLanguage": {
+                "type": "string"
+              },
+              "totalDiskSpace": {
+                "type": "integer"
+              },
+              "groupUpdateProvider": {
+                "type": "boolean"
+              },
+              "deploymentStatus": {
+                "type": "string"
+              },
+              "deploymentMessage": {
+                "type": "string"
+              },
+              "deploymentTargetVersion": {
+                "type": "string"
+              },
+              "deploymentRunningVersion": {
+                "type": "string"
+              },
+              "deploymentPreVersion": {
+                "type": "string"
+              },
+              "lastDeploymentTime": {
+                "type": "integer"
+              },
+              "virtualizationPlatform": {
+                "type": "string"
+              },
+              "securityVirtualAppliance": {},
+              "serialNumber": {
+                "type": "string"
+              },
+              "installType": {
+                "type": "string"
+              },
+              "writeFiltersStatus": {},
+              "agentVersion": {
+                "type": "string"
+              },
+              "atpDeviceId": {},
+              "encryptedDevicePassword": {},
+              "publicKey": {
+                "type": "string"
+              },
+              "deleted": {
+                "type": "integer"
+              },
+              "quarantineStatus": {
+                "type": "integer"
+              },
+              "quarantineCode": {
+                "type": "integer"
+              },
+              "quarantineDesc": {
+                "type": "string"
+              },
+              "loginDomain": {
+                "type": "string"
+              },
+              "agentId": {
+                "type": "string"
+              },
+              "agentType": {
+                "type": "string"
+              },
+              "profileVersion": {
+                "type": "string"
+              },
+              "profileSerialNo": {
+                "type": "string"
+              },
+              "profileChecksum": {},
+              "idsVersion": {
+                "type": "string"
+              },
+              "idsSerialNo": {
+                "type": "string"
+              },
+              "idsChecksum": {},
+              "creationTime": {
+                "type": "integer"
+              },
+              "onlineStatus": {
+                "type": "integer"
+              },
+              "lastUpdateTime": {
+                "type": "integer"
+              },
+              "lastServerId": {
+                "type": "string"
+              },
+              "lastServerName": {
+                "type": "string"
+              },
+              "lastSiteId": {
+                "type": "string"
+              },
+              "lastSiteName": {
+                "type": "string"
+              },
+              "attributeExtension": {
+                "type": "string"
+              },
+              "fullName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "jobTitle": {
+                "type": "string"
+              },
+              "department": {
+                "type": "string"
+              },
+              "employeeNumber": {
+                "type": "string"
+              },
+              "employeeStatus": {
+                "type": "string"
+              },
+              "officePhone": {
+                "type": "string"
+              },
+              "mobilePhone": {
+                "type": "string"
+              },
+              "homePhone": {
+                "type": "string"
+              },
+              "agentTimeStamp": {
+                "type": "integer"
+              },
+              "agentUsn": {
+                "type": "integer"
+              },
+              "patternIdx": {
+                "type": "string"
+              },
+              "apOnOff": {
+                "type": "integer"
+              },
+              "infected": {
+                "type": "integer"
+              },
+              "worstInfectionIdx": {
+                "type": "string"
+              },
+              "lastScanTime": {
+                "type": "integer"
+              },
+              "lastVirusTime": {
+                "type": "integer"
+              },
+              "contentUpdate": {
+                "type": "integer"
+              },
+              "avEngineOnOff": {
+                "type": "integer"
+              },
+              "avDefsetVersion": {
+                "type": "string"
+              },
+              "avDefsetSequence": {
+                "type": "string"
+              },
+              "avDefsetRevision": {
+                "type": "string"
+              },
+              "tamperOnOff": {
+                "type": "integer"
+              },
+              "majorVersion": {
+                "type": "integer"
+              },
+              "minorVersion": {
+                "type": "integer"
+              },
+              "rebootRequired": {
+                "type": "integer"
+              },
+              "rebootReason": {
+                "type": "string"
+              },
+              "licenseStatus": {
+                "type": "integer"
+              },
+              "licenseExpiry": {
+                "type": "integer"
+              },
+              "timeZone": {
+                "type": "integer"
+              },
+              "firewallOnOff": {
+                "type": "integer"
+              },
+              "freeMem": {
+                "type": "integer"
+              },
+              "freeDisk": {
+                "type": "integer"
+              },
+              "lastDownloadTime": {
+                "type": "integer"
+              },
+              "currentClientId": {
+                "type": "string"
+              },
+              "licenseId": {},
+              "isGrace": {
+                "type": "integer"
+              },
+              "snacLicenseId": {},
+              "ptpOnOff": {
+                "type": "integer"
+              },
+              "lastHeuristicThreatTime": {
+                "type": "integer"
+              },
+              "bashStatus": {
+                "type": "integer"
+              },
+              "daOnOff": {
+                "type": "integer"
+              },
+              "cidsDrvOnOff": {
+                "type": "integer"
+              },
+              "cidsSilentMode": {
+                "type": "integer"
+              },
+              "cidsDrvMulfCode": {
+                "type": "integer"
+              },
+              "cidsBrowserIeOnOff": {
+                "type": "integer"
+              },
+              "cidsBrowserFfOnOff": {
+                "type": "integer"
+              },
+              "cidsEngineVersion": {
+                "type": "string"
+              },
+              "cidsDefsetVersion": {
+                "type": "string"
+              },
+              "elamOnOff": {
+                "type": "integer"
+              },
+              "osElamStatus": {
+                "type": "integer"
+              },
+              "tdadOnOff": {
+                "type": "integer"
+              },
+              "tdadStatusId": {
+                "type": "integer"
+              },
+              "tdadGlobalDataDownloadTime": {
+                "type": "integer"
+              },
+              "tdadGlobalDataProcessingDoneTime": {
+                "type": "integer"
+              },
+              "vsicStatus": {
+                "type": "integer"
+              },
+              "isNpvdiClient": {
+                "type": "integer"
+              },
+              "svaId": {},
+              "lastConnectedIpAddr": {
+                "type": "string"
+              },
+              "pepOnOff": {
+                "type": "integer"
+              },
+              "edrStatus": {
+                "type": "integer"
+              },
+              "atpServer": {
+                "type": "string"
+              },
+              "tpmDevice": {
+                "type": "string"
+              },
+              "dhcpServer": {
+                "type": "string"
+              },
+              "computerTimeStamp": {
+                "type": "integer"
+              },
+              "computerUsn": {
+                "type": "integer"
+              },
+              "diskDrive": {
+                "type": "string"
+              },
+              "hypervisorVendorId": {
+                "type": "string"
+              },
+              "kernel": {},
+              "bwf": {
+                "type": "integer"
+              },
+              "fbwf": {
+                "type": "integer"
+              },
+              "uwf": {
+                "type": "integer"
+              },
+              "telemetryMid": {
+                "type": "string"
+              },
+              "telemetryHwid": {
+                "type": "string"
+              },
+              "wssStatus": {
+                "type": "integer"
+              },
+              "pskVersion": {
+                "type": "integer"
+              },
+              "readableLastScanTime": {
+                "type": "string"
+              },
+              "timediffLastScanTime": {
+                "type": "number"
+              },
+              "readableLastUpdateTime": {
+                "type": "string"
+              },
+              "timediffLastUpdateTime": {
+                "type": "number"
+              },
+              "readableLastVirusTime": {
+                "type": "string"
+              },
+              "timediffLastVirusTime": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "totalPages": {
+          "type": "integer"
+        },
+        "firstPage": {
+          "type": "boolean"
+        },
+        "lastPage": {
+          "type": "boolean"
+        },
+        "totalElements": {
+          "type": "integer"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "number": {
+          "type": "integer"
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "direction": {
+                "type": "string"
+              },
+              "property": {
+                "type": "string"
+              },
+              "ascending": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "numberOfElements": {
+          "type": "integer"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
