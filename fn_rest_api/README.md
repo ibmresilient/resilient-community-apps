@@ -62,10 +62,12 @@ This application is based on the `call_rest_api` function from the `fn_utilities
 
 ### Key Features
 * Make REST API requests to external web services.
-* Request body, headers and cookies now support complex structures just as nested key-value pairs and lists by JSON format.
+* Request body, headers, query parameters and cookies now support complex structures just as nested key-value pairs and lists by JSON format.
 * Response is returned in both JSON and text format.
 * Ability to substitute sensitive information that are specified in the inputs for values that are in the app.config.
 * Make REST API requests to multiple endpoints.
+* Ability to retry requests on failure.
+* Authenticate with endpoints that supports OAuth Authentication.
 
 ---
 
@@ -116,6 +118,7 @@ The app does support a proxy server.
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=51.0
+* PyJWT
 
 ---
 
