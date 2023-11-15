@@ -83,8 +83,7 @@ If deploying to a SOAR platform with an Edge Gateway, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `48.2`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* The application underwent testing with Integration server running `resilient-circuits` versions `48.1` and `46.0`.
-* Earlier versions of resilient-circuits may also work correctly as there are no specific required dependencies.
+* The application requires `resilient-circuits` versions `51.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -116,7 +115,7 @@ The app does support a proxy server.
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient-circuits
+* resilient-circuits>=51.0
 
 ---
 
