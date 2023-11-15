@@ -585,7 +585,7 @@ method  = ""
 
 url     = ""
 
-verify  = False
+verify  = True
 
 params  = None
 
@@ -660,25 +660,18 @@ inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_cod
 # 1. RETRY_TRIES (rest_retry_tries):
 #
 #     This parameter defines the maximum number of retry attempts that will be made for a 
-#     failed request before the system ceases further retry efforts. If the maximum number
-#     of retry attempts is reached and the request still fails, the system will cease further
-#     retries and may trigger an error notification or follow an alternative error-handling
-#     process. Default value : 1 (no retry)
+#     failed request before the system ceases further retry efforts.
+#     Default value : 1 (no retry)
 
 # 2. RETRY_DELAY (rest_retry_delay):
 #
 #     This parameter used to define the delay between retry attempts when a request fails and
-#     the request retry mechanism is invoked. This parameter plays a crucial role in controlling
-#     the timing of automatic retry attempts. Default value : 1 (no delay)
+#     the request retry mechanism is invoked. Default value : 1 (no delay)
 
 # 3. RETRY_BACKOFF (rest_retry_backoff):
 #
 #     This parameter is used to specify the multiplier applied to delay between attempts.
-#     Default: 1 (no backoff). The backoff strategy follows the below algorithm:
-#
-#         `DELAY = RETRY_DELAY * (RETRY_BACKOFF ^ n-1)`
-#
-#             where `n` is the current attempt count.
+#     Default: 1 (no backoff). 
 #
 #       Example:
 #
