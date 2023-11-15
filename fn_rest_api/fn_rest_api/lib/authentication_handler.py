@@ -24,8 +24,6 @@ LOG = logging.getLogger(__file__)
 """
 
 DEFAULT_AUTH_CONTENT_TYPE = "application/x-www-form-urlencoded"
-REFRESH_GRANT_TYPE = "refresh_token"
-ACCESS_GRANT_TYPE  = "authorization_code"
 
 AUTH_URL = "auth_url"
 TOKEN_URL = "token_url"
@@ -33,7 +31,6 @@ CODE  = "code"
 STATE = "state"
 SCOPE = "scope"
 CLIENT_ID  = "client_id"
-GRANT_TYPE = "grant_type"
 TOKEN_TYPE = "token_type"
 EXPIRES_IN = "expires_in"
 ACCESS_TOKEN = "access_token"
@@ -46,27 +43,16 @@ CONTENT_TYPE  = "content_type"
 ADDITIONAL_HEADERS = "additional_headers"
 ADDITIONAL_ATTRIBUTES = "additional_attributes"
 
-def add_oauth_headers(oauth_client, rest_properties) -> dict:
-    """
-    This application can function without OAuth authentication process. For the
-    application to perform OAuth authentication, it requires certain parameters. This
-    function checks to see if the required parameters are provided and performs OAuth 
-    authentication. If they aren't provided, it simply skips the process and directly
-    performs the REST api call. To do so, it takes in the rest_headers and either adds
-    oauth credentials/headers or skips and returns original headers untouched
+OAUTH_SUPPORTED    = "oauth_supported"
+FLOW_ACCESS_TOKEN  = "access_token_flow"
+FLOW_REFRESH_TOKEN = "refresh_token_flow"
+FLOW_AUTHORIZATION = "authorization_flow"
+FLOW_CLIENT_CREDENTIALS = "client_credentials_flow"
 
-    Returns:
-    --------
-        <dict> : headers, with or without oauth generated credentials
-    """
-    if oauth_client.check_oauth_ready():
-        LOG.info("OAuth properties detected!")
-        oauth_headers = oauth_client.authenticate()
-        if rest_properties.get(HEADERS):
-            rest_properties[HEADERS].update(oauth_headers)
-        else:
-            rest_properties[HEADERS] = oauth_headers
-    return rest_properties
+GRANT_TYPE = "grant_type"
+REFRESH_GRANT_TYPE = "refresh_token"
+ACCESS_GRANT_TYPE  = "authorization_code"
+CLIENT_CREDENTIALS_GRANT_TYPE = "client_credentials"
 
 
 class OAuth2Authorization():
@@ -74,22 +60,7 @@ class OAuth2Authorization():
     def __init__(self, rc, oauth_options):
 
         self.rc = rc
-        LOG.debug("Configuration values")
-        LOG.debug(json.dumps(oauth_options, indent=2))
-
-        self._oauth_properties = {
-            TOKEN_URL     : validate_url(oauth_options.get(TOKEN_URL)),
-            CLIENT_ID     : oauth_options.get(CLIENT_ID),
-            CLIENT_SECRET : oauth_options.get(CLIENT_SECRET),
-            REDIRECT_URI  : oauth_options.get(REDIRECT_URI),
-            SCOPE         : oauth_options.get(SCOPE),
-            CODE          : oauth_options.get(CODE),
-            ACCESS_TOKEN  : oauth_options.get(ACCESS_TOKEN),
-            REFRESH_TOKEN : oauth_options.get(REFRESH_TOKEN),
-            TOKEN_TYPE    : oauth_options.get(TOKEN_TYPE, DEFAULT_TOKEN_TYPE),
-            EXPIRES_IN    : oauth_options.get(EXPIRES_IN),
-            ADDITIONAL_HEADERS    : oauth_options.get(ADDITIONAL_HEADERS, {}),
-            ADDITIONAL_ATTRIBUTES : oauth_options.get(ADDITIONAL_ATTRIBUTES, {})}
+        self._oauth_properties = oauth_options
 
 
     def _compile_headers(self) -> dict:
@@ -196,6 +167,29 @@ class OAuth2Authorization():
         return self._process_endpoint_response(response)
 
 
+    def add_oauth_headers(self, rest_properties) -> dict:
+        """
+        This application can function without OAuth authentication process. For the
+        application to perform OAuth authentication, it requires certain parameters. This
+        function checks to see if the required parameters are provided and performs OAuth 
+        authentication. If they aren't provided, it simply skips the process and directly
+        performs the REST api call. To do so, it takes in the rest_headers and either adds
+        oauth credentials/headers or skips and returns original headers untouched
+
+        Returns:
+        --------
+            <dict> : headers, with or without oauth generated credentials
+        """
+        if self.check_oauth_ready():
+            LOG.info("OAuth properties detected!")
+            oauth_headers = self.authenticate()
+            if rest_properties.get(HEADERS):
+                rest_properties[HEADERS].update(oauth_headers)
+            else:
+                rest_properties[HEADERS] = oauth_headers
+        return rest_properties
+
+
     def check_oauth_ready(self):
         """
         Responsible for determining if the application is OAuth ready. An application needs the following
@@ -210,16 +204,47 @@ class OAuth2Authorization():
         --------
             <bool> : True/False depending on the application being OAuth ready.
         """
+        supported_oauth_flow = {
+            OAUTH_SUPPORTED    : False,
+            FLOW_ACCESS_TOKEN  : False,
+            FLOW_AUTHORIZATION : False,
+            FLOW_REFRESH_TOKEN : False,
+            FLOW_CLIENT_CREDENTIALS : False}
+        
         if self._oauth_properties.get(ACCESS_TOKEN):
-            return True
+            LOG.info(f"Application OAuth Complaint. Detected: AccessToken Flow")
+            supported_oauth_flow[FLOW_ACCESS_TOKEN] = supported_oauth_flow[OAUTH_SUPPORTED] = True
 
-        if (    (self._oauth_properties.get(CODE) or self._oauth_properties.get(REFRESH_TOKEN))
-             and
-                (self._oauth_properties.get(TOKEN_URL) and self._oauth_properties.get(CLIENT_ID))
-           ):
-            return True
+        # OAuth Client-Credentials Flow
+        if  (
+            self._oauth_properties.get(TOKEN_URL) and
+            self._oauth_properties.get(CLIENT_ID) and
+            self._oauth_properties.get(CLIENT_SECRET) and
+            self._oauth_properties.get(GRANT_TYPE, "").lower() == CLIENT_CREDENTIALS_GRANT_TYPE
+        ):
+            LOG.info(f"Application OAuth Complaint. Detected: Client-Credentials Flow")
+            supported_oauth_flow[FLOW_CLIENT_CREDENTIALS] = supported_oauth_flow[OAUTH_SUPPORTED] = True
 
-        return False
+        # OAuth Authorization Flow
+        if  (
+            self._oauth_properties.get(CODE) and
+            self._oauth_properties.get(TOKEN_URL) and
+            self._oauth_properties.get(CLIENT_ID)
+        ):
+            LOG.info(f"Application OAuth Complaint. Detected: Authorization Flow")
+            supported_oauth_flow[FLOW_AUTHORIZATION] = supported_oauth_flow[OAUTH_SUPPORTED] = True
+
+        # OAuth Refresh Token Flow
+        if  (
+            self._oauth_properties.get(REFRESH_TOKEN) and
+            self._oauth_properties.get(TOKEN_URL) and
+            self._oauth_properties.get(CLIENT_ID)
+        ):
+            LOG.info(f"Application OAuth Complaint. Detected: Refresh Token Flow")
+            supported_oauth_flow[FLOW_REFRESH_TOKEN] = supported_oauth_flow[OAUTH_SUPPORTED] = True
+
+        # Return False when provided parameters fall under none of the above mentioned categories
+        return supported_oauth_flow
 
 
     def force_refresh_tokens(self):
@@ -263,32 +288,34 @@ class OAuth2Authorization():
         This is particularly used when an application is provided direct access without having to perform the entire OAuth
         authorization and authentication process. When an ACCESS_TOKEN is directly provided, its TOKEN_TYPE must also be specified.
         """
-        if self._oauth_properties.get(ACCESS_TOKEN):
+        supported_oauth_flows = self.check_oauth_ready()
+
+        # Directly use ACCESS_TOKEN if provided (FLOW_ACCESS_TOKEN)
+        if supported_oauth_flows[OAUTH_SUPPORTED] and supported_oauth_flows[FLOW_ACCESS_TOKEN]:
             LOG.info(f"ACCESS_TOKEN detected. Skipping token refresh mechanism.")
             if not self._oauth_properties.get(TOKEN_TYPE):
                 LOG.warning(f"{TOKEN_TYPE} not specified. ACCESS_TOKEN cannot be used without a {TOKEN_TYPE}. Using default token type : {DEFAULT_TOKEN_TYPE}")
                 self._oauth_properties[TOKEN_TYPE] = DEFAULT_TOKEN_TYPE
 
-            elif self._oauth_properties.get(EXPIRES_IN):
-                if self._oauth_properties.get(EXPIRES_IN) <= time.time():
-                    # Validity of REFRESH_TOKEN has ended before current time.
-                    LOG.info(f"Updating expired ACCESS_TOKEN")
-                    if not self._update_tokens():
-                        raise IntegrationError("Unable to refresh tokens")
-                else:
-                    # Expiry time of REFRESH_TOKEN is greater than current time. Hence valid.
-                    LOG.info(f"ACCESS_TOKEN seem valid and well within expiration date {self._oauth_properties.get(EXPIRES_IN)}")
+        # Use REFRESH_TOKEN to fetch new ACCESS_TOKEN (FLOW_REFRESH_TOKEN)
+        elif (
+            supported_oauth_flows[OAUTH_SUPPORTED] and
+            supported_oauth_flows[FLOW_REFRESH_TOKEN]
+        ):
+            LOG.info(f"Updating/Fetching new ACCESS_TOKEN")
+            if not self._update_tokens():
+                raise IntegrationError("Unable to refresh ACCESS_TOKEN")
             else:
-                # No expiration time was specified. ACCESS_TOKEN is used without checking validity.
-                LOG.warning(f"ACCESS_TOKEN validity unverified. No {EXPIRES_IN} property available to check validity")
-
-        # If REFRESH_TOKEN is specified without ACCESS_TOKEN, handler automatically fetches all required information for authentication
-        elif self._oauth_properties.get(REFRESH_TOKEN):
-            self.force_refresh_tokens()
+                # Expiry time of REFRESH_TOKEN is greater than current time. Hence valid.
+                LOG.info(f"New ACCESS_TOKEN successfully retrieved")
+                LOG.info(f"Token validity : {self._oauth_properties.get(EXPIRES_IN)}")
 
         # If CODE is specified. ACCESS_TOKEN and REFRESH_TOKEN is fetched in exchange for CODE
-        elif self._oauth_properties.get(CODE):
-            LOG.info(f"CODE detected. No REFRESH_TOKEN OR ACCESS_TOKEN present.")
+        elif (
+            supported_oauth_flows[OAUTH_SUPPORTED] and
+            supported_oauth_flows[FLOW_AUTHORIZATION]
+        ):
+            LOG.info(f"CODE detected. Fetching new ACCESS_TOKEN and possibly a REFRESH_TOKEN")
             if not self._get_tokens():
                 raise IntegrationError(f"Unable to exchange CODE for REFRESH_TOKEN and ACCESS_TOKEN")
 

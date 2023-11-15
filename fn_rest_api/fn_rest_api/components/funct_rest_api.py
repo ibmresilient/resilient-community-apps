@@ -272,7 +272,7 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Checking if request is OAuth ready...")
         if oauth_client.check_oauth_ready():
             yield self.status_message("OAuth parameters detected, initializing authentication process..")
-            rest_properties  = authentication_handler.add_oauth_headers(oauth_client, rest_properties)
+            rest_properties  = oauth_client.add_oauth_headers(rest_properties)
             yield self.status_message("Successfully authenticated! ACCESS_TOKEN added to header")
         else:
             yield self.status_message("No Oauth parameters were detected. Skipping OAuth authentication")
