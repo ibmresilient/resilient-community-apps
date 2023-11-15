@@ -11,10 +11,10 @@ stages:
     if: tag IS blank AND branch = master AND type = cron
   - name: run package tests
     if: type != cron
-  - name: sonarqube scan
-    if: type != cron
   - name: build image and app zip
     if: tag IS blank AND type = push
+  - name: sonarqube scan, twistlock scan, and validate
+    if: type != cron
   - name: rebuild all images
     if: tag =~ ^rebuild/.+
   - name: sync all images
@@ -53,6 +53,9 @@ env:
     - KEYWORD_DEV_DEPS='[dev-deps]'
     - DEV_DEPS=`[[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_DEV_DEPS"* ]]; echo $?`
     - PYPI_INDEX_TO_USE=`if [ $DEV_DEPS == 1 ]; then echo "$ARTIFACTORY_PYPI_INDEX"; else echo "$PYPI_INDEX"; fi`
+
+    - KEYWORD_SKIP_VALIDATE = "[skip_validate]"
+    - SKIP_VALIDATE=$([[ "$TRAVIS_COMMIT_MESSAGE" != *"$KEYWORD_SKIP_VALIDATE"* ]]; echo $?)
 
     - SONAR_SCANNER_CLI_URL="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli"
     - SONAR_SCANNER_CLI_FILENAME="sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip"
@@ -358,15 +361,25 @@ matrix:
       name: SonarQube Scan on All Packages
       language: java
       env: RUN_TYPE=sonarqube
-      before_install:
+      install:
         - wget "$SONAR_SCANNER_CLI_URL/$SONAR_SCANNER_CLI_FILENAME"
         - unzip $SONAR_SCANNER_CLI_FILENAME -d /tmp
-        - pip install requests retry2
-        - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO" "$PATH_DOWNLOAD_SCRIPT_SAVE_LOC"
       script:
         - echo "Installing and running SonarQube scan"
         - ALL_ALLOWED_IMAGES=`python $PATH_COMMON_SCRIPTS_DIR/get_all_allowed_image_names.py "$PATH_ALLOW_IMAGE_NAMES" --ignore-lines "rc-" "rc_data_feed_plugin_odbcfeed"`
         - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$ALL_ALLOWED_IMAGES" "$PATH_COMMON_SCRIPTS_DIR" 1 0
+
+    - stage: cron run tests and sonar scan on all packages
+      name: Twistlock Scan on All Packages
+      services:
+        - docker
+      env: RUN_TYPE=twistlock
+      install:
+        - pip install jinja2
+      script:
+        - echo "Installing and running Twistlock scan on all packages"
+        # use travis_wait to allow for no output for up to 45 minutes
+        - travis_wait 45 $PATH_SCRIPTS_DIR/run_twistlock_on_all_images.sh
 
     - stage: run package tests
       name: Python 2.7 Unit Tests - Package
@@ -405,28 +418,6 @@ matrix:
         - echo "Starting Python 3.9 Unit Tests - Package"
         - $PATH_SCRIPTS_DIR/run_tests.sh "$PACKAGE_NAME" "$PYPI_INDEX_TO_USE"
 
-    - stage: sonarqube scan
-      name: SonarQube Scan
-      language: java
-      env: RUN_TYPE=sonarqube
-      before_install:
-        - wget "$SONAR_SCANNER_CLI_URL/$SONAR_SCANNER_CLI_FILENAME"
-        - unzip $SONAR_SCANNER_CLI_FILENAME -d /tmp
-        - pip install requests retry2
-        - $PATH_SCRIPTS_DIR/download_common_scripts.sh "$PATH_COMMON_SCRIPTS_DIR" "$GH_PATH_COMMON_SCRIPTS_REPO" "$PATH_DOWNLOAD_SCRIPT_SAVE_LOC"
-        - PACKAGE_NAME=`python $PATH_SCRIPTS_DIR/get_package_name_from_cmt_msg.py "$TRAVIS_COMMIT_MESSAGE" "$TRAVIS_BRANCH"`
-      script:
-        - echo "Installing and running SonarQube scan"
-        - IS_DATA_FEEDER_PLUGIN=`[[ "$PACKAGE_NAME" == *"rc_data_feed_plugin"* ]]; echo $?`
-        - |
-          if [ $IS_DATA_FEEDER_PLUGIN -eq 0 ]; then
-              echo "This is a data feeder plugin. Modifying SONAR_SRCS"
-              SONAR_SRCS="$PACKAGE_NAME/data_feeder_plugins";
-          else
-              SONAR_SRCS="$PACKAGE_NAME/$PACKAGE_NAME";
-          fi
-        - echo $SONAR_SRCS
-        - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$SONAR_SRCS" "$PATH_COMMON_SCRIPTS_DIR" 1 0
 
     - stage: build image and app zip
       name: Build Image and App zip
@@ -455,6 +446,50 @@ matrix:
         - echo "PATH_APP_ZIP=$PATH_APP_ZIP";
         - FILE_NAME=$(basename $PATH_APP_ZIP);
         - if [[ $UPLOAD_APP_TO_APPHOST == 1 ]]; then $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME>" "success"; else $PATH_COMMON_SCRIPTS_DIR/send_slack_notification.sh "Built $BUILD_TYPE version of [$PACKAGE_NAME] \n Artifactory App.zip - <$PATH_APP_ZIP|$FILE_NAME> \n [$PACKAGE_NAME] can be found at <https://${FYRE_CLUSTER_DOMAIN}/#admin?tab=apps| ${FYRE_CLUSTER_DOMAIN}> if successfully deployed." "success"; fi
+
+
+    - stage: sonarqube scan, twistlock scan, and validate
+      name: SonarQube Scan
+      language: java
+      env: RUN_TYPE=sonarqube
+      install:
+        - wget "$SONAR_SCANNER_CLI_URL/$SONAR_SCANNER_CLI_FILENAME"
+        - unzip $SONAR_SCANNER_CLI_FILENAME -d /tmp
+      script:
+        - echo "Installing and running SonarQube scan"
+        - IS_DATA_FEEDER_PLUGIN=`[[ "$PACKAGE_NAME" == *"rc_data_feed_plugin"* ]]; echo $?`
+        - |
+          if [ $IS_DATA_FEEDER_PLUGIN -eq 0 ]; then
+              echo "This is a data feeder plugin. Modifying SONAR_SRCS"
+              SONAR_SRCS="$PACKAGE_NAME/data_feeder_plugins";
+          else
+              SONAR_SRCS="$PACKAGE_NAME/$PACKAGE_NAME";
+          fi
+        - echo $SONAR_SRCS
+        - $PATH_COMMON_SCRIPTS_DIR/run_sonar_scanner.sh "$SONAR_SRCS" "$PATH_COMMON_SCRIPTS_DIR" 1 0
+
+    - stage: sonarqube scan, twistlock scan, and validate
+      name: Twistlock Scan
+      services:
+        - docker
+      env: RUN_TYPE=twistlock
+      install:
+        - pip install resilient-sdk -i $PYPI_INDEX_TO_USE
+        - echo "Packaging $PACKAGE_NAME with resilient-sdk"
+        - resilient-sdk package -p $TRAVIS_BUILD_DIR/$PACKAGE_NAME
+      script:
+        - echo "Installing and running Twistlock scan"
+        - BASE_IMAGE_REPO_LOC=`if [ $DEV_DEPS == 1 ]; then echo "$DOCKER_BASE_IMAGE_ARTIFACTORY_LOCATION"; else echo "$QUAY_URL"; fi`
+        - $PATH_COMMON_SCRIPTS_DIR/run_twistlock.sh "$PACKAGE_NAME" "$TRAVIS_BUILD_DIR/$PACKAGE_NAME" "$BASE_IMAGE_REPO_LOC" "$PATH_COMMON_SCRIPTS_DIR"
+
+    - stage: sonarqube scan, twistlock scan, and validate
+      name: resilient-sdk validate
+      python: 3.9
+      env:
+      - RUN_TYPE=validate
+      script: $PATH_COMMON_SCRIPTS_DIR/run_sdk_validate_on_travis.sh "$PACKAGE_NAME" "$PATH_COMMON_SCRIPTS_DIR" "TRUE"
+      on:
+        condition: "$SKIP_VALIDATE = 0"
 
     - stage: rebuild all images
       python: 3.9
