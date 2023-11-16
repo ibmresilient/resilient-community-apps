@@ -9,8 +9,9 @@ from datetime import datetime, timedelta
 from logging import getLogger
 from threading import Thread, Event
 from resilient_circuits import ResilientComponent
-from resilient_lib import IntegrationError, SOARCommon, clean_html
-from fn_qradar_enhanced_data.util.function_utils import (get_qradar_client, get_server_settings, get_sync_notes)
+from resilient_lib import IntegrationError, SOARCommon
+from fn_qradar_enhanced_data.util.function_utils import (get_qradar_client, get_server_settings,
+                                                         get_sync_notes, filter_comments)
 from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACKAGE_NAME)
 from fn_qradar_enhanced_data.util.qradar_utils import AuthInfo
 from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_POLLERQUERY
@@ -281,21 +282,7 @@ class PollerComponent(ResilientComponent):
                     incident_id = case_server_dict.get(server, {}).get(notes.get('id'), {}).get('id') # ID of the SOAR incident
                     new_notes = [note.get("noteText").replace("\r", "") for note in notes.get("notes") if int(note.get("createTime")) > poller_time\
                         and AUTO_ESCALATION_NOTE not in note.get("noteText") and MANUAL_ESCALATION not in note.get("noteText")]
-                    notes_to_add = self.filter_comments(incident_id, new_notes, soar_str_to_remove="\nAdded from QRadar")
+                    notes_to_add = filter_comments(self.soar_common, incident_id, new_notes, soar_str_to_remove="\nAdded from QRadar")
                     if notes_to_add:
                         for note in notes_to_add:
                             self.soar_common.create_case_comment(incident_id, f"{note}\nAdded from QRadar")
-
-    def filter_comments(self, incident_id, new_notes, soar_str_to_remove=None):
-        """
-        Filter out comments that are already on the SOAR incident
-        :param incident_id: SOAR incident ID
-        :param new_notes: List of notes on the QRadar case
-        :param soar_str_to_remove: String to remove from SOAR comments that is added when a note is added to SOAR incident by QRadar.
-        """
-        soar_comments = self.soar_common.get_case_comments(str(incident_id))
-        # Remove html and given soar_str_to_remove
-        soar_comment_list = [clean_html(comment.get('text').replace(soar_str_to_remove, "")) for comment in soar_comments]
-        # Check if the QRadar comment is already a note on the SOAR incident
-        return [comment for comment in new_notes\
-                if clean_html(comment) not in soar_comment_list]
