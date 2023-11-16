@@ -85,7 +85,7 @@ If deploying to a SOAR platform with an Edge Gateway, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `48.2`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* The application requires `resilient-circuits` versions `51.0`.
+* The application requires `resilient-circuits` version `51.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
