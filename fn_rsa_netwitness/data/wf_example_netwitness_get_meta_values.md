@@ -73,9 +73,7 @@ inputs.nw_meta_id2 = workflow.properties.nw_meta_id_ranges.content.params.field2
 
 ### Post-Processing Script
 ```python
-input_values = results.get("inputs", {})
-incident.addNote(helper.createRichText(
- f"""Meta values between {input_values.get("nw_meta_id1")} and {input_values.get("nw_meta_id2")} are listed below.<br/> {str(input_values.get("results"))}"""))
+incident.addNote(helper.createRichText("Meta values between {} and {} are listed below.<br/> {}".format(results.get("inputs", {}).get("nw_meta_id1"), results.get("inputs", {}).get("nw_meta_id2"), str(results.get("content").get("results")))))
 ```
 
 ---
