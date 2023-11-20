@@ -47,6 +47,10 @@ def test_filter_comments():
     new_comments = filter_comments(soar_common(), 123, notes_from_qradar, "\nAdded from QRadar")
     assert new_comments == []
 
+    # Test having data after the '\nAdded from QRadar'
+    notes_from_qradar = ["test1", "test2", "test4\nsomething else"]
+    new_comments = filter_comments(soar_common(), 1, notes_from_qradar, "\nAdded from QRadar")
+    assert new_comments == []
 
 class soar_common():
     """ Mock soar_common class for testing """
@@ -55,4 +59,7 @@ class soar_common():
 
     def get_case_comments(self, soar_id: str):
         """ Mock get case comments return """
-        return [{"text": "test1\nAdded from QRadar"}, {"text": "test2"}, {"text": "test3\nAdded from QRadar"}, {"text": "test4"}]
+        if soar_id == "1":
+            return [{"text": "test1\nAdded from QRadar"}, {"text": "test2"}, {"text": "test3\nAdded from QRadar"}, {"text": "test4\nAdded from QRadar\nsomething else"}]
+        else:
+            return [{"text": "test1\nAdded from QRadar"}, {"text": "test2"}, {"text": "test3\nAdded from QRadar"}, {"text": "test4"}]
