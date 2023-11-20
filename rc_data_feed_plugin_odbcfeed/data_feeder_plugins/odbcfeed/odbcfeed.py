@@ -35,6 +35,7 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
         self.pwd = options.get("pwd")
         self.uid = options.get("uid")
 
+        # see _start_transaction
         #self.connection = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
 
         self._init_tables()

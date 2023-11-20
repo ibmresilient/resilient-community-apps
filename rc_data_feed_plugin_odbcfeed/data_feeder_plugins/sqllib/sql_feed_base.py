@@ -18,7 +18,7 @@ PYODBC_CONNECTION_LOST = ('08001', '08S01', '08003', 'HY000') # 08S01 = connecti
 
 # thread lock used to limit the number of simultaneous updates needed to database tables
 UPDATE_LOCK = Lock()
-UPDATE_TABLE_LOCK = {} 
+UPDATE_TABLE_LOCK = {}
 
 def get_table_lock(table_name) -> Lock:
     """get a table specific lock for use when updating the table schema 
@@ -153,7 +153,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         LOG.debug("hash_key (%s): %s", type_name, hash_key)
         return hash_key
 
-    @cached(cache=LRUCache(100), key=cache_key)
+    # may not be needed per is_field_found @cached(cache=LRUCache(100), key=cache_key)
     def _create_or_update_table(self, type_name, all_fields):
 
         # if locked, bypass any schema updates
