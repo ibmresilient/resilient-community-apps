@@ -272,7 +272,10 @@ class OAuth2Authorization():
 
             - TOKEN_URL
             - CLIENT_ID
-            - CODE (or) ACCESS_TOKEN (or) REFRESH_TOKEN
+            - CLIENT_SECRET (Optional: Client-credentials flow)
+            - CODE          (Optional: Authorization flow)
+            - ACCESS_TOKEN  (Optional: Access token flow)
+            - REFRESH_TOKEN (Optional: Refresh token flow)
 
         This then returns a dictionary with a list of supported flows. This entirely depends on the input
         parameters provided.
