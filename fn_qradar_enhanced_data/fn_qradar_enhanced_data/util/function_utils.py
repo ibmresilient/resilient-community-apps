@@ -9,19 +9,19 @@ from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACK
 
 LOG = getLogger(__name__)
 
-def filter_comments(soar_common, incident_id, new_notes, soar_str_to_remove=None):
+def filter_comments(soar_common, incident_id, qradar_notes, soar_str_to_remove=None):
     """
     Filter out comments that are already on the SOAR incident
     :param soar_common: Connection to SOAR instance
     :param incident_id: SOAR incident ID
-    :param new_notes: List of notes on the QRadar case
+    :param qradar_notes: List of notes on the QRadar case
     :param soar_str_to_remove: String to remove from SOAR comments that is added when a note is added to SOAR incident by QRadar.
     """
     soar_comments = soar_common.get_case_comments(str(incident_id))
     # Remove html and given soar_str_to_remove
     soar_comment_list = [clean_html(comment.get('text').replace(soar_str_to_remove, "")) for comment in soar_comments]
     # Check if the QRadar comment is already a note on the SOAR incident
-    return [comment for comment in new_notes\
+    return [comment for comment in qradar_notes\
             if clean_html(comment) not in soar_comment_list]
 
 def get_sync_notes(global_settings, options):
