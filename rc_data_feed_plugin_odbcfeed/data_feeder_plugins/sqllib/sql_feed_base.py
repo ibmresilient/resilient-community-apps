@@ -14,7 +14,9 @@ from rc_data_feed.lib.type_info import TypeInfo
 from .sql_dialect import PostgreSQL96Dialect, SqliteDialect, MySqlDialect, SqlServerDialect, OracleDialect
 
 LOG = logging.getLogger(__name__)
-PYODBC_CONNECTION_LOST = ('08001', '08S01', '08003', 'HY000') # 08S01 = connection lost, 08003 = Connection not open, HY000 - catch all error
+# 08S01 = connection lost, 08003 = Connection not open, HY000 - catch all error
+# 42703 - column not found. Maybe due to threads not having correct db schema
+PYODBC_CONNECTION_LOST = ('08001', '08S01', '08003', 'HY000', '42703')
 
 # thread lock used to limit the number of simultaneous updates needed to database tables
 UPDATE_LOCK = Lock()
