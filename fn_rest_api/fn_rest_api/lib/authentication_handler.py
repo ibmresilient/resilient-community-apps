@@ -22,7 +22,7 @@ LOG = logging.getLogger(__file__)
     O A U T H  2. 0
     - - - - -  -  -
 """
-
+OAUTH_REQUEST_METHOD = "post"
 DEFAULT_AUTH_CONTENT_TYPE = "application/x-www-form-urlencoded"
 
 AUTH_URL = "auth_url"
@@ -30,6 +30,8 @@ TOKEN_URL = "token_url"
 CODE  = "code"
 STATE = "state"
 SCOPE = "scope"
+AUTH_TYPE = "auth_type"
+TOKEN_VALUE = "token_value"
 CLIENT_ID  = "client_id"
 TOKEN_TYPE = "token_type"
 EXPIRES_IN = "expires_in"
@@ -56,292 +58,28 @@ CLIENT_CREDENTIALS_GRANT_TYPE = "client_credentials"
 
 
 class OAuth2Authorization():
+    """
+    Perform OAuth authentication. This supports 3 different flow:
+    
+    * Refresh-Token
+    * Client-Credentials
+    * Access-Token
+    * Authorization
+    
+    ==================
+    REFRESH-TOKEN FLOW
+    ==================
 
-    def __init__(self, rc, oauth_options):
+            Using REFRESH_TOKENS usually generates new ACCESS_TOKEN. This also extends the
+        life span of the same REFRESH_TOKEN. Therefore the same REFRESH_TOKEN can be used to
+        generate new ACCESS_TOKEN
 
-        self.rc = rc
-        self._oauth_properties = oauth_options
+        ..note::
+        On successfully completing a `refresh-token` flow, the existing client properties are
+        updated with the newly fetched values. This means that this client can be used to fetch
+        new tokens and values virtually indefinitely.
 
-
-    def _compile_headers(self) -> dict:
-        """
-        Create headers needed for authentication/authorization, overriding the default ones if needed.
-
-        :param headers: Dictionary containing the ``Authorization`` header
-        :type headers: dict
-        """
-        return {AUTHORIZATION_KEY : f"{self._oauth_properties.get(TOKEN_TYPE)} {self._oauth_properties.get(ACCESS_TOKEN)}"}
-
-
-    def _process_endpoint_response(self, response) -> bool:
-        """
-        Processes response received from the endpoint. The values received could vary from endpoint to endpoint. This allows
-        the client to handle such varied responses.
-
-        Args:
-        -----
-            response <requests.response> : response received from endpoint
-
-        Raises:
-        -------
-            __IntegrationError__ : Status code > 300. Invalid REFRESH_TOKEN supplied.
-               __ValueError__    : ACCESS_TOKEN not found in response.
-        
-        Returns:
-        --------
-            <bool> : True when all required parameters are found in response
-
-        """
-        if response.status_code >= 300:
-            raise IntegrationError(f"Unable to refresh ACCESS_TOKEN. Please check or renew your REFRESH_TOKEN. {response.content}")
-        
-        response = response.json()
-
-        # If REFRESH_TOKEN available in response, updates existing REFRESH_TOKEN to the current one.
-        # Else retains existing TOKEN provided in the constructor.
-        if REFRESH_TOKEN in response:
-            self._oauth_properties[REFRESH_TOKEN] = response.get(REFRESH_TOKEN)
-        
-        # If TOKEN_TYPE not in response, using DEFAULT_TOKEN_TYPE specified while reading inputs in oauth_handler's constructor
-        if TOKEN_TYPE in response:
-            self._oauth_properties[TOKEN_TYPE] = response.get(TOKEN_TYPE)
-        else:
-            LOG.warning(f"No {TOKEN_TYPE} detected in response. Using DEFAULT_TOKEN_TYPE : {DEFAULT_TOKEN_TYPE}")
-            
-        if EXPIRES_IN in response:
-            self._oauth_properties[EXPIRES_IN] = time.time() + int(response.get(EXPIRES_IN))
-
-        if ACCESS_TOKEN in response:
-            self._oauth_properties[ACCESS_TOKEN] = response.get(ACCESS_TOKEN)
-        else:
-            raise ValueError(f"Did not receive ACCESS_TOKEN. Received response : {json.dumps(response, indent=2)}")
-
-        return True
-
-
-    def _update_tokens(self) -> bool:
-        """
-        Institutes a request for a new access token using REFRESH_TOKEN.
-        """
-        LOG.info(f"Refreshing ACCESS_TOKEN using REFRESH_TOKEN")
-
-        if not self._oauth_properties.get(REFRESH_TOKEN):
-            raise ValueError("In order to refresh tokens, REFRESH_TOKEN is required and cannot be None")
-
-        response = self.fetch_renew_tokens(
-            token_url=self._oauth_properties.get(TOKEN_URL),
-            auth_type=REFRESH_TOKEN,
-            code_or_refresh_token=self._oauth_properties.get(REFRESH_TOKEN),
-            client_id=self._oauth_properties.get(CLIENT_ID),
-            client_secret=self._oauth_properties.get(CLIENT_SECRET),
-            grant_type=REFRESH_GRANT_TYPE,
-            redirect_uri=self._oauth_properties.get(REDIRECT_URI),
-            scope=self._oauth_properties.get(SCOPE),
-            additional_headers=self._oauth_properties.get(ADDITIONAL_HEADERS, {}),
-            additional_attributes=self._oauth_properties.get(ADDITIONAL_ATTRIBUTES, {}))
-
-        return self._process_endpoint_response(response)
-
-
-    def _get_tokens(self) -> bool:
-        """
-        Institutes a request for a new access token by exchanging CODE for the tokens
-        """
-        LOG.info(f"Exchanging CODE for ACCESS_TOKEN and REFRESH_TOKEN")
-        
-        if not self._oauth_properties.get(CODE):
-            raise ValueError(f"In order to fetch tokens, CODE is required and cannot be None")
-
-        response = self.fetch_renew_tokens(
-            token_url=self._oauth_properties.get(TOKEN_URL),
-            auth_type=CODE,
-            code_or_refresh_token=self._oauth_properties.get(CODE),
-            client_id=self._oauth_properties.get(CLIENT_ID),
-            client_secret=self._oauth_properties.get(CLIENT_SECRET),
-            grant_type=ACCESS_GRANT_TYPE,
-            redirect_uri=self._oauth_properties.get(REDIRECT_URI),
-            scope=self._oauth_properties.get(SCOPE),
-            additional_headers=self._oauth_properties.get(ADDITIONAL_HEADERS, {}),
-            additional_attributes=self._oauth_properties.get(ADDITIONAL_ATTRIBUTES, {}))
-
-        return self._process_endpoint_response(response)
-
-
-    def add_oauth_headers(self, rest_properties) -> dict:
-        """
-        This application can function without OAuth authentication process. For the
-        application to perform OAuth authentication, it requires certain parameters. This
-        function checks to see if the required parameters are provided and performs OAuth 
-        authentication. If they aren't provided, it simply skips the process and directly
-        performs the REST api call. To do so, it takes in the rest_headers and either adds
-        oauth credentials/headers or skips and returns original headers untouched
-
-        Returns:
-        --------
-            <dict> : headers, with or without oauth generated credentials
-        """
-        if self.check_oauth_ready():
-            LOG.info("OAuth properties detected!")
-            oauth_headers = self.authenticate()
-            if rest_properties.get(HEADERS):
-                rest_properties[HEADERS].update(oauth_headers)
-            else:
-                rest_properties[HEADERS] = oauth_headers
-        return rest_properties
-
-
-    def check_oauth_ready(self):
-        """
-        Responsible for determining if the application is OAuth ready. An application needs the following
-        parameters to perform OAuth authentication. Failing to provide these would simply return False
-        stating that the application is not OAuth ready.
-        
-            - TOKEN_URL
-            - CLIENT_ID
-            - CODE (or) ACCESS_TOKEN (or) REFRESH_TOKEN
-
-        Returns:
-        --------
-            <bool> : True/False depending on the application being OAuth ready.
-        """
-        supported_oauth_flow = {
-            OAUTH_SUPPORTED    : False,
-            FLOW_ACCESS_TOKEN  : False,
-            FLOW_AUTHORIZATION : False,
-            FLOW_REFRESH_TOKEN : False,
-            FLOW_CLIENT_CREDENTIALS : False}
-        
-        if self._oauth_properties.get(ACCESS_TOKEN):
-            LOG.info(f"Application OAuth Complaint. Detected: AccessToken Flow")
-            supported_oauth_flow[FLOW_ACCESS_TOKEN] = supported_oauth_flow[OAUTH_SUPPORTED] = True
-
-        # OAuth Client-Credentials Flow
-        if  (
-            self._oauth_properties.get(TOKEN_URL) and
-            self._oauth_properties.get(CLIENT_ID) and
-            self._oauth_properties.get(CLIENT_SECRET) and
-            self._oauth_properties.get(GRANT_TYPE, "").lower() == CLIENT_CREDENTIALS_GRANT_TYPE
-        ):
-            LOG.info(f"Application OAuth Complaint. Detected: Client-Credentials Flow")
-            supported_oauth_flow[FLOW_CLIENT_CREDENTIALS] = supported_oauth_flow[OAUTH_SUPPORTED] = True
-
-        # OAuth Authorization Flow
-        if  (
-            self._oauth_properties.get(CODE) and
-            self._oauth_properties.get(TOKEN_URL) and
-            self._oauth_properties.get(CLIENT_ID)
-        ):
-            LOG.info(f"Application OAuth Complaint. Detected: Authorization Flow")
-            supported_oauth_flow[FLOW_AUTHORIZATION] = supported_oauth_flow[OAUTH_SUPPORTED] = True
-
-        # OAuth Refresh Token Flow
-        if  (
-            self._oauth_properties.get(REFRESH_TOKEN) and
-            self._oauth_properties.get(TOKEN_URL) and
-            self._oauth_properties.get(CLIENT_ID)
-        ):
-            LOG.info(f"Application OAuth Complaint. Detected: Refresh Token Flow")
-            supported_oauth_flow[FLOW_REFRESH_TOKEN] = supported_oauth_flow[OAUTH_SUPPORTED] = True
-
-        # Return False when provided parameters fall under none of the above mentioned categories
-        return supported_oauth_flow
-
-
-    def force_refresh_tokens(self):
-        """
-        Forces the client to fetch fresh ACCESS_TOKEN and REFRESH_TOKEN.
-        
-        RAISES:
-        -------
-            __IntegrationError__ : REFRESH_TOKEN is either unavailable or invalid
-
-        RETURNS:
-        --------
-            <bool> : _description_
-        """
-        LOG.info(f"Forcing ACCESS_TOKEN to be refreshed using REFRESH_TOKEN")
-        if not self._oauth_properties.get(REFRESH_TOKEN):
-            msg = f"Cannot refresh ACCESS_TOKEN. REFRESH_TOKEN is invalid: {self._oauth_properties.get(REFRESH_TOKEN)}"
-            LOG.error(msg)
-            raise IntegrationError(msg)
-
-        if not self._update_tokens():
-            raise IntegrationError(f"Unable to refresh tokens. Please check REFRESH_TOKEN {self._oauth_properties.get(REFRESH_TOKEN)}")
-        return True
-
-
-    def show_tokens(self) -> dict:
-        """
-        Returns:
-            dict: ACCESS_TOKEN, REFRESH_TOKEN, TOKEN_TYPE, EXPIRES_IN
-        """
-        return {
-            ACCESS_TOKEN  : self._oauth_properties.get(ACCESS_TOKEN),
-            REFRESH_TOKEN : self._oauth_properties.get(REFRESH_TOKEN),
-            TOKEN_TYPE    : self._oauth_properties.get(TOKEN_TYPE),
-            EXPIRES_IN    : self._oauth_properties.get(EXPIRES_IN)}
-
-
-    def authenticate(self) -> dict:
-        """
-            If ACCESS_TOKEN is directly provided, the oauth_handler should automatically use the token without having to refresh it.
-        This is particularly used when an application is provided direct access without having to perform the entire OAuth
-        authorization and authentication process. When an ACCESS_TOKEN is directly provided, its TOKEN_TYPE must also be specified.
-        """
-        supported_oauth_flows = self.check_oauth_ready()
-
-        # Directly use ACCESS_TOKEN if provided (FLOW_ACCESS_TOKEN)
-        if supported_oauth_flows[OAUTH_SUPPORTED] and supported_oauth_flows[FLOW_ACCESS_TOKEN]:
-            LOG.info(f"ACCESS_TOKEN detected. Skipping token refresh mechanism.")
-            if not self._oauth_properties.get(TOKEN_TYPE):
-                LOG.warning(f"{TOKEN_TYPE} not specified. ACCESS_TOKEN cannot be used without a {TOKEN_TYPE}. Using default token type : {DEFAULT_TOKEN_TYPE}")
-                self._oauth_properties[TOKEN_TYPE] = DEFAULT_TOKEN_TYPE
-
-        # Use REFRESH_TOKEN to fetch new ACCESS_TOKEN (FLOW_REFRESH_TOKEN)
-        elif (
-            supported_oauth_flows[OAUTH_SUPPORTED] and
-            supported_oauth_flows[FLOW_REFRESH_TOKEN]
-        ):
-            LOG.info(f"Updating/Fetching new ACCESS_TOKEN")
-            if not self._update_tokens():
-                raise IntegrationError("Unable to refresh ACCESS_TOKEN")
-            else:
-                # Expiry time of REFRESH_TOKEN is greater than current time. Hence valid.
-                LOG.info(f"New ACCESS_TOKEN successfully retrieved")
-                LOG.info(f"Token validity : {self._oauth_properties.get(EXPIRES_IN)}")
-
-        # If CODE is specified. ACCESS_TOKEN and REFRESH_TOKEN is fetched in exchange for CODE
-        elif (
-            supported_oauth_flows[OAUTH_SUPPORTED] and
-            supported_oauth_flows[FLOW_AUTHORIZATION]
-        ):
-            LOG.info(f"CODE detected. Fetching new ACCESS_TOKEN and possibly a REFRESH_TOKEN")
-            if not self._get_tokens():
-                raise IntegrationError(f"Unable to exchange CODE for REFRESH_TOKEN and ACCESS_TOKEN")
-
-        # Failing execution as none of the required parameters are specified.
-        else:
-            err_msg = f"No ACCESS_TOKEN, REFRESH_TOKEN or CODE specified."
-            LOG.error(err_msg)
-            raise KeyError(err_msg)
-
-        return self._compile_headers()
-
-
-    def fetch_renew_tokens(self, token_url:str, auth_type:str, code_or_refresh_token:str, client_id:str,
-            client_secret:str=None, grant_type:str=None, redirect_uri:str=None, scope:str=None,
-            content_type:dict=DEFAULT_AUTH_CONTENT_TYPE, additional_headers:dict={},
-            additional_attributes:dict={}) -> dict:
-        """
-        Refresh ACCESS_TOKEN using REFRESH_TOKEN. Both ACCESS_TOKEN and REFRESH_TOKEN are
-        time-bound. ACCESS_TOKENS usually have a significantly shorter lifespan than REFRESH_TOKEN.
-        When an ACCESS_TOKEN expires, it can be renewed using a REFRESH_TOKEN, doing so would also
-        usually extend the lifespan of the REFRESH_TOKEN itself.
-        
-        Note: Using REFRESH_TOKENS usually generates new ACCESS_TOKEN. But the life span of the
-              same REFRESH_TOKEN is extended. Therefore the same REFRESH_TOKEN can be used to
-              generate new ACCESS_TOKEN
-
+        ..code::
         REQUEST FORMAT:        Using REFRESH_TOKEN to refresh ACCESS_TOKEN and REFRESH_TOKEN
         ---------------
             Header:
@@ -356,12 +94,24 @@ class OAuth2Authorization():
         ----------------
             Body:
                 ACCESS_TOKEN
-                REFRESH_TOKEN
                 EXPIRES_IN
                 REFRESH_TOKEN_EXPIRES_IN
+                REFRESH_TOKEN                       (optional)
+                SCOPE                               (optional)
+    
+    ==================
+    AUTHORIZATION FLOW
+    ==================
 
-        Using CODE to get ACCESS_TOKEN and REFRESH_TOKEN. CODE is a one off credential that
-        can be exchanged for an ACCESS_TOKEN and REFRESH_TOKEN.
+            Using CODE to get ACCESS_TOKEN and REFRESH_TOKEN. CODE is a one-off credential
+        that can be exchanged for an ACCESS_TOKEN and REFRESH_TOKEN.
+
+        ..note::
+        if the endpoint returns a `refresh-token` on successively completing the above flow,
+        the existing client properties are updated with the newly fetched values. This means
+        the client goes from `Authorization Flow` to `Refresh-Token flow` moving forward.
+        This means that this client can be used to fetch new tokens and values virtually
+        indefinitely.
 
         REQUEST FORMAT:        Exchanging CODE for ACCESS_TOKEN and REFRESH_TOKEN
         ---------------
@@ -382,71 +132,372 @@ class OAuth2Authorization():
         ----------------
             Body:
                 ACCESS_TOKEN
-                REFRESH_TOKEN
                 EXPIRES_IN
                 REFRESH_TOKEN_EXPIRES_IN
+                REFRESH_TOKEN                       (optional)
+                SCOPE                               (optional)
+    
+    =======================
+    CLIENT-CREDENTIALS FLOW
+    =======================
 
-        RAISES:
-        -------
-            __ValueError__ : Invalid authentication type provided.
+            Client Credentials Flow doesn't involve user authentication, and it is suitable
+        for scenarios where the client is a confidential client, meaning it can keep its client
+        credentials (client ID and client secret) secure.
 
-        RETURNS:
-        --------
-            <response.response> : client endpoint response.
+        ..note::
+        if the endpoint returns a `refresh-token` on successively completing the above flow,
+        the existing client properties are updated with the newly fetched values. This means
+        the client goes from `Client-Credentials Flow` to `Refresh-Token flow` moving forward.
+        This means that this client can be used to fetch new tokens and values virtually
+        indefinitely.
+
+        REQUEST FORMAT:        Exchanging CODE for ACCESS_TOKEN and REFRESH_TOKEN
+        ---------------
+            Header:
+                CONTENT_TYPE  : "application/x-www-form-urlencoded"
+
+            Body:
+                GRANT_TYPE    : "client_credentials"
+                CLIENT_ID
+                CLIENT_SECRET
+
+        RESPONSE FORMAT:
+        ----------------
+            Body:
+                ACCESS_TOKEN
+                EXPIRES_IN
+                REFRESH_TOKEN_EXPIRES_IN
+                REFRESH_TOKEN                       (optional)
+                SCOPE                               (optional)
+    """
+
+    def __init__(self, rc, oauth_inputs, retry_options):
+        """ Constructor for the OAuth2Authorization
+        :param rc: request_common required for making REST requests
+        :type rc: resilient_lib.request_common
+        :param oauth_inputs: all oauth related inputs
+        :type oauth_inputs: dict
+        :param retry_options: enables the ability to retry failed requests
+        :type retry_options: dict
+        """
+        self.rc = rc
+        self._oauth_inputs  = oauth_inputs
+        self._retry_options = retry_options
+
+
+    def _compile_headers(self) -> dict:
+        """
+        Create headers needed for authentication/authorization, overriding the default ones if needed.
+
+        :param headers: Dictionary containing the ``Authorization`` header
+        :type headers: dict
+        """
+        return {AUTHORIZATION_KEY : f"{self._oauth_inputs.get(TOKEN_TYPE)} {self._oauth_inputs.get(ACCESS_TOKEN)}"}
+
+
+    def _process_endpoint_response(self, response) -> bool:
+        """
+        Processes response received from the endpoint. The values received could vary from endpoint to endpoint. This allows
+        the client to handle such varied responses.
+
+        :param response: response received from endpoint
+        :type response: requests.response
+        :raises IntegrationError: Status code > 300. Invalid REFRESH_TOKEN supplied
+        :raises ValueError: ACCESS_TOKEN not found in response
+        :return: True when all required parameters are found in response
+        :rtype: bool
+        """
+
+        if response.status_code >= 300:
+            raise IntegrationError(f"Unable to refresh ACCESS_TOKEN. Please check or renew your REFRESH_TOKEN. {response.content}")
+
+        response = response.json()
+
+        # If REFRESH_TOKEN available in response, updates existing REFRESH_TOKEN to the current one.
+        # Else retains existing TOKEN provided in the constructor.
+        if REFRESH_TOKEN in response:
+            self._oauth_inputs[REFRESH_TOKEN] = response.get(REFRESH_TOKEN)
+            # Setting Grant-Type to `refresh_token` for re-authentication.
+            self._oauth_inputs[GRANT_TYPE] = REFRESH_GRANT_TYPE
+
+        # Extracting SCOPE if available in response
+        if SCOPE in response:
+            self._oauth_inputs[SCOPE] = response.get(SCOPE)
+
+        # If TOKEN_TYPE not in response, using DEFAULT_TOKEN_TYPE specified while reading inputs in oauth_handler's constructor
+        if TOKEN_TYPE in response:
+            self._oauth_inputs[TOKEN_TYPE] = response.get(TOKEN_TYPE)
+        else:
+            LOG.warning(f"No {TOKEN_TYPE} detected in response. Using DEFAULT_TOKEN_TYPE : {DEFAULT_TOKEN_TYPE}")
+            
+        if EXPIRES_IN in response:
+            self._oauth_inputs[EXPIRES_IN] = time.time() + int(response.get(EXPIRES_IN))
+
+        if ACCESS_TOKEN in response:
+            self._oauth_inputs[ACCESS_TOKEN] = response.get(ACCESS_TOKEN)
+        else:
+            raise ValueError(f"Did not receive ACCESS_TOKEN. Received response : {json.dumps(response, indent=2)}")
+
+        return True
+
+
+    def add_oauth_headers(self, rest_properties) -> dict:
+        """
+        This wrapper is for fn_rest_api. For the application to perform OAuth authentication,
+        it requires certain parameters. This function checks to see if the required parameters
+        are provided and performs OAuth authentication. If they aren't provided, it simply skips
+        the process and directly performs the REST api call. To do so, it takes in the
+        rest_headers and either adds oauth credentials/headers or skips and returns original
+        headers untouched
+
+        :param rest_properties: inputs for fn_rest_api
+        :return: headers, with or without oauth generated credentials
+        :rtype: dict
+        """
+        if self.check_oauth_ready()[OAUTH_SUPPORTED]:
+            LOG.info("OAuth properties detected!")
+            oauth_headers = self.authenticate()
+            if rest_properties.get(HEADERS):
+                rest_properties[HEADERS].update(oauth_headers)
+            else:
+                rest_properties[HEADERS] = oauth_headers
+        return rest_properties
+
+
+    def check_oauth_ready(self):
+        """
+        Responsible for determining if the application is OAuth ready. There are multiple authentication
+        flows that can be performed, entirely depending upon the attributes provided.
+
+            - TOKEN_URL
+            - CLIENT_ID
+            - CODE (or) ACCESS_TOKEN (or) REFRESH_TOKEN
+
+        This then returns a dictionary with a list of supported flows. This entirely depends on the input
+        parameters provided.
+        
+        ..codeblock:: python
+        {
+            OAUTH_SUPPORTED    : False,
+            FLOW_ACCESS_TOKEN  : False,
+            FLOW_AUTHORIZATION : False,
+            FLOW_REFRESH_TOKEN : False,
+            FLOW_CLIENT_CREDENTIALS : False
+        }
+        
+        :returns: True/False for each of the authentication flow
+        :rtype: dict
+        """
+        supported_oauth_flow = {
+            OAUTH_SUPPORTED    : False,
+            FLOW_ACCESS_TOKEN  : False,
+            FLOW_AUTHORIZATION : False,
+            FLOW_REFRESH_TOKEN : False,
+            FLOW_CLIENT_CREDENTIALS : False}
+        
+        if self._oauth_inputs.get(ACCESS_TOKEN):
+            LOG.info(f"Application OAuth compliant. Detected: AccessToken Flow")
+            supported_oauth_flow[FLOW_ACCESS_TOKEN] = supported_oauth_flow[OAUTH_SUPPORTED] = True
+
+        # OAuth Client-Credentials Flow
+        if  (
+            self._oauth_inputs.get(TOKEN_URL) and
+            self._oauth_inputs.get(CLIENT_ID) and
+            self._oauth_inputs.get(CLIENT_SECRET) and
+            self._oauth_inputs.get(GRANT_TYPE)) and (
+            self._oauth_inputs.get(GRANT_TYPE).lower() == CLIENT_CREDENTIALS_GRANT_TYPE
+        ):
+            LOG.info(f"Application OAuth compliant. Detected: Client-Credentials Flow")
+            supported_oauth_flow[FLOW_CLIENT_CREDENTIALS] = supported_oauth_flow[OAUTH_SUPPORTED] = True
+
+        # OAuth Authorization Flow
+        if  (
+            self._oauth_inputs.get(CODE) and
+            self._oauth_inputs.get(TOKEN_URL) and
+            self._oauth_inputs.get(CLIENT_ID)
+        ):
+            LOG.info(f"Application OAuth compliant. Detected: Authorization Flow")
+            supported_oauth_flow[FLOW_AUTHORIZATION] = supported_oauth_flow[OAUTH_SUPPORTED] = True
+
+        # OAuth RefreshToken Flow
+        if  (
+            self._oauth_inputs.get(REFRESH_TOKEN) and
+            self._oauth_inputs.get(TOKEN_URL) and
+            self._oauth_inputs.get(CLIENT_ID)
+        ):
+            LOG.info(f"Application OAuth compliant. Detected: Refresh Token Flow")
+            supported_oauth_flow[FLOW_REFRESH_TOKEN] = supported_oauth_flow[OAUTH_SUPPORTED] = True
+
+        # Return False when provided parameters fall under none of the above mentioned categories
+        return supported_oauth_flow
+
+
+    def authenticate(self) -> dict:
+        """
+            This OAuth client support multiple authentication flows. The authentication flow to be performed
+        is automatically chosen depending upon the input parameters provided to the OAuth client. However, certain
+        authentication flows are alway prioritized over other flows, for instance, REFRESH_TOKEN flow is always
+        prioritized over other flows. This is because REFRESH_TOKEN can always be used to fetch fresh ACCESS_TOKENS
+        and on the even of a failed attempt, a REFRESH_TOKEN can always be used to renew the ACCESS_TOKEN.
+
+        This is then followed by the AUTHORIZATION and the CLIENT_CREDENTIALS flow. It is worth noting that
+        upon using AUTHORIZATION_FLOW or the REFRESH_TOKEN_FLOW the appropriate CODE and REFRESH_TOKEN is discarded
+        and replaced with a REFRESH_TOKEN, if provided by the endpoint. This is to make sure that, if a request fails
+        the new REFRESH_TOKEN can be used one other time to renew the ACCESS_TOKEN
+
+        :retrun: compiled request header with an access_token
+        :rtype: dict
+        """
+        supported_oauth_flows = self.check_oauth_ready()
+
+        # Unsupported flow
+        if not supported_oauth_flows[OAUTH_SUPPORTED]:
+            err_msg = f"Application does not support OAuth authentication."
+            LOG.error(err_msg)
+            raise IntegrationError(err_msg)
+
+        # Refresh_token flow
+        if supported_oauth_flows[FLOW_REFRESH_TOKEN]:
+            LOG.info(f"REFRESH_TOKEN detected. Fetching new ACCESS_TOKEN and possibly a REFRESH_TOKEN")
+            # refresh-token is removed as this will be replaced later on successful authentication
+            # this is to make sure that the existing refresh-toke is not used on retry
+            _auth_specific_attributes = {
+                AUTH_TYPE   : REFRESH_TOKEN,
+                TOKEN_VALUE : self._oauth_inputs.pop(REFRESH_TOKEN),
+                GRANT_TYPE  : REFRESH_GRANT_TYPE}
+
+        # Authorization Flow
+        elif supported_oauth_flows[FLOW_AUTHORIZATION]:
+            # authorization-code is removed as this can not be reused. If the endpoint returns a
+            # refresh-token, that is added back later, thereby changing the flow from `authorization`
+            # to `refresh_token`. Which can later be used to renew access_token
+            LOG.info(f"CODE detected. Fetching new ACCESS_TOKEN and possibly a REFRESH_TOKEN")
+            _auth_specific_attributes = {
+                AUTH_TYPE   : CODE,
+                TOKEN_VALUE : self._oauth_inputs.pop(CODE),
+                GRANT_TYPE  : ACCESS_GRANT_TYPE}
+
+        # Client-Credentials Flow
+        elif supported_oauth_flows[FLOW_CLIENT_CREDENTIALS]:
+            # `Client-Credentials` flow does not alter the flow of authentication unless the endpoint returns
+            # a `refresh-token` back. Therefore, once `Client-Credentials` flow is used, the application will
+            # always follow the Client-Credentials flow.
+            LOG.info(f"Client-Credentials detected. Fetching new ACCESS_TOKEN and possibly a REFRESH_TOKEN")
+            _auth_specific_attributes = {GRANT_TYPE : CLIENT_CREDENTIALS_GRANT_TYPE}
+
+        # Access_token flow
+        elif supported_oauth_flows[FLOW_ACCESS_TOKEN]:
+            LOG.info(f"ACCESS_TOKEN detected. Skipping token refresh mechanism.")
+            if not self._oauth_inputs.get(TOKEN_TYPE):
+                LOG.warning(f"{TOKEN_TYPE} not specified. ACCESS_TOKEN cannot be used without \
+                    a {TOKEN_TYPE}. Using default token type : {DEFAULT_TOKEN_TYPE}")
+                self._oauth_inputs[TOKEN_TYPE] = DEFAULT_TOKEN_TYPE
+            return self._compile_headers()
+
+        # Selecting and adding parameters only required for authentication from self._oauth_inputs
+        _auth_specific_attributes.update({
+            _each_key : self._oauth_inputs.get(_each_key) for _each_key in [
+                TOKEN_URL, CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, SCOPE]})
+
+        # Overriding GRANT_TYPE if specified by user
+        if self._oauth_inputs.get(GRANT_TYPE):
+            _auth_specific_attributes[GRANT_TYPE] = self._oauth_inputs[GRANT_TYPE]
+
+        response = self.fetch_renew_tokens(**_auth_specific_attributes)
+
+        if self._process_endpoint_response(response):
+            return self._compile_headers()
+
+
+    def fetch_renew_tokens(self, token_url:str, client_id:str, token_value:str=None, auth_type:str=None,
+        client_secret:str=None, grant_type:str=None, redirect_uri:str=None, scope:str=None,
+        content_type:dict=DEFAULT_AUTH_CONTENT_TYPE, additional_headers:dict={},
+        additional_attributes:dict={}) -> dict:
+        """
+        Retrieves or extends access tokens through a POST request to the designated token_url. In addition
+        to the mandatory parameters, supplementary ones are included if provided.
+
+        :param token_url: The URL where the token request should be sent.
+        :type token_url: str
+        :param client_id: The client ID used for authentication.
+        :type client_id: str
+        :param token_value: (Optional) The token value (e.g., code or refresh token) if required by the
+            authentication method.
+        :type token_value: str
+        :param auth_type: (Optional) The type of authentication (e.g., 'Bearer' for OAuth).
+        :type auth_type: str
+        :param client_secret: (Optional) The client secret used for authentication if required.
+        :type client_secret: str
+        :param grant_type: (Optional) The type of grant being requested if applicable.
+        :type grant_type: str
+        :param redirect_uri: (Optional) The redirect URI if applicable.
+        :type redirect_uri: str
+        :param scope: (Optional) The scope of the access request if applicable.
+        :type scope: str
+        :param content_type: (Optional) The content type of the request body (default is 
+            DEFAULT_AUTH_CONTENT_TYPE).
+        :type content_type: str
+        :param additional_headers: (Optional) Additional headers to include in the request.
+        :type additional_headers: dict
+        :param additional_attributes: (Optional) Additional attributes to include in the request body.
+        :type additional_attributes: dict
+        :return: response from the token request.
+        :rtype: dict
         """
         headers = {
-            "Content-Type" : content_type}
+            CONTENT_TYPE : content_type}
+
+        data = {
+            CLIENT_ID : client_id}
+
+        # AUTH_TYPE (optional)
+        if token_value:
+            data.update({auth_type : token_value})
+
+        # CLIENT_SECRET (optional)
+        if client_secret:
+            data.update({CLIENT_SECRET : client_secret})
+
+        # GRANT_TYPE (optional)
+        if grant_type:
+            data.update({GRANT_TYPE : grant_type})
+
+        # SCOPE (optional)
+        if scope:
+            data.update({SCOPE : scope})
+
+        # REDIRECT_URI (optional)
+        if redirect_uri:
+            data.update({REDIRECT_URI : redirect_uri})
+
+        # Adding any additional attributes to the request body, if required
+        if additional_attributes:
+            data.update(additional_attributes)
 
         # Adding any additional headers to the request body, if required
         if additional_headers:
             headers.update(additional_headers)
 
-        body = {
-            CLIENT_ID : client_id}
-
-        # AUTH_TYPE (required)
-        if auth_type == CODE:
-            body.update({CODE : code_or_refresh_token})
-        elif auth_type == REFRESH_TOKEN:
-            body.update({REFRESH_TOKEN : code_or_refresh_token})
-        else:
-            raise ValueError(f"Authentication Type has to be either {CODE} or {REFRESH_TOKEN}. {auth_type} is not a valid authentication type")
-
-        # CLIENT_SECRET (optional)
-        if client_secret:
-            body.update({CLIENT_SECRET : client_secret})
-
-        # GRANT_TYPE (optional)
-        if grant_type:
-            body.update({GRANT_TYPE : grant_type})
-        elif auth_type == CODE:
-            body.update({GRANT_TYPE : ACCESS_GRANT_TYPE})
-        elif auth_type == REFRESH_TOKEN:
-            body.update({GRANT_TYPE : REFRESH_GRANT_TYPE})
-        # else: 
-        #   Skipping GRANT_TYPE all-together
-
-        # SCOPE (optional)
-        if scope:
-            body.update({SCOPE : scope})
-
-        # REDIRECT_URI (optional)
-        if redirect_uri:
-            body.update({REDIRECT_URI : redirect_uri})
-
-        # Adding any additional attributes to the request body, if required
-        if additional_attributes:
-            body.update(additional_attributes)
-
         response = self.rc.execute(
-            "post",
+            OAUTH_REQUEST_METHOD,
             url=token_url,
             headers=headers,
-            data=body,
-            callback=lambda resp: resp)
+            data=data,
+            **self._retry_options)
 
         return response
 
+    def show_tokens(self) -> dict:
+        """
+        :return: ACCESS_TOKEN, REFRESH_TOKEN, TOKEN_TYPE, EXPIRES_IN
+        :rtype: dict
+        """
+        return {
+            ACCESS_TOKEN  : self._oauth_inputs.get(ACCESS_TOKEN),
+            REFRESH_TOKEN : self._oauth_inputs.get(REFRESH_TOKEN),
+            TOKEN_TYPE    : self._oauth_inputs.get(TOKEN_TYPE),
+            EXPIRES_IN    : self._oauth_inputs.get(EXPIRES_IN)}
 
 """
    C L I E N T   S I D E   A U T H E N T I C A T I O N
