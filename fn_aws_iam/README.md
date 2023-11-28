@@ -29,6 +29,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.2
+- Update payloads in workflow comments
+
 ### v1.0.1
 - Support added for App Host.
 
@@ -152,8 +155,8 @@ aws_iam_secret_access_key=<AWS_IAM_SECRET_ACCESS_KEY>
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **aws_iam_access_key_id** | Yes | `ABCD1EFGHI2JK3L4MNOP` | *AWS access key id of user with programmatic (API) access to AWS IAM services for an AWS account. Note: User must have sufficent permissions to be able to manage IAM resources for the AWS account.* |
-  | **aws_iam_secret_access_key** | Yes | `aBcdeFGH/iJkl1MNo2P3Q4rs5tuV6wXYZAbc+Def` | *AWS secret access key used for programmatic (API) access to AWS services.* |
+  | **aws_iam_access_key_id** | Yes | `ABCDEFG` | *AWS access key id of user with programmatic (API) access to AWS IAM services for an AWS account. Note: User must have sufficent permissions to be able to manage IAM resources for the AWS account.* |
+  | **aws_iam_secret_access_key** | Yes | `aBcdeFGH/ABCDEFG12345` | *AWS secret access key used for programmatic (API) access to AWS services.* |
   | **http_proxy** | No | `http://proxy:80` | *Optional setting for an http proxy if required.* |
   | **https_proxy** | No | `http://proxy:80` | *Optional setting for an http proxy if required.* |
   
@@ -192,19 +195,19 @@ aws_iam_secret_access_key=<AWS_IAM_SECRET_ACCESS_KEY>
 ## Troubleshooting
 There are several ways to verify the successful operation of a function.
 
-### Resilient Action Status
+### SOAR Action Status
 * When viewing an incident, use the Actions menu to view **Action Status**.
 * By default, pending and errors are displayed.
 * Modify the filter for actions to also show Completed actions.
 * Clicking on an action displays additional information on the progress made or what error occurred.
 
-### Resilient Scripting Log
+### SOAR Scripting Log
 * A separate log file is available to review scripting errors.
 * This is useful when issues occur in the pre-processing or post-processing scripts.
 * The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`.
 
-### Resilient Logs
-* By default, Resilient logs are retained at `/usr/share/co3/logs`.
+### SOAR Logs
+* By default, SOAR logs are retained at `/usr/share/co3/logs`.
 * The `client.log` may contain additional information regarding the execution of functions.
 
 ### Resilient-Circuits
@@ -218,4 +221,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_aws_iam | 1.0.0 | IBM Resilient Support | https://ibm.com/mysupport |
+| fn_aws_iam | 1.0.2 | IBM SOAR Support | https://ibm.com/mysupport |
