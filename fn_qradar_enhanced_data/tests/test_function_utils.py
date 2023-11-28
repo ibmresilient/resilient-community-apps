@@ -39,17 +39,17 @@ def test_filter_comments():
     """
     # Test that only the new comment is returned
     notes_from_qradar = ["test1", "Hello World", "test2"]
-    new_comments = filter_comments(soar_common(), 123, notes_from_qradar, soar_str_to_remove="\nAdded from QRadar")
+    new_comments = filter_comments(soar_common(), 123, notes_from_qradar)
     assert new_comments == ["Hello World"]
 
     # Test that no comments are returned because all given comments are already on SOAR
     notes_from_qradar = ["test1", "admin@example.com: test2", "test4"]
-    new_comments = filter_comments(soar_common(), 123, notes_from_qradar, soar_str_to_remove="\nAdded from QRadar", qradar_header_to_remove="admin@example.com: ")
+    new_comments = filter_comments(soar_common(), 123, notes_from_qradar, qradar_header_to_remove="admin@example.com: ")
     assert new_comments == []
 
-    # Test having data after the '\nAdded from QRadar'
-    notes_from_qradar = ["test1", "test2", "test4\nsomething else"]
-    new_comments = filter_comments(soar_common(), 1, notes_from_qradar, "\nAdded from QRadar")
+    # Test having data after the ''
+    notes_from_qradar = ["test1", "test2", "admin@example.com: test4\nsomething else"]
+    new_comments = filter_comments(soar_common(), 1, notes_from_qradar, qradar_header_to_remove="admin@example.com: ")
     assert new_comments == []
 
 class soar_common():
@@ -60,6 +60,6 @@ class soar_common():
     def get_case_comments(self, soar_id: str):
         """ Mock get case comments return """
         if soar_id == "1":
-            return [{"text": "test1\nAdded from QRadar"}, {"text": "test2"}, {"text": "test3\nAdded from QRadar"}, {"text": "test4\nAdded from QRadar\nsomething else"}]
+            return [{"text": "test1"}, {"text": "test2"}, {"text": "test3"}, {"text": "test4\nsomething else"}]
         else:
-            return [{"text": "test1\nAdded from QRadar"}, {"text": "test2"}, {"text": "test3\nAdded from QRadar"}, {"text": "test4"}]
+            return [{"text": "test1"}, {"text": "test2"}, {"text": "test3"}, {"text": "test4"}]
