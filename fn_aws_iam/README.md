@@ -48,7 +48,7 @@
 **Amazon AWS IAM Integration for Resilient**
 
 Amazon Web Services Identity and Access Management (AWS IAM) allows management of access to AWS services and resources securely. You can use IAM to create and manage AWS users and groups, and use permissions to allow or deny access to AWS resources. 
-The AWS IAM integration with the Resilient platform allows you to query and update users or access keys for an AWS account.
+The AWS IAM integration with the SOAR platform allows you to query and update users or access keys for an AWS account.
 
 You can execute the following types of queries:
 * Get a list of users and associated items (login profile, access keys, groups, policies).
@@ -92,7 +92,7 @@ The integration contains the following functions:
   *  `resilient_circuits>=35.0.0`
   *  `resilient_lib>=35.0.0`
  
-  * The minimum set of Resilient API permissions for this integration if using an API key account:
+  * The minimum set of SOAR API permissions for this integration if using an API key account:
     * Edit Org Data
     * Incidents.Edit.Fields
     * Functions.Read
@@ -176,7 +176,7 @@ aws_iam_secret_access_key=<AWS_IAM_SECRET_ACCESS_KEY>
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* To use the functions, the Resilient playbook designer should create a new Incident tab containing the data tables. Drag the AWS IAM data tables on to the layout and click Save as shown in the screenshot below:
+* To use the functions, the SOAR playbook designer should create a new Incident tab containing the data tables. Drag the AWS IAM data tables on to the layout and click Save as shown in the screenshot below:
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 ---
