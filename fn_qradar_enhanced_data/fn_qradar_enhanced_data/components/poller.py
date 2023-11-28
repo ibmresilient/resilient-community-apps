@@ -270,6 +270,13 @@ class PollerComponent(ResilientComponent):
             # If timezone_offset configured in individual server settings
             last_poller_time = self.set_time_offset(options.get("timezone_offset"))
 
+        # Get QRadar Note header
+        qradar_header = None
+        if self.soar_common.rest_client.use_api_key:
+            qradar_header = f"{self.soar_common.rest_client.api_key_id}: "
+        else:
+            qradar_header = f'{self.soar_common.rest_client.authdata.get("email", None)}: '
+
         if get_sync_notes(self.global_settings, options):
             # Get notes from all QRadar offenses in filter
             offenses_notes = qradar_client.graphql_query({"filter": filter_notes}, GRAPHQL_POLLERQUERY).get("content")
@@ -282,7 +289,7 @@ class PollerComponent(ResilientComponent):
                     incident_id = case_server_dict.get(server, {}).get(notes.get('id'), {}).get('id') # ID of the SOAR incident
                     qradar_notes = [note.get("noteText").replace("\r", "") for note in notes.get("notes") if int(note.get("createTime")) > poller_time\
                         and AUTO_ESCALATION_NOTE not in note.get("noteText") and MANUAL_ESCALATION not in note.get("noteText")]
-                    notes_to_add = filter_comments(self.soar_common, incident_id, qradar_notes, soar_str_to_remove="\nAdded from QRadar")
+                    notes_to_add = filter_comments(self.soar_common, incident_id, qradar_notes, qradar_header_to_remove=qradar_header)
                     if notes_to_add:
                         for note in notes_to_add:
-                            self.soar_common.create_case_comment(incident_id, f"{note}\nAdded from QRadar")
+                            self.soar_common.create_case_comment(incident_id, f"{note}")
