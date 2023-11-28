@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-aws-iam Functions for IBM Resilient
+# fn-aws-iam Functions for IBM SOAR
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -87,7 +87,7 @@ The integration contains the following functions:
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v35.0.5468`
+* SOAR platform >= `v48.2.16`
 * An Integration Server running:
   *  `resilient_circuits>=35.0.0`
   *  `resilient_lib>=35.0.0`
@@ -145,7 +145,7 @@ aws_iam_secret_access_key=<AWS_IAM_SECRET_ACCESS_KEY>
   ```
   $ resilient-circuits config -u
   ```
-* Import the fn_aws_iam **customizations** into the Resilient platform:
+* Import the fn_aws_iam **customizations** into the SOAR platform:
   ```
   $ resilient-circuits customize -y -l fn-aws-iam
   ```
