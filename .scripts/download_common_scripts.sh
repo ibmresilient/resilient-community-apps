@@ -40,5 +40,5 @@ wget --header 'Authorization: token '$GITHUB_AUTH_TOKEN \
     -O $PATH_DOWNLOAD_SCRIPT_SAVE_LOC \
     $PATH_COMMON_SCRIPTS_REPO
 
-python $PATH_DOWNLOAD_SCRIPT_SAVE_LOC "Resilient/hydra-common-scripts" "common" $PATH_COMMON_SCIPTS_SAVE_LOC -b story/SOARAPPS-7346/build/custom_base_image
-python $PATH_DOWNLOAD_SCRIPT_SAVE_LOC "Resilient/hydra-common-scripts" "common-app-build-scripts" $PATH_SCRIPTS_DIR -b story/SOARAPPS-7346/build/custom_base_image
+python $PATH_DOWNLOAD_SCRIPT_SAVE_LOC "Resilient/hydra-common-scripts" "common" $PATH_COMMON_SCIPTS_SAVE_LOC
+python $PATH_DOWNLOAD_SCRIPT_SAVE_LOC "Resilient/hydra-common-scripts" "common-app-build-scripts" $PATH_SCRIPTS_DIR
