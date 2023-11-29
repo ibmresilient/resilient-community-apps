@@ -376,72 +376,72 @@ Search MISP event attributes for a given match on an artifact
 
 ```python
 results = {
-            "success": true,
-            "content": [
-                {
-                  "Event": {
-                    "id": "66",
-                    "orgc_id": "1",
-                    "org_id": "1",
-                    "date": "2020-09-25",
-                    "threat_level_id": "1",
-                    "info": "Example Event",
-                    "published": false,
-                    "uuid": "17538fd2-54da-4280-bd98-25ba6723ea92",
-                    "attribute_count": "1",
-                    "analysis": "1",
-                    "timestamp": "1601062027",
-                    "distribution": "1",
-                    "proposal_email_lock": false,
-                    "locked": false,
-                    "publish_timestamp": "0",
-                    "sharing_group_id": "0",
-                    "disable_correlation": false,
-                    "extends_uuid": "",
-                    "event_creator_email": "admin@admin.test",
-                    "Org": {
-                      "id": "1",
-                      "name": "ORGNAME",
-                      "uuid": "00e8cf4b-ba62-4edb-a990-90049cd53df2",
-                      "local": true
-                    },
-                    "Orgc": {
-                      "id": "1",
-                      "name": "ORGNAME",
-                      "uuid": "00e8cf4b-ba62-4edb-a990-90049cd53df2",
-                      "local": true
-                    },
-                    "Attribute": [
-                      {
-                        "id": "6",
-                        "type": "text",
-                        "category": "Other",
-                        "to_ids": false,
-                        "uuid": "b4e6230a-98a2-4935-9706-f5ebc6a1b628",
-                        "event_id": "66",
-                        "distribution": "5",
-                        "timestamp": "1601062027",
-                        "comment": "",
-                        "sharing_group_id": "0",
-                        "deleted": false,
-                        "disable_correlation": false,
-                        "object_id": "0",
-                        "object_relation": null,
-                        "first_seen": null,
-                        "last_seen": null,
-                        "value": "example attribute",
-                        "Galaxy": [],
-                        "ShadowAttribute": []
-                      }
-                    ],
-                    "ShadowAttribute": [],
-                    "RelatedEvent": [],
-                    "Galaxy": [],
-                    "Object": []
-                  }
-                }
-              ],
-              "tags": []
+  "success": true,
+  "content": [
+    {
+      "Event": {
+        "id": "66",
+        "orgc_id": "1",
+        "org_id": "1",
+        "date": "2020-09-25",
+        "threat_level_id": "1",
+        "info": "Example Event",
+        "published": false,
+        "uuid": "17538fd2-54da-4280-bd98-25ba6723ea92",
+        "attribute_count": "1",
+        "analysis": "1",
+        "timestamp": "1601062027",
+        "distribution": "1",
+        "proposal_email_lock": false,
+        "locked": false,
+        "publish_timestamp": "0",
+        "sharing_group_id": "0",
+        "disable_correlation": false,
+        "extends_uuid": "",
+        "event_creator_email": "admin@admin.test",
+        "Org": {
+          "id": "1",
+          "name": "ORGNAME",
+          "uuid": "00e8cf4b-ba62-4edb-a990-90049cd53df2",
+          "local": true
+        },
+        "Orgc": {
+          "id": "1",
+          "name": "ORGNAME",
+          "uuid": "00e8cf4b-ba62-4edb-a990-90049cd53df2",
+          "local": true
+        },
+        "Attribute": [
+          {
+            "id": "6",
+            "type": "text",
+            "category": "Other",
+            "to_ids": false,
+            "uuid": "b4e6230a-98a2-4935-9706-f5ebc6a1b628",
+            "event_id": "66",
+            "distribution": "5",
+            "timestamp": "1601062027",
+            "comment": "",
+            "sharing_group_id": "0",
+            "deleted": false,
+            "disable_correlation": false,
+            "object_id": "0",
+            "object_relation": null,
+            "first_seen": null,
+            "last_seen": null,
+            "value": "example attribute",
+            "Galaxy": [],
+            "ShadowAttribute": []
+          }
+        ],
+        "ShadowAttribute": [],
+        "RelatedEvent": [],
+        "Galaxy": [],
+        "Object": []
+      }
+    }
+  ],
+  "tags": []
 }
 ```
 

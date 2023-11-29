@@ -33,7 +33,6 @@ class FunctionComponent(ResilientComponent):
     def _misp_create_attribute_function(self, event, *args, **kwargs):
         """Function: Create attribute in MISP"""
         try:
-
             API_KEY, URL, VERIFY_CERT = common.validate(self.options)
 
             # Get the function parameters:
@@ -43,7 +42,7 @@ class FunctionComponent(ResilientComponent):
 
             # ensure misp_event_id is an integer so we can get an event by it's index
             if not isinstance(misp_event_id, int):
-                raise IntegrationError(u"Unexpected input type for MISP Event ID. Expected and integer, received {}".format(type(misp_event_id)))
+                raise IntegrationError("Unexpected input type for MISP Event ID. Expected and integer, received {}".format(type(misp_event_id)))
 
             log = logging.getLogger(__name__)
             log.info("misp_event_id: %s", misp_event_id)
