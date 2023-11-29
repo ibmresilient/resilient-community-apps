@@ -2,67 +2,54 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
 import sys
 if sys.version_info.major < 3:
     from fn_misp.lib import misp_2_helper as misp_helper
 else:
     from fn_misp.lib import misp_3_helper as misp_helper
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_misp.lib import common
+from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
+from resilient_lib import validate_fields
 
+PACKAGE_NAME = "fn_misp"
+FN_NAME = "misp_create_event"
 
-PACKAGE= "fn_misp"
-
-class FunctionComponent(ResilientComponent):
+class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function(s)"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.opts = opts
-        self.options = opts.get(PACKAGE, {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        validate_fields([
+            {"name": "misp_key", "placeholder": "http://localhost"},
+            {"name": "misp_url", "placeholder": "<your key>"},
+            {"name": "verify_cert"}
+        ], self.options)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get(PACKAGE, {})
-
-    @function("misp_create_event")
-    def _misp_create_event_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: create a MISP event from an incident """
-        try:
+        # Get the function parameters:
+        misp_event_name = getattr(fn_inputs, "misp_event_name")  # text
+        misp_distribution = getattr(fn_inputs, "misp_distribution")  # number
+        misp_analysis_level = getattr(fn_inputs, "misp_analysis_level")  # number
+        misp_threat_level = getattr(fn_inputs, "misp_threat_level")  # number
 
-            API_KEY, URL, VERIFY_CERT = common.validate(self.options)
+        self.LOG.info("misp_event_name: %s", misp_event_name)
+        self.LOG.info("misp_distribution: %s", misp_distribution)
+        self.LOG.info("misp_analysis_level: %s", misp_analysis_level)
+        self.LOG.info("misp_threat_level: %s", misp_threat_level)
 
-            # Get the function parameters:
-            misp_event_name = kwargs.get("misp_event_name")  # text
-            misp_distribution = kwargs.get("misp_distribution")  # number
-            misp_analysis_level = kwargs.get("misp_analysis_level")  # number
-            misp_threat_level = kwargs.get("misp_threat_level")  # number
+        yield self.status_message("Setting up connection to MISP")
 
-            log = logging.getLogger(__name__)
-            log.info("misp_event_name: %s", misp_event_name)
-            log.info("misp_distribution: %s", misp_distribution)
-            log.info("misp_analysis_level: %s", misp_analysis_level)
-            log.info("misp_threat_level: %s", misp_threat_level)
+        misp_client = misp_helper.get_misp_client(self.options.get("misp_url"), self.options.get("misp_key"), self.rc.get_verify(), proxies=self.rc.get_proxies())
 
-            yield StatusMessage("Setting up connection to MISP")
+        yield self.status_message(f"Creating event {misp_event_name}")
 
-            proxies = common.get_proxies(self.opts, self.options)
+        events = misp_helper.create_misp_event(misp_client, misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name)
 
-            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
+        self.LOG.debug(events)
 
-            yield StatusMessage(u"Creating event {}".format(misp_event_name))
+        yield self.status_message("Event has been created")
 
-            events = misp_helper.create_misp_event(misp_client, misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name)
+        # Produce a FunctionResult with the results
+        yield FunctionResult(events)
 
-            log.debug(events)
-
-            yield StatusMessage("Event has been created")
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(events)
-        except Exception:
-            yield FunctionError()

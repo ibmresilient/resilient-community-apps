@@ -82,7 +82,7 @@ def customization_data(client=None):
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
     if not os.path.isfile(res_file):
-        raise FileNotFoundError("{} not found".format(RES_FILE))
+        raise FileNotFoundError(f"{RES_FILE} not found")
 
     with io.open(res_file, mode='rt') as f:
         b64_data = base64.b64encode(f.read().encode('utf-8'))

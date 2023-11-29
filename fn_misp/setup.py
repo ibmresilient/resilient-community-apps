@@ -38,8 +38,7 @@ setup(
                      "Sample rules and workflows are provided. "
                      "Custom attribute types can be mapped from the workflow pre-processing script of the function. "
                      "See the sample workflows for sample payloads returned.",
-    install_requires=['resilient_circuits>=32.0',
-                      'resilient_lib>=32.0',
+    install_requires=['resilient_circuits>=48.0',
                       'pymisp>=2.4; python_version>="3"',
                       'pymisp==2.4.119.1; python_version<"3"'
                       ],
@@ -52,7 +51,7 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "{}FunctionComponent = fn_misp.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_misp/components/[a-zA-Z]*.py")
+            f"{snake_to_camel(get_module_name(filename))}FunctionComponent = fn_misp.components.{get_module_name(filename)}:FunctionComponent" for filename in glob.glob("./fn_misp/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_misp.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_misp.util.customize:customization_data"],

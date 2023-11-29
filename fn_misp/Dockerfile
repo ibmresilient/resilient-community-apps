@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/python-39:latest
 #FROM resilient/rc-data-feeder-base
 
 ARG APPLICATION=fn_misp
-ARG RES_CIRCUITS_VERSION=37.0
+ARG RES_CIRCUITS_VERSION=48.0
 
 # Environment variable for any app to check if running in a container
 ARG APP_HOST_CONTAINER=1

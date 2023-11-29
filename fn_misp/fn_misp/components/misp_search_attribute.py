@@ -2,71 +2,51 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
 import sys
 if sys.version_info.major < 3:
     from fn_misp.lib import misp_2_helper as misp_helper
 else:
     from fn_misp.lib import misp_3_helper as misp_helper
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_misp.lib import common
+from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
 
+PACKAGE_NAME = "fn_misp"
+FN_NAME = "misp_search_attribute"
 
-PACKAGE= "fn_misp"
-
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function(s)"""
+class FunctionComponent(AppFunctionComponent):
+    """Component that implements SOAR function(s)"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.opts = opts
-        self.options = opts.get(PACKAGE, {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get(PACKAGE, {})
-
-    @function("misp_search_attribute")
-    def _misp_search_attribute_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: Search to see if an attribute exists for a given artifact value"""
-        try:
+        # Get the function parameters:
+        search_attribute = getattr(fn_inputs, "misp_attribute_value")  # text
 
-            API_KEY, URL, VERIFY_CERT = common.validate(self.options)
+        self.LOG.info("search_attribute: %s", search_attribute)
 
-            # Get the function parameters:
-            search_attribute = kwargs.get("misp_attribute_value")  # text
+        yield self.status_message("Setting up connection to MISP")
 
-            log = logging.getLogger(__name__)
-            log.info("search_attribute: %s", search_attribute)
+        misp_client = misp_helper.get_misp_client(self.options.get("misp_url"), self.options.get("misp_key"), self.rc.get_verify(), proxies=self.rc.get_proxies())
 
-            yield StatusMessage("Setting up connection to MISP")
+        yield self.status_message(f"Searching for attribute - {search_attribute}")
 
-            proxies = common.get_proxies(self.opts, self.options)
+        results = {}
 
-            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
+        search_results = misp_helper.search_misp_attribute(misp_client, search_attribute)
 
-            yield StatusMessage(u"Searching for attribute - {}".format(search_attribute))
+        self.LOG.debug(search_results)
 
-            results = {}
+        if search_results['search_status']:
+            results['success'] = True
+            results['content'] = search_results['search_results']
+            misp_tags = misp_helper.get_misp_attribute_tags(misp_client, search_results['search_results'])
+            results['tags'] = misp_tags
+        else:
+            results['success'] = False
 
-            search_results = misp_helper.search_misp_attribute(misp_client, search_attribute)
+        yield self.status_message("Attribute search complete.")
 
-            log.debug(search_results)
-
-            if search_results['search_status']:
-                results['success'] = True
-                results['content'] = search_results['search_results']
-                misp_tags = misp_helper.get_misp_attribute_tags(misp_client, search_results['search_results'])
-                results['tags'] = misp_tags
-            else:
-                results['success'] = False
-
-            yield StatusMessage("Attribute search complete.")
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        # Produce a FunctionResult with the results
+        yield FunctionResult(results)

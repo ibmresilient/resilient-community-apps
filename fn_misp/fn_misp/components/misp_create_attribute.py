@@ -2,68 +2,50 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import logging
 import sys
 if sys.version_info.major < 3:
     from fn_misp.lib import misp_2_helper as misp_helper
 else:
     from fn_misp.lib import misp_3_helper as misp_helper
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_misp.lib import common
 from resilient_lib import IntegrationError
+from resilient_circuits import AppFunctionComponent, FunctionResult, app_function
 
-PACKAGE= "fn_misp"
+PACKAGE_NAME = "fn_misp"
+FN_NAME = "misp_create_attribute"
 
-class FunctionComponent(ResilientComponent):
+class FunctionComponent(AppFunctionComponent):
     """Component that implements SOAR function(s)"""
 
     def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.opts = opts
-        self.options = opts.get(PACKAGE, {})
+        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get(PACKAGE, {})
-
-    @function("misp_create_attribute")
-    def _misp_create_attribute_function(self, event, *args, **kwargs):
+    @app_function(FN_NAME)
+    def _app_function(self, fn_inputs):
         """Function: Create attribute in MISP"""
-        try:
-            API_KEY, URL, VERIFY_CERT = common.validate(self.options)
+        # Get the function parameters:
+        misp_event_id = getattr(fn_inputs, "misp_event_id")  # number
+        misp_attribute_value = getattr(fn_inputs, "misp_attribute_value")  # text
+        misp_attribute_type = getattr(fn_inputs, "misp_attribute_type")  # text
 
-            # Get the function parameters:
-            misp_event_id = kwargs.get("misp_event_id")  # number
-            misp_attribute_value = kwargs.get("misp_attribute_value")  # text
-            misp_attribute_type = kwargs.get("misp_attribute_type")  # text
+        # ensure misp_event_id is an integer so we can get an event by it's index
+        if not isinstance(misp_event_id, int):
+            raise IntegrationError(f"Unexpected input type for MISP Event ID. Expected and integer, received {type(misp_event_id)}")
 
-            # ensure misp_event_id is an integer so we can get an event by it's index
-            if not isinstance(misp_event_id, int):
-                raise IntegrationError("Unexpected input type for MISP Event ID. Expected and integer, received {}".format(type(misp_event_id)))
+        self.LOG.info("misp_event_id: %s", misp_event_id)
+        self.LOG.info("misp_attribute_value: %s", misp_attribute_value)
+        self.LOG.info("misp_attribute_type: %s", misp_attribute_type)
 
-            log = logging.getLogger(__name__)
-            log.info("misp_event_id: %s", misp_event_id)
-            log.info("misp_attribute_value: %s", misp_attribute_value)
-            log.info("misp_attribute_type: %s", misp_attribute_type)
+        yield self.status_message("Setting up connection to MISP")
 
-            yield StatusMessage("Setting up connection to MISP")
+        misp_client = misp_helper.get_misp_client(self.options.get("misp_url"), self.options.get("misp_key"), self.rc.get_verify(), proxies=self.rc.get_proxies())
 
-            proxies = common.get_proxies(self.opts, self.options)
+        yield self.status_message(f"Creating new misp attribute {misp_attribute_type} {misp_attribute_value}")
 
-            misp_client = misp_helper.get_misp_client(URL, API_KEY, VERIFY_CERT, proxies=proxies)
+        attribute = misp_helper.create_misp_attribute(misp_client, misp_event_id, misp_attribute_type, misp_attribute_value)
 
-            yield StatusMessage(u"Creating new misp attribute {} {}".format(misp_attribute_type, misp_attribute_value))
+        self.LOG.debug(attribute)
 
-            attribute = misp_helper.create_misp_attribute(misp_client, misp_event_id, misp_attribute_type, misp_attribute_value)
+        yield self.status_message("Attribute has been created")
 
-            log.debug(attribute)
-
-            yield StatusMessage("Attribute has been created")
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(attribute)
-        except Exception:
-            yield FunctionError()
+        # Produce a FunctionResult with the results
+        yield FunctionResult(attribute)
