@@ -230,7 +230,7 @@ class FeedComponent(ResilientComponent):
                                               int(opts.get("resilient", {}).get("num_workers", 0)),
                                               self.feed_outputs,
                                               self.workspaces,
-                                              parallel_execution=self.options.get("parallel_execution", False))
+                                              parallel_execution=str_to_bool(self.options.get("parallel_execution", 'false')))
 
                 # expose attachment content setting
                 self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
