@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
 
 """Feed component implementation."""
@@ -29,21 +29,36 @@ class PluginPool():
     """This class allows for separate, long running threads to perform the plugin logic.
         It frees up the application threads to service other message queue actions
     """
-    def __init__(self, rest_client_helper, num_workers, feed_outputs, workspaces):
+    def __init__(self,
+                 rest_client_helper,
+                 num_workers,
+                 feed_outputs,
+                 workspaces,
+                 parallel_execution=False):
         self.rest_client_helper = rest_client_helper
         self.num_workers = num_workers if num_workers else DEF_NUM_WORKERS
         self.feed_outputs = feed_outputs
         self.workspaces = workspaces
+        self.parallel_execution = parallel_execution
 
-        # increase the number of threads for handling event messages
-        thread_pool_size = int(self.num_workers*POOL_RATIO) # could be +/- num_workers
-        LOG.info(f"ThreadPool size: {thread_pool_size}")
-        self.pool = multiprocessing.pool.ThreadPool(thread_pool_size)
+        if self.parallel_execution:
+            # increase the number of threads for handling event messages
+            thread_pool_size = int(self.num_workers*POOL_RATIO) # could be +/- num_workers
+            LOG.info(f"ThreadPool size: {thread_pool_size}")
+            self.pool = multiprocessing.pool.ThreadPool(thread_pool_size)
+        else:
+            LOG.info("ThreadPool disabled")
 
     def run_plugin(self, task, args):
-        _async_result = self.pool.apply_async(task, args=args)
-        # run without pooling until sqlendtran can be worked out
-        #task(*args)
+        # support both parallel execution and serial
+        if self.parallel_execution:
+            _async_result = self.pool.apply_async(task, args=args)
+        else:
+            task(*args)
+
+    def _is_workspace_valid(self, workspace, feed_name):
+        result = not self.workspaces or (feed_name in self.workspaces.get(workspace, []))
+        return result
 
     def async_send_data(self, type_name, workspace, context, payload):
         """handler for asynchronously sending data to a plugin
@@ -61,7 +76,7 @@ class PluginPool():
         for feed_name, feed_output in self.feed_outputs.items():
             # don't let a failure in one feed break all the rest
             try:
-                if not self.workspaces or (workspace in self.workspaces and feed_name in self.workspaces[workspace]):
+                if self._is_workspace_valid(workspace, feed_name):
                     LOG.debug("Calling feed %s for workspace: %s", feed_output.__class__.__name__, workspace)
                     self.run_plugin(feed_output.send_data, args=(context, payload))
                     item_sent = True
@@ -214,7 +229,8 @@ class FeedComponent(ResilientComponent):
                 self.plugin_pool = PluginPool(self.rest_client_helper,
                                               int(opts.get("resilient", {}).get("num_workers", 0)),
                                               self.feed_outputs,
-                                              self.workspaces)
+                                              self.workspaces,
+                                              parallel_execution=self.options.get("parallel_execution", False))
 
                 # expose attachment content setting
                 self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
@@ -505,13 +521,13 @@ class Reload(object):
             self._process_task_notes(item.get('notes', []), task_note_type_info, inc_id)
 
         return len(item_list)
-    
+
     def _process_task_notes(self, notes_list, task_note_type_info, inc_id):
-            # go through all the task notes
-            for note in notes_list:
-                self.plugin_pool.send_data(task_note_type_info, inc_id, note, False, self.incl_attachment_data)
-                # children notes?
-                self._process_task_notes(note.get('children', []), task_note_type_info, inc_id)
+        # go through all the task notes
+        for note in notes_list:
+            self.plugin_pool.send_data(task_note_type_info, inc_id, note, False, self.incl_attachment_data)
+            # children notes?
+            self._process_task_notes(note.get('children', []), task_note_type_info, inc_id)
 
     def _query_task_note(self, inc_id, task_id, type_info):
         query = "/tasks/{}/comments".format(task_id)
@@ -534,7 +550,7 @@ class Reload(object):
         for _, table in item_list.items():
             datatable_id = table['id']
             # only sync datatables expressed in app.config
-            if datatable_id in self.datatable_search_type_names.keys():
+            if datatable_id in self.datatable_search_type_names:
                 # We need the ID of the table, not the ID for the generic "datatable" type.
                 type_info = self.type_info_index[datatable_id]
 
