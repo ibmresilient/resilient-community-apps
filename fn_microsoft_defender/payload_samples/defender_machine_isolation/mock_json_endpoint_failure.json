@@ -1,0 +1,7 @@
+{
+    "error": {
+        "code": "ResourceNotFound",
+        "message": "Machine 12345 was not found.",
+        "target": "baf4230c-b78d-466a-ae4d-126e740683a2"
+    }
+}
