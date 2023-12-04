@@ -1,0 +1,23 @@
+{
+    "type": "artifact",
+    "id": 28,
+    "uuid": "f9821dc2-05c4-4ce6-a2f6-6a3379b7d1e1",
+    "name": "ibmLog.svg",
+    "content_type": "image/svg+xml",
+    "created": 1701693786896,
+    "creator_id": 1,
+    "size": 4121,
+    "actions": [],
+    "playbooks": [],
+    "task_id": null,
+    "task_name": null,
+    "task_custom": null,
+    "task_members": null,
+    "task_at_id": null,
+    "reconciliation_status": "matched",
+    "vers": 3,
+    "inc_id": 2096,
+    "inc_name": "empty fries",
+    "inc_owner": 1,
+    "attachment_id": 475
+  }

@@ -22,6 +22,7 @@
     - [1. RETRY TRIES (rest\_retry\_tries)](#1-retry-tries-rest_retry_tries)
     - [2. RETRY DELAY (rest\_retry\_delay)](#2-retry-delay-rest_retry_delay)
     - [3. RETRY BACKOFF (rest\_retry\_backoff)](#3-retry-backoff-rest_retry_backoff)
+  - [Attachments](#attachments)
   - [Authentication](#authentication)
     - [OAuth 2.0](#oauth-20)
       - [Method 1: Using CODE:](#method-1-using-code)
@@ -46,7 +47,7 @@
 | ------- | ---- | ----- |
 | 1.0.0 | 05/2023 | Initial Release |
 | 1.1.0 | 06/2023 | Added support for OAuth, Client Side Authentication using certificates, JWT |
-| 1.2.0 | 11/2023 | Added support for Retry mechanism, query parameters and json formatted body for content-type/json (case-insensitive) |
+| 1.2.0 | 11/2023 | Added support for Retry mechanism, attachments, query parameters and json formatted body for content-type/json (case-insensitive) |
 
 ---
 
@@ -294,6 +295,23 @@ Note: These parameters have default values which are assumed when they are not a
 
 You can find more information on this in the link: [retry2/retry_call](https://github.com/eSAMTrade/retry#retry_call )
 
+## Attachments
+
+Incident attachments and artifacts (that contain attachments) can be bundled and sent with a REST request.
+
+The application sends the attachment as ``Content-Type: multipart/form-data``, meaning that the body of the
+request is a series of parts, each of which contains files that are base64 encoded. The body of the request is
+divided into multiple parts, and each part is separated by a boundary defined that is auto-defined by the app.
+Each part typically contains a `Content-Disposition` header that describes the `name` and `type` of the data,
+along with the actual data itself. While the `type` is automatically assigned by the application, the `name`
+is supposed to be provided by the user in the below field.
+
+    Each part in multipart/form-data is expected to contain a content-disposition header where the disposition type
+    is automatically set by the application, and a disposition name. This disposition name changes with regard to
+    the endpoint that is being used and is to be set by the user. 
+    
+    Default value : `file`
+
 ---
 
 
@@ -470,6 +488,9 @@ Note:   The client authentication certificate and private key are commonly given
 | `rest_retry_delay` | `number` | No | `2` | Initial delay in seconds between attempts. Default: 0 |
 | `rest_retry_backoff` | `number` | No | `2` | Multiplier applied to delay in seconds between attempts. Default: 1 (no backoff) |
 | `oauth_token_url` | `text` | No | `https://www.example.com/oauth/token` | URL for the Authorization server endpoint |
+| `incident_id` | `number` | No | `2095` | ID of the incident in which the artifact or attachment is present |
+| `artifact_id` | `number` | No | `12` | Used to identify the attachment that is to be sent with the REST request |
+| `attachment_id` | `number` | No | `12` | Used to identify the artifact **with attachment** that is to be sent with the REST request |
 | `oauth_client_id` | `text` | No | `-` | Identifies the client application |
 | `oauth_client_secret` | `text` | No | `-` | Authenticates the client application (required for certain grant types) |
 | `oauth_redirect_uri` | `text` | No | `https://www.example.com/redirect` | The redirect URI used during the authorization flow (for authorization code grant) |
@@ -581,15 +602,24 @@ results = {
 # It also supports various authentication methods, including basic authentication, OAuth, API keys, and client side 
 # authentication.
 
-method  = ""
+import json
+from base64 import b64encode
 
-url     = ""
+KEY_ID = "26d6dc0a-f920-4abe-8f06-a815b9ca1416"
+KEY_SECRET = "InPrh4XMzlbOk_4HlqY53xtGgTWy_UsMv7QRAT7Hiys"
 
-verify  = True
+api_token_basic = b64encode(f"{KEY_ID}:{KEY_SECRET}".encode('utf-8')).decode('utf-8')
+
+
+method  = "POST"
+
+url     = "https://bedsides1.fyre.ibm.com/rest/orgs/201/incidents/2096/attachments"
+
+verify  = False
 
 params  = None
 
-header  = None
+header  = json.dumps({"Authorization" : f"basic {api_token_basic}"})
 
 body    = None
 
@@ -615,7 +645,7 @@ inputs.rest_api_url     = url
 inputs.rest_api_verify  = verify if verify not in [None, ''] else True
 
 # REST methods: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS" and "PATCH". Defaults to GET method
-inputs.rest_api_method  = method if method and method in SUPPORTED_REST_METHODS else REST_METHODS[0] 
+inputs.rest_api_method  = method if method and method in REST_METHODS else REST_METHODS[0] 
 
 # Time in seconds to wait before timing-out request. Default: 60 seconds.
 inputs.rest_api_timeout = timeout if timeout else None
@@ -648,7 +678,6 @@ inputs.rest_api_query_parameters = params
 
 # Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default
 inputs.rest_api_allowed_status_codes = allowed_status_code if allowed_status_code else None
-
 
 #                                                       =======
 #                                                        RETRY
@@ -698,6 +727,38 @@ inputs.rest_retry_delay   = retry_delay
  # Multiplier applied to delay between attempts. Default: 1 (no backoff)
 inputs.rest_retry_backoff = retry_backoff
 
+
+#                                                    ================
+#                                                       Attachment   
+#                                                    ================
+
+# Incident attachments and artifacts (that contain attachments) can be bundled and sent with a REST request.
+
+# Note: An attachment can only be retrieved from a single incident
+
+# The application sends the attachment as ``Content-Type: multipart/form-data``, meaning that the body of the
+# request is a series of parts, each of which contains files that are base64 encoded. The body of the request is
+# divided into multiple parts, and each part is separated by a boundary defined that is auto-defined by the app.
+# Each part typically contains a `Content-Disposition` header that describes the `name` and `type` of the data,
+# along with the actual data itself. While the `type` is automatically assigned by the application, the `name`
+# is supposed to be provided by the user in the below field.
+
+# Each part in multipart/form-data is expected to contain a content-disposition header where the disposition type
+# is automatically set by the application, and a disposition name. This disposition name changes with regard to
+# the endpoint that is being used and is to be set by the user. Default value : "file"
+
+inputs.attachment_form_field_name = None
+
+# ID of the incident in which the artifact or attachment is present. dtype : int
+inputs.incident_id   = incident.id
+
+# Used to identify the attachment that is to be sent with the REST request. dtype : int
+inputs.attachment_id = None
+
+# Used to identify the artifact **with attachment** that is to be sent with the REST request. dtype : int
+inputs.artifact_id   = None
+
+
 #                                                       =========
 #                                                        SECRETS
 #                                                       =========
@@ -723,9 +784,10 @@ inputs.rest_retry_backoff = retry_backoff
 #        "X-Frooble"     : "Baz",
 #        "Authorization" : "bearer ${API_TOKEN}"
 #      })
+#
 
 #                                                  ====================                                                  
-#                                                   DICT / JSON FORMAT                                                   
+#                                                   DICT / JSON FORMAT                                                      
 #                                                  ====================                                                  
 
 # Function inputs can only accept values that are either strings, numbers, or 
@@ -738,10 +800,11 @@ inputs.rest_retry_backoff = retry_backoff
 #     ----------------
 #       - inputs.rest_api_headers
 #       - inputs.rest_api_cookies
-#       - inputs.rest_api_body
+#       - inputs.rest_api_body 
 #       - inputs.rest_api_query_parameters
 #       - inputs.jwt_headers
 #       - inputs.jwt_payload
+#
 
 # 1. JSON format:
 #    ------------
@@ -751,7 +814,7 @@ inputs.rest_retry_backoff = retry_backoff
 #
 #    Example:
 #    --------
-#      inputs.rest_api_body = """
+#      inputs.rest_api_body  = """
 #      "name" : "user1",
 #      "password" : "p@ssword1",
 #      "role" : "admin",
@@ -762,14 +825,14 @@ inputs.rest_retry_backoff = retry_backoff
 #    -----
 #
 #    An easier way to feed inputs to the above mentioned fields would be using
-#    python dictionaries. While the inputs don't directly support dict, the in-built
+#    python dictionaries. While the inputs don't directly support dict, the in-built 
 #    json package can be used to convert a python dict to json string.
 #
 #    Example:
 #    --------
 #      import json
-#
-#      inputs.rest_api_body = json.dumps({
+#     
+#      inputs.rest_api_body  = {
 #       "name"     : "user1",
 #       "password" : "p@ssword1",
 #       "role"     : "admin",
@@ -777,9 +840,9 @@ inputs.rest_retry_backoff = retry_backoff
 #          "site_url" : "www.example.com",
 #          "users"    : ["user1", "user2"]
 #          }
-#      })
+#      }
 #
-#     json.dumps() -> converts the dict to a json string
+#     inputs.rest_api_body = json.dumps(body) # this converts the dict to a json string
 
 
 # 2. New-line separated (Legacy)
@@ -841,22 +904,11 @@ inputs.rest_retry_backoff = retry_backoff
 # Authentication flow, as mentioned below.
 
 # Note:   The exact implementation details of OAuth2 can vary depending on the
-#         authorization server and the API you are integrating with. Make sure to consult
-#         the OAuth2 documentation specific to the service you are working with.
+#         authorization server and the API you are integrating with. Make sure
+#         to consult the OAuth2 documentation specific to the service you are
+#         working with.
 
-# Method 1: Using CODE:
-#
-#     The authorization server redirects the user back to address specified on the 
-#     redirect URI with an authorization CODE. This CODE is a temporary token
-#     that represents the user's authorization and usually can be used only once.
-#     This function exchanges the authorization code for an ACCESS_TOKEN (and 
-#     possibly also a REFRESH_TOKEN depending on the endpoint). This requires making
-#     a request to the authorization server's token endpoint, providing the 
-#     authorization CODE, client ID, client secret, token URL and redirect URI.
-#
-#     Note: These codes are generally one time use only.
-
-# Method 2: Using REFRESH_TOKEN
+# Method 1: REFRESH_TOKEN
 #
 #     It is a credential that is used to obtain a new access token from the
 #     authorization server when the original access token expires. It is an integral
@@ -866,10 +918,39 @@ inputs.rest_retry_backoff = retry_backoff
 #     the validity of the token. Client ID, Client secret, Redirect URI and token URL
 #     might also have to be provided.
 #
-#     Note: These can be used more than once. The validity of the REFRESH_TOKEN is
-#           generally extended on use, making it viable for long lived access.
+#     Note: On successfully completing a `refresh-token` flow, the existing client properties are
+#           updated with the newly fetched values. This means that this client can be used to fetch
+#           new tokens and values virtually indefinitely.
 
-# Method 3: Using ACCESS_TOKEN
+# Method 2: CLIENT-CREDENTIALS
+#
+#     Client Credentials Flow doesn't involve user authentication, and it is suitable
+#     for scenarios where the client is a confidential client, meaning it can keep it's
+#     client credentials (client ID and client secret) secure.
+#
+#     Note: If the endpoint returns a `refresh-token` on successively completing the above flow,
+#           the existing client properties are updated with the newly fetched values. This means
+#           the client goes from `Client-Credentials Flow` to `Refresh-Token flow` moving forward.
+#           This means that this client can be used to fetch new tokens and values virtually
+#           indefinitely.
+
+# Method 3: AUTHORIZATION (CODE):
+#
+#     The authorization server redirects the user back to address specified on the 
+#     redirect URI with an authorization CODE. This CODE is a temporary token
+#     that represents the user's authorization and usually can be used only once.
+#     This function exchanges the authorization code for an ACCESS_TOKEN (and 
+#     possibly also a REFRESH_TOKEN depending on the endpoint). This requires making
+#     a request to the authorization server's token endpoint, providing the 
+#     authorization CODE, client ID, client secret, token URL and redirect URI.
+#
+#     Note: If the endpoint returns a `refresh-token` on successively completing the above flow,
+#           the existing client properties are updated with the newly fetched values. This means
+#           the client goes from `Authorization Flow` to `Refresh-Token flow` moving forward.
+#           This means that this client can be used to fetch new tokens and values virtually
+#           indefinitely.
+
+# Method 4: ACCESS_TOKEN
 #
 #      If an ACCESS_TOKEN is available, it can be directly used without having to 
 #      perform authentication. In order to use the ACCESS_TOKEN, all that is required
@@ -891,7 +972,8 @@ inputs.oauth_redirect_uri  = None
 # Set of permissions granted by the resource owner (user) to the client application
 inputs.oauth_scope         = None
 
-# Provides information to the client application about the token's characteristics. Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer
+# Provides information to the client application about the token's characteristics. 
+# Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer
 inputs.oauth_token_type    = None
 
 # Resultant token of the Authentication process
@@ -902,6 +984,10 @@ inputs.oauth_code          = None
 
 # The refresh token used to obtain a new access token (for refresh token grant)
 inputs.oauth_refresh_token = None
+
+# Specifies methods through which applications can gain Access Tokens. 
+# Commonly used grant_types are : implicit, authorization_code, client_credentials, password.
+inputs.oauth_grant_type    = None
 
 
 
