@@ -173,8 +173,8 @@ class AttachmentHandler:
         """
         _id = file_metadata.get(ID)
         if object_type == ARTIFACTS:
-            _file_contents = get_file_attachment(
             LOG.info("Downloading artifact's attachment data")
+            _file_contents = get_file_attachment(
                 self.rest_client,
                 incident_id=self.incident_id,
                 artifact_id=_id)
@@ -196,7 +196,7 @@ class AttachmentHandler:
 
 
     def add_files(self, incident_id:int=None, artifact_id:int=None,
-        attachment_id:int=None, attachment_form_field_name:str=None):
+        attachment_id:int=None, attachment_form_field_name:str="file"):
 
         if incident_id:
             self.incident_id, files = incident_id, []
@@ -211,4 +211,5 @@ class AttachmentHandler:
                 _attachments_metadata = self._get_file_contents(_attachments_metadata, object_type=ATTACHMENTS)
                 files.append(self._format_files_for_request(attachment_form_field_name, _attachments_metadata))
 
-            return files
+            if files:
+                return files
