@@ -224,7 +224,8 @@ class FunctionComponent(AppFunctionComponent):
             authentication_handler.CODE          : getattr(fn_inputs, "oauth_code", None),
             authentication_handler.ACCESS_TOKEN  : getattr(fn_inputs, "oauth_access_token", None),
             authentication_handler.REFRESH_TOKEN : getattr(fn_inputs, "oauth_refresh_token", None),
-            authentication_handler.TOKEN_TYPE    : getattr(fn_inputs, "oauth_token_type", None)}
+            authentication_handler.TOKEN_TYPE    : getattr(fn_inputs, "oauth_token_type", None),
+            authentication_handler.GRANT_TYPE    : getattr(fn_inputs, "oauth_grant_type", None)}
 
         # Properties required for JWT Authentication
         jwt_properties = {
@@ -265,27 +266,27 @@ class FunctionComponent(AppFunctionComponent):
 
         # Initializing OAuth handler
         LOG.info("Initializing OAuth Client to handle Authentication")
-        oauth_client     = authentication_handler.OAuth2Authorization(self.rc, oauth_properties)
+        oauth_client = authentication_handler.OAuth2Authorization(self.rc, oauth_properties, retry_properties)
 
         # Performing OAuth authentication if Oauth parameters are provided
 
         yield self.status_message("Checking if request is OAuth ready...")
-        if oauth_client.check_oauth_ready():
+        if oauth_client.check_oauth_ready()[authentication_handler.OAUTH_SUPPORTED]:
             yield self.status_message("OAuth parameters detected, initializing authentication process..")
-            rest_properties  = authentication_handler.add_oauth_headers(oauth_client, rest_properties)
+            rest_properties  = oauth_client.add_oauth_headers(rest_properties)
             yield self.status_message("Successfully authenticated! ACCESS_TOKEN added to header")
         else:
             yield self.status_message("No Oauth parameters were detected. Skipping OAuth authentication")
 
         # Initializing JWT handler
         LOG.info("Initializing OAuth Client to handle Authentication")
-        jwt_client       = authentication_handler.JWTHandler(jwt_properties)
+        jwt_client = authentication_handler.JWTHandler(jwt_properties)
 
         # Generating jwt headers if jwt attributes are provided
         yield self.status_message("Checking if request is JWT ready...")
         if jwt_client.check_jwt_ready():
             yield self.status_message("JWT parameters detected, initiating authentication process")
-            rest_properties  = jwt_client.add_jwt_headers(rest_properties)
+            rest_properties = jwt_client.add_jwt_headers(rest_properties)
             yield self.status_message("Successfully authenticated! ACCESS_TOKEN added to header")
         else:
            yield self.status_message("No JWT parameters were detected. Skipping JWT authentication")
@@ -312,10 +313,9 @@ class FunctionComponent(AppFunctionComponent):
             # renew this by forcing the OAuth client to refresh its credentials, thereby generating new
             # headers.
             yield self.status_message(str(err))
-            if oauth_client.check_oauth_ready():
+            if oauth_client.check_oauth_ready()[authentication_handler.FLOW_REFRESH_TOKEN]:
                 LOG.info("Request seems to be OAuth ready, attempting to refresh token")
-                oauth_client.force_refresh_tokens()
-                rest_properties = authentication_handler.add_oauth_headers(oauth_client, rest_properties)
+                rest_properties = oauth_client.add_oauth_headers(rest_properties)
                 yield self.status_message("Retrying request with new header...")
                 response = make_rest_call(
                     self.opts, self.options, allowed_status_codes,
