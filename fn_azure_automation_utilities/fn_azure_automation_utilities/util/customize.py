@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v50.1.262
+# Generated with resilient-sdk v51.0.0.0.430
 
-"""Generate the Resilient customizations required for fn_azure_automation_utilities"""
+"""Generate the SOAR customizations required for fn_azure_automation_utilities"""
 
 import base64
 import os
