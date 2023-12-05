@@ -1,3 +1,63 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "Event": {
+      "id": "10",
+      "orgc_id": "1",
+      "org_id": "1",
+      "date": "2023-11-30",
+      "threat_level_id": "1",
+      "info": "Test for MISP",
+      "published": false,
+      "uuid": "8313b298-aa56-4cb4-9dca-c295e25754b9",
+      "attribute_count": "0",
+      "analysis": "2",
+      "timestamp": "1701369537",
+      "distribution": "0",
+      "proposal_email_lock": false,
+      "locked": false,
+      "publish_timestamp": "0",
+      "sharing_group_id": "0",
+      "disable_correlation": false,
+      "extends_uuid": "",
+      "protected": null,
+      "event_creator_email": "admin@admin.test",
+      "Org": {
+        "id": "1",
+        "name": "ORGNAME",
+        "uuid": "40e5d872-1571-4c7d-9d2d-9d234710c5e5",
+        "local": true
+      },
+      "Orgc": {
+        "id": "1",
+        "name": "ORGNAME",
+        "uuid": "40e5d872-1571-4c7d-9d2d-9d234710c5e5",
+        "local": true
+      },
+      "Attribute": [],
+      "ShadowAttribute": [],
+      "RelatedEvent": [],
+      "Galaxy": [],
+      "Object": [],
+      "EventReport": [],
+      "CryptographicKey": []
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "misp_distribution": 0,
+    "misp_event_name": "Test for MISP",
+    "misp_threat_level": 1,
+    "misp_analysis_level": 2
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-misp",
+    "package_version": "3.0.2",
+    "host": "Richards-MBP-2.hsd1.ma.comcast.net",
+    "execution_time_ms": 467,
+    "timestamp": "2023-11-30 13:38:57"
+  }
 }

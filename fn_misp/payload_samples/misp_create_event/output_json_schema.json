@@ -1,3 +1,177 @@
 {
-    
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "Event": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "orgc_id": {
+              "type": "string"
+            },
+            "org_id": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            },
+            "threat_level_id": {
+              "type": "string"
+            },
+            "info": {
+              "type": "string"
+            },
+            "published": {
+              "type": "boolean"
+            },
+            "uuid": {
+              "type": "string"
+            },
+            "attribute_count": {
+              "type": "string"
+            },
+            "analysis": {
+              "type": "string"
+            },
+            "timestamp": {
+              "type": "string"
+            },
+            "distribution": {
+              "type": "string"
+            },
+            "proposal_email_lock": {
+              "type": "boolean"
+            },
+            "locked": {
+              "type": "boolean"
+            },
+            "publish_timestamp": {
+              "type": "string"
+            },
+            "sharing_group_id": {
+              "type": "string"
+            },
+            "disable_correlation": {
+              "type": "boolean"
+            },
+            "extends_uuid": {
+              "type": "string"
+            },
+            "protected": {},
+            "event_creator_email": {
+              "type": "string"
+            },
+            "Org": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "local": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "Orgc": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "local": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "Attribute": {
+              "type": "array"
+            },
+            "ShadowAttribute": {
+              "type": "array"
+            },
+            "RelatedEvent": {
+              "type": "array"
+            },
+            "Galaxy": {
+              "type": "array"
+            },
+            "Object": {
+              "type": "array"
+            },
+            "EventReport": {
+              "type": "array"
+            },
+            "CryptographicKey": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "misp_distribution": {
+          "type": "integer"
+        },
+        "misp_event_name": {
+          "type": "string"
+        },
+        "misp_threat_level": {
+          "type": "integer"
+        },
+        "misp_analysis_level": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

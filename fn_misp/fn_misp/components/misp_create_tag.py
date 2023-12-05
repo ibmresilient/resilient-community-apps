@@ -8,7 +8,7 @@ if sys.version_info.major < 3:
 else:
     from fn_misp.lib import misp_3_helper as misp_helper
 from resilient_circuits import AppFunctionComponent, FunctionResult, app_function, FunctionError
-from resilient_lib import IntegrationError
+from resilient_lib import IntegrationError, str_to_bool
 
 PACKAGE_NAME = "fn_misp"
 FN_NAME = "misp_create_tag"
@@ -43,7 +43,9 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message("Setting up connection to MISP")
 
-        misp_client = misp_helper.get_misp_client(self.options.get("misp_url"), self.options.get("misp_key"), self.rc.get_verify(), proxies=self.rc.get_proxies())
+        verify = str_to_bool(self.options.get("verify_cert", "false").lower())
+
+        misp_client = misp_helper.get_misp_client(self.options.get("misp_url"), self.options.get("misp_key"), verify, proxies=self.rc.get_proxies())
 
         yield self.status_message(f"Tagging {misp_tag_type} with {misp_tag_name}")
 

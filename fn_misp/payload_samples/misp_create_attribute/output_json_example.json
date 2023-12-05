@@ -1,3 +1,43 @@
 {
-    
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "Attribute": {
+      "id": "1",
+      "event_id": "10",
+      "object_id": "0",
+      "object_relation": null,
+      "category": "Network activity",
+      "type": "ip-dst",
+      "value1": "1.1.1.1",
+      "value2": "",
+      "to_ids": true,
+      "uuid": "094aed52-7446-4053-b2b1-bfc436884f62",
+      "timestamp": "1701370145",
+      "distribution": "5",
+      "sharing_group_id": "0",
+      "comment": "",
+      "deleted": false,
+      "disable_correlation": false,
+      "first_seen": null,
+      "last_seen": null,
+      "value": "1.1.1.1"
+    },
+    "AttributeTag": []
+  },
+  "raw": null,
+  "inputs": {
+    "misp_attribute_value": "1.1.1.1",
+    "misp_attribute_type": "ip-dst",
+    "misp_event_id": 10
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-misp",
+    "package_version": "3.0.2",
+    "host": "Richards-MBP-2.hsd1.ma.comcast.net",
+    "execution_time_ms": 454,
+    "timestamp": "2023-11-30 13:49:05"
+  }
 }
