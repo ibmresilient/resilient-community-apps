@@ -378,8 +378,8 @@ matrix:
         - pip install jinja2
       script:
         - echo "Installing and running Twistlock scan on all packages"
-        # use travis_wait to allow for no output for up to 45 minutes
-        - travis_wait 45 $PATH_SCRIPTS_DIR/run_twistlock_on_all_images.sh
+        # use travis_wait to allow for no output for up to 120 minutes
+        - travis_wait 120 $PATH_SCRIPTS_DIR/run_twistlock_on_all_images.sh
 
     - stage: run package tests
       name: Python 2.7 Unit Tests - Package
