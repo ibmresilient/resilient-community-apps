@@ -8,6 +8,7 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from resilient_lib import validate_fields
 from fn_azure_automation_utilities.util.helper import get_azure_client, PACKAGE_NAME
 from ast import literal_eval
+from fn_azure_automation_utilities.lib.configure_tab import init_azureautomation_tab
 
 FN_NAME = "azure_create_account"
 
@@ -16,6 +17,8 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+        # Initialize Azure Automation tab in the SOAR UI
+        init_azureautomation_tab()
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
