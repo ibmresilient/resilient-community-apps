@@ -25,7 +25,7 @@ def snake_to_camel(word):
 setup(
     name="fn_mandiant",
     display_name="Mandiant Threat Intelligence",
-    version="1.0.0",
+    version="1.0.1",
     license="MIT",
     author="IBM SOAR",
     url="https://ibm.com/mysupport",

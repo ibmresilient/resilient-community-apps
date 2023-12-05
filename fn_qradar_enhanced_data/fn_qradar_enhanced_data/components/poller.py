@@ -26,8 +26,8 @@ def poller(named_poller_interval, named_last_poller_time, package_name):
     """
     Decorator for poller, manage poller time, calling the customized method for getting the next entities
     :param named_poller_interval: (str) Name of instance variable containing the poller interval in seconds
-    :param named_last_poller_time: (datetime) Name of instance variable containing the lookback value in mseconds
-    :param package_name: (str) Name of package for loggging
+    :param named_last_poller_time: (datetime) Name of instance variable containing the lookback value in seconds
+    :param package_name: (str) Name of package for logging
     """
     def poller_wrapper(func):
         # Decorator for running a function forever, passing the ms timestamp of
@@ -139,7 +139,7 @@ class PollerComponent(ResilientComponent):
     @poller('polling_interval', 'last_poller_time', PACKAGE_NAME)
     def run(self, last_poller_time=None):
         """
-        Process to query for changes in datasource entities and the cooresponding update SOAR case
+        Process to query for changes in datasource entities and the corresponding update SOAR case
            The steps taken are to
             1) Query SOAR for all open cases with qradar_id and qradar_destination fields
             2) Create dictionary of QRadar servers that have incidents on SOAR, each QRadar server equals a list of the offense ID's to query
@@ -217,7 +217,7 @@ class PollerComponent(ResilientComponent):
             # Add to payload to update SOAR cases field qr_last_updated_time
             if offenses_update_list:
                 updated_cases = [case_server_dict.get(server, {}).get(str(offense.get('id')), {}).get("id") for offense in offenses_update_list]
-                # Iterate through list of offenses recieved from QRadar query
+                # Iterate through list of offenses received from QRadar query
                 for offense in offenses_update_list:
                     offense_lastPersistedTime = int(offense.get("last_persisted_time"))
                     offense_id = str(offense.get('id'))

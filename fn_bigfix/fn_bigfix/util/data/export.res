@@ -42,7 +42,7 @@
       ],
       "enabled": true,
       "export_key": "Example: BigFix Query for Artifact",
-      "id": 84,
+      "id": 74,
       "logic_type": "any",
       "message_destinations": [],
       "name": "Example: BigFix Query for Artifact",
@@ -104,7 +104,7 @@
       ],
       "enabled": true,
       "export_key": "Example: BigFix Remediate",
-      "id": 85,
+      "id": 75,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: BigFix Remediate",
@@ -154,7 +154,7 @@
       ],
       "enabled": true,
       "export_key": "Example: BigFix Retrieve Resource Details",
-      "id": 86,
+      "id": 76,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: BigFix Retrieve Resource Details",
@@ -181,7 +181,7 @@
       ],
       "enabled": true,
       "export_key": "Example: BigFix Update Action status",
-      "id": 87,
+      "id": 77,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: BigFix Update Action status",
@@ -198,7 +198,7 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1660568757735,
+  "export_date": 1698827380616,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -212,7 +212,7 @@
       "deprecated": false,
       "export_key": "__function/bigfix_artifact_value",
       "hide_notification": false,
-      "id": 1070,
+      "id": 763,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -242,7 +242,7 @@
       "deprecated": false,
       "export_key": "__function/bigfix_artifact_type",
       "hide_notification": false,
-      "id": 1071,
+      "id": 764,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -272,7 +272,7 @@
       "deprecated": false,
       "export_key": "__function/bigfix_incident_id",
       "hide_notification": false,
-      "id": 1067,
+      "id": 765,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -302,7 +302,7 @@
       "deprecated": false,
       "export_key": "__function/bigfix_action_id",
       "hide_notification": false,
-      "id": 1074,
+      "id": 766,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -332,7 +332,7 @@
       "deprecated": false,
       "export_key": "__function/bigfix_asset_name",
       "hide_notification": false,
-      "id": 1073,
+      "id": 767,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -362,7 +362,7 @@
       "deprecated": false,
       "export_key": "__function/bigfix_artifact_properties_value",
       "hide_notification": false,
-      "id": 1065,
+      "id": 768,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -391,7 +391,7 @@
       "deprecated": false,
       "export_key": "__function/bigfix_incident_plan_status",
       "hide_notification": false,
-      "id": 1068,
+      "id": 769,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -421,7 +421,7 @@
       "deprecated": false,
       "export_key": "__function/bigfix_artifact_id",
       "hide_notification": false,
-      "id": 1069,
+      "id": 770,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -451,7 +451,7 @@
       "deprecated": false,
       "export_key": "__function/bigfix_asset_id",
       "hide_notification": false,
-      "id": 1066,
+      "id": 771,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -481,7 +481,7 @@
       "deprecated": false,
       "export_key": "__function/bigfix_artifact_properties_name",
       "hide_notification": false,
-      "id": 1072,
+      "id": 772,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -514,7 +514,7 @@
   ],
   "functions": [
     {
-      "created_date": 1658418944305,
+      "created_date": 1698389349004,
       "description": {
         "content": "Retrieve status of a BigFix action.",
         "format": "text"
@@ -522,14 +522,14 @@
       "destination_handle": "fn_bigfix",
       "display_name": "BigFix Action Status",
       "export_key": "fn_bigfix_action_status",
-      "id": 47,
+      "id": 29,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
-        "id": 12,
-        "name": "a@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
-      "last_modified_time": 1658418944344,
+      "last_modified_time": 1698389349066,
       "name": "fn_bigfix_action_status",
       "tags": [],
       "uuid": "b8fc0661-4959-4757-bd79-cd665f4e86c2",
@@ -553,7 +553,7 @@
           "programmatic_name": "bigfix_remediate",
           "tags": [],
           "uuid": null,
-          "workflow_id": 45
+          "workflow_id": 64
         },
         {
           "actions": [],
@@ -563,12 +563,12 @@
           "programmatic_name": "bigfix_update_action_status",
           "tags": [],
           "uuid": null,
-          "workflow_id": 46
+          "workflow_id": 63
         }
       ]
     },
     {
-      "created_date": 1658418944371,
+      "created_date": 1698389349075,
       "description": {
         "content": "Query a BigFix server for any endpoints with hits for an artifact.\n\nThe supported artifact types are:\nIP Address,\nProcess Name,\nService,\nFile path,\nRegistry Key (MS Windows registry key)",
         "format": "text"
@@ -576,18 +576,18 @@
       "destination_handle": "fn_bigfix",
       "display_name": "BigFix Artifact",
       "export_key": "fn_bigfix_artifact",
-      "id": 48,
+      "id": 30,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
-        "id": 12,
-        "name": "a@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
-      "last_modified_time": 1660567441717,
+      "last_modified_time": 1698389349131,
       "name": "fn_bigfix_artifact",
       "tags": [],
       "uuid": "5f7cdfda-7a08-4cb1-ae76-b8a0105dd0ec",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "0c6ab356-a8c2-4cf7-8a88-d24863dc64cb",
@@ -655,12 +655,12 @@
           "programmatic_name": "bigfix_query_for_artifact",
           "tags": [],
           "uuid": null,
-          "workflow_id": 47
+          "workflow_id": 62
         }
       ]
     },
     {
-      "created_date": 1658418944434,
+      "created_date": 1698389349139,
       "description": {
         "content": "Query a BigFix server for properties of an endpoint (asset) .",
         "format": "text"
@@ -668,14 +668,14 @@
       "destination_handle": "fn_bigfix",
       "display_name": "BigFix Assets",
       "export_key": "fn_bigfix_assets",
-      "id": 49,
+      "id": 31,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
-        "id": 12,
-        "name": "a@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
-      "last_modified_time": 1658418944474,
+      "last_modified_time": 1698389349196,
       "name": "fn_bigfix_assets",
       "tags": [],
       "uuid": "7cebc584-ca2f-4171-b1b6-28a4c62ec383",
@@ -715,12 +715,12 @@
           "programmatic_name": "bigfix_retrieve_resource_details",
           "tags": [],
           "uuid": null,
-          "workflow_id": 44
+          "workflow_id": 65
         }
       ]
     },
     {
-      "created_date": 1658418944498,
+      "created_date": 1698389349204,
       "description": {
         "content": "Remediate a hit on an endpoint or asset in a BigFix environment.\n\nThe supported artifact types are:\nProcess Name,\nService,\nFile path,\nRegistry Key (MS Windows registry key)",
         "format": "text"
@@ -728,18 +728,18 @@
       "destination_handle": "fn_bigfix",
       "display_name": "BigFix Remediation",
       "export_key": "fn_bigfix_remediation",
-      "id": 50,
+      "id": 32,
       "last_modified_by": {
-        "display_name": "Resilient Sysadmin",
-        "id": 12,
-        "name": "a@example.com",
-        "type": "user"
+        "display_name": "SOAR_Apps_Dev",
+        "id": 9,
+        "name": "bfde63ec-7eae-4aeb-8a0f-346ea9219d43",
+        "type": "apikey"
       },
-      "last_modified_time": 1660567441775,
+      "last_modified_time": 1698389349262,
       "name": "fn_bigfix_remediation",
       "tags": [],
       "uuid": "359ee120-84f0-46f3-8716-fabee5a1b136",
-      "version": 2,
+      "version": 1,
       "view_items": [
         {
           "content": "14f2b9da-c6e6-4703-8ba7-7bf8faa18808",
@@ -783,20 +783,20 @@
           "programmatic_name": "bigfix_remediate",
           "tags": [],
           "uuid": null,
-          "workflow_id": 45
+          "workflow_id": 64
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 50,
+  "id": 250,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1660568755958,
+      "create_date": 1698827377669,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -805,7 +805,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1660568755958,
+      "update_date": 1698827377669,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -814,31 +814,31 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [],
+      "api_keys": [
+        "bfde63ec-7eae-4aeb-8a0f-346ea9219d43"
+      ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_bigfix",
       "name": "fn_bigfix",
       "programmatic_name": "fn_bigfix",
       "tags": [],
-      "users": [
-        "a@example.com"
-      ],
+      "users": [],
       "uuid": "274ca9fb-6d79-441a-b14e-01fedc493a9d"
     }
   ],
   "notifications": null,
-  "overrides": [],
+  "overrides": null,
   "phases": [],
-  "playbooks": null,
+  "playbooks": [],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 49,
-    "major": 43,
-    "minor": 1,
-    "version": "43.1.49"
+    "build_number": 8131,
+    "major": 46,
+    "minor": 0,
+    "version": "46.0.8131"
   },
   "tags": [],
   "task_order": [],
@@ -859,7 +859,7 @@
           "deprecated": false,
           "export_key": "res_bigfix_query_results/res_artifact_type",
           "hide_notification": false,
-          "id": 1057,
+          "id": 755,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -876,7 +876,7 @@
           "templates": [],
           "text": "Artifact Type",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1041,
           "uuid": "924ce7b4-4d55-4ac9-998d-0c552e6c96ae",
           "values": [],
           "width": 38
@@ -891,7 +891,7 @@
           "deprecated": false,
           "export_key": "res_bigfix_query_results/res_artifact_value",
           "hide_notification": false,
-          "id": 1058,
+          "id": 756,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -908,7 +908,7 @@
           "templates": [],
           "text": "Artifact Value",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1041,
           "uuid": "ca48fd05-1532-4966-ab3e-e54232d853b7",
           "values": [],
           "width": 110
@@ -923,7 +923,7 @@
           "deprecated": false,
           "export_key": "res_bigfix_query_results/res_bigfix_action_id",
           "hide_notification": false,
-          "id": 1059,
+          "id": 757,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -939,7 +939,7 @@
           "templates": [],
           "text": "BigFix Action ID",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1041,
           "uuid": "a481f749-9011-4131-899e-d83e1c446d43",
           "values": [],
           "width": 34
@@ -954,7 +954,7 @@
           "deprecated": false,
           "export_key": "res_bigfix_query_results/res_bigfix_computer_id",
           "hide_notification": false,
-          "id": 1060,
+          "id": 758,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -971,7 +971,7 @@
           "templates": [],
           "text": "BigFix Computer ID",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1041,
           "uuid": "e9b92ab0-9851-4169-ad8f-34ac1faf42d9",
           "values": [],
           "width": 69
@@ -986,7 +986,7 @@
           "deprecated": false,
           "export_key": "res_bigfix_query_results/res_bigfix_computer_name",
           "hide_notification": false,
-          "id": 1061,
+          "id": 759,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1002,7 +1002,7 @@
           "templates": [],
           "text": "BigFix Computer Name",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1041,
           "uuid": "1ba3c26e-d83a-4238-a001-7c9d96110867",
           "values": [],
           "width": 149
@@ -1017,7 +1017,7 @@
           "deprecated": false,
           "export_key": "res_bigfix_query_results/res_query_execution_date",
           "hide_notification": false,
-          "id": 1062,
+          "id": 760,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1033,7 +1033,7 @@
           "templates": [],
           "text": "Query Execution Date",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1041,
           "uuid": "e2a94bad-50ca-47af-9fcc-801df081079a",
           "values": [],
           "width": 51
@@ -1048,7 +1048,7 @@
           "deprecated": false,
           "export_key": "res_bigfix_query_results/res_remediation_date",
           "hide_notification": false,
-          "id": 1063,
+          "id": 761,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1064,7 +1064,7 @@
           "templates": [],
           "text": "Remediation Date",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1041,
           "uuid": "14708e3e-801b-4dfe-bb98-0868c6001562",
           "values": [],
           "width": 69
@@ -1079,7 +1079,7 @@
           "deprecated": false,
           "export_key": "res_bigfix_query_results/res_remediation_status",
           "hide_notification": false,
-          "id": 1064,
+          "id": 762,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1095,7 +1095,7 @@
           "templates": [],
           "text": "Remediation Status",
           "tooltip": "",
-          "type_id": 1013,
+          "type_id": 1041,
           "uuid": "5ee1e17f-9b06-47fe-9d6a-d13663776b71",
           "values": [],
           "width": 75
@@ -1125,78 +1125,78 @@
     {
       "actions": [],
       "content": {
-        "version": 2,
-        "workflow_id": "bigfix_query_for_artifact",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"bigfix_query_for_artifact\" isExecutable=\"true\" name=\"Example: BigFix Query for Artifact\"\u003e\u003cdocumentation\u003eQuery a BigFix server for any endpoints in the BigFix environment with hits for an artifact.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_13ug9li\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_03nwjm5\" name=\"BigFix Artifact\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5f7cdfda-7a08-4cb1-ae76-b8a0105dd0ec\"\u003e{\"inputs\":{},\"post_processing_script\":\"noteText = u\\\"BigFix Integration: Ran query for artifact id {} of type {} and value {}.\\\".format(artifact.id, artifact.type, artifact.value)\\n\\nif results.get(\\\"content\\\"):\\n  content = results.get(\\\"content\\\")\\n  endpoint_hits = content.get(\\\"endpoint_hits\\\")\\n  hits_count = content.get(\\\"hits_count\\\")\\n  query_execution_date = content.get(\\\"query_execution_date\\\")\\n  hits_over_limit = content.get(\\\"hits_over_limit\\\")\\n  att_name = content.get(\\\"att_name\\\")\\n  if hits_over_limit:\\n    noteText += \\\"There were {} hits found. Added as an attachment. Attachment name: {}\\\".format(hits_count, att_name)\\n  elif endpoint_hits:\\n    noteText += \\\"There were {} hits found.\\\".format(hits_count)\\n    for eh in endpoint_hits:\\n      newrow = incident.addRow(\u0027res_bigfix_query_results\u0027)\\n      newrow[\\\"res_query_execution_date\\\"] = query_execution_date\\n      newrow[\\\"res_remediation_status\\\"] = \\\"None\\\"\\n      newrow[\\\"res_artifact_type\\\"] = artifact.type\\n      newrow[\\\"res_artifact_value\\\"] = artifact.value\\n      newrow[\\\"res_bigfix_computer_id\\\"] = eh.get(\\\"computer_id\\\")\\n      newrow[\\\"res_bigfix_computer_name\\\"] = eh.get(\\\"computer_name\\\")\\nelse:\\n  noteText += \\\"There were no hits found.\\\"\\n\\nincident.addNote(noteText)\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.bigfix_artifact_id = artifact.id\\ninputs.bigfix_artifact_value = artifact.value\\ninputs.bigfix_artifact_type = artifact.type\\nif artifact.properties:\\n  inputs.bigfix_artifact_properties_name = artifact.properties[0][\\\"name\\\"]\\n  inputs.bigfix_artifact_properties_value = artifact.properties[0][\\\"value\\\"]\\ninputs.bigfix_incident_id = incident.id\\ninputs.bigfix_incident_plan_status = incident.plan_status\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_13ug9li\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_15dd6dy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_13ug9li\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03nwjm5\"/\u003e\u003cendEvent id=\"EndEvent_0y4nyet\"\u003e\u003cincoming\u003eSequenceFlow_15dd6dy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_15dd6dy\" sourceRef=\"ServiceTask_03nwjm5\" targetRef=\"EndEvent_0y4nyet\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03nwjm5\" id=\"ServiceTask_03nwjm5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"248\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13ug9li\" id=\"SequenceFlow_13ug9li_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"223\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"223\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"248\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"238\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0y4nyet\" id=\"EndEvent_0y4nyet_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"400\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"418\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15dd6dy\" id=\"SequenceFlow_15dd6dy_di\"\u003e\u003comgdi:waypoint x=\"348\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"400\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"374\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "description": "Query a BigFix server for any endpoints in the BigFix environment with hits for an artifact.",
-      "export_key": "bigfix_query_for_artifact",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1660567442135,
-      "name": "Example: BigFix Query for Artifact",
-      "object_type": "artifact",
-      "programmatic_name": "bigfix_query_for_artifact",
-      "tags": [],
-      "uuid": "b8a74a6e-7598-4af4-aab1-ef17ddab9403",
-      "workflow_id": 47
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "bigfix_update_action_status",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"bigfix_update_action_status\" isExecutable=\"true\" name=\"Example: BigFix Update Action status\"\u003e\u003cdocumentation\u003eUpdate status of a BigFix action which mediates a hit.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0qximjl\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_11ahqyl\" name=\"BigFix Action Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b8fc0661-4959-4757-bd79-cd665f4e86c2\"\u003e{\"inputs\":{},\"post_processing_script\":\"result = results.get(\\\"content\\\")\\nstatus = result.get(\\\"status\\\")\\nstatus_message = result.get(\\\"status_message\\\")\\naction_id = row.res_bigfix_action_id\\n\\nif (status and (status == \\\"OK\\\" or status == \\\"Failed\\\")):\\n  row.res_remediation_status = status_message\\n  noteText = \\\"Big Fix Integration: Big Fix Action ID \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; finished with status \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;.\\\" \\\\\\n              .format(action_id, status_message)\\nelse:\\n  noteText = \\\"Big Fix Integration: Big Fix Action ID \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; unsuccessful.\\\".format(action_id)\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.bigfix_action_id = row.res_bigfix_action_id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0qximjl\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_04m98pr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0qximjl\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_11ahqyl\"/\u003e\u003cendEvent id=\"EndEvent_0kcnl3r\"\u003e\u003cincoming\u003eSequenceFlow_04m98pr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_04m98pr\" sourceRef=\"ServiceTask_11ahqyl\" targetRef=\"EndEvent_0kcnl3r\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_11ahqyl\" id=\"ServiceTask_11ahqyl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"263\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0qximjl\" id=\"SequenceFlow_0qximjl_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"263\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"230.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0kcnl3r\" id=\"EndEvent_0kcnl3r_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04m98pr\" id=\"SequenceFlow_04m98pr_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "description": "Update status of a BigFix action which mediates a hit.",
-      "export_key": "bigfix_update_action_status",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1660567442557,
-      "name": "Example: BigFix Update Action status",
-      "object_type": "res_bigfix_query_results",
-      "programmatic_name": "bigfix_update_action_status",
-      "tags": [],
-      "uuid": "5ecc8fd2-e997-4d31-9325-6ed16faafe6d",
-      "workflow_id": 46
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
-        "workflow_id": "bigfix_remediate",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"bigfix_remediate\" isExecutable=\"true\" name=\"Example: BigFix Remediate\"\u003e\u003cdocumentation\u003eRemediate or fix a hit in a BigFix environment and return status of the remediating action.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1skvbbr\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1p9ylwg\" name=\"BigFix Remediation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"359ee120-84f0-46f3-8716-fabee5a1b136\"\u003e{\"inputs\":{},\"post_processing_script\":\"result = results.get(\\\"content\\\")\\nstatus = result.get(\\\"status\\\")\\naction_id = result.get(\\\"action_id\\\")\\nif status and status == \\\"OK\\\":\\n  row.res_remediation_status = result.get(\\\"status_message\\\")\\n  row.res_remediation_date = result.get(\\\"remediation_date\\\")\\n  row.res_bigfix_action_id = action_id\\n  noteText = u\\\"Big Fix Integration: Action created successfully to remediate artifact value \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; \\\" \\\\\\n              \\\"and type \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; on endpoint \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;. BigFix Action ID \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;.\\\"\\\\\\n              .format(unicode(row.res_artifact_value), row.res_artifact_type.content, unicode(row.res_bigfix_computer_name), action_id)\\nelse:\\n  noteText = u\\\"Big Fix Integration: Action creation unsuccessful to remediate artifact value \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; \\\" \\\\\\n             \\\"and type \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; on endpoint \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(unicode(row.res_artifact_value), row.res_artifact_type.content, unicode(row.res_bigfix_computer_name))\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.bigfix_asset_id = row.res_bigfix_computer_id\\ninputs.bigfix_artifact_value = row.res_artifact_value\\ninputs.bigfix_artifact_type = row.res_artifact_type.content\\ninputs.bigfix_incident_id = incident.id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1skvbbr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jy5e26\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1skvbbr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1p9ylwg\"/\u003e\u003cserviceTask id=\"ServiceTask_0wvm1ji\" name=\"BigFix Action Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b8fc0661-4959-4757-bd79-cd665f4e86c2\"\u003e{\"inputs\":{},\"post_processing_script\":\"result = results.get(\u0027content\u0027)\\nstatus = result.get(\\\"status\\\")\\nstatus_message = result.get(\\\"status_message\\\")\\naction_id = row.res_bigfix_action_id\\n\\nif (status and (status == \\\"OK\\\" or status == \\\"Failed\\\")):\\n  row.res_remediation_status = status_message\\n  noteText = \\\"Big Fix Integration: Big Fix Action ID \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; finished with status \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;.\\\" \\\\\\n              .format(action_id, status_message)\\nelse:\\n  noteText = \\\"Big Fix Integration: Big Fix Action ID \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; unsuccessful.\\\".format(action_id)\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.bigfix_action_id = row.res_bigfix_action_id\",\"pre_processing_script_language\":\"python\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0jy5e26\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_054g17g\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0jy5e26\" sourceRef=\"ServiceTask_1p9ylwg\" targetRef=\"ServiceTask_0wvm1ji\"/\u003e\u003cendEvent id=\"EndEvent_1sc23bt\"\u003e\u003cincoming\u003eSequenceFlow_054g17g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_054g17g\" sourceRef=\"ServiceTask_0wvm1ji\" targetRef=\"EndEvent_1sc23bt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1p9ylwg\" id=\"ServiceTask_1p9ylwg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"260\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1skvbbr\" id=\"SequenceFlow_1skvbbr_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"260\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"229\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0wvm1ji\" id=\"ServiceTask_0wvm1ji_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"436\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jy5e26\" id=\"SequenceFlow_0jy5e26_di\"\u003e\u003comgdi:waypoint x=\"360\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"398\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"398\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"436\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"368\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1sc23bt\" id=\"EndEvent_1sc23bt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"588\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"561\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_054g17g\" id=\"SequenceFlow_054g17g_di\"\u003e\u003comgdi:waypoint x=\"536\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"588\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"517\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
-      },
-      "content_version": 2,
-      "description": "Remediate or fix a hit in a BigFix environment and return status of the remediating action.",
-      "export_key": "bigfix_remediate",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1660567442353,
-      "name": "Example: BigFix Remediate",
-      "object_type": "res_bigfix_query_results",
-      "programmatic_name": "bigfix_remediate",
-      "tags": [],
-      "uuid": "018ec427-ec7a-41aa-af01-92d7711194f6",
-      "workflow_id": 45
-    },
-    {
-      "actions": [],
-      "content": {
-        "version": 2,
+        "version": 9,
         "workflow_id": "bigfix_retrieve_resource_details",
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"bigfix_retrieve_resource_details\" isExecutable=\"true\" name=\"Example: BigFix Retrieve Resource Details\"\u003e\u003cdocumentation\u003eRetrieve properties of an endpoint in a BigFix environment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1o37esr\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_12i0ji3\" name=\"BigFix Assets\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7cebc584-ca2f-4171-b1b6-28a4c62ec383\"\u003e{\"inputs\":{},\"post_processing_script\":\"result = results.get(\\\"content\\\")\\nstatus = result.get(\\\"status\\\")\\nstatus_note = result.get(\\\"status_note\\\")\\natt_name = result.get(\\\"att_name\\\")\\n\\nif status and status == \\\"OK\\\":\\n  noteText = u\\\"BigFix Integration: Ran query for BigFix Asset id \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; and name \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;. \\\" \\\\\\n             \\\"Added as an attachment. Attachment name: \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt; \\\"\\\\\\n              .format(row.res_bigfix_computer_id, unicode(row.res_bigfix_computer_name), att_name)\\nelse:\\n  noteText = u\\\"BigFix Integration: Query unsuccessful for BigFix Asset id \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; and name \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;.\\\"\\\\\\n              .format(row.res_bigfix_computer_id, unicode(row.res_bigfix_computer_name))\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python\",\"pre_processing_script\":\"inputs.bigfix_asset_name = row.res_bigfix_computer_name\\ninputs.bigfix_asset_id = row.res_bigfix_computer_id\\ninputs.bigfix_incident_id = incident.id\",\"pre_processing_script_language\":\"python\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1o37esr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0lmsarb\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1o37esr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_12i0ji3\"/\u003e\u003cendEvent id=\"EndEvent_03kt9vi\"\u003e\u003cincoming\u003eSequenceFlow_0lmsarb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0lmsarb\" sourceRef=\"ServiceTask_12i0ji3\" targetRef=\"EndEvent_03kt9vi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" xsi:type=\"omgdc:Point\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" xsi:type=\"omgdc:Point\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_12i0ji3\" id=\"ServiceTask_12i0ji3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"263\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1o37esr\" id=\"SequenceFlow_1o37esr_di\"\u003e\u003comgdi:waypoint x=\"198\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"231\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"231\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"263\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"246\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_03kt9vi\" id=\"EndEvent_03kt9vi_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"399\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"417\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lmsarb\" id=\"SequenceFlow_0lmsarb_di\"\u003e\u003comgdi:waypoint x=\"363\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"399\" xsi:type=\"omgdc:Point\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"381\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"bigfix_retrieve_resource_details\" isExecutable=\"true\" name=\"Example: BigFix Retrieve Resource Details\"\u003e\u003cdocumentation\u003eRetrieve properties of an endpoint in a BigFix environment.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1o37esr\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_12i0ji3\" name=\"BigFix Assets\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7cebc584-ca2f-4171-b1b6-28a4c62ec383\"\u003e{\"inputs\":{},\"post_processing_script\":\"result = results.get(\\\"content\\\")\\nstatus = result.get(\\\"status\\\")\\nstatus_note = result.get(\\\"status_note\\\")\\natt_name = result.get(\\\"att_name\\\")\\n\\nif status and status == \\\"OK\\\":\\n  noteText = u\\\"BigFix Integration: Ran query for BigFix Asset id \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; and name \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;. \\\" \\\\\\n             \\\"Added as an attachment. Attachment name: \u0026lt;b\u0026gt;{}\u0026lt;/b\u0026gt; \\\"\\\\\\n              .format(row.res_bigfix_computer_id, unicode(row.res_bigfix_computer_name), att_name)\\nelse:\\n  noteText = u\\\"BigFix Integration: Query unsuccessful for BigFix Asset id \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; and name \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;.\\\"\\\\\\n              .format(row.res_bigfix_computer_id, unicode(row.res_bigfix_computer_name))\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.bigfix_asset_name = row.res_bigfix_computer_name\\ninputs.bigfix_asset_id = row.res_bigfix_computer_id\\ninputs.bigfix_incident_id = incident.id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1o37esr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0lmsarb\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1o37esr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_12i0ji3\"/\u003e\u003cendEvent id=\"EndEvent_03kt9vi\"\u003e\u003cincoming\u003eSequenceFlow_0lmsarb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0lmsarb\" sourceRef=\"ServiceTask_12i0ji3\" targetRef=\"EndEvent_03kt9vi\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_12i0ji3\" id=\"ServiceTask_12i0ji3_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"263\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1o37esr\" id=\"SequenceFlow_1o37esr_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"231\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"231\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"263\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"246\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_03kt9vi\" id=\"EndEvent_03kt9vi_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"399\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"417\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0lmsarb\" id=\"SequenceFlow_0lmsarb_di\"\u003e\u003comgdi:waypoint x=\"363\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"399\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"381\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 2,
+      "content_version": 9,
       "description": "Retrieve properties of an endpoint in a BigFix environment.",
       "export_key": "bigfix_retrieve_resource_details",
-      "last_modified_by": "a@example.com",
-      "last_modified_time": 1660567442689,
+      "last_modified_by": "soar_apps_dev@ibm.com",
+      "last_modified_time": 1698827300121,
       "name": "Example: BigFix Retrieve Resource Details",
       "object_type": "res_bigfix_query_results",
       "programmatic_name": "bigfix_retrieve_resource_details",
       "tags": [],
       "uuid": "4ccbc1de-05c8-4665-8abe-a2dd80b36266",
-      "workflow_id": 44
+      "workflow_id": 65
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 4,
+        "workflow_id": "bigfix_query_for_artifact",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"bigfix_query_for_artifact\" isExecutable=\"true\" name=\"Example: BigFix Query for Artifact\"\u003e\u003cdocumentation\u003eQuery a BigFix server for any endpoints in the BigFix environment with hits for an artifact.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_13ug9li\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_03nwjm5\" name=\"BigFix Artifact\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5f7cdfda-7a08-4cb1-ae76-b8a0105dd0ec\"\u003e{\"inputs\":{},\"post_processing_script\":\"noteText = u\\\"BigFix Integration: Ran query for artifact id {} of type {} and value {}.\\\".format(artifact.id, artifact.type, artifact.value)\\n\\nif results.get(\\\"content\\\"):\\n  content = results.get(\\\"content\\\")\\n  endpoint_hits = content.get(\\\"endpoint_hits\\\")\\n  hits_count = content.get(\\\"hits_count\\\")\\n  query_execution_date = content.get(\\\"query_execution_date\\\")\\n  hits_over_limit = content.get(\\\"hits_over_limit\\\")\\n  att_name = content.get(\\\"att_name\\\")\\n  if hits_over_limit:\\n    noteText += \\\"There were {} hits found. Added as an attachment. Attachment name: {}\\\".format(hits_count, att_name)\\n  elif endpoint_hits:\\n    noteText += \\\"There were {} hits found.\\\".format(hits_count)\\n    for eh in endpoint_hits:\\n      newrow = incident.addRow(\u0027res_bigfix_query_results\u0027)\\n      newrow[\\\"res_query_execution_date\\\"] = query_execution_date\\n      newrow[\\\"res_remediation_status\\\"] = \\\"None\\\"\\n      newrow[\\\"res_artifact_type\\\"] = artifact.type\\n      newrow[\\\"res_artifact_value\\\"] = artifact.value\\n      newrow[\\\"res_bigfix_computer_id\\\"] = eh.get(\\\"computer_id\\\")\\n      newrow[\\\"res_bigfix_computer_name\\\"] = eh.get(\\\"computer_name\\\")\\nelse:\\n  noteText += \\\"There were no hits found.\\\"\\n\\nincident.addNote(noteText)\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.bigfix_artifact_id = artifact.id\\ninputs.bigfix_artifact_value = artifact.value\\ninputs.bigfix_artifact_type = artifact.type\\nif artifact.properties:\\n  inputs.bigfix_artifact_properties_name = artifact.properties[0][\\\"name\\\"]\\n  inputs.bigfix_artifact_properties_value = artifact.properties[0][\\\"value\\\"]\\ninputs.bigfix_incident_id = incident.id\\ninputs.bigfix_incident_plan_status = incident.plan_status\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_13ug9li\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_15dd6dy\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_13ug9li\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_03nwjm5\"/\u003e\u003cendEvent id=\"EndEvent_0y4nyet\"\u003e\u003cincoming\u003eSequenceFlow_15dd6dy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_15dd6dy\" sourceRef=\"ServiceTask_03nwjm5\" targetRef=\"EndEvent_0y4nyet\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_03nwjm5\" id=\"ServiceTask_03nwjm5_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"248\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_13ug9li\" id=\"SequenceFlow_13ug9li_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"223\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"223\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"248\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"238\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0y4nyet\" id=\"EndEvent_0y4nyet_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"400\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"418\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_15dd6dy\" id=\"SequenceFlow_15dd6dy_di\"\u003e\u003comgdi:waypoint x=\"348\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"400\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"374\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 4,
+      "description": "Query a BigFix server for any endpoints in the BigFix environment with hits for an artifact.",
+      "export_key": "bigfix_query_for_artifact",
+      "last_modified_by": "soar_apps_dev@ibm.com",
+      "last_modified_time": 1698391193538,
+      "name": "Example: BigFix Query for Artifact",
+      "object_type": "artifact",
+      "programmatic_name": "bigfix_query_for_artifact",
+      "tags": [],
+      "uuid": "b8a74a6e-7598-4af4-aab1-ef17ddab9403",
+      "workflow_id": 62
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 5,
+        "workflow_id": "bigfix_update_action_status",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"bigfix_update_action_status\" isExecutable=\"true\" name=\"Example: BigFix Update Action status\"\u003e\u003cdocumentation\u003eUpdate status of a BigFix action which mediates a hit.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0qximjl\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_11ahqyl\" name=\"BigFix Action Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b8fc0661-4959-4757-bd79-cd665f4e86c2\"\u003e{\"inputs\":{},\"post_processing_script\":\"result = results.get(\\\"content\\\")\\nstatus = result.get(\\\"status\\\")\\nstatus_message = result.get(\\\"status_message\\\")\\naction_id = row.res_bigfix_action_id\\n\\nif (status and (status == \\\"OK\\\" or status == \\\"Failed\\\")):\\n  row.res_remediation_status = status_message\\n  noteText = \\\"Big Fix Integration: Big Fix Action ID \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; finished with status \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;.\\\" \\\\\\n              .format(action_id, status_message)\\nelse:\\n  noteText = \\\"Big Fix Integration: Big Fix Action ID \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; unsuccessful.\\\".format(action_id)\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.bigfix_action_id = row.res_bigfix_action_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0qximjl\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_04m98pr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0qximjl\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_11ahqyl\"/\u003e\u003cendEvent id=\"EndEvent_0kcnl3r\"\u003e\u003cincoming\u003eSequenceFlow_04m98pr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_04m98pr\" sourceRef=\"ServiceTask_11ahqyl\" targetRef=\"EndEvent_0kcnl3r\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_11ahqyl\" id=\"ServiceTask_11ahqyl_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"263\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0qximjl\" id=\"SequenceFlow_0qximjl_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"263\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"230.5\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0kcnl3r\" id=\"EndEvent_0kcnl3r_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"423\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"441\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_04m98pr\" id=\"SequenceFlow_04m98pr_di\"\u003e\u003comgdi:waypoint x=\"363\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"423\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"393\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 5,
+      "description": "Update status of a BigFix action which mediates a hit.",
+      "export_key": "bigfix_update_action_status",
+      "last_modified_by": "soar_apps_dev@ibm.com",
+      "last_modified_time": 1698390737223,
+      "name": "Example: BigFix Update Action status",
+      "object_type": "res_bigfix_query_results",
+      "programmatic_name": "bigfix_update_action_status",
+      "tags": [],
+      "uuid": "5ecc8fd2-e997-4d31-9325-6ed16faafe6d",
+      "workflow_id": 63
+    },
+    {
+      "actions": [],
+      "content": {
+        "version": 10,
+        "workflow_id": "bigfix_remediate",
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"bigfix_remediate\" isExecutable=\"true\" name=\"Example: BigFix Remediate\"\u003e\u003cdocumentation\u003eRemediate or fix a hit in a BigFix environment and return status of the remediating action.\u003c/documentation\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_1skvbbr\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1p9ylwg\" name=\"BigFix Remediation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"359ee120-84f0-46f3-8716-fabee5a1b136\"\u003e{\"inputs\":{},\"post_processing_script\":\"result = results.get(\\\"content\\\")\\nstatus = result.get(\\\"status\\\")\\naction_id = result.get(\\\"action_id\\\")\\nif status and status == \\\"OK\\\":\\n  row.res_remediation_status = result.get(\\\"status_message\\\")\\n  row.res_remediation_date = result.get(\\\"remediation_date\\\")\\n  row.res_bigfix_action_id = action_id\\n  noteText = u\\\"Big Fix Integration: Action created successfully to remediate artifact value \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; \\\" \\\\\\n              \\\"and type \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; on endpoint \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;. BigFix Action ID \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;.\\\"\\\\\\n              .format(unicode(row.res_artifact_value), row.res_artifact_type.content, unicode(row.res_bigfix_computer_name), action_id)\\nelse:\\n  noteText = u\\\"Big Fix Integration: Action creation unsuccessful to remediate artifact value \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; \\\" \\\\\\n             \\\"and type \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; on endpoint \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;.\\\"\\\\\\n            .format(unicode(row.res_artifact_value), row.res_artifact_type.content, unicode(row.res_bigfix_computer_name))\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.bigfix_asset_id = row.res_bigfix_computer_id\\ninputs.bigfix_artifact_value = row.res_artifact_value\\ninputs.bigfix_artifact_type = row.res_artifact_type.content\\ninputs.bigfix_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_1skvbbr\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0jy5e26\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_1skvbbr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1p9ylwg\"/\u003e\u003cserviceTask id=\"ServiceTask_0wvm1ji\" name=\"BigFix Action Status\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b8fc0661-4959-4757-bd79-cd665f4e86c2\"\u003e{\"inputs\":{},\"post_processing_script\":\"result = results.get(\u0027content\u0027)\\nstatus = result.get(\\\"status\\\")\\nstatus_message = result.get(\\\"status_message\\\")\\naction_id = row.res_bigfix_action_id\\n\\nif (status and (status == \\\"OK\\\" or status == \\\"Failed\\\")):\\n  row.res_remediation_status = status_message\\n  noteText = \\\"Big Fix Integration: Big Fix Action ID \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; finished with status \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt;.\\\" \\\\\\n              .format(action_id, status_message)\\nelse:\\n  noteText = \\\"Big Fix Integration: Big Fix Action ID \u0026lt;b\u0026gt;\u0027{}\u0027\u0026lt;/b\u0026gt; unsuccessful.\\\".format(action_id)\\n\\nincident.addNote(helper.createRichText(noteText))\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"inputs.bigfix_action_id = row.res_bigfix_action_id\",\"pre_processing_script_language\":\"python3\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0jy5e26\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_054g17g\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0jy5e26\" sourceRef=\"ServiceTask_1p9ylwg\" targetRef=\"ServiceTask_0wvm1ji\"/\u003e\u003cendEvent id=\"EndEvent_1sc23bt\"\u003e\u003cincoming\u003eSequenceFlow_054g17g\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_054g17g\" sourceRef=\"ServiceTask_0wvm1ji\" targetRef=\"EndEvent_1sc23bt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eStart your workflow here\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"162\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"157\" y=\"223\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"99\" y=\"254\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"169\" y=\"220\"/\u003e\u003comgdi:waypoint x=\"153\" y=\"254\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1p9ylwg\" id=\"ServiceTask_1p9ylwg_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"260\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_1skvbbr\" id=\"SequenceFlow_1skvbbr_di\"\u003e\u003comgdi:waypoint x=\"198\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"260\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"229\" y=\"184\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0wvm1ji\" id=\"ServiceTask_0wvm1ji_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"436\" y=\"166\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0jy5e26\" id=\"SequenceFlow_0jy5e26_di\"\u003e\u003comgdi:waypoint x=\"360\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"398\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"398\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"436\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"368\" y=\"199.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_1sc23bt\" id=\"EndEvent_1sc23bt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"588\" y=\"188\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"561\" y=\"227\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_054g17g\" id=\"SequenceFlow_054g17g_di\"\u003e\u003comgdi:waypoint x=\"536\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"588\" y=\"206\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"90\" x=\"517\" y=\"184.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "content_version": 10,
+      "description": "Remediate or fix a hit in a BigFix environment and return status of the remediating action.",
+      "export_key": "bigfix_remediate",
+      "last_modified_by": "soar_apps_dev@ibm.com",
+      "last_modified_time": 1698464268600,
+      "name": "Example: BigFix Remediate",
+      "object_type": "res_bigfix_query_results",
+      "programmatic_name": "bigfix_remediate",
+      "tags": [],
+      "uuid": "018ec427-ec7a-41aa-af01-92d7711194f6",
+      "workflow_id": 64
     }
   ],
   "workspaces": []

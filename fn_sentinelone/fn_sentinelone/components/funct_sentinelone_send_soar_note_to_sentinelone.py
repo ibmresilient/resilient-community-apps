@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 
 """AppFunction implementation"""
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, clean_html
-from fn_sentinelone.lib.constants import FROM_SENTINELONE_COMMENT_HDR, SENT_TO_SENTINELONE_HDR
-from fn_sentinelone.lib.sentinelone_common import SentinelOneClient
+from fn_sentinelone.lib.app_common import (AppCommon, PACKAGE_NAME, SOAR_HEADER)
 
-PACKAGE_NAME = "fn_sentinelone"
 FN_NAME = "sentinelone_send_soar_note_to_sentinelone"
 
 
@@ -34,27 +32,26 @@ class FunctionComponent(AppFunctionComponent):
 
         reason = None
         success = False
-        if FROM_SENTINELONE_COMMENT_HDR in note_text or SENT_TO_SENTINELONE_HDR in note_text:
-            yield self.status_message("Bypassing synchronization of note: {}".format(note_text))
-            success = True
-        else:
-            try:
-                sentinelone_api = SentinelOneClient(self.opts, self.options)
-                response = sentinelone_api.add_threat_note(threat_id, clean_html(note_text))
 
-                data = response.get("data")
-                affected = int(data.get("affected"))
-                if affected >= 1:
-                    success = True
-                    yield self.status_message("Sentinel comment added to threatId: {}"\
+        try:
+            app_common = AppCommon(self.rc, PACKAGE_NAME, self.options)
+            response = app_common.add_threat_note(threat_id, 
+                                                  clean_html(note_text), 
+                                                  SOAR_HEADER)
+
+            data = response.get("data")
+            affected = int(data.get("affected"))
+            if affected >= 1:
+                success = True
+                yield self.status_message("Sentinel comment added to threatId: {}"\
                                     .format(threat_id))
-                else:
-                    errors = response.get("errors")
-                    reason = errors.get("type")
-                    yield self.status_message("Sentinel comment failure for threatId {}: {}"\
+            else:
+                errors = response.get("errors")
+                reason = errors.get("type")
+                yield self.status_message("Sentinel comment failure for threatId {}: {}"\
                                     .format(threat_id, reason))
-            except IntegrationError as err:
-                reason = str(err)
+        except IntegrationError as err:
+            reason = str(err)
 
         results = {"success": success,
                    "reason:": reason}
