@@ -19,6 +19,7 @@ from fn_qradar_enhanced_data.util.qradar_graphql_queries import GRAPHQL_POLLERQU
 LOG = getLogger(__name__)
 AUTO_ESCALATION_NOTE = "Case created in SOAR"
 MANUAL_ESCALATION = "Manual escalation of offense to SOAR"
+PLUGIN_ADDED_NOTE = "\nAdded from SOAR"
 # The max number of QRadar offenses that can be searched for at once
 MAX_OFFENSES_TO_SEARCH = 50
 
@@ -288,8 +289,9 @@ class PollerComponent(ResilientComponent):
                 for notes in offenses_notes:
                     incident_id = case_server_dict.get(server, {}).get(notes.get('id'), {}).get('id') # ID of the SOAR incident
                     qradar_notes = [note.get("noteText").replace("\r", "") for note in notes.get("notes") if int(note.get("createTime")) > poller_time\
-                        and AUTO_ESCALATION_NOTE not in note.get("noteText") and MANUAL_ESCALATION not in note.get("noteText")]
-                    notes_to_add = filter_comments(self.soar_common, incident_id, qradar_notes, qradar_header_to_remove=qradar_header)
+                        and AUTO_ESCALATION_NOTE not in note.get("noteText") and MANUAL_ESCALATION not in note.get("noteText") and qradar_header not in note.get("noteText")\
+                            and PLUGIN_ADDED_NOTE not in note.get("noteText")]
+                    notes_to_add = filter_comments(self.soar_common, incident_id, qradar_notes,soar_str_to_remove="\nAdded from QRadar")
                     if notes_to_add:
                         for note in notes_to_add:
-                            self.soar_common.create_case_comment(incident_id, f"{note}")
+                            self.soar_common.create_case_comment(incident_id, f"{note}\nAdded from QRadar")

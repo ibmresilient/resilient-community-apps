@@ -9,7 +9,7 @@ from fn_qradar_enhanced_data.util.qradar_constants import (GLOBAL_SETTINGS, PACK
 
 LOG = getLogger(__name__)
 
-def filter_comments(soar_common, incident_id, qradar_notes, soar_str_to_remove="", qradar_header_to_remove=""):
+def filter_comments(soar_common, incident_id, qradar_notes, soar_str_to_remove="", qradar_header_to_remove="", qradar_str_to_remove=""):
     """
     Filter out comments that are already on the SOAR incident
     :param soar_common: Connection to SOAR instance
@@ -20,11 +20,11 @@ def filter_comments(soar_common, incident_id, qradar_notes, soar_str_to_remove="
     """
     soar_comments = soar_common.get_case_comments(str(incident_id))
     # Remove html and given soar_str_to_remove
-    soar_comment_list = [clean_html(comment.get('text')).strip() for comment in soar_comments]
+    soar_comment_list = [clean_html(comment.get('text').replace(soar_str_to_remove, "")).strip() for comment in soar_comments]
     # Remove html an given qradar_header_to_remove
     qradar_notes_list = []
     for note in qradar_notes:
-        qradar_notes_list.append(clean_html(note.replace(qradar_header_to_remove, "").replace("\x03", "")).strip())
+        qradar_notes_list.append(clean_html(note.replace(qradar_header_to_remove, "").replace("\x03", "").replace(qradar_str_to_remove, "")).strip())
     # Check if the QRadar comment is already a note on the SOAR incident
     return [comment for comment in qradar_notes_list\
             if comment not in soar_comment_list]
