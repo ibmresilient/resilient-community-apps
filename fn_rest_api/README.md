@@ -602,24 +602,15 @@ results = {
 # It also supports various authentication methods, including basic authentication, OAuth, API keys, and client side 
 # authentication.
 
-import json
-from base64 import b64encode
+method  = ""
 
-KEY_ID = "26d6dc0a-f920-4abe-8f06-a815b9ca1416"
-KEY_SECRET = "InPrh4XMzlbOk_4HlqY53xtGgTWy_UsMv7QRAT7Hiys"
+url     = ""
 
-api_token_basic = b64encode(f"{KEY_ID}:{KEY_SECRET}".encode('utf-8')).decode('utf-8')
-
-
-method  = "POST"
-
-url     = "https://bedsides1.fyre.ibm.com/rest/orgs/201/incidents/2096/attachments"
-
-verify  = False
+verify  = True
 
 params  = None
 
-header  = json.dumps({"Authorization" : f"basic {api_token_basic}"})
+header  = None
 
 body    = None
 
@@ -726,7 +717,6 @@ inputs.rest_retry_delay   = retry_delay
 
  # Multiplier applied to delay between attempts. Default: 1 (no backoff)
 inputs.rest_retry_backoff = retry_backoff
-
 
 #                                                    ================
 #                                                       Attachment   
@@ -1117,42 +1107,6 @@ inputs.jwt_key       = None
 
 # Encryption algorithm used for encoding the JWT. Defaults to "HS256" algorithm
 inputs.jwt_algorithm = None
-```
-
-</p>
-</details>
-
-<details><summary>Process REST Response :</summary>
-<p>
-
-```python
-'''
-results = {
-  "ok"      : response.ok,
-  "url"     : response.url,
-  "reason"  : response.reason,
-  "cookies" : dedup_dict(response.cookies),
-  "headers" : dedup_dict(response.headers),
-  "elapsed" : int(response.elapsed.total_seconds() * 1000.0),
-  "text"    : response.text,
-  "json"    : response_json,
-  "links"   : response.links,
-  "status_code": response.status_code,
-  "apparent_encoding": response.apparent_encoding,
-}
-'''
-
-result = playbook.functions.results.rest_response
-
-if not result.success:
-  incident.addNote(helper.createRichText(result.reason))
-
-else:
-  response_text = result.content.get("text")
-  if artifact.description:
-    artifact.description = u"{}\n\n{}".format(artifact.description.content, response_text)
-  else:
-    artifact.description = response_text 
 
 ```
 
