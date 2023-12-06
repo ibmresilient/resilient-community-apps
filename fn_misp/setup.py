@@ -39,7 +39,7 @@ setup(
                      "Custom attribute types can be mapped from the workflow pre-processing script of the function. "
                      "See the sample workflows for sample payloads returned.",
     install_requires=['resilient_circuits>=48.0',
-                      'pymisp>=2.4; python_version>="3"',
+                      'pymisp~=2.4; python_version>="3"',
                       'pymisp==2.4.119.1; python_version<"3"'
                       ],
     packages=find_packages(),
