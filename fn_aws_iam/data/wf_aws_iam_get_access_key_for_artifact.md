@@ -29,20 +29,20 @@ inputs.aws_iam_query_type = "access_keys"
 # Example result:
 """
 Result: {'version': '1.0', 'success': True, 'reason': None,
-         'content': [{'Path': '/', 'UserName': 'iam_test_User', 'UserId': 'ABCDEFG',
-                      'Arn': 'arn:aws:iam::123456789123:user/iam_test_User', 'CreateDate': '2019-11-18 18:11:33',
+         'content': [{'Path': '/', 'UserName': 'iam_test_user', 'UserId': 'ABCDEFG',
+                      'Arn': 'arn:aws:iam::123456789123:user/iam_test_user', 'CreateDate': '2019-11-18 18:11:33',
                       'LoginProfileExists': 'No',
-                      'Groups': [{'Path': '/', 'GroupName': 'denyall_group', 'GroupId': 'ABCDEFG',
-                                  'Arn': 'arn:aws:iam::123456789123:group/denyall_group', 'CreateDate': '2019-11-29 15:49:34'}],
-                      'AccessKeyIds': [{'UserName': 'iam_johnpren_test_User_1', 'AccessKeyId': 'ABCDEFG',
+                      'Groups': [{'Path': '/', 'GroupName': 'group', 'GroupId': 'ABCDEFG',
+                                  'Arn': 'arn:aws:iam::123456789123:group/group', 'CreateDate': '2019-11-29 15:49:34'}],
+                      'AccessKeyIds': [{'UserName': 'iam_test_user', 'AccessKeyId': 'ABCDEFG',
                                         'Status': 'Active', 'CreateDate': '2019-12-10 14:20:19'},
-                                       {'UserName': 'iam_johnpren_test_User_1', 'AccessKeyId': 'ABCDEFG',
+                                       {'UserName': 'iam_test_user', 'AccessKeyId': 'ABCDEFG',
                                         'Status': 'Active', 'CreateDate': '2020-01-07 17:10:19'}]}],
-         'raw': '[{"Path": "/", "UserName": "iam_johnpren_test_User_1", "UserId": "AIDA4EQBBG2YAZYSSDGXE", '
-                '"Arn": "arn:aws:iam::123456789123:user/iam_johnpren_test_User_1", "CreateDate": "2019-11-18 18:11:33", "LoginProfileExists": "No", '
-                '"Groups": [{"Path": "/", "GroupName": "denyall_group", "GroupId": "AGPA4EQBBG2YPUAIHTA3E", "Arn": "arn:aws:iam::123456789123:group/denyall_group", '
-                '"CreateDate": "2019-11-29 15:49:34"}], "AccessKeyIds": [{"UserName": "iam_test_User", "AccessKeyId": "ABCDEFG", '
-                '"Status": "Active", "CreateDate": "2019-12-10 14:20:19"}, {"UserName": "iam_test_User", "AccessKeyId": "ABCDEFG", '
+         'raw': '[{"Path": "/", "UserName": "iam_test_user", "UserId": "ABCDEFGH", '
+                '"Arn": "arn:aws:iam::123456789123:user/iam_test_user", "CreateDate": "2019-11-18 18:11:33", "LoginProfileExists": "No", '
+                '"Groups": [{"Path": "/", "GroupName": "group", "GroupId": "ABCDEFG", "Arn": "arn:aws:iam::123456789123:group/group", '
+                '"CreateDate": "2019-11-29 15:49:34"}], "AccessKeyIds": [{"UserName": "iam_test_user", "AccessKeyId": "ABCDEFG", '
+                '"Status": "Active", "CreateDate": "2019-12-10 14:20:19"}, {"UserName": "iam_test_user", "AccessKeyId": "ABCDEFG", '
                 '"Status": "Active", "CreateDate": "2020-01-07 17:10:19"}]}]',
          'inputs': {'aws_iam_access_key_filter': 'ABCDEFG'},
          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
