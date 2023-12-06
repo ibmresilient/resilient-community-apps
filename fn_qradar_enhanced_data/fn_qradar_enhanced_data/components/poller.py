@@ -291,7 +291,7 @@ class PollerComponent(ResilientComponent):
                     qradar_notes = [note.get("noteText").replace("\r", "") for note in notes.get("notes") if int(note.get("createTime")) > poller_time\
                         and AUTO_ESCALATION_NOTE not in note.get("noteText") and MANUAL_ESCALATION not in note.get("noteText") and qradar_header not in note.get("noteText")\
                             and PLUGIN_ADDED_NOTE not in note.get("noteText")]
-                    notes_to_add = filter_comments(self.soar_common, incident_id, qradar_notes,soar_str_to_remove="\nAdded from QRadar")
+                    notes_to_add = filter_comments(self.soar_common, incident_id, qradar_notes, soar_str_to_remove="\nAdded from QRadar")
                     if notes_to_add:
                         for note in notes_to_add:
                             self.soar_common.create_case_comment(incident_id, f"{note}\nAdded from QRadar")
