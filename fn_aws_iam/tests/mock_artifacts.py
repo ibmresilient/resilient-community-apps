@@ -122,10 +122,10 @@ def mocked_iam_pre_results(type):
     response = {
         "access_keys":([{'UserName': 'iam_test_User_1', 'Status': 'Active',
                                'CreateDate': datetime.datetime(2019, 10, 31, 16, 23, 8, tzinfo=tzutc()),
-                               'AccessKeyId': 'AKIA4EQBBG2YO3VWDSN6'},
+                               'AccessKeyId': 'ABCDEFGH1'},
                               {'UserName': 'iam_test_User_2', 'Status': 'Active',
                                'CreateDate': datetime.datetime(2019, 11, 4, 11, 33, 33, tzinfo=tzutc()),
-                               'AccessKeyId': 'AKIA4EQBBG2YP4S4SOEV'}]
+                               'AccessKeyId': 'ABCDEFGH2'}]
         ),
         "groups":([{'Path': '/', 'CreateDate': datetime.datetime(2017, 5, 29, 20, 37, 53, tzinfo=tzutc()),
                     'GroupId': 'AGPAJUCG3BHM64OGVGCBG',
@@ -193,10 +193,10 @@ def mock_client_results(type):
         ),
         "expected_result_upd_keys": ([{'UserName': 'iam_test_User_1', 'Status': 'Active',
                                                    'CreateDate': '2019-10-31 16:23:08',
-                                                   'AccessKeyId': 'AKIA4EQBBG2YO3VWDSN6'},
+                                                   'AccessKeyId': 'ABCDEFGH1'},
                                                   {'UserName': 'iam_test_User_2', 'Status': 'Active',
                                                    'CreateDate': '2019-11-04 11:33:33',
-                                                   'AccessKeyId': 'AKIA4EQBBG2YP4S4SOEV'}]
+                                                   'AccessKeyId': 'ABCDEFGH2'}]
 
                                     ),
         "expected result_pagination": ([{u'UserName': 'iam_test_User_1', u'PasswordLastUsed': '2019-11-15 17:11:28',

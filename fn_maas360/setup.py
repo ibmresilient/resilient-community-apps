@@ -22,11 +22,11 @@ def snake_to_camel(word):
 
 setup(
     name="fn_maas360",
-    version="1.0.1",
+    version="1.0.2",
     license="MIT",
-    author="IBM Resilient",
+    author="IBM SOAR",
     url='https://ibm.com/mysupport',
-    description="This package enables Mobile Device Management (MDM) actions from IBM Resilient.",
+    description="This package enables Mobile Device Management (MDM) actions from IBM SOAR.",
     long_description="""
 The MaaS360 function package enables users to perform the following Mobile Device Management (MDM) actions:<br>
 - Basic device search.<br>

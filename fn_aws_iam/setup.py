@@ -19,16 +19,16 @@ def snake_to_camel(word):
 
 setup(
     name='fn_aws_iam',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
-    author='IBM Resilient',
+    author='IBM SOAR',
     author_email='',
     url='https://ibm.com/mysupport',
-    description="Amazon AWS IAM Integration for Resilient",
+    description="Amazon AWS IAM Integration for SOAR",
     long_description="Integration with Amazon AWS IAM to facilitate manual enrichment and targeted remediation actions. "
                      "Teams can investigate an attack by searching for AWS user accounts across an AWS environment, and "
                      "quickly respond to attacks by executing remediation actions, such as removing permissions or "
-                     "login profiles for suspicious accounts from within the Resilient platform.",
+                     "login profiles for suspicious accounts from within the SOAR platform.",
     install_requires=[
         'resilient_circuits>=35.0.0',
         'resilient_lib>=35.0.0',

@@ -40,6 +40,9 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.2
+* Converted workflows to Python3
+
 ### v1.0.1
 * Added App Host support
 
