@@ -10,244 +10,233 @@
     },
     "reason": {},
     "content": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        },
-        "content": {
-          "type": "array",
-          "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Event": {
             "type": "object",
             "properties": {
-              "Event": {
+              "id": {
+                "type": "string"
+              },
+              "orgc_id": {
+                "type": "string"
+              },
+              "org_id": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "threat_level_id": {
+                "type": "string"
+              },
+              "info": {
+                "type": "string"
+              },
+              "published": {
+                "type": "boolean"
+              },
+              "uuid": {
+                "type": "string"
+              },
+              "attribute_count": {
+                "type": "string"
+              },
+              "analysis": {
+                "type": "string"
+              },
+              "timestamp": {
+                "type": "string"
+              },
+              "distribution": {
+                "type": "string"
+              },
+              "proposal_email_lock": {
+                "type": "boolean"
+              },
+              "locked": {
+                "type": "boolean"
+              },
+              "publish_timestamp": {
+                "type": "string"
+              },
+              "sharing_group_id": {
+                "type": "string"
+              },
+              "disable_correlation": {
+                "type": "boolean"
+              },
+              "extends_uuid": {
+                "type": "string"
+              },
+              "protected": {},
+              "event_creator_email": {
+                "type": "string"
+              },
+              "Org": {
                 "type": "object",
                 "properties": {
                   "id": {
                     "type": "string"
                   },
-                  "orgc_id": {
+                  "name": {
                     "type": "string"
-                  },
-                  "org_id": {
-                    "type": "string"
-                  },
-                  "date": {
-                    "type": "string"
-                  },
-                  "threat_level_id": {
-                    "type": "string"
-                  },
-                  "info": {
-                    "type": "string"
-                  },
-                  "published": {
-                    "type": "boolean"
                   },
                   "uuid": {
                     "type": "string"
                   },
-                  "attribute_count": {
-                    "type": "string"
-                  },
-                  "analysis": {
-                    "type": "string"
-                  },
-                  "timestamp": {
-                    "type": "string"
-                  },
-                  "distribution": {
-                    "type": "string"
-                  },
-                  "proposal_email_lock": {
+                  "local": {
                     "type": "boolean"
+                  }
+                }
+              },
+              "Orgc": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
                   },
-                  "locked": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "uuid": {
+                    "type": "string"
+                  },
+                  "local": {
                     "type": "boolean"
-                  },
-                  "publish_timestamp": {
-                    "type": "string"
-                  },
-                  "sharing_group_id": {
-                    "type": "string"
-                  },
-                  "disable_correlation": {
-                    "type": "boolean"
-                  },
-                  "extends_uuid": {
-                    "type": "string"
-                  },
-                  "protected": {},
-                  "event_creator_email": {
-                    "type": "string"
-                  },
-                  "Org": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "uuid": {
-                        "type": "string"
-                      },
-                      "local": {
-                        "type": "boolean"
-                      }
-                    }
-                  },
-                  "Orgc": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "uuid": {
-                        "type": "string"
-                      },
-                      "local": {
-                        "type": "boolean"
-                      }
-                    }
-                  },
-                  "Attribute": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "type": {
-                          "type": "string"
-                        },
-                        "category": {
-                          "type": "string"
-                        },
-                        "to_ids": {
-                          "type": "boolean"
-                        },
-                        "uuid": {
-                          "type": "string"
-                        },
-                        "event_id": {
-                          "type": "string"
-                        },
-                        "distribution": {
-                          "type": "string"
-                        },
-                        "timestamp": {
-                          "type": "string"
-                        },
-                        "comment": {
-                          "type": "string"
-                        },
-                        "sharing_group_id": {
-                          "type": "string"
-                        },
-                        "deleted": {
-                          "type": "boolean"
-                        },
-                        "disable_correlation": {
-                          "type": "boolean"
-                        },
-                        "object_id": {
-                          "type": "string"
-                        },
-                        "object_relation": {},
-                        "first_seen": {},
-                        "last_seen": {},
-                        "value": {
-                          "type": "string"
-                        },
-                        "Galaxy": {
-                          "type": "array"
-                        },
-                        "ShadowAttribute": {
-                          "type": "array"
-                        },
-                        "Sighting": {
-                          "type": "array",
-                          "items": {
+                  }
+                }
+              },
+              "Attribute": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "category": {
+                      "type": "string"
+                    },
+                    "to_ids": {
+                      "type": "boolean"
+                    },
+                    "uuid": {
+                      "type": "string"
+                    },
+                    "event_id": {
+                      "type": "string"
+                    },
+                    "distribution": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    },
+                    "comment": {
+                      "type": "string"
+                    },
+                    "sharing_group_id": {
+                      "type": "string"
+                    },
+                    "deleted": {
+                      "type": "boolean"
+                    },
+                    "disable_correlation": {
+                      "type": "boolean"
+                    },
+                    "object_id": {
+                      "type": "string"
+                    },
+                    "object_relation": {},
+                    "first_seen": {},
+                    "last_seen": {},
+                    "value": {
+                      "type": "string"
+                    },
+                    "Galaxy": {
+                      "type": "array"
+                    },
+                    "ShadowAttribute": {
+                      "type": "array"
+                    },
+                    "Sighting": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "attribute_id": {
+                            "type": "string"
+                          },
+                          "event_id": {
+                            "type": "string"
+                          },
+                          "org_id": {
+                            "type": "string"
+                          },
+                          "date_sighting": {
+                            "type": "string"
+                          },
+                          "uuid": {
+                            "type": "string"
+                          },
+                          "source": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "attribute_uuid": {
+                            "type": "string"
+                          },
+                          "Organisation": {
                             "type": "object",
                             "properties": {
                               "id": {
                                 "type": "string"
                               },
-                              "attribute_id": {
-                                "type": "string"
-                              },
-                              "event_id": {
-                                "type": "string"
-                              },
-                              "org_id": {
-                                "type": "string"
-                              },
-                              "date_sighting": {
-                                "type": "string"
-                              },
                               "uuid": {
                                 "type": "string"
                               },
-                              "source": {
+                              "name": {
                                 "type": "string"
-                              },
-                              "type": {
-                                "type": "string"
-                              },
-                              "attribute_uuid": {
-                                "type": "string"
-                              },
-                              "Organisation": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "uuid": {
-                                    "type": "string"
-                                  },
-                                  "name": {
-                                    "type": "string"
-                                  }
-                                }
                               }
                             }
                           }
                         }
                       }
                     }
-                  },
-                  "ShadowAttribute": {
-                    "type": "array"
-                  },
-                  "RelatedEvent": {
-                    "type": "array"
-                  },
-                  "Galaxy": {
-                    "type": "array"
-                  },
-                  "Object": {
-                    "type": "array"
-                  },
-                  "EventReport": {
-                    "type": "array"
-                  },
-                  "CryptographicKey": {
-                    "type": "array"
                   }
                 }
+              },
+              "ShadowAttribute": {
+                "type": "array"
+              },
+              "RelatedEvent": {
+                "type": "array"
+              },
+              "Galaxy": {
+                "type": "array"
+              },
+              "Object": {
+                "type": "array"
+              },
+              "EventReport": {
+                "type": "array"
+              },
+              "CryptographicKey": {
+                "type": "array"
               }
             }
           }
-        },
-        "tags": {
-          "type": "array"
         }
       }
     },

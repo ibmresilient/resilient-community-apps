@@ -4,26 +4,26 @@
   "reason": null,
   "content": {
     "Sighting": {
-      "id": "1",
-      "attribute_id": "1",
-      "event_id": "10",
+      "id": "3",
+      "attribute_id": "3",
+      "event_id": "11",
       "org_id": "1",
-      "date_sighting": "1701370203",
-      "uuid": "ac38af87-22b4-4a3a-8b74-66e54faed53c",
+      "date_sighting": "1701877013",
+      "uuid": "fbca0cd6-aaaa-aaaa-aaaa-1e7af7f99e15",
       "source": "IBM QRadar SOAR",
       "type": "0"
     }
   },
   "raw": null,
   "inputs": {
-    "misp_sighting": "1.1.1.1"
+    "misp_sighting": "google.com"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-misp",
     "package_version": "3.0.2",
-    "host": "Richards-MBP-2.hsd1.ma.comcast.net",
-    "execution_time_ms": 480,
-    "timestamp": "2023-11-30 13:50:03"
+    "host": "local",
+    "execution_time_ms": 479,
+    "timestamp": "2023-12-06 10:36:53"
   }
 }
