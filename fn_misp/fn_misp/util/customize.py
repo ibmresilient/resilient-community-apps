@@ -33,6 +33,8 @@ def codegen_reload_data():
             u"misp_search_attribute",
             u"misp_sighting_list"
         ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [
             u"misp_event_id"
         ],
@@ -41,7 +43,13 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": ["misp_create_attribute", "misp_create_event", "misp_create_sighting", "misp_search_attribute", "misp_sighting_list"],
+        "playbooks": [
+            u"misp_create_attribute",
+            u"misp_create_event",
+            u"misp_create_sighting",
+            u"misp_search_attribute",
+            u"misp_sighting_list"
+        ]
     }
 
 
@@ -62,27 +70,19 @@ def customization_data(client=None):
         - misp_create_tag
         - misp_search_attribute
         - misp_sighting_list
-    - Workflows:
-        - example_misp_create_attribute
-        - example_misp_create_event
-        - example_misp_create_sighting
-        - example_misp_create_tag_on_attribute
-        - example_misp_create_tag_on_event
-        - example_misp_search_attribute
-        - example_misp_sighting_list
-    - Rules:
-        - Example: Create MISP Attribute
-        - Example: Create MISP Event
-        - Example: Create MISP Sighting
-        - Example: MISP Search Attribute
-        - Example: MISP Sighting List
+    - Playbooks:
+        - misp_create_attribute
+        - misp_create_event
+        - misp_create_sighting
+        - misp_search_attribute
+        - misp_sighting_list
     - Incident Fields:
         - misp_event_id
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
     if not os.path.isfile(res_file):
-        raise FileNotFoundError(f"{RES_FILE} not found")
+        raise FileNotFoundError("{} not found".format(RES_FILE))
 
     with io.open(res_file, mode='rt') as f:
         b64_data = base64.b64encode(f.read().encode('utf-8'))

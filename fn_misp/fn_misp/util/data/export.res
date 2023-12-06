@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1701275282207,
+  "export_date": 1701879388218,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -725,13 +725,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 21,
+  "id": 26,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1701275280504,
+      "create_date": 1701879386789,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -740,7 +740,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1701275280504,
+      "update_date": 1701879386789,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -768,8 +768,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_1ae9c3d9_d191_4508_9c8e_736909a4bdfb\" isExecutable=\"true\" name=\"playbook_1ae9c3d9_d191_4508_9c8e_736909a4bdfb\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_09po78i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MISP Create Attribute\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f5c4aae2-135e-41ac-8bbc-082b00677ecb\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.misp_attribute_value = artifact.value\\ninputs.misp_event_id = incident.properties.misp_event_id\\n\\nresilient_to_misp_map = {\\n  \\\"DNS Name\\\": \\\"domain\\\",\\n  \\\"Email Attachment\\\": \\\"email-attachment\\\",\\n  \\\"Email Body\\\": \\\"email-body\\\",\\n  \\\"Email Recipient\\\": \\\"email-dst\\\",\\n  \\\"Email Sender\\\": \\\"email-src\\\",\\n  \\\"Email subject\\\": \\\"email-subject\\\",\\n  \\\"File Name\\\": \\\"filename\\\",\\n  \\\"DNS Name\\\": \\\"hostname\\\",\\n  \\\"MAC Address\\\": \\\"mac-address\\\",\\n  \\\"Malware MD5 Hash\\\": \\\"md5\\\",\\n  \\\"Port\\\": \\\"port\\\",\\n  \\\"Malware SHA-1 Hash\\\": \\\"sha1\\\",\\n  \\\"Malware SHA-256 Hash\\\": \\\"sha256\\\",\\n  \\\"URI Path\\\": \\\"uri\\\",\\n  \\\"URL\\\": \\\"url\\\",\\n  \\\"Threat CVE ID\\\": \\\"vulnerability\\\",\\n  \\\"IP Address\\\": \\\"ip-dst\\\"\\n}\\n\\ntry:\\n  misp_type = resilient_to_misp_map.get(artifact.type)\\n  inputs.misp_attribute_type = misp_type\\nexcept Exception as e:\\n  helper.fail(\\\"You do not have this artifact type {} mapped to a type in MISP - Ask your Admin\\\".format(artifact.value))\\n  raise e\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"misp_attribute\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09po78i\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wi8bkr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_09po78i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"88ec88bb-d75c-4ee2-a24f-5143c189e0eb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wi8bkr\u003c/incoming\u003e\u003coutgoing\u003eFlow_1rwxt24\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1wi8bkr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1rwxt24\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1rwxt24\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1ae9c3d9_d191_4508_9c8e_736909a4bdfb\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09po78i\" id=\"Flow_09po78i_di\"\u003e\u003comgdi:waypoint x=\"724\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"724\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wi8bkr\" id=\"Flow_1wi8bkr_di\"\u003e\u003comgdi:waypoint x=\"724\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"724\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rwxt24\" id=\"Flow_1rwxt24_di\"\u003e\u003comgdi:waypoint x=\"724\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"724\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"633\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"626\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"626\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"658\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 7,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_1ae9c3d9_d191_4508_9c8e_736909a4bdfb\" isExecutable=\"true\" name=\"playbook_1ae9c3d9_d191_4508_9c8e_736909a4bdfb\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_09po78i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MISP Create Attribute\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f5c4aae2-135e-41ac-8bbc-082b00677ecb\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.misp_attribute_value = artifact.value\\ninputs.misp_event_id = incident.properties.misp_event_id\\n\\nresilient_to_misp_map = {\\n  \\\"DNS Name\\\": \\\"domain\\\",\\n  \\\"Email Attachment\\\": \\\"email-attachment\\\",\\n  \\\"Email Body\\\": \\\"email-body\\\",\\n  \\\"Email Recipient\\\": \\\"email-dst\\\",\\n  \\\"Email Sender\\\": \\\"email-src\\\",\\n  \\\"Email subject\\\": \\\"email-subject\\\",\\n  \\\"File Name\\\": \\\"filename\\\",\\n  \\\"DNS Name\\\": \\\"hostname\\\",\\n  \\\"MAC Address\\\": \\\"mac-address\\\",\\n  \\\"Malware MD5 Hash\\\": \\\"md5\\\",\\n  \\\"Port\\\": \\\"port\\\",\\n  \\\"Malware SHA-1 Hash\\\": \\\"sha1\\\",\\n  \\\"Malware SHA-256 Hash\\\": \\\"sha256\\\",\\n  \\\"URI Path\\\": \\\"uri\\\",\\n  \\\"URL\\\": \\\"url\\\",\\n  \\\"Threat CVE ID\\\": \\\"vulnerability\\\",\\n  \\\"IP Address\\\": \\\"ip-dst\\\"\\n}\\n\\ntry:\\n  misp_type = resilient_to_misp_map.get(artifact.type)\\n  inputs.misp_attribute_type = misp_type\\nexcept Exception as e:\\n  helper.fail(\\\"You do not have this artifact type {} mapped to a type in MISP - Ask your Admin\\\".format(artifact.value))\\n  raise e\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"misp_attribute\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09po78i\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wi8bkr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_09po78i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"88ec88bb-d75c-4ee2-a24f-5143c189e0eb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wi8bkr\u003c/incoming\u003e\u003coutgoing\u003eFlow_1rwxt24\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1wi8bkr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1rwxt24\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1rwxt24\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1ae9c3d9_d191_4508_9c8e_736909a4bdfb\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rwxt24\" id=\"Flow_1rwxt24_di\"\u003e\u003comgdi:waypoint x=\"724\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"724\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wi8bkr\" id=\"Flow_1wi8bkr_di\"\u003e\u003comgdi:waypoint x=\"724\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"724\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09po78i\" id=\"Flow_09po78i_di\"\u003e\u003comgdi:waypoint x=\"724\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"724\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"633\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"626\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"626\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"658\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1701273359455,
       "creator_principal": {
@@ -820,7 +820,7 @@
         "name": "b@example.com",
         "type": "user"
       },
-      "last_modified_time": 1701273878662,
+      "last_modified_time": 1701876656000,
       "local_scripts": [
         {
           "actions": [],
@@ -831,12 +831,12 @@
           "id": 119,
           "language": "python3",
           "last_modified_by": "b@example.com",
-          "last_modified_time": 1701273836444,
+          "last_modified_time": 1701876654429,
           "name": "post process",
           "object_type": "artifact",
           "playbook_handle": "misp_create_attribute",
           "programmatic_name": "misp_create_attribute_post_process",
-          "script_text": "results = playbook.functions.results.misp_attribute\nexisting_description = artifact.description.content+\u0027\\n\u0027 if artifact.description else \"\"\n\nif results.get(\"content\", [])[0].get(\u0027errors\u0027):\n  artifact.description = \"{}MISP Attribute failure: {}\".format(existing_description, results.get(\"content\", [])[0].get(\u0027errors\u0027, {}).get(\u0027value\u0027))\nelse:\n  artifact.description = \"{}MISP Attribute created: {}\".format(existing_description, results.get(\"content\", [])[0].get(\u0027Attribute\u0027, {}).get(\u0027category\u0027))",
+          "script_text": "results = playbook.functions.results.misp_attribute\nif results.get(\"content\", {}).get(\u0027errors\u0027):\n  incident.addNote(f\"MISP failed to create attribute {artifact.value}.\\nError: {results.get(\u0027content\u0027, {}).get(\u0027errors\u0027, {}).get(\u0027value\u0027)}\")\nelse:\n  incident.addNote(f\"MISP created attribute {artifact.value} with category {results.get(\u0027content\u0027, {}).get(\u0027Attribute\u0027, {}).get(\u0027category\u0027)}\")",
           "tags": [],
           "uuid": "88ec88bb-d75c-4ee2-a24f-5143c189e0eb"
         }
@@ -844,6 +844,30 @@
       "manual_settings": {
         "activation_conditions": {
           "conditions": [
+            {
+              "evaluation_id": null,
+              "field_name": "artifact.type",
+              "method": "in",
+              "type": null,
+              "value": [
+                "IP Address",
+                "DNS Name",
+                "URL",
+                "Email Subject",
+                "Email Body",
+                "Email Attachment",
+                "Email Sender",
+                "Malware MD5 Hash",
+                "Malware SHA-1 Hash",
+                "Email Recipient",
+                "Port",
+                "File Name",
+                "Malware SHA-256 Hash",
+                "MAC Address",
+                "URI Path",
+                "Threat CVE ID"
+              ]
+            },
             {
               "evaluation_id": null,
               "field_name": "incident.properties.misp_event_id",
@@ -869,7 +893,7 @@
       "tags": [],
       "type": "default",
       "uuid": "1ae9c3d9-d191-4508-9c8e-736909a4bdfb",
-      "version": 10
+      "version": 12
     },
     {
       "activation_type": "manual",
@@ -980,8 +1004,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_10d913f7_0b85_4020_bf18_496113b72824\" isExecutable=\"true\" name=\"playbook_10d913f7_0b85_4020_bf18_496113b72824\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0959ipc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MISP Create Sighting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e9df792b-a3af-4d67-ae90-e48aabca138c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.misp_sighting = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"misp_sighting\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0959ipc\u003c/incoming\u003e\u003coutgoing\u003eFlow_012ao5b\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0959ipc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4c03238e-ef59-4e1b-8591-f8ca184ac840\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_012ao5b\u003c/incoming\u003e\u003coutgoing\u003eFlow_05hjwli\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_012ao5b\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_05hjwli\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_05hjwli\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_10d913f7_0b85_4020_bf18_496113b72824\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0959ipc\" id=\"Flow_0959ipc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_012ao5b\" id=\"Flow_012ao5b_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05hjwli\" id=\"Flow_05hjwli_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 7,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_10d913f7_0b85_4020_bf18_496113b72824\" isExecutable=\"true\" name=\"playbook_10d913f7_0b85_4020_bf18_496113b72824\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0959ipc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MISP Create Sighting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e9df792b-a3af-4d67-ae90-e48aabca138c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.misp_sighting = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"misp_sighting\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0959ipc\u003c/incoming\u003e\u003coutgoing\u003eFlow_012ao5b\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0959ipc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4c03238e-ef59-4e1b-8591-f8ca184ac840\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_012ao5b\u003c/incoming\u003e\u003coutgoing\u003eFlow_05hjwli\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_012ao5b\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_05hjwli\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_05hjwli\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_10d913f7_0b85_4020_bf18_496113b72824\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05hjwli\" id=\"Flow_05hjwli_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"494\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_012ao5b\" id=\"Flow_012ao5b_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0959ipc\" id=\"Flow_0959ipc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"494\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1701274219326,
       "creator_principal": {
@@ -1032,7 +1056,7 @@
         "name": "b@example.com",
         "type": "user"
       },
-      "last_modified_time": 1701274446022,
+      "last_modified_time": 1701877008681,
       "local_scripts": [
         {
           "actions": [],
@@ -1043,12 +1067,12 @@
           "id": 121,
           "language": "python3",
           "last_modified_by": "b@example.com",
-          "last_modified_time": 1701274401042,
+          "last_modified_time": 1701876992032,
           "name": "post process",
           "object_type": "artifact",
           "playbook_handle": "misp_create_sighting",
           "programmatic_name": "misp_create_sighting_post_process",
-          "script_text": "results = playbook.functions.results.misp_sighting\nexisting_description = artifact.description.content+\u0027\\n\u0027 if artifact.description else \"\"\n\nif results.get(\"success\"):\n  artifact.description = \"{}MISP Attribute created: {}\".format(existing_description, results.get(\"content\", {}).get(\u0027message\u0027))",
+          "script_text": "results = playbook.functions.results.misp_sighting\nexisting_description = artifact.description.content+\u0027\\n\u0027 if artifact.description else \"\"\n\nif results.get(\"success\"):\n  incident.addNote(f\"MISP Sighting {artifact.value} created with ID {results.get(\u0027content\u0027, {}).get(\u0027Sighting\u0027, {}).get(\u0027id\u0027)}\")",
           "tags": [],
           "uuid": "4c03238e-ef59-4e1b-8591-f8ca184ac840"
         }
@@ -1073,13 +1097,13 @@
       "tags": [],
       "type": "default",
       "uuid": "10d913f7-0b85-4020-bf18-496113b72824",
-      "version": 9
+      "version": 11
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_baaf18ee_7813_4ebd_a5b7_7a1a80dcfa8d\" isExecutable=\"true\" name=\"playbook_baaf18ee_7813_4ebd_a5b7_7a1a80dcfa8d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1mkn0kk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MISP Search Attribute\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c248bc7c-b60f-4d36-9a2e-294ee78a5981\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.misp_attribute_value = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"misp_attributes\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mkn0kk\u003c/incoming\u003e\u003coutgoing\u003eFlow_1mlcrkt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1mkn0kk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ac69fa8a-705a-414f-97d5-b7b78350f3db\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mlcrkt\u003c/incoming\u003e\u003coutgoing\u003eFlow_08f99u4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1mlcrkt\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_08f99u4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_08f99u4\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_baaf18ee_7813_4ebd_a5b7_7a1a80dcfa8d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mkn0kk\" id=\"Flow_1mkn0kk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mlcrkt\" id=\"Flow_1mlcrkt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08f99u4\" id=\"Flow_08f99u4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"544\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"544\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 16,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_baaf18ee_7813_4ebd_a5b7_7a1a80dcfa8d\" isExecutable=\"true\" name=\"playbook_baaf18ee_7813_4ebd_a5b7_7a1a80dcfa8d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1mkn0kk\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MISP Search Attribute\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c248bc7c-b60f-4d36-9a2e-294ee78a5981\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.misp_attribute_value = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"misp_attributes\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mkn0kk\u003c/incoming\u003e\u003coutgoing\u003eFlow_1mlcrkt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1mkn0kk\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ac69fa8a-705a-414f-97d5-b7b78350f3db\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mlcrkt\u003c/incoming\u003e\u003coutgoing\u003eFlow_08f99u4\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1mlcrkt\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_08f99u4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_08f99u4\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_baaf18ee_7813_4ebd_a5b7_7a1a80dcfa8d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08f99u4\" id=\"Flow_08f99u4_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"544\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mlcrkt\" id=\"Flow_1mlcrkt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mkn0kk\" id=\"Flow_1mkn0kk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"544\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1701274481009,
       "creator_principal": {
@@ -1130,7 +1154,7 @@
         "name": "b@example.com",
         "type": "user"
       },
-      "last_modified_time": 1701274977850,
+      "last_modified_time": 1701879330175,
       "local_scripts": [
         {
           "actions": [],
@@ -1141,12 +1165,12 @@
           "id": 122,
           "language": "python3",
           "last_modified_by": "b@example.com",
-          "last_modified_time": 1701274961924,
+          "last_modified_time": 1701879305711,
           "name": "post process",
           "object_type": "artifact",
           "playbook_handle": "misp_search_attribute",
           "programmatic_name": "misp_search_attribute_post_process",
-          "script_text": "results = playbook.functions.results.misp_attributes\nexisting_description = artifact.description.content+\u0027\\n\u0027 if artifact.description else \"\"\n\nif not results.success:\n  artifact.description = \"{}No matching attribute found\".format(existing_description)\nelse:\n  matched = []\n  for match in results.get(\"content\", {}):\n    matched.append(u\"Event: {}, ID: {}, Tags: {}\".format(match.get(\u0027Event\u0027, {}).get(\u0027info\u0027), match.get(\u0027Event\u0027, {}).get(\u0027id\u0027), results.get(\"tags\")))\n\n  artifact.description = u\"{} Attribute Search Matches:\\n {}\".format(existing_description, \u0027\\n\u0027.join(matched))",
+          "script_text": "results = playbook.functions.results.misp_attributes\n\nif not results.get(\"success\"):\n  incident.addNote(f\"No attributes matching {artifact.value} found\")\nelse:\n  matched = []\n  for match in results.get(\"content\", {}):\n    matched.append(f\"Event: {match.get(\u0027Event\u0027, {}).get(\u0027info\u0027)}, ID: {match.get(\u0027Event\u0027, {}).get(\u0027id\u0027)}\")\n  incident.addNote(\"Attribute Search Macthes:\\n {}\".format(\u0027\\n\u0027.join(matched)))",
           "tags": [],
           "uuid": "ac69fa8a-705a-414f-97d5-b7b78350f3db"
         }
@@ -1171,13 +1195,13 @@
       "tags": [],
       "type": "default",
       "uuid": "baaf18ee-7813-4ebd-a5b7-7a1a80dcfa8d",
-      "version": 8
+      "version": 20
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_b7f5aee8_0b88_4ce9_92f6_b24b757d29ac\" isExecutable=\"true\" name=\"playbook_b7f5aee8_0b88_4ce9_92f6_b24b757d29ac\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1anrt8h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MISP Sighting List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8b531827-741d-40e8-90a5-1ec99cb1710d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.misp_event_id = incident.properties.misp_event_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"misp_sighting\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1anrt8h\u003c/incoming\u003e\u003coutgoing\u003eFlow_05qajxv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1anrt8h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1db98320-52e4-4d0a-8bcc-a397db8e24cc\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05qajxv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wizgrw\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05qajxv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1wizgrw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1wizgrw\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b7f5aee8_0b88_4ce9_92f6_b24b757d29ac\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1anrt8h\" id=\"Flow_1anrt8h_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05qajxv\" id=\"Flow_05qajxv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wizgrw\" id=\"Flow_1wizgrw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 5,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_b7f5aee8_0b88_4ce9_92f6_b24b757d29ac\" isExecutable=\"true\" name=\"playbook_b7f5aee8_0b88_4ce9_92f6_b24b757d29ac\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1anrt8h\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"MISP Sighting List\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8b531827-741d-40e8-90a5-1ec99cb1710d\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.misp_event_id = incident.properties.misp_event_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"misp_sighting\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1anrt8h\u003c/incoming\u003e\u003coutgoing\u003eFlow_05qajxv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1anrt8h\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1db98320-52e4-4d0a-8bcc-a397db8e24cc\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05qajxv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1wizgrw\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_05qajxv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1wizgrw\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1wizgrw\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b7f5aee8_0b88_4ce9_92f6_b24b757d29ac\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wizgrw\" id=\"Flow_1wizgrw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05qajxv\" id=\"Flow_05qajxv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1anrt8h\" id=\"Flow_1anrt8h_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1701275022764,
       "creator_principal": {
@@ -1228,7 +1252,7 @@
         "name": "b@example.com",
         "type": "user"
       },
-      "last_modified_time": 1701275184622,
+      "last_modified_time": 1701879353186,
       "local_scripts": [
         {
           "actions": [],
@@ -1277,7 +1301,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b7f5aee8-0b88-4ce9-92f6-b24b757d29ac",
-      "version": 8
+      "version": 9
     }
   ],
   "regulators": null,

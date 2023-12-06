@@ -35,21 +35,16 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Searching for attribute - {search_attribute}")
 
-        results = {}
+        results = []
 
         search_results = misp_helper.search_misp_attribute(misp_client, search_attribute)
 
         self.LOG.debug(search_results)
 
-        if search_results['search_status']:
-            results['success'] = True
-            results['content'] = search_results['search_results']
-            misp_tags = misp_helper.get_misp_attribute_tags(misp_client, search_results['search_results'])
-            results['tags'] = misp_tags
-        else:
-            results['success'] = False
+        if search_results.get('search_status'):
+            results = search_results.get('search_results', [])
 
         yield self.status_message("Attribute search complete.")
 
         # Produce a FunctionResult with the results
-        yield FunctionResult(results)
+        yield FunctionResult(results, success=search_results.get("search_status"))

@@ -61,7 +61,7 @@ results = playbook.functions.results.misp_sighting
 existing_description = artifact.description.content+'\n' if artifact.description else ""
 
 if results.get("success"):
-  artifact.description = "{}MISP Attribute created: {}".format(existing_description, results.get("content", {}).get('message'))
+  incident.addNote(f"MISP Sighting {artifact.value} created with ID {results.get('content', {}).get('Sighting', {}).get('id')}")
 ```
 
 ---

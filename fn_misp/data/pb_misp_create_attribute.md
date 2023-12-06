@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`incident.properties.misp_event_id has_a_value`
+`artifact.type in ['IP Address', 'DNS Name', 'URL', 'Email Subject', 'Email Body', 'Email Attachment', 'Email Sender', 'Malware MD5 Hash', 'Malware SHA-1 Hash', 'Email Recipient', 'Port', 'File Name', 'Malware SHA-256 Hash', 'MAC Address', 'URI Path', 'Threat CVE ID'] AND incident.properties.misp_event_id has_a_value`
 
 ### Object Type
 `artifact`
@@ -86,12 +86,10 @@ except Exception as e:
 ### Script Content
 ```python
 results = playbook.functions.results.misp_attribute
-existing_description = artifact.description.content+'\n' if artifact.description else ""
-
-if results.get("content", [])[0].get('errors'):
-  artifact.description = "{}MISP Attribute failure: {}".format(existing_description, results.get("content", [])[0].get('errors', {}).get('value'))
+if results.get("content", {}).get('errors'):
+  incident.addNote(f"MISP failed to create attribute {artifact.value}.\nError: {results.get('content', {}).get('errors', {}).get('value')}")
 else:
-  artifact.description = "{}MISP Attribute created: {}".format(existing_description, results.get("content", [])[0].get('Attribute', {}).get('category'))
+  incident.addNote(f"MISP created attribute {artifact.value} with category {results.get('content', {}).get('Attribute', {}).get('category')}")
 ```
 
 ---
