@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 """Function implementation"""
 
 import ast
@@ -9,7 +9,8 @@ import sys
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, str_to_bool
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
-from .feed_ingest import Reload, build_feed_outputs, PluginPool
+from rc_data_feed.components.threadpool import PluginPool_Factory
+from .feed_ingest import Reload, build_feed_outputs
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'data_feeder_sync_incidents"""
@@ -30,9 +31,6 @@ class FunctionComponent(ResilientComponent):
     def _data_feeder_sync_incidents_function(self, event, *args, **kwargs):
         """Function: Synchronize Incident(s) and their associated tasks, notes, attachments, artifacts, milestones and associated datatables"""
         try:
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
-
             result = ResultPayload("data_feeder", **kwargs)
 
             # Get the function parameters:
@@ -63,7 +61,7 @@ class FunctionComponent(ResilientComponent):
             # expose attachment content setting
             self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
-            plugin_pool = PluginPool(rest_client_helper,
+            plugin_pool = PluginPool_Factory.get_thread_pool(rest_client_helper,
                                      int(self.opts.get("resilient", {}).get("num_workers", 0)),
                                      feed_outputs,
                                      self.workspaces)
