@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
-import json, os
+import json, os, copy
 import pytest, unittest
 
 from requests.exceptions import InvalidURL
@@ -22,15 +22,18 @@ class TestAttachmentConstants(unittest.TestCase):
 
 ATH_METADATA = json.loads(open(os.path.join(os.path.dirname(__file__), "data", "attachmentResponse.json"), "r").read())
 ART_METADATA = json.loads(open(os.path.join(os.path.dirname(__file__), "data", "artifactResponse.json"), "r").read())
+ART_WO_ATCH  = json.loads(open(os.path.join(os.path.dirname(__file__), "data", "artifactWithoutAttachmentResponse.json"), "r").read())
 ATH_CONTENT  = open(os.path.join(os.path.dirname(__file__), "data", "attachment.svg"), "rb").read()
 ART_CONTENT  = open(os.path.join(os.path.dirname(__file__), "data", "artifact.svg"), "rb").read()
 
 class MockRestClient(MagicMock):
     def get(self, url):
         if url == '/incidents/2096/attachments/478':
-            return ATH_METADATA
+            return copy.deepcopy(ATH_METADATA)
         elif url == '/incidents/2096/artifacts/26':
-            return ART_METADATA
+            return copy.deepcopy(ART_METADATA)
+        elif url == '/incidents/2096/artifacts/36':
+            return copy.deepcopy(ART_WO_ATCH)
         else:
             raise InvalidURL(f"unrecognized url : {url}")
 
@@ -85,6 +88,12 @@ class TestAttachmentHandler(unittest.TestCase):
         ath = AttachmentHandler(rest_client)
         with pytest.raises(InvalidURL) as err:
             ath.add_files(incident_id=2096, artifact_id=500)
+
+    def test_artifact_with_no_attachment(self):
+        rest_client = MockRestClient()
+        ath = AttachmentHandler(rest_client)
+        with pytest.raises(ValueError) as err:
+            ath.add_files(incident_id=2096, artifact_id=36, attachment_id=478)
 
     def test_both(self):
         rest_client = MockRestClient()
@@ -153,3 +162,29 @@ class TestGetFileContents(unittest.TestCase):
         assert ret["file_path_on_device"]
         assert os.path.isfile(ret["file_path_on_device"])
         assert open(ret["file_path_on_device"], "rb").read() == ATH_CONTENT
+
+
+class TestFindArtifactId(unittest.TestCase):
+
+    def test_missing_artifact_id(self):
+        rest_client = MockRestClient()
+        ath = AttachmentHandler(rest_client)
+        with pytest.raises(TypeError) as err:
+            ath.find_artifact_by_id()
+
+    def test_working_artifact_id(self):
+        rest_client = MockRestClient()
+        ath = AttachmentHandler(rest_client)
+        ath.incident_id = 2096
+        response = ath.find_artifact_by_id(artifact_id=26)
+        assert response.get(ATTACHMENT_ID)
+        assert response.get(ATTACHMENT_ID) == ART_METADATA.get("attachment").get("id")
+        assert response.get(ID)
+        assert response.get(ID) == ART_METADATA.get("id")
+    
+    def test_artifact_without_attachment(self):
+        rest_client = MockRestClient()
+        ath = AttachmentHandler(rest_client)
+        ath.incident_id = 2096
+        with pytest.raises(ValueError) as err:
+            ath.find_artifact_by_id(artifact_id=36)
