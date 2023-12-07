@@ -99,8 +99,8 @@ DATA_TBL_FIELDS = ["query_execution_time", "list_name", "guid", "file_descriptio
 # Processing
 response = results.response
 query_execution_time = results.query_execution_time
-data = response["data"]
 if response is not None:
+    data = response["data"]
     r = response["metadata"]["results"]
     noteText = "Cisco AMP for Endpoints Integration: There were <b>{0}</b> results returned out of a total of <b>{1}</b> " \
                "for list <b>{2}</b> for Resilient function <b>{3}</b>"\

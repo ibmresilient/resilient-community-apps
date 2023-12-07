@@ -111,7 +111,8 @@ else:
 ### Pre-Processing Script
 ```python
 response =  workflow.properties.get_computers_results.response
-inputs.amp_conn_guid = response["data"][0]["connector_guid"]
+if response.get("data", []):
+  inputs.amp_conn_guid = response["data"][0]["connector_guid"]
 inputs.amp_q = rule.properties.amp_q
 ```
 

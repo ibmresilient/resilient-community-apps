@@ -86,7 +86,7 @@ response = results.response
 query_execution_time = results.query_execution_time
 input_params = results.input_params
 
-if response is not None and response["metadata"]["results"]["total"] != 0:
+if response is not None and response.get("metadata", {}).get("results", {}).get("total") != 0:
     noteText = u"Cisco AMP for Endpoints Integration: Result returned for computer <b>{0}</b> " \
                "for Resilient function <b>{1}</b>"\
         .format(input_params.get("hostname", {}), "fn_amp_get_computer")

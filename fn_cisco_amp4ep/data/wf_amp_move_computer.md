@@ -181,11 +181,11 @@ response_groups =  workflow.properties.get_groups_results.response
 input_params_groups = workflow.properties.get_groups_results.input_params
 response_computers =  workflow.properties.get_computers_results.response
 input_params_computers = workflow.properties.get_computers_results.input_params
-if response_groups is not None and response_groups["metadata"]["results"]["total"] > 0:
+if response_groups.get("metadata", {}).get("results", {}).get("total") > 0:
   inputs.amp_group_guid = response_groups["data"][0]["guid"]
 else:
   raise ValueError("No results returned for group name")
-if response_computers is not None and response_computers["metadata"]["results"]["total"] > 0:
+if response_computers.get("metadata", {}).get("results", {}).get("total") > 0:
   inputs.amp_conn_guid = response_computers["data"][0]["connector_guid"]
 else:
   raise ValueError("No results returned for computer name")
