@@ -16,7 +16,7 @@ def get_cli_raw_responses(op):
                                                                          u'Key': 'Tes Tag2'}],
                        u'PasswordLastUsed': datetime.datetime(2019, 11, 15, 17, 11, 28, tzinfo=tzutc()),
                        u'CreateDate': datetime.datetime(2019, 11, 5, 15, 54, 43, tzinfo=tzutc()),
-                       u'UserId': 'AIDA4EQBBG2YGZOQXT2JB', u'Path': '/',
+                       u'UserId': 'ABCDEFGH', u'Path': '/',
                        u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_1'},
              'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200,
                                   'RequestId': '9af69169-8050-469a-a9c8-bceaab643067',
@@ -29,11 +29,11 @@ def get_cli_raw_responses(op):
                                  u'Users': [{u'UserName': 'iam_test_User_1',
                                              u'PasswordLastUsed': datetime.datetime(2019, 11, 15, 17, 11, 28, tzinfo=tzutc()),
                                              u'CreateDate': datetime.datetime(2019, 11, 5, 15, 54, 43, tzinfo=tzutc()),
-                                             u'UserId': 'AIDA4EQBBG2YDOLTU6QSA', u'Path': '/',
+                                             u'UserId': 'ABCDEFGH', u'Path': '/',
                                              u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_1'},
                                             {u'UserName': 'iam_test_User_2', u'Path': '/',
                                              u'CreateDate': datetime.datetime(2019, 11, 18, 18, 11, 33, tzinfo=tzutc()),
-                                             u'UserId': 'AIDA4EQBBG2YDOLTU6QSB',
+                                             u'UserId': 'ABCDEFGH',
                                              u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_2'}],
                                  'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200,
                                                       'RequestId': '013d16e4-2df8-4e84-b798-198c096e4e16',
@@ -42,12 +42,12 @@ def get_cli_raw_responses(op):
                                                                       'content-type': 'text/xml'}}, u'IsTruncated': True},
                                  {u'Users': [{u'UserName': 'iam_test_User_3', u'Path': '/',
                                               u'CreateDate': datetime.datetime(2019, 11, 18, 18, 11, 34, tzinfo=tzutc()),
-                                              u'UserId': 'AIDA4EQBBG2YDOLTU6QSC',
+                                              u'UserId': 'ABCDEFGH',
                                               u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_3'},
                                              {u'UserName': 'iam_test_User_4',
                                               u'PasswordLastUsed': datetime.datetime(2019, 12, 10, 17, 10, 40, tzinfo=tzutc()),
                                               u'CreateDate': datetime.datetime(2019, 10, 31, 16, 23, 7, tzinfo=tzutc()),
-                                              u'UserId': 'AIDA4EQBBG2YDOLTU6QSD', u'Path': '/',
+                                              u'UserId': 'ABCDEFGH', u'Path': '/',
                                               u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_4'}],
                                   'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200,
                                                        'RequestId': '4b16f25c-43a1-42da-ba1c-406697f0d509',
@@ -128,7 +128,7 @@ def mocked_iam_pre_results(type):
                                'AccessKeyId': 'ABCDEFGH2'}]
         ),
         "groups":([{'Path': '/', 'CreateDate': datetime.datetime(2017, 5, 29, 20, 37, 53, tzinfo=tzutc()),
-                    'GroupId': 'AGPAJUCG3BHM64OGVGCBG',
+                    'GroupId': 'ABCDEFGH',
                     'Arn': 'arn:aws:iam::123456789012:group/test-group',
                     'GroupName': 'test-group'}]
 
@@ -138,12 +138,12 @@ def mocked_iam_pre_results(type):
                                 {'Value': 'system', 'Key': 'Account_Type'}],
                        'PasswordLastUsed': datetime.datetime(2019, 11, 15, 17, 11, 28, tzinfo=tzutc()),
                        'CreateDate': datetime.datetime(2019, 10, 31, 16, 23, 7, tzinfo=tzutc()),
-                       'UserId': 'AIDA4EQBBG2YGZOQXT2JB', 'Path': '/',
+                       'UserId': 'ABCDEFGH', 'Path': '/',
                        'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_2'}]
         ),
         "pre_result_add_prop": ([{'UserName': 'iam_test_User_1',
                          'CreateDate': '2019-10-31 16:23:07',
-                         'UserId': 'AIDA4EQBBG2YGZOQXT2JA',
+                         'UserId': 'ABCDEFGH1',
                          'Path': '/', 'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_1'}]
         ),
         "pre_result_default_add_prop": ([{'UserName': 'iam_test_User_2',
@@ -151,13 +151,13 @@ def mocked_iam_pre_results(type):
                                           {'Value': 'system', 'Key': 'Account_Type'}],
                                  'PasswordLastUsed': '2019-11-15 17:11:28',
                                  'CreateDate': '2019-10-31 16:23:07',
-                                 'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                                 'UserId': 'ABCDEFGH',
                                  'Path': '/', 'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_2'}]
                               ),
         "pre_result_with_profile_add_prop": ([{'UserName': 'iam_test_User_3',
                          'PasswordLastUsed': '2019-11-15 17:11:28',
                          'CreateDate': '2019-10-31 16:23:07',
-                         'UserId': 'AIDA4EQBBG2YGZOQXT2JC',
+                         'UserId': 'ABCDEFGH3',
                          'Path': '/', 'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_3'}]
         )
     }
@@ -167,7 +167,7 @@ def mocked_iam_pre_results(type):
 def mock_client_results(type):
 
     response = {
-        "expected_result_add_prop": ([{'Path': '/', 'UserName': 'iam_test_User_1', 'UserId': 'AIDA4EQBBG2YGZOQXT2JA',
+        "expected_result_add_prop": ([{'Path': '/', 'UserName': 'iam_test_User_1', 'UserId': 'ABCDEFGH1',
                               'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_1',
                               'CreateDate': '2019-10-31 16:23:07', 'LoginProfileExists': 'No'}]
         ),
@@ -175,19 +175,19 @@ def mock_client_results(type):
                                       'Tags': [{'Value': 'test', 'Key': 'Evironment'},
                                                {'Value': 'system', 'Key': 'Account_Type'}],
                                       'PasswordLastUsed': '2019-11-15 17:11:28',
-                                      'CreateDate': '2019-10-31 16:23:07', 'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                                      'CreateDate': '2019-10-31 16:23:07', 'UserId': 'ABCDEFGH',
                                       'LoginProfileExists': 'Yes', 'Path': '/',
                                       'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_2'}]
         ),
         "expected_result_with_profile_add_prop": ([{'Path': '/', 'UserName': 'iam_test_User_3',
-                                           'UserId': 'AIDA4EQBBG2YGZOQXT2JC',
+                                           'UserId': 'ABCDEFGH3',
                                            'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_3',
                                            'CreateDate': '2019-10-31 16:23:07',
                                            'PasswordLastUsed': '2019-11-15 17:11:28',
                                            'LoginProfileExists': 'Yes'}]
         ),
         "expected_result_upd_group": ([{'Path': '/', 'CreateDate': '2017-05-29 20:37:53',
-                                                    'GroupId': 'AGPAJUCG3BHM64OGVGCBG',
+                                                    'GroupId': 'ABCDEFGH',
                                                     'Arn': 'arn:aws:iam::123456789012:group/test-group',
                                                     'GroupName': 'test-group'}]
         ),
@@ -200,17 +200,17 @@ def mock_client_results(type):
 
                                     ),
         "expected result_pagination": ([{u'UserName': 'iam_test_User_1', u'PasswordLastUsed': '2019-11-15 17:11:28',
-                                         u'CreateDate': '2019-11-05 15:54:43', u'UserId': 'AIDA4EQBBG2YDOLTU6QSA',
+                                         u'CreateDate': '2019-11-05 15:54:43', u'UserId': 'ABCDEFGH',
                                          'LoginProfileExists': 'No', u'Path': '/',
                                          u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_1'},
                                         {u'UserName': 'iam_test_User_2', 'LoginProfileExists': 'Yes', u'Path': '/',
-                                         u'CreateDate': '2019-11-18 18:11:33', u'UserId': 'AIDA4EQBBG2YDOLTU6QSB',
+                                         u'CreateDate': '2019-11-18 18:11:33', u'UserId': 'ABCDEFGH',
                                          u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_2'},
                                         {u'UserName': 'iam_test_User_3', 'LoginProfileExists': 'Yes', u'Path': '/',
-                                         u'CreateDate': '2019-11-18 18:11:34', u'UserId': 'AIDA4EQBBG2YDOLTU6QSC',
+                                         u'CreateDate': '2019-11-18 18:11:34', u'UserId': 'ABCDEFGH',
                                          u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_3'},
                                         {u'UserName': 'iam_test_User_4', u'PasswordLastUsed': '2019-12-10 17:10:40',
-                                         u'CreateDate': '2019-10-31 16:23:07', u'UserId': 'AIDA4EQBBG2YDOLTU6QSD',
+                                         u'CreateDate': '2019-10-31 16:23:07', u'UserId': 'ABCDEFGH',
                                          'LoginProfileExists': 'No', u'Path': '/',
                                          u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_4'}]
                                       ),
@@ -219,7 +219,7 @@ def mock_client_results(type):
                                            {u'Key': 'Tes Tag2', u'Value': 'Another test tag'}],
                                  u'PasswordLastUsed': '2019-11-15 17:11:28',
                                  u'CreateDate': '2019-11-05 15:54:43',
-                                 u'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                                 u'UserId': 'ABCDEFGH',
                                  'LoginProfileExists': 'Yes',
                                  u'Path': '/', u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_1'}]
                                )
@@ -230,20 +230,20 @@ def mock_client_results(type):
 # Mocked responses for Function tests.
 def get_func_responses(op):
     response = {
-        "get_user": ([{'Path': '/', 'UserName': 'iam_test_User_1', 'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+        "get_user": ([{'Path': '/', 'UserName': 'iam_test_User_1', 'UserId': 'ABCDEFGH',
                          'Arn': 'arn:aws:iam::012345678901:user/iam_test_User_1', 'CreateDate': '2019-10-31 16:23:07',
                          'PasswordLastUsed': '2019-12-10 17:10:40', 'LoginProfileExists': 'Yes', 'DefaultUser': 'Yes'}]
         ),
-        "list_users": ([{'Path': '/', 'UserName': 'iam_list_User', 'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+        "list_users": ([{'Path': '/', 'UserName': 'iam_list_User', 'UserId': 'ABCDEFGH',
                          'Arn': 'arn:aws:iam::012345678901:user/iam_test_User', 'CreateDate': '2019-10-31 16:23:07',
                          'PasswordLastUsed': '2019-12-10 17:10:40', 'LoginProfileExists': 'Yes', 'DefaultUser': 'Yes'},
-                        {'Path': '/', 'UserName': 'iam_list_User_1', 'UserId': 'AIDA4EQBBG2YDOLTU6QSM',
+                        {'Path': '/', 'UserName': 'iam_list_User_1', 'UserId': 'ABCDEFGH',
                          'Arn': 'arn:aws:iam::012345678901:user/iam_test_User_1', 'CreateDate': '2019-11-05 15:54:43',
                          'PasswordLastUsed': '2019-11-15 17:11:28', 'LoginProfileExists': 'Yes'},
-                        {'Path': '/', 'UserName': 'iam_list_User_2', 'UserId': 'AIDA4EQBBG2YAZYSSDGXE',
+                        {'Path': '/', 'UserName': 'iam_list_User_2', 'UserId': 'ABCDEFGH',
                          'Arn': 'arn:aws:iam::012345678901:user/iam_test_User_2', 'CreateDate': '2019-11-18 18:11:33',
                          'LoginProfileExists': 'No'},
-                        {'Path': '/', 'UserName': 'iam_list_User_3', 'UserId': 'AIDAJJWGAZUIOOUXCUOHA',
+                        {'Path': '/', 'UserName': 'iam_list_User_3', 'UserId': 'ABCDEFGH',
                          'Arn': 'arn:aws:iam::012345678901:user/iam_test_User_3', 'CreateDate': '2017-05-29 20:38:09',
                          'LoginProfileExists': 'Yes'}]
                       ),
@@ -260,12 +260,12 @@ def get_func_responses(op):
                                           'DefaultUser': 'Yes',
                                           'Groups': [{'Arn': 'arn:aws:iam::123456789012:group/null_group',
                                                       'CreateDate': '2019-12-04 12:31:47',
-                                                      'GroupId': 'AGPA4EQBBG2YAVPJATCNZ',
+                                                      'GroupId': 'ABCDEFGH',
                                                       'GroupName': 'null_group',
                                                       'Path': '/'},
                                                      {'Arn': 'arn:aws:iam::123456789012:group/denyall_group',
                                                       'CreateDate': '2019-11-29 15:49:34',
-                                                      'GroupId': 'AGPA4EQBBG2YPUAIHTA3E',
+                                                      'GroupId': 'ABCDEFGH',
                                                       'GroupName': 'denyall_group',
                                                       'Path': '/'}],
                                           'LoginProfileExists': 'Yes',
@@ -278,7 +278,7 @@ def get_func_responses(op):
                                                         'PolicyName': 'AWSDenyAll'}],
                                           'Tags': [{'Key': 'Test_tag1', 'Value': 'A test TAG'},
                                                    {'Key': 'Tes Tag2', 'Value': 'Another test tag'}],
-                                          'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                                          'UserId': 'ABCDEFGH',
                                           'UserName': 'iam_test_User_1'}]
         ),
         "list_users_filtered_by_group":([{'Arn': 'arn:aws:iam::012345678901:user/iam_test_User',
@@ -286,13 +286,13 @@ def get_func_responses(op):
                                           'DefaultUser': 'Yes',
                                           'Groups': {'Arn': 'arn:aws:iam::123456789012:group/null_group',
                                                      'CreateDate': '2019-12-04 12:31:47',
-                                                     'GroupId': 'AGPA4EQBBG2YAVPJATCNZ',
+                                                     'GroupId': 'ABCDEFGH',
                                                      'GroupName': 'null_group',
                                                      'Path': '/'},
                                           'LoginProfileExists': 'Yes',
                                           'PasswordLastUsed': '2019-12-10 17:10:40',
                                           'Path': '/',
-                                          'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                                          'UserId': 'ABCDEFGH',
                                           'UserName': 'iam_list_User'}]
                                         ),
         "list_users_filtered_by_policy": (  [{'Arn': 'arn:aws:iam::012345678901:user/iam_test_User',
@@ -303,7 +303,7 @@ def get_func_responses(op):
                                               'Path': '/',
                                               'Policies': {'PolicyArn': 'arn:aws:iam::123456789012:policy/deny_all',
                                                            'PolicyName': 'deny_all'},
-                                              'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                                              'UserId': 'ABCDEFGH',
                                               'UserName': 'iam_list_User'}]
         ),
         "list_users_filtered_by_keys_with_dates": ([{'AccessKeyIds': [{'AccessKeyId': 'ABC123CDE456FGH789IJ',
@@ -326,18 +326,18 @@ def get_func_responses(op):
                                                   'LoginProfileExists': 'Yes',
                                                   'PasswordLastUsed': '2019-12-10 17:10:40',
                                                   'Path': '/',
-                                                  'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                                                  'UserId': 'ABCDEFGH',
                                                   'UserName': 'iam_list_User'}]
         ),
-        "list_policies": ([{'PolicyName': 'deny_all', 'PolicyId': 'ANPA4EQBBG2YGU5WU75FL',
+        "list_policies": ([{'PolicyName': 'deny_all', 'PolicyId': 'ABCDEFGH',
                             'Arn': 'arn:aws:iam::123456789012:policy/deny_all', 'Path': '/', 'DefaultVersionId': 'v1',
                             'AttachmentCount': 0, 'PermissionsBoundaryUsageCount': 0, 'IsAttachable': True,
                             'CreateDate': '2019-12-04 12:34:33', 'UpdateDate': '2019-12-04 12:34:33'},
-                           {'PolicyName': 'test_pol_2', 'PolicyId': 'ANPA4EQBBG2YNU2DAGG5G',
+                           {'PolicyName': 'test_pol_2', 'PolicyId': 'ABCDEFGH',
                             'Arn': 'arn:aws:iam::123456789012:policy/test_pol_2', 'Path': '/', 'DefaultVersionId': 'v1',
                             'AttachmentCount': 1, 'PermissionsBoundaryUsageCount': 0, 'IsAttachable': True,
                             'CreateDate': '2019-11-21 11:26:19', 'UpdateDate': '2019-11-21 11:26:19'},
-                           {'PolicyName': 'AWSDenyAll', 'PolicyId': 'ANPAZKAPJZG4P43IUQ5E5',
+                           {'PolicyName': 'AWSDenyAll', 'PolicyId': 'ABCDEFGH',
                             'Arn': 'arn:aws:iam::aws:policy/AWSDenyAll', 'Path': '/', 'DefaultVersionId': 'v1',
                             'AttachmentCount': 3, 'PermissionsBoundaryUsageCount': 0, 'IsAttachable': True,
                             'CreateDate': '2019-05-01 22:36:14', 'UpdateDate': '2019-05-01 22:36:14'}]
@@ -362,10 +362,10 @@ def get_func_responses(op):
                                       ]
         ),
         "list_access_keys_empty": ([]),
-        "list_groups_for_user": ([{'Path': '/', 'GroupName': 'null_group', 'GroupId': 'AGPA4EQBBG2YAVPJATCNZ',
+        "list_groups_for_user": ([{'Path': '/', 'GroupName': 'null_group', 'GroupId': 'ABCDEFGH',
                                    'Arn': 'arn:aws:iam::123456789012:group/null_group',
                                    'CreateDate': '2019-12-04 12:31:47'},
-                                  {'Path': '/', 'GroupName': 'denyall_group', 'GroupId': 'AGPA4EQBBG2YPUAIHTA3E',
+                                  {'Path': '/', 'GroupName': 'denyall_group', 'GroupId': 'ABCDEFGH',
                                    'Arn': 'arn:aws:iam::123456789012:group/denyall_group',
                                    'CreateDate': '2019-11-29 15:49:34'}]
         ),
@@ -399,7 +399,7 @@ def get_func_responses(op):
                                       ]
         ),
         "list_signing_certificates": (
-            [{'UserName': 'iam_test_user', 'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD',
+            [{'UserName': 'iam_test_user', 'CertificateId': 'ABCDEFGH',
               'CertificateBody': '-----BEGIN CERTIFICATE-----MIID...Apg=-----END CERTIFICATE-----',
               'Status': 'Active', 'UploadDate': '2020-02-26 12:25:27'}]
         ),
@@ -408,13 +408,13 @@ def get_func_responses(op):
         "list_service_specific_credentials": ([{'UserName': 'iam_test_user', 'Status': 'Active',
                                                 'ServiceUserName': 'iam_test_user-at-834299573936',
                                                 'CreateDate': '2020-02-25 10:43:24',
-                                                'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ',
+                                                'ServiceSpecificCredentialId': 'ABCDEFGH',
                                                 'ServiceName': 'codecommit.amazonaws.com'
                                                 }]
         ),
         "list_service_specific_credentials_nosuch": ({"Status": "NoSuchEntity"}
         ),
-        "list_ssh_public_keys": ([{'UserName': 'iam_test_user', 'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G',
+        "list_ssh_public_keys": ([{'UserName': 'iam_test_user', 'SSHPublicKeyId': 'ABCDEFGH',
                                    'Status': 'Active', 'UploadDate': '2020-02-25 11:05:17'
                                    }]
         ),
@@ -517,7 +517,7 @@ def mocked_iam(*args, **kwargs):
 
 # Mocked default identity raw response for standalone.
 def get_default_identity(*args, **kwargs):
-    default_identity = {'Account': '012345678901', 'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+    default_identity = {'Account': '012345678901', 'UserId': 'ABCDEFGH',
                         'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200,
                                              'RequestId': '7103139f-1cd5-11ea-8b40-dfdcff3443b4',
                                              'HTTPHeaders': {'x-amzn-requestid': '7103139f-1cd5-11ea-8b40-dfdcff3443b4',
