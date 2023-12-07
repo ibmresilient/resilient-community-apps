@@ -16,7 +16,7 @@ def get_cli_raw_responses(op):
                                                                          u'Key': 'Tes Tag2'}],
                        u'PasswordLastUsed': datetime.datetime(2019, 11, 15, 17, 11, 28, tzinfo=tzutc()),
                        u'CreateDate': datetime.datetime(2019, 11, 5, 15, 54, 43, tzinfo=tzutc()),
-                       u'UserId': 'ABCDEFGH', u'Path': '/',
+                       u'UserId': 'AABCDEFGH', u'Path': '/',
                        u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_1'},
              'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200,
                                   'RequestId': '9af69169-8050-469a-a9c8-bceaab643067',
@@ -138,7 +138,7 @@ def mocked_iam_pre_results(type):
                                 {'Value': 'system', 'Key': 'Account_Type'}],
                        'PasswordLastUsed': datetime.datetime(2019, 11, 15, 17, 11, 28, tzinfo=tzutc()),
                        'CreateDate': datetime.datetime(2019, 10, 31, 16, 23, 7, tzinfo=tzutc()),
-                       'UserId': 'ABCDEFGH', 'Path': '/',
+                       'UserId': 'AABCDEFGH', 'Path': '/',
                        'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_2'}]
         ),
         "pre_result_add_prop": ([{'UserName': 'iam_test_User_1',
@@ -151,7 +151,7 @@ def mocked_iam_pre_results(type):
                                           {'Value': 'system', 'Key': 'Account_Type'}],
                                  'PasswordLastUsed': '2019-11-15 17:11:28',
                                  'CreateDate': '2019-10-31 16:23:07',
-                                 'UserId': 'ABCDEFGH',
+                                 'UserId': 'AABCDEFGH',
                                  'Path': '/', 'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_2'}]
                               ),
         "pre_result_with_profile_add_prop": ([{'UserName': 'iam_test_User_3',
@@ -175,7 +175,7 @@ def mock_client_results(type):
                                       'Tags': [{'Value': 'test', 'Key': 'Evironment'},
                                                {'Value': 'system', 'Key': 'Account_Type'}],
                                       'PasswordLastUsed': '2019-11-15 17:11:28',
-                                      'CreateDate': '2019-10-31 16:23:07', 'UserId': 'ABCDEFGH',
+                                      'CreateDate': '2019-10-31 16:23:07', 'UserId': 'AABCDEFGH',
                                       'LoginProfileExists': 'Yes', 'Path': '/',
                                       'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_2'}]
         ),
@@ -219,7 +219,7 @@ def mock_client_results(type):
                                            {u'Key': 'Tes Tag2', u'Value': 'Another test tag'}],
                                  u'PasswordLastUsed': '2019-11-15 17:11:28',
                                  u'CreateDate': '2019-11-05 15:54:43',
-                                 u'UserId': 'ABCDEFGH',
+                                 u'UserId': 'AABCDEFGH',
                                  'LoginProfileExists': 'Yes',
                                  u'Path': '/', u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_1'}]
                                )
@@ -517,7 +517,7 @@ def mocked_iam(*args, **kwargs):
 
 # Mocked default identity raw response for standalone.
 def get_default_identity(*args, **kwargs):
-    default_identity = {'Account': '012345678901', 'UserId': 'ABCDEFGH',
+    default_identity = {'Account': '012345678901', 'UserId': 'AABCDEFGH',
                         'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200,
                                              'RequestId': '7103139f-1cd5-11ea-8b40-dfdcff3443b4',
                                              'HTTPHeaders': {'x-amzn-requestid': '7103139f-1cd5-11ea-8b40-dfdcff3443b4',
