@@ -84,16 +84,15 @@ def get_event_uuid(misp_client, misp_event_id):
     return event_uuid
 
 def get_attribute_uuid(misp_client, misp_attribute_value, misp_event_id):
-    misp_event = MISPEvent()
-    misp_event.id = int(misp_event_id)
-    event_response = misp_client.get_event(misp_event)
+    event_response = misp_client.get_event(int(misp_event_id))
     attribute_uuid = None
-    if not event_response.get('Event').get('Attribute'):
+    attributes = event_response.get('Event').get('Attribute')
+    if not attributes:
         log.error(f"Could not get a uuid for event = {misp_event_id} and attribute = {misp_attribute_value}. Does it exist?")
         raise IntegrationError(f"Failed to find any attributes on event {misp_event_id}")
 
     else:
-        for attribute in event_response.get('Event').get('Attribute'):
+        for attribute in attributes:
             if attribute['value'] == misp_attribute_value:
                 attribute_uuid = attribute.get('uuid')
         if attribute_uuid:

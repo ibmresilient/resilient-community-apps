@@ -47,6 +47,8 @@ def codegen_reload_data():
             u"misp_create_attribute",
             u"misp_create_event",
             u"misp_create_sighting",
+            u"misp_create_tag_on_attribute",
+            u"misp_create_tag_on_event",
             u"misp_search_attribute",
             u"misp_sighting_list"
         ]
@@ -58,7 +60,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 48.2.16
+    IBM SOAR Platform Version: 48.0.0
 
     Contents:
     - Message Destinations:
@@ -74,6 +76,8 @@ def customization_data(client=None):
         - misp_create_attribute
         - misp_create_event
         - misp_create_sighting
+        - misp_create_tag_on_attribute
+        - misp_create_tag_on_event
         - misp_search_attribute
         - misp_sighting_list
     - Incident Fields:

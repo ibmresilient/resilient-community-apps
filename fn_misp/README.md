@@ -40,6 +40,14 @@
 | 1.5.0 | MM/YYYY | Added MITRE Att&ck support |
 | 1.0.0 | MM/YYYY | Initial Release |
 
+### 3.0.2
+
+In v3.0.2, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
+
+If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows. But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.
+
 ---
 
 ## Overview
@@ -63,11 +71,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `48.2.16`.
+* SOAR platform >= `48.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `48.2.16`.
+* SOAR platform >= `48.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=48.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
@@ -473,7 +481,28 @@ Creates a Tag
 
 ```python
 results = {
-} 
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true
+  },
+  "raw": null,
+  "inputs": {
+    "misp_attribute_value": "",
+    "misp_tag_type": "Event",
+    "misp_tag_name": "tlp:white",
+    "misp_event_id": 12
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-misp",
+    "package_version": "3.0.2",
+    "host": "local",
+    "execution_time_ms": 558,
+    "timestamp": "2023-12-07 10:32:08"
+  }
+}
 ```
 
 </p>
@@ -483,7 +512,9 @@ results = {
 <p>
 
 ```python
-None
+inputs.misp_tag_type = "Event"
+inputs.misp_tag_name = "tlp:white"
+inputs.misp_event_id = incident.properties.misp_event_id
 ```
 
 </p>
@@ -493,7 +524,9 @@ None
 <p>
 
 ```python
-None
+results = playbook.functions.results.tags
+if results.get("success"):
+  incident.addNote(f"Tags {results.get('inputs', {}).get('misp_tag_name')} added to the MISP Event.")
 ```
 
 </p>
