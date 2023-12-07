@@ -55,35 +55,62 @@ if results.get("success"):
     # You can control inference using the minimum_probability parameter, and inference of persons using the infer_persons parameter.
     inferred = str(person.get("@inferred", ""))
     
-
-PERSON_ATTRIBUTE_TO_NAME_MAP = {
-  "names"      : "display",
-  "username"   : "content",
-  "phones"     : "display_international",
-  "gender"     : "content",
-  "dob"        : "display",
-  "address"    : "display",
-  "job"        : "display",
-  "educations" : "display",
-  "user_ids"   : "content",
-  "images"     : "url",
-  "urls"       : "url"}
-emails = person.get("emails", [])
-for email in emails:
-  add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "email address", email.get("address", ""), match, inferred)
-  add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "address_md5", email.get("address_md5", ""), match, inferred)
-for each_attribute in PERSON_ATTRIBUTE_TO_NAME_MAP:
-  for _attribute in person.get(each_attribute, []):
-    if each_attribute in ["images", "url"]:
-      _attribute_values = """<a href='{0}'>{0}</a>""".format(url.get(PERSON_ATTRIBUTE_TO_NAME_MAP[each_attribute], "")) if url.get(PERSON_ATTRIBUTE_TO_NAME_MAP[each_attribute], "") else ""
-    else:
-      _attribute_value = _attribute.get(PERSON_ATTRIBUTE_TO_NAME_MAP[each_attribute], "")
-    add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, each_attribute, _attribute_value, match, inferred)
+    # Person data
+    names = person.get("names", [])
+    for name in names:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "name", name.get("display", ""), match, inferred)
+    
+    emails = person.get("emails", [])
+    for email in emails:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "email address", email.get("address", ""), match, inferred)
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "address_md5", email.get("address_md5", ""), match, inferred)
+    
+    usernames = person.get("usernames", [])
+    for usrname in usernames:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "username", usrname.get("content", ""), match, inferred)
+      
+    phones = person.get("phones", [])
+    for phone in phones:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "phone", phone.get("display_international", ""), match, inferred)
+      
+    gender = person.get("gender")
+    if gender:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "gender", gender.get("content", ""), match, inferred)
+    
+    dob = person.get("dob")
+    if dob:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "dob", dob.get("display", ""), match, inferred)
+    
+    addresses = person.get("addresses", [])
+    for address in addresses:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "address", address.get("display", ""), match, inferred)
+      
+    jobs = person.get("jobs", [])
+    for job in jobs:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "job", job.get("display", ""), match, inferred)
+    
+    educations = person.get("educations", [])
+    for edu in educations:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "education", edu.get("display", ""), match, inferred)
+      
+    user_ids = person.get("user_ids", [])
+    for usr_id in user_ids:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "user_id", usr_id.get("content", ""), match, inferred)
+      
+    images = person.get("images", [])
+    for image in images:
+      image_url = """<a href='{0}'>{0}</a>""".format(image.get("url", "")) if image.get("url", "") else ""
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "image", image_url, match, inferred)
+      
+    urls = person.get("urls", [])
+    for url in urls:
+      url_url = """<a href='{0}'>{0}</a>""".format(url.get("url", "")) if url.get("url", "") else ""
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "url", url_url, match, inferred)
       
   # Save the json result as an Note
   raw_data = results.raw_data if results.raw_data else ""
   counter = possible_person_counter if possible_person_counter > 0 else ""
-  noteText = """Pipl Data API response for artifact_value {} returned {} {}: \n{}""".format(artifact.value, counter, results.pipl_response, raw_data)
+  noteText = u"""Pipl Data API response for artifact_value {} returned {} {}: \n{}""".format(artifact.value, counter, results.pipl_response, raw_data)
   incident.addNote(noteText)
 ```
 
