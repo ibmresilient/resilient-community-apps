@@ -31,7 +31,7 @@ Result: {
             'version': '1.0', 'success': True, 'reason': None,
             'content': [{'Path': '/', 'UserName': 'iam_test_User', 'UserId': 'ABCDEFG',
                          'Arn': 'arn:aws:iam::123456789123:user/iam_test_User', 'CreateDate': '2019-11-05 15:54:43'},
-                        {'Path': '/', 'UserName': 'iam_test_User_2', 'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                        {'Path': '/', 'UserName': 'iam_test_User_2', 'UserId': 'ABCDEFG',
                          'Arn': 'arn:aws:iam::123456789123:user/iam_test_User_2',
                          'CreateDate': '2019-10-31 16:23:07', 'PasswordLastUsed': '2019-11-12 10:55:42'}
                        ],

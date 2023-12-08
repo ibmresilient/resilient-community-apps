@@ -266,7 +266,7 @@ Result: {
                       {'AccessKeyId': 'ABCDEFG', 'Status': 'NoSuchEntity'}],
           'raw': '[{"AccessKeyId": "ABCDEFG", "Status": "OK"},
                   {"AccessKeyId": "ABCDEFG", "Status": "NoSuchEntity"}]',
-          'inputs': {'aws_iam_user_name': 'iam_johnpren_test_User', 'aws_iam_access_keys': 'ABCDEFG,ABCDEFG'},
+          'inputs': {'aws_iam_user_name': 'test_User', 'aws_iam_access_keys': 'ABCDEFG,ABCDEFG'},
           'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
                       'host': 'myhost.ibm.com', 'execution_time_ms': 37199, 'timestamp': '2019-11-21 14:31:13'
                      }
@@ -968,10 +968,10 @@ inputs.aws_iam_user_name = row.UserName
 # Example result:
 """
 Result: {'version': '1.0', 'success': True, 'reason': None, 
-         'content': [{'UserName': 'iam_test_user', 'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 
+         'content': [{'UserName': 'iam_test_user', 'CertificateId': 'ABCDEFGH1234567', 
                       'CertificateBody': '-----BEGIN CERTIFICATE-----\nMIID...Apg=\n-----END CERTIFICATE-----', 
                       'Status': 'Active', 'UploadDate': '2020-02-26 12:25:27'}], 
-         'raw': '[{"UserName": "iam_test_user", "CertificateId": "WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD", "CertificateBody": 
+         'raw': '[{"UserName": "iam_test_user", "CertificateId": "ABCDEFGH1234567", "CertificateBody": 
                  "-----BEGIN CERTIFICATE-----\\nMIID...Apg=\\n-----END CERTIFICATE-----", "Status": "Active", "UploadDate": "2020-02-26 12:25:27"}]', 
          'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 'execution_time_ms': 729, 'timestamp': '2020-02-26 12:33:57'

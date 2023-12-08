@@ -59,7 +59,7 @@ class TestFnAwsIamListSsCreds:
     @pytest.mark.parametrize("aws_iam_user_name, expected_results", [
         ("iam_test_user", [{'CreateDate': '2020-02-25 10:43:24',
                             'ServiceName': 'codecommit.amazonaws.com',
-                            'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ',
+                            'ServiceSpecificCredentialId': 'ABCDEFGH',
                             'ServiceUserName': 'iam_test_user-at-834299573936',
                             'Status': 'Active',
                             'UserName': 'iam_test_user'}]),

@@ -133,13 +133,13 @@ Note: If all unfiltered users are listed, the default user for the integration i
 ```python
 results = {
             'version': '1.0', 'success': True, 'reason': None,
-            'content': [{'Path': '/', 'UserName': 'iam_test_User', 'UserId': 'AIDA4EQBBG2YDOLTU6QSM',
+            'content': [{'Path': '/', 'UserName': 'iam_test_User', 'UserId': 'ABCDEFGH',
                          'Arn': 'arn:aws:iam::123456789123:user/iam_test_User', 'CreateDate': '2019-11-05 15:54:43'},
-                        {'Path': '/', 'UserName': 'iam_test_User_2', 'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                        {'Path': '/', 'UserName': 'iam_test_User_2', 'UserId': 'ABCDEFGH',
                          'Arn': 'arn:aws:iam::123456789123:user/iam_test_User_2',
                          'CreateDate': '2019-10-31 16:23:07', 'PasswordLastUsed': '2019-11-12 10:55:42'}
                        ],
-            'raw': '[{"Path": "/", "UserName": "iam_test_User", "UserId": "AIDA4EQBBG2YDOLTU6QSM", "Arn": "arn:aws:iam::834299573936:user/iam_test_User", "CreateDate": "2019-11-05 15:54:43"}, {"Path": "/", "UserName": "iam_test_User_2", "UserId": "AIDA4EQBBG2YGZOQXT2JB", "Arn": "arn:aws:iam::834299573936:user/iam_test_User_2", "CreateDate": "2019-10-31 16:23:07"}]',
+            'raw': '[{"Path": "/", "UserName": "iam_test_User", "UserId": "ABCDEFGH", "Arn": "arn:aws:iam::123456789123:user/iam_test_User", "CreateDate": "2019-11-05 15:54:43"}, {"Path": "/", "UserName": "iam_test_User_2", "UserId": "ABCDEFGH", "Arn": "arn:aws:iam::123456789123:user/iam_test_User_2", "CreateDate": "2019-10-31 16:23:07"}]',
             'inputs': {},
             'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
                         'host': 'myhost.ibm.com', 'execution_time_ms': 7951,
@@ -349,13 +349,13 @@ Note: If all unfiltered access keys are listed, the key for the default user for
 ```python
 results =  {
             'version': '1.0', 'success': True, 'reason': None,
-            'content': [{'Path': '/', 'UserName': 'iam_test_User', 'UserId': 'AIDA4EQBBG2YDOLTU6QSM',
+            'content': [{'Path': '/', 'UserName': 'iam_test_User', 'UserId': 'ABCDEFGH',
                          'Arn': 'arn:aws:iam::123456789123:user/iam_test_User', 'CreateDate': '2019-11-05 15:54:43'},
-                        {'Path': '/', 'UserName': 'iam_test_User_2', 'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                        {'Path': '/', 'UserName': 'iam_test_User_2', 'UserId': 'ABCDEFGH',
                          'Arn': 'arn:aws:iam::123456789123:user/iam_test_User_2',
                          'CreateDate': '2019-10-31 16:23:07', 'PasswordLastUsed': '2019-11-12 10:55:42'}
                        ],
-            'raw': '[{"Path": "/", "UserName": "iam_test_User", "UserId": "AIDA4EQBBG2YDOLTU6QSM", "Arn": "arn:aws:iam::834299573936:user/iam_test_User", "CreateDate": "2019-11-05 15:54:43"}, {"Path": "/", "UserName": "iam_test_User_2", "UserId": "AIDA4EQBBG2YGZOQXT2JB", "Arn": "arn:aws:iam::834299573936:user/iam_test_User_2", "CreateDate": "2019-10-31 16:23:07"}]',
+            'raw': '[{"Path": "/", "UserName": "iam_test_User", "UserId": "ABCDEFGH", "Arn": "arn:aws:iam::123456789123:user/iam_test_User", "CreateDate": "2019-11-05 15:54:43"}, {"Path": "/", "UserName": "iam_test_User_2", "UserId": "ABCDEFGH", "Arn": "arn:aws:iam::123456789123:user/iam_test_User_2", "CreateDate": "2019-10-31 16:23:07"}]',
             'inputs': {},
             'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
                         'host': 'myhost.ibm.com', 'execution_time_ms': 7951,
@@ -630,11 +630,11 @@ On successful completion of the workflow, the `Access key ids` field of the `AWS
 ```python
 results = {
           'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'UserName': 'iam_test_User', 'AccessKeyId': 'AKIA4EQBBG2YKXYJB55L',
+          'content': [{'UserName': 'iam_test_User', 'AccessKeyId': 'ABCDEFGH',
                        'Status': 'Active', 'CreateDate': '2019-11-12 11:09:38'
                       }
                      ],
-          'raw': '[{"UserName": "iam_test_User", "AccessKeyId": "AKIA4EQBBG2YKXYJB55L", "Status": "Active", "CreateDate": "2019-11-12 11:09:38"}]',
+          'raw': '[{"UserName": "iam_test_User", "AccessKeyId": "ABCDEFGH", "Status": "Active", "CreateDate": "2019-11-12 11:09:38"}]',
           'inputs': {'aws_iam_user_name': 'iam_test_User'},
           'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
                       'host': 'myhost.ibm.com', 'execution_time_ms': 5365, 'timestamp': '2019-11-21 10:41:22'}
@@ -732,7 +732,7 @@ On successful completion of the workflow, the `Status` field of the `AWS IAM Acc
 <p>
 
 ```python
-results = {'inputs': {'aws_iam_user_name': 'iam_test_user', 'aws_iam_access_key_id': 'AKIA4EQBBG2YGLNUPO64', 
+results = {'inputs': {'aws_iam_user_name': 'iam_test_user', 'aws_iam_access_key_id': 'ABCDEFGH', 
                       'aws_iam_status': 'Inactive'},
            'metrics': {'package': 'fn-aws-iam', 'timestamp': '2020-02-19 12:53:48', 'package_version': '1.0.0',
                      'host': 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 3023},
@@ -886,9 +886,9 @@ On successful completion of the workflow, the artifact description is updated wi
 
 ```python
 results = {'version': '1.0', 'success': True, 'reason': None,
-           'content': [{'AccessKeyId': 'AKIA4EQBBG2YFAXXIG6M', 'Status': 'OK'}],
-           'raw': '[{"AccessKeyId": "AKIA4EQBBG2YFAXXIG6M", "Status": "OK"}]',
-           'inputs': {'aws_iam_user_name': 'iam_test_User_1', 'aws_iam_access_keys': 'AKIA4EQBBG2YFAXXIG6M'},
+           'content': [{'AccessKeyId': 'ABCDEFGH', 'Status': 'OK'}],
+           'raw': '[{"AccessKeyId": "ABCDEFGH", "Status": "OK"}]',
+           'inputs': {'aws_iam_user_name': 'iam_test_User_1', 'aws_iam_access_keys': 'ABCDEFGH'},
            'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 
                        'host': 'myhost.ibm.com', 'execution_time_ms': 752, 'timestamp': '2020-01-16 13:47:07'
                       }
@@ -1000,18 +1000,18 @@ On successful completion of the workflow, the `Groups` field of the `AWS IAM Use
 
 ```python
 results = {'version': '1.0', 'success': True, 'reason': None, 
-         'content': [{'Path': '/', 'GroupName': 'null_group', 'GroupId': 'AGPA4EQBBG2YAVPJATCNZ', 
-                      'Arn': 'arn:aws:iam::834299573936:group/null_group', 'CreateDate': '2019-12-04 12:31:47'}, 
-                      {'Path': '/', 'GroupName': 'denyall_group', 'GroupId': 'AGPA4EQBBG2YPUAIHTA3E', 
-                       'Arn': 'arn:aws:iam::834299573936:group/denyall_group', 'CreateDate': '2019-11-29 15:49:34'}, 
-                      {'Path': '/', 'GroupName': 'myS3group', 'GroupId': 'AGPAIH4V2XCXOME6HWCPQ', 
-                      'Arn': 'arn:aws:iam::834299573936:group/myS3group', 'CreateDate': '2017-05-29 20:41:50'}], 
-          'raw': '[{"Path": "/", "GroupName": "null_group", "GroupId": "AGPA4EQBBG2YAVPJATCNZ",' \
-                 '"Arn": "arn:aws:iam::834299573936:group/null_group", "CreateDate": "2019-12-04 12:31:47"},' \ 
-                 '"Path": "/", "GroupName": "denyall_group", "GroupId": "AGPA4EQBBG2YPUAIHTA3E",' \
-                 '"Arn": "arn:aws:iam::834299573936:group/denyall_group", "CreateDate": "2019-11-29 15:49:34"},' \
-                 '{"Path": "/", "GroupName": "myS3group", "GroupId": "AGPAIH4V2XCXOME6HWCPQ",' \
-                 '"Arn": "arn:aws:iam::834299573936:group/myS3group", "CreateDate": "2017-05-29 20:41:50"}]' , 
+         'content': [{'Path': '/', 'GroupName': 'null_group', 'GroupId': 'ABCDEFGH', 
+                      'Arn': 'arn:aws:iam::123456789123:group/null_group', 'CreateDate': '2019-12-04 12:31:47'}, 
+                      {'Path': '/', 'GroupName': 'denyall_group', 'GroupId': 'ABCDEFGH', 
+                       'Arn': 'arn:aws:iam::123456789123:group/denyall_group', 'CreateDate': '2019-11-29 15:49:34'}, 
+                      {'Path': '/', 'GroupName': 'myS3group', 'GroupId': 'ABCDEFGH', 
+                      'Arn': 'arn:aws:iam::123456789123:group/myS3group', 'CreateDate': '2017-05-29 20:41:50'}], 
+          'raw': '[{"Path": "/", "GroupName": "null_group", "GroupId": "ABCDEFGH",' \
+                 '"Arn": "arn:aws:iam::123456789123:group/null_group", "CreateDate": "2019-12-04 12:31:47"},' \ 
+                 '"Path": "/", "GroupName": "denyall_group", "GroupId": "ABCDEFGH",' \
+                 '"Arn": "arn:aws:iam::123456789123:group/denyall_group", "CreateDate": "2019-11-29 15:49:34"},' \
+                 '{"Path": "/", "GroupName": "myS3group", "GroupId": "ABCDEFGH",' \
+                 '"Arn": "arn:aws:iam::123456789123:group/myS3group", "CreateDate": "2017-05-29 20:41:50"}]' , 
          'inputs': {'aws_iam_user_name': 'iam_test_user_1'}, 
          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ie.ibm.com', 
                      'execution_time_ms': 944, 'timestamp': '2020-03-16 15:43:21'
@@ -1348,11 +1348,11 @@ results = {
           'version': '1.0', 'success': True, 'reason': None,
           'content': [{'PolicyName': 'test_pol'},
                       {'PolicyName': 'test_pol_2',
-                       'PolicyArn': 'arn:aws:iam::834299573936:policy/test_pol_2'},
+                       'PolicyArn': 'arn:aws:iam::123456789123:policy/test_pol_2'},
                       {'PolicyName': 'AmazonRoute53ReadOnlyAccess',
                        'PolicyArn': 'arn:aws:iam::aws:policy/AmazonRoute53ReadOnlyAccess'}],
           'raw': '[{"PolicyName": "test_pol"}, {"PolicyName": "test_pol_2", "PolicyArn":'\
-                 '"arn:aws:iam::834299573936:policy/test_pol_2"}, {"PolicyName": '\
+                 '"arn:aws:iam::123456789123:policy/test_pol_2"}, {"PolicyName": '\
                  '"AmazonRoute53ReadOnlyAccess", "PolicyArn": "arn:aws:iam::aws:policy/AmazonRoute53ReadOnlyAccess"}]',
           'inputs': {'aws_iam_user_name': 'iam_test_User'},
           'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
@@ -1698,11 +1698,11 @@ For more information on this workflow, reference section [Function - AWS IAM: De
 ```python
 results = {
           'version': '1.0', 'success': True, 'reason': None, 
-          'content': [{'UserName': 'iam_test_user', 'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 
+          'content': [{'UserName': 'iam_test_user', 'SSHPublicKeyId': 'ABCDEFGH', 
                        'Status': 'Active', 'UploadDate': '2020-02-25 11:05:17'
                       }
                      ], 
-          'raw': '[{"UserName": "iam_test_user_10", "SSHPublicKeyId": "APKA4EQBBG2YCGOGDY5G", '\
+          'raw': '[{"UserName": "iam_test_user_10", "SSHPublicKeyId": "ABCDEFGH", '\
                  '"Status": "Active", "UploadDate": "2020-02-25 11:05:17"}]', 
           'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
           'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
@@ -1805,11 +1805,11 @@ For more information on this workflow, reference section [Function - AWS IAM: De
 ```python
 results = {
           'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 'Status': 'OK'}
-                      {'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 'Status': 'NoSuchEntity'}],
-          'raw': '[{"SSHPublicKeyId": "APKA4EQBBG2YCGOGDY5G", "Status": "OK"},'\
-                  '{"SSHPublicKeyId": "APKA4EQBBG2YCGOGDY5G", "Status": "NoSuchEntity"}]',
-          'inputs': {'aws_iam_ssh_keys_ids': 'APKA4EQBBG2YCGOGDY5G', 'aws_iam_user_name': 'iam_test_User'},
+          'content': [{'SSHPublicKeyId': 'ABCDEFGH', 'Status': 'OK'}
+                      {'SSHPublicKeyId': 'ABCDEFGH', 'Status': 'NoSuchEntity'}],
+          'raw': '[{"SSHPublicKeyId": "ABCDEFGH", "Status": "OK"},'\
+                  '{"SSHPublicKeyId": "ABCDEFGH", "Status": "NoSuchEntity"}]',
+          'inputs': {'aws_iam_ssh_keys_ids': 'ABCDEFGH', 'aws_iam_user_name': 'iam_test_User'},
           'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
                       'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
                      }
@@ -1922,18 +1922,18 @@ For more information on this workflow, reference section [Function - AWS IAM: De
 
 ```python
 results = {'version': '1.0', 'success': True, 'reason': None, 
-         'content': [{'UserName': 'iam_test_user', 'Status': 'Active', 'ServiceUserName': 'iam_test_user-at-834299573936', 
-                      'CreateDate': '2020-02-25 10:43:24', 'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 
+         'content': [{'UserName': 'iam_test_user', 'Status': 'Active', 'ServiceUserName': 'iam_test_user-at-123456789123', 
+                      'CreateDate': '2020-02-25 10:43:24', 'ServiceSpecificCredentialId': 'ABCDEFGH', 
                       'ServiceName': 'codecommit.amazonaws.com'
                      },
-                     {'UserName': 'iam_test_user', 'Status': 'Active', 'ServiceUserName': 'iam_test_user_10-at-834299573936',
-                      'CreateDate': '2020-02-26 11:50:52', 'ServiceSpecificCredentialId': 'ACCA4EQBBG2YGOLHZWY7L', 
+                     {'UserName': 'iam_test_user', 'Status': 'Active', 'ServiceUserName': 'iam_test_user_10-at-123456789123',
+                      'CreateDate': '2020-02-26 11:50:52', 'ServiceSpecificCredentialId': 'ABCDEFGH', 
                       'ServiceName': 'cassandra.amazonaws.com'}], 
-         'raw': '[{"UserName": "iam_test_user", "Status": "Active", "ServiceUserName": "iam_test_user_10-at-834299573936",'\ 
-                   '"CreateDate": "2020-02-25 10:43:24", "ServiceSpecificCredentialId": "ACCA4EQBBG2YH6NR76SCQ", '\
+         'raw': '[{"UserName": "iam_test_user", "Status": "Active", "ServiceUserName": "iam_test_user_10-at-123456789123",'\ 
+                   '"CreateDate": "2020-02-25 10:43:24", "ServiceSpecificCredentialId": "ABCDEFGH", '\
                    '"ServiceName": "codecommit.amazonaws.com"},{"UserName": "iam_test_user_10", "Status": "Active", '\
-                   '"ServiceUserName": "iam_test_user_10-at-834299573936", "CreateDate": "2020-02-26 11:50:52", '\
-                   '"ServiceSpecificCredentialId": "ACCA4EQBBG2YGOLHZWY7L", "ServiceName": "cassandra.amazonaws.com"}]', 
+                   '"ServiceUserName": "iam_test_user_10-at-123456789123", "CreateDate": "2020-02-26 11:50:52", '\
+                   '"ServiceSpecificCredentialId": "ABCDEFGH", "ServiceName": "cassandra.amazonaws.com"}]', 
          'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
                      'execution_time_ms': 982, 'timestamp': '2020-02-26 11:56:51'
@@ -2032,11 +2032,11 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 ```python
 results = {
           'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 'Status': 'OK'}
-                      {'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 'Status': 'NoSuchEntity'}],
-          'raw': '[{"ServiceSpecificCredentialId: "ACCA4EQBBG2YH6NR76SCQ", "Status": "OK"},'\
-                 '{"ServiceSpecificCredentialId": "ACCA4EQBBG2YH6NR76SCQ", "Status": "NoSuchEntity"}]',
-          'inputs': {'aws_iam_ssc_ids': 'ACCA4EQBBG2YH6NR76SCQ', 'aws_iam_user_name': 'iam_test_User'},
+          'content': [{'ServiceSpecificCredentialId': 'ABCDEFGH', 'Status': 'OK'}
+                      {'ServiceSpecificCredentialId': 'ABCDEFGH', 'Status': 'NoSuchEntity'}],
+          'raw': '[{"ServiceSpecificCredentialId: "ABCDEFGH", "Status": "OK"},'\
+                 '{"ServiceSpecificCredentialId": "ABCDEFGH", "Status": "NoSuchEntity"}]',
+          'inputs': {'aws_iam_ssc_ids': 'ABCDEFGH', 'aws_iam_user_name': 'iam_test_User'},
           'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
                       'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
                      }
@@ -2148,10 +2148,10 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 
 ```python
 results = {'version': '1.0', 'success': True, 'reason': None, 
-         'content': [{'UserName': 'iam_test_user', 'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 
+         'content': [{'UserName': 'iam_test_user', 'CertificateId': 'ABCDEFGH', 
                       'CertificateBody': '-----BEGIN CERTIFICATE-----\nMIID...Apg=\n-----END CERTIFICATE-----', 
                       'Status': 'Active', 'UploadDate': '2020-02-26 12:25:27'}], 
-         'raw': '[{"UserName": "iam_test_user", "CertificateId": "WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD", "CertificateBody":'
+         'raw': '[{"UserName": "iam_test_user", "CertificateId": "ABCDEFGH", "CertificateBody":'
                  '"-----BEGIN CERTIFICATE-----\\nMIID...Apg=\\n-----END CERTIFICATE-----", "Status": "Active",'
                  '"UploadDate": "2020-02-26 12:25:27"}]',
          'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
@@ -2183,10 +2183,10 @@ inputs.aws_iam_user_name = row.UserName
 # Example result:
 """
 Result: {'version': '1.0', 'success': True, 'reason': None, 
-         'content': [{'UserName': 'iam_test_user', 'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 
+         'content': [{'UserName': 'iam_test_user', 'CertificateId': 'ABCDEFGH', 
                       'CertificateBody': '-----BEGIN CERTIFICATE-----\nMIID...Apg=\n-----END CERTIFICATE-----', 
                       'Status': 'Active', 'UploadDate': '2020-02-26 12:25:27'}], 
-         'raw': '[{"UserName": "iam_test_user", "CertificateId": "WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD", "CertificateBody": 
+         'raw': '[{"UserName": "iam_test_user", "CertificateId": "ABCDEFGH", "CertificateBody": 
                  "-----BEGIN CERTIFICATE-----\\nMIID...Apg=\\n-----END CERTIFICATE-----", "Status": "Active", "UploadDate": "2020-02-26 12:25:27"}]', 
          'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
@@ -2267,11 +2267,11 @@ For more information on this workflow, reference section [Function - AWS IAM: De
 ```python
 results = {
           'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'OK'},
-                      {'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'NoSuchEntity'}],
-          'raw': '[{'CertificateId': "WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD", "Status": "OK"},'
-                  '{'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'NoSuchEntity'}]',
-          'inputs': {'aws_iam_sign_cert_ids': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'aws_iam_user_name': 'iam_test_User'},
+          'content': [{'CertificateId': 'ABCDEFGH', 'Status': 'OK'},
+                      {'CertificateId': 'ABCDEFGH', 'Status': 'NoSuchEntity'}],
+          'raw': '[{'CertificateId': "ABCDEFGH", "Status": "OK"},'
+                  '{'CertificateId': 'ABCDEFGH', 'Status': 'NoSuchEntity'}]',
+          'inputs': {'aws_iam_sign_cert_ids': 'ABCDEFGH', 'aws_iam_user_name': 'iam_test_User'},
           'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
                       'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
                      }
@@ -2383,9 +2383,9 @@ For more information on this workflow, reference section [Function - AWS IAM: De
 
 ```python
 results = {'version': '1.0', 'success': True, 'reason': None, 
-         'content': [{'UserName': 'iam_test_user', 'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 
+         'content': [{'UserName': 'iam_test_user', 'SerialNumber': 'arn:aws:iam::123456789123:mfa/iam_test_user', 
                       'EnableDate': '2020-02-26 16:55:05', 'is_virtual': True}],
-         'raw': '[{"UserName": "iam_test_user_10", "SerialNumber": "arn:aws:iam::834299573936:mfa/iam_test_user_10",' 
+         'raw': '[{"UserName": "iam_test_user_10", "SerialNumber": "arn:aws:iam::123456789123:mfa/iam_test_user_10",' 
                  '"EnableDate": "2020-02-26 16:55:05", 'is_virtual': True}]', 
          'inputs': {'aws_iam_user_name': 'iam_test_user_10'},
          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ie.ibm.com', 
@@ -2486,9 +2486,9 @@ For more information on this workflow, reference section [Function - AWS IAM: De
 ```python
 results = {
           'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'OK'}],
-          'raw': '[{"SerialNumber": "arn:aws:iam::834299573936:mfa/iam_test_user", "Status": "OK"}]',
-          'inputs': {'aws_iam_mfa_serial_nums': 'arn:aws:iam::834299573936:mfa/iam_test_user', 
+          'content': [{'SerialNumber': 'arn:aws:iam::123456789123:mfa/iam_test_user', 'Status': 'OK'}],
+          'raw': '[{"SerialNumber": "arn:aws:iam::123456789123:mfa/iam_test_user", "Status": "OK"}]',
+          'inputs': {'aws_iam_mfa_serial_nums': 'arn:aws:iam::123456789123:mfa/iam_test_user', 
                      'aws_iam_user_name': 'iam_test_User'},
           'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
                       'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
@@ -2603,9 +2603,9 @@ For more information on this workflow, reference section [Function - AWS IAM: De
 ```python
 results = {
           'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'OK'}],
-          'raw': '[{'SerialNumber': "arn:aws:iam::834299573936:mfa/iam_test_user", "Status": "OK"}]',
-          'inputs': {'aws_iam_mfa_serial_nums': 'arn:aws:iam::834299573936:mfa/iam_test_user', 
+          'content': [{'SerialNumber': 'arn:aws:iam::123456789123:mfa/iam_test_user', 'Status': 'OK'}],
+          'raw': '[{'SerialNumber': "arn:aws:iam::123456789123:mfa/iam_test_user", "Status": "OK"}]',
+          'inputs': {'aws_iam_mfa_serial_nums': 'arn:aws:iam::123456789123:mfa/iam_test_user', 
                      'aws_iam_user_name': 'iam_test_User'},
           'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
                       'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'

@@ -57,8 +57,8 @@ class TestFnAwsIamDeleteSigningCerts:
 
     @patch("fn_aws_iam.components.fn_aws_iam_delete_signing_certs.AwsIamClient", side_effect=mocked_aws_iam_client)
     @pytest.mark.parametrize("aws_iam_user_name, aws_iam_sign_cert_ids, expected_results", [
-        ("iam_test_user", "WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD",
-         [{'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'OK'}]),
+        ("iam_test_user", "ABCDEFGH",
+         [{'CertificateId': 'ABCDEFGH', 'Status': 'OK'}]),
         ("iam_test_user", "not_exists",
          [{'CertificateId': 'not_exists', 'Status': 'NoSuchEntity'}]),
     ])
