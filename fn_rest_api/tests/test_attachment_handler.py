@@ -51,7 +51,8 @@ class TestAttachmentHandler(unittest.TestCase):
     def test_artifact(self):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
-        output = ath.add_files(incident_id=2096, artifact_id=26)
+        output = ath.attach_files({}, incident_id=2096, artifact_id=26)
+        output = output.get("file")
         assert len(output) == 1
         assert len(output[0]) == 2
         # test for default attachment_form_field_name
@@ -66,7 +67,8 @@ class TestAttachmentHandler(unittest.TestCase):
         field_name = "image/files"
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
-        output = ath.add_files(incident_id=2096, attachment_id=478, attachment_form_field_name=field_name)
+        output = ath.attach_files({}, incident_id=2096, attachment_id=478, attachment_form_field_name=field_name)
+        output = output.get("file")
         assert len(output) == 1
         assert len(output[0]) == 2
         # test for custom attachment_form_field_name
@@ -81,51 +83,47 @@ class TestAttachmentHandler(unittest.TestCase):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
         with pytest.raises(InvalidURL) as err:
-            ath.add_files(incident_id=2096, attachment_id=500)
+            ath.attach_files({}, incident_id=2096, attachment_id=500)
 
     def test_invalid_artifact(self):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
         with pytest.raises(InvalidURL) as err:
-            ath.add_files(incident_id=2096, artifact_id=500)
+            ath.attach_files({}, incident_id=2096, artifact_id=500)
 
     def test_artifact_with_no_attachment(self):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
-        with pytest.raises(ValueError) as err:
-            ath.add_files(incident_id=2096, artifact_id=36, attachment_id=478)
+        with pytest.raises(ValueError):
+            ath.attach_files({}, incident_id=2096, artifact_id=36)
+
 
     def test_both(self):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
-        output = ath.add_files(incident_id=2096, artifact_id=26, attachment_id=478)
-        assert len(output) == 2
+        output = ath.attach_files({}, incident_id=2096, artifact_id=26, attachment_id=478)
+        output = output["file"]
+        assert len(output) == 1
         assert len(output[0]) == 2
         # test for default attachment_form_field_name
         assert output[0][0] == "file"
 
         _body_artifact = output[0][1]
-        assert _body_artifact[0] == 'artifact.svg'
-        assert _body_artifact[2] == 'image/svg+xml'
-        assert _body_artifact[1] == open(os.path.join(os.path.dirname(__file__), "data", "artifact.svg"), "rb").read()
-
-        _body_artifact = output[1][1]
         assert _body_artifact[0] == 'attachment.svg'
         assert _body_artifact[2] == 'image/svg+xml'
         assert _body_artifact[1] == open(os.path.join(os.path.dirname(__file__), "data", "attachment.svg"), "rb").read()
-
 
 class TestAddFiles(unittest.TestCase):
 
     def test_missing_incident_id(self):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
-        self.assertIsNone(ath.add_files(artifact_id=10, attachment_id=10))
+        self.assertDictEqual(ath.attach_files({}, artifact_id=10, attachment_id=10), {})
 
     def test_missing_artifact_attachment_id(self):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
-        self.assertIsNone(ath.add_files(incident_id=10))
+        self.assertDictEqual(ath.attach_files({}, incident_id=10), {})
 
 
 class TestGetFileContents(unittest.TestCase):
@@ -146,6 +144,7 @@ class TestGetFileContents(unittest.TestCase):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
         ath.incident_id = 2096
+        ath.task_id = None
         ret = ath._get_file_contents(ATH_METADATA, object_type="attachments")
         assert ret
         assert FILE_CONTENTS in ret
@@ -155,6 +154,7 @@ class TestGetFileContents(unittest.TestCase):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
         ath.incident_id = 2096
+        ath.task_id = None
         ret = ath._get_file_contents(ATH_METADATA, object_type="attachments", write_to_phy_location=True)
         assert ret
         assert FILE_CONTENTS in ret
@@ -188,3 +188,119 @@ class TestFindArtifactId(unittest.TestCase):
         ath.incident_id = 2096
         with pytest.raises(ValueError) as err:
             ath.find_artifact_by_id(artifact_id=36)
+
+
+class TestAddFilesToRequest(unittest.TestCase): 
+
+    rest_client = MockRestClient()
+
+    @pytest.fixture(autouse=True)
+    def init_caplog_fixture(self, caplog):
+        self.caplog = caplog
+
+    def test_without_file_asbody(self):
+        self.caplog.clear()
+        self.caplog.set_level(logging.INFO)
+        ath = AttachmentHandler(self.rest_client)
+
+        sample_file = ('Content-Header', ('file_name', b'<svg id="Layer_1" da...Z"/></svg>', 'Content-Type'))
+        _out = ath._add_files_to_request(sample_file, send_file_as_body=False, rest_properties={})
+        self.assertDictEqual(_out, {"file" : [sample_file]})
+        assert len(self.caplog.records) == 1
+        assert "Sending file as multipart/form-data" in self.caplog.records[0].message
+
+    def test_without_file_as_body_with_rest_properties(self):
+        sample_rest_properties = {
+            "headers" : {
+                "authorization" : "bearer 112233",
+                "content-type"  : "application/json"},
+            "body" : {
+                "data"  : "value",
+                "value" : "data"}}
+        sample_file = ('Content-Header', ('file_name', b'<svg id="Layer_1" da...Z"/></svg>', 'Content-Type'))
+
+        self.caplog.clear(), self.caplog.set_level(logging.INFO)
+        ath = AttachmentHandler(self.rest_client)
+        _out = ath._add_files_to_request(sample_file, send_file_as_body=False, rest_properties=sample_rest_properties)
+        self.assertListEqual(_out["file"], [sample_file])
+        self.assertDictEqual(_out["headers"], sample_rest_properties["headers"])
+        self.assertDictEqual(_out["body"], sample_rest_properties["body"])
+        assert len(self.caplog.records) == 1
+        assert "Sending file as multipart/form-data" in self.caplog.records[0].message
+
+    def test_data_already_exists(self):
+        sample_file = ('Content-Header', ('file_name', b'<svg id="Layer_1" da...Z"/></svg>', 'Content-Type'))
+        sample_rest_properties = {
+            "headers" : {
+                "authorization" : "bearer 112233",
+                "content-type"  : "application/json"},
+            "body" : {
+                "data"  : "value",
+                "value" : "data"}}
+
+        self.caplog.clear(), self.caplog.set_level(logging.INFO)
+        ath = AttachmentHandler(self.rest_client)
+        with pytest.raises(IntegrationError):
+            ath._add_files_to_request(
+                sample_file,
+                send_file_as_body=True,
+                rest_properties=sample_rest_properties)
+
+    def test_data_already_exists(self):
+        sample_file = ('Content-Header', ('file_name', b'<svg id="Layer_1" da...Z"/></svg>', 'Content-Type'))
+        sample_rest_properties = {
+            "headers" : {
+                "authorization" : "bearer 112233",
+                "content-type"  : "application/json"},
+            "body" : {
+                "data"  : "value",
+                "value" : "data"}}
+
+        self.caplog.clear(), self.caplog.set_level(logging.INFO)
+        ath = AttachmentHandler(self.rest_client)
+        with pytest.raises(IntegrationError):
+            ath._add_files_to_request(
+                sample_file,
+                send_file_as_body=True,
+                rest_properties=sample_rest_properties)
+
+    def test_content_type_already_exists(self):
+        sample_file = ('Content-Header', ('file_name', b'<svg id="Layer_1" da...Z"/></svg>', 'image/jpeg'))
+        sample_rest_properties = {
+            "headers" : {
+                "authorization" : "bearer 112233",
+                "content-type"  : "application/json"}}
+
+        self.caplog.clear(), self.caplog.set_level(logging.INFO)
+        ath = AttachmentHandler(self.rest_client)
+        _out = ath._add_files_to_request(
+            sample_file,
+            send_file_as_body=True,
+            rest_properties=sample_rest_properties)
+        self.assertDictEqual(_out["headers"], sample_rest_properties["headers"])
+        assert _out["body"] == sample_file[1][1]
+        assert 'WARNING' == self.caplog.records[1].levelname
+        assert 'File content-type image/jpeg does not match with user provided content-type application/json' in self.caplog.records[1].message
+        self.assertDictEqual(_out["headers"], sample_rest_properties["headers"])
+
+    def test_set_content_type(self):
+        sample_file = ('Content-Header', ('file_name', b'....', 'image/jpeg'))
+        sample_rest_properties = {"headers" : {}}
+
+        ath = AttachmentHandler(self.rest_client)
+        _out = ath._add_files_to_request(
+            sample_file,
+            send_file_as_body=True,
+            rest_properties=sample_rest_properties)
+        self.assertDictEqual(_out["headers"], {'content_type': 'image/jpeg'})
+        
+        # missing `headers` key in rest_properties
+        sample_file = ('Content-Header', ('file_name', b'....', 'image/jpeg'))
+        sample_rest_properties = {}
+
+        ath = AttachmentHandler(self.rest_client)
+        _out = ath._add_files_to_request(
+            sample_file,
+            send_file_as_body=True,
+            rest_properties=sample_rest_properties)
+        self.assertDictEqual(_out["headers"], {'content_type': 'image/jpeg'})

@@ -245,8 +245,10 @@ class FunctionComponent(AppFunctionComponent):
         # Properties required for Attachments
         attachment_properties = {
             attachment_handler.INCIDENT_ID   : getattr(fn_inputs, attachment_handler.INCIDENT_ID, None),
+            attachment_handler.TASK_ID       : getattr(fn_inputs, attachment_handler.TASK_ID, None),
             attachment_handler.ARTIFACT_ID   : getattr(fn_inputs, attachment_handler.ARTIFACT_ID, None),
             attachment_handler.ATTACHMENT_ID : getattr(fn_inputs, attachment_handler.ATTACHMENT_ID, None),
+            attachment_handler.SEND_FILE_AS_BODY : getattr(fn_inputs, attachment_handler.SEND_FILE_AS_BODY, False),
             attachment_handler.ATTACHMENT_FORM_FIELD : getattr(fn_inputs, attachment_handler.ATTACHMENT_FORM_FIELD, "file")}
 
         LOG.info(f"REST Options  : {json.dumps(rest_options, indent=2)}")
@@ -309,7 +311,8 @@ class FunctionComponent(AppFunctionComponent):
         # Handling attachments
         yield self.status_message("Checking if any attachments are to be added to the request")
         attachment_client = attachment_handler.AttachmentHandler(self.rest_client())
-        rest_options["files"] = attachment_client.add_files(**attachment_properties)
+        rest_properties   =  attachment_client.attach_files(rest_properties, **attachment_properties)
+
 
         LOG.debug(f"Request Body : {json.dumps(rest_properties.get('body'), indent=2)}")
 

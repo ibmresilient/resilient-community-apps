@@ -1,11 +1,13 @@
 
-import json, copy, logging
-from resilient_lib import (get_file_attachment, write_to_tmp_file)
+
+import json,  logging
+from resilient_lib import (get_file_attachment, write_to_tmp_file, IntegrationError)
 
 LOG = logging.getLogger()
 
 URL_FIND_ARTIFACT_DIRECT = "/incidents/{}/artifacts/{}"
 URL_FIND_ATTACHMENT_DIRECT = "/incidents/{}/attachments/{}"
+URL_FIND_TASK_ATTACHMENT = "/tasks/{}/attachments/{}"
 
 ID, NAME = "id", "name"
 CONTENT_TYPE  = "content_type"
@@ -13,10 +15,11 @@ FILE_CONTENTS = "file_contents"
 ARTIFACTS = "artifacts"
 ATTACHMENTS = "attachments"
 INCIDENT_ID = "incident_id"
+TASK_ID = "task_id"
 ARTIFACT_ID = "artifact_id"
 ATTACHMENT_ID = "attachment_id"
 ATTACHMENT_FORM_FIELD = "attachment_form_field_name"
-
+SEND_FILE_AS_BODY = "send_file_as_body"
 
 class AttachmentHandler:
     """
@@ -111,7 +114,14 @@ class AttachmentHandler:
         :rtype: dict
         """
         LOG.info("finding attachment by id")
-        return self.rest_client.get(URL_FIND_ATTACHMENT_DIRECT.format(self.incident_id, attachment_id))
+        if not self.incident_id:
+            raise ValueError("incident_id not specified!")
+        if self.task_id:
+            LOG.info("retrieving attachment from Task")
+            return self.rest_client.get(URL_FIND_TASK_ATTACHMENT.format(self.task_id, attachment_id))
+        else:
+            LOG.info("retrieving attachment from Incident")
+            return self.rest_client.get(URL_FIND_ATTACHMENT_DIRECT.format(self.incident_id, attachment_id))
 
 
     def _format_files_for_request(self, form_field_name, file_metadata):
@@ -149,6 +159,8 @@ class AttachmentHandler:
         :rtype: tuple
         """
         LOG.info("formatting attachment in the required format")
+        if not form_field_name:
+            form_field_name = "file"
         return (
             form_field_name,
             (file_metadata.get(NAME), file_metadata.get(FILE_CONTENTS), file_metadata.get(CONTENT_TYPE)))
@@ -172,18 +184,12 @@ class AttachmentHandler:
         :rtype: _type_
         """
         _id = file_metadata.get(ID)
-        if object_type == ARTIFACTS:
-            LOG.info("Downloading artifact's attachment data")
-            _file_contents = get_file_attachment(
-                self.rest_client,
-                incident_id=self.incident_id,
-                artifact_id=_id)
-        elif object_type == ATTACHMENTS:
-            LOG.info("Downloading attachment data")
-            _file_contents = get_file_attachment(
-                self.rest_client,
-                incident_id=self.incident_id,
-                attachment_id=_id)
+        _params = {
+                ARTIFACT_ID   : _id if object_type == ARTIFACTS else None,
+                TASK_ID       : self.task_id if self.task_id else None,
+                ATTACHMENT_ID : _id if object_type == ATTACHMENTS else None}
+
+        _file_contents = get_file_attachment(self.rest_client, self.incident_id, **_params)
 
         if write_to_phy_location:
             LOG.info("Writing files to device")
@@ -195,21 +201,93 @@ class AttachmentHandler:
         return file_metadata
 
 
-    def add_files(self, incident_id:int=None, artifact_id:int=None,
-        attachment_id:int=None, attachment_form_field_name:str="file"):
+    def _add_files_to_request(self, rest_properties:dict, files:tuple, send_file_as_body:bool=False):
+        """_summary_
 
-        if incident_id:
-            self.incident_id, files = incident_id, []
+        :param files: _description_
+        :type files: _type_
+        :param send_file_as_body: _description_
+        :type send_file_as_body: _type_
+        :param rest_properties: _description_
+        :type rest_properties: _type_
+        :raises IntegrationError: _description_
+        :return: _description_
+        :rtype: _type_
+        """
+        
+        # files format: ('Content-Header', ('file_name', b'<svg id="Layer_1" da...Z"/></svg>', 'Content-Type'))
+        if files and send_file_as_body:
+            LOG.info("Sending file as request body")
+            # Checking to see if body already has user defined content in it
+            if rest_properties.get("body"):
+                raise IntegrationError("Request body is not empty! Can not add file contents to body")
+            else:
+                # Copying file binary data to request body
+                rest_properties["body"] = files[1][1]
 
-            if artifact_id:
-                _artifacts_metadata = self.find_artifact_by_id(artifact_id=artifact_id)
-                _artifacts_metadata = self._get_file_contents(_artifacts_metadata, object_type=ARTIFACTS)
-                files.append(self._format_files_for_request(attachment_form_field_name, _artifacts_metadata))
+            # Checking header for appropriate content-type
+            _file_content_type = files[1][2]
+            _headers = rest_properties.get("headers", {})
 
-            if attachment_id:
-                _attachments_metadata = self.find_attachments_by_id(attachment_id=attachment_id)
-                _attachments_metadata = self._get_file_contents(_attachments_metadata, object_type=ATTACHMENTS)
-                files.append(self._format_files_for_request(attachment_form_field_name, _attachments_metadata))
+            _found_header = False
+            for each_header in _headers:
+            # checking to see if header has content-type specified by user. If so, assigns body to data
+                if each_header.lower() == "content-type":
+                    _found_header = True
+                    if _file_content_type in _headers[each_header].lower():
+                        LOG.info(f"Found similar content-type in request header : {_file_content_type}")
+                    else:
+                        LOG.warning(f"File content-type {_file_content_type} does not match with user provided content-type {_headers[each_header]}")
+                        LOG.info("Proceeding with user defined content-type")
+            if not _found_header:
+                if "headers" not in rest_properties:
+                    rest_properties["headers"] = {}
+                rest_properties["headers"][CONTENT_TYPE] = _file_content_type
 
-            if files:
-                return files
+        elif files:
+            LOG.info("Sending file as multipart/form-data")
+            rest_properties["files"] = [files]
+
+        return rest_properties
+
+
+
+    def attach_files(self, rest_properties,
+            incident_id:int=None, task_id:int=None, artifact_id:int=None,
+            attachment_id:int=None, attachment_form_field_name:str="file",
+            send_file_as_body=False):
+        """_summary_
+
+        :param rest_properties: _description_
+        :type rest_properties: _type_
+        :param incident_id: _description_, defaults to None
+        :type incident_id: int, optional
+        :param task_id: _description_, defaults to None
+        :type task_id: int, optional
+        :param artifact_id: _description_, defaults to None
+        :type artifact_id: int, optional
+        :param attachment_id: _description_, defaults to None
+        :type attachment_id: int, optional
+        :param attachment_form_field_name: _description_, defaults to "file"
+        :type attachment_form_field_name: str, optional
+        :param send_file_as_body: _description_, defaults to False
+        :type send_file_as_body: bool, optional
+        :return: _description_
+        :rtype: _type_
+        """
+
+        self.task_id = task_id
+        self.incident_id = incident_id
+        files = None
+
+        if self.incident_id and attachment_id:
+            _attachments_metadata = self.find_attachments_by_id(attachment_id=attachment_id)
+            _attachments_metadata = self._get_file_contents(_attachments_metadata, object_type=ATTACHMENTS)
+            files = self._format_files_for_request(attachment_form_field_name, _attachments_metadata)
+
+        elif self.incident_id and artifact_id:
+            _artifacts_metadata = self.find_artifact_by_id(artifact_id=artifact_id)
+            _artifacts_metadata = self._get_file_contents(_artifacts_metadata, object_type=ARTIFACTS)
+            files = self._format_files_for_request(attachment_form_field_name, _artifacts_metadata)
+
+        return  self._add_files_to_request(rest_properties, files, send_file_as_body)
