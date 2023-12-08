@@ -58,7 +58,7 @@ class TestFnAwsIamListSigningCerts:
     @patch("fn_aws_iam.components.fn_aws_iam_list_signing_certs.AwsIamClient", side_effect=mocked_aws_iam_client)
     @pytest.mark.parametrize("aws_iam_user_name, expected_results", [
         ("iam_test_user", [{'CertificateBody': '-----BEGIN CERTIFICATE-----MIID...Apg=-----END CERTIFICATE-----',
-                            'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD',
+                            'CertificateId': 'ABCDEFGH',
                             'Status': 'Active',
                             'UploadDate': '2020-02-26 12:25:27',
                             'UserName': 'iam_test_user'}]),

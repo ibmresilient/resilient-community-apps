@@ -70,7 +70,7 @@ Result: {
                          'Arn': 'arn:aws:iam::123456789123:user/iam_test_User_2',
                          'CreateDate': '2019-10-31 16:23:07', 'PasswordLastUsed': '2019-11-12 10:55:42'}
                        ],
-            'raw': '[{"Path": "/", "UserName": "iam_test_User", "UserId": "ABCDEFG", "Arn": "arn:aws:iam::834299573936:user/iam_test_User", "CreateDate": "2019-11-05 15:54:43"}, {"Path": "/", "UserName": "iam_test_User_2", "UserId": "ABCDEFG", "Arn": "arn:aws:iam::123456789123:user/iam_test_User_2", "CreateDate": "2019-10-31 16:23:07"}]',
+            'raw': '[{"Path": "/", "UserName": "iam_test_User", "UserId": "ABCDEFG", "Arn": "arn:aws:iam::123456789123:user/iam_test_User", "CreateDate": "2019-11-05 15:54:43"}, {"Path": "/", "UserName": "iam_test_User_2", "UserId": "ABCDEFG", "Arn": "arn:aws:iam::123456789123:user/iam_test_User_2", "CreateDate": "2019-10-31 16:23:07"}]',
             'inputs': {},
             'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
                         'host': 'myhost.ibm.com', 'execution_time_ms': 7951,

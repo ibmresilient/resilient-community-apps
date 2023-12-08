@@ -45,8 +45,8 @@ class TestFnAwsIamUpdateLoginProfile:
 
     @patch('fn_aws_iam.components.fn_aws_iam_update_login_profile.AwsIamClient', side_effect=mocked_aws_iam_client)
     @pytest.mark.parametrize("aws_iam_user_name, aws_iam_password, aws_iam_password_reset_required, expected_results", [
-        ("iam_test_User_good", "As3!asdT011", True, get_func_responses("update_login_profile_good")),
-        ("iam_test_User_nosuch", "As3!asdT011", True, get_func_responses("update_login_profile_nosuch")),
+        ("iam_test_User_good", "abcdefgh!1", True, get_func_responses("update_login_profile_good")),
+        ("iam_test_User_nosuch", "abcdefgh!1", True, get_func_responses("update_login_profile_nosuch")),
         ("iam_test_User_badpw", "mypass", True, get_func_responses("update_login_profile_badpw"))
 
     ])
