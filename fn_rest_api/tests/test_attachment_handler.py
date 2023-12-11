@@ -52,7 +52,7 @@ class TestAttachmentHandler(unittest.TestCase):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
         output = ath.attach_files({}, incident_id=2096, artifact_id=26)
-        output = output.get("file")
+        output = output.get("files")
         assert len(output) == 1
         assert len(output[0]) == 2
         # test for default attachment_form_field_name
@@ -68,7 +68,7 @@ class TestAttachmentHandler(unittest.TestCase):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
         output = ath.attach_files({}, incident_id=2096, attachment_id=478, attachment_form_field_name=field_name)
-        output = output.get("file")
+        output = output.get("files")
         assert len(output) == 1
         assert len(output[0]) == 2
         # test for custom attachment_form_field_name
@@ -102,7 +102,7 @@ class TestAttachmentHandler(unittest.TestCase):
         rest_client = MockRestClient()
         ath = AttachmentHandler(rest_client)
         output = ath.attach_files({}, incident_id=2096, artifact_id=26, attachment_id=478)
-        output = output["file"]
+        output = output["files"]
         assert len(output) == 1
         assert len(output[0]) == 2
         # test for default attachment_form_field_name
@@ -204,8 +204,8 @@ class TestAddFilesToRequest(unittest.TestCase):
         ath = AttachmentHandler(self.rest_client)
 
         sample_file = ('Content-Header', ('file_name', b'<svg id="Layer_1" da...Z"/></svg>', 'Content-Type'))
-        _out = ath._add_files_to_request(sample_file, send_file_as_body=False, rest_properties={})
-        self.assertDictEqual(_out, {"file" : [sample_file]})
+        _out = ath._add_files_to_request(files=sample_file, send_file_as_body=False, rest_properties={})
+        self.assertDictEqual(_out, {"files" : [sample_file]})
         assert len(self.caplog.records) == 1
         assert "Sending file as multipart/form-data" in self.caplog.records[0].message
 
@@ -221,8 +221,8 @@ class TestAddFilesToRequest(unittest.TestCase):
 
         self.caplog.clear(), self.caplog.set_level(logging.INFO)
         ath = AttachmentHandler(self.rest_client)
-        _out = ath._add_files_to_request(sample_file, send_file_as_body=False, rest_properties=sample_rest_properties)
-        self.assertListEqual(_out["file"], [sample_file])
+        _out = ath._add_files_to_request(files=sample_file, send_file_as_body=False, rest_properties=sample_rest_properties)
+        self.assertListEqual(_out["files"], [sample_file])
         self.assertDictEqual(_out["headers"], sample_rest_properties["headers"])
         self.assertDictEqual(_out["body"], sample_rest_properties["body"])
         assert len(self.caplog.records) == 1
@@ -260,7 +260,7 @@ class TestAddFilesToRequest(unittest.TestCase):
         ath = AttachmentHandler(self.rest_client)
         with pytest.raises(IntegrationError):
             ath._add_files_to_request(
-                sample_file,
+                files=sample_file,
                 send_file_as_body=True,
                 rest_properties=sample_rest_properties)
 
@@ -273,10 +273,9 @@ class TestAddFilesToRequest(unittest.TestCase):
 
         self.caplog.clear(), self.caplog.set_level(logging.INFO)
         ath = AttachmentHandler(self.rest_client)
-        _out = ath._add_files_to_request(
-            sample_file,
-            send_file_as_body=True,
-            rest_properties=sample_rest_properties)
+        _out = ath._add_files_to_request(rest_properties=sample_rest_properties,
+            files=sample_file,
+            send_file_as_body=True)
         self.assertDictEqual(_out["headers"], sample_rest_properties["headers"])
         assert _out["body"] == sample_file[1][1]
         assert 'WARNING' == self.caplog.records[1].levelname
@@ -289,10 +288,10 @@ class TestAddFilesToRequest(unittest.TestCase):
 
         ath = AttachmentHandler(self.rest_client)
         _out = ath._add_files_to_request(
-            sample_file,
-            send_file_as_body=True,
-            rest_properties=sample_rest_properties)
-        self.assertDictEqual(_out["headers"], {'content_type': 'image/jpeg'})
+            rest_properties=sample_rest_properties,
+            files=sample_file,
+            send_file_as_body=True)
+        self.assertDictEqual(_out["headers"], {'content-type': 'image/jpeg'})
         
         # missing `headers` key in rest_properties
         sample_file = ('Content-Header', ('file_name', b'....', 'image/jpeg'))
@@ -300,7 +299,7 @@ class TestAddFilesToRequest(unittest.TestCase):
 
         ath = AttachmentHandler(self.rest_client)
         _out = ath._add_files_to_request(
-            sample_file,
+            files=sample_file,
             send_file_as_body=True,
             rest_properties=sample_rest_properties)
-        self.assertDictEqual(_out["headers"], {'content_type': 'image/jpeg'})
+        self.assertDictEqual(_out["headers"], {'content-type': 'image/jpeg'})
