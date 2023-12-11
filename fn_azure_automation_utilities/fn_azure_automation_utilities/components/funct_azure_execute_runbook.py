@@ -37,7 +37,7 @@ class FunctionComponent(AppFunctionComponent):
         # fn_inputs.input_parameters is a string dictionary. Convert it into a dictionary from a string.
         input_parameters = {}
         if getattr(fn_inputs, "input_parameters"):
-            input_parameters = literal_eval(getattr(fn_inputs, "input_parameters"))
+            input_parameters = literal_eval(getattr(fn_inputs, "input_parameters").strip())
         time_to_wait = getattr(fn_inputs, "time_to_wait", 30)
 
         # Log inputs

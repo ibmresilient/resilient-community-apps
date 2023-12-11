@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.0.0.430
+# Generated with resilient-sdk v51.0.0.1.486
 
 """Generate the SOAR customizations required for fn_azure_automation_utilities"""
 
@@ -47,7 +47,9 @@ def codegen_reload_data():
         ],
         "workflows": [],
         "actions": [],
-        "incident_fields": [],
+        "incident_fields": [
+            u"azure_automation_create_ui_tab"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [
@@ -91,7 +93,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 48.2.16
+    IBM SOAR Platform Version: 48.0.0
 
     Contents:
     - Message Destinations:
@@ -138,6 +140,8 @@ def customization_data(client=None):
         - azure_automation_utilities_get_schedule
         - azure_automation_utilities_list_statistics_by_automation_account
         - azure_automation_utilities_regenerate_agent_registration_key
+    - Incident Fields:
+        - azure_automation_create_ui_tab
     - Data Tables:
         - azure_automation_accounts
         - azure_automation_credentials
