@@ -23,6 +23,9 @@
     - [2. RETRY DELAY (rest\_retry\_delay)](#2-retry-delay-rest_retry_delay)
     - [3. RETRY BACKOFF (rest\_retry\_backoff)](#3-retry-backoff-rest_retry_backoff)
   - [Attachments](#attachments)
+    - [REQUEST FORMAT](#request-format)
+    - [1. file bundled as a multipart/form-data:](#1-file-bundled-as-a-multipartform-data)
+    - [2. file bundled as request body:](#2-file-bundled-as-request-body)
   - [Authentication](#authentication)
     - [OAuth 2.0](#oauth-20)
       - [Method 1: Using CODE:](#method-1-using-code)
@@ -298,19 +301,59 @@ You can find more information on this in the link: [retry2/retry_call](https://g
 ## Attachments
 
 Incident attachments and artifacts (that contain attachments) can be bundled and sent with a REST request.
+The following fields can be used to find and locate the file to be sent.
 
-The application sends the attachment as ``Content-Type: multipart/form-data``, meaning that the body of the
-request is a series of parts, each of which contains files that are base64 encoded. The body of the request is
-divided into multiple parts, and each part is separated by a boundary defined that is auto-defined by the app.
-Each part typically contains a `Content-Disposition` header that describes the `name` and `type` of the data,
-along with the actual data itself. While the `type` is automatically assigned by the application, the `name`
-is supposed to be provided by the user in the below field.
+Note: Only one file can be sent per request. If both attachment_id and artifact_id is provided,
+      the application will prioritize attachment over artifact
+
+```python
+#[Required] ID of the incident in which the artifact or attachment is present. dtype : int
+inputs.incident_id   = incident.id
+
+# [Optional] ID of the incident in which the artifact or attachment is present. dtype : int
+inputs,task_id = task.id if task else None
+
+# Used to identify the attachment that is to be sent with the REST request. dtype : int
+inputs.attachment_id = None
+
+# Used to identify the artifact **with attachment** that is to be sent with the REST request. dtype : int
+inputs.artifact_id   = None
+```
+
+### REQUEST FORMAT
+
+The endpoint has the capability to receive a REST request containing a file attachment in various formats. The selection of the methodology for sending a file depends on the specific requirements of the endpoint.
+
+### 1. file bundled as a multipart/form-data:
+
+    This methodology sends the attachment as ``Content-Type: multipart/form-data``, meaning that the body of the
+    request is a series of parts, each of which contains files that are base64 encoded. The body of the request is
+    divided into multiple parts, and each part is separated by a boundary defined that is auto-defined by the app.
+    Each part typically contains a `Content-Disposition` header that describes the `name` and `type` of the data,
+    along with the actual data itself. While the `type` is automatically assigned by the application, the `name`
+    is supposed to be provided by the user in the below field.
 
     Each part in multipart/form-data is expected to contain a content-disposition header where the disposition type
     is automatically set by the application, and a disposition name. This disposition name changes with regard to
-    the endpoint that is being used and is to be set by the user. 
-    
-    Default value : `file`
+    the endpoint that is being used and is to be set by the user. Default value : "file"
+
+```python
+inputs.attachment_form_field_name = "file"
+
+# sends file as multipart/form-data
+inputs.send_file_as_body = False
+```
+
+###  2. file bundled as request body:
+
+    This methodology sends the file the binary data of the file as REST request body. Certain endpoints require
+    files to be sent in this format. Although most endpoints tend to use multipart/form-data. Default: False
+
+```python
+inputs.send_file_as_body = True
+```
+Note: The body of the request has to be empty, i.e. inputs.rest_api_body = None, otherwise the application will raise an error
+
 
 ---
 
@@ -723,30 +766,60 @@ inputs.rest_retry_backoff = retry_backoff
 #                                                    ================
 
 # Incident attachments and artifacts (that contain attachments) can be bundled and sent with a REST request.
+# The following fields can be used to find and locate the file to be sent.
 
-# Note: An attachment can only be retrieved from a single incident
+# Note: Only one file can be sent per request. If both attachment_id and artifact_id is provided,
+#       the application will prioritize attachment over artifact
 
-# The application sends the attachment as ``Content-Type: multipart/form-data``, meaning that the body of the
-# request is a series of parts, each of which contains files that are base64 encoded. The body of the request is
-# divided into multiple parts, and each part is separated by a boundary defined that is auto-defined by the app.
-# Each part typically contains a `Content-Disposition` header that describes the `name` and `type` of the data,
-# along with the actual data itself. While the `type` is automatically assigned by the application, the `name`
-# is supposed to be provided by the user in the below field.
-
-# Each part in multipart/form-data is expected to contain a content-disposition header where the disposition type
-# is automatically set by the application, and a disposition name. This disposition name changes with regard to
-# the endpoint that is being used and is to be set by the user. Default value : "file"
-
-inputs.attachment_form_field_name = None
-
-# ID of the incident in which the artifact or attachment is present. dtype : int
+# [Required] ID of the incident in which the artifact or attachment is present. dtype : int
 inputs.incident_id   = incident.id
+
+# [Optional] ID of the incident in which the artifact or attachment is present. dtype : int
+inputs,task_id = task.id if task else None
 
 # Used to identify the attachment that is to be sent with the REST request. dtype : int
 inputs.attachment_id = None
 
 # Used to identify the artifact **with attachment** that is to be sent with the REST request. dtype : int
 inputs.artifact_id   = None
+
+# REQUEST FORMAT
+# --------------
+
+# The endpoint has the capability to receive a REST request containing a file attachment in various formats.
+# The selection of the methodology for sending a file depends on the specific requirements of the endpoint.
+
+# 1. file bundled as a multipart/form-data:
+#
+#  This methodology sends the attachment as ``Content-Type: multipart/form-data``, meaning that the body of the
+#  request is a series of parts, each of which contains files that are base64 encoded. The body of the request is
+#  divided into multiple parts, and each part is separated by a boundary defined that is auto-defined by the app.
+#  Each part typically contains a `Content-Disposition` header that describes the `name` and `type` of the data,
+#  along with the actual data itself. While the `type` is automatically assigned by the application, the `name`
+#  is supposed to be provided by the user in the below field.
+
+#  Each part in multipart/form-data is expected to contain a content-disposition header where the disposition type
+#  is automatically set by the application, and a disposition name. This disposition name changes with regard to
+#  the endpoint that is being used and is to be set by the user. Default value : "file"
+
+inputs.attachment_form_field_name = "file"
+
+# sends file as multipart/form-data
+inputs.send_file_as_body = False
+
+
+# 2. file bundled as request body:
+#
+#   This methodology sends the file the binary data of the file as REST request body. Certain endpoints require
+#   files to be sent in this format. Although most endpoints tend to use multipart/form-data. Default: False
+
+# Uncomment the following line to send file as REST request body
+# inputs.send_file_as_body = True
+
+# Note: The body of the request has to be empty, i.e. inputs.rest_api_body = None, otherwise the application
+#       will raise an error
+
+
 
 
 #                                                       =========

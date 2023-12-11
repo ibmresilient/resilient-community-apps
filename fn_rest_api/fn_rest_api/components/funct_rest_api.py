@@ -314,8 +314,6 @@ class FunctionComponent(AppFunctionComponent):
         rest_properties   =  attachment_client.attach_files(rest_properties, **attachment_properties)
 
 
-        LOG.debug(f"Request Body : {json.dumps(rest_properties.get('body'), indent=2)}")
-
         try:
             yield self.status_message("Attempting call...")
             response = make_rest_call(

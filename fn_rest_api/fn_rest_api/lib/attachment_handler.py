@@ -242,7 +242,7 @@ class AttachmentHandler:
             if not _found_header:
                 if "headers" not in rest_properties:
                     rest_properties["headers"] = {}
-                rest_properties["headers"][CONTENT_TYPE] = _file_content_type
+                rest_properties["headers"]["content-type"] = _file_content_type
 
         elif files:
             LOG.info("Sending file as multipart/form-data")

@@ -250,7 +250,7 @@ class TestValidateURL(unittest.TestCase):
         assert validate_url({}) == None
 
 
-class TestMakeRestCallWithRetr(unittest.TestCase):
+class TestMakeRestCallWithRetry(unittest.TestCase):
 
     opts, options = {}, {}
     @pytest.fixture(autouse=True)
