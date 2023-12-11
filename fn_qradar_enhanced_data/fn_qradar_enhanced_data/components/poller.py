@@ -274,9 +274,10 @@ class PollerComponent(ResilientComponent):
         # Get QRadar Note header
         qradar_header = None
         if self.soar_common.rest_client.use_api_key:
-            qradar_header = f"{self.soar_common.rest_client.api_key_id}: "
+            qradar_header = f"{self.soar_common.rest_client.api_key_id}:"
         else:
-            qradar_header = f'{self.soar_common.rest_client.authdata.get("email", None)}: '
+            qradar_header = f'{self.soar_common.rest_client.authdata.get("email", None)}:'
+        LOG.debug(qradar_header)
 
         if get_sync_notes(self.global_settings, options):
             # Get notes from all QRadar offenses in filter
