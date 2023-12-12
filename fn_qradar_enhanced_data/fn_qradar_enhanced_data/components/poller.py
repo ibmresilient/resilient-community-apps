@@ -291,7 +291,7 @@ class PollerComponent(ResilientComponent):
                     incident_id = case_server_dict.get(server, {}).get(notes.get('id'), {}).get('id') # ID of the SOAR incident
                     qradar_notes = [note.get("noteText").replace("\r", "") for note in notes.get("notes") if int(note.get("createTime")) > poller_time\
                         and AUTO_ESCALATION_NOTE not in note.get("noteText") and MANUAL_ESCALATION not in note.get("noteText") and qradar_header not in note.get("noteText")\
-                            and PLUGIN_ADDED_NOTE not in note.get("noteText") and PLUGIN_ADDED_NOTE[2:] not in note.get("noteText")]
+                            and PLUGIN_ADDED_NOTE not in note.get("noteText") and PLUGIN_ADDED_NOTE[2:] not in note.get("noteText") and "Added from QRadar" not in note.get("noteText")]
                     notes_to_add = filter_comments(self.soar_common, incident_id, qradar_notes, soar_str_to_remove="\nAdded from QRadar")
                     if notes_to_add:
                         for note in notes_to_add:
