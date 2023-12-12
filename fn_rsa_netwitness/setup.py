@@ -5,17 +5,15 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_rsa_netwitness',
-    version='1.1.1',
+    version='1.1.2',
     license='MIT',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail',
+    author='IBM SOAR',
+    author_email='',
     url='https://github.com/ibmresilient/resilient-circuits-packages',
-    description="Resilient Circuits Functions for calling NetWitness APIs 'fn_rsa_netwitness'",
-    long_description="Resilient Circuits Components to query for "\
-        "NetWitness metadata and retrieve pcap/log data 'fn_rsa_netwitness'",
+    description="IBM QRadar SOAR Functions for RCA NetWitness",
+    long_description="Query NetWitness metadata and retrieve pcap/log data",
     install_requires=[
-        'resilient_circuits>=39.0.0',
-        'resilient-lib>=32.0.0',
+        'resilient_circuits>=50.0.0',
         'pytz'
     ],
     packages=find_packages(),
