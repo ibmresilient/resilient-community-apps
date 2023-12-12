@@ -12,6 +12,7 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 
 from fn_rest_api.lib.helper import make_rest_call, dedup_dict, render_dict_components
 from fn_rest_api.lib import authentication_handler
+from fn_rest_api.lib import attachment_handler
 
 FN_NAME = "rest_api"
 PACKAGE_NAME = "fn_rest_api"
@@ -241,6 +242,15 @@ class FunctionComponent(AppFunctionComponent):
             authentication_handler.CLIENT_AUTH_KEY  : getattr(fn_inputs, authentication_handler.CLIENT_AUTH_KEY, None),
             authentication_handler.CLIENT_AUTH_PEM  : getattr(fn_inputs, authentication_handler.CLIENT_AUTH_PEM, None)}
 
+        # Properties required for Attachments
+        attachment_properties = {
+            attachment_handler.INCIDENT_ID   : getattr(fn_inputs, attachment_handler.INCIDENT_ID, None),
+            attachment_handler.TASK_ID       : getattr(fn_inputs, attachment_handler.TASK_ID, None),
+            attachment_handler.ARTIFACT_ID   : getattr(fn_inputs, attachment_handler.ARTIFACT_ID, None),
+            attachment_handler.ATTACHMENT_ID : getattr(fn_inputs, attachment_handler.ATTACHMENT_ID, None),
+            attachment_handler.SEND_FILE_AS_BODY : getattr(fn_inputs, attachment_handler.SEND_FILE_AS_BODY, False),
+            attachment_handler.ATTACHMENT_FORM_FIELD : getattr(fn_inputs, attachment_handler.ATTACHMENT_FORM_FIELD, "file")}
+
         LOG.info(f"REST Options  : {json.dumps(rest_options, indent=2)}")
         LOG.info(f"RETRY Options : {json.dumps(retry_properties, indent=2)}")
 
@@ -291,15 +301,18 @@ class FunctionComponent(AppFunctionComponent):
         else:
            yield self.status_message("No JWT parameters were detected. Skipping JWT authentication")
 
-
         # Generating certificates for client side authentication, if certificates are provided
-        yield self.status_message("Checking if Client-Side Certificates have been provided ...")
+        yield self.status_message("Checking if Client-Side Certificates have been provided...")
         if authentication_handler.check_certificates(cert_properties):
             rest_properties["clientauth"] = authentication_handler.add_certificates(cert_properties, certs_path)
         else:
             yield self.status_message("No certificates were detected. Skipping Client-Side authentication")
 
-        LOG.debug(f"Request Body : {json.dumps(rest_properties.get('body'), indent=2)}")
+        # Handling attachments
+        yield self.status_message("Checking if any attachments are to be added to the request")
+        attachment_client = attachment_handler.AttachmentHandler(self.rest_client())
+        rest_properties   =  attachment_client.attach_files(rest_properties, **attachment_properties)
+
 
         try:
             yield self.status_message("Attempting call...")
