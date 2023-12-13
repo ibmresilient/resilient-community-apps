@@ -59,6 +59,8 @@ payload = {
 }
 if getattr(playbook.inputs, "azure_automation_credential_username", None):
   payload["properties"]["userName"] = getattr(playbook.inputs, "azure_automation_credential_username", None)
+else:
+  payload["properties"]["userName"] = row.credential_username
 if getattr(playbook.inputs, "azure_automation_credential_password", None):
   payload["properties"]["password"] = getattr(playbook.inputs, "azure_automation_credential_password", None)
 if getattr(playbook.inputs, "azure_automation_credential_description", None):
