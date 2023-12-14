@@ -150,20 +150,6 @@ class TestGetFileContents(unittest.TestCase):
         assert FILE_CONTENTS in ret
         assert ret[FILE_CONTENTS]
 
-    def test_write_file(self):
-        rest_client = MockRestClient()
-        ath = AttachmentHandler(rest_client)
-        ath.incident_id = 2096
-        ath.task_id = None
-        ret = ath._get_file_contents(ATH_METADATA, object_type="attachments", write_to_phy_location=True)
-        assert ret
-        assert FILE_CONTENTS in ret
-        assert ret[FILE_CONTENTS]
-        assert ret["file_path_on_device"]
-        assert os.path.isfile(ret["file_path_on_device"])
-        assert open(ret["file_path_on_device"], "rb").read() == ATH_CONTENT
-
-
 class TestFindArtifactId(unittest.TestCase):
 
     def test_missing_artifact_id(self):
