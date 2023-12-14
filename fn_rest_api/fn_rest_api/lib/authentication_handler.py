@@ -353,6 +353,7 @@ class OAuth2Authorization():
         :rtype: dict
         """
         supported_oauth_flows = self.check_oauth_ready()
+        _auth_specific_attributes = {}
 
         # Unsupported flow
         if not supported_oauth_flows[OAUTH_SUPPORTED]:
