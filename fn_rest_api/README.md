@@ -346,7 +346,7 @@ inputs.send_file_as_body = False
 
 ###  2. file bundled as request body:
 
-    This methodology sends the file the binary data of the file as REST request body. Certain endpoints require
+    This methodology sends the binary data of the file as REST request body. Certain endpoints require
     files to be sent in this format. Although most endpoints tend to use multipart/form-data. Default: False
 
 ```python
@@ -463,23 +463,11 @@ Note:   The client authentication certificate and private key are commonly given
 
 ```python
   inputs.client_auth_cert = """
-      Bag Attributes
-          friendlyName: Authentication certificate
-          localKeyID: 78 94 0E 86 8D 30 EC D3 90 C8 6A 69 0F XX XX XX XX
-      Key Attributes: <No Attributes>
       -----BEGIN CERTIFICATE-----
       MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G
       9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E
       FEgCxB3Rdkim5Dfog6SCCFWIa4YAyv0rdgNLeRbQNTKyT14+inqWE+CLKvZ/T+56
       OEdDSh0RPCg+UxjyCnkSiMce+/8RT+FXK41q1iQZAREJGEpZJIizVYB+aW2caCdq
-      PteGybdmFFeRIP/qbo0u17zc+Urj+MbuqYcEtx5YriF39+xRrReDbteSTnigQQP4
-      7zQHgQkU+U6MOuFTICtqVBuH9LX8qCJAG+92FLseh6I4qg0gd1ilyTG8PnhKuBRi
-      vkuz+SOtAgMBAAECggEAFkbnNQxamWGs6DpNT9j6V7412yZMZatVtaguR5CXJ9KU
-      0GTV1+9qwGIKnt4tZPOmQYh2h+8WUn2xHFVY5I7seX6mo8EXmCq2cT21PmI4QYCf
-      cNOKjYkEgwKBgAktKQorCoDvo5oiI89zpUhRHbJIlGWHuZFCCmEIQb4z+dUr72LL
-      uhZP0s22aRkqXMzDblFYrS0H3p7clhqEsoD9DO9WsiQK/2G85nR+IZd9U0bQ7z/t
-      7FOMkDbMPHkmkwAHlFC/UbS4XWJCZzrOoi6Zl/Cx4nFwvWyn7OtJfI/xAoGAdgat
-      PtFt97+wPDuSdVIbXjArSSq9F22J/cpG+wOMIGdgtNfPbNJFRG7Q/Lc/eDMPB5Nw
       9O9YOnDFpqb8S+aE+4/Yfcxg4gGrKazXu+flYNhzpCTx3SpVawQCrUF3dE/2hbV+
       FbGVFPaJziRDeH3UA1+1q0/bRg1trxqkZtGSGukCgYAA7SWvZ3lGJ42tiFzoH4F5
       SfTZXQytCwyxXF6BIWTIXQBcCep5TrfOnYz4iEDwMdp4Qb/QhyjaUsIlo+JldquZ
@@ -533,7 +521,9 @@ Note:   The client authentication certificate and private key are commonly given
 | `oauth_token_url` | `text` | No | `https://www.example.com/oauth/token` | URL for the Authorization server endpoint |
 | `incident_id` | `number` | No | `2095` | ID of the incident in which the artifact or attachment is present |
 | `artifact_id` | `number` | No | `12` | Used to identify the attachment that is to be sent with the REST request |
-| `attachment_id` | `number` | No | `12` | Used to identify the artifact **with attachment** that is to be sent with the REST request |
+| `attachment_id` | `number` | No | `12` | Used to identify file-based artifact that is to be sent with the REST request |
+| `send_file_as_body ` | `bool` | No | `False`` | Sends the attachment as request body instead of multipart/form-data |
+| `attachment_form_field_name` | `text` | No | `file` | the content-disposition header name for multipart/form-data |
 | `oauth_client_id` | `text` | No | `-` | Identifies the client application |
 | `oauth_client_secret` | `text` | No | `-` | Authenticates the client application (required for certain grant types) |
 | `oauth_redirect_uri` | `text` | No | `https://www.example.com/redirect` | The redirect URI used during the authorization flow (for authorization code grant) |
@@ -780,7 +770,7 @@ inputs,task_id = task.id if task else None
 # Used to identify the attachment that is to be sent with the REST request. dtype : int
 inputs.attachment_id = None
 
-# Used to identify the artifact **with attachment** that is to be sent with the REST request. dtype : int
+# Used to identify file-based artifact that is to be sent with the REST request. dtype : int
 inputs.artifact_id   = None
 
 # REQUEST FORMAT
@@ -810,7 +800,7 @@ inputs.send_file_as_body = False
 
 # 2. file bundled as request body:
 #
-#   This methodology sends the file the binary data of the file as REST request body. Certain endpoints require
+#   This methodology sends the binary data of the file as REST request body. Certain endpoints require
 #   files to be sent in this format. Although most endpoints tend to use multipart/form-data. Default: False
 
 # Uncomment the following line to send file as REST request body
@@ -1112,25 +1102,11 @@ inputs.oauth_grant_type    = None
 #    same input format, as shown below.
 #
 #   inputs.client_auth_cert = """
-#       Bag Attributes
-#           friendlyName: Authentication certificate
-#           localKeyID: 78 94 0E 86 8D 30 EC D3 90 C8 6A 69 0F XX XX XX XX
-#       Key Attributes: <No Attributes>
 #       -----BEGIN CERTIFICATE-----
 #       MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G
 #       9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E
 #       FEgCxB3Rdkim5Dfog6SCCFWIa4YAyv0rdgNLeRbQNTKyT14+inqWE+CLKvZ/T+56
 #       OEdDSh0RPCg+UxjyCnkSiMce+/8RT+FXK41q1iQZAREJGEpZJIizVYB+aW2caCdq
-#       PteGybdmFFeRIP/qbo0u17zc+Urj+MbuqYcEtx5YriF39+xRrReDbteSTnigQQP4
-#       7zQHgQkU+U6MOuFTICtqVBuH9LX8qCJAG+92FLseh6I4qg0gd1ilyTG8PnhKuBRi
-#       vkuz+SOtAgMBAAECggEAFkbnNQxamWGs6DpNT9j6V7412yZMZatVtaguR5CXJ9KU
-#       0GTV1+9qwGIKnt4tZPOmQYh2h+8WUn2xHFVY5I7seX6mo8EXmCq2cT21PmI4QYCf
-#       cNOKjYkEgwKBgAktKQorCoDvo5oiI89zpUhRHbJIlGWHuZFCCmEIQb4z+dUr72LL
-#       uhZP0s22aRkqXMzDblFYrS0H3p7clhqEsoD9DO9WsiQK/2G85nR+IZd9U0bQ7z/t
-#       7FOMkDbMPHkmkwAHlFC/UbS4XWJCZzrOoi6Zl/Cx4nFwvWyn7OtJfI/xAoGAdgat
-#       PtFt97+wPDuSdVIbXjArSSq9F22J/cpG+wOMIGdgtNfPbNJFRG7Q/Lc/eDMPB5Nw
-#       9O9YOnDFpqb8S+aE+4/Yfcxg4gGrKazXu+flYNhzpCTx3SpVawQCrUF3dE/2hbV+
-#       FbGVFPaJziRDeH3UA1+1q0/bRg1trxqkZtGSGukCgYAA7SWvZ3lGJ42tiFzoH4F5
 #       SfTZXQytCwyxXF6BIWTIXQBcCep5TrfOnYz4iEDwMdp4Qb/QhyjaUsIlo+JldquZ
 #       k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ
 #       Y20A9hExGKyHns4hW5KgvA==
