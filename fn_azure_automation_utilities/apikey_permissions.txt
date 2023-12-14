@@ -42,8 +42,8 @@ read_function
 #edit_data
 #
 ## Customization Permissions
-#read_layouts
-#edit_layouts
+read_layouts
+edit_layouts
 #delete_layouts
 #read_script
 #edit_script

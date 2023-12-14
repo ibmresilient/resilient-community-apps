@@ -16,7 +16,7 @@
 `Manual`
 
 ### Activation Conditions
-`azure_automation_runbooks.account_name_runbooks has_a_value AND azure_automation_runbooks.resource_group_runbooks has_a_value AND azure_automation_runbooks.runbook_name has_a_value`
+`azure_automation_runbooks.account_name_runbooks has_a_value AND azure_automation_runbooks.resource_group_runbooks has_a_value AND azure_automation_runbooks.runbook_deleted not_equals True AND azure_automation_runbooks.runbook_name has_a_value`
 
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
