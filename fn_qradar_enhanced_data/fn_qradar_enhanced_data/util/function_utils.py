@@ -23,7 +23,7 @@ def filter_comments(soar_common, incident_id, qradar_notes, soar_str_to_remove="
     # Remove html an given qradar_header_to_remove
     qradar_notes_list = []
     for note in qradar_notes:
-        qradar_notes_list.append(clean_html(note.replace("\x03", "")).strip())
+        qradar_notes_list.append(clean_html(note).strip())
     # Check if the QRadar comment is already a note on the SOAR incident
     return [comment for comment in qradar_notes_list\
             if comment not in soar_comment_list]
