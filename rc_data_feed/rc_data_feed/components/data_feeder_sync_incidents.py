@@ -6,11 +6,11 @@
 import ast
 import logging
 import sys
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult
 from resilient_lib import ResultPayload, str_to_bool
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
 from rc_data_feed.components.threadpool import PluginPool_Factory
-from .feed_ingest import Reload, build_feed_outputs
+from .feed_ingest import Reload
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'data_feeder_sync_incidents"""
@@ -54,7 +54,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("starting...")
             rest_client_helper = RestClientHelper(self.rest_client)
-            feed_outputs = build_feed_outputs(rest_client_helper, self.opts, self.options.get("feed_names", None))
+
             # build the list workspaces to plugin, if present
             self.workspaces = ast.literal_eval("{{ {} }}".format(self.options.get("workspaces", "")))
 
@@ -62,9 +62,10 @@ class FunctionComponent(ResilientComponent):
             self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
             plugin_pool = PluginPool_Factory.get_thread_pool(rest_client_helper,
-                                     int(self.opts.get("resilient", {}).get("num_workers", 0)),
-                                     feed_outputs,
-                                     self.workspaces)
+                                                             int(self.opts.get("resilient", {}).get("num_workers", 0)),
+                                                             self.options.get("feed_names", None),
+                                                             self.opts,
+                                                             self.workspaces)
 
             df = Reload(plugin_pool,
                         [ type.strip() for type in self.options.get("reload_types", "").split(",") \

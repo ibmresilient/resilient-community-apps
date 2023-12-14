@@ -10,9 +10,6 @@ import traceback
 
 from pydoc import locate
 from resilient_lib import get_file_attachment
-
-
-from rc_data_feed.lib.type_info import get_incident
 from rc_data_feed.lib.feed import FeedContext
 
 LOG = logging.getLogger(__name__)
@@ -27,12 +24,13 @@ class PluginPool():
     def __init__(self,
                  rest_client_helper,
                  num_workers,
-                 feed_outputs,
+                 feed_list,
+                 opts,
                  workspaces,
                  parallel_execution=False):
         self.rest_client_helper = rest_client_helper
         self.num_workers = num_workers if num_workers else DEF_NUM_WORKERS
-        self.feed_outputs = feed_outputs
+        self.feed_outputs = self.build_feed_outputs(opts, feed_list)
         self.workspaces = workspaces
         self.parallel_execution = parallel_execution
 
@@ -43,6 +41,30 @@ class PluginPool():
             self.pool = multiprocessing.pool.PluginPool_Factory(thread_pool_size)
         else:
             LOG.info("PluginPool_Factory disabled")
+
+    def build_feed_outputs(self, opts, feed_names):
+        """
+        build array of all the classes which of datastores to populate
+        :param opts:
+        :param feed_names:
+        :return: array of datastore classes
+        """
+        feed_config_names = [name.strip() for name in feed_names.split(',')]
+
+        feed_outputs = {}
+
+        for feed_config_name in feed_config_names:
+            feed_options = opts.get(feed_config_name, {})
+
+            class_name = feed_options.get("class")
+
+            namespace = 'data_feeder_plugins.{ns}.{ns}.{claz}Destination'.format(ns=class_name.lower(), claz=class_name)
+            LOG.debug(namespace)
+            obj = locate(namespace)(self.rest_client_helper, feed_options)
+
+            feed_outputs[feed_config_name] = obj
+
+        return feed_outputs
 
     def run_plugin(self, task, args):
         # support both parallel execution and serial
@@ -81,7 +103,7 @@ class PluginPool():
                 LOG.error("Traceback %s", error_trace)
 
         if not item_sent:
-            LOG.debug("No feed found to satisfy workspace: %s for %s (%s)", workspace, type_name, payload.get('id'))
+            LOG.debug("No feed found to satisfy workspace: '%s' for %s (%s)", workspace, type_name, payload.get('id'))
 
 
     def send_data(self, type_info, inc_id, payload, is_deleted, incl_attachment_data):
@@ -141,12 +163,14 @@ class PluginPool_Factory():
     def get_thread_pool(rest_client_helper,
                         num_workers,
                         feed_outputs,
+                        opts,
                         workspaces,
                         parallel_execution=False):
         if not PluginPool_Factory.thread_pool:
             PluginPool_Factory.thread_pool = PluginPool(rest_client_helper,
                                                         num_workers,
                                                         feed_outputs,
+                                                        opts,
                                                         workspaces,
                                                         parallel_execution=parallel_execution)
 

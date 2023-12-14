@@ -9,7 +9,6 @@ import logging
 import sys
 import traceback
 
-from pydoc import locate
 from resilient_circuits import ResilientComponent, handler, ActionMessage
 from resilient_lib import str_to_bool
 from resilient import SimpleHTTPException
@@ -28,31 +27,6 @@ def _get_inc_id(payload):
 
 def _is_incident_or_task(parent_types):
     return {'incident', 'task'}.intersection(parent_types)
-
-def build_feed_outputs(rest_client_helper, opts, feed_names):
-    """
-    build array of all the classes which of datastores to populate
-    :param rest_client_helper:
-    :param opts:
-    :param feed_names:
-    :return: array of datastore classes
-    """
-    feed_config_names = [name.strip() for name in feed_names.split(',')]
-
-    feed_outputs = {}
-
-    for feed_config_name in feed_config_names:
-        feed_options = opts.get(feed_config_name, {})
-
-        class_name = feed_options.get("class")
-
-        namespace = 'data_feeder_plugins.{ns}.{ns}.{claz}Destination'.format(ns=class_name.lower(), claz=class_name)
-        LOG.debug(namespace)
-        obj = locate(namespace)(rest_client_helper, feed_options)
-
-        feed_outputs[feed_config_name] = obj
-
-    return feed_outputs
 
 def range_chunks(chunk_range, chunk_size):
     """
@@ -97,7 +71,6 @@ class FeedComponent(ResilientComponent):
             else:
                 self.rest_client_helper = RestClientHelper(self.rest_client)
 
-                self.feed_outputs = build_feed_outputs(self.rest_client_helper, opts, self.options.get("feed_names", None))
                 # build the list workspaces to plugin, if present
                 try:
                     self.workspaces = ast.literal_eval("{{ {0} }}".format(self.options.get("workspaces", "")))
@@ -109,7 +82,8 @@ class FeedComponent(ResilientComponent):
 
                 self.plugin_pool = PluginPool_Factory.get_thread_pool(self.rest_client_helper,
                                               int(opts.get("resilient", {}).get("num_workers", 0)),
-                                              self.feed_outputs,
+                                              self.options.get("feed_names", None),
+                                              opts,
                                               self.workspaces,
                                               parallel_execution=str_to_bool(self.options.get("parallel_execution", 'false')))
 
