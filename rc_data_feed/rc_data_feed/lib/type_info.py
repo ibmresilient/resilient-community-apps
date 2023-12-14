@@ -318,19 +318,19 @@ class TypeInfo(object):
         if incident:
             return self.get_workspace_from_id(incident['workspace'])
 
+        LOG.error(f"incident id: {inc_id} not found")
         return None
 
     def get_workspace_from_id(self, workspace_id):
-        """ get an incident workspace label from the workspace id """
+        """ get an incident workspace label based on the workspace id """
 
         incident_type = self.get_type(0) # incident
         for workspace_value in incident_type['fields']['workspace']['values']:
-            if workspace_value['default']:
-                default_workspace = workspace_value['label']
             if workspace_id == workspace_value['value']:
                 return workspace_value['label']
 
-        return default_workspace
+        LOG.error(f"workspace id: {workspace_id} not found within type_info")
+        return None
 
     def get_type_name(self, type_id, pretty=True):
         """
