@@ -81,7 +81,7 @@ class PluginPool():
                 LOG.error("Traceback %s", error_trace)
 
         if not item_sent:
-            LOG.debug("No workspace found to satisfy data feed for %s (%s)", type_name, payload.get('id'))
+            LOG.debug("No feed found to satisfy workspace: %s for %s (%s)", workspace, type_name, payload.get('id'))
 
 
     def send_data(self, type_info, inc_id, payload, is_deleted, incl_attachment_data):
