@@ -94,7 +94,7 @@ class PluginPool():
             # don't let a failure in one feed break all the rest
             try:
                 if self._is_workspace_valid(workspace, feed_name):
-                    LOG.debug("Calling feed %s for workspace: %s", feed_output.__class__.__name__, workspace)
+                    LOG.info("Calling feed %s for workspace: %s", feed_output.__class__.__name__, workspace)
                     self.run_plugin(feed_output.send_data, args=(context, payload))
                     item_sent = True
             except Exception as err:
@@ -103,7 +103,7 @@ class PluginPool():
                 LOG.error("Traceback %s", error_trace)
 
         if not item_sent:
-            LOG.debug("No feed found to satisfy workspace: '%s' for %s (%s)", workspace, type_name, payload.get('id'))
+            LOG.info("No feed found to satisfy workspace: '%s' for %s (%s)", workspace, type_name, payload.get('id'))
 
 
     def send_data(self, type_info, inc_id, payload, is_deleted, incl_attachment_data):
