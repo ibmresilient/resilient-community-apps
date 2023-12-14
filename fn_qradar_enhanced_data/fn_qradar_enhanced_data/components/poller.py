@@ -271,14 +271,6 @@ class PollerComponent(ResilientComponent):
             # If timezone_offset configured in individual server settings
             last_poller_time = self.set_time_offset(options.get("timezone_offset"))
 
-        # Get QRadar Note header
-        qradar_header = None
-        if self.soar_common.rest_client.use_api_key:
-            qradar_header = f"{self.soar_common.rest_client.api_key_id}:"
-        else:
-            qradar_header = f'{self.soar_common.rest_client.authdata.get("email", None)}:'
-        LOG.debug(qradar_header)
-
         if get_sync_notes(self.global_settings, options):
             # Get notes from all QRadar offenses in filter
             offenses_notes = qradar_client.graphql_query({"filter": filter_notes}, GRAPHQL_POLLERQUERY).get("content")
