@@ -19,56 +19,6 @@ LOG = logging.getLogger(__name__)
 # 42P01 - table not found.
 PYODBC_CONNECTION_LOST = ('08001', '08S01', '08003', 'HY000', '42703', '42P01')
 
-# thread lock used to limit the number of simultaneous updates needed to database tables
-UPDATE_LOCK = Lock()
-UPDATE_TABLE_LOCK = {}
-
-def get_table_lock(table_name) -> Lock:
-    """get a table specific lock for use when updating the table schema 
-
-    :param table_name: name of table
-    :type table_name: str
-    :return: lock for table updates
-    :rtype: threading.Lock
-    """
-    with UPDATE_LOCK:
-        if not UPDATE_TABLE_LOCK.get(table_name):
-            UPDATE_TABLE_LOCK[table_name] = Lock()
-
-        return UPDATE_TABLE_LOCK[table_name]
-    
-# static table column listing needed for multi-threaded lookup
-# This is needed to minimize the number of times the schema of db table is updated
-TABLE_SCHEMA_LOOKUP_LOCK = Lock()
-TABLE_SCHEMA_LOOKUP = {} # structure: { "<table_name>": {<column_name>:<input_type>} } 
-
-def is_table_found(table_name: str) -> bool:
-    return TABLE_SCHEMA_LOOKUP.get(table_name)
-
-def is_field_found(table_name: str, field_name: str, field_type) -> bool:
-    global TABLE_SCHEMA_LOOKUP
-    """determine if the field name already exist in the db table
-
-    :param table_name: object name is identical to table name
-    :type table_name: str
-    :param field_name: field name in object 
-    :type field_name: str
-    :return: <field found>, <field_type same> True if field already added to the db table
-    :rtype: bool, bool
-    """
-    with TABLE_SCHEMA_LOOKUP_LOCK:
-        if not TABLE_SCHEMA_LOOKUP.get(table_name):
-            TABLE_SCHEMA_LOOKUP[table_name] = {field_name: field_type}
-            return False, False   # not found
-
-        field_found = (field_name in TABLE_SCHEMA_LOOKUP[table_name])
-
-        field_type_same = (TABLE_SCHEMA_LOOKUP[table_name].get(field_name) == field_type)
-        # always update
-        TABLE_SCHEMA_LOOKUP[table_name][field_name] = field_type # add/update
-
-        return field_found, field_type_same
-
 class RetrySendDataException(Exception):
     """Class used to signal a retry of an operation to ensure transactional completeness
 
@@ -107,6 +57,15 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
             self.dialect = SqlFeedDestinationBase.AVAILABLE_DIALECTS[dialect_name]()
 
         self.sqlparams_helper = self.dialect.get_sqlparams_helper()
+
+        # table column listing needed for multi-threaded lookup
+        # This is needed to minimize the number of times the schema of db table is updated
+        self.TABLE_SCHEMA_LOOKUP_LOCK = Lock()
+        self.TABLE_SCHEMA_LOOKUP = {} # structure: { "<table_name>": {<column_name>:<input_type>} }
+
+        # thread lock used to limit the number of simultaneous updates needed to database tables
+        self.UPDATE_LOCK = Lock()
+        self.UPDATE_TABLE_LOCK = {}
 
     def _init_tables(self):
         if self.rest_client_helper:
@@ -156,12 +115,52 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         LOG.debug("hash_key (%s): %s", type_name, hash_key)
         return hash_key
 
+    def get_table_lock(self, table_name) -> Lock:
+        """get a table specific lock for use when updating the table schema
+
+        :param table_name: name of table
+        :type table_name: str
+        :return: lock for table updates
+        :rtype: threading.Lock
+        """
+        with self.UPDATE_LOCK:
+            if not self.UPDATE_TABLE_LOCK.get(table_name):
+                self.UPDATE_TABLE_LOCK[table_name] = Lock()
+
+            return self.UPDATE_TABLE_LOCK[table_name]
+
+    def is_table_found(self, table_name: str) -> bool:
+        return self.TABLE_SCHEMA_LOOKUP.get(table_name)
+
+    def is_field_found(self, table_name: str, field_name: str, field_type) -> bool:
+        """determine if the field name already exist in the db table
+
+        :param table_name: object name is identical to table name
+        :type table_name: str
+        :param field_name: field name in object
+        :type field_name: str
+        :return: <field found>, <field_type same> True if field already added to the db table
+        :rtype: bool, bool
+        """
+        with self.TABLE_SCHEMA_LOOKUP_LOCK:
+            if not self.TABLE_SCHEMA_LOOKUP.get(table_name):
+                self.TABLE_SCHEMA_LOOKUP[table_name] = {field_name: field_type}
+                return False, False   # not found
+
+            field_found = (field_name in self.TABLE_SCHEMA_LOOKUP[table_name])
+
+            field_type_same = (self.TABLE_SCHEMA_LOOKUP[table_name].get(field_name) == field_type)
+            # always update
+            self.TABLE_SCHEMA_LOOKUP[table_name][field_name] = field_type # add/update
+
+            return field_found, field_type_same
+
     # may not be needed per is_field_found @cached(cache=LRUCache(100), key=cache_key)
     def _create_or_update_table(self, type_name, all_fields):
 
         # if locked, bypass any schema updates
-        if not get_table_lock(type_name).locked():
-            with get_table_lock(type_name):
+        if not self.get_table_lock(type_name).locked():
+            with self.get_table_lock(type_name):
                 cursor = None
                 for _retry in range(2):
                     try:
@@ -169,7 +168,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                         # id and inc_id are special fields.  We always add them.  Then we look at the
                         # fields to add all the other fields.
                         #
-                        if not is_table_found(type_name):
+                        if not self.is_table_found(type_name):
                             column_spec = {
                                 "id": "integer primary key",
                                 "inc_id": "integer"
@@ -181,7 +180,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
                             # add in the initial columns
                             for k in column_spec.keys():
-                                is_field_found(type_name, k, 'number')
+                                self.is_field_found(type_name, k, 'number')
 
                         for field in all_fields:
                             field_name = field['name']
@@ -189,7 +188,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
                             # Add the column for the field if it hasn't been already.
                             #
-                            field_found, field_type_same = is_field_found(type_name, field_name, field_type)
+                            field_found, field_type_same = self.is_field_found(type_name, field_name, field_type)
                             if not field_found or not field_type_same:
                                 self._add_field_to_table(cursor, type_name, field)
 
