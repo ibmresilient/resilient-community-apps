@@ -166,20 +166,16 @@ class AttachmentHandler:
             (file_metadata.get(NAME), file_metadata.get(FILE_CONTENTS), file_metadata.get(CONTENT_TYPE)))
 
 
-    def _get_file_contents(self, file_metadata:dict, object_type:str, write_to_phy_location:bool=False):
+    def _get_file_contents(self, file_metadata:dict, object_type:str):
         """
-        Download the contents of the attachment from soar. The function also has the ability to write the
-        file to a physical location if required. This can then be later referenced if directly in the request
-        later. The contents retrieved from soar is also stored within the metadata.
+        Retrieves the binary data of an attachment or file-based artifact from SOAR,
+        which can subsequently be combined with a request and sent to a designated endpoint.
 
         :param file_metadata: attachment information. Format matches the output of
             `find_attachments_by_id`.
         :type file_metadata: dict
         :param object_type: used to identify the object type that is to be retrieved.
         :type object_type: str. Supported values : `artifacts` or `attachments`
-        :param write_to_phy_location: Downloads the contents and recreates the file
-            on the machine, defaults to False
-        :type write_to_phy_location: bool, optional
         :return: _description_
         :rtype: _type_
         """
@@ -191,12 +187,6 @@ class AttachmentHandler:
 
         _file_contents = get_file_attachment(self.rest_client, self.incident_id, **_params)
 
-        if write_to_phy_location:
-            LOG.info("Writing files to device")
-            _file_path, _ = write_to_tmp_file(
-                _file_contents,
-                tmp_file_name=file_metadata.get(NAME))
-            file_metadata["file_path_on_device"] = _file_path
         file_metadata[FILE_CONTENTS] = _file_contents
         return file_metadata
 
