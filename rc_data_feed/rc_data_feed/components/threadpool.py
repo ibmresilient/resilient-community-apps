@@ -17,6 +17,26 @@ LOG = logging.getLogger(__name__)
 DEF_NUM_WORKERS = 25
 POOL_RATIO = 1.0 # multiplier for number of pool threads to allow
 
+class PluginPool_Factory():
+    thread_pool = None
+
+    @staticmethod
+    def get_thread_pool(rest_client_helper,
+                        num_workers,
+                        feed_outputs,
+                        opts,
+                        workspaces,
+                        parallel_execution=False):
+        if not PluginPool_Factory.thread_pool:
+            PluginPool_Factory.thread_pool = PluginPool(rest_client_helper,
+                                                        num_workers,
+                                                        feed_outputs,
+                                                        opts,
+                                                        workspaces,
+                                                        parallel_execution=parallel_execution)
+
+        return PluginPool_Factory.thread_pool
+
 class PluginPool():
     """This class allows for separate, long running threads to perform the plugin logic.
         It frees up the application threads to service other message queue actions
@@ -33,12 +53,13 @@ class PluginPool():
         self.feed_outputs = self.build_feed_outputs(opts, feed_list)
         self.workspaces = workspaces
         self.parallel_execution = parallel_execution
+        self.pool = None
 
         if self.parallel_execution:
             # increase the number of threads for handling event messages
             thread_pool_size = int(self.num_workers*POOL_RATIO) # could be +/- num_workers
             LOG.info(f"PluginPool_Factory size: {thread_pool_size}")
-            self.pool = multiprocessing.pool.PluginPool_Factory(thread_pool_size)
+            self.pool = multiprocessing.Pool(thread_pool_size)
         else:
             LOG.info("PluginPool_Factory disabled")
 
@@ -154,24 +175,3 @@ class PluginPool():
             workspace = type_info.get_incident_workspace(inc_id)
 
         self.async_send_data(type_name, workspace, context, payload)
-
-
-class PluginPool_Factory():
-    thread_pool = None
-
-    @staticmethod
-    def get_thread_pool(rest_client_helper,
-                        num_workers,
-                        feed_outputs,
-                        opts,
-                        workspaces,
-                        parallel_execution=False):
-        if not PluginPool_Factory.thread_pool:
-            PluginPool_Factory.thread_pool = PluginPool(rest_client_helper,
-                                                        num_workers,
-                                                        feed_outputs,
-                                                        opts,
-                                                        workspaces,
-                                                        parallel_execution=parallel_execution)
-
-        return PluginPool_Factory.thread_pool
