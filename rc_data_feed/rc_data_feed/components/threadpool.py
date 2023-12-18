@@ -17,6 +17,9 @@ LOG = logging.getLogger(__name__)
 DEF_NUM_WORKERS = 25
 POOL_RATIO = 1.0 # multiplier for number of pool threads to allow
 
+def error_callback(exception):
+    LOG.error((f"Plugin error during apply_async: {str(exception)}"))
+
 class PluginPool_Factory():
     thread_pool = None
 
@@ -90,7 +93,7 @@ class PluginPool():
     def run_plugin(self, task, args):
         # support both parallel execution and serial
         if self.parallel_execution:
-            _async_result = self.pool.apply_async(task, args=args)
+            _async_result = self.pool.apply_async(task, args=args, error_callback=error_callback)
         else:
             task(*args)
 
