@@ -141,7 +141,7 @@ class PluginPool():
         :param incl_attachment_data: true/false
         :return: None
         """
-        context = FeedContext(type_info, inc_id, self.rest_client_helper.inst_rest_client, is_deleted)
+        context = FeedContext(type_info, inc_id, None, is_deleted)
 
         type_name = type_info.get_pretty_type_name()
         # make sure the incident has a org_name
