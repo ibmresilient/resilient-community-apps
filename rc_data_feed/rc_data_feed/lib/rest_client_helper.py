@@ -6,7 +6,6 @@
 
 import logging
 from threading import Lock
-lock = Lock()
 
 LOG = logging.getLogger(__name__)
 
@@ -18,6 +17,7 @@ class RestClientHelper:
     """
     def __init__(self, rest_client):
         self.rest_client = rest_client
+        self.lock = Lock()
         self._get_connection()
 
     def post(self, url, query):
@@ -61,8 +61,5 @@ class RestClientHelper:
 
 
     def _get_connection(self):
-        lock.acquire()
-        try:
+        with self.lock:
             self.inst_rest_client = self.rest_client()
-        finally:
-            lock.release()
