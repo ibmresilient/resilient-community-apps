@@ -19,6 +19,8 @@ POOL_RATIO = 1.0 # multiplier for number of pool threads to allow
 
 def error_callback(exception):
     LOG.error((f"Plugin error during apply_async: {str(exception)}"))
+    stack_trace = traceback.format_exception(exception)
+    LOG.error(stack_trace)
 
 class PluginPool_Factory():
     thread_pool = None
