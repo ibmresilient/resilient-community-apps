@@ -12,7 +12,7 @@ TAB_NAME = "Azure Automation"
 class AzureAutomationTab(Tab):
     SECTION = "fn_azure_automation_utilities"
     NAME = TAB_NAME
-    UUID = "6hca8936-m5jg-sur9-8225-01c58n60470b"
+    UUID = "f7ea99b0-76e2-45d7-ae35-e95dff66661f"
 
     CONTAINS = [
         Datatable("azure_automation_accounts"),
