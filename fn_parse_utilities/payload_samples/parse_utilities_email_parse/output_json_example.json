@@ -6,7 +6,7 @@
     "received": [
       {
         "from": "www-data@localhost",
-        "by": "example.fyre.ibm.com 8.15.2/8.15.2/Submit",
+        "by": "example.ibm.com 8.15.2/8.15.2/Submit",
         "id": "29AJsIaP1141965",
         "date": "Mon, 10 Oct 2022 12:54:18 -0700",
         "hop": 1,
@@ -67,8 +67,8 @@
     "mime-version": "1.0",
     "from": [
       [
-        "Fyre Admin",
-        "fyre@us.ibm.com"
+        "Example Admin",
+        "Example@us.ibm.com"
       ]
     ],
     "has_defects": false,
