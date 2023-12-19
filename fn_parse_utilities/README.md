@@ -48,8 +48,19 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### 1.1.0 Changes
+In v1.1.0, the existing rules and workflows have been replaced with playbooks.
+This change is made to support the ongoing, newer capabilities of playbooks.
+Each playbook has the same functionality as the previous, corresponding rule/workflow. 
+
+If upgrading from a previous release, you'll notice that the previous release's rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it's corresponding rule, but with "(PB)" added at the end.
+
+You can continue to use the rules/workflows. 
+But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes. 
+
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.0 | 12/2023 | Add playbooks and remove workflows. |
 | 1.0.2 | 2/2023 | Update cryptography to version 39.0.1 and pyOpenSSL to version 23.0 |
 | 1.0.1 | 1/2023 | Bug Fix |
 | 1.0.0 | 11/2022 | Initial Release |
