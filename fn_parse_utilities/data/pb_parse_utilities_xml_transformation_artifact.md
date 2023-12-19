@@ -41,7 +41,7 @@ Example playbook to transform an XML document artifact using a defined xsl trans
 ```python
 inputs.parse_utilities_artifact_id = artifact.id
 inputs.parse_utilities_incident_id = incident.id
-inputs.parse_utilities_xml_stylesheet = "cdcatalog.xslt"
+inputs.parse_utilities_xml_stylesheet = "cdcatalog.xslt"  # CHANGEME
 ```
 
 ---

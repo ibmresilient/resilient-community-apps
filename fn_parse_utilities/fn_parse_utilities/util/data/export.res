@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1702997856784,
+  "export_date": 1703011339021,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -397,28 +397,7 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Parse Utilities Email Parsing (Artifact)",
-          "object_type": "artifact",
-          "programmatic_name": "example_parse_utilities_email_parsing_artifact",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 35
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Parse Utilities Email Parsing (Attachment)",
-          "object_type": "attachment",
-          "programmatic_name": "example_parse_utilities_email_parsing_attachment",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 29
-        }
-      ]
+      "workflows": []
     },
     {
       "created_date": 1701708550012,
@@ -473,18 +452,7 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Parse Utilities Parse SSL Certificate",
-          "object_type": "artifact",
-          "programmatic_name": "example_parse_utilities_parse_ssl_certificate",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 30
-        }
-      ]
+      "workflows": []
     },
     {
       "created_date": 1701708550065,
@@ -571,28 +539,7 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Parse Utilities PDFID (Artifact)",
-          "object_type": "artifact",
-          "programmatic_name": "example_parse_utilities_pdfid",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 31
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Parse Utilities PDFID (Attachment)",
-          "object_type": "attachment",
-          "programmatic_name": "example_parse_utilities_pdfid_attachment",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 32
-        }
-      ]
+      "workflows": []
     },
     {
       "created_date": 1701708550115,
@@ -671,39 +618,18 @@
           "step_label": null
         }
       ],
-      "workflows": [
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example Parse Utilities XML (Attachment)",
-          "object_type": "attachment",
-          "programmatic_name": "example_parse_utilities_xml_attachment",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 33
-        },
-        {
-          "actions": [],
-          "description": null,
-          "name": "Example: Parse Utilities XML Transformation",
-          "object_type": "artifact",
-          "programmatic_name": "example_parse_utilities_xml_transformation",
-          "tags": [],
-          "uuid": null,
-          "workflow_id": 34
-        }
-      ]
+      "workflows": []
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 4,
+  "id": 6,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1702997855228,
+      "create_date": 1703011337360,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -712,7 +638,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1702997855228,
+      "update_date": 1703011337360,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -742,7 +668,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 12,
+        "content_version": 15,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_4a34f9ba_b19a_4785_8623_5dea9034efa5\" isExecutable=\"true\" name=\"playbook_4a34f9ba_b19a_4785_8623_5dea9034efa5\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0qye9xc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Parse Utilities: Email Parse\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b8d57d19-a21e-42d4-9dba-06154084ca7e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Define incident_id and artifact_id\\ninputs.parse_utilities_incident_id = incident.id\\ninputs.parse_utilities_artifact_id = artifact.id\\n\\n# Setting this to True will add any found attachments as an Email Attachment Artifact\\ninputs.parse_utilities_email_attachments = True\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"email_parse\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qye9xc\u003c/incoming\u003e\u003coutgoing\u003eFlow_0qe3ltl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0qye9xc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0qe3ltl\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1rjoj9p\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Email Parsing (Artifact)\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"59a182e9-e7ac-4582-9628-1e6672bec0ca\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qe3ltl\u003c/incoming\u003e\u003coutgoing\u003eFlow_1rjoj9p\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1rjoj9p\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_4a34f9ba_b19a_4785_8623_5dea9034efa5\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rjoj9p\" id=\"Flow_1rjoj9p_di\"\u003e\u003comgdi:waypoint x=\"724\" y=\"132\"/\u003e\u003comgdi:waypoint x=\"724\" y=\"194\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qe3ltl\" id=\"Flow_0qe3ltl_di\"\u003e\u003comgdi:waypoint x=\"724\" y=\"-8\"/\u003e\u003comgdi:waypoint x=\"724\" y=\"48\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qye9xc\" id=\"Flow_0qye9xc_di\"\u003e\u003comgdi:waypoint x=\"724\" y=\"-164\"/\u003e\u003comgdi:waypoint x=\"724\" y=\"-92\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"633\" y=\"-216\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"625.95\" y=\"-91.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"657.95\" y=\"194.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"625.95\" y=\"48.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1701871814305,
@@ -794,7 +720,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1702996602697,
+      "last_modified_time": 1703003417193,
       "local_scripts": [
         {
           "actions": [],
@@ -805,12 +731,12 @@
           "id": 26,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1702329148475,
+          "last_modified_time": 1703003415104,
           "name": "Email Parsing (Artifact)",
           "object_type": "artifact",
           "playbook_handle": "parse_utilities_email_parsing_artifact_pb",
           "programmatic_name": "parse_utilities_email_parsing_artifact_pb_email_parsing_artifact",
-          "script_text": "import re\n\nresults = playbook.functions.results.email_parse\n\nif not results.success:\n  note_text = u\"\"\"Workflow \u0027Example: Parse Utilities Email Parsing (Artifact)\u0027 Failed\u003cbr\u003e\n                  \u003cb\u003eReason:\u003c/b\u003e {0}\"\"\".format(str(results.reason))\n  \n  incident.addNote(helper.createRichText(note_text))\n\nelse:\n  email = results.content\n  \n  # Get Email Subject\n  eml_subject = email.get(\"subject\", \"BLANK SUBJECT LINE\")\n\n  #########################################\n  # Add Artifacts for Email Recipient: to #\n  #########################################\n  for eml_addr in email.get(\"to\", []):\n    if eml_addr[1]:\n      incident.addArtifact(\"Email Recipient\", eml_addr[1], eml_addr[0])\n  \n  #########################################\n  # Add Artifacts for Email Recipient: cc #\n  #########################################\n  for eml_addr in email.get(\"cc\", []):\n    if eml_addr[1]:\n      incident.addArtifact(\"Email Recipient\", eml_addr[1], eml_addr[0])\n  \n  ########################################\n  # Add Artifacts for Email Sender: from #\n  ########################################\n  for eml_addr in email.get(\"from\", []):\n    if eml_addr[1]:\n      incident.addArtifact(\"Email Sender\", eml_addr[1], eml_addr[0])\n\n  ################################################\n  # Add Artifacts for IPs found in Email Headers #\n  ################################################\n  for eml_header in email.get(\"received\", []):\n    \n    the_header = eml_header.get(\"from\", None)\n    \n    if the_header:\n      ips = re.findall(\u0027(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\u0027, the_header)\n      unique_ips = set(ips)\n  \n      for an_ip in unique_ips:\n        if an_ip:\n          incident.addArtifact(\"IP Address\", an_ip, u\"Hop {0} at {1}\\n\\nHeader: {2}\".format(eml_header.get(\"hop\", \"\"), eml_header.get(\"date_utc\", \"\"), the_header))\n\n  ##############################################\n  # Add Artifacts for URLs found in Email Body #\n  ##############################################\n  urls = []\n  for eml_body_content in [email.get(\"plain_body\", \"\"), email.get(\"html_body\", \"\")]:\n    urls.extend(re.findall(\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027, eml_body_content))\n\n  uniq_urls = set(urls)\n\n  for a_url in uniq_urls:\n    # Remove any backslash as regex can add\n    a_url = a_url.replace(\u0027\\\\\u0027,\"\")\n    if a_url:\n      incident.addArtifact(\"URL\", a_url, \"Found in parsed Email\")\n  \n  ################################################\n  # Add the Email Body as a Note to the Incident #\n  ################################################\n  if email.get(\"body\"):\n    note_text = u\"\"\"\u003cb\u003eParsed Email::\u003c/b\u003e\u003cbr\u003e\n                    \u003cb\u003eSubject:\u003c/b\u003e\u003cbr\u003e{0}\u003cbr\u003e\n                    \u003cb\u003eFrom:\u003c/b\u003e\u003cbr\u003e{1}\u003cbr\u003e\n                    \u003cb\u003eTo:\u003c/b\u003e\u003cbr\u003e{2}\u003cbr\u003e\n                    \u003cb\u003eBody:\u003c/b\u003e\u003cbr\u003e{3}\"\"\".format(str(eml_subject),\n                                  str(email.get(\"from\", \"N/A\")),\n                                  str(email.get(\"to\", \"N/A\")), \n                                  str(email.get(\"body\", \"N/A\")))\n\n    incident.addNote(helper.createRichText(note_text))\n  \n  \u0027\u0027\u0027Uncomment this if you would like to add a (safer) plain_text only Note\n  if email.get(\"plain_body\"):\n    note_text = u\"\"\"Parsed Email::\\n\\nSubject:\\n{0}\\n\\nFrom:\\n{1}\\n\\nTo:\\n{2}\\n\\nBody:\\n{3}\"\"\".format(str(eml_subject),\n      str(email.get(\"from\", \"N/A\")), unicode(email.get(\"to\", \"N/A\")), str(email.get(\"body\", \"N/A\")))\n\n    incident.addNote(helper.createPlainText(note_text))\n  \u0027\u0027\u0027",
+          "script_text": "import re\n\nresults = playbook.functions.results.email_parse\n\nif not results.success:\n  note_text = u\"\"\"Playbook \u0027Parse Utilities: Email Parsing (Artifact) - Example (PB)\u0027 Failed\u003cbr\u003e\n                  \u003cb\u003eReason:\u003c/b\u003e {0}\"\"\".format(str(results.reason))\n  \n  incident.addNote(helper.createRichText(note_text))\n\nelse:\n  email = results.content\n  \n  # Get Email Subject\n  eml_subject = email.get(\"subject\", \"BLANK SUBJECT LINE\")\n\n  #########################################\n  # Add Artifacts for Email Recipient: to #\n  #########################################\n  for eml_addr in email.get(\"to\", []):\n    if len(eml_addr) \u003e= 2:\n      incident.addArtifact(\"Email Recipient\", eml_addr[1], eml_addr[0])\n  \n  #########################################\n  # Add Artifacts for Email Recipient: cc #\n  #########################################\n  for eml_addr in email.get(\"cc\", []):\n    if len(eml_addr) \u003e= 2:\n      incident.addArtifact(\"Email Recipient\", eml_addr[1], eml_addr[0])\n  \n  ########################################\n  # Add Artifacts for Email Sender: from #\n  ########################################\n  for eml_addr in email.get(\"from\", []):\n    if len(eml_addr) \u003e= 2:\n      incident.addArtifact(\"Email Sender\", eml_addr[1], eml_addr[0])\n\n  ################################################\n  # Add Artifacts for IPs found in Email Headers #\n  ################################################\n  for eml_header in email.get(\"received\", []):\n    \n    the_header = eml_header.get(\"from\", None)\n    \n    if the_header:\n      ips = re.findall(\u0027(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\u0027, the_header)\n      unique_ips = set(ips)\n  \n      for an_ip in unique_ips:\n        if an_ip:\n          incident.addArtifact(\"IP Address\", an_ip, u\"Hop {0} at {1}\\n\\nHeader: {2}\".format(eml_header.get(\"hop\", \"\"), eml_header.get(\"date_utc\", \"\"), the_header))\n\n  ##############################################\n  # Add Artifacts for URLs found in Email Body #\n  ##############################################\n  urls = []\n  for eml_body_content in [email.get(\"plain_body\", \"\"), email.get(\"html_body\", \"\")]:\n    urls.extend(re.findall(\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027, eml_body_content))\n\n  uniq_urls = set(urls)\n\n  for a_url in uniq_urls:\n    # Remove any backslash as regex can add\n    a_url = a_url.replace(\u0027\\\\\u0027,\"\")\n    if a_url:\n      incident.addArtifact(\"URL\", a_url, \"Found in parsed Email\")\n  \n  ################################################\n  # Add the Email Body as a Note to the Incident #\n  ################################################\n  if email.get(\"body\"):\n    note_text = u\"\"\"\u003cb\u003eParsed Email::\u003c/b\u003e\u003cbr\u003e\n                    \u003cb\u003eSubject:\u003c/b\u003e\u003cbr\u003e{0}\u003cbr\u003e\n                    \u003cb\u003eFrom:\u003c/b\u003e\u003cbr\u003e{1}\u003cbr\u003e\n                    \u003cb\u003eTo:\u003c/b\u003e\u003cbr\u003e{2}\u003cbr\u003e\n                    \u003cb\u003eBody:\u003c/b\u003e\u003cbr\u003e{3}\"\"\".format(str(eml_subject),\n                                  str(email.get(\"from\", \"N/A\")),\n                                  str(email.get(\"to\", \"N/A\")), \n                                  str(email.get(\"body\", \"N/A\")))\n\n    incident.addNote(helper.createRichText(note_text))\n  \n  \u0027\u0027\u0027Uncomment this if you would like to add a (safer) plain_text only Note\n  if email.get(\"plain_body\"):\n    note_text = u\"\"\"Parsed Email::\\n\\nSubject:\\n{0}\\n\\nFrom:\\n{1}\\n\\nTo:\\n{2}\\n\\nBody:\\n{3}\"\"\".format(str(eml_subject),\n      str(email.get(\"from\", \"N/A\")), unicode(email.get(\"to\", \"N/A\")), str(email.get(\"body\", \"N/A\")))\n\n    incident.addNote(helper.createPlainText(note_text))\n  \u0027\u0027\u0027",
           "tags": [],
           "uuid": "59a182e9-e7ac-4582-9628-1e6672bec0ca"
         }
@@ -847,12 +773,12 @@
       "tags": [],
       "type": "default",
       "uuid": "4a34f9ba-b19a-4785-8623-5dea9034efa5",
-      "version": 20
+      "version": 23
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
+        "content_version": 5,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_636f90a1_c042_42ff_8eac_9385587efc1e\" isExecutable=\"true\" name=\"playbook_636f90a1_c042_42ff_8eac_9385587efc1e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0nt2mr4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Parse Utilities: Email Parse\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b8d57d19-a21e-42d4-9dba-06154084ca7e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# Define incident_id and attachment_id\\ninputs.parse_utilities_incident_id = incident.id\\ninputs.parse_utilities_attachment_id = attachment.id\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.parse_utilities_task_id = task.id\\n\\n# Setting this to True will add any found attachments as an Email Attachment Artifact\\ninputs.parse_utilities_email_attachments = True\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"email_parse\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0nt2mr4\u003c/incoming\u003e\u003coutgoing\u003eFlow_1jml5bp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0nt2mr4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Email Parsing (Attachment)\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1c1bd85-dbf8-4efd-8bde-01555c1c5cb0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1jml5bp\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vuj65m\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1jml5bp\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1vuj65m\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1vuj65m\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_636f90a1_c042_42ff_8eac_9385587efc1e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vuj65m\" id=\"Flow_1vuj65m_di\"\u003e\u003comgdi:waypoint x=\"430\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"430\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1jml5bp\" id=\"Flow_1jml5bp_di\"\u003e\u003comgdi:waypoint x=\"430\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"430\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0nt2mr4\" id=\"Flow_0nt2mr4_di\"\u003e\u003comgdi:waypoint x=\"430\" y=\"136\"/\u003e\u003comgdi:waypoint x=\"430\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"209.017\" x=\"325\" y=\"84\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"332\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"332\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"364\" y=\"503.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1702997782351,
@@ -904,7 +830,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1702997849530,
+      "last_modified_time": 1703010819540,
       "local_scripts": [
         {
           "actions": [],
@@ -915,12 +841,12 @@
           "id": 38,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1702997782432,
+          "last_modified_time": 1703010816034,
           "name": "Email Parsing (Attachment)",
           "object_type": "attachment",
           "playbook_handle": "parse_utilities_email_parsing_attachment_pb",
           "programmatic_name": "parse_utilities_email_parsing_attachment_pb_email_parsing_attachment",
-          "script_text": "import re\n\nresults = playbook.functions.results.email_parse\n\nif not results.success:\n  note_text = u\"\"\"Workflow \u0027Example: Email Parsing (Attachment)\u0027 Failed\u003cbr\u003e\n                  \u003cb\u003eReason:\u003c/b\u003e {0}\"\"\".format(str(results.reason))\n  \n  incident.addNote(helper.createRichText(note_text))\n\nelse:\n  email = results.content\n  \n  # Get Email Subject\n  eml_subject = email.get(\"subject\", \"BLANK SUBJECT LINE\")\n\n  #########################################\n  # Add Artifacts for Email Recipient: to #\n  #########################################\n  for eml_addr in email.get(\"to\", []):\n    if eml_addr[1]:\n      incident.addArtifact(\"Email Recipient\", eml_addr[1], eml_addr[0])\n  \n  #########################################\n  # Add Artifacts for Email Recipient: cc #\n  #########################################\n  for eml_addr in email.get(\"cc\", []):\n    if eml_addr[1]:\n      incident.addArtifact(\"Email Recipient\", eml_addr[1], eml_addr[0])\n  \n  ########################################\n  # Add Artifacts for Email Sender: from #\n  ########################################\n  for eml_addr in email.get(\"from\", []):\n    if eml_addr[1]:\n      incident.addArtifact(\"Email Sender\", eml_addr[1], eml_addr[0])\n\n  ################################################\n  # Add Artifacts for IPs found in Email Headers #\n  ################################################\n  for eml_header in email.get(\"received\", []):\n    \n    the_header = eml_header.get(\"from\", None)\n    \n    if the_header:\n      ips = re.findall(\u0027(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\u0027, the_header)\n      unique_ips = set(ips)\n  \n      for an_ip in unique_ips:\n        if an_ip:\n          incident.addArtifact(\"IP Address\", an_ip, u\"Hop {0} at {1}\\n\\nHeader: {2}\".format(eml_header.get(\"hop\", \"\"), eml_header.get(\"date_utc\", \"\"), the_header))\n\n  ##############################################\n  # Add Artifacts for URLs found in Email Body #\n  ##############################################\n  urls = []\n  for eml_body_content in [email.get(\"plain_body\", \"\"), email.get(\"html_body\", \"\")]:\n    urls.extend(re.findall(\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027, eml_body_content))\n\n  uniq_urls = set(urls)\n\n  for a_url in uniq_urls:\n    # Remove any backslash as regex can add\n    a_url = a_url.replace(\u0027\\\\\u0027,\"\")\n    if a_url:\n      incident.addArtifact(\"URL\", a_url, \"Found in parsed Email\")\n  \n  ################################################\n  # Add the Email Body as a Note to the Incident #\n  ################################################\n  if email.get(\"body\"):\n    note_text = u\"\"\"\u003cb\u003eParsed Email::\u003c/b\u003e\u003cbr\u003e\n                    \u003cb\u003eSubject:\u003c/b\u003e\u003cbr\u003e{0}\u003cbr\u003e\n                    \u003cb\u003eFrom:\u003c/b\u003e\u003cbr\u003e{1}\u003cbr\u003e\n                    \u003cb\u003eTo:\u003c/b\u003e\u003cbr\u003e{2}\u003cbr\u003e\n                    \u003cb\u003eBody:\u003c/b\u003e\u003cbr\u003e{3}\"\"\".format(str(eml_subject),\n                                  str(email.get(\"from\", \"N/A\")),\n                                  str(email.get(\"to\", \"N/A\")), \n                                  str(email.get(\"body\", \"N/A\")))\n\n    incident.addNote(helper.createRichText(note_text))\n  \n  \u0027\u0027\u0027Uncomment this if you would like to add a (safer) plain_text only Note\n  if email.get(\"plain_body\"):\n    note_text = u\"\"\"Parsed Email::\\n\\nSubject:\\n{0}\\n\\nFrom:\\n{1}\\n\\nTo:\\n{2}\\n\\nBody:\\n{3}\"\"\".format(str(eml_subject),\n      str(email.get(\"from\", \"N/A\")), str(email.get(\"to\", \"N/A\")), str(email.get(\"body\", \"N/A\")))\n\n    incident.addNote(helper.createPlainText(note_text))\n  \u0027\u0027\u0027",
+          "script_text": "import re\n\nresults = playbook.functions.results.email_parse\n\nif not results.success:\n  note_text = u\"\"\"Playbook \u0027Parse Utilities: Email Parsing (Attachment) - Example (PB)\u0027 Failed\u003cbr\u003e\n                  \u003cb\u003eReason:\u003c/b\u003e {0}\"\"\".format(str(results.reason))\n  \n  incident.addNote(helper.createRichText(note_text))\n\nelse:\n  email = results.content\n  \n  # Get Email Subject\n  eml_subject = email.get(\"subject\", \"BLANK SUBJECT LINE\")\n\n  #########################################\n  # Add Artifacts for Email Recipient: to #\n  #########################################\n  for eml_addr in email.get(\"to\", []):\n    if len(eml_addr) \u003e= 2:\n      incident.addArtifact(\"Email Recipient\", eml_addr[1], eml_addr[0])\n  \n  #########################################\n  # Add Artifacts for Email Recipient: cc #\n  #########################################\n  for eml_addr in email.get(\"cc\", []):\n    if len(eml_addr) \u003e= 2:\n      incident.addArtifact(\"Email Recipient\", eml_addr[1], eml_addr[0])\n  \n  ########################################\n  # Add Artifacts for Email Sender: from #\n  ########################################\n  for eml_addr in email.get(\"from\", []):\n    if len(eml_addr) \u003e= 2:\n      incident.addArtifact(\"Email Sender\", eml_addr[1], eml_addr[0])\n\n  ################################################\n  # Add Artifacts for IPs found in Email Headers #\n  ################################################\n  for eml_header in email.get(\"received\", []):\n    \n    the_header = eml_header.get(\"from\", None)\n    \n    if the_header:\n      ips = re.findall(\u0027(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\u0027, the_header)\n      unique_ips = set(ips)\n  \n      for an_ip in unique_ips:\n        if an_ip:\n          incident.addArtifact(\"IP Address\", an_ip, u\"Hop {0} at {1}\\n\\nHeader: {2}\".format(eml_header.get(\"hop\", \"\"), eml_header.get(\"date_utc\", \"\"), the_header))\n\n  ##############################################\n  # Add Artifacts for URLs found in Email Body #\n  ##############################################\n  urls = []\n  for eml_body_content in [email.get(\"plain_body\", \"\"), email.get(\"html_body\", \"\")]:\n    urls.extend(re.findall(\u0027http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.\u0026+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\u0027, eml_body_content))\n\n  uniq_urls = set(urls)\n\n  for a_url in uniq_urls:\n    # Remove any backslash as regex can add\n    a_url = a_url.replace(\u0027\\\\\u0027,\"\")\n    if a_url:\n      incident.addArtifact(\"URL\", a_url, \"Found in parsed Email\")\n  \n  ################################################\n  # Add the Email Body as a Note to the Incident #\n  ################################################\n  if email.get(\"body\"):\n    note_text = u\"\"\"\u003cb\u003eParsed Email::\u003c/b\u003e\u003cbr\u003e\n                    \u003cb\u003eSubject:\u003c/b\u003e\u003cbr\u003e{0}\u003cbr\u003e\n                    \u003cb\u003eFrom:\u003c/b\u003e\u003cbr\u003e{1}\u003cbr\u003e\n                    \u003cb\u003eTo:\u003c/b\u003e\u003cbr\u003e{2}\u003cbr\u003e\n                    \u003cb\u003eBody:\u003c/b\u003e\u003cbr\u003e{3}\"\"\".format(str(eml_subject),\n                                  str(email.get(\"from\", \"N/A\")),\n                                  str(email.get(\"to\", \"N/A\")), \n                                  str(email.get(\"body\", \"N/A\")))\n\n    incident.addNote(helper.createRichText(note_text))\n  \n  \u0027\u0027\u0027Uncomment this if you would like to add a (safer) plain_text only Note\n  if email.get(\"plain_body\"):\n    note_text = u\"\"\"Parsed Email::\\n\\nSubject:\\n{0}\\n\\nFrom:\\n{1}\\n\\nTo:\\n{2}\\n\\nBody:\\n{3}\"\"\".format(str(eml_subject),\n      str(email.get(\"from\", \"N/A\")), str(email.get(\"to\", \"N/A\")), str(email.get(\"body\", \"N/A\")))\n\n    incident.addNote(helper.createPlainText(note_text))\n  \u0027\u0027\u0027",
           "tags": [],
           "uuid": "d1c1bd85-dbf8-4efd-8bde-01555c1c5cb0"
         }
@@ -945,7 +871,7 @@
       "tags": [],
       "type": "default",
       "uuid": "636f90a1-c042-42ff-8eac-9385587efc1e",
-      "version": 6
+      "version": 8
     },
     {
       "activation_type": "manual",
@@ -1260,8 +1186,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 9,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_f7cc5e19_32fb_4b6a_974c_3457346523ca\" isExecutable=\"true\" name=\"playbook_f7cc5e19_32fb_4b6a_974c_3457346523ca\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0xftpis\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Parse Utilities: XML Transformation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fb731c0f-f0ee-4a66-8cc5-ab98495a92ca\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.parse_utilities_artifact_id = artifact.id\\ninputs.parse_utilities_incident_id = incident.id\\ninputs.parse_utilities_xml_stylesheet = \\\"cdcatalog.xslt\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"xml_transformation\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xftpis\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ov3yvr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"XML Transformation\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"602bf77f-9df8-4c29-b907-cf55fd082e91\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ov3yvr\u003c/incoming\u003e\u003coutgoing\u003eFlow_14ltjtk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14ltjtk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0xftpis\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1ov3yvr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_14ltjtk\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f7cc5e19_32fb_4b6a_974c_3457346523ca\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14ltjtk\" id=\"Flow_14ltjtk_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ov3yvr\" id=\"Flow_1ov3yvr_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xftpis\" id=\"Flow_0xftpis_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"106\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"379\" y=\"54\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"372\" y=\"177.64999389648438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"372\" y=\"337.6499938964844\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"404\" y=\"483.6499938964844\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 10,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_f7cc5e19_32fb_4b6a_974c_3457346523ca\" isExecutable=\"true\" name=\"playbook_f7cc5e19_32fb_4b6a_974c_3457346523ca\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0xftpis\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Parse Utilities: XML Transformation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fb731c0f-f0ee-4a66-8cc5-ab98495a92ca\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.parse_utilities_artifact_id = artifact.id\\ninputs.parse_utilities_incident_id = incident.id\\ninputs.parse_utilities_xml_stylesheet = \\\"cdcatalog.xslt\\\"  # CHANGEME\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"xml_transformation\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xftpis\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ov3yvr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"XML Transformation\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"602bf77f-9df8-4c29-b907-cf55fd082e91\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ov3yvr\u003c/incoming\u003e\u003coutgoing\u003eFlow_14ltjtk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14ltjtk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0xftpis\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1ov3yvr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_14ltjtk\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f7cc5e19_32fb_4b6a_974c_3457346523ca\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14ltjtk\" id=\"Flow_14ltjtk_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ov3yvr\" id=\"Flow_1ov3yvr_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xftpis\" id=\"Flow_0xftpis_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"106\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"379\" y=\"54\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"372\" y=\"177.64999389648438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"372\" y=\"337.6499938964844\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"404\" y=\"483.6499938964844\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1702412789291,
       "creator_principal": {
@@ -1312,7 +1238,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1702996751261,
+      "last_modified_time": 1703011173215,
       "local_scripts": [
         {
           "actions": [],
@@ -1366,7 +1292,7 @@
       "tags": [],
       "type": "default",
       "uuid": "f7cc5e19-32fb-4b6a-974c-3457346523ca",
-      "version": 15
+      "version": 16
     },
     {
       "activation_type": "manual",

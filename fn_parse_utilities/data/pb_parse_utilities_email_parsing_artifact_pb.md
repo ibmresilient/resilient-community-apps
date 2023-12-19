@@ -67,7 +67,7 @@ import re
 results = playbook.functions.results.email_parse
 
 if not results.success:
-  note_text = u"""Workflow 'Example: Parse Utilities Email Parsing (Artifact)' Failed<br>
+  note_text = u"""Playbook 'Parse Utilities: Email Parsing (Artifact) - Example (PB)' Failed<br>
                   <b>Reason:</b> {0}""".format(str(results.reason))
   
   incident.addNote(helper.createRichText(note_text))
@@ -82,21 +82,21 @@ else:
   # Add Artifacts for Email Recipient: to #
   #########################################
   for eml_addr in email.get("to", []):
-    if eml_addr[1]:
+    if len(eml_addr) >= 2:
       incident.addArtifact("Email Recipient", eml_addr[1], eml_addr[0])
   
   #########################################
   # Add Artifacts for Email Recipient: cc #
   #########################################
   for eml_addr in email.get("cc", []):
-    if eml_addr[1]:
+    if len(eml_addr) >= 2:
       incident.addArtifact("Email Recipient", eml_addr[1], eml_addr[0])
   
   ########################################
   # Add Artifacts for Email Sender: from #
   ########################################
   for eml_addr in email.get("from", []):
-    if eml_addr[1]:
+    if len(eml_addr) >= 2:
       incident.addArtifact("Email Sender", eml_addr[1], eml_addr[0])
 
   ################################################
