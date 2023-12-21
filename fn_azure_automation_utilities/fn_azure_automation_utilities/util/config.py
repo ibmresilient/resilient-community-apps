@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
 # Generated with resilient-sdk v49.0.4423
 
 """Generate a default configuration-file section for fn_azure_automation_utilities"""
-
 
 def config_section_data():
     """

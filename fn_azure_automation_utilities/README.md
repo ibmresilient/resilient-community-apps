@@ -1,6 +1,5 @@
 # Azure Automation Utilities
 
-
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)

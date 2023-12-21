@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+
 from logging import getLogger
 from resilient_lib import IntegrationError
 import time
