@@ -82,13 +82,23 @@ class PluginPool():
         for feed_config_name in feed_config_names:
             feed_options = opts.get(feed_config_name, {})
 
+            if not feed_options:
+                LOG.error(f"feed_name: {feed_config_name} not found in app.config")
+                continue
+
             class_name = feed_options.get("class")
 
+            # initialize the class for this given plugin
             namespace = 'data_feeder_plugins.{ns}.{ns}.{claz}Destination'.format(ns=class_name.lower(), claz=class_name)
-            LOG.debug(namespace)
-            obj = locate(namespace)(self.rest_client_helper, feed_options)
+            LOG.debug(f"{feed_config_name}:{namespace}")
+            obj = locate(namespace)
+            
+            if not obj:
+                LOG.error(f"Unable to find plugin: {namespace}. Check if plugin is installed.")
+                continue
 
-            feed_outputs[feed_config_name] = obj
+            # initialize class
+            feed_outputs[feed_config_name] = obj(self.rest_client_helper, feed_options)
 
         return feed_outputs
 
@@ -120,7 +130,7 @@ class PluginPool():
             # don't let a failure in one feed break all the rest
             try:
                 if self._is_workspace_valid(workspace, feed_name):
-                    LOG.info("Calling feed %s for workspace: %s", feed_output.__class__.__name__, workspace)
+                    LOG.info("Calling feed %s:%s for workspace: %s", feed_name, feed_output.__class__.__name__, workspace)
                     self.run_plugin(feed_output.send_data, args=(context, payload))
                     item_sent = True
             except Exception as err:
