@@ -47,7 +47,7 @@ class PluginPool(object):
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
-            cls._instance = obj = super(PluginPool, cls).__new__(cls, *args, **kwargs)
+            cls._instance = obj = super(PluginPool, cls).__new__(cls)
             # initialization
             cls.init_plugin_pool(*args, *kwargs)
         return cls._instance
