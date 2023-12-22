@@ -14,7 +14,7 @@ from resilient_lib import str_to_bool
 from resilient import SimpleHTTPException
 
 from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo, get_incident
-from rc_data_feed.components.threadpool import PluginPool_Factory
+from rc_data_feed.components.threadpool import PluginPool_Factory, PluginPool
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
 
 LOG = logging.getLogger(__name__)
@@ -80,7 +80,7 @@ class FeedComponent(ResilientComponent):
                     LOG.error('Syntax: workspaces="workspaceA": "odbcfeed", "workspaceB": ["odbcfeed", "elasticfeed"]')
                     self.workspaces = {}
 
-                self.plugin_pool = PluginPool_Factory.get_thread_pool(self.rest_client_helper,
+                self.plugin_pool = PluginPool(self.rest_client_helper,
                                               int(opts.get("resilient", {}).get("num_workers", 0)),
                                               self.options.get("feed_names", None),
                                               opts,

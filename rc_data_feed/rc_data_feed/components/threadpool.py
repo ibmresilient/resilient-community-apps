@@ -42,17 +42,23 @@ class PluginPool_Factory():
 
         return PluginPool_Factory.thread_pool
 
-class PluginPool():
-    """This class allows for separate, long running threads to perform the plugin logic.
-        It frees up the application threads to service other message queue actions
-    """
-    def __init__(self,
-                 rest_client_helper,
-                 num_workers,
-                 feed_list,
-                 opts,
-                 workspaces,
-                 parallel_execution=False):
+class PluginPool(object):
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = obj = super(PluginPool, cls).__new__(cls, *args, **kwargs)
+            # initialization
+            cls.init_plugin_pool(*args, *kwargs)
+        return cls._instance
+    
+    def init_plugin_pool(self,
+                         rest_client_helper,
+                         num_workers,
+                         feed_list,
+                         opts,
+                         workspaces,
+                         parallel_execution=False):
         self.rest_client_helper = rest_client_helper
         self.num_workers = num_workers if num_workers else DEF_NUM_WORKERS
         self.feed_outputs = self.build_feed_outputs(opts, feed_list)
@@ -67,6 +73,32 @@ class PluginPool():
             self.pool = multiprocessing.Pool(thread_pool_size)
         else:
             LOG.info("PluginPool_Factory disabled")
+
+# class PluginPool():
+#     """This class allows for separate, long running threads to perform the plugin logic.
+#         It frees up the application threads to service other message queue actions
+#     """
+#     def __init__(self,
+#                  rest_client_helper,
+#                  num_workers,
+#                  feed_list,
+#                  opts,
+#                  workspaces,
+#                  parallel_execution=False):
+#         self.rest_client_helper = rest_client_helper
+#         self.num_workers = num_workers if num_workers else DEF_NUM_WORKERS
+#         self.feed_outputs = self.build_feed_outputs(opts, feed_list)
+#         self.workspaces = workspaces
+#         self.parallel_execution = parallel_execution
+#         self.pool = None
+
+#         if self.parallel_execution:
+#             # increase the number of threads for handling event messages
+#             thread_pool_size = int(self.num_workers*POOL_RATIO) # could be +/- num_workers
+#             LOG.info(f"PluginPool_Factory size: {thread_pool_size}")
+#             self.pool = multiprocessing.Pool(thread_pool_size)
+#         else:
+#             LOG.info("PluginPool_Factory disabled")
 
     def build_feed_outputs(self, opts, feed_names):
         """
