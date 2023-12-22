@@ -1,0 +1,152 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "casefiles": [
+      {
+        "caseFileID": "7c551c65686c0866daafcee3d8061d6b",
+        "created": "2021-10-14T10:28:28.741Z",
+        "owner": {
+          "name": "\u0414\u0430\u0440\u044c\u044f \u041b\u0430\u043d\u0433\u0438\u043d\u0430",
+          "userid": "http://www.ibm.com/5500038YXJ",
+          "isDisabled": false
+        },
+        "title": "\u0440\u043f\u043e\u043f",
+        "shared": true,
+        "writable": false,
+        "links": [],
+        "tags": []
+      },
+      {
+        "caseFileID": "7c551c65686c0866daafcee3d838f052",
+        "created": "2021-05-20T12:19:07.138Z",
+        "owner": {
+          "name": "QA RVision",
+          "userid": "http://www.ibm.com/55000AJ8RT",
+          "isDisabled": false
+        },
+        "title": "Test_Collection",
+        "shared": true,
+        "writable": false,
+        "links": [],
+        "tags": []
+      },
+      {
+        "caseFileID": "2a58b28a880eab0ddc23d856e4871a69",
+        "created": "2023-03-08T17:51:22.131Z",
+        "owner": {
+          "name": "First Last",
+          "userid": "http://www.ibm.com/550001H8BT",
+          "isDisabled": false
+        },
+        "title": "test2",
+        "shared": true,
+        "writable": true,
+        "links": [],
+        "totalVotes": 0,
+        "tags": []
+      },
+      {
+        "caseFileID": "6db4c6bcafe3333fffaf5a754b7ae73d",
+        "created": "2020-03-10T12:33:59.224Z",
+        "owner": {
+          "name": "sai Karthik",
+          "userid": "http://www.ibm.com/55000126PG",
+          "isDisabled": false
+        },
+        "title": "test1",
+        "shared": true,
+        "writable": false,
+        "links": [],
+        "tags": []
+      },
+      {
+        "caseFileID": "52adef79fe80b4958050c700a8b0da15",
+        "created": "2019-07-22T17:20:40.817Z",
+        "owner": {
+          "name": "ZHENG LU",
+          "userid": "http://www.ibm.com/550002YAE9",
+          "isDisabled": false
+        },
+        "title": "Test Email",
+        "shared": true,
+        "writable": false,
+        "links": [],
+        "tags": []
+      },
+      {
+        "caseFileID": "7d889aac958a5dbebc01a16979140eb2",
+        "created": "2023-01-23T11:34:04.800Z",
+        "owner": {
+          "name": "X-Force Research",
+          "userid": "http://www.ibm.com/550004JMXN",
+          "verified": "researcher",
+          "isDisabled": false
+        },
+        "title": "Taobao Squatting Campaign",
+        "shared": true,
+        "writable": false,
+        "links": [],
+        "tags": [
+          "phishing",
+          "early-warning",
+          "squatting",
+          "x-location:all",
+          "x-industry:media"
+        ]
+      },
+      {
+        "caseFileID": "e2fa5296f88a0c4ad37e4f4652c221db",
+        "created": "2017-10-30T07:47:29.799Z",
+        "owner": {
+          "name": "Noah J, A",
+          "userid": "http://www.ibm.com/50SKQTFFS2",
+          "isDisabled": false
+        },
+        "title": "Kryptik / FusionCore / ICLoader Malware Campaign via AWS IP",
+        "shared": true,
+        "writable": false,
+        "links": [],
+        "tags": [
+          "icloader",
+          "fusioncore",
+          "kryptik",
+          "adware",
+          "malware"
+        ]
+      },
+      {
+        "caseFileID": "383879eab7c4e0c5d38c1c2e9709ffe9",
+        "created": "2018-04-10T13:05:35.686Z",
+        "owner": {
+          "name": "XFTAS Newsletter Admin",
+          "userid": "http://www.ibm.com/50GHFD9JCW",
+          "verified": "ibmexpert",
+          "isDisabled": false
+        },
+        "title": "XFTAS Daily Threat Assessment for April 02, 2018",
+        "shared": true,
+        "writable": false,
+        "links": [],
+        "tags": [
+          "xftas"
+        ]
+      }
+    ],
+    "num_of_casefiles": 8
+  },
+  "raw": null,
+  "inputs": {
+    "xforce_query": "1.1.1.1",
+    "xforce_collection_type": "public"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-xforce",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 556,
+    "timestamp": "2023-05-09 09:11:47"
+  }
+}
