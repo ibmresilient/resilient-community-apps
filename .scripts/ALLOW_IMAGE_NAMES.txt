@@ -10,6 +10,7 @@ fn_api_void
 fn_aws_guardduty
 fn_aws_iam
 fn_aws_utilities
+fn_azure_automation_utilities
 fn_bigfix
 fn_bmc_helix
 fn_calendar_invite
