@@ -42,6 +42,7 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
 
     @retry(pyodbc.OperationalError, tries=10, delay=5, backoff=3, logger=LOG)
     def _reinit(self, connect_str, uid, pwd, dialect=None):
+        LOG.info(f"Initializing database connection: {connect_str}")
         # pylint: disable=c-extension-no-member
         if dialect and isinstance(dialect, OracleDialect):
             connection = cx_Oracle.connect(uid, pwd, connect_str, encoding="UTF-8")
@@ -60,7 +61,8 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
         thread_id = threading.current_thread().ident
         if not thread_id in self.THREAD_CONNECTION:
             self.THREAD_CONNECTION[thread_id] = self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)
-            
+
+        LOG.debug(f"thread: {thread_id} connection: {self.connect_str} {id(self.THREAD_CONNECTION[thread_id])}")
         return self.THREAD_CONNECTION[thread_id].cursor()
 
     def _commit_transaction(self, context):
