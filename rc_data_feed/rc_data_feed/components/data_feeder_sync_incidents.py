@@ -9,7 +9,7 @@ import sys
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult
 from resilient_lib import ResultPayload, str_to_bool
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
-from rc_data_feed.components.threadpool import PluginPool_Factory
+from rc_data_feed.components.threadpool import PluginPool
 from .feed_ingest import Reload
 
 class FunctionComponent(ResilientComponent):
@@ -61,11 +61,11 @@ class FunctionComponent(ResilientComponent):
             # expose attachment content setting
             self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
-            plugin_pool = PluginPool_Factory.get_thread_pool(rest_client_helper,
-                                                             int(self.opts.get("resilient", {}).get("num_workers", 0)),
-                                                             self.options.get("feed_names", None),
-                                                             self.opts,
-                                                             self.workspaces)
+            plugin_pool = PluginPool.get_instance(rest_client_helper,
+                                                  int(self.opts.get("resilient", {}).get("num_workers", 0)),
+                                                  self.options.get("feed_names", None),
+                                                  self.opts,
+                                                  self.workspaces)
 
             df = Reload(plugin_pool,
                         [ type.strip() for type in self.options.get("reload_types", "").split(",") \

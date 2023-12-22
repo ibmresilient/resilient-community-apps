@@ -14,7 +14,7 @@ from resilient_lib import str_to_bool
 from resilient import SimpleHTTPException
 
 from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo, get_incident
-from rc_data_feed.components.threadpool import PluginPool_Factory, PluginPool
+from rc_data_feed.components.threadpool import PluginPool
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
 
 LOG = logging.getLogger(__name__)
@@ -80,12 +80,12 @@ class FeedComponent(ResilientComponent):
                     LOG.error('Syntax: workspaces="workspaceA": "odbcfeed", "workspaceB": ["odbcfeed", "elasticfeed"]')
                     self.workspaces = {}
 
-                self.plugin_pool = PluginPool(self.rest_client_helper,
-                                              int(opts.get("resilient", {}).get("num_workers", 0)),
-                                              self.options.get("feed_names", None),
-                                              opts,
-                                              self.workspaces,
-                                              parallel_execution=str_to_bool(self.options.get("parallel_execution", 'false')))
+                self.plugin_pool = PluginPool.get_instance(self.rest_client_helper,
+                                                           int(opts.get("resilient", {}).get("num_workers", 0)),
+                                                           self.options.get("feed_names", None),
+                                                           opts,
+                                                           self.workspaces,
+                                                           parallel_execution=str_to_bool(self.options.get("parallel_execution", 'false')))
 
                 # expose attachment content setting
                 self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
