@@ -101,6 +101,7 @@ fn_shadowserver
 fn_shodan
 fn_siemplify
 fn_slack
+fn_snapshot_url
 fn_spamhaus_query
 fn_splunk_integration
 fn_symantec_dlp
