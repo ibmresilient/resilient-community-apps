@@ -18,6 +18,12 @@
 ### Activation Conditions
 `artifact.type equals URL`
 
+### Activation Form Elements
+| Input Field Label | API Name | Element Type | Tooltip | Requirement |
+| ----------------- | -------- | ------------ | ------- | ----------- |
+| Full Screen Capture | `snapshot_full_screen_capture` | boolean | - | Optional |
+| URL Load Timeout | `snapshot_url_load_timeout` | number | - | Optional |
+
 ### Object Type
 `artifact`
 
@@ -41,8 +47,9 @@ Snapshot URL as png image attachment.
 ```python
 inputs.snapshot_incident_id = incident.id
 inputs.snapshot_url = artifact.value
-#inputs.snapshot_timeout = 60
-#inputs.snapshot_fullpage = True
+if getattr(playbook.inputs, "snapshot_url_load_timeout", None):
+  inputs.snapshot_timeout = playbook.inputs.snapshot_url_load_timeout
+inputs.snapshot_fullpage = playbook.inputs.snapshot_full_screen_capture
 ```
 
 ---

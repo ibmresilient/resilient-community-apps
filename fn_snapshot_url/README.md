@@ -192,8 +192,9 @@ results = {
 ```python
 inputs.snapshot_incident_id = incident.id
 inputs.snapshot_url = artifact.value
-#inputs.snapshot_timeout = 60
-#inputs.snapshot_fullpage = True
+if getattr(playbook.inputs, "snapshot_url_load_timeout", None):
+  inputs.snapshot_timeout = playbook.inputs.snapshot_url_load_timeout
+inputs.snapshot_fullpage = playbook.inputs.snapshot_full_screen_capture
 ```
 
 </p>
@@ -225,7 +226,10 @@ else:
 ---
 
 ## Troubleshooting & Support
-Refer to the documentation listed in the Requirements section for troubleshooting information.
+
+### Full screen images are not viewable within SOAR. 
+When viewing PNG files within SOAR by clicking on the attachment, only the bottom portion of the page is visible. Download the PNG attachment to view the entire URL page.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+This is a IBM Supported app. Refer issues to [ibm.com/mysupport](https://ibm.com/mysupport).
+Also search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.

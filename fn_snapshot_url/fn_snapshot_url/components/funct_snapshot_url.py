@@ -7,8 +7,10 @@ from io import BytesIO
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields, write_file_attachment
 from selenium import webdriver
-from selenium.webdriver.common.proxy import Proxy, ProxyType
 from selenium.common.exceptions import WebDriverException
+from time import sleep
+
+IMAGE_LOAD_WAIT_SEC = 5
 
 PACKAGE_NAME = "fn_snapshot_url"
 FN_NAME = "snapshot_url"
@@ -58,7 +60,9 @@ class FunctionComponent(AppFunctionComponent):
                 driver.set_page_load_timeout(fn_inputs.snapshot_timeout)
 
             driver.get(fn_inputs.snapshot_url)
+            sleep(IMAGE_LOAD_WAIT_SEC)
             if getattr(fn_inputs, "snapshot_fullpage", False):
+                # get body of html page
                 png_bytes = driver.get_full_page_screenshot_as_png()
             else:
                 png_bytes = driver.get_screenshot_as_png()

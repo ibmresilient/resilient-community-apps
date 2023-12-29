@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1703800231967,
+  "export_date": 1703855819031,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -205,13 +205,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 20,
+  "id": 21,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1703800231560,
+      "create_date": 1703855819060,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -220,7 +220,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1703800231560,
+      "update_date": 1703855819060,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -237,7 +237,9 @@
       "name": "fn_snapshot_url",
       "programmatic_name": "fn_snapshot_url",
       "tags": [],
-      "users": [],
+      "users": [
+        "a@example.com"
+      ],
       "uuid": "1b1c1592-7a20-43a4-935e-a9a9918771e6"
     }
   ],
@@ -248,8 +250,8 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 19,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7\" isExecutable=\"true\" name=\"playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_01csd5e\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SnapShot URL\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"058ba37d-dbd0-4f68-94d5-787a5121c0d8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.snapshot_incident_id = incident.id\\ninputs.snapshot_url = artifact.value\\n#inputs.snapshot_timeout = 60\\n#inputs.snapshot_fullpage = True\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"snapshot_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_01csd5e\u003c/incoming\u003e\u003coutgoing\u003eFlow_14k7a76\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_01csd5e\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14vyaha\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_14k7a76\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"snapshot_results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"02f115f0-ef41-4eee-88fa-838996615045\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14k7a76\u003c/incoming\u003e\u003coutgoing\u003eFlow_14vyaha\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14vyaha\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14vyaha\" id=\"Flow_14vyaha_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14k7a76\" id=\"Flow_14k7a76_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01csd5e\" id=\"Flow_01csd5e_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"287.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 22,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7\" isExecutable=\"true\" name=\"playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_01csd5e\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SnapShot URL\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"058ba37d-dbd0-4f68-94d5-787a5121c0d8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.snapshot_incident_id = incident.id\\ninputs.snapshot_url = artifact.value\\nif getattr(playbook.inputs, \\\"snapshot_url_load_timeout\\\", None):\\n  inputs.snapshot_timeout = playbook.inputs.snapshot_url_load_timeout\\ninputs.snapshot_fullpage = playbook.inputs.snapshot_full_screen_capture\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"snapshot_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_01csd5e\u003c/incoming\u003e\u003coutgoing\u003eFlow_14k7a76\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_01csd5e\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14vyaha\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_14k7a76\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"snapshot_results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"02f115f0-ef41-4eee-88fa-838996615045\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14k7a76\u003c/incoming\u003e\u003coutgoing\u003eFlow_14vyaha\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14vyaha\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14vyaha\" id=\"Flow_14vyaha_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14k7a76\" id=\"Flow_14k7a76_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01csd5e\" id=\"Flow_01csd5e_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"287.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1700247384039,
       "creator_principal": {
@@ -270,7 +272,66 @@
         "actions": [],
         "display_name": "Snapshot URL - Example",
         "export_key": "playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7",
-        "fields": {},
+        "fields": {
+          "snapshot_full_screen_capture": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7/snapshot_full_screen_capture",
+            "hide_notification": false,
+            "id": 1104,
+            "input_type": "boolean",
+            "internal": false,
+            "is_tracked": false,
+            "name": "snapshot_full_screen_capture",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "Full Screen Capture",
+            "tooltip": "",
+            "type_id": 1030,
+            "uuid": "e7a7c02b-ec4e-4140-b469-c715f9e63cef",
+            "values": []
+          },
+          "snapshot_url_load_timeout": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7/snapshot_url_load_timeout",
+            "hide_notification": false,
+            "id": 1105,
+            "input_type": "number",
+            "internal": false,
+            "is_tracked": false,
+            "name": "snapshot_url_load_timeout",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "30",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "URL Load Timeout",
+            "tooltip": "",
+            "type_id": 1030,
+            "uuid": "ed354b4b-8ac3-480a-8339-7499f0acc70a",
+            "values": []
+          }
+        },
         "for_actions": false,
         "for_custom_fields": false,
         "for_notifications": false,
@@ -300,7 +361,7 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1703800225263,
+      "last_modified_time": 1703854284017,
       "local_scripts": [
         {
           "actions": [],
@@ -334,7 +395,24 @@
           ],
           "logic_type": "all"
         },
-        "view_items": []
+        "view_items": [
+          {
+            "content": "e7a7c02b-ec4e-4140-b469-c715f9e63cef",
+            "element": "field_uuid",
+            "field_type": "playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          },
+          {
+            "content": "ed354b4b-8ac3-480a-8339-7499f0acc70a",
+            "element": "field_uuid",
+            "field_type": "playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
       },
       "name": "snapshot_url__example",
       "object_type": "artifact",
@@ -349,7 +427,7 @@
       "tags": [],
       "type": "default",
       "uuid": "7faa5aa3-cdfa-424e-bd65-1951522f9bd7",
-      "version": 27
+      "version": 30
     }
   ],
   "regulators": null,
