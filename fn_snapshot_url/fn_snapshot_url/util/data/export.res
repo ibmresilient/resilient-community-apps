@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1703855819031,
+  "export_date": 1704216542371,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -155,17 +155,17 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1703798722514,
+      "last_modified_time": 1704208839338,
       "name": "snapshot_url",
       "output_description": {
         "content": null,
         "format": "text"
       },
-      "output_json_example": "{}",
-      "output_json_schema": "{}",
+      "output_json_example": "{\"version\": 2, \"success\": true, \"reason\": null, \"content\": {\"attachment_name\": \"https://cybersecuritynordic.messukeskus.com/program-3/.png\"}, \"raw\": null, \"inputs\": {\"snapshot_incident_id\": 2103, \"snapshot_url\": \"https://cybersecuritynordic.messukeskus.com/program-3/\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-snapshot-url\", \"package_version\": \"1.0.0\", \"host\": \"1fd9269d-5558-411b-ba33-e4767f763c59-8678ccd8c8-xs2vr\", \"execution_time_ms\": 49769, \"timestamp\": \"2023-12-28 20:51:10\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-04/schema#\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"integer\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {\"type\": \"null\"}, \"content\": {\"type\": \"object\", \"properties\": {\"attachment_name\": {\"type\": \"string\"}}, \"required\": [\"attachment_name\"]}, \"raw\": {\"type\": \"null\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"snapshot_incident_id\": {\"type\": \"integer\"}, \"snapshot_url\": {\"type\": \"string\"}}, \"required\": [\"snapshot_incident_id\", \"snapshot_url\"]}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}, \"required\": [\"version\", \"package\", \"package_version\", \"host\", \"execution_time_ms\", \"timestamp\"]}}, \"required\": [\"version\", \"success\", \"reason\", \"content\", \"inputs\", \"metrics\"]}",
       "tags": [],
       "uuid": "058ba37d-dbd0-4f68-94d5-787a5121c0d8",
-      "version": 10,
+      "version": 11,
       "view_items": [
         {
           "content": "d920070a-1d84-4db1-8829-1ef753f604c4",
@@ -205,13 +205,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 21,
+  "id": 22,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1703855819060,
+      "create_date": 1704216541088,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -220,7 +220,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1703855819060,
+      "update_date": 1704216541088,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -250,7 +250,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 22,
+        "content_version": 24,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7\" isExecutable=\"true\" name=\"playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_01csd5e\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"SnapShot URL\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"058ba37d-dbd0-4f68-94d5-787a5121c0d8\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.snapshot_incident_id = incident.id\\ninputs.snapshot_url = artifact.value\\nif getattr(playbook.inputs, \\\"snapshot_url_load_timeout\\\", None):\\n  inputs.snapshot_timeout = playbook.inputs.snapshot_url_load_timeout\\ninputs.snapshot_fullpage = playbook.inputs.snapshot_full_screen_capture\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"snapshot_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_01csd5e\u003c/incoming\u003e\u003coutgoing\u003eFlow_14k7a76\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_01csd5e\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14vyaha\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_14k7a76\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"snapshot_results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"02f115f0-ef41-4eee-88fa-838996615045\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14k7a76\u003c/incoming\u003e\u003coutgoing\u003eFlow_14vyaha\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14vyaha\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14vyaha\" id=\"Flow_14vyaha_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14k7a76\" id=\"Flow_14k7a76_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01csd5e\" id=\"Flow_01csd5e_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"287.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1700247384039,
@@ -270,7 +270,7 @@
       "field_type_handle": "playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7",
       "fields_type": {
         "actions": [],
-        "display_name": "Snapshot URL - Example",
+        "display_name": "Snapshot URL",
         "export_key": "playbook_7faa5aa3_cdfa_424e_bd65_1951522f9bd7",
         "fields": {
           "snapshot_full_screen_capture": {
@@ -326,7 +326,7 @@
             "tags": [],
             "templates": [],
             "text": "URL Load Timeout",
-            "tooltip": "",
+            "tooltip": "In seconds",
             "type_id": 1030,
             "uuid": "ed354b4b-8ac3-480a-8339-7499f0acc70a",
             "values": []
@@ -361,7 +361,7 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1703854284017,
+      "last_modified_time": 1704216505170,
       "local_scripts": [
         {
           "actions": [],
@@ -427,17 +427,17 @@
       "tags": [],
       "type": "default",
       "uuid": "7faa5aa3-cdfa-424e-bd65-1951522f9bd7",
-      "version": 30
+      "version": 32
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 0,
+    "build_number": 45,
     "major": 48,
-    "minor": 0,
-    "version": "48.0.0"
+    "minor": 2,
+    "version": "48.2.45"
   },
   "tags": [],
   "task_order": [],

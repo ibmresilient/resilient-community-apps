@@ -22,7 +22,7 @@
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
 | Full Screen Capture | `snapshot_full_screen_capture` | boolean | - | Optional |
-| URL Load Timeout | `snapshot_url_load_timeout` | number | - | Optional |
+| URL Load Timeout | `snapshot_url_load_timeout` | number | In seconds | Optional |
 
 ### Object Type
 `artifact`

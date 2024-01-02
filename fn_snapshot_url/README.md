@@ -132,8 +132,14 @@ Additional package dependencies may exist for each of these packages:
 
 | Setting | Required | Example | Description |
 | ------- | -------- | ------- | ----------- |
+<!--
+| browser | No | firefox|chrome | Browser to use for web site image rendering. 
+Only used with integration servers. Default is `firefox`.
+-->
 | proxy_server | No | `11.22.33.44` | HTTP(S) proxy server |
 
+### Integration Server Installation
+This app relies on Firefox version 121.0 or greater. It needs to be installed prior to using the app.
 ---
 
 ## Function - SnapShot URL
@@ -228,7 +234,9 @@ else:
 ## Troubleshooting & Support
 
 ### Full screen images are not viewable within SOAR. 
-When viewing PNG files within SOAR by clicking on the attachment, only the bottom portion of the page is visible. Download the PNG attachment to view the entire URL page.
+* When viewing PNG files within SOAR by clicking on the attachment, only the bottom portion of the page is visible. Download the PNG attachment to view the entire URL page.
+
+* For full page images, it's possible that all the subsequent page images may not display. This a feature of some websites which load images on demand when the page comes into view.
 
 ### For Support
 This is a IBM Supported app. Refer issues to [ibm.com/mysupport](https://ibm.com/mysupport).
