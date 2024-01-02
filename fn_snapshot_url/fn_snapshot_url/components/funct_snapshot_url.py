@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """AppFunction implementation"""
+import base64
 from io import BytesIO
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields, write_file_attachment
@@ -29,6 +30,19 @@ def firefox_setup(options):
 
     return firefox_options
 
+def chrome_setup(options):
+    """configure the options needed for firefox operation, such as headless operation
+
+    :return: option settings
+    :rtype: FirefoxOptions
+    """
+    chrome_options: webdriver.ChromeOptions = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless=new")
+
+    if options.get("proxy_server"):
+        chrome_options.add_argument(f'--proxy-server={options.get("proxy_server")}')
+
+    return chrome_options
 
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'snapshot_url'"""
@@ -53,8 +67,11 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["snapshot_url", "snapshot_incident_id"], fn_inputs)
 
         try:
-            # setup the driver and take the snapshot
-            driver: webdriver.Firefox = webdriver.Firefox(options=firefox_setup(self.options))
+            if self.is_chrome():
+                driver: webdriver.Chrome = webdriver.Chrome(options=chrome_setup(self.options))
+            else:
+                # setup the driver and take the snapshot
+                driver: webdriver.Firefox = webdriver.Firefox(options=firefox_setup(self.options))
 
             if hasattr(fn_inputs, "snapshot_timeout"):
                 driver.set_page_load_timeout(fn_inputs.snapshot_timeout)
@@ -62,8 +79,11 @@ class FunctionComponent(AppFunctionComponent):
             driver.get(fn_inputs.snapshot_url)
             sleep(IMAGE_LOAD_WAIT_SEC)
             if getattr(fn_inputs, "snapshot_fullpage", False):
-                # get body of html page
-                png_bytes = driver.get_full_page_screenshot_as_png()
+                if self.is_chrome():
+                    png_bytes = capture_full_page_screenshot(driver)
+                else:
+                    # get body of html page
+                    png_bytes = driver.get_full_page_screenshot_as_png()
             else:
                 png_bytes = driver.get_screenshot_as_png()
 
@@ -92,3 +112,25 @@ class FunctionComponent(AppFunctionComponent):
         yield self.status_message("Finished running App Function: '{0}'".format(FN_NAME))
 
         yield FunctionResult(result, success=True if result else False, reason=reason)
+
+    def is_chrome(self):
+        return self.options.get("browser", "").lower() == "chrome"
+    
+def capture_full_page_screenshot(driver) -> bytes:
+    """Gets full page screenshot of the current window as a binary data."""
+    metrics = driver.execute_cdp_cmd("Page.getLayoutMetrics", {})
+    return base64.b64decode(
+        driver.execute_cdp_cmd(
+            "Page.captureScreenshot",
+            {
+                "clip": {
+                    "x": 0,
+                    "y": 0,
+                    "width": metrics["contentSize"]["width"],
+                    "height": metrics["contentSize"]["height"],
+                    "scale": 1,
+                },
+                "captureBeyondViewport": True,
+            },
+        )["data"]
+    )

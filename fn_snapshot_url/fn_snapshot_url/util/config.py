@@ -12,6 +12,8 @@ def config_section_data():
     """
 
     config_data = u"""[fn_snapshot_url]
+# used for integration servers. choices are 'firefox' and 'chrome'. Firefox is the default.
+#browser= 
 # IP address for proxy server
 proxy_server=
 """

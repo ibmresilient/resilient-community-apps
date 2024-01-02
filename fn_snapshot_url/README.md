@@ -132,14 +132,17 @@ Additional package dependencies may exist for each of these packages:
 
 | Setting | Required | Example | Description |
 | ------- | -------- | ------- | ----------- |
-<!--
-| browser | No | firefox|chrome | Browser to use for web site image rendering. 
-Only used with integration servers. Default is `firefox`.
--->
+| browser | No | `firefox\|chrome` | Browser to use for web site image rendering. Only used with integration servers. Default is `firefox`. |
 | proxy_server | No | `11.22.33.44` | HTTP(S) proxy server |
 
 ### Integration Server Installation
-This app relies on Firefox version 121.0 or greater. It needs to be installed prior to using the app.
+Either a Firefox or Chrome browser needs to be installed prior to using this app. Tested versions of the browsers are:
+
+| Browser | Tested Version |
+| ------- | -------------- |
+| Firefox | 121.0 |
+| Chrome | 120.0 |
+
 ---
 
 ## Function - SnapShot URL
