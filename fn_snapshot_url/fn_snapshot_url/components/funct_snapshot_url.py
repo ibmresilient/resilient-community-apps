@@ -4,6 +4,7 @@
 
 """AppFunction implementation"""
 import base64
+import os
 from io import BytesIO
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields, write_file_attachment
@@ -67,7 +68,7 @@ class FunctionComponent(AppFunctionComponent):
         validate_fields(["snapshot_url", "snapshot_incident_id"], fn_inputs)
 
         try:
-            if self.is_chrome():
+            if self.is_chrome() and not is_app_host():
                 driver: webdriver.Chrome = webdriver.Chrome(options=chrome_setup(self.options))
             else:
                 # setup the driver and take the snapshot
@@ -79,7 +80,7 @@ class FunctionComponent(AppFunctionComponent):
             driver.get(fn_inputs.snapshot_url)
             sleep(IMAGE_LOAD_WAIT_SEC)
             if getattr(fn_inputs, "snapshot_fullpage", False):
-                if self.is_chrome():
+                if self.is_chrome() and not is_app_host():
                     png_bytes = capture_full_page_screenshot(driver)
                 else:
                     # get body of html page
@@ -134,3 +135,11 @@ def capture_full_page_screenshot(driver) -> bytes:
             },
         )["data"]
     )
+
+def is_app_host():
+    """determine if running in an App Host
+
+    :return: True if running in App Host
+    :rtype: bool
+    """
+    return bool(os.environ.get("APP_HOST_CONTAINER", False))
