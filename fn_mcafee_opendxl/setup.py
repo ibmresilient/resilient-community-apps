@@ -15,9 +15,10 @@ setup(
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient_lib',
-        'PySocks<1.7',
+        'PySocks<1.7', # required for dxclient even though resilient circuits allows ~= 1.6
         'dxlclient'
     ],
+    python_requires='<3.11', # because dxlclient requires PySocks<1.7, PY311 requires PySocks >= 1.7
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
