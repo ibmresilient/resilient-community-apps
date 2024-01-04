@@ -355,7 +355,8 @@ results = playbook.functions.results.ssl_results
 
 if (results.expiration_status != "Valid"):
   color = "#ff402b"
-noteText = """<br>Certificate Subject :<b>{0}</b>
+noteText = """<b>Playbook 'Parse Utilities: Parse SSL Certificate - Example (PB)' results</b><br>
+              <br>Certificate Subject :<b>{0}</b>
               <b>Certificate Expiry After :</b>{1}</a>
               <b>Expiration Status:</b> <b style="color: {2}">{3}</b>
               <br>Issuer Details :<b>{4}</b>""".format(results.subject, results.notAfter, color, results.expiration_status,results.issuer)
@@ -364,7 +365,7 @@ incident.addNote(helper.createRichText(noteText))
 
 playbook.addProperty('convert_json_to_rich_text', { 
     "version": 1.0,
-    "header": None,
+    "header": "<b>Playbook 'Parse Utilities: Parse SSL Certificate - Example (PB)' results</b>",
     "padding": 10,
     "separator": u"<br>",
     "json": results,

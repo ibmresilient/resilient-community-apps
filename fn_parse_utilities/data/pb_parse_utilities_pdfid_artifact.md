@@ -75,10 +75,10 @@ interesting_sections = [
 results = playbook.functions.results.pdfid_results
 
 if not results.isPdf:
-  incident.addNote(helper.createRichText(u"Not a PDF file: {}".format(results.get("filename"))))
+  incident.addNote(helper.createRichText(u"Playbook 'Parse Utilities: PDFiD (Artifact) - Example (PB)' results<br>Not a PDF file: {}".format(results.get("filename"))))
 else:
   # In this example we just write them to a note in the incident
-  note_data = [u"PDFID report for {} ({}):".format(results.get("filename"), results.header)]
+  note_data = [u"Playbook 'Parse Utilities: PDFiD (Artifact) - Example (PB)' results\nPDFID report for {} ({}):".format(results.get("filename"), results.header)]
 
   for section in interesting_sections:
     value = results.get(section)

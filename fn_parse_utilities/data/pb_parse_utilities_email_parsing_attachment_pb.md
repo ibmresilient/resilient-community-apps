@@ -137,7 +137,8 @@ else:
   # Add the Email Body as a Note to the Incident #
   ################################################
   if email.get("body"):
-    note_text = u"""<b>Parsed Email::</b><br>
+    note_text = u"""<b>Playbook 'Parse Utilities: Email Parsing (Attachment) - Example (PB)' results</b><br>
+                    <b>Parsed Email::</b><br>
                     <b>Subject:</b><br>{0}<br>
                     <b>From:</b><br>{1}<br>
                     <b>To:</b><br>{2}<br>
