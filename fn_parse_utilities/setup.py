@@ -23,11 +23,11 @@ def snake_to_camel(word):
 setup(
     name="fn_parse_utilities",
     display_name="Parse Utilities Function for SOAR",
-    version="1.0.2",
+    version="1.1.0",
     license="MIT",
     author="IBM SOAR",
     url="http://ibm.biz/soarcommunity",
-    description="Useful workflow/playbook functions to use for common parsing in the SOAR platform",
+    description="Useful playbook functions to use for common parsing in the SOAR platform",
     long_description="""This package contains functions to parse information from emails, ssl certificates, and PDFs as well as a function to transform an XML document using a preexisting xsl stylesheet.""",
     install_requires=[
         "resilient-circuits",

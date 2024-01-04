@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.0.1.486
 
-"""Generate the Resilient customizations required for fn_parse_utilities"""
+"""Generate the SOAR customizations required for fn_parse_utilities"""
 
 import base64
 import os
@@ -20,17 +22,34 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_parse_utilities",
-        "message_destinations": [u"fn_parse_utilities"],
-        "functions": [u"parse_utilities_email_parse", u"parse_utilities_parse_ssl_certificate", u"parse_utilities_pdfid", u"parse_utilities_xml_transformation"],
-        "workflows": [u"example_parse_utilities_email_parsing_artifact", u"example_parse_utilities_email_parsing_attachment", u"example_parse_utilities_parse_ssl_certificate", u"example_parse_utilities_pdfid", u"example_parse_utilities_pdfid_attachment", u"example_parse_utilities_xml_attachment", u"example_parse_utilities_xml_transformation"],
-        "actions": [u"Example: Parse Utilities Email Parsing (Artifact)", u"Example: Parse Utilities Email Parsing (Attachment)", u"Example: Parse Utilities Parse SSL Certificate", u"Example: Parse Utilities PDFID (Artifact)", u"Example: Parse Utilities PDFID (Attachment)", u"Example: Parse Utilities XML Transformation", u"Example: Parse Utilities XML Transformation (Attachment)"],
+        "message_destinations": [
+            u"fn_parse_utilities"
+        ],
+        "functions": [
+            u"parse_utilities_email_parse",
+            u"parse_utilities_parse_ssl_certificate",
+            u"parse_utilities_pdfid",
+            u"parse_utilities_xml_transformation"
+        ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": [u"Convert JSON to rich text v1.0"],
-        "playbooks": []
+        "scripts": [
+            u"Convert JSON to rich text v1.3"
+        ],
+        "playbooks": [
+            u"parse_utilities_email_parsing_artifact_pb",
+            u"parse_utilities_email_parsing_attachment_pb",
+            u"parse_utilities_parse_ssl_certificate",
+            u"parse_utilities_pdfid_artifact",
+            u"parse_utilities_pdfid_attachment",
+            u"parse_utilities_xml_transformation_artifact",
+            u"parse_utilities_xml_transformation_attachment_pb"
+        ]
     }
 
 
@@ -39,7 +58,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 48.2.16
 
     Contents:
     - Message Destinations:
@@ -49,24 +68,16 @@ def customization_data(client=None):
         - parse_utilities_parse_ssl_certificate
         - parse_utilities_pdfid
         - parse_utilities_xml_transformation
-    - Workflows:
-        - example_parse_utilities_email_parsing_artifact
-        - example_parse_utilities_email_parsing_attachment
-        - example_parse_utilities_parse_ssl_certificate
-        - example_parse_utilities_pdfid
-        - example_parse_utilities_pdfid_attachment
-        - example_parse_utilities_xml_attachment
-        - example_parse_utilities_xml_transformation
-    - Rules:
-        - Example: Parse Utilities Email Parsing (Artifact)
-        - Example: Parse Utilities Email Parsing (Attachment)
-        - Example: Parse Utilities Parse SSL Certificate
-        - Example: Parse Utilities PDFID (Artifact)
-        - Example: Parse Utilities PDFID (Attachment)
-        - Example: Parse Utilities XML Transformation
-        - Example: Parse Utilities XML Transformation (Attachment)
+    - Playbooks:
+        - parse_utilities_email_parsing_artifact_pb
+        - parse_utilities_email_parsing_attachment_pb
+        - parse_utilities_parse_ssl_certificate
+        - parse_utilities_pdfid_artifact
+        - parse_utilities_pdfid_attachment
+        - parse_utilities_xml_transformation_artifact
+        - parse_utilities_xml_transformation_attachment_pb
     - Scripts:
-        - Convert JSON to rich text v1.0
+        - Convert JSON to rich text v1.3
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

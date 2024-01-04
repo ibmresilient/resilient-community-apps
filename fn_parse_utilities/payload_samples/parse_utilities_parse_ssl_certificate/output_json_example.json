@@ -6,7 +6,7 @@
   "version": 2,
   "expiration_status": "Valid",
   "signature_algorithm": "b'ecdsa-with-SHA256'",
-  "public_key": "b'-----BEGIN PUBLIC KEY-----\\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEXLHljT47vFyTH/0A6YqZhypEhVok\\n6OsRv++OwcB5tcAQmnTF58RgamcQ8rOEiEDhavOcbBeX/xsus397BgBGmQ==\\n-----END PUBLIC KEY-----\\n'",
+  "public_key": "b'-----BEGIN PUBLIC KEY-----\\BgBGmQ==\\n-----END PUBLIC KEY-----\\n'",
   "extensions": {
     "subjectAltNames": "[\"sni.cloudflaressl.com\", \"*.adamtheautomator.com\", \"adamtheautomator.com\"]",
     "basicConstraints": "false",
