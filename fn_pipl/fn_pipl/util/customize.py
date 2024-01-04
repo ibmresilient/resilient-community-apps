@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# Generated with resilient-sdk v50.1.262
 
 """Generate the Resilient customizations required for fn_pipl"""
 
@@ -20,15 +22,30 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_pipl",
-        "message_destinations": [u"fn_pipl"],
-        "functions": [u"pipl_search_function"],
-        "workflows": [u"example_pipl_search_function"],
-        "actions": [u"Example: Create an Artifact from Pipl data", u"Example: Pipl search function"],
+        "message_destinations": [
+            u"fn_pipl"
+        ],
+        "functions": [
+            u"pipl_search_function"
+        ],
+        "workflows": [
+            u"example_pipl_search_function"
+        ],
+        "actions": [
+            u"Example: Create an Artifact from Pipl data",
+            u"Example: Pipl search function"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
-        "datatables": [u"pipl_person_data"],
+        "incident_types": [],
+        "datatables": [
+            u"pipl_person_data"
+        ],
         "automatic_tasks": [],
-        "scripts": [u"Create Artifact from Pipl Data"],
+        "scripts": [
+            u"Create Artifact from Pipl Data"
+        ],
+        "playbooks": [],
     }
 
 
@@ -37,7 +54,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 37.0.0
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
