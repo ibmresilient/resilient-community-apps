@@ -10,9 +10,6 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from resilient_lib import validate_fields, write_file_attachment
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
-from time import sleep
-
-IMAGE_LOAD_WAIT_SEC = 5
 
 PACKAGE_NAME = "fn_snapshot_url"
 FN_NAME = "snapshot_url"
@@ -78,7 +75,7 @@ class FunctionComponent(AppFunctionComponent):
                 driver.set_page_load_timeout(fn_inputs.snapshot_timeout)
 
             driver.get(fn_inputs.snapshot_url)
-            sleep(IMAGE_LOAD_WAIT_SEC)
+
             if getattr(fn_inputs, "snapshot_fullpage", False):
                 if self.is_chrome() and not is_app_host():
                     png_bytes = capture_full_page_screenshot(driver)

@@ -15,6 +15,6 @@ def config_section_data():
 # used for integration servers. choices are 'firefox' and 'chrome'. Firefox is the default.
 #browser= 
 # IP address for proxy server
-proxy_server=
+#proxy_server=
 """
     return config_data

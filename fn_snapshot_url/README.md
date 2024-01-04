@@ -72,7 +72,7 @@ Save snapshots of web pages as incident attachments
 --> 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
-This implementation uses a FireFox browser to perform the url lookup and image rendering. The configuration of a Firefox browser may place additional constraints on an Integration Server. Therefore, the use of the App Host for container deployment is the easiest way to configure this app.
+This implementation uses a FireFox or Chrome browser to perform the url lookup and image rendering. The configuration of a Firefox or Chrome browser may place additional constraints on an Integration Server. Therefore, the use of the App Host for container deployment is the easiest way to configure this app. App Host deployments use the FireFox browser.
 
 ### SOAR platform
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
