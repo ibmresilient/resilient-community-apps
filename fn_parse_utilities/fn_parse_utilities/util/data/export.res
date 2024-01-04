@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1704397106388,
+  "export_date": 1704401470056,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -623,13 +623,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 7,
+  "id": 8,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1704397104525,
+      "create_date": 1704401468299,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -638,7 +638,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1704397104525,
+      "update_date": 1704401468299,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1186,7 +1186,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 20,
+        "content_version": 21,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_f7cc5e19_32fb_4b6a_974c_3457346523ca\" isExecutable=\"true\" name=\"playbook_f7cc5e19_32fb_4b6a_974c_3457346523ca\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0xftpis\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Parse Utilities: XML Transformation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fb731c0f-f0ee-4a66-8cc5-ab98495a92ca\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.parse_utilities_artifact_id = artifact.id\\ninputs.parse_utilities_incident_id = incident.id\\ninputs.parse_utilities_xml_stylesheet = \\\"cdcatalog.xslt\\\"  # CHANGEME\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"xml_transformation\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xftpis\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ov3yvr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"XML Transformation\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"602bf77f-9df8-4c29-b907-cf55fd082e91\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ov3yvr\u003c/incoming\u003e\u003coutgoing\u003eFlow_14ltjtk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14ltjtk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0xftpis\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1ov3yvr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_14ltjtk\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f7cc5e19_32fb_4b6a_974c_3457346523ca\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14ltjtk\" id=\"Flow_14ltjtk_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ov3yvr\" id=\"Flow_1ov3yvr_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xftpis\" id=\"Flow_0xftpis_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"106\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"379\" y=\"54\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"372\" y=\"177.64999389648438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"372\" y=\"337.6499938964844\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"404\" y=\"483.6499938964844\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1702412789291,
@@ -1238,7 +1238,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1704396599762,
+      "last_modified_time": 1704401361357,
       "local_scripts": [
         {
           "actions": [],
@@ -1249,12 +1249,12 @@
           "id": 32,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1704396597945,
+          "last_modified_time": 1704401359637,
           "name": "XML Transformation",
           "object_type": "artifact",
           "playbook_handle": "parse_utilities_xml_transformation_artifact",
           "programmatic_name": "parse_utilities_xml_transformation_artifact_xml_transformation",
-          "script_text": "results = playbook.functions.results.xml_transformation\n\n# results.content is the string representation of the transformed xml document\ncontent = helper.createPlainText(\"Playbook \u0027Parse Utilities: XML Transformation (Artifact) - Example (PB)\u0027 results\\n{}\".format(results.content))\nincident.addNote(content)",
+          "script_text": "results = playbook.functions.results.xml_transformation\n\n# results.content is the string representation of the transformed xml document\ncontent = helper.createRichText(\"\u003cb\u003ePlaybook \u0027Parse Utilities: XML Transformation (Artifact) - Example (PB)\u0027 results\u003c/b\u003e\u003cbr\u003e{}\".format(results.content))\nincident.addNote(content)",
           "tags": [],
           "uuid": "602bf77f-9df8-4c29-b907-cf55fd082e91"
         }
@@ -1292,12 +1292,12 @@
       "tags": [],
       "type": "default",
       "uuid": "f7cc5e19-32fb-4b6a-974c-3457346523ca",
-      "version": 26
+      "version": 27
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 8,
+        "content_version": 9,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_5c981904_3da8_461c_a88b_11844f450ef0\" isExecutable=\"true\" name=\"playbook_5c981904_3da8_461c_a88b_11844f450ef0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0xftpis\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Parse Utilities: XML Transformation\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"fb731c0f-f0ee-4a66-8cc5-ab98495a92ca\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.parse_utilities_incident_id = incident.id\\ninputs.parse_utilities_attachment_id = attachment.id\\ninputs.parse_utilities_xml_stylesheet = \\\"cdcatalog.xslt\\\"\\n\\n# If this is a \\\"task attachment\\\" then we will additionally have a task-id\\nif task is not None:\\n  inputs.parse_utilities_task_id = task.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"xml_transformation\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xftpis\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ov3yvr\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"XML Transformation\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0a60a5a6-e8df-4cb3-a6c0-e2dacfa350aa\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ov3yvr\u003c/incoming\u003e\u003coutgoing\u003eFlow_14ltjtk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14ltjtk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0xftpis\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1ov3yvr\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_14ltjtk\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_5c981904_3da8_461c_a88b_11844f450ef0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14ltjtk\" id=\"Flow_14ltjtk_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ov3yvr\" id=\"Flow_1ov3yvr_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xftpis\" id=\"Flow_0xftpis_di\"\u003e\u003comgdi:waypoint x=\"470\" y=\"106\"/\u003e\u003comgdi:waypoint x=\"470\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"209.017\" x=\"379\" y=\"54\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"372\" y=\"177.64999389648438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"372\" y=\"337.6499938964844\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"404\" y=\"483.6499938964844\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1702931250305,
@@ -1349,7 +1349,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1704395919050,
+      "last_modified_time": 1704401339322,
       "local_scripts": [
         {
           "actions": [],
@@ -1360,12 +1360,12 @@
           "id": 36,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1704395873024,
+          "last_modified_time": 1704401328910,
           "name": "XML Transformation",
           "object_type": "attachment",
           "playbook_handle": "parse_utilities_xml_transformation_attachment_pb",
           "programmatic_name": "parse_utilities_xml_transformation_attachment_pb_xml_transformation",
-          "script_text": "results = playbook.functions.results.xml_transformation\n\n# results.content is the string representation of the transformed xml document\ncontent = helper.createPlainText(\"Playbook \u0027Parse Utilities: XML Transformation (Attachment) - Example (PB)\u0027 results\\n{}\".format(results.content))\nincident.addNote(content)",
+          "script_text": "results = playbook.functions.results.xml_transformation\n\n# results.content is the string representation of the transformed xml document\ncontent = helper.createRichText(\"\u003cb\u003ePlaybook \u0027Parse Utilities: XML Transformation (Attachment) - Example (PB)\u0027 results\u003c/b\u003e\u003cbr\u003e{}\".format(results.content))\nincident.addNote(content)",
           "tags": [],
           "uuid": "0a60a5a6-e8df-4cb3-a6c0-e2dacfa350aa"
         }
@@ -1390,7 +1390,7 @@
       "tags": [],
       "type": "default",
       "uuid": "5c981904-3da8-461c-a88b-11844f450ef0",
-      "version": 13
+      "version": 14
     }
   ],
   "regulators": null,

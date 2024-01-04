@@ -66,7 +66,7 @@ if task is not None:
 results = playbook.functions.results.xml_transformation
 
 # results.content is the string representation of the transformed xml document
-content = helper.createPlainText("Playbook 'Parse Utilities: XML Transformation (Attachment) - Example (PB)' results\n{}".format(results.content))
+content = helper.createRichText("<b>Playbook 'Parse Utilities: XML Transformation (Attachment) - Example (PB)' results</b><br>{}".format(results.content))
 incident.addNote(content)
 ```
 
