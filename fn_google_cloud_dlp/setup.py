@@ -21,13 +21,13 @@ def snake_to_camel(word):
 
 setup(
     name='fn_google_cloud_dlp',
-    version='1.2.1',
+    version='1.2.2',
     license='MIT',
     author='IBM SOAR',
     author_email='',
     url='http://ibm.biz/soarcommunity',
-    description="Resilient Circuits Components for 'fn_google_cloud_dlp'",
-    long_description="The Resilient Integration with Google Cloud DLP provides tools to integrate into your Incident Response Plan. The integration brings Automation and Orchestration capabilities for either identifying, redacting or de-identifying Personally identifiable information (PII) in a body of text.",
+    description="IBM QRadar SOAR Components for 'fn_google_cloud_dlp'",
+    long_description="The SOAR Integration with Google Cloud DLP provides tools to integrate into your Incident Response Plan. The integration brings Automation and Orchestration capabilities for either identifying, redacting or de-identifying Personally identifiable information (PII) in a body of text.",
     install_requires=[
         'resilient_circuits>=45.0.0',
         'google-cloud-dlp~=3.7.1',
