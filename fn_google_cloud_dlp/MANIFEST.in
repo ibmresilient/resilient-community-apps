@@ -1,9 +1,14 @@
 include README.md
+include Dockerfile
+include apikey_permissions.txt
+include entrypoint.sh
 recursive-include fn_google_cloud_dlp/util *
 include fn_google_cloud_dlp/LICENSE
+include doc/*.md
 include doc/screenshots/*
-include doc/*
-include Dockerfile
-include entrypoint.sh
-include apikey_permissions.txt
-include fn_google_cloud_dlp/icons/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak

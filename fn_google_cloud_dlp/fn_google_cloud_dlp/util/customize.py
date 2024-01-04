@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# Generated with resilient-sdk v50.1.262
 
 """Generate the Resilient customizations required for fn_google_cloud_dlp"""
 
@@ -20,17 +22,30 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_google_cloud_dlp",
-        "message_destinations": [u"fn_google_cloud_dlp"],
-        "functions": [u"google_cloud_dlp_deidentify_content", u"google_cloud_dlp_inspect_content"],
-        "workflows": [u"gcp_dlp_deidentify_artifact", u"gcp_dlp_deidentify_attachment", u"gcp_dlp_inspect_attachment"],
-        "actions": [u"Example: Google Cloud - Inspect Attachment for PII", u"Example: Google Cloud - Remove PII from Attachment", u"Example: Google Cloud - Remove PII from String"],
+        "message_destinations": [
+            u"fn_google_cloud_dlp"
+        ],
+        "functions": [
+            u"google_cloud_dlp_deidentify_content",
+            u"google_cloud_dlp_inspect_content"
+        ],
+        "workflows": [
+            u"gcp_dlp_deidentify_artifact",
+            u"gcp_dlp_deidentify_attachment",
+            u"gcp_dlp_inspect_attachment"
+        ],
+        "actions": [
+            u"Example: Google Cloud - Inspect Attachment for PII",
+            u"Example: Google Cloud - Remove PII from Attachment",
+            u"Example: Google Cloud - Remove PII from String"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [],
     }
 
 
@@ -39,7 +54,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 43.1.49
+    IBM SOAR Platform Version: 46.0.8131
 
     Contents:
     - Message Destinations:
