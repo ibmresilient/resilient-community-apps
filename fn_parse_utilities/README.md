@@ -60,7 +60,7 @@ But migrating to playbooks provides greater functionality along with future app 
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 12/2023 | Add playbooks and remove workflows. |
+| 1.1.0 | 1/2024 | Add playbooks and remove workflows. |
 | 1.0.2 | 2/2023 | Update cryptography to version 39.0.1 and pyOpenSSL to version 23.0 |
 | 1.0.1 | 1/2023 | Bug Fix |
 | 1.0.0 | 11/2022 | Initial Release |
