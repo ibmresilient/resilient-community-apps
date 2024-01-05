@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
 from xmltodict import parse
@@ -49,12 +49,14 @@ class FunctionComponent(AppFunctionComponent):
             dict_response = parse(xml_response)
         except KeyError as e:
             yield self.status_message("Editing the user group was unsuccessful.")
-            raise FunctionError(e)
+            # Produce a FunctionResult with the results
+            yield FunctionResult({}, success=False, reason=e)
 
         if dict_response["response"].get("@code") == PASS_CONSTANT:
             yield self.status_message("User group was successfully edited.")
         else:
-            raise FunctionError(f"Editing the user group was unsuccessful with code {dict_response['response'].get('@code')}, raising FunctionError.")
+            # Produce a FunctionResult with the results
+            yield FunctionResult({}, success=False, reason=f"Editing the user group was unsuccessful with code {dict_response['response'].get('@code')}, raising FunctionError.")
 
         # Add to dict_response to allow for more options in SOAR scripting and make some actions easier
         dict_response["xml_response"] = xml_response

@@ -45,9 +45,9 @@ Given a User Account artifact, removes the user from the "Blocked_Users" group i
 ### Function-Input Script
 ```python
 # Set this to the xpath of the group you are interested in
-inputs.panorama_user_group_xpath = "/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']"
+inputs.panorama_user_group_xpath = "/config/vsys/local-user-database/user-group/entry[@name='Blocked_Users']"
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
-inputs.panorama_location = "shared"
+inputs.panorama_location = "vsys"
 ```
 
 ---
@@ -64,12 +64,12 @@ inputs.panorama_location = "shared"
 
 ### Function-Input Script
 ```python
-inputs.panorama_location = "shared"
+inputs.panorama_location = "vsys"
 # Set this to the name of the user group you wish to add a user to
 group_name = "Blocked_Users"
 
 # Set this to the xpath of the group you are interested in
-inputs.panorama_user_group_xpath = f"/config/shared/local-user-database/user-group/entry[@name='{group_name}']"
+inputs.panorama_user_group_xpath = f"/config/vsys/local-user-database/user-group/entry[@name='{group_name}']"
 
 users_list = playbook.functions.results.get_users_results.get("content", {}).get("user_list")
 
@@ -131,6 +131,8 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 results = playbook.functions.results.edit_users_results
 if results.get("success"):
   incident.addNote(f"User account: {artifact.value} was unblocked.")
+else:
+  incident.addNote(f"Unblock User failed with reason: {results.get('reason')}")
 ```
 
 ---

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
 from xmltodict import parse
@@ -44,6 +44,8 @@ class FunctionComponent(AppFunctionComponent):
             xml_response = panorama_util.get_users_in_a_group(fn_inputs.panorama_user_group_xpath)
         except KeyError:
             yield self.status_message("No users returned.") # No users returned
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=err)
 
         # Create results dictionary from the above results
         results = parse(xml_response)

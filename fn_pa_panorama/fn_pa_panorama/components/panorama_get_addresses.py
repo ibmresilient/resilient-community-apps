@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 """Function implementation"""
 
 from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME, get_server_settings
@@ -34,7 +34,10 @@ class FunctionComponent(AppFunctionComponent):
                                        self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
                                        getattr(fn_inputs, "panorama_vsys", None))
 
-        response = panorama_util.get_addresses()
+        try:
+            response = panorama_util.get_addresses()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=err)
 
         yield self.status_message(f"{response.get('result', {}).get('@count')} addresses returned.")
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")

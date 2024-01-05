@@ -52,8 +52,8 @@ def list_to_json_str(l):
       string_list = string_list + ", "
   return string_list + "]"
 
-inputs.panorama_location = "shared"
-inputs.panorama_vsys = "test"
+inputs.panorama_location = "vsys"
+inputs.panorama_vsys = "vsys1"
 
 ip_address_name = artifact.value
 group = playbook.functions.results.get_groups_results.get("content", {}).get("result", {}).get("entry", [])[0]
@@ -98,8 +98,8 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 
 ### Function-Input Script
 ```python
-inputs.panorama_location = "shared"
-inputs.panorama_vsys = "test"
+inputs.panorama_location = "vsys"
+inputs.panorama_vsys = "vsys1"
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
@@ -117,8 +117,8 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 
 ### Function-Input Script
 ```python
-inputs.panorama_location = "shared"
-inputs.panorama_vsys = "test"
+inputs.panorama_location = "vsys"
+inputs.panorama_vsys = "vsys1"
 inputs.panorama_name_parameter = "Blocked Group"
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
@@ -141,6 +141,8 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 results = playbook.functions.results.edit_addresses_results
 if results.get("success"):
   incident.addNote(f"IP Address: {artifact.value} was unblocked.")
+else:
+  incident.addNote(f"Unblock IP address failed with reason: {results.get('reason')}")
 ```
 
 ---
