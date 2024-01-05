@@ -1504,9 +1504,9 @@
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 16,
+    "build_number": 0,
     "major": 48,
-    "minor": 2,
+    "minor": 0,
     "version": "48.0.0"
   },
   "tags": [],
