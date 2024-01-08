@@ -83,7 +83,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png) <!-- ::CHANGE_ME:: -->
 
-The Cisco AMP for Endpoints integration with the SOAR platform allows for the querying and updating of an AMP for Endpoints deployment. The integration includes 12 functions that return results which show security events for endpoints in the deployment. The returned results can be used to make customized updates to the Resilient platform, such as updating incidents, artifacts, data tables and so on. The integration can also be used to make changes to a deployment including adding or removing a hash to a blacklist and moving an endpoint to a different group.
+The Cisco AMP for Endpoints integration with the SOAR platform allows for the querying and updating of an AMP for Endpoints deployment. The integration includes 12 functions that return results which show security events for endpoints in the deployment. The returned results can be used to make customized updates to the SOAR platform, such as updating incidents, artifacts, data tables and so on. The integration can also be used to make changes to a deployment including adding or removing a hash to a blacklist and moving an endpoint to a different group.
 
 ### Key Features
 <!--
