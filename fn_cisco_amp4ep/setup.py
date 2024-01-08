@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_cisco_amp4ep',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='IBM SOAR',
     author_email='',
