@@ -74,6 +74,7 @@
 
 | Date | Version | Notes |
 | ---: | :------: | :---- |
+| 11/2023 | 1.1.1 | Convert Workflow/Script to Python3 |
 | 01/2023 | 1.1.0 | Five more functions added (Cancel a command, Get critical event information, Get all policy summary, Get firewall policy, Get exceptions policy) and relevant test functions implemented. Payload, ReadMe added and bug fix for patch import.|
 | 12/2022 | 1.0.2 | Bug fix for osname and selftest |
 | 11/2020 | 1.0.1 | Support added for App Host |
@@ -146,7 +147,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.8`.
+* IBM Cloud Pak for Security >= `1.10`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -278,7 +279,7 @@ for i in range(len(content)):
     break
 inputs.sep_hash_value = artifact.value
 inputs.sep_fingerprintlist_name = rule.properties.sep_fingerprintlist_name
-inputs.sep_description = u"Fingerprint list '{}'".format(unicode(inputs.sep_fingerprintlist_name))
+inputs.sep_description = "Fingerprint list '{}'".format(inputs.get("sep_fingerprintlist_name"))
 ```
 
 </p>
@@ -314,8 +315,8 @@ INPUTS = results.inputs
 def main():
     if CONTENT is not None:
         # If we got here we assume we are successsful.
-        note_text = u"Symantec SEP Integration: Workflow <b>{0}</b>: Successfully added MD5 hash <b>{1}</b> to new fingerprint list <b>{2}</b> for Resilient function " \
-                   "<b>{3}</b>".format(WF_NAME, artifact.value, unicode(INPUTS["sep_fingerprintlist_name"]), FN_NAME)
+        note_text = "Symantec SEP Integration: Workflow <b>{0}</b>: Successfully added MD5 hash <b>{1}</b> to new fingerprint list <b>{2}</b> for Resilient function " \
+                   "<b>{3}</b>".format(WF_NAME, artifact.value, INPUTS["sep_fingerprintlist_name"], FN_NAME)
     
     else:
         note_text += "Symantec SEP Integration: Workflow <b>{0}</b>: There was <b>no</b> results returned for Resilient " \
@@ -1109,14 +1110,14 @@ QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 def main():
     note_text = ''
     if C_OUTER is not None:
-        note_text = u"Symantec SEP Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for computer name " \
+        note_text = "Symantec SEP Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for computer name " \
                     "<b>{2}</b> for Resilient function <b>{3}</b>" \
-            .format(WF_NAME, results["content"]["numberOfElements"], unicode(INPUTS["sep_computername"]),
+            .format(WF_NAME, results.get("content", {}).get("numberOfElements"), INPUTS["sep_computername"],
                     FN_NAME)
 
         eps = C_OUTER["content"]
         for i in range(len(eps)):
-            ep_osname = eps[i]["osname"]
+            ep_osname = eps[i].get("osname", "")
             newrow = incident.addRow("sep_endpoint_details")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
             for f in DATA_TBL_FIELDS:
@@ -1124,8 +1125,8 @@ def main():
                 if f_base == "query_execution_time":
                     continue
                 if eps[i][f_base] is not None:
-                    if isinstance(eps[i][f_base], unicode) or isinstance(eps[i][f_base], int) \
-                            or isinstance(eps[i][f_base], long) or len(eps[i][f_base]) == 0:
+                    if isinstance(eps[i][f_base], str) or isinstance(eps[i][f_base], int) \
+                            or isinstance(eps[i][f_base], int) or len(eps[i][f_base]) == 0:
                         if f_base == "onlineStatus":
                             if eps[i][f_base]:
                                 newrow[f] = "Online"
@@ -1159,9 +1160,9 @@ def main():
                     newrow.domain_id = domain["id"]
 
     else:
-        note_text += u"Symantec SEP Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for computer " \
+        note_text += "Symantec SEP Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for computer " \
                      "name <b>{1}</b> for Resilient function <b>{2}</b>" \
-            .format(WF_NAME, unicode(INPUTS["sep_computername"]), FN_NAME)
+            .format(WF_NAME, INPUTS["sep_computername"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 
@@ -1249,8 +1250,8 @@ for i in range(len(content)):
 if domainid is not None:
     workflow.addProperty("domid_exists", {})
 else:
-    note_text = u"Symantec SEP Integration: Workflow <b>{0}</b>: The domain name  <b>{1}</b> was not found " \
-                u"for Resilient function <b>{2}</b>.".format(wf_name, unicode(rule.properties.sep_domain_name), fn_name)
+    note_text = "Symantec SEP Integration: Workflow <b>{0}</b>: The domain name  <b>{1}</b> was not found " \
+                "for Resilient function <b>{2}</b>.".format(wf_name, rule.properties.sep_domain_name, fn_name)
     incident.addNote(helper.createRichText(note_text))
 ```
 
@@ -1477,9 +1478,9 @@ def main():
             workflow.addProperty("hash_in_list", {})
 
     if fpl_exists and hash_in_list:
-        note_text = u"Symantec SEP Integration: Workflow <b>{0}</b>: The hash <b>{1}</b> has already been added to " \
-                    u"fingerprint list <b>{2}</b> for domain id <b>{3}</b>."\
-            .format(WF_NAME, artifact.value, unicode(INPUTS["sep_fingerprintlist_name"]),
+        note_text = "Symantec SEP Integration: Workflow <b>{0}</b>: The hash <b>{1}</b> has already been added to " \
+                    "fingerprint list <b>{2}</b> for domain id <b>{3}</b>."\
+            .format(WF_NAME, artifact.value, INPUTS["sep_fingerprintlist_name"],
                     INPUTS["sep_domainid"])
         incident.addNote(helper.createRichText(note_text))
 
@@ -2143,9 +2144,9 @@ def set_inputs(fn, fp, md5, sha1, sha256):
     inputs.sep_scan_type = rule.properties.sep_scan_type
     inputs.sep_scan_action = None
     if ARTIFACT_DESCRIPTION is not None:
-        inputs.sep_description = u"Scan eoc for {0}".format(unicode(ARTIFACT_DESCRIPTION["content"]))
+        inputs.sep_description = "Scan eoc for {0}".format(ARTIFACT_DESCRIPTION["content"])
     else:
-        inputs.sep_description = u"Scan eoc for for suspicious hash of type {0} and value {1} in the SEP environment.".format(ARTIFACT_TYPE, ARTIFACT_VALUE)
+        inputs.sep_description = "Scan eoc for for suspicious hash of type {0} and value {1} in the SEP environment.".format(ARTIFACT_TYPE, ARTIFACT_VALUE)
 
 def main():
     get_computers()
@@ -2192,13 +2193,13 @@ note_text = ''
 def main():
     note_text = ''
     if CONTENT  is not None:
-        note_text = u"Symantec SEP Integration: Workflow <b>{0}</b>: Returned command id <b>{1}</b> for a <b>{2}</b> " \
+        note_text = "Symantec SEP Integration: Workflow <b>{0}</b>: Returned command id <b>{1}</b> for a <b>{2}</b> " \
                     "scan on artifact <b>{3}</b> for Resilient function <b>{4}</b>"\
-            .format(WF_NAME, CONTENT["commandID_computer"], INPUTS["sep_scan_type"], unicode(artifact.value), FN_NAME)
+            .format(WF_NAME, CONTENT["commandID_computer"], INPUTS["sep_scan_type"], artifact.value, FN_NAME)
     else:
-        note_text = u"Symantec SEP Integration: Workflow <b>{0}</b>: There was <b>no</b> command id returned for a " \
+        note_text = "Symantec SEP Integration: Workflow <b>{0}</b>: There was <b>no</b> command id returned for a " \
                     "<b>{1}</b> scan on artifact <b>{2}</b> for Resilient function <b>{3}</b>"\
-            .format(WF_NAME, INPUTS["sep_scan_type"], INPUTS["sep_file_path"], unicode(artifact.value), FN_NAME)
+            .format(WF_NAME, INPUTS["sep_scan_type"], INPUTS["sep_file_path"], artifact.value, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
@@ -2300,7 +2301,7 @@ if fpl_content["name"] ==  rule.properties.sep_fingerprintlist_name:
     else:
         inputs.sep_hash_value = artifact.value
 
-inputs.sep_description = u"Fingerprint list '{}'".format(unicode(inputs.sep_fingerprintlist_name))
+inputs.sep_description = "Fingerprint list '{}'".format(inputs.get("sep_fingerprintlist_name"))
 
 ```
 
@@ -2337,9 +2338,9 @@ INPUTS = results.inputs
 def main():
     if CONTENT is not None:
         # If we got here we assume we are successsful, no status messgae is returned by api.
-        note_text = u"Symantec SEP Integration: Workflow <b>{0}</b>: Successfully added MD5 hash <b>{1}</b> to fingerprint " \
+        note_text = "Symantec SEP Integration: Workflow <b>{0}</b>: Successfully added MD5 hash <b>{1}</b> to fingerprint " \
                     "list <b>{2}</b> for Resilient function <b>{3}</b>"\
-            .format(WF_NAME, artifact.value, unicode(INPUTS["sep_fingerprintlist_name"]),
+            .format(WF_NAME, artifact.value, INPUTS["sep_fingerprintlist_name"],
                     FN_NAME)
     
     else:
@@ -2475,9 +2476,9 @@ inputs = results.inputs
 # Processing
 
 if content  is not None:
-    noteText = u"Symantec SEP Integration: Workflow <b>{0}</b>: Command excuted with id  <b>{1}</b> for artifact with " \
+    noteText = "Symantec SEP Integration: Workflow <b>{0}</b>: Command excuted with id  <b>{1}</b> for artifact with " \
                "type <b>{2}</b> and value <b>{3}</b> from source <b>{4}</b> for Resilient function <b>{5}</b>"\
-        .format(wf_name, content["commandID"], row.artifact_type, unicode(row.artifact_value), inputs["sep_source"], fn_name)
+        .format(wf_name, content["commandID"], row.artifact_type, row.artifact_value, inputs["sep_source"], fn_name)
     row.upload_commandid = content["commandID"]
 
 else:
@@ -7173,8 +7174,8 @@ def main():
 
     validate_fields(["System Name", ARTIFACT_TYPE], PARAMS)
 
-    desc = u"Detected by Symantec SEP Eoc Scan for artifact of type '{0}' and value '{1}' by function " \
-    "'{2}' for Symantec SEP.".format(row.artifact_type, unicode(row.artifact_value), FUNCTION_NAME)
+    desc = "Detected by Symantec SEP Eoc Scan for artifact of type '{0}' and value '{1}' by function " \
+    "'{2}' for Symantec SEP.".format(row.artifact_type, row.artifact_value, FUNCTION_NAME)
     addArtifact(ARTIFACT_TYPE, PARAMS[ARTIFACT_TYPE], desc)
 
 
@@ -7265,7 +7266,8 @@ def main():
     if FILE_PATH_LIST:
         for fp in FILE_PATH_LIST:
           file_name = fp.split("\\")[-1] if '\\' in fp else fp.split("/")[-1]
-          add_artifact("File Name", file_name, u"File name of file path for suspicious file {} in SEP environment.".format(unicode(fp)))
+          add_artifact("File Name", file_name, "File name of file path for suspicious file {} in SEP environment.".format(fp))
+
 # Script execution starts here
 main()
 ```
