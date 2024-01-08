@@ -1,5 +1,14 @@
 include README.md
-include fn_cisco_amp4ep/util/*
-include fn_cisco_amp4ep/lib/*
+include Dockerfile
+include apikey_permissions.txt
+include entrypoint.sh
+recursive-include fn_cisco_amp4ep/util *
 include fn_cisco_amp4ep/LICENSE
-include fn_cisco_amp4ep/doc/*
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak
