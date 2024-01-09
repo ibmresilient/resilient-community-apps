@@ -1045,7 +1045,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785790744,
@@ -1088,7 +1088,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785790999,
@@ -1131,7 +1131,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785791216,
@@ -1190,7 +1190,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785791442,
@@ -1225,7 +1225,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785791673,
@@ -1276,7 +1276,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785791912,
@@ -1311,7 +1311,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785792144,
@@ -1354,7 +1354,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785792399,
@@ -1389,7 +1389,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785792620,
@@ -1424,7 +1424,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785792846,
@@ -1491,7 +1491,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785793074,
@@ -1542,7 +1542,7 @@
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785793289,
@@ -1655,7 +1655,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_7e933741_7c74_4711_96d7_0b8d31d67343",
@@ -1697,7 +1697,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785795195,
@@ -1710,7 +1710,7 @@
           "export_key": "Salesforce: Check function results to add Salesforce comments to case",
           "id": 92,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785794419,
           "name": "Salesforce: Check function results to add Salesforce comments to case",
           "object_type": "incident",
@@ -1774,7 +1774,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_bb44618a_c4be_47fe_a367_2f8bcdd5fbeb",
@@ -1816,7 +1816,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785796195,
@@ -1829,7 +1829,7 @@
           "export_key": "Salesforce: Update Case Status",
           "id": 93,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785795448,
           "name": "Salesforce: Update Case Status",
           "object_type": "incident",
@@ -1865,7 +1865,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_53b2cb7f_7d97_4da5_acbf_89fdee65baaa",
@@ -2375,7 +2375,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704786233027,
@@ -2388,7 +2388,7 @@
           "export_key": "Salesforce: Write results of Create Salesforce Case function",
           "id": 94,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704786160834,
           "name": "Salesforce: Write results of Create Salesforce Case function",
           "object_type": "incident",
@@ -2406,7 +2406,7 @@
           "export_key": "Salesforce: Write sync task results to a note ",
           "id": 95,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785796957,
           "name": "Salesforce: Write sync task results to a note ",
           "object_type": "incident",
@@ -2530,7 +2530,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_a9666b4d_02ff_47be_a8c7_719b9b51541b",
@@ -2602,7 +2602,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704786231383,
@@ -2615,7 +2615,7 @@
           "export_key": "Salesforce: Update SOAR Case with Salesforce Case Details",
           "id": 96,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704786144002,
           "name": "Salesforce: Update SOAR Case with Salesforce Case Details",
           "object_type": "incident",
@@ -2633,7 +2633,7 @@
           "export_key": "Salesforce: Write results of Send Tasks to Salesforce case",
           "id": 97,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785798061,
           "name": "Salesforce: Write results of Send Tasks to Salesforce case",
           "object_type": "incident",
@@ -2651,7 +2651,7 @@
           "export_key": "Salesforce: Write sync task results to a note ",
           "id": 98,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785798122,
           "name": "Salesforce: Write sync task results to a note ",
           "object_type": "incident",
@@ -2711,7 +2711,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_e43fa5c0_2ea2_4965_abc7_c5525e3c7815",
@@ -2753,7 +2753,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785799894,
@@ -2766,7 +2766,7 @@
           "export_key": "Salesforce: Get Attachments write results to a note",
           "id": 99,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785799119,
           "name": "Salesforce: Get Attachments write results to a note",
           "object_type": "incident",
@@ -2817,7 +2817,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_05ce7276_b7fc_4e8c_afcf_41831acab3d6",
@@ -2859,7 +2859,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785801172,
@@ -2872,7 +2872,7 @@
           "export_key": "Salesforce: Post Artifact File to Salesforce Case",
           "id": 100,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785800121,
           "name": "Salesforce: Post Artifact File to Salesforce Case",
           "object_type": "artifact",
@@ -2938,7 +2938,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_c9b4fe8b_8d4a_4e1f_a3cd_6cf4204f70df",
@@ -2980,7 +2980,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785802310,
@@ -2993,7 +2993,7 @@
           "export_key": "Salesforce: Write Results of Post Attachment to Salesforce case ",
           "id": 101,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785801410,
           "name": "Salesforce: Write Results of Post Attachment to Salesforce case ",
           "object_type": "attachment",
@@ -3044,7 +3044,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_2e3e51f7_d0a9_42e0_b863_3e8b5c096c16",
@@ -3086,7 +3086,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785803210,
@@ -3131,7 +3131,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_7aaf3494_d064_4357_b92e_095fc9c740a7",
@@ -3306,7 +3306,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785804443,
@@ -3319,7 +3319,7 @@
           "export_key": "Salesforce: Write Create Task to Note",
           "id": 102,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785803575,
           "name": "Salesforce: Write Create Task to Note",
           "object_type": "task",
@@ -3387,7 +3387,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_a0042da4_5e03_462a_b3dd_ebc7b67f6568",
@@ -3487,7 +3487,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785805558,
@@ -3500,7 +3500,7 @@
           "export_key": "Salesforce: Write results of task sync to note",
           "id": 103,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785804772,
           "name": "Salesforce: Write results of task sync to note",
           "object_type": "incident",
@@ -3574,7 +3574,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_e81303a8_e109_4418_88df_424d8ea764d5",
@@ -3616,7 +3616,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785806596,
@@ -3629,7 +3629,7 @@
           "export_key": "Salesforce: Set Account fields to None",
           "id": 104,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785805788,
           "name": "Salesforce: Set Account fields to None",
           "object_type": "incident",
@@ -3647,7 +3647,7 @@
           "export_key": "Salesforce: Update Account details in SOAR",
           "id": 105,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785805848,
           "name": "Salesforce: Update Account details in SOAR",
           "object_type": "incident",
@@ -3711,7 +3711,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_a6db8735_3d90_4c38_866d_2f91ca038490",
@@ -3753,7 +3753,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785807846,
@@ -3766,7 +3766,7 @@
           "export_key": "Salesforce: Update Account Name",
           "id": 106,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785806836,
           "name": "Salesforce: Update Account Name",
           "object_type": "incident",
@@ -3784,7 +3784,7 @@
           "export_key": "Salesforce: Update case in SOAR",
           "id": 107,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785806901,
           "name": "Salesforce: Update case in SOAR",
           "object_type": "incident",
@@ -3802,7 +3802,7 @@
           "export_key": "Salesforce: Update Contact",
           "id": 108,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785806963,
           "name": "Salesforce: Update Contact",
           "object_type": "incident",
@@ -3820,7 +3820,7 @@
           "export_key": "Salesforce: Update User information",
           "id": 109,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785807029,
           "name": "Salesforce: Update User information",
           "object_type": "incident",
@@ -3856,7 +3856,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_c53f6cfd_04c9_4713_9806_7758148cba62",
@@ -4031,7 +4031,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785809066,
@@ -4044,7 +4044,7 @@
           "export_key": "Salesforce: Update Account Name",
           "id": 110,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785808235,
           "name": "Salesforce: Update Account Name",
           "object_type": "incident",
@@ -4062,7 +4062,7 @@
           "export_key": "Salesforce: Update Status write results",
           "id": 111,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785808296,
           "name": "Salesforce: Update Status write results",
           "object_type": "incident",
@@ -4130,7 +4130,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_c9f4a766_2b98_4676_a125_15af20ebdfe1",
@@ -4172,7 +4172,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785809907,
@@ -4231,7 +4231,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_cc4762df_970f_45b8_9fdd_bae6e9ee4746",
@@ -4273,7 +4273,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785811094,
@@ -4286,7 +4286,7 @@
           "export_key": "Salesforce: Set Contact custom fields to None",
           "id": 112,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785810148,
           "name": "Salesforce: Set Contact custom fields to None",
           "object_type": "incident",
@@ -4304,7 +4304,7 @@
           "export_key": "Salesforce: Update Contact details when ContactId changes",
           "id": 113,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785810240,
           "name": "Salesforce: Update Contact details when ContactId changes",
           "object_type": "incident",
@@ -4354,7 +4354,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_25e0244c_c93a_44bd_a0f2_5922c14699a9",
@@ -4396,7 +4396,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785812120,
@@ -4409,7 +4409,7 @@
           "export_key": "Salesforce: Update Case Owner details in SOAR",
           "id": 114,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785811342,
           "name": "Salesforce: Update Case Owner details in SOAR",
           "object_type": "incident",
@@ -4445,7 +4445,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_43b42c04_a20e_4b8c_813d_4869ad5c7537",
@@ -4487,7 +4487,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785813064,
@@ -4500,7 +4500,7 @@
           "export_key": "Salesforce: Write Account information",
           "id": 115,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785812363,
           "name": "Salesforce: Write Account information",
           "object_type": "incident",
@@ -4551,7 +4551,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_9096e28f_a667_43f0_8f87_a1f6e37db51a",
@@ -4593,7 +4593,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785814039,
@@ -4606,7 +4606,7 @@
           "export_key": "Salesforce: Write Contact details to a note",
           "id": 116,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785813305,
           "name": "Salesforce: Write Contact details to a note",
           "object_type": "incident",
@@ -4657,7 +4657,7 @@
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_35a6e1dd_f0fe_4773_bfa4_6335ee30b84f",
@@ -4699,7 +4699,7 @@
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
         "id": 6,
-        "name": "admin@example.com"",
+        "name": "admin@example.com",
         "type": "user"
       },
       "last_modified_time": 1704785815021,
@@ -4712,7 +4712,7 @@
           "export_key": "Salesforce: Write Owner (User) details to an SOAR note",
           "id": 117,
           "language": "python3",
-          "last_modified_by": "allen.ch.lee@ibm.com",
+          "last_modified_by": "admin@example.com",
           "last_modified_time": 1704785814290,
           "name": "Salesforce: Write Owner (User) details to an SOAR note",
           "object_type": "incident",
