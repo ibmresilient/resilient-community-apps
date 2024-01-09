@@ -9,7 +9,7 @@ import logging
 import sys
 import traceback
 
-from resilient_circuits import ResilientComponent, handler, ActionMessage
+from resilient_circuits import ResilientComponent, handler, ActionMessage, is_this_a_selftest
 from resilient_lib import str_to_bool
 from resilient import SimpleHTTPException
 
@@ -91,7 +91,7 @@ class FeedComponent(ResilientComponent):
                 self.incl_attachment_data = str_to_bool(self.options.get("include_attachment_data", 'false'))
 
                 # determine the reload options to follow
-                if str_to_bool(self.options.get('reload', 'false')):
+                if str_to_bool(self.options.get('reload', 'false')) and not is_this_a_selftest(self):
                     query_api_method = str_to_bool(self.options.get("reload_query_api_method", 'false'))
 
                     reload_feeds = Reload(self.plugin_pool,
