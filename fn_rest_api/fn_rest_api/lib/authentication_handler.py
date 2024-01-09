@@ -146,7 +146,7 @@ class OAuth2Authorization():
         credentials (client ID and client secret) secure.
 
         ..note::
-        if the endpoint returns a `refresh-token` on successively completing the above flow,
+        if the endpoint returns a `refresh-token` on successfully completing the above flow,
         the existing client properties are updated with the newly fetched values. This means
         the client goes from `Client-Credentials Flow` to `Refresh-Token flow` moving forward.
         This means that this client can be used to fetch new tokens and values virtually
