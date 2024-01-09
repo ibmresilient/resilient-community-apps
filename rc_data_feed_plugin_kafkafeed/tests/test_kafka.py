@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import json
+import pytest
 import sys
 import time
+from mock import patch
 from collections import OrderedDict
 from data_feeder_plugins.kafkafeed.kafkafeed import KafkaFeedDestination
 from rc_data_feed.lib.type_info import ActionMessageTypeInfo
@@ -18,7 +20,7 @@ TOPIC = "resilient_test"
 APP_CONFIG = {
     "class": "KafkaFeed",
     "topic_map": "default={}".format(TOPIC),
-    "bootstrap.servers": "localhost:9092",
+    "bootstrap.servers": "localhost:29092",
     "acks": "all",
     "message.timeout.ms": 5000
 }
@@ -48,7 +50,22 @@ else:
     RESULT_PAYLOAD['test_date']     = "2019-02-13T15:55:47.448000"
     RESULT_PAYLOAD['test_datetime'] = "2019-02-13T15:55:47.448000+00:00"
 
+def test_send_patched():
+    # GOAL: write test to cover all lines of the send_data function
+    # with all the kafka specific logic patched out
 
+    context = Context()
+    with patch("data_feeder_plugins.kafkafeed.kafkafeed.Producer") as mock_producer:
+        p_feed = KafkaFeedDestination(None, APP_CONFIG)
+        p_feed.send_data(context, MSG_PAYLOAD)
+
+        # check properly constructed
+        assert mock_producer.called
+        # check that produce and flush functions were both called
+        assert mock_producer.return_value.produce.called
+        assert mock_producer.return_value.flush.called
+
+@pytest.mark.livetest
 def test_send():
     """
     test that all fields sent for a file_feed are present
@@ -66,6 +83,7 @@ def _kafka_consumer(app_settings):
     settings = dict(app_settings)
     settings.pop("topic_map")
     settings.pop("class")
+    settings.pop("selftest_timeout", None)
     settings["auto.offset.reset"] = "earliest"
     settings["group.id"] = "mygroup"
 

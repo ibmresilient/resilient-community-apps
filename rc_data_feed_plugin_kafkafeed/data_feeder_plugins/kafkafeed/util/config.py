@@ -22,6 +22,9 @@ message.timeout.ms=5000
 #sasl.kerberos.keytab=/etc/security/keytabs/kafka.keytab
 #sasl.kerberos.service.name=kafka
 #sasl.kerberos.principal=kafka/server.example.com
+
+# test configuration settings
+#selftest_timeout=20 # seconds before aborting connection test (defaults to 10)
 """
 
     return config_data
@@ -31,8 +34,21 @@ def apphost_config_section_data():
 # comma separated section names. ex. sqlserver_feed,file_feed
 feed_names=kafka_feed
 reload=False
-# set to true if ElasticSearch errors occur during reload=True
+# use reload_types to limit the types of objects when reload=true.
+# Ex: incident,task,note,artifact,attachment,<data_table_api_name>
+reload_types=
+# set to true if ElasticSearch errors occur during reload=true
 reload_query_api_method=False
+
 # feed_data is the default message destination that will be listened to
 queue=feed_data
+
+# set to true if attachment data should be part of payload send to plugins
+# NOTE: attachment data sent to kafka_feed will be base64 encoded
+include_attachment_data=false
+# if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it
+# ex: 'Default Workspace': ['sqlserver_feed'], 'workspace A': ['kafka_feed', 'resilient_feed']
+workspaces=
+# support for parallel execution. NOTE: as of 1.1.0 kafka_feed DOES NOT support parallel execution
+parallel_execution = False
 """
