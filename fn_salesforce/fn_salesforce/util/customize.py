@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v50.0.85
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.0.1.486
 
-"""Generate the Resilient customizations required for fn_salesforce"""
+"""Generate the SOAR customizations required for fn_salesforce"""
 
 import base64
 import os
@@ -21,17 +22,72 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_salesforce",
-        "message_destinations": [u"fn_salesforce"],
-        "functions": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_create_case_in_salesforce", u"salesforce_create_task_in_salesforce_case", u"salesforce_get_account", u"salesforce_get_attachments_from_salesforce", u"salesforce_get_case", u"salesforce_get_case_comments", u"salesforce_get_contact", u"salesforce_get_user", u"salesforce_post_attachment_to_salesforce_case", u"salesforce_sync_tasks_between_cases", u"salesforce_update_case_status"],
+        "message_destinations": [
+            u"fn_salesforce"
+        ],
+        "functions": [
+            u"salesforce_add_comment_to_salesforce_case",
+            u"salesforce_create_case_in_salesforce",
+            u"salesforce_create_task_in_salesforce_case",
+            u"salesforce_get_account",
+            u"salesforce_get_attachments_from_salesforce",
+            u"salesforce_get_case",
+            u"salesforce_get_case_comments",
+            u"salesforce_get_contact",
+            u"salesforce_get_user",
+            u"salesforce_post_attachment_to_salesforce_case",
+            u"salesforce_sync_tasks_between_cases",
+            u"salesforce_update_case_status"
+        ],
         "workflows": [],
         "actions": [],
-        "incident_fields": [u"salesforce_account_id", u"salesforce_account_name", u"salesforce_case_id", u"salesforce_case_link", u"salesforce_case_number", u"salesforce_case_owner", u"salesforce_case_type", u"salesforce_contact_email", u"salesforce_contact_fax", u"salesforce_contact_id", u"salesforce_contact_name", u"salesforce_contact_phone", u"salesforce_origin", u"salesforce_owner_id", u"salesforce_status", u"salesforce_supplied_company", u"salesforce_supplied_email", u"salesforce_supplied_name", u"salesforce_supplied_phone"],
+        "incident_fields": [
+            u"salesforce_account_id",
+            u"salesforce_account_name",
+            u"salesforce_case_id",
+            u"salesforce_case_link",
+            u"salesforce_case_number",
+            u"salesforce_case_owner",
+            u"salesforce_case_type",
+            u"salesforce_contact_email",
+            u"salesforce_contact_fax",
+            u"salesforce_contact_id",
+            u"salesforce_contact_name",
+            u"salesforce_contact_phone",
+            u"salesforce_origin",
+            u"salesforce_owner_id",
+            u"salesforce_status",
+            u"salesforce_supplied_company",
+            u"salesforce_supplied_email",
+            u"salesforce_supplied_name",
+            u"salesforce_supplied_phone"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"salesforce_add_comment_to_salesforce_case", u"salesforce_close_case", u"salesforce_create_salesforce_case", u"salesforce_create_salesforce_case_from_this_soar_case", u"salesforce_get_account", u"salesforce_get_attachments_from_salesforce_case", u"salesforce_get_contact", u"salesforce_post_artifact_file_to_salesforce_case", u"salesforce_post_attachment_to_salesforce_case", u"salesforce_send_note_to_salesforce_case", u"salesforce_send_task_to_salesforce_case", u"salesforce_sync_tasks_between_soar_and_salesforce", u"salesforce_update_account_details_in_soar", u"salesforce_update_case", u"salesforce_update_case_status_manual", u"salesforce_update_comments_from_salesforce_case", u"salesforce_update_contact_details_in_soar", u"salesforce_update_owner_details_in_soar", u"salesforce_write_owner_details_to_note"]
+        "playbooks": [
+            u"salesforce_add_comment_to_salesforce_case",
+            u"salesforce_close_case",
+            u"salesforce_create_salesforce_case",
+            u"salesforce_create_salesforce_case_from_this_soar_case",
+            u"salesforce_get_account",
+            u"salesforce_get_attachments_from_salesforce_case",
+            u"salesforce_get_contact",
+            u"salesforce_post_artifact_file_to_salesforce_case",
+            u"salesforce_post_attachment_to_salesforce_case",
+            u"salesforce_send_note_to_salesforce_case",
+            u"salesforce_send_task_to_salesforce_case",
+            u"salesforce_sync_tasks_between_soar_and_salesforce",
+            u"salesforce_update_account_details_in_soar",
+            u"salesforce_update_case",
+            u"salesforce_update_case_status_manual",
+            u"salesforce_update_comments_from_salesforce_case",
+            u"salesforce_update_contact_details_in_soar",
+            u"salesforce_update_owner_details_in_soar",
+            u"salesforce_write_owner_details_to_note"
+        ]
     }
 
 
