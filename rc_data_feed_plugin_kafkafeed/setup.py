@@ -17,7 +17,12 @@ setup(
     The updates are performed in near real-time.
     This plugin allows this replica data to be maintained in Kafka.
     Refer to the documentation on the Data Feed extension for uses cases support and configuration options.
-    Also refer to the other Data Feed plugins which can be used in combination.""",
+    Also refer to the other Data Feed plugins which can be used in combination.
+
+    <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+    <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
+    <ul><a target='blank' href='https://github.com/ibmresilient/resilient-community-apps/blob/main/rc_data_feed_plugin_kafkafeed/README.md'>App Documentation</a></ul>
+    """,
     install_requires=[
         'rc_data_feed',
         'resilient',
