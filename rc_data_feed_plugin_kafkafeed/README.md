@@ -8,6 +8,7 @@ Refer to the documentation on the Data Feed extension for uses cases, support an
 # History
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.0   | 01/2024 | Updated base rc_data_feed to 3.0.0 and added selftest capabilities |
 | 1.0.1   | 08/2020 | App Host support |
 | 1.0.0   | 12/2019 | Initial release |
 
