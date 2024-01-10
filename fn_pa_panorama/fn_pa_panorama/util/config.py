@@ -8,7 +8,7 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    return u"""
+    return """
 # V1.2.0+ have the option to have multiple servers configured.
 # By default two examples of servers are given, example one is labeled `panorama_label1` and example two is labeled `panorama_label2`.
 # The label for a server is placed after `[fn_pa_panorama:` and then followed by `]`.

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # Generated with resilient-sdk v51.0.0.1.486
 
 """Generate the SOAR customizations required for fn_pa_panorama"""
@@ -45,6 +45,7 @@ def codegen_reload_data():
             u"example_panorama_block_dns_name",
             u"example_panorama_block_ip_address",
             u"example_panorama_block_user",
+            u"example_panorama_get_address_groups",
             u"example_panorama_unblock_dns_name",
             u"example_panorama_unblock_ip_address",
             u"example_panorama_unblock_user"
@@ -73,6 +74,7 @@ def customization_data(client=None):
         - example_panorama_block_dns_name
         - example_panorama_block_ip_address
         - example_panorama_block_user
+        - example_panorama_get_address_groups
         - example_panorama_unblock_dns_name
         - example_panorama_unblock_ip_address
         - example_panorama_unblock_user

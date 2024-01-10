@@ -42,6 +42,8 @@ class FunctionComponent(AppFunctionComponent):
         # Initialize variables
         noUsers = False
         results = {}
+        reason = ""
+        success = True
 
         try:
             # Get the users in a group in xml format
@@ -50,9 +52,10 @@ class FunctionComponent(AppFunctionComponent):
             yield self.status_message("No users returned.") # No users returned
             noUsers = True
         except Exception as err:
-            yield FunctionResult({}, success=False, reason=err)
+            success = False
+            reason = err
 
-        if noUsers:
+        if not noUsers and success:
             # Create results dictionary from the above results
             results = parse(xml_response)
 
@@ -68,4 +71,4 @@ class FunctionComponent(AppFunctionComponent):
             results["xml_response"] = xml_response
 
         # Produce a FunctionResult with the results
-        yield FunctionResult(results)
+        yield FunctionResult(results, success=success, reason=reason)

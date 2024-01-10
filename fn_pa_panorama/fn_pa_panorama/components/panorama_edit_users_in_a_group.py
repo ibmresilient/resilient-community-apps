@@ -5,7 +5,7 @@
 
 from xmltodict import parse
 from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME, get_server_settings
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import validate_fields
 
 FN_NAME = "panorama_edit_users_in_a_group"

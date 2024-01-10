@@ -34,13 +34,19 @@ class FunctionComponent(AppFunctionComponent):
                                        self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
                                        getattr(fn_inputs, "panorama_vsys", None))
 
-        try:
-            response = panorama_util.get_addresses()
-        except Exception as err:
-            yield FunctionResult({}, success=False, reason=err)
+        # Initialize variables
+        results = {}
+        success = True
+        reason = ""
 
-        yield self.status_message(f"{response.get('result', {}).get('@count')} addresses returned.")
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+        try:
+            results = panorama_util.get_addresses()
+        except Exception as err:
+            success = False
+            reason = err
 
         # Produce a FunctionResult with the results
-        yield FunctionResult(response)
+        yield FunctionResult(results, success=success, reason=reason)
+
+        yield self.status_message(f"{results.get('result', {}).get('@count')} addresses returned.")
+        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")

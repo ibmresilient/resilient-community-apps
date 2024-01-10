@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1704901127856,
+  "export_date": 1704902054970,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -651,13 +651,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 83,
+  "id": 84,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1704901126482,
+      "create_date": 1704902053644,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -666,7 +666,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1704901126482,
+      "update_date": 1704902053644,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1125,6 +1125,143 @@
       "type": "default",
       "uuid": "7bc7deb6-d0e0-434b-b25d-aaed1532ea9f",
       "version": 17
+    },
+    {
+      "activation_type": "manual",
+      "content": {
+        "content_version": 8,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_71e6da2e_4ed7_41b7_a185_e12b6a8b5532\" isExecutable=\"true\" name=\"playbook_71e6da2e_4ed7_41b7_a185_e12b6a8b5532\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0z59qd2\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Panorama Get Address Groups\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4b233153-426e-456d-83cd-c133c6e05429\"\u003e{\"inputs\":{\"e9aa03fe-166f-4ebc-b783-0bfa367a963b\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"c9f1bf5e-1c78-440a-bbe2-a373610200cf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"fb0e735b-6a43-461a-87a2-893edc92d24f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"d3a29851-1be8-4c24-ad15-34e247fdbf9d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"inputs.panorama_label = getattr(playbook.inputs, \\\"panorama_label\\\", None)\\ninputs.panorama_location = \\\"vsys\\\"\\ninputs.panorama_vsys = \\\"vsys1\\\"\\ninputs.panorama_name_parameter = \\\"Blocked Group\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"address_groups\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0z59qd2\u003c/incoming\u003e\u003coutgoing\u003eFlow_07y3vq7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0z59qd2\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"post process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ab4fbb5c-f777-4434-973f-1f24bab618f6\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07y3vq7\u003c/incoming\u003e\u003coutgoing\u003eFlow_0q4h7z3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_07y3vq7\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0q4h7z3\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0q4h7z3\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_71e6da2e_4ed7_41b7_a185_e12b6a8b5532\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0q4h7z3\" id=\"Flow_0q4h7z3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07y3vq7\" id=\"Flow_07y3vq7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0z59qd2\" id=\"Flow_0z59qd2_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+      },
+      "create_date": 1699623450996,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 35,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_71e6da2e_4ed7_41b7_a185_e12b6a8b5532",
+      "description": {
+        "content": "Get address groups on the Panorama server",
+        "format": "text"
+      },
+      "display_name": "Example: Panorama Get Address Groups (PB)",
+      "export_key": "example_panorama_get_address_groups",
+      "field_type_handle": "playbook_71e6da2e_4ed7_41b7_a185_e12b6a8b5532",
+      "fields_type": {
+        "actions": [],
+        "display_name": "Example: Panorama Get Address Groups (PB)",
+        "export_key": "playbook_71e6da2e_4ed7_41b7_a185_e12b6a8b5532",
+        "fields": {
+          "panorama_label": {
+            "allow_default_value": false,
+            "blank_option": false,
+            "calculated": false,
+            "changeable": true,
+            "chosen": false,
+            "default_chosen_by_server": false,
+            "deprecated": false,
+            "export_key": "playbook_71e6da2e_4ed7_41b7_a185_e12b6a8b5532/panorama_label",
+            "hide_notification": false,
+            "id": 4697,
+            "input_type": "text",
+            "internal": false,
+            "is_tracked": false,
+            "name": "panorama_label",
+            "operation_perms": {},
+            "operations": [],
+            "placeholder": "",
+            "prefix": null,
+            "read_only": false,
+            "rich_text": false,
+            "tags": [],
+            "templates": [],
+            "text": "panorama_label",
+            "tooltip": "Label given to the server to use",
+            "type_id": 1042,
+            "uuid": "bafa45c4-232c-4810-8ab7-3a1e97cbd460",
+            "values": []
+          }
+        },
+        "for_actions": false,
+        "for_custom_fields": false,
+        "for_notifications": false,
+        "for_workflows": false,
+        "id": null,
+        "parent_types": [
+          "__playbook"
+        ],
+        "properties": {
+          "can_create": false,
+          "can_destroy": false,
+          "for_who": []
+        },
+        "scripts": [],
+        "tags": [],
+        "type_id": 28,
+        "type_name": "playbook_71e6da2e_4ed7_41b7_a185_e12b6a8b5532",
+        "uuid": "eb16b0ac-8581-4020-bc3b-92e8e2831454"
+      },
+      "has_logical_errors": false,
+      "id": 37,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 35,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1704824074796,
+      "local_scripts": [
+        {
+          "actions": [],
+          "created_date": 1699623639800,
+          "description": "",
+          "enabled": false,
+          "export_key": "post process",
+          "id": 50,
+          "language": "python3",
+          "last_modified_by": "a@example.com",
+          "last_modified_time": 1704824073235,
+          "name": "post process",
+          "object_type": "incident",
+          "playbook_handle": "example_panorama_get_address_groups",
+          "programmatic_name": "example_panorama_get_address_groups_post_process",
+          "script_text": "from json import dumps\nresults = playbook.functions.results.address_groups\n\nif results.get(\"success\"):\n  incident.addNote(dumps(results.get(\"content\", {}), indent=4))\nelse:\n  incident.addNote(f\"Get address groups failed with reason: {results.get(\u0027reason\u0027)}\")",
+          "tags": [],
+          "uuid": "ab4fbb5c-f777-4434-973f-1f24bab618f6"
+        }
+      ],
+      "manual_settings": {
+        "activation_conditions": {
+          "conditions": [],
+          "logic_type": "all"
+        },
+        "view_items": [
+          {
+            "content": "bafa45c4-232c-4810-8ab7-3a1e97cbd460",
+            "element": "field_uuid",
+            "field_type": "playbook_71e6da2e_4ed7_41b7_a185_e12b6a8b5532",
+            "show_if": null,
+            "show_link_header": false,
+            "step_label": null
+          }
+        ]
+      },
+      "name": "example_panorama_get_address_groups",
+      "object_type": "incident",
+      "status": "enabled",
+      "tag": {
+        "display_name": "Playbook_71e6da2e-4ed7-41b7-a185-e12b6a8b5532",
+        "id": 37,
+        "name": "playbook_71e6da2e_4ed7_41b7_a185_e12b6a8b5532",
+        "type": "playbook",
+        "uuid": "5feb36d3-7a54-4a1c-a300-e6b0bd6cb675"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "71e6da2e-4ed7-41b7-a185-e12b6a8b5532",
+      "version": 12
     },
     {
       "activation_type": "manual",
