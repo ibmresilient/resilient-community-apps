@@ -1,5 +1,6 @@
 # fn_pa_panorama
 
+
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -28,7 +29,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.3.0 | 04/2023 | Convert from rules/workflows to playbooks and update Panorama api version to 9.1 |
+| 1.3.0 | 04/2023 | Convert from rules/workflows to playbooks and update Panorama api version to v9.1 |
 | 1.2.0 | 10/2022 | Multi-tenancy support added |
 | 1.1.0 | 04/2021 | Support for different API versions. See app.config `api_version` setting |
 | 1.0.1 | 07/2019 | App Host support |
@@ -45,13 +46,8 @@ If upgrading from a previous release, you'll noticed that the previous release's
 
 You can continue to use the rules/workflows. But migrating to playbooks will provide greater functionality along with future app enhancements and bug fixes.
 
----
-
 ## Overview
-<!--
-  Provide a high-level description of the function itself and its remote software or application.
-  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
--->
+
 **SOAR Components to Integrate with the Panorama Platform**
 
  ![screenshot: main](./doc/screenshots/main.png)
@@ -70,9 +66,9 @@ This integration contains Functions to interact with address groups, addresses, 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
-If deploying to a SOAR platform with an Edge Gateway, the requirements are:
+If deploying to a SOAR platform with an App Host, the requirements are:
 * SOAR platform >= `48.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -95,7 +91,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.8`.
+* IBM Cloud Pak for Security >= `1.10.15`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -202,7 +198,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -210,22 +206,22 @@ inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
 inputs.panorama_name_parameter = artifact.value
 
-body = '''{{
-  "entry": {{
-    "@name": "{}",
-    "description": "{}",
-    "fqdn": "{}"
-  }}
-}}'''.format(artifact.value, artifact.value, artifact.value)
+body = f'''{{
+"entry": {{
+  "@name": "{artifact.value}",
+  "description": "{artifact.value}",
+  "fqdn": "{artifact.value}"
+}}
+}}'''
 
 inputs.panorama_request_body = body
-inputs.panorama_label = playbook.inputs.panorama_label
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -292,7 +288,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -308,55 +304,48 @@ inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
 
 dns_name = ""
-group = playbook.functions.results.groups_results.get("content", {}).get("result", {}).get("entry", [])[0]
-
-# If new address was created
-if playbook.functions.results.create_address_results:
-  dns_name = artifact.value
-# Else find it in the list of addresses
-else:
-  addresses = playbook.functions.results.addresses_results.get("content", {}).get("result", {}).get("entry")
-  for address in addresses:
-    if address.get("fqdn") == artifact.value:
-      dns_name = address.get("@name")
-      break
+group = playbook.functions.results.get_groups_results.get("content", {}).get("result", {}).get("entry", [])[0]
+addresses = playbook.functions.results.get_addresses_results.get("content", {}).get("result", {}).get("entry", [])
+for address in addresses:
+  if address.get("fqdn") == artifact.value:
+    dns_name = address.get("@name")
+    break
 
 group_name = group.get("@name")
 des = group.get("description")
+member_list = group.get("static", {}).get("member")
 
-if group.get("static", {}).get("member"):
-  member_list = group.get("static", {}).get("member", [])
-else:
-  member_list = []
-if dns_name not in member_list:
-  member_list.append(dns_name)
+# Remove IP address from list
+member_list.remove(dns_name)
 
 inputs.panorama_name_parameter = group_name
 
-body = '''{{
+body = f'''{{
   "entry": {{
-    "@name": "{}",
-    "description": "{}",
+    "@name": "{group_name}",
+    "description": "{des}",
     "static": {{
-      "member": {}
+      "member": {list_to_json_str(member_list)}
     }}
   }}
-}}'''.format(group_name, des, list_to_json_str(member_list))
+}}'''
 
 inputs.panorama_request_body = body
-inputs.panorama_label = playbook.inputs.panorama_label
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
-results = playbook.functions.results.edit_group_results
+results = playbook.functions.results.edit_addresses_results
 if results.get("success"):
-  incident.addNote("DNS name: {} was blocked.".format(artifact.value))
+  incident.addNote(f"DNS name: {artifact.value} was unblocked.")
+else:
+  incident.addNote(f"Unblock DNS failed with reason: {results.get('reason')}")
 ```
 
 </p>
@@ -420,7 +409,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -429,7 +418,7 @@ inputs.panorama_location = "vsys"
 group_name = "Blocked_Users"
 
 # Set this to the xpath of the group you are interested in
-inputs.panorama_user_group_xpath = "/config/shared/local-user-database/user-group/entry[@name='{}']".format(group_name)
+inputs.panorama_user_group_xpath = f"/config/shared/local-user-database/user-group/entry[@name='{group_name}']"
 
 users_list = playbook.functions.results.get_users_results.get("content", {}).get("user_list", [])
 
@@ -441,42 +430,50 @@ if len(users_list) == 1:
 elif len(users_list) > 1:
   # multiple users returned
   for user in users_list:
-    blocked_users.append(user.get("#text"))
+    blocked_users.append(str(user.get("#text")))
 
-# Add the user to the blocked list if they are not already there
-if artifact.value not in blocked_users:
-  blocked_users.append(artifact.value)
+# Remove the user from the blocked list if they are there
+if artifact.value in blocked_users:
+  blocked_users.remove(artifact.value)
 
-# Build xml which the function will send to Panorama
-panorama_xml = u'''
-<entry name="{}">
-    <user>'''.format(str(group_name))
+panorama_xml = ""
+# Set xml to empty users if list is empty
+if len(users_list) == 0:
+  panorama_xml = f'<entry name="{group_name}"/>'
 
-# Add member nodes with the username to the xml string
-for user in blocked_users:
-  panorama_xml += u"\n      <member>" + user + "</member>"
+# Multiple members, build xml which the function will send to Panorama
+else:
+  panorama_xml = f'''
+  <entry name="{group_name}">
+      <user>'''
 
-# Add the ending of the xml to the string
-xml_ending = """
-    </user>
-</entry>
-"""
-panorama_xml += xml_ending
+  # Add member nodes with the username to the xml string
+  for user in blocked_users:
+    panorama_xml += f"\n      <member>{user}</member>"
+
+  # Add the ending of the xml to the string
+  xml_ending = """
+      </user>
+  </entry>
+  """
+  panorama_xml += xml_ending
 
 inputs.panorama_user_group_xml = panorama_xml
-inputs.panorama_label = playbook.inputs.panorama_label
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
 results = playbook.functions.results.edit_users_results
 if results.get("success"):
-  incident.addNote("User account: {} was blocked.".format(artifact.value))
+  incident.addNote(f"User account: {artifact.value} was unblocked.")
+else:
+  incident.addNote(f"Unblock User failed with reason: {results.get('reason')}")
 ```
 
 </p>
@@ -557,24 +554,30 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
 inputs.panorama_name_parameter = "Blocked Group"
-inputs.panorama_label = playbook.inputs.panorama_label
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
-None
+from json import dumps
+results = playbook.functions.results.address_groups
+
+if results.get("success"):
+  incident.addNote(dumps(results.get("content", {}), indent=4))
+else:
+  incident.addNote(f"Get address groups failed with reason: {results.get('reason')}")
 ```
 
 </p>
@@ -739,19 +742,19 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
-inputs.panorama_label = playbook.inputs.panorama_label
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -871,20 +874,20 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
 # Set this to the xpath of the group you are interested in
 inputs.panorama_user_group_xpath = "/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']"
-inputs.panorama_label = playbook.inputs.panorama_label
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 inputs.panorama_location = "vsys"
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -898,14 +901,15 @@ None
 
 
 ## Playbooks
-| Playbook Name | Description | Object | Status |
-| ------------- | ----------- | ------ | ------ |
-| Example: Panorama Block DNS Name | Given a DNS Name artifact, adds the DNS Name to the "Blocked Group" in Panorama. | artifact | `enabled` |
-| Example: Panorama Block IP Address | Given an IP Address artifact, adds the IP Address to the "Blocked Group" in Panorama. | artifact | `enabled` |
-| Example: Panorama Block User | Given a User Account artifact, adds the user to the "Blocked_Users" group in Panorama. | artifact | `enabled` |
-| Example: Panorama Unblock DNS Name | Given a DNS Name artifact, removes the DNS Name from the "Blocked Group" in Panorama. | artifact | `enabled` |
-| Example: Panorama Unblock IP Address | Given an IP Address artifact, removes the IP Address from the "Blocked Group" in Panorama. | artifact | `enabled` |
-| Example: Panorama Unblock User | Given a User Account artifact, removes the user from the "Blocked_Users" group in Panorama. | artifact | `enabled` |
+| Playbook Name | Description | Activation Type | Object | Status | Condition | 
+| ------------- | ----------- | --------------- | ------ | ------ | --------- | 
+| Example: Panorama Block DNS Name (PB) | Given a DNS Name artifact, adds the DNS Name to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` | 
+| Example: Panorama Block IP Address (PB) | Given an IP Address artifact, adds the IP Address to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
+| Example: Panorama Block User (PB) | Given a User Account artifact, adds the user to the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` | 
+| Example: Panorama Get Address Groups (PB) | Get address groups on the Panorama server | Manual | incident | `enabled` | `-` | 
+| Example: Panorama Unblock DNS Name (PB) | Given a DNS Name artifact, removes the DNS Name from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` | 
+| Example: Panorama Unblock IP Address (PB) | Given an IP Address artifact, removes the IP Address from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
+| Example: Panorama Unblock User (PB) | Given a User Account artifact, removes the user from the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` | 
 
 ---
 
@@ -952,6 +956,6 @@ The activation field `panorama_label` is a text field in which the user enters t
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
-
+ 
 ### For Support
-This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+This is a IBM Community provided app. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
