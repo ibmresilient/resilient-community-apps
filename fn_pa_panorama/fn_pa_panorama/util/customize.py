@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v50.1.262
+# Generated with resilient-sdk v51.0.0.1.486
 
-"""Generate the Resilient customizations required for fn_pa_panorama"""
+"""Generate the SOAR customizations required for fn_pa_panorama"""
 
 import base64
 import os

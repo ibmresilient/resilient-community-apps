@@ -39,13 +39,18 @@ class FunctionComponent(AppFunctionComponent):
                                        self.get_select_param(fn_inputs.panorama_location),
                                        getattr(fn_inputs, "panorama_vsys", None))
 
+        response = {}
+        reason = ""
+        success = True
+
         try:
             response = panorama_util.get_address_groups(fn_inputs.panorama_name_parameter)
         except Exception as err:
-            yield FunctionResult({}, success=False, reason=err)
+            reason = str(err)
+            success = False
+
+        # Produce a FunctionResult with the results
+        yield FunctionResult(response, success=success, reason=reason)
 
         yield self.status_message(f"{response.get('result', {}).get('@count')} groups returned.")
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
-
-        # Produce a FunctionResult with the results
-        yield FunctionResult(response)

@@ -39,27 +39,33 @@ class FunctionComponent(AppFunctionComponent):
                                        self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
                                        None)
 
+        # Initialize variables
+        noUsers = False
+        results = {}
+
         try:
             # Get the users in a group in xml format
             xml_response = panorama_util.get_users_in_a_group(fn_inputs.panorama_user_group_xpath)
         except KeyError:
             yield self.status_message("No users returned.") # No users returned
+            noUsers = True
         except Exception as err:
             yield FunctionResult({}, success=False, reason=err)
 
-        # Create results dictionary from the above results
-        results = parse(xml_response)
+        if noUsers:
+            # Create results dictionary from the above results
+            results = parse(xml_response)
 
-        members = results.get("response", {}).get("result", {}).get("entry", {}).get("user", {}).get("member")
-        # Create a list of the returned users
-        user_list = [m for m in members] if isinstance(members, list) else [members.get("#text")]
+            members = results.get("response", {}).get("result", {}).get("entry", {}).get("user", {}).get("member")
+            # Create a list of the returned users
+            user_list = [m for m in members] if isinstance(members, list) else [members.get("#text")]
 
-        yield self.status_message(f"{len(user_list)} users returned.")
+            yield self.status_message(f"{len(user_list)} users returned.")
 
-        # Add list of users received from the get_users_in_a_group call to the results dict
-        results["user_list"] = user_list
-        # Add get_users_in_a_group response to the results dict in xml format
-        results["xml_response"] = xml_response
+            # Add list of users received from the get_users_in_a_group call to the results dict
+            results["user_list"] = user_list
+            # Add get_users_in_a_group response to the results dict in xml format
+            results["xml_response"] = xml_response
 
         # Produce a FunctionResult with the results
         yield FunctionResult(results)

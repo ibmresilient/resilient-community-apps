@@ -42,26 +42,30 @@ class FunctionComponent(AppFunctionComponent):
                                        get_server_settings(self.opts, getattr(fn_inputs, "panorama_label", None)),
                                        self.get_select_param(getattr(fn_inputs, "panorama_location", None)),
                                        None)
+        # Initialize variables
+        results = {}
+        success = True
+        reason = ""
 
         try:
             xml_response = panorama_util.edit_users_in_a_group(fn_inputs.panorama_user_group_xpath,
                            self.get_textarea_param(fn_inputs.panorama_user_group_xml))
-            dict_response = parse(xml_response)
+            results = parse(xml_response)
         except KeyError as e:
             yield self.status_message("Editing the user group was unsuccessful.")
-            # Produce a FunctionResult with the results
-            yield FunctionResult({}, success=False, reason=e)
+            success = False
+            reason = e
 
-        if dict_response["response"].get("@code") == PASS_CONSTANT:
+        if success and results["response"].get("@code") == PASS_CONSTANT:
             yield self.status_message("User group was successfully edited.")
+            if xml_response:
+                # Add to dict_response to allow for more options in SOAR scripting and make some actions easier
+                results["xml_response"] = xml_response
         else:
-            # Produce a FunctionResult with the results
-            yield FunctionResult({}, success=False, reason=f"Editing the user group was unsuccessful with code {dict_response['response'].get('@code')}, raising FunctionError.")
-
-        # Add to dict_response to allow for more options in SOAR scripting and make some actions easier
-        dict_response["xml_response"] = xml_response
+            success = False
+            reason = f"Editing the user group was unsuccessful with code {results['response'].get('@code')}, raising FunctionError."
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
         # Produce a FunctionResult with the results
-        yield FunctionResult(dict_response)
+        yield FunctionResult(results, success=success, reason=reason)
