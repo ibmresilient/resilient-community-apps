@@ -132,7 +132,7 @@ fn_zia
 #Data_Feeder
 rc_data_feed
 rc_data_feed_plugin_elasticfeed
-#rc-data-feed-plugin-kafkafeed
+rc_data_feed_plugin_kafkafeed
 rc_data_feed_plugin_odbcfeed
 #rc-data-feed-plugin-resilientfeed
 rc_data_feed_plugin_splunkfeed

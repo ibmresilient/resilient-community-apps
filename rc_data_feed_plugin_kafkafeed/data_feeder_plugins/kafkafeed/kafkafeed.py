@@ -6,9 +6,13 @@
 This module contains the KafkaFeedDestination for writing Resilient data
 to a Kafka Topic.
 """
+
+import base64
 import json
 import logging
+
 from confluent_kafka import Producer
+
 from rc_data_feed.lib.feed import FeedDestinationBase
 from rc_data_feed.lib.type_info import TypeInfo
 
@@ -23,13 +27,14 @@ class KafkaFeedDestination(FeedDestinationBase):
         self.all_options = options.copy()
 
         ## Get the mapping of topics
-        topic_map = self.all_options['topic_map']
+        topic_map = self.all_options["topic_map"]
         self.topic_dict = dict(item.split('=') for item in topic_map.replace(' ', '').split(';'))
         LOG.debug("Topic Map is: %s", self.topic_dict)
 
         ## Tidy up to remove our options vs kafkas options
-        self.all_options.pop('class')
-        self.all_options.pop('topic_map')
+        self.all_options.pop("class")
+        self.all_options.pop("topic_map")
+        self.all_options.pop("selftest_timeout", None)
 
         # create the producer - this will be a long persistence object
         self.p = Producer(**self.all_options)
@@ -45,6 +50,10 @@ class KafkaFeedDestination(FeedDestinationBase):
 
         name = context.type_info.get_pretty_type_name()
 
+        # overwrite the default blob translator in rc_data_feed.TypeInfo.translate_value_blob
+        # to convert the input value to base64 encoded value (must decode the value to ascii too since
+        # it is a bytes value)
+        TypeInfo.translate_value_blob = lambda _,__,value: base64.b64encode(value).decode("ascii")
         kafka_message = context.type_info.flatten(payload, TypeInfo.translate_value)
 
         # add the incident_id and object id to all payloads, if needed
