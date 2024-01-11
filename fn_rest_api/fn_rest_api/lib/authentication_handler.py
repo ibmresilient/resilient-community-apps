@@ -781,8 +781,7 @@ class JWTHandler:
         -------
             <bool> : True if JWT authentication ready, False if not.
         """
-        LOG.info("Checking to see if a valid JWT token was provided \
-            or appropriate JWT attributes required for token generation is provided")
+        LOG.info("Checking to see if a valid JWT token was provided or appropriate JWT attributes required for token generation is provided")
         if self._jwt_properties.get(JWT_TOKEN) or self._jwt_properties.get(JWT_KEY):
             return True
         return False
