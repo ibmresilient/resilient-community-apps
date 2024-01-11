@@ -77,6 +77,7 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 09/2023 | Initial Release |
+| 1.0.1 | 01/2024 | Text Correction |
 
 ---
 
@@ -544,7 +545,7 @@ if results.success:
   if salesforce_case.get("entity_url", None):
     note_text = note_text + "   <a target='_blank' href='{0}'>Link</a>".format(salesforce_case.get("entity_url"))
 else:
-  note_text = "<b>Salesforce: Create Case in Saleforce</b> failed:<br>{}".format(salesforce_case.get("error", None))
+  note_text = "<b>Salesforce: Create Case in Salesforce</b> failed:<br>{}".format(salesforce_case.get("error", None))
   
 incident.addNote(note_text)
 ```
