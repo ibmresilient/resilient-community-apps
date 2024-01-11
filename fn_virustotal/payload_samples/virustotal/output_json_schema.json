@@ -1,0 +1,1840 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "scan": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "last_dns_records": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "ttl": {
+                        "type": "integer"
+                      },
+                      "priority": {
+                        "type": "integer"
+                      },
+                      "rname": {
+                        "type": "string"
+                      },
+                      "retry": {
+                        "type": "integer"
+                      },
+                      "refresh": {
+                        "type": "integer"
+                      },
+                      "minimum": {
+                        "type": "integer"
+                      },
+                      "expire": {
+                        "type": "integer"
+                      },
+                      "serial": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "jarm": {
+                  "type": "string"
+                },
+                "whois": {
+                  "type": "string"
+                },
+                "last_https_certificate_date": {
+                  "type": "integer"
+                },
+                "tags": {
+                  "type": "array"
+                },
+                "popularity_ranks": {
+                  "type": "object",
+                  "properties": {
+                    "Majestic": {
+                      "type": "object",
+                      "properties": {
+                        "timestamp": {
+                          "type": "integer"
+                        },
+                        "rank": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "Statvoo": {
+                      "type": "object",
+                      "properties": {
+                        "timestamp": {
+                          "type": "integer"
+                        },
+                        "rank": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "Alexa": {
+                      "type": "object",
+                      "properties": {
+                        "timestamp": {
+                          "type": "integer"
+                        },
+                        "rank": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "Cisco Umbrella": {
+                      "type": "object",
+                      "properties": {
+                        "timestamp": {
+                          "type": "integer"
+                        },
+                        "rank": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "last_analysis_date": {
+                  "type": "integer"
+                },
+                "last_dns_records_date": {
+                  "type": "integer"
+                },
+                "last_analysis_stats": {
+                  "type": "object",
+                  "properties": {
+                    "harmless": {
+                      "type": "integer"
+                    },
+                    "malicious": {
+                      "type": "integer"
+                    },
+                    "suspicious": {
+                      "type": "integer"
+                    },
+                    "undetected": {
+                      "type": "integer"
+                    },
+                    "timeout": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "creation_date": {
+                  "type": "integer"
+                },
+                "whois_date": {
+                  "type": "integer"
+                },
+                "reputation": {
+                  "type": "integer"
+                },
+                "registrar": {
+                  "type": "string"
+                },
+                "last_analysis_results": {
+                  "type": "object",
+                  "properties": {
+                    "Bkav": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "CMC Threat Intelligence": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Snort IP sample list": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "0xSI_f33d": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "ViriBack": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "PhishLabs": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "K7AntiVirus": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "CINS Army": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Quttera": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "PrecisionSec": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "OpenPhish": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "VX Vault": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "ArcSight Threat Intelligence": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Scantitan": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "AlienVault": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Sophos": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Phishtank": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Cyan": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Spam404": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "SecureBrain": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "CRDF": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Fortinet": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "alphaMountain.ai": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Lionic": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Cyble": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Seclookup": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Xcitium Verdict Cloud": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Google Safebrowsing": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "SafeToOpen": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "ADMINUSLabs": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "ESTsecurity": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Juniper Networks": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Heimdal Security": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "AutoShun": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Trustwave": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "AICC (MONITORAPP)": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "CyRadar": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Dr.Web": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Emsisoft": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Abusix": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Webroot": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Avira": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "securolytics": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Antiy-AVL": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "AlphaSOC": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Acronis": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Quick Heal": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "URLQuery": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Viettel Threat Intelligence": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "DNS8": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "benkow.cc": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "EmergingThreats": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Chong Lua Dao": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Yandex Safebrowsing": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Lumu": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "zvelo": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Kaspersky": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Segasec": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Sucuri SiteCheck": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "desenmascara.me": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "CrowdSec": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Cluster25": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "URLhaus": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "PREBYTES": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "StopForumSpam": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Blueliv": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Netcraft": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "ZeroCERT": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Phishing Database": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "MalwarePatrol": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "IPsum": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Malwared": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "BitDefender": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "GreenSnow": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "G-Data": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "VIPRE": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "SCUMWARE.org": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "PhishFort": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "malwares.com URL checker": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Forcepoint ThreatSeeker": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Criminal IP": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Certego": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "ESET": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Threatsourcing": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "ThreatHive": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "Bfore.Ai PreCrime": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "method": {
+                          "type": "string"
+                        },
+                        "engine_name": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "last_update_date": {
+                  "type": "integer"
+                },
+                "last_modification_date": {
+                  "type": "integer"
+                },
+                "tld": {
+                  "type": "string"
+                },
+                "last_https_certificate": {
+                  "type": "object",
+                  "properties": {
+                    "size": {
+                      "type": "integer"
+                    },
+                    "public_key": {
+                      "type": "object",
+                      "properties": {
+                        "rsa": {
+                          "type": "object",
+                          "properties": {
+                            "key_size": {
+                              "type": "integer"
+                            },
+                            "modulus": {
+                              "type": "string"
+                            },
+                            "exponent": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "algorithm": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "thumbprint_sha256": {
+                      "type": "string"
+                    },
+                    "cert_signature": {
+                      "type": "object",
+                      "properties": {
+                        "signature": {
+                          "type": "string"
+                        },
+                        "signature_algorithm": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "validity": {
+                      "type": "object",
+                      "properties": {
+                        "not_after": {
+                          "type": "string"
+                        },
+                        "not_before": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "extensions": {
+                      "type": "object",
+                      "properties": {
+                        "certificate_policies": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "extended_key_usage": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "authority_key_identifier": {
+                          "type": "object",
+                          "properties": {
+                            "keyid": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "subject_alternative_name": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "subject_key_identifier": {
+                          "type": "string"
+                        },
+                        "crl_distribution_points": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "key_usage": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "1.3.6.1.4.1.11129.2.4.2": {
+                          "type": "string"
+                        },
+                        "CA": {
+                          "type": "boolean"
+                        },
+                        "ca_information_access": {
+                          "type": "object",
+                          "properties": {
+                            "CA Issuers": {
+                              "type": "string"
+                            },
+                            "OCSP": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "thumbprint": {
+                      "type": "string"
+                    },
+                    "serial_number": {
+                      "type": "string"
+                    },
+                    "issuer": {
+                      "type": "object",
+                      "properties": {
+                        "C": {
+                          "type": "string"
+                        },
+                        "CN": {
+                          "type": "string"
+                        },
+                        "O": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "subject": {
+                      "type": "object",
+                      "properties": {
+                        "C": {
+                          "type": "string"
+                        },
+                        "L": {
+                          "type": "string"
+                        },
+                        "CN": {
+                          "type": "string"
+                        },
+                        "O": {
+                          "type": "string"
+                        },
+                        "ST": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "categories": {
+                  "type": "object",
+                  "properties": {
+                    "Forcepoint ThreatSeeker": {
+                      "type": "string"
+                    },
+                    "Sophos": {
+                      "type": "string"
+                    },
+                    "Xcitium Verdict Cloud": {
+                      "type": "string"
+                    },
+                    "BitDefender": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "total_votes": {
+                  "type": "object",
+                  "properties": {
+                    "harmless": {
+                      "type": "integer"
+                    },
+                    "malicious": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            },
+            "type": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "links": {
+              "type": "object",
+              "properties": {
+                "self": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "code": {
+      "type": "string"
+    }
+  }
+}
