@@ -156,16 +156,6 @@ List any steps that are needed to configure the endpoint to use this app.
 * To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
-### App Configuration
-The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
-
-| Config | Required | Example | Description |
-| ------ | :------: | ------- | ----------- |
-
-
-
- ---
-
 ## Function - MITRE Get Groups Using All Given Techniques
 For given Techniques, return the Groups that are known to use all of them.
 Techniques can be specified with a comma separated strings of IDs or Names.
