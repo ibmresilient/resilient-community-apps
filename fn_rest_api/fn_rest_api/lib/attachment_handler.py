@@ -217,7 +217,7 @@ class AttachmentHandler:
 
             # Checking header for appropriate content-type
             _file_content_type = files[1][2]
-            _headers = rest_properties.get("headers", {})
+            _headers = rest_properties.get("headers") if rest_properties.get("headers") else {}
 
             _found_header = False
             for each_header in _headers:
@@ -230,8 +230,10 @@ class AttachmentHandler:
                         LOG.warning(f"File content-type {_file_content_type} does not match with user provided content-type {_headers[each_header]}")
                         LOG.info("Proceeding with user defined content-type")
             if not _found_header:
-                if "headers" not in rest_properties:
+                if "headers" not in rest_properties or not rest_properties["headers"]:
                     rest_properties["headers"] = {}
+                if "content-type" not in rest_properties["headers"]:
+                    rest_properties["headers"].update({"content-type" : _file_content_type})
                 rest_properties["headers"]["content-type"] = _file_content_type
 
         elif files:
