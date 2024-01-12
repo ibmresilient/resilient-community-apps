@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
-# Generated with resilient-sdk v51.0.0.0.430
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# Generated with resilient-sdk v51.0.0.2.575
 
 """Generate the SOAR customizations required for fn_rest_api"""
 
