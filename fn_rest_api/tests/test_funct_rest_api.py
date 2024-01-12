@@ -76,7 +76,6 @@ class TestInternetUtilitiesCallRestApi:
     def init_caplog_fixture(self, caplog):
         self.caplog = caplog
 
-    @pytest.mark.livetest
     def test_retry_request(self, circuits_app):
         """ Test calling with sample values for the parameters """
         RETRY_TRIES_COUNT   = 4
