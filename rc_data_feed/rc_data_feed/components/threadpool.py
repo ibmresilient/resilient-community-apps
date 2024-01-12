@@ -5,7 +5,7 @@
 """Feed component implementation."""
 
 import logging
-import multiprocessing
+from multiprocessing.pool import ThreadPool
 import traceback
 
 from pydoc import locate
@@ -43,7 +43,7 @@ class PluginPool(object):
             # increase the number of threads for handling event messages
             thread_pool_size = int(self.num_workers*POOL_RATIO) # could be +/- num_workers
             LOG.info(f"PluginPool_Factory size: {thread_pool_size}")
-            self.pool = multiprocessing.Pool(thread_pool_size)
+            self.pool = ThreadPool(thread_pool_size)
         else:
             LOG.info("PluginPool_Factory disabled")
 
@@ -88,7 +88,7 @@ class PluginPool(object):
             namespace = 'data_feeder_plugins.{ns}.{ns}.{claz}Destination'.format(ns=class_name.lower(), claz=class_name)
             LOG.debug(f"{feed_config_name}:{namespace}")
             obj = locate(namespace)
-            
+
             if not obj:
                 LOG.error(f"Unable to find plugin: {namespace}. Check if plugin is installed.")
                 continue
