@@ -4,8 +4,9 @@
 """Function implementation"""
 
 from xmltodict import parse
+from ast import literal_eval
 from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME, get_server_settings
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
 from resilient_lib import validate_fields
 
 FN_NAME = "panorama_edit_users_in_a_group"
@@ -25,14 +26,28 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.panorama_user_group_xml
             -   fn_inputs.panorama_label
             -   fn_inputs.panorama_location
+            -   fn_inputs.panorama_user_group_name
+            -   fn_inputs.panorama_users_list
         """
         # Response code should equal 20 indicating the call went through successfully
         PASS_CONSTANT = "20"
+        xml_body = ""
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
+        if getattr(fn_inputs, "panorama_user_group_name", None) and getattr(fn_inputs, "panorama_users_list", None):
+            # Create xml request body
+            xml_body = f"""<entry name="{str(fn_inputs.panorama_user_group_name)}"><user>"""
+            for user in literal_eval(fn_inputs.panorama_users_list):
+                xml_body += f"<member>{user}</member>"
+            xml_body += "</user></entry>"
+        elif getattr(fn_inputs, "panorama_user_group_xml", None):
+            # User xml created in playbook (Backwards compatible)
+            xml_body = self.get_textarea_param(fn_inputs.panorama_user_group_xml)
+        else:
+            raise FunctionError("Either panorama_user_group_name and panorama_users_list have to be given or panorama_user_group_xml needs to be given as input.")
         # Validate required parameters
-        validate_fields(["panorama_user_group_xpath", "panorama_user_group_xml"], fn_inputs)
+        validate_fields(["panorama_user_group_xpath"], fn_inputs)
 
         # Log inputs
         self.LOG.info(fn_inputs)
@@ -49,7 +64,7 @@ class FunctionComponent(AppFunctionComponent):
 
         try:
             xml_response = panorama_util.edit_users_in_a_group(fn_inputs.panorama_user_group_xpath,
-                           self.get_textarea_param(fn_inputs.panorama_user_group_xml))
+                           xml_body)
             results = parse(xml_response)
         except KeyError as e:
             yield self.status_message("Editing the user group was unsuccessful.")

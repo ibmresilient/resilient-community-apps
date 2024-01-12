@@ -4,7 +4,7 @@
     Generated with resilient-sdk v51.0.0.1.486
 -->
 
-# Playbook - Example: Panorama Block IP Address (PB)
+# Playbook - Panorama: Block IP Address - Example (PB)
 
 ### API Name
 `example_panorama_block_ip_address`
@@ -83,19 +83,20 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 
 ### Function-Input Script
 ```python
+from json import dumps
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
 inputs.panorama_name_parameter = artifact.value
 
-body = f'''{{
-  "entry": {{
-    "@name": "{artifact.value}",
-    "description": "{artifact.value}",
-    "ip-netmask": "{artifact.value}"
-  }}
-}}'''
+body = {
+  "entry": {
+    "@name": artifact.value,
+    "description": artifact.value,
+    "ip-netmask": artifact.value
+  }
+}
 
-inputs.panorama_request_body = body
+inputs.panorama_request_body = dumps(body)
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
@@ -113,19 +114,15 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 
 ### Function-Input Script
 ```python
-def list_to_json_str(l):
-  string_list = "["
-  for item in l:
-    string_list = string_list + '"' + item + '"'
-    if item != l[-1]:
-      string_list = string_list + ", "
-  return string_list + "]"
+from json import dumps
 
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
 
 ip_name = ""
-group = playbook.functions.results.get_groups_results.get("content", {}).get("result", {}).get("entry", [])[0]
+group = playbook.functions.results.get_groups_results.get("content", {}).get("result", {}).get("entry", [])
+if group:
+  group = group[0]
 
 # If new address was created
 if playbook.functions.results.create_address_results:
@@ -147,17 +144,17 @@ if ip_name not in member_list:
 
 inputs.panorama_name_parameter = group_name
 
-body = f'''{{
-  "entry": {{
-    "@name": "{group_name}",
-    "description": "{des}",
-    "static": {{
-      "member": {list_to_json_str(member_list)}
-    }}
-  }}
-}}'''
+body = {
+  "entry": {
+    "@name": group_name,
+    "description": des,
+    "static": {
+      "member": dumps(member_list)
+    }
+  }
+}
 
-inputs.panorama_request_body = body
+inputs.panorama_request_body = dumps(body)
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
@@ -178,9 +175,9 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```python
 results = playbook.functions.results.edit_groups_results
 if results.get("success"):
-  incident.addNote(f"IP Address: {artifact.value} was blocked.")
+  incident.addNote(f"Panorama IP Address: {artifact.value} was blocked.")
 else:
-  incident.addNote(f"Block IP failed with reason: {results.get('reason')}")
+  incident.addNote(f"Panorama Block IP failed with reason: {results.get('reason')}")
 ```
 
 ---

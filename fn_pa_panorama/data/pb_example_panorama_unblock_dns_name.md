@@ -4,7 +4,7 @@
     Generated with resilient-sdk v51.0.0.1.486
 -->
 
-# Playbook - Example: Panorama Unblock DNS Name (PB)
+# Playbook - Panorama: Unblock DNS Name - Example (PB)
 
 ### API Name
 `example_panorama_unblock_dns_name`
@@ -83,13 +83,7 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 
 ### Function-Input Script
 ```python
-def list_to_json_str(l):
-  string_list = "["
-  for item in l:
-    string_list = string_list + '"' + item + '"'
-    if item != l[-1]:
-      string_list = string_list + ", "
-  return string_list + "]"
+from json import dumps
 
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
@@ -111,17 +105,17 @@ member_list.remove(dns_name)
 
 inputs.panorama_name_parameter = group_name
 
-body = f'''{{
-  "entry": {{
-    "@name": "{group_name}",
-    "description": "{des}",
-    "static": {{
-      "member": {list_to_json_str(member_list)}
-    }}
-  }}
-}}'''
+body = {
+  "entry": {
+    "@name": group_name,
+    "description": des,
+    "static": {
+      "member": dumps(member_list)
+    }
+  }
+}
 
-inputs.panorama_request_body = body
+inputs.panorama_request_body = dumps(body)
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
@@ -142,9 +136,9 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```python
 results = playbook.functions.results.edit_addresses_results
 if results.get("success"):
-  incident.addNote(f"DNS name: {artifact.value} was unblocked.")
+  incident.addNote(f"Panorama DNS name: {artifact.value} was unblocked.")
 else:
-  incident.addNote(f"Unblock DNS failed with reason: {results.get('reason')}")
+  incident.addNote(f"Panorama Unblock DNS failed with reason: {results.get('reason')}")
 ```
 
 ---

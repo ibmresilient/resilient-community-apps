@@ -5,7 +5,7 @@
 
 from xmltodict import parse
 from fn_pa_panorama.util.panorama_util import PanoramaClient, PACKAGE_NAME, get_server_settings
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
+from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
 from resilient_lib import validate_fields
 
 FN_NAME = "panorama_get_users_in_a_group"
@@ -40,7 +40,6 @@ class FunctionComponent(AppFunctionComponent):
                                        None)
 
         # Initialize variables
-        noUsers = False
         results = {}
         reason = ""
         success = True
@@ -50,16 +49,19 @@ class FunctionComponent(AppFunctionComponent):
             xml_response = panorama_util.get_users_in_a_group(fn_inputs.panorama_user_group_xpath)
         except KeyError:
             yield self.status_message("No users returned.") # No users returned
-            noUsers = True
         except Exception as err:
             success = False
             reason = err
 
-        if not noUsers and success:
+        if success:
             # Create results dictionary from the above results
             results = parse(xml_response)
+            # If result is empty, then the user group was not found
+            if not results.get("response", {}).get("result", {}):
+                yield self.status_message("The given user group was not found.")
+                raise FunctionError("The given user group was not found.")
 
-            members = results.get("response", {}).get("result", {}).get("entry", {}).get("user", {}).get("member")
+            members = results.get("response", {}).get("result", {}).get("entry", {}).get("user", {}).get("member", [])
             # Create a list of the returned users
             user_list = [m for m in members] if isinstance(members, list) else [members.get("#text")]
 

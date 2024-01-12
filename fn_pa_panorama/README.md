@@ -125,7 +125,7 @@ The following table provides the settings you need to configure the app. These s
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
 | **panorama_host** | Yes | `<https://0.0.0.0>` | *IP or hostname of the panorama server.* |
-| **api_version** | No | `9.0` | *Specify the api version to use. '9.0' is the default.* |
+| **api_version** | No | `v9.1` | *Specify the api version to use. 'v9.1' is the default.* |
 | **api_key** | Yes | `<Panorama_api_key>` | *API key generated with permissions to query the Panorama API. Get the API key via: curl -k -X GET 'https://<panoramaIP>/api/?type=keygen&user=<username>&password=<password>'* |
 | **cert** | Yes | <code>[True &#124; False]</code> | *Validate certificates (True) or allow insecure connections (False).* |
 | **http_proxy** | No | `<http://proxy.server:3128>` | *Optional http proxy server.* |
@@ -202,19 +202,20 @@ results = {
 <p>
 
 ```python
+from json import dumps
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
 inputs.panorama_name_parameter = artifact.value
 
-body = f'''{{
-"entry": {{
-  "@name": "{artifact.value}",
-  "description": "{artifact.value}",
-  "fqdn": "{artifact.value}"
-}}
-}}'''
+body = {
+  "entry": {
+    "@name": artifact.value,
+    "description": artifact.value,
+    "ip-netmask": artifact.value
+  }
+}
 
-inputs.panorama_request_body = body
+inputs.panorama_request_body = dumps(body)
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
@@ -292,45 +293,47 @@ results = {
 <p>
 
 ```python
-def list_to_json_str(l):
-  string_list = "["
-  for item in l:
-    string_list = string_list + '"' + item + '"'
-    if item != l[-1]:
-      string_list = string_list + ", "
-  return string_list + "]"
+from json import dumps
 
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
 
-dns_name = ""
-group = playbook.functions.results.get_groups_results.get("content", {}).get("result", {}).get("entry", [])[0]
-addresses = playbook.functions.results.get_addresses_results.get("content", {}).get("result", {}).get("entry", [])
-for address in addresses:
-  if address.get("fqdn") == artifact.value:
-    dns_name = address.get("@name")
-    break
+ip_name = ""
+group = playbook.functions.results.get_groups_results.get("content", {}).get("result", {}).get("entry", [])
+if group:
+  group = group[0]
+
+# If new address was created
+if playbook.functions.results.create_address_results:
+  ip_name = artifact.value
+# Else find it in the list of addresses
+else:
+  addresses = playbook.functions.results.get_addresses_results.get("content", {}).get("result", {}).get("entry")
+  for address in addresses:
+    if address.get("ip-netmask") == artifact.value:
+      ip_name = address.get("@name")
+      break
 
 group_name = group.get("@name")
 des = group.get("description")
-member_list = group.get("static", {}).get("member")
 
-# Remove IP address from list
-member_list.remove(dns_name)
+member_list = group.get("static", {}).get("member", [])
+if ip_name not in member_list:
+  member_list.append(ip_name)
 
 inputs.panorama_name_parameter = group_name
 
-body = f'''{{
-  "entry": {{
-    "@name": "{group_name}",
-    "description": "{des}",
-    "static": {{
-      "member": {list_to_json_str(member_list)}
-    }}
-  }}
-}}'''
+body = {
+  "entry": {
+    "@name": group_name,
+    "description": des,
+    "static": {
+      "member": dumps(member_list)
+    }
+  }
+}
 
-inputs.panorama_request_body = body
+inputs.panorama_request_body = dumps(body)
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
@@ -343,9 +346,9 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```python
 results = playbook.functions.results.edit_addresses_results
 if results.get("success"):
-  incident.addNote(f"DNS name: {artifact.value} was unblocked.")
+  incident.addNote(f"Panorama DNS name: {artifact.value} was unblocked.")
 else:
-  incident.addNote(f"Unblock DNS failed with reason: {results.get('reason')}")
+  incident.addNote(f"Panorama Unblock DNS failed with reason: {results.get('reason')}")
 ```
 
 </p>
@@ -366,6 +369,8 @@ Edits users in a group in Panorama.
 | `panorama_location` | `select` | Yes | `-` | The location of the entry |
 | `panorama_user_group_xml` | `textarea` | No | `-` | xml structure indicating which users are members of the group |
 | `panorama_user_group_xpath` | `text` | No | `/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']` | xpath to the user group you want to use |
+| `panorama_users_list` | `text` | No | `["user1", "user2"]` | Python list of users |
+| `panorama_user_group_name` | `text` | `Blocked_Users` | Name od user group |
 
 </p>
 </details>
@@ -430,36 +435,33 @@ if len(users_list) == 1:
 elif len(users_list) > 1:
   # multiple users returned
   for user in users_list:
-    blocked_users.append(str(user.get("#text")))
+    blocked_users.append(user.get("#text"))
 
-# Remove the user from the blocked list if they are there
-if artifact.value in blocked_users:
-  blocked_users.remove(artifact.value)
+# Add the user to the blocked list if they are not already there
+if artifact.value not in blocked_users:
+  blocked_users.append(artifact.value)
 
-panorama_xml = ""
-# Set xml to empty users if list is empty
-if len(users_list) == 0:
-  panorama_xml = f'<entry name="{group_name}"/>'
-
-# Multiple members, build xml which the function will send to Panorama
-else:
-  panorama_xml = f'''
-  <entry name="{group_name}">
-      <user>'''
-
-  # Add member nodes with the username to the xml string
-  for user in blocked_users:
-    panorama_xml += f"\n      <member>{user}</member>"
-
-  # Add the ending of the xml to the string
-  xml_ending = """
-      </user>
-  </entry>
-  """
-  panorama_xml += xml_ending
-
-inputs.panorama_user_group_xml = panorama_xml
+# Updated function creates the xml request body for you
+inputs.panorama_users_list = str(blocked_users)
+inputs.panorama_user_group_name = group_name
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+
+# Giving the xml request body as an input still works
+# # Build xml which the function will send to Panorama
+# panorama_xml = f'''
+# <entry name="{str(group_name)}">
+#     <user>'''
+
+# # Add member nodes with the username to the xml string
+# for user in blocked_users:
+#   panorama_xml += f"\n      <member>{user}</member>"
+
+# # Add the ending of the xml to the string
+# panorama_xml += """
+#     </user>
+# </entry>
+# """
+# inputs.panorama_user_group_xml = panorama_xml
 ```
 
 </p>
@@ -471,9 +473,9 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```python
 results = playbook.functions.results.edit_users_results
 if results.get("success"):
-  incident.addNote(f"User account: {artifact.value} was unblocked.")
+  incident.addNote(f"Panorama User account: {artifact.value} was unblocked.")
 else:
-  incident.addNote(f"Unblock User failed with reason: {results.get('reason')}")
+  incident.addNote(f"Panorama Unblock User failed with reason: {results.get('reason')}")
 ```
 
 </p>
@@ -558,10 +560,10 @@ results = {
 <p>
 
 ```python
+inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 inputs.panorama_location = "vsys"
 inputs.panorama_vsys = "vsys1"
 inputs.panorama_name_parameter = "Blocked Group"
-inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```
 
 </p>
@@ -577,7 +579,7 @@ results = playbook.functions.results.address_groups
 if results.get("success"):
   incident.addNote(dumps(results.get("content", {}), indent=4))
 else:
-  incident.addNote(f"Get address groups failed with reason: {results.get('reason')}")
+  incident.addNote(f"Panorama Get address groups failed with reason: {results.get('reason')}")
 ```
 
 </p>
@@ -903,13 +905,13 @@ None
 ## Playbooks
 | Playbook Name | Description | Activation Type | Object | Status | Condition | 
 | ------------- | ----------- | --------------- | ------ | ------ | --------- | 
-| Example: Panorama Block DNS Name (PB) | Given a DNS Name artifact, adds the DNS Name to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` | 
-| Example: Panorama Block IP Address (PB) | Given an IP Address artifact, adds the IP Address to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
-| Example: Panorama Block User (PB) | Given a User Account artifact, adds the user to the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` | 
-| Example: Panorama Get Address Groups (PB) | Get address groups on the Panorama server | Manual | incident | `enabled` | `-` | 
-| Example: Panorama Unblock DNS Name (PB) | Given a DNS Name artifact, removes the DNS Name from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` | 
-| Example: Panorama Unblock IP Address (PB) | Given an IP Address artifact, removes the IP Address from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
-| Example: Panorama Unblock User (PB) | Given a User Account artifact, removes the user from the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` | 
+| Panorama: Block DNS Name - Example (PB) | Given a DNS Name artifact, adds the DNS Name to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` | 
+| Panorama: Block IP Address - Example (PB) | Given an IP Address artifact, adds the IP Address to the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
+| Panorama: Block User - Example (PB) | Given a User Account artifact, adds the user to the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` | 
+| Panorama: Get Address Groups - Example (PB) | Get address groups on the Panorama server | Manual | incident | `enabled` | `-` | 
+| Panorama: Unblock DNS Name - Example (PB) | Given a DNS Name artifact, removes the DNS Name from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals DNS Name` | 
+| Panorama: Unblock IP Address - Example (PB) | Given an IP Address artifact, removes the IP Address from the "Blocked Group" in Panorama. | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
+| Panorama: Unblock User - Example (PB) | Given a User Account artifact, removes the user from the "Blocked_Users" group in Panorama. | Manual | artifact | `enabled` | `artifact.type equals User Account` | 
 
 ---
 
@@ -921,7 +923,7 @@ To use only a single server there are two ways this can be configured
 # URL/IP of Panorama
 panorama_host=<https://0.0.0.0>
 # Versions of panorama can be used by changing the api_version to use a different API version
-api_version=9.0
+api_version=v9.1
 api_key=<Panorama_api_key>
 cert=[True|False]
 # optional settings to access Panorama via proxies
@@ -934,7 +936,7 @@ cert=[True|False]
 # URL/IP of Panorama
 panorama_host=<https://0.0.0.0>
 # Versions of panorama can be used by changing the api_version to use a different API version
-api_version=9.0
+api_version=v9.1
 api_key=<Panorama_api_key>
 cert=[True|False]
 # optional settings to access Panorama via proxies

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
 # Generated with resilient-sdk v51.0.0.1.486
 
 """Generate the SOAR customizations required for fn_pa_panorama"""

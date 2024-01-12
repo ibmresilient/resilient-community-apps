@@ -22,7 +22,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
-#RUN yum -y update && yum clean all
+RUN yum -y update && yum clean all
 #RUN yum -y install <package>
 
 # install the base package

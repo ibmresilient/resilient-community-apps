@@ -4,7 +4,7 @@
     Generated with resilient-sdk v51.0.0.1.486
 -->
 
-# Playbook - Example: Panorama Unblock User (PB)
+# Playbook - Panorama: Unblock User - Example (PB)
 
 ### API Name
 `example_panorama_unblock_user`
@@ -87,30 +87,29 @@ elif len(users_list) > 1:
 if artifact.value in blocked_users:
   blocked_users.remove(artifact.value)
 
-panorama_xml = ""
-# Set xml to empty users if list is empty
-if len(users_list) == 0:
-  panorama_xml = f'<entry name="{group_name}"/>'
-
-# Multiple members, build xml which the funciton will send to Panorama
-else:
-  panorama_xml = f'''
-  <entry name="{group_name}">
-      <user>'''
-
-  # Add member nodes with the username to the xml string
-  for user in blocked_users:
-    panorama_xml += f"\n      <member>{user}</member>"
-
-  # Add the ending of the xml to the string
-  xml_ending = """
-      </user>
-  </entry>
-  """
-  panorama_xml += xml_ending
-
-inputs.panorama_user_group_xml = panorama_xml
+# Updated function creates the xml request body for you
+inputs.panorama_users_list = str(blocked_users)
+inputs.panorama_user_group_name = group_name
 inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
+
+# Giving the xml request body as an input still works
+# panorama_xml = ""
+# # Set xml to empty users if list is empty
+# if len(users_list) == 0:
+#   panorama_xml = f'<entry name="{group_name}"/>'
+
+# # Multiple members, build xml which the function will send to Panorama
+# else:
+#   panorama_xml = f"<entry name='{group_name}'><user>"
+
+#   # Add member nodes with the username to the xml string
+#   for user in blocked_users:
+#     panorama_xml += f"<member>{user}</member>"
+
+#   # Add the ending of the xml to the string
+#   panorama_xml += "</user></entry>"
+
+# inputs.panorama_user_group_xml = panorama_xml
 ```
 
 ---
@@ -130,9 +129,9 @@ inputs.panorama_label = getattr(playbook.inputs, "panorama_label", None)
 ```python
 results = playbook.functions.results.edit_users_results
 if results.get("success"):
-  incident.addNote(f"User account: {artifact.value} was unblocked.")
+  incident.addNote(f"Panorama User account: {artifact.value} was unblocked.")
 else:
-  incident.addNote(f"Unblock User failed with reason: {results.get('reason')}")
+  incident.addNote(f"Panorama Unblock User failed with reason: {results.get('reason')}")
 ```
 
 ---

@@ -4,7 +4,7 @@
     Generated with resilient-sdk v51.0.0.1.486
 -->
 
-# Playbook - Example: Panorama Get Address Groups (PB)
+# Playbook - Panorama: Get Address Groups - Example (PB)
 
 ### API Name
 `example_panorama_get_address_groups`
@@ -69,9 +69,9 @@ from json import dumps
 results = playbook.functions.results.address_groups
 
 if results.get("success"):
-  incident.addNote(dumps(results.get("content", {}), indent=4))
+  incident.addNote(f'Panorama Get Address Groups\n{dumps(results.get("content", {}), indent=4)}')
 else:
-  incident.addNote(f"Get address groups failed with reason: {results.get('reason')}")
+  incident.addNote(f"Panorama Get address groups failed with reason: {results.get('reason')}")
 ```
 
 ---
