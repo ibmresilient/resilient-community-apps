@@ -263,6 +263,7 @@ class TestMakeRestCallWithRetry(unittest.TestCase):
         RETRY_BACKOFF_COUNT = 3
         ENDPOINT = "https://postman-echo.com/status/404"
 
+        self.caplog.set_level(logging.INFO)
         self.caplog.clear()
         try:
             make_rest_call(
@@ -288,11 +289,11 @@ class TestMakeRestCallWithRetry(unittest.TestCase):
         # failed request 2, retrying in 6 seconds...
         # failed request 3, retrying in 18 seconds...
         # request 4
-        assert len(records) == RETRY_TRIES_COUNT
-        assert f"retrying in {RETRY_DELAY_COUNT} seconds..." in records[0].message
-        assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[1].message
-        assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[2].message
-        assert f"404 Client Error:" in records[2].message
+        assert len(records) == RETRY_TRIES_COUNT * 2
+        assert f"retrying in {RETRY_DELAY_COUNT} seconds..." in records[1].message
+        assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[3].message
+        assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[5].message
+        assert f"404 Client Error:" in records[7].message
 
         self.caplog.clear() # clear caplog
 
