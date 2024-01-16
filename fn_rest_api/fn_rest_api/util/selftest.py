@@ -48,14 +48,12 @@ def selftest_function(opts):
         # make_rest_call(opts, options, rest_method, rest_url, headers_dict, cookies_dict, rest_body, rest_verify)
         resp = make_rest_call(
             opts, opts.get("fn_rest_api", {}),
-            "POST",
-            "/".join((TEST_IP, "post")),
-            headers,
-            None,
-            payload,
-            False,
-            600
-        )
+            method="POST",
+            url="/".join((TEST_IP, "post")),
+            headers=headers,
+            data=payload,
+            verify=False,
+            timeout=600)
 
         state = "success"
     except Exception as e:
