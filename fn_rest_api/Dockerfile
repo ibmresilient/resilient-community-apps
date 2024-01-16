@@ -1,11 +1,11 @@
-# Generated with resilient-sdk v48.0.4034
-# docker build -t ibmresilient/fn_rest_api:1.0.0 -t ibmresilient/fn_rest_api:latest .
+# Generated with resilient-sdk v51.0.0.1.486
+# docker build -t ibmresilient/fn_rest_api:1.2.0 -t ibmresilient/fn_rest_api:latest .
 
 # Base image using Red Hat's universal base image (rhel 8) for python
 FROM registry.access.redhat.com/ubi8/python-39:latest
 
 ARG APPLICATION=fn_rest_api
-ARG RESILIENT_CIRCUITS_VERSION=48.0.0
+ARG RESILIENT_CIRCUITS_VERSION=51.0.0.1.0
 ARG PATH_RESILIENT_CIRCUITS=rescircuits
 
 # Environment variable for any app to check if running in a container
@@ -23,7 +23,7 @@ RUN pip install "resilient-circuits>=${RESILIENT_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
-#RUN yum -y update && yum clean all
+RUN yum -y update && yum clean all
 #RUN yum -y install <package>
 
 # install the base package
@@ -32,6 +32,10 @@ RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
 # uncomment and replicate if additional pypi packages are needed
 #RUN pip install <package>
+
+# uncomment and replicate if additional pypi packages in requirements file are needed
+#COPY /path/to/<requirements.txt> /tmp/packages/.
+#RUN pip install -r /tmp/packages/<requirements.txt>
 
 # uncomment and replicate if additional local packages are needed
 #COPY /path/to/extra_package /tmp/packages/.
