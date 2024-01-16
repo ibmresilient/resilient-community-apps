@@ -17,10 +17,10 @@ LOG = logging.getLogger(__name__)
 DEF_NUM_WORKERS = 25
 POOL_RATIO = 1.0 # multiplier for number of pool threads to allow
 
-def error_callback(exception):
-    LOG.error((f"Plugin error during apply_async: {str(exception)}"))
-    stack_trace = traceback.format_exception(exception)
-    LOG.error(stack_trace)
+def error_callback(err):
+    LOG.error((f"Plugin error during apply_async: {str(err)}"))
+    stack_trace_list = traceback.format_exception(type(err), err, err.__traceback__)
+    LOG.error("".join(stack_trace_list))
 
 class PluginPool(object):
     _instance = None
