@@ -1,0 +1,61 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "content": [
+      {
+        "beginTime": "2023-01-06T09:51:09Z",
+        "lastUpdateTime": "2023-01-06T09:51:09Z",
+        "computerName": "computerName",
+        "computerIp": "000.00.00.00",
+        "domainName": "Default",
+        "currentLoginUserName": "Testuser",
+        "stateId": 3,
+        "subStateId": 0,
+        "subStateDesc": "C:\\Users\\Public\\Documents\\sample.exe",
+        "binaryFileId": "binaryFileId",
+        "resultInXML": "",
+        "computerId": "computerId",
+        "hardwareKey": "hardwareKey"
+      }
+    ],
+    "totalPages": 1,
+    "firstPage": true,
+    "lastPage": true,
+    "totalElements": 1,
+    "size": 20,
+    "number": 0,
+    "sort": [
+      {
+        "direction": "ASC",
+        "property": "Begintime",
+        "ascending": true
+      }
+    ],
+    "numberOfElements": 1,
+    "total_match_count": 0,
+    "total_match_ep_count": 0,
+    "total_remediation_count": 0,
+    "total_fail_remediation_count": 0,
+    "total_remediation_ep_count": 0,
+    "total_not_completed": 0,
+    "total_ep_count": 1,
+    "scan_artifact_value": "",
+    "remediate_artifact_value": "",
+    "overall_command_state": "Completed"
+  },
+  "raw": "{\"content\": [{\"beginTime\": \"2023-01-06T09:51:09Z\", \"lastUpdateTime\": \"2023-01-06T09:51:09Z\", \"computerName\": \"EC2AMAZ-O9BT872\", \"computerIp\": \"172.31.37.22\", \"domainName\": \"Default\", \"currentLoginUserName\": \"Administrator\", \"stateId\": 3, \"subStateId\": 0, \"subStateDesc\": \"C:\\\\Users\\\\Public\\\\Documents\\\\sample.exe\", \"binaryFileId\": \"F1568E3BAC1F211B397E2DAC71FD6BF7\", \"resultInXML\": \"\", \"computerId\": \"CD08C63EAC1F211B1B6FD4039B293000\", \"hardwareKey\": \"E4A30FDB287F7B23F9BF22166FD54BF1\"}], \"totalPages\": 1, \"firstPage\": true, \"lastPage\": true, \"totalElements\": 1, \"size\": 20, \"number\": 0, \"sort\": [{\"direction\": \"ASC\", \"property\": \"Begintime\", \"ascending\": true}], \"numberOfElements\": 1, \"total_match_count\": 0, \"total_match_ep_count\": 0, \"total_remediation_count\": 0, \"total_fail_remediation_count\": 0, \"total_remediation_ep_count\": 0, \"total_not_completed\": 0, \"total_ep_count\": 1, \"scan_artifact_value\": \"\", \"remediate_artifact_value\": \"\", \"overall_command_state\": \"Completed\"}",
+  "inputs": {
+    "sep_status_type": "quarantine",
+    "sep_commandid": "commandid"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.0.1",
+    "host": "host",
+    "execution_time_ms": 2060,
+    "timestamp": "2023-01-06 13:56:03"
+  }
+}
