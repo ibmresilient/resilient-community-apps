@@ -10,7 +10,7 @@ setup(
     license='MIT',
     author='IBM QRadar SOAR',
     author_email='',
-    url='http://ibm.biz/resilientcommunity',
+    url='http://ibm.biz/soarcommunity',
     description="IBM SOAR Components for sending data feeds to other (BI) systems",
     long_description="""This package contains the Elasticsearch Plugin to the Data Feed extension.
     This Data Feed extension allows one to maintain 'replica' data for SOAR incidents, artifacts, tasks, notes, etc.
