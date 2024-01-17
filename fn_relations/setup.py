@@ -25,7 +25,7 @@ def snake_to_camel(word):
 setup(
     name="fn_relations",
     display_name="Parent/Child Relationships",
-    version="3.0.0",
+    version="3.1.0",
     license="MIT",
     author="Nick Mumaw",
     author_email="Nick.Mumaw@ibm.com",
@@ -33,7 +33,11 @@ setup(
     description="Builds Relationships of Incidents within IBM Security SOAR",
     long_description="""App used within the SOAR platform allowing the relationship building of incidents as Children and Parents.
     The app will also allow syncing of notes between the incidents with a relationship, auto closing child incidents of a closed parent,
-    and syncing changes in child status with the parent datatable that shows all children.""",
+    and syncing changes in child status with the parent datatable that shows all children.
+<br>
+Links:
+<ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+<ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",    
     install_requires=[
         "resilient-circuits>=48.0.0"
     ],
