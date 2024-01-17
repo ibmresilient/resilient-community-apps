@@ -75,23 +75,23 @@ class FunctionComponent(AppFunctionComponent):
             raise IntegrationError("Incident does not have a relation level. Unable to sync datatable(s).")
 
         if not relations_row_data:
-            if 'All' in relations_datatables.split(','):
+            if 'all' in [dt.lower() for dt in relations_datatables.split(',')]:
                 self.LOG.info('Collecting All Table Data')
                 all_dataTable_data = self.rest_client().get('/incidents/{}/table_data?handle_format=names'.format(incident_id))
                 self.LOG.debug('DataTables Collected: {}'.format(all_dataTable_data))
 
                 for datatable in all_dataTable_data:
                     if datatable not in relations_exclude_datatables.split(','):
-                        self.LOG.info('Sanatizing DataTable of Row IDs')
+                        self.LOG.info('Sanitizing DataTable of Row IDs')
                         sanatized_datatable_rows = remove_row_id(all_dataTable_data[datatable]['rows'])
-                        self.LOG.debug('Sanatized Rows: {}'.format(sanatized_datatable_rows))
+                        self.LOG.debug('Sanitized Rows: {}'.format(sanatized_datatable_rows))
                         if incident['properties']['relations_level'] == 'Child':
                             self.LOG.info('Collecting Parent DataTable')
                             parent_datatable = self.rest_client().get('/incidents/{}/table_data/{}?handle_format=names'.format(parent_id, datatable))
                             self.LOG.debug('DataTable Collected: {}'.format(parent_datatable))
-                            self.LOG.info('Sanatizing DataTable of Row IDs')
+                            self.LOG.info('Sanitizing DataTable of Row IDs')
                             sanatized_parent_rows = remove_row_id(parent_datatable['rows'])
-                            self.LOG.debug('Sanatized Rows: {}'.format(sanatized_parent_rows))
+                            self.LOG.debug('Sanitized Rows: {}'.format(sanatized_parent_rows))
                             for sanatized_row in sanatized_datatable_rows:
                                 if sanatized_row not in sanatized_parent_rows:
                                     self.LOG.info('Posting Row to Parent Incident')
@@ -105,9 +105,9 @@ class FunctionComponent(AppFunctionComponent):
                                 self.LOG.info('Collecting Child DataTable')
                                 child_datatable = self.rest_client().get('/incidents/{}/table_data/{}?handle_format=names'.format(child, datatable))
                                 self.LOG.debug('DataTable Collected: {}'.format(child_datatable))
-                                self.LOG.info('Sanatizing DataTable of Row IDs')
+                                self.LOG.info('Sanitizing DataTable of Row IDs')
                                 sanatized_child_rows = remove_row_id(child_datatable['rows'])
-                                self.LOG.debug('Sanatized Rows: {}'.format(sanatized_child_rows))
+                                self.LOG.debug('Sanitized Rows: {}'.format(sanatized_child_rows))
                                 for sanatized_row in sanatized_datatable_rows:
                                     if sanatized_row not in sanatized_child_rows:
                                         self.LOG.info('Posting Row to Child Incident')
@@ -127,16 +127,16 @@ class FunctionComponent(AppFunctionComponent):
                     self.LOG.info('Collecting Table Data')
                     dataTable_data = self.rest_client().get('/incidents/{}/table_data/{}?handle_format=names'.format(incident_id, datatable))
                     self.LOG.debug('DataTable Collected: {}'.format(dataTable_data))
-                    self.LOG.info('Sanatizing DataTable of Row IDs')
+                    self.LOG.info('Sanitizing DataTable of Row IDs')
                     sanatized_datatable_rows = remove_row_id(dataTable_data['rows'])
-                    self.LOG.debug('Sanatized Rows: {}'.format(sanatized_datatable_rows))
+                    self.LOG.debug('Sanitized Rows: {}'.format(sanatized_datatable_rows))
                     if incident['properties']['relations_level'] == 'Child':
                         self.LOG.info('Collecting Parent DataTable')
                         parent_datatable = self.rest_client().get('/incidents/{}/table_data/{}?handle_format=names'.format(parent_id, datatable))
                         self.LOG.debug('DataTable Collected: {}'.format(parent_datatable))
-                        self.LOG.info('Sanatizing DataTable of Row IDs')
+                        self.LOG.info('Sanitizing DataTable of Row IDs')
                         sanatized_parent_rows = remove_row_id(parent_datatable['rows'])
-                        self.LOG.debug('Sanatized Rows: {}'.format(sanatized_parent_rows))
+                        self.LOG.debug('Sanitized Rows: {}'.format(sanatized_parent_rows))
                         for sanatized_row in sanatized_datatable_rows:
                             if sanatized_row not in sanatized_parent_rows:
                                 self.LOG.info('Posting Row to Parent Incident')
@@ -150,9 +150,9 @@ class FunctionComponent(AppFunctionComponent):
                             self.LOG.info('Collecting Child DataTable')
                             child_datatable = self.rest_client().get('/incidents/{}/table_data/{}?handle_format=names'.format(child, datatable))
                             self.LOG.debug('DataTable Collected: {}'.format(child_datatable))
-                            self.LOG.info('Sanatizing DataTable of Row IDs')
+                            self.LOG.info('Sanitizing DataTable of Row IDs')
                             sanatized_child_rows = remove_row_id(child_datatable['rows'])
-                            self.LOG.debug('Sanatized Rows: {}'.format(sanatized_child_rows))
+                            self.LOG.debug('Sanitized Rows: {}'.format(sanatized_child_rows))
                             for sanatized_row in sanatized_datatable_rows:
                                 if sanatized_row not in sanatized_child_rows:
                                     self.LOG.info('Posting Row to Child Incident')
@@ -181,9 +181,9 @@ class FunctionComponent(AppFunctionComponent):
                     self.LOG.info('Collecting Parent DataTable')
                     parent_datatable = self.rest_client().get('/incidents/{}/table_data/{}?handle_format=names'.format(parent_id, relations_datatables.split(',')[0]))
                     self.LOG.debug('DataTable Collected: {}'.format(parent_datatable))
-                    self.LOG.info('Sanatizing DataTable of Row IDs')
+                    self.LOG.info('Sanitizing DataTable of Row IDs')
                     sanatized_parent_rows = remove_row_id(parent_datatable['rows'])
-                    self.LOG.debug('Sanatized Rows: {}'.format(sanatized_parent_rows))
+                    self.LOG.debug('Sanitized Rows: {}'.format(sanatized_parent_rows))
                     if dataTable_row not in sanatized_parent_rows:
                         self.LOG.info('Posting Row to Parent Incident')
                         posted_row = self.rest_client().post('/incidents/{}/table_data/{}/row_data?handle_format=names'.format(parent_id, relations_datatables.split(',')[0]), {'cells': dataTable_row})
@@ -197,9 +197,9 @@ class FunctionComponent(AppFunctionComponent):
                         self.LOG.info('Collecting Child DataTable')
                         child_datatable = self.rest_client().get('/incidents/{}/table_data/{}?handle_format=names'.format(child, relations_datatables.split(',')[0]))
                         self.LOG.debug('DataTable Collected: {}'.format(child_datatable))
-                        self.LOG.info('Sanatizing DataTable of Row IDs')
+                        self.LOG.info('Sanitizing DataTable of Row IDs')
                         sanatized_child_rows = remove_row_id(child_datatable['rows'])
-                        self.LOG.debug('Sanatized Rows: {}'.format(sanatized_child_rows))
+                        self.LOG.debug('Sanitized Rows: {}'.format(sanatized_child_rows))
                         if dataTable_row not in sanatized_child_rows:
                             self.LOG.info('Posting Row to Child Incident')
                             posted_row = self.rest_client().post('/incidents/{}/table_data/{}/row_data?handle_format=names'.format(child, relations_datatables.split(',')[0]), {'cells': dataTable_row})
