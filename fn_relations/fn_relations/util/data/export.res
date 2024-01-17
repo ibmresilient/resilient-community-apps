@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1705499148496,
+  "export_date": 1705518655087,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -419,17 +419,17 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1705412570062,
+      "last_modified_time": 1705518605969,
       "name": "relations_assign_parent",
       "output_description": {
         "content": null,
         "format": "text"
       },
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"child_artifact_results\": {\"success\": true, \"content\": {\"id\": 3828, \"type\": 1040, \"value\": \"2799\", \"description\": \"Parent Incident ID in Relationship\", \"attachment\": null, \"parent_id\": null, \"inc_id\": 2802, \"inc_name\": \"Child 3\", \"inc_owner\": 1, \"hits\": [], \"created\": 1693442727342, \"last_modified_time\": 1693442727362, \"last_modified_by\": {\"id\": 49, \"type\": \"apikey\", \"name\": \"6bf8c47e-77a6-41ad-ad22-1004f7eee7cb\", \"display_name\": \"AppBuilder\"}, \"pending_sources\": [], \"perms\": {\"read\": true, \"write\": true, \"delete\": true}, \"properties\": null, \"actions\": [{\"id\": 23, \"name\": \"Update Data Table Row\", \"enabled\": false}, {\"id\": 96, \"name\": \"Example: XML Transformation\", \"enabled\": false}, {\"id\": 21, \"name\": \"Get Data Table Rows\", \"enabled\": false}, {\"id\": 91, \"name\": \"Example: Shell Command\", \"enabled\": false}, {\"id\": 92, \"name\": \"Example: String to Attachment\", \"enabled\": false}, {\"id\": 20, \"name\": \"Get Data Table Row\", \"enabled\": false}, {\"id\": 17, \"name\": \"Delete Data Table Rows\", \"enabled\": false}, {\"id\": 16, \"name\": \"Delete Data Table Row\", \"enabled\": false}, {\"id\": 100, \"name\": \"Add Row to Datatable\", \"enabled\": false}, {\"id\": 27, \"name\": \"Defender Find Machine by DNS name\", \"enabled\": false}, {\"id\": 28, \"name\": \"Defender Find Machines by File Hash\", \"enabled\": false}, {\"id\": 29, \"name\": \"Defender Find Machines by Internal IP Address\", \"enabled\": false}, {\"id\": 30, \"name\": \"Defender Get File Information\", \"enabled\": false}, {\"id\": 42, \"name\": \"Defender Set Indicator\", \"enabled\": false}, {\"id\": 75, \"name\": \"Example: (Artifact) Attachment to Base64\", \"enabled\": false}, {\"id\": 429, \"name\": \"Example: Network Utilities Domain Distance\", \"enabled\": false}, {\"id\": 430, \"name\": \"Example: Network Utilities Expand URL\", \"enabled\": false}, {\"id\": 431, \"name\": \"Example: Network Utilities Extract SSL Certificate from URL\", \"enabled\": false}, {\"id\": 81, \"name\": \"Example: Email Parsing (Artifact)\", \"enabled\": false}, {\"id\": 79, \"name\": \"Example: Call REST API\", \"enabled\": false}, {\"id\": 432, \"name\": \"Example: Network Utilities Linux Shell Command\", \"enabled\": false}, {\"id\": 433, \"name\": \"Example: Network Utilities Local Shell Command\", \"enabled\": false}, {\"id\": 76, \"name\": \"Example: Artifact Hash\", \"enabled\": false}, {\"id\": 434, \"name\": \"Example: Network Utilities Windows Shell Command\", \"enabled\": false}, {\"id\": 83, \"name\": \"Example: Expand URL\", \"enabled\": false}, {\"id\": 84, \"name\": \"Example: Extract SSL Certificate\", \"enabled\": false}, {\"id\": 87, \"name\": \"Example: JSON2HTML\", \"enabled\": false}, {\"id\": 88, \"name\": \"Example: Parse SSL Certificate\", \"enabled\": false}, {\"id\": 210, \"name\": \"Example: LDAP Utilities: Remove User(s) from Group(s)\", \"enabled\": false}, {\"id\": 225, \"name\": \"QRadar Move from Sample Blocked to Sample Suspected\", \"enabled\": false}, {\"id\": 80, \"name\": \"Example: Domain Distance\", \"enabled\": false}, {\"id\": 213, \"name\": \"Example: LDAP Utilities: Toggle Access\", \"enabled\": false}, {\"id\": 214, \"name\": \"Example: LDAP Utilities: Update\", \"enabled\": false}, {\"id\": 191, \"name\": \"Example: Exchange Online Get User Profile\", \"enabled\": false}, {\"id\": 194, \"name\": \"Example: Exchange Online Query Messages on Artifact\", \"enabled\": false}, {\"id\": 205, \"name\": \"Schedule a Rule/Playbook to Run - Artifact\", \"enabled\": false}, {\"id\": 267, \"name\": \"Example: urlscan.io\", \"enabled\": false}, {\"id\": 381, \"name\": \"Example: Relations - Sync Artifact\", \"enabled\": false}, {\"id\": 209, \"name\": \"Example: LDAP Utilities: Add User(s) to Group(s)\", \"enabled\": false}, {\"id\": 211, \"name\": \"Example: LDAP Utilities: Search\", \"enabled\": false}, {\"id\": 212, \"name\": \"Example: LDAP Utilities: Set Password\", \"enabled\": false}, {\"id\": 365, \"name\": \"Run whois query against Artifact (RDAP)\", \"enabled\": false}, {\"id\": 364, \"name\": \"Run rdap query against Artifact\", \"enabled\": false}, {\"id\": 221, \"name\": \"Find All QRadar Reference Sets\", \"enabled\": true}, {\"id\": 222, \"name\": \"Find in QRadar Reference Set\", \"enabled\": true}, {\"id\": 223, \"name\": \"QRadar Add to Reference Set\", \"enabled\": false}, {\"id\": 224, \"name\": \"QRadar Add to Reference Table\", \"enabled\": true}], \"playbooks\": [{\"playbook_handle\": 138, \"display_name\": \"Relations: Sync Artifact\"}, {\"playbook_handle\": 131, \"display_name\": \"Scheduler: Schedule a Job (Artifact) (PB)\"}], \"hash\": \"99e5ebfa1cbebdd970bb3d841bb645d8bee76c375a637406859e2a8425951177\", \"relating\": true, \"creator_principal\": {\"id\": 49, \"type\": \"apikey\", \"name\": \"6bf8c47e-77a6-41ad-ad22-1004f7eee7cb\", \"display_name\": \"AppBuilder\"}, \"related_incident_count\": null, \"pending_scan_result\": false, \"global_info\": null, \"ip\": {\"source\": null, \"destination\": null}, \"global_artifact\": []}}, \"table_addition_results\": {\"success\": true, \"content\": {\"id\": 6786, \"cells\": {\"relations_incident_id\": {\"id\": \"relations_incident_id\", \"row_id\": 6786, \"value\": \"\u003cdiv class=\\\"rte\\\"\u003e\u003cdiv\u003e\u003ca href=\\\"#incidents/2802\\\" target=\\\"_blank\\\"\u003e2802\u003c/a\u003e\u003c/div\u003e\u003c/div\u003e\"}, \"relations_incident_name\": {\"id\": \"relations_incident_name\", \"row_id\": 6786, \"value\": \"Child 3\"}, \"relations_incident_status\": {\"id\": \"relations_incident_status\", \"row_id\": 6786, \"value\": \"Active\"}}, \"actions\": [], \"playbooks\": [], \"type_id\": 1043, \"table_name\": \"Relations Child Incidents\", \"inc_id\": 2799, \"inc_name\": \"Parent\", \"inc_owner\": \"john_doe@company.com\", \"version\": 1}}, \"parent_artifact_results\": {\"success\": false, \"content\": \"Parent Already in Artifacts\"}, \"notes_synced\": 1}, \"raw\": null, \"inputs\": {\"relations_child_incident_id\": 2802, \"relations_parent_incident_id\": 2799}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-relations\", \"package_version\": \"2.0.0\", \"host\": \"IBM-PF36KPAV\", \"execution_time_ms\": 11502, \"timestamp\": \"2023-08-30 20:45:34\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"child_artifact_results\": {\"type\": \"object\", \"properties\": {\"success\": {\"type\": \"boolean\"}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"type\": {\"type\": \"integer\"}, \"value\": {\"type\": \"string\"}, \"description\": {\"type\": \"string\"}, \"attachment\": {}, \"parent_id\": {}, \"inc_id\": {\"type\": \"integer\"}, \"inc_name\": {\"type\": \"string\"}, \"inc_owner\": {\"type\": \"integer\"}, \"hits\": {\"type\": \"array\"}, \"created\": {\"type\": \"integer\"}, \"last_modified_time\": {\"type\": \"integer\"}, \"last_modified_by\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"type\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"display_name\": {\"type\": \"string\"}}}, \"pending_sources\": {\"type\": \"array\"}, \"perms\": {\"type\": \"object\", \"properties\": {\"read\": {\"type\": \"boolean\"}, \"write\": {\"type\": \"boolean\"}, \"delete\": {\"type\": \"boolean\"}}}, \"properties\": {}, \"actions\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}, \"enabled\": {\"type\": \"boolean\"}}}}, \"playbooks\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"playbook_handle\": {\"type\": \"integer\"}, \"display_name\": {\"type\": \"string\"}}}}, \"hash\": {\"type\": \"string\"}, \"relating\": {\"type\": \"boolean\"}, \"creator_principal\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"type\": {\"type\": \"string\"}, \"name\": {\"type\": \"string\"}, \"display_name\": {\"type\": \"string\"}}}, \"related_incident_count\": {}, \"pending_scan_result\": {\"type\": \"boolean\"}, \"global_info\": {}, \"ip\": {\"type\": \"object\", \"properties\": {\"source\": {}, \"destination\": {}}}, \"global_artifact\": {\"type\": \"array\"}}}}}, \"table_addition_results\": {\"type\": \"object\", \"properties\": {\"success\": {\"type\": \"boolean\"}, \"content\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"cells\": {\"type\": \"object\", \"properties\": {\"relations_incident_id\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"row_id\": {\"type\": \"integer\"}, \"value\": {\"type\": \"string\"}}}, \"relations_incident_name\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"row_id\": {\"type\": \"integer\"}, \"value\": {\"type\": \"string\"}}}, \"relations_incident_status\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"row_id\": {\"type\": \"integer\"}, \"value\": {\"type\": \"string\"}}}}}, \"actions\": {\"type\": \"array\"}, \"playbooks\": {\"type\": \"array\"}, \"type_id\": {\"type\": \"integer\"}, \"table_name\": {\"type\": \"string\"}, \"inc_id\": {\"type\": \"integer\"}, \"inc_name\": {\"type\": \"string\"}, \"inc_owner\": {\"type\": \"string\"}, \"version\": {\"type\": \"integer\"}}}}}, \"parent_artifact_results\": {\"type\": \"object\", \"properties\": {\"success\": {\"type\": \"boolean\"}, \"content\": {\"type\": \"string\"}}}, \"notes_synced\": {\"type\": \"integer\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"relations_child_incident_id\": {\"type\": \"integer\"}, \"relations_parent_incident_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "output_json_example": "{}",
+      "output_json_schema": "{}",
       "tags": [],
       "uuid": "0c0afabc-263a-45b0-9dcf-8225ca010e6c",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "acb92f9a-6593-4820-9d14-3b7eda74300f",
@@ -477,17 +477,17 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1705412570097,
+      "last_modified_time": 1705518606007,
       "name": "relations_auto_close_child_incidents",
       "output_description": {
         "content": null,
         "format": "text"
       },
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"incidents\": [2801, 2800]}, \"raw\": null, \"inputs\": {\"relations_parent_incident_id\": 2799}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-relations\", \"package_version\": \"2.0.0\", \"host\": \"IBM-PF36KPAV\", \"execution_time_ms\": 10038, \"timestamp\": \"2023-08-30 21:12:37\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"incidents\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"relations_parent_incident_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "output_json_example": "{}",
+      "output_json_schema": "{}",
       "tags": [],
       "uuid": "75127e2f-3446-4e3e-992b-e7e88321927e",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "78b1bb0c-0961-4a6b-87e7-37878c3645ed",
@@ -527,15 +527,17 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1705412570131,
+      "last_modified_time": 1705518606055,
       "name": "relations_copy_task",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{}",
+      "output_json_schema": "{}",
       "tags": [],
       "uuid": "9b99ef7d-9a46-4b90-b27f-772617191eb6",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "78b1bb0c-0961-4a6b-87e7-37878c3645ed",
@@ -583,17 +585,17 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1705412570165,
+      "last_modified_time": 1705518606101,
       "name": "relations_remove_child_relation",
       "output_description": {
         "content": null,
         "format": "text"
       },
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"parent_incident\": 2799, \"child_incident\": 2800}, \"raw\": null, \"inputs\": {\"relations_child_incident_id\": 2802, \"relations_remove_notes\": true}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-relations\", \"package_version\": \"2.0.0\", \"host\": \"IBM-PF36KPAV\", \"execution_time_ms\": 15068, \"timestamp\": \"2023-08-30 20:44:47\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"parent_incident\": {\"type\": \"integer\"}, \"child_incident\": {\"type\": \"integer\"}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"relations_child_incident_id\": {\"type\": \"integer\"}, \"relations_remove_notes\": {\"type\": \"boolean\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "output_json_example": "{}",
+      "output_json_schema": "{}",
       "tags": [],
       "uuid": "3ada2248-2dcb-415b-be77-b6ab43803500",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "acb92f9a-6593-4820-9d14-3b7eda74300f",
@@ -641,15 +643,17 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1705412570198,
+      "last_modified_time": 1705518606150,
       "name": "relations_sync_artifact",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{}",
+      "output_json_schema": "{}",
       "tags": [],
       "uuid": "3413cd7d-7b02-439a-9b25-8cbf837b5c43",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
@@ -697,17 +701,17 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1705412570231,
+      "last_modified_time": 1705518606199,
       "name": "relations_sync_child_table_data",
       "output_description": {
         "content": null,
         "format": "text"
       },
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"response\": {\"id\": 6786, \"cells\": {\"relations_incident_id\": {\"id\": \"relations_incident_id\", \"row_id\": 6786, \"value\": \"\u003cdiv class=\\\"rte\\\"\u003e\u003cdiv\u003e\u003ca href=\\\"#incidents/2802\\\" target=\\\"_blank\\\"\u003e2802\u003c/a\u003e\u003c/div\u003e\u003c/div\u003e\"}, \"relations_incident_name\": {\"id\": \"relations_incident_name\", \"row_id\": 6786, \"value\": \"Child 3\"}, \"relations_incident_status\": {\"id\": \"relations_incident_status\", \"row_id\": 6786, \"value\": \"Closed\"}}, \"actions\": [], \"playbooks\": [], \"type_id\": 1043, \"table_name\": \"Relations Child Incidents\", \"inc_id\": 2799, \"inc_name\": \"Parent\", \"inc_owner\": \"john_doe@company.com\", \"version\": 4}}, \"raw\": null, \"inputs\": {\"relations_parent_incident_id\": 2799, \"relations_child_incident_id\": 2802}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-relations\", \"package_version\": \"2.0.0\", \"host\": \"IBM-PF36KPAV\", \"execution_time_ms\": 2219, \"timestamp\": \"2023-08-30 21:58:36\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"response\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"cells\": {\"type\": \"object\", \"properties\": {\"relations_incident_id\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"row_id\": {\"type\": \"integer\"}, \"value\": {\"type\": \"string\"}}}, \"relations_incident_name\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"row_id\": {\"type\": \"integer\"}, \"value\": {\"type\": \"string\"}}}, \"relations_incident_status\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"string\"}, \"row_id\": {\"type\": \"integer\"}, \"value\": {\"type\": \"string\"}}}}}, \"actions\": {\"type\": \"array\"}, \"playbooks\": {\"type\": \"array\"}, \"type_id\": {\"type\": \"integer\"}, \"table_name\": {\"type\": \"string\"}, \"inc_id\": {\"type\": \"integer\"}, \"inc_name\": {\"type\": \"string\"}, \"inc_owner\": {\"type\": \"string\"}, \"version\": {\"type\": \"integer\"}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"relations_parent_incident_id\": {\"type\": \"integer\"}, \"relations_child_incident_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "output_json_example": "{}",
+      "output_json_schema": "{}",
       "tags": [],
       "uuid": "250d88c8-e474-42b7-a2b6-673ecc3646bb",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "acb92f9a-6593-4820-9d14-3b7eda74300f",
@@ -755,15 +759,17 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1705412570262,
+      "last_modified_time": 1705518606248,
       "name": "relations_sync_datatable_data",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{}",
+      "output_json_schema": "{}",
       "tags": [],
       "uuid": "b4fdcac2-7e67-41cc-8a99-8d1f69a0d7d6",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
@@ -827,17 +833,17 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1705412570294,
+      "last_modified_time": 1705518606299,
       "name": "relations_sync_notes",
       "output_description": {
         "content": null,
         "format": "text"
       },
-      "output_json_example": "{\"version\": 2.0, \"success\": true, \"reason\": null, \"content\": {\"new_note\": {\"text\": {\"format\": \"html\", \"content\": \"Note from Parent Incident: \u003ca href=\\\"#incidents/2799\\\" target=\\\"_blank\\\"\u003e2799\u003c/a\u003e\u003cbr\u003eNote ID: 609\u003cbr\u003eOn Date: 08/30/2023 20:43:40\u003cbr\u003eBy: John Doe\u003cbr\u003e\u003cbr\u003e\u003cdiv class=\\\"rte\\\"\u003e\u003cdiv\u003eReply to the privileged note!\u003c/div\u003e\u003c/div\u003e\"}}}, \"raw\": null, \"inputs\": {\"incident_id\": 2799, \"relations_note_id\": 609}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-relations\", \"package_version\": \"2.0.0\", \"host\": \"IBM-PF36KPAV\", \"execution_time_ms\": 5574, \"timestamp\": \"2023-08-30 20:43:56\"}}",
-      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"number\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"new_note\": {\"type\": \"object\", \"properties\": {\"text\": {\"type\": \"object\", \"properties\": {\"format\": {\"type\": \"string\"}, \"content\": {\"type\": \"string\"}}}}}}}, \"raw\": {}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"relations_note_id\": {\"type\": \"integer\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
+      "output_json_example": "{}",
+      "output_json_schema": "{}",
       "tags": [],
       "uuid": "4c26215f-66e7-4a75-a62e-8ce8a6707b2f",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
@@ -885,15 +891,17 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1705412570329,
+      "last_modified_time": 1705518606352,
       "name": "relations_sync_task_notes",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{}",
+      "output_json_schema": "{}",
       "tags": [],
       "uuid": "c6156ed5-748a-4f21-b858-e53cc5443dc8",
-      "version": 1,
+      "version": 3,
       "view_items": [
         {
           "content": "ba318261-ed6a-4a38-a187-9e0b68d1604f",
@@ -928,7 +936,7 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 3,
+  "id": 5,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [
@@ -953,7 +961,7 @@
   ],
   "incident_types": [
     {
-      "create_date": 1705499146660,
+      "create_date": 1705518653371,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -962,7 +970,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1705499146660,
+      "update_date": 1705518653371,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1125,10 +1133,10 @@
           "conditions": [
             {
               "evaluation_id": null,
-              "field_name": "incident.end_date",
-              "method": "has_a_value",
+              "field_name": "incident.plan_status",
+              "method": "changed_to",
               "type": null,
-              "value": null
+              "value": "Closed"
             },
             {
               "evaluation_id": null,
@@ -1143,8 +1151,8 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_538c6bae_cbbe_48da_a352_9877fe035677\" isExecutable=\"true\" name=\"playbook_538c6bae_cbbe_48da_a352_9877fe035677\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0msy09t\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Relations: Auto Close Child Incidents\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75127e2f-3446-4e3e-992b-e7e88321927e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.relations_parent_incident_id = incident.id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"close_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0msy09t\u003c/incoming\u003e\u003coutgoing\u003eFlow_0d142ki\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0msy09t\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0d142ki\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0d142ki\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_538c6bae_cbbe_48da_a352_9877fe035677\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0msy09t\" id=\"Flow_0msy09t_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0d142ki\" id=\"Flow_0d142ki_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"384\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"384\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 4,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_538c6bae_cbbe_48da_a352_9877fe035677\" isExecutable=\"true\" name=\"playbook_538c6bae_cbbe_48da_a352_9877fe035677\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0msy09t\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Relations: Auto Close Child Incidents\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"75127e2f-3446-4e3e-992b-e7e88321927e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.relations_parent_incident_id = incident.id\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"close_output\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0msy09t\u003c/incoming\u003e\u003coutgoing\u003eFlow_0d142ki\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0msy09t\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0d142ki\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0d142ki\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_538c6bae_cbbe_48da_a352_9877fe035677\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0d142ki\" id=\"Flow_0d142ki_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"384\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0msy09t\" id=\"Flow_0msy09t_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"384\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1705495837727,
       "creator_principal": {
@@ -1195,7 +1203,7 @@
         "name": "a@example.com",
         "type": "user"
       },
-      "last_modified_time": 1705497044956,
+      "last_modified_time": 1705518606977,
       "local_scripts": [],
       "name": "relations_auto_close_child_incidents",
       "object_type": "incident",
@@ -1210,7 +1218,7 @@
       "tags": [],
       "type": "default",
       "uuid": "538c6bae-cbbe-48da-a352-9877fe035677",
-      "version": 5
+      "version": 6
     },
     {
       "activation_type": "manual",

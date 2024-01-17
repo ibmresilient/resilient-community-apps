@@ -16,7 +16,7 @@
 `Automatic`
 
 ### Activation Conditions
-`incident.end_date has_a_value AND incident.properties.relations_level equals Parent`
+`incident.plan_status changed_to Closed AND incident.properties.relations_level equals Parent`
 
 ### Object Type
 `incident`
