@@ -18,7 +18,7 @@
 - [Function - Relations: Remove Child Relation](#function---relations-remove-child-relation)
 - [Function - Relations: Sync Artifact](#function---relations-sync-artifact)
 - [Function - Relations: Sync Child Table Data](#function---relations-sync-child-table-data)
-- [Function - Relations: Sync DataTable Data](#function---relations-sync-datatable-data)
+- [Function - Relations: Sync Datatable Data](#function---relations-sync-datatable-data)
 - [Function - Relations: Sync Notes](#function---relations-sync-notes)
 - [Function - Relations: Sync Task Notes](#function---relations-sync-task-notes)
 - [Data Table - Relations Child Incidents](#data-table---relations-child-incidents)
@@ -35,26 +35,25 @@
 | 1.0.0 | 07/2020 | Initial Release |
 | 1.0.1 | 05/2021 | Add AppHost Support<br>Patch: Verification of Parent Incident before creating relation |
 | 1.0.2 | 04/2023 | Support for Python 3.9<br>Support for CP4S<br>Patch: Verification of Parent and Child Incidents are different<br>Patch: Changed rules to only sync incident notes |
-| 2.0.0 | 09/2023 | New Function: Copy Task to Children<br>New Function: Sync Task Notes from Copied Tasks<br>New Function: Sync Artifact Data to Parent and Children<br>New Function: Sync DataTable Data to Parent and Children<br>Enhancement: Added functionality to all note syncing to allow conversations, meaning notes and replies to notes for better collaboration |
+| 2.0.0 | 09/2023 | New Function: Copy Task to Children<br>New Function: Sync Task Notes from Copied Tasks<br>New Function: Sync Artifact Data to Parent and Children<br>New Function: Sync Datatable Data to Parent and Children<br>Enhancement: Added functionality to all note syncing to allow conversations, meaning notes and replies to notes for better collaboration |
 | 3.0.0 | 12/2023 | IBM Supported |
+| 3.1.0 | 1/2023 | Auto configuration of Child layout tab and summary information, and use of playbooks | 
 
 ---
 
 ## Overview
-The Relations function is meant to provide the ability to allow parent/child relations levels within Resilient to link incidents “manually”. This package consists of 9 Functions, 9 Workflows, and 11 Rules along with 2 new fields and 1 new data table.
+The Relations app is meant to provide the ability to allow parent/child relations levels within QRadar SOAR to link incidents “manually”. This package consists of 9 functions, and 11 playbooks along with 2 new fields and 1 new data table.
 
-If you would like the Playbook variants of these instead of the workflows, Checkout the link below:
-[https://github.com/TheIRGurus/Playbooks/tree/main/Incident%20Relations%20Playbooks](https://github.com/TheIRGurus/Playbooks/tree/main/Incident%20Relations%20Playbooks)
 
-This document outlines the functionality of function as it relates to Resilient.
+This document outlines the functionality of function as it relates to QRadar SOAR.
 
 **Builds Relationships of Incidents within IBM Security SOAR**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-App used within the SOAR platform allowing the relationship building of incidents as Children and Parents.
+App used within the QRadar SOAR platform allowing the relationship building of incidents as Children and Parents.
 
-The app will also allow syncing of notes between the incidents with a relationship, auto closing child incidents of a closed parent, and syncing changes in child status with the parent DataTable that shows all children.
+The app will also allow syncing of notes between the incidents with a relationship, auto closing child incidents of a closed parent, and syncing changes in child status with the parent Datatable that shows all children.
 
 ### Key Features
 * Assign Parent incident to Child
@@ -82,11 +81,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `48.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0.8131`.
+* SOAR platform >= `48.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits>=48.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -184,241 +183,6 @@ results = {
     "child_artifact_results": {
       "content": {
         "actions": [
-          {
-            "enabled": false,
-            "id": 23,
-            "name": "Update Data Table Row"
-          },
-          {
-            "enabled": false,
-            "id": 96,
-            "name": "Example: XML Transformation"
-          },
-          {
-            "enabled": false,
-            "id": 21,
-            "name": "Get Data Table Rows"
-          },
-          {
-            "enabled": false,
-            "id": 91,
-            "name": "Example: Shell Command"
-          },
-          {
-            "enabled": false,
-            "id": 92,
-            "name": "Example: String to Attachment"
-          },
-          {
-            "enabled": false,
-            "id": 20,
-            "name": "Get Data Table Row"
-          },
-          {
-            "enabled": false,
-            "id": 17,
-            "name": "Delete Data Table Rows"
-          },
-          {
-            "enabled": false,
-            "id": 16,
-            "name": "Delete Data Table Row"
-          },
-          {
-            "enabled": false,
-            "id": 100,
-            "name": "Add Row to Datatable"
-          },
-          {
-            "enabled": false,
-            "id": 27,
-            "name": "Defender Find Machine by DNS name"
-          },
-          {
-            "enabled": false,
-            "id": 28,
-            "name": "Defender Find Machines by File Hash"
-          },
-          {
-            "enabled": false,
-            "id": 29,
-            "name": "Defender Find Machines by Internal IP Address"
-          },
-          {
-            "enabled": false,
-            "id": 30,
-            "name": "Defender Get File Information"
-          },
-          {
-            "enabled": false,
-            "id": 42,
-            "name": "Defender Set Indicator"
-          },
-          {
-            "enabled": false,
-            "id": 75,
-            "name": "Example: (Artifact) Attachment to Base64"
-          },
-          {
-            "enabled": false,
-            "id": 429,
-            "name": "Example: Network Utilities Domain Distance"
-          },
-          {
-            "enabled": false,
-            "id": 430,
-            "name": "Example: Network Utilities Expand URL"
-          },
-          {
-            "enabled": false,
-            "id": 431,
-            "name": "Example: Network Utilities Extract SSL Certificate from URL"
-          },
-          {
-            "enabled": false,
-            "id": 81,
-            "name": "Example: Email Parsing (Artifact)"
-          },
-          {
-            "enabled": false,
-            "id": 79,
-            "name": "Example: Call REST API"
-          },
-          {
-            "enabled": false,
-            "id": 432,
-            "name": "Example: Network Utilities Linux Shell Command"
-          },
-          {
-            "enabled": false,
-            "id": 433,
-            "name": "Example: Network Utilities Local Shell Command"
-          },
-          {
-            "enabled": false,
-            "id": 76,
-            "name": "Example: Artifact Hash"
-          },
-          {
-            "enabled": false,
-            "id": 434,
-            "name": "Example: Network Utilities Windows Shell Command"
-          },
-          {
-            "enabled": false,
-            "id": 83,
-            "name": "Example: Expand URL"
-          },
-          {
-            "enabled": false,
-            "id": 84,
-            "name": "Example: Extract SSL Certificate"
-          },
-          {
-            "enabled": false,
-            "id": 87,
-            "name": "Example: JSON2HTML"
-          },
-          {
-            "enabled": false,
-            "id": 88,
-            "name": "Example: Parse SSL Certificate"
-          },
-          {
-            "enabled": false,
-            "id": 210,
-            "name": "Example: LDAP Utilities: Remove User(s) from Group(s)"
-          },
-          {
-            "enabled": false,
-            "id": 225,
-            "name": "QRadar Move from Sample Blocked to Sample Suspected"
-          },
-          {
-            "enabled": false,
-            "id": 80,
-            "name": "Example: Domain Distance"
-          },
-          {
-            "enabled": false,
-            "id": 213,
-            "name": "Example: LDAP Utilities: Toggle Access"
-          },
-          {
-            "enabled": false,
-            "id": 214,
-            "name": "Example: LDAP Utilities: Update"
-          },
-          {
-            "enabled": false,
-            "id": 191,
-            "name": "Example: Exchange Online Get User Profile"
-          },
-          {
-            "enabled": false,
-            "id": 194,
-            "name": "Example: Exchange Online Query Messages on Artifact"
-          },
-          {
-            "enabled": false,
-            "id": 205,
-            "name": "Schedule a Rule/Playbook to Run - Artifact"
-          },
-          {
-            "enabled": false,
-            "id": 267,
-            "name": "Example: urlscan.io"
-          },
-          {
-            "enabled": false,
-            "id": 381,
-            "name": "Example: Relations - Sync Artifact"
-          },
-          {
-            "enabled": false,
-            "id": 209,
-            "name": "Example: LDAP Utilities: Add User(s) to Group(s)"
-          },
-          {
-            "enabled": false,
-            "id": 211,
-            "name": "Example: LDAP Utilities: Search"
-          },
-          {
-            "enabled": false,
-            "id": 212,
-            "name": "Example: LDAP Utilities: Set Password"
-          },
-          {
-            "enabled": false,
-            "id": 365,
-            "name": "Run whois query against Artifact (RDAP)"
-          },
-          {
-            "enabled": false,
-            "id": 364,
-            "name": "Run rdap query against Artifact"
-          },
-          {
-            "enabled": true,
-            "id": 221,
-            "name": "Find All QRadar Reference Sets"
-          },
-          {
-            "enabled": true,
-            "id": 222,
-            "name": "Find in QRadar Reference Set"
-          },
-          {
-            "enabled": false,
-            "id": 223,
-            "name": "QRadar Add to Reference Set"
-          },
-          {
-            "enabled": true,
-            "id": 224,
-            "name": "QRadar Add to Reference Table"
-          }
         ],
         "attachment": null,
         "created": 1693442727342,
@@ -517,7 +281,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 11502,
-    "host": "IBM-PF36KPAV",
+    "host": "localhost",
     "package": "fn-relations",
     "package_version": "2.0.0",
     "timestamp": "2023-08-30 20:45:34",
@@ -589,7 +353,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 10038,
-    "host": "IBM-PF36KPAV",
+    "host": "localhost",
     "package": "fn-relations",
     "package_version": "2.0.0",
     "timestamp": "2023-08-30 21:12:37",
@@ -670,7 +434,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 7216,
-    "host": "IBM-PF36KPAV",
+    "host": "localhost",
     "package": "fn-relations",
     "package_version": "2.0.0",
     "timestamp": "2023-08-30 23:29:46",
@@ -740,7 +504,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 15068,
-    "host": "IBM-PF36KPAV",
+    "host": "localhost",
     "package": "fn-relations",
     "package_version": "2.0.0",
     "timestamp": "2023-08-30 20:44:47",
@@ -780,7 +544,7 @@ None
 
 ---
 ## Function - Relations: Sync Artifact
-Sync Artifacts from the incident where the artifact is currently to the parent or child.
+Sync Artifacts from the incident where the artifact is currently to the parent or children.
 
  ![screenshot: fn-relations-sync-artifact ](./doc/screenshots/fn-relations-sync-artifact.png)
 
@@ -820,7 +584,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 5944,
-    "host": "IBM-PF36KPAV",
+    "host": "localhost",
     "package": "fn-relations",
     "package_version": "2.0.0",
     "timestamp": "2023-08-30 23:27:26",
@@ -918,7 +682,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 2219,
-    "host": "IBM-PF36KPAV",
+    "host": "localhost",
     "package": "fn-relations",
     "package_version": "2.0.0",
     "timestamp": "2023-08-30 21:58:36",
@@ -961,8 +725,8 @@ None
 </details>
 
 ---
-## Function - Relations: Sync DataTable Data
-A Function used to Sync DataTable Data from the incident where it resides to the parent or child.
+## Function - Relations: Sync Datatable Data
+A Function used to Sync Datatable Data from the incident where it resides to the parent or children.
 
  ![screenshot: fn-relations-sync-datatable-data ](./doc/screenshots/fn-relations-sync-datatable-data.png)
 
@@ -972,9 +736,9 @@ A Function used to Sync DataTable Data from the incident where it resides to the
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | Yes | `-` | - |
-| `relations_datatables` | `text` | Yes | `data_table_api1,data_table_api2 OR All` | A comma seperated list of DataTable API Names to sync, or just "All" if syncing everything. |
-| `relations_exclude_datatables` | `text` | No | `data_table_api1,data_table_api2,data_table_api3` | A Comma Seperated list of DataTable API Names that are to be excluded from the Sync. Meant to be used when syncing "All" DataTables. |
-| `relations_row_data` | `text` | No | `-` | The entire row output of a DataTable Row for syncing specific Rows individually. |
+| `relations_datatables` | `text` | Yes | `data_table_api1,data_table_api2 OR All` | A comma separated list of Datatable API Names to sync, or just "All" if syncing everything. |
+| `relations_exclude_datatables` | `text` | No | `data_table_api1,data_table_api2,data_table_api3` | A Comma separated list of Datatable API Names that are to be excluded from the Sync. Meant to be used when syncing "All" DataTables. |
+| `relations_row_data` | `text` | No | `-` | The entire row output of a Datatable Row for syncing specific Rows individually. |
 
 </p>
 </details>
@@ -1004,7 +768,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 5321,
-    "host": "IBM-PF36KPAV",
+    "host": "localhost",
     "package": "fn-relations",
     "package_version": "2.0.0",
     "timestamp": "2023-08-30 23:41:19",
@@ -1048,7 +812,7 @@ None
 
 ---
 ## Function - Relations: Sync Notes
-Sync notes from the incident where the note is currently to the parent or child.
+Sync notes from the incident where the note is currently to the parent or children.
 
  ![screenshot: fn-relations-sync-notes ](./doc/screenshots/fn-relations-sync-notes.png)
 
@@ -1084,7 +848,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 5574,
-    "host": "IBM-PF36KPAV",
+    "host": "localhost",
     "package": "fn-relations",
     "package_version": "2.0.0",
     "timestamp": "2023-08-30 20:43:56",
@@ -1161,7 +925,7 @@ results = {
   },
   "metrics": {
     "execution_time_ms": 4242,
-    "host": "IBM-PF36KPAV",
+    "host": "localhost",
     "package": "fn-relations",
     "package_version": "2.0.0",
     "timestamp": "2023-08-30 23:31:10",
@@ -1228,30 +992,29 @@ dt_relations_child_incidents
 ## Custom Artifact Types
 | Display Name | API Access Name | Description |
 | ------------ | --------------- | ----------- |
-| Related Parent Incident | `related_parent_incident` | Incident ID of the parent of all related incidents to create a relation within Resilient incidents manually. |
+| Related Parent Incident | `related_parent_incident` | Incident ID of the parent of all related incidents to create a relation within QRadar SOAR incidents manually. |
 
 ---
 
 ## Rules
-| Rule Name | Object | Workflow Triggered |
+| Rule Name | Object | Playbook Triggered |
 | --------- | ------ | ------------------ |
-| Example: Relations - Assign Parent Incident | incident | `example_relations_assign_parent` |
-| Example: Relations - Close Child Incidents | incident | `example_relations_auto_close_child_incidents` |
-| Example: Relations - Remove Child Relation | incident | `example_relations_remove_child_relation` |
-| Example: Relations - Send Task to Children | task | `example_relations_send_task_to_children` |
-| Example: Relations - Sync Artifact | artifact | `example_relations_sync_artifact_to_parentchild` |
-| Example: Relations - Sync DataTable Data | incident | `example_relations_sync_datatable_data_to_parentchild` |
-| Example: Relations - Sync Notes with Child | note | `example_relations_sync_notes_to_parentchild` |
-| Example: Relations - Sync Notes with Parent | note | `example_relations_sync_notes_to_parentchild` |
-| Example: Relations - Sync Task Note to Child | note | `example_relations_sync_task_notes_to_parentchild` |
-| Example: Relations - Sync Task Notes to Parent | note | `example_relations_sync_task_notes_to_parentchild` |
-| Example: Relations - Update Child Incident Parent Data Table | incident | `example_relations_update_child_table_data` |
+| Relations: Assign Parent Incident | incident | `relations_assign_parent` |
+| Relations: Close Child Incidents | incident | `relations_auto_close_child_incidents` |
+| Relations: Remove Child Relation | incident | `relations_remove_child_relation` |
+| Relations: Send Task to Children | task | `relations_send_task_to_children` |
+| Relations: Sync Artifact | artifact | `relations_sync_artifact_to_parentchild` |
+| Relations: Sync Datatable Data | incident | `relations_sync_datatable_data_to_parentchild` |
+| Relations: Sync Notes with Child | note | `relations_sync_notes_to_parentchild` |
+| Relations: Sync Notes with Parent | note | `relations_sync_notes_to_parentchild` |
+| Relations: Sync Task Note to Child | note | `relations_sync_task_notes_to_parentchild` |
+| Relations: Sync Task Notes to Parent | note | `relations_sync_task_notes_to_parentchild` |
+| Relations: Update Child Incident Parent Data Table | incident | `relations_update_child_table_data` |
 
 ---
-
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+This is a IBM Supported provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance or [open a support case](https://ibm.com/mysupport).

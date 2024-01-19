@@ -8,6 +8,7 @@
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 from resilient_lib import IntegrationError, validate_fields
 from fn_relations.lib.utilities import unix_to_datetime, list_children, list_artifacts
+from fn_relations.lib.configure_tab import init_relations_layout
 
 PACKAGE_NAME = "fn_relations"
 FN_NAME = "relations_assign_parent"
@@ -18,6 +19,9 @@ class FunctionComponent(AppFunctionComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+
+        # initialize the layouts for this tabs, sections, etc.
+        init_relations_layout(opts)
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
