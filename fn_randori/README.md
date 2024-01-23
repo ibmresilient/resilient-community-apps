@@ -212,6 +212,7 @@ The following Randori Tab custom layout is included in the app:
 
 The poller is just one way to escalate Randori Targets to SOAR cases. It's also possible to send target information to a SIEM, such as IBM QRadar, which would then coorelate Targets into Offenses. With the QRadar Plugin for SOAR, offenses can then be escalated to SOAR cases. As long as the Randori Target ID is preserved in the custom case field `randori_target_id`, then all the remaining details about the target will synchronize to the SOAR case. In the case of the QRadar Plugin for SOAR, you would modify the escalation templates to reference this custom field with the Randori Target ID.
 <p>
+
 When using another source of Randori Target escalation to IBM SOAR, disable the poller by changing the app.config setting to `polling_interval=0`.
 <p>
 
