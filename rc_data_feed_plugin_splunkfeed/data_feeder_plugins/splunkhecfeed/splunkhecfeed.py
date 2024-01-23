@@ -8,6 +8,7 @@ This module contains the SplunkHECFeedDestination for writing Resilient data
 to an Splunk HTTP Event Collector index.
 """
 
+import base64
 import logging
 
 from rc_data_feed.lib.feed import FeedDestinationBase

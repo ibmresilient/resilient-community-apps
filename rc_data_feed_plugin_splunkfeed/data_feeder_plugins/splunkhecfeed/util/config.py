@@ -48,4 +48,6 @@ include_attachment_data=false
 # if necessary, specify the supported workspace (by label, case sensitive) and the list of feeds associated with it
 # ex: 'Default Workspace': ['sqlserver_feed'], 'workspace A': ['kafka_feed', 'resilient_feed']
 workspaces=
+# support for parallel execution. Default is False
+parallel_execution = False
 """
