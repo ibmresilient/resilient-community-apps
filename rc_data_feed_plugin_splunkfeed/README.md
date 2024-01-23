@@ -135,4 +135,4 @@ Follow these steps to create an HTTP Event Collector:
 ![token screenshot](./doc/screenshots/collector_token.png)
 
 ## Additional Data Feed Documentation
-For more information on the setup and use of the data feeder, including the use of the Data Sync Incident function, refer to the [Data Feeder Documentation](https://github.ibm.com/Resilient/resilient-community-apps/blob/main/rc_data_feed/doc/IBM_SOAR_Data_Feed_App_Guide.docx).
+For more information on the setup and use of the data feeder, including the use of the Data Sync Incident function, refer to the [Data Feeder Documentation](https://github.com/ibmresilient/resilient-community-apps/blob/main/rc_data_feed/doc/IBM_SOAR_Data_Feed_App_Guide.docx).
