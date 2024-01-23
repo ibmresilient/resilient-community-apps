@@ -1,7 +1,6 @@
 # docker build -t resilient/{ext} .
 # rc-data-feeder will build plugins from a base image
-# FROM quay.io/ibmresilient/rc_data_feed:3.0.0
-FROM docker-eu.artifactory.swg-devops.com/sec-resilient-docker-local/ibmresilient/rc_data_feed:3.0.1400
+FROM quay.io/ibmresilient/rc_data_feed:3.0.0
 
 ARG APPLICATION=rc_data_feed_plugin_splunkfeed
 ARG RES_CIRCUITS_VERSION=44.0
