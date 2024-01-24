@@ -1,24 +1,27 @@
-# Introduction
-This package contains the SplunkFeed Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for IBM SOAR incidents, artifacts, tasks, notes, etc.  The updates are performed in near real-time.
+# Data Feed plugin for Splunk HTTP Event Collector
+
+## Introduction
+This package contains the SplunkFeed Plugin to the Data Feed extension. This Data Feed extension allows one to maintain "replica" data for IBM SOAR incidents, artifacts, tasks, notes, etc via a HTTP Event Collector in Splunk. The updates are performed in near real-time.
 
 This plugin allows this replica data to be maintained in Splunk.
 
 Refer to the documentation on the Data Feed extension for uses cases support and configuration options. Also refer to the other Data Feed plugins which can be used in combination.
 
-# License
+## License
 
 Unless otherwise specified, contents of this repository are published under the MIT open-source
 [LICENSE](LICENSE).
 
-# Release Notes
+## Release Notes
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.2   | 01/2024 | Updated base rc_data_feed to 3.0.0 |
 | 1.1.1   | 10/2022 | Fix to handle rare corrupt event.message |
 | 1.1.0   | 5/2022 | Replaced base component, adding attachment content, workspace separation, more control over auto data reload. |
 | 1.0.3   | 9/2020 | App Host and Proxy Support |
 
-## 1.1.0 Changes
+### 1.1.0 Changes
 
 This release modified the base portion of the Data Feeder which is controlled by the `[feed]` section within the app.config file. New parameters have been added which you need to manually add if upgrading from a previous version:
 
@@ -28,21 +31,21 @@ This release modified the base portion of the Data Feeder which is controlled by
 | workspaces | "Default Workspace": ["sqlserver_feed"], "workspace A": ["kafka_feed", "resilient_feed"] | This setting allows for the partitioning of Data Feeder execution among different workspaces. The format is to specify the workspace name with the data feeder components to associated with it: "workspace": ["app.config section_name"]. If unused, data from all workspaces is accessed. |
 | include_attachment_data | true/false | set to true if attachment data should be part of the sent payload. When 'true', the attachment's byte data is saved in base64 format. |
 
-# Compatibility
+## Compatibility
 
 SOAR Compatibilty: 30.0 or higher
 
 CP4S Compatibility: 1.4 or higher
 
-# Installation
+## Installation
 The data feeder app for Splunk contains Python components that are called by the IBM SOAR platform. It can either by installed directly in the app for management and execution through the App Host, or installed on your own Integration server, running our integration framework: resilient-circuits. It is prefered that an enterprise use App Host, as all the component installation and dependencies are already packaged.
 
-## App Host
+### App Host
 Simply install the .zip file into the app. It includes:
 * Rules to automatically share incident data with Splunk. Review the rules which start with 'Data Feeder:' if you wish to reduce the types of information shared. To share datatable data, create a new rule specifying the datatable and assign it to 'data_feed' destination. See the [app.config file](#app.config-file) section for more information on how to configure your data feed environment.
 
-## Integration Server
-### Install the Python components
+### Integration Server
+#### Install the Python components
   Complete the following steps to install the Python components:
 * Ensure that the environment is up-to-date, as follows:
 ```
@@ -71,7 +74,7 @@ Simply install the .zip file into the app. It includes:
   resilient-circuits config –u [-l rc-data-feed-plugin-splunkfeed]
 ```
 
-## app.config file
+### app.config file
 * Edit the app.config configuration file, as follows:
 
      - In the [resilient] section, ensure that you provide all the information required to connect to the IBM SOAR platform.
@@ -98,7 +101,7 @@ include_attachment_data=false
 workspaces=
 ```
 
-# SplunkHECFeed Class
+## SplunkHECFeed Class
 The SplunkHECFeed class utilizes the Splunk HTTP Event Collector for data import. This is convenient as the data from IBM SOAR is readily converted to JSON which can be natively consumed by Splunk.
 
 | Key | Values | Description |
@@ -113,23 +116,23 @@ port | Ex. 8088 | The default is 8088 |
 | event_source_type |  | Optional source_type if one value is used for all events. If unspecified, each object type (incident, task, note, etc.) is used as the source_type
 | use_ssl | True | False | Indicate if connections to the HEC uses encryption (https) |
 
-## Considerations
+### Considerations
 * Enable the HTTP Event Collector within Splunk ES before using this data feed.
 * Splunk events are immutable. IBM SOAR object changes are represented as new events. No event deletion is possible.
 * Be aware that when using `reload=True`, all IBM SOAR records will be duplicated in Splunk each time resilient-circuits is re-started. Use the app.config setting `reload_types` to specify the data sent if you want to either limit the object types or to also include datatables.
 
-# Splunk Configuration
+## Splunk Configuration
 Follow these steps to create an HTTP Event Collector:
 
 1. Go to Settings and select Indexes.
 2. Create an index for data feeder. Your requirements will guide you to the correct settings. We have tested with Index Data Type `Events` and App `Search and Reporting`.
-![create screenshot](./doc/screenshots/index.png) 
+![create screenshot](./doc/screenshots/index.png)
 3. Go to Settings and select Data Inputs.
 4. For HTTP Event Collector, click the `Add new` Action.
 5. Enter information about your collector, specifically, the index(es) to enable and the Default Index. No other settings are necessary (such as Source Type) but can be added for further identification.
-![create screenshot](./doc/screenshots/create_collector.png) 
+![create screenshot](./doc/screenshots/create_collector.png)
 6. Once created, copy the Token Value for use in the app.config `token` setting.
 ![token screenshot](./doc/screenshots/collector_token.png)
 
-# Additional Data Feed Documentation
-For more information on the setup and use of the data feeder, including the use of the Data Sync Incident function, refer to the [Data Feeder Documentation](https://github.ibm.com/Resilient/resilient-community-apps/blob/master/rc_data_feed/doc/IBM_SOAR_Data_Feed_App_Guide.docx).
+## Additional Data Feed Documentation
+For more information on the setup and use of the data feeder, including the use of the Data Sync Incident function, refer to the [Data Feeder Documentation](https://github.com/ibmresilient/resilient-community-apps/blob/main/rc_data_feed/doc/IBM_SOAR_Data_Feed_App_Guide.docx).

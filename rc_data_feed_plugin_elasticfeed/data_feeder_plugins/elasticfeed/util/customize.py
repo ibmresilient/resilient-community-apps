@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for rc-data-feed"""
+"""Generate the SOAR customizations required for rc-data-feed"""
+
+import os
+import io
+import base64
 
 from __future__ import print_function
 from resilient import ImportDefinition
 
 """THIS INFORMATION IS REPLICATED FROM RC-DATA-FEED. IT SHOULD ONLY BE USED FOR APPHOST ENVIRONMENTS"""
+
+RES_FILE = "data/export.res"
 
 def codegen_reload_data():
     """

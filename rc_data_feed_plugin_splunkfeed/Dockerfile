@@ -1,8 +1,6 @@
 # docker build -t resilient/{ext} .
-# Base image using Red Hat's universal base image (rhel 8) for python
-#FROM registry.access.redhat.com/ubi8/python-36:latest
 # rc-data-feeder will build plugins from a base image
-FROM quay.io/ibmresilient/rc_data_feed:2.2.2
+FROM quay.io/ibmresilient/rc_data_feed:3.0.0
 
 ARG APPLICATION=rc_data_feed_plugin_splunkfeed
 ARG RES_CIRCUITS_VERSION=44.0
@@ -13,11 +11,11 @@ USER 0
 RUN pip install --upgrade pip
 
 # install resilient-circuits
-RUN pip install "resilient-circuits>=${RES_CIRCUITS_VERSION}"
+RUN pip install --upgrade "resilient-circuits>=${RES_CIRCUITS_VERSION}"
 
 ## ---- section for changes ----
 # uncomment and replicate if additional os libraries are needed
-#RUN yum -y update && yum clean all
+RUN yum -y update && yum clean all
 #RUN yum -y install <package>
 
 # install the base package
