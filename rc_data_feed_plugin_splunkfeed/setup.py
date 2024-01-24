@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='rc_data_feed_plugin_splunkfeed',
     display_name='Data Feeder for Splunk',
-    version='1.1.1',
+    version='1.1.2',
     license='MIT',
     author='IBM QRadar SOAR',
     author_email='',
@@ -20,8 +20,7 @@ setup(
     Also refer to the other Data Feed plugins which can be used in combination.""",
     install_requires=[
         'rc_data_feed>=2.2.2',
-        'resilient',
-        'resilient-lib>=44.0.0'
+        'resilient'
     ],
     packages=find_packages(),
     include_package_data=True,

@@ -2,16 +2,20 @@
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 import json
-from operator import truediv
 import os
-import pytest
 import re
 import sys
 import time
 from collections import OrderedDict
-from data_feeder_plugins.splunkhecfeed.splunkhecfeed import SplunkHECFeedDestination
-from rc_data_feed.lib.type_info import ActionMessageTypeInfo
+from operator import truediv
+
+import pytest
+from data_feeder_plugins.splunkhecfeed.splunkhecfeed import \
+    SplunkHECFeedDestination
+from mock import patch
 from requests import Session
+
+from rc_data_feed.lib.type_info import ActionMessageTypeInfo
 
 if sys.version_info.major < 3:
     import ConfigParser as configparser
@@ -83,9 +87,15 @@ else:
     RESULT_PAYLOAD['test_date']     = "2019-02-13T15:55:47.448000"
     RESULT_PAYLOAD['test_datetime'] = "2019-02-13T15:55:47.448000+00:00"
 
-def test_build_pass():
-    """ This test does nothing. It's required for the build process to have one passing test """
-    return True
+@patch("data_feeder_plugins.splunkhecfeed.splunkhecfeed.http_event_collector")
+def test_mocked_index_run(patched_event_collector_class):
+    es_feed = SplunkHECFeedDestination(None, APP_CONFIG)
+
+    context = Context()
+    es_feed.send_data(context, MSG_PAYLOAD)
+
+    assert patched_event_collector_class.called
+    assert patched_event_collector_class.return_value.sendEvent.called
 
 @pytest.mark.livetest
 def test_index():
