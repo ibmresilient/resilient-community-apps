@@ -1,7 +1,7 @@
 # Data Feed plugin for Splunk HTTP Event Collector
 
 ## Introduction
-This package contains the SplunkFeed Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for IBM SOAR incidents, artifacts, tasks, notes, etc via a HTTP Event Collector in Splunk.  The updates are performed in near real-time.
+This package contains the SplunkFeed Plugin to the Data Feed extension. This Data Feed extension allows one to maintain "replica" data for IBM SOAR incidents, artifacts, tasks, notes, etc via a HTTP Event Collector in Splunk. The updates are performed in near real-time.
 
 This plugin allows this replica data to be maintained in Splunk.
 

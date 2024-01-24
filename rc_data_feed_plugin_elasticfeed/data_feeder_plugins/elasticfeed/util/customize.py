@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for rc-data-feed"""
+"""Generate the SOAR customizations required for rc-data-feed"""
 
 import os
 import io
