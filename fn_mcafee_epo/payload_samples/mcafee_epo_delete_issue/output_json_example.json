@@ -1,0 +1,18 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": 1,
+  "raw": null,
+  "inputs": {
+    "mcafee_epo_issue_id": 12
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 538,
+    "timestamp": "2022-08-19 09:01:12"
+  }
+}
