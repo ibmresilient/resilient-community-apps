@@ -115,7 +115,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.6 is supported.
+Python 3.9 is supported. This is due to dependencies on selenium.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=48.0.0
 * selenium
