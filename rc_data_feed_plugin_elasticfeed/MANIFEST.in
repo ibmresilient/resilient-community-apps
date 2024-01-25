@@ -1,0 +1,5 @@
+include README.md
+include rc_data_feed_plugin_elasticfeed/*
+include rc_data_feed_plugin_elasticfeed/LICENSE
+recursive-include data_feeder_plugins *
+recursive-exclude tests *
