@@ -44,7 +44,7 @@ setup(
         'paramiko~=2.10',
         'defusedxml~=0.7.1',
         'pdfid~=1.1',
-        'chardet==4.0.0'
+        'chardet'
     ],
     packages=find_packages(),
     python_requires='>=3',
