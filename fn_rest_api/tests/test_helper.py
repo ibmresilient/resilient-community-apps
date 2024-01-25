@@ -9,293 +9,255 @@ from fn_rest_api.lib.helper import (validate_url,
 
 from resilient_lib import IntegrationError
 
-class TestConsants(unittest.TestCase):
 
-    def test_constants(self):
-        self.assertEqual(helper.CONTENT_TYPE, "content-type")
-        self.assertEqual(helper.CONTENT_TYPE_JSON, "application/json")
+def test_constants():
+    assert helper.CONTENT_TYPE == "content-type"
+    assert helper.CONTENT_TYPE_JSON == "application/json"
 
-class TestRenderDictComponents(unittest.TestCase):
+def test_str_dict_to_py_dict():
+    processed_value = {"test_input" : {"sample1" : "normal plain text"}}
+    render_dict_components(processed_value, {}),
+    assert processed_value == {"test_input" : {'sample1': 'normal plain text'}}
 
-    def test_str_dict_to_py_dict(self):
-        processed_value = {"test_input" : {"sample1" : "normal plain text"}}
-        render_dict_components(processed_value, {}),
-        self.assertDictEqual(processed_value,
-            {"test_input" : {'sample1': 'normal plain text'}})
+def test_json_dict():
+    # String to dict using json decoder
+    processed_value = {"test_input" :  """ {"key" : "json text"} """}
+    render_dict_components(processed_value, {}),
+    assert processed_value == {"test_input" : {'key': 'json text'}}
 
-    def test_json_dict(self):
-        # String to dict using json decoder
-        processed_value = {"test_input" :  """ {"key" : "json text"} """}
-        render_dict_components(processed_value, {}),
-        self.assertDictEqual(processed_value,
-            {"test_input" : {'key': 'json text'}})
+def test_json_dict_with_none():
+    # Null handling using json decoder
+    processed_value = {"test_input" :  """ {"key" :  null} """}
+    render_dict_components(processed_value, {}),
+    assert processed_value == {"test_input" : {'key': None}}
 
-    def test_json_dict_with_none(self):
-        # Null handling using json decoder
-        processed_value = {"test_input" :  """ {"key" :  null} """}
-        render_dict_components(processed_value, {}),
-        self.assertDictEqual(processed_value,
-            {"test_input" : {'key': None}})
+def test_json_dict_multiline():
+    # Multi-line string with to dict with \n character using json decoder
+    processed_value = {"test_input" :  """ {"key1" : "multi line json text1",
+        "key2" : "multi line json text2"}"""}
+    render_dict_components(processed_value, {}),
+    assert processed_value == {"test_input" : {'key1': 'multi line json text1', 'key2': 'multi line json text2'}}
 
-    def test_json_dict(self):
-        # Multi-line string to dict using json decoder
-        processed_value = {"test_input" :  """ {"key1" : "multi line json text1", "key2" : "multi line json text2"}"""}
-        render_dict_components(processed_value, {}),
-        self.assertDictEqual(processed_value,
-            {"test_input" : {'key1': 'multi line json text1', 'key2': 'multi line json text2'}})
+def test_simple_dict():
+    # Simple new line kv-pair to string
+    processed_value = {"test_input" : """ key1 : new line separated text 1
+        key2 : new line separated text 2 """}
+    render_dict_components(processed_value, {})
+    assert processed_value == {"test_input" : {'key1': 'new line separated text 1',
+    'key2': 'new line separated text 2'}}
 
-    def test_json_dict_multiline(self):
-        # Multi-line string with to dict with \n character using json decoder
-        processed_value = {"test_input" :  """ {"key1" : "multi line json text1",
-                           "key2" : "multi line json text2"}"""}
-        render_dict_components(processed_value, {}),
-        self.assertDictEqual(processed_value,
-            {"test_input" : {'key1': 'multi line json text1', 'key2': 'multi line json text2'}})
+def test_simple_dict_with_leading_new_line():
+    # Simple new line kv-pair with leading blank line to dict
+    processed_value = {"test_input" : """
+        key1 : new line separated text 1
+        key2 : new line separated text 2 """}
+    render_dict_components(processed_value, {})
+    assert processed_value == {"test_input" : {'key1': 'new line separated text 1',
+    'key2': 'new line separated text 2'}}
 
-    def test_simple_dict(self):
-        # Simple new line kv-pair to string
-        processed_value = {"test_input" : """ key1 : new line separated text 1
-            key2 : new line separated text 2 """}
-        render_dict_components(processed_value, {})
-        self.assertDictEqual(processed_value,
-            {"test_input" : {'key1': 'new line separated text 1',
-             'key2': 'new line separated text 2'}})
+def test_simple_dict_with_numbers():
+    # Simple new line kv-pair with numbers and decimals to dict
+    processed_value = {"test_input" : """
+        key1 : 1234
+        key2 : 22.2345 """}
+    render_dict_components(processed_value, {})
+    assert processed_value == {"test_input" : {'key1': '1234',
+    'key2': '22.2345'}}
 
-    def test_simple_dict_with_leading_new_line(self):
-        # Simple new line kv-pair with leading blank line to dict
-        processed_value = {"test_input" : """
-            key1 : new line separated text 1
-            key2 : new line separated text 2 """}
-        render_dict_components(processed_value, {})
-        self.assertDictEqual(processed_value,
-            {"test_input" : {'key1': 'new line separated text 1',
-             'key2': 'new line separated text 2'}})
+def test_none_handling():
+    # None handling
+    processed_value = {"test_input" : None}
+    render_dict_components(processed_value, {})
+    assert processed_value == {"test_input" : None}
 
-    def test_simple_dict_with_numbers(self):
-        # Simple new line kv-pair with numbers and decimals to dict
-        processed_value = {"test_input" : """
-            key1 : 1234
-            key2 : 22.2345 """}
-        render_dict_components(processed_value, {})
-        self.assertDictEqual(processed_value,
-            {"test_input" : {'key1': '1234',
-             'key2': '22.2345'}})
+def test_empty_string():
+    # Empty string
+    processed_value = {"test_input" : ""}
+    render_dict_components(processed_value, {})
+    assert processed_value ==     {"test_input" : ""}
 
-    def test_none_handlig(self):
-        # None handling
-        processed_value = {"test_input" : None}
-        render_dict_components(processed_value, {})
-        self.assertDictEqual(processed_value,
-            {"test_input" : None})
+def test_json_dict_value_sub():
+    processed_value = {"test_input" : """{"sample1" : "normal {{TO_BE_SUBED}}"}"""}
+    render_dict_components(processed_value, {"TO_BE_SUBED" : "plain text but substituted"}),
+    assert processed_value == {"test_input" : {'sample1': 'normal plain text but substituted'}}
 
-    def test_empty_string(self):
-        # Empty string
-        processed_value = {"test_input" : ""}
-        render_dict_components(processed_value, {})
-        self.assertDictEqual(processed_value,
-               {"test_input" : ""})
+def test_simple_dict_with_leading_new_line_and_sub():
+    # Multiline kv pair with multiple secret substitutions
+    processed_value = {"test_input" : """
+        key1 : new line separated {{SECRET_001}} {{SECRET_002}}
+        key2 : new line separated {{SECRET_002}} {{SECRET_001}}
+        {{SECRET_KEY}} : new line separated secret
+        {{SECRET_key}} : {{SECRET_value}}"""}
 
-    def test_json_dict_value_sub(self):
-        processed_value = {"test_input" : """{"sample1" : "normal {{TO_BE_SUBED}}"}"""}
-        render_dict_components(processed_value, {"TO_BE_SUBED" : "plain text but substituted"}),
-        self.assertDictEqual(processed_value,
-            {"test_input" : {'sample1': 'normal plain text but substituted'}})
+    render_dict_components(processed_value, {
+        "SECRET_key"   : "thisisakey",
+        "SECRET_001"   : "testsecret1",
+        "SECRET_002"   : "testsecret@!$%^2",
+        "SECRET_KEY"   : " test KEY ",
+        "SECRET_value" : "testvaluesecret"})
 
-    def test_simple_dict_with_leading_new_line_and_sub(self):
-        # Multiline kv pair with multiple secret substitutions
-        processed_value = {"test_input" : """
-            key1 : new line separated {{SECRET_001}} {{SECRET_002}}
-            key2 : new line separated {{SECRET_002}} {{SECRET_001}}
-            {{SECRET_KEY}} : new line separated secret
-            {{SECRET_key}} : {{SECRET_value}}"""}
-        render_dict_components(processed_value, {
-            "SECRET_key"   : "thisisakey",
-            "SECRET_001"   : "testsecret1",
-            "SECRET_002"   : "testsecret@!$%^2",
-            "SECRET_KEY"   : " test KEY ",
-            "SECRET_value" : "testvaluesecret"})
+    assert processed_value == {"test_input" : {
+    'key1': 'new line separated testsecret1 testsecret@!$%^2',
+    'key2': 'new line separated testsecret@!$%^2 testsecret1',
+    'test KEY' : 'new line separated secret',
+    "thisisakey" : "testvaluesecret"}}
 
-        self.assertDictEqual(processed_value,
-            {"test_input" : {
-                'key1': 'new line separated testsecret1 testsecret@!$%^2',
-                'key2': 'new line separated testsecret@!$%^2 testsecret1',
-                'test KEY' : 'new line separated secret',
-                "thisisakey" : "testvaluesecret"}})
+def test_simple_dict_with_blank_lines():
+    # Simple new line kv-pair with multiple blank lines to dict
+    processed_value = {"test_input" : """
 
-    def test_simple_dict_with_blank_lines(self):
-        # Simple new line kv-pair with multiple blank lines to dict
-        processed_value = {"test_input" : """
+        key1 : new line separated text 1
 
-            key1 : new line separated text 1
+        key2 : new line separated text 2
 
-            key2 : new line separated text 2
+    """}
+    render_dict_components(processed_value, {})
+    assert processed_value == {"test_input" : {'key1': 'new line separated text 1',
+    'key2': 'new line separated text 2'}}
 
-        """}
-        render_dict_components(processed_value, {})
-        self.assertDictEqual(processed_value,
-            {"test_input" : {'key1': 'new line separated text 1',
-             'key2': 'new line separated text 2'}})
+def test_simple_dict_with_symbols():
+    # Simple new line kv-pair with symbols to dict
+    processed_value = {"test_input" : """
 
-    def test_simple_dict_with_symbols(self):
-        # Simple new line kv-pair with symbols to dict
-        processed_value = {"test_input" : """
+        key1 : new !@#$/%/%^^$#@!@#$!%
 
-            key1 : new !@#$/%/%^^$#@!@#$!%
-
-            key2 : new line separated text 2
-        """}
-        render_dict_components(processed_value, {})
-        self.assertDictEqual(processed_value,
-            {"test_input" : {'key1': 'new !@#$/%/%^^$#@!@#$!%',
-             'key2': 'new line separated text 2'}})
+        key2 : new line separated text 2
+    """}
+    render_dict_components(processed_value, {})
+    assert processed_value == {"test_input" : {'key1': 'new !@#$/%/%^^$#@!@#$!%',
+    'key2': 'new line separated text 2'}}
 
 
-class TestBuildDict(unittest.TestCase):
-    
-    def test_json_dict(self):
-        # String to dict using json decoder
-        processed_value = build_dict(""" {"key" : "json text"} """)
-        self.assertDictEqual(processed_value, {'key': 'json text'})
 
-    def test_json_dict_with_none(self):
-        # Null handling using json decoder
-        processed_value = build_dict(""" {"key" :  null} """)
-        self.assertDictEqual(processed_value, {'key': None})
+def test_build_json_dict_basic():
+    # String to dict using json decoder
+    processed_value = build_dict(""" {"key" : "json text"} """)
+    assert processed_value == {'key': 'json text'}
 
-    def test_json_dict(self):
-        # Multi-line string to dict using json decoder
-        processed_value = build_dict(""" {"key1" : "multi line json text1", "key2" : "multi line json text2"}""")
-        self.assertDictEqual(processed_value, {'key1': 'multi line json text1', 'key2': 'multi line json text2'})
+def test_build_json_dict_with_none():
+    # Null handling using json decoder
+    processed_value = build_dict(""" {"key" :  null} """)
+    assert processed_value == {'key': None}
 
-    def test_json_dict_multiline(self):
-        # Multi-line string with to dict with \n character using json decoder
-        processed_value = build_dict(""" {"key1" : "multi line json text1",
-                            "key2" : "multi line json text2"}""")
-        self.assertDictEqual(processed_value, {'key1': 'multi line json text1', 'key2': 'multi line json text2'})
+def test_build_json_dict():
+    # Multi-line string to dict using json decoder
+    processed_value = build_dict(""" {"key1" : "multi line json text1", "key2" : "multi line json text2"}""")
+    assert processed_value == {'key1': 'multi line json text1', 'key2': 'multi line json text2'}
 
-    def test_simple_dict(self):
-        # Simple new line kv-pair to string
-        processed_value = build_dict(""" key1 : new line separated text 1
-            key2 : new line separated text 2 """)
-        self.assertDictEqual(processed_value, {'key1': 'new line separated text 1',
-                'key2': 'new line separated text 2'})
+def test_build_json_dict_multiline():
+    # Multi-line string with to dict with \n character using json decoder
+    processed_value = build_dict(""" {"key1" : "multi line json text1",
+                        "key2" : "multi line json text2"}""")
+    assert processed_value == {'key1': 'multi line json text1', 'key2': 'multi line json text2'}
 
-    def test_simple_dict_with_leading_new_line(self):
-        # Simple new line kv-pair with leading blank line to dict
-        processed_value = build_dict("""
-            key1 : new line separated text 1
-            key2 : new line separated text 2 """)
-        self.assertDictEqual(processed_value, {'key1': 'new line separated text 1',
-                'key2': 'new line separated text 2'})
+def test_build_simple_dict():
+    # Simple new line kv-pair to string
+    processed_value = build_dict(""" key1 : new line separated text 1
+        key2 : new line separated text 2 """)
+    assert processed_value == {'key1': 'new line separated text 1',
+            'key2': 'new line separated text 2'}
 
-    def test_simple_dict_with_numbers(self):
-        # Simple new line kv-pair with numbers and decimals to dict
-        processed_value = build_dict("""
-            key1 : 1234
-            key2 : 22.2345 """)
-        self.assertDictEqual(processed_value, {'key1': '1234',
-                'key2': '22.2345'})
+def test_build_simple_dict_with_leading_new_line():
+    # Simple new line kv-pair with leading blank line to dict
+    processed_value = build_dict("""
+        key1 : new line separated text 1
+        key2 : new line separated text 2 """)
+    assert processed_value == {'key1': 'new line separated text 1',
+            'key2': 'new line separated text 2'}
 
-    def test_none_handling(self):
-        # None handling
-        processed_value = build_dict("")
-        assert(processed_value, {})
+def test_build_simple_dict_with_numbers():
+    # Simple new line kv-pair with numbers and decimals to dict
+    processed_value = build_dict("""
+        key1 : 1234
+        key2 : 22.2345 """)
+    assert processed_value == {'key1': '1234',
+            'key2': '22.2345'}
 
-    def test_empty_string(self):
-        # Empty string
-        processed_value = build_dict(None)
-        self.assertDictEqual(processed_value, {})
+def test_build_none_handling():
+    # None handling
+    processed_value = build_dict("")
+    assert processed_value == ""
 
+def test_build_empty_string():
+    # Empty string
+    processed_value = build_dict(None)
+    assert processed_value == {}
 
-class TestValidateURL(unittest.TestCase):
+def test_valid_url():
+    # Http adapter
+    url_http = "http://www.example.com/uk-en"
+    assert url_http == validate_url(url_http)
 
-    def test_valid_url(self):
-        # Http adapter
-        url_http = "http://www.example.com/uk-en"
-        assert url_http == validate_url(url_http)
+    # Https adapter
+    url_https = "https://www.example.com/uk-en"
+    validate_url(url_https)
 
-        # Https adapter
-        url_https = "https://www.example.com/uk-en"
-        validate_url(url_https)
+def test_missing_invalid_adapter():
+    # Missing adapter
+    with pytest.raises(URLError) as err:
+        validate_url("www.ibm.com/uk-en")
 
-    def test_missing_invalid_adapter(self):
-        # Missing adapter
-        with pytest.raises(URLError) as err:
-            validate_url("www.ibm.com/uk-en")
+    # Invalid adapter
+    with pytest.raises(URLError) as err:
+        validate_url("hppt:www.ibm.com/uk-en")
 
-        # Invalid adapter
-        with pytest.raises(URLError) as err:
-            validate_url("hppt:www.ibm.com/uk-en")
+def test_missing_schema():
+    # missing schema
+    with pytest.raises(URLError) as err:
+        validate_url('www.example.com')
 
-    def test_missing_schema(self):
-        # missing schema
-        with pytest.raises(URLError) as err:
-            validate_url('www.example.com')
+def test_missing_netloc():
+    # missing netloc
+    with pytest.raises(URLError) as err:
+        validate_url('https://')
 
-    def test_missing_netloc(self):
-        # missing netloc
-        with pytest.raises(URLError) as err:
-            validate_url('https://')
+def test_missing_value():
+    # empty string in url
+    assert validate_url('') == None
 
-    def test_missing_value(self):
-        # empty string in url
-        assert validate_url('') == None
+def test_none_value():
+    # None in url
+    assert validate_url(None) == None
 
-    def test_none_value(self):
-        # None in url
-        assert validate_url(None) == None
-    
-    def test_empty_dict_value(self):
-        # None in url
-        assert validate_url({}) == None
+def test_empty_dict_value():
+    # None in url
+    assert validate_url({}) == None
 
+def test_request_retry(caplog):
+    RETRY_TRIES_COUNT   = 4
+    RETRY_DELAY_COUNT   = .2
+    RETRY_BACKOFF_COUNT = 3
+    ENDPOINT = "https://postman-echo.com/status/404"
 
-class TestMakeRestCallWithRetry(unittest.TestCase):
+    caplog.set_level(logging.INFO)
 
-    opts, options = {}, {}
-    @pytest.fixture(autouse=True)
-    def init_caplog_fixture(self, caplog):
-        self.caplog = caplog
-
-    def test_request_retry(self):
-        RETRY_TRIES_COUNT   = 4
-        RETRY_DELAY_COUNT   = 2
-        RETRY_BACKOFF_COUNT = 3
-        ENDPOINT = "https://postman-echo.com/status/404"
-
-        self.caplog.set_level(logging.INFO)
-        self.caplog.clear()
-        try:
-            make_rest_call(
-                self.opts, self.options,
-                method="GET",
-                url=ENDPOINT,
-                headers={},
-                cookies={},
-                body={},
-                params=None,
-                retry_tries=RETRY_TRIES_COUNT,
-                retry_delay=RETRY_DELAY_COUNT,
-                retry_backoff=RETRY_BACKOFF_COUNT,
-                verify=True,
-                timeout=60,
-                clientauth=None)
-        except IntegrationError as err:
-            records = list(self.caplog.records)
-
-        # For these values: RETRY_TRIES_COUNT = 4   RETRY_DELAY_COUNT = 2   RETRY_BACKOFF_COUNT = 3
-        # requests must be executed in the following order:
-        # failed request 1, retrying in 2 seconds...
-        # failed request 2, retrying in 6 seconds...
-        # failed request 3, retrying in 18 seconds...
-        # request 4
-        assert len(records) == RETRY_TRIES_COUNT * 2
-        assert f"retrying in {RETRY_DELAY_COUNT} seconds..." in records[1].message
-        assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[3].message
-        assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[5].message
-        assert f"404 Client Error:" in records[7].message
-
-        self.caplog.clear() # clear caplog
+    with pytest.raises(IntegrationError):
+        make_rest_call(
+            {}, {},
+            method="GET",
+            url=ENDPOINT,
+            headers={},
+            cookies={},
+            body={},
+            params=None,
+            retry_tries=RETRY_TRIES_COUNT,
+            retry_delay=RETRY_DELAY_COUNT,
+            retry_backoff=RETRY_BACKOFF_COUNT,
+            verify=True,
+            timeout=60,
+            clientauth=None)
+    # For these values: RETRY_TRIES_COUNT = 4   RETRY_DELAY_COUNT = 2   RETRY_BACKOFF_COUNT = 3
+    # requests must be executed in the following order:
+    # failed request 1, retrying in .2 seconds...
+    # failed request 2, retrying in .6 seconds...
+    # failed request 3, retrying in 1.8 seconds...
+    # request 4
+    records = list(caplog.records)
+    assert len(records) == RETRY_TRIES_COUNT * 2
+    assert f"retrying in {RETRY_DELAY_COUNT} seconds..." in records[1].message
+    assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[3].message
+    assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[5].message
+    assert "404 Client Error:" in records[7].message
 
 class TestMakeRestCall(unittest.TestCase):
 
